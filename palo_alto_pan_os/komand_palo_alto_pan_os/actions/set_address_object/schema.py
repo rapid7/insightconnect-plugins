@@ -29,19 +29,19 @@ class SetAddressObjectInput(komand.Input):
   "properties": {
     "address_object": {
       "type": "string",
-      "title": "Address Object",
+      "title": "Address",
       "description": "The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com google.com",
       "order": 1
     },
     "object_description": {
       "type": "string",
-      "title": "Object Description",
+      "title": "Description",
       "description": "A description for the address object",
       "order": 3
     },
     "object_name": {
       "type": "string",
-      "title": "Object Name",
+      "title": "Address Object",
       "description": "The name of the address object",
       "order": 2
     },

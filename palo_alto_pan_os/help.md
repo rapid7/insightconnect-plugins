@@ -58,7 +58,7 @@ Example input:
 {
   "address": "198.51.100.100",
   "device_name": "localhost.localdomain",
-  "enable_search": true,
+  "enable_search": false,
   "group": "ICON Block List",
   "virtual_system": "vsys1"
 }
@@ -136,11 +136,6 @@ This action is used to get a policy.
 Example input:
 
 ```
-{
-  "device_name": "localhost.localdomain",
-  "policy_name": "InsightConnect Block List",
-  "virtual_system": "vsys1"
-}
 ```
 
 ##### Output
@@ -823,6 +818,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 4.0.0 - Update to Create Address Object to make input consistent with other actions
 * 3.0.0 - New action Remove Address Object from Group | Update to Check if Address in Group to match input of Remove Address Object from Group 
 * 2.2.0 - New action Check if Address in Group
 * 2.1.0 - New action Get Policy
