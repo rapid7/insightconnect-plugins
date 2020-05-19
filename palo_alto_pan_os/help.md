@@ -831,7 +831,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
-* 5.0.0 - Update to plugin title and documentation to remove PAN OS
+* 5.0.0 - Change plugin title to "Palo Alto Firewall" from "Palo Alto PAN-OS" and update remaining references
 * 4.0.0 - Update to Create Address Object to make input consistent with other actions
 * 3.0.0 - New action Remove Address Object from Group | Update to Check if Address in Group to match input of Remove Address Object from Group 
 * 2.2.0 - New action Check if Address in Group
