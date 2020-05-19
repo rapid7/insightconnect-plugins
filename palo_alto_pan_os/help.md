@@ -46,7 +46,7 @@ This action checks to see if an IP, CIDR, or domain is in an Address Group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, doman) within the address object instead of matching the name|None|198.51.100.100|
+|address|string|None|True|The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name|None|198.51.100.100|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
 |enable_search|boolean|False|True|When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name|None|False|
 |group|string|None|True|Group name|None|ICON Block List|
@@ -823,6 +823,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 4.0.1 - Fix typo
 * 4.0.0 - Update to Create Address Object to make input consistent with other actions
 * 3.0.0 - New action Remove Address Object from Group | Update to Check if Address in Group to match input of Remove Address Object from Group 
 * 2.2.0 - New action Check if Address in Group

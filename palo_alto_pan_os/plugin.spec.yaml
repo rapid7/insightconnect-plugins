@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_pan_os
 title: Palo Alto PAN-OS
 description: Manage Palo Alto Networks devices via PAN-OS
-version: 4.0.0
+version: 4.0.1
 vendor: rapid7
 support: rapid7
 status: []
@@ -748,7 +748,7 @@ actions:
         order: 1
       address:
         title: Address
-        description: The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, doman) within the address object instead of matching the name
+        description: The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name
         type: string
         example: 198.51.100.100
         required: true
