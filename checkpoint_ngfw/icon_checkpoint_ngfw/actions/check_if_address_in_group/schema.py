@@ -8,14 +8,44 @@ class Component:
 
 
 class Input:
-    pass
+    ADDRESS = "address"
+    ENABLE_SEARCH = "enable_search"
+    GROUP = "group"
+    
 
 class Output:
     pass
 
 class CheckIfAddressInGroupInput(komand.Input):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "address": {
+      "type": "string",
+      "title": "Address",
+      "description": "Address to check in the group",
+      "order": 2
+    },
+    "enable_search": {
+      "type": "boolean",
+      "title": "Enable Search",
+      "description": "Search contents of address objects for IP addresses, CIDR IP addresses, or domains",
+      "default": false,
+      "order": 3
+    },
+    "group": {
+      "type": "string",
+      "title": "Group",
+      "description": "Group to check. UID is not supported",
+      "order": 1
+    }
+  },
+  "required": [
+    "address"
+  ]
+}
     """)
 
     def __init__(self):

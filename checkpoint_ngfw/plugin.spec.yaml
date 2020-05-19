@@ -889,7 +889,7 @@ actions:
   check_if_address_in_group:
     title: Check if Address in Group
     description: Checks to see if an IP, CIDR, or domain is in an Address Group
-    inputs:
+    input:
       group:
         title: Group
         description: Group to check. UID is not supported

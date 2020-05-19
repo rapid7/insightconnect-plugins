@@ -49,7 +49,21 @@ This action checks to see if an IP, CIDR, or domain is in an Address Group.
 
 ##### Input
 
-_This action does not contain any inputs._
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|Address to check in the group|None|198.51.100.100|
+|enable_search|boolean|False|False|Search contents of address objects for IP addresses, CIDR IP addresses, or domains|None|False|
+|group|string|None|False|Group to check. UID is not supported|None|InsightConnect Block List|
+
+Example input:
+
+```
+{
+  "address": "198.51.100.100",
+  "enable_search": false,
+  "group": "InsightConnect Block List"
+}
+```
 
 ##### Output
 
@@ -75,6 +89,19 @@ This action is used to install a policy to selected targets.
 Example input:
 
 ```
+{
+  "access_control_policy": true,
+  "desktop_security_policy": false,
+  "discard_other_sessions": false,
+  "install_on_all_cluster_members_or_fail": false,
+  "policy_package": "standard",
+  "qos_policy": false,
+  "targets": [
+    "checkpoint_fw_1",
+    "checkpoint_fw_2"
+  ],
+  "threat_prevention_policy": true
+}
 ```
 
 ##### Output
@@ -144,6 +171,12 @@ This action is used to add a host to a network group.
 Example input:
 
 ```
+{
+  "color": "black",
+  "discard_other_sessions": true,
+  "host_ip": "192.168.2.1",
+  "name": "192.168.2.1"
+}
 ```
 
 ##### Output
