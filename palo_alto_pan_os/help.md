@@ -58,7 +58,7 @@ Example input:
 {
   "address": "198.51.100.100",
   "device_name": "localhost.localdomain",
-  "enable_search": true,
+  "enable_search": false,
   "group": "ICON Block List",
   "virtual_system": "vsys1"
 }
@@ -212,9 +212,9 @@ In this case, we will strip the /32 from the end and check the IP against the wh
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_object|string|None|True|The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com google.com|None|1.1.1.1|
-|object_description|string|None|False|A description for the address object|None|Blocked host from Insight Connect|
-|object_name|string|None|True|The name of the address object|None|Blocked host|
+|address|string|None|True|The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com google.com|None|1.1.1.1|
+|address_object|string|None|True|The name of the address object|None|Blocked host|
+|description|string|None|False|A description for the address object|None|Blocked host from Insight Connect|
 |tags|string|None|False|Tags for the address object. Use commas to separate multiple tags|None|malware|
 |whitelist|[]string|None|False|This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)|None|["198.51.100.100", "192.0.2.0/24", "example.com"]|
 
@@ -222,9 +222,9 @@ Example input:
 
 ```
 {
-  "address_object": "1.1.1.1",
-  "object_description": "Blocked host from Insight Connect",
-  "object_name": "Blocked host",
+  "address": "1.1.1.1",
+  "address_object": "Blocked host",
+  "description": "Blocked host from Insight Connect",
   "tags": "malware",
   "whitelist": [
     "198.51.100.100",
@@ -823,6 +823,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 4.0.0 - Update to Create Address Object to make input consistent with other actions
 * 3.0.0 - New action Remove Address Object from Group | Update to Check if Address in Group to match input of Remove Address Object from Group 
 * 2.2.0 - New action Check if Address in Group
 * 2.1.0 - New action Get Policy
