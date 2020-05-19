@@ -1654,11 +1654,13 @@ actions:
         title: Site ID
         description: ID of the site to scan
         type: string
+        example: 1
         required: true
       hosts:
         title: Hosts
         description: The hosts that should be included in the scan
         type: "[]string"
+        example: ["192.0.2.3", "192.0.2.10-192.0.2.20", "ADSRV.local"]
         required: false
     output:
       id:

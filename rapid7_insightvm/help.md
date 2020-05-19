@@ -604,15 +604,19 @@ This action is used to start a scan on a site.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hosts|[]string|None|False|The hosts that should be included in the scan|None|None|
-|site_id|string|None|True|ID of the site to scan|None|None|
+|hosts|[]string|None|False|The hosts that should be included in the scan|None|["192.0.2.3", "192.0.2.10-192.0.2.20", "ADSRV.local"]|
+|site_id|string|None|True|ID of the site to scan|None|1|
 
 Example input:
 
 ```
 {
+  "hosts": [
+    "192.0.2.3",
+    "192.0.2.10-192.0.2.20",
+    "ADSRV.local"
+  ],
   "site_id": 1
-  "hosts": ["192.0.2.1", "192.0.2.10-192.0.2.20", "ADSRV.local"]
 }
 ```
 
