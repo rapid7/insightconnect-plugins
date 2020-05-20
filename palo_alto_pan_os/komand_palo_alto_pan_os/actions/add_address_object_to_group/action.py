@@ -39,13 +39,14 @@ class AddAddressObjectToGroup(komand.Action):
 
 
         # Append the address_object
-        names.append(address_object)
-
-        # Rebuild the object in the way the API wants
-        xml_str = self.make_xml(names, group_name)
-
-        # Send it back ot the API
-        self.connection.request.edit_(xpath, xml_str)
+        if not address_object in names:
+            names.append(address_object)
+            # Rebuild the object in the way the API wants
+            xml_str = self.make_xml(names, group_name)
+            # Send it back ot the API
+            self.connection.request.edit_(xpath, xml_str)
+        else:
+            self.logger.info(f"Address Object \"{address_object}\" was already in group \"{group_name}\". Skipping append.")
 
         return {Output.SUCCESS: True, Output.ADDRESS_OBJECTS: names}
 
