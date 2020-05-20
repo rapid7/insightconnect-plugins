@@ -33,10 +33,7 @@ Example input:
 
 ```
 {
-  "credentials": "{
-      "username":"username", 
-      "password":"password"
-  }",
+  "credentials": "{\"username\":\"username\", \"password\":\"password\"}",
   "server": "http://www.example.com",
   "verify_cert": true
 }
@@ -182,12 +179,17 @@ This action is used to get a policy.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
-|policy_name|string|None|True|Policy name|None|InsightConnect Block List|
+|policy_name|string|None|True|Policy name|None|InsightConnect Block Policy|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
 
 Example input:
 
 ```
+{
+  "device_name": "localhost.localdomain",
+  "policy_name": "InsightConnect Block Policy",
+  "virtual_system": "vsys1"
+}
 ```
 
 ##### Output
