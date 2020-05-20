@@ -33,10 +33,7 @@ Example input:
 
 ```
 {
-  "credentials": {
-      "username": "username", 
-      "password": "password"
-  },
+  "credentials": "{\"username\":\"username\", \"password\":\"password\"}",
   "server": "http://www.example.com",
   "verify_cert": true
 }
@@ -45,6 +42,42 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Add Address Object to Group
+
+This action adds an address object to an address group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object|string|None|True|The name of the address object to add|None|Malicious IP|
+|device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
+|group|string|None|True|Group name|None|ICON Block List|
+|virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
+
+Example input:
+
+```
+{
+  "address_object": "Malicious IP",
+  "device_name": "localhost.localdomain",
+  "group": "ICON Block List",
+  "virtual_system": "vsys1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|address_objects|[]string|True|Address Objects currently in group|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+```
 
 #### Check if Address in Group
 
@@ -144,11 +177,6 @@ This action is used to get a policy.
 Example input:
 
 ```
-{
-  "device_name": "localhost.localdomain",
-  "policy_name": "InsightConnect Block List",
-  "virtual_system": "vsys1"
-}
 ```
 
 ##### Output
@@ -831,6 +859,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 5.1.0 - New action Add Address Object to Group
 * 5.0.0 - Change plugin title to "Palo Alto Firewall" from "Palo Alto PAN-OS" and update remaining references
 * 4.0.0 - Update to Create Address Object to make input consistent with other actions
 * 3.0.0 - New action Remove Address Object from Group | Update to Check if Address in Group to match input of Remove Address Object from Group 

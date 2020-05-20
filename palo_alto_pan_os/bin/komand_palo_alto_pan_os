@@ -19,6 +19,8 @@ class ICONPaloAltoPanOs(komand.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_action(actions.AddAddressObjectToGroup())
+
         self.add_action(actions.AddExternalDynamicList())
 
         self.add_action(actions.AddToPolicy())
