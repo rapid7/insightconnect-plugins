@@ -675,8 +675,8 @@ actions:
         title: Device Name
         description: Device name
         type: string
-        default: localhost.localdomain
-        example: localhost.localdomain
+        default: "localhost.localdomain"
+        example: "localhost.localdomain"
         required: true
         order: 2
       virtual_system:
