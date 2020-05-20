@@ -873,6 +873,6 @@ actions:
         required: true
       address_objects:
         title: Address Objects
-        description: Address Objects currently in group
+        description: Address objects currently in group
         type: "[]string"
         required: true
