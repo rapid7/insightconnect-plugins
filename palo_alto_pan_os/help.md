@@ -35,7 +35,7 @@ Example input:
 {
   "credentials": "
   {
-    "username": "username\", 
+    "username": "username", 
     "password": "password"
   },
   "server": "http://www.example.com",
