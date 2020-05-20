@@ -19,6 +19,21 @@ class CheckIfAddressInGroup(komand.Action):
         enable_search = params.get(Input.ENABLE_SEARCH)
         group_input = params.get(Input.GROUP)
 
+        host_names = self._aggregate_hosts(address=address, group_input=group_input)
+
+        if len(host_names):
+            return {Output.FOUND: True, Output.ADDRESS_OBJECTS: list(host_names)}
+        else:
+            return {Output.FOUND: False, Output.ADDRESS_OBJECTS: []}
+
+    def _aggregate_hosts(self, address: str, group_input: Optional[str]) -> {str}:
+        """
+        Aggregate a list of hosts from network groups within a Check Point firewall instance
+        :param address: Address to search for
+        :param group_input: Group name, specified by the user. If not provided then all groups will be searched
+        :return: Set of hosts found
+        """
+
         # Holds groups with "full" information - the get_groups call below returns groups with minimal information
         full_groups: [dict] = []
 
@@ -39,10 +54,7 @@ class CheckIfAddressInGroup(komand.Action):
             if host_name:
                 host_names.add(host_name)
 
-        if len(host_names):
-            return {Output.FOUND: True, Output.ADDRESS_OBJECTS: list(host_names)}
-        else:
-            return {Output.FOUND: False, Output.ADDRESS_OBJECTS: []}
+        return host_names
 
     @staticmethod
     def _check_group_for_address(group: dict, address: str) -> Optional[str]:
