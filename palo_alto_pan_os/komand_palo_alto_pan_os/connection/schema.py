@@ -24,7 +24,7 @@ class ConnectionSchema(komand.Input):
     "server": {
       "type": "string",
       "title": "Server",
-      "description": "URL pointing to instance of a Palo Alto Firewall",
+      "description": "URL pointing to instance of a Palo Alto firewall",
       "order": 1
     },
     "verify_cert": {
