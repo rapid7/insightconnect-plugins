@@ -15,7 +15,7 @@ class DeleteAddressObject(komand.Action):
                 output=DeleteAddressObjectOutput())
 
     def run(self, params={}):
-        host = params[Input.HOST]
+        host = params[Input.ADDRESS]
 
         # This will check if the host is an IP
         # If not it will check if the host ends with 2 chars. If this is true it is assumed to be a valid FQDN

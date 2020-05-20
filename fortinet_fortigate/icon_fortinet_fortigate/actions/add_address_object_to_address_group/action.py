@@ -14,8 +14,8 @@ class AddAddressObjectToAddressGroup(komand.Action):
                 output=AddAddressObjectToAddressGroupOutput())
 
     def run(self, params={}):
-        group_name = params[Input.GROUP_NAME]
-        address_name = params[Input.ADDRESS_OBJECT_NAME]
+        group_name = params[Input.GROUP]
+        address_name = params[Input.ADDRESS_OBJECT]
 
         group = self.connection.get_address_group(group_name)
         group_members = group.get("member")

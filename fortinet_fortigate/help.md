@@ -28,11 +28,53 @@ The connection configuration accepts the following parameters:
 |hostname|string|None|True|Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000|None|fortigate.rapid7.com|
 |ssl_verify|boolean|None|True|SSL verify|None|False|
 
+Example input:
+
+```
+{
+  "api_key": "2Fty5834tFpBdidePJnt9075MMdkUb",
+  "hostname": "fortigate.rapid7.com",
+  "ssl_verify": false
+}
+```
+
 ## Technical Details
 
 ### Actions
 
-#### Check Address Group for IP Address
+#### 
+
+This action is used to .
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object|string|None|True|Address object|None|198.51.100.100|
+|group|string|None|True|Group name|None|blocked IP's|
+
+Example input:
+
+```
+{
+  "address_object": "198.51.100.100",
+  "group": "blocked IP's"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|result_object|object|True|An object containing the results of the action|
+|success|boolean|True|Was the operation successful|
+
+Example output:
+
+```
+```
+
+#### Check if Address in Group
 
 This action is used to check if an IP address is in an address group.
 
@@ -40,19 +82,23 @@ This action is used to check if an IP address is in an address group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_group_name|string|None|True|The name of the address group to check|None|blocked IP's|
-|ip_address|string|None|True|The IP address to check for|None|198.51.100.100|
+|address|string|None|True|The IP, CIDR, or domain to check for|None|MaliciousHost|
+|group|string|None|True|Name of Address Group to check for address|None|blocked IP's|
 
 Example input:
 
 ```
+{
+  "address": "MaliciousHost",
+  "group": "blocked IP's"
+}
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|ip_address_found|boolean|True|True if the IP address was found in the address group|
+|found|boolean|True|True if the address was found in the address group|
 
 Example output:
 
@@ -67,11 +113,15 @@ This action is used to get policies.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name_filter|string|None|False|Optional name to filter on|None|None|
+|name_filter|string|None|False|Optional name to filter on|None|my policy name|
 
 Example input:
 
 ```
+{
+  "address_object": "198.51.100.100",
+  "group": "blocked IP's"
+}
 ```
 
 ##### Output
@@ -228,12 +278,16 @@ This action is used to add an address object to an address group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_object_name|string|None|True|Address object name|None|None|
-|group_name|string|None|True|Group name|None|None|
+|address_object|string|None|True|Address object|None|198.51.100.100|
+|group|string|None|True|Group name|None|blocked IP's|
 
 Example input:
 
 ```
+{
+  "address_object": "198.51.100.100",
+  "group": "blocked IP's"
+}
 ```
 
 ##### Output
@@ -274,17 +328,16 @@ This action is used to create an address object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|host|string|None|True|The host to create. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|198.51.100.100|
-|name|string|None|False|Optional name to give this address object. If not provided, the name will be the IP address or domain name|None|MaliciousHost|
-|whitelist|[]string|None|False|This list contains a set of network object that should not be blocked. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|[198.51.100.100, example.com, 192.0.2.0/24]|
+|address|string|None|True|The host to create. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|198.51.100.100|
+|address_object|string|None|False|Optional name to give this address object. If not provided, the name will be the IP address or domain name|None|MaliciousHost|
+|whitelist|[]string|None|False|This list contains a set of network object that should not be blocked. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|["198.51.100.100", "example.com", "192.0.2.0/24"]|
 
 Example input:
 
 ```
 {
-  "host": "192.168.7.7",
-  "name": "testing",
-  "whitelist": ["198.51.100.100", "example,com", "192.0.2.0/24"]
+  "address_object": "198.51.100.100",
+  "group": "blocked IP's"
 }
 ```
 
@@ -326,13 +379,14 @@ This action is used to delete an address object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|host|string|None|True|The host to delete. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|198.51.100.100|
+|address_object|string|None|True|Name of Address Object to delete|None|MaliciousHost|
 
 Example input:
 
 ```
 {
-  "host": "198.51.100.100"
+  "address_object": "198.51.100.100",
+  "group": "blocked IP's"
 }
 ```
 
@@ -374,11 +428,15 @@ This action is used to get address objects.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name_filter|string|None|False|Optional name to filter on|None|None|
+|name_filter|string|None|False|Optional name to filter on|None|198.51.100.100|
 
 Example input:
 
 ```
+{
+  "address_object": "198.51.100.100",
+  "group": "blocked IP's"
+}
 ```
 
 ##### Output
@@ -559,6 +617,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.0 - Rename a number of actions inputs and outputs to conform to Rapid7 naming schema for firewalls | Add example inputs | New action Remove Address Object from Group
 * 2.0.0 - Simplify the Create Address Object action to auto-detect the input type | Add whitelist safety check to Create Address Object action
 * 1.1.0 - New Action Check if IP is in Address Group
 * 1.0.0 - Initial plugin

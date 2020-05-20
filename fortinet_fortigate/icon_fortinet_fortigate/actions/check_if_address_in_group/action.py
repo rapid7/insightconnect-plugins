@@ -1,21 +1,21 @@
 import komand
-from .schema import CheckIfIpIsInAddressGroupsInput, CheckIfIpIsInAddressGroupsOutput, Input, Output, Component
+from .schema import CheckIfAddressInGroupInput, CheckIfAddressInGroupOutput, Input, Output, Component
 # Custom imports below
 from komand.exceptions import PluginException
 
 
-class CheckIfIpIsInAddressGroups(komand.Action):
+class CheckIfAddressInGroup(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='check_if_ip_is_in_address_groups',
+                name='check_if_address_in_group',
                 description=Component.DESCRIPTION,
-                input=CheckIfIpIsInAddressGroupsInput(),
-                output=CheckIfIpIsInAddressGroupsOutput())
+                input=CheckIfAddressInGroupInput(),
+                output=CheckIfAddressInGroupOutput())
 
     def run(self, params={}):
-        addrgrp = params.get(Input.ADDRESS_GROUP_NAME)
-        ip_to_check = params.get(Input.IP_ADDRESS)
+        addrgrp = params.get(Input.GROUP)
+        ip_to_check = params.get(Input.ADDRESS)
         endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/addrgrp/{addrgrp}"
         result = self.connection.session.get(endpoint, verify=self.connection.ssl_verify)
 
@@ -53,4 +53,4 @@ class CheckIfIpIsInAddressGroups(komand.Action):
             if ip_to_check == item["name"]:
                 found = True
 
-        return {Output.IP_ADDRESS_FOUND: found}
+        return {Output.FOUND: found}

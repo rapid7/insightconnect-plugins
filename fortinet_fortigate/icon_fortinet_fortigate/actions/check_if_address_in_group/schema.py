@@ -8,36 +8,36 @@ class Component:
 
 
 class Input:
-    ADDRESS_GROUP_NAME = "address_group_name"
-    IP_ADDRESS = "ip_address"
+    ADDRESS = "address"
+    GROUP = "group"
     
 
 class Output:
-    IP_ADDRESS_FOUND = "ip_address_found"
+    FOUND = "found"
     
 
-class CheckIfIpIsInAddressGroupsInput(komand.Input):
+class CheckIfAddressInGroupInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "address_group_name": {
+    "address": {
       "type": "string",
-      "title": "Address Group Name",
-      "description": "The name of the address group to check",
-      "order": 1
-    },
-    "ip_address": {
-      "type": "string",
-      "title": "IP Address",
-      "description": "The IP address to check for",
+      "title": "Address",
+      "description": "The IP, CIDR, or domain to check for",
       "order": 2
+    },
+    "group": {
+      "type": "string",
+      "title": "Group",
+      "description": "Name of Address Group to check for address",
+      "order": 1
     }
   },
   "required": [
-    "address_group_name",
-    "ip_address"
+    "address",
+    "group"
   ]
 }
     """)
@@ -46,21 +46,21 @@ class CheckIfIpIsInAddressGroupsInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class CheckIfIpIsInAddressGroupsOutput(komand.Output):
+class CheckIfAddressInGroupOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "ip_address_found": {
+    "found": {
       "type": "boolean",
-      "title": "IP Address Found",
-      "description": "True if the IP address was found in the address group",
+      "title": "Found",
+      "description": "True if the address was found in the address group",
       "order": 1
     }
   },
   "required": [
-    "ip_address_found"
+    "found"
   ]
 }
     """)

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: fortinet_fortigate
 title: Fortinet FortiGate
 description: FortiGate Next Generation Firewalls (NGFWs) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection
-version: 2.0.0
+version: 3.0.0
 vendor: rapid7
 support: community
 status: []
@@ -627,26 +627,26 @@ connection:
     example: false
 
 actions:
-  check_if_ip_is_in_address_groups:
-    title: Check Address Group for IP Address
+  check_if_address_in_group:
+    title: Check if Address in Group
     description: Check if an IP address is in an address group
     input:
-      address_group_name:
-        title: Address Group Name
-        description: The name of the address group to check
+      group:
+        title: Group
+        description: Name of Address Group to check for address
         type: string
         required: true
         example: blocked IP's
-      ip_address:
-        title: IP Address
-        description: The IP address to check for
+      address:
+        title: Address
+        description: The IP, CIDR, or domain to check for
         type: string
         required: true
-        example: 198.51.100.100
+        example: MaliciousHost
     output:
-      ip_address_found:
-        title: IP Address Found
-        description: True if the IP address was found in the address group
+      found:
+        title: Found
+        description: True if the address was found in the address group
         type: boolean
         required: true
   get_policies:
@@ -658,13 +658,13 @@ actions:
         description: Optional name to filter on
         type: string
         required: false
+        example: my policy name
     output:
       policies:
         title: Policies
         description: Policies
         type: "[]policies"
         required: false
-
   get_address_objects:
     title: Get Address Objects
     description: Get address objects
@@ -674,36 +674,36 @@ actions:
         description: Optional name to filter on
         type: string
         required: false
+        example: 198.51.100.100
     output:
       address_objects:
         title: Address Objects
         description: A list of address objects
         type: '[]object'
         required: true
-
   create_address_object:
     title: Create Address Object
     description: Create an address object
     input:
-      host:
-        title: Host
+      address:
+        title: Address
         description: The host to create. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name
         type: string
         required: true
         example: 198.51.100.100
-        order: 1
-      name:
-        title: Name
+        order: 2
+      address_object:
+        title: Address Object
         description: Optional name to give this address object. If not provided, the name will be the IP address or domain name
         type: string
         required: false
         example: MaliciousHost
-        order: 2
+        order: 1
       whitelist:
         title: Whitelist
         description: This list contains a set of network object that should not be blocked. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name
         type: "[]string"
-        example: "[198.51.100.100, example.com, 192.0.2.0/24]"
+        example: ["198.51.100.100", "example.com", "192.0.2.0/24"]
         required: false
         order: 3
     output:
@@ -717,16 +717,15 @@ actions:
         description: Information about the operation that was performed
         type: object
         required: true
-
   delete_address_object:
     title: Delete Address Object
     description: Delete an address object
     input:
-      host:
-        title: Host
-        description: The host to delete. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name
+      address_object:
+        title: Address Object
+        description: Name of Address Object to delete
         type: string
-        example: 198.51.100.100
+        example: MaliciousHost
         required: true
     output:
       success:
@@ -739,21 +738,47 @@ actions:
         description: Information about the operation that was performed
         type: object
         required: true
-
   add_address_object_to_address_group:
     title: Add Address Object to Group
     description: Add an address object to an address group
     input:
-      group_name:
-        title: Group Name
+      group:
+        title: Group
         description: Group name
         type: string
         required: true
-      address_object_name:
-        title: Address Object Name
-        description: Address object name
+        example: blocked IP's
+      address_object:
+        title: Address Object
+        description: Address object
         type: string
         required: true
+        example: 198.51.100.100
+    output:
+      success:
+        title: Success
+        description: Was the operation successful
+        type: boolean
+        required: true
+      result_object:
+        title: Result Object
+        description: An object containing the results of the action
+        type: object
+        required: true
+  remove_address_object_from_group:
+    input:
+      group:
+        title: Group
+        description: Group name
+        type: string
+        required: true
+        example: blocked IP's
+      address_object:
+        title: Address Object
+        description: Address object
+        type: string
+        required: true
+        example: 198.51.100.100
     output:
       success:
         title: Success
