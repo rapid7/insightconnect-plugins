@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Checks to see if an IP, CIDR, or domain is in an Address Group"
+    DESCRIPTION = "Checks to see if an IP address, CIDR IP address, or domain is in an Address Group"
 
 
 class Input:
@@ -15,7 +15,9 @@ class Input:
     
 
 class Output:
-    pass
+    ADDRESS_OBJECTS = "address_objects"
+    FOUND = "found"
+    
 
 class CheckIfAddressInGroupInput(komand.Input):
     schema = json.loads("""
@@ -46,13 +48,14 @@ class CheckIfAddressInGroupInput(komand.Input):
     "group": {
       "type": "string",
       "title": "Group",
-      "description": "Group to check. UID is not supported",
+      "description": "Group to check. UID is not supported. Omitting this input will check all groups",
       "order": 1
     }
   },
   "required": [
     "address",
-    "discard_other_sessions"
+    "discard_other_sessions",
+    "enable_search"
   ]
 }
     """)
@@ -63,7 +66,31 @@ class CheckIfAddressInGroupInput(komand.Input):
 
 class CheckIfAddressInGroupOutput(komand.Output):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "address_objects": {
+      "type": "array",
+      "title": "Address Objects",
+      "description": "The names of the address objects that match or contain the address",
+      "items": {
+        "type": "string"
+      },
+      "order": 2
+    },
+    "found": {
+      "type": "boolean",
+      "title": "Found",
+      "description": "Was address found in group",
+      "order": 1
+    }
+  },
+  "required": [
+    "address_objects",
+    "found"
+  ]
+}
     """)
 
     def __init__(self):

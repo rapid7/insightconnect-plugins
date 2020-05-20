@@ -888,13 +888,13 @@ actions:
 
   check_if_address_in_group:
     title: Check if Address in Group
-    description: Checks to see if an IP, CIDR, or domain is in an Address Group
+    description: Checks to see if an IP address, CIDR IP address, or domain is in an Address Group
     input:
       group:
         title: Group
-        description: Group to check. UID is not supported
+        description: Group to check. UID is not supported. Omitting this input will check all groups
         type: string
-        required: true
+        required: false
         example: InsightConnect Block List
         order: 1
       address:
@@ -920,7 +920,7 @@ actions:
         required: true
         default: true
         order: 4
-    outputs:
+    output:
       found:
         title: Found
         description: Was address found in group
@@ -930,4 +930,4 @@ actions:
         title: Address Objects
         description: The names of the address objects that match or contain the address
         type: "[]string"
-        required: false
+        required: true

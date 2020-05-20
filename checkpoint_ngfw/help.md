@@ -53,8 +53,8 @@ This action checks to see if an IP, CIDR, or domain is in an Address Group.
 |----|----|-------|--------|-----------|----|-------|
 |address|string|None|True|Address to check in the group|None|198.51.100.100|
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
-|enable_search|boolean|False|False|Search contents of address objects for IP addresses, CIDR IP addresses, or domains|None|False|
-|group|string|None|False|Group to check. UID is not supported|None|InsightConnect Block List|
+|enable_search|boolean|False|True|Search contents of address objects for IP addresses, CIDR IP addresses, or domains|None|False|
+|group|string|None|False|Group to check. UID is not supported. Omitting this input will check all groups|None|InsightConnect Block List|
 
 Example input:
 
@@ -69,7 +69,10 @@ Example input:
 
 ##### Output
 
-_This action does not contain any outputs._
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|address_objects|[]string|True|The names of the address objects that match or contain the address|
+|found|boolean|True|Was address found in group|
 
 #### Install Policy
 
@@ -173,12 +176,6 @@ This action is used to add a host to a network group.
 Example input:
 
 ```
-{
-  "color": "black",
-  "discard_other_sessions": true,
-  "host_ip": "192.168.2.1",
-  "name": "192.168.2.1"
-}
 ```
 
 ##### Output
