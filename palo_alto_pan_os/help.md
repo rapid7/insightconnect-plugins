@@ -33,11 +33,7 @@ Example input:
 
 ```
 {
-  "credentials": 
-  {
-    "username":"username", 
-    "password":"password"
-  }",
+  "credentials": "{\"username\":\"username\", \"password\":\"password\"}",
   "server": "http://www.example.com",
   "verify_cert": true
 }
@@ -144,7 +140,7 @@ This action removes an address object from an address group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_object|string|None|True|The name of the address object to remove|None|Malicious IP|
+|address_object|string|None|True|The name of the address object to remove|None|Malicious Host|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
 |group|string|None|True|Group name|None|ICON Block List|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
@@ -153,7 +149,7 @@ Example input:
 
 ```
 {
-  "address_object": "Malicious IP",
+  "address_object": "Malicious Host",
   "device_name": "localhost.localdomain",
   "group": "ICON Block List",
   "virtual_system": "vsys1"
@@ -189,6 +185,11 @@ This action is used to get a policy.
 Example input:
 
 ```
+{
+  "device_name": "localhost.localdomain",
+  "policy_name": "InsightConnect Block Policy",
+  "virtual_system": "vsys1"
+}
 ```
 
 ##### Output

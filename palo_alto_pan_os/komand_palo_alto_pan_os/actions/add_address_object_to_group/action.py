@@ -25,7 +25,7 @@ class AddAddressObjectToGroup(komand.Action):
         address_objects = response.get("response", {}).get("result", {}).get("entry", {}).get("static", {}).get(
             "member")
         if not address_objects:
-            raise PluginException(cause="PAN OS returned an unexpected response.",
+            raise PluginException(cause="Palo Alto firewall returned an unexpected response.",
                                   assistance=f"Could not find group {group_name}, or group was empty. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {virtual_system}",
                                   data=response)
 

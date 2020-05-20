@@ -740,7 +740,7 @@ actions:
         required: false
   check_if_address_object_in_group:
     title: Check if Address in Group
-    description: Checks to see if an IP, CIDR, or domain is in an Address Group
+    description: Checks to see if an IP address, CIDR IP address, or domain is in an Address Group
     input:
       group:
         title: Group
@@ -799,7 +799,7 @@ actions:
         title: Address Object
         description: The name of the address object to remove
         type: string
-        example: Malicious IP
+        example: Malicious Host
         required: true
         order: 1
       group:
