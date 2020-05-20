@@ -93,7 +93,7 @@ Example output:
 
 #### Check if Address in Group
 
-This action checks to see if an IP, CIDR, or domain is in an Address Group.
+This action checks to see if an IP address, CIDR IP address, or domain is in an Address Group.
 
 ##### Input
 
