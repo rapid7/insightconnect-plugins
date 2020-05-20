@@ -1,6 +1,6 @@
 # Description
 
-[PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os) is the software that runs all Palo Alto Networks next-generation firewalls. This plugin utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api) to provide programmatic management of the Palo Alto Firewall appliance(s).
+[PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os) is the software that runs all Palo Alto Networks next-generation firewalls. This plugin utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api) to provide programmatic management of the Palo Alto firewall appliance(s).
 
 # Key Features
 
@@ -33,9 +33,10 @@ Example input:
 
 ```
 {
-  "credentials": {
-      "username": "username", 
-      "password": "password"
+  "credentials": 
+  {
+    "username":"username", 
+    "password":"password"
   },
   "server": "http://www.example.com",
   "verify_cert": true
@@ -46,9 +47,53 @@ Example input:
 
 ### Actions
 
+#### Add Address Object to Group
+
+This action adds an address object to an address group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object|string|None|True|The name of the address object to add|None|Malicious IP address|
+|device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
+|group|string|None|True|Group name|None|ICON Block List|
+|virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
+
+Example input:
+
+```
+{
+  "address_object": "Malicious IP",
+  "device_name": "localhost.localdomain",
+  "group": "ICON Block List",
+  "virtual_system": "vsys1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|address_objects|[]string|True|Address Objects currently in group|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+{
+  "success": true,
+  "address_objects": [
+    "198.51.100.100",
+    "198.51.100.101",
+    "Malicious IP",
+  ]
+}
+```
+
 #### Check if Address in Group
 
-This action checks to see if an IP, CIDR, or domain is in an Address Group.
+This action checks to see if an IP address, CIDR IP address, or domain is in an Address Group.
 
 ##### Input
 
@@ -99,7 +144,7 @@ This action removes an address object from an address group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_object|string|None|True|The name of the address object to remove|None|Malicious IP|
+|address_object|string|None|True|The name of the address object to remove|None|Malicious Host|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
 |group|string|None|True|Group name|None|ICON Block List|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
@@ -108,7 +153,7 @@ Example input:
 
 ```
 {
-  "address_object": "Malicious IP",
+  "address_object": "Malicious Host",
   "device_name": "localhost.localdomain",
   "group": "ICON Block List",
   "virtual_system": "vsys1"
@@ -138,7 +183,7 @@ This action is used to get a policy.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
-|policy_name|string|None|True|Policy name|None|InsightConnect Block List|
+|policy_name|string|None|True|Policy name|None|InsightConnect Block Policy|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
 
 Example input:
@@ -146,7 +191,7 @@ Example input:
 ```
 {
   "device_name": "localhost.localdomain",
-  "policy_name": "InsightConnect Block List",
+  "policy_name": "InsightConnect Block Policy",
   "virtual_system": "vsys1"
 }
 ```
@@ -831,6 +876,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 5.1.0 - New action Add Address Object to Group
 * 5.0.0 - Change plugin title to "Palo Alto Firewall" from "Palo Alto PAN-OS" and update remaining references
 * 4.0.0 - Update to Create Address Object to make input consistent with other actions
 * 3.0.0 - New action Remove Address Object from Group | Update to Check if Address in Group to match input of Remove Address Object from Group 
