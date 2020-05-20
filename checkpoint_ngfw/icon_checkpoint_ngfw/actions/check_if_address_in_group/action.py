@@ -25,11 +25,10 @@ class CheckIfAddressInGroup(komand.Action):
         if group_input:
             full_groups.append(self.connection.get_group(name=group_input))
         else:
-            # TODO: Implement pagination
             groups = self._get_all_groups()
 
             for group in groups:
-                full_groups.append(self.connection.get_group(name=group["name"]))
+                full_groups.append(group["name"])
 
         self.logger.info(f"GOT GROUPS: {full_groups}")
 
@@ -69,11 +68,11 @@ class CheckIfAddressInGroup(komand.Action):
         """
         full_groups: [dict] = []
 
+        limit = 500
         current_offset = 0
 
         while True:
-            response = self.connection.get_groups(details_level=DetailsLevel.full, limit=2, offset=current_offset)
-            self.logger.info(f"XXX RESPONSE IS: {response}")
+            response = self.connection.get_groups(details_level=DetailsLevel.full, limit=limit, offset=current_offset)
 
             objects = response["objects"]
             if not objects:
@@ -81,6 +80,6 @@ class CheckIfAddressInGroup(komand.Action):
 
             for group in objects:
                 full_groups.append(self.connection.get_group(name=group["name"]))
-            current_offset = response["from"]
+            current_offset += limit
 
         return full_groups
