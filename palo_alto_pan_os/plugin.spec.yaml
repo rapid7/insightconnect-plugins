@@ -31,7 +31,7 @@ connection:
   server:
     title: Server
     type: string
-    description: URL pointing to instance of a Palo Alto firewall
+    description: URL pointing to instance of a Palo Alto Firewall
     required: true
     example: http://www.example.com
   credentials:

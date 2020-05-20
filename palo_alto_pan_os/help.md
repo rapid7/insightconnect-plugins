@@ -26,14 +26,17 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Username and password|None|{"username":"username", "password":"password"}|
-|server|string|None|True|URL pointing to instance of a Palo Alto firewall|None|http://www.example.com|
+|server|string|None|True|URL pointing to instance of a Palo Alto Firewall|None|http://www.example.com|
 |verify_cert|boolean|None|True|If true, validate the server's TLS certificate when contacting the firewall over HTTPS|None|True|
 
 Example input:
 
 ```
 {
-  "credentials": "{\"username\":\"username\", \"password\":\"password\"}",
+  "credentials": "{
+      "username":"username", 
+      "password":"password"
+  }",
   "server": "http://www.example.com",
   "verify_cert": true
 }
@@ -77,6 +80,14 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true,
+  "address_objects": [
+    "198.51.100.100",
+    "198.51.100.101",
+    "Malicious IP",
+  ]
+}
 ```
 
 #### Check if Address in Group
