@@ -952,7 +952,7 @@ actions:
         description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
         example: true
         required: true
-        default: true
+        default: false
         order: 3
     output:
       success:
