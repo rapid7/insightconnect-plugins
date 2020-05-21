@@ -35,7 +35,8 @@ Example input:
 {
   "port": 443,
   "server": "198.168.2.1",
-  "ssl_verify": true
+  "ssl_verify": true,
+  "username_password": "{\"username\": \"xxxxxx\", \"password\": \"xxxxxx\"}"
 }
 ```
 
@@ -174,12 +175,6 @@ This action is used to add a host to a network group.
 Example input:
 
 ```
-{
-  "color": "black",
-  "discard_other_sessions": true,
-  "host_ip": "192.168.2.1",
-  "name": "192.168.2.1"
-}
 ```
 
 ##### Output
