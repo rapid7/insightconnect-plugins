@@ -3,6 +3,7 @@ from .schema import DeleteAddressObjectInput, DeleteAddressObjectOutput, Input, 
 # Custom imports below
 from komand.exceptions import PluginException
 from ipaddress import ip_network
+from icon_fortinet_fortigate.util.util import Helpers
 
 
 class DeleteAddressObject(komand.Action):
@@ -15,7 +16,8 @@ class DeleteAddressObject(komand.Action):
                 output=DeleteAddressObjectOutput())
 
     def run(self, params={}):
-        host = params[Input.ADDRESS]
+        host = params[Input.ADDRESS_OBJECT]
+        helper = Helpers(self.logger)
 
         # This will check if the host is an IP
         # If not it will check if the host ends with 2 chars. If this is true it is assumed to be a valid FQDN
@@ -38,10 +40,11 @@ class DeleteAddressObject(komand.Action):
         response = self.connection.session.delete(endpoint, params=params_payload, verify=self.connection.ssl_verify)
 
         try:
-            response.raise_for_status()
-        except Exception as e:
-            raise PluginException(cause="Delete address failed.",
-                                  assistance=response.text,
-                                  data=e)
+            json_response = response.json()
+        except ValueError:
+            raise PluginException(cause="Data sent by FortiGate was not in JSON format.\n",
+                                  assistance="Contact support for help.",
+                                  data=response.text)
+        helper.http_errors(json_response, response.status_code)
 
-        return {Output.SUCCESS: True, Output.RESPONSE_OBJECT: response.json()}
+        return {Output.SUCCESS: True, Output.RESPONSE_OBJECT: json_response}

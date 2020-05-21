@@ -1,8 +1,35 @@
 import re
 from ipaddress import ip_network, ip_address
+from komand.exceptions import PluginException
 
 
 class Helpers(object):
+
+    # status codes constant. Used to id all non 2XX return codes and there causes and assistance
+    _STATUS_CODES = {
+        400: {"cause": "Bad Request: Request cannot be processed by the API.",
+              "assistance": "Contact support for assistance."},
+        401: {"cause": "Not Authorized: Request without successful login session.",
+              "assistance": "Ensure that the API key is correct."},
+        403: {"cause": "Forbidden: Request is missing CSRF token or administrator is missing access profile permissions.",
+              "assistance": "Ensure that the account being used has permission to preform this action."},
+        404: {"cause": "Resource Not Found: Unable to find the specified resource.",
+              "assistance": "Data was requested but not found. Check that inputs are correct."},
+        405: {"cause": "Method Not Allowed: Specified HTTP method is not allowed for this resource.",
+              "assistance": "Contact support for assistance."},
+        413: {"cause": "Request Entity Too Large: Request cannot be processed due to large entity.",
+              "assistance": "Contact support for assistance."},
+        424: {"cause": "Failed Dependency: Fail dependency can be duplicate resource, missing required parameter,"
+                       " missing required attribute, invalid attribute value.",
+              "assistance": "This error is caused because a required condition was not met."
+                            " Common caused are: trying to add a object that already exists,"
+                            " or trying to delete an object that is currently in use."},
+        429: {"cause": "Access temporarily blocked: Maximum failed authentications reached."
+                       " The offended source is temporarily blocked for certain amount of time.",
+              "assistance": "Wait out the access timeout."},
+        500: {"cause": "Internal Server Error: Internal error when processing the request.",
+              "assistance": "Contact support for assistance."}
+    }
 
     def __init__(self, logger):
         """
@@ -12,8 +39,23 @@ class Helpers(object):
         """
         self.logger = logger
 
+    def http_errors(self, response: dict, status_code: int) -> None:
+        """
+        Will look for and handle non 2XX status codes
+        :param response: The JSON response from the API call
+        :param status_code: The API calls status code
+        """
+        if status_code in self._STATUS_CODES:
+            raise PluginException(cause=self._STATUS_CODES[status_code]["cause"],
+                                  assistance=self._STATUS_CODES[status_code]["assistance"],
+                                  data=f"Raw response data: {response}")
+        if status_code not in range(200, 299):
+            raise PluginException(cause="An undocumented response code was returned.",
+                                  assistance="Contact support for assistance",
+                                  data=f"Raw response data: {response}")
+
     @staticmethod
-    def determine_address_type(address):
+    def determine_address_type(address: str) -> str:
         if re.search('[a-zA-Z]', address):
             return "fqdn"
         return "ipmask"

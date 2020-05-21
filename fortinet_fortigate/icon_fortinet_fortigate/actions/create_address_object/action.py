@@ -48,14 +48,14 @@ class CreateAddressObject(komand.Action):
             endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/address"
 
             response = self.connection.session.post(endpoint, json=payload, verify=self.connection.ssl_verify)
-
             try:
-                response.raise_for_status()
-            except Exception as e:
-                raise PluginException(cause=f"Create address failed with {endpoint}\n",
-                                      assistance=response.text,
-                                      data=e)
+                json_response = response.json()
+            except ValueError:
+                raise PluginException(cause="Data sent by FortiGate was not in JSON format.\n",
+                                      assistance="Contact support for help.",
+                                      data=response.text)
+            helper.http_errors(json_response, response.status_code)
 
-            return {Output.SUCCESS: True, Output.RESPONSE_OBJECT: response.json()}
+            return {Output.SUCCESS: True, Output.RESPONSE_OBJECT: json_response}
 
         return {Output.SUCCESS: False, Output.RESPONSE_OBJECT: {"message": "IP matched whitelist, skipping block action."}}
