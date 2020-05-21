@@ -1,8 +1,9 @@
 import komand
 from .schema import CheckIfAddressInGroupInput, CheckIfAddressInGroupOutput, Input, Output, Component
 # Custom imports below
-from icon_checkpoint_ngfw.util.utils import DetailsLevel
+from icon_checkpoint_ngfw.util.utils import DetailsLevel, AddressType, IPAddressCheck
 from typing import Optional
+import ipaddress
 
 
 class CheckIfAddressInGroup(komand.Action):
@@ -16,10 +17,9 @@ class CheckIfAddressInGroup(komand.Action):
 
     def run(self, params={}):
         address = params.get(Input.ADDRESS)
-        enable_search = params.get(Input.ENABLE_SEARCH)
         group_input = params.get(Input.GROUP)
 
-        host_names = self._aggregate_hosts(address=address, group_input=group_input)
+        host_names: {str} = self._aggregate_hosts(address=address, group_input=group_input)
 
         if len(host_names):
             return {Output.FOUND: True, Output.ADDRESS_OBJECTS: list(host_names)}
@@ -43,9 +43,7 @@ class CheckIfAddressInGroup(komand.Action):
             groups = self._get_all_groups()
 
             for group in groups:
-                full_groups.append(group["name"])
-
-        self.logger.info(f"GOT GROUPS: {full_groups}")
+                full_groups.append(group)
 
         # Utilize a set to prevent duplicates
         host_names: {str} = set()
@@ -91,6 +89,7 @@ class CheckIfAddressInGroup(komand.Action):
                 break
 
             for group in objects:
+                self.logger.info(f"Getting hosts for group: {group['name']}")
                 full_groups.append(self.connection.get_group(name=group["name"]))
             current_offset += limit
 

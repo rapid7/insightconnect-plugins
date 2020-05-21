@@ -175,6 +175,7 @@ class Connection(komand.Connection):
             "limit": limit,
             "offset": offset,
             "details-level": details_level.value,
+            "show-as-ranges": True
         }
 
         headers = self.get_headers()

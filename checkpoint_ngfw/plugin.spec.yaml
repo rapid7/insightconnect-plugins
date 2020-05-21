@@ -888,7 +888,7 @@ actions:
 
   check_if_address_in_group:
     title: Check if Address in Group
-    description: Checks to see if an IP address, CIDR IP address, or domain is in an Address Group
+    description: Checks to see if an IP address is in an Address Group
     input:
       group:
         title: Group
@@ -904,14 +904,6 @@ actions:
         required: true
         example: 198.51.100.100
         order: 2
-      enable_search:
-        title: Enable Search
-        description: Search contents of address objects for IP addresses, CIDR IP addresses, or domains
-        type: boolean
-        required: true
-        example: false
-        default: false
-        order: 3
       discard_other_sessions:
         title: Discard Other Sessions
         type: boolean
@@ -919,7 +911,7 @@ actions:
         example: true
         required: true
         default: true
-        order: 4
+        order: 3
     output:
       found:
         title: Found

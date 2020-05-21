@@ -4,13 +4,12 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Checks to see if an IP address, CIDR IP address, or domain is in an Address Group"
+    DESCRIPTION = "Checks to see if an IP address is in an Address Group"
 
 
 class Input:
     ADDRESS = "address"
     DISCARD_OTHER_SESSIONS = "discard_other_sessions"
-    ENABLE_SEARCH = "enable_search"
     GROUP = "group"
     
 
@@ -36,13 +35,6 @@ class CheckIfAddressInGroupInput(komand.Input):
       "title": "Discard Other Sessions",
       "description": "Discard all other user sessions. This can fix errors when objects are locked by other sessions",
       "default": true,
-      "order": 4
-    },
-    "enable_search": {
-      "type": "boolean",
-      "title": "Enable Search",
-      "description": "Search contents of address objects for IP addresses, CIDR IP addresses, or domains",
-      "default": false,
       "order": 3
     },
     "group": {
@@ -54,8 +46,7 @@ class CheckIfAddressInGroupInput(komand.Input):
   },
   "required": [
     "address",
-    "discard_other_sessions",
-    "enable_search"
+    "discard_other_sessions"
   ]
 }
     """)
