@@ -28,10 +28,10 @@ class RemoveAddressObjectFromGroup(komand.Action):
         }
 
         headers = self.connection.get_headers()
-
         response = self.connection.post_and_publish(headers, discard_other_changes, payload, url)
+
         if response.status_code == 200:
-            return {Output.SUCCESS}
+            return {Output.SUCCESS: True}
         elif response.status_code in [400, 401, 403, 404, 409, 500, 501]:
             raise PluginException(cause=response["errors"]["message"],
                                   assistance="Remediate the issue noted in the error message above and try again.",
