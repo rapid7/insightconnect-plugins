@@ -204,18 +204,17 @@ This action is used to add a host to a network group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|None|
-|group_name|string|None|True|Name of the group to add this object to|None|None|
-|host_name|string|None|True|The host to add to the network group, usually the IP address|None|None|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
+|group_name|string|None|True|Name of the group to add this object to|None|ICON Block List|
+|host_name|string|None|True|The host to add to the network group, usually the IP address|None|New Host|
 
 Example input:
 
 ```
 {
-  "color": "black",
   "discard_other_sessions": true,
-  "host_ip": "192.168.2.1",
-  "name": "192.168.2.1"
+  "group_name": "ICON Block List",
+  "host_name": "New Host"
 }
 ```
 

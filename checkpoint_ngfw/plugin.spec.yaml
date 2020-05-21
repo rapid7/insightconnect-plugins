@@ -739,12 +739,14 @@ actions:
         required: true
         type: string
         order: 1
+        example: "ICON Block List"
       host_name:
         title: Host Name
         description: The host to add to the network group, usually the IP address
         required: true
         type: string
         order: 2
+        example: "New Host"
       discard_other_sessions:
         title: Discard Other Sessions
         type: boolean
@@ -752,6 +754,7 @@ actions:
         required: true
         default: true
         order: 3
+        example: true
     output:
       success:
         title: Success
