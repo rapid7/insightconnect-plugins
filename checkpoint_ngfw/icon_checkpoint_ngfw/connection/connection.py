@@ -3,6 +3,7 @@ from .schema import ConnectionSchema, Input
 # Custom imports below
 from komand.exceptions import PluginException, ConnectionTestException
 import requests
+from icon_checkpoint_ngfw.util.utils import DetailsLevel
 
 
 class Connection(komand.Connection):
@@ -155,9 +156,64 @@ class Connection(komand.Connection):
         try:
             result.raise_for_status()
         except Exception as e:
-            raise PluginException(cause="Could not find group {name}.",
+            raise PluginException(cause=f"Could not find group {name}.",
                                   assistance=result.text,
                                   data=e)
+        return result.json()
+
+    def get_groups(self, details_level: DetailsLevel, limit: int = 500, offset: int = 0) -> dict:
+        """
+        Return all network groups found within the Check Point NGFW instance
+        :param details_level: Detail level, as an enum, to provide with group information
+        :param limit: How many groups to request at once
+        :param offset: Group request offset
+        :return: All network groups
+        """
+        endpoint = f"{self.server_and_port}/web_api/show-groups"
+
+        payload = {
+            "limit": limit,
+            "offset": offset,
+            "details-level": details_level.value,
+            "show-as-ranges": True
+        }
+
+        headers = self.get_headers()
+        result = requests.post(endpoint, headers=headers, json=payload, verify=self.ssl_verify)
+
+        try:
+            result.raise_for_status()
+        except Exception as e:
+            raise PluginException(cause="Unable to get groups from Check Point NGFW.",
+                                  assistance=result.text,
+                                  data=e)
+
+        return result.json()
+
+    def get_host_object_by_host_name(self, host_name: str, details_level: DetailsLevel) -> dict:
+        """
+        Returns a host object via name lookup (NOT UID)
+        :param host_name: Host name
+        :param details_level: Detail level, as an enum, to provide with host information
+        :return: Host object, as a dictionary
+        """
+        endpoint = f"{self.server_and_port}/web_api/show-host"
+
+        payload = {
+            "name": host_name,
+            "details-level": details_level.value
+        }
+
+        headers = self.get_headers()
+        result = requests.post(endpoint, headers=headers, json=payload, verify=self.ssl_verify)
+
+        try:
+            result.raise_for_status()
+        except Exception as e:
+            raise PluginException(cause=f"Unable to get host '{host_name}' from Check Point NGFW.",
+                                  assistance=result.text,
+                                  data=e)
+
         return result.json()
 
     def install_policy(self, headers, discard_other_changes, payload, url):

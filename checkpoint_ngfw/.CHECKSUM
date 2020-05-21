@@ -1,6 +1,6 @@
 {
-	"spec": "18d04cf9773e2c8197efa9abf0b49d13",
-	"manifest": "e8545c3322699314610eb7843f3dd862",
+	"spec": "515de53ab6c0687655e363b1469490ad",
+	"manifest": "31c7e94676736e3d312b783fd652d3eb",
 	"setup": "dbcd29267e4279509db88b97934c753a",
 	"schemas": [
 		{
@@ -14,6 +14,10 @@
 		{
 			"identifier": "add_host_to_network_group/schema.py",
 			"hash": "3eec1926fcb61887fd83f522c2296f11"
+		},
+		{
+			"identifier": "check_if_address_in_group/schema.py",
+			"hash": "42e192a3a7b07bf1f3939fcb2f029a14"
 		},
 		{
 			"identifier": "discard_all_sessions/schema.py",

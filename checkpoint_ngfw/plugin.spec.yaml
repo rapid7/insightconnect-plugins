@@ -887,27 +887,40 @@ actions:
         type: boolean
         required: true
 
-    remove_address_object_from_group:
-      title: Remove Address Object from Group
-      description: Removes an address object from an address group
-      input:
-        address_object:
-          title: Address Object
-          description: The name of the address object to remove
-          type: string
-          example: Malicious Host
-          required: true
-          order: 1
-        group:
-          title: Group
-          description: Group name
-          type: string
-          example: ICON Block List
-          required: true
-          order: 2
-      output:
-        success:
-          title: Success
-          description: Was operation successful
-          type: boolean
-          required: true
+  check_if_address_in_group:
+    title: Check if Address in Group
+    description: Checks to see if an IPv4 or IPv6 address is in an Address Group
+    input:
+      group:
+        title: Group
+        description: Group to check. UID is not supported. Omitting this input will check all groups
+        type: string
+        required: false
+        example: InsightConnect Block List
+        order: 1
+      address:
+        title: Address
+        description: IPv4 or IPv6 address to check in the group
+        type: string
+        required: true
+        example: 198.51.100.100
+        order: 2
+      discard_other_sessions:
+        title: Discard Other Sessions
+        type: boolean
+        description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
+        example: true
+        required: true
+        default: true
+        order: 3
+    output:
+      found:
+        title: Found
+        description: Was address found in group
+        type: boolean
+        required: true
+      address_objects:
+        title: Address Objects
+        description: The names of the address objects that match or contain the address
+        type: "[]string"
+        required: true
