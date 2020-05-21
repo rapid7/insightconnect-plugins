@@ -888,7 +888,7 @@ actions:
 
   check_if_address_in_group:
     title: Check if Address in Group
-    description: Checks to see if an IP address is in an Address Group
+    description: Checks to see if an IPv4 or IPv6 address is in an Address Group
     input:
       group:
         title: Group
@@ -899,7 +899,7 @@ actions:
         order: 1
       address:
         title: Address
-        description: Address to check in the group
+        description: IPv4 or IPv6 address to check in the group
         type: string
         required: true
         example: 198.51.100.100

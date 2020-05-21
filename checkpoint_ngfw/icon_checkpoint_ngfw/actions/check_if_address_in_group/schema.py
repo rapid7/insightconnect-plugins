@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Checks to see if an IP address is in an Address Group"
+    DESCRIPTION = "Checks to see if an IPv4 or IPv6 address is in an Address Group"
 
 
 class Input:
@@ -27,7 +27,7 @@ class CheckIfAddressInGroupInput(komand.Input):
     "address": {
       "type": "string",
       "title": "Address",
-      "description": "Address to check in the group",
+      "description": "IPv4 or IPv6 address to check in the group",
       "order": 2
     },
     "discard_other_sessions": {

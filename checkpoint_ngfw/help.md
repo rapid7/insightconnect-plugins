@@ -45,13 +45,13 @@ Example input:
 
 #### Check if Address in Group
 
-This action checks to see if an IP, CIDR, or domain is in an Address Group.
+This action checks to see if an IPv4 or IPv6 address is in an Address Group
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|Address to check in the group|None|198.51.100.100|
+|address|string|None|True|IPv4 or IPv6 address to check in the group|None|198.51.100.100|
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
 |group|string|None|False|Group to check. UID is not supported. Omitting this input will check all groups|None|InsightConnect Block List|
 
@@ -174,12 +174,6 @@ This action is used to add a host to a network group.
 Example input:
 
 ```
-{
-  "color": "black",
-  "discard_other_sessions": true,
-  "host_ip": "192.168.2.1",
-  "name": "192.168.2.1"
-}
 ```
 
 ##### Output
@@ -956,6 +950,7 @@ privileges.
 
 # Version History
 
+* 1.4.0 - New action Check if Address in Group
 * 1.3.0 - Update to add install options to Install Policy
 * 1.2.0 - New action Install Policy | Fix issue where logout could fail | Update to help to improve troubleshooting | Update to `Add Host` action to with color option 
 * 1.1.0 - New action Add Host to Network Group
