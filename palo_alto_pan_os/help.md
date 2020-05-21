@@ -1,6 +1,6 @@
 # Description
 
-[PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os) is the software that runs all Palo Alto Networks next-generation firewalls. This plugin utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api) to provide programmatic management of the Palo Alto PAN-OS firewall appliance(s).
+[PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os) is the software that runs all Palo Alto Networks next-generation firewalls. This plugin utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api) to provide programmatic management of the Palo Alto firewall appliance(s).
 
 # Key Features
 
@@ -15,7 +15,7 @@
 
 # Requirements
 
-* PAN-OS credentials
+* Firewall credentials
 
 # Documentation
 
@@ -25,22 +25,75 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and password|None|None|
-|server|string|None|True|URL pointing to instance of PAN-OS|None|None|
-|verify_cert|boolean|None|True|If true, validate the server's TLS certificate when contacting PAN-OS over HTTPS|None|None|
+|credentials|credential_username_password|None|True|Username and password|None|{"username":"username", "password":"password"}|
+|server|string|None|True|URL pointing to instance of a Palo Alto firewall|None|http://www.example.com|
+|verify_cert|boolean|None|True|If true, validate the server's TLS certificate when contacting the firewall over HTTPS|None|True|
 
 Example input:
 
 ```
+{
+  "credentials": 
+  {
+    "username":"username", 
+    "password":"password"
+  },
+  "server": "http://www.example.com",
+  "verify_cert": true
+}
 ```
 
 ## Technical Details
 
 ### Actions
 
+#### Add Address Object to Group
+
+This action adds an address object to an address group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object|string|None|True|The name of the address object to add|None|Malicious IP address|
+|device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
+|group|string|None|True|Group name|None|ICON Block List|
+|virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
+
+Example input:
+
+```
+{
+  "address_object": "Malicious IP",
+  "device_name": "localhost.localdomain",
+  "group": "ICON Block List",
+  "virtual_system": "vsys1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|address_objects|[]string|True|Address Objects currently in group|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+{
+  "success": true,
+  "address_objects": [
+    "198.51.100.100",
+    "198.51.100.101",
+    "Malicious IP",
+  ]
+}
+```
+
 #### Check if Address in Group
 
-This action checks to see if an IP, CIDR, or domain is in an Address Group.
+This action checks to see if an IP address, CIDR IP address, or domain is in an Address Group.
 
 ##### Input
 
@@ -91,7 +144,7 @@ This action removes an address object from an address group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_object|string|None|True|The name of the address object to remove|None|Malicious IP|
+|address_object|string|None|True|The name of the address object to remove|None|Malicious Host|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
 |group|string|None|True|Group name|None|ICON Block List|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
@@ -100,7 +153,7 @@ Example input:
 
 ```
 {
-  "address_object": "Malicious IP",
+  "address_object": "Malicious Host",
   "device_name": "localhost.localdomain",
   "group": "ICON Block List",
   "virtual_system": "vsys1"
@@ -130,7 +183,7 @@ This action is used to get a policy.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
-|policy_name|string|None|True|Policy name|None|InsightConnect Block List|
+|policy_name|string|None|True|Policy name|None|InsightConnect Block Policy|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
 
 Example input:
@@ -138,7 +191,7 @@ Example input:
 ```
 {
   "device_name": "localhost.localdomain",
-  "policy_name": "InsightConnect Block List",
+  "policy_name": "InsightConnect Block Policy",
   "virtual_system": "vsys1"
 }
 ```
@@ -238,7 +291,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|code|string|False|Response code from PAN-OS|
+|code|string|False|Response code from the firewall|
 |message|string|False|A message with more detail about the status|
 |status|string|False|The status of the requested operation e.g. success, error, etc|
 
@@ -264,7 +317,7 @@ This action is used to create a new security policy rule.
 |application|string|None|True|Applications for which this rule will be applied e.g. adobe-cloud, dropbox,  any|None|None|
 |description|string|None|True|Description of the rule and what it does|None|None|
 |destination|string|None|True|Destinations for which this rule will be applied e.g. 10.0.0.1, computername, any|None|None|
-|disable_server_response_inspection|boolean|None|True|If true, PAN-OS will not inspect this traffic|None|None|
+|disable_server_response_inspection|boolean|None|True|If true, the firewall will not inspect this traffic|None|None|
 |disabled|boolean|None|True|If true, rule is disabled|None|None|
 |dst_zone|string|None|True|Zone which the traffic is going to e.g. server zone, any|None|None|
 |log_end|boolean|None|True|Generates a traffic log entry for the end of a session|None|None|
@@ -286,7 +339,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|response|config|False|Response from PAN-OS|
+|response|config|False|Response from the firewall|
 
 Example output:
 
@@ -321,7 +374,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|response|object|False|Response from PAN-OS|
+|response|object|False|Response from the firewall|
 
 Example output:
 
@@ -355,7 +408,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|response|config|False|Response from PAN-OS|
+|response|config|False|Response from the firewall|
 
 Example output:
 
@@ -409,7 +462,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|response|object|False|Response from PAN-OS|
+|response|object|False|Response from the firewall|
 
 Example output:
 
@@ -443,7 +496,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|response|config|False|Response from PAN-OS|
+|response|config|False|Response from the firewall|
 
 Example output:
 
@@ -520,7 +573,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|response|log|False|Response from PAN-OS|
+|response|log|False|Response from the firewall|
 
 Example output:
 
@@ -587,7 +640,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|response|object|False|Response from PAN-OS|
+|response|object|False|Response from the firewall|
 
 Example output:
 
@@ -624,7 +677,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|response|config|False|Response from PAN-OS|
+|response|config|False|Response from the firewall|
 
 Example output:
 
@@ -658,7 +711,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|response|object|False|Response from PAN-OS|
+|response|object|False|Response from the firewall|
 
 Example output:
 
@@ -703,7 +756,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|code|string|False|Response code from PAN-OS|
+|code|string|False|Response code from firewall|
 |message|string|False|A message with more detail about the status|
 |status|string|False|Status of the requested operation e.g. success, error, etc|
 
@@ -747,7 +800,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|code|string|False|Response code from PAN-OS|
+|code|string|False|Response code from the firewall|
 |message|string|False|A message with more detail about the status|
 |status|string|False|Status of the requested operation e.g. success, error, etc|
 
@@ -773,7 +826,7 @@ This action is used to add an external dynamic list.
 |day|string||True|If repeat is weekly, choose a day to update|['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']|None|
 |description|string|None|True|A description of the list|None|None|
 |list_type|string|None|True|The type of list|['IP List', 'Domain List', 'URL List']|None|
-|name|string|None|True|An arbitrary name for the list. This name will be used to identify the list in PAN-OS|None|None|
+|name|string|None|True|An arbitrary name for the list. This name will be used to identify the list in the firewall|None|None|
 |repeat|string|None|True|The interval at which to retrieve updates from the list|['Five Minute', 'Hourly', 'Daily', 'Weekly']|None|
 |source|string|None|True|The web site you will pull the list from e.g. https://www.example.com/test.txt|None|None|
 |time|string||True|If repeat is daily or weekly, choose an hour on a 24 hour clock to update (Default: '')|['', '00', '01', '02', '03', '04', '05', '06', '07', 8, 9, '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']|None|
@@ -787,7 +840,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|code|string|False|Response code from PAN-OS|
+|code|string|False|Response code from the firewall|
 |message|string|False|A message with more detail about the status|
 |status|string|False|The status of the requested operation e.g. success, error, etc|
 
@@ -823,6 +876,8 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 5.1.0 - New action Add Address Object to Group
+* 5.0.0 - Change plugin title to "Palo Alto Firewall" from "Palo Alto PAN-OS" and update remaining references
 * 4.0.0 - Update to Create Address Object to make input consistent with other actions
 * 3.0.0 - New action Remove Address Object from Group | Update to Check if Address in Group to match input of Remove Address Object from Group 
 * 2.2.0 - New action Check if Address in Group

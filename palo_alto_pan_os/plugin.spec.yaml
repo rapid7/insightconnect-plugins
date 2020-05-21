@@ -2,9 +2,9 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: palo_alto_pan_os
-title: Palo Alto PAN-OS
-description: Manage Palo Alto Networks devices via PAN-OS
-version: 4.0.0
+title: Palo Alto Firewall
+description: Manage Palo Alto Networks firewall devices
+version: 5.1.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -31,19 +31,22 @@ connection:
   server:
     title: Server
     type: string
-    description: URL pointing to instance of PAN-OS
+    description: URL pointing to instance of a Palo Alto firewall
     required: true
+    example: http://www.example.com
   credentials:
     title: Credentials
     description: Username and password
     type: credential_username_password
     required: true
+    example: '{"username":"username", "password":"password"}'
   verify_cert:
     title: Verify Cert
     type: boolean
-    description: If true, validate the server's TLS certificate when contacting PAN-OS
+    description: If true, validate the server's TLS certificate when contacting the firewall
       over HTTPS
     required: true
+    example: true
 actions:
   set_security_policy_rule:
     title: Set Security Policy Rule
@@ -91,7 +94,7 @@ actions:
         required: true
       disable_server_response_inspection:
         title: Disable Server Response Inspection
-        description: If true, PAN-OS will not inspect this traffic
+        description: If true, the firewall will not inspect this traffic
         type: boolean
         required: true
       negate_source:
@@ -137,7 +140,7 @@ actions:
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: config
         required: false
   show:
@@ -152,7 +155,7 @@ actions:
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: config
         required: false
   get:
@@ -167,7 +170,7 @@ actions:
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: config
         required: false
   delete:
@@ -182,7 +185,7 @@ actions:
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: config
         required: false
   set:
@@ -202,7 +205,7 @@ actions:
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: object
         required: false
   edit:
@@ -223,7 +226,7 @@ actions:
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: object
         required: false
   commit:
@@ -244,7 +247,7 @@ actions:
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: object
         required: false
   op:
@@ -259,7 +262,7 @@ actions:
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: object
         required: false
   retrieve_logs:
@@ -321,12 +324,12 @@ actions:
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: log
         required: false
   add_to_policy:
     title: Add to Policy
-    description: Add a rule to a PAN-OS security policy
+    description: Add a rule to a firewall security policy
     input:
       rule_name:
         title: Rule Name
@@ -405,7 +408,7 @@ actions:
         required: false
       code:
         title: Code
-        description: Response code from PAN-OS
+        description: Response code from firewall
         type: string
         required: false
       message:
@@ -415,7 +418,7 @@ actions:
         required: false
   remove_from_policy:
     title: Remove from Policy
-    description: Remove a rule from a PAN-OS security policy
+    description: Remove a rule from a firewall security policy
     input:
       rule_name:
         title: Rule Name
@@ -494,7 +497,7 @@ actions:
         required: false
       code:
         title: Code
-        description: Response code from PAN-OS
+        description: Response code from the firewall
         type: string
         required: false
       message:
@@ -509,7 +512,7 @@ actions:
       name:
         title: The Name of the List
         description: An arbitrary name for the list. This name will be used to identify
-          the list in PAN-OS
+          the list in the firewall
         type: string
         required: true
       list_type:
@@ -597,7 +600,7 @@ actions:
         required: false
       code:
         title: Code
-        description: Response code from PAN-OS
+        description: Response code from the firewall
         type: string
         required: false
       message:
@@ -649,7 +652,7 @@ actions:
         required: false
       code:
         title: Code
-        description: Response code from PAN-OS
+        description: Response code from the firewall
         type: string
         required: false
       message:
@@ -665,15 +668,15 @@ actions:
         title: Policy Name
         description: Policy name
         type: string
-        example: InsightConnect Block List
+        example: InsightConnect Block Policy
         required: true
         order: 1
       device_name:
         title: Device Name
         description: Device name
         type: string
-        default: localhost.localdomain
-        example: localhost.localdomain
+        default: "localhost.localdomain"
+        example: "localhost.localdomain"
         required: true
         order: 2
       virtual_system:
@@ -737,7 +740,7 @@ actions:
         required: false
   check_if_address_object_in_group:
     title: Check if Address in Group
-    description: Checks to see if an IP, CIDR, or domain is in an Address Group
+    description: Checks to see if an IP address, CIDR IP address, or domain is in an Address Group
     input:
       group:
         title: Group
@@ -796,6 +799,46 @@ actions:
         title: Address Object
         description: The name of the address object to remove
         type: string
+        example: Malicious Host
+        required: true
+        order: 1
+      group:
+        title: Group
+        description: Group name
+        type: string
+        example: ICON Block List
+        required: true
+        order: 2
+      device_name:
+        title: Device Name
+        description: Device name
+        type: string
+        default: localhost.localdomain
+        example: localhost.localdomain
+        required: true
+        order: 3
+      virtual_system:
+        title: Virtual System Name
+        description: Virtual system name
+        type: string
+        default: vsys1
+        example: vsys1
+        required: true
+        order: 4
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  add_address_object_to_group:
+    title: Add Address Object to Group
+    description: Adds an address object to an address group
+    input:
+      address_object:
+        title: Address Object
+        description: The name of the address object to add
+        type: string
         example: Malicious IP
         required: true
         order: 1
@@ -827,4 +870,9 @@ actions:
         title: Success
         description: Was operation successful
         type: boolean
+        required: true
+      address_objects:
+        title: Address Objects
+        description: Address objects currently in group
+        type: "[]string"
         required: true
