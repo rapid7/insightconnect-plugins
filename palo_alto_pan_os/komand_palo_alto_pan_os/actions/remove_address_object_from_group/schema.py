@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Removes an address object from an address group"
+    DESCRIPTION = "Removes an address object from an address group. Supports IPv6"
 
 
 class Input:
