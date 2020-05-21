@@ -68,7 +68,7 @@ class Connection(komand.Connection):
         request = requests.post(url, json=payload, headers=headers, verify=self.ssl_verify)
         try:
             request.raise_for_status()
-        except Exception as e:
+        except Exception:
             self.logger.warning(f"There was a problem logging out. Ignoring this and attempting to continue. "
                               f"Error follows:\n{request.text}")
 
