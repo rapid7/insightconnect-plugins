@@ -453,6 +453,7 @@ connection:
     title: Credentials
     description: Username and password
     required: true
+    example: '{"username": "xxxxxx", "password": "xxxxxx"}'
   server:
     type: string
     title: Check Point Server IP Address
@@ -885,3 +886,28 @@ actions:
         description: Success
         type: boolean
         required: true
+
+    remove_address_object_from_group:
+      title: Remove Address Object from Group
+      description: Removes an address object from an address group
+      input:
+        address_object:
+          title: Address Object
+          description: The name of the address object to remove
+          type: string
+          example: Malicious Host
+          required: true
+          order: 1
+        group:
+          title: Group
+          description: Group name
+          type: string
+          example: ICON Block List
+          required: true
+          order: 2
+      output:
+        success:
+          title: Success
+          description: Was operation successful
+          type: boolean
+          required: true

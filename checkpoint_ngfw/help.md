@@ -27,19 +27,16 @@ The connection configuration accepts the following parameters:
 |port|integer|443|True|Check Point server port|None|443|
 |server|string|None|True|Check Point server IP address|None|198.168.2.1|
 |ssl_verify|boolean|True|True|Use SSL verification|None|True|
-|username_password|credential_username_password|None|True|Username and password|None|None|
+|username_password|credential_username_password|None|True|Username and password|None|{"username": "xxxxxx", "password": "xxxxxx"}|
 
 Example input:
 
 ```
 {
   "port": 443,
-  "server": "192.168.1.1",
-  "ssl_verify": false,
-  "username_password": {
-    "password": "xxxxxx",
-    "username": "xxxxxx"
-  }
+  "server": "198.168.2.1",
+  "ssl_verify": true,
+  "username_password": "{\"username\": \"xxxxxx\", \"password\": \"xxxxxx\"}"
 }
 ```
 
@@ -61,7 +58,7 @@ This action is used to install a policy to selected targets.
 |install_on_all_cluster_members_or_fail|boolean|False|True|Relevant for the gateway clusters. If true, the policy is installed on all the cluster members. If the installation on a cluster member fails, don't install on that cluster|None|False|
 |policy_package|string|standard|True|Policy package to install|None|standard|
 |qos_policy|boolean|False|True|Set to be true in order to install the QoS policy. By default, the value is true if Quality-of-Service policy is enabled on the input policy package, otherwise false|None|False|
-|targets|[]string|['target name']|True|On what targets to execute this command. Targets may be identified by their name, or object unique identifier|None|['checkpoint_fw_1', 'checkpoint_fw_2']|
+|targets|[]string|["target name"]|True|On what targets to execute this command. Targets may be identified by their name, or object unique identifier|None|["checkpoint_fw_1", "checkpoint_fw_2"]|
 |threat_prevention_policy|boolean|True|True|Set to be true in order to install the Threat Prevention policy. By default, the value is true if Threat Prevention policy is enabled on the input policy package, otherwise false|None|True|
 
 Example input:
@@ -75,7 +72,8 @@ Example input:
   "policy_package": "standard",
   "qos_policy": false,
   "targets": [
-    "checkmark_fw"
+    "checkpoint_fw_1",
+    "checkpoint_fw_2"
   ],
   "threat_prevention_policy": true
 }
@@ -114,7 +112,7 @@ Example input:
 {
   "action": "Prevent",
   "discard_other_sessions": true,
-  "name": "Alt-N Technologies SecurityGateway Username Buffer Overflow",
+  "name": "Blaster Attacks",
   "profile": "Optimized"
 }
 ```
@@ -148,11 +146,6 @@ This action is used to add a host to a network group.
 Example input:
 
 ```
-{
-  "discard_other_sessions": false,
-  "group_name": "Test Group",
-  "host_name": "192.168.5.1"
-}
 ```
 
 ##### Output
@@ -213,7 +206,7 @@ Example input:
 ```
 {
   "discard_other_sessions": true,
-  "name": "192.1.2.1"
+  "name": "192.168.2.1"
 }
 ```
 
@@ -250,9 +243,10 @@ Example input:
 
 ```
 {
+  "color": "black",
   "discard_other_sessions": true,
-  "host_ip": "192.168.5.1",
-  "name": "192.168.5.1"
+  "host_ip": "192.168.2.1",
+  "name": "192.168.2.1"
 }
 ```
 
@@ -320,7 +314,7 @@ Example input:
 
 ```
 {
-  "access_rule_name": "Test from InsightConnect",
+  "access_rule_name": "InsightConnect Access Rule",
   "discard_other_sessions": true,
   "layer": "Network"
 }
@@ -568,7 +562,7 @@ This action is used to create a rule to block traffic.
 |destination|string|None|False|Destination network object name|None|192.168.2.1|
 |discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
 |layer|string|Network|True|Layer to add this rule to|None|Network|
-|list_of_services|[]string|None|False|List of services to block|None|['AOL', 'SMTP']|
+|list_of_services|[]string|None|False|List of services to block|None|["AOL", "SMTP"]|
 |name|string|None|True|Rule name|None|Malicious IP Addresses|
 |position|string|top|True|Position in the list of rules. e.g. top, bottom, 15|None|1|
 |source|string|None|False|Source network object name|None|192.168.2.1|
@@ -578,11 +572,16 @@ Example input:
 ```
 {
   "action": "Drop",
+  "destination": "192.168.2.1",
   "discard_other_sessions": true,
   "layer": "Network",
-  "name": "Test from Komand",
-  "position": "top",
-  "source": "192.1.2.1"
+  "list_of_services": [
+    "AOL",
+    "SMTP"
+  ],
+  "name": "Malicious IP Addresses",
+  "position": 1,
+  "source": "192.168.2.1"
 }
 ```
 
