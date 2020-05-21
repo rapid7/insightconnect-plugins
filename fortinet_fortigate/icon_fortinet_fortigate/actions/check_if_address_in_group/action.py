@@ -20,16 +20,16 @@ class CheckIfAddressInGroup(komand.Action):
         helper = Helpers(self.logger)
 
         endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/addrgrp/{addrgrp}"
-        result = self.connection.session.get(endpoint, verify=self.connection.ssl_verify)
+        response = self.connection.session.get(endpoint, verify=self.connection.ssl_verify)
 
         try:
-            address_groups = result.json()
+            address_groups = response.json()
         except ValueError:
             raise PluginException(cause="Data sent by FortiGate was not in JSON format.\n",
                                   assistance="Contact support for help.",
-                                  data=result.text)
+                                  data=response.text)
 
-        helper.http_errors(address_groups, result.status_code)
+        helper.http_errors(address_groups, response.status_code)
 
         try:
             groups = address_groups["results"]
@@ -40,13 +40,13 @@ class CheckIfAddressInGroup(komand.Action):
         if len(groups) > 1:
             raise PluginException(cause="FortiGate returned more than one address group.\n",
                                   assistance="Contact support for help.",
-                                  data=result.text)
+                                  data=response.text)
         try:
             ips = groups[0]["member"]
         except KeyError:
             raise PluginException(cause="The address group date was malformed.\n",
                                   assistance="Contact support for help.",
-                                  data=result.text)
+                                  data=response.text)
 
         found = False
         for item in ips:
