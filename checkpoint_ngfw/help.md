@@ -980,7 +980,7 @@ privileges.
 
 # Version History
 
-* 1.4.0 - New actions Check if Address in Group, Remove Address Object from Group
+* 2.0.0 - New actions Check if Address in Group, Remove Address Object from Group | Move "Discard Sessions" input from individual actions to connection
 * 1.3.0 - Update to add install options to Install Policy
 * 1.2.0 - New action Install Policy | Fix issue where logout could fail | Update to help to improve troubleshooting | Update to `Add Host` action to with color option 
 * 1.1.0 - New action Add Host to Network Group
