@@ -42,9 +42,9 @@ Example input:
 
 ### Actions
 
-#### 
+#### Remove Address Object from Group
 
-This action is used to .
+This action removes an address object to an address group.
 
 ##### Input
 
@@ -119,8 +119,7 @@ Example input:
 
 ```
 {
-  "address_object": "198.51.100.100",
-  "group": "blocked IP's"
+  "name_filter": "my policy name"
 }
 ```
 
@@ -336,8 +335,13 @@ Example input:
 
 ```
 {
-  "address_object": "198.51.100.100",
-  "group": "blocked IP's"
+  "address": "198.51.100.100",
+  "address_object": "MaliciousHost",
+  "whitelist": [
+    "198.51.100.100",
+    "example.com",
+    "192.0.2.0/24"
+  ]
 }
 ```
 
@@ -385,8 +389,7 @@ Example input:
 
 ```
 {
-  "address_object": "198.51.100.100",
-  "group": "blocked IP's"
+  "address_object": "MaliciousHost"
 }
 ```
 
@@ -434,8 +437,7 @@ Example input:
 
 ```
 {
-  "address_object": "198.51.100.100",
-  "group": "blocked IP's"
+  "name_filter": "198.51.100.100"
 }
 ```
 
