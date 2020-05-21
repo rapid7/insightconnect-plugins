@@ -610,7 +610,7 @@ actions:
         required: false
   set_address_object:
     title: Create Address Object
-    description: Create a new address object
+    description: Create a new address object. Supports IPv6
     input:
       address:
         title: Address
@@ -740,7 +740,7 @@ actions:
         required: false
   check_if_address_object_in_group:
     title: Check if Address in Group
-    description: Checks to see if an IP address, CIDR IP address, or domain is in an Address Group
+    description: Checks to see if an IP address, CIDR IP address, or domain is in an Address Group. Supports IPv6
     input:
       group:
         title: Group
@@ -793,7 +793,7 @@ actions:
         required: false
   remove_address_object_from_group:
     title: Remove Address Object from Group
-    description: Removes an address object from an address group
+    description: Removes an address object from an address group. Supports IPv6
     input:
       address_object:
         title: Address Object
@@ -833,7 +833,7 @@ actions:
         required: true
   add_address_object_to_group:
     title: Add Address Object to Group
-    description: Adds an address object to an address group
+    description: Adds an address object to an address group. Supports IPv6
     input:
       address_object:
         title: Address Object
