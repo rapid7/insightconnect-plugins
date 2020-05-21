@@ -4,10 +4,10 @@ import komand
 from komand_powershell import connection, actions, triggers
 
 
-Name = 'PowerShell'
-Vendor = 'rapid7'
-Version = '2.1.1'
-Description = 'Run a PowerShell script'
+Name = "PowerShell"
+Vendor = "rapid7"
+Version = "2.1.2"
+Description = "Run a PowerShell script"
 
 
 class ICONPowershell(komand.Plugin):
