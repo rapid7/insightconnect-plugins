@@ -24,6 +24,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|discard_other_sessions|boolean|False|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
 |port|integer|443|True|Check Point server port|None|443|
 |server|string|None|True|Check Point server IP address|None|198.168.2.1|
 |ssl_verify|boolean|True|True|Use SSL verification|None|True|
@@ -33,6 +34,7 @@ Example input:
 
 ```
 {
+  "discard_other_sessions": true,
   "port": 443,
   "server": "198.168.2.1",
   "ssl_verify": true,
@@ -53,7 +55,6 @@ This action removes an address object (host) from an address group.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |address_object|string|None|True|The name of the address object (host) to remove|None|Malicious Host|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
 |group|string|None|True|Group name|None|ICON Block List|
 
 Example input:
@@ -61,7 +62,6 @@ Example input:
 ```
 {
   "address_object": "Malicious Host",
-  "discard_other_sessions": true,
   "group": "ICON Block List"
 }
 ```
@@ -89,7 +89,6 @@ This action checks to see if an IPv4 or IPv6 address is in an Address Group
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |address|string|None|True|IPv4 or IPv6 address to check in the group|None|198.51.100.100|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
 |group|string|None|False|Group to check. UID is not supported. Omitting this input will check all groups|None|InsightConnect Block List|
 
 Example input:
@@ -97,7 +96,6 @@ Example input:
 ```
 {
   "address": "198.51.100.100",
-  "discard_other_sessions": true,
   "group": "InsightConnect Block List"
 }
 ```
@@ -119,7 +117,6 @@ This action is used to install a policy to selected targets.
 |----|----|-------|--------|-----------|----|-------|
 |access_control_policy|boolean|True|True|Set to be true in order to install the Access Control policy. By default, the value is true if Access Control policy is enabled on the input policy package, otherwise false|None|True|
 |desktop_security_policy|boolean|False|True|Set to be true in order to install the Desktop Security policy. By default, the value is true if desktop security policy is enabled on the input policy package, otherwise false|None|False|
-|discard_other_sessions|boolean|False|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|False|
 |install_on_all_cluster_members_or_fail|boolean|False|True|Relevant for the gateway clusters. If true, the policy is installed on all the cluster members. If the installation on a cluster member fails, don't install on that cluster|None|False|
 |policy_package|string|standard|True|Policy package to install|None|standard|
 |qos_policy|boolean|False|True|Set to be true in order to install the QoS policy. By default, the value is true if Quality-of-Service policy is enabled on the input policy package, otherwise false|None|False|
@@ -132,7 +129,6 @@ Example input:
 {
   "access_control_policy": true,
   "desktop_security_policy": false,
-  "discard_other_sessions": false,
   "install_on_all_cluster_members_or_fail": false,
   "policy_package": "standard",
   "qos_policy": false,
@@ -167,7 +163,6 @@ This action is used to set a threat protection action.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |action|string|None|True|Action|['Inactive', 'Detect', 'Prevent', 'Drop', 'Accept']|Prevent|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
 |name|string|None|True|Name of the protection to act on|None|Blaster Attacks|
 |profile|string|Optimized|True|Profile e.g. Optimized, Basic, Strict|None|Optimized|
 
@@ -176,7 +171,6 @@ Example input:
 ```
 {
   "action": "Prevent",
-  "discard_other_sessions": true,
   "name": "Blaster Attacks",
   "profile": "Optimized"
 }
@@ -204,7 +198,6 @@ This action is used to add a host to a network group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
 |group_name|string|None|True|Name of the group to add this object to|None|ICON Block List|
 |host_name|string|None|True|The host to add to the network group, usually the IP address|None|New Host|
 
@@ -212,7 +205,6 @@ Example input:
 
 ```
 {
-  "discard_other_sessions": true,
   "group_name": "ICON Block List",
   "host_name": "New Host"
 }
@@ -268,14 +260,12 @@ This action is used to remove a host from network objects.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
 |name|string|None|True|Name|None|192.168.2.1|
 
 Example input:
 
 ```
 {
-  "discard_other_sessions": true,
   "name": "192.168.2.1"
 }
 ```
@@ -305,7 +295,6 @@ This action is used to add a host as a network object.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |color|string|black|False|Color|['black', 'aquamarine', 'blue', 'brown', 'burlywood', 'coral', 'crete', 'cyan', 'dark blue', 'dark gold', 'dark gray', 'dark green', 'dark orange', 'dark sea green', 'firebrick', 'forest green', 'gold', 'gray', 'khaki', 'lemon chiffon', 'light green', 'magenta', 'navy blue', 'olive', 'orange', 'orchid', 'pink', 'purple', 'red', 'sea green', 'sienna', 'sky blue', 'slate blue', 'turquoise', 'violet red', 'yellow']|black|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
 |host_ip|string|None|True|Host IP address|None|192.168.2.1|
 |name|string|None|True|Name|None|192.168.2.1|
 
@@ -314,7 +303,6 @@ Example input:
 ```
 {
   "color": "black",
-  "discard_other_sessions": true,
   "host_ip": "192.168.2.1",
   "name": "192.168.2.1"
 }
@@ -377,7 +365,6 @@ This action is used to remove an access rule.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |access_rule_name|string|None|True|Access rule name|None|InsightConnect Access Rule|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
 |layer|string|Network|True|Layer|None|Network|
 
 Example input:
@@ -385,7 +372,6 @@ Example input:
 ```
 {
   "access_rule_name": "InsightConnect Access Rule",
-  "discard_other_sessions": true,
   "layer": "Network"
 }
 ```
@@ -630,7 +616,6 @@ This action is used to create a rule to block traffic.
 |----|----|-------|--------|-----------|----|-------|
 |action|string|Drop|True|Action to take|['Accept', 'Drop', 'Ask', 'Inform', 'Reject', 'User Auth', 'Client Auth', 'Apply Layer']|Drop|
 |destination|string|None|False|Destination network object name|None|192.168.2.1|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
 |layer|string|Network|True|Layer to add this rule to|None|Network|
 |list_of_services|[]string|None|False|List of services to block|None|["AOL", "SMTP"]|
 |name|string|None|True|Rule name|None|Malicious IP Addresses|
@@ -643,7 +628,6 @@ Example input:
 {
   "action": "Drop",
   "destination": "192.168.2.1",
-  "discard_other_sessions": true,
   "layer": "Network",
   "list_of_services": [
     "AOL",

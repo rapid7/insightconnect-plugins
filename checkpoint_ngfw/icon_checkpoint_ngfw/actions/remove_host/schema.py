@@ -8,7 +8,6 @@ class Component:
 
 
 class Input:
-    DISCARD_OTHER_SESSIONS = "discard_other_sessions"
     NAME = "name"
     
 
@@ -23,13 +22,6 @@ class RemoveHostInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "discard_other_sessions": {
-      "type": "boolean",
-      "title": "Discard Other Sessions",
-      "description": "Discard all other user sessions. This can fix errors when objects are locked by other sessions",
-      "default": true,
-      "order": 2
-    },
     "name": {
       "type": "string",
       "title": "Name",
@@ -38,7 +30,6 @@ class RemoveHostInput(komand.Input):
     }
   },
   "required": [
-    "discard_other_sessions",
     "name"
   ]
 }

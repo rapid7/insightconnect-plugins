@@ -9,7 +9,6 @@ class Component:
 
 class Input:
     ADDRESS_OBJECT = "address_object"
-    DISCARD_OTHER_SESSIONS = "discard_other_sessions"
     GROUP = "group"
     
 
@@ -29,13 +28,6 @@ class RemoveAddressObjectFromGroupInput(komand.Input):
       "description": "The name of the address object (host) to remove",
       "order": 1
     },
-    "discard_other_sessions": {
-      "type": "boolean",
-      "title": "Discard Other Sessions",
-      "description": "Discard all other user sessions. This can fix errors when objects are locked by other sessions",
-      "default": true,
-      "order": 3
-    },
     "group": {
       "type": "string",
       "title": "Group",
@@ -45,7 +37,6 @@ class RemoveAddressObjectFromGroupInput(komand.Input):
   },
   "required": [
     "address_object",
-    "discard_other_sessions",
     "group"
   ]
 }

@@ -4,6 +4,7 @@ import json
 
 
 class Input:
+    DISCARD_OTHER_SESSIONS = "discard_other_sessions"
     PORT = "port"
     SERVER = "server"
     SSL_VERIFY = "ssl_verify"
@@ -16,6 +17,13 @@ class ConnectionSchema(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "discard_other_sessions": {
+      "type": "boolean",
+      "title": "Discard Other Sessions",
+      "description": "Discard all other user sessions. This can fix errors when objects are locked by other sessions",
+      "default": false,
+      "order": 5
+    },
     "port": {
       "type": "integer",
       "title": "Check Point Server Port",
@@ -44,6 +52,7 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
+    "discard_other_sessions",
     "port",
     "server",
     "ssl_verify",

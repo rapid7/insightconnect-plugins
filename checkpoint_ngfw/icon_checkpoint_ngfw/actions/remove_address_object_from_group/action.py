@@ -18,7 +18,6 @@ class RemoveAddressObjectFromGroup(komand.Action):
 
         group_name = params.get(Input.GROUP)
         address_name = params.get(Input.ADDRESS_OBJECT)
-        discard_other_changes = params.get(Input.DISCARD_OTHER_SESSIONS)
 
         payload = {
             "name": group_name,
@@ -28,7 +27,7 @@ class RemoveAddressObjectFromGroup(komand.Action):
         }
 
         headers = self.connection.get_headers()
-        response = self.connection.post_and_publish(headers, discard_other_changes, payload, url)
+        response = self.connection.post_and_publish(headers, payload, url)
 
         if response.status_code == 200:
             return {Output.SUCCESS: True}

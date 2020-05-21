@@ -41,11 +41,9 @@ class AddAccessRule(komand.Action):
         if destination:
             payload["destination"] = destination
 
-        discard_other_sessions = params.get(Input.DISCARD_OTHER_SESSIONS)
-
         headers = self.connection.get_headers()
 
         self.logger.info(f"Adding access rule at: {url}")
-        result = self.connection.post_and_publish(headers, discard_other_sessions, payload, url)
+        result = self.connection.post_and_publish(headers, payload, url)
 
         return {Output.ACCESS_RULE: result.json()}

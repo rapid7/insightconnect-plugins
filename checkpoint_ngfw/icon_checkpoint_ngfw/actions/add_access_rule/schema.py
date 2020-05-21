@@ -10,7 +10,6 @@ class Component:
 class Input:
     ACTION = "action"
     DESTINATION = "destination"
-    DISCARD_OTHER_SESSIONS = "discard_other_sessions"
     LAYER = "layer"
     LIST_OF_SERVICES = "list_of_services"
     NAME = "name"
@@ -51,13 +50,6 @@ class AddAccessRuleInput(komand.Input):
       "description": "Destination network object name",
       "order": 5
     },
-    "discard_other_sessions": {
-      "type": "boolean",
-      "title": "Discard Other Sessions",
-      "description": "Discard all other user sessions. This can fix errors when objects are locked by other sessions",
-      "default": true,
-      "order": 8
-    },
     "layer": {
       "type": "string",
       "title": "Layer",
@@ -96,7 +88,6 @@ class AddAccessRuleInput(komand.Input):
   },
   "required": [
     "action",
-    "discard_other_sessions",
     "layer",
     "name",
     "position"

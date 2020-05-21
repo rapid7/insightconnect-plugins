@@ -8,7 +8,6 @@ class Component:
 
 
 class Input:
-    DISCARD_OTHER_SESSIONS = "discard_other_sessions"
     GROUP_NAME = "group_name"
     HOST_NAME = "host_name"
     
@@ -23,13 +22,6 @@ class AddHostToNetworkGroupInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "discard_other_sessions": {
-      "type": "boolean",
-      "title": "Discard Other Sessions",
-      "description": "Discard all other user sessions. This can fix errors when objects are locked by other sessions",
-      "default": true,
-      "order": 3
-    },
     "group_name": {
       "type": "string",
       "title": "Group Name",
@@ -44,7 +36,6 @@ class AddHostToNetworkGroupInput(komand.Input):
     }
   },
   "required": [
-    "discard_other_sessions",
     "group_name",
     "host_name"
   ]
