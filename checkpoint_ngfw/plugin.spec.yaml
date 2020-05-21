@@ -453,6 +453,7 @@ connection:
     title: Credentials
     description: Username and password
     required: true
+    example: '{"username": "xxxxxx", "password": "xxxxxx"}'
   server:
     type: string
     title: Check Point Server IP Address
