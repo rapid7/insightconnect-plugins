@@ -74,7 +74,7 @@ class AddAddressObjectToGroupOutput(komand.Output):
     "address_objects": {
       "type": "array",
       "title": "Address Objects",
-      "description": "Address Objects currently in group",
+      "description": "Address objects currently in group",
       "items": {
         "type": "string"
       },
