@@ -330,6 +330,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 3.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/rest)
 * 3.0.2 - Update to v3 Python plugin architecture | Support get endpoints returning lists
 * 3.0.1 - New spec and help.md format for the Extension Library
 * 3.0.0 - Add basic auth support
