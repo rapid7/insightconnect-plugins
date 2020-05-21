@@ -9,7 +9,6 @@ class Component:
 
 class Input:
     ADDRESS = "address"
-    DISCARD_OTHER_SESSIONS = "discard_other_sessions"
     GROUP = "group"
     
 
@@ -30,13 +29,6 @@ class CheckIfAddressInGroupInput(komand.Input):
       "description": "IPv4 or IPv6 address to check in the group",
       "order": 2
     },
-    "discard_other_sessions": {
-      "type": "boolean",
-      "title": "Discard Other Sessions",
-      "description": "Discard all other user sessions. This can fix errors when objects are locked by other sessions",
-      "default": true,
-      "order": 3
-    },
     "group": {
       "type": "string",
       "title": "Group",
@@ -45,8 +37,7 @@ class CheckIfAddressInGroupInput(komand.Input):
     }
   },
   "required": [
-    "address",
-    "discard_other_sessions"
+    "address"
   ]
 }
     """)

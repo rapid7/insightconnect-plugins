@@ -9,7 +9,6 @@ class Component:
 
 class Input:
     COLOR = "color"
-    DISCARD_OTHER_SESSIONS = "discard_other_sessions"
     HOST_IP = "host_ip"
     NAME = "name"
     
@@ -67,13 +66,6 @@ class AddHostInput(komand.Input):
         "violet red",
         "yellow"
       ],
-      "order": 4
-    },
-    "discard_other_sessions": {
-      "type": "boolean",
-      "title": "Discard Other Sessions",
-      "description": "Discard all other user sessions. This can fix errors when objects are locked by other sessions",
-      "default": true,
       "order": 3
     },
     "host_ip": {
@@ -90,7 +82,6 @@ class AddHostInput(komand.Input):
     }
   },
   "required": [
-    "discard_other_sessions",
     "host_ip",
     "name"
   ]

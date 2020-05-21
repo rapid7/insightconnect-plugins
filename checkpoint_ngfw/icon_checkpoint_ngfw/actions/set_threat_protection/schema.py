@@ -9,7 +9,6 @@ class Component:
 
 class Input:
     ACTION = "action"
-    DISCARD_OTHER_SESSIONS = "discard_other_sessions"
     NAME = "name"
     PROFILE = "profile"
     
@@ -37,13 +36,6 @@ class SetThreatProtectionInput(komand.Input):
       ],
       "order": 2
     },
-    "discard_other_sessions": {
-      "type": "boolean",
-      "title": "Discard Other Sessions",
-      "description": "Discard all other user sessions. This can fix errors when objects are locked by other sessions",
-      "default": true,
-      "order": 4
-    },
     "name": {
       "type": "string",
       "title": "Name",
@@ -60,7 +52,6 @@ class SetThreatProtectionInput(komand.Input):
   },
   "required": [
     "action",
-    "discard_other_sessions",
     "name",
     "profile"
   ]

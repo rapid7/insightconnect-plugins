@@ -25,8 +25,6 @@ class InstallPolicy(komand.Action):
         }
 
         headers = self.connection.get_headers()
-        discard_other_changes = params.get(Input.DISCARD_OTHER_SESSIONS)
-
-        self.connection.install_policy(headers, discard_other_changes, payload, url)
+        self.connection.install_policy(headers, payload, url)
 
         return {Output.SUCCESS: True}

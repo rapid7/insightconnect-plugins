@@ -18,9 +18,8 @@ class RemoveHost(komand.Action):
             "name": params.get(Input.NAME),
         }
         headers = self.connection.get_headers()
-        discard_other_changes = params.get(Input.DISCARD_OTHER_SESSIONS)
 
-        result = self.connection.post_and_publish(headers, discard_other_changes, payload, url)
+        result = self.connection.post_and_publish(headers, payload, url)
 
         return {Output.MESSAGE: result.json().get("message"),
                 Output.SUCCESS: True}

@@ -21,6 +21,7 @@ class Connection(komand.Connection):
         self.server_port = params.get(Input.PORT)
 
         self.server_and_port = f"https://{self.server_ip}:{self.server_port}"
+        self.discard_sessions = params.get(Input.DISCARD_OTHER_SESSIONS)
 
         self.get_sid()
 
@@ -116,7 +117,7 @@ class Connection(komand.Connection):
 
         self.get_sid()
 
-    def post_and_publish(self, headers, discard_other_sessions, payload, url):
+    def post_and_publish(self, headers, payload, url):
         result = requests.post(url, headers=headers, json=payload, verify=self.ssl_verify)
         # This gets odd. If you try to publish a change while someone else is working on a change it will fail
         # I give the user an option to discard all sessions, however, I don't want to do that unless I have to
@@ -128,7 +129,7 @@ class Connection(komand.Connection):
         except Exception:
             self.logger.warning(result.text)
             if "object is locked" in result.text:
-                if discard_other_sessions:
+                if self.discard_sessions:
                     self.discard_all_sessions()
                     result = requests.post(url, headers=headers, json=payload, verify=self.ssl_verify)
 
@@ -216,7 +217,7 @@ class Connection(komand.Connection):
 
         return result.json()
 
-    def install_policy(self, headers, discard_other_changes, payload, url):
+    def install_policy(self, headers, payload, url):
         result = requests.post(url, headers=headers, json=payload, verify=self.ssl_verify)
         try:
             result.raise_for_status()
