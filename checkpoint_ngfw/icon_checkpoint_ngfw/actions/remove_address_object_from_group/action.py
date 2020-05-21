@@ -36,3 +36,5 @@ class RemoveAddressObjectFromGroup(komand.Action):
             raise PluginException(cause=response["errors"]["message"],
                                   assistance="Remediate the issue noted in the error message above and try again.",
                                   data=response.text)
+        else:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
