@@ -44,6 +44,39 @@ Example input:
 
 ### Actions
 
+#### Remove Address Object from Group
+
+This action removes an address object (host) from an address group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object|string|None|True|The name of the address object (host) to remove|None|Malicious Host|
+|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
+|group|string|None|True|Group name|None|ICON Block List|
+
+Example input:
+
+```
+{
+  "address_object": "Malicious Host",
+  "discard_other_sessions": true,
+  "group": "ICON Block List"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+```
+
 #### Check if Address in Group
 
 This action checks to see if an IPv4 or IPv6 address is in an Address Group
@@ -951,7 +984,7 @@ privileges.
 
 # Version History
 
-* 1.4.0 - New action Check if Address in Group
+* 1.4.0 - New actions Check if Address in Group, Remove Address Object from Group
 * 1.3.0 - Update to add install options to Install Policy
 * 1.2.0 - New action Install Policy | Fix issue where logout could fail | Update to help to improve troubleshooting | Update to `Add Host` action to with color option 
 * 1.1.0 - New action Add Host to Network Group

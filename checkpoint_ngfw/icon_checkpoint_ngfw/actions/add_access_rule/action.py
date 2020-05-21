@@ -1,7 +1,6 @@
 import komand
 from .schema import AddAccessRuleInput, AddAccessRuleOutput, Input, Output, Component
 # Custom imports below
-import requests
 
 
 class AddAccessRule(komand.Action):

@@ -1,7 +1,7 @@
 import komand
 from .schema import RemoveAccessRuleInput, RemoveAccessRuleOutput, Input, Output, Component
 # Custom imports below
-import string
+
 
 class RemoveAccessRule(komand.Action):
 

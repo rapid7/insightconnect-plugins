@@ -1,7 +1,7 @@
 {
-	"spec": "694b6c76be9d12bd1734c3d467a5761d",
-	"manifest": "31c7e94676736e3d312b783fd652d3eb",
-	"setup": "dbcd29267e4279509db88b97934c753a",
+	"spec": "996f31a2f99ffe1d82dfef4086a8f2d1",
+	"manifest": "fafce50ac73831e51a5414c101c5dbb8",
+	"setup": "6a8bb25739cce5ab0676739bb578b722",
 	"schemas": [
 		{
 			"identifier": "add_access_rule/schema.py",
@@ -30,6 +30,10 @@
 		{
 			"identifier": "remove_access_rule/schema.py",
 			"hash": "63a13725d644e952c40f5648fa41382e"
+		},
+		{
+			"identifier": "remove_address_object_from_group/schema.py",
+			"hash": "1b5da70b58a7dac759775c6617831d57"
 		},
 		{
 			"identifier": "remove_host/schema.py",

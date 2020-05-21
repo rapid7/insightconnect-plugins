@@ -1,9 +1,8 @@
 import komand
 from .schema import CheckIfAddressInGroupInput, CheckIfAddressInGroupOutput, Input, Output, Component
 # Custom imports below
-from icon_checkpoint_ngfw.util.utils import DetailsLevel, AddressType, IPAddressCheck
+from icon_checkpoint_ngfw.util.utils import DetailsLevel
 from typing import Optional
-import ipaddress
 
 
 class CheckIfAddressInGroup(komand.Action):
