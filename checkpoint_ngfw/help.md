@@ -174,6 +174,12 @@ This action is used to add a host to a network group.
 Example input:
 
 ```
+{
+  "color": "black",
+  "discard_other_sessions": true,
+  "host_ip": "192.168.2.1",
+  "name": "192.168.2.1"
+}
 ```
 
 ##### Output
