@@ -21,7 +21,7 @@ class Connection(komand.Connection):
         self.server_port = params.get(Input.PORT)
 
         self.server_and_port = f"https://{self.server_ip}:{self.server_port}"
-        self.discard_sessions = params.get(Input.DISCARD_OTHER_SESSIONS)
+        self.discard_sessions = params.get(Input.DISCARD_OTHER_SESSIONS, False)
 
         self.get_sid()
 
