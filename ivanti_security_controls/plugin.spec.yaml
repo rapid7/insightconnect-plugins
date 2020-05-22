@@ -424,7 +424,7 @@ types:
       description: "Id"
       required: false
     isSupported:
-      title: "Issupported"
+      title: "Is Supported"
       type: boolean
       description: "Issupported"
       required: false
