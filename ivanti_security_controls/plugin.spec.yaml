@@ -441,7 +441,7 @@ types:
     patchIds:
       title: "Patchids"
       type: "[]string"
-      description: "Patchids"
+      description: "Patch IDs"
       required: false
     patchType:
       title: "Patchtype"
