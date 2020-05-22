@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_pan_os
 title: Palo Alto Firewall
 description: Manage Palo Alto Networks firewall devices
-version: 5.0.0
+version: 5.1.1
 vendor: rapid7
 support: rapid7
 status: []
@@ -610,7 +610,7 @@ actions:
         required: false
   set_address_object:
     title: Create Address Object
-    description: Create a new address object
+    description: Create a new address object. Supports IPv6
     input:
       address:
         title: Address
@@ -668,15 +668,15 @@ actions:
         title: Policy Name
         description: Policy name
         type: string
-        example: InsightConnect Block List
+        example: InsightConnect Block Policy
         required: true
         order: 1
       device_name:
         title: Device Name
         description: Device name
         type: string
-        default: localhost.localdomain
-        example: localhost.localdomain
+        default: "localhost.localdomain"
+        example: "localhost.localdomain"
         required: true
         order: 2
       virtual_system:
@@ -740,7 +740,7 @@ actions:
         required: false
   check_if_address_object_in_group:
     title: Check if Address in Group
-    description: Checks to see if an IP, CIDR, or domain is in an Address Group
+    description: Checks to see if an IP address, CIDR IP address, or domain is in an Address Group. Supports IPv6
     input:
       group:
         title: Group
@@ -793,11 +793,51 @@ actions:
         required: false
   remove_address_object_from_group:
     title: Remove Address Object from Group
-    description: Removes an address object from an address group
+    description: Removes an address object from an address group. Supports IPv6
     input:
       address_object:
         title: Address Object
         description: The name of the address object to remove
+        type: string
+        example: Malicious Host
+        required: true
+        order: 1
+      group:
+        title: Group
+        description: Group name
+        type: string
+        example: ICON Block List
+        required: true
+        order: 2
+      device_name:
+        title: Device Name
+        description: Device name
+        type: string
+        default: localhost.localdomain
+        example: localhost.localdomain
+        required: true
+        order: 3
+      virtual_system:
+        title: Virtual System Name
+        description: Virtual system name
+        type: string
+        default: vsys1
+        example: vsys1
+        required: true
+        order: 4
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  add_address_object_to_group:
+    title: Add Address Object to Group
+    description: Adds an address object to an address group. Supports IPv6
+    input:
+      address_object:
+        title: Address Object
+        description: The name of the address object to add
         type: string
         example: Malicious IP
         required: true
@@ -830,4 +870,9 @@ actions:
         title: Success
         description: Was operation successful
         type: boolean
+        required: true
+      address_objects:
+        title: Address Objects
+        description: Address objects currently in group
+        type: "[]string"
         required: true

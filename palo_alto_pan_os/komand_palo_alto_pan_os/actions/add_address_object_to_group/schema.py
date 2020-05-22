@@ -4,66 +4,57 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Checks to see if an IP address, CIDR IP address, or domain is in an Address Group. Supports IPv6"
+    DESCRIPTION = "Adds an address object to an address group. Supports IPv6"
 
 
 class Input:
-    ADDRESS = "address"
+    ADDRESS_OBJECT = "address_object"
     DEVICE_NAME = "device_name"
-    ENABLE_SEARCH = "enable_search"
     GROUP = "group"
     VIRTUAL_SYSTEM = "virtual_system"
     
 
 class Output:
     ADDRESS_OBJECTS = "address_objects"
-    FOUND = "found"
+    SUCCESS = "success"
     
 
-class CheckIfAddressObjectInGroupInput(komand.Input):
+class AddAddressObjectToGroupInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "address": {
+    "address_object": {
       "type": "string",
-      "title": "Address",
-      "description": "The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, doman) within the address object instead of matching the name",
-      "order": 2
+      "title": "Address Object",
+      "description": "The name of the address object to add",
+      "order": 1
     },
     "device_name": {
       "type": "string",
       "title": "Device Name",
       "description": "Device name",
       "default": "localhost.localdomain",
-      "order": 4
-    },
-    "enable_search": {
-      "type": "boolean",
-      "title": "Enable Search",
-      "description": "When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name",
-      "default": false,
       "order": 3
     },
     "group": {
       "type": "string",
       "title": "Group",
       "description": "Group name",
-      "order": 1
+      "order": 2
     },
     "virtual_system": {
       "type": "string",
       "title": "Virtual System Name",
       "description": "Virtual system name",
       "default": "vsys1",
-      "order": 5
+      "order": 4
     }
   },
   "required": [
-    "address",
+    "address_object",
     "device_name",
-    "enable_search",
     "group",
     "virtual_system"
   ]
@@ -74,7 +65,7 @@ class CheckIfAddressObjectInGroupInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class CheckIfAddressObjectInGroupOutput(komand.Output):
+class AddAddressObjectToGroupOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
@@ -83,21 +74,22 @@ class CheckIfAddressObjectInGroupOutput(komand.Output):
     "address_objects": {
       "type": "array",
       "title": "Address Objects",
-      "description": "The names of the address objects that match or contain address",
+      "description": "Address objects currently in group",
       "items": {
         "type": "string"
       },
       "order": 2
     },
-    "found": {
+    "success": {
       "type": "boolean",
-      "title": "Found",
-      "description": "Was address found in group",
+      "title": "Success",
+      "description": "Was operation successful",
       "order": 1
     }
   },
   "required": [
-    "found"
+    "address_objects",
+    "success"
   ]
 }
     """)
