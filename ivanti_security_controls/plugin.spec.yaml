@@ -391,7 +391,7 @@ types:
       required: true
   next:
     href:
-      title: "Href"
+      title: "HREF"
       type: string
       description: "Href"
       required: false
