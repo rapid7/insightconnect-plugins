@@ -446,7 +446,7 @@ types:
     patchType:
       title: "Patchtype"
       type: string
-      description: "Patchtype"
+      description: "Patch Type"
       required: false
     releaseDate:
       title: "Releasedate"
