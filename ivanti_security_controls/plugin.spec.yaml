@@ -451,7 +451,7 @@ types:
     releaseDate:
       title: "Releasedate"
       type: string
-      description: "Releasedate"
+      description: "Release Date"
       required: false
     replacedBy:
       title: "Replaced By"
