@@ -22,8 +22,6 @@ class IvantiSecurityControlsAPI:
         patch_ids = []
 
         if security_ids:
-            kbs = []
-            bulletin_ids = []
             for security_id in security_ids:
                 if security_id.startswith("CVE"):
                     cves.append(security_id)

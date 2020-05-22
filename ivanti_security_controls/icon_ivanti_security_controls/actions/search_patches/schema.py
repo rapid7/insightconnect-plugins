@@ -30,7 +30,10 @@ class SearchPatchesInput(insightconnect_plugin_runtime.Input):
       },
       "order": 1
     }
-  }
+  },
+  "required": [
+    "security_id"
+  ]
 }
     """)
 

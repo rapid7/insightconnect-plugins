@@ -23,7 +23,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Username and password|None|{"username":"user1", "password":"mypassword"}|
-|host|string|None|True|Enter the hostname|None|hostname-1|
+|host|string|None|True|Enter the hostname|None|example.com|
 |port|integer|3121|True|Enter the port|None|3121|
 |ssl_verify|boolean|True|True|Validate certificate|None|True|
 
@@ -32,7 +32,7 @@ Example input:
 ```
 {
   "credentials": "{\"username\":\"user1\", \"password\":\"mypassword\"}",
-  "host": "hostname-1",
+  "host": "example.com",
   "port": 3121,
   "ssl_verify": true
 }
@@ -193,7 +193,7 @@ This action is used to find and display detailed information about patch.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|security_id|[]string|None|False|Security Vulnerability ID|None|['MS99-031', 'Q240346', 'CVE-2015-4485', '4693']|
+|security_id|[]string|None|True|Security Vulnerability ID|None|['MS99-031', 'Q240346', 'CVE-2015-4485', '4693']|
 
 Example input:
 

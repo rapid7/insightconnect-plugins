@@ -25,7 +25,7 @@ connection:
     description: Enter the hostname
     type: string
     required: true
-    example: hostname-1
+    example: example.com
   port:
     title: Port
     description: Enter the port
@@ -746,7 +746,7 @@ actions:
         title: Security ID
         description: Security Vulnerability ID
         type: '[]string'
-        required: false
+        required: true
         example: ["MS99-031", "Q240346", "CVE-2015-4485", "4693"]
     output:
       vulnerabilities:

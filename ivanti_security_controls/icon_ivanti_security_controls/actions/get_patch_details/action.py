@@ -13,8 +13,6 @@ class GetPatchDetails(insightconnect_plugin_runtime.Action):
                 output=GetPatchDetailsOutput())
 
     def run(self, params={}):
-        patch = self.connection.ivanti_api.get_patch_details(params.get(Input.ID))
-        
         return {
-            Output.PATCH: patch
+            Output.PATCH: self.connection.ivanti_api.get_patch_details(params.get(Input.ID))
         }
