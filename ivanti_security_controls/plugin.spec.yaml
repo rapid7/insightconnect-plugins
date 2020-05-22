@@ -454,7 +454,7 @@ types:
       description: "Releasedate"
       required: false
     replacedBy:
-      title: "Replacedby"
+      title: "Replaced By"
       type: "[]string"
       description: "Replacedby"
       required: false
