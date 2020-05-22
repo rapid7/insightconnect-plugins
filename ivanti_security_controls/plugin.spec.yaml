@@ -419,7 +419,7 @@ types:
       description: "CVE"
       required: false
     id:
-      title: "Id"
+      title: "Patch ID"
       type: integer
       description: "Id"
       required: false
