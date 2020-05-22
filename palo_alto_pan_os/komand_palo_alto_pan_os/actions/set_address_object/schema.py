@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Create a new address object"
+    DESCRIPTION = "Create a new address object. Supports IPv6"
 
 
 class Input:

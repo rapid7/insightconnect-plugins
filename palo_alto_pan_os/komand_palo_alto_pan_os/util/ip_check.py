@@ -4,12 +4,16 @@ from ipaddress import ip_network, ip_address
 
 class IpCheck:
     def determine_address_type(self, address):
+        try:
+            if ip_address(address):
+                return "ip_address"
+        except ValueError:
+            pass
         if re.search('[a-zA-Z]', address):
             return "fqdn"
         if re.search('/', address):
             return "ip_range"
-        if re.search('\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', address):
-            return "ip_address"
+
         return "unknown"  # This could be wildcard, in which case we can't handle it elegantly
 
     def check_ip_in_range(self, ip: str, cidr: str) -> bool:
