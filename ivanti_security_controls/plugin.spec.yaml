@@ -4,7 +4,7 @@ products: [insightconnect]
 name: ivanti_security_controls
 title: Ivanti Security Controls
 description: Ivanti Security Controls is a unified IT management platform used for managing and protecting through Patch Management, Application Control, and Asset Inventory functionality
-version: 1.1.0
+version: 1.2.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -389,6 +389,182 @@ types:
       description: The vendor-defined severity of the security risk or issue that this patch corrects
       type: string
       required: true
+  next:
+    href:
+      title: "Href"
+      type: string
+      description: "Href"
+      required: false
+  links:
+    next:
+      title: "Next"
+      type: next
+      description: "Next"
+      required: false
+  links_self:
+    self:
+      title: "Self"
+      type: next
+      description: "Self"
+      required: false
+  vulnerability:
+    bulletinId:
+      title: "Bulletinid"
+      type: string
+      description: "Bulletinid"
+      required: false
+    cve:
+      title: "CVE"
+      type: "[]string"
+      description: "CVE"
+      required: false
+    id:
+      title: "Id"
+      type: integer
+      description: "Id"
+      required: false
+    isSupported:
+      title: "Issupported"
+      type: boolean
+      description: "Issupported"
+      required: false
+    kb:
+      title: "Kb"
+      type: string
+      description: "Kb"
+      required: false
+    links:
+      title: "Links"
+      type: links_self
+      description: "Links"
+      required: false
+    patchIds:
+      title: "Patchids"
+      type: "[]string"
+      description: "Patchids"
+      required: false
+    patchType:
+      title: "Patchtype"
+      type: string
+      description: "Patchtype"
+      required: false
+    releaseDate:
+      title: "Releasedate"
+      type: string
+      description: "Releasedate"
+      required: false
+    replacedBy:
+      title: "Replacedby"
+      type: "[]string"
+      description: "Replacedby"
+      required: false
+  patch_deployment:
+    completedMachineCount:
+      title: Completed Machine Count
+      description: Number of machines that has the deployment completed
+      type: integer
+      required: false
+    creator:
+      title: Creator
+      description: Initiator of the deployment
+      type: string
+      required: false
+    expectedMachineCount:
+      title: Expected Machine Count
+      description: Number of machines in this deployment
+      type: integer
+      required: false
+    isComplete:
+      title: Completed
+      description: Completion status of the deployment
+      type: boolean
+      required: false
+    lastUpdatedOn:
+      title: Last Updated On
+      description: Date of receipt of the last status update
+      type: string
+      required: false
+    links:
+      title: Links
+      description: Shows the related URLs for the deployment, the machines and the template
+      type: object
+      required: false
+    name:
+      title: Name
+      description: Name of the deployment template
+      type: string
+      required: false
+    startedOn:
+      title: Started On
+      description: Deployment start date
+      type: string
+      required: false
+    id:
+      title: ID
+      description: The unique operation identifier assigned to the patch deployment
+      type: string
+      required: true
+  machine_deploy_state:
+    address:
+      title: Address
+      description: The IP address of the machine
+      type: string
+      required: false
+    completedPatches:
+      title: Completed Patches
+      description: The count of in-progress patches
+      type: integer
+      required: false
+    dnsName:
+      title: DNS Name
+      description: The DNS name of the machine
+      type: string
+      required: false
+    domain:
+      title: Domain
+      description: The domain name of the machine
+      type: string
+      required: false
+    errorCode:
+      title: Error Code
+      description: The error code reported on failure by the machine
+      type: integer
+      required: false
+    id:
+      title: ID
+      description: The unique machine identifier for the machine being deployed to
+      type: integer
+      required: false
+    lastUpdated:
+      title: Last Updated
+      description: Specifies when the deployment status was last updated
+      type: string
+      required: false
+    links:
+      title: Links
+      description: Shows the related URL for the deployment to the machine
+      type: object
+      required: false
+    name:
+      title: Name
+      description: The hostname of the machine
+      type: string
+      required: false
+    overallState:
+      title: Overall State
+      description: The overall state of the machine deployment
+      type: string
+      required: false
+    patchStates:
+      title: Patch States
+      description: The status of each patch in the deployment
+      type: "[]object"
+      required: false
+    statusDescription:
+      title: Status Description
+      description: A description of the status of the deployment
+      type: string
+      required: false
 actions:
   get_agent:
     title: Get Agent
@@ -561,4 +737,63 @@ actions:
         title: Detected Patches
         description: Detected patches
         type: '[]detected_patch'
+        required: true
+  search_patches:
+    title: Search Patches
+    description: Find and display detailed information about patch
+    input:
+      security_id:
+        title: Security ID
+        description: Security Vulnerability ID
+        type: '[]string'
+        required: false
+        example: ["MS99-031", "Q240346", "CVE-2015-4485", "4693"]
+    output:
+      vulnerabilities:
+        title: Vulnerabilities
+        description: Details about an agent
+        type: "[]vulnerability"
+        required: true
+  get_patch_details:
+    title: Get Patch Details
+    description: Retrieve detailed patch information from Ivanti Security Controls
+    input:
+      id:
+        title: ID
+        description: The vulnerability ID
+        type: integer
+        required: true
+        example: 4693
+    output:
+      patch:
+        title: Patch
+        description: Detailed information about a patch
+        type: vulnerability
+        required: true
+  get_patch_deployment:
+    title: Get Patch Deployment
+    description: Retrieve information about a specific patch deployment
+    input:
+      deployment_id:
+        title: Deployment ID
+        description: Patch deployment ID
+        type: string
+        required: true
+        example: 5dbcb89f-eec3-4182-a9aa-1e6074fb0acb
+      machine_id:
+        title: Machine ID
+        description: ID of a machine involved with a specific patch deployment
+        type: integer
+        required: false
+        example: 7
+    output:
+      patch_deployment_details:
+        title: Patch Deployment Details
+        description: Detailed information about a specific deployment
+        type: patch_deployment
+        required: true
+      machine_information:
+        title: Machine Information
+        description: Information about a machine involved with the patch deployment
+        type: machine_deploy_state
         required: true

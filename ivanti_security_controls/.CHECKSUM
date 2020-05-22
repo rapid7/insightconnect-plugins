@@ -1,7 +1,7 @@
 {
-	"spec": "b13a79962fcff5a1c9dad29be714bde7",
-	"manifest": "e5e72a00824270d91c653dd9a764d530",
-	"setup": "91ade9a8f246d45c2a754a6d53b3ba03",
+	"spec": "bbc90380a2188d26662e240aa78a325d",
+	"manifest": "6dfa0bc2aa952b45364c56a81a335dec",
+	"setup": "14dca5190313a102f387a8c694d18ca8",
 	"schemas": [
 		{
 			"identifier": "get_agent/schema.py",
@@ -16,12 +16,24 @@
 			"hash": "79eee50d7e4264b758433475be282045"
 		},
 		{
+			"identifier": "get_patch_deployment/schema.py",
+			"hash": "1e509a6baadb1be01473919aad6cf8e2"
+		},
+		{
+			"identifier": "get_patch_details/schema.py",
+			"hash": "3592673816895e08492bef04ab20e08e"
+		},
+		{
 			"identifier": "get_patch_scan_status/schema.py",
 			"hash": "88247e5f1e9d9fa4eeae0a8030aa6b2f"
 		},
 		{
 			"identifier": "get_scanned_machine_details/schema.py",
 			"hash": "f13b58495b12f1edbedfdb395dd55eba"
+		},
+		{
+			"identifier": "search_patches/schema.py",
+			"hash": "1aa96835f4a56a7c09b977f1b3859a3a"
 		},
 		{
 			"identifier": "start_patch_scan/schema.py",

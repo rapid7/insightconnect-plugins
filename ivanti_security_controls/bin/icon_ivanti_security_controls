@@ -6,7 +6,7 @@ from icon_ivanti_security_controls import connection, actions, triggers
 
 Name = "Ivanti Security Controls"
 Vendor = "rapid7"
-Version = "1.1.0"
+Version = "1.2.0"
 Description = "Ivanti Security Controls is a unified IT management platform used for managing and protecting through Patch Management, Application Control, and Asset Inventory functionality"
 
 
@@ -25,9 +25,15 @@ class ICONIvantiSecurityControls(insightconnect_plugin_runtime.Plugin):
 
         self.add_action(actions.GetAgents())
 
+        self.add_action(actions.GetPatchDeployment())
+
+        self.add_action(actions.GetPatchDetails())
+
         self.add_action(actions.GetPatchScanStatus())
 
         self.add_action(actions.GetScannedMachineDetails())
+
+        self.add_action(actions.SearchPatches())
 
         self.add_action(actions.StartPatchScan())
 
