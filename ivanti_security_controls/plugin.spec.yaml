@@ -409,7 +409,7 @@ types:
       required: false
   vulnerability:
     bulletinId:
-      title: "Bulletinid"
+      title: "Bulletin ID"
       type: string
       description: "Bulletinid"
       required: false
