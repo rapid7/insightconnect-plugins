@@ -15,7 +15,7 @@ class Connection(komand.Connection):
     def connect_key(self, params):
         self.logger.info("connecting via key")
 
-        key = base64.b64decode(params.get('key').get('privateKey')).strip().decode("utf-8")
+        key = base64.b64decode(params.get('key').get('secretKey')).strip().decode("utf-8")
         fd = io.StringIO(key)
         k = paramiko.RSAKey.from_private_key(fd, password=params.get('password').get('secretKey'))
 
@@ -24,8 +24,8 @@ class Connection(komand.Connection):
         s.load_system_host_keys()
 
         s.connect(
-          params.get('host'), 
-          params.get('port'), 
+          params.get('host'),
+          params.get('port'),
           username=params.get('username'),
           pkey=k
         )
@@ -38,7 +38,7 @@ class Connection(komand.Connection):
         s.load_system_host_keys()
         s.connect(
           params.get('host'),
-          params.get('port'), 
+          params.get('port'),
           params.get('username'),
           params.get('password').get('secretKey')
         )
