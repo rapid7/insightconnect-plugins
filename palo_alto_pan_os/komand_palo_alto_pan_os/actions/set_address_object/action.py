@@ -51,10 +51,10 @@ class SetAddressObject(komand.Action):
         return False
 
     def run(self, params={}):
-        address = params.get(Input.ADDRESS_OBJECT)
+        address = params.get(Input.ADDRESS)
         # object_type = params.get(Input.TYPE)
-        name = params.get(Input.OBJECT_NAME)
-        description = params.get(Input.OBJECT_DESCRIPTION)
+        name = params.get(Input.ADDRESS_OBJECT)
+        description = params.get(Input.DESCRIPTION)
         tag_list = params.get(Input.TAGS)
         whitelist = params.get(Input.WHITELIST)
 

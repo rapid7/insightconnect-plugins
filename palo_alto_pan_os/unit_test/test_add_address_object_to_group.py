@@ -4,22 +4,22 @@ sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase
 from komand_palo_alto_pan_os.connection.connection import Connection
-from komand_palo_alto_pan_os.actions.check_if_address_object_in_group import CheckIfAddressObjectInGroup
+from komand_palo_alto_pan_os.actions.add_address_object_to_group import AddAddressObjectToGroup
 import json
 import logging
 
 
-class TestCheckIfAddressObjectInGroup(TestCase):
-    def test_integration_check_if_address_object_in_group(self):
+class TestAddAddressObjectToGroup(TestCase):
+    def test_integration_add_address_object_to_group(self):
         log = logging.getLogger("Test")
         test_conn = Connection()
-        test_action = CheckIfAddressObjectInGroup()
+        test_action = AddAddressObjectToGroup()
 
         test_conn.logger = log
         test_action.logger = log
 
         try:
-            with open("../tests/check_if_address_object_in_group.json") as file:
+            with open("../tests/add_address_object_to_group.json") as file:
                 test_json = json.loads(file.read()).get("body")
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
@@ -37,20 +37,5 @@ class TestCheckIfAddressObjectInGroup(TestCase):
         test_action.connection = test_conn
         results = test_action.run(action_params)
 
-        self.assertTrue(results.get("found"))
-        self.assertTrue(results.get("address_object_name"))
-
-
-    def test_check_if_address_object_in_group(self):
-        """
-        TODO: Implement test cases here
-
-        Here you can mock the connection with data returned from the above integration test.
-        For information on mocking and unit testing please go here:
-
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
-
-        You can either create a formal Mock for this, or you can create a fake connection class to pass to your
-        action for testing.
-        """
-        self.fail("Unimplemented Test Case")
+        self.assertTrue(results.get("success"))
+        self.assertTrue(len(results.get("address_objects")) > 0)
