@@ -721,7 +721,7 @@ actions:
         type: "[]string"
         required: false
         default: "[]"
-        example: '["769fcc7550bf98d96bccb7e22a5557301c403455"]'
+        example: ["769fcc7550bf98d96bccb7e22a5557301c403455"]
       fuzzy_match_string:
         title: Fuzzy Match String
         description: "Filters the list for matching strings in the File Name, Title, and Source Context fields"
@@ -825,7 +825,7 @@ actions:
         type: "[]string"
         description: GUID of the target server
         required: true
-        example: '["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]'
+        example: ["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]
       task_type:
         title: Task Type
         description: Type of API request. For Endpoint Sensor, the value is always 4
@@ -900,7 +900,7 @@ actions:
         description: The list of file SHA-1 values
         type: "[]string"
         required: true
-        example: '["695cad3121a1f496cff0e35d51ba25e33cf266650626b4c1d035a72d2f801343"]'
+        example: ["695cad3121a1f496cff0e35d51ba25e33cf266650626b4c1d035a72d2f801343"]
     output:
       Data:
         title: "Data"
@@ -1098,7 +1098,7 @@ actions:
         description: Skip entity ids on isolate and uninstall actions
         type: "[]string"
         required: false
-        example: '["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]'
+        example: ["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]
     output:
       result_code:
         title: Result Code

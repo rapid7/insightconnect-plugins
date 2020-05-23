@@ -50,7 +50,7 @@ This action is used to retrieve a list of security agents based on host informat
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent_ids|[]string|None|False|The GUID, IP address, MAC address, hostname of the Security Agent|None|['08-00-27-96-86-8E', '626dcf14-b0c3-4b00-bc76-71cf5713ab2e', '198.51.100.100', 'TREND-MICRO-TES']|
+|agent_ids|[]string|None|False|The GUID, IP address, MAC address, hostname of the Security Agent|None|["08-00-27-96-86-8E", "626dcf14-b0c3-4b00-bc76-71cf5713ab2e", "198.51.100.100", "TREND-MICRO-TES"]|
 
 Example input:
 
@@ -290,7 +290,9 @@ Example input:
   "product": "SLF_PRODUCT_OFFICESCAN_CE",
   "relocate_to_folder_path": "\\NewDomain\\NewFolder",
   "relocate_to_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
-  "skip_ids": ["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]
+  "skip_ids": [
+    "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"
+  ]
 }
 ```
 
@@ -348,7 +350,9 @@ Example input:
 
 ```
 {
-  "file_hash_id_list": ["769fcc7550bf98d96bccb7e22a5557301c403455"],
+  "file_hash_id_list": [
+    "769fcc7550bf98d96bccb7e22a5557301c403455"
+  ],
   "fuzzy_match_string": "Rapid7 InsightConnect",
   "page_number": 1,
   "page_size": 10,
@@ -433,7 +437,9 @@ Example input:
 
 ```
 {
-  "file_hash_id_list": "[\"695cad3121a1f496cff0e35d51ba25e33cf266650626b4c1d035a72d2f801343\"]"
+  "file_hash_id_list": [
+    "695cad3121a1f496cff0e35d51ba25e33cf266650626b4c1d035a72d2f801343"
+  ]
 }
 ```
 
@@ -610,7 +616,9 @@ Example input:
   "host_ip": "198.51.100.100",
   "host_name": "CU-PRO1-7814-2",
   "scan_summary_guid": "58127b3e-1bde-4c6e-8d86-0d0f89ded601",
-  "server_guid": ["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"],
+  "server_guid": [
+    "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"
+  ],
   "task_type": "CMEF"
 }
 ```
