@@ -9,5 +9,4 @@ from .get_rca_object.action import GetRcaObject
 from .openioc_files_list.action import OpeniocFilesList
 from .performs_action.action import PerformsAction
 from .search_agents.action import SearchAgents
-from .terminate_process.action import TerminateProcess
 from .upload_openioc_file.action import UploadOpeniocFile

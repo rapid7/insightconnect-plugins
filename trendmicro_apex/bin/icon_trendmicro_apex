@@ -39,8 +39,6 @@ class ICONTrendmicroApex(komand.Plugin):
 
         self.add_action(actions.SearchAgents())
 
-        self.add_action(actions.TerminateProcess())
-
         self.add_action(actions.UploadOpeniocFile())
 
 
