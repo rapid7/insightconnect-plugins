@@ -109,7 +109,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.0.0 - Upgrade the Dockerfile and change the SSH key credential type
+* 4.0.0 - Upgrade the plugin runtime to `komand/python-3-37-plugin` and run as least-privileged user | Change the SSH key credential type to `credential_secret_key` to skip PEM validation in the product UI
 * 3.0.1 - Fixed issue obtaining username in connection
 * 3.0.0 - Update connection username from credential_secret_key to string
 * 2.0.0 - Update Run action output to return 3 output fields i.e. `stderr`, `stdout`, and `all_output`
