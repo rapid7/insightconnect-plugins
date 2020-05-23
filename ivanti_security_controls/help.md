@@ -31,7 +31,7 @@ Example input:
 
 ```
 {
-  "credentials": {"username": "user1", "password":"mypassword"},
+  "credentials": "{\"username\":\"user1\", \"password\":\"mypassword\"}",
   "host": "example.com",
   "port": 3121,
   "ssl_verify": true
@@ -193,7 +193,7 @@ This action is used to find and display detailed information about patch.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|security_id|[]string|None|True|Security Vulnerability ID|None|['MS99-031', 'Q240346', 'CVE-2015-4485', '4693']|
+|security_id|[]string|None|True|Security Vulnerability ID|None|["MS99-031", "Q240346", "CVE-2015-4485", "4693"]|
 
 Example input:
 
@@ -257,7 +257,7 @@ This action is used to start a patch scan.
 |credential_id|string|None|False|Credential ID|None|01234567-89AB-CDEF-0123-456789ABCDEF|
 |diagnostic_trace_enabled|boolean|None|False|An indication whether diagnostics tracing should be enabled during scan|None|False|
 |hostnames|[]string|None|False|Hostnames - Either hostnames or machine group IDs must be specified|None|hostname-1|
-|machine_group_ids|[]string|None|False|List of machine groups to scan. Either hostnames or machine group IDs must be specified|None|['1', '2']|
+|machine_group_ids|[]string|None|False|List of machine groups to scan. Either hostnames or machine group IDs must be specified|None|["1", "2"]|
 |max_poll_time|integer|300|True|Max poll time|None|300|
 |name|string|None|False|Name to be given to scan|None|test-scan|
 |run_as_credential_id|string|None|False|Reference to a credential to use to start a scan. Overwrites RunAsDefault behavior|None|01234567-89AB-CDEF-0123-456789ABCDEF|

@@ -1,5 +1,5 @@
 {
-	"spec": "8e6408b9b3292b183fa576d5d11479a4",
+	"spec": "89b962fc36ec49ad50aae3d7ade7fc51",
 	"manifest": "6dfa0bc2aa952b45364c56a81a335dec",
 	"setup": "14dca5190313a102f387a8c694d18ca8",
 	"schemas": [
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "get_patch_details/schema.py",
-			"hash": "3592673816895e08492bef04ab20e08e"
+			"hash": "8fb06ed265415aba50ed68e41de1b246"
 		},
 		{
 			"identifier": "get_patch_scan_status/schema.py",
@@ -33,7 +33,7 @@
 		},
 		{
 			"identifier": "search_patches/schema.py",
-			"hash": "0c230e19f54b40475bf6eb472a5da521"
+			"hash": "fc344937b62340d0da188153afe688b4"
 		},
 		{
 			"identifier": "start_patch_scan/schema.py",

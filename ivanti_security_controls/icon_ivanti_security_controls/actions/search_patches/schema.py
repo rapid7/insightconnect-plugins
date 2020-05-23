@@ -79,7 +79,7 @@ class SearchPatchesOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "href": {
               "type": "string",
-              "title": "Href",
+              "title": "HREF",
               "description": "Href",
               "order": 1
             }
@@ -93,7 +93,7 @@ class SearchPatchesOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "href": {
           "type": "string",
-          "title": "Href",
+          "title": "HREF",
           "description": "Href",
           "order": 1
         }
@@ -105,7 +105,7 @@ class SearchPatchesOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "bulletinId": {
           "type": "string",
-          "title": "Bulletinid",
+          "title": "Bulletin ID",
           "description": "Bulletinid",
           "order": 1
         },
@@ -120,13 +120,13 @@ class SearchPatchesOutput(insightconnect_plugin_runtime.Output):
         },
         "id": {
           "type": "integer",
-          "title": "Id",
+          "title": "Patch ID",
           "description": "Id",
           "order": 3
         },
         "isSupported": {
           "type": "boolean",
-          "title": "Issupported",
+          "title": "Is Supported",
           "description": "Issupported",
           "order": 4
         },
@@ -145,7 +145,7 @@ class SearchPatchesOutput(insightconnect_plugin_runtime.Output):
         "patchIds": {
           "type": "array",
           "title": "Patchids",
-          "description": "Patchids",
+          "description": "Patch IDs",
           "items": {
             "type": "string"
           },
@@ -154,18 +154,18 @@ class SearchPatchesOutput(insightconnect_plugin_runtime.Output):
         "patchType": {
           "type": "string",
           "title": "Patchtype",
-          "description": "Patchtype",
+          "description": "Patch Type",
           "order": 8
         },
         "releaseDate": {
           "type": "string",
           "title": "Releasedate",
-          "description": "Releasedate",
+          "description": "Release Date",
           "order": 9
         },
         "replacedBy": {
           "type": "array",
-          "title": "Replacedby",
+          "title": "Replaced By",
           "description": "Replacedby",
           "items": {
             "type": "string"
@@ -192,7 +192,7 @@ class SearchPatchesOutput(insightconnect_plugin_runtime.Output):
               "properties": {
                 "href": {
                   "type": "string",
-                  "title": "Href",
+                  "title": "HREF",
                   "description": "Href",
                   "order": 1
                 }
@@ -206,7 +206,7 @@ class SearchPatchesOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "href": {
               "type": "string",
-              "title": "Href",
+              "title": "HREF",
               "description": "Href",
               "order": 1
             }

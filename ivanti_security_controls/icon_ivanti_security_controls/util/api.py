@@ -23,14 +23,15 @@ class IvantiSecurityControlsAPI:
 
         if security_ids:
             for security_id in security_ids:
-                if security_id.startswith("CVE"):
-                    cves.append(security_id)
-                elif security_id.startswith("MS"):
-                    bulletin_ids.append(security_id)
-                elif security_id.startswith("Q"):
-                    kbs.append(security_id)
-                elif security_id.isnumeric():
-                    patch_ids.append(security_id)
+                security_id_upper = security_id.upper()
+                if security_id_upper.startswith("CVE"):
+                    cves.append(security_id_upper)
+                elif security_id_upper.startswith("MS"):
+                    bulletin_ids.append(security_id_upper)
+                elif security_id_upper.startswith("Q"):
+                    kbs.append(security_id_upper)
+                elif security_id_upper.isnumeric():
+                    patch_ids.append(security_id_upper)
 
         vulnerabilities = []
         if cves:
@@ -47,7 +48,7 @@ class IvantiSecurityControlsAPI:
 
         return self._remove_duplicates(vulnerabilities)
 
-    def _get_id(self, id_name, ids):
+    def _get_id(self, id_name: str, ids: list) -> list:
         vulnerabilities = []
         output = self._call_api("GET", f"{self.url}/patches", params={id_name: ",".join(ids)})
         if output and "value" in output:
@@ -57,7 +58,7 @@ class IvantiSecurityControlsAPI:
         return vulnerabilities
 
     @staticmethod
-    def _remove_duplicates(vulnerabilities):
+    def _remove_duplicates(vulnerabilities: list) -> list:
         duplicates = {d.get("id"): d for d in vulnerabilities}
         return [v for k, v in duplicates.items()]
 
