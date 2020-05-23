@@ -710,7 +710,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.1.0 - New actions List Security Agents, List OpenIOC Files, Download the RCA CSV File, Upload OpenIOC File, Delete OpenIOC File, Download OpenIOC File, Get Investigation, Terminate Process, Execute Agent Action
+* 1.1.0 - New actions Get Agent Status, Search Agents, List OpenIOC Files, Download the RCA CSV File, Upload OpenIOC File, Delete OpenIOC File, Download OpenIOC File, Get Investigation, Terminate Process, Execute Agent Action
 * 1.0.0 - Initial plugin
 
 # Links
