@@ -134,7 +134,7 @@ Example output:
 
 #### Get Patch Details
 
-This action is used to retrieve detailed patch information from Ivanti Security Controls.
+This action is used to retrieve information about a patch from Ivanti Security Controls.
 
 ##### Input
 

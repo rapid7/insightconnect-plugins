@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieve detailed patch information from Ivanti Security Controls"
+    DESCRIPTION = "Retrieve information about a patch from Ivanti Security Control"
 
 
 class Input:

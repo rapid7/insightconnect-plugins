@@ -756,7 +756,7 @@ actions:
         required: true
   get_patch_details:
     title: Get Patch Details
-    description: Retrieve detailed patch information from Ivanti Security Controls
+    description: Retrieve information about a patch from Ivanti Security Control
     input:
       id:
         title: ID
