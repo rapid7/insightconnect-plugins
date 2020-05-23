@@ -548,6 +548,47 @@ types:
       title: Product
       description: Result product
       type: string
+  search_agent_response:
+    ad_domain:
+      title: AD Domain
+      description: Security agent AD domain
+      type: string
+    capabilities:
+      title: Capabilities
+      description: Security agent capabilities
+      type: "[]string"
+    entity_id:
+      title: Entity ID
+      description: Security agent entity ID
+      type: string
+    folder_path:
+      title: Folder Path
+      description: Security agent folder path
+      type: string
+    host_name:
+      title: Host Name
+      description: Security agent host name
+      type: string
+    ip_address_list:
+      title: IP Address List
+      description: Security agent IP address list
+      type: string
+    isolation_status:
+      title: Isolation Status
+      description: Security agent isolation status
+      type: string
+    mac_address_list:
+      title: MAC Address List
+      description: Security agent MAC Address List
+      type: string
+    managing_server_id:
+      title: Managing Server ID
+      description: Security agent managing server ID
+      type: string
+    product:
+      title: Product
+      description: Security agent product
+      type: string
 actions:
   add_file_to_udso_list:
     title: Add File to UDSO List
@@ -633,65 +674,40 @@ actions:
         description: Whether or not the action was successful
         type: boolean
         required: true
-  agent_list:
-    title: List Security Agents
+  search_agents:
+    title: Search Agents
+    description: Retrieves a list of Security Agents
+    input:
+      agent_ids:
+        title: Agent IDS
+        description: The GUID, IP address, MAC address, hostname of the Security Agent
+        type: "[]string"
+        required: false
+    output:
+      search_agent_response:
+        title: Search Agent Response
+        description: Search agent response
+        type: "[]search_agent_response"
+        required: false
+  get_agent_status:
+    title: Get Agent Status
     description: Retrieves a list of all Security Agents with the Endpoint Sensor feature enabled
     input:
-      task_type:
-        title: Task Type
-        description: Type of API request. For Endpoint Sensor, the value is always 4
+      agent_guid:
+        title: Agent GUID
+        description: GUID of the agent
         type: string
         required: true
-        default: CMEF
-        example: CMEF
-        enum:
-          - UNKNOWN
-          - INTERNAL
-          - CM
-          - CMEF
-          - OSF_COMMAND
-          - OSF_QUERY
-          - OSF_NOTIFY
-          - OSF_LOG
-          - MDR_ATTACK_DISCOVERY
-          - OSF_SYS_CALL
-      filter:
-        title: "Filter"
-        type: "[]filter"
-        description: "Filter"
-        required: false
-        example: '[{"type": 1, "value": "a"}]'
-      pagination:
-        title: "Pagination"
-        type: meta_page
-        description: "Pagination"
-        required: false
-        example: '{"offset": 0, "limit": 50}'
     output:
-      Data:
-        title: "Data"
-        description: Contains the data returned by the specific API
-        type: api_data
+      agentEntity:
+        title: Agent Entity
+        description: Agent entity data
+        type: agentEntity
         required: false
-      FeatureCtrl:
-        title: "Feature CTRL"
-        description: The Apex Central deployment model
-        type: FeatureCtrl
-        required: false
-      Meta:
-        title: "Meta"
-        description: Indicates the response status, including the result, error code, and error message
-        type: Meta
-        required: false
-      PermissionCtrl:
-        title: "Permission CTRL"
-        description: Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features
-        type: PermissionCtrl
-        required: false
-      SystemCtrl:
-        title: "System CTRL"
-        description: Indicates the suspicious object distribution role of the Apex Central server
-        type: SystemCtrl
+      agentQueryStatus:
+        title: Agent Query Status
+        description: Agent query status data
+        type: agentQueryStatus
         required: false
   openioc_files_list:
     title: List OpenIOC Files
@@ -946,7 +962,7 @@ actions:
         type: SystemCtrl
         required: false
   get_rca_object:
-    title: Get Investigation
+    title: Get Root Cause Analysis
     description: Retrieves results of investigations in different formats based on the specified taskId
     input:
       task_id:

@@ -41,7 +41,34 @@ Example input:
 
 ### Actions
 
-#### Get Investigation
+#### Search Agents
+
+This action is used to retrieve a list of security agents based on the available search terms.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent_ids|[]string|None|False|The GUID, IP address, MAC address, hostname of the Security Agent|None|None|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|search_agent_response|[]search_agent_response|False|Search agent response|
+
+Example output:
+
+```
+{}
+```
+
+#### Get Root Cause Analysis
 
 This action retrieves results of investigations in different formats based on the specified taskId.
 
@@ -78,77 +105,34 @@ Example input:
 Example output:
 
 ```
-{
-  "Data": {
-    "Code": 0,
-    "CodeType": 1,
-    "Message": "OK",
-    "Data": {
-      "taskId": "B44BE9AE-80A9-4048-A4CE-064D90CB6D4C",
-      "lastContentId": "[\r\n  {\r\n    \"serverGuid\": \"C22E1795-BF95-45BB-BC82-486B0F5161BE\",\r\n    \"lastContentId\": 48,\r\n    \"hasMore\": false,\r\n    \"totalProgress\": 0,\r\n    \"currentProgress\": 0\r\n  }\r\n]",
-      "hasMore": false,
-      "serverName": "Apex One as a Service",
-      "serverGuid": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
-      "content": [
-        {
-          "statusCode": 0,
-          "message": "TMSL_S_SUCCESS",
-          "content": {
-            "agentServerMeta": [
-              {
-                "agentGuid": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
-                "minFirstSeen": 1589061887,
-                "serverMeta": [
-                  {
-                    "criteriaNo": 0,
-                    "sweepingType": 7,
-                    "metaValue": "notepad.exe",
-                    "metaHashId": "-1666102285318829169",
-                    "firstSeen": 1589061887,
-                    "lastSeen": 1589131161
-                  }
-                ],
-                "isCriteriaExceedMaxMetaCount": [
-                  false
-                ],
-                "serverGuid": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
-                "serverName": "Apex One as a Service",
-                "serverMode": 1,
-                "isOnline": true,
-                "isEnable": true,
-                "isImportant": false,
-                "ip": "10.0.2.15",
-                "machineGuid": "3E4EC062-A620-4DE6-9DA9-395DD98EC1D8",
-                "machineName": "TREND-MICRO-TES",
-                "machineType": "Desktop",
-                "userName": "TREND-MICRO-TES\\vagrant",
-                "userGuid": "6AC1B3DCF-CE52-8279-EE9E-E101FD504E3",
-                "isolateStatus": 4,
-                "machineOS": "Windows 10",
-                "productType": 15
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "TimeZone": -4
-  },
-  "Meta": {
-    "result": 1,
-    "errorCode": 0,
-    "errorMessgae": "Success"
-  },
-  "PermissionCtrl": {
-    "permission": "255"
-  },
-  "FeatureCtrl": {
-    "mode": "0"
-  },
-  "SystemCtrl": {
-    "TmcmSoDist_Role": "none"
-  }
-}
+```
+
+#### Get Agent Status
+
+This action retrieves a list of all Security Agents with the Endpoint Sensor feature enabled.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent_guid|string|None|True|GUID of the agent|None|None|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|agentEntity|agentEntity|False|Agent entity data|
+|agentQueryStatus|agentQueryStatus|False|Agent query status data|
+
+Example output:
+
+```
+{}
 ```
 
 #### Execute Agent Action
@@ -615,103 +599,6 @@ Example output:
       "serverGuid": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
       "serverName": "Apex One as a Service",
       "taskId": "5f7bef38-6603-4edc-b285-837feb136da5"
-    },
-    "Message": "OK",
-    "TimeZone": -4
-  },
-  "FeatureCtrl": {
-    "mode": "0"
-  },
-  "Meta": {
-    "errorCode": 0,
-    "errorMessgae": "Success",
-    "result": 1
-  },
-  "PermissionCtrl": {
-    "permission": "255"
-  },
-  "SystemCtrl": {
-    "TmcmSoDist_Role": "none"
-  }
-}
-```
-
-#### List Security Agents
-
-This action retrieves a list of all Security Agents with the Endpoint Sensor feature enabled.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|[]filter|None|False|Filter|None|[{"type": 1, "value": "a"}]|
-|pagination|meta_page|None|False|Pagination|None|{"offset": 0, "limit": 50}|
-|task_type|string|CMEF|True|Type of API request. For Endpoint Sensor, the value is always 4|['UNKNOWN', 'INTERNAL', 'CM', 'CMEF', 'OSF_COMMAND', 'OSF_QUERY', 'OSF_NOTIFY', 'OSF_LOG', 'MDR_ATTACK_DISCOVERY', 'OSF_SYS_CALL']|CMEF|
-
-Example input:
-
-```
-{
-  "filter": "[{\"type\": 1, \"value\": \"a\"}]",
-  "pagination": "{\"offset\": 0, \"limit\": 50}",
-  "task_type": "CMEF"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Data|api_data|False|Contains the data returned by the specific API|
-|FeatureCtrl|FeatureCtrl|False|The Apex Central deployment model|
-|Meta|Meta|False|Indicates the response status, including the result, error code, and error message|
-|PermissionCtrl|PermissionCtrl|False|Indicates the permissions assigned to the logged-on user account for accessing Apex Central menu items and features|
-|SystemCtrl|SystemCtrl|False|Indicates the suspicious object distribution role of the Apex Central server|
-
-Example output:
-
-```
-{
-  "Data": {
-    "Code": 0,
-    "CodeType": 1,
-    "Data": {
-      "content": [
-        {
-          "content": {
-            "agentEntity": [
-              {
-                "agentGuid": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
-                "ip": "10.0.2.15",
-                "isEnable": true,
-                "isImportant": false,
-                "isOnline": true,
-                "isolateStatus": 1,
-                "machineGuid": "3E4EC062-A620-4DE6-9DA9-395DD98EC1D8",
-                "machineName": "TREND-MICRO-TES",
-                "machineOS": "Windows 10",
-                "machineType": "Desktop",
-                "productType": 15,
-                "serverGuid": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
-                "userGuid": "6AC1B3DCF-CE52-8279-EE9E-E101FD504E3",
-                "userName": "TREND-MICRO-TES\\vagrant"
-              }
-            ],
-            "agentQueryStatus": {
-              "hasFullAgents": true,
-              "hasFullRbac": true
-            },
-            "pagination": {
-              "limit": 50,
-              "offset": 0,
-              "total": 1
-            }
-          },
-          "message": "Success",
-          "statusCode": 0
-        }
-      ],
-      "hasMore": false
     },
     "Message": "OK",
     "TimeZone": -4
