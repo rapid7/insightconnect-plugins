@@ -6,6 +6,25 @@ import time
 from datetime import timedelta
 from datetime import datetime
 
+DEFAULT_TASK_TYPE = "CMEF"
+
+
+class TaskType:
+    @staticmethod
+    def value_of(task_type: str) -> int:
+        return {
+            "UNKNOWN": 1,
+            "INTERNAL": 2,
+            "CM": 3,
+            "CMEF": 4,
+            "OSF_COMMAND": 5,
+            "OSF_QUERY": 6,
+            "OSF_NOTIFY": 7,
+            "OSF_LOG": 8,
+            "MDR_ATTACK_DISCOVERY": 9,
+            "OSF_SYS_CALL": 10
+        }.get(task_type)
+
 
 def create_base64_checksum(http_method: str, raw_url: str, raw_header: str, request_body: str) -> str:
     """Create a base64 encoded hash string for an Apex JWT token"""
