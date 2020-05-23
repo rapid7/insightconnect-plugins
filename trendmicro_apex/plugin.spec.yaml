@@ -683,6 +683,7 @@ actions:
         description: The GUID, IP address, MAC address, hostname of the Security Agent
         type: "[]string"
         required: false
+        example: ["08-00-27-96-86-8E", "626dcf14-b0c3-4b00-bc76-71cf5713ab2e", "198.51.100.100", "TREND-MICRO-TES"]
     output:
       search_agent_response:
         title: Search Agent Response
@@ -698,6 +699,7 @@ actions:
         description: GUID of the agent
         type: string
         required: true
+        example: "626dcf14-b0c3-4b00-bc76-71cf5713ab2e"
     output:
       agentEntity:
         title: Agent Entity
@@ -1029,7 +1031,7 @@ actions:
         required: false
   performs_action:
     title: Execute Agent Action
-    description: This action performs agent actions such as endpoint isolation, restoration, relocation, and uninstalls.
+    description: This action performs agent actions such as endpoint isolation, restoration, relocation, and uninstalls
     input:
       action:
         title: Action

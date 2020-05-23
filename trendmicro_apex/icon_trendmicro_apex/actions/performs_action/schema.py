@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action performs agent actions such as endpoint isolation, restoration, relocation, and uninstalls."
+    DESCRIPTION = "This action performs agent actions such as endpoint isolation, restoration, relocation, and uninstalls"
 
 
 class Input:
