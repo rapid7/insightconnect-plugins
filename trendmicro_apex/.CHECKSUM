@@ -1,7 +1,7 @@
 {
-	"spec": "d8433a871e3287e28305a2e3da26f882",
-	"manifest": "2e6dbcf10f9f75ee8ddf05c8756483b7",
-	"setup": "cca2bbed73d446e2077aa34807e7fdd0",
+	"spec": "dafd169e46f28ae0adea2c01d910c1f1",
+	"manifest": "9cdde3cddb200a550b66e25cf83e7a8a",
+	"setup": "9015d7a2c1521f93c6280cb0d9f247e7",
 	"schemas": [
 		{
 			"identifier": "add_file_to_udso_list/schema.py",
@@ -12,8 +12,44 @@
 			"hash": "fa7e1970dd8a5c0ed819a250c4d5fc76"
 		},
 		{
+			"identifier": "delete_openioc_file/schema.py",
+			"hash": "07ba9302a9f6b6147845140a169c673b"
+		},
+		{
+			"identifier": "download_openioc_file/schema.py",
+			"hash": "23e0127d99e03d1471588ce9998143a1"
+		},
+		{
+			"identifier": "download_rca_csv_file/schema.py",
+			"hash": "35199f3dedc11a9ac1321fb332f15497"
+		},
+		{
+			"identifier": "get_agent_status/schema.py",
+			"hash": "d8a7c053a96a059605a7e20dd4f25ae1"
+		},
+		{
+			"identifier": "get_rca_object/schema.py",
+			"hash": "1fffa60ba0bf7ec173d2abf40fd51047"
+		},
+		{
+			"identifier": "openioc_files_list/schema.py",
+			"hash": "a656469ab5c2391d4a29a3d6258dca52"
+		},
+		{
+			"identifier": "performs_action/schema.py",
+			"hash": "b56898241a24c97640f336631aa7fd13"
+		},
+		{
+			"identifier": "search_agents/schema.py",
+			"hash": "9ea55d6de1bfe34ad48145ef98e2fc1c"
+		},
+		{
+			"identifier": "upload_openioc_file/schema.py",
+			"hash": "5740a349a2c27f9753e5056f201b9767"
+		},
+		{
 			"identifier": "connection/schema.py",
-			"hash": "a6645a2e586e9df5ac54c93550610928"
+			"hash": "1a427b75a7feedd9f230692f41771039"
 		}
 	]
 }
