@@ -6,7 +6,7 @@ from icon_trendmicro_apex import connection, actions, triggers
 
 Name = "Trend Micro Apex"
 Vendor = "rapid7"
-Version = "1.0.0"
+Version = "1.1.0"
 Description = "Report suspicious objects and files to block on Apex firewall"
 
 
