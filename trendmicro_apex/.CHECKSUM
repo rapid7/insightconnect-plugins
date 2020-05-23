@@ -1,7 +1,7 @@
 {
-	"spec": "9abe009bfc77eed20da7e27e9d1aed72",
-	"manifest": "c14c546cda1bb7eb2638297e7762ffe6",
-	"setup": "cca2bbed73d446e2077aa34807e7fdd0",
+	"spec": "dafd169e46f28ae0adea2c01d910c1f1",
+	"manifest": "9cdde3cddb200a550b66e25cf83e7a8a",
+	"setup": "9015d7a2c1521f93c6280cb0d9f247e7",
 	"schemas": [
 		{
 			"identifier": "add_file_to_udso_list/schema.py",
