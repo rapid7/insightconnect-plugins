@@ -759,7 +759,8 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-The agent / endpoint actions require that the Apex Endpoint Sensor feature is enabled.
+This plugin supports multiple Apex products. Check that the actions you intend to use are supported in your product.
+For example, the agent / endpoint actions require that the Apex Endpoint Sensor feature is enabled.
 
 # Version History
 
