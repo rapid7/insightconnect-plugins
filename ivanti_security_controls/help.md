@@ -31,12 +31,13 @@ Example input:
 
 ```
 {
-  "credentials": "{\"username\":\"user1\", \"password\":\"mypassword\"}",
+  "credentials": {"username":"user1", "password":"mypassword"}",
   "host": "example.com",
   "port": 3121,
   "ssl_verify": true
 }
 ```
+
 ## Technical Details
 
 ### Actions
