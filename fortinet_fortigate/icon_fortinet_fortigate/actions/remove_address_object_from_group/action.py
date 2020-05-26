@@ -24,7 +24,7 @@ class RemoveAddressObjectFromGroup(komand.Action):
         if {"name": address_object} in group_members:
             group_members.remove({"name": address_object})
         else:
-            return {Output.SUCCESS: False, Output.RESULT_OBJECT: "TODO"}
+            return {Output.SUCCESS: False, Output.RESULT_OBJECT: f"The address object {address_object} was not in the group {group_name}"}
 
         group["member"] = group_members
 
