@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="markdown-rapid7-plugin",
-      version="3.0.0",
+      version="3.1.0",
       description="Convert markdown to and from various popular formats",
       author="rapid7",
       author_email="",
