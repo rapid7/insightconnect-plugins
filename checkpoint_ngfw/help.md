@@ -75,6 +75,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Remove Address Object from Group
