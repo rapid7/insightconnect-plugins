@@ -320,9 +320,9 @@ Example output:
 }
 ```
 
-#### Add Host
+#### Create Address Object
 
-This action is used to add a host as a network object.
+This action is used to add an address object (host) as a network object
 
 ##### Input
 
@@ -338,7 +338,12 @@ Example input:
 {
   "color": "black",
   "host_ip": "192.168.2.1",
-  "name": "192.168.2.1"
+  "name": "192.168.2.1",
+  "whitelist": [
+    "192.168.1.1", 
+    "192.168.0.0/24
+  "],
+  "skip_rfc1918": True
 }
 ```
 
