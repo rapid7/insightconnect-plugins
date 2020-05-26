@@ -37,7 +37,9 @@ class TestCheckIfAddressObjectInGroup(TestCase):
         test_action.connection = test_conn
         results = test_action.run(action_params)
 
-        self.assertEquals({"found": True}, results)
+        self.assertTrue(results.get("found"))
+        self.assertTrue(results.get("address_object_name"))
+
 
     def test_check_if_address_object_in_group(self):
         """

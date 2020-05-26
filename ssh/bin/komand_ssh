@@ -6,7 +6,7 @@ from komand_ssh import connection, actions, triggers
 
 Name = "SSH"
 Vendor = "rapid7"
-Version = "3.0.1"
+Version = "4.0.0"
 Description = "The SSH protocol is a method for secure remote login from one computer to another"
 
 

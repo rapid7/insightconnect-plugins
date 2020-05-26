@@ -4,10 +4,10 @@ import komand
 from komand_palo_alto_pan_os import connection, actions, triggers
 
 
-Name = "Palo Alto PAN-OS"
+Name = "Palo Alto Firewall"
 Vendor = "rapid7"
-Version = "2.2.0"
-Description = "Manage Palo Alto Networks devices via PAN-OS"
+Version = "5.1.1"
+Description = "Manage Palo Alto Networks firewall devices"
 
 
 class ICONPaloAltoPanOs(komand.Plugin):
@@ -19,6 +19,8 @@ class ICONPaloAltoPanOs(komand.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_action(actions.AddAddressObjectToGroup())
+
         self.add_action(actions.AddExternalDynamicList())
 
         self.add_action(actions.AddToPolicy())
@@ -36,6 +38,8 @@ class ICONPaloAltoPanOs(komand.Plugin):
         self.add_action(actions.GetPolicy())
 
         self.add_action(actions.Op())
+
+        self.add_action(actions.RemoveAddressObjectFromGroup())
 
         self.add_action(actions.RemoveFromPolicy())
 

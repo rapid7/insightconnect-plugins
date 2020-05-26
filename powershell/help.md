@@ -144,6 +144,7 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 
 # Version History
 
+* 2.1.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/mass-delete-with-powershell)
 * 2.1.1 - New spec and help.md format for the Extension Library
 * 2.1.0 - Add functionality to allow CredSSP connections
 * 2.0.1 - Fix issue with unicode characters
