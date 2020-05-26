@@ -124,9 +124,6 @@ class CreateAddressObjectOutput(komand.Output):
       "order": 1
     }
   },
-  "required": [
-    "host_object"
-  ],
   "definitions": {
     "creation_time_type": {
       "type": "object",

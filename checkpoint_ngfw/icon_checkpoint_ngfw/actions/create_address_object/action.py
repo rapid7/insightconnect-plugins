@@ -32,11 +32,11 @@ class CreateAddressObject(komand.Action):
 
         if skip_rfc1918 and is_private:
             self.logger.info(f"Provided IP address {user_ip_address} is private - skipping!")
-            return  # TODO: Fix me
+            return
 
         if len(whitelist) > 0 and check_if_ip_in_whitelist(ip_address=user_ip_address, whitelist=whitelist):
             self.logger.info(f"Provided IP address {user_ip_address} was found within the whitelist - skipping!")
-            return  # TODO: Fix me
+            return
 
         payload = {
             "name": name,

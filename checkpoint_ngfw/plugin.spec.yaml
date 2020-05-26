@@ -692,7 +692,7 @@ actions:
         title: Host
         description: Information about the host that was added
         type: host_object
-        required: true
+        required: false
 
   remove_host:
     title: Remove Host
