@@ -611,9 +611,9 @@ actions:
         type: boolean
         required: true
 
-  add_host:
-    title: Add Host
-    description: Add a host as a network object
+  create_address_object:
+    title: Create Address Object
+    description: Add an address object (host) as a network object
     input:
       name:
         title: Name
@@ -674,6 +674,19 @@ actions:
           - turquoise
           - violet red
           - yellow
+      whitelist:
+        title: Whitelist
+        description: This list contains a set of network objects that should not be blocked. This can include IP addresses and CIDR IP addresses
+        type: "[]string"
+        example: '["198.51.100.100", "192.0.2.0/24"]'
+        required: false
+      skip_rfc1918:
+        title: Skip RFC 1918 (Private) IP Addresses
+        description: Skip private IP addresses as defined in RFC 1918
+        type: boolean
+        example: true
+        required: true
+        default: true
     output:
       host_object:
         title: Host

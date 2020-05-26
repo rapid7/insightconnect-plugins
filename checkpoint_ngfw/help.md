@@ -38,16 +38,81 @@ Example input:
   "port": 443,
   "server": "198.168.2.1",
   "ssl_verify": true,
-  "username_password": {
-    "username": "xxxxxx", 
-    "password": "xxxxxx"
-  }
+  "username_password": "{\"username\": \"xxxxxx\", \"password\": \"xxxxxx\"}"
 }
 ```
 
 ## Technical Details
 
 ### Actions
+
+#### Add Host to Network Group
+
+This action is used to add a host to a network group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|group_name|string|None|True|Name of the group to add this object to|None|ICON Block List|
+|host_name|string|None|True|The host to add to the network group, usually the IP address|None|New Host|
+
+Example input:
+
+```
+{
+  "group_name": "ICON Block List",
+  "host_name": "New Host"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Success|
+
+Example output:
+
+```
+```
+
+#### Create Address Object
+
+This action is used to add an address object (host) as a network object.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|color|string|black|False|Color|['black', 'aquamarine', 'blue', 'brown', 'burlywood', 'coral', 'crete', 'cyan', 'dark blue', 'dark gold', 'dark gray', 'dark green', 'dark orange', 'dark sea green', 'firebrick', 'forest green', 'gold', 'gray', 'khaki', 'lemon chiffon', 'light green', 'magenta', 'navy blue', 'olive', 'orange', 'orchid', 'pink', 'purple', 'red', 'sea green', 'sienna', 'sky blue', 'slate blue', 'turquoise', 'violet red', 'yellow']|black|
+|host_ip|string|None|True|Host IP address|None|192.168.2.1|
+|name|string|None|True|Name|None|192.168.2.1|
+|skip_rfc1918|boolean|True|True|Skip private IP addresses as defined in RFC 1918|None|True|
+|whitelist|[]string|None|False|This list contains a set of network objects that should not be blocked. This can include IP addresses and CIDR IP addresses|None|["198.51.100.100", "192.0.2.0/24"]|
+
+Example input:
+
+```
+{
+  "color": "black",
+  "host_ip": "192.168.2.1",
+  "name": "192.168.2.1",
+  "skip_rfc1918": true,
+  "whitelist": "[\"198.51.100.100\", \"192.0.2.0/24\"]"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|host_object|host_object|True|Information about the host that was added|
+
+Example output:
+
+```
+```
 
 #### Remove Address Object from Group
 
@@ -184,41 +249,6 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |success|boolean|True|Was operation successful|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
-#### Add Host to Network Group
-
-This action is used to add a host to a network group.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|group_name|string|None|True|Name of the group to add this object to|None|ICON Block List|
-|host_name|string|None|True|The host to add to the network group, usually the IP address|None|New Host|
-
-Example input:
-
-```
-{
-  "color": "black",
-  "host_ip": "192.168.2.1",
-  "name": "192.168.2.1"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Success|
 
 Example output:
 
