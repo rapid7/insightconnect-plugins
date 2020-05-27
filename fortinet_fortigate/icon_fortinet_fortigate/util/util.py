@@ -49,7 +49,7 @@ class Helpers(object):
             raise PluginException(cause=self._STATUS_CODES[status_code]["cause"],
                                   assistance=self._STATUS_CODES[status_code]["assistance"],
                                   data=f"Raw response data: {response}")
-        if status_code not in range(200, 299):
+        if status_code not in self._STATUS_CODES:
             raise PluginException(cause="An undocumented response code was returned.",
                                   assistance="Contact support for assistance",
                                   data=f"Raw response data: {response}")
