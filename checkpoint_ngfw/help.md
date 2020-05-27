@@ -38,7 +38,10 @@ Example input:
   "port": 443,
   "server": "198.168.2.1",
   "ssl_verify": true,
-  "username_password": "{\"username\": \"xxxxxx\", \"password\": \"xxxxxx\"}"
+  "username_password": {
+    "username": "xxxxxx", 
+    "password": "xxxxxx"
+  }
 }
 ```
 
