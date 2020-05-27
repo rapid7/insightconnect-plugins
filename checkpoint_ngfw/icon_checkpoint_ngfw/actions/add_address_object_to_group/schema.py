@@ -4,40 +4,40 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add a host to a network group"
+    DESCRIPTION = "Add an address object (host) to a group"
 
 
 class Input:
-    GROUP_NAME = "group_name"
-    HOST_NAME = "host_name"
+    ADDRESS_OBJECT = "address_object"
+    GROUP = "group"
     
 
 class Output:
     SUCCESS = "success"
     
 
-class AddHostToNetworkGroupInput(komand.Input):
+class AddAddressObjectToGroupInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "group_name": {
-      "type": "string",
-      "title": "Group Name",
-      "description": "Name of the group to add this object to",
-      "order": 1
-    },
-    "host_name": {
+    "address_object": {
       "type": "string",
       "title": "Host Name",
-      "description": "The host to add to the network group, usually the IP address",
+      "description": "The name of the host to add, usually the IP address",
       "order": 2
+    },
+    "group": {
+      "type": "string",
+      "title": "Group",
+      "description": "Name of the group to add this object to",
+      "order": 1
     }
   },
   "required": [
-    "group_name",
-    "host_name"
+    "address_object",
+    "group"
   ]
 }
     """)
@@ -46,7 +46,7 @@ class AddHostToNetworkGroupInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class AddHostToNetworkGroupOutput(komand.Output):
+class AddAddressObjectToGroupOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",

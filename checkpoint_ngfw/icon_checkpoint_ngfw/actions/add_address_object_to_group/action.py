@@ -1,20 +1,20 @@
 import komand
-from .schema import AddHostToNetworkGroupInput, AddHostToNetworkGroupOutput, Input, Output, Component
+from .schema import AddAddressObjectToGroupInput, AddAddressObjectToGroupOutput, Input, Output, Component
 # Custom imports below
 
 
-class AddHostToNetworkGroup(komand.Action):
+class AddAddressObjectToGroup(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='add_host_to_network_group',
+                name='add_address_object_to_group',
                 description=Component.DESCRIPTION,
-                input=AddHostToNetworkGroupInput(),
-                output=AddHostToNetworkGroupOutput())
+                input=AddAddressObjectToGroupInput(),
+                output=AddAddressObjectToGroupOutput())
 
     def run(self, params={}):
-        group_name = params.get(Input.GROUP_NAME)
-        host_name = params.get(Input.HOST_NAME)
+        group_name = params.get(Input.GROUP)
+        host_name = params.get(Input.ADDRESS_OBJECT)
 
         url = f"{self.connection.server_and_port}/web_api/set-group"
         payload = {

@@ -19,7 +19,7 @@ class ConnectionSchema(komand.Input):
   "properties": {
     "discard_other_sessions": {
       "type": "boolean",
-      "title": "Discard Other Sessions",
+      "title": "Force Changes",
       "description": "Discard all other user sessions. This can fix errors when objects are locked by other sessions",
       "default": false,
       "order": 5

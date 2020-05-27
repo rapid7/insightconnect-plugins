@@ -475,7 +475,7 @@ connection:
     example: true
     default: true
   discard_other_sessions:
-    title: Discard Other Sessions
+    title: Force Changes
     type: boolean
     description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
     required: true
@@ -717,20 +717,20 @@ actions:
         type: boolean
         required: true
 
-  add_host_to_network_group:
-    title: Add Host to Network Group
-    description: Add a host to a network group
+  add_address_object_to_group:
+    title: Add Address Object to Group
+    description: Add an address object (host) to a group
     input:
-      group_name:
-        title: Group Name
+      group:
+        title: Group
         description: Name of the group to add this object to
         required: true
         type: string
         order: 1
         example: "InsightConnect Block List"
-      host_name:
+      address_object:
         title: Host Name
-        description: The host to add to the network group, usually the IP address
+        description: The name of the host to add, usually the IP address
         required: true
         type: string
         order: 2

@@ -1,6 +1,6 @@
 {
-	"spec": "9bc1f786e1b927c456beb22db5011463",
-	"manifest": "c82cf35193264b2b62c6fdd6d21b0e82",
+	"spec": "c15c24071959844dabc9aff5dac90a79",
+	"manifest": "f2829ec9a12ab0ea78ae89d344ae3f78",
 	"setup": "068d307f34595a4819498d06805e6b46",
 	"schemas": [
 		{
@@ -8,8 +8,8 @@
 			"hash": "38ad3951cb894c6a01e187e4e6b881c9"
 		},
 		{
-			"identifier": "add_host_to_network_group/schema.py",
-			"hash": "6178ab41651918251dd746eae74ad2e3"
+			"identifier": "add_address_object_to_group/schema.py",
+			"hash": "bb9058d7fa4cd8f1ea2b34fe7c57a089"
 		},
 		{
 			"identifier": "check_if_address_in_group/schema.py",
@@ -49,7 +49,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "99e102ab369028e03a84d7c32c4217bd"
+			"hash": "afeef0043d87bfabca42534317a97ea3"
 		}
 	]
 }

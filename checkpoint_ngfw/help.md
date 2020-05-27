@@ -49,23 +49,23 @@ Example input:
 
 ### Actions
 
-#### Add Host to Network Group
+#### Add Address Object to Group
 
-This action is used to add a host to a network group.
+This action is used to add an address object (host) to a group.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|group_name|string|None|True|Name of the group to add this object to|None|ICON Block List|
-|host_name|string|None|True|The host to add to the network group, usually the IP address|None|New Host|
+|address_object|string|None|True|The name of the host to add, usually the IP address|None|New Host|
+|group|string|None|True|Name of the group to add this object to|None|InsightConnect Block List|
 
 Example input:
 
 ```
 {
-  "group_name": "ICON Block List",
-  "host_name": "New Host"
+  "address_object": "New Host",
+  "group": "InsightConnect Block List"
 }
 ```
 
