@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add an address object (host) to a group"
+    DESCRIPTION = "Add an address object (host object) to a group"
 
 
 class Input:
@@ -25,7 +25,7 @@ class AddAddressObjectToGroupInput(komand.Input):
     "address_object": {
       "type": "string",
       "title": "Host Name",
-      "description": "The name of the host to add, usually the IP address",
+      "description": "The name of the host object to add",
       "order": 2
     },
     "group": {

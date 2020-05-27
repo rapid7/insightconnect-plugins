@@ -1,5 +1,5 @@
 {
-	"spec": "c15c24071959844dabc9aff5dac90a79",
+	"spec": "ab914a5a1a780913c0220e14e1a91a88",
 	"manifest": "f2829ec9a12ab0ea78ae89d344ae3f78",
 	"setup": "068d307f34595a4819498d06805e6b46",
 	"schemas": [
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "add_address_object_to_group/schema.py",
-			"hash": "bb9058d7fa4cd8f1ea2b34fe7c57a089"
+			"hash": "e8b0788faa151dab59c3b94f985641a1"
 		},
 		{
 			"identifier": "check_if_address_in_group/schema.py",
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "create_address_object/schema.py",
-			"hash": "2843e5fb5fafa035538e4d610b46090f"
+			"hash": "d74940a32dd8cf841cae4f7180a2a1fb"
 		},
 		{
 			"identifier": "discard_all_sessions/schema.py",
@@ -33,11 +33,11 @@
 		},
 		{
 			"identifier": "remove_address_object_from_group/schema.py",
-			"hash": "3679d3fffcebbe109454462c6c3b74e7"
+			"hash": "6825f19bc97b825c30b4b669ff96d499"
 		},
 		{
 			"identifier": "remove_host/schema.py",
-			"hash": "7492b1d17df50c02ba64499c2b58e8e5"
+			"hash": "22f5aa69ae3e6a1279769e2bf60aa121"
 		},
 		{
 			"identifier": "set_threat_protection/schema.py",
@@ -49,7 +49,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "afeef0043d87bfabca42534317a97ea3"
+			"hash": "d4e88a46218b46e0d11758138275af9d"
 		}
 	]
 }

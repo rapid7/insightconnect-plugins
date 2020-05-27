@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Remove a host from network objects"
+    DESCRIPTION = "Remove a host object from network objects"
 
 
 class Input:

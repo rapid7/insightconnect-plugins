@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add an address object (host) as a network object"
+    DESCRIPTION = "Add an address object (host object) as a network object"
 
 
 class Input:
@@ -120,7 +120,7 @@ class CreateAddressObjectOutput(komand.Output):
     "host_object": {
       "$ref": "#/definitions/host_object",
       "title": "Host",
-      "description": "Information about the host that was added",
+      "description": "Information about the host object that was added",
       "order": 1
     }
   },

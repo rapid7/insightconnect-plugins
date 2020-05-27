@@ -20,7 +20,7 @@ class ConnectionSchema(komand.Input):
     "discard_other_sessions": {
       "type": "boolean",
       "title": "Force Changes",
-      "description": "Discard all other user sessions. This can fix errors when objects are locked by other sessions",
+      "description": "Force changes made by any plugin actions. Currently logged in users will be logged out of their sessions to allow the plugin to commit changes. Users of Check Point R80+ may not need to enable this option",
       "default": false,
       "order": 5
     },

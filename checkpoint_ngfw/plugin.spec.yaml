@@ -458,7 +458,7 @@ connection:
     type: string
     title: Check Point Server IP Address
     description: Check Point server IP address
-    example: 198.168.2.1
+    example: 198.51.100.100
     required: true
   port:
     type: integer
@@ -477,7 +477,7 @@ connection:
   discard_other_sessions:
     title: Force Changes
     type: boolean
-    description: Discard all other user sessions. This can fix errors when objects are locked by other sessions
+    description: Force changes made by any plugin actions. Currently logged in users will be logged out of their sessions to allow the plugin to commit changes. Users of Check Point R80+ may not need to enable this option
     required: true
     default: false
     example: true
@@ -538,14 +538,14 @@ actions:
         title: Source
         description: Source network object name
         type: string
-        example: 192.168.2.1
+        example: 198.51.100.100
         required: false
         order: 4
       destination:
         title: Destination
         description: Destination network object name
         type: string
-        example: 192.168.2.1
+        example: 198.51.100.100
         required: false
         order: 5
       action:
@@ -613,21 +613,21 @@ actions:
 
   create_address_object:
     title: Create Address Object
-    description: Add an address object (host) as a network object
+    description: Add an address object (host object) as a network object
     input:
       name:
         title: Name
         description: Name
         type: string
         required: true
-        example: 192.168.2.1
+        example: 198.51.100.100
         order: 1
       host_ip:
         title: Host IP Address
         description: Host IP address
         type: string
         required: true
-        example: 192.168.2.1
+        example: 198.51.100.100
         order: 2
       color:
         title: Color
@@ -690,20 +690,20 @@ actions:
     output:
       host_object:
         title: Host
-        description: Information about the host that was added
+        description: Information about the host object that was added
         type: host_object
         required: false
 
   remove_host:
     title: Remove Host
-    description: Remove a host from network objects
+    description: Remove a host object from network objects
     input:
       name:
         title: Name
         description: Name
         type: string
         required: true
-        example: 192.168.2.1
+        example: 198.51.100.100
         order: 1
     output:
       message:
@@ -719,7 +719,7 @@ actions:
 
   add_address_object_to_group:
     title: Add Address Object to Group
-    description: Add an address object (host) to a group
+    description: Add an address object (host object) to a group
     input:
       group:
         title: Group
@@ -730,7 +730,7 @@ actions:
         example: "InsightConnect Block List"
       address_object:
         title: Host Name
-        description: The name of the host to add, usually the IP address
+        description: The name of the host object to add
         required: true
         type: string
         order: 2
@@ -886,11 +886,11 @@ actions:
 
   remove_address_object_from_group:
     title: Remove Address Object from Group
-    description: Removes an address object (host) from an address group
+    description: Removes an address object (host object) from an address group
     input:
       address_object:
         title: Address Object
-        description: The name of the address object (host) to remove
+        description: The name of the address object (host object) to remove
         type: string
         example: Malicious Host
         required: true

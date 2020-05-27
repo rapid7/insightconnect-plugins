@@ -24,9 +24,9 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|discard_other_sessions|boolean|False|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
+|discard_other_sessions|boolean|False|True|Force changes made by any plugin actions. Currently logged in users will be logged out of their sessions to allow the plugin to commit changes. Users of Check Point R80+ may not need to enable this option|None|True|
 |port|integer|443|True|Check Point server port|None|443|
-|server|string|None|True|Check Point server IP address|None|198.168.2.1|
+|server|string|None|True|Check Point server IP address|None|198.51.100.100|
 |ssl_verify|boolean|True|True|Use SSL verification|None|True|
 |username_password|credential_username_password|None|True|Username and password|None|{"username": "xxxxxx", "password": "xxxxxx"}|
 
@@ -36,7 +36,7 @@ Example input:
 {
   "discard_other_sessions": true,
   "port": 443,
-  "server": "198.168.2.1",
+  "server": "198.51.100.100",
   "ssl_verify": true,
   "username_password": {
     "username": "xxxxxx", 
@@ -57,7 +57,7 @@ This action is used to add an address object (host) to a group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_object|string|None|True|The name of the host to add, usually the IP address|None|New Host|
+|address_object|string|None|True|The name of the host object to add|None|New Host|
 |group|string|None|True|Name of the group to add this object to|None|InsightConnect Block List|
 
 Example input:
@@ -91,7 +91,7 @@ This action removes an address object (host) from an address group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_object|string|None|True|The name of the address object (host) to remove|None|Malicious Host|
+|address_object|string|None|True|The name of the address object (host object) to remove|None|Malicious Host|
 |group|string|None|True|Group name|None|ICON Block List|
 
 Example input:
@@ -258,13 +258,13 @@ This action is used to remove a host from network objects.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name|string|None|True|Name|None|192.168.2.1|
+|name|string|None|True|Name|None|198.51.100.100|
 
 Example input:
 
 ```
 {
-  "name": "192.168.2.1"
+  "name": "198.51.100.100"
 }
 ```
 
@@ -293,8 +293,8 @@ This action is used to add an address object (host) as a network object
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |color|string|black|False|Color|['black', 'aquamarine', 'blue', 'brown', 'burlywood', 'coral', 'crete', 'cyan', 'dark blue', 'dark gold', 'dark gray', 'dark green', 'dark orange', 'dark sea green', 'firebrick', 'forest green', 'gold', 'gray', 'khaki', 'lemon chiffon', 'light green', 'magenta', 'navy blue', 'olive', 'orange', 'orchid', 'pink', 'purple', 'red', 'sea green', 'sienna', 'sky blue', 'slate blue', 'turquoise', 'violet red', 'yellow']|black|
-|host_ip|string|None|True|Host IP address|None|192.168.2.1|
-|name|string|None|True|Name|None|192.168.2.1|
+|host_ip|string|None|True|Host IP address|None|198.51.100.100|
+|name|string|None|True|Name|None|198.51.100.100|
 |skip_rfc1918|boolean|True|True|Skip private IP addresses as defined in RFC 1918|None|True|
 |whitelist|[]string|None|False|This list contains a set of network objects that should not be blocked. This can include IP addresses and CIDR IP addresses|None|["198.51.100.100", "192.0.2.0/24"]|
 
@@ -303,8 +303,8 @@ Example input:
 ```
 {
   "color": "black",
-  "host_ip": "192.168.2.1",
-  "name": "192.168.2.1",
+  "host_ip": "198.51.100.100",
+  "name": "198.51.100.100",
   "skip_rfc1918": true,
   "whitelist": ["198.51.100.100", "192.0.2.0/24"]
 }
@@ -314,7 +314,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|host_object|host_object|False|Information about the host that was added|
+|host_object|host_object|False|Information about the host object that was added|
 
 Example output:
 
@@ -617,19 +617,19 @@ This action is used to create a rule to block traffic.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |action|string|Drop|True|Action to take|['Accept', 'Drop', 'Ask', 'Inform', 'Reject', 'User Auth', 'Client Auth', 'Apply Layer']|Drop|
-|destination|string|None|False|Destination network object name|None|192.168.2.1|
+|destination|string|None|False|Destination network object name|None|198.51.100.100|
 |layer|string|Network|True|Layer to add this rule to|None|Network|
 |list_of_services|[]string|None|False|List of services to block|None|["AOL", "SMTP"]|
 |name|string|None|True|Rule name|None|Malicious IP Addresses|
 |position|string|top|True|Position in the list of rules. e.g. top, bottom, 15|None|1|
-|source|string|None|False|Source network object name|None|192.168.2.1|
+|source|string|None|False|Source network object name|None|198.51.100.100|
 
 Example input:
 
 ```
 {
   "action": "Drop",
-  "destination": "192.168.2.1",
+  "destination": "198.51.100.100",
   "layer": "Network",
   "list_of_services": [
     "AOL",
@@ -637,7 +637,7 @@ Example input:
   ],
   "name": "Malicious IP Addresses",
   "position": 1,
-  "source": "192.168.2.1"
+  "source": "198.51.100.100"
 }
 ```
 
