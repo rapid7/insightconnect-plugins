@@ -767,7 +767,7 @@ actions:
         required: true
   remove_address_object_from_group:
     title: Remove Address Object from Group
-    description: Removes an address object to an address group
+    description: Removes an address object from an address group
     input:
       group:
         title: Group
