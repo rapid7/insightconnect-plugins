@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="ivanti_security_controls-rapid7-plugin",
-      version="1.1.0",
+      version="1.2.0",
       description="Ivanti Security Controls is a unified IT management platform used for managing and protecting through Patch Management, Application Control, and Asset Inventory functionality",
       author="rapid7",
       author_email="",
