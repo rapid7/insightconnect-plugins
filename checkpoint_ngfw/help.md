@@ -236,11 +236,6 @@ issue where objects remain locked after editing.
 
 _This action does not contain any inputs._
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
