@@ -1,36 +1,36 @@
 import komand
-from .schema import CheckIfIpIsInAddressGroupsInput, CheckIfIpIsInAddressGroupsOutput, Input, Output, Component
+from .schema import CheckIfAddressInGroupInput, CheckIfAddressInGroupOutput, Input, Output, Component
 # Custom imports below
 from komand.exceptions import PluginException
+from icon_fortinet_fortigate.util.util import Helpers
 
 
-class CheckIfIpIsInAddressGroups(komand.Action):
+class CheckIfAddressInGroup(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='check_if_ip_is_in_address_groups',
+                name='check_if_address_in_group',
                 description=Component.DESCRIPTION,
-                input=CheckIfIpIsInAddressGroupsInput(),
-                output=CheckIfIpIsInAddressGroupsOutput())
+                input=CheckIfAddressInGroupInput(),
+                output=CheckIfAddressInGroupOutput())
 
     def run(self, params={}):
-        addrgrp = params.get(Input.ADDRESS_GROUP_NAME)
-        ip_to_check = params.get(Input.IP_ADDRESS)
+        addrgrp = params.get(Input.GROUP)
+        ip_to_check = params.get(Input.ADDRESS)
+        helper = Helpers(self.logger)
+
         endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/addrgrp/{addrgrp}"
-        result = self.connection.session.get(endpoint, verify=self.connection.ssl_verify)
+        response = self.connection.session.get(endpoint, verify=self.connection.ssl_verify)
 
         try:
-            result.raise_for_status()
-        except Exception as e:
-            raise PluginException(cause=f"Unable to retrieve address group for {endpoint}\n",
-                                  assistance=result.text,
-                                  data=e)
-        try:
-            address_groups = result.json()
+            address_groups = response.json()
         except ValueError:
             raise PluginException(cause="Data sent by FortiGate was not in JSON format.\n",
                                   assistance="Contact support for help.",
-                                  data=result.text)
+                                  data=response.text)
+
+        helper.http_errors(address_groups, response.status_code)
+
         try:
             groups = address_groups["results"]
         except KeyError:
@@ -40,17 +40,17 @@ class CheckIfIpIsInAddressGroups(komand.Action):
         if len(groups) > 1:
             raise PluginException(cause="FortiGate returned more than one address group.\n",
                                   assistance="Contact support for help.",
-                                  data=result.text)
+                                  data=response.text)
         try:
             ips = groups[0]["member"]
         except KeyError:
             raise PluginException(cause="The address group date was malformed.\n",
                                   assistance="Contact support for help.",
-                                  data=result.text)
+                                  data=response.text)
 
         found = False
         for item in ips:
             if ip_to_check == item["name"]:
                 found = True
 
-        return {Output.IP_ADDRESS_FOUND: found}
+        return {Output.FOUND: found}

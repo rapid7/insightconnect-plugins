@@ -4,19 +4,20 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Delete an address object"
+    DESCRIPTION = "Removes an address object from an address group"
 
 
 class Input:
     ADDRESS_OBJECT = "address_object"
+    GROUP = "group"
     
 
 class Output:
-    RESPONSE_OBJECT = "response_object"
+    RESULT_OBJECT = "result_object"
     SUCCESS = "success"
     
 
-class DeleteAddressObjectInput(komand.Input):
+class RemoveAddressObjectFromGroupInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -25,12 +26,19 @@ class DeleteAddressObjectInput(komand.Input):
     "address_object": {
       "type": "string",
       "title": "Address Object",
-      "description": "Name of Address Object to delete",
+      "description": "Address object",
+      "order": 2
+    },
+    "group": {
+      "type": "string",
+      "title": "Group",
+      "description": "Group name",
       "order": 1
     }
   },
   "required": [
-    "address_object"
+    "address_object",
+    "group"
   ]
 }
     """)
@@ -39,27 +47,27 @@ class DeleteAddressObjectInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class DeleteAddressObjectOutput(komand.Output):
+class RemoveAddressObjectFromGroupOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "response_object": {
+    "result_object": {
       "type": "object",
-      "title": "Response Object",
-      "description": "Information about the operation that was performed",
+      "title": "Result Object",
+      "description": "An object containing the results of the action",
       "order": 2
     },
     "success": {
       "type": "boolean",
       "title": "Success",
-      "description": "Boolean value indicating the success of the operation",
+      "description": "Was the operation successful",
       "order": 1
     }
   },
   "required": [
-    "response_object",
+    "result_object",
     "success"
   ]
 }

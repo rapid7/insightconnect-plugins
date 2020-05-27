@@ -1,28 +1,34 @@
 import komand
-from .schema import AddAddressObjectToAddressGroupInput, AddAddressObjectToAddressGroupOutput, Input, Output, Component
+from .schema import RemoveAddressObjectFromGroupInput, RemoveAddressObjectFromGroupOutput, Input, Output, Component
 # Custom imports below
 from komand.exceptions import PluginException
 from icon_fortinet_fortigate.util.util import Helpers
 
 
-class AddAddressObjectToAddressGroup(komand.Action):
+class RemoveAddressObjectFromGroup(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='add_address_object_to_address_group',
+                name='remove_address_object_from_group',
                 description=Component.DESCRIPTION,
-                input=AddAddressObjectToAddressGroupInput(),
-                output=AddAddressObjectToAddressGroupOutput())
+                input=RemoveAddressObjectFromGroupInput(),
+                output=RemoveAddressObjectFromGroupOutput())
 
     def run(self, params={}):
         group_name = params[Input.GROUP]
-        address_name = params[Input.ADDRESS_OBJECT]
+        address_object = params[Input.ADDRESS_OBJECT]
         helper = Helpers(self.logger)
 
         group = self.connection.get_address_group(group_name)
         group_members = group.get("member")
+        found = False
+        for item in group_members:
+            if "name" in item and address_object == item["name"]:
+                group_members.remove(item)
+                found = True
+        if not found:
+            return {Output.SUCCESS: False, Output.RESULT_OBJECT: f"The address object {address_object} was not in the group {group_name}"}
 
-        group_members.append({"name": address_name})
         group["member"] = group_members
 
         endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/addrgrp/{group.get('name')}"
@@ -35,19 +41,8 @@ class AddAddressObjectToAddressGroup(komand.Action):
             raise PluginException(cause="Data sent by FortiGate was not in JSON format.\n",
                                   assistance="Contact support for help.",
                                   data=response.text)
-
-        if json_response.get("error", 0) == -3:
-            raise PluginException(cause=f"Add address object to address group failed: {endpoint}\n",
-                                  assistance="The error code returned was -3. This usually indicates"
-                                             "that the address object specified could not be found.",
-                                  data=response.text)
         helper.http_errors(json_response, response.status_code)
 
         success = json_response.get("status", "").lower() == "success"
 
         return {Output.SUCCESS: success, Output.RESULT_OBJECT: json_response}
-
-    def throw_unknown_error(self, endpoint, response):
-        raise PluginException(cause=f"Add address object to address group failed: {endpoint}\n",
-                              assistance="Contact support for assistance.",
-                              data=response.text)
