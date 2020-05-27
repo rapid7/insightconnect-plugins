@@ -636,7 +636,7 @@ actions:
         description: Name of Address Group to check for address
         type: string
         required: true
-        example: blocked IP's
+        example: InsightConnect Block Policy
       address:
         title: Address
         description: The IP, CIDR, or domain to check for

@@ -27,13 +27,13 @@ class CreateAddressObjectInput(komand.Input):
     "address": {
       "type": "string",
       "title": "Address",
-      "description": "The host to create. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name",
+      "description": "The address to assign to the Address Object. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name",
       "order": 1
     },
     "address_object": {
       "type": "string",
       "title": "Address Object",
-      "description": "Optional name to give this address object. If not provided, the name will be the IP address or domain name",
+      "description": "Optional name to give this address object. If not provided, the name will be the value of address input field",
       "order": 2
     },
     "whitelist": {

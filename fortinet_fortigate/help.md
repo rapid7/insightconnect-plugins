@@ -101,14 +101,14 @@ This action is used to check if an IP address is in an address group.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |address|string|None|True|The IP, CIDR, or domain to check for|None|MaliciousHost|
-|group|string|None|True|Name of Address Group to check for address|None|blocked IP's|
+|group|string|None|True|Name of Address Group to check for address|None|InsightConnect Block Policy|
 
 Example input:
 
 ```
 {
   "address": "MaliciousHost",
-  "group": "blocked IP's"
+  "group": "InsightConnect Block Policy"
 }
 ```
 
@@ -345,8 +345,8 @@ This action is used to create an address object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|The host to create. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|198.51.100.100|
-|address_object|string|None|False|Optional name to give this address object. If not provided, the name will be the IP address or domain name|None|MaliciousHost|
+|address|string|None|True|The address to assign to the Address Object. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|198.51.100.100|
+|address_object|string|None|False|Optional name to give this address object. If not provided, the name will be the value of address input field|None|MaliciousHost|
 |whitelist|[]string|None|False|This list contains a set of network object that should not be blocked. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|["198.51.100.100", "example.com", "192.0.2.0/24"]|
 
 Example input:
