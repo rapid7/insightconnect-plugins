@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|API key|None|2Fty5834tFpBdidePJnt9075MMdkUb|
-|hostname|string|None|True|Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000|None|fortigate.rapid7.com|
+|hostname|string|None|True|Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000|None|example.com|
 |ssl_verify|boolean|None|True|SSL verify|None|False|
 
 Example input:
@@ -33,7 +33,7 @@ Example input:
 ```
 {
   "api_key": "2Fty5834tFpBdidePJnt9075MMdkUb",
-  "hostname": "fortigate.rapid7.com",
+  "hostname": "example.com",
   "ssl_verify": false
 }
 ```
@@ -51,14 +51,14 @@ This action removes an address object to an address group.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |address_object|string|None|True|Address object|None|198.51.100.100|
-|group|string|None|True|Group name|None|blocked IP's|
+|group|string|None|True|Group name|None|InsightConnect Block List|
 
 Example input:
 
 ```
 {
   "address_object": "198.51.100.100",
-  "group": "blocked IP's"
+  "group": "InsightConnect Block List"
 }
 ```
 
@@ -113,13 +113,13 @@ This action is used to get policies.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name_filter|string|None|False|Optional name to filter on|None|my policy name|
+|name_filter|string|None|False|Optional name to filter on|None|InsightConnect Block Policy|
 
 Example input:
 
 ```
 {
-  "name_filter": "my policy name"
+  "name_filter": "InsightConnect Block Policy"
 }
 ```
 
@@ -278,14 +278,14 @@ This action is used to add an address object to an address group.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |address_object|string|None|True|Address object|None|198.51.100.100|
-|group|string|None|True|Group name|None|blocked IP's|
+|group|string|None|True|Group name|None|InsightConnect Block List|
 
 Example input:
 
 ```
 {
   "address_object": "198.51.100.100",
-  "group": "blocked IP's"
+  "group": "InsightConnect Block List"
 }
 ```
 

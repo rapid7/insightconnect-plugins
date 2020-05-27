@@ -612,7 +612,7 @@ connection:
     title: Hostname
     description: Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000
     required: true
-    example: fortigate.rapid7.com
+    example: example.com
   api_key:
     type: credential_secret_key
     title: API Key
