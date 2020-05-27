@@ -21,9 +21,12 @@ class RemoveAddressObjectFromGroup(komand.Action):
 
         group = self.connection.get_address_group(group_name)
         group_members = group.get("member")
-        if {"name": address_object} in group_members:
-            group_members.remove({"name": address_object})
-        else:
+        found = False
+        for item in group_members:
+            if "name" in item and address_object == item["name"]:
+                group_members.remove(item)
+                found = True
+        if not found:
             return {Output.SUCCESS: False, Output.RESULT_OBJECT: f"The address object {address_object} was not in the group {group_name}"}
 
         group["member"] = group_members

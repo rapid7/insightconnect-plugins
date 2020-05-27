@@ -17,7 +17,7 @@ class CreateAddressObject(komand.Action):
 
     def run(self, params={}):
         host = params.get(Input.ADDRESS)
-        name = params.get(Input.NAME, "")
+        name = params.get(Input.ADDRESS_OBJECT, "")
         whitelist = params.get(Input.WHITELIST)
         helper = Helpers(self.logger)
 
