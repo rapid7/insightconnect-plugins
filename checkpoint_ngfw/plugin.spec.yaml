@@ -899,7 +899,7 @@ actions:
         title: Group
         description: Group name
         type: string
-        example: ICON Block List
+        example: InsightConnect Block List
         required: true
         order: 2
     output:

@@ -92,7 +92,7 @@ This action removes an address object (host) from an address group.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |address_object|string|None|True|The name of the address object (host object) to remove|None|Malicious Host|
-|group|string|None|True|Group name|None|ICON Block List|
+|group|string|None|True|Group name|None|InsightConnect Block List|
 
 Example input:
 
