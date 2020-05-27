@@ -25,7 +25,7 @@ class CheckIfAddressInGroupInput(komand.Input):
     "address": {
       "type": "string",
       "title": "Address",
-      "description": "The name, IP address, CIDR IP address, or domain to check for",
+      "description": "The address object name, IP address, CIDR IP address, or domain to check for",
       "order": 2
     },
     "group": {

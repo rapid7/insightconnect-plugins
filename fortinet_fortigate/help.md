@@ -100,7 +100,7 @@ This action is used to check if an IP address is in an address group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|The name, IP address, CIDR IP address, or domain to check for|None|MaliciousHost|
+|address|string|None|True|The address object name, IP address, CIDR IP address, or domain to check for|None|MaliciousHost|
 |group|string|None|True|Name of Address Group to check for address|None|InsightConnect Block Policy|
 
 Example input:

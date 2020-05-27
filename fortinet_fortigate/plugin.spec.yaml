@@ -639,7 +639,7 @@ actions:
         example: InsightConnect Block Policy
       address:
         title: Address
-        description: The name, IP address, CIDR IP address, or domain to check for
+        description: The address object name, IP address, CIDR IP address, or domain to check for
         type: string
         required: true
         example: MaliciousHost
