@@ -44,7 +44,7 @@ Example input:
 
 #### Remove Address Object from Group
 
-This action removes an address object to an address group.
+This action removes an address object from an address group.
 
 ##### Input
 
