@@ -32,11 +32,16 @@ class CreateAddressObject(komand.Action):
 
         if skip_rfc1918 and is_private:
             self.logger.info(f"Provided IP address {user_ip_address} is private - skipping!")
-            return
+            return {Output.HOST_OBJECT: {}}
 
-        if len(whitelist) > 0 and check_if_ip_in_whitelist(ip_address=user_ip_address, whitelist=whitelist):
-            self.logger.info(f"Provided IP address {user_ip_address} was found within the whitelist - skipping!")
-            return
+        try:
+            if len(whitelist) > 0 and check_if_ip_in_whitelist(ip_address=user_ip_address, whitelist=whitelist):
+                self.logger.info(f"Provided IP address {user_ip_address} was found within the whitelist - skipping!")
+                return {Output.HOST_OBJECT: {}}
+        except ValueError as e:
+            raise PluginException(cause="Invalid entry found in whitelist.",
+                                  assistance="Please ensure the entries within the whitelist are valid IP addresses (IPv4 or IPv6) or CIDR IP addresses.",
+                                  data=e)
 
         payload = {
             "name": name,
