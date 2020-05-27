@@ -23,13 +23,229 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Username and password|None|{"username":"user1", "password":"mypassword"}|
-|host|string|None|True|Enter the hostname|None|hostname-1|
+|host|string|None|True|Enter the hostname|None|example.com|
 |port|integer|3121|True|Enter the port|None|3121|
 |ssl_verify|boolean|True|True|Validate certificate|None|True|
+
+Example input:
+
+```
+{
+  "credentials": {"username":"user1", "password":"mypassword"}",
+  "host": "example.com",
+  "port": 3121,
+  "ssl_verify": true
+}
+```
 
 ## Technical Details
 
 ### Actions
+
+#### Get Patch Deployment
+
+This action is used to retrieve information about a specific patch deployment.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|deployment_id|string|None|True|Patch deployment ID|None|5dbcb89f-eec3-4182-a9aa-1e6074fb0acb|
+|machine_id|integer|None|False|ID of a machine involved with a specific patch deployment|None|7|
+
+Example input:
+
+```
+{
+  "deployment_id": "5dbcb89f-eec3-4182-a9aa-1e6074fb0acb",
+  "machine_id": 7
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|machine_information|machine_deploy_state|True|Information about a machine involved with the patch deployment|
+|patch_deployment_details|patch_deployment|True|Detailed information about a specific deployment|
+
+Example output:
+
+```
+{
+  "patch_deployment_details": {
+    "completedMachineCount": 1,
+    "creator": "IVANTI-W16\\Administrator",
+    "expectedMachineCount": 1,
+    "id": "282cbbf9-276d-4d36-a96d-6e55c8a7271e",
+    "isComplete": true,
+    "lastUpdatedOn": "2020-05-08T13:38:37.987Z",
+    "links": {
+      "self": {
+        "href": "https://example.com:3121/st/console/api/v1.0/patch/deployments/282cbbf9-276d-4d36-a96d-6e55c8a7271e"
+      },
+      "machines": {
+        "href": "https://example.com:3121/st/console/api/v1.0/patch/deployments/282cbbf9-276d-4d36-a96d-6e55c8a7271e/machines"
+      },
+      "template": {
+        "href": "https://example.com:3121/st/console/api/v1.0/patch/deploytemplates/7b5bc7e4-7437-47ac-ae2e-569ffdb0ccf8"
+      }
+    },
+    "name": "Standard",
+    "startedOn": "2020-05-08T13:33:39.077Z"
+  },
+  "machine_information": [
+    {
+      "address": "10.4.27.111",
+      "completedPatches": 1,
+      "domain": "WORKGROUP",
+      "id": 36,
+      "lastUpdated": "2020-05-08T13:38:37.987Z",
+      "links": {
+        "self": {
+          "href": "https://example.com:3121/st/console/api/v1.0/patch/deployments/282cbbf9-276d-4d36-a96d-6e55c8a7271e/machines/36"
+        }
+      },
+      "name": "splunk-724-w12",
+      "overallState": "Complete",
+      "patchStates": [
+        {
+          "bulletinId": "MS20-02-AFP-4537759",
+          "finishedOn": "2020-05-08T13:34:54.6",
+          "hasExecuted": true,
+          "kb": "Q4537759",
+          "lastUpdated": "2020-05-08T13:34:54.6",
+          "nativeCode": 0,
+          "overallState": "Complete",
+          "overallStateDescription": "Complete",
+          "patchId": "00030eb2-0000-0000-0000-000000000000",
+          "scheduledOn": "2020-05-08T06:33:40.47",
+          "startedOn": "2020-05-08T13:34:42.463",
+          "status": "VerifiedFixed",
+          "statusDescription": "Successfully installed"
+        }
+      ],
+      "statusDescription": "Finished"
+    }
+  ]
+}
+
+```
+
+#### Get Patch Details
+
+This action is used to retrieve information about a patch from Ivanti Security Controls.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|integer|None|True|The vulnerability ID|None|4693|
+
+Example input:
+
+```
+{
+  "id": 4693
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|patch|vulnerability|True|Detailed information about a patch|
+
+Example output:
+
+```
+{
+  "patch": {
+    "bulletinId": "MS15-022",
+    "cve": [
+      "CVE-2015-0085",
+      "CVE-2015-0097"
+    ],
+    "id": 5033,
+    "isSupported": true,
+    "kb": "Q2920812",
+    "links": {
+      "self": {
+        "href": "https://example.com:3121/st/console/api/v1.0/patches/5033"
+      }
+    },
+    "patchIds": [
+      "0000df6d-0000-0000-0000-000000000000",
+      "0000dfb5-0000-0000-0000-000000000000",
+      "0000dfd4-0000-0000-0000-000000000000"
+    ],
+    "patchType": "SecurityPatch",
+    "releaseDate": "2015-03-10T00:00:00",
+    "replacedBy": []
+  }
+}
+```
+
+#### Search Patches
+
+This action is used to find and display detailed information about patch.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|security_id|[]string|None|True|Security Vulnerability ID|None|["MS99-031", "Q240346", "CVE-2015-4485", "4693"]|
+
+Example input:
+
+```
+{
+  "security_id": [
+    "MS99-031",
+    "Q240346",
+    "CVE-2015-4485",
+    "4693"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|vulnerabilities|[]vulnerability|True|Details about an agent|
+
+Example output:
+
+```
+{
+  "vulnerabilities": [
+    {
+      "bulletinId": "MS15-022",
+      "cve": [
+        "CVE-2015-0085",
+        "CVE-2015-0097"
+      ],
+      "id": 5033,
+      "isSupported": true,
+      "kb": "Q2920812",
+      "links": {
+        "self": {
+          "href": "https://example.com:3121/st/console/api/v1.0/patches/5033"
+        }
+      },
+      "patchIds": [
+        "0000df6d-0000-0000-0000-000000000000",
+        "0000dfb5-0000-0000-0000-000000000000",
+        "0000dfd4-0000-0000-0000-000000000000"
+      ],
+      "patchType": "SecurityPatch",
+      "releaseDate": "2015-03-10T00:00:00",
+      "replacedBy": []
+    }
+  ]
+}
+```
 
 #### Start a Patch Scan
 
@@ -42,7 +258,7 @@ This action is used to start a patch scan.
 |credential_id|string|None|False|Credential ID|None|01234567-89AB-CDEF-0123-456789ABCDEF|
 |diagnostic_trace_enabled|boolean|None|False|An indication whether diagnostics tracing should be enabled during scan|None|False|
 |hostnames|[]string|None|False|Hostnames - Either hostnames or machine group IDs must be specified|None|hostname-1|
-|machine_group_ids|[]string|None|False|List of machine groups to scan. Either hostnames or machine group IDs must be specified|None|['1', '2']|
+|machine_group_ids|[]string|None|False|List of machine groups to scan. Either hostnames or machine group IDs must be specified|None|["1", "2"]|
 |max_poll_time|integer|300|True|Max poll time|None|300|
 |name|string|None|False|Name to be given to scan|None|test-scan|
 |run_as_credential_id|string|None|False|Reference to a credential to use to start a scan. Overwrites RunAsDefault behavior|None|01234567-89AB-CDEF-0123-456789ABCDEF|
@@ -53,16 +269,18 @@ Example input:
 
 ```
 {
-  "credential_id": "",
+  "credential_id": "01234567-89AB-CDEF-0123-456789ABCDEF",
   "diagnostic_trace_enabled": false,
-  "hostnames": ["hostname-1"],
-  "machine_group_ids": [],
-  "name": "",
-  "run_as_credential_id": "",
-  "run_as_default": false,
+  "hostnames": "hostname-1",
+  "machine_group_ids": [
+    "1",
+    "2"
+  ],
+  "max_poll_time": 300,
+  "name": "test-scan",
+  "run_as_credential_id": "01234567-89AB-CDEF-0123-456789ABCDEF",
   "template_id": "01234567-89AB-CDEF-0123-456789ABCDEF",
-  "use_machine_credential": true,
-  "max_poll_time": 300
+  "use_machine_credential": false
 }
 ```
 
@@ -93,21 +311,23 @@ Example output:
 }
 ```
 
-#### Get Patch Scan Status
+#### Get Scanned Machine Details
 
-This action is used to get patch scan status.
+This action is used to get scanned machine details.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|hostname|string|None|True|Hostname|None|hostname-1|
 |scan_id|string|None|True|Scan ID|None|01234567-89AB-CDEF-0123-456789ABCDEF|
 
 Example input:
 
 ```
 {
-  "scan_id": "f447bd51-de32-4bd6-a28e-ad834694d5ac"
+  "hostname": "hostname-1",
+  "scan_id": "01234567-89AB-CDEF-0123-456789ABCDEF"
 }
 ```
 
@@ -115,7 +335,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|patch_scan_status_details|patch_scan_status_details|True|Patch scan status details|
+|detected_patches|[]detected_patch|True|Detected patches|
+|patch_scan_machine|patch_scan_machine|True|Patch scan machine|
 
 Example output:
 
@@ -149,22 +370,20 @@ Example output:
 }
 ```
 
-#### Get Scanned Machine Details
+#### Get Patch Scan Status
 
-This action is used to get scanned machine details.
+This action is used to get patch scan status.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hostname|string|None|True|Hostname|None|hostname-1|
 |scan_id|string|None|True|Scan ID|None|01234567-89AB-CDEF-0123-456789ABCDEF|
 
 Example input:
 
 ```
 {
-  "hostname": "hostname-1",
   "scan_id": "01234567-89AB-CDEF-0123-456789ABCDEF"
 }
 ```
@@ -173,8 +392,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|detected_patches|[]detected_patch|True|Detected patches|
-|patch_scan_machine|patch_scan_machine|True|Patch scan machine|
+|patch_scan_status_details|patch_scan_status_details|True|Patch scan status details|
 
 Example output:
 
@@ -525,6 +743,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.0 - New actions Get Patch Deployment, Get Patch Details and Search Patches
 * 1.1.0 - Add actions Start Patch Scan, Get Patch Scan Status and Get Scanned Machine Details
 * 1.0.1 - Fix issue where Get Agents action does not include filters during paging
 * 1.0.0 - Initial plugin

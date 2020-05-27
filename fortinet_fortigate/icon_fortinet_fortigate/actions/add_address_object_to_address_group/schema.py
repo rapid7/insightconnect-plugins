@@ -8,8 +8,8 @@ class Component:
 
 
 class Input:
-    ADDRESS_OBJECT_NAME = "address_object_name"
-    GROUP_NAME = "group_name"
+    ADDRESS_OBJECT = "address_object"
+    GROUP = "group"
     
 
 class Output:
@@ -23,22 +23,22 @@ class AddAddressObjectToAddressGroupInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "address_object_name": {
+    "address_object": {
       "type": "string",
-      "title": "Address Object Name",
-      "description": "Address object name",
+      "title": "Address Object",
+      "description": "Address object",
       "order": 2
     },
-    "group_name": {
+    "group": {
       "type": "string",
-      "title": "Group Name",
+      "title": "Group",
       "description": "Group name",
       "order": 1
     }
   },
   "required": [
-    "address_object_name",
-    "group_name"
+    "address_object",
+    "group"
   ]
 }
     """)

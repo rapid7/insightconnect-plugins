@@ -30,7 +30,7 @@ class ConnectionSchema(komand.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "URL with port number of the Apex Security Manager.",
+      "description": "URL of the Apex Security Manager. Port can be specified as well e.g. https://example.com:443",
       "order": 1
     }
   },

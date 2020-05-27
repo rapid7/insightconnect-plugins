@@ -22,4 +22,3 @@ class Run(komand.Action):
         results['all_output'] = results['stdout'] + results['stderr']
         client.close()
         return {Output.RESULTS: results}
-
