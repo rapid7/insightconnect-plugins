@@ -687,7 +687,7 @@ actions:
     input:
       address:
         title: Address
-        description: The host to create. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name
+        description: The address to assign to the Address Object. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name
         type: string
         required: true
         example: 198.51.100.100
