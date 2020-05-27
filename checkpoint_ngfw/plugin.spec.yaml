@@ -727,7 +727,7 @@ actions:
         required: true
         type: string
         order: 1
-        example: "ICON Block List"
+        example: "InsightConnect Block List"
       host_name:
         title: Host Name
         description: The host to add to the network group, usually the IP address
