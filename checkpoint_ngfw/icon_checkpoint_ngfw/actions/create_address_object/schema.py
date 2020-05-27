@@ -4,21 +4,22 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add a host as a network object"
+    DESCRIPTION = "Add an address object (host object) as a network object"
 
 
 class Input:
     COLOR = "color"
-    DISCARD_OTHER_SESSIONS = "discard_other_sessions"
     HOST_IP = "host_ip"
     NAME = "name"
+    SKIP_RFC1918 = "skip_rfc1918"
+    WHITELIST = "whitelist"
     
 
 class Output:
     HOST_OBJECT = "host_object"
     
 
-class AddHostInput(komand.Input):
+class CreateAddressObjectInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -67,13 +68,6 @@ class AddHostInput(komand.Input):
         "violet red",
         "yellow"
       ],
-      "order": 4
-    },
-    "discard_other_sessions": {
-      "type": "boolean",
-      "title": "Discard Other Sessions",
-      "description": "Discard all other user sessions. This can fix errors when objects are locked by other sessions",
-      "default": true,
       "order": 3
     },
     "host_ip": {
@@ -87,12 +81,28 @@ class AddHostInput(komand.Input):
       "title": "Name",
       "description": "Name",
       "order": 1
+    },
+    "skip_rfc1918": {
+      "type": "boolean",
+      "title": "Skip RFC 1918 (Private) IP Addresses",
+      "description": "Skip private IP addresses as defined in RFC 1918",
+      "default": true,
+      "order": 5
+    },
+    "whitelist": {
+      "type": "array",
+      "title": "Whitelist",
+      "description": "This list contains a set of network objects that should not be blocked. This can include IP addresses and CIDR IP addresses",
+      "items": {
+        "type": "string"
+      },
+      "order": 4
     }
   },
   "required": [
-    "discard_other_sessions",
     "host_ip",
-    "name"
+    "name",
+    "skip_rfc1918"
   ]
 }
     """)
@@ -101,7 +111,7 @@ class AddHostInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class AddHostOutput(komand.Output):
+class CreateAddressObjectOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
@@ -110,13 +120,10 @@ class AddHostOutput(komand.Output):
     "host_object": {
       "$ref": "#/definitions/host_object",
       "title": "Host",
-      "description": "Information about the host that was added",
+      "description": "Information about the host object that was added",
       "order": 1
     }
   },
-  "required": [
-    "host_object"
-  ],
   "definitions": {
     "creation_time_type": {
       "type": "object",

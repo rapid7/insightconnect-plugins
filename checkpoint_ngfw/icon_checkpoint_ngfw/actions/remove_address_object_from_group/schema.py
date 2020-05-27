@@ -4,33 +4,40 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Remove a host object from network objects"
+    DESCRIPTION = "Removes an address object (host object) from an address group"
 
 
 class Input:
-    NAME = "name"
+    ADDRESS_OBJECT = "address_object"
+    GROUP = "group"
     
 
 class Output:
-    MESSAGE = "message"
     SUCCESS = "success"
     
 
-class RemoveHostInput(komand.Input):
+class RemoveAddressObjectFromGroupInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "name": {
+    "address_object": {
       "type": "string",
-      "title": "Name",
-      "description": "Name",
+      "title": "Address Object",
+      "description": "The name of the address object (host object) to remove",
       "order": 1
+    },
+    "group": {
+      "type": "string",
+      "title": "Group",
+      "description": "Group name",
+      "order": 2
     }
   },
   "required": [
-    "name"
+    "address_object",
+    "group"
   ]
 }
     """)
@@ -39,27 +46,20 @@ class RemoveHostInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class RemoveHostOutput(komand.Output):
+class RemoveAddressObjectFromGroupOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "message": {
-      "type": "string",
-      "title": "Message",
-      "description": "Remove operation status",
-      "order": 1
-    },
     "success": {
       "type": "boolean",
       "title": "Success",
-      "description": "Success",
-      "order": 2
+      "description": "Was operation successful",
+      "order": 1
     }
   },
   "required": [
-    "message",
     "success"
   ]
 }

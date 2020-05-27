@@ -22,9 +22,8 @@ class SetThreatProtection(komand.Action):
             }
         }
         headers = self.connection.get_headers()
-        discard_other_changes = params.get(Input.DISCARD_OTHER_SESSIONS)
 
-        self.connection.post_and_publish(headers, discard_other_changes, payload, url)
+        self.connection.post_and_publish(headers, payload, url)
 
         # If no exception is thrown, we can assume this succeeded.
         return {Output.SUCCESS: True}
