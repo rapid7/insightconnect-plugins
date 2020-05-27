@@ -658,7 +658,7 @@ actions:
         description: Optional name to filter on
         type: string
         required: false
-        example: my policy name
+        example: InsightConnect Block Policy
     output:
       policies:
         title: Policies
