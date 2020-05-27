@@ -99,7 +99,7 @@ Example input:
 ```
 {
   "address_object": "Malicious Host",
-  "group": "ICON Block List"
+  "group": "InsightConnect Block List"
 }
 ```
 
