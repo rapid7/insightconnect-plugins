@@ -1,19 +1,21 @@
-import komand
-from .schema import CreateAddressObjectInput, CreateAddressObjectOutput, Input, Output, Component
 # Custom imports below
 import ipaddress
+
+import komand
 from komand.exceptions import PluginException
+
 from icon_checkpoint_ngfw.util.utils import check_if_ip_in_whitelist
+from .schema import CreateAddressObjectInput, CreateAddressObjectOutput, Input, Output, Component
 
 
 class CreateAddressObject(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='create_address_object',
-                description=Component.DESCRIPTION,
-                input=CreateAddressObjectInput(),
-                output=CreateAddressObjectOutput())
+            name='create_address_object',
+            description=Component.DESCRIPTION,
+            input=CreateAddressObjectInput(),
+            output=CreateAddressObjectOutput())
 
     def run(self, params={}):
         url = f"{self.connection.server_and_port}/web_api/add-host"
@@ -31,16 +33,21 @@ class CreateAddressObject(komand.Action):
                                   assistance=e)
 
         if skip_rfc1918 and is_private:
-            self.logger.info(f"Provided IP address {user_ip_address} is private - skipping!")
-            return {Output.HOST_OBJECT: {}}
+            raise PluginException(
+                cause=f"The IP address specified ({user_ip_address}) is private and will be ignored as per "
+                      f"the action configuration.",
+                assistance="Please update your action configuration to accommodate the IP address or ignore "
+                           "this message.")
 
         try:
             if len(whitelist) > 0 and check_if_ip_in_whitelist(ip_address=user_ip_address, whitelist=whitelist):
-                self.logger.info(f"Provided IP address {user_ip_address} was found within the whitelist - skipping!")
-                return {Output.HOST_OBJECT: {}}
+                raise PluginException(
+                    cause=f"The IP address specified ({user_ip_address}) was found within the whitelist.",
+                    assistance="Please update your whitelist to accommodate the IP address or ignore this message.")
         except ValueError as e:
             raise PluginException(cause="Invalid entry found in whitelist.",
-                                  assistance="Please ensure the entries within the whitelist are valid IP addresses (IPv4 or IPv6) or CIDR IP addresses.",
+                                  assistance="Please ensure the entries within the whitelist are valid IP "
+                                             "addresses (IPv4 or IPv6) or CIDR IP addresses.",
                                   data=e)
 
         payload = {
