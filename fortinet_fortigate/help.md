@@ -637,7 +637,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.0.0 - Rename a number of actions inputs and outputs to conform to Rapid7 naming schema for firewalls | Add example inputs | New action Remove Address Object from Group
+* 3.0.0 - Revise action input/output naming schemes | Add example inputs | New action Remove Address Object from Group
 * 2.0.0 - Simplify the Create Address Object action to auto-detect the input type | Add whitelist safety check to Create Address Object action
 * 1.1.0 - New Action Check if IP is in Address Group
 * 1.0.0 - Initial plugin
