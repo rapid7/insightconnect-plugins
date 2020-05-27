@@ -1,15 +1,11 @@
 {
-	"spec": "fc679efe81fc5c9481aee74e29a9ebe5",
-	"manifest": "73a974f5f6e7e49dd35ce0d7123447e9",
+	"spec": "9bc1f786e1b927c456beb22db5011463",
+	"manifest": "c82cf35193264b2b62c6fdd6d21b0e82",
 	"setup": "068d307f34595a4819498d06805e6b46",
 	"schemas": [
 		{
 			"identifier": "add_access_rule/schema.py",
 			"hash": "38ad3951cb894c6a01e187e4e6b881c9"
-		},
-		{
-			"identifier": "add_host/schema.py",
-			"hash": "f29f8d8e72e3c0e8e1204a0755dd1215"
 		},
 		{
 			"identifier": "add_host_to_network_group/schema.py",
@@ -18,6 +14,10 @@
 		{
 			"identifier": "check_if_address_in_group/schema.py",
 			"hash": "b8c2d8a5725dea7c931e9aada5cafc2d"
+		},
+		{
+			"identifier": "create_address_object/schema.py",
+			"hash": "2843e5fb5fafa035538e4d610b46090f"
 		},
 		{
 			"identifier": "discard_all_sessions/schema.py",
