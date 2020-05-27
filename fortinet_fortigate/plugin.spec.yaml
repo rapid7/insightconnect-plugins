@@ -694,7 +694,7 @@ actions:
         order: 2
       address_object:
         title: Address Object
-        description: Optional name to give this address object. If not provided, the name will be the IP address or domain name
+        description: Optional name to give this address object. If not provided, the name will be the value of address input field
         type: string
         required: false
         example: MaliciousHost
