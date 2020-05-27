@@ -72,6 +72,24 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true,
+  "result_object": {
+    "http_method": "PUT",
+    "revision": "ae0c665d9d5ad469c280efc424e00e29",
+    "revision_changed": true,
+    "old_revision": "94d82356a2bc4cb05963807103392ca3",
+    "mkey": "Test Group",
+    "status": "success",
+    "http_status": 200,
+    "vdom": "root",
+    "path": "firewall",
+    "name": "addrgrp",
+    "serial": "FGVM02TM20001791",
+    "version": "v6.2.3",
+    "build": 1066
+  }
+}
 ```
 
 #### Check if Address in Group
