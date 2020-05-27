@@ -774,7 +774,7 @@ actions:
         description: Group name
         type: string
         required: true
-        example: blocked IP's
+        example: InsightConnect Block List
       address_object:
         title: Address Object
         description: Address object
