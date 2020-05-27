@@ -2,6 +2,7 @@ import komand
 from .schema import ConnectionSchema, Input
 # Custom imports below
 from requests import Session
+from icon_fortinet_fortigate.util.util import Helpers
 from komand.exceptions import ConnectionTestException, PluginException
 
 
@@ -49,13 +50,16 @@ class Connection(komand.Connection):
         return group
 
     def test(self):
+        helper = Helpers(self.logger)
         endpoint = f"https://{self.host}/api/v2/cmdb/firewall.consolidated/policy"
-        result = self.session.get(endpoint, verify=self.ssl_verify)
+        response = self.session.get(endpoint, verify=self.ssl_verify)
 
         try:
-            result.raise_for_status()
-        except Exception:
-            raise ConnectionTestException(cause=f"Could not connect to {self.host}\n",
-                                          assistance="Please check your connection settings.\n",
-                                          data=result.text)
-        return result.json()
+            json_response = response.json()
+        except ValueError:
+            raise PluginException(cause="Data sent by FortiGate was not in JSON format.\n",
+                                  assistance="Contact support for help.",
+                                  data=response.text)
+        helper.http_errors(json_response, response.status_code)
+
+        return response.json()

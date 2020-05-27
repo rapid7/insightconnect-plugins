@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    HOST = "host"
+    ADDRESS_OBJECT = "address_object"
     
 
 class Output:
@@ -22,15 +22,15 @@ class DeleteAddressObjectInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "host": {
+    "address_object": {
       "type": "string",
-      "title": "Host",
-      "description": "The host to delete. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name",
+      "title": "Address Object",
+      "description": "Name of Address Object to delete",
       "order": 1
     }
   },
   "required": [
-    "host"
+    "address_object"
   ]
 }
     """)

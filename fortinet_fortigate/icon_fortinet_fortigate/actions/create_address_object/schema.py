@@ -8,8 +8,8 @@ class Component:
 
 
 class Input:
-    HOST = "host"
-    NAME = "name"
+    ADDRESS = "address"
+    ADDRESS_OBJECT = "address_object"
     WHITELIST = "whitelist"
     
 
@@ -24,16 +24,16 @@ class CreateAddressObjectInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "host": {
+    "address": {
       "type": "string",
-      "title": "Host",
-      "description": "The host to create. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name",
+      "title": "Address",
+      "description": "The address to assign to the Address Object. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name",
       "order": 1
     },
-    "name": {
+    "address_object": {
       "type": "string",
-      "title": "Name",
-      "description": "Optional name to give this address object. If not provided, the name will be the IP address or domain name",
+      "title": "Address Object",
+      "description": "Optional name to give this address object. If not provided, the name will be the value of address input field",
       "order": 2
     },
     "whitelist": {
@@ -47,7 +47,7 @@ class CreateAddressObjectInput(komand.Input):
     }
   },
   "required": [
-    "host"
+    "address"
   ]
 }
     """)

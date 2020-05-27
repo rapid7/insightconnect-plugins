@@ -2,6 +2,7 @@ import komand
 from .schema import GetPoliciesInput, GetPoliciesOutput, Input, Output, Component
 # Custom imports below
 from komand.exceptions import PluginException
+from icon_fortinet_fortigate.util.util import Helpers
 
 
 class GetPolicies(komand.Action):
@@ -15,6 +16,7 @@ class GetPolicies(komand.Action):
 
     def run(self, params={}):
         endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/policy"
+        helper = Helpers(self.logger)
 
         filter_ = params.get(Input.NAME_FILTER, "")
         get_params = {}
@@ -23,15 +25,16 @@ class GetPolicies(komand.Action):
                 "filter": f"name=@{filter_}"
             }
 
-        result = self.connection.session.get(endpoint, params=get_params, verify=self.connection.ssl_verify)
+        response = self.connection.session.get(endpoint, params=get_params, verify=self.connection.ssl_verify)
 
         try:
-            result.raise_for_status()
-        except Exception as e:
-            raise PluginException(cause=f"Get policy failed for {endpoint}\n",
-                                  assistance=result.text,
-                                  data=e)
+            json_response = response.json()
+        except ValueError:
+            raise PluginException(cause="Data sent by FortiGate was not in JSON format.\n",
+                                  assistance="Contact support for help.",
+                                  data=response.text)
+        helper.http_errors(json_response, response.status_code)
 
-        policies = result.json().get("results")
+        policies = response.json().get("results")
 
         return {Output.POLICIES: komand.helper.clean(policies)}

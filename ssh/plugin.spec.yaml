@@ -4,7 +4,7 @@ products: [insightconnect]
 name: ssh
 title: SSH
 description: The SSH protocol is a method for secure remote login from one computer to another
-version: 3.0.1
+version: 4.0.0
 vendor: rapid7
 support: community
 status: []
@@ -49,7 +49,7 @@ connection:
     required: false
     example: {"secretKey": "mypassword"}
   key:
-    type: credential_asymmetric_key
+    type: credential_secret_key
     description: A base64 encoded SSH private key to use to authenticate to remote
       server. A newline is required after the beginning and before the end marker
     required: false
