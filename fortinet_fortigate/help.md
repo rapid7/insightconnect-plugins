@@ -124,6 +124,10 @@ Example input:
 Example output:
 
 ```
+{
+  "found": true,
+  "address_objects": ["198.51.100.100/32"]
+}
 ```
 
 #### Get Policies
@@ -642,7 +646,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.0.0 - Update Create Address Object action to accept a RFC1918 whitelist | 
+* 4.0.0 - Update Create Address Object action to accept a RFC1918 whitelist | Add enable_search functionality to Check if Address in Group action
 * 3.0.0 - Revise action input/output naming schemes | Add example inputs | New action Remove Address Object from Group
 * 2.0.0 - Simplify the Create Address Object action to auto-detect the input type | Add whitelist safety check to Create Address Object action
 * 1.1.0 - New Action Check if IP is in Address Group
