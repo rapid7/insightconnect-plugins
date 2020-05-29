@@ -874,6 +874,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 6.0.0 - Update to Create Address Object to add Skip RFC 1918 input
 * 5.1.1 - Fix issue where IPv6 address were not supported
 * 5.1.0 - New action Add Address Object to Group
 * 5.0.0 - Change plugin title to "Palo Alto Firewall" from "Palo Alto PAN-OS" and update remaining references
