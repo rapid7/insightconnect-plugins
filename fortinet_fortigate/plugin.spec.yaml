@@ -4,7 +4,7 @@ products: [insightconnect]
 name: fortinet_fortigate
 title: Fortinet FortiGate
 description: FortiGate Next Generation Firewalls (NGFWs) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection
-version: 3.0.0
+version: 4.0.0
 vendor: rapid7
 support: community
 status: []
@@ -637,17 +637,32 @@ actions:
         type: string
         required: true
         example: InsightConnect Block Policy
+        order: 1
       address:
         title: Address
-        description: The address object name, IP address, CIDR IP address, or domain to check for
+        description: The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name
         type: string
+        example: 198.51.100.100
         required: true
-        example: MaliciousHost
+        order: 2
+      enable_search:
+        title: Enable Search
+        description: When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don't know the Address Object by its name
+        type: boolean
+        example: false
+        default: false
+        required: true
+        order: 3
     output:
       found:
         title: Found
-        description: True if the address was found in the address group
+        description: Was address found in group
         type: boolean
+        required: true
+      address_objects:
+        title: Address Objects
+        description: The names of the address objects that match or contain the address
+        type: "[]string"
         required: true
   get_policies:
     title: Get Policies
@@ -706,6 +721,14 @@ actions:
         example: ["198.51.100.100", "example.com", "192.0.2.0/24"]
         required: false
         order: 3
+      skip_rfc1918:
+        title: Skip RFC 1918 (Private) IP Addresses
+        description: Skip private IP addresses as defined in RFC 1918
+        type: boolean
+        example: true
+        required: true
+        default: true
+        order: 4
     output:
       success:
         title: Success

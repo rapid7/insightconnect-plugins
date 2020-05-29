@@ -9,10 +9,12 @@ class Component:
 
 class Input:
     ADDRESS = "address"
+    ENABLE_SEARCH = "enable_search"
     GROUP = "group"
     
 
 class Output:
+    ADDRESS_OBJECTS = "address_objects"
     FOUND = "found"
     
 
@@ -25,8 +27,15 @@ class CheckIfAddressInGroupInput(komand.Input):
     "address": {
       "type": "string",
       "title": "Address",
-      "description": "The address object name, IP address, CIDR IP address, or domain to check for",
+      "description": "The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name",
       "order": 2
+    },
+    "enable_search": {
+      "type": "boolean",
+      "title": "Enable Search",
+      "description": "When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don't know the Address Object by its name",
+      "default": false,
+      "order": 3
     },
     "group": {
       "type": "string",
@@ -37,6 +46,7 @@ class CheckIfAddressInGroupInput(komand.Input):
   },
   "required": [
     "address",
+    "enable_search",
     "group"
   ]
 }
@@ -52,14 +62,24 @@ class CheckIfAddressInGroupOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "address_objects": {
+      "type": "array",
+      "title": "Address Objects",
+      "description": "The names of the address objects that match or contain the address",
+      "items": {
+        "type": "string"
+      },
+      "order": 2
+    },
     "found": {
       "type": "boolean",
       "title": "Found",
-      "description": "True if the address was found in the address group",
+      "description": "Was address found in group",
       "order": 1
     }
   },
   "required": [
+    "address_objects",
     "found"
   ]
 }
