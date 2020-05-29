@@ -33,7 +33,8 @@ Example input:
 
 ```
 {
-  "credentials": {
+  "credentials": 
+  {
     "username":"username", 
     "password":"password"
   },
