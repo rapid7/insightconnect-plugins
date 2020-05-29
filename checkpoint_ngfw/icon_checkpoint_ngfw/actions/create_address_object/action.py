@@ -3,6 +3,7 @@ import ipaddress
 
 import komand
 from komand.exceptions import PluginException
+from icon_checkpoint_ngfw.util.utils import PublishException
 
 from icon_checkpoint_ngfw.util.utils import check_if_ip_in_whitelist
 from .schema import CreateAddressObjectInput, CreateAddressObjectOutput, Input, Output, Component
@@ -61,6 +62,10 @@ class CreateAddressObject(komand.Action):
             payload["color"] = color
 
         headers = self.connection.get_headers()
-        result = self.connection.post_and_publish(headers, payload, url)
+
+        try:
+            result = self.connection.post_and_publish(headers, payload, url)
+        except PublishException as e:
+            pass
 
         return {Output.HOST_OBJECT: komand.helper.clean(result.json())}

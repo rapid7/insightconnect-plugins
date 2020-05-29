@@ -1,9 +1,12 @@
+from json import JSONDecodeError
+
 import komand
-from .schema import ConnectionSchema, Input
+import requests
 # Custom imports below
 from komand.exceptions import PluginException, ConnectionTestException
-import requests
-from icon_checkpoint_ngfw.util.utils import DetailsLevel
+
+from icon_checkpoint_ngfw.util.utils import DetailsLevel, PublishException
+from .schema import ConnectionSchema, Input
 
 
 class Connection(komand.Connection):
@@ -57,9 +60,12 @@ class Connection(komand.Connection):
         except Exception as e:
             # The errors returned by this api aren't very good
             # It's a 400 with some error text.
-            raise PluginException(cause="There was problem publishing to Check Point NGFW.",
-                                  assistance=request.text,
-                                  data=e)
+            try:
+                raise PublishException.from_json_response(json_=request.json())
+            except JSONDecodeError:
+                raise PluginException(cause="There was problem publishing to Check Point NGFW.",
+                                      assistance=request.text,
+                                      data=e)
 
     def logout(self):
         url = f"{self.server_and_port}/web_api/logout"
@@ -71,7 +77,7 @@ class Connection(komand.Connection):
             request.raise_for_status()
         except Exception:
             self.logger.warning(f"There was a problem logging out. Ignoring this and attempting to continue. "
-                              f"Error follows:\n{request.text}")
+                                f"Error follows:\n{request.text}")
 
     def get_headers(self):
         return {
@@ -112,7 +118,7 @@ class Connection(komand.Connection):
 
             requests.post(url_discard, json=discard_payload, headers=headers, verify=self.ssl_verify)
 
-        self.publish() # Yes, you have to publish that you are not publishing
+        self.publish()  # Yes, you have to publish that you are not publishing
         self.logout()
 
         self.get_sid()

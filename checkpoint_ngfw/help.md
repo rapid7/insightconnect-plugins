@@ -314,7 +314,9 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|error_message|string|False|The cause of the error (if the action fails)|
 |host_object|host_object|False|Information about the host object that was added|
+|success|boolean|True|Whether or not Check Point could successfully create the address object|
 
 Example output:
 

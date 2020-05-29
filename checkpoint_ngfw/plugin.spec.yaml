@@ -693,6 +693,16 @@ actions:
         description: Information about the host object that was added
         type: host_object
         required: false
+      success:
+        title: Success
+        description: Whether or not Check Point could successfully create the address object
+        type: boolean
+        required: true
+      error_message:
+        title: Error Message
+        description: The cause of the error (if the action fails)
+        type: string
+        required: false
 
   remove_host:
     title: Remove Host
