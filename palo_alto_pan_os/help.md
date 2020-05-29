@@ -33,11 +33,7 @@ Example input:
 
 ```
 {
-  "credentials": 
-  {
-    "username":"username", 
-    "password":"password"
-  },
+  "credentials": "{\"username\":\"username\", \"password\":\"password\"}",
   "server": "http://www.example.com",
   "verify_cert": true
 }
@@ -99,7 +95,7 @@ This action checks to see if an IP address, CIDR IP address, or domain is in an 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, doman) within the address object instead of matching the name|None|198.51.100.100|
+|address|string|None|True|The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name|None|198.51.100.100|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
 |enable_search|boolean|False|True|When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name|None|False|
 |group|string|None|True|Group name|None|ICON Block List|
@@ -268,6 +264,7 @@ In this case, we will strip the /32 from the end and check the IP against the wh
 |address|string|None|True|The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com google.com|None|1.1.1.1|
 |address_object|string|None|True|The name of the address object|None|Blocked host|
 |description|string|None|False|A description for the address object|None|Blocked host from Insight Connect|
+|skip_rfc1918|boolean|False|True|Skip private IP addresses as defined in RFC 1918|None|True|
 |tags|string|None|False|Tags for the address object. Use commas to separate multiple tags|None|malware|
 |whitelist|[]string|None|False|This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)|None|["198.51.100.100", "192.0.2.0/24", "example.com"]|
 
@@ -278,6 +275,7 @@ Example input:
   "address": "1.1.1.1",
   "address_object": "Blocked host",
   "description": "Blocked host from Insight Connect",
+  "skip_rfc1918": true,
   "tags": "malware",
   "whitelist": [
     "198.51.100.100",
@@ -876,6 +874,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 6.0.0 - Update to Create Address Object to add Skip RFC 1918 input
 * 5.1.1 - Fix issue where IPv6 address were not supported
 * 5.1.0 - New action Add Address Object to Group
 * 5.0.0 - Change plugin title to "Palo Alto Firewall" from "Palo Alto PAN-OS" and update remaining references

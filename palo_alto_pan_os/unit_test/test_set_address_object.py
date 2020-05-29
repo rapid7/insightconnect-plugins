@@ -75,3 +75,14 @@ class TestSetAddressObject(TestCase):
         self.assertEquals(test_action.determine_address_type("www.google.com"), "fqdn")
         self.assertEquals(test_action.determine_address_type("10.1.1.1-10.1.1.255"), "ip-range")
 
+    def test_check_if_private(self):
+        test_action = SetAddressObject()
+        test_action.logger = logging.getLogger("test")
+
+        self.assertTrue(test_action.check_if_private("192.168.1.1"))
+        self.assertTrue(test_action.check_if_private("192.168.1.1/32"))
+        self.assertTrue(test_action.check_if_private("FE80::903A:1C1A:E802:11E4"))
+        self.assertFalse(test_action.check_if_private("www.google.com"))
+        self.assertFalse(test_action.check_if_private("1.1.1.1"))
+        self.assertFalse(test_action.check_if_private("192.168.1.1-192.168.1.100"))
+
