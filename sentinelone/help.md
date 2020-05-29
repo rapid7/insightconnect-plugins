@@ -1049,7 +1049,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.2.1 - Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin siz
+* 1.2.1 - Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size
 * 1.2.0 - New spec and help.md format for the Extension Library | New actions activities_list, activities_types, agents_abort_scan, agents_connect, agents_decommission, agents_disconnect, agents_fetch_logs, agents_initiate, agents_processes, agents_reload, agents_restart, agents_shutdown, agents_summary, agents_uninstall, apps_by_agent_ids, name_available
 * 1.1.0 - New trigger Get Threats | New actions Mitigate Threat, Mark as Benign, Mark as Threat and Create IOC Threat
 * 1.0.1 - Update to add Blacklist by IoC Hash and Blacklist by Content Hash
