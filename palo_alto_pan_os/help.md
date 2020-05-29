@@ -33,7 +33,10 @@ Example input:
 
 ```
 {
-  "credentials": "{\"username\":\"username\", \"password\":\"password\"}",
+  "credentials": {
+    "username":"username", 
+    "password":"password"
+  },
   "server": "http://www.example.com",
   "verify_cert": true
 }
@@ -185,6 +188,11 @@ This action is used to get a policy.
 Example input:
 
 ```
+{
+  "device_name": "localhost.localdomain",
+  "policy_name": "InsightConnect Block Policy",
+  "virtual_system": "vsys1"
+}
 ```
 
 ##### Output
