@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_pan_os
 title: Palo Alto Firewall
 description: Manage Palo Alto Networks firewall devices
-version: 5.1.1
+version: 6.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -638,6 +638,13 @@ actions:
         type: string
         example: malware
         required: false
+      skip_rfc1918:
+        title: Skip RFC 1918 (Private) IP Addresses
+        description: Skip private IP addresses as defined in RFC 1918
+        type: boolean
+        example: true
+        required: true
+        default: false
       whitelist:
         title: Whitelist
         description: This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)
@@ -751,7 +758,7 @@ actions:
         order: 1
       address:
         title: Address
-        description: The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, doman) within the address object instead of matching the name
+        description: The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name
         type: string
         example: 198.51.100.100
         required: true
