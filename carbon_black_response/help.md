@@ -729,6 +729,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.1.9 - Pin to latest version of cbapi to fix broken isolate() function
 * 3.1.8 - New spec and help.md format for the Extension Library
 * 3.1.7 - Fix issue where Delete Watchlist action would not run successfully
 * 3.1.6 - Fix issue where output from the New Alert trigger did not match the output schema
