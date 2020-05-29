@@ -22,10 +22,15 @@ This plugin utilizes the SentinelOne API..
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|True|Username and password|None|
-|url|string|https://usea1-partners.sentinelone.net/|True|URL and endpoint of SentinelOne instance. For example: https://usea1-partners.sentinelone.net/|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|credentials|credential_username_password|None|True|Username and password|None|None|
+|url|string|https://usea1-partners.sentinelone.net/|True|URL and endpoint of SentinelOne instance. For example: https://usea1-partners.sentinelone.net/|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -152,6 +157,11 @@ Example output:
 
 This action is used to get a list of activity types.
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -178,9 +188,14 @@ This action aborts running scan on all agents matching the input filter.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -202,9 +217,14 @@ This action sends a connect to network command to all agents matching the input 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -226,9 +246,14 @@ This action decommissions all agents matching the input filter.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -250,9 +275,14 @@ This action disconnects agents associated to marked threats from network.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|filter|object|None|True|Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats.|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|filter|object|None|True|Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -274,9 +304,14 @@ This action sends a fetch logs command to all agents matching the input filter.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -298,9 +333,14 @@ This action sends a scan command to all agents matching the input filter.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -322,9 +362,14 @@ This action is used to retrieve running processes for a specific agent.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|ids|[]string|None|True|Agent ID list|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ids|[]string|None|True|Agent ID list|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -343,10 +388,15 @@ This action is used to reload an agent module (applies to Windows agents only).
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|
-|module|string|None|True|Agent module to reload|['monitor', 'static', 'agent', 'log']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|None|
+|module|string|None|True|Agent module to reload|['monitor', 'static', 'agent', 'log']|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -368,9 +418,14 @@ This action sends a restart command to all agents matching the input filter.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - One of the following filter arguments must be supplied - ids, groupIds, filterId|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - One of the following filter arguments must be supplied - ids, groupIds, filterId|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -392,9 +447,14 @@ This action sends a shutdown command to all agents matching the input filter.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -416,10 +476,15 @@ This action is used to summary of agents by numbers.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|account_ids|[]string|None|False|List of Account IDs to filter by|None|
-|site_ids|[]string|None|False|List of Site IDs to filter by|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|account_ids|[]string|None|False|List of Account IDs to filter by|None|None|
+|site_ids|[]string|None|False|List of Site IDs to filter by|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -443,9 +508,14 @@ This action sends an uninstall command to all agents matching the input filter.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -467,9 +537,14 @@ This action is used to retrieve running applications for a specific agent.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|ids|[]string|None|True|Agent ID list|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ids|[]string|None|True|Agent ID list|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -488,9 +563,14 @@ This action is used to add hashed content to global blacklist. The input for thi
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|hash|string|None|True|Content hash to add to blacklist|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|hash|string|None|True|Content hash to add to blacklist|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -514,10 +594,15 @@ This action is used to add hashed indicator of compromise to global blacklist.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|hash|string|None|True|Indicator of compromise hash to add to blacklist|None|
-|agent_id|string|None|True|Agent ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent_id|string|None|True|Agent ID|None|None|
+|hash|string|None|True|Indicator of compromise hash to add to blacklist|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -541,14 +626,19 @@ This action is used to create a threat from an IOC event.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|agent_id|string|None|True|Agent ID for the slim threat|None|
-|annotation|string|None|True|Vigilance annotation|None|
-|annotation_url|string|None|True|Vigilance annotation URL|None|
-|group_id|string|None|False|Group ID|None|
-|hash|string|None|True|SHA1 hash|None|
-|path|string|None|False|Path|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent_id|string|None|True|Agent ID for the slim threat|None|None|
+|annotation|string|None|True|Vigilance annotation|None|None|
+|annotation_url|string|None|True|Vigilance annotation URL|None|None|
+|group_id|string|None|False|Group ID|None|None|
+|hash|string|None|True|SHA1 hash|None|None|
+|path|string|None|False|Path|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -587,11 +677,16 @@ This action is used to mark a threat as resolved.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|threat_id|string|None|True|ID of a threat|None|
-|whitening_option|string|None|False|Selected whitening option|['browser-type', 'certificate', 'file-type', 'file_hash', 'path']|
-|target_scope|string|None|True|Scope to be used for exclusions|['group', 'site', 'tenant']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|target_scope|string|None|True|Scope to be used for exclusions|['group', 'site', 'tenant']|None|
+|threat_id|string|None|True|ID of a threat|None|None|
+|whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -613,11 +708,16 @@ This action is used to mark a suspicious threat as a threat.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|target_scope|string|None|True|Scope to be used for exclusions|['group', 'site', 'tenant']|
-|threat_id|string|None|True|ID of a threat|None|
-|whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|target_scope|string|None|True|Scope to be used for exclusions|['group', 'site', 'tenant']|None|
+|threat_id|string|None|True|ID of a threat|None|None|
+|whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -639,10 +739,15 @@ This action is used to apply a mitigation action to a threat.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|action|string|None|True|Mitigation action|['rollback-remediation', 'quarantine', 'kill', 'remediate', 'un-quarantine']|
-|threat_id|string|None|True|ID of a threat|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|action|string|None|True|Mitigation action|['rollback-remediation', 'quarantine', 'kill', 'remediate', 'un-quarantine']|None|
+|threat_id|string|None|True|ID of a threat|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -664,9 +769,14 @@ This action is the account name available for this account.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|name|string|None|True|Account Name to validate|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|name|string|None|True|Account Name to validate|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -690,13 +800,18 @@ This trigger is used to get threats.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|resolved|boolean|None|False|Include resolved threats|None|
-|agent_is_active|boolean|None|False|Include agents currently connected to the management console|None|
-|frequency|integer|5|False|Poll frequency in seconds|None|
-|classifications|[]string|None|False|List of classifications to search|None|
-|engines|[]string|None|False|Included engines|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent_is_active|boolean|None|False|Include agents currently connected to the management console|None|None|
+|classifications|[]string|None|False|List of classifications to search|None|None|
+|engines|[]string|None|False|Included engines|None|None|
+|frequency|integer|5|False|Poll frequency in seconds|None|None|
+|resolved|boolean|None|False|Include resolved threats|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -934,6 +1049,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.1 - Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size
 * 1.2.0 - New spec and help.md format for the Extension Library | New actions activities_list, activities_types, agents_abort_scan, agents_connect, agents_decommission, agents_disconnect, agents_fetch_logs, agents_initiate, agents_processes, agents_reload, agents_restart, agents_shutdown, agents_summary, agents_uninstall, apps_by_agent_ids, name_available
 * 1.1.0 - New trigger Get Threats | New actions Mitigate Threat, Mark as Benign, Mark as Threat and Create IOC Threat
 * 1.0.1 - Update to add Blacklist by IoC Hash and Blacklist by Content Hash
