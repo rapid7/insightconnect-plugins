@@ -63,7 +63,7 @@ class CreateAddressObject(komand.Action):
 
         try:
             result = self.connection.post_and_publish(headers, payload, url)
-            return {Output.HOST_OBJECT: komand.helper.clean(result.json())}
+            return {Output.HOST_OBJECT: komand.helper.clean(result.json()), Output.SUCCESS: True}
         except PublishException as e:
             return {Output.HOST_OBJECT: {}, Output.SUCCESS: False, Output.ERROR_MESSAGE: e.get_errors()[0]}
         except PluginException as e:
