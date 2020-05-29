@@ -322,6 +322,8 @@ Example output:
 
 ```
 {
+  "success": true,
+  "error_message": "A host with the IP address or name already exists!",
   "host_object": {
     "uid": "70c9580f-0708-4878-8fdd-98bd4f6d3b44",
     "name": "192.1.2.1",
