@@ -100,14 +100,16 @@ This action is used to check if an IP address is in an address group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|The address object name, IP address, CIDR IP address, or domain to check for|None|MaliciousHost|
+|address|string|None|True|The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, doman) within the address object instead of matching the name|None|198.51.100.100|
+|enable_search|boolean|False|True|When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don't know the Address Object by its name|None|False|
 |group|string|None|True|Name of Address Group to check for address|None|InsightConnect Block Policy|
 
 Example input:
 
 ```
 {
-  "address": "MaliciousHost",
+  "address": "198.51.100.100",
+  "enable_search": false,
   "group": "InsightConnect Block Policy"
 }
 ```
@@ -116,7 +118,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|found|boolean|True|True if the address was found in the address group|
+|address_objects|[]string|True|The names of the address objects that match or contain the address|
+|found|boolean|True|Was address found in group|
 
 Example output:
 
@@ -347,6 +350,7 @@ This action is used to create an address object.
 |----|----|-------|--------|-----------|----|-------|
 |address|string|None|True|The address to assign to the Address Object. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|198.51.100.100|
 |address_object|string|None|False|Optional name to give this address object. If not provided, the name will be the value of address input field|None|MaliciousHost|
+|skip_rfc1918|boolean|True|True|Skip private IP addresses as defined in RFC 1918|None|True|
 |whitelist|[]string|None|False|This list contains a set of network object that should not be blocked. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|["198.51.100.100", "example.com", "192.0.2.0/24"]|
 
 Example input:
@@ -355,6 +359,7 @@ Example input:
 {
   "address": "198.51.100.100",
   "address_object": "MaliciousHost",
+  "skip_rfc1918": true,
   "whitelist": [
     "198.51.100.100",
     "example.com",
@@ -637,6 +642,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.0 - Update Create Address Object action to accept a RFC1918 whitelist | 
 * 3.0.0 - Revise action input/output naming schemes | Add example inputs | New action Remove Address Object from Group
 * 2.0.0 - Simplify the Create Address Object action to auto-detect the input type | Add whitelist safety check to Create Address Object action
 * 1.1.0 - New Action Check if IP is in Address Group

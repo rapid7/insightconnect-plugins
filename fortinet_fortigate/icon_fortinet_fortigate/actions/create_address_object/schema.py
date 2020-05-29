@@ -10,6 +10,7 @@ class Component:
 class Input:
     ADDRESS = "address"
     ADDRESS_OBJECT = "address_object"
+    SKIP_RFC1918 = "skip_rfc1918"
     WHITELIST = "whitelist"
     
 
@@ -36,6 +37,13 @@ class CreateAddressObjectInput(komand.Input):
       "description": "Optional name to give this address object. If not provided, the name will be the value of address input field",
       "order": 2
     },
+    "skip_rfc1918": {
+      "type": "boolean",
+      "title": "Skip RFC 1918 (Private) IP Addresses",
+      "description": "Skip private IP addresses as defined in RFC 1918",
+      "default": true,
+      "order": 4
+    },
     "whitelist": {
       "type": "array",
       "title": "Whitelist",
@@ -47,7 +55,8 @@ class CreateAddressObjectInput(komand.Input):
     }
   },
   "required": [
-    "address"
+    "address",
+    "skip_rfc1918"
   ]
 }
     """)
