@@ -50,18 +50,17 @@ class SetAddressObject(komand.Action):
 
         return False
 
-    # YOU ARE HERE
     def check_if_private(self, address):
-        if re.search('/', address):
+        if re.search('/', address): # CIDR
             return ip_network(address, False).is_private
-        elif re.search('-', address):
+        elif re.search('-', address): # IP Range
             split_ = address.split("-")
             if len(split_) == 2: # If this isn't 2, I'm not sure what the input was
                 return (ip_address(split_[0]).is_private and ip_address(split_[1]).is_private)
-        try:
+        try: # Other
             if ip_address(address).is_private:
                 return True
-        except Exception:
+        except Exception: # This was a domain name
             pass
 
         return False
