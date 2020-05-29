@@ -2,6 +2,7 @@ import komand
 from .schema import CheckIfAddressInGroupInput, CheckIfAddressInGroupOutput, Input, Output, Component
 # Custom imports below
 from komand.exceptions import PluginException
+import ipaddress
 from icon_fortinet_fortigate.util.util import Helpers
 
 
@@ -73,13 +74,25 @@ class CheckIfAddressInGroup(komand.Action):
                                           assistance="This is normally caused by an invalid address group name."
                                                      " Double check that the address group name is correct")
                 for result in results:
+                    # If address_object is a fqdn
                     if result["type"] == "fqdn":
                         if address_to_check == result["fqdn"]:
                             addresses_found.append(result["fqdn"])
                             found = True
+                    # If address_object is a ipmask
                     if result["type"] == "ipmask":
-                        if address_to_check == result["subnet"]:
-                            addresses_found.append(result["subnet"])
+                        # Convert returned address to CIDR
+                        ipmask = result["subnet"].replace(" ", "/")
+                        ipmask = ipaddress.IPv4Network(ipmask)
+
+                        # Convert given address to CIDR address to CIDR
+                        try:
+                            address_to_check = ipaddress.IPv4Network(address_to_check)
+                        except ipaddress.AddressValueError:
+                            pass
+
+                        if address_to_check == ipmask:
+                            addresses_found.append(str(ipmask))
                             found = True
                     # This only looks for ipmasks (IP or CIDR) and FQDN's.
                     # Other address types like mac address are not searchable at present
