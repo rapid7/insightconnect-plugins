@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='carbon_black_response-rapid7-plugin',
-      version='3.1.8',
+      version='3.1.9',
       description='Automate information collection, endpoint isolation and hash blacklisting',
       author='rapid7',
       author_email='',
