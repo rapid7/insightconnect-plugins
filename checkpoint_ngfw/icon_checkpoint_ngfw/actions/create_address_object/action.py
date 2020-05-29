@@ -3,8 +3,8 @@ import ipaddress
 
 import komand
 from komand.exceptions import PluginException
-from icon_checkpoint_ngfw.util.utils import PublishException
 
+from icon_checkpoint_ngfw.util.utils import PublishException
 from icon_checkpoint_ngfw.util.utils import check_if_ip_in_whitelist
 from .schema import CreateAddressObjectInput, CreateAddressObjectOutput, Input, Output, Component
 
@@ -34,17 +34,15 @@ class CreateAddressObject(komand.Action):
                                   assistance=e)
 
         if skip_rfc1918 and is_private:
-            raise PluginException(
-                cause=f"The IP address specified ({user_ip_address}) is private and will be ignored as per "
-                      f"the action configuration.",
-                assistance="Please update your action configuration to accommodate the IP address or ignore "
-                           "this message.")
+            return {Output.HOST_OBJECT: {}, Output.SUCCESS: False,
+                    Output.ERROR_MESSAGE: f"The IP address specified ({user_ip_address}) is private and will "
+                                          f"be ignored as per the action configuration."}
 
         try:
             if len(whitelist) > 0 and check_if_ip_in_whitelist(ip_address=user_ip_address, whitelist=whitelist):
-                raise PluginException(
-                    cause=f"The IP address specified ({user_ip_address}) was found within the whitelist.",
-                    assistance="Please update your whitelist to accommodate the IP address or ignore this message.")
+                return {Output.HOST_OBJECT: {}, Output.SUCCESS: False,
+                        Output.ERROR_MESSAGE: f"The IP address specified ({user_ip_address}) was found within "
+                                              f"the whitelist."}
         except ValueError as e:
             raise PluginException(cause="Invalid entry found in whitelist.",
                                   assistance="Please ensure the entries within the whitelist are valid IP "
@@ -65,7 +63,6 @@ class CreateAddressObject(komand.Action):
 
         try:
             result = self.connection.post_and_publish(headers, payload, url)
+            return {Output.HOST_OBJECT: komand.helper.clean(result.json())}
         except PublishException as e:
-            pass
-
-        return {Output.HOST_OBJECT: komand.helper.clean(result.json())}
+            return {Output.HOST_OBJECT: {}, Output.SUCCESS: False, Output.ERROR_MESSAGE: e.get_errors()[0]}
