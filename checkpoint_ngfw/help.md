@@ -980,6 +980,7 @@ privileges.
 
 # Version History
 
+* 2.0.1 - Revise Create Address Object action output
 * 2.0.0 - New actions Check if Address in Group, Remove Address Object from Group | Rename "Add Host" action to "Create Address Object" and add whitelist support | Move "Discard Sessions" input from individual actions to connection
 * 1.3.0 - Update to add install options to Install Policy
 * 1.2.0 - New action Install Policy | Fix issue where logout could fail | Update to help to improve troubleshooting | Update to `Add Host` action to with color option 

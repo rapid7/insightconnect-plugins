@@ -66,3 +66,7 @@ class CreateAddressObject(komand.Action):
             return {Output.HOST_OBJECT: komand.helper.clean(result.json())}
         except PublishException as e:
             return {Output.HOST_OBJECT: {}, Output.SUCCESS: False, Output.ERROR_MESSAGE: e.get_errors()[0]}
+        except PluginException as e:
+            if "Multiple objects have the same" in e.assistance or "More than one object named" in e.assistance:
+                return {Output.HOST_OBJECT: {}, Output.SUCCESS: False,
+                        Output.ERROR_MESSAGE: "A host with the IP address or name already exists!"}

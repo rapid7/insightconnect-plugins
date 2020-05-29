@@ -4,7 +4,7 @@ products: [insightconnect]
 name: checkpoint_ngfw
 title: Check Point NGFW
 description: Check Point Next Generation Firewalls (NGFW) are trusted by customers for their highest security effectiveness and their ability to keep organizations protected from sophisticated fifth generation cyber-attacks
-version: 2.0.0
+version: 2.0.1
 vendor: rapid7
 support: community
 status: []
