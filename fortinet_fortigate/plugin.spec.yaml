@@ -640,7 +640,7 @@ actions:
         order: 1
       address:
         title: Address
-        description: The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, doman) within the address object instead of matching the name
+        description: The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name
         type: string
         example: 198.51.100.100
         required: true

@@ -27,7 +27,7 @@ class CheckIfAddressInGroupInput(komand.Input):
     "address": {
       "type": "string",
       "title": "Address",
-      "description": "The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, doman) within the address object instead of matching the name",
+      "description": "The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name",
       "order": 2
     },
     "enable_search": {
