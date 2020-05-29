@@ -33,11 +33,7 @@ Example input:
 
 ```
 {
-  "credentials": 
-  {
-    "username":"username", 
-    "password":"password"
-  },
+  "credentials": "{\"username\":\"username\", \"password\":\"password\"}",
   "server": "http://www.example.com",
   "verify_cert": true
 }
@@ -268,6 +264,7 @@ In this case, we will strip the /32 from the end and check the IP against the wh
 |address|string|None|True|The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com google.com|None|1.1.1.1|
 |address_object|string|None|True|The name of the address object|None|Blocked host|
 |description|string|None|False|A description for the address object|None|Blocked host from Insight Connect|
+|skip_rfc1918|boolean|True|True|Skip private IP addresses as defined in RFC 1918|None|True|
 |tags|string|None|False|Tags for the address object. Use commas to separate multiple tags|None|malware|
 |whitelist|[]string|None|False|This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)|None|["198.51.100.100", "192.0.2.0/24", "example.com"]|
 
@@ -278,6 +275,7 @@ Example input:
   "address": "1.1.1.1",
   "address_object": "Blocked host",
   "description": "Blocked host from Insight Connect",
+  "skip_rfc1918": true,
   "tags": "malware",
   "whitelist": [
     "198.51.100.100",

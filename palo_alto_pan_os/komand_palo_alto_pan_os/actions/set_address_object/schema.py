@@ -11,6 +11,7 @@ class Input:
     ADDRESS = "address"
     ADDRESS_OBJECT = "address_object"
     DESCRIPTION = "description"
+    SKIP_RFC1918 = "skip_rfc1918"
     TAGS = "tags"
     WHITELIST = "whitelist"
     
@@ -45,6 +46,13 @@ class SetAddressObjectInput(komand.Input):
       "description": "A description for the address object",
       "order": 3
     },
+    "skip_rfc1918": {
+      "type": "boolean",
+      "title": "Skip RFC 1918 (Private) IP Addresses",
+      "description": "Skip private IP addresses as defined in RFC 1918",
+      "default": true,
+      "order": 5
+    },
     "tags": {
       "type": "string",
       "title": "Tags",
@@ -58,12 +66,13 @@ class SetAddressObjectInput(komand.Input):
       "items": {
         "type": "string"
       },
-      "order": 5
+      "order": 6
     }
   },
   "required": [
     "address",
-    "address_object"
+    "address_object",
+    "skip_rfc1918"
   ]
 }
     """)

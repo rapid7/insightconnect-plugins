@@ -50,6 +50,22 @@ class SetAddressObject(komand.Action):
 
         return False
 
+    # YOU ARE HERE
+    def check_if_private(self, address):
+        if re.search('/', address):
+            return ip_network(address, False).is_private
+        elif re.search('-', address):
+            split_ = address.split("-")
+            if len(split_) == 2: # If this isn't 2, I'm not sure what the input was
+                return (ip_address(split_[0]).is_private and ip_address(split_[1]).is_private)
+        try:
+            if ip_address(address).is_private:
+                return True
+        except Exception:
+            pass
+
+        return False
+
     def run(self, params={}):
         address = params.get(Input.ADDRESS)
         # object_type = params.get(Input.TYPE)
@@ -57,6 +73,7 @@ class SetAddressObject(komand.Action):
         description = params.get(Input.DESCRIPTION)
         tag_list = params.get(Input.TAGS)
         whitelist = params.get(Input.WHITELIST)
+        skip_private = params.get(Input.SKIP_RFC1918)
 
         object_type = self.determine_address_type(address)
 
@@ -77,6 +94,15 @@ class SetAddressObject(komand.Action):
         - fqdn        
         """
         # object_type = object_type.lower()
+        if skip_private:
+            if object_type != "fqdn":
+               if self.check_if_private(address):
+                   return {
+                       Output.MESSAGE: "Address object was RFC 1918 (private).",
+                       Output.CODE: "",
+                       Output.STATUS: "error"
+                   }
+
 
         if object_type != "ip-range":
             if whitelist:
