@@ -185,11 +185,6 @@ This action is used to get a policy.
 Example input:
 
 ```
-{
-  "device_name": "localhost.localdomain",
-  "policy_name": "InsightConnect Block Policy",
-  "virtual_system": "vsys1"
-}
 ```
 
 ##### Output
