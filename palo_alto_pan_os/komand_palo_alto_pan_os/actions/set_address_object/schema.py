@@ -50,7 +50,7 @@ class SetAddressObjectInput(komand.Input):
       "type": "boolean",
       "title": "Skip RFC 1918 (Private) IP Addresses",
       "description": "Skip private IP addresses as defined in RFC 1918",
-      "default": true,
+      "default": false,
       "order": 5
     },
     "tags": {

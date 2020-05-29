@@ -644,7 +644,7 @@ actions:
         type: boolean
         example: true
         required: true
-        default: true
+        default: false
       whitelist:
         title: Whitelist
         description: This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)
