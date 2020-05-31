@@ -24,14 +24,17 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and password|None|{“username”:”user@example.com”, “password”:”mypassword”}|
+|credentials|credential_username_password|None|True|Username and password|None|{"username": "user@example.com", "password": "mypassword"}|
 |url|string|https://usea1-partners.sentinelone.net/|True|URL and endpoint of SentinelOne instance.|None|https://usea1-partners.sentinelone.net/|
 
 Example input:
 
 ```
 {
-  "credentials": "{“username”:”user@example.com”, “password”:”mypassword”}",
+  "credentials": {
+    "username": "user@example.com",
+    "password": "mypassword
+  },
   "url": "https://usea1-partners.sentinelone.net/"
 }
 ```

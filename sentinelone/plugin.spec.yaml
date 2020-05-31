@@ -519,7 +519,7 @@ connection:
     title: Credentials
     description: Username and password
     required: true
-    example: '{“username”:”user@example.com”, “password”:”mypassword”}'
+    example: '{"username": "user@example.com", "password": "mypassword"}'
   url:
     title: URL
     description: URL and endpoint of SentinelOne instance.
