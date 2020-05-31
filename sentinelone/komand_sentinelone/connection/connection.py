@@ -9,6 +9,9 @@ class Connection(komand.Connection):
 
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
+        self.username = None
+        self.password = None
+        self.url = None
 
     def connect(self, params):
         """
@@ -26,12 +29,22 @@ class Connection(komand.Connection):
         self.password = params.get(Input.CREDENTIALS).get('password')
         self.url = params.get(Input.URL)
 
+        index = self.url.find("/", self._get_start_index(self.url))
+        if index >= 0:
+            self.url = self.url[:index]
+
         # Add trailing slash if needed
         if not self.url.endswith("/"):
             self.url = self.url + "/"
 
         token = self.get_auth_token(self.url, self.username, self.password)
         self.logger.info("Token: " + "*************" + str(token[len(token) - 5:len(token)]))
+
+    @staticmethod
+    def _get_start_index(url):
+        if url.startswith("http://") or url.startswith("https://"):
+            return 9
+        return 0
 
     def get_auth_token(self, url, username, password):
         # TODO: Need to make a token timeout here for 7 days
@@ -43,10 +56,15 @@ class Connection(komand.Connection):
         }
 
         r = requests.post(final_url, json=auth_headers)
+        if r.status_code == 401:
+            raise ConnectionTestException(
+                cause="Could not authorize with SentinelOne instance at: " + final_url,
+                assistance="Check if you login with e-mail. Response was: " + r.text
+            )
         if r.status_code is not 200:
             raise ConnectionTestException(
                 cause="Could not authorize with SentinelOne instance at: " + final_url,
-                assistance="Repsonse was: " + r.text
+                assistance="Response was: " + r.text
             )
 
         self.token = r.json().get('data').get('token')
@@ -139,11 +157,11 @@ class Connection(komand.Connection):
         self.logger.info("Using endpoint: " + endpoint)
 
         headers = self.make_token_header()
-        
+
         # Note: AgentID according to the API is optional, however, api will throw error if omitted
         body = {
             "data": [{
-                "hash": hash_value, 
+                "hash": hash_value,
                 "agentId": agent_id
             }]
         }
@@ -156,8 +174,8 @@ class Connection(komand.Connection):
         return results.json()
 
     def create_ioc_threat(
-        self, hash_, group_id, path, agent_id,
-        annotation=None, annotation_url=None
+            self, hash_, group_id, path, agent_id,
+            annotation=None, annotation_url=None
     ):
         body = {
             "data": [{

@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 1.2.1
+version: 1.2.2
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
@@ -519,12 +519,14 @@ connection:
     title: Credentials
     description: Username and password
     required: true
+    example: '{“username”:”user@example.com”, “password”:”mypassword”}'
   url:
     title: URL
-    description: 'URL and endpoint of SentinelOne instance. For example: https://usea1-partners.sentinelone.net/'
+    description: URL and endpoint of SentinelOne instance.
     default: https://usea1-partners.sentinelone.net/
     type: string
     required: true
+    example: https://usea1-partners.sentinelone.net/
 actions:
   get_threat_summary:
     title: Get Threat Summary
