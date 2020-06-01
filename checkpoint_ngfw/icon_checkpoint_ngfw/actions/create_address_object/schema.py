@@ -16,7 +16,9 @@ class Input:
     
 
 class Output:
+    ERROR_MESSAGE = "error_message"
     HOST_OBJECT = "host_object"
+    SUCCESS = "success"
     
 
 class CreateAddressObjectInput(komand.Input):
@@ -117,13 +119,28 @@ class CreateAddressObjectOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "error_message": {
+      "type": "string",
+      "title": "Error Message",
+      "description": "The cause of the error (if the action fails)",
+      "order": 3
+    },
     "host_object": {
       "$ref": "#/definitions/host_object",
       "title": "Host",
       "description": "Information about the host object that was added",
       "order": 1
+    },
+    "success": {
+      "type": "boolean",
+      "title": "Success",
+      "description": "Whether or not Check Point could successfully create the address object",
+      "order": 2
     }
   },
+  "required": [
+    "success"
+  ],
   "definitions": {
     "creation_time_type": {
       "type": "object",
