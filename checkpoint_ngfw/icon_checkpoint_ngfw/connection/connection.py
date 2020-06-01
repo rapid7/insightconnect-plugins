@@ -63,7 +63,7 @@ class Connection(komand.Connection):
             try:
                 raise PublishException.from_json_response(json_=request.json())
             except JSONDecodeError:
-                raise PluginException(cause="There was problem publishing to Check Point NGFW.",
+                raise PluginException(cause="There was a problem publishing to Check Point NGFW.",
                                       assistance=request.text,
                                       data=e)
 
