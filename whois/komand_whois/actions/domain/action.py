@@ -1,11 +1,10 @@
 import insightconnect_plugin_runtime
-from .schema import DomainInput, DomainOutput, Input, Output
+from .schema import DomainInput, DomainOutput, Input
 
 # Custom imports below
 import whois
 import datetime
 from insightconnect_plugin_runtime.exceptions import PluginException
-
 
 class Domain(insightconnect_plugin_runtime.Action):
 
@@ -25,7 +24,7 @@ class Domain(insightconnect_plugin_runtime.Action):
                                   assistance="Ensure the domain is not prefixed with a protocol.")
 
         try:
-            lookup_results = whois.query(domain, ignore_returncode=1)  # ignore_returncode required for plugin
+            lookup_results = whois.query(domain, ignore_returncode=1)  # ignore_return code required for plugin
         except Exception as e:
             self.logger.error("Error occurred: %s" % e)
             raise e

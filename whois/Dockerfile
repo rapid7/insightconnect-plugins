@@ -7,14 +7,17 @@ ENV SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
 ENV SSL_CERT_DIR /etc/ssl/certs
 ENV REQUESTS_CA_BUNDLE  /etc/ssl/certs/ca-certificates.crt
 
-ADD ./whois.conf /etc/whois.conf
+# ADD ./whois.conf /etc/whois.conf
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD . /python/src
 
 WORKDIR /python/src
+
 # Add any package dependencies here
-RUN apt-get update && apt-get install -y whois git
-RUN pip install git+https://github.com/komand/python-whois.git@0.4.2
+# Removed our fork in 2.0.2
+RUN apt-get update && apt-get install -y whois
+# git
+# RUN pip install git+https://github.com/komand/python-whois.git@0.4.2
 
 # End package dependencies
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
