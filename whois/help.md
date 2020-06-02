@@ -64,23 +64,19 @@ Example input:
 Example output:
 
 ```
-
 {
-  "registrar_whois_server": "whois.markmonitor.com",
-  "registry_domain_id": "2138514_domain_com-vrsn",
-  "last_updated": "2011-07-20T16:55:31",
-  "registrar_iana_id": "292",
+  "name": "rapid7.com",
   "registrar": "MarkMonitor Inc.",
-  "dnssec": "unsigned",
-  "domain_status": ["clientdeleteprohibited https://icann.org/epp#clientdeleteprohibited", "clienttransferprohibited https://icann.org/epp#clienttransferprohibited", "clientupdateprohibited https://icann.org/epp#clientupdateprohibited", "serverdeleteprohibited https://icann.org/epp#serverdeleteprohibited", "servertransferprohibited https://icann.org/epp#servertransferprohibited", "serverupdateprohibited https://icann.org/epp#serverupdateprohibited"],
-  "registrar_url": "http://www.markmonitor.com",
-  "creation_date": "1997-09-15T04:00:00",
-  "name_servers": ["ns2.google.com", "ns3.google.com", "ns1.google.com", "ns4.google.com"],
-  "registrar_abuse_contact_email": "user@example.com",
-  "registrar_abuse_contact_phone": "+1.2083895740",
-  "name": "google.com"
+  "creation_date": "2000-05-25 19:00:54",
+  "expiration_date": "2021-05-25 19:00:54",
+  "status": "clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited",
+  "name_servers": [
+    "ns-1653.awsdns-14.co.uk",
+    "ns-439.awsdns-54.com",
+    "ns-1390.awsdns-45.org",
+    "ns-739.awsdns-28.net"
+  ]
 }
-
 ```
 
 #### Address Lookup
@@ -126,27 +122,25 @@ Example input:
 Example output:
 
 ```
-
 {
-  "address": "1025 Eldorado Blvd.",
-  "cidr": "8.0.0.0/8",
-  "city": "Broomfield",
+  "netrange": "54.240.128.0 - 54.240.191.255",
+  "cidr": "54.240.128.0/18",
+  "netname": "AMAZO-CF1",
+  "nettype": "Reallocated",
+  "organization": "A100 US LLC (UL-42)",
+  "regdate": "2013-01-30",
+  "update": "2014-07-01",
+  "orgname": "A100 US LLC",
+  "address": "1919 8th Ave",
+  "city": "Seattle",
+  "state": "WA",
+  "postal": "98109",
   "country": "US",
-  "netname": "LVLT-ORG-8-8",
-  "netrange": "8.0.0.0 - 8.255.255.255",
-  "nettype": "Direct Allocation",
-  "org_abuse_email": "user@example.com",
-  "org_abuse_phone": "+1-877-453-8353 ",
-  "org_tech_email": "user@example.com",
-  "org_tech_phone": "+1-877-453-8353 ",
-  "organization": "Level 3 Communications, Inc. (LVLT)",
-  "orgname": "Level 3 Communications, Inc.",
-  "postal": "80021",
-  "regdate": "1992-12-01",
-  "state": "CO",
-  "update": "2012-02-24"
+  "org_tech_phone": "+1-206-266-4064",
+  "org_tech_email": "amzn-noc-contact@amazon.com",
+  "org_abuse_phone": "+1-206-266-4064",
+  "org_abuse_email": "abuse@amazonaws.com"
 }
-
 ```
 
 ### Triggers

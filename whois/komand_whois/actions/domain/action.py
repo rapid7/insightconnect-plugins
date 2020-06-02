@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import DomainInput, DomainOutput, Input
+from .schema import DomainInput, DomainOutput, Input, Output
 
 # Custom imports below
 import whois
