@@ -33,6 +33,18 @@ The connection configuration accepts the following parameters:
 |secret_key|credential_secret_key|None|True|The application secret key|None|FgHrtydiP4TynI+rTZF42Qu0FtGuhJtuNM5bDh82goJQHed9kJZ5t/ORwGnI5r2hkl/bzCosZ+KVapJFeaf3Yw==|
 |url|string|None|True|The URL for the Mimecast server|None|https://api.mimecast.com|
 
+Example input:
+
+```
+{
+  "access_key": "eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi",
+  "app_id": "78d2e4b1-8cc2-4806-nt79-6ef332a47374",
+  "app_key": "475x54c6-4f61-4fab-8be7-a0710f3859e3",
+  "secret_key": "FgHrtydiP4TynI+rTZF42Qu0FtGuhJtuNM5bDh82goJQHed9kJZ5t/ORwGnI5r2hkl/bzCosZ+KVapJFeaf3Yw==",
+  "url": "https://api.mimecast.com"
+}
+```
+
 ## Technical Details
 
 ### Actions
@@ -58,12 +70,12 @@ Example input:
 ```
 {
   "action": "block",
-  "comment": "test",
-  "disable_log_click": false,
-  "disable_rewrite": false,
+  "comment": "i'm blocking this because virustotal said it was malicious",
+  "disable_log_click": "Flase",
+  "disable_rewrite": true,
   "disable_user_awareness": false,
   "match_type": "explicit",
-  "url": "http://rapid7.com"
+  "url": "https://rapid7.com"
 }
 ```
 
@@ -115,13 +127,12 @@ Example input:
 
 ```
 {
-  "action": "none",
-  "disable_log_click": "true",
-  "disable_rewrite": "false",
-  "disable_user_awareness": "ture",
+  "action": "block",
+  "disable_log_click": true,
+  "disable_rewrite": false,
+  "disable_user_awareness": false,
   "domain": "rapid7.com",
-  "id": "",
-  "match_type": "explicit",
+  "match_type": "domain",
   "scheme": "http"
 }
 ```
@@ -255,14 +266,14 @@ Example input:
 
 ```
 {
-  "description": "komand test",
+  "description": "A description",
   "from_part": "envelope_from",
-  "from_type": "email_domain",
-  "from_value": "rapid7.com",
+  "from_type": "internal_addresses",
+  "from_value": "user@example.com",
   "option": "block_sender",
   "source_ips": "198.51.100.0/24",
   "to_type": "everyone",
-  "to_value": "example.com"
+  "to_value": "user@example.com"
 }
 ```
 
@@ -434,8 +445,7 @@ Example input:
 
 ```
 {
-
-  "query": "exam.*",
+  "query": "mygroup",
   "source": "cloud"
 }
 ```
@@ -491,10 +501,13 @@ Example input:
 
 ```
 {
-  "from": "2019-04-23T11:00:00+0000",
-  "route": "all",
-  "scan_result": "all",
-  "to": "2019-04-28T11:00:00+0000"
+  "from": "2018-11-22T14:49:18+0000",
+  "max_pages": 10,
+  "page_size": 10,
+  "route": "inbound",
+  "scan_result": "malicious",
+  "to": "2018-11-22T14:49:18+0000",
+  "url_to_filter": "exam.*"
 }
 ```
 
@@ -617,6 +630,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Version History
 
+* 4.1.1 - Fix bug where the connection test would sometimes pass even with invalid credentials
 * 4.1.0 - Update Get TTP URL Logs action to use pagination
 * 4.0.1 - Add example inputs
 * 4.0.0 - Update Get TTP URL Logs to allow for better URL filtering
