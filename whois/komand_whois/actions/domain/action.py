@@ -36,13 +36,13 @@ class Domain(insightconnect_plugin_runtime.Action):
         # convert datetimes to string
         for key in result_dict.keys():
             value = result_dict.get(key)
-            if type(value) == datetime.datetime:
+            if isinstance(value, datetime.datetime):
                 result_dict[key] = str(value)
 
         # convert set to list
         for key in result_dict.keys():
             value = result_dict.get(key)
-            if type(value) == set:
+            if isinstance(value, set):
                 result_dict[key] = list(value)
 
         return result_dict
