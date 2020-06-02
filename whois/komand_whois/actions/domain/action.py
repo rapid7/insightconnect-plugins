@@ -37,7 +37,7 @@ class Domain(insightconnect_plugin_runtime.Action):
         # convert datetimes to string
         for key in result_dict.keys():
             value = result_dict.get(key)
-            if type(value) == datetime.datetime:
+            if isinstance(value, datetime.datetime):
                 result_dict[key] = str(value)
 
         # convert set to list
