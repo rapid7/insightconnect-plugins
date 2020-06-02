@@ -3,6 +3,7 @@ from .schema import DomainInput, DomainOutput, Input
 
 # Custom imports below
 import whois
+import datetime
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -27,12 +28,25 @@ class Domain(insightconnect_plugin_runtime.Action):
             lookup_results = whois.query(domain, ignore_returncode=1)  # ignore_returncode required for plugin
         except Exception as e:
             self.logger.error("Error occurred: %s" % e)
-            raise
-        else:
-            serializable_results = lookup_results.get_json_serializable()
-            serializable_results = insightconnect_plugin_runtime.helper.clean_dict(serializable_results)
+            raise e
 
-            return serializable_results
+        result_dict = insightconnect_plugin_runtime.helper.clean_dict(lookup_results.__dict__)
+
+        # Type conversions for the new version of whois.
+
+        # convert datetimes to string
+        for key in result_dict.keys():
+            value = result_dict.get(key)
+            if type(value) == datetime.datetime:
+                result_dict[key] = str(value)
+
+        # convert set to list
+        for key in result_dict.keys():
+            value = result_dict.get(key)
+            if type(value) == set:
+                result_dict[key] = list(value)
+
+        return result_dict
 
     def is_valid_domain(self, domain):
         if "://" in domain:
