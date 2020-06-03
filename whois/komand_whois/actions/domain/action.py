@@ -27,7 +27,8 @@ class Domain(insightconnect_plugin_runtime.Action):
             lookup_results = whois.query(domain, ignore_returncode=1)  # ignore_return code required for plugin
         except Exception as e:
             self.logger.error("Error occurred: %s" % e)
-            raise e
+            raise PluginException(cause="The whois command failed.",
+                                  assistance=f"{e}")
 
         result_dict = insightconnect_plugin_runtime.helper.clean_dict(lookup_results.__dict__)
 

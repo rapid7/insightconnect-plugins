@@ -137,9 +137,9 @@ Example output:
   "postal": "98109",
   "country": "US",
   "org_tech_phone": "+1-206-266-4064",
-  "org_tech_email": "amzn-noc-contact@amazon.com",
+  "org_tech_email": "user@example.com",
   "org_abuse_phone": "+1-206-266-4064",
-  "org_abuse_email": "abuse@amazonaws.com"
+  "org_abuse_email": "user@example.com"
 }
 ```
 
