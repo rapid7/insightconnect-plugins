@@ -29,16 +29,6 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
-{
-  "application_id": "xxxxxxx-xxxxxx-xxxxx-xxxx",
-  "application_secret": {
-    "secretKey": "xxxxxxx"
-  },
-  "directory_id": "xxxx-xxxx-xxxx-xxxx-xxx",
-  "username_password": {
-    "password": "password",
-    "username": "user@example.com"
-}
 ```
 
 ## Technical Details
@@ -62,11 +52,6 @@ Regular expressions used by this action are Python specific.
 Example input:
 
 ```
-{
-  "channel_name": "ICON Test Channel",
-  "message": "Hello!",
-  "team_name": "ICON-Test-Everyone"
-}
 ```
 
 ##### Output
@@ -121,11 +106,6 @@ This action is used to send HTML as a message.
 Example input:
 
 ```
-{
-  "channel_name": "ICON Test Channel",
-  "message_content": "<b>Hello!</b>",
-  "team_name": "ICON-Test-Everyone"
-}
 ```
 
 ##### Output
@@ -177,6 +157,11 @@ This action sends a message using the GUID for the team and channel. This is mor
 |is_html|boolean|None|True|Is the message HTML|None|None|
 |message|string|None|True|Message to send|None|None|
 |team_guid|string|None|True|Team GUID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -249,9 +234,6 @@ Regular expressions used by this action are Python specific.
 Example input:
 
 ```
-{
-  "team_name": "Komand-Test-Everyone"
-}
 ```
 
 ##### Output
@@ -316,10 +298,6 @@ Regular expressions used by this action are Python specific.
 Example input:
 
 ```
-{
-  "channel_name": "Komand Test Channel",
-  "team_name": "Komand-Test-Everyone"
-}
 ```
 
 ##### Output
@@ -358,10 +336,6 @@ This action is used to add a member to a team.
 Example input:
 
 ```
-{
-  "member_login": "user@example.com",
-  "team_name": "ICON-Test-Everyone"
-}
 ```
 
 ##### Output
@@ -393,11 +367,6 @@ This action is used to add a channel to a team.
 Example input:
 
 ```
-{
-  "channel_description": "This is a test channel.",
-  "channel_name": "test_channel",
-  "team_name": "ICON-Test-Everyone"
-}
 ```
 
 ##### Output
@@ -428,10 +397,6 @@ This action is used to remove a channel from a team.
 Example input:
 
 ```
-{
-  "channel_name": "test_channel",
-  "team_name": "ICON-Test-Everyone"
-}
 ```
 
 ##### Output
@@ -462,10 +427,6 @@ This action is used to remove a member from a team.
 Example input:
 
 ```
-{
-  "member_login": "user@example.com",
-  "team_name": "Komand-Test-Everyone"
-}
 ```
 
 ##### Output
@@ -500,12 +461,6 @@ This action is used to create a group in Azure and enable it for Microsoft Teams
 Example input:
 
 ```
-  "group_description": "A test group",
-  "group_name": "test_group",
-  "mail_enabled": false,
-  "mail_nickname": "TestGroup",
-  "members": "['user@example.com']",
-  "owners": "['user@example.com']"
 ```
 
 ##### Output
@@ -558,9 +513,6 @@ This action is used to delete a team and the associated group from Azure.
 Example input:
 
 ```
-{
-  "team_name": "Test Team"
-}
 ```
 
 ##### Output
@@ -596,11 +548,6 @@ Regular expressions used by this trigger are Python specific.
 Example input:
 
 ```
-{
-  "channel_name": "ICON Test Channel",
-  "message_content": "[Tt]est",
-  "team_name": "ICON-Test-Everyone"
-}
 ```
 
 ##### Output
@@ -650,6 +597,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.4 - Fix issue where a message that only had an image in it could break the 'New Message Received' trigger
 * 2.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/microsoft-teams)
 * 2.0.2 - Fix issue where unexpected HTML messages would not trigger workflows
 * 2.0.1 - Update to Get Teams action to support more than 20 teams
