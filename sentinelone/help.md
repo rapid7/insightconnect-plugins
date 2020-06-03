@@ -792,6 +792,42 @@ Example output:
 }
 ```
 
+#### Blacklist
+
+This action is used to create or delete a blacklist item for a SHA1 hash. Block hash only for sites that user have permission not for tenant
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|blacklist_state|boolean|None|True|True to create blacklist hash, false to unblacklist hash|None|True|
+|description|string|Hash Blacklisted from InsightConnect|False|Description for why the hash is blacklisted|None|Hash Blacklisted from InsightConnect|
+|hash|string|None|True|Create a blacklist item from a SHA1 hash|None|3395856ce81f2b7382dee72602f798b642f14140|
+
+Example input:
+
+```
+{
+  "blacklist_state": true,
+  "description": "Hash Blacklisted from InsightConnect",
+  "hash": "3395856ce81f2b7382dee72602f798b642f14140"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Return true if blacklist item was created or deleted|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 ### Triggers
 
 #### Get Threats
@@ -1049,6 +1085,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.0 - Add new action Create Blacklist Item
 * 1.2.1 - Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size
 * 1.2.0 - New spec and help.md format for the Extension Library | New actions activities_list, activities_types, agents_abort_scan, agents_connect, agents_decommission, agents_disconnect, agents_fetch_logs, agents_initiate, agents_processes, agents_reload, agents_restart, agents_shutdown, agents_summary, agents_uninstall, apps_by_agent_ids, name_available
 * 1.1.0 - New trigger Get Threats | New actions Mitigate Threat, Mark as Benign, Mark as Threat and Create IOC Threat

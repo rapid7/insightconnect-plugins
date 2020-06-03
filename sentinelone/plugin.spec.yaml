@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 1.2.1
+version: 1.3.0
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
@@ -1110,6 +1110,35 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: false
+  blacklist:
+    title: Blacklist
+    description: Create or delete a blacklist item for a SHA1 hash. Block hash only for sites that user have permission not for tenant
+    input:
+      hash:
+        title: Hash
+        description: Create a blacklist item from a SHA1 hash
+        type: string
+        required: true
+        example: "3395856ce81f2b7382dee72602f798b642f14140"
+      description:
+        title: Description
+        description: Description for why the hash is blacklisted
+        type: string
+        default: "Hash Blacklisted from InsightConnect"
+        required: false
+        example: "Hash Blacklisted from InsightConnect"
+      blacklist_state:
+        title: Blacklist State
+        description: True to create blacklist hash, false to unblacklist hash
+        type: boolean
+        required: true
+        example: true
+    output:
+      success:
+        title: Success
+        description: Return true if blacklist item was created or deleted
+        type: boolean
+        required: true
 
 triggers:
   get_threats:

@@ -1,7 +1,7 @@
 {
-	"spec": "4094e42abd2732af79368a84490ba2c8",
-	"manifest": "149aab6b3b39ddf39800457e188b1202",
-	"setup": "373941970f3783a1f031bcc6465b4e3f",
+	"spec": "a1622a9089ab3221c4374500a92092f4",
+	"manifest": "b951ecb5aa9049a7afe2355d44d3742e",
+	"setup": "6e56370218bebca04894fd1331ce99dc",
 	"schemas": [
 		{
 			"identifier": "activities_list/schema.py",
@@ -62,6 +62,10 @@
 		{
 			"identifier": "apps_by_agent_ids/schema.py",
 			"hash": "f1a871cbbcdf7e1730215961e3b2ac99"
+		},
+		{
+			"identifier": "blacklist/schema.py",
+			"hash": "8633e2ce553a6cd0cdda6199512037fc"
 		},
 		{
 			"identifier": "blacklist_by_content_hash/schema.py",

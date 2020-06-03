@@ -1,7 +1,7 @@
 import komand
 import requests
 from .schema import ConnectionSchema, Input
-from komand.exceptions import ConnectionTestException
+from komand.exceptions import ConnectionTestException, PluginException
 # from komand_sentinelone.util import api
 
 
@@ -214,6 +214,50 @@ class Connection(komand.Connection):
 
     def get_threats(self, params):
         return self._call_api("GET", "threats", params=params)
+
+    def create_blacklist_item(self, blacklist_hash: str, description: str):
+        sites = self._call_api("GET", "sites").get("data", {}).get("sites", [])
+        site_ids = []
+        for site in sites:
+            site_ids.append(site.get("id"))
+        errors = []
+        for os_type in ["linux", "windows", "macos"]:
+            errors.extend(self._call_api("POST", "restrictions", json={
+                "data": {
+                    "value": blacklist_hash,
+                    "type": "black_hash",
+                    "osType": os_type,
+                    "description": description
+                },
+                "filter": {
+                    "siteIds": site_ids
+                }
+            }).get("errors", []))
+
+        return errors
+
+    def get_item_ids_by_hash(self, blacklist_hash: str):
+        response = self._call_api("GET", "restrictions", params={
+            "type": "black_hash",
+            "value": blacklist_hash
+        })
+
+        if len(response.get("errors", [])) == 0:
+            ids = []
+            restrictions = response.get("data", [])
+            for restriction in restrictions:
+                ids.append(restriction.get("id"))
+            return ids
+
+        raise PluginException(cause="Server response error.", assistance="Hash not exist. Please check if hash exist.")
+
+    def delete_blacklist_item_by_hash(self, item_ids: str):
+        return self._call_api("DELETE", "restrictions", json={
+          "data": {
+            "type": "black_hash",
+            "ids": item_ids
+          }
+        })
 
     def _call_api(self, method, endpoint, json=None, params=None):
         endpoint = self.url + "web/api/v2.0/" + endpoint
