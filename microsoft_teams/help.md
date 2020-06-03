@@ -178,11 +178,6 @@ This action sends a message using the GUID for the team and channel. This is mor
 |message|string|None|True|Message to send|None|None|
 |team_guid|string|None|True|Team GUID|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -321,6 +316,10 @@ Regular expressions used by this action are Python specific.
 Example input:
 
 ```
+{
+  "channel_name": "Komand Test Channel",
+  "team_name": "Komand-Test-Everyone"
+}
 ```
 
 ##### Output
