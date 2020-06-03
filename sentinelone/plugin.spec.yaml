@@ -526,7 +526,7 @@ connection:
     default: https://usea1-partners.sentinelone.net/
     type: string
     required: true
-    example: https://usea1-partners.sentinelone.net/
+    example: https://example.sentinelone.com
 actions:
   get_threat_summary:
     title: Get Threat Summary

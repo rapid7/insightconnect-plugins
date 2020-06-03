@@ -2,6 +2,8 @@ import komand
 import requests
 from .schema import ConnectionSchema, Input
 from komand.exceptions import ConnectionTestException
+
+
 # from komand_sentinelone.util import api
 
 
@@ -42,7 +44,7 @@ class Connection(komand.Connection):
 
     @staticmethod
     def _get_start_index(url):
-        if url.startswith("http://") or url.startswith("https://"):
+        if url.startswith("https://"):
             return 9
         return 0
 
@@ -59,7 +61,7 @@ class Connection(komand.Connection):
         if r.status_code == 401:
             raise ConnectionTestException(
                 cause="Could not authorize with SentinelOne instance at: " + final_url,
-                assistance="Check if you login with e-mail. Response was: " + r.text
+                assistance="Your 'username' in connection configuration should be an e-mail address. Check if your e-mail address is correct. Response was: " + r.text
             )
         if r.status_code is not 200:
             raise ConnectionTestException(
