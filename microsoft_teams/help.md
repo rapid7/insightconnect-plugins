@@ -29,6 +29,16 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
+{
+  "application_id": "xxxxxxx-xxxxxx-xxxxx-xxxx",
+  "application_secret": {
+    "secretKey": "xxxxxxx"
+  },
+  "directory_id": "xxxx-xxxx-xxxx-xxxx-xxx",
+  "username_password": {
+    "password": "password",
+    "username": "user@example.com"
+}
 ```
 
 ## Technical Details
@@ -52,6 +62,11 @@ Regular expressions used by this action are Python specific.
 Example input:
 
 ```
+{
+  "channel_name": "ICON Test Channel",
+  "message": "Hello!",
+  "team_name": "ICON-Test-Everyone"
+}
 ```
 
 ##### Output
@@ -106,6 +121,11 @@ This action is used to send HTML as a message.
 Example input:
 
 ```
+{
+  "channel_name": "ICON Test Channel",
+  "message_content": "<b>Hello!</b>",
+  "team_name": "ICON-Test-Everyone"
+}
 ```
 
 ##### Output
@@ -234,6 +254,9 @@ Regular expressions used by this action are Python specific.
 Example input:
 
 ```
+{
+  "team_name": "Komand-Test-Everyone"
+}
 ```
 
 ##### Output
@@ -336,6 +359,10 @@ This action is used to add a member to a team.
 Example input:
 
 ```
+{
+  "member_login": "user@example.com",
+  "team_name": "ICON-Test-Everyone"
+}
 ```
 
 ##### Output
@@ -397,6 +424,10 @@ This action is used to remove a channel from a team.
 Example input:
 
 ```
+{
+  "channel_name": "test_channel",
+  "team_name": "ICON-Test-Everyone"
+}
 ```
 
 ##### Output
@@ -427,6 +458,10 @@ This action is used to remove a member from a team.
 Example input:
 
 ```
+{
+  "member_login": "user@example.com",
+  "team_name": "Komand-Test-Everyone"
+}
 ```
 
 ##### Output
@@ -461,6 +496,14 @@ This action is used to create a group in Azure and enable it for Microsoft Teams
 Example input:
 
 ```
+{
+  "group_description": "A test group",
+  "group_name": "test_group",
+  "mail_enabled": false,
+  "mail_nickname": "TestGroup",
+  "members": "['user@example.com']",
+  "owners": "['user@example.com']"
+}
 ```
 
 ##### Output
@@ -513,6 +556,9 @@ This action is used to delete a team and the associated group from Azure.
 Example input:
 
 ```
+{
+  "team_name": "Test Team"
+}
 ```
 
 ##### Output
@@ -548,6 +594,11 @@ Regular expressions used by this trigger are Python specific.
 Example input:
 
 ```
+{
+  "channel_name": "ICON Test Channel",
+  "message_content": "[Tt]est",
+  "team_name": "ICON-Test-Everyone"
+}
 ```
 
 ##### Output
