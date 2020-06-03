@@ -393,6 +393,11 @@ This action is used to add a channel to a team.
 Example input:
 
 ```
+{
+  "channel_description": "This is a test channel.",
+  "channel_name": "test_channel",
+  "team_name": "ICON-Test-Everyone"
+}
 ```
 
 ##### Output
