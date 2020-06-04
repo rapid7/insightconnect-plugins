@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Create or delete a blacklist item for a SHA1 hash. Block hash only for sites that user have permission not for tenant"
+    DESCRIPTION = "Blacklist and unblacklist a SHA1 hash"
 
 
 class Input:
