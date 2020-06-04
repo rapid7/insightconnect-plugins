@@ -850,7 +850,7 @@ Example output:
 
 #### Blacklist
 
-This action is used to create or delete a blacklist item for a SHA1 hash. Block hash only for sites that user have permission not for tenant
+This action is used to create or delete a blacklist item for a SHA1 hash. The blacklist is attempted for Linux, Windows, and MacOS operating systems and for all sites that the user has permission to manage.
 
 ##### Input
 
