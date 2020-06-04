@@ -1143,7 +1143,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.3.0 - Add new action Create Blacklist Item
+* 1.3.0 - Add new action Blacklist
 * 1.2.2 - Update error message in Connection
 * 1.2.1 - Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size
 * 1.2.0 - New spec and help.md format for the Extension Library | New actions activities_list, activities_types, agents_abort_scan, agents_connect, agents_decommission, agents_disconnect, agents_fetch_logs, agents_initiate, agents_processes, agents_reload, agents_restart, agents_shutdown, agents_summary, agents_uninstall, apps_by_agent_ids, name_available
