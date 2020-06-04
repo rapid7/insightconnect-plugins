@@ -4,7 +4,7 @@ products: [insightconnect]
 name: checkpoint_ngfw
 title: Check Point NGFW
 description: Check Point Next Generation Firewalls (NGFW) are trusted by customers for their highest security effectiveness and their ability to keep organizations protected from sophisticated fifth generation cyber-attacks
-version: 2.0.0
+version: 2.0.1
 vendor: rapid7
 support: community
 status: []
@@ -692,6 +692,16 @@ actions:
         title: Host
         description: Information about the host object that was added
         type: host_object
+        required: false
+      success:
+        title: Success
+        description: Whether or not Check Point could successfully create the address object
+        type: boolean
+        required: true
+      error_message:
+        title: Error Message
+        description: The cause of the error (if the action fails)
+        type: string
         required: false
 
   remove_host:
