@@ -164,6 +164,7 @@ connection:
     description: Okta key
     type: credential_secret_key
     required: true
+
 triggers:
   users_added_removed_from_group:
     title: Monitor User Groups
