@@ -314,12 +314,16 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|error_message|string|False|The cause of the error (if the action fails)|
 |host_object|host_object|False|Information about the host object that was added|
+|success|boolean|True|Whether or not Check Point could successfully create the address object|
 
 Example output:
 
 ```
 {
+  "success": true,
+  "error_message": "A host with the IP address or name already exists!",
   "host_object": {
     "uid": "70c9580f-0708-4878-8fdd-98bd4f6d3b44",
     "name": "192.1.2.1",
@@ -978,6 +982,7 @@ privileges.
 
 # Version History
 
+* 2.0.1 - Revise Create Address Object action output
 * 2.0.0 - New actions Check if Address in Group, Remove Address Object from Group | Rename "Add Host" action to "Create Address Object" and add whitelist support | Move "Discard Sessions" input from individual actions to connection
 * 1.3.0 - Update to add install options to Install Policy
 * 1.2.0 - New action Install Policy | Fix issue where logout could fail | Update to help to improve troubleshooting | Update to `Add Host` action to with color option 
