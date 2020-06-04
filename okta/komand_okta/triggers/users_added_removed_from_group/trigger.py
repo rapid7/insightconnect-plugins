@@ -23,6 +23,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
         okta_url = self.connection.okta_url
         current_list = list()
         group_names = list()
+
         for group in group_list:
             api = f"{okta_url}/api/v1/groups/{group}/users"
             # Build a reference list to check for updates against
@@ -86,5 +87,6 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             elif removed and not added:
                 self.send({Output.USERS_REMOVED_FROM_GROUPS: removed})
 
-                current_list = new_list
+            current_list = new_list
+
             time.sleep(params.get(Input.INTERVAL, 300))
