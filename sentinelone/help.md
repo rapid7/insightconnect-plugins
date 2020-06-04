@@ -9,8 +9,10 @@ This plugin utilizes the SentinelOne API..
 # Key Features
 
 * Quarantine endpoints
+* Execute scans
 * Blacklist hashes
 * Trigger workflows on security alerts
+* Manage threats
 
 # Requirements
 
