@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Username and password|None|{"username": "user@example.com", "password": "mypassword"}|
-|url|string|https://usea1-partners.sentinelone.net/|True|URL and endpoint of SentinelOne instance.|None|https://example.sentinelone.com|
+|url|string|None|True|SentinelOne Console URL|None|https://example.sentinelone.com|
 
 Example input:
 
@@ -220,7 +220,9 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|activity_types|[]activities_types|True|Result of activities types|
+|data|[]data|False|Data|
+|errors|[]object|False|Errors|
+|pagination|pagination|False|Pagination|
 
 Example output:
 
