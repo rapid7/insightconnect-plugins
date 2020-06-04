@@ -151,7 +151,7 @@ Example output:
       "agentIsDecommissioned": true,
       "description": "malware detected - not mitigated yet (static engin...",
       "fileDisplayName": "EICAR.com",
-      "agentIp": "208.118.227.19",
+      "agentIp": "198.51.100.100",
       "agentIsActive": false,
       "fileObjectId": "F0F63E0588AAC528",
       "filePath": "\\Device\\HarddiskVolume2\\Users\\vagrant\\Desktop\\EICA...",
