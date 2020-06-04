@@ -1113,7 +1113,7 @@ actions:
         required: false
   blacklist:
     title: Blacklist
-    description: Create or delete a blacklist item for a SHA1 hash. Block hash only for sites that user have permission not for tenant
+    description: Blacklist and unblacklist a SHA1 hash
     input:
       hash:
         title: Hash
