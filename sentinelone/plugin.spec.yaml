@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 1.2.1
+version: 1.4.0
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
@@ -512,6 +512,328 @@ types:
       title: File Malicious Content
       type: boolean
       description: File malicious content
+      required: false
+  agent_data:
+    scanFinishedAt:
+      title: Scan Finished At
+      description: Finish time of last scan
+      type: string
+      required: false
+    inRemoteShellSession:
+      title: In Remote Shell Session
+      description: Is the Agent in a remote shell session
+      type: boolean
+      required: false
+    externalIp:
+      title: External Ip
+      description: External IPv4 address
+      type: string
+      required: false
+    mitigationMode:
+      title: Mitigation Mode
+      description: Agent mitigation mode policy
+      type: string
+      required: false
+    isUpToDate:
+      title: Is Up To Date
+      description: Indicates if the agent version is up to date
+      type: boolean
+      required: false
+    scanAbortedAt:
+      title: Scan Aborted At
+      description: Abort time of last scan
+      type: string
+      required: false
+    appsVulnerabilityStatus:
+      title: Apps Vulnerability Status
+      description: Apps vulnerability status
+      type: string
+      required: false
+    rangerVersion:
+      title: Ranger Version
+      description: The version of Ranger
+      type: string
+      required: false
+    createdAt:
+      title: Created At
+      description: Created at date
+      type: string
+      required: false
+    userActionsNeeded:
+      title: User Actions Needed
+      description: A list of pending user actions
+      type: "[]string"
+      required: false
+    groupId:
+      title: Group Id
+      description: A reference to the containing network group
+      type: string
+      required: false
+    isPendingUninstall:
+      title: Is Pending Uninstall
+      description: Agent with a pending uninstall request
+      type: boolean
+      required: false
+    accountName:
+      title: Account Name
+      description: Name of the containing account
+      type: string
+      required: false
+    siteId:
+      title: Site Id
+      description: A reference to the containing site
+      type: string
+      required: false
+    siteName:
+      title: Site Name
+      description: Name of the containing site
+      type: string
+      required: false
+    osStartTime:
+      title: OS Start Time
+      description: Last boot time
+      type: string
+      required: false
+    activeDirectory:
+      title: Active Directory
+      description: Active Directory data
+      type: object
+      required: false
+    networkInterfaces:
+      title: Network Interfaces
+      description: Device's network interfaces
+      type: "[]object"
+      required: false
+    rangerStatus:
+      title: Ranger Status
+      description: Is Agent disabled as a Ranger
+      type: string
+      required: false
+    accountId:
+      title: Account Id
+      description: A reference to the containing account
+      type: string
+      required: false
+    threatRebootRequired:
+      title: Threat Reboot Required
+      description: Has at least one threat with at least one mitigation action that is pending reboot to succeed
+      type: boolean
+      required: false
+    osArch:
+      title: OS Arch
+      description: OS Arch
+      type: string
+      required: false
+    activeThreats:
+      title: Active Threats
+      description: Current number of active threats
+      type: integer
+      required: false
+    installerType:
+      title: Installer Type
+      description: Installer package type (file extension)
+      type: string
+      required: false
+    scanStatus:
+      title: Scan Status
+      description: Last scan status
+      type: string
+      required: false
+    groupName:
+      title: Group Name
+      description: Name of the containing network group
+      type: string
+      required: false
+    consoleMigrationStatus:
+      title: Console Migration Status
+      description: What step the agent is at in the process of migrating to another console, if any
+      type: string
+      required: false
+    infected:
+      title: infected
+      description: Indicates if the Agent has active threats
+      type: boolean
+      required: false
+    id:
+      title: id
+      description: Agent ID
+      type: string
+      required: false
+    updatedAt:
+      title: Updated at
+      description: Last updated date
+      type: string
+      required: false
+    machineType:
+      title: Machine Type
+      description: Machine type
+      type: string
+      required: false
+    isDecommissioned:
+      title: Is Decommissioned
+      description: Is Agent decommissioned
+      type: boolean
+      required: false
+    osRevision:
+      title: OS Revision
+      description: OS revision
+      type: string
+      required: false
+    scanStartedAt:
+      title: Scan Started At
+      description: Start time of last scan
+      type: string
+      required: false
+    policyUpdatedAt:
+      title: Policy Updated At
+      description: Date of when the policy was last updated
+      type: string
+      required: false
+    encryptedApplications:
+      title: Encrypted Applications
+      description: Disk encryption status
+      type: boolean
+      required: false
+    locations:
+      title: Locations
+      description: A list of locations reported by the Agent
+      type: "[]object"
+      required: false
+    domain:
+      title: Domain
+      description: Network domain 
+      type: string
+      required: false
+    locationType:
+      title: Location Type
+      description: Reported location type
+      type: string
+      required: false
+    registeredAt:
+      title: Registered At
+      description: Time of first registration to management console (similar to createdAt)
+      type: string
+      required: false
+    totalMemory:
+      title: Total Memory
+      description: Memory size (MB)
+      type: integer
+      required: false
+    groupUpdatedAt:
+      title: Group Updated At
+      description: Date of when the group was last updated
+      type: string
+      required: false
+    computerName:
+      title: Computer Name
+      description: Computer name
+      type: string
+      required: false
+    isUninstalled:
+      title: Is Uninstalled
+      description: Indicates if Agent was removed from the device
+      type: boolean
+      required: false
+    uuid:
+      title: UUID
+      description: Agent's universally unique identifier
+      type: string
+      required: false
+    licenseKey:
+      title: License Key
+      description: License key
+      type: string
+      required: false
+    isActive:
+      title: Is Active
+      description: Indicates if the agent was recently active
+      type: boolean
+      required: false
+    cpuCount:
+      title: CPU Count
+      description: Number of CPUs
+      type: integer
+      required: false
+    modelName:
+      title: Model Name
+      description: Model name
+      type: string
+      required: false
+    externalId:
+      title: External ID
+      description: External id set by customer
+      type: string
+      required: false
+    coreCount:
+      title: Core Count
+      description: Number of CPU cores
+      type: integer
+      required: false
+    allowRemoteShell:
+      title: Allow Remote Shell
+      description: Agent is capable and policy enabled for remote shell
+      type: boolean
+      required: false
+    agentVersion:
+      title: Agent Version
+      description: Agent version
+      type: string
+      required: false
+    groupIp:
+      title: Group IP
+      description: IP Address subnet
+      type: string
+      required: false
+    osName:
+      title: OS Name
+      description: Os name
+      type: string
+      required: false
+    mitigationModeSuspicious:
+      title: Mitigation Mode Suspicious
+      description: Mitigation mode policy for suspicious activity
+      type: string
+      required: false
+    osUsername:
+      title: OS Username
+      description: Os username
+      type: string
+      required: false
+    lastLoggedInUserName:
+      title: Last Logged In User Name
+      description: Last logged in user name
+      type: string
+      required: false
+    cpuId:
+      title: CPU ID
+      description: CPU model
+      type: string
+      required: false
+    lastActiveDate:
+      title: Last Active Date
+      description: Last active date
+      type: string
+      required: false
+    osType:
+      title: OS Type
+      description: OS type
+      type: string
+      required: false
+    networkStatus:
+      title: Network Status
+      description: Agent's network connectivity status
+      type: string
+      required: false
+  quarantine_response:
+    errors:
+      title: Errors
+      description: Errors
+      type: "[]object"
+      required: false
+    data:
+      title: Data
+      description: Response data
+      type: object
       required: false
 connection:
   credentials:
@@ -1109,6 +1431,66 @@ actions:
         title: Affected
         description: Number of entities affected by the requested operation
         type: integer
+        required: false
+  search_agents:
+    title: Search Agents
+    description: Searches for agents using provided information
+    input:
+      agent:
+        title: Agent
+        description: Agent to retrieve device information from. Accepts IP address, MAC address, hostname, or device ID
+        type: string
+        example: hostname123
+        required: true
+    output:
+      agents:
+        title: Agents
+        description: Detailed information about agents found
+        type: "[]agent_data"
+        required: false
+  get_agent_details:
+    title: Get Agent Details
+    description: Gets details for an agent using provided information
+    input:
+      agent:
+        title: Agent
+        description: Agent to retrieve device information from. Accepts IP address, MAC address, hostname, or device ID
+        type: string
+        example: hostname123
+        required: true
+    output:
+      agent:
+        title: Agent
+        description: Detailed information about agents found
+        type: object
+        required: false
+  quarantine:
+    title: Quarantine
+    description: Isolate (quarantine) endpoint from the network 
+    input:
+      agent:
+        title: Agent
+        description: Agent to perform quarantine action on. Accepts IP address, MAC address, hostname, or device ID
+        type: string
+        example: hostname123
+        required: true
+      quarantine_state:
+        title: Quarantine State
+        description: True to quarantine host, false to unquarantine host
+        type: boolean
+        example: true
+        required: true
+      whitelist:
+        title: Whitelist
+        description: This list contains a set of devices that should not be blocked. This can include IPs, hostnames, and device IDs
+        type: "[]string"
+        example: ["198.51.100.100", "225494730938493804"]
+        required: false
+    output:
+      response:
+        title: Response
+        description: SentinelOne API call response data
+        type: quarantine_response
         required: false
 
 triggers:

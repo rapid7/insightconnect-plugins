@@ -2,8 +2,7 @@ import komand
 import requests
 from .schema import ConnectionSchema, Input
 from komand.exceptions import ConnectionTestException
-# from komand_sentinelone.util import api
-
+from komand_sentinelone.util.api import SentineloneAPI
 
 class Connection(komand.Connection):
 
@@ -31,6 +30,7 @@ class Connection(komand.Connection):
             self.url = self.url + "/"
 
         token = self.get_auth_token(self.url, self.username, self.password)
+        self.client = SentineloneAPI(self.url, self.make_token_header())
         self.logger.info("Token: " + "*************" + str(token[len(token) - 5:len(token)]))
 
     def get_auth_token(self, url, username, password):

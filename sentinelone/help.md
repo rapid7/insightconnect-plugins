@@ -36,6 +36,202 @@ Example input:
 
 ### Actions
 
+#### Search Agents
+
+This action searches for agents using provided information.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, or device ID|None|hostname123|
+
+Example input:
+
+```
+{
+  "agent": "hostname123"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|agents|[]agent_data|False|Detailed information about agents found|
+
+Example output:
+
+```
+{
+  "agents": [
+    {
+      "installerType": ".exe",
+      "threatRebootRequired": false,
+      "groupIp": "128.177.65.x",
+      "modelName": "VMware, Inc. - VMware Virtual Platform",
+      "machineType": "server",
+      "groupName": "Default Group",
+      "lastActiveDate": "2020-06-03T18:53:56.748663Z",
+      "registeredAt": "2020-05-28T14:53:03.010853Z",
+      "scanStatus": "finished",
+      "allowRemoteShell": false,
+      "appsVulnerabilityStatus": "up_to_date",
+      "coreCount": 1,
+      "inRemoteShellSession": false,
+      "isDecommissioned": false,
+      "siteId": "521580416395045459",
+      "accountName": "SentinelOne",
+      "isActive": true,
+      "isUpToDate": true,
+      "networkStatus": "disconnected",
+      "osType": "windows",
+      "updatedAt": "2020-06-03T18:53:39.584577Z",
+      "createdAt": "2020-05-28T14:53:03.014660Z",
+      "siteName": "Rapid7",
+      "lastLoggedInUserName": "",
+      "domain": "WORKGROUP",
+      "externalId": "",
+      "scanAbortedAt": "None",
+      "computerName": "so-agent-win12",
+      "id": "901345720792880606",
+      "locationType": "fallback",
+      "mitigationMode": "protect",
+      "networkInterfaces": [
+        {
+          "id": "901345720801269215",
+          "inet": [
+            "10.4.24.55"
+          ],
+          "inet6": [
+            "fe80::3c5e:f39e:aee:6088"
+          ],
+          "name": "Ethernet",
+          "physical": "00:50:56:94:17:08"
+        }
+      ],
+      "scanStartedAt": "2020-05-28T21:12:58.216807Z",
+      "userActionsNeeded": [],
+      "activeDirectory": {
+        "computerDistinguishedName": "None",
+        "computerMemberOf": [],
+        "lastUserDistinguishedName": "None",
+        "lastUserMemberOf": []
+      },
+      "externalIp": "128.177.65.3",
+      "isUninstalled": false,
+      "licenseKey": "",
+      "osArch": "64 bit",
+      "totalMemory": 1023,
+      "accountId": "433241117337583618",
+      "consoleMigrationStatus": "N/A",
+      "groupId": "521580416411822676",
+      "isPendingUninstall": false,
+      "locations": [
+        {
+          "scope": "global",
+          "id": "629380164464502476",
+          "name": "Fallback"
+        }
+      ],
+      "osStartTime": "2020-05-28T14:59:33Z",
+      "scanFinishedAt": "2020-05-28T22:24:59.420166Z",
+      "cpuCount": 1,
+      "osUsername": "None",
+      "rangerVersion": "None",
+      "agentVersion": "4.1.4.82",
+      "osRevision": "9200",
+      "uuid": "28db47168fa54f89aeed99769ac8d4dc",
+      "mitigationModeSuspicious": "detect",
+      "cpuId": "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz",
+      "infected": false,
+      "encryptedApplications": false,
+      "osName": "Windows Server 2012 Standard",
+      "rangerStatus": "NotApplicable",
+      "activeThreats": 0
+    }
+  ]
+}
+```
+
+#### Quarantine
+
+This action is used to isolate (quarantine) endpoint from the network.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|True|Agent to perform quarantine action on. Accepts IP address, MAC address, hostname, or device ID|None|hostname123|
+|quarantine_state|boolean|None|True|True to quarantine host, false to unquarantine host|None|True|
+|whitelist|[]string|None|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, and device IDs|None|["198.51.100.100", "225494730938493804"]|
+
+Example input:
+
+```
+{
+  "agent": "hostname123",
+  "quarantine_state": true,
+  "whitelist": [
+    "198.51.100.100",
+    "225494730938493804"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|quarantine_response|False|SentinelOne API call response data|
+
+Example output:
+
+```
+{
+  "response": {
+    "response": {
+      "data": {
+        "affected": 0
+      }
+    }
+  }
+}
+```
+
+#### Get Agent Details
+
+This action gets details for an agent using provided information.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, or device ID|None|hostname123|
+
+Example input:
+
+```
+{
+  "agent": "hostname123"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|agent|object|False|Detailed information about agents found|
+
+Example output:
+
+```
+{
+  "agent": {}
+}
+```
+
+
 #### Get Threat Summary
 
 This action is used to get a list of activities.
@@ -1043,12 +1239,87 @@ Example output:
 |username|string|False|Username|
 |whiteningOptions|[]string|False|Whitening options|
 
+#### agent_data
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Account Id|string|False|A reference to the containing account|
+|Account Name|string|False|Name of the containing account|
+|Active Directory|object|False|Active Directory data|
+|Active Threats|integer|False|Current number of active threats|
+|Agent Version|string|False|Agent version|
+|Allow Remote Shell|boolean|False|Agent is capable and policy enabled for remote shell|
+|Apps Vulnerability Status|string|False|Apps vulnerability status|
+|Computer Name|string|False|Computer name|
+|Console Migration Status|string|False|What step the agent is at in the process of migrating to another console, if any|
+|Core Count|integer|False|Number of CPU cores|
+|CPU Count|integer|False|Number of CPUs|
+|CPU ID|string|False|CPU model|
+|Created At|string|False|Created at date|
+|Domain|string|False|Network domain|
+|Encrypted Applications|boolean|False|Disk encryption status|
+|External ID|string|False|External id set by customer|
+|External Ip|string|False|External IPv4 address|
+|Group Id|string|False|A reference to the containing network group|
+|Group IP|string|False|IP Address subnet|
+|Group Name|string|False|Name of the containing network group|
+|Group Updated At|string|False|Date of when the group was last updated|
+|id|string|False|Agent ID|
+|In Remote Shell Session|boolean|False|Is the Agent in a remote shell session|
+|infected|boolean|False|Indicates if the Agent has active threats|
+|Installer Type|string|False|Installer package type (file extension)|
+|Is Active|boolean|False|Indicates if the agent was recently active|
+|Is Decommissioned|boolean|False|Is Agent decommissioned|
+|Is Pending Uninstall|boolean|False|Agent with a pending uninstall request|
+|Is Uninstalled|boolean|False|Indicates if Agent was removed from the device|
+|Is Up To Date|boolean|False|Indicates if the agent version is up to date|
+|Last Active Date|string|False|Last active date|
+|Last Logged In User Name|string|False|Last logged in user name|
+|License Key|string|False|License key|
+|Location Type|string|False|Reported location type|
+|Locations|[]object|False|A list of locations reported by the Agent|
+|Machine Type|string|False|Machine type|
+|Mitigation Mode|string|False|Agent mitigation mode policy|
+|Mitigation Mode Suspicious|string|False|Mitigation mode policy for suspicious activity|
+|Model Name|string|False|Model name|
+|Network Interfaces|[]object|False|Device's network interfaces|
+|Network Status|string|False|Agent's network connectivity status|
+|OS Arch|string|False|OS Arch|
+|OS Name|string|False|Os name|
+|OS Revision|string|False|OS revision|
+|OS Start Time|string|False|Last boot time|
+|OS Type|string|False|OS type|
+|OS Username|string|False|Os username|
+|Policy Updated At|string|False|Date of when the policy was last updated|
+|Ranger Status|string|False|Is Agent disabled as a Ranger|
+|Ranger Version|string|False|The version of Ranger|
+|Registered At|string|False|Time of first registration to management console (similar to createdAt)|
+|Scan Aborted At|string|False|Abort time of last scan|
+|Scan Finished At|string|False|Finish time of last scan|
+|Scan Started At|string|False|Start time of last scan|
+|Scan Status|string|False|Last scan status|
+|Site Id|string|False|A reference to the containing site|
+|Site Name|string|False|Name of the containing site|
+|Threat Reboot Required|boolean|False|Has at least one threat with at least one mitigation action that is pending reboot to succeed|
+|Total Memory|integer|False|Memory size (MB)|
+|Updated at|string|False|Last updated date|
+|User Actions Needed|[]string|False|A list of pending user actions.|
+|UUID|string|False|Agent's universally unique identifier|
+
+#### quarantine_response
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Data|object|False|Response data|
+|Errors|[]object|False|Errors|
+
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.4.0 - New actions Quarantine, Get Agent Details, Search Agents
 * 1.2.1 - Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size
 * 1.2.0 - New spec and help.md format for the Extension Library | New actions activities_list, activities_types, agents_abort_scan, agents_connect, agents_decommission, agents_disconnect, agents_fetch_logs, agents_initiate, agents_processes, agents_reload, agents_restart, agents_shutdown, agents_summary, agents_uninstall, apps_by_agent_ids, name_available
 * 1.1.0 - New trigger Get Threats | New actions Mitigate Threat, Mark as Benign, Mark as Threat and Create IOC Threat
