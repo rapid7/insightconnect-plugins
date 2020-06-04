@@ -8,9 +8,9 @@ This plugin utilizes the SentinelOne API..
 
 # Key Features
 
-* Blacklist vulnerable devices
+* Quarantine endpoints
+* Blacklist hashes
 * Trigger workflows on security alerts
-* Manage Threats
 
 # Requirements
 
