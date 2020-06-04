@@ -27,6 +27,7 @@ class BlacklistInput(komand.Input):
       "type": "boolean",
       "title": "Blacklist State",
       "description": "True to create blacklist hash, false to unblacklist hash",
+      "default": true,
       "order": 3
     },
     "description": {

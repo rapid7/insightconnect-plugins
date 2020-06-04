@@ -1133,6 +1133,7 @@ actions:
         description: True to create blacklist hash, false to unblacklist hash
         type: boolean
         required: true
+        default: true
         example: true
     output:
       success:

@@ -858,7 +858,7 @@ This action is used to blacklist and unblacklist a SHA1 hash. The blacklist is a
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|blacklist_state|boolean|None|True|True to create blacklist hash, false to unblacklist hash|None|True|
+|blacklist_state|boolean|True|True|True to create blacklist hash, false to unblacklist hash|None|True|
 |description|string|Hash Blacklisted from InsightConnect|False|Description for why the hash is blacklisted|None|Hash Blacklisted from InsightConnect|
 |hash|string|None|True|Create a blacklist item from a SHA1 hash|None|3395856ce81f2b7382dee72602f798b642f14140|
 
