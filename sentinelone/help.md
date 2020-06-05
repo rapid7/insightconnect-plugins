@@ -127,7 +127,7 @@ Example output:
         "lastUserDistinguishedName": "None",
         "lastUserMemberOf": []
       },
-      "externalIp": "128.177.65.3",
+      "externalIp": "198.51.100.100",
       "isUninstalled": false,
       "licenseKey": "",
       "osArch": "64 bit",
