@@ -61,7 +61,7 @@ class SearchAgentsOutput(komand.Output):
       "properties": {
         "accountId": {
           "type": "string",
-          "title": "Account Id",
+          "title": "Account ID",
           "description": "A reference to the containing account",
           "order": 20
         },
@@ -157,13 +157,13 @@ class SearchAgentsOutput(komand.Output):
         },
         "externalIp": {
           "type": "string",
-          "title": "External Ip",
+          "title": "External IP",
           "description": "External IPv4 address",
           "order": 3
         },
         "groupId": {
           "type": "string",
-          "title": "Group Id",
+          "title": "Group ID",
           "description": "A reference to the containing network group",
           "order": 11
         },
@@ -187,7 +187,7 @@ class SearchAgentsOutput(komand.Output):
         },
         "id": {
           "type": "string",
-          "title": "id",
+          "title": "ID",
           "description": "Agent ID",
           "order": 29
         },
@@ -199,7 +199,7 @@ class SearchAgentsOutput(komand.Output):
         },
         "infected": {
           "type": "boolean",
-          "title": "infected",
+          "title": "Infected",
           "description": "Indicates if the Agent has active threats",
           "order": 28
         },
@@ -397,7 +397,7 @@ class SearchAgentsOutput(komand.Output):
         },
         "siteId": {
           "type": "string",
-          "title": "Site Id",
+          "title": "Site ID",
           "description": "A reference to the containing site",
           "order": 14
         },
