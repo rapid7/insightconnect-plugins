@@ -86,8 +86,8 @@ class TestNewMessageReceived(TestCase):
         nmr.logger = log
         nmr.connection = MockConnection()
 
-        # This was a mess to figure out...because I'm importing with from I have to refer to the class it's being called
-        # from and not the actual function that's being imported
+        # This was a mess to figure out...because I'm importing with from I have to refer to the class it's being
+        #  called from and not the actual function that's being imported
         with mock.patch('icon_microsoft_teams.triggers.new_message_received.trigger.get_teams_from_microsoft', return_value=[{"id": "team"}]):
             with mock.patch('icon_microsoft_teams.triggers.new_message_received.trigger.get_channels_from_microsoft', return_value=[{"id": "channel"}]):
                 endpoint = nmr.setup_endpoint("channel", "team")
