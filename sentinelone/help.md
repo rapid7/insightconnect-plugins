@@ -77,7 +77,7 @@ Example output:
     {
       "installerType": ".exe",
       "threatRebootRequired": false,
-      "groupIp": "128.177.65.x",
+      "groupIp": "198.51.100.x",
       "modelName": "VMware, Inc. - VMware Virtual Platform",
       "machineType": "server",
       "groupName": "Default Group",
