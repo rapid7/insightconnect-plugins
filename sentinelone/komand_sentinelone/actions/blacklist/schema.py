@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Create or delete a blacklist item for a SHA1 hash. Block hash only for sites that user have permission not for tenant"
+    DESCRIPTION = "Blacklist and unblacklist a SHA1 hash"
 
 
 class Input:
@@ -27,6 +27,7 @@ class BlacklistInput(komand.Input):
       "type": "boolean",
       "title": "Blacklist State",
       "description": "True to create blacklist hash, false to unblacklist hash",
+      "default": true,
       "order": 3
     },
     "description": {

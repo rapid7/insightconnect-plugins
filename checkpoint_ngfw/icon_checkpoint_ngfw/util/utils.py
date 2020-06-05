@@ -2,6 +2,27 @@ from enum import Enum
 import ipaddress
 
 
+class PublishException(Exception):
+
+    def __init__(self, code: str, message: str, errors: [dict]):
+        super().__init__()
+
+        self.code = code
+        self.message = message
+        self.errors = errors
+
+    @classmethod
+    def from_json_response(cls, json_: dict):
+        return cls(
+            code=json_.get("code", ""),
+            message=json_.get("message", ""),
+            errors=json_.get("errors")
+        )
+
+    def get_errors(self) -> [str]:
+        return {e.get("message") for e in self.errors if e.get("message") is not None}
+
+
 class DetailsLevel(Enum):
     uid = "uid"
     standard = "standard"
