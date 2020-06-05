@@ -650,7 +650,7 @@ types:
       type: string
       required: false
     infected:
-      title: infected
+      title: Infected
       description: Indicates if the Agent has active threats
       type: boolean
       required: false
