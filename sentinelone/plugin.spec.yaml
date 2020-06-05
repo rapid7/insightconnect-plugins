@@ -565,7 +565,7 @@ types:
       type: "[]string"
       required: false
     groupId:
-      title: Group Id
+      title: Group ID
       description: A reference to the containing network group
       type: string
       required: false
