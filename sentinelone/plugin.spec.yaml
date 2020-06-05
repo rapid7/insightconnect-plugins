@@ -525,7 +525,7 @@ types:
       type: boolean
       required: false
     externalIp:
-      title: External Ip
+      title: External IP
       description: External IPv4 address
       type: string
       required: false
