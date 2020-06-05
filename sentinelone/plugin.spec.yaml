@@ -1436,7 +1436,7 @@ actions:
 
   search_agents:
     title: Search Agents
-    description: Searches for agents using provided information
+    description: Searches for agents by IP address, MAC address, hostname, or device ID
     input:
       agent:
         title: Agent
@@ -1453,7 +1453,7 @@ actions:
 
   get_agent_details:
     title: Get Agent Details
-    description: Gets details for an agent using provided information
+    description: Get agent details
     input:
       agent:
         title: Agent
@@ -1464,7 +1464,7 @@ actions:
     output:
       agent:
         title: Agent
-        description: Detailed information about agents found
+        description: Detailed information about agent found
         type: object
         required: false
 

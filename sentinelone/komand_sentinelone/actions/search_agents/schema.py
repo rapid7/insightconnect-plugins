@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Searches for agents using provided information"
+    DESCRIPTION = "Searches for agents by IP address, MAC address, hostname, or device ID"
 
 
 class Input:
@@ -428,7 +428,7 @@ class SearchAgentsOutput(komand.Output):
         "userActionsNeeded": {
           "type": "array",
           "title": "User Actions Needed",
-          "description": "A list of pending user actions.",
+          "description": "A list of pending user actions",
           "items": {
             "type": "string"
           },

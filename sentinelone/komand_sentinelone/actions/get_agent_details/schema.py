@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Gets details for an agent using provided information"
+    DESCRIPTION = "Get agent details"
 
 
 class Input:
@@ -47,7 +47,7 @@ class GetAgentDetailsOutput(komand.Output):
     "agent": {
       "type": "object",
       "title": "Agent",
-      "description": "Detailed information about agents found",
+      "description": "Detailed information about agent found",
       "order": 1
     }
   }
