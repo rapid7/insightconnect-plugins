@@ -655,7 +655,7 @@ types:
       type: boolean
       required: false
     id:
-      title: id
+      title: ID
       description: Agent ID
       type: string
       required: false
