@@ -18,14 +18,15 @@ Business, or Enterprise plan.
 * Requires JWT credentials from Zoom App marketplace
 
 # Documentation
+
 ## Setup
 
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|JWT API Key|None||
-|secret|credential_secret_key|None|True|JWT Secret|None||
+|api_key|credential_secret_key|None|True|JWT API Key|None|abcdefgABCDEFG12345678|
+|secret|credential_secret_key|None|True|JWT Secret|None|abcdefgABCDEFG123456789abcdefgABCDEF|
 
 Example input:
 

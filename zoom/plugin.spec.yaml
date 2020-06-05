@@ -25,13 +25,13 @@ connection:
     description: JWT API Key
     type: credential_secret_key
     required: true
-    example: ''
+    example: 'abcdefgABCDEFG12345678'
   secret:
     title: Secret
     description: JWT Secret
     type: credential_secret_key
     required: true
-    example: ''
+    example: 'abcdefgABCDEFG123456789abcdefgABCDEF'
 
 types:
   user_activity:
