@@ -257,7 +257,7 @@ class Connection(komand.Connection):
             "type": "black_hash",
             "ids": item_ids
           }
-        })
+        }).get("errors", [])
 
     def _call_api(self, method, endpoint, json=None, params=None):
         endpoint = self.url + "web/api/v2.0/" + endpoint
