@@ -1453,7 +1453,7 @@ actions:
 
   get_agent_details:
     title: Get Agent Details
-    description: Get agent details
+    description: Retrieve agent details
     input:
       agent:
         title: Agent

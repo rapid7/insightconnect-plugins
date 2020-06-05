@@ -47,7 +47,7 @@ Example input:
 
 #### Search Agents
 
-This action searches for agents using provided information.
+This action searches for agents by IP address, MAC address, hostname, or device ID.
 
 ##### Input
 
@@ -210,7 +210,7 @@ Example output:
 
 #### Get Agent Details
 
-This action gets details for an agent using provided information.
+This action retrieves agent details.
 
 ##### Input
 
