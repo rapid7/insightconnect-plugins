@@ -230,7 +230,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|agent|object|False|Detailed information about agents found|
+|agents|[]agent_data|False|Detailed information about agents found|
 
 Example output:
 
@@ -368,30 +368,30 @@ This action is used to get a list of activities.
 
 #### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|account_ids|[]string|None|False|List of Account IDs to filter by|None|
-|activity_types|[]string|None|False|Return only these activity codes|None|
-|agent_ids|[]string|None|False|Return activities related to specified agent ids|None|
-|count_only|boolean|None|False|If true, only total number of items will be returned, without any of the actual objects|None|
-|created_at_between|string|None|False|Return activities created within this range (inclusive), example 1514978764288-1514978999999|None|
-|created_at_gt|string|None|False|Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|
-|created_at_gte|string|None|False|Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|
-|created_at_lt|string|None|False|Return activities created before this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|
-|created_at_lte|string|None|False|Return activities created before or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|
-|cursor|string|None|False|Cursor position returned by the last request. Should be used for iterating over more than 1000 items, example YWdlbnRfaWQ6NTgwMjkzODE=|None|
-|group_ids|[]string|None|False|Get a list of activities|None|
-|ids|[]string|None|False|If true, total number of items will not be calculated, which speeds up execution time|None|
-|include_hidden|boolean|None|False|Include internal activities hidden from display?|None|
-|limit|integer|None|False|Limit number of returned items (1-100)|None|
-|site_ids|[]string|None|False|List of Site IDs to filter by|None|
-|skip|integer|None|False|Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead|None|
-|skip_count|boolean|None|False|If true, total number of items will not be calculated, which speeds up execution time|None|
-|sort_by|string|None|False|The column to sort the results by|['id', 'activityType', 'createdAt']|
-|sort_order|string|None|False|Sort direction|['asc', 'desc']|
-|threat_ids|[]string|None|False|Return only these activity codes|None|
-|user_emails|[]string|None|False|Email of the user who invoked the activity (If applicable)|None|
-|user_ids|[]string|None|False|The user who invoked the activity (If applicable)|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|account_ids|[]string|None|False|List of Account IDs to filter by|None|None|
+|activity_types|[]string|None|False|Return only these activity codes|None|None|
+|agent_ids|[]string|None|False|Return activities related to specified agent ids|None|None|
+|count_only|boolean|None|False|If true, only total number of items will be returned, without any of the actual objects|None|None|
+|created_at_between|string|None|False|Return activities created within this range (inclusive), example 1514978764288-1514978999999|None|None|
+|created_at_gt|string|None|False|Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|None|
+|created_at_gte|string|None|False|Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|None|
+|created_at_lt|string|None|False|Return activities created before this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|None|
+|created_at_lte|string|None|False|Return activities created before or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|None|
+|cursor|string|None|False|Cursor position returned by the last request. Should be used for iterating over more than 1000 items, example YWdlbnRfaWQ6NTgwMjkzODE=|None|None|
+|group_ids|[]string|None|False|Get a list of activities|None|None|
+|ids|[]string|None|False|If true, total number of items will not be calculated, which speeds up execution time|None|None|
+|include_hidden|boolean|None|False|Include internal activities hidden from display?|None|None|
+|limit|integer|None|False|Limit number of returned items (1-100)|None|None|
+|site_ids|[]string|None|False|List of Site IDs to filter by|None|None|
+|skip|integer|None|False|Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead|None|None|
+|skip_count|boolean|None|False|If true, total number of items will not be calculated, which speeds up execution time|None|None|
+|sort_by|string|None|False|The column to sort the results by|['id', 'activityType', 'createdAt']|None|
+|sort_order|string|None|False|Sort direction|['asc', 'desc']|None|
+|threat_ids|[]string|None|False|Return only these activity codes|None|None|
+|user_emails|[]string|None|False|Email of the user who invoked the activity (If applicable)|None|None|
+|user_ids|[]string|None|False|The user who invoked the activity (If applicable)|None|None|
 
 #### Output
 
@@ -418,9 +418,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|[]data|False|Data|
-|errors|[]object|False|Errors|
-|pagination|pagination|False|Pagination|
+|activity_types|[]activities_types|True|Result of activities types|
 
 Example output:
 
@@ -650,6 +648,11 @@ This action is used to reload an agent module (applies to Windows agents only).
 Example input:
 
 ```
+{
+  "blacklist_state": true,
+  "description": "Hash Blacklisted from InsightConnect",
+  "hash": "3395856ce81f2b7382dee72602f798b642f14140"
+}
 ```
 
 ##### Output
