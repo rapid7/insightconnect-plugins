@@ -841,12 +841,13 @@ connection:
     title: Credentials
     description: Username and password
     required: true
+    example: '{"username": "user@example.com", "password": "mypassword"}'
   url:
     title: URL
-    description: 'URL and endpoint of SentinelOne instance. For example: https://usea1-partners.sentinelone.net/'
-    default: https://usea1-partners.sentinelone.net/
+    description: SentinelOne Console URL
     type: string
     required: true
+    example: https://example.sentinelone.com
 actions:
   get_threat_summary:
     title: Get Threat Summary
@@ -1432,6 +1433,7 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: false
+
   search_agents:
     title: Search Agents
     description: Searches for agents using provided information
@@ -1448,6 +1450,7 @@ actions:
         description: Detailed information about agents found
         type: "[]agent_data"
         required: false
+
   get_agent_details:
     title: Get Agent Details
     description: Gets details for an agent using provided information
@@ -1464,6 +1467,7 @@ actions:
         description: Detailed information about agents found
         type: object
         required: false
+
   quarantine:
     title: Quarantine
     description: Isolate (quarantine) endpoint from the network 
@@ -1492,6 +1496,37 @@ actions:
         description: SentinelOne API call response data
         type: quarantine_response
         required: false
+
+  blacklist:
+    title: Blacklist
+    description: Blacklist and unblacklist a SHA1 hash
+    input:
+      hash:
+        title: Hash
+        description: Create a blacklist item from a SHA1 hash
+        type: string
+        required: true
+        example: "3395856ce81f2b7382dee72602f798b642f14140"
+      description:
+        title: Description
+        description: Description for why the hash is blacklisted
+        type: string
+        default: "Hash Blacklisted from InsightConnect"
+        required: false
+        example: "Hash Blacklisted from InsightConnect"
+      blacklist_state:
+        title: Blacklist State
+        description: True to create blacklist hash, false to unblacklist hash
+        type: boolean
+        required: true
+        default: true
+        example: true
+    output:
+      success:
+        title: Success
+        description: Return true if blacklist item was created or deleted
+        type: boolean
+        required: true
 
 triggers:
   get_threats:

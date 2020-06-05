@@ -64,6 +64,10 @@
 			"hash": "f1a871cbbcdf7e1730215961e3b2ac99"
 		},
 		{
+			"identifier": "blacklist/schema.py",
+			"hash": "de16f4a3cf4c4e29f6a48cd120e2814d"
+		},
+		{
 			"identifier": "blacklist_by_content_hash/schema.py",
 			"hash": "ac946280f99e8fd3d8ab3f9376b373b1"
 		},
@@ -109,7 +113,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "7839b46114cb187fce6db0039e4cecf6"
+			"hash": "2e04a6a8659eaffcb6d893593d52635d"
 		},
 		{
 			"identifier": "get_threats/schema.py",

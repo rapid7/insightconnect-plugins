@@ -14,6 +14,7 @@ from .agents_shutdown.action import AgentsShutdown
 from .agents_summary.action import AgentsSummary
 from .agents_uninstall.action import AgentsUninstall
 from .apps_by_agent_ids.action import AppsByAgentIds
+from .blacklist.action import Blacklist
 from .blacklist_by_content_hash.action import BlacklistByContentHash
 from .blacklist_by_ioc_hash.action import BlacklistByIocHash
 from .create_ioc_threat.action import CreateIocThreat

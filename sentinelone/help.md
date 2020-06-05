@@ -8,9 +8,11 @@ This plugin utilizes the SentinelOne API..
 
 # Key Features
 
-* Blacklist vulnerable devices
+* Quarantine endpoints
+* Execute scans
+* Blacklist hashes
 * Trigger workflows on security alerts
-* Manage Threats
+* Manage threats
 
 # Requirements
 
@@ -24,12 +26,19 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and password|None|None|
-|url|string|https://usea1-partners.sentinelone.net/|True|URL and endpoint of SentinelOne instance. For example: https://usea1-partners.sentinelone.net/|None|None|
+|credentials|credential_username_password|None|True|Username and password|None|{"username": "user@example.com", "password": "mypassword"}|
+|url|string|None|True|SentinelOne Console URL|None|https://example.sentinelone.com|
 
 Example input:
 
 ```
+{
+  "credentials": {
+    "username": "user@example.com",
+    "password": "mypassword
+  },
+  "url": "https://example.sentinelone.com"
+}
 ```
 
 ## Technical Details
@@ -276,32 +285,79 @@ Example output:
 {
   "data": [
     {
-      "comments": "string",
-      "userId": "225494730938493804",
-      "accountId": "225494730938493804",
-      "createdAt": "2018-02-27T04:49:26.257525Z",
-      "data": {
-        "computer_name": "COMP_1234",
-        "username": "my_user"
+      "agentOsType": "windows",
+      "automaticallyResolved": false,
+      "cloudVerdict": "black",
+      "id": "566535959618699500",
+      "indicators": [],
+      "engines": [
+        "reputation"
+      ],
+      "fileContentHash": "3395856ce81f2b7382dee72602f798b642f14140",
+      "fromCloud": false,
+      "mitigationMode": "protect",
+      "mitigationReport": {
+        "network_quarantine": {},
+        "quarantine": {
+          "status": "success"
+        },
+        "remediate": {},
+        "rollback": {},
+        "unquarantine": {},
+        "kill": {
+          "status": "success"
+        }
       },
-      "agentUpdatedVersion": "2.5.1.1320",
-      "siteId": "225494730938493804",
-      "id": "225494730938493804",
-      "updatedAt": "2018-02-27T04:49:26.257525Z",
-      "description": "string",
-      "primaryDescription": "string",
-      "agentId": "225494730938493804",
-      "hash": "string",
-      "activityType": 0,
-      "osFamily": "macos",
-      "threatId": "225494730938493804",
-      "groupId": "225494730938493804",
-      "secondaryDescription": "string"
+      "rank": 7,
+      "siteName": "Rapid7",
+      "whiteningOptions": [
+        "hash"
+      ],
+      "agentComputerName": "vagrant-pc",
+      "collectionId": "433377870883088367",
+      "createdAt": "2019-02-21T16:05:49.251201Z",
+      "mitigationStatus": "active",
+      "classificationSource": "Static",
+      "resolved": true,
+      "accountName": "SentinelOne",
+      "fileVerificationType": "NotSigned",
+      "siteId": "521580416395045459",
+      "fileIsExecutable": false,
+      "fromScan": false,
+      "agentNetworkStatus": "disconnecting",
+      "createdDate": "2019-02-21T16:05:49.175000Z",
+      "accountId": "433241117337583618",
+      "initiatedBy": "agentPolicy",
+      "initiatedByDescription": "Agent Policy",
+      "threatAgentVersion": "3.0.1.3",
+      "username": "vagrant-pc\\vagrant",
+      "agentVersion": "3.0.1.3",
+      "classifierName": "STATIC",
+      "fileExtensionType": "Executable",
+      "agentDomain": "WORKGROUP",
+      "fileIsSystem": false,
+      "agentInfected": false,
+      "isCertValid": false,
+      "isInteractiveSession": false,
+      "isPartialStory": false,
+      "updatedAt": "2020-05-28T21:53:36.064425Z",
+      "agentId": "560700200554747611",
+      "agentMachineType": "desktop",
+      "classification": "Malware",
+      "markedAsBenign": false,
+      "threatName": "EICAR.com",
+      "agentIsDecommissioned": true,
+      "description": "malware detected - not mitigated yet (static engin...",
+      "fileDisplayName": "EICAR.com",
+      "agentIp": "198.51.100.100",
+      "agentIsActive": false,
+      "fileObjectId": "F0F63E0588AAC528",
+      "filePath": "\\Device\\HarddiskVolume2\\Users\\vagrant\\Desktop\\EICA...",
+      "maliciousGroupId": "542D14600CEBA01D"
     }
   ],
   "pagination": {
-    "nextCursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
-    "totalItems": 580
+    "totalItems": 1
   }
 }
 ```
@@ -362,7 +418,9 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|activity_types|[]activities_types|True|Result of activities types|
+|data|[]data|False|Data|
+|errors|[]object|False|Errors|
+|pagination|pagination|False|Pagination|
 
 Example output:
 
@@ -988,6 +1046,43 @@ Example output:
 }
 ```
 
+#### Blacklist
+
+This action is used to blacklist and unblacklist a SHA1 hash. The blacklist is attempted for Linux, Windows, and MacOS operating systems and for all sites that the user has permission to manage.
+Note that when attempting to unblacklist a SHA1 hash by setting `blacklist_state` to `false`, the SentinelOne API will always return success even if the hash was not blacklisted to begin with.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|blacklist_state|boolean|True|True|True to create blacklist hash, false to unblacklist hash|None|True|
+|description|string|Hash Blacklisted from InsightConnect|False|Description for why the hash is blacklisted|None|Hash Blacklisted from InsightConnect|
+|hash|string|None|True|Create a blacklist item from a SHA1 hash|None|3395856ce81f2b7382dee72602f798b642f14140|
+
+Example input:
+
+```
+{
+  "blacklist_state": true,
+  "description": "Hash Blacklisted from InsightConnect",
+  "hash": "3395856ce81f2b7382dee72602f798b642f14140"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Return true if blacklist item was created or deleted|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 ### Triggers
 
 #### Get Threats
@@ -1320,6 +1415,8 @@ _This plugin does not contain any troubleshooting information._
 # Version History
 
 * 1.4.0 - New actions Quarantine, Get Agent Details, Search Agents
+* 1.3.0 - Add new action Blacklist
+* 1.2.2 - Update error message in Connection
 * 1.2.1 - Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size
 * 1.2.0 - New spec and help.md format for the Extension Library | New actions activities_list, activities_types, agents_abort_scan, agents_connect, agents_decommission, agents_disconnect, agents_fetch_logs, agents_initiate, agents_processes, agents_reload, agents_restart, agents_shutdown, agents_summary, agents_uninstall, apps_by_agent_ids, name_available
 * 1.1.0 - New trigger Get Threats | New actions Mitigate Threat, Mark as Benign, Mark as Threat and Create IOC Threat

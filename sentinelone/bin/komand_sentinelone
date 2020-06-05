@@ -51,6 +51,8 @@ class ICONSentinelone(komand.Plugin):
 
         self.add_action(actions.AppsByAgentIds())
 
+        self.add_action(actions.Blacklist())
+
         self.add_action(actions.BlacklistByContentHash())
 
         self.add_action(actions.BlacklistByIocHash())
