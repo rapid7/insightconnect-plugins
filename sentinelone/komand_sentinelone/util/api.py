@@ -11,7 +11,7 @@ class SentineloneAPI:
     def search_agents(self,  agent_details: str, results_length: int = 0) -> list:
         results = []
         for search in self.__get_searches(agent_details):
-            endpoint = self.url + 'web/api/v2.0/agents?'+search+'='+agent_details
+            endpoint = f"{self.url}web/api/v2.0/agents?{search}={agent_details}"
             output = requests.get(endpoint, headers=self.token_header)
 
             if output.status_code is 200 and output.json()["pagination"]["totalItems"] >= 1:
