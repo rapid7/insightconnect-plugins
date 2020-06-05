@@ -61,8 +61,7 @@ class Quarantine(komand.Action):
             if key == 'inet' or key == 'externalIp' or key == 'computerName' or key == 'id':
                 if value in whitelist:
                     raise PluginException(
-                        cause="Agent found in the whitelist",
+                        cause="Agent found in the whitelist.",
                         assistance=f"If you would like to block this host, remove {value} from the whitelist and try again"
                     )
         return
-
