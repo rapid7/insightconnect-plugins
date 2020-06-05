@@ -580,7 +580,7 @@ types:
       type: string
       required: false
     siteId:
-      title: Site Id
+      title: Site ID
       description: A reference to the containing site
       type: string
       required: false
