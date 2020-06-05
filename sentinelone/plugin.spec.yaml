@@ -610,7 +610,7 @@ types:
       type: string
       required: false
     accountId:
-      title: Account Id
+      title: Account ID
       description: A reference to the containing account
       type: string
       required: false
