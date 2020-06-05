@@ -62,6 +62,6 @@ class Quarantine(komand.Action):
                 if value in whitelist:
                     raise PluginException(
                         cause="Agent found in the whitelist.",
-                        assistance=f"If you would like to block this host, remove {value} from the whitelist and try again"
+                        assistance=f"If you would like to block this host, remove {value} from the whitelist and try again."
                     )
         return
