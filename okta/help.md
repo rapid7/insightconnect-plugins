@@ -899,6 +899,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 3.4.1 - Fix issue where Monitor User Groups trigger would continually detect the same new group addition
 * 3.4.0 - New trigger Monitor User Groups
 * 3.3.0 - New actions Get Factors and Send Push
 * 3.2.2 - Change docker image from `komand/python-2-plugin:2` to `komand/python-3-37-slim-plugin:3` | Use input and output constants | Changed variables names to more readable | Added "f" strings | Removed duplicated code
