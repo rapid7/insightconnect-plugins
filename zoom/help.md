@@ -31,10 +31,14 @@ Example input:
 
 ```
 {
-  "api_key": "",
-  "secret": ""
+  "api_key": "abcdefgABCDEFG12345678",
+  "secret": "abcdefgABCDEFG123456789abcdefgABCDEF"
 }
 ```
+
+See the Zoom [Create a JWT App](https://marketplace.zoom.us/docs/guides/build/jwt-app) documentation for generating a 
+JWT App and obtaining your API key and secret.
+
 ## Technical Details
 
 ### Actions
