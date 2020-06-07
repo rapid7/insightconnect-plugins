@@ -1465,7 +1465,7 @@ actions:
       agent:
         title: Agent
         description: Detailed information about agent found
-        type: object
+        type: agent_data
         required: false
 
   quarantine:

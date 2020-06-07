@@ -1,5 +1,5 @@
 {
-	"spec": "20d8905543e0220851dc67173e4bd066",
+	"spec": "14395a5879a5867dc136961c4102042f",
 	"manifest": "f0ffe874005a47a792c590fbccd98565",
 	"setup": "20da831da12534d66d5ace720b3d0c18",
 	"schemas": [
@@ -81,7 +81,7 @@
 		},
 		{
 			"identifier": "get_agent_details/schema.py",
-			"hash": "9927fb535b8f2febeb4b81e5eab39ce6"
+			"hash": "f0a5060b540227b68c167dfe1a0ee04a"
 		},
 		{
 			"identifier": "get_threat_summary/schema.py",

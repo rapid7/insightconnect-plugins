@@ -111,7 +111,7 @@ Example output:
             "198.51.100.100"
           ],
           "inet6": [
-            "fe80::3c5e:f39e:aee:6088"
+            "2001:db8:8:4::2"
           ],
           "name": "Ethernet",
           "physical": "00:50:56:94:17:08"
@@ -228,7 +228,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|agents|[]agent_data|False|Detailed information about agents found|
+|agent|agent_data|False|Detailed information about agent found|
 
 Example output:
 
@@ -291,7 +291,7 @@ Example output:
           "198.51.100.100"
         ],
         "inet6": [
-          "fe80::3c5e:f39e:aee:6088"
+          "2001:db8:8:4::2"
         ],
         "name": "Ethernet",
         "physical": "00:50:56:94:17:08"

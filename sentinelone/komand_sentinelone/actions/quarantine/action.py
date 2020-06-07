@@ -58,7 +58,7 @@ class Quarantine(komand.Action):
     @staticmethod
     def __find_in_whitelist(agent_obj: dict, whitelist: list):
         for key, value in agent_obj.items():
-            if key == 'inet' or key == 'externalIp' or key == 'computerName' or key == 'id':
+            if key in ['inet', 'externalIp', 'computerName', 'id', 'uuid']:
                 if value in whitelist:
                     raise PluginException(
                         cause="Agent found in the whitelist.",

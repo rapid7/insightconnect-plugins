@@ -24,11 +24,11 @@ class SentineloneAPI:
 
     @staticmethod
     def __get_searches(agent_details: str) -> list:
+        if len(agent_details) == 18 and agent_details.isdigit():
+            return ["ids"]
         if match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", agent_details):
             return ["networkInterfaceInet__contains", "externalIp__contains"]
         if match(r"((?:(\d{1,2}|[a-fA-F]{1,2}){2})(?::|-*)){6}", agent_details):
             return ["networkInterfacePhysical__contains", "uuid"]
-        if len(agent_details) == 18 and agent_details.isdigit():
-            return ["ids"]
         else:
             return ["computerName"]
