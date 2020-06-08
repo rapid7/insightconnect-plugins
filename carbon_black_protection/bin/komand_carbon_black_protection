@@ -4,10 +4,10 @@ import komand
 from komand_carbon_black_protection import connection, actions, triggers
 
 
-Name = 'Carbon Black Protection'
-Vendor = 'rapid7'
-Version = '2.2.1'
-Description = 'Ban and unban files and as well as manage approval requests'
+Name = "VMware Carbon Black App Control"
+Vendor = "rapid7"
+Version = "2.2.1"
+Description = "Ban and unban files and as well as manage approval requests"
 
 
 class ICONCarbonBlackProtection(komand.Plugin):
