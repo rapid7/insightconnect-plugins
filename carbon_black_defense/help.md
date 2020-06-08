@@ -320,7 +320,7 @@ Get Notifications trigger requires that the [API key type](https://developer.car
 
 # Version History
 
-* 2.0.1 - Rebrand and update help referencese
+* 2.0.1 - Rebrand and update help references
 * 2.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Registry Value
 * 1.1.1 - Update to Python 3.7 Slim SDK (plugin size reduction) | Fix bug in output where Security Event Code was defined as an `object` instead of a `string`
 * 1.1.0 - New action Get Details for Specific Event
@@ -335,4 +335,3 @@ Get Notifications trigger requires that the [API key type](https://developer.car
 * [VMware Carbon Black Cloud Endpoint Standard API](https://developer.carbonblack.com/reference/carbon-black-cloud/cb-defense/latest/rest-api/)
 * [Rate Limits](https://developer.carbonblack.com/reference/carbon-black-cloud/rate-limiting/)
 * [API Key Types](https://developer.carbonblack.com/reference/carbon-black-cloud/authentication/#creating-an-api-key)
-
