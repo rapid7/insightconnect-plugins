@@ -51,7 +51,7 @@ This action searches for agents by IP address, MAC address, hostname, or device 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, or device ID|None|hostname123|
+|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID|None|hostname123|
 
 Example input:
 
@@ -228,7 +228,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|agent|agent_data|False|Detailed information about agent found|
+|agents|[]agent_data|False|Detailed information about agents found|
 
 Example output:
 

@@ -1488,7 +1488,7 @@ actions:
         title: Whitelist
         description: This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs
         type: "[]string"
-        example: ["198.51.100.100", "example-host", "901345720792880606", "28db47168fa54f89aeed99769ac8d4dc"]
+        example: ["198.51.100.100", "hostname123", "901345720792880606", "28db47168fa54f89aeed99769ac8d4dc"]
         required: false
     output:
       response:

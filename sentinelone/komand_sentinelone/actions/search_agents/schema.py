@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Searches for agents by IP address, MAC address, hostname, or device ID"
+    DESCRIPTION = "Search for agents"
 
 
 class Input:
@@ -24,7 +24,7 @@ class SearchAgentsInput(komand.Input):
     "agent": {
       "type": "string",
       "title": "Agent",
-      "description": "Agent to retrieve device information from. Accepts IP address, MAC address, hostname, or device ID",
+      "description": "Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID",
       "order": 1
     }
   },

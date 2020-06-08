@@ -1,5 +1,5 @@
 {
-	"spec": "14395a5879a5867dc136961c4102042f",
+	"spec": "74ed84e041f52fde2131ac7f41807011",
 	"manifest": "f0ffe874005a47a792c590fbccd98565",
 	"setup": "20da831da12534d66d5ace720b3d0c18",
 	"schemas": [
@@ -81,7 +81,7 @@
 		},
 		{
 			"identifier": "get_agent_details/schema.py",
-			"hash": "f0a5060b540227b68c167dfe1a0ee04a"
+			"hash": "9773b0f6d72fc6174406bccbcfc03e55"
 		},
 		{
 			"identifier": "get_threat_summary/schema.py",
@@ -105,11 +105,11 @@
 		},
 		{
 			"identifier": "quarantine/schema.py",
-			"hash": "9df055a4449542a46706c87f80c299b3"
+			"hash": "68e484c3713f9f19cefab6c7452fcf4c"
 		},
 		{
 			"identifier": "search_agents/schema.py",
-			"hash": "dc11245a6a6845b3a968fa0ee659146a"
+			"hash": "38bd3aec5ba4eb3814ff0074ff9a31a4"
 		},
 		{
 			"identifier": "connection/schema.py",

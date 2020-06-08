@@ -24,7 +24,7 @@ class GetAgentDetailsInput(komand.Input):
     "agent": {
       "type": "string",
       "title": "Agent",
-      "description": "Agent to retrieve device information from. Accepts IP address, MAC address, hostname, or device ID",
+      "description": "Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID",
       "order": 1
     }
   },

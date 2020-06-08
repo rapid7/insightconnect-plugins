@@ -26,7 +26,7 @@ class QuarantineInput(komand.Input):
     "agent": {
       "type": "string",
       "title": "Agent",
-      "description": "Agent to perform quarantine action on. Accepts IP address, MAC address, hostname, or device ID",
+      "description": "Agent to perform quarantine action on. Accepts IP address, MAC address, hostname, UUID or agent ID",
       "order": 1
     },
     "quarantine_state": {
@@ -38,7 +38,7 @@ class QuarantineInput(komand.Input):
     "whitelist": {
       "type": "array",
       "title": "Whitelist",
-      "description": "This list contains a set of devices that should not be blocked. This can include IPs, hostnames, and device IDs",
+      "description": "This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs",
       "items": {
         "type": "string"
       },
