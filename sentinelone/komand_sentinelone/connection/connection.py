@@ -1,6 +1,8 @@
 import komand
 import requests
 from .schema import ConnectionSchema, Input
+
+from komand_sentinelone.util.api import SentineloneAPI
 from komand.exceptions import ConnectionTestException, PluginException
 # from komand_sentinelone.util import api
 
@@ -38,6 +40,7 @@ class Connection(komand.Connection):
             self.url = self.url + "/"
 
         token = self.get_auth_token(self.url, self.username, self.password)
+        self.client = SentineloneAPI(self.url, self.make_token_header())
         self.logger.info("Token: " + "*************" + str(token[len(token) - 5:len(token)]))
 
     @staticmethod
