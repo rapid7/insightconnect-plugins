@@ -171,7 +171,7 @@ This action is used to isolate (quarantine) endpoint from the network.
 |----|----|-------|--------|-----------|----|-------|
 |agent|string|None|True|Agent to perform quarantine action on. Accepts IP address, MAC address, hostname, or device ID|None|hostname123|
 |quarantine_state|boolean|None|True|True to quarantine host, false to unquarantine host|None|True|
-|whitelist|[]string|None|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, and device IDs|None|["198.51.100.100", "225494730938493804"]|
+|whitelist|[]string|None|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, and device IDs|None|["198.51.100.100", "hostname123", "901345720792880606", "28db47168fa54f89aeed99769ac8d4dc"]|
 
 Example input:
 
@@ -181,7 +181,9 @@ Example input:
   "quarantine_state": true,
   "whitelist": [
     "198.51.100.100",
-    "225494730938493804"
+    "hostname123",
+    "28db47168fa54f89aeed99769ac8d4dc",
+    "901345720792880606"
   ]
 }
 ```
