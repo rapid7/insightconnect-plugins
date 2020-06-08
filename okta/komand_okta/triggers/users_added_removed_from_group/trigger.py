@@ -2,7 +2,6 @@ import komand
 import time
 from .schema import UsersAddedRemovedFromGroupInput, UsersAddedRemovedFromGroupOutput, Input, Output, Component
 # Custom imports below
-import itertools
 from komand.exceptions import PluginException
 from komand_okta.util import helpers
 
@@ -71,10 +70,29 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             added = list()
             removed = list()
             for index, value in enumerate(group_list):
-                added_users = list(
-                    itertools.filterfalse(lambda user: user in current_list[index][value], new_list[index][value]))
-                removed_users = list(
-                    itertools.filterfalse(lambda user: user in new_list[index][value], current_list[index][value]))
+
+                # Find added group members
+                added_users = []
+                for new_user in new_list[index][value]:
+                    found = False
+                    for old_user in current_list[index][value]:
+                        if new_user["id"] == old_user["id"]:
+                            found = True
+
+                    if not found:
+                        added_users.append(new_user)
+
+                # Find removed group members
+                removed_users = []
+                for old_user in current_list[index][value]:
+                    found = False
+                    for new_user in new_list[index][value]:
+                        if old_user["id"] == new_user["id"]:
+                            found = True
+
+                    if not found:
+                        removed_users.append(old_user)
+
                 if added_users:
                     added.append({"group_name": group_names[index], "group_id": value, "users": added_users})
                 if removed_users:
