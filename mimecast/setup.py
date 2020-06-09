@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="mimecast-rapid7-plugin",
-      version="4.1.0",
+      version="4.1.1",
       description="Services for email security, archiving and continuity. Protect, manage and archive without compromise",
       author="rapid7",
       author_email="",

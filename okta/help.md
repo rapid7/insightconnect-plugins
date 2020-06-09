@@ -899,6 +899,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 3.4.2 - Fix issue where Monitor User Groups trigger would erroneously detect logins as an addition/removal of a group member
 * 3.4.1 - Fix issue where Monitor User Groups trigger would continually detect the same new group addition
 * 3.4.0 - New trigger Monitor User Groups
 * 3.3.0 - New actions Get Factors and Send Push

@@ -1,0 +1,357 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: zoom
+title: Zoom
+description: Trigger workflows on user activity while also managing your users with the Zoom plugin
+version: 1.0.0
+vendor: rapid7
+support: rapid7
+status: []
+tags: [zoom, chat]
+hub_tags:
+  use_cases: [alerting_and_notifications, application_management, threat_detection_and_response, user_management]
+  keywords: [zoom, chat]
+  features: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/zoom
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.zoom.com/
+enable_cache: false
+
+connection:
+  api_key:
+    title: API Key
+    description: JWT API Key
+    type: credential_secret_key
+    required: true
+    example: 'abcdefgABCDEFG12345678'
+  secret:
+    title: Secret
+    description: JWT Secret
+    type: credential_secret_key
+    required: true
+    example: 'abcdefgABCDEFG123456789abcdefgABCDEF'
+
+types:
+  user_activity:
+    email:
+      title: Email
+      description: Email address of the user used for the activity
+      type: string
+      required: true
+    time:
+      title: Time
+      description: Time during which the activity occurred
+      type: string
+      required: true
+    type:
+      title: Type
+      description: The type of activity
+      type: string
+      required: true
+      enum:
+      - "Sign in"
+      - "Sign out"
+    ip_address:
+      title: IP Address
+      description: The IP address of the user's device
+      type: string
+      required: true
+    client_type:
+      title: Client Type
+      description: The type of client of the user's device
+      type: string
+      required: false
+    version:
+      title: Version
+      description: The version of the client of the user's device
+      type: string
+      required: false
+  user:
+    id:
+      title: ID
+      description: User identifier
+      type: string
+      required: true
+    first_name:
+      title: First Name
+      description: First name of user
+      type: string
+      required: false
+    last_name:
+      title: Last Name
+      description: Last name of user
+      type: string
+      required: false
+    email:
+      title: Email
+      description: Email address of user
+      type: string
+      required: false
+    type:
+      title: Type
+      description: User type
+      type: integer
+      required: false
+      enum:
+      - 1
+      - 2
+      - 3
+    role_name:
+      title: Role Name
+      description: Role name of user
+      type: string
+      required: false
+    pmi:
+      title: Personal Meeting ID
+      description: Personal meeting ID
+      type: integer
+      required: false
+    use_pmi:
+      title: Use Personal Meeting ID
+      description: Use Personal meeting ID for instant meetings
+      type: boolean
+      required: false
+    personal_meeting_url:
+      title: Personal Meeting URL
+      description: Personal meeting URL of user
+      type: string
+      required: false
+    timezone:
+      title: Timezone
+      description: Timezone of user
+      type: string
+      required: false
+    verified:
+      title: Verified
+      description: Whether the user is verified or not
+      type: integer
+      required: false
+      enum:
+      - 1
+      - 0
+    dept:
+      title: Department
+      description: Department of user
+      type: string
+      required: false
+    created_at:
+      title: Created At
+      description: Creation datetime of user
+      type: string
+      required: false
+    last_login_time:
+      title: Last Login Time
+      description: Last login datetime of user
+      type: string
+      required: false
+    host_key:
+      title: Host Key
+      description: User's host key
+      type: string
+      required: false
+    jid:
+      title: JID
+      description: JID of user
+      type: string
+      required: false
+    group_ids:
+      title: Web Group IDs
+      description: IDs of the web groups user belongs to
+      type: "[]string"
+      required: false
+    im_group_ids:
+      title: IM Group IDs
+      description: IM IDs of the groups user belongs to
+      type: "[]string"
+      required: false
+    account_id:
+      title: Account ID
+      description: Account ID of user
+      type: string
+      required: false
+    language:
+      title: Language
+      description: Language of user
+      type: string
+      required: false
+    phone_country:
+      title: Phone Country
+      description: Phone country of user
+      type: string
+      required: false
+    phone_number:
+      title: Phone Number
+      description: Phone number of user
+      type: string
+      required: false
+    status:
+      title: Status
+      description: Status of user
+      type: string
+      required: false
+actions:
+  get_user:
+    title: Get User
+    description: Get user in Zoom account
+    input:
+      user_id:
+        title: User ID
+        description: The user identifier or email address
+        type: string
+        required: true
+        example: "user@example.com"
+    output:
+      user:
+        title: User
+        description: User details
+        type: user
+        required: true
+  create_user:
+    title: Create User
+    description: Create user associated to account
+    input:
+      action:
+        title: Action
+        description: Specify how to create the new user
+        type: string
+        required: true
+        default: create
+        enum:
+        - "create"
+        - "autoCreate"
+        - "custCreate"
+        - "ssoCreate"
+        example: "create"
+      email:
+        title: Email
+        description: Email address of user
+        type: string
+        required: true
+        example: user@example.com
+      type:
+        title: Type
+        description: User type
+        type: string
+        required: true
+        enum:
+        - "Basic"
+        - "Licensed"
+        - "On-prem"
+        example: Basic
+      first_name:
+        title: First Name
+        description: First name of user
+        type: string
+        required: false
+        example: John
+      last_name:
+        title: Last Name
+        description: Last name of user
+        type: string
+        required: true
+        example: Smith
+    output:
+      id:
+        title: ID
+        description: User identifier
+        type: string
+        required: true
+      email:
+        title: Email
+        description: Email address of user
+        type: string
+        required: true
+      type:
+        title: Type
+        description: User type
+        type: integer
+        required: true
+        enum:
+        - 1
+        - 2
+        - 3
+      first_name:
+        title: First Name
+        description: First name of user
+        type: string
+        required: false
+      last_name:
+        title: Last Name
+        description: Last name of user
+        type: string
+        required: true
+  delete_user:
+    title: Delete User
+    description: Delete or disassociate user from account
+    input:
+      action:
+        title: Action
+        description: Specify how to delete the user. To delete pending user, use disassocaite
+        type: string
+        required: true
+        enum:
+        - "delete"
+        - "disassociate"
+        example: "delete"
+      id:
+        title: User ID
+        description: The user identifier or email address
+        type: string
+        required: true
+        example: "user@example.com"
+      transfer_email:
+        title: Transfer Email
+        description: Email to transfer meetings, webinars, or recordings
+        type: string
+        required: false
+        example: "user@example.com"
+      transfer_meetings:
+        title: Transfer Meetings
+        description: Whether to transfer meetings to defined transfer email
+        type: boolean
+        required: false
+        default: false
+        example: false
+      transfer_webinars:
+        title: Transfer Webinars
+        description: Whether to transfer webinars to defined transfer email
+        type: boolean
+        required: false
+        default: false
+        example: false
+      transfer_recordings:
+        title: Transfer Recordings
+        description: Whether to transfer recordings to defined transfer email
+        type: boolean
+        required: false
+        default: false
+        example: false
+    output:
+      success:
+        title: Success
+        description: Success
+        type: boolean
+        required: true
+triggers:
+  user_activity_event:
+    title: User Activity Event
+    description: Poll for user activity events
+    input:
+      activity_type:
+        title: Activity Type
+        description: Type of user activity to match event
+        type: string
+        required: true
+        enum:
+        - "Sign in"
+        - "Sign out"
+        - "All"
+        example: "All"
+    output:
+      user_activity:
+        title: User Activity
+        description: User Activity
+        type: user_activity
+        required: false
