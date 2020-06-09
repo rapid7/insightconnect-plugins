@@ -2,9 +2,9 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: carbon_black_live_response
-title: Carbon Black Live Response
+title: VMware Carbon Black EDR
 description: Delete malicious files
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: rapid7
 status: []
@@ -14,10 +14,11 @@ resources:
   vendor_url: https://www.carbonblack.com/
 tags:
 - carbon black
+- vmware
 - live response
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [carbon black, live response]
+  keywords: [carbon black, vmware, live response]
   features: []
 types:
   session:
@@ -105,12 +106,12 @@ connection:
   api_key:
     type: credential_secret_key
     title: API Key
-    description: API token found in your Carbon Black profile
+    description: API token found in your VMware Carbon Black profile
     required: true
   url:
     title: API URL
     type: string
-    description: Carbon Black Server API URL
+    description: VMware Carbon Black Server API URL
     default: https://127.0.0.1/api/bit9platform/v1
     required: true
   verify_ssl:
