@@ -97,7 +97,7 @@ Example input:
 
 ```
 {
-  "address": "185.231.155.180"
+  "address": "198.51.100.100"
 }
 ```
 
@@ -169,7 +169,7 @@ _This plugin has no references._
 
 # Version History
 
-* 2.0.2 - Update to use latest fork of komand_whois 
+* 2.0.2 - Fix issue where com.br style domains could crash the plugin
 * 2.0.1 - Update to v4 Python plugin runtime
 * 2.0.0 - Add example inputs | Fix capitalization in the title of the `last_updated` output.
 * 1.0.7 - Upgrade komand/python-whois version to 0.4.2 | Update whois.conf to support .in domains | Updated help.md for the Extension Library
