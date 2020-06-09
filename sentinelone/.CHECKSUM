@@ -1,7 +1,7 @@
 {
-	"spec": "4094e42abd2732af79368a84490ba2c8",
-	"manifest": "149aab6b3b39ddf39800457e188b1202",
-	"setup": "373941970f3783a1f031bcc6465b4e3f",
+	"spec": "c0b5c620f3fae3ca100cb40be9f72ddd",
+	"manifest": "f0ffe874005a47a792c590fbccd98565",
+	"setup": "20da831da12534d66d5ace720b3d0c18",
 	"schemas": [
 		{
 			"identifier": "activities_list/schema.py",
@@ -64,6 +64,10 @@
 			"hash": "f1a871cbbcdf7e1730215961e3b2ac99"
 		},
 		{
+			"identifier": "blacklist/schema.py",
+			"hash": "de16f4a3cf4c4e29f6a48cd120e2814d"
+		},
+		{
 			"identifier": "blacklist_by_content_hash/schema.py",
 			"hash": "ac946280f99e8fd3d8ab3f9376b373b1"
 		},
@@ -74,6 +78,10 @@
 		{
 			"identifier": "create_ioc_threat/schema.py",
 			"hash": "ea407640aed1d5eba054c404bb7687c9"
+		},
+		{
+			"identifier": "get_agent_details/schema.py",
+			"hash": "9773b0f6d72fc6174406bccbcfc03e55"
 		},
 		{
 			"identifier": "get_threat_summary/schema.py",
@@ -96,8 +104,16 @@
 			"hash": "7882f358d6395e2edb2ff5d82a45b4fc"
 		},
 		{
+			"identifier": "quarantine/schema.py",
+			"hash": "68e484c3713f9f19cefab6c7452fcf4c"
+		},
+		{
+			"identifier": "search_agents/schema.py",
+			"hash": "38bd3aec5ba4eb3814ff0074ff9a31a4"
+		},
+		{
 			"identifier": "connection/schema.py",
-			"hash": "7839b46114cb187fce6db0039e4cecf6"
+			"hash": "2e04a6a8659eaffcb6d893593d52635d"
 		},
 		{
 			"identifier": "get_threats/schema.py",
