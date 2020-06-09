@@ -70,7 +70,7 @@ Example input:
 ```
 {
   "action": "block",
-  "comment": "i'm blocking this because virustotal said it was malicious",
+  "comment": "Deemed malicious by VirusTotal",
   "disable_log_click": "Flase",
   "disable_rewrite": true,
   "disable_user_awareness": false,
