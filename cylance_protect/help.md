@@ -155,4 +155,4 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Cylance Protect](https://www.cylance.com)
+* [BlackBerry CylancePROTECT](https://www.cylance.com)
