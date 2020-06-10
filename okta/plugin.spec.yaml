@@ -156,7 +156,7 @@ types:
 connection:
   okta_url:
     title: Okta Domain
-    description: Okta Domain e.g. http://www.example.com/profile
+    description: Okta Domain e.g. example.okta.com
     type: string
     required: true
   okta_key:
