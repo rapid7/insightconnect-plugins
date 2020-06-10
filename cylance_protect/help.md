@@ -26,7 +26,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|application_id|credential_secret_key|None|True|Application ID for Cylance Protect instance|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|
+|application_id|credential_secret_key|None|True|Application ID for CylancePROTECT instance|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|
 |application_secret|credential_secret_key|None|True|Generated token that allows access to Cylance Resources|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|
 |tenant_id|credential_secret_key|None|True|The unique tenant ID of the tenant that the device belongs to|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|
 |url|string|https://protectapi.cylance.com|True|Web API URL|None|https://protectapi.cylance.com|
