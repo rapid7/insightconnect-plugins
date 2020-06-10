@@ -4,11 +4,79 @@ import json
 
 
 class Input:
-    pass
+    CREDENTIALS = "credentials"
+    DOMAIN = "domain"
+    HOST = "host"
+    PORT = "port"
+    
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "credentials": {
+      "$ref": "#/definitions/credential_username_password",
+      "title": "Username and Password",
+      "description": "Username and password",
+      "order": 3
+    },
+    "domain": {
+      "type": "string",
+      "title": "Domain",
+      "description": "The Symantec Endpoint Protection Manager domain to which the username logs on",
+      "order": 4
+    },
+    "host": {
+      "type": "string",
+      "title": "Host",
+      "description": "Symantec Endpoint Protection Manager host, either IP address or domain",
+      "order": 1
+    },
+    "port": {
+      "type": "integer",
+      "title": "Port",
+      "description": "Symantec Endpoint Protection server port, typically 8446",
+      "default": 8446,
+      "order": 2
+    }
+  },
+  "required": [
+    "credentials",
+    "domain",
+    "host",
+    "port"
+  ],
+  "definitions": {
+    "credential_username_password": {
+      "id": "credential_username_password",
+      "type": "object",
+      "title": "Credential: Username and Password",
+      "description": "A username and password combination",
+      "properties": {
+        "password": {
+          "type": "string",
+          "title": "Password",
+          "displayType": "password",
+          "description": "The password",
+          "format": "password",
+          "order": 2
+        },
+        "username": {
+          "type": "string",
+          "title": "Username",
+          "description": "The username to log in with",
+          "order": 1
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
+    }
+  }
+}
     """)
 
     def __init__(self):

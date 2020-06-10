@@ -18,3 +18,30 @@ hub_tags:
   use_cases: [TODO]
   keywords: [symantec, endpoint, edr]
   features: []
+
+connection:
+  host:
+    title: Host
+    type: string
+    description: Symantec Endpoint Protection Manager host, either IP address or domain
+    example: sepm-14
+    required: true
+  port:
+    title: Port
+    type: integer
+    description: Symantec Endpoint Protection server port, typically 8446
+    default: 8446
+    example: 8446
+    required: true
+  credentials:
+    title: Username and Password
+    type: credential_username_password
+    description: Username and password
+    example: '{"username": example, "password": "test"}'
+    required: true
+  domain:
+    title: Domain
+    type: string
+    description: The Symantec Endpoint Protection Manager domain to which the username logs on
+    required: true
+    example: mydomain
