@@ -19,15 +19,15 @@ class Connection(insightconnect_plugin_runtime.Connection):
         domain = params.get(Input.DOMAIN, "")
 
         try:
-            self.api_client = APIClient.new_client(host=host,
-                                                   username=username,
-                                                   password=password,
-                                                   domain=domain,
-                                                   port=port)
+            self.api_client: APIClient = APIClient.new_client(host=host,
+                                                              username=username,
+                                                              password=password,
+                                                              domain=domain,
+                                                              port=port)
         except APIException as e:
             raise PluginException(cause="Authentication to the Symantec Endpoint Protection console failed!",
                                   assistance=e.message)
 
     def test(self):
-        # TODO: Implement connection test
-        pass
+        # Implicit connection test happens since connect function is called first
+        return {"success": True}
