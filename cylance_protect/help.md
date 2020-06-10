@@ -1,17 +1,18 @@
 # Description
 
-The Cylance Protect plugin allows you to manage all your CylancePROTECT operations
+The [Blackberry Cylance Protect](https://www.cylance.com/en-us/platform/products/cylance-protect.html) plugin allows you to automate response operations.
 
 # Key Features
 
-Identify key features of plugin.
+* Get agent details
+* Blacklist a malicious hash
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product's user interface
+* CylancePROTECT
 
 # Documentation
+
 ## Setup
 
 The connection configuration accepts the following parameters:
@@ -75,7 +76,7 @@ Example output:
 
 #### Get Agent Details
 
-This action is used to single input to obtain agent information.
+This action is used to obtain agent information.
 
 ##### Input
 
@@ -87,7 +88,7 @@ Example input:
 
 ```
 {
-  "agent": "1abc234d-5efa-6789-bcde-0f1abcde23f5"
+  "agent": "198.51.100.100"
 }
 ```
 
@@ -118,7 +119,7 @@ Example output:
         "is_safe": false,
         "date_first_registered": "2020-05-28T14:00:50",
         "ip_addresses": [
-          "10.5.33.69"
+          "198.51.100.100"
         ],
         "mac_addresses": [
           "00-60-26-26-D5-19"
