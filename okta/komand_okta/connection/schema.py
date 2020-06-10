@@ -23,7 +23,7 @@ class ConnectionSchema(komand.Input):
     "okta_url": {
       "type": "string",
       "title": "Okta Domain",
-      "description": "Okta Domain e.g. http://www.example.com/profile",
+      "description": "Okta Domain e.g. example.okta.com",
       "order": 1
     }
   },

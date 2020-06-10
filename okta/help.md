@@ -21,7 +21,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |okta_key|credential_secret_key|None|True|Okta key|None|None|
-|okta_url|string|None|True|Okta Domain e.g. http://www.example.com/profile|None|None|
+|okta_url|string|None|True|Okta Domain e.g. example.okta.com|None|None|
 
 ## Technical Details
 
