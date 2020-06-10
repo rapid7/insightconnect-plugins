@@ -143,7 +143,7 @@ connection:
     example: 1abc234d-5efa-6789-bcde-0f1abcde23f5
   application_id:
     title: Application ID
-    description: Application ID for Cylance Protect instance
+    description: Application ID for CylancePROTECT instance
     type: credential_secret_key
     required: true
     example: 1abc234d-5efa-6789-bcde-0f1abcde23f5
