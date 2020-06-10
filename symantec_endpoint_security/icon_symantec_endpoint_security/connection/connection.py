@@ -23,7 +23,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
                                                               username=username,
                                                               password=password,
                                                               domain=domain,
-                                                              port=port)
+                                                              port=port,
+                                                              logger=self.logger)
             self.logger.info(f"Got API token: {self.api_client.auth_token}")
         except APIException as e:
             raise PluginException(cause="Authentication to the Symantec Endpoint Protection console failed!",

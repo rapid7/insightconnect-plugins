@@ -1,6 +1,8 @@
 import requests
 import json
 from typing import Optional
+import logging
+from logging import Logger
 
 
 class APIException(Exception):
@@ -21,7 +23,7 @@ class APIClient(object):
         self.session = requests.Session()
 
     @classmethod
-    def new_client(cls, host: str, username: str, password: str, domain: str, port: str):
+    def new_client(cls, host: str, username: str, password: str, domain: str, port: str, logger: Logger):
         """
         Authenticates with Symantec Endpoint Protection and returns an API client
         :param host: Console host
@@ -29,11 +31,14 @@ class APIClient(object):
         :param password: Console password
         :param domain: Console domain
         :param port: Console port
+        :param logger: Logger to use
         :return: API Client
         """
 
         url = f"https://{host}:{port}/sepm/api/v1"
         auth_url = f"{url}/identity/authenticate"
+
+        logger.info(f"Authenticating with Symantec Endpoint Protection console at '{url}'")
 
         auth_body = {"username": username, "password": password, "domain": domain}
         headers = {"Content-Type": "application/json"}
@@ -41,6 +46,7 @@ class APIClient(object):
                                  json=auth_body,
                                  headers=headers,
                                  verify=False)
+        logger.info(f"Received status code '{response.status_code}' from Symantec Endpoint Protection console.")
 
         status_codes = {
             400: APIException(status_code=400, message="The parameters are invalid."),
@@ -60,6 +66,7 @@ class APIClient(object):
             except KeyError:
                 raise APIException(status_code=None, message="Symantec Endpoint Protection did not return the "
                                                              "authentication token!")
+            logger.info("Authentication with Symantec Endpoint Protection console successful!")
             return cls(base_url=url,
                        auth_token=auth_token)
         elif status_codes.get(response.status_code) is not None:

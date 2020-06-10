@@ -8,14 +8,29 @@ class Component:
 
 
 class Input:
-    pass
+    AGENT = "agent"
+    
 
 class Output:
     pass
 
 class GetAgentDetailsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "agent": {
+      "type": "string",
+      "title": "Agent",
+      "description": "Agent to retrieve device from. This can be by IP address, MAC address, hostname, or agent ID",
+      "order": 1
+    }
+  },
+  "required": [
+    "agent"
+  ]
+}
     """)
 
     def __init__(self):

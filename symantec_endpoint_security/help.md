@@ -39,17 +39,7 @@ Example input:
 
 ### Actions
 
-#### Get Agent Details
-
-This action is used to get details about an agent by IP address, MAC address, hostname, or agent ID.
-
-##### Input
-
-_This action does not contain any inputs._
-
-##### Output
-
-_This action does not contain any outputs._
+_This plugin does not contain any actions._
 
 ### Triggers
 
