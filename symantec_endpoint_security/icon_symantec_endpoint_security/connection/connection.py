@@ -1,25 +1,32 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 # Custom imports below
+from icon_symantec_endpoint_security.util.api import APIClient, APIException
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
 
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
+        self.api_client = None
 
     def connect(self, params):
-        """
-        Connection config params are supplied as a dict in
-        params or also accessible in self.parameters['key']
+        host = params.get(Input.HOST)
+        port = params.get(Input.PORT)
+        username = params.get(Input.CREDENTIALS)["username"]
+        password = params.get(Input.CREDENTIALS)["password"]
+        domain = params.get(Input.DOMAIN, "")
 
-        The following will setup the var to be accessed
-          self.blah = self.parameters['blah']
-        in the action and trigger files as:
-          blah = self.connection.blah
-        """
-        # TODO: Implement connection or 'pass' if no connection is necessary
-        self.logger.info("Connect: Connecting...")
+        try:
+            self.api_client = APIClient.new_client(host=host,
+                                                   username=username,
+                                                   password=password,
+                                                   domain=domain,
+                                                   port=port)
+        except APIException as e:
+            raise PluginException(cause="Authentication to the Symantec Endpoint Protection console failed!",
+                                  assistance=e.message)
 
     def test(self):
         # TODO: Implement connection test
