@@ -45,3 +45,15 @@ connection:
     description: The Symantec Endpoint Protection Manager domain to which the username logs on
     required: true
     example: mydomain
+
+actions:
+  get_agent_details:
+    title: Get Agent Details
+    description: "Get details about an agent by IP address, MAC address, hostname, or agent ID"
+    inputs:
+      agent:
+        title: "Agent"
+        description: "Agent to retrieve device from. This can be by IP address, MAC address, hostname, or agent ID"
+        type: string
+        required: true
+        example: "example"

@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 # Custom imports below
 from icon_symantec_endpoint_security.util.api import APIClient, APIException
-from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -24,6 +24,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                                                               password=password,
                                                               domain=domain,
                                                               port=port)
+            self.logger.info(f"Got API token: {self.api_client.auth_token}")
         except APIException as e:
             raise PluginException(cause="Authentication to the Symantec Endpoint Protection console failed!",
                                   assistance=e.message)
