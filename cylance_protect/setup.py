@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="cylance_protect-rapid7-plugin",
       version="1.0.0",
-      description="The Cylance Protect plugin allows you to manage all your CylancePROTECT operations",
+      description="Automate detection and response operations using CylancePROTECT",
       author="rapid7",
       author_email="",
       url="",

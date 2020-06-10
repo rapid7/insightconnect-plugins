@@ -30,7 +30,7 @@ class CylanceProtectAPI:
             if len(ret) > 0:
                 devices = ret
         if len(devices) > 1:
-            self.logger.info(f"Multiple agents found that matched the query: {devices}.We will act upon the first match")
+            self.logger.info(f"Multiple agents found that matched the query: {devices}. We will act upon the first match.")
         return clean(devices[0])
 
     def create_blacklist_item(self, payload):
@@ -57,24 +57,24 @@ class CylanceProtectAPI:
                                         headers=headers)
 
             if response.status_code == 400:
-                raise PluginException(cause="Bad request",
-                                      assistance="the Tenant ID cannot be retrieved from the JWT token")
+                raise PluginException(cause="Bad request.",
+                                      assistance="The Tenant ID cannot be retrieved from the JWT token.")
             if response.status_code == 401:
                 raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
             if response.status_code == 403:
                 raise PluginException(
-                    cause="Forbidden",
-                    assistance="the JWT Token did not contain the proper scope to perform this action"
+                    cause="Forbidden.",
+                    assistance="The JWT Token did not contain the proper scope to perform this action."
                 )
             if response.status_code == 404:
                 raise PluginException(
-                    cause="Not found",
-                    assistance="the request was made for a resource that doesn't exist"
+                    cause="Not found.",
+                    assistance="The request was made for a resource that doesn't exist."
                 )
             if response.status_code == 409:
                 raise PluginException(
-                    cause="Conflict",
-                    assistance="request made conflicts with an existing resource"
+                    cause="Conflict.",
+                    assistance="Request made conflicts with an existing resource."
                 )
             if response.status_code >= 500:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR)

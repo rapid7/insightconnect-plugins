@@ -22,7 +22,7 @@ The connection configuration accepts the following parameters:
 |application_id|credential_secret_key|None|True|Application ID for Cylance Protect instance|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|
 |application_secret|credential_secret_key|None|True|Generated token that allows access to Cylance Resources|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|
 |tenant_id|credential_secret_key|None|True|The unique tenant ID of the tenant that the device belongs to|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|
-|url|string|None|True|Web API URL|None|https://example.com|
+|url|string|https://protectapi.cylance.com|True|Web API URL|None|https://protectapi.cylance.com|
 
 Example input:
 
@@ -31,7 +31,7 @@ Example input:
   "application_id": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
   "application_secret": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
   "tenant_id": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
-  "url": "https://example.com"
+  "url": "https://protectapi.cylance.com"
 }
 ```
 ## Technical Details
@@ -82,13 +82,13 @@ This action is used to obtain agent information.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent|string|None|True|Agent to retrieve device information from. Accepts MAC address, hostname, or agent ID|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|
+|agent|string|None|True|Agent to retrieve device information from. Accepts MAC address, hostname, or agent ID|None|cylance-agent-win12|
 
 Example input:
 
 ```
 {
-  "agent": "198.51.100.100"
+  "agent": "cylance-agent-win12"
 }
 ```
 

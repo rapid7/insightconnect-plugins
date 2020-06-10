@@ -38,6 +38,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "URL",
       "description": "Web API URL",
+      "default": "https://protectapi.cylance.com",
       "order": 2
     }
   },

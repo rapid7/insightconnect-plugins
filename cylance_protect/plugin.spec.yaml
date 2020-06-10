@@ -8,10 +8,10 @@ version: 1.0.0
 vendor: rapid7
 support: rapid7
 status: []
-tags: [cylance, protect]
+tags: [cylance, protect, edr, blacklist]
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [cylance, protect]
+  keywords: [cylance, protect, edr, blacklist]
   features: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cylanceprotect
@@ -133,8 +133,8 @@ connection:
     description: Web API URL
     type: string
     required: true
-    default: https://protect.cylance.com
-    example: https://protect.cylance.com
+    default: https://protectapi.cylance.com
+    example: https://protectapi.cylance.com
   application_secret:
     title: Application Secret
     description: Generated token that allows access to Cylance Resources
@@ -158,7 +158,7 @@ actions:
         description: Agent to retrieve device information from. Accepts MAC address, hostname, or agent ID
         type: string
         required: true
-        example: 198.51.100.100
+        example: cylance-agent-win12
     output:
       agent:
         title: Agent

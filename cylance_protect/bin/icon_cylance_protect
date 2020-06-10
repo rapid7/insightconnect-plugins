@@ -4,10 +4,10 @@ import insightconnect_plugin_runtime
 from icon_cylance_protect import connection, actions, triggers
 
 
-Name = "Cylance Protect"
+Name = "Blackberry CylancePROTECT"
 Vendor = "rapid7"
 Version = "1.0.0"
-Description = "The Cylance Protect plugin allows you to manage all your CylancePROTECT operations"
+Description = "Automate detection and response operations using CylancePROTECT"
 
 
 class ICONCylanceProtect(insightconnect_plugin_runtime.Plugin):
