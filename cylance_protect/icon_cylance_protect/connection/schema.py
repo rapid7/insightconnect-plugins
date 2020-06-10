@@ -19,7 +19,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "application_id": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Application ID",
-      "description": "Application ID for Cylance Protect instance",
+      "description": "Application ID for CylancePROTECT instance",
       "order": 4
     },
     "application_secret": {

@@ -90,7 +90,7 @@ class CylanceProtectAPI:
             self.logger.info(f"Invalid json: {e}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
         except requests.exceptions.HTTPError as e:
-            self.logger.info(f"Call to Any Run failed: {e}")
+            self.logger.info(f"Call to CylancePROTECT failed: {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
 
     def generate_token(self, tenant_id, app_id, app_secret, scope):
