@@ -9,11 +9,18 @@ The [Blackberry Cylance Protect](https://www.cylance.com/en-us/platform/products
 
 # Requirements
 
-* CylancePROTECT configured with an Integration Application
+* CylancePROTECT configured with an Custom Application
 
 # Documentation
 
 ## Setup
+
+You must create a Custom Application by the following procedure from the CylancePROTECT console.
+
+1. Go to the Integrations tab on the Settings page
+2. Click "Add Application"
+3. Provide a name for the integration and choose the permissions related to the actions you want to use
+4. Copy and paste the Application ID, Application Secret, and Tenant ID (from the Integrations tab) into the connection
 
 The connection configuration accepts the following parameters:
 
@@ -34,6 +41,7 @@ Example input:
   "url": "https://protectapi.cylance.com"
 }
 ```
+
 ## Technical Details
 
 ### Actions
