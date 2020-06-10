@@ -21,7 +21,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |okta_key|credential_secret_key|None|True|Okta key|None|None|
-|okta_url|string|None|True|Okta Domain e.g. dev-114295-admin.oktapreview.com|None|None|
+|okta_url|string|None|True|Okta Domain e.g. http://www.example.com/profile|None|None|
 
 ## Technical Details
 
@@ -815,8 +815,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|users_added_from_groups|[]user_group|False|Users added to a group since the last check|
-|users_removed_from_groups|[]user_group|False|Users removed from a group since the last check|
+|users_added_from_groups|[]user_group|True|Users added to a group since the last check|
+|users_removed_from_groups|[]user_group|True|Users removed from a group since the last check|
 
 Example output:
 ```

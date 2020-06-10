@@ -156,7 +156,7 @@ types:
 connection:
   okta_url:
     title: Okta Domain
-    description: Okta Domain e.g. dev-114295-admin.oktapreview.com
+    description: Okta Domain e.g. http://www.example.com/profile
     type: string
     required: true
   okta_key:
@@ -188,12 +188,12 @@ triggers:
         title: Additions
         description: Users added to a group since the last check
         type: "[]user_group"
-        required: false
+        required: true
       users_removed_from_groups:
         title: Removals
         description: Users removed from a group since the last check
         type: "[]user_group"
-        required: false
+        required: true
 actions:
   get_factors:
     title: Get Okta User Factors
