@@ -101,9 +101,9 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             if added and removed:
                 self.send({Output.USERS_ADDED_FROM_GROUPS: added, Output.USERS_REMOVED_FROM_GROUPS: removed})
             elif added and not removed:
-                self.send({Output.USERS_ADDED_FROM_GROUPS: added})
+                self.send({Output.USERS_ADDED_FROM_GROUPS: added, Output.USERS_REMOVED_FROM_GROUPS: []})
             elif removed and not added:
-                self.send({Output.USERS_REMOVED_FROM_GROUPS: removed})
+                self.send({Output.USERS_REMOVED_FROM_GROUPS: removed, Output.USERS_ADDED_FROM_GROUPS: []})
 
             current_list = new_list
 
