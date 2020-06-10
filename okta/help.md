@@ -18,10 +18,10 @@ to integrate their central user account system with a wide variety of other appl
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|okta_key|credential_secret_key|None|True|Okta key|None|
-|okta_url|string|None|True|Okta Domain e.g. dev-114295-admin.oktapreview.com|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|okta_key|credential_secret_key|None|True|Okta key|None|None|
+|okta_url|string|None|True|Okta Domain e.g. dev-114295-admin.oktapreview.com|None|None|
 
 ## Technical Details
 
@@ -33,9 +33,9 @@ This action returns an object containing all of a user's factors for MFA.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user_id|string|None|True|User ID to get factors for|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|User ID to get factors for|None|None|
 
 Example input:
 
@@ -117,10 +117,10 @@ This action pushes a MFA challenge to a user's device and waits for a success or
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|factor_id|string|None|True|Factor ID of the user to push verification to|None|
-|user_id|string|None|True|User ID to push verification to|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|factor_id|string|None|True|Factor ID of the user to push verification to|None|None|
+|user_id|string|None|True|User ID to push verification to|None|None|
 
 Example input:
 
@@ -149,9 +149,9 @@ as a whole.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|The email of the employee to suspend|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|The email of the employee to suspend|None|None|
 
 Example input:
 
@@ -193,9 +193,9 @@ This action is used to reset all multifactors for a user by email.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|The email of the employee to reset factors|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|The email of the employee to reset factors|None|None|
 
 Example input:
 
@@ -241,9 +241,9 @@ the API returning a successful result and the actual deactivation / deprovisioni
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|The email of the employee to deactivate|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|The email of the employee to deactivate|None|None|
 
 Example input:
 
@@ -285,10 +285,10 @@ This action is used to delete a user. If a user is not deprovisioned, this will 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|send_admin_email|boolean|False|True|Sends a deactivation email to the administrator if true. Default value is false|None|
-|user_email|string|None|True|The email of the user to delete|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|send_admin_email|boolean|False|True|Sends a deactivation email to the administrator if true. Default value is false|None|None|
+|user_email|string|None|True|The email of the user to delete|None|None|
 
 Example input:
 
@@ -319,9 +319,9 @@ This action is used to unsuspend a user.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|The email of the Okta user|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|The email of the Okta user|None|None|
 
 Example input:
 
@@ -363,9 +363,9 @@ This action is used to obtain information about a user.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|The email of the user to obtain information about|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|The email of the user to obtain information about|None|None|
 
 Example input:
 
@@ -478,10 +478,10 @@ This action is used to remove a user from an existing group.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|The email of the Okta user|None|
-|group_id|string|None|True|The ID of the group to which the user should be added|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|The email of the Okta user|None|None|
+|group_id|string|None|True|The ID of the group to which the user should be added|None|None|
 
 Example input:
 
@@ -514,10 +514,10 @@ This action is used to add a user to an existing group.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|The email of the Okta user|None|
-|group_id|string|None|True|The ID of the group to which the user should be added|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|The email of the Okta user|None|None|
+|group_id|string|None|True|The ID of the group to which the user should be added|None|None|
 
 Example input:
 
@@ -550,9 +550,9 @@ This action is used to list available groups.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|False|Query to list groups, otherwise all groups will be returned|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|False|Query to list groups, otherwise all groups will be returned|None|None|
 
 Example input:
 
@@ -626,10 +626,10 @@ This action is used to assign a user to an application for SSO and provisioning.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|applicationId|string|None|True|Application ID|None|
-|appuser|object|None|False|Application user model as JSON object, see https://developer.okta.com/docs/api/resources/apps#application-user-model|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|applicationId|string|None|True|Application ID|None|None|
+|appuser|object|None|False|Application user model as JSON object, see https://developer.okta.com/docs/api/resources/apps#application-user-model|None|None|
 
 `appuser` accepts a [application user model](https://developer.okta.com/docs/api/resources/apps#application-user-model) JSON object.
 
@@ -675,14 +675,14 @@ e.g.: `{ "firstName": "Isaac", "lastName": "Brock", "email": "user@example.com",
 If configuring the `provider` and/or `recovery_question` inputs, for each used, their respective fields must be completed otherwise Okta will return an error.
 This action will attempt to prevent that be removing the entire input if it detects a missing field in that input.
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|activate|boolean|True|True|Executes activation lifecycle operation when creating the user|None|
-|credentials|credentials_input|None|False|Credentials for user|None|
-|groupIds|[]string|None|False|IDs of groups that user will be immediately added to at time of creation|None|
-|nextLogin|boolean|None|True|Change password next time the user logs in|None|
-|profile|object|None|True|Profile properties for user|None|
-|provider|boolean|False|True|Indicates whether to create a user with a specified authentication provider|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|activate|boolean|True|True|Executes activation lifecycle operation when creating the user|None|None|
+|credentials|credentials_input|None|False|Credentials for user|None|None|
+|groupIds|[]string|None|False|IDs of groups that user will be immediately added to at time of creation|None|None|
+|nextLogin|boolean|None|True|Change password next time the user logs in|None|None|
+|profile|object|None|True|Profile properties for user|None|None|
+|provider|boolean|False|True|Indicates whether to create a user with a specified authentication provider|None|None|
 
 Example input:
 
@@ -797,10 +797,10 @@ This trigger monitors a list of groups for user membership changes.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|group_ids|[]string|None|True|A list of group ID's|None|
-|interval|integer|300|True|The time in seconds between checks for changes to the groups users|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|group_ids|[]string|None|True|A list of group ID's|None|['00g41ix8hKbsu74Ca4x6', '00g41ieu5y7i9XEYE4x6']|
+|interval|integer|300|True|The time in seconds between checks for changes to the groups users|None|100|
 
 Example input:
 
@@ -899,6 +899,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 3.4.3 - Fix issue where trigger did not return empty arrays when users where removed or added to group
 * 3.4.2 - Fix issue where Monitor User Groups trigger would erroneously detect logins as an addition/removal of a group member
 * 3.4.1 - Fix issue where Monitor User Groups trigger would continually detect the same new group addition
 * 3.4.0 - New trigger Monitor User Groups
