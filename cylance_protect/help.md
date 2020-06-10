@@ -9,7 +9,7 @@ The [Blackberry Cylance Protect](https://www.cylance.com/en-us/platform/products
 
 # Requirements
 
-* CylancePROTECT
+* CylancePROTECT configured with an Integration Application
 
 # Documentation
 

@@ -2,8 +2,8 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: cylance_protect
-title: Cylance Protect
-description: The Cylance Protect plugin allows you to manage all your CylancePROTECT operations
+title: Blackberry CylancePROTECT
+description: Automate detection and response operations using CylancePROTECT
 version: 1.0.0
 vendor: rapid7
 support: rapid7
@@ -133,7 +133,8 @@ connection:
     description: Web API URL
     type: string
     required: true
-    example: https://example.com
+    default: https://protect.cylance.com
+    example: https://protect.cylance.com
   application_secret:
     title: Application Secret
     description: Generated token that allows access to Cylance Resources
@@ -146,6 +147,7 @@ connection:
     type: credential_secret_key
     required: true
     example: 1abc234d-5efa-6789-bcde-0f1abcde23f5
+
 actions:
   get_agent_details:
     title: Get Agent Details
@@ -156,7 +158,7 @@ actions:
         description: Agent to retrieve device information from. Accepts MAC address, hostname, or agent ID
         type: string
         required: true
-        example: 1abc234d-5efa-6789-bcde-0f1abcde23f5
+        example: 198.51.100.100
     output:
       agent:
         title: Agent
