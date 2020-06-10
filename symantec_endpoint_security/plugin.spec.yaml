@@ -1,0 +1,20 @@
+plugin_spec_version: v2
+extension: plugin
+products: ["insightconnect"]
+name: symantec_endpoint_security
+title: Symantec Endpoint Security
+description: Symantec Endpoint Security delivers the most complete, integrated endpoint security platform on the planet
+version: 1.0.0
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/symantec_endpoint_security
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.broadcom.com/
+tags:
+- symantec
+hub_tags:
+  use_cases: [TODO]
+  keywords: [symantec, endpoint, edr]
+  features: []
