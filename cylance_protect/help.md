@@ -1,6 +1,6 @@
 # Description
 
-The [Blackberry Cylance Protect](https://www.cylance.com/en-us/platform/products/cylance-protect.html) plugin allows you to automate response operations.
+The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/cylance-protect.html) plugin allows you to automate response operations.
 
 # Key Features
 
