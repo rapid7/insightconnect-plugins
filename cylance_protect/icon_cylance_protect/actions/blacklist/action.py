@@ -30,7 +30,7 @@ class Blacklist(insightconnect_plugin_runtime.Action):
             })
 
         if len(errors) != 0:
-            raise PluginException(cause='The response from Cylance API was not in the correct format.',
+            raise PluginException(cause='The response from the CylancePROTECT API was not in the correct format.',
                                   assistance='Contact support for help. See log for more details',
                                   data=errors)
 
