@@ -15,7 +15,7 @@ The [Blackberry Cylance Protect](https://www.cylance.com/en-us/platform/products
 
 ## Setup
 
-You must create a Custom Application by the following procedure from the CylancePROTECT console.
+You must create a Custom Application by following this procedure from the CylancePROTECT console:
 
 1. Go to the Integrations tab on the Settings page
 2. Click "Add Application"
