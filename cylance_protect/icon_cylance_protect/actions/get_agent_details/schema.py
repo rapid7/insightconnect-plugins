@@ -145,8 +145,8 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
         },
         "os_version": {
           "type": "string",
-          "title": "Os Version",
-          "description": "Os version",
+          "title": "OS Version",
+          "description": "OS version",
           "order": 14
         },
         "policy": {

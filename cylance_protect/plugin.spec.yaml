@@ -96,9 +96,9 @@ types:
       description: Name
       required: false
     os_version:
-      title: Os Version
+      title: OS Version
       type: string
-      description: Os version
+      description: OS version
       required: false
     policy:
       title: Policy
