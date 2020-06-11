@@ -1,0 +1,19 @@
+{
+	"spec": "31100ce5f063d09a75b19007dd1c6a53",
+	"manifest": "9c6975231ecafd32b792fb7405a27148",
+	"setup": "c403ba35414f4d61679a7c226c403f76",
+	"schemas": [
+		{
+			"identifier": "blacklist/schema.py",
+			"hash": "3815b3ec59bf44113390edeb1e46d929"
+		},
+		{
+			"identifier": "get_agent_details/schema.py",
+			"hash": "af42365d39f72bdd2d48709b28367255"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "7e21c6307043d0f723cedd7679449627"
+		}
+	]
+}
