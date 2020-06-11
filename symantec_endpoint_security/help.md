@@ -27,7 +27,7 @@ Example input:
 
 ```
 {
-  "credentials": "{\"username\": example, \"password\": \"test\"}",
+  "credentials": {"username": example, "password": "test"},
   "domain": "mydomain",
   "host": "sepm-14",
   "port": 8446
