@@ -1,3 +1,5 @@
+from re import match
+
 import insightconnect_plugin_runtime
 from .schema import BlacklistInput, BlacklistOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -15,6 +17,10 @@ class Blacklist(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         sha1_hash = params.get(Input.HASH)
+        if not match(r"^[A-Fa-f0-9]{64}$", sha1_hash):
+            raise PluginException(cause="Wrong HASH.",
+                                  assistance="API supported only SHA256. Make sure you enter correct HASH.")
+
         if params.get(Input.BLACKLIST_STATE) is True:
             errors = self.connection.client.create_blacklist_item({
                 "sha256": sha1_hash,

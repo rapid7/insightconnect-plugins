@@ -6,7 +6,7 @@ from icon_cylance_protect import connection, actions, triggers
 
 Name = "Blackberry CylancePROTECT"
 Vendor = "rapid7"
-Version = "1.0.0"
+Version = "1.0.1"
 Description = "Automate detection and response operations using CylancePROTECT"
 
 

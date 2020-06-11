@@ -4,7 +4,7 @@ products: [insightconnect]
 name: cylance_protect
 title: Blackberry CylancePROTECT
 description: Automate detection and response operations using CylancePROTECT
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: rapid7
 status: []
