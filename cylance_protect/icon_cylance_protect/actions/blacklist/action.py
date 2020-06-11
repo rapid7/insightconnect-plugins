@@ -18,8 +18,8 @@ class Blacklist(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         sha1_hash = params.get(Input.HASH)
         if not match(r"^[A-Fa-f0-9]{64}$", sha1_hash):
-            raise PluginException(cause="Wrong HASH.",
-                                  assistance="API supported only SHA256. Make sure you enter correct HASH.")
+            raise PluginException(cause="The Cylance API only supports SHA256.",
+                                  assistance="Please enter a SHA256 hash and try again.")
 
         if params.get(Input.BLACKLIST_STATE) is True:
             errors = self.connection.client.create_blacklist_item({
