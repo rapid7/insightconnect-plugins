@@ -37,9 +37,38 @@ Example input:
 
 
 
+
 ### Actions
 
-_This plugin does not contain any actions._
+#### Get Agent Details
+
+This action is used to get details about an agent by MAC address or computer hostname.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|True|Agent to retrieve device from. This can be by MAC address or computer hostname|None|example|
+
+Example input:
+
+```
+{
+  "agent": "example"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|agent|agent|False|Agent matching the search|
+
+Example output:
+
+```
+
+```
 
 ### Triggers
 
