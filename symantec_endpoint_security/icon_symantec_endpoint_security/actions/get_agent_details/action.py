@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import GetAgentDetailsInput, GetAgentDetailsOutput, Input, Output, Component
 # Custom imports below
+from insightconnect_plugin_runtime.helper import clean
 from icon_symantec_endpoint_security.util.api import APIException, Agent
 from insightconnect_plugin_runtime.exceptions import PluginException
 from typing import Optional
@@ -26,7 +27,7 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
                 match: Optional[Agent] = self.connection.api_client.get_computer(mac_address=query)
             else:  # hostname
                 match: Optional[Agent] = self.connection.api_client.get_computer(computer_name=query)
-            return {Output.AGENT: match}
+            return {Output.AGENT: clean(match)}
 
         except APIException as e:
             raise PluginException(cause="An error occurred while attempting to get agent details!",

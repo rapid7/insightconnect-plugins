@@ -7,7 +7,7 @@ from typing import Any
 
 from logging import Logger
 
-Agent = Dict[str: Any]
+Agent = Dict[str, Any]
 
 
 class APIException(Exception):
