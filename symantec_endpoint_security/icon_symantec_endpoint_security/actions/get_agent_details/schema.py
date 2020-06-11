@@ -950,7 +950,7 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
             "domain": {
               "$ref": "#/definitions/domain",
               "title": "Domain",
-              "description": "The Symantec Endpoint Protection Manager domain to which this group belongs",
+              "description": "The Broadcom Symantec Endpoint Protection Manager domain to which this group belongs",
               "order": 1
             },
             "externalReferenceId": {
@@ -1032,7 +1032,7 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
         "domain": {
           "$ref": "#/definitions/domain",
           "title": "Domain",
-          "description": "The Symantec Endpoint Protection Manager domain to which this group belongs",
+          "description": "The Broadcom Symantec Endpoint Protection Manager domain to which this group belongs",
           "order": 1
         },
         "externalReferenceId": {

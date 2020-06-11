@@ -1,17 +1,17 @@
 # Description
 
-Symantec Endpoint Security delivers the most complete, integrated endpoint security platform on the planet
+Broadcom Symantec Endpoint Security delivers the most complete, integrated endpoint security platform on the planet
 
 # Key Features
 
-Identify key features of plugin.
+* Get details about an agent
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product's user interface
+* Credentials with system administrator privileges for a Broadcom Symantec Endpoint Protection server
 
 # Documentation
+
 ## Setup
 
 The connection configuration accepts the following parameters:
@@ -34,9 +34,6 @@ Example input:
 }
 ```
 ## Technical Details
-
-
-
 
 ### Actions
 
@@ -219,6 +216,7 @@ _This plugin does not contain any triggers._
 ### Custom Output Types
 
 _This plugin does not contain any custom output types._
+
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
@@ -231,4 +229,4 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Symantec Endpoint Security](LINK TO PRODUCT/VENDOR WEBSITE)
+* [Broadcom Symantec Endpoint Security](https://www.broadcom.com/products/cyber-security/endpoint/end-user)

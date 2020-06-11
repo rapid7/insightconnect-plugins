@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="symantec_endpoint_security-rapid7-plugin",
       version="1.0.0",
-      description="Symantec Endpoint Security delivers the most complete, integrated endpoint security platform on the planet",
+      description="Broadcom Symantec Endpoint Security delivers the most complete, integrated endpoint security platform on the planet",
       author="rapid7",
       author_email="",
       url="",

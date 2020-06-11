@@ -2,8 +2,8 @@ plugin_spec_version: v2
 extension: plugin
 products: ["insightconnect"]
 name: symantec_endpoint_security
-title: Symantec Endpoint Security
-description: Symantec Endpoint Security delivers the most complete, integrated endpoint security platform on the planet
+title: Broadcom Symantec Endpoint Security
+description: Broadcom Symantec Endpoint Security delivers the most complete, integrated endpoint security platform on the planet
 version: 1.0.0
 vendor: rapid7
 support: rapid7
@@ -14,6 +14,7 @@ resources:
   vendor_url: https://www.broadcom.com/
 tags:
 - symantec
+- sepm
 hub_tags:
   use_cases: [TODO]
   keywords: [symantec, endpoint, edr]
@@ -36,7 +37,7 @@ types:
     domain:
       title: "Domain"
       type: domain
-      description: "The Symantec Endpoint Protection Manager domain to which this group belongs"
+      description: "The Broadcom Symantec Endpoint Protection Manager domain to which this group belongs"
       required: false
     name:
       title: "Name"
