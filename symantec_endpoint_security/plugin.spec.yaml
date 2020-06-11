@@ -31,6 +31,7 @@ types:
       type: string
       description: "Name"
       required: false
+
   group:
     domain:
       title: "Domain"
@@ -86,12 +87,12 @@ types:
         required: false
     profileChecksum:
         title: "Profile Checksum"
-        type: None
+        type: string
         description: "Profile checksum"
         required: false
     atpDeviceId:
         title: "ATP Device ID"
-        type: None
+        type: string
         description: "ATP device ID"
         required: false
     processorType:
@@ -181,7 +182,7 @@ types:
         required: false
     snacLicenseId:
         title: "SNAC license ID"
-        type: None
+        type: string
         description: "SNAC license ID"
         required: false
     lastSiteId:
@@ -466,7 +467,7 @@ types:
         required: false
     svaId:
         title: "SVA ID"
-        type: None
+        type: string
         description: "SVA ID"
         required: false
     loginDomain:
@@ -576,7 +577,7 @@ types:
         required: false
     idsChecksum:
         title: "IDS Checksum"
-        type: None
+        type: string
         description: "IDS checksum"
         required: false
     operatingSystem:
@@ -808,3 +809,9 @@ actions:
         type: string
         required: true
         example: "example"
+    output:
+      agent:
+        title: "Agent"
+        description: "Agent matching the search"
+        type: agent
+        required: false
