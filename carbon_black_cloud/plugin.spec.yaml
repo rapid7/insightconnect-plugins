@@ -437,6 +437,7 @@ actions:
         title: Agent
         description: Agent to retrieve device information from. Accepts IP address, MAC address, hostname, or device ID. Search results are case sensitive
         type: string
+        required: true
         example: 198.51.100.1
     output:
       agent:

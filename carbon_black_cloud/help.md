@@ -4,15 +4,18 @@ The VMware Carbon Black Cloud is a cloud-native endpoint protection platform (EP
 
 # Key Features
 
-Identify key features of plugin.
+* Get device information
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product's user interface
+* API Key
+* API Secret
+* Base URL
 
 # Documentation
 ## Setup
+
+For information on how to get the API Key, API Secret, and your base URL please see the [Carbon Black Authentication](https://developer.carbonblack.com/reference/carbon-black-cloud/authentication/) documentation.
 
 The connection configuration accepts the following parameters:
 
@@ -31,6 +34,7 @@ Example input:
   "url": "https://api5.conferdeploy.net/integrationServices/v3/"
 }
 ```
+
 ## Technical Details
 
 ### Actions
@@ -43,7 +47,7 @@ This action is used to get Agent Details.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent|string|None|False|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, or device ID. Search results are case sensitive|None|198.51.100.1|
+|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, or device ID. Search results are case sensitive|None|198.51.100.1|
 
 Example input:
 
@@ -262,4 +266,5 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Carbon Black Cloud](LINK TO PRODUCT/VENDOR WEBSITE)
+* [Carbon Black Cloud](https://www.carbonblack.com/products/vmware-carbon-black-cloud)
+* [Carbon Black Authentication](https://developer.carbonblack.com/reference/carbon-black-cloud/authentication/)
