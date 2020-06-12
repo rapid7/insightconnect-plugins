@@ -1,0 +1,15 @@
+{
+	"spec": "fd07fce8905f7a6e244817994458f463",
+	"manifest": "6f859e249cfce0393c0790f1b192d00b",
+	"setup": "00015e9d12229ae25be52c453e0b73a4",
+	"schemas": [
+		{
+			"identifier": "antivirus_scan/schema.py",
+			"hash": "7ae779279cb7211b2ff6b6ae46c3f2a5"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "7873f116b03f210b3912f1bb36f3f556"
+		}
+	]
+}
