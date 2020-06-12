@@ -6,7 +6,7 @@ from komand_okta import connection, actions, triggers
 
 Name = "Okta"
 Vendor = "rapid7"
-Version = "3.4.2"
+Version = "3.4.3"
 Description = "Secure identity management and single sign-on to any application"
 
 
