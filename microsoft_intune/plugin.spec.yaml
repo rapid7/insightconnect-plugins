@@ -62,7 +62,7 @@ actions:
         description: Search devices by device name, user ID, email address, or device ID
         type: string
         required: true
-        example: aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa
+        example: 547a48e3-0942-4888-acf1-a92b7fb19ef9
       update:
         title: Update Signatures
         description: If true the action with update Antivirus Signatures before scan
