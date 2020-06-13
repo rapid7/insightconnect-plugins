@@ -31,23 +31,23 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|client_id|string|None|True|Client ID, also called Application ID|None|aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa|
+|client_id|string|None|True|Client ID, also called Application ID|None|a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d|
 |client_secret|string|None|True|Client secret key|None|kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=|
 |credentials|credential_username_password|None|True|E-mail address and password|None|{"username": "user@example.com", "password": "mypassword"}|
-|tenant_id|string|None|True|Tenant ID can be found in Active Directory|None|aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa|
+|tenant_id|string|None|True|Tenant ID can be found in Active Directory|None|3a522933-ae5e-2b63-96ab-3c004b4f7f10|
 |url|string|https://graph.microsoft.com|True|Base URL for the Microsoft endpoint|None|https://graph.microsoft.com|
 
 Example input:
 
 ```
 {
-  "client_id": "aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa",
+  "client_id": "a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d",
   "client_secret": "kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=",
   "credentials": {
     "username": "user@example.com",
     "password": "mypassword"
   },
-  "tenant_id": "aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa",
+  "tenant_id": "3a522933-ae5e-2b63-96ab-3c004b4f7f10",
   "url": "https://graph.microsoft.com"
 }
 ```
