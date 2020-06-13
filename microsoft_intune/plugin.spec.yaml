@@ -39,7 +39,7 @@ connection:
     description: Client ID, also called Application ID
     type: string
     required: true
-    example: aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa
+    example: a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d
   client_secret:
     title: Client Secret
     description:  Client secret key
@@ -51,7 +51,7 @@ connection:
     description: Tenant ID can be found in Active Directory
     type: string
     required: true
-    example: aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa
+    example: 3a522933-ae5e-2b63-96ab-3c004b4f7f10
 actions:
   antivirus_scan:
     title: Antivirus Scan
