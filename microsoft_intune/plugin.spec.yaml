@@ -65,7 +65,7 @@ actions:
         example: 547a48e3-0942-4888-acf1-a92b7fb19ef9
       update:
         title: Update Signatures
-        description: If true the action with update Antivirus Signatures before scan
+        description: If true the action updates Antivirus Signatures before scan
         type: boolean
         required: false
         default: false

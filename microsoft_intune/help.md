@@ -64,7 +64,7 @@ This action is used to initiate a Windows Defender Antivirus scan on a machine.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |device|string|None|True|Search devices by device name, user ID, email address, or device ID|None|547a48e3-0942-4888-acf1-a92b7fb19ef9|
-|update|boolean|False|False|If true the action with update Antivirus Signatures before scan|None|True|
+|update|boolean|False|False|If true the action updates Antivirus Signatures before scan|None|True|
 
 Example input:
 

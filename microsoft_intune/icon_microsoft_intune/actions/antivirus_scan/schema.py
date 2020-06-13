@@ -31,7 +31,7 @@ class AntivirusScanInput(insightconnect_plugin_runtime.Input):
     "update": {
       "type": "boolean",
       "title": "Update Signatures",
-      "description": "If true the action with update Antivirus Signatures before scan",
+      "description": "If true the action updates Antivirus Signatures before scan",
       "default": false,
       "order": 2
     }

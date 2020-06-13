@@ -1,11 +1,11 @@
 {
-	"spec": "2985dad763cd3a6e984ff72cf32bd20c",
+	"spec": "12c42b64c7daab28062e5e8095f980d5",
 	"manifest": "54e154a34efc400e7329ea5fd10b7ba9",
 	"setup": "c6d9ca75fc925d2b4b2493b01e52ddce",
 	"schemas": [
 		{
 			"identifier": "antivirus_scan/schema.py",
-			"hash": "095de0662a390b838a6c87f286003bf1"
+			"hash": "13ec3c94a55380e9466c3dd6a51d795b"
 		},
 		{
 			"identifier": "connection/schema.py",
