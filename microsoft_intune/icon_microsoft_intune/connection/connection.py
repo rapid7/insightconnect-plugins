@@ -31,7 +31,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Starting connection test:")   
 
         try:
-            self.api.search_managed_devices("user@email.com")
+            self.api.search_managed_devices("nonexistinguser@example.com")
         except PluginException as e:
             raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e)
 

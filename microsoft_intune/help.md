@@ -1,6 +1,6 @@
 # Description
 
-Integrate Microsoft Intune into your workflow
+[Microsoft Intune](https://www.microsoft.com/en-us/microsoft-365/enterprise-mobility-security/microsoft-intune) is a Microsoft cloud-based management solution that provides for mobile device and operating system management.
 
 # Key Features
 
@@ -13,6 +13,17 @@ Integrate Microsoft Intune into your workflow
 
 # Documentation
 ## Setup
+1. Create an Azure Active Directory application.
+2. Assign the following API Permissions that that application:
+    * Within Microsoft Graph select Delegated Permissions and pick below permissions under DeviceManagementManagedDevices:
+        * DeviceManagementManagedDevices.PrivilegedOperations.All
+        * DeviceManagementManagedDevices.Read.All
+        * DeviceManagementManagedDevices.ReadWrite.All
+    * Please note, these API Permissions require administrator consent.
+3. Create a new secret and copy the secret value and paste into the connection.
+4. Copy and paste the 'Application (client) ID' and 'Directory (tenant) ID' (from the Overview tab) into the connection.
+
+For detailed instructions refer to [Microsoft Documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal).
 
 The connection configuration accepts the following parameters:
 
@@ -22,7 +33,7 @@ The connection configuration accepts the following parameters:
 |client_secret|string|None|True|Client secret key|None|kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=|
 |credentials|credential_username_password|None|True|E-mail address and password|None|{"username": "user@example.com", "password": "mypassword"}|
 |tenant_id|string|None|True|Tenant ID can be found in Active Directory|None|aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa|
-|url|string|None|True|Base URL for the Microsoft endpoint|None|https://example.com|
+|url|string|https://graph.microsoft.com|True|Base URL for the Microsoft endpoint|None|https://graph.microsoft.com|
 
 Example input:
 
@@ -35,7 +46,7 @@ Example input:
     "password": "mypassword"
   },
   "tenant_id": "aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa",
-  "url": "https://example.com"
+  "url": "https://graph.microsoft.com"
 }
 ```
 ## Technical Details
@@ -50,7 +61,7 @@ This action is used to initiate a Windows Defender Antivirus scan on a machine.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|device|string|None|True|Search devices by either of - device name, user ID, email address, device ID|None|aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa|
+|device|string|None|True|Search devices by device name, user ID, email address, or device ID|None|aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa|
 |update|boolean|False|False|If true the action with update Antivirus Signatures before scan|None|True|
 
 Example input:

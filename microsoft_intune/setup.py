@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="microsoft_intune-rapid7-plugin",
       version="1.0.0",
-      description="Integrate Microsoft Intune into your workflow",
+      description="Microsoft cloud-based management solution that provides for mobile device and operating system management",
       author="rapid7",
       author_email="",
       url="",

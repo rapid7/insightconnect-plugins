@@ -2,11 +2,11 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: microsoft_intune
-title: "Microsoft Intune"
-description: Integrate Microsoft Intune into your workflow
+title: Microsoft Intune
+description: Microsoft cloud-based management solution that provides for mobile device and operating system management
 version: 1.0.0
 vendor: rapid7
-support: community
+support: rapid7
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/microsoft_intune
@@ -32,7 +32,8 @@ connection:
     description: Base URL for the Microsoft endpoint
     type: string
     required: true
-    example: https://example.com
+    default: https://graph.microsoft.com
+    example: https://graph.microsoft.com
   client_id:
     title: Client ID
     description: Client ID, also called Application ID
@@ -58,7 +59,7 @@ actions:
     input:
       device:
         title: Device
-        description: Search devices by either of - device name, user ID, email address, device ID
+        description: Search devices by device name, user ID, email address, or device ID
         type: string
         required: true
         example: aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa

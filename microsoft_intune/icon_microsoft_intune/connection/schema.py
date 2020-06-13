@@ -45,6 +45,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Host URL",
       "description": "Base URL for the Microsoft endpoint",
+      "default": "https://graph.microsoft.com",
       "order": 2
     }
   },

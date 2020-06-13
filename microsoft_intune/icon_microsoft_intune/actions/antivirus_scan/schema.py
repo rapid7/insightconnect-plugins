@@ -25,7 +25,7 @@ class AntivirusScanInput(insightconnect_plugin_runtime.Input):
     "device": {
       "type": "string",
       "title": "Device",
-      "description": "Search devices by either of - device name, user ID, email address, device ID",
+      "description": "Search devices by device name, user ID, email address, or device ID",
       "order": 1
     },
     "update": {
