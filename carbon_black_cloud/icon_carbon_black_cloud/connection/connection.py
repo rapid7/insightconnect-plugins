@@ -3,6 +3,7 @@ from .schema import ConnectionSchema, Input
 # Custom imports below
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
+import timer
 import urllib.parse
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -49,10 +50,20 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 raise PluginException(cause="Either the name you chose already exists, or there is an unacceptable character used.",
                                       assistance="Change any spaces in the name to underscores. Look through your list of API Keys and see if there is an existing key with the same name.",
                                       data=result.text)
-            if result.status_code == 503:
-                raise PluginException(cause="Cannot return object at this moment because service is unavailable.",
-                                      assistance="This can happen if too many file downloads are happening at the same time. You can try later.",
-                                      data=result.text)
+            if result.status_code == 503: # This is usually an API limit error or server error, try again
+                timer.sleep(5)
+                result = requests.get(url, headers=self.headers, json=payload)
+
+                try:
+                    result.raise_for_status()
+                except Exception as e:
+                    self.logger.error(str(e))
+                    self.logger.error(result.text)
+                    raise PluginException.Preset.UNKNOWN
+
+                return result
+
+
             self.logger.error(f"Exception was:\n{e}")
             self.logger.error(f"Result text was:\n{result.text}")
             raise PluginException(PluginException.Preset.UNKNOWN)
