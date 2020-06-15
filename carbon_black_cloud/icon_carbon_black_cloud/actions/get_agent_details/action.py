@@ -36,4 +36,4 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
                 self.logger.info("More than one agent found, returning the first agent.")
             device = devices[0]
 
-        return {Output.AGENT: device}
+        return {Output.AGENT: insightconnect_plugin_runtime.helper.clean(device)}
