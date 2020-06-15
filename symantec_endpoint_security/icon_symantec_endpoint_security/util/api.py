@@ -12,6 +12,7 @@ from logging import Logger
 import logging
 
 Agent = Dict[str, Any]
+Domain = Dict[str, Any]
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
@@ -182,6 +183,32 @@ class APIClient(object):
                 return None
         elif status_codes.get(response.status_code) is not None:
             raise status_codes[response.status_code]
+        else:
+            raise APIException(status_code=None, message=f"An unhandled response was received from Symantec Endpoint "
+                                                         f"Protection: {response.text}")
+
+    def get_all_accessible_domains(self) -> [Domain]:
+        """
+        Returns a list of all accessible Symantec Endpoint Protection Manager domains
+        :return: List of domains
+        """
+
+        url = f"{self.base_url}/domains"
+
+        response = self.session.get(url=url,
+                                    verify=False)
+
+        if response.status_code == 200:
+            try:
+                domains = response.json()
+                return domains
+            except json.JSONDecodeError:
+                raise APIException(status_code=None, message="Symantec Endpoint Protection server returned a "
+                                                             "non-JSON response!")
+            except (KeyError, IndexError):
+                return None
+        elif self._STATUS_CODES.get(response.status_code) is not None:
+            raise self._STATUS_CODES[response.status_code]
         else:
             raise APIException(status_code=None, message=f"An unhandled response was received from Symantec Endpoint "
                                                          f"Protection: {response.text}")
