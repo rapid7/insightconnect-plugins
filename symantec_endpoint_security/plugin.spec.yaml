@@ -818,7 +818,7 @@ actions:
         required: false
   blacklist:
     title: "Blacklist"
-    description: "Blacklist an MD5 or SHA256 hash"
+    description: "Blacklist MD5 and SHA256 hashes"
     input:
       hashes:
         title: "Hashes"

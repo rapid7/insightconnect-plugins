@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Blacklist an MD5 or SHA256 hash"
+    DESCRIPTION = "Blacklist MD5 and SHA256 hashes"
 
 
 class Input:
