@@ -233,7 +233,7 @@ types:
     macAddress:
       title: "MAC Address"
       type: string
-      description: "MAC Address"
+      description: "MAC address"
       required: false
     messages:
       title: "Messages"
