@@ -83,7 +83,7 @@ types:
     avStatus:
       title: "AV Status"
       type: "[]string"
-      description: "AV Status"
+      description: "AV status"
       required: false
     avUpdateServers:
       title: "AV Update Servers"
