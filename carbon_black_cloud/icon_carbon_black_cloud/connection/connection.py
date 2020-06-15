@@ -35,7 +35,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                                       data=result.text)
             if result.status_code == 401:
                 raise PluginException(cause="Authentication Error",
-                                      assistance="Please verify that your secret_key and api_id values are correct.",
+                                      assistance="Please verify that your Secret Key and API ID values in the plugin connection are correct.",
                                       data=result.text)
             if result.status_code == 403:
                 raise PluginException(cause="The specified object cannot be accessed or changed.",
@@ -74,6 +74,5 @@ class Connection(insightconnect_plugin_runtime.Connection):
                                           data=str(e))
 
         return({"success": True})
-
 
 
