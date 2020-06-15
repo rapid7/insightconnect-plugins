@@ -43,7 +43,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                                       data=result.text)
             if result.status_code == 404:
                 raise PluginException(cause="The object referenced in the request cannot be found.",
-                                      assistance="Verify that your request contains objects that haven’t been deleted. Verify that the org_key in the URL is correct.",
+                                      assistance="Verify that your request contains objects that haven’t been deleted. Verify that the organization key in the URL is correct.",
                                       data=result.text)
             if result.status_code == 409:
                 raise PluginException(cause="Either the name you chose already exists, or there is an unacceptable character used.",
@@ -74,5 +74,4 @@ class Connection(insightconnect_plugin_runtime.Connection):
                                           data=str(e))
 
         return({"success": True})
-
 
