@@ -816,3 +816,38 @@ actions:
         description: "Agent matching the search"
         type: agent
         required: false
+  blacklist:
+    title: "Blacklist"
+    description: "Blacklist an MD5 or SHA256 hash"
+    input:
+      hashes:
+        title: "Hashes"
+        description: "Hashes (MD5 or SHA256) to add to the blacklist"
+        type: "[]string"
+        required: true
+        example: '["9de5069c5afe602b2ea0a04b66beb2c0", "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"]'
+      description:
+        title: "Description"
+        description: "Description for the blacklist"
+        type: string
+        required: true
+        example: "Hashes banned via InsightConnect"
+      name:
+        title: "Name"
+        description: "Name for the blacklist"
+        type: string
+        required: true
+        example: "Insightconnect Blacklist"
+      domain_id:
+        title: "Domain ID"
+        description: "ID of the domain to apply the blacklist to"
+        type: string
+        required: true
+        example: "0AF740760A0414711FAA4F8BD5293158"
+    output:
+      blacklist_id:
+        title: "Blacklist ID"
+        description: "ID of the resulting blacklist"
+        type: string
+        required: true
+        example: "5348023646E740128BFE65939934F22E"
