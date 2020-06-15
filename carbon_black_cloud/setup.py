@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="carbon_black_cloud-rapid7-plugin",
       version="1.0.0",
-      description="The VMware Carbon Black Cloud is a cloud-native endpoint protection platform (EPP) that combines the intelligent system hardening and behavioral prevention needed to keep emerging threats at bay, using a single lightweight agent and an easy-to-use console",
+      description="The VMware Carbon Black Cloud is a cloud-native endpoint protection platform (EPP)",
       author="rapid7",
       author_email="",
       url="",
