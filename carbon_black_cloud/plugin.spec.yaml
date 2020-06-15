@@ -398,7 +398,7 @@ types:
     virtualizationProvider:
       title: "Virtualization Provider"
       type: string
-      description: "Virtualization Provider"
+      description: "Virtualization provider"
       required: false
     windowsPlatform:
       title: "Windows Platform"
@@ -451,4 +451,3 @@ actions:
         description: In the unlikely case that multiple agents match the search criteria, for instance if duplicate IPs are present on the network, all agents will be listed here
         type: "[]agent"
         required: false
-
