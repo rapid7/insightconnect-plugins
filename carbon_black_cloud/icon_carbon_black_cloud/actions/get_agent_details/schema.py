@@ -13,7 +13,6 @@ class Input:
 
 class Output:
     AGENT = "agent"
-    ALL_AGENTS_MATCHED = "all_agents_matched"
     
 
 class GetAgentDetailsInput(insightconnect_plugin_runtime.Input):
@@ -50,15 +49,6 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
       "title": "Agent",
       "description": "Details about the agent",
       "order": 1
-    },
-    "all_agents_matched": {
-      "type": "array",
-      "title": "All Agents Matched",
-      "description": "In the unlikely case that multiple agents match the search criteria, for instance if duplicate IPs are present on the network, all agents will be listed here",
-      "items": {
-        "$ref": "#/definitions/agent"
-      },
-      "order": 2
     }
   },
   "definitions": {

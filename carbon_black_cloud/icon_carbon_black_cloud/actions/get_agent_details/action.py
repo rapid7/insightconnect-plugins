@@ -30,13 +30,10 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
 
         if agent_type == agent_typer.DEVICE_ID:
             device = result.get("deviceInfo", {})
-            all_devices = {}
         else:
-            devices = result.get("results")
-            if len(devices):
-                device = devices[0]
-            else:
-                device = {}
-            all_devices = result.get("results")
+            devices = result.get("results",[{}])
+            if len(devices) > 1:
+                self.logger.info("More than one agent found, returning the first agent.")
+            device = devices[0]
 
-        return {Output.AGENT: device, Output.ALL_AGENTS_MATCHED: all_devices}
+        return {Output.AGENT: device}
