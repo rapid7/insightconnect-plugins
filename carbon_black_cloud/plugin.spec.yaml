@@ -417,7 +417,7 @@ connection:
   api_secret_key:
     title: API Secret Key
     type: credential_secret_key
-    description: API Secret Key
+    description: API secret key
     example: Z1PXFRDZI321LXQVAB9IJKKZ
     required: true
     order: 2
