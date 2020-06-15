@@ -2,13 +2,13 @@
 from setuptools import setup, find_packages
 
 
-setup(name="whois-rapid7-plugin",
-      version="2.0.2",
-      description="The WHOIS plugin enables address and domain lookups in the WHOIS databases",
+setup(name="microsoft_intune-rapid7-plugin",
+      version="1.0.0",
+      description="Microsoft cloud-based management solution that provides for mobile device and operating system management",
       author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
       install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_whois']
+      scripts=['bin/icon_microsoft_intune']
       )

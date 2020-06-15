@@ -78,6 +78,10 @@ class UsersAddedRemovedFromGroupOutput(komand.Output):
       "order": 2
     }
   },
+  "required": [
+    "users_added_from_groups",
+    "users_removed_from_groups"
+  ],
   "definitions": {
     "_links": {
       "type": "object",
