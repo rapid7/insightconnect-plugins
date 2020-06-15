@@ -298,7 +298,7 @@ types:
     registeredTime:
       title: "Registered Time"
       type: integer
-      description: "Registered Time"
+      description: "Registered time"
       required: false
     rootedByAnalytics:
       title: "Rooted by Analytics"
