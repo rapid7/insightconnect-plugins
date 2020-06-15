@@ -318,7 +318,7 @@ types:
     rootedBySensorTime:
       title: "Rooted by Sensor Time"
       type: string
-      description: "Rooted by Sensor Time"
+      description: "Rooted by sensor time"
       required: false
     scanLastActionTime:
       title: "Scan Last Action Time"
