@@ -20,7 +20,7 @@ tags:
 - vmware
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [carbon black, cloud, antivirus, cloud]
+  keywords: [carbon black, vmware, cloud, antivirus]
   features: []
 
 types:
@@ -451,6 +451,5 @@ actions:
         description: In the unlikely case that multiple agents match the search criteria, for instance if duplicate IPs are present on the network, all agents will be listed here
         type: "[]agent"
         required: false
-
 
 
