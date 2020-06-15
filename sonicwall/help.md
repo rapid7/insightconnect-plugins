@@ -1,17 +1,19 @@
 # Description
 
-SonicWall SonicOS API provides analternative to the SonicOS Command Line Interface (CLI) for configuring selected functions
+[SonicWall](https://www.sonicwall.com/products/firewalls/) next-generation firewalls (NGFW) provide the security, control and visibility you need to maintain an effective cybersecurity posture.
+Manage your firewalls and block malicious hosts through this plugin.
 
 # Key Features
 
-* Add address object to group
+* Block and unblock hosts by managing address groups
 
 # Requirements
 
-* Username and password for SonicWall endpoint
-* Base URL for the SonicWall endpoint
+* Username and password for SonicWall firewall
+* Base URL for the SonicWall firewall
 
 # Documentation
+
 ## Setup
 
 The connection configuration accepts the following parameters:
@@ -36,6 +38,7 @@ Example input:
   "verify_ssl": true
 }
 ```
+
 ## Technical Details
 
 ### Actions

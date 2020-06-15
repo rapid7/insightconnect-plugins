@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sonicwall
 title: SonicWall Firewall
-description: SonicWall SonicOS API provides analternative to the SonicOS Command Line Interface (CLI) for configuring selected functions
+description: Manage firewalls and block hosts with SonicWall firewalls
 version: 1.0.0
 vendor: rapid7
 support: rapid7
@@ -87,8 +87,8 @@ types:
 
 connection:
   url:
-    title: Host URL
-    description: Base URL for the SonicWall endpoint
+    title: URL
+    description: Base URL for the SonicWall firewall
     type: string
     required: true
     example: https://www.example.com
@@ -122,17 +122,16 @@ actions:
         description: Name of the address object
         type: string
         required: true
-        example: rapid7 object
+        example: MaliciousHost
       group:
         title: Group
         description: Name of the address group to add the address object to
         type: string
         required: true
-        example: rapid7 group
+        example: BlockList
     output:
       object_action:
         title: Object Action
         description: Return information about add address object to group
         type: object_action
         required: false
-
