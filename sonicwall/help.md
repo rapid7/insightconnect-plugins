@@ -9,8 +9,8 @@ Manage your firewalls and block malicious hosts through this plugin.
 
 # Requirements
 
-* Username and password for SonicWall firewall
-* Base URL for the SonicWall firewall
+* Username and password
+* Base URL of firewall
 
 # Documentation
 
