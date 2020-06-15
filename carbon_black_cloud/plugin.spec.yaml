@@ -78,7 +78,7 @@ types:
     avProductVersion:
       title: "AV Product Version"
       type: string
-      description: "AV Product Version"
+      description: "AV product version"
       required: false
     avStatus:
       title: "AV Status"
