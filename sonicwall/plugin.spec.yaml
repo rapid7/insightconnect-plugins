@@ -1,0 +1,138 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: sonicwall
+title: SonicWall Firewall
+description: SonicWall SonicOS API provides analternative to the SonicOS Command Line Interface (CLI) for configuring selected functions
+version: 1.0.0
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/sonicwall
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.sonicwall.com/
+tags:
+  - sonicwall
+  - firewall
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [sonicwall, firewall]
+  features: []
+types:
+  cli:
+    configuring:
+      title: Configuring
+      type: boolean
+      description: Configuring
+      required: false
+    depth:
+      title: Depth
+      type: integer
+      description: Depth
+      required: false
+    mode:
+      title: Mode
+      type: string
+      description: Mode
+      required: false
+    pending_config:
+      title: Pending Config
+      type: boolean
+      description: Pending config
+      required: false
+    restart_required:
+      title: Restart Required
+      type: string
+      description: Restart required
+      required: false
+  info:
+    code:
+      title: Code
+      type: string
+      description: Code
+      required: false
+    level:
+      title: Level
+      type: string
+      description: Level
+      required: false
+    message:
+      title: Message
+      type: string
+      description: Message
+      required: false
+  status:
+    cli:
+      title: CLI
+      type: cli
+      description: CLI
+      required: false
+    info:
+      title: Info
+      type: "[]info"
+      description: Info
+      required: false
+    success:
+      title: Success
+      type: boolean
+      description: Success
+      required: false
+  object_action:
+    status:
+      title: Status
+      type: status
+      description: Status
+      required: false
+
+connection:
+  url:
+    title: Host URL
+    description: Base URL for the SonicWall endpoint
+    type: string
+    required: true
+    example: https://www.example.com
+  credentials:
+    title: Credentials
+    description: Username and password
+    type: credential_username_password
+    required: true
+    example: '{"username":"user1", "password":"mypassword"}'
+  verify_ssl:
+    title: Verify SSL
+    type: boolean
+    description: Check the server's SSL certificate
+    default: true
+    required: false
+    example: true
+  port:
+    title: Port
+    description: The port number for provided host
+    type: integer
+    default: 443
+    required: false
+    example: 443
+actions:
+  add_address_object_to_group:
+    title: Add Address Object to Group
+    description: Add address object (FQDN, MAC, IPv4 or IPv6) to group (IPv4, IPv6 or Mixed)
+    input:
+      address_object:
+        title: Address Object
+        description: Name of the address object
+        type: string
+        required: true
+        example: rapid7 object
+      group:
+        title: Group
+        description: Name of the address group to add the address object to
+        type: string
+        required: true
+        example: rapid7 group
+    output:
+      object_action:
+        title: Object Action
+        description: Return information about add address object to group
+        type: object_action
+        required: false
+
