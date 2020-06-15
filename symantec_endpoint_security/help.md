@@ -37,6 +37,41 @@ Example input:
 
 ### Actions
 
+#### Blacklist
+
+This action is used to blacklist an MD5 or SHA256 hash.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|description|string|None|True|Description for the blacklist|None|Hashes banned via InsightConnect|
+|domain_id|string|None|True|ID of the domain to apply the blacklist to|None|0AF740760A0414711FAA4F8BD5293158|
+|hashes|[]string|None|True|Hashes (MD5 or SHA256) to add to the blacklist|None|["9de5069c5afe602b2ea0a04b66beb2c0", "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"]|
+|name|string|None|True|Name for the blacklist|None|Insightconnect Blacklist|
+
+Example input:
+
+```
+{
+  "description": "Hashes banned via InsightConnect",
+  "domain_id": "0AF740760A0414711FAA4F8BD5293158",
+  "hashes": "[\"9de5069c5afe602b2ea0a04b66beb2c0\", \"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f\"]",
+  "name": "Insightconnect Blacklist"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|blacklist_id|string|True|ID of the resulting blacklist|
+
+Example output:
+
+```
+```
+
 #### Get Agent Details
 
 This action is used to get details about an agent by MAC address or computer hostname.
