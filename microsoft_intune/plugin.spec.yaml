@@ -1,0 +1,78 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: microsoft_intune
+title: Microsoft Intune
+description: Microsoft cloud-based management solution that provides for mobile device and operating system management
+version: 1.0.0
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/microsoft_intune
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://microsoft.com
+tags:
+  - microsoft
+  - intune
+  - azure
+hub_tags:
+  use_cases: [data_utility]
+  keywords: [intune, cloud, azure]
+  features: []
+connection:
+  credentials:
+    title: Credentials
+    description: E-mail address and password
+    type: credential_username_password
+    required: true
+    example: '{"username": "user@example.com", "password": "mypassword"}'
+  url:
+    title: Host URL
+    description: Base URL for the Microsoft endpoint
+    type: string
+    required: true
+    default: https://graph.microsoft.com
+    example: https://graph.microsoft.com
+  client_id:
+    title: Client ID
+    description: Client ID, also called Application ID
+    type: string
+    required: true
+    example: a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d
+  client_secret:
+    title: Client Secret
+    description:  Client secret key
+    type: string
+    required: true
+    example: kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=
+  tenant_id:
+    title: Tenant ID
+    description: Tenant ID can be found in Active Directory
+    type: string
+    required: true
+    example: 3a522933-ae5e-2b63-96ab-3c004b4f7f10
+actions:
+  antivirus_scan:
+    title: Antivirus Scan
+    description: Initiate a Windows Defender Antivirus scan on a machine
+    input:
+      device:
+        title: Device
+        description: Search devices by device name, user ID, email address, or device ID
+        type: string
+        required: true
+        example: 547a48e3-0942-4888-acf1-a92b7fb19ef9
+      update:
+        title: Update Signatures
+        description: If true the action updates Antivirus Signatures before scan
+        type: boolean
+        required: false
+        default: false
+        example: True
+    output:
+      success:
+        title: Success
+        description: Return true if scan was initiated successfully
+        type: boolean
+        required: true
