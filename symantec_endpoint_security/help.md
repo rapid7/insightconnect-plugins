@@ -39,7 +39,7 @@ Example input:
 
 #### Blacklist
 
-This action is used to blacklist an MD5 or SHA256 hash.
+This action is used to blacklist MD5 and SHA256 hashes.
 
 ##### Input
 
