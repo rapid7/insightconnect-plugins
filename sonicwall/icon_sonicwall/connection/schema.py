@@ -31,8 +31,8 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     },
     "url": {
       "type": "string",
-      "title": "Host URL",
-      "description": "Base URL for the SonicWall endpoint",
+      "title": "URL",
+      "description": "Base URL for the SonicWall firewall",
       "order": 1
     },
     "verify_ssl": {

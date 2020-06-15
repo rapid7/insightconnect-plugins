@@ -7,7 +7,7 @@ from icon_sonicwall import connection, actions, triggers
 Name = "SonicWall Firewall"
 Vendor = "rapid7"
 Version = "1.0.0"
-Description = "SonicWall SonicOS API provides analternative to the SonicOS Command Line Interface (CLI) for configuring selected functions"
+Description = "Manage firewalls and block hosts with SonicWall firewalls"
 
 
 class ICONSonicwall(insightconnect_plugin_runtime.Plugin):

@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="sonicwall-rapid7-plugin",
       version="1.0.0",
-      description="SonicWall SonicOS API provides analternative to the SonicOS Command Line Interface (CLI) for configuring selected functions",
+      description="Manage firewalls and block hosts with SonicWall firewalls",
       author="rapid7",
       author_email="",
       url="",

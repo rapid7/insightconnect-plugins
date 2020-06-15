@@ -51,15 +51,15 @@ This action is used to add address object (FQDN, MAC, IPv4 or IPv6) to group (IP
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_object|string|None|True|Name of the address object|None|rapid7 object|
-|group|string|None|True|Name of the address group to add the address object to|None|rapid7 group|
+|address_object|string|None|True|Name of the address object|None|MaliciousHost|
+|group|string|None|True|Name of the address group to add the address object to|None|BlockList|
 
 Example input:
 
 ```
 {
-  "address_object": "rapid7 object",
-  "group": "rapid7 group"
+  "address_object": "MaliciousHost",
+  "group": "BlockList"
 }
 ```
 
