@@ -56,7 +56,7 @@ Example input:
 {
   "description": "Hashes banned via InsightConnect",
   "domain_id": "0AF740760A0414711FAA4F8BD5293158",
-  "hashes": "[\"9de5069c5afe602b2ea0a04b66beb2c0\", \"275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f\"]",
+  "hashes": ["9de5069c5afe602b2ea0a04b66beb2c0", "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"],
   "name": "Insightconnect Blacklist"
 }
 ```
@@ -70,6 +70,9 @@ Example input:
 Example output:
 
 ```
+{
+  "blacklist_id": "5348023646E740128BFE65939934F22E"
+}
 ```
 
 #### Get Agent Details
