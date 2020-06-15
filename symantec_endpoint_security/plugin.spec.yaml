@@ -818,14 +818,14 @@ actions:
         required: false
   blacklist:
     title: "Blacklist"
-    description: "Blacklist MD5 and SHA256 hashes"
+    description: "Blacklist MD5 or SHA256 hashes"
     input:
       hashes:
         title: "Hashes"
-        description: "Hashes (MD5 or SHA256) to add to the blacklist"
+        description: "Hashes (MD5 or SHA256) to add to the blacklist. Note: only one type of hash is allowed at a time"
         type: "[]string"
         required: true
-        example: '["9de5069c5afe602b2ea0a04b66beb2c0", "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"]'
+        example: '["9de5069c5afe602b2ea0a04b66beb2c0"]'
       description:
         title: "Description"
         description: "Description for the blacklist"
