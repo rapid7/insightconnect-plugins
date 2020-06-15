@@ -3,7 +3,7 @@ from .schema import ConnectionSchema, Input
 # Custom imports below
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
-import timer
+import time
 import urllib.parse
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -51,7 +51,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                                       assistance="Change any spaces in the name to underscores. Look through your list of API Keys and see if there is an existing key with the same name.",
                                       data=result.text)
             if result.status_code == 503: # This is usually an API limit error or server error, try again
-                timer.sleep(5)
+                time.sleep(5)
                 result = requests.get(url, headers=self.headers, json=payload)
 
                 try:

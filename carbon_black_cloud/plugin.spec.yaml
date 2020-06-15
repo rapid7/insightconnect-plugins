@@ -410,14 +410,14 @@ connection:
     title: API ID
     type: string
     description: API ID
-    example: ABCDE12345
+    example: ADFF2QLIIZ
     required: true
     order: 1
   api_secret_key:
     title: API Secret Key
     type: credential_secret_key
     description: API Secret Key
-    example: ABCDEFG12345ABCD1234ABCD
+    example: Z1PXFRDZI321LXQVAB9IJKKZ
     required: true
     order: 2
   url:
