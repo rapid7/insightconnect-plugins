@@ -45,13 +45,13 @@ This action is used to get Agent Details.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, or device ID. Search results are case-sensitive|None|198.51.100.1|
+|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, or device ID. Search results are case-sensitive|None|198.51.100.100|
 
 Example input:
 
 ```
 {
-  "agent": "198.51.100.1"
+  "agent": "198.51.100.100"
 }
 ```
 
@@ -82,7 +82,7 @@ Example output:
     "deviceId": 3466056,
     "createTime": null,
     "deviceGuid": null,
-    "email": "sgoncharov@rapid7.com",
+    "email": "user@example.com",
     "deviceSessionId": null,
     "deviceType": "WINDOWS",
     "assignedToId": null,
