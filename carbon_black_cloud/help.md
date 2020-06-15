@@ -19,16 +19,16 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_id|string|None|True|API ID|None|ABCDE12345|
-|api_secret_key|credential_secret_key|None|True|API Secret Key|None|ABCDEFG12345ABCD1234ABCD|
+|api_id|string|None|True|API ID|None|ADFF2QLIIZ|
+|api_secret_key|credential_secret_key|None|True|API secret key|None|Z1PXFRDZI321LXQVAB9IJKKZ|
 |url|string|https://api5.conferdeploy.net/integrationServices/v3/|True|API URL|None|https://api5.conferdeploy.net/integrationServices/v3/|
 
 Example input:
 
 ```
 {
-  "api_id": "ABCDE12345",
-  "api_secret_key": "ABCDEFG12345ABCD1234ABCD",
+  "api_id": "ADFF2QLIIZ",
+  "api_secret_key": "Z1PXFRDZI321LXQVAB9IJKKZ",
   "url": "https://api5.conferdeploy.net/integrationServices/v3/"
 }
 ```
@@ -45,7 +45,7 @@ This action is used to get Agent Details.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, or device ID. Search results are case sensitive|None|198.51.100.1|
+|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, or device ID. Search results are case-sensitive|None|198.51.100.1|
 
 Example input:
 
@@ -153,7 +153,7 @@ Example output:
     "policyId": 12345,
     "policyName": "test"
   },
-  "other_matches": [
+  "all_agents_matched": [
     {
       "adGroupId": 0,
       "policyOverride": false,

@@ -25,7 +25,7 @@ class GetAgentDetailsInput(insightconnect_plugin_runtime.Input):
     "agent": {
       "type": "string",
       "title": "Agent",
-      "description": "Agent to retrieve device information from. Accepts IP address, MAC address, hostname, or device ID. Search results are case sensitive",
+      "description": "Agent to retrieve device information from. Accepts IP address, MAC address, hostname, or device ID. Search results are case-sensitive",
       "order": 1
     }
   },
@@ -129,13 +129,13 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
         "avProductVersion": {
           "type": "string",
           "title": "AV Product Version",
-          "description": "AV Product Version",
+          "description": "AV product version",
           "order": 11
         },
         "avStatus": {
           "type": "array",
           "title": "AV Status",
-          "description": "AV Status",
+          "description": "AV status",
           "items": {
             "type": "string"
           },
@@ -318,7 +318,7 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
         "macAddress": {
           "type": "string",
           "title": "MAC Address",
-          "description": "MAC Address",
+          "description": "MAC address",
           "order": 42
         },
         "messages": {
@@ -396,7 +396,7 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
         "registeredTime": {
           "type": "integer",
           "title": "Registered Time",
-          "description": "Registered Time",
+          "description": "Registered time",
           "order": 55
         },
         "rootedByAnalytics": {
@@ -420,7 +420,7 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
         "rootedBySensorTime": {
           "type": "string",
           "title": "Rooted by Sensor Time",
-          "description": "Rooted by Sensor Time",
+          "description": "Rooted by sensor time",
           "order": 59
         },
         "scanLastActionTime": {
@@ -507,7 +507,7 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
         "vdiBaseDevice": {
           "type": "string",
           "title": "VDI Base Device",
-          "description": "VDI Base Device",
+          "description": "VDI base device",
           "order": 73
         },
         "virtualMachine": {
@@ -519,7 +519,7 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
         "virtualizationProvider": {
           "type": "string",
           "title": "Virtualization Provider",
-          "description": "Virtualization Provider",
+          "description": "Virtualization provider",
           "order": 75
         },
         "windowsPlatform": {

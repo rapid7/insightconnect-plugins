@@ -39,4 +39,4 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
                 device = {}
             all_devices = result.get("results")
 
-        return {Output.AGENT: device, Output.OTHER_MATCHES: all_devices}
+        return {Output.AGENT: device, Output.ALL_AGENTS_MATCHED: all_devices}
