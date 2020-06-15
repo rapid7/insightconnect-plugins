@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: carbon_black_cloud
 title: Carbon Black Cloud
-description: The VMware Carbon Black Cloud is a cloud-native endpoint protection platform (EPP) that combines the intelligent system hardening and behavioral prevention needed to keep emerging threats at bay, using a single lightweight agent and an easy-to-use console
+description: The VMware Carbon Black Cloud is a cloud-native endpoint protection platform (EPP).
 version: 1.0.0
 vendor: rapid7
 support: rapid7
