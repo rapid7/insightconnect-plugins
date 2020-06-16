@@ -1,10 +1,12 @@
 # Description
 
-The VMware Carbon Black Cloud is a cloud-native endpoint protection platform (EPP) that combines the intelligent system hardening and behavioral prevention needed to keep emerging threats at bay, using a single lightweight agent and an easy-to-use console
+The [VMware Carbon Black Cloud](https://www.carbonblack.com/products/vmware-carbon-black-cloud/) is a cloud-native endpoint protection platform (EPP) that combines the intelligent system hardening and behavioral prevention needed to keep emerging threats at bay, using a single lightweight agent and an easy-to-use console.
+Manage and contain threats on your Carbon Black endpoints using this plugin.
 
 # Key Features
 
 * Get device information
+* Quarantine a device
 
 # Requirements
 
@@ -50,7 +52,7 @@ This action is used to quarantine an agent.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |agent|string|None|True|Agent to retrieve device information from. Accepts IP address, hostname, or device ID. Search results are case-sensitive|None|198.51.100.100|
-|quarantine_state|boolean|True|True|Would you like to qarantine the agent. Set to true to quarantine the agent, set to false to unquarantine an agent|None|True|
+|quarantine_state|boolean|True|True|Set to true to quarantine the agent, set to false to unquarantine an agent|None|True|
 |whitelist|[]string|None|False|An array of IPs, hostnames, or device ID that a user can pass in that will not be quarantined|None|["198.51.100.100", "win-test"]|
 
 Example input:
@@ -217,3 +219,4 @@ _This plugin does not contain any troubleshooting information._
 
 * [Carbon Black Cloud](https://www.carbonblack.com/products/vmware-carbon-black-cloud)
 * [Carbon Black Authentication](https://developer.carbonblack.com/reference/carbon-black-cloud/authentication/)
+* [Carbon Black API URLs](https://developer.carbonblack.com/reference/carbon-black-cloud/authentication/#constructing-your-request)

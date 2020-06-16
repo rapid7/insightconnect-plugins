@@ -32,7 +32,7 @@ class QuarantineInput(insightconnect_plugin_runtime.Input):
     "quarantine_state": {
       "type": "boolean",
       "title": "Quarantine State",
-      "description": "Would you like to qarantine the agent. Set to true to quarantine the agent, set to false to unquarantine an agent",
+      "description": "Set to true to quarantine the agent, set to false to unquarantine an agent",
       "default": true,
       "order": 2
     },

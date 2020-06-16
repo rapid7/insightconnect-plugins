@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: carbon_black_cloud
 title: Carbon Black Cloud
-description: The VMware Carbon Black Cloud is a cloud-native endpoint protection platform (EPP)
+description: Quarantine endpoints and get device details with the VMware Carbon Black Cloud plugin
 version: 1.0.0
 vendor: rapid7
 support: rapid7
@@ -466,7 +466,7 @@ actions:
         order: 1
       quarantine_state:
         title: Quarantine State
-        description: Would you like to qarantine the agent. Set to true to quarantine the agent, set to false to unquarantine an agent
+        description: Set to true to quarantine the agent, set to false to unquarantine an agent
         type: boolean
         required: true
         default: true
@@ -485,6 +485,5 @@ actions:
         description: Is the agent quarantined
         type: boolean
         required: true
-
 
 

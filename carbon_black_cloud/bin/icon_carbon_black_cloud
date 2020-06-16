@@ -7,7 +7,7 @@ from icon_carbon_black_cloud import connection, actions, triggers
 Name = "Carbon Black Cloud"
 Vendor = "rapid7"
 Version = "1.0.0"
-Description = "The VMware Carbon Black Cloud is a cloud-native endpoint protection platform (EPP)"
+Description = "Quarantine endpoints and get device details with the VMware Carbon Black Cloud plugin"
 
 
 class ICONCarbonBlackCloud(insightconnect_plugin_runtime.Plugin):
