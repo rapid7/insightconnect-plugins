@@ -796,7 +796,7 @@ connection:
     title: Domain
     type: string
     description: The Symantec Endpoint Protection Manager domain to which the username logs on
-    required: true
+    required: false
     example: mydomain
 
 actions:

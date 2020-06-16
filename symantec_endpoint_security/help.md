@@ -19,7 +19,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Username and password|None|{"username": example, "password": "test"}|
-|domain|string|None|True|The Symantec Endpoint Protection Manager domain to which the username logs on|None|mydomain|
+|domain|string|None|False|The Symantec Endpoint Protection Manager domain to which the username logs on|None|mydomain|
 |host|string|None|True|Symantec Endpoint Protection Manager host, either IP address or domain|None|sepm-14|
 |port|integer|8446|True|Symantec Endpoint Protection server port, typically 8446|None|8446|
 

@@ -44,7 +44,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "credentials",
-    "domain",
     "host",
     "port"
   ],
