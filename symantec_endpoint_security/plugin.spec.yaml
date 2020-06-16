@@ -837,7 +837,7 @@ actions:
         description: "Name for the blacklist"
         type: string
         required: true
-        example: "Insightconnect Blacklist"
+        example: "InsightConnect Blacklist"
       domain_id:
         title: "Domain ID"
         description: "ID of the domain to apply the blacklist to. Omitting this input will apply the blacklist to all domains (globally)"
