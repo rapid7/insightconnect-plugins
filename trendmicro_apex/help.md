@@ -1,7 +1,7 @@
 # Description
 
 Trend Micro Apex and Apex Central offer modern advanced automated threat detection and response. Apex agents have more than antivirus
-capabilities, they are an extension of the Apex threat management system.  
+capabilities, they are an extension of the Apex threat management system.
 
 This plugin works for both the on-premise and Apex SaaS solutions and supports multiple Apex products.
 
@@ -41,6 +41,67 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Quarantine
+
+This action is used to quarantine (isolate) an endpoint.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|True|Agent ID, hostname, MAC address, or IP address of the agent to perform the action on|None|198.51.100.100|
+|quarantine_state|boolean|True|False|True to quarantine host, false to unquarantine host|None|True|
+|whitelist|[]string|None|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs|None|["198.51.100.101", "TREND-MICRO-AGENT", "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]|
+
+Example input:
+
+```
+{
+  "agent": "198.51.100.100",
+  "quarantine_state": true,
+  "whitelist": [
+    "198.51.100.101",
+    "TREND-MICRO-AGENT",
+    "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|result_code|integer|False|The Apex Central Automation API result code|
+|result_content|[]result_content|False|The Apex Central Automation API result content|
+|result_description|string|False|The Apex Central Automation API result description|
+
+Example output:
+
+```
+{
+  "result_code": 1,
+  "result_description": "Operation successful",
+  "result_content": [
+    {
+      "entity_id": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
+      "product": "SLF_PRODUCT_OFFICESCAN_CE",
+      "managing_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
+      "folder_path": "Workgroup",
+      "ip_address_list": "198.51.100.100",
+      "mac_address_list": "08-00-27-96-86-8E",
+      "host_name": "TREND-MICRO-TES",
+      "isolation_status": "normal",
+      "capabilities": [
+        "cmd_restore_isolated_agent",
+        "cmd_isolate_agent",
+        "cmd_relocate_agent",
+        "cmd_uninstall_agent"
+      ]
+    }
+  ]
+}
+```
 
 #### Search Agents
 
@@ -255,79 +316,6 @@ Example output:
     "hasFullAgents": true,
     "hasFullRbac": true
   }
-}
-```
-
-#### Execute Agent Action
-
-This action performs actions on the agent.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|action|string|None|True|Perform action|['Isolate', 'Restore', 'Relocate', 'Uninstall']|Isolate|
-|allow_multiple_match|boolean|True|False|True - Allows multiple matches False - Does not allow multiple matches|None|True|
-|entity_id|string|None|False|The GUID of the managed product agent. Use to identify the agent(s) on which the action is performed|None|2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6|
-|host_name|string|None|False|The endpoint name of the managed product agent. Use to identify the agent(s) on which the action is performed|None|CU-PRO1-7814-2|
-|ip_address|string|None|False|The IP address of the managed product agent. Use to identify the agent(s) on which the action is performed|None|198.51.100.100|
-|mac_address|string|None|False|The MAC address of the managed product agent. Use to identify the agent(s) on which the action is performed|None|08:00:27:8d:c0:4d|
-|product|string|None|False|The Trend Micro product on the server instance. Use to identify the agent(s) on which the action is performed|None|SLF_PRODUCT_OFFICESCAN_CE|
-|relocate_to_folder_path|string|None|False|The target directory for the agent|None|\NewDomain\NewFolder|
-|relocate_to_server_id|string|None|False|The GUID of the target server for the agent|None|C22E1795-BF95-45BB-BC82-486B0F5161BE|
-|skip_ids|[]string|None|False|Skip entity ids on isolate and uninstall actions|None|["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]|
-
-Example input:
-
-```
-{
-  "action": "Isolate",
-  "allow_multiple_match": true,
-  "entity_id": "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6",
-  "host_name": "CU-PRO1-7814-2",
-  "ip_address": "198.51.100.100",
-  "mac_address": "08:00:27:8d:c0:4d",
-  "product": "SLF_PRODUCT_OFFICESCAN_CE",
-  "relocate_to_folder_path": "\\NewDomain\\NewFolder",
-  "relocate_to_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
-  "skip_ids": [
-    "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"
-  ]
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result_code|integer|False|The Apex Central Automation API result code|
-|result_content|[]result_content|False|The Apex Central Automation API result content|
-|result_description|string|False|The Apex Central Automation API result description|
-
-Example output:
-
-```
-{
-  "result_code": 1,
-  "result_description": "Operation successful",
-  "result_content": [
-    {
-      "entity_id": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
-      "product": "SLF_PRODUCT_OFFICESCAN_CE",
-      "managing_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
-      "folder_path": "Workgroup",
-      "ip_address_list": "198.51.100.100",
-      "mac_address_list": "08-00-27-96-86-8E",
-      "host_name": "TREND-MICRO-TES",
-      "isolation_status": "normal",
-      "capabilities": [
-        "cmd_restore_isolated_agent",
-        "cmd_isolate_agent",
-        "cmd_relocate_agent",
-        "cmd_uninstall_agent"
-      ]
-    }
-  ]
 }
 ```
 
@@ -764,6 +752,7 @@ For example, the agent / endpoint actions require that the Apex Endpoint Sensor 
 
 # Version History
 
+* 2.0.0 - Update action Execute Agent Action to Quarantine
 * 1.1.0 - New actions Get Agent Status, Search Agents, List OpenIOC Files, Download the RCA CSV File, Upload OpenIOC File, Delete OpenIOC File, Download OpenIOC File, Get Investigation, Terminate Process, and Execute Agent Action
 * 1.0.0 - Initial plugin
 
