@@ -19,6 +19,7 @@ Agent = Dict[str, Any]
 Domain = Dict[str, Any]
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+logging.getLogger("asyncio").setLevel(logging.WARNING)
 
 
 class HashType(Enum):

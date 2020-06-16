@@ -1,4 +1,5 @@
 # List third-party dependencies here, separated by newlines. 
 # All dependencies must be version-pinned, eg. requests==1.2.0
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
-aiohttp==3.6.2
+# Uncomment the below line for building wheels
+# aiohttp==3.6.2

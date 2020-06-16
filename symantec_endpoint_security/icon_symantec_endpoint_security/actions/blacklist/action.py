@@ -18,7 +18,7 @@ class Blacklist(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         bl_name = params.get(Input.NAME)
         bl_desc = params.get(Input.DESCRIPTION)
-        domain_ids = params.get(Input.DOMAIN_ID, "")
+        domain_ids = [params.get(Input.DOMAIN_ID, "")]
         hashes = params.get(Input.HASHES)
 
         if not hashes:
@@ -39,17 +39,17 @@ class Blacklist(insightconnect_plugin_runtime.Action):
 
         self.logger.info("Starting hash blacklisting...")
         try:
-            self.connection.api_client.blacklist_files(blacklist_data=hashes,
-                                                       blacklist_description=bl_desc,
-                                                       domain_id=domain_ids,
-                                                       hash_type=hash_type,
-                                                       name=bl_name)
+            blacklist_ids = self.connection.api_client.blacklist_files(blacklist_data=hashes,
+                                                                       blacklist_description=bl_desc,
+                                                                       domain_ids=domain_ids,
+                                                                       hash_type=hash_type,
+                                                                       name=bl_name)
         except APIException as e:
             raise PluginException(cause="An error occurred while attempting to blacklist hashes!",
                                   assistance=e.message)
 
         self.logger.info("Hash blacklisting complete!")
-        return {Output.BLACKLIST_IDS}
+        return {Output.BLACKLIST_IDS: blacklist_ids}
 
     def _verify_hash_input(self, hashes: [str]) -> None:
         """
