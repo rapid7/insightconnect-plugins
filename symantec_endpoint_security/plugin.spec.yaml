@@ -840,7 +840,7 @@ actions:
         example: "Insightconnect Blacklist"
       domain_id:
         title: "Domain ID"
-        description: "ID of the domain to apply the blacklist to"
+        description: "ID of the domain to apply the blacklist to."
         type: string
         required: true
         example: "0AF740760A0414711FAA4F8BD5293158"

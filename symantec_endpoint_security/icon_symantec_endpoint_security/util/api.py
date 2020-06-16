@@ -1,5 +1,9 @@
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
+import aiohttp
+import asyncio
+
 import json
 
 from typing import Optional
@@ -52,8 +56,25 @@ class APIClient(object):
         self.logger = logger
 
         self.session = requests.Session()
-        self.session.headers = {"Content-Type": "application/json",
-                                "Authorization": f"Bearer {self.auth_token}"}
+        self.session.headers = self._get_headers()
+
+    def _get_headers(self) -> {str: str}:
+        """
+        Return headers for interacting with the SEPM API
+        :return: Header dict
+        """
+
+        return {"Content-Type": "application/json",
+                "Authorization": f"Bearer {self.auth_token}"}
+
+    def _get_async_session(self) -> aiohttp.ClientSession:
+        """
+        Create and return a new aiohttp ClientSession
+        :return: aiohttp ClientSession
+        """
+
+        return aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False),
+                                     headers=self._get_headers())
 
     @classmethod
     def new_client(cls, host: str, username: str, password: str, domain: str, port: str,
@@ -135,24 +156,15 @@ class APIClient(object):
             raise APIException(status_code=None, message=f"An unhandled response was received from Symantec Endpoint "
                                                          f"Protection: {response.text}")
 
-    def blacklist_file(self,
-                       blacklist_data: [str],
-                       blacklist_description: str,
-                       domain_id: str,
-                       hash_type: HashType,
-                       name: Optional[str] = None):
+    async def _do_blacklist_files_request(self, body: dict, session: aiohttp.ClientSession) -> Optional[str]:
         """
-        Blacklists a file hash
-        :param blacklist_data: The blacklist file’s data
-        :param blacklist_description: The blacklist file’s description
-        :param domain_id: The domain ID to which the blacklist file is applied
-        :param hash_type: The blacklist file’s hash type, either MD5 or SHA256
-        :param name: The blacklist file's ID, only required when updating an existing blacklist file
-        :return:
+        Send a blacklist file request asynchronously
+        :param body: Parameters required for the API call
+        :param session: aiohttp ClientSession
+        :return: Blacklist ID
         """
-
+        self.logger.info(f"Creating blacklist for domain ID: {body['domainId']}")
         url = f"{self.base_url}/policy-objects/fingerprints"
-
         status_codes = {
             **self._STATUS_CODES,
             409: APIException(status_code=409,
@@ -160,32 +172,51 @@ class APIClient(object):
                                       "of the target resource. The file fingerprint already exists.")
         }
 
-        body = {
-            "data": blacklist_data,
-            "description": blacklist_description,
-            "domainId": domain_id,
-            "hashType": hash_type.value,
-            "name": name
-        }
-
-        response = self.session.post(url=url,
-                                     verify=False,
-                                     json=body)
-
-        if response.status_code == 200:
+        response = await session.post(url=url, data=json.dumps(body))
+        if response.status == 200:
             try:
-                id_ = response.json()["id"]
-                return id_
+                resp_json = await response.json()
+                return resp_json["id"]
             except json.JSONDecodeError:
                 raise APIException(status_code=None, message="Symantec Endpoint Protection server returned a "
                                                              "non-JSON response!")
             except (KeyError, IndexError):
                 return None
-        elif status_codes.get(response.status_code) is not None:
-            raise status_codes[response.status_code]
+        elif status_codes.get(response.status) is not None:
+            raise status_codes[response.status]
         else:
             raise APIException(status_code=None, message=f"An unhandled response was received from Symantec Endpoint "
                                                          f"Protection: {response.text}")
+
+    def blacklist_files(self,
+                        blacklist_data: [str],
+                        blacklist_description: str,
+                        domain_ids: [str],
+                        hash_type: HashType,
+                        name: Optional[str] = None) -> [str]:
+        """
+        Blacklists a file hash
+        :param blacklist_data: The blacklist file’s data
+        :param blacklist_description: The blacklist file’s description
+        :param domain_ids: The domain ID(s) to which the blacklist file is applied
+        :param hash_type: The blacklist file’s hash type, either MD5 or SHA256
+        :param name: The blacklist file's ID, only required when updating an existing blacklist file
+        :return:
+        """
+
+        async with self._get_async_session() as async_session:
+            tasks: [asyncio.Task] = []
+            for domain_id in domain_ids:
+                body = {
+                    "data": blacklist_data,
+                    "description": blacklist_description,
+                    "domainId": domain_id,
+                    "hashType": hash_type.value,
+                    "name": name
+                }
+                tasks.append(asyncio.Task(self._do_blacklist_files_request(body=body, session=async_session)))
+            blacklist_ids = await asyncio.ensure_future(asyncio.gather(*tasks))
+        return blacklist_ids
 
     def get_all_accessible_domains(self) -> [Domain]:
         """
