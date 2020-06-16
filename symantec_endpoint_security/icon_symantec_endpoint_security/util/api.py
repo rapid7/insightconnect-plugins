@@ -188,12 +188,12 @@ class APIClient(object):
             raise APIException(status_code=None, message=f"An unhandled response was received from Symantec Endpoint "
                                                          f"Protection: {response.text}")
 
-    def blacklist_files(self,
-                        blacklist_data: [str],
-                        blacklist_description: str,
-                        domain_ids: [str],
-                        hash_type: HashType,
-                        name: Optional[str] = None) -> [str]:
+    async def _blacklist_files(self,
+                               blacklist_data: [str],
+                               blacklist_description: str,
+                               domain_ids: [str],
+                               hash_type: HashType,
+                               name: Optional[str] = None) -> [str]:
         """
         Blacklists a file hash
         :param blacklist_data: The blacklist file’s data
@@ -217,6 +217,22 @@ class APIClient(object):
                 tasks.append(asyncio.Task(self._do_blacklist_files_request(body=body, session=async_session)))
             blacklist_ids = await asyncio.ensure_future(asyncio.gather(*tasks))
         return blacklist_ids
+
+    def blacklist_files(self,
+                        blacklist_data: [str],
+                        blacklist_description: str,
+                        domain_ids: [str],
+                        hash_type: HashType,
+                        name: Optional[str] = None) -> [str]:
+        """
+        Public function for calling the async blacklist_files function
+        """
+
+        return asyncio.run(self._blacklist_files(blacklist_data=blacklist_data,
+                                                 blacklist_description=blacklist_description,
+                                                 domain_ids=domain_ids,
+                                                 hash_type=hash_type,
+                                                 name=name))
 
     def get_all_accessible_domains(self) -> [Domain]:
         """
