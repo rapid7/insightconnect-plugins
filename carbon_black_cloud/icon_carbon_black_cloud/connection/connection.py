@@ -55,7 +55,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         return device
 
-    def post_to_api(self, url, payload):
+    def post_to_api(self, url, payload, retry=True):
         result = requests.post(url, headers=self.headers, json=payload)
 
         try:
@@ -83,16 +83,15 @@ class Connection(insightconnect_plugin_runtime.Connection):
                                       data=result.text)
             if result.status_code == 503: # This is usually an API limit error or server error, try again
                 time.sleep(5)
-                result = requests.post(url, headers=self.headers, json=payload)
+                if retry:
+                    return self.post_to_api(url, payload, False)
 
-                try:
-                    result.raise_for_status()
-                except Exception as e:
-                    self.logger.error(str(e))
-                    self.logger.error(result.text)
-                    raise PluginException.Preset.UNKNOWN
+                self.logger.error("Retry on 503 failed.")
+                self.logger.error(str(e))
+                self.logger.error(result.text)
+                raise PluginException.Preset.UNKNOWN
 
-                return result
+
 
 
             self.logger.error(f"Exception was:\n{e}")
