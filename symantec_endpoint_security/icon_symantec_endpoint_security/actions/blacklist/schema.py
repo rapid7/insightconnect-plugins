@@ -15,7 +15,7 @@ class Input:
     
 
 class Output:
-    BLACKLIST_ID = "blacklist_id"
+    BLACKLIST_IDS = "blacklist_ids"
     
 
 class BlacklistInput(insightconnect_plugin_runtime.Input):
@@ -33,7 +33,7 @@ class BlacklistInput(insightconnect_plugin_runtime.Input):
     "domain_id": {
       "type": "string",
       "title": "Domain ID",
-      "description": "ID of the domain to apply the blacklist to",
+      "description": "ID of the domain to apply the blacklist to. Omitting this input will apply the blacklist to all domains (globally)",
       "order": 4
     },
     "hashes": {
@@ -54,7 +54,6 @@ class BlacklistInput(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "description",
-    "domain_id",
     "hashes",
     "name"
   ]
@@ -71,15 +70,18 @@ class BlacklistOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "blacklist_id": {
-      "type": "string",
-      "title": "Blacklist ID",
-      "description": "ID of the resulting blacklist",
+    "blacklist_ids": {
+      "type": "array",
+      "title": "Blacklist IDs",
+      "description": "IDs of the resulting blacklists",
+      "items": {
+        "type": "string"
+      },
       "order": 1
     }
   },
   "required": [
-    "blacklist_id"
+    "blacklist_ids"
   ]
 }
     """)

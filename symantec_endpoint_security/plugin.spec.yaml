@@ -840,14 +840,14 @@ actions:
         example: "Insightconnect Blacklist"
       domain_id:
         title: "Domain ID"
-        description: "ID of the domain to apply the blacklist to."
+        description: "ID of the domain to apply the blacklist to. Omitting this input will apply the blacklist to all domains (globally)"
         type: string
-        required: true
+        required: false
         example: "0AF740760A0414711FAA4F8BD5293158"
     output:
-      blacklist_id:
-        title: "Blacklist ID"
-        description: "ID of the resulting blacklist"
-        type: string
+      blacklist_ids:
+        title: "Blacklist IDs"
+        description: "IDs of the resulting blacklists"
+        type: "[]string"
         required: true
-        example: "5348023646E740128BFE65939934F22E"
+        example: '["5348023646E740128BFE65939934F22E", "5348023646E740128BFE65939934B13E"]'
