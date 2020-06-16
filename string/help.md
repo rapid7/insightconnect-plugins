@@ -8,7 +8,7 @@ This plugin utilizes the Python 3 String library [set of methods](https://docs.p
 
 * Split a string to a list of elements
 * Split a string to an object
-* Upper and Lower case a string
+* Upper case, lower case, and trim a string
 
 # Requirements
 
