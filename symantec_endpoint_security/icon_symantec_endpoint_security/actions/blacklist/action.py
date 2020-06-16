@@ -33,9 +33,11 @@ class Blacklist(insightconnect_plugin_runtime.Action):
 
         # If no domain_id specified, then blacklist should be global. Get all domain IDs the connection can access
         if not domain_ids:
+            self.logger.info("No domain IDs were specified, defaulting to global blacklisting!")
             domains = self.connection.api_client.get_all_accessible_domains()
             domain_ids = [domain["id"] for domain in domains]
 
+        self.logger.info("Starting hash blacklisting...")
         try:
             self.connection.api_client.blacklist_files(blacklist_data=hashes,
                                                        blacklist_description=bl_desc,
@@ -46,6 +48,7 @@ class Blacklist(insightconnect_plugin_runtime.Action):
             raise PluginException(cause="An error occurred while attempting to blacklist hashes!",
                                   assistance=e.message)
 
+        self.logger.info("Hash blacklisting complete!")
         return {Output.BLACKLIST_IDS}
 
     def _verify_hash_input(self, hashes: [str]) -> None:
