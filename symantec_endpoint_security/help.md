@@ -57,7 +57,7 @@ Example input:
   "description": "Hashes banned via InsightConnect",
   "domain_id": "0AF740760A0414711FAA4F8BD5293158",
   "hashes": ["9de5069c5afe602b2ea0a04b66beb2c0"],
-  "name": "Insightconnect Blacklist"
+  "name": "Hashes Blacklisted from InsightConnect"
 }
 ```
 
