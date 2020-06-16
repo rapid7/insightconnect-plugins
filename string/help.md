@@ -24,16 +24,54 @@ _This plugin does not contain a connection._
 
 ### Actions
 
+#### Length
+
+This action is used to return the length of a string.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|string|string|None|True|String to return length of|None|None|
+
+Example input:
+
+```
+{
+  "string": "What is the length of this string?"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|length|integer|True|Length of string|
+
+Example output:
+
+```
+{
+  "length": 36
+}
+```
+
 #### Split String to List
 
 This action is used to convert a string to a list of strings.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|string|string|None|True|String to convert e.g. Sentence one\nSentence two|None|
-|delimiter|string|None|False|The character used to split the string into slices for the list. The default is a newline, if not provided by the user|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|delimiter|string|None|False|The character used to split the string into slices for the list. The default is a newline, if not provided by the user|None|None|
+|string|string|None|True|String to convert e.g. Sentence one
+Sentence two|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -68,11 +106,16 @@ It allows users the ability to use the green selector and choose a specific vari
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|string|string|None|True|String to convert e.g. USER=bob|None|
-|string_delimiter|string|None|False|The character used to split the string into slices for the list. The default is a space, if not provided by the user|None|
-|block_delimiter|string|None|False|The character used to split a block of text (e.g. paragraph) into slices before applying a split with the string delimiter. This is an optional parameter and necessary in more complex splitting situations where a character split isn't enough|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|block_delimiter|string|None|False|The character delimiter for the initial string split, applied before the string delimiter input. This parameter is optional but allows for more complex handling|None|None|
+|string|string|None|True|String to convert e.g. USER=bob|None|None|
+|string_delimiter|string|None|False|The character used to split the string into slices for the list. The default is a space, if not provided by the user|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -119,9 +162,14 @@ This action is used to convert lowercase letters to uppercase.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|string|string|None|True|String to convert e.g. USER=bob|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|string|string|None|True|String to convert e.g. USER=bob|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -143,9 +191,14 @@ This action is used to convert uppercase letters to lowercase.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|string|string|None|True|String to convert e.g. USER=bob|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|string|string|None|True|String to convert e.g. USER=bob|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -167,11 +220,16 @@ This action is used to encode a string.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|encoding|string|None|True|Encoding to use|['UTF-8', 'ASCII']|
-|error_handling|string|None|True|Error handler to use for encoding and decoding|['strict', 'replace', 'ignore']|
-|string|string|None|True|String to encode|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|encoding|string|None|True|Encoding to use|['UTF-8', 'ASCII']|None|
+|error_handling|string|None|True|Error handler to use for encoding and decoding|['strict', 'replace', 'ignore']|None|
+|string|string|None|True|String to encode|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -193,15 +251,20 @@ This action is used to trim a string of leading and trailing whitespace.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|string|string|None|True|String to trim|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|string|string|None|True|String to trim|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|trimmed|string|False|Trimmed string|
+|trimmed|string|True|Trimmed string|
 
 Example output:
 

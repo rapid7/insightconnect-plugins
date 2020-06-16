@@ -146,3 +146,19 @@ actions:
         title: Trimmed
         description: Trimmed string
         required: true
+
+  length:
+    title: Length
+    description: Return the length of a string
+    input:
+      string:
+        title: String Input
+        description: String to return length of
+        type: string
+        required: true
+    output:
+      length:
+        type: integer
+        title: Length
+        description: Length of string
+        required: true
