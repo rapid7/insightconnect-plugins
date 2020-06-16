@@ -7,6 +7,6 @@ from .download_rca_csv_file.action import DownloadRcaCsvFile
 from .get_agent_status.action import GetAgentStatus
 from .get_rca_object.action import GetRcaObject
 from .openioc_files_list.action import OpeniocFilesList
-from .performs_action.action import PerformsAction
+from .quarantine.action import Quarantine
 from .search_agents.action import SearchAgents
 from .upload_openioc_file.action import UploadOpeniocFile
