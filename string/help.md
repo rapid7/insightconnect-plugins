@@ -71,6 +71,10 @@ Sentence two|None|None|
 Example input:
 
 ```
+{
+  "delimiter": " ",
+  "string": "This is a sentence"
+}
 ```
 
 ##### Output
@@ -169,6 +173,9 @@ This action is used to convert lowercase letters to uppercase.
 Example input:
 
 ```
+{
+  "string": "to be uppercase"
+}
 ```
 
 ##### Output
@@ -181,7 +188,7 @@ Example output:
 
 ```
 {
-  "upper": "LDAP"
+  "upper": "TO BE UPPERCASE"
 }
 ```
 
@@ -198,6 +205,9 @@ This action is used to convert uppercase letters to lowercase.
 Example input:
 
 ```
+{
+  "string": "TO BE LOWERCASE"
+}
 ```
 
 ##### Output
@@ -210,7 +220,7 @@ Example output:
 
 ```
 {
-  "lower": "hello"
+  "lower": "to be lowercase"
 }
 ```
 
@@ -258,6 +268,9 @@ This action is used to trim a string of leading and trailing whitespace.
 Example input:
 
 ```
+{
+  "string": "Extra spaces at the end of this string     "
+}
 ```
 
 ##### Output
@@ -270,7 +283,7 @@ Example output:
 
 ```
 {
-  "trimmed": "hello"
+  "trimmed": "Extra spaces at the end of this string"
 }
 ```
 
@@ -289,6 +302,7 @@ If this is the case, consider using the Python 3 Script plugin instead.
 
 # Version History
 
+* 1.2.0 - New action Length
 * 1.2.1 - New spec and help.md format for the Extension Library
 * 1.2.0 - New action Trim
 * 1.1.0 - New action Set Encoding
