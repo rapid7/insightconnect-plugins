@@ -65,10 +65,14 @@ class Connection(komand.Connection):
 
     def check_and_refresh_api_token(self, force_refresh_token=False):
         self.time_now = time.time()
+        self.logger.info(f"Time Now: {self.time_now}")
+        self.logger.info(f"Time Ago: {self.time_ago}")
         if (self.time_now - self.time_ago) > 3500 or force_refresh_token:  # 1 hour in seconds (minus some buffer time)
             self.logger.info("Refreshing auth token")
             self.get_token()
             self.time_ago = time.time()
+        else:
+            self.logger.info("Token is valid, not refreshing.")
 
     def get_headers(self, forceRefreshToken=False):
         self.check_and_refresh_api_token(forceRefreshToken)
