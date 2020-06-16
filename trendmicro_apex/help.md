@@ -1,7 +1,7 @@
 # Description
 
 Trend Micro Apex and Apex Central offer modern advanced automated threat detection and response. Apex agents have more than antivirus
-capabilities, they are an extension of the Apex threat management system.  
+capabilities, they are an extension of the Apex threat management system.
 
 This plugin works for both the on-premise and Apex SaaS solutions and supports multiple Apex products.
 
