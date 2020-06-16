@@ -68,7 +68,7 @@ class Connection(komand.Connection):
         if (self.time_now - self.time_ago) > 3500 or force_refresh_token:  # 1 hour in seconds (minus some buffer time)
             self.logger.info("Refreshing auth token")
             self.get_token()
-        self.time_ago = time.time()
+            self.time_ago = time.time()
 
     def get_headers(self, forceRefreshToken=False):
         self.check_and_refresh_api_token(forceRefreshToken)
