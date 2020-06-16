@@ -37,7 +37,7 @@ class Blacklist(insightconnect_plugin_runtime.Action):
             domain_ids = [domain["id"] for domain in domains]
 
         try:
-            self.connection.api_client.blacklist_file(blacklist_data=hashes,
+            self.connection.api_client.blacklist_files(blacklist_data=hashes,
                                                       blacklist_description=bl_desc,
                                                       domain_id=domain_ids,
                                                       hash_type=hash_type,
