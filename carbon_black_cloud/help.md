@@ -17,6 +17,8 @@ Manage and contain threats on your Carbon Black endpoints using this plugin.
 
 ## Setup
 
+For information on how to get the API credentials and your base URL please see the [Carbon Black Authentication](https://developer.carbonblack.com/reference/carbon-black-cloud/authentication/) documentation.
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
