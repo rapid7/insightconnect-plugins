@@ -729,7 +729,7 @@ For example, the agent / endpoint actions require that the Apex Endpoint Sensor 
 
 # Version History
 
-* 2.0.0 - Update acion Execute Agent Action to Quarantine
+* 2.0.0 - Update action Execute Agent Action to Quarantine
 * 1.1.0 - New actions Get Agent Status, Search Agents, List OpenIOC Files, Download the RCA CSV File, Upload OpenIOC File, Delete OpenIOC File, Download OpenIOC File, Get Investigation, Terminate Process, and Execute Agent Action
 * 1.0.0 - Initial plugin
 
