@@ -83,7 +83,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                                       data=result.text)
             if result.status_code == 503: # This is usually an API limit error or server error, try again
                 time.sleep(5)
-                result = requests.get(url, headers=self.headers, json=payload)
+                result = requests.post(url, headers=self.headers, json=payload)
 
                 try:
                     result.raise_for_status()

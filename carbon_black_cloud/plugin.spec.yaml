@@ -4,7 +4,7 @@ products: [insightconnect]
 name: carbon_black_cloud
 title: Carbon Black Cloud
 description: Quarantine endpoints and get device details with the VMware Carbon Black Cloud plugin
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: rapid7
 status: []
