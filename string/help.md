@@ -309,7 +309,7 @@ If this is the case, consider using the Python 3 Script plugin instead.
 
 # Version History
 
-* 1.2.0 - New action Length | Add example inputs
+* 1.3.0 - New action Length | Add example inputs
 * 1.2.1 - New spec and help.md format for the Extension Library
 * 1.2.0 - New action Trim
 * 1.1.0 - New action Set Encoding
