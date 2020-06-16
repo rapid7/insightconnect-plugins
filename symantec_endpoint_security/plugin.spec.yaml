@@ -831,7 +831,7 @@ actions:
         description: "Description for the blacklist"
         type: string
         required: true
-        example: "Hashes banned via InsightConnect"
+        example: "Hashes Blacklisted from InsightConnect"
       name:
         title: "Name"
         description: "Name for the blacklist"
