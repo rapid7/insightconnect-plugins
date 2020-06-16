@@ -796,7 +796,7 @@ connection:
     title: Domain
     type: string
     description: The Symantec Endpoint Protection Manager domain to which the username logs on
-    required: true
+    required: false
     example: mydomain
 
 actions:
@@ -816,3 +816,38 @@ actions:
         description: "Agent matching the search"
         type: agent
         required: false
+  blacklist:
+    title: "Blacklist"
+    description: "Blacklist MD5 or SHA256 hashes"
+    input:
+      hashes:
+        title: "Hashes"
+        description: "Hashes (MD5 or SHA256) to add to the blacklist. Note: only one type of hash is allowed at a time"
+        type: "[]string"
+        required: true
+        example: '["9de5069c5afe602b2ea0a04b66beb2c0"]'
+      description:
+        title: "Description"
+        description: "Description for the blacklist"
+        type: string
+        required: true
+        example: "Hashes Blacklisted from InsightConnect"
+      name:
+        title: "Name"
+        description: "Name for the blacklist"
+        type: string
+        required: true
+        example: "InsightConnect Blacklist"
+      domain_id:
+        title: "Domain ID"
+        description: "ID of the domain to apply the blacklist to. Omitting this input will apply the blacklist to all domains (globally)"
+        type: string
+        required: false
+        example: "0AF740760A0414711FAA4F8BD5293158"
+    output:
+      blacklist_ids:
+        title: "Blacklist IDs"
+        description: "IDs of the resulting blacklists"
+        type: "[]string"
+        required: true
+        example: '["5348023646E740128BFE65939934F22E", "5348023646E740128BFE65939934B13E"]'
