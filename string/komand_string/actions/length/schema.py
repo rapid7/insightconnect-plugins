@@ -4,34 +4,27 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Converts a string to a list of strings"
+    DESCRIPTION = "Return the length of a string"
 
 
 class Input:
-    DELIMITER = "delimiter"
     STRING = "string"
     
 
 class Output:
-    LIST = "list"
+    LENGTH = "length"
     
 
-class SplitToListInput(komand.Input):
+class LengthInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "delimiter": {
-      "type": "string",
-      "title": "Delimiter",
-      "description": "The character used to split the string into slices for the list. The default is a newline, if not provided by the user",
-      "order": 2
-    },
     "string": {
       "type": "string",
       "title": "String Input",
-      "description": "String to break into an array",
+      "description": "String to return length of",
       "order": 1
     }
   },
@@ -45,22 +38,22 @@ class SplitToListInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class SplitToListOutput(komand.Output):
+class LengthOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "list": {
-      "type": "array",
-      "title": "List",
-      "description": "List of string components",
-      "items": {
-        "type": "string"
-      },
+    "length": {
+      "type": "integer",
+      "title": "Length",
+      "description": "Length of string",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "length"
+  ]
 }
     """)
 
