@@ -23,7 +23,8 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |api_id|string|None|True|API ID|None|ADFF2QLIIZ|
 |api_secret_key|credential_secret_key|None|True|API secret key|None|Z1PXFRDZI321LXQVAB9IJKKZ|
-|url|string|https://api5.conferdeploy.net/integrationServices/v3/|True|API URL|None|https://api5.conferdeploy.net/integrationServices/v3/|
+|org_key|string|None|True|Organization Key|None|1ABZY2FJ|
+|url|string|https://defense.conferdeploy.net|True|API URL|None|https://defense.conferdeploy.net|
 
 Example input:
 
@@ -31,13 +32,50 @@ Example input:
 {
   "api_id": "ADFF2QLIIZ",
   "api_secret_key": "Z1PXFRDZI321LXQVAB9IJKKZ",
-  "url": "https://api5.conferdeploy.net/integrationServices/v3/"
+  "org_key": "1ABZY2FJ",
+  "url": "https://defense.conferdeploy.net"
 }
 ```
 
 ## Technical Details
 
 ### Actions
+
+#### Quarantine
+
+This action is used to quarantine an agent.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, hostname, or device ID. Search results are case-sensitive|None|198.51.100.100|
+|quarantine_state|boolean|True|True|Would you like to qarantine the agent. Set to true to quarantine the agent, set to false to unquarantine an agent|None|True|
+|whitelist|[]string|None|False|An array of IPs, hostnames, or device ID that a user can pass in that will not be quarantined|None|["198.51.100.100", "win-test"]|
+
+Example input:
+
+```
+{
+  "agent": "198.51.100.100",
+  "quarantine_state": true,
+  "whitelist": [
+    "198.51.100.100",
+    "win-test"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|quarantined|boolean|True|Is the agent quarantined|
+
+Example output:
+
+```
+```
 
 #### Get Agent Details
 
@@ -47,7 +85,7 @@ This action is used to get Agent Details.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, or device ID. Search results are case-sensitive|None|198.51.100.100|
+|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, hostname, or device ID. Search results are case-sensitive|None|198.51.100.100|
 
 Example input:
 
@@ -62,7 +100,6 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |agent|agent|False|Details about the agent|
-|all_agents_matched|[]agent|False|In the unlikely case that multiple agents match the search criteria, for instance if duplicate IPs are present on the network, all agents will be listed here|
 
 Example output:
 
