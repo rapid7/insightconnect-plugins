@@ -1,8 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import GetAgentDetailsInput, GetAgentDetailsOutput, Input, Output, Component
 # Custom imports below
-import icon_carbon_black_cloud.util.agent_typer as agent_typer
-
 
 class GetAgentDetails(insightconnect_plugin_runtime.Action):
 
@@ -15,25 +13,7 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         agent = params[Input.AGENT]
-        agent_type = agent_typer.get_agent_type(agent)
 
-        endpoint = "/device"
-        if agent_type == agent_typer.HOSTNAME:
-            endpoint+=f"?hostNameExact={agent}"
-        elif agent_type == agent_typer.IP_ADDRESS:
-            endpoint += f"?ipAddress={agent}"
-        elif agent_type == agent_typer.DEVICE_ID:
-            endpoint += f"/{agent}"
-
-        self.logger.info(f"Searching at {endpoint}")
-        result = self.connection.get_from_api(endpoint, {})
-
-        if agent_type == agent_typer.DEVICE_ID:
-            device = result.get("deviceInfo", {})
-        else:
-            devices = result.get("results",[{}])
-            if len(devices) > 1:
-                self.logger.info("More than one agent found, returning the first agent.")
-            device = devices[0]
+        device = self.connection.get_agent(agent)
 
         return {Output.AGENT: insightconnect_plugin_runtime.helper.clean(device)}

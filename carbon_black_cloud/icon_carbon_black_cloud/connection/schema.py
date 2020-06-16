@@ -6,6 +6,7 @@ import json
 class Input:
     API_ID = "api_id"
     API_SECRET_KEY = "api_secret_key"
+    ORG_KEY = "org_key"
     URL = "url"
     
 
@@ -27,17 +28,24 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "API secret key",
       "order": 2
     },
+    "org_key": {
+      "type": "string",
+      "title": "Org Key",
+      "description": "Organization Key",
+      "order": 3
+    },
     "url": {
       "type": "string",
       "title": "URL",
       "description": "API URL",
-      "default": "https://api5.conferdeploy.net/integrationServices/v3/",
-      "order": 3
+      "default": "https://defense.conferdeploy.net",
+      "order": 4
     }
   },
   "required": [
     "api_id",
     "api_secret_key",
+    "org_key",
     "url"
   ],
   "definitions": {

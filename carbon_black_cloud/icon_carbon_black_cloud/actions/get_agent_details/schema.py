@@ -24,7 +24,7 @@ class GetAgentDetailsInput(insightconnect_plugin_runtime.Input):
     "agent": {
       "type": "string",
       "title": "Agent",
-      "description": "Agent to retrieve device information from. Accepts IP address, MAC address, hostname, or device ID. Search results are case-sensitive",
+      "description": "Agent to retrieve device information from. Accepts IP address, hostname, or device ID. Search results are case-sensitive",
       "order": 1
     }
   },

@@ -4,6 +4,7 @@ from .schema import ConnectionSchema, Input
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 import time
+import icon_carbon_black_cloud.util.agent_typer as agent_typer
 import urllib.parse
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -15,17 +16,47 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.api_id = params.get(Input.API_ID)
         self.api_secret = params.get(Input.API_SECRET_KEY).get("secretKey")
 
-        self.base_url = params.get(Input.URL)
-        self.base_url = self.base_url.rstrip("/")
+        base_url = params.get(Input.URL)
+        self.base_url = urllib.parse.urlparse(base_url).hostname
+        self.base_url = f"https://{self.base_url}"
+
+        self.org_key = params.get(Input.ORG_KEY)
 
         self.x_auth_token = f"{self.api_secret}/{self.api_id}"
         self.headers = {
             "X-Auth-Token": self.x_auth_token
         }
 
-    def get_from_api(self, endpoint, payload):
-        url = self.base_url + endpoint
-        result = requests.get(url, headers=self.headers, json=payload)
+    def get_agent(self, agent):
+        self.logger.info(f"Looking for: {agent}")
+        agent_type = agent_typer.get_agent_type(agent)
+        endpoint = f"appservices/v6/orgs/{self.org_key}/devices/_search"
+        url = f"{self.base_url}/{endpoint}"
+        payload = {
+            "query": agent
+        }
+
+        self.logger.info(f"Searching at {url}")
+        results = self.post_to_api(url, payload).get("results")
+
+        device = None
+        if agent_type == agent_typer.DEVICE_ID:
+            device = next((x for x in results if str(x.get("id","")) == agent), None)
+        if agent_type == agent_typer.IP_ADDRESS:
+            device = next((x for x in results if x.get("last_internal_ip_address") == agent or
+                                                 x.get("last_external_ip_address")), None)
+        if agent_type == agent_typer.HOSTNAME:
+            device = next((x for x in results if x.get("name", "") == agent), None)
+        if agent_typer == agent_typer.MAC_ADDRESS:
+            device = next((x for x in results if x.get("mac_address", "") == agent), None)
+
+        if not device:
+            self.logger.error(f"Could not find any device that matched {agent}")
+
+        return device
+
+    def post_to_api(self, url, payload):
+        result = requests.post(url, headers=self.headers, json=payload)
 
         try:
             result.raise_for_status()
@@ -68,7 +99,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.logger.error(f"Result text was:\n{result.text}")
             raise PluginException(PluginException.Preset.UNKNOWN)
 
-        return result.json()
+
+        if result.status_code != 204:
+            return result.json()
+        else:
+            return {}
 
 
     def test(self):
