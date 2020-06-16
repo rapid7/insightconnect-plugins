@@ -89,7 +89,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 self.logger.error("Retry on 503 failed.")
                 self.logger.error(str(e))
                 self.logger.error(result.text)
-                raise PluginException.Preset.UNKNOWN
+                raise PluginException(PluginException.Preset.UNKNOWN)
 
         if result.status_code != 204:
             return result.json()
