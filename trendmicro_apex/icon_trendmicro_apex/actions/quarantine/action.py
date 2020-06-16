@@ -29,8 +29,9 @@ class Quarantine(komand.Action):
             action = "cmd_restore_isolated_agent"
 
         if "cmd_isolate_agent" == action and agent in params.get(Input.WHITELIST, []):
-            raise PluginException(cause="Something unexpected occurred.",
-                                  assistance=f"Can't isolate for admin endpoint")
+            raise PluginException(cause="Unable to block whitelisted entry.",
+                                  assistance=f"Please remove the host from the action's whitelist or quarantine a different host.")
+
 
         payload = {
             "act": action,

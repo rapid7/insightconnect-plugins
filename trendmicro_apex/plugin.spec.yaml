@@ -1051,7 +1051,7 @@ actions:
         description: This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs
         type: "[]string"
         required: false
-        example: ["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]
+        example: ["198.51.100.101", "TREND-MICRO-AGENT", "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]
     output:
       result_code:
         title: Result Code

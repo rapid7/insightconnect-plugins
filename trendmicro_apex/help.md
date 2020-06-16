@@ -52,7 +52,7 @@ This action is used to quarantine (isolate) an endpoint.
 |----|----|-------|--------|-----------|----|-------|
 |agent|string|None|True|Agent ID, hostname, MAC address, or IP address of the agent to perform the action on|None|198.51.100.100|
 |quarantine_state|boolean|True|False|True to quarantine host, false to unquarantine host|None|True|
-|whitelist|[]string|None|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs|None|["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]|
+|whitelist|[]string|None|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs|None|["198.51.100.101", "TREND-MICRO-AGENT", "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]|
 
 Example input:
 
@@ -61,6 +61,8 @@ Example input:
   "agent": "198.51.100.100",
   "quarantine_state": true,
   "whitelist": [
+    "198.51.100.101",
+    "TREND-MICRO-AGENT",
     "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"
   ]
 }
