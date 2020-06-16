@@ -10,10 +10,10 @@ class Blacklist(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='blacklist',
-                description=Component.DESCRIPTION,
-                input=BlacklistInput(),
-                output=BlacklistOutput())
+            name='blacklist',
+            description=Component.DESCRIPTION,
+            input=BlacklistInput(),
+            output=BlacklistOutput())
 
     def run(self, params={}):
         bl_name = params.get(Input.NAME)
@@ -38,10 +38,10 @@ class Blacklist(insightconnect_plugin_runtime.Action):
 
         try:
             self.connection.api_client.blacklist_files(blacklist_data=hashes,
-                                                      blacklist_description=bl_desc,
-                                                      domain_id=domain_ids,
-                                                      hash_type=hash_type,
-                                                      name=bl_name)
+                                                       blacklist_description=bl_desc,
+                                                       domain_id=domain_ids,
+                                                       hash_type=hash_type,
+                                                       name=bl_name)
         except APIException as e:
             raise PluginException(cause="An error occurred while attempting to blacklist hashes!",
                                   assistance=e.message)
