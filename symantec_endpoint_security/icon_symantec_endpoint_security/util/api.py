@@ -205,7 +205,7 @@ class APIClient(object):
         """
 
         async with self._get_async_session() as async_session:
-            tasks: [asyncio.Task] = []
+            tasks: [asyncio.Future] = []
             for domain_id in domain_ids:
                 body = {
                     "data": blacklist_data,
@@ -214,8 +214,8 @@ class APIClient(object):
                     "hashType": hash_type.value,
                     "name": name
                 }
-                tasks.append(asyncio.Task(self._do_blacklist_files_request(body=body, session=async_session)))
-            blacklist_ids = await asyncio.ensure_future(asyncio.gather(*tasks))
+                tasks.append(asyncio.ensure_future(self._do_blacklist_files_request(body=body, session=async_session)))
+            blacklist_ids = await asyncio.gather(*tasks)
         return blacklist_ids
 
     def blacklist_files(self,

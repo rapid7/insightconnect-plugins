@@ -45,19 +45,19 @@ This action is used to blacklist MD5 or SHA256 hashes.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|description|string|None|True|Description for the blacklist|None|Hashes banned via InsightConnect|
+|description|string|None|True|Description for the blacklist|None|Hashes Blacklisted from InsightConnect|
 |domain_id|string|None|False|ID of the domain to apply the blacklist to. Omitting this input will apply the blacklist to all domains (globally)|None|0AF740760A0414711FAA4F8BD5293158|
 |hashes|[]string|None|True|Hashes (MD5 or SHA256) to add to the blacklist. Note: only one type of hash is allowed at a time|None|["9de5069c5afe602b2ea0a04b66beb2c0"]|
-|name|string|None|True|Name for the blacklist|None|Insightconnect Blacklist|
+|name|string|None|True|Name for the blacklist|None|InsightConnect Blacklist|
 
 Example input:
 
 ```
 {
-  "description": "Hashes banned via InsightConnect",
+  "description": "Hashes Blacklisted from InsightConnect",
   "domain_id": "0AF740760A0414711FAA4F8BD5293158",
   "hashes": ["9de5069c5afe602b2ea0a04b66beb2c0"],
-  "name": "Hashes Blacklisted from InsightConnect"
+  "name": "InsightConnect Blacklist"
 }
 ```
 
