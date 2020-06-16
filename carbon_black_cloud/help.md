@@ -77,6 +77,9 @@ Example input:
 Example output:
 
 ```
+{
+  "quarantined": true
+}
 ```
 
 #### Get Agent Details
