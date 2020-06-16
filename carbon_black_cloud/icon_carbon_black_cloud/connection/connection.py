@@ -91,14 +91,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 self.logger.error(result.text)
                 raise PluginException.Preset.UNKNOWN
 
-
-
-
-            self.logger.error(f"Exception was:\n{e}")
-            self.logger.error(f"Result text was:\n{result.text}")
-            raise PluginException(PluginException.Preset.UNKNOWN)
-
-
         if result.status_code != 204:
             return result.json()
         else:
