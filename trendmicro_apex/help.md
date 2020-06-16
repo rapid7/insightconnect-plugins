@@ -77,7 +77,28 @@ Example input:
 Example output:
 
 ```
-
+{
+  "result_code": 1,
+  "result_description": "Operation successful",
+  "result_content": [
+    {
+      "entity_id": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
+      "product": "SLF_PRODUCT_OFFICESCAN_CE",
+      "managing_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
+      "folder_path": "Workgroup",
+      "ip_address_list": "198.51.100.100",
+      "mac_address_list": "08-00-27-96-86-8E",
+      "host_name": "TREND-MICRO-TES",
+      "isolation_status": "normal",
+      "capabilities": [
+        "cmd_restore_isolated_agent",
+        "cmd_isolate_agent",
+        "cmd_relocate_agent",
+        "cmd_uninstall_agent"
+      ]
+    }
+  ]
+}
 ```
 
 #### Search Agents
@@ -510,7 +531,7 @@ Example input:
 
 ```
 {
-  "files": "[{\"filename\": \"file.txt\", \"content\": \"UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==\"}]"
+  "files": [{"filename": "file.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}]
 }
 ```
 
@@ -694,7 +715,7 @@ Example input:
 
 ```
 {
-  "file": "{\"filename\": \"setup.exe\", \"content\": \"UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==\"}",
+  "file": {"filename": "setup.exe", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="},
   "notes": "This file is malware",
   "scan_action": "QUARANTINE"
 }
