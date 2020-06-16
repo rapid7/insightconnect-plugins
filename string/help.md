@@ -32,13 +32,13 @@ This action is used to return the length of a string.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|string|string|None|True|String to return length of|None|None|
+|string|string|None|True|String to return length of|None|return the number of characters in this string|
 
 Example input:
 
 ```
 {
-  "string": "What is the length of this string?"
+  "string": "return the number of characters in this string"
 }
 ```
 
@@ -52,7 +52,7 @@ Example output:
 
 ```
 {
-  "length": 36
+  "length": 46
 }
 ```
 
@@ -64,16 +64,15 @@ This action is used to convert a string to a list of strings.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|delimiter|string|None|False|The character used to split the string into slices for the list. The default is a newline, if not provided by the user|None|None|
-|string|string|None|True|String to convert e.g. Sentence one
-Sentence two|None|None|
+|delimiter|string|None|False|The character used to split the string into slices for the list. The default is a newline, if not provided by the user|None|,|
+|string|string|None|True|String to break into an array|None|This,is,a,sentence|
 
 Example input:
 
 ```
 {
-  "delimiter": " ",
-  "string": "This is a sentence"
+  "delimiter": ",",
+  "string": "This,is,a,sentence"
 }
 ```
 
@@ -113,12 +112,16 @@ It allows users the ability to use the green selector and choose a specific vari
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |block_delimiter|string|None|False|The character delimiter for the initial string split, applied before the string delimiter input. This parameter is optional but allows for more complex handling|None|None|
-|string|string|None|True|String to convert e.g. USER=bob|None|None|
-|string_delimiter|string|None|False|The character used to split the string into slices for the list. The default is a space, if not provided by the user|None|None|
+|string|string|None|True|String to convert e.g. USER=Bob|None|User=Bob|
+|string_delimiter|string|None|False|The character used to split the string into slices for the list. The default is a space, if not provided by the user|None|=|
 
 Example input:
 
 ```
+{
+  "string": "User=Bob",
+  "string_delimiter": "="
+}
 ```
 
 ##### Output
@@ -168,13 +171,13 @@ This action is used to convert lowercase letters to uppercase.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|string|string|None|True|String to convert e.g. USER=bob|None|None|
+|string|string|None|True|String to uppercase|None|uppercase this string|
 
 Example input:
 
 ```
 {
-  "string": "to be uppercase"
+  "string": "uppercase this string"
 }
 ```
 
@@ -188,7 +191,7 @@ Example output:
 
 ```
 {
-  "upper": "TO BE UPPERCASE"
+  "upper": "UPPERCASE THIS STRING"
 }
 ```
 
@@ -200,13 +203,13 @@ This action is used to convert uppercase letters to lowercase.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|string|string|None|True|String to convert e.g. USER=bob|None|None|
+|string|string|None|True|String to convert e.g. USER=bob|None|LOWERCASE THIS STRING|
 
 Example input:
 
 ```
 {
-  "string": "TO BE LOWERCASE"
+  "string": "LOWERCASE THIS STRING"
 }
 ```
 
@@ -220,7 +223,7 @@ Example output:
 
 ```
 {
-  "lower": "to be lowercase"
+  "lower": "LOWERCASE THIS STRING"
 }
 ```
 
@@ -232,13 +235,17 @@ This action is used to encode a string.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|encoding|string|None|True|Encoding to use|['UTF-8', 'ASCII']|None|
-|error_handling|string|None|True|Error handler to use for encoding and decoding|['strict', 'replace', 'ignore']|None|
+|encoding|string|None|True|Encoding to use|['UTF-8', 'ASCII']|ASCII|
+|error_handling|string|None|True|Error handler to use for encoding and decoding|['strict', 'replace', 'ignore']|ignore|
 |string|string|None|True|String to encode|None|None|
 
 Example input:
 
 ```
+{
+  "encoding": "ASCII",
+  "error_handling": "ignore"
+}
 ```
 
 ##### Output
@@ -263,7 +270,7 @@ This action is used to trim a string of leading and trailing whitespace.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|string|string|None|True|String to trim|None|None|
+|string|string|None|True|String to trim|None|Extra spaces at the end of this string     |
 
 Example input:
 
@@ -302,7 +309,7 @@ If this is the case, consider using the Python 3 Script plugin instead.
 
 # Version History
 
-* 1.2.0 - New action Length
+* 1.2.0 - New action Length | Add example inputs
 * 1.2.1 - New spec and help.md format for the Extension Library
 * 1.2.0 - New action Trim
 * 1.1.0 - New action Set Encoding

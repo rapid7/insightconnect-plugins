@@ -81,15 +81,17 @@ actions:
     input:
       string:
         title: String Input
-        description: String to convert e.g. USER=bob
+        description: String to convert e.g. USER=Bob
         type: string
         required: true
+        example: "User=Bob"
       string_delimiter:
         title: String Delimiter
         description: The character used to split the string into slices for the list.
           The default is a space, if not provided by the user
         type: string
         required: false
+        example: "="
       block_delimiter:
         title: Block Delimiter
         description: The character delimiter for the initial string split, applied
