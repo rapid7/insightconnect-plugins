@@ -1,6 +1,6 @@
 # Description
 
-Broadcom Symantec Endpoint Security delivers the most complete, integrated endpoint security platform on the planet
+Broadcom Symantec Endpoint Protection delivers the most complete, integrated endpoint security platform on the planet
 
 # Key Features
 
