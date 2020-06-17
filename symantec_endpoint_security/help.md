@@ -5,6 +5,8 @@ Broadcom Symantec Endpoint Security delivers the most complete, integrated endpo
 # Key Features
 
 * Get details about an agent
+* Blacklist hashes
+* Quarantine an agent
 
 # Requirements
 
