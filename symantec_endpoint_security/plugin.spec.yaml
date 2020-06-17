@@ -16,8 +16,8 @@ tags:
 - symantec
 - sepm
 hub_tags:
-  use_cases: [TODO]
-  keywords: [symantec, endpoint, edr]
+  use_cases: [threat_detection_and_response]
+  keywords: [symantec, endpoint, edr, antivirus]
   features: []
 
 types:
