@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 # Custom imports below
-from icon_symantec_endpoint_security.util.api import APIClient, APIException
+from icon_broadcom_symantec_endpoint_protection.util.api import APIClient, APIException
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 

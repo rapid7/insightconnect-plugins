@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import GetAgentDetailsInput, GetAgentDetailsOutput, Input, Output, Component
 # Custom imports below
 from insightconnect_plugin_runtime.helper import clean
-from icon_symantec_endpoint_security.util.api import APIException, Agent
+from icon_broadcom_symantec_endpoint_protection.util.api import APIException, Agent
 from insightconnect_plugin_runtime.exceptions import PluginException
 from typing import Optional
 

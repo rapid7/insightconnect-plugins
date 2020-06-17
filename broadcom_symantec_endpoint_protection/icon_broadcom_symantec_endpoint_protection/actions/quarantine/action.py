@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import QuarantineInput, QuarantineOutput, Input, Output, Component
 # Custom imports below
-from icon_symantec_endpoint_security.util.api import APIException
+from icon_broadcom_symantec_endpoint_protection.util.api import APIException
 import re
 from insightconnect_plugin_runtime.exceptions import PluginException
 

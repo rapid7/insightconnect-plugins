@@ -1,7 +1,7 @@
 plugin_spec_version: v2
 extension: plugin
 products: ["insightconnect"]
-name: symantec_endpoint_protection
+name: broadcom_symantec_endpoint_protection
 title: Broadcom Symantec Endpoint Protection
 description: Broadcom Symantec Endpoint Protection delivers the most complete, integrated endpoint security platform on the planet
 version: 1.0.0

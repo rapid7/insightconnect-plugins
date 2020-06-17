@@ -3,7 +3,7 @@ from .schema import BlacklistInput, BlacklistOutput, Input, Output, Component
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
 import re
-from icon_symantec_endpoint_security.util.api import APIException, HashType
+from icon_broadcom_symantec_endpoint_protection.util.api import APIException, HashType
 
 
 class Blacklist(insightconnect_plugin_runtime.Action):
