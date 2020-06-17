@@ -236,18 +236,24 @@ class APIClient(object):
                                                  name=name))
 
     def update_quarantine_statuses(self,
-                                   computer_ids: [str],
-                                   quarantine: bool) -> Optional[str]:
+                                   computer_ids: [str] = [],
+                                   hardware_ids: [str] = [],
+                                   quarantine: bool = True) -> Optional[str]:
         """
-        Update the quarantine status of a computer(s)
+        Update the quarantine status of a computer(s). Either computer_ids or hardware_ids should be specified
         :param computer_ids: List of 'uniqueId' belonging to computers to quarantine
+        :param hardware_ids: List of MAC addresses belonging to computers to quarantine
         :param quarantine: Whether or not to undo the quarantine. True = quarantine, False = unquarantine
         :return: command_id: ID of the command that was ran
         """
 
         url = f"{self.base_url}/command-queue/quarantine"
 
-        params = {"computer_ids": computer_ids, "undo": not quarantine}
+        params = {"undo": not quarantine}
+        if computer_ids:
+            params["computer_ids"] = computer_ids
+        else:
+            params["hardware_ids"] = hardware_ids
 
         response = self.session.post(url=url,
                                      params=params,
