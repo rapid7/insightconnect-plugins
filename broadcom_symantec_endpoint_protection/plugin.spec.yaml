@@ -1,0 +1,889 @@
+plugin_spec_version: v2
+extension: plugin
+products: ["insightconnect"]
+name: broadcom_symantec_endpoint_protection
+title: Broadcom Symantec Endpoint Protection
+description: Broadcom Symantec Endpoint Protection delivers the most complete, integrated endpoint security platform on the planet
+version: 1.0.0
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/broadcom_symantec_endpoint_protection
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.broadcom.com/
+tags:
+- symantec
+- sepm
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [symantec, endpoint, edr, antivirus]
+  features: []
+
+types:
+  domain:
+    id:
+      title: "ID"
+      type: string
+      description: "ID"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+
+  group:
+    domain:
+      title: "Domain"
+      type: domain
+      description: "The Broadcom Symantec Endpoint Protection Manager domain to which this group belongs"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "The name of the group"
+      required: false
+    fullPathName:
+      title: "Full Path Name"
+      type: string
+      description: "The full path of the group including the root group, which SEPM sets. It is not user-configurable"
+      required: false
+    externalReferenceId:
+      title: "External Reference ID"
+      type: string
+      description: "The external reference ID for this group, between 1 - 50"
+      required: false
+    source:
+      title: "Source"
+      type: string
+      description: "Source"
+      required: false
+    id:
+      title: "ID"
+      type: string
+      description: "The group ID, which SEPM sets. It is not user-configurable"
+      required: false
+
+  agent:
+    group:
+      title: "Group"
+      type: group
+      description: "Group that the agent belongs to"
+      required: true
+    profileVersion:
+        title: "Profile Version"
+        type: string
+        description: "Profile version"
+        required: false
+    elamOnOff:
+        title: "Elam On Off"
+        type: integer
+        description: "Elam on off"
+        required: false
+    avEngineOnOff:
+        title: "AV Engine On Off"
+        type: integer
+        description: "AV engine on off"
+        required: false
+    profileChecksum:
+        title: "Profile Checksum"
+        type: string
+        description: "Profile checksum"
+        required: false
+    atpDeviceId:
+        title: "ATP Device ID"
+        type: string
+        description: "ATP device ID"
+        required: false
+    processorType:
+        title: "Processor Type"
+        type: string
+        description: "Processor type"
+        required: false
+    licenseId:
+        title: "License Id"
+        type: string
+        description: "License ID"
+        required: false
+    licenseStatus:
+        title: "License Status"
+        type: integer
+        description: "License status"
+        required: false
+    uuid:
+        title: "UUID"
+        type: string
+        description: "UUID"
+        required: false
+    groupUpdateProvider:
+        title: "Group Update Provider"
+        type: boolean
+        description: "Group update provider"
+        required: false
+    edrStatus:
+        title: "EDR Status"
+        type: integer
+        description: "EDR status"
+        required: false
+    freeDisk:
+        title: "Free Disk"
+        type: integer
+        description: "Free disk"
+        required: false
+    diskDrive:
+        title: "Disk Drive"
+        type: string
+        description: "Disk drive"
+        required: false
+    osFunction:
+        title: "OS Function"
+        type: string
+        description: "OS function"
+        required: false
+    processorClock:
+        title: "Processor Clock"
+        type: integer
+        description: "Processor clock"
+        required: false
+    mobilePhone:
+        title: "Mobile Phone"
+        type: string
+        description: "Mobile phone"
+        required: false
+    jobTitle:
+        title: "Job Title"
+        type: string
+        description: "Job title"
+        required: false
+    lastHeuristicThreatTime:
+        title: "Last Heuristic Threat Time"
+        type: integer
+        description: "Last heuristic threat time"
+        required: false
+    winServers:
+        title: "Winservers"
+        type: "[]string"
+        description: "Winservers"
+        required: false
+    deploymentMessage:
+        title: "Deployment Message"
+        type: string
+        description: "Deployment message"
+        required: false
+    idsSerialNo:
+        title: "IDS Serial Number"
+        type: string
+        description: "IDS serial number"
+        required: false
+    employeeNumber:
+        title: "Employee Number"
+        type: string
+        description: "Employee number"
+        required: false
+    snacLicenseId:
+        title: "SNAC license ID"
+        type: string
+        description: "SNAC license ID"
+        required: false
+    lastSiteId:
+        title: "Last Site ID"
+        type: string
+        description: "Last site ID"
+        required: false
+    uwf:
+        title: "UWF"
+        type: integer
+        description: "UWF"
+        required: false
+    currentClientId:
+        title: "Current Client ID"
+        type: string
+        description: "Current client ID"
+        required: false
+    lastScanTime:
+        title: "Last Scan Time"
+        type: integer
+        description: "Last scan time"
+        required: false
+    email:
+        title: "Email"
+        type: string
+        description: "Email"
+        required: false
+    securityVirtualAppliance:
+        title: "Security Virtual Appliance"
+        type: string
+        description: "Security virtual appliance"
+        required: false
+    worstInfectionIdx:
+        title: "Worst Infection IDX"
+        type: string
+        description: "Worst infection IDX"
+        required: false
+    encryptedDevicePassword:
+        title: "Encrypted Device Password"
+        type: string
+        description: "Encrypted device password"
+        required: false
+    lastServerId:
+        title: "Last server ID"
+        type: string
+        description: "Last server ID"
+        required: false
+    kernel:
+        title: "Kernel"
+        type: string
+        description: "Kernel"
+        required: false
+    lastUpdateTime:
+        title: "Last Update Time"
+        type: integer
+        description: "Last update time"
+        required: false
+    ptpOnOff:
+        title: "PTP On Off"
+        type: integer
+        description: "PTP on off"
+        required: false
+    majorVersion:
+        title: "Major Version"
+        type: integer
+        description: "Major version"
+        required: false
+    lastConnectedIpAddr:
+        title: "Last Connected IP Address"
+        type: string
+        description: "Last connected IP address"
+        required: false
+    agentVersion:
+        title: "Agent Version"
+        type: string
+        description: "Agent version"
+        required: false
+    deploymentRunningVersion:
+        title: "Deployment Running Version"
+        type: string
+        description: "Deployment running version"
+        required: false
+    agentTimeStamp:
+        title: "Agent Timestamp"
+        type: integer
+        description: "Agent timestamp"
+        required: false
+    osMajor:
+        title: "OS Major Version"
+        type: integer
+        description: "OS major version"
+        required: false
+    deploymentTargetVersion:
+        title: "Deployment Target Version"
+        type: string
+        description: "Deployment target version"
+        required: false
+    osMinor:
+        title: "OS Minor Version"
+        type: integer
+        description: "OS minor version"
+        required: false
+    osFlavorNumber:
+        title: "OS Flavor Number"
+        type: integer
+        description: "OS flavor number"
+        required: false
+    logicalCpus:
+        title: "Logical CPUs"
+        type: integer
+        description: "Logical CPUs"
+        required: false
+    deploymentPreVersion:
+        title: "Deployment Pre-version"
+        type: string
+        description: "Deployment pre-version"
+        required: false
+    hypervisorVendorId:
+        title: "Hypervisor Vendor ID"
+        type: string
+        description: "Hypervisor vendor ID"
+        required: false
+    avDefsetRevision:
+        title: "AV Definition Set Revision"
+        type: string
+        description: "AV definition set revision"
+        required: false
+    fbwf:
+        title: "FBWF"
+        type: integer
+        description: "FBWF"
+        required: false
+    dnsServers:
+        title: "DNS Servers"
+        type: "[]string"
+        description: "DNS servers"
+        required: false
+    vsicStatus:
+        title: "VSIC Status"
+        type: integer
+        description: "VSIC status"
+        required: false
+    tdadGlobalDataDownloadTime:
+        title: "TDAD Global Data Download Time"
+        type: integer
+        description: "TDAD global data download time"
+        required: false
+    deleted:
+        title: "Deleted"
+        type: integer
+        description: "Deleted"
+        required: false
+    deploymentStatus:
+        title: "Deployment Status"
+        type: string
+        description: "Deployment status"
+        required: false
+    computerTimeStamp:
+        title: "Computer Timestamp"
+        type: integer
+        description: "Computer timestamp"
+        required: false
+    bwf:
+        title: "BWF"
+        type: integer
+        description: "BWF"
+        required: false
+    totalDiskSpace:
+        title: "Total Disk Space"
+        type: integer
+        description: "Total disk space"
+        required: false
+    homePhone:
+        title: "Home Phone"
+        type: string
+        description: "Home phone"
+        required: false
+    daOnOff:
+        title: "DA On Off"
+        type: integer
+        description: "DA on off"
+        required: false
+    computerDescription:
+        title: "Computer Description"
+        type: string
+        description: "Computer description"
+        required: false
+    pepOnOff:
+        title: "PEP On Off"
+        type: integer
+        description: "PEP on off"
+        required: false
+    bashStatus:
+        title: "Bash status"
+        type: integer
+        description: "Bash status"
+        required: false
+    agentUsn:
+        title: "Agent USN"
+        type: integer
+        description: "Agent USN"
+        required: false
+    osName:
+        title: "OS Name"
+        type: string
+        description: "OS name"
+        required: false
+    patternIdx:
+        title: "Pattern IDX"
+        type: string
+        description: "Pattern IDX"
+        required: false
+    employeeStatus:
+        title: "Employee Status"
+        type: string
+        description: "Employee status"
+        required: false
+    tmpDevice:
+        title: "Tmp Device"
+        type: string
+        description: "Tmp device"
+        required: false
+    rebootRequired:
+        title: "Reboot Required"
+        type: integer
+        description: "Reboot required"
+        required: false
+    subnetMasks:
+        title: "Subnet Masks"
+        type: "[]string"
+        description: "Subnet masks"
+        required: false
+    minorVersion:
+        title: "Minor Version"
+        type: integer
+        description: "Minor version"
+        required: false
+    lastSiteName:
+        title: "Last Site Name"
+        type: string
+        description: "Last site name"
+        required: false
+    cidsEngineVersion:
+        title: "CIDS Engine Version"
+        type: string
+        description: "CIDS engine version"
+        required: false
+    lastDeploymentTime:
+        title: "Last Deployment Time"
+        type: integer
+        description: "Lastd eployment time"
+        required: false
+    avDefsetVersion:
+        title: "AV Definition Set Version"
+        type: string
+        description: "AV definition set version"
+        required: false
+    isGrace:
+        title: "Is Grace"
+        type: integer
+        description: "Is grace"
+        required: false
+    computerUsn:
+        title: "Computer USN"
+        type: integer
+        description: "Computer USN"
+        required: false
+    agentId:
+        title: "Agent ID"
+        type: string
+        description: "Agent ID"
+        required: false
+    cidsBrowserFfOnOff:
+        title: "CIDS Browser FF On Off"
+        type: integer
+        description: "CIDS browser FF on off"
+        required: false
+    domainOrWorkgroup:
+        title: "Domain or Workgroup"
+        type: string
+        description: "Domain or workgroup"
+        required: false
+    svaId:
+        title: "SVA ID"
+        type: string
+        description: "SVA ID"
+        required: false
+    loginDomain:
+        title: "Login Domain"
+        type: string
+        description: "Login domain"
+        required: false
+    lastServerName:
+        title: "Last Server Name"
+        type: string
+        description: "Last server name"
+        required: false
+    contentUpdate:
+        title: "Content Update"
+        type: integer
+        description: "Content update"
+        required: false
+    writeFiltersStatus:
+        title: "Write Filters Status"
+        type: string
+        description: "Write filters status"
+        required: false
+    infected:
+        title: "Infected"
+        type: integer
+        description: "Infected"
+        required: false
+    memory:
+        title: "Memory"
+        type: integer
+        description: "Memory"
+        required: false
+    freeMem:
+        title: "Free Memory"
+        type: integer
+        description: "Free memory"
+        required: false
+    officePhone:
+        title: "Office Phone"
+        type: string
+        description: "Office phone"
+        required: false
+    lastVirusTime:
+        title: "Last Virus Time"
+        type: integer
+        description: "Last virus time"
+        required: false
+    telemetryMid:
+        title: "Telemetry MID"
+        type: string
+        description: "Telemetry MID"
+        required: false
+    idsVersion:
+        title: "IDS Version"
+        type: string
+        description: "IDS version"
+        required: false
+    avDefsetSequence:
+        title: "AV Definition Set Sequence"
+        type: string
+        description: "AV definition set sequence"
+        required: false
+    publicKey:
+        title: "Public Key"
+        type: string
+        description: "Public key"
+        required: false
+    quarantineDesc:
+        title: "Quarantine Description"
+        type: string
+        description: "Quarantine description"
+        required: false
+    cidsDrvMulfCode:
+        title: "CIDS DRV Mulf Code"
+        type: integer
+        description: "CIDS DRV mulf code"
+        required: false
+    biosVersion:
+        title: "BIOS Version"
+        type: string
+        description: "BIOS version"
+        required: false
+    rebootReason:
+        title: "Reboot Reason"
+        type: string
+        description: "Reboot reason"
+        required: false
+    telemetryHwid:
+        title: "Telemetry HWID"
+        type: string
+        description: "Telemetry HWID"
+        required: false
+    cidsSilentMode:
+        title: "CIDS Silent Mode"
+        type: integer
+        description: "CIDS silent mode"
+        required: false
+    creationTime:
+        title: "Creation Time"
+        type: integer
+        description: "Creation time"
+        required: false
+    macAddresses:
+        title: "MAC Addresses"
+        type: "[]string"
+        description: "MAC addresses"
+        required: false
+    idsChecksum:
+        title: "IDS Checksum"
+        type: string
+        description: "IDS checksum"
+        required: false
+    operatingSystem:
+        title: "Operating System"
+        type: string
+        description: "Operating system"
+        required: false
+    virtualizationPlatform:
+        title: "Virtualization"
+        type: string
+        description: "Virtualization platform"
+        required: false
+    ipAddresses:
+        title: "IP Addresses"
+        type: "[]string"
+        description: "IP addresses"
+        required: false
+    physicalCpus:
+        title: "Physical CPUs"
+        type: integer
+        description: "Physical CPUs"
+        required: false
+    osBitness:
+        title: "OS Bitness"
+        type: string
+        description: "OS bitness"
+        required: false
+    cidsDefsetVersion:
+        title: "CIDS Definition Set Version"
+        type: string
+        description: "CIDS definition set version"
+        required: false
+    tdadStatusId:
+        title: "TDAD Status ID"
+        type: integer
+        description: "TDAD status ID"
+        required: false
+    tdadOnOff:
+        title: "TDAD On Off"
+        type: integer
+        description: "TDAD on off"
+        required: false
+    cidsDrvOnOff:
+        title: "CIDS Drv On Off"
+        type: integer
+        description: "CIDS drv on off"
+        required: false
+    computerName:
+        title: "Computer Name"
+        type: string
+        description: "Computer name"
+        required: false
+    logonUserName:
+        title: "Logon Username"
+        type: string
+        description: "Logon username"
+        required: false
+    licenseExpiry:
+        title: "License Expiry"
+        type: integer
+        description: "License expiry"
+        required: false
+    osLanguage:
+        title: "OS Language"
+        type: string
+        description: "OS language"
+        required: false
+    gateways:
+        title: "Gateways"
+        type: "[]string"
+        description: "Gateways"
+        required: false
+    uniqueId:
+        title: "Unique ID"
+        type: string
+        description: "Unique ID"
+        required: false
+    department:
+        title: "Department"
+        type: string
+        description: "Department"
+        required: false
+    isNpvdiClient:
+        title: "Is NPVDI Client"
+        type: integer
+        description: "Is NPVDI client"
+        required: false
+    dhcpServer:
+        title: "DHCP Server"
+        type: string
+        description: "DHCP server"
+        required: false
+    description:
+        title: "Description"
+        type: string
+        description: "Description"
+        required: false
+    tpmDevice:
+        title: "TPM Device"
+        type: string
+        description: "TPM device"
+        required: false
+    onlineStatus:
+        title: "Online Status"
+        type: integer
+        description: "Online status"
+        required: false
+    cidsBrowserIeOnOff:
+        title: "CIDS Browser IE On Off"
+        type: integer
+        description: "CIDS browser IE on off"
+        required: false
+    lastDownloadTime:
+        title: "Last Download Time"
+        type: integer
+        description: "Last download time"
+        required: false
+    apOnOff:
+        title: "AP On Off"
+        type: integer
+        description: "AP on off"
+        required: false
+    timeZone:
+        title: "Time Zone"
+        type: integer
+        description: "Time zone"
+        required: false
+    fullName:
+        title: "Full Name"
+        type: string
+        description: "Full name"
+        required: false
+    osVersion:
+        title: "OS Version"
+        type: string
+        description: "OS version"
+        required: false
+    attributeExtension:
+        title: "Attribute Extension"
+        type: string
+        description: "Attribute extension"
+        required: false
+    atpServer:
+        title: "ATP Server"
+        type: string
+        description: "ATP server"
+        required: false
+    tamperOnOff:
+        title: "Tamper On Off"
+        type: integer
+        description: "Tamper on off"
+        required: false
+    osServicePack:
+        title: "OS Service Pack"
+        type: string
+        description: "OS service pack"
+        required: false
+    agentType:
+        title: "Agent Type"
+        type: string
+        description: "Agent type"
+        required: false
+    serialNumber:
+        title: "Serial Number"
+        type: string
+        description: "Serial number"
+        required: false
+    osElamStatus:
+        title: "OS ElAM Status"
+        type: integer
+        description: "OS ELAM status"
+        required: false
+    installType:
+        title: "Install Type"
+        type: string
+        description: "Install type"
+        required: false
+    profileSerialNo:
+        title: "Profile Serial Number"
+        type: string
+        description: "Profile serial number"
+        required: false
+    hardwareKey:
+        title: "Hardware Key"
+        type: string
+        description: "Hardware key"
+        required: false
+    firewallOnOff:
+        title: "Firewall On Off"
+        type: integer
+        description: "Firewall on off"
+        required: false
+
+connection:
+  host:
+    title: Host
+    type: string
+    description: Symantec Endpoint Protection Manager host, either IP address or domain
+    example: sepm-14
+    required: true
+  port:
+    title: Port
+    type: integer
+    description: Symantec Endpoint Protection server port, typically 8446
+    default: 8446
+    example: 8446
+    required: true
+  credentials:
+    title: Username and Password
+    type: credential_username_password
+    description: Username and password
+    example: '{"username": example, "password": "test"}'
+    required: true
+  domain:
+    title: Domain
+    type: string
+    description: The Symantec Endpoint Protection Manager domain to which the username logs on
+    required: false
+    example: mydomain
+
+actions:
+  get_agent_details:
+    title: Get Agent Details
+    description: "Get details about an agent by MAC address or computer hostname"
+    input:
+      agent:
+        title: "Agent"
+        description: "Agent to retrieve device from. This can be by MAC address or computer hostname"
+        type: string
+        required: true
+        example: "example"
+    output:
+      agent:
+        title: "Agent"
+        description: "Agent matching the search"
+        type: agent
+        required: false
+  blacklist:
+    title: "Blacklist"
+    description: "Blacklist MD5 or SHA256 hashes"
+    input:
+      hashes:
+        title: "Hashes"
+        description: "Hashes (MD5 or SHA256) to add to the blacklist. Note: only one type of hash is allowed at a time"
+        type: "[]string"
+        required: true
+        example: '["9de5069c5afe602b2ea0a04b66beb2c0"]'
+      description:
+        title: "Description"
+        description: "Description for the blacklist"
+        type: string
+        required: true
+        example: "Hashes Blacklisted from InsightConnect"
+      name:
+        title: "Name"
+        description: "Name for the blacklist"
+        type: string
+        required: true
+        example: "InsightConnect Blacklist"
+      domain_id:
+        title: "Domain ID"
+        description: "ID of the domain to apply the blacklist to. Omitting this input will apply the blacklist to all domains (globally)"
+        type: string
+        required: false
+        example: "0AF740760A0414711FAA4F8BD5293158"
+    output:
+      blacklist_ids:
+        title: "Blacklist IDs"
+        description: "IDs of the resulting blacklists"
+        type: "[]string"
+        required: true
+        example: '["5348023646E740128BFE65939934F22E", "5348023646E740128BFE65939934B13E"]'
+  quarantine:
+    title: "Quarantine"
+    description: "Quarantine (isolate) endpoint an endpoint"
+    input:
+      agent:
+        title: "Agent"
+        description: "Agent to perform quarantine action on. This must be either a MAC address or hostname"
+        type: string
+        required: true
+        example: "example_host"
+      whitelist:
+        title: "Whitelist"
+        description: "MAC addresses for machines to avoid quarantining. Both hyphenated and colon-delimited formats are acceptable"
+        type: "[]string"
+        required: false
+        example: '["01:23:45:67:89:AB", "89-67-45-23-10-CD"]'
+      quarantine_state:
+        title: "Quarantine State"
+        description: "True to quarantine host, false to unquarantine host"
+        type: boolean
+        required: true
+        default: true
+        example: true
+    output:
+      success:
+        title: "Success"
+        description: "Whether or not the quarantine/unquarantine was successful"
+        type: boolean
+        required: true
+        example: true
+      whitelisted:
+        title: "Whitelisted"
+        description: "Whether or not the quarantine/unquarantine failed due to whitelisting"
+        type: boolean
+        required: true
+        example: true
