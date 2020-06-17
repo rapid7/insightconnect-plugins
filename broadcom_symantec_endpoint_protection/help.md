@@ -309,10 +309,11 @@ Domain IDs are not the actual domain names - they are individual, unique IDs tha
 
 # Version History
 
+* 1.0.1 - Workflow usability fixes
 * 1.0.0 - Initial plugin
 
 # Links
 
 ## References
 
-* [Broadcom Symantec Endpoint Security](https://www.broadcom.com/products/cyber-security/endpoint/end-user)
+* [Broadcom Symantec Endpoint Protection](https://www.broadcom.com/products/cyber-security/endpoint/end-user)

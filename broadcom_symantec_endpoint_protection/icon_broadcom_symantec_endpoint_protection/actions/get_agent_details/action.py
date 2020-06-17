@@ -27,6 +27,9 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
                 match: Optional[Agent] = self.connection.api_client.get_computer(mac_address=query)
             else:  # hostname
                 match: Optional[Agent] = self.connection.api_client.get_computer(computer_name=query)
+
+            if not match:
+                return {}
             return {Output.AGENT: clean(match)}
 
         except APIException as e:
