@@ -50,7 +50,7 @@ This action is used to quarantine (isolate) endpoints.
 |----|----|-------|--------|-----------|----|-------|
 |agent|string|None|True|Agent to perform quarantine action on. This must be either a MAC address or hostname|None|example_host|
 |quarantine_state|boolean|True|True|True to quarantine host, false to unquarantine host|None|True|
-|whitelist|[]string|None|False|MAC addresses for machines to avoid quarantining|None|["01:23:45:67:89:AB", "89-67-45-23-10-CD"]|
+|whitelist|[]string|None|False|MAC addresses for machines to avoid quarantining. Both hyphenated and colon-delimited formats are acceptable|None|["01:23:45:67:89:AB", "89-67-45-23-10-CD"]|
 
 Example input:
 

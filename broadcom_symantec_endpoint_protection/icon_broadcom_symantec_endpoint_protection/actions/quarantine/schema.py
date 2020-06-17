@@ -40,7 +40,7 @@ class QuarantineInput(insightconnect_plugin_runtime.Input):
     "whitelist": {
       "type": "array",
       "title": "Whitelist",
-      "description": "MAC addresses for machines to avoid quarantining",
+      "description": "MAC addresses for machines to avoid quarantining. Both hyphenated and colon-delimited formats are acceptable",
       "items": {
         "type": "string"
       },
