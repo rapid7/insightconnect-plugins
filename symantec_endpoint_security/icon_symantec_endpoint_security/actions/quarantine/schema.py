@@ -38,9 +38,12 @@ class QuarantineInput(insightconnect_plugin_runtime.Input):
       "order": 3
     },
     "whitelist": {
-      "type": "string",
+      "type": "array",
       "title": "Whitelist",
       "description": "MAC addresses for machines to avoid quarantining",
+      "items": {
+        "type": "string"
+      },
       "order": 2
     }
   },

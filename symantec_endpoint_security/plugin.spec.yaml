@@ -864,7 +864,7 @@ actions:
       whitelist:
         title: "Whitelist"
         description: "MAC addresses for machines to avoid quarantining"
-        type: string
+        type: "[]string"
         required: false
         example: '["01:23:45:67:89:AB", "89-67-45-23-10-CD"]'
       quarantine_state:

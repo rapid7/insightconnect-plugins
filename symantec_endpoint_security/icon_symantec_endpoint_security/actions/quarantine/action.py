@@ -10,10 +10,10 @@ class Quarantine(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='quarantine',
-                description=Component.DESCRIPTION,
-                input=QuarantineInput(),
-                output=QuarantineOutput())
+            name='quarantine',
+            description=Component.DESCRIPTION,
+            input=QuarantineInput(),
+            output=QuarantineOutput())
 
     def run(self, params={}):
         agent_identifier = params.get(Input.AGENT)
@@ -47,8 +47,8 @@ class Quarantine(insightconnect_plugin_runtime.Action):
                          f"following agent: {agent_identifier}")
 
         try:
-            self.connection.api_client.update_quarantine_status(hardware_ids=[hardware_identifier],
-                                                                quarantine=quarantine_state)
+            self.connection.api_client.update_quarantine_statuses(hardware_ids=[hardware_identifier],
+                                                                  quarantine=quarantine_state)
         except APIException as e:
             raise PluginException(cause=f"An error occurred while attempting to "
                                         f"{'quarantine' if quarantine_state else 'unquarantine'} the agent!",
