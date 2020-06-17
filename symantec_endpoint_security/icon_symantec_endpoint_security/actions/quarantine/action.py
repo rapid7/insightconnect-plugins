@@ -36,11 +36,13 @@ class Quarantine(insightconnect_plugin_runtime.Action):
             hardware_identifier = self._normalize_mac_address(mac_address=agent_identifier)
             in_whitelist = hardware_identifier in whitelist_normalized
 
+        # If whitelisted, return a failure with a whitelist status of true
         if in_whitelist:
             self.logger.info(f"The agent specified '{agent_identifier}' was found within the whitelist and "
                              f"will be skipped!")
             return {Output.SUCCESS: False, Output.WHITELISTED: True}
 
+        # No whitelist entry found, go ahead and do the action
         self.logger.info(f"{'Quarantining' if quarantine_state else 'Unquarantining'} the "
                          f"following agent: {agent_identifier}")
 
@@ -52,7 +54,7 @@ class Quarantine(insightconnect_plugin_runtime.Action):
                                         f"{'quarantine' if quarantine_state else 'unquarantine'} the agent!",
                                   assistance=e.message)
 
-        return {Output.SUCCESS: True}
+        return {Output.SUCCESS: True, Output.WHITELISTED: False}
 
     @staticmethod
     def _is_mac_address(agent_identifier: str) -> bool:
