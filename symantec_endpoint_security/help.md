@@ -33,6 +33,7 @@ Example input:
   "port": 8446
 }
 ```
+
 ## Technical Details
 
 ### Actions
@@ -70,7 +71,8 @@ Example output:
 
 ```
 {
-  "success": true
+  "success": true,
+  "whitelisted": false
 }
 ```
 
