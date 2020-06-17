@@ -160,18 +160,15 @@ Example output:
       }
     },
     "ipAddresses": [
-      "10.0.2.15",
-      "FE80:0000:0000:0000:C50D:519F:96A4:E108"
+      "198.51.100.100",
+      "2001:db8:8:4::2"
     ],
     "macAddresses": [
       "08-00-27-E6-E5-59",
       "08-00-27-E6-E5-59"
     ],
     "gateways": [
-      "10.0.2.2",
-      "10.0.2.2",
-      "0.0.0.0",
-      "0.0.0.0"
+      "198.51.100.1"
     ],
     "subnetMasks": [
       "255.255.255.0",
@@ -276,7 +273,7 @@ Example output:
     "tdadGlobalDataDownloadTime": 0,
     "vsicStatus": 3,
     "isNpvdiClient": 0,
-    "lastConnectedIpAddr": "10.3.20.8",
+    "lastConnectedIpAddr": "198.51.100.100",
     "pepOnOff": 1,
     "edrStatus": 0,
     "tpmDevice": "0",

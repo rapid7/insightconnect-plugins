@@ -23,6 +23,6 @@ RUN pip install wheel && pip install wheels/*.whl && \
 		python setup.py build && python setup.py install
 
 # User to run plugin code. The two supported users are: root, nobody
-USER root
+USER nobody
 
 ENTRYPOINT ["/usr/local/bin/icon_broadcom_symantec_endpoint_protection"]
