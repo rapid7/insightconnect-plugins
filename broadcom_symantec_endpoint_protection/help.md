@@ -301,7 +301,11 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+The Broadcom Symantec Endpoint Protection API does not allow for updating blacklists. The plugin will fail if it is told
+to create a blacklist with the name of a blacklist that already exists.
+
+Domain IDs are not the actual domain names - they are individual, unique IDs that come back as part of the 
+'Get Agent Details' action.
 
 # Version History
 
