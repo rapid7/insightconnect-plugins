@@ -6,7 +6,7 @@ from icon_trendmicro_apex import connection, actions, triggers
 
 Name = "Trend Micro Apex"
 Vendor = "rapid7"
-Version = "1.1.0"
+Version = "2.0.0"
 Description = "Report suspicious objects and files to block on Apex firewall"
 
 
@@ -35,7 +35,7 @@ class ICONTrendmicroApex(komand.Plugin):
 
         self.add_action(actions.OpeniocFilesList())
 
-        self.add_action(actions.PerformsAction())
+        self.add_action(actions.Quarantine())
 
         self.add_action(actions.SearchAgents())
 
