@@ -18,7 +18,7 @@ class Blacklist(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         bl_name = params.get(Input.NAME)
         bl_desc = params.get(Input.DESCRIPTION)
-        domain_ids = [params.get(Input.DOMAIN_ID, "")]
+        domain_id = params.get(Input.DOMAIN_ID, "")
         hashes = params.get(Input.HASHES)
 
         if not hashes:
@@ -32,16 +32,18 @@ class Blacklist(insightconnect_plugin_runtime.Action):
         hash_type = self._is_md5_or_sha256(hashes[0])
 
         # If no domain_id specified, then blacklist should be global. Get all domain IDs the connection can access
-        if not domain_ids:
+        if not domain_id:
             self.logger.info("No domain IDs were specified, defaulting to global blacklisting!")
             domains = self.connection.api_client.get_all_accessible_domains()
-            domain_ids = [domain["id"] for domain in domains]
+            domains_to_blacklist = [domain["id"] for domain in domains]
+        else:
+            domains_to_blacklist = [domain_id]
 
         self.logger.info("Starting hash blacklisting...")
         try:
             blacklist_ids = self.connection.api_client.blacklist_files(blacklist_data=hashes,
                                                                        blacklist_description=bl_desc,
-                                                                       domain_ids=domain_ids,
+                                                                       domain_ids=domains_to_blacklist,
                                                                        hash_type=hash_type,
                                                                        name=bl_name)
         except APIException as e:
