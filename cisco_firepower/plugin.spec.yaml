@@ -182,3 +182,21 @@ actions:
         title: Commands Processed
         type: number
         required: true
+  map_insightvm_vulnerability_to_host_database:
+    title: "Map InsightVM Vulnerability to Host database"
+    description: "Map InsightVM Vulnerability to Host database"
+    input:
+      csv:
+        title: CSV of InsightVM Vulnerabilities
+        description: CSV of InsightVM vulnerabilities
+        type: bytes
+        required: true
+        example: "something goes here"
+        order: 1
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+
