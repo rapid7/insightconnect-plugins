@@ -33,9 +33,48 @@ Example input:
   "port": 8446
 }
 ```
+
 ## Technical Details
 
 ### Actions
+
+#### Quarantine
+
+This action is used to quarantine (isolate) endpoints.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|True|Agent to perform quarantine action on. This must be either a MAC address or hostname|None|example_host|
+|quarantine_state|boolean|True|True|True to quarantine host, false to unquarantine host|None|True|
+|whitelist|[]string|None|False|MAC addresses for machines to avoid quarantining|None|["01:23:45:67:89:AB", "89-67-45-23-10-CD"]|
+
+Example input:
+
+```
+{
+  "agent": "example_host",
+  "quarantine_state": true,
+  "whitelist": ["01:23:45:67:89:AB", "89-67-45-23-10-CD"]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Whether or not the quarantine/unquarantine was successful|
+|whitelisted|boolean|True|Whether or not the quarantine/unquarantine failed due to whitelisting|
+
+Example output:
+
+```
+{
+  "success": true,
+  "whitelisted": false
+}
+```
 
 #### Blacklist
 

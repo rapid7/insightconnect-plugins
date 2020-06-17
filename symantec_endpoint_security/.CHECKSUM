@@ -1,6 +1,6 @@
 {
-	"spec": "e5f10f815b32abc400c8011b8f6fff29",
-	"manifest": "68fcc548a1d7b4e7bd0c48942c72d3ba",
+	"spec": "3d82e44940ba9f13761d63e584d85568",
+	"manifest": "61986688d41a443ed5beded892350e8b",
 	"setup": "f583d05f1556a086aff8af9521824888",
 	"schemas": [
 		{
@@ -10,6 +10,10 @@
 		{
 			"identifier": "get_agent_details/schema.py",
 			"hash": "51ebc05480ad2730556cc455251e0e02"
+		},
+		{
+			"identifier": "quarantine/schema.py",
+			"hash": "985333ffbba75fb45482ce0ccdbbd61d"
 		},
 		{
 			"identifier": "connection/schema.py",

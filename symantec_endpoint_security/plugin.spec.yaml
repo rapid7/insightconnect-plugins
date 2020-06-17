@@ -851,3 +851,39 @@ actions:
         type: "[]string"
         required: true
         example: '["5348023646E740128BFE65939934F22E", "5348023646E740128BFE65939934B13E"]'
+  quarantine:
+    title: "Quarantine"
+    description: "Quarantine (isolate) endpoint an endpoint"
+    input:
+      agent:
+        title: "Agent"
+        description: "Agent to perform quarantine action on. This must be either a MAC address or hostname"
+        type: string
+        required: true
+        example: "example_host"
+      whitelist:
+        title: "Whitelist"
+        description: "MAC addresses for machines to avoid quarantining"
+        type: "[]string"
+        required: false
+        example: '["01:23:45:67:89:AB", "89-67-45-23-10-CD"]'
+      quarantine_state:
+        title: "Quarantine State"
+        description: "True to quarantine host, false to unquarantine host"
+        type: boolean
+        required: true
+        default: true
+        example: true
+    output:
+      success:
+        title: "Success"
+        description: "Whether or not the quarantine/unquarantine was successful"
+        type: boolean
+        required: true
+        example: true
+      whitelisted:
+        title: "Whitelisted"
+        description: "Whether or not the quarantine/unquarantine failed due to whitelisting"
+        type: boolean
+        required: true
+        example: true

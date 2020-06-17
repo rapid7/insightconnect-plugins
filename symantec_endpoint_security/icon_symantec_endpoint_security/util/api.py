@@ -235,6 +235,45 @@ class APIClient(object):
                                                  hash_type=hash_type,
                                                  name=name))
 
+    def update_quarantine_statuses(self,
+                                   computer_ids: [str] = [],
+                                   hardware_ids: [str] = [],
+                                   quarantine: bool = True) -> Optional[str]:
+        """
+        Update the quarantine status of a computer(s). Either computer_ids or hardware_ids should be specified
+        :param computer_ids: List of 'uniqueId' belonging to computers to quarantine
+        :param hardware_ids: List of MAC addresses belonging to computers to quarantine
+        :param quarantine: Whether or not to undo the quarantine. True = quarantine, False = unquarantine
+        :return: command_id: ID of the command that was ran
+        """
+
+        url = f"{self.base_url}/command-queue/quarantine"
+
+        params = {"undo": not quarantine}
+        if computer_ids:
+            params["computer_ids"] = computer_ids
+        else:
+            params["hardware_ids"] = hardware_ids
+
+        response = self.session.post(url=url,
+                                     params=params,
+                                     verify=False)
+
+        if response.status_code == 200:
+            try:
+                command_id = response.json()["commandID_computer"]
+                return command_id
+            except json.JSONDecodeError:
+                raise APIException(status_code=None, message="Symantec Endpoint Protection server returned a "
+                                                             "non-JSON response!")
+            except (KeyError, IndexError):
+                return None
+        elif self._STATUS_CODES.get(response.status_code) is not None:
+            raise self._STATUS_CODES[response.status_code]
+        else:
+            raise APIException(status_code=None, message=f"An unhandled response was received from Symantec Endpoint "
+                                                         f"Protection: {response.text}")
+
     def get_all_accessible_domains(self) -> [Domain]:
         """
         Returns a list of all accessible Symantec Endpoint Protection Manager domains
