@@ -64,10 +64,14 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |success|boolean|True|Whether or not the quarantine/unquarantine was successful|
+|whitelisted|boolean|True|Whether or not the quarantine/unquarantine failed due to whitelisting|
 
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Blacklist

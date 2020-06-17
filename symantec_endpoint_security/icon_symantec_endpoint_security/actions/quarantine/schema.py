@@ -15,6 +15,7 @@ class Input:
 
 class Output:
     SUCCESS = "success"
+    WHITELISTED = "whitelisted"
     
 
 class QuarantineInput(insightconnect_plugin_runtime.Input):
@@ -65,10 +66,17 @@ class QuarantineOutput(insightconnect_plugin_runtime.Output):
       "title": "Success",
       "description": "Whether or not the quarantine/unquarantine was successful",
       "order": 1
+    },
+    "whitelisted": {
+      "type": "boolean",
+      "title": "Whitelisted",
+      "description": "Whether or not the quarantine/unquarantine failed due to whitelisting",
+      "order": 2
     }
   },
   "required": [
-    "success"
+    "success",
+    "whitelisted"
   ]
 }
     """)

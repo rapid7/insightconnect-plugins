@@ -881,3 +881,9 @@ actions:
         type: boolean
         required: true
         example: true
+      whitelisted:
+        title: "Whitelisted"
+        description: "Whether or not the quarantine/unquarantine failed due to whitelisting"
+        type: boolean
+        required: true
+        example: true

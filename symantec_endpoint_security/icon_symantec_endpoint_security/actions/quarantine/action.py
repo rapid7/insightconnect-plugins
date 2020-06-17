@@ -39,7 +39,7 @@ class Quarantine(insightconnect_plugin_runtime.Action):
         if in_whitelist:
             self.logger.info(f"The agent specified '{agent_identifier}' was found within the whitelist and "
                              f"will be skipped!")
-            return {Output.SUCCESS: False}
+            return {Output.SUCCESS: False, Output.WHITELISTED: True}
 
         self.logger.info(f"{'Quarantining' if quarantine_state else 'Unquarantining'} the "
                          f"following agent: {agent_identifier}")
