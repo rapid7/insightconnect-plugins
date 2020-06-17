@@ -1,15 +1,15 @@
 plugin_spec_version: v2
 extension: plugin
 products: ["insightconnect"]
-name: symantec_endpoint_security
-title: Broadcom Symantec Endpoint Security
-description: Broadcom Symantec Endpoint Security delivers the most complete, integrated endpoint security platform on the planet
+name: symantec_endpoint_protection
+title: Broadcom Symantec Endpoint Protection
+description: Broadcom Symantec Endpoint Protection delivers the most complete, integrated endpoint security platform on the planet
 version: 1.0.0
 vendor: rapid7
 support: rapid7
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/symantec_endpoint_security
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/symantec_endpoint_protection
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.broadcom.com/
 tags:
