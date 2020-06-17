@@ -55,7 +55,7 @@ Example input:
 {
   "agent": "example_host",
   "quarantine_state": true,
-  "whitelist": "[\"01:23:45:67:89:AB\", \"89-67-45-23-10-CD\"]"
+  "whitelist": ["01:23:45:67:89:AB", "89-67-45-23-10-CD"]
 }
 ```
 
