@@ -625,7 +625,7 @@ actions:
         required: true
   blacklist:
     title: Blacklist
-    description: Blacklist IP, URL, file SHA1 or domain in UDSO list
+    description: Blacklist an IP, URL, file SHA1 or domain in the UDSO list
     input:
       indicator:
         title: Indicator
@@ -652,7 +652,7 @@ actions:
       expiry_date:
         title: Expiry Date
         description: Number of days to allow this rule to be active
-        type: int
+        type: integer
         default: 30
         required: false
         example: 100
@@ -660,7 +660,7 @@ actions:
         title: Blacklist State
         description: True to blacklist hash, false to unblacklist hash
         type: boolean
-        required: false
+        required: true
         default: true
         example: true
     output:

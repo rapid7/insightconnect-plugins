@@ -13,8 +13,7 @@ This plugin works for both the on-premise and Apex SaaS solutions and supports m
 # Requirements
 
 * Apex One, Apex Central, or Apex SaaS
-* API Key
-* Application ID
+* API Key and Application ID
 
 # Documentation
 
@@ -44,7 +43,7 @@ Example input:
 
 #### Blacklist
 
-This action is used to blacklist IP, URL, file SHA1 or domain in UDSO list.
+This action is used to blacklist an IP, URL, file SHA1 hash or domain in the UDSO list.
 
 ##### Input
 
