@@ -71,8 +71,8 @@ class Blacklist(komand.Action):
             return "FILE_SHA1"
 
         raise PluginException(
-            cause="Invalid input",
-            assistance="Check indicator input. It should be IP, URL, domain oraz sha1"
+            cause="Invalid indicator input provided.",
+            assistance="Supported indicators are IP, URL, domain and SHA1 hash."
         )
 
     def generate_payload(self, params):
@@ -80,7 +80,7 @@ class Blacklist(komand.Action):
         user_notes = params.get(Input.DESCRIPTION)
         if user_notes:
             if len(user_notes) > self.MAX_NOTES_LENGTH:
-                self.logger.warning(f"Notes exceeds maximum length, truncated to {self.MAX_NOTES_LENGTH} characters")
+                self.logger.warning(f"Note: exceeds maximum length, truncated to {self.MAX_NOTES_LENGTH} characters")
             payload_notes = user_notes[:self.MAX_NOTES_LENGTH]
         indicator = params.get(Input.INDICATOR).lower()
         payload_type = self.get_data_type(indicator)
