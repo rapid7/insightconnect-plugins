@@ -30,6 +30,9 @@ class Blacklist(insightconnect_plugin_runtime.Action):
 
         # Get the hash type
         hash_type = self._is_md5_or_sha256(hashes[0])
+        if hash_type is HashType.sha256:
+            raise PluginException(cause="SHA256 hashes are not supported!",
+                                  assistance="Ensure only MD5 hashes are being used for input!")
 
         # If no domain_id specified, then blacklist should be global. Get all domain IDs the connection can access
         if not domain_id:

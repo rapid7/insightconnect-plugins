@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: broadcom_symantec_endpoint_protection
 title: Broadcom Symantec Endpoint Protection
 description: Broadcom Symantec Endpoint Protection delivers the most complete, integrated endpoint security platform on the planet
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: rapid7
 status: []
@@ -818,11 +818,11 @@ actions:
         required: false
   blacklist:
     title: "Blacklist"
-    description: "Blacklist MD5 or SHA256 hashes"
+    description: "Blacklist MD5 hashes"
     input:
       hashes:
         title: "Hashes"
-        description: "Hashes (MD5 or SHA256) to add to the blacklist. Note: only one type of hash is allowed at a time"
+        description: "MD5 hash to add to the blacklist"
         type: "[]string"
         required: true
         example: '["9de5069c5afe602b2ea0a04b66beb2c0"]'

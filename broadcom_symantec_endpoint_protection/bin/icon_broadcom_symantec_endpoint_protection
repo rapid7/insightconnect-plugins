@@ -6,7 +6,7 @@ from icon_broadcom_symantec_endpoint_protection import connection, actions, trig
 
 Name = "Broadcom Symantec Endpoint Protection"
 Vendor = "rapid7"
-Version = "1.0.1"
+Version = "1.0.2"
 Description = "Broadcom Symantec Endpoint Protection delivers the most complete, integrated endpoint security platform on the planet"
 
 
