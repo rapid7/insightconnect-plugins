@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: broadcom_symantec_endpoint_protection
 title: Broadcom Symantec Endpoint Protection
 description: Broadcom Symantec Endpoint Protection delivers the most complete, integrated endpoint security platform on the planet
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: rapid7
 status: []
