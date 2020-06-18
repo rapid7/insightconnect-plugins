@@ -30,6 +30,9 @@ class Blacklist(insightconnect_plugin_runtime.Action):
 
         # Get the hash type
         hash_type = self._is_md5_or_sha256(hashes[0])
+        if hash_type is HashType.sha256:
+            raise PluginException(cause="SHA256 hashes are not supported!",
+                                  assistance="Ensure only MD5 hashes are being used for input!")
 
         # If no domain_id specified, then blacklist should be global. Get all domain IDs the connection can access
         if not domain_id:
@@ -62,8 +65,7 @@ class Blacklist(insightconnect_plugin_runtime.Action):
         """
         if len(set(filter(self._is_md5_or_sha256, hashes))) > 1:
             raise PluginException(cause="Multiple types of hashes were found in the hashes input!",
-                                  assistance="Only one type of hash can be provided in the hashes input per step."
-                                             "Ensure only MD5 or only SHA256 hashes are being used as input.")
+                                  assistance="Only MD5 hashes are allowed as input.")
 
     @staticmethod
     def _is_md5_or_sha256(hash_: str) -> HashType:
@@ -80,4 +82,4 @@ class Blacklist(insightconnect_plugin_runtime.Action):
         else:
             raise PluginException(cause=f"The hash {hash_} provided as input to the action was not an allowed type "
                                         f"by Symantec Endpoint Protection!",
-                                  assistance="Ensure only MD5 or SHA256 hashes are provided to this action.")
+                                  assistance="Ensure only MD5 hashes are provided to this action.")

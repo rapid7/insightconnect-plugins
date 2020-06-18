@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Blacklist MD5 or SHA256 hashes"
+    DESCRIPTION = "Blacklist MD5 hashes"
 
 
 class Input:
@@ -39,7 +39,7 @@ class BlacklistInput(insightconnect_plugin_runtime.Input):
     "hashes": {
       "type": "array",
       "title": "Hashes",
-      "description": "Hashes (MD5 or SHA256) to add to the blacklist. Note: only one type of hash is allowed at a time",
+      "description": "MD5 hashes to add to the blacklist",
       "items": {
         "type": "string"
       },
