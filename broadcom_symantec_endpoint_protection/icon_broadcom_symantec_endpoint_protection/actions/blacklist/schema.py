@@ -39,7 +39,7 @@ class BlacklistInput(insightconnect_plugin_runtime.Input):
     "hashes": {
       "type": "array",
       "title": "Hashes",
-      "description": "MD5 hash to add to the blacklist",
+      "description": "MD5 hashes to add to the blacklist",
       "items": {
         "type": "string"
       },
