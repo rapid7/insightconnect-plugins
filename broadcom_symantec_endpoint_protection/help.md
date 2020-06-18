@@ -91,7 +91,7 @@ This action is used to blacklist MD5 or SHA256 hashes.
 |----|----|-------|--------|-----------|----|-------|
 |description|string|None|True|Description for the blacklist|None|Hashes Blacklisted from InsightConnect|
 |domain_id|string|None|False|ID of the domain to apply the blacklist to. Omitting this input will apply the blacklist to all domains (globally)|None|0AF740760A0414711FAA4F8BD5293158|
-|hashes|[]string|None|True|MD5 hash to add to the blacklist|None|["9de5069c5afe602b2ea0a04b66beb2c0"]|
+|hashes|[]string|None|True|MD5 hashes to add to the blacklist|None|["9de5069c5afe602b2ea0a04b66beb2c0"]|
 |name|string|None|True|Name for the blacklist|None|InsightConnect Blacklist|
 
 Example input:
