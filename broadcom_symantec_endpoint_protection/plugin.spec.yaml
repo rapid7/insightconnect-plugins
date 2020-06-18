@@ -822,7 +822,7 @@ actions:
     input:
       hashes:
         title: "Hashes"
-        description: "MD5 hash to add to the blacklist"
+        description: "MD5 hashes to add to the blacklist"
         type: "[]string"
         required: true
         example: '["9de5069c5afe602b2ea0a04b66beb2c0"]'
