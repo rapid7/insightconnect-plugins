@@ -1,5 +1,5 @@
 {
-	"spec": "d7bb976b6a15f12b3253e324466043dc",
+	"spec": "22975a86f093c88cbfc1cc0ed27a7da1",
 	"manifest": "3b7f6a250a05091c2fef323f5a9b5c18",
 	"setup": "1898d606cab4c3031ee1a58b8f9e575b",
 	"schemas": [
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "blacklist/schema.py",
-			"hash": "f4f908103e5884601fd878debd5e0c6e"
+			"hash": "0f7f304e40bc1b82134f874caac06fdc"
 		},
 		{
 			"identifier": "delete_openioc_file/schema.py",

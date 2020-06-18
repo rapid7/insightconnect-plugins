@@ -49,9 +49,9 @@ This action is used to blacklist an IP, URL, file SHA1 hash or domain in the UDS
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|blacklist_state|boolean|True|False|True to blacklist hash, false to unblacklist hash|None|True|
+|blacklist_state|boolean|True|True|True to blacklist hash, false to unblacklist hash|None|True|
 |description|string|None|False|Notes about why the file is being quarantined (256 characters max)|None|Indicator Blacklisted from InsightConnect|
-|expiry_date|int|30|False|Number of days to allow this rule to be active|None|100|
+|expiry_date|integer|30|False|Number of days to allow this rule to be active|None|100|
 |indicator|string|None|True|The item to be filed as suspicious. data_type affects character limit.  URL/DOMAIN are 2046 characters max, SHA is 40 characters max|None|http://www.example.com|
 |scan_action|string|BLOCK|False|What action to do with the data sent|['BLOCK', 'LOG']|BLOCK|
 

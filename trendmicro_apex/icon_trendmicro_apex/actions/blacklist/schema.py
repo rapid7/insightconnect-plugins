@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Blacklist IP, URL, file SHA1 or domain in UDSO list"
+    DESCRIPTION = "Blacklist an IP, URL, file SHA1 or domain in the UDSO list"
 
 
 class Input:
@@ -64,6 +64,7 @@ class BlacklistInput(komand.Input):
     }
   },
   "required": [
+    "blacklist_state",
     "indicator"
   ]
 }
