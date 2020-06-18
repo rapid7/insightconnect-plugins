@@ -4,14 +4,14 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add an IP, email or similar info to the UDSO list"
+    DESCRIPTION = "Blacklist IP, URL, file SHA1 or domain in UDSO list"
 
 
 class Input:
-    CONTENT = "content"
-    DATA_TYPE = "data_type"
+    BLACKLIST_STATE = "blacklist_state"
+    DESCRIPTION = "description"
     EXPIRY_DATE = "expiry_date"
-    NOTES = "notes"
+    INDICATOR = "indicator"
     SCAN_ACTION = "scan_action"
     
 
@@ -19,29 +19,23 @@ class Output:
     SUCCESS = "success"
     
 
-class AddToUdsoListInput(komand.Input):
+class BlacklistInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "content": {
-      "type": "string",
-      "title": "Content",
-      "description": "The item to be filed as suspicious. data_type affects character limit.  URL/DOMAIN are 2046 characters max, SHA is 40 characters max",
-      "order": 1
+    "blacklist_state": {
+      "type": "boolean",
+      "title": "Blacklist State",
+      "description": "True to blacklist hash, false to unblacklist hash",
+      "default": true,
+      "order": 5
     },
-    "data_type": {
+    "description": {
       "type": "string",
-      "title": "Data Type",
-      "description": "Format of the data, character length of content is affected by this",
-      "default": "URL",
-      "enum": [
-        "IP",
-        "URL",
-        "FILE_SHA1",
-        "DOMAIN"
-      ],
+      "title": "Description",
+      "description": "Notes about why the file is being quarantined (256 characters max)",
       "order": 3
     },
     "expiry_date": {
@@ -49,19 +43,19 @@ class AddToUdsoListInput(komand.Input):
       "title": "Expiry Date",
       "description": "Number of days to allow this rule to be active",
       "default": 30,
-      "order": 5
-    },
-    "notes": {
-      "type": "string",
-      "title": "Notes",
-      "description": "Notes about why the file is being quarantined (256 characters max)",
       "order": 4
+    },
+    "indicator": {
+      "type": "string",
+      "title": "Indicator",
+      "description": "The item to be filed as suspicious. data_type affects character limit.  URL/DOMAIN are 2046 characters max, SHA is 40 characters max",
+      "order": 1
     },
     "scan_action": {
       "type": "string",
       "title": "Scan Action",
       "description": "What action to do with the data sent",
-      "default": "LOG",
+      "default": "BLOCK",
       "enum": [
         "BLOCK",
         "LOG"
@@ -70,9 +64,7 @@ class AddToUdsoListInput(komand.Input):
     }
   },
   "required": [
-    "content",
-    "data_type",
-    "scan_action"
+    "indicator"
   ]
 }
     """)
@@ -81,7 +73,7 @@ class AddToUdsoListInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class AddToUdsoListOutput(komand.Output):
+class BlacklistOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",

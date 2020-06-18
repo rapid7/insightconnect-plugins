@@ -1,15 +1,15 @@
 {
-	"spec": "1d836792f3ec9b4cf29bd5d041e5ea58",
-	"manifest": "4f54d38fe35b012afc01d4238c80a61d",
-	"setup": "e434e1504a9fc108488e2799081de419",
+	"spec": "d7bb976b6a15f12b3253e324466043dc",
+	"manifest": "3b7f6a250a05091c2fef323f5a9b5c18",
+	"setup": "1898d606cab4c3031ee1a58b8f9e575b",
 	"schemas": [
 		{
 			"identifier": "add_file_to_udso_list/schema.py",
 			"hash": "f47fe5c8fc29b908e51f43827070af4c"
 		},
 		{
-			"identifier": "add_to_udso_list/schema.py",
-			"hash": "fa7e1970dd8a5c0ed819a250c4d5fc76"
+			"identifier": "blacklist/schema.py",
+			"hash": "f4f908103e5884601fd878debd5e0c6e"
 		},
 		{
 			"identifier": "delete_openioc_file/schema.py",
