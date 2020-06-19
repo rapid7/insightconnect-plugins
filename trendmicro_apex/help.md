@@ -19,6 +19,12 @@ This plugin works for both the on-premise and Apex SaaS solutions and supports m
 
 ## Setup
 
+In the Trend Micro Apex console, the API can be configured:
+
+1. Choose Administraton from the main menu
+2. Select API Automation Access Settings from the Settings drop-down.
+3. Configure your API settings and copy the API key and Application ID into the Connection
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
