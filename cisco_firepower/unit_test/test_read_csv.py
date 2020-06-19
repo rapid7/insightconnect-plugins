@@ -14,8 +14,3 @@ class TestReadCSV(TestCase):
 
         self.assertEqual(fields, expected_fields)
         self.assertEqual(expected_records, len(csv_dict))
-
-
-
-
-

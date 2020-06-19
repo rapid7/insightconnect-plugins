@@ -1,4 +1,5 @@
-FROM komand/python-3-plugin:2
+# FROM komand/python-3-38-plugin:2
+FROM rapid7/insightconnect-python-3-38-plugin:4
 LABEL organization=komand
 LABEL sdk=python
 LABEL type=plugin
@@ -7,7 +8,7 @@ ENV SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
 ENV SSL_CERT_DIR /etc/ssl/certs
 ENV REQUESTS_CA_BUNDLE  /etc/ssl/certs/ca-certificates.crt
 
-RUN apt-get install libssl-dev
+RUN apt-get update -y && apt-get install libssl-dev -y
 RUN pip install pyopenssl
 
 ADD ./plugin.spec.yaml /plugin.spec.yaml

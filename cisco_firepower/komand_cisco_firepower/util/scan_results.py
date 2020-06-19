@@ -13,13 +13,18 @@ class ScanResults(object):
         self.added_hosts = {}
 
     def add_scan_result(self, address, scan_result, operation):
+        # Operation
+        # - ScanUpdate
+        # - ScanFlush
+
         new_host = False
         command = ""
         if not self.added_hosts.get(address):
             new_host = True
             host = scan_result.get('host', {})
             command += generate_add_host_command(address)
-            command += generate_set_os_command(host, address)
+            if len(host.get("operating_system", {})):
+                command += generate_set_os_command(host, address)
             self.added_hosts[address] = True
 
         details = scan_result.get('scan_result_details', {})

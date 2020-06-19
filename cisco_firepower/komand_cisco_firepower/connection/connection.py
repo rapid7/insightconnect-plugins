@@ -6,10 +6,13 @@ import re
 import socket
 import ssl
 import struct
+import select
+import time
 import OpenSSL.crypto as crypto
 from ..util.message_details import MessageDetails
 from ..util.message_details import MessageType
 from ..util.utils import first
+from komand.exceptions import PluginException
 
 
 class Connection(komand.Connection):
@@ -29,16 +32,18 @@ class Connection(komand.Connection):
 
         self.logger.info("Connect: Connecting..")
         self.__generate_certificate()
-        sockt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        ctx = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
-        ctx.load_cert_chain(self.__cert_file)
-        self.__connection = ctx.wrap_socket(sockt)
-        self.__connection.connect((self.__host, self.__port))
-
-        self.max_data_size = self.__get_max_data_size()
+        self.make_connection()
         self.logger.info("Connect: Connected successfully.")
 
-    def send(self, data_array):
+    def make_connection(self):
+        self.sockt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        ctx = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
+        ctx.load_cert_chain(self.__cert_file)
+        self.__connection = ctx.wrap_socket(self.sockt)
+        self.__connection.connect((self.__host, self.__port))
+        self.max_data_size = self.__get_max_data_size()
+
+    def send(self, data_array, timeout=300):
         self.logger.info("Connect: Sending data through socket...")
         error_count = 0
         total_commands = 0
@@ -47,7 +52,7 @@ class Connection(komand.Connection):
             self.logger.info("Connect: Sending new data set.")
             message_type = MessageType.DATA_PAYLOAD_LENGTH
             msg_details = MessageDetails(message_type, len(data), data)
-            response = self.__send_data(msg_details)
+            response = self.__send_data(msg_details, timeout)
             error, commands = self.__parse_response(response)
             total_commands += commands
             if error:
@@ -60,9 +65,9 @@ class Connection(komand.Connection):
             self.logger.info("{} batches contained error(s).".format(error_count))
         return total_commands, error_count
 
-    def read(self):
+    def read(self, timeout=300):
         self.logger.info("Connect: Reading from socket...")
-        msg_details = self.__get_message_details()
+        msg_details = self.__get_message_details(timeout)
         data = self.__connection.recv(msg_details.msg_length)
         data = data.decode('UTF-8')
         return data
@@ -74,8 +79,9 @@ class Connection(komand.Connection):
 
     def close(self):
         self.__connection.close()
+        self.sockt.close()
 
-    def __send_data(self, msg_details):
+    def __send_data(self, msg_details, timeout=300):
         # Send the data type and size
         data_struct = struct.pack(
             self.TWO_UINT, msg_details.msg_type, msg_details.msg_length
@@ -86,7 +92,7 @@ class Connection(komand.Connection):
         )
         self.__connection.send(msg_details.data.encode())
         self.logger.debug("Data sent.")
-        response = self.read()
+        response = self.read(timeout)
         return response
 
     def __get_max_data_size(self):
@@ -108,7 +114,13 @@ class Connection(komand.Connection):
         self.logger.debug("Max data size is {}".format(data))
         return data
 
-    def __get_message_details(self):
+    def __get_message_details(self, timeout=300):
+        # This will block for timeout time or return as soon as the socket is ready to be read
+        r, _, _ = select.select([self.__connection], [], [], timeout)
+        if not r:
+            raise PluginException(cause="Communication timeout with Firepower server.",
+                                  assistance="Set the number of records processed at one time to a lower number and try again.")
+
         data = self.__connection.recv()
 
         msg_type = self.__custom_unpack(data[0:4], self.ONE_UINT)
