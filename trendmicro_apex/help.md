@@ -13,12 +13,17 @@ This plugin works for both the on-premise and Apex SaaS solutions and supports m
 # Requirements
 
 * Apex One, Apex Central, or Apex SaaS
-* API Key
-* Application ID
+* API Key and Application ID
 
 # Documentation
 
 ## Setup
+
+In the Trend Micro Apex console, the API can be configured:
+
+1. Choose Administraton from the main menu
+2. Select API Automation Access Settings from the Settings drop-down.
+3. Configure your API settings and copy the API key and Application ID into the Connection
 
 The connection configuration accepts the following parameters:
 
@@ -41,6 +46,46 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Blacklist
+
+This action is used to blacklist an IP, URL, file SHA1 hash or domain in the UDSO list.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|blacklist_state|boolean|True|True|True to blacklist hash, false to unblacklist hash|None|True|
+|description|string|None|False|Notes about why the file is being quarantined (256 characters max)|None|Indicator Blacklisted from InsightConnect|
+|expiry_date|integer|30|False|Number of days to allow this rule to be active|None|100|
+|indicator|string|None|True|The item to be filed as suspicious. data_type affects character limit.  URL/DOMAIN are 2046 characters max, SHA is 40 characters max|None|http://www.example.com|
+|scan_action|string|BLOCK|False|What action to do with the data sent|['BLOCK', 'LOG']|BLOCK|
+
+Example input:
+
+```
+{
+  "blacklist_state": true,
+  "description": "Indicator Blacklisted from InsightConnect",
+  "expiry_date": 100,
+  "indicator": "http://www.example.com",
+  "scan_action": "BLOCK"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Whether or not the action was successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Quarantine
 
@@ -661,46 +706,6 @@ Example output:
 }
 ```
 
-#### Add to UDSO List
-
-This action is used to add an IP address, email or similar info to the UDSO list.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|content|string|None|True|The item to be filed as suspicious. data_type affects character limit.  URL/DOMAIN are 2046 characters max, SHA is 40 characters max|None|http://www.example.com|
-|data_type|string|URL|True|Format of the data, character length of content is affected by this|['IP', 'URL', 'FILE_SHA1', 'DOMAIN']|URL|
-|expiry_date|int|30|False|Number of days to allow this rule to be active|None|100|
-|notes|string|None|False|Notes about why the file is being quarantined (256 characters max)|None|This URL leads to malware|
-|scan_action|string|LOG|True|What action to do with the data sent|['BLOCK', 'LOG']|LOG|
-
-Example input:
-
-```
-{
-  "content": "http://www.example.com",
-  "data_type": "URL",
-  "expiry_date": 100,
-  "notes": "This URL leads to malware",
-  "scan_action": "LOG"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Whether or not the action was successful|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
 #### Add File to UDSO List
 
 This action is used to add a file to the UDSO list of the Apex Security Manager.
@@ -752,6 +757,7 @@ For example, the agent / endpoint actions require that the Apex Endpoint Sensor 
 
 # Version History
 
+* 3.0.0 - Update action Add to UDSO List to Blacklist
 * 2.0.0 - Update action Execute Agent Action to Quarantine
 * 1.1.0 - New actions Get Agent Status, Search Agents, List OpenIOC Files, Download the RCA CSV File, Upload OpenIOC File, Delete OpenIOC File, Download OpenIOC File, Get Investigation, Terminate Process, and Execute Agent Action
 * 1.0.0 - Initial plugin

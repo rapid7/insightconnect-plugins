@@ -21,7 +21,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         )
 
     def test(self):
-        token = self.client.generate_token()
+        token = self.client.generate_token("device:read")
         if token is not None and len(token) > 0:
             return True
 

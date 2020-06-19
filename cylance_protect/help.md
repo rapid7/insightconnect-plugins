@@ -149,6 +149,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.2 - Update to fix connection test
 * 1.0.1 - Add SHA256 input validation in Blacklist action
 * 1.0.0 - Initial plugin
 

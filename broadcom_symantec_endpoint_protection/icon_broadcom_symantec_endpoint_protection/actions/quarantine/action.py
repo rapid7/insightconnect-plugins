@@ -28,6 +28,10 @@ class Quarantine(insightconnect_plugin_runtime.Action):
         # If a MAC address is passed then we can go ahead and use that directly after normalizing it
         if not self._is_mac_address(agent_identifier=agent_identifier):
             full_details = self.connection.api_client.get_computer(computer_name=agent_identifier)
+
+            if not full_details:
+                return {Output.SUCCESS: False, Output.WHITELISTED: False}
+            
             mac_addresses = set(full_details.get("macAddresses", []))
 
             in_whitelist = len(whitelist_normalized.intersection(mac_addresses)) > 0
