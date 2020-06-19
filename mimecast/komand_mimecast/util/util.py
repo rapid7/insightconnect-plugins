@@ -120,10 +120,11 @@ class MimecastRequests:
 
         try:
             if response['meta']['status'] != 200:
-                self.logger.error(response['fail'])
+                self.logger.error(response)
                 raise PluginException(cause='Server request failed.',
                                       assistance='Status code is {}, see log for details.'.format(
-                                          response['meta']['status']))
+                                          response['meta']['status']),
+                                      data=response['fail'])
         except KeyError:
             self.logger.error(response)
             raise PluginException(cause='Unknown error.',

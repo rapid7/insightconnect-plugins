@@ -3,7 +3,7 @@ from .schema import ListGroupsInput, ListGroupsOutput, Input, Output, Component
 # Custom imports below
 import requests
 import urllib.parse
-
+from komand_okta.util.helpers import raise_based_on_error_code
 
 class ListGroups(komand.Action):
     def __init__(self):
@@ -43,3 +43,6 @@ class ListGroups(komand.Action):
                 group['description'] = keys.get('description', 'Unknown')
 
             return {Output.GROUPS: data, Output.SUCCESS: True}
+        else:
+            raise_based_on_error_code(response=response)
+

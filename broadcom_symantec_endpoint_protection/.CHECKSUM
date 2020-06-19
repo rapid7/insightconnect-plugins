@@ -1,0 +1,23 @@
+{
+	"spec": "31c8795e66bcb62620a05e4a02c67316",
+	"manifest": "e742849f0e7f21f7534680844538e466",
+	"setup": "e789d3044443fda2c80ba3a93dd145fc",
+	"schemas": [
+		{
+			"identifier": "blacklist/schema.py",
+			"hash": "d92d27c56285b9bfebcde97a72e75480"
+		},
+		{
+			"identifier": "get_agent_details/schema.py",
+			"hash": "51ebc05480ad2730556cc455251e0e02"
+		},
+		{
+			"identifier": "quarantine/schema.py",
+			"hash": "e86dc95bc783eadc9ed17d5da94cfc3b"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "278ce416716ea533ba9bdd33d82f18ba"
+		}
+	]
+}

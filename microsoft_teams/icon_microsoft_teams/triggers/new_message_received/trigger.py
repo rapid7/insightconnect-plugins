@@ -57,18 +57,18 @@ class NewMessageReceived(komand.Trigger):
                     message = remove_null_and_clean(message)
                     if maya.parse(message.get("createdDateTime")) > last_time_we_checked:
                         self.logger.info("Analyzing message...")
-                        if message_content:
+                        if message_content: # Do we have a reg ex
                             self.logger.info("Checking message content.")
-                            message_content = message.get("body",{}).get("content", "")
+                            ms_message_content = message.get("body",{}).get("content", "")
                             if message.get("body", {}).get("contentType", "").lower() == "html":
-                                message_content = strip_html(message_content)
-                            self.logger.info(f"Testing message: {message_content}")
-                            if compiled_message_content.search(message_content):
+                                ms_message_content = strip_html(ms_message_content)
+                            self.logger.info(f"Testing message: {ms_message_content}")
+                            if compiled_message_content.search(ms_message_content):
                                 self.logger.info("Returning new message.")
                                 self.send({Output.MESSAGE: message})
                             else:
-                                self.logger.info(f"Message did not match {message_content}")
-                        else:
+                                self.logger.info(f"Message did not match regex.\nMessage: {ms_message_content}\nRegex: {message_content}")
+                        else: # we did not have a regex
                             self.logger.info("Returning new message.")
                             self.send({Output.MESSAGE: message})
                     else:

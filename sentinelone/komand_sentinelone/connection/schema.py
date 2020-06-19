@@ -23,8 +23,7 @@ class ConnectionSchema(komand.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "URL and endpoint of SentinelOne instance. For example: https://usea1-partners.sentinelone.net/",
-      "default": "https://usea1-partners.sentinelone.net/",
+      "description": "SentinelOne Console URL",
       "order": 2
     }
   },
