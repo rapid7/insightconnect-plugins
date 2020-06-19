@@ -4,7 +4,7 @@ products: [insightconnect]
 name: sonicwall
 title: SonicWall Firewall
 description: Manage firewalls and block hosts with SonicWall firewalls
-version: 1.0.0
+version: 1.1.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -134,4 +134,61 @@ actions:
         title: Object Action
         description: Return information about add address object to group
         type: object_action
+        required: false
+  create_address_object:
+    title: Create Address Object
+    description: Creates a new address object
+    input:
+      address_object:
+        title: Address Object
+        description: Name of the address object, defaults to value address if no name is given
+        type: string
+        required: false
+        example: MaliciousHost
+      address:
+        title: Address
+        description: IP, CIDR, or domain name to assign to the Address Object
+        type: string
+        required: true
+        example: example.com
+      skip_private_address:
+        title: Skip Private Addresses
+        description: If set to true, any addresses that are defined in the RFC1918 space will not be blocked. e.g. 10/8, 172.16/12, 192.168/16
+        type: boolean
+        required: true
+        example: true
+      whitelist:
+        title: Whitelist
+        description: This list contains a set of hosts that should not be blocked. This can include IPs, CIDRs, and domains
+        type: "[]string"
+        required: false
+        example: ["198.51.100.100", "192.0.2.0/24", "example.com" ]
+      zone:
+        title: Zone
+        description: Name of the zone where the new object will be placed
+        type: string
+        required: true
+        default: WAN
+        example: WAN
+    output:
+      status:
+        title: Status
+        description: Returns information about creating new address object
+        type: status
+        required: false
+  delete_address_object:
+    title: Delete Address Object
+    description: Deletes an address object
+    input:
+      address_object:
+        title: Address Object
+        description: Name of the address object to delete
+        type: string
+        required: true
+        example: MaliciousHost
+    output:
+      status:
+        title: Status
+        description: Returns information about creating new address object
+        type: status
         required: false

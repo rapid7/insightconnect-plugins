@@ -50,6 +50,25 @@ class SonicWallAPI:
     def add_address_object_to_group(self, group_type, group_name, payload):
         return self._make_request("put", f"address-groups/{group_type}/name/{group_name}", json_data=payload)
 
+    def create_address_object(self, object_type, payload):
+        if object_type == "cidr":
+            object_type = "ipv4"
+        return self._make_request("post", f"address-objects/{object_type}", json_data=payload)
+
+    def delete_address_object(self, object_name, object_type):
+        return self._make_request("delete", f"address-objects/{object_type}/name/{object_name}")
+
+    def validate_if_zone_exists(self, zone_name):
+        self.login()
+        try: 
+            if self._call_api("get", f"zones/name/{zone_name}"):
+                return True
+        except PluginException as _:
+            raise PluginException(cause=f"The zone: {zone_name} does not exist in SonicWall.",
+                              assistance="Please enter valid zone name and try again.")
+        finally:
+            self.logout()
+
     def _make_request(self, method, path, json_data=None):
         self.login()
         try:
