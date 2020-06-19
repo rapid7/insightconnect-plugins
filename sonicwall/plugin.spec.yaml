@@ -171,10 +171,10 @@ actions:
         default: WAN
         example: WAN
     output:
-      object_action:
-        title: Object Action
+      status:
+        title: Status
         description: Returns information about creating new address object
-        type: object_action
+        type: status
         required: false
   delete_address_object:
     title: Delete Address Object
@@ -187,8 +187,8 @@ actions:
         required: true
         example: MaliciousHost
     output:
-      object_action:
-        title: Object Action
+      status:
+        title: Status
         description: Returns information about creating new address object
-        type: object_action
+        type: status
         required: false

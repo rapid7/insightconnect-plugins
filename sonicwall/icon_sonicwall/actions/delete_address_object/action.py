@@ -16,8 +16,8 @@ class DeleteAddressObject(insightconnect_plugin_runtime.Action):
         object_name = params.get(Input.ADDRESS_OBJECT)
 
         return {
-            Output.OBJECT_ACTION: self.connection.sonicwall_api.delete_address_object(
+            Output.STATUS: self.connection.sonicwall_api.delete_address_object(
                 object_name,
                 self.connection.sonicwall_api.get_object_type(object_name)
-            )
+            )['status']
         }

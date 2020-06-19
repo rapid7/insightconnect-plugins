@@ -40,7 +40,7 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
         )
 
         return {
-            Output.OBJECT_ACTION: response
+            Output.STATUS: response['status']
         }
 
     def _create_payload(self, name: str, zone: str, address: str, address_type: str) -> dict:
@@ -102,7 +102,7 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
         return False
 
     @staticmethod
-    def _generate_subnet_netmask(address: str) -> tuple:
+    def _generate_subnet_netmask(address: str) -> dict:
         return {
             "subnet": str(IPv4Network(address).network_address),
             "mask": str(IPv4Network(address).netmask)

@@ -65,30 +65,28 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|object_action|object_action|False|Returns information about creating new address object|
+|status|status|False|Returns information about creating new address object|
 
 Example output:
 
 ```
 {
-    "object_action": {
-        "status": {
-            "success": true,
-            "cli": {
-                "mode": "config_mode",
-                "depth": 1,
-                "configuring": true,
-                "pending_config": true,
-                "restart_required": "FALSE"
-            },
-            "info": [
-                {
-                    "level": "info",
-                    "code": "E_OK",
-                    "message": "Success."
-                }
-            ]
-        }
+    "status": {
+        "success": true,
+        "cli": {
+            "mode": "config_mode",
+            "depth": 1,
+            "configuring": true,
+            "pending_config": true,
+            "restart_required": "FALSE"
+        },
+        "info": [
+            {
+                "level": "info",
+                "code": "E_OK",
+                "message": "Success."
+            }
+        ]
     }
 }
 ```
@@ -127,30 +125,28 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|object_action|object_action|False|Returns information about creating new address object|
+|status|status|False|Returns information about creating new address object|
 
 Example output:
 
 ```
 {
-    "object_action": {
-        "status": {
-            "success": true,
-            "cli": {
-                "mode": "config_mode",
-                "depth": 1,
-                "configuring": true,
-                "pending_config": true,
-                "restart_required": "FALSE"
-            },
-            "info": [
-                {
-                    "level": "info",
-                    "code": "E_OK",
-                    "message": "Success."
-                }
-            ]
-        }
+    "status": {
+        "success": true,
+        "cli": {
+            "mode": "config_mode",
+            "depth": 1,
+            "configuring": true,
+            "pending_config": true,
+            "restart_required": "FALSE"
+        },
+        "info": [
+            {
+                "level": "info",
+                "code": "E_OK",
+                "message": "Success."
+            }
+        ]
     }
 }
 ```

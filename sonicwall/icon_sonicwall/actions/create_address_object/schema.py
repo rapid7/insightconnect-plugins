@@ -16,7 +16,7 @@ class Input:
     
 
 class Output:
-    OBJECT_ACTION = "object_action"
+    STATUS = "status"
     
 
 class CreateAddressObjectInput(insightconnect_plugin_runtime.Input):
@@ -78,9 +78,9 @@ class CreateAddressObjectOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "object_action": {
-      "$ref": "#/definitions/object_action",
-      "title": "Object Action",
+    "status": {
+      "$ref": "#/definitions/status",
+      "title": "Status",
       "description": "Returns information about creating new address object",
       "order": 1
     }
@@ -143,169 +143,6 @@ class CreateAddressObjectOutput(insightconnect_plugin_runtime.Output):
           "title": "Message",
           "description": "Message",
           "order": 3
-        }
-      }
-    },
-    "object_action": {
-      "type": "object",
-      "title": "object_action",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/status",
-          "title": "Status",
-          "description": "Status",
-          "order": 1
-        }
-      },
-      "definitions": {
-        "cli": {
-          "type": "object",
-          "title": "cli",
-          "properties": {
-            "configuring": {
-              "type": "boolean",
-              "title": "Configuring",
-              "description": "Configuring",
-              "order": 1
-            },
-            "depth": {
-              "type": "integer",
-              "title": "Depth",
-              "description": "Depth",
-              "order": 2
-            },
-            "mode": {
-              "type": "string",
-              "title": "Mode",
-              "description": "Mode",
-              "order": 3
-            },
-            "pending_config": {
-              "type": "boolean",
-              "title": "Pending Config",
-              "description": "Pending config",
-              "order": 4
-            },
-            "restart_required": {
-              "type": "string",
-              "title": "Restart Required",
-              "description": "Restart required",
-              "order": 5
-            }
-          }
-        },
-        "info": {
-          "type": "object",
-          "title": "info",
-          "properties": {
-            "code": {
-              "type": "string",
-              "title": "Code",
-              "description": "Code",
-              "order": 1
-            },
-            "level": {
-              "type": "string",
-              "title": "Level",
-              "description": "Level",
-              "order": 2
-            },
-            "message": {
-              "type": "string",
-              "title": "Message",
-              "description": "Message",
-              "order": 3
-            }
-          }
-        },
-        "status": {
-          "type": "object",
-          "title": "status",
-          "properties": {
-            "cli": {
-              "$ref": "#/definitions/cli",
-              "title": "CLI",
-              "description": "CLI",
-              "order": 1
-            },
-            "info": {
-              "type": "array",
-              "title": "Info",
-              "description": "Info",
-              "items": {
-                "$ref": "#/definitions/info"
-              },
-              "order": 2
-            },
-            "success": {
-              "type": "boolean",
-              "title": "Success",
-              "description": "Success",
-              "order": 3
-            }
-          },
-          "definitions": {
-            "cli": {
-              "type": "object",
-              "title": "cli",
-              "properties": {
-                "configuring": {
-                  "type": "boolean",
-                  "title": "Configuring",
-                  "description": "Configuring",
-                  "order": 1
-                },
-                "depth": {
-                  "type": "integer",
-                  "title": "Depth",
-                  "description": "Depth",
-                  "order": 2
-                },
-                "mode": {
-                  "type": "string",
-                  "title": "Mode",
-                  "description": "Mode",
-                  "order": 3
-                },
-                "pending_config": {
-                  "type": "boolean",
-                  "title": "Pending Config",
-                  "description": "Pending config",
-                  "order": 4
-                },
-                "restart_required": {
-                  "type": "string",
-                  "title": "Restart Required",
-                  "description": "Restart required",
-                  "order": 5
-                }
-              }
-            },
-            "info": {
-              "type": "object",
-              "title": "info",
-              "properties": {
-                "code": {
-                  "type": "string",
-                  "title": "Code",
-                  "description": "Code",
-                  "order": 1
-                },
-                "level": {
-                  "type": "string",
-                  "title": "Level",
-                  "description": "Level",
-                  "order": 2
-                },
-                "message": {
-                  "type": "string",
-                  "title": "Message",
-                  "description": "Message",
-                  "order": 3
-                }
-              }
-            }
-          }
         }
       }
     },
