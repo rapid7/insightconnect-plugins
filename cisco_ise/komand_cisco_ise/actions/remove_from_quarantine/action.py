@@ -1,6 +1,7 @@
 import komand
 from .schema import RemoveFromQuarantineInput, RemoveFromQuarantineOutput
 # Custom imports below
+import asyncio
 
 
 class RemoveFromQuarantine(komand.Action):
@@ -31,9 +32,10 @@ class RemoveFromQuarantine(komand.Action):
             raise Exception('Unexpected error. See log for more details')
 
         try:
-            for x in results:
-                find = self.connection.ers.get_anc_endpoint(x['id'])
-                if find['ErsAncEndpoint']['macAddress'] == mac_address:
+            ids = [result["id"] for result in results]
+            found = asyncio.run(self.connection.ers.get_anc_endpoints(endpoint_ids=ids))
+            for f in found:
+                if f['ErsAncEndpoint']['macAddress'] == mac_address:
                     self.logger.error(results)
                     raise Exception('{} was not removed. See log for more details'.format(mac_address))
             return {'success': True}

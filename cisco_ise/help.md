@@ -182,6 +182,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.2.2 - Improve performance with coroutines
 * 2.2.1 - New spec and help.md format for the Extension Library
 * 2.2.0 - New action Get ANC Endpoint
 * 2.1.2 - Fixed issue where Query Endpoint would return an error if endpoint was not found | Update to input description for Query Endpoint

@@ -1,7 +1,11 @@
 import requests
 import re
 import json
-from komand.exceptions import ConnectionTestException
+from komand.exceptions import ConnectionTestException, PluginException
+
+import aiohttp
+import asyncio
+from typing import Optional
 
 
 # Class from https://github.com/bobthebutcher/ise/blob/master/cream.py
@@ -81,6 +85,31 @@ class ERS(object):
 
         found_endpoint = resp.json()
         return found_endpoint
+
+    async def _get_anc_endpoint(self, session: aiohttp.ClientSession, endpoint_id: str = "") -> Optional[dict]:
+        url = f"{self.url_base}/config/ancendpoint/{endpoint_id}"
+
+        response = await session.get(url=url)
+        if response.status == 401:
+            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
+        if response.reason == "Not Found":
+            return None
+
+        found_endpoint = await response.json()
+
+        return found_endpoint
+
+    async def get_anc_endpoints(self, endpoint_ids: [str]) -> [Optional[dict]]:
+
+        with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False),
+                                   headers={"ACCEPT": "application/json", "Content-Type": "application/json"}) as sess:
+            tasks: [asyncio.Task] = []
+            for endpoint_id in endpoint_ids:
+                tasks.append(asyncio.ensure_future(self._get_anc_endpoint(session=sess,
+                                                                          endpoint_id=endpoint_id)))
+            endpoints = asyncio.gather(*tasks)
+
+        return endpoints
 
     def get_anc_endpoint(self, endpoint_id='') -> str:
 

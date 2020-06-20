@@ -2,6 +2,7 @@ import komand
 from .schema import QuarantineInput, QuarantineOutput
 from komand.exceptions import ConnectionTestException
 # Custom imports below
+import asyncio
 
 
 class Quarantine(komand.Action):
@@ -31,10 +32,13 @@ class Quarantine(komand.Action):
             raise
 
         try:
-            for x in results:
-                find = self.connection.ers.get_anc_endpoint(x['id'])
-                if find['ErsAncEndpoint']['macAddress'] == mac_address:
-                    return {'ers_anc_endpoint': find['ErsAncEndpoint']}
+            ids = [result["id"] for result in results]
+            found = asyncio.run(self.connection.ers.get_anc_endpoints(endpoint_ids=ids))
+            for f in found:
+                if f['ErsAncEndpoint']['macAddress'] == mac_address:
+                    return {'ers_anc_endpoint': f['ErsAncEndpoint']}
+
+        # TODO: Clean up the below code
         except KeyError:
             self.logger.error('Raw results from ANC endpoint query: ' + str(results))
             self.logger.error('Raw results from ANC endpoint query on IDs: ' + x)

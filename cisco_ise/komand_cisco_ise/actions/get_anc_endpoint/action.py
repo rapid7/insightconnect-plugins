@@ -1,6 +1,7 @@
 import komand
 from .schema import GetAncEndpointInput, GetAncEndpointOutput, Input, Output
 # Custom imports below
+import asyncio
 
 
 class GetAncEndpoint(komand.Action):
@@ -16,10 +17,12 @@ class GetAncEndpoint(komand.Action):
         endpoint_mac = params.get(Input.MAC)
 
         all_endpoints = self.connection.ers.get_anc_endpoint_all()
+
         try:
-            for endpoint in all_endpoints["SearchResult"]["resources"]:
-                results = self.connection.ers.get_anc_endpoint(endpoint["id"])
-                ersanc_endpoint = results["ErsAncEndpoint"]
+            endpoint_ids = [endpoint["id"] for endpoint in all_endpoints["SearchResult"]["resources"]]
+            results = asyncio.run(self.connection.ers.get_anc_endpoints(endpoint_ids=endpoint_ids))
+            for result in results:
+                ersanc_endpoint = result["ErsAncEndpoint"]
                 if "macAddress" in ersanc_endpoint and ersanc_endpoint["macAddress"] == endpoint_mac:
                     return {Output.RESULTS: ersanc_endpoint}
         except Exception as e:
