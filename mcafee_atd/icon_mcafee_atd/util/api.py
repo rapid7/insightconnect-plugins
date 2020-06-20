@@ -34,7 +34,7 @@ class McAfeeATDAPI:
         results = {}
         statuses = submit_hash.get("results", {})
         for submitted_hash, status in statuses.items():
-            results[submitted_hash] = self.STATUSES.get(status, status)
+            results[submitted_hash.lower()] = self.STATUSES.get(status, status)
 
         return results
 
