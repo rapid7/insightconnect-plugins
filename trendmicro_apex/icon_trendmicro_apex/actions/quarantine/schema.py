@@ -4,20 +4,13 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action performs agent actions such as endpoint isolation, restoration, relocation, and uninstalls"
+    DESCRIPTION = "Quarantine (isolate) an endpoint"
 
 
 class Input:
-    ACTION = "action"
-    ALLOW_MULTIPLE_MATCH = "allow_multiple_match"
-    ENTITY_ID = "entity_id"
-    HOST_NAME = "host_name"
-    IP_ADDRESS = "ip_address"
-    MAC_ADDRESS = "mac_address"
-    PRODUCT = "product"
-    RELOCATE_TO_FOLDER_PATH = "relocate_to_folder_path"
-    RELOCATE_TO_SERVER_ID = "relocate_to_server_id"
-    SKIP_IDS = "skip_ids"
+    AGENT = "agent"
+    QUARANTINE_STATE = "quarantine_state"
+    WHITELIST = "whitelist"
     
 
 class Output:
@@ -26,85 +19,37 @@ class Output:
     RESULT_DESCRIPTION = "result_description"
     
 
-class PerformsActionInput(komand.Input):
+class QuarantineInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "action": {
+    "agent": {
       "type": "string",
-      "title": "Action",
-      "description": "Perform action",
-      "enum": [
-        "Isolate",
-        "Restore",
-        "Relocate",
-        "Uninstall"
-      ],
+      "title": "Agent",
+      "description": "Agent ID, hostname, MAC address, or IP address of the agent to perform the action on",
       "order": 1
     },
-    "allow_multiple_match": {
+    "quarantine_state": {
       "type": "boolean",
-      "title": "Allow Multiple Match",
-      "description": "True - Allows multiple matches False - Does not allow multiple matches",
+      "title": "Quarantine State",
+      "description": "True to quarantine host, false to unquarantine host",
       "default": true,
       "order": 2
     },
-    "entity_id": {
-      "type": "string",
-      "title": "Entity ID",
-      "description": "The GUID of the managed product agent. Use to identify the agent(s) on which the action is performed",
-      "order": 3
-    },
-    "host_name": {
-      "type": "string",
-      "title": "Host Name",
-      "description": "The endpoint name of the managed product agent. Use to identify the agent(s) on which the action is performed",
-      "order": 4
-    },
-    "ip_address": {
-      "type": "string",
-      "title": "IP Address",
-      "description": "The IP address of the managed product agent. Use to identify the agent(s) on which the action is performed",
-      "order": 5
-    },
-    "mac_address": {
-      "type": "string",
-      "title": "MAC Address",
-      "description": "The MAC address of the managed product agent. Use to identify the agent(s) on which the action is performed",
-      "order": 6
-    },
-    "product": {
-      "type": "string",
-      "title": "Product",
-      "description": "The Trend Micro product on the server instance. Use to identify the agent(s) on which the action is performed",
-      "order": 7
-    },
-    "relocate_to_folder_path": {
-      "type": "string",
-      "title": "Relocate to Folder Path",
-      "description": "The target directory for the agent",
-      "order": 8
-    },
-    "relocate_to_server_id": {
-      "type": "string",
-      "title": "Relocate to Server ID",
-      "description": "The GUID of the target server for the agent",
-      "order": 9
-    },
-    "skip_ids": {
+    "whitelist": {
       "type": "array",
-      "title": "Skip Entity ID",
-      "description": "Skip entity ids on isolate and uninstall actions",
+      "title": "Whitelist",
+      "description": "This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs",
       "items": {
         "type": "string"
       },
-      "order": 10
+      "order": 3
     }
   },
   "required": [
-    "action"
+    "agent"
   ]
 }
     """)
@@ -113,7 +58,7 @@ class PerformsActionInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class PerformsActionOutput(komand.Output):
+class QuarantineOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
