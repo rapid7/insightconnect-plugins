@@ -18,6 +18,17 @@ class McAfeeATDAPI:
             'Invalid input data': 'Invalid hash value'
         }
 
+    def check_analysis_status(self, task_id: int, type: str):
+        param = "iTaskId"
+        if "job" == type:
+            param = "jobId"
+
+        return self._make_login_request(
+            "GET",
+            "samplestatus.php",
+            params={param: task_id}
+        )
+
     def submit_hash(self, md5_hash: str):
         submit_hash = self._make_login_request(
             "POST",
@@ -59,13 +70,14 @@ class McAfeeATDAPI:
 
         raise ConnectionTestException(ConnectionTestException.Preset.USERNAME_PASSWORD)
 
-    def _make_login_request(self, method: str, path: str, json_data: dict):
+    def _make_login_request(self, method: str, path: str, json_data: dict = None, params: dict = None):
         headers = None
         try:
             headers = self._get_login_headers()
             response = self.mc_afee_request.make_json_request(
                 method,
                 path,
+                params=params,
                 data=json_data,
                 headers=headers
             )

@@ -6,7 +6,7 @@ from icon_mcafee_atd import connection, actions, triggers
 
 Name = "McAfee Advanced Threat Defense"
 Vendor = "rapid7"
-Version = "1.0.0"
+Version = "1.1.0"
 Description = "McAfee Advanced Threat Defense provides an API framework for external applications to access core McAfeeATD functions through the REST protocol"
 
 
@@ -19,6 +19,8 @@ class ICONMcafeeAtd(insightconnect_plugin_runtime.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_action(actions.CheckAnalysisStatus())
+
         self.add_action(actions.SubmitHash())
 
 

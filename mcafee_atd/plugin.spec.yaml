@@ -4,7 +4,7 @@ products: [insightconnect]
 name: mcafee_atd
 title: McAfee Advanced Threat Defense
 description: McAfee Advanced Threat Defense provides an API framework for external applications to access core McAfeeATD functions through the REST protocol
-version: 1.0.0
+version: 1.1.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -22,7 +22,104 @@ hub_tags:
   use_cases: [threat_detection_and_response, reporting_and_analytics]
   keywords: [mcafee, atd, advanced, threat, defense]
   features: []
-
+types:
+  output:
+    userid:
+      title: User ID
+      type: integer
+      description: User ID
+      required: false
+    taskid:
+      title: Task ID
+      type: integer
+      description: Task ID
+      required: false
+    istate:
+      title: Istate
+      type: integer
+      description: Istate
+      required: false
+    status:
+      title: Status
+      type: string
+      description: Status
+      required: false
+    filename:
+      title: Filename
+      type: string
+      description: Filename
+      required: false
+    md5:
+      title: MD5
+      type: string
+      description: MD5
+      required: false
+    vmProfile:
+      title: VM Profile
+      type: string
+      description: VM profile
+      required: false
+    jobid:
+      title: Job ID
+      type: integer
+      description: Job ID
+      required: false
+    submitTime:
+      title: Submit Time
+      type: string
+      description: Submit time
+      required: false
+    summaryFiles:
+      title: Summary Files
+      type: string
+      description: Summary files
+      required: false
+    useLogs:
+      title: Use Logs
+      type: string
+      description: Use logs
+      required: false
+    asmListing:
+      title: Asm Listing
+      type: string
+      description: Asm listing
+      required: false
+    PEInfo:
+      title: PE info
+      type: string
+      description: PE info
+      required: false
+    family:
+      title: Family
+      type: string
+      description: Family
+      required: false
+    vmName:
+      title: VM Name
+      type: string
+      description: VM name
+      required: false
+    vmDesc:
+      title: VM Desc
+      type: string
+      description: VM desc
+      required: false
+  job:
+    status:
+      title: Status
+      type: integer
+      description: Status
+      required: false
+    allEngineState:
+      title: All Engine State
+      type: integer
+      description: All engine state
+      required: false
+    severity:
+      title: Severity
+      type: integer
+      description: Severity
+      required: false
 connection:
   url:
     title: URL
@@ -72,3 +169,38 @@ actions:
         description: Return information about given MD5 Hash
         type: object
         required: true
+  check_analysis_status:
+    title: Check Analysis Status
+    description: Checks the analysis status
+    input:
+      analysis_id:
+        title: Analysis ID
+        description: Task ID or job ID value which is returned in submission step
+        type: integer
+        required: true
+        example: 13
+      type:
+        title: Type
+        description: Type of ID, default value is task
+        type: string
+        required: false
+        default: task
+        enum:
+          - task
+          - job
+    output:
+      success:
+        title: Success
+        description: Success status of analysis ID
+        type: boolean
+        required: false
+      results:
+        title: Results
+        description: Return information about given Task ID
+        type: output
+        required: false
+      job_results:
+        title: Job Results
+        description: Return information about given Job ID
+        type: job
+        required: false
