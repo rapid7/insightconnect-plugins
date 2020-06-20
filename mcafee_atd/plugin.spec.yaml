@@ -52,8 +52,8 @@ connection:
     example: 443
 actions:
   submit_hash:
-    title: Submit Hash
-    description: Action to submit a MD5 Hash and check it's status
+    title: Check Hash Status
+    description: Check if a MD5 hash is blacklisted or whitelisted
     input:
       hash:
         title: MD5 Hash

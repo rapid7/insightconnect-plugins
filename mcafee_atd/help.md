@@ -3,7 +3,7 @@
 
 # Key Features
 
-* Verify blacklisted and whitelisted hash values
+* Check if a hash is blacklisted
 
 # Requirements
 
@@ -11,6 +11,7 @@
 * Base URL for McAfee ATD
 
 # Documentation
+
 ## Setup
 
 The connection configuration accepts the following parameters:
@@ -35,13 +36,14 @@ Example input:
   "verify_ssl": true
 }
 ```
+
 ## Technical Details
 
 ### Actions
 
-#### Submit Hash
+#### Check Hash Status
 
-This action is used to action to submit a MD5 hash and check it's status.
+This action is used to action to check if a user submitted hash value is either blacklisted or whitelisted.
 
 ##### Input
 
