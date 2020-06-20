@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Action to submit a MD5 Hash and check it's status"
+    DESCRIPTION = "Check if a MD5 hash is blacklisted or whitelisted"
 
 
 class Input:
