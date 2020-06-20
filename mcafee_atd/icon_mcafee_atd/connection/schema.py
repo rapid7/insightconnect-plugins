@@ -32,13 +32,13 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "Base URL for the McAfee Advanced Threat Defense",
+      "description": "Base URL for the McAfee Advanced Threat Defense server",
       "order": 1
     },
     "verify_ssl": {
       "type": "boolean",
-      "title": "Verify SSL",
-      "description": "Check the server's SSL certificate",
+      "title": "Verify TLS/SSL",
+      "description": "Verify the server's TLS/SSL certificate",
       "default": true,
       "order": 3
     }

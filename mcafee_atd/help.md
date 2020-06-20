@@ -20,8 +20,8 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Username and password|None|{"username":"user1", "password":"mypassword"}|
 |port|integer|443|False|The port number for provided host|None|443|
-|url|string|None|True|Base URL for the McAfee Advanced Threat Defense|None|https://www.example.com|
-|verify_ssl|boolean|True|False|Check the server's SSL certificate|None|True|
+|url|string|None|True|Base URL for the McAfee Advanced Threat Defense server|None|https://www.example.com|
+|verify_ssl|boolean|True|False|Verify the server's TLS/SSL certificate|None|True|
 
 Example input:
 
