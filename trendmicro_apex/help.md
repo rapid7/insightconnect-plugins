@@ -757,6 +757,7 @@ For example, the agent / endpoint actions require that the Apex Endpoint Sensor 
 
 # Version History
 
+* 3.0.1 - Fix too many slash in url
 * 3.0.0 - Update action Add to UDSO List to Blacklist
 * 2.0.0 - Update action Execute Agent Action to Quarantine
 * 1.1.0 - New actions Get Agent Status, Search Agents, List OpenIOC Files, Download the RCA CSV File, Upload OpenIOC File, Delete OpenIOC File, Download OpenIOC File, Get Investigation, Terminate Process, and Execute Agent Action

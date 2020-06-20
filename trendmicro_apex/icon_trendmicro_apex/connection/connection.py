@@ -27,7 +27,7 @@ class Connection(komand.Connection):
     def connect(self, params):
         self.api_key = params.get(Input.API_KEY).get('secretKey')
         self.application_id = params.get(Input.APPLICATION_ID).get('secretKey')
-        self.url = params.get(Input.URL)
+        self.url = params.get(Input.URL).rstrip("/")
         self.api = Api(self)
 
     def create_jwt_token(self, api_path, http_method, request_body):
