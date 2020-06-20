@@ -1,5 +1,6 @@
 # Description
-[McAfee Advanced Threat Defense](https://www.mcafee.com/enterprise/en-us/products/advanced-threat-defense.html) provides an API framework for external applications to access core McAfeeATD functions through the REST protocol
+
+[McAfee Advanced Threat Defense](https://www.mcafee.com/enterprise/en-us/products/advanced-threat-defense.html) provides an API framework for external applications to access core McAfeeATD functions through the REST protocol.
 
 # Key Features
 
@@ -43,7 +44,7 @@ Example input:
 
 #### Check Hash Status
 
-This action is used to action to check if a user submitted hash value is either blacklisted or whitelisted.
+This action is used to check if a user submitted hash value is either blacklisted or whitelisted.
 
 ##### Input
 
@@ -84,6 +85,7 @@ _This plugin does not contain any triggers._
 ### Custom Output Types
 
 _This plugin does not contain any custom output types._
+
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
