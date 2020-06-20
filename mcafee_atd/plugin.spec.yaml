@@ -26,7 +26,7 @@ hub_tags:
 connection:
   url:
     title: URL
-    description: Base URL for the McAfee Advanced Threat Defense
+    description: Base URL for the McAfee Advanced Threat Defense server
     type: string
     required: true
     example: https://www.example.com
@@ -37,9 +37,9 @@ connection:
     required: true
     example: '{"username":"user1", "password":"mypassword"}'
   verify_ssl:
-    title: Verify SSL
+    title: Verify TLS/SSL
     type: boolean
-    description: Check the server's SSL certificate
+    description: Verify the server's TLS/SSL certificate
     default: true
     required: false
     example: true
