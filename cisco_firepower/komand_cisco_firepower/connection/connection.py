@@ -53,7 +53,11 @@ class Connection(komand.Connection):
             message_type = MessageType.DATA_PAYLOAD_LENGTH
             msg_details = MessageDetails(message_type, len(data), data)
             response = self.__send_data(msg_details, timeout)
-            error, commands = self.__parse_response(response)
+            if response:
+                error, commands = self.__parse_response(response)
+            else:
+                error = 0
+                commands = 0
             total_commands += commands
             if error:
                 error_count += 1
@@ -68,8 +72,10 @@ class Connection(komand.Connection):
     def read(self, timeout=300):
         self.logger.info("Connect: Reading from socket...")
         msg_details = self.__get_message_details(timeout)
-        data = self.__connection.recv(msg_details.msg_length)
-        data = data.decode('UTF-8')
+        data = None
+        if msg_details.data or msg_details.msg_length or msg_details.msg_type:
+            data = self.__connection.recv(msg_details.msg_length)
+            data = data.decode('UTF-8')
         return data
 
     def test_connection(self):

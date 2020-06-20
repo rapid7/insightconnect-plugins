@@ -31,12 +31,17 @@ class ScanResults(object):
         source_id = details.get('source_id', '')
         command += generate_set_source_command(source_id)
         command += generate_add_result_command(details, address)
+        command = command.strip() + "\n"
         if not new_host:
             command += self.FOOTER
         else:
             command += operation
             command += "\n"
-        self.__add_command(command)
+        print(f"****************************")
+        print(f"type: {type(command)}")
+        print(f"command: {command}")
+        print(f"****************************")
+        self.__add_command(str(command))
 
     def __add_command(self, command):
         current_index = len(self.commands) - 1
