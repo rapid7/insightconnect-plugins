@@ -201,7 +201,7 @@ actions:
         description: Name of address group to check
         type: string
         required: true
-        example: BlockList
+        example: group
       address:
         title: Address
         description: Address Object name, or IP, CIDR, or domain name when Enable Search is on
@@ -214,7 +214,7 @@ actions:
         type: boolean
         default: false
         required: false
-        example: false
+        example: true
     output:
       found:
         title: Found

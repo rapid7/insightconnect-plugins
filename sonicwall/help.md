@@ -52,16 +52,16 @@ This action is used to check that HOST is in address group.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |address|string|None|True|Address Object name, or IP, CIDR, or domain name when Enable Search is on|None|example.com|
-|enable_search|boolean|False|False|Search for contents of Address Objects for IP, CIDR or domain|None|False|
-|group|string|None|True|Name of address group to check|None|BlockList|
+|enable_search|boolean|False|False|Search for contents of Address Objects for IP, CIDR or domain|None|True|
+|group|string|None|True|Name of address group to check|None|group|
 
 Example input:
 
 ```
 {
   "address": "example.com",
-  "enable_search": false,
-  "group": "BlockList"
+  "enable_search": true,
+  "group": "group"
 }
 ```
 
@@ -75,6 +75,18 @@ Example input:
 Example output:
 
 ```
+{
+  "found": true,
+  "objects": [
+    {
+      "dns_ttl": 0,
+      "domain": "example.com",
+      "name": "qwerty",
+      "uuid": "00000000-0000-0001-0100-00401034ea00",
+      "zone": "DMZ"
+    }
+  ]
+}
 ```
 
 #### Delete Address Object
