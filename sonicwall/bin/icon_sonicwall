@@ -6,7 +6,7 @@ from icon_sonicwall import connection, actions, triggers
 
 Name = "SonicWall Firewall"
 Vendor = "rapid7"
-Version = "1.1.0"
+Version = "1.2.0"
 Description = "Manage firewalls and block hosts with SonicWall firewalls"
 
 
@@ -20,6 +20,8 @@ class ICONSonicwall(insightconnect_plugin_runtime.Plugin):
                 connection=connection.Connection()
                 )
         self.add_action(actions.AddAddressObjectToGroup())
+
+        self.add_action(actions.CheckIfAddressInAddressGroup())
 
         self.add_action(actions.CreateAddressObject())
 

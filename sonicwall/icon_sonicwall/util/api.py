@@ -1,7 +1,7 @@
-import requests
-from insightconnect_plugin_runtime.exceptions import PluginException
 import json
+import requests
 from collections import OrderedDict
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class SonicWallAPI:
@@ -19,33 +19,55 @@ class SonicWallAPI:
         self._call_api("DELETE", "auth", auth=(self.username, self.password))
 
     def get_object_type(self, name):
-        self.login()
-        for object_type in ["fqdn", "mac", "ipv6", "ipv4"]:
-            try:
-                if self._call_api("get", f"address-objects/{object_type}/name/{name}"):
-                    return object_type
-            except PluginException as _:
-                continue
+        return self.get_address_object(name).get("object_type")
 
-        self.logout()
-        raise PluginException(cause="The address object does not exist in SonicWall.",
-                              assistance="Please enter valid names and try again.")
-
-    def get_group_type(self, name):
+    def get_group(self, name):
         try:
-            if self._make_request("get", f"address-groups/ipv4/name/{name}"):
-                return "ipv4"
+            response = self._make_request("get", f"address-groups/ipv4/name/{name}")
+            if response:
+                return response
         except PluginException as _:
             pass
 
         try:
-            if self._make_request("get", f"address-groups/ipv6/name/{name}"):
-                return "ipv6"
+            response = self._make_request("get", f"address-groups/ipv6/name/{name}")
+            if response:
+                return response
         except PluginException as _:
             pass
 
         raise PluginException(cause="The address group does not exist in SonicWall.",
                               assistance="Please enter valid names and try again.")
+
+    def get_group_type(self, name):
+        group = self.get_group(name)
+        for groups in group.get('address_group', {}):
+            if 'ipv4' in groups:
+                return 'ipv4'
+            if 'ipv6' in groups:
+                return 'ipv6'
+
+        raise PluginException(cause="The address group does not exist in SonicWall.",
+                              assistance="Please enter valid names and try again.")
+
+    def get_address_object(self, name):
+        self.login()
+        for object_type in ["fqdn", "mac", "ipv6", "ipv4"]:
+            try:
+                address_object = self._call_api("get", f"address-objects/{object_type}/name/{name}")
+                if address_object:
+                    return {
+                        "object_type": object_type,
+                        "address_object": address_object
+                    }
+            except PluginException as _:
+                continue
+
+        self.logout()
+        raise PluginException(
+            cause="The address object does not exist in SonicWall.",
+            assistance="Please enter valid names and try again."
+        )
 
     def add_address_object_to_group(self, group_type, group_name, payload):
         return self._make_request("put", f"address-groups/{group_type}/name/{group_name}", json_data=payload)
@@ -60,12 +82,12 @@ class SonicWallAPI:
 
     def validate_if_zone_exists(self, zone_name):
         self.login()
-        try: 
+        try:
             if self._call_api("get", f"zones/name/{zone_name}"):
                 return True
         except PluginException as _:
             raise PluginException(cause=f"The zone: {zone_name} does not exist in SonicWall.",
-                              assistance="Please enter valid zone name and try again.")
+                                  assistance="Please enter valid zone name and try again.")
         finally:
             self.logout()
 

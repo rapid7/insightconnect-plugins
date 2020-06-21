@@ -43,6 +43,52 @@ Example input:
 
 ### Actions
 
+#### Check if Address in Group
+
+This action is used to check that a host or address object is in an address group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|Address Object name, or IP, CIDR, or domain name when Enable Search is set to true|None|MaliciousHost|
+|enable_search|boolean|False|False|When enabled, search for contents of Address Objects for an IP, CIDR or domain. This is useful when you don’t know the Address Object by its name|None|True|
+|group|string|None|True|Name of address group to check|None|ICON Block List|
+
+Example input:
+
+```
+{
+  "address": "MaliciousHost",
+  "enable_search": true,
+  "group": "ICON Block List"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|address_objects|[]object|False|The names and details of the address objects that match or contain the address|
+|found|boolean|True|Return true if address was found in group, return false if not found|
+
+Example output:
+
+```
+{
+  "found": true,
+  "address_objects": [
+    {
+      "dns_ttl": 0,
+      "domain": "example.com",
+      "name": "ICON Block List",
+      "uuid": "00000000-0000-0001-0100-00401034ea00",
+      "zone": "DMZ"
+    }
+  ]
+}
+```
+
 #### Delete Address Object
 
 This action deletes an address object that has an exact match for the name.
@@ -247,6 +293,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.0 - New action Check If Address In Address Group
 * 1.1.0 - New actions Create Address Object and Delete Address Object
 * 1.0.0 - Initial plugin
 
