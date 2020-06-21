@@ -4,11 +4,12 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Wipe device by device name, user ID, email address, or device ID if it is not whitelisted"
+    DESCRIPTION = "Perform action on device by device name, user ID, email address, or device ID if it is not whitelisted"
 
 
 class Input:
     DEVICE = "device"
+    TYPE = "type"
     WHITELIST = "whitelist"
     
 
@@ -16,7 +17,7 @@ class Output:
     SUCCESS = "success"
     
 
-class WipeInput(insightconnect_plugin_runtime.Input):
+class ManageDeviceInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -28,18 +29,32 @@ class WipeInput(insightconnect_plugin_runtime.Input):
       "description": "Device name, user ID, email address, or device ID",
       "order": 1
     },
+    "type": {
+      "type": "string",
+      "title": "Type",
+      "description": "Type of action",
+      "enum": [
+        "Shutdown",
+        "Reboot",
+        "Sync",
+        "Reset PassCode",
+        "Lock"
+      ],
+      "order": 2
+    },
     "whitelist": {
       "type": "array",
       "title": "Whitelist",
-      "description": "This list contains a set of of device names, user IDs, email addresses, or device IDs that a user can pass in that will not be wiped",
+      "description": "This list contains a set of of device names, user IDs, email addresses, or device IDs that action will not be performed on",
       "items": {
         "type": "string"
       },
-      "order": 2
+      "order": 3
     }
   },
   "required": [
-    "device"
+    "device",
+    "type"
   ]
 }
     """)
@@ -48,7 +63,7 @@ class WipeInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class WipeOutput(insightconnect_plugin_runtime.Output):
+class ManageDeviceOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
@@ -57,7 +72,7 @@ class WipeOutput(insightconnect_plugin_runtime.Output):
     "success": {
       "type": "boolean",
       "title": "Success",
-      "description": "Return true if device was successfully wiped",
+      "description": "Return true if action was successfully performed on device",
       "order": 1
     }
   },

@@ -28,6 +28,18 @@ class MicrosoftIntuneAPI:
             }
         )
 
+    def managed_device_action(self, device_id: str, action: str):
+        if "Shutdown" == action:
+            return self._call_api("GET", f"deviceManagement/managedDevices/{device_id}/shutDown")
+        if "Reboot" == action:
+            return self._call_api("GET", f"deviceManagement/managedDevices/{managed_device}/rebootNow")
+        if "Sync" == action:
+            return self._call_api("GET", f"deviceManagement/managedDevices/{managed_device}/syncDevice")
+        if "Reset PassCode" == action:
+            return self._call_api("GET", f"deviceManagement/managedDevices/{managed_device}/resetPasscode")
+        if "Lock" == action:
+            return self._call_api("GET", f"deviceManagement/managedDevices/{managed_device}/remoteLock")
+
     def search_managed_devices(self, device):
         if validators.uuid(device):
             return list(filter(lambda iter_device: iter_device['userId'] == device or iter_device['id'] == device,
@@ -134,11 +146,6 @@ class MicrosoftIntuneAPI:
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
     def get_device_by_uuid_if_not_whitelisted(self, device, whitelist):
-        if not validators.uuid(device):
-            raise PluginException(
-                cause=f"Managed device ID: {device} is not valid UUID",
-                assistance="Contact support for help. See log for more details"
-            )
         device_response = self.search_managed_devices(device)
 
         if not device_response:

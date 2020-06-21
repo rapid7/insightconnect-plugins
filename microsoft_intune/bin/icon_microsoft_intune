@@ -6,7 +6,7 @@ from icon_microsoft_intune import connection, actions, triggers
 
 Name = "Microsoft Intune"
 Vendor = "rapid7"
-Version = "1.0.0"
+Version = "1.1.0"
 Description = "Microsoft cloud-based management solution that provides for mobile device and operating system management"
 
 
@@ -20,6 +20,12 @@ class ICONMicrosoftIntune(insightconnect_plugin_runtime.Plugin):
                 connection=connection.Connection()
                 )
         self.add_action(actions.AntivirusScan())
+
+        self.add_action(actions.ManageDevice())
+
+        self.add_action(actions.SearchDevices())
+
+        self.add_action(actions.Wipe())
 
 
 def main():
