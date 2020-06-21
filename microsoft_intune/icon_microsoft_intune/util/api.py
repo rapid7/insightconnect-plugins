@@ -99,7 +99,7 @@ class MicrosoftIntuneAPI:
             return self._handle_json_to_dict(response)
         elif response.status_code == 400:
             raise PluginException(
-                cause="Bad request. URL or parameters were invalid",
+                cause="Bad request. URL or parameters were invalid.",
                 assistance="If the issue persists please contact support.",
                 data=response.text
             )
