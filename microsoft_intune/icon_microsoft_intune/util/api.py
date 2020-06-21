@@ -16,6 +16,18 @@ class MicrosoftIntuneAPI:
         self.logger = logger
         self.access_token = None
 
+    def wipe_managed_device(self, managed_device_id, keep_enrollment_data=None, keep_user_data=None,
+                            mac_os_unlock_code=None):
+        return self._call_api(
+            "POST",
+            f"deviceManagement/managedDevices/{managed_device_id}/wipe",
+            request_body={
+                "keepEnrollmentData": keep_enrollment_data,
+                "keepUserData": keep_user_data,
+                "macOsUnlockCode": mac_os_unlock_code
+            }
+        )
+
     def search_managed_devices(self, device):
         if validators.uuid(device):
             return list(filter(lambda iter_device: iter_device['userId'] == device or iter_device['id'] == device,
@@ -62,11 +74,13 @@ class MicrosoftIntuneAPI:
         )
         if 200 <= response.status_code < 300:
             token = self._handle_json_to_dict(response)["access_token"]
-            self.logger.info(f"Access Token: ********************{str(token[len(token) - 5:len(token)])}")
+            self.logger.info(f"Access Token: ******************** {str(token[len(token) - 5:len(token)])}")
             return token
         if response.status_code == 400:
-            raise PluginException(cause="Could not authenticate user. Please make sure your connection data is valid.",
-                                  assistance="If the issue persists please contact support.")
+            raise PluginException(
+                cause="Could not authenticate user. Please make sure your connection data is valid.",
+                assistance="If the issue persists please contact support."
+            )
 
         raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
@@ -84,9 +98,11 @@ class MicrosoftIntuneAPI:
         if 200 <= response.status_code < 300:
             return self._handle_json_to_dict(response)
         elif response.status_code == 400:
-            raise PluginException(cause="Bad request. URL or parameters were invalid",
-                                  assistance="If the issue persists please contact support.",
-                                  data=response.text)
+            raise PluginException(
+                cause="Bad request. URL or parameters were invalid",
+                assistance="If the issue persists please contact support.",
+                data=response.text
+            )
         elif response.status_code == 401 and retry_on_unauthenticated is True:
             self.logger.info("Token expired, reauthenticating...")
             self.refresh_access_token()
@@ -102,7 +118,7 @@ class MicrosoftIntuneAPI:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
 
     def _request(self, method, url, params=None, request_body=None, headers=None, data=None):
-        self.logger.info(f"[Calling api] method: {method} url: {url}")
+        self.logger.debug(f"[Calling api] method: {method}, url: {url}")
 
         try:
             return requests.request(
