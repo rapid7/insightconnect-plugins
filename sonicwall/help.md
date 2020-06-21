@@ -22,7 +22,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Username and password|None|{"username":"user1", "password":"mypassword"}|
 |port|integer|443|False|The port number for provided host|None|443|
-|url|string|None|True|Base URL for the SonicWall endpoint|None|https://www.example.com|
+|url|string|None|True|Base URL for the SonicWall firewall|None|https://www.example.com|
 |verify_ssl|boolean|True|False|Check the server's SSL certificate|None|True|
 
 Example input:
@@ -42,6 +42,40 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Check If Address In Address Group
+
+This action is used to check that HOST is in address group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|Address Object name, or IP, CIDR, or domain name when Enable Search is on|None|example.com|
+|enable_search|boolean|False|False|Search for contents of Address Objects for IP, CIDR or domain|None|False|
+|group|string|None|True|Name of address group to check|None|BlockList|
+
+Example input:
+
+```
+{
+  "address": "example.com",
+  "enable_search": false,
+  "group": "BlockList"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|found|boolean|True|Return true if found, return false if not found|
+|objects|[]string|True|List of object names that the address was found in|
+
+Example output:
+
+```
+```
 
 #### Delete Address Object
 
@@ -247,6 +281,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.0 - New action Check If Address In Address Group
 * 1.1.0 - New actions Create Address Object and Delete Address Object
 * 1.0.0 - Initial plugin
 

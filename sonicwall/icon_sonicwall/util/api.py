@@ -2,6 +2,7 @@ import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 from collections import OrderedDict
+import validators
 
 
 class SonicWallAPI:
@@ -31,21 +32,45 @@ class SonicWallAPI:
         raise PluginException(cause="The address object does not exist in SonicWall.",
                               assistance="Please enter valid names and try again.")
 
-    def get_group_type(self, name):
+    def get_group(self, name):
         try:
-            if self._make_request("get", f"address-groups/ipv4/name/{name}"):
-                return "ipv4"
+            response = self._make_request("get", f"address-groups/ipv4/name/{name}")
+            if response:
+                return response
         except PluginException as _:
             pass
 
         try:
-            if self._make_request("get", f"address-groups/ipv6/name/{name}"):
-                return "ipv6"
+            response = self._make_request("get", f"address-groups/ipv6/name/{name}")
+            if response:
+                return response
         except PluginException as _:
             pass
 
         raise PluginException(cause="The address group does not exist in SonicWall.",
                               assistance="Please enter valid names and try again.")
+
+    def get_group_type(self, name):
+        group = self.get_group(name)
+        for groups in group.get('address_groups', []):
+            if 'ipv4' in groups:
+                return 'ipv4'
+            if 'ipv6' in groups:
+                return 'ipv6'
+
+        raise PluginException(cause="The address group does not exist in SonicWall.",
+                              assistance="Please enter valid names and try again.")
+
+    def get_address_object(self, address_object):
+        object_type = "fqdn"
+        if validators.mac_address(address_object):
+            object_type = "mac"
+        elif validators.ipv4(address_object):
+            object_type = "ipv4"
+        elif validators.ipv6(address_object):
+            object_type = "ipv6"
+
+        return self._make_request("get", f"address-groups/{object_type}/name/{name}")
 
     def add_address_object_to_group(self, group_type, group_name, payload):
         return self._make_request("put", f"address-groups/{group_type}/name/{group_name}", json_data=payload)

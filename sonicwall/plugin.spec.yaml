@@ -4,7 +4,7 @@ products: [insightconnect]
 name: sonicwall
 title: SonicWall Firewall
 description: Manage firewalls and block hosts with SonicWall firewalls
-version: 1.1.0
+version: 1.2.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -192,3 +192,37 @@ actions:
         description: Returns information about creating new address object
         type: status
         required: false
+  check_if_address_in_address_group:
+    title: Check If Address In Address Group
+    description: Check that HOST is in address group
+    input:
+      group:
+        title: Group
+        description: Name of address group to check
+        type: string
+        required: true
+        example: BlockList
+      address:
+        title: Address
+        description: Address Object name, or IP, CIDR, or domain name when Enable Search is on
+        type: string
+        required: true
+        example: example.com
+      enable_search:
+        title: Enable Search
+        description: Search for contents of Address Objects for IP, CIDR or domain
+        type: boolean
+        default: false
+        required: false
+        example: false
+    output:
+      found:
+        title: Found
+        description: Return true if found, return false if not found
+        type: boolean
+        required: true
+      objects:
+        title: Objects
+        description: List of object names that the address was found in
+        type: "[]string"
+        required: true
