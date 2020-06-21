@@ -584,36 +584,3 @@ actions:
         description: Return true if device was successfully wiped
         type: boolean
         required: true
-  manage_device:
-    title: Manage Device
-    description: Perform action on device by device name, user ID, email address, or device ID if it is not whitelisted
-    input:
-      device:
-        title: Device
-        description: Device name, user ID, email address, or device ID
-        type: string
-        required: true
-        example: aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa
-      type:
-        title: Type
-        description: Type of action
-        type: string
-        required: true
-        enum:
-          - Shutdown
-          - Reboot
-          - Sync
-          - Reset PassCode
-          - Lock
-      whitelist:
-        title: Whitelist
-        description: This list contains a set of of device names, user IDs, email addresses, or device IDs that action will not be performed on
-        type: "[]string"
-        required: false
-        example: ["user@example.com", "705c034c-034c-705c-4c03-5c704c035c70"]
-    output:
-      success:
-        title: Success
-        description: Return true if action was successfully performed on device
-        type: boolean
-        required: true
