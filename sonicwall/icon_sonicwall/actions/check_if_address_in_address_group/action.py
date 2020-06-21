@@ -37,7 +37,11 @@ class CheckIfAddressInAddressGroup(insightconnect_plugin_runtime.Action):
                 response = self.connection.sonicwall_api.get_address_object(object_from_group.get("name"))
                 object_type = response.get("object_type", {})
                 address_object = response.get("address_object", {}).get("address_object").get(object_type)
-                if name.replace(":", "") == address_object.get("address") or name == address_object.get("host", {}).get("ip") or name == address_object.get("domain"):
+                upper_name = name.upper()
+                if upper_name == address_object.get("address", "").upper()\
+                        or upper_name.replace(":", "") == address_object.get("address", "").upper()\
+                        or upper_name == address_object.get("host", {}).get("ip", "").upper()\
+                        or upper_name == address_object.get("domain", "").upper():
                     objects_matching.append(address_object)
 
         return {
