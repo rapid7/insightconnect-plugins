@@ -224,5 +224,5 @@ actions:
       objects:
         title: Objects
         description: List of object names that the address was found in
-        type: "[]string"
+        type: "[]object"
         required: true
