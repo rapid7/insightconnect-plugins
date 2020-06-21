@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Check that HOST is in address group"
+    DESCRIPTION = "Check that a host or address object is in an address group"
 
 
 class Input:
@@ -27,19 +27,19 @@ class CheckIfAddressInAddressGroupInput(insightconnect_plugin_runtime.Input):
     "address": {
       "type": "string",
       "title": "Address",
-      "description": "Address Object name, or IP, CIDR, or domain name when Enable Search is on",
+      "description": "Address Object name, or IP, CIDR, or domain name when Enable Search is set to true",
       "order": 2
     },
     "enable_search": {
       "type": "boolean",
       "title": "Enable Search",
-      "description": "Search for contents of Address Objects for IP, CIDR or domain",
+      "description": "When enabled, search for contents of Address Objects for an IP, CIDR or domain. This is useful when you don’t know the Address Object by its name",
       "default": false,
       "order": 3
     },
     "group": {
       "type": "string",
-      "title": "Group",
+      "title": "Group Name",
       "description": "Name of address group to check",
       "order": 1
     }

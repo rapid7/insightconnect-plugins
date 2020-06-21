@@ -43,25 +43,25 @@ Example input:
 
 ### Actions
 
-#### Check If Address in Address Group
+#### Check if Address in Group
 
-This action is used to check that HOST is in address group.
+This action is used to check that a host or address object is in an address group.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|Address Object name, or IP, CIDR, or domain name when Enable Search is on|None|example.com|
-|enable_search|boolean|False|False|Search for contents of Address Objects for IP, CIDR or domain|None|True|
-|group|string|None|True|Name of address group to check|None|group|
+|address|string|None|True|Address Object name, or IP, CIDR, or domain name when Enable Search is set to true|None|MaliciousHost|
+|enable_search|boolean|False|False|When enabled, search for contents of Address Objects for an IP, CIDR or domain. This is useful when you don’t know the Address Object by its name|None|True|
+|group|string|None|True|Name of address group to check|None|ICON Block List|
 
 Example input:
 
 ```
 {
-  "address": "example.com",
+  "address": "MaliciousHost",
   "enable_search": true,
-  "group": "group"
+  "group": "ICON Block List"
 }
 ```
 
