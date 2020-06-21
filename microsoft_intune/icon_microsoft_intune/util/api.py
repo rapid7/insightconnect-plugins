@@ -118,7 +118,7 @@ class MicrosoftIntuneAPI:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
 
     def _request(self, method, url, params=None, request_body=None, headers=None, data=None):
-        self.logger.debug(f"[Calling api] method: {method}, url: {url}")
+        self.logger.debug(f"[Calling API] method: {method}, url: {url}")
 
         try:
             return requests.request(
