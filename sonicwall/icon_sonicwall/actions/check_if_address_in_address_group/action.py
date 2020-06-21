@@ -18,7 +18,6 @@ class CheckIfAddressInAddressGroup(insightconnect_plugin_runtime.Action):
         objects_matching = []
         name = params.get(Input.ADDRESS)
 
-        # get address group and from that obtain all address object names assigned to that group
         address_group = self.connection.sonicwall_api.get_group(params.get(Input.GROUP))
         address_objects_names = []
         for ip in ['ipv4', 'ipv6']:

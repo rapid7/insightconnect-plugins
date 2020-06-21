@@ -41,7 +41,7 @@ class SonicWallAPI:
 
     def get_group_type(self, name):
         group = self.get_group(name)
-        for groups in group.get('address_groups', []):
+        for groups in group.get('address_group', {}):
             if 'ipv4' in groups:
                 return 'ipv4'
             if 'ipv6' in groups:
