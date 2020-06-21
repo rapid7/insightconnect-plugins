@@ -1,10 +1,6 @@
 import insightconnect_plugin_runtime
-
 from .schema import WipeInput, WipeOutput, Input, Output, Component
 # Custom imports below
-from icon_microsoft_intune.util.utils import Utils
-import validators
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class Wipe(insightconnect_plugin_runtime.Action):
@@ -17,9 +13,8 @@ class Wipe(insightconnect_plugin_runtime.Action):
             output=WipeOutput())
 
     def run(self, params={}):
-        device = Utils.get_device_by_uuid_if_not_whitelisted(
+        device = self.connection.api.get_device_by_uuid_if_not_whitelisted(
             params.get(Input.DEVICE),
-            self.connection.api.search_managed_devices,
             params.get(Input.WHITELIST)
         )
 
