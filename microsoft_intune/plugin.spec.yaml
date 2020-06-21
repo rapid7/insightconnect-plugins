@@ -532,7 +532,7 @@ actions:
         description: Search devices by either of - device name, user ID, email address, device ID
         type: string
         required: true
-        example: aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa
+        example: 547a48e3-0942-4888-acf1-a92b7fb19ef9
     output:
       devices:
         title: Devices
@@ -571,7 +571,7 @@ actions:
         description: Device name, user ID, email address, or device ID
         type: string
         required: true
-        example: aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa
+        example: 547a48e3-0942-4888-acf1-a92b7fb19ef9
       whitelist:
         title: Whitelist
         description: This list contains a set of of device names, user IDs, email addresses, or device IDs that a user can pass in that will not be wiped

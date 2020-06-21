@@ -51,13 +51,14 @@ Example input:
   "url": "https://graph.microsoft.com"
 }
 ```
+
 ## Technical Details
 
 ### Actions
 
 #### Wipe
 
-This action is used to wipe device by ID if it is not whitelisted.
+This action is used to wipe device by device name, device ID, user ID, or email address. It supports a whitelist to skip critical devices that should never be whitelisted.
 
 ##### Input
 
@@ -70,7 +71,7 @@ Example input:
 
 ```
 {
-  "device": "aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa",
+  "device": "547a48e3-0942-4888-acf1-a92b7fb19ef9",
   "whitelist": [
     "user@example.com",
     "705c034c-034c-705c-4c03-5c704c035c70"
@@ -106,7 +107,7 @@ Example input:
 
 ```
 {
-  "device": "aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa"
+  "device": "547a48e3-0942-4888-acf1-a92b7fb19ef9"
 }
 ```
 
@@ -143,7 +144,7 @@ Example output:
       "emailAddress": "user@example.com",
       "imei": "",
       "activationLockBypassCode": null,
-      "managedDeviceName": "jschipp_Windows_6/12/2020_1:52 PM",
+      "managedDeviceName": "user1_Windows_6/12/2020_1:52 PM",
       "managementAgent": "mdm",
       "deviceActionResults": [],
       "deviceHealthAttestationState": null,
@@ -164,7 +165,7 @@ Example output:
       "easActivated": false,
       "exchangeAccessStateReason": "none",
       "exchangeLastSuccessfulSyncDateTime": "0001-01-01T00:00:00Z",
-      "userDisplayName": "Jon Schipp",
+      "userDisplayName": "User1",
       "deviceRegistrationState": "registered",
       "easDeviceId": "",
       "managedDeviceOwnerType": "company",
