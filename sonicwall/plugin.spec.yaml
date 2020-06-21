@@ -88,7 +88,7 @@ types:
 connection:
   url:
     title: URL
-    description: Base URL for the SonicWall firewall
+    description: Base URL for the SonicWall endpoint
     type: string
     required: true
     example: https://www.example.com
@@ -193,7 +193,7 @@ actions:
         type: status
         required: false
   check_if_address_in_address_group:
-    title: Check If Address In Address Group
+    title: Check If Address in Address Group
     description: Check that HOST is in address group
     input:
       group:

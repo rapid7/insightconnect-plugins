@@ -22,7 +22,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Username and password|None|{"username":"user1", "password":"mypassword"}|
 |port|integer|443|False|The port number for provided host|None|443|
-|url|string|None|True|Base URL for the SonicWall firewall|None|https://www.example.com|
+|url|string|None|True|Base URL for the SonicWall endpoint|None|https://www.example.com|
 |verify_ssl|boolean|True|False|Check the server's SSL certificate|None|True|
 
 Example input:
@@ -43,7 +43,7 @@ Example input:
 
 ### Actions
 
-#### Check If Address In Address Group
+#### Check If Address in Address Group
 
 This action is used to check that HOST is in address group.
 
@@ -70,7 +70,7 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |found|boolean|True|Return true if found, return false if not found|
-|objects|[]string|True|List of object names that the address was found in|
+|objects|[]object|True|List of object names that the address was found in|
 
 Example output:
 

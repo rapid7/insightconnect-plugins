@@ -72,7 +72,7 @@ class CheckIfAddressInAddressGroupOutput(insightconnect_plugin_runtime.Output):
       "title": "Objects",
       "description": "List of object names that the address was found in",
       "items": {
-        "type": "string"
+        "type": "object"
       },
       "order": 2
     }
