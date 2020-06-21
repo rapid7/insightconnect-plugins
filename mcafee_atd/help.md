@@ -5,6 +5,7 @@
 # Key Features
 
 * Check if a hash is blacklisted
+* Check the analysis status
 
 # Requirements
 
@@ -41,6 +42,59 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Check Analysis Status
+
+This action checks the analysis status.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|analysis_id|integer|None|True|Task ID or job ID value which is returned in submission step|None|13|
+|type|string|task|False|Type of ID, default value is task|['task', 'job']|None|
+
+Example input:
+
+```
+{
+  "analysis_id": 13
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|job_results|job|False|Return information about given Job ID|
+|results|output|False|Return information about given Task ID|
+|success|boolean|False|Success status of analysis ID|
+
+Example output:
+
+```
+{
+  "results": {
+    "PEInfo": "0",
+    "asmListing": "0",
+    "family": "0",
+    "filename": "test.txt",
+    "istate": 1,
+    "jobid": 13,
+    "md5": "0B47F671BC6328623DFA10851D418E55",
+    "status": "Completed",
+    "submitTime": "2020-06-20 19: 11: 44",
+    "summaryFiles": "0",
+    "taskid": 13,
+    "useLogs": "0",
+    "userid": 1,
+    "vmDesc": "Only Down Selectors",
+    "vmName": "Analyzer Profile 1",
+    "vmProfile": "1"
+  },
+  "success": true
+}
+```
 
 #### Check Hash Status
 
@@ -92,6 +146,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - New action Check Analysis Status
 * 1.0.0 - Initial plugin
 
 # Links
