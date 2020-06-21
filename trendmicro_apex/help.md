@@ -31,7 +31,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|API key paired with the Application ID e.g. CU1874A2-G782-47X1-B6J3-1014A92624BC|None|CU1874A2-G782-47X1-B6J3-1014A92624BC|
 |application_id|credential_secret_key|None|True|Application ID to communicate to the Apex Security Manager e.g. 909D88H7-3458-42RN-92FF-012V3CU3D294|None|909D88H7-3458-42RN-92FF-012V3CU3D294|
-|url|string|None|True|URL of the Apex Security Manager. Port can be specified as well e.g. https://example.com:443|None|https://example.manage.trendmicro.com|
+|url|string|None|True|URL of the Apex Security Manager e.g. https://example.manage.trendmicro.com, the port can be specified as well with a colon|None|https://example.manage.trendmicro.com|
 
 Example input:
 
