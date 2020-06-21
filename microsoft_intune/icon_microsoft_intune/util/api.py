@@ -139,7 +139,7 @@ class MicrosoftIntuneAPI:
         if not device_response:
             raise PluginException(
                 cause=f"Managed device: {device}, was not found",
-                assistance="Contact support for help. See log for more details"
+                assistance="Contact support for help. See log for more details."
             )
         elif len(device_response) > 1:
             raise PluginException(
