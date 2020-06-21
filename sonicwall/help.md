@@ -69,8 +69,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|found|boolean|True|Return true if found, return false if not found|
-|objects|[]object|True|List of object names that the address was found in|
+|address_objects|[]object|False|The names and details of the address objects that match or contain the address|
+|found|boolean|True|Return true if address was found in group, return false if not found|
 
 Example output:
 

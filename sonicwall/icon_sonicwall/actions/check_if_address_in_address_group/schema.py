@@ -14,8 +14,8 @@ class Input:
     
 
 class Output:
+    ADDRESS_OBJECTS = "address_objects"
     FOUND = "found"
-    OBJECTS = "objects"
     
 
 class CheckIfAddressInAddressGroupInput(insightconnect_plugin_runtime.Input):
@@ -61,25 +61,24 @@ class CheckIfAddressInAddressGroupOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "found": {
-      "type": "boolean",
-      "title": "Found",
-      "description": "Return true if found, return false if not found",
-      "order": 1
-    },
-    "objects": {
+    "address_objects": {
       "type": "array",
-      "title": "Objects",
-      "description": "List of object names that the address was found in",
+      "title": "Address Objects",
+      "description": "The names and details of the address objects that match or contain the address",
       "items": {
         "type": "object"
       },
       "order": 2
+    },
+    "found": {
+      "type": "boolean",
+      "title": "Found",
+      "description": "Return true if address was found in group, return false if not found",
+      "order": 1
     }
   },
   "required": [
-    "found",
-    "objects"
+    "found"
   ]
 }
     """)
