@@ -77,11 +77,11 @@ Example output:
 ```
 {
   "found": true,
-  "objects": [
+  "address_objects": [
     {
       "dns_ttl": 0,
       "domain": "example.com",
-      "name": "qwerty",
+      "name": "ICON Block List",
       "uuid": "00000000-0000-0001-0100-00401034ea00",
       "zone": "DMZ"
     }

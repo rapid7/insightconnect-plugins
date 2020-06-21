@@ -45,5 +45,5 @@ class CheckIfAddressInAddressGroup(insightconnect_plugin_runtime.Action):
 
         return {
             Output.FOUND: len(objects_matching) > 0,
-            Output.OBJECTS: objects_matching
+            Output.ADDRESS_OBJECTS: objects_matching
         }
