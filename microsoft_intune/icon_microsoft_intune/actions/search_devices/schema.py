@@ -192,22 +192,22 @@ class SearchDevicesOutput(insightconnect_plugin_runtime.Output):
         },
         "eas_activated": {
           "type": "boolean",
-          "title": "Eas Activated",
-          "description": "Eas activated",
+          "title": "EAS Activated",
+          "description": "EAS activated",
           "order": 15
         },
         "eas_activation_date_time": {
           "type": "string",
-          "title": "Eas Activation Date Time",
+          "title": "EAS Activation Date Time",
           "displayType": "date",
-          "description": "Eas activation date time",
+          "description": "EAS activation date time",
           "format": "date-time",
           "order": 16
         },
         "eas_device_id": {
           "type": "string",
-          "title": "Eas Device ID",
-          "description": "Eas device ID",
+          "title": "EAS Device ID",
+          "description": "EAS device ID",
           "order": 17
         },
         "email_address": {
@@ -258,8 +258,8 @@ class SearchDevicesOutput(insightconnect_plugin_runtime.Output):
         },
         "imei": {
           "type": "string",
-          "title": "Imei",
-          "description": "Imei",
+          "title": "IMEI",
+          "description": "IMEI",
           "order": 25
         },
         "is_encrypted": {
@@ -314,8 +314,8 @@ class SearchDevicesOutput(insightconnect_plugin_runtime.Output):
         },
         "meid": {
           "type": "string",
-          "title": "Meid",
-          "description": "Meid",
+          "title": "MEID",
+          "description": "MEID",
           "order": 34
         },
         "model": {
@@ -510,8 +510,8 @@ class SearchDevicesOutput(insightconnect_plugin_runtime.Output):
             },
             "bit_locker_status": {
               "type": "string",
-              "title": "Bit Locker Status",
-              "description": "Bit locker status",
+              "title": "BitLocker Status",
+              "description": "BitLocker status",
               "order": 3
             },
             "boot_app_security_version": {
@@ -640,8 +640,8 @@ class SearchDevicesOutput(insightconnect_plugin_runtime.Output):
             },
             "pcr0": {
               "type": "string",
-              "title": "Pcr0",
-              "description": "Pcr0",
+              "title": "PCR0",
+              "description": "PCR0",
               "order": 23
             },
             "pcr_hash_algorithm": {
@@ -760,8 +760,8 @@ class SearchDevicesOutput(insightconnect_plugin_runtime.Output):
         },
         "bit_locker_status": {
           "type": "string",
-          "title": "Bit Locker Status",
-          "description": "Bit locker status",
+          "title": "BitLocker Status",
+          "description": "BitLocker status",
           "order": 3
         },
         "boot_app_security_version": {
@@ -890,8 +890,8 @@ class SearchDevicesOutput(insightconnect_plugin_runtime.Output):
         },
         "pcr0": {
           "type": "string",
-          "title": "Pcr0",
-          "description": "Pcr0",
+          "title": "PCR0",
+          "description": "PCR0",
           "order": 23
         },
         "pcr_hash_algorithm": {
