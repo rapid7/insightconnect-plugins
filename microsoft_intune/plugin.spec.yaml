@@ -4,7 +4,7 @@ products: [insightconnect]
 name: microsoft_intune
 title: Microsoft Intune
 description: Microsoft cloud-based management solution that provides for mobile device and operating system management
-version: 1.0.0
+version: 1.1.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -20,6 +20,476 @@ hub_tags:
   use_cases: [data_utility]
   keywords: [intune, cloud, azure]
   features: []
+types:
+  configuration_manager_client_enabled_features:
+    odata_type:
+      title: Odata Type
+      type: string
+      description: Odata type
+      required: false
+    compliance_policy:
+      title: Compliance Policy
+      type: boolean
+      description: Compliance policy
+      required: false
+    device_configuration:
+      title: Device Configuration
+      type: boolean
+      description: Device configuration
+      required: false
+    inventory:
+      title: Inventory
+      type: boolean
+      description: Inventory
+      required: false
+    modern_apps:
+      title: Modern Apps
+      type: boolean
+      description: Modern apps
+      required: false
+    resource_access:
+      title: Resource Access
+      type: boolean
+      description: Resource access
+      required: false
+    windows_update_for_business:
+      title: Windows Update For Business
+      type: boolean
+      description: Windows update for business
+      required: false
+  device_action_results:
+    odata_type:
+      title: Odata Type
+      type: string
+      description: Odata type
+      required: false
+    action_name:
+      title: Action Name
+      type: string
+      description: Action name
+      required: false
+    action_state:
+      title: Action State
+      type: string
+      description: Action state
+      required: false
+    last_updated_date_time:
+      title: Last Updated Date Time
+      type: date
+      description: Last updated date time
+      required: false
+    start_date_time:
+      title: Start Date Time
+      type: date
+      description: Start date time
+      required: false
+  device_health_attestation_state:
+    odata_type:
+      title: Odata Type
+      type: string
+      description: Odata type
+      required: false
+    attestation_identity_key:
+      title: Attestation Identity Key
+      type: string
+      description: Attestation identity key
+      required: false
+    bit_locker_status:
+      title: BitLocker Status
+      type: string
+      description: BitLocker status
+      required: false
+    boot_app_security_version:
+      title: Boot App Security Version
+      type: string
+      description: Boot app security version
+      required: false
+    boot_debugging:
+      title: Boot Debugging
+      type: string
+      description: Boot debugging
+      required: false
+    boot_manager_security_version:
+      title: Boot Manager Security Version
+      type: string
+      description: Boot manager security version
+      required: false
+    boot_manager_version:
+      title: Boot Manager Version
+      type: string
+      description: Boot manager version
+      required: false
+    boot_revision_list_info:
+      title: Boot Revision List Info
+      type: string
+      description: Boot revision list info
+      required: false
+    code_integrity:
+      title: Code Integrity
+      type: string
+      description: Code integrity
+      required: false
+    code_integrity_check_version:
+      title: Code Integrity Check Version
+      type: string
+      description: Code integrity check version
+      required: false
+    code_integrity_policy:
+      title: Code Integrity Policy
+      type: string
+      description: Code integrity policy
+      required: false
+    content_namespace_url:
+      title: Content Namespace URL
+      type: string
+      description: Content namespace URL
+      required: false
+    content_version:
+      title: Content Version
+      type: string
+      description: Content version
+      required: false
+    data_excution_policy:
+      title: Data Excution Policy
+      type: string
+      description: Data excution policy
+      required: false
+    device_health_attestation_status:
+      title: Device Health Attestation Status
+      type: string
+      description: Device health attestation status
+      required: false
+    early_launch_anti_malware_driver_protection:
+      title: Early Launch Anti Malware Driver Protection
+      type: string
+      description: Early launch anti malware driver protection
+      required: false
+    health_attestation_supported_status:
+      title: Health Attestation Supported Status
+      type: string
+      description: Health attestation supported status
+      required: false
+    health_status_mismatch_info:
+      title: Health Status Mismatch Info
+      type: string
+      description: Health status mismatch info
+      required: false
+    issued_date_time:
+      title: Issued Date Time
+      type: date
+      description: Issued date time
+      required: false
+    last_update_date_time:
+      title: Last Update Date Time
+      type: date
+      description: Last update date time
+      required: false
+    operating_system_kernel_debugging:
+      title: Operating System Kernel Debugging
+      type: string
+      description: Operating system kernel debugging
+      required: false
+    operating_system_rev_list_info:
+      title: Operating System Rev List Info
+      type: string
+      description: Operating system rev list info
+      required: false
+    pcr0:
+      title: PCR0
+      type: string
+      description: PCR0
+      required: false
+    pcr_hash_algorithm:
+      title: PCR Hash Algorithm
+      type: string
+      description: PCR hash algorithm
+      required: false
+    reset_count:
+      title: Reset Count
+      type: integer
+      description: Reset count
+      required: false
+    restart_count:
+      title: Restart Count
+      type: integer
+      description: Restart count
+      required: false
+    safe_mode:
+      title: Safe Mode
+      type: string
+      description: Safe mode
+      required: false
+    secure_boot:
+      title: Secure Boot
+      type: string
+      description: Secure boot
+      required: false
+    secure_boot_configuration_policy_finger_print:
+      title: Secure Boot Configuration Policy Finger Print
+      type: string
+      description: Secure boot configuration policy finger print
+      required: false
+    test_signing:
+      title: Test Signing
+      type: string
+      description: Test signing
+      required: false
+    tpm_version:
+      title: TPM Version
+      type: string
+      description: TPM version
+      required: false
+    virtual_secure_mode:
+      title: Virtual Secure Mode
+      type: string
+      description: Virtual secure mode
+      required: false
+    windows_pe:
+      title: Windows PE
+      type: string
+      description: Windows PE
+      required: false
+  device:
+    odata_type:
+      title: Odata Type
+      type: string
+      description: Odata type
+      required: false
+    activation_lock_bypass_code:
+      title: Activation Lock Bypass Code
+      type: string
+      description: Activation lock bypass code
+      required: false
+    android_security_patch_level:
+      title: Android Security Patch Level
+      type: string
+      description: Android security patch level
+      required: false
+    azure_ad_device_id:
+      title: Azure AD Device ID
+      type: string
+      description: Azure AD device ID
+      required: false
+    azure_ad_registered:
+      title: Azure AD Registered
+      type: boolean
+      description: Azure AD registered
+      required: false
+    compliance_grace_period_expiration_date_time:
+      title: Compliance Grace Period Expiration Date Time
+      type: date
+      description: Compliance grace period expiration date time
+      required: false
+    compliance_state:
+      title: Compliance State
+      type: string
+      description: Compliance state
+      required: false
+    configuration_manager_client_enabled_features:
+      title: Configuration Manager Client Enabled Features
+      type: configuration_manager_client_enabled_features
+      description: Configuration manager client enabled features
+      required: false
+    device_action_results:
+      title: Device Action Results
+      type: "[]device_action_results"
+      description: Device action results
+      required: false
+    device_category_display_name:
+      title: Device Category Display Name
+      type: string
+      description: Device category display name
+      required: false
+    device_enrollment_type:
+      title: Device Enrollment Type
+      type: string
+      description: Device enrollment type
+      required: false
+    device_health_attestation_state:
+      title: Device Health Attestation State
+      type: device_health_attestation_state
+      description: Device health attestation state
+      required: false
+    device_name:
+      title: Device Name
+      type: string
+      description: Device name
+      required: false
+    device_registration_state:
+      title: Device Registration State
+      type: string
+      description: Device registration state
+      required: false
+    eas_activated:
+      title: EAS Activated
+      type: boolean
+      description: EAS activated
+      required: false
+    eas_activation_date_time:
+      title: EAS Activation Date Time
+      type: date
+      description: EAS activation date time
+      required: false
+    eas_device_id:
+      title: EAS Device ID
+      type: string
+      description: EAS device ID
+      required: false
+    email_address:
+      title: Email Address
+      type: string
+      description: Email address
+      required: false
+    enrolled_date_time:
+      title: Enrolled Date Time
+      type: date
+      description: Enrolled date time
+      required: false
+    exchange_access_state:
+      title: Exchange Access State
+      type: string
+      description: Exchange access state
+      required: false
+    exchange_access_state_reason:
+      title: Exchange Access State Reason
+      type: string
+      description: Exchange access state reason
+      required: false
+    exchange_last_successful_sync_date_time:
+      title: Exchange Last Successful Sync Date Time
+      type: date
+      description: Exchange last successful sync date time
+      required: false
+    free_storage_space_in_bytes:
+      title: Free Storage Space In Bytes
+      type: integer
+      description: Free storage space in bytes
+      required: false
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    imei:
+      title: IMEI
+      type: string
+      description: IMEI
+      required: false
+    is_encrypted:
+      title: Is Encrypted
+      type: boolean
+      description: Is encrypted
+      required: false
+    is_supervised:
+      title: Is Supervised
+      type: boolean
+      description: Is supervised
+      required: false
+    jail_broken:
+      title: Jail Broken
+      type: string
+      description: Jail broken
+      required: false
+    last_sync_date_time:
+      title: Last Sync Date Time
+      type: date
+      description: Last sync date time
+      required: false
+    managed_device_name:
+      title: Managed Device Name
+      type: string
+      description: Managed device name
+      required: false
+    managed_device_owner_type:
+      title: Managed Device Owner Type
+      type: string
+      description: Managed device owner type
+      required: false
+    management_agent:
+      title: Management Agent
+      type: string
+      description: Management agent
+      required: false
+    manufacturer:
+      title: Manufacturer
+      type: string
+      description: Manufacturer
+      required: false
+    meid:
+      title: MEID
+      type: string
+      description: MEID
+      required: false
+    model:
+      title: Model
+      type: string
+      description: Model
+      required: false
+    operating_system:
+      title: Operating System
+      type: string
+      description: Operating system
+      required: false
+    os_version:
+      title: OS Version
+      type: string
+      description: OS version
+      required: false
+    partner_reported_threat_state:
+      title: Partner Reported Threat State
+      type: string
+      description: Partner reported threat state
+      required: false
+    phone_number:
+      title: Phone Number
+      type: string
+      description: Phone number
+      required: false
+    remote_assistance_session_error_details:
+      title: Remote Assistance Session Error Details
+      type: string
+      description: Remote assistance session error details
+      required: false
+    remote_assistance_session_url:
+      title: Remote Assistance Session URL
+      type: string
+      description: Remote assistance session URL
+      required: false
+    serial_number:
+      title: Serial Number
+      type: string
+      description: Serial number
+      required: false
+    subscriber_carrier:
+      title: Subscriber Carrier
+      type: string
+      description: Subscriber carrier
+      required: false
+    total_storage_space_in_bytes:
+      title: Total Storage Space In Bytes
+      type: integer
+      description: Total storage space in bytes
+      required: false
+    user_display_name:
+      title: User Display Name
+      type: string
+      description: User display name
+      required: false
+    user_id:
+      title: User ID
+      type: string
+      description: User ID
+      required: false
+    user_principal_name:
+      title: User Principal Name
+      type: string
+      description: User principal name
+      required: false
+    wifi_mac_address:
+      title: Wifi MAC Address
+      type: string
+      description: Wifi MAC address
+      required: false
 connection:
   credentials:
     title: Credentials
@@ -53,6 +523,22 @@ connection:
     required: true
     example: 3a522933-ae5e-2b63-96ab-3c004b4f7f10
 actions:
+  search_devices:
+    title: Search Devices
+    description: Search devices by device name, user ID, email address or device ID
+    input:
+      device:
+        title: Device
+        description: Search devices by either of - device name, user ID, email address, device ID
+        type: string
+        required: true
+        example: 547a48e3-0942-4888-acf1-a92b7fb19ef9
+    output:
+      devices:
+        title: Devices
+        description: Devices details
+        required: false
+        type: "[]device"
   antivirus_scan:
     title: Antivirus Scan
     description: Initiate a Windows Defender Antivirus scan on a machine
@@ -74,5 +560,27 @@ actions:
       success:
         title: Success
         description: Return true if scan was initiated successfully
+        type: boolean
+        required: true
+  wipe:
+    title: Wipe
+    description: Wipe device by device name, user ID, email address, or device ID if it is not whitelisted
+    input:
+      device:
+        title: Device
+        description: Device name, user ID, email address, or device ID
+        type: string
+        required: true
+        example: 547a48e3-0942-4888-acf1-a92b7fb19ef9
+      whitelist:
+        title: Whitelist
+        description: This list contains a set of of device names, user IDs, email addresses, or device IDs that a user can pass in that will not be wiped
+        type: "[]string"
+        required: false
+        example: ["user@example.com", "705c034c-034c-705c-4c03-5c704c035c70"]
+    output:
+      success:
+        title: Success
+        description: Return true if device was successfully wiped
         type: boolean
         required: true

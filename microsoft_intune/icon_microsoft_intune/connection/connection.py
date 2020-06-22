@@ -14,14 +14,14 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
-        url = params.get(Input.URL) if params.get(Input.URL).endswith("/") else f"{params.get(Input.URL)}/"
+        url = params.get(Input.URL).rstrip("/")
         self.api = MicrosoftIntuneAPI(
             username=params.get(Input.CREDENTIALS).get("username"),
             password=params.get(Input.CREDENTIALS).get("password"),
             client_id=params.get(Input.CLIENT_ID),
             client_secret=params.get(Input.CLIENT_SECRET),
             tenant_id=params.get(Input.TENANT_ID),
-            api_url=f"{url}v1.0/",
+            api_url=f"{url}/v1.0/",
             logger=self.logger
         )
 
