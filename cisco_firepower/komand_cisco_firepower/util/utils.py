@@ -7,9 +7,6 @@ def first(array):
 
 
 # Generates correct payload that can be sent to Firepower
-# Operation
-# - ScanUpdate
-# - ScanFlush
 def generate_payload(results, operation, max_page_size):
     scan_results = ScanResults(max_page_size)
 

@@ -1,7 +1,7 @@
 {
-	"spec": "2be1b0b381990823ded2ce79ea60bffb",
-	"manifest": "8cbaa4a617770dcb858aab3135742d4d",
-	"setup": "f6443af50afc60855be719ad79dbac20",
+	"spec": "2778414ae7e5dd0463bc85f883eeb55e",
+	"manifest": "e385a33fbaa713899e567aa25df7cbd8",
+	"setup": "44df8ec66ec21dacbef51f0a6e9f1ec9",
 	"schemas": [
 		{
 			"identifier": "add_scan_result/schema.py",
@@ -10,10 +10,6 @@
 		{
 			"identifier": "bulk_add_scan_result/schema.py",
 			"hash": "8c3562902594f4b1b76c040d46b0a38c"
-		},
-		{
-			"identifier": "map_insightvm_vulnerability_to_host_database/schema.py",
-			"hash": "29a08fdfa6d84a99db04344af65effe2"
 		},
 		{
 			"identifier": "connection/schema.py",

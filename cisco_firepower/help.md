@@ -21,55 +21,16 @@ This plugin utilizes the [Host Input API](https://www.cisco.com/c/en/us/td/docs/
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|certificate|bytes|None|False|Base64-encoded certificate to authenticate with the host input API|None|None|
-|certificate_passphrase|credential_secret_key|None|False|The passphrase to access the certificate|None|None|
-|port|integer|8307|False|Enter the port to connect to the host input API (Default:8307)|None|None|
-|server|string|None|False|Enter the address for the server|None|None|
-
-Example input:
-
-```
-```
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|certificate_passphrase|credential_secret_key|None|False|The passphrase to access the certificate|None|
+|port|integer|8307|False|Enter the port to connect to the Host Input API (Default:8307)|None|
+|certificate|bytes|None|False|Base64 encoded certificate to authenticate with the host input API|None|
+|server|string|None|False|Enter the address for the server|None|
 
 ## Technical Details
 
 ### Actions
-
-#### Map InsightVM Vulnerability to Host database
-
-This action is used to map InsightVM Vulnerability to Host database.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|csv|bytes|None|True|CSV of InsightVM vulnerabilities|None|something goes here|
-|timeout|integer|300|False||None|300|
-|vulnerabilities_to_batch|integer|100|False||None|100|
-
-Example input:
-
-```
-{
-  "csv": "something goes here",
-  "timeout": 300,
-  "vulnerabilities_to_batch": 100
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|commands_processed|number|True|Number of commands processed|
-|errors|number|True|Number of errors|
-
-Example output:
-
-```
-```
 
 #### Bulk Add Scan Result
 
@@ -77,22 +38,17 @@ This action is used to add scan results from a third-party vulnerability scanner
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|operation|string|None|True|The operation to be performed when adding scan results. ScanFlush to remove existing scan results or ScanUpdate to keep existing scan results|['ScanUpdate', 'ScanFlush']|None|
-|scan_results|[]scan_result|None|False|Scan results to add|None|None|
-
-Example input:
-
-```
-```
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|operation|string|None|True|The operation to be performed when adding scan results. ScanFlush to remove existing scan results or ScanUpdate to keep existing scan results|['ScanUpdate', 'ScanFlush']|
+|scan_results|[]scan_result|None|False|Scan results to add|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|commands_processed|number|True|Number of commands processed|
-|errors|number|True|Number of errors|
+|commands_processed|number|False|None|
+|errors|number|False|None|
 
 Example output:
 
@@ -111,22 +67,17 @@ This action is used to add a scan result from a third-party vulnerability scanne
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|operation|string|None|True|The operation to be performed when adding scan results. ScanFlush to remove existing scan results or ScanUpdate to keep existing scan results|['ScanUpdate', 'ScanFlush']|None|
-|scan_result|scan_result|None|False|Scan result for the host|None|None|
-
-Example input:
-
-```
-```
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|scan_result|scan_result|None|False|Scan result for the host|None|
+|operation|string|None|True|The operation to be performed when adding scan results. ScanFlush to remove existing scan results or ScanUpdate to keep existing scan results|['ScanUpdate', 'ScanFlush']|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|commands_processed|number|True|Number of commands processed|
-|errors|number|True|Number of errors|
+|commands_processed|number|False|None|
+|errors|number|False|None|
 
 Example output:
 
@@ -141,7 +92,7 @@ Example output:
 
 ### Triggers
 
-_This plugin does not contain any triggers._
+This plugin does not contain any triggers.
 
 ### Custom Output Types
 
