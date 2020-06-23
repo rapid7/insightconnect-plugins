@@ -6,13 +6,11 @@ from icon_cisco_firepower.util.commands import generate_set_os_command, generate
     generate_add_result_command, generate_set_source_command
 from io import StringIO
 from paramiko import SSHClient
+from bs4 import BeautifulSoup
 import csv
 import base64
 import os
 import paramiko
-import time
-from OpenSSL import crypto
-import subprocess
 
 
 class ImportCsv(insightconnect_plugin_runtime.Action):
@@ -35,17 +33,25 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
 
         headers, vuln_list = self.read_csv(csv_string)
 
+        #################
+        # Remove duplicates
+        #################
+        self.logger.info(f"Number of records found: {len(vuln_list)}")
+        vuln_list = [dict(t) for t in {tuple(d.items()) for d in vuln_list}]
+        self.logger.info(f"Duplicates removed, Number of records found: {len(vuln_list)}")
+
         vuln_objects = self.convert_csv_to_scan_results(vuln_list)
-        operation = "ScanUpdate" # This tells Firepower to update host vulnerabilities with new results. ScanFlush will remove existing results
+        self.logger.info(f"Number of records to process: {len(vuln_objects)}")
 
         ################
         #  Write CSV File
         ################
+        self.logger.info("Building payload file...")
         cvs_file_string = ""
         for vuln in vuln_objects:
             ip = vuln.get("host", {}).get("ip_address")
             if ip:
-                command = self.create_scan_result(ip, vuln, operation)
+                command = self.create_scan_result(ip, vuln)
                 cvs_file_string += command
             else:
                 self.logger.warning("Vulnerability found without an IP address, skipping. Vulnerability follows")
@@ -53,26 +59,62 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
 
         firepower_filename = "firepower_import.csv"
         f = open(firepower_filename, "w")
-        filename = os.path.realpath(f.name)
+        firepower_fullpath = os.path.realpath(f.name)
         f.write(cvs_file_string)
         f.close()
-
+        self.logger.info("Building payload file complete.")
 
         ################
-        #  Copy CSV to Server
+        # Create nmimport batch file
         ################
-        scp_command = f"sshpass -p {self.connection.password} scp {filename} {self.connection.username}@{self.connection.host}:/Volume/home/admin/{firepower_filename}"
-        stream = os.popen(scp_command)
+        self.logger.info("Building payload shell script...")
+        nmimport_command = "#!/bin/bash\n"
+        nmimport_command += f"echo {self.connection.password} | sudo -S /usr/local/sf/bin/nmimport.pl /Volume/home/admin/firepower_import.csv"
+        nmimport_command_filename = "nmimport.sh"
+        f = open("nmimport.sh", "w")
+        nmimport_script_fullpath = os.path.realpath(f.name)
+        f.write(nmimport_command)
+        f.close()
+        self.logger.info("Building payload shell script complete")
+
+        ################
+        #  Copy files to Server
+        ################
+        self.logger.info("Copying payload file to server...")
+        scp_command_firepower = f"sshpass -p {self.connection.password} scp {firepower_fullpath} {self.connection.username}@{self.connection.host}:/Volume/home/admin/{firepower_filename}"
+        stream = os.popen(scp_command_firepower)
         output = stream.read()
         if output:
             raise PluginException(cause="Could not copy payload file to the firepower server",
                                   assistance=output)
         stream.close()
 
+        scp_command_firepower = f"sshpass -p {self.connection.password} scp {nmimport_script_fullpath} {self.connection.username}@{self.connection.host}:/Volume/home/admin/{nmimport_command_filename}"
+        stream = os.popen(scp_command_firepower)
+        output = stream.read()
+        if output:
+            raise PluginException(cause="Could not copy payload file to the firepower server",
+                                  assistance=output)
+        stream.close()
+
+        self.logger.info("Copy complete.")
+
+        ################
+        #  Cleanup local files
+        ################
+        self.logger.info("Starting local cleanup...")
+        rm_stream1 = os.popen(f"rm {firepower_fullpath}")
+        rm_stream2 = os.popen(f"rm {nmimport_script_fullpath}")
+
+        rm_stream1.close()
+        rm_stream2.close()
+
+        self.logger.info("Local cleanup complete.")
 
         ################
         #  SSH to server and run nmimport.pl on the csv file
         ################
+        self.logger.info("Running nmimport.pl on server...")
         ssh = SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
@@ -85,15 +127,44 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
 
         # ssh and run nmimport.pl
         # nmimport_command = f"sudo -S -p \"{self.connection.password}\n\" /usr/local/sf/bin/nmimport.pl /Volume/home/admin/{firepower_filename}"
-        nmimport_command = f"echo {self.connection.password} | sudo -S /usr/local/sf/bin/nmimport.pl /Volume/home/admin/firepower_import.csv"
-        stdin, stdout, stderr = ssh.exec_command(nmimport_command)
-        stdout_str = stdout.read()
-        stderr_str = stderr.read()
+        nmimport_shell_command = f"chmod +x /Volume/home/admin/{nmimport_command_filename}\n/Volume/home/admin/{nmimport_command_filename}"
+        stdin, stdout, stderr = ssh.exec_command(nmimport_shell_command)
+
+        # This will hang if the output is excessive. Around 1000 records is the limit this will reasonablly read back from.
+        stdout_str = stdout.read(1000)
+        stderr_str = stderr.read(1000)
+
         ssh.close()
 
+        ####################
+        # Remove shell script from server
+        ####################
+        ssh = SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+        # ssh connect
+        ssh.connect(self.connection.host,
+                    username=self.connection.username,
+                    password=self.connection.password,
+                    look_for_keys=False,
+                    timeout=60)
+
+        rm_command = f"rm -f /Volume/home/admin/{nmimport_command_filename}"
+        rm_stdin, rm_stdout, rm_stderr = ssh.exec_command(rm_command)
+        rm_stderr_str = rm_stderr.read(1000)
+
+        if rm_stderr_str:
+            self.logger.error("Warning: shell script may still be on the server. It can be found at\n/Volume/home/admin/{nmimport_command_filename}")
+
+
+        ####################
+        # Check results and return
+        ####################
+        self.logger.info("Running nmimport.pl on server complete.")
+        self.logger.info("Checking results.")
         if "Done processing" in str(stdout_str):
             return {
-                Output.RESULT: stdout_str.decode("utf-8"),
+                Output.RESULT: stdout_str.decode("utf-8").strip(),
                 Output.SUCCESS: True
             }
 
@@ -106,6 +177,10 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
     def convert_csv_to_scan_results(self, vuln_list):
         scan_results = []
         for vuln in vuln_list:
+            description = vuln.get("description", "")
+            if description:
+                description = BeautifulSoup(description).get_text()
+
             scan_result = \
             {
                 "host": {
@@ -122,7 +197,7 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
                     "protocol_id": vuln.get("protocol_id", ""),
                     "scanner_id": "InsightVM",
                     "vulnerability_id": vuln.get("vulnerability_id", ""),
-                    "description": vuln.get("description", ""),
+                    "description": description,
                     "vulnerability_title": vuln.get("title", ""),
                     "cve_ids": "", # Space-separated list of CVE vulnerability IDs
                     "bugtraq_ids": "", # Space-separated list of BugTraq vulnerability IDs
@@ -133,13 +208,14 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
         return scan_results
 
     # This will generate a set of commands from a given vulnerability.
-    # ex
+    # ex:
     # AddHost,1.2.3.5
     # AddScanResult,1.2.3.5,"Qualys",82003,,,"ICMP Timestamp Request","ICMP (Internet Control and Error Message Protocol) is a protocol encapsulated in IP packets. Its principal purpose is to provide a protocol layer able to inform gateways of the inter-connectivity and accessibility of other gateways or hosts. ping is a well-known program for determining if a host is up or down. It uses ICMP echo packets. ICMP timestamp packets are used to synchronize clocks between hosts.","cve_ids: CVE-1999-0524","bugtraq_ids:"
-    def create_scan_result(self, address, scan_result, operation):
-        # Operation
-        # - ScanUpdate
-        # - ScanFlush
+    # ScanUpdate
+    def create_scan_result(self, address, scan_result):
+        # Operations
+        # - ScanUpdate - This will append results to a host
+        # - ScanFlush - This will clear all results on a host and then add results
 
         # new_host = False
         added_hosts = {}
@@ -160,15 +236,11 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
 
         command += generate_add_result_command(details, address)
         command = command.strip() + "\n"
-        # if not new_host:
-        #     command += "ScanUpdate"
-        # else:
-        #     command += operation
-        #     command += "\n"
         command += "ScanUpdate\n"
         return command
 
     # Read a CSV and return the headers list and each row as a dictionary
+    # The dictionaries will look like dict['header_name'] = column_value
     def read_csv(self, csv_string):
         f = StringIO(csv_string)
         reader = csv.DictReader(f)
