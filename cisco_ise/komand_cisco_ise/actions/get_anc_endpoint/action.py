@@ -21,7 +21,7 @@ class GetAncEndpoint(komand.Action):
         try:
             endpoint_ids = [endpoint["id"] for endpoint in all_endpoints["SearchResult"]["resources"]]
             results = asyncio.run(self.connection.ers.get_anc_endpoints(endpoint_ids=endpoint_ids))
-            for result in results:
+            for result in [r for r in results if r is not None]:
                 ersanc_endpoint = result["ErsAncEndpoint"]
                 if "macAddress" in ersanc_endpoint and ersanc_endpoint["macAddress"] == endpoint_mac:
                     return {Output.RESULTS: ersanc_endpoint}

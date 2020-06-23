@@ -34,7 +34,7 @@ class Quarantine(komand.Action):
         try:
             ids = [result["id"] for result in results]
             found = asyncio.run(self.connection.ers.get_anc_endpoints(endpoint_ids=ids))
-            for f in found:
+            for f in [f for f in found if f is not None]:
                 if f['ErsAncEndpoint']['macAddress'] == mac_address:
                     return {'ers_anc_endpoint': f['ErsAncEndpoint']}
 

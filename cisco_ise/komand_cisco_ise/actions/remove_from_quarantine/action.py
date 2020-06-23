@@ -34,7 +34,7 @@ class RemoveFromQuarantine(komand.Action):
         try:
             ids = [result["id"] for result in results]
             found = asyncio.run(self.connection.ers.get_anc_endpoints(endpoint_ids=ids))
-            for f in found:
+            for f in [f for f in found if f is not None]:
                 if f['ErsAncEndpoint']['macAddress'] == mac_address:
                     self.logger.error(results)
                     raise Exception('{} was not removed. See log for more details'.format(mac_address))
