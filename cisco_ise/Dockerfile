@@ -1,4 +1,4 @@
-FROM komand/python-pypy3-plugin:2
+FROM rapid7/insightconnect-python-3-38-slim-plugin:4
 LABEL organization=komand
 LABEL sdk=python
 LABEL type=plugin
@@ -15,6 +15,9 @@ WORKDIR /python/src
 
 # End package dependencies
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-RUN python setup.py build && python setup.py install
+
+# Install plugin
+RUN pip install wheel && pip install wheels/*.whl && \
+		python setup.py build && python setup.py install
 
 ENTRYPOINT ["/usr/local/bin/komand_cisco_ise"]
