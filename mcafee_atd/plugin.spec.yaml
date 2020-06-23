@@ -4,7 +4,7 @@ products: [insightconnect]
 name: mcafee_atd
 title: McAfee Advanced Threat Defense
 description: McAfee Advanced Threat Defense provides an API framework for external applications to access core McAfeeATD functions through the REST protocol
-version: 1.1.0
+version: 1.2.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -120,6 +120,103 @@ types:
       type: integer
       description: Severity
       required: false
+  results:
+    cache:
+      title: Cache
+      type: integer
+      description: Cache
+      required: false
+    destIp:
+      title: Dest IP
+      type: string
+      description: Dest IP
+      required: false
+    file:
+      title: File
+      type: string
+      description: File
+      required: false
+    md5:
+      title: MD5
+      type: string
+      description: MD5
+      required: false
+    messageId:
+      title: Message ID
+      type: string
+      description: Message ID
+      required: false
+    sha1:
+      title: SHA1
+      type: string
+      description: SHA1
+      required: false
+    sha256:
+      title: SHA256
+      type: string
+      description: SHA256
+      required: false
+    size:
+      title: Size
+      type: string
+      description: Size
+      required: false
+    srcIp:
+      title: Src IP
+      type: string
+      description: Src IP
+      required: false
+    submitType:
+      title: Submit Type
+      type: string
+      description: Submit type
+      required: false
+    taskId:
+      title: Task ID
+      type: integer
+      description: Taski ID
+      required: false
+    url:
+      title: URL
+      type: string
+      description: URL
+      required: false
+  submit_url_info:
+    estimatedTime:
+      title: Estimated Time
+      type: integer
+      description: Estimated time
+      required: false
+    fileId:
+      title: File ID
+      type: string
+      description: File ID
+      required: false
+    filesWait:
+      title: Files Wait
+      type: integer
+      description: Files wait
+      required: false
+    mimeType:
+      title: MIME Type
+      type: string
+      description: MIME type
+      required: false
+    results:
+      title: Results
+      type: "[]results"
+      description: Results
+      required: false
+    subId:
+      title: Sub ID
+      type: integer
+      description: Sub ID
+      required: false
+    success:
+      title: Success
+      type: boolean
+      description: Success
+      required: false
 connection:
   url:
     title: URL
@@ -203,4 +300,29 @@ actions:
         title: Job Results
         description: Return information about given Job ID
         type: job
+        required: false
+  submit_url:
+    title: Submit URL
+    description: Upload URL for dynamic analysis
+    input:
+      url:
+        title: URL
+        description: Address URL for analysis
+        type: string
+        required: true
+        example: https://www.example.com
+      submit_type:
+        title: Submit Type
+        description: Analysis URL or analysis file from URL
+        type: string
+        required: false
+        default: URL submission
+        enum:
+          - URL submission
+          - File from URL
+    output:
+      submit_url_info:
+        title: Submit URL Info
+        description: Information about submitted URL
+        type: submit_url_info
         required: false
