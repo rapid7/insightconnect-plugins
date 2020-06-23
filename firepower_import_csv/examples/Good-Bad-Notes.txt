@@ -1,0 +1,151 @@
+Good Command: 
+
+AddHost,10.4.18.180
+SetOS,10.4.18.180,Microsoft,Windows XP,Unknown
+SetSource,InsightVM
+AddScanResult,10.4.18.180,"InsightVM",130888,3389,6,"TLS/SSL Server Supports 3DES Cipher Suite","","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+
+AddHost,10.4.18.180
+SetOS,10.4.18.180,Microsoft,Windows XP,Unknown
+SetSource,InsightVM
+AddScanResult,10.4.18.180,"InsightVM",130888,3389,6,"TLS/SSL Server Supports 3DES Cipher Suite","A FAKE DESCRIPTION","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+
+Bad Command: 
+
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+SetSource,InsightVM
+AddScanResult,10.0.2.15,"InsightVM",109384,,,"KB2607712: Fraudulent Digital Certificates Could Allow Spoofing","","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+
+Still Bad
+
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+SetSource,InsightVM
+AddScanResult,10.0.2.15,"InsightVM",109384,,,"KB2607712: Fraudulent Digital Certificates Could Allow Spoofing",,"cve_ids: ","bugtraq_ids: "
+ScanUpdate
+
+
+Good: 
+AddHost,10.4.18.180
+SetOS,10.4.18.180,Microsoft,Windows XP,Unknown
+SetSource,InsightVM
+AddScanResult,10.4.18.180,"InsightVM",130888,3389,6,"TLS/SSL Server Supports 3DES Cipher Suite","A FAKE DESCRIPTION","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+
+
+Bad:
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+SetSource,InsightVM
+AddScanResult,10.0.2.15,"InsightVM",109384,,,"KB2607712: Fraudulent Digital Certificates Could Allow Spoofing","A FAKE DESCRIPTION","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+
+JSON GOOD: 
+{
+   "host":{
+      "ip_address":"10.4.18.180",
+      "operating_system":{
+         "name":"Windows XP",
+         "vendor":"Microsoft",
+         "version":"Unknown"
+      }
+   },
+   "scan_result_details":{
+      "source_id":"InsightVM",
+      "port":"3389",
+      "protocol_id":"6",
+      "scanner_id":"InsightVM",
+      "vulnerability_id":"130888",
+      "description":"",
+      "vulnerability_title":"TLS/SSL Server Supports 3DES Cipher Suite",
+      "cve_ids":"",
+      "bugtraq_ids":""
+   }
+}
+
+JSON BAD: 
+{
+   "host":{
+      "ip_address":"10.0.2.15",
+      "operating_system":{
+         "name":"Windows 7 Professional Edition",
+         "vendor":"Microsoft",
+         "version":"SP1"
+      }
+   },
+   "scan_result_details":{
+      "source_id":"InsightVM",
+      "port":"-1",
+      "protocol_id":"-1",
+      "scanner_id":"InsightVM",
+      "vulnerability_id":"109384",
+      "description":"",
+      "vulnerability_title":"KB2607712: Fraudulent Digital Certificates Could Allow Spoofing",
+      "cve_ids":"",
+      "bugtraq_ids":""
+   }
+}
+
+GOOD: 
+****************************
+type: <class 'str'>
+command: AddHost,10.4.18.180
+SetOS,10.4.18.180,Microsoft,Windows XP,Unknown
+SetSource,InsightVM
+AddScanResult,10.4.18.180,"InsightVM",114887,3389,6,"TLS/SSL Server is enabling the BEAST attack","","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+
+****************************
+
+BAD: 
+****************************
+type: <class 'str'>
+command: AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+SetSource,InsightVM
+AddScanResult,10.0.2.15,"InsightVM",33502,,,"MS11-009  Vulnerability in JScript and VBScript Scripting Engines Could Allow Information Disclosure (2475792)","","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+
+****************************
+
+GOOD: 
+['AddHost,10.4.18.180\nSetOS,10.4.18.180,Microsoft,Windows XP,Unknown\nSetSource,InsightVM\nAddScanResult,10.4.18.180,"InsightVM",130888,3389,6,"TLS/SSL Server Supports 3DES Cipher Suite","","cve_ids: ","bugtraq_ids: "\nScanUpdate\n']
+BAD: 
+['AddHost,10.0.2.15\nSetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1\nSetSource,InsightVM\nAddScanResult,10.0.2.15,"InsightVM",109384,,,"KB2607712  Fraudulent Digital Certificates Could Allow Spoofing","","cve_ids: ","bugtraq_ids: "\nScanUpdate\n']
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

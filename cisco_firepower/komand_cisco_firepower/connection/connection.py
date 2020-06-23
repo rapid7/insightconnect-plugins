@@ -27,7 +27,7 @@ class Connection(komand.Connection):
         self.__p12 = params.get('certificate')
         self.__p12_pwd = params.get('certificate_passphrase').get('secretKey')
         self.__cert_file = 'cert.pem'
-        self.__host = params.get('server')
+        self.host = params.get('server')
         self.__port = params.get('port')
 
         self.logger.info("Connect: Connecting..")
@@ -40,7 +40,7 @@ class Connection(komand.Connection):
         ctx = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
         ctx.load_cert_chain(self.__cert_file)
         self.__connection = ctx.wrap_socket(self.sockt)
-        self.__connection.connect((self.__host, self.__port))
+        self.__connection.connect((self.host, self.__port))
         self.max_data_size = self.__get_max_data_size()
 
     def send(self, data_array, timeout=300):

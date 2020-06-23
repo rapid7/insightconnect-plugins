@@ -19,6 +19,11 @@ class ScanResults(object):
 
         new_host = False
         command = ""
+
+        details = scan_result.get('scan_result_details', {})
+        source_id = details.get('source_id', '')
+        command += generate_set_source_command(source_id)
+
         if not self.added_hosts.get(address):
             new_host = True
             host = scan_result.get('host', {})
@@ -27,9 +32,6 @@ class ScanResults(object):
                 command += generate_set_os_command(host, address)
             self.added_hosts[address] = True
 
-        details = scan_result.get('scan_result_details', {})
-        source_id = details.get('source_id', '')
-        command += generate_set_source_command(source_id)
         command += generate_add_result_command(details, address)
         command = command.strip() + "\n"
         if not new_host:
@@ -37,10 +39,6 @@ class ScanResults(object):
         else:
             command += operation
             command += "\n"
-        print(f"****************************")
-        print(f"type: {type(command)}")
-        print(f"command: {command}")
-        print(f"****************************")
         self.__add_command(str(command))
 
     def __add_command(self, command):

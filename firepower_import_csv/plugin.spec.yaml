@@ -1,0 +1,67 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: cisco_firepower
+title: Cisco Firepower
+vendor: rapid7
+support: rapid7
+status: []
+description: This plugin utilizes Cisco Firepower to add scan results from a CSV file
+version: 1.0.0
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cisco_firepower
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.cisco.com
+tags:
+- firewall
+- cisco
+- firesight
+- firepower
+hub_tags:
+  use_cases: [vulnerability_management]
+  keywords: [firewall, cisco, firesight, firepower]
+  features: []
+language: python
+
+connection:
+  username_password:
+    title: SSH Credentials
+    description: Username and password used to ssh into the Firepower server
+    type: credential_username_password
+    required: false
+  server:
+    title: Server Address
+    type: string
+    description: Enter the address for the server
+    required: false
+  key:
+    title: Key
+    type: bytes
+    description: SSH key from firepower in base64
+    required: false
+actions:
+  import_csv:
+    title: "Import CSV"
+    description: "Import a base64 encoded csv of vulnerabilities"
+    input:
+      csv:
+        title: CSV of Vulnerabilities
+        description: CSV of vulnerabilities
+        type: bytes
+        required: true
+        example: ABCDE1234ASDF1234ASDF1234ASDF1234ASDF1234ASDF1234
+    output:
+      result:
+        title: Result
+        description: Results from the import utility on the Firepower server
+        type: string
+        required: false
+      success:
+        title: Success
+        description: Was import successful
+        type: boolean
+        required: true
+
+
+
+
