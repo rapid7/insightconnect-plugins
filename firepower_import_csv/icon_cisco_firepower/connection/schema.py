@@ -4,7 +4,6 @@ import json
 
 
 class Input:
-    KEY = "key"
     SERVER = "server"
     USERNAME_PASSWORD = "username_password"
     
@@ -15,14 +14,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "key": {
-      "type": "string",
-      "title": "Key",
-      "displayType": "bytes",
-      "description": "SSH key from firepower in base64",
-      "format": "bytes",
-      "order": 3
-    },
     "server": {
       "type": "string",
       "title": "Server Address",

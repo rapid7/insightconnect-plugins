@@ -6,7 +6,7 @@ LABEL sdk=python
 
 # Add any custom package dependencies here
 # NOTE: Add pip packages to requirements.txt
-
+RUN apt-get update && apt-get install -y sshpass
 # End package dependencies
 
 # Add source code

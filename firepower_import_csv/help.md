@@ -18,7 +18,6 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|key|bytes|None|False|SSH key from firepower in base64|None|None|
 |server|string|None|False|Enter the address for the server|None|None|
 |username_password|credential_username_password|None|False|Username and password used to ssh into the Firepower server|None|None|
 

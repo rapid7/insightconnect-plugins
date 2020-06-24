@@ -64,39 +64,17 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
         f.close()
         self.logger.info("Building payload file complete.")
 
-        ################
-        # Create nmimport batch file
-        ################
-        self.logger.info("Building payload shell script...")
-        nmimport_command = "#!/bin/bash\n"
-        nmimport_command += f"echo {self.connection.password} | sudo -S /usr/local/sf/bin/nmimport.pl /Volume/home/admin/firepower_import.csv"
-        nmimport_command_filename = "nmimport.sh"
-        f = open("nmimport.sh", "w")
-        nmimport_script_fullpath = os.path.realpath(f.name)
-        f.write(nmimport_command)
-        f.close()
-        self.logger.info("Building payload shell script complete")
-
-        ################
+       ################
         #  Copy files to Server
         ################
         self.logger.info("Copying payload file to server...")
-        scp_command_firepower = f"sshpass -p {self.connection.password} scp {firepower_fullpath} {self.connection.username}@{self.connection.host}:/Volume/home/admin/{firepower_filename}"
+        scp_command_firepower = f"sshpass -p {self.connection.password} scp -o StrictHostKeyChecking=no {firepower_fullpath} {self.connection.username}@{self.connection.host}:/Volume/home/admin/{firepower_filename}"
         stream = os.popen(scp_command_firepower)
         output = stream.read()
         if output:
             raise PluginException(cause="Could not copy payload file to the firepower server",
                                   assistance=output)
         stream.close()
-
-        scp_command_firepower = f"sshpass -p {self.connection.password} scp {nmimport_script_fullpath} {self.connection.username}@{self.connection.host}:/Volume/home/admin/{nmimport_command_filename}"
-        stream = os.popen(scp_command_firepower)
-        output = stream.read()
-        if output:
-            raise PluginException(cause="Could not copy payload file to the firepower server",
-                                  assistance=output)
-        stream.close()
-
         self.logger.info("Copy complete.")
 
         ################
@@ -104,11 +82,7 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
         ################
         self.logger.info("Starting local cleanup...")
         rm_stream1 = os.popen(f"rm {firepower_fullpath}")
-        rm_stream2 = os.popen(f"rm {nmimport_script_fullpath}")
-
         rm_stream1.close()
-        rm_stream2.close()
-
         self.logger.info("Local cleanup complete.")
 
         ################
@@ -126,36 +100,14 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
                     timeout=60)
 
         # ssh and run nmimport.pl
-        # nmimport_command = f"sudo -S -p \"{self.connection.password}\n\" /usr/local/sf/bin/nmimport.pl /Volume/home/admin/{firepower_filename}"
-        nmimport_shell_command = f"chmod +x /Volume/home/admin/{nmimport_command_filename}\n/Volume/home/admin/{nmimport_command_filename}"
-        stdin, stdout, stderr = ssh.exec_command(nmimport_shell_command)
+        nmimport_command = f"sudo /usr/local/sf/bin/nmimport.pl /Volume/home/admin/{firepower_filename}"
+        stdin, stdout, stderr = ssh.exec_command(nmimport_command)
 
         # This will hang if the output is excessive. Around 1000 records is the limit this will reasonablly read back from.
         stdout_str = stdout.read(1000)
         stderr_str = stderr.read(1000)
 
         ssh.close()
-
-        ####################
-        # Remove shell script from server
-        ####################
-        ssh = SSHClient()
-        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-
-        # ssh connect
-        ssh.connect(self.connection.host,
-                    username=self.connection.username,
-                    password=self.connection.password,
-                    look_for_keys=False,
-                    timeout=60)
-
-        rm_command = f"rm -f /Volume/home/admin/{nmimport_command_filename}"
-        rm_stdin, rm_stdout, rm_stderr = ssh.exec_command(rm_command)
-        rm_stderr_str = rm_stderr.read(1000)
-
-        if rm_stderr_str:
-            self.logger.error("Warning: shell script may still be on the server. It can be found at\n/Volume/home/admin/{nmimport_command_filename}")
-
 
         ####################
         # Check results and return
@@ -179,7 +131,7 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
         for vuln in vuln_list:
             description = vuln.get("description", "")
             if description:
-                description = BeautifulSoup(description).get_text()
+                description = BeautifulSoup(description, features="html.parser").get_text()
 
             scan_result = \
             {

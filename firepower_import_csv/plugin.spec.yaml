@@ -34,11 +34,6 @@ connection:
     type: string
     description: Enter the address for the server
     required: false
-  key:
-    title: Key
-    type: bytes
-    description: SSH key from firepower in base64
-    required: false
 actions:
   import_csv:
     title: "Import CSV"
