@@ -29,7 +29,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                     look_for_keys=False,
                     timeout=30)
 
-        # ssh and run nmimport.pl
+        # ssh and run a simple command
         test_command = f"pwd"
         stdin, stdout, stderr = ssh.exec_command(test_command)
 
