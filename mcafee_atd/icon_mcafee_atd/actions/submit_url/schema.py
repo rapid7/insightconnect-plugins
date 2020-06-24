@@ -25,7 +25,7 @@ class SubmitUrlInput(insightconnect_plugin_runtime.Input):
     "submit_type": {
       "type": "string",
       "title": "Submit Type",
-      "description": "Analysis URL or analysis file from URL",
+      "description": "URL to submit for analysis or file to analyze from a URL",
       "default": "URL submission",
       "enum": [
         "URL submission",
@@ -36,7 +36,7 @@ class SubmitUrlInput(insightconnect_plugin_runtime.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "Address URL for analysis",
+      "description": "URL for analysis",
       "order": 1
     }
   },
@@ -76,8 +76,8 @@ class SubmitUrlOutput(insightconnect_plugin_runtime.Output):
         },
         "destIp": {
           "type": "string",
-          "title": "Dest IP",
-          "description": "Dest IP",
+          "title": "Destination IP",
+          "description": "Destination IP",
           "order": 2
         },
         "file": {
@@ -118,8 +118,8 @@ class SubmitUrlOutput(insightconnect_plugin_runtime.Output):
         },
         "srcIp": {
           "type": "string",
-          "title": "Src IP",
-          "description": "Src IP",
+          "title": "Source IP",
+          "description": "Source IP",
           "order": 9
         },
         "submitType": {
@@ -131,7 +131,7 @@ class SubmitUrlOutput(insightconnect_plugin_runtime.Output):
         "taskId": {
           "type": "integer",
           "title": "Task ID",
-          "description": "Taski ID",
+          "description": "Task ID",
           "order": 11
         },
         "url": {
@@ -205,8 +205,8 @@ class SubmitUrlOutput(insightconnect_plugin_runtime.Output):
             },
             "destIp": {
               "type": "string",
-              "title": "Dest IP",
-              "description": "Dest IP",
+              "title": "Destination IP",
+              "description": "Destination IP",
               "order": 2
             },
             "file": {
@@ -247,8 +247,8 @@ class SubmitUrlOutput(insightconnect_plugin_runtime.Output):
             },
             "srcIp": {
               "type": "string",
-              "title": "Src IP",
-              "description": "Src IP",
+              "title": "Source IP",
+              "description": "Source IP",
               "order": 9
             },
             "submitType": {
@@ -260,7 +260,7 @@ class SubmitUrlOutput(insightconnect_plugin_runtime.Output):
             "taskId": {
               "type": "integer",
               "title": "Task ID",
-              "description": "Taski ID",
+              "description": "Task ID",
               "order": 11
             },
             "url": {

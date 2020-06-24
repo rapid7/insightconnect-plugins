@@ -6,7 +6,7 @@
 
 * Check if a hash is blacklisted
 * Check the analysis status
-* Analyzing submitted URL
+* Submit a URL for analysis
 
 # Requirements
 
@@ -46,14 +46,14 @@ Example input:
 
 #### Submit URL
 
-This action is used to upload URL for dynamic analysis.
+This action is used to submit a URL for dynamic analysis. It accepts a URL to analyze or a URL that points to a file to analyze.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|submit_type|string|URL submission|False|Analysis URL or analysis file from URL|['URL submission', 'File from URL']|None|
-|url|string|None|True|Address URL for analysis|None|https://www.example.com|
+|submit_type|string|URL submission|False|URL to submit for analysis or file to analyze from a URL|['URL submission', 'File from URL']|None|
+|url|string|None|True|URL for analysis|None|https://www.example.com|
 
 Example input:
 
