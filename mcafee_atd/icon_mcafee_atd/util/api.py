@@ -18,6 +18,16 @@ class McAfeeATDAPI:
             'Invalid input data': 'Invalid hash value'
         }
 
+    def submit_url(self, url: str, submit_type: str) -> dict:
+        number_type = "1"
+        if submit_type == "File from URL":
+            number_type = "3"
+        return self._make_login_request(
+            "POST",
+            "fileupload.php",
+            {'data': json.dumps({'data': {"url": url, "submitType": number_type}})}
+        )
+
     def check_analysis_status(self, task_id: int, type: str):
         param = "iTaskId"
         if "job" == type:

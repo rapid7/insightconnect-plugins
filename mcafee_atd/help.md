@@ -6,6 +6,7 @@
 
 * Check if a hash is blacklisted
 * Check the analysis status
+* Submit a URL for analysis
 
 # Requirements
 
@@ -42,6 +43,63 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Submit URL
+
+This action is used to submit a URL for dynamic analysis. The `submit_type` options allows you to choose between a URL to analyze (e.g. https://www.example.com) and a URL that points to a file to analyze (e.g. https://www.example.com/PDF/14274les19.pdf).
+
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|submit_type|string|URL submission|False|URL to submit for analysis (https://www.example.com) or file to analyze from a URL (e.g. https://www.example.com/PDF/14274les19.pdf)|['URL submission', 'File from URL']|None|
+|url|string|None|True|URL for analysis|None|https://www.example.com|
+
+Example input:
+
+```
+{
+  "url": "https://www.example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|submit_url_info|submit_url_info|False|Information about submitted URL|
+
+Example output:
+
+```
+{
+  "submit_url_info": {
+    "estimatedTime": 0,
+    "fileId": "",
+    "filesWait": 0,
+    "mimeType": "application/url",
+    "results": [
+      {
+        "cache": 0,
+        "destIp": "",
+        "file": "https://example.com",
+        "md5": "03C63305A49C1342D4FA9988B635973E",
+        "messageId": "",
+        "sha1": "",
+        "sha256": "",
+        "size": "18",
+        "srcIp": "",
+        "submitType": "1",
+        "taskId": 29,
+        "url": "https://example.com"
+      }
+    ],
+    "subId": 29,
+    "success": true
+  }
+}
+```
 
 #### Check Analysis Status
 
@@ -146,6 +204,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.0 - New action Submit URL
 * 1.1.0 - New action Check Analysis Status
 * 1.0.0 - Initial plugin
 
