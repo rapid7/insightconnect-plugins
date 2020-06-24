@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Import a base64 encoded csv of vulnerabilities"
+    DESCRIPTION = "Import a base64 encoded CSV of vulnerabilities"
 
 
 class Input:

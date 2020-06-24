@@ -45,7 +45,10 @@ Example input:
 ```
 {
   "server": "198.51.100.100",
-  "username_password": "{\"username\": \"username\", \"password\": \"password\"}"
+  "username_password": {
+    "username": "username", 
+    "password": "password"
+  }
 }
 ```
 

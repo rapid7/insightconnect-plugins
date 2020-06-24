@@ -23,7 +23,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "username_password": {
       "$ref": "#/definitions/credential_username_password",
       "title": "SSH Credentials",
-      "description": "Username and password used to ssh into the Firepower server",
+      "description": "Username and password used to SSH into the Firepower server",
       "order": 1
     }
   },
