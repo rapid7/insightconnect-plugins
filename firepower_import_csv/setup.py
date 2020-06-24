@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name="firepower_import_csv-rapid7-plugin",
+setup(name="firepower_import_csv-custom_r7-plugin",
       version="1.0.0",
       description="This plugin utilizes Cisco Firepower to add scan results from a CSV file",
-      author="rapid7",
+      author="custom_r7",
       author_email="",
       url="",
       packages=find_packages(),

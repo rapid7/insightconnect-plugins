@@ -5,7 +5,7 @@ from icon_firepower_import_csv import connection, actions, triggers
 
 
 Name = "Firepower Import CSV"
-Vendor = "rapid7"
+Vendor = "custom_r7"
 Version = "1.0.0"
 Description = "This plugin utilizes Cisco Firepower to add scan results from a CSV file"
 
