@@ -45,21 +45,9 @@ class TestImportCsv(TestCase):
             """
             self.fail(message)
 
-
-        with open("../examples/report_all_values.txt") as file:
-            all_values_base64 = file.read()
-
-        action_params["csv"] = all_values_base64
-
         test_conn.connect(connection_params)
         test_action.connection = test_conn
         result = test_action.run(action_params)
-
-        print("\n")
-        print("*******************************")
-        print(f"Result: {result.get('result')}")
-        print(f"Success: {result.get('success')}")
-        print("*******************************")
 
         self.assertTrue("result" in result.keys())
         self.assertTrue(result.get("success"))

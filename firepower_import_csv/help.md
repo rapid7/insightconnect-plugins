@@ -1,30 +1,54 @@
 # Description
 
-This plugin utilizes Cisco Firepower to add scan results from a CSV file
+The [Cisco Firepower](https://www.cisco.com/c/en/us/products/security/firepower-management-center/index.html) plugin adds scan results from a CSV file. 
+
+The plugin will create a Firepower formatted .csv of commands from an input CSV file. It will then SCP that file onto the server and use SSH to run nmimport.pl
 
 # Key Features
 
-Identify key features of plugin.
+Import comma separated values (.csv) file of vulnerabilities to Firepower 
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product's user interface
+* Firepower server IP
+* SSH credentials to the the Firepower server
 
 # Documentation
+
 ## Setup
+
+Before running this plugin, nmimport needs to be added to the sudoers file on the Firepower server. 
+
+To do this SSH into the Firepower server and run  
+
+`sudo visudo`
+
+At the bottom of the sudoers file add these lines: 
+
+```
+# Needed for CVS import from InsightConnect
+admin fmc-6-3-0 = (root) NOPASSWD: /usr/local/sf/bin/nmimport.pl /Volume/home/admin/firepower_import.csv
+```
+
+This allows the plugin to run `sudo nmimport.pl` without providing a password.  
 
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|server|string|None|False|Enter the address for the server|None|None|
-|username_password|credential_username_password|None|False|Username and password used to ssh into the Firepower server|None|None|
+|server|string|None|False|Enter the address for the server|None|198.51.100.100|
+|username_password|credential_username_password|None|False|Username and password used to ssh into the Firepower server|None|{"username": "username", "password": "password"}|
 
 Example input:
 
 ```
+{
+  "server": "198.51.100.100",
+  "username_password": "{\"username\": \"username\", \"password\": \"password\"}"
+}
 ```
+
+
 ## Technical Details
 
 ### Actions
@@ -33,17 +57,20 @@ Example input:
 
 This action is used to import a base64 encoded csv of vulnerabilities.
 
+NOTE: This action is limited to around 100-200 vulnerabilities. If too many records are processed at one time Firepower
+unexpectedly hangs with no warnings or timeouts. This is based on a 4 core server with 32gb of ram.  
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|csv|bytes|None|True|CSV of vulnerabilities|None|ABCDE1234ASDF1234ASDF1234ASDF1234ASDF1234ASDF1234|
+|csv|bytes|None|True|CSV of vulnerabilities|None|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
 
 Example input:
 
 ```
 {
-  "csv": "ABCDE1234ASDF1234ASDF1234ASDF1234ASDF1234ASDF1234"
+  "csv": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
 }
 ```
 
@@ -57,6 +84,10 @@ Example input:
 Example output:
 
 ```
+{
+  "result": "Done processing 108 commands.",
+  "success": true
+}
 ```
 
 ### Triggers
@@ -66,9 +97,13 @@ _This plugin does not contain any triggers._
 ### Custom Output Types
 
 _This plugin does not contain any custom output types._
+
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+The import CSV action is limited to around 100-200 vulnerabilities. If too many records are processed at one time Firepower
+unexpectedly hangs with no warnings or timeouts. This is based on a 4 core server with 32gb of ram. 
+
+If this plugin hangs for a long time, try to batch the input CSV into smaller CSVs. 
 
 # Version History
 
@@ -78,4 +113,4 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Cisco Firepower](LINK TO PRODUCT/VENDOR WEBSITE)
+* [Cisco Firepower](https://www.cisco.com/c/en/us/products/security/firepower-management-center/index.html)

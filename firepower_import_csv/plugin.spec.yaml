@@ -29,11 +29,13 @@ connection:
     description: Username and password used to ssh into the Firepower server
     type: credential_username_password
     required: false
+    example: '{"username": "username", "password": "password"}'
   server:
     title: Server Address
     type: string
     description: Enter the address for the server
     required: false
+    example: 198.51.100.100
 actions:
   import_csv:
     title: "Import CSV"
@@ -44,7 +46,7 @@ actions:
         description: CSV of vulnerabilities
         type: bytes
         required: true
-        example: ABCDE1234ASDF1234ASDF1234ASDF1234ASDF1234ASDF1234
+        example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
     output:
       result:
         title: Result

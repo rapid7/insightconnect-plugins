@@ -123,8 +123,6 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
         raise PluginException(cause="Firepower failed to process input file.",
                               assistance=f"Error: {stderr_str}\nOutput: {stdout_str}")
 
-
-
     # This converts the decoded CSV into objects we can process
     def convert_csv_to_scan_results(self, vuln_list):
         scan_results = []
