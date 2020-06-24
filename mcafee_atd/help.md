@@ -7,6 +7,7 @@
 * Check if a hash is blacklisted
 * Check the analysis status
 * Submit a URL for analysis
+* Submit a file for analysis
 
 # Requirements
 
@@ -44,6 +45,66 @@ Example input:
 
 ### Actions
 
+#### Submit File
+
+This action is used to upload file for dynamic analysis.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|file|file|None|True|File for analysis|None|{"filename": "setup.exe", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|
+|url_for_file|string|None|False|URL from which the file is downloaded|None|https://www.example.com|
+
+Example input:
+
+```
+{
+  "file": {
+    "filename": "setup.exe",
+    "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
+  },
+  "url_for_file": "https://www.example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|submit_file_info|submit_info|False|Information about submitted file|
+
+Example output:
+
+```
+{
+  "submit_file_info": {
+    "estimatedTime": 0,
+    "fileId": "",
+    "filesWait": 0,
+    "mimeType": "text/plain",
+    "results": [
+      {
+        "cache": 3,
+        "destIp": "",
+        "file": "amas_filename",
+        "md5": "EA4B93CD8A68F72ACB1FB63B0AB7543B",
+        "messageId": "",
+        "sha1": "FC1E325DFBB631B82B53648A570750E329380417",
+        "sha256": "0F84347E49EB9A2E8259A7EAABF190575BCCEDFA60B1AF11373D00BE442E2783",
+        "size": "48",
+        "srcIp": "",
+        "submitType": "0",
+        "taskId": 58,
+        "url": ""
+      }
+    ],
+    "subId": 58,
+    "success": true
+  }
+}
+```
+
 #### Submit URL
 
 This action is used to submit a URL for dynamic analysis. The `submit_type` options allows you to choose between a URL to analyze (e.g. https://www.example.com) and a URL that points to a file to analyze (e.g. https://www.example.com/PDF/14274les19.pdf).
@@ -68,7 +129,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|submit_url_info|submit_url_info|False|Information about submitted URL|
+|submit_url_info|submit_info|False|Information about submitted URL|
 
 Example output:
 
@@ -204,6 +265,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.0 - New action Submit File
 * 1.2.0 - New action Submit URL
 * 1.1.0 - New action Check Analysis Status
 * 1.0.0 - Initial plugin
