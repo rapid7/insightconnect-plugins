@@ -18,6 +18,17 @@ class McAfeeATDAPI:
             'Invalid input data': 'Invalid hash value'
         }
 
+    def submit_file(self, file: dict, url_for_file: str) -> dict:
+        type_number = "0"
+        if url_for_file:
+            type_number = "2"
+        return self._make_login_request(
+                "POST",
+                "fileupload.php",
+                json_data={'data': json.dumps({'data': {"url": url_for_file, "submitType": type_number}})},
+                files={'amas_filename': base64.decodebytes(file.get('content').encode('utf-8'))}
+            )
+
     def submit_url(self, url: str, submit_type: str) -> dict:
         number_type = "1"
         if submit_type == "File from URL":
@@ -80,7 +91,7 @@ class McAfeeATDAPI:
 
         raise ConnectionTestException(ConnectionTestException.Preset.USERNAME_PASSWORD)
 
-    def _make_login_request(self, method: str, path: str, json_data: dict = None, params: dict = None):
+    def _make_login_request(self, method: str, path: str, json_data: dict = None, params: dict = None, files: dict = None):
         headers = None
         try:
             headers = self._get_login_headers()
@@ -89,6 +100,7 @@ class McAfeeATDAPI:
                 path,
                 params=params,
                 data=json_data,
+                files=files,
                 headers=headers
             )
             return response

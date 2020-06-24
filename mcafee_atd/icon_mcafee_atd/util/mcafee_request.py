@@ -9,7 +9,7 @@ class McAfeeRequest:
         self.verify_ssl = verify_ssl
         self.logger = logger
 
-    def make_json_request(self, method, path, params=None, data=None, headers=None):
+    def make_json_request(self, method, path, params=None, data=None, headers=None, files=None):
         response = {"text": ""}
 
         try:
@@ -18,6 +18,7 @@ class McAfeeRequest:
                 f"{self.url}/{path}",
                 data=data,
                 params=params,
+                files=files,
                 headers=headers,
                 verify=self.verify_ssl
             )
