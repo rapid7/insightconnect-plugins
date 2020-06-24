@@ -338,7 +338,7 @@ actions:
         example: '{"filename": "setup.exe", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}'
       url_for_file:
         title: File URL
-        description: You can also submit the URL from which the file is downloaded. In this case, a McAfee GTI URL look up is done on the submitted URL in addition to file analysis.
+        description: You can also submit the URL from which the file is downloaded. In this case, a McAfee GTI URL look up is done on the submitted URL in addition to file analysis
         type: string
         required: false
         example: https://www.example.com/download/latest
