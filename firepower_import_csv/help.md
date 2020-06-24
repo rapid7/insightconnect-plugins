@@ -58,7 +58,7 @@ Example input:
 This action is used to import a base64 encoded csv of vulnerabilities.
 
 NOTE: This action is limited to around 100-200 vulnerabilities. If too many records are processed at one time Firepower
-unexpectedly hangs with no warnings or timeouts. This is based on a 4 core server with 32gb of ram.  
+will unexpectedly hang with no warnings or timeouts. This is based on a 4 core server with 32gb of ram.  
 
 ##### Input
 
