@@ -2,11 +2,12 @@
 
 The [Cisco Firepower](https://www.cisco.com/c/en/us/products/security/firepower-management-center/index.html) plugin adds scan results from a CSV file. 
 
-The plugin will create a Firepower formatted .csv of commands from an input CSV file. It will then SCP that file onto the server and use SSH to run nmimport.pl
+The plugin will create a Firepower formatted comma separated values (CSV) of commands from an input CSV file. 
+It will then SCP that file onto the server and use SSH to run nmimport.pl
 
 # Key Features
 
-Import comma separated values (.csv) file of vulnerabilities to Firepower 
+Import comma separated values (CSV) file of vulnerabilities to Firepower 
 
 # Requirements
 
@@ -37,7 +38,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |server|string|None|False|Enter the address for the server|None|198.51.100.100|
-|username_password|credential_username_password|None|False|Username and password used to ssh into the Firepower server|None|{"username": "username", "password": "password"}|
+|username_password|credential_username_password|None|False|Username and password used to SSH into the Firepower server|None|{"username": "username", "password": "password"}|
 
 Example input:
 
@@ -55,7 +56,7 @@ Example input:
 
 #### Import CSV
 
-This action is used to import a base64 encoded csv of vulnerabilities.
+This action is used to import a base64 encoded CSV of vulnerabilities.
 
 NOTE: This action is limited to around 100-200 vulnerabilities. If too many records are processed at one time Firepower
 will unexpectedly hang with no warnings or timeouts. This is based on a 4 core server with 32gb of ram.  

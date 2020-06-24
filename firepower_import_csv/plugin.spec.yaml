@@ -26,7 +26,7 @@ language: python
 connection:
   username_password:
     title: SSH Credentials
-    description: Username and password used to ssh into the Firepower server
+    description: Username and password used to SSH into the Firepower server
     type: credential_username_password
     required: false
     example: '{"username": "username", "password": "password"}'
@@ -39,7 +39,7 @@ connection:
 actions:
   import_csv:
     title: "Import CSV"
-    description: "Import a base64 encoded csv of vulnerabilities"
+    description: "Import a base64 encoded CSV of vulnerabilities"
     input:
       csv:
         title: CSV of Vulnerabilities
