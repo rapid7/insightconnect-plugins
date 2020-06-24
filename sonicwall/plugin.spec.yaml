@@ -4,7 +4,7 @@ products: [insightconnect]
 name: sonicwall
 title: SonicWall Firewall
 description: Manage firewalls and block hosts with SonicWall firewalls
-version: 1.0.0
+version: 1.2.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -88,7 +88,7 @@ types:
 connection:
   url:
     title: URL
-    description: Base URL for the SonicWall firewall
+    description: Base URL for the SonicWall endpoint
     type: string
     required: true
     example: https://www.example.com
@@ -135,3 +135,95 @@ actions:
         description: Return information about add address object to group
         type: object_action
         required: false
+  create_address_object:
+    title: Create Address Object
+    description: Creates a new address object
+    input:
+      address_object:
+        title: Address Object
+        description: Name of the address object, defaults to value address if no name is given
+        type: string
+        required: false
+        example: MaliciousHost
+      address:
+        title: Address
+        description: IP, CIDR, or domain name to assign to the Address Object
+        type: string
+        required: true
+        example: example.com
+      skip_private_address:
+        title: Skip Private Addresses
+        description: If set to true, any addresses that are defined in the RFC1918 space will not be blocked. e.g. 10/8, 172.16/12, 192.168/16
+        type: boolean
+        required: true
+        example: true
+      whitelist:
+        title: Whitelist
+        description: This list contains a set of hosts that should not be blocked. This can include IPs, CIDRs, and domains
+        type: "[]string"
+        required: false
+        example: ["198.51.100.100", "192.0.2.0/24", "example.com" ]
+      zone:
+        title: Zone
+        description: Name of the zone where the new object will be placed
+        type: string
+        required: true
+        default: WAN
+        example: WAN
+    output:
+      status:
+        title: Status
+        description: Returns information about creating new address object
+        type: status
+        required: false
+  delete_address_object:
+    title: Delete Address Object
+    description: Deletes an address object
+    input:
+      address_object:
+        title: Address Object
+        description: Name of the address object to delete
+        type: string
+        required: true
+        example: MaliciousHost
+    output:
+      status:
+        title: Status
+        description: Returns information about creating new address object
+        type: status
+        required: false
+  check_if_address_in_address_group:
+    title: Check if Address in Group
+    description: Check that a host or address object is in an address group
+    input:
+      group:
+        title: Group Name
+        description: Name of address group to check
+        type: string
+        required: true
+        example: "ICON Block List"
+      address:
+        title: Address
+        description: Address Object name, or IP, CIDR, or domain name when Enable Search is set to true
+        type: string
+        required: true
+        example: MaliciousHost
+      enable_search:
+        title: Enable Search
+        description: When enabled, search for contents of Address Objects for an IP, CIDR or domain. This is useful when you don’t know the Address Object by its name
+        type: boolean
+        default: false
+        required: false
+        example: true
+    output:
+      found:
+        title: Found
+        description: Return true if address was found in group, return false if not found
+        type: boolean
+        required: true
+      address_objects:
+        title: Address Objects
+        description: The names and details of the address objects that match or contain the address
+        type: "[]object"
+        required: false
+

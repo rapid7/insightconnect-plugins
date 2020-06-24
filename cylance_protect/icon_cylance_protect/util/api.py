@@ -40,7 +40,7 @@ class CylanceProtectAPI:
         return self._call_api("DELETE", f"{self.url}/globallists/v2", "globallist:delete", json_data=payload)
 
     def _call_api(self, method, url, scope, params=None, json_data=None):
-        token = self.generate_token(self.tenant_id, self.app_id, self.app_secret, scope)
+        token = self.generate_token(scope)
         return self._make_request(
             method, url, params, json_data, headers={
                 "Authorization": f"Bearer {token}"
@@ -93,7 +93,7 @@ class CylanceProtectAPI:
             self.logger.info(f"Call to CylancePROTECT failed: {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
 
-    def generate_token(self, tenant_id, app_id, app_secret, scope):
+    def generate_token(self, scope):
         timeout = 1800
         now = datetime.utcnow()
         timeout_datetime = now + timedelta(seconds=timeout)
@@ -101,15 +101,15 @@ class CylanceProtectAPI:
             "exp": int((timeout_datetime - datetime(1970, 1, 1)).total_seconds()),
             "iat": int((now - datetime(1970, 1, 1)).total_seconds()),
             "iss": "http://cylance.com",
-            "sub": app_id,
-            "tid": tenant_id,
+            "sub": self.app_id,
+            "tid": self.tenant_id,
             "jti": str(uuid.uuid4()),
             "scp": scope
         }
 
         response = self._make_request(method="POST",
                                       url=f"{self.url}/auth/v2/token",
-                                      data=json.dumps({"auth_token": jwt.encode(claims, app_secret,
+                                      data=json.dumps({"auth_token": jwt.encode(claims, self.app_secret,
                                                                                 algorithm='HS256').decode(
                                           'utf-8')}),
                                       headers={"Content-Type": "application/json; charset=utf-8"})
