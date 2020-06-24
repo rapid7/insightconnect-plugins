@@ -341,7 +341,7 @@ actions:
         description: You can also submit the URL from which the file is downloaded. In this case, a McAfee GTI URL look up is done on the submitted URL in addition to file analysis.
         type: string
         required: false
-        example: https://www.example.com
+        example: https://www.example.com/download/latest
     output:
       submit_file_info:
         title: Submit File Info

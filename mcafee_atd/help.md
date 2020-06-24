@@ -54,7 +54,7 @@ This action is used to upload a file for dynamic analysis. It accepts an option 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |file|file|None|True|File for analysis|None|{"filename": "setup.exe", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|
-|url_for_file|string|None|False|You can also submit the URL from which the file is downloaded. In this case, a McAfee GTI URL look up is done on the submitted URL in addition to file analysis.|None|https://www.example.com|
+|url_for_file|string|None|False|You can also submit the URL from which the file is downloaded. In this case, a McAfee GTI URL look up is done on the submitted URL in addition to file analysis.|None|https://www.example.com/download/latest|
 
 Example input:
 
@@ -64,7 +64,7 @@ Example input:
     "filename": "setup.exe",
     "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
   },
-  "url_for_file": "https://www.example.com"
+  "url_for_file": "https://www.example.com/download/latest"
 }
 ```
 
