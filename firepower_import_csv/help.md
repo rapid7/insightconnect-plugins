@@ -1,6 +1,6 @@
 # Description
 
-The [Cisco Firepower](https://www.cisco.com/c/en/us/products/security/firepower-management-center/index.html) plugin adds scan results from a CSV file. 
+The [Firepower](https://www.cisco.com/c/en/us/products/security/firepower-management-center/index.html) Import CSV plugin adds scan results from a CSV file. 
 
 The plugin will create a Firepower formatted comma separated values (CSV) of commands from an input CSV file. 
 It will then SCP that file onto the server and use SSH to run nmimport.pl

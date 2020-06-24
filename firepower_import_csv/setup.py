@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 
-setup(name="cisco_firepower-rapid7-plugin",
+setup(name="firepower_import_csv-rapid7-plugin",
       version="1.0.0",
       description="This plugin utilizes Cisco Firepower to add scan results from a CSV file",
       author="rapid7",
@@ -10,5 +10,5 @@ setup(name="cisco_firepower-rapid7-plugin",
       url="",
       packages=find_packages(),
       install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/icon_cisco_firepower']
+      scripts=['bin/icon_firepower_import_csv']
       )

@@ -23,4 +23,4 @@ RUN python setup.py build && python setup.py install
 # User to run plugin code. The two supported users are: root, nobody
 USER root
 
-ENTRYPOINT ["/usr/local/bin/icon_cisco_firepower"]
+ENTRYPOINT ["/usr/local/bin/icon_firepower_import_csv"]

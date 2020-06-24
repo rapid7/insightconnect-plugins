@@ -3,8 +3,8 @@ import os
 sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase
-from icon_cisco_firepower.connection.connection import Connection
-from icon_cisco_firepower.actions.import_csv import ImportCsv
+from icon_firepower_import_csv.connection.connection import Connection
+from icon_firepower_import_csv.actions.import_csv import ImportCsv
 import json
 import logging
 

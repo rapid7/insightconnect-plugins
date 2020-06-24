@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import ImportCsvInput, ImportCsvOutput, Input, Output, Component
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
-from icon_cisco_firepower.util.commands import generate_set_os_command, generate_add_host_command, \
+from icon_firepower_import_csv.util.commands import generate_set_os_command, generate_add_host_command, \
     generate_add_result_command, generate_set_source_command
 from io import StringIO
 from paramiko import SSHClient

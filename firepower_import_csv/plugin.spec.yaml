@@ -1,8 +1,8 @@
 plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
-name: cisco_firepower
-title: Cisco Firepower
+name: firepower_import_csv
+title: Firepower Import CSV
 vendor: rapid7
 support: rapid7
 status: []
