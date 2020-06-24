@@ -30,8 +30,8 @@ class SubmitFileInput(insightconnect_plugin_runtime.Input):
     },
     "url_for_file": {
       "type": "string",
-      "title": "URL for File",
-      "description": "URL from which the file is downloaded",
+      "title": "File URL",
+      "description": "You can also submit the URL from which the file is downloaded. In this case, a McAfee GTI URL look up is done on the submitted URL in addition to file analysis.",
       "order": 2
     }
   },
