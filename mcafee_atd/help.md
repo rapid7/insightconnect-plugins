@@ -46,13 +46,14 @@ Example input:
 
 #### Submit URL
 
-This action is used to submit a URL for dynamic analysis. It accepts a URL to analyze or a URL that points to a file to analyze.
+This action is used to submit a URL for dynamic analysis. The `submit_type` options allows you to choose between a URL to analyze (e.g. https://www.example.com) and a URL that points to a file to analyze (e.g. https://www.example.com/PDF/14274les19.pdf).
+
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|submit_type|string|URL submission|False|URL to submit for analysis or file to analyze from a URL|['URL submission', 'File from URL']|None|
+|submit_type|string|URL submission|False|URL to submit for analysis (https://www.example.com) or file to analyze from a URL (e.g. https://www.example.com/PDF/14274les19.pdf)|['URL submission', 'File from URL']|None|
 |url|string|None|True|URL for analysis|None|https://www.example.com|
 
 Example input:

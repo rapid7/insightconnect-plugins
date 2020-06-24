@@ -25,7 +25,7 @@ class SubmitUrlInput(insightconnect_plugin_runtime.Input):
     "submit_type": {
       "type": "string",
       "title": "Submit Type",
-      "description": "URL to submit for analysis or file to analyze from a URL",
+      "description": "URL to submit for analysis (https://www.example.com) or file to analyze from a URL (e.g. https://www.example.com/PDF/14274les19.pdf)",
       "default": "URL submission",
       "enum": [
         "URL submission",

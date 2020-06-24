@@ -313,7 +313,7 @@ actions:
         example: https://www.example.com
       submit_type:
         title: Submit Type
-        description: URL to submit for analysis or file to analyze from a URL
+        description: URL to submit for analysis (https://www.example.com) or file to analyze from a URL (e.g. https://www.example.com/PDF/14274les19.pdf)
         type: string
         required: false
         default: URL submission
