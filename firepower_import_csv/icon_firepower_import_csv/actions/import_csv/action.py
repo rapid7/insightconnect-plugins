@@ -71,10 +71,10 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
         scp_command_firepower = f"sshpass -p {self.connection.password} scp -o StrictHostKeyChecking=no {firepower_fullpath} {self.connection.username}@{self.connection.host}:/Volume/home/admin/{firepower_filename}"
         stream = os.popen(scp_command_firepower)
         output = stream.read()
+        stream.close()
         if output:
             raise PluginException(cause="Could not copy payload file to the firepower server",
                                   assistance=output)
-        stream.close()
         self.logger.info("Copy complete.")
 
         ################

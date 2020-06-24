@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: firepower_import_csv
 title: Firepower Import CSV
-vendor: rapid7
+vendor: custom
 support: rapid7
 status: []
 description: This plugin utilizes Cisco Firepower to add scan results from a CSV file
