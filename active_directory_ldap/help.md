@@ -443,7 +443,7 @@ paired `\(\)` are supported
 
 # Version History
 
-* 3.2.9 - Fix issue with error handling and logging for the Modify Groups action | add example inputs | update to use ldap3 2.7 and python 3.8
+* 3.2.9 - Fix issue with error handling and logging for the Modify Groups action | Add example inputs | Update to use ldap3 2.7 and Python 3.8
 * 3.2.8 - Fix issue were adding objects to containers might fail
 * 3.2.7 - New spec and help.md format for the Extension Library
 * 3.2.6 - Update help to document supported Windows Server versions

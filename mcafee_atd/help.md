@@ -8,6 +8,7 @@
 * Check the analysis status
 * Submit a URL for analysis
 * Submit a file for analysis
+* Display the analyzer profiles to which the user has access
 
 # Requirements
 
@@ -44,6 +45,82 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### List Analyzer Profiles
+
+This action is used to display the analyzer profiles to which the user has access.
+
+##### Input
+
+_This action does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|profiler_results|[]profiler_results|True|Displays the analyzer profiles, which the user can access|
+|success|boolean|True|Returns true if found information about analyzer profiles|
+
+Example output:
+
+```
+{
+  "profiler_results": [
+    {
+      "artimas": 0,
+      "asm": 0,
+      "aviraAV": 0,
+      "consoleLog": 0,
+      "createTime": "2020-06-25 17:33:30",
+      "customrules": 0,
+      "defaultVM": 0,
+      "dnnEnable": 0,
+      "dropZip": 0,
+      "dumpZip": 0,
+      "family": 0,
+      "flp": 0,
+      "gam": 1,
+      "gml": 0,
+      "gtiTS": 1,
+      "gtiURLRep": 0,
+      "heuristic": 0,
+      "imageid": 0,
+      "internet": 0,
+      "lastChange": "2020-06-25 17:33:30",
+      "locBlackList": 0,
+      "locWhiteList": 1,
+      "logZip": 0,
+      "maxExecTime": 0,
+      "memorydump": 0,
+      "mfeAV": 1,
+      "minExecTime": 0,
+      "name": "Test",
+      "netLog": 0,
+      "netdriveZip": 0,
+      "noPDF": 0,
+      "ntvLog": 0,
+      "openarchive": 1,
+      "overrideOS": 0,
+      "pe32": 0,
+      "reAnalysis": 1,
+      "recusiveAnalysis": 0,
+      "sandbox": 0,
+      "sophosAV": 0,
+      "ssAPIid": 0,
+      "ssKeyid": 0,
+      "ssLevelid": 0,
+      "summary": 1,
+      "userLog": 0,
+      "userid": 1,
+      "vmProfileid": 11,
+      "xMode": 0,
+      "yaraScan": 0,
+      "yararules": 0
+    }
+  ],
+  "success": true
+}
+```
 
 #### Submit File
 
@@ -264,6 +341,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.4.0 - New action List Analyzer Profiles
 * 1.3.0 - New action Submit File
 * 1.2.0 - New action Submit URL
 * 1.1.0 - New action Check Analysis Status
