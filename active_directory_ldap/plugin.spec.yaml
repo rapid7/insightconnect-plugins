@@ -29,7 +29,7 @@ types:
 connection:
   host:
     title: Host
-    description: Server Host, e.g. ldap://198.51.100.100. Must use either ldap:// or ldaps://
+    description: Server Host, e.g. ldap://example.com. Must use either ldap:// or ldaps://
       for SSL prefix
     type: string
     required: true
