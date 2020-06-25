@@ -33,6 +33,22 @@ admin fmc-6-3-0 = (root) NOPASSWD: /usr/local/sf/bin/nmimport.pl /Volume/home/ad
 
 This allows the plugin to run `sudo nmimport.pl` without providing a password.  
 
+The incoming CSV needs the following headers (in any order): 
+
+vulnerability_id
+description
+ip_address
+port
+protocol_id
+name (OS name)
+vendor (OS vendor)
+version (OS version)
+
+
+
+
+
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|

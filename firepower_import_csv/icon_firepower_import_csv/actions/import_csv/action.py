@@ -11,6 +11,7 @@ import csv
 import base64
 import os
 import paramiko
+import re
 
 
 class ImportCsv(insightconnect_plugin_runtime.Action):
@@ -149,13 +150,32 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
                     "vulnerability_id": vuln.get("vulnerability_id", ""),
                     "description": description,
                     "vulnerability_title": vuln.get("title", ""),
-                    "cve_ids": "", # Space-separated list of CVE vulnerability IDs
+                    "cve_ids": self.get_cve_ids(vuln.get("title")),
                     "bugtraq_ids": "", # Space-separated list of BugTraq vulnerability IDs
                 }
             }
 
             scan_results.append(scan_result)
         return scan_results
+
+
+    # This will extract CVE numbers from the title of the vulnerability
+    # The titles typically look like this:
+    # `Microsoft CVE-2019-0981: .Net Framework and .Net Core Denial CVE-2019-0982 of Service  CVE-2019-094 Vulnerability`
+    # Firepower expects a space separated list of CVEs in the CVE field of AddScanResult
+    def get_cve_ids(self, title_string):
+        if not title_string:
+            return ""
+        cve_list = re.findall("CVE-\d{4}-\d{4,7}", title_string)
+        if not len(cve_list):
+            return ""
+
+        cve_string = ""
+        for cve in cve_list:
+            cve_string += cve + " "
+
+        return cve_string.strip()
+
 
     # This will generate a set of commands from a given vulnerability.
     # ex:

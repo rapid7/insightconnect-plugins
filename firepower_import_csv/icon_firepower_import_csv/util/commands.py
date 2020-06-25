@@ -30,6 +30,10 @@ def generate_set_source_command(source_id):
 
 
 def generate_add_result_command(details, ip):
+    # These are written like this because it's possible for the incoming object to have a value like this
+    # descripiton: None
+    # In that case get will return None, which Firepower chokes on
+
     scanner_id = details.get('scanner_id', '') if details.get('scanner_id', '') else ''
     vuln_id = details.get('vulnerability_id', '') if details.get('vulnerability_id', '') else ''
     port = details.get('port', '')
