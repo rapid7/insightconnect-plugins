@@ -18,6 +18,12 @@ class McAfeeATDAPI:
             'Invalid input data': 'Invalid hash value'
         }
 
+    def list_analyzer_profiles(self):
+        return self._make_login_request(
+            "GET",
+            "vmprofiles.php"
+        )
+
     def submit_file(self, file: dict, url_for_file: str) -> dict:
         type_number = "0"
         if url_for_file:
