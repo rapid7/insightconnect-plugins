@@ -45,7 +45,6 @@ name (OS name)
 vendor (OS vendor)
 version (OS version)
 
-
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
