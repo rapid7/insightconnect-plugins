@@ -4,7 +4,7 @@ products: [insightconnect]
 name: mcafee_atd
 title: McAfee Advanced Threat Defense
 description: McAfee Advanced Threat Defense provides an API framework for external applications to access core McAfeeATD functions through the REST protocol
-version: 1.3.0
+version: 1.4.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -217,6 +217,287 @@ types:
       type: boolean
       description: Success
       required: false
+  profiler_results:
+    artimas:
+      title: Artimas
+      type: integer
+      description: Artimas
+      required: false
+    asm:
+      title: Asm
+      type: integer
+      description: Asm
+      required: false
+    aviraAV:
+      title: Avira AV
+      type: integer
+      description: Avira AV
+      required: false
+    consoleLog:
+      title: Console Log
+      type: integer
+      description: Console log
+      required: false
+    createTime:
+      title: Create Time
+      type: string
+      description: Create time
+      required: false
+    customrules:
+      title: Customrules
+      type: integer
+      description: Customrules
+      required: false
+    default32OSName:
+      title: Default 32OS Name
+      type: string
+      description: Default 32OS name
+      required: false
+    default64OSName:
+      title: Default 64OS Name
+      type: string
+      description: Default 64OS name
+      required: false
+    defaultVM:
+      title: Default VM
+      type: integer
+      description: Default VM
+      required: false
+    dnnEnable:
+      title: DNN Enable
+      type: integer
+      description: DNN enable
+      required: false
+    dropZip:
+      title: Drop ZIP
+      type: integer
+      description: Drop ZIP
+      required: false
+    dumpZip:
+      title: Dump ZIP
+      type: integer
+      description: Dump ZIP
+      required: false
+    family:
+      title: Family
+      type: integer
+      description: Family
+      required: false
+    filePassword:
+      title: File Password
+      type: string
+      description: File password
+      required: false
+    filePassword1:
+      title: File Password 1
+      type: string
+      description: File password 1
+      required: false
+    flp:
+      title: FLP
+      type: integer
+      description: FLP
+      required: false
+    gam:
+      title: GAM
+      type: integer
+      description: GAM
+      required: false
+    gml:
+      title: GML
+      type: integer
+      description: GML
+      required: false
+    gtiTS:
+      title: GTI TS
+      type: integer
+      description: GTI TS
+      required: false
+    gtiURLRep:
+      title: GTI URL REP
+      type: integer
+      description: GTI URL REP
+      required: false
+    heuristic:
+      title: Heuristic
+      type: integer
+      description: Heuristic
+      required: false
+    imageid:
+      title: Image ID
+      type: integer
+      description: Image ID
+      required: false
+    internet:
+      title: Internet
+      type: integer
+      description: Internet
+      required: false
+    lastChange:
+      title: Last Change
+      type: string
+      description: Last change
+      required: false
+    locBlackList:
+      title: Loc Blacklist
+      type: integer
+      description: Loc blacklist
+      required: false
+    locWhiteList:
+      title: Loc Whitelist
+      type: integer
+      description: Loc whitelist
+      required: false
+    logZip:
+      title: Log ZIP
+      type: integer
+      description: Log ZIP
+      required: false
+    maxExecTime:
+      title: Max Exec Time
+      type: integer
+      description: Max exec time
+      required: false
+    memorydump:
+      title: Memory Dump
+      type: integer
+      description: Memory dump
+      required: false
+    mfeAV:
+      title: MFE AV
+      type: integer
+      description: MFE AV
+      required: false
+    minExecTime:
+      title: Min Exec Time
+      type: integer
+      description: Min exec time
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    netLog:
+      title: Net Log
+      type: integer
+      description: Net log
+      required: false
+    netdriveZip:
+      title: Net Drive ZIP
+      type: integer
+      description: Net drive ZIP
+      required: false
+    noPDF:
+      title: No PDF
+      type: integer
+      description: No PDF
+      required: false
+    ntvLog:
+      title: Ntv Log
+      type: integer
+      description: Ntv log
+      required: false
+    openarchive:
+      title: Openarchive
+      type: integer
+      description: Openarchive
+      required: false
+    overrideOS:
+      title: Override OS
+      type: integer
+      description: Override OS
+      required: false
+    pe32:
+      title: PE32
+      type: integer
+      description: PE32
+      required: false
+    reAnalysis:
+      title: Re Analysis
+      type: integer
+      description: Re analysis
+      required: false
+    recusiveAnalysis:
+      title: Recusive Analysis
+      type: integer
+      description: Recusive analysis
+      required: false
+    runtimeArgument:
+      title: Runtime Argument
+      type: string
+      description: Runtime argument
+      required: false
+    sandbox:
+      title: Sandbox
+      type: integer
+      description: Sandbox
+      required: false
+    selectedOSName:
+      title: Selected OS Name
+      type: string
+      description: Selected OS name
+      required: false
+    sophosAV:
+      title: Sophos AV
+      type: integer
+      description: Sophos AV
+      required: false
+    ssAPIid:
+      title: SS API ID
+      type: integer
+      description: SS API ID
+      required: false
+    ssKeyid:
+      title: SS Key ID
+      type: integer
+      description: SS key ID
+      required: false
+    ssLevelid:
+      title: SS Level ID
+      type: integer
+      description: SS level ID
+      required: false
+    summary:
+      title: Summary
+      type: integer
+      description: Summary
+      required: false
+    userLog:
+      title: User Log
+      type: integer
+      description: User log
+      required: false
+    userid:
+      title: User ID
+      type: integer
+      description: User ID
+      required: false
+    vmDesc:
+      title: VM Desc
+      type: string
+      description: VM desc
+      required: false
+    vmProfileid:
+      title: VM Profileid
+      type: integer
+      description: VM profileid
+      required: false
+    xMode:
+      title: X Mode
+      type: integer
+      description: X mode
+      required: false
+    yaraScan:
+      title: Yara Scan
+      type: integer
+      description: Yara scan
+      required: false
+    yararules:
+      title: Yara Rules
+      type: integer
+      description: Yara rules
+      required: false
 connection:
   url:
     title: URL
@@ -348,3 +629,17 @@ actions:
         description: Information about submitted file
         type: submit_info
         required: false
+  list_analyzer_profiles:
+    title: List Analyzer Profiles
+    description: Display the analyzer profiles to which the user has access
+    output:
+      profiler_results:
+        title: Profiler Results
+        description: Displays the analyzer profiles, which the user can access
+        type: "[]profiler_results"
+        required: true
+      success:
+        title: Success
+        description: Returns true if found information about analyzer profiles
+        type: boolean
+        required: true
