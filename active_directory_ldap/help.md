@@ -36,8 +36,8 @@ Example input:
 {
   "host": "ldaps://example.com",
   "port": 389,
-  "use_ssl": "true",
-  "username_password": {"username":"user1", "password":"mypassword"}
+  "use_ssl": true,
+  "username_password": "{\"username\":\"user1\", \"password\":\"mypassword\"}"
 }
 ```
 
@@ -91,7 +91,7 @@ This action is used to add the specified Active Directory user.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|account_disabled|string|True|True|Set this to true to disable the user account at creation|['true', 'false']|True|
+["|account_disabled|string|true|True|Set this to true to disable the user account at creation|['true', 'false']|true|"]
 |additional_parameters|object|None|False|Add additional user parameters in JSON format|None|{"telephoneNumber":"(617)555-1234"}|
 |domain_name|string|None|True|The domain name this user will belong to|None|example.com|
 |first_name|string|None|True|User's first name|None|John|
@@ -106,7 +106,7 @@ Example input:
 ```
 {
   "account_disabled": "true",
-  "additional_parameters": {"telephoneNumber":"(617)555-1234"},
+  "additional_parameters": "{\"telephoneNumber\":\"(617)555-1234\"}",
   "domain_name": "example.com",
   "first_name": "John",
   "last_name": "Doe",
