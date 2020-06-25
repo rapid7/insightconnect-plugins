@@ -43,13 +43,13 @@ class AddUserInput(komand.Input):
     "additional_parameters": {
       "type": "object",
       "title": "Additional Parameters",
-      "description": "Add additional user parameters in JSON format e.g. {'telephoneNumber': '(617)555-1234'}",
+      "description": "Add additional user parameters in JSON format",
       "order": 9
     },
     "domain_name": {
       "type": "string",
       "title": "Domain Name",
-      "description": "The domain name this user will belong to, e.g. mydomain.com",
+      "description": "The domain name this user will belong to",
       "order": 1
     },
     "first_name": {
@@ -88,7 +88,7 @@ class AddUserInput(komand.Input):
     "user_principal_name": {
       "type": "string",
       "title": "User Principal Name",
-      "description": "The users principal name, e.g. user@example.com",
+      "description": "The users principal name",
       "order": 8
     }
   },

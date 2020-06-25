@@ -36,7 +36,7 @@ class ModifyGroupsInput(komand.Input):
     "distinguished_name": {
       "type": "string",
       "title": "Distinguished Name",
-      "description": "The distinguished name of the user whose membership will be modified e.g. CN=user,OU=domain_users,DC=mydomain,DC=com",
+      "description": "The distinguished name of the user whose membership will be modified",
       "order": 1
     },
     "group_dn": {
