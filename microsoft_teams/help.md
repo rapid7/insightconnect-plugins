@@ -500,12 +500,14 @@ This action is used to create a group in Azure and enable it for Microsoft Teams
 Example input:
 
 ```
+{
   "group_description": "A test group",
   "group_name": "test_group",
   "mail_enabled": false,
   "mail_nickname": "TestGroup",
   "members": "['user@example.com']",
   "owners": "['user@example.com']"
+}
 ```
 
 ##### Output
@@ -650,6 +652,9 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.5 - Fix issue where auth token wasn't properly renewed
+* 2.0.4 - Fix issue where a message that only had an image in it could break the 'New Message Received' trigger
+* 2.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/microsoft-teams)
 * 2.0.2 - Fix issue where unexpected HTML messages would not trigger workflows
 * 2.0.1 - Update to Get Teams action to support more than 20 teams
 * 2.0.0 - Fix issue where send message would not work if there were too many teams | Removed regex capability for team and channel inputs which will speed up Send Message and Send HTML Message actions

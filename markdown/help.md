@@ -33,6 +33,11 @@ This action is used to convert HTML to Markdown.
 |html|bytes|None|False|HTML data as bytes|None|None|
 |html_string|string|None|False|HTML data as string|None|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -50,6 +55,15 @@ This action is used to convert Markdown to PDF.
 |----|----|-------|--------|-----------|----|-------|
 |markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|
 |markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|
+
+Example input:
+
+```
+{
+  "markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=",
+  "markdown_string": "# Rapid7 InsightConnect"
+}
+```
 
 ##### Output
 
@@ -73,7 +87,8 @@ Example input:
 
 ```
 {
-  "markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q="
+  "markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=",
+  "markdown_string": "# Rapid7 InsightConnect"
 }
 ```
 
@@ -93,6 +108,42 @@ Example output:
 }
 ```
 
+#### Markdown to TXT
+
+This action is used to convert Markdown to TXT.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|
+|markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|
+
+Example input:
+
+```
+{
+  "markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=",
+  "markdown_string": "# Rapid7 InsightConnect"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|txt|bytes|False|TXT data as bytes|
+|txt_string|string|False|TXT data as string|
+
+Example output:
+
+```
+{
+  "txt_string": "Rapid7 InsightConnect\n",
+  "txt": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
+}
+```
+
 ### Triggers
 
 _This plugin does not contain any triggers._
@@ -107,6 +158,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.0 - New action: Markdown to TXT
 * 3.0.0 - Update Markdown to HTML and Markdown to PDF action titles and descriptions
 * 2.2.2 - New spec and help.md format for the Extension Library
 * 2.2.1 - Add `utilities` plugin tag for Marketplace searchability

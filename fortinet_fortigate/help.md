@@ -25,14 +25,74 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|API key|None|2Fty5834tFpBdidePJnt9075MMdkUb|
-|hostname|string|None|True|Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000|None|fortigate.rapid7.com|
+|hostname|string|None|True|Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000|None|example.com|
 |ssl_verify|boolean|None|True|SSL verify|None|False|
+
+Example input:
+
+```
+{
+  "api_key": "2Fty5834tFpBdidePJnt9075MMdkUb",
+  "hostname": "example.com",
+  "ssl_verify": false
+}
+```
 
 ## Technical Details
 
 ### Actions
 
-#### Check Address Group for IP Address
+#### Remove Address Object from Group
+
+This action removes an address object from an address group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object|string|None|True|Address object|None|198.51.100.100|
+|group|string|None|True|Group name|None|InsightConnect Block List|
+
+Example input:
+
+```
+{
+  "address_object": "198.51.100.100",
+  "group": "InsightConnect Block List"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|result_object|object|True|An object containing the results of the action|
+|success|boolean|True|Was the operation successful|
+
+Example output:
+
+```
+{
+  "success": true,
+  "result_object": {
+    "http_method": "PUT",
+    "revision": "ae0c665d9d5ad469c280efc424e00e29",
+    "revision_changed": true,
+    "old_revision": "94d82356a2bc4cb05963807103392ca3",
+    "mkey": "Test Group",
+    "status": "success",
+    "http_status": 200,
+    "vdom": "root",
+    "path": "firewall",
+    "name": "addrgrp",
+    "serial": "FGVM02TM20001791",
+    "version": "v6.2.3",
+    "build": 1066
+  }
+}
+```
+
+#### Check if Address in Group
 
 This action is used to check if an IP address is in an address group.
 
@@ -40,23 +100,34 @@ This action is used to check if an IP address is in an address group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_group_name|string|None|True|The name of the address group to check|None|blocked IP's|
-|ip_address|string|None|True|The IP address to check for|None|198.51.100.100|
+|address|string|None|True|The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name|None|198.51.100.100|
+|enable_search|boolean|False|True|When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don't know the Address Object by its name|None|False|
+|group|string|None|True|Name of Address Group to check for address|None|InsightConnect Block Policy|
 
 Example input:
 
 ```
+{
+  "address": "198.51.100.100",
+  "enable_search": false,
+  "group": "InsightConnect Block Policy"
+}
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|ip_address_found|boolean|True|True if the IP address was found in the address group|
+|address_objects|[]string|True|The names of the address objects that match or contain the address|
+|found|boolean|True|Was address found in group|
 
 Example output:
 
 ```
+{
+  "found": true,
+  "address_objects": ["198.51.100.100/32"]
+}
 ```
 
 #### Get Policies
@@ -67,11 +138,14 @@ This action is used to get policies.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name_filter|string|None|False|Optional name to filter on|None|None|
+|name_filter|string|None|False|Optional name to filter on|None|InsightConnect Block Policy|
 
 Example input:
 
 ```
+{
+  "name_filter": "InsightConnect Block Policy"
+}
 ```
 
 ##### Output
@@ -228,12 +302,16 @@ This action is used to add an address object to an address group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_object_name|string|None|True|Address object name|None|None|
-|group_name|string|None|True|Group name|None|None|
+|address_object|string|None|True|Address object|None|198.51.100.100|
+|group|string|None|True|Group name|None|InsightConnect Block List|
 
 Example input:
 
 ```
+{
+  "address_object": "198.51.100.100",
+  "group": "InsightConnect Block List"
+}
 ```
 
 ##### Output
@@ -274,17 +352,23 @@ This action is used to create an address object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|host|string|None|True|The host to create. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|198.51.100.100|
-|name|string|None|False|Optional name to give this address object. If not provided, the name will be the IP address or domain name|None|MaliciousHost|
-|whitelist|[]string|None|False|This list contains a set of network object that should not be blocked. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|[198.51.100.100, example.com, 192.0.2.0/24]|
+|address|string|None|True|The address to assign to the Address Object. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|198.51.100.100|
+|address_object|string|None|False|Optional name to give this address object. If not provided, the name will be the value of address input field|None|MaliciousHost|
+|skip_rfc1918|boolean|True|True|Skip private IP addresses as defined in RFC 1918|None|True|
+|whitelist|[]string|None|False|This list contains a set of network object that should not be blocked. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|["198.51.100.100", "example.com", "192.0.2.0/24"]|
 
 Example input:
 
 ```
 {
-  "host": "192.168.7.7",
-  "name": "testing",
-  "whitelist": ["198.51.100.100", "example,com", "192.0.2.0/24"]
+  "address": "198.51.100.100",
+  "address_object": "MaliciousHost",
+  "skip_rfc1918": true,
+  "whitelist": [
+    "198.51.100.100",
+    "example.com",
+    "192.0.2.0/24"
+  ]
 }
 ```
 
@@ -326,13 +410,13 @@ This action is used to delete an address object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|host|string|None|True|The host to delete. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|198.51.100.100|
+|address_object|string|None|True|Name of Address Object to delete|None|MaliciousHost|
 
 Example input:
 
 ```
 {
-  "host": "198.51.100.100"
+  "address_object": "MaliciousHost"
 }
 ```
 
@@ -374,11 +458,14 @@ This action is used to get address objects.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name_filter|string|None|False|Optional name to filter on|None|None|
+|name_filter|string|None|False|Optional name to filter on|None|198.51.100.100|
 
 Example input:
 
 ```
+{
+  "name_filter": "198.51.100.100"
+}
 ```
 
 ##### Output
@@ -559,6 +646,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.0 - Update Create Address Object action to accept a RFC1918 whitelist | Add enable_search functionality to Check if Address in Group action
+* 3.0.0 - Revise action input/output naming schemes | Add example inputs | New action Remove Address Object from Group
 * 2.0.0 - Simplify the Create Address Object action to auto-detect the input type | Add whitelist safety check to Create Address Object action
 * 1.1.0 - New Action Check if IP is in Address Group
 * 1.0.0 - Initial plugin

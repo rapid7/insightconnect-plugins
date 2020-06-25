@@ -4,13 +4,14 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Create a new address object"
+    DESCRIPTION = "Create a new address object. Supports IPv6"
 
 
 class Input:
+    ADDRESS = "address"
     ADDRESS_OBJECT = "address_object"
-    OBJECT_DESCRIPTION = "object_description"
-    OBJECT_NAME = "object_name"
+    DESCRIPTION = "description"
+    SKIP_RFC1918 = "skip_rfc1918"
     TAGS = "tags"
     WHITELIST = "whitelist"
     
@@ -27,23 +28,30 @@ class SetAddressObjectInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "address_object": {
+    "address": {
       "type": "string",
-      "title": "Address Object",
+      "title": "Address",
       "description": "The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com google.com",
       "order": 1
     },
-    "object_description": {
+    "address_object": {
       "type": "string",
-      "title": "Object Description",
+      "title": "Address Object",
+      "description": "The name of the address object",
+      "order": 2
+    },
+    "description": {
+      "type": "string",
+      "title": "Description",
       "description": "A description for the address object",
       "order": 3
     },
-    "object_name": {
-      "type": "string",
-      "title": "Object Name",
-      "description": "The name of the address object",
-      "order": 2
+    "skip_rfc1918": {
+      "type": "boolean",
+      "title": "Skip RFC 1918 (Private) IP Addresses",
+      "description": "Skip private IP addresses as defined in RFC 1918",
+      "default": false,
+      "order": 5
     },
     "tags": {
       "type": "string",
@@ -58,12 +66,13 @@ class SetAddressObjectInput(komand.Input):
       "items": {
         "type": "string"
       },
-      "order": 5
+      "order": 6
     }
   },
   "required": [
+    "address",
     "address_object",
-    "object_name"
+    "skip_rfc1918"
   ]
 }
     """)
@@ -81,7 +90,7 @@ class SetAddressObjectOutput(komand.Output):
     "code": {
       "type": "string",
       "title": "Code",
-      "description": "Response code from PAN-OS",
+      "description": "Response code from the firewall",
       "order": 2
     },
     "message": {

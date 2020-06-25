@@ -6,7 +6,7 @@ from icon_trendmicro_apex import connection, actions, triggers
 
 Name = "Trend Micro Apex"
 Vendor = "rapid7"
-Version = "1.0.0"
+Version = "3.0.1"
 Description = "Report suspicious objects and files to block on Apex firewall"
 
 
@@ -21,7 +21,25 @@ class ICONTrendmicroApex(komand.Plugin):
                 )
         self.add_action(actions.AddFileToUdsoList())
 
-        self.add_action(actions.AddToUdsoList())
+        self.add_action(actions.Blacklist())
+
+        self.add_action(actions.DeleteOpeniocFile())
+
+        self.add_action(actions.DownloadOpeniocFile())
+
+        self.add_action(actions.DownloadRcaCsvFile())
+
+        self.add_action(actions.GetAgentStatus())
+
+        self.add_action(actions.GetRcaObject())
+
+        self.add_action(actions.OpeniocFilesList())
+
+        self.add_action(actions.Quarantine())
+
+        self.add_action(actions.SearchAgents())
+
+        self.add_action(actions.UploadOpeniocFile())
 
 
 def main():

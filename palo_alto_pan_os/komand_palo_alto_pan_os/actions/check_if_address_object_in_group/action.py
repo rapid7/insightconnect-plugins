@@ -14,10 +14,11 @@ class CheckIfAddressObjectInGroup(komand.Action):
                 output=CheckIfAddressObjectInGroupOutput())
 
     def run(self, params={}):
-        group_name = params.get(Input.GROUP_NAME)
+        group_name = params.get(Input.GROUP)
         address_to_check = params.get(Input.ADDRESS)
         device_name = params.get(Input.DEVICE_NAME)
         virtual_system = params.get(Input.VIRTUAL_SYSTEM)
+        enable_search= params.get(Input.ENABLE_SEARCH)
 
         xpath = f"/config/devices/entry[@name='{device_name}']/vsys/entry[@name='{virtual_system}']/address-group/entry[@name='{group_name}']"
         response = self.connection.request.get_(xpath)
@@ -34,38 +35,55 @@ class CheckIfAddressObjectInGroup(komand.Action):
         self.logger.info(f"Searching through {len(ip_objects)} address objects.")
         ip_object_names = []
         for member in ip_objects.get("member", {}):
-            object_name = member.get("#text", "")
-            if object_name:
-                ip_object_names.append(object_name)
+            if type(member) == str:
+                ip_object_names.append(member)
+            else:
+                object_name = member.get("#text", "")
+                if object_name:
+                    ip_object_names.append(object_name)
 
-        # This is a helper to check addresses against address objects
-        ip_checker = IpCheck()
+        # If enable search is false, we just want to see if the address to check matches an address object
+        # If enable search is true, we have to look in each address object for address to check
+        if not enable_search:
+            for name in ip_object_names:
+                if name == address_to_check:
+                    return {Output.FOUND: True, Output.ADDRESS_OBJECTS: [name]}
+        else:  # enable_search is false
+            # This is a helper to check addresses against address objects
+            ip_checker = IpCheck()
 
-        # This goes out and gets each address object by name, and attempts to pull the actual
-        # IP, CIDR, or domain out of the return.
-        #
-        # The response format changes depending on the type of address object, and we need to handle
-        # all of that
-        for name in ip_object_names:
-            # For each name, go and grab the Address Object
-            object_xpath = f"/config/devices/entry[@name='{device_name}']/vsys/entry[@name='{virtual_system}']/address/entry[@name='{name}']"
-            object_result = self.connection.request.get_(object_xpath)
-            get_entry = object_result.get("response", {}).get("result", {}).get("entry", {})
+            # This goes out and gets each address object by name, and attempts to pull the actual
+            # IP, CIDR, or domain out of the return.
+            #
+            # The response format changes depending on the type of address object, and we need to handle
+            # all of that
+            object_names_to_return = []
+            found = False
+            for name in ip_object_names:
+                # For each name, go and grab the Address Object
+                object_xpath = f"/config/devices/entry[@name='{device_name}']/vsys/entry[@name='{virtual_system}']/address/entry[@name='{name}']"
+                object_result = self.connection.request.get_(object_xpath)
+                get_entry = object_result.get("response", {}).get("result", {}).get("entry", {})
 
-            # Now try and deal with that address object
-            if get_entry:
-                # Find an entry that's either ip-something or fqdn
-                key_to_get = list(filter(lambda x: (x.startswith("ip-") or x == "fqdn"), list(get_entry.keys())))[0]
-                address_object = get_entry.get(key_to_get)
+                # Now try and deal with that address object
+                if get_entry:
+                    # Find an entry that's either ip-something or fqdn
+                    key_to_get = list(filter(lambda x: (x.startswith("ip-") or x == "fqdn"), list(get_entry.keys())))[0]
+                    address_object = get_entry.get(key_to_get)
 
-                # Depending on how PAN OS is feeling on a given day, it will either have a string or list returned
-                # in the XML for the key we just found
-                if type(address_object) is str:
-                    if ip_checker.check_address_against_object(address_object, address_to_check):
-                        return {Output.FOUND: True}
-                else:
-                    if ip_checker.check_address_against_object(address_object.get("#text", ""), address_to_check):
-                        return {Output.FOUND: True}
+                    # Depending on how PAN OS is feeling on a given day, it will either have a string or list returned
+                    # in the XML for the key we just found
+                    if type(address_object) is str:
+                        if ip_checker.check_address_against_object(address_object, address_to_check):
+                            object_names_to_return.append(name)
+                            found = True
+                    else:
+                        if ip_checker.check_address_against_object(address_object.get("#text", ""), address_to_check):
+                            object_names_to_return.append(name)
+                            found = True
+
+            if found:
+                return {Output.FOUND: True, Output.ADDRESS_OBJECTS: object_names_to_return}
 
         # That was a lot of work for nothing...bail out
-        return {Output.FOUND: False}
+        return {Output.FOUND: False, Output.ADDRESS_OBJECTS: []}

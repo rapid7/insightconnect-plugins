@@ -1,0 +1,196 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: cylance_protect
+title: BlackBerry CylancePROTECT
+description: Automate detection and response operations using CylancePROTECT
+version: 1.0.3
+vendor: rapid7
+support: rapid7
+status: []
+tags: [cylance, protect, edr, blacklist]
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [cylance, protect, edr, blacklist]
+  features: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cylanceprotect
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.cylance.com
+types:
+  policy:
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+  agent:
+    agent_version:
+      title: Agent Version
+      type: string
+      description: Agent version
+      required: false
+    background_detection:
+      title: Background Detection
+      type: boolean
+      description: Background detection
+      required: false
+    date_first_registered:
+      title: Date First Registered
+      type: string
+      description: Date first registered
+      required: false
+    date_last_modified:
+      title: Date Last Modified
+      type: string
+      description: Date last modified
+      required: false
+    date_offline:
+      title: Date Offline
+      type: string
+      description: Date offline
+      required: false
+    distinguished_name:
+      title: Distinguished Name
+      type: string
+      description: Distinguished name
+      required: false
+    host_name:
+      title: Host Name
+      type: string
+      description: Host name
+      required: false
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    ip_addresses:
+      title: IP Addresses
+      type: "[]string"
+      description: IP addresses
+      required: false
+    is_safe:
+      title: Is Safe
+      type: boolean
+      description: Is safe
+      required: false
+    last_logged_in_user:
+      title: Last Logged In User
+      type: string
+      description: Last logged in user
+      required: false
+    mac_addresses:
+      title: MAC Addresses
+      type: "[]string"
+      description: MAC addresses
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    os_version:
+      title: OS Version
+      type: string
+      description: OS version
+      required: false
+    policy:
+      title: Policy
+      type: policy
+      description: Policy
+      required: false
+    state:
+      title: State
+      type: string
+      description: State
+      required: false
+    update_available:
+      title: Update Available
+      type: boolean
+      description: Update available
+      required: false
+    update_type:
+      title: Update Type
+      type: string
+      description: Update type
+      required: false
+
+connection:
+  tenant_id:
+    title: Tenant ID
+    description: The unique tenant ID of the tenant that the device belongs to
+    type: credential_secret_key
+    required: true
+    example: 1abc234d-5efa-6789-bcde-0f1abcde23f5
+  url:
+    title: URL
+    description: Web API URL
+    type: string
+    required: true
+    default: https://protectapi.cylance.com
+    example: https://protectapi.cylance.com
+  application_secret:
+    title: Application Secret
+    description: Generated token that allows access to Cylance Resources
+    type: credential_secret_key
+    required: true
+    example: 1abc234d-5efa-6789-bcde-0f1abcde23f5
+  application_id:
+    title: Application ID
+    description: Application ID for CylancePROTECT instance
+    type: credential_secret_key
+    required: true
+    example: 1abc234d-5efa-6789-bcde-0f1abcde23f5
+
+actions:
+  get_agent_details:
+    title: Get Agent Details
+    description: Retrieve agent information
+    input:
+      agent:
+        title: Agent
+        description: Agent to retrieve device information from. Accepts MAC address, hostname, or agent ID
+        type: string
+        required: true
+        example: cylance-agent-win12
+    output:
+      agent:
+        title: Agent
+        description: Details for an agent
+        type: agent
+        required: true
+  blacklist:
+    title: Blacklist
+    description: Blacklist (quarantine) a hash globally
+    input:
+      hash:
+        title: Hash
+        description: Create a blacklist item from a SHA256 hash
+        type: string
+        required: true
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+      description:
+        title: Description
+        description: Description for why the hash is blacklisted
+        type: string
+        required: true
+        default: Hash Blacklisted from InsightConnect
+        example: Hash Blacklisted from InsightConnect
+      blacklist_state:
+        title: Blacklist State
+        description: True to blacklist hash, false to unblacklist hash
+        type: boolean
+        required: true
+        example: True
+    output:
+      success:
+        title: Success
+        description: Return true if blacklist item was created or deleted
+        type: boolean
+        required: true

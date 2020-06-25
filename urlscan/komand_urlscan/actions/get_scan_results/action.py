@@ -53,5 +53,11 @@ class GetScanResults(komand.Action):
         ret["screenshotURL"] = su
 
         return {
-            Output.SCAN_RESULTS: ret
+            Output.SCAN_RESULTS: ret,
+            Output.TASK: js.get("task", {}),
+            Output.PAGE: js.get("page", {}),
+            Output.LISTS: js.get("lists", {}),
+            Output.META: js.get("meta", {}),
+            Output.STATS: js.get("stats", {}),
+            Output.VERDICTS: js.get("verdicts", {})
         }

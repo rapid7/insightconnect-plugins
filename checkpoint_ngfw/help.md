@@ -24,21 +24,23 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|discard_other_sessions|boolean|False|True|Force changes made by any plugin actions. Currently logged in users will be logged out of their sessions to allow the plugin to commit changes. Users of Check Point R80+ may not need to enable this option|None|True|
 |port|integer|443|True|Check Point server port|None|443|
-|server|string|None|True|Check Point server IP address|None|198.168.2.1|
+|server|string|None|True|Check Point server IP address|None|198.51.100.100|
 |ssl_verify|boolean|True|True|Use SSL verification|None|True|
-|username_password|credential_username_password|None|True|Username and password|None|None|
+|username_password|credential_username_password|None|True|Username and password|None|{"username": "xxxxxx", "password": "xxxxxx"}|
 
 Example input:
 
 ```
 {
+  "discard_other_sessions": true,
   "port": 443,
-  "server": "192.168.1.1",
-  "ssl_verify": false,
+  "server": "198.51.100.100",
+  "ssl_verify": true,
   "username_password": {
-    "password": "xxxxxx",
-    "username": "xxxxxx"
+    "username": "xxxxxx", 
+    "password": "xxxxxx"
   }
 }
 ```
@@ -46,6 +48,101 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Add Address Object to Group
+
+This action is used to add an address object (host) to a group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object|string|None|True|The name of the host object to add|None|New Host|
+|group|string|None|True|Name of the group to add this object to|None|InsightConnect Block List|
+
+Example input:
+
+```
+{
+  "address_object": "New Host",
+  "group": "InsightConnect Block List"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Success|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Remove Address Object from Group
+
+This action removes an address object (host) from an address group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object|string|None|True|The name of the address object (host object) to remove|None|Malicious Host|
+|group|string|None|True|Group name|None|InsightConnect Block List|
+
+Example input:
+
+```
+{
+  "address_object": "Malicious Host",
+  "group": "InsightConnect Block List"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Check if Address in Group
+
+This action checks to see if an IPv4 or IPv6 address is in an Address Group
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|IPv4 or IPv6 address to check in the group|None|198.51.100.100|
+|group|string|None|False|Group to check. UID is not supported. Omitting this input will check all groups|None|InsightConnect Block List|
+
+Example input:
+
+```
+{
+  "address": "198.51.100.100",
+  "group": "InsightConnect Block List"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|address_objects|[]string|True|The names of the address objects that match or contain the address|
+|found|boolean|True|Was address found in group|
 
 #### Install Policy
 
@@ -57,11 +154,10 @@ This action is used to install a policy to selected targets.
 |----|----|-------|--------|-----------|----|-------|
 |access_control_policy|boolean|True|True|Set to be true in order to install the Access Control policy. By default, the value is true if Access Control policy is enabled on the input policy package, otherwise false|None|True|
 |desktop_security_policy|boolean|False|True|Set to be true in order to install the Desktop Security policy. By default, the value is true if desktop security policy is enabled on the input policy package, otherwise false|None|False|
-|discard_other_sessions|boolean|False|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|False|
 |install_on_all_cluster_members_or_fail|boolean|False|True|Relevant for the gateway clusters. If true, the policy is installed on all the cluster members. If the installation on a cluster member fails, don't install on that cluster|None|False|
 |policy_package|string|standard|True|Policy package to install|None|standard|
 |qos_policy|boolean|False|True|Set to be true in order to install the QoS policy. By default, the value is true if Quality-of-Service policy is enabled on the input policy package, otherwise false|None|False|
-|targets|[]string|['target name']|True|On what targets to execute this command. Targets may be identified by their name, or object unique identifier|None|['checkpoint_fw_1', 'checkpoint_fw_2']|
+|targets|[]string|["target name"]|True|On what targets to execute this command. Targets may be identified by their name, or object unique identifier|None|["checkpoint_fw_1", "checkpoint_fw_2"]|
 |threat_prevention_policy|boolean|True|True|Set to be true in order to install the Threat Prevention policy. By default, the value is true if Threat Prevention policy is enabled on the input policy package, otherwise false|None|True|
 
 Example input:
@@ -70,12 +166,12 @@ Example input:
 {
   "access_control_policy": true,
   "desktop_security_policy": false,
-  "discard_other_sessions": false,
   "install_on_all_cluster_members_or_fail": false,
   "policy_package": "standard",
   "qos_policy": false,
   "targets": [
-    "checkmark_fw"
+    "checkpoint_fw_1",
+    "checkpoint_fw_2"
   ],
   "threat_prevention_policy": true
 }
@@ -104,7 +200,6 @@ This action is used to set a threat protection action.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |action|string|None|True|Action|['Inactive', 'Detect', 'Prevent', 'Drop', 'Accept']|Prevent|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
 |name|string|None|True|Name of the protection to act on|None|Blaster Attacks|
 |profile|string|Optimized|True|Profile e.g. Optimized, Basic, Strict|None|Optimized|
 
@@ -113,8 +208,7 @@ Example input:
 ```
 {
   "action": "Prevent",
-  "discard_other_sessions": true,
-  "name": "Alt-N Technologies SecurityGateway Username Buffer Overflow",
+  "name": "Blaster Attacks",
   "profile": "Optimized"
 }
 ```
@@ -133,42 +227,6 @@ Example output:
 }
 ```
 
-#### Add Host to Network Group
-
-This action is used to add a host to a network group.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|None|
-|group_name|string|None|True|Name of the group to add this object to|None|None|
-|host_name|string|None|True|The host to add to the network group, usually the IP address|None|None|
-
-Example input:
-
-```
-{
-  "discard_other_sessions": false,
-  "group_name": "Test Group",
-  "host_name": "192.168.5.1"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Success|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
 #### Discard All Sessions
 
 This action is a troubleshooting action that will discard all active sessions. This can sometimes alleviate the 
@@ -177,11 +235,6 @@ issue where objects remain locked after editing.
 ##### Input
 
 _This action does not contain any inputs._
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -205,15 +258,13 @@ This action is used to remove a host from network objects.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
-|name|string|None|True|Name|None|192.168.2.1|
+|name|string|None|True|Name|None|198.51.100.100|
 
 Example input:
 
 ```
 {
-  "discard_other_sessions": true,
-  "name": "192.1.2.1"
+  "name": "198.51.100.100"
 }
 ```
 
@@ -233,26 +284,29 @@ Example output:
 }
 ```
 
-#### Add Host
+#### Create Address Object
 
-This action is used to add a host as a network object.
+This action is used to add an address object (host) as a network object
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |color|string|black|False|Color|['black', 'aquamarine', 'blue', 'brown', 'burlywood', 'coral', 'crete', 'cyan', 'dark blue', 'dark gold', 'dark gray', 'dark green', 'dark orange', 'dark sea green', 'firebrick', 'forest green', 'gold', 'gray', 'khaki', 'lemon chiffon', 'light green', 'magenta', 'navy blue', 'olive', 'orange', 'orchid', 'pink', 'purple', 'red', 'sea green', 'sienna', 'sky blue', 'slate blue', 'turquoise', 'violet red', 'yellow']|black|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
-|host_ip|string|None|True|Host IP address|None|192.168.2.1|
-|name|string|None|True|Name|None|192.168.2.1|
+|host_ip|string|None|True|Host IP address|None|198.51.100.100|
+|name|string|None|True|Name|None|198.51.100.100|
+|skip_rfc1918|boolean|True|True|Skip private IP addresses as defined in RFC 1918|None|True|
+|whitelist|[]string|None|False|This list contains a set of network objects that should not be blocked. This can include IP addresses and CIDR IP addresses|None|["198.51.100.100", "192.0.2.0/24"]|
 
 Example input:
 
 ```
 {
-  "discard_other_sessions": true,
-  "host_ip": "192.168.5.1",
-  "name": "192.168.5.1"
+  "color": "black",
+  "host_ip": "198.51.100.100",
+  "name": "198.51.100.100",
+  "skip_rfc1918": true,
+  "whitelist": ["198.51.100.100", "192.0.2.0/24"]
 }
 ```
 
@@ -260,12 +314,16 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|host_object|host_object|True|Information about the host that was added|
+|error_message|string|False|The cause of the error (if the action fails)|
+|host_object|host_object|False|Information about the host object that was added|
+|success|boolean|True|Whether or not Check Point could successfully create the address object|
 
 Example output:
 
 ```
 {
+  "success": true,
+  "error_message": "A host with the IP address or name already exists!",
   "host_object": {
     "uid": "70c9580f-0708-4878-8fdd-98bd4f6d3b44",
     "name": "192.1.2.1",
@@ -313,15 +371,13 @@ This action is used to remove an access rule.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |access_rule_name|string|None|True|Access rule name|None|InsightConnect Access Rule|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
 |layer|string|Network|True|Layer|None|Network|
 
 Example input:
 
 ```
 {
-  "access_rule_name": "Test from InsightConnect",
-  "discard_other_sessions": true,
+  "access_rule_name": "InsightConnect Access Rule",
   "layer": "Network"
 }
 ```
@@ -565,24 +621,27 @@ This action is used to create a rule to block traffic.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |action|string|Drop|True|Action to take|['Accept', 'Drop', 'Ask', 'Inform', 'Reject', 'User Auth', 'Client Auth', 'Apply Layer']|Drop|
-|destination|string|None|False|Destination network object name|None|192.168.2.1|
-|discard_other_sessions|boolean|True|True|Discard all other user sessions. This can fix errors when objects are locked by other sessions|None|True|
+|destination|string|None|False|Destination network object name|None|198.51.100.100|
 |layer|string|Network|True|Layer to add this rule to|None|Network|
-|list_of_services|[]string|None|False|List of services to block|None|['AOL', 'SMTP']|
+|list_of_services|[]string|None|False|List of services to block|None|["AOL", "SMTP"]|
 |name|string|None|True|Rule name|None|Malicious IP Addresses|
 |position|string|top|True|Position in the list of rules. e.g. top, bottom, 15|None|1|
-|source|string|None|False|Source network object name|None|192.168.2.1|
+|source|string|None|False|Source network object name|None|198.51.100.100|
 
 Example input:
 
 ```
 {
   "action": "Drop",
-  "discard_other_sessions": true,
+  "destination": "198.51.100.100",
   "layer": "Network",
-  "name": "Test from Komand",
-  "position": "top",
-  "source": "192.1.2.1"
+  "list_of_services": [
+    "AOL",
+    "SMTP"
+  ],
+  "name": "Malicious IP Addresses",
+  "position": 1,
+  "source": "198.51.100.100"
 }
 ```
 
@@ -923,6 +982,8 @@ privileges.
 
 # Version History
 
+* 2.0.1 - Revise Create Address Object action output
+* 2.0.0 - New actions Check if Address in Group, Remove Address Object from Group | Rename "Add Host" action to "Create Address Object" and add whitelist support | Move "Discard Sessions" input from individual actions to connection
 * 1.3.0 - Update to add install options to Install Policy
 * 1.2.0 - New action Install Policy | Fix issue where logout could fail | Update to help to improve troubleshooting | Update to `Add Host` action to with color option 
 * 1.1.0 - New action Add Host to Network Group

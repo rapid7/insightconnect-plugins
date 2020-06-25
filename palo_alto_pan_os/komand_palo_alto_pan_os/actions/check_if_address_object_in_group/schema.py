@@ -4,17 +4,19 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Checks to see if an IP, CIDR, or domain is in an Address Group"
+    DESCRIPTION = "Checks to see if an IP address, CIDR IP address, or domain is in an Address Group. Supports IPv6"
 
 
 class Input:
     ADDRESS = "address"
     DEVICE_NAME = "device_name"
-    GROUP_NAME = "group_name"
+    ENABLE_SEARCH = "enable_search"
+    GROUP = "group"
     VIRTUAL_SYSTEM = "virtual_system"
     
 
 class Output:
+    ADDRESS_OBJECTS = "address_objects"
     FOUND = "found"
     
 
@@ -27,7 +29,7 @@ class CheckIfAddressObjectInGroupInput(komand.Input):
     "address": {
       "type": "string",
       "title": "Address",
-      "description": "IP, CIDR, or domain to check if in address group. e.g. 198.51.100.100, 198.51.100.100/24, rapid7.com",
+      "description": "The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name",
       "order": 2
     },
     "device_name": {
@@ -35,11 +37,18 @@ class CheckIfAddressObjectInGroupInput(komand.Input):
       "title": "Device Name",
       "description": "Device name",
       "default": "localhost.localdomain",
+      "order": 4
+    },
+    "enable_search": {
+      "type": "boolean",
+      "title": "Enable Search",
+      "description": "When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name",
+      "default": false,
       "order": 3
     },
-    "group_name": {
+    "group": {
       "type": "string",
-      "title": "Group Name",
+      "title": "Group",
       "description": "Group name",
       "order": 1
     },
@@ -48,13 +57,14 @@ class CheckIfAddressObjectInGroupInput(komand.Input):
       "title": "Virtual System Name",
       "description": "Virtual system name",
       "default": "vsys1",
-      "order": 4
+      "order": 5
     }
   },
   "required": [
     "address",
     "device_name",
-    "group_name",
+    "enable_search",
+    "group",
     "virtual_system"
   ]
 }
@@ -70,6 +80,15 @@ class CheckIfAddressObjectInGroupOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "address_objects": {
+      "type": "array",
+      "title": "Address Objects",
+      "description": "The names of the address objects that match or contain address",
+      "items": {
+        "type": "string"
+      },
+      "order": 2
+    },
     "found": {
       "type": "boolean",
       "title": "Found",
