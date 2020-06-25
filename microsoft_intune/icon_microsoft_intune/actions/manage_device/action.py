@@ -14,11 +14,8 @@ class ManageDevice(insightconnect_plugin_runtime.Action):
             output=ManageDeviceOutput())
 
         self.actions = {
-            "Shutdown": "shutDown",
             "Reboot": "rebootNow",
             "Sync": "syncDevice",
-            "Reset PassCode": "resetPasscode",
-            "Lock": "remoteLock",
         }
 
     def run(self, params={}):
