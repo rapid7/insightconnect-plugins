@@ -37,16 +37,13 @@ The incoming CSV needs the following headers (in any order):
 
 vulnerability_id
 description
+title
 ip_address
 port
 protocol_id
 name (OS name)
 vendor (OS vendor)
 version (OS version)
-
-
-
-
 
 
 The connection configuration accepts the following parameters:
