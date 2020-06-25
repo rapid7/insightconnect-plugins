@@ -46,7 +46,7 @@ connection:
     type: boolean
     description: Use SSL?
     required: true
-    example: "true"
+    example: true
   username_password:
     title: Username and Password
     type: credential_username_password
