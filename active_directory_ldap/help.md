@@ -37,7 +37,7 @@ Example input:
   "host": "ldaps://example.com",
   "port": 389,
   "use_ssl": "true",
-  "username_password": "{\"username\":\"user1\", \"password\":\"mypassword\"}"
+  "username_password": {"username":"user1", "password":"mypassword"}
 }
 ```
 
