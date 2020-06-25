@@ -28,6 +28,9 @@ class MicrosoftIntuneAPI:
             }
         )
 
+    def managed_device_action(self, device_id: str, action: str):
+        return self._call_api("POST", f"deviceManagement/managedDevices/{device_id}/{action}")
+
     def search_managed_devices(self, device):
         if validators.uuid(device):
             return list(filter(lambda iter_device: iter_device['userId'] == device or iter_device['id'] == device,

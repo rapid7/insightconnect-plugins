@@ -1,11 +1,15 @@
 {
-	"spec": "92aa61c6db2f41cc66943da474a1c8cb",
-	"manifest": "e990fb4aaa4dbf0b30282ef1d26b4f33",
+	"spec": "e67f67ab84e198849792e8c4a2572596",
+	"manifest": "d7470bc83d8bd917516fc8387bd087c4",
 	"setup": "114d7e33eea9fdef61ec096b34060698",
 	"schemas": [
 		{
 			"identifier": "antivirus_scan/schema.py",
 			"hash": "13ec3c94a55380e9466c3dd6a51d795b"
+		},
+		{
+			"identifier": "manage_device/schema.py",
+			"hash": "9f6d231f62c713b04a487fd1b492c11c"
 		},
 		{
 			"identifier": "search_devices/schema.py",

@@ -174,6 +174,44 @@ Example output:
 }
 ```
 
+#### Manage Device
+
+This action is used to perform action on device by ID if it is not whitelisted.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|device|string|None|True|Device name, user ID, email address, or device ID|None|aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa|
+|type|string|None|True|Type of action|['Shutdown', 'Reboot', 'Sync', 'Reset PassCode', 'Lock']|None|
+|whitelist|[]string|None|False|This list contains a set of of device names, user IDs, email addresses, or device IDs that action will not be performed on|None|["user@example.com", "705c034c-034c-705c-4c03-5c704c035c70"]|
+
+Example input:
+
+```
+{
+  "device": "aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa",
+  "whitelist": [
+    "user@example.com",
+    "705c034c-034c-705c-4c03-5c704c035c70"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Return true if action was successfully performed on device|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 #### Antivirus Scan
 
 This action is used to initiate a Windows Defender Antivirus scan on a machine.
@@ -222,7 +260,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.1.0 - Add new actions Search Devices and Wipe
+* 1.1.0 - Add new action Manage Device
 * 1.0.0 - Initial plugin creation, action Antivirus Scan added
 
 # Links
