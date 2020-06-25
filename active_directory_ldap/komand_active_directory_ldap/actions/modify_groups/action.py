@@ -4,6 +4,7 @@ from .schema import ModifyGroupsInput, ModifyGroupsOutput
 from komand.exceptions import PluginException
 from komand_active_directory_ldap.util.utils import ADUtils
 from ldap3 import extend
+from ldap3.core.exceptions import *
 
 
 class ModifyGroups(komand.Action):
@@ -31,13 +32,22 @@ class ModifyGroups(komand.Action):
         group_dn = ','.join(temp_list)
 
         if add_remove == 'add':
-            group = extend.ad_add_members_to_groups(conn, dn, group_dn)
+            try:
+                group = extend.ad_add_members_to_groups(conn, dn, group_dn)
+            except LDAPInvalidDnError as e:
+                raise PluginException(cause='Either the user or group distinguished name was not found.',
+                                      assistance='Please check that the distinguished names are correct',
+                                      data=e)
         else:
-            group = extend.ad_remove_members_from_groups(conn, dn, group_dn, fix=True)
+            try:
+                group = extend.ad_remove_members_from_groups(conn, dn, group_dn, fix=True)
+            except LDAPInvalidDnError as e:
+                raise PluginException(cause='Either the user or group distinguished name was not found.',
+                                      assistance='Please check that the distinguished names are correct',
+                                      data=e)
 
         if group is False:
-            self.logger.error("ModifyGroups: Unexpected result for group. Group was " + str(group))
-            raise PluginException(cause="",
-                                  assistance="")
+            self.logger.error('ModifyGroups: Unexpected result for group. Group was ' + str(group))
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
         return {'success': group}
