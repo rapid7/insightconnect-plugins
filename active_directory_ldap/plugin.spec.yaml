@@ -52,7 +52,7 @@ connection:
     type: credential_username_password
     description: Username and password
     required: true
-    example: "{“username”:”user1”, “password”:”mypassword”}"
+    example: '{"username":"user1", "password":"mypassword"}'
 actions:
   query:
     title: Query
