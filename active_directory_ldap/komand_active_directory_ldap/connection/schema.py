@@ -19,7 +19,7 @@ class ConnectionSchema(komand.Input):
     "host": {
       "type": "string",
       "title": "Host",
-      "description": "Server Host, e.g. ldap://198.51.100.100. Must use either ldap:// or ldaps:// for SSL prefix",
+      "description": "Server Host, e.g. ldap://example.com. Must use either ldap:// or ldaps:// for SSL prefix",
       "order": 1
     },
     "port": {
