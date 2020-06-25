@@ -153,7 +153,7 @@ actions:
         description: 'Add additional user parameters in JSON format'
         type: object
         required: false
-        example: "{'telephoneNumber':'(617)555-1234'}"
+        example: '{"telephoneNumber":"(617)555-1234"}'
     output:
       success:
         description: Operation status
