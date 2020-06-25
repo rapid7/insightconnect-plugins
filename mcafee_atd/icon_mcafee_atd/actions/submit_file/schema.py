@@ -4,45 +4,61 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Upload URL for dynamic analysis"
+    DESCRIPTION = "Upload file for dynamic analysis"
 
 
 class Input:
-    SUBMIT_TYPE = "submit_type"
-    URL = "url"
+    FILE = "file"
+    URL_FOR_FILE = "url_for_file"
     
 
 class Output:
-    SUBMIT_URL_INFO = "submit_url_info"
+    SUBMIT_FILE_INFO = "submit_file_info"
     
 
-class SubmitUrlInput(insightconnect_plugin_runtime.Input):
+class SubmitFileInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "submit_type": {
-      "type": "string",
-      "title": "Submit Type",
-      "description": "URL to submit for analysis (https://www.example.com) or file to analyze from a URL (e.g. https://www.example.com/PDF/14274les19.pdf)",
-      "default": "URL submission",
-      "enum": [
-        "URL submission",
-        "File from URL"
-      ],
-      "order": 2
-    },
-    "url": {
-      "type": "string",
-      "title": "URL",
-      "description": "URL for analysis",
+    "file": {
+      "$ref": "#/definitions/file",
+      "title": "File",
+      "description": "File for analysis",
       "order": 1
+    },
+    "url_for_file": {
+      "type": "string",
+      "title": "File URL",
+      "description": "You can also submit the URL from which the file is downloaded. In this case, a McAfee GTI URL look up is done on the submitted URL in addition to file analysis",
+      "order": 2
     }
   },
   "required": [
-    "url"
-  ]
+    "file"
+  ],
+  "definitions": {
+    "file": {
+      "id": "file",
+      "type": "object",
+      "title": "File",
+      "description": "File Object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "title": "Content",
+          "description": "File contents",
+          "format": "bytes"
+        },
+        "filename": {
+          "type": "string",
+          "title": "Filename",
+          "description": "Name of file"
+        }
+      }
+    }
+  }
 }
     """)
 
@@ -50,16 +66,16 @@ class SubmitUrlInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class SubmitUrlOutput(insightconnect_plugin_runtime.Output):
+class SubmitFileOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "submit_url_info": {
+    "submit_file_info": {
       "$ref": "#/definitions/submit_info",
-      "title": "Submit URL Info",
-      "description": "Information about submitted URL",
+      "title": "Submit File Info",
+      "description": "Information about submitted file",
       "order": 1
     }
   },
