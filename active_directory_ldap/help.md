@@ -14,6 +14,8 @@
 
 * Host name and port number (the default TCP/UDP port for LDAP is 389, and 636 for LDAP over SSL)
 * Administrative credentials
+* To connect, you must have NTLM credentials.
+* Please make sure you enter your credentials with the DOMAIN\username format.
 
 # Documentation
 
@@ -23,19 +25,19 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|host|string|None|True|Server Host, e.g. ldap://198.51.100.100. Must use either ldap:// or ldaps:// for SSL prefix|None|ldaps://198.51.100.100|
+|host|string|None|True|Server Host, e.g. ldap://198.51.100.100. Must use either ldap:// or ldaps:// for SSL prefix|None|ldaps://example.com|
 |port|integer|389|True|Port, e.g. 389|None|389|
 |use_ssl|boolean|None|True|Use SSL?|None|True|
-|username_password|credential_username_password|None|True|Username and password|None|{“username”:”user1”, “password”:”mypassword”}|
+|username_password|credential_username_password|None|True|Username and password|None|{"username":"user1", "password":"mypassword"}|
 
 Example input:
 
 ```
 {
-  "host": "ldaps://198.51.100.100",
+  "host": "ldaps://example.com",
   "port": 389,
   "use_ssl": "true",
-  "username_password": "{“username”:”user1”, “password”:”mypassword”}"
+  "username_password": "{\"username\":\"user1\", \"password\":\"mypassword\"}"
 }
 ```
 
@@ -90,7 +92,7 @@ This action is used to add the specified Active Directory user.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |account_disabled|string|True|True|Set this to true to disable the user account at creation|['true', 'false']|True|
-|additional_parameters|object|None|False|Add additional user parameters in JSON format|None|{'telephoneNumber':'(617)555-1234'}|
+|additional_parameters|object|None|False|Add additional user parameters in JSON format|None|{"telephoneNumber":"(617)555-1234"}|
 |domain_name|string|None|True|The domain name this user will belong to|None|example.com|
 |first_name|string|None|True|User's first name|None|John|
 |last_name|string|None|True|User's last name|None|Doe|
@@ -104,7 +106,7 @@ Example input:
 ```
 {
   "account_disabled": "true",
-  "additional_parameters": "{'telephoneNumber':'(617)555-1234'}",
+  "additional_parameters": "{\"telephoneNumber\":\"(617)555-1234\"}",
   "domain_name": "example.com",
   "first_name": "John",
   "last_name": "Doe",
