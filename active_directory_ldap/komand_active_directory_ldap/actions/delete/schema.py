@@ -24,7 +24,7 @@ class DeleteInput(komand.Input):
     "distinguished_name": {
       "type": "string",
       "title": "Distinguished Name",
-      "description": "The distinguished name of the object to delete. Example CN=user,OU=domain_users,DC=mydomain,DC=com",
+      "description": "The distinguished name of the object to delete",
       "order": 1
     }
   },

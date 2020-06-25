@@ -4,7 +4,7 @@ products: [insightconnect]
 name: active_directory_ldap
 title: Active Directory LDAP
 description: This plugin utilizes Microsoft\'s Active Directory service to create and manage domains, users, and objects within a network
-version: 3.2.8
+version: 3.2.9
 vendor: rapid7
 support: rapid7
 status: []
@@ -29,26 +29,30 @@ types:
 connection:
   host:
     title: Host
-    description: Server Host, e.g. ldap://192.5.5.5. Must use either ldap:// or ldaps://
+    description: Server Host, e.g. ldap://198.51.100.100. Must use either ldap:// or ldaps://
       for SSL prefix
     type: string
     required: true
+    example: ldaps://198.51.100.100
   port:
     title: Port
     description: Port, e.g. 389
     type: integer
     default: 389
     required: true
+    example: 389
   use_ssl:
     title: Use SSL
     type: boolean
     description: Use SSL?
     required: true
+    example: "true"
   username_password:
     title: Username and Password
     type: credential_username_password
     description: Username and password
     required: true
+    example: "{“username”:”user1”, “password”:”mypassword”}"
 actions:
   query:
     title: Query
@@ -58,13 +62,15 @@ actions:
         title: Search Filter
         type: string
         description: 'The filter of the search request. It must conform to the LDAP
-          filter syntax specified in RFC4515. Example: (accountName=joesmith)'
+          filter syntax specified in RFC4515'
         required: true
+        example: "(sAMAccountName=joesmith)"
       search_base:
         title: Search Base
         type: string
         description: The base of the search request
         required: true
+        example: "DC=example,DC=com"
     output:
       results:
         description: Results returned
@@ -77,8 +83,9 @@ actions:
       distinguished_name:
         title: Distinguished Name
         type: string
-        description: The distinguished name of the object to delete. Example CN=user,OU=domain_users,DC=mydomain,DC=com
+        description: The distinguished name of the object to delete
         required: true
+        example: CN=user,OU=domain_users,DC=example,DC=com
     output:
       success:
         description: Operation status
@@ -91,34 +98,40 @@ actions:
       domain_name:
         title: Domain Name
         type: string
-        description: The domain name this user will belong to, e.g. mydomain.com
+        description: The domain name this user will belong to
         required: true
+        example: example.com
       logon_name:
         title: Logon Name
         type: string
         description: The logon name for the account
         required: true
+        example: jdoe
       first_name:
         title: First Name
         type: string
         description: User's first name
         required: true
+        example: John
       last_name:
         title: Last Name
         type: string
         description: User's last name
         required: true
+        example: Doe
       user_ou:
         title: User OU
         type: string
         description: The OU that the user account will be created in
         required: true
         default: Users
+        example: Users
       password:
         title: Password
         type: password
         description: The account's starting password
         required: true
+        example: mypassword
       account_disabled:
         title: Account Disabled
         type: string
@@ -128,17 +141,19 @@ actions:
         description: Set this to true to disable the user account at creation
         required: true
         default: 'true'
+        example: 'true'
       user_principal_name:
         title: User Principal Name
-        description: The users principal name, e.g. user@example.com
+        description: The users principal name
         type: string
         required: true
+        example: user@example.com
       additional_parameters:
         title: Additional Parameters
-        description: 'Add additional user parameters in JSON format e.g. {''telephoneNumber'':
-          ''(617)555-1234''}'
+        description: 'Add additional user parameters in JSON format'
         type: object
         required: false
+        example: "{'telephoneNumber':'(617)555-1234'}"
     output:
       success:
         description: Operation status
@@ -151,8 +166,9 @@ actions:
       distinguished_name:
         title: Distinguished Name
         type: string
-        description: The distinguished name of the user to enable e.g. CN=user,OU=domain_users,DC=mydomain,DC=com
+        description: The distinguished name of the user to enable
         required: true
+        example: CN=user,OU=domain_users,DC=example,DC=com
     output:
       success:
         description: Operation status
@@ -165,8 +181,9 @@ actions:
       distinguished_name:
         title: Distinguished Name
         type: string
-        description: The distinguished name of the user to disable e.g. CN=user,OU=domain_users,DC=mydomain,DC=com
+        description: The distinguished name of the user to disable
         required: true
+        example: CN=user,OU=domain_users,DC=example,DC=com
     output:
       success:
         description: Operation status
@@ -180,13 +197,14 @@ actions:
         title: Distinguished Name
         type: string
         description: The distinguished name of the user whose membership will be modified
-          e.g. CN=user,OU=domain_users,DC=mydomain,DC=com
         required: true
+        example: CN=user,OU=domain_users,DC=mydomain,DC=com
       group_dn:
         title: Group DN
         type: string
         description: The Distinguished Name of the group to add or remove
         required: true
+        example: CN=group_name,OU=domain_groups,DC=example,DC=com
       add_remove:
         title: Add or Remove
         description: Add or remove the group
@@ -195,6 +213,7 @@ actions:
         - add
         - remove
         required: true
+        example: add
     output:
       success:
         description: Operation status
@@ -208,13 +227,14 @@ actions:
         title: Distinguished Name
         type: string
         description: The distinguished name of the user whose membership will be modified
-          e.g. CN=user,OU=domain_users,DC=mydomain,DC=com
         required: true
+        example: CN=user,OU=domain_users,DC=example,DC=com
       new_ou:
         title: New OU
         type: string
-        description: The distinguished name of the OU to move the object to e.g. OU=disabled_users,DC=mydomain,DC=com
+        description: The distinguished name of the OU to move the object to
         required: true
+        example: OU=disabled_users,DC=example,DC=com
     output:
       success:
         description: Operation status
@@ -228,13 +248,14 @@ actions:
         title: Distinguished Name
         type: string
         description: The distinguished name of the user whose membership will be modified
-          e.g. CN=user,OU=domain_users,DC=mydomain,DC=com
         required: true
+        example: CN=user,OU=domain_users,DC=example,DC=com
       new_password:
         title: New Password
         description: The new password
         type: password
         required: true
+        example: mypassword
     output:
       success:
         description: Operation status
@@ -248,8 +269,8 @@ actions:
         title: Distinguished Name
         type: string
         description: The distinguished name of the user who will be forced to reset
-          their password  e.g. CN=user,OU=domain_users,DC=mydomain,DC=com
         required: true
+        example: CN=user,OU=domain_users,DC=example,DC=com
     output:
       success:
         title: Success
