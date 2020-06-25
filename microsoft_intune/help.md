@@ -51,26 +51,27 @@ Example input:
   "url": "https://graph.microsoft.com"
 }
 ```
+
 ## Technical Details
 
 ### Actions
 
 #### Wipe
 
-This action is used to wipe device by ID if it is not whitelisted.
+This action is used to wipe device by device name, device ID, user ID, or email address. It supports a whitelist to skip critical devices that should never be whitelisted.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|device|string|None|True|Device name, user ID, email address, or device ID|None|aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa|
+|device|string|None|True|Device name, user ID, email address, or device ID|None|547a48e3-0942-4888-acf1-a92b7fb19ef9|
 |whitelist|[]string|None|False|This list contains a set of of device names, user IDs, email addresses, or device IDs that a user can pass in that will not be wiped|None|["user@example.com", "705c034c-034c-705c-4c03-5c704c035c70"]|
 
 Example input:
 
 ```
 {
-  "device": "aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa",
+  "device": "547a48e3-0942-4888-acf1-a92b7fb19ef9",
   "whitelist": [
     "user@example.com",
     "705c034c-034c-705c-4c03-5c704c035c70"
@@ -100,13 +101,13 @@ This action is used to search devices by device name, user ID, email address or 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|device|string|None|True|Search devices by either of - device name, user ID, email address, device ID|None|aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa|
+|device|string|None|True|Search devices by either of - device name, user ID, email address, device ID|None|547a48e3-0942-4888-acf1-a92b7fb19ef9|
 
 Example input:
 
 ```
 {
-  "device": "aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa"
+  "device": "547a48e3-0942-4888-acf1-a92b7fb19ef9"
 }
 ```
 
@@ -143,7 +144,7 @@ Example output:
       "emailAddress": "user@example.com",
       "imei": "",
       "activationLockBypassCode": null,
-      "managedDeviceName": "jschipp_Windows_6/12/2020_1:52 PM",
+      "managedDeviceName": "user1_Windows_6/12/2020_1:52 PM",
       "managementAgent": "mdm",
       "deviceActionResults": [],
       "deviceHealthAttestationState": null,
@@ -164,7 +165,7 @@ Example output:
       "easActivated": false,
       "exchangeAccessStateReason": "none",
       "exchangeLastSuccessfulSyncDateTime": "0001-01-01T00:00:00Z",
-      "userDisplayName": "Jon Schipp",
+      "userDisplayName": "User1",
       "deviceRegistrationState": "registered",
       "easDeviceId": "",
       "managedDeviceOwnerType": "company",
@@ -260,7 +261,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.1.0 - Add new action Manage Device
+* 1.2.0 - Add new action Manage Device
+* 1.1.0 - Add new actions Search Devices and Wipe
 * 1.0.0 - Initial plugin creation, action Antivirus Scan added
 
 # Links

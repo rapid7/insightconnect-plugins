@@ -4,7 +4,7 @@ products: [insightconnect]
 name: microsoft_intune
 title: Microsoft Intune
 description: Microsoft cloud-based management solution that provides for mobile device and operating system management
-version: 1.1.0
+version: 1.2.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -95,9 +95,9 @@ types:
       description: Attestation identity key
       required: false
     bit_locker_status:
-      title: Bit Locker Status
+      title: BitLocker Status
       type: string
-      description: Bit locker status
+      description: BitLocker status
       required: false
     boot_app_security_version:
       title: Boot App Security Version
@@ -195,9 +195,9 @@ types:
       description: Operating system rev list info
       required: false
     pcr0:
-      title: Pcr0
+      title: PCR0
       type: string
-      description: Pcr0
+      description: PCR0
       required: false
     pcr_hash_algorithm:
       title: PCR Hash Algorithm
@@ -321,19 +321,19 @@ types:
       description: Device registration state
       required: false
     eas_activated:
-      title: Eas Activated
+      title: EAS Activated
       type: boolean
-      description: Eas activated
+      description: EAS activated
       required: false
     eas_activation_date_time:
-      title: Eas Activation Date Time
+      title: EAS Activation Date Time
       type: date
-      description: Eas activation date time
+      description: EAS activation date time
       required: false
     eas_device_id:
-      title: Eas Device ID
+      title: EAS Device ID
       type: string
-      description: Eas device ID
+      description: EAS device ID
       required: false
     email_address:
       title: Email Address
@@ -371,9 +371,9 @@ types:
       description: ID
       required: false
     imei:
-      title: Imei
+      title: IMEI
       type: string
-      description: Imei
+      description: IMEI
       required: false
     is_encrypted:
       title: Is Encrypted
@@ -416,9 +416,9 @@ types:
       description: Manufacturer
       required: false
     meid:
-      title: Meid
+      title: MEID
       type: string
-      description: Meid
+      description: MEID
       required: false
     model:
       title: Model
@@ -532,7 +532,7 @@ actions:
         description: Search devices by either of - device name, user ID, email address, device ID
         type: string
         required: true
-        example: aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa
+        example: 547a48e3-0942-4888-acf1-a92b7fb19ef9
     output:
       devices:
         title: Devices
@@ -571,7 +571,7 @@ actions:
         description: Device name, user ID, email address, or device ID
         type: string
         required: true
-        example: aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa
+        example: 547a48e3-0942-4888-acf1-a92b7fb19ef9
       whitelist:
         title: Whitelist
         description: This list contains a set of of device names, user IDs, email addresses, or device IDs that a user can pass in that will not be wiped

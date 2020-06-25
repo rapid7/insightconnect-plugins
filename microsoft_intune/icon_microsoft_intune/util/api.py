@@ -102,7 +102,7 @@ class MicrosoftIntuneAPI:
             return self._handle_json_to_dict(response)
         elif response.status_code == 400:
             raise PluginException(
-                cause="Bad request. URL or parameters were invalid",
+                cause="Bad request. URL or parameters were invalid.",
                 assistance="If the issue persists please contact support.",
                 data=response.text
             )
@@ -121,7 +121,7 @@ class MicrosoftIntuneAPI:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
 
     def _request(self, method, url, params=None, request_body=None, headers=None, data=None):
-        self.logger.debug(f"[Calling api] method: {method}, url: {url}")
+        self.logger.debug(f"[Calling API] method: {method}, url: {url}")
 
         try:
             return requests.request(
@@ -141,8 +141,8 @@ class MicrosoftIntuneAPI:
 
         if not device_response:
             raise PluginException(
-                cause=f"Managed device: {device}, was not found",
-                assistance="Contact support for help. See log for more details"
+                cause=f"Managed device: {device}, was not found.",
+                assistance="Contact support for help. See log for more details."
             )
         elif len(device_response) > 1:
             raise PluginException(

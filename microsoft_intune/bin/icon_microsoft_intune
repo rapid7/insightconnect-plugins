@@ -6,7 +6,7 @@ from icon_microsoft_intune import connection, actions, triggers
 
 Name = "Microsoft Intune"
 Vendor = "rapid7"
-Version = "1.1.0"
+Version = "1.2.0"
 Description = "Microsoft cloud-based management solution that provides for mobile device and operating system management"
 
 
