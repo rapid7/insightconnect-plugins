@@ -32,7 +32,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "Base URL for the SonicWall firewall",
+      "description": "Base URL for the SonicWall endpoint",
       "order": 1
     },
     "verify_ssl": {

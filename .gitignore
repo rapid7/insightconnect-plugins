@@ -54,3 +54,8 @@ demo-*.tar.gz
 # Ignore .json files
 *.json
 **/*.json
+
+# Ignore archives
+**/*.rar
+**/*.7z
+**/*.zip
