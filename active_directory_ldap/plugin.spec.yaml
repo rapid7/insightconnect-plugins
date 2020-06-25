@@ -33,7 +33,7 @@ connection:
       for SSL prefix
     type: string
     required: true
-    example: ldaps://198.51.100.100
+    example: ldaps://example.com
   port:
     title: Port
     description: Port, e.g. 389
