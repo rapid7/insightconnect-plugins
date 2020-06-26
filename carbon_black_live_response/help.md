@@ -1,6 +1,6 @@
 # Description
 
-[VMware Carbon Black EDR](https://developer.carbonblack.com/reference/carbon-black-cloud/cb-defense/latest/live-response-api/) allows security operators to collect information and take action on remote endpoints in real time. The InsightConnect plugin can delete files.
+[VMware Carbon Black Cloud Live Response](https://developer.carbonblack.com/reference/carbon-black-cloud/cb-defense/latest/live-response-api/) allows security operators to collect information and take action on remote endpoints in real time. The InsightConnect plugin can delete files.
 
 # Key Features
 
@@ -8,7 +8,7 @@
 
 # Requirements
 
-* Requires an API Key from VMware Carbon Black EDR
+* Requires an API Key from VMware Carbon Black Cloud Live Response
 
 # Documentation
 
@@ -69,5 +69,5 @@ This plugin does not contain any troubleshooting information.
 
 ## References
 
-* [VMware Carbon Black EDR](https://developer.carbonblack.com/reference/carbon-black-cloud/cb-defense/latest/live-response-api/)
+* [VMware Carbon Black Cloud Live Response](https://developer.carbonblack.com/reference/carbon-black-cloud/cb-defense/latest/live-response-api/)
 
