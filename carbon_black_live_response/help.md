@@ -1,6 +1,6 @@
 # Description
 
-[Carbon Black Live Response](https://developer.carbonblack.com/reference/cb-defense/1/live-response-api/) allows security operators to collect information and take action on remote endpoints in real time. The InsightConnect plugin can delete files.
+[VMware Carbon Black Cloud Live Response](https://developer.carbonblack.com/reference/carbon-black-cloud/cb-defense/latest/live-response-api/) allows security operators to collect information and take action on remote endpoints in real time. The InsightConnect plugin can delete files.
 
 # Key Features
 
@@ -8,7 +8,7 @@
 
 # Requirements
 
-* Requires an API Key from Carbon Black Live Response
+* Requires an API Key from VMware Carbon Black Cloud Live Response
 
 # Documentation
 
@@ -45,7 +45,7 @@ This action is used to delete a file from the endpoint.
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -57,6 +57,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.2 - Rebrand and update help references
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Support web server mode
 * 0.1.3 - Bug fix for CI tool incorrectly uploading plugins
@@ -68,5 +69,5 @@ This plugin does not contain any troubleshooting information.
 
 ## References
 
-* [Carbon Black Live Response](https://developer.carbonblack.com/reference/cb-defense/1/live-response-api/)
+* [VMware Carbon Black Cloud Live Response](https://developer.carbonblack.com/reference/carbon-black-cloud/cb-defense/latest/live-response-api/)
 

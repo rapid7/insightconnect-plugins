@@ -4,10 +4,10 @@ import komand
 from komand_carbon_black_defense import connection, actions, triggers
 
 
-Name = 'Carbon Black Defense'
-Vendor = 'rapid7'
-Version = '2.0.0'
-Description = 'Find events and retrieve details for specific events'
+Name = "VMware Carbon Black Cloud Endpoint Standard"
+Vendor = "rapid7"
+Version = "2.0.1"
+Description = "Find events and retrieve details for specific events"
 
 
 class ICONCarbonBlackDefense(komand.Plugin):
