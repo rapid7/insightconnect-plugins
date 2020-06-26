@@ -1,15 +1,15 @@
 {
-	"spec": "dafd169e46f28ae0adea2c01d910c1f1",
-	"manifest": "9cdde3cddb200a550b66e25cf83e7a8a",
-	"setup": "9015d7a2c1521f93c6280cb0d9f247e7",
+	"spec": "52a0dbc719213d48e8d8b8d7df2aa6b5",
+	"manifest": "5abdfb384047953f332989870764a03e",
+	"setup": "c9b9b23f4722f0ce5a42782465e5bb7c",
 	"schemas": [
 		{
 			"identifier": "add_file_to_udso_list/schema.py",
 			"hash": "f47fe5c8fc29b908e51f43827070af4c"
 		},
 		{
-			"identifier": "add_to_udso_list/schema.py",
-			"hash": "fa7e1970dd8a5c0ed819a250c4d5fc76"
+			"identifier": "blacklist/schema.py",
+			"hash": "0f7f304e40bc1b82134f874caac06fdc"
 		},
 		{
 			"identifier": "delete_openioc_file/schema.py",
@@ -36,8 +36,8 @@
 			"hash": "a656469ab5c2391d4a29a3d6258dca52"
 		},
 		{
-			"identifier": "performs_action/schema.py",
-			"hash": "b56898241a24c97640f336631aa7fd13"
+			"identifier": "quarantine/schema.py",
+			"hash": "cd028ab32b328f8ec9e30a569dd96415"
 		},
 		{
 			"identifier": "search_agents/schema.py",
@@ -49,7 +49,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "1a427b75a7feedd9f230692f41771039"
+			"hash": "25dc4a1b5eaed2373f59c6cd663851fc"
 		}
 	]
 }

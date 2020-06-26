@@ -1,7 +1,7 @@
 # Description
 
 Trend Micro Apex and Apex Central offer modern advanced automated threat detection and response. Apex agents have more than antivirus
-capabilities, they are an extension of the Apex threat management system.  
+capabilities, they are an extension of the Apex threat management system.
 
 This plugin works for both the on-premise and Apex SaaS solutions and supports multiple Apex products.
 
@@ -13,12 +13,17 @@ This plugin works for both the on-premise and Apex SaaS solutions and supports m
 # Requirements
 
 * Apex One, Apex Central, or Apex SaaS
-* API Key
-* Application ID
+* API Key and Application ID
 
 # Documentation
 
 ## Setup
+
+In the Trend Micro Apex console, the API can be configured:
+
+1. Choose Administraton from the main menu
+2. Select API Automation Access Settings from the Settings drop-down.
+3. Configure your API settings and copy the API key and Application ID into the Connection
 
 The connection configuration accepts the following parameters:
 
@@ -26,7 +31,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|API key paired with the Application ID e.g. CU1874A2-G782-47X1-B6J3-1014A92624BC|None|CU1874A2-G782-47X1-B6J3-1014A92624BC|
 |application_id|credential_secret_key|None|True|Application ID to communicate to the Apex Security Manager e.g. 909D88H7-3458-42RN-92FF-012V3CU3D294|None|909D88H7-3458-42RN-92FF-012V3CU3D294|
-|url|string|None|True|URL of the Apex Security Manager. Port can be specified as well e.g. https://example.com:443|None|https://example.com|
+|url|string|None|True|URL of the Apex Security Manager e.g. https://example.manage.trendmicro.com, the port can be specified as well with a colon|None|https://example.manage.trendmicro.com|
 
 Example input:
 
@@ -34,13 +39,114 @@ Example input:
 {
   "api_key": "CU1874A2-G782-47X1-B6J3-1014A92624BC",
   "application_id": "909D88H7-3458-42RN-92FF-012V3CU3D294",
-  "url": "https://example.com"
+  "url": "https://example.manage.trendmicro.com"
 }
 ```
 
 ## Technical Details
 
 ### Actions
+
+#### Blacklist
+
+This action is used to blacklist an IP, URL, file SHA1 hash or domain in the UDSO list.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|blacklist_state|boolean|True|True|True to blacklist hash, false to unblacklist hash|None|True|
+|description|string|None|False|Notes about why the file is being quarantined (256 characters max)|None|Indicator Blacklisted from InsightConnect|
+|expiry_date|integer|30|False|Number of days to allow this rule to be active|None|100|
+|indicator|string|None|True|The item to be filed as suspicious. data_type affects character limit.  URL/DOMAIN are 2046 characters max, SHA is 40 characters max|None|http://www.example.com|
+|scan_action|string|BLOCK|False|What action to do with the data sent|['BLOCK', 'LOG']|BLOCK|
+
+Example input:
+
+```
+{
+  "blacklist_state": true,
+  "description": "Indicator Blacklisted from InsightConnect",
+  "expiry_date": 100,
+  "indicator": "http://www.example.com",
+  "scan_action": "BLOCK"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Whether or not the action was successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Quarantine
+
+This action is used to quarantine (isolate) an endpoint.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|True|Agent ID, hostname, MAC address, or IP address of the agent to perform the action on|None|198.51.100.100|
+|quarantine_state|boolean|True|False|True to quarantine host, false to unquarantine host|None|True|
+|whitelist|[]string|None|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs|None|["198.51.100.101", "TREND-MICRO-AGENT", "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]|
+
+Example input:
+
+```
+{
+  "agent": "198.51.100.100",
+  "quarantine_state": true,
+  "whitelist": [
+    "198.51.100.101",
+    "TREND-MICRO-AGENT",
+    "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|result_code|integer|False|The Apex Central Automation API result code|
+|result_content|[]result_content|False|The Apex Central Automation API result content|
+|result_description|string|False|The Apex Central Automation API result description|
+
+Example output:
+
+```
+{
+  "result_code": 1,
+  "result_description": "Operation successful",
+  "result_content": [
+    {
+      "entity_id": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
+      "product": "SLF_PRODUCT_OFFICESCAN_CE",
+      "managing_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
+      "folder_path": "Workgroup",
+      "ip_address_list": "198.51.100.100",
+      "mac_address_list": "08-00-27-96-86-8E",
+      "host_name": "TREND-MICRO-TES",
+      "isolation_status": "normal",
+      "capabilities": [
+        "cmd_restore_isolated_agent",
+        "cmd_isolate_agent",
+        "cmd_relocate_agent",
+        "cmd_uninstall_agent"
+      ]
+    }
+  ]
+}
+```
 
 #### Search Agents
 
@@ -255,79 +361,6 @@ Example output:
     "hasFullAgents": true,
     "hasFullRbac": true
   }
-}
-```
-
-#### Execute Agent Action
-
-This action performs actions on the agent.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|action|string|None|True|Perform action|['Isolate', 'Restore', 'Relocate', 'Uninstall']|Isolate|
-|allow_multiple_match|boolean|True|False|True - Allows multiple matches False - Does not allow multiple matches|None|True|
-|entity_id|string|None|False|The GUID of the managed product agent. Use to identify the agent(s) on which the action is performed|None|2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6|
-|host_name|string|None|False|The endpoint name of the managed product agent. Use to identify the agent(s) on which the action is performed|None|CU-PRO1-7814-2|
-|ip_address|string|None|False|The IP address of the managed product agent. Use to identify the agent(s) on which the action is performed|None|198.51.100.100|
-|mac_address|string|None|False|The MAC address of the managed product agent. Use to identify the agent(s) on which the action is performed|None|08:00:27:8d:c0:4d|
-|product|string|None|False|The Trend Micro product on the server instance. Use to identify the agent(s) on which the action is performed|None|SLF_PRODUCT_OFFICESCAN_CE|
-|relocate_to_folder_path|string|None|False|The target directory for the agent|None|\NewDomain\NewFolder|
-|relocate_to_server_id|string|None|False|The GUID of the target server for the agent|None|C22E1795-BF95-45BB-BC82-486B0F5161BE|
-|skip_ids|[]string|None|False|Skip entity ids on isolate and uninstall actions|None|["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]|
-
-Example input:
-
-```
-{
-  "action": "Isolate",
-  "allow_multiple_match": true,
-  "entity_id": "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6",
-  "host_name": "CU-PRO1-7814-2",
-  "ip_address": "198.51.100.100",
-  "mac_address": "08:00:27:8d:c0:4d",
-  "product": "SLF_PRODUCT_OFFICESCAN_CE",
-  "relocate_to_folder_path": "\\NewDomain\\NewFolder",
-  "relocate_to_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
-  "skip_ids": [
-    "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"
-  ]
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result_code|integer|False|The Apex Central Automation API result code|
-|result_content|[]result_content|False|The Apex Central Automation API result content|
-|result_description|string|False|The Apex Central Automation API result description|
-
-Example output:
-
-```
-{
-  "result_code": 1,
-  "result_description": "Operation successful",
-  "result_content": [
-    {
-      "entity_id": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
-      "product": "SLF_PRODUCT_OFFICESCAN_CE",
-      "managing_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
-      "folder_path": "Workgroup",
-      "ip_address_list": "198.51.100.100",
-      "mac_address_list": "08-00-27-96-86-8E",
-      "host_name": "TREND-MICRO-TES",
-      "isolation_status": "normal",
-      "capabilities": [
-        "cmd_restore_isolated_agent",
-        "cmd_isolate_agent",
-        "cmd_relocate_agent",
-        "cmd_uninstall_agent"
-      ]
-    }
-  ]
 }
 ```
 
@@ -673,46 +706,6 @@ Example output:
 }
 ```
 
-#### Add to UDSO List
-
-This action is used to add an IP address, email or similar info to the UDSO list.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|content|string|None|True|The item to be filed as suspicious. data_type affects character limit.  URL/DOMAIN are 2046 characters max, SHA is 40 characters max|None|http://www.example.com|
-|data_type|string|URL|True|Format of the data, character length of content is affected by this|['IP', 'URL', 'FILE_SHA1', 'DOMAIN']|URL|
-|expiry_date|int|30|False|Number of days to allow this rule to be active|None|100|
-|notes|string|None|False|Notes about why the file is being quarantined (256 characters max)|None|This URL leads to malware|
-|scan_action|string|LOG|True|What action to do with the data sent|['BLOCK', 'LOG']|LOG|
-
-Example input:
-
-```
-{
-  "content": "http://www.example.com",
-  "data_type": "URL",
-  "expiry_date": 100,
-  "notes": "This URL leads to malware",
-  "scan_action": "LOG"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Whether or not the action was successful|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
 #### Add File to UDSO List
 
 This action is used to add a file to the UDSO list of the Apex Security Manager.
@@ -764,6 +757,9 @@ For example, the agent / endpoint actions require that the Apex Endpoint Sensor 
 
 # Version History
 
+* 3.0.1 - Fix issue in URL parameter of Connection where an extraneous forward-slash would not pass the connection test
+* 3.0.0 - Update action Add to UDSO List to Blacklist
+* 2.0.0 - Update action Execute Agent Action to Quarantine
 * 1.1.0 - New actions Get Agent Status, Search Agents, List OpenIOC Files, Download the RCA CSV File, Upload OpenIOC File, Delete OpenIOC File, Download OpenIOC File, Get Investigation, Terminate Process, and Execute Agent Action
 * 1.0.0 - Initial plugin
 

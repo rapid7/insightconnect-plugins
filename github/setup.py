@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='github-rapid7-plugin',
-      version='2.1.1',
+      version='2.1.2',
       description='Github plugin allows users and issues management in Github',
       author='rapid7',
       author_email='',

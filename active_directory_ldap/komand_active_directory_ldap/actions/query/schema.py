@@ -31,7 +31,7 @@ class QueryInput(komand.Input):
     "search_filter": {
       "type": "string",
       "title": "Search Filter",
-      "description": "The filter of the search request. It must conform to the LDAP filter syntax specified in RFC4515. Example: (accountName=joesmith)",
+      "description": "The filter of the search request. It must conform to the LDAP filter syntax specified in RFC4515",
       "order": 1
     }
   },

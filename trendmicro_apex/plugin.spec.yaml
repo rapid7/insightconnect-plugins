@@ -4,7 +4,7 @@ products: [insightconnect]
 name: trendmicro_apex
 title: Trend Micro Apex
 description: Report suspicious objects and files to block on Apex firewall
-version: 1.1.0
+version: 3.0.1
 vendor: rapid7
 support: rapid7
 status: []
@@ -25,10 +25,10 @@ hub_tags:
 connection:
   url:
     title: URL
-    description: URL of the Apex Security Manager. Port can be specified as well e.g. https://example.com:443
+    description: URL of the Apex Security Manager e.g. https://example.manage.trendmicro.com, the port can be specified as well with a colon
     type: string
     required: true
-    example: "https://example.com"
+    example: "https://example.manage.trendmicro.com"
   application_id:
     title: Application ID
     description: Application ID to communicate to the Apex Security Manager e.g. 909D88H7-3458-42RN-92FF-012V3CU3D294
@@ -623,12 +623,12 @@ actions:
         description: Whether or not the action was successful
         type: boolean
         required: true
-  add_to_udso_list:
-    title: Add to UDSO List
-    description: Add an IP, email or similar info to the UDSO list
+  blacklist:
+    title: Blacklist
+    description: Blacklist an IP, URL, file SHA1 or domain in the UDSO list
     input:
-      content:
-        title: Content
+      indicator:
+        title: Indicator
         type: string
         description: The item to be filed as suspicious. data_type affects character limit.  URL/DOMAIN are 2046 characters max, SHA is 40 characters max
         required: true
@@ -636,38 +636,33 @@ actions:
       scan_action:
         title: Scan Action
         description: What action to do with the data sent
-        required: true
+        required: false
         type: string
-        default: "LOG"
+        default: "BLOCK"
         enum:
           - BLOCK
           - LOG
-        example: LOG
-      data_type:
-        title: Data Type
-        description: Format of the data, character length of content is affected by this
-        default: "URL"
-        type: string
-        required: true
-        enum:
-          - IP
-          - URL
-          - FILE_SHA1
-          - DOMAIN
-        example: URL
-      notes:
-        title: Notes
+        example: BLOCK
+      description:
+        title: Description
         type: string
         description: Notes about why the file is being quarantined (256 characters max)
         required: false
-        example: "This URL leads to malware"
+        example: Indicator Blacklisted from InsightConnect
       expiry_date:
         title: Expiry Date
         description: Number of days to allow this rule to be active
-        type: int
+        type: integer
         default: 30
         required: false
         example: 100
+      blacklist_state:
+        title: Blacklist State
+        description: True to blacklist hash, false to unblacklist hash
+        type: boolean
+        required: true
+        default: true
+        example: true
     output:
       success:
         title: Success
@@ -1029,76 +1024,29 @@ actions:
         description: Indicates the suspicious object distribution role of the Apex Central server
         type: SystemCtrl
         required: false
-  performs_action:
-    title: Execute Agent Action
-    description: This action performs agent actions such as endpoint isolation, restoration, relocation, and uninstalls
+  quarantine:
+    title: Quarantine
+    description: Quarantine (isolate) an endpoint
     input:
-      action:
-        title: Action
-        description: Perform action
+      agent:
+        title: Agent
+        description: Agent ID, hostname, MAC address, or IP address of the agent to perform the action on
         type: string
         required: true
-        example: Isolate
-        enum:
-          - Isolate
-          - Restore
-          - Relocate
-          - Uninstall
-      allow_multiple_match:
-        title: Allow Multiple Match
-        description: "True - Allows multiple matches False - Does not allow multiple matches"
+        example: 198.51.100.100
+      quarantine_state:
+        title: Quarantine State
+        description: True to quarantine host, false to unquarantine host
         type: boolean
         required: false
         default: true
         example: true
-      entity_id:
-        title: Entity ID
-        description: The GUID of the managed product agent. Use to identify the agent(s) on which the action is performed
-        type: string
-        required: false
-        example: "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"
-      host_name:
-        title: Host Name
-        description: The endpoint name of the managed product agent. Use to identify the agent(s) on which the action is performed
-        type: string
-        required: false
-        example: "CU-PRO1-7814-2"
-      ip_address:
-        title: IP Address
-        description: The IP address of the managed product agent. Use to identify the agent(s) on which the action is performed
-        type: string
-        required: false
-        example: "198.51.100.100"
-      mac_address:
-        title: MAC Address
-        description: The MAC address of the managed product agent. Use to identify the agent(s) on which the action is performed
-        type: string
-        required: false
-        example: "08:00:27:8d:c0:4d"
-      product:
-        title: Product
-        description: The Trend Micro product on the server instance. Use to identify the agent(s) on which the action is performed
-        type: string
-        required: false
-        example: "SLF_PRODUCT_OFFICESCAN_CE"
-      relocate_to_folder_path:
-        title: Relocate to Folder Path
-        description: The target directory for the agent
-        type: string
-        required: false
-        example: "\\NewDomain\\NewFolder"
-      relocate_to_server_id:
-        title: Relocate to Server ID
-        description: The GUID of the target server for the agent
-        type: string
-        required: false
-        example: "C22E1795-BF95-45BB-BC82-486B0F5161BE"
-      skip_ids:
-        title: Skip Entity ID
-        description: Skip entity ids on isolate and uninstall actions
+      whitelist:
+        title: Whitelist
+        description: This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs
         type: "[]string"
         required: false
-        example: ["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]
+        example: ["198.51.100.101", "TREND-MICRO-AGENT", "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]
     output:
       result_code:
         title: Result Code

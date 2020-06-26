@@ -1,47 +1,47 @@
 {
-	"spec": "5d5067ba32e32a887b98000e68f71918",
-	"manifest": "b2e36b36e13b6539dc39e809bb696d4c",
-	"setup": "666839dbe3e4c787519f6bf03eb71b4e",
+	"spec": "bb9b4aa060098c10f0c39c921c820c70",
+	"manifest": "9e73817777f221a0deca70c437402a1e",
+	"setup": "41389a80de43d716b90f086a013a723f",
 	"schemas": [
 		{
 			"identifier": "add_user/schema.py",
-			"hash": "0d8e118cb4468844c508bd09329b224e"
+			"hash": "d550ff51dd4729c6c5a39eb05130653c"
 		},
 		{
 			"identifier": "delete/schema.py",
-			"hash": "91d1d609b27d9cab1ca06ce1a977464d"
+			"hash": "1e4a0b7ad8c7ac6315650d44963cc8e1"
 		},
 		{
 			"identifier": "disable_user/schema.py",
-			"hash": "39a29697496476dd5dfabe9951a465fb"
+			"hash": "0754b5eed56a14d031f0f9483e4a12e5"
 		},
 		{
 			"identifier": "enable_user/schema.py",
-			"hash": "6f793ae5f1a182b96da88628059d919a"
+			"hash": "bb5e4c161b614348b00ac2cc98f7339e"
 		},
 		{
 			"identifier": "force_password_reset/schema.py",
-			"hash": "1b4f49a17b2eb11981f79b6aa8e4efe6"
+			"hash": "727147171b5f19d7e9eee2c5e6e51323"
 		},
 		{
 			"identifier": "modify_groups/schema.py",
-			"hash": "24fb20790899d4584ebd0b40972a9735"
+			"hash": "a4d32fe8d78291e63f7fd845a0d4e3f2"
 		},
 		{
 			"identifier": "move_object/schema.py",
-			"hash": "aacec5b09283057a5067ed7e58c7c5d8"
+			"hash": "6e381297ed6e7c0b13576a98c790d395"
 		},
 		{
 			"identifier": "query/schema.py",
-			"hash": "8dc3d6ea53ef581e17950a3577c243fa"
+			"hash": "3805cf1daf8674d3a0dc3eaa05aff6a8"
 		},
 		{
 			"identifier": "reset_password/schema.py",
-			"hash": "16dde89754930f24e49fd55a13bf1044"
+			"hash": "f17da94a3bdfd6dfa2973f358b19408f"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "7dbbec44e2fb5d5f20cd37b31df6d95e"
+			"hash": "f9fbb2a0ae6dbbb1014f6734d622cc9b"
 		}
 	]
 }

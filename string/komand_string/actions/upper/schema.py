@@ -24,7 +24,7 @@ class UpperInput(komand.Input):
     "string": {
       "type": "string",
       "title": "String Input",
-      "description": "String to convert e.g. USER=bob",
+      "description": "String to uppercase",
       "order": 1
     }
   },

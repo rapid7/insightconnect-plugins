@@ -2,9 +2,9 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: cylance_protect
-title: Blackberry CylancePROTECT
+title: BlackBerry CylancePROTECT
 description: Automate detection and response operations using CylancePROTECT
-version: 1.0.1
+version: 1.0.3
 vendor: rapid7
 support: rapid7
 status: []
