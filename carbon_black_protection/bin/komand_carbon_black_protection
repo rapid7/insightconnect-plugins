@@ -6,7 +6,7 @@ from komand_carbon_black_protection import connection, actions, triggers
 
 Name = "VMware Carbon Black App Control"
 Vendor = "rapid7"
-Version = "2.2.1"
+Version = "2.2.2"
 Description = "Ban and unban files and as well as manage approval requests"
 
 
