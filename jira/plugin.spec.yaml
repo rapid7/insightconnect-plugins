@@ -129,12 +129,18 @@ connection:
     default: https://company.atlassian.net
     required: false
     example: https://company.atlassian.net
-  credentials:
-    title: Username and API Key
-    type: credential_username_password
-    description: Username and Jira API key (Jira password is not supported)
+  user:
+    title: User
+    type: string
+    description: Jira user email
     required: true
-    example: '{ "username": "user1", "password":"my_jira_api_key"}'
+    example: user@example.com
+  api_key:
+    title: API Key
+    type: credential_secret_key
+    description: Jira API key (Jira password is not supported)
+    required: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
 actions:
   transition_issue:
     title: Transition Issue

@@ -17,9 +17,9 @@ class Connection(komand.Connection):
         self.rest_client = None
 
     def connect(self, params={}):
-        self.url, self.username, self.password = params[Input.URL], \
-                                                 params[Input.CREDENTIALS]["username"], \
-                                                 params[Input.CREDENTIALS]["password"]
+        self.url = params.get(Input.URL)
+        self.username = params.get(Input.USER)
+        self.password = params.get(Input.API_KEY).get("secretKey")
 
         if ".atlassian.net" in self.url or ".jira.com" in self.url:
             self.is_cloud = True
@@ -54,3 +54,5 @@ class Connection(komand.Connection):
                                                      "connection is correct.")
         else:
             self.logger.error(ConnectionTestException(cause=f"Unhandled error occurred: {response.content}"))
+            raise ConnectionTestException(cause=f"Unhandled error occurred.",
+                                          assistance=response.content)

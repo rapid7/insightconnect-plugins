@@ -21,15 +21,17 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and Jira API key (Jira password is not supported)|None|{ "username": "user1", "password":"my_jira_api_key"}|
+|api_key|credential_secret_key|None|True|Jira API key (Jira password is not supported)|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |url|string|https://company.atlassian.net|False|Jira URL, e.g. https://company.atlassian.net|None|https://company.atlassian.net|
+|user|string|None|True|Jira user email|None|user@example.com|
 
 Example input:
 
 ```
 {
-  "credentials": { "username": "user1", "password":"my_jira_api_key"},
-  "url": "https://company.atlassian.net"
+  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "url": "https://company.atlassian.net",
+  "user": "user@example.com"
 }
 ```
 
