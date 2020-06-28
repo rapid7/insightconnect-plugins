@@ -31,7 +31,10 @@ Example input:
 
 ```
 {
-  "credentials": {"username":"user1", "password":"mypassword"}",
+  "credentials": {
+    "username": "user1",
+    "password": "mypassword"
+  },
   "host": "example.com",
   "port": 3121,
   "ssl_verify": true
@@ -469,8 +472,7 @@ Example input:
 
 ```
 {
-  "agent_configuration_filter": "All",
-  "name_filter": "hostname-1"
+  "id": "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCD"
 }
 ```
 
