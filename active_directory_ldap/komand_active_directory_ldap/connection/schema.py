@@ -19,7 +19,7 @@ class ConnectionSchema(komand.Input):
     "host": {
       "type": "string",
       "title": "Host",
-      "description": "Server Host, e.g. ldap://192.5.5.5. Must use either ldap:// or ldaps:// for SSL prefix",
+      "description": "Server Host, e.g. ldap://example.com. Must use either ldap:// or ldaps:// for SSL prefix",
       "order": 1
     },
     "port": {
@@ -60,12 +60,14 @@ class ConnectionSchema(komand.Input):
           "title": "Password",
           "displayType": "password",
           "description": "The password",
-          "format": "password"
+          "format": "password",
+          "order": 2
         },
         "username": {
           "type": "string",
           "title": "Username",
-          "description": "The username to log in with"
+          "description": "The username to log in with",
+          "order": 1
         }
       },
       "required": [

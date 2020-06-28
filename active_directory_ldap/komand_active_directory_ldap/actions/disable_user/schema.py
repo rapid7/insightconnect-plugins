@@ -24,7 +24,7 @@ class DisableUserInput(komand.Input):
     "distinguished_name": {
       "type": "string",
       "title": "Distinguished Name",
-      "description": "The distinguished name of the user to disable e.g. CN=user,OU=domain_users,DC=mydomain,DC=com",
+      "description": "The distinguished name of the user to disable",
       "order": 1
     }
   },
