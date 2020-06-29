@@ -1,7 +1,7 @@
 import komand
 from .schema import FindIssuesInput, FindIssuesOutput, Input, Output, Component
 # Custom imports below
-from ...util import normalize_issue
+from komand_jira.util.util import normalize_issue
 
 
 class FindIssues(komand.Action):
