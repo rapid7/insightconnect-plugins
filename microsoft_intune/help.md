@@ -177,7 +177,7 @@ Example output:
 
 #### Manage Device
 
-This action is used to perform action on device by ID if it is not whitelisted.
+This action is used to perform management tasks on a device such as rebooting and syncing.
 
 ##### Input
 

@@ -586,7 +586,7 @@ actions:
         required: true
   manage_device:
     title: Manage Device
-    description: Perform action on device by device name, user ID, email address, or device ID if it is not whitelisted
+    description: Perform management tasks on a device such as rebooting and syncing
     input:
       device:
         title: Device

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Perform action on device by device name, user ID, email address, or device ID if it is not whitelisted"
+    DESCRIPTION = "Perform management tasks on a device such as rebooting and syncing"
 
 
 class Input:
