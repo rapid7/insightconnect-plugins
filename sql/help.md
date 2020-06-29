@@ -19,13 +19,18 @@ This plugin allows users to run and execute queries against a SQL database.
 
 The connection configuration accepts the following parameters:
 
-  |Name|Type|Default|Required|Description|Enum|
-  |----|----|-------|--------|-----------|----|
-  |type|string|None|True|Database type (i.e. mysql, postgres... etc.)|None|
-  |host|string|None|True|Database hostname|None|
-  |port|string|None|False|Database port|None|
-  |db|string|None|True|Database name|None|
-  |credentials|credential_username_password|None|True|Database username and password|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|credentials|credential_username_password|None|True|Database username and password|None|None|
+|db|string|None|True|Database name|None|None|
+|host|string|None|True|Database hostname|None|None|
+|port|string|None|False|Database port|None|None|
+|type|string|None|True|Database type (i.e. mysql, postgres... etc.)|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -37,18 +42,23 @@ This action is used to run an arbitrary SQL query against the connected database
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|True|query to run|None|
-|parameters|object|None|True|parameter for parameterized query|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|parameters|object|None|False|Parameters for query|None|None|
+|query|string|None|True|Query to run|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|True|Status message|
 |header|[]string|False|Array of header fields for the columns|
 |results|[]object|False|Result rows, each as an object with header keys|
+|status|string|True|Status message|
 
 Example output:
 
@@ -80,6 +90,7 @@ For the SQL query action, be sure that your query is valid SQL.
 
 # Version History
 
+* 2.0.6 - Fix issue where connection test always success
 * 2.0.5 - New spec and help.md format for the Extension Library
 * 2.0.4 - Add support for Microsoft SQL server
 * 2.0.3 - Fix issue where credentials used incorrect username | Update help
