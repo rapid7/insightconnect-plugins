@@ -43,11 +43,14 @@ class StartPatchScan(insightconnect_plugin_runtime.Action):
 
         scan = self.connection.ivanti_api.start_patch_scan(payload)
 
-        operation_location_url = scan.headers.get("Operation-Location")
-
         try:
+            operation_location_url = scan.headers.get("Operation-Location")
             polling2.poll(lambda: self.connection.ivanti_api.get_operation_location(operation_location_url)
             .get("percentComplete") == 100, step=10, timeout=max_poll_time)
+        except KeyError as e:
+            raise PluginException(
+                cause=f'{e} not found within the header.',
+                assistance=f'If the issue persists please contact support.')
         except polling2.TimeoutException as e:
             raise PluginException(
                 cause='Action timeout.',
