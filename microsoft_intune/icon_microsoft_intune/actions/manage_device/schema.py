@@ -34,11 +34,8 @@ class ManageDeviceInput(insightconnect_plugin_runtime.Input):
       "title": "Type",
       "description": "Type of action",
       "enum": [
-        "Shutdown",
         "Reboot",
-        "Sync",
-        "Reset PassCode",
-        "Lock"
+        "Sync"
       ],
       "order": 2
     },

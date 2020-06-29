@@ -600,11 +600,8 @@ actions:
         type: string
         required: true
         enum:
-          - Shutdown
           - Reboot
           - Sync
-          - Reset PassCode
-          - Lock
       whitelist:
         title: Whitelist
         description: This list contains a set of of device names, user IDs, email addresses, or device IDs that action will not be performed on

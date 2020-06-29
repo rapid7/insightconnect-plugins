@@ -184,7 +184,7 @@ This action is used to perform action on device by ID if it is not whitelisted.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |device|string|None|True|Device name, user ID, email address, or device ID|None|aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa|
-|type|string|None|True|Type of action|['Shutdown', 'Reboot', 'Sync', 'Reset PassCode', 'Lock']|None|
+|type|string|None|True|Type of action|['Reboot', 'Sync']|None|
 |whitelist|[]string|None|False|This list contains a set of of device names, user IDs, email addresses, or device IDs that action will not be performed on|None|["user@example.com", "705c034c-034c-705c-4c03-5c704c035c70"]|
 
 Example input:
