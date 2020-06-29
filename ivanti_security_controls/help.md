@@ -472,7 +472,8 @@ Example input:
 
 ```
 {
-  "id": "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCD"
+  "agent_configuration_filter": "All",
+  "name_filter": "hostname-1"
 }
 ```
 
