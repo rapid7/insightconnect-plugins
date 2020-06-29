@@ -19,6 +19,10 @@ class ICONIvantiSecurityControls(insightconnect_plugin_runtime.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_action(actions.CreatePatchGroupAndAddCves())
+
+        self.add_action(actions.CreatePatchScanTemplate())
+
         self.add_action(actions.GetAgent())
 
         self.add_action(actions.GetAgentStatus())

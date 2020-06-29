@@ -31,7 +31,10 @@ Example input:
 
 ```
 {
-  "credentials": {"username":"user1", "password":"mypassword"}",
+  "credentials": {
+    "username":"user1",
+    "password":"mypassword"
+    },
   "host": "example.com",
   "port": 3121,
   "ssl_verify": true
@@ -41,6 +44,129 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Create Patch Scan Template
+
+This action is used to create a new patch scan template.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|description|string|None|False|Description that explains the purpose of this patch scan template|None|Created by REST API|
+|name|string|None|True|Name of the patch scan template|None|ExamplePatchScanTemplate|
+|patchGroupIds|[]integer|None|True|The IDs of the patch groups to use|None|1|
+|path|string|None|False|Path to the location of the machine group within the Patch Scan Templates list in the navigation pane|None|Lab\Servers|
+|threadCount|integer|None|False|Specifies maximum number of machines that can be simultaneously scanned during one patch scan|None|1|
+
+Example input:
+
+```
+{
+  "description": "Created by REST API",
+  "name": "ExamplePatchScanTemplate",
+  "patchGroupIds": 1,
+  "path": "Lab\\Servers",
+  "threadCount": 1
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|patch_scan_template|patch_scan_template|True|Detailed information about the patch scan template|
+
+Example output:
+
+```
+{
+    "patch_scan_template": {
+        "creator": "IVANTI-W16\\Administrator",
+        "description": "Example Patch Scan Templete Description",
+        "id": "4374292d-3465-4d77-b752-c4eccd91bba5",
+        "isSystem": false,
+        "links": {
+            "self": {
+                "href": "https://example.com:3121/st/console/api/v1.0/patch/scanTemplates/4374292d-3465-4d77-b752-c4eccd91bba5"
+            },
+            "usedby": {
+                "href": "https://example.com:3121/st/console/api/v1.0/patch/scanTemplates/4374292d-3465-4d77-b752-c4eccd91bba5/usedby"
+            }
+        },
+        "name": "example-patch-scan-template",
+        "patchFilter": {
+            "patchGroupFilterType": "Scan",
+            "patchGroupIds": [
+                2,
+                3
+            ],
+            "patchPropertyFilter": {
+                "customActions": false,
+                "nonSecurityPatchSeverities": "None",
+                "securityPatchSeverities": "None",
+                "securityTools": false
+            },
+            "scanFor": "NecessaryExplicitlyInstalled",
+            "softwareDistribution": false,
+            "vendorFamilyProductFilter": {}
+        }
+    }
+}
+```
+
+#### Create Patch Group and Add CVEs
+
+This action is used to create a new patch group and add CVEs to it.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|cves|[]string|None|True|The CVEs that should be included in the new patch group|None|["cve-2019-0701", "CVE-2019-0708"]|
+|name|string|None|True|The name of the new patch group|None|New Patch Group|
+|path|string|None|False|The path that describes the location of the patch group within the Patch Templates and Groups list in the navigation pane|None|Lab\Servers|
+
+Example input:
+
+```
+{
+  "cves": [
+    "cve-2019-0701",
+    "CVE-2019-0708"
+  ],
+  "name": "New Patch Group",
+  "path": "Lab\\Servers"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|patch_group|patch_group|True|Detailed information about the patch group|
+
+Example output:
+
+```
+{
+    "patch_group": {
+        "id": 10,
+        "links": {
+            "self": {
+                "href": "https://example.com:3121/st/console/api/v1.0/patch/groups/10"
+            },
+            "patches": {
+                "href": "https://example.com:3121/st/console/api/v1.0/patch/groups/10/patches"
+            },
+            "usedby": {
+                "href": "https://example.com:3121/st/console/api/v1.0/patch/groups/10/usedby"
+            }
+        },
+        "name": "example-patch-group"
+    }
+}
+```
 
 #### Get Patch Deployment
 
@@ -743,6 +869,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.0 - New actions Create Patch Group and Add CVEs, Create Patch Scan Template
 * 1.2.0 - New actions Get Patch Deployment, Get Patch Details and Search Patches
 * 1.1.0 - Add actions Start Patch Scan, Get Patch Scan Status and Get Scanned Machine Details
 * 1.0.1 - Fix issue where Get Agents action does not include filters during paging
