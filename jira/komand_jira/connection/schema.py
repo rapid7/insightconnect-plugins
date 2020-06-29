@@ -24,8 +24,8 @@ class ConnectionSchema(komand.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "Jira URL, e.g. https://company.atlassian.net",
-      "default": "https://company.atlassian.net",
+      "description": "Jira URL",
+      "default": "https://example.atlassian.net",
       "order": 1
     },
     "user": {

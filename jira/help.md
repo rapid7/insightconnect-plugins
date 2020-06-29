@@ -22,7 +22,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|Jira API key (Jira password is not supported)|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|url|string|https://company.atlassian.net|False|Jira URL, e.g. https://company.atlassian.net|None|https://company.atlassian.net|
+|url|string|https://example.atlassian.net|False|Jira URL|None|https://example.atlassian.net|
 |user|string|None|True|Jira user email|None|user@example.com|
 
 Example input:
@@ -30,7 +30,7 @@ Example input:
 ```
 {
   "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "url": "https://company.atlassian.net",
+  "url": "https://example.atlassian.net",
   "user": "user@example.com"
 }
 ```

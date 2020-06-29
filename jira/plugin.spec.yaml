@@ -125,10 +125,10 @@ connection:
   url:
     title: URL
     type: string
-    description: Jira URL, e.g. https://company.atlassian.net
-    default: https://company.atlassian.net
+    description: Jira URL
+    default: https://example.atlassian.net
     required: false
-    example: https://company.atlassian.net
+    example: https://example.atlassian.net
   user:
     title: User
     type: string
