@@ -25,7 +25,7 @@ class Decode(komand.Action):
         except Exception as e:
             self.logger.error("An error has occurred while decoding ", e)
             raise PluginException(
-                cause="Failed to decode because base64 input was not provided.",
+                cause="Failed to decode because valid base64 input was not provided.",
                 assistance='If you would like continue to attempt to decode the input try setting the value of the error field to ignore errors or to replace the characters.',
                 data=e
             )
