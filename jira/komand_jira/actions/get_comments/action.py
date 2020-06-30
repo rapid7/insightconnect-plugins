@@ -2,7 +2,7 @@ import komand
 from .schema import GetCommentsInput, GetCommentsOutput, Input, Output, Component
 
 # Custom imports below
-from ...util import normalize_comment
+from komand_jira.util.util import normalize_comment
 from komand.exceptions import PluginException
 
 

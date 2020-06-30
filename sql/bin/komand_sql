@@ -4,10 +4,10 @@ import komand
 from komand_sql import connection, actions, triggers
 
 
-Name = 'SQL'
-Vendor = 'rapid7'
-Version = '2.0.5'
-Description = 'The SQL plugin allows you to run SQL queries'
+Name = "SQL"
+Vendor = "rapid7"
+Version = "2.0.6"
+Description = "The SQL plugin allows you to run SQL queries"
 
 
 class ICONSql(komand.Plugin):

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="fortinet_fortigate-rapid7-plugin",
-      version="4.0.0",
+      version="4.0.1",
       description="FortiGate Next Generation Firewalls (NGFWs) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection",
       author="rapid7",
       author_email="",

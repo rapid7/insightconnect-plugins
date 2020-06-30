@@ -14,10 +14,16 @@ class CreateUser(komand.Action):
 
     def run(self, params={}):
         """Run action"""
+
+        username = ""
+        if not self.connection.is_cloud:
+            username = params[Input.USERNAME]
+
         success = self.connection.client.add_user(
-            username=params[Input.USERNAME],
+            fullname=params[Input.USERNAME],
             email=params[Input.EMAIL],
             password=params.get(Input.PASSWORD, None),
             notify=params.get(Input.NOTIFY, False),
+            username=username
         )
         return {Output.SUCCESS: success}
