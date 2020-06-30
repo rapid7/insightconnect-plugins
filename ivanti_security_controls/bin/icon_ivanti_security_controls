@@ -6,7 +6,7 @@ from icon_ivanti_security_controls import connection, actions, triggers
 
 Name = "Ivanti Security Controls"
 Vendor = "rapid7"
-Version = "1.2.0"
+Version = "1.3.0"
 Description = "Ivanti Security Controls is a unified IT management platform used for managing and protecting through Patch Management, Application Control, and Asset Inventory functionality"
 
 

@@ -1,7 +1,7 @@
 {
-	"spec": "1ab45539a031e140045fd77fae70000a",
-	"manifest": "361be81e330f690778914af309d12fa7",
-	"setup": "14dca5190313a102f387a8c694d18ca8",
+	"spec": "553867d2bd11a12cdbd20ed47fb88481",
+	"manifest": "fad6c075c1c6c55bf109a4197caf6843",
+	"setup": "e36bb1669df60fcab9e9ab00450c1080",
 	"schemas": [
 		{
 			"identifier": "create_patch_group_and_add_cves/schema.py",
