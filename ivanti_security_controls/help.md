@@ -31,7 +31,10 @@ Example input:
 
 ```
 {
-  "credentials": {"username":"user1", "password":"mypassword"}",
+  "credentials": {
+    "username": "user1",
+    "password": "mypassword"
+  },
   "host": "example.com",
   "port": 3121,
   "ssl_verify": true
@@ -743,6 +746,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.1 - Added session credentials and changed polling method for Start Patch Scan
 * 1.2.0 - New actions Get Patch Deployment, Get Patch Details and Search Patches
 * 1.1.0 - Add actions Start Patch Scan, Get Patch Scan Status and Get Scanned Machine Details
 * 1.0.1 - Fix issue where Get Agents action does not include filters during paging
