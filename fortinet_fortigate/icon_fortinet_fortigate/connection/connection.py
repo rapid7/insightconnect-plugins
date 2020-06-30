@@ -20,10 +20,13 @@ class Connection(komand.Connection):
 
         self.session = Session()
         self.session.params = self.session_params
+        # Strip http:// or https://
         if self.host.startswith("http://"):
             self.host = self.host[7:]
         if self.host.startswith("https://"):
             self.host = self.host[8:]
+        # Strip out any URL character after /
+        self.host = self.host.split("/", 1)[0]
 
         # This is broken. Leaving this here as its supposed to be fixed in a future version of requests
         # self.session.verify = self.ssl_verify
