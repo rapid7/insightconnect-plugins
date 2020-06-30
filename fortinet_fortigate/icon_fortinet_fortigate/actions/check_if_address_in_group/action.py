@@ -56,8 +56,11 @@ class CheckIfAddressInGroup(komand.Action):
         if enable_search:
             for item in address_objects:
                 name = item["name"]
-                endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/address/{name}"
-                response = self.connection.session.get(endpoint, verify=self.connection.ssl_verify)
+                params = {
+                    "filter": f"name=@{name}"
+                }
+                endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/address/"
+                response = self.connection.session.get(endpoint, params=params, verify=self.connection.ssl_verify)
                 try:
                     address_data = response.json()
                 except ValueError:

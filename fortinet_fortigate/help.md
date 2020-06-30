@@ -646,6 +646,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.2 - Support host URL in connection | Improve Create Address Object action to allow for IPs and CIDRs as input
+* 4.0.1 - Bug fix where some names were being incorrectly parsed in the Check if Address in Group action causing the action to fail
 * 4.0.0 - Update Create Address Object action to accept a RFC1918 whitelist | Add enable_search functionality to Check if Address in Group action
 * 3.0.0 - Revise action input/output naming schemes | Add example inputs | New action Remove Address Object from Group
 * 2.0.0 - Simplify the Create Address Object action to auto-detect the input type | Add whitelist safety check to Create Address Object action

@@ -3,8 +3,7 @@ from .schema import StartPatchScanInput, StartPatchScanOutput, Input, Output, Co
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
-import time
-
+import polling2
 
 class StartPatchScan(insightconnect_plugin_runtime.Action):
 
@@ -39,19 +38,28 @@ class StartPatchScan(insightconnect_plugin_runtime.Action):
             "templateId": params.get(Input.TEMPLATE_ID),
             "useMachineCredential": use_machine_credential
         }
-        scan_details = self.connection.ivanti_api.start_patch_scan(payload)
+        
+        self.connection.ivanti_api.create_session_credential()
 
-        i = 0
-        # Poll for patch scan completion
-        while i < max_poll_time:
-            time.sleep(10)
-            patch_scan_status_details = self.connection.ivanti_api.get_patch_scan_status_details(scan_details['id'], allow_404=True)
-            if patch_scan_status_details is not None:
-                if patch_scan_status_details.get('isComplete'):
-                    scan_details['isComplete'] = patch_scan_status_details['isComplete']
-                    scan_details['updatedOn'] = patch_scan_status_details['updatedOn']
-                    break
-            i += 10
+        scan = self.connection.ivanti_api.start_patch_scan(payload)
+
+        try:
+            operation_location_url = scan.headers.get("Operation-Location")
+            polling2.poll(lambda: self.connection.ivanti_api.get_operation_location(operation_location_url)
+            .get("percentComplete") == 100, step=10, timeout=max_poll_time)
+        except KeyError as e:
+            raise PluginException(
+                cause=f'{e} not found within the header.',
+                assistance=f'If the issue persists please contact support.')
+        except polling2.TimeoutException as e:
+            raise PluginException(
+                cause='Action timeout.',
+                assistance=f'This scan has exceeded the maximum poll time of {max_poll_time}.')
+
+        operation_location = self.connection.ivanti_api.get_operation_location(operation_location_url)
+        scan_details = scan.json()
+        scan_details['isComplete'] = True
+        scan_details['updatedOn'] = operation_location['lastAction']
 
         return {
             Output.SCAN_DETAILS: scan_details

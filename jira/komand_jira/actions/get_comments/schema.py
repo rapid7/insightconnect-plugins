@@ -90,29 +90,35 @@ class GetCommentsOutput(komand.Output):
           "type": "object",
           "title": "user",
           "properties": {
+            "accountId": {
+              "type": "string",
+              "title": "Account ID",
+              "description": "User account ID",
+              "order": 1
+            },
             "active": {
               "type": "boolean",
               "title": "Active",
               "description": "Whether the user is active",
-              "order": 4
+              "order": 5
             },
             "display_name": {
               "type": "string",
               "title": "Display Name",
               "description": "User's display name",
-              "order": 3
+              "order": 4
             },
             "email_address": {
               "type": "string",
               "title": "Email Address",
               "description": "User's email address",
-              "order": 2
+              "order": 3
             },
             "name": {
               "type": "string",
               "title": "Name",
               "description": "User name",
-              "order": 1
+              "order": 2
             }
           }
         }
@@ -122,29 +128,35 @@ class GetCommentsOutput(komand.Output):
       "type": "object",
       "title": "user",
       "properties": {
+        "accountId": {
+          "type": "string",
+          "title": "Account ID",
+          "description": "User account ID",
+          "order": 1
+        },
         "active": {
           "type": "boolean",
           "title": "Active",
           "description": "Whether the user is active",
-          "order": 4
+          "order": 5
         },
         "display_name": {
           "type": "string",
           "title": "Display Name",
           "description": "User's display name",
-          "order": 3
+          "order": 4
         },
         "email_address": {
           "type": "string",
           "title": "Email Address",
           "description": "User's email address",
-          "order": 2
+          "order": 3
         },
         "name": {
           "type": "string",
           "title": "Name",
           "description": "User name",
-          "order": 1
+          "order": 2
         }
       }
     }

@@ -9,6 +9,7 @@ class IvantiSecurityControlsAPI:
     def __init__(self, host, port, ssl_verify, username, password, logger):
         self.url = f"https://{host}:{port}/st/console/api/v1.0"
         self.ntlm_auth = HttpNtlmAuth(username, password)
+        self.password = password
         self.logger = logger
         self.ssl_verify = ssl_verify
 
@@ -89,7 +90,7 @@ class IvantiSecurityControlsAPI:
                 return agents
 
     def start_patch_scan(self, payload):
-        return self._call_api("POST", f"{self.url}/patch/scans", json_data=payload)
+        return self._call_api("POST", f"{self.url}/patch/scans", json_data=payload, return_response=True)
 
     def get_patch_scan_machines(self, scan_id):
         return self._call_api("GET", f"{self.url}/patch/scans/{scan_id}/machines")
@@ -124,7 +125,17 @@ class IvantiSecurityControlsAPI:
     def get_patch_scan_template(self, patch_scan_template_id):
         return self._call_api("GET", f"{self.url}/patch/scanTemplates/{patch_scan_template_id}")
 
-    def _call_api(self, method, url, params=None, json_data=None, allow_404=False):
+    def create_session_credential(self):
+        payload = {
+            "clearText": self.password,
+        }
+        self._call_api("DELETE", f"{self.url}/sessioncredentials", allow_404=True, return_response=True)
+        return self._call_api("POST", f"{self.url}/sessioncredentials", json_data=payload)
+
+    def get_operation_location(self, url):
+        return self._call_api("GET", url)
+
+    def _call_api(self, method, url, params=None, json_data=None, allow_404=False, return_response=False):
         try:
             response = requests.request(method, url,
                                         auth=self.ntlm_auth,
@@ -141,6 +152,8 @@ class IvantiSecurityControlsAPI:
             if response.status_code == 409:
                 raise PluginException(cause='Conflict.', assistance='Resource with this name already exists.')
             if 200 <= response.status_code < 300:
+                if return_response:
+                    return response
                 return response.json()
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)

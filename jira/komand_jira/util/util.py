@@ -74,13 +74,16 @@ def normalize_issue(issue, get_attachments=False, include_raw_fields=False, logg
     return output
 
 
-def normalize_user(user, logger=logging.getLogger()):
+def normalize_user(user, is_cloud = False, logger=logging.getLogger()):
     output = {
-        "name": user.name if hasattr(user, 'name') else None,
-        "email_address": user.emailAddress,
         "display_name": user.displayName,
         "active": user.active,
+        "email_address": user.emailAddress
     }
+    if is_cloud:
+        output["account_id"] = user.accountId
+    else:
+        output["name"] = user.name
 
     logger.debug("Result user: %s", output)
 
