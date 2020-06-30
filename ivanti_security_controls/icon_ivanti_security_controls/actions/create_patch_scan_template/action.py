@@ -14,20 +14,16 @@ class CreatePatchScanTemplate(insightconnect_plugin_runtime.Action):
                 output=CreatePatchScanTemplateOutput())
 
     def run(self, params={}):
-        patch_groups_ids = params.get(Input.PATCHGROUPIDS)
-        for patch_group_id in patch_groups_ids:
-            if self.connection.ivanti_api.get_patch_group(patch_group_id):
-                pass
-            else:
-                raise PluginException(cause='Invalid Patch Group ID provided.',
-                                    assistance=f'Patch Group ID: {patch_group_id} doesn\'t exist.')
+        patch_group_ids = params.get(Input.PATCHGROUPIDS)
 
+        self.valdate_patch_group_ids(patch_group_ids)
+        
         payload = {
             "description": params.get(Input.DESCRIPTION, None),
             "name": params.get(Input.NAME),
             "patchFilter": {
                 "patchGroupFilterType": "Scan",
-                "patchGroupIds": patch_groups_ids
+                "patchGroupIds": patch_group_ids
             },
             "path": params.get(Input.PATH, None),
             "threadCount": params.get(Input.THREADCOUNT, None)
@@ -41,3 +37,19 @@ class CreatePatchScanTemplate(insightconnect_plugin_runtime.Action):
         return {
             Output.PATCH_SCAN_TEMPLATE: self.connection.ivanti_api.get_patch_scan_template(template_id)
         }
+
+    def valdate_patch_group_ids(self, patch_group_ids: list):
+        invalid_ids = []
+        for patch_group_id in patch_group_ids:
+            if self.connection.ivanti_api.get_patch_group(patch_group_id):
+                pass
+            else:
+                invalid_ids.append(patch_group_id)
+        if len(invalid_ids) == 1:
+            raise PluginException(cause='Invalid Patch Group ID provided.',
+                                assistance=f'Patch Group ID: {invalid_ids[0]} doesn\'t exist.')
+        elif len(invalid_ids) > 1:
+            raise PluginException(cause='Invalid Patch Group IDs provided.',
+                                assistance=f'Patch Group IDs: {invalid_ids} don\'t exist.')
+        else:
+            return
