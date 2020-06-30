@@ -17,7 +17,7 @@ class CreatePatchScanTemplate(insightconnect_plugin_runtime.Action):
         patch_group_ids = params.get(Input.PATCHGROUPIDS)
 
         self.valdate_patch_group_ids(patch_group_ids)
-        
+
         payload = {
             "description": params.get(Input.DESCRIPTION, None),
             "name": params.get(Input.NAME),
@@ -50,6 +50,6 @@ class CreatePatchScanTemplate(insightconnect_plugin_runtime.Action):
                                 assistance=f'Patch Group ID: {invalid_ids[0]} doesn\'t exist.')
         elif len(invalid_ids) > 1:
             raise PluginException(cause='Invalid Patch Group IDs provided.',
-                                assistance=f'Patch Group IDs: {invalid_ids} don\'t exist.')
+                                assistance=f'Patch Group IDs: {str(invalid_ids)[1:-1]} don\'t exist.')
         else:
             return
