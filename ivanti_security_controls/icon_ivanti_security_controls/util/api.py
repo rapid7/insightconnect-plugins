@@ -120,6 +120,10 @@ class IvantiSecurityControlsAPI:
     def get_operation_location(self, url):
         return self._call_api("GET", url)
 
+    def get_patch_deployment_template_by_name(self, deployment_template_name):
+        params = {"name": deployment_template_name}
+        return self._call_api("GET", f"{self.url}/patch/deploytemplates", params=params)
+
     def _call_api(self, method, url, params=None, json_data=None, allow_404=False, return_response=False):
         try:
             response = requests.request(method, url,

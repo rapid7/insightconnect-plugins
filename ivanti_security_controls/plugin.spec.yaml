@@ -797,3 +797,46 @@ actions:
         description: Information about a machine involved with the patch deployment
         type: machine_deploy_state
         required: true
+  get_patch_deployment_template_id:
+    title: Get Patch Deployment Template ID
+    description: Get a Patch Deployment Template ID by searching for the Patch Deployment Template Name
+    input:
+      patch_deployment_template_name:
+        title: Patch Deployment Template Name
+        description: The name of the patch deployment template
+        type: string
+        required: true
+        example: example-template-name
+    output:
+      patch_deployment_template_id:
+        title: Patch Deployment Template ID
+        description: The ID of the patch deployment template
+        type: string
+  start_patch_deployment:
+    title: Start Patch Deployment
+    description: Start patch deployment
+    input:
+      scan_identifier:
+        title: Scan Identifier
+        description: A scan ID or scan name
+        type: string
+        required: true
+        example: 01234567-89AB-CDEF-0123-456789ABCDEF
+      template_identifier:
+        title: Template Identifier
+        description: A template ID or template name
+        type: string
+        required: true
+        example: example-template-name
+      download_patches:
+        title: Download Patches
+        description: Boolean to initiate patch download before starting the deployment
+        type: boolean
+        required: true
+        example: false
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true

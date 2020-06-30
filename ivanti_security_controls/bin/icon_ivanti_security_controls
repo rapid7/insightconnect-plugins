@@ -27,6 +27,8 @@ class ICONIvantiSecurityControls(insightconnect_plugin_runtime.Plugin):
 
         self.add_action(actions.GetPatchDeployment())
 
+        self.add_action(actions.GetPatchDeploymentTemplateId())
+
         self.add_action(actions.GetPatchDetails())
 
         self.add_action(actions.GetPatchScanStatus())
@@ -34,6 +36,8 @@ class ICONIvantiSecurityControls(insightconnect_plugin_runtime.Plugin):
         self.add_action(actions.GetScannedMachineDetails())
 
         self.add_action(actions.SearchPatches())
+
+        self.add_action(actions.StartPatchDeployment())
 
         self.add_action(actions.StartPatchScan())
 

@@ -31,10 +31,7 @@ Example input:
 
 ```
 {
-  "credentials": {
-    "username": "user1",
-    "password": "mypassword"
-  },
+  "credentials": "{\"username\":\"user1\", \"password\":\"mypassword\"}",
   "host": "example.com",
   "port": 3121,
   "ssl_verify": true
@@ -44,6 +41,123 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Start Patch Deployment
+
+This action is used to start patch deployment.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|download_patches|boolean|None|True|Boolean to initiate patch download before starting the deployment|None|False|
+|scan_identifier|string|None|True|A scan ID or scan name|None|01234567-89AB-CDEF-0123-456789ABCDEF|
+|template_identifier|string|None|True|A template ID or template name|None|example-template-name|
+
+Example input:
+
+```
+{
+  "download_patches": false,
+  "scan_identifier": "01234567-89AB-CDEF-0123-456789ABCDEF",
+  "template_identifier": "example-template-name"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+```
+
+#### Get Patch Deployment Template ID
+
+This action is used to get a Patch Deployment Template ID by searching for the Patch Deployment Template Name.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|patch_deployment_template_name|string|None|True|The name of the patch deployment template|None|example-template-name|
+
+Example input:
+
+```
+{
+  "patch_deployment_template_name": "example-template-name"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|patch_deployment_template_id|string|False|The ID of the patch deployment template|
+
+Example output:
+
+```
+{
+  "machine_information": {
+    "overallState": "Complete",
+    "statusDescription": "Finished",
+    "address": "10.4.27.111",
+    "completedPatches": 1,
+    "lastUpdated": "2020-05-08T13:38:37.987Z",
+    "name": "splunk-724-w12",
+    "patchStates": [
+      {
+        "finishedOn": "2020-05-08T13:34:54.6",
+        "hasExecuted": true,
+        "lastUpdated": "2020-05-08T13:34:54.6",
+        "overallState": "Complete",
+        "startedOn": "2020-05-08T13:34:42.463",
+        "statusDescription": "Successfully installed",
+        "bulletinId": "MS20-02-AFP-4537759",
+        "kb": "Q4537759",
+        "nativeCode": 0,
+        "overallStateDescription": "Complete",
+        "patchId": "00030eb2-0000-0000-0000-000000000000",
+        "scheduledOn": "2020-05-08T06:33:40.47",
+        "status": "VerifiedFixed"
+      }
+    ],
+    "domain": "WORKGROUP",
+    "id": 36,
+    "links": {
+      "self": {
+        "href": "https://ivanti-w16.vuln.lax.rapid7.com:3121/st/con..."
+      }
+    }
+  },
+  "patch_deployment_details": {
+    "creator": "IVANTI-W16\\Administrator",
+    "expectedMachineCount": 1,
+    "isComplete": true,
+    "lastUpdatedOn": "2020-05-08T13:38:37.987Z",
+    "links": {
+      "machines": {
+        "href": "https://ivanti-w16.vuln.lax.rapid7.com:3121/st/con..."
+      },
+      "self": {
+        "href": "https://ivanti-w16.vuln.lax.rapid7.com:3121/st/con..."
+      },
+      "template": {
+        "href": "https://ivanti-w16.vuln.lax.rapid7.com:3121/st/con..."
+      }
+    },
+    "name": "Standard",
+    "completedMachineCount": 1,
+    "id": "282cbbf9-276d-4d36-a96d-6e55c8a7271e",
+    "startedOn": "2020-05-08T13:33:39.077Z"
+  }
+}
+```
 
 #### Get Patch Deployment
 
