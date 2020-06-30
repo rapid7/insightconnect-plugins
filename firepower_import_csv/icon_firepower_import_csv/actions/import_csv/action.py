@@ -130,7 +130,7 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
         for vuln in vuln_list:
             description = vuln.get("description", "")
             if description:
-                description = BeautifulSoup(description, features="html.parser").get_text()
+                description = BeautifulSoup(description, features="html.parser").get_text().strip()
 
             scan_result = \
             {
@@ -148,10 +148,10 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
                     "protocol_id": vuln.get("protocol_id", ""),
                     "scanner_id": "InsightVM",
                     "vulnerability_id": vuln.get("vulnerability_id", ""),
-                    "description": description,
+                    "description": description if description else "",
                     "vulnerability_title": vuln.get("title", ""),
-                    "cve_ids": self.get_cve_ids(vuln.get("title")),
-                    "bugtraq_ids": "", # Space-separated list of BugTraq vulnerability IDs
+                    "cve_ids": "".strip(),
+                    "bugtraq_ids": "".strip(), # Space-separated list of BugTraq vulnerability IDs
                 }
             }
 

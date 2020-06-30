@@ -48,6 +48,8 @@ class TestImportCsv(TestCase):
         test_conn.connect(connection_params)
         test_action.connection = test_conn
         result = test_action.run(action_params)
+        print(result.get("result"))
+        print(result.get("success"))
 
         self.assertTrue("result" in result.keys())
         self.assertTrue(result.get("success"))

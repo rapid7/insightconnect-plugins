@@ -1,0 +1,202 @@
+vulnerability_id,title,description,ip_address,port,protocol_id,name,vendor,version
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.60,137,17,Windows Server 2003,Microsoft,SP2
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.60,3306,6,Windows Server 2003,Microsoft,SP2
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.60,1025,6,Windows Server 2003,Microsoft,SP2
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.60,139,6,Windows Server 2003,Microsoft,SP2
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.60,135,6,Windows Server 2003,Microsoft,SP2
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.60,3389,6,Windows Server 2003,Microsoft,SP2
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.60,22,6,Windows Server 2003,Microsoft,SP2
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.60,443,6,Windows Server 2003,Microsoft,SP2
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.60,80,6,Windows Server 2003,Microsoft,SP2
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.60,445,6,Windows Server 2003,Microsoft,SP2
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.23.32,111,6,Linux,CentOS,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.23.32,80,6,Linux,CentOS,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.23.32,22,6,Linux,CentOS,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.23.32,111,17,Linux,CentOS,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.22.179,2049,17,Enterprise Linux,Red Hat,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.22.179,139,6,Enterprise Linux,Red Hat,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.22.179,80,6,Enterprise Linux,Red Hat,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.22.179,31400,17,Enterprise Linux,Red Hat,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.22.179,22,6,Enterprise Linux,Red Hat,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.22.179,5432,6,Enterprise Linux,Red Hat,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.22.179,2049,6,Enterprise Linux,Red Hat,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.22.179,137,17,Enterprise Linux,Red Hat,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.22.179,111,6,Enterprise Linux,Red Hat,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.22.179,5353,17,Enterprise Linux,Red Hat,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.22.179,445,6,Enterprise Linux,Red Hat,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.22.179,111,17,Enterprise Linux,Red Hat,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,3306,6,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,3389,6,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,135,6,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,80,6,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,443,6,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,139,6,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,123,17,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,137,17,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,31400,17,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,445,6,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,22,6,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.23.181,80,6,Linux,Ubuntu,10.04
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.23.181,5353,17,Linux,Ubuntu,10.04
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.23.181,22,6,Linux,Ubuntu,10.04
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,3306,6,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,3389,6,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,135,6,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,80,6,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,443,6,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,139,6,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,123,17,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,137,17,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,31400,17,Windows XP,Microsoft,Unknown
+26172,PHP Vulnerability: CVE-2017-11628,"
+    
+<p>In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system&#39;s php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.</p>
+  ",10.4.24.54,445,6,Windows XP,Microsoft,Unknown
+

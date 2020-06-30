@@ -1,0 +1,280 @@
+SetSource,InsightVM
+AddHost,10.4.23.32
+SetOS,10.4.23.32,CentOS,Linux,Unknown
+AddScanResult,10.4.23.32,"InsightVM",26172,111,17,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.60
+SetOS,10.4.24.60,Microsoft,Windows Server 2003,SP2
+AddScanResult,10.4.24.60,"InsightVM",26172,1025,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.23.32
+SetOS,10.4.23.32,CentOS,Linux,Unknown
+AddScanResult,10.4.23.32,"InsightVM",26172,22,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.22.179
+SetOS,10.4.22.179,Red Hat,Enterprise Linux,Unknown
+AddScanResult,10.4.22.179,"InsightVM",26172,22,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.22.179
+SetOS,10.4.22.179,Red Hat,Enterprise Linux,Unknown
+AddScanResult,10.4.22.179,"InsightVM",26172,137,17,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.23.32
+SetOS,10.4.23.32,CentOS,Linux,Unknown
+AddScanResult,10.4.23.32,"InsightVM",26172,80,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.54
+SetOS,10.4.24.54,Microsoft,Windows XP,Unknown
+AddScanResult,10.4.24.54,"InsightVM",26172,80,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.60
+SetOS,10.4.24.60,Microsoft,Windows Server 2003,SP2
+AddScanResult,10.4.24.60,"InsightVM",26172,3306,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.60
+SetOS,10.4.24.60,Microsoft,Windows Server 2003,SP2
+AddScanResult,10.4.24.60,"InsightVM",26172,139,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.54
+SetOS,10.4.24.54,Microsoft,Windows XP,Unknown
+AddScanResult,10.4.24.54,"InsightVM",26172,22,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.22.179
+SetOS,10.4.22.179,Red Hat,Enterprise Linux,Unknown
+AddScanResult,10.4.22.179,"InsightVM",26172,139,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.23.32
+SetOS,10.4.23.32,CentOS,Linux,Unknown
+AddScanResult,10.4.23.32,"InsightVM",26172,111,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.22.179
+SetOS,10.4.22.179,Red Hat,Enterprise Linux,Unknown
+AddScanResult,10.4.22.179,"InsightVM",26172,111,17,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.60
+SetOS,10.4.24.60,Microsoft,Windows Server 2003,SP2
+AddScanResult,10.4.24.60,"InsightVM",26172,443,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.60
+SetOS,10.4.24.60,Microsoft,Windows Server 2003,SP2
+AddScanResult,10.4.24.60,"InsightVM",26172,3389,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.23.181
+SetOS,10.4.23.181,Ubuntu,Linux,10.04
+AddScanResult,10.4.23.181,"InsightVM",26172,80,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.54
+SetOS,10.4.24.54,Microsoft,Windows XP,Unknown
+AddScanResult,10.4.24.54,"InsightVM",26172,135,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.22.179
+SetOS,10.4.22.179,Red Hat,Enterprise Linux,Unknown
+AddScanResult,10.4.22.179,"InsightVM",26172,80,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.60
+SetOS,10.4.24.60,Microsoft,Windows Server 2003,SP2
+AddScanResult,10.4.24.60,"InsightVM",26172,445,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.22.179
+SetOS,10.4.22.179,Red Hat,Enterprise Linux,Unknown
+AddScanResult,10.4.22.179,"InsightVM",26172,2049,17,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.22.179
+SetOS,10.4.22.179,Red Hat,Enterprise Linux,Unknown
+AddScanResult,10.4.22.179,"InsightVM",26172,5432,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.23.181
+SetOS,10.4.23.181,Ubuntu,Linux,10.04
+AddScanResult,10.4.23.181,"InsightVM",26172,22,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.60
+SetOS,10.4.24.60,Microsoft,Windows Server 2003,SP2
+AddScanResult,10.4.24.60,"InsightVM",26172,135,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.60
+SetOS,10.4.24.60,Microsoft,Windows Server 2003,SP2
+AddScanResult,10.4.24.60,"InsightVM",26172,80,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.54
+SetOS,10.4.24.54,Microsoft,Windows XP,Unknown
+AddScanResult,10.4.24.54,"InsightVM",26172,137,17,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.22.179
+SetOS,10.4.22.179,Red Hat,Enterprise Linux,Unknown
+AddScanResult,10.4.22.179,"InsightVM",26172,31400,17,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.22.179
+SetOS,10.4.22.179,Red Hat,Enterprise Linux,Unknown
+AddScanResult,10.4.22.179,"InsightVM",26172,2049,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.60
+SetOS,10.4.24.60,Microsoft,Windows Server 2003,SP2
+AddScanResult,10.4.24.60,"InsightVM",26172,137,17,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.22.179
+SetOS,10.4.22.179,Red Hat,Enterprise Linux,Unknown
+AddScanResult,10.4.22.179,"InsightVM",26172,5353,17,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.54
+SetOS,10.4.24.54,Microsoft,Windows XP,Unknown
+AddScanResult,10.4.24.54,"InsightVM",26172,31400,17,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.54
+SetOS,10.4.24.54,Microsoft,Windows XP,Unknown
+AddScanResult,10.4.24.54,"InsightVM",26172,3306,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.54
+SetOS,10.4.24.54,Microsoft,Windows XP,Unknown
+AddScanResult,10.4.24.54,"InsightVM",26172,3389,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.54
+SetOS,10.4.24.54,Microsoft,Windows XP,Unknown
+AddScanResult,10.4.24.54,"InsightVM",26172,123,17,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.54
+SetOS,10.4.24.54,Microsoft,Windows XP,Unknown
+AddScanResult,10.4.24.54,"InsightVM",26172,445,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.23.181
+SetOS,10.4.23.181,Ubuntu,Linux,10.04
+AddScanResult,10.4.23.181,"InsightVM",26172,5353,17,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.22.179
+SetOS,10.4.22.179,Red Hat,Enterprise Linux,Unknown
+AddScanResult,10.4.22.179,"InsightVM",26172,111,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.54
+SetOS,10.4.24.54,Microsoft,Windows XP,Unknown
+AddScanResult,10.4.24.54,"InsightVM",26172,139,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.54
+SetOS,10.4.24.54,Microsoft,Windows XP,Unknown
+AddScanResult,10.4.24.54,"InsightVM",26172,443,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.60
+SetOS,10.4.24.60,Microsoft,Windows Server 2003,SP2
+AddScanResult,10.4.24.60,"InsightVM",26172,22,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.22.179
+SetOS,10.4.22.179,Red Hat,Enterprise Linux,Unknown
+AddScanResult,10.4.22.179,"InsightVM",26172,445,6,"PHP Vulnerability: CVE-2017-11628","
+In PHP before 5.6.31, 7.x before 7.0.21, and 7.1.x before 7.1.7, a stack-based buffer overflow in the zend_ini_do_op() function in Zend/zend_ini_parser.c could cause a denial of service or potentially allow executing code. NOTE: this is only relevant for PHP applications that accept untrusted input (instead of the system's php.ini file) for the parse_ini_string or parse_ini_file function, e.g., a web application for syntax validation of php.ini directives.
+","cve_ids: ","bugtraq_ids: "
+ScanUpdate
