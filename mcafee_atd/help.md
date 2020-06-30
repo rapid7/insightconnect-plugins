@@ -9,6 +9,7 @@
 * Submit a URL for analysis
 * Submit a file for analysis
 * Display the analyzer profiles to which the user has access
+* Download the analysis report files
 
 # Requirements
 
@@ -45,6 +46,44 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Get Report
+
+This action is used to download the analysis report files for given parameter.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|Task ID or job ID or MD5 value for which will be prepared analysis report|None|13|
+|report_type|string|JSON|False|Type of file prepared analysis report|['JSON', 'HTML', 'TXT', 'ZIP', 'XML', 'IOC', 'STIX', 'PDF', 'SAMPLE']|HTML|
+|type_id|string|MD5|False|Type of given ID parameter, default value is MD5|['MD5', 'TASK ID', 'JOB ID']|TASK ID|
+
+Example input:
+
+```
+{
+  "id": 13,
+  "report_type": "HTML",
+  "type_id": "TASK ID"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|file|bytes|True|Prepared analysis report|
+|report|object|False|Return report in JSON|
+
+Example output:
+
+```
+{
+  "file": "PCFET0NUWVBFIEhUTUwgUFVCTElDIFwiLS8vVzNDLy9EVEQgSFRNTCA0LjAxLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL1RSL2h0bWw0L3N0cmljdC5kdGRcIj4KPGh0bWw+CjxoZWFkPgo8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQvaHRtbDsgY2hhcnNldD11dGYtOCI+Cjx0aXRsZT5NYWx3YXJlIFN1bW1hcnk8L3RpdGxlPgo8bGluayBocmVmPSIvaW1hZ2VzL3N0YW5kYXJkLmNzcyIgcmVsPSJzdHlsZXNoZWV0Ij4KPCEtLSAgPGxpbmsgaHJlZj0iL2ltYWdlcy9zdGFuZGFyZDIwMTUuY3NzIiByZWw9InN0eWxlc2hlZXQiPiAtLT4KPGxpbmsgaHJlZj0iL2ltYWdlcy9ib290c3RyYXAubWluLmNzcyIgcmVsPSJzdHlsZXNoZWV0Ij4KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4gCmRpdi5jZm9vdGVyIHttYXJnaW4tdG9wOjQwcHg7IHBhZGRpbmctdG9wOjIwcHg7IGJvcmRlci10b3A6N3B4IGRvdWJsZSAjY2FiMmQyOyBtYXJnaW4tcmlnaHQ6MTUlfQo8L3N0eWxlPgo8L2hlYWQ+Cjxib2R5Pgo8IS0tCjxkaXYgY2xhc3M9Im1haW50aXRsZSI+VGhyZWF0IEFuYWx5c2lzIFJlcG9ydDwvZGl2Pgo8aW1nIHNyYz0iL2ltYWdlcy9pbnRfU2VjdXJpdHkucG5nIiBzdHlsZT0iZmxvYXQ6cmlnaHQ7IG1hcmdpbi1yaWdodDoyMDBweDsgIj4KPGRpdiBzdHlsZT0iY2xlYXI6Ym90aDsiPjwvZGl2PgotLT4KPGRpdiBjbGFzcz0ibWFpbnRpdGxlIj4KPGltZyBzcmM9Ii9pbWFnZXMvbWNsb2dvLWJ3LmpwZyIgaGVpZ2h0PSIyNSIgd2lkdGg9IjEyNSIgYWxpZ249InRvcCI+ICZlbnNwOyAmZW5zcDt8JmVuc3A7IDxmb250IHNpemU9IjUiIGNvbG9yPSIjNDE0NDQ4IiA+ICBUaHJlYXQgQW5hbHlzaXMgUmVwb3J0PC9mb250PjwvZGl2Pgo8cCBhbGlnbj0icmlnaHQiPjxmb250IHNpemU9IisxIj5NY0FmZWUgQWR2YW5jZWQgVGhyZWF0IERlZmVuc2U8L2ZvbnQ+PC9wPgo8YnI+PGJyPgo8aDI+U3VtbWFyeTwvaDI+CjxwPlNhbXBsZSBOYW1lOiB0ZXN0LnR4dDwvcD4KPHA+TUQ1IEhhc2ggSWRlbnRpZmllcjogMEI0N0Y2NzFCQzYzMjg2MjNERkExMDg1MUQ0MThFNTU8L3A+Cgo8cCBjbGFzcz0ibWFsaSI+U2V2ZXJpdHk6IC0yPC9wPgo8cCBjbGFzcz0ibWFsaSI+RGVzY3JpcHRpb246IEZpbGUgdHlwZSBub3Qgc3VwcG9ydGVkLjwvcD4KCjxkaXYgc3R5bGU9ImJvcmRlci10b3A6MXB4IHNvbGlkIHJnYigyMjMsMjIzLDIyMyk7IHBhZGRpbmctdG9wOjI1cHg7IG1hcmdpbi10b3A6NTBweDsgIj5Db3B5cmlnaHQgwqkgMjAxOCBNY0FmZWUsIExMQy4gQWxsIHJpZ2h0cyByZXNlcnZlZC48YnI+IDxhIGhyZWY9Imh0dHA6Ly93d3cubWNhZmVlLmNvbSI+d3d3Lm1jYWZlZS5jb208L2E+CjwvZGl2Pgo8L2JvZHk+CjwvaHRtbD4K",
+  "report": {}
+}
+```
 
 #### List Analyzer Profiles
 
@@ -341,6 +380,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.5.0 - New action Get Report
 * 1.4.0 - New action List Analyzer Profiles
 * 1.3.0 - New action Submit File
 * 1.2.0 - New action Submit URL
