@@ -14,12 +14,20 @@ class CreatePatchScanTemplate(insightconnect_plugin_runtime.Action):
                 output=CreatePatchScanTemplateOutput())
 
     def run(self, params={}):
+        patch_groups_ids = params.get(Input.PATCHGROUPIDS)
+        for patch_group_id in patch_groups_ids:
+            if self.connection.ivanti_api.get_patch_group(patch_group_id):
+                pass
+            else:
+                raise PluginException(cause='Invalid Patch Group ID provided.',
+                                    assistance=f'Patch Group ID: {patch_group_id} doesn\'t exist.')
+
         payload = {
             "description": params.get(Input.DESCRIPTION, None),
             "name": params.get(Input.NAME),
             "patchFilter": {
                 "patchGroupFilterType": "Scan",
-                "patchGroupIds": params.get(Input.PATCHGROUPIDS)
+                "patchGroupIds": patch_groups_ids
             },
             "path": params.get(Input.PATH, None),
             "threadCount": params.get(Input.THREADCOUNT, None)

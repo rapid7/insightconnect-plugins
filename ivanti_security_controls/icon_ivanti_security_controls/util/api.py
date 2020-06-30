@@ -112,6 +112,9 @@ class IvantiSecurityControlsAPI:
     def create_patch_group(self, payload):
         return self._call_api("POST", f"{self.url}/patch/groups", json_data=payload)
 
+    def get_patch_group(self, patch_group_id):
+        return self._call_api("GET", f"{self.url}/patch/groups/{patch_group_id}", allow_404=True)
+
     def add_cves_to_patch_group(self, patch_group_id, payload):
         return self._call_api("POST", f"{self.url}/patch/groups/{patch_group_id}/patches/cves", json_data=payload)
 
