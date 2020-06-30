@@ -28,28 +28,26 @@ class CreatePatchScanTemplate(insightconnect_plugin_runtime.Action):
             "path": params.get(Input.PATH, None),
             "threadCount": params.get(Input.THREADCOUNT, None)
         }
-        try:
-            template_id = self.connection.ivanti_api.create_patch_scan_template(payload)['id']
-        except KeyError as e:
-            raise PluginException(cause=f'"{e}" not found in the API response.',
-                                  assistance='If the issue persists please contact support.')
 
-        return {
-            Output.PATCH_SCAN_TEMPLATE: self.connection.ivanti_api.get_patch_scan_template(template_id)
-        }
+        template_id = self.connection.ivanti_api.create_patch_scan_template(payload).get('id')
+        if template_id:
+            return {
+                Output.PATCH_SCAN_TEMPLATE: self.connection.ivanti_api.get_patch_scan_template(template_id)
+            }
+        
+        raise PluginException(
+            cause='Invalid API response.',
+            assistance='If the issue persists please contact support.'
+        )
 
     def valdate_patch_group_ids(self, patch_group_ids: list):
         invalid_ids = []
         for patch_group_id in patch_group_ids:
-            if self.connection.ivanti_api.get_patch_group(patch_group_id):
-                pass
-            else:
+            if not self.connection.ivanti_api.get_patch_group(patch_group_id):
                 invalid_ids.append(patch_group_id)
-        if len(invalid_ids) == 1:
-            raise PluginException(cause='Invalid Patch Group ID provided.',
-                                assistance=f'Patch Group ID: {invalid_ids[0]} doesn\'t exist.')
-        elif len(invalid_ids) > 1:
-            raise PluginException(cause='Invalid Patch Group IDs provided.',
-                                assistance=f'Patch Group IDs: {str(invalid_ids)[1:-1]} don\'t exist.')
-        else:
-            return
+        if len(invalid_ids) >= 1:
+            raise PluginException(
+                cause='Invalid Patch Group ID provided.',
+                assistance=f'Following Patch Group IDs do not exist: {str(invalid_ids)[1:-1]}.'
+            )
+        return

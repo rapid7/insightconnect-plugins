@@ -14,24 +14,25 @@ class CreatePatchGroupAndAddCves(insightconnect_plugin_runtime.Action):
                 output=CreatePatchGroupAndAddCvesOutput())
 
     def run(self, params={}):
-        patch_group_payload = {
-            "name": params.get(Input.NAME),
-            "path": params.get(Input.PATH, None)
-        }
+        patch_group_details = self.connection.ivanti_api.create_patch_group(
+            {
+                "name": params.get(Input.NAME),
+                "path": params.get(Input.PATH, None)
+            }
+        )
 
-        patch_group_details = self.connection.ivanti_api.create_patch_group(patch_group_payload)
-        try:
-            patch_group_id = patch_group_details['id']
-        except KeyError as e:
-            raise PluginException(cause=f'"{e}" not found in the API response.',
-                                  assistance='If the issue persists please contact support.')
+        patch_group_id = patch_group_details.get('id')
 
-        cve_payload = {
-            "cves": params.get(Input.CVES),
-        }
+        if patch_group_id:
+            self.connection.ivanti_api.add_cves_to_patch_group(
+                patch_group_id,
+                {"cves": params.get(Input.CVES)}
+            )
+            return {
+                Output.PATCH_GROUP: patch_group_details
+            }
 
-        self.connection.ivanti_api.add_cves_to_patch_group(patch_group_id, cve_payload)
-
-        return {
-            Output.PATCH_GROUP: patch_group_details
-        }
+        raise PluginException(
+            cause='Invalid API response.',
+            assistance='If the issue persists please contact support.'
+        )
