@@ -49,7 +49,8 @@ Example input:
 
 #### Get Report
 
-This action is used to download the analysis report files for given parameter.
+This action is used to download the report of an analysis. It will return the report in JSON along with a file version of
+the report based on the specific file type specified in `report_type`.
 
 ##### Input
 

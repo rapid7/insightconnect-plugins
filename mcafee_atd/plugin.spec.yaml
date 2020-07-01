@@ -645,7 +645,7 @@ actions:
         required: true
   get_report:
     title: Get Report
-    description: Download the analysis report file for given parameter
+    description: Download the report of an analysis
     input:
       id:
         title: ID

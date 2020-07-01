@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Download the analysis report file for given parameter"
+    DESCRIPTION = "Download the report of an analysis"
 
 
 class Input:
