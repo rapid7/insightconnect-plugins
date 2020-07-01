@@ -9,7 +9,7 @@ class McAfeeRequest:
         self.verify_ssl = verify_ssl
         self.logger = logger
 
-    def make_json_request(self, method, path, params=None, data=None, headers=None, files=None):
+    def make_json_request(self, method, path, params=None, data=None, headers=None, files=None, full_response: bool = False):
         response = {"text": ""}
 
         try:
@@ -26,9 +26,11 @@ class McAfeeRequest:
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.API_KEY)
             if response.status_code >= 400:
-                response_data = response.json()
-                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response_data.get("message"))
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
             if 200 <= response.status_code < 300:
+                if full_response:
+                    return response
+
                 return response.json()
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)

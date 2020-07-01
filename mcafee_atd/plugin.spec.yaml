@@ -4,7 +4,7 @@ products: [insightconnect]
 name: mcafee_atd
 title: McAfee Advanced Threat Defense
 description: McAfee Advanced Threat Defense provides an API framework for external applications to access core McAfeeATD functions through the REST protocol
-version: 1.4.0
+version: 1.5.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -643,3 +643,51 @@ actions:
         description: Returns true if found information about analyzer profiles
         type: boolean
         required: true
+  get_report:
+    title: Get Report
+    description: Download the report of an analysis
+    input:
+      id:
+        title: ID
+        description: The Task ID, job ID, or MD5 value for the prepared analysis report
+        type: string
+        required: true
+        example: 13
+      type_id:
+        title: Type ID
+        description: Type of given ID parameter, the type must match the value of the ID field. The default value is MD5
+        type: string
+        required: false
+        default: MD5
+        example: TASK ID
+        enum:
+          - MD5
+          - TASK ID
+          - JOB ID
+      report_type:
+        title: Report Type
+        description: The file type of the report to return in the file output
+        type: string
+        required: false
+        default: HTML
+        example: HTML
+        enum:
+          - HTML
+          - TXT
+          - ZIP
+          - XML
+          - IOC
+          - STIX
+          - PDF
+          - SAMPLE
+    output:
+      file:
+        title: File
+        description: Prepared analysis report
+        type: bytes
+        required: true
+      report:
+        title: Report
+        description: Return report in JSON
+        type: object
+        required: false
