@@ -47,7 +47,7 @@ Example input:
 
 #### Create Patch Group
 
-This action is used to create a new patch group and add CVEs to it.
+This action is used to create a new patch group with CVEs.
 
 ##### Input
 
