@@ -45,6 +45,42 @@ Example input:
 
 ### Actions
 
+#### Create Patch Group
+
+This action is used to create a new patch group and add CVEs to it.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|cves|[]string|None|True|The CVEs that should be included in the new patch group|None|["cve-2019-0701", "CVE-2019-0708"]|
+|name|string|None|True|The name of the new patch group|None|New Patch Group|
+|path|string|None|False|The path that describes the location of the patch group within the Patch Templates and Groups list in the navigation pane|None|Lab\Servers|
+
+Example input:
+
+```
+{
+  "cves": [
+    "cve-2019-0701",
+    "CVE-2019-0708"
+  ],
+  "name": "New Patch Group",
+  "path": "Lab\\Servers"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|patch_group|patch_group|True|Detailed information about the patch group|
+
+Example output:
+
+```
+```
+
 #### Create Patch Scan Template
 
 This action is used to create a new patch scan template.
@@ -53,7 +89,7 @@ This action is used to create a new patch scan template.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|description|string|None|False|Description that explains the purpose of this patch scan template|None|Created by REST API|
+|description|string|None|False|Description that explains the purpose of this patch scan template|None|Patch Scan Template created from InsightConnect|
 |name|string|None|True|Name of the patch scan template|None|ExamplePatchScanTemplate|
 |patchGroupIds|[]integer|None|True|The IDs of the patch groups to use|None|1|
 |path|string|None|False|Path to the location of the machine group within the Patch Scan Templates list in the navigation pane|None|Lab\Servers|
@@ -63,7 +99,7 @@ Example input:
 
 ```
 {
-  "description": "Created by REST API",
+  "description": "Patch Scan Template created from InsightConnect",
   "name": "ExamplePatchScanTemplate",
   "patchGroupIds": 1,
   "path": "Lab\\Servers",
@@ -111,59 +147,6 @@ Example output:
             "softwareDistribution": false,
             "vendorFamilyProductFilter": {}
         }
-    }
-}
-```
-
-#### Create Patch Group and Add CVEs
-
-This action is used to create a new patch group and add CVEs to it.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|cves|[]string|None|True|The CVEs that should be included in the new patch group|None|["cve-2019-0701", "CVE-2019-0708"]|
-|name|string|None|True|The name of the new patch group|None|New Patch Group|
-|path|string|None|False|The path that describes the location of the patch group within the Patch Templates and Groups list in the navigation pane|None|Lab\Servers|
-
-Example input:
-
-```
-{
-  "cves": [
-    "cve-2019-0701",
-    "CVE-2019-0708"
-  ],
-  "name": "New Patch Group",
-  "path": "Lab\\Servers"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|patch_group|patch_group|True|Detailed information about the patch group|
-
-Example output:
-
-```
-{
-    "patch_group": {
-        "id": 10,
-        "links": {
-            "self": {
-                "href": "https://example.com:3121/st/console/api/v1.0/patch/groups/10"
-            },
-            "patches": {
-                "href": "https://example.com:3121/st/console/api/v1.0/patch/groups/10/patches"
-            },
-            "usedby": {
-                "href": "https://example.com:3121/st/console/api/v1.0/patch/groups/10/usedby"
-            }
-        },
-        "name": "example-patch-group"
     }
 }
 ```
