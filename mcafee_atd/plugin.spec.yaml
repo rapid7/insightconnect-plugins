@@ -666,7 +666,7 @@ actions:
           - JOB ID
       report_type:
         title: Report Type
-        description: Type of file prepared analysis report
+        description: The file type of the report to return in the file output
         type: string
         required: false
         default: JSON
@@ -692,4 +692,3 @@ actions:
         description: Return report in JSON
         type: object
         required: false
-
