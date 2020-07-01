@@ -4,7 +4,7 @@ products: [insightconnect]
 name: ivanti_security_controls
 title: Ivanti Security Controls
 description: Ivanti Security Controls is a unified IT management platform used for managing and protecting through Patch Management, Application Control, and Asset Inventory functionality
-version: 1.2.1
+version: 1.4.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -806,7 +806,7 @@ actions:
         description: The name of the patch deployment template
         type: string
         required: true
-        example: example-template-name
+        example: Patch Deployment Template created from InsightConnect
     output:
       patch_deployment_template_id:
         title: Patch Deployment Template ID
@@ -827,7 +827,7 @@ actions:
         description: A template ID or template name
         type: string
         required: true
-        example: example-template-name
+        example: Template created from InsightConnect
       download_patches:
         title: Download Patches
         description: Boolean to initiate patch download before starting the deployment

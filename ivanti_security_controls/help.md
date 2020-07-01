@@ -52,7 +52,7 @@ This action is used to start patch deployment.
 |----|----|-------|--------|-----------|----|-------|
 |download_patches|boolean|None|True|Boolean to initiate patch download before starting the deployment|None|False|
 |scan_identifier|string|None|True|A scan ID or scan name|None|01234567-89AB-CDEF-0123-456789ABCDEF|
-|template_identifier|string|None|True|A template ID or template name|None|example-template-name|
+|template_identifier|string|None|True|A template ID or template name|None|Template created from InsightConnect|
 
 Example input:
 
@@ -60,7 +60,7 @@ Example input:
 {
   "download_patches": false,
   "scan_identifier": "01234567-89AB-CDEF-0123-456789ABCDEF",
-  "template_identifier": "example-template-name"
+  "template_identifier": "Template created from InsightConnect"
 }
 ```
 
@@ -83,7 +83,7 @@ This action is used to get a Patch Deployment Template ID by searching for the P
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|patch_deployment_template_name|string|None|True|The name of the patch deployment template|None|example-template-name|
+|patch_deployment_template_name|string|None|True|The name of the patch deployment template|None|Patch Deployment Template created from InsightConnect|
 
 Example input:
 
@@ -102,61 +102,6 @@ Example input:
 Example output:
 
 ```
-{
-  "machine_information": {
-    "overallState": "Complete",
-    "statusDescription": "Finished",
-    "address": "10.4.27.111",
-    "completedPatches": 1,
-    "lastUpdated": "2020-05-08T13:38:37.987Z",
-    "name": "splunk-724-w12",
-    "patchStates": [
-      {
-        "finishedOn": "2020-05-08T13:34:54.6",
-        "hasExecuted": true,
-        "lastUpdated": "2020-05-08T13:34:54.6",
-        "overallState": "Complete",
-        "startedOn": "2020-05-08T13:34:42.463",
-        "statusDescription": "Successfully installed",
-        "bulletinId": "MS20-02-AFP-4537759",
-        "kb": "Q4537759",
-        "nativeCode": 0,
-        "overallStateDescription": "Complete",
-        "patchId": "00030eb2-0000-0000-0000-000000000000",
-        "scheduledOn": "2020-05-08T06:33:40.47",
-        "status": "VerifiedFixed"
-      }
-    ],
-    "domain": "WORKGROUP",
-    "id": 36,
-    "links": {
-      "self": {
-        "href": "https://ivanti-w16.vuln.lax.rapid7.com:3121/st/con..."
-      }
-    }
-  },
-  "patch_deployment_details": {
-    "creator": "IVANTI-W16\\Administrator",
-    "expectedMachineCount": 1,
-    "isComplete": true,
-    "lastUpdatedOn": "2020-05-08T13:38:37.987Z",
-    "links": {
-      "machines": {
-        "href": "https://ivanti-w16.vuln.lax.rapid7.com:3121/st/con..."
-      },
-      "self": {
-        "href": "https://ivanti-w16.vuln.lax.rapid7.com:3121/st/con..."
-      },
-      "template": {
-        "href": "https://ivanti-w16.vuln.lax.rapid7.com:3121/st/con..."
-      }
-    },
-    "name": "Standard",
-    "completedMachineCount": 1,
-    "id": "282cbbf9-276d-4d36-a96d-6e55c8a7271e",
-    "startedOn": "2020-05-08T13:33:39.077Z"
-  }
-}
 ```
 
 #### Get Patch Deployment
@@ -860,6 +805,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.4.0 - New actions Get Patch Deployment Template ID, Start Patch Deployment
 * 1.2.1 - Added session credentials and changed polling method for Start Patch Scan
 * 1.2.0 - New actions Get Patch Deployment, Get Patch Details and Search Patches
 * 1.1.0 - Add actions Start Patch Scan, Get Patch Scan Status and Get Scanned Machine Details

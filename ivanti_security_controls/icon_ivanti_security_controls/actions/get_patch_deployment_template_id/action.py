@@ -14,15 +14,16 @@ class GetPatchDeploymentTemplateId(insightconnect_plugin_runtime.Action):
                 output=GetPatchDeploymentTemplateIdOutput())
 
     def run(self, params={}):
-        patch_deployment_template_name = params.get(Input.PATCH_DEPLOYMENT_TEMPLATE_NAME)
-        try:
-            patch_deployment_template_id = self.connection.ivanti_api.get_patch_deployment_template_by_name(
-                patch_deployment_template_name
-            )['value'][0]['id']
+        name = params.get(Input.PATCH_DEPLOYMENT_TEMPLATE_NAME)
+        patch_deployment_template = self.connection.ivanti_api.get_patch_deployment_template_by_name(name)
+
+        if patch_deployment_template.get('count'):
+            template_id = patch_deployment_template.get('value')[0].get('id')
             return {
-                Output.PATCH_DEPLOYMENT_TEMPLATE_ID: patch_deployment_template_id
+                Output.PATCH_DEPLOYMENT_TEMPLATE_ID: template_id
             }
-        except:
-            raise PluginException(cause="Not a valid patch deployment template name.",
-                                assistance=f"Patch deployment template: {patch_deployment_template_name} doesn't exist."
-                                )
+            
+        raise PluginException(
+            cause="Invalid patch deployment template name provided.",
+            assistance=f"Patch deployment template: {name} doesn't exist."
+        )
