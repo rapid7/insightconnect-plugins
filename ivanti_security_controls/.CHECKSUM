@@ -1,11 +1,11 @@
 {
-	"spec": "f08369a489b9213c524a7bbd20aae425",
+	"spec": "c4b58c124ed238af78e3fb7a77865800",
 	"manifest": "fad6c075c1c6c55bf109a4197caf6843",
 	"setup": "e36bb1669df60fcab9e9ab00450c1080",
 	"schemas": [
 		{
 			"identifier": "create_patch_group_and_add_cves/schema.py",
-			"hash": "703bf0ba15698f6a550b27ae4a36fcc9"
+			"hash": "06e50a9ce549deddcc8a1a467ab60572"
 		},
 		{
 			"identifier": "create_patch_scan_template/schema.py",

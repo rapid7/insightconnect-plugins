@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Create a new patch group and add CVEs to it"
+    DESCRIPTION = "Create a new patch group with CVEs"
 
 
 class Input:

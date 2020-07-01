@@ -963,7 +963,7 @@ actions:
         required: true
   create_patch_group_and_add_cves:
     title: Create Patch Group
-    description: Create a new patch group and add CVEs to it
+    description: Create a new patch group with CVEs
     input:
       name:
         title: Name
