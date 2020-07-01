@@ -655,7 +655,7 @@ actions:
         example: 13
       type_id:
         title: Type ID
-        description: Type of given ID parameter, default value is MD5
+        description: Type of given ID parameter, the type must match the value of the ID field. The default value is MD5
         type: string
         required: false
         default: MD5
