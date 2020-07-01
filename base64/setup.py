@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="base64-rapid7-plugin",
-      version="1.1.4",
+      version="1.1.5",
       description="Encode and decode data using the base64 alphabet",
       author="rapid7",
       author_email="",
