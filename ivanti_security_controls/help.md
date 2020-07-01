@@ -11,7 +11,7 @@ Ivanti Security Controls is a unified IT management platform used for managing a
 
 * Ivanti Security Controls 2019.3 (Build: 9.4.34544) or later
 * Ivanti Security Controls host and API port (default: 3121)
-* Username and password of Windows account where Ivanti Security Controls is installed 
+* Username and password of Windows account where Ivanti Security Controls is installed
 * (Recommended) Ivanti Security Controls certificate in order to enforce certificate verification
 
 # Documentation
