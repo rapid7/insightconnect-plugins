@@ -649,7 +649,7 @@ actions:
     input:
       id:
         title: ID
-        description: Task ID or job ID or MD5 value for which will be prepared analysis report
+        description: The Task ID, job ID, or MD5 value for the prepared analysis report
         type: string
         required: true
         example: 13
