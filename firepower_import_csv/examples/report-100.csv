@@ -1,0 +1,670 @@
+asset_id,host_name,ip_address,mac_address,last_assessed_for_vulnerabilities,asset_riskscore,vulnerability_description,vulnerability_title,vulnerability_severity,vulnerability_riskscore
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>This security update resolves three privately reported vulnerabilities and one publicly disclosed vulnerability in Microsoft Windows. The most severe of these vulnerabilities could allow elevation of privilege if an attacker logs on to the system and runs a specially crafted application. An attacker must have valid logon credentials and be able to log on locally to exploit the most severe vulnerabilities.</p>
+  ",MS13-036: Vulnerabilities in Kernel-Mode Driver Could Allow Elevation Of Privilege (2829996),Severe,289.453064
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists when the Windows GDI component improperly discloses the contents of its memory. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user&#8217;s system.
+There are multiple ways an attacker could exploit the vulnerability, such as by convincing a user to open a specially crafted document, or by convincing a user to visit an untrusted webpage.
+The security update addresses the vulnerability by correcting how the Windows GDI component handles objects in memory.
+</p>
+  ",Microsoft CVE-2019-0758: Windows GDI Information Disclosure Vulnerability,Severe,263.9537354
+13,fortigate-vm02.vuln.lax.rapid7.com,10.4.22.129,00:50:56:94:42:6b,2020-06-16 8:06:01,7311.624222,"
+    
+<p>The OpenSSL ECDSA signature algorithm has been shown to be vulnerable to a timing side channel attack. An attacker could use variations in the signing algorithm to recover the private key. Fixed in OpenSSL 1.1.0j (Affected 1.1.0-1.1.0i). Fixed in OpenSSL 1.1.1a (Affected 1.1.1).</p>
+  ",OpenSSL Timing vulnerability in ECDSA signature generation (CVE-2018-0735),Severe,297.1381531
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>This security update resolves a publicly disclosed vulnerability in Internet Explorer. The vulnerability could allow remote code execution if a user views a specially crafted webpage using an affected version of Internet Explorer. An attacker who successfully exploited this vulnerability could gain the same user rights as the current user. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.</p>
+  ",MS14-021: Security Update for Internet Explorer (2965111),Critical,892.3052979
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists when the Windows kernel fails to properly handle objects in memory. An attacker who successfully exploited this vulnerability could run arbitrary code in kernel mode. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights.
+To exploit this vulnerability, an attacker would first have to log on to the system. An attacker could then run a specially crafted application to take control of an affected system.
+The update addresses the vulnerability by correcting how the Windows kernel handles objects in memory.
+</p>
+  ",Microsoft CVE-2017-8694: Windows Kernel Elevation of Privilege Vulnerability,Severe,446.1499634
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists in the way that the Microsoft Server Message Block 1.0 (SMBv1) server handles certain requests. An attacker who successfully exploited the vulnerability could gain the ability to execute code on the target server.
+To exploit the vulnerability, in most situations, an authenticated attacker could send a specially crafted packet to a targeted SMBv1 server.
+The security update addresses the vulnerability by correcting how SMBv1 handles these specially crafted requests.
+</p>
+  ",Microsoft CVE-2017-0272: Windows SMB Remote Code Execution Vulnerability,Critical,569.6296387
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure exists in the Windows Common Log File System (CLFS) driver when it fails to properly handle sandbox checks. An attacker who successfully exploited this vulnerability could potentially read data outside their expected limits.
+To exploit the vulnerability, an attacker would first have to log on to the system, and then run a specially crafted application.
+The security update addresses the vulnerability by correcting how CLFS handles sandbox checks.
+</p>
+  ",Microsoft CVE-2019-1282: Windows Common Log File System Driver Information Disclosure Vulnerability,Moderate,199.7899933
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists in Windows Error Reporting (WER) when WER handles and executes files. The vulnerability could allow elevation of privilege if an attacker can successfully exploit it.
+An attacker who successfully exploited the vulnerability could gain greater access to sensitive information and system functionality. To exploit the vulnerability, an attacker could run a specially crafted application.
+The security update addresses the vulnerability by correcting the way that WER handles and executes files.
+</p>
+  ",Microsoft CVE-2019-1319: Windows Error Reporting Elevation of Privilege Vulnerability,Severe,296.8050537
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists in the way that the Windows Search Indexer handles objects in memory. An attacker who successfully exploited the vulnerability could execute code with elevated permissions.
+To exploit the vulnerability, a locally authenticated attacker could run a specially crafted application.
+The security update addresses the vulnerability by ensuring the Windows Search Indexer properly handles objects in memory.
+</p>
+  ",Microsoft CVE-2020-0625: Windows Search Indexer Elevation of Privilege Vulnerability,Severe,218.210144
+15,cuckoo-2-0-5.vuln.lax.rapid7.com,10.4.23.176,00:50:56:94:8e:71,2020-06-16 8:04:05,18454.32763,"
+    
+<p>
+      A Domain Name Server (DNS) amplification attack is a popular form of
+      distributed denial of service (DDoS) that relies on the use of publically
+      accessible open DNS servers to overwhelm a victim system with DNS response
+      traffic.
+    </p>
+    
+<p>
+      A Domain Name Server (DNS) Amplification attack is a popular form of
+      Distributed Denial of Service (DDoS), in which attackers use publically
+      accessible open DNS servers to flood a target system with DNS response traffic.
+      The primary technique consists of an attacker sending a DNS name lookup request
+      to an open DNS server with the source address spoofed to be the target&#39;s
+      address. When the DNS server sends the DNS record response, it is sent instead
+      to the target. Attackers will typically submit a request for as much zone
+      information as possible to maximize the amplification effect. In most attacks
+      of this type observed by US-CERT, the spoofed queries sent by the attacker are
+      of the type, &quot;ANY&quot; which returns all known information about a DNS zone in a
+      single request. Because the size of the response is considerably larger than
+      the request, the attacker is able to increase the amount of traffic directed at
+      the victim. By leveraging a botnet to produce a large number of spoofed DNS
+      queries, an attacker can create an immense amount of traffic with little
+      effort. Additionally, because the responses are legitimate data coming from
+      valid servers, it is extremely difficult to prevent these types of attacks.
+      While the attacks are difficult to stop, network operators can apply several
+      possible mitigation strategies.
+    </p>
+    
+<p>
+      While the most common form of this attack that US-CERT has observed
+      involves DNS servers configured to allow unrestricted recursive resolution for
+      any client on the Internet, attacks can also involve authoritative name servers
+      that do not provide recursive resolution. The attack method is similar to open
+      recursive resolvers, but is more difficult to mitigate since even a server
+      configured with best practices can still be used in an attack. In the case of
+      authoritative servers, mitigation should focus on using Response Rate Limiting
+      to restrict the amount of traffic.
+    </p>
+  ",DNS Traffic Amplification,Moderate,0
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A Win32k information disclosure vulnerability exists when the Windows GDI component improperly discloses kernel memory addresses. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user&#8217;s system.
+To exploit this vulnerability, an attacker would have to log on to an affected system and run a specially crafted application. The vulnerability would not allow an attacker to execute code or to elevate user rights directly, but it could be used to obtain information that could be used to try to further compromise the affected system.
+The security update addresses the vulnerability by correcting how the Windows GDI component handles objects in memory.
+</p>
+  ",Microsoft CVE-2017-11852: Windows GDI Information Disclosure Vulnerability,Moderate,285.6090698
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists when Windows Virtual Secure Mode improperly handles objects in memory. A locally-authenticated attacker who successfully exploited this vulnerability could be able to read sensitive information on the target system.</p>
+  ",MS16-137: Security Update for Windows Authentication Methods (3199173),Severe,600.8841553
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists when the Windows Jet Database Engine improperly handles objects in memory. An attacker who successfully exploited this vulnerability could execute arbitrary code on a victim system.
+An attacker could exploit this vulnerability by enticing a victim to open a specially crafted file.
+The update addresses the vulnerability by correcting the way the Windows Jet Database Engine handles objects in memory.
+</p>
+  ",Microsoft CVE-2019-0901: Jet Database Engine Remote Code Execution Vulnerability,Critical,404.1791382
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists in the HTTP protocol stack (HTTP.sys) that is caused when HTTP.sys improperly parses specially crafted HTTP requests. An attacker who successfully exploited this vulnerability could execute arbitrary code in the context of the System account.</p>
+  ",MS15-034: Vulnerability in HTTP.sys Could Allow Remote Code Execution (3042553),Critical,830.3041382
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists in Windows when the Win32k component fails to properly handle objects in memory. An attacker who successfully exploited this vulnerability could run arbitrary code in kernel mode. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights.
+To exploit this vulnerability, an attacker would first have to log on to the system. An attacker could then run a specially crafted application that could exploit the vulnerability and take control of an affected system.
+The update addresses this vulnerability by correcting how Win32k handles objects in memory.
+</p>
+  ",Microsoft CVE-2017-8573: Win32k Elevation of Privilege Vulnerability,Severe,468.3114624
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists in the way that the Microsoft Windows Embedded OpenType (EOT) font engine parses specially crafted embedded fonts. An attacker who successfully exploited this vulnerability could potentially read data that was not intended to be disclosed. Note that while this vulnerability would not allow an attacker to either execute code or to elevate user rights directly, it could be used to obtain information in an attempt to further compromise the affected system.
+To exploit this vulnerability, an attacker would have to log on to an affected system and open a document containing specially crafted fonts.
+The security update addresses the vulnerability by correcting how the Windows EOT font engine handles embedded fonts.
+</p>
+  ",Microsoft CVE-2018-0760: Windows EOT Font Engine Information Disclosure Vulnerability,Moderate,304.3887939
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists when the win32k component improperly provides kernel information. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user&#8217;s system.
+To exploit this vulnerability, an attacker would have to log on to an affected system and run a specially crafted application.
+The security update addresses the vulnerability by correcting how win32k handles objects in memory.
+</p>
+  ",Microsoft CVE-2020-0608: Win32k Information Disclosure Vulnerability,Moderate,172.2711639
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists when the Windows GDI component improperly discloses the contents of its memory. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user&#8217;s system.
+There are multiple ways an attacker could exploit the vulnerability, such as by convincing a user to open a specially crafted document, or by convincing a user to visit an untrusted webpage.
+The security update addresses the vulnerability by correcting how the Windows GDI component handles objects in memory.
+</p>
+  ",Microsoft CVE-2019-0882: Windows GDI Information Disclosure Vulnerability,Severe,263.9537354
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists when the Windows GDI component improperly discloses the contents of its memory. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user&#8217;s system.
+There are multiple ways an attacker could exploit the vulnerability, such as by convincing a user to open a specially crafted document, or by convincing a user to visit an untrusted webpage.
+The security update addresses the vulnerability by correcting how the Windows GDI component handles objects in memory.
+</p>
+  ",Microsoft CVE-2019-1016: Windows GDI Information Disclosure Vulnerability,Severe,258.9508057
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists in the way that the Windows SMB Server handles certain requests. An authenticated attacker who successfully exploited this vulnerability could craft a special packet, which could lead to information disclosure from the server.
+To exploit the vulnerability, an attacker would have to be able to authenticate and send SMB messages to an impacted Windows SMB Server
+The security update addresses the vulnerability by correcting how Windows SMB Server handles authenticated requests.
+</p>
+  ",Microsoft CVE-2017-11815: Windows SMB Information Disclosure Vulnerability,Severe,287.9210205
+15,cuckoo-2-0-5.vuln.lax.rapid7.com,10.4.23.176,00:50:56:94:8e:71,2020-06-16 8:04:05,18454.32763,"
+    
+<p>named in ISC BIND 9.x before 9.9.9-P4, 9.10.x before 9.10.4-P4, and 9.11.x before 9.11.0-P1 allows remote attackers to cause a denial of service (assertion failure and daemon exit) via a DNAME record in the answer section of a response to a recursive query, related to db.c and resolver.c.</p>
+  ",ISC BIND: A problem handling responses containing a DNAME answer can lead to an assertion failure (CVE-2016-8864),Severe,169.5839081
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists when the (Human Interface Device) HID Parser Library driver improperly handles objects in memory. An attacker who successfully exploited this vulnerability could run processes in an elevated context.
+To exploit the vulnerability, an attacker would first have to log on to the system, and then run a specially crafted application to take control over the affected system.
+The security update addresses the vulnerability by correcting how the HID Parser Library handles objects in memory.
+</p>
+  ",Microsoft CVE-2018-8169: HIDParser Elevation of Privilege Vulnerability,Severe,380.9133301
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists when the Windows kernel improperly handles objects in memory. An attacker who successfully exploited this vulnerability could obtain information to further compromise the user&#8217;s system.
+To exploit this vulnerability, an attacker would have to log on to an affected system and run a specially crafted application. The vulnerability would not allow an attacker to execute code or to elevate user rights directly, but it could be used to obtain information that could be used to try to further compromise the affected system.
+The update addresses the vulnerability by correcting how the Windows kernel handles objects in memory.
+</p>
+  ",Microsoft CVE-2018-8330: Windows Kernel Information Disclosure Vulnerability,Moderate,264.8238525
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists when the Windows Jet Database Engine improperly handles objects in memory. An attacker who successfully exploited this vulnerability could execute arbitrary code on a victim system.
+An attacker could exploit this vulnerability by enticing a victim to open a specially crafted file.
+The update addresses the vulnerability by correcting the way the Windows Jet Database Engine handles objects in memory.
+</p>
+  ",Microsoft CVE-2019-0576: Jet Database Engine Remote Code Execution Vulnerability,Critical,437.2850952
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists when the Windows GDI component improperly discloses the contents of its memory. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user&#8217;s system.
+There are multiple ways an attacker could exploit the vulnerability, such as by convincing a user to open a specially crafted document, or by convincing a user to visit an untrusted webpage.
+The security update addresses the vulnerability by correcting how the Windows GDI component handles objects in memory.
+</p>
+  ",Microsoft CVE-2019-1049: Windows GDI Information Disclosure Vulnerability,Severe,258.9508057
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>This security update resolves two publicly disclosed vulnerabilities in Microsoft Windows. The vulnerabilities could allow remote code execution if a user opened a specially crafted fax cover page file (.cov) using the Windows Fax Cover Page Editor. An attacker who successfully exploited either of these vulnerabilities could gain the same user rights as the logged-on user. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.</p>
+  ",MS11-024: Vulnerabilities in Windows Fax Cover Page Editor Could Allow Remote Code Execution (2527308),Critical,817.814209
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>
+      Insight Agent on Windows systems searches for local dependencies in several locations, including in directories in the system PATH variable. As this can include arbitrary directories, and the Agent doesn&#39;t specify the directories to search, an attacker with local admin access could place a (potentially malicious) DLL in a directory in that path, causing the Agent to load that library.
+    </p>
+  ",Rapid7 Insight Agent: CVE-2017-5252: Insight Agent on Windows is vulnerable to loading malicious libraries placed in its dependency search path,Severe,429.0461731
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A  information disclosure vulnerability exists when the Windows GDI+ component improperly discloses kernel memory addresses. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user&#8217;s system.
+To exploit this vulnerability, an attacker would have to log on to an affected system and run a specially crafted application. The vulnerability would not allow an attacker to execute code or to elevate user rights directly, but it could be used to obtain information that could be used to try to further compromise the affected system.
+The security update addresses the vulnerability by correcting how the Windows GDI+ component handles objects in memory.
+</p>
+  ",Microsoft CVE-2017-8681: Windows GDI+ Information Disclosure Vulnerability,Moderate,349.4227295
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A race condition that could lead to a remote code execution vulnerability exists in NetBT Session Services when NetBT fails to maintain certain sequencing requirements. To exploit the vulnerability, an attacker needs to be able to send specially crafted NetBT Session Service packets to an impacted system.
+An attacker who successfully exploits the vulnerability could execute arbitrary code on the target.
+The security update addresses the vulnerability by correcting how NetBT sequences certain operations.
+</p>
+  ",Microsoft CVE-2017-0161: NetBIOS Remote Code Execution Vulnerability,Severe,451.3459473
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A denial of service vulnerability exists in the Microsoft Server Block Message (SMB) when an attacker sends specially crafted requests to the server. An attacker who exploited this vulnerability could cause the affected system to stop responding until it is manually restarted. To attempt to exploit this issue, an attacker would need to send specially crafted SMB requests to the target system.
+Note that the denial of service vulnerability would not allow an attacker to execute code or to elevate their user rights, but it could cause the affected system to stop accepting requests.
+The security update addresses the vulnerability by correcting the manner in which SMB handles specially crafted client requests.
+</p>
+  ",Microsoft CVE-2017-0269: Windows SMB Denial of Service Vulnerability,Severe,124.0010071
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A denial of service vulnerability exists when Microsoft Hyper-V Network Switch on a host server fails to properly validate input from a privileged user on a guest operating system. An attacker who successfully exploited the vulnerability could cause the host server to crash.
+To exploit the vulnerability, an attacker who already has a privileged account on a guest operating system, running as a virtual machine, could run a specially crafted application that causes a host machine to crash.
+The update addresses the vulnerability by modifying how virtual machines access the Hyper-V Network Switch.
+</p>
+  ",Microsoft CVE-2019-0715: Windows Hyper-V Denial of Service Vulnerability,Severe,100.1091537
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists when Windows Hyper-V Network Switch on a host server fails to properly validate input from an authenticated user on a guest operating system. To exploit the vulnerability, an attacker could run a specially crafted application on a guest operating system that could cause the Hyper-V host operating system to execute arbitrary code.
+An attacker who successfully exploited the vulnerability could execute arbitrary code on the host operating system.
+The security update addresses the vulnerability by correcting how Windows Hyper-V Network Switch validates guest operating system network traffic.
+</p>
+  ",Microsoft CVE-2019-0719: Hyper-V Remote Code Execution Vulnerability,Critical,268.7035217
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists when the win32k component improperly provides kernel information. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user&#8217;s system.
+To exploit this vulnerability, an attacker would have to log on to an affected system and run a specially crafted application.
+The security update addresses the vulnerability by correcting how win32k handles objects in memory.
+</p>
+  ",Microsoft CVE-2019-1469: Win32k Information Disclosure Vulnerability,Moderate,180.0997162
+15,cuckoo-2-0-5.vuln.lax.rapid7.com,10.4.23.176,00:50:56:94:8e:71,2020-06-16 8:04:05,18454.32763,"
+    
+<p>The expression specified in &lt;FilesMatch&gt; could match &#39;$&#39; to a newline character in a malicious filename, rather than matching only the end of the filename. This could be exploited in environments where uploads of some files are are externally blocked, but only by matching the trailing portion of the filename.</p>
+  ",Apache HTTPD: <FilesMatch> bypass with a trailing newline in the file name (CVE-2017-15715),Severe,417.8881531
+14,misp-2-4.vuln.lax.rapid7.com,10.4.24.13,00:50:56:94:40:60,2020-06-16 8:03:48,14600.75249,"
+    
+<p>The expression specified in &lt;FilesMatch&gt; could match &#39;$&#39; to a newline character in a malicious filename, rather than matching only the end of the filename. This could be exploited in environments where uploads of some files are are externally blocked, but only by matching the trailing portion of the filename.</p>
+  ",Apache HTTPD: <FilesMatch> bypass with a trailing newline in the file name (CVE-2017-15715),Severe,417.8881531
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists in Windows when the Win32k component fails to properly handle objects in memory. An attacker who successfully exploited this vulnerability could run arbitrary code in kernel mode. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights.
+To exploit this vulnerability, an attacker would first have to log on to the system. An attacker could then run a specially crafted application that could exploit the vulnerability and take control of an affected system.
+The update addresses this vulnerability by correcting how Win32k handles objects in memory.
+</p>
+  ",Microsoft CVE-2017-8578: Win32k Elevation of Privilege Vulnerability,Critical,557.8262329
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>
+A remote code execution vulnerability exists when the Microsoft Malware Protection Engine does not properly scan a specially crafted file, leading to memory corruption. An attacker who successfully exploited this vulnerability could execute arbitrary code in the security context of the LocalSystem account and take control of the system. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights.
+    </p>
+    
+<p>
+To exploit this vulnerability, a specially crafted file must be scanned by an affected version of the Microsoft Malware Protection Engine. There are many ways that an attacker could place a specially crafted file in a location that is scanned by the Microsoft Malware Protection Engine. For example, an attacker could use a website to deliver a specially crafted file to the victim&#39;s system that is scanned when the website is viewed by the user. An attacker could also deliver a specially crafted file via an email message or in an Instant Messenger message that is scanned when the file is opened. In addition, an attacker could take advantage of websites that accept or host user-provided content, to upload a specially crafted file to a shared location that is scanned by the Malware Protection Engine running on the hosting server.
+    </p>
+    
+<p>
+If the affected antimalware software has real-time protection turned on, the Microsoft Malware Protection Engine will scan files automatically, leading to exploitation of the vulnerability when the specially crafted file is scanned. If real-time scanning is not enabled, the attacker would need to wait until a scheduled scan occurs in order for the vulnerability to be exploited. All systems running an affected version of antimalware software are primarily at risk. 
+    </p>
+    
+<p>
+The update addresses the vulnerability by correcting how the Microsoft Malware Protection Engine scans specially crafted files.
+    </p>
+    
+<p>
+Note: Typically, no action is required of enterprise administrators or end users to install updates for the Microsoft Malware Protection Engine, because the built-in mechanism for the automatic detection and deployment of updates will apply the update within 48 hours of release. The exact time frame depends on the software used, Internet connection, and infrastructure configuration.
+    </p>
+  ",Microsoft CVE-2017-8540 Microsoft Malware Protection Engine Remote Code Execution Vulnerability,Critical,597.989624
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists in the way some ActiveX objects are instantiated. An attacker who successfully exploited this vulnerability could gain access to protected memory contents.
+To exploit this vulnerability, an attacker would need to convince a user to open a malicious document that could then instantiate the vulnerable object. This security update addresses the vulnerability by correcting how these objects are instantiated.
+</p>
+  ",Microsoft CVE-2017-0242: Microsoft ActiveX Information Disclosure Vulnerability,Severe,372.0030518
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists when Microsoft Edge improperly accesses objects in memory. The vulnerability could corrupt memory in such a way that enables an attacker to execute arbitrary code in the context of the current user. An attacker who successfully exploited the vulnerability could gain the same user rights as the current user. If the current user is logged on with administrative user rights, an attacker could take control of an affected system. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights.
+An attacker could host a specially crafted website that is designed to exploit the vulnerability through Microsoft Edge, and then convince a user to view the website. The attacker could also take advantage of compromised websites and websites that accept or host user-provided content or advertisements by adding specially crafted content that could exploit the vulnerability. In all cases, however, an attacker would have no way to force users to view the attacker-controlled content. Instead, an attacker would have to convince users to take action, typically by way of enticement in an email or Instant Messenger message, or by getting them to open an attachment sent through email.
+The security update addresses the vulnerability by modifying how Microsoft Edge handles objects in memory.
+</p>
+  ",Microsoft CVE-2017-0238: Microsoft Edge Memory Corruption Vulnerability,Critical,488.4732056
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>This security update resolves a publicly disclosed vulnerability in Microsoft XML Core Services. The vulnerability could allow remote code execution if a user views a specially crafted webpage using Internet Explorer. An attacker would have no way to force users to visit such a website. Instead, an attacker would have to convince users to visit the website, typically by getting them to click a link in an email message or Instant Messenger message that takes the user to the attacker&#39;s website.</p>
+  ",MS12-043: Vulnerability in Microsoft XML Core Services Could Allow Remote Code Execution (2722479),Critical,909.4602051
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists in the Network Driver Interface Specification (NDIS) when ndis.sys fails to check the length of a buffer prior to copying memory to it.
+To exploit the vulnerability, in a local attack scenario, an attacker could run a specially crafted application to elevate the attacker&#39;s privilege level. An attacker who successfully exploited this vulnerability could run processes in an elevated context. However, an attacker must first gain access to the local system with the ability to execute a malicious application in order to exploit this vulnerability.
+The security update addresses the vulnerability by changing how ndis.sys validates buffer length.
+</p>
+  ",Microsoft CVE-2018-8342: Windows NDIS Elevation of Privilege Vulnerability,Severe,420.4586487
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists in Windows when the Win32k component fails to properly handle objects in memory. An attacker who successfully exploited this vulnerability could run arbitrary code in kernel mode. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights.
+To exploit this vulnerability, an attacker would first have to log on to the system. An attacker could then run a specially crafted application that could exploit the vulnerability and take control of an affected system.
+The update addresses this vulnerability by correcting how Win32k handles objects in memory.
+</p>
+  ",Microsoft CVE-2019-1256: Win32k Elevation of Privilege Vulnerability,Severe,305.9284058
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists in Windows Adobe Type Manager Font Driver (ATMFD.dll)  when it fails to properly handle objects in memory. An attacker who successfully exploited this vulnerability could potentially read data that was not intended to be disclosed. Note that this vulnerability would not allow an attacker to execute code or to elevate their user rights directly, but it could be used to obtain information that could be used to try to further compromise the affected system.
+To exploit this vulnerability, an attacker would have to log on to an affected system and open a document containing specially crafted fonts.
+The update addresses the vulnerability by correcting how ATMFD.dll handles objects in memory.
+</p>
+  ",Microsoft CVE-2019-1412: OpenType Font Driver Information Disclosure Vulnerability,Moderate,186.2593231
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A denial of service vulnerability exists when .NET Framework and .NET Core improperly process RegEx strings. An attacker who successfully exploited this vulnerability could cause a denial of service against a .NET application.
+A remote unauthenticated attacker could exploit this vulnerability by issuing specially crafted requests to a .NET Framework (or .NET core) application.
+The update addresses the vulnerability by correcting how .NET Framework and .NET Core applications handle RegEx string processing.
+</p>
+  ",Microsoft CVE-2019-0820: .NET Framework and .NET Core Denial of Service Vulnerability,Severe,150.4931641
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists when the win32k component improperly provides kernel information. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user&#8217;s system.
+To exploit this vulnerability, an attacker would have to log on to an affected system and run a specially crafted application.
+The security update addresses the vulnerability by correcting how win32k handles objects in memory.
+</p>
+  ",Microsoft CVE-2019-0848: Win32k Information Disclosure Vulnerability,Moderate,231.0313568
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>This security update resolves a privately reported vulnerability in Microsoft software. The vulnerability could allow remote code execution if a user views a specially crafted Web page that uses a specific binary behavior in Internet Explorer. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights. This update also includes kill bits for four third-party ActiveX controls.</p>
+  ",MS11-090: Cumulative Security Update of ActiveX Kill Bits (2618451),Critical,795.5778198
+15,cuckoo-2-0-5.vuln.lax.rapid7.com,10.4.23.176,00:50:56:94:8e:71,2020-06-16 8:04:05,18454.32763,"
+    
+<p>The affected asset is vulnerable to this vulnerability ONLY if it is running one of the following modules: mod_auth_digest.  Review your web server configuration for validation.  When generating an HTTP Digest authentication challenge, the nonce sent to prevent reply attacks was not correctly generated using a pseudo-random seed. In a cluster of servers using a common Digest authentication configuration, HTTP requests could be replayed across servers by an attacker without detection.</p>
+  ",Apache HTTPD: Weak Digest auth nonce generation in mod_auth_digest (CVE-2018-1312),Severe,417.8881531
+14,misp-2-4.vuln.lax.rapid7.com,10.4.24.13,00:50:56:94:40:60,2020-06-16 8:03:48,14600.75249,"
+    
+<p>The affected asset is vulnerable to this vulnerability ONLY if it is running one of the following modules: mod_auth_digest.  Review your web server configuration for validation.  When generating an HTTP Digest authentication challenge, the nonce sent to prevent reply attacks was not correctly generated using a pseudo-random seed. In a cluster of servers using a common Digest authentication configuration, HTTP requests could be replayed across servers by an attacker without detection.</p>
+  ",Apache HTTPD: Weak Digest auth nonce generation in mod_auth_digest (CVE-2018-1312),Severe,417.8881531
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists in the Windows kernel that could allow an attacker to retrieve information that could lead to a Kernel Address Space Layout Randomization (ASLR) bypass. An attacker who successfully exploited the vulnerability could retrieve the memory address of a kernel object.
+To exploit the vulnerability, an attacker would have to log on to an affected system and run a specially crafted application.
+The security update addresses the vulnerability by correcting how the Windows kernel handles memory addresses.
+</p>
+  ",Microsoft CVE-2017-11784: Windows Kernel Information Disclosure Vulnerability,Moderate,323.4075928
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists in the way that the Windows Kernel API enforces permissions. An attacker who successfully exploited the vulnerability could impersonate processes, interject cross-process communication, or interrupt system functionality.
+To exploit the vulnerability, a locally authenticated attacker could run a specially crafted application.
+The security update addresses the vulnerability by helping to ensure that the Windows Kernel API properly enforces permissions.
+</p>
+  ",Microsoft CVE-2017-0050: Windows Elevation of Privilege Vulnerability,Severe,575.4414673
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists in Windows when the Win32k component fails to properly handle objects in memory. An attacker who successfully exploited this vulnerability could run arbitrary code in kernel mode. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights.
+To exploit this vulnerability, an attacker would first have to log on to the system. An attacker could then run a specially crafted application that could exploit the vulnerability and take control of an affected system.
+The update addresses this vulnerability by correcting how Win32k handles objects in memory.
+</p>
+  ",Microsoft CVE-2017-0155: Win32k Elevation of Privilege Vulnerability,Severe,489.4337463
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists when &quot;Windows Theme API&quot; does not properly decompress files.
+An attacker who successfully exploited the vulnerability could run arbitrary code in the context of the current user. If the current user is logged on with administrative user rights, an attacker could take control of the affected system. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.
+To exploit the vulnerability, a victim user must open a specially crafted file. In an email attack scenario, an attacker could exploit the vulnerability by sending the specially crafted file to the user and then convincing the user to open the file. In a web-based attack scenario, an attacker could host a website (or leverage a compromised website that accepts or hosts user-provided content) that contains a specially crafted file designed to exploit the vulnerability. An attacker would have no way to force a user to visit the website. Instead, an attacker would have to convince a user to click a link, typically by way of an enticement in an email or Instant Messenger message, and then convince the user to open the specially crafted file.
+The security update addresses the vulnerability by helping to ensure that &quot;Windows Theme API&quot; properly decompresses files.
+</p>
+  ",Microsoft CVE-2018-8413: Windows Theme API Remote Code Execution Vulnerability,Critical,482.8240967
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists in Windows when the Win32k component fails to properly handle objects in memory. An attacker who successfully exploited this vulnerability could run arbitrary code in kernel mode. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights.
+To exploit this vulnerability, an attacker would first have to log on to the system. An attacker could then run a specially crafted application that could exploit the vulnerability and take control of an affected system.
+The update addresses this vulnerability by correcting how Win32k handles objects in memory.
+</p>
+  ",Microsoft CVE-2018-8404: Win32k Elevation of Privilege Vulnerability,Severe,420.4586487
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege exists in the p2pimsvc service where an attacker who successfully exploited the vulnerability could run arbitrary code with elevated privileges.
+To exploit this vulnerability, an attacker would first have to log on to the system. An attacker could then run a specially crafted application that could exploit the vulnerability and take control of an affected system.
+The update addresses this vulnerability by correcting how the p2pimsvc service handles processes these requests.
+</p>
+  ",Microsoft CVE-2019-1168: Microsoft Windows p2pimsvc Elevation of Privilege Vulnerability,Severe,314.9179993
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists when the Windows Jet Database Engine improperly handles objects in memory. An attacker who successfully exploited this vulnerability could execute arbitrary code on a victim system.
+An attacker could exploit this vulnerability by enticing a victim to open a specially crafted file.
+The update addresses the vulnerability by correcting the way the Windows Jet Database Engine handles objects in memory.
+</p>
+  ",Microsoft CVE-2019-1242: Jet Database Engine Remote Code Execution Vulnerability,Critical,370.8247375
+13,fortigate-vm02.vuln.lax.rapid7.com,10.4.22.129,00:50:56:94:42:6b,2020-06-16 8:06:01,7311.624222,"
+    
+<p>Normally in OpenSSL EC groups always have a co-factor present and this is used in side channel resistant code paths. However, in some cases, it is possible to construct a group using explicit parameters (instead of using a named curve). In those cases it is possible that such a group does not have the cofactor present. This can occur even where all the parameters match a known named curve. If such a curve is used then OpenSSL falls back to non-side channel resistant code paths which may result in full key recovery during an ECDSA signature operation. In order to be vulnerable an attacker would have to have the ability to time the creation of a large number of signatures where explicit parameters with no co-factor present are in use by an application using libcrypto. For the avoidance of doubt libssl is not vulnerable because explicit parameters are never used. Fixed in OpenSSL 1.1.1d (Affected 1.1.1-1.1.1c). Fixed in OpenSSL 1.1.0l (Affected 1.1.0-1.1.0k). Fixed in OpenSSL 1.0.2t (Affected 1.0.2-1.0.2s).</p>
+  ",OpenSSL ECDSA remote timing attack (CVE-2019-1547),Moderate,152.9524689
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists in the way that the Windows Graphics Device Interface (GDI) handles objects in the memory, aka &#39;GDI+ Remote Code Execution Vulnerability&#39;. This CVE ID is unique from CVE-2020-0881.</p>
+  ",Microsoft CVE-2020-0883: GDI+ Remote Code Execution Vulnerability,Critical,315.5828247
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists when Windows Shell improperly handles objects in memory. An attacker who successfully exploited this vulnerability could cause arbitrary code to execute in the context of the current user. If a user is logged on with administrative user rights, an attacker could take control of the affected system. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.</p>
+  ",MS15-109: Security Update for Windows Shell to Address Remote Code Execution (3096443),Critical,660.8757324
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists when Windows Uniscribe improperly discloses the contents of its memory. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user&#8217;s system.
+There are multiple ways an attacker could exploit the vulnerability, such as by convincing a user to open a specially crafted document or by convincing a user to visit an untrusted webpage.
+The update addresses the vulnerability by correcting how Windows Uniscribe handles objects in memory.
+</p>
+  ",Microsoft CVE-2017-8695: Windows Uniscribe Information Disclosure Vulnerability,Moderate,299.6813049
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"Microsoft is announcing the release of SHA-2 code sign support for Windows 7 SP1, and Windows Server 2008 R2 SP1. Please see 2019 SHA-2 Code Signing Support requirement for Windows and WSUS for more information.",Microsoft ADV190009: Microsoft ADV190009: SHA-2 Code Sign Support Advisory,Moderate,0
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists when the Windows font library improperly handles specially crafted embedded fonts. An attacker who successfully exploited this vulnerability could take control of the affected system. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.
+There are multiple ways an attacker could exploit this vulnerability.
+
+In a web-based attack scenario, an attacker could host a specially crafted website that is designed to exploit this vulnerability and then convince a user to view the website. An attacker would have no way to force users to view the attacker-controlled content. Instead, an attacker would have to convince users to take action, typically by getting them to click a link in an email message or in an Instant Messenger message that takes users to the attacker&#39;s website, or by opening an attachment sent through email.
+
+In a file sharing attack scenario, an attacker could provide a specially crafted document file that is designed to exploit this vulnerability, and then convince a user to open the document file.
+
+
+The security update addresses the vulnerability by correcting how the Windows font library handles embedded fonts.
+</p>
+  ",Microsoft CVE-2018-8332: Win32k Graphics Remote Code Execution Vulnerability,Critical,466.593689
+16,cb-response-dev.vuln.lax.rapid7.com,10.4.24.253,00:50:56:94:62:7a,2020-05-27 8:08:53,7748.99054,"
+    
+<p>Buffer overflow in redis-cli of Redis before 4.0.10 and 5.x before 5.0 RC3 allows an attacker to achieve code execution and escalate to higher privileges via a crafted command line. NOTE: It is unclear whether there are any common situations in which redis-cli is used with, for example, a -h (aka hostname) argument from an untrusted source.</p>
+  ",Redis: Improper Restriction of Operations within the Bounds of a Memory Buffer (CVE-2018-12326),Severe,383.8286133
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists in the way that the Windows Search Indexer handles objects in memory. An attacker who successfully exploited the vulnerability could execute code with elevated permissions.
+To exploit the vulnerability, a locally authenticated attacker could run a specially crafted application.
+The security update addresses the vulnerability by ensuring the Windows Search Indexer properly handles objects in memory.
+</p>
+  ",Microsoft CVE-2020-0632: Windows Search Indexer Elevation of Privilege Vulnerability,Severe,218.210144
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists when Windows improperly handles authentication requests. An attacker who successfully exploited this vulnerability could run processes in an elevated context.
+An attacker could exploit this vulnerability by running a specially crafted application on the victim system.
+The update addresses the vulnerability by correcting the way Windows handles authentication requests.
+</p>
+  ",Microsoft CVE-2019-0543: Microsoft Windows Elevation of Privilege Vulnerability,Severe,333.6235657
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists in the way that the Windows SMB Server handles certain requests. An authenticated attacker who successfully exploited this vulnerability could craft a special packet, which could lead to information disclosure from the server.
+To exploit the vulnerability, an attacker would have to be able to authenticate and send SMB messages to an impacted Windows SMB Server
+The security update addresses the vulnerability by correcting how Windows SMB Server handles authenticated requests.
+</p>
+  ",Microsoft CVE-2019-0821: Windows SMB Information Disclosure Vulnerability,Severe,226.971817
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A security feature bypass vulnerability exists in the Network Location Awareness (NLA) service that could unintentionally relax the firewall policy and/or configuration of certain services. This could increase the surface exposed to an attacker. The vulnerability is caused when the NLA service fails to properly validate whether a domain-connected computer is connected to the domain or to an untrusted network. The update addresses the vulnerability by forcing mutual authentication via Kerberos.</p>
+  ",MS15-005: Vulnerability in Network Location Awareness Service Could Allow Security Feature Bypass (3022777),Severe,402.359375
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>Remote code execution vulnerabilities exist when Internet Explorer improperly accesses objects in memory. These vulnerabilities could corrupt memory in such a way that an attacker could execute arbitrary code in the context of the current user. </p>
+  ",MS15-079: Cumulative Security Update for Internet Explorer (3082442),Critical,703.534668
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A security feature bypass vulnerability exists when Microsoft browsers improperly handle redirect requests. The vulnerability allows Microsoft browsers to bypass CORS redirect restrictions, and to follow redirect requests that should otherwise be ignored. An attacker who successfully exploited the vulnerability could force the browser to send data that would otherwise be restricted to a destination website of the attacker&#39;s choice.
+In a web-based attack scenario, an attacker could host a specially crafted website that is designed to exploit the vulnerability through Microsoft browsers and then convince a user to view the website. The attacker could also take advantage of compromised websites, and websites that accept or host user-provided content or advertisements. These websites could contain specially crafted content that could exploit the vulnerability.
+The security update addresses the vulnerability by modifying how affected Microsoft browsers handle redirect requests.
+</p>
+  ",Microsoft CVE-2017-8592: Microsoft Browser Security Feature Bypass Vulnerability,Severe,364.2947083
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists when the Windows Graphics Component (GDI32.dll) fails to properly handle objects in memory, allowing an attacker to retrieve information that could lead to an Address Space Layout Randomization (ASLR) bypass. An attacker who successfully exploited this vulnerability could cause an information disclosure to bypass the ASLR security feature that protects users from a broad class of vulnerabilities. </p>
+  ",MS16-074: Security Update for Microsoft Graphics Component  (3164036),Severe,594.5320435
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists when LDAP request buffer lengths are improperly calculated. In a remote attack scenario, an attacker could exploit this vulnerability by running a specially crafted application to send malicious traffic to a Domain Controller. An attacker who successfully exploited this vulnerability could run processes in an elevated context.
+The update addresses the vulnerability by correcting how LDAP request buffer lengths are calculated.
+</p>
+  ",Microsoft CVE-2017-0166: LDAP Elevation of Privilege Vulnerability,Critical,574.7509155
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists in the way that the Microsoft Server Message Block 1.0 (SMBv1) server handles certain requests. An attacker who successfully exploited this vulnerability could craft a special packet, which could lead to information disclosure from the server.
+To exploit the vulnerability, in most situations, an unauthenticated attacker could send a specially crafted packet to a targeted SMBv1 server.
+The security update addresses the vulnerability by correcting how SMBv1 handles these specially crafted requests.
+</p>
+  ",Microsoft CVE-2017-0268: Windows SMB Information Disclosure Vulnerability,Severe,372.0030518
+5,cb-protection.vuln.lax.rapid7.com,10.4.28.244,00:50:56:94:9f:39,2020-06-16 8:05:07,9309.972092,"
+    
+<p>
+        The server is not configured with support for any modern, secure ciphers and only supports ciphers known to be weak against attack.
+    </p>
+  ",TLS/SSL Server Does Not Support Any Strong Cipher Algorithms,Moderate,0
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists when the Windows font library improperly handles specially crafted embedded fonts. An attacker who successfully exploited the vulnerability could take control of the affected system. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.
+There are multiple ways an attacker could exploit the vulnerability:
+
+In a web-based attack scenario, an attacker could host a specially crafted website that is designed to exploit the vulnerability and then convince users to view the website. An attacker would have no way to force users to view the attacker-controlled content. Instead, an attacker would have to convince users to take action, typically by getting them to click a link in an email or instant message that takes users to the attacker&#39;s website, or by opening an attachment sent through email.
+In a file-sharing attack scenario, an attacker could provide a specially crafted document file designed to exploit the vulnerability and then convince users to open the document file.
+
+The security update addresses the vulnerability by correcting how the Windows font library handles embedded fonts.
+</p>
+  ",Microsoft CVE-2018-8344: Microsoft Graphics Remote Code Execution Vulnerability,Critical,473.2265015
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists when Windows Search handles objects in memory. An attacker who successfully exploited this vulnerability could take control of the affected system. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights.
+To exploit the vulnerability, the attacker could send specially crafted messages to the Windows Search service. An attacker with access to a target computer could exploit this vulnerability to elevate privileges and take control of the computer. Additionally, in an enterprise scenario, a remote unauthenticated attacker could remotely trigger the vulnerability through an SMB connection and then take control of a target computer.
+The security update addresses the vulnerability by correcting how Windows Search handles objects in memory.
+</p>
+  ",Microsoft CVE-2017-8589: Windows Search Remote Code Execution Vulnerability,Critical,759.2345581
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists when the Windows Common Log File System (CLFS) driver improperly handles objects in memory. An attacker who successfully exploited this vulnerability could run processes in an elevated context.
+To exploit the vulnerability, an attacker would first have to log on to the system, and then run a specially crafted application to take control over the affected system.
+The security update addresses the vulnerability by correcting how CLFS handles objects in memory.
+</p>
+  ",Microsoft CVE-2017-8624: Windows Common Log File System Driver Elevation of Privilege Vulnerability,Severe,509.0687866
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>Elevation of privilege vulnerabilities exist when the Windows kernel-mode driver fails to properly handle objects in memory. An attacker who successfully exploited the vulnerabilities could run arbitrary code in kernel mode. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights. </p>
+  ",MS16-039: Security Update for Microsoft Graphics Component  (3148522),Critical,668.7749023
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A denial of service vulnerability exists when the XmlLite runtime (XmlLite.dll) improperly parses XML input. An attacker who successfully exploited this vulnerability could cause a denial of service against an XML application.
+A remote unauthenticated attacker could exploit this vulnerability by issuing specially crafted requests to an XML application.
+The update addresses the vulnerability by correcting how the XmlLite runtime parses XML input.
+</p>
+  ",Microsoft CVE-2019-1187: XmlLite Runtime Denial of Service Vulnerability,Severe,148.0574493
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists in the Windows Remote Desktop Client when a user connects to a malicious server. An attacker who successfully exploited this vulnerability could execute arbitrary code on the computer of the connecting client. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights.
+To exploit this vulnerability, an attacker would need to have control of a server and then convince a user to connect to it. An attacker would have no way of forcing a user to connect to the malicious server, they would need to trick the user into connecting via social engineering, DNS poisoning or using a Man in the Middle (MITM) technique. An attacker could also compromise a legitimate server, host malicious code on it, and wait for the user to connect.
+The update addresses the vulnerability by correcting how the Windows Remote Desktop Client handles connection requests.
+</p>
+  ",Microsoft CVE-2019-1290: Remote Desktop Client Remote Code Execution Vulnerability,Critical,370.8247375
+13,fortigate-vm02.vuln.lax.rapid7.com,10.4.22.129,00:50:56:94:42:6b,2020-06-16 8:06:01,7311.624222,"
+    
+<p>OpenSSL 1.1.1 introduced a rewritten random number generator (RNG). This was intended to include protection in the event of a fork() system call in order to ensure that the parent and child processes did not share the same RNG state. However this protection was not being used in the default case. A partial mitigation for this issue is that the output from a high precision timer is mixed into the RNG state so the likelihood of a parent and child process sharing state is significantly reduced. If an application already calls OPENSSL_init_crypto() explicitly using OPENSSL_INIT_ATFORK then this problem does not occur at all. Fixed in OpenSSL 1.1.1d (Affected 1.1.1-1.1.1c).</p>
+  ",OpenSSL Fork Protection (CVE-2019-1549),Severe,441.6854248
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists in Windows when the Win32k component fails to properly handle objects in memory, aka &#39;Win32k Elevation of Privilege Vulnerability&#39;. This CVE ID is unique from CVE-2020-0691, CVE-2020-0720, CVE-2020-0721, CVE-2020-0722, CVE-2020-0723, CVE-2020-0724, CVE-2020-0725, CVE-2020-0726, CVE-2020-0731.</p>
+  ",Microsoft CVE-2020-0719: Win32k Elevation of Privilege Vulnerability,Severe,254.039505
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists when the Terminal Services component improperly discloses the contents of its memory. An attacker who successfully exploited the vulnerability could obtain information to further compromise a user&#8217;s system.
+To exploit this vulnerability, an attacker would have to log on to an affected system and run a specially crafted application.
+The update addresses the vulnerability by correcting how the Terminal Services component handle objects in memory.
+</p>
+  ",Microsoft CVE-2019-0839: Windows Information Disclosure Vulnerability,Moderate,231.0313568
+15,cuckoo-2-0-5.vuln.lax.rapid7.com,10.4.23.176,00:50:56:94:8e:71,2020-06-16 8:04:05,18454.32763,"
+    
+<p>
+        Allowing nameservers to process recursive queries coming from any system
+        may, in certain situations, help attackers conduct denial of service or
+        cache poisoning attacks.
+     </p>
+  ",Nameserver Processes Recursive Queries,Severe,199.8276367
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists in the Microsoft Common Console Document (.msc) when it improperly parses XML input containing a reference to an external entity. An attacker who successfully exploited this vulnerability could read arbitrary files via an XML external entity (XXE) declaration.
+To exploit the vulnerability, an attacker could create a file containing specially crafted XML content and convince an authenticated user to open the file.
+The update addresses the vulnerability by modifying the way that the Microsoft Common Console Document (.msc) parses XML input.
+</p>
+  ",Microsoft CVE-2017-8557: Windows System Information Console Information Disclosure Vulnerability,Moderate,336.3777161
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists in Windows when the Win32k component fails to properly handle objects in memory. An attacker who successfully exploited this vulnerability could run arbitrary code in kernel mode. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights.
+To exploit this vulnerability, an attacker would first have to log on to the system. An attacker could then run a specially crafted application that could exploit the vulnerability and take control of an affected system.
+The update addresses this vulnerability by correcting how Win32k handles objects in memory.
+</p>
+  ",Microsoft CVE-2018-8120: Win32k Elevation of Privilege Vulnerability,Severe,511.372406
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A security feature bypass vulnerability exists when Windows Netlogon improperly handles a secure communications channel. An attacker who successfully exploited the vulnerability could downgrade aspects of the connection allowing for further modification of the transmission.
+To exploit the vulnerability, an attacker would require an active man in the middle attack to be in place for the targeted traffic.
+The update addresses the vulnerability by modifying how Netlogon handles these connections, accounting for potential attack through a man in the middle.
+</p>
+  ",Microsoft CVE-2019-1424: NetLogon Security Feature Bypass Vulnerability,Severe,291.4263611
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists in Windows when the Win32k component fails to properly handle objects in memory. An attacker who successfully exploited this vulnerability could run arbitrary code in kernel mode. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights.
+To exploit this vulnerability, an attacker would first have to log on to the system. An attacker could then run a specially crafted application that could exploit the vulnerability and take control of an affected system.
+The update addresses this vulnerability by correcting how Win32k handles objects in memory.
+</p>
+  ",Microsoft CVE-2019-1458: Win32k Elevation of Privilege Vulnerability,Severe,275.7776794
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists in the way that the Windows Search Indexer handles objects in memory, aka &#39;Windows Search Indexer Elevation of Privilege Vulnerability&#39;. This CVE ID is unique from CVE-2020-0666, CVE-2020-0667, CVE-2020-0735.</p>
+  ",Microsoft CVE-2020-0752: Windows Search Indexer Elevation of Privilege Vulnerability,Severe,210.1442413
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists when the Windows Jet Database Engine improperly handles objects in memory. An attacker who successfully exploited this vulnerability could execute arbitrary code on a victim system.
+An attacker could exploit this vulnerability by enticing a victim to open a specially crafted file.
+The update addresses the vulnerability by correcting the way the Windows Jet Database Engine handles objects in memory.
+</p>
+  ",Microsoft CVE-2019-0898: Jet Database Engine Remote Code Execution Vulnerability,Critical,404.1791382
+14,misp-2-4.vuln.lax.rapid7.com,10.4.24.13,00:50:56:94:40:60,2020-06-16 8:03:48,14600.75249,"
+    
+<p>For configurations enabling support for HTTP/2, SSL client certificate validation was not enforced if configured, allowing clients unauthorized access to protected resources over HTTP/2. This issue affected releases 2.4.18 and 2.4.20 only.</p>
+  ",Apache HTTPD: TLS/SSL X.509 client certificate auth bypass with HTTP/2 (CVE-2016-4979),Severe,214.2943268
+15,cuckoo-2-0-5.vuln.lax.rapid7.com,10.4.23.176,00:50:56:94:8e:71,2020-06-16 8:04:05,18454.32763,"
+    
+<p>For configurations enabling support for HTTP/2, SSL client certificate validation was not enforced if configured, allowing clients unauthorized access to protected resources over HTTP/2. This issue affected releases 2.4.18 and 2.4.20 only.</p>
+  ",Apache HTTPD: TLS/SSL X.509 client certificate auth bypass with HTTP/2 (CVE-2016-4979),Severe,214.2943268
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists in the way that the Microsoft Server Message Block 1.0 (SMBv1) server handles certain requests. An attacker who successfully exploited the vulnerability could gain the ability to execute code on the target server.
+To exploit the vulnerability, in most situations, an authenticated attacker could send a specially crafted packet to a targeted SMBv1 server.
+The security update addresses the vulnerability by correcting how SMBv1 handles these specially crafted requests.
+</p>
+  ",Microsoft CVE-2017-0279: Windows SMB Remote Code Execution Vulnerability,Severe,471.2038574
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists in StructuredQuery when the software fails to properly handle objects in memory.
+An attacker who successfully exploited the vulnerability could run arbitrary code in the context of the current user. If the current user is logged on with administrative user rights, an attacker could take control of the affected system. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.
+Exploitation of the vulnerability typically requires that a user open a specially crafted file. In an email attack scenario, an attacker could exploit the vulnerability by sending the specially crafted file to the user and convincing the user to open the file. In a web-based attack scenario, an attacker could host a website (or leverage a compromised website that accepts or hosts user-provided content) containing a specially crafted file designed to exploit the vulnerability. An attacker would have no way to force users to visit the website. Instead, an attacker would have to convince users to click a link, typically by way of an enticement in an email or instant message, and then convince them to open the specially crafted file.
+Note that where severity is indicated as Critical in the Affected Products table, the Preview Pane is an attack vector.
+The security update addresses the vulnerability by correcting how StructuredQuery handles objects in memory.
+</p>
+  ",Microsoft CVE-2018-0825: StructuredQuery Remote Code Execution Vulnerability,Critical,419.9494324
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An elevation of privilege vulnerability exists when the Windows kernel fails to properly handle objects in memory. An attacker who successfully exploited this vulnerability could run arbitrary code in kernel mode. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights.
+To exploit this vulnerability, an attacker would first have to log on to the system. An attacker could then run a specially crafted application to take control of an affected system.
+The update addresses the vulnerability by correcting how the Windows kernel handles objects in memory.
+</p>
+  ",Microsoft CVE-2018-8224: Windows Kernel Elevation of Privilege Vulnerability,Severe,380.9133301
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists when the Windows font library improperly handles specially crafted embedded fonts. An attacker who successfully exploited the vulnerability could take control of the affected system. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.
+There are multiple ways an attacker could exploit the vulnerability:
+
+In a web-based attack scenario, an attacker could host a specially crafted website that is designed to exploit the vulnerability and then convince users to view the website. An attacker would have no way to force users to view the attacker-controlled content. Instead, an attacker would have to convince users to take action, typically by getting them to click a link in an email or instant message that takes users to the attacker&#39;s website, or by opening an attachment sent through email.
+In a file-sharing attack scenario, an attacker could provide a specially crafted document file designed to exploit the vulnerability and then convince users to open the document file.
+
+The security update addresses the vulnerability by correcting how the Windows font library handles embedded fonts.
+</p>
+  ",Microsoft CVE-2019-1151: Microsoft Graphics Remote Code Execution Vulnerability,Critical,378.8623352
+16,cb-response-dev.vuln.lax.rapid7.com,10.4.24.253,00:50:56:94:62:7a,2020-05-27 8:08:53,7748.99054,"
+    
+<p>An Integer Overflow issue was discovered in the struct library in the Lua subsystem in Redis before 3.2.12, 4.x before 4.0.10, and 5.x before 5.0 RC2, leading to a failure of bounds checking.</p>
+  ",Redis: Integer Overflow or Wraparound (CVE-2018-11219),Critical,602.0281372
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists when the Windows Jet Database Engine improperly handles objects in memory. An attacker who successfully exploited this vulnerability could execute arbitrary code on a victim system.
+An attacker could exploit this vulnerability by enticing a victim to open a specially crafted file.
+The update addresses the vulnerability by correcting the way the Windows Jet Database Engine handles objects in memory.
+</p>
+  ",Microsoft CVE-2019-0579: Jet Database Engine Remote Code Execution Vulnerability,Critical,437.2850952
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists when the Windows Jet Database Engine improperly handles objects in memory. An attacker who successfully exploited this vulnerability could execute arbitrary code on a victim system.
+An attacker could exploit this vulnerability by enticing a victim to open a specially crafted file.
+The update addresses the vulnerability by correcting the way the Windows Jet Database Engine handles objects in memory.
+</p>
+  ",Microsoft CVE-2019-0596: Jet Database Engine Remote Code Execution Vulnerability,Critical,428.3087158
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists when the Windows GDI component improperly discloses the contents of its memory. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user&#8217;s system.
+There are multiple ways an attacker could exploit the vulnerability, such as by convincing a user to open a specially crafted document, or by convincing a user to visit an untrusted webpage.
+The security update addresses the vulnerability by correcting how the Windows GDI component handles objects in memory.
+</p>
+  ",Microsoft CVE-2019-0849: Windows GDI Information Disclosure Vulnerability,Severe,270.104248
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>A remote code execution vulnerability exists when the Microsoft XML Core Services MSXML parser processes user input. An attacker who successfully exploited the vulnerability could run malicious code remotely to take control of the user&#8217;s system.
+To exploit the vulnerability, an attacker could host a specially crafted website designed to invoke MSXML through a web browser. However, an attacker would have no way to force a user to visit such a website. Instead, an attacker would typically have to convince a user to either click a link in an email message or instant message that would then take the user to the website. When Internet Explorer parses the XML content, an attacker could run malicious code remotely to take control of the user&#8217;s system.
+The update addresses the vulnerability by correcting how the MSXML parser processes user input.
+</p>
+  ",Microsoft CVE-2019-0795: MS XML Remote Code Execution Vulnerability,Critical,413.5971069

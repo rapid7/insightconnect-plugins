@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-import random
+import re
 
 SetSource = 'SetSource,{source_id}\n'
 AddHost = 'AddHost,{address}\n'
@@ -28,11 +28,36 @@ def generate_set_os_command(host_dict, ip):
 def generate_set_source_command(source_id):
     return SetSource.format(source_id=source_id)
 
+def clean_description(string):
+    if not string:
+        return ""
+
+    bs = BeautifulSoup(string)
+    bs_str = bs.get_text().replace('\n', ' ').replace('\r', ' ')
+    bs_str = bs_str.replace("’","'")
+    bs_str = bs_str.replace(";", "")
+    bs_str = bs_str.replace("\"", "")
+    bs_str = bs_str.replace("\t", " ")
+    bs_str = bs_str.replace("–", " ")
+    bs_str = bs_str.replace(",", "")
+
+    bs_str = ''.join(c for c in bs_str if c.isprintable())
+    bs_str = re.sub("[^ a-z0-9]+", "", bs_str, flags=re.IGNORECASE)
+    bs_str = bs_str.replace("  ", " ")
+    while "  " in bs_str:
+        bs_str = bs_str.replace("  ", " ")
+
+    return bs_str
 
 def generate_add_result_command(details, ip):
     # These are written like this because it's possible for the incoming object to have a value like this
     # descripiton: None
     # In that case get will return None, which Firepower chokes on
+    # description = details.get('description', '').replace('\n', '').replace('\r', '') if details.get('description',
+    #                                                                                                 '') else ''
+    #
+
+    description = clean_description(details.get('description', ''))
 
     scanner_id = details.get('scanner_id', '') if details.get('scanner_id', '') else ''
     vuln_id = details.get('vulnerability_id', '') if details.get('vulnerability_id', '') else ''
@@ -40,7 +65,6 @@ def generate_add_result_command(details, ip):
     port = '' if (not port or port == Unknown) else port
     protocol_id = details.get('protocol_id', '')
     protocol_id = '' if (not protocol_id or protocol_id == Unknown) else protocol_id
-    description = details.get('description', '') if details.get('description', '') else ''
     vuln_title = details.get('vulnerability_title', '') if details.get('vulnerability_title', '') else ''
     cve_ids = details.get('cve_ids', '').replace(':',' ') if details.get('cve_ids', '') else ''
     bugtraq_ids = details.get('bugtraq_ids', '') if details.get('bugtraq_ids', '') else ''

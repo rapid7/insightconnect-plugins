@@ -1,0 +1,16 @@
+asset_id,host_name,ip_address,mac_address,last_assessed_for_vulnerabilities,asset_riskscore,vulnerability_description,vulnerability_title,vulnerability_severity,vulnerability_riskscore
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>This security update resolves three privately reported vulnerabilities and one publicly disclosed vulnerability in Microsoft Windows. The most severe of these vulnerabilities could allow elevation of privilege if an attacker logs on to the system and runs a specially crafted application. An attacker must have valid logon credentials and be able to log on locally to exploit the most severe vulnerabilities.</p>
+  ",MS13-036: Vulnerabilities in Kernel-Mode Driver Could Allow Elevation Of Privilege (2829996),Severe,289.453064
+18,vagrant-pc,10.0.2.15,08:00:27:33:9f:ce,2020-03-26 10:04:24,412228.5955,"
+    
+<p>An information disclosure vulnerability exists when the Windows GDI component improperly discloses the contents of its memory. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user&#8217;s system.
+There are multiple ways an attacker could exploit the vulnerability, such as by convincing a user to open a specially crafted document, or by convincing a user to visit an untrusted webpage.
+The security update addresses the vulnerability by correcting how the Windows GDI component handles objects in memory.
+</p>
+  ",Microsoft CVE-2019-0758: Windows GDI Information Disclosure Vulnerability,Severe,263.9537354
+13,fortigate-vm02.vuln.lax.rapid7.com,10.4.22.129,00:50:56:94:42:6b,2020-06-16 8:06:01,7311.624222,"
+    
+<p>The OpenSSL ECDSA signature algorithm has been shown to be vulnerable to a timing side channel attack. An attacker could use variations in the signing algorithm to recover the private key. Fixed in OpenSSL 1.1.0j (Affected 1.1.0-1.1.0i). Fixed in OpenSSL 1.1.1a (Affected 1.1.1).</p>
+  ",OpenSSL Timing vulnerability in ECDSA signature generation (CVE-2018-0735),Severe,297.1381531

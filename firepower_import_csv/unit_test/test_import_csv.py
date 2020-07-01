@@ -47,6 +47,10 @@ class TestImportCsv(TestCase):
 
         test_conn.connect(connection_params)
         test_action.connection = test_conn
+
+        with open("../examples/big_test.txt") as big_test:
+            action_params["csv"] = big_test.read()
+
         result = test_action.run(action_params)
         print(result.get("result"))
         print(result.get("success"))

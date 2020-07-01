@@ -6,10 +6,11 @@ from icon_firepower_import_csv.util.commands import generate_set_os_command, gen
     generate_add_result_command, generate_set_source_command
 from io import StringIO
 from paramiko import SSHClient
+from scp import SCPClient
+import io
 from bs4 import BeautifulSoup
 import csv
 import base64
-import os
 import paramiko
 import re
 
@@ -33,6 +34,8 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
             raise PluginException(PluginException.Preset.BASE64_DECODE)
 
         headers, vuln_list = self.read_csv(csv_string)
+
+        # TODO: Log headers here
 
         #################
         # Remove duplicates
@@ -59,37 +62,38 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
                 self.logger.warning(f"{vuln}")
 
         firepower_filename = "firepower_import.csv"
-        f = open(firepower_filename, "w")
-        firepower_fullpath = os.path.realpath(f.name)
-        f.write(cvs_file_string)
-        f.close()
+        # f = open(firepower_filename, "w")
+        # firepower_fullpath = os.path.realpath(f.name)
+        # f.write(cvs_file_string)
+        # f.close()
         self.logger.info("Building payload file complete.")
 
        ################
         #  Copy files to Server
         ################
-        self.logger.info("Copying payload file to server...")
-        scp_command_firepower = f"sshpass -p {self.connection.password} scp -o StrictHostKeyChecking=no {firepower_fullpath} {self.connection.username}@{self.connection.host}:/Volume/home/admin/{firepower_filename}"
-        stream = os.popen(scp_command_firepower)
-        output = stream.read()
-        stream.close()
-        if output:
-            raise PluginException(cause="Could not copy payload file to the firepower server",
-                                  assistance=output)
-        self.logger.info("Copy complete.")
+        # self.logger.info("Copying payload file to server...")
+        # scp_command_firepower = f"sshpass -p {self.connection.password} scp -o StrictHostKeyChecking=no {firepower_fullpath} {self.connection.username}@{self.connection.host}:/Volume/home/admin/{firepower_filename}"
+        # stream = os.popen(scp_command_firepower)
+        # # TODO: See if we can get the exit code here
+        # output = stream.read()
+        # stream.close()
+        # if output:
+        #     raise PluginException(cause="Could not copy payload file to the firepower server",
+        #                           assistance=output)
+        # self.logger.info("Copy complete.")
 
         ################
         #  Cleanup local files
         ################
-        self.logger.info("Starting local cleanup...")
-        rm_stream1 = os.popen(f"rm {firepower_fullpath}")
-        rm_stream1.close()
-        self.logger.info("Local cleanup complete.")
+        # self.logger.info("Starting local cleanup...")
+        # rm_stream1 = os.popen(f"rm {firepower_fullpath}")
+        # rm_stream1.close()
+        # self.logger.info("Local cleanup complete.")
 
         ################
         #  SSH to server and run nmimport.pl on the csv file
         ################
-        self.logger.info("Running nmimport.pl on server...")
+        self.logger.info("Creating firepower import file on server...")
         ssh = SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
@@ -101,7 +105,31 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
                     timeout=60)
 
         # ssh and run nmimport.pl
-        nmimport_command = f"sudo /usr/local/sf/bin/nmimport.pl /Volume/home/admin/{firepower_filename}"
+        scp = SCPClient(ssh.get_transport())
+
+        # generate in-memory file-like object
+        fl = io.BytesIO()
+        fl.write(cvs_file_string.encode("utf-8", "ignore"))
+        fl.seek(0)
+        # upload it directly from memory
+        scp.putfo(fl, f'{firepower_filename}')
+        scp.close()
+        fl.close()
+        ssh.close()
+        self.logger.info("Firepower file created on server.")
+
+        self.logger.info("Running nmimport.pl on server...")
+        ssh = SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+        # ssh connect
+        ssh.connect(self.connection.host,
+                    username=self.connection.username,
+                    password=self.connection.password,
+                    look_for_keys=False,
+                    timeout=60)
+
+        nmimport_command = f"sudo /usr/local/sf/bin/nmimport.pl /Volume/home/{self.connection.username}/{firepower_filename}"
         stdin, stdout, stderr = ssh.exec_command(nmimport_command)
 
         # This will hang if the output is excessive. Around 1000 records is the limit this will reasonablly read back from.
@@ -207,6 +235,7 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
         command += generate_add_result_command(details, address)
         command = command.strip() + "\n"
         command += "ScanUpdate\n"
+
         return command
 
     # Read a CSV and return the headers list and each row as a dictionary

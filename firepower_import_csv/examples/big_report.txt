@@ -1,0 +1,474 @@
+SetSource,InsightVM
+AddHost,10.4.24.13
+SetOS,10.4.24.13,Ubuntu,Linux,16.04
+AddScanResult,10.4.24.13,"InsightVM",5072,995,6,"","The PCI (Payment Card Industry) Data Security Standard requires a minimum of TLS v1.1
+    and recommends TLS v1.2. In addition, FIPS 140-2 standard requires a minimum of
+    TLS v1.1 and recommends TLS v1.2.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.22.211
+SetOS,10.4.22.211,Microsoft,Windows Server 2016 Standard Edition,Unknown
+AddScanResult,10.4.22.211,"InsightVM",5072,3389,6,"","The PCI (Payment Card Industry) Data Security Standard requires a minimum of TLS v1.1
+    and recommends TLS v1.2. In addition, FIPS 140-2 standard requires a minimum of
+    TLS v1.1 and recommends TLS v1.2.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3856,,,"","This security update resolves one publicly disclosed vulnerability and eight privately reported vulnerabilities in Internet Explorer. The most severe vulnerabilities could allow remote code execution if a user views a specially crafted webpage using Internet Explorer. An attacker who successfully exploited the most severe of these vulnerabilities could gain the same user rights as the current user. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",723,,,"","This security update corrects a denial of service in the Local Security Authority Subsystem Service (LSASS) caused when an authenticated attacker sends a specially crafted authentication request. A remote attacker who successfully exploited this vulnerability could cause a denial of service on the target system's LSASS service, which triggers an automatic reboot of the system.
+The security update addresses the vulnerability by changing the way that LSASS handles specially crafted authentication requests.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3662,,,"","This security update resolves one privately reported vulnerability in Microsoft Windows. The vulnerability could allow remote code execution if a print server received a specially crafted print job. Firewall best practices and standard default firewall configurations can help protect networks from attacks that originate outside the enterprise perimeter. Best practices recommend that systems connected directly to the Internet have a minimal number of ports exposed.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",804,,,"","A remote code execution vulnerability exists when the Microsoft Speech API (SAPI) improperly handles text-to-speech (TTS) input. The vulnerability could corrupt memory in a way that enables an attacker to execute arbitrary code in the context of the current user.
+To exploit the vulnerability, an attacker would need to convince a user to open a specially crafted document containing TTS content invoked through a scripting language.
+The update address the vulnerability by modifying how the system handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",744,,,"","An elevation of privilege vulnerability exists in Windows when the Win32k component fails to properly handle objects in memory. An attacker who successfully exploited this vulnerability could run arbitrary code in kernel mode. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights.
+To exploit this vulnerability, an attacker would first have to log on to the system. An attacker could then run a specially crafted application that could exploit the vulnerability and take control of an affected system.
+The update addresses this vulnerability by correcting how Win32k handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3860,,,"","This security update resolves a privately reported vulnerability in Microsoft Windows. The vulnerability could allow remote code execution if an attacker sends a specially crafted web request to an ASP.NET web application running on an affected system. An attacker could exploit this vulnerability without authentication to run arbitrary code.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3672,,,"","This security update resolves a privately reported vulnerability in the Open Data (OData) protocol. The vulnerability could allow denial of service if an unauthenticated attacker sends specially crafted HTTP requests to an affected site. Firewall best practices and standard default firewall configurations can help protect networks from attacks that originate outside the enterprise perimeter. Best practices recommend that systems that are connected to the Internet have a minimal number of ports exposed.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3691,,,"","This security update resolves one privately reported vulnerabilityin the .NET Framework. The vulnerability could allow elevation of privilege if a user views a specially crafted webpage using a web browser that can run XAML Browser Applications (XBAPs). The vulnerability could also be used by Windows .NET applications to bypass Code Access Security (CAS) restrictions. An attacker who successfully exploited this vulnerability could gain the same user rights as the current user. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.13
+SetOS,10.4.24.13,Ubuntu,Linux,16.04
+AddScanResult,10.4.24.13,"InsightVM",5072,993,6,"","The PCI (Payment Card Industry) Data Security Standard requires a minimum of TLS v1.1
+    and recommends TLS v1.2. In addition, FIPS 140-2 standard requires a minimum of
+    TLS v1.1 and recommends TLS v1.2.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",6700,,,"","An information disclosure vulnerability exists when the Human Interface Devices (HID) component improperly handles objects in memory. An attacker who successfully exploited this vulnerability could obtain information to further compromise the victim’s system.
+To exploit the vulnerability, an attacker would first have to gain execution on the victim system, then run a specially crafted application.
+The security update addresses the vulnerability by correcting how the HID component handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3799,,,"","This security update resolves a privately reported vulnerability in Windows Defender for Windows 7 and Windows Defender when installed on Windows Server 2008 R2. The vulnerability could allow elevation of privilege due to the pathnames used by Windows Defender. An attacker who successfully exploited this vulnerability could execute arbitrary code and take complete control of an affected system. The attacker could then install programs; view, change, or delete data; or create new accounts with full user rights. An attacker must have valid logon credentials to exploit this vulnerability. The vulnerability could not be exploited by anonymous users.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",724,,,"","An elevation of privilege vulnerability exists in the Windows Installer when the Windows Installer fails to properly sanitize input leading to an insecure library loading behavior.
+A locally authenticated attacker could run arbitrary code with elevated system privileges. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights.
+The security update addresses the vulnerability by correcting the input sanitization error to preclude unintended elevation.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",701,,,"","An elevation of privilege vulnerability exists when Windows improperly handles calls to Advanced Local Procedure Call (ALPC).
+An attacker who successfully exploited this vulnerability could run arbitrary code in the security context of the local system. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights.
+To exploit this vulnerability, an attacker would first have to log on to the system. An attacker could then run a specially crafted application that could exploit the vulnerability and take control over an affected system.
+The update addresses the vulnerability by correcting how Windows handles calls to ALPC.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3696,,,"","This security update resolves a privately reported vulnerability in Microsoft Windows. The vulnerability could allow denial of service if an unauthenticated attacker sends a specially crafted connection termination packet to the server.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3667,,,"","This security update resolves four privately reported vulnerabilitiesin the .NET Framework. The most severe of these vulnerabilities could allow elevation of privilege if a user views a specially crafted webpage using a web browser that can run XAML Browser Applications (XBAPs). The vulnerabilities could also be used by Windows .NET applications to bypass Code Access Security (CAS) restrictions. An attacker who successfully exploited these vulnerabilities could gain the same user rights as the logged-on user. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3891,,,"","This security update resolves a privately reported vulnerability that is currently being exploited. The vulnerability exists in the InformationCardSigninHelper Class ActiveX control. The vulnerability could allow remote code execution if a user views a specially crafted webpage with Internet Explorer, instantiating the ActiveX control. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.28.244
+SetOS,10.4.28.244,Microsoft,Windows Server 2012 R2 Standard Edition,Unknown
+AddScanResult,10.4.28.244,"InsightVM",5072,443,6,"","The PCI (Payment Card Industry) Data Security Standard requires a minimum of TLS v1.1
+    and recommends TLS v1.2. In addition, FIPS 140-2 standard requires a minimum of
+    TLS v1.1 and recommends TLS v1.2.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.28.244
+SetOS,10.4.28.244,Microsoft,Windows Server 2012 R2 Standard Edition,Unknown
+AddScanResult,10.4.28.244,"InsightVM",5072,3389,6,"","The PCI (Payment Card Industry) Data Security Standard requires a minimum of TLS v1.1
+    and recommends TLS v1.2. In addition, FIPS 140-2 standard requires a minimum of
+    TLS v1.1 and recommends TLS v1.2.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",6667,,,"","An information disclosure vulnerability exists when the Windows GDI component improperly discloses the contents of its memory. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user’s system.
+There are multiple ways an attacker could exploit the vulnerability, such as by convincing a user to open a specially crafted document, or by convincing a user to visit an untrusted webpage.
+The security update addresses the vulnerability by correcting how the Windows GDI component handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3772,,,"","This security update resolves one privately reported vulnerability and one publicly disclosed vulnerabilityin the .NET Framework. The more severe of the vulnerabilities could allow spoofing if a .NET application receives a specially crafted XML file. An attacker who successfully exploited the vulnerabilities could modify the contents of an XML file without invalidating the file's signature and could gain access to endpoint functions as if they were an authenticated user.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",730,,,"","An information disclosure vulnerability exists when the Windows GDI component improperly discloses the contents of its memory. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user’s system.
+There are multiple ways an attacker could exploit the vulnerability, such as by convincing a user to open a specially crafted document, or by convincing a user to visit an untrusted webpage.
+The security update addresses the vulnerability by correcting how the Windows GDI component handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",6703,,,"","A remote code execution vulnerability exists in the way that Windows Deployment Services TFTP Server handles objects in memory.
+An attacker who successfully exploited the vulnerability could execute arbitrary code with elevated permissions on a target system.
+To exploit the vulnerability, an attacker could create a specially crafted request, causing Windows to execute arbitrary code with elevated permissions.
+The security update addresses the vulnerability by correcting how Windows Deployment Services TFTP Server handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",745,,,"","An information disclosure vulnerability exists when the Windows GDI component improperly discloses the contents of its memory. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user’s system.
+There are multiple ways an attacker could exploit the vulnerability, such as by convincing a user to open a specially crafted document, or by convincing a user to visit an untrusted webpage.
+The security update addresses the vulnerability by correcting how the Windows GDI component handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.18.180
+SetOS,10.4.18.180,Microsoft,Windows XP,Unknown
+AddScanResult,10.4.18.180,"InsightVM",5072,3389,6,"","The PCI (Payment Card Industry) Data Security Standard requires a minimum of TLS v1.1
+    and recommends TLS v1.2. In addition, FIPS 140-2 standard requires a minimum of
+    TLS v1.1 and recommends TLS v1.2.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",711,,,"","An information disclosure vulnerability exists in the Windows Event Viewer (eventvwr.msc) when it improperly parses XML input containing a reference to an external entity. An attacker who successfully exploited this vulnerability could read arbitrary files via an XML external entity (XXE) declaration.
+To exploit the vulnerability, an attacker could create a file containing specially crafted XML content and convince an authenticated user to import the file.
+The update addresses the vulnerability by modifying the way that the Event Viewer parses XML input.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.13
+SetOS,10.4.24.13,Ubuntu,Linux,16.04
+AddScanResult,10.4.24.13,"InsightVM",5677,80,6,"","The affected asset is vulnerable to this vulnerability ONLY if it is running one of the following modules: mod_http2.  Review your web server configuration for validation.  By manipulating the flow control windows on streams, a client was able to block server threads for long times, causing starvation of worker threads. Connections could still be opened, but no streams where processed for these. This issue affected HTTP/2 support in 2.4.17 and 2.4.18.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3811,,,"","This security update resolves a privately reported vulnerability in Microsoft Windows. The vulnerability could allow a denial of service if the attacker sends a specially crafted ICMP packet to the target system.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",6398,,,"","A remote code execution vulnerability exists when the Microsoft Office Access Connectivity Engine improperly handles objects in memory. An attacker who successfully exploited this vulnerability could execute arbitrary code on a victim system.
+An attacker could exploit this vulnerability by enticing a victim to open a specially crafted file.
+The update addresses the vulnerability by correcting the way the Microsoft Office Access Connectivity Engine handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",6665,,,"","An information disclosure vulnerability exists when the Windows GDI component improperly discloses the contents of its memory. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user’s system.
+There are multiple ways an attacker could exploit the vulnerability, such as by convincing a user to open a specially crafted document, or by convincing a user to visit an untrusted webpage.
+The security update addresses the vulnerability by correcting how the Windows GDI component handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3895,,,"","This security update resolves a privately reported vulnerability in Microsoft Windows. The vulnerability could allow information disclosure if an attacker logs on to an affected system as a local user, and runs a specially crafted application on the system that is designed to enable the attacker to obtain information from a higher-privileged account. An attacker must have valid logon credentials and be able to log on locally to exploit this vulnerability.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",6421,,,"","An information disclosure vulnerability exists when the Windows GDI component improperly discloses the contents of its memory. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user’s system.
+There are multiple ways an attacker could exploit the vulnerability, such as by convincing a user to open a specially crafted document, or by convincing a user to visit an untrusted webpage.
+The security update addresses the vulnerability by correcting how the Windows GDI component handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3726,,,"","This security update resolves a privately reported vulnerability in Windows Remote Desktop Client. The vulnerability could allow remote code execution if a user views a specially crafted webpage. An attacker who successfully exploited the vulnerability could gain the same user rights as the current user. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.22.129
+SetOS,10.4.22.129,Unknown,Unknown,Unknown
+AddScanResult,10.4.22.129,"InsightVM",5072,443,6,"","The PCI (Payment Card Industry) Data Security Standard requires a minimum of TLS v1.1
+    and recommends TLS v1.2. In addition, FIPS 140-2 standard requires a minimum of
+    TLS v1.1 and recommends TLS v1.2.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.23.176
+SetOS,10.4.23.176,Ubuntu,Linux,16.04
+AddScanResult,10.4.23.176,"InsightVM",5677,80,6,"","The affected asset is vulnerable to this vulnerability ONLY if it is running one of the following modules: mod_http2.  Review your web server configuration for validation.  By manipulating the flow control windows on streams, a client was able to block server threads for long times, causing starvation of worker threads. Connections could still be opened, but no streams where processed for these. This issue affected HTTP/2 support in 2.4.17 and 2.4.18.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",6487,,,"","An elevation of privilege vulnerability exists in Active Directory Forest trusts due to a default setting that lets an attacker in the trusting forest request delegation of a TGT for an identity from the trusted forest. To exploit this vulnerability, an attacker would first need to compromise an Active Directory forest.
+An attacker who successfully exploited this vulnerability could request delegation of a TGT for an identity from the trusted forest.
+This update addresses the vulnerability by ensuring new Active Directory Forest trusts disable TGT delegation by default. The update does not change existing TGT delegation configurations.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.23.176
+SetOS,10.4.23.176,Ubuntu,Linux,16.04
+AddScanResult,10.4.23.176,"InsightVM",3784,53,17,"","ISC BIND 9.x before 9.9.9-P2, 9.10.x before 9.10.4-P2, and 9.11.x before 9.11.0b2, when lwresd or the named lwres option is enabled, allows remote attackers to cause a denial of service (daemon crash) via a long request that uses the lightweight resolver protocol.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",6427,,,"","An information disclosure vulnerability exists when the Windows GDI component improperly discloses the contents of its memory. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user’s system.
+There are multiple ways an attacker could exploit the vulnerability, such as by convincing a user to open a specially crafted document, or by convincing a user to visit an untrusted webpage.
+The security update addresses the vulnerability by correcting how the Windows GDI component handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",6663,,,"","An information disclosure vulnerability exists when the Windows GDI component improperly discloses the contents of its memory. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user’s system.
+There are multiple ways an attacker could exploit the vulnerability, such as by convincing a user to open a specially crafted document, or by convincing a user to visit an untrusted webpage.
+The security update addresses the vulnerability by correcting how the Windows GDI component handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",6701,,,"","An information disclosure vulnerability exists when the Windows GDI component improperly discloses the contents of its memory. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user’s system.
+There are multiple ways an attacker could exploit the vulnerability, such as by convincing a user to open a specially crafted document, or by convincing a user to visit an untrusted webpage.
+The security update addresses the vulnerability by correcting how the Windows GDI component handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3903,,,"","This security update resolves a privately reported vulnerability in Microsoft Windows. The vulnerability could allow remote code execution if a user or application runs or installs a specially crafted, signed portable executable (PE) file on an affected system.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3857,,,"","This security update resolves seven privately reported vulnerabilities in Microsoft Windows. The most severe of these vulnerabilities could allow remote code execution if a user views shared content that embeds OpenType or TrueType font files. An attacker who successfully exploited these vulnerabilities could take complete control of an affected system.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.26.101
+SetOS,10.4.26.101,Microsoft,Windows 10 Enterprise Edition,Unknown
+AddScanResult,10.4.26.101,"InsightVM",5072,443,6,"","The PCI (Payment Card Industry) Data Security Standard requires a minimum of TLS v1.1
+    and recommends TLS v1.2. In addition, FIPS 140-2 standard requires a minimum of
+    TLS v1.1 and recommends TLS v1.2.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3723,,,"","This security update resolves three privately reported vulnerabilities in Microsoft Windows. These vulnerabilities could allow elevation of privilege if an attacker gains access to a system.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.13
+SetOS,10.4.24.13,Ubuntu,Linux,16.04
+AddScanResult,10.4.24.13,"InsightVM",5072,110,6,"","The PCI (Payment Card Industry) Data Security Standard requires a minimum of TLS v1.1
+    and recommends TLS v1.2. In addition, FIPS 140-2 standard requires a minimum of
+    TLS v1.1 and recommends TLS v1.2.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.26.101
+SetOS,10.4.26.101,Microsoft,Windows 10 Enterprise Edition,Unknown
+AddScanResult,10.4.26.101,"InsightVM",5072,3389,6,"","The PCI (Payment Card Industry) Data Security Standard requires a minimum of TLS v1.1
+    and recommends TLS v1.2. In addition, FIPS 140-2 standard requires a minimum of
+    TLS v1.1 and recommends TLS v1.2.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3792,,,"","This security update resolves five privately reported vulnerabilities and two publicly disclosed vulnerabilities in Microsoft .NET Framework and Microsoft Silverlight. The most severe of these vulnerabilities could allow remote code execution if a trusted application uses a particular pattern of code. An attacker who successfully exploited this vulnerability could gain the same user rights as the logged-on user. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",6672,,,"","A remote code execution vulnerability exists in the way that the Windows Graphics Device Interface (GDI) handles objects in the memory. An attacker who successfully exploited this vulnerability could take control of the affected system. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.
+There are multiple ways an attacker could exploit the vulnerability:
+
+In a web-based attack scenario, an attacker could host a specially crafted website that is designed to exploit the vulnerability and then convince users to view the website. An attacker would have no way to force users to view the attacker-controlled content. Instead, an attacker would have to convince users to take action, typically by getting them to open an email attachment or click a link in an email or instant message.
+In a file-sharing attack scenario, an attacker could provide a specially crafted document file that is designed to exploit the vulnerability, and then convince users to open the document file.
+
+The security update addresses the vulnerability by correcting the way that the Windows GDI handles objects in the memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3751,,,"","This security update resolves three privately reported vulnerabilities and one publicly disclosed vulnerability in Microsoft Windows. The most severe of these vulnerabilities could allow elevation of privilege if an attacker logs on to the system and runs a specially crafted application. An attacker must have valid logon credentials and be able to log on locally to exploit the most severe vulnerabilities.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3901,,,"","This security update resolves seven privately reported vulnerabilities in Internet Explorer. The most severe vulnerabilities could allow remote code execution if a user views a specially crafted webpage using Internet Explorer. An attacker who successfully exploited the most severe of these vulnerabilities could gain the same user rights as the current user. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",798,,,"","A denial of service vulnerability exists when .NET Framework or .NET Core improperly handle web requests. An attacker who successfully exploited this vulnerability could cause a denial of service against a .NET Framework or .NET Core web application. The vulnerability can be exploited remotely, without authentication.
+A remote unauthenticated attacker could exploit this vulnerability by issuing specially crafted requests to the .NET Framework or .NET Core application.
+The update addresses the vulnerability by correcting how .NET Framework or .NET Core web applications handles web requests.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",802,,,"","An elevation of privilege vulnerability exists when the Windows Common Log File System (CLFS) driver improperly handles objects in memory. An attacker who successfully exploited this vulnerability could run processes in an elevated context.
+To exploit the vulnerability, an attacker would first have to log on to the system, and then run a specially crafted application to take control over the affected system.
+The security update addresses the vulnerability by correcting how CLFS handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.23.176
+SetOS,10.4.23.176,Ubuntu,Linux,16.04
+AddScanResult,10.4.23.176,"InsightVM",3784,53,6,"","ISC BIND 9.x before 9.9.9-P2, 9.10.x before 9.10.4-P2, and 9.11.x before 9.11.0b2, when lwresd or the named lwres option is enabled, allows remote attackers to cause a denial of service (daemon crash) via a long request that uses the lightweight resolver protocol.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.23.176
+SetOS,10.4.23.176,Ubuntu,Linux,16.04
+AddScanResult,10.4.23.176,"InsightVM",3785,53,6,"","buffer.c in named in ISC BIND 9 before 9.9.9-P3, 9.10.x before 9.10.4-P3, and 9.11.x before 9.11.0rc3 does not properly construct responses, which allows remote attackers to cause a denial of service (assertion failure and daemon exit) via a crafted query.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3866,,,"","This security update resolves ten privately reported vulnerabilities in Internet Explorer. The most severe vulnerabilities could allow remote code execution if a user views a specially crafted webpage using Internet Explorer. An attacker who successfully exploited the most severe of these vulnerabilities could gain the same user rights as the current user. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3859,,,"","This security update resolves two privately reported vulnerabilities and one publicly disclosed vulnerability in Microsoft .NET Framework. The most severe of the vulnerabilities could allow remote code execution if a user visits a website containing a specially crafted OpenType font (OTF) file using a browser capable of instantiating XBAP applications.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",754,,,"","An information disclosure vulnerability exists when the Windows GDI component improperly discloses the contents of its memory. An attacker who successfully exploited the vulnerability could obtain information to further compromise the user’s system.
+There are multiple ways an attacker could exploit the vulnerability, such as by convincing a user to open a specially crafted document, or by convincing a user to visit an untrusted webpage.
+The security update addresses the vulnerability by correcting how the Windows GDI component handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",6453,,,"","A denial of service vulnerability exists when Microsoft Hyper-V Network Switch on a host server fails to properly validate input from a privileged user on a guest operating system. An attacker who successfully exploited the vulnerability could cause the host server to crash.
+To exploit the vulnerability, an attacker who already has a privileged account on a guest operating system, running as a virtual machine, could run a specially crafted application that causes a host machine to crash.
+The update addresses the vulnerability by modifying how virtual machines access the Hyper-V Network Switch.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",6669,,,"","A remote code execution vulnerability exists when the Windows Jet Database Engine improperly handles objects in memory. An attacker who successfully exploited this vulnerability could execute arbitrary code on a victim system.
+An attacker could exploit this vulnerability by enticing a victim to open a specially crafted file.
+The update addresses the vulnerability by correcting the way the Windows Jet Database Engine handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",6424,,,"","A remote code execution vulnerability exists in the way that the Windows Graphics Device Interface (GDI) handles objects in the memory. An attacker who successfully exploited this vulnerability could take control of the affected system. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.
+There are multiple ways an attacker could exploit the vulnerability:
+
+In a web-based attack scenario, an attacker could host a specially crafted website that is designed to exploit the vulnerability and then convince users to view the website. An attacker would have no way to force users to view the attacker-controlled content. Instead, an attacker would have to convince users to take action, typically by getting them to open an email attachment or click a link in an email or instant message.
+In a file-sharing attack scenario, an attacker could provide a specially crafted document file that is designed to exploit the vulnerability, and then convince users to open the document file.
+
+The security update addresses the vulnerability by correcting the way that the Windows GDI handles objects in the memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",6397,,,"","A remote code execution vulnerability exists when the Microsoft Office Access Connectivity Engine improperly handles objects in memory. An attacker who successfully exploited this vulnerability could execute arbitrary code on a victim system.
+An attacker could exploit this vulnerability by enticing a victim to open a specially crafted file.
+The update addresses the vulnerability by correcting the way the Microsoft Office Access Connectivity Engine handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",6662,,,"","A remote code execution vulnerability exists in .NET Framework and Visual Studio software when the software fails to check the source markup of a file.
+An attacker who successfully exploited the vulnerability could run arbitrary code in the context of the current user. If the current user is logged on with administrative user rights, an attacker could take control of the affected system. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights.
+Exploitation of the vulnerability requires that a user open a specially crafted file with an affected version of .NET Framework or Visual Studio. In an email attack scenario, an attacker could exploit the vulnerability by sending the specially crafted file to the user and convincing the user to open the file.
+The security update addresses the vulnerability by correcting how .NET Framework and Visual Studio check the source markup of a file.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3783,,,"","This security update resolves a privately reported vulnerability in Microsoft Windows. The vulnerability could allow denial of service if an attacker sends specially crafted packets to the server. Firewall best practices and standard default firewall configurations can help protect networks from attacks that originate outside the enterprise perimeter.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.24.13
+SetOS,10.4.24.13,Ubuntu,Linux,16.04
+AddScanResult,10.4.24.13,"InsightVM",5072,143,6,"","The PCI (Payment Card Industry) Data Security Standard requires a minimum of TLS v1.1
+    and recommends TLS v1.2. In addition, FIPS 140-2 standard requires a minimum of
+    TLS v1.1 and recommends TLS v1.2.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",725,,,"","A remote code execution vulnerability exists when the Windows Jet Database Engine improperly handles objects in memory. An attacker who successfully exploited this vulnerability could execute arbitrary code on a victim system.
+An attacker could exploit this vulnerability by enticing a victim to open a specially crafted file.
+The update addresses the vulnerability by correcting the way the Windows Jet Database Engine handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3790,,,"","This security update resolves a privately reported vulnerability in Microsoft Windows. The vulnerability could allow elevation of privilege when an authenticated attacker deletes a printer connection. An attacker must have valid logon credentials and be able to log on to exploit this vulnerability.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3897,,,"","This security update resolves a privately reported vulnerability in Microsoft Windows. The vulnerability could allow denial of service when an affected web service processes a specially crafted X.509 certificate.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",3663,,,"","This security update resolves two privately reported vulnerabilities in Microsoft XML Core Services. The vulnerabilities could allow remote code execution if a user views a specially crafted webpage using Internet Explorer. An attacker would have no way to force users to visit such a website. Instead, an attacker would have to convince users to visit the website, typically by getting them to click a link in an email message or Instant Messenger message that takes the user to the attacker's website.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",805,,,"","An elevation of privilege vulnerability exists when the Windows User Profile Service (ProfSvc) improperly handles symlinks. An attacker who successfully exploited this vulnerability could delete files and folders in an elevated context.
+To exploit this vulnerability, an attacker would first have to log on to the system. An attacker could then run a specially crafted application that could exploit the vulnerability and delete files or folders of their choosing.
+The security update addresses the vulnerability by correcting how the Windows User Profile Service handles symlinks.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",6395,,,"","A remote code execution vulnerability exists when the Microsoft Office Access Connectivity Engine improperly handles objects in memory. An attacker who successfully exploited this vulnerability could execute arbitrary code on a victim system.
+An attacker could exploit this vulnerability by enticing a victim to open a specially crafted file.
+The update addresses the vulnerability by correcting the way the Microsoft Office Access Connectivity Engine handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",6422,,,"","An information disclosure vulnerability exists when the Windows kernel improperly handles objects in memory. An attacker who successfully exploited this vulnerability could obtain information to further compromise the user’s system.
+An authenticated attacker could exploit this vulnerability by running a specially crafted application.
+The update addresses the vulnerability by correcting how the Windows kernel handles objects in memory.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",797,,,"","A denial of service vulnerability exists when .NET Framework or .NET Core improperly handle web requests. An attacker who successfully exploited this vulnerability could cause a denial of service against a .NET Framework or .NET Core web application. The vulnerability can be exploited remotely, without authentication.
+A remote unauthenticated attacker could exploit this vulnerability by issuing specially crafted requests to the .NET Framework or .NET Core application.
+The update addresses the vulnerability by correcting how .NET Framework or .NET Core web applications handles web requests.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.4.23.176
+SetOS,10.4.23.176,Ubuntu,Linux,16.04
+AddScanResult,10.4.23.176,"InsightVM",3785,53,17,"","buffer.c in named in ISC BIND 9 before 9.9.9-P3, 9.10.x before 9.10.4-P3, and 9.11.x before 9.11.0rc3 does not properly construct responses, which allows remote attackers to cause a denial of service (assertion failure and daemon exit) via a crafted query.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+SetSource,InsightVM
+AddHost,10.0.2.15
+SetOS,10.0.2.15,Microsoft,Windows 7 Professional Edition,SP1
+AddScanResult,10.0.2.15,"InsightVM",699,,,"","A denial of service exists in Microsoft IIS Server when the optional request filtering feature improperly handles requests. An attacker who successfully exploited this vulnerability could perform a temporary denial of service against pages configured to use request filtering.
+To exploit this vulnerability, an attacker could send a specially crafted request to a page utilizing request filtering.
+The update addresses the vulnerability by changing the way certain requests are processed by the filter.","cve_ids: ","bugtraq_ids: "
+ScanUpdate
+
