@@ -29,7 +29,7 @@ class Helpers(object):
               "assistance": "Wait out the access timeout."},
         500: {"cause": "Internal Server Error: Internal error when processing the request.",
               "assistance": "The most common causes of this error are invalid requests."
-                            " e.g. create an address that already exists, delete an address that dose not exist ect."
+                            "Check that the address has not already been created."
                             "Contact support for additional assistance."}
     }
 
