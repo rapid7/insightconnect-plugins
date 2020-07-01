@@ -79,6 +79,23 @@ Example input:
 Example output:
 
 ```
+{
+  "patch_group": {
+    "id": 10,
+    "links": {
+      "self": {
+        "href": "https://example.com:3121/st/console/api/v1.0/patch/groups/10"
+      },
+      "patches": {
+        "href": "https://example.com:3121/st/console/api/v1.0/patch/groups/10/patches"
+      },
+      "usedby": {
+        "href": "https://example.com:3121/st/console/api/v1.0/patch/groups/10/usedby"
+      }
+    },
+    "name": "example-patch-group"
+  }
+}
 ```
 
 #### Create Patch Scan Template
