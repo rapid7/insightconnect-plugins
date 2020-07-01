@@ -55,9 +55,9 @@ This action is used to download the analysis report files for given parameter.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Task ID or job ID or MD5 value for which will be prepared analysis report|None|13|
-|report_type|string|JSON|False|Type of file prepared analysis report|['JSON', 'HTML', 'TXT', 'ZIP', 'XML', 'IOC', 'STIX', 'PDF', 'SAMPLE']|HTML|
-|type_id|string|MD5|False|Type of given ID parameter, default value is MD5|['MD5', 'TASK ID', 'JOB ID']|TASK ID|
+|id|string|None|True|The Task ID, job ID, or MD5 value for the prepared analysis report|None|13|
+|report_type|string|HTML|False|The file type of the report to return in the file output|['HTML', 'TXT', 'ZIP', 'XML', 'IOC', 'STIX', 'PDF', 'SAMPLE']|HTML|
+|type_id|string|MD5|False|Type of given ID parameter, the type must match the value of the ID field. The default value is MD5|['MD5', 'TASK ID', 'JOB ID']|TASK ID|
 
 Example input:
 
@@ -80,8 +80,19 @@ Example output:
 
 ```
 {
-  "file": "PCFET0NUWVBFIEhUTUwgUFVCTElDIFwiLS8vVzNDLy9EVEQgSFRNTCA0LjAxLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL1RSL2h0bWw0L3N0cmljdC5kdGRcIj4KPGh0bWw+CjxoZWFkPgo8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQvaHRtbDsgY2hhcnNldD11dGYtOCI+Cjx0aXRsZT5NYWx3YXJlIFN1bW1hcnk8L3RpdGxlPgo8bGluayBocmVmPSIvaW1hZ2VzL3N0YW5kYXJkLmNzcyIgcmVsPSJzdHlsZXNoZWV0Ij4KPCEtLSAgPGxpbmsgaHJlZj0iL2ltYWdlcy9zdGFuZGFyZDIwMTUuY3NzIiByZWw9InN0eWxlc2hlZXQiPiAtLT4KPGxpbmsgaHJlZj0iL2ltYWdlcy9ib290c3RyYXAubWluLmNzcyIgcmVsPSJzdHlsZXNoZWV0Ij4KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4gCmRpdi5jZm9vdGVyIHttYXJnaW4tdG9wOjQwcHg7IHBhZGRpbmctdG9wOjIwcHg7IGJvcmRlci10b3A6N3B4IGRvdWJsZSAjY2FiMmQyOyBtYXJnaW4tcmlnaHQ6MTUlfQo8L3N0eWxlPgo8L2hlYWQ+Cjxib2R5Pgo8IS0tCjxkaXYgY2xhc3M9Im1haW50aXRsZSI+VGhyZWF0IEFuYWx5c2lzIFJlcG9ydDwvZGl2Pgo8aW1nIHNyYz0iL2ltYWdlcy9pbnRfU2VjdXJpdHkucG5nIiBzdHlsZT0iZmxvYXQ6cmlnaHQ7IG1hcmdpbi1yaWdodDoyMDBweDsgIj4KPGRpdiBzdHlsZT0iY2xlYXI6Ym90aDsiPjwvZGl2PgotLT4KPGRpdiBjbGFzcz0ibWFpbnRpdGxlIj4KPGltZyBzcmM9Ii9pbWFnZXMvbWNsb2dvLWJ3LmpwZyIgaGVpZ2h0PSIyNSIgd2lkdGg9IjEyNSIgYWxpZ249InRvcCI+ICZlbnNwOyAmZW5zcDt8JmVuc3A7IDxmb250IHNpemU9IjUiIGNvbG9yPSIjNDE0NDQ4IiA+ICBUaHJlYXQgQW5hbHlzaXMgUmVwb3J0PC9mb250PjwvZGl2Pgo8cCBhbGlnbj0icmlnaHQiPjxmb250IHNpemU9IisxIj5NY0FmZWUgQWR2YW5jZWQgVGhyZWF0IERlZmVuc2U8L2ZvbnQ+PC9wPgo8YnI+PGJyPgo8aDI+U3VtbWFyeTwvaDI+CjxwPlNhbXBsZSBOYW1lOiB0ZXN0LnR4dDwvcD4KPHA+TUQ1IEhhc2ggSWRlbnRpZmllcjogMEI0N0Y2NzFCQzYzMjg2MjNERkExMDg1MUQ0MThFNTU8L3A+Cgo8cCBjbGFzcz0ibWFsaSI+U2V2ZXJpdHk6IC0yPC9wPgo8cCBjbGFzcz0ibWFsaSI+RGVzY3JpcHRpb246IEZpbGUgdHlwZSBub3Qgc3VwcG9ydGVkLjwvcD4KCjxkaXYgc3R5bGU9ImJvcmRlci10b3A6MXB4IHNvbGlkIHJnYigyMjMsMjIzLDIyMyk7IHBhZGRpbmctdG9wOjI1cHg7IG1hcmdpbi10b3A6NTBweDsgIj5Db3B5cmlnaHQgwqkgMjAxOCBNY0FmZWUsIExMQy4gQWxsIHJpZ2h0cyByZXNlcnZlZC48YnI+IDxhIGhyZWY9Imh0dHA6Ly93d3cubWNhZmVlLmNvbSI+d3d3Lm1jYWZlZS5jb208L2E+CjwvZGl2Pgo8L2JvZHk+CjwvaHRtbD4K",
-  "report": {}
+  "file": "PGh0bWw+CjxoZWFkPgo8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQvaHRtbDsgY2hhcnNldD11dGYtOCI+Cjx0aXRsZT5NYWx3YXJlIFN1bW1hcnk8L3RpdGxlPgo8bGluayBocmVmPSIvaW1hZ2VzL3N0YW5kYXJkLmNzcyIgcmVsPSJzdHlsZXNoZWV0Ij4KPCEtLSA8bGluayBocmVmPSIvaW1hZ2VzL3N0YW5kYXJkMjAxNS5jc3MiIHJlbD0ic3R5bGVzaGVldCI+IC0tPgo8bGluayBocmVmPSIvaW1hZ2VzL2Jvb3RzdHJhcC5taW4uY3NzIiByZWw9InN0eWxlc2hlZXQiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgpkaXYuY2Zvb3RlciB7bWFyZ2luLXRvcDo0MHB4OyBwYWRkaW5nLXRvcDoyMHB4OyBib3JkZXItdG9wOjdweCBkb3VibGUgI2NhYjJkMjsgbWFyZ2luLXJpZ2h0OjE1JX0KPC9zdHlsZT4KPC9oZWFkPgo8Ym9keT4KPCEtLQo8ZGl2IGNsYXNzPSJtYWludGl0bGUiPlRocmVhdCBBbmFseXNpcyBSZXBvcnQ8L2Rpdj4KPGltZyBzcmM9Ii9pbWFnZXMvaW50X1NlY3VyaXR5LnBuZyIgc3R5bGU9ImZsb2F0OnJpZ2h0OyBtYXJnaW4tcmlnaHQ6MjAwcHg7ICI+CjxkaXYgc3R5bGU9ImNsZWFyOmJvdGg7Ij48L2Rpdj4KLS0+CjxkaXYgY2xhc3M9Im1haW50aXRsZSI+CjxpbWcgc3JjPSIvaW1hZ2VzL21jbG9nby1idy5qcGciIGhlaWdodD0iMjUiIHdpZHRoPSIxMjUiIGFsaWduPSJ0b3AiPiAmZW5zcDsgJmVuc3A7fCZlbnNwOyA8Zm9udCBzaXplPSI1IiBjb2xvcj0iIzQxNDQ0OCIgPiAgVGhyZWF0IEFuYWx5c2lzIFJlcG9ydDwvZm9udD48L2Rpdj4KPHAgYWxpZ249InJpZ2h0Ij48Zm9udCBzaXplPSIrMSI+TWNBZmVlIEFkdmFuY2VkIFRocmVhdCBEZWZlbnNlPC9mb250PjwvcD4KPGJyPjxicj4KPGgyPlN1bW1hcnk8L2gyPgo8cD5TYW1wbGUgTmFtZTogdGVzdC50eHQ8L3A+CjxwPk1ENSBIYXNoIElkZW50aWZpZXI6IDBCNDdGNjcxQkM2MzI4NjIzREZBMTA4NTFENDE4RTU1PC9wPgoKPHAgY2xhc3M9Im1hbGkiPlNldmVyaXR5OiAtMjwvcD4KPHAgY2xhc3M9Im1hbGkiPkRlc2NyaXB0aW9uOiBSZXBvcnQgbm90IGF2YWlsYWJsZSAtIEFuYWx5c2lzIGluY29tcGxldGU8L3A+Cgo8ZGl2IHN0eWxlPSJib3JkZXItdG9wOjFweCBzb2xpZCByZ2IoMjIzLDIyMywyMjMpOyBwYWRkaW5nLXRvcDoyNXB4OyBtYXJnaW4tdG9wOjUwcHg7ICI+Q29weXJpZ2h0IMKpIDIwMTkgTWNBZmVlLCBMTEMuIEFsbCByaWdodHMgcmVzZXJ2ZWQuPGJyPiA8YSBocmVmPSJodHRwOi8vd3d3Lm1jYWZlZS5jb20iPnd3dy5tY2FmZWUuY29tPC9hPgo8L2Rpdj4KPC9ib2R5Pgo8L2h0bWw+Cgo=",
+  "report": {
+    "Summary": {
+      "Subject": {
+        "Name": "test.txt",
+        "md5": "0B47F671BC6328623DFA10851D418E55"
+      },
+      "Verdict": {
+        "Description": "Invalid file type, or invalid file size, or local heuristics determine the file to have a low probability of being malicious, or contain malicious intent.",
+        "Severity": "-2"
+      }
+    }
+  }
 }
 ```
 

@@ -15,7 +15,8 @@ class GetReport(insightconnect_plugin_runtime.Action):
             output=GetReportOutput())
 
     def run(self, params={}):
-        return_type = params.get(Input.REPORT_TYPE, "json").lower()
+        analyse_id = params.get(Input.ID)
+        return_type = params.get(Input.REPORT_TYPE, "html").lower()
         type_id = params.get(Input.TYPE_ID, "MD5")
         if return_type == "sample" and type_id != "TASK ID":
             raise PluginException(
@@ -24,16 +25,8 @@ class GetReport(insightconnect_plugin_runtime.Action):
                            "Please check to ensure all parameters are correct."
             )
 
-        response = self.connection.mcafee_atd_api.get_report(
-            params.get(Input.ID),
-            return_type,
-            type_id
-        )
-
-        report = {}
-        if return_type == "json":
-            report = response.json()
+        response = self.connection.mcafee_atd_api.get_report(analyse_id, return_type, type_id)
         return {
             Output.FILE: base64.b64encode(response.content).decode('utf-8'),
-            Output.REPORT: report
+            Output.REPORT: self.connection.mcafee_atd_api.get_report(analyse_id, "json", type_id).json()
         }

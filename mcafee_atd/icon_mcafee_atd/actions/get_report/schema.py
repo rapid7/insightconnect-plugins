@@ -27,16 +27,15 @@ class GetReportInput(insightconnect_plugin_runtime.Input):
     "id": {
       "type": "string",
       "title": "ID",
-      "description": "Task ID or job ID or MD5 value for which will be prepared analysis report",
+      "description": "The Task ID, job ID, or MD5 value for the prepared analysis report",
       "order": 1
     },
     "report_type": {
       "type": "string",
       "title": "Report Type",
-      "description": "Type of file prepared analysis report",
-      "default": "JSON",
+      "description": "The file type of the report to return in the file output",
+      "default": "HTML",
       "enum": [
-        "JSON",
         "HTML",
         "TXT",
         "ZIP",
@@ -51,7 +50,7 @@ class GetReportInput(insightconnect_plugin_runtime.Input):
     "type_id": {
       "type": "string",
       "title": "Type ID",
-      "description": "Type of given ID parameter, default value is MD5",
+      "description": "Type of given ID parameter, the type must match the value of the ID field. The default value is MD5",
       "default": "MD5",
       "enum": [
         "MD5",

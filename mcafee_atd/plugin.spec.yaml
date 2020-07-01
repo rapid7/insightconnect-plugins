@@ -669,10 +669,9 @@ actions:
         description: The file type of the report to return in the file output
         type: string
         required: false
-        default: JSON
+        default: HTML
         example: HTML
         enum:
-          - JSON
           - HTML
           - TXT
           - ZIP
