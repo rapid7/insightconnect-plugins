@@ -46,13 +46,15 @@ Example input:
 
 This action is used to start patch deployment.
 
+In case if Scan Identifier provided is a name, the action will use the ID of the latest scan with that name. 
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |download_patches|boolean|None|True|Boolean to initiate patch download before starting the deployment|None|False|
 |scan_identifier|string|None|True|A scan ID or scan name|None|01234567-89AB-CDEF-0123-456789ABCDEF|
-|template_identifier|string|None|True|A template ID or template name|None|Template created from InsightConnect|
+|template_identifier|string|None|True|A template ID or template name|None|Deployment Template created from InsightConnect|
 
 Example input:
 
@@ -60,7 +62,7 @@ Example input:
 {
   "download_patches": false,
   "scan_identifier": "01234567-89AB-CDEF-0123-456789ABCDEF",
-  "template_identifier": "Template created from InsightConnect"
+  "template_identifier": "Deployment Template created from InsightConnect"
 }
 ```
 
@@ -73,6 +75,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Get Patch Deployment Template ID
@@ -89,7 +94,7 @@ Example input:
 
 ```
 {
-  "patch_deployment_template_name": "example-template-name"
+  "patch_deployment_template_name": "Patch Deployment Template created from InsightConnect"
 }
 ```
 
@@ -97,11 +102,14 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|patch_deployment_template_id|string|False|The ID of the patch deployment template|
+|patch_deployment_template_id|string|True|The ID of the patch deployment template|
 
 Example output:
 
 ```
+{
+  "patch_deployment_template_id": "01234567-89AB-CDEF-0123-456789ABCDEF"
+}
 ```
 
 #### Get Patch Deployment

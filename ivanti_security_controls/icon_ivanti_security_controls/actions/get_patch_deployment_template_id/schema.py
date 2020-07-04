@@ -50,7 +50,10 @@ class GetPatchDeploymentTemplateIdOutput(insightconnect_plugin_runtime.Output):
       "description": "The ID of the patch deployment template",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "patch_deployment_template_id"
+  ]
 }
     """)
 

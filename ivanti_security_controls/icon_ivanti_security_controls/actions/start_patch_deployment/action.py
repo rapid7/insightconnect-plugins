@@ -1,6 +1,8 @@
 import insightconnect_plugin_runtime
 from .schema import StartPatchDeploymentInput, StartPatchDeploymentOutput, Input, Output, Component
 # Custom imports below
+from validators import uuid
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class StartPatchDeployment(insightconnect_plugin_runtime.Action):
@@ -13,5 +15,47 @@ class StartPatchDeployment(insightconnect_plugin_runtime.Action):
                 output=StartPatchDeploymentOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        scan_identifier = params.get(Input.SCAN_IDENTIFIER)
+        template_identifier = params.get(Input.TEMPLATE_IDENTIFIER)
+
+        if not uuid(scan_identifier):
+            scan_id = self.get_scan_id(scan_identifier)
+        if not uuid(template_identifier):
+            template_id = self.get_template_id(template_identifier)
+
+        if params.get(Input.DOWNLOAD_PATCHES):
+            self.connection.ivanti_api.start_patch_download(scan_id)
+
+        payload = {
+            'scanId': scan_id,
+            'templateId': template_id
+        }
+
+        self.connection.ivanti_api.create_session_credential()
+        success = False
+        if self.connection.ivanti_api.start_patch_deployment(payload):
+            success = True
+
+        return {
+            Output.SUCCESS: success
+        }
+
+    def get_scan_id(self, scan_name: str) -> str:
+        get_response = self.connection.ivanti_api.get_patch_scan_by_name(scan_name)
+        if get_response.get('count'):
+            return get_response.get('value')[0].get('id')
+
+        raise PluginException(
+            cause='Scan not found.',
+            assistance=f'Scan: "{scan_name}" doesn\'t exist, please validate the name.'
+        )
+
+    def get_template_id(self, template_name: str) -> str:
+        get_response = self.connection.ivanti_api.get_patch_deployment_template_by_name(template_name)
+        if get_response.get('count'):
+            return get_response.get('value')[0].get('id')
+
+        raise PluginException(
+            cause='Template not found.',
+            assistance=f'Template: "{template_name}" doesn\'t exist, please validate the name.'
+        )

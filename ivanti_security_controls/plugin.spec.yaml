@@ -812,6 +812,7 @@ actions:
         title: Patch Deployment Template ID
         description: The ID of the patch deployment template
         type: string
+        required: true
   start_patch_deployment:
     title: Start Patch Deployment
     description: Start patch deployment
@@ -827,7 +828,7 @@ actions:
         description: A template ID or template name
         type: string
         required: true
-        example: Template created from InsightConnect
+        example: Deployment Template created from InsightConnect
       download_patches:
         title: Download Patches
         description: Boolean to initiate patch download before starting the deployment
