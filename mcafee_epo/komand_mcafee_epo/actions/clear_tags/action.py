@@ -1,32 +1,33 @@
-import komand
-from .schema import ClearTagsInput, ClearTagsOutput
+import insightconnect_plugin_runtime
+from .schema import ClearTagsInput, ClearTagsOutput, Input, Output
 # Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class ClearTags(komand.Action):
+class ClearTags(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='clear_tags',
-                description='Clears the given tag to a supplied list of systems',
-                input=ClearTagsInput(),
-                output=ClearTagsOutput())
+            name='clear_tags',
+            description='Clears the given tag to a supplied list of systems',
+            input=ClearTagsInput(),
+            output=ClearTagsOutput())
 
-    def run(self, params={}):
+    def run(self, params=None):
+        if params is None:
+            params = {}
         try:
-            mc = self.connection.client
-            for d in params['devices']:
-                mc.run('system.clearTag', d, params['tag'])
-            self.logger.info("Tag cleared from {} devices".format(len(params['devices'])))
-            return {"message": "Tags cleared from devices successfully"}
+            for d in params.get(Input.DEVICES):
+                self.connection.client(
+                    'system.clearTag',
+                    d,
+                    params.get(Input.TAG)
+                )
+            self.logger.info("Tag cleared from {} devices".format(len(params.get(Input.DEVICES))))
+            return {
+                Output.MESSAGE: "Tags cleared from devices successfully"
+            }
         except Exception as e:
-            self.logger.error("Tags could not be cleared from some or all devices. Error: " + str(e))
-            raise
-
-    def test(self):
-        try:
-            mc = self.connection.client
-            if mc.epo.getVersion():
-                return {"message": "test passed"}
-        except Exception:
-            self.logger.error("An unexpected error occurred during the API request")
-            raise
+            raise PluginException(
+                cause="Tags error",
+                assistance=f"Tags could not be cleared from some or all devices. Error: {e}"
+            )

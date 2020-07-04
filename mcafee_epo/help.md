@@ -20,13 +20,18 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and password to access McAfee ePO e.g. admin|None|None|
-|port|number|None|True|McAfee ePO Port e.g. 8443|None|None|
-|url|string|None|True|McAfee ePO address e.g. epo.company.com|None|None|
+|credentials|credential_username_password|None|True|Username and password to access McAfee ePO|None|{"username":"user1", "password":"mypassword"}|
+|port|number|None|True|McAfee ePO port|None|8443|
+|url|string|None|True|McAfee ePO address|None|https://www.example.com|
 
 Example input:
 
 ```
+{
+  "credentials": "{\"username\":\"user1\", \"password\":\"mypassword\"}",
+  "port": 8443,
+  "url": "https://www.example.com"
+}
 ```
 
 ## Technical Details
@@ -41,11 +46,14 @@ This action is used to list information about system(s).
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|query|string|None|False|System search query e.g Device-1|None|None|
+|query|integer|None|False|System search query e.g Device-1|None|Device-1|
 
 Example input:
 
 ```
+{
+  "query": "Device-1"
+}
 ```
 
 ##### Output
@@ -67,12 +75,19 @@ This action is used to assign the given tag to a supplied list of systems.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|devices|[]string|None|True|Array of all devices to tag e.g. ["Device-1","Device-2"]|None|None|
-|tag|string|None|True|The tag to apply|None|None|
+|devices|[]string|None|True|Array of all devices to tag|None|["Device-1", "Device-2"]|
+|tag|string|None|True|The tag to apply|None|Tag1|
 
 Example input:
 
 ```
+{
+  "devices": [
+    "Device-1",
+    "Device-2"
+  ],
+  "tag": "Tag1"
+}
 ```
 
 ##### Output
@@ -89,12 +104,16 @@ This action is used to add permission set(s) to a specified user.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|permission_set|string|None|False|String name of the permission set to apply e.g. Group Admin|None|None|
-|user|string|None|False|Username of the target user|None|None|
+|permission_set|string|None|False|String name of the permission set to apply|None|Group admin|
+|user|string|None|False|Username of the target user|None|user1|
 
 Example input:
 
 ```
+{
+  "permission_set": "Group admin",
+  "user": "user1"
+}
 ```
 
 ##### Output
@@ -111,12 +130,19 @@ This action is used to clear the given tag to a supplied list of systems.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|devices|[]string|None|True|Array of all devices to clear tag e.g. ["Device-1","Device-2"]|None|None|
-|tag|string|None|True|The tag to clear|None|None|
+|devices|[]string|None|True|Array of all devices to clear tag|None|["Device-1", "Device-2"]|
+|tag|string|None|True|The tag to clear|None|Tag1|
 
 Example input:
 
 ```
+{
+  "devices": [
+    "Device-1",
+    "Device-2"
+  ],
+  "tag": "Tag1"
+}
 ```
 
 ##### Output
@@ -138,6 +164,8 @@ _This plugin does not contain any custom output types._
 This plugin does not contain any troubleshooting information.
 
 # Version History
+
+* 2.0.0 - Update to use the `insightconnect-python-3-38-plugin:4` Docker image
 * 1.0.2 - Fix issue with wrong type in action System Information
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
