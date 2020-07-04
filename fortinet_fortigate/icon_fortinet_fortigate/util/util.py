@@ -28,7 +28,9 @@ class Helpers(object):
                        " The offended source is temporarily blocked for certain amount of time.",
               "assistance": "Wait out the access timeout."},
         500: {"cause": "Internal Server Error: Internal error when processing the request.",
-              "assistance": "Contact support for assistance."}
+              "assistance": "Something went wrong and the API did not provide a reason."
+                            "This can happen when an object you're trying to create already exists or when an object you're trying to remove doesn't exist."
+                            "If the issue persists contact support for additional assistance."}
     }
 
     def __init__(self, logger):
