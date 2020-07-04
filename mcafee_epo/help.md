@@ -28,7 +28,10 @@ Example input:
 
 ```
 {
-  "credentials": "{\"username\":\"user1\", \"password\":\"mypassword\"}",
+  "credentials": {
+    "username":"user1",
+    "password":"mypassword"
+  },
   "port": 8443,
   "url": "https://www.example.com"
 }
@@ -37,6 +40,35 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Get Policies
+
+This action is used to get policies assigned to a user.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|search_text|string|None|True|Finds all policies that the user is permitted to see that match the given search text|None|Search text|
+
+Example input:
+
+```
+{
+  "search_text": "Search text"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|policies_returned|[]policies_returned|True|All policies that match to the given search text|
+
+Example output:
+
+```
+```
 
 #### System Information
 
@@ -96,6 +128,11 @@ Example input:
 |----|----|--------|-----------|
 |message|string|True|Response message|
 
+Example output:
+
+```
+```
+
 #### Add Permission Set to User
 
 This action is used to add permission set(s) to a specified user.
@@ -121,6 +158,11 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |message|boolean|True|Response message|
+
+Example output:
+
+```
+```
 
 #### Clear Tags
 
@@ -151,6 +193,11 @@ Example input:
 |----|----|--------|-----------|
 |message|string|True|Response message|
 
+Example output:
+
+```
+```
+
 ### Triggers
 
 _This plugin does not contain any triggers._
@@ -165,6 +212,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.1.0 - New action Get Policies 
 * 2.0.0 - Update to use the `insightconnect-python-3-38-plugin:4` Docker image
 * 1.0.2 - Fix issue with wrong type in action System Information
 * 1.0.1 - New spec and help.md format for the Extension Library
