@@ -565,6 +565,130 @@ types:
       description: A description of the status of the deployment
       type: string
       required: false
+  patch_property_filter:
+    customActions:
+      title: Custom Actions
+      description: Custom actions
+      type: boolean
+      required: false
+    nonSecurityPatchSeverities:
+      title: Non Security Patch Severities
+      description: The non-security patch severities
+      type: string
+      required: false
+    securityPatchSeverities:
+      title: Security Patch Severities
+      description: The security patch severities
+      type: string
+      required: false
+    securityTools:
+      title: Security Tools
+      description: Security tools
+      type: boolean
+      required: false
+  patch_filter:
+    patchFilePath:
+      title: Patch File Path
+      description: The patch file path
+      type: string
+      required: false
+    patchGroupFilterType:
+      title: Patch Group Filter Type
+      description: The patch's filter describes how this filter will be applied. The values can be Scan, Skip, or None
+      type: string
+      required: false
+    patchGroupIds:
+      title: Patch Group IDs
+      description: The IDs of the patch groups to use
+      type: '[]integer'
+      required: false
+    patchPropertyFilter:
+      title: Patch Property Filter
+      description: Patch property filter (security, non-security, critical, etc.)
+      type: patch_property_filter
+      required: false
+    scanFor:
+      title: Scan For
+      description: Gets or sets the type of patches to scan for
+      type: string
+      required: false
+    softwareDistribution:
+      title: Software Distribution
+      description: Is software distribution included in the scan
+      type: boolean
+      required: false
+    vendorFamilyProductFilter:
+      title: Vendor Family Product Filter
+      description: Vendor and family product hierarchy
+      type: object
+      required: false
+  patch_scan_template:
+    creator:
+      title: Creator
+      description: The name of the person who created the template
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Provides a description that explains the purpose of this patch scan template
+      type: string
+      required: false
+    id:
+      title: ID
+      description: Specifies the ID of the patch scan template
+      type: string
+      required: false
+    isSystem:
+      title: Is System
+      description: Indicates if this is a system template
+      type: boolean
+      required: false
+    links:
+      title: Links
+      description: Shows the related URLs for each patch scan template and for the usedby list
+      type: object
+      required: false
+    name:
+      title: Name
+      description: Specifies the patch scan template name
+      type: string
+      required: false
+    patchFilter:
+      title: Patch Filter
+      description: Specifies the mode
+      type: patch_filter
+      required: false
+    path:
+      title: Path
+      description: The path that describes the location of the machine group within the Patch Scan Templates list in the navigation pane
+      type: string
+      required: false
+    threadCount:
+      title: Thread Count
+      description: Specifies maximum number of machines that can be simultaneously scanned during one patch scan
+      type: integer
+      required: false
+  patch_group:
+    id:
+      title: ID
+      description: The patch group ID
+      type: integer
+      required: false
+    links:
+      title: Links
+      description: Shows the related URLs for the patch group
+      type: object
+      required: false
+    name:
+      title: Name
+      description: The name of the patch group
+      type: string
+      required: false
+    path:
+      title: Path
+      description: The path that describes the location of the patch group within the Windows Patch Groups list in the navigation pane
+      type: string
+      required: false
 actions:
   get_agent:
     title: Get Agent
@@ -840,4 +964,72 @@ actions:
         title: Success
         description: Was operation successful
         type: boolean
+        required: true
+  create_patch_scan_template:
+    title: Create Patch Scan Template
+    description: Create a new patch scan template
+    input:
+      name:
+        title: Name
+        description: Name of the patch scan template
+        type: string
+        required: true
+        example: ExamplePatchScanTemplate
+      description:
+        title: Description
+        description: Description that explains the purpose of this patch scan template
+        type: string
+        required: false
+        example: Patch Scan Template created from InsightConnect
+      path:
+        title: Path
+        description: Path to the location of the machine group within the Patch Scan Templates list in the navigation pane
+        type: string
+        required: false
+        example: Lab\Servers
+      threadCount:
+        title: Thread Count
+        description: Specifies maximum number of machines that can be simultaneously scanned during one patch scan
+        type: integer
+        required: false
+        example: 1
+      patchGroupIds:
+        title: Patch Group IDs
+        description: The IDs of the patch groups to use
+        type: '[]integer'
+        required: true
+        example: 1
+    output:
+      patch_scan_template:
+        title: Patch Scan Template
+        description: Detailed information about the patch scan template
+        type: patch_scan_template
+        required: true
+  create_patch_group_and_add_cves:
+    title: Create Patch Group
+    description: Create a new patch group with CVEs
+    input:
+      name:
+        title: Name
+        description: The name of the new patch group
+        type: string
+        required: true
+        example: New Patch Group
+      path:
+        title: Path
+        description: The path that describes the location of the patch group within the Patch Templates and Groups list in the navigation pane
+        type: string
+        required: false
+        example: Lab\Servers
+      cves:
+        title: CVEs
+        description: The CVEs that should be included in the new patch group
+        type: '[]string'
+        required: true
+        example: ["cve-2019-0701", "CVE-2019-0708"]
+    output:
+      patch_group:
+        title: Patch Group
+        description: Detailed information about the patch group
+        type: patch_group
         required: true

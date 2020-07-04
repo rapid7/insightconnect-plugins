@@ -110,6 +110,21 @@ class IvantiSecurityControlsAPI:
     def get_patch_deployment_machine(self, deployment_id, machine_id):
         return self._call_api("GET", f"{self.url}/patch/deployments/{deployment_id}/machines/{machine_id}")
 
+    def create_patch_group(self, payload):
+        return self._call_api("POST", f"{self.url}/patch/groups", json_data=payload)
+
+    def get_patch_group(self, patch_group_id):
+        return self._call_api("GET", f"{self.url}/patch/groups/{patch_group_id}", allow_404=True)
+
+    def add_cves_to_patch_group(self, patch_group_id, payload):
+        return self._call_api("POST", f"{self.url}/patch/groups/{patch_group_id}/patches/cves", json_data=payload)
+
+    def create_patch_scan_template(self, payload):
+        return self._call_api("POST", f"{self.url}/patch/scanTemplates", json_data=payload)
+
+    def get_patch_scan_template(self, patch_scan_template_id):
+        return self._call_api("GET", f"{self.url}/patch/scanTemplates/{patch_scan_template_id}")
+
     def create_session_credential(self):
         payload = {
             "clearText": self.password,
@@ -148,6 +163,8 @@ class IvantiSecurityControlsAPI:
                     return None
                 else:
                     raise PluginException(preset=PluginException.Preset.NOT_FOUND)
+            if response.status_code == 409:
+                raise PluginException(cause='Conflict.', assistance='Resource with this name already exists.')
             if 200 <= response.status_code < 300:
                 if return_response:
                     return response

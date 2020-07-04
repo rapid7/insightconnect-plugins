@@ -19,16 +19,16 @@ class StartPatchDeployment(insightconnect_plugin_runtime.Action):
         template_identifier = params.get(Input.TEMPLATE_IDENTIFIER)
 
         if not uuid(scan_identifier):
-            scan_id = self.get_scan_id(scan_identifier)
+            scan_identifier = self.get_scan_id(scan_identifier)
         if not uuid(template_identifier):
-            template_id = self.get_template_id(template_identifier)
+            template_identifier = self.get_template_id(template_identifier)
 
         if params.get(Input.DOWNLOAD_PATCHES):
-            self.connection.ivanti_api.start_patch_download(scan_id)
+            self.connection.ivanti_api.start_patch_download(scan_identifier)
 
         payload = {
-            'scanId': scan_id,
-            'templateId': template_id
+            'scanId': scan_identifier,
+            'templateId': template_identifier
         }
 
         self.connection.ivanti_api.create_session_credential()

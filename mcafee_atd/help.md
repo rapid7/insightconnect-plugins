@@ -9,6 +9,7 @@
 * Submit a URL for analysis
 * Submit a file for analysis
 * Display the analyzer profiles to which the user has access
+* Download the analysis report files
 
 # Requirements
 
@@ -45,6 +46,56 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Get Report
+
+This action is used to download the report of an analysis. It will return the report in JSON along with a file version of
+the report based on the specific file type specified in `report_type`.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|The Task ID, job ID, or MD5 value for the prepared analysis report|None|13|
+|report_type|string|HTML|False|The file type of the report to return in the file output|['HTML', 'TXT', 'ZIP', 'XML', 'IOC', 'STIX', 'PDF', 'SAMPLE']|HTML|
+|type_id|string|MD5|False|Type of given ID parameter, the type must match the value of the ID field. The default value is MD5|['MD5', 'TASK ID', 'JOB ID']|TASK ID|
+
+Example input:
+
+```
+{
+  "id": 13,
+  "report_type": "HTML",
+  "type_id": "TASK ID"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|file|bytes|True|Prepared analysis report|
+|report|object|False|Return report in JSON|
+
+Example output:
+
+```
+{
+  "file": "PGh0bWw+CjxoZWFkPgo8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQvaHRtbDsgY2hhcnNldD11dGYtOCI+Cjx0aXRsZT5NYWx3YXJlIFN1bW1hcnk8L3RpdGxlPgo8bGluayBocmVmPSIvaW1hZ2VzL3N0YW5kYXJkLmNzcyIgcmVsPSJzdHlsZXNoZWV0Ij4KPCEtLSA8bGluayBocmVmPSIvaW1hZ2VzL3N0YW5kYXJkMjAxNS5jc3MiIHJlbD0ic3R5bGVzaGVldCI+IC0tPgo8bGluayBocmVmPSIvaW1hZ2VzL2Jvb3RzdHJhcC5taW4uY3NzIiByZWw9InN0eWxlc2hlZXQiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgpkaXYuY2Zvb3RlciB7bWFyZ2luLXRvcDo0MHB4OyBwYWRkaW5nLXRvcDoyMHB4OyBib3JkZXItdG9wOjdweCBkb3VibGUgI2NhYjJkMjsgbWFyZ2luLXJpZ2h0OjE1JX0KPC9zdHlsZT4KPC9oZWFkPgo8Ym9keT4KPCEtLQo8ZGl2IGNsYXNzPSJtYWludGl0bGUiPlRocmVhdCBBbmFseXNpcyBSZXBvcnQ8L2Rpdj4KPGltZyBzcmM9Ii9pbWFnZXMvaW50X1NlY3VyaXR5LnBuZyIgc3R5bGU9ImZsb2F0OnJpZ2h0OyBtYXJnaW4tcmlnaHQ6MjAwcHg7ICI+CjxkaXYgc3R5bGU9ImNsZWFyOmJvdGg7Ij48L2Rpdj4KLS0+CjxkaXYgY2xhc3M9Im1haW50aXRsZSI+CjxpbWcgc3JjPSIvaW1hZ2VzL21jbG9nby1idy5qcGciIGhlaWdodD0iMjUiIHdpZHRoPSIxMjUiIGFsaWduPSJ0b3AiPiAmZW5zcDsgJmVuc3A7fCZlbnNwOyA8Zm9udCBzaXplPSI1IiBjb2xvcj0iIzQxNDQ0OCIgPiAgVGhyZWF0IEFuYWx5c2lzIFJlcG9ydDwvZm9udD48L2Rpdj4KPHAgYWxpZ249InJpZ2h0Ij48Zm9udCBzaXplPSIrMSI+TWNBZmVlIEFkdmFuY2VkIFRocmVhdCBEZWZlbnNlPC9mb250PjwvcD4KPGJyPjxicj4KPGgyPlN1bW1hcnk8L2gyPgo8cD5TYW1wbGUgTmFtZTogdGVzdC50eHQ8L3A+CjxwPk1ENSBIYXNoIElkZW50aWZpZXI6IDBCNDdGNjcxQkM2MzI4NjIzREZBMTA4NTFENDE4RTU1PC9wPgoKPHAgY2xhc3M9Im1hbGkiPlNldmVyaXR5OiAtMjwvcD4KPHAgY2xhc3M9Im1hbGkiPkRlc2NyaXB0aW9uOiBSZXBvcnQgbm90IGF2YWlsYWJsZSAtIEFuYWx5c2lzIGluY29tcGxldGU8L3A+Cgo8ZGl2IHN0eWxlPSJib3JkZXItdG9wOjFweCBzb2xpZCByZ2IoMjIzLDIyMywyMjMpOyBwYWRkaW5nLXRvcDoyNXB4OyBtYXJnaW4tdG9wOjUwcHg7ICI+Q29weXJpZ2h0IMKpIDIwMTkgTWNBZmVlLCBMTEMuIEFsbCByaWdodHMgcmVzZXJ2ZWQuPGJyPiA8YSBocmVmPSJodHRwOi8vd3d3Lm1jYWZlZS5jb20iPnd3dy5tY2FmZWUuY29tPC9hPgo8L2Rpdj4KPC9ib2R5Pgo8L2h0bWw+Cgo=",
+  "report": {
+    "Summary": {
+      "Subject": {
+        "Name": "test.txt",
+        "md5": "0B47F671BC6328623DFA10851D418E55"
+      },
+      "Verdict": {
+        "Description": "Invalid file type, or invalid file size, or local heuristics determine the file to have a low probability of being malicious, or contain malicious intent.",
+        "Severity": "-2"
+      }
+    }
+  }
+}
+```
 
 #### List Analyzer Profiles
 
@@ -341,6 +392,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.5.0 - New action Get Report
 * 1.4.0 - New action List Analyzer Profiles
 * 1.3.0 - New action Submit File
 * 1.2.0 - New action Submit URL

@@ -11,7 +11,7 @@ Ivanti Security Controls is a unified IT management platform used for managing a
 
 * Ivanti Security Controls 2019.3 (Build: 9.4.34544) or later
 * Ivanti Security Controls host and API port (default: 3121)
-* Username and password of Windows account where Ivanti Security Controls is installed 
+* Username and password of Windows account where Ivanti Security Controls is installed
 * (Recommended) Ivanti Security Controls certificate in order to enforce certificate verification
 
 # Documentation
@@ -42,27 +42,28 @@ Example input:
 
 ### Actions
 
-#### Start Patch Deployment
+#### Create Patch Group
 
-This action is used to start patch deployment.
-
-In case if Scan Identifier provided is a name, the action will use the ID of the latest scan with that name. 
+This action is used to create a new patch group with CVEs.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|download_patches|boolean|None|True|Boolean to initiate patch download before starting the deployment|None|False|
-|scan_identifier|string|None|True|A scan ID or scan name|None|01234567-89AB-CDEF-0123-456789ABCDEF|
-|template_identifier|string|None|True|A template ID or template name|None|Deployment Template created from InsightConnect|
+|cves|[]string|None|True|The CVEs that should be included in the new patch group|None|["cve-2019-0701", "CVE-2019-0708"]|
+|name|string|None|True|The name of the new patch group|None|New Patch Group|
+|path|string|None|False|The path that describes the location of the patch group within the Patch Templates and Groups list in the navigation pane|None|Lab\Servers|
 
 Example input:
 
 ```
 {
-  "download_patches": false,
-  "scan_identifier": "01234567-89AB-CDEF-0123-456789ABCDEF",
-  "template_identifier": "Deployment Template created from InsightConnect"
+  "cves": [
+    "cve-2019-0701",
+    "CVE-2019-0708"
+  ],
+  "name": "New Patch Group",
+  "path": "Lab\\Servers"
 }
 ```
 
@@ -70,31 +71,53 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|True|Was operation successful|
+|patch_group|patch_group|True|Detailed information about the patch group|
 
 Example output:
 
 ```
 {
-  "success": true
+  "patch_group": {
+    "id": 10,
+    "links": {
+      "self": {
+        "href": "https://example.com:3121/st/console/api/v1.0/patch/groups/10"
+      },
+      "patches": {
+        "href": "https://example.com:3121/st/console/api/v1.0/patch/groups/10/patches"
+      },
+      "usedby": {
+        "href": "https://example.com:3121/st/console/api/v1.0/patch/groups/10/usedby"
+      }
+    },
+    "name": "example-patch-group"
+  }
 }
 ```
 
-#### Get Patch Deployment Template ID
+#### Create Patch Scan Template
 
-This action is used to get a Patch Deployment Template ID by searching for the Patch Deployment Template Name.
+This action is used to create a new patch scan template.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|patch_deployment_template_name|string|None|True|The name of the patch deployment template|None|Patch Deployment Template created from InsightConnect|
+|description|string|None|False|Description that explains the purpose of this patch scan template|None|Patch Scan Template created from InsightConnect|
+|name|string|None|True|Name of the patch scan template|None|ExamplePatchScanTemplate|
+|patchGroupIds|[]integer|None|True|The IDs of the patch groups to use|None|1|
+|path|string|None|False|Path to the location of the machine group within the Patch Scan Templates list in the navigation pane|None|Lab\Servers|
+|threadCount|integer|None|False|Specifies maximum number of machines that can be simultaneously scanned during one patch scan|None|1|
 
 Example input:
 
 ```
 {
-  "patch_deployment_template_name": "Patch Deployment Template created from InsightConnect"
+  "description": "Patch Scan Template created from InsightConnect",
+  "name": "ExamplePatchScanTemplate",
+  "patchGroupIds": 1,
+  "path": "Lab\\Servers",
+  "threadCount": 1
 }
 ```
 
@@ -102,13 +125,43 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|patch_deployment_template_id|string|True|The ID of the patch deployment template|
+|patch_scan_template|patch_scan_template|True|Detailed information about the patch scan template|
 
 Example output:
 
 ```
 {
-  "patch_deployment_template_id": "01234567-89AB-CDEF-0123-456789ABCDEF"
+    "patch_scan_template": {
+        "creator": "IVANTI-W16\\Administrator",
+        "description": "Example Patch Scan Templete Description",
+        "id": "4374292d-3465-4d77-b752-c4eccd91bba5",
+        "isSystem": false,
+        "links": {
+            "self": {
+                "href": "https://example.com:3121/st/console/api/v1.0/patch/scanTemplates/4374292d-3465-4d77-b752-c4eccd91bba5"
+            },
+            "usedby": {
+                "href": "https://example.com:3121/st/console/api/v1.0/patch/scanTemplates/4374292d-3465-4d77-b752-c4eccd91bba5/usedby"
+            }
+        },
+        "name": "example-patch-scan-template",
+        "patchFilter": {
+            "patchGroupFilterType": "Scan",
+            "patchGroupIds": [
+                2,
+                3
+            ],
+            "patchPropertyFilter": {
+                "customActions": false,
+                "nonSecurityPatchSeverities": "None",
+                "securityPatchSeverities": "None",
+                "securityTools": false
+            },
+            "scanFor": "NecessaryExplicitlyInstalled",
+            "softwareDistribution": false,
+            "vendorFamilyProductFilter": {}
+        }
+    }
 }
 ```
 
@@ -814,6 +867,7 @@ _This plugin does not contain any troubleshooting information._
 # Version History
 
 * 1.4.0 - New actions Get Patch Deployment Template ID, Start Patch Deployment
+* 1.3.0 - New actions Create Patch Group and Add CVEs, Create Patch Scan Template
 * 1.2.1 - Added session credentials and changed polling method for Start Patch Scan
 * 1.2.0 - New actions Get Patch Deployment, Get Patch Details and Search Patches
 * 1.1.0 - Add actions Start Patch Scan, Get Patch Scan Status and Get Scanned Machine Details

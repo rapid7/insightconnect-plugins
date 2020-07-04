@@ -26,6 +26,12 @@ class CreateAddressObject(komand.Action):
         # If not it will check if the host ends with 2 chars. If this is true it is assumed to be a valid FQDN
         # Else it is assumed to be an invalid IP
         type_ = "ipmask"
+
+        # White_list expects a IP rather than a CIDR, The rest of this action requires a CIRD
+        # whitelist_ref will save a version of the host without the CIRD
+        whitelist_ref = host
+        if host.endswith("/32"):
+            whitelist_ref = host[:-3]
         try:
             host = ipaddress.ip_network(host)
         except ValueError:
@@ -35,7 +41,7 @@ class CreateAddressObject(komand.Action):
                                       data=host)
             type_ = "fqdn"
 
-        if type_ == "ipmask" and skip_rfc1918 is True and ipaddress.ip_address(host).is_private:
+        if type_ == "ipmask" and skip_rfc1918 is True and ipaddress.ip_network(host).is_private:
             return {Output.SUCCESS: False,
                     Output.RESPONSE_OBJECT: {"message": f"The IP address specified ({host}) is private and will be ignored as per "
                                                         f"the action configuration."}}
@@ -43,7 +49,7 @@ class CreateAddressObject(komand.Action):
         found = False
         host = str(host)
         if whitelist:
-            found = helper.match_whitelist(host, whitelist)
+            found = helper.match_whitelist(whitelist_ref, whitelist)
         if not found:
             payload = {
                 "name": name if name else host,

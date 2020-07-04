@@ -8,10 +8,10 @@ class Decode(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='decode',
-                description=Component.DESCRIPTION,
-                input=DecodeInput(),
-                output=DecodeOutput())
+            name='decode',
+            description=Component.DESCRIPTION,
+            input=DecodeInput(),
+            output=DecodeOutput())
 
     def run(self, params={}):
         try:
@@ -24,6 +24,8 @@ class Decode(komand.Action):
                 return {Output.DATA: result.decode('utf-8')}
         except Exception as e:
             self.logger.error("An error has occurred while decoding ", e)
-            raise PluginException(cause="Internal error",
-                                  assistance='An error has occurred while decoding ',
-                                  data=e)
+            raise PluginException(
+                cause="Failed to decode because valid base64 input was not provided.",
+                assistance='If you would like continue to attempt to decode the input try setting the value of the error field to ignore errors or to replace the characters.',
+                data=e
+            )
