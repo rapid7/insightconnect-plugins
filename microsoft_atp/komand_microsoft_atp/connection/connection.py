@@ -140,6 +140,8 @@ class Connection(komand.Connection):
         try:
             response.raise_for_status()
         except Exception as e:
+            # TODO: Check to see if action is pending. It will throw a 400 error if it is.
+            # It's a pain however, as we'll have to search through all the current actions to find this one
             raise ConnectionTestException(cause=f"Connection error occurred while connecting to: {endpoint_url}. Error "
                                                 f"was: {e}",
                                           assistance="Check connection settings for proper resource URL and host "
@@ -151,7 +153,7 @@ class Connection(komand.Connection):
 
     def unisolate_machine(self, id, comment):
         self.check_and_refresh_api_token()
-        endpoint_url = f"https://api.securitycenter.windows.com/api/machines/{id}/isolate"
+        endpoint_url = f"https://api.securitycenter.windows.com/api/machines/{id}/unisolate"
         body = {
             "Comment": comment
         }

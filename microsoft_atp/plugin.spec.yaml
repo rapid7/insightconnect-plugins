@@ -327,6 +327,47 @@ types:
        type: string
        description: "Version"
        required: false
+  machine_action:
+     creationDateTimeUtc:
+       title: "Creation Date Time UTC"
+       type: string
+       description: "Creation date time UTC"
+       required: false
+     errorHResult:
+       title: "Error HResult"
+       type: integer
+       description: "Error HResult"
+       required: false
+     id:
+       title: "ID"
+       type: string
+       description: "ID"
+       required: false
+     lastUpdateDateTimeUtc:
+       title: "Last Update Date Time UTC"
+       type: string
+       description: "Last update date time utc"
+       required: false
+     machineId:
+       title: "Machine ID"
+       type: string
+       description: "Machine ID"
+       required: false
+     requestor:
+       title: "Requestor"
+       type: string
+       description: "Requestor"
+       required: false
+     requestorComment:
+       title: "Requestor Comment"
+       type: string
+       description: "Requestor comment"
+       required: false
+     status:
+       title: "Status"
+       type: string
+       description: "Status"
+       required: false
 
 connection:
   application_id:
@@ -410,10 +451,10 @@ actions:
         required: true
     output:
       machine_isolation_response:
-        type: object
+        type: machine_action
         title: Machine Action Response
         description: A response that includes the result of the action, and supplemental
-          information about the action taken
+          information about the action taken.
         required: true
   unisolate_machine:
     title: Unisolate Machine
@@ -431,7 +472,7 @@ actions:
         required: true
     output:
       machine_isolation_response:
-        type: object
+        type: machine_action
         title: Machine Action Response
         description: A response that includes the result of the action, and supplemental
           information about the action taken
@@ -457,7 +498,7 @@ actions:
         required: true
     output:
       stop_and_quarantine_response:
-        type: object
+        type: machine_action
         title: Stop and Quarantine Response
         description: A response that includes the result of the action, and supplemental
           information about the action taken
@@ -486,7 +527,7 @@ actions:
         - Quick
     output:
       machine_action_response:
-        type: object
+        type: machine_action
         title: Machine Action Response
         description: A response that includes the result of the action, and supplemental
           information about the action taken
@@ -502,7 +543,7 @@ actions:
         required: true
     output:
       machine_action_response:
-        type: object
+        type: machine_action
         title: Machine Action Response
         description: A response that includes the result of the action, and supplemental
           information about the action taken

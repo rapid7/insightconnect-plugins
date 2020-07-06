@@ -121,7 +121,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|machine_isolation_response|object|True|A response that includes the result of the action, and supplemental information about the action taken|
+|machine_isolation_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken.|
 
 Example output:
 
@@ -160,7 +160,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|machine_isolation_response|object|True|A response that includes the result of the action, and supplemental information about the action taken|
+|machine_isolation_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|
 
 Example output:
 
@@ -200,7 +200,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|stop_and_quarantine_response|object|True|A response that includes the result of the action, and supplemental information about the action taken|
+|stop_and_quarantine_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|
 
 Example output:
 
@@ -243,7 +243,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|machine_action_response|object|True|A response that includes the result of the action, and supplemental information about the action taken|
+|machine_action_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|
 
 Example output:
 
@@ -281,7 +281,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|machine_action_response|object|True|A response that includes the result of the action, and supplemental information about the action taken|
+|machine_action_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|
 
 Example output:
 

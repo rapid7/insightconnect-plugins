@@ -61,7 +61,7 @@ class StopAndQuarantineFileOutput(komand.Output):
   "title": "Variables",
   "properties": {
     "stop_and_quarantine_response": {
-      "type": "object",
+      "$ref": "#/definitions/machine_action",
       "title": "Stop and Quarantine Response",
       "description": "A response that includes the result of the action, and supplemental information about the action taken",
       "order": 1
@@ -69,7 +69,63 @@ class StopAndQuarantineFileOutput(komand.Output):
   },
   "required": [
     "stop_and_quarantine_response"
-  ]
+  ],
+  "definitions": {
+    "machine_action": {
+      "type": "object",
+      "title": "machine_action",
+      "properties": {
+        "creationDateTimeUtc": {
+          "type": "string",
+          "title": "Creation Date Time UTC",
+          "description": "Creation date time UTC",
+          "order": 1
+        },
+        "errorHResult": {
+          "type": "integer",
+          "title": "Error HResult",
+          "description": "Error HResult",
+          "order": 2
+        },
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "ID",
+          "order": 3
+        },
+        "lastUpdateDateTimeUtc": {
+          "type": "string",
+          "title": "Last Update Date Time UTC",
+          "description": "Last update date time utc",
+          "order": 4
+        },
+        "machineId": {
+          "type": "string",
+          "title": "Machine ID",
+          "description": "Machine ID",
+          "order": 5
+        },
+        "requestor": {
+          "type": "string",
+          "title": "Requestor",
+          "description": "Requestor",
+          "order": 6
+        },
+        "requestorComment": {
+          "type": "string",
+          "title": "Requestor Comment",
+          "description": "Requestor comment",
+          "order": 7
+        },
+        "status": {
+          "type": "string",
+          "title": "Status",
+          "description": "Status",
+          "order": 8
+        }
+      }
+    }
+  }
 }
     """)
 
