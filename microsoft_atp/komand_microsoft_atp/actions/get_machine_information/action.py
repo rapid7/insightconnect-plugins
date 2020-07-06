@@ -17,8 +17,7 @@ class GetMachineInformation(komand.Action):
 
         machine_id = params.get(Input.MACHINE_ID)
 
-        self.logger.info("Attempting to get information for machine ID: " + machine_id)
+        self.logger.info(f"Attempting to get information for machine ID: {machine_id}")
         response = self.connection.get_machine_information(machine_id)
 
         return {Output.MACHINE: komand.helper.clean(response)}
-
