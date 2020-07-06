@@ -8,6 +8,7 @@ class Component:
 
 
 class Input:
+    ACCOUNT_ID = "account_id"
     USERNAME = "username"
     
 
@@ -21,16 +22,19 @@ class DeleteUserInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "account_id": {
+      "type": "string",
+      "title": "Account ID",
+      "description": "Unique identifier for an Atlassian account",
+      "order": 2
+    },
     "username": {
       "type": "string",
       "title": "Username",
       "description": "Username",
       "order": 1
     }
-  },
-  "required": [
-    "username"
-  ]
+  }
 }
     """)
 

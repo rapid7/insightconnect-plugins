@@ -18,16 +18,39 @@ class McAfeeATDAPI:
             'Invalid input data': 'Invalid hash value'
         }
 
+    def get_report(self, id: str, return_type: str, type_id: str):
+        param = "md5"
+        if type_id == "TASK ID":
+            param = "iTaskId"
+        elif type_id == "JOB ID":
+            param = "jobId"
+
+        return self._make_login_request(
+            "GET",
+            "showreport.php",
+            params={
+                param: id,
+                "iType": return_type
+            },
+            full_response=True
+        )
+
+    def list_analyzer_profiles(self):
+        return self._make_login_request(
+            "GET",
+            "vmprofiles.php"
+        )
+
     def submit_file(self, file: dict, url_for_file: str) -> dict:
         type_number = "0"
         if url_for_file:
             type_number = "2"
         return self._make_login_request(
-                "POST",
-                "fileupload.php",
-                json_data={'data': json.dumps({'data': {"url": url_for_file, "submitType": type_number}})},
-                files={'amas_filename': base64.decodebytes(file.get('content').encode('utf-8'))}
-            )
+            "POST",
+            "fileupload.php",
+            json_data={'data': json.dumps({'data': {"url": url_for_file, "submitType": type_number}})},
+            files={'amas_filename': base64.decodebytes(file.get('content').encode('utf-8'))}
+        )
 
     def submit_url(self, url: str, submit_type: str) -> dict:
         number_type = "1"
@@ -91,7 +114,8 @@ class McAfeeATDAPI:
 
         raise ConnectionTestException(ConnectionTestException.Preset.USERNAME_PASSWORD)
 
-    def _make_login_request(self, method: str, path: str, json_data: dict = None, params: dict = None, files: dict = None):
+    def _make_login_request(self, method: str, path: str, json_data: dict = None, params: dict = None,
+                            files: dict = None, full_response: bool = False):
         headers = None
         try:
             headers = self._get_login_headers()
@@ -101,7 +125,8 @@ class McAfeeATDAPI:
                 params=params,
                 data=json_data,
                 files=files,
-                headers=headers
+                headers=headers,
+                full_response=full_response
             )
             return response
         except ConnectionTestException as e:

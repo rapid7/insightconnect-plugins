@@ -1,8 +1,16 @@
 {
-	"spec": "b27212c8d7d7d027e5605c59e720dc95",
-	"manifest": "6dfa0bc2aa952b45364c56a81a335dec",
-	"setup": "14dca5190313a102f387a8c694d18ca8",
+	"spec": "9e4478b979f0b6588b647567040fb5f0",
+	"manifest": "788ee8c9c684bd03624d96e1902b654e",
+	"setup": "97ab32040f0e9dafb41cd29b86bca71f",
 	"schemas": [
+		{
+			"identifier": "create_patch_group_and_add_cves/schema.py",
+			"hash": "06e50a9ce549deddcc8a1a467ab60572"
+		},
+		{
+			"identifier": "create_patch_scan_template/schema.py",
+			"hash": "78bb62a5e3f77055e46a6980519579d3"
+		},
 		{
 			"identifier": "get_agent/schema.py",
 			"hash": "bd4900e521eb00ef0c86d6b73fd1fb55"
@@ -20,6 +28,10 @@
 			"hash": "1e509a6baadb1be01473919aad6cf8e2"
 		},
 		{
+			"identifier": "get_patch_deployment_template_id/schema.py",
+			"hash": "8f8b04af979211d7da2d89352799f073"
+		},
+		{
 			"identifier": "get_patch_details/schema.py",
 			"hash": "77501bf845fbd281c9007415d7615023"
 		},
@@ -34,6 +46,10 @@
 		{
 			"identifier": "search_patches/schema.py",
 			"hash": "fc344937b62340d0da188153afe688b4"
+		},
+		{
+			"identifier": "start_patch_deployment/schema.py",
+			"hash": "a423b291913b7ba6b191f11400bb9d92"
 		},
 		{
 			"identifier": "start_patch_scan/schema.py",

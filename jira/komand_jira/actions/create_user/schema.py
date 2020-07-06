@@ -56,8 +56,7 @@ class CreateUserInput(komand.Input):
   },
   "required": [
     "email",
-    "notify",
-    "username"
+    "notify"
   ]
 }
     """)
