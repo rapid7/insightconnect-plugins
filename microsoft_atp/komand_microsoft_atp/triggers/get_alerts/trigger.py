@@ -16,7 +16,7 @@ class GetAlerts(komand.Trigger):
     def run(self, params={}):
         """Run the trigger"""
 
-        frequency = params.get("frequency", 10)
+        frequency = params.get(Input.FREQUENCY, 10)
 
         # Set a baseline for the time to start looking for alerts.
         initial_results = self.connection.get_all_alerts(query_parameters="?$orderby=alertCreationTime+desc&$top=1")
