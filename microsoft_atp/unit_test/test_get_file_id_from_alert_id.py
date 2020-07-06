@@ -11,19 +11,6 @@ import logging
 
 class TestGetFileIdFromAlertId(TestCase):
     def test_integration_get_file_id_from_alert_id(self):
-        """
-        TODO: Implement assertions at the end of this test case
-
-        This is an integration test that will connect to the services your plugin uses. It should be used
-        as the basis for tests below that can run independent of a "live" connection.
-
-        This test assumes a normal plugin structure with a /tests directory. In that /tests directory should
-        be json samples that contain all the data needed to run this test. To generate samples run:
-
-        icon-plugin generate samples
-
-        """
-
         log = logging.getLogger("Test")
         test_conn = Connection()
         test_action = GetFileIdFromAlertId()
@@ -50,23 +37,6 @@ class TestGetFileIdFromAlertId(TestCase):
         test_action.connection = test_conn
         results = test_action.run(action_params)
 
-        # TODO: Remove this line
-        self.fail("Unimplemented test case")
-
         # TODO: The following assert should be updated to look for data from your action
-        # For example: self.assertEquals({"success": True}, results) 
-        self.assertEquals({}, results)
-
-    def test_get_file_id_from_alert_id(self):
-        """
-        TODO: Implement test cases here
-
-        Here you can mock the connection with data returned from the above integration test.
-        For information on mocking and unit testing please go here:
-
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
-
-        You can either create a formal Mock for this, or you can create a fake connection class to pass to your
-        action for testing.
-        """
-        self.fail("Unimplemented Test Case")
+        # For example: self.assertEquals({"success": True}, results)
+        self.assertTrue("file_list" in results.keys())

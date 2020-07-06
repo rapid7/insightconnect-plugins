@@ -12,7 +12,7 @@ class Input:
     
 
 class Output:
-    FILE_INFORMATION = "file_information"
+    FILE_LIST = "file_list"
     
 
 class GetFileIdFromAlertIdInput(komand.Input):
@@ -44,16 +44,40 @@ class GetFileIdFromAlertIdOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "file_information": {
-      "type": "object",
+    "file_list": {
+      "type": "array",
       "title": "File Information",
       "description": "The file ID related to the given alert ID",
+      "items": {
+        "$ref": "#/definitions/file"
+      },
       "order": 1
     }
   },
   "required": [
-    "file_information"
-  ]
+    "file_list"
+  ],
+  "definitions": {
+    "file": {
+      "id": "file",
+      "type": "object",
+      "title": "File",
+      "description": "File Object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "title": "Content",
+          "description": "File contents",
+          "format": "bytes"
+        },
+        "filename": {
+          "type": "string",
+          "title": "Filename",
+          "description": "Name of file"
+        }
+      }
+    }
+  }
 }
     """)
 

@@ -164,6 +164,92 @@ types:
       description: "Evidence"
       required: false
 
+  file_type:
+    sha1:
+      title: "SHA1"
+      type: string
+      description: "SHA1"
+      required: false
+    sha256:
+      title: "SHA256"
+      type: string
+      description: "SHA256"
+      required: false
+    md5:
+      title: "MD5"
+      type: string
+      description: "MD5"
+      required: false
+    globalPrevalence:
+      title: "Global Prevalence"
+      type: integer
+      description: "Global prevalence"
+      required: false
+    globalFirstObserved:
+      title: "Global First Observed"
+      type: string
+      description: "Global first observed"
+      required: false
+    globalLastObserved:
+      title: "Global Last Observed"
+      type: string
+      description: "Global last observed"
+      required: false
+    size:
+      title: "Size"
+      type: integer
+      description: "Size"
+      required: false
+    fileType:
+      title: "File Type"
+      type: string
+      description: "File type"
+      required: false
+    isPeFile:
+      title: "Is PE File"
+      type: boolean
+      description: "Is PE File"
+      required: false
+    filePublisher:
+      title: "File Publisher"
+      type: string
+      description: "File publisher"
+      required: false
+    fileProductName:
+      title: "File Product Name"
+      type: string
+      description: "File product name"
+      required: false
+    signer:
+      title: "Signer"
+      type: string
+      description: "Signer"
+      required: false
+    issuer:
+      title: "Issuer"
+      type: string
+      description: "Issuer"
+      required: false
+    signerHash:
+      title: "Signer Hash"
+      type: string
+      description: "Signer hash"
+      required: false
+    isValidCertificate:
+      title: "Is Valid Certificate"
+      type: boolean
+      description: "Is valid certificate"
+      required: false
+    determinationType:
+      title: "Determination Type"
+      type: string
+      description: "Determination type"
+      required: false
+    determinationValue:
+      title: "Determination Value"
+      type: string
+      description: "Determination value"
+      required: false
 
 connection:
   application_id:
@@ -205,19 +291,20 @@ actions:
         type: object
         required: true
   get_file_id_from_alert_id:
-    title: Get File ID from Alert
-    description: Retrieve the file ID related to an alert
+    title: Get Files from Alert
+    description: Retrieve a list of file information objects related to an alert
     input:
       alert_id:
         type: string
         title: Alert ID
         description: Alert ID to get files from
+        example: da637293198146839977_2089064327
         required: true
     output:
-      file_information:
+      file_list:
         title: File Information
         description: The file ID related to the given alert ID
-        type: object
+        type: "[]file"
         required: true
   isolate_machine:
     title: Isolate Machine

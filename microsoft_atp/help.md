@@ -106,7 +106,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|file_information|object|True|The file ID related to the given alert ID|
+|file_list|[]file|True|The file ID related to the given alert ID|
 
 Example output:
 
