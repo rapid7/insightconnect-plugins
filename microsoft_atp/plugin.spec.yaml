@@ -498,7 +498,7 @@ actions:
         required: true
       sha1:
         type: string
-        title: SHA1
+        title: SHA1 Hash
         description: SHA1 of the file to stop and quarantine on the machine
         example: ad0c0f2fa80411788e81a4567d1d8758b83cd76e
         required: true
