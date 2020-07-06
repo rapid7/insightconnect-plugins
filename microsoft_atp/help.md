@@ -29,17 +29,17 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|application_id|string|None|True|Application (client) ID|None|xxxxxxx-xxxxxx-xxxxx-xxxx|
-|application_secret|credential_secret_key|None|True|Application secret|None|xxxxxxxxxxxxxxxxxxxxx|
-|directory_id|string|None|True|Directory (tenant) ID|None|xxxx-xxxx-xxxx-xxxx-xxx|
+|application_id|string|None|True|Application (client) ID|None|a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d|
+|application_secret|credential_secret_key|None|True|Application secret|None|kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=|
+|directory_id|string|None|True|Directory (tenant) ID|None|3a522933-ae5e-2b63-96ab-3c004b4f7f10|
 
 Example input:
 
 ```
 {
-  "application_id": "xxxxxxx-xxxxxx-xxxxx-xxxx",
-  "application_secret": "xxxxxxxxxxxxxxxxxxxxx",
-  "directory_id": "xxxx-xxxx-xxxx-xxxx-xxx"
+  "application_id": "a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d",
+  "application_secret": "kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=",
+  "directory_id": "3a522933-ae5e-2b63-96ab-3c004b4f7f10"
 }
 ```
 
@@ -197,14 +197,14 @@ This action is used to restore network connectivity to a machine.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|comment|string|None|True|Comment to associate with the unisolate action|None|InsightConnect is removing isolation|
+|comment|string|None|True|Comment to associate with the unisolate action|None|Unisolated by InsightConnect|
 |machine_id|string|None|True|Machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 
 Example input:
 
 ```
 {
-  "comment": "InsightConnect is removing isolation",
+  "comment": "Unisolated by InsightConnect",
   "machine_id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
 }
 ```
@@ -242,7 +242,7 @@ This action is used to stop the execution of a file on a machine and delete it.
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|None|True|Comment to associate with the stop and quarantine action|None|InsightConnect has stopped a file.|
 |machine_id|string|None|True|Machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
-|sha1|string|None|True|SHA1 of the file to stop and quarantine on the machine|None|ad0c0f2fa80411788e81a4567d1d8758b83cd76e|
+|sha1|string|None|True|SHA1 hash of the file to stop and quarantine on the machine|None|ad0c0f2fa80411788e81a4567d1d8758b83cd76e|
 
 Example input:
 
@@ -383,8 +383,7 @@ Example input:
 
 ```
 {
-  "key": "assignedTo",
-  "value": "user@example.com"
+  "frequency": 10
 }
 ```
 

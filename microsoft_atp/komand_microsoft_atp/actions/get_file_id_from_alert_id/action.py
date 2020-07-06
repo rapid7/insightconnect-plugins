@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetFileIdFromAlertIdInput, GetFileIdFromAlertIdOutput, Input, Output
 # Custom imports below
 
 
-class GetFileIdFromAlertId(komand.Action):
+class GetFileIdFromAlertId(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -20,4 +20,4 @@ class GetFileIdFromAlertId(komand.Action):
         file_payload = self.connection.get_files_from_id(alert_id)
         files = file_payload.get("value")
 
-        return {Output.FILE_LIST: komand.helper.clean(files)}
+        return {Output.FILE_LIST: insightconnect_plugin_runtime.helper.clean(files)}

@@ -1,13 +1,13 @@
 from .schema import ConnectionSchema, Input
-import komand
+import insightconnect_plugin_runtime
 # Custom imports below
-from komand.exceptions import ConnectionTestException, PluginException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 import json
 import requests
 import time
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
 
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
@@ -123,7 +123,7 @@ class Connection(komand.Connection):
             self.logger.error("Alerts returned were in an unexpected format!")
             raise PluginException(PluginException.Preset.INVALID_JSON, data=response.text)
 
-        return komand.helper.clean(matching_alerts)
+        return insightconnect_plugin_runtime.helper.clean(matching_alerts)
 
     def isolate_machine(self, id, isolation_type, comment):
         self.check_and_refresh_api_token()

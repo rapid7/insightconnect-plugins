@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 import time
 from .schema import GetAlertMatchingKeyInput, GetAlertMatchingKeyOutput, Input, Output
 # Custom imports below
 
 
-class GetAlertMatchingKey(komand.Trigger):
+class GetAlertMatchingKey(insightconnect_plugin_runtime.Trigger):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -48,7 +48,7 @@ class GetAlertMatchingKey(komand.Trigger):
             for alert in current_results_list:
                 current_value = alert.get(alert_key)
                 if current_value == alert_value:
-                    self.send({Output.RESULTS: komand.helper.clean(alert)})
+                    self.send({Output.RESULTS: insightconnect_plugin_runtime.helper.clean(alert)})
                     self.logger.info("\n") # This keeps the logs easier to read, Send doesn't add newlines
                 else:
                     self.logger.info(f"Found new alert, however, value {current_value} did not match {alert_value}."

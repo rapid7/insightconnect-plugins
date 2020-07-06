@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetMachineActionInput, GetMachineActionOutput
 # Custom imports below
 
 
-class GetMachineAction(komand.Action):
+class GetMachineAction(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -19,4 +19,4 @@ class GetMachineAction(komand.Action):
 
         self.logger.info("Attempting to get action for action ID: " + action_id)
         response = self.connection.get_machine_action(action_id)
-        return {"machine_action_response": komand.helper.clean(response)}
+        return {"machine_action_response": insightconnect_plugin_runtime.helper.clean(response)}

@@ -375,21 +375,21 @@ connection:
     description: Application (client) ID
     type: string
     required: true
-    example: xxxxxxx-xxxxxx-xxxxx-xxxx
+    example: a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d
     order: 1
   application_secret:
     title: Application Secret
     description: Application secret
     type: credential_secret_key
     required: true
-    example: xxxxxxxxxxxxxxxxxxxxx
+    example: kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=
     order: 2
   directory_id:
     title: Directory ID
     description: Directory (tenant) ID
     type: string
     required: true
-    example: xxxx-xxxx-xxxx-xxxx-xxx
+    example: 3a522933-ae5e-2b63-96ab-3c004b4f7f10
     order: 3
 
 actions:

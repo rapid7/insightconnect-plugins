@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import RunAntivirusScanInput, RunAntivirusScanOutput
 # Custom imports below
 
 
-class RunAntivirusScan(komand.Action):
+class RunAntivirusScan(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -21,4 +21,4 @@ class RunAntivirusScan(komand.Action):
 
         self.logger.info("Attempting to run a " + scan_type + " antivirus scan on machine id: " + machine_id)
         response = self.connection.run_antivirus_scan(machine_id, scan_type, comment)
-        return {"machine_action_response": komand.helper.clean(response)}
+        return {"machine_action_response": insightconnect_plugin_runtime.helper.clean(response)}

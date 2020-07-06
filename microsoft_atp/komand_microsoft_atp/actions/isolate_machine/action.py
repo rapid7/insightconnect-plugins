@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import IsolateMachineInput, IsolateMachineOutput, Input, Output
 # Custom imports below
 
 
-class IsolateMachine(komand.Action):
+class IsolateMachine(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -21,4 +21,4 @@ class IsolateMachine(komand.Action):
 
         self.logger.info("Attempting to isolate machine id: " + machine_id)
         response = self.connection.isolate_machine(machine_id, isolation_type, comment)
-        return {Output.MACHINE_ISOLATION_RESPONSE: komand.helper.clean(response)}
+        return {Output.MACHINE_ISOLATION_RESPONSE: insightconnect_plugin_runtime.helper.clean(response)}
