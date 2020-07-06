@@ -33,7 +33,6 @@ class GetAlertMatchingKey(komand.Trigger):
         # Start looking for new results
         while True:
             query_params = f"?$filter=alertCreationTime+gt+{most_recent_time_string}&$orderby=alertCreationTime+desc"
-            # query_params = ""
 
             self.logger.info("Looking for new alerts.")
             self.logger.info(f"Query params:{query_params}")
