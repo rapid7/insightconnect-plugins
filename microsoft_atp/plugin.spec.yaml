@@ -428,7 +428,7 @@ actions:
         required: true
   isolate_machine:
     title: Isolate Machine
-    description: Isolate a machine from the network, but keep the connection to Windows ATP open
+    description: Isolate a machine from the network
     input:
       machine_id:
         type: string
