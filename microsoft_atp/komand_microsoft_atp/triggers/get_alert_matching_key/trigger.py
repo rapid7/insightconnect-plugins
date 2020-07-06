@@ -17,7 +17,7 @@ class GetAlertMatchingKey(komand.Trigger):
         alert_key = params.get(Input.KEY)
         alert_value = params.get(Input.VALUE)
 
-        frequency = params.get("frequency", 10)
+        frequency = params.get(Input.FREQUENCY, 10)
 
         # Set a baseline for the time to start looking for alerts.
         initial_results = self.connection.get_all_alerts(query_parameters="?$orderby=alertCreationTime+desc&$top=1")
