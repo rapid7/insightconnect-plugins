@@ -395,7 +395,7 @@ connection:
 actions:
   get_machine_information:
     title: Get Machine Information
-    description: Get details about a machine with it's ID
+    description: Get details about a machine with its ID
     input:
       machine_id:
         title: Machine ID
