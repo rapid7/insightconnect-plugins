@@ -23,7 +23,7 @@ class GetAlertMatchingKey(komand.Trigger):
         initial_results = self.connection.get_all_alerts(query_parameters="?$orderby=alertCreationTime+desc&$top=1")
         all_results = initial_results.json()
 
-        if len(all_results.get("value")):
+        if len(all_results.get("value", [])):
             most_recent_result = all_results.get("value")[0]
             most_recent_time_string = most_recent_result.get("alertCreationTime")
         else:
