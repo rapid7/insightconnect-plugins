@@ -100,7 +100,7 @@ class RunAntivirusScanOutput(komand.Output):
         "lastUpdateDateTimeUtc": {
           "type": "string",
           "title": "Last Update Date Time UTC",
-          "description": "Last update date time utc",
+          "description": "Last update date time UTC",
           "order": 4
         },
         "machineId": {

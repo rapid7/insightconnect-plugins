@@ -27,7 +27,7 @@ class GetAlertsInput(komand.Input):
       "type": "integer",
       "title": "Frequency",
       "description": "Poll frequency in seconds",
-      "default": 5,
+      "default": 10,
       "order": 1
     }
   }

@@ -1,7 +1,7 @@
 {
-	"spec": "4d368ef900aadb9b22f510ef3232a0f4",
-	"manifest": "cd56eb56f5a8088fa3cd3e58534266a5",
-	"setup": "a84ebbaffc9b3e0940ad1890af39fa94",
+	"spec": "4aeda7894ec78b2595b9daa7fbe11289",
+	"manifest": "1b18107c274fd927fdc2dfd029eb1ca6",
+	"setup": "15e57080cf70ad306ee3a153b5a3a3d7",
 	"schemas": [
 		{
 			"identifier": "get_file_id_from_alert_id/schema.py",
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "get_machine_action/schema.py",
-			"hash": "55e4453a6df49180a31f27155c4c1114"
+			"hash": "4c7f731644ff198d640c02dedfdd6d2f"
 		},
 		{
 			"identifier": "get_machine_information/schema.py",
@@ -17,19 +17,19 @@
 		},
 		{
 			"identifier": "isolate_machine/schema.py",
-			"hash": "50b7f26ef0ec2d66297d524a83260dc7"
+			"hash": "aa632ca4630899df740cfc9ad22823c6"
 		},
 		{
 			"identifier": "run_antivirus_scan/schema.py",
-			"hash": "9f35019e653eaac568d4f299ccd1ff80"
+			"hash": "c0d6a0fc62897253ba0299b8bb91430c"
 		},
 		{
 			"identifier": "stop_and_quarantine_file/schema.py",
-			"hash": "d84d8826fe7ca8537e29ee652d7696f9"
+			"hash": "478bf3a909865e3005f1ff4cfd88bd8b"
 		},
 		{
 			"identifier": "unisolate_machine/schema.py",
-			"hash": "bc2b779625459a70bc46a3bae98b8d7f"
+			"hash": "d1c456032598006056f8307f1e450250"
 		},
 		{
 			"identifier": "connection/schema.py",
@@ -41,7 +41,7 @@
 		},
 		{
 			"identifier": "get_alerts/schema.py",
-			"hash": "3852cf0d001b0b867be93953551e7fbc"
+			"hash": "e576d9abca9ab59b1a42c95c7f0e4f4d"
 		}
 	]
 }

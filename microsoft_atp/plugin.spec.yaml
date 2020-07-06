@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: microsoft_atp
 title: Microsoft Windows Defender ATP
 description: The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
-version: 1.5.1
+version: 2.0.0
 vendor: rapid7
 support: community
 status: []
@@ -346,7 +346,7 @@ types:
      lastUpdateDateTimeUtc:
        title: "Last Update Date Time UTC"
        type: string
-       description: "Last update date time utc"
+       description: "Last update date time UTC"
        required: false
      machineId:
        title: "Machine ID"
@@ -428,19 +428,20 @@ actions:
         required: true
   isolate_machine:
     title: Isolate Machine
-    description: Isolate a machine from the network, but keep the connection to Windows
-      ATP open
+    description: Isolate a machine from the network, but keep the connection to Windows ATP open
     input:
       machine_id:
         type: string
         title: Machine ID
         description: Machine ID
+        example: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73
         required: true
       isolation_type:
         type: string
         description: Type of isolation to perform on target machine
         title: Isolation Type
         required: true
+        example: Full
         enum:
         - Full
         - Selective
@@ -448,13 +449,13 @@ actions:
         type: string
         title: Comment
         description: Comment to associate with the isolation action
+        example: Isolated by InsightConnect
         required: true
     output:
       machine_isolation_response:
         type: machine_action
         title: Machine Action Response
-        description: A response that includes the result of the action, and supplemental
-          information about the action taken.
+        description: A response that includes the result of the action, and supplemental information about the action taken
         required: true
   unisolate_machine:
     title: Unisolate Machine
@@ -464,11 +465,13 @@ actions:
         type: string
         title: Machine ID
         description: Machine ID
+        example: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73
         required: true
       comment:
         type: string
         title: Comment
         description: Comment to associate with the unisolate action
+        example: InsightConnect is removing isolation
         required: true
     output:
       machine_isolation_response:
@@ -485,16 +488,19 @@ actions:
         type: string
         title: Machine ID
         description: Machine ID
+        example: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73
         required: true
       comment:
         type: string
         title: Comment
         description: Comment to associate with the stop and quarantine action
+        example: InsightConnect has stopped a file.
         required: true
       sha1:
         type: string
-        title: Sha1
-        description: Sha1 of the file to stop and quarantine on the machine
+        title: SHA1
+        description: SHA1 of the file to stop and quarantine on the machine
+        example: ad0c0f2fa80411788e81a4567d1d8758b83cd76e
         required: true
     output:
       stop_and_quarantine_response:
@@ -511,17 +517,20 @@ actions:
         type: string
         title: Machine ID
         description: Machine ID
+        example: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73
         required: true
       comment:
         type: string
         title: Comment
         description: Comment to associate with the antivirus scan action
+        example: InsightConnect has started an antivirus scan.
         required: true
       scan_type:
         type: string
         title: Scan Type
         description: The type of antivirus scan to run
         required: true
+        example: Full
         enum:
         - Full
         - Quick
@@ -540,6 +549,7 @@ actions:
         type: string
         title: Action ID
         description: Action ID
+        example: ffd1f0cb-68ad-44ea-bf90-d01061b965ec
         required: true
     output:
       machine_action_response:
@@ -556,11 +566,15 @@ triggers:
       key:
         type: string
         description: The key to look for in the alert
+        example: assignedTo
         required: true
+        order: 1
       value:
         type: string
         description: The value to look for in the alert
+        example: user@example.com
         required: true
+        order: 2
     output:
       results:
         title: Alerts
@@ -574,7 +588,8 @@ triggers:
       frequency:
         type: integer
         description: Poll frequency in seconds
-        default: 5
+        default: 10
+        example: 10
         required: false
     output:
       results:

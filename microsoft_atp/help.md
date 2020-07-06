@@ -14,11 +14,16 @@ This plugin utilizes the [Microsoft ATP API](https://docs.microsoft.com/en-us/wi
 # Requirements
 
 * Windows Defender Advanced Threat Protection application credentials
-* Authentication and Resource URLs for your instance of Windows ATP
 
 # Documentation
 
 ## Setup
+
+This plugin uses the Windows Defender ATP API. It will use an Azure application to connect to the API and run 
+actions from InsightConnect. 
+
+For information on how to setup your application and assign permssions go here:  
+https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp
 
 The connection configuration accepts the following parameters:
 
@@ -69,6 +74,27 @@ Example input:
 Example output:
 
 ```
+{
+  "machine": {
+    "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#Machines/$entity",
+    "id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+    "computerDnsName": "desktop-qo15on7",
+    "firstSeen": "2020-06-26T19:54:48.0962745Z",
+    "lastSeen": "2020-07-02T18:34:23.1871866Z",
+    "osPlatform": "Windows10",
+    "osProcessor": "x64",
+    "version": "2004",
+    "lastIpAddress": "198.51.100.100",
+    "lastExternalIpAddress": "198.51.100.100",
+    "agentVersion": "10.7150.19041.153",
+    "osBuild": 19041,
+    "healthStatus": "Active",
+    "rbacGroupId": 0,
+    "riskScore": "Medium",
+    "exposureLevel": "Low",
+    "machineTags": []
+  }
+}
 ```
 
 #### Get Files from Alert
@@ -98,6 +124,24 @@ Example input:
 Example output:
 
 ```
+{
+  "file_list": [
+    {
+      "sha1": "f093e7767bb63ac973b697d3fd1d40a78b87b8bf",
+      "sha256": "470a75fe3da2ddf9d27fb3f9c96e6c665506ea7ba26ab89f0c89606f678ae4a2",
+      "md5": "a69acb01b99959efec7c0a2a8caa7545",
+      "globalPrevalence": 437,
+      "globalFirstObserved": "2015-11-01T02:48:27.1103102Z",
+      "globalLastObserved": "2020-07-05T07:58:26.8760293Z",
+      "size": 740544,
+      "isPeFile": true,
+      "signerHash": "006276223396f7510653e20f0d10cd1a5d97176e",
+      "isValidCertificate": false,
+      "determinationType": "Unknown",
+      "determinationValue": "HackTool:MSIL/AutoKms"
+    }
+  ]
+}
 ```
 
 #### Isolate Machine
@@ -108,20 +152,25 @@ This action is used to isolate a machine from the network, but keep the connecti
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|comment|string|None|True|Comment to associate with the isolation action|None|None|
-|isolation_type|string|None|True|Type of isolation to perform on target machine|['Full', 'Selective']|None|
-|machine_id|string|None|True|Machine ID|None|None|
+|comment|string|None|True|Comment to associate with the isolation action|None|Isolated by InsightConnect|
+|isolation_type|string|None|True|Type of isolation to perform on target machine|['Full', 'Selective']|Full|
+|machine_id|string|None|True|Machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 
 Example input:
 
 ```
+{
+  "comment": "Isolated by InsightConnect",
+  "isolation_type": "Full",
+  "machine_id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
+}
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|machine_isolation_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken.|
+|machine_isolation_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|
 
 Example output:
 
@@ -148,12 +197,16 @@ This action is used to restore network connectivity to a machine.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|comment|string|None|True|Comment to associate with the unisolate action|None|None|
-|machine_id|string|None|True|Machine ID|None|None|
+|comment|string|None|True|Comment to associate with the unisolate action|None|InsightConnect is removing isolation|
+|machine_id|string|None|True|Machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 
 Example input:
 
 ```
+{
+  "comment": "InsightConnect is removing isolation",
+  "machine_id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
+}
 ```
 
 ##### Output
@@ -187,13 +240,18 @@ This action is used to stop the execution of a file on a machine and delete it.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|comment|string|None|True|Comment to associate with the stop and quarantine action|None|None|
-|machine_id|string|None|True|Machine ID|None|None|
-|sha1|string|None|True|Sha1 of the file to stop and quarantine on the machine|None|None|
+|comment|string|None|True|Comment to associate with the stop and quarantine action|None|InsightConnect has stopped a file.|
+|machine_id|string|None|True|Machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|sha1|string|None|True|SHA1 of the file to stop and quarantine on the machine|None|ad0c0f2fa80411788e81a4567d1d8758b83cd76e|
 
 Example input:
 
 ```
+{
+  "comment": "InsightConnect has stopped a file.",
+  "machine_id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+  "sha1": "ad0c0f2fa80411788e81a4567d1d8758b83cd76e"
+}
 ```
 
 ##### Output
@@ -230,13 +288,18 @@ This action is used to initiate a Windows Defender antivirus scan on a machine.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|comment|string|None|True|Comment to associate with the antivirus scan action|None|None|
-|machine_id|string|None|True|Machine ID|None|None|
-|scan_type|string|None|True|The type of antivirus scan to run|['Full', 'Quick']|None|
+|comment|string|None|True|Comment to associate with the antivirus scan action|None|InsightConnect has started an antivirus scan.|
+|machine_id|string|None|True|Machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|scan_type|string|None|True|The type of antivirus scan to run|['Full', 'Quick']|Full|
 
 Example input:
 
 ```
+{
+  "comment": "InsightConnect has started an antivirus scan.",
+  "machine_id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+  "scan_type": "Full"
+}
 ```
 
 ##### Output
@@ -270,11 +333,14 @@ This action is used to retrieve details about an action taken on a machine.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|action_id|string|None|True|Action ID|None|None|
+|action_id|string|None|True|Action ID|None|ffd1f0cb-68ad-44ea-bf90-d01061b965ec|
 
 Example input:
 
 ```
+{
+  "action_id": "ffd1f0cb-68ad-44ea-bf90-d01061b965ec"
+}
 ```
 
 ##### Output
@@ -310,12 +376,16 @@ This trigger is used to get alerts that match a given key to its value.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|key|string|None|True|The key to look for in the alert|None|None|
-|value|string|None|True|The value to look for in the alert|None|None|
+|key|string|None|True|The key to look for in the alert|None|assignedTo|
+|value|string|None|True|The value to look for in the alert|None|user@example.com|
 
 Example input:
 
 ```
+{
+  "key": "assignedTo",
+  "value": "user@example.com"
+}
 ```
 
 ##### Output
@@ -369,11 +439,14 @@ This trigger is used to return all new alerts.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|frequency|integer|5|False|Poll frequency in seconds|None|None|
+|frequency|integer|10|False|Poll frequency in seconds|None|10|
 
 Example input:
 
 ```
+{
+  "frequency": 10
+}
 ```
 
 ##### Output
@@ -429,6 +502,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.0 - Update to refactor connection and actions
 * 1.5.1 - New spec and help.md format for the Extension Library
 * 1.5.0 - Fix issue where triggers always returned a blank payload
 * 1.4.0 - New trigger Get Alerts | New action Get Machine Action

@@ -67,7 +67,7 @@ class IsolateMachineOutput(komand.Output):
     "machine_isolation_response": {
       "$ref": "#/definitions/machine_action",
       "title": "Machine Action Response",
-      "description": "A response that includes the result of the action, and supplemental information about the action taken.",
+      "description": "A response that includes the result of the action, and supplemental information about the action taken",
       "order": 1
     }
   },
@@ -100,7 +100,7 @@ class IsolateMachineOutput(komand.Output):
         "lastUpdateDateTimeUtc": {
           "type": "string",
           "title": "Last Update Date Time UTC",
-          "description": "Last update date time utc",
+          "description": "Last update date time UTC",
           "order": 4
         },
         "machineId": {
