@@ -22,14 +22,21 @@ This plugin utilizes the [Microsoft ATP API](https://docs.microsoft.com/en-us/wi
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|auth_url|string|None|True|Server used to obtain OAuth token. Example: https://login.windows.net/{Azure Tenant ID}/oauth2/token|None|
-|client_id|string|None|True|Client ID obtained from Windows Defender Security Center API settings|None|
-|client_secret|string|None|True|Client secret obtained when authorizing an application to connect to Windows Defender|None|
-|host|string|https://wdatp-alertexporter-us.securitycenter.windows.com|True|Base URL for endpoints, e.g. https://wdatp-alertexporter-us.securitycenter.windows.com|None|
-|resource_url|string|https://api.securitycenter.windows.com|False|This will be the server that will return information from the plug-in requests. This will typically be https://graph.windows.net (for alert information) or https://api.securitycenter.windows.com (for machine information and actions).|None|
-|seconds_ago|integer|0|False|Seconds before the first run of the trigger to check for alerts. If left blank, the trigger will start scanning from the time the workflow begins.|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|application_id|string|None|True|Application (client) ID|None|xxxxxxx-xxxxxx-xxxxx-xxxx|
+|application_secret|credential_secret_key|None|True|Application secret|None|xxxxxxxxxxxxxxxxxxxxx|
+|directory_id|string|None|True|Directory (tenant) ID|None|xxxx-xxxx-xxxx-xxxx-xxx|
+
+Example input:
+
+```
+{
+  "application_id": "xxxxxxx-xxxxxx-xxxxx-xxxx",
+  "application_secret": "xxxxxxxxxxxxxxxxxxxxx",
+  "directory_id": "xxxx-xxxx-xxxx-xxxx-xxx"
+}
+```
 
 ## Technical Details
 
@@ -41,15 +48,20 @@ This action is used to retrieve the machine ID related to an alert.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|alert_id|string|None|True|Alert ID to get a machine ID from|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|alert_id|string|None|True|Alert ID to get a machine ID from|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|machine_information|machine_information_type|True|The machine ID related to the given Alert ID|
+|machine_information|object|True|The machine ID related to the given Alert ID|
 
 Example output:
 
@@ -81,15 +93,20 @@ This action is used to retrieve the file ID related to an alert.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|alert_id|string|None|True|Alert ID to get files from|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|alert_id|string|None|True|Alert ID to get files from|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|file_information|file_information|True|The file ID related to the given alert ID|
+|file_information|object|True|The file ID related to the given alert ID|
 
 Example output:
 
@@ -125,17 +142,22 @@ This action is used to isolate a machine from the network, but keep the connecti
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|machine_id|string|None|True|Machine ID|None|
-|isolation_type|string|None|True|Type of isolation to perform on target machine|['Full', 'Selective']|
-|comment|string|None|True|Comment to associate with the isolation action|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|True|Comment to associate with the isolation action|None|None|
+|isolation_type|string|None|True|Type of isolation to perform on target machine|['Full', 'Selective']|None|
+|machine_id|string|None|True|Machine ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|machine_isolation_response|machine_action_response|True|A response that includes the result of the action, and supplemental information about the action taken|
+|machine_isolation_response|object|True|A response that includes the result of the action, and supplemental information about the action taken|
 
 Example output:
 
@@ -160,16 +182,21 @@ This action is used to restore network connectivity to a machine.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|machine_id|string|None|True|Machine ID|None|
-|comment|string|None|True|Comment to associate with the unisolate action|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|True|Comment to associate with the unisolate action|None|None|
+|machine_id|string|None|True|Machine ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|machine_isolation_response|machine_action_response|True|A response that includes the result of the action, and supplemental information about the action taken|
+|machine_isolation_response|object|True|A response that includes the result of the action, and supplemental information about the action taken|
 
 Example output:
 
@@ -194,17 +221,22 @@ This action is used to stop the execution of a file on a machine and delete it.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|machine_id|string|None|True|Machine ID|None|
-|comment|string|None|True|Comment to associate with the stop and quarantine action|None|
-|sha1|string|None|True|Sha1 of the file to stop and quarantine on the machine|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|True|Comment to associate with the stop and quarantine action|None|None|
+|machine_id|string|None|True|Machine ID|None|None|
+|sha1|string|None|True|Sha1 of the file to stop and quarantine on the machine|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|stop_and_quarantine_response|stop_and_quarantine_response|True|A response that includes the result of the action, and supplemental information about the action taken|
+|stop_and_quarantine_response|object|True|A response that includes the result of the action, and supplemental information about the action taken|
 
 Example output:
 
@@ -232,17 +264,22 @@ This action is used to initiate a Windows Defender antivirus scan on a machine.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|machine_id|string|None|True|Machine ID|None|
-|comment|string|None|True|Comment to associate with the antivirus scan action|None|
-|scan_type|string|None|True|The type of antivirus scan to run|['Full', 'Quick']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|True|Comment to associate with the antivirus scan action|None|None|
+|machine_id|string|None|True|Machine ID|None|None|
+|scan_type|string|None|True|The type of antivirus scan to run|['Full', 'Quick']|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|machine_action_response|machine_action_response|True|A response that includes the result of the action, and supplemental information about the action taken|
+|machine_action_response|object|True|A response that includes the result of the action, and supplemental information about the action taken|
 
 Example output:
 
@@ -267,15 +304,20 @@ This action is used to retrieve details about an action taken on a machine.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|action_id|string|None|True|Action ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|action_id|string|None|True|Action ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|machine_action_response|machine_action_response|True|A response that includes the result of the action, and supplemental information about the action taken|
+|machine_action_response|object|True|A response that includes the result of the action, and supplemental information about the action taken|
 
 Example output:
 
@@ -296,234 +338,27 @@ Example output:
 
 ### Triggers
 
-#### Get Alerts for ID
-
-This trigger is used to get alerts by ID.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id|string|None|True|ID to get|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results|[]alert|True|All alerts that match the given ID|
-
-Example output:
-
-```
-{
-   "results":[
-      {
-         "AlertTime":"2018-11-07T18:59:10.2582627Z",
-         "ComputerDnsName":"xxxxxxxx",
-         "AlertTitle":"Suspicious Powershell commandline",
-         "Category":"SuspiciousActivity",
-         "Severity":"Medium",
-         "AlertId":"636772141692393966_614861963",
-         "LinkToWDATP":"https://securitycenter.windows.com/alert/636772141692393966_614861963",
-         "Sha1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "FileName":"powershell.exe",
-         "FilePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
-         "IoaDefinitionId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
-         "AlertPart":0,
-         "FullId":"636772141692393966_614861963:DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco=",
-         "LastProcessedTimeUtc":"2018-11-07T19:05:01.8993766Z",
-         "Source":"EDR",
-         "Md5":"95000560239032bc68b4c2fdfcdef913",
-         "Sha256":"d3f8fade829d2b7bd596c4504a6dae5c034e789b6a3defbe013bda7d14466677",
-         "LogOnUsers":"XXXXXXXX\\Administrator",
-         "MachineName":"XXXXXX",
-         "InternalIPv4List":"XXX.XXX.XXX.XXX",
-         "InternalIPv6List":"XXXXXXXXXX",
-         "FileHash":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "DeviceID":"c6944fa14970633adeecbabc104167ef12557a6f",
-         "Description":"A suspicious Powershell commandline was found on the machine. This commandline might be used during installation, exploration, or in some cases with lateral movement activities which are used by attackers to invoke modules, download external payloads, and get more information about the system. Attackers usually use Powershell to bypass security protection mechanisms by executing their payload in memory without touching the disk and leaving any trace.\r\nThe process powershell.exe was executing suspicious commandline \r\npowershell.exe  -NoExit -ExecutionPolicy Bypass -WindowStyle Hidden (New-Object System.Net.WebClient).DownloadFile('http://127.0.0.1/1.exe', 'C:\\test-WDATP-test\\invoice.exe'); Start-Process 'C:\\test-WDATP-test\\invoice.exe'",
-         "ExternalId":"418AE8AD3F8A1B26F9D02B09E0583A0AEBAC93E7",
-         "IocUniqueId":"DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco="
-      }
-   ]
-}
-```
-
-#### Get Alerts for Domain
-
-This trigger is used to get alerts by domain.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|domain|string|None|True|Domain to get|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results|[]alert|True|All alerts that match the given domain|
-
-Example output:
-
-```
-{
-   "results":[
-      {
-         "AlertTime":"2018-11-07T18:59:10.2582627Z",
-         "ComputerDnsName":"xxxxxxxx",
-         "AlertTitle":"Suspicious Powershell commandline",
-         "Category":"SuspiciousActivity",
-         "Severity":"Medium",
-         "AlertId":"636772141692393966_614861963",
-         "LinkToWDATP":"https://securitycenter.windows.com/alert/636772141692393966_614861963",
-         "Sha1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "FileName":"powershell.exe",
-         "FilePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
-         "IoaDefinitionId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
-         "AlertPart":0,
-         "FullId":"636772141692393966_614861963:DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco=",
-         "LastProcessedTimeUtc":"2018-11-07T19:05:01.8993766Z",
-         "Source":"EDR",
-         "Md5":"95000560239032bc68b4c2fdfcdef913",
-         "Sha256":"d3f8fade829d2b7bd596c4504a6dae5c034e789b6a3defbe013bda7d14466677",
-         "LogOnUsers":"XXXXXXXX\\Administrator",
-         "MachineName":"XXXXXX",
-         "InternalIPv4List":"XXX.XXX.XXX.XXX",
-         "InternalIPv6List":"XXXXXXXXXX",
-         "FileHash":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "DeviceID":"c6944fa14970633adeecbabc104167ef12557a6f",
-         "Description":"A suspicious Powershell commandline was found on the machine. This commandline might be used during installation, exploration, or in some cases with lateral movement activities which are used by attackers to invoke modules, download external payloads, and get more information about the system. Attackers usually use Powershell to bypass security protection mechanisms by executing their payload in memory without touching the disk and leaving any trace.\r\nThe process powershell.exe was executing suspicious commandline \r\npowershell.exe  -NoExit -ExecutionPolicy Bypass -WindowStyle Hidden (New-Object System.Net.WebClient).DownloadFile('http://127.0.0.1/1.exe', 'C:\\test-WDATP-test\\invoice.exe'); Start-Process 'C:\\test-WDATP-test\\invoice.exe'",
-         "ExternalId":"418AE8AD3F8A1B26F9D02B09E0583A0AEBAC93E7",
-         "IocUniqueId":"DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco="
-      }
-   ]
-}
-```
-
-#### Get Alerts for Actor
-
-This trigger is used to get alerts by an actor.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|actor|string|None|True|Actor to get|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results|[]alert|True|All alerts that match the given actor|
-
-Example output:
-
-```
-{
-   "results":[
-      {
-         "AlertTime":"2018-11-07T18:59:10.2582627Z",
-         "ComputerDnsName":"xxxxxxxx",
-         "AlertTitle":"Suspicious Powershell commandline",
-         "Category":"SuspiciousActivity",
-         "Severity":"Medium",
-         "AlertId":"636772141692393966_614861963",
-         "LinkToWDATP":"https://securitycenter.windows.com/alert/636772141692393966_614861963",
-         "Sha1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "FileName":"powershell.exe",
-         "FilePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
-         "IoaDefinitionId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
-         "AlertPart":0,
-         "FullId":"636772141692393966_614861963:DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco=",
-         "LastProcessedTimeUtc":"2018-11-07T19:05:01.8993766Z",
-         "Source":"EDR",
-         "Md5":"95000560239032bc68b4c2fdfcdef913",
-         "Sha256":"d3f8fade829d2b7bd596c4504a6dae5c034e789b6a3defbe013bda7d14466677",
-         "LogOnUsers":"XXXXXXXX\\Administrator",
-         "MachineName":"XXXXXX",
-         "InternalIPv4List":"XXX.XXX.XXX.XXX",
-         "InternalIPv6List":"XXXXXXXXXX",
-         "FileHash":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "DeviceID":"c6944fa14970633adeecbabc104167ef12557a6f",
-         "Description":"A suspicious Powershell commandline was found on the machine. This commandline might be used during installation, exploration, or in some cases with lateral movement activities which are used by attackers to invoke modules, download external payloads, and get more information about the system. Attackers usually use Powershell to bypass security protection mechanisms by executing their payload in memory without touching the disk and leaving any trace.\r\nThe process powershell.exe was executing suspicious commandline \r\npowershell.exe  -NoExit -ExecutionPolicy Bypass -WindowStyle Hidden (New-Object System.Net.WebClient).DownloadFile('http://127.0.0.1/1.exe', 'C:\\test-WDATP-test\\invoice.exe'); Start-Process 'C:\\test-WDATP-test\\invoice.exe'",
-         "ExternalId":"418AE8AD3F8A1B26F9D02B09E0583A0AEBAC93E7",
-         "IocUniqueId":"DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco="
-      }
-   ]
-}
-```
-
-#### Get Alerts by File Name
-
-This trigger is used to get alerts by file name.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|filename|string|None|True|File name to get|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results|[]alert|True|All alerts that match the given file name|
-
-Example output:
-
-```
-{
-   "results":[
-      {
-         "AlertTime":"2018-11-07T18:59:10.2582627Z",
-         "ComputerDnsName":"xxxxxxxx",
-         "AlertTitle":"Suspicious Powershell commandline",
-         "Category":"SuspiciousActivity",
-         "Severity":"Medium",
-         "AlertId":"636772141692393966_614861963",
-         "LinkToWDATP":"https://securitycenter.windows.com/alert/636772141692393966_614861963",
-         "Sha1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "FileName":"powershell.exe",
-         "FilePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
-         "IoaDefinitionId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
-         "AlertPart":0,
-         "FullId":"636772141692393966_614861963:DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco=",
-         "LastProcessedTimeUtc":"2018-11-07T19:05:01.8993766Z",
-         "Source":"EDR",
-         "Md5":"95000560239032bc68b4c2fdfcdef913",
-         "Sha256":"d3f8fade829d2b7bd596c4504a6dae5c034e789b6a3defbe013bda7d14466677",
-         "LogOnUsers":"XXXXXXXX\\Administrator",
-         "MachineName":"XXXXXX",
-         "InternalIPv4List":"XXX.XXX.XXX.XXX",
-         "InternalIPv6List":"XXXXXXXXXX",
-         "FileHash":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "DeviceID":"c6944fa14970633adeecbabc104167ef12557a6f",
-         "Description":"A suspicious Powershell commandline was found on the machine. This commandline might be used during installation, exploration, or in some cases with lateral movement activities which are used by attackers to invoke modules, download external payloads, and get more information about the system. Attackers usually use Powershell to bypass security protection mechanisms by executing their payload in memory without touching the disk and leaving any trace.\r\nThe process powershell.exe was executing suspicious commandline \r\npowershell.exe  -NoExit -ExecutionPolicy Bypass -WindowStyle Hidden (New-Object System.Net.WebClient).DownloadFile('http://127.0.0.1/1.exe', 'C:\\test-WDATP-test\\invoice.exe'); Start-Process 'C:\\test-WDATP-test\\invoice.exe'",
-         "ExternalId":"418AE8AD3F8A1B26F9D02B09E0583A0AEBAC93E7",
-         "IocUniqueId":"DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco="
-      }
-   ]
-}
-```
-
 #### Get Alerts Matching Key
 
 This trigger is used to get alerts that match a given key to its value.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|key|string|None|True|The key to look for in the alert|None|
-|value|string|None|True|The value to look for in the alert|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|key|string|None|True|The key to look for in the alert|None|None|
+|value|string|None|True|The value to look for in the alert|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|[]alert|True|All alerts that contain the given key and match its value|
+|results|alert|True|All alerts that contain the given key and match its value|
 
 Example output:
 
@@ -568,15 +403,20 @@ This trigger is used to return all new alerts.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|frequency|integer|5|False|Poll frequency in seconds|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|frequency|integer|5|False|Poll frequency in seconds|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|[]alert|True|All new alerts are returned|
+|results|alert|True|All new alerts are returned|
 
 Example output:
 

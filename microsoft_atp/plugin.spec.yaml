@@ -22,420 +22,161 @@ hub_tags:
 
 types:
   alert:
-    Category:
+    id:
+      title: "Id"
       type: string
-    UserName:
-      type: string
-    IoaDefinitionId:
-      definition: Indicator of Attack definition ID
-      type: string
-    Severity:
-      type: string
-    AlertId:
-      title: Alert ID
-      type: string
-    UserDomain:
-      type: string
-    LastProcessedTimeUtc:
-      title: Last Processed Time UTC
-      type: string
-    Actor:
-      type: string
-    RemediationIsSuccess:
-      type: string
-    Source:
-      type: string
-    CommandLine:
-      type: string
-    FullId:
-      title: Full ID
-      type: string
-    Sha256:
-      title: SHA-256
-      type: string
-    IpAddress:
-      title: IP Address
-      type: string
-    BuiltInMachineTags:
-      type: string
-    Description:
-      type: string
-    ThreatFamily:
-      type: string
-    IocUniqueId:
-      title: IoC Unique ID
-      definition: Indicator of Compromise unique ID
-      type: string
-    LinkToWDATP:
-      title: Link to Windows Defender ATP
-      type: string
-    ThreatCategory:
-      type: string
-    MachineGroup:
-      type: string
-    CreatorIocValue:
-      type: string
-    UserDefinedMachineTags:
-      type: string
-    Md5:
-      title: MD5
-      type: string
-    InternalIPv4List:
-      title: Internal IP v4 List
-      type: string
-    Sha1:
-      title: SHA-1
-      type: string
-    CreatorIocName:
-      title: Creator IoC Name
-      type: string
-    Url:
-      title: URL
-      type: string
-    MachineDomain:
-      title: Machine Domain
-      type: string
-    AlertTitle:
-      title: Alert Title
-      type: string
-    AlertTime:
-      title: Alert Time
-      type: string
-    DeviceID:
-      title: Device ID
-      type: string
-    RemediationAction:
-      type: string
-    InternalIPv6List:
-      title: Internal IP v6 List
-      type: string
-    ThreatName:
-      title: Threat Name
-      type: string
-    IocValue:
-      title: IoC Value
-      definition: Indicator of Compromise value
-      type: string
-    WasExecutingWhileDetected:
-      type: string
-    LogOnUsers:
-      type: string
-    AlertPart:
-      type: integer
-    FileHash:
-      type: string
-    FilePath:
-      type: string
-    IocName:
-      title: IoC Name
-      definition: Indicator of Compromise name
-      type: string
-    ComputerDnsName:
-      title: Computer DNS Name
-      type: string
-    FileName:
-      type: string
-    MachineName:
-      type: string
-    ExternalId:
-      title: External ID
-      type: string
-  machine_information_type:
-    agentVersion:
-      description: Agent version
-      title: Agent Version
-      type: string
-    osPlatform:
-      description: OS platform
-      title: OS Platform
-      type: string
-    isAadJoined:
-      description: Is AAD joined
-      title: Is Aad Joined
-      type: boolean
-    osBuild:
-      description: OS build
-      title: OS Build
-      type: integer
-    rbacGroupName:
-      description: RBAC group name
-      title: RBAC Group Name
-      type: string
+      description: "Id"
       required: false
-    machineTags:
-      description: Machine tags
-      title: Machine Tags
-      type: '[]object'
-    aadDeviceId:
-      description: AAD device ID
-      title: AAD Device ID
+    incidentId:
+      title: "Incidentid"
+      type: integer
+      description: "Incidentid"
+      required: false
+    investigationId:
+      title: "Investigationid"
+      type: integer
+      description: "Investigationid"
+      required: false
+    assignedTo:
+      title: "Assignedto"
       type: string
+      description: "Assignedto"
+      required: false
+    severity:
+      title: "Severity"
+      type: string
+      description: "Severity"
+      required: false
+    status:
+      title: "Status"
+      type: string
+      description: "Status"
+      required: false
+    classification:
+      title: "Classification"
+      type: string
+      description: "Classification"
+      required: false
+    determination:
+      title: "Determination"
+      type: string
+      description: "Determination"
+      required: false
+    investigationState:
+      title: "Investigationstate"
+      type: string
+      description: "Investigationstate"
+      required: false
+    detectionSource:
+      title: "Detectionsource"
+      type: string
+      description: "Detectionsource"
+      required: false
+    category:
+      title: "Category"
+      type: string
+      description: "Category"
+      required: false
+    threatFamilyName:
+      title: "Threatfamilyname"
+      type: string
+      description: "Threatfamilyname"
+      required: false
+    title:
+      title: "Title"
+      type: string
+      description: "Title"
+      required: false
+    description:
+      title: "Description"
+      type: string
+      description: "Description"
+      required: false
+    alertCreationTime:
+      title: "Alertcreationtime"
+      type: string
+      description: "Alertcreationtime"
+      required: false
+    firstEventTime:
+      title: "Firsteventtime"
+      type: string
+      description: "Firsteventtime"
+      required: false
+    lastEventTime:
+      title: "Lasteventtime"
+      type: string
+      description: "Lasteventtime"
+      required: false
+    lastUpdateTime:
+      title: "Lastupdatetime"
+      type: string
+      description: "Lastupdatetime"
+      required: false
+    resolvedTime:
+      title: "Resolvedtime"
+      type: string
+      description: "Resolvedtime"
+      required: false
+    machineId:
+      title: "Machineid"
+      type: string
+      description: "Machineid"
       required: false
     computerDnsName:
-      description: Computer DNS name
-      title: Computer DNS Name
+      title: "Computerdnsname"
       type: string
-    rbacGroupId:
-      description: RBAC group ID
-      title: RBAC Group ID
-      type: integer
-    healthStatus:
-      description: Health status
-      title: Health Status
-      type: string
-    '@odata.context':
-      description: OData context
-      title: OData Context
-      type: string
-    lastExternalIpAddress:
-      description: Last external IP address
-      title: Last External IP Address
-      type: string
-    lastIpAddress:
-      description: Last IP address
-      title: Last IP Address
-      type: string
-    osVersion:
-      description: OS version
-      title: OS Version
-      type: string
+      description: "Computerdnsname"
       required: false
-    riskScore:
-      description: Risk score
-      title: Risk Score
+    rbacGroupName:
+      title: "Rbacgroupname"
       type: string
-    id:
-      description: ID
-      title: ID
-      type: string
-    firstSeen:
-      description: First seen
-      title: First Seen
-      type: string
-    lastSeen:
-      description: Last seen
-      title: Last Seen
-      type: string
-  machine_action_response:
-    status:
-      description: Isolation action status
-      title: Status
-      type: string
-    creationDateTimeUtc:
-      description: Date and time this request was created
-      title: Creation Date Time UTC
-      type: string
-    machineId:
-      description: Machine ID this request was taken on
-      title: Machine ID
-      type: string
-    lastUpdateTimeUtc:
-      description: Last Update for this requested action
-      title: Last Update Time UTC
-      type: string
-    '@odata.context':
-      description: OData Context
-      title: OData Context
-      type: string
-    requestor:
-      description: User associated with this action
-      title: Requestor
-      type: string
-    error:
-      description: Error associated with this action
-      title: Error
-      type: string
+      description: "Rbacgroupname"
       required: false
-    type:
-      description: Type of action
-      title: Type
+    aadTenantId:
+      title: "Aadtenantid"
       type: string
-    id:
-      description: ID
-      title: ID
-      type: string
-    requestorComment:
-      description: Comment associated with this action
-      title: Requestor Comment
-      type: string
-  file_list_entry:
-    fileProductName:
-      description: File product name
-      title: File Product Name
-      type: string
+      description: "Aadtenantid"
       required: false
-    filePublisher:
-      description: File publisher
-      title: File Publisher
+    relatedUser:
+      title: "Relateduser"
       type: string
+      description: "Relateduser"
       required: false
-    fileType:
-      description: File type
-      title: File Type
-      type: string
-    globalFirstObserved:
-      description: Global first observed
-      title: Global First Observed
-      type: string
-    globalLastObserved:
-      description: Global last observed
-      title: Global Last Observed
-      type: string
-    globalPrevalence:
-      description: Global prevalence
-      title: Global Prevalence
-      type: integer
-    isPeFile:
-      description: Is PE file
-      title: Is PE File
-      type: boolean
-    isValidCertificate:
-      description: Is valid certificate
-      title: Is Valid Certificate
-      type: boolean
-    issuer:
-      description: Issuer
-      title: Issuer
-      type: string
-    md5:
-      description: MD5
-      title: MD5
-      type: string
-    sha1:
-      description: SHA1
-      title: SHA1
-      type: string
-    sha256:
-      description: SHA256
-      title: SHA256
-      type: string
-    signer:
-      description: Signer
-      title: Signer
-      type: string
-    signerHash:
-      description: Signer hash
-      title: Signer Hash
-      type: string
-    size:
-      description: Size
-      title: Size
-      type: integer
-    windowsDefenderAVThreatName:
-      description: Windows Defender AV threat name
-      title: Windows Defender AV Threat Name
-      type: string
+    comments:
+      title: "Comments"
+      type: "[]string"
+      description: "Comments"
       required: false
-  file_information:
-    file_list:
-      description: List of file information entities
-      title: File List
-      type: '[]file_list_entry'
-    '@odata.context':
-      description: OData context
-      title: OData Context
-      type: string
-  relatedFileInfo:
-    fileIdentifier:
-      title: File Identifier
-      type: string
-      description: File identifier
+    evidence:
+      title: "Evidence"
+      type: "[]string"
+      description: "Evidence"
       required: false
-    fileIdentifierType:
-      title: File Identifier Type
-      type: string
-      description: File identifier type
-      required: false
-  stop_and_quarantine_response:
-    status:
-      title: Status
-      type: string
-      description: Status
-      required: false
-    creationDateTimeUtc:
-      title: Creation Date Time UTC
-      type: string
-      description: Creation date time utc
-      required: false
-    machineId:
-      title: Machine ID
-      type: string
-      description: Machine ID
-      required: false
-    lastUpdateTimeUtc:
-      title: Last Update Time UTC
-      type: string
-      description: Last update time UTC
-      required: false
-    '@odata.context':
-      title: '@Odata.Context'
-      type: string
-      description: '@odata.context'
-      required: false
-    requestor:
-      title: Requestor
-      type: string
-      description: Requestor
-      required: false
-    relatedFileInfo:
-      title: Related File Info
-      type: relatedFileInfo
-      description: Related File Info
-      required: false
-    type:
-      title: Type
-      type: string
-      description: Type
-      required: false
-    id:
-      title: ID
-      type: string
-      description: ID
-      required: false
-    requestorComment:
-      title: Requestor Comment
-      type: string
-      description: Requestor comment
-      required: false
+
+
 connection:
-  auth_url:
-    title: Authorization server URL
-    description: 'Server used to obtain OAuth token. Example: https://login.windows.net/{Azure
-      Tenant ID}/oauth2/token'
+  application_id:
+    title: Application ID
+    description: Application (client) ID
+    type: string
     required: true
-    type: string
-  client_id:
-    title: Client ID
-    description: Client ID obtained from Windows Defender Security Center API settings
+    example: xxxxxxx-xxxxxx-xxxxx-xxxx
+    order: 1
+  application_secret:
+    title: Application Secret
+    description: Application secret
+    type: credential_secret_key
     required: true
+    example: xxxxxxxxxxxxxxxxxxxxx
+    order: 2
+  directory_id:
+    title: Directory ID
+    description: Directory (tenant) ID
     type: string
-  client_secret:
-    title: Client Secret
-    description: Client secret obtained when authorizing an application to connect
-      to Windows Defender
     required: true
-    type: string
-  host:
-    title: Host URL
-    description: Base URL for endpoints, e.g. https://wdatp-alertexporter-us.securitycenter.windows.com
-    required: true
-    type: string
-    default: https://wdatp-alertexporter-us.securitycenter.windows.com
-  resource_url:
-    title: Resource URL
-    description: This will be the server that will return information from the plug-in
-      requests. This will typically be https://graph.windows.net (for alert information)
-      or https://api.securitycenter.windows.com (for machine information and actions).
-    required: false
-    type: string
-    default: https://api.securitycenter.windows.com
-  seconds_ago:
-    title: Seconds Ago
-    description: Seconds before the first run of the trigger to check for alerts.
-      If left blank, the trigger will start scanning from the time the workflow begins.
-    required: false
-    type: integer
-    default: 0
+    example: xxxx-xxxx-xxxx-xxxx-xxx
+    order: 3
+
 actions:
   get_machine_id_from_alert_id:
     title: Get Machine ID from Alert
@@ -450,7 +191,7 @@ actions:
       machine_information:
         title: Machine Information
         description: The machine ID related to the given Alert ID
-        type: machine_information_type
+        type: object
         required: true
   get_file_id_from_alert_id:
     title: Get File ID from Alert
@@ -465,7 +206,7 @@ actions:
       file_information:
         title: File Information
         description: The file ID related to the given alert ID
-        type: file_information
+        type: object
         required: true
   isolate_machine:
     title: Isolate Machine
@@ -492,7 +233,7 @@ actions:
         required: true
     output:
       machine_isolation_response:
-        type: machine_action_response
+        type: object
         title: Machine Action Response
         description: A response that includes the result of the action, and supplemental
           information about the action taken
@@ -513,7 +254,7 @@ actions:
         required: true
     output:
       machine_isolation_response:
-        type: machine_action_response
+        type: object
         title: Machine Action Response
         description: A response that includes the result of the action, and supplemental
           information about the action taken
@@ -539,7 +280,7 @@ actions:
         required: true
     output:
       stop_and_quarantine_response:
-        type: stop_and_quarantine_response
+        type: object
         title: Stop and Quarantine Response
         description: A response that includes the result of the action, and supplemental
           information about the action taken
@@ -568,7 +309,7 @@ actions:
         - Quick
     output:
       machine_action_response:
-        type: machine_action_response
+        type: object
         title: Machine Action Response
         description: A response that includes the result of the action, and supplemental
           information about the action taken
@@ -584,69 +325,12 @@ actions:
         required: true
     output:
       machine_action_response:
-        type: machine_action_response
+        type: object
         title: Machine Action Response
         description: A response that includes the result of the action, and supplemental
           information about the action taken
         required: true
 triggers:
-  get_alert_for_id:
-    title: Get Alerts for ID
-    description: Get alerts by ID
-    input:
-      id:
-        title: ID
-        type: string
-        description: ID to get
-        required: true
-    output:
-      results:
-        title: Alerts
-        description: All alerts that match the given ID
-        type: '[]alert'
-        required: true
-  get_alert_for_domain:
-    title: Get Alerts for Domain
-    description: Get alerts by domain
-    input:
-      domain:
-        type: string
-        description: Domain to get
-        required: true
-    output:
-      results:
-        title: Alerts
-        description: All alerts that match the given domain
-        type: '[]alert'
-        required: true
-  get_alert_for_actor:
-    title: Get Alerts for Actor
-    description: Get alerts by an actor
-    input:
-      actor:
-        type: string
-        description: Actor to get
-        required: true
-    output:
-      results:
-        title: Alerts
-        description: All alerts that match the given actor
-        type: '[]alert'
-        required: true
-  get_alert_for_file:
-    title: Get Alerts by File Name
-    description: Get alerts by file name
-    input:
-      filename:
-        type: string
-        description: File name to get
-        required: true
-    output:
-      results:
-        title: Alerts
-        description: All alerts that match the given file name
-        type: '[]alert'
-        required: true
   get_alert_matching_key:
     title: Get Alerts Matching Key
     description: Get alerts that match a given key to its value
@@ -663,7 +347,7 @@ triggers:
       results:
         title: Alerts
         description: All alerts that contain the given key and match its value
-        type: '[]alert'
+        type: 'alert'
         required: true
   get_alerts:
     title: Get Alerts
@@ -678,5 +362,5 @@ triggers:
       results:
         title: Alerts
         description: All new alerts are returned
-        type: '[]alert'
+        type: 'alert'
         required: true

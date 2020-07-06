@@ -4,12 +4,9 @@ import json
 
 
 class Input:
-    AUTH_URL = "auth_url"
-    CLIENT_ID = "client_id"
-    CLIENT_SECRET = "client_secret"
-    HOST = "host"
-    RESOURCE_URL = "resource_url"
-    SECONDS_AGO = "seconds_ago"
+    APPLICATION_ID = "application_id"
+    APPLICATION_SECRET = "application_secret"
+    DIRECTORY_ID = "directory_id"
     
 
 class ConnectionSchema(komand.Input):
@@ -18,52 +15,50 @@ class ConnectionSchema(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "auth_url": {
+    "application_id": {
       "type": "string",
-      "title": "Authorization server URL",
-      "description": "Server used to obtain OAuth token. Example: https://login.windows.net/{Azure Tenant ID}/oauth2/token",
+      "title": "Application ID",
+      "description": "Application (client) ID",
       "order": 1
     },
-    "client_id": {
-      "type": "string",
-      "title": "Client ID",
-      "description": "Client ID obtained from Windows Defender Security Center API settings",
+    "application_secret": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "Application Secret",
+      "description": "Application secret",
       "order": 2
     },
-    "client_secret": {
+    "directory_id": {
       "type": "string",
-      "title": "Client Secret",
-      "description": "Client secret obtained when authorizing an application to connect to Windows Defender",
+      "title": "Directory ID",
+      "description": "Directory (tenant) ID",
       "order": 3
-    },
-    "host": {
-      "type": "string",
-      "title": "Host URL",
-      "description": "Base URL for endpoints, e.g. https://wdatp-alertexporter-us.securitycenter.windows.com",
-      "default": "https://wdatp-alertexporter-us.securitycenter.windows.com",
-      "order": 4
-    },
-    "resource_url": {
-      "type": "string",
-      "title": "Resource URL",
-      "description": "This will be the server that will return information from the plug-in requests. This will typically be https://graph.windows.net (for alert information) or https://api.securitycenter.windows.com (for machine information and actions).",
-      "default": "https://api.securitycenter.windows.com",
-      "order": 5
-    },
-    "seconds_ago": {
-      "type": "integer",
-      "title": "Seconds Ago",
-      "description": "Seconds before the first run of the trigger to check for alerts. If left blank, the trigger will start scanning from the time the workflow begins.",
-      "default": 0,
-      "order": 6
     }
   },
   "required": [
-    "auth_url",
-    "client_id",
-    "client_secret",
-    "host"
-  ]
+    "application_id",
+    "application_secret",
+    "directory_id"
+  ],
+  "definitions": {
+    "credential_secret_key": {
+      "id": "credential_secret_key",
+      "type": "object",
+      "title": "Credential: Secret Key",
+      "description": "A shared secret key",
+      "properties": {
+        "secretKey": {
+          "type": "string",
+          "title": "Secret Key",
+          "displayType": "password",
+          "description": "The shared secret key",
+          "format": "password"
+        }
+      },
+      "required": [
+        "secretKey"
+      ]
+    }
+  }
 }
     """)
 

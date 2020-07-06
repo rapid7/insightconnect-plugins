@@ -4,10 +4,10 @@ import komand
 from komand_microsoft_atp import connection, actions, triggers
 
 
-Name = 'Microsoft Windows Defender ATP'
-Vendor = 'rapid7'
-Version = '1.5.1'
-Description = 'The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files'
+Name = "Microsoft Windows Defender ATP"
+Vendor = "rapid7"
+Version = "1.5.1"
+Description = "The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files"
 
 
 class ICONMicrosoftAtp(komand.Plugin):
@@ -19,14 +19,6 @@ class ICONMicrosoftAtp(komand.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
-        self.add_trigger(triggers.GetAlertForActor())
-
-        self.add_trigger(triggers.GetAlertForDomain())
-
-        self.add_trigger(triggers.GetAlertForFile())
-
-        self.add_trigger(triggers.GetAlertForId())
-
         self.add_trigger(triggers.GetAlertMatchingKey())
 
         self.add_trigger(triggers.GetAlerts())

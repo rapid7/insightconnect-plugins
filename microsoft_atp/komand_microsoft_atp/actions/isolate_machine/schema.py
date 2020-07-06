@@ -65,7 +65,7 @@ class IsolateMachineOutput(komand.Output):
   "title": "Variables",
   "properties": {
     "machine_isolation_response": {
-      "$ref": "#/definitions/machine_action_response",
+      "type": "object",
       "title": "Machine Action Response",
       "description": "A response that includes the result of the action, and supplemental information about the action taken",
       "order": 1
@@ -73,75 +73,7 @@ class IsolateMachineOutput(komand.Output):
   },
   "required": [
     "machine_isolation_response"
-  ],
-  "definitions": {
-    "machine_action_response": {
-      "type": "object",
-      "title": "machine_action_response",
-      "properties": {
-        "@odata.context": {
-          "type": "string",
-          "title": "OData Context",
-          "description": "OData Context",
-          "order": 5
-        },
-        "creationDateTimeUtc": {
-          "type": "string",
-          "title": "Creation Date Time UTC",
-          "description": "Date and time this request was created",
-          "order": 2
-        },
-        "error": {
-          "type": "string",
-          "title": "Error",
-          "description": "Error associated with this action",
-          "order": 7
-        },
-        "id": {
-          "type": "string",
-          "title": "ID",
-          "description": "ID",
-          "order": 9
-        },
-        "lastUpdateTimeUtc": {
-          "type": "string",
-          "title": "Last Update Time UTC",
-          "description": "Last Update for this requested action",
-          "order": 4
-        },
-        "machineId": {
-          "type": "string",
-          "title": "Machine ID",
-          "description": "Machine ID this request was taken on",
-          "order": 3
-        },
-        "requestor": {
-          "type": "string",
-          "title": "Requestor",
-          "description": "User associated with this action",
-          "order": 6
-        },
-        "requestorComment": {
-          "type": "string",
-          "title": "Requestor Comment",
-          "description": "Comment associated with this action",
-          "order": 10
-        },
-        "status": {
-          "type": "string",
-          "title": "Status",
-          "description": "Isolation action status",
-          "order": 1
-        },
-        "type": {
-          "type": "string",
-          "title": "Type",
-          "description": "Type of action",
-          "order": 8
-        }
-      }
-    }
-  }
+  ]
 }
     """)
 

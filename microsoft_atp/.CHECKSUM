@@ -1,63 +1,47 @@
 {
-	"spec": "1df6a383b27bff0b74930ec5a1dcbcf4",
-	"manifest": "0b35e1f750069025e5ce653742a3a5f8",
-	"setup": "633dffd90851d49e1315b36016d72ef2",
+	"spec": "a288b2b71e8d87047346bb5581f05056",
+	"manifest": "aac322555bd932a2a3baed70f7dd3898",
+	"setup": "a84ebbaffc9b3e0940ad1890af39fa94",
 	"schemas": [
 		{
 			"identifier": "get_file_id_from_alert_id/schema.py",
-			"hash": "5567e8e4e6210ed21ace945a7e2edf1b"
+			"hash": "f0b6de7deb44d8286bf292e0e0799dad"
 		},
 		{
 			"identifier": "get_machine_action/schema.py",
-			"hash": "274b5cb7f782d1311441c9a59c6f6bdd"
+			"hash": "10208801df1f4c79db4a062c41ce2bda"
 		},
 		{
 			"identifier": "get_machine_id_from_alert_id/schema.py",
-			"hash": "32102a069c7caf9dc31373e2335d8653"
+			"hash": "9541b9c235a81ad6be539148bcf07579"
 		},
 		{
 			"identifier": "isolate_machine/schema.py",
-			"hash": "97e6460fa7cfebf3ec96c169f8bac908"
+			"hash": "ff3eae3c84a973b8525046b4cc73db60"
 		},
 		{
 			"identifier": "run_antivirus_scan/schema.py",
-			"hash": "f58a15f374751c33235b3ff4b66167cd"
+			"hash": "e9b3a231f2a5c057baff8e6b5fca2894"
 		},
 		{
 			"identifier": "stop_and_quarantine_file/schema.py",
-			"hash": "edff101f510ee9ca7e7fcfbdc9f06334"
+			"hash": "9eb382e67d4d5677e85df727fcfe6e79"
 		},
 		{
 			"identifier": "unisolate_machine/schema.py",
-			"hash": "52ab922910985ef85312135848bae871"
+			"hash": "cee55a5b50df8fe5811b56bdb5445dd3"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "8fda9492c93617e39b5fb6ea47551cbd"
-		},
-		{
-			"identifier": "get_alert_for_actor/schema.py",
-			"hash": "0bd1c04f1d70767c28aacb1f8e68f8e7"
-		},
-		{
-			"identifier": "get_alert_for_domain/schema.py",
-			"hash": "0571004afc4c52200dfab4c2df78c66f"
-		},
-		{
-			"identifier": "get_alert_for_file/schema.py",
-			"hash": "e5b45cbe376d63b973bd627795bd5b8f"
-		},
-		{
-			"identifier": "get_alert_for_id/schema.py",
-			"hash": "98f815ecc96cb4ae0927c2f3dd27a1d4"
+			"hash": "ca429b2b997b439ce9776f7fe0c3ee09"
 		},
 		{
 			"identifier": "get_alert_matching_key/schema.py",
-			"hash": "1e79f66a95960f824e7780c4c8d077df"
+			"hash": "27f41a2e21a8d13301e50d8585b6452f"
 		},
 		{
 			"identifier": "get_alerts/schema.py",
-			"hash": "051aba7c26309d59ec379d4f822951b6"
+			"hash": "2d19f41a8091eafc45a529229dbcb0cf"
 		}
 	]
 }
