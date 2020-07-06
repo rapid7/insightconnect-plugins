@@ -471,7 +471,7 @@ actions:
         type: string
         title: Comment
         description: Comment to associate with the unisolate action
-        example: InsightConnect is removing isolation
+        example: Unisolated by InsightConnect
         required: true
     output:
       machine_isolation_response:
