@@ -42,64 +42,51 @@ Example input:
 
 ### Actions
 
-#### Get Machine ID from Alert
+#### Get Machine Information
 
-This action is used to retrieve the machine ID related to an alert.
+This action is used to get details about a machine with it's ID.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|alert_id|string|None|True|Alert ID to get a machine ID from|None|None|
+|machine_id|string|None|True|Machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 
 Example input:
 
 ```
+{
+  "machine_id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
+}
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|machine_information|object|True|The machine ID related to the given Alert ID|
+|machine|object|True|Machine information|
 
 Example output:
 
 ```
-{
-   "machine_information":{
-      "@odata.context":"https://api.securitycenter.windows.com/api/$metadata#Machines/$entity",
-      "id":"c6944fa14970633xxxxxxxx104167ef12557a6f",
-      "computerDnsName":"xxxxxxxx",
-      "firstSeen":"2018-11-07T17:59:46.4708884Z",
-      "lastSeen":"2018-11-28T07:29:48.8372663Z",
-      "osPlatform":"Windows10",
-      "lastIpAddress":"10.4.18.162",
-      "lastExternalIpAddress":"128.177.65.3",
-      "agentVersion":"10.4850.17134.191",
-      "osBuild":17134,
-      "healthStatus":"Active",
-      "rbacGroupId":0,
-      "riskScore":"Medium",
-      "isAadJoined":false,
-      "machineTags":[]
-   }
-}
 ```
 
-#### Get File ID from Alert
+#### Get Files from Alert
 
-This action is used to retrieve the file ID related to an alert.
+This action is used to retrieve a list of file information objects related to an alert.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|alert_id|string|None|True|Alert ID to get files from|None|None|
+|alert_id|string|None|True|Alert ID to get files from|None|da637293198146839977_2089064327|
 
 Example input:
 
 ```
+{
+  "alert_id": "da637293198146839977_2089064327"
+}
 ```
 
 ##### Output
@@ -111,29 +98,6 @@ Example input:
 Example output:
 
 ```
-{
-    "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#Files",
-    "value": [
-        {
-            "sha1": "654f19c41d9662cf86be21bf0af5a88c38c56a9d",
-            "sha256": "2f905feec2798cee6f63da2c26758d86bfeaab954c01e20ac7085bf55fedde87",
-            "md5": "82849dc81d94056224445ea73dc6153a",
-            "globalPrevalence": 33,
-            "globalFirstObserved": "2018-07-17T18:17:27.5909748Z",
-            "globalLastObserved": "2018-08-06T16:07:12.9414137Z",
-            "windowsDefenderAVThreatName": null,
-            "size": 801112,
-            "fileType": "PortableExecutable",
-            "isPeFile": true,
-            "filePublisher": null,
-            "fileProductName": null,
-            "signer": "Microsoft Windows",
-            "issuer": "Microsoft Development PCA 2014",
-            "signerHash": "9e284231a4d1c53fc8d4492b09f65116bf97447f",
-            "isValidCertificate": true
-        }
-    ]
-}
 ```
 
 #### Isolate Machine

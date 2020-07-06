@@ -4,32 +4,32 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieve the machine ID related to an alert"
+    DESCRIPTION = "Get details about a machine with it's ID"
 
 
 class Input:
-    ALERT_ID = "alert_id"
+    MACHINE_ID = "machine_id"
     
 
 class Output:
-    MACHINE_INFORMATION = "machine_information"
+    MACHINE = "machine"
     
 
-class GetMachineIdFromAlertIdInput(komand.Input):
+class GetMachineInformationInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "alert_id": {
+    "machine_id": {
       "type": "string",
-      "title": "Alert ID",
-      "description": "Alert ID to get a machine ID from",
+      "title": "Machine ID",
+      "description": "Machine ID",
       "order": 1
     }
   },
   "required": [
-    "alert_id"
+    "machine_id"
   ]
 }
     """)
@@ -38,21 +38,21 @@ class GetMachineIdFromAlertIdInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class GetMachineIdFromAlertIdOutput(komand.Output):
+class GetMachineInformationOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "machine_information": {
+    "machine": {
       "type": "object",
-      "title": "Machine Information",
-      "description": "The machine ID related to the given Alert ID",
+      "title": "Machine",
+      "description": "Machine information",
       "order": 1
     }
   },
   "required": [
-    "machine_information"
+    "machine"
   ]
 }
     """)

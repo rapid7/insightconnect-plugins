@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieve the file ID related to an alert"
+    DESCRIPTION = "Retrieve a list of file information objects related to an alert"
 
 
 class Input:

@@ -251,7 +251,45 @@ class Connection(komand.Connection):
         try:
             response.raise_for_status()
         except Exception as e:
-            raise ConnectionTestException(cause=f"Connection error occurred while connecting to: {endpoint_url}. Error "
+            raise ConnectionTestException(cause=f"Connection error occurred while connecting to: {endpoint}. Error "
+                                                f"was: {e}",
+                                          assistance="Check connection settings for proper resource URL and host "
+                                                     "server. Verify application has Machine.Read.All permissions "
+                                                     "in the Azure portal.",
+                                          data=response.text
+                                          )
+        return response.json()
+
+    def get_machines_from_alert_id(self, alert_id):
+        self.check_and_refresh_api_token()
+        endpoint = f"https://api.securitycenter.windows.com/api/alerts/{alert_id}/machines"
+
+        self.logger.info(f"Getting files with: {endpoint}")
+        response = self.session.get(endpoint)
+
+        try:
+            response.raise_for_status()
+        except Exception as e:
+            raise ConnectionTestException(cause=f"Connection error occurred while connecting to: {endpoint}. Error "
+                                                f"was: {e}",
+                                          assistance="Check connection settings for proper resource URL and host "
+                                                     "server. Verify application has Machine.Read.All permissions "
+                                                     "in the Azure portal.",
+                                          data=response.text
+                                          )
+        return response.json()
+
+    def get_machine_information(self, machine_id):
+        self.check_and_refresh_api_token()
+        endpoint = f"https://api.securitycenter.windows.com/api/machines/{machine_id}"
+
+        self.logger.info(f"Getting files with: {endpoint}")
+        response = self.session.get(endpoint)
+
+        try:
+            response.raise_for_status()
+        except Exception as e:
+            raise ConnectionTestException(cause=f"Connection error occurred while connecting to: {endpoint}. Error "
                                                 f"was: {e}",
                                           assistance="Check connection settings for proper resource URL and host "
                                                      "server. Verify application has Machine.Read.All permissions "

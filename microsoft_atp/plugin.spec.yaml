@@ -251,6 +251,83 @@ types:
       description: "Determination value"
       required: false
 
+  machine:
+     agentVersion:
+       title: "Agent Version"
+       type: string
+       description: "Agent version"
+       required: false
+     computerDnsName:
+       title: "Computer DNS Name"
+       type: string
+       description: "Computer DNS name"
+       required: false
+     exposureLevel:
+       title: "Exposure Level"
+       type: string
+       description: "Exposure level"
+       required: false
+     firstSeen:
+       title: "First Seen"
+       type: string
+       description: "First seen"
+       required: false
+     healthStatus:
+       title: "Health Status"
+       type: string
+       description: "Health status"
+       required: false
+     id:
+       title: "ID"
+       type: string
+       description: "ID"
+       required: false
+     lastExternalIpAddress:
+       title: "Last External IP Address"
+       type: string
+       description: "Last external IP address"
+       required: false
+     lastIpAddress:
+       title: "Last IP Address"
+       type: string
+       description: "Last IP address"
+       required: false
+     lastSeen:
+       title: "Last Seen"
+       type: string
+       description: "Last seen"
+       required: false
+     osBuild:
+       title: "OS Build"
+       type: integer
+       description: "OS build"
+       required: false
+     osPlatform:
+       title: "OS Platform"
+       type: string
+       description: "OS platform"
+       required: false
+     osProcessor:
+       title: "OS Processor"
+       type: string
+       description: "OS processor"
+       required: false
+     rbacGroupId:
+       title: "RBAC Group ID"
+       type: integer
+       description: "RBAC group ID"
+       required: false
+     riskScore:
+       title: "Risk Score"
+       type: string
+       description: "Risk score"
+       required: false
+     version:
+       title: "Version"
+       type: string
+       description: "Version"
+       required: false
+
 connection:
   application_id:
     title: Application ID
@@ -275,21 +352,23 @@ connection:
     order: 3
 
 actions:
-  get_machine_id_from_alert_id:
-    title: Get Machine ID from Alert
-    description: Retrieve the machine ID related to an alert
+  get_machine_information:
+    title: Get Machine Information
+    description: Get details about a machine with it's ID
     input:
-      alert_id:
+      machine_id:
+        title: Machine ID
+        description: Machine ID
         type: string
-        title: Alert ID
-        description: Alert ID to get a machine ID from
+        example: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73
         required: true
     output:
-      machine_information:
-        title: Machine Information
-        description: The machine ID related to the given Alert ID
+      machine:
+        title: Machine
+        description: Machine information
         type: object
         required: true
+
   get_file_id_from_alert_id:
     title: Get Files from Alert
     description: Retrieve a list of file information objects related to an alert

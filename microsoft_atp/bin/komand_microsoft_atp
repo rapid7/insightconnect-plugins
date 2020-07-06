@@ -27,7 +27,7 @@ class ICONMicrosoftAtp(komand.Plugin):
 
         self.add_action(actions.GetMachineAction())
 
-        self.add_action(actions.GetMachineIdFromAlertId())
+        self.add_action(actions.GetMachineInformation())
 
         self.add_action(actions.IsolateMachine())
 

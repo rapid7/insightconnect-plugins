@@ -4,22 +4,22 @@ sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase
 from komand_microsoft_atp.connection.connection import Connection
-from komand_microsoft_atp.actions.get_machine_id_from_alert_id import GetMachineIdFromAlertId
+from komand_microsoft_atp.actions.get_machine_information import GetMachineInformation
 import json
 import logging
 
 
-class TestGetMachineIdFromAlertId(TestCase):
-    def test_integration_get_machine_id_from_alert_id(self):
+class TestGetMachineInformation(TestCase):
+    def test_integration_get_machine_information(self):
         log = logging.getLogger("Test")
         test_conn = Connection()
-        test_action = GetMachineIdFromAlertId()
+        test_action = GetMachineInformation()
 
         test_conn.logger = log
         test_action.logger = log
 
         try:
-            with open("../tests/get_machine_id_from_alert_id.json") as file:
+            with open("../tests/get_machine_information.json") as file:
                 test_json = json.loads(file.read()).get("body")
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
@@ -37,6 +37,4 @@ class TestGetMachineIdFromAlertId(TestCase):
         test_action.connection = test_conn
         results = test_action.run(action_params)
 
-        # TODO: The following assert should be updated to look for data from your action
-        # For example: self.assertEquals({"success": True}, results)
-        self.assertEquals({}, results)
+        self.assertTrue("machine" in results.keys())
