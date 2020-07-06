@@ -21,6 +21,17 @@ hub_tags:
   features: []
 
 types:
+  related_user_object:
+    domainName:
+      title: "Domain Name"
+      description: "Domain name"
+      required: false
+      type: string
+    userName:
+      title: User Name
+      description: User name
+      required: false
+      type: string
   alert:
     id:
       title: "Id"
@@ -139,7 +150,7 @@ types:
       required: false
     relatedUser:
       title: "Relateduser"
-      type: string
+      type: related_user_object
       description: "Relateduser"
       required: false
     comments:

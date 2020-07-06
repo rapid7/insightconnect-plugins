@@ -196,7 +196,7 @@ class GetAlertMatchingKeyOutput(komand.Output):
           "order": 22
         },
         "relatedUser": {
-          "type": "string",
+          "$ref": "#/definitions/related_user_object",
           "title": "Relateduser",
           "description": "Relateduser",
           "order": 24
@@ -230,6 +230,44 @@ class GetAlertMatchingKeyOutput(komand.Output):
           "title": "Title",
           "description": "Title",
           "order": 13
+        }
+      },
+      "definitions": {
+        "related_user_object": {
+          "type": "object",
+          "title": "related_user_object",
+          "properties": {
+            "domainName": {
+              "type": "string",
+              "title": "Domain Name",
+              "description": "Domain name",
+              "order": 1
+            },
+            "userName": {
+              "type": "string",
+              "title": "User Name",
+              "description": "User name",
+              "order": 2
+            }
+          }
+        }
+      }
+    },
+    "related_user_object": {
+      "type": "object",
+      "title": "related_user_object",
+      "properties": {
+        "domainName": {
+          "type": "string",
+          "title": "Domain Name",
+          "description": "Domain name",
+          "order": 1
+        },
+        "userName": {
+          "type": "string",
+          "title": "User Name",
+          "description": "User name",
+          "order": 2
         }
       }
     }
