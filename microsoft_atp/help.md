@@ -49,7 +49,7 @@ Example input:
 
 #### Get Machine Information
 
-This action is used to get details about a machine with it's ID.
+This action is used to get details about a machine from its ID.
 
 ##### Input
 
