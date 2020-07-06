@@ -51,7 +51,6 @@ This action is used to start a patch deployment. It accepts a scan and template 
 
 Note that scan names are not unique in Ivanti, in the event that there are duplicate names, the action will automatically use the latest scan. If you want a specific scan that is not the latest, pass in the scan ID instead.
 
-In case if there are multiple scans with the same name, the action will pick the ID of the latest scan with that name.
 
 ##### Input
 
