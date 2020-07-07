@@ -41,19 +41,24 @@ class GetAlertMatchingKey(insightconnect_plugin_runtime.Trigger):
 
             # If new results available, return each of them, update the time we saw the latest result
             current_results_list = current_results.get("value", [])
-            if not current_results_list:
-                self.logger.info(f"No new results were found. Sleeping for {frequency} seconds\n")
+            if len(current_results_list):
+                self.logger.info(f"New results found, returning {len(current_results_list)} results.")
+                for alert in current_results_list:
+                    current_value = alert.get(alert_key)
 
-            self.logger.info(f"New results found, examining {len(current_results_list)} results.")
-            for alert in current_results_list:
-                current_value = alert.get(alert_key)
-                if current_value == alert_value:
-                    self.send({Output.ALERT: insightconnect_plugin_runtime.helper.clean(alert)})
-                    self.logger.info("\n") # This keeps the logs easier to read, Send doesn't add newlines
-                else:
-                    self.logger.info(f"Found new alert, however, value {current_value} did not match {alert_value}."
-                                     f" Skipping this alert.")
-            self.logger.info(f"Updating time from.\n")
-            most_recent_time_string = current_results.get("value")[0].get("alertCreationTime")
+                    # See if current result matches the key / value pair we're looking for
+                    if current_value == alert_value:
+                        self.send({Output.ALERT: insightconnect_plugin_runtime.helper.clean(alert)})
+                        self.logger.info("\n")  # This keeps the logs easier to read, Send doesn't add newlines
+                    else:
+                        self.logger.info(f"Found new alert, however, expected value did not match actual value.\n"
+                                         f"Key: {alert_key}\n"
+                                         f"Expected Value: {alert_value}\n"
+                                         f"Actual Value: {current_value}\n"
+                                         f"Skipping this alert.\n")
+                self.logger.info(f"\nUpdating time from.\n")
+                most_recent_time_string = current_results.get("value")[0].get("alertCreationTime")
+            else:
+                self.logger.info(f"No new results were found. Sleeping for {frequency} seconds\n")
 
             time.sleep(frequency)

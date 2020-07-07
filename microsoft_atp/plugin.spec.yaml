@@ -153,16 +153,6 @@ types:
       type: related_user_object
       description: "Related user"
       required: false
-    comments:
-      title: "Comments"
-      type: "[]string"
-      description: "Comments"
-      required: false
-    evidence:
-      title: "Evidence"
-      type: "[]string"
-      description: "Evidence"
-      required: false
 
   file_type:
     sha1:

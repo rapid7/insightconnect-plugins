@@ -1,8 +1,7 @@
 import insightconnect_plugin_runtime
-import time
 from .schema import GetAlertsInput, GetAlertsOutput, Input, Output
 # Custom imports below
-import maya
+import time
 
 class GetAlerts(insightconnect_plugin_runtime.Trigger):
 
@@ -31,8 +30,7 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
 
         # Start looking for new results
         while True:
-            # query_params = f"?$filter=alertCreationTime+gt+{most_recent_time_string}&$orderby=alertCreationTime+desc"
-            query_params = ""
+            query_params = f"?$filter=alertCreationTime+gt+{most_recent_time_string}&$orderby=alertCreationTime+desc"
 
             self.logger.info("Looking for new alerts.")
             self.logger.info(f"Query params:{query_params}")

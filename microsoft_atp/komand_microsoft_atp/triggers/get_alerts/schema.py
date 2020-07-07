@@ -89,15 +89,6 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
           "description": "Classification",
           "order": 7
         },
-        "comments": {
-          "type": "array",
-          "title": "Comments",
-          "description": "Comments",
-          "items": {
-            "type": "string"
-          },
-          "order": 25
-        },
         "computerDnsName": {
           "type": "string",
           "title": "Computer DNS Name",
@@ -121,15 +112,6 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
           "title": "Determination",
           "description": "Determination",
           "order": 8
-        },
-        "evidence": {
-          "type": "array",
-          "title": "Evidence",
-          "description": "Evidence",
-          "items": {
-            "type": "string"
-          },
-          "order": 26
         },
         "firstEventTime": {
           "type": "string",
