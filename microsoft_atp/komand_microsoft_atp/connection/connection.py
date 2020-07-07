@@ -126,9 +126,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
                                           )
         return response.json()
 
-    def unisolate_machine(self, id, comment):
+    def unisolate_machine(self, id_, comment):
         self.check_and_refresh_api_token()
-        endpoint_url = f"https://api.securitycenter.windows.com/api/machines/{id}/unisolate"
+        endpoint_url = f"https://api.securitycenter.windows.com/api/machines/{id_}/unisolate"
         body = {
             "Comment": comment
         }
