@@ -100,10 +100,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
                                           assistance=response.text)
         return response
 
-    def isolate_machine(self, id, isolation_type, comment):
+    def isolate_machine(self, id_, isolation_type, comment):
         self.check_and_refresh_api_token()
 
-        endpoint_url = f"https://api.securitycenter.windows.com/api/machines/{id}/isolate"
+        endpoint_url = f"https://api.securitycenter.windows.com/api/machines/{id_}/isolate"
         body = {
             "Comment": comment,
             "IsolationType": isolation_type
