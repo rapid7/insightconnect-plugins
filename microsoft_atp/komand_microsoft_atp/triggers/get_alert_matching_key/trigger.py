@@ -43,12 +43,12 @@ class GetAlertMatchingKey(insightconnect_plugin_runtime.Trigger):
             current_results_list = current_results.get("value", [])
             if not current_results_list:
                 self.logger.info(f"No new results were found. Sleeping for {frequency} seconds\n")
-                
+
             self.logger.info(f"New results found, examining {len(current_results_list)} results.")
             for alert in current_results_list:
                 current_value = alert.get(alert_key)
                 if current_value == alert_value:
-                    self.send({Output.RESULTS: insightconnect_plugin_runtime.helper.clean(alert)})
+                    self.send({Output.ALERT: insightconnect_plugin_runtime.helper.clean(alert)})
                     self.logger.info("\n") # This keeps the logs easier to read, Send doesn't add newlines
                 else:
                     self.logger.info(f"Found new alert, however, value {current_value} did not match {alert_value}."

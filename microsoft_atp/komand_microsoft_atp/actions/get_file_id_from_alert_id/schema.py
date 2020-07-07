@@ -49,7 +49,7 @@ class GetFileIdFromAlertIdOutput(insightconnect_plugin_runtime.Output):
       "title": "File Information",
       "description": "The file ID related to the given alert ID",
       "items": {
-        "$ref": "#/definitions/file"
+        "$ref": "#/definitions/file_type"
       },
       "order": 1
     }
@@ -58,22 +58,111 @@ class GetFileIdFromAlertIdOutput(insightconnect_plugin_runtime.Output):
     "file_list"
   ],
   "definitions": {
-    "file": {
-      "id": "file",
+    "file_type": {
       "type": "object",
-      "title": "File",
-      "description": "File Object",
+      "title": "file_type",
       "properties": {
-        "content": {
+        "determinationType": {
           "type": "string",
-          "title": "Content",
-          "description": "File contents",
-          "format": "bytes"
+          "title": "Determination Type",
+          "description": "Determination type",
+          "order": 16
         },
-        "filename": {
+        "determinationValue": {
           "type": "string",
-          "title": "Filename",
-          "description": "Name of file"
+          "title": "Determination Value",
+          "description": "Determination value",
+          "order": 17
+        },
+        "fileProductName": {
+          "type": "string",
+          "title": "File Product Name",
+          "description": "File product name",
+          "order": 11
+        },
+        "filePublisher": {
+          "type": "string",
+          "title": "File Publisher",
+          "description": "File publisher",
+          "order": 10
+        },
+        "fileType": {
+          "type": "string",
+          "title": "File Type",
+          "description": "File type",
+          "order": 8
+        },
+        "globalFirstObserved": {
+          "type": "string",
+          "title": "Global First Observed",
+          "description": "Global first observed",
+          "order": 5
+        },
+        "globalLastObserved": {
+          "type": "string",
+          "title": "Global Last Observed",
+          "description": "Global last observed",
+          "order": 6
+        },
+        "globalPrevalence": {
+          "type": "integer",
+          "title": "Global Prevalence",
+          "description": "Global prevalence",
+          "order": 4
+        },
+        "isPeFile": {
+          "type": "boolean",
+          "title": "Is PE File",
+          "description": "Is PE File",
+          "order": 9
+        },
+        "isValidCertificate": {
+          "type": "boolean",
+          "title": "Is Valid Certificate",
+          "description": "Is valid certificate",
+          "order": 15
+        },
+        "issuer": {
+          "type": "string",
+          "title": "Issuer",
+          "description": "Issuer",
+          "order": 13
+        },
+        "md5": {
+          "type": "string",
+          "title": "MD5",
+          "description": "MD5",
+          "order": 3
+        },
+        "sha1": {
+          "type": "string",
+          "title": "SHA1",
+          "description": "SHA1",
+          "order": 1
+        },
+        "sha256": {
+          "type": "string",
+          "title": "SHA256",
+          "description": "SHA256",
+          "order": 2
+        },
+        "signer": {
+          "type": "string",
+          "title": "Signer",
+          "description": "Signer",
+          "order": 12
+        },
+        "signerHash": {
+          "type": "string",
+          "title": "Signer Hash",
+          "description": "Signer hash",
+          "order": 14
+        },
+        "size": {
+          "type": "integer",
+          "title": "Size",
+          "description": "Size",
+          "order": 7
         }
       }
     }

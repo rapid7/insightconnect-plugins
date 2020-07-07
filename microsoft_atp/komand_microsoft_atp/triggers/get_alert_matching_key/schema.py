@@ -9,13 +9,14 @@ class Component:
 
 class Input:
     
+    FREQUENCY = "frequency"
     KEY = "key"
     VALUE = "value"
     
 
 class Output:
     
-    RESULTS = "results"
+    ALERT = "alert"
     
 
 class GetAlertMatchingKeyInput(insightconnect_plugin_runtime.Input):
@@ -24,16 +25,23 @@ class GetAlertMatchingKeyInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "frequency": {
+      "type": "integer",
+      "title": "Frequency",
+      "description": "Poll frequency in seconds",
+      "default": 10,
+      "order": 3
+    },
     "key": {
       "type": "string",
       "title": "Key",
-      "description": "The key to look for in the alert",
+      "description": "The key to look for in the alert. This key must match the case shown in the example output section in help",
       "order": 1
     },
     "value": {
       "type": "string",
       "title": "Value",
-      "description": "The value to look for in the alert",
+      "description": "The value to look for in the alert. The value must match the case of the value returned",
       "order": 2
     }
   },
@@ -54,15 +62,15 @@ class GetAlertMatchingKeyOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "results": {
+    "alert": {
       "$ref": "#/definitions/alert",
-      "title": "Alerts",
-      "description": "All alerts that contain the given key and match its value",
+      "title": "Alert",
+      "description": "An alert that contains the given key and matching value",
       "order": 1
     }
   },
   "required": [
-    "results"
+    "alert"
   ],
   "definitions": {
     "alert": {
@@ -71,20 +79,20 @@ class GetAlertMatchingKeyOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "aadTenantId": {
           "type": "string",
-          "title": "Aadtenantid",
-          "description": "Aadtenantid",
+          "title": "AAD Tenant ID",
+          "description": "AAD tenant ID",
           "order": 23
         },
         "alertCreationTime": {
           "type": "string",
-          "title": "Alertcreationtime",
-          "description": "Alertcreationtime",
+          "title": "Alert Creation Time",
+          "description": "Alert creation time",
           "order": 15
         },
         "assignedTo": {
           "type": "string",
-          "title": "Assignedto",
-          "description": "Assignedto",
+          "title": "Assigned To",
+          "description": "Assigned To",
           "order": 4
         },
         "category": {
@@ -110,8 +118,8 @@ class GetAlertMatchingKeyOutput(insightconnect_plugin_runtime.Output):
         },
         "computerDnsName": {
           "type": "string",
-          "title": "Computerdnsname",
-          "description": "Computerdnsname",
+          "title": "Computer DNS Name",
+          "description": "Computer DNS name",
           "order": 21
         },
         "description": {
@@ -122,8 +130,8 @@ class GetAlertMatchingKeyOutput(insightconnect_plugin_runtime.Output):
         },
         "detectionSource": {
           "type": "string",
-          "title": "Detectionsource",
-          "description": "Detectionsource",
+          "title": "Detection Source",
+          "description": "Detection source",
           "order": 10
         },
         "determination": {
@@ -143,68 +151,68 @@ class GetAlertMatchingKeyOutput(insightconnect_plugin_runtime.Output):
         },
         "firstEventTime": {
           "type": "string",
-          "title": "Firsteventtime",
-          "description": "Firsteventtime",
+          "title": "First Event Time",
+          "description": "First event time",
           "order": 16
         },
         "id": {
           "type": "string",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 1
         },
         "incidentId": {
           "type": "integer",
-          "title": "Incidentid",
-          "description": "Incidentid",
+          "title": "Incident ID",
+          "description": "Incident ID",
           "order": 2
         },
         "investigationId": {
           "type": "integer",
-          "title": "Investigationid",
-          "description": "Investigationid",
+          "title": "Investigation ID",
+          "description": "Investigation ID",
           "order": 3
         },
         "investigationState": {
           "type": "string",
-          "title": "Investigationstate",
-          "description": "Investigationstate",
+          "title": "Investigation State",
+          "description": "Investigation state",
           "order": 9
         },
         "lastEventTime": {
           "type": "string",
-          "title": "Lasteventtime",
-          "description": "Lasteventtime",
+          "title": "Last Event Time",
+          "description": "Last event time",
           "order": 17
         },
         "lastUpdateTime": {
           "type": "string",
-          "title": "Lastupdatetime",
-          "description": "Lastupdatetime",
+          "title": "Last Update Time",
+          "description": "Last update time",
           "order": 18
         },
         "machineId": {
           "type": "string",
-          "title": "Machineid",
-          "description": "Machineid",
+          "title": "Machine ID",
+          "description": "Machine ID",
           "order": 20
         },
         "rbacGroupName": {
           "type": "string",
-          "title": "Rbacgroupname",
-          "description": "Rbacgroupname",
+          "title": "RBAC Group Name",
+          "description": "RBAC group name",
           "order": 22
         },
         "relatedUser": {
           "$ref": "#/definitions/related_user_object",
-          "title": "Relateduser",
-          "description": "Relateduser",
+          "title": "Related User",
+          "description": "Related user",
           "order": 24
         },
         "resolvedTime": {
           "type": "string",
-          "title": "Resolvedtime",
-          "description": "Resolvedtime",
+          "title": "Resolved Time",
+          "description": "Resolved time",
           "order": 19
         },
         "severity": {
@@ -221,8 +229,8 @@ class GetAlertMatchingKeyOutput(insightconnect_plugin_runtime.Output):
         },
         "threatFamilyName": {
           "type": "string",
-          "title": "Threatfamilyname",
-          "description": "Threatfamilyname",
+          "title": "Threat Family Name",
+          "description": "Threat family name",
           "order": 12
         },
         "title": {

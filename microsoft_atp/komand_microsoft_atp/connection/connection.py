@@ -101,30 +101,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
                                           assistance=response.text)
         return response
 
-    def get_alerts_by_key_value(self, key, value):
-        self.check_and_refresh_api_token()
-
-        endpoint = "https://api.securitycenter.windows.com/api/alerts"
-        self.logger.info(f"Connecting to: {endpoint}")
-        response = self.session.get(endpoint)
-
-        try:
-            response.raise_for_status()
-        except Exception as e:
-            raise ConnectionTestException(cause=f"Connection error occurred while connecting to: {endpoint}.\nError "
-                                                f"was: {e}\n",
-                                          assistance=response.text)
-
-        self.logger.info("Looking for {} matching {}".format(value, key))
-
-        try:
-            matching_alerts = list(filter(lambda a: a.get(key) == value, response.json()))
-        except json.JSONDecodeError as e:
-            self.logger.error("Alerts returned were in an unexpected format!")
-            raise PluginException(PluginException.Preset.INVALID_JSON, data=response.text)
-
-        return insightconnect_plugin_runtime.helper.clean(matching_alerts)
-
     def isolate_machine(self, id, isolation_type, comment):
         self.check_and_refresh_api_token()
 

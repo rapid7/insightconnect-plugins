@@ -19,12 +19,6 @@ This plugin utilizes the [Microsoft ATP API](https://docs.microsoft.com/en-us/wi
 
 ## Setup
 
-This plugin uses the Windows Defender ATP API. It will use an Azure application to connect to the API and run 
-actions from InsightConnect. 
-
-For information on how to setup your application and assign permissions go here:  
-https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp
-
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -119,7 +113,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|file_list|[]file|True|The file ID related to the given alert ID|
+|file_list|[]file_type|True|The file ID related to the given alert ID|
 
 Example output:
 
@@ -370,19 +364,25 @@ Example output:
 
 #### Get Alerts Matching Key
 
-This trigger is used to get alerts that match a given key to its value.
+This trigger is used to get alerts that match a given key to its value. 
+
+The valid key names are shown in the example output for this action. The key names and values must be exact case when
+looking for a match. 
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|key|string|None|True|The key to look for in the alert|None|assignedTo|
-|value|string|None|True|The value to look for in the alert|None|user@example.com|
+|frequency|integer|10|False|Poll frequency in seconds|None|10|
+|key|string|None|True|The key to look for in the alert. This key must match the case shown in the example output section in help|None|assignedTo|
+|value|string|None|True|The value to look for in the alert. The value must match the case of the value returned|None|user@example.com|
 
 Example input:
 
 ```
 {
+  "key": "assignedTo", 
+  "value": "Automation",
   "frequency": 10
 }
 ```
@@ -391,42 +391,39 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|alert|True|All alerts that contain the given key and match its value|
+|alert|alert|True|An alert that contains the given key and matching value|
 
 Example output:
 
 ```
 {
-   "results":[
-      {
-         "AlertTime":"2018-11-07T18:59:10.2582627Z",
-         "ComputerDnsName":"xxxxxxxx",
-         "AlertTitle":"Suspicious Powershell commandline",
-         "Category":"SuspiciousActivity",
-         "Severity":"Medium",
-         "AlertId":"636772141692393966_614861963",
-         "LinkToWDATP":"https://securitycenter.windows.com/alert/636772141692393966_614861963",
-         "Sha1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "FileName":"powershell.exe",
-         "FilePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
-         "IoaDefinitionId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
-         "AlertPart":0,
-         "FullId":"636772141692393966_614861963:DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco=",
-         "LastProcessedTimeUtc":"2018-11-07T19:05:01.8993766Z",
-         "Source":"EDR",
-         "Md5":"95000560239032bc68b4c2fdfcdef913",
-         "Sha256":"d3f8fade829d2b7bd596c4504a6dae5c034e789b6a3defbe013bda7d14466677",
-         "LogOnUsers":"XXXXXXXX\\Administrator",
-         "MachineName":"XXXXXX",
-         "InternalIPv4List":"XXX.XXX.XXX.XXX",
-         "InternalIPv6List":"XXXXXXXXXX",
-         "FileHash":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "DeviceID":"c6944fa14970633adeecbabc104167ef12557a6f",
-         "Description":"A suspicious Powershell commandline was found on the machine. This commandline might be used during installation, exploration, or in some cases with lateral movement activities which are used by attackers to invoke modules, download external payloads, and get more information about the system. Attackers usually use Powershell to bypass security protection mechanisms by executing their payload in memory without touching the disk and leaving any trace.\r\nThe process powershell.exe was executing suspicious commandline \r\npowershell.exe  -NoExit -ExecutionPolicy Bypass -WindowStyle Hidden (New-Object System.Net.WebClient).DownloadFile('http://127.0.0.1/1.exe', 'C:\\test-WDATP-test\\invoice.exe'); Start-Process 'C:\\test-WDATP-test\\invoice.exe'",
-         "ExternalId":"418AE8AD3F8A1B26F9D02B09E0583A0AEBAC93E7",
-         "IocUniqueId":"DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco="
-      }
-   ]
+   "alert":{
+      "id":"da637292082891366787_322129023",
+      "incidentId":1,
+      "investigationId":1,
+      "assignedTo":"Automation",
+      "severity":"Informational",
+      "status":"Resolved",
+      "investigationState":"Benign",
+      "detectionSource":"WindowsDefenderAv",
+      "category":"Malware",
+      "title":"'EICAR_Test_File' malware was detected",
+      "description":"Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks.\n\nThis detection might indicate that the malware was stopped from delivering its payload. However, it is prudent to check the machine for signs of infection.",
+      "alertCreationTime":"2020-07-01T13:51:29.0741799Z",
+      "firstEventTime":"2020-07-01T13:49:55.2853766Z",
+      "lastEventTime":"2020-07-01T13:49:55.8520351Z",
+      "lastUpdateTime":"2020-07-02T20:11:23.0966667Z",
+      "resolvedTime":"2020-07-01T14:02:24.4812386Z",
+      "machineId":"2df36d707c1ee508xyFf77f3dbfc95db65bc4a73",
+      "computerDnsName":"example-desktop",
+      "aadTenantId":"5c824599-ab2c-43ab-651x-3b886d4f8f10",
+      "comments":[
+
+      ],
+      "evidence":[
+
+      ]
+   }
 }
 ```
 
@@ -452,42 +449,39 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|alert|True|All new alerts are returned|
+|alert|alert|True|Alert|
 
 Example output:
 
 ```
 {
-   "results":[
-      {
-         "AlertTime":"2018-11-07T18:59:10.2582627Z",
-         "ComputerDnsName":"xxxxxxxx",
-         "AlertTitle":"Suspicious Powershell commandline",
-         "Category":"SuspiciousActivity",
-         "Severity":"Medium",
-         "AlertId":"636772141692393966_614861963",
-         "LinkToWDATP":"https://securitycenter.windows.com/alert/636772141692393966_614861963",
-         "Sha1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "FileName":"powershell.exe",
-         "FilePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
-         "IoaDefinitionId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
-         "AlertPart":0,
-         "FullId":"636772141692393966_614861963:DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco=",
-         "LastProcessedTimeUtc":"2018-11-07T19:05:01.8993766Z",
-         "Source":"EDR",
-         "Md5":"95000560239032bc68b4c2fdfcdef913",
-         "Sha256":"d3f8fade829d2b7bd596c4504a6dae5c034e789b6a3defbe013bda7d14466677",
-         "LogOnUsers":"XXXXXXXX\\Administrator",
-         "MachineName":"XXXXXX",
-         "InternalIPv4List":"XXX.XXX.XXX.XXX",
-         "InternalIPv6List":"XXXXXXXXXX",
-         "FileHash":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "DeviceID":"c6944fa14970633adeecbabc104167ef12557a6f",
-         "Description":"A suspicious Powershell commandline was found on the machine. This commandline might be used during installation, exploration, or in some cases with lateral movement activities which are used by attackers to invoke modules, download external payloads, and get more information about the system. Attackers usually use Powershell to bypass security protection mechanisms by executing their payload in memory without touching the disk and leaving any trace.\r\nThe process powershell.exe was executing suspicious commandline \r\npowershell.exe  -NoExit -ExecutionPolicy Bypass -WindowStyle Hidden (New-Object System.Net.WebClient).DownloadFile('http://127.0.0.1/1.exe', 'C:\\test-WDATP-test\\invoice.exe'); Start-Process 'C:\\test-WDATP-test\\invoice.exe'",
-         "ExternalId":"418AE8AD3F8A1B26F9D02B09E0583A0AEBAC93E7",
-         "IocUniqueId":"DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco="
-      }
-   ]
+   "alert":{
+      "id":"da637292082891366787_322129023",
+      "incidentId":1,
+      "investigationId":1,
+      "assignedTo":"Automation",
+      "severity":"Informational",
+      "status":"Resolved",
+      "investigationState":"Benign",
+      "detectionSource":"WindowsDefenderAv",
+      "category":"Malware",
+      "title":"'EICAR_Test_File' malware was detected",
+      "description":"Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks.\n\nThis detection might indicate that the malware was stopped from delivering its payload. However, it is prudent to check the machine for signs of infection.",
+      "alertCreationTime":"2020-07-01T13:51:29.0741799Z",
+      "firstEventTime":"2020-07-01T13:49:55.2853766Z",
+      "lastEventTime":"2020-07-01T13:49:55.8520351Z",
+      "lastUpdateTime":"2020-07-02T20:11:23.0966667Z",
+      "resolvedTime":"2020-07-01T14:02:24.4812386Z",
+      "machineId":"2df36d707c1ee508xyFf77f3dbfc95db65bc4a73",
+      "computerDnsName":"example-desktop",
+      "aadTenantId":"5c824599-ab2c-43ab-651x-3b886d4f8f10",
+      "comments":[
+
+      ],
+      "evidence":[
+
+      ]
+   }
 }
 ```
 

@@ -34,24 +34,24 @@ types:
       type: string
   alert:
     id:
-      title: "Id"
+      title: "ID"
       type: string
-      description: "Id"
+      description: "ID"
       required: false
     incidentId:
-      title: "Incidentid"
+      title: "Incident ID"
       type: integer
-      description: "Incidentid"
+      description: "Incident ID"
       required: false
     investigationId:
-      title: "Investigationid"
+      title: "Investigation ID"
       type: integer
-      description: "Investigationid"
+      description: "Investigation ID"
       required: false
     assignedTo:
-      title: "Assignedto"
+      title: "Assigned To"
       type: string
-      description: "Assignedto"
+      description: "Assigned To"
       required: false
     severity:
       title: "Severity"
@@ -74,14 +74,14 @@ types:
       description: "Determination"
       required: false
     investigationState:
-      title: "Investigationstate"
+      title: "Investigation State"
       type: string
-      description: "Investigationstate"
+      description: "Investigation state"
       required: false
     detectionSource:
-      title: "Detectionsource"
+      title: "Detection Source"
       type: string
-      description: "Detectionsource"
+      description: "Detection source"
       required: false
     category:
       title: "Category"
@@ -89,9 +89,9 @@ types:
       description: "Category"
       required: false
     threatFamilyName:
-      title: "Threatfamilyname"
+      title: "Threat Family Name"
       type: string
-      description: "Threatfamilyname"
+      description: "Threat family name"
       required: false
     title:
       title: "Title"
@@ -104,54 +104,54 @@ types:
       description: "Description"
       required: false
     alertCreationTime:
-      title: "Alertcreationtime"
+      title: "Alert Creation Time"
       type: string
-      description: "Alertcreationtime"
+      description: "Alert creation time"
       required: false
     firstEventTime:
-      title: "Firsteventtime"
+      title: "First Event Time"
       type: string
-      description: "Firsteventtime"
+      description: "First event time"
       required: false
     lastEventTime:
-      title: "Lasteventtime"
+      title: "Last Event Time"
       type: string
-      description: "Lasteventtime"
+      description: "Last event time"
       required: false
     lastUpdateTime:
-      title: "Lastupdatetime"
+      title: "Last Update Time"
       type: string
-      description: "Lastupdatetime"
+      description: "Last update time"
       required: false
     resolvedTime:
-      title: "Resolvedtime"
+      title: "Resolved Time"
       type: string
-      description: "Resolvedtime"
+      description: "Resolved time"
       required: false
     machineId:
-      title: "Machineid"
+      title: "Machine ID"
       type: string
-      description: "Machineid"
+      description: "Machine ID"
       required: false
     computerDnsName:
-      title: "Computerdnsname"
+      title: "Computer DNS Name"
       type: string
-      description: "Computerdnsname"
+      description: "Computer DNS name"
       required: false
     rbacGroupName:
-      title: "Rbacgroupname"
+      title: "RBAC Group Name"
       type: string
-      description: "Rbacgroupname"
+      description: "RBAC group name"
       required: false
     aadTenantId:
-      title: "Aadtenantid"
+      title: "AAD Tenant ID"
       type: string
-      description: "Aadtenantid"
+      description: "AAD tenant ID"
       required: false
     relatedUser:
-      title: "Relateduser"
+      title: "Related User"
       type: related_user_object
-      description: "Relateduser"
+      description: "Related user"
       required: false
     comments:
       title: "Comments"
@@ -424,7 +424,7 @@ actions:
       file_list:
         title: File Information
         description: The file ID related to the given alert ID
-        type: "[]file"
+        type: "[]file_type"
         required: true
   isolate_machine:
     title: Isolate Machine
@@ -558,6 +558,7 @@ actions:
         description: A response that includes the result of the action, and supplemental
           information about the action taken
         required: true
+
 triggers:
   get_alert_matching_key:
     title: Get Alerts Matching Key
@@ -565,20 +566,27 @@ triggers:
     input:
       key:
         type: string
-        description: The key to look for in the alert
+        description: The key to look for in the alert. This key must match the case shown in the example output section in help
         example: assignedTo
         required: true
         order: 1
       value:
         type: string
-        description: The value to look for in the alert
+        description: The value to look for in the alert. The value must match the case of the value returned
         example: user@example.com
         required: true
         order: 2
+      frequency:
+        type: integer
+        description: Poll frequency in seconds
+        default: 10
+        example: 10
+        required: false
+        order: 3
     output:
-      results:
-        title: Alerts
-        description: All alerts that contain the given key and match its value
+      alert:
+        title: Alert
+        description: An alert that contains the given key and matching value
         type: 'alert'
         required: true
   get_alerts:
@@ -592,8 +600,8 @@ triggers:
         example: 10
         required: false
     output:
-      results:
-        title: Alerts
-        description: All new alerts are returned
+      alert:
+        title: Alert
+        description: Alert
         type: 'alert'
         required: true
