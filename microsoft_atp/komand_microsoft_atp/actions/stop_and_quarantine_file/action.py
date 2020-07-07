@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import StopAndQuarantineFileInput, StopAndQuarantineFileOutput
 # Custom imports below
 
 
-class StopAndQuarantineFile(komand.Action):
+class StopAndQuarantineFile(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -22,7 +22,7 @@ class StopAndQuarantineFile(komand.Action):
         self.logger.info("Attempting to stop and quarantine file: " + sha1_id)
         self.logger.info("Attempting to stop and quarantine file on machine: " + machine_id)
         response = self.connection.stop_and_quarantine_file(machine_id, sha1_id, comment)
-        return {"stop_and_quarantine_response": komand.helper.clean(response)}
+        return {"stop_and_quarantine_response": insightconnect_plugin_runtime.helper.clean(response)}
 
     # def test(self):
     #     # TODO: Implement test function
