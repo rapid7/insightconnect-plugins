@@ -426,9 +426,7 @@ Example output:
       "comments":[
 
       ],
-      "evidence":[
-
-      ]
+      "evidence":[]
    }
 }
 ```
@@ -481,12 +479,8 @@ Example output:
       "machineId":"2df36d707c1ee508xyFf77f3dbfc95db65bc4a73",
       "computerDnsName":"example-desktop",
       "aadTenantId":"5c824599-ab2c-43ab-651x-3b886d4f8f10",
-      "comments":[
-
-      ],
-      "evidence":[
-
-      ]
+      "comments":[],
+      "evidence":[]
    }
 }
 ```
