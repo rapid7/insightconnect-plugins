@@ -149,6 +149,13 @@ class IvantiSecurityControlsAPI:
     def start_patch_deployment(self, payload):
         return self._call_api("POST", f"{self.url}/patch/deployments", json_data=payload, return_response=True)
 
+    def get_patch_group_by_name(self, patch_group_name):
+        params = {"name": patch_group_name, 'count': 1}
+        return self._call_api("GET", f"{self.url}/patch/groups")
+
+    def add_patches_to_patch_group(self, patch_group_id, payload):
+        return self._call_api("POST", f"{self.url}/patch/groups/{patch_group_id}/patches", json_data=payload)
+
     def _call_api(self, method, url, params=None, json_data=None, allow_404=False, return_response=False):
         try:
             response = requests.request(method, url,

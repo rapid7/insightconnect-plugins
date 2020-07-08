@@ -45,6 +45,43 @@ Example input:
 
 ### Actions
 
+#### Update Patch Group
+
+This action is used to add CVEs to an existing patch group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|patch_group|string|None|True|Name or ID of an existing patch group|None|Patch Group created from InsightConnect|
+|vulnerability_identifier|[]string|None|True|List of patch IDs or CVEs to add to an existing patch group|None|["CVE-2019-0708", "12345"]|
+
+Example input:
+
+```
+{
+  "patch_group": "Patch Group created from InsightConnect",
+  "vulnerability_identifier": [
+    "CVE-2019-0708",
+    "12345"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 #### Start Patch Deployment
 
 This action is used to start a patch deployment. It accepts a scan and template by ID or by name.
@@ -940,6 +977,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.5.0 - New action Update Patch Group
 * 1.4.0 - New actions Get Patch Deployment Template ID, Start Patch Deployment
 * 1.3.0 - New actions Create Patch Group and Add CVEs, Create Patch Scan Template
 * 1.2.1 - Added session credentials and changed polling method for Start Patch Scan
