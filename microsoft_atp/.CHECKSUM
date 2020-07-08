@@ -1,63 +1,47 @@
 {
-	"spec": "1df6a383b27bff0b74930ec5a1dcbcf4",
-	"manifest": "0b35e1f750069025e5ce653742a3a5f8",
-	"setup": "633dffd90851d49e1315b36016d72ef2",
+	"spec": "c1156db3c7024267bfd8b1f3fe54b58c",
+	"manifest": "7b54429adc4eb179350cb505027c9331",
+	"setup": "4b8c44a10fdddafc3d67008e5a05060c",
 	"schemas": [
 		{
 			"identifier": "get_file_id_from_alert_id/schema.py",
-			"hash": "5567e8e4e6210ed21ace945a7e2edf1b"
+			"hash": "e5288fd810dc0856a26733180d957e32"
 		},
 		{
 			"identifier": "get_machine_action/schema.py",
-			"hash": "274b5cb7f782d1311441c9a59c6f6bdd"
+			"hash": "5045c4b4d61d8afa02151ecd19730a9a"
 		},
 		{
-			"identifier": "get_machine_id_from_alert_id/schema.py",
-			"hash": "32102a069c7caf9dc31373e2335d8653"
+			"identifier": "get_machine_information/schema.py",
+			"hash": "5debc70afde9a82671e5e4d142c2a759"
 		},
 		{
 			"identifier": "isolate_machine/schema.py",
-			"hash": "97e6460fa7cfebf3ec96c169f8bac908"
+			"hash": "fdc6f5b6ae4a472206229aed9f8e5cfd"
 		},
 		{
 			"identifier": "run_antivirus_scan/schema.py",
-			"hash": "f58a15f374751c33235b3ff4b66167cd"
+			"hash": "8ad8695735c2202735ddec208ba4f21d"
 		},
 		{
 			"identifier": "stop_and_quarantine_file/schema.py",
-			"hash": "edff101f510ee9ca7e7fcfbdc9f06334"
+			"hash": "1377a6e9e61f36f006c3cff3cf7bca00"
 		},
 		{
 			"identifier": "unisolate_machine/schema.py",
-			"hash": "52ab922910985ef85312135848bae871"
+			"hash": "117bfa596d0f855a8cb4f92cf967e766"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "8fda9492c93617e39b5fb6ea47551cbd"
-		},
-		{
-			"identifier": "get_alert_for_actor/schema.py",
-			"hash": "0bd1c04f1d70767c28aacb1f8e68f8e7"
-		},
-		{
-			"identifier": "get_alert_for_domain/schema.py",
-			"hash": "0571004afc4c52200dfab4c2df78c66f"
-		},
-		{
-			"identifier": "get_alert_for_file/schema.py",
-			"hash": "e5b45cbe376d63b973bd627795bd5b8f"
-		},
-		{
-			"identifier": "get_alert_for_id/schema.py",
-			"hash": "98f815ecc96cb4ae0927c2f3dd27a1d4"
+			"hash": "d9a62de96f1020d4400d6dae06d8594f"
 		},
 		{
 			"identifier": "get_alert_matching_key/schema.py",
-			"hash": "1e79f66a95960f824e7780c4c8d077df"
+			"hash": "9c85b56f82d3f8fda4baa5d9447f4a61"
 		},
 		{
 			"identifier": "get_alerts/schema.py",
-			"hash": "051aba7c26309d59ec379d4f822951b6"
+			"hash": "709b75d54408c209fe4f2fa57506d2dd"
 		}
 	]
 }
