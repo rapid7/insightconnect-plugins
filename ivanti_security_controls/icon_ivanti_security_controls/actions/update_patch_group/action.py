@@ -38,6 +38,7 @@ class UpdatePatchGroup(insightconnect_plugin_runtime.Action):
             )
 
         if patch_group_identifier.isdigit():
+            self.check_patch_group_exists(patch_group_identifier)
             patch_group_id = patch_group_identifier
         else: 
             patch_group_id = self.get_patch_group_id(patch_group_identifier)
@@ -61,4 +62,12 @@ class UpdatePatchGroup(insightconnect_plugin_runtime.Action):
         raise PluginException(
             cause='Invalid Patch Group provided.',
             assistance=f'Patch group: "{patch_group_name}" doesn\'t exist.'
+        )
+
+    def check_patch_group_exists(self, patch_group_identifier: str):
+        if self.connection.ivanti_api.get_patch_group(patch_group_identifier):
+            return
+        raise PluginException(
+            cause='Invalid Patch Group provided.',
+            assistance=f'Patch group: "{patch_group_identifier}" doesn\'t exist.'
         )
