@@ -1,6 +1,6 @@
 # Description
 
-[Jira](https://www.atlassian.com/software/jira) is an issue tracking product developed by Atlassian that allows teams to plan, track, and release great software. This plugin uses the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v2/) to programmatically manage and create issues and users. The Jira REST API supports the Jira Software, Jira Server, and Jira Help Desk products from Atlassian.
+[Jira](https://www.atlassian.com/software/jira) is an issue tracking product developed by Atlassian that allows teams to plan, track, and release great software. This plugin uses the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v2/) to programmatically manage and create issues and users. The Jira plugin supports cloud and on-premise versions of Jira Software, Jira Server, and Jira ServiceDesk products from Atlassian.
 
 # Key Features
 
@@ -10,7 +10,7 @@
 
 # Requirements
 
-* Jira URL
+* URL for Jira Software, Jira Server, or Jira ServiceDesk
 * Administrative credentials
 
 # Documentation
@@ -1142,6 +1142,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 6.0.1 - Update documentation to include supported Jira products
 * 6.0.0 - Update Create User, Delete User and Find Users to reflect [Jira Cloud API privacy changes](https://developer.atlassian.com/cloud/jira/platform/api-changes-for-user-privacy-announcement/) to support `accountId` | Fix issue in connection test where the error was logged but did not fail for users | Update connection schema to match the API key and username inputs
 * 5.0.0 - Fix user enumeration  in `Find Users` | Add example input | Update titles of Attachment Filename input in Attach Issue action and Poll Timeout input in New Issue trigger to match style
 * 4.0.2 - Moved `apk add` in Dockerfile to use cache | Changed bare strings in params.get and output to static fields from schema | Remove duplicated code in actions | Changed `Exception` to `PluginException`
