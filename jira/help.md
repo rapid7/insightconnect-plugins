@@ -1,6 +1,6 @@
 # Description
 
-[Jira](https://www.atlassian.com/software/jira) is an issue tracking product developed by Atlassian that allows teams to plan, track, and release great software. This plugin uses the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v2/) to programmatically manage and create issues and users. The Jira REST API supports Jira Software, Jira Server, and Jira ServiceDesk products from Atlassian.
+[Jira](https://www.atlassian.com/software/jira) is an issue tracking product developed by Atlassian that allows teams to plan, track, and release great software. This plugin uses the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v2/) to programmatically manage and create issues and users. The Jira plugin supports cloud and on-premise versions of Jira Software, Jira Server, and Jira ServiceDesk products from Atlassian.
 
 # Key Features
 
@@ -10,7 +10,7 @@
 
 # Requirements
 
-* Organization URL for Jira Software, Jira Server, or Jira ServiceDesk
+* URL for Jira Software, Jira Server, or Jira ServiceDesk
 * Administrative credentials
 
 # Documentation
