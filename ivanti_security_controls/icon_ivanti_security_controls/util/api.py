@@ -135,6 +135,20 @@ class IvantiSecurityControlsAPI:
     def get_operation_location(self, url):
         return self._call_api("GET", url)
 
+    def get_patch_deployment_template_by_name(self, deployment_template_name):
+        params = {"name": deployment_template_name}
+        return self._call_api("GET", f"{self.url}/patch/deploytemplates", params=params)
+
+    def start_patch_download(self, scan_id):
+        return self._call_api("POST", f"{self.url}/patch/downloads/scans/{scan_id}", return_response=True)
+
+    def get_patch_scan_by_name(self, scan_name):
+        params = {"name": scan_name, 'count': 1}
+        return self._call_api("GET", f"{self.url}/patch/scans", params=params)
+
+    def start_patch_deployment(self, payload):
+        return self._call_api("POST", f"{self.url}/patch/deployments", json_data=payload, return_response=True)
+
     def _call_api(self, method, url, params=None, json_data=None, allow_404=False, return_response=False):
         try:
             response = requests.request(method, url,

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: ivanti_security_controls
 title: Ivanti Security Controls
 description: Ivanti Security Controls is a unified IT management platform used for managing and protecting through Patch Management, Application Control, and Asset Inventory functionality
-version: 1.3.0
+version: 1.4.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -920,6 +920,50 @@ actions:
         title: Machine Information
         description: Information about a machine involved with the patch deployment
         type: machine_deploy_state
+        required: true
+  get_patch_deployment_template_id:
+    title: Get Patch Deployment Template ID
+    description: Get a Patch Deployment Template ID by searching for the Patch Deployment Template Name
+    input:
+      patch_deployment_template_name:
+        title: Patch Deployment Template Name
+        description: The name of the patch deployment template
+        type: string
+        required: true
+        example: Patch Deployment Template created from InsightConnect
+    output:
+      patch_deployment_template_id:
+        title: Patch Deployment Template ID
+        description: The ID of the patch deployment template
+        type: string
+        required: true
+  start_patch_deployment:
+    title: Start Patch Deployment
+    description: Start patch deployment
+    input:
+      scan_identifier:
+        title: Scan Identifier
+        description: A scan ID or scan name
+        type: string
+        required: true
+        example: 01234567-89AB-CDEF-0123-456789ABCDEF
+      template_identifier:
+        title: Template Identifier
+        description: A template ID or template name
+        type: string
+        required: true
+        example: Deployment Template created from InsightConnect
+      download_patches:
+        title: Download Patches
+        description: Boolean to initiate patch download before starting the deployment
+        type: boolean
+        required: true
+        example: false
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
         required: true
   create_patch_scan_template:
     title: Create Patch Scan Template
