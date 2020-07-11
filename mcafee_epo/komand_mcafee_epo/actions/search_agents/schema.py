@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "List system information"
+    DESCRIPTION = "Find Systems in the ePolicy Orchestrator tree by name, IP address, MAC address, user name, AgentGUID, or tag"
 
 
 class Input:
@@ -12,19 +12,19 @@ class Input:
     
 
 class Output:
-    PROPERTIES = "properties"
+    AGENTS = "agents"
     
 
-class SystemInfoInput(insightconnect_plugin_runtime.Input):
+class SearchAgentsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
     "query": {
-      "type": "integer",
+      "type": "string",
       "title": "Query",
-      "description": "System search query e.g Device-1",
+      "description": "Name, IP address, MAC address, user name, AgentGUID, or tag to search available agents",
       "order": 1
     }
   }
@@ -35,16 +35,16 @@ class SystemInfoInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class SystemInfoOutput(insightconnect_plugin_runtime.Output):
+class SearchAgentsOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "properties": {
+    "agents": {
       "type": "array",
-      "title": "Properties",
-      "description": "Computer Properties",
+      "title": "Agents",
+      "description": "Returned agents",
       "items": {
         "$ref": "#/definitions/computer_properties"
       },
@@ -52,7 +52,7 @@ class SystemInfoOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "properties"
+    "agents"
   ],
   "definitions": {
     "computer_properties": {

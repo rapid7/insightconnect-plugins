@@ -24,25 +24,29 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 f"{url}:{port}",
                 params.get(Input.CREDENTIALS).get('username'),
                 params.get(Input.CREDENTIALS).get('password'),
-                verify=False
+                verify=params.get(Input.SSL_VERIFY, True)
             )
             if self.client is not None:
                 self.logger.info("Connected")
         except Exception:
             self.logger.error("Error connecting to Mcafee EPO")
             raise ConnectionTestException(
-                cause="Connection error",
+                cause="Connection error.",
                 assistance="Error connecting to McAfee EPO"
             )
 
     def test(self):
         try:
-            mc = self.client
-            if mc.epo.getVersion():
+            if self.client("core.getSecurityToken"):
                 return {"success": True}
+            else:
+                raise ConnectionTestException(
+                    cause="Connection error.",
+                    assistance="An unexpected error occurred during the API request"
+                )
         except Exception:
             self.logger.error("An unexpected error occurred during the API request")
             raise ConnectionTestException(
-                cause="Connection error",
+                cause="Connection error.",
                 assistance="An unexpected error occurred during the API request"
             )

@@ -6,6 +6,7 @@ import json
 class Input:
     CREDENTIALS = "credentials"
     PORT = "port"
+    SSL_VERIFY = "ssl_verify"
     URL = "url"
     
 
@@ -27,6 +28,13 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "McAfee ePO port",
       "order": 2
     },
+    "ssl_verify": {
+      "type": "boolean",
+      "title": "SSL Verify",
+      "description": "Verify SSL Certificate",
+      "default": true,
+      "order": 4
+    },
     "url": {
       "type": "string",
       "title": "URL",
@@ -37,6 +45,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "required": [
     "credentials",
     "port",
+    "ssl_verify",
     "url"
   ],
   "definitions": {

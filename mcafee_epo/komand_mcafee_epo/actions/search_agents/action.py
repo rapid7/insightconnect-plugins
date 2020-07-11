@@ -1,16 +1,17 @@
 import insightconnect_plugin_runtime
-from .schema import SystemInfoInput, SystemInfoOutput, Input, Output
+from .schema import SearchAgentsInput, SearchAgentsOutput, Input, Output, Component
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class SystemInfo(insightconnect_plugin_runtime.Action):
+class SearchAgents(insightconnect_plugin_runtime.Action):
+
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='system_info',
-                description='List system information',
-                input=SystemInfoInput(),
-                output=SystemInfoOutput())
+                name='search_agents',
+                description=Component.DESCRIPTION,
+                input=SearchAgentsInput(),
+                output=SearchAgentsOutput())
 
     def run(self, params=None):
         if params is None:
@@ -27,10 +28,11 @@ class SystemInfo(insightconnect_plugin_runtime.Action):
                 cleaned_response.append(cleaned_prop)
             # return the cleaned list
             return {
-                Output.PROPERTIES: cleaned_response
+                Output.AGENTS: cleaned_response
             }
-        except Exception:
+        except Exception as e:
             raise PluginException(
-                cause="System information error",
-                assistance="Unable to query for system information"
+                cause="System information error.",
+                assistance="Unable to query for system information",
+                data=e
             )

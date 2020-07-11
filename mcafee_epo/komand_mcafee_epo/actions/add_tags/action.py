@@ -22,12 +22,13 @@ class AddTags(insightconnect_plugin_runtime.Action):
                     d,
                     params.get(Input.TAG)
                 )
-            self.logger.info("Applied to {} devices".format(len(params.get(Input.DEVICES))))
+            self.logger.info(f"Applied to {len(params.get(Input.DEVICES))} devices")
             return {
                 Output.MESSAGE: "Tags applied to devices successfully"
             }
         except Exception as e:
             raise PluginException(
-                cause="Tags error",
-                assistance=f"Tags could not be added to some or all devices. Error: {e}"
+                cause="Tags error.",
+                assistance="Tags could not be added to some or all devices. Please check tag name and device name.",
+                data=e
             )

@@ -23,6 +23,7 @@ class AddPermissionSetToUser(insightconnect_plugin_runtime.Action):
             }
         except Exception as e:
             raise PluginException(
-                cause="Server Error",
-                assistance=f"Could not add specified permission set to specified user. Error: {e}"
+                cause="Server Error.",
+                assistance="Could not add specified permission set to specified user.",
+                data=e
             )
