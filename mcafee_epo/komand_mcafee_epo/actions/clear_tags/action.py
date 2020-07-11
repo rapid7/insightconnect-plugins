@@ -22,12 +22,13 @@ class ClearTags(insightconnect_plugin_runtime.Action):
                     d,
                     params.get(Input.TAG)
                 )
-            self.logger.info("Tag cleared from {} devices".format(len(params.get(Input.DEVICES))))
+            self.logger.info(f"Tag cleared from {len(params.get(Input.DEVICES))} devices")
             return {
                 Output.MESSAGE: "Tags cleared from devices successfully"
             }
         except Exception as e:
             raise PluginException(
                 cause="Tags error",
-                assistance=f"Tags could not be cleared from some or all devices. Error: {e}"
+                assistance="Tags could not be cleared from some or all devices.",
+                data=e
             )

@@ -253,7 +253,7 @@ actions:
         description: String name of the permission set to apply
         type: string
         required: false
-        example: Group admin
+        example: Group Admin
     output:
       message:
         title: Message
@@ -304,19 +304,19 @@ actions:
         description: Response message
         type: string
         required: true
-  system_info:
-    title: System Information
-    description: List system information
+  search_agents:
+    title: Search Agents
+    description: Find Systems in the ePolicy Orchestrator tree by name, IP address, MAC address, user name, AgentGUID, or tag
     input:
       query:
         title: Query
-        description: System search query e.g Device-1
-        type: integer
+        description: Name, IP address, MAC address, user name, AgentGUID, or tag to search available agents
+        type: string
         required: false
         example: Device-1
     output:
-      properties:
-        title: Properties
-        description: Computer Properties
+      agents:
+        title: Agents
+        description: Returned agents
         type: '[]computer_properties'
         required: true
