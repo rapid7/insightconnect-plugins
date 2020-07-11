@@ -83,6 +83,8 @@ Example output:
       "typeId": 3,
       "typeName": "General"
     }
+  ]
+}
 ```
 
 #### Search Agents
