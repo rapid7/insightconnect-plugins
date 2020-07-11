@@ -31,7 +31,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         except Exception:
             self.logger.error("Error connecting to Mcafee EPO")
             raise ConnectionTestException(
-                cause="Connection error",
+                cause="Connection error.",
                 assistance="Error connecting to McAfee EPO"
             )
 
@@ -40,10 +40,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
             if self.client("core.getSecurityToken"):
                 return {"success": True}
             else:
-                return {"success": False}
+                raise ConnectionTestException(
+                    cause="Connection error.",
+                    assistance="An unexpected error occurred during the API request"
+                )
         except Exception:
             self.logger.error("An unexpected error occurred during the API request")
             raise ConnectionTestException(
-                cause="Connection error",
+                cause="Connection error.",
                 assistance="An unexpected error occurred during the API request"
             )

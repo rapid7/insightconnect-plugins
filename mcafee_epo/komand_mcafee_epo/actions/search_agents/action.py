@@ -32,7 +32,7 @@ class SearchAgents(insightconnect_plugin_runtime.Action):
             }
         except Exception as e:
             raise PluginException(
-                cause="System information error",
+                cause="System information error.",
                 assistance="Unable to query for system information",
                 data=e
             )

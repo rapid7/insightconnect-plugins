@@ -28,7 +28,7 @@ class ClearTags(insightconnect_plugin_runtime.Action):
             }
         except Exception as e:
             raise PluginException(
-                cause="Tags error",
+                cause="Tags error.",
                 assistance="Tags could not be cleared from some or all devices.",
                 data=e
             )

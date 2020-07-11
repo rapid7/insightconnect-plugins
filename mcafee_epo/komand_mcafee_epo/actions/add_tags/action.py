@@ -28,7 +28,7 @@ class AddTags(insightconnect_plugin_runtime.Action):
             }
         except Exception as e:
             raise PluginException(
-                cause="Tags error",
+                cause="Tags error.",
                 assistance="Tags could not be added to some or all devices. Please check tag name and device name.",
                 data=e
             )
