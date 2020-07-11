@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="mcafee_epo-rapid7-plugin",
-      version="2.0.0",
+      version="2.1.0",
       description="McAfee ePolicy Orchestrator provides a web API for McAfee endpoint protection management activities",
       author="rapid7",
       author_email="",

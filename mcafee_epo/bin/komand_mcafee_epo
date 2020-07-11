@@ -6,7 +6,7 @@ from komand_mcafee_epo import connection, actions, triggers
 
 Name = "McAfee ePO"
 Vendor = "rapid7"
-Version = "2.0.0"
+Version = "2.1.0"
 Description = "McAfee ePolicy Orchestrator provides a web API for McAfee endpoint protection management activities"
 
 
@@ -24,6 +24,8 @@ class ICONMcafeeEpo(insightconnect_plugin_runtime.Plugin):
         self.add_action(actions.AddTags())
 
         self.add_action(actions.ClearTags())
+
+        self.add_action(actions.GetPolicies())
 
         self.add_action(actions.SearchAgents())
 

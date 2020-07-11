@@ -43,6 +43,50 @@ Example input:
 
 ### Actions
 
+#### Get Policies
+
+This action is used to get policies assigned to a user.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|search_text|string|None|True|Finds all policies that the user is permitted to see that match the given search text|None|McAfee Default|
+
+Example input:
+
+```
+{
+  "search_text": "McAfee Default"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|policies_returned|[]policies_returned|True|All policies that match to the given search text|
+
+Example output:
+
+```
+{
+  "policies_returned": [
+    {
+      "featureId": "EPOAGENTMETA",
+      "featureName": "McAfee Agent",
+      "objectId": 4,
+      "objectName": "McAfee Default",
+      "objectNotes": "The McAfee Default policy is configured with settings recommended by McAfee to protect many environments",
+      "productId": "EPOAGENTMETA",
+      "productName": "McAfee Agent ",
+      "typeId": 3,
+      "typeName": "General"
+    }
+  ]
+}
+```
+
 #### Search Agents
 
 This action is used to find Systems in the ePolicy Orchestrator tree by name, IP address, MAC address, user name, AgentGUID, or tag.
@@ -287,12 +331,27 @@ _This plugin does not contain any triggers._
 |Managed State|integer|False|None|
 |Tags|string|False|None|
 
+#### policies_returned
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Feature ID|string|False|Feature ID|
+|Feature Name|string|False|Feature name|
+|Object ID|integer|False|Object ID|
+|Object Name|string|False|Object name|
+|Object Notes|string|False|Object notes|
+|Product ID|string|False|Product ID|
+|Product Name|string|False|Product name|
+|Type ID|integer|False|Type ID|
+|Type Name|string|False|Type name|
+
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.1.0 - New action Get Policies 
 * 2.0.0 - Update to use the `insightconnect-python-3-38-plugin:4` Docker image | Use input and output constants | Add example inputs | Changed `Exception` to `PluginException` | Added "f" strings | Move test from actions to connection | Update System Information action to Search Agents
 * 1.0.2 - Fix issue with wrong type in action System Information
 * 1.0.1 - New spec and help.md format for the Extension Library
