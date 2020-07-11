@@ -22,14 +22,17 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Username and password to access McAfee ePO|None|{"username":"user1", "password":"mypassword"}|
 |port|number|None|True|McAfee ePO port|None|8443|
-|ssl_verify|boolean|True|False|Verify SSL Certificate|None|True|
+|ssl_verify|boolean|True|True|Verify SSL Certificate|None|True|
 |url|string|None|True|McAfee ePO address|None|https://www.example.com|
 
 Example input:
 
 ```
 {
-  "credentials": "{\"username\":\"user1\", \"password\":\"mypassword\"}",
+  "credentials": {
+    "username":"user1",
+    "password":"mypassword"
+  },
   "port": 8443,
   "ssl_verify": true,
   "url": "https://www.example.com"

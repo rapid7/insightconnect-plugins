@@ -45,6 +45,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "required": [
     "credentials",
     "port",
+    "ssl_verify",
     "url"
   ],
   "definitions": {

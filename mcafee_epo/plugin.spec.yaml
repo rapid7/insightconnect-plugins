@@ -241,7 +241,7 @@ connection:
     type: boolean
     title: SSL Verify
     description: Verify SSL Certificate
-    required: false
+    required: true
     default: true
     example: true
 actions:
