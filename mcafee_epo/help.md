@@ -22,17 +22,16 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Username and password to access McAfee ePO|None|{"username":"user1", "password":"mypassword"}|
 |port|number|None|True|McAfee ePO port|None|8443|
+|ssl_verify|boolean|True|False|Verify SSL Certificate|None|True|
 |url|string|None|True|McAfee ePO address|None|https://www.example.com|
 
 Example input:
 
 ```
 {
-  "credentials": {
-    "username":"user1",
-    "password":"mypassword"
-},
+  "credentials": "{\"username\":\"user1\", \"password\":\"mypassword\"}",
   "port": 8443,
+  "ssl_verify": true,
   "url": "https://www.example.com"
 }
 ```
@@ -125,7 +124,7 @@ This action is used to assign the given tag to a supplied list of systems.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|devices|[]string|None|True|Array of all devices to tag|None|['Device-1', 'Device-2']|
+|devices|[]string|None|True|Array of all devices to tag|None|["Device-1", "Device-2"]|
 |tag|string|None|True|The tag to apply|None|Tag1|
 
 Example input:
@@ -196,7 +195,7 @@ This action is used to clear the given tag to a supplied list of systems.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|devices|[]string|None|True|Array of all devices to clear tag|None|['Device-1', 'Device-2']|
+|devices|[]string|None|True|Array of all devices to clear tag|None|["Device-1", "Device-2"]|
 |tag|string|None|True|The tag to clear|None|Tag1|
 
 Example input:

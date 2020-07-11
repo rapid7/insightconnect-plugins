@@ -24,7 +24,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 f"{url}:{port}",
                 params.get(Input.CREDENTIALS).get('username'),
                 params.get(Input.CREDENTIALS).get('password'),
-                verify=False
+                verify=params.get(Input.SSL_VERIFY, True)
             )
             if self.client is not None:
                 self.logger.info("Connected")
@@ -37,9 +37,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self):
         try:
-            mc = self.client
-            if mc.epo.getVersion():
+            if self.client("core.getSecurityToken"):
                 return {"success": True}
+            else:
+                return {"success": False}
         except Exception:
             self.logger.error("An unexpected error occurred during the API request")
             raise ConnectionTestException(
