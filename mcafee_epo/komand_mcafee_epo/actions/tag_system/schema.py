@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Assigns the given tag to a agent by GUID"
+    DESCRIPTION = "Assigns the given tag to an agent by GUID"
 
 
 class Input:

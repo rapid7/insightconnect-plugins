@@ -45,7 +45,7 @@ Example input:
 
 #### Tag a System
 
-This action assigns the given tag to a agent by GUID.
+This action assigns the given tag to an agent by GUID.
 
 ##### Input
 

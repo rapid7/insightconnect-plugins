@@ -1,7 +1,7 @@
 {
-	"spec": "f90c50ef0619090b8bd42b2686c4f907",
-	"manifest": "3dea1e95fcb3e4fa5176fa1b6d819771",
-	"setup": "1f1be1a326e100fbaeb22c195d7c5558",
+	"spec": "c4b36d1b3e094d68878d508dd502d969",
+	"manifest": "a11b3f906d0d262d2cbdd850fa3a79b8",
+	"setup": "aa099825df5f82f4c5b8614053e4410c",
 	"schemas": [
 		{
 			"identifier": "add_permission_set_to_user/schema.py",
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "tag_system/schema.py",
-			"hash": "4a2b6cad3c6a87ed567101197709680c"
+			"hash": "5edeaccd6d5b3b663b129cc5346bf702"
 		},
 		{
 			"identifier": "connection/schema.py",
