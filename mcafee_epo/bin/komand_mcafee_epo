@@ -25,6 +25,8 @@ class ICONMcafeeEpo(insightconnect_plugin_runtime.Plugin):
 
         self.add_action(actions.ClearTags())
 
+        self.add_action(actions.GetPolicies())
+
         self.add_action(actions.SearchAgents())
 
 

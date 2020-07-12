@@ -45,6 +45,77 @@ Example input:
 
 ### Actions
 
+#### Start Patch Deployment
+
+This action is used to start a patch deployment. It accepts a scan and template by ID or by name.
+
+Note that scan names are not unique in Ivanti, in the event that there are duplicate names, the action will automatically use the latest scan. If you want a specific scan that is not the latest, pass in the scan ID instead.
+
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|download_patches|boolean|None|True|Boolean to initiate patch download before starting the deployment|None|False|
+|scan_identifier|string|None|True|A scan ID or scan name|None|01234567-89AB-CDEF-0123-456789ABCDEF|
+|template_identifier|string|None|True|A template ID or template name|None|Deployment Template created from InsightConnect|
+
+Example input:
+
+```
+{
+  "download_patches": false,
+  "scan_identifier": "01234567-89AB-CDEF-0123-456789ABCDEF",
+  "template_identifier": "Deployment Template created from InsightConnect"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Get Patch Deployment Template ID
+
+This action is used to get a Patch Deployment Template ID by searching for the Patch Deployment Template Name.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|patch_deployment_template_name|string|None|True|The name of the patch deployment template|None|Patch Deployment Template created from InsightConnect|
+
+Example input:
+
+```
+{
+  "patch_deployment_template_name": "Patch Deployment Template created from InsightConnect"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|patch_deployment_template_id|string|True|The ID of the patch deployment template|
+
+Example output:
+
+```
+{
+  "patch_deployment_template_id": "01234567-89AB-CDEF-0123-456789ABCDEF"
+}
+```
+
 #### Create Patch Group
 
 This action is used to create a new patch group with CVEs.
@@ -869,6 +940,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.4.0 - New actions Get Patch Deployment Template ID, Start Patch Deployment
 * 1.3.0 - New actions Create Patch Group and Add CVEs, Create Patch Scan Template
 * 1.2.1 - Added session credentials and changed polling method for Start Patch Scan
 * 1.2.0 - New actions Get Patch Deployment, Get Patch Details and Search Patches
