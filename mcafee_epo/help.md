@@ -43,7 +43,41 @@ Example input:
 
 ### Actions
 
-#### Run Wake Up
+#### Assign Tags
+
+This action assigns the given tag to an agent by GUID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|True|Agent GUID|None|5BB33CFB-C31F-11CA-012A-001577952C99|
+|tag|string|None|True|The tag to apply|None|Tag1|
+
+Example input:
+
+```
+{
+  "agent": "5BB33CFB-C31F-11CA-012A-001577952C99",
+  "tag": "Tag1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|message|string|True|Response message|
+
+Example output:
+
+```
+{
+  "message": "Tag applied to devices successfully"
+}
+```
+
+#### Wake Up
 
 This action wakes up the agent on a system.
 
@@ -76,40 +110,6 @@ Example output:
   "completed": 1,
   "expired": 0,
   "failed": 0
-}
-```
-
-#### Tag a System
-
-This action assigns the given tag to an agent by GUID.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|agent|string|None|True|Agent GUID|None|5BB33CFB-C31F-11CA-012A-001577952C99|
-|tag|string|None|True|The tag to apply|None|Tag1|
-
-Example input:
-
-```
-{
-  "agent": "5BB33CFB-C31F-11CA-012A-001577952C99",
-  "tag": "Tag1"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|message|string|True|Response message|
-
-Example output:
-
-```
-{
-  "message": "Tag applied to devices successfully"
 }
 ```
 
@@ -384,7 +384,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 3.1.0 - New action Run Wake Up
+* 4.0.0 - New action Wake Up | Rename Tag a System action to Assign Tags
 * 3.0.0 - Update and rename Add Tags action to Tag a System
 * 2.0.0 - Update to use the `insightconnect-python-3-38-plugin:4` Docker image | Use input and output constants | Add example inputs | Changed `Exception` to `PluginException` | Added "f" strings | Move test from actions to connection | Update and rename System Information action to Search Agents | New action Get Policies
 * 1.0.2 - Fix issue with wrong type in action System Information

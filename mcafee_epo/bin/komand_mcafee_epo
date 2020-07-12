@@ -6,7 +6,7 @@ from komand_mcafee_epo import connection, actions, triggers
 
 Name = "McAfee ePO"
 Vendor = "rapid7"
-Version = "3.1.0"
+Version = "4.0.0"
 Description = "McAfee ePolicy Orchestrator provides a web API for McAfee endpoint protection management activities"
 
 
