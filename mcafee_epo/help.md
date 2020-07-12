@@ -43,6 +43,40 @@ Example input:
 
 ### Actions
 
+#### Tag a System
+
+This action assigns the given tag to a agent by GUID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|True|Agent GUID|None|5BB33CFB-C31F-11CA-012A-001577952C99|
+|tag|string|None|True|The tag to apply|None|Tag1|
+
+Example input:
+
+```
+{
+  "agent": "5BB33CFB-C31F-11CA-012A-001577952C99",
+  "tag": "Tag1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|message|string|True|Response message|
+
+Example output:
+
+```
+{
+  "message": "Tag applied to devices successfully"
+}
+```
+
 #### Get Policies
 
 This action is used to get policies assigned to a user.
@@ -161,43 +195,6 @@ Example output:
         }
       ]
     }
-```
-
-#### Add Tags
-
-This action is used to assign the given tag to a supplied list of systems.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|devices|[]string|None|True|Array of all devices to tag|None|["Device-1", "Device-2"]|
-|tag|string|None|True|The tag to apply|None|Tag1|
-
-Example input:
-
-```
-{
-  "devices": [
-    "Device-1",
-    "Device-2"
-  ],
-  "tag": "Tag1"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|message|string|True|Response message|
-
-Example output:
-
-```
-{
-  "message": "Tags applied to devices successfully"
-}
 ```
 
 #### Add Permission Set to User
@@ -351,6 +348,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.1.0 - Update and rename Add Tags action to Tag a System
 * 2.0.0 - Update to use the `insightconnect-python-3-38-plugin:4` Docker image | Use input and output constants | Add example inputs | Changed `Exception` to `PluginException` | Added "f" strings | Move test from actions to connection | Update and rename System Information action to Search Agents | New action Get Policies
 * 1.0.2 - Fix issue with wrong type in action System Information
 * 1.0.1 - New spec and help.md format for the Extension Library
