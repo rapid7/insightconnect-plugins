@@ -16,7 +16,6 @@ class UpdatePatchGroup(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         vulnerability_identifiers = params.get(Input.VULNERABILITY_IDENTIFIER)
-        patch_group_identifier = params.get(Input.PATCH_GROUP)
         cves = []
         patch_ids = []
         invalid_identifiers = []
@@ -25,7 +24,7 @@ class UpdatePatchGroup(insightconnect_plugin_runtime.Action):
             if re.match("CVE-\d{4}-\d{4,7}", identifier, re.IGNORECASE):
                 cves.append(identifier)
                 continue
-            if identifier.isdigit():
+            elif identifier.isdigit():
                 patch_ids.append(identifier)
                 continue
             else:
@@ -37,12 +36,7 @@ class UpdatePatchGroup(insightconnect_plugin_runtime.Action):
                 assistance=f'Following vulnerabilites are not valid: {str(invalid_identifiers)[1:-1]}.'
             )
 
-        if patch_group_identifier.isdigit():
-            self.check_patch_group_exists(patch_group_identifier)
-            patch_group_id = patch_group_identifier
-        else: 
-            patch_group_id = self.get_patch_group_id(patch_group_identifier)
-
+        patch_group_id = self.get_patch_group_id(params.get(Input.PATCH_GROUP))
         success = False
         if cves:
             self.connection.ivanti_api.add_cves_to_patch_group(patch_group_id, {"cves": cves})
@@ -55,19 +49,26 @@ class UpdatePatchGroup(insightconnect_plugin_runtime.Action):
             Output.SUCCESS: success
         }
 
-    def get_patch_group_id(self, patch_group_name: str) -> str:
-        patch_id = self.connection.ivanti_api.get_patch_group_by_name(patch_group_name).get('value')[0].get('id') 
-        if patch_id:
-            return patch_id
+    def get_patch_group_id(self, patch_group: str) -> str:
+        if patch_group.isdigit() and self.check_patch_group_exists(patch_group):
+            patch_group_id = patch_group
+        else:
+            get_patch_group_response = self.connection.ivanti_api.get_patch_group_by_name(patch_group)
+            if get_patch_group_response.get('count'):
+                patch_group_id = get_patch_group_response.get('value')[0].get('id')
+
+        if patch_group_id:
+            return patch_group_id
+
         raise PluginException(
             cause='Invalid Patch Group provided.',
-            assistance=f'Patch group: "{patch_group_name}" doesn\'t exist.'
+            assistance=f'Patch group: "{patch_group}" doesn\'t exist.'
         )
 
-    def check_patch_group_exists(self, patch_group_identifier: str):
-        if self.connection.ivanti_api.get_patch_group(patch_group_identifier):
-            return
+    def check_patch_group_exists(self, patch_group: str) -> bool:
+        if self.connection.ivanti_api.get_patch_group(patch_group):
+            return True
         raise PluginException(
             cause='Invalid Patch Group provided.',
-            assistance=f'Patch group: "{patch_group_identifier}" doesn\'t exist.'
+            assistance=f'Patch group: "{patch_group}" doesn\'t exist.'
         )
