@@ -348,7 +348,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.1.0 - Update and rename Add Tags action to Tag a System
+* 3.0.0 - Update and rename Add Tags action to Tag a System
 * 2.0.0 - Update to use the `insightconnect-python-3-38-plugin:4` Docker image | Use input and output constants | Add example inputs | Changed `Exception` to `PluginException` | Added "f" strings | Move test from actions to connection | Update and rename System Information action to Search Agents | New action Get Policies
 * 1.0.2 - Fix issue with wrong type in action System Information
 * 1.0.1 - New spec and help.md format for the Extension Library
