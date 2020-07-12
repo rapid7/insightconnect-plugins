@@ -1,7 +1,7 @@
 {
-	"spec": "c4b36d1b3e094d68878d508dd502d969",
-	"manifest": "a11b3f906d0d262d2cbdd850fa3a79b8",
-	"setup": "aa099825df5f82f4c5b8614053e4410c",
+	"spec": "3ab68868464db4a319d56ffa779ae108",
+	"manifest": "2b2de0480e1225f4da48167632609a11",
+	"setup": "a4b5b2621cae87bc422e07c72a276600",
 	"schemas": [
 		{
 			"identifier": "add_permission_set_to_user/schema.py",
@@ -14,6 +14,10 @@
 		{
 			"identifier": "get_policies/schema.py",
 			"hash": "89188b11eb2fb44d2ce056acc2d83d84"
+		},
+		{
+			"identifier": "run_wake_up/schema.py",
+			"hash": "2c90fc893fe0d5dd860947ceb93b9ded"
 		},
 		{
 			"identifier": "search_agents/schema.py",

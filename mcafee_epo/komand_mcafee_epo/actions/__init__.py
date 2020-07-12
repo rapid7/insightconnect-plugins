@@ -2,5 +2,6 @@
 from .add_permission_set_to_user.action import AddPermissionSetToUser
 from .clear_tags.action import ClearTags
 from .get_policies.action import GetPolicies
+from .run_wake_up.action import RunWakeUp
 from .search_agents.action import SearchAgents
 from .tag_system.action import TagSystem

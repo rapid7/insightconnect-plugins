@@ -43,6 +43,42 @@ Example input:
 
 ### Actions
 
+#### Run Wake Up
+
+This action wakes up the agent on a system.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|system_name|string|None|True|Name of an system to wake up|None|Device1|
+
+Example input:
+
+```
+{
+  "system_name": "Device1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|completed|integer|True|Completed wake up number|
+|expired|integer|True|Expired wake up number|
+|failed|integer|True|Failed wake up number|
+
+Example output:
+
+```
+{
+  "completed": 1,
+  "expired": 0,
+  "failed": 0
+}
+```
+
 #### Tag a System
 
 This action assigns the given tag to an agent by GUID.
@@ -348,6 +384,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.1.0 - New action Run Wake Up
 * 3.0.0 - Update and rename Add Tags action to Tag a System
 * 2.0.0 - Update to use the `insightconnect-python-3-38-plugin:4` Docker image | Use input and output constants | Add example inputs | Changed `Exception` to `PluginException` | Added "f" strings | Move test from actions to connection | Update and rename System Information action to Search Agents | New action Get Policies
 * 1.0.2 - Fix issue with wrong type in action System Information
