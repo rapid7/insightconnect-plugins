@@ -4,11 +4,11 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Assigns the given tag to a supplied list of systems"
+    DESCRIPTION = "Assigns the given tag to an agent by GUID"
 
 
 class Input:
-    DEVICES = "devices"
+    AGENT = "agent"
     TAG = "tag"
     
 
@@ -16,19 +16,16 @@ class Output:
     MESSAGE = "message"
     
 
-class AddTagsInput(insightconnect_plugin_runtime.Input):
+class TagSystemInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "devices": {
-      "type": "array",
-      "title": "Devices",
-      "description": "Array of all devices to tag",
-      "items": {
-        "type": "string"
-      },
+    "agent": {
+      "type": "string",
+      "title": "Agent",
+      "description": "Agent GUID",
       "order": 1
     },
     "tag": {
@@ -39,7 +36,7 @@ class AddTagsInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "devices",
+    "agent",
     "tag"
   ]
 }
@@ -49,7 +46,7 @@ class AddTagsInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class AddTagsOutput(insightconnect_plugin_runtime.Output):
+class TagSystemOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
