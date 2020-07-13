@@ -642,8 +642,9 @@ _This plugin does not contain any triggers._
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
-
+In order for this plugin to function the orchestrator's IP address must be added to the trusted hosts list for the API admin
+To do this log into the FortiGate firewall. Go to the System tab, Administrator subtab. Then select and edit the API admin.
+Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51.100.100/32`
 # Version History
 
 * 4.0.4 - Improve error messaging around 401 return codes to indicate that the orchestrator IP not being in the trusted host list may be the cause
