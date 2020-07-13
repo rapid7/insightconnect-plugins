@@ -21,11 +21,11 @@ class UpdatePatchGroup(insightconnect_plugin_runtime.Action):
         invalid_identifiers = []
 
         for identifier in vulnerability_identifiers:
-            if re.match("CVE-\d{4}-\d{4,7}", identifier, re.IGNORECASE):
-                cves.append(identifier)
-                continue
-            elif identifier.isdigit():
+            if identifier.isdigit():
                 patch_ids.append(identifier)
+                continue
+            elif re.match("CVE-\d{4}-\d{4,7}", identifier, re.IGNORECASE):
+                cves.append(identifier)
                 continue
             else:
                 invalid_identifiers.append(identifier)

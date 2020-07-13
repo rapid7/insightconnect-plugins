@@ -151,7 +151,7 @@ class IvantiSecurityControlsAPI:
 
     def get_patch_group_by_name(self, patch_group_name):
         params = {"name": patch_group_name, 'count': 1}
-        return self._call_api("GET", f"{self.url}/patch/groups")
+        return self._call_api("GET", f"{self.url}/patch/groups", params=params)
 
     def add_patches_to_patch_group(self, patch_group_id, payload):
         return self._call_api("POST", f"{self.url}/patch/groups/{patch_group_id}/patches", json_data=payload)
