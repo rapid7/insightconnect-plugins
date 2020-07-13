@@ -116,7 +116,6 @@ class CylanceProtectAPI:
         if scope:
             claims["scp"] = scope
 
-
         response = self._make_request(method="POST",
                                       url=f"{self.url}/auth/v2/token",
                                       data=json.dumps({"auth_token": jwt.encode(claims, self.app_secret,
