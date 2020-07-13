@@ -647,7 +647,7 @@ To do this log into the FortiGate firewall. Go to the System tab, Administrator 
 Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51.100.100/32`
 # Version History
 
-* 4.0.4 - Improve error messaging around 401 return codes to indicate that the orchestrator IP not being in the trusted host list may be the cause
+* 4.0.4 - Improve error messaging around HTTP 401 status codes to indicate that the InsightConnect orchestrator IP address not being in the trusted host list may be the cause
 * 4.0.3 - Improve assistance message when the API returns an Internal Server Errror
 * 4.0.2 - Support host URL in connection | Improve Create Address Object action to allow for IPs and CIDRs as input
 * 4.0.1 - Bug fix where some names were being incorrectly parsed in the Check if Address in Group action causing the action to fail
