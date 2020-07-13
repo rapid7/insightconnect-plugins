@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Assigns the given tag to an agent by GUID"
+    DESCRIPTION = "Assigns the given tag to an agent by GUID, name, IP address, MAC address or user name"
 
 
 class Input:
@@ -25,7 +25,7 @@ class TagSystemInput(insightconnect_plugin_runtime.Input):
     "agent": {
       "type": "string",
       "title": "Agent",
-      "description": "Agent GUID",
+      "description": "Agent GUID, name, IP address, MAC address or user name",
       "order": 1
     },
     "tag": {

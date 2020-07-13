@@ -7,7 +7,7 @@ vendor: rapid7
 support: community
 status: []
 description: McAfee ePolicy Orchestrator provides a web API for McAfee endpoint protection management activities
-version: 4.0.0
+version: 5.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/mcafee_epo
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -316,11 +316,11 @@ actions:
         required: true
   tag_system:
     title: Assign Tags
-    description: Assigns the given tag to an agent by GUID
+    description: Assigns the given tag to an agent by GUID, name, IP address, MAC address or user name
     input:
       agent:
         title: Agent
-        description: Agent GUID
+        description: Agent GUID, name, IP address, MAC address or user name
         type: string
         required: true
         example: 5BB33CFB-C31F-11CA-012A-001577952C99
@@ -338,14 +338,14 @@ actions:
         required: true
   clear_tags:
     title: Clear Tags
-    description: Clears the given tag to a supplied list of systems
+    description: Clears the given tag to an agent by GUID, name, IP address, MAC address or user name
     input:
-      devices:
-        title: Devices
-        description: Array of all devices to clear tag
-        type: '[]string'
+      device:
+        title: Device
+        description: Agent GUID, name, IP address, MAC address or user name
+        type: string
         required: true
-        example: ["Device-1","Device-2"]
+        example: 5BB33CFB-C31F-11CA-012A-001577952C99
       tag:
         title: Tag
         description: The tag to clear
