@@ -14,7 +14,7 @@ for flexible policy management of large groups of dynamic addresses.
 # Requirements
 
 * An admin API key
-* The IP of the orchestrator must be set as a trusted host in Administrator > Settings (Edit button) > Trusted Hosts 
+* The IP of the orchestrator must be set as a trusted host in Settings > Administrator (Edit button) > Trusted Hosts 
 
 # Documentation
 
