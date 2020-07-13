@@ -643,7 +643,7 @@ _This plugin does not contain any triggers._
 ## Troubleshooting
 
 In order for this plugin to communicate with the Fortigate firewall, the orchestrator's IP address must be added to the *trusted hosts* list for the API admin account.
-To do this log into the FortiGate firewall. Go to the System tab, Administrator subtab. Then select and edit the API admin.
+To accomplish this, log into the FortiGate firewall. Go to the System tab -> Administrator subtab and then select and edit the API admin.
 Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51.100.100/32`
 # Version History
 
