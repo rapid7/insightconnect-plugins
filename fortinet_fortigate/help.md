@@ -466,7 +466,7 @@ Example input:
 
 ```
 {
-  "fqdn_filter": "rapid7.com",
+  "fqdn_filter": "example.com",
   "name_filter": "MaliciousHost",
   "subnet_filter": "198.51.100.100/32"
 }
