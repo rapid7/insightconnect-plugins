@@ -125,7 +125,7 @@ class Helpers(object):
 
     def netmaskConverter(self, host: str) -> str:
         """Converts a CIDR or IP to a netmask"""
-        host = IPv4Network(host).network_address
+        host = IPv4Network(host).with_netmask
         host = str(host)
         host = host.replace("/", " ")
         return host

@@ -22,14 +22,14 @@ class CreateAddressObject(komand.Action):
         skip_rfc1918 = params.get(Input.SKIP_RFC1918)
         helper = Helpers(self.logger)
 
+        type_ = helper.determine_address_type(host)
+        if type_ == "ipmask":
+            host = helper.ipmaskConverter(host)
         # White_list expects a IP rather than a CIDR, The rest of this action requires a CIRD
         # whitelist_ref will save a version of the host without the CIRD
         whitelist_ref = host
         if host.endswith("/32"):
             whitelist_ref = host[:-3]
-        type_ = helper.determine_address_type(host)
-        if type_ == "ipmask":
-            host = helper.ipmaskConverter(host)
 
         if type_ == "ipmask" and skip_rfc1918 is True and ipaddress.ip_network(host).is_private:
             return {Output.SUCCESS: False,
