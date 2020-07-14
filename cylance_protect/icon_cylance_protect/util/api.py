@@ -39,6 +39,13 @@ class CylanceProtectAPI:
     def delete_blacklist_item(self, payload):
         return self._call_api("DELETE", f"{self.url}/globallists/v2", "globallist:delete", json_data=payload)
 
+    def device_lockdown(self, device_id):
+        device_id = device_id.replace('-', '').upper()
+        return self._call_api("PUT", f"{self.url}/devicecommands/v2/{device_id}/lockdown?value=true", None)
+
+    def get_agents(self, page, page_size):
+        return self._call_api("GET", f"{self.url}/devices/v2?page={page}?page_size={page_size}", "device:list")
+
     def _call_api(self, method, url, scope, params=None, json_data=None):
         token = self.generate_token(scope)
         return self._make_request(
@@ -103,9 +110,11 @@ class CylanceProtectAPI:
             "iss": "http://cylance.com",
             "sub": self.app_id,
             "tid": self.tenant_id,
-            "jti": str(uuid.uuid4()),
-            "scp": scope
+            "jti": str(uuid.uuid4())
         }
+
+        if scope:
+            claims["scp"] = scope
 
         response = self._make_request(method="POST",
                                       url=f"{self.url}/auth/v2/token",
