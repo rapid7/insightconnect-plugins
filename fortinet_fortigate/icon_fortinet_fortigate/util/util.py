@@ -10,7 +10,8 @@ class Helpers(object):
         400: {"cause": "Bad Request: Request cannot be processed by the API.",
               "assistance": "Contact support for assistance."},
         401: {"cause": "Not Authorized: Request without successful login session.",
-              "assistance": "Ensure that the API key is correct."},
+              "assistance": "Ensure that the API key is correct,"
+                            " and that the IP address of the orchestrator has been added to the trusted hosts list"},
         403: {"cause": "Forbidden: Request is missing CSRF token or administrator is missing access profile permissions.",
               "assistance": "Ensure that the account being used has permission to preform this action."},
         404: {"cause": "Resource Not Found: Unable to find the specified resource.",

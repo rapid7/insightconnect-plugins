@@ -46,6 +46,54 @@ Example input:
 
 ### Actions
 
+#### Quarantine
+
+This action is used to quarantine (isolate) an endpoint.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|True|Device to perform quarantine action on. Accepts IP address, MAC address, hostname, or device ID|None|Example-Hostname|
+|whitelist|[]string|None|False|This list contains a set of hosts that should not be blocked. This can include IPs, hostnames or device IDs|None|["198.51.100.100", "Example-Hostname", "1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
+
+Example input:
+
+```
+{
+  "agent": "Example-Hostname",
+  "whitelist": [
+    "198.51.100.100",
+    "Example-Hostname",
+    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|lockdown_details|lockdown_response|True|Detailed information about the device lockdown|
+
+Example output:
+
+```
+{
+    "status": "COMPLETE",
+    "data": {
+        "id": "1ABC234D5EFA6789BCDE0F1ABCDE23F5",
+        "hostname": "Example-Hostname",
+        "tenant_id": "1abc234d5efa6789bcde0f1abcde23f5",
+        "connection_status": "locked",
+        "optics_device_version": "2.4.2100.1015",
+        "password": "unlock-pa22-w0rd",
+        "lockdown_expiration": "2020-07-11T21:15:29Z",
+        "lockdown_initiated": "2020-07-08T21:15:29Z"
+    }
+}
+```
+
 #### Blacklist
 
 This action is used to blacklist (quarantine) a hash globally.
@@ -150,6 +198,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - New action Quarantine
 * 1.0.3 - Match official branding in plugin title
 * 1.0.2 - Update to fix connection test
 * 1.0.1 - Add SHA256 input validation in Blacklist action

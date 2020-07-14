@@ -14,7 +14,7 @@ for flexible policy management of large groups of dynamic addresses.
 # Requirements
 
 * An admin API key
-* The IP of the orchestrator must be set as a trusted host in Administrator > Settings (Edit button) > Trusted Hosts 
+* The IP of the orchestrator must be set as a trusted host in Settings > Administrator (Edit button) > Trusted Hosts 
 
 # Documentation
 
@@ -642,10 +642,12 @@ _This plugin does not contain any triggers._
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
-
+In order for this plugin to communicate with the Fortigate firewall, the orchestrator's IP address must be added to the *trusted hosts* list for the API admin account.
+To accomplish this, log into the FortiGate firewall. Go to the System tab -> Administrator subtab and then select and edit the API admin.
+Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51.100.100/32`
 # Version History
 
+* 4.0.4 - Improve error messaging around HTTP 401 status codes to indicate that the InsightConnect orchestrator IP address not being in the trusted host list may be the cause
 * 4.0.3 - Improve assistance message when the API returns an Internal Server Errror
 * 4.0.2 - Support host URL in connection | Improve Create Address Object action to allow for IPs and CIDRs as input
 * 4.0.1 - Bug fix where some names were being incorrectly parsed in the Check if Address in Group action causing the action to fail
