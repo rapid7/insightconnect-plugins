@@ -652,7 +652,7 @@ Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51
 
 # Version History
 
-* 5.0.0 - Improve input handling for all actions to allow IPs, CIDRs, and subnetmasks to all be handled correctly | fixed output of get_address_objects to return searchable data | Update get_address_objects to allow for additional search parameters
+* 5.0.0 - Improve input handling to allow IPs, CIDRs, and subnet masks in actions | Fix output of get_address_objects to return searchable data | Update get_address_objects to allow for additional search parameters
 * 4.0.4 - Improve error messaging around HTTP 401 status codes to indicate that the InsightConnect orchestrator IP address not being in the trusted host list may be the cause
 * 4.0.3 - Improve assistance message when the API returns an Internal Server Errror
 * 4.0.2 - Support host URL in connection | Improve Create Address Object action to allow for IPs and CIDRs as input
