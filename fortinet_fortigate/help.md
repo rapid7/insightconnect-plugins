@@ -50,14 +50,14 @@ This action removes an address object from an address group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_object|string|None|True|Address object|None|198.51.100.100|
+|address_object|string|None|True|Address object|None|MaliciousHost|
 |group|string|None|True|Group name|None|InsightConnect Block List|
 
 Example input:
 
 ```
 {
-  "address_object": "198.51.100.100",
+  "address_object": "MaliciousHost",
   "group": "InsightConnect Block List"
 }
 ```
@@ -302,14 +302,14 @@ This action is used to add an address object to an address group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_object|string|None|True|Address object|None|198.51.100.100|
+|address_object|string|None|True|Address object|None|MaliciousHost|
 |group|string|None|True|Group name|None|InsightConnect Block List|
 
 Example input:
 
 ```
 {
-  "address_object": "198.51.100.100",
+  "address_object": "MaliciousHost",
   "group": "InsightConnect Block List"
 }
 ```
@@ -458,13 +458,17 @@ This action is used to get address objects.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name_filter|string|None|False|Optional name to filter on|None|198.51.100.100|
+|fqdn_filter|string|None|False|Optional FQDN to filter on|None|rapid7.com|
+|name_filter|string|None|False|Optional name to filter on|None|MaliciousHost|
+|subnet_filter|string|None|False|Optional subnet to filter on|None|198.51.100.100/32|
 
 Example input:
 
 ```
 {
-  "name_filter": "198.51.100.100"
+  "fqdn_filter": "rapid7.com",
+  "name_filter": "MaliciousHost",
+  "subnet_filter": "198.51.100.100/32"
 }
 ```
 
@@ -472,7 +476,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|address_objects|[]object|True|A list of address objects|
+|address_objects|[]address_objects|True|A list of address objects|
 
 Example output:
 
@@ -647,6 +651,7 @@ To do this log into the FortiGate firewall. Go to the System tab, Administrator 
 Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51.100.100/32`
 # Version History
 
+* 5.0.0 - Improve input handling for all actions to allow IPs, CIDRs, and subnetmasks to all be handled correctly | fixed output of get_address_objects to return searchable data | Update get_address_objects to allow for additional search parameters
 * 4.0.4 - Improve error messaging around HTTP 401 status codes to indicate that the InsightConnect orchestrator IP address not being in the trusted host list may be the cause
 * 4.0.3 - Improve assistance message when the API returns an Internal Server Errror
 * 4.0.2 - Support host URL in connection | Improve Create Address Object action to allow for IPs and CIDRs as input

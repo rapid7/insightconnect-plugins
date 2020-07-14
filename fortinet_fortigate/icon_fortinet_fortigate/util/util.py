@@ -1,5 +1,5 @@
 import re
-from ipaddress import ip_network, ip_address
+from ipaddress import ip_network, ip_address, IPv4Network
 from komand.exceptions import PluginException
 
 
@@ -97,3 +97,35 @@ class Helpers(object):
                     return True
 
         return False
+
+    def TypeFinder(self, host: str) -> str:
+        """determines the type of host ipmask or fqdn"""
+        type_ = "ipmask"
+        try:
+            host = ip_network(host)
+        except ValueError:
+            if re.match("^[0-9 .]+$", host):
+                return type_
+            elif host[-1].isdigit() or host[-2].isdigit():
+                raise PluginException(cause="The host input appears to be an invalid IP or domain name.",
+                                      assistance="Ensure that the host input is a valid IP or domain.",
+                                      data=host)
+            type_ = "fqdn"
+            return type_
+        return type_
+
+    def ipmaskConverter(self, host: str) -> str:
+        """Converts a IP or netmask into a CIDR"""
+        try:
+            host = ip_network(host)
+        except ValueError:
+            host = host.replace(" ", "/")
+            host = ip_network(host)
+        return str(host)
+
+    def netmaskConverter(self, host: str) -> str:
+        """Converts a CIDR or IP to a netmask"""
+        host = IPv4Network(host).network_address
+        host = str(host)
+        host = host.replace("/", " ")
+        return host

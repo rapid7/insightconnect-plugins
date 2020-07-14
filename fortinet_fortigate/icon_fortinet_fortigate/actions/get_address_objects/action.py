@@ -16,14 +16,14 @@ class GetAddressObjects(komand.Action):
 
     def run(self, params={}):
         endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/address"
-        filter_ = params.get(Input.NAME_FILTER, "")
+        name_filter = params.get(Input.NAME_FILTER, "")
+        fqdn_filter = params.get(Input.FQDN_FILTER, "")
+        subnet_filter = params.get(Input.SUBNET_FILTER, "")
         helper = Helpers(self.logger)
 
-        params = None
-        if filter_:
-            params = {
-                "filter": f"name=@{filter_}"
-            }
+        subnet_filter = helper.ipmaskConverter(subnet_filter)
+        subnet_filter = helper.netmaskConverter(subnet_filter)
+        params = {"filter": [f"name=@{name_filter}", f"fqdn=@{fqdn_filter}", f"subnet{subnet_filter}"]}
 
         response = self.connection.session.get(endpoint, verify=self.connection.ssl_verify, params=params)
 
@@ -35,5 +35,10 @@ class GetAddressObjects(komand.Action):
                                   data=response.text)
         helper.http_errors(json_response, response.status_code)
 
-        results = response.json().get("results")
+        results = response.json().get("results").get("address_objects")
+        for i in range(len(results)):
+            if results[i].get("subnet"):
+                subnet = helper.netmaskConverter(results[i].get("subnet"))
+                results[i]["subnet"] = subnet
+
         return {Output.ADDRESS_OBJECTS: komand.helper.clean(results)}
