@@ -47,7 +47,7 @@ Example input:
 
 #### Update Patch Group
 
-This action is used to add CVEs to an existing patch group.
+This action is used to add CVEs or Patch IDs to an existing patch group.
 
 ##### Input
 
