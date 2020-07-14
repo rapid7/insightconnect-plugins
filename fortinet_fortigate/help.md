@@ -647,7 +647,7 @@ _This plugin does not contain any triggers._
 ## Troubleshooting
 
 To accomplish this, log into the FortiGate firewall. Go to the System tab -> Administrator subtab and then select and edit the API admin.
-To do this log into the FortiGate firewall. Go to the System tab, Administrator subtab. Then select and edit the API admin.
+To accomplish this, log into the FortiGate firewall. Go to the System tab -> Administrator subtab and then select and edit the API admin account.
 Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51.100.100/32`
 
 # Version History
