@@ -514,7 +514,7 @@ types:
       type: string
       description: "Radius-MAC-auth-bypass"
       required: false
-  address_objects:
+  address_object:
     cache-ttl:
       title: "Cache-TTL"
       type: integer

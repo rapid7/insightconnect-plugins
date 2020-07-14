@@ -24,7 +24,7 @@ class CreateAddressObject(komand.Action):
 
         type_ = helper.determine_address_type(host)
         if type_ == "ipmask":
-            host = helper.ipmaskConverter(host)
+            host = helper.ipmask_converter(host)
         # White_list expects a IP rather than a CIDR, The rest of this action requires a CIRD
         # whitelist_ref will save a version of the host without the CIRD
         whitelist_ref = host

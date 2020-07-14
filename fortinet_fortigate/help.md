@@ -476,7 +476,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|address_objects|[]address_objects|True|A list of address objects|
+|address_objects|[]address_object|True|A list of address objects|
 
 Example output:
 

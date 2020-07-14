@@ -21,8 +21,8 @@ class GetAddressObjects(komand.Action):
         subnet_filter = params.get(Input.SUBNET_FILTER, "")
         helper = Helpers(self.logger)
 
-        subnet_filter = helper.ipmaskConverter(subnet_filter)
-        subnet_filter = helper.netmaskConverter(subnet_filter)
+        subnet_filter = helper.ipmask_converter(subnet_filter)
+        subnet_filter = helper.netmask_converter(subnet_filter)
 
         params = {"filter": [f"name=@{name_filter}", f"fqdn=@{fqdn_filter}", f"subnet=@{subnet_filter}"]}
 
@@ -39,7 +39,7 @@ class GetAddressObjects(komand.Action):
         results = response.json().get("results")
         for i in range(len(results)):
             if results[i].get("subnet"):
-                subnet = helper.ipmaskConverter(results[i].get("subnet"))
+                subnet = helper.ipmask_converter(results[i].get("subnet"))
                 results[i]["subnet"] = subnet
 
         return {Output.ADDRESS_OBJECTS: komand.helper.clean(results)}

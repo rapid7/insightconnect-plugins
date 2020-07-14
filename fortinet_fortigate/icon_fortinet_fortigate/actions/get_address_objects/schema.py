@@ -60,7 +60,7 @@ class GetAddressObjectsOutput(komand.Output):
       "title": "Address Objects",
       "description": "A list of address objects",
       "items": {
-        "$ref": "#/definitions/address_objects"
+        "$ref": "#/definitions/address_object"
       },
       "order": 1
     }
@@ -69,9 +69,9 @@ class GetAddressObjectsOutput(komand.Output):
     "address_objects"
   ],
   "definitions": {
-    "address_objects": {
+    "address_object": {
       "type": "object",
-      "title": "address_objects",
+      "title": "address_object",
       "properties": {
         "allow-routing": {
           "type": "string",

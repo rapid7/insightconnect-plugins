@@ -98,7 +98,7 @@ class Helpers(object):
 
         return False
 
-    def TypeFinder(self, host: str) -> str:
+    def Type_finder(self, host: str) -> str:
         """determines the type of host ipmask or fqdn"""
         type_ = "ipmask"
         try:
@@ -114,7 +114,7 @@ class Helpers(object):
             return type_
         return type_
 
-    def ipmaskConverter(self, host: str) -> str:
+    def ipmask_converter(self, host: str) -> str:
         """Converts a IP or netmask into a CIDR"""
         try:
             host = ip_network(host)
@@ -123,7 +123,7 @@ class Helpers(object):
             host = ip_network(host)
         return str(host)
 
-    def netmaskConverter(self, host: str) -> str:
+    def netmask_converter(self, host: str) -> str:
         """Converts a CIDR or IP to a netmask"""
         host = IPv4Network(host).with_netmask
         host = str(host)
