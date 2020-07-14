@@ -701,7 +701,7 @@ actions:
         description: Optional FQDN to filter on
         type: string
         required: false
-        example: rapid7.com
+        example: example.com
     output:
       address_objects:
         title: Address Objects
