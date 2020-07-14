@@ -706,7 +706,7 @@ actions:
       address_objects:
         title: Address Objects
         description: A list of address objects
-        type: '[]address_objects'
+        type: '[]address_object'
         required: true
   create_address_object:
     title: Create Address Object
