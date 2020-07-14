@@ -458,7 +458,7 @@ This action is used to get address objects.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fqdn_filter|string|None|False|Optional FQDN to filter on|None|rapid7.com|
+|fqdn_filter|string|None|False|Optional FQDN to filter on|None|example.com|
 |name_filter|string|None|False|Optional name to filter on|None|MaliciousHost|
 |subnet_filter|string|None|False|Optional subnet to filter on|None|198.51.100.100/32|
 
