@@ -12,3 +12,4 @@ from .get_scanned_machine_details.action import GetScannedMachineDetails
 from .search_patches.action import SearchPatches
 from .start_patch_deployment.action import StartPatchDeployment
 from .start_patch_scan.action import StartPatchScan
+from .update_patch_group.action import UpdatePatchGroup

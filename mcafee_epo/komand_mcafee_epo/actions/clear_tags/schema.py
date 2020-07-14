@@ -4,11 +4,11 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Clears the given tag to a supplied list of systems"
+    DESCRIPTION = "Clears the given tag to an agent by GUID, name, IP address, MAC address or user name"
 
 
 class Input:
-    DEVICES = "devices"
+    DEVICE = "device"
     TAG = "tag"
     
 
@@ -22,13 +22,10 @@ class ClearTagsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "devices": {
-      "type": "array",
-      "title": "Devices",
-      "description": "Array of all devices to clear tag",
-      "items": {
-        "type": "string"
-      },
+    "device": {
+      "type": "string",
+      "title": "Device",
+      "description": "Agent GUID, name, IP address, MAC address or user name",
       "order": 1
     },
     "tag": {
@@ -39,7 +36,7 @@ class ClearTagsInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "devices",
+    "device",
     "tag"
   ]
 }

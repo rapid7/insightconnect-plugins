@@ -4,7 +4,7 @@ products: [insightconnect]
 name: ivanti_security_controls
 title: Ivanti Security Controls
 description: Ivanti Security Controls is a unified IT management platform used for managing and protecting through Patch Management, Application Control, and Asset Inventory functionality
-version: 1.4.0
+version: 1.5.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -1032,4 +1032,26 @@ actions:
         title: Patch Group
         description: Detailed information about the patch group
         type: patch_group
+        required: true
+  update_patch_group:
+    title: Update Patch Group
+    description: Add CVEs or Patches to an existing patch group
+    input:
+      patch_group:
+        title: Patch Group
+        description: Name or ID of an existing patch group
+        type: string
+        required: true
+        example: Patch Group created from InsightConnect
+      vulnerability_identifier:
+        title: Vulnerability Identifier
+        description: List of patch IDs or CVEs to add to an existing patch group
+        type: '[]string'
+        required: true
+        example: ['CVE-2019-0708', "12345"]
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
         required: true

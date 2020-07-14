@@ -1,7 +1,7 @@
 {
-	"spec": "9e4478b979f0b6588b647567040fb5f0",
-	"manifest": "788ee8c9c684bd03624d96e1902b654e",
-	"setup": "97ab32040f0e9dafb41cd29b86bca71f",
+	"spec": "8c145534c75b3830b06f59ac8667464d",
+	"manifest": "7280daa95ea56f830dd832ebc5be0cfe",
+	"setup": "dbe66041fe2ce88bb7e50c61aec5a722",
 	"schemas": [
 		{
 			"identifier": "create_patch_group_and_add_cves/schema.py",
@@ -54,6 +54,10 @@
 		{
 			"identifier": "start_patch_scan/schema.py",
 			"hash": "4f8149da8fdda6a4657ecbc8f3089371"
+		},
+		{
+			"identifier": "update_patch_group/schema.py",
+			"hash": "9155a31486b858b4a0dfbe051557b3b3"
 		},
 		{
 			"identifier": "connection/schema.py",
