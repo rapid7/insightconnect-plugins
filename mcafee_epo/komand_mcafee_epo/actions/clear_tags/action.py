@@ -16,13 +16,16 @@ class ClearTags(insightconnect_plugin_runtime.Action):
         if params is None:
             params = {}
         try:
-            for d in params.get(Input.DEVICES):
+            devices = []
+            for d in self.connection.client('system.find', params.get(Input.DEVICE)):
+                computer_name = d["EPOComputerProperties.ComputerName"]
                 self.connection.client(
                     'system.clearTag',
-                    d,
+                    computer_name,
                     params.get(Input.TAG)
                 )
-            self.logger.info(f"Tag cleared from {len(params.get(Input.DEVICES))} devices")
+                devices.append(computer_name)
+            self.logger.info(f"Tag cleared from {len(devices)} devices")
             return {
                 Output.MESSAGE: "Tags cleared from devices successfully"
             }

@@ -51,7 +51,7 @@ This action assigns the given tag to an agent by GUID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent|string|None|True|Agent GUID|None|5BB33CFB-C31F-11CA-012A-001577952C99|
+|agent|string|None|True|Agent GUID, name, IP address, MAC address or user name|None|5BB33CFB-C31F-11CA-012A-001577952C99|
 |tag|string|None|True|The tag to apply|None|Tag1|
 
 Example input:
@@ -275,17 +275,14 @@ This action is used to clear the given tag to a supplied list of systems.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|devices|[]string|None|True|Array of all devices to clear tag|None|["Device-1", "Device-2"]|
+|device|string|None|True|Agent GUID, name, IP address, MAC address or user name|None|5BB33CFB-C31F-11CA-012A-001577952C99|
 |tag|string|None|True|The tag to clear|None|Tag1|
 
 Example input:
 
 ```
 {
-  "devices": [
-    "Device-1",
-    "Device-2"
-  ],
+  "device": "5BB33CFB-C31F-11CA-012A-001577952C99",
   "tag": "Tag1"
 }
 ```
@@ -384,6 +381,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 5.0.0 - Update action Clear Tags | Update action Assign Tags
 * 4.0.0 - New action Wake Up | Rename Tag a System action to Assign Tags
 * 3.0.0 - Update and rename Add Tags action to Tag a System
 * 2.0.0 - Update to use the `insightconnect-python-3-38-plugin:4` Docker image | Use input and output constants | Add example inputs | Changed `Exception` to `PluginException` | Added "f" strings | Move test from actions to connection | Update and rename System Information action to Search Agents | New action Get Policies

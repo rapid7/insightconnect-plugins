@@ -4,7 +4,7 @@ products: [insightconnect]
 name: cylance_protect
 title: BlackBerry CylancePROTECT
 description: Automate detection and response operations using CylancePROTECT
-version: 1.0.3
+version: 1.1.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -120,6 +120,79 @@ types:
       type: string
       description: Update type
       required: false
+  lockdown_history:
+    user_id:
+      title: User ID
+      description: The unique ID of the user who locked down the device
+      type: string
+      required: false
+    timestamp:
+      title: Timestamp
+      description: The timestamp (in UTC) of when the command was initiated
+      type: string
+      required: false
+    command:
+      title: Command
+      description: The command that was executed
+      type: string
+      required: false
+  lockdown:
+    id:
+      title: ID
+      description: The unique device ID that the lockdown command was issued to
+      type: string
+      required: false
+    hostname:
+      title: Hostname
+      description: The hostname of the device that the lockdown command was issued to
+      type: string
+      required: false
+    tenant_id:
+      title: Tenant ID
+      description: The unique tenant ID of the tenant that the device belongs to
+      type: string
+      required: false
+    connection_status:
+      title: Connection Status
+      description: Whether or not the device is connected to Cylance's cloud services
+      type: string
+      required: false
+    optics_device_version:
+      title: Optics Device Version
+      description: The numerical version of CylanceOPTICS running on the device
+      type: string
+      required: false
+    password:
+      title: Password
+      description: The password required to unlock the device
+      type: string
+      required: false
+    lockdown_expiration:
+      title: Lockdown Expiration
+      description: The timestamp (in UTC) of when the current device lockdown is set to expire
+      type: string
+      required: false
+    lockdown_initiated:
+      title: Lockdown Initiated
+      description: The timestamp (in UTC) of when the current device lockdown was initiated
+      type: string
+      required: false
+    lockdown_history:
+      title: Lockdown History
+      description: A list of historical device lockdown commands issued to this particular device
+      type: "[]lockdown_history"
+      required: false
+  lockdown_response:
+    status:
+      title: Status
+      description: Status of the action performed
+      type: string
+      required: false
+    lockdown_details:
+      title: Lockdown Details
+      description: Detailed information about the lockdown action performed
+      type: lockdown
+      required: false
 
 connection:
   tenant_id:
@@ -193,4 +266,26 @@ actions:
         title: Success
         description: Return true if blacklist item was created or deleted
         type: boolean
+        required: true
+  quarantine:
+    title: Quarantine
+    description: Quarantine (isolate) an endpoint
+    input:
+      agent:
+        title: Agent
+        description: Device to perform quarantine action on. Accepts IP address, MAC address, hostname, or device ID
+        type: string
+        required: true
+        example: Example-Hostname
+      whitelist:
+        title: Whitelist
+        description: This list contains a set of hosts that should not be blocked. This can include IPs, hostnames or device IDs
+        type: "[]string"
+        required: false
+        example: ["198.51.100.100", "Example-Hostname", "1abc234d-5efa-6789-bcde-0f1abcde23f5"]
+    output:
+      lockdown_details:
+        title: Lockdown Details
+        description: Detailed information about the device lockdown
+        type: lockdown_response
         required: true
