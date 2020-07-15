@@ -46,6 +46,55 @@ Example input:
 
 ### Actions
 
+#### Search Agents
+
+This action this action searches for agents and returns device information details.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, name, or device ID|None|EXAMPLE-HOSTNAME|
+
+Example input:
+
+```
+{
+  "agent": "EXAMPLE-HOSTNAME"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|agent|agent|True|Detailed information about agents found|
+
+Example output:
+
+```
+{
+  "agents": [
+    {
+      "agent_version": "2.0.1540",
+      "date_first_registered": "2020-05-28T14:00:50",
+      "id": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
+      "ip_addresses": [
+        "198.51.100.100"
+      ],
+      "mac_addresses": [
+        "00-60-26-26-D5-19"
+      ],
+      "name": "EXAMPLE-HOSTNAME",
+      "policy": {
+        "name": "Default"
+      },
+      "state": "Online"
+    }
+  ]
+}
+```
+
 #### Quarantine
 
 This action is used to quarantine (isolate) an endpoint.
@@ -198,6 +247,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.0 - New action Search Agents
 * 1.1.0 - New action Quarantine
 * 1.0.3 - Match official branding in plugin title
 * 1.0.2 - Update to fix connection test
