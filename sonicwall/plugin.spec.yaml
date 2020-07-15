@@ -4,7 +4,7 @@ products: [insightconnect]
 name: sonicwall
 title: SonicWall Firewall
 description: Manage firewalls and block hosts with SonicWall firewalls
-version: 1.2.0
+version: 1.3.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -226,4 +226,25 @@ actions:
         description: The names and details of the address objects that match or contain the address
         type: "[]object"
         required: false
-
+  remove_address_from_group:
+    title: Remove Address Object from Group
+    description: Deletes an address object from an address group
+    input:
+      address_object:
+        title: Address Object
+        description: Name of the address object
+        type: string
+        required: true
+        example: MaliciousHost
+      group:
+        title: Group
+        description: Name of the address group to check
+        type: string
+        required: true
+        example: ICON Block List
+    output:
+      status:
+        title: Status
+        description: Returns information about removing the address object from the address group
+        type: status
+        required: false

@@ -43,6 +43,58 @@ Example input:
 
 ### Actions
 
+#### Remove Address Object from Group
+
+This action deletes an address object from an address group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object|string|None|True|Name of the address object|None|MaliciousHost|
+|group|string|None|True|Name of the address group to check|None|ICON Block List|
+
+Example input:
+
+```
+{
+  "address_object": "MaliciousHost",
+  "group": "ICON Block List"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|status|status|False|Returns information about removing the address object from the address group|
+
+Example output:
+
+```
+{
+    "status": {
+        "status": {
+            "success": true,
+            "cli": {
+                "mode": "config_mode",
+                "depth": 1,
+                "configuring": true,
+                "pending_config": false,
+                "restart_required": "FALSE"
+            },
+            "info": [
+                {
+                    "level": "info",
+                    "code": "E_OK",
+                    "message": "Changes made."
+                }
+            ]
+        }
+    }
+}
+```
+
 #### Check if Address in Group
 
 This action is used to check that a host or address object is in an address group.
@@ -293,6 +345,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.0 - New action Remove Address from Group
 * 1.2.0 - New action Check If Address In Address Group
 * 1.1.0 - New actions Create Address Object and Delete Address Object
 * 1.0.0 - Initial plugin
