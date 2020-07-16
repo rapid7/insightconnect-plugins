@@ -1,0 +1,557 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: sophos_central
+title: Sophos Central
+description: Sophos Central is a unified console for managing Sophos products. Using the Sophos Central plugin for Rapid7 InsightConnect, users can get alerts, endpoints, and SIEM events
+version: 1.0.0
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/sophos_central
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.sophos.com
+tags:
+- sophos
+- firewall
+hub_tags:
+  use_cases: [devops, threat_detection_and_response]
+  keywords: [sophos, firewall]
+  features: []
+
+types:
+  date_time_zone:
+    fixed:
+      type: boolean
+    id:
+      type: string
+  chronology:
+    zone:
+      type: date_time_zone
+  date_time:
+    afterNow:
+      type: boolean
+    beforeNow:
+      type: boolean
+    centuryOfEra:
+      type: integer
+    chronology:
+      type: chronology
+    dayOfMonth:
+      type: integer
+    dayOfWeek:
+      type: integer
+    dayOfYear:
+      type: integer
+    equalNow:
+      type: boolean
+    era:
+      type: integer
+    hourOfDay:
+      type: integer
+    millis:
+      type: integer
+    millisOfDay:
+      type: integer
+    millisOfSecond:
+      type: integer
+    minuteOfDay:
+      type: integer
+    minuteOfHour:
+      type: integer
+    monthOfYear:
+      type: integer
+    secondOfDay:
+      type: integer
+    secondOfMinute:
+      type: integer
+    weekOfWeekyear:
+      type: integer
+    weekyear:
+      type: integer
+    year:
+      type: integer
+    yearOfCentury:
+      type: integer
+    yearOfEra:
+      type: integer
+    zone:
+      type: date_time_zone
+  object_id:
+    counter:
+      type: integer
+    date:
+      type: string
+    machineIdentifier:
+      type: integer
+    processIdentifier:
+      type: integer
+    time:
+      type: integer
+    timeSecond:
+      type: integer
+    timestamp:
+      type: integer
+  customer_license:
+    expired:
+      type: boolean
+    expires_on:
+      type: date_time
+    id:
+      type: object_id
+    license_code:
+      type: string
+    license_id:
+      type: string
+    license_type:
+      type: string
+      enum:
+      - ALPHA
+      - BETA
+      - EAP
+      - ENTERPRISE
+      - FULL
+      - FREE
+      - MONTHLY
+      - MSP
+      - TERMED
+      - TRIAL
+      - VIRTUAL
+    quota:
+      type: integer
+    starts_on:
+      type: date_time
+    suspended:
+      type: boolean
+  previous_password_entity:
+    invalidated:
+      type: date
+    password:
+      type: string
+  tamper_protection_entity:
+    enabled:
+      type: boolean
+    globally_enabled:
+      type: boolean
+    password:
+      type: string
+    previous_passwords:
+      type: '[]previous_password_entity'
+  endpoint_entry:
+    adSyncInfo:
+      type: object
+    alert_status:
+      type: integer
+    assignedProducts:
+      type: '[]string'
+    awsInfo:
+      type: object
+      additionalProperties:
+        type: string
+    azureInfo:
+      type: object
+      additionalProperties:
+        type: string
+    beta:
+      type: boolean
+    decloned_from:
+      type: string
+    deleted_at:
+      type: string
+    device_encryption_status_unmanaged:
+      type: boolean
+    early_access_program:
+      type: string
+    endpoint_type:
+      type: string
+    group_full_name:
+      type: string
+    group_id:
+      type: string
+    group_name:
+      type: string
+    health_status:
+      type: integer
+    heartbeat_utm_name:
+      type: string
+    id:
+      type: string
+    info:
+      type: object
+    is_adsync_group:
+      type: boolean
+    java_id:
+      type: string
+    last_activity:
+      type: string
+    last_user:
+      type: string
+    last_user_id:
+      type: string
+    license_codes:
+      type: '[]string'
+    machine_id:
+      type: string
+    name:
+      type: string
+    registered_at:
+      type: string
+    status:
+      type: object
+    tamper_protection:
+      type: tamper_protection_entity
+    transport:
+      type: string
+  current_licenses_response:
+    licenses:
+      type: '[]customer_license'
+  endpoint_whitelist_properties:
+    property:
+      type: string
+    type:
+      type: string
+      enum:
+      - SHA_256
+      - CERTIFICATE_SIGNER
+      - PATH
+  alert_entity:
+    created_at:
+      type: string
+      description: The date at which the alert was created
+    customer_id:
+      type: string
+      description: The unique identifier of the customer linked with this record
+    data:
+      type: object
+      additionalProperties:
+        type: object
+    description:
+      type: string
+      description: The description of the alert that was generated
+    event_service_event_id:
+      type: string
+      description: The Event Services event id
+    id:
+      type: string
+      description: Identifier for the alert
+    location:
+      type: string
+      description: The location captured for this record
+    severity:
+      type: string
+      description: The severity for this alert
+      enum:
+      - LOW
+      - MEDIUM
+      - HIGH
+    source:
+      type: string
+      description: Describes the source from alert was generated
+    threat:
+      type: string
+      description: The name of the threat responsible for the generation of alert
+    threat_cleanable:
+      type: boolean
+    type:
+      type: string
+      description: Describes the type of the device on which alert was generated
+    when:
+      type: string
+      description: The date at which the alert was created
+  customer_feature:
+    expirationProcessed:
+      type: boolean
+    expired:
+      type: boolean
+    expiresOn:
+      type: date_time
+    featureCode:
+      type: string
+      enum:
+      - f_invalid
+      - f_srv
+      - f_srv_av
+      - f_srv_appctl
+      - f_srv_devctl
+      - f_srv_devctl_block
+      - f_srv_dlp
+      - f_srv_lockdown
+      - f_srv_web
+      - f_srv_mtd
+      - f_srv_xpd
+      - f_srv_hbt
+      - f_srv_stac
+      - f_srv_efw
+      - f_srv_extsup_win2k3
+      - f_virt_ep_av
+      - f_virt_srv_av
+      - f_ep
+      - f_ep_appctl
+      - f_ep_devctl
+      - f_ep_dlp
+      - f_ep_av
+      - f_ep_web
+      - f_ep_efw
+      - f_ep_denc_deprecated
+      - f_ep_denc
+      - f_ep_fenc
+      - f_ep_xpd
+      - f_ep_stac
+      - f_ep_ntp
+      - f_ep_ntp_adv
+      - f_ep_ntp_xg
+      - f_ep_hbt
+      - f_ep_hbt_adv
+      - f_ep_hbt_xg
+      - f_ep_extsup_winxp
+      - f_mob
+      - f_mob_lock
+      - f_mob_locate
+      - f_mob_wipe
+      - f_mob_policy_compliance
+      - f_mob_policy_exchange
+      - f_mob_policy_passcode
+      - f_mob_policy_restrictions
+      - f_mob_policy_vpn
+      - f_mob_policy_wifi
+      - f_mob_container_email
+      - f_mob_container_mcm
+      - f_mob_container_docs
+      - f_mob_container_browser
+      - f_smc_migration
+      - f_smsec
+      - f_smsec_webfiltering
+      - f_csg
+      - f_multi_policies
+      - f_support
+      - f_user_specific
+      - f_ad_sync
+      - f_xgemail
+      - f_xgemail_antispam
+      - f_xgemail_av
+      - f_xgemail_eminbox
+      - f_xgemail_quarantine
+      - f_xgemail_ssp
+      - f_xgemail_ad_sync
+      - f_xgemail_toc_url_protect
+      - f_xgemail_dkim
+      - f_xgemail_spf
+      - f_xgemail_anti_phish
+      - f_xgemail_att_policy
+      - f_wifi_entry_standard
+      - f_wifi_performance_standard
+      - f_phish_training
+    generatedFromLicenseId:
+      type: string
+    licenseCode:
+      type: string
+    protection:
+      type: boolean
+    valid:
+      type: boolean
+  core_remedy_item:
+    descriptor:
+      type: string
+    result:
+      type: string
+      enum:
+      - NOT_APPLICABLE
+      - SUCCESS
+      - NOT_FOUND
+      - DELETED
+      - FAILED_TO_DELETE
+      - WHITELISTED
+      - OTHER_ERROR
+      - FAILED_TO_DELETE_SYSTEM_PROTECTED
+    type:
+      type: string
+  installer_info:
+    beta:
+      type: boolean
+    command:
+      type: string
+    platform:
+      type: string
+    productName:
+      type: string
+    url:
+      type: string
+  customer_featuresResponse:
+    features:
+      type: '[]customer_feature'
+  core_remedy_items:
+    items:
+      type: '[]core_remedy_item'
+    totalItems:
+      type: integer
+  legacy_event_entity:
+    core_remedy_items:
+      description: details of the items cleaned or restored
+      type: core_remedy_items
+    created_at:
+      type: string
+      description: The date at which the event was created
+    customer_id:
+      type: string
+      description: The identifier of the customer for which record is created
+    endpoint_id:
+      type: string
+      description: The corresponding endpoint id associated with the record
+    endpoint_type:
+      type: string
+      description: The corresponding endpoint type associated with the record
+    group:
+      type: string
+      description: The group associated with the group
+    id:
+      type: string
+      description: The Identifier for the event
+    location:
+      type: string
+      description: The location captured for this record
+    name:
+      type: string
+      description: The name of the record created
+    origin:
+      type: string
+      description: originating component of a detection
+    severity:
+      type: string
+      description: The severity for this alert
+      enum:
+      - NONE
+      - LOW
+      - MEDIUM
+      - HIGH
+      - CRITICAL
+    source:
+      type: string
+      description: The source for this record
+    threat:
+      type: string
+      description: The threat associated with the record
+    type:
+      type: string
+      description: The type of this record
+    user_id:
+      type: string
+      description: The identifier of the user for which record is created
+    when:
+      type: string
+      description: The date at which the event was created
+    whitelist_properties:
+      type: '[]endpoint_whitelist_properties'
+      description: The properties by which this event can be whitelisted on an endpoint,
+        if applicable
+  event_aggregate:
+    has_more:
+      type: boolean
+    items:
+      type: '[]legacy_event_entity'
+    next_cursor:
+      type: string
+      description: Value of the next cursor. This will be used to make next call of API
+  hashes_response:
+    hashes:
+      type: object
+  installer_info_response:
+    installer_info:
+      type: '[]installer_info'
+
+connection:
+  url:
+    title: URL
+    description: Host URL
+    type: string
+    required: true
+    example: TODO
+  client_secret:
+    title: Client Secret
+    description: Client secret key that allows access to Sophos Central
+    type: credential_secret_key
+    required: true
+    example: TODO
+  client_id:
+    title: Client ID
+    description: Client ID for Sophos Central instance
+    type: credential_secret_key
+    required: true
+    example: TODO
+
+actions:
+  download_hashes:
+    title: Download Hashes
+    description: Get SHA1 hashes for all available installer templates
+    output:
+      hashes:
+        title: Hashes
+        description: SHA1 hashes for all available installer templates
+        type: hashes_response
+        required: true
+  get_endpoints:
+    title: Get Endpoints
+    description: Get endpoints for a customer based on the last seen after date and time
+    input:
+      since:
+        title: Since
+        description: Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01.700Z, -P1D, PT20M, PT4H500S
+        required: false
+        type: string
+        example: 2019-09-23T12:02:01.700Z
+    output:
+      items:
+        title: Items
+        description: Endpoint items
+        type: "[]endpoint_entry"
+        required: true
+  get_alerts:
+    title: Get Alerts
+    description: Get alerts for a customer based on the parameters provided
+    input:
+      from_date:
+        title: From date
+        description: The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Ignored if cursor is set. Must be within last 24 hours
+        required: false
+        type: integer
+        example: 123
+    output:
+      alerts:
+        title: Alerts
+        description: Alerts for specified time period
+        type: '[]alert_entity'
+        required: true
+  get_siem_events:
+    title: Get SIEM Events
+    description: Get events for a customer based on the parameters provided
+    input:
+      limit:
+        title: Limit
+        description: The maximum number of items to return, default is 200, max is 1000
+        required: false
+        type: integer
+        default: 200
+        example: 200
+      cursor:
+        title: Cursor
+        description: Identifier for next item in the list, this value is available in response as next_cursor. Response will default to last 24 hours if cursor is not within last 24 hours
+        required: false
+        type: string
+        example: 123
+      from_date:
+        title: From Date
+        description: The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Ignored if cursor is set. Must be within last 24 hours
+        required: false
+        type: integer
+        example: 123
+      exclude_types:
+        title: Exclude Types
+        description: The string of list of types of events to be excluded
+        required: false
+        type: string
+        example: 123
+    output:
+      events:
+        description: Events for the specified time period
+        type: event_aggregate
+        required: true

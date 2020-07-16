@@ -1,0 +1,429 @@
+# Description
+
+[Sophos Central](https://www.sophos.com) is a unified console for managing Sophos products. Using the Sophos Central plugin for Rapid7 InsightConnect, users can get alerts, endpoints, and SIEM events
+
+# Key Features
+
+Identify key features of plugin.
+
+# Requirements
+
+* Example: Requires an API Key from the product
+* Example: API must be enabled on the Settings page in the product's user interface
+
+# Documentation
+## Setup
+
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|client_id|credential_secret_key|None|True|Client ID for Sophos Central instance|None|TODO|
+|client_secret|credential_secret_key|None|True|Client secret key that allows access to Sophos Central|None|TODO|
+|url|string|None|True|Host URL|None|TODO|
+
+Example input:
+
+```
+{
+  "client_id": "TODO",
+  "client_secret": "TODO",
+  "url": "TODO"
+}
+```
+## Technical Details
+
+### Actions
+
+#### Download Hashes
+
+This action is used to get SHA1 hashes for all available installer templates.
+
+##### Input
+
+_This action does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|hashes|hashes_response|True|SHA1 hashes for all available installer templates|
+
+Example output:
+
+```
+
+```
+
+#### Get Alerts
+
+This action is used to get alerts for a customer based on the parameters provided.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|from_date|integer|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Ignored if cursor is set. Must be within last 24 hours|None|123|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|alerts|[]alert_entity|True|Alerts for specified time period|
+
+Example output:
+
+```
+{
+  "alerts": {
+    "items": [],
+    "pages": {
+      "maxSize": 500,
+      "size": 50
+    }
+  }
+}
+```
+
+#### Get Endpoints
+
+This action is used to get endpoints for a customer based on the parameters provided.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|since|string|None|False|Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01.700Z, -P1D, PT20M, PT4H500S|None|2019-09-23T12:02:01.700Z|
+
+Example input:
+
+```
+{
+  "since": "2019-09-23T12:02:01.700Z"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|items|[]endpoint_entry|True|Endpoint items|
+
+Example output:
+
+```
+
+```
+
+#### Get SIEM Events
+
+This action is used to get events for a customer based on the parameters provided.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|cursor|string|None|False|Identifier for next item in the list, this value is available in response as next_cursor. Response will default to last 24 hours if cursor is not within last 24 hours|None|123|
+|exclude_types|string|None|False|The string of list of types of events to be excluded|None|123|
+|from_date|integer|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Ignored if cursor is set. Must be within last 24 hours|None|123|
+|limit|integer|200|False|The maximum number of items to return, default is 200, max is 1000|None|200|
+
+Example input:
+
+```
+{
+  "cursor": 123,
+  "exclude_types": 123,
+  "from_date": 123,
+  "limit": 200
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|events|event_aggregate|True|Events for the specified time period|
+
+Example output:
+
+```
+```
+
+### Triggers
+
+_This plugin does not contain any triggers._
+
+### Custom Output Types
+
+#### alert_aggregate
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Has More|boolean|False|None|
+|Items|[]alert_entity|False|None|
+|Next Cursor|string|False|Value of the next cursor. This will be used to make next call of API|
+
+#### alert_entity
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Created At|string|False|The date at which the alert was created|
+|Customer Id|string|False|The unique identifier of the customer linked with this record|
+|Data|object|False|None|
+|Description|string|False|The description of the alert that was generated|
+|Event Service Event Id|string|False|The Event Services event id|
+|Id|string|False|Identifier for the alert|
+|Location|string|False|The location captured for this record|
+|Severity|string|False|The severity for this alert|
+|Source|string|False|Describes the source from alert was generated|
+|Threat|string|False|The name of the threat responsible for the generation of alert|
+|Threat Cleanable|boolean|False|None|
+|Type|string|False|Describes the type of the device on which alert was generated|
+|When|string|False|The date at which the alert was created|
+
+#### chronology
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Zone|date_time_zone|False|None|
+
+#### core_remedy_item
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Descriptor|string|False|None|
+|Result|string|False|None|
+|Type|string|False|None|
+
+#### core_remedy_items
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Items|[]core_remedy_item|False|None|
+|TotalItems|integer|False|None|
+
+#### current_licenses_response
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Licenses|[]customer_license|False|None|
+
+#### customer_feature
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ExpirationProcessed|boolean|False|None|
+|Expired|boolean|False|None|
+|ExpiresOn|date_time|False|None|
+|FeatureCode|string|False|None|
+|GeneratedFromLicenseId|string|False|None|
+|LicenseCode|string|False|None|
+|Protection|boolean|False|None|
+|Valid|boolean|False|None|
+
+#### customer_featuresResponse
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Features|[]customer_feature|False|None|
+
+#### customer_license
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Expired|boolean|False|None|
+|Expires On|date_time|False|None|
+|Id|object_id|False|None|
+|License Code|string|False|None|
+|License Id|string|False|None|
+|License Type|string|False|None|
+|Quota|integer|False|None|
+|Starts On|date_time|False|None|
+|Suspended|boolean|False|None|
+
+#### date_time
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|AfterNow|boolean|False|None|
+|BeforeNow|boolean|False|None|
+|CenturyOfEra|integer|False|None|
+|Chronology|chronology|False|None|
+|DayOfMonth|integer|False|None|
+|DayOfWeek|integer|False|None|
+|DayOfYear|integer|False|None|
+|EqualNow|boolean|False|None|
+|Era|integer|False|None|
+|HourOfDay|integer|False|None|
+|Millis|integer|False|None|
+|MillisOfDay|integer|False|None|
+|MillisOfSecond|integer|False|None|
+|MinuteOfDay|integer|False|None|
+|MinuteOfHour|integer|False|None|
+|MonthOfYear|integer|False|None|
+|SecondOfDay|integer|False|None|
+|SecondOfMinute|integer|False|None|
+|WeekOfWeekyear|integer|False|None|
+|Weekyear|integer|False|None|
+|Year|integer|False|None|
+|YearOfCentury|integer|False|None|
+|YearOfEra|integer|False|None|
+|Zone|date_time_zone|False|None|
+
+#### date_time_zone
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Fixed|boolean|False|None|
+|Id|string|False|None|
+
+#### endpoint_entry
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|AdSyncInfo|object|False|None|
+|Alert Status|integer|False|None|
+|AssignedProducts|[]string|False|None|
+|AwsInfo|object|False|None|
+|AzureInfo|object|False|None|
+|Beta|boolean|False|None|
+|Decloned From|string|False|None|
+|Deleted At|string|False|None|
+|Device Encryption Status Unmanaged|boolean|False|None|
+|Early Access Program|string|False|None|
+|Endpoint Type|string|False|None|
+|Group Full Name|string|False|None|
+|Group Id|string|False|None|
+|Group Name|string|False|None|
+|Health Status|integer|False|None|
+|Heartbeat Utm Name|string|False|None|
+|Id|string|False|None|
+|Info|object|False|None|
+|Is Adsync Group|boolean|False|None|
+|Java Id|string|False|None|
+|Last Activity|string|False|None|
+|Last User|string|False|None|
+|Last User Id|string|False|None|
+|License Codes|[]string|False|None|
+|Machine Id|string|False|None|
+|Name|string|False|None|
+|Registered At|string|False|None|
+|Status|object|False|None|
+|Tamper Protection|tamper_protection_entity|False|None|
+|Transport|string|False|None|
+
+#### endpoint_whitelist_properties
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Property|string|False|None|
+|Type|string|False|None|
+
+#### endpoints_response
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Filtered|integer|False|None|
+|Items|[]endpoint_entry|False|None|
+|Next Key|string|False|None|
+|Total|integer|False|None|
+
+#### event_aggregate
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Has More|boolean|False|None|
+|Items|[]legacy_event_entity|False|None|
+|Next Cursor|string|False|Value of the next cursor. This will be used to make next call of API|
+
+#### hashes_response
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Hashes|object|False|None|
+
+#### installer_info
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Beta|boolean|False|None|
+|Command|string|False|None|
+|Platform|string|False|None|
+|ProductName|string|False|None|
+|Url|string|False|None|
+
+#### installer_info_response
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Installer Info|[]installer_info|False|None|
+
+#### legacy_event_entity
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Core Remedy Items|core_remedy_items|False|details of the items cleaned or restored|
+|Created At|string|False|The date at which the event was created|
+|Customer Id|string|False|The identifier of the customer for which record is created|
+|Endpoint Id|string|False|The corresponding endpoint id associated with the record|
+|Endpoint Type|string|False|The corresponding endpoint type associated with the record|
+|Group|string|False|The group associated with the group|
+|Id|string|False|The Identifier for the event|
+|Location|string|False|The location captured for this record|
+|Name|string|False|The name of the record created|
+|Origin|string|False|originating component of a detection|
+|Severity|string|False|The severity for this alert|
+|Source|string|False|The source for this record|
+|Threat|string|False|The threat associated with the record|
+|Type|string|False|The type of this record|
+|User Id|string|False|The identifier of the user for which record is created|
+|When|string|False|The date at which the event was created|
+|Whitelist Properties|[]endpoint_whitelist_properties|False|The properties by which this event can be whitelisted on an endpoint, if applicable|
+
+#### object_id
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Counter|integer|False|None|
+|Date|string|False|None|
+|MachineIdentifier|integer|False|None|
+|ProcessIdentifier|integer|False|None|
+|Time|integer|False|None|
+|TimeSecond|integer|False|None|
+|Timestamp|integer|False|None|
+
+#### previous_password_entity
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Invalidated|date|False|None|
+|Password|string|False|None|
+
+#### tamper_protection_entity
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Enabled|boolean|False|None|
+|Globally Enabled|boolean|False|None|
+|Password|string|False|None|
+|Previous Passwords|[]previous_password_entity|False|None|
+
+## Troubleshooting
+
+_This plugin does not contain any troubleshooting information._
+
+# Version History
+
+* 1.0.0 - Initial plugin
+
+# Links
+
+## References
+
+* [Sophos Central](https://www.sophos.com)
