@@ -214,6 +214,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.2 - Updated branding
 * 1.0.1 - Fix issue where retry on error call could crash plugin
 * 1.0.0 - Initial plugin
 

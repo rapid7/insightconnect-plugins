@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="carbon_black_cloud-rapid7-plugin",
-      version="1.0.1",
+      version="1.0.2",
       description="Quarantine endpoints and get device details with the VMware Carbon Black Cloud plugin",
       author="rapid7",
       author_email="",
