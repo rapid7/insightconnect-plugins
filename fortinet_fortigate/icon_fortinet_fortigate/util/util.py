@@ -98,7 +98,7 @@ class Helpers(object):
 
         return False
 
-    def Type_finder(self, host: str) -> str:
+    def type_finder(self, host: str) -> str:
         """determines the type of host ipmask or fqdn"""
         type_ = "ipmask"
         try:
