@@ -57,7 +57,7 @@ class SearchAgents(insightconnect_plugin_runtime.Action):
                             agents.append(device)
             if identifier_type == 'hostname':
                 for device in device_list:
-                        if agent.upper() == device.get('host_name').upper():
+                        if agent.upper() == device.get('name').upper():
                             agents.append(device)
 
             i += 1

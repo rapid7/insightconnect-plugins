@@ -344,5 +344,5 @@ actions:
       agents:
         title: Agents
         description: Detailed information about agents found
-        type: agent
+        type: "[]agents"
         required: true

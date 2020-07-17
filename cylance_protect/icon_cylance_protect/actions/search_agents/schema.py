@@ -45,9 +45,12 @@ class SearchAgentsOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "agents": {
-      "$ref": "#/definitions/agent",
+      "type": "array",
       "title": "Agents",
       "description": "Detailed information about agents found",
+      "items": {
+        "$ref": "#/definitions/agents"
+      },
       "order": 1
     }
   },
@@ -55,57 +58,27 @@ class SearchAgentsOutput(insightconnect_plugin_runtime.Output):
     "agents"
   ],
   "definitions": {
-    "agent": {
+    "agents": {
       "type": "object",
-      "title": "agent",
+      "title": "agents",
       "properties": {
         "agent_version": {
           "type": "string",
           "title": "Agent Version",
           "description": "Agent version",
-          "order": 1
-        },
-        "background_detection": {
-          "type": "boolean",
-          "title": "Background Detection",
-          "description": "Background detection",
-          "order": 2
+          "order": 4
         },
         "date_first_registered": {
           "type": "string",
           "title": "Date First Registered",
           "description": "Date first registered",
-          "order": 3
-        },
-        "date_last_modified": {
-          "type": "string",
-          "title": "Date Last Modified",
-          "description": "Date last modified",
-          "order": 4
-        },
-        "date_offline": {
-          "type": "string",
-          "title": "Date Offline",
-          "description": "Date offline",
-          "order": 5
-        },
-        "distinguished_name": {
-          "type": "string",
-          "title": "Distinguished Name",
-          "description": "Distinguished name",
           "order": 6
-        },
-        "host_name": {
-          "type": "string",
-          "title": "Host Name",
-          "description": "Host name",
-          "order": 7
         },
         "id": {
           "type": "string",
           "title": "ID",
           "description": "ID",
-          "order": 8
+          "order": 1
         },
         "ip_addresses": {
           "type": "array",
@@ -114,19 +87,7 @@ class SearchAgentsOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
-          "order": 9
-        },
-        "is_safe": {
-          "type": "boolean",
-          "title": "Is Safe",
-          "description": "Is safe",
-          "order": 10
-        },
-        "last_logged_in_user": {
-          "type": "string",
-          "title": "Last Logged In User",
-          "description": "Last logged in user",
-          "order": 11
+          "order": 7
         },
         "mac_addresses": {
           "type": "array",
@@ -135,43 +96,25 @@ class SearchAgentsOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
-          "order": 12
+          "order": 8
         },
         "name": {
           "type": "string",
           "title": "Name",
           "description": "Name",
-          "order": 13
-        },
-        "os_version": {
-          "type": "string",
-          "title": "OS Version",
-          "description": "OS version",
-          "order": 14
+          "order": 2
         },
         "policy": {
           "$ref": "#/definitions/policy",
           "title": "Policy",
           "description": "Policy",
-          "order": 15
+          "order": 5
         },
         "state": {
           "type": "string",
           "title": "State",
           "description": "State",
-          "order": 16
-        },
-        "update_available": {
-          "type": "boolean",
-          "title": "Update Available",
-          "description": "Update available",
-          "order": 17
-        },
-        "update_type": {
-          "type": "string",
-          "title": "Update Type",
-          "description": "Update type",
-          "order": 18
+          "order": 3
         }
       },
       "definitions": {
