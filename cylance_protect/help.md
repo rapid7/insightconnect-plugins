@@ -68,7 +68,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|agent|agent|True|Detailed information about agents found|
+|agents|agent|True|Detailed information about agents found|
 
 Example output:
 

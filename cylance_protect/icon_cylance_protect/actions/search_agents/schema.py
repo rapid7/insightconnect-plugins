@@ -12,10 +12,10 @@ class Input:
     
 
 class Output:
-    AGENT = "agent"
+    AGENTS = "agents"
     
 
-class SeachAgentsInput(insightconnect_plugin_runtime.Input):
+class SearchAgentsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -38,13 +38,13 @@ class SeachAgentsInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class SeachAgentsOutput(insightconnect_plugin_runtime.Output):
+class SearchAgentsOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "agent": {
+    "agents": {
       "$ref": "#/definitions/agent",
       "title": "Agents",
       "description": "Detailed information about agents found",
@@ -52,7 +52,7 @@ class SeachAgentsOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "agent"
+    "agents"
   ],
   "definitions": {
     "agent": {

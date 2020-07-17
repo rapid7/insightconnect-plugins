@@ -330,7 +330,7 @@ actions:
         description: Detailed information about the device lockdown
         type: lockdown_response
         required: true
-  seach_agents:
+  search_agents:
     title: Search Agents
     description: This action searches for agents and returns device information details
     input:
@@ -341,7 +341,7 @@ actions:
         required: true
         example: EXAMPLE-HOSTNAME
     output:
-      agent:
+      agents:
         title: Agents
         description: Detailed information about agents found
         type: agent
