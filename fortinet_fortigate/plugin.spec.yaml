@@ -4,7 +4,7 @@ products: [insightconnect]
 name: fortinet_fortigate
 title: Fortinet FortiGate
 description: FortiGate Next Generation Firewalls (NGFWs) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection
-version: 4.0.4
+version: 5.0.0
 vendor: rapid7
 support: community
 status: []
@@ -514,7 +514,7 @@ types:
       type: string
       description: "Radius-MAC-auth-bypass"
       required: false
-  address_objects:
+  address_object:
     cache-ttl:
       title: "Cache-TTL"
       type: integer
@@ -689,12 +689,24 @@ actions:
         description: Optional name to filter on
         type: string
         required: false
-        example: 198.51.100.100
+        example: MaliciousHost
+      subnet_filter:
+        title: Subnet Filter
+        description: Optional subnet to filter on
+        type: string
+        required: false
+        example: 198.51.100.100/32
+      fqdn_filter:
+        title: FQDN Filter
+        description: Optional FQDN to filter on
+        type: string
+        required: false
+        example: example.com
     output:
       address_objects:
         title: Address Objects
         description: A list of address objects
-        type: '[]object'
+        type: '[]address_object'
         required: true
   create_address_object:
     title: Create Address Object
@@ -776,7 +788,7 @@ actions:
         description: Address object
         type: string
         required: true
-        example: 198.51.100.100
+        example: MaliciousHost
     output:
       success:
         title: Success
@@ -803,7 +815,7 @@ actions:
         description: Address object
         type: string
         required: true
-        example: 198.51.100.100
+        example: MaliciousHost
     output:
       success:
         title: Success
