@@ -19,7 +19,7 @@ class RemoveAddressFromGroup(insightconnect_plugin_runtime.Action):
         group_type = self.connection.sonicwall_api.get_group_type(group_name)
         object_type = self.connection.sonicwall_api.get_address_object(address_object).get('object_type')
 
-        if not self.check_address_object_in_group(address_object, group_name, group_type, object_type):
+        if not self.check_address_object_in_group(address_object, group_name, group_type):
             raise PluginException(
                 cause=f"The address object: {address_object} does not exist in the address group.",
                 assistance="Please enter valid names and try again."
@@ -34,9 +34,7 @@ class RemoveAddressFromGroup(insightconnect_plugin_runtime.Action):
             Output.STATUS: self.connection.sonicwall_api.invoke_cli_command(payload)
         }
 
-    def check_address_object_in_group(
-        self, address_object: str, group_name: str, group_type: str, object_type: str
-        ) -> bool:
+    def check_address_object_in_group(self, address_object: str, group_name: str, group_type: str) -> bool:
         address_group = self.connection.sonicwall_api.get_group(group_name)
         address_objects_names = []
         address_objects = address_group.get('address_group', {}).get(group_type, {}).get('address_object', {})
