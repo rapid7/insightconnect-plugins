@@ -25,6 +25,7 @@ class RemoveAddressFromGroup(insightconnect_plugin_runtime.Action):
                 assistance="Please enter valid names and try again."
             )
 
+        # Use CLI because an endpoint is not supported for this at the time of writing
         payload = f"""address-group {group_type} '{group_name}'
         no address-object {object_type} '{address_object}'
         exit
