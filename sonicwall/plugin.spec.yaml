@@ -201,7 +201,7 @@ actions:
         description: Name of address group to check
         type: string
         required: true
-        example: "ICON Block List"
+        example: "InsightConnect Block List"
       address:
         title: Address
         description: Address Object name, or IP, CIDR, or domain name when Enable Search is set to true
@@ -241,7 +241,7 @@ actions:
         description: Name of the address group to check
         type: string
         required: true
-        example: ICON Block List
+        example: InsightConnect Block List
     output:
       status:
         title: Status
