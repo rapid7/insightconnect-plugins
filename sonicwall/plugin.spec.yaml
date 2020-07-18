@@ -238,7 +238,7 @@ actions:
         example: MaliciousHost
       group:
         title: Group
-        description: Name of the address group to check
+        description: Name of the address group
         type: string
         required: true
         example: InsightConnect Block List

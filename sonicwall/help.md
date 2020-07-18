@@ -52,7 +52,7 @@ This action deletes an address object from an address group.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |address_object|string|None|True|Name of the address object|None|MaliciousHost|
-|group|string|None|True|Name of the address group to check|None|InsightConnect Block List|
+|group|string|None|True|Name of the address group|None|InsightConnect Block List|
 
 Example input:
 

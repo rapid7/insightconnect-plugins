@@ -31,7 +31,7 @@ class RemoveAddressFromGroupInput(insightconnect_plugin_runtime.Input):
     "group": {
       "type": "string",
       "title": "Group",
-      "description": "Name of the address group to check",
+      "description": "Name of the address group",
       "order": 2
     }
   },
