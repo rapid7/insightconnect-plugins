@@ -15,13 +15,6 @@ The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/
 
 ## Setup
 
-You must create a Custom Application by following this procedure from the CylancePROTECT console:
-
-1. Go to the Integrations tab on the Settings page
-2. Click "Add Application"
-3. Provide a name for the integration and choose the permissions related to the actions you want to use
-4. Copy and paste the Application ID, Application Secret, and Tenant ID (from the Integrations tab) into the connection
-
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -45,6 +38,73 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Search Threats
+
+This action finds and displays detailed information about one or more threats.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|score|[]integer|None|False|Filter the search by the Cylance score assigned to the threat. Accepts an integer within the range [-1,1]|None|[-1, 1]|
+|threat_identifier|[]string|None|True|The threat(s) to search for. The input should be an array of threat names, md5, or sha256 hashes|None|["9de5069c5afe602b2ea0a04b66beb2c0", "02699626f388ed830012e5b787640e71c56d42d8", "Example-Threat-Name"]|
+
+Example input:
+
+```
+{
+  "score": [
+    -1,
+    1
+  ],
+  "threat_identifier": [
+    "9de5069c5afe602b2ea0a04b66beb2c0",
+    "02699626f388ed830012e5b787640e71c56d42d8",
+    "Example-Threat-Name"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|threats|[]threat|True|Detailed information about threats found|
+
+Example output:
+
+```
+```
+
+#### Search Threat Agents
+
+This action finds and displays detailed information about threat and device details for a threat.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|threat_identifier|string|None|True|The threat to search for. The input should be a threat name, md5, or sha256 hash|None|9de5069c5afe602b2ea0a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "threat_identifier": "9de5069c5afe602b2ea0a04b66beb2c0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|threat_agents|[]threat_device|True|Detailed information about threat agents found|
+
+Example output:
+
+```
+```
 
 #### Quarantine
 
@@ -198,6 +258,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.0 - New actions Search Threats, Search Threat Agents
 * 1.1.0 - New action Quarantine
 * 1.0.3 - Match official branding in plugin title
 * 1.0.2 - Update to fix connection test

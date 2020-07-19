@@ -4,7 +4,7 @@ products: [insightconnect]
 name: cylance_protect
 title: BlackBerry CylancePROTECT
 description: Automate detection and response operations using CylancePROTECT
-version: 1.1.0
+version: 1.3.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -193,6 +193,118 @@ types:
       description: Detailed information about the lockdown action performed
       type: lockdown
       required: false
+  threat:
+    name:
+      title: Name
+      description: The name of the threat
+      type: string
+      required: false
+    sha256:
+      title: SHA256
+      description: The SHA256 hash for the threat
+      type: string
+      required: false
+    md5:
+      title: MD5
+      description: The MD5 hash for the threat
+      type: string
+      required: false
+    cylance_score:
+      title: Cylance Score
+      description: The Cylance Score assigned to the threat
+      type: float
+      required: false
+    av_industry:
+      title: AV Industry
+      description: The score provided by the antivirus industry
+      type: float
+      required: false
+    classification:
+      title: Classification
+      description: The threat classification for the threat
+      type: string
+      required: false
+    sub_classification:
+      title: Sub Classification
+      description: The threat sub-classification for the threat
+      type: string
+      required: false
+    global_quarantined:
+      title: Global Quarantined
+      description: Identifies if the threat is on the Global Quarantine list
+      type: boolean
+      required: false
+    safelisted:
+      title: Safelisted
+      description: Identifies if the threat is on the Safe List
+      type: boolean
+      required: false
+    file_size:
+      title: File Size
+      description: The size of the file, in bytes
+      type: int
+      required: false
+    unique_to_cylance:
+      title: Unique to Cylance
+      description: The threat was identifies by Cylance but not by other antivirus sources
+      type: boolean
+      required: false
+    last_found:
+      title: Last Found
+      description: The date and time the threat was last found on any device in your organization
+      type: string
+      required: false
+  threat_device:
+    id:
+      title: ID
+      description: The endpoint's unique identifier
+      type: string
+      required: false
+    name:
+      title: Name
+      description: The name of the device
+      type: string
+      required: false
+    state:
+      title: State
+      description: The state of the device
+      type: string
+      required: false
+    agent_version:
+      title: Agent Version
+      description: The CylancePROTECT Agent version installed on the device
+      type: string
+      required: false
+    policy_id:
+      title: Policy ID
+      description: The unique identifier for the policy assigned to the device, or null if no policy is assigned
+      type: string
+      required: false
+    date_found:
+      title: Date Found
+      description: The date and time (in UTC) when the threat was found on the device
+      type: string
+      required: false
+    file_status:
+      title: File Status
+      description: Current quarantine status of the file on the device
+      type: string
+      required: false
+    file_path:
+      title: File Path
+      description: The path where the file was found on the device
+      type: string
+      required: false
+    ip_addresses:
+      title: IP Addressess
+      description: The list of IP addresses for the device
+      type: "[]string"
+      required: false
+    mac_addresses:
+      title: MAC Addressess
+      description: The list of MAC addresses for the device
+      type: "[]string"
+      required: false
 
 connection:
   tenant_id:
@@ -288,4 +400,42 @@ actions:
         title: Lockdown Details
         description: Detailed information about the device lockdown
         type: lockdown_response
+        required: true
+  search_threats:
+    title: Search Threats
+    description: Finds and displays detailed information about one or more threats
+    input:
+      threat_identifier:
+        title: Threat Identifier
+        description: The threat(s) to search for. The input should be an array of threat names, md5, or sha256 hashes
+        type: "[]string"
+        required: true
+        example: ["9de5069c5afe602b2ea0a04b66beb2c0", "02699626f388ed830012e5b787640e71c56d42d8", "Example-Threat-Name"]
+      score:
+        title: Score
+        description: Filter the search by the Cylance score assigned to the threat. Accepts an integer within the range [-1,1]
+        type: "[]integer"
+        required: false
+        example: [-1, 1]
+    output:
+      threats:
+        title: Threats
+        description: Detailed information about threats found
+        type: "[]threat"
+        required: true
+  search_threat_agents:
+    title: Search Threat Agents
+    description: Finds and displays detailed information about threat and device details for a threat
+    input:
+      threat_identifier:
+        title: Threat Identifier
+        description: The threat to search for. The input should be a threat name, md5, or sha256 hash
+        type: string
+        required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+    output:
+      threat_agents:
+        title: Threat Agents
+        description: Detailed information about threat agents found
+        type: "[]threat_device"
         required: true
