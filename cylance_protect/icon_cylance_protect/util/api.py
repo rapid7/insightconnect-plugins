@@ -1,5 +1,4 @@
 from re import match
-
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 import json
@@ -32,6 +31,42 @@ class CylanceProtectAPI:
         if len(devices) > 1:
             self.logger.info(f"Multiple agents found that matched the query: {devices}. We will act upon the first match.")
         return clean(devices[0])
+
+    def search_agents(self, agent):
+        i = 1
+        total_pages = self.get_agents(i, '20').get('total_pages')
+        agents = []
+
+        while i <= total_pages:
+            response = self.get_agents(i, "20")
+            device_list = response.get('page_items')
+            if match('^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$', agent):
+                for device in device_list:
+                    for ip in device.get('ip_addresses'):
+                        if agent == ip:
+                            agents.append(device)
+            elif match('[0-9a-f]{2}([-:]?)[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$', agent.lower()):
+                for device in device_list:
+                    for mac in device.get('mac_addresses'):
+                        if agent.replace(':', '-').upper() == mac:
+                            agents.append(device)
+            elif match('^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$', agent.lower()):
+                for device in device_list:
+                        if agent.lower() == device.get('id'):
+                            agents.append(device)
+            else:
+                for device in device_list:
+                        if agent.upper() == device.get('name').upper():
+                            agents.append(device)
+            i += 1
+
+        if len(agents) == 0:
+            raise PluginException(
+                cause="Agent not found.",
+                assistance=f"Unable to find any agents using identifier provided: {agent}."
+            )
+            
+        return agents
 
     def create_blacklist_item(self, payload):
         return self._call_api("POST", f"{self.url}/globallists/v2", "globallist:create", json_data=payload)
