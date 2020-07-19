@@ -1,5 +1,5 @@
 {
-	"spec": "23451b7401ded149eddc3da0ce1b7e01",
+	"spec": "84c6498d8cb656472fcf563a535af6cf",
 	"manifest": "678046d0cc0735e3f910d736b5262da1",
 	"setup": "af0a2ebdeaee6b8151f158cb03cd9ec0",
 	"schemas": [
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "search_threats/schema.py",
-			"hash": "02cd9d5ec20aa0e5aefef549b5214f14"
+			"hash": "2a854024b3cfca2942031b0e0458a0cf"
 		},
 		{
 			"identifier": "connection/schema.py",

@@ -23,12 +23,9 @@ class SearchThreatsInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "score": {
-      "type": "array",
+      "type": "integer",
       "title": "Score",
       "description": "Filter the search by the Cylance score assigned to the threat. Accepts an integer within the range [-1,1]",
-      "items": {
-        "type": "integer"
-      },
       "order": 2
     },
     "threat_identifier": {

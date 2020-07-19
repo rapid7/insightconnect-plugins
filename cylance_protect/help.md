@@ -47,17 +47,14 @@ This action finds and displays detailed information about one or more threats.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|score|[]integer|None|False|Filter the search by the Cylance score assigned to the threat. Accepts an integer within the range [-1,1]|None|[-1, 1]|
+|score|integer|None|False|Filter the search by the Cylance score assigned to the threat. Accepts an integer within the range [-1,1]|None|-1|
 |threat_identifier|[]string|None|True|The threat(s) to search for. The input should be an array of threat names, md5, or sha256 hashes|None|["9de5069c5afe602b2ea0a04b66beb2c0", "02699626f388ed830012e5b787640e71c56d42d8", "Example-Threat-Name"]|
 
 Example input:
 
 ```
 {
-  "score": [
-    -1,
-    1
-  ],
+  "score": -1,
   "threat_identifier": [
     "9de5069c5afe602b2ea0a04b66beb2c0",
     "02699626f388ed830012e5b787640e71c56d42d8",

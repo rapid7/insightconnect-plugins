@@ -414,9 +414,9 @@ actions:
       score:
         title: Score
         description: Filter the search by the Cylance score assigned to the threat. Accepts an integer within the range [-1,1]
-        type: "[]integer"
+        type: integer
         required: false
-        example: [-1, 1]
+        example: -1
     output:
       threats:
         title: Threats
