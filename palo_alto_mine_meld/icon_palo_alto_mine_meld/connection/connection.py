@@ -32,8 +32,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         except Exception:
             self.logger.error("Error connecting to Palo Alto MineMeld")
             raise ConnectionTestException(
-                cause="Connection error.",
-                assistance="Error connecting to Palo Alto MineMeld"
+                cause="Error connecting to Palo Alto MineMeld.",
+                assistance="Please check your connection credentials and that the orchestrator has network access to the MindMeld server."
             )
 
     def test(self):
