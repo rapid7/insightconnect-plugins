@@ -72,6 +72,23 @@ Example input:
 Example output:
 
 ```
+{
+  "threats": [
+    {
+      "file_size": 109395,
+      "md5": "9DE5069C5AFE602B2EA0A04B66BEB2C0",
+      "safelisted": false,
+      "unique_to_cylance": true,
+      "classification": "Malware",
+      "cylance_score": -1,
+      "global_quarantined": false,
+      "last_found": "2020-05-29T10:12:45",
+      "name": "honeyhashx86.exe",
+      "sha256": "02699626F388ED830012E5B787640E71C56D42D8",
+      "sub_classification": "Exploit"
+    }
+  ]
+}
 ```
 
 #### Search Threat Agents
@@ -101,6 +118,26 @@ Example input:
 Example output:
 
 ```
+{
+  "threat_agents": [
+    {
+      "id": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
+      "name": "Example-Hostname",
+      "state": "OffLine",
+      "agent_version": "2.0.1540",
+      "policy_id": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
+      "date_found": "2020-05-29T10:12:45",
+      "file_status": "Default",
+      "file_path": "C:\\Program Files (x86)\\Rapid7\\Endpoint Agent\\honeyhashx86.exe",
+      "ip_addresses": [
+        "198.51.100.100"
+      ],
+      "mac_addresses": [
+        "00-60-26-26-D5-19"
+      ]
+    }
+  ]
+}
 ```
 
 #### Quarantine
