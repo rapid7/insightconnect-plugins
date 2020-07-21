@@ -21,17 +21,14 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Username and password to access Palo Alto MineMeld|None|{"username":"user1", "password":"mypassword"}|
 |port|number|443|False|Palo Alto MineMeld port|None|443|
-|ssl_verify|boolean|True|False|Verify SSL Certificate|None|True|
+|ssl_verify|boolean|True|False|Verify TLS/SSL Certificate|None|True|
 |url|string|None|True|Palo Alto MindMeld URL|None|https://www.example.com|
 
 Example input:
 
 ```
 {
-  "credentials": {
-    "username":"user1",
-    "password":"mypassword"
-  },
+  "credentials": "{\"username\":\"user1\", \"password\":\"mypassword\"}",
   "port": 443,
   "ssl_verify": true,
   "url": "https://www.example.com"
@@ -50,16 +47,16 @@ This action is used to add and remove IP addresses and domains to/from an extern
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|indicator|string|None|True|Indicator type which is IP address, domain name, URL|None|198.51.100.100|
-|list_name|string|None|True|List name to add an indicator|None|example_list_name|
-|operation|string|Add|False|Choose add or remove indicator to list|['Add', 'Remove']|None|
+|indicator|string|None|True|Indicator type which is IP address, domain name, or URL|None|198.51.100.100|
+|list_name|string|None|True|Name of the dynamic list|None|example_list_name|
+|operation|string|Add|False|Choose operation to add or remove indicator|['Add', 'Remove']|None|
 
 Example input:
 
 ```
 {
   "indicator": "198.51.100.100",
-  "list_name": "example_list_name",
+  "list_name": "example_list_name"
   "operation": "Add"
 }
 ```

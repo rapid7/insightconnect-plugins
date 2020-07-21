@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add and remove IP addresses and domains to/from an external dynamic list"
+    DESCRIPTION = "Add and remove indicators to and from an external dynamic list"
 
 
 class Input:
@@ -26,19 +26,19 @@ class UpdateExternalDynamicListInput(insightconnect_plugin_runtime.Input):
     "indicator": {
       "type": "string",
       "title": "Indicator",
-      "description": "Indicator type which is IP address, domain name, URL",
+      "description": "Indicator type which is IP address, domain name, or URL",
       "order": 1
     },
     "list_name": {
       "type": "string",
-      "title": "List Name",
-      "description": "List name to add an indicator",
+      "title": "Dynamic List",
+      "description": "Name of the dynamic list",
       "order": 2
     },
     "operation": {
       "type": "string",
       "title": "Operation",
-      "description": "Choose add or remove indicator to list",
+      "description": "Choose operation to add or remove indicator",
       "default": "Add",
       "enum": [
         "Add",

@@ -31,8 +31,8 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     },
     "ssl_verify": {
       "type": "boolean",
-      "title": "SSL Verify",
-      "description": "Verify SSL Certificate",
+      "title": "TLS/SSL Verify",
+      "description": "Verify TLS/SSL Certificate",
       "default": true,
       "order": 4
     },
