@@ -4,7 +4,7 @@
 
 # Key Features
 
-* Update External Dynamic List
+* Add and remove indicators in External Dynamic Lists
 
 # Requirements
 
