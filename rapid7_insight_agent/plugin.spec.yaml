@@ -1,0 +1,65 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: rapid7_insight_agent
+title: Rapid7 Insight Agent
+description: Take actions on an Insight Agent
+version: 1.0.0
+vendor: rapid7
+support: community
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_insight_agent
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+tags:
+- rapid7
+- agent
+- insight
+- edr
+- endpoint
+- detection
+- response
+hub_tags:
+  use_cases: [data_utility]
+  keywords: [rapid7, agent, endpoint, response, detection, insight]
+  features: []
+connection:
+  api_key:
+    title: X API Key
+    description: X API Key from the Insight Platform
+    type: credential_secret_key
+    example: a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99
+  org_id:
+    title: Organization ID
+    description: Organization ID
+    type: credential_secret_key
+    example: 2cg99z6y-795n-7bzf-hj67-12355h554974
+  region:
+    title: Region
+    description: Region
+    type: string
+    default: United States
+    example: United States
+    enum:
+      - United States
+      - Europe
+      - Canada
+      - Australia
+      - Japan
+actions:
+  get_agent_details:
+    title: Get Agent Details
+    description: This action is used to find and display detailed information about a device
+    input:
+      agent:
+        title: Agent
+        description: IP address, MAC address, or host name of the device to get information from
+        type: string
+        required: true
+        example: MaliciousHost
+    output:
+      agent:
+        title: Agent
+        description: Agent information
+        type: object
+        required: true
