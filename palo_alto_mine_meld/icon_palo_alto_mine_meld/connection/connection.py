@@ -43,11 +43,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
             else:
                 raise ConnectionTestException(
                     cause="Connection error.",
-                    assistance="An unexpected error occurred during the API request"
+                    assistance="An unexpected error occurred during the API request."
                 )
         except Exception:
             self.logger.error("An unexpected error occurred during the API request")
             raise ConnectionTestException(
                 cause="Connection error.",
-                assistance="An unexpected error occurred during the API request"
+                assistance="An unexpected error occurred during the API request."
             )
