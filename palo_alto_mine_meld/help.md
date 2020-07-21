@@ -12,6 +12,7 @@
 * Base URL for Palo Alto MineMeld
 
 # Documentation
+
 ## Setup
 
 The connection configuration accepts the following parameters:
@@ -36,6 +37,7 @@ Example input:
   "url": "https://www.example.com"
 }
 ```
+
 ## Technical Details
 
 ### Actions
@@ -83,6 +85,7 @@ _This plugin does not contain any triggers._
 ### Custom Output Types
 
 _This plugin does not contain any custom output types._
+
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._

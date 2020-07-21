@@ -12,7 +12,7 @@ tags:
 - palo_alto
 - mine_meld
 hub_tags:
-  use_cases: [asset_inventory]
+  use_cases: [threat_detection_and_response]
   keywords: [palo alto, mine meld]
   features: []
 resources:
@@ -42,32 +42,33 @@ connection:
     default: 443
     example: 443
   ssl_verify:
-    title: SSL Verify
-    description: Verify SSL Certificate
+    title: TLS/SSL Verify
+    description: Verify TLS/SSL Certificate
     type: boolean
     required: false
     default: true
     example: true
+
 actions:
   update_external_dynamic_list:
     title: Update External Dynamic List
-    description: Add and remove IP addresses and domains to/from an external dynamic list
+    description: Add and remove indicators to and from an external dynamic list
     input:
       indicator:
         title: Indicator
-        description: Indicator type which is IP address, domain name, URL
+        description: Indicator type which is IP address, domain name, or URL
         type: string
         required: true
         example: 198.51.100.100
       list_name:
-        title: List Name
-        description: List name to add an indicator
+        title: Dynamic List
+        description: Name of the dynamic list
         type: string
         required: true
         example: example_list_name
       operation:
         title: Operation
-        description: Choose add or remove indicator to list
+        description: Choose operation to add or remove indicator
         type: string
         enum:
         - Add
