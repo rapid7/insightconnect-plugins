@@ -8,7 +8,7 @@
 
 # Requirements
 
-* Username and password 
+* Username and password
 * Base URL for Palo Alto MineMeld
 
 # Documentation
