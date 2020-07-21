@@ -50,4 +50,6 @@ class TestGetAgentDetails(TestCase):
         test_action.connection = test_conn
         results = test_action.run(action_params)
 
-        self.assertEquals({}, results)
+        self.assertTrue("agent" in results.keys())
+        self.assertTrue(len(results), 1)
+        self.assertEqual(results.get("agent").get("id"), "15eec979a15f75ad70567d58ad8a0aef")
