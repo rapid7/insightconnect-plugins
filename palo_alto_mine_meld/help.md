@@ -28,7 +28,7 @@ Example input:
 
 ```
 {
-  "credentials": "{\"username\":\"user1\", \"password\":\"mypassword\"}",
+  "credentials": {"username": "user1", "password": "mypassword"},
   "port": 443,
   "ssl_verify": true,
   "url": "https://www.example.com"
