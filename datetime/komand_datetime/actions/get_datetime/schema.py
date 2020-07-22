@@ -26,7 +26,7 @@ class GetDatetimeInput(insightconnect_plugin_runtime.Input):
     "format_string": {
       "type": "string",
       "title": "Format String",
-      "description": "Format string for the output. Example: %H:%M:%S or %d/%m/%Y",
+      "description": "Format string for the output",
       "default": "%d %b %Y %H:%M:%S",
       "order": 1
     },
