@@ -25,9 +25,8 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
     def get_all_agents(self):
         agents = []
         headers = self.connection.get_headers()
-        # TODO: Change limit to 10000
         payload = {
-            "query": "query($orgId: String!) {organization(id: $orgId) { assets(first: 1) { pageInfo { hasNextPage endCursor } edges { node { host { id vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } id agent { id } } } } } } ",
+            "query": "query($orgId: String!) {organization(id: $orgId) { assets(first: 10000) { pageInfo { hasNextPage endCursor } edges { node { host { id vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } id agent { id } } } } } } ",
             "variables": {
                 "orgId": self.connection.org_key
             }
