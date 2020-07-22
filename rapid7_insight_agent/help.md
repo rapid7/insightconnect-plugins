@@ -35,6 +35,39 @@ Example input:
 
 ### Actions
 
+#### Quarantine
+
+This action is used to quarantine or release quarantine on a device.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent_id|string|None|True|The ID of the agent on the device to quarantine|None|a1cfb273c8e7d46a9e2a0e2dae01a0ce|
+|interval|int|604800|False||None|604800|
+|quarantine_state|boolean|True|False|Set to True to quarantine a host, set to false to release quarantine|None|True|
+
+Example input:
+
+```
+{
+  "agent_id": "a1cfb273c8e7d46a9e2a0e2dae01a0ce",
+  "interval": 604800,
+  "quarantine_state": true
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+```
+
 #### Get Agent Details
 
 This action this action is used to find and display detailed information about a device.

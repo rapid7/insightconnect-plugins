@@ -145,3 +145,41 @@ actions:
         description: Agent information
         type: agent
         required: true
+  quarantine:
+    title: Quarantine
+    description: Quarantine or release quarantine on a device
+    input:
+      agent_id:
+        title: Agent ID
+        description: The ID of the agent on the device to quarantine
+        type: string
+        example: a1cfb273c8e7d46a9e2a0e2dae01a0ce
+        required: true
+        order: 1
+      quarantine_state:
+        title: Quarantine State
+        description: Set to True to quarantine a host, set to false to release quarantine
+        type: boolean
+        default: true
+        example: true
+        requred: true
+        order: 2
+      interval:
+        title: Interval
+        descritpion: Length in time in seconds to try to take action on a device. This is also called Advertisement Period
+        type: int
+        default: 604800
+        example: 604800
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+
+
+
+
+
+
+
