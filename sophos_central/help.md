@@ -18,17 +18,17 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|client_id|credential_secret_key|None|True|Client ID for Sophos Central instance|None|TODO|
-|client_secret|credential_secret_key|None|True|Client secret key that allows access to Sophos Central|None|TODO|
-|url|string|None|True|Host URL|None|TODO|
+|client_id|credential_secret_key|None|True|Client ID for Sophos Central instance|None|1x1xxx11-1x11-11x1-11xx-1x1xxx1x11x1|
+|client_secret|credential_secret_key|None|True|Client secret key that allows access to Sophos Central|None|x1x111111x11111x11111xx11111xx111111x11x11xx1x111xxx11xx111x1x1xxx111111x1xx11x111x1xxx111x1111x1x11|
+|url|string|None|True|Host URL|None|https://api-eu02.central.sophos.com|
 
 Example input:
 
 ```
 {
-  "client_id": "TODO",
-  "client_secret": "TODO",
-  "url": "TODO"
+  "client_id": "1x1xxx11-1x11-11x1-11xx-1x1xxx1x11x1",
+  "client_secret": "x1x111111x11111x11111xx11111xx111111x11x11xx1x111xxx11xx111x1x1xxx111111x1xx11x111x1xxx111x1111x1x11",
+  "url": "https://api-eu02.central.sophos.com"
 }
 ```
 ## Technical Details
@@ -52,7 +52,20 @@ _This action does not contain any inputs._
 Example output:
 
 ```
-
+{
+  "hashes": {
+    "hashes": {
+      "business": {
+        "windows": "3395856ce81f2b7382dee72602f798b642f14140",
+        "windows_thin_installer": "3395856ce81f2b7382dee72602f798b642f14140",
+        "mac": "3395856ce81f2b7382dee72602f798b642f14140"
+      },
+      "home": {
+        "mac": "3395856ce81f2b7382dee72602f798b642f14140"
+      }
+    }
+  }
+}
 ```
 
 #### Get Alerts
@@ -63,7 +76,7 @@ This action is used to get alerts for a customer based on the parameters provide
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|from_date|integer|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Ignored if cursor is set. Must be within last 24 hours|None|123|
+|from_date|string|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours|None|2019-09-23T12:02:01.700Z|
 
 Example input:
 
@@ -80,13 +93,7 @@ Example output:
 
 ```
 {
-  "alerts": {
-    "items": [],
-    "pages": {
-      "maxSize": 500,
-      "size": 50
-    }
-  }
+  "items": []
 }
 ```
 
@@ -117,42 +124,9 @@ Example input:
 Example output:
 
 ```
-
-```
-
-#### Get SIEM Events
-
-This action is used to get events for a customer based on the parameters provided.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|cursor|string|None|False|Identifier for next item in the list, this value is available in response as next_cursor. Response will default to last 24 hours if cursor is not within last 24 hours|None|123|
-|exclude_types|string|None|False|The string of list of types of events to be excluded|None|123|
-|from_date|integer|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Ignored if cursor is set. Must be within last 24 hours|None|123|
-|limit|integer|200|False|The maximum number of items to return, default is 200, max is 1000|None|200|
-
-Example input:
-
-```
 {
-  "cursor": 123,
-  "exclude_types": 123,
-  "from_date": 123,
-  "limit": 200
+  "items": []
 }
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|events|event_aggregate|True|Events for the specified time period|
-
-Example output:
-
-```
 ```
 
 ### Triggers

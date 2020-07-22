@@ -22,9 +22,9 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "from_date": {
-      "type": "integer",
+      "type": "string",
       "title": "From date",
-      "description": "The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Ignored if cursor is set. Must be within last 24 hours",
+      "description": "The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours",
       "order": 1
     }
   }

@@ -49,10 +49,13 @@ class SophosCentralAPI:
         )
 
     def download_hashes(self):
-        return self._call_api(
+        return self._make_request(
             "GET",
-            f"{self.url}/migration-tool/v1/download/hashes",
-            "Tenant"
+            f"https://api3.central.sophos.com/gateway/migration-tool/v1/download/hashes",
+            headers={
+                "x-api-key": self.client_id,
+                "Authorization": f"Basic {self.client_secret}"
+            }
         )
 
     def get_endpoints(self, since):

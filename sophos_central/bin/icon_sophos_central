@@ -25,8 +25,6 @@ class ICONSophosCentral(insightconnect_plugin_runtime.Plugin):
 
         self.add_action(actions.GetEndpoints())
 
-        self.add_action(actions.GetSiemEvents())
-
 
 def main():
     """Run plugin"""

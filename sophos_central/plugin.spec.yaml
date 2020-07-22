@@ -465,19 +465,19 @@ connection:
     description: Host URL
     type: string
     required: true
-    example: TODO
+    example: https://api-eu02.central.sophos.com
   client_secret:
     title: Client Secret
     description: Client secret key that allows access to Sophos Central
     type: credential_secret_key
     required: true
-    example: TODO
+    example: x1x111111x11111x11111xx11111xx111111x11x11xx1x111xxx11xx111x1x1xxx111111x1xx11x111x1xxx111x1111x1x11
   client_id:
     title: Client ID
     description: Client ID for Sophos Central instance
     type: credential_secret_key
     required: true
-    example: TODO
+    example: 1x1xxx11-1x11-11x1-11xx-1x1xxx1x11x1
 
 actions:
   download_hashes:
@@ -511,47 +511,13 @@ actions:
     input:
       from_date:
         title: From date
-        description: The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Ignored if cursor is set. Must be within last 24 hours
+        description: The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours
         required: false
-        type: integer
-        example: 123
+        type: string
+        example: 2019-09-23T12:02:01.700Z
     output:
       alerts:
         title: Alerts
         description: Alerts for specified time period
         type: '[]alert_entity'
-        required: true
-  get_siem_events:
-    title: Get SIEM Events
-    description: Get events for a customer based on the parameters provided
-    input:
-      limit:
-        title: Limit
-        description: The maximum number of items to return, default is 200, max is 1000
-        required: false
-        type: integer
-        default: 200
-        example: 200
-      cursor:
-        title: Cursor
-        description: Identifier for next item in the list, this value is available in response as next_cursor. Response will default to last 24 hours if cursor is not within last 24 hours
-        required: false
-        type: string
-        example: 123
-      from_date:
-        title: From Date
-        description: The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Ignored if cursor is set. Must be within last 24 hours
-        required: false
-        type: integer
-        example: 123
-      exclude_types:
-        title: Exclude Types
-        description: The string of list of types of events to be excluded
-        required: false
-        type: string
-        example: 123
-    output:
-      events:
-        description: Events for the specified time period
-        type: event_aggregate
         required: true
