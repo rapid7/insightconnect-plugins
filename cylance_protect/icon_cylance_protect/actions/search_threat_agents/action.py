@@ -30,7 +30,7 @@ class SearchThreatAgents(insightconnect_plugin_runtime.Action):
             )
 
         return {
-            Output.THREAT_AGENTS: agents
+            Output.AGENTS: agents
         }
 
     def get_all_threat_agents(self, sha256: str) -> list:

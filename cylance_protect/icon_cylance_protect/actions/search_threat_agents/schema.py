@@ -12,7 +12,7 @@ class Input:
     
 
 class Output:
-    THREAT_AGENTS = "threat_agents"
+    AGENTS = "agents"
     
 
 class SearchThreatAgentsInput(insightconnect_plugin_runtime.Input):
@@ -44,9 +44,9 @@ class SearchThreatAgentsOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "threat_agents": {
+    "agents": {
       "type": "array",
-      "title": "Threat Agents",
+      "title": "Agents",
       "description": "Detailed information about threat agents found",
       "items": {
         "$ref": "#/definitions/threat_device"
@@ -55,7 +55,7 @@ class SearchThreatAgentsOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "threat_agents"
+    "agents"
   ],
   "definitions": {
     "threat_device": {

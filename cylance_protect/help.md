@@ -120,13 +120,13 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|threat_agents|[]threat_device|True|Detailed information about threat agents found|
+|agents|[]threat_device|True|Detailed information about threat agents found|
 
 Example output:
 
 ```
 {
-  "threat_agents": [
+  "agents": [
     {
       "id": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
       "name": "Example-Hostname",
@@ -299,7 +299,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.3.0 - New actions Search Threats, Search Threat Agents
+* 1.2.0 - New actions Search Threats, Search Threat Agents
 * 1.1.0 - New action Quarantine
 * 1.0.3 - Match official branding in plugin title
 * 1.0.2 - Update to fix connection test
