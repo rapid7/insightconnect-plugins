@@ -29,7 +29,7 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
         payload = {
             "query": "query($orgId: String!) {organization(id: $orgId) { assets(first: 1) { pageInfo { hasNextPage endCursor } edges { node { host { id vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } id agent { id } } } } } } ",
             "variables": {
-                "orgId": "3af18a2c-432f-4bce-af67-93711c509704"
+                "orgId": self.connection.org_key
             }
         }
 
