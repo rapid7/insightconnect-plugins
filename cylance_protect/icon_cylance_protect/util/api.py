@@ -6,6 +6,7 @@ import jwt
 import uuid
 from datetime import datetime, timedelta
 from insightconnect_plugin_runtime.helper import clean
+import validators
 
 
 class CylanceProtectAPI:
@@ -32,32 +33,14 @@ class CylanceProtectAPI:
             self.logger.info(f"Multiple agents found that matched the query: {devices}. We will act upon the first match.")
         return clean(devices[0])
 
-    def search_agents(self, agent):
+    def search_agents_all(self, agent):
         i = 1
-        total_pages = self.get_agents(i, '20').get('total_pages')
         agents = []
-
-        while i <= total_pages:
+        while True:
             response = self.get_agents(i, "20")
-            device_list = response.get('page_items')
-            if match('^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$', agent):
-                for device in device_list:
-                    for ip in device.get('ip_addresses'):
-                        if agent == ip:
-                            agents.append(device)
-            elif match('[0-9a-f]{2}([-:]?)[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$', agent.lower()):
-                for device in device_list:
-                    for mac in device.get('mac_addresses'):
-                        if agent.replace(':', '-').upper() == mac:
-                            agents.append(device)
-            elif match('^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$', agent.lower()):
-                for device in device_list:
-                        if agent.lower() == device.get('id'):
-                            agents.append(device)
-            else:
-                for device in device_list:
-                        if agent.upper() == device.get('name').upper():
-                            agents.append(device)
+            if i > response.get('total_pages'):
+                break
+            agents.extend(self.search_agents(agent, response.get('page_items')))
             i += 1
 
         if len(agents) == 0:
@@ -67,6 +50,52 @@ class CylanceProtectAPI:
             )
             
         return agents
+
+    def search_agents(self, agent: str, device_list: dict) -> list:
+        agents = []
+        if validators.ipv4(agent):
+            agents.extend(self.get_device_by_ip(agent, device_list))
+        elif match('[0-9a-f]{2}([-:]?)[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$', agent.lower()):
+            agents.extend(self.get_device_by_mac(agent, device_list))
+        elif match('^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$', agent.lower()):
+            agents.extend(self.get_device_by_id(agent, device_list))
+        else:
+            agents.extend(self.get_device_by_name(agent, device_list))
+        return agents
+
+    @staticmethod
+    def get_device_by_ip(ip_address: str, device_list: list) -> list:
+        matching_devices = []
+        for device in device_list:
+            for ip in device.get('ip_addresses'):
+                if ip_address == ip:
+                    matching_devices.append(device)
+        return matching_devices
+
+    @staticmethod
+    def get_device_by_mac(mac_address: str, device_list: list) -> list:
+        matching_devices = []
+        for device in device_list:
+            for mac in device.get('mac_addresses'):
+                if mac_address.replace(':', '-').upper() == mac:
+                    matching_devices.append(device)
+        return matching_devices
+
+    @staticmethod
+    def get_device_by_id(device_id: str, device_list: list) -> list:
+        matching_devices = []
+        for device in device_list:
+            if device_id.lower() == device.get('id'):
+                matching_devices.append(device)
+        return matching_devices
+
+    @staticmethod
+    def get_device_by_name(name: str, device_list: list) -> list:
+        matching_devices = []
+        for device in device_list:
+                if name.upper() == device.get('name').upper():
+                    matching_devices.append(device)
+        return matching_devices
 
     def create_blacklist_item(self, payload):
         return self._call_api("POST", f"{self.url}/globallists/v2", "globallist:create", json_data=payload)

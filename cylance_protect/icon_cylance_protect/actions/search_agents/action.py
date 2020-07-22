@@ -15,5 +15,5 @@ class SearchAgents(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         return {
-            Output.AGENTS: self.search_agents(params.get(Input.AGENT))
+            Output.AGENTS: self.connection.client.search_agents_all(params.get(Input.AGENT))
         }
