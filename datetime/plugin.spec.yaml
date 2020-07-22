@@ -4,10 +4,11 @@ products: [insightconnect]
 name: datetime
 title: Datetime
 description: This plugin manipulates timestamps using Python's maya library
-version: 2.0.5
+version: 2.0.6
 vendor: rapid7
 support: rapid7
 status: []
+cloud_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/datetime
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
