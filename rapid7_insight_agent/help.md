@@ -57,11 +57,56 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|agent|object|True|Agent information|
+|agent|agent|True|Agent information|
 
 Example output:
 
 ```
+{
+  "agent": {
+    "id": "15eec979a15f75ad70567d58ad8a0aef",
+    "vendor": "Microsoft",
+    "version": "SP1",
+    "description": "Microsoft Windows 7 Professional SP1",
+    "hostNames": [
+      {
+        "name": "joey-w7-vagrant-pc"
+      }
+    ],
+    "primaryAddress": {
+      "ip": "10.0.2.15",
+      "mac": "08-00-27-33-9F-CE"
+    },
+    "uniqueIdentity": [
+      {
+        "source": "Endpoint Agent",
+        "id": "15eec979a15f75ad70567d58ad8a0aef"
+      },
+      {
+        "source": "CSPRODUCT",
+        "id": "030B19C0-F12D-6643-B86E-FA7C08A4A838"
+      }
+    ],
+    "attributes": [
+      {
+        "key": "cpuinfo",
+        "value": "Intel(R) Core(TM) i7-6920HQ CPU @ 2.90GHz"
+      },
+      {
+        "key": "timezone",
+        "value": "GMT-7"
+      },
+      {
+        "key": "release",
+        "value": "7"
+      },
+      {
+        "key": "proxies",
+        "value": "{}"
+      }
+    ]
+  }
+}
 ```
 
 ### Triggers

@@ -45,7 +45,7 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "agent": {
-      "type": "object",
+      "$ref": "#/definitions/agent",
       "title": "Agent",
       "description": "Agent information",
       "order": 1
@@ -53,7 +53,206 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
   },
   "required": [
     "agent"
-  ]
+  ],
+  "definitions": {
+    "agent": {
+      "type": "object",
+      "title": "agent",
+      "properties": {
+        "attributes": {
+          "type": "array",
+          "title": "Attributes",
+          "description": "Attributes",
+          "items": {
+            "$ref": "#/definitions/attributes"
+          },
+          "order": 1
+        },
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "description": "Description",
+          "order": 2
+        },
+        "hostNames": {
+          "type": "array",
+          "title": "Hostnames",
+          "description": "Hostnames",
+          "items": {
+            "$ref": "#/definitions/hostNames"
+          },
+          "order": 3
+        },
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "Id",
+          "order": 4
+        },
+        "primaryAddress": {
+          "$ref": "#/definitions/primaryAddress",
+          "title": "Primaryaddress",
+          "description": "Primaryaddress",
+          "order": 5
+        },
+        "uniqueIdentity": {
+          "type": "array",
+          "title": "Uniqueidentity",
+          "description": "Uniqueidentity",
+          "items": {
+            "$ref": "#/definitions/uniqueIdentity"
+          },
+          "order": 6
+        },
+        "vendor": {
+          "type": "string",
+          "title": "Vendor",
+          "description": "Vendor",
+          "order": 7
+        },
+        "version": {
+          "type": "string",
+          "title": "Version",
+          "description": "Version",
+          "order": 8
+        }
+      },
+      "definitions": {
+        "attributes": {
+          "type": "object",
+          "title": "attributes",
+          "properties": {
+            "key": {
+              "type": "string",
+              "title": "Key",
+              "description": "Key",
+              "order": 1
+            },
+            "value": {
+              "type": "string",
+              "title": "Value",
+              "description": "Value",
+              "order": 2
+            }
+          }
+        },
+        "hostNames": {
+          "type": "object",
+          "title": "hostNames",
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "Name",
+              "order": 1
+            }
+          }
+        },
+        "primaryAddress": {
+          "type": "object",
+          "title": "primaryAddress",
+          "properties": {
+            "ip": {
+              "type": "string",
+              "title": "Ip",
+              "description": "Ip",
+              "order": 1
+            },
+            "mac": {
+              "type": "string",
+              "title": "Mac",
+              "description": "Mac",
+              "order": 2
+            }
+          }
+        },
+        "uniqueIdentity": {
+          "type": "object",
+          "title": "uniqueIdentity",
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "Id",
+              "description": "Id",
+              "order": 1
+            },
+            "source": {
+              "type": "string",
+              "title": "Source",
+              "description": "Source",
+              "order": 2
+            }
+          }
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "title": "attributes",
+      "properties": {
+        "key": {
+          "type": "string",
+          "title": "Key",
+          "description": "Key",
+          "order": 1
+        },
+        "value": {
+          "type": "string",
+          "title": "Value",
+          "description": "Value",
+          "order": 2
+        }
+      }
+    },
+    "hostNames": {
+      "type": "object",
+      "title": "hostNames",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 1
+        }
+      }
+    },
+    "primaryAddress": {
+      "type": "object",
+      "title": "primaryAddress",
+      "properties": {
+        "ip": {
+          "type": "string",
+          "title": "Ip",
+          "description": "Ip",
+          "order": 1
+        },
+        "mac": {
+          "type": "string",
+          "title": "Mac",
+          "description": "Mac",
+          "order": 2
+        }
+      }
+    },
+    "uniqueIdentity": {
+      "type": "object",
+      "title": "uniqueIdentity",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "Id",
+          "order": 1
+        },
+        "source": {
+          "type": "string",
+          "title": "Source",
+          "description": "Source",
+          "order": 2
+        }
+      }
+    }
+  }
 }
     """)
 

@@ -23,6 +23,88 @@ hub_tags:
   use_cases: [data_utility]
   keywords: [rapid7, agent, endpoint, response, detection, insight]
   features: []
+types:
+  attributes:
+    key:
+      title: "Key"
+      type: string
+      description: "Key"
+      required: false
+    value:
+      title: "Value"
+      type: string
+      description: "Value"
+      required: false
+  hostNames:
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+  primaryAddress:
+    ip:
+      title: "Ip"
+      type: string
+      description: "Ip"
+      required: false
+    mac:
+      title: "Mac"
+      type: string
+      description: "Mac"
+      required: false
+  uniqueIdentity:
+    id:
+      title: "Id"
+      type: string
+      description: "Id"
+      required: false
+    source:
+      title: "Source"
+      type: string
+      description: "Source"
+      required: false
+  agent:
+    attributes:
+      title: "Attributes"
+      type: "[]attributes"
+      description: "Attributes"
+      required: false
+    description:
+      title: "Description"
+      type: string
+      description: "Description"
+      required: false
+    hostNames:
+      title: "Hostnames"
+      type: "[]hostNames"
+      description: "Hostnames"
+      required: false
+    id:
+      title: "Id"
+      type: string
+      description: "Id"
+      required: false
+    primaryAddress:
+      title: "Primaryaddress"
+      type: primaryAddress
+      description: "Primaryaddress"
+      required: false
+    uniqueIdentity:
+      title: "Uniqueidentity"
+      type: "[]uniqueIdentity"
+      description: "Uniqueidentity"
+      required: false
+    vendor:
+      title: "Vendor"
+      type: string
+      description: "Vendor"
+      required: false
+    version:
+      title: "Version"
+      type: string
+      description: "Version"
+      required: false
+
 connection:
   api_key:
     title: X API Key
@@ -61,5 +143,5 @@ actions:
       agent:
         title: Agent
         description: Agent information
-        type: object
+        type: agent
         required: true
