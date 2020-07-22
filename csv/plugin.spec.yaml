@@ -5,10 +5,11 @@ name: csv
 title: CSV
 description: "CSV (Comma Separated Values) is a simple data format for storing data. This plugin allows one to
   extract fields from CSV strings and files"
-version: 1.1.5
+version: 1.1.6
 vendor: rapid7
 support: community
 status: []
+cloud_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/csv
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -28,10 +29,12 @@ actions:
         type: string
         description: CSV string
         required: true
+        example: column1, column2\nvalue1, value2
       fields:
         type: string
-        description: Fields to filter E.g. f1, f2, f3-f6
+        description: Fields to filter
         required: true
+        example: f1, f2, f3-f6
     output:
       string:
         type: string
@@ -45,10 +48,12 @@ actions:
         type: bytes
         description: Base64 encoded CSV file
         required: true
+        example: ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTIK
       fields:
         type: string
-        description: Fields to filter E.g. f1, f2, f3-f6
+        description: Fields to filter
         required: true
+        example: f1, f2, f3-f6
     output:
       filtered:
         type: bytes
@@ -63,12 +68,14 @@ actions:
         type: bytes
         description: Base64 encoded CSV file
         required: true
+        example: ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTIK
       validation:
         title: Validate
         type: boolean
         description: Validate CSV data, error if not valid
         default: false
         required: true
+        example: true
     output:
       json:
         title: JSON
@@ -84,6 +91,7 @@ actions:
         type: '[]object'
         description: JSON array to convert to CSV
         required: true
+        example: "[{\"column1\": \"value1\", \" column2\": \" value2\"}]"
     output:
       csv:
         title: CSV
