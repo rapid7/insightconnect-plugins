@@ -407,7 +407,7 @@ actions:
     input:
       threat_identifier:
         title: Threat Identifier
-        description: The threat(s) to search for. The input should be an array of threat names, md5, or sha256 hashes
+        description: The threat(s) to search for. The input should be an array of threat names, MD5, or SHA256 hashes
         type: "[]string"
         required: true
         example: ["9de5069c5afe602b2ea0a04b66beb2c0", "02699626f388ed830012e5b787640e71c56d42d8", "Example-Threat-Name"]
@@ -429,7 +429,7 @@ actions:
     input:
       threat_identifier:
         title: Threat Identifier
-        description: The threat to search for. The input should be a threat name, md5, or sha256 hash
+        description: The threat to search for. The input should be a threat name, MD5, or SHA256 hash
         type: string
         required: true
         example: 9de5069c5afe602b2ea0a04b66beb2c0

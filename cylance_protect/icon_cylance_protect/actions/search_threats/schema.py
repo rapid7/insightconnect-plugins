@@ -31,7 +31,7 @@ class SearchThreatsInput(insightconnect_plugin_runtime.Input):
     "threat_identifier": {
       "type": "array",
       "title": "Threat Identifier",
-      "description": "The threat(s) to search for. The input should be an array of threat names, md5, or sha256 hashes",
+      "description": "The threat(s) to search for. The input should be an array of threat names, MD5, or SHA256 hashes",
       "items": {
         "type": "string"
       },

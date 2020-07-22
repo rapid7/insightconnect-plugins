@@ -24,7 +24,7 @@ class SearchThreatAgentsInput(insightconnect_plugin_runtime.Input):
     "threat_identifier": {
       "type": "string",
       "title": "Threat Identifier",
-      "description": "The threat to search for. The input should be a threat name, md5, or sha256 hash",
+      "description": "The threat to search for. The input should be a threat name, MD5, or SHA256 hash",
       "order": 1
     }
   },
