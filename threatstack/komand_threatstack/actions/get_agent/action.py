@@ -15,8 +15,3 @@ class GetAgent(komand.Action):
     def run(self, params={}):
         agent = self.connection.client.agents.get(params.get('agent_id'))
         return {'agent': agent}
-
-    def test(self):
-        '''Test action'''
-        self.logger.info('Unable to test request, proceeding with example output')
-        return { 'agent': {} }

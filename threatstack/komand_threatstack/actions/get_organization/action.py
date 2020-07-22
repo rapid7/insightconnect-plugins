@@ -31,9 +31,3 @@ class GetOrganization(komand.Action):
             raise Exception('Organization not found')
 
         return {'organization': organization}
-
-
-    def test(self):
-        '''Test action'''
-        self.logger.info('Unable to test request, proceeding with example output')
-        return { 'organization': {} }

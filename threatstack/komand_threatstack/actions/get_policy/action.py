@@ -15,8 +15,3 @@ class GetPolicy(komand.Action):
     def run(self, params={}):
         policy = self.connection.client.policies.get(params.get('policy_id', ''))
         return {'policy': policy}
-
-    def test(self):
-        '''Test action'''
-        self.logger.info('Unable to test request, proceeding with example output')
-        return { 'policy': [{}] }

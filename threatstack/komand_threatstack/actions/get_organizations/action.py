@@ -28,7 +28,3 @@ class GetOrganizations(komand.Action):
                 break
 
         return {'organizations': organization_list, 'count': len(organization_list)}
-
-    def test(self):
-        '''Test action'''
-        return self.run()

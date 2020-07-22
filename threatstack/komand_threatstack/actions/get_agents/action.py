@@ -31,7 +31,3 @@ class GetAgents(komand.Action):
                 break
 
         return {'agents': agent_list, 'count': len(agent_list)}
-
-    def test(self):
-        '''Test action'''
-        return self.run()

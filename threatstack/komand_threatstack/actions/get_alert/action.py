@@ -15,8 +15,3 @@ class GetAlert(komand.Action):
     def run(self, params={}):
         alert = self.connection.client.alerts.get(params.get('alert_id'))
         return {'alert': alert}
-
-    def test(self):
-        '''Test action'''
-        self.logger.info('Unable to test request, proceeding with example output')
-        return { 'alert': {} }

@@ -28,8 +28,3 @@ class GetAlerts(komand.Action):
                 break
 
         return {'alerts': alert_list, 'count': len(alert_list)}
-
-    def test(self):
-        '''Test action'''
-        self.logger.info('Unable to test request, proceeding with example output')
-        return { 'alerts': [{}], 'count': 0 }

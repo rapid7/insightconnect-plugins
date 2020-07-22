@@ -25,12 +25,17 @@ In addition, Threat Stack will be deprecating this API in favor of version 2 whe
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|REST API key|None|
-|api_version|integer|1|False|API version|None|
-|org_id|string||False|Threat Stack Org ID (For use when multiple orgs)|None|
-|timeout|integer|120|False|API timeout|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|REST API key|None|None|
+|api_version|integer|1|False|API version|None|None|
+|org_id|string||False|Threat Stack Org ID (For use when multiple orgs)|None|None|
+|timeout|integer|120|False|API timeout|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -42,10 +47,15 @@ This action is used to get alert data by ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|alert_id|string|None|True|Alert ID e.g. 597b8c751c7ff17fcf028e54|None|
-|fields|[]string|None|False|Fields to return|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|alert_id|string|None|True|Alert ID e.g. 597b8c751c7ff17fcf028e54|None|None|
+|fields|[]string|None|False|Fields to return|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -268,10 +278,15 @@ This action is used to get a policy.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|fields|[]string|None|False|Fields to return|None|
-|policy_id|string|None|True|Threat Stack policy ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|fields|[]string|None|False|Fields to return|None|None|
+|policy_id|string|None|True|Threat Stack policy ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -328,11 +343,16 @@ This action is used to get alerts by filter.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|end|string|None|False|End date e.g. 2018-01-01|None|
-|fields|[]string|None|False|Fields to return|None|
-|start|string|None|False|Start date e.g. 2017-01-01|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|end|string|None|False|End date e.g. 2018-01-01|None|None|
+|fields|[]string|None|False|Fields to return|None|None|
+|start|string|None|False|Start date e.g. 2017-01-01|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -560,10 +580,15 @@ This action is used to get an organization.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|fields|[]string|None|False|Fields to return|None|
-|organization_id|string|None|True|Threat Stack organization ID e.g. 583cb310a3d05a733a4383ap|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|fields|[]string|None|False|Fields to return|None|None|
+|organization_id|string|None|True|Threat Stack organization ID e.g. 583cb310a3d05a733a4383ap|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -591,11 +616,16 @@ This action is used to get agent data.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|end|string|None|False|End date e.g. 2018-01-01|None|
-|fields|[]string|None|False|Fields to return|None|
-|start|string|None|False|Start date e.g. 2017-01-01|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|end|string|None|False|End date e.g. 2018-01-01|None|None|
+|fields|[]string|None|False|Fields to return|None|None|
+|start|string|None|False|Start date e.g. 2017-01-01|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -640,9 +670,14 @@ This action is used to get organizations.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|fields|[]string|None|False|Fields to return|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|fields|[]string|None|False|Fields to return|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -674,9 +709,14 @@ This action is used to get policies.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|fields|[]string|None|False|Fields to return|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|fields|[]string|None|False|Fields to return|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -740,10 +780,15 @@ This action is used to get agent data.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|agent_id|string|None|True|Agent ID e.g. 597b2c751b7cc18fcf028e52|None|
-|fields|[]string|None|False|Fields to return|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent_id|string|None|True|Agent ID e.g. 597b2c751b7cc18fcf028e52|None|None|
+|fields|[]string|None|False|Fields to return|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 

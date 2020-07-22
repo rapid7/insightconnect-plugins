@@ -3,12 +3,11 @@ extension: plugin
 products: [insightconnect]
 name: threatstack
 title: Threat Stack
-description: The Threat Stack plugin is used to get information about alerts, assets, and policies
+description: Get information about alerts, assets, policies, and more
 version: 1.0.1
 vendor: rapid7
 support: community
 status: []
-author: Tom McLaughlin
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/threatstack
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -22,6 +21,7 @@ hub_tags:
   keywords: [threatstack, ts, cloud]
   features: []
 language: python
+
 connection:
   api_key:
     title: API Key
@@ -33,7 +33,6 @@ connection:
     type: string
     description: Threat Stack Org ID (For use when multiple orgs)
     required: false
-    default: ''
   api_version:
     title: API Version
     type: integer
@@ -46,7 +45,9 @@ connection:
     description: API timeout
     required: false
     default: 120
+
 actions:
+
   get_agent:
     title: Get Agent
     description: Get agent data
@@ -64,6 +65,7 @@ actions:
         type: object
         description: Detailed agent data
         required: true
+
   get_agents:
     title: Get Agents
     description: Get agent data
@@ -89,6 +91,7 @@ actions:
         type: integer
         description: Number of agents
         required: true
+
   get_alert:
     title: Get Alert
     description: Get alert data by ID
@@ -107,6 +110,7 @@ actions:
         type: object
         description: Detailed alert data
         required: true
+
   get_alerts:
     title: Get Alerts
     description: Get alerts by filter
@@ -132,6 +136,7 @@ actions:
         type: integer
         description: Number of alerts
         required: true
+
   get_organizations:
     title: Get Organizations
     description: Get organizations
@@ -149,6 +154,7 @@ actions:
         type: integer
         description: Number of organizations
         required: true
+
   get_organization:
     title: Get Organization
     description: Get organization
@@ -167,6 +173,7 @@ actions:
         type: '[]object'
         description: Organization data
         required: true
+
   get_policies:
     title: Get Policies
     description: Get policies
@@ -184,6 +191,7 @@ actions:
         type: integer
         description: Number of policies
         required: true
+
   get_policy:
     title: Get Policy
     description: Get policy

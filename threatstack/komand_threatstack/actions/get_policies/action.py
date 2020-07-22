@@ -28,7 +28,3 @@ class GetPolicies(komand.Action):
                 break
 
         return {'policies': policy_list, 'count': len(policy_list)}
-
-    def test(self):
-        '''Test action'''
-        return self.run()

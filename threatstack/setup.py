@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="threatstack-rapid7-plugin",
       version="1.0.1",
-      description="The Threat Stack plugin is used to get information about alerts, assets, and policies",
+      description="Get information about alerts, assets, policies, and more",
       author="rapid7",
       author_email="",
       url="",
