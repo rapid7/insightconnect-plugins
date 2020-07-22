@@ -37,7 +37,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
             "Accept-Encoding": "gzip, deflate, br"
         }
 
-
     def test(self):
         # Return the first org to verify the connection works
         graph_ql_payload = "{ organizations(first: 1) { edges { node { id } } totalCount } }"
