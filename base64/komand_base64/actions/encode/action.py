@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import EncodeInput, EncodeOutput, Input, Output, Component
 import base64
 
 
-class Encode(komand.Action):
+class Encode(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
