@@ -22,23 +22,90 @@ hub_tags:
   features: []
 language: python
 
+types:
+  alert:
+    id:
+      type: string
+      title: ID
+      required: true
+      description: ID of the alert
+    title:
+      type: string
+      title: Title
+      required: true
+      description: Title of the alert
+    datasource:
+      type: string
+      title: Datasource
+      required: false
+      description: Indicates whether this alert was generated from a CloudTrail event or Agent event. Agent events will have AgentId
+    createdAt:
+      type: string
+      title: Created At
+      required: true
+      description: Date and time the alert was fired
+    isDismissed:
+      type: boolean
+      title: Is Dismissed
+      required: true
+      description: Flag that shows if the alert was dismissed
+    dismissedAt:
+      type: string
+      title: Dismissed At
+      required: false
+      description: Date and time the alert was dismissed
+    dismissReason:
+      type: string
+      title: Dismiss Reason
+      required: false
+      description: Either BUSINESS_OP, COMPANY_POLICY, MAINTENANCE, NONE, AUTO_DISMISS, or OTHER
+    dismissReasonText:
+      type: string
+      title: Dismiss Reason Text
+      required: false
+      description: Reason the alert was dismissed if dismiss reason is OTHER
+    dismissedBy:
+      type: string
+      title: Dismissed By
+      required: false
+      description: Person that dismissed the alert
+    severity:
+      type: number
+      title: Severity
+      required: true
+      description: Severity of the alert. Either 1, 2, or 3
+    agentId:
+      type: string
+      title: Agent ID
+      required: false
+      description: ID of the agent that generated the alert
+    ruleId:
+      type: string
+      title: Rule ID
+      required: true
+      description: ID of the rule that generated the alert
+    rulesetId:
+      type: string
+      title: Ruleset ID
+      required: true
+      description: ID of the ruleset that generated the alert
+
 connection:
   api_key:
     title: API Key
     type: credential_secret_key
     description: REST API key
     required: true
+  user_id:
+    title: User ID
+    type: string
+    description: User ID
+    required: true
   org_id:
     title: Org ID
     type: string
-    description: Threat Stack Org ID (For use when multiple orgs)
-    required: false
-  api_version:
-    title: API Version
-    type: integer
-    description: API version
-    required: false
-    default: 1
+    description: Threat Stack Organization ID
+    required: true
   timeout:
     title: Timeout
     type: integer
@@ -47,6 +114,44 @@ connection:
     default: 120
 
 actions:
+
+  get_alert:
+    title: Get Alert
+    description: Get alert data by ID
+    input:
+      alert_id:
+        type: string
+        title: Alert ID
+        description: Alert ID e.g. 597b8c751c7ff17fcf028e54
+        required: true
+    output:
+      alert:
+        type: alert
+        title: Alert
+        description: Detailed alert data
+        required: true
+
+  get_alerts:
+    title: Get Alerts
+    description: Get alerts by filter
+    input:
+      start:
+        type: string
+        description: Start date e.g. 2017-01-01
+        required: false
+      end:
+        type: string
+        description: End date e.g. 2018-01-01
+        required: false
+    output:
+      alerts:
+        type: '[]alert'
+        description: List of alerts
+        required: true
+      count:
+        type: integer
+        description: Number of alerts
+        required: true
 
   get_agent:
     title: Get Agent
@@ -92,49 +197,23 @@ actions:
         description: Number of agents
         required: true
 
-  get_alert:
-    title: Get Alert
-    description: Get alert data by ID
+  get_organization:
+    title: Get Organization
+    description: Get organization
     input:
-      alert_id:
+      organization_id:
         type: string
-        title: Alert ID
-        description: Alert ID e.g. 597b8c751c7ff17fcf028e54
+        title: Organization ID
+        description: Threat Stack organization ID e.g. 583cb310a3d05a733a4383ap
         required: true
       fields:
         type: '[]string'
         description: Fields to return
         required: false
     output:
-      alert:
-        type: object
-        description: Detailed alert data
-        required: true
-
-  get_alerts:
-    title: Get Alerts
-    description: Get alerts by filter
-    input:
-      start:
-        type: string
-        description: Start date e.g. 2017-01-01
-        required: false
-      end:
-        type: string
-        description: End date e.g. 2018-01-01
-        required: false
-      fields:
-        type: '[]string'
-        description: Fields to return
-        required: false
-    output:
-      alerts:
+      organization:
         type: '[]object'
-        description: List of alerts
-        required: true
-      count:
-        type: integer
-        description: Number of alerts
+        description: Organization data
         required: true
 
   get_organizations:
@@ -155,23 +234,23 @@ actions:
         description: Number of organizations
         required: true
 
-  get_organization:
-    title: Get Organization
-    description: Get organization
+  get_policy:
+    title: Get Policy
+    description: Get policy
     input:
-      organization_id:
+      policy_id:
         type: string
-        title: Organization ID
-        description: Threat Stack organization ID e.g. 583cb310a3d05a733a4383ap
+        title: Policy ID
+        description: Threat Stack policy ID
         required: true
       fields:
         type: '[]string'
         description: Fields to return
         required: false
     output:
-      organization:
+      policy:
         type: '[]object'
-        description: Organization data
+        description: Policy data
         required: true
 
   get_policies:
@@ -190,23 +269,4 @@ actions:
       count:
         type: integer
         description: Number of policies
-        required: true
-
-  get_policy:
-    title: Get Policy
-    description: Get policy
-    input:
-      policy_id:
-        type: string
-        title: Policy ID
-        description: Threat Stack policy ID
-        required: true
-      fields:
-        type: '[]string'
-        description: Fields to return
-        required: false
-    output:
-      policy:
-        type: '[]object'
-        description: Policy data
         required: true

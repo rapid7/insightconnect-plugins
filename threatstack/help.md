@@ -28,9 +28,9 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|REST API key|None|None|
-|api_version|integer|1|False|API version|None|None|
-|org_id|string||False|Threat Stack Org ID (For use when multiple orgs)|None|None|
+|org_id|string|None|True|Threat Stack Organization ID|None|None|
 |timeout|integer|120|False|API timeout|None|None|
+|user_id|string|None|True|User ID|None|None|
 
 Example input:
 
@@ -41,16 +41,16 @@ Example input:
 
 ### Actions
 
-#### Get Alert
+#### Get Alerts
 
-This action is used to get alert data by ID.
+This action is used to get alerts by filter.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|alert_id|string|None|True|Alert ID e.g. 597b8c751c7ff17fcf028e54|None|None|
-|fields|[]string|None|False|Fields to return|None|None|
+|end|string|None|False|End date e.g. 2018-01-01|None|None|
+|start|string|None|False|Start date e.g. 2017-01-01|None|None|
 
 Example input:
 
@@ -61,7 +61,53 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|alert|object|True|Detailed alert data|
+|alerts|[]alert|True|List of alerts|
+|count|integer|True|Number of alerts|
+
+Example output:
+
+```
+{
+  "alert": {
+    "dataSource": "cloudtrail",
+    "id": "2abca110-cb87-11ea-b55e-4f5cfb08a8d1",
+    "ruleId": "ed8418b3-69f6-11ea-8dc5-19fea1b7cb31",
+    "title": "CloudTrail: Access Denied: Event: DescribeScalingP...",
+    "aggregates": {
+      "ip": "38.98.140.20",
+      "user": "user@example.com",
+      "accountId": "113901497002",
+      "eventName": "DescribeScalingPolicies",
+      "eventSource": "autoscaling.amazonaws.com"
+    },
+    "createdAt": "2020-07-21T19:19:58.625Z",
+    "isDismissed": false,
+    "rulesetId": "aac04548-69f6-11ea-b4d2-ad32b4432dec",
+    "severity": 3
+  }
+}
+```
+
+#### Get Alert
+
+This action is used to get alert data by ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|alert_id|string|None|True|Alert ID e.g. 597b8c751c7ff17fcf028e54|None|None|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|alert|alert|True|Detailed alert data|
 
 Example output:
 
@@ -333,243 +379,6 @@ Example output:
     "id": "7f6cac6f-eef7-11e6-b0e1-ad6efc548ecd",
     "description": "CloudTrail Base Rule Set"
   }
-}
-
-```
-
-#### Get Alerts
-
-This action is used to get alerts by filter.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|end|string|None|False|End date e.g. 2018-01-01|None|None|
-|fields|[]string|None|False|Fields to return|None|None|
-|start|string|None|False|Start date e.g. 2017-01-01|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|alerts|[]object|True|List of alerts|
-|count|integer|True|Number of alerts|
-
-Example output:
-
-```
-
-{
-  count: 16,
-  alerts: [
-    {
-      "count": 34,
-      "severity": 3,
-      "title": "User Activity (Login Failures): User undefined failed authentication from IP undefined",
-      "rule": {
-        "exclusion_filter": null,
-        "hash": "b27736c8444f963efae2fd1692c771bb",
-        "description": "This rule alerts on Login failures by users. Monitoring of failed login attempts can identify brute force/dictionary attacks as well as users trying to access systems without authorization.",
-        "title": "User Activity (Login Failures): User {{user}} failed authentication from IP {{src_ip}}",
-        "hermes_alert_policy_id": "7f7ba0ac-eef7-11e6-b0e1-cf66e6984857",
-        "severity": 3,
-        "original_rule": {
-          "description": "This rule alerts on Login failures by users. Monitoring of failed login attempts can identify brute force/dictionary attacks as well as users trying to access systems without authorization.",
-          "severity": 3,
-          "tags": [],
-          "anomalous_only": false,
-          "enabled": true,
-          "created_at": "2016-01-27T22:19:51.516Z",
-          "aggregate_fields": [
-            "user",
-            "src_ip"
-          ],
-          "window_seconds": 3600,
-          "updated_at": "2017-04-06T15:24:33.586Z",
-          "id": "7f842c39-eef7-11e6-b0e1-8d4568316479",
-          "filter": "group = \"authentication-failed\" or group = \"invalid_login\" OR group = \"authentication_failed\" or group like \"fail\"",
-          "auto_suppress": false,
-          "threshold": 1,
-          "title": "User Activity (Login Failures): User {{user}} failed authentication from IP {{src_ip}}",
-          "type": "all",
-          "exclusions": [],
-          "name": "Users : Login Failures"
-        },
-        "window_seconds": 3600,
-        "TranslationKeyMap": {
-          "files": [],
-          "domain": [],
-          "src_port": [],
-          "event_type": [],
-          "ip": [],
-          "agent": [],
-          "port": [],
-          "exit": [],
-          "user": [],
-          "host_signatures": [],
-          "threat_type": [],
-          "threat_source": [],
-          "dst_port": []
-        },
-        "alert_policy_id": "53743bc0BEEFBEEFBEEFBEEF",
-        "id": "7f842c39-eef7-11e6-b0e1-8d4568316479",
-        "filter": "group = \"authentication-failed\" or group = \"invalid_login\" OR group = \"authentication_failed\" or group like \"fail\"",
-        "aggFields": [
-          "user",
-          "src_ip"
-        ],
-        "auto_suppress": false,
-        "hermes_rule_id": "7f842c39-eef7-11e6-b0e1-8d4568316479",
-        "threshold": 1,
-        "_hash_key": "b27736c8444f963efae2fd1692c771bb",
-        "type": "all",
-        "rule_id": "53743bc0BEEFBEEFBEEFBEEF",
-        "enabled": true,
-        "policy_id": "7f7ba0ac-eef7-11e6-b0e1-cf66e6984857"
-      },
-      "created_at": 1500245139383,
-      "last_updated_at": "2017-07-16T23:43:47.340Z",
-      "expires_at": 1500248739383,
-      "latest_events": [
-        {
-          "comment": "Attempt to login using a non-existent user",
-          "sigid": 5710,
-          "group": [
-            "invalid_login",
-            "authentication_failed"
-          ],
-          "log": "Jul 16 23:43:33 ip-10-1-255-11 sshd[30916]: input_userauth_request: invalid user ubnt [preauth]",
-          "level": 5,
-          "_insert_time": 1500248609195,
-          "timestamp": 1500248620555,
-          "hostname": "ip-10-1-255-11",
-          "pid": 30916,
-          "location": "/var/log/secure",
-          "organization_id": "589cb810a7d05f7f3a438cb2",
-          "agent_id": "58e52b4c4cc77462cf786a9d",
-          "groups": [
-            "invalid_login",
-            "authentication_failed"
-          ],
-          "_id": "9888ce3c-6a80-11e7-9dab-0acd2b127a3c",
-          "_type": "host",
-          "event_type": "host"
-        },
-        {
-          "comment": "Attempt to login using a non-existent user",
-          "sigid": 5710,
-          "group": [
-            "invalid_login",
-            "authentication_failed"
-          ],
-          "log": "Jul 16 23:43:35 ip-10-1-255-11 sshd[30938]: input_userauth_request: invalid user user [preauth]",
-          "level": 5,
-          "_insert_time": 1500248609195,
-          "timestamp": 1500248620555,
-          "hostname": "ip-10-1-255-11",
-          "pid": 30938,
-          "location": "/var/log/secure",
-          "organization_id": "589cb810a7d05f7f3a438cb2",
-          "agent_id": "58e52b4c4cc77462cf786a9d",
-          "groups": [
-            "invalid_login",
-            "authentication_failed"
-          ],
-          "_id": "9888ce3d-6a80-11e7-9dab-0acd2b127a3c",
-          "_type": "host",
-          "event_type": "host"
-        },
-        {
-          "comment": "Attempt to login using a non-existent user",
-          "sigid": 5710,
-          "group": [
-            "invalid_login",
-            "authentication_failed"
-          ],
-          "log": "Jul 16 23:43:23 ip-10-1-255-11 sshd[30891]: input_userauth_request: invalid user telnet [preauth]",
-          "level": 5,
-          "_insert_time": 1500248579195,
-          "timestamp": 1500248608549,
-          "hostname": "ip-10-1-255-11",
-          "pid": 30891,
-          "location": "/var/log/secure",
-          "organization_id": "589cb810a7d05f7f3a438cb2",
-          "agent_id": "58e52b4c4cc77462cf786a9d",
-          "groups": [
-            "invalid_login",
-            "authentication_failed"
-          ],
-          "_id": "9160d616-6a80-11e7-b48f-1296fd8e9d1a",
-          "_type": "host",
-          "event_type": "host"
-        },
-        {
-          "comment": "Attempt to login using a non-existent user",
-          "sigid": 5710,
-          "group": [
-            "invalid_login",
-            "authentication_failed"
-          ],
-          "log": "Jul 16 23:43:24 ip-10-1-255-11 sshd[30911]: input_userauth_request: invalid user test [preauth]",
-          "level": 5,
-          "_insert_time": 1500248579195,
-          "timestamp": 1500248608549,
-          "hostname": "ip-10-1-255-11",
-          "pid": 30911,
-          "location": "/var/log/secure",
-          "organization_id": "589cb810a7d05f7f3a438cb2",
-          "agent_id": "58e52b4c4cc77462cf786a9d",
-          "groups": [
-            "invalid_login",
-            "authentication_failed"
-          ],
-          "_id": "9160d617-6a80-11e7-b48f-1296fd8e9d1a",
-          "_type": "host",
-          "event_type": "host"
-        },
-        {
-          "comment": "Attempt to login using a non-existent user",
-          "sigid": 5710,
-          "group": [
-            "invalid_login",
-            "authentication_failed"
-          ],
-          "log": "Jul 16 23:43:42 ip-10-1-255-11 sshd[30941]: input_userauth_request: invalid user user1 [preauth]",
-          "level": 5,
-          "_insert_time": 1500248609195,
-          "timestamp": 1500248623562,
-          "hostname": "ip-10-1-255-11",
-          "pid": 30941,
-          "location": "/var/log/secure",
-          "organization_id": "589cb810a7d05f7f3a438cb2",
-          "agent_id": "58e52b4c4cc77462cf786a9d",
-          "groups": [
-            "invalid_login",
-            "authentication_failed"
-          ],
-          "_id": "9a53a3b1-6a80-11e7-baf2-0acabd9a2786",
-          "_type": "host",
-          "event_type": "host"
-        }
-      ],
-      "dismissed": false,
-      "key": "7f842c39-eef7-11e6-b0e1-8d4568316479-58e52b4c4cc77462cf786a9d-b27736c8444f963efae2fd1692c771bb",
-      "active": true,
-      "rule_id": "53743bc0beefbeefbeefbeef",
-      "unread": true,
-      "type": "rule",
-      "id": "596bec96f11ead2a97ee0bc0",
-      "alert_policy_id": "53743bc0beefbeefbeefbeef",
-      "agent_id": "58e52b4c4cc77462cf786a9d"
-    },
-    ...
-  ]
 }
 
 ```

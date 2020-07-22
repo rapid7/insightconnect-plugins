@@ -5,9 +5,9 @@ import json
 
 class Input:
     API_KEY = "api_key"
-    API_VERSION = "api_version"
     ORG_ID = "org_id"
     TIMEOUT = "timeout"
+    USER_ID = "user_id"
     
 
 class ConnectionSchema(komand.Input):
@@ -22,19 +22,11 @@ class ConnectionSchema(komand.Input):
       "description": "REST API key",
       "order": 1
     },
-    "api_version": {
-      "type": "integer",
-      "title": "API Version",
-      "description": "API version",
-      "default": 1,
-      "order": 3
-    },
     "org_id": {
       "type": "string",
       "title": "Org ID",
-      "description": "Threat Stack Org ID (For use when multiple orgs)",
-      "default": "",
-      "order": 2
+      "description": "Threat Stack Organization ID",
+      "order": 3
     },
     "timeout": {
       "type": "integer",
@@ -42,10 +34,18 @@ class ConnectionSchema(komand.Input):
       "description": "API timeout",
       "default": 120,
       "order": 4
+    },
+    "user_id": {
+      "type": "string",
+      "title": "User ID",
+      "description": "User ID",
+      "order": 2
     }
   },
   "required": [
-    "api_key"
+    "api_key",
+    "org_id",
+    "user_id"
   ],
   "definitions": {
     "credential_secret_key": {

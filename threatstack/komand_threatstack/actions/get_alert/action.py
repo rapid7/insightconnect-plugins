@@ -1,6 +1,7 @@
 import komand
-from .schema import GetAlertInput, GetAlertOutput
+from .schema import GetAlertInput, GetAlertOutput, Input, Output
 # Custom imports below
+from komand.helper import clean
 
 
 class GetAlert(komand.Action):
@@ -13,5 +14,7 @@ class GetAlert(komand.Action):
                 output=GetAlertOutput())
 
     def run(self, params={}):
-        alert = self.connection.client.alerts.get(params.get('alert_id'))
-        return {'alert': alert}
+        alert_id = params.get(Input.ALERT_ID)
+        alert = clean(self.connection.client.alerts.get(alert_id))
+
+        return {Output.ALERT: alert}
