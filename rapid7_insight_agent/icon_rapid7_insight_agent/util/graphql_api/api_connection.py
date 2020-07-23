@@ -1,5 +1,5 @@
 from icon_rapid7_insight_agent.util.graphql_api.region_map import region_map
-from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
+from icon_rapid7_insight_agent.util.graphql_api.api_exception import APIException
 import icon_rapid7_insight_agent.util.graphql_api.agent_typer as agent_typer
 import requests
 
@@ -99,15 +99,15 @@ class ApiConnection():
         try:
             result.raise_for_status()
         except:
-            raise PluginException(cause="Error connecting to the Insight Agent API.",
-                                  assistance="Please check your Org ID, and API key.\n",
-                                  data=result.text)
+            raise APIException(cause="Error connecting to the Insight Agent API.",
+                               assistance="Please check your Org ID, and API key.\n",
+                               data=result.text)
 
         results_object = result.json()
 
         if results_object.get("errors"):
-            raise PluginException(cause="Insight Agent API returned errors",
-                                  assistance=results_object.get("errors"))
+            raise APIException(cause="Insight Agent API returned errors",
+                               assistance=results_object.get("errors"))
 
         return results_object
 
@@ -118,8 +118,8 @@ class ApiConnection():
             endpoint = f"https://{region_code}.api.insight.rapid7.com/graphql"
         else:
             # It's an enum, hopefully this never happens.
-            raise PluginException(cause="Region not found.",
-                                  assistance="Region code was not found for selected region. Please contact support.")
+            raise APIException(cause="Region not found.",
+                               assistance="Region code was not found for selected region. Please contact support.")
 
         return endpoint
 
@@ -211,11 +211,11 @@ class ApiConnection():
                 if stripped_input_mac == stripped_target_mac:
                     return agent
             else:
-                raise PluginException(cause="Could not determine agent type.",
-                                      assistance=f"Agent {agent_input} was not a Mac, IP, or Hostname.")
+                raise APIException(cause="Could not determine agent type.",
+                                   assistance=f"Agent {agent_input} was not a Mac, IP, or Hostname.")
 
-        raise PluginException(cause=f"Could not find agent matching {agent_input} of type {agent_type}.",
-                              assistance=f"Check the agent input value and try again.")
+        raise APIException(cause=f"Could not find agent matching {agent_input} of type {agent_type}.",
+                           assistance=f"Check the agent input value and try again.")
 
     def _get_agents_from_result_object(self, results_object):
         """

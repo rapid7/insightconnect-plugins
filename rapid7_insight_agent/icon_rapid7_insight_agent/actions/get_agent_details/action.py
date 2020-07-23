@@ -1,7 +1,8 @@
 import insightconnect_plugin_runtime
 from .schema import GetAgentDetailsInput, GetAgentDetailsOutput, Input, Output, Component
 # Custom imports below
-from icon_rapid7_insight_agent.util.graphql_api.api_connection import ApiConnection
+from icon_rapid7_insight_agent.util.graphql_api.api_exception import APIException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 class GetAgentDetails(insightconnect_plugin_runtime.Action):
 
@@ -14,7 +15,13 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         agent_input = params.get(Input.AGENT)
-        agent = self.connection.api.get_agent(agent_input)
+        try:
+            agent = self.connection.api.get_agent(agent_input)
+        except APIException as e:
+            raise PluginException(cause = e.cause,
+                                  assistance = e.assistance,
+                                  data = e.data)
+
         return {Output.AGENT: agent}
 
 

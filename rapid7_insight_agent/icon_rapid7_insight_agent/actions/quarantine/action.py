@@ -1,6 +1,8 @@
 import insightconnect_plugin_runtime
 from .schema import QuarantineInput, QuarantineOutput, Input, Output, Component
 # Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
+from icon_rapid7_insight_agent.util.graphql_api.api_exception import APIException
 
 class Quarantine(insightconnect_plugin_runtime.Action):
 
@@ -16,5 +18,11 @@ class Quarantine(insightconnect_plugin_runtime.Action):
         advertisement_period = params.get(Input.INTERVAL)
         quarantine_state = params.get(Input.QUARANTINE_STATE)
 
-        success = self.connection.api.quarantine(advertisement_period, agent_id, quarantine_state)
+        try:
+            success = self.connection.api.quarantine(advertisement_period, agent_id, quarantine_state)
+        except APIException as e:
+            raise PluginException(cause=e.cause,
+                                  assistance=e.assistance,
+                                  data=e.data)
+
         return {Output.SUCCESS: success}

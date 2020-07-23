@@ -23,7 +23,6 @@ class TestConnection(TestCase):
             with open("../tests/get_agent_details.json") as file:
                 test_json = json.loads(file.read()).get("body")
                 connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
         except Exception as e:
             message = """
             Could not find or read sample tests from /tests directory
@@ -33,6 +32,7 @@ class TestConnection(TestCase):
             """
             self.fail(message)
 
+        connection_params["api_key"] = {"secretKey": None}
         test_conn.connect(connection_params)
 
         try:
