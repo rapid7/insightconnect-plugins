@@ -27,4 +27,5 @@ class Connection(komand.Connection):
                                   timeout=timeout)
 
     def test(self):
+        # TODO: Implement test
         pass

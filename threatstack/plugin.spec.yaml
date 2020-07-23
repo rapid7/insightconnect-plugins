@@ -90,6 +90,146 @@ types:
       required: true
       description: ID of the ruleset that generated the alert
 
+  types:
+    tags:
+      source:
+        title: "Source"
+        type: string
+        description: "Source"
+        required: false
+      value:
+        title: "Value"
+        type: string
+        description: "Value"
+        required: false
+      key:
+        title: "Key"
+        type: string
+        description: "Key"
+        required: false
+    ipAddresses:
+      link_local:
+        title: "Link Local"
+        type: "[]string"
+        description: "Link local"
+        required: false
+      public:
+        title: "Public"
+        type: "[]string"
+        description: "Public"
+        required: false
+      private:
+        title: "Private"
+        type: "[]string"
+        description: "Private"
+        required: false
+
+  ip_address:
+    private:
+      title: "Private"
+      type: string
+      description: "Private IP address used to reach this Agent"
+      required: true
+    link_local:
+      title: "Link Local"
+      type: string
+      description: "Link local IP address used to reach this Agent"
+      required: true
+    public:
+      title: "Private"
+      type: string
+      description: "Public IP address used to reach this Agent"
+      required: true
+
+  tag:
+    key:
+      title: "Key"
+      type: string
+      description: "Key"
+      required: false
+    value:
+      title: "Value"
+      type: string
+      description: "Value"
+      required: false
+    source:
+      title: "Source"
+      type: string
+      description: "Source, e.g. ec2"
+      required: false
+
+  agent:
+    status:
+      title: "Status"
+      type: string
+      description: "The current status of the Agent"
+      required: true
+    kernel:
+      title: "Kernel"
+      type: string
+      description: "The kernel version for the server the Agent is installed on"
+      required: false
+    lastReportedAt:
+      title: "Last Reported At"
+      type: string
+      description: "The date and time Threat Stack last received a message from the Agent"
+      required: true
+    name:
+      title: "Name"
+      type: string
+      description: "The name for the Agent as defined at the time of installation. If a name was not provided during installation, then the Agent inherits the hostname"
+      required: false
+    tags:
+      title: "Tags"
+      type: "[]tag"
+      description: "The Threat Stack tags on the server associated with the Agent. Includes AWS tags if available and applicable"
+      required: false
+    instanceId:
+      title: "Instance ID"
+      type: string
+      description: "Unique ID of the cloud server if available, e.g. i-0fb579452b04eea738"
+      required: false
+    agentType:
+      title: "Agent Type"
+      type: string
+      description: "Either 'monitor' or 'investigate'"
+      required: true
+    hostname:
+      title: "Hostname"
+      type: string
+      description: "The hostname of the server the Agent is installed on"
+      required: true
+    version:
+      title: "Version"
+      type: string
+      description: "The current version of the Agent"
+      required: true
+    ipAddresses:
+      title: "IP Addresses"
+      type: "[]ip_address"
+      description: "IP addresses"
+      required: true
+    osVersion:
+      title: "OS Version"
+      type: string
+      description: "Operating system and its version number"
+      required: true
+    id:
+      title: "ID"
+      type: string
+      description: "Unique ID of the agent"
+      required: true
+    createdAt:
+      title: "Created At"
+      type: string
+      description: "The date and time the Agent activated"
+      required: true
+    description:
+      title: "Description"
+      type: string
+      description: "The description for the Agent"
+      required: true
+
 connection:
   api_key:
     title: API Key
