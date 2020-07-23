@@ -3,6 +3,13 @@ import icon_rapid7_insight_agent.util.agent_typer as agent_typer
 
 
 def get_all_agents(connection, logger):
+    """
+    Gets all available agents from the API
+
+    :param connection: ICON connection object
+    :param logger: Logger object
+    :return: list (agent objects)
+    """
     agents = []
     payload = {
         "query": "query($orgId: String!) {organization(id: $orgId) { assets(first: 10000) { pageInfo { hasNextPage endCursor } edges { node { host { id vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } id agent { id } } } } } } ",
@@ -27,6 +34,16 @@ def get_all_agents(connection, logger):
     return agents
 
 def get_next_page_of_agents(agents, results_object, connection, logger):
+    """
+    In the case of multiple pages of returned agents, this will go through each page and append
+    those agents to the agents list
+
+    :param agents: list (agent objects)
+    :param results_object: dict
+    :param connection: ICON connection
+    :param logger: logger object
+    :return: tuple (boolean, dict (results object))
+    """
     logger.info(f"Getting next page of agents.")
     next_cursor = results_object.get("data").get("organization").get("assets").get("pageInfo").get("endCursor")
     payload = {
@@ -48,6 +65,16 @@ def get_next_page_of_agents(agents, results_object, connection, logger):
     return has_next_page, results_object
 
 def find_agent_in_agents(agents, agent_input, agent_type, logger):
+    """
+    Given a list of agent objects, find the agent that matches our input
+
+    :param agents: list (agents)
+    :param agent_input: String (Input value to look for)
+    :param agent_type: String (What type of input to look for, MAC, IP_ADDRESS, or HOSTNAME)
+    :param logger: logger object
+
+    :return: dict (agent object)
+    """
     logger.info(f"Searching for: {agent_input}")
     logger.info(f"Search type: {agent_type}")
     for agent in agents:
@@ -76,6 +103,12 @@ def find_agent_in_agents(agents, agent_input, agent_type, logger):
 
 
 def get_agents_from_result_object(results_object):
+    """
+    This will extract an agent object from the objec that's returned from the API
+
+    :param results_object: dict (API result payload)
+    :return: dict (agent object)
+    """
     agent_list = []
 
     edges = results_object.get("data").get("organization").get("assets").get("edges")

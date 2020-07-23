@@ -12,6 +12,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
     def connect(self, params):
+        """
+        Entry point for connection to the API
+
+        :param params: dict
+        :return: none
+        """
         self.logger.info("Connect: Connecting...")
 
         # Setup region
@@ -33,6 +39,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Setup complete.")
 
     def get_headers(self):
+        """
+        This build and returns headers for the request session
+
+        :return: dict
+        """
         return {
             "X-Api-key": self.api_key,
             "Accept-Version": "kratos",
@@ -41,6 +52,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
         }
 
     def post_payload(self, payload):
+        """
+        This will post a given payload to the API using the connection session
+
+        :param payload: dict
+        :return: dict
+        """
         result = self.session.post(self.endpoint, json=payload)
 
         try:
@@ -59,6 +76,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return results_object
 
     def test(self):
+        """
+        connection test
+
+        :return: dict
+        """
+
         # Return the first org to verify the connection works
         graph_ql_payload = "{ organizations(first: 1) { edges { node { id } } totalCount } }"
         result = self.session.post(self.endpoint, data=graph_ql_payload)
