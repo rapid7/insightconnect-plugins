@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import TextInput, TextOutput, Input, Output, Component
 # Custom imports below
 from bs4 import BeautifulSoup
 
 
-class Text(komand.Action):
+class Text(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
