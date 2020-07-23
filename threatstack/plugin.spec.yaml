@@ -90,40 +90,6 @@ types:
       required: true
       description: ID of the ruleset that generated the alert
 
-  types:
-    tags:
-      source:
-        title: "Source"
-        type: string
-        description: "Source"
-        required: false
-      value:
-        title: "Value"
-        type: string
-        description: "Value"
-        required: false
-      key:
-        title: "Key"
-        type: string
-        description: "Key"
-        required: false
-    ipAddresses:
-      link_local:
-        title: "Link Local"
-        type: "[]string"
-        description: "Link local"
-        required: false
-      public:
-        title: "Public"
-        type: "[]string"
-        description: "Public"
-        required: false
-      private:
-        title: "Private"
-        type: "[]string"
-        description: "Private"
-        required: false
-
   ip_address:
     private:
       title: "Private"
