@@ -20,7 +20,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|X API Key from the Insight Platform|None|a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99|
+|api_key|credential_secret_key|None|True|User or Organization Key from the Insight Platform|None|a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99|
 |org_id|credential_secret_key|None|True|Organization ID|None|2cg99z6y-795n-7bzf-hj67-12355h554974|
 |region|string|United States|True|Region|['United States', 'Europe', 'Canada', 'Australia', 'Japan']|United States|
 
@@ -48,7 +48,7 @@ This action is used to quarantine or release quarantine on a device.
 |----|----|-------|--------|-----------|----|-------|
 |agent_id|string|None|True|The ID of the agent on the device to quarantine|None|a1cfb273c8e7d46a9e2a0e2dae01a0ce|
 |interval|int|604800|True|Length in time in seconds to try to take action on a device. This is also called Advertisement Period|None|604800|
-|quarantine_state|boolean|True|True|Set to True to quarantine a host, set to false to release quarantine|None|True|
+|quarantine_state|boolean|True|True|Set to true to quarantine a host, set to false to release quarantine|None|True|
 
 Example input:
 

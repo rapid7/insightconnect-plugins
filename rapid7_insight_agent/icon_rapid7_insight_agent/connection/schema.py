@@ -17,8 +17,8 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "properties": {
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
-      "title": "X API Key",
-      "description": "X API Key from the Insight Platform",
+      "title": "API Key",
+      "description": "User or Organization Key from the Insight Platform",
       "order": 1
     },
     "org_id": {

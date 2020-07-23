@@ -39,7 +39,7 @@ class QuarantineInput(insightconnect_plugin_runtime.Input):
     "quarantine_state": {
       "type": "boolean",
       "title": "Quarantine State",
-      "description": "Set to True to quarantine a host, set to false to release quarantine",
+      "description": "Set to true to quarantine a host, set to false to release quarantine",
       "default": true,
       "order": 2
     }
