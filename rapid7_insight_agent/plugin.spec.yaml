@@ -6,7 +6,7 @@ title: Rapid7 Insight Agent
 description: Take actions on an Insight Agent
 version: 1.0.0
 vendor: rapid7
-support: community
+support: rapid7
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_insight_agent
@@ -19,9 +19,11 @@ tags:
 - endpoint
 - detection
 - response
+- idr
+- ivm
 hub_tags:
-  use_cases: [data_utility]
-  keywords: [rapid7, agent, endpoint, response, detection, insight]
+  use_cases: [threat_detection_and_response]
+  keywords: [rapid7, agent, endpoint, response, detection, insight, idr, ivm]
   features: []
 types:
   attributes:
@@ -107,8 +109,8 @@ types:
 
 connection:
   api_key:
-    title: X API Key
-    description: X API Key from the Insight Platform
+    title: API Key
+    description: User or Organization Key from the Insight Platform
     type: credential_secret_key
     example: a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99
     required: true
@@ -161,7 +163,7 @@ actions:
         order: 1
       quarantine_state:
         title: Quarantine State
-        description: Set to True to quarantine a host, set to false to release quarantine
+        description: Set to true to quarantine a host, set to false to release quarantine
         type: boolean
         default: true
         example: true

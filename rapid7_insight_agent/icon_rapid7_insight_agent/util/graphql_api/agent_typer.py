@@ -12,7 +12,7 @@ def get_agent_type(search_string):
     try:
         search_string = ip_address(search_string)
         return IP_ADDRESS
-    except Exception:
+    except ValueError:
         pass # Not an IP
 
     if MAC_REGEX.match(search_string):

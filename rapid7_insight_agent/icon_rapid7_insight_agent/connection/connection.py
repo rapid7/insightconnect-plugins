@@ -37,8 +37,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         :return: dict
         """
         try:
-            success = self.api.run_connection_test()
+            success = self.api.connection_test()
         except Exception as e:
             raise ConnectionTestException(cause="Connection Test Failed.\n",
-                                          assistance="Check that your organization ID and API key are correct.\n") from e
+                                          assistance="Please double-check that your Organization ID and API key are correct.\n") from e
         return {"success": success}

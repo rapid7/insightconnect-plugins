@@ -60,7 +60,7 @@ class ApiConnection():
 
         return (not failed)
 
-    def run_connection_test(self):
+    def connection_test(self):
         # Return the first org to verify the connection works
         graph_ql_payload = {
             "query":"{ organizations(first: 1) { edges { node { id } } totalCount } }"
@@ -100,13 +100,13 @@ class ApiConnection():
             result.raise_for_status()
         except:
             raise APIException(cause="Error connecting to the Insight Agent API.",
-                               assistance="Please check your Org ID, and API key.\n",
+                               assistance="Please check your Org ID and API key.\n",
                                data=result.text)
 
         results_object = result.json()
 
         if results_object.get("errors"):
-            raise APIException(cause="Insight Agent API returned errors",
+            raise APIException(cause="The Insight Agent API returned errors",
                                assistance=results_object.get("errors"))
 
         return results_object

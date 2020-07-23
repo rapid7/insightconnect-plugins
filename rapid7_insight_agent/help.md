@@ -1,17 +1,19 @@
 # Description
 
-Take actions on an Insight Agent
+Using the power of the [Insight Agent](https://docs.rapid7.com/insight-agent/overview/) investigate and mitigate vulnerabilities across your organization. 
 
 # Key Features
 
-Identify key features of plugin.
+* Get details about devices
+* Qurantine and unquarantine devices
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product's user interface
+* Platform API Key: [Mange Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)
+* Organization ID: (See Page 10 of the GraphQL API doc)
 
 # Documentation
+
 ## Setup
 
 The connection configuration accepts the following parameters:
@@ -31,6 +33,7 @@ Example input:
   "region": "United States"
 }
 ```
+
 ## Technical Details
 
 ### Actions
@@ -152,6 +155,7 @@ _This plugin does not contain any triggers._
 ### Custom Output Types
 
 _This plugin does not contain any custom output types._
+
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
@@ -164,4 +168,6 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Rapid7 Insight Agent](LINK TO PRODUCT/VENDOR WEBSITE)
+* [Rapid7 Insight Agent](https://docs.rapid7.com/insight-agent/overview/)
+* [Mange Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)
+*  
