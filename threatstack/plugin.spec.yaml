@@ -196,6 +196,48 @@ types:
       description: "The description for the Agent"
       required: true
 
+  event:
+    event_type:
+      title: "Event Type"
+      type: string
+      description: "Event type, e.g. cloudtrail"
+      required: true
+    eventClass:
+      title: "Event Class"
+      type: string
+      description: "Event class, e.g. CloudtrailEvent"
+      required: true
+    user:
+      title: "User"
+      type: string
+      description: "User"
+      required: true
+    agent_id:
+      title: "Agent ID"
+      type: string
+      description: "Agent ID"
+      required: true
+    _id:
+      title: "Event ID"
+      type: string
+      description: "Event ID"
+      required: true
+    timestamp:
+      title: "Timestamp"
+      type: number
+      description: "Timestamp"
+      required: true
+    organization_id:
+      title: "Timestamp"
+      type: string
+      description: "Organization ID"
+      required: true
+    miscellaneous:
+      title: "Miscellaneous"
+      type: object
+      description: "Miscellaneous event data not found across all event types"
+      required: false
+
 connection:
   api_key:
     title: API Key
@@ -257,6 +299,25 @@ actions:
       count:
         type: integer
         description: Number of alerts
+        required: true
+
+  get_events:
+    title: Get Events
+    description: Get events which contributed to an alert
+    input:
+      alert_id:
+        title: Alert ID
+        type: string
+        description: Alert ID
+        required: true
+    output:
+      alerts:
+        type: '[]event'
+        description: List of events
+        required: true
+      count:
+        type: integer
+        description: Number of events
         required: true
 
   get_agent:

@@ -41,6 +41,33 @@ Example input:
 
 ### Actions
 
+#### Get Events
+
+This action is used to get events which contributed to an alert.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|alert_id|string|None|True|Alert ID|None|None|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|alerts|[]event|True|List of events|
+|count|integer|True|Number of events|
+
+Example output:
+
+```
+```
+
 #### Get Alerts
 
 This action is used to get alerts by filter.
