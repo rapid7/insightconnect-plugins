@@ -28,6 +28,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
                                   assistance="Region code was not found for selected region. Please contact support.")
 
         self.logger.info("Setup Complete")
+        self.session = requests.Session()
+        self.session.headers = self.get_headers()
+        self.logger.info("Setup complete.")
 
     def get_headers(self):
         return {
@@ -37,12 +40,28 @@ class Connection(insightconnect_plugin_runtime.Connection):
             "Accept-Encoding": "gzip, deflate, br"
         }
 
+    def post_payload(self, payload):
+        result = self.session.post(self.endpoint, json=payload)
+
+        try:
+            result.raise_for_status()
+        except:
+            raise PluginException(cause="Error connecting to the Insight Agent API.",
+                                  assistance="Please check your Org ID, and API key.\n",
+                                  data=result.text)
+
+        results_object = result.json()
+
+        if results_object.get("errors"):
+            raise PluginException(cause="Insight Agent API returned errors",
+                                  assistance=results_object.get("errors"))
+
+        return results_object
+
     def test(self):
         # Return the first org to verify the connection works
         graph_ql_payload = "{ organizations(first: 1) { edges { node { id } } totalCount } }"
-
-        headers = self.get_headers()
-        result = requests.post(self.endpoint, headers=headers, data=graph_ql_payload)
+        result = self.session.post(self.endpoint, data=graph_ql_payload)
 
         try:
             result.raise_for_status()
@@ -50,5 +69,4 @@ class Connection(insightconnect_plugin_runtime.Connection):
             raise ConnectionTestException(cause="Connection Test Failed",
                                           assistance="Please check your X API Key and Organization Key",
                                           data=result.text)
-
         return {}

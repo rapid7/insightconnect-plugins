@@ -1,10 +1,9 @@
 from insightconnect_plugin_runtime.exceptions import PluginException
 import icon_rapid7_insight_agent.util.agent_typer as agent_typer
-import requests
+
 
 def get_all_agents(connection, logger):
     agents = []
-    headers = connection.get_headers()
     payload = {
         "query": "query($orgId: String!) {organization(id: $orgId) { assets(first: 10000) { pageInfo { hasNextPage endCursor } edges { node { host { id vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } id agent { id } } } } } } ",
         "variables": {
@@ -13,30 +12,21 @@ def get_all_agents(connection, logger):
     }
 
     logger.info(f"Getting agents from: {connection.endpoint}")
-    result = requests.post(connection.endpoint, headers=headers, json=payload)
-    try:
-        result.raise_for_status()
-    except:
-        raise PluginException(cause="Could not get results from Insight Agent API",
-                              assistance="Please verify your Organization ID and API Key\n",
-                              data=result.text)
-    results_object = result.json()
-    if results_object.get("errors"):
-        raise PluginException(cause="Insight Agent API returned errors",
-                              assistance=results_object.get("errors"))
+    results_object = connection.post_payload(payload)
+
     has_next_page = results_object.get("data").get("organization").get("assets").get("pageInfo").get("hasNextPage")
     agents.extend(get_agents_from_result_object(results_object))
     logger.info(f"Initial agents received.")
 
     # See if we have more pages of data, if so get next page and append until we reach the end
     while has_next_page:
-        has_next_page, results_object = get_next_page_of_agents(agents, headers, results_object, connection, logger)
+        has_next_page, results_object = get_next_page_of_agents(agents, results_object, connection, logger)
 
     logger.info(f"Done getting all agents.")
 
     return agents
 
-def get_next_page_of_agents(agents, headers, results_object, connection, logger):
+def get_next_page_of_agents(agents, results_object, connection, logger):
     logger.info(f"Getting next page of agents.")
     next_cursor = results_object.get("data").get("organization").get("assets").get("pageInfo").get("endCursor")
     payload = {
@@ -46,12 +36,15 @@ def get_next_page_of_agents(agents, headers, results_object, connection, logger)
             "nextCursor": next_cursor
         }
     }
-    result = requests.post(connection.endpoint, headers=headers, json=payload)
-    results_object = result.json()
+    results_object = connection.post_payload(payload)
+
     has_next_page = results_object.get("data").get("organization").get("assets").get("pageInfo").get(
         "hasNextPage")
+
     next_agents = get_agents_from_result_object(results_object)
+
     agents.extend(next_agents)
+
     return has_next_page, results_object
 
 def find_agent_in_agents(agents, agent_input, agent_type, logger):

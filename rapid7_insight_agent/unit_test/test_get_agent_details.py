@@ -11,19 +11,6 @@ import logging
 
 class TestGetAgentDetails(TestCase):
     def test_integration_get_agent_details(self):
-        """
-        TODO: Implement assertions at the end of this test case
-
-        This is an integration test that will connect to the services your plugin uses. It should be used
-        as the basis for tests below that can run independent of a "live" connection.
-
-        This test assumes a normal plugin structure with a /tests directory. In that /tests directory should
-        be json samples that contain all the data needed to run this test. To generate samples run:
-
-        icon-plugin generate samples
-
-        """
-
         log = logging.getLogger("Test")
         test_conn = Connection()
         test_action = GetAgentDetails()
