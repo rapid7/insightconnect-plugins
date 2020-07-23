@@ -4,3 +4,8 @@ class APIException(Exception):
         self.assistance = assistance
         self.data = data
         super().__init__(self.cause)
+
+    def __str__(self):
+        return "An error occurred connecting to Insight Agent!\n\n{cause}\n{assistance}\nResponse was: {data}".format(
+            cause=self.cause, assistance=self.assistance, data=self.data
+        )
