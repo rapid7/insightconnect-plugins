@@ -1,11 +1,13 @@
 # Description
 
-The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/cylance-protect.html) plugin allows you to automate response operations.
+The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/cylance-protect.html) plugin allows you to automate response operations for CylancePROTECT and CylanceOPTICS.
 
 # Key Features
 
 * Get agent details
 * Blacklist a malicious hash
+* Quarantine endpoints
+* Search threats
 
 # Requirements
 
