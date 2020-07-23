@@ -1,7 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import QuarantineInput, QuarantineOutput, Input, Output, Component
 # Custom imports below
-from icon_rapid7_insight_agent.util.quarantine import quarantine
 
 class Quarantine(insightconnect_plugin_runtime.Action):
 
@@ -17,5 +16,5 @@ class Quarantine(insightconnect_plugin_runtime.Action):
         advertisement_period = params.get(Input.INTERVAL)
         quarantine_state = params.get(Input.QUARANTINE_STATE)
 
-        success = quarantine(advertisement_period, agent_id, quarantine_state, self.connection, self.logger)
+        success = self.connection.api.quarantine(advertisement_period, agent_id, quarantine_state)
         return {Output.SUCCESS: success}
