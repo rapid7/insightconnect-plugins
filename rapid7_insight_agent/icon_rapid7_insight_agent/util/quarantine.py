@@ -9,7 +9,7 @@ def quarantine(advertisement_period, agent_id, quarantine_state, connection, log
     :param quarantine_state: boolean (quarantine or unquarantine the agent)
     :param connection: ICON connection object
     :param logger: logger object
-    
+
     :return: boolean
     """
     if quarantine_state:
