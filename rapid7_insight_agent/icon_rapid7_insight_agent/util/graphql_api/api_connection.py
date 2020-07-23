@@ -164,7 +164,7 @@ class ApiConnection():
         self.logger.info(f"Getting next page of agents.")
         next_cursor = results_object.get("data").get("organization").get("assets").get("pageInfo").get("endCursor")
         payload = {
-            "query": "query( $orgId:String! $nextCursor:String! ) { organization(id: $orgId) { assets( first: 1 after: $nextCursor ) { pageInfo { hasNextPage endCursor } edges { node { host { id vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } id agent { id } } } } } }",
+            "query": "query( $orgId:String! $nextCursor:String! ) { organization(id: $orgId) { assets( first: 10000 after: $nextCursor ) { pageInfo { hasNextPage endCursor } edges { node { host { id vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } id agent { id } } } } } }",
             "variables": {
                 "orgId": self.org_key,
                 "nextCursor": next_cursor
