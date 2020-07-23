@@ -46,9 +46,9 @@ Example input:
 
 ### Actions
 
-#### Get Devices Affected by Threat
+#### Search Threats
 
-This action is used to retrieve a list of devices affected by a threat.
+This action finds and displays detailed information about one or more threats.
 
 ##### Input
 
@@ -98,9 +98,9 @@ Example output:
 }
 ```
 
-#### Search Threat Agents
+#### Get Devices Affected by Threat
 
-This action finds and displays detailed information about threat and device details for a threat.
+This action is used to retrieve a list of devices affected by a threat.
 
 ##### Input
 
@@ -181,17 +181,17 @@ Example output:
 
 ```
 {
-    "status": "COMPLETE",
-    "data": {
-        "id": "1ABC234D5EFA6789BCDE0F1ABCDE23F5",
-        "hostname": "Example-Hostname",
-        "tenant_id": "1abc234d5efa6789bcde0f1abcde23f5",
-        "connection_status": "locked",
-        "optics_device_version": "2.4.2100.1015",
-        "password": "unlock-pa22-w0rd",
-        "lockdown_expiration": "2020-07-11T21:15:29Z",
-        "lockdown_initiated": "2020-07-08T21:15:29Z"
-    }
+  "status": "COMPLETE",
+  "data": {
+      "id": "1ABC234D5EFA6789BCDE0F1ABCDE23F5",
+      "hostname": "Example-Hostname",
+      "tenant_id": "1abc234d5efa6789bcde0f1abcde23f5",
+      "connection_status": "locked",
+      "optics_device_version": "2.4.2100.1015",
+      "password": "unlock-pa22-w0rd",
+      "lockdown_expiration": "2020-07-11T21:15:29Z",
+      "lockdown_initiated": "2020-07-08T21:15:29Z"
+  }
 }
 ```
 
@@ -259,29 +259,29 @@ Example output:
 
 ```
 {
-      "agent": {
-        "id": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
-        "name": "NA-TESTX-NAM11",
-        "host_name": "na-testx-nam11",
-        "os_version": "Microsoft Windows Server 2012 Standard",
-        "state": "Online",
-        "agent_version": "2.0.1540",
-        "policy": {
-          "id": "00000000-0000-0000-0000-000000000000",
-          "name": "Default"
-        },
-        "last_logged_in_user": "NA-TESTX-NAM11\\Administrator",
-        "update_available": false,
-        "background_detection": false,
-        "is_safe": false,
-        "date_first_registered": "2020-05-28T14:00:50",
-        "ip_addresses": [
-          "198.51.100.100"
-        ],
-        "mac_addresses": [
-          "00-60-26-26-D5-19"
-        ]
-      }
+  "agent": {
+    "id": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
+    "name": "NA-TESTX-NAM11",
+    "host_name": "na-testx-nam11",
+    "os_version": "Microsoft Windows Server 2012 Standard",
+    "state": "Online",
+    "agent_version": "2.0.1540",
+    "policy": {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "name": "Default"
+    },
+    "last_logged_in_user": "NA-TESTX-NAM11\\Administrator",
+    "update_available": false,
+    "background_detection": false,
+    "is_safe": false,
+    "date_first_registered": "2020-05-28T14:00:50",
+    "ip_addresses": [
+      "198.51.100.100"
+    ],
+    "mac_addresses": [
+      "00-60-26-26-D5-19"
+    ]
+  }
 }
 ```
 
@@ -299,7 +299,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.2.0 - New actions Search Threats, Search Threat Agents
+* 1.2.0 - New actions Search Threats, Get Devices Affected by Threat
 * 1.1.0 - New action Quarantine
 * 1.0.3 - Match official branding in plugin title
 * 1.0.2 - Update to fix connection test
