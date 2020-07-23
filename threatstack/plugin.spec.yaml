@@ -303,43 +303,6 @@ actions:
         description: Number of agents
         required: true
 
-  get_organization:
-    title: Get Organization
-    description: Get organization
-    input:
-      organization_id:
-        type: string
-        title: Organization ID
-        description: Threat Stack organization ID e.g. 583cb310a3d05a733a4383ap
-        required: true
-      fields:
-        type: '[]string'
-        description: Fields to return
-        required: false
-    output:
-      organization:
-        type: '[]object'
-        description: Organization data
-        required: true
-
-  get_organizations:
-    title: Get Organizations
-    description: Get organizations
-    input:
-      fields:
-        type: '[]string'
-        description: Fields to return
-        required: false
-    output:
-      organizations:
-        type: '[]object'
-        description: Array of organizations
-        required: true
-      count:
-        type: integer
-        description: Number of organizations
-        required: true
-
   get_policy:
     title: Get Policy
     description: Get policy

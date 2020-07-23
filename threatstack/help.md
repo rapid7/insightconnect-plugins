@@ -383,42 +383,6 @@ Example output:
 
 ```
 
-#### Get Organization
-
-This action is used to get an organization.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|fields|[]string|None|False|Fields to return|None|None|
-|organization_id|string|None|True|Threat Stack organization ID e.g. 583cb310a3d05a733a4383ap|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|organization|[]object|True|Organization data|
-
-Example output:
-
-```
-
-{
-  "organization": {
-    "role": "owner",
-    "id": "deadbeefdeadbeefdeadbeef",
-    "name": "Example Account"
-  }
-}
-
-```
-
 #### Get Agents
 
 This action is used to get agent data.
@@ -468,45 +432,6 @@ Example output:
       "description": ""
     },
     ...
-  ]
-}
-
-```
-
-#### Get Organizations
-
-This action is used to get organizations.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|fields|[]string|None|False|Fields to return|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|count|integer|True|Number of organizations|
-|organizations|[]object|True|Array of organizations|
-
-Example output:
-
-```
-
-{
-  "count": 1,
-  "organizations": [
-    {
-      "role": "owner",
-      "id": "deadbeefdeadbeefdeadbeef",
-      "name": "Example Account"
-    }
   ]
 }
 

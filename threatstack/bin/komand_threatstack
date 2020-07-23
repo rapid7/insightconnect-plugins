@@ -27,10 +27,6 @@ class ICONThreatstack(komand.Plugin):
 
         self.add_action(actions.GetAlerts())
 
-        self.add_action(actions.GetOrganization())
-
-        self.add_action(actions.GetOrganizations())
-
         self.add_action(actions.GetPolicies())
 
         self.add_action(actions.GetPolicy())
