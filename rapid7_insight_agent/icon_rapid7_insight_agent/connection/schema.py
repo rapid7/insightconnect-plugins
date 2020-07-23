@@ -42,6 +42,11 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "order": 3
     }
   },
+  "required": [
+    "api_key",
+    "org_id",
+    "region"
+  ],
   "definitions": {
     "credential_secret_key": {
       "id": "credential_secret_key",

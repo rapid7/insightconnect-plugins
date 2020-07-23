@@ -43,20 +43,20 @@ types:
       required: false
   primaryAddress:
     ip:
-      title: "Ip"
+      title: "IP"
       type: string
-      description: "Ip"
+      description: "IP"
       required: false
     mac:
-      title: "Mac"
+      title: "MAC"
       type: string
-      description: "Mac"
+      description: "MAC address"
       required: false
   uniqueIdentity:
     id:
-      title: "Id"
+      title: "ID"
       type: string
-      description: "Id"
+      description: "ID"
       required: false
     source:
       title: "Source"
@@ -75,9 +75,9 @@ types:
       description: "Description"
       required: false
     hostNames:
-      title: "Hostnames"
+      title: "Host Names"
       type: "[]hostNames"
-      description: "Hostnames"
+      description: "Host names"
       required: false
     id:
       title: "Id"
@@ -85,14 +85,14 @@ types:
       description: "Id"
       required: false
     primaryAddress:
-      title: "Primaryaddress"
+      title: "Primary Address"
       type: primaryAddress
-      description: "Primaryaddress"
+      description: "Primary address"
       required: false
     uniqueIdentity:
-      title: "Uniqueidentity"
+      title: "Unique Identity"
       type: "[]uniqueIdentity"
-      description: "Uniqueidentity"
+      description: "Unique identity"
       required: false
     vendor:
       title: "Vendor"
@@ -111,17 +111,20 @@ connection:
     description: X API Key from the Insight Platform
     type: credential_secret_key
     example: a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99
+    required: true
   org_id:
     title: Organization ID
     description: Organization ID
     type: credential_secret_key
     example: 2cg99z6y-795n-7bzf-hj67-12355h554974
+    required: true
   region:
     title: Region
     description: Region
     type: string
     default: United States
     example: United States
+    required: true
     enum:
       - United States
       - Europe
@@ -162,14 +165,15 @@ actions:
         type: boolean
         default: true
         example: true
-        requred: true
+        required: true
         order: 2
       interval:
         title: Interval
-        descritpion: Length in time in seconds to try to take action on a device. This is also called Advertisement Period
+        description: Length in time in seconds to try to take action on a device. This is also called Advertisement Period
         type: int
         default: 604800
         example: 604800
+        required: true
     output:
       success:
         title: Success

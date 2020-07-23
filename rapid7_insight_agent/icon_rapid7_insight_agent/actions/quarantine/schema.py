@@ -32,6 +32,7 @@ class QuarantineInput(insightconnect_plugin_runtime.Input):
     "interval": {
       "type": "integer",
       "title": "Interval",
+      "description": "Length in time in seconds to try to take action on a device. This is also called Advertisement Period",
       "default": 604800,
       "order": 3
     },
@@ -44,7 +45,9 @@ class QuarantineInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "agent_id"
+    "agent_id",
+    "interval",
+    "quarantine_state"
   ]
 }
     """)

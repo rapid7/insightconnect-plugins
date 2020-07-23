@@ -76,8 +76,8 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
         },
         "hostNames": {
           "type": "array",
-          "title": "Hostnames",
-          "description": "Hostnames",
+          "title": "Host Names",
+          "description": "Host names",
           "items": {
             "$ref": "#/definitions/hostNames"
           },
@@ -91,14 +91,14 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
         },
         "primaryAddress": {
           "$ref": "#/definitions/primaryAddress",
-          "title": "Primaryaddress",
-          "description": "Primaryaddress",
+          "title": "Primary Address",
+          "description": "Primary address",
           "order": 5
         },
         "uniqueIdentity": {
           "type": "array",
-          "title": "Uniqueidentity",
-          "description": "Uniqueidentity",
+          "title": "Unique Identity",
+          "description": "Unique identity",
           "items": {
             "$ref": "#/definitions/uniqueIdentity"
           },
@@ -154,14 +154,14 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "ip": {
               "type": "string",
-              "title": "Ip",
-              "description": "Ip",
+              "title": "IP",
+              "description": "IP",
               "order": 1
             },
             "mac": {
               "type": "string",
-              "title": "Mac",
-              "description": "Mac",
+              "title": "MAC",
+              "description": "MAC address",
               "order": 2
             }
           }
@@ -172,8 +172,8 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "id": {
               "type": "string",
-              "title": "Id",
-              "description": "Id",
+              "title": "ID",
+              "description": "ID",
               "order": 1
             },
             "source": {
@@ -222,14 +222,14 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "ip": {
           "type": "string",
-          "title": "Ip",
-          "description": "Ip",
+          "title": "IP",
+          "description": "IP",
           "order": 1
         },
         "mac": {
           "type": "string",
-          "title": "Mac",
-          "description": "Mac",
+          "title": "MAC",
+          "description": "MAC address",
           "order": 2
         }
       }
@@ -240,8 +240,8 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "id": {
           "type": "string",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 1
         },
         "source": {
