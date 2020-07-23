@@ -424,8 +424,8 @@ actions:
         type: "[]threat"
         required: true
   search_threat_agents:
-    title: Search Threat Agents
-    description: Finds and displays detailed information about threat and device details for a threat
+    title: Get Devices Affected by Threat
+    description: Retrieve a list of devices affected by a threat
     input:
       threat_identifier:
         title: Threat Identifier

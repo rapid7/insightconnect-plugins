@@ -46,9 +46,9 @@ Example input:
 
 ### Actions
 
-#### Search Threats
+#### Get Devices Affected by Threat
 
-This action finds and displays detailed information about one or more threats.
+This action is used to retrieve a list of devices affected by a threat.
 
 ##### Input
 

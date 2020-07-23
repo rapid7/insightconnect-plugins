@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Finds and displays detailed information about threat and device details for a threat"
+    DESCRIPTION = "Retrieve a list of devices affected by a threat"
 
 
 class Input:
