@@ -229,7 +229,10 @@ class ApiConnection():
         """
         agent_list = []
 
-        edges = results_object.get("data").get("organization").get("assets").get("edges")
+        try:
+            edges = results_object.get("data").get("organization").get("assets").get("edges")
+        except KeyError:
+            raise APIException(cause="Insight Agent API returned data in an unexpected format.")
         for edge in edges:
             agent = edge.get("node").get("host")
             agent_list.append(agent)
