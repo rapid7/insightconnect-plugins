@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import JsonToCsvInput, JsonToCsvOutput, Input, Output, Component
 # Custom imports below
 import csv
@@ -6,7 +6,7 @@ import base64
 from io import StringIO
 
 
-class JsonToCsv(komand.Action):
+class JsonToCsv(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

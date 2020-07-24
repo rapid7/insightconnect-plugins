@@ -28,10 +28,19 @@ This action is used to get the current Datetime in a specified format.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|format_string|string|%d %b %Y %H:%M:%S|True|Format string for the output. Example: %H:%M:%S or %d/%m/%Y|None|
-|use_rfc3339_format|boolean|None|True|Use RFC3339 format (eg. 2017-10-24T18:27:36.23Z). This is the most compatible date format for timestamp manipulation. Enabling this will override the format string input|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|format_string|string|%d %b %Y %H:%M:%S|True|Format string for the output|None|%d %b %Y %H:%M:%S|
+|use_rfc3339_format|boolean|None|True|Use RFC3339 format (eg. 2017-10-24T18:27:36.23Z). This is the most compatible date format for timestamp manipulation. Enabling this will override the format string input|None|True|
+
+Example input:
+
+```
+{
+  "format_string": "%d %b %Y %H:%M:%S",
+  "use_rfc3339_format": true
+}
+```
 
 ##### Output
 
@@ -57,15 +66,29 @@ This action is used to subtract Datetime units from a Datetime.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|base_time|date|None|True|Datetime from which to subtract from|None|
-|days|integer|0|True|How many days to subtract from the specified Datetime|None|
-|hours|integer|0|True|How many hours to subtract from the specified Datetime|None|
-|minutes|integer|0|True|How many minutes to subtract from the specified Datetime|None|
-|months|integer|0|True|How many months to subtract from the specified Datetime|None|
-|seconds|integer|0|True|How many seconds to subtract from the specified Datetime|None|
-|years|integer|0|True|How many years to subtract from the specified Datetime|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|base_time|date|None|True|Datetime from which to subtract from|None|22 Jul 2020 21:20:33|
+|days|integer|0|True|How many days to subtract from the specified Datetime|None|0|
+|hours|integer|0|True|How many hours to subtract from the specified Datetime|None|0|
+|minutes|integer|0|True|How many minutes to subtract from the specified Datetime|None|0|
+|months|integer|0|True|How many months to subtract from the specified Datetime|None|0|
+|seconds|integer|0|True|How many seconds to subtract from the specified Datetime|None|0|
+|years|integer|0|True|How many years to subtract from the specified Datetime|None|0|
+
+Example input:
+
+```
+{
+  "base_time": "22 Jul 2020 21:20:33",
+  "days": 0,
+  "hours": 0,
+  "minutes": 0,
+  "months": 0,
+  "seconds": 0,
+  "years": 0
+}
+```
 
 ##### Output
 
@@ -89,15 +112,29 @@ This action is used to add Datetime units to a Datetime.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|base_time|date|None|True|Datetime with which to add to|None|
-|days|integer|0|True|How many days to add to the specified Datetime|None|
-|hours|integer|0|True|How many hours to add to the specified Datetime|None|
-|minutes|integer|0|True|How many minutes to add to the specified Datetime|None|
-|months|integer|0|True|How many months to add to the specified Datetime|None|
-|seconds|integer|0|True|How many seconds to add to the specified Datetime|None|
-|years|integer|0|True|How many years to add to the specified Datetime|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|base_time|date|None|True|Datetime with which to add to|None|22 Jul 2020 21:20:33|
+|days|integer|0|True|How many days to add to the specified Datetime|None|0|
+|hours|integer|0|True|How many hours to add to the specified Datetime|None|0|
+|minutes|integer|0|True|How many minutes to add to the specified Datetime|None|0|
+|months|integer|0|True|How many months to add to the specified Datetime|None|0|
+|seconds|integer|0|True|How many seconds to add to the specified Datetime|None|0|
+|years|integer|0|True|How many years to add to the specified Datetime|None|0|
+
+Example input:
+
+```
+{
+  "base_time": "22 Jul 2020 21:20:33",
+  "days": 0,
+  "hours": 0,
+  "minutes": 0,
+  "months": 0,
+  "seconds": 0,
+  "years": 0
+}
+```
 
 ##### Output
 
@@ -121,9 +158,17 @@ This action is used to convert an epoch as an integer to a Datetime.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|epoch|number|None|True|Epoch as integer or float|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|epoch|number|None|True|Epoch as integer or float|None|1595452833|
+
+Example input:
+
+```
+{
+  "epoch": 1595452833
+}
+```
 
 ##### Output
 
@@ -147,9 +192,17 @@ This action is used to convert a Datetime to an epoch.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|datetime|date|None|True|Date in RFC3339 format|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|datetime|date|None|True|Date in RFC3339 format|None|22 Jul 2020 21:09:09|
+
+Example input:
+
+```
+{
+  "datetime": "22 Jul 2020 21:09:09"
+}
+```
 
 ##### Output
 
@@ -173,11 +226,21 @@ This action is used to find the difference between two Datetime inputs.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|first_time|date|None|True|First date|None|
-|result_unit|string|None|True|Time unit of measurement for result|['Years', 'Months', 'Days', 'Hours', 'Minutes', 'Seconds']|
-|second_time|date|None|True|Second date|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|first_time|date|None|True|First date|None|2020-07-22T21:20:33.0Z|
+|result_unit|string|None|True|Time unit of measurement for result|['Years', 'Months', 'Days', 'Hours', 'Minutes', 'Seconds']|Years|
+|second_time|date|None|True|Second date|None|2022-07-22T21:20:33.0Z|
+
+Example input:
+
+```
+{
+  "first_time": "2020-07-22T21:20:33.0Z",
+  "result_unit": "Years",
+  "second_time": "2022-07-22T21:20:33.0Z"
+}
+```
 
 ##### Output
 
@@ -211,6 +274,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.6 - Update to v4 Python plugin runtime 
 * 2.0.5 - New spec and help.md format for the Extension Library | Changed const string in params.get to Input constants | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
 * 2.0.4 - Update plugin tag from `utility` to `utilities` for Marketplace searchability
 * 2.0.3 - Fixed issue where connection test failed

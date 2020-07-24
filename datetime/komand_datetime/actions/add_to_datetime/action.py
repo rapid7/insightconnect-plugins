@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AddToDatetimeInput, AddToDatetimeOutput, Input, Output
 import maya
 
 
-class AddToDatetime(komand.Action):
+class AddToDatetime(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
