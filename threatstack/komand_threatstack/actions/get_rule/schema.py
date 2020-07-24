@@ -53,7 +53,7 @@ class GetRuleOutput(komand.Output):
   "title": "Variables",
   "properties": {
     "rule": {
-      "type": "object",
+      "$ref": "#/definitions/rule",
       "title": "Rule",
       "description": "Rule",
       "order": 1
@@ -61,7 +61,102 @@ class GetRuleOutput(komand.Output):
   },
   "required": [
     "rule"
-  ]
+  ],
+  "definitions": {
+    "rule": {
+      "type": "object",
+      "title": "rule",
+      "properties": {
+        "alertDescription": {
+          "type": "string",
+          "title": "Alert Description",
+          "description": "Alert description",
+          "order": 9
+        },
+        "createdAt": {
+          "type": "string",
+          "title": "Created At",
+          "description": "Created at",
+          "order": 5
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "Enabled",
+          "description": "Enabled",
+          "order": 14
+        },
+        "filter": {
+          "type": "string",
+          "title": "Filter",
+          "description": "Filter",
+          "order": 10
+        },
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "Event ID",
+          "order": 1
+        },
+        "name": {
+          "type": "string",
+          "title": "Rule Name",
+          "description": "Rule name",
+          "order": 3
+        },
+        "rulesetId": {
+          "type": "string",
+          "title": "Ruleset ID",
+          "description": "Ruleset ID",
+          "order": 2
+        },
+        "severityOfAlerts": {
+          "type": "number",
+          "title": "Severity of Alerts",
+          "description": "Severity of alerts, between 1 and 3",
+          "order": 8
+        },
+        "suppressions": {
+          "type": "array",
+          "title": "Suppressions",
+          "description": "Suppressions",
+          "items": {
+            "type": "string"
+          },
+          "order": 13
+        },
+        "threshold": {
+          "type": "number",
+          "title": "Threshold",
+          "description": "Threshold",
+          "order": 12
+        },
+        "title": {
+          "type": "string",
+          "title": "Title",
+          "description": "Rule title",
+          "order": 7
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type",
+          "order": 4
+        },
+        "updatedAt": {
+          "type": "string",
+          "title": "Updated At",
+          "description": "Updated at",
+          "order": 6
+        },
+        "window": {
+          "type": "number",
+          "title": "Window",
+          "description": "Window",
+          "order": 11
+        }
+      }
+    }
+  }
 }
     """)
 

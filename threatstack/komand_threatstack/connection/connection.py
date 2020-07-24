@@ -12,9 +12,6 @@ class Connection(komand.Connection):
         self.client = None
 
     def connect(self, params):
-        mohawk_logger = logging.getLogger("mohawk.base")
-        mohawk_logger.setLevel(logging.CRITICAL)
-
         api_key = params.get(Input.API_KEY)["secretKey"]
         user_id = params.get(Input.USER_ID)
         org_id = params.get(Input.ORG_ID)

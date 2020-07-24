@@ -196,6 +196,78 @@ types:
       description: "The description for the Agent"
       required: false
 
+  rule:
+    id:
+      title: "ID"
+      type: string
+      description: "Event ID"
+      required: false
+    rulesetId:
+      title: "Ruleset ID"
+      type: string
+      description: "Ruleset ID"
+      required: false
+    name:
+      title: "Rule Name"
+      type: string
+      description: "Rule name"
+      required: false
+    type:
+      title: "Type"
+      type: string
+      description: "Type"
+      required: false
+    createdAt:
+      title: "Created At"
+      type: string
+      description: "Created at"
+      required: false
+    updatedAt:
+      title: "Updated At"
+      type: string
+      description: "Updated at"
+      required: false
+    title:
+      title: "Title"
+      type: string
+      description: "Rule title"
+      required: false
+    severityOfAlerts:
+      title: "Severity of Alerts"
+      type: number
+      description: "Severity of alerts, between 1 and 3"
+      required: false
+    alertDescription:
+      title: "Alert Description"
+      type: string
+      description: "Alert description"
+      required: false
+    filter:
+      title: "Filter"
+      type: string
+      description: "Filter"
+      required: false
+    window:
+      title: "Window"
+      type: number
+      description: "Window"
+      required: false
+    threshold:
+      title: "Threshold"
+      type: number
+      description: "Threshold"
+      required: false
+    suppressions:
+      title: "Suppressions"
+      type: "[]string]"
+      description: "Suppressions"
+      required: false
+    enabled:
+      title: "Enabled"
+      type: boolean
+      description: "Enabled"
+      required: false
+
   event:
     event_type:
       title: "Event Type"
@@ -370,7 +442,7 @@ actions:
         required: true
     output:
       rule:
-        type: object
+        type: rule
         description: Rule
         required: true
 

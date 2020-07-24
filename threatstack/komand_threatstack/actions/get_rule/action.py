@@ -1,6 +1,7 @@
 import komand
 from .schema import GetRuleInput, GetRuleOutput, Input, Output, Component
 # Custom imports below
+from komand.helper import clean
 
 
 class GetRule(komand.Action):
@@ -13,5 +14,7 @@ class GetRule(komand.Action):
                 output=GetRuleOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        rule_id, ruleset_id = params.get(Input.RULE_ID), params.get(Input.RULESET_ID)
+        rule = self.connection.client.rulesets.rules(ruleset_id=ruleset_id, rule_id=rule_id)
+
+        return {Output.RULE: rule}

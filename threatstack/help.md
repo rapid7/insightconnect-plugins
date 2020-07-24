@@ -61,11 +61,14 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|rule|object|True|Rule|
+|rule|rule|True|Rule|
 
 Example output:
 
 ```
+{
+  "rule": {}
+}
 ```
 
 #### Get Agents
