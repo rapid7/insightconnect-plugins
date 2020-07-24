@@ -47,7 +47,7 @@ This action is used to quarantine or release quarantine on a device.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |agent_id|string|None|True|The ID of the agent on the device to quarantine|None|a1cfb273c8e7d46a9e2a0e2dae01a0ce|
-|interval|int|604800|True|Length in time in seconds to try to take action on a device. This is also called Advertisement Period|None|604800|
+|interval|int|604800|True|Length of time in seconds to try to take action on a device. This is also called Advertisement Period|None|604800|
 |quarantine_state|boolean|True|True|Set to true to quarantine a host, set to false to unquarantine|None|True|
 
 Example input:

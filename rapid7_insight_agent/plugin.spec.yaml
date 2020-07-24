@@ -26,7 +26,7 @@ hub_tags:
   keywords: [rapid7, agent, endpoint, response, detection, insight, idr, ivm]
   features: []
 types:
-  attributes:
+  attribute:
     key:
       title: "Key"
       type: string
@@ -37,7 +37,7 @@ types:
       type: string
       description: "Value"
       required: false
-  hostNames:
+  hostName:
     name:
       title: "Name"
       type: string
@@ -45,12 +45,12 @@ types:
       required: false
   primaryAddress:
     ip:
-      title: "IP"
+      title: "IP Address"
       type: string
-      description: "IP"
+      description: "IP address"
       required: false
     mac:
-      title: "MAC"
+      title: "MAC Address"
       type: string
       description: "MAC address"
       required: false
@@ -68,7 +68,7 @@ types:
   agent:
     attributes:
       title: "Attributes"
-      type: "[]attributes"
+      type: "[]attribute"
       description: "Attributes"
       required: false
     description:
@@ -78,13 +78,13 @@ types:
       required: false
     hostNames:
       title: "Host Names"
-      type: "[]hostNames"
+      type: "[]hostName"
       description: "Host names"
       required: false
     id:
-      title: "Id"
+      title: "ID"
       type: string
-      description: "Id"
+      description: "ID"
       required: false
     primaryAddress:
       title: "Primary Address"

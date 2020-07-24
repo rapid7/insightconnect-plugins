@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="rapid7_insight_agent-rapid7-plugin",
       version="1.0.0",
-      description="Take actions on an Insight Agent",
+      description="Investigate and mitigate vulnerabilities across your organization using the power of the Insight Agent",
       author="rapid7",
       author_email="",
       url="",
