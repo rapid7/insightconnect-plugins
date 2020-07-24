@@ -3,6 +3,7 @@ from icon_rapid7_insight_agent.util.graphql_api.api_exception import APIExceptio
 import icon_rapid7_insight_agent.util.graphql_api.agent_typer as agent_typer
 import requests
 
+
 class ApiConnection():
     def __init__(self, api_key, org_key, region_string, logger):
         self.api_key = api_key
@@ -22,7 +23,7 @@ class ApiConnection():
 
     def quarantine(self, advertisement_period, agent_id, quarantine_state):
         """
-        Take a quarantine action on a given agent id
+        Take a quarantine action on a given agent ID
 
         :param advertisement_period: int (Amount of time in seconds to try to take the quarantine action)
         :param agent_id: string

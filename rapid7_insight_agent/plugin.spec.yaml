@@ -171,7 +171,7 @@ actions:
         order: 2
       interval:
         title: Interval
-        description: Length in time in seconds to try to take action on a device. This is also called Advertisement Period
+        description: Length of time in seconds to try to take action on a device. This is also called Advertisement Period
         type: int
         default: 604800
         example: 604800
@@ -182,7 +182,6 @@ actions:
         description: Was operation successful
         type: boolean
         required: true
-
 
 
 
