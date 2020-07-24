@@ -12,8 +12,8 @@ class Input:
     
 
 class Output:
-    ALERTS = "alerts"
     COUNT = "count"
+    EVENTS = "events"
     
 
 class GetEventsInput(komand.Input):
@@ -45,25 +45,25 @@ class GetEventsOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "alerts": {
-      "type": "array",
-      "title": "Alerts",
-      "description": "List of events",
-      "items": {
-        "$ref": "#/definitions/event"
-      },
-      "order": 1
-    },
     "count": {
       "type": "integer",
       "title": "Count",
       "description": "Number of events",
       "order": 2
+    },
+    "events": {
+      "type": "array",
+      "title": "Events",
+      "description": "List of events",
+      "items": {
+        "$ref": "#/definitions/event"
+      },
+      "order": 1
     }
   },
   "required": [
-    "alerts",
-    "count"
+    "count",
+    "events"
   ],
   "definitions": {
     "event": {

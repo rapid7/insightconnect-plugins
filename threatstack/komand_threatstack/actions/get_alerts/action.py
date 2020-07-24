@@ -17,6 +17,7 @@ class GetAlerts(komand.Action):
         start = params.get(Input.START)
         end = params.get(Input.END)
 
+        # TODO: Look into async, very slow for 5k results
         alerts = clean([alert for alert in self.connection.client.alerts.list(start=start, end=end)])
 
         return {Output.ALERTS: alerts, Output.COUNT: len(alerts)}

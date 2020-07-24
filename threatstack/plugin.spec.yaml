@@ -262,7 +262,6 @@ connection:
     default: 120
 
 actions:
-
   get_agent:
     title: Get Agent
     description: Get agent data
@@ -276,7 +275,6 @@ actions:
         type: agent
         description: Detailed agent data
         required: true
-
   get_agents:
     title: Get Agents
     description: Get agent data
@@ -347,8 +345,8 @@ actions:
         description: Alert ID
         required: true
     output:
-      alerts:
-        type: '[]event'
+      events:
+        type: "[]event"
         description: List of events
         required: true
       count:

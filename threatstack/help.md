@@ -89,8 +89,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|alerts|[]event|True|List of events|
 |count|integer|True|Number of events|
+|events|[]event|True|List of events|
 
 Example output:
 
