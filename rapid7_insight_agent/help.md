@@ -1,6 +1,6 @@
 # Description
 
-Using the power of the [Insight Agent](https://docs.rapid7.com/insight-agent/overview/) investigate and mitigate vulnerabilities across your organization. 
+Investigate and mitigate vulnerabilities across your organization using the power of the [Insight Agent](https://docs.rapid7.com/insight-agent/overview/). 
 
 # Key Features
 
