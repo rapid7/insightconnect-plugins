@@ -23,7 +23,7 @@ class ApiConnection():
 
     def quarantine(self, advertisement_period, agent_id, quarantine_state):
         """
-        Take a quarantine action on a given agent id
+        Take a quarantine action on a given agent ID
 
         :param advertisement_period: int (Amount of time in seconds to try to take the quarantine action)
         :param agent_id: string
