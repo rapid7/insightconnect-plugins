@@ -4,8 +4,6 @@ from .schema import ConnectionSchema, Input
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 from icon_rapid7_insight_agent.util.graphql_api.api_connection import ApiConnection
 
-import requests
-
 
 class Connection(insightconnect_plugin_runtime.Connection):
 

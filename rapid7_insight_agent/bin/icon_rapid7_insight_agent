@@ -19,6 +19,8 @@ class ICONRapid7InsightAgent(insightconnect_plugin_runtime.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_action(actions.CheckAgentStatus())
+
         self.add_action(actions.GetAgentDetails())
 
         self.add_action(actions.Quarantine())
