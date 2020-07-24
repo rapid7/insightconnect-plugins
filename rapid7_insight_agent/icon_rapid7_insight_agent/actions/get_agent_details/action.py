@@ -4,6 +4,7 @@ from .schema import GetAgentDetailsInput, GetAgentDetailsOutput, Input, Output, 
 from icon_rapid7_insight_agent.util.graphql_api.api_exception import APIException
 from insightconnect_plugin_runtime.exceptions import PluginException
 
+
 class GetAgentDetails(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
@@ -23,5 +24,4 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
                                   data = e.data)
 
         return {Output.AGENT: agent}
-
 
