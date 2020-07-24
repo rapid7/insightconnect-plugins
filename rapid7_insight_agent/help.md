@@ -5,7 +5,7 @@ Investigate and mitigate vulnerabilities across your organization using the powe
 # Key Features
 
 * Get details about devices
-* Qurantine and unquarantine devices
+* Quarantine and unquarantine devices
 
 # Requirements
 
