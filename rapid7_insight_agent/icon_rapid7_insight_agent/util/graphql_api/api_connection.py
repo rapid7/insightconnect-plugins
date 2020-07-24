@@ -121,7 +121,8 @@ class ApiConnection():
         else:
             # It's an enum, hopefully this never happens.
             raise APIException(cause="Region not found.",
-                               assistance="Region code was not found for selected region. Please contact support.")
+                               assistance="Region code was not found for selected region. Available reagions are: United States, "
+                                          "Europe, Canada, Australia, Japan")
 
         return endpoint
 

@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: rapid7_insight_agent
 title: Rapid7 Insight Agent
-description: Take actions on an Insight Agent
+description: Investigate and mitigate vulnerabilities across your organization using the power of the Insight Agent
 version: 1.0.0
 vendor: rapid7
 support: rapid7
