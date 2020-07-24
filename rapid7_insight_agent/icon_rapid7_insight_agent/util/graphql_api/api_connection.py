@@ -26,7 +26,7 @@ class ApiConnection():
 
         :param advertisement_period: int (Amount of time in seconds to try to take the quarantine action)
         :param agent_id: string
-        :param quarantine_state: boolean (quarantine or unquarantine the agent)
+        :param quarantine_state: boolean (true = quarantine, false = unquarantine)
 
         :return: boolean
         """
