@@ -215,7 +215,7 @@ class ApiConnection():
                     return agent
             else:
                 raise APIException(cause="Could not determine agent type.",
-                                   assistance=f"Agent {agent_input} was not a Mac, IP, or Hostname.")
+                                   assistance=f"Agent {agent_input} was not a MAC address, IP address, or hostname.")
 
         raise APIException(cause=f"Could not find agent matching {agent_input} of type {agent_type}.",
                            assistance=f"Check the agent input value and try again.")
