@@ -38,6 +38,44 @@ Example input:
 
 ### Actions
 
+#### Check Agent Status
+
+This action is used to get the online status and quarantine state of an agent.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent_id|string|None|True|The ID of the agent on the device to get the status from|None|a1cfb273c8e7d46a9e2a0e2dae01a0ce|
+
+Example input:
+
+```
+{
+  "agent_id": "a1cfb273c8e7d46a9e2a0e2dae01a0ce"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|is_asset_online|boolean|True|Is this asset online|
+|is_currently_quarantined|boolean|True|Is the device currently quarantined|
+|is_quarantine_requested|boolean|True|Is a quarantine action pending on this device|
+|is_unquarantine_requested|boolean|True|Is there a pending request to release quarantine on this device|
+
+Example output:
+
+```
+{
+  "is_currently_quarantined": true,
+  "is_asset_online": true,
+  "is_quarantine_requested": false,
+  "is_unquarantine_requested": false
+}
+```
+
 #### Quarantine
 
 This action is used to quarantine or release quarantine on a device.

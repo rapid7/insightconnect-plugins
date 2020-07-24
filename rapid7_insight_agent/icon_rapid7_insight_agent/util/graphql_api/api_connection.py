@@ -60,6 +60,33 @@ class ApiConnection():
 
         return (not failed)
 
+    def get_agent_status(self, agent_id):
+        payload = {
+            "query": "query( $orgID: String! $agentID: String! ) { assets( orgId: $orgID ids: [$agentID] ){ agent { id quarantineState{ currentState } agentStatus } } }",
+            "variables": {
+              "orgID": self.org_key,
+              "agentID": agent_id
+            }
+        }
+
+        results_object = self._post_payload(payload)
+
+        agent = results_object.get("data").get("assets")[0].get("agent")
+        quarantine_state = agent.get("quarantineState").get("currentState")
+        agent_status = agent.get("agentStatus")
+
+        is_online = True if agent_status == "ONLINE" else False
+        is_quarantine_requested = True if quarantine_state == "QUARANTINE_IN_PROGRESS" else False
+        is_unquarantine_requested = True if quarantine_state == "UNQUARANTINE_IN_PROGRESS" else False
+        is_is_quarantined = True if (quarantine_state == "QUARANTINED" or quarantine_state == "UNQUARANTINE_IN_PROGRESS") else False
+
+        return {
+            "is_currently_quarantined": is_is_quarantined,
+            "is_asset_online": is_online,
+            "is_quarantine_requested": is_quarantine_requested,
+            "is_unquarantine_requested": is_unquarantine_requested
+        }
+
     def connection_test(self):
         # Return the first org to verify the connection works
         graph_ql_payload = {
