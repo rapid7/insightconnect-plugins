@@ -27,12 +27,12 @@ types:
     id:
       type: string
       title: ID
-      required: true
+      required: false
       description: ID of the alert
     title:
       type: string
       title: Title
-      required: true
+      required: false
       description: Title of the alert
     datasource:
       type: string
@@ -42,12 +42,12 @@ types:
     createdAt:
       type: string
       title: Created At
-      required: true
+      required: false
       description: Date and time the alert was fired
     isDismissed:
       type: boolean
       title: Is Dismissed
-      required: true
+      required: false
       description: Flag that shows if the alert was dismissed
     dismissedAt:
       type: string
@@ -82,30 +82,30 @@ types:
     ruleId:
       type: string
       title: Rule ID
-      required: true
+      required: false
       description: ID of the rule that generated the alert
     rulesetId:
       type: string
       title: Ruleset ID
-      required: true
+      required: false
       description: ID of the ruleset that generated the alert
 
   ip_address:
     private:
       title: "Private"
-      type: string
+      type: "[]string"
       description: "Private IP address used to reach this Agent"
-      required: true
+      required: false
     link_local:
       title: "Link Local"
-      type: string
+      type: "[]string"
       description: "Link local IP address used to reach this Agent"
-      required: true
+      required: false
     public:
       title: "Private"
-      type: string
+      type: "[]string"
       description: "Public IP address used to reach this Agent"
-      required: true
+      required: false
 
   tag:
     key:
@@ -129,7 +129,7 @@ types:
       title: "Status"
       type: string
       description: "The current status of the Agent"
-      required: true
+      required: false
     kernel:
       title: "Kernel"
       type: string
@@ -139,7 +139,7 @@ types:
       title: "Last Reported At"
       type: string
       description: "The date and time Threat Stack last received a message from the Agent"
-      required: true
+      required: false
     name:
       title: "Name"
       type: string
@@ -159,27 +159,27 @@ types:
       title: "Agent Type"
       type: string
       description: "Either 'monitor' or 'investigate'"
-      required: true
+      required: false
     hostname:
       title: "Hostname"
       type: string
       description: "The hostname of the server the Agent is installed on"
-      required: true
+      required: false
     version:
       title: "Version"
       type: string
       description: "The current version of the Agent"
-      required: true
+      required: false
     ipAddresses:
       title: "IP Addresses"
-      type: "[]ip_address"
+      type: ip_address
       description: "IP addresses"
-      required: true
+      required: false
     osVersion:
       title: "OS Version"
       type: string
       description: "Operating system and its version number"
-      required: true
+      required: false
     id:
       title: "ID"
       type: string
@@ -194,29 +194,29 @@ types:
       title: "Description"
       type: string
       description: "The description for the Agent"
-      required: true
+      required: false
 
   event:
     event_type:
       title: "Event Type"
       type: string
       description: "Event type, e.g. cloudtrail"
-      required: true
+      required: false
     eventClass:
       title: "Event Class"
       type: string
       description: "Event class, e.g. CloudtrailEvent"
-      required: true
+      required: false
     user:
       title: "User"
       type: string
       description: "User"
-      required: true
+      required: false
     agent_id:
       title: "Agent ID"
       type: string
       description: "Agent ID"
-      required: true
+      required: false
     _id:
       title: "Event ID"
       type: string
@@ -226,12 +226,12 @@ types:
       title: "Timestamp"
       type: number
       description: "Timestamp"
-      required: true
+      required: false
     organization_id:
       title: "Timestamp"
       type: string
       description: "Organization ID"
-      required: true
+      required: false
     miscellaneous:
       title: "Miscellaneous"
       type: object

@@ -111,12 +111,9 @@ class GetAgentsOutput(komand.Output):
           "order": 6
         },
         "ipAddresses": {
-          "type": "array",
+          "$ref": "#/definitions/ip_address",
           "title": "IP Addresses",
           "description": "IP addresses",
-          "items": {
-            "$ref": "#/definitions/ip_address"
-          },
           "order": 10
         },
         "kernel": {
@@ -166,16 +163,8 @@ class GetAgentsOutput(komand.Output):
         }
       },
       "required": [
-        "agentType",
         "createdAt",
-        "description",
-        "hostname",
-        "id",
-        "ipAddresses",
-        "lastReportedAt",
-        "osVersion",
-        "status",
-        "version"
+        "id"
       ],
       "definitions": {
         "ip_address": {
@@ -183,29 +172,33 @@ class GetAgentsOutput(komand.Output):
           "title": "ip_address",
           "properties": {
             "link_local": {
-              "type": "string",
+              "type": "array",
               "title": "Link Local",
               "description": "Link local IP address used to reach this Agent",
+              "items": {
+                "type": "string"
+              },
               "order": 2
             },
             "private": {
-              "type": "string",
+              "type": "array",
               "title": "Private",
               "description": "Private IP address used to reach this Agent",
+              "items": {
+                "type": "string"
+              },
               "order": 1
             },
             "public": {
-              "type": "string",
+              "type": "array",
               "title": "Private",
               "description": "Public IP address used to reach this Agent",
+              "items": {
+                "type": "string"
+              },
               "order": 3
             }
-          },
-          "required": [
-            "link_local",
-            "private",
-            "public"
-          ]
+          }
         },
         "tag": {
           "type": "object",
@@ -238,29 +231,33 @@ class GetAgentsOutput(komand.Output):
       "title": "ip_address",
       "properties": {
         "link_local": {
-          "type": "string",
+          "type": "array",
           "title": "Link Local",
           "description": "Link local IP address used to reach this Agent",
+          "items": {
+            "type": "string"
+          },
           "order": 2
         },
         "private": {
-          "type": "string",
+          "type": "array",
           "title": "Private",
           "description": "Private IP address used to reach this Agent",
+          "items": {
+            "type": "string"
+          },
           "order": 1
         },
         "public": {
-          "type": "string",
+          "type": "array",
           "title": "Private",
           "description": "Public IP address used to reach this Agent",
+          "items": {
+            "type": "string"
+          },
           "order": 3
         }
-      },
-      "required": [
-        "link_local",
-        "private",
-        "public"
-      ]
+      }
     },
     "tag": {
       "type": "object",

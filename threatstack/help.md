@@ -67,6 +67,7 @@ Example input:
 Example output:
 
 ```
+
 ```
 
 #### Get Events

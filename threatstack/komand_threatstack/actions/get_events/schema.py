@@ -120,13 +120,7 @@ class GetEventsOutput(komand.Output):
         }
       },
       "required": [
-        "_id",
-        "agent_id",
-        "eventClass",
-        "event_type",
-        "organization_id",
-        "timestamp",
-        "user"
+        "_id"
       ]
     }
   }

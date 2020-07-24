@@ -154,13 +154,7 @@ class GetAlertsOutput(komand.Output):
         }
       },
       "required": [
-        "createdAt",
-        "id",
-        "isDismissed",
-        "ruleId",
-        "rulesetId",
-        "severity",
-        "title"
+        "severity"
       ]
     }
   }

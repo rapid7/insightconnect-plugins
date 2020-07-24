@@ -1,6 +1,7 @@
 import komand
 from .schema import GetAgentsInput, GetAgentsOutput, Input, Output
 # Custom imports below
+from komand.helper import clean
 
 
 class GetAgents(komand.Action):
@@ -18,6 +19,6 @@ class GetAgents(komand.Action):
                                                     end=end)
 
         # Consume the generator
-        agents = [agent for agent in agents]
+        agents = [clean(agent) for agent in agents]
 
         return {Output.AGENTS: agents, Output.COUNT: len(agents)}
