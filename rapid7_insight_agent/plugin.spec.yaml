@@ -152,7 +152,7 @@ actions:
         required: true
   quarantine:
     title: Quarantine
-    description: Quarantine or release quarantine on a device
+    description: Quarantine or unquarantine on a device
     input:
       agent_id:
         title: Agent ID
@@ -182,7 +182,6 @@ actions:
         description: Was operation successful
         type: boolean
         required: true
-
 
 
 
