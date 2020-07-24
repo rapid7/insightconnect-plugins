@@ -19,9 +19,8 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
         try:
             agent = self.connection.api.get_agent(agent_input)
         except APIException as e:
-            raise PluginException(cause = e.cause,
-                                  assistance = e.assistance,
-                                  data = e.data)
+            raise PluginException(cause=e.cause,
+                                  assistance=e.assistance,
+                                  data=e.data)
 
         return {Output.AGENT: agent}
-
