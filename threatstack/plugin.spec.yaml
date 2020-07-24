@@ -346,7 +346,7 @@ actions:
         required: true
     output:
       events:
-        type: "[]event"
+        type: '[]event'
         description: List of events
         required: true
       count:

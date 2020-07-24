@@ -95,6 +95,143 @@ Example input:
 Example output:
 
 ```
+{
+  "count": 11,
+  "events": [
+    {
+      "eventSource": "ecr.amazonaws.com",
+      "eventType": "AwsApiCall",
+      "created_at": 1595559480000,
+      "errorCode": "AccessDenied",
+      "mfaUsed": false,
+      "profile_id": "5d52ac59c08db5d269aa3108",
+      "userType": "AssumedRole",
+      "agent_id": "5d52ac59c08db5d269aa3108",
+      "_id": "0e36a925-a612-4b4a-9714-35eaaf9b9964",
+      "errorMessage": "User: arn:aws:sts::113901497002:assumed-role/terra...",
+      "eventClass": "CloudtrailEvent",
+      "eventID": "0e36a925-a612-4b4a-9714-35eaaf9b9964",
+      "MFAUsed": "false",
+      "eventName": "BatchGetImage",
+      "feed": "cloudtrail",
+      "ip": "AWS Internal",
+      "recipientAccountId": "113901497002",
+      "eventId": "0e36a925-a612-4b4a-9714-35eaaf9b9964",
+      "error": "AccessDenied",
+      "recipientAccountID": "113901497002",
+      "requestID": "832d1700-3e62-4021-83f0-ca1fc05d663a",
+      "tsEventType": "cloudtrail",
+      "accountId": "113901497002",
+      "eventVersion": "1.05",
+      "organizationId": "5babc3a62d1d16f529050c86",
+      "userIdentity": {
+        "principalId": "AROAIRC6TNAC6P32APTLG:i-053374f60a4d79830",
+        "sessionContext": {
+          "attributes": {
+            "creationDate": "2020-07-24T00:16:39Z",
+            "mfaAuthenticated": "false"
+          },
+          "ec2RoleDelivery": "1.0",
+          "sessionIssuer": {
+            "type": "Role",
+            "userName": "terraform-eks-k8s-node",
+            "accountId": "113901497002",
+            "arn": "arn:aws:iam::113901497002:role/terraform-eks-k8s-n...",
+            "principalId": "AROAIRC6TNAC6P32APTLG"
+          },
+          "webIdFederationData": {}
+        },
+        "type": "AssumedRole",
+        "accessKeyId": "ASIAJJRY65OGGO2NCTEQ",
+        "accountId": "113901497002",
+        "arn": "arn:aws:sts::113901497002:assumed-role/terraform-e...",
+        "invokedBy": "AWS Internal"
+      },
+      "eventSourceType": "AwsApiCall",
+      "eventTime": 1595559480000,
+      "profileId": "5d52ac59c08db5d269aa3108",
+      "timestamp": 1595559480000,
+      "user": "i-053374f60a4d79830",
+      "arnRole": "assumed-role/terraform-eks-k8s-node/i-053374f60a4d...",
+      "agentId": "5d52ac59c08db5d269aa3108",
+      "awsRegion": "us-east-1",
+      "event_type": "cloudtrail",
+      "ingestTime": 1595560287588,
+      "organization_id": "5babc3a62d1d16f529050c86",
+      "region": "us-east-1",
+      "requestId": "832d1700-3e62-4021-83f0-ca1fc05d663a",
+      "accessKey": "ASIAJJRY65OGGO2NCTEQ",
+      "userAgent": "AWS Internal",
+      "sourceIPAddress": "AWS Internal"
+    },
+    {
+      "requestID": "a4f7c208-541e-4206-beb8-34b02cedb663",
+      "created_at": 1595559174000,
+      "errorCode": "AccessDenied",
+      "eventType": "AwsApiCall",
+      "eventVersion": "1.05",
+      "event_type": "cloudtrail",
+      "ingestTime": 1595559811447,
+      "mfaUsed": false,
+      "accountId": "113901497002",
+      "eventID": "2f121599-941b-433e-a0c9-a3179ecca3be",
+      "eventSourceType": "AwsApiCall",
+      "ip": "AWS Internal",
+      "organizationId": "5babc3a62d1d16f529050c86",
+      "recipientAccountId": "113901497002",
+      "region": "us-east-1",
+      "userAgent": "AWS Internal",
+      "errorMessage": "User: arn:aws:sts::113901497002:assumed-role/terra...",
+      "accessKey": "ASIAJJRY65OGGO2NCTEQ",
+      "recipientAccountID": "113901497002",
+      "userType": "AssumedRole",
+      "MFAUsed": "false",
+      "eventSource": "ecr.amazonaws.com",
+      "organization_id": "5babc3a62d1d16f529050c86",
+      "timestamp": 1595559174000,
+      "arnRole": "assumed-role/terraform-eks-k8s-node/i-053374f60a4d...",
+      "error": "AccessDenied",
+      "eventId": "2f121599-941b-433e-a0c9-a3179ecca3be",
+      "eventName": "BatchGetImage",
+      "profileId": "5d52ac59c08db5d269aa3108",
+      "sourceIPAddress": "AWS Internal",
+      "user": "i-053374f60a4d79830",
+      "agent_id": "5d52ac59c08db5d269aa3108",
+      "profile_id": "5d52ac59c08db5d269aa3108",
+      "userIdentity": {
+        "arn": "arn:aws:sts::113901497002:assumed-role/terraform-e...",
+        "invokedBy": "AWS Internal",
+        "principalId": "AROAIRC6TNAC6P32APTLG:i-053374f60a4d79830",
+        "sessionContext": {
+          "attributes": {
+            "creationDate": "2020-07-24T00:16:39Z",
+            "mfaAuthenticated": "false"
+          },
+          "ec2RoleDelivery": "1.0",
+          "sessionIssuer": {
+            "type": "Role",
+            "userName": "terraform-eks-k8s-node",
+            "accountId": "113901497002",
+            "arn": "arn:aws:iam::113901497002:role/terraform-eks-k8s-n...",
+            "principalId": "AROAIRC6TNAC6P32APTLG"
+          },
+          "webIdFederationData": {}
+        },
+        "type": "AssumedRole",
+        "accessKeyId": "ASIAJJRY65OGGO2NCTEQ",
+        "accountId": "113901497002"
+      },
+      "eventTime": 1595559174000,
+      "agentId": "5d52ac59c08db5d269aa3108",
+      "awsRegion": "us-east-1",
+      "eventClass": "CloudtrailEvent",
+      "feed": "cloudtrail",
+      "requestId": "a4f7c208-541e-4206-beb8-34b02cedb663",
+      "tsEventType": "cloudtrail",
+      "_id": "2f121599-941b-433e-a0c9-a3179ecca3be"
+    }
+  ]
+}
 ```
 
 #### Get Alerts
