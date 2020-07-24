@@ -1,5 +1,5 @@
 import komand
-from .schema import GetAgentsInput, GetAgentsOutput
+from .schema import GetAgentsInput, GetAgentsOutput, Input, Output
 # Custom imports below
 
 
@@ -13,21 +13,11 @@ class GetAgents(komand.Action):
                 output=GetAgentsOutput())
 
     def run(self, params={}):
-        agents = self.connection.client.agents.list(**params)
-        agent_list = []
+        start, end = params.get(Input.START), params.get(Input.END)
+        agents = self.connection.client.agents.list(start=start,
+                                                    end=end)
 
-        # NOTE: The Threat Stack module is inconsistent as a result of the web
-        # API being inconsistent.  We check if the generator is not iteratable
-        # and then check again if the list is empty.
-        while True:
-            try:
-                agent = next(agents)
-                agent_list.append(agent)
-            except TypeError:
-                # Nothing found.
-                # Not necessarily an error; could be failed search.
-                break
-            except StopIteration:
-                break
+        # Consume the generator
+        agents = [agent for agent in agents]
 
-        return {'agents': agent_list, 'count': len(agent_list)}
+        return {Output.AGENTS: agents, Output.COUNT: len(agents)}

@@ -13,7 +13,7 @@ class Input:
     
 
 class Output:
-    ALERTS = "alerts"
+    AGENTS = "agents"
     COUNT = "count"
     
 
@@ -49,9 +49,9 @@ class GetAgentsOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "alerts": {
+    "agents": {
       "type": "array",
-      "title": "Alerts",
+      "title": "Agents",
       "description": "List of agents",
       "items": {
         "$ref": "#/definitions/agent"
@@ -66,7 +66,7 @@ class GetAgentsOutput(komand.Output):
     }
   },
   "required": [
-    "alerts",
+    "agents",
     "count"
   ],
   "definitions": {

@@ -61,7 +61,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|alerts|[]agent|True|List of agents|
+|agents|[]agent|True|List of agents|
 |count|integer|True|Number of agents|
 
 Example output:

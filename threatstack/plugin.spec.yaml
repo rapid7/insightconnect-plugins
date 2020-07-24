@@ -290,7 +290,7 @@ actions:
         description: End date e.g. 2018-01-01
         required: false
     output:
-      alerts:
+      agents:
         type: '[]agent'
         description: List of agents
         required: true
