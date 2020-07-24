@@ -21,45 +21,46 @@ class ApiConnection():
         agent = self._find_agent_in_agents(agents, agent_input, agent_type)
         return agent
 
-    def quarantine(self, advertisement_period, agent_id, quarantine_state):
+    def quarantine(self, advertisement_period, agent_id):
         """
-        Take a quarantine action on a given agent ID
+        quarantine action on a given agent ID
 
         :param advertisement_period: int (Amount of time in seconds to try to take the quarantine action)
         :param agent_id: string
-        :param quarantine_state: boolean (true = quarantine, false = unquarantine)
 
         :return: boolean
         """
-        if quarantine_state:
-            quarantine_payload = {
-                "query": "mutation( $orgID:String! $agentID:String! $advPeriod:Long! ) { quarantineAssets( orgId:$orgID assetIds: [$agentID] input: {advertisementPeriod: $advPeriod} ) { results { assetId failed } } }",
-                "variables": {
-                    "orgID": self.org_key,
-                    "agentID": agent_id,
-                    "advPeriod": advertisement_period
-                }
+        quarantine_payload = {
+            "query": "mutation( $orgID:String! $agentID:String! $advPeriod:Long! ) { quarantineAssets( orgId:$orgID assetIds: [$agentID] input: {advertisementPeriod: $advPeriod} ) { results { assetId failed } } }",
+            "variables": {
+                "orgID": self.org_key,
+                "agentID": agent_id,
+                "advPeriod": advertisement_period
             }
-        else:
-            quarantine_payload = {
-                "query": "mutation( $orgID:String! $agentID:String!) { unquarantineAssets( orgId:$orgID assetIds: [$agentID] ) { results { assetId failed } } }",
-                "variables": {
-                    "orgID": self.org_key,
-                    "agentID": agent_id
-                }
-            }
-
-        action_verb = "quarantine" if quarantine_state else "unquarantine"
-        self.logger.info(f"Attempting to {action_verb} asset {agent_id} at {self.endpoint}")
+        }
 
         results_object = self._post_payload(quarantine_payload)
-
-        if quarantine_state:
-            failed = results_object.get("data").get("quarantineAssets").get("results")[0].get("failed")
-        else:
-            failed = results_object.get("data").get("unquarantineAssets").get("results")[0].get("failed")
-
+        failed = results_object.get("data").get("quarantineAssets").get("results")[0].get("failed")
         return (not failed)
+
+    def unquarantine(self, agent_id):
+        """
+        unquarantine action on a given agent ID
+        :param agent_id: string
+
+        :return: boolean
+        """
+        unquarantine_payload = {
+            "query": "mutation( $orgID:String! $agentID:String!) { unquarantineAssets( orgId:$orgID assetIds: [$agentID] ) { results { assetId failed } } }",
+            "variables": {
+                "orgID": self.org_key,
+                "agentID": agent_id
+            }
+        }
+
+        results_object = self._post_payload(unquarantine_payload)
+        failed = results_object.get("data").get("unquarantineAssets").get("results")[0].get("failed")
+        return not failed
 
     def connection_test(self):
         # Return the first org to verify the connection works
