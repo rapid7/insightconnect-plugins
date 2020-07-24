@@ -1,13 +1,13 @@
-import komand
+import insightconnect_plugin_runtime
 import base64
 
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import pypandoc
 import re
 from .schema import EpubInput, EpubOutput
 
 
-class Epub(komand.Action):
+class Epub(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name='epub',

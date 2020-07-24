@@ -9,11 +9,11 @@
 		},
 		{
 			"identifier": "get_agent_details/schema.py",
-			"hash": "c9634302807c00326882b9144992adf7"
+			"hash": "d7bff6592448d2b2205296ad9dc8a749"
 		},
 		{
 			"identifier": "quarantine/schema.py",
-			"hash": "fb217d7eaf5ce07b6287bf63ac6e8f1b"
+			"hash": "a57f4441d42702fc37e0d1d794cf502b"
 		},
 		{
 			"identifier": "connection/schema.py",

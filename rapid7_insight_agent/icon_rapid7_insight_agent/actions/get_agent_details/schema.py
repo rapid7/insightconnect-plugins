@@ -24,7 +24,7 @@ class GetAgentDetailsInput(insightconnect_plugin_runtime.Input):
     "agent": {
       "type": "string",
       "title": "Agent",
-      "description": "IP address, MAC address, or host name of the device to get information from",
+      "description": "IP address, MAC address, or hostname of the device to get information from",
       "order": 1
     }
   },
@@ -64,7 +64,7 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
           "title": "Attributes",
           "description": "Attributes",
           "items": {
-            "$ref": "#/definitions/attributes"
+            "$ref": "#/definitions/attribute"
           },
           "order": 1
         },
@@ -79,14 +79,14 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
           "title": "Host Names",
           "description": "Host names",
           "items": {
-            "$ref": "#/definitions/hostNames"
+            "$ref": "#/definitions/hostName"
           },
           "order": 3
         },
         "id": {
           "type": "string",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 4
         },
         "primaryAddress": {
@@ -118,9 +118,9 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "definitions": {
-        "attributes": {
+        "attribute": {
           "type": "object",
-          "title": "attributes",
+          "title": "attribute",
           "properties": {
             "key": {
               "type": "string",
@@ -136,9 +136,9 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "hostNames": {
+        "hostName": {
           "type": "object",
-          "title": "hostNames",
+          "title": "hostName",
           "properties": {
             "name": {
               "type": "string",
@@ -154,13 +154,13 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "ip": {
               "type": "string",
-              "title": "IP",
-              "description": "IP",
+              "title": "IP Address",
+              "description": "IP address",
               "order": 1
             },
             "mac": {
               "type": "string",
-              "title": "MAC",
+              "title": "MAC Address",
               "description": "MAC address",
               "order": 2
             }
@@ -186,9 +186,9 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "attributes": {
+    "attribute": {
       "type": "object",
-      "title": "attributes",
+      "title": "attribute",
       "properties": {
         "key": {
           "type": "string",
@@ -204,9 +204,9 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "hostNames": {
+    "hostName": {
       "type": "object",
-      "title": "hostNames",
+      "title": "hostName",
       "properties": {
         "name": {
           "type": "string",
@@ -222,13 +222,13 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "ip": {
           "type": "string",
-          "title": "IP",
-          "description": "IP",
+          "title": "IP Address",
+          "description": "IP address",
           "order": 1
         },
         "mac": {
           "type": "string",
-          "title": "MAC",
+          "title": "MAC Address",
           "description": "MAC address",
           "order": 2
         }

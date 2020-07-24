@@ -9,6 +9,12 @@ REGEX_STRING = "^(?:[0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-
 MAC_REGEX = re.compile(REGEX_STRING)
 
 def get_agent_type(search_string):
+    """
+    Get the type of agent from the agent string
+
+    :param search_string: string
+    :return: string
+    """
     try:
         search_string = ip_address(search_string)
         return IP_ADDRESS

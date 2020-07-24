@@ -91,6 +91,17 @@ class SonicWallAPI:
         finally:
             self.logout()
 
+    def invoke_cli_command(self, payload):
+        self.login()
+        try:
+            response = self._call_api("POST", f"direct/cli", data=payload, content_type='text/plain')
+        except PluginException as e:
+            raise PluginException(cause=e.cause, assistance=e.assistance, data=e.data)
+        finally:
+            self.logout()
+
+        return response
+        
     def _make_request(self, method, path, json_data=None):
         self.login()
         try:
@@ -103,17 +114,18 @@ class SonicWallAPI:
 
         return response
 
-    def _call_api(self, method, path, json_data=None, auth=None):
+    def _call_api(self, method, path, json_data=None, auth=None, content_type='application/json', data=None):
         response = {"text": ""}
         headers = OrderedDict([
             ('Accept', 'application/json'),
-            ('Content-Type', 'application/json'),
+            ('Content-Type', content_type),
             ('Accept-Encoding', 'application/json'),
             ('charset', 'UTF-8')
         ])
         try:
             response = requests.request(method, self.url + path,
                                         json=json_data,
+                                        data=data,
                                         auth=auth,
                                         headers=headers,
                                         verify=self.verify_ssl)

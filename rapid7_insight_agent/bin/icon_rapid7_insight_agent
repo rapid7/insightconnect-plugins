@@ -7,7 +7,7 @@ from icon_rapid7_insight_agent import connection, actions, triggers
 Name = "Rapid7 Insight Agent"
 Vendor = "rapid7"
 Version = "1.0.0"
-Description = "Take actions on an Insight Agent"
+Description = "Investigate and mitigate vulnerabilities across your organization using the power of the Insight Agent"
 
 
 class ICONRapid7InsightAgent(insightconnect_plugin_runtime.Plugin):

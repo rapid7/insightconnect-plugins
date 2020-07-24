@@ -1,15 +1,15 @@
 # Description
 
-Using the power of the [Insight Agent](https://docs.rapid7.com/insight-agent/overview/) investigate and mitigate vulnerabilities across your organization. 
+Investigate and mitigate vulnerabilities across your organization using the power of the [Insight Agent](https://docs.rapid7.com/insight-agent/overview/). 
 
 # Key Features
 
 * Get details about devices
-* Qurantine and unquarantine devices
+* Quarantine and unquarantine devices
 
 # Requirements
 
-* Platform API Key: [Mange Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)
+* [Platform API Key](https://docs.rapid7.com/insight/managing-platform-api-keys/)
 * Organization ID: (See Page 10 of the GraphQL API doc)
 
 # Documentation
@@ -85,8 +85,8 @@ This action is used to quarantine or release quarantine on a device.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |agent_id|string|None|True|The ID of the agent on the device to quarantine|None|a1cfb273c8e7d46a9e2a0e2dae01a0ce|
-|interval|int|604800|True|Length in time in seconds to try to take action on a device. This is also called Advertisement Period|None|604800|
-|quarantine_state|boolean|True|True|Set to true to quarantine a host, set to false to release quarantine|None|True|
+|interval|int|604800|True|Length of time in seconds to try to take action on a device. This is also called Advertisement Period|None|604800|
+|quarantine_state|boolean|True|True|Set to true to quarantine a host, set to false to unquarantine|None|True|
 
 Example input:
 
@@ -120,7 +120,7 @@ This action this action is used to find and display detailed information about a
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent|string|None|True|IP address, MAC address, or host name of the device to get information from|None|MaliciousHost|
+|agent|string|None|True|IP address, MAC address, or hostname of the device to get information from|None|MaliciousHost|
 
 Example input:
 
@@ -207,5 +207,5 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [Rapid7 Insight Agent](https://docs.rapid7.com/insight-agent/overview/)
-* [Mange Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)
+* [Manage Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)
 *  

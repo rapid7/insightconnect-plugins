@@ -3,6 +3,7 @@ from icon_rapid7_insight_agent.util.graphql_api.api_exception import APIExceptio
 import icon_rapid7_insight_agent.util.graphql_api.agent_typer as agent_typer
 import requests
 
+
 class ApiConnection():
     def __init__(self, api_key, org_key, region_string, logger):
         self.api_key = api_key
@@ -20,45 +21,46 @@ class ApiConnection():
         agent = self._find_agent_in_agents(agents, agent_input, agent_type)
         return agent
 
-    def quarantine(self, advertisement_period, agent_id, quarantine_state):
+    def quarantine(self, advertisement_period, agent_id):
         """
-        Take a quarantine action on a given agent id
+        quarantine action on a given agent ID
 
         :param advertisement_period: int (Amount of time in seconds to try to take the quarantine action)
         :param agent_id: string
-        :param quarantine_state: boolean (quarantine or unquarantine the agent)
 
         :return: boolean
         """
-        if quarantine_state:
-            quarantine_payload = {
-                "query": "mutation( $orgID:String! $agentID:String! $advPeriod:Long! ) { quarantineAssets( orgId:$orgID assetIds: [$agentID] input: {advertisementPeriod: $advPeriod} ) { results { assetId failed } } }",
-                "variables": {
-                    "orgID": self.org_key,
-                    "agentID": agent_id,
-                    "advPeriod": advertisement_period
-                }
+        quarantine_payload = {
+            "query": "mutation( $orgID:String! $agentID:String! $advPeriod:Long! ) { quarantineAssets( orgId:$orgID assetIds: [$agentID] input: {advertisementPeriod: $advPeriod} ) { results { assetId failed } } }",
+            "variables": {
+                "orgID": self.org_key,
+                "agentID": agent_id,
+                "advPeriod": advertisement_period
             }
-        else:
-            quarantine_payload = {
-                "query": "mutation( $orgID:String! $agentID:String!) { unquarantineAssets( orgId:$orgID assetIds: [$agentID] ) { results { assetId failed } } }",
-                "variables": {
-                    "orgID": self.org_key,
-                    "agentID": agent_id
-                }
-            }
-
-        action_verb = "quarantine" if quarantine_state else "unquarantine"
-        self.logger.info(f"Attempting to {action_verb} asset {agent_id} at {self.endpoint}")
+        }
 
         results_object = self._post_payload(quarantine_payload)
-
-        if quarantine_state:
-            failed = results_object.get("data").get("quarantineAssets").get("results")[0].get("failed")
-        else:
-            failed = results_object.get("data").get("unquarantineAssets").get("results")[0].get("failed")
-
+        failed = results_object.get("data").get("quarantineAssets").get("results")[0].get("failed")
         return (not failed)
+
+    def unquarantine(self, agent_id):
+        """
+        unquarantine action on a given agent ID
+        :param agent_id: string
+
+        :return: boolean
+        """
+        unquarantine_payload = {
+            "query": "mutation( $orgID:String! $agentID:String!) { unquarantineAssets( orgId:$orgID assetIds: [$agentID] ) { results { assetId failed } } }",
+            "variables": {
+                "orgID": self.org_key,
+                "agentID": agent_id
+            }
+        }
+
+        results_object = self._post_payload(unquarantine_payload)
+        failed = results_object.get("data").get("unquarantineAssets").get("results")[0].get("failed")
+        return not failed
 
     def get_agent_status(self, agent_id):
         """
@@ -133,7 +135,7 @@ class ApiConnection():
             result.raise_for_status()
         except:
             raise APIException(cause="Error connecting to the Insight Agent API.",
-                               assistance="Please check your Org ID and API key.\n",
+                               assistance="Please check your Organization ID and API key.\n",
                                data=result.text)
 
         results_object = result.json()
@@ -152,7 +154,8 @@ class ApiConnection():
         else:
             # It's an enum, hopefully this never happens.
             raise APIException(cause="Region not found.",
-                               assistance="Region code was not found for selected region. Please contact support.")
+                               assistance="Region code was not found for selected region. Available reagions are: United States, "
+                                          "Europe, Canada, Australia, Japan")
 
         return endpoint
 
@@ -245,23 +248,26 @@ class ApiConnection():
                     return agent
             else:
                 raise APIException(cause="Could not determine agent type.",
-                                   assistance=f"Agent {agent_input} was not a Mac, IP, or Hostname.")
+                                   assistance=f"Agent {agent_input} was not a MAC address, IP address, or hostname.")
 
         raise APIException(cause=f"Could not find agent matching {agent_input} of type {agent_type}.",
                            assistance=f"Check the agent input value and try again.")
 
     def _get_agents_from_result_object(self, results_object):
         """
-        This will extract an agent object from the objec that's returned from the API
+        This will extract an agent object from the object that's returned from the API
 
         :param results_object: dict (API result payload)
         :return: dict (agent object)
         """
         agent_list = []
 
-        edges = results_object.get("data").get("organization").get("assets").get("edges")
-        for edge in edges:
-            agent = edge.get("node").get("host")
-            agent_list.append(agent)
+        try:
+            edges = results_object.get("data").get("organization").get("assets").get("edges")
+            for edge in edges:
+                agent = edge.get("node").get("host")
+                agent_list.append(agent)
+        except KeyError:
+            raise APIException(cause="Insight Agent API returned data in an unexpected format.")
 
         return agent_list

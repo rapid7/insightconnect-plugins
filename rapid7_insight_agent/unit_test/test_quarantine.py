@@ -32,7 +32,6 @@ class TestQuarantine(TestCase):
             """
             self.fail(message)
 
-
         test_conn.connect(connection_params)
         test_action.connection = test_conn
         results = test_action.run(action_params)
