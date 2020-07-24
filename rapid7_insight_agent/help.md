@@ -1,6 +1,6 @@
 # Description
 
-Investigate and mitigate vulnerabilities across your organization using the power of the [Insight Agent](https://docs.rapid7.com/insight-agent/overview/). 
+The [Insight Agent] (https://docs.rapid7.com/insight-agent/overview/) collects live system information, easily centralizing and monitoring data on the Insight platform. Using the Insight Agent plugin from InsightConnect, you can quarantine, unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices across your organization. 
 
 # Key Features
 
