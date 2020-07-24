@@ -41,6 +41,33 @@ Example input:
 
 ### Actions
 
+#### Get Rule
+
+This action is used to get rule.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|rule_id|string|None|True|Rule ID|None|None|
+|ruleset_id|string|None|True|Ruleset ID for which the rule ID belongs|None|None|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|rule|object|True|Rule|
+
+Example output:
+
+```
+```
+
 #### Get Agents
 
 This action is used to get agent data.
@@ -507,142 +534,6 @@ Example output:
     "alert_policy_id": "53743bc0beefbeefbeefbeef",
     "agent_id": "58e52b4c4cc77462cf786a9d"
   }
-}
-
-```
-
-#### Get Policy
-
-This action is used to get a policy.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|fields|[]string|None|False|Fields to return|None|None|
-|policy_id|string|None|True|Threat Stack policy ID|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|policy|[]object|True|Policy data|
-
-Example output:
-
-```
-
-{
-  "policy": {
-    "organization_id": "deadbeefdeadbeefdeadbeef",
-    "name": "CloudTrail Base Rule Set",
-    "file_integrity_rules": [],
-    "created_at": "2015-09-25T19:24:03.956Z",
-    "alert_policy": [
-      {
-        "description": "This rule tracks file views (GetObject), file changes (PutObject) into specific S3 buckets ",
-        "title": "CloudTrail Activity (S3FIM): {{eventName}} by {{user}}",
-        "window_seconds": 86400,
-        "created_at": "2017-01-11T13:33:06.593Z",
-        "aggregate_fields": [
-          "eventName",
-          "user"
-        ],
-        "enabled": true,
-        "updated_at": "2017-01-11T13:34:53.315Z",
-        "exclusions": [],
-        "filter": "(eventName = \"PutObjectAcl\" or eventName = \"GetObjectAcl\" or eventName = \"GetObject\" or eventName = \"PutObject\" or eventName = \"ListObjects\" or eventName = \"HeadObject\") and bucketName = \"xx\"",
-        "threshold": 1,
-        "type": "cloudtrail",
-        "id": "7f7474ae-eef7-11e6-b0e1-d9a81a1397f1",
-        "severity": 2
-      },
-      ...
-    ]
-    "enabled": true,
-    "updated_at": "2015-09-25T19:24:03.956Z",
-    "alert_policy_id": "7f6cac6f-eef7-11e6-b0e1-ad6efc548ecd",
-    "agent_count": 0,
-    "alert_rule_count": 31,
-    "id": "7f6cac6f-eef7-11e6-b0e1-ad6efc548ecd",
-    "description": "CloudTrail Base Rule Set"
-  }
-}
-
-```
-
-#### Get Policies
-
-This action is used to get policies.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|fields|[]string|None|False|Fields to return|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|count|integer|True|Number of policies|
-|policies|[]object|True|Array of policies|
-
-Example output:
-
-```
-
-{
-  count: 2,
-  policies: [
-    {
-      "policy": {
-        "organization_id": "deadbeefdeadbeefdeadbeef",
-        "name": "CloudTrail Base Rule Set",
-        "file_integrity_rules": [],
-        "created_at": "2015-09-25T19:24:03.956Z",
-        "alert_policy": [
-          {
-            "description": "This rule tracks file views (GetObject), file changes (PutObject) into specific S3 buckets ",
-            "title": "CloudTrail Activity (S3FIM): {{eventName}} by {{user}}",
-            "window_seconds": 86400,
-            "created_at": "2017-01-11T13:33:06.593Z",
-            "aggregate_fields": [
-              "eventName",
-              "user"
-            ],
-            "enabled": true,
-            "updated_at": "2017-01-11T13:34:53.315Z",
-            "exclusions": [],
-            "filter": "(eventName = \"PutObjectAcl\" or eventName = \"GetObjectAcl\" or eventName = \"GetObject\" or eventName = \"PutObject\" or eventName = \"ListObjects\" or eventName = \"HeadObject\") and bucketName = \"xx\"",
-            "threshold": 1,
-            "type": "cloudtrail",
-            "id": "7f7474ae-eef7-11e6-b0e1-d9a81a1397f1",
-            "severity": 2
-          },
-          ...
-        ]
-        "enabled": true,
-        "updated_at": "2015-09-25T19:24:03.956Z",
-        "alert_policy_id": "7f6cac6f-eef7-11e6-b0e1-ad6efc548ecd",
-        "agent_count": 0,
-        "alert_rule_count": 31,
-        "id": "7f6cac6f-eef7-11e6-b0e1-ad6efc548ecd",
-        "description": "CloudTrail Base Rule Set"
-      }
-    },
-    ...
-  ]
 }
 
 ```

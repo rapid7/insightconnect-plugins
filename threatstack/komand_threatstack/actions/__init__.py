@@ -4,5 +4,4 @@ from .get_agents.action import GetAgents
 from .get_alert.action import GetAlert
 from .get_alerts.action import GetAlerts
 from .get_events.action import GetEvents
-from .get_policies.action import GetPolicies
-from .get_policy.action import GetPolicy
+from .get_rule.action import GetRule

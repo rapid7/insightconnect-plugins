@@ -354,39 +354,40 @@ actions:
         description: Number of events
         required: true
 
-  get_policy:
-    title: Get Policy
-    description: Get policy
+  get_rule:
+    title: Get Rule
+    description: Get rule
     input:
-      policy_id:
+      rule_id:
         type: string
-        title: Policy ID
-        description: Threat Stack policy ID
+        title: Rule ID
+        description: Rule ID
         required: true
-      fields:
-        type: '[]string'
-        description: Fields to return
-        required: false
+      ruleset_id:
+        type: string
+        title: Ruleset ID
+        description: Ruleset ID for which the rule ID belongs
+        required: true
     output:
-      policy:
-        type: '[]object'
-        description: Policy data
+      rule:
+        type: object
+        description: Rule
         required: true
 
-  get_policies:
-    title: Get Policies
-    description: Get policies
-    input:
-      fields:
-        type: '[]string'
-        description: Fields to return
-        required: false
-    output:
-      policies:
-        type: '[]object'
-        description: Array of policies
-        required: true
-      count:
-        type: integer
-        description: Number of policies
-        required: true
+#  get_policies:
+#    title: Get Policies
+#    description: Get policies
+#    input:
+#      fields:
+#        type: '[]string'
+#        description: Fields to return
+#        required: false
+#    output:
+#      policies:
+#        type: '[]object'
+#        description: Array of policies
+#        required: true
+#      count:
+#        type: integer
+#        description: Number of policies
+#        required: true
