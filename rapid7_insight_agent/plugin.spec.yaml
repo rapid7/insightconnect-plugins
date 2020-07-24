@@ -163,7 +163,7 @@ actions:
         order: 1
       quarantine_state:
         title: Quarantine State
-        description: Set to true to quarantine a host, set to false to release quarantine
+        description: Set to true to quarantine a host, set to false to unquarantine
         type: boolean
         default: true
         example: true
