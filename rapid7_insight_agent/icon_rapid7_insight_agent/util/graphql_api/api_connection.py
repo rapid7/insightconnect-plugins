@@ -215,14 +215,14 @@ class ApiConnection():
                     return agent
             else:
                 raise APIException(cause="Could not determine agent type.",
-                                   assistance=f"Agent {agent_input} was not a Mac, IP, or Hostname.")
+                                   assistance=f"Agent {agent_input} was not a MAC address, IP address, or hostname.")
 
         raise APIException(cause=f"Could not find agent matching {agent_input} of type {agent_type}.",
                            assistance=f"Check the agent input value and try again.")
 
     def _get_agents_from_result_object(self, results_object):
         """
-        This will extract an agent object from the objec that's returned from the API
+        This will extract an agent object from the object that's returned from the API
 
         :param results_object: dict (API result payload)
         :return: dict (agent object)
