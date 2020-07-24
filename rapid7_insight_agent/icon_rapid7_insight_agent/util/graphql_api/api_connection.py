@@ -222,7 +222,7 @@ class ApiConnection():
 
     def _get_agents_from_result_object(self, results_object):
         """
-        This will extract an agent object from the objec that's returned from the API
+        This will extract an agent object from the object that's returned from the API
 
         :param results_object: dict (API result payload)
         :return: dict (agent object)
