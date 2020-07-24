@@ -102,7 +102,7 @@ class ApiConnection():
             result.raise_for_status()
         except:
             raise APIException(cause="Error connecting to the Insight Agent API.",
-                               assistance="Please check your Org ID and API key.\n",
+                               assistance="Please check your Organization ID and API key.\n",
                                data=result.text)
 
         results_object = result.json()
