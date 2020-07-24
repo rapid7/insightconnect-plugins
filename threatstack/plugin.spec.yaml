@@ -263,6 +263,42 @@ connection:
 
 actions:
 
+  get_agent:
+    title: Get Agent
+    description: Get agent data
+    input:
+      agent_id:
+        type: string
+        description: Agent ID e.g. 597b2c751b7cc18fcf028e52
+        required: true
+    output:
+      agent:
+        type: agent
+        description: Detailed agent data
+        required: true
+
+  get_agents:
+    title: Get Agents
+    description: Get agent data
+    input:
+      start:
+        type: string
+        description: Start date e.g. 2017-01-01
+        required: false
+      end:
+        type: string
+        description: End date e.g. 2018-01-01
+        required: false
+    output:
+      alerts:
+        type: '[]agent'
+        description: List of agents
+        required: true
+      count:
+        type: integer
+        description: Number of agents
+        required: true
+
   get_alert:
     title: Get Alert
     description: Get alert data by ID
@@ -318,50 +354,6 @@ actions:
       count:
         type: integer
         description: Number of events
-        required: true
-
-  get_agent:
-    title: Get Agent
-    description: Get agent data
-    input:
-      agent_id:
-        type: string
-        description: Agent ID e.g. 597b2c751b7cc18fcf028e52
-        required: true
-      fields:
-        type: '[]string'
-        description: Fields to return
-        required: false
-    output:
-      agent:
-        type: object
-        description: Detailed agent data
-        required: true
-
-  get_agents:
-    title: Get Agents
-    description: Get agent data
-    input:
-      start:
-        type: string
-        description: Start date e.g. 2017-01-01
-        required: false
-      end:
-        type: string
-        description: End date e.g. 2018-01-01
-        required: false
-      fields:
-        type: '[]string'
-        description: Fields to return
-        required: false
-    output:
-      alerts:
-        type: '[]object'
-        description: List of agents
-        required: true
-      count:
-        type: integer
-        description: Number of agents
         required: true
 
   get_policy:

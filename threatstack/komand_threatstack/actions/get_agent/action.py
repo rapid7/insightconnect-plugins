@@ -1,6 +1,7 @@
 import komand
-from .schema import GetAgentInput, GetAgentOutput
+from .schema import GetAgentInput, GetAgentOutput, Input, Output
 # Custom imports below
+from komand.helper import clean
 
 
 class GetAgent(komand.Action):
@@ -13,5 +14,7 @@ class GetAgent(komand.Action):
                 output=GetAgentOutput())
 
     def run(self, params={}):
-        agent = self.connection.client.agents.get(params.get('agent_id'))
-        return {'agent': agent}
+        agent_id = params.get(Input.AGENT_ID)
+        agent = clean(self.connection.client.agents.get(agent_id))
+
+        return {Output.AGENT: agent}

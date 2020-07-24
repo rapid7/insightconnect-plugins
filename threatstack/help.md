@@ -41,6 +41,34 @@ Example input:
 
 ### Actions
 
+#### Get Agents
+
+This action is used to get agent data.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|end|string|None|False|End date e.g. 2018-01-01|None|None|
+|start|string|None|False|Start date e.g. 2017-01-01|None|None|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|alerts|[]agent|True|List of agents|
+|count|integer|True|Number of agents|
+
+Example output:
+
+```
+```
+
 #### Get Events
 
 This action is used to get events which contributed to an alert.
@@ -410,60 +438,6 @@ Example output:
 
 ```
 
-#### Get Agents
-
-This action is used to get agent data.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|end|string|None|False|End date e.g. 2018-01-01|None|None|
-|fields|[]string|None|False|Fields to return|None|None|
-|start|string|None|False|Start date e.g. 2017-01-01|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|alerts|[]object|True|List of agents|
-|count|integer|True|Number of agents|
-
-Example output:
-
-```
-
-{
-  "count": 47,
-  "agents": [
-    {
-      "status": "active",
-      "hostname": "default-centos-67",
-      "name": "default-centos-67",
-      "created_at": "2017-04-27T20:01:22.353Z",
-      "activated_at": "2017-04-27T20:01:22.130Z",
-      "enabled": false,
-      "updated_at": "2017-05-11T20:15:12.268Z",
-      "paused": false,
-      "version": "1.6.2",
-      "agent_id": "589cb810a7d05f7f3a438cb2-4885b890-2b84-11e7-b27b-9f608f21aff091bf46da8a73e77e",
-      "last_reported_at": "2017-04-27T20:05:09.939Z",
-      "online": false,
-      "ip_address": "144.121.5.10",
-      "id": "59024beed911cadeadee1b09",
-      "description": ""
-    },
-    ...
-  ]
-}
-
-```
-
 #### Get Policies
 
 This action is used to get policies.
@@ -544,7 +518,6 @@ This action is used to get agent data.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |agent_id|string|None|True|Agent ID e.g. 597b2c751b7cc18fcf028e52|None|None|
-|fields|[]string|None|False|Fields to return|None|None|
 
 Example input:
 
@@ -555,7 +528,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|agent|object|True|Detailed agent data|
+|agent|agent|True|Detailed agent data|
 
 Example output:
 
