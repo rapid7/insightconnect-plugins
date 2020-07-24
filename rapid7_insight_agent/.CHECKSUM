@@ -1,15 +1,15 @@
 {
-	"spec": "70a57c82a6ea5aeea68610b3c34087da",
+	"spec": "565b3c821f340eb7873304301e8b5b92",
 	"manifest": "15220deaa8aa850419b0f583821104e9",
 	"setup": "83f3ec04295ae11f49054fecd98708e2",
 	"schemas": [
 		{
 			"identifier": "get_agent_details/schema.py",
-			"hash": "c9634302807c00326882b9144992adf7"
+			"hash": "94ec47ff45772fa55754d2c2913429e3"
 		},
 		{
 			"identifier": "quarantine/schema.py",
-			"hash": "fb217d7eaf5ce07b6287bf63ac6e8f1b"
+			"hash": "d8667296491c1a8e2117b1e4919fcb65"
 		},
 		{
 			"identifier": "connection/schema.py",

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Quarantine or release quarantine on a device"
+    DESCRIPTION = "Quarantine or unquarantine on a device"
 
 
 class Input:
@@ -39,7 +39,7 @@ class QuarantineInput(insightconnect_plugin_runtime.Input):
     "quarantine_state": {
       "type": "boolean",
       "title": "Quarantine State",
-      "description": "Set to true to quarantine a host, set to false to release quarantine",
+      "description": "Set to true to quarantine a host, set to false to unquarantine",
       "default": true,
       "order": 2
     }

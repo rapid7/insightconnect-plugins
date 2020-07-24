@@ -48,7 +48,7 @@ This action is used to quarantine or release quarantine on a device.
 |----|----|-------|--------|-----------|----|-------|
 |agent_id|string|None|True|The ID of the agent on the device to quarantine|None|a1cfb273c8e7d46a9e2a0e2dae01a0ce|
 |interval|int|604800|True|Length in time in seconds to try to take action on a device. This is also called Advertisement Period|None|604800|
-|quarantine_state|boolean|True|True|Set to true to quarantine a host, set to false to release quarantine|None|True|
+|quarantine_state|boolean|True|True|Set to true to quarantine a host, set to false to unquarantine|None|True|
 
 Example input:
 
@@ -82,7 +82,7 @@ This action this action is used to find and display detailed information about a
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent|string|None|True|IP address, MAC address, or host name of the device to get information from|None|MaliciousHost|
+|agent|string|None|True|IP address, MAC address, or hostname of the device to get information from|None|MaliciousHost|
 
 Example input:
 

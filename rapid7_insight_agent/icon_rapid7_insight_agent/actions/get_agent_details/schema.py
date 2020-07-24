@@ -24,7 +24,7 @@ class GetAgentDetailsInput(insightconnect_plugin_runtime.Input):
     "agent": {
       "type": "string",
       "title": "Agent",
-      "description": "IP address, MAC address, or host name of the device to get information from",
+      "description": "IP address, MAC address, or hostname of the device to get information from",
       "order": 1
     }
   },
