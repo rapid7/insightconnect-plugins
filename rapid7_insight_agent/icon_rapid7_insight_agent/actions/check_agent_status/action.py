@@ -1,7 +1,6 @@
 import insightconnect_plugin_runtime
-from .schema import CheckAgentStatusInput, CheckAgentStatusOutput, Input, Output, Component
+from .schema import CheckAgentStatusInput, CheckAgentStatusOutput, Input, Component
 # Custom imports below
-
 
 
 class CheckAgentStatus(insightconnect_plugin_runtime.Action):

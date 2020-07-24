@@ -61,6 +61,12 @@ class ApiConnection():
         return (not failed)
 
     def get_agent_status(self, agent_id):
+        """
+        This will get agent status information from a specified agent
+
+        :param agent_id: string
+        :return: dict
+        """
         payload = {
             "query": "query( $orgID: String! $agentID: String! ) { assets( orgId: $orgID ids: [$agentID] ){ agent { id quarantineState{ currentState } agentStatus } } }",
             "variables": {
