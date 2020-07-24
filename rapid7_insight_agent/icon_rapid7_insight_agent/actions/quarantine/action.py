@@ -4,6 +4,7 @@ from .schema import QuarantineInput, QuarantineOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_rapid7_insight_agent.util.graphql_api.api_exception import APIException
 
+
 class Quarantine(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
