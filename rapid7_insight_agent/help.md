@@ -9,7 +9,7 @@ Investigate and mitigate vulnerabilities across your organization using the powe
 
 # Requirements
 
-* Platform API Key: [Mange Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)
+* [Platform API Key](https://docs.rapid7.com/insight/managing-platform-api-keys/)
 * Organization ID: (See Page 10 of the GraphQL API doc)
 
 # Documentation
