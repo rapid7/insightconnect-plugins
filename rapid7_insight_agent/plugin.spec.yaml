@@ -140,7 +140,7 @@ actions:
     input:
       agent:
         title: Agent
-        description: IP address, MAC address, or host name of the device to get information from
+        description: IP address, MAC address, or hostname of the device to get information from
         type: string
         required: true
         example: MaliciousHost
@@ -182,7 +182,6 @@ actions:
         description: Was operation successful
         type: boolean
         required: true
-
 
 
 
