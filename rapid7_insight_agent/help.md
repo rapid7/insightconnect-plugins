@@ -169,5 +169,5 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [Rapid7 Insight Agent](https://docs.rapid7.com/insight-agent/overview/)
-* [Mange Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)
+* [Manage Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)
 *  
