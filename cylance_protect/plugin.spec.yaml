@@ -4,7 +4,7 @@ products: [insightconnect]
 name: cylance_protect
 title: BlackBerry CylancePROTECT
 description: Automate detection and response operations using CylancePROTECT
-version: 1.2.0
+version: 1.3.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -193,6 +193,46 @@ types:
       description: Detailed information about the lockdown action performed
       type: lockdown
       required: false
+  agents:
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    state:
+      title: State
+      type: string
+      description: State
+      required: false
+    agent_version:
+      title: Agent Version
+      type: string
+      description: Agent version
+      required: false
+    policy:
+      title: Policy
+      type: policy
+      description: Policy
+      required: false
+    date_first_registered:
+      title: Date First Registered
+      type: string
+      description: Date first registered
+      required: false
+    ip_addresses:
+      title: IP Addresses
+      type: "[]string"
+      description: IP addresses
+      required: false
+    mac_addresses:
+      title: MAC Addresses
+      type: "[]string"
+      description: MAC addresses
   threat:
     name:
       title: Name
@@ -400,6 +440,22 @@ actions:
         title: Lockdown Details
         description: Detailed information about the device lockdown
         type: lockdown_response
+        required: true
+  search_agents:
+    title: Search Agents
+    description: This action searches for agents and returns device information details
+    input:
+      agent:
+        title: Agent
+        description: Agent to retrieve device information from. Accepts IP address, MAC address, name, or device ID
+        type: string
+        required: true
+        example: EXAMPLE-HOSTNAME
+    output:
+      agents:
+        title: Agents
+        description: Detailed information about agents found
+        type: "[]agents"
         required: true
   search_threats:
     title: Search Threats
