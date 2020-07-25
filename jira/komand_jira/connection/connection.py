@@ -53,6 +53,5 @@ class Connection(komand.Connection):
                                           assistance="Verify the Jira server at the URL configured in your plugin "
                                                      "connection is correct.")
         else:
-            self.logger.error(ConnectionTestException(cause=f"Unhandled error occurred: {response.content}"))
             raise ConnectionTestException(cause=f"Unhandled error occurred.",
                                           assistance=response.content)
