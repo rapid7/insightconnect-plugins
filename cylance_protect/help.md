@@ -81,17 +81,17 @@ Example output:
       "mac_addresses": [
         "08-00-27-2F-43-60"
       ],
-      "name": "DESKTOP-43MH4Q2",
+      "name": "Example-Hostname",
       "policy": {
-        "id": "c6f694e8-5ddd-4988-8a6b-3a1d3d2da631",
+        "id": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
         "name": "Default"
       },
       "state": "Offline",
       "agent_version": "2.0.1540",
       "date_first_registered": "2020-06-21T15:53:43",
-      "id": "4e8338cb-59bf-41bf-a92b-cce7c9a7e400",
+      "id": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
       "ip_addresses": [
-        "10.0.2.15"
+        "198.51.100.100"
       ]
     }
   ]
