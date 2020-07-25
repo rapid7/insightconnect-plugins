@@ -308,7 +308,7 @@ types:
       title: "Miscellaneous"
       type: object
       description: "Miscellaneous event data not found across all event types"
-      required: false
+      required: true
 
 connection:
   api_key:

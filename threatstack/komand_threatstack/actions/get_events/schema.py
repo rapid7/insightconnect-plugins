@@ -120,7 +120,8 @@ class GetEventsOutput(komand.Output):
         }
       },
       "required": [
-        "_id"
+        "_id",
+        "miscellaneous"
       ]
     }
   }
