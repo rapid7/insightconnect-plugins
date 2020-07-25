@@ -36,7 +36,7 @@ class CylanceProtectAPI:
     def search_agents_all(self, agent):
         i = 1
         agents = []
-        while True:
+        while i < 9999:
             response = self.get_agents(i, "20")
             if i > response.get('total_pages'):
                 break
@@ -51,13 +51,13 @@ class CylanceProtectAPI:
             
         return agents
 
-    def search_agents(self, agent: str, device_list: dict) -> list:
+    def search_agents(self, agent: str, device_list: list) -> list:
         agents = []
         if validators.ipv4(agent):
             agents.extend(self.get_device_by_ip(agent, device_list))
         elif match('[0-9a-f]{2}([-:]?)[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$', agent.lower()):
             agents.extend(self.get_device_by_mac(agent, device_list))
-        elif match('^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$', agent.lower()):
+        elif validators.uuid(agent):
             agents.extend(self.get_device_by_id(agent, device_list))
         else:
             agents.extend(self.get_device_by_name(agent, device_list))
@@ -93,8 +93,8 @@ class CylanceProtectAPI:
     def get_device_by_name(name: str, device_list: list) -> list:
         matching_devices = []
         for device in device_list:
-                if name.upper() == device.get('name').upper():
-                    matching_devices.append(device)
+            if name.upper() == device.get('name').upper():
+                matching_devices.append(device)
         return matching_devices
 
     def create_blacklist_item(self, payload):
