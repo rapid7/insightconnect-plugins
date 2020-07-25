@@ -4,7 +4,7 @@ products: [insightconnect]
 name: cylance_protect
 title: BlackBerry CylancePROTECT
 description: Automate detection and response operations using CylancePROTECT
-version: 1.2.0
+version: 1.4.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -438,4 +438,66 @@ actions:
         title: Agents
         description: Detailed information about threat agents found
         type: "[]threat_device"
+        required: true
+  update_agent_threat:
+    title: Update Agent Threat
+    description: Updates the status (waive or quarantine) of a convicted threat on a selected device
+    input:
+      agent:
+        title: Agent
+        description: Device to update threat on. Accepts IP address, MAC address, hostname, or device ID
+        type: string
+        required: true
+        example: Example-Hostname
+      threat_identifier:
+        title: Threat Identifier
+        description: The threat to search for. The input should be a threat name, MD5 or SHA256 hash
+        type: string
+        required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+      quarantine_state:
+        title: Quarantine State
+        description: True to quarantine threat, false to waive threat
+        type: string
+        required: true
+        example: True
+    output:
+      success:
+        title: Success
+        description: Return true if the threat was updated
+        type: boolean
+        required: true
+  update_agent:
+    title: Update Agent
+    description: Adds or removes zones and/or updates the policy of a specific Console device resource belonging to a Tenant
+    input:
+      agent:
+        title: Agent
+        description: Agent to update device information from. Accepts IP address, MAC address, hostname, or device ID
+        type: string
+        required: true
+        example: Example-Hostname
+      add_zones:
+        title: Add Zones
+        description: The list of zone identifiers which the device is to be assigned. The input should be an array of zone IDs
+        type: "[]string"
+        required: false
+        example: ["1abc234d-5efa-6789-bcde-0f1abcde23f5"]
+      remove_zones:
+        title: Remove Zones
+        description: The list of zone identifiers from which the device is to be removed. The input should be an array of zone IDs
+        type: "[]string"
+        required: false
+        example: ["1abc234d-5efa-6789-bcde-0f1abcde23f5"]
+      policy:
+        title: Policy
+        description: The unique identifier for the policy to assign to the device. Specify policy, or leave the string empty to remove the current policy from the device
+        type: string
+        required: true
+        example: 1abc234d-5efa-6789-bcde-0f1abcde23f5
+    output:
+      success:
+        title: Success
+        description: Return true if the agent was updated
+        type: boolean
         required: true
