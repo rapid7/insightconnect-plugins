@@ -50,7 +50,7 @@ Example input:
 
 #### Search Agents
 
-This action this action searches for agents and returns device information details.
+This action searches for agents and returns device information details about them.
 
 ##### Input
 
