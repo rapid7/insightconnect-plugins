@@ -456,6 +456,7 @@ actions:
         title: Agents
         description: Detailed information about agents found
         type: "[]agents"
+        required: true
   search_threats:
     title: Search Threats
     description: Finds and displays detailed information about one or more threats

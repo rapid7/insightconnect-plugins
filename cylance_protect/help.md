@@ -70,7 +70,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|agents|[]agents|False|Detailed information about agents found|
+|agents|[]agents|True|Detailed information about agents found|
 
 Example output:
 
