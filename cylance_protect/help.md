@@ -1,11 +1,13 @@
 # Description
 
-The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/cylance-protect.html) plugin allows you to automate response operations.
+The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/cylance-protect.html) plugin allows you to automate response operations for CylancePROTECT and CylanceOPTICS.
 
 # Key Features
 
 * Get agent details
 * Blacklist a malicious hash
+* Quarantine endpoints
+* Search threats
 
 # Requirements
 
@@ -68,7 +70,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|agents|[]agents|True|Detailed information about agents found|
+|agents|[]agents|False|Detailed information about agents found|
 
 Example output:
 
@@ -76,20 +78,122 @@ Example output:
 {
   "agents": [
     {
+      "mac_addresses": [
+        "08-00-27-2F-43-60"
+      ],
+      "name": "DESKTOP-43MH4Q2",
+      "policy": {
+        "id": "c6f694e8-5ddd-4988-8a6b-3a1d3d2da631",
+        "name": "Default"
+      },
+      "state": "Offline",
       "agent_version": "2.0.1540",
-      "date_first_registered": "2020-05-28T14:00:50",
+      "date_first_registered": "2020-06-21T15:53:43",
+      "id": "4e8338cb-59bf-41bf-a92b-cce7c9a7e400",
+      "ip_addresses": [
+        "10.0.2.15"
+      ]
+    }
+  ]
+}
+```
+
+#### Search Threats
+
+This action finds and displays detailed information about one or more threats.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|score|integer|None|False|Filter the search by the Cylance score assigned to the threat. Accepts an integer within the range [-1,1]|None|-1|
+|threat_identifier|[]string|None|True|The threat(s) to search for. The input should be an array of threat names, MD5, or SHA256 hashes|None|["9de5069c5afe602b2ea0a04b66beb2c0", "02699626f388ed830012e5b787640e71c56d42d8", "Example-Threat-Name"]|
+
+Example input:
+
+```
+{
+  "score": -1,
+  "threat_identifier": [
+    "9de5069c5afe602b2ea0a04b66beb2c0",
+    "02699626f388ed830012e5b787640e71c56d42d8",
+    "Example-Threat-Name"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|threats|[]threat|True|Detailed information about threats found|
+
+Example output:
+
+```
+{
+  "threats": [
+    {
+      "file_size": 109395,
+      "md5": "9DE5069C5AFE602B2EA0A04B66BEB2C0",
+      "safelisted": false,
+      "unique_to_cylance": true,
+      "classification": "Malware",
+      "cylance_score": -1,
+      "global_quarantined": false,
+      "last_found": "2020-05-29T10:12:45",
+      "name": "honeyhashx86.exe",
+      "sha256": "02699626F388ED830012E5B787640E71C56D42D8",
+      "sub_classification": "Exploit"
+    }
+  ]
+}
+```
+
+#### Get Devices Affected by Threat
+
+This action is used to retrieve a list of devices affected by a threat.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|threat_identifier|string|None|True|The threat to search for. The input should be a threat name, MD5, or SHA256 hash|None|9de5069c5afe602b2ea0a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "threat_identifier": "9de5069c5afe602b2ea0a04b66beb2c0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|agents|[]threat_device|True|Detailed information about threat agents found|
+
+Example output:
+
+```
+{
+  "agents": [
+    {
       "id": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
+      "name": "Example-Hostname",
+      "state": "OffLine",
+      "agent_version": "2.0.1540",
+      "policy_id": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
+      "date_found": "2020-05-29T10:12:45",
+      "file_status": "Default",
+      "file_path": "C:\\Program Files (x86)\\Rapid7\\Endpoint Agent\\honeyhashx86.exe",
       "ip_addresses": [
         "198.51.100.100"
       ],
       "mac_addresses": [
         "00-60-26-26-D5-19"
-      ],
-      "name": "EXAMPLE-HOSTNAME",
-      "policy": {
-        "name": "Default"
-      },
-      "state": "Online"
+      ]
     }
   ]
 }
@@ -129,17 +233,17 @@ Example output:
 
 ```
 {
-    "status": "COMPLETE",
-    "data": {
-        "id": "1ABC234D5EFA6789BCDE0F1ABCDE23F5",
-        "hostname": "Example-Hostname",
-        "tenant_id": "1abc234d5efa6789bcde0f1abcde23f5",
-        "connection_status": "locked",
-        "optics_device_version": "2.4.2100.1015",
-        "password": "unlock-pa22-w0rd",
-        "lockdown_expiration": "2020-07-11T21:15:29Z",
-        "lockdown_initiated": "2020-07-08T21:15:29Z"
-    }
+  "status": "COMPLETE",
+  "data": {
+      "id": "1ABC234D5EFA6789BCDE0F1ABCDE23F5",
+      "hostname": "Example-Hostname",
+      "tenant_id": "1abc234d5efa6789bcde0f1abcde23f5",
+      "connection_status": "locked",
+      "optics_device_version": "2.4.2100.1015",
+      "password": "unlock-pa22-w0rd",
+      "lockdown_expiration": "2020-07-11T21:15:29Z",
+      "lockdown_initiated": "2020-07-08T21:15:29Z"
+  }
 }
 ```
 
@@ -207,29 +311,29 @@ Example output:
 
 ```
 {
-      "agent": {
-        "id": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
-        "name": "NA-TESTX-NAM11",
-        "host_name": "na-testx-nam11",
-        "os_version": "Microsoft Windows Server 2012 Standard",
-        "state": "Online",
-        "agent_version": "2.0.1540",
-        "policy": {
-          "id": "00000000-0000-0000-0000-000000000000",
-          "name": "Default"
-        },
-        "last_logged_in_user": "NA-TESTX-NAM11\\Administrator",
-        "update_available": false,
-        "background_detection": false,
-        "is_safe": false,
-        "date_first_registered": "2020-05-28T14:00:50",
-        "ip_addresses": [
-          "198.51.100.100"
-        ],
-        "mac_addresses": [
-          "00-60-26-26-D5-19"
-        ]
-      }
+  "agent": {
+    "id": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
+    "name": "NA-TESTX-NAM11",
+    "host_name": "na-testx-nam11",
+    "os_version": "Microsoft Windows Server 2012 Standard",
+    "state": "Online",
+    "agent_version": "2.0.1540",
+    "policy": {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "name": "Default"
+    },
+    "last_logged_in_user": "NA-TESTX-NAM11\\Administrator",
+    "update_available": false,
+    "background_detection": false,
+    "is_safe": false,
+    "date_first_registered": "2020-05-28T14:00:50",
+    "ip_addresses": [
+      "198.51.100.100"
+    ],
+    "mac_addresses": [
+      "00-60-26-26-D5-19"
+    ]
+  }
 }
 ```
 
@@ -247,7 +351,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.2.0 - New action Search Agents
+* 1.3.0 - New action Search Agents
+* 1.2.0 - New actions Search Threats, Get Devices Affected by Threat
 * 1.1.0 - New action Quarantine
 * 1.0.3 - Match official branding in plugin title
 * 1.0.2 - Update to fix connection test

@@ -110,6 +110,34 @@ class CylanceProtectAPI:
     def get_agents(self, page, page_size):
         return self._call_api("GET", f"{self.url}/devices/v2?page={page}?page_size={page_size}", "device:list")
 
+    def search_threats(self, identifiers):
+        threats = self._call_api("GET", f"{self.url}/threats/v2?page=1&page_size=100", "threat:list").get("page_items")
+        matching_threats = []
+        for identifier in identifiers:
+            if match('^[a-fA-F\d]{32}$', identifier):
+                for threat in threats:
+                    if identifier.upper() == threat.get('md5'):
+                        matching_threats.append(threat)
+            elif match('^[A-Fa-f0-9]{64}$', identifier):
+                for threat in threats:
+                    if identifier.upper() == threat.get('sha256'):
+                        matching_threats.append(threat)
+            else:
+                for threat in threats:
+                    if identifier.upper() == threat.get('name').upper():
+                        matching_threats.append(threat)
+
+        if len(matching_threats) == 0:
+            raise PluginException(
+                cause="Threat not found.",
+                assistance=f"Unable to find any threats using identifier provided: {identifier}."
+            )
+
+        return clean(matching_threats)
+
+    def get_threat_devices(self, sha256, page, page_size):
+        return self._call_api("GET", f"{self.url}/threats/v2/{sha256}/devices?page={page}?page_size={page_size}", None)
+
     def _call_api(self, method, url, scope, params=None, json_data=None):
         token = self.generate_token(scope)
         return self._make_request(

@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 import requests
 from .schema import ValidateOutput, ValidateInput
 
 
-class Validate(komand.Action):
+class Validate(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name='validate',

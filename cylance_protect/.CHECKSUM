@@ -1,7 +1,7 @@
 {
-	"spec": "9a414516a303003d66d78ce12f4ea7ee",
-	"manifest": "59127906666f95f941d3a24f680b279b",
-	"setup": "655f3ab9ec7c37aab2c90edcb667bceb",
+	"spec": "d8d4636f43cb7fbaa3bd84a75b16770f",
+	"manifest": "b81451a3a7e741986831f1d185de591a",
+	"setup": "af0a2ebdeaee6b8151f158cb03cd9ec0",
 	"schemas": [
 		{
 			"identifier": "blacklist/schema.py",
@@ -17,7 +17,15 @@
 		},
 		{
 			"identifier": "search_agents/schema.py",
-			"hash": "8cfac83a4cf94f44e99346e4c4d824cf"
+			"hash": "566d7b08c40ae1bb66dad64c0ee641d1"
+		},
+		{
+			"identifier": "search_threat_agents/schema.py",
+			"hash": "8c07566de4cdf43e2f9062588b0a433e"
+		},
+		{
+			"identifier": "search_threats/schema.py",
+			"hash": "93b93ef42a01a531b877ed20e0c6bc18"
 		},
 		{
 			"identifier": "connection/schema.py",

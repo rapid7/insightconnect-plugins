@@ -4,9 +4,9 @@ import insightconnect_plugin_runtime
 from icon_carbon_black_cloud import connection, actions, triggers
 
 
-Name = "Carbon Black Cloud"
+Name = "VMware Carbon Black Cloud"
 Vendor = "rapid7"
-Version = "1.0.1"
+Version = "1.0.2"
 Description = "Quarantine endpoints and get device details with the VMware Carbon Black Cloud plugin"
 
 

@@ -54,9 +54,6 @@ class SearchAgentsOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
-  "required": [
-    "agents"
-  ],
   "definitions": {
     "agents": {
       "type": "object",
