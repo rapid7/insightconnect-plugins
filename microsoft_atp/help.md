@@ -19,6 +19,12 @@ This plugin utilizes the [Microsoft ATP API](https://docs.microsoft.com/en-us/wi
 
 ## Setup
 
+This plugin uses the Windows Defender ATP API. It will use an Azure application to connect to the API and run 
+actions from InsightConnect. 
+
+For information on how to setup your application and assign permissions go here:  
+https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -381,9 +387,7 @@ Example input:
 
 ```
 {
-  "frequency": 10,
-  "key": "assignedTo",
-  "value": "user@example.com"
+  "frequency": 10
 }
 ```
 
@@ -489,7 +493,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 3.0.0 - Move connection functions to their own util class | Changed `Exception` to `PluginException` | Added error handling to `Action already in progress` in `isolate` and `scan` action | Update input in machine related actions
+* 3.0.0 - Move connection functions to their own util class | Changed `Exception` to `PluginException` | Added error handling to `Action already in progress` in `Isolate Machine`, `Unisolate Machine`, `Stop and Quarantine File` and `Run Antivirus Scan` action | Update input in machine related actions
 * 2.0.0 - Update to refactor connection and actions
 * 1.5.1 - New spec and help.md format for the Extension Library
 * 1.5.0 - Fix issue where triggers always returned a blank payload
