@@ -381,7 +381,9 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "frequency": 10,
+  "key": "assignedTo",
+  "value": "user@example.com"
 }
 ```
 

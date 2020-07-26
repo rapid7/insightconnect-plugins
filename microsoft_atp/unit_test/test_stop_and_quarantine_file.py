@@ -32,7 +32,7 @@ class TestStopAndQuarantineFile(TestCase):
         test_action.logger = log
 
         try:
-            with open("../tests/22_stop_and_quarantine_file_id.json") as file:
+            with open("../tests/stop_and_quarantine_file_id.json") as file:
                 test_json = json.loads(file.read()).get("body")
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
