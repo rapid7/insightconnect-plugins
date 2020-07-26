@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "get_machine_information/schema.py",
-			"hash": "cbf844ebdda35d897174044cca661373"
+			"hash": "22ced3b215a7b772029d1adecffdb6ac"
 		},
 		{
 			"identifier": "isolate_machine/schema.py",
