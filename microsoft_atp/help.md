@@ -69,7 +69,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|machine|object|True|Machine information|
+|machine|machine|True|Machine information|
 
 Example output:
 
@@ -493,6 +493,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.0.0 - Add custom type to output in action `Get Machine Information`
 * 3.0.0 - Move connection functions to their own util class | Changed `Exception` to `PluginException` | Added error handling to `Action already in progress` in `Isolate Machine`, `Unisolate Machine`, `Stop and Quarantine File` and `Run Antivirus Scan` action | Update input in machine related actions
 * 2.0.0 - Update to refactor connection and actions
 * 1.5.1 - New spec and help.md format for the Extension Library

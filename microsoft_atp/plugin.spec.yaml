@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: microsoft_atp
 title: Microsoft Windows Defender ATP
 description: The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
-version: 3.0.0
+version: 4.0.0
 vendor: rapid7
 support: community
 status: []
@@ -317,6 +317,11 @@ types:
        type: string
        description: "Version"
        required: false
+     machineTags:
+       title: "Machinetags"
+       type: '[]string'
+       description: "Machinetags"
+       required: false
   machine_action:
      creationDateTimeUtc:
        title: "Creation Date Time UTC"
@@ -397,7 +402,7 @@ actions:
       machine:
         title: Machine
         description: Machine information
-        type: object
+        type: machine
         required: true
   get_file_id_from_alert_id:
     title: Get Files from Alert
