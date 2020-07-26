@@ -6,8 +6,9 @@ title: HTML
 vendor: rapid7
 support: community
 status: []
+cloud_ready: true
 description: Validate HTML, convert a HTML document to another format, or strip a HTML document of all tags
-version: 1.2.1
+version: 1.2.2
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/html
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -33,6 +34,7 @@ actions:
         description: HTML Contents
         type: string
         required: true
+        example: "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect!</p></body></html>"
     output:
       validated:
         title: Is Validated
@@ -48,6 +50,7 @@ actions:
         description: Document to transform
         type: string
         required: true
+        example: "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to Markdown</p></body></html>"
     output:
       markdown_contents:
         title: Contents
@@ -68,6 +71,7 @@ actions:
         description: Document to transform
         type: string
         required: true
+        example: "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to HTML5</p></body></html>"
     output:
       html5_contents:
         title: Contents
@@ -88,6 +92,7 @@ actions:
         description: Document to transform
         type: string
         required: true
+        example: "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to PDF</p></body></html>"
     output:
       pdf:
         title: PDF
@@ -103,6 +108,7 @@ actions:
         description: Document to transform
         type: string
         required: true
+        example: "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to EPUB</p></body></html>"
     output:
       epub:
         title: Epub
@@ -118,6 +124,7 @@ actions:
         description: Document to transform
         type: string
         required: true
+        example: "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to DOCX</p></body></html>"
     output:
       docx:
         title: Docx
@@ -133,11 +140,13 @@ actions:
         description: Document to transform
         type: string
         required: true
+        example: "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect!</p></body></html>"
       remove_scripts:
         title: Remove Scripts
         description: Remove non-HTML scripts from the document
         type: boolean
         required: false
+        example: false
     output:
       text:
         title: Text

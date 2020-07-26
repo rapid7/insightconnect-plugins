@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetDatetimeInput, GetDatetimeOutput, Input, Output
 import time
 import maya
 
 
-class GetDatetime(komand.Action):
+class GetDatetime(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
