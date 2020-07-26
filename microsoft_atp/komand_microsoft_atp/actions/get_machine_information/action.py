@@ -20,6 +20,6 @@ class GetMachineInformation(insightconnect_plugin_runtime.Action):
 
         return {
             Output.MACHINE: insightconnect_plugin_runtime.helper.clean(
-                self.connection.client.client.get_machine_information(machine_id)
+                self.connection.client.get_machine_information(machine_id)
             )
         }
