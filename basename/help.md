@@ -62,6 +62,7 @@ If the input doesn't contain a slash `/` in the path the result will be the orig
 
 # Version History
 
+* 1.0.2 - Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Update plugin.spec.yaml to include `cloud_ready
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Support web server mode
 * 0.1.1 - Update to v2 Python plugin architecture

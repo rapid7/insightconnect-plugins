@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import DecodeInput, DecodeOutput, Input, Output
 # Custom imports below
 from komand_microsoft_atp_safe_links.util.utils import decode_url
 
 
-class Decode(komand.Action):
+class Decode(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
