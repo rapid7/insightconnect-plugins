@@ -514,7 +514,7 @@ actions:
       quarantine_state:
         title: Quarantine State
         description: True to quarantine threat, false to waive threat
-        type: string
+        type: boolean
         required: true
         example: True
     output:

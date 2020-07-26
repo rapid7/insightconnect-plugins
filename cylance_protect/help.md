@@ -17,6 +17,13 @@ The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/
 
 ## Setup
 
+You must create a Custom Application by following this procedure from the CylancePROTECT console:
+
+1. Go to the Integrations tab on the Settings page
+2. Click "Add Application"
+3. Provide a name for the integration and choose the permissions related to the actions you want to use
+4. Copy and paste the Application ID, Application Secret, and Tenant ID (from the Integrations tab) into the connection
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -50,21 +57,16 @@ This action updates the status (waive or quarantine) of a convicted threat on a 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |agent|string|None|True|Device to update threat on. Accepts IP address, MAC address, hostname, or device ID|None|Example-Hostname|
-|quarantine_state|string|None|True|True to quarantine threat, false to waive threat|None|True|
+|quarantine_state|boolean|None|True|True to quarantine threat, false to waive threat|None|True|
 |threat_identifier|string|None|True|The threat to search for. The input should be a threat name, MD5 or SHA256 hash|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
 ```
 {
-  "add_zones": [
-    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
-  ],
   "agent": "Example-Hostname",
-  "policy": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
-  "remove_zones": [
-    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
-  ]
+  "quarantine_state": true,
+  "threat_identifier": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 

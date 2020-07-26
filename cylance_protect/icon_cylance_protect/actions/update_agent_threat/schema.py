@@ -30,7 +30,7 @@ class UpdateAgentThreatInput(insightconnect_plugin_runtime.Input):
       "order": 1
     },
     "quarantine_state": {
-      "type": "string",
+      "type": "boolean",
       "title": "Quarantine State",
       "description": "True to quarantine threat, false to waive threat",
       "order": 3

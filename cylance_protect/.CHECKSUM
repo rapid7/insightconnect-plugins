@@ -1,5 +1,5 @@
 {
-	"spec": "ce8a1f378860db26d986e1b9d995a3b4",
+	"spec": "ee210f08b59f616d2c3b1cccb3677da3",
 	"manifest": "77facc3dbeaf06e7955cff76d6d9c535",
 	"setup": "5df9a9b5e09ef3ff57479e775c0989ba",
 	"schemas": [
@@ -33,7 +33,7 @@
 		},
 		{
 			"identifier": "update_agent_threat/schema.py",
-			"hash": "74603e8645a2edf01ff10bae4de4627b"
+			"hash": "12b9ed88ab2a1fc36191cae0609f51fa"
 		},
 		{
 			"identifier": "connection/schema.py",

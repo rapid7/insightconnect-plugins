@@ -24,7 +24,7 @@ class UpdateAgent(insightconnect_plugin_runtime.Action):
             "add_zone_ids": params.get(Input.ADD_ZONES, None),
             "name": agent.get('name'),
             "policy_id": policy,
-            "remove_zone_ids": params.get(Input.ADD_ZONES, None)
+            "remove_zone_ids": params.get(Input.REMOVE_ZONES, None)
         }
 
         errors = self.connection.client.update_agent(agent.get('id'), payload)
