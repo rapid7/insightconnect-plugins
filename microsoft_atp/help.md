@@ -387,6 +387,8 @@ Example input:
 
 ```
 {
+  "key": "assignedTo", 
+  "value": "Automation",
   "frequency": 10
 }
 ```
