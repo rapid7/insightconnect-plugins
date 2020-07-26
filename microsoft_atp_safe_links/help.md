@@ -68,7 +68,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.1.2 - Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Update plugin.spec.yaml to include `cloud_ready
+* 1.1.2 - Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Update plugin.spec.yaml to include `cloud_ready`
 * 1.1.1 - Fix issue where `decoded` output wasn't returned
 * 1.1.0 - Fixed issue where embedded URLs returned blank string
 * 1.0.2 - New spec and help.md format for the Extension Library
