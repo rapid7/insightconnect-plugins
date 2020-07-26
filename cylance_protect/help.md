@@ -48,31 +48,21 @@ Example input:
 
 ### Actions
 
-#### Update Agent
+#### Search Agents
 
-This action adds or removes zones and/or updates the policy of a specific Console device resource belonging to a Tenant.
+This action searches for agents and returns device information details about them.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|add_zones|[]string|None|False|The list of zone identifiers which the device is to be assigned. The input should be an array of zone IDs|None|["1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
-|agent|string|None|True|Agent to update device information from. Accepts IP address, MAC address, hostname, or device ID|None|Example-Hostname|
-|policy|string|None|False|The unique identifier for the policy to assign to the device. Specify policy, or leave the string empty to remove the current policy from the device|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|
-|remove_zones|[]string|None|False|The list of zone identifiers from which the device is to be removed. The input should be an array of zone IDs|None|["1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
+|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, name, or device ID|None|EXAMPLE-HOSTNAME|
 
 Example input:
 
 ```
 {
-  "add_zones": [
-    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
-  ],
-  "agent": "Example-Hostname",
-  "policy": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
-  "remove_zones": [
-    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
-  ]
+  "agent": "EXAMPLE-HOSTNAME"
 }
 ```
 
@@ -80,54 +70,31 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|True|Return true if the agent was updated|
+|agents|[]agents|True|Detailed information about agents found|
 
 Example output:
 
 ```
 {
-  "success": true
-}
-```
-
-#### Update Agent Threat
-
-This action updates the status (waive or quarantine) of a convicted threat on a selected device.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|agent|string|None|True|Device to update threat on. Accepts IP address, MAC address, hostname, or device ID|None|Example-Hostname|
-|quarantine_state|string|None|True|True to quarantine threat, false to waive threat|None|True|
-|threat_identifier|string|None|True|The threat to search for. The input should be a threat name, MD5 or SHA256 hash|None|9de5069c5afe602b2ea0a04b66beb2c0|
-
-Example input:
-
-```
-{
-  "add_zones": [
-    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
-  ],
-  "agent": "Example-Hostname",
-  "policy": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
-  "remove_zones": [
-    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
+  "agents": [
+    {
+      "mac_addresses": [
+        "08-00-27-2F-43-60"
+      ],
+      "name": "Example-Hostname",
+      "policy": {
+        "id": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
+        "name": "Default"
+      },
+      "state": "Offline",
+      "agent_version": "2.0.1540",
+      "date_first_registered": "2020-06-21T15:53:43",
+      "id": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
+      "ip_addresses": [
+        "198.51.100.100"
+      ]
+    }
   ]
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Return true if the threat was updated|
-
-Example output:
-
-```
-{
-  "success": true
 }
 ```
 
@@ -385,6 +352,7 @@ _This plugin does not contain any troubleshooting information._
 # Version History
 
 * 1.4.0 - New actions Update Agent Threat, Update Agent
+* 1.3.0 - New action Search Agents
 * 1.2.0 - New actions Search Threats, Get Devices Affected by Threat
 * 1.1.0 - New action Quarantine
 * 1.0.3 - Match official branding in plugin title

@@ -1142,6 +1142,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 6.0.2 - Fix in Comment Issue action where the Python module attributes were logged | Remove duplicate ConnectionTestException call from Connection Test
 * 6.0.1 - Update documentation to include supported Jira products
 * 6.0.0 - Update Create User, Delete User and Find Users to reflect [Jira Cloud API privacy changes](https://developer.atlassian.com/cloud/jira/platform/api-changes-for-user-privacy-announcement/) to support `accountId` | Fix issue in connection test where the error was logged but did not fail for users | Update connection schema to match the API key and username inputs
 * 5.0.0 - Fix user enumeration  in `Find Users` | Add example input | Update titles of Attachment Filename input in Attach Issue action and Poll Timeout input in New Issue trigger to match style

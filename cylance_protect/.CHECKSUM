@@ -16,6 +16,10 @@
 			"hash": "9d575fe6af1b20f93719c46dc7e41bf4"
 		},
 		{
+			"identifier": "search_agents/schema.py",
+			"hash": "8cfac83a4cf94f44e99346e4c4d824cf"
+		},
+		{
 			"identifier": "search_threat_agents/schema.py",
 			"hash": "8c07566de4cdf43e2f9062588b0a433e"
 		},
