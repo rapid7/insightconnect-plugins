@@ -1,7 +1,7 @@
 {
-	"spec": "c924e5e6944c82652a0b95a9c10fe602",
-	"manifest": "65fc05475e6773abe8052f3cf098c39f",
-	"setup": "a45b97d03c1572624efbc3f73d079b68",
+	"spec": "630bef47348e29a6ce5315171e0b7bca",
+	"manifest": "70a1a633852e6ea7b6f49bebf8705ec8",
+	"setup": "b33e45d11e953d451b43cf3d68740b05",
 	"schemas": [
 		{
 			"identifier": "parse_tap_alert/schema.py",
