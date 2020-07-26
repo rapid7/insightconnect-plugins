@@ -17,13 +17,6 @@ The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/
 
 ## Setup
 
-You must create a Custom Application by following this procedure from the CylancePROTECT console:
-
-1. Go to the Integrations tab on the Settings page
-2. Click "Add Application"
-3. Provide a name for the integration and choose the permissions related to the actions you want to use
-4. Copy and paste the Application ID, Application Secret, and Tenant ID (from the Integrations tab) into the connection
-
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -47,6 +40,89 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Update Agent Threat
+
+This action updates the status (waive or quarantine) of a convicted threat on a selected device.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|True|Device to update threat on. Accepts IP address, MAC address, hostname, or device ID|None|Example-Hostname|
+|quarantine_state|string|None|True|True to quarantine threat, false to waive threat|None|True|
+|threat_identifier|string|None|True|The threat to search for. The input should be a threat name, MD5 or SHA256 hash|None|9de5069c5afe602b2ea0a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "add_zones": [
+    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
+  ],
+  "agent": "Example-Hostname",
+  "policy": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
+  "remove_zones": [
+    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Return true if the threat was updated|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Update Agent
+
+This action adds or removes zones and/or updates the policy of a specific Console device resource belonging to a Tenant.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|add_zones|[]string|None|False|The list of zone identifiers which the device is to be assigned. The input should be an array of zone IDs|None|["1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
+|agent|string|None|True|Agent to update device information from. Accepts IP address, MAC address, hostname, or device ID|None|Example-Hostname|
+|policy|string|None|False|The unique identifier for the policy to assign to the device. Specify policy, or leave the string empty to remove the current policy from the device|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|
+|remove_zones|[]string|None|False|The list of zone identifiers from which the device is to be removed. The input should be an array of zone IDs|None|["1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
+
+Example input:
+
+```
+{
+  "add_zones": [
+    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
+  ],
+  "agent": "Example-Hostname",
+  "policy": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
+  "remove_zones": [
+    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Return true if the agent was updated|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Search Agents
 
