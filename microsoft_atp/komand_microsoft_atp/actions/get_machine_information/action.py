@@ -15,9 +15,11 @@ class GetMachineInformation(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         self.logger.info("Running...")
 
-        machine_id = params.get(Input.MACHINE_ID)
-
+        machine_id = self.connection.client.find_first_machine(params.get(Input.MACHINE)).get("id")
         self.logger.info(f"Attempting to get information for machine ID: {machine_id}")
-        response = self.connection.get_machine_information(machine_id)
 
-        return {Output.MACHINE: insightconnect_plugin_runtime.helper.clean(response)}
+        return {
+            Output.MACHINE: insightconnect_plugin_runtime.helper.clean(
+                self.connection.client.get_machine_information(machine_id)
+            )
+        }

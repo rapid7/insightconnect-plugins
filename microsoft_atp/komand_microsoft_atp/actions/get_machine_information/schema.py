@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    MACHINE_ID = "machine_id"
+    MACHINE = "machine"
     
 
 class Output:
@@ -21,15 +21,15 @@ class GetMachineInformationInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "machine_id": {
+    "machine": {
       "type": "string",
-      "title": "Machine ID",
-      "description": "Machine ID",
+      "title": "Machine",
+      "description": "Machine IP address, hostname and machine ID",
       "order": 1
     }
   },
   "required": [
-    "machine_id"
+    "machine"
   ]
 }
     """)

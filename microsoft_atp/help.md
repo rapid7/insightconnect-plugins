@@ -19,10 +19,10 @@ This plugin utilizes the [Microsoft ATP API](https://docs.microsoft.com/en-us/wi
 
 ## Setup
 
-This plugin uses the Windows Defender ATP API. It will use an Azure application to connect to the API and run 
-actions from InsightConnect. 
+This plugin uses the Windows Defender ATP API. It will use an Azure application to connect to the API and run
+actions from InsightConnect.
 
-For information on how to setup your application and assign permissions go here:  
+For information on how to setup your application and assign permissions go here:
 https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp
 
 The connection configuration accepts the following parameters:
@@ -55,13 +55,13 @@ This action is used to get details about a machine from its ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|machine_id|string|None|True|Machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 
 Example input:
 
 ```
 {
-  "machine_id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
 }
 ```
 
@@ -154,7 +154,7 @@ This action is used to isolate a machine from the network, but keep the connecti
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|None|True|Comment to associate with the isolation action|None|Isolated by InsightConnect|
 |isolation_type|string|None|True|Type of isolation to perform on target machine|['Full', 'Selective']|Full|
-|machine_id|string|None|True|Machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 
 Example input:
 
@@ -162,7 +162,7 @@ Example input:
 {
   "comment": "Isolated by InsightConnect",
   "isolation_type": "Full",
-  "machine_id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
 }
 ```
 
@@ -198,14 +198,14 @@ This action is used to restore network connectivity to a machine.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|None|True|Comment to associate with the unisolate action|None|Unisolated by InsightConnect|
-|machine_id|string|None|True|Machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 
 Example input:
 
 ```
 {
   "comment": "Unisolated by InsightConnect",
-  "machine_id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
 }
 ```
 
@@ -241,7 +241,7 @@ This action is used to stop the execution of a file on a machine and delete it.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|None|True|Comment to associate with the stop and quarantine action|None|InsightConnect has stopped a file.|
-|machine_id|string|None|True|Machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 |sha1|string|None|True|SHA1 hash of the file to stop and quarantine on the machine|None|ad0c0f2fa80411788e81a4567d1d8758b83cd76e|
 
 Example input:
@@ -249,7 +249,7 @@ Example input:
 ```
 {
   "comment": "InsightConnect has stopped a file.",
-  "machine_id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
   "sha1": "ad0c0f2fa80411788e81a4567d1d8758b83cd76e"
 }
 ```
@@ -289,7 +289,7 @@ This action is used to initiate a Windows Defender antivirus scan on a machine.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|None|True|Comment to associate with the antivirus scan action|None|InsightConnect has started an antivirus scan.|
-|machine_id|string|None|True|Machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 |scan_type|string|None|True|The type of antivirus scan to run|['Full', 'Quick']|Full|
 
 Example input:
@@ -297,7 +297,7 @@ Example input:
 ```
 {
   "comment": "InsightConnect has started an antivirus scan.",
-  "machine_id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
   "scan_type": "Full"
 }
 ```
@@ -370,10 +370,10 @@ Example output:
 
 #### Get Alerts Matching Key
 
-This trigger is used to get alerts that match a given key to its value. 
+This trigger is used to get alerts that match a given key to its value.
 
 The valid key names are shown in the example output for this action. The key names and values must be exact case when
-looking for a match. 
+looking for a match.
 
 ##### Input
 
@@ -387,7 +387,7 @@ Example input:
 
 ```
 {
-  "key": "assignedTo", 
+  "key": "assignedTo",
   "value": "Automation",
   "frequency": 10
 }
@@ -495,6 +495,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.0.0 - Move connection functions to their own util class | Changed `Exception` to `PluginException` | Added error handling around "Action already in progress" state in Isolate Machine, Unisolate Machine, Stop and Quarantine File, and Run Antivirus Scan actions | Rename `machine_id` to `machine` in machine-related actions to support hostnames and IP addresses in addition to machine IDs.
 * 2.0.0 - Update to refactor connection and actions
 * 1.5.1 - New spec and help.md format for the Extension Library
 * 1.5.0 - Fix issue where triggers always returned a blank payload

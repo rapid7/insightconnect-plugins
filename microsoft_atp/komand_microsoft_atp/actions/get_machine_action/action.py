@@ -18,5 +18,5 @@ class GetMachineAction(insightconnect_plugin_runtime.Action):
         action_id = params.get("action_id")
 
         self.logger.info("Attempting to get action for action ID: " + action_id)
-        response = self.connection.get_machine_action(action_id)
+        response = self.connection.client.get_machine_action(action_id)
         return {"machine_action_response": insightconnect_plugin_runtime.helper.clean(response)}

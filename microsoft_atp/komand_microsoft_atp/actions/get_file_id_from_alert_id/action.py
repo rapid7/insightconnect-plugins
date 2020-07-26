@@ -17,7 +17,7 @@ class GetFileIdFromAlertId(insightconnect_plugin_runtime.Action):
         alert_id = params.get(Input.ALERT_ID)
         self.logger.info("Looking for alerts matching ID: " + alert_id)
 
-        file_payload = self.connection.get_files_from_id(alert_id)
+        file_payload = self.connection.client.get_files_from_id(alert_id)
         files = file_payload.get("value")
 
         return {Output.FILE_LIST: insightconnect_plugin_runtime.helper.clean(files)}
