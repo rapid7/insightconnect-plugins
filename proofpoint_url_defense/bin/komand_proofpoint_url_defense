@@ -6,7 +6,7 @@ from komand_proofpoint_url_defense import connection, actions, triggers
 
 Name = "Proofpoint URL Defense"
 Vendor = "rapid7"
-Version = "2.0.0"
+Version = "1.2.1"
 Description = "Decode Proofpoint encoded URLs"
 
 

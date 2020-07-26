@@ -27,15 +27,15 @@ This action is used to take a Proofpoint URL and decode it to the original URL.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|encoded_url|string|None|True|Proofpoint encoded URL or URL parameters e.g http-3A__www.example.org_url&d=BwdwBAg&c=TIwfCwdwWnrHy3gMA_uzZorHPsT2wfwvKrwfU|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|encoded_url|string|None|True|Proofpoint encoded URL or URL parameters e.g http-3A__www.example.org_url&d=BwdwBAg&c=TIwfCwdwWnrHy3gMA_uzZorHPsT2wfwvKrwfU|None|http-3A__www.example.org_url&d=BwdwBAg&c=TIwfCwdwWnrHy3gMA_uzZorHPsT2wfwvKrwf|
 
 Example input:
 
 ```
 {
-  "encoded_url": "http-3A__www.example.org_url&d=BwdwBAg&c=TIwfCwdwWnrHy3gMA_uzZorHPsT2wfwvKrwf"
+  "encoded_url": "http-3A__www.example.org_url\u0026d=BwdwBAg\u0026c=TIwfCwdwWnrHy3gMA_uzZorHPsT2wfwvKrwf"
 }
 ```
 
@@ -70,7 +70,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.0.0 - Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Update plugin.spec.yaml to include `cloud_ready`
+* 1.2.1 - Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Update plugin.spec.yaml to include `cloud_ready`
 * 1.2.0 - Update to URL Decode to add `decoded` as an output variable 
 * 1.1.0 - Update to URL Decode action to add support for v3 links
 * 1.0.1 - New spec and help.md format for the Extension Library
