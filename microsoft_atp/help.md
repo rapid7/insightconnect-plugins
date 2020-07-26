@@ -19,10 +19,10 @@ This plugin utilizes the [Microsoft ATP API](https://docs.microsoft.com/en-us/wi
 
 ## Setup
 
-This plugin uses the Windows Defender ATP API. It will use an Azure application to connect to the API and run 
-actions from InsightConnect. 
+This plugin uses the Windows Defender ATP API. It will use an Azure application to connect to the API and run
+actions from InsightConnect.
 
-For information on how to setup your application and assign permissions go here:  
+For information on how to setup your application and assign permissions go here:
 https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp
 
 The connection configuration accepts the following parameters:
@@ -370,10 +370,10 @@ Example output:
 
 #### Get Alerts Matching Key
 
-This trigger is used to get alerts that match a given key to its value. 
+This trigger is used to get alerts that match a given key to its value.
 
 The valid key names are shown in the example output for this action. The key names and values must be exact case when
-looking for a match. 
+looking for a match.
 
 ##### Input
 
@@ -387,7 +387,7 @@ Example input:
 
 ```
 {
-  "key": "assignedTo", 
+  "key": "assignedTo",
   "value": "Automation",
   "frequency": 10
 }
