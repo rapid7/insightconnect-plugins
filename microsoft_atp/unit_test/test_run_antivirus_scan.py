@@ -32,7 +32,7 @@ class TestRunAntivirusScan(TestCase):
         test_action.logger = log
 
         try:
-            with open("../tests/run_antivirus_scan_bad_in_progress.json") as file:
+            with open("../tests/run_antivirus_scan.json") as file:
                 test_json = json.loads(file.read()).get("body")
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
