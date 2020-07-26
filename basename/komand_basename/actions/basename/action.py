@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 import os
 from .schema import BasenameInput, BasenameOutput
 
 
-class Basename(komand.Action):
+class Basename(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import FilterBytesInput, FilterBytesOutput, Input, Output, Component
 # Custom imports below
 import base64
 from komand_csv.util import utils
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class FilterBytes(komand.Action):
+class FilterBytes(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
