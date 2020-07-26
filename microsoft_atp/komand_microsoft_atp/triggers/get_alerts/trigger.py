@@ -18,7 +18,7 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
         frequency = params.get(Input.FREQUENCY, 10)
 
         # Set a baseline for the time to start looking for alerts.
-        initial_results = self.connection.get_all_alerts(query_parameters="?$orderby=alertCreationTime+desc&$top=1")
+        initial_results = self.connection.client.get_all_alerts(query_parameters="?$orderby=alertCreationTime+desc&$top=1")
         all_results = initial_results.json()
 
         if len(all_results.get("value")):
@@ -34,7 +34,7 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
 
             self.logger.info("Looking for new alerts.")
             self.logger.info(f"Query params:{query_params}")
-            current_results_result = self.connection.get_all_alerts(query_parameters=query_params)
+            current_results_result = self.connection.client.get_all_alerts(query_parameters=query_params)
             current_results = current_results_result.json()
 
             # If new results available, return each of them, update the time we saw the latest result
