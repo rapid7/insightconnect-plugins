@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import UpdateAgentThreatInput, UpdateAgentThreatOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 # Custom imports below
 
 
@@ -13,10 +14,36 @@ class UpdateAgentThreat(insightconnect_plugin_runtime.Action):
                 output=UpdateAgentThreatOutput())
 
     def run(self, params={}):
-        agent = params.get(Input.AGENT)
-        threat = params.get(Input.THREAT_IDENTIFIER)
-        quarantine = params.get(Input.QUARANTINE_STATE)
+        threat_identifier = params.get(Input.THREAT_IDENTIFIER)
+        threats = self.connection.client.search_threats([threat_identifier])
 
-        # TODO check api.py get agent details. 
+        if len(threats) > 1:
+            self.logger.info(
+                f"Multiple threats found that matched the query: {threat_identifier}."
+                "We will only act upon the first match"
+            )
 
-        return {}
+        if params.get(Input.QUARANTINE_STATE):
+            payload = {
+                "threat_id": threats[0].get('sha256'),
+                "event": "Quarantine"
+            }
+        else:
+            payload = {
+                "threat_id": threats[0].get('sha256'),
+                "event": "Waive"
+            }
+
+        errors = self.connection.client.update_agent_threat(
+            self.connection.client.get_agent_details(params.get(Input.AGENT)).get('id'),
+            payload
+        )
+
+        if len(errors) != 0:
+            raise PluginException(cause='The response from the CylancePROTECT API was not in the correct format.',
+                                  assistance='Contact support for help. See log for more details',
+                                  data=errors)
+
+        return {
+            Output.SUCCESS: True
+        }

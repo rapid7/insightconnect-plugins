@@ -74,6 +74,15 @@ class CylanceProtectAPI:
     def get_threat_devices(self, sha256, page, page_size):
         return self._call_api("GET", f"{self.url}/threats/v2/{sha256}/devices?page={page}?page_size={page_size}", None)
 
+    def update_agent_threat(self, agent_id, payload):
+        return self._call_api("POST", f"{self.url}/devices/v2/{agent_id}/threats", "threat:update", json_data=payload)
+
+    def update_agent(self, agent_id, payload):
+        return self._call_api("PUT", f"{self.url}/devices/v2/{agent_id}", "device:update", json_data=payload)
+
+    def get_policies(self, page):
+        return self._call_api("GET", f"{self.url}/policies/v2?page={page}", "policy:list")
+
     def _call_api(self, method, url, scope, params=None, json_data=None):
         token = self.generate_token(scope)
         return self._make_request(
@@ -93,7 +102,7 @@ class CylanceProtectAPI:
 
             if response.status_code == 400:
                 raise PluginException(cause="Bad request.",
-                                      assistance="The Tenant ID cannot be retrieved from the JWT token.")
+                                      data=response.text)
             if response.status_code == 401:
                 raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
             if response.status_code == 403:
@@ -109,7 +118,8 @@ class CylanceProtectAPI:
             if response.status_code == 409:
                 raise PluginException(
                     cause="Conflict.",
-                    assistance="Request made conflicts with an existing resource."
+                    assistance="Request made conflicts with an existing resource.",
+                    data=response.text
                 )
             if response.status_code >= 500:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR)

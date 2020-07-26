@@ -58,7 +58,7 @@ This action adds or removes zones and/or updates the policy of a specific Consol
 |----|----|-------|--------|-----------|----|-------|
 |add_zones|[]string|None|False|The list of zone identifiers which the device is to be assigned. The input should be an array of zone IDs|None|["1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
 |agent|string|None|True|Agent to update device information from. Accepts IP address, MAC address, hostname, or device ID|None|Example-Hostname|
-|policy|string|None|True|The unique identifier for the policy to assign to the device. Specify policy, or leave the string empty to remove the current policy from the device|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|
+|policy|string|None|False|The unique identifier for the policy to assign to the device. Specify policy, or leave the string empty to remove the current policy from the device|None|1abc234d-5efa-6789-bcde-0f1abcde23f5|
 |remove_zones|[]string|None|False|The list of zone identifiers from which the device is to be removed. The input should be an array of zone IDs|None|["1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
 
 Example input:
@@ -85,6 +85,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Update Agent Threat
@@ -123,6 +126,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Search Threats

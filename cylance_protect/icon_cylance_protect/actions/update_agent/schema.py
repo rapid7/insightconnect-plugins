@@ -56,8 +56,7 @@ class UpdateAgentInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "agent",
-    "policy"
+    "agent"
   ]
 }
     """)
