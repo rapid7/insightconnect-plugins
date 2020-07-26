@@ -125,6 +125,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.0 - Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Update plugin.spec.yaml to include `cloud_ready`
 * 1.0.6 - Parsing out GUID of the message into the output type
 * 1.0.5 - Parsing out the View Threat Details link from emails to its own value
 * 1.0.4 - New spec and help.md format for the Extension Library
