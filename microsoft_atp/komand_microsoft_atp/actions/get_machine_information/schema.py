@@ -115,8 +115,8 @@ class GetMachineInformationOutput(insightconnect_plugin_runtime.Output):
         },
         "machineTags": {
           "type": "array",
-          "title": "Machinetags",
-          "description": "Machinetags",
+          "title": "Machine Tags",
+          "description": "Machine Tags",
           "items": {
             "type": "string"
           },

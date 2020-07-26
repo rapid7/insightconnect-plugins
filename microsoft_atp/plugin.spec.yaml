@@ -318,9 +318,9 @@ types:
        description: "Version"
        required: false
      machineTags:
-       title: "Machinetags"
+       title: "Machine Tags"
        type: '[]string'
-       description: "Machinetags"
+       description: "Machine Tags"
        required: false
   machine_action:
      creationDateTimeUtc:
