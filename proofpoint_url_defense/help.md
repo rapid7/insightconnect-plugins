@@ -1,6 +1,6 @@
 # Description
 
-[Proofpoint URL Defense](https://www.proofpoint.com/us) is a service designed to handle emails that contain 
+[Proofpoint URL Defense](https://www.proofpoint.com/us) is a service designed to handle emails that contain
 malicious URLs. This plugin decodes URLs that are encoded by Proofpoints URL Defense service using ppdecode.
 
 # Key Features
@@ -55,7 +55,6 @@ Example output:
 }
 ```
 
-
 ### Triggers
 
 _This plugin does not contain any triggers._
@@ -71,7 +70,7 @@ This plugin does not contain any troubleshooting information.
 # Version History
 
 * 1.2.1 - Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Update plugin.spec.yaml to include `cloud_ready`
-* 1.2.0 - Update to URL Decode to add `decoded` as an output variable 
+* 1.2.0 - Update to URL Decode to add `decoded` as an output variable
 * 1.1.0 - Update to URL Decode action to add support for v3 links
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Bug fix with decode parsing
