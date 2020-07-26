@@ -158,7 +158,7 @@ class WindwosDefenderATP_API:
             if response.status_code == 400 and '"message":"Action is already in progress"' in response.text:
                 self.logger.info("Action is already in progress")
                 return {
-                    "status": "Action is already in progress"
+                    "status": "InProgress"
                 }
             if response.status_code >= 400:
                 raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
