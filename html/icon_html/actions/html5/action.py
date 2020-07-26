@@ -1,12 +1,12 @@
-import komand
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 import pypandoc
 import base64
 import re
 from .schema import Html5Input, Html5Output
 
 
-class Html5(komand.Action):
+class Html5(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name='html5',

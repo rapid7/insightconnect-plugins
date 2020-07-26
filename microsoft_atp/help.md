@@ -19,10 +19,10 @@ This plugin utilizes the [Microsoft ATP API](https://docs.microsoft.com/en-us/wi
 
 ## Setup
 
-This plugin uses the Windows Defender ATP API. It will use an Azure application to connect to the API and run 
-actions from InsightConnect. 
+This plugin uses the Windows Defender ATP API. It will use an Azure application to connect to the API and run
+actions from InsightConnect.
 
-For information on how to setup your application and assign permissions go here:  
+For information on how to setup your application and assign permissions go here:
 https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp
 
 The connection configuration accepts the following parameters:
@@ -370,10 +370,10 @@ Example output:
 
 #### Get Alerts Matching Key
 
-This trigger is used to get alerts that match a given key to its value. 
+This trigger is used to get alerts that match a given key to its value.
 
 The valid key names are shown in the example output for this action. The key names and values must be exact case when
-looking for a match. 
+looking for a match.
 
 ##### Input
 
@@ -387,6 +387,8 @@ Example input:
 
 ```
 {
+  "key": "assignedTo",
+  "value": "Automation",
   "frequency": 10
 }
 ```
@@ -494,7 +496,7 @@ This plugin does not contain any troubleshooting information.
 # Version History
 
 * 4.0.0 - Add custom type to output in action `Get Machine Information`
-* 3.0.0 - Move connection functions to their own util class | Changed `Exception` to `PluginException` | Added error handling to `Action already in progress` in `Isolate Machine`, `Unisolate Machine`, `Stop and Quarantine File` and `Run Antivirus Scan` action | Update input in machine related actions
+* 3.0.0 - Move connection functions to their own util class | Changed `Exception` to `PluginException` | Added error handling around "Action already in progress" state in Isolate Machine, Unisolate Machine, Stop and Quarantine File, and Run Antivirus Scan actions | Rename `machine_id` to `machine` in machine-related actions to support hostnames and IP addresses in addition to machine IDs.
 * 2.0.0 - Update to refactor connection and actions
 * 1.5.1 - New spec and help.md format for the Extension Library
 * 1.5.0 - Fix issue where triggers always returned a blank payload

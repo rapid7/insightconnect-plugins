@@ -158,7 +158,7 @@ class WindwosDefenderATP_API:
             if response.status_code == 400 and '"message":"Action is already in progress"' in response.text:
                 self.logger.info("Action is already in progress")
                 return {
-                    "status": "Action is already in progress"
+                    "status": "InProgress"
                 }
             if response.status_code >= 400:
                 raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
@@ -167,8 +167,6 @@ class WindwosDefenderATP_API:
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except json.decoder.JSONDecodeError as e:
-            self.logger.info(f"Invalid json: {e}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
         except requests.exceptions.HTTPError as e:
-            self.logger.info(f"Call to Any Run failed: {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
