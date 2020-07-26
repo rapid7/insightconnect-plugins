@@ -493,7 +493,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 3.0.0 - Move connection functions to their own util class | Changed `Exception` to `PluginException` | Added error handling to `Action already in progress` in `Isolate Machine`, `Unisolate Machine`, `Stop and Quarantine File` and `Run Antivirus Scan` action | Update input in machine related actions
+* 3.0.0 - Move connection functions to their own util class | Changed `Exception` to `PluginException` | Added error handling to `Action already in progress` in Isolate Machine, Unisolate Machine, Stop and Quarantine File, and Run Antivirus Scan action | Rename `machine_id` to `machine` in machine-related actions to support hostnames and IP addresses in addition to machine IDs.
 * 2.0.0 - Update to refactor connection and actions
 * 1.5.1 - New spec and help.md format for the Extension Library
 * 1.5.0 - Fix issue where triggers always returned a blank payload
