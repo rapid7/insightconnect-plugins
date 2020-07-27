@@ -13,8 +13,8 @@ Description = "Get information about alerts, assets, policies, and more"
 class ICONThreatstack(insightconnect_plugin_runtime.Plugin):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name=Name,
-                vendor=Vendor,
+                name=Name, 
+                vendor=Vendor, 
                 version=Version,
                 description=Description,
                 connection=connection.Connection()
