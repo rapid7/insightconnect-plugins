@@ -5,15 +5,16 @@ import requests
 
 
 class ApiConnection():
-    def __init__(self, api_key, org_key, region_string, logger):
+    def __init__(self, api_key, region_string, logger):
         self.api_key = api_key
-        self.org_key = org_key
         self.logger = logger
-
         self.endpoint = self._setup_endpoint(region_string)
 
         self.session = requests.Session()
         self.session.headers = self._get_headers()
+
+        self.org_key = self._get_org_key()
+        self.logger.info(f"Recieved org key: ********-****-****-****-*******{self.org_key[-5:]}")
 
     def get_agent(self, agent_input):
         agent_type = agent_typer.get_agent_type(agent_input)
@@ -108,6 +109,20 @@ class ApiConnection():
     #################
     # Private Methods
     #################
+
+    def _get_org_key(self):
+        """
+        Get the org key from GraphQL
+
+        :return: String
+        """
+
+        payload = {
+            "query": "{ organizations(first: 1) { edges { node { id name } } } }"
+        }
+        result_object = self._post_payload(payload)
+        self.logger.info("Organization ID query complete.")
+        return result_object.get("data").get("organizations").get("edges")[0].get("node").get("id")
 
     def _get_headers(self):
         """

@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="rapid7_insight_agent-rapid7-plugin",
       version="1.0.0",
-      description="Investigate and mitigate vulnerabilities across your organization using the power of the Insight Agent",
+      description="Using the Insight Agent plugin from InsightConnect, you can quarantine, unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices across your organization.",
       author="rapid7",
       author_email="",
       url="",

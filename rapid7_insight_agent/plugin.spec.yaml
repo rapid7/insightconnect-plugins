@@ -114,12 +114,6 @@ connection:
     type: credential_secret_key
     example: a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99
     required: true
-  org_id:
-    title: Organization ID
-    description: Organization ID
-    type: credential_secret_key
-    example: 2cg99z6y-795n-7bzf-hj67-12355h554974
-    required: true
   region:
     title: Region
     description: Region

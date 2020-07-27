@@ -1,7 +1,7 @@
 {
-	"spec": "9864b4bb3a19f799a85e9e125f993cae",
-	"manifest": "ed5c5ce160b380e1a4bc21d857c2b3cd",
-	"setup": "83f3ec04295ae11f49054fecd98708e2",
+	"spec": "1bf25fd26869dc386b7142dd2770000e",
+	"manifest": "1f185796d64409ce3313a593b3a9de2a",
+	"setup": "b8296d0a6565af82f28ce65ea4364369",
 	"schemas": [
 		{
 			"identifier": "check_agent_status/schema.py",
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "b4e5ec17b5c75d044b29f4327c46299e"
+			"hash": "77319d2ab31eb12d3b3fc1589d56aae6"
 		}
 	]
 }

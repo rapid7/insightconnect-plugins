@@ -21,10 +21,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         # Setup region
         api_key = params.get(Input.API_KEY).get("secretKey")
-        org_key = params.get(Input.ORG_ID).get("secretKey")
+        # org_key = params.get(Input.ORG_ID).get("secretKey")
         region_string = params.get(Input.REGION)
 
-        self.api = ApiConnection(api_key, org_key, region_string, self.logger)
+        self.api = ApiConnection(api_key, region_string, self.logger)
 
         self.logger.info("Setup Complete")
 

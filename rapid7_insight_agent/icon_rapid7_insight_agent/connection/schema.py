@@ -5,7 +5,6 @@ import json
 
 class Input:
     API_KEY = "api_key"
-    ORG_ID = "org_id"
     REGION = "region"
     
 
@@ -21,12 +20,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "User or Organization Key from the Insight Platform",
       "order": 1
     },
-    "org_id": {
-      "$ref": "#/definitions/credential_secret_key",
-      "title": "Organization ID",
-      "description": "Organization ID",
-      "order": 2
-    },
     "region": {
       "type": "string",
       "title": "Region",
@@ -39,12 +32,11 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
         "Australia",
         "Japan"
       ],
-      "order": 3
+      "order": 2
     }
   },
   "required": [
     "api_key",
-    "org_id",
     "region"
   ],
   "definitions": {

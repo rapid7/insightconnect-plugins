@@ -16,28 +16,11 @@ The [Insight Agent] (https://docs.rapid7.com/insight-agent/overview/) collects l
 
 ## Setup
 
-Get your Platform key by following the instructions here: [Platform API Key](https://docs.rapid7.com/insight/managing-platform-api-keys/)
-
-Get your Organization ID by
-1. Log into the Platform
-2. Click on the Plug icon on the left nav to go to Data Collection Management
-3. In the top, next to Data Collection Management select the organization you would like to manage with this plugin
-4. Get the Organization ID from the URL shown in the browser. For example if your URL is this: 
-
-`https://insight.rapid7.com/platform#/datacollection/2cg99z6y-795n-7bzf-hj67-12355h554974/agent-management`
-
-grab the part that looks like this:
-
-`2cg99z6y-795n-7bzf-hj67-12355h554974`
-
-That is your Organization ID. 
-
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|User or Organization Key from the Insight Platform|None|a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99|
-|org_id|credential_secret_key|None|True|Organization ID|None|2cg99z6y-795n-7bzf-hj67-12355h554974|
 |region|string|United States|True|Region|['United States', 'Europe', 'Canada', 'Australia', 'Japan']|United States|
 
 Example input:
@@ -45,7 +28,6 @@ Example input:
 ```
 {
   "api_key": "a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99",
-  "org_id": "2cg99z6y-795n-7bzf-hj67-12355h554974",
   "region": "United States"
 }
 ```
