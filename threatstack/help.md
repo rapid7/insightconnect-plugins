@@ -32,6 +32,12 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
+{
+  "api_key": "23c71eaadfdde87bcfae85cefedb528f0e556c92463b87c3674271d65f00fb3f",
+  "org_id": "25cd88bd50b9ff3822aabd88",
+  "timeout": 120,
+  "user_id": "9bb2ad3aeb246c7d145056e7"
+}
 ```
 
 ## Technical Details
@@ -52,6 +58,10 @@ This action is used to get a rule.
 Example input:
 
 ```
+{
+  "rule_id": "1bbc84ed9-17db-18cd-1937-1947ebd910a2",
+  "ruleset_id": "1947cbe9-1c8e-11e9-91be-18cbed810a82"
+}
 ```
 
 ##### Output
@@ -64,7 +74,32 @@ Example output:
 
 ```
 {
-  "rule": {}
+  "rule": {
+    "id": "1bbc84ed9-17db-18cd-1937-1947ebd910a2",
+    "rulesetId": "1947cbe9-1c8e-11e9-91be-18cbed810a82",
+    "name": "User: Sysctl",
+    "type": "Host",
+    "createdAt": "2019-09-23T15:02:25.924Z",
+    "updatedAt": "2020-04-27T21:50:33.549Z",
+    "title": "User: Sysctl : {{exe}} run by {{user}} with arguments {{arguments}}",
+    "severityOfAlerts": 3,
+    "alertDescription": "Monitoring Sysctl",
+    "aggregateFields": [
+      "user",
+      "exe",
+      "arguments"
+    ],
+    "filter": "command = \"sysctl\"",
+    "window": 86400,
+    "threshold": 1,
+    "suppressions": [
+      "user = \"root\" and exe = \"/sbin/sysctl\" and arguments = \"/sbin/sysctl\" and agent_id = \"dfe3cc18-12c7-4df3-aa95-4fb4ff00f533\"",
+      "user = \"root\" and exe = \"/sbin/sysctl\" and arguments = \"/sbin/sysctl\" and agent_id=\"135ab463-95c8-46d1-b58f-f7922d6a7765\"",
+      "cwd starts_with \"/opt/rapid7\" or cwd starts_with \"/home/insightvm\" or user starts_with \"insightvm\"",
+      "(user = \"root\" and exe like \"/sbin/sysctl\" and arguments like \"sysctl -n\") and (arguments like \"net.ipv4.tcp_keepalive_intvl\" or arguments like \"vm.dirty_background_ratio\" or arguments like \"vm.dirty_ratio\" or arguments like \"vm.swappiness\" or arguments like \"vm.dirty_expire_centisecs\" or arguments like \"net.ipv4.tcp_keepalive_time\" or arguments like \"net.ipv4.tcp_keepalive_probes\" or arguments like \"net.ipv4.ip_local_port_range\" or arguments like \"net.ipv4.tcp_fin_timeout\" or arguments like \"net.ipv4.tcp_tw_reuse\" or arguments like \"net.ipv4.ip_default_ttl\")"
+    ],
+    "enabled": true
+  }
 }
 ```
 
@@ -82,6 +117,10 @@ This action is used to get agent data.
 Example input:
 
 ```
+{
+  "end": "2018-01-01",
+  "start": "2018-01-01"
+}
 ```
 
 ##### Output
@@ -110,6 +149,9 @@ This action is used to get events which contributed to an alert.
 Example input:
 
 ```
+{
+  "alert_id": "183d125e-b7b6-47f6-b872-9242df0f21f3"
+}
 ```
 
 ##### Output
@@ -123,141 +165,77 @@ Example output:
 
 ```
 {
-  "count": 11,
   "events": [
     {
-      "eventSource": "ecr.amazonaws.com",
-      "eventType": "AwsApiCall",
-      "created_at": 1595559480000,
-      "errorCode": "AccessDenied",
-      "mfaUsed": false,
-      "profile_id": "5d52ac59c08db5d269aa3108",
-      "userType": "AssumedRole",
-      "agent_id": "5d52ac59c08db5d269aa3108",
-      "_id": "0e36a925-a612-4b4a-9714-35eaaf9b9964",
-      "errorMessage": "User: arn:aws:sts::113901497002:assumed-role/terra...",
-      "eventClass": "CloudtrailEvent",
-      "eventID": "0e36a925-a612-4b4a-9714-35eaaf9b9964",
-      "MFAUsed": "false",
-      "eventName": "BatchGetImage",
-      "feed": "cloudtrail",
-      "ip": "AWS Internal",
-      "recipientAccountId": "113901497002",
-      "eventId": "0e36a925-a612-4b4a-9714-35eaaf9b9964",
-      "error": "AccessDenied",
-      "recipientAccountID": "113901497002",
-      "requestID": "832d1700-3e62-4021-83f0-ca1fc05d663a",
-      "tsEventType": "cloudtrail",
-      "accountId": "113901497002",
-      "eventVersion": "1.05",
-      "organizationId": "5babc3a62d1d16f529050c86",
-      "userIdentity": {
-        "principalId": "AROAIRC6TNAC6P32APTLG:i-053374f60a4d79830",
-        "sessionContext": {
-          "attributes": {
-            "creationDate": "2020-07-24T00:16:39Z",
-            "mfaAuthenticated": "false"
-          },
-          "ec2RoleDelivery": "1.0",
-          "sessionIssuer": {
-            "type": "Role",
-            "userName": "terraform-eks-k8s-node",
-            "accountId": "113901497002",
-            "arn": "arn:aws:iam::113901497002:role/terraform-eks-k8s-n...",
-            "principalId": "AROAIRC6TNAC6P32APTLG"
-          },
-          "webIdFederationData": {}
-        },
-        "type": "AssumedRole",
-        "accessKeyId": "ASIAJJRY65OGGO2NCTEQ",
-        "accountId": "113901497002",
-        "arn": "arn:aws:sts::113901497002:assumed-role/terraform-e...",
-        "invokedBy": "AWS Internal"
-      },
-      "eventSourceType": "AwsApiCall",
-      "eventTime": 1595559480000,
-      "profileId": "5d52ac59c08db5d269aa3108",
       "timestamp": 1595559480000,
-      "user": "i-053374f60a4d79830",
-      "arnRole": "assumed-role/terraform-eks-k8s-node/i-053374f60a4d...",
-      "agentId": "5d52ac59c08db5d269aa3108",
-      "awsRegion": "us-east-1",
+      "_id": "92c92b48-064f-4060-b1d2-b240a96c31cd",
       "event_type": "cloudtrail",
-      "ingestTime": 1595560287588,
-      "organization_id": "5babc3a62d1d16f529050c86",
-      "region": "us-east-1",
-      "requestId": "832d1700-3e62-4021-83f0-ca1fc05d663a",
-      "accessKey": "ASIAJJRY65OGGO2NCTEQ",
-      "userAgent": "AWS Internal",
-      "sourceIPAddress": "AWS Internal"
-    },
-    {
-      "requestID": "a4f7c208-541e-4206-beb8-34b02cedb663",
-      "created_at": 1595559174000,
-      "errorCode": "AccessDenied",
-      "eventType": "AwsApiCall",
-      "eventVersion": "1.05",
-      "event_type": "cloudtrail",
-      "ingestTime": 1595559811447,
-      "mfaUsed": false,
-      "accountId": "113901497002",
-      "eventID": "2f121599-941b-433e-a0c9-a3179ecca3be",
-      "eventSourceType": "AwsApiCall",
-      "ip": "AWS Internal",
-      "organizationId": "5babc3a62d1d16f529050c86",
-      "recipientAccountId": "113901497002",
-      "region": "us-east-1",
-      "userAgent": "AWS Internal",
-      "errorMessage": "User: arn:aws:sts::113901497002:assumed-role/terra...",
-      "accessKey": "ASIAJJRY65OGGO2NCTEQ",
-      "recipientAccountID": "113901497002",
-      "userType": "AssumedRole",
-      "MFAUsed": "false",
-      "eventSource": "ecr.amazonaws.com",
-      "organization_id": "5babc3a62d1d16f529050c86",
-      "timestamp": 1595559174000,
-      "arnRole": "assumed-role/terraform-eks-k8s-node/i-053374f60a4d...",
-      "error": "AccessDenied",
-      "eventId": "2f121599-941b-433e-a0c9-a3179ecca3be",
-      "eventName": "BatchGetImage",
-      "profileId": "5d52ac59c08db5d269aa3108",
-      "sourceIPAddress": "AWS Internal",
+      "organization_id": "8d8460c76ca30b6f4e9f429b",
       "user": "i-053374f60a4d79830",
-      "agent_id": "5d52ac59c08db5d269aa3108",
-      "profile_id": "5d52ac59c08db5d269aa3108",
-      "userIdentity": {
-        "arn": "arn:aws:sts::113901497002:assumed-role/terraform-e...",
-        "invokedBy": "AWS Internal",
-        "principalId": "AROAIRC6TNAC6P32APTLG:i-053374f60a4d79830",
-        "sessionContext": {
-          "attributes": {
-            "creationDate": "2020-07-24T00:16:39Z",
-            "mfaAuthenticated": "false"
-          },
-          "ec2RoleDelivery": "1.0",
-          "sessionIssuer": {
-            "type": "Role",
-            "userName": "terraform-eks-k8s-node",
-            "accountId": "113901497002",
-            "arn": "arn:aws:iam::113901497002:role/terraform-eks-k8s-n...",
-            "principalId": "AROAIRC6TNAC6P32APTLG"
-          },
-          "webIdFederationData": {}
-        },
-        "type": "AssumedRole",
-        "accessKeyId": "ASIAJJRY65OGGO2NCTEQ",
-        "accountId": "113901497002"
-      },
-      "eventTime": 1595559174000,
-      "agentId": "5d52ac59c08db5d269aa3108",
-      "awsRegion": "us-east-1",
+      "agent_id": "68ecb9589e26d51f48d109ff",
       "eventClass": "CloudtrailEvent",
-      "feed": "cloudtrail",
-      "requestId": "a4f7c208-541e-4206-beb8-34b02cedb663",
-      "tsEventType": "cloudtrail",
-      "_id": "2f121599-941b-433e-a0c9-a3179ecca3be"
+      "miscellaneous": {
+        "errorMessage": "User: arn:aws:sts::assumed-role/terraform-eks-k8s-node/i is not authorized to perform: ecr:BatchGetImage on resource: arn:aws:ecr:us-east-1:repository/pygrate",
+        "eventId": "2ce0c765-7607-47c6-a8f2-1cc629ea7e75",
+        "tsEventType": "cloudtrail",
+        "eventType": "AwsApiCall",
+        "userIdentity": {
+          "arn": "arn:aws:sts::assumed-role/terraform-eks-k8s-node/i",
+          "principalId": "AROBCAB8DIQP7TE2APDPT:i-053374f60a4d79830",
+          "accessKeyId": "ASIACCRJ43OTPOVNEIFG",
+          "accountId": "987047183047",
+          "invokedBy": "AWS Internal",
+          "type": "AssumedRole",
+          "sessionContext": {
+            "sessionIssuer": {
+              "arn": "arn:aws:iam::946856184103:role/terraform-eks-k8s-node",
+              "principalId": "AROBCAB8DIQP7TE2APDPT",
+              "accountId": "987047183047",
+              "type": "Role",
+              "userName": "terraform-eks-k8s-node"
+            },
+            "webIdFederationData": {},
+            "attributes": {
+              "mfaAuthenticated": "false",
+              "creationDate": "2020-07-24T00:16:39Z"
+            },
+            "ec2RoleDelivery": "1.0"
+          }
+        },
+        "userAgent": "AWS Internal",
+        "mfaUsed": false,
+        "recipientAccountId": "987047183047",
+        "accountId": "987047183047",
+        "profile_id": "1193792bc073bdb479cbe1846",
+        "eventVersion": "1.05",
+        "feed": "cloudtrail",
+        "eventTime": 1595559480000,
+        "created_at": 1595559480000,
+        "userType": "AssumedRole",
+        "eventID": "adfe635d-7a8a-4c0f-9091-0929d14d5018",
+        "ip": "AWS Internal",
+        "ingestTime": 1595560287588,
+        "sourceIPAddress": "AWS Internal",
+        "eventSource": "ecr.amazonaws.com",
+        "arnRole": "assumed-role/terraform-eks-k8s-node/i",
+        "MFAUsed": "false",
+        "organizationId": "9bbb85cc42d68e5f4f4ce5fe",
+        "requestID": "d649bec7-eaa2-4f4d-8fd1-ea549922510f",
+        "eventSourceType": "AwsApiCall",
+        "awsRegion": "us-east-1",
+        "eventName": "BatchGetImage",
+        "error": "AccessDenied",
+        "region": "us-east-1",
+        "errorCode": "AccessDenied",
+        "requestId": "a0881659-9658-4606-9254-056e03a638cf",
+        "recipientAccountID": "173457601846",
+        "profileId": "1ebde0c9301be18cbdeb5cbe7",
+        "accessKey": "ASIACCRJ43OTPOVNEIFG",
+        "agentId": "c34cb43e79948f0a4a6b3b2b"
+      }
     }
-  ]
+  ],
+  "count": 1
 }
 ```
 
@@ -275,6 +253,10 @@ This action is used to get alerts by filter.
 Example input:
 
 ```
+{
+  "end": "2018-01-01",
+  "start": "2018-01-01"
+}
 ```
 
 ##### Output
@@ -290,19 +272,19 @@ Example output:
 {
   "alert": {
     "dataSource": "cloudtrail",
-    "id": "2abca110-cb87-11ea-b55e-4f5cfb08a8d1",
-    "ruleId": "ed8418b3-69f6-11ea-8dc5-19fea1b7cb31",
+    "id": "cc3c6e27-4262-4b22-89a3-d00f0c6d7e3b",
+    "ruleId": "4eabd6aa-b96d-4461-a023-1e403e5e410a",
     "title": "CloudTrail: Access Denied: Event: DescribeScalingP...",
     "aggregates": {
-      "ip": "38.98.140.20",
+      "ip": "198.51.100.100",
       "user": "user@example.com",
-      "accountId": "113901497002",
+      "accountId": "017484651936",
       "eventName": "DescribeScalingPolicies",
       "eventSource": "autoscaling.amazonaws.com"
     },
     "createdAt": "2020-07-21T19:19:58.625Z",
     "isDismissed": false,
-    "rulesetId": "aac04548-69f6-11ea-b4d2-ad32b4432dec",
+    "rulesetId": "770b3d96-253c-4b2d-b43c-d058e97241e7",
     "severity": 3
   }
 }
@@ -321,6 +303,9 @@ This action is used to get alert data by ID.
 Example input:
 
 ```
+{
+  "alert_id": "4ed70109-bd4b-4c29-a52f-8c576ba8ce47"
+}
 ```
 
 ##### Output
@@ -340,10 +325,10 @@ Example output:
     "title": "User Activity (Login Failures): User undefined failed authentication from IP undefined",
     "rule": {
       "exclusion_filter": null,
-      "hash": "b27736c8444f963efae2fd1692c771bb",
+      "hash": "44d88612fea8a8f36de82e1278abb02f",
       "description": "This rule alerts on Login failures by users. Monitoring of failed login attempts can identify brute force/dictionary attacks as well as users trying to access systems without authorization.",
       "title": "User Activity (Login Failures): User {{user}} failed authentication from IP {{src_ip}}",
-      "hermes_alert_policy_id": "7f7ba0ac-eef7-11e6-b0e1-cf66e6984857",
+      "hermes_alert_policy_id": "fd592b75-5a0f-4488-9b7f-1f7628f75701",
       "severity": 3,
       "original_rule": {
         "description": "This rule alerts on Login failures by users. Monitoring of failed login attempts can identify brute force/dictionary attacks as well as users trying to access systems without authorization.",
@@ -358,7 +343,7 @@ Example output:
         ],
         "window_seconds": 3600,
         "updated_at": "2017-04-06T15:24:33.586Z",
-        "id": "7f842c39-eef7-11e6-b0e1-8d4568316479",
+        "id": "e5b5a82c-7638-4015-8fbb-26cd7b0bdf3f",
         "filter": "group = \"authentication-failed\" or group = \"invalid_login\" OR group = \"authentication_failed\" or group like \"fail\"",
         "auto_suppress": false,
         "threshold": 1,
@@ -384,20 +369,20 @@ Example output:
         "dst_port": []
       },
       "alert_policy_id": "53743bc0BEEFBEEFBEEFBEEF",
-      "id": "7f842c39-eef7-11e6-b0e1-8d4568316479",
+      "id": "4aa8c3f1-d5a6-4afd-a84e-7789e7abcd41",
       "filter": "group = \"authentication-failed\" or group = \"invalid_login\" OR group = \"authentication_failed\" or group like \"fail\"",
       "aggFields": [
         "user",
         "src_ip"
       ],
       "auto_suppress": false,
-      "hermes_rule_id": "7f842c39-eef7-11e6-b0e1-8d4568316479",
+      "hermes_rule_id": "3ad1d113-cf3d-48cd-992e-2043673aefac",
       "threshold": 1,
       "_hash_key": "b27736c8444f963efae2fd1692c771bb",
       "type": "all",
       "rule_id": "53743bc0BEEFBEEFBEEFBEEF",
       "enabled": true,
-      "policy_id": "7f7ba0ac-eef7-11e6-b0e1-cf66e6984857"
+      "policy_id": "91278a37-a2d5-452f-909a-bb1c08959cd9"
     },
     "created_at": 1500245139383,
     "last_updated_at": "2017-07-16T23:43:47.340Z",
@@ -414,125 +399,29 @@ Example output:
         "level": 5,
         "_insert_time": 1500248609195,
         "timestamp": 1500248620555,
-        "hostname": "ip-10-1-255-11",
+        "hostname": "example",
         "pid": 30916,
         "location": "/var/log/secure",
-        "organization_id": "589cb810a7d05f7f3a438cb2",
-        "agent_id": "58e52b4c4cc77462cf786a9d",
+        "organization_id": "c7468a346f1e0350fbd0f85a",
+        "agent_id": "0c11cec5e91661179a99b08f",
         "groups": [
           "invalid_login",
           "authentication_failed"
         ],
-        "_id": "9888ce3c-6a80-11e7-9dab-0acd2b127a3c",
-        "_type": "host",
-        "event_type": "host"
-      },
-      {
-        "comment": "Attempt to login using a non-existent user",
-        "sigid": 5710,
-        "group": [
-          "invalid_login",
-          "authentication_failed"
-        ],
-        "log": "Jul 16 23:43:35 ip-10-1-255-11 sshd[30938]: input_userauth_request: invalid user user [preauth]",
-        "level": 5,
-        "_insert_time": 1500248609195,
-        "timestamp": 1500248620555,
-        "hostname": "ip-10-1-255-11",
-        "pid": 30938,
-        "location": "/var/log/secure",
-        "organization_id": "589cb810a7d05f7f3a438cb2",
-        "agent_id": "58e52b4c4cc77462cf786a9d",
-        "groups": [
-          "invalid_login",
-          "authentication_failed"
-        ],
-        "_id": "9888ce3d-6a80-11e7-9dab-0acd2b127a3c",
-        "_type": "host",
-        "event_type": "host"
-      },
-      {
-        "comment": "Attempt to login using a non-existent user",
-        "sigid": 5710,
-        "group": [
-          "invalid_login",
-          "authentication_failed"
-        ],
-        "log": "Jul 16 23:43:23 ip-10-1-255-11 sshd[30891]: input_userauth_request: invalid user telnet [preauth]",
-        "level": 5,
-        "_insert_time": 1500248579195,
-        "timestamp": 1500248608549,
-        "hostname": "ip-10-1-255-11",
-        "pid": 30891,
-        "location": "/var/log/secure",
-        "organization_id": "589cb810a7d05f7f3a438cb2",
-        "agent_id": "58e52b4c4cc77462cf786a9d",
-        "groups": [
-          "invalid_login",
-          "authentication_failed"
-        ],
-        "_id": "9160d616-6a80-11e7-b48f-1296fd8e9d1a",
-        "_type": "host",
-        "event_type": "host"
-      },
-      {
-        "comment": "Attempt to login using a non-existent user",
-        "sigid": 5710,
-        "group": [
-          "invalid_login",
-          "authentication_failed"
-        ],
-        "log": "Jul 16 23:43:24 ip-10-1-255-11 sshd[30911]: input_userauth_request: invalid user test [preauth]",
-        "level": 5,
-        "_insert_time": 1500248579195,
-        "timestamp": 1500248608549,
-        "hostname": "ip-10-1-255-11",
-        "pid": 30911,
-        "location": "/var/log/secure",
-        "organization_id": "589cb810a7d05f7f3a438cb2",
-        "agent_id": "58e52b4c4cc77462cf786a9d",
-        "groups": [
-          "invalid_login",
-          "authentication_failed"
-        ],
-        "_id": "9160d617-6a80-11e7-b48f-1296fd8e9d1a",
-        "_type": "host",
-        "event_type": "host"
-      },
-      {
-        "comment": "Attempt to login using a non-existent user",
-        "sigid": 5710,
-        "group": [
-          "invalid_login",
-          "authentication_failed"
-        ],
-        "log": "Jul 16 23:43:42 ip-10-1-255-11 sshd[30941]: input_userauth_request: invalid user user1 [preauth]",
-        "level": 5,
-        "_insert_time": 1500248609195,
-        "timestamp": 1500248623562,
-        "hostname": "ip-10-1-255-11",
-        "pid": 30941,
-        "location": "/var/log/secure",
-        "organization_id": "589cb810a7d05f7f3a438cb2",
-        "agent_id": "58e52b4c4cc77462cf786a9d",
-        "groups": [
-          "invalid_login",
-          "authentication_failed"
-        ],
-        "_id": "9a53a3b1-6a80-11e7-baf2-0acabd9a2786",
+        "_id": "0fd85ed5-c776-4587-ab08-dee6666ce961",
         "_type": "host",
         "event_type": "host"
       }
     ],
     "dismissed": false,
-    "key": "7f842c39-eef7-11e6-b0e1-8d4568316479-58e52b4c4cc77462cf786a9d-b27736c8444f963efae2fd1692c771bb",
+    "key": "1ecf8ef4-3738-425a-b348-f8a34c9ede09-0c11cec5e91661179a99b08f-bcbe79037cbde194784563edf37cb18cb",
     "active": true,
     "rule_id": "53743bc0beefbeefbeefbeef",
     "unread": true,
     "type": "rule",
-    "id": "596bec96f11ead2a97ee0bc0",
+    "id": "3ac4be2a4bcc032a63a35c15",
     "alert_policy_id": "53743bc0beefbeefbeefbeef",
-    "agent_id": "58e52b4c4cc77462cf786a9d"
+    "agent_id": "9710350fc348f6d715b3a87c"
   }
 }
 
@@ -551,6 +440,9 @@ This action is used to get agent data.
 Example input:
 
 ```
+{
+  "agent_id": "597b2c751b7cc18fcf028e52"
+}
 ```
 
 ##### Output
@@ -574,11 +466,11 @@ Example output:
     "updated_at": "2017-05-11T20:15:12.268Z",
     "paused": false,
     "version": "1.6.2",
-    "agent_id": "589cb810a7d05f7f3a438cb2-4885b890-2b84-11e7-b27b-9f608f21aff091bf46da8a73e77e",
+    "agent_id": "06284106-09e6-456a-8988-2b98d484112a-43d709b6284564b47633597e",
     "last_reported_at": "2017-04-27T20:05:09.939Z",
     "online": false,
-    "ip_address": "144.121.5.10",
-    "id": "59024beed911cadeadee1b09",
+    "ip_address": "198.51.100.100",
+    "id": "d8cac3f5ed3555c35673ac52",
     "description": ""
   }
 }
