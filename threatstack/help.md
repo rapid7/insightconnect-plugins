@@ -133,7 +133,40 @@ Example input:
 Example output:
 
 ```
-
+{
+  "agents": [
+    {
+      "id": "adbc2b0d-22fd-4e15-82d5-cb55b8e7bdbc",
+      "status": "online",
+      "createdAt": "2020-07-27T20:41:29.454Z",
+      "lastReportedAt": "2020-07-27T20:50:44.505Z",
+      "version": "2.1.3c",
+      "name": "example",
+      "hostname": "example",
+      "ipAddresses": {
+        "private": [],
+        "link_local": [],
+        "public": [
+          "198.51.100.100"
+        ]
+      },
+      "tags": [
+        {
+          "source": "ec2",
+          "key": "aws:autoscaling:groupName",
+          "value": "ac-prod-k8s-cluster-1.15-ac-spot-0"
+        },
+        {
+          "source": "ec2",
+          "key": "kubernetes.io/cluster/ac-prod-k8s-cluster",
+          "value": "owned"
+        }
+      ],
+      "agentType": "investigate"
+    }
+  ],
+  "count": 1
+}
 ```
 
 #### Get Events
@@ -317,7 +350,6 @@ Example input:
 Example output:
 
 ```
-
 {
   "alert": {
     "count": 34,
@@ -424,7 +456,6 @@ Example output:
     "agent_id": "9710350fc348f6d715b3a87c"
   }
 }
-
 ```
 
 #### Get Agent
@@ -454,7 +485,6 @@ Example input:
 Example output:
 
 ```
-
 {
   "agent": {
     "status": "active",
@@ -474,7 +504,6 @@ Example output:
     "description": ""
   }
 }
-
 ```
 
 ### Triggers
