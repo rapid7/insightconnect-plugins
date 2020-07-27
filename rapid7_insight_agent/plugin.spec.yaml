@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: rapid7_insight_agent
 title: Rapid7 Insight Agent
-description: Investigate and mitigate vulnerabilities across your organization using the power of the Insight Agent
+description: Using the Insight Agent plugin from InsightConnect, you can quarantine, unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices across your organization.
 version: 1.0.0
 vendor: rapid7
 support: rapid7
@@ -182,6 +182,39 @@ actions:
         description: Was operation successful
         type: boolean
         required: true
+  check_agent_status:
+    title: Check Agent Status
+    description: Get the online status and quarantine state of an agent
+    input:
+      agent_id:
+        title: Agent ID
+        description: The ID of the agent on the device to get the status from
+        type: string
+        example: a1cfb273c8e7d46a9e2a0e2dae01a0ce
+        required: true
+    output:
+      is_currently_quarantined:
+        title: Is Currenty Quarantined
+        description: Is the device currently quarantined
+        type: boolean
+        required: true
+      is_quarantine_requested:
+        title: Is Quarantine Requested
+        description: Is a quarantine action pending on this device
+        type: boolean
+        required: true
+      is_unquarantine_requested:
+        title: Is Unquarantine Requested
+        description: Is there a pending request to release quarantine on this device
+        type: boolean
+        required: true
+      is_asset_online:
+        title: Is Asset Online
+        description: Is this asset online
+        type: boolean
+        required: true
+
+
 
 
 
