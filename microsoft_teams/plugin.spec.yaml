@@ -4,7 +4,7 @@ products: [insightconnect]
 name: microsoft_teams
 title: Microsoft Teams
 description: The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users
-version: 2.0.5
+version: 2.1.0
 vendor: rapid7
 support: community
 status: []
@@ -199,18 +199,21 @@ triggers:
         type: string
         required: true
         order: 1
+        example: ICON-Test-Everyone
       channel_name:
         title: Channel Name
         description: Channel
         type: string
         required: true
         order: 2
+        example: ICON Test Channel
       message_content:
         title: Message Content
         description: Regex to match new messages against
         type: string
         required: false
         order: 3
+        example: "[Tt]est"
     output:
       message:
         title: Message
@@ -228,6 +231,7 @@ actions:
         description: Optional regex-capable team name to look for
         type: string
         required: false
+        example: Komand-Test-Everyone
     output:
       teams:
         title: Teams
@@ -244,12 +248,14 @@ actions:
         type: string
         required: true
         order: 1
+        example: Komand-Test-Everyone
       channel_name:
         title: Channel Name
         description: Optional regex-capable channel to look for
         type: string
         required: false
         order: 2
+        example: Komand Test Channel
     output:
       channels:
         title: Channels
@@ -266,18 +272,28 @@ actions:
         type: string
         required: true
         order: 1
+        example: ICON-Test-Everyone
       channel_name:
         title: Channel Name
         description: Channel
         type: string
         required: true
         order: 2
+        example: ICON Test Channel
+      thread_id:
+        title: Thread ID
+        description: To post in a thread, select parent message ID
+        type: string
+        required: true
+        order: 3
+        example: "1595889908700"
       message:
         title: Message
         description: Message to send
         type: string
         required: true
-        order: 3
+        order: 4
+        example: Hello!
     output:
       message:
         title: Message
@@ -294,24 +310,28 @@ actions:
         type: string
         required: true
         order: 1
+        example: xxxxx-xxxxx-xxxx-xxxx
       channel_guid:
         title: Channel GUID
         description: Channel GUID
         type: string
         required: true
         order: 2
+        example: xxxxx-xxxxx-xxxx-xxxx
       is_html:
         title: Is HTML
         description: Is the message HTML
         type: boolean
         required: true
         order: 3
+        example: false
       message:
         title: Message
         description: Message to send
         type: string
         required: true
         order: 4
+        example: Hello!
     output:
       message:
         title: Message
@@ -328,18 +348,28 @@ actions:
         type: string
         required: true
         order: 1
+        example: ICON-Test-Everyone
       channel_name:
         title: Channel Name
         description: Channel name
         type: string
         required: true
         order: 2
+        example: ICON Test Channel
+      thread_id:
+        title: Thread ID
+        description: To post in a thread, select parent message ID
+        type: string
+        required: true
+        order: 3
+        example: "1595889908700"
       message_content:
         title: Message Content
         description: HTML content to send
         type: string
         required: true
-        order: 3
+        order: 4
+        example: "<b>Hello!</b>"
     output:
       message:
         title: Message
@@ -356,12 +386,14 @@ actions:
         type: string
         required: true
         order: 1
+        example: ICON-Test-Everyone
       member_login:
         title: Member Login
         description: Member login e.g. user@example.com
         type: string
         required: true
         order: 2
+        example: user@example.com
     output:
       success:
         title: Success
@@ -378,12 +410,14 @@ actions:
         type: string
         required: true
         order: 1
+        example: Komand-Test-Everyone
       member_login:
         title: Member Login
         description: Member Login e.g. user@example.com
         type: string
         required: true
         order: 2
+        example: user@example.com
     output:
       success:
         title: Success
@@ -400,18 +434,21 @@ actions:
         type: string
         required: true
         order: 1
+        example: ICON-Test-Everyone
       channel_name:
         title: Channel Name
         description: Channel name
         type: string
         required: true
         order: 2
+        example: test_channel
       channel_description:
         title: Channel Description
         description: Channel description
         type: string
         required: true
         order: 3
+        example: This is a test channel.
     output:
       success:
         title: Success
@@ -428,12 +465,14 @@ actions:
         type: string
         required: true
         order: 1
+        example: ICON-Test-Everyone
       channel_name:
         title: Channel Name
         description: Channel name
         type: string
         required: true
         order: 2
+        example: test_channel
     output:
       success:
         title: Success
@@ -450,36 +489,42 @@ actions:
         type: string
         required: true
         order: 1
+        example: test_group
       group_description:
         title: Group Description
         description: Group description
         type: string
         required: true
         order: 2
+        example: A test group
       mail_nickname:
         title: Mail Nickname
         description: The nickname for the email address of this group in Outlook
         type: string
         required: true
         order: 3
+        example: TestGroup
       mail_enabled:
         title: Mail Enabled
         description: Should e-mail should be enabled for this group
         type: boolean
         required: true
         order: 4
+        example: false
       owners:
         title: Owners
         description: A list of usernames to set as owners
         type: "string[]"
         required: false
         order: 5
+        example: ['user@example.com']
       members:
         title: Members
         description: A list of usernames to set as members
         type: "string[]"
         required: false
         order: 6
+        example: ['user@example.com']
     output:
       group:
         title: Group
@@ -495,11 +540,10 @@ actions:
         description: Team Name
         type: string
         required: true
+        example: Test Team
     output:
       success:
         title: Success
         description: Boolean indicating if this action was successful
         type: boolean
         required: true
-
-

@@ -55,9 +55,10 @@ Regular expressions used by this action are Python specific.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|channel_name|string|None|True|Channel|None|None|
-|message|string|None|True|Message to send|None|None|
-|team_name|string|None|True|Team name|None|None|
+|channel_name|string|None|True|Channel|None|ICON Test Channel|
+|message|string|None|True|Message to send|None|Hello!|
+|team_name|string|None|True|Team name|None|ICON-Test-Everyone|
+|thread_id|string|None|True|To post in a thread, select parent message ID|None|1595889908700|
 
 Example input:
 
@@ -65,7 +66,8 @@ Example input:
 {
   "channel_name": "ICON Test Channel",
   "message": "Hello!",
-  "team_name": "ICON-Test-Everyone"
+  "team_name": "ICON-Test-Everyone",
+  "thread_id": "1595889908700"
 }
 ```
 
@@ -114,17 +116,19 @@ This action is used to send HTML as a message.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|channel_name|string|None|True|Channel name|None|None|
-|message_content|string|None|True|HTML content to send|None|None|
-|team_name|string|None|True|Team name|None|None|
+|channel_name|string|None|True|Channel name|None|ICON Test Channel|
+|message_content|string|None|True|HTML content to send|None|<b>Hello!</b>|
+|team_name|string|None|True|Team name|None|ICON-Test-Everyone|
+|thread_id|string|None|True|To post in a thread, select parent message ID|None|1595889908700|
 
 Example input:
 
 ```
 {
   "channel_name": "ICON Test Channel",
-  "message_content": "<b>Hello!</b>",
-  "team_name": "ICON-Test-Everyone"
+  "message_content": "\u003cb\u003eHello!\u003c/b\u003e",
+  "team_name": "ICON-Test-Everyone",
+  "thread_id": "1595889908700"
 }
 ```
 
@@ -173,10 +177,21 @@ This action sends a message using the GUID for the team and channel. This is mor
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|channel_guid|string|None|True|Channel GUID|None|None|
-|is_html|boolean|None|True|Is the message HTML|None|None|
-|message|string|None|True|Message to send|None|None|
-|team_guid|string|None|True|Team GUID|None|None|
+|channel_guid|string|None|True|Channel GUID|None|xxxxx-xxxxx-xxxx-xxxx|
+|is_html|boolean|None|True|Is the message HTML|None|False|
+|message|string|None|True|Message to send|None|Hello!|
+|team_guid|string|None|True|Team GUID|None|xxxxx-xxxxx-xxxx-xxxx|
+
+Example input:
+
+```
+{
+  "channel_guid": "xxxxx-xxxxx-xxxx-xxxx",
+  "is_html": false,
+  "message": "Hello!",
+  "team_guid": "xxxxx-xxxxx-xxxx-xxxx"
+}
+```
 
 ##### Output
 
@@ -244,7 +259,7 @@ Regular expressions used by this action are Python specific.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|team_name|string|None|False|Optional regex-capable team name to look for|None|None|
+|team_name|string|None|False|Optional regex-capable team name to look for|None|Komand-Test-Everyone|
 
 Example input:
 
@@ -310,8 +325,8 @@ Regular expressions used by this action are Python specific.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|channel_name|string|None|False|Optional regex-capable channel to look for|None|None|
-|team_name|string|None|True|Team name to look for|None|None|
+|channel_name|string|None|False|Optional regex-capable channel to look for|None|Komand Test Channel|
+|team_name|string|None|True|Team name to look for|None|Komand-Test-Everyone|
 
 Example input:
 
@@ -352,8 +367,8 @@ This action is used to add a member to a team.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|member_login|string|None|True|Member login e.g. user@example.com|None|None|
-|team_name|string|None|True|Team name|None|None|
+|member_login|string|None|True|Member login e.g. user@example.com|None|user@example.com|
+|team_name|string|None|True|Team name|None|ICON-Test-Everyone|
 
 Example input:
 
@@ -386,9 +401,9 @@ This action is used to add a channel to a team.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|channel_description|string|None|True|Channel description|None|None|
-|channel_name|string|None|True|Channel name|None|None|
-|team_name|string|None|True|Team name|None|None|
+|channel_description|string|None|True|Channel description|None|This is a test channel.|
+|channel_name|string|None|True|Channel name|None|test_channel|
+|team_name|string|None|True|Team name|None|ICON-Test-Everyone|
 
 Example input:
 
@@ -422,8 +437,8 @@ This action is used to remove a channel from a team.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|channel_name|string|None|True|Channel name|None|None|
-|team_name|string|None|True|Team name|None|None|
+|channel_name|string|None|True|Channel name|None|test_channel|
+|team_name|string|None|True|Team name|None|ICON-Test-Everyone|
 
 Example input:
 
@@ -456,8 +471,8 @@ This action is used to remove a member from a team.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|member_login|string|None|True|Member Login e.g. user@example.com|None|None|
-|team_name|string|None|True|Team name|None|None|
+|member_login|string|None|True|Member Login e.g. user@example.com|None|user@example.com|
+|team_name|string|None|True|Team name|None|Komand-Test-Everyone|
 
 Example input:
 
@@ -490,12 +505,12 @@ This action is used to create a group in Azure and enable it for Microsoft Teams
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|group_description|string|None|True|Group description|None|None|
-|group_name|string|None|True|Team name|None|None|
-|mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|None|
-|mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|None|
-|members|string[]|None|False|A list of usernames to set as members|None|None|
-|owners|string[]|None|False|A list of usernames to set as owners|None|None|
+|group_description|string|None|True|Group description|None|A test group|
+|group_name|string|None|True|Team name|None|test_group|
+|mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|False|
+|mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|TestGroup|
+|members|string[]|None|False|A list of usernames to set as members|None|[user@example.com]|
+|owners|string[]|None|False|A list of usernames to set as owners|None|[user@example.com]|
 
 Example input:
 
@@ -505,8 +520,12 @@ Example input:
   "group_name": "test_group",
   "mail_enabled": false,
   "mail_nickname": "TestGroup",
-  "members": "['user@example.com']",
-  "owners": "['user@example.com']"
+  "members": [
+    "user@example.com"
+  ],
+  "owners": [
+    "user@example.com"
+  ]
 }
 ```
 
@@ -555,7 +574,7 @@ This action is used to delete a team and the associated group from Azure.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|team_name|string|None|True|Team Name|None|None|
+|team_name|string|None|True|Team Name|None|Test Team|
 
 Example input:
 
@@ -591,9 +610,9 @@ Regular expressions used by this trigger are Python specific.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|channel_name|string|None|True|Channel|None|None|
-|message_content|string|None|False|Regex to match new messages against|None|None|
-|team_name|string|None|True|Team name|None|None|
+|channel_name|string|None|True|Channel|None|ICON Test Channel|
+|message_content|string|None|False|Regex to match new messages against|None|[Tt]est|
+|team_name|string|None|True|Team name|None|ICON-Test-Everyone|
 
 Example input:
 
@@ -652,6 +671,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.0 - Update Send Message and Send HTML Message to support replying to existing thread
 * 2.0.5 - Fix issue where auth token wasn't properly renewed
 * 2.0.4 - Fix issue where a message that only had an image in it could break the 'New Message Received' trigger
 * 2.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/microsoft-teams)
