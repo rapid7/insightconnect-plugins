@@ -52,8 +52,8 @@ This action is used to get a rule.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|rule_id|string|None|True|Rule ID|None|None|
-|ruleset_id|string|None|True|Ruleset ID for which the rule ID belongs|None|None|
+|rule_id|string|None|True|Rule ID|None|1bbc84ed9-17db-18cd-1937-1947ebd910a2|
+|ruleset_id|string|None|True|Ruleset ID for which the rule ID belongs|None|1947cbe9-1c8e-11e9-91be-18cbed810a82|
 
 Example input:
 
@@ -111,8 +111,8 @@ This action is used to get agent data.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|end|string|None|False|End date e.g. 2018-01-01|None|None|
-|start|string|None|False|Start date e.g. 2017-01-01|None|None|
+|end|string|None|False|End date e.g. 2018-01-01|None|2018-01-01|
+|start|string|None|False|Start date e.g. 2017-01-01|None|2018-01-01|
 
 Example input:
 
@@ -177,7 +177,7 @@ This action is used to get events which contributed to an alert.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|alert_id|string|None|True|Alert ID|None|None|
+|alert_id|string|None|True|Alert ID|None|183d125e-b7b6-47f6-b872-9242df0f21f3|
 
 Example input:
 
@@ -280,8 +280,8 @@ This action is used to get alerts by filter.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|end|string|None|False|End date e.g. 2018-01-01|None|None|
-|start|string|None|False|Start date e.g. 2017-01-01|None|None|
+|end|string|None|False|End date e.g. 2018-01-01|None|2018-01-01|
+|start|string|None|False|Start date e.g. 2017-01-01|None|2018-01-01|
 
 Example input:
 
@@ -331,7 +331,7 @@ This action is used to get alert data by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|alert_id|string|None|True|Alert ID e.g. 597b8c751c7ff17fcf028e54|None|None|
+|alert_id|string|None|True|Alert ID e.g. 597b8c751c7ff17fcf028e54|None|4ed70109-bd4b-4c29-a52f-8c576ba8ce47|
 
 Example input:
 
@@ -466,7 +466,7 @@ This action is used to get agent data.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent_id|string|None|True|Agent ID e.g. 597b2c751b7cc18fcf028e52|None|None|
+|agent_id|string|None|True|Agent ID e.g. 597b2c751b7cc18fcf028e52|None|597b2c751b7cc18fcf028e52|
 
 Example input:
 
