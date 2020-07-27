@@ -1,23 +1,20 @@
 # Description
 
-The Threat Stack plugin is used to get information about alerts, assets, and policies.
+Get information about alerts, assets, policies, and more.
 
 [Threat Stack](https://www.threatstack.com) is a cloud security monitoring provider helping companies to achieve compliance and cloud security.
 
-This plugin utilizes the [Threatstack API](https://apidocs.threatstack.com/).
-
-Note that the REST API is undocumented the plugin does not have custom types built which allows for the response outputs to be selectable by name in the UI.
-In addition, Threat Stack will be deprecating this API in favor of version 2 when it's released.
+This plugin utilizes the [Threat Stack API](https://apidocs.threatstack.com/).
 
 # Key Features
 
-* Get information about alerts, organizations, policies, and agents
+* Get information about alerts, rules, agents, and events
 
 # Requirements
 
-* A Threat Stack API key
-* An organization ID
-* The Threat Stack API version
+* Threat Stack API key
+* Threat Stack user ID
+* Threat Stack organization ID
 
 # Documentation
 
@@ -43,7 +40,7 @@ Example input:
 
 #### Get Rule
 
-This action is used to get rule.
+This action is used to get a rule.
 
 ##### Input
 
@@ -602,6 +599,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Use ThreatStack API v2 | Fix all actions | Type action outputs
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 architecture | Support web server mode | Update to new credential types
 * 0.1.1 - SSL bug fix in SDK

@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetAlertInput, GetAlertOutput, Input, Output
 # Custom imports below
-from komand.helper import clean
+from insightconnect_plugin_runtime.helper import clean
 from threatstack.errors import ThreatStackAPIError, ThreatStackClientError, APIRateLimitError
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class GetAlert(komand.Action):
+class GetAlert(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

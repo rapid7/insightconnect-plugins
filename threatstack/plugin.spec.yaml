@@ -4,7 +4,7 @@ products: [insightconnect]
 name: threatstack
 title: Threat Stack
 description: Get information about alerts, assets, policies, and more
-version: 1.0.1
+version: 2.0.0
 vendor: rapid7
 support: community
 status: []
