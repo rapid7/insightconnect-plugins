@@ -126,7 +126,7 @@ Example input:
 ```
 {
   "channel_name": "ICON Test Channel",
-  "message_content": "\u003cb\u003eHello!\u003c/b\u003e",
+  "message_content": "<b>Hello!</b>",
   "team_name": "ICON-Test-Everyone",
   "thread_id": "1595889908700"
 }
