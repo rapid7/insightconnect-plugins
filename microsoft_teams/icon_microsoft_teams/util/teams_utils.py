@@ -149,7 +149,8 @@ def send_message(logger: Logger,
     """
     send_message_url = f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
 
-    #IF thread ID then add to send message url to ".../messages/{id}/replies"
+    if thread_id:
+        send_message_url = send_message_url + f"/{thread_id}/replies"
 
     logger.info(f"Sending message to: {send_message_url}")
     headers = connection.get_headers()
