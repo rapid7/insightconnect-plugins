@@ -2,6 +2,8 @@ import komand
 from .schema import GetEventsInput, GetEventsOutput, Input, Output, Component
 # Custom imports below
 from komand.helper import clean
+from threatstack.errors import ThreatStackAPIError, ThreatStackClientError, APIRateLimitError
+from komand.exceptions import PluginException
 
 
 class GetEvents(komand.Action):
@@ -16,7 +18,12 @@ class GetEvents(komand.Action):
     def run(self, params={}):
         alert_id = params.get(Input.ALERT_ID)
 
-        events = self.connection.client.alerts.events(alert_id=alert_id).get("events", [])
+        try:
+            events = self.connection.client.alerts.events(alert_id=alert_id).get("events", [])
+        except (ThreatStackAPIError, ThreatStackClientError, APIRateLimitError) as e:
+            raise PluginException(cause="An error occurred!",
+                                  assistance=e)
+
         events = clean([self._add_miscellaneous_values(event=event) for event in events])
 
         return {Output.EVENTS: events, Output.COUNT: len(events)}

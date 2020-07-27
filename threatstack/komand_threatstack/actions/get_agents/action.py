@@ -2,6 +2,8 @@ import komand
 from .schema import GetAgentsInput, GetAgentsOutput, Input, Output
 # Custom imports below
 from komand.helper import clean
+from threatstack.errors import ThreatStackAPIError, ThreatStackClientError, APIRateLimitError
+from komand.exceptions import PluginException
 
 
 class GetAgents(komand.Action):
@@ -15,8 +17,12 @@ class GetAgents(komand.Action):
 
     def run(self, params={}):
         start, end = params.get(Input.START), params.get(Input.END)
-        agents = self.connection.client.agents.list(start=start,
-                                                    end=end)
+        try:
+            agents = self.connection.client.agents.list(start=start,
+                                                        end=end)
+        except (ThreatStackAPIError, ThreatStackClientError, APIRateLimitError) as e:
+            raise PluginException(cause="An error occurred!",
+                                  assistance=e)
 
         # Consume the generator
         agents = [clean(agent) for agent in agents]
