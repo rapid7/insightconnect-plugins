@@ -2,7 +2,6 @@ import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 # Custom imports below
 from threatstack import ThreatStack
-from threatstack.errors import ThreatStackAPIError, ThreatStackClientError
 
 
 class Connection(insightconnect_plugin_runtime.Connection):

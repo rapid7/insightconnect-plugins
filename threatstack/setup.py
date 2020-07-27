@@ -10,5 +10,5 @@ setup(name="threatstack-rapid7-plugin",
       url="",
       packages=find_packages(),
       install_requires=['insightconnect_plugin_runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_threatstack']
+      scripts=['bin/icon_threatstack']
       )
