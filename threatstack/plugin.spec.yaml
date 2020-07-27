@@ -342,6 +342,7 @@ actions:
         type: string
         description: Agent ID e.g. 597b2c751b7cc18fcf028e52
         required: true
+        example: 597b2c751b7cc18fcf028e52
     output:
       agent:
         type: agent
@@ -355,10 +356,12 @@ actions:
         type: string
         description: Start date e.g. 2017-01-01
         required: false
+        example: 2018-01-01
       end:
         type: string
         description: End date e.g. 2018-01-01
         required: false
+        example: 2018-01-01
     output:
       agents:
         type: '[]agent'
@@ -378,6 +381,7 @@ actions:
         title: Alert ID
         description: Alert ID e.g. 597b8c751c7ff17fcf028e54
         required: true
+        example: 4ed70109-bd4b-4c29-a52f-8c576ba8ce47
     output:
       alert:
         type: alert
@@ -393,10 +397,12 @@ actions:
         type: string
         description: Start date e.g. 2017-01-01
         required: false
+        example: 2018-01-01
       end:
         type: string
         description: End date e.g. 2018-01-01
         required: false
+        example: 2018-01-01
     output:
       alerts:
         type: '[]alert'
@@ -416,6 +422,7 @@ actions:
         type: string
         description: Alert ID
         required: true
+        example: 183d125e-b7b6-47f6-b872-9242df0f21f3
     output:
       events:
         type: '[]event'
@@ -435,31 +442,15 @@ actions:
         title: Rule ID
         description: Rule ID
         required: true
+        example: 1bbc84ed9-17db-18cd-1937-1947ebd910a2
       ruleset_id:
         type: string
         title: Ruleset ID
         description: Ruleset ID for which the rule ID belongs
         required: true
+        example: 1947cbe9-1c8e-11e9-91be-18cbed810a82
     output:
       rule:
         type: rule
         description: Rule
         required: true
-
-#  get_policies:
-#    title: Get Policies
-#    description: Get policies
-#    input:
-#      fields:
-#        type: '[]string'
-#        description: Fields to return
-#        required: false
-#    output:
-#      policies:
-#        type: '[]object'
-#        description: Array of policies
-#        required: true
-#      count:
-#        type: integer
-#        description: Number of policies
-#        required: true
