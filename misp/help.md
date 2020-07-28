@@ -855,7 +855,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 5.0.0 - New fields added to Search Events action: values, category and type_attribute
+* 5.0.0 - New fields added to Search Events action for `values`, `category` and `type_attribute`
 * 4.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Commented Explanation
 * 3.0.0 - Fixed issue where Add URLs, Add Context, Add Email Sender, Add Email Subject and Add Email Recipient actions sent requests as a proposal | Fixed an issue where the distribution list was set incorrectly within Add URLs, Add Context, Create an Event, Add Email Sender, Add Email Subject, Add Email Recipient actions
 * 2.0.0 - Updated to new credential types | Update `hostname` variable in Connection to `url`
