@@ -18,16 +18,17 @@ class UpdateAgent(insightconnect_plugin_runtime.Action):
         policy = params.get(Input.POLICY)
 
         if policy == "":
-            policy = self.find_default_policy_id()
-            
-        payload = {
-            "add_zone_ids": params.get(Input.ADD_ZONES, None),
-            "name": agent.get('name'),
-            "policy_id": policy,
-            "remove_zone_ids": params.get(Input.REMOVE_ZONES, None)
-        }
+            policy = self._find_default_policy_id()
 
-        errors = self.connection.client.update_agent(agent.get('id'), payload)
+        errors = self.connection.client.update_agent(
+            agent.get('id'),
+            {
+                "add_zone_ids": params.get(Input.ADD_ZONES, None),
+                "name": agent.get('name'),
+                "policy_id": policy,
+                "remove_zone_ids": params.get(Input.REMOVE_ZONES, None)
+            }
+        )
 
         if len(errors) != 0:
             raise PluginException(cause='The response from the CylancePROTECT API was not in the correct format.',
@@ -38,7 +39,7 @@ class UpdateAgent(insightconnect_plugin_runtime.Action):
             Output.SUCCESS: True
         }
     
-    def find_default_policy_id(self) -> str:
+    def _find_default_policy_id(self) -> str:
         i = 1
         while i < 9999:
             response = self.connection.client.get_policies(i)

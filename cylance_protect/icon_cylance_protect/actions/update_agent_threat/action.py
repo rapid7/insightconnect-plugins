@@ -23,16 +23,14 @@ class UpdateAgentThreat(insightconnect_plugin_runtime.Action):
                 "We will only act upon the first match"
             )
 
+        payload = {
+            "threat_id": threats[0].get('sha256')
+        }
+
         if params.get(Input.QUARANTINE_STATE):
-            payload = {
-                "threat_id": threats[0].get('sha256'),
-                "event": "Quarantine"
-            }
+            payload["event"] = "Quarantine"
         else:
-            payload = {
-                "threat_id": threats[0].get('sha256'),
-                "event": "Waive"
-            }
+            payload["event"] = "Waive"
 
         errors = self.connection.client.update_agent_threat(
             self.connection.client.get_agent_details(params.get(Input.AGENT)).get('id'),
