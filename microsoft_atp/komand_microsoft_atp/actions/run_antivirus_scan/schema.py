@@ -9,7 +9,7 @@ class Component:
 
 class Input:
     COMMENT = "comment"
-    MACHINE_ID = "machine_id"
+    MACHINE = "machine"
     SCAN_TYPE = "scan_type"
     
 
@@ -29,10 +29,10 @@ class RunAntivirusScanInput(insightconnect_plugin_runtime.Input):
       "description": "Comment to associate with the antivirus scan action",
       "order": 2
     },
-    "machine_id": {
+    "machine": {
       "type": "string",
-      "title": "Machine ID",
-      "description": "Machine ID",
+      "title": "Machine",
+      "description": "Machine IP address, hostname and machine ID",
       "order": 1
     },
     "scan_type": {
@@ -48,7 +48,7 @@ class RunAntivirusScanInput(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "comment",
-    "machine_id",
+    "machine",
     "scan_type"
   ]
 }
