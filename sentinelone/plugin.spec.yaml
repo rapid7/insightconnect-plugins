@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 1.4.0
+version: 1.4.1
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
@@ -1304,7 +1304,7 @@ actions:
         type: '[]agents_processes'
         required: false
   agents_initiate:
-    title: Initiate scan
+    title: Initiate Scan
     description: Sends a scan command to all agents matching the input filter
     input:
       filter:
@@ -1547,6 +1547,7 @@ triggers:
         title: Agent is Active
         description: Include agents currently connected to the management console
         type: boolean
+        default: true
         required: false
       engines:
         title: Engines

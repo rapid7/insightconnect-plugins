@@ -31,6 +31,7 @@ class GetThreatsInput(komand.Input):
       "type": "boolean",
       "title": "Agent is Active",
       "description": "Include agents currently connected to the management console",
+      "default": true,
       "order": 3
     },
     "classifications": {
