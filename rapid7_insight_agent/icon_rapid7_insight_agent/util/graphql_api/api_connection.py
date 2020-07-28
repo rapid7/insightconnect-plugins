@@ -339,6 +339,7 @@ class ApiConnection:
                 agent = edge.get("node").get("host")
                 agent_list.append(agent)
         except KeyError:
-            raise APIException(cause="Insight Agent API returned data in an unexpected format.")
+            raise APIException(cause="Insight Agent API returned data in an unexpected format.\n",
+                               data=str(results_object))
 
         return agent_list

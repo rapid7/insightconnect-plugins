@@ -14,4 +14,5 @@ class CheckAgentStatus(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         agent_id = params.get(Input.AGENT_ID)
-        return self.connection.api.get_agent_status(agent_id)
+        agent_id_stripped = agent_id.replace("-","")
+        return self.connection.api.get_agent_status(agent_id_stripped)

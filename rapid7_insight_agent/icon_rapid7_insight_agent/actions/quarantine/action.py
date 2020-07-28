@@ -19,11 +19,12 @@ class Quarantine(insightconnect_plugin_runtime.Action):
         advertisement_period = params.get(Input.INTERVAL)
         quarantine_state = params.get(Input.QUARANTINE_STATE)
 
+        agent_id_stripped = agent_id.replace("-","")
         try:
             if quarantine_state:
-                success = self.connection.api.quarantine(advertisement_period, agent_id)
+                success = self.connection.api.quarantine(advertisement_period, agent_id_stripped)
             else:
-                success = self.connection.api.unquarantine(agent_id)
+                success = self.connection.api.unquarantine(agent_id_stripped)
         except APIException as e:
             raise PluginException(cause=e.cause,
                                   assistance=e.assistance,
