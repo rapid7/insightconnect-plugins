@@ -22,6 +22,9 @@ class GetAlerts(insightconnect_plugin_runtime.Action):
             alerts_response = self.connection.client.get_alerts(key=alerts_response.get("pages", {}).get("nextKey"))
             alerts.extend(alerts_response.get("items"))
 
+        for alert in alerts:
+            alert['severity'] = alert['severity'].upper()
+
         return {
             Output.ALERTS: alerts
         }

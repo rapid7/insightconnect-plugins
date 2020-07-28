@@ -17,7 +17,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             params.get(Input.URL).rstrip("/"),
             params.get(Input.CLIENT_ID).get("secretKey"),
             params.get(Input.CLIENT_SECRET).get("secretKey"),
-            params.get(Input.TENANT_ID).get("secretKey"),
+            params.get(Input.TENANT_ID, {}).get("secretKey"),
             self.logger
         )
 

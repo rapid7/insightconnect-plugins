@@ -55,6 +55,27 @@ class GetEndpointsOutput(insightconnect_plugin_runtime.Output):
     "items"
   ],
   "definitions": {
+    "assigned_product": {
+      "type": "object",
+      "title": "assigned_product",
+      "properties": {
+        "code": {
+          "type": "string",
+          "title": "Code",
+          "order": 1
+        },
+        "status": {
+          "type": "string",
+          "title": "Status",
+          "order": 3
+        },
+        "version": {
+          "type": "string",
+          "title": "Version",
+          "order": 2
+        }
+      }
+    },
     "endpoint_entry": {
       "type": "object",
       "title": "endpoint_entry",
@@ -73,7 +94,7 @@ class GetEndpointsOutput(insightconnect_plugin_runtime.Output):
           "type": "array",
           "title": "AssignedProducts",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/assigned_product"
           },
           "order": 3
         },
@@ -217,6 +238,27 @@ class GetEndpointsOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "definitions": {
+        "assigned_product": {
+          "type": "object",
+          "title": "assigned_product",
+          "properties": {
+            "code": {
+              "type": "string",
+              "title": "Code",
+              "order": 1
+            },
+            "status": {
+              "type": "string",
+              "title": "Status",
+              "order": 3
+            },
+            "version": {
+              "type": "string",
+              "title": "Version",
+              "order": 2
+            }
+          }
+        },
         "previous_password_entity": {
           "type": "object",
           "title": "previous_password_entity",

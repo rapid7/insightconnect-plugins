@@ -44,7 +44,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "required": [
     "client_id",
     "client_secret",
-    "tenant_id",
     "url"
   ],
   "definitions": {
