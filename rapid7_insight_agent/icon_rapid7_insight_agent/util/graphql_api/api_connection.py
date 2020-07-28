@@ -2,10 +2,16 @@ from icon_rapid7_insight_agent.util.graphql_api.region_map import region_map
 from icon_rapid7_insight_agent.util.graphql_api.api_exception import APIException
 import icon_rapid7_insight_agent.util.graphql_api.agent_typer as agent_typer
 import requests
+import logging
 
 
 class ApiConnection():
-    def __init__(self, api_key, region_string, logger):
+    def __init__(self,
+                 api_key: str,
+                 region_string: str,
+                 logger: logging.log
+                 ) -> None:
+
         self.api_key = api_key
         self.logger = logger
         self.endpoint = self._setup_endpoint(region_string)
@@ -16,13 +22,25 @@ class ApiConnection():
         self.org_key = self._get_org_key()
         self.logger.info(f"Recieved org key: ********-****-****-****-*******{self.org_key[-5:]}")
 
-    def get_agent(self, agent_input):
+    def get_agent(self,
+                  agent_input: str
+                  )-> dict:
+        """
+        Find an agent based on a Mac Address, IP, or Hostname
+
+        :param agent_input: string
+        :return:
+        """
+
         agent_type = agent_typer.get_agent_type(agent_input)
-        agent = self._get_agent(agent_input, agent_type)
-        # agent = self._find_agent_in_agents(agents, agent_input, agent_type)
+        agents = self._get_agent(agent_input, agent_type)
+        agent = self._find_agent_in_agents(agents, agent_input, agent_type)
         return agent
 
-    def quarantine(self, advertisement_period, agent_id):
+    def quarantine(self,
+                   advertisement_period:int,
+                   agent_id:str
+                   )->bool:
         """
         quarantine action on a given agent ID
 
@@ -44,7 +62,9 @@ class ApiConnection():
         failed = results_object.get("data").get("quarantineAssets").get("results")[0].get("failed")
         return (not failed)
 
-    def unquarantine(self, agent_id):
+    def unquarantine(self,
+                     agent_id:str
+                     )->bool:
         """
         unquarantine action on a given agent ID
         :param agent_id: string
@@ -63,7 +83,9 @@ class ApiConnection():
         failed = results_object.get("data").get("unquarantineAssets").get("results")[0].get("failed")
         return not failed
 
-    def get_agent_status(self, agent_id):
+    def get_agent_status(self,
+                         agent_id:str
+                         )->dict:
         """
         This will get agent status information from a specified agent
 
@@ -96,7 +118,7 @@ class ApiConnection():
             "is_unquarantine_requested": is_unquarantine_requested
         }
 
-    def connection_test(self):
+    def connection_test(self)->bool:
         # Return the first org to verify the connection works
         graph_ql_payload = {
             "query":"{ organizations(first: 1) { edges { node { id } } totalCount } }"
@@ -110,7 +132,7 @@ class ApiConnection():
     # Private Methods
     #################
 
-    def _get_org_key(self):
+    def _get_org_key(self)->str:
         """
         Get the org key from GraphQL
 
@@ -124,7 +146,7 @@ class ApiConnection():
         self.logger.info("Organization ID query complete.")
         return result_object.get("data").get("organizations").get("edges")[0].get("node").get("id")
 
-    def _get_headers(self):
+    def _get_headers(self)->dict:
         """
         This build and returns headers for the request session
 
@@ -137,7 +159,9 @@ class ApiConnection():
             "Accept-Encoding": "gzip, deflate, br"
         }
 
-    def _post_payload(self, payload):
+    def _post_payload(self,
+                      payload:dict
+                      )->dict:
         """
         This will post a given payload to the API using the connection session
 
@@ -161,7 +185,15 @@ class ApiConnection():
 
         return results_object
 
-    def _setup_endpoint(self, region_string):
+    def _setup_endpoint(self,
+                        region_string:str
+                        )->str:
+        """
+        Creates the URL endpoint for the API based on the region
+
+        :param region_string: string
+        :return: string
+        """
         region_code = region_map.get(region_string)
 
         if region_code:
@@ -174,11 +206,14 @@ class ApiConnection():
 
         return endpoint
 
-    def _get_agent(self, agent_input, agent_type):
+    def _get_agent(self,
+                   agent_input:str,
+                   agent_type:str
+                   )->dict:
         """
-        Gets all available agents from the API
+        Gets an agent from a Mac, IP, or Hostname.
 
-        :return: list (agent objects)
+        :return: dict
         """
         agents = []
         payload = {
@@ -200,7 +235,9 @@ class ApiConnection():
             return agent
 
         # See if we have more pages of data, if so get next page and append until we reach the end
+        self.logger.info(f"Extra pages of agents: {has_next_page}")
         while has_next_page:
+            self.logger.info(f"Getting next page of agents.")
             has_next_page, results_object, next_agents = self._get_next_page_of_agents(results_object)
             agent = self._find_agent_in_agents(next_agents, agent_input, agent_type)
             if agent:
@@ -210,13 +247,15 @@ class ApiConnection():
                            assistance=f"Check the agent input value and try again.",
                            data="NA")
 
-    def _get_next_page_of_agents(self, results_object):
+    def _get_next_page_of_agents(self,
+                                 results_object: dict
+                                 ) -> (bool, dict, list):
         """
         In the case of multiple pages of returned agents, this will go through each page and append
         those agents to the agents list
 
         :param results_object: dict
-        :return: tuple (boolean, dict (results object))
+        :return: tuple (boolean, dict (results), list (agents))
         """
         self.logger.info(f"Getting next page of agents.")
         next_cursor = results_object.get("data").get("organization").get("assets").get("pageInfo").get("endCursor")
@@ -234,11 +273,13 @@ class ApiConnection():
 
         next_agents = self._get_agents_from_result_object(results_object)
 
-        # agents.extend(next_agents)
-
         return has_next_page, results_object, next_agents
 
-    def _find_agent_in_agents(self, agents, agent_input, agent_type):
+    def _find_agent_in_agents(self,
+                              agents:list,
+                              agent_input:str,
+                              agent_type:str
+                              )->dict:
         """
         Given a list of agent objects, find the agent that matches our input.
 
@@ -273,14 +314,16 @@ class ApiConnection():
                 raise APIException(cause="Could not determine agent type.",
                                    assistance=f"Agent {agent_input} was not a MAC address, IP address, or hostname.")
 
-        return None
+        return None # No agent found
 
-    def _get_agents_from_result_object(self, results_object):
+    def _get_agents_from_result_object(self,
+                                       results_object:dict
+                                       )->list:
         """
         This will extract an agent object from the object that's returned from the API
 
         :param results_object: dict (API result payload)
-        :return: dict (agent object)
+        :return: list (agent objects)
         """
         agent_list = []
 
