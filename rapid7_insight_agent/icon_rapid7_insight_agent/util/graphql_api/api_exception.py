@@ -5,6 +5,6 @@ class APIException(Exception):
         self.data = str(data) if data else None
         super().__init__(self.cause)
 
-    def __str__(self):
+    def __str__(self)->str:
         return f"\nAn error occurred with the Insight Agent API.\n" \
                f"{self.cause}\n{self.assistance}\nData: {self.data}"

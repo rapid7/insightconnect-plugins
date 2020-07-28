@@ -8,7 +8,7 @@ HOSTNAME = "Host Name"
 REGEX_STRING = "^(?:[0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2})$"
 MAC_REGEX = re.compile(REGEX_STRING)
 
-def get_agent_type(search_string):
+def get_agent_type(search_string:str)->str:
     """
     Get the type of agent from the agent string
 
