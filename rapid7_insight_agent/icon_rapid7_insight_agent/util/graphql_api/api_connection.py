@@ -1,5 +1,6 @@
 from icon_rapid7_insight_agent.util.graphql_api.region_map import region_map
 from icon_rapid7_insight_agent.util.graphql_api.api_exception import APIException
+from typing import Any
 import icon_rapid7_insight_agent.util.graphql_api.agent_typer as agent_typer
 import requests
 import logging
@@ -20,7 +21,7 @@ class ApiConnection():
         self.session.headers = self._get_headers()
 
         self.org_key = self._get_org_key()
-        self.logger.info(f"Recieved org key: ********-****-****-****-*******{self.org_key[-5:]}")
+        self.logger.info(f"Received org key: ********-****-****-****-*******{self.org_key[-5:]}")
 
     def get_agent(self,
                   agent_input: str
@@ -33,8 +34,7 @@ class ApiConnection():
         """
 
         agent_type = agent_typer.get_agent_type(agent_input)
-        agents = self._get_agent(agent_input, agent_type)
-        agent = self._find_agent_in_agents(agents, agent_input, agent_type)
+        agent = self._get_agent(agent_input, agent_type)
         return agent
 
     def quarantine(self,
@@ -279,7 +279,7 @@ class ApiConnection():
                               agents:list,
                               agent_input:str,
                               agent_type:str
-                              )->dict:
+                              )->Any:
         """
         Given a list of agent objects, find the agent that matches our input.
 
