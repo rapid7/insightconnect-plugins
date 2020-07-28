@@ -20,11 +20,16 @@ This plugin utilizes the [MISP API](https://circl.lu/doc/misp/automation/index.h
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|URL of the MISP server e.g. https://misp-2-4.example.com|None|
-|automation_code|credential_secret_key|None|True|API/Automation code of MISP server|None|
-|ssl|boolean|None|True|If true will use SSL for communication to MISP|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|automation_code|credential_secret_key|None|True|API/Automation code of MISP server|None|None|
+|ssl|boolean|None|True|If true will use SSL for communication to MISP|None|None|
+|url|string|None|True|URL of the MISP server e.g. https://misp-2-4.example.com|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -36,13 +41,18 @@ This action is used to add context. This action returns `true` or `false` on whe
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|comment|comment_input|None|True|Comment|None|
-|link|link_input|None|True|Link|None|
-|other|other_input|None|True|Other|None|
-|text|text_input|None|True|Text|None|
-|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|comment_input|None|True|Comment|None|None|
+|link|link_input|None|True|Link|None|None|
+|other|other_input|None|True|Other|None|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|None|
+|text|text_input|None|True|Text|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -66,14 +76,19 @@ This action is used to export all events in XML format.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|to|string|None|False|To date E.g. 2015-02-17|None|
-|from|string|None|False|From date E.g. 2015-02-15|None|
-|tags|[]string|None|False|Array of tags to include in results|None|
-|event_id|string|None|False|Specify single event to export|None|
-|last|string|None|False|Events within x amount of time E.g. 5d|None|
-|encode_attachments|boolean|True|True|Encode attachments in export|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|encode_attachments|boolean|True|True|Encode attachments in export|None|None|
+|event_id|string|None|False|Specify single event to export|None|None|
+|from|string|None|False|From date E.g. 2015-02-15|None|None|
+|last|string|None|False|Events within x amount of time E.g. 5d|None|None|
+|tags|[]string|None|False|Array of tags to include in results|None|None|
+|to|string|None|False|To date E.g. 2015-02-17|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -87,43 +102,46 @@ This action is used to create a MISP event.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|info|string|None|True|Extra event information|None|
-|orgc_id|string|None|False|Organization C ID|None|
-|sharing_group_id|string|None|False|Sharing group ID|None|
-|org_id|string|None|False|Organization ID|None|
-|analysis|string|None|False|The analysis level of the event|['2', '1', '0']|
-|published|boolean|None|True|Published event?|None|
-|distribution|string|This Organization|False|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
-|threat_level_id|string|None|True|Importance of the threat|['4', '3', '2', '1']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|analysis|string|None|False|The analysis level of the event|['2', '1', '0']|None|
+|distribution|string|This Organization|False|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|None|
+|info|string|None|True|Extra event information|None|None|
+|org_id|string|None|False|Organization ID|None|None|
+|orgc_id|string|None|False|Organization C ID|None|None|
+|published|boolean|None|True|Published event?|None|None|
+|sharing_group_id|string|None|False|Sharing group ID|None|None|
+|threat_level_id|string|None|True|Importance of the threat|['4', '3', '2', '1']|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|orgc_id|string|False|Organization C ID|
-|sharing_group_id|string|False|Sharing group ID|
-|timestamp|string|False|Timestamp|
 |Attribute|[]base_output|False|Attribute|
-|date|date|False|Date|
-|org|orgc_output|False|Organization|
-|disable_correlation|boolean|False|Disable correlation|
-|id|string|False|Event ID|
-|threat_level_id|string|False|Threat level ID|
-|publish_timestamp|string|False|Publish timestamp|
-|info|string|False|Info|
-|event_creator_email|string|False|Event creator's email|
-|locked|boolean|False|Locked|
-|uuid|string|False|Unique event ID|
-|orgc|orgc_output|False|Orgc|
-|attribute_count|string|False|Attribute count|
-|org_id|string|False|Organization ID|
-|analysis|string|False|Analysis|
-|published|boolean|False|Published|
-|distribution|string|False|Distribution|
-|proposal_email_lock|boolean|False|Lock proposal email|
 |RelatedEvent|[]object|False|Related event|
+|analysis|string|False|Analysis|
+|attribute_count|string|False|Attribute count|
+|date|date|False|Date|
+|disable_correlation|boolean|False|Disable correlation|
+|distribution|string|False|Distribution|
+|event_creator_email|string|False|Event creator's email|
+|id|string|False|Event ID|
+|info|string|False|Info|
+|locked|boolean|False|Locked|
+|org_id|string|False|Organization ID|
+|orgc_id|string|False|Organization C ID|
+|proposal_email_lock|boolean|False|Lock proposal email|
+|publish_timestamp|string|False|Publish timestamp|
+|published|boolean|False|Published|
+|sharing_group_id|string|False|Sharing group ID|
+|threat_level_id|string|False|Threat level ID|
+|timestamp|string|False|Timestamp|
+|uuid|string|False|Unique event ID|
 
 #### Export RPZ
 
@@ -131,12 +149,17 @@ This action is used to export RPZ zone files.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|event_id|string|None|False|Specify single event to export|None|
-|to|string|None|False|To date E.g. 2015-02-17|None|
-|from|string|None|False|From date E.g. 2015-02-15|None|
-|tags|[]string|None|False|Array of tags to include in results|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|event_id|string|None|False|Specify single event to export|None|None|
+|from|string|None|False|From date E.g. 2015-02-15|None|None|
+|tags|[]string|None|False|Array of tags to include in results|None|None|
+|to|string|None|False|To date E.g. 2015-02-17|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -150,10 +173,15 @@ This action is used to add a tag. The event tag must already exist in MISP. This
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|tag|string|None|True|Event tag to add|None|
-|event|string|None|True|Event ID to append to|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|event|string|None|True|Event ID to append to|None|None|
+|tag|string|None|True|Event tag to add|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -177,14 +205,19 @@ This action is used to export events in STIX format.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|to|string|None|False|To date E.g. 2015-02-17|None|
-|from|string|None|False|From date E.g. 2015-02-15|None|
-|tags|[]string|None|False|Array of tags to include in results|None|
-|event_id|string|None|False|Specify single event to export|None|
-|last|string|None|False|Events within x amount of time E.g. 5d|None|
-|encode_attachments|boolean|True|True|Encode attachments in export|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|encode_attachments|boolean|True|True|Encode attachments in export|None|None|
+|event_id|string|None|False|Specify single event to export|None|None|
+|from|string|None|False|From date E.g. 2015-02-15|None|None|
+|last|string|None|False|Events within x amount of time E.g. 5d|None|None|
+|tags|[]string|None|False|Array of tags to include in results|None|None|
+|to|string|None|False|To date E.g. 2015-02-17|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -198,9 +231,14 @@ This action is used to add sightings to an organization.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|sightings|[]string|None|True|Event sightings|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|sightings|[]string|None|True|Event sightings|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -224,14 +262,18 @@ This action is used to add URLs to an event. This action returns `true` or `fals
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|comment|string|None|False|Attribute comment|None|
-|distribution|string|None|False|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
-|event|string|None|False|Event ID to append to|None|
-|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
-|urls|[]string|None|False|URLs to add|None|
-|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|False|Attribute comment|None|None|
+|distribution|string|None|False|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|None|
+|event|string|None|False|Event ID to append to|None|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|None|
+|urls|[]string|None|False|URLs to add|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -255,13 +297,18 @@ This action is used to export hashes from the HIDS database.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|to|string|None|False|To date E.g. 2015-02-17|None|
-|format|string|None|True|Export format as either MD5 or SHA1|['md5', 'sha1']|
-|from|string|None|False|From date E.g. 2015-02-15|None|
-|last|string|None|False|Events within x amount of time E.g. 5d|None|
-|tags|[]string|None|False|Array of tags to include in results|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|format|string|None|True|Export format as either MD5 or SHA1|['md5', 'sha1']|None|
+|from|string|None|False|From date E.g. 2015-02-15|None|None|
+|last|string|None|False|Events within x amount of time E.g. 5d|None|None|
+|tags|[]string|None|False|Array of tags to include in results|None|None|
+|to|string|None|False|To date E.g. 2015-02-17|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -275,15 +322,20 @@ This action is used to export snort or suricata rules.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|to|string|None|False|To date E.g. 2015-02-17|None|
-|from|string|None|False|From date E.g. 2015-02-15|None|
-|tags|[]string|None|False|Array of tags to include in results|None|
-|event_id|string|None|False|Narrow results to a single event|None|
-|last|string|None|False|Events within x amount of time E.g. 5d|None|
-|frame|boolean|True|True|Commented out explanation framing the data|None|
-|format|string|None|True|Export format as either Suricata or Snort|['suricata', 'snort']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|event_id|string|None|False|Narrow results to a single event|None|None|
+|format|string|None|True|Export format as either Suricata or Snort|['suricata', 'snort']|None|
+|frame|boolean|True|True|Commented out explanation framing the data|None|None|
+|from|string|None|False|From date E.g. 2015-02-15|None|None|
+|last|string|None|False|Events within x amount of time E.g. 5d|None|None|
+|tags|[]string|None|False|Array of tags to include in results|None|None|
+|to|string|None|False|To date E.g. 2015-02-17|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -297,17 +349,22 @@ This action is used to export all attributes in CSV format.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|category|string|None|False|Attribute category|None|
-|from|string|None|False|From date E.g. 2015-02-15|None|
-|include_context|boolean|True|True|Include event data with each attribute|None|
-|event_id|[]string|None|False|Array of events to download|None|
-|tags|[]string|None|False|Array of tags to include in results|None|
-|to|string|None|False|To date E.g. 2015-02-17|None|
-|last|string|None|False|Events within x amount of time E.g. 5d|None|
-|include|boolean|True|True|Include attributes not marked as to_ids|None|
-|type|string|None|False|Attribute type|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|category|string|None|False|Attribute category|None|None|
+|event_id|[]string|None|False|Array of events to download|None|None|
+|from|string|None|False|From date E.g. 2015-02-15|None|None|
+|include|boolean|True|True|Include attributes not marked as to_ids|None|None|
+|include_context|boolean|True|True|Include event data with each attribute|None|None|
+|last|string|None|False|Events within x amount of time E.g. 5d|None|None|
+|tags|[]string|None|False|Array of tags to include in results|None|None|
+|to|string|None|False|To date E.g. 2015-02-17|None|None|
+|type|string|None|False|Attribute type|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -321,9 +378,14 @@ This action is used to download an attachment.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|attribute_id|string|None|True|Attribute ID of attachment or malware sample|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|attribute_id|string|None|True|Attribute ID of attachment or malware sample|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -337,13 +399,18 @@ This action is used to add email recipient to event. This action returns `true` 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|comment|string|None|True|Attribute comment|None|
-|distribution|string|None|True|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
-|event|string|None|True|Event ID to append to|None|
-|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
-|recipient|string|None|True|Recipient email address|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|True|Attribute comment|None|None|
+|distribution|string|None|True|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|None|
+|event|string|None|True|Event ID to append to|None|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|None|
+|recipient|string|None|True|Recipient email address|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -367,13 +434,18 @@ This action is used to add email sender to event. This action returns `true` or 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|comment|string|None|True|Attribute comment|None|
-|distribution|string|None|True|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
-|event|string|None|True|Event ID to append to|None|
-|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
-|sender|string|None|True|Sender email address|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|True|Attribute comment|None|None|
+|distribution|string|None|True|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|None|
+|event|string|None|True|Event ID to append to|None|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|None|
+|sender|string|None|True|Sender email address|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -397,14 +469,18 @@ This action is used to add email subject to event. This action returns `true` or
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|comment|string|None|True|Attribute comment|None|
-|distribution|string|None|True|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|
-|event|string|None|True|Event ID to append to|None|
-|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
-|subject|string|None|True|Email subject|None|
-|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|True|Attribute comment|None|None|
+|distribution|string|None|True|Distribution type|['This Community', 'This Organization', 'Connected Communities', 'All Communities']|None|
+|event|string|None|True|Event ID to append to|None|None|
+|proposal|boolean|False|True|Mark request as a proposal (Default: false)|None|None|
+|subject|string|None|True|Email subject|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -428,9 +504,14 @@ This action is used to receive events based on criteria.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|event_id|string|None|True|Event ID e.g. 123|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|event_id|string|None|True|Event ID e.g. 123|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -535,16 +616,32 @@ This action is used to search for events.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|analysis|string|None|False|Search by analysis level|['Do not search on', 'Initial', 'Ongoing', 'Completed']|
-|date_from|string|None|False|Search after this date e.g. 2018-03-22|None|
-|date_until|string|None|False|Search before this date e.g. 2018-03-22|None|
-|event|string|None|False|Search by event ID|None|
-|organization|string|None|False|Search by organization|None|
-|published|string|None|False|Search by if published|['Do not search on', 'True', 'False']|
-|tag|string|None|False|Search by tag|None|
-|threat_level|string|None|False|Search by threat level|['Do not search on', 'Undefined', 'Low', 'Medium', 'High']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|analysis|string|None|False|Search by analysis level|['Do not search on', 'Initial', 'Ongoing', 'Completed']|None|
+|category|string|None|False|Search by attribute category|None|Person|
+|date_from|string|None|False|Search after this date e.g. 2018-03-22|None|None|
+|date_until|string|None|False|Search before this date e.g. 2018-03-22|None|None|
+|event|string|None|False|Search by event ID|None|None|
+|organization|string|None|False|Search by organization|None|None|
+|published|string|None|False|Search by if published|['Do not search on', 'True', 'False']|None|
+|tag|string|None|False|Search by tag|None|None|
+|threat_level|string|None|False|Search by threat level|['Do not search on', 'Undefined', 'Low', 'Medium', 'High']|None|
+|type_attribute|string|None|False|Search by any valid MISP attribute type|None|text|
+|values|[]string|None|False|Search by given values of attributes value field|None|["example_one", "example_two"]|
+
+Example input:
+
+```
+{
+  "category": "Person",
+  "type_attribute": "text",
+  "values": [
+    "example_one",
+    "example_two"
+  ]
+}
+```
 
 ##### Output
 
@@ -577,10 +674,15 @@ This action is used to remove a tag.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|tag|string|None|True|Event tag for search|None|
-|event|string|None|True|Event ID to append to|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|event|string|None|True|Event ID to append to|None|None|
+|tag|string|None|True|Event tag for search|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -604,13 +706,18 @@ This action is used to add an attribute to an event.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|category|string|None|True|The attribute category e.g. external analysis, network activity|None|
-|comment|string|None|False|Optional comment to add to attribute|None|
-|event|string|None|True|ID of event to append to|None|
-|type_value|string|None|True|The Type of attribute e.g. URL, SHA256|None|
-|value|string|None|True|The Value of the attribute e.g. for a URL https://malware.com|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|category|string|None|True|The attribute category e.g. external analysis, network activity|None|None|
+|comment|string|None|False|Optional comment to add to attribute|None|None|
+|event|string|None|True|ID of event to append to|None|None|
+|type_value|string|None|True|The Type of attribute e.g. URL, SHA256|None|None|
+|value|string|None|True|The Value of the attribute e.g. for a URL https://malware.com|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -650,9 +757,14 @@ This action is used to publish an event.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|event|string|None|False|Search by event ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|event|string|None|False|Search by event ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -681,11 +793,16 @@ This action is used to add an attachment to event.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|attachment|bytes|None|True|Attachment for event|None|
-|event|string|None|True|Event ID to append to|None|
-|filename|string|None|False|Filename of attachment|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|attachment|bytes|None|True|Attachment for event|None|None|
+|event|string|None|True|Event ID to append to|None|None|
+|filename|string|None|False|Filename of attachment|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -700,23 +817,33 @@ Example output:
 
 ### Triggers
 
-#### Search For Tag
+#### Search for Tag
 
-This trigger is used to search MISP for any events with a specified tag.
+This trigger this trigger will search MISP for any events with a specified tag.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|interval|integer|60|True|How frequently (in seconds) to trigger a search|None|
-|tag|string|None|True|The tag to search for|None|
-|remove|boolean|None|True|If true the tag will be removed|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|interval|integer|60|True|How frequently (in seconds) to trigger a search|None|None|
+|remove|boolean|None|True|If true the tag will be removed|None|None|
+|tag|string|None|True|The tag to search for|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |events|[]string|True|A list of event_ids with the tag|
+
+Example output:
+
+```
+```
 
 ### Custom Output Types
 
@@ -728,6 +855,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 5.0.0 - New fields added to Search Events action: values, category and type_attribute
 * 4.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Commented Explanation
 * 3.0.0 - Fixed issue where Add URLs, Add Context, Add Email Sender, Add Email Subject and Add Email Recipient actions sent requests as a proposal | Fixed an issue where the distribution list was set incorrectly within Add URLs, Add Context, Create an Event, Add Email Sender, Add Email Subject, Add Email Recipient actions
 * 2.0.0 - Updated to new credential types | Update `hostname` variable in Connection to `url`
