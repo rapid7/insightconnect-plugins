@@ -58,15 +58,20 @@ This action updates the status (waive or quarantine) of a convicted threat on a 
 |----|----|-------|--------|-----------|----|-------|
 |agent|string|None|True|Device to update threat on. Accepts IP address, MAC address, hostname, or device ID|None|Example-Hostname|
 |quarantine_state|boolean|None|True|True to quarantine threat, false to waive threat|None|True|
-|threat_identifier|string|None|True|The threat to search for. The input should be a threat name, MD5 or SHA256 hash|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|threat_identifier|string|None|True|The threat to search for. The input should be a threat name, MD5 or SHA256 hash|None|44d88612fea8a8f36de82e1278abb02f|
 
 Example input:
 
 ```
 {
+  "add_zones": [
+    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
+  ],
   "agent": "Example-Hostname",
-  "quarantine_state": true,
-  "threat_identifier": "9de5069c5afe602b2ea0a04b66beb2c0"
+  "policy": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
+  "remove_zones": [
+    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
+  ]
 }
 ```
 
@@ -185,7 +190,7 @@ This action finds and displays detailed information about one or more threats.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |score|integer|None|False|Filter the search by the Cylance score assigned to the threat. Accepts an integer within the range [-1,1]|None|-1|
-|threat_identifier|[]string|None|True|The threat(s) to search for. The input should be an array of threat names, MD5, or SHA256 hashes|None|["9de5069c5afe602b2ea0a04b66beb2c0", "02699626f388ed830012e5b787640e71c56d42d8", "Example-Threat-Name"]|
+|threat_identifier|[]string|None|True|The threat(s) to search for. The input should be an array of threat names, MD5, or SHA256 hashes|None|["44d88612fea8a8f36de82e1278abb02f", "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f", "Example-Threat-Name"]|
 
 Example input:
 
@@ -193,8 +198,8 @@ Example input:
 {
   "score": -1,
   "threat_identifier": [
-    "9de5069c5afe602b2ea0a04b66beb2c0",
-    "02699626f388ed830012e5b787640e71c56d42d8",
+    "44d88612fea8a8f36de82e1278abb02f",
+    "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
     "Example-Threat-Name"
   ]
 }
@@ -236,13 +241,13 @@ This action is used to retrieve a list of devices affected by a threat.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|threat_identifier|string|None|True|The threat to search for. The input should be a threat name, MD5, or SHA256 hash|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|threat_identifier|string|None|True|The threat to search for. The input should be a threat name, MD5, or SHA256 hash|None|44d88612fea8a8f36de82e1278abb02f|
 
 Example input:
 
 ```
 {
-  "threat_identifier": "9de5069c5afe602b2ea0a04b66beb2c0"
+  "threat_identifier": "44d88612fea8a8f36de82e1278abb02f"
 }
 ```
 

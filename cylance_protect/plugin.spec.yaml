@@ -466,7 +466,7 @@ actions:
         description: The threat(s) to search for. The input should be an array of threat names, MD5, or SHA256 hashes
         type: "[]string"
         required: true
-        example: ["9de5069c5afe602b2ea0a04b66beb2c0", "02699626f388ed830012e5b787640e71c56d42d8", "Example-Threat-Name"]
+        example: ["44d88612fea8a8f36de82e1278abb02f", "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f", "Example-Threat-Name"]
       score:
         title: Score
         description: Filter the search by the Cylance score assigned to the threat. Accepts an integer within the range [-1,1]
@@ -488,7 +488,7 @@ actions:
         description: The threat to search for. The input should be a threat name, MD5, or SHA256 hash
         type: string
         required: true
-        example: 9de5069c5afe602b2ea0a04b66beb2c0
+        example: 44d88612fea8a8f36de82e1278abb02f
     output:
       agents:
         title: Agents
@@ -510,7 +510,7 @@ actions:
         description: The threat to search for. The input should be a threat name, MD5 or SHA256 hash
         type: string
         required: true
-        example: 9de5069c5afe602b2ea0a04b66beb2c0
+        example: 44d88612fea8a8f36de82e1278abb02f
       quarantine_state:
         title: Quarantine State
         description: True to quarantine threat, false to waive threat
