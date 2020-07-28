@@ -4,30 +4,12 @@ import json
 
 
 class SophosCentralAPI:
-    def __init__(self, url, client_id, client_secret, logger):
+    def __init__(self, url, client_id, client_secret, tenant_id, logger):
         self.url = url
         self.client_id = client_id
         self.client_secret = client_secret
+        self.tenant_id = tenant_id
         self.logger = logger
-
-    def get_siem_events(self, since: str = None, key: str = None):
-        params = {
-            "pageTotal": True
-        }
-        if since:
-            params = {
-                "from": since
-            }
-        if key:
-            params = {
-                "pageFromKey": key
-            }
-        return self._call_api(
-            "GET",
-            f"{self.url}/common/v1/alerts",
-            "Tenant",
-            params=params
-        )
 
     def get_alerts(self, since: str = None, key: str = None):
         params = {
@@ -80,7 +62,7 @@ class SophosCentralAPI:
             }
         )
 
-    def generate_headers(self):
+    def get_access_token(self):
         token = self._make_request(
             method="POST",
             url="https://id.sophos.com/api/v2/oauth2/token",
@@ -95,19 +77,20 @@ class SophosCentralAPI:
             }
         )
 
-        return {
-            'tracking_id': token.get("trackingId"),
-            'access_token': token.get("access_token")
-        }
+        return token.get("access_token")
 
     def _call_api(self, method, url, key_type, params=None, json_data=None):
-        generate_headers = self.generate_headers()
-        access_token = generate_headers.get("access_token")
-        id = self.whoami(access_token)["id"]
+        access_token = self.get_access_token()
+
+        if self.tenant_id:
+            id_ = self.tenant_id
+        else:
+            id_ = self.whoami(access_token)["id"]
+
         return self._make_request(
             method, url, params, json_data, headers={
                 "Authorization": f"Bearer {access_token}",
-                f"X-{key_type}-ID": id
+                f"X-{key_type}-ID": id_
             }
         )
 

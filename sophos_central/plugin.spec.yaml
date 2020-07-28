@@ -478,6 +478,12 @@ connection:
     type: credential_secret_key
     required: true
     example: 1x1xxx11-1x11-11x1-11xx-1x1xxx1x11x1
+  tenant_id:
+    title: Tenant ID
+    description: Tenant ID for Sophos Central instance
+    type: credential_secret_key
+    required: true
+    example: 1x1xxx11-1x11-11x1-11xx-1x1xxx1x11x1
 
 actions:
   download_hashes:
@@ -510,7 +516,7 @@ actions:
     description: Get alerts for a customer based on the parameters provided
     input:
       from_date:
-        title: From date
+        title: From Date
         description: The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours
         required: false
         type: string

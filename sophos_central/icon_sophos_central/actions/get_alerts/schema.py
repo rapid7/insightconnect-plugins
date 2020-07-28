@@ -23,7 +23,7 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "from_date": {
       "type": "string",
-      "title": "From date",
+      "title": "From Date",
       "description": "The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours",
       "order": 1
     }

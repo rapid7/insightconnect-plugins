@@ -6,6 +6,7 @@ import json
 class Input:
     CLIENT_ID = "client_id"
     CLIENT_SECRET = "client_secret"
+    TENANT_ID = "tenant_id"
     URL = "url"
     
 
@@ -27,6 +28,12 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "Client secret key that allows access to Sophos Central",
       "order": 2
     },
+    "tenant_id": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "Tenant ID",
+      "description": "Tenant ID for Sophos Central instance",
+      "order": 4
+    },
     "url": {
       "type": "string",
       "title": "URL",
@@ -37,6 +44,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "required": [
     "client_id",
     "client_secret",
+    "tenant_id",
     "url"
   ],
   "definitions": {
