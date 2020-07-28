@@ -10,7 +10,7 @@ class Component:
 class Input:
     COMMENT = "comment"
     ISOLATION_TYPE = "isolation_type"
-    MACHINE_ID = "machine_id"
+    MACHINE = "machine"
     
 
 class Output:
@@ -39,17 +39,17 @@ class IsolateMachineInput(insightconnect_plugin_runtime.Input):
       ],
       "order": 2
     },
-    "machine_id": {
+    "machine": {
       "type": "string",
-      "title": "Machine ID",
-      "description": "Machine ID",
+      "title": "Machine",
+      "description": "Machine IP address, hostname and machine ID",
       "order": 1
     }
   },
   "required": [
     "comment",
     "isolation_type",
-    "machine_id"
+    "machine"
   ]
 }
     """)

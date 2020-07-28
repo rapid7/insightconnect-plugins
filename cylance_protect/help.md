@@ -48,6 +48,56 @@ Example input:
 
 ### Actions
 
+#### Search Agents
+
+This action searches for agents and returns device information details about them.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, name, or device ID|None|EXAMPLE-HOSTNAME|
+
+Example input:
+
+```
+{
+  "agent": "EXAMPLE-HOSTNAME"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|agents|[]agents|True|Detailed information about agents found|
+
+Example output:
+
+```
+{
+  "agents": [
+    {
+      "mac_addresses": [
+        "08-00-27-2F-43-60"
+      ],
+      "name": "Example-Hostname",
+      "policy": {
+        "id": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
+        "name": "Default"
+      },
+      "state": "Offline",
+      "agent_version": "2.0.1540",
+      "date_first_registered": "2020-06-21T15:53:43",
+      "id": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
+      "ip_addresses": [
+        "198.51.100.100"
+      ]
+    }
+  ]
+}
+```
+
 #### Search Threats
 
 This action finds and displays detailed information about one or more threats.
@@ -301,6 +351,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.0 - New action Search Agents
 * 1.2.0 - New actions Search Threats, Get Devices Affected by Threat
 * 1.1.0 - New action Quarantine
 * 1.0.3 - Match official branding in plugin title

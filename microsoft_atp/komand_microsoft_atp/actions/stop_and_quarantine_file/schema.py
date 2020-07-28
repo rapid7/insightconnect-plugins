@@ -9,7 +9,7 @@ class Component:
 
 class Input:
     COMMENT = "comment"
-    MACHINE_ID = "machine_id"
+    MACHINE = "machine"
     SHA1 = "sha1"
     
 
@@ -29,10 +29,10 @@ class StopAndQuarantineFileInput(insightconnect_plugin_runtime.Input):
       "description": "Comment to associate with the stop and quarantine action",
       "order": 2
     },
-    "machine_id": {
+    "machine": {
       "type": "string",
-      "title": "Machine ID",
-      "description": "Machine ID",
+      "title": "Machine",
+      "description": "Machine IP address, hostname and machine ID",
       "order": 1
     },
     "sha1": {
@@ -44,7 +44,7 @@ class StopAndQuarantineFileInput(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "comment",
-    "machine_id",
+    "machine",
     "sha1"
   ]
 }
