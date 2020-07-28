@@ -32,12 +32,6 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
-{
-  "api_key": "23c71eaadfdde87bcfae85cefedb528f0e556c92463b87c3674271d65f00fb3f",
-  "org_id": "25cd88bd50b9ff3822aabd88",
-  "timeout": 120,
-  "user_id": "9bb2ad3aeb246c7d145056e7"
-}
 ```
 
 ## Technical Details

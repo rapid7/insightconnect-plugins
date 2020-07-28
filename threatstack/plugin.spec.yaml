@@ -259,7 +259,7 @@ types:
       required: false
     suppressions:
       title: "Suppressions"
-      type: "[]string]"
+      type: "[]string"
       description: "Suppressions"
       required: false
     enabled:
