@@ -10,7 +10,6 @@ The [Insight Agent] (https://docs.rapid7.com/insight-agent/overview/) collects l
 # Requirements
 
 * [Platform API Key](https://docs.rapid7.com/insight/managing-platform-api-keys/)
-* Organization ID
 
 # Documentation
 

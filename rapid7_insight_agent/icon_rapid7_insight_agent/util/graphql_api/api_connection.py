@@ -18,8 +18,8 @@ class ApiConnection():
 
     def get_agent(self, agent_input):
         agent_type = agent_typer.get_agent_type(agent_input)
-        agents = self._get_all_agents()
-        agent = self._find_agent_in_agents(agents, agent_input, agent_type)
+        agent = self._get_agent(agent_input, agent_type)
+        # agent = self._find_agent_in_agents(agents, agent_input, agent_type)
         return agent
 
     def quarantine(self, advertisement_period, agent_id):
@@ -174,7 +174,7 @@ class ApiConnection():
 
         return endpoint
 
-    def _get_all_agents(self):
+    def _get_agent(self, agent_input, agent_type):
         """
         Gets all available agents from the API
 
@@ -195,20 +195,26 @@ class ApiConnection():
         agents.extend(self._get_agents_from_result_object(results_object))
         self.logger.info(f"Initial agents received.")
 
+        agent = self._find_agent_in_agents(agents, agent_input, agent_type)
+        if agent:
+            return agent
+
         # See if we have more pages of data, if so get next page and append until we reach the end
         while has_next_page:
-            has_next_page, results_object = self._get_next_page_of_agents(agents, results_object)
+            has_next_page, results_object, next_agents = self._get_next_page_of_agents(results_object)
+            agent = self._find_agent_in_agents(next_agents, agent_input, agent_type)
+            if agent:
+                return agent
 
-        self.logger.info(f"Done getting all agents.")
+        raise APIException(cause=f"Could not find agent matching {agent_input} of type {agent_type}.",
+                           assistance=f"Check the agent input value and try again.",
+                           data="NA")
 
-        return agents
-
-    def _get_next_page_of_agents(self, agents, results_object):
+    def _get_next_page_of_agents(self, results_object):
         """
         In the case of multiple pages of returned agents, this will go through each page and append
         those agents to the agents list
 
-        :param agents: list (agent objects)
         :param results_object: dict
         :return: tuple (boolean, dict (results object))
         """
@@ -228,19 +234,21 @@ class ApiConnection():
 
         next_agents = self._get_agents_from_result_object(results_object)
 
-        agents.extend(next_agents)
+        # agents.extend(next_agents)
 
-        return has_next_page, results_object
+        return has_next_page, results_object, next_agents
 
     def _find_agent_in_agents(self, agents, agent_input, agent_type):
         """
-        Given a list of agent objects, find the agent that matches our input
+        Given a list of agent objects, find the agent that matches our input.
+
+        If no agent is found this will return None
 
         :param agents: list (agents)
         :param agent_input: String (Input value to look for)
         :param agent_type: String (What type of input to look for, MAC, IP_ADDRESS, or HOSTNAME)
 
-        :return: dict (agent object)
+        :return: dict (agent object), None
         """
         self.logger.info(f"Searching for: {agent_input}")
         self.logger.info(f"Search type: {agent_type}")
@@ -265,8 +273,7 @@ class ApiConnection():
                 raise APIException(cause="Could not determine agent type.",
                                    assistance=f"Agent {agent_input} was not a MAC address, IP address, or hostname.")
 
-        raise APIException(cause=f"Could not find agent matching {agent_input} of type {agent_type}.",
-                           assistance=f"Check the agent input value and try again.")
+        return None
 
     def _get_agents_from_result_object(self, results_object):
         """
