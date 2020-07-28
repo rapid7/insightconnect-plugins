@@ -57,6 +57,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.3 - Updated extension title and logo
 * 1.0.2 - Rebrand and update help references
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Support web server mode

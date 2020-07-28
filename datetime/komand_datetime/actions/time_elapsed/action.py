@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import TimeElapsedInput, TimeElapsedOutput, Input, Output
 import maya
 
 
-class TimeElapsed(komand.Action):
+class TimeElapsed(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

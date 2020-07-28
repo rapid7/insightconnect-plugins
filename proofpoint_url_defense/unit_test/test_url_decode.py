@@ -5,7 +5,6 @@ sys.path.append(os.path.abspath('../'))
 from unittest import TestCase
 from komand_proofpoint_url_defense.connection.connection import Connection
 from komand_proofpoint_url_defense.actions.url_decode import UrlDecode
-from komand.exceptions import PluginException
 import json
 import logging
 

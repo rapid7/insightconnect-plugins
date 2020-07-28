@@ -4,7 +4,7 @@ products: [insightconnect]
 name: cylance_protect
 title: BlackBerry CylancePROTECT
 description: Automate detection and response operations using CylancePROTECT
-version: 1.0.3
+version: 1.3.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -120,6 +120,231 @@ types:
       type: string
       description: Update type
       required: false
+  lockdown_history:
+    user_id:
+      title: User ID
+      description: The unique ID of the user who locked down the device
+      type: string
+      required: false
+    timestamp:
+      title: Timestamp
+      description: The timestamp (in UTC) of when the command was initiated
+      type: string
+      required: false
+    command:
+      title: Command
+      description: The command that was executed
+      type: string
+      required: false
+  lockdown:
+    id:
+      title: ID
+      description: The unique device ID that the lockdown command was issued to
+      type: string
+      required: false
+    hostname:
+      title: Hostname
+      description: The hostname of the device that the lockdown command was issued to
+      type: string
+      required: false
+    tenant_id:
+      title: Tenant ID
+      description: The unique tenant ID of the tenant that the device belongs to
+      type: string
+      required: false
+    connection_status:
+      title: Connection Status
+      description: Whether or not the device is connected to Cylance's cloud services
+      type: string
+      required: false
+    optics_device_version:
+      title: Optics Device Version
+      description: The numerical version of CylanceOPTICS running on the device
+      type: string
+      required: false
+    password:
+      title: Password
+      description: The password required to unlock the device
+      type: string
+      required: false
+    lockdown_expiration:
+      title: Lockdown Expiration
+      description: The timestamp (in UTC) of when the current device lockdown is set to expire
+      type: string
+      required: false
+    lockdown_initiated:
+      title: Lockdown Initiated
+      description: The timestamp (in UTC) of when the current device lockdown was initiated
+      type: string
+      required: false
+    lockdown_history:
+      title: Lockdown History
+      description: A list of historical device lockdown commands issued to this particular device
+      type: "[]lockdown_history"
+      required: false
+  lockdown_response:
+    status:
+      title: Status
+      description: Status of the action performed
+      type: string
+      required: false
+    lockdown_details:
+      title: Lockdown Details
+      description: Detailed information about the lockdown action performed
+      type: lockdown
+      required: false
+  agents:
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    state:
+      title: State
+      type: string
+      description: State
+      required: false
+    agent_version:
+      title: Agent Version
+      type: string
+      description: Agent version
+      required: false
+    policy:
+      title: Policy
+      type: policy
+      description: Policy
+      required: false
+    date_first_registered:
+      title: Date First Registered
+      type: string
+      description: Date first registered
+      required: false
+    ip_addresses:
+      title: IP Addresses
+      type: "[]string"
+      description: IP addresses
+      required: false
+    mac_addresses:
+      title: MAC Addresses
+      type: "[]string"
+      description: MAC addresses
+  threat:
+    name:
+      title: Name
+      description: The name of the threat
+      type: string
+      required: false
+    sha256:
+      title: SHA256
+      description: The SHA256 hash for the threat
+      type: string
+      required: false
+    md5:
+      title: MD5
+      description: The MD5 hash for the threat
+      type: string
+      required: false
+    cylance_score:
+      title: Cylance Score
+      description: The Cylance Score assigned to the threat
+      type: float
+      required: false
+    av_industry:
+      title: AV Industry
+      description: The score provided by the antivirus industry
+      type: float
+      required: false
+    classification:
+      title: Classification
+      description: The threat classification for the threat
+      type: string
+      required: false
+    sub_classification:
+      title: Sub Classification
+      description: The threat sub-classification for the threat
+      type: string
+      required: false
+    global_quarantined:
+      title: Global Quarantined
+      description: Identifies if the threat is on the Global Quarantine list
+      type: boolean
+      required: false
+    safelisted:
+      title: Safelisted
+      description: Identifies if the threat is on the Safe List
+      type: boolean
+      required: false
+    file_size:
+      title: File Size
+      description: The size of the file, in bytes
+      type: int
+      required: false
+    unique_to_cylance:
+      title: Unique to Cylance
+      description: The threat was identifies by Cylance but not by other antivirus sources
+      type: boolean
+      required: false
+    last_found:
+      title: Last Found
+      description: The date and time the threat was last found on any device in your organization
+      type: string
+      required: false
+  threat_device:
+    id:
+      title: ID
+      description: The endpoint's unique identifier
+      type: string
+      required: false
+    name:
+      title: Name
+      description: The name of the device
+      type: string
+      required: false
+    state:
+      title: State
+      description: The state of the device
+      type: string
+      required: false
+    agent_version:
+      title: Agent Version
+      description: The CylancePROTECT Agent version installed on the device
+      type: string
+      required: false
+    policy_id:
+      title: Policy ID
+      description: The unique identifier for the policy assigned to the device, or null if no policy is assigned
+      type: string
+      required: false
+    date_found:
+      title: Date Found
+      description: The date and time (in UTC) when the threat was found on the device
+      type: string
+      required: false
+    file_status:
+      title: File Status
+      description: Current quarantine status of the file on the device
+      type: string
+      required: false
+    file_path:
+      title: File Path
+      description: The path where the file was found on the device
+      type: string
+      required: false
+    ip_addresses:
+      title: IP Addressess
+      description: The list of IP addresses for the device
+      type: "[]string"
+      required: false
+    mac_addresses:
+      title: MAC Addressess
+      description: The list of MAC addresses for the device
+      type: "[]string"
+      required: false
 
 connection:
   tenant_id:
@@ -193,4 +418,80 @@ actions:
         title: Success
         description: Return true if blacklist item was created or deleted
         type: boolean
+        required: true
+  quarantine:
+    title: Quarantine
+    description: Quarantine (isolate) an endpoint
+    input:
+      agent:
+        title: Agent
+        description: Device to perform quarantine action on. Accepts IP address, MAC address, hostname, or device ID
+        type: string
+        required: true
+        example: Example-Hostname
+      whitelist:
+        title: Whitelist
+        description: This list contains a set of hosts that should not be blocked. This can include IPs, hostnames or device IDs
+        type: "[]string"
+        required: false
+        example: ["198.51.100.100", "Example-Hostname", "1abc234d-5efa-6789-bcde-0f1abcde23f5"]
+    output:
+      lockdown_details:
+        title: Lockdown Details
+        description: Detailed information about the device lockdown
+        type: lockdown_response
+        required: true
+  search_agents:
+    title: Search Agents
+    description: This action searches for agents and returns device information details
+    input:
+      agent:
+        title: Agent
+        description: Agent to retrieve device information from. Accepts IP address, MAC address, name, or device ID
+        type: string
+        required: true
+        example: EXAMPLE-HOSTNAME
+    output:
+      agents:
+        title: Agents
+        description: Detailed information about agents found
+        type: "[]agents"
+        required: true
+  search_threats:
+    title: Search Threats
+    description: Finds and displays detailed information about one or more threats
+    input:
+      threat_identifier:
+        title: Threat Identifier
+        description: The threat(s) to search for. The input should be an array of threat names, MD5, or SHA256 hashes
+        type: "[]string"
+        required: true
+        example: ["9de5069c5afe602b2ea0a04b66beb2c0", "02699626f388ed830012e5b787640e71c56d42d8", "Example-Threat-Name"]
+      score:
+        title: Score
+        description: Filter the search by the Cylance score assigned to the threat. Accepts an integer within the range [-1,1]
+        type: integer
+        required: false
+        example: -1
+    output:
+      threats:
+        title: Threats
+        description: Detailed information about threats found
+        type: "[]threat"
+        required: true
+  search_threat_agents:
+    title: Get Devices Affected by Threat
+    description: Retrieve a list of devices affected by a threat
+    input:
+      threat_identifier:
+        title: Threat Identifier
+        description: The threat to search for. The input should be a threat name, MD5, or SHA256 hash
+        type: string
+        required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+    output:
+      agents:
+        title: Agents
+        description: Detailed information about threat agents found
+        type: "[]threat_device"
         required: true

@@ -2,9 +2,9 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: carbon_black_live_response
-title: VMware Carbon Black EDR
+title: VMware Carbon Black Cloud Live Response
 description: Delete malicious files
-version: 1.0.2
+version: 1.0.3
 vendor: rapid7
 support: rapid7
 status: []

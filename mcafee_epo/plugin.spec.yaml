@@ -7,7 +7,7 @@ vendor: rapid7
 support: community
 status: []
 description: McAfee ePolicy Orchestrator provides a web API for McAfee endpoint protection management activities
-version: 1.0.2
+version: 5.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/mcafee_epo
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -107,7 +107,7 @@ types:
       type: string
       required: false
     EPOComputerProperties.IPXAddress:
-      title: ''
+      title: IPX Address
       type: string
       required: false
     EPOComputerProperties.SysvolTotalSpace:
@@ -218,84 +218,201 @@ types:
       title: Last Agent Handler
       type: integer
       required: false
+  policies_returned:
+    featureId:
+      title: Feature ID
+      type: string
+      description: Feature ID
+      required: false
+    featureName:
+      title: Feature Name
+      type: string
+      description: Feature name
+      required: false
+    objectId:
+      title: Object ID
+      type: integer
+      description: Object ID
+      required: false
+    objectName:
+      title: Object Name
+      type: string
+      description: Object name
+      required: false
+    objectNotes:
+      title: Object Notes
+      type: string
+      description: Object notes
+      required: false
+    productId:
+      title: Product ID
+      type: string
+      description: Product ID
+      required: false
+    productName:
+      title: Product Name
+      type: string
+      description: Product name
+      required: false
+    typeId:
+      title: Type ID
+      type: integer
+      description: Type ID
+      required: false
+    typeName:
+      title: Type Name
+      type: string
+      description: Type name
+      required: false
+
 connection:
   url:
     title: URL
-    description: McAfee ePO address e.g. epo.company.com
+    description: McAfee ePO address
     type: string
     required: true
+    example: https://www.example.com
   port:
     title: Port
-    description: McAfee ePO Port e.g. 8443
+    description: McAfee ePO port
     type: number
     required: true
+    example: 8443
   credentials:
     title: Username and Password
-    description: Username and password to access McAfee ePO e.g. admin
+    description: Username and password to access McAfee ePO
     type: credential_username_password
     required: true
+    example: '{"username":"user1", "password":"mypassword"}'
+  ssl_verify:
+    type: boolean
+    title: SSL Verify
+    description: Verify SSL Certificate
+    required: true
+    default: true
+    example: true
 actions:
   add_permission_set_to_user:
     title: Add Permission Set to User
     description: Adds permission set(s) to specified user
     input:
       user:
-        type: string
+        title: User
         description: Username of the target user
+        type: string
         required: false
+        example: user1
       permission_set:
+        title: Permission Set
+        description: String name of the permission set to apply
         type: string
-        description: String name of the permission set to apply e.g. Group Admin
         required: false
+        example: Group Admin
     output:
       message:
+        title: Message
+        description: Response message
         type: boolean
-        description: Response message
         required: true
-  add_tags:
-    title: Add Tags
-    description: Assigns the given tag to a supplied list of systems
+  tag_system:
+    title: Assign Tags
+    description: Assigns the given tag to an agent by GUID, name, IP address, MAC address or user name
     input:
-      devices:
-        type: '[]string'
-        description: Array of all devices to tag e.g. ["Device-1","Device-2"]
-        required: true
-      tag:
+      agent:
+        title: Agent
+        description: Agent GUID, name, IP address, MAC address or user name
         type: string
-        description: The tag to apply
         required: true
+        example: 5BB33CFB-C31F-11CA-012A-001577952C99
+      tag:
+        title: Tag
+        description: The tag to apply
+        type: string
+        required: true
+        example: Tag1
     output:
       message:
-        type: string
+        title: Message
         description: Response message
+        type: string
         required: true
   clear_tags:
     title: Clear Tags
-    description: Clears the given tag to a supplied list of systems
+    description: Clears the given tag to an agent by GUID, name, IP address, MAC address or user name
     input:
-      devices:
-        type: '[]string'
-        description: Array of all devices to clear tag e.g. ["Device-1","Device-2"]
-        required: true
-      tag:
+      device:
+        title: Device
+        description: Agent GUID, name, IP address, MAC address or user name
         type: string
-        description: The tag to clear
         required: true
+        example: 5BB33CFB-C31F-11CA-012A-001577952C99
+      tag:
+        title: Tag
+        description: The tag to clear
+        type: string
+        required: true
+        example: Tag1
     output:
       message:
-        type: string
+        title: Message
         description: Response message
+        type: string
         required: true
-  system_info:
-    title: System Information
-    description: List system information
+  search_agents:
+    title: Search Agents
+    description: Find Systems in the ePolicy Orchestrator tree by name, IP address, MAC address, user name, AgentGUID, or tag
     input:
       query:
+        title: Query
+        description: Name, IP address, MAC address, user name, AgentGUID, or tag to search available agents
         type: string
-        description: System search query e.g Device-1
         required: false
+        example: Device-1
     output:
-      properties:
+      agents:
+        title: Agents
+        description: Returned agents
         type: '[]computer_properties'
-        description: Computer Properties
+        required: true
+  get_policies:
+    title: Get Policies
+    description: Get policies assigned to a user
+    input:
+      search_text:
+        title: Search Text
+        description: Finds all policies that the user is permitted to see that match the given search text
+        type: string
+        required: true
+        example: McAfee Default
+    output:
+      policies_returned:
+        title: Policies Returned
+        description: All policies that match to the given search text
+        type: "[]policies_returned"
+        required: true
+  run_wake_up:
+    title: Wake Up
+    description: Wakes up the agent on a system
+    input:
+      system_name:
+        title: System Name
+        description: Name of an system to wake up
+        type: string
+        required: true
+        example: Device1
+    output:
+      completed:
+        title: Completed
+        description: Completed wake up number
+        type: integer
+        required: true
+      failed:
+        title: Failed
+        description: Failed wake up number
+        type: integer
+        required: true
+      expired:
+        title: Expired
+        description: Expired wake up number
+        type: integer
         required: true
