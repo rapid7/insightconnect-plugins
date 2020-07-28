@@ -6,7 +6,13 @@ import requests
 import logging
 
 
-class ApiConnection():
+class ApiConnection:
+    """
+    ApiConnection(api_key, region_string, logger)
+
+    A class to connect to the Insight Agent GraphQL. This class provides convince methods to perform actions
+    on Insight Agents.
+    """
     def __init__(self,
                  api_key: str,
                  region_string: str,
@@ -25,7 +31,7 @@ class ApiConnection():
 
     def get_agent(self,
                   agent_input: str
-                  )-> dict:
+                  ) -> dict:
         """
         Find an agent based on a Mac Address, IP, or Hostname
 
@@ -38,9 +44,9 @@ class ApiConnection():
         return agent
 
     def quarantine(self,
-                   advertisement_period:int,
-                   agent_id:str
-                   )->bool:
+                   advertisement_period: int,
+                   agent_id: str
+                   ) -> bool:
         """
         quarantine action on a given agent ID
 
@@ -60,11 +66,11 @@ class ApiConnection():
 
         results_object = self._post_payload(quarantine_payload)
         failed = results_object.get("data").get("quarantineAssets").get("results")[0].get("failed")
-        return (not failed)
+        return not failed
 
     def unquarantine(self,
-                     agent_id:str
-                     )->bool:
+                     agent_id: str
+                     ) -> bool:
         """
         unquarantine action on a given agent ID
         :param agent_id: string
@@ -84,8 +90,8 @@ class ApiConnection():
         return not failed
 
     def get_agent_status(self,
-                         agent_id:str
-                         )->dict:
+                         agent_id: str
+                         ) -> dict:
         """
         This will get agent status information from a specified agent
 
@@ -118,10 +124,10 @@ class ApiConnection():
             "is_unquarantine_requested": is_unquarantine_requested
         }
 
-    def connection_test(self)->bool:
+    def connection_test(self) -> bool:
         # Return the first org to verify the connection works
         graph_ql_payload = {
-            "query":"{ organizations(first: 1) { edges { node { id } } totalCount } }"
+            "query": "{ organizations(first: 1) { edges { node { id } } totalCount } }"
         }
 
         # If no exceptions are thrown, we have a valid connection
@@ -132,7 +138,7 @@ class ApiConnection():
     # Private Methods
     #################
 
-    def _get_org_key(self)->str:
+    def _get_org_key(self) -> str:
         """
         Get the org key from GraphQL
 
@@ -146,7 +152,7 @@ class ApiConnection():
         self.logger.info("Organization ID query complete.")
         return result_object.get("data").get("organizations").get("edges")[0].get("node").get("id")
 
-    def _get_headers(self)->dict:
+    def _get_headers(self) -> dict:
         """
         This build and returns headers for the request session
 
@@ -160,8 +166,8 @@ class ApiConnection():
         }
 
     def _post_payload(self,
-                      payload:dict
-                      )->dict:
+                      payload: dict
+                      ) -> dict:
         """
         This will post a given payload to the API using the connection session
 
@@ -172,7 +178,7 @@ class ApiConnection():
 
         try:
             result.raise_for_status()
-        except:
+        except Exception:
             raise APIException(cause="Error connecting to the Insight Agent API.",
                                assistance="Please check your Organization ID and API key.\n",
                                data=result.text)
@@ -186,8 +192,8 @@ class ApiConnection():
         return results_object
 
     def _setup_endpoint(self,
-                        region_string:str
-                        )->str:
+                        region_string: str
+                        ) -> str:
         """
         Creates the URL endpoint for the API based on the region
 
@@ -201,15 +207,15 @@ class ApiConnection():
         else:
             # It's an enum, hopefully this never happens.
             raise APIException(cause="Region not found.",
-                               assistance="Region code was not found for selected region. Available reagions are: United States, "
+                               assistance="Region code was not found for selected region. Available regions are: United States, "
                                           "Europe, Canada, Australia, Japan")
 
         return endpoint
 
     def _get_agent(self,
-                   agent_input:str,
-                   agent_type:str
-                   )->dict:
+                   agent_input: str,
+                   agent_type: str
+                   ) -> dict:
         """
         Gets an agent from a Mac, IP, or Hostname.
 
@@ -276,10 +282,10 @@ class ApiConnection():
         return has_next_page, results_object, next_agents
 
     def _find_agent_in_agents(self,
-                              agents:list,
-                              agent_input:str,
-                              agent_type:str
-                              )->Any:
+                              agents: list,
+                              agent_input: str,
+                              agent_type: str
+                              ) -> Any:
         """
         Given a list of agent objects, find the agent that matches our input.
 
@@ -314,11 +320,11 @@ class ApiConnection():
                 raise APIException(cause="Could not determine agent type.",
                                    assistance=f"Agent {agent_input} was not a MAC address, IP address, or hostname.")
 
-        return None # No agent found
+        return None  # No agent found
 
     def _get_agents_from_result_object(self,
-                                       results_object:dict
-                                       )->list:
+                                       results_object: dict
+                                       ) -> list:
         """
         This will extract an agent object from the object that's returned from the API
 
