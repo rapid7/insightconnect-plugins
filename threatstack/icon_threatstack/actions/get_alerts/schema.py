@@ -26,13 +26,13 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
     "end": {
       "type": "string",
       "title": "End",
-      "description": "End date yyyy-mm-dd format e.g. 2018-01-01",
+      "description": "End date in yyyy-mm-dd format e.g. 2018-01-01",
       "order": 2
     },
     "start": {
       "type": "string",
       "title": "Start",
-      "description": "Start date yyyy-mm-dd format e.g. 2017-01-01",
+      "description": "Start date in yyyy-mm-dd format e.g. 2017-01-01",
       "order": 1
     }
   }

@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|REST API key|None|None|
-|org_id|string|None|True|Threat Stack Organization ID|None|None|
+|org_id|string|None|True|Threat Stack organization ID|None|None|
 |timeout|integer|120|False|API timeout|None|None|
 |user_id|string|None|True|User ID|None|None|
 
@@ -111,8 +111,8 @@ This action is used to get agent data.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|end|string|None|False|End date e.g. 2018-01-01|None|2018-01-01|
-|start|string|None|False|Start date e.g. 2017-01-01|None|2018-01-01|
+|end|string|None|False|End date in yyyy-mm-dd format e.g. 2018-01-01|None|2018-01-01|
+|start|string|None|False|Start date in yyyy-mm-dd format e.g. 2017-01-01|None|2018-01-01|
 
 Example input:
 
@@ -280,8 +280,8 @@ This action is used to get alerts by filter.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|end|string|None|False|End date e.g. 2018-01-01|None|2018-01-01|
-|start|string|None|False|Start date e.g. 2017-01-01|None|2018-01-01|
+|end|string|None|False|End date in yyyy-mm-dd format e.g. 2018-01-01|None|2018-01-01|
+|start|string|None|False|Start date in yyyy-mm-dd format e.g. 2017-01-01|None|2018-01-01|
 
 Example input:
 

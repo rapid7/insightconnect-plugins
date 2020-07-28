@@ -322,9 +322,9 @@ connection:
     description: User ID
     required: true
   org_id:
-    title: Org ID
+    title: Organization ID
     type: string
-    description: Threat Stack Organization ID
+    description: Threat Stack organization ID
     required: true
   timeout:
     title: Timeout
@@ -339,6 +339,7 @@ actions:
     description: Get agent data
     input:
       agent_id:
+        title: Agent ID
         type: string
         description: Agent ID e.g. 597b2c751b7cc18fcf028e52
         required: true
@@ -354,12 +355,12 @@ actions:
     input:
       start:
         type: string
-        description: Start date e.g. 2017-01-01
+        description: Start date in yyyy-mm-dd format e.g. 2017-01-01
         required: false
         example: 2018-01-01
       end:
         type: string
-        description: End date e.g. 2018-01-01
+        description: End date in yyyy-mm-dd format e.g. 2018-01-01
         required: false
         example: 2018-01-01
     output:
@@ -395,12 +396,12 @@ actions:
     input:
       start:
         type: string
-        description: Start date e.g. 2017-01-01
+        description: Start date in yyyy-mm-dd format e.g. 2017-01-01
         required: false
         example: 2018-01-01
       end:
         type: string
-        description: End date e.g. 2018-01-01
+        description: End date in yyyy-mm-dd format e.g. 2018-01-01
         required: false
         example: 2018-01-01
     output:
