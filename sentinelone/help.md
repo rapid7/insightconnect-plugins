@@ -1501,7 +1501,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.4.1 - Upgrade trigger input Agent is Active to default true
+* 2.0.0 - Upgrade trigger input Agent is Active to default true
 * 1.4.0 - New actions Quarantine, Get Agent Details, Search Agents
 * 1.3.0 - Add new action Blacklist
 * 1.2.2 - Update error message in Connection
