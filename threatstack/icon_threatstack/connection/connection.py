@@ -28,8 +28,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def test(self):
         now = datetime.datetime.now().strftime("%Y-%m-%d")
         try:
-            response = self.client.http_request(method="get", path="agents", params={"from": now, "until": now})
-            self.logger.info(f"RESPONSE IS: {response}")
+            self.client.http_request(method="get", path="agents", params={"from": now, "until": now})
         except (ThreatStackAPIError, ThreatStackClientError, APIRateLimitError) as e:
             raise ConnectionTestException(cause="An error occurred!",
                                           assistance=e)
