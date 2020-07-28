@@ -145,6 +145,7 @@ def send_message(logger: Logger,
     :param message: String
     :param team_id: String
     :param channel_id: String
+    :param thread_id: string
     :return: dict
     """
     send_message_url = f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
@@ -176,7 +177,8 @@ def send_html_message(logger: Logger,
                       connection: komand.connection,
                       message: str,
                       team_id: str,
-                      channel_id: str) -> dict:
+                      channel_id: str,
+                      thread_id: str=None) -> dict:
     """
     Send HTML content as a message to Teams
 
@@ -185,9 +187,14 @@ def send_html_message(logger: Logger,
     :param message: String (HTML)
     :param team_id: String
     :param channel_id: String
+    :param thread_id: string
     :return: dict
     """
     send_message_url = f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
+
+    if thread_id:
+        send_message_url = send_message_url + f"/{thread_id}/replies"
+        
     logger.info(f"Sending message to: {send_message_url}")
     headers = connection.get_headers()
 
