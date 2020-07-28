@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: microsoft_atp
 title: Microsoft Windows Defender ATP
 description: The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
-version: 2.0.0
+version: 4.0.0
 vendor: rapid7
 support: community
 status: []
@@ -317,6 +317,11 @@ types:
        type: string
        description: "Version"
        required: false
+     machineTags:
+       title: "Machine Tags"
+       type: '[]string'
+       description: "Machine Tags"
+       required: false
   machine_action:
      creationDateTimeUtc:
        title: "Creation Date Time UTC"
@@ -387,9 +392,9 @@ actions:
     title: Get Machine Information
     description: Get details about a machine with its ID
     input:
-      machine_id:
-        title: Machine ID
-        description: Machine ID
+      machine:
+        title: Machine
+        description: Machine IP address, hostname and machine ID
         type: string
         example: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73
         required: true
@@ -397,9 +402,8 @@ actions:
       machine:
         title: Machine
         description: Machine information
-        type: object
+        type: machine
         required: true
-
   get_file_id_from_alert_id:
     title: Get Files from Alert
     description: Retrieve a list of file information objects related to an alert
@@ -420,10 +424,10 @@ actions:
     title: Isolate Machine
     description: Isolate a machine from the network
     input:
-      machine_id:
+      machine:
+        title: Machine
+        description: Machine IP address, hostname and machine ID
         type: string
-        title: Machine ID
-        description: Machine ID
         example: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73
         required: true
       isolation_type:
@@ -451,10 +455,10 @@ actions:
     title: Unisolate Machine
     description: Restore network connectivity to a machine
     input:
-      machine_id:
+      machine:
+        title: Machine
+        description: Machine IP address, hostname and machine ID
         type: string
-        title: Machine ID
-        description: Machine ID
         example: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73
         required: true
       comment:
@@ -474,10 +478,10 @@ actions:
     title: Stop and Quarantine File
     description: Stop the execution of a file on a machine and delete it
     input:
-      machine_id:
+      machine:
+        title: Machine
+        description: Machine IP address, hostname and machine ID
         type: string
-        title: Machine ID
-        description: Machine ID
         example: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73
         required: true
       comment:
@@ -503,10 +507,10 @@ actions:
     title: Run Antivirus Scan
     description: Initiate a Windows Defender Antivirus scan on a machine
     input:
-      machine_id:
+      machine:
+        title: Machine
+        description: Machine IP address, hostname and machine ID
         type: string
-        title: Machine ID
-        description: Machine ID
         example: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73
         required: true
       comment:

@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SubtractFromDatetimeInput, SubtractFromDatetimeOutput, Input, Output
 import maya
 
 
-class SubtractFromDatetime(komand.Action):
+class SubtractFromDatetime(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

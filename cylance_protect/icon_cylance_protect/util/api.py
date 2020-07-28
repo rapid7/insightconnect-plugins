@@ -1,5 +1,4 @@
 from re import match
-
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 import json
@@ -7,6 +6,7 @@ import jwt
 import uuid
 from datetime import datetime, timedelta
 from insightconnect_plugin_runtime.helper import clean
+import validators
 
 
 class CylanceProtectAPI:
@@ -33,6 +33,70 @@ class CylanceProtectAPI:
             self.logger.info(f"Multiple agents found that matched the query: {devices}. We will act upon the first match.")
         return clean(devices[0])
 
+    def search_agents_all(self, agent):
+        i = 1
+        agents = []
+        while i < 9999:
+            response = self.get_agents(i, "20")
+            if i > response.get('total_pages'):
+                break
+            agents.extend(self.search_agents(agent, response.get('page_items')))
+            i += 1
+
+        if len(agents) == 0:
+            raise PluginException(
+                cause="Agent not found.",
+                assistance=f"Unable to find any agents using identifier provided: {agent}."
+            )
+            
+        return agents
+
+    def search_agents(self, agent: str, device_list: list) -> list:
+        agents = []
+        if validators.ipv4(agent):
+            agents.extend(self.get_device_by_ip(agent, device_list))
+        elif match('[0-9a-f]{2}([-:]?)[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$', agent.lower()):
+            agents.extend(self.get_device_by_mac(agent, device_list))
+        elif validators.uuid(agent):
+            agents.extend(self.get_device_by_id(agent, device_list))
+        else:
+            agents.extend(self.get_device_by_name(agent, device_list))
+        return agents
+
+    @staticmethod
+    def get_device_by_ip(ip_address: str, device_list: list) -> list:
+        matching_devices = []
+        for device in device_list:
+            for ip in device.get('ip_addresses'):
+                if ip_address == ip:
+                    matching_devices.append(device)
+        return matching_devices
+
+    @staticmethod
+    def get_device_by_mac(mac_address: str, device_list: list) -> list:
+        matching_devices = []
+        for device in device_list:
+            for mac in device.get('mac_addresses'):
+                if mac_address.replace(':', '-').upper() == mac:
+                    matching_devices.append(device)
+        return matching_devices
+
+    @staticmethod
+    def get_device_by_id(device_id: str, device_list: list) -> list:
+        matching_devices = []
+        for device in device_list:
+            if device_id.lower() == device.get('id'):
+                matching_devices.append(device)
+        return matching_devices
+
+    @staticmethod
+    def get_device_by_name(name: str, device_list: list) -> list:
+        matching_devices = []
+        for device in device_list:
+            if name.upper() == device.get('name').upper():
+                matching_devices.append(device)
+        return matching_devices
+
     def create_blacklist_item(self, payload):
         return self._call_api("POST", f"{self.url}/globallists/v2", "globallist:create", json_data=payload)
 
@@ -45,6 +109,34 @@ class CylanceProtectAPI:
 
     def get_agents(self, page, page_size):
         return self._call_api("GET", f"{self.url}/devices/v2?page={page}?page_size={page_size}", "device:list")
+
+    def search_threats(self, identifiers):
+        threats = self._call_api("GET", f"{self.url}/threats/v2?page=1&page_size=100", "threat:list").get("page_items")
+        matching_threats = []
+        for identifier in identifiers:
+            if match('^[a-fA-F\d]{32}$', identifier):
+                for threat in threats:
+                    if identifier.upper() == threat.get('md5'):
+                        matching_threats.append(threat)
+            elif match('^[A-Fa-f0-9]{64}$', identifier):
+                for threat in threats:
+                    if identifier.upper() == threat.get('sha256'):
+                        matching_threats.append(threat)
+            else:
+                for threat in threats:
+                    if identifier.upper() == threat.get('name').upper():
+                        matching_threats.append(threat)
+
+        if len(matching_threats) == 0:
+            raise PluginException(
+                cause="Threat not found.",
+                assistance=f"Unable to find any threats using identifier provided: {identifier}."
+            )
+
+        return clean(matching_threats)
+
+    def get_threat_devices(self, sha256, page, page_size):
+        return self._call_api("GET", f"{self.url}/threats/v2/{sha256}/devices?page={page}?page_size={page_size}", None)
 
     def _call_api(self, method, url, scope, params=None, json_data=None):
         token = self.generate_token(scope)

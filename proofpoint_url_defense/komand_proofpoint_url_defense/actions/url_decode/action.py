@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import UrlDecodeInput, UrlDecodeOutput, Input, Output
 # Custom imports below
 from komand_proofpoint_url_defense.util.proofpoint_decoder import URLDefenseDecoder
 
 
-class UrlDecode(komand.Action):
+class UrlDecode(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
                 name='url_decode',

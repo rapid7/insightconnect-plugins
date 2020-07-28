@@ -24,5 +24,4 @@ class CommentIssue(komand.Action):
                                   assistance='Please provide a valid issue ID.')
 
         comment = self.connection.client.add_comment(issue=issue, body=params[Input.COMMENT])
-        self.logger.info("Returned comment: %s", dir(comment))
         return {Output.COMMENT_ID: comment.id}
