@@ -23,7 +23,7 @@ class GetAgentInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "agent_id": {
       "type": "string",
-      "title": "Agent Id",
+      "title": "Agent ID",
       "description": "Agent ID e.g. 597b2c751b7cc18fcf028e52",
       "order": 1
     }

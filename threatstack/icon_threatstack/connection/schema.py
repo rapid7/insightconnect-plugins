@@ -24,8 +24,8 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     },
     "org_id": {
       "type": "string",
-      "title": "Org ID",
-      "description": "Threat Stack Organization ID",
+      "title": "Organization ID",
+      "description": "Threat Stack organization ID",
       "order": 3
     },
     "timeout": {
