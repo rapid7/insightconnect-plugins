@@ -98,7 +98,26 @@ Example output:
 
 ```
 {
-  "items": []
+  "alerts": [
+    {
+      "managedAgent": {},
+      "severity": "LOW",
+      "type": "Event::Mobile::ApnsCertificateRenewed",
+      "allowedActions": [
+        "acknowledge"
+      ],
+      "description": "Your APNs certificate was renewed",
+      "id": "1ffcae82-97d2-46e8-83e8-469525c28513",
+      "raisedAt": "2020-07-19T07:22:07.019Z",
+      "tenant": {
+        "id": "11f446c2-a094-427f-868e-bd13e2f5b27e",
+        "name": "NinjaRMM LLC"
+      },
+      "category": "mobiles",
+      "groupKey": "MyxFdmVudDo6TW9iaWxlOjpBcG5zQ2VydGlmaWNhdGVSZW5ld2...",
+      "product": "mobile"
+    }
+  ]
 }
 ```
 
@@ -130,7 +149,66 @@ Example output:
 
 ```
 {
-  "items": []
+  "items": [
+    {
+      "id": "1d65be44-e663-437c-949c-2057b73c5630",
+      "type": "computer",
+      "tenant": {
+        "id": "11f446c2-a094-427f-868e-bd13e2f5b27e"
+      },
+      "hostname": "WIN-JJS9RP995G8",
+      "health": {
+        "overall": "suspicious",
+        "threats": {
+          "status": "good"
+        },
+        "services": {
+          "status": "good",
+          "serviceDetails": [
+            {
+              "name": "File Detection",
+              "status": "running"
+            }
+          ]
+        }
+      },
+      "os": {
+        "isServer": false,
+        "platform": "windows",
+        "name": "Windows 8.1",
+        "majorVersion": 6,
+        "minorVersion": 3,
+        "build": 9600
+      },
+      "ipv4Addresses": [
+        "198.51.100.1"
+      ],
+      "ipv6Addresses": [
+        "2001:db8:8:4::2"
+      ],
+      "macAddresses": [
+        "00:0C:29:9B:2F:DF"
+      ],
+      "associatedPerson": {
+        "name": "WIN-JJS9RP995G8\\User",
+        "viaLogin": "WIN-JJS9RP995G8\\User",
+        "id": "ceddc646-43b2-4b9f-835a-d1ecb9af8253"
+      },
+      "tamperProtectionEnabled": true,
+      "assignedProducts": [
+        {
+          "code": "endpointProtection",
+          "version": "10.8.6",
+          "status": "installed"
+        }
+      ],
+      "capabilities": [],
+      "lastSeenAt": "2020-04-08T17:27:32.059Z",
+      "encryption": {
+        "volumes": []
+      }
+    }
+  ]
 }
 ```
 
