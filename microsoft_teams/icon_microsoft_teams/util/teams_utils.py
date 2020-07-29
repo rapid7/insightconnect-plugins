@@ -178,7 +178,7 @@ def send_html_message(logger: Logger,
                       message: str,
                       team_id: str,
                       channel_id: str,
-                      thread_id: str=None) -> dict:
+                      thread_id: str = None) -> dict:
     """
     Send HTML content as a message to Teams
 

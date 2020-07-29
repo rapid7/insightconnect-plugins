@@ -16,7 +16,6 @@ class SendHtmlMessage(komand.Action):
 
     def run(self, params={}):
         message = params.get(Input.MESSAGE_CONTENT)
-        thread_id = params.get(Input.THREAD_ID)
 
         teams = get_teams_from_microsoft(self.logger, self.connection, params.get(Input.TEAM_NAME))
         team_id = teams[0].get("id")

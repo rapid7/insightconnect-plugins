@@ -67,7 +67,7 @@ Example input:
   "channel_name": "ICON Test Channel",
   "message": "Hello!",
   "team_name": "ICON-Test-Everyone",
-  "thread_id": "1595889908700"
+  "thread_id": 1595889908700
 }
 ```
 
@@ -128,7 +128,7 @@ Example input:
   "channel_name": "ICON Test Channel",
   "message_content": "<b>Hello!</b>",
   "team_name": "ICON-Test-Everyone",
-  "thread_id": "1595889908700"
+  "thread_id": 1595889908700
 }
 ```
 
@@ -671,7 +671,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.1.0 - Update Send Message and Send HTML Message to support replying to existing thread
+* 3.0.0 - Update Send Message and Send HTML Message
 * 2.0.5 - Fix issue where auth token wasn't properly renewed
 * 2.0.4 - Fix issue where a message that only had an image in it could break the 'New Message Received' trigger
 * 2.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/microsoft-teams)
