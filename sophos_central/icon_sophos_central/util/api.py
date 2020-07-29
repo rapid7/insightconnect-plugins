@@ -140,7 +140,7 @@ class SophosCentralAPI:
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except json.decoder.JSONDecodeError as e:
-            self.logger.info(f"Invalid json: {e}")
+            self.logger.info(f"Invalid JSON: {e}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
         except requests.exceptions.HTTPError as e:
             self.logger.info(f"Call to Sophos Central failed: {e}")
