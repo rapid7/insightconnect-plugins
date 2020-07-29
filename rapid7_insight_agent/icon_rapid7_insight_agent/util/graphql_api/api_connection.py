@@ -26,8 +26,7 @@ class ApiConnection:
         self.session = requests.Session()
         self.session.headers = self._get_headers()
 
-        self.org_key = self._get_org_key()
-        self.logger.info(f"Received org key: ********-****-****-****-*******{self.org_key[-5:]}")
+        self._setup()
 
     def get_agent(self,
                   agent_input: str
@@ -142,6 +141,15 @@ class ApiConnection:
     #################
     # Private Methods
     #################
+
+    def _setup(self)-> None:
+        """
+        Get the org key and set it to a class variable
+
+        :return: None
+        """
+        self.org_key = self._get_org_key()
+        self.logger.info(f"Received org key: ********-****-****-****-*******{self.org_key[-5:]}")
 
     def _get_org_key(self) -> str:
         """
