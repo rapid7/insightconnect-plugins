@@ -93,7 +93,7 @@ class ApiConnection:
                          agent_id: str
                          ) -> dict:
         """
-        This will get agent status information from a specified agent
+        Get status information from a specified agent
 
         :param agent_id: string
         :return: dict
