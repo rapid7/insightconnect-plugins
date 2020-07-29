@@ -233,7 +233,7 @@ class ApiConnection:
         """
         Gets an agent by MAC address, IP address, or hostname.
 
-        :pram agent_input: Mac, IP Address or hostname
+        :param agent_input: MAC address, IP address or hostname
         :param agent_type: Is the agent input a MAC, IP_ADDRESS, or HOSTNAME
 
         :return: dict
