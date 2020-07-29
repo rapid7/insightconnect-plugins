@@ -1,6 +1,6 @@
 from icon_rapid7_insight_agent.util.graphql_api.region_map import region_map
 from icon_rapid7_insight_agent.util.graphql_api.api_exception import APIException
-from typing import Any
+from typing import Optional
 import icon_rapid7_insight_agent.util.graphql_api.agent_typer as agent_typer
 import requests
 import logging
