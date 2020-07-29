@@ -290,10 +290,10 @@ class ApiConnection:
         return has_next_page, results_object, next_agents
 
     def _find_agent_in_agents(self,
-                              agents: list,
+                              agents: [dict],
                               agent_input: str,
                               agent_type: str
-                              ) -> Any:
+                              ) -> Optional[dict]:
         """
         Given a list of agent objects, find the agent that matches our input.
 
