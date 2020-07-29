@@ -883,6 +883,10 @@ Example input:
 
 ```
 {
+  "file": {
+    "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
+    "filename": "setup.exe"
+  },
   "env_bitness": 32,
   "env_os": "windows",
   "env_type": "complete",
