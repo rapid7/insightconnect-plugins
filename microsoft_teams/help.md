@@ -24,7 +24,7 @@ The connection configuration accepts the following parameters:
 |application_id|string|None|True|Application (client) ID|None|63a0cad6-ac64-435c-a221-5d37c97b763e|
 |application_secret|credential_secret_key|None|True|Application secret|None|aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=|
 |directory_id|string|None|True|Directory (tenant) ID|None|9e538ff5-dcb2-46a9-9a28-f93b8250deb0|
-|username_password|credential_username_password|None|True|Username and password|None|{ "username": "user": "password": "mypassword" }|
+|username_password|credential_username_password|None|True|Username and password|None|{ "username": "user", "password": "mypassword" }|
 
 Example input:
 
