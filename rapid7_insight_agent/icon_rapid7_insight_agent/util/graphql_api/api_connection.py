@@ -73,7 +73,7 @@ class ApiConnection:
                      ) -> bool:
         """
         unquarantine action on a given agent ID
-        :param agent_id: string
+        :param agent_id: Agent ID to unquarantine
 
         :return: boolean
         """
