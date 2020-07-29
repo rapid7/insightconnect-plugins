@@ -10,7 +10,7 @@ class ApiConnection:
     """
     ApiConnection(api_key, region_string, logger)
 
-    A class to connect to the Insight Agent GraphQL. This class provides convince methods to perform actions
+    A class to connect to the Insight Agent GraphQL. This class provides convenience methods to perform actions
     on Insight Agents.
     """
     def __init__(self,
