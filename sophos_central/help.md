@@ -4,7 +4,6 @@
 
 # Key Features
 
-* Download hashes
 * Get endpoints
 * Get alerts
 
@@ -445,7 +444,12 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.0 - Initial plugin
+* 3.0.0 - Rewrite Sophos Central in Python 3
+* 2.0.0 - Update type for Invalidated to date
+* 1.0.3 - New spec and help.md format for the Extension Library
+* 1.0.2 - Regenerate with latest Go SDK to solve bug with triggers
+* 1.0.0 - Support web server mode | Update to new credential types | Rename "Download hashes" action to "Download Hashes" | Rename "Get endpoints" action to "Get Endpoints" | Rename "Get alerts" action to "Get Alerts" | Rename "Get SIEM events" action to "Get SIEM Events"
+* 0.1.0 - Initial plugin
 
 # Links
 
