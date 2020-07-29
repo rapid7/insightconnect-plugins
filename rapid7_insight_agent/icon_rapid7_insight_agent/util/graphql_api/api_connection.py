@@ -106,7 +106,7 @@ class ApiConnection:
             agent = results_object.get("data").get("assets")[0].get("agent")
             quarantine_state = agent.get("quarantineState").get("currentState")
             agent_status = agent.get("agentStatus")
-        except KeyError:
+        except (KeyError, IndexError):
             raise APIException(cause="Received an unexpected response from the server.",
                                assistance="(non-JSON or no response was received).\n",
                                data=str(results_object))
