@@ -33,7 +33,7 @@ class ApiConnection:
                   agent_input: str
                   ) -> dict:
         """
-        Find an agent based on a Mac Address, IP, or Hostname
+        Find an agent based on a MAC address, IP address, or hostname
 
         :param agent_input: string
         :return:
