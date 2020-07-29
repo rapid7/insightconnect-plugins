@@ -172,21 +172,25 @@ connection:
     description: Application (client) ID
     type: string
     required: true
+    example: 63a0cad6-ac64-435c-a221-5d37c97b763e
   directory_id:
     title: Directory ID
     description: Directory (tenant) ID
     type: string
     required: true
+    example: 9e538ff5-dcb2-46a9-9a28-f93b8250deb0
   application_secret:
     title: Application Secret
     description: Application secret
     type: credential_secret_key
     required: true
+    example: aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=
   username_password:
     type: credential_username_password
     title: "Credentials"
     description: "Username and password"
     required: true
+    example: '{ "username": "user", "password": "mypassword" }'
 
 triggers:
   new_message_received:
