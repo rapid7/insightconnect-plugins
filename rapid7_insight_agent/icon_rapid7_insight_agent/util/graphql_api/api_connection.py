@@ -51,7 +51,7 @@ class ApiConnection:
         quarantine action on a given agent ID
 
         :param advertisement_period: Amount of time, in seconds, to try to take the quarantine action
-        :param agent_id: string
+        :param agent_id: Agent ID to quarantine
 
         :return: boolean
         """
