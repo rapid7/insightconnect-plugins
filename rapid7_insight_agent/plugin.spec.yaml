@@ -137,7 +137,7 @@ actions:
         description: IP address, MAC address, or hostname of the device to get information from
         type: string
         required: true
-        example: MaliciousHost
+        example: Example-Hostname
     output:
       agent:
         title: Agent

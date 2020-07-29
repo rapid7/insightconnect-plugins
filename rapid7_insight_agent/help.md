@@ -117,13 +117,13 @@ This action this action is used to find and display detailed information about a
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent|string|None|True|IP address, MAC address, or hostname of the device to get information from|None|MaliciousHost|
+|agent|string|None|True|IP address, MAC address, or hostname of the device to get information from|None|Example-Hostname|
 
 Example input:
 
 ```
 {
-  "agent": "MaliciousHost"
+  "agent": "Example-Hostname"
 }
 ```
 
