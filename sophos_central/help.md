@@ -4,12 +4,11 @@
 
 # Key Features
 
-Identify key features of plugin.
+* Download hashes
+* Get endpoints
+* Get alerts
 
 # Requirements
-
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product's user interface
 
 # Documentation
 ## Setup
