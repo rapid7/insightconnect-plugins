@@ -48,7 +48,7 @@ class ApiConnection:
                    agent_id: str
                    ) -> bool:
         """
-        quarantine action on a given agent ID
+        Quarantine an agent given an agent ID
 
         :param advertisement_period: Amount of time, in seconds, to try to take the quarantine action
         :param agent_id: Agent ID to quarantine
