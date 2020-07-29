@@ -16,7 +16,7 @@ class ApiConnection:
     def __init__(self,
                  api_key: str,
                  region_string: str,
-                 logger: logging.log
+                 logger: logging.Logger
                  ) -> None:
 
         self.api_key = api_key
