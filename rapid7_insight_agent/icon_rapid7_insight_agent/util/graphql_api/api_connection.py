@@ -53,7 +53,7 @@ class ApiConnection:
         :param advertisement_period: Amount of time, in seconds, to try to take the quarantine action
         :param agent_id: Agent ID to quarantine
 
-        :return: boolean
+        :return: Boolean indicating whether or not the quarantine succeeded
         """
         quarantine_payload = {
             "query": "mutation( $orgID:String! $agentID:String! $advPeriod:Long! ) { quarantineAssets( orgId:$orgID assetIds: [$agentID] input: {advertisementPeriod: $advPeriod} ) { results { assetId failed } } }",
