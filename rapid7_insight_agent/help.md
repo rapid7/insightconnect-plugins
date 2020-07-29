@@ -1,6 +1,8 @@
 # Description
 
-The [Insight Agent] (https://docs.rapid7.com/insight-agent/overview/) collects live system information, easily centralizing and monitoring data on the Insight platform. Using the Insight Agent plugin from InsightConnect, you can quarantine, unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices across your organization. 
+The [Insight Agent](https://docs.rapid7.com/insight-agent/overview/) collects live system information, easily centralizing and monitoring data on the Insight platform. Using the Insight Agent plugin from InsightConnect, you can quarantine, unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices across your organization. 
+
+The agent is used by Rapid7 InsightIDR and InsightVM customers to monitor endpoints.
 
 # Key Features
 
