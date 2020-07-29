@@ -95,7 +95,7 @@ class ApiConnection:
         """
         Get status information from a specified agent
 
-        :param agent_id: string
+        :param agent_id: Agent ID to get status information for
         :return: dict
         """
         payload = {
