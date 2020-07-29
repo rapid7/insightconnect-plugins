@@ -108,9 +108,14 @@ class ApiConnection:
 
         results_object = self._post_payload(payload)
 
-        agent = results_object.get("data").get("assets")[0].get("agent")
-        quarantine_state = agent.get("quarantineState").get("currentState")
-        agent_status = agent.get("agentStatus")
+        try:
+            agent = results_object.get("data").get("assets")[0].get("agent")
+            quarantine_state = agent.get("quarantineState").get("currentState")
+            agent_status = agent.get("agentStatus")
+        except KeyError:
+            raise APIException(cause="Received an unexpected response from the server.",
+                               assistance="(non-JSON or no response was received).\n",
+                               data=str(results_object))
 
         is_online = True if agent_status == "ONLINE" else False
         is_quarantine_requested = True if quarantine_state == "QUARANTINE_IN_PROGRESS" else False
