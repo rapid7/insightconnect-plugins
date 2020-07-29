@@ -292,8 +292,8 @@ class ApiConnection:
         If no agent is found this will return None
 
         :param agents: list (agents)
-        :param agent_input: String (Input value to look for)
-        :param agent_type: String (What type of input to look for, MAC, IP_ADDRESS, or HOSTNAME)
+        :param agent_input: MAC address, IP address, or hostname
+        :param agent_type: What type of input to look for, MAC, IP_ADDRESS, or HOSTNAME)
 
         :return: dict (agent object), None
         """
