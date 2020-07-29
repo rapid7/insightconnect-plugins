@@ -24,9 +24,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def test(self):
         try:
             return {
-                "success": self.client.whoami(
-                    self.client.generate_headers()["access_token"]
-                )["id"] is not None
+                "success": self.client.whoami(self.client.get_access_token())["id"] is not None
             }
         except Exception as e:
             raise ConnectionTestException(

@@ -36,39 +36,6 @@ Example input:
 
 ### Actions
 
-#### Download Hashes
-
-This action is used to get SHA1 hashes for all available installer templates.
-
-##### Input
-
-_This action does not contain any inputs._
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|hashes|hashes_response|True|SHA1 hashes for all available installer templates|
-
-Example output:
-
-```
-{
-  "hashes": {
-    "hashes": {
-      "business": {
-        "windows": "3395856ce81f2b7382dee72602f798b642f14140",
-        "windows_thin_installer": "3395856ce81f2b7382dee72602f798b642f14140",
-        "mac": "3395856ce81f2b7382dee72602f798b642f14140"
-      },
-      "home": {
-        "mac": "3395856ce81f2b7382dee72602f798b642f14140"
-      }
-    }
-  }
-}
-```
-
 #### Get Alerts
 
 This action is used to get alerts for a customer based on the parameters provided.

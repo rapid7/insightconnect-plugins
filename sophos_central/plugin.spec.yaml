@@ -493,15 +493,6 @@ connection:
     example: 1x1xxx11-1x11-11x1-11xx-1x1xxx1x11x1
 
 actions:
-  download_hashes:
-    title: Download Hashes
-    description: Get SHA1 hashes for all available installer templates
-    output:
-      hashes:
-        title: Hashes
-        description: SHA1 hashes for all available installer templates
-        type: hashes_response
-        required: true
   get_endpoints:
     title: Get Endpoints
     description: Get endpoints for a customer based on the last seen after date and time

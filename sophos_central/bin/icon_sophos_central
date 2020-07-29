@@ -19,8 +19,6 @@ class ICONSophosCentral(insightconnect_plugin_runtime.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
-        self.add_action(actions.DownloadHashes())
-
         self.add_action(actions.GetAlerts())
 
         self.add_action(actions.GetEndpoints())
