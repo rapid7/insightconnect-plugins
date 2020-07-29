@@ -311,7 +311,7 @@ class ApiConnection:
                     if agent_input == host_name.get("name"):
                         return agent
             elif agent_type == agent_typer.MAC_ADDRESS:
-                # Mac addresses can come in with : or - as a separator, remove all of it and compare
+                # MAC addresses can come in with : or - as a separator, remove all of it and compare
                 stripped_input_mac = agent_input.replace("-", "").replace(":", "")
                 stripped_target_mac = agent.get("primaryAddress").get("mac").replace("-", "").replace(":", "")
                 if stripped_input_mac == stripped_target_mac:
