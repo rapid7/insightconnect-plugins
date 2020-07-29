@@ -207,9 +207,3 @@ actions:
         description: Is this asset online
         type: boolean
         required: true
-
-
-
-
-
-
