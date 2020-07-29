@@ -20,7 +20,7 @@ class GetThreats(komand.Trigger):
         params = {
             "resolved": params.get(Input.RESOLVED),
             "classifications": params.get(Input.CLASSIFICATIONS),
-            "agentIsActive": params.get(Input.AGENT_IS_ACTIVE),
+            "agentIsActive": params.get(Input.AGENT_IS_ACTIVE, True),
             "engines": params.get(Input.ENGINES),
             "limit": 1,
         }
