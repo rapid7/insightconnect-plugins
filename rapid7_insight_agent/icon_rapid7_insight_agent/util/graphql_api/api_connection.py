@@ -217,7 +217,7 @@ class ApiConnection:
                    agent_type: str
                    ) -> dict:
         """
-        Gets an agent from a Mac, IP, or Hostname.
+        Gets an agent by MAC address, IP address, or hostname.
 
         :return: dict
         """
