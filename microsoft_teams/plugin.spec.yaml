@@ -199,14 +199,14 @@ triggers:
         type: string
         required: true
         order: 1
-        example: ICON-Test-Everyone
+        example: InsightConnect Team
       channel_name:
         title: Channel Name
         description: Channel
         type: string
         required: true
         order: 2
-        example: ICON Test Channel
+        example: InsightConnect Channel
       message_content:
         title: Message Content
         description: Regex to match new messages against
@@ -231,7 +231,7 @@ actions:
         description: Optional regex-capable team name to look for
         type: string
         required: false
-        example: Komand-Test-Everyone
+        example: InsightConnect Team
     output:
       teams:
         title: Teams
@@ -248,14 +248,14 @@ actions:
         type: string
         required: true
         order: 1
-        example: Komand-Test-Everyone
+        example: InsightConnect Team
       channel_name:
         title: Channel Name
         description: Optional regex-capable channel to look for
         type: string
         required: false
         order: 2
-        example: Komand Test Channel
+        example: InsightConnect Channel
     output:
       channels:
         title: Channels
@@ -272,14 +272,14 @@ actions:
         type: string
         required: true
         order: 1
-        example: ICON-Test-Everyone
+        example: InsightConnect Team
       channel_name:
         title: Channel Name
         description: Channel
         type: string
         required: true
         order: 2
-        example: ICON Test Channel
+        example: InsightConnect Channel
       thread_id:
         title: Thread ID
         description: To post in a thread, select parent message ID
@@ -348,14 +348,14 @@ actions:
         type: string
         required: true
         order: 1
-        example: ICON-Test-Everyone
+        example: InsightConnect Team
       channel_name:
         title: Channel Name
         description: Channel name
         type: string
         required: true
         order: 2
-        example: ICON Test Channel
+        example: InsightConnect Channel
       thread_id:
         title: Thread ID
         description: To post in a thread, select parent message ID
@@ -386,7 +386,7 @@ actions:
         type: string
         required: true
         order: 1
-        example: ICON-Test-Everyone
+        example: InsightConnect Team
       member_login:
         title: Member Login
         description: Member login e.g. user@example.com
@@ -410,7 +410,7 @@ actions:
         type: string
         required: true
         order: 1
-        example: Komand-Test-Everyone
+        example: InsightConnect Team
       member_login:
         title: Member Login
         description: Member Login e.g. user@example.com
@@ -434,14 +434,14 @@ actions:
         type: string
         required: true
         order: 1
-        example: ICON-Test-Everyone
+        example: InsightConnect Team
       channel_name:
         title: Channel Name
         description: Channel name
         type: string
         required: true
         order: 2
-        example: test_channel
+        example: InsightConnect Channel
       channel_description:
         title: Channel Description
         description: Channel description
@@ -465,14 +465,14 @@ actions:
         type: string
         required: true
         order: 1
-        example: ICON-Test-Everyone
+        example: InsightConnect Team
       channel_name:
         title: Channel Name
         description: Channel name
         type: string
         required: true
         order: 2
-        example: test_channel
+        example: InsightConnect Channel
     output:
       success:
         title: Success

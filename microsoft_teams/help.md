@@ -29,16 +29,6 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
-{
-  "application_id": "xxxxxxx-xxxxxx-xxxxx-xxxx",
-  "application_secret": {
-    "secretKey": "xxxxxxx"
-  },
-  "directory_id": "xxxx-xxxx-xxxx-xxxx-xxx",
-  "username_password": {
-    "password": "password",
-    "username": "user@example.com"
-}
 ```
 
 ## Technical Details
@@ -55,18 +45,18 @@ Regular expressions used by this action are Python specific.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|channel_name|string|None|True|Channel|None|ICON Test Channel|
+|channel_name|string|None|True|Channel|None|InsightConnect Channel|
 |message|string|None|True|Message to send|None|Hello!|
-|team_name|string|None|True|Team name|None|ICON-Test-Everyone|
+|team_name|string|None|True|Team name|None|InsightConnect Team|
 |thread_id|string|None|True|To post in a thread, select parent message ID|None|1595889908700|
 
 Example input:
 
 ```
 {
-  "channel_name": "ICON Test Channel",
+  "channel_name": "InsightConnect Channel",
   "message": "Hello!",
-  "team_name": "ICON-Test-Everyone",
+  "team_name": "InsightConnect Team",
   "thread_id": 1595889908700
 }
 ```
@@ -116,18 +106,18 @@ This action is used to send HTML as a message.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|channel_name|string|None|True|Channel name|None|ICON Test Channel|
+|channel_name|string|None|True|Channel name|None|InsightConnect Channel|
 |message_content|string|None|True|HTML content to send|None|<b>Hello!</b>|
-|team_name|string|None|True|Team name|None|ICON-Test-Everyone|
+|team_name|string|None|True|Team name|None|InsightConnect Team|
 |thread_id|string|None|True|To post in a thread, select parent message ID|None|1595889908700|
 
 Example input:
 
 ```
 {
-  "channel_name": "ICON Test Channel",
+  "channel_name": "InsightConnect Channel",
   "message_content": "<b>Hello!</b>",
-  "team_name": "ICON-Test-Everyone",
+  "team_name": "InsightConnect Team",
   "thread_id": 1595889908700
 }
 ```
@@ -186,10 +176,10 @@ Example input:
 
 ```
 {
-  "channel_guid": "xxxxx-xxxxx-xxxx-xxxx",
-  "is_html": false,
+  "channel_name": "InsightConnect Channel",
   "message": "Hello!",
-  "team_guid": "xxxxx-xxxxx-xxxx-xxxx"
+  "team_name": "InsightConnect Team",
+  "thread_id": 1595889908700
 }
 ```
 
@@ -259,13 +249,13 @@ Regular expressions used by this action are Python specific.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|team_name|string|None|False|Optional regex-capable team name to look for|None|Komand-Test-Everyone|
+|team_name|string|None|False|Optional regex-capable team name to look for|None|InsightConnect Team|
 
 Example input:
 
 ```
 {
-  "team_name": "Komand-Test-Everyone"
+  "team_name": "InsightConnect Team"
 }
 ```
 
@@ -284,7 +274,7 @@ Example output:
       "id": "7af08a76-01fe-4a1d-bfa1-84d2b5509cdd",
       "createdDateTime": "2019-10-14T17:18:55Z",
       "description": "A test team of everyone",
-      "displayName": "ICON-Test-Everyone",
+      "displayName": "InsightConnect Team",
       "externalGroupIds": [],
       "groupTypes": [
         "Unified"
@@ -325,15 +315,15 @@ Regular expressions used by this action are Python specific.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|channel_name|string|None|False|Optional regex-capable channel to look for|None|Komand Test Channel|
-|team_name|string|None|True|Team name to look for|None|Komand-Test-Everyone|
+|channel_name|string|None|False|Optional regex-capable channel to look for|None|InsightConnect Channel|
+|team_name|string|None|True|Team name to look for|None|InsightConnect Team|
 
 Example input:
 
 ```
 {
-  "channel_name": "Komand Test Channel",
-  "team_name": "Komand-Test-Everyone"
+  "channel_name": "InsightConnect Channel",
+  "team_name": "InsightConnect Team"
 }
 ```
 
@@ -368,14 +358,14 @@ This action is used to add a member to a team.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |member_login|string|None|True|Member login e.g. user@example.com|None|user@example.com|
-|team_name|string|None|True|Team name|None|ICON-Test-Everyone|
+|team_name|string|None|True|Team name|None|InsightConnect Team|
 
 Example input:
 
 ```
 {
   "member_login": "user@example.com",
-  "team_name": "ICON-Test-Everyone"
+  "team_name": "InsightConnect Team"
 }
 ```
 
@@ -402,16 +392,16 @@ This action is used to add a channel to a team.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |channel_description|string|None|True|Channel description|None|This is a test channel.|
-|channel_name|string|None|True|Channel name|None|test_channel|
-|team_name|string|None|True|Team name|None|ICON-Test-Everyone|
+|channel_name|string|None|True|Channel name|None|InsightConnect Channel|
+|team_name|string|None|True|Team name|None|InsightConnect Team|
 
 Example input:
 
 ```
 {
   "channel_description": "This is a test channel.",
-  "channel_name": "test_channel",
-  "team_name": "ICON-Test-Everyone"
+  "channel_name": "InsightConnect Channel",
+  "team_name": "InsightConnect Team"
 }
 ```
 
@@ -437,15 +427,15 @@ This action is used to remove a channel from a team.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|channel_name|string|None|True|Channel name|None|test_channel|
-|team_name|string|None|True|Team name|None|ICON-Test-Everyone|
+|channel_name|string|None|True|Channel name|None|InsightConnect Channel|
+|team_name|string|None|True|Team name|None|InsightConnect Team|
 
 Example input:
 
 ```
 {
-  "channel_name": "test_channel",
-  "team_name": "ICON-Test-Everyone"
+  "channel_name": "InsightConnect Channel",
+  "team_name": "InsightConnect Team"
 }
 ```
 
@@ -472,14 +462,14 @@ This action is used to remove a member from a team.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |member_login|string|None|True|Member Login e.g. user@example.com|None|user@example.com|
-|team_name|string|None|True|Team name|None|Komand-Test-Everyone|
+|team_name|string|None|True|Team name|None|InsightConnect Team|
 
 Example input:
 
 ```
 {
   "member_login": "user@example.com",
-  "team_name": "Komand-Test-Everyone"
+  "team_name": "InsightConnect Team"
 }
 ```
 
@@ -610,17 +600,17 @@ Regular expressions used by this trigger are Python specific.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|channel_name|string|None|True|Channel|None|ICON Test Channel|
+|channel_name|string|None|True|Channel|None|InsightConnect Channel|
 |message_content|string|None|False|Regex to match new messages against|None|[Tt]est|
-|team_name|string|None|True|Team name|None|ICON-Test-Everyone|
+|team_name|string|None|True|Team name|None|InsightConnect Team|
 
 Example input:
 
 ```
 {
-  "channel_name": "ICON Test Channel",
+  "channel_name": "InsightConnect Channel",
   "message_content": "[Tt]est",
-  "team_name": "ICON-Test-Everyone"
+  "team_name": "InsightConnect Team"
 }
 ```
 
