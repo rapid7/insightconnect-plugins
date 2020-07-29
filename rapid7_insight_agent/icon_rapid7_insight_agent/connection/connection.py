@@ -19,7 +19,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         """
         self.logger.info("Connect: Connecting...")
 
-
         api_key = params.get(Input.API_KEY).get("secretKey")
         region_string = params.get(Input.REGION)
 
