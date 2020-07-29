@@ -154,7 +154,7 @@ class ApiConnection:
 
     def _get_headers(self) -> dict:
         """
-        This build and returns headers for the request session
+        Build and return headers for the API
 
         :return: dict
         """
