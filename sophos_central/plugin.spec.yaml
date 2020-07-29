@@ -16,7 +16,7 @@ tags:
 - sophos
 - firewall
 hub_tags:
-  use_cases: [devops, threat_detection_and_response]
+  use_cases: [threat_detection_and_response]
   keywords: [sophos, firewall]
   features: []
 
