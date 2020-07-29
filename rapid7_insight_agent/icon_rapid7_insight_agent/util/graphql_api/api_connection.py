@@ -288,7 +288,7 @@ class ApiConnection:
                               agents: list,
                               agent_input: str,
                               agent_type: str
-                              ) -> Any:
+                              ) -> Optional[dict]:
         """
         Given a list of agent objects, find the agent that matches our input.
 
