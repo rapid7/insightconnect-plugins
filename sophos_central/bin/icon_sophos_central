@@ -6,7 +6,7 @@ from icon_sophos_central import connection, actions, triggers
 
 Name = "Sophos Central"
 Vendor = "rapid7"
-Version = "1.0.0"
+Version = "3.0.0"
 Description = "Sophos Central is a unified console for managing Sophos products. Using the Sophos Central plugin for Rapid7 InsightConnect, users can get alerts, endpoints, and SIEM events"
 
 
