@@ -478,19 +478,19 @@ connection:
     description: Client secret key that allows access to Sophos Central
     type: credential_secret_key
     required: true
-    example: x1x111111x11111x11111xx11111xx111111x11x11xx1x111xxx11xx111x1x1xxx111111x1xx11x111x1xxx111x1111x1x11
+    example: a1e263620c12382b36054cf34512ef836854e61d27ab2d079dda27af903a5b6eec396416b2dc40aabce6edfg670b0790d9a90
   client_id:
     title: Client ID
     description: Client ID for Sophos Central instance
     type: credential_secret_key
     required: true
-    example: 1x1xxx11-1x11-11x1-11xx-1x1xxx1x11x1
+    example: 8a9jbad0-12ab-88be-cad4-3b4cad6f78e0
   tenant_id:
     title: Tenant ID
     description: Tenant ID for Sophos Central instance
     type: credential_secret_key
     required: false
-    example: 1x1xxx11-1x11-11x1-11xx-1x1xxx1x11x1
+    example: 5b0eba20-ab12-34cd-88be-3a4cdc6a70f8
 
 actions:
   get_endpoints:

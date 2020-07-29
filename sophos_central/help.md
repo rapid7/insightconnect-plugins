@@ -11,27 +11,29 @@
 # Requirements
 
 # Documentation
+
 ## Setup
 
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|client_id|credential_secret_key|None|True|Client ID for Sophos Central instance|None|1x1xxx11-1x11-11x1-11xx-1x1xxx1x11x1|
-|client_secret|credential_secret_key|None|True|Client secret key that allows access to Sophos Central|None|x1x111111x11111x11111xx11111xx111111x11x11xx1x111xxx11xx111x1x1xxx111111x1xx11x111x1xxx111x1111x1x11|
-|tenant_id|credential_secret_key|None|False|Tenant ID for Sophos Central instance|None|1x1xxx11-1x11-11x1-11xx-1x1xxx1x11x1|
+|client_id|credential_secret_key|None|True|Client ID for Sophos Central instance|None|8a9jbad0-12ab-88be-cad4-3b4cad6f78e0|
+|client_secret|credential_secret_key|None|True|Client secret key that allows access to Sophos Central|None|a1e263620c12382b36054cf34512ef836854e61d27ab2d079dda27af903a5b6eec396416b2dc40aabce6edfg670b0790d9a90|
+|tenant_id|credential_secret_key|None|False|Tenant ID for Sophos Central instance|None|5b0eba20-ab12-34cd-88be-3a4cdc6a70f8|
 |url|string|None|True|Host URL|None|https://api-eu02.central.sophos.com|
 
 Example input:
 
 ```
 {
-  "client_id": "1x1xxx11-1x11-11x1-11xx-1x1xxx1x11x1",
-  "client_secret": "x1x111111x11111x11111xx11111xx111111x11x11xx1x111xxx11xx111x1x1xxx111111x1xx11x111x1xxx111x1111x1x11",
-  "tenant_id": "1x1xxx11-1x11-11x1-11xx-1x1xxx1x11x1",
+  "client_id": "8a9jbad0-12ab-88be-cad4-3b4cad6f78e0",
+  "client_secret": "a1e263620c12382b36054cf34512ef836854e61d27ab2d079dda27af903a5b6eec396416b2dc40aabce6edfg670b0790d9a90",
+  "tenant_id": "5b0eba20-ab12-34cd-88be-3a4cdc6a70f8",
   "url": "https://api-eu02.central.sophos.com"
 }
 ```
+
 ## Technical Details
 
 ### Actions
@@ -44,7 +46,7 @@ This action is used to get alerts for a customer based on the parameters provide
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|from_date|string|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours|None|2019-09-23 12:02:01.700000|
+|from_date|string|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours|None|2019-09-23T12:02:01.700Z|
 
 Example input:
 
@@ -95,7 +97,7 @@ This action is used to get endpoints for a customer based on the parameters prov
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|since|string|None|False|Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01.700Z, -P1D, PT20M, PT4H500S|None|2019-09-23 12:02:01.700000|
+|since|string|None|False|Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01.700Z, -P1D, PT20M, PT4H500S|None|2019-09-23T12:02:01.700Z|
 
 Example input:
 
