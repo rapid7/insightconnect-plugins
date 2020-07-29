@@ -355,3 +355,50 @@ triggers:
         description: User Activity
         type: user_activity
         required: false
+events:
+  user_activity_event:
+    title: User Activity Event
+    description: Retrieve user activity events
+    input:
+      activity_type:
+        title: Activity Type
+        description: Type of user activity to match event
+        type: string
+        required: true
+        enum:
+        - "Sign in"
+        - "Sign out"
+        - "All"
+        example: "All"
+    output:
+      user_activity:
+        title: User Activity
+        description: User Activity
+        type: user_activity
+        required: false
+    schedule:
+      title: Schedule for retrieving events  # Title can be source specific
+      type: string  # Always string?
+      enum:  # Enum restricts what options are available; can add more supported options over time
+      - "cron"
+      - "seconds"
+      - "minutes"
+      - "hours"
+      - "datetime"  # Future date
+      default: cron
+    persistence:  # Any number of key/value pairs stored between runs
+      last_event_time:  # Example
+        title: Last Event Time
+        description: The datetime of the last retrieved event
+        type: string
+      last_event_id:  # Example
+        title: Last Event ID
+        description: The identifier of the last retrieved event
+        type: integer
+      last_run_time:  # Example
+        title: Last Run Time
+        description: The time of the last time events were retrieved
+        type: string
+    # Not defined in spec but passed at configuration time
+    # batch_events: true (whether to return batch or single events)
+    # batch_size: 1000 (how many events to return in each response/page)
