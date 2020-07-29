@@ -48,7 +48,7 @@ class ApiConnection:
                    agent_id: str
                    ) -> bool:
         """
-        quarantine action on a given agent ID
+        Quarantine an agent given an agent ID
 
         :param advertisement_period: Amount of time, in seconds, to try to take the quarantine action
         :param agent_id: Agent ID to quarantine
@@ -72,8 +72,8 @@ class ApiConnection:
                      agent_id: str
                      ) -> bool:
         """
-        unquarantine action on a given agent ID
-        :param agent_id: string
+        Unquarantine an agent given an agent ID
+        :param agent_id: Agent ID to unquarantine
 
         :return: boolean
         """
@@ -93,9 +93,9 @@ class ApiConnection:
                          agent_id: str
                          ) -> dict:
         """
-        This will get agent status information from a specified agent
+        Get status information from a specified agent
 
-        :param agent_id: string
+        :param agent_id: Agent ID to get status information for
         :return: dict
         """
         payload = {
@@ -154,7 +154,7 @@ class ApiConnection:
 
     def _get_headers(self) -> dict:
         """
-        This build and returns headers for the request session
+        Build and return headers for the API
 
         :return: dict
         """
@@ -217,7 +217,7 @@ class ApiConnection:
                    agent_type: str
                    ) -> dict:
         """
-        Gets an agent from a Mac, IP, or Hostname.
+        Gets an agent by MAC address, IP address, or hostname.
 
         :pram agent_input: Mac, IP Address or hostname
         :param agent_type: Is the agent input a MAC, IP_ADDRESS, or HOSTNAME
