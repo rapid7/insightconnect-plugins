@@ -324,7 +324,7 @@ class ApiConnection:
 
     def _get_agents_from_result_object(self,
                                        results_object: dict
-                                       ) -> list:
+                                       ) -> [dict]:
         """
         This will extract an agent object from the object that's returned from the API
 
