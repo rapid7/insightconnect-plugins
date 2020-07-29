@@ -125,7 +125,7 @@ Example input:
 ```
 {
   "channel_name": "InsightConnect Channel",
-  "message_content": "\u003cb\u003eHello!\u003c/b\u003e",
+  "message_content": "<b>Hello!</b>",
   "team_name": "InsightConnect Team",
   "thread_id": 1595889908700
 }
