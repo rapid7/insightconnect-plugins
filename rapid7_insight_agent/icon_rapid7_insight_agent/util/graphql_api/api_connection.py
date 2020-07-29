@@ -21,12 +21,7 @@ class ApiConnection:
 
         self.api_key = api_key
         self.logger = logger
-        self.endpoint = self._setup_endpoint(region_string)
-
-        self.session = requests.Session()
-        self.session.headers = self._get_headers()
-
-        self._setup()
+        self._setup(region_string)
 
     def get_agent(self,
                   agent_input: str
@@ -142,12 +137,18 @@ class ApiConnection:
     # Private Methods
     #################
 
-    def _setup(self)-> None:
+    def _setup(self, region_string:str)-> None:
         """
-        Get the org key and set it to a class variable
+        Setup the API connection
 
+        :param region_string: The human readable name of the region. e.x. "United States"
         :return: None
         """
+        self.endpoint = self._setup_endpoint(region_string)
+
+        self.session = requests.Session()
+        self.session.headers = self._get_headers()
+
         self.org_key = self._get_org_key()
         self.logger.info(f"Received org key: ********-****-****-****-*******{self.org_key[-5:]}")
 
