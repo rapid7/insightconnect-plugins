@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     ANALYSIS = "analysis"
+    CATEGORY = "category"
     DATE_FROM = "date_from"
     DATE_UNTIL = "date_until"
     EVENT = "event"
@@ -16,6 +17,8 @@ class Input:
     PUBLISHED = "published"
     TAG = "tag"
     THREAT_LEVEL = "threat_level"
+    TYPE_ATTRIBUTE = "type_attribute"
+    VALUES = "values"
     
 
 class Output:
@@ -39,6 +42,12 @@ class SearchEventsInput(komand.Input):
         "Completed"
       ],
       "order": 8
+    },
+    "category": {
+      "type": "string",
+      "title": "Category",
+      "description": "Search by attribute category",
+      "order": 11
     },
     "date_from": {
       "type": "string",
@@ -93,6 +102,21 @@ class SearchEventsInput(komand.Input):
         "High"
       ],
       "order": 5
+    },
+    "type_attribute": {
+      "type": "string",
+      "title": "Type Attribute",
+      "description": "Search by any valid MISP attribute type",
+      "order": 10
+    },
+    "values": {
+      "type": "array",
+      "title": "Values",
+      "description": "Search by given values of attributes value field",
+      "items": {
+        "type": "string"
+      },
+      "order": 9
     }
   }
 }
