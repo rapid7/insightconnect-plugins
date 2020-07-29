@@ -670,7 +670,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.0.0 - Update Send Message and Send HTML Message actions to return `thread_id` to support threaded replies
+* 3.0.0 - Update Send Message and Send HTML Message actions to accept `thread_id` input to support threaded replies
 * 2.0.5 - Fix issue where auth token wasn't properly renewed
 * 2.0.4 - Fix issue where a message that only had an image in it could break the 'New Message Received' trigger
 * 2.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/microsoft-teams)
