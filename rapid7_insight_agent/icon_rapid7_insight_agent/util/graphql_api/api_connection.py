@@ -35,7 +35,7 @@ class ApiConnection:
         """
         Find an agent based on a MAC address, IP address, or hostname
 
-        :param agent_input: string
+        :param agent_input: MAC address, IP address, or hostname
         :return:
         """
 
