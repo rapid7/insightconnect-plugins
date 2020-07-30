@@ -92,7 +92,7 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
             "agentSemanticVersion": {
               "type": "string",
               "title": "Agent Semantic Version",
-              "description": "Agent Semantic Version",
+              "description": "Agent semantic version",
               "order": 1
             },
             "agentStatus": {
@@ -335,7 +335,7 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
         "agentSemanticVersion": {
           "type": "string",
           "title": "Agent Semantic Version",
-          "description": "Agent Semantic Version",
+          "description": "Agent semantic version",
           "order": 1
         },
         "agentStatus": {

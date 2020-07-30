@@ -45,104 +45,104 @@ types:
       required: false
   agent_info:
     agentSemanticVersion:
-      title: "Agent Semantic Version"
+      title: Agent Semantic Version
       type: string
-      description: "Agent Semantic Version"
+      description: Agent semantic version
       required: false
     agentStatus:
-      title: "Agent Status"
+      title: Agent Status
       type: string
-      description: "Agent status"
+      description: Agent status
       required: false
     quarantineState:
-      title: "Quarantine State"
+      title: Quarantine State
       type: quarantineState_object
-      description: "Quarantine state"
+      description: Quarantine state
       required: false
   hostName:
     name:
-      title: "Name"
+      title: Name
       type: string
-      description: "Name"
+      description: Name
       required: false
   primaryAddress:
     ip:
-      title: "IP Address"
+      title: IP Address
       type: string
-      description: "IP address"
+      description: IP address
       required: false
     mac:
-      title: "MAC Address"
+      title: MAC Address
       type: string
-      description: "MAC address"
+      description: MAC address
       required: false
   uniqueIdentity_object:
     id:
-      title: "ID"
+      title: ID
       type: string
-      description: "ID"
+      description: ID
       required: false
     source:
-      title: "Source"
+      title: Source
       type: string
-      description: "Source"
+      description: Source
       required: false
   host:
     attributes:
-      title: "Attributes"
+      title: Attributes
       type: "[]attribute"
-      description: "Attributes"
+      description: Attributes
       required: false
     description:
-      title: "Description"
+      title: Description
       type: string
-      description: "Description"
+      description: Description
       required: false
     hostNames:
-      title: "Hostnames"
+      title: Hostnames
       type: "[]hostName"
-      description: "Hostnames"
+      description: Hostnames
       required: false
     primaryAddress:
-      title: "Primary Address"
+      title: Primary Address
       type: primaryAddress
-      description: "Primary address"
+      description: Primary address
       required: false
     uniqueIdentity:
-      title: "Unique Identity"
+      title: Unique Identity
       type: "[]uniqueIdentity_object"
-      description: "Unique identity"
+      description: Unique identity
       required: false
     vendor:
-      title: "Vendor"
+      title: Vendor
       type: string
-      description: "Vendor"
+      description: Vendor
       required: false
     version:
-      title: "Version"
+      title: Version
       type: string
-      description: "Version"
+      description: Version
       required: false
   agent:
     agent_info:
-      title: "Agent Information"
+      title: Agent Information
       type: agent_info
-      description: "Agent information"
+      description: Agent information
       required: false
     host:
-      title: "Host"
+      title: Host
       type: host
-      description: "Host"
+      description: Host
       required: false
     id:
-      title: "ID"
+      title: ID
       type: string
-      description: "ID"
+      description: ID
       required: false
     platform:
-      title: "Platform"
+      title: Platform
       type: string
-      description: "Platform"
+      description: Platform
       required: false
 
 connection:
