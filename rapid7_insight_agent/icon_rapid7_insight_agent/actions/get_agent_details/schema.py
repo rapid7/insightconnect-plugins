@@ -59,6 +59,335 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "agent",
       "properties": {
+        "agent_info": {
+          "$ref": "#/definitions/agent_info",
+          "title": "Agent Information",
+          "description": "Agent information",
+          "order": 1
+        },
+        "host": {
+          "$ref": "#/definitions/host",
+          "title": "Host",
+          "description": "Host",
+          "order": 2
+        },
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "ID",
+          "order": 3
+        },
+        "platform": {
+          "type": "string",
+          "title": "Platform",
+          "description": "Platform",
+          "order": 4
+        }
+      },
+      "definitions": {
+        "agent_info": {
+          "type": "object",
+          "title": "agent_info",
+          "properties": {
+            "agentSemanticVersion": {
+              "type": "string",
+              "title": "Agent Semantic Version",
+              "description": "Agent Semantic Version",
+              "order": 1
+            },
+            "agentStatus": {
+              "type": "string",
+              "title": "Agent Status",
+              "description": "Agent status",
+              "order": 2
+            },
+            "quarantineState": {
+              "$ref": "#/definitions/quarantineState_object",
+              "title": "Quarantine State",
+              "description": "Quarantine state",
+              "order": 3
+            }
+          },
+          "definitions": {
+            "quarantineState_object": {
+              "type": "object",
+              "title": "quarantineState_object",
+              "properties": {
+                "currentState": {
+                  "type": "string",
+                  "title": "Current State",
+                  "description": "Current state",
+                  "order": 1
+                }
+              }
+            }
+          }
+        },
+        "attribute": {
+          "type": "object",
+          "title": "attribute",
+          "properties": {
+            "key": {
+              "type": "string",
+              "title": "Key",
+              "description": "Key",
+              "order": 1
+            },
+            "value": {
+              "type": "string",
+              "title": "Value",
+              "description": "Value",
+              "order": 2
+            }
+          }
+        },
+        "host": {
+          "type": "object",
+          "title": "host",
+          "properties": {
+            "attributes": {
+              "type": "array",
+              "title": "Attributes",
+              "description": "Attributes",
+              "items": {
+                "$ref": "#/definitions/attribute"
+              },
+              "order": 1
+            },
+            "description": {
+              "type": "string",
+              "title": "Description",
+              "description": "Description",
+              "order": 2
+            },
+            "hostNames": {
+              "type": "array",
+              "title": "Hostnames",
+              "description": "Hostnames",
+              "items": {
+                "$ref": "#/definitions/hostName"
+              },
+              "order": 3
+            },
+            "primaryAddress": {
+              "$ref": "#/definitions/primaryAddress",
+              "title": "Primary Address",
+              "description": "Primary address",
+              "order": 4
+            },
+            "uniqueIdentity": {
+              "type": "array",
+              "title": "Unique Identity",
+              "description": "Unique identity",
+              "items": {
+                "$ref": "#/definitions/uniqueIdentity_object"
+              },
+              "order": 5
+            },
+            "vendor": {
+              "type": "string",
+              "title": "Vendor",
+              "description": "Vendor",
+              "order": 6
+            },
+            "version": {
+              "type": "string",
+              "title": "Version",
+              "description": "Version",
+              "order": 7
+            }
+          },
+          "definitions": {
+            "attribute": {
+              "type": "object",
+              "title": "attribute",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "title": "Key",
+                  "description": "Key",
+                  "order": 1
+                },
+                "value": {
+                  "type": "string",
+                  "title": "Value",
+                  "description": "Value",
+                  "order": 2
+                }
+              }
+            },
+            "hostName": {
+              "type": "object",
+              "title": "hostName",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "title": "Name",
+                  "description": "Name",
+                  "order": 1
+                }
+              }
+            },
+            "primaryAddress": {
+              "type": "object",
+              "title": "primaryAddress",
+              "properties": {
+                "ip": {
+                  "type": "string",
+                  "title": "IP Address",
+                  "description": "IP address",
+                  "order": 1
+                },
+                "mac": {
+                  "type": "string",
+                  "title": "MAC Address",
+                  "description": "MAC address",
+                  "order": 2
+                }
+              }
+            },
+            "uniqueIdentity_object": {
+              "type": "object",
+              "title": "uniqueIdentity_object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "title": "ID",
+                  "description": "ID",
+                  "order": 1
+                },
+                "source": {
+                  "type": "string",
+                  "title": "Source",
+                  "description": "Source",
+                  "order": 2
+                }
+              }
+            }
+          }
+        },
+        "hostName": {
+          "type": "object",
+          "title": "hostName",
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "Name",
+              "order": 1
+            }
+          }
+        },
+        "primaryAddress": {
+          "type": "object",
+          "title": "primaryAddress",
+          "properties": {
+            "ip": {
+              "type": "string",
+              "title": "IP Address",
+              "description": "IP address",
+              "order": 1
+            },
+            "mac": {
+              "type": "string",
+              "title": "MAC Address",
+              "description": "MAC address",
+              "order": 2
+            }
+          }
+        },
+        "quarantineState_object": {
+          "type": "object",
+          "title": "quarantineState_object",
+          "properties": {
+            "currentState": {
+              "type": "string",
+              "title": "Current State",
+              "description": "Current state",
+              "order": 1
+            }
+          }
+        },
+        "uniqueIdentity_object": {
+          "type": "object",
+          "title": "uniqueIdentity_object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "ID",
+              "description": "ID",
+              "order": 1
+            },
+            "source": {
+              "type": "string",
+              "title": "Source",
+              "description": "Source",
+              "order": 2
+            }
+          }
+        }
+      }
+    },
+    "agent_info": {
+      "type": "object",
+      "title": "agent_info",
+      "properties": {
+        "agentSemanticVersion": {
+          "type": "string",
+          "title": "Agent Semantic Version",
+          "description": "Agent Semantic Version",
+          "order": 1
+        },
+        "agentStatus": {
+          "type": "string",
+          "title": "Agent Status",
+          "description": "Agent status",
+          "order": 2
+        },
+        "quarantineState": {
+          "$ref": "#/definitions/quarantineState_object",
+          "title": "Quarantine State",
+          "description": "Quarantine state",
+          "order": 3
+        }
+      },
+      "definitions": {
+        "quarantineState_object": {
+          "type": "object",
+          "title": "quarantineState_object",
+          "properties": {
+            "currentState": {
+              "type": "string",
+              "title": "Current State",
+              "description": "Current state",
+              "order": 1
+            }
+          }
+        }
+      }
+    },
+    "attribute": {
+      "type": "object",
+      "title": "attribute",
+      "properties": {
+        "key": {
+          "type": "string",
+          "title": "Key",
+          "description": "Key",
+          "order": 1
+        },
+        "value": {
+          "type": "string",
+          "title": "Value",
+          "description": "Value",
+          "order": 2
+        }
+      }
+    },
+    "host": {
+      "type": "object",
+      "title": "host",
+      "properties": {
         "attributes": {
           "type": "array",
           "title": "Attributes",
@@ -76,45 +405,39 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
         },
         "hostNames": {
           "type": "array",
-          "title": "Host Names",
-          "description": "Host names",
+          "title": "Hostnames",
+          "description": "Hostnames",
           "items": {
             "$ref": "#/definitions/hostName"
           },
           "order": 3
         },
-        "id": {
-          "type": "string",
-          "title": "ID",
-          "description": "ID",
-          "order": 4
-        },
         "primaryAddress": {
           "$ref": "#/definitions/primaryAddress",
           "title": "Primary Address",
           "description": "Primary address",
-          "order": 5
+          "order": 4
         },
         "uniqueIdentity": {
           "type": "array",
           "title": "Unique Identity",
           "description": "Unique identity",
           "items": {
-            "$ref": "#/definitions/uniqueIdentity"
+            "$ref": "#/definitions/uniqueIdentity_object"
           },
-          "order": 6
+          "order": 5
         },
         "vendor": {
           "type": "string",
           "title": "Vendor",
           "description": "Vendor",
-          "order": 7
+          "order": 6
         },
         "version": {
           "type": "string",
           "title": "Version",
           "description": "Version",
-          "order": 8
+          "order": 7
         }
       },
       "definitions": {
@@ -166,9 +489,9 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "uniqueIdentity": {
+        "uniqueIdentity_object": {
           "type": "object",
-          "title": "uniqueIdentity",
+          "title": "uniqueIdentity_object",
           "properties": {
             "id": {
               "type": "string",
@@ -183,24 +506,6 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
               "order": 2
             }
           }
-        }
-      }
-    },
-    "attribute": {
-      "type": "object",
-      "title": "attribute",
-      "properties": {
-        "key": {
-          "type": "string",
-          "title": "Key",
-          "description": "Key",
-          "order": 1
-        },
-        "value": {
-          "type": "string",
-          "title": "Value",
-          "description": "Value",
-          "order": 2
         }
       }
     },
@@ -234,9 +539,21 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "uniqueIdentity": {
+    "quarantineState_object": {
       "type": "object",
-      "title": "uniqueIdentity",
+      "title": "quarantineState_object",
+      "properties": {
+        "currentState": {
+          "type": "string",
+          "title": "Current State",
+          "description": "Current state",
+          "order": 1
+        }
+      }
+    },
+    "uniqueIdentity_object": {
+      "type": "object",
+      "title": "uniqueIdentity_object",
       "properties": {
         "id": {
           "type": "string",

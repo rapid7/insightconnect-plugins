@@ -37,6 +37,28 @@ types:
       type: string
       description: "Value"
       required: false
+  quarantineState_object:
+    currentState:
+      title: Current State
+      type: string
+      description: Current state
+      required: false
+  agent_info:
+    agentSemanticVersion:
+      title: "Agent Semantic Version"
+      type: string
+      description: "Agent Semantic Version"
+      required: false
+    agentStatus:
+      title: "Agent Status"
+      type: string
+      description: "Agent status"
+      required: false
+    quarantineState:
+      title: "Quarantine State"
+      type: quarantineState_object
+      description: "Quarantine state"
+      required: false
   hostName:
     name:
       title: "Name"
@@ -54,7 +76,7 @@ types:
       type: string
       description: "MAC address"
       required: false
-  uniqueIdentity:
+  uniqueIdentity_object:
     id:
       title: "ID"
       type: string
@@ -65,7 +87,7 @@ types:
       type: string
       description: "Source"
       required: false
-  agent:
+  host:
     attributes:
       title: "Attributes"
       type: "[]attribute"
@@ -77,14 +99,9 @@ types:
       description: "Description"
       required: false
     hostNames:
-      title: "Host Names"
+      title: "Hostnames"
       type: "[]hostName"
-      description: "Host names"
-      required: false
-    id:
-      title: "ID"
-      type: string
-      description: "ID"
+      description: "Hostnames"
       required: false
     primaryAddress:
       title: "Primary Address"
@@ -93,7 +110,7 @@ types:
       required: false
     uniqueIdentity:
       title: "Unique Identity"
-      type: "[]uniqueIdentity"
+      type: "[]uniqueIdentity_object"
       description: "Unique identity"
       required: false
     vendor:
@@ -105,6 +122,27 @@ types:
       title: "Version"
       type: string
       description: "Version"
+      required: false
+  agent:
+    agent_info:
+      title: "Agent Information"
+      type: agent_info
+      description: "Agent information"
+      required: false
+    host:
+      title: "Host"
+      type: host
+      description: "Host"
+      required: false
+    id:
+      title: "ID"
+      type: string
+      description: "ID"
+      required: false
+    platform:
+      title: "Platform"
+      type: string
+      description: "Platform"
       required: false
 
 connection:

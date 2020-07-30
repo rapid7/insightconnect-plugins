@@ -240,7 +240,7 @@ class ApiConnection:
         """
         agents = []
         payload = {
-            "query": "query($orgId: String!) {organization(id: $orgId) { assets(first: 10000) { pageInfo { hasNextPage endCursor } edges { node { host { id vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } id agent { id } } } } } } ",
+            "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
             "variables": {
                 "orgId": self.org_key
             }
@@ -283,7 +283,7 @@ class ApiConnection:
         self.logger.info(f"Getting next page of agents.")
         next_cursor = results_object.get("data").get("organization").get("assets").get("pageInfo").get("endCursor")
         payload = {
-            "query": "query( $orgId:String! $nextCursor:String! ) { organization(id: $orgId) { assets( first: 10000 after: $nextCursor ) { pageInfo { hasNextPage endCursor } edges { node { host { id vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } id agent { id } } } } } }",
+            "query": "query( $orgId:String! $nextCursor:String! ) { organization(id: $orgId) { assets( first: 10000, after: $nextCursor ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
             "variables": {
                 "orgId": self.org_key,
                 "nextCursor": next_cursor
@@ -317,25 +317,30 @@ class ApiConnection:
         self.logger.info(f"Searching for: {agent_input}")
         self.logger.info(f"Search type: {agent_type}")
         for agent in agents:
-            if agent_type == agent_typer.IP_ADDRESS:
-                if agent_input == agent.get("primaryAddress").get("ip"):
-                    return agent
-            elif agent_type == agent_typer.HOSTNAME:
-                # In this case, we have an alpha/numeric value. This could be the ID or the Hostname. Need to check both
-                if agent_input == agent.get("id"):
-                    return agent
-                for host_name in agent.get("hostNames"):
-                    if agent_input == host_name.get("name"):
+            if agent and len(agent):
+                if agent_type == agent_typer.IP_ADDRESS:
+                    if agent_input == agent.get("host").get("primaryAddress").get("ip"):
                         return agent
-            elif agent_type == agent_typer.MAC_ADDRESS:
-                # MAC addresses can come in with : or - as a separator, remove all of it and compare
-                stripped_input_mac = agent_input.replace("-", "").replace(":", "")
-                stripped_target_mac = agent.get("primaryAddress").get("mac").replace("-", "").replace(":", "")
-                if stripped_input_mac == stripped_target_mac:
-                    return agent
+                elif agent_type == agent_typer.HOSTNAME:
+                    # In this case, we have an alpha/numeric value. This could be the ID or the Hostname. Need to check both
+                    if agent_input == agent.get("host").get("id"):
+                        return agent
+                    for host_name in agent.get("host").get("hostNames"):
+                        if agent_input == host_name.get("name"):
+                            return agent
+                elif agent_type == agent_typer.MAC_ADDRESS:
+                    # MAC addresses can come in with : or - as a separator, remove all of it and compare
+                    stripped_input_mac = agent_input.replace("-", "").replace(":", "")
+                    stripped_target_mac = agent.get("host").get("primaryAddress").get("mac").replace("-", "").replace(":", "")
+                    if stripped_input_mac == stripped_target_mac:
+                        return agent
+                else:
+                    raise APIException(cause="Could not determine agent type.",
+                                       assistance=f"Agent {agent_input} was not a MAC address, IP address, or hostname.")
             else:
-                raise APIException(cause="Could not determine agent type.",
-                                   assistance=f"Agent {agent_input} was not a MAC address, IP address, or hostname.")
+                self.logger.info("Agent info not available, skipping...")
+                self.logger.info(str(agent))
+
 
         return None  # No agent found
 
@@ -353,7 +358,7 @@ class ApiConnection:
         try:
             edges = results_object.get("data").get("organization").get("assets").get("edges")
             for edge in edges:
-                agent = edge.get("node").get("host")
+                agent = edge.get("node")
                 agent_list.append(agent)
         except KeyError:
             raise APIException(cause="Insight Agent API returned data in an unexpected format.\n",
