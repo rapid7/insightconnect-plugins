@@ -19,8 +19,8 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |client_id|credential_secret_key|None|True|Client ID for Sophos Central instance|None|8a9jbad0-12ab-88be-cad4-3b4cad6f78e0|
 |client_secret|credential_secret_key|None|True|Client secret key that allows access to Sophos Central|None|a1e263620c12382b36054cf34512ef836854e61d27ab2d079dda27af903a5b6eec396416b2dc40aabce6edfg670b0790d9a90|
+|region|string|US East|False|API region|['US West', 'US East', 'EU Ireland', 'DE Germany']|US East|
 |tenant_id|credential_secret_key|None|False|Tenant ID for Sophos Central instance|None|5b0eba20-ab12-34cd-88be-3a4cdc6a70f8|
-|url|string|https://api-us03.central.sophos.com|False|Host URL|['https://api-us01.central.sophos.com', 'https://api-us03.central.sophos.com', 'https://api-eu01.central.sophos.com', 'https://api-eu02.central.sophos.com']|https://api-eu02.central.sophos.com|
 
 Example input:
 
@@ -28,8 +28,8 @@ Example input:
 {
   "client_id": "8a9jbad0-12ab-88be-cad4-3b4cad6f78e0",
   "client_secret": "a1e263620c12382b36054cf34512ef836854e61d27ab2d079dda27af903a5b6eec396416b2dc40aabce6edfg670b0790d9a90",
-  "tenant_id": "5b0eba20-ab12-34cd-88be-3a4cdc6a70f8",
-  "url": "https://api-eu02.central.sophos.com"
+  "region": "US East",
+  "tenant_id": "5b0eba20-ab12-34cd-88be-3a4cdc6a70f8"
 }
 ```
 

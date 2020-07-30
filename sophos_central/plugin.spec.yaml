@@ -467,19 +467,18 @@ types:
       type: '[]installer_info'
 
 connection:
-  url:
-    title: URL
-    description: Host URL
+  region:
+    title: API region
+    description: API region
     type: string
     required: false
-    example: https://api-eu02.central.sophos.com
-    default: https://api-us03.central.sophos.com
+    example: US East
+    default: US East
     enum:
-      - https://api-us01.central.sophos.com
-      - https://api-us03.central.sophos.com
-      - https://api-eu01.central.sophos.com
-      - https://api-eu02.central.sophos.com
-
+      - US West
+      - US East
+      - EU Ireland
+      - DE Germany
   client_secret:
     title: Client Secret
     description: Client secret key that allows access to Sophos Central

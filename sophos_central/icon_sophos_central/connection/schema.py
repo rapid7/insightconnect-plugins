@@ -6,8 +6,8 @@ import json
 class Input:
     CLIENT_ID = "client_id"
     CLIENT_SECRET = "client_secret"
+    REGION = "region"
     TENANT_ID = "tenant_id"
-    URL = "url"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -28,24 +28,24 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "Client secret key that allows access to Sophos Central",
       "order": 2
     },
+    "region": {
+      "type": "string",
+      "title": "API region",
+      "description": "API region",
+      "default": "US East",
+      "enum": [
+        "US West",
+        "US East",
+        "EU Ireland",
+        "DE Germany"
+      ],
+      "order": 1
+    },
     "tenant_id": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Tenant ID",
       "description": "Tenant ID for Sophos Central instance",
       "order": 4
-    },
-    "url": {
-      "type": "string",
-      "title": "URL",
-      "description": "Host URL",
-      "default": "https://api-us03.central.sophos.com",
-      "enum": [
-        "https://api-us01.central.sophos.com",
-        "https://api-us03.central.sophos.com",
-        "https://api-eu01.central.sophos.com",
-        "https://api-eu02.central.sophos.com"
-      ],
-      "order": 1
     }
   },
   "required": [
