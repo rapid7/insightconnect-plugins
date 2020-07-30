@@ -27,7 +27,7 @@ class SendHtmlMessage(komand.Action):
             message,
             team_id,
             channels[0].get("id"),
-            thread_id=params.get(Input.THREAD_ID)
+            thread_id=params.get(Input.THREAD_ID, None)
         )
 
         return {

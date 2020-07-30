@@ -57,7 +57,7 @@ Regular expressions used by this action are Python specific.
 |channel_name|string|None|True|Channel|None|InsightConnect Channel|
 |message|string|None|True|Message to send|None|Hello!|
 |team_name|string|None|True|Team name|None|InsightConnect Team|
-|thread_id|string|None|True|To post in a thread, select parent message ID|None|1595889908700|
+|thread_id|string|None|False|To post in a thread, select parent message ID|None|1595889908700|
 
 Example input:
 
@@ -118,7 +118,7 @@ This action is used to send HTML as a message.
 |channel_name|string|None|True|Channel name|None|InsightConnect Channel|
 |message_content|string|None|True|HTML content to send|None|<b>Hello!</b>|
 |team_name|string|None|True|Team name|None|InsightConnect Team|
-|thread_id|string|None|True|To post in a thread, select parent message ID|None|1595889908700|
+|thread_id|string|None|False|To post in a thread, select parent message ID|None|1595889908700|
 
 Example input:
 
@@ -670,7 +670,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.0.0 - Update Send Message and Send HTML Message actions to accept `thread_id` input to support threaded replies
+* 2.1.0 - Update Send Message and Send HTML Message actions to accept `thread_id` input to support threaded replies
 * 2.0.5 - Fix issue where auth token wasn't properly renewed
 * 2.0.4 - Fix issue where a message that only had an image in it could break the 'New Message Received' trigger
 * 2.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/microsoft-teams)

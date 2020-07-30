@@ -52,8 +52,7 @@ class SendMessageInput(komand.Input):
   "required": [
     "channel_name",
     "message",
-    "team_name",
-    "thread_id"
+    "team_name"
   ]
 }
     """)

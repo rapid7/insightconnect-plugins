@@ -52,8 +52,7 @@ class SendHtmlMessageInput(komand.Input):
   "required": [
     "channel_name",
     "message_content",
-    "team_name",
-    "thread_id"
+    "team_name"
   ]
 }
     """)
