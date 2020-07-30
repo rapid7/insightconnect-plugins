@@ -23,9 +23,9 @@ class SophosCentralAPI:
             params = {
                 "pageFromKey": key
             }
-        return self._call_api(
+        return self._make_request(
             "GET",
-            f"{self.url}/common/v1/alerts",
+            f"/common/v1/alerts",
             "Tenant",
             params=params
         )
@@ -36,15 +36,15 @@ class SophosCentralAPI:
             params = {
                 "lastSeenAfter": since
             }
-        return self._call_api(
+        return self._make_request(
             "GET",
-            f"{self.url}/endpoint/v1/endpoints",
+            f"/endpoint/v1/endpoints",
             "Tenant",
             params=params
         )
 
     def whoami(self, access_token):
-        return self._make_request(
+        return self._call_api(
             "GET",
             "https://api.central.sophos.com/whoami/v1",
             headers={
@@ -53,7 +53,7 @@ class SophosCentralAPI:
         )
 
     def get_access_token(self):
-        token = self._make_request(
+        token = self._call_api(
             method="POST",
             url="https://id.sophos.com/api/v2/oauth2/token",
             headers={
@@ -69,22 +69,28 @@ class SophosCentralAPI:
 
         return token.get("access_token")
 
-    def _call_api(self, method, url, key_type, params=None, json_data=None):
+    def _make_request(self, method, path, key_type, params=None, json_data=None):
         access_token = self.get_access_token()
+        whoami = self.whoami(access_token)
 
+        url = None
         if self.tenant_id:
             id_ = self.tenant_id
         else:
-            id_ = self.whoami(access_token)["id"]
+            id_ = whoami["id"]
+            url = whoami.get("apiHosts", {}).get("dataRegion")
 
-        return self._make_request(
-            method, url, params, json_data, headers={
+        if not url:
+            url = self.url
+
+        return self._call_api(
+            method, f"{url}{path}", params, json_data, headers={
                 "Authorization": f"Bearer {access_token}",
                 f"X-{key_type}-ID": id_
             }
         )
 
-    def _make_request(self, method, url, params=None, json_data=None, data=None, headers=None):
+    def _call_api(self, method, url, params=None, json_data=None, data=None, headers=None):
         response = {"text": ""}
         try:
             response = requests.request(

@@ -471,8 +471,15 @@ connection:
     title: URL
     description: Host URL
     type: string
-    required: true
+    required: false
     example: https://api-eu02.central.sophos.com
+    default: https://api-us03.central.sophos.com
+    enum:
+      - https://api-us01.central.sophos.com
+      - https://api-us03.central.sophos.com
+      - https://api-eu01.central.sophos.com
+      - https://api-eu02.central.sophos.com
+
   client_secret:
     title: Client Secret
     description: Client secret key that allows access to Sophos Central

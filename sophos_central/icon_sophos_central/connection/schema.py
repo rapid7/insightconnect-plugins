@@ -38,13 +38,19 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "URL",
       "description": "Host URL",
+      "default": "https://api-us03.central.sophos.com",
+      "enum": [
+        "https://api-us01.central.sophos.com",
+        "https://api-us03.central.sophos.com",
+        "https://api-eu01.central.sophos.com",
+        "https://api-eu02.central.sophos.com"
+      ],
       "order": 1
     }
   },
   "required": [
     "client_id",
-    "client_secret",
-    "url"
+    "client_secret"
   ],
   "definitions": {
     "credential_secret_key": {

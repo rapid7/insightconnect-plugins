@@ -14,7 +14,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params=None):
         self.logger.info("Connect: Connecting...")
         self.client = SophosCentralAPI(
-            params.get(Input.URL).rstrip("/"),
+            params.get(Input.URL, "https://api-us03.central.sophos.com").rstrip("/"),
             params.get(Input.CLIENT_ID).get("secretKey"),
             params.get(Input.CLIENT_SECRET).get("secretKey"),
             params.get(Input.TENANT_ID, {}).get("secretKey"),

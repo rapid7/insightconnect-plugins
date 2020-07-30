@@ -20,7 +20,7 @@ The connection configuration accepts the following parameters:
 |client_id|credential_secret_key|None|True|Client ID for Sophos Central instance|None|8a9jbad0-12ab-88be-cad4-3b4cad6f78e0|
 |client_secret|credential_secret_key|None|True|Client secret key that allows access to Sophos Central|None|a1e263620c12382b36054cf34512ef836854e61d27ab2d079dda27af903a5b6eec396416b2dc40aabce6edfg670b0790d9a90|
 |tenant_id|credential_secret_key|None|False|Tenant ID for Sophos Central instance|None|5b0eba20-ab12-34cd-88be-3a4cdc6a70f8|
-|url|string|None|True|Host URL|None|https://api-eu02.central.sophos.com|
+|url|string|https://api-us03.central.sophos.com|False|Host URL|['https://api-us01.central.sophos.com', 'https://api-us03.central.sophos.com', 'https://api-eu01.central.sophos.com', 'https://api-eu02.central.sophos.com']|https://api-eu02.central.sophos.com|
 
 Example input:
 
@@ -45,7 +45,7 @@ This action is used to get alerts for a customer based on the parameters provide
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|from_date|string|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours|None|2019-09-23T12:02:01.700Z|
+|from_date|string|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours|None|2019-09-23 12:02:01.700000|
 
 Example input:
 
@@ -96,7 +96,7 @@ This action is used to get endpoints for a customer based on the parameters prov
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|since|string|None|False|Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01.700Z, -P1D, PT20M, PT4H500S|None|2019-09-23T12:02:01.700Z|
+|since|string|None|False|Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01.700Z, -P1D, PT20M, PT4H500S|None|2019-09-23 12:02:01.700000|
 
 Example input:
 
