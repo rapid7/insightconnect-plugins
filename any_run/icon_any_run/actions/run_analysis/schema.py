@@ -139,7 +139,7 @@ class RunAnalysisInput(insightconnect_plugin_runtime.Input):
     "obj_ext_useragent": {
       "type": "string",
       "title": "User Agent",
-      "description": "User agent, used only for \\"download\\" type",
+      "description": "User agent, used only for \\"download\\" and \\"url\\" types",
       "order": 6
     },
     "obj_type": {

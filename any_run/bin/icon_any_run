@@ -6,7 +6,7 @@ from icon_any_run import connection, actions, triggers
 
 Name = "Any.Run"
 Vendor = "rapid7"
-Version = "1.0.0"
+Version = "1.1.0"
 Description = "Analyze suspicious and malicious activities using the cloud-based malware analysis service"
 
 
