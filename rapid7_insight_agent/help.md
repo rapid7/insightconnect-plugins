@@ -207,4 +207,3 @@ _This plugin does not contain any troubleshooting information._
 
 * [Rapid7 Insight Agent](https://docs.rapid7.com/insight-agent/overview/)
 * [Manage Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)
-*  
