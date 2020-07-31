@@ -317,7 +317,7 @@ class ApiConnection:
         self.logger.info(f"Searching for: {agent_input}")
         self.logger.info(f"Search type: {agent_type}")
         for agent in agents:
-            if agent and len(agent):
+            if agent and len(agent) and agent.get("host"): # Some hosts come back None...need to check for that
                 if agent_type == agent_typer.IP_ADDRESS:
                     if agent_input == agent.get("host").get("primaryAddress").get("ip"):
                         return agent
@@ -338,7 +338,7 @@ class ApiConnection:
                     raise APIException(cause="Could not determine agent type.",
                                        assistance=f"Agent {agent_input} was not a MAC address, IP address, or hostname.")
             else:
-                self.logger.info("Agent info not available, skipping...")
+                self.logger.info("Agent host information not available, skipping...")
                 self.logger.info(str(agent))
 
 
