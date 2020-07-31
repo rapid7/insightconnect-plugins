@@ -224,6 +224,16 @@ triggers:
         description: The message object that was created
         type: message
         required: false
+      channel_name:
+        title: Channel Name
+        description: Name of the channel where the message was posted
+        type: string
+        required: false
+      team_name:
+        title: Team Name
+        description: Name of the team to which the channel is assigned to
+        type: string
+        required: false
 
 actions:
   get_teams:

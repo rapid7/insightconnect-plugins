@@ -627,7 +627,9 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|channel_name|string|False|Name of the channel where the message was posted|
 |message|message|False|The message object that was created|
+|team_name|string|False|Name of the team to which the channel is assigned to|
 
 Example output:
 
@@ -670,7 +672,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.1.0 - Update Send Message and Send HTML Message actions to accept `thread_id` input to support threaded replies
+* 2.1.0 - Update Send Message and Send HTML Message actions to accept `thread_id` input to support threaded replies, updated trigger New Message Received to output team and channel names
 * 2.0.5 - Fix issue where auth token wasn't properly renewed
 * 2.0.4 - Fix issue where a message that only had an image in it could break the 'New Message Received' trigger
 * 2.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/microsoft-teams)
