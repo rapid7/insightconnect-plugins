@@ -55,7 +55,7 @@ class CheckAgentStatusOutput(insightconnect_plugin_runtime.Output):
     },
     "is_currently_quarantined": {
       "type": "boolean",
-      "title": "Is Currenty Quarantined",
+      "title": "Is Currently Quarantined",
       "description": "Is the device currently quarantined",
       "order": 1
     },

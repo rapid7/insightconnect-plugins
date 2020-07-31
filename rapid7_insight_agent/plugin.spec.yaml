@@ -228,7 +228,7 @@ actions:
         required: true
     output:
       is_currently_quarantined:
-        title: Is Currenty Quarantined
+        title: Is Currently Quarantined
         description: Is the device currently quarantined
         type: boolean
         required: true
