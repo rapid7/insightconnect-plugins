@@ -866,7 +866,7 @@ This action is used to run a new analysis.
 |obj_ext_elevateprompt|boolean|True|False|Auto-accept UAC option|None|True|
 |obj_ext_extension|boolean|True|False|Change extension to valid|None|True|
 |obj_ext_startfolder|string|temp|False|Start object from|['desktop', 'home', 'downloads', 'appdata', 'temp', 'windows', 'root']|temp|
-|obj_ext_useragent|string|None|False|User agent, used only for "download" type|None|Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0|
+|obj_ext_useragent|string|None|False|User agent, used only for "download" and "url" types|None|Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0|
 |obj_type|string|file|True|Type of new task|['file', 'url', 'download']|file|
 |obj_url|string|None|False|URL, used only if "obj_type" is "url" or "download"|None|http://example.org|
 |opt_kernel_heavyevasion|boolean|False|False|Heavy evasion option|None|False|
@@ -887,7 +887,27 @@ Example input:
     "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
     "filename": "setup.exe"
   },
-  "obj_type": "file"
+  "env_bitness": 32,
+  "env_os": "windows",
+  "env_type": "complete",
+  "env_version": "7",
+  "obj_ext_browser": "Google Chrome",
+  "obj_ext_cmd": "RunDll32.EXE %FILENAME%, func32 -r",
+  "obj_ext_elevateprompt": true,
+  "obj_ext_extension": true,
+  "obj_ext_startfolder": "temp",
+  "obj_ext_useragent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0",
+  "obj_type": "file",
+  "obj_url": "http://example.org",
+  "opt_kernel_heavyevasion": false,
+  "opt_network_connect": true,
+  "opt_network_fakenet": false,
+  "opt_network_geo": "fastest",
+  "opt_network_mitm": false,
+  "opt_network_tor": false,
+  "opt_privacy_hidesource": true,
+  "opt_privacy_type": "bylink",
+  "opt_timeout": 60
 }
 ```
 
@@ -942,6 +962,7 @@ When configuring the connection, only one authentication method can be supplied.
 
 # Version History
 
+* 1.1.0 - Allow user agent input when using URL type in Run Analysis action
 * 1.0.0 - Initial plugin
 
 # Links
