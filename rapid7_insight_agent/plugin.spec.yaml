@@ -1,0 +1,249 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: rapid7_insight_agent
+title: Rapid7 Insight Agent
+description: Using the Insight Agent plugin from InsightConnect, you can quarantine, unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices across your organization
+version: 1.0.0
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_insight_agent
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.rapid7.com
+  docs_url: https://docs.rapid7.com/insightconnect/insight-agent
+tags:
+- rapid7
+- agent
+- insight
+- edr
+- endpoint
+- detection
+- response
+- idr
+- ivm
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [rapid7, agent, endpoint, response, detection, insight, idr, ivm]
+  features: []
+types:
+  attribute:
+    key:
+      title: "Key"
+      type: string
+      description: "Key"
+      required: false
+    value:
+      title: "Value"
+      type: string
+      description: "Value"
+      required: false
+  quarantineState_object:
+    currentState:
+      title: Current State
+      type: string
+      description: Current state
+      required: false
+  agent_info:
+    agentSemanticVersion:
+      title: Agent Semantic Version
+      type: string
+      description: Agent semantic version
+      required: false
+    agentStatus:
+      title: Agent Status
+      type: string
+      description: Agent status
+      required: false
+    quarantineState:
+      title: Quarantine State
+      type: quarantineState_object
+      description: Quarantine state
+      required: false
+  hostName:
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+  primaryAddress:
+    ip:
+      title: IP Address
+      type: string
+      description: IP address
+      required: false
+    mac:
+      title: MAC Address
+      type: string
+      description: MAC address
+      required: false
+  uniqueIdentity_object:
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    source:
+      title: Source
+      type: string
+      description: Source
+      required: false
+  host:
+    attributes:
+      title: Attributes
+      type: "[]attribute"
+      description: Attributes
+      required: false
+    description:
+      title: Description
+      type: string
+      description: Description
+      required: false
+    hostNames:
+      title: Hostnames
+      type: "[]hostName"
+      description: Hostnames
+      required: false
+    primaryAddress:
+      title: Primary Address
+      type: primaryAddress
+      description: Primary address
+      required: false
+    uniqueIdentity:
+      title: Unique Identity
+      type: "[]uniqueIdentity_object"
+      description: Unique identity
+      required: false
+    vendor:
+      title: Vendor
+      type: string
+      description: Vendor
+      required: false
+    version:
+      title: Version
+      type: string
+      description: Version
+      required: false
+  agent:
+    agent_info:
+      title: Agent Information
+      type: agent_info
+      description: Agent information
+      required: false
+    host:
+      title: Host
+      type: host
+      description: Host
+      required: false
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    platform:
+      title: Platform
+      type: string
+      description: Platform
+      required: false
+
+connection:
+  api_key:
+    title: API Key
+    description: User or Organization Key from the Insight Platform
+    type: credential_secret_key
+    example: a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99
+    required: true
+  region:
+    title: Region
+    description: Region
+    type: string
+    default: United States
+    example: United States
+    required: true
+    enum:
+      - United States
+      - Europe
+      - Canada
+      - Australia
+      - Japan
+actions:
+  get_agent_details:
+    title: Get Agent Details
+    description: This action is used to find and display detailed information about a device
+    input:
+      agent:
+        title: Agent
+        description: IP address, MAC address, or hostname of the device to get information from
+        type: string
+        required: true
+        example: Example-Hostname
+    output:
+      agent:
+        title: Agent
+        description: Agent information
+        type: agent
+        required: true
+  quarantine:
+    title: Quarantine
+    description: Quarantine or unquarantine on a device
+    input:
+      agent_id:
+        title: Agent ID
+        description: The ID of the agent on the device to quarantine
+        type: string
+        example: a1cfb273c8e7d46a9e2a0e2dae01a0ce
+        required: true
+        order: 1
+      quarantine_state:
+        title: Quarantine State
+        description: Set to true to quarantine a host, set to false to unquarantine
+        type: boolean
+        default: true
+        example: true
+        required: true
+        order: 2
+      interval:
+        title: Interval
+        description: Length of time in seconds to try to take action on a device. This is also called Advertisement Period
+        type: int
+        default: 604800
+        example: 604800
+        required: true
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  check_agent_status:
+    title: Check Agent Status
+    description: Get the online status and quarantine state of an agent
+    input:
+      agent_id:
+        title: Agent ID
+        description: The ID of the agent on the device to get the status from
+        type: string
+        example: a1cfb273c8e7d46a9e2a0e2dae01a0ce
+        required: true
+    output:
+      is_currently_quarantined:
+        title: Is Currently Quarantined
+        description: Is the device currently quarantined
+        type: boolean
+        required: true
+      is_quarantine_requested:
+        title: Is Quarantine Requested
+        description: Is a quarantine action pending on this device
+        type: boolean
+        required: true
+      is_unquarantine_requested:
+        title: Is Unquarantine Requested
+        description: Is there a pending request to release quarantine on this device
+        type: boolean
+        required: true
+      is_asset_online:
+        title: Is Asset Online
+        description: Is this asset online
+        type: boolean
+        required: true
