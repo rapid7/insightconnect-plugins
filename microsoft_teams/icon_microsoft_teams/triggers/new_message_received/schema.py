@@ -16,7 +16,9 @@ class Input:
 
 class Output:
     
+    CHANNEL_NAME = "channel_name"
     MESSAGE = "message"
+    TEAM_NAME = "team_name"
     
 
 class NewMessageReceivedInput(komand.Input):
@@ -61,11 +63,23 @@ class NewMessageReceivedOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "channel_name": {
+      "type": "string",
+      "title": "Channel Name",
+      "description": "Name of the channel where the message was posted",
+      "order": 2
+    },
     "message": {
       "$ref": "#/definitions/message",
       "title": "Message",
       "description": "The message object that was created",
       "order": 1
+    },
+    "team_name": {
+      "type": "string",
+      "title": "Team Name",
+      "description": "Name of the team to which the channel is assigned to",
+      "order": 3
     }
   },
   "definitions": {

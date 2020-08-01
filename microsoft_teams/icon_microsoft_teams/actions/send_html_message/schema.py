@@ -11,6 +11,7 @@ class Input:
     CHANNEL_NAME = "channel_name"
     MESSAGE_CONTENT = "message_content"
     TEAM_NAME = "team_name"
+    THREAD_ID = "thread_id"
     
 
 class Output:
@@ -33,13 +34,19 @@ class SendHtmlMessageInput(komand.Input):
       "type": "string",
       "title": "Message Content",
       "description": "HTML content to send",
-      "order": 3
+      "order": 4
     },
     "team_name": {
       "type": "string",
       "title": "Team Name",
       "description": "Team name",
       "order": 1
+    },
+    "thread_id": {
+      "type": "string",
+      "title": "Thread ID",
+      "description": "To post in a thread, select parent message ID",
+      "order": 3
     }
   },
   "required": [

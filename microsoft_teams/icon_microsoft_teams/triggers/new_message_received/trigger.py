@@ -65,7 +65,11 @@ class NewMessageReceived(komand.Trigger):
                             self.logger.info(f"Testing message: {ms_message_content}")
                             if compiled_message_content.search(ms_message_content):
                                 self.logger.info("Returning new message.")
-                                self.send({Output.MESSAGE: message})
+                                self.send({
+                                    Output.MESSAGE: message,
+                                    Output.TEAM_NAME: team_name,
+                                    Output.CHANNEL_NAME: channel_name
+                                })
                             else:
                                 self.logger.info(f"Message did not match regex.\nMessage: {ms_message_content}\nRegex: {message_content}")
                         else: # we did not have a regex
