@@ -30,7 +30,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     },
     "region": {
       "type": "string",
-      "title": "API region",
+      "title": "API Region",
       "description": "API region",
       "default": "US East",
       "enum": [

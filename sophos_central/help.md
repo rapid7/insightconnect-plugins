@@ -9,6 +9,8 @@
 
 # Requirements
 
+* Sophos Central API tenant credentials
+
 # Documentation
 
 ## Setup
@@ -37,6 +39,42 @@ Example input:
 
 ### Actions
 
+#### Blacklist
+
+This action blocks a hash across all systems.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|blacklist_state|boolean|None|True|Set true to blacklist hash, set false to unblacklist hash|None|True|
+|description|string|Hash Blacklisted from InsightConnect|False|Description for why the hash is blacklisted|None|Hash Blacklisted from InsightConnect|
+|hash|string|None|True|Create a blacklist item from a SHA256 hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
+
+Example input:
+
+```
+{
+  "blacklist_state": true,
+  "description": "Hash Blacklisted from InsightConnect",
+  "hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Return true if blacklist item was created or deleted|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 #### Get Alerts
 
 This action is used to get alerts for a customer based on the parameters provided.
@@ -45,7 +83,7 @@ This action is used to get alerts for a customer based on the parameters provide
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|from_date|string|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours|None|2019-09-23 12:02:01.700000|
+|from_date|string|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours|None|2019-09-23T12:02:01.700Z|
 
 Example input:
 
@@ -96,7 +134,7 @@ This action is used to get endpoints for a customer based on the parameters prov
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|since|string|None|False|Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01.700Z, -P1D, PT20M, PT4H500S|None|2019-09-23 12:02:01.700000|
+|since|string|None|False|Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01.700Z, -P1D, PT20M, PT4H500S|None|2019-09-23T12:02:01.700Z|
 
 Example input:
 
@@ -444,6 +482,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.0 - Add new action Blacklist | Update "API region" title in connection to "API Region"
 * 3.0.0 - Rewrite Sophos Central in Python 3
 * 2.0.0 - Update type for Invalidated to date
 * 1.0.3 - New spec and help.md format for the Extension Library
