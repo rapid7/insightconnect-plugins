@@ -6,6 +6,7 @@
 
 * Get endpoints
 * Get alerts
+* Antivirus Scan
 
 # Requirements
 
@@ -36,6 +37,38 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Antivirus Scan
+
+This action sends a request to the specified endpoint to perform or configure a scan.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|True|Agent ID, IPv4 address, IPv6 address, MAC address or hostname|None|198.51.100.100|
+
+Example input:
+
+```
+{
+  "agent": "198.51.100.100"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|id|string|True|Antivirus scan ID|
+|requested_at|string|True|Antivirus scan requested at|
+|status|string|True|Antivirus scan status|
+
+Example output:
+
+```
+
+```
 
 #### Get Alerts
 
@@ -444,6 +477,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.2.0 - Add new action Antivirus Scan
 * 3.0.0 - Rewrite Sophos Central in Python 3
 * 2.0.0 - Update type for Invalidated to date
 * 1.0.3 - New spec and help.md format for the Extension Library
