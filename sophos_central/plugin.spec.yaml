@@ -4,7 +4,7 @@ products: [insightconnect]
 name: sophos_central
 title: Sophos Central
 description: Sophos Central is a unified console for managing Sophos products. Using the Sophos Central plugin for Rapid7 InsightConnect, users can get alerts, endpoints, and SIEM events
-version: 3.0.0
+version: 3.1.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -468,7 +468,7 @@ types:
 
 connection:
   region:
-    title: API region
+    title: API Region
     description: API region
     type: string
     required: false
@@ -530,4 +530,33 @@ actions:
         title: Alerts
         description: Alerts for specified time period
         type: '[]alert_entity'
+        required: true
+  blacklist:
+    title: Blacklist
+    description: Blocks a hash across all systems
+    input:
+      hash:
+        title: Hash
+        description: Create a blacklist item from a SHA256 hash
+        type: string
+        required: true
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+      description:
+        title: Description
+        description: Description for why the hash is blacklisted
+        type: string
+        required: false
+        default: Hash Blacklisted from InsightConnect
+        example: Hash Blacklisted from InsightConnect
+      blacklist_state:
+        title: Blacklist State
+        description: Set true to blacklist hash, set false to unblacklist hash
+        type: boolean
+        required: true
+        example: true
+    output:
+      success:
+        title: Success
+        description: Return true if blacklist item was created or deleted
+        type: boolean
         required: true

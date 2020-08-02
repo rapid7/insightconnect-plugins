@@ -37,6 +37,42 @@ Example input:
 
 ### Actions
 
+#### Blacklist
+
+This action blocks a hash across all systems.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|blacklist_state|boolean|None|True|Set true to blacklist hash, set false to unblacklist hash|None|True|
+|description|string|Hash Blacklisted from InsightConnect|False|Description for why the hash is blacklisted|None|Hash Blacklisted from InsightConnect|
+|hash|string|None|True|Create a blacklist item from a SHA256 hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
+
+Example input:
+
+```
+{
+  "blacklist_state": true,
+  "description": "Hash Blacklisted from InsightConnect",
+  "hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Return true if blacklist item was created or deleted|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 #### Get Alerts
 
 This action is used to get alerts for a customer based on the parameters provided.
@@ -444,6 +480,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.0 - Add new action Blacklist
 * 3.0.0 - Rewrite Sophos Central in Python 3
 * 2.0.0 - Update type for Invalidated to date
 * 1.0.3 - New spec and help.md format for the Extension Library
