@@ -9,6 +9,8 @@
 
 # Requirements
 
+* Sophos Central API tenant credentials
+
 # Documentation
 
 ## Setup
@@ -480,7 +482,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.1.0 - Add new action Blacklist
+* 4.0.0 - Add new action Blacklist | Update "API region" title in connection to "API Region"
 * 3.0.0 - Rewrite Sophos Central in Python 3
 * 2.0.0 - Update type for Invalidated to date
 * 1.0.3 - New spec and help.md format for the Extension Library
