@@ -18,8 +18,8 @@ class Blacklist(insightconnect_plugin_runtime.Action):
         success = False
         hash_input = params.get(Input.HASH)
         if not validators.sha256(hash_input):
-            raise PluginException(cause="Invalid HASH input.",
-                                  assistance="Your HASH is not correct. Make sure you provide SHA256.")
+            raise PluginException(cause="An invalid hash was provided.",
+                                  assistance="Please enter a SHA256 hash and try again.")
 
         if params.get(Input.BLACKLIST_STATE):
             action = self.connection.client.blacklist(hash_input, params.get(Input.DESCRIPTION))
@@ -35,9 +35,8 @@ class Blacklist(insightconnect_plugin_runtime.Action):
                         break
 
                 if uuid is None:
-                    raise PluginException(cause="HASH not found.",
-                                          assistance="Provided HASH is not on blacklist. "
-                                                     "Make sure you provide correct information.")
+                    raise PluginException(cause="Unable to unblacklist a hash that is not in the blacklist.",
+                                          assistance="Please provide a hash that is already blacklisted.")
 
                 action = self.connection.client.unblacklist(uuid)
                 success = action.get("deleted") is not None
