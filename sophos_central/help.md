@@ -67,7 +67,11 @@ Example input:
 Example output:
 
 ```
-
+{
+  "id": "999fd666-9666-4e66-a066-d66fd966ad66",
+  "requested_at": "2020-08-02T21:30:55.487Z",
+  "status": "requested"
+}
 ```
 
 #### Get Alerts
