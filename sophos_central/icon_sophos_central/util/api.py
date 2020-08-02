@@ -11,6 +11,39 @@ class SophosCentralAPI:
         self.tenant_id = tenant_id
         self.logger = logger
 
+    def get_blacklists(self, page: int = 1):
+        return self._make_request(
+            "GET",
+            f"/endpoint/v1/settings/blocked-items",
+            "Tenant",
+            params={
+                "page": page,
+                "pageSize": 100,
+                "pageTotal": True
+            }
+        )
+
+    def unblacklist(self, uuid: str):
+        return self._make_request(
+            "DELETE",
+            f"/endpoint/v1/settings/blocked-items/{uuid}",
+            "Tenant"
+        )
+
+    def blacklist(self, hash: str, description: str):
+        return self._make_request(
+            "POST",
+            f"/endpoint/v1/settings/blocked-items",
+            "Tenant",
+            json_data={
+                "comment": description,
+                "properties": {
+                    "sha256": hash
+                },
+                "type": "sha256"
+            }
+        )
+
     def antivirus_scan(self, uuid: str):
         return self._make_request(
             "POST",
