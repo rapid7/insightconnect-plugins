@@ -49,7 +49,7 @@ Example input:
 
 #### Find Machines with Installed Software
 
-This action is used to retrieve a list of device references that has this software installed.
+This action is used to retrieve a list of device references that has specific software installed.
 
 ##### Input
 
