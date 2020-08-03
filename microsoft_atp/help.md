@@ -47,6 +47,45 @@ Example input:
 
 ### Actions
 
+#### Find Machines with Installed Software
+
+This action is used to retrieve a list of device references that have specific software installed.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|software|string|None|True|Name of the software to be searched|None|microsoft-_-edge|
+
+Example input:
+
+```
+{
+  "software": "microsoft-_-edge"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|machines|[]machine_software|True|List of machines with provided software|
+
+Example output:
+
+```
+{
+  "machines": [
+    {
+      "computerDnsName": "mseewin10",
+      "id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+      "osPlatform": "Windows10",
+      "rbacGroupId": 0
+    }
+  ]
+}
+```
+
 #### Get Machine Information
 
 This action is used to get details about a machine from its ID.
@@ -495,6 +534,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.1.0 - Add new action Find Machines with Installed Software
 * 4.0.0 - Add custom type to output in action Get Machine Information
 * 3.0.0 - Move connection functions to their own util class | Changed `Exception` to `PluginException` | Added error handling around "Action already in progress" state in Isolate Machine, Unisolate Machine, Stop and Quarantine File, and Run Antivirus Scan actions | Rename `machine_id` to `machine` in machine-related actions to support hostnames and IP addresses in addition to machine IDs.
 * 2.0.0 - Update to refactor connection and actions
