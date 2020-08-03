@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieve a list of device references that has this software installed"
+    DESCRIPTION = "Retrieve a list of device references that has specific software installed"
 
 
 class Input:

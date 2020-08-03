@@ -580,7 +580,7 @@ actions:
         required: true
   find_machines_with_installed_software:
     title: Find Machines with Installed Software
-    description: Retrieve a list of device references that has this software installed
+    description: Retrieve a list of device references that has specific software installed
     input:
       software:
         title: Software
