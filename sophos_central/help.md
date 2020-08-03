@@ -6,6 +6,7 @@
 
 * Get endpoints
 * Get alerts
+* Antivirus Scan
 
 # Requirements
 
@@ -75,6 +76,42 @@ Example output:
 }
 ```
 
+#### Antivirus Scan
+
+This action sends a request to the specified endpoint to perform or configure a scan.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|True|Agent ID, IPv4 address, IPv6 address, MAC address or hostname|None|198.51.100.100|
+
+Example input:
+
+```
+{
+  "agent": "198.51.100.100"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|id|string|True|Antivirus scan ID|
+|requested_at|string|True|Antivirus scan requested at|
+|status|string|True|Antivirus scan status|
+
+Example output:
+
+```
+{
+  "id": "999fd666-9666-4e66-a066-d66fd966ad66",
+  "requested_at": "2020-08-02T21:30:55.487Z",
+  "status": "requested"
+}
+```
+
 #### Get Alerts
 
 This action is used to get alerts for a customer based on the parameters provided.
@@ -83,7 +120,7 @@ This action is used to get alerts for a customer based on the parameters provide
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|from_date|string|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours|None|2019-09-23T12:02:01.700Z|
+|from_date|string|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours|None|2019-09-23 12:02:01.700000|
 
 Example input:
 
@@ -134,7 +171,7 @@ This action is used to get endpoints for a customer based on the parameters prov
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|since|string|None|False|Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01.700Z, -P1D, PT20M, PT4H500S|None|2019-09-23T12:02:01.700Z|
+|since|string|None|False|Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01.700Z, -P1D, PT20M, PT4H500S|None|2019-09-23 12:02:01.700000|
 
 Example input:
 
@@ -482,6 +519,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.1.0 - Add new action Antivirus Scan
 * 4.0.0 - Add new action Blacklist | Update "API region" title in connection to "API Region"
 * 3.0.0 - Rewrite Sophos Central in Python 3
 * 2.0.0 - Update type for Invalidated to date

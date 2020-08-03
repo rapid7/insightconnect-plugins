@@ -6,7 +6,7 @@ from icon_sophos_central import connection, actions, triggers
 
 Name = "Sophos Central"
 Vendor = "rapid7"
-Version = "4.0.0"
+Version = "4.1.0"
 Description = "Sophos Central is a unified console for managing Sophos products. Using the Sophos Central plugin for Rapid7 InsightConnect, users can get alerts, endpoints, and SIEM events"
 
 
@@ -19,6 +19,8 @@ class ICONSophosCentral(insightconnect_plugin_runtime.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_action(actions.AntivirusScan())
+
         self.add_action(actions.Blacklist())
 
         self.add_action(actions.GetAlerts())

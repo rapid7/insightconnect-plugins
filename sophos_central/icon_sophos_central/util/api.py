@@ -44,6 +44,14 @@ class SophosCentralAPI:
             }
         )
 
+    def antivirus_scan(self, uuid: str):
+        return self._make_request(
+            "POST",
+            f"/endpoint/v1/endpoints/{uuid}/scans",
+            "Tenant",
+            json_data={}
+        )
+
     def get_alerts(self, since: str = None, key: str = None):
         params = {
             "pageTotal": True
@@ -63,11 +71,17 @@ class SophosCentralAPI:
             params=params
         )
 
-    def get_endpoints(self, since):
-        params = {}
+    def get_endpoints(self, since=None, page_key=None):
+        params = {
+            "pageTotal": True
+        }
         if since:
             params = {
                 "lastSeenAfter": since
+            }
+        if page_key:
+            params = {
+                "pageKey": page_key
             }
         return self._make_request(
             "GET",
