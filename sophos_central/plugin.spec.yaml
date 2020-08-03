@@ -4,7 +4,7 @@ products: [insightconnect]
 name: sophos_central
 title: Sophos Central
 description: Sophos Central is a unified console for managing Sophos products. Using the Sophos Central plugin for Rapid7 InsightConnect, users can get alerts, endpoints, and SIEM events
-version: 4.1.0
+version: 4.2.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -585,4 +585,20 @@ actions:
         title: Requested At
         description: Antivirus scan requested at
         type: string
+        required: true
+  get_agent_details:
+    title: Get Agent Details
+    description: Get details for an agent
+    input:
+      agent:
+        title: Agent
+        description: Agent to retrieve device information from. Accepts IPv4 address, IPv6 address, MAC address, hostname, or device ID
+        type: string
+        required: true
+        example: 198.51.100.100
+    output:
+      agent:
+        title: Agents
+        description: Details for the matched agent
+        type: endpoint_entry
         required: true
