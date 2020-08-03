@@ -59,6 +59,9 @@ class WindwosDefenderATP_API:
             'Accept': 'application/json'
         }
 
+    def find_machines(self, software: str):
+        return self._make_request("GET", f"Software/{software}/machineReferences")
+
     def get_machine_action(self, action_id: str) -> dict:
         return self._make_request("GET", f"machineactions/{action_id}")
 
