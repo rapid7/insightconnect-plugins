@@ -17,6 +17,7 @@ class Input:
 class Output:
     
     CHANNEL_NAME = "channel_name"
+    INDICATORS = "indicators"
     MESSAGE = "message"
     TEAM_NAME = "team_name"
     
@@ -67,6 +68,12 @@ class NewMessageReceivedOutput(komand.Output):
       "type": "string",
       "title": "Channel Name",
       "description": "Name of the channel where the message was posted",
+      "order": 3
+    },
+    "indicators": {
+      "type": "object",
+      "title": "Indicators",
+      "description": "The indicators object that was get from message",
       "order": 2
     },
     "message": {
@@ -79,7 +86,7 @@ class NewMessageReceivedOutput(komand.Output):
       "type": "string",
       "title": "Team Name",
       "description": "Name of the team to which the channel is assigned to",
-      "order": 3
+      "order": 4
     }
   },
   "definitions": {

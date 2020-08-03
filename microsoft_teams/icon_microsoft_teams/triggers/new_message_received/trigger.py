@@ -10,16 +10,17 @@ from typing import Pattern
 import re
 import requests
 import maya
+import validators
 
 
 class NewMessageReceived(komand.Trigger):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='new_message_received',
-                description=Component.DESCRIPTION,
-                input=NewMessageReceivedInput(),
-                output=NewMessageReceivedOutput())
+            name='new_message_received',
+            description=Component.DESCRIPTION,
+            input=NewMessageReceivedInput(),
+            output=NewMessageReceivedOutput())
 
     def run(self, params={}):
         """Run the trigger"""
@@ -57,9 +58,9 @@ class NewMessageReceived(komand.Trigger):
                     message = remove_null_and_clean(message)
                     if maya.parse(message.get("createdDateTime")) > last_time_we_checked:
                         self.logger.info("Analyzing message...")
-                        if message_content: # Do we have a reg ex
+                        if message_content:  # Do we have a reg ex
                             self.logger.info("Checking message content.")
-                            ms_message_content = message.get("body",{}).get("content", "")
+                            ms_message_content = message.get("body", {}).get("content", "")
                             if message.get("body", {}).get("contentType", "").lower() == "html":
                                 ms_message_content = strip_html(ms_message_content)
                             self.logger.info(f"Testing message: {ms_message_content}")
@@ -68,13 +69,18 @@ class NewMessageReceived(komand.Trigger):
                                 self.send({
                                     Output.MESSAGE: message,
                                     Output.TEAM_NAME: team_name,
-                                    Output.CHANNEL_NAME: channel_name
+                                    Output.CHANNEL_NAME: channel_name,
+                                    Output.INDICATORS: self.get_indicators(message.get("body", {}).get("content", ""))
                                 })
                             else:
-                                self.logger.info(f"Message did not match regex.\nMessage: {ms_message_content}\nRegex: {message_content}")
-                        else: # we did not have a regex
+                                self.logger.info(
+                                    f"Message did not match regex.\nMessage: {ms_message_content}\nRegex: {message_content}")
+                        else:  # we did not have a regex
                             self.logger.info("Returning new message.")
-                            self.send({Output.MESSAGE: message})
+                            self.send({
+                                Output.MESSAGE: message,
+                                Output.INDICATORS: self.get_indicators(message.get("body", {}).get("content", ""))
+                            })
                     else:
                         # This speeds up execution a ton. The Beta endpoint doesn't limit how many messages are returned.
                         # Thus, get out of the loop as soon as we see an old message
@@ -159,3 +165,122 @@ class NewMessageReceived(komand.Trigger):
         channel_id = channel[0].get("id")
         messages_endpoint = f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
         return messages_endpoint
+
+    def get_indicators(self, message: str) -> object:
+        urls = self.remove_duplicates(self.extract_urls(message))
+        normalized_urls = []
+        domains = []
+
+        if urls:
+            for url in urls:
+                if url.startswith("http") or url.startswith("https"):
+                    normalized_urls.append(url)
+                else:
+                    normalized_urls.append(f"https://{url}")
+
+            for url in normalized_urls:
+                domains.append(url.replace("https://", "").replace("http://", ""))
+
+        return {
+            "domains": self.remove_duplicates(domains),
+            "urls": self.remove_duplicates(normalized_urls),
+            "email_addresses": self.remove_duplicates(self.extract_emails(message)),
+            "hashes": {
+                "md5_hashes": self.remove_duplicates(self.extract_md5(message)),
+                "sha1_hashes": self.remove_duplicates(self.extract_sha1(message)),
+                "sha256_hashes": self.remove_duplicates(self.extract_sha256(message)),
+            },
+            "ip_addresses": {
+                "ipv4_addresses": self.remove_duplicates(self.extract_ipv4_addresses(message)),
+                "ipv6_addresses": self.remove_duplicates(self.extract_ipv6_addresses(message))
+            },
+            "mac_addresses": self.remove_duplicates(self.extract_macs(message)),
+            "cves": self.remove_duplicates(self.extract_cve(message))
+        }
+
+    @staticmethod
+    def remove_duplicates(list_with_duplicates):
+        return list(dict.fromkeys(list_with_duplicates))
+
+    @staticmethod
+    def extract_first_word(message: str) -> str:
+        words = message.split()
+
+        if len(words) == 0:
+            return ""
+
+        return words[0]
+
+    @staticmethod
+    def extract_ipv4_addresses(msg: str) -> list:
+        return re.findall(r'(?m)\b[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}(?:/[0-9]{1,2})?\b', msg)
+
+    @staticmethod
+    def extract_ipv6_addresses(msg: str) -> list:
+        ipv4_seg = r'(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])'
+        ipv4_addr = r'(?:(?:' + ipv4_seg + r'\.){3,3}' + ipv4_seg + r')'
+        ipv6_seg = r'(?:(?:[0-9a-fA-F]){1,4})'
+        ipv6_groups = (
+            r'(?:' + ipv6_seg + r':){7,7}' + ipv6_seg,
+            r'(?:' + ipv6_seg + r':){1,7}:',
+            r'(?:' + ipv6_seg + r':){1,6}:' + ipv6_seg,
+            r'(?:' + ipv6_seg + r':){1,5}(?::' + ipv6_seg + r'){1,2}',
+            r'(?:' + ipv6_seg + r':){1,4}(?::' + ipv6_seg + r'){1,3}',
+            r'(?:' + ipv6_seg + r':){1,3}(?::' + ipv6_seg + r'){1,4}',
+            r'(?:' + ipv6_seg + r':){1,2}(?::' + ipv6_seg + r'){1,5}',
+            ipv6_seg + r':(?:(?::' + ipv6_seg + r'){1,6})',
+            r':(?:(?::' + ipv6_seg + r'){1,7}|:)',
+            r'fe80:(?::' + ipv6_seg + r'){0,4}%[0-9a-zA-Z]{1,}',
+            r'::(?:ffff(?::0{1,4}){0,1}:){0,1}[^\s:]' + ipv4_addr,
+            r'(?:' + ipv6_seg + r':){1,4}:[^\s:]' + ipv4_addr,
+        )
+
+        return re.findall('|'.join(['(?:{})'.format(g) for g in ipv6_groups[::-1]]), msg)
+
+    @staticmethod
+    def extract_md5(msg: str) -> list:
+        return re.findall(r'(?m)\b[a-zA-Z0-9]{32}\b', msg)
+
+    @staticmethod
+    def extract_sha1(msg: str) -> list:
+        return re.findall(r'(?m)\b[a-zA-Z0-9]{40}\b', msg)
+
+    @staticmethod
+    def extract_sha256(msg: str) -> list:
+        return re.findall(r'(?m)\b[a-zA-Z0-9]{64}\b', msg)
+
+    @staticmethod
+    def extract_urls(msg: str) -> list:
+        urls = re.findall(
+            r"(?m)\b(?:http(?:s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+\b",
+            msg.lower()
+        )
+        normalized_urls = []
+        for url in urls:
+            if '@' in url or validators.ipv6(url) or validators.ipv4(url):
+                continue
+
+            normalized_urls.append(url)
+
+        return normalized_urls
+
+    @staticmethod
+    def extract_emails(msg: str) -> list:
+        return re.findall(r'(?m)\b([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)\b', msg.lower())
+
+    @staticmethod
+    def extract_cve(msg: str) -> list:
+        return re.findall(r'(?m)\bCVE-\d{4}-\d{4,7}\b', msg.upper())
+
+    @staticmethod
+    def extract_macs(msg: str) -> list:
+        mac_addresses = re.findall(
+            r'(?m)\b(?:[0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}'
+            r'[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2})\b',
+            msg.upper()
+        )
+        normalized_mac_addresses = []
+        for mac_address in mac_addresses:
+            normalized_mac_addresses.append(mac_address.replace("-", ":"))
+
+        return normalized_mac_addresses

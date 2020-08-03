@@ -185,10 +185,10 @@ Example input:
 
 ```
 {
-  "channel_name": "InsightConnect Channel",
+  "channel_guid": "xxxxx-xxxxx-xxxx-xxxx",
+  "is_html": false,
   "message": "Hello!",
-  "team_name": "InsightConnect Team",
-  "thread_id": 1595889908700
+  "team_guid": "xxxxx-xxxxx-xxxx-xxxx"
 }
 ```
 
@@ -508,8 +508,8 @@ This action is used to create a group in Azure and enable it for Microsoft Teams
 |group_name|string|None|True|Team name|None|test_group|
 |mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|False|
 |mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|TestGroup|
-|members|string[]|None|False|A list of usernames to set as members|None|[user@example.com]|
-|owners|string[]|None|False|A list of usernames to set as owners|None|[user@example.com]|
+|members|string[]|None|False|A list of usernames to set as members|None|["user@example.com"]|
+|owners|string[]|None|False|A list of usernames to set as owners|None|["user@example.com"]|
 
 Example input:
 
@@ -628,6 +628,7 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |channel_name|string|False|Name of the channel where the message was posted|
+|indicators|object|False|The indicators object that was get from message|
 |message|message|False|The message object that was created|
 |team_name|string|False|Name of the team to which the channel is assigned to|
 
@@ -658,6 +659,42 @@ Example output:
     "attachments": [],
     "mentions": [],
     "reactions": []
+  },
+  "indicators": {
+    "domains": [
+      "www.rapid7.com"
+    ],
+    "urls": [
+      "https://www.rapid7.com"
+    ],
+    "email_addresses": [
+      "user@example.com"
+    ],
+    "hashes": {
+      "md5_hashes": [
+        "7cafac7ec5adaebf62257a4cf5aa63cb"
+      ],
+      "sha1_hashes": [
+        "df5f8044e02c1e72967dd6eed70aeab2bab234c5"
+      ],
+      "sha256_hashes": [
+        "711712cd0038f268a768fed960dacf57b6515d4ad3d1db2dfbca0be9680ed7d9"
+      ]
+    },
+    "ip_addresses": {
+      "ipv4_addresses": [
+        "198.51.100.1"
+      ],
+      "ipv6_addresses": [
+        "2001:db8:8:4::2"
+      ]
+    },
+    "mac_addresses": [
+      "00:00:0A:BB:28:FC"
+    ],
+    "cves": [
+      "CVE-2015-3429"
+    ]
   }
 }
 ```
@@ -672,6 +709,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.0 - Add indicators to New Message Received output
 * 2.1.0 - Update Send Message and Send HTML Message actions to accept `thread_id` input to support threaded replies | Update New Message Received trigger to output team and channel names so they can be passed into subsequent steps
 * 2.0.5 - Fix issue where auth token wasn't properly renewed
 * 2.0.4 - Fix issue where a message that only had an image in it could break the 'New Message Received' trigger
