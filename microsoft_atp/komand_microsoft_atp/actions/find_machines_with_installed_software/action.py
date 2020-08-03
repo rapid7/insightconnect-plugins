@@ -17,6 +17,6 @@ class FindMachinesWithInstalledSoftware(insightconnect_plugin_runtime.Action):
 
         return {
             Output.MACHINES: insightconnect_plugin_runtime.helper.clean(
-                self.connection.client.find_machines(params.get(Input.SOFTWARE)).get("value")
+                self.connection.client.find_machines(params.get(Input.SOFTWARE)).get("value", [])
             )
         }
