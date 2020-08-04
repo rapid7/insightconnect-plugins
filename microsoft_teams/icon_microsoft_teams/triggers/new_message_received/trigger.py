@@ -56,6 +56,7 @@ class NewMessageReceived(komand.Trigger):
 
                 for message in sorted_messages:  # For each new message
                     message = remove_null_and_clean(message)
+                    message["first_word"] = self.extract_first_word(message.get("body", {}).get("content", ""))
                     if maya.parse(message.get("createdDateTime")) > last_time_we_checked:
                         self.logger.info("Analyzing message...")
                         if message_content:  # Do we have a reg ex
@@ -182,7 +183,6 @@ class NewMessageReceived(komand.Trigger):
                 domains.append(url.replace("https://", "").replace("http://", ""))
 
         return {
-            "first_word": self.extract_first_word(message),
             "domains": self.remove_duplicates(domains),
             "urls": self.remove_duplicates(normalized_urls),
             "email_addresses": self.remove_duplicates(self.extract_emails(message)),

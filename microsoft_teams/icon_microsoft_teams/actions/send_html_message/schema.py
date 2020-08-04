@@ -141,6 +141,12 @@ class SendHtmlMessageOutput(komand.Output):
           "description": "Created date time",
           "order": 3
         },
+        "first_word": {
+          "type": "string",
+          "title": "First Word",
+          "description": "Extracted first word from message",
+          "order": 9
+        },
         "from": {
           "$ref": "#/definitions/from",
           "title": "From",

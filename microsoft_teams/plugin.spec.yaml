@@ -67,11 +67,6 @@ types:
       type: "[]string"
       required: false
   indicators:
-    first_word:
-      title: First Word
-      description: Extracted first word from message
-      type: string
-      required: false
     domains:
       title: Domains
       description: Extracted domains from message
@@ -191,6 +186,11 @@ types:
        title: "ID"
        type: string
        description: "ID"
+       required: false
+     first_word:
+       title: First Word
+       description: Extracted first word from message
+       type: string
        required: false
   group:
       mailNickname:

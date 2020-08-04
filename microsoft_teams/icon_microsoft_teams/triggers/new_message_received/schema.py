@@ -184,7 +184,7 @@ class NewMessageReceivedOutput(komand.Output):
           "items": {
             "type": "string"
           },
-          "order": 8
+          "order": 7
         },
         "domains": {
           "type": "array",
@@ -193,7 +193,7 @@ class NewMessageReceivedOutput(komand.Output):
           "items": {
             "type": "string"
           },
-          "order": 2
+          "order": 1
         },
         "email_addresses": {
           "type": "array",
@@ -202,25 +202,19 @@ class NewMessageReceivedOutput(komand.Output):
           "items": {
             "type": "string"
           },
-          "order": 4
-        },
-        "first_word": {
-          "type": "string",
-          "title": "First Word",
-          "description": "Extracted first word from message",
-          "order": 1
+          "order": 3
         },
         "hashes": {
           "$ref": "#/definitions/hashes",
           "title": "Hashes",
           "description": "Extracted hashes from message",
-          "order": 5
+          "order": 4
         },
         "ip_addresses": {
           "$ref": "#/definitions/ip_addresses",
           "title": "IP Addressses",
           "description": "Extracted IP addresses from message",
-          "order": 6
+          "order": 5
         },
         "mac_addresses": {
           "type": "array",
@@ -229,7 +223,7 @@ class NewMessageReceivedOutput(komand.Output):
           "items": {
             "type": "string"
           },
-          "order": 7
+          "order": 6
         },
         "urls": {
           "type": "array",
@@ -238,7 +232,7 @@ class NewMessageReceivedOutput(komand.Output):
           "items": {
             "type": "string"
           },
-          "order": 3
+          "order": 2
         }
       },
       "definitions": {
@@ -340,6 +334,12 @@ class NewMessageReceivedOutput(komand.Output):
           "title": "Created Date Time",
           "description": "Created date time",
           "order": 3
+        },
+        "first_word": {
+          "type": "string",
+          "title": "First Word",
+          "description": "Extracted first word from message",
+          "order": 9
         },
         "from": {
           "$ref": "#/definitions/from",
