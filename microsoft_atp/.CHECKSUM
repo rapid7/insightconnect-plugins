@@ -1,8 +1,12 @@
 {
-	"spec": "23e4e029e5af5e4ceedf6a2a7a2141a5",
-	"manifest": "52b474448b058d5f9942d2f0b8304e3e",
-	"setup": "754f9070058cab6a5dfdd27edc846a18",
+	"spec": "0340b3783ffa88da9666c2e303644887",
+	"manifest": "ae4f0e689c6c6a334299c0d6c7e7ac6e",
+	"setup": "6c01d452cce23e18a3fd7bf62f7d4fa5",
 	"schemas": [
+		{
+			"identifier": "find_machines_with_installed_software/schema.py",
+			"hash": "d981612bfde23566c6a463963425f6a9"
+		},
 		{
 			"identifier": "get_file_id_from_alert_id/schema.py",
 			"hash": "e5288fd810dc0856a26733180d957e32"
