@@ -184,7 +184,7 @@ class NewMessageReceivedOutput(komand.Output):
           "items": {
             "type": "string"
           },
-          "order": 7
+          "order": 8
         },
         "domains": {
           "type": "array",
@@ -193,7 +193,7 @@ class NewMessageReceivedOutput(komand.Output):
           "items": {
             "type": "string"
           },
-          "order": 1
+          "order": 2
         },
         "email_addresses": {
           "type": "array",
@@ -202,19 +202,25 @@ class NewMessageReceivedOutput(komand.Output):
           "items": {
             "type": "string"
           },
-          "order": 3
+          "order": 4
+        },
+        "first_word": {
+          "type": "string",
+          "title": "First Word",
+          "description": "Extracted first word from message",
+          "order": 1
         },
         "hashes": {
           "$ref": "#/definitions/hashes",
           "title": "Hashes",
           "description": "Extracted hashes from message",
-          "order": 4
+          "order": 5
         },
         "ip_addresses": {
           "$ref": "#/definitions/ip_addresses",
           "title": "IP Addressses",
           "description": "Extracted IP addresses from message",
-          "order": 5
+          "order": 6
         },
         "mac_addresses": {
           "type": "array",
@@ -223,7 +229,7 @@ class NewMessageReceivedOutput(komand.Output):
           "items": {
             "type": "string"
           },
-          "order": 6
+          "order": 7
         },
         "urls": {
           "type": "array",
@@ -232,7 +238,7 @@ class NewMessageReceivedOutput(komand.Output):
           "items": {
             "type": "string"
           },
-          "order": 2
+          "order": 3
         }
       },
       "definitions": {

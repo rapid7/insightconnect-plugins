@@ -182,6 +182,7 @@ class NewMessageReceived(komand.Trigger):
                 domains.append(url.replace("https://", "").replace("http://", ""))
 
         return {
+            "first_word": self.extract_first_word(message),
             "domains": self.remove_duplicates(domains),
             "urls": self.remove_duplicates(normalized_urls),
             "email_addresses": self.remove_duplicates(self.extract_emails(message)),
@@ -204,7 +205,8 @@ class NewMessageReceived(komand.Trigger):
 
     @staticmethod
     def extract_first_word(message: str) -> str:
-        words = message.split()
+        message_normalize = re.sub(r'<.*?>', '', message)
+        words = message_normalize.split()
 
         if len(words) == 0:
             return ""
