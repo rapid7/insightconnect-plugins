@@ -39,6 +39,69 @@ types:
         type: string
         description: "Description"
         required: false
+  hashes:
+    md5_hashes:
+      title: MD5 Hashes
+      description: Indicators MD5 Hashes
+      type: "[]string"
+      required: false
+    sha1_hashes:
+      title: SHA1 Hashes
+      description: Indicators SHA1 hashes
+      type: "[]string"
+      required: false
+    sha256_hashes:
+      title: SHA256 Hashes
+      description: Indicators SHA256 hashes
+      type: "[]string"
+      required: false
+  ip_addresses:
+    ipv4_addresses:
+      title: IPv4 Addressses
+      description: Indicators IPv4 addressses
+      type: "[]string"
+      required: false
+    ipv6_addresses:
+      title: IPv6 Addressses
+      description: Indicators IPv6 addresses
+      type: "[]string"
+      required: false
+  indicators:
+    domains:
+      title: Domains
+      description: Indicators domains
+      type: "[]string"
+      required: false
+    urls:
+      title: URLs
+      description: Indicators URLs
+      type: "[]string"
+      required: false
+    email_addresses:
+      title: Email Addresses
+      description: Indicators email addresses
+      type: "[]string"
+      required: false
+    hashes:
+      title: Hashes
+      description: Indicators hashes
+      type: hashes
+      required: false
+    ip_addresses:
+      title: IP Addressses
+      description: Indicators IP addresses
+      type: ip_addresses
+      required: false
+    mac_addresses:
+      title: MAC Addresses
+      description: Indicators MAC addresses
+      type: "[]string"
+      required: false
+    cves:
+      title: CVEs
+      description: Indicators CVEs
+      type: "[]string"
+      required: false
   channel:
     displayName:
       title: "Display Name"
@@ -227,7 +290,7 @@ triggers:
       indicators:
         title: Indicators
         description: The indicators object that was get from message
-        type: object
+        type: indicators
         required: false
       channel_name:
         title: Channel Name

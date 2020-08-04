@@ -71,7 +71,7 @@ class NewMessageReceivedOutput(komand.Output):
       "order": 3
     },
     "indicators": {
-      "type": "object",
+      "$ref": "#/definitions/indicators",
       "title": "Indicators",
       "description": "The indicators object that was get from message",
       "order": 2
@@ -137,6 +137,185 @@ class NewMessageReceivedOutput(komand.Output):
               "order": 2
             }
           }
+        }
+      }
+    },
+    "hashes": {
+      "type": "object",
+      "title": "hashes",
+      "properties": {
+        "md5_hashes": {
+          "type": "array",
+          "title": "MD5 Hashes",
+          "description": "Indicators MD5 Hashes",
+          "items": {
+            "type": "string"
+          },
+          "order": 1
+        },
+        "sha1_hashes": {
+          "type": "array",
+          "title": "SHA1 Hashes",
+          "description": "Indicators SHA1 hashes",
+          "items": {
+            "type": "string"
+          },
+          "order": 2
+        },
+        "sha256_hashes": {
+          "type": "array",
+          "title": "SHA256 Hashes",
+          "description": "Indicators SHA256 hashes",
+          "items": {
+            "type": "string"
+          },
+          "order": 3
+        }
+      }
+    },
+    "indicators": {
+      "type": "object",
+      "title": "indicators",
+      "properties": {
+        "cves": {
+          "type": "array",
+          "title": "CVEs",
+          "description": "Indicators CVEs",
+          "items": {
+            "type": "string"
+          },
+          "order": 7
+        },
+        "domains": {
+          "type": "array",
+          "title": "Domains",
+          "description": "Indicators domains",
+          "items": {
+            "type": "string"
+          },
+          "order": 1
+        },
+        "email_addresses": {
+          "type": "array",
+          "title": "Email Addresses",
+          "description": "Indicators email addresses",
+          "items": {
+            "type": "string"
+          },
+          "order": 3
+        },
+        "hashes": {
+          "$ref": "#/definitions/hashes",
+          "title": "Hashes",
+          "description": "Indicators hashes",
+          "order": 4
+        },
+        "ip_addresses": {
+          "$ref": "#/definitions/ip_addresses",
+          "title": "IP Addressses",
+          "description": "Indicators IP addresses",
+          "order": 5
+        },
+        "mac_addresses": {
+          "type": "array",
+          "title": "MAC Addresses",
+          "description": "Indicators MAC addresses",
+          "items": {
+            "type": "string"
+          },
+          "order": 6
+        },
+        "urls": {
+          "type": "array",
+          "title": "URLs",
+          "description": "Indicators URLs",
+          "items": {
+            "type": "string"
+          },
+          "order": 2
+        }
+      },
+      "definitions": {
+        "hashes": {
+          "type": "object",
+          "title": "hashes",
+          "properties": {
+            "md5_hashes": {
+              "type": "array",
+              "title": "MD5 Hashes",
+              "description": "Indicators MD5 Hashes",
+              "items": {
+                "type": "string"
+              },
+              "order": 1
+            },
+            "sha1_hashes": {
+              "type": "array",
+              "title": "SHA1 Hashes",
+              "description": "Indicators SHA1 hashes",
+              "items": {
+                "type": "string"
+              },
+              "order": 2
+            },
+            "sha256_hashes": {
+              "type": "array",
+              "title": "SHA256 Hashes",
+              "description": "Indicators SHA256 hashes",
+              "items": {
+                "type": "string"
+              },
+              "order": 3
+            }
+          }
+        },
+        "ip_addresses": {
+          "type": "object",
+          "title": "ip_addresses",
+          "properties": {
+            "ipv4_addresses": {
+              "type": "array",
+              "title": "IPv4 Addressses",
+              "description": "Indicators IPv4 addressses",
+              "items": {
+                "type": "string"
+              },
+              "order": 1
+            },
+            "ipv6_addresses": {
+              "type": "array",
+              "title": "IPv6 Addressses",
+              "description": "Indicators IPv6 addresses",
+              "items": {
+                "type": "string"
+              },
+              "order": 2
+            }
+          }
+        }
+      }
+    },
+    "ip_addresses": {
+      "type": "object",
+      "title": "ip_addresses",
+      "properties": {
+        "ipv4_addresses": {
+          "type": "array",
+          "title": "IPv4 Addressses",
+          "description": "Indicators IPv4 addressses",
+          "items": {
+            "type": "string"
+          },
+          "order": 1
+        },
+        "ipv6_addresses": {
+          "type": "array",
+          "title": "IPv6 Addressses",
+          "description": "Indicators IPv6 addresses",
+          "items": {
+            "type": "string"
+          },
+          "order": 2
         }
       }
     },
