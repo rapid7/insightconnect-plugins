@@ -123,6 +123,7 @@ If this plugin hangs for a long time, try to batch the input CSV into smaller CS
 
 # Version History
 
+* 1.0.3 - Fix issue where removing duplicates could throw an exception
 * 1.0.2 - Fixed CSV flie values
 * 1.0.1 - Removed CVE code that caused vulnerability imports to fail
 * 1.0.0 - Initial plugin

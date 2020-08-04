@@ -41,7 +41,10 @@ class ImportCsv(insightconnect_plugin_runtime.Action):
         # Remove duplicates
         #################
         self.logger.info(f"Number of records found: {len(vuln_list)}")
-        vuln_list = [dict(t) for t in {tuple(d.items()) for d in vuln_list}]
+        try:
+            vuln_list = [dict(t) for t in {tuple(d.items()) for d in vuln_list}]
+        except Exception:
+            pass # No duplicates were found. Not changing the list.
         self.logger.info(f"Duplicates removed, Number of records found: {len(vuln_list)}")
 
         vuln_objects = self.convert_csv_to_scan_results(vuln_list)

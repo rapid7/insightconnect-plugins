@@ -7,7 +7,7 @@ vendor: custom_r7
 support: rapid7
 status: []
 description: This plugin utilizes Cisco Firepower to add scan results from a CSV file
-version: 1.0.2
+version: 1.0.3
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cisco_firepower
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
