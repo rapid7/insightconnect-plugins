@@ -185,10 +185,10 @@ Example input:
 
 ```
 {
-  "channel_guid": "xxxxx-xxxxx-xxxx-xxxx",
-  "is_html": false,
+  "channel_name": "InsightConnect Channel",
   "message": "Hello!",
-  "team_guid": "xxxxx-xxxxx-xxxx-xxxx"
+  "team_name": "InsightConnect Team",
+  "thread_id": 1595889908700
 }
 ```
 
@@ -628,7 +628,7 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |channel_name|string|False|Name of the channel where the message was posted|
-|indicators|indicators|False|The indicators object that was get from message|
+|indicators|indicators|False|The indicators object that was extracted from message|
 |message|message|False|The message object that was created|
 |team_name|string|False|Name of the team to which the channel is assigned to|
 

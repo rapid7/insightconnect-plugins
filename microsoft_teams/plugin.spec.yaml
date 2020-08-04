@@ -42,64 +42,64 @@ types:
   hashes:
     md5_hashes:
       title: MD5 Hashes
-      description: Indicators MD5 Hashes
+      description: Extracted MD5 Hashes from message
       type: "[]string"
       required: false
     sha1_hashes:
       title: SHA1 Hashes
-      description: Indicators SHA1 hashes
+      description: Extracted SHA1 hashes from message
       type: "[]string"
       required: false
     sha256_hashes:
       title: SHA256 Hashes
-      description: Indicators SHA256 hashes
+      description: Extracted SHA256 hashes from message
       type: "[]string"
       required: false
   ip_addresses:
     ipv4_addresses:
       title: IPv4 Addressses
-      description: Indicators IPv4 addressses
+      description: Extracted IPv4 addressses from message
       type: "[]string"
       required: false
     ipv6_addresses:
       title: IPv6 Addressses
-      description: Indicators IPv6 addresses
+      description: Extracted IPv6 addresses from message
       type: "[]string"
       required: false
   indicators:
     domains:
       title: Domains
-      description: Indicators domains
+      description: Extracted domains from message
       type: "[]string"
       required: false
     urls:
       title: URLs
-      description: Indicators URLs
+      description: Extracted URLs from message
       type: "[]string"
       required: false
     email_addresses:
       title: Email Addresses
-      description: Indicators email addresses
+      description: Extracted email addresses from message
       type: "[]string"
       required: false
     hashes:
       title: Hashes
-      description: Indicators hashes
+      description: Extracted hashes from message
       type: hashes
       required: false
     ip_addresses:
       title: IP Addressses
-      description: Indicators IP addresses
+      description: Extracted IP addresses from message
       type: ip_addresses
       required: false
     mac_addresses:
       title: MAC Addresses
-      description: Indicators MAC addresses
+      description: Extracted MAC addresses from message
       type: "[]string"
       required: false
     cves:
       title: CVEs
-      description: Indicators CVEs
+      description: Extracted CVEs from message
       type: "[]string"
       required: false
   channel:
@@ -289,7 +289,7 @@ triggers:
         required: false
       indicators:
         title: Indicators
-        description: The indicators object that was get from message
+        description: The indicators object that was extracted from message
         type: indicators
         required: false
       channel_name:

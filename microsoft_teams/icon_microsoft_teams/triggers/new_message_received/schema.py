@@ -73,7 +73,7 @@ class NewMessageReceivedOutput(komand.Output):
     "indicators": {
       "$ref": "#/definitions/indicators",
       "title": "Indicators",
-      "description": "The indicators object that was get from message",
+      "description": "The indicators object that was extracted from message",
       "order": 2
     },
     "message": {
@@ -147,7 +147,7 @@ class NewMessageReceivedOutput(komand.Output):
         "md5_hashes": {
           "type": "array",
           "title": "MD5 Hashes",
-          "description": "Indicators MD5 Hashes",
+          "description": "Extracted MD5 Hashes from message",
           "items": {
             "type": "string"
           },
@@ -156,7 +156,7 @@ class NewMessageReceivedOutput(komand.Output):
         "sha1_hashes": {
           "type": "array",
           "title": "SHA1 Hashes",
-          "description": "Indicators SHA1 hashes",
+          "description": "Extracted SHA1 hashes from message",
           "items": {
             "type": "string"
           },
@@ -165,7 +165,7 @@ class NewMessageReceivedOutput(komand.Output):
         "sha256_hashes": {
           "type": "array",
           "title": "SHA256 Hashes",
-          "description": "Indicators SHA256 hashes",
+          "description": "Extracted SHA256 hashes from message",
           "items": {
             "type": "string"
           },
@@ -180,7 +180,7 @@ class NewMessageReceivedOutput(komand.Output):
         "cves": {
           "type": "array",
           "title": "CVEs",
-          "description": "Indicators CVEs",
+          "description": "Extracted CVEs from message",
           "items": {
             "type": "string"
           },
@@ -189,7 +189,7 @@ class NewMessageReceivedOutput(komand.Output):
         "domains": {
           "type": "array",
           "title": "Domains",
-          "description": "Indicators domains",
+          "description": "Extracted domains from message",
           "items": {
             "type": "string"
           },
@@ -198,7 +198,7 @@ class NewMessageReceivedOutput(komand.Output):
         "email_addresses": {
           "type": "array",
           "title": "Email Addresses",
-          "description": "Indicators email addresses",
+          "description": "Extracted email addresses from message",
           "items": {
             "type": "string"
           },
@@ -207,19 +207,19 @@ class NewMessageReceivedOutput(komand.Output):
         "hashes": {
           "$ref": "#/definitions/hashes",
           "title": "Hashes",
-          "description": "Indicators hashes",
+          "description": "Extracted hashes from message",
           "order": 4
         },
         "ip_addresses": {
           "$ref": "#/definitions/ip_addresses",
           "title": "IP Addressses",
-          "description": "Indicators IP addresses",
+          "description": "Extracted IP addresses from message",
           "order": 5
         },
         "mac_addresses": {
           "type": "array",
           "title": "MAC Addresses",
-          "description": "Indicators MAC addresses",
+          "description": "Extracted MAC addresses from message",
           "items": {
             "type": "string"
           },
@@ -228,7 +228,7 @@ class NewMessageReceivedOutput(komand.Output):
         "urls": {
           "type": "array",
           "title": "URLs",
-          "description": "Indicators URLs",
+          "description": "Extracted URLs from message",
           "items": {
             "type": "string"
           },
@@ -243,7 +243,7 @@ class NewMessageReceivedOutput(komand.Output):
             "md5_hashes": {
               "type": "array",
               "title": "MD5 Hashes",
-              "description": "Indicators MD5 Hashes",
+              "description": "Extracted MD5 Hashes from message",
               "items": {
                 "type": "string"
               },
@@ -252,7 +252,7 @@ class NewMessageReceivedOutput(komand.Output):
             "sha1_hashes": {
               "type": "array",
               "title": "SHA1 Hashes",
-              "description": "Indicators SHA1 hashes",
+              "description": "Extracted SHA1 hashes from message",
               "items": {
                 "type": "string"
               },
@@ -261,7 +261,7 @@ class NewMessageReceivedOutput(komand.Output):
             "sha256_hashes": {
               "type": "array",
               "title": "SHA256 Hashes",
-              "description": "Indicators SHA256 hashes",
+              "description": "Extracted SHA256 hashes from message",
               "items": {
                 "type": "string"
               },
@@ -276,7 +276,7 @@ class NewMessageReceivedOutput(komand.Output):
             "ipv4_addresses": {
               "type": "array",
               "title": "IPv4 Addressses",
-              "description": "Indicators IPv4 addressses",
+              "description": "Extracted IPv4 addressses from message",
               "items": {
                 "type": "string"
               },
@@ -285,7 +285,7 @@ class NewMessageReceivedOutput(komand.Output):
             "ipv6_addresses": {
               "type": "array",
               "title": "IPv6 Addressses",
-              "description": "Indicators IPv6 addresses",
+              "description": "Extracted IPv6 addresses from message",
               "items": {
                 "type": "string"
               },
@@ -302,7 +302,7 @@ class NewMessageReceivedOutput(komand.Output):
         "ipv4_addresses": {
           "type": "array",
           "title": "IPv4 Addressses",
-          "description": "Indicators IPv4 addressses",
+          "description": "Extracted IPv4 addressses from message",
           "items": {
             "type": "string"
           },
@@ -311,7 +311,7 @@ class NewMessageReceivedOutput(komand.Output):
         "ipv6_addresses": {
           "type": "array",
           "title": "IPv6 Addressses",
-          "description": "Indicators IPv6 addresses",
+          "description": "Extracted IPv6 addresses from message",
           "items": {
             "type": "string"
           },
