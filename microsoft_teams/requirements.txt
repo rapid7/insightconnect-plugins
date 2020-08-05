@@ -3,3 +3,4 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 maya==0.5.0
 beautifulsoup4==4.9.0
+validators==0.17.0
