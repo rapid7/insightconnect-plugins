@@ -71,7 +71,7 @@ class BlacklistInput(insightconnect_plugin_runtime.Input):
       "type": "boolean",
       "title": "Indicator State",
       "description": "True to add indicator, false to remove it from the list",
-      "default": true,
+      "default": false,
       "order": 11
     },
     "indicator_type": {

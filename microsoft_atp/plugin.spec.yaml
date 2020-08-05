@@ -808,7 +808,7 @@ actions:
         description: True to add indicator, false to remove it from the list
         type: boolean
         example: true
-        default: true
+        default: false
         required: false
     output:
       indicator_action_response:

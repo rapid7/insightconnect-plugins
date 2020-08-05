@@ -60,7 +60,7 @@ This action is used to submit or update new indicator.
 |description|string|None|False|Description of the indicator|None|description|
 |expiration_time|string|None|False|The expiration time of the indicator|None|2020-12-12T00:00:00Z|
 |indicator|string|None|True|The value of the indicator|None|220e7d15b011d7fac48f2bd61114db1022197f7f|
-|indicator_state|boolean|True|False|True to add indicator, false to remove it from the list|None|True|
+|indicator_state|boolean|False|False|True to add indicator, false to remove it from the list|None|True|
 |indicator_type|string|None|False|Type of the indicator|['IpAddress', 'Url', 'Domain', 'FileSha1', 'FileSha256']|Domain|
 |rbac_group_names|[]string|None|False|List of RBAC group names the indicator would be applied to|None|["group1", "group2"]|
 |recommended_actions|string|None|False|TI indicator alert recommended actions|None|nothing|

@@ -16,7 +16,7 @@ class Blacklist(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         self.logger.info("Running...")
-        indicator_state = params.get(Input.INDICATOR_STATE, True)
+        indicator_state = params.get(Input.INDICATOR_STATE)
 
         return {
             Output.INDICATOR_ACTION_RESPONSE: insightconnect_plugin_runtime.helper.clean(
@@ -38,7 +38,8 @@ class Blacklist(insightconnect_plugin_runtime.Action):
             self.logger.info("Multiple indicators found. We will only act upon the first match")
 
         indicator_id = indicators[0].get("id")
-        return self.connection.client.delete_indicator(indicator_id)
+        self.connection.client.delete_indicator(indicator_id)
+        return indicators[0]
 
     def _create_or_update_indicator(self, params: dict) -> dict:
         return self.connection.client.submit_or_update_indicator(self._create_payload(params))
