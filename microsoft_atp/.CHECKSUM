@@ -1,8 +1,12 @@
 {
-	"spec": "0340b3783ffa88da9666c2e303644887",
-	"manifest": "ae4f0e689c6c6a334299c0d6c7e7ac6e",
-	"setup": "6c01d452cce23e18a3fd7bf62f7d4fa5",
+	"spec": "a35cc12ccfe142820867fb7cc647a7a9",
+	"manifest": "987799486cbf2f8d5e7f56c127abd9fe",
+	"setup": "106f88dfe322db3a84a534075cb8118e",
 	"schemas": [
+		{
+			"identifier": "blacklist/schema.py",
+			"hash": "e98816ee7286752c1353819dfbf7f0ff"
+		},
 		{
 			"identifier": "find_machines_with_installed_software/schema.py",
 			"hash": "d981612bfde23566c6a463963425f6a9"
