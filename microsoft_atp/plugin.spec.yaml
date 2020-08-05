@@ -801,7 +801,7 @@ actions:
         title: RBAC Group Names
         description: List of RBAC group names the indicator would be applied to
         type: '[]string'
-        example: [group1,group2]
+        example: '["group1","group2"]'
         required: false
       indicator_state:
         title: Indicator State
