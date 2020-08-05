@@ -1,11 +1,11 @@
 {
-	"spec": "b6e5c4fd4d8a0ba110378a8a98cd703d",
+	"spec": "27e8ee3d4fc30ad1a4a6a46b540533e7",
 	"manifest": "987799486cbf2f8d5e7f56c127abd9fe",
 	"setup": "106f88dfe322db3a84a534075cb8118e",
 	"schemas": [
 		{
 			"identifier": "blacklist/schema.py",
-			"hash": "24893c591025f30de6af814d64a30927"
+			"hash": "2525e0a7f6ec684626abd22b60836b1b"
 		},
 		{
 			"identifier": "find_machines_with_installed_software/schema.py",

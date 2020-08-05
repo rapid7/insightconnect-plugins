@@ -64,7 +64,7 @@ class BlacklistInput(insightconnect_plugin_runtime.Input):
     "indicator": {
       "type": "string",
       "title": "Indicator",
-      "description": "The value of the indicator",
+      "description": "A supported indicator to blacklist or unblacklist. Supported indicators are IP addresses, URLs, domains, and SHA1 and SHA256 hashes",
       "order": 1
     },
     "indicator_state": {
@@ -231,7 +231,7 @@ class BlacklistOutput(insightconnect_plugin_runtime.Output):
         "indicatorValue": {
           "type": "string",
           "title": "Indicator Value",
-          "description": "The value of the indicator",
+          "description": "The potentially malicious indicator of one of the following types: IP addresses, URLs, domains, and SHA1 and SHA256 hashes",
           "order": 3
         },
         "lastUpdateTime": {

@@ -404,7 +404,7 @@ types:
     indicatorValue:
       title: Indicator Value
       type: string
-      description: The value of the indicator
+      description: "The potentially malicious indicator of one of the following types: IP addresses, URLs, domains, and SHA1 and SHA256 hashes"
       required: false
     indicatorType:
       type: string
@@ -728,7 +728,7 @@ actions:
     input:
       indicator:
         title: Indicator
-        description: The value of the indicator
+        description: A supported indicator to blacklist or unblacklist. Supported indicators are IP addresses, URLs, domains, and SHA1 and SHA256 hashes
         type: string
         example: 220e7d15b011d7fac48f2bd61114db1022197f7f
         required: true

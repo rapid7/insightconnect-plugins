@@ -31,8 +31,8 @@ class Blacklist(insightconnect_plugin_runtime.Action):
         )
         if len(indicators) == 0:
             raise PluginException(
-                cause='Did not find indicator to delete',
-                assistance='Indicator not deleted'
+                cause='Did not find indicator to delete.',
+                assistance='Indicator not deleted.'
             )
         if len(indicators) > 1:
             self.logger.info("Multiple indicators found. We will only act upon the first match")
