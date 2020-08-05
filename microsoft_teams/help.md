@@ -654,11 +654,12 @@ Example output:
     },
     "body": {
       "contentType": "text",
-      "content": "Hello from InsightConnect!"
+      "content": "extract-indicators www.rapid7.com user@example.com ..."
     },
     "attachments": [],
     "mentions": [],
-    "reactions": []
+    "reactions": [],
+    "first_word": "extract-indicators"
   },
   "indicators": {
     "domains": [

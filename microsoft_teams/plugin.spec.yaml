@@ -189,7 +189,7 @@ types:
        required: false
      first_word:
        title: First Word
-       description: Extracted first word from message
+       description: Extracted first word from message (easy way to obtain a chat command)
        type: string
        required: false
   group:

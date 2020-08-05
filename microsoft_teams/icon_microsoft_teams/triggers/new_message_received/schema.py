@@ -338,7 +338,7 @@ class NewMessageReceivedOutput(komand.Output):
         "first_word": {
           "type": "string",
           "title": "First Word",
-          "description": "Extracted first word from message",
+          "description": "Extracted first word from message (easy way to obtain a chat command)",
           "order": 9
         },
         "from": {
