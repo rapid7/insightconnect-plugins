@@ -539,7 +539,7 @@ types:
     exploitUris:
       title: Exploit URIs
       type: '[]string'
-      description: Exploit uris
+      description: Exploit URIs
       required: false
     exploitVerified:
       title: Exploit Verified
