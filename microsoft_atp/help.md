@@ -662,7 +662,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 4.3.0 - New action Get Machine Vulnerabilities
+* 4.3.0 - Add new action Get Machine Vulnerabilities
 * 4.2.0 - Add new action Blacklist
 * 4.1.0 - Add new action Find Machines with Installed Software
 * 4.0.0 - Add custom type to output in action Get Machine Information
