@@ -23,6 +23,8 @@ class ICONMicrosoftAtp(insightconnect_plugin_runtime.Plugin):
 
         self.add_trigger(triggers.GetAlerts())
 
+        self.add_action(actions.Blacklist())
+
         self.add_action(actions.FindMachinesWithInstalledSoftware())
 
         self.add_action(actions.GetFileIdFromAlertId())

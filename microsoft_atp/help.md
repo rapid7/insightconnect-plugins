@@ -47,6 +47,85 @@ Example input:
 
 ### Actions
 
+#### Blacklist
+
+This action is used to submit or update new indicator.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|action|string|AlertAndBlock|False|The action that will be taken if the indicator will be discovered in the organization|['Alert', 'AlertAndBlock', 'Allowed']|AlertAndBlock|
+|application|string|None|False|The application associated with the indicator|None|demo-test|
+|description|string|None|False|Description of the indicator|None|description|
+|expiration_time|string|None|False|The expiration time of the indicator|None|2020-12-12T00:00:00Z|
+|indicator|string|None|True|A supported indicator to blacklist or unblacklist. Supported indicators are IP addresses, URLs, domains, and SHA1 and SHA256 hashes|None|220e7d15b011d7fac48f2bd61114db1022197f7f|
+|indicator_state|boolean|False|False|True to add indicator, false to remove it from the list|None|True|
+|rbac_group_names|[]string|None|False|List of RBAC group names the indicator would be applied to|None|["group1","group2"]|
+|recommended_actions|string|None|False|TI indicator alert recommended actions|None|nothing|
+|severity|string|High|False|The severity of the indicator|['Informational', 'Low', 'Medium', 'High']|High|
+|title|string|None|False|Indicator alert title|None|test|
+
+Example input:
+
+```
+{
+  "action": "AlertAndBlock",
+  "application": "demo-test",
+  "description": "description",
+  "expiration_time": "2020-12-12T00:00:00Z",
+  "indicator": "220e7d15b011d7fac48f2bd61114db1022197f7f",
+  "indicator_state": true,
+  "rbac_group_names": [
+    "group1",
+    "group2"
+  ],
+  "recommended_actions": "nothing",
+  "severity": "High",
+  "title": "test"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|indicator_action_response|indicator_action|False|A response that includes the result of the action, and supplemental information about the action taken|
+
+Example output:
+
+```
+{
+  "indicator_action_response": {
+    "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#Indicators/$entity",
+    "action": "Alert",
+    "application": "application",
+    "category": 1,
+    "createdBy": "82f42fca-e931-4f03-b54c-47af94bd394d",
+    "createdByDisplayName": "WindowsDefenderATPSiemConnector",
+    "createdBySource": "PublicApi",
+    "creationTimeDateTimeUtc": "2020-07-30T19:01:56.6543461Z",
+    "description": "some description",
+    "expirationTime": "2020-12-12T00:00:00Z",
+    "generateAlert": true,
+    "historicalDetection": false,
+    "id": "11",
+    "indicatorType": "Url",
+    "indicatorValue": "http://google.com",
+    "lastUpdateTime": "2020-07-30T19:02:10.9680026Z",
+    "lastUpdatedBy": "82f42fca-e931-4f03-b54c-47af94bd394d",
+    "mitreTechniques": [],
+    "rbacGroupIds": [],
+    "rbacGroupNames": [],
+    "recommendedActions": "nothing",
+    "severity": "Informational",
+    "source": "WindowsDefenderATPSiemConnector",
+    "sourceType": "AadApp",
+    "title": "Title"
+  }
+}
+```
+
 #### Get Machine Vulnerabilities
 
 This action retrieves a collection of discovered vulnerabilities related to a given device ID.
@@ -584,6 +663,7 @@ This plugin does not contain any troubleshooting information.
 # Version History
 
 * 4.3.0 - New action Get Machine Vulnerabilities
+* 4.2.0 - Add new action Blacklist
 * 4.1.0 - Add new action Find Machines with Installed Software
 * 4.0.0 - Add custom type to output in action Get Machine Information
 * 3.0.0 - Move connection functions to their own util class | Changed `Exception` to `PluginException` | Added error handling around "Action already in progress" state in Isolate Machine, Unisolate Machine, Stop and Quarantine File, and Run Antivirus Scan actions | Rename `machine_id` to `machine` in machine-related actions to support hostnames and IP addresses in addition to machine IDs.
