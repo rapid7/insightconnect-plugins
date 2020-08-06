@@ -128,7 +128,7 @@ Example output:
 
 #### Get Machine Vulnerabilities
 
-This action retrieves a collection of discovered vulnerabilities related to a given device ID.
+This action retrieves a collection of discovered vulnerabilities related to a given device.
 
 ##### Input
 
