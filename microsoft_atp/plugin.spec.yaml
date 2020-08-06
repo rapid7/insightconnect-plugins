@@ -870,7 +870,7 @@ actions:
         required: false
   get_machine_vulnerabilities:
     title: Get Machine Vulnerabilities
-    description: Retrieves a collection of discovered vulnerabilities related to a given device ID
+    description: Retrieves a collection of discovered vulnerabilities related to a given device
     input:
       machine:
         title: Machine
