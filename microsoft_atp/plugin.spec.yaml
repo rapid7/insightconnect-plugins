@@ -537,7 +537,7 @@ types:
       description: Exploit types
       required: false
     exploitUris:
-      title: Exploit Uris
+      title: Exploit URIs
       type: '[]string'
       description: Exploit uris
       required: false
