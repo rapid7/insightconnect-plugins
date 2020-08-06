@@ -112,8 +112,8 @@ class GetMachineVulnerabilitiesOutput(insightconnect_plugin_runtime.Output):
         },
         "id": {
           "type": "string",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 8
         },
         "name": {

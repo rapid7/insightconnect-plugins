@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="microsoft_atp-rapid7-plugin",
-      version="4.2.0",
+      version="4.3.0",
       description="The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files",
       author="rapid7",
       author_email="",

@@ -55,13 +55,13 @@ This action retrieves a collection of discovered vulnerabilities related to a gi
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|machine|string|None|True|Machine IP address, hostname or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|machine|string|None|True|Machine IP address, hostname or machine ID|None|9de5069c5afe602b2ea0a04b66beb2c0cef77fdf|
 
 Example input:
 
 ```
 {
-  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
+  "machine": "9de5069c5afe602b2ea0a04b66beb2c0cef77fdf"
 }
 ```
 
@@ -583,7 +583,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 4.2.0 - New action Get Machine Vulnerabilities
+* 4.3.0 - New action Get Machine Vulnerabilities
 * 4.1.0 - Add new action Find Machines with Installed Software
 * 4.0.0 - Add custom type to output in action Get Machine Information
 * 3.0.0 - Move connection functions to their own util class | Changed `Exception` to `PluginException` | Added error handling around "Action already in progress" state in Isolate Machine, Unisolate Machine, Stop and Quarantine File, and Run Antivirus Scan actions | Rename `machine_id` to `machine` in machine-related actions to support hostnames and IP addresses in addition to machine IDs.

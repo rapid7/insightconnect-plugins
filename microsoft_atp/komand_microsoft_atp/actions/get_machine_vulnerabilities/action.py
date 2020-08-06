@@ -16,7 +16,7 @@ class GetMachineVulnerabilities(insightconnect_plugin_runtime.Action):
         self.logger.info("Running...")
 
         machine_id = self.connection.client.find_first_machine(params.get(Input.MACHINE)).get("id")
-        self.logger.info(f"Attempting to get vulnerabilities for machine ID: {machine_id}")
+        self.logger.info(f"Attempting to get vulnerabilities for machine ID: {machine_id}.")
 
         return {
             Output.VULNERABILITIES: insightconnect_plugin_runtime.helper.clean(

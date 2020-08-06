@@ -1,7 +1,7 @@
 {
-	"spec": "d748cce865a9bf6f779552f3a677f646",
-	"manifest": "46c02a3f939597b03f54172e3a6028e8",
-	"setup": "106f88dfe322db3a84a534075cb8118e",
+	"spec": "82a9aee4cde323764b8a451d00121f22",
+	"manifest": "6a183651c04b45bee9a4c17e6c67f184",
+	"setup": "2ac062734b21549c7a36436f51c77e14",
 	"schemas": [
 		{
 			"identifier": "find_machines_with_installed_software/schema.py",
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "get_machine_vulnerabilities/schema.py",
-			"hash": "02362fbe8f02d07329664d182022f992"
+			"hash": "033d0513961275f759a0130f161dfb5d"
 		},
 		{
 			"identifier": "isolate_machine/schema.py",
