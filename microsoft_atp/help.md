@@ -47,6 +47,55 @@ Example input:
 
 ### Actions
 
+#### Get Machine Vulnerabilities
+
+This action retrieves a collection of discovered vulnerabilities related to a given device ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|machine|string|None|True|Machine IP address, hostname or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+
+Example input:
+
+```
+{
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|vulnerabilities|[]vulnerability|True|List of vulnerabilities of the machine|
+
+Example output:
+
+```
+{
+  "vulnerabilities": [
+    {
+      "id": "CVE-2020-14711",
+      "name": "CVE-2020-14711",
+      "description": "Vulnerability in the Oracle VM VirtualBox product of Oracle Virtualization (component: Core).  Supported versions that are affected are Prior to 5.2.44, prior to 6.0.24 and  prior to 6.1.12. Easily exploitable vulnerability allows high privileged attacker with logon to the infrastructure where Oracle VM VirtualBox executes to compromise Oracle VM VirtualBox.  Successful attacks require human interaction from a person other than the attacker. Successful attacks of this vulnerability can result in takeover of Oracle VM VirtualBox.  Note: The CVE-2020-14711 is applicable to macOS host only. CVSS 3.1 Base Score 6.5 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:H/A:H).",
+      "severity": "Medium",
+      "cvssV3": 6.5,
+      "exposedMachines": 1,
+      "publishedOn": "2020-07-14T00:00:00Z",
+      "updatedOn": "2020-07-27T22:00:00Z",
+      "publicExploit": false,
+      "exploitVerified": false,
+      "exploitInKit": false,
+      "exploitTypes": [],
+      "exploitUris": []
+    }
+  ]
+}
+
+```
+
 #### Find Machines with Installed Software
 
 This action is used to retrieve a list of device references that have specific software installed.
@@ -426,9 +475,9 @@ Example input:
 
 ```
 {
+  "frequency": 10,
   "key": "assignedTo",
-  "value": "Automation",
-  "frequency": 10
+  "value": "user@example.com"
 }
 ```
 
@@ -534,6 +583,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.2.0 - New action Get Machine Vulnerabilities
 * 4.1.0 - Add new action Find Machines with Installed Software
 * 4.0.0 - Add custom type to output in action Get Machine Information
 * 3.0.0 - Move connection functions to their own util class | Changed `Exception` to `PluginException` | Added error handling around "Action already in progress" state in Isolate Machine, Unisolate Machine, Stop and Quarantine File, and Run Antivirus Scan actions | Rename `machine_id` to `machine` in machine-related actions to support hostnames and IP addresses in addition to machine IDs.

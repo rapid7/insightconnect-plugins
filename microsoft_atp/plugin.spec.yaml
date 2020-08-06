@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: microsoft_atp
 title: Microsoft Windows Defender ATP
 description: The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
-version: 4.1.0
+version: 4.2.0
 vendor: rapid7
 support: community
 status: []
@@ -240,7 +240,6 @@ types:
       type: string
       description: "Determination value"
       required: false
-
   machine_software:
      id:
        title: ID
@@ -389,6 +388,72 @@ types:
        type: string
        description: "Status"
        required: false
+  vulnerability:
+    cvssV3:
+      title: "CVSS V3"
+      type: float
+      description: "CVSS v3"
+      required: false
+    description:
+      title: "Description"
+      type: string
+      description: "Description"
+      required: false
+    exploitInKit:
+      title: "Exploit In Kit"
+      type: boolean
+      description: "Exploit in kit"
+      required: false
+    exploitTypes:
+      title: "Exploit Types"
+      type: '[]string'
+      description: "Exploit types"
+      required: false
+    exploitUris:
+      title: "Exploit Uris"
+      type: '[]string'
+      description: "Exploit uris"
+      required: false
+    exploitVerified:
+      title: "Exploit Verified"
+      type: boolean
+      description: "Exploit verified"
+      required: false
+    exposedMachines:
+      title: "Exposed Machines"
+      type: integer
+      description: "Exposed machines"
+      required: false
+    id:
+      title: "Id"
+      type: string
+      description: "Id"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    publicExploit:
+      title: "Public Exploit"
+      type: boolean
+      description: "Public exploit"
+      required: false
+    publishedOn:
+      title: "Published On"
+      type: string
+      description: "Published on"
+      required: false
+    severity:
+      title: "Severity"
+      type: string
+      description: "Severity"
+      required: false
+    updatedOn:
+      title: "Updated On"
+      type: string
+      description: "Updated on"
+      required: false
 
 connection:
   application_id:
@@ -593,6 +658,22 @@ actions:
         title: Machines
         description: List of machines with provided software
         type: '[]machine_software'
+        required: true
+  get_machine_vulnerabilities:
+    title: Get Machine Vulnerabilities
+    description: Retrieves a collection of discovered vulnerabilities related to a given device ID
+    input:
+      machine:
+        title: Machine
+        description: Machine IP address, hostname or machine ID
+        type: string
+        example: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73
+        required: true
+    output:
+      vulnerabilities:
+        type: '[]vulnerability'
+        title: Vulnerabilities
+        description: List of vulnerabilities of the machine
         required: true
 
 triggers:
