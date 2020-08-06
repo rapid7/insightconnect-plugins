@@ -84,6 +84,9 @@ class WindwosDefenderATP_API:
     def get_machine_information(self, machine_id: str) -> dict:
         return self._make_request("GET", f"machines/{machine_id}")
 
+    def get_machine_vulnerabilities(self, machine_id: str) -> dict:
+        return self._make_request("GET", f"machines/{machine_id}/vulnerabilities")
+
     def get_files_from_id(self, alert_id: str) -> dict:
         return self._make_request("GET", f"alerts/{alert_id}/files")
 
