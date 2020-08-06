@@ -35,10 +35,9 @@ class Blacklist(insightconnect_plugin_runtime.Action):
                 assistance='Indicator not deleted.'
             )
         if len(indicators) > 1:
-            self.logger.info("Multiple indicators found. We will only act upon the first match")
+            self.logger.info("Multiple indicators found. We will only act upon the first match.")
 
-        indicator_id = indicators[0].get("id")
-        self.connection.client.delete_indicator(indicator_id)
+        self.connection.client.delete_indicator(indicators[0].get("id"))
         return indicators[0]
 
     def _create_or_update_indicator(self, params: dict) -> dict:
@@ -47,29 +46,19 @@ class Blacklist(insightconnect_plugin_runtime.Action):
     @staticmethod
     def _create_payload(params: dict) -> dict:
         indicator = params.get(Input.INDICATOR)
-        action = params.get(Input.ACTION, "AlertAndBlock")
-        application = params.get(Input.APPLICATION)
-        title = params.get(Input.TITLE, indicator)
-        description = params.get(Input.DESCRIPTION, indicator)
-        expiration_time = params.get(Input.EXPIRATION_TIME)
-        severity = params.get(Input.SEVERITY, "High")
-        recommended_actions = params.get(Input.RECOMMENDED_ACTIONS)
-        rbac_group_names = params.get(Input.RBAC_GROUP_NAMES, [])
-        indicator_type = params.get(Input.INDICATOR_TYPE, Blacklist._get_type(indicator))
 
-        payload = {
-            "indicatorValue": indicator,
-            "indicatorType": indicator_type,
-            "action": action,
-            "application": application,
-            "title": title,
-            "description": description,
-            "expirationTime": expiration_time,
-            "severity": severity,
-            "recommendedActions": recommended_actions,
-            "rbacGroupNames": rbac_group_names
+        return {
+            "indicatorValue": params.get(Input.INDICATOR),
+            "indicatorType": Blacklist._get_type(indicator),
+            "action": params.get(Input.ACTION, "AlertAndBlock"),
+            "application": params.get(Input.APPLICATION),
+            "title": params.get(Input.TITLE, indicator),
+            "description": params.get(Input.DESCRIPTION, indicator),
+            "expirationTime": params.get(Input.EXPIRATION_TIME),
+            "severity": params.get(Input.SEVERITY, "High"),
+            "recommendedActions": params.get(Input.RECOMMENDED_ACTIONS),
+            "rbacGroupNames": params.get(Input.RBAC_GROUP_NAMES, [])
         }
-        return payload
 
     @staticmethod
     def _get_type(indicator):
@@ -84,6 +73,6 @@ class Blacklist(insightconnect_plugin_runtime.Action):
         elif validators.sha256(indicator):
             return "FileSha256"
         raise PluginException(
-            cause='Could not determine type of indicator',
-            assistance='Indicator not added'
+            cause='Could not determine type of indicator.',
+            assistance='Indicator not added.'
         )

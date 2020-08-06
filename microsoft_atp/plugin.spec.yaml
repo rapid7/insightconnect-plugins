@@ -732,18 +732,6 @@ actions:
         type: string
         example: 220e7d15b011d7fac48f2bd61114db1022197f7f
         required: true
-      indicator_type:
-        title: Indicator Type
-        description: Type of the indicator
-        type: string
-        example: Domain
-        required: false
-        enum:
-          - IpAddress
-          - Url
-          - Domain
-          - FileSha1
-          - FileSha256
       action:
         title: Action
         description: The action that will be taken if the indicator will be discovered in the organization

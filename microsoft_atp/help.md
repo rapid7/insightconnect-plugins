@@ -61,8 +61,7 @@ This action is used to submit or update new indicator.
 |expiration_time|string|None|False|The expiration time of the indicator|None|2020-12-12T00:00:00Z|
 |indicator|string|None|True|A supported indicator to blacklist or unblacklist. Supported indicators are IP addresses, URLs, domains, and SHA1 and SHA256 hashes|None|220e7d15b011d7fac48f2bd61114db1022197f7f|
 |indicator_state|boolean|False|False|True to add indicator, false to remove it from the list|None|True|
-|indicator_type|string|None|False|Type of the indicator|['IpAddress', 'Url', 'Domain', 'FileSha1', 'FileSha256']|Domain|
-|rbac_group_names|[]string|None|False|List of RBAC group names the indicator would be applied to|None|["group1", "group2"]|
+|rbac_group_names|[]string|None|False|List of RBAC group names the indicator would be applied to|None|["group1","group2"]|
 |recommended_actions|string|None|False|TI indicator alert recommended actions|None|nothing|
 |severity|string|High|False|The severity of the indicator|['Informational', 'Low', 'Medium', 'High']|High|
 |title|string|None|False|Indicator alert title|None|test|

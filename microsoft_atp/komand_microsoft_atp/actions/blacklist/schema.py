@@ -14,7 +14,6 @@ class Input:
     EXPIRATION_TIME = "expiration_time"
     INDICATOR = "indicator"
     INDICATOR_STATE = "indicator_state"
-    INDICATOR_TYPE = "indicator_type"
     RBAC_GROUP_NAMES = "rbac_group_names"
     RECOMMENDED_ACTIONS = "recommended_actions"
     SEVERITY = "severity"
@@ -41,25 +40,25 @@ class BlacklistInput(insightconnect_plugin_runtime.Input):
         "AlertAndBlock",
         "Allowed"
       ],
-      "order": 3
+      "order": 2
     },
     "application": {
       "type": "string",
       "title": "Application",
       "description": "The application associated with the indicator",
-      "order": 4
+      "order": 3
     },
     "description": {
       "type": "string",
       "title": "Description",
       "description": "Description of the indicator",
-      "order": 6
+      "order": 5
     },
     "expiration_time": {
       "type": "string",
       "title": "Expiration Time",
       "description": "The expiration time of the indicator",
-      "order": 7
+      "order": 6
     },
     "indicator": {
       "type": "string",
@@ -72,20 +71,7 @@ class BlacklistInput(insightconnect_plugin_runtime.Input):
       "title": "Indicator State",
       "description": "True to add indicator, false to remove it from the list",
       "default": false,
-      "order": 11
-    },
-    "indicator_type": {
-      "type": "string",
-      "title": "Indicator Type",
-      "description": "Type of the indicator",
-      "enum": [
-        "IpAddress",
-        "Url",
-        "Domain",
-        "FileSha1",
-        "FileSha256"
-      ],
-      "order": 2
+      "order": 10
     },
     "rbac_group_names": {
       "type": "array",
@@ -94,13 +80,13 @@ class BlacklistInput(insightconnect_plugin_runtime.Input):
       "items": {
         "type": "string"
       },
-      "order": 10
+      "order": 9
     },
     "recommended_actions": {
       "type": "string",
       "title": "Recommended Actions",
       "description": "TI indicator alert recommended actions",
-      "order": 9
+      "order": 8
     },
     "severity": {
       "type": "string",
@@ -113,13 +99,13 @@ class BlacklistInput(insightconnect_plugin_runtime.Input):
         "Medium",
         "High"
       ],
-      "order": 8
+      "order": 7
     },
     "title": {
       "type": "string",
       "title": "Title",
       "description": "Indicator alert title",
-      "order": 5
+      "order": 4
     }
   },
   "required": [
