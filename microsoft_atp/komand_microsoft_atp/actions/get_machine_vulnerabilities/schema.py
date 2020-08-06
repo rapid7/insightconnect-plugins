@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieves a collection of discovered vulnerabilities related to a given device ID"
+    DESCRIPTION = "Retrieves a collection of discovered vulnerabilities related to a given device"
 
 
 class Input:
@@ -91,8 +91,8 @@ class GetMachineVulnerabilitiesOutput(insightconnect_plugin_runtime.Output):
         },
         "exploitUris": {
           "type": "array",
-          "title": "Exploit Uris",
-          "description": "Exploit uris",
+          "title": "Exploit URIs",
+          "description": "Exploit URIs",
           "items": {
             "type": "string"
           },
