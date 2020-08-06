@@ -18,8 +18,8 @@ class Basename(insightconnect_plugin_runtime.Action):
         basename = os.path.basename(path)
         if basename is None or basename == '':
             raise PluginException(
-                cause='Unable to find basename',
-                assistance=f"Not able to retrieve basename of {path}"
+                cause='Unable to find basename.',
+                assistance=f"Not able to retrieve basename of {path}."
             )
 
         return {
