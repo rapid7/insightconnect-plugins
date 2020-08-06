@@ -1,28 +1,27 @@
 import insightconnect_plugin_runtime
 import os
-from .schema import BasenameInput, BasenameOutput
+from .schema import BasenameInput, BasenameOutput, Input, Output
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class Basename(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='basename',
-                description='Get the basename of a path',
-                input=BasenameInput(),
-                output=BasenameOutput())
+            name='basename',
+            description='Get the basename of a path',
+            input=BasenameInput(),
+            output=BasenameOutput())
 
     def run(self, params={}):
-        path = str(params.get('path'))
+        path = params.get(Input.PATH)
         basename = os.path.basename(path)
-        if basename is None or basename is '':
-            self.logger.error('Not able to retrieve basename of %s', path)
-            raise Exception('Unable to find basename')
-        return { 'basename': basename }
+        if basename is None or basename == '':
+            raise PluginException(
+                cause='Unable to find basename.',
+                assistance=f"Not able to retrieve basename of {path}."
+            )
 
-    def test(self, params={}):
-        path = '/usr/local/bin/stuff'
-        basename = os.path.basename(path)
-        if not basename == 'stuff':
-            raise Exception('Basename Failed')
-        return { 'basename': basename }
+        return {
+            Output.BASENAME: basename
+        }
