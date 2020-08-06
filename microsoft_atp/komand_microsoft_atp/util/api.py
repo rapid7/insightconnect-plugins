@@ -123,6 +123,15 @@ class WindwosDefenderATP_API:
 
         return self._make_request("GET", endpoint)
 
+    def submit_or_update_indicator(self, payload) -> dict:
+        return self._make_request("POST", "indicators", json_data=payload)
+
+    def delete_indicator(self, indicator_id: str) -> dict:
+        return self._make_request("DELETE", f"indicators/{indicator_id}")
+
+    def search_indicators(self, query_parameters) -> dict:
+        return self._make_request("GET", f"indicators{query_parameters}")
+
     def _make_request(self, method: str, path: str, json_data: dict = None, allow_empty: bool = False) -> dict:
         self.check_and_refresh_api_token()
         return self._call_api(
@@ -170,7 +179,9 @@ class WindwosDefenderATP_API:
             if response.status_code >= 400:
                 raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
             if 200 <= response.status_code < 300:
-                return response.json()
+                if response.text:
+                    return response.json()
+                return {}
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except json.decoder.JSONDecodeError as e:
