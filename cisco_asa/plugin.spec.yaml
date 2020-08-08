@@ -1,0 +1,122 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: cisco_asa
+title: Cisco Adaptive Security Appliance
+description: Cisco Adaptive Security Appliance Software delivers enterprise-class firewall capabilities for ASA devices in an array of form factors - standalone appliances, blades, and virtual appliances - for any distributed network environment
+version: 1.0.0
+vendor: rapid7
+support: community
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cisco_asa
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.cisco.com
+tags:
+- cisco adaptive security appliance
+- resiliency applications
+- firewall
+hub_tags:
+  use_cases: [asset_inventory, threat_detection_and_response]
+  keywords: [cisco, firewall]
+  features: []
+types:
+  host:
+    kind:
+      title: Kind
+      type: string
+      description: Kind
+      required: false
+    value:
+      title: Value
+      type: string
+      description: Value
+      required: false
+  address_objects:
+    host:
+      title: Host
+      type: host
+      description: Host
+      required: false
+    kind:
+      title: Kind
+      type: string
+      description: Kind
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    objectId:
+      title: Object ID
+      type: string
+      description: Object ID
+      required: false
+    selfLink:
+      title: Self Link
+      type: string
+      description: Self link
+      required: false
+connection:
+  credentials:
+    title: Credentials
+    description: Username and password
+    type: credential_username_password
+    required: true
+    example: '{"username": example, "password": "test"}'
+  url:
+    title: URL
+    description: API Access URL
+    type: string
+    required: true
+    example: 'https://example.com:443'
+  ssl_verify:
+    title: SSL Verify
+    description: Validate certificate
+    type: boolean
+    default: true
+    required: false
+    example: true
+  port:
+    title: Port
+    description: The port number for provided host
+    type: integer
+    default: 443
+    required: false
+    example: 443
+actions:
+  check_if_address_object_in_group:
+    title: Check If Address in Group
+    description: Checks to see if an IP address, CIDR IP address, or domain is in an Address Group. Supports IPv6
+    input:
+      group:
+        title: Group
+        description: Name of address group to check
+        type: string
+        example: ICON Block List
+        required: true
+      address:
+        title: Address
+        description: IP, CIDR, or domain name when Enable Search is off or Address Object name, object ID, IP, CIDR, or domain name if Enable Search is on
+        type: string
+        example: 198.51.100.100
+        required: true
+      enable_search:
+        title: Enable Search
+        description: Set to true for search contents of Address Object name, object ID, IP, CIDR, or domain name
+        type: boolean
+        example: false
+        default: false
+        required: true
+    output:
+      found:
+        title: Found
+        description: Was address found in group
+        type: boolean
+        required: true
+      address_objects:
+        title: Address Objects
+        description: List of address objects
+        type: "[]address_objects"
+        required: false
