@@ -19,7 +19,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "credentials": {
       "$ref": "#/definitions/credential_username_password",
       "title": "Credentials",
-      "description": "Username and password",
+      "description": "Email address and password",
       "order": 1
     },
     "port": {

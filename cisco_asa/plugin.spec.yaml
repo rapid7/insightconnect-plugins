@@ -61,10 +61,10 @@ types:
 connection:
   credentials:
     title: Credentials
-    description: Username and password
+    description: Email address and password
     type: credential_username_password
     required: true
-    example: '{"username": example, "password": "test"}'
+    example: '{"username": user@example.com, "password": "test"}'
   url:
     title: URL
     description: API Access URL

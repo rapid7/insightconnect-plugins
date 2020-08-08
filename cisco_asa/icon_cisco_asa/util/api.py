@@ -5,7 +5,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class CiscoAsaAPI:
-    def __init__(self, username, password, url, verify_ssl, port, logger):
+    def __init__(self, username: str, password: str, url: str, verify_ssl: bool, port: int, logger: object):
         self.url = url + ":" + str(port) + "/api/"
         self.verify_ssl = verify_ssl
         self.logger = logger
@@ -13,23 +13,41 @@ class CiscoAsaAPI:
         self.password = password
 
     def get_groups(self):
-        return self._call_api("GET", "objects/networkobjectgroups")
+        return self.run_with_pages("objects/networkobjectgroups")
 
-    def get_group(self, group_name):
-        groups = self.get_groups()
-        for item in groups.get("items", []):
+    def get_group(self, group_name: str):
+        for item in self.get_groups():
             if item.get("name") == group_name or item.get("objectId") == group_name:
                 return item
 
         return {}
 
     def get_objects(self):
-        return self._call_api("GET", "objects/networkobjects")
+        return self.run_with_pages("objects/networkobjects")
+
+    def run_with_pages(self, path):
+        objects = []
+        limit = 100
+        for page in range(0, 9999):
+            response = self._call_api(
+                "GET",
+                path,
+                params={
+                    "limit": limit,
+                    "offset": page * limit
+                }
+            )
+            objects.extend(response.get("items", []))
+
+            if (page + 1) * limit >= response.get("rangeInfo", {}).get("total", 0):
+                break
+
+        return objects
 
     def get_clock(self):
         return self._call_api("GET", "monitoring/clock")
 
-    def _call_api(self, method, path, json_data=None):
+    def _call_api(self, method: str, path: str, json_data: dict = None, params: dict = None):
         response = {"text": ""}
         headers = OrderedDict([
             ('Content-Type', 'application/json'),
@@ -40,6 +58,7 @@ class CiscoAsaAPI:
             response = requests.request(
                 method, self.url + path,
                 json=json_data,
+                params=params,
                 auth=(self.username, self.password),
                 headers=headers,
                 verify=self.verify_ssl

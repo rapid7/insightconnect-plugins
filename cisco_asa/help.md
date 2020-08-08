@@ -18,7 +18,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and password|None|{"username": example, "password": "test"}|
+|credentials|credential_username_password|None|True|Email address and password|None|{"username": user@example.com, "password": "test"}|
 |port|integer|443|False|The port number for provided host|None|443|
 |ssl_verify|boolean|True|False|Validate certificate|None|True|
 |url|string|None|True|API Access URL|None|https://example.com:443|

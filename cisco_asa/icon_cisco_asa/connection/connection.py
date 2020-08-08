@@ -29,3 +29,5 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 cause="Connection error.",
                 assistance="Problem with connecting to Cisco Server."
             )
+
+        return {"success": True}
