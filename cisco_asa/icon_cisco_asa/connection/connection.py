@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 # Custom imports below
 from icon_cisco_asa.util.api import CiscoAsaAPI
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -23,11 +23,18 @@ class Connection(insightconnect_plugin_runtime.Connection):
         )
 
     def test(self):
-        clock = self.cisco_asa_api.get_clock()
-        if not clock.get("date"):
+        try:
+            clock = self.cisco_asa_api.get_clock()
+            if not clock.get("date"):
+                raise ConnectionTestException(
+                    cause="Connection error.",
+                    assistance="Problem with connecting to Cisco Server."
+                )
+        except PluginException as e:
             raise ConnectionTestException(
-                cause="Connection error.",
-                assistance="Problem with connecting to Cisco Server."
+                cause=e.cause,
+                assistance=e.assistance,
+                data=e.data
             )
 
         return {"success": True}
