@@ -94,7 +94,7 @@ actions:
         title: Group
         description: Name of address group to check
         type: string
-        example: ICON Block List
+        example: InsightConnect Block List
         required: true
       address:
         title: Address
