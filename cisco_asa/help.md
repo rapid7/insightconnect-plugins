@@ -8,12 +8,19 @@
 
 # Requirements
 
-* Username and Password for an ASA account with privilege level 15
+* Username and Password for an ASA account with the appropriate privilege level for the action
 * Cisco ASA server with the [REST API server enabled](https://www.cisco.com/c/en/us/td/docs/security/asa/api/qsg-asa-api.html)
 
 # Documentation
 
 ## Setup
+
+The REST API server must be installed and enabled on the Cisco ASA device this plugin connects to. Cisco provides online
+documentation for this available [here](https://www.cisco.com/c/en/us/td/docs/security/asa/api/qsg-asa-api.html). In
+addition, the user account must have the necessary permissions for the intended actions:
+
+* Actions that retrieve or check data require Cisco privilege level 5 or greater
+* Actions that change or modidy data require Cisco privilege level 15
 
 The connection configuration accepts the following parameters:
 
