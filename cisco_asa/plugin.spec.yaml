@@ -72,7 +72,7 @@ connection:
     required: true
     example: 'https://example.com:443'
   ssl_verify:
-    title: SSL Verify
+    title: TLS / SSL Verify
     description: Validate certificate
     type: boolean
     default: true
