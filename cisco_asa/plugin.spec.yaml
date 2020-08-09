@@ -44,7 +44,7 @@ types:
       description: Kind
       required: false
     name:
-      title: Name
+      title: Object Name
       type: string
       description: Name
       required: false
