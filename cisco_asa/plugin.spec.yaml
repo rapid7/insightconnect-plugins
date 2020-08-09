@@ -117,6 +117,6 @@ actions:
         required: true
       address_objects:
         title: Address Objects
-        description: List of address objects
+        description: List of found address objects
         type: "[]address_objects"
         required: false
