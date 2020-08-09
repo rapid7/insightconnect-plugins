@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: cisco_asa
 title: Cisco Adaptive Security Appliance
-description: Cisco Adaptive Security Appliance Software delivers enterprise-class firewall capabilities for ASA devices in an array of form factors - standalone appliances, blades, and virtual appliances - for any distributed network environment
+description: The Cisco ASA plugin allows you to automate the management of network objects
 version: 1.0.0
 vendor: rapid7
 support: community
@@ -13,13 +13,13 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.cisco.com
 tags:
-- cisco adaptive security appliance
-- resiliency applications
+- asa
 - firewall
 hub_tags:
-  use_cases: [asset_inventory, threat_detection_and_response]
-  keywords: [cisco, firewall]
+  use_cases: [threat_detection_and_response]
+  keywords: [cisco, asa, firewall]
   features: []
+
 types:
   host:
     kind:
@@ -58,13 +58,14 @@ types:
       type: string
       description: Self link
       required: false
+
 connection:
   credentials:
     title: Credentials
-    description: Email address and password
+    description: Username and password
     type: credential_username_password
     required: true
-    example: '{"username": user@example.com, "password": "test"}'
+    example: '{"username": "admin", "password": "mypassword"}'
   url:
     title: URL
     description: API Access URL
@@ -92,10 +93,11 @@ connection:
     default: REST API Agent
     required: false
     example: REST API Agent
+
 actions:
   check_if_address_object_in_group:
     title: Check If Address in Group
-    description: Checks to see if an IP address, CIDR IP address, or domain is in an Address Group. Supports IPv6
+    description: Checks to see if an IP address, CIDR IP address, or domain is in a Group
     input:
       group:
         title: Group
@@ -111,7 +113,7 @@ actions:
         required: true
       enable_search:
         title: Enable Search
-        description: Set to true for search contents of Address Object name, object ID, IP, CIDR, or domain name
+        description: Set to true to search contents of object by its name, ID, IP, CIDR, or domain name
         type: boolean
         example: false
         default: false

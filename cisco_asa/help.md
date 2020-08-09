@@ -1,6 +1,6 @@
 # Description
 
-[Cisco Adaptive Security Appliance](https://www.cisco.com/c/en/us/products/security/adaptive-security-appliance-asa-software/index.html) Software delivers enterprise-class firewall capabilities for ASA devices in an array of form factors - standalone appliances, blades, and virtual appliances - for any distributed network environment
+[Cisco Adaptive Security Appliances](https://www.cisco.com/c/en/us/products/security/adaptive-security-appliance-asa-software/index.html) deliver enterprise-class firewall capabilities and the Cisco ASA plugin allows you to automate the management of network objects for ASA appliances.
 
 # Key Features
 
@@ -8,17 +8,18 @@
 
 # Requirements
 
-* Username and Password
-* Cisco ASA server
+* Username and Password for an ASA account with privilege level 15
+* Cisco ASA server with the [REST API server enabled](https://www.cisco.com/c/en/us/td/docs/security/asa/api/qsg-asa-api.html)
 
 # Documentation
+
 ## Setup
 
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Email address and password|None|{"username": user@example.com, "password": "test"}|
+|credentials|credential_username_password|None|True|Username and password|None|{"username": "admin", "password": "mypassword"}|
 |port|integer|443|False|The port number for provided host|None|443|
 |ssl_verify|boolean|True|False|Validate TLS / SSL certificate|None|True|
 |url|string|None|True|API Access URL|None|https://example.com|
@@ -28,16 +29,14 @@ Example input:
 
 ```
 {
-  "credentials": {
-    "username": example,
-    "password": "test"
-  },
+  "credentials": {"username": "admin", "password": "mypassword"},
   "port": 443,
   "ssl_verify": true,
   "url": "https://example.com",
   "user_agent": "REST API Agent"
 }
 ```
+
 ## Technical Details
 
 ### Actions
@@ -51,7 +50,7 @@ This action checks to see if an IP address, CIDR IP address, or domain is in an 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |address|string|None|True|IP, CIDR, or domain name when Enable Search is off or Address Object name, object ID, IP, CIDR, or domain name if Enable Search is on|None|198.51.100.100|
-|enable_search|boolean|False|True|Set to true for search contents of Address Object name, object ID, IP, CIDR, or domain name|None|False|
+|enable_search|boolean|False|True|Set to true to search contents of object by its name, ID, IP, CIDR, or domain name|None|False|
 |group|string|None|True|Name of address group to check|None|InsightConnect Block List|
 
 Example input:

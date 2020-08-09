@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Checks to see if an IP address, CIDR IP address, or domain is in an Address Group. Supports IPv6"
+    DESCRIPTION = "Checks to see if an IP address, CIDR IP address, or domain is in a Group"
 
 
 class Input:
@@ -33,7 +33,7 @@ class CheckIfAddressObjectInGroupInput(insightconnect_plugin_runtime.Input):
     "enable_search": {
       "type": "boolean",
       "title": "Enable Search",
-      "description": "Set to true for search contents of Address Object name, object ID, IP, CIDR, or domain name",
+      "description": "Set to true to search contents of object by its name, ID, IP, CIDR, or domain name",
       "default": false,
       "order": 3
     },
