@@ -5,12 +5,14 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class CiscoAsaAPI:
-    def __init__(self, username: str, password: str, url: str, verify_ssl: bool, port: int, logger: object):
+    def __init__(self, username: str, password: str, url: str, user_agent: str, verify_ssl: bool, port: int,
+                 logger: object):
         self.url = url + ":" + str(port) + "/api/"
         self.verify_ssl = verify_ssl
         self.logger = logger
         self.username = username
         self.password = password
+        self.user_agent = user_agent
 
     def get_groups(self):
         return self.run_with_pages("objects/networkobjectgroups")
@@ -51,7 +53,7 @@ class CiscoAsaAPI:
         response = {"text": ""}
         headers = OrderedDict([
             ('Content-Type', 'application/json'),
-            ('User-Agent', 'test-user-agent')
+            ('User-Agent', self.user_agent)
         ])
 
         try:

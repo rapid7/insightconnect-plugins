@@ -70,7 +70,7 @@ connection:
     description: API Access URL
     type: string
     required: true
-    example: 'https://example.com:443'
+    example: 'https://example.com'
   ssl_verify:
     title: TLS / SSL Verify
     description: Validate TLS / SSL certificate
@@ -85,6 +85,13 @@ connection:
     default: 443
     required: false
     example: 443
+  user_agent:
+    title: User Agent
+    description: User agent for provided host
+    type: string
+    default: REST API Agent
+    required: false
+    example: REST API Agent
 actions:
   check_if_address_object_in_group:
     title: Check If Address in Group

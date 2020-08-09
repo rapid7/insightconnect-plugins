@@ -19,6 +19,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             password=params.get(Input.CREDENTIALS).get("password"),
             url=params.get(Input.URL),
             port=params.get(Input.PORT, 443),
+            user_agent=params.get(Input.USER_AGENT, "REST API Agent"),
             logger=self.logger
         )
 

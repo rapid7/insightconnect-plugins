@@ -65,7 +65,7 @@ class CheckIfAddressObjectInGroupOutput(insightconnect_plugin_runtime.Output):
     "address_objects": {
       "type": "array",
       "title": "Address Objects",
-      "description": "List of address objects",
+      "description": "List of found address objects",
       "items": {
         "$ref": "#/definitions/address_objects"
       },
@@ -100,8 +100,8 @@ class CheckIfAddressObjectInGroupOutput(insightconnect_plugin_runtime.Output):
         },
         "name": {
           "type": "string",
-          "title": "Name",
-          "description": "Name",
+          "title": "Object Name",
+          "description": "The name of the object",
           "order": 3
         },
         "objectId": {
@@ -125,13 +125,13 @@ class CheckIfAddressObjectInGroupOutput(insightconnect_plugin_runtime.Output):
             "kind": {
               "type": "string",
               "title": "Kind",
-              "description": "Kind",
+              "description": "Kind is the type of object e.g. IPv4Address, IPv4FQDN, etc.",
               "order": 1
             },
             "value": {
               "type": "string",
               "title": "Value",
-              "description": "Value",
+              "description": "The value of the object. This will be the actual IPv4, IPv6, FQDN, etc. address the object refers to.",
               "order": 2
             }
           }
@@ -145,13 +145,13 @@ class CheckIfAddressObjectInGroupOutput(insightconnect_plugin_runtime.Output):
         "kind": {
           "type": "string",
           "title": "Kind",
-          "description": "Kind",
+          "description": "Kind is the type of object e.g. IPv4Address, IPv4FQDN, etc.",
           "order": 1
         },
         "value": {
           "type": "string",
           "title": "Value",
-          "description": "Value",
+          "description": "The value of the object. This will be the actual IPv4, IPv6, FQDN, etc. address the object refers to.",
           "order": 2
         }
       }

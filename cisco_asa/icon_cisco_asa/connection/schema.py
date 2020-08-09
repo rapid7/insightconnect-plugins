@@ -8,6 +8,7 @@ class Input:
     PORT = "port"
     SSL_VERIFY = "ssl_verify"
     URL = "url"
+    USER_AGENT = "user_agent"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -31,8 +32,8 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     },
     "ssl_verify": {
       "type": "boolean",
-      "title": "SSL Verify",
-      "description": "Validate certificate",
+      "title": "TLS / SSL Verify",
+      "description": "Validate TLS / SSL certificate",
       "default": true,
       "order": 3
     },
@@ -41,6 +42,13 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "URL",
       "description": "API Access URL",
       "order": 2
+    },
+    "user_agent": {
+      "type": "string",
+      "title": "User Agent",
+      "description": "User agent for provided host",
+      "default": "REST API Agent",
+      "order": 5
     }
   },
   "required": [

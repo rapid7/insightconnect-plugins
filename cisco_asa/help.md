@@ -20,8 +20,9 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Email address and password|None|{"username": user@example.com, "password": "test"}|
 |port|integer|443|False|The port number for provided host|None|443|
-|ssl_verify|boolean|True|False|Validate certificate|None|True|
-|url|string|None|True|API Access URL|None|https://example.com:443|
+|ssl_verify|boolean|True|False|Validate TLS / SSL certificate|None|True|
+|url|string|None|True|API Access URL|None|https://example.com|
+|user_agent|string|REST API Agent|False|User agent for provided host|None|REST API Agent|
 
 Example input:
 
@@ -30,10 +31,11 @@ Example input:
   "credentials": {
     "username": example,
     "password": "test"
-    },
+  },
   "port": 443,
   "ssl_verify": true,
-  "url": "https://example.com:443"
+  "url": "https://example.com",
+  "user_agent": "REST API Agent"
 }
 ```
 ## Technical Details
@@ -50,7 +52,7 @@ This action checks to see if an IP address, CIDR IP address, or domain is in an 
 |----|----|-------|--------|-----------|----|-------|
 |address|string|None|True|IP, CIDR, or domain name when Enable Search is off or Address Object name, object ID, IP, CIDR, or domain name if Enable Search is on|None|198.51.100.100|
 |enable_search|boolean|False|True|Set to true for search contents of Address Object name, object ID, IP, CIDR, or domain name|None|False|
-|group|string|None|True|Name of address group to check|None|ICON Block List|
+|group|string|None|True|Name of address group to check|None|InsightConnect Block List|
 
 Example input:
 
@@ -58,7 +60,7 @@ Example input:
 {
   "address": "198.51.100.100",
   "enable_search": false,
-  "group": "ICON Block List"
+  "group": "InsightConnect Block List"
 }
 ```
 
@@ -66,7 +68,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|address_objects|[]address_objects|False|List of address objects|
+|address_objects|[]address_objects|False|List of found address objects|
 |found|boolean|True|Was address found in group|
 
 Example output:
