@@ -46,7 +46,7 @@ types:
     name:
       title: Object Name
       type: string
-      description: Name
+      description: The name of the object
       required: false
     objectId:
       title: Object ID
