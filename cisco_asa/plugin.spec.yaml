@@ -30,7 +30,7 @@ types:
     value:
       title: Value
       type: string
-      description: Value
+      description: The value of the object. This will be the actual IPv4, IPv6, FQDN, etc. address the object refers to.
       required: false
   address_objects:
     host:
