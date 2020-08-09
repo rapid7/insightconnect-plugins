@@ -1,0 +1,15 @@
+{
+	"spec": "2919b9a71d72c33fc3827afc8fcf6fe6",
+	"manifest": "53068a86f04cc33afa07852ec17e7e88",
+	"setup": "0a6df85e5f1cb5b41fb1efdcf0c75318",
+	"schemas": [
+		{
+			"identifier": "check_if_address_object_in_group/schema.py",
+			"hash": "6ab78079cdba4b3af229361568ba0a1a"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "c7ef3ec4f79c4de5cb5192a03c1d94fd"
+		}
+	]
+}
