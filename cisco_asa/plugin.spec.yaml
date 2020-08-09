@@ -25,7 +25,7 @@ types:
     kind:
       title: Kind
       type: string
-      description: Kind
+      description: Kind is the type of object e.g. IPv4Address, IPv4FQDN, etc.
       required: false
     value:
       title: Value
