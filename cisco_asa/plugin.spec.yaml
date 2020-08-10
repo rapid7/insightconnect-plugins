@@ -153,14 +153,14 @@ actions:
         required: true
   delete_address_object:
     title: Delete Address Object
-    description: Delete an Address Object from an indicator
+    description: Delete an Address Object
     input:
       address_object:
         title: Address Object
         description: Name of the address object to delete
         type: string
         required: true
-        example: InsightConnect Address
+        example: MaliciousDomain
     output:
       success:
         title: Success

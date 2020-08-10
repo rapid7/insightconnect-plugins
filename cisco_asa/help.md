@@ -55,19 +55,19 @@ Example input:
 
 #### Delete Address Object
 
-This action is used to delete an Address Object from an indicator.
+This action is used to delete an Address Object by its object name.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_object|string|None|True|Name of the address object to delete|None|InsightConnect Address|
+|address_object|string|None|True|Name of the address object to delete|None|MaliciousDomain|
 
 Example input:
 
 ```
 {
-  "address_object": "InsightConnect Address"
+  "address_object": "MaliciousDomain"
 }
 ```
 

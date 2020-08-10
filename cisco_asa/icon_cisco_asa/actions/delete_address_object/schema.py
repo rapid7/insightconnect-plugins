@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Delete an Address Object from an indicator"
+    DESCRIPTION = "Delete an Address Object"
 
 
 class Input:
