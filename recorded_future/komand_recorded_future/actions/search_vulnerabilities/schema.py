@@ -572,8 +572,11 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "order": 4
         },
         "rawrisk": {
-          "$ref": "#/definitions/rawrisk_obj",
+          "type": "array",
           "title": "Rawrisk",
+          "items": {
+            "$ref": "#/definitions/rawrisk_obj"
+          },
           "order": 14
         },
         "relatedEntities": {

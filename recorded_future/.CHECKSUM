@@ -1,5 +1,5 @@
 {
-	"spec": "ce696c3a8d543ad18aa2abcac00c6b79",
+	"spec": "1f7ec149716f419efa8a057a73e15d48",
 	"manifest": "a3f04786828c94a8581aaeb5f47f0dbe",
 	"setup": "b483edc38e3c6bcd18d830658d04d1fb",
 	"schemas": [
@@ -61,7 +61,7 @@
 		},
 		{
 			"identifier": "lookup_vulnerability/schema.py",
-			"hash": "51500453c1b7be41201e75387656e4e0"
+			"hash": "f9712d5ccad4684d31ddcf3f68bb2945"
 		},
 		{
 			"identifier": "search_IP_addresses/schema.py",
@@ -85,7 +85,7 @@
 		},
 		{
 			"identifier": "search_vulnerabilities/schema.py",
-			"hash": "37be54d31f76fd03227c565c385fcd3e"
+			"hash": "48a8f3f4797ccef510b21102e553361a"
 		},
 		{
 			"identifier": "connection/schema.py",

@@ -240,7 +240,7 @@ types:
       type: timestamps
       required: false
     rawrisk:
-      type: rawrisk_obj
+      type: '[]rawrisk_obj'
       required: false
   location_data:
     continent:
