@@ -35,7 +35,11 @@ def parse_fields(yaml_obj):
     # Extension -- mandatory
     # In this case, only workflows
     extension_type = yaml_obj.get("extension")
-    extension_obj = {"type": extension_type, extension_type: yaml_obj.get("name") + ".icon"}
+    extension_obj = {"type": extension_type}
+    if extension_type == "workflow":
+        extension_obj[extension_type] = yaml_obj.get("name") + ".icon"
+    # if extension_type == plugin....
+
     manifest_obj["extension"] = extension_obj
 
     # ID -- mandatory
@@ -101,7 +105,12 @@ def parse_fields(yaml_obj):
 
     # Required R7 Features -- Required
     # Different rules for workflows, plugins, etc....Workflows --> need orchestrator
-    manifest_obj["required_rapid7_features"] = ["orchestrator"]
+    if extension_type == 'workflow' or extension_type == 'plugin':
+        cloud_ready = yaml_obj.get("cloud_ready")
+        if not yaml_obj.get('cloud_ready'):
+            manifest_obj["required_rapid7_features"] = ["orchestrator"]
+        else:
+            manifest_obj["required_rapid7_features"] = []
 
     # Status -- optional
     # From yaml
@@ -137,18 +146,20 @@ def parse_fields(yaml_obj):
 
     # Media -- optional
     # Small conversions from yaml
-    media_list = []
-    for media in yaml_obj.get("resources").get("screenshots"):
-        image_pattern = r'\S+\.(?:png|jpe?g)'
-        video_pattern = r'\S+\.(?:mp4)'
-        type_of_media = ""
-        if re.match(image_pattern, media['name']):
-            type_of_media = "image"
-        if re.match(video_pattern, media['name']):
-            type_of_media = "video"
-        media_info = {"source": media.get('name'), "title": media.get('title'), 'type': type_of_media}
-        media_list.append(media_info)
-    manifest_obj['media'] = media_list
+    screenshots = yaml_obj.get("resources").get("screenshots")
+    if screenshots:
+        media_list = []
+        for media in yaml_obj.get("resources").get("screenshots"):
+            image_pattern = r'\S+\.(?:png|jpe?g)'
+            video_pattern = r'\S+\.(?:mp4)'
+            type_of_media = ""
+            if re.match(image_pattern, media['name']):
+                type_of_media = "image"
+            if re.match(video_pattern, media['name']):
+                type_of_media = "video"
+            media_info = {"source": media.get('name'), "title": media.get('title'), 'type': type_of_media}
+            media_list.append(media_info)
+        manifest_obj['media'] = media_list
 
     # Links -- optional
     # Conversion from yaml
