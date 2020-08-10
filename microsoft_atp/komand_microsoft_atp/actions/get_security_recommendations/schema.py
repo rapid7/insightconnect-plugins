@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieve a list of"
+    DESCRIPTION = "Retrieve a list of security recommendations"
 
 
 class Input:
@@ -97,7 +97,7 @@ class GetSecurityRecommendationsOutput(insightconnect_plugin_runtime.Output):
         },
         "id": {
           "type": "string",
-          "title": "Id",
+          "title": "ID",
           "description": "Id",
           "order": 6
         },

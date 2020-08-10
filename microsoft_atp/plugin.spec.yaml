@@ -583,94 +583,94 @@ types:
       required: false
   recommendation:
     activeAlert:
-      title: "Active Alert"
+      title: Active Alert
+      description: Active alert
       type: boolean
-      description: "Active alert"
       required: false
     associatedThreats:
-      title: "Associated Threats"
+      title: Associated Threats
+      description: Associated threats
       type: '[]string'
-      description: "Associated threats"
       required: false
     configScoreImpact:
-      title: "Config Score Impact"
+      title: Config Score Impact
+      description: Config score impact
       type: float
-      description: "Config score impact"
       required: false
     exposedMachinesCount:
-      title: "Exposed Machines Count"
+      title: Exposed Machines Count
+      description: Exposed machines count
       type: integer
-      description: "Exposed machines count"
       required: false
     exposureImpact:
-      title: "Exposure Impact"
+      title: Exposure Impact
+      description: Exposure impact
       type: float
-      description: "Exposure impact"
       required: false
     id:
-      title: "Id"
+      title: ID
+      description: Id
       type: string
-      description: "Id"
       required: false
     nonProductivityImpactedAssets:
-      title: "Non Productivity Impacted Assets"
+      title: Non Productivity Impacted Assets
+      description: Non productivity impacted assets
       type: integer
-      description: "Non productivity impacted assets"
       required: false
     productName:
-      title: "Product Name"
+      title: Product Name
+      description: Product name
       type: string
-      description: "Product name"
       required: false
     publicExploit:
-      title: "Public Exploit"
+      title: Public Exploit
+      description: Public exploit
       type: boolean
-      description: "Public exploit"
       required: false
     recommendationCategory:
-      title: "Recommendation Category"
+      title: Recommendation Category
+      description: Recommendation category
       type: string
-      description: "Recommendation category"
       required: false
     recommendationName:
-      title: "Recommendation Name"
+      title: Recommendation Name
+      description: Recommendation name
       type: string
-      description: "Recommendation name"
       required: false
     relatedComponent:
-      title: "Related Component"
+      title: Related Component
+      description: Related component
       type: string
-      description: "Related component"
       required: false
     remediationType:
-      title: "Remediation Type"
+      title: Remediation Type
+      description: Remediation type
       type: string
-      description: "Remediation type"
       required: false
     severityScore:
-      title: "Severity Score"
+      title: Severity Score
+      description: Severity score
       type: float
-      description: "Severity score"
       required: false
     status:
-      title: "Status"
+      title: Status
+      description: Status
       type: string
-      description: "Status"
       required: false
     totalMachineCount:
-      title: "Total Machine Count"
+      title: Total Machine Count
+      description: Total machine count
       type: integer
-      description: "Total machine count"
       required: false
     vendor:
-      title: "Vendor"
+      title: Vendor
+      description: Vendor
       type: string
-      description: "Vendor"
       required: false
     weaknesses:
-      title: "Weaknesses"
+      title: Weaknesses
+      description: Weaknesses
       type: integer
-      description: "Weaknesses"
       required: false
 
 connection:
@@ -977,7 +977,7 @@ actions:
         required: true
   get_security_recommendations:
     title: Get Security Recommendations
-    description: Retrieve a list of
+    description: Retrieve a list of security recommendations
     input:
       machine:
         title: Machine
