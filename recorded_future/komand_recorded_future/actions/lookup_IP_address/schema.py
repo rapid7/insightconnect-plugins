@@ -134,7 +134,7 @@ class LookupIPAddressOutput(komand.Output):
       "order": 7
     },
     "risk": {
-      "$ref": "#/definitions/risk",
+      "$ref": "#/definitions/risk_obj",
       "title": "Risk",
       "description": "Risk",
       "order": 11
@@ -284,9 +284,9 @@ class LookupIPAddressOutput(komand.Output):
         }
       }
     },
-    "evidenceDetails": {
+    "evidenceDetails_obj": {
       "type": "object",
-      "title": "evidenceDetails",
+      "title": "evidenceDetails_obj",
       "properties": {
         "criticality": {
           "type": "number",
@@ -550,9 +550,9 @@ class LookupIPAddressOutput(komand.Output):
         }
       }
     },
-    "risk": {
+    "risk_obj": {
       "type": "object",
-      "title": "risk",
+      "title": "risk_obj",
       "properties": {
         "criticality": {
           "type": "number",
@@ -568,7 +568,7 @@ class LookupIPAddressOutput(komand.Output):
           "type": "array",
           "title": "Evidence Details",
           "items": {
-            "$ref": "#/definitions/evidenceDetails"
+            "$ref": "#/definitions/evidenceDetails_obj"
           },
           "order": 3
         },
@@ -589,9 +589,9 @@ class LookupIPAddressOutput(komand.Output):
         }
       },
       "definitions": {
-        "evidenceDetails": {
+        "evidenceDetails_obj": {
           "type": "object",
-          "title": "evidenceDetails",
+          "title": "evidenceDetails_obj",
           "properties": {
             "criticality": {
               "type": "number",

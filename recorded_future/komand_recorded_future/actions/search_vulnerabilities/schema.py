@@ -238,9 +238,9 @@ class SearchVulnerabilitiesOutput(komand.Output):
         }
       }
     },
-    "evidenceDetails": {
+    "evidenceDetails_obj": {
       "type": "object",
-      "title": "evidenceDetails",
+      "title": "evidenceDetails_obj",
       "properties": {
         "criticality": {
           "type": "number",
@@ -281,6 +281,24 @@ class SearchVulnerabilitiesOutput(komand.Output):
         "value": {
           "type": "integer",
           "title": "Value",
+          "order": 2
+        }
+      }
+    },
+    "rawrisk_obj": {
+      "type": "object",
+      "title": "rawrisk_obj",
+      "properties": {
+        "rule": {
+          "type": "string",
+          "title": "Rule",
+          "description": "Rule",
+          "order": 1
+        },
+        "timestamp": {
+          "type": "string",
+          "title": "Timestamp",
+          "description": "Timestamp",
           "order": 2
         }
       }
@@ -376,9 +394,9 @@ class SearchVulnerabilitiesOutput(komand.Output):
         }
       }
     },
-    "risk": {
+    "risk_obj": {
       "type": "object",
-      "title": "risk",
+      "title": "risk_obj",
       "properties": {
         "criticality": {
           "type": "number",
@@ -394,7 +412,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "type": "array",
           "title": "Evidence Details",
           "items": {
-            "$ref": "#/definitions/evidenceDetails"
+            "$ref": "#/definitions/evidenceDetails_obj"
           },
           "order": 3
         },
@@ -415,9 +433,9 @@ class SearchVulnerabilitiesOutput(komand.Output):
         }
       },
       "definitions": {
-        "evidenceDetails": {
+        "evidenceDetails_obj": {
           "type": "object",
-          "title": "evidenceDetails",
+          "title": "evidenceDetails_obj",
           "properties": {
             "criticality": {
               "type": "number",
@@ -553,6 +571,11 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "title": "NVD Description",
           "order": 4
         },
+        "rawrisk": {
+          "$ref": "#/definitions/rawrisk_obj",
+          "title": "Rawrisk",
+          "order": 14
+        },
         "relatedEntities": {
           "type": "array",
           "title": "Related Entities",
@@ -562,7 +585,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "order": 9
         },
         "risk": {
-          "$ref": "#/definitions/risk",
+          "$ref": "#/definitions/risk_obj",
           "title": "Risk",
           "order": 10
         },
@@ -726,9 +749,9 @@ class SearchVulnerabilitiesOutput(komand.Output):
             }
           }
         },
-        "evidenceDetails": {
+        "evidenceDetails_obj": {
           "type": "object",
-          "title": "evidenceDetails",
+          "title": "evidenceDetails_obj",
           "properties": {
             "criticality": {
               "type": "number",
@@ -769,6 +792,24 @@ class SearchVulnerabilitiesOutput(komand.Output):
             "value": {
               "type": "integer",
               "title": "Value",
+              "order": 2
+            }
+          }
+        },
+        "rawrisk_obj": {
+          "type": "object",
+          "title": "rawrisk_obj",
+          "properties": {
+            "rule": {
+              "type": "string",
+              "title": "Rule",
+              "description": "Rule",
+              "order": 1
+            },
+            "timestamp": {
+              "type": "string",
+              "title": "Timestamp",
+              "description": "Timestamp",
               "order": 2
             }
           }
@@ -864,9 +905,9 @@ class SearchVulnerabilitiesOutput(komand.Output):
             }
           }
         },
-        "risk": {
+        "risk_obj": {
           "type": "object",
-          "title": "risk",
+          "title": "risk_obj",
           "properties": {
             "criticality": {
               "type": "number",
@@ -882,7 +923,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
               "type": "array",
               "title": "Evidence Details",
               "items": {
-                "$ref": "#/definitions/evidenceDetails"
+                "$ref": "#/definitions/evidenceDetails_obj"
               },
               "order": 3
             },
@@ -903,9 +944,9 @@ class SearchVulnerabilitiesOutput(komand.Output):
             }
           },
           "definitions": {
-            "evidenceDetails": {
+            "evidenceDetails_obj": {
               "type": "object",
-              "title": "evidenceDetails",
+              "title": "evidenceDetails_obj",
               "properties": {
                 "criticality": {
                   "type": "number",

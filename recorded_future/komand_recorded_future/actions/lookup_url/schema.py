@@ -111,7 +111,7 @@ class LookupUrlOutput(komand.Output):
       "order": 6
     },
     "risk": {
-      "$ref": "#/definitions/risk",
+      "$ref": "#/definitions/risk_obj",
       "title": "Risk",
       "description": "Risk",
       "order": 8
@@ -219,9 +219,9 @@ class LookupUrlOutput(komand.Output):
         }
       }
     },
-    "evidenceDetails": {
+    "evidenceDetails_obj": {
       "type": "object",
-      "title": "evidenceDetails",
+      "title": "evidenceDetails_obj",
       "properties": {
         "criticality": {
           "type": "number",
@@ -357,9 +357,9 @@ class LookupUrlOutput(komand.Output):
         }
       }
     },
-    "risk": {
+    "risk_obj": {
       "type": "object",
-      "title": "risk",
+      "title": "risk_obj",
       "properties": {
         "criticality": {
           "type": "number",
@@ -375,7 +375,7 @@ class LookupUrlOutput(komand.Output):
           "type": "array",
           "title": "Evidence Details",
           "items": {
-            "$ref": "#/definitions/evidenceDetails"
+            "$ref": "#/definitions/evidenceDetails_obj"
           },
           "order": 3
         },
@@ -396,9 +396,9 @@ class LookupUrlOutput(komand.Output):
         }
       },
       "definitions": {
-        "evidenceDetails": {
+        "evidenceDetails_obj": {
           "type": "object",
-          "title": "evidenceDetails",
+          "title": "evidenceDetails_obj",
           "properties": {
             "criticality": {
               "type": "number",

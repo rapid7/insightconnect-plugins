@@ -192,9 +192,9 @@ class SearchHashesOutput(komand.Output):
         }
       }
     },
-    "evidenceDetails": {
+    "evidenceDetails_obj": {
       "type": "object",
-      "title": "evidenceDetails",
+      "title": "evidenceDetails_obj",
       "properties": {
         "criticality": {
           "type": "number",
@@ -330,9 +330,9 @@ class SearchHashesOutput(komand.Output):
         }
       }
     },
-    "risk": {
+    "risk_obj": {
       "type": "object",
-      "title": "risk",
+      "title": "risk_obj",
       "properties": {
         "criticality": {
           "type": "number",
@@ -348,7 +348,7 @@ class SearchHashesOutput(komand.Output):
           "type": "array",
           "title": "Evidence Details",
           "items": {
-            "$ref": "#/definitions/evidenceDetails"
+            "$ref": "#/definitions/evidenceDetails_obj"
           },
           "order": 3
         },
@@ -369,9 +369,9 @@ class SearchHashesOutput(komand.Output):
         }
       },
       "definitions": {
-        "evidenceDetails": {
+        "evidenceDetails_obj": {
           "type": "object",
-          "title": "evidenceDetails",
+          "title": "evidenceDetails_obj",
           "properties": {
             "criticality": {
               "type": "number",
@@ -446,7 +446,7 @@ class SearchHashesOutput(komand.Output):
           "order": 6
         },
         "risk": {
-          "$ref": "#/definitions/risk",
+          "$ref": "#/definitions/risk_obj",
           "title": "Risk",
           "order": 7
         },
@@ -559,9 +559,9 @@ class SearchHashesOutput(komand.Output):
             }
           }
         },
-        "evidenceDetails": {
+        "evidenceDetails_obj": {
           "type": "object",
-          "title": "evidenceDetails",
+          "title": "evidenceDetails_obj",
           "properties": {
             "criticality": {
               "type": "number",
@@ -697,9 +697,9 @@ class SearchHashesOutput(komand.Output):
             }
           }
         },
-        "risk": {
+        "risk_obj": {
           "type": "object",
-          "title": "risk",
+          "title": "risk_obj",
           "properties": {
             "criticality": {
               "type": "number",
@@ -715,7 +715,7 @@ class SearchHashesOutput(komand.Output):
               "type": "array",
               "title": "Evidence Details",
               "items": {
-                "$ref": "#/definitions/evidenceDetails"
+                "$ref": "#/definitions/evidenceDetails_obj"
               },
               "order": 3
             },
@@ -736,9 +736,9 @@ class SearchHashesOutput(komand.Output):
             }
           },
           "definitions": {
-            "evidenceDetails": {
+            "evidenceDetails_obj": {
               "type": "object",
-              "title": "evidenceDetails",
+              "title": "evidenceDetails_obj",
               "properties": {
                 "criticality": {
                   "type": "number",

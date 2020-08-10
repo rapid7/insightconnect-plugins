@@ -9,7 +9,7 @@ status: []
 description: "Recorded Future arms threat analysts, security operators, and incident
   responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7
 InsightConnect, users can search domain lists, entity lists, and more"
-version: 1.5.5
+version: 1.6.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/recorded_future
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -68,7 +68,7 @@ types:
     type:
       type: string
       required: false
-  evidenceDetails:
+  evidenceDetails_obj:
     criticality:
       type: number
       required: false
@@ -86,7 +86,7 @@ types:
     timestamp:
       type: string
       required: false
-  risk:
+  risk_obj:
     criticality:
       type: number
       required: false
@@ -96,7 +96,7 @@ types:
       required: false
     evidenceDetails:
       title: Evidence Details
-      type: '[]evidenceDetails'
+      type: '[]evidenceDetails_obj'
       required: false
     riskSummary:
       title: Risk Summary
@@ -181,6 +181,19 @@ types:
       title: Access Vector
       type: string
       required: false
+
+  rawrisk_obj:
+    rule:
+      title: "Rule"
+      type: string
+      description: "Rule"
+      required: false
+    timestamp:
+      title: "Timestamp"
+      type: string
+      description: "Timestamp"
+      required: false
+
   vulnerability_search_data:
     counts:
       type: '[]counts'
@@ -214,7 +227,7 @@ types:
       type: '[]relatedEntities'
       required: false
     risk:
-      type: risk
+      type: risk_obj
       required: false
     sightings:
       type: '[]sightings'
@@ -225,6 +238,9 @@ types:
       required: false
     timestamps:
       type: timestamps
+      required: false
+    rawrisk:
+      type: rawrisk_obj
       required: false
   location_data:
     continent:
@@ -297,7 +313,7 @@ types:
       type: '[]relatedEntities'
       required: false
     risk:
-      type: risk
+      type: risk_obj
       required: false
     sightings:
       type: '[]sightings'
@@ -349,6 +365,7 @@ connection:
     description: API Key
     required: true
     example: 9de5069c5afe602b2ea0a04b66beb2c0
+
 actions:
   download_domain_risk_list:
     title: Download Domain Risk List
@@ -522,7 +539,7 @@ actions:
       risk:
         title: "Risk"
         description: "Risk"
-        type: risk
+        type: risk_obj
         required: false
   search_entity_lists:
     title: Search Entity Lists
@@ -718,7 +735,7 @@ actions:
       risk:
         title: "Risk"
         description: "Risk"
-        type: risk
+        type: risk_obj
         required: false
   download_IP_addresses_risk_list:
     title: Download IP Addresses Risk List
@@ -912,7 +929,7 @@ actions:
       risk:
         title: Risk
         description: Risk
-        type: risk
+        type: risk_obj
         required: false
       riskyCIDRIPs:
         title: Risky CIDR IPs
@@ -1170,5 +1187,5 @@ actions:
       risk:
         title: Risk
         description: Risk
-        type: risk
+        type: risk_obj
         required: false
