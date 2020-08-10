@@ -135,6 +135,9 @@ class WindwosDefenderATP_API:
     def search_indicators(self, query_parameters) -> dict:
         return self._make_request("GET", f"indicators{query_parameters}")
 
+    def get_security_recommendations(self, machine_id: str) -> dict:
+        return self._make_request("GET", f"machines/{machine_id}/recommendations")
+
     def _make_request(self, method: str, path: str, json_data: dict = None, allow_empty: bool = False) -> dict:
         self.check_and_refresh_api_token()
         return self._call_api(

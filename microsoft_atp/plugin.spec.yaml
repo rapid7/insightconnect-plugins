@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: microsoft_atp
 title: Microsoft Windows Defender ATP
 description: The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
-version: 4.3.0
+version: 4.4.0
 vendor: rapid7
 support: community
 status: []
@@ -581,6 +581,97 @@ types:
       type: string
       description: Updated on
       required: false
+  recommendation:
+    activeAlert:
+      title: "Active Alert"
+      type: boolean
+      description: "Active alert"
+      required: false
+    associatedThreats:
+      title: "Associated Threats"
+      type: '[]string'
+      description: "Associated threats"
+      required: false
+    configScoreImpact:
+      title: "Config Score Impact"
+      type: float
+      description: "Config score impact"
+      required: false
+    exposedMachinesCount:
+      title: "Exposed Machines Count"
+      type: integer
+      description: "Exposed machines count"
+      required: false
+    exposureImpact:
+      title: "Exposure Impact"
+      type: float
+      description: "Exposure impact"
+      required: false
+    id:
+      title: "Id"
+      type: string
+      description: "Id"
+      required: false
+    nonProductivityImpactedAssets:
+      title: "Non Productivity Impacted Assets"
+      type: integer
+      description: "Non productivity impacted assets"
+      required: false
+    productName:
+      title: "Product Name"
+      type: string
+      description: "Product name"
+      required: false
+    publicExploit:
+      title: "Public Exploit"
+      type: boolean
+      description: "Public exploit"
+      required: false
+    recommendationCategory:
+      title: "Recommendation Category"
+      type: string
+      description: "Recommendation category"
+      required: false
+    recommendationName:
+      title: "Recommendation Name"
+      type: string
+      description: "Recommendation name"
+      required: false
+    relatedComponent:
+      title: "Related Component"
+      type: string
+      description: "Related component"
+      required: false
+    remediationType:
+      title: "Remediation Type"
+      type: string
+      description: "Remediation type"
+      required: false
+    severityScore:
+      title: "Severity Score"
+      type: float
+      description: "Severity score"
+      required: false
+    status:
+      title: "Status"
+      type: string
+      description: "Status"
+      required: false
+    totalMachineCount:
+      title: "Total Machine Count"
+      type: integer
+      description: "Total machine count"
+      required: false
+    vendor:
+      title: "Vendor"
+      type: string
+      description: "Vendor"
+      required: false
+    weaknesses:
+      title: "Weaknesses"
+      type: integer
+      description: "Weaknesses"
+      required: false
 
 connection:
   application_id:
@@ -883,6 +974,22 @@ actions:
         type: '[]vulnerability'
         title: Vulnerabilities
         description: List of vulnerabilities of the machine
+        required: true
+  get_security_recommendations:
+    title: Get Security Recommendations
+    description: Retrieve a list of
+    input:
+      machine:
+        title: Machine
+        description: Machine IP address, hostname or machine ID
+        type: string
+        example: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73
+        required: true
+    output:
+      recommendations:
+        title: Recommendations
+        description: List of security recommendations
+        type: '[]recommendation'
         required: true
 
 triggers:
