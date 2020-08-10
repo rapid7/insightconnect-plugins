@@ -49,7 +49,7 @@ Example input:
 
 #### Get Security Recommendations
 
-This action is used to retrieve a list of.
+This action is used to retrieve a list of security recommendations.
 
 ##### Input
 
