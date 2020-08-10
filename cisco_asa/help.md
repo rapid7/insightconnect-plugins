@@ -39,7 +39,7 @@ Example input:
 ```
 {
   "credentials": {
-    "username": "admin", 
+    "username": "admin",
     "password": "mypassword"
   },
   "port": 443,
