@@ -14,6 +14,16 @@ class CiscoAsaAPI:
         self.password = password
         self.user_agent = user_agent
 
+    def update_group(self, object_id: str, group: str, all_members: list):
+        return self._call_api(
+            "PUT",
+            f"objects/networkobjectgroups/{object_id}",
+            json_data={
+                "name": group,
+                "members": all_members
+            }
+        )
+
     def get_groups(self):
         return self.run_with_pages("objects/networkobjectgroups")
 
@@ -73,6 +83,8 @@ class CiscoAsaAPI:
             if response.status_code >= 400:
                 response_data = response.text
                 raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response_data)
+            if response.status_code == 204:
+                return {}
             if 200 <= response.status_code < 300:
                 return response.json()
 

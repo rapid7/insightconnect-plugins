@@ -5,6 +5,7 @@
 # Key Features
 
 * Check if address is in address group
+* Remove address from group
 
 # Requirements
 
@@ -20,7 +21,7 @@ documentation for this available [here](https://www.cisco.com/c/en/us/td/docs/se
 addition, the user account must have the necessary permissions for the intended actions:
 
 * Actions that retrieve or check data require Cisco privilege level 5 or greater
-* Actions that change or modidy data require Cisco privilege level 15
+* Actions that change or modify data require Cisco privilege level 15
 
 The connection configuration accepts the following parameters:
 
@@ -36,7 +37,10 @@ Example input:
 
 ```
 {
-  "credentials": {"username": "admin", "password": "mypassword"},
+  "credentials": {
+    "username": "admin", 
+    "password": "mypassword"
+  },
   "port": 443,
   "ssl_verify": true,
   "url": "https://example.com",
@@ -47,6 +51,40 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Remove Address from Group
+
+This action is used to remove an address from a group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|The IP address or FQDN to remove from group|None|198.51.100.100|
+|group|string|None|True|Name of the group to remove the address from|None|InsightConnect Block List|
+
+Example input:
+
+```
+{
+  "address": "198.51.100.100",
+  "group": "InsightConnect Block List"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Success if address removed from group|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Check If Address in Group
 
@@ -126,6 +164,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - Add new action Remove Address from Group
 * 1.0.0 - Initial plugin
 
 # Links
