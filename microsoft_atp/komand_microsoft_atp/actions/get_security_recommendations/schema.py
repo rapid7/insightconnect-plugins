@@ -98,7 +98,7 @@ class GetSecurityRecommendationsOutput(insightconnect_plugin_runtime.Output):
         "id": {
           "type": "string",
           "title": "ID",
-          "description": "Id",
+          "description": "ID",
           "order": 6
         },
         "nonProductivityImpactedAssets": {
