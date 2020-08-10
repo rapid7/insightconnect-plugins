@@ -1,11 +1,15 @@
 {
-	"spec": "a2667a2e9c18f01a02bb9d2822351723",
-	"manifest": "af0621eaa91f0caea0c37af4608314b8",
-	"setup": "0e7f219195edb70bbbbe01036bf95ad7",
+	"spec": "5c6287ad0d88476a5e0bcdd6366bfa0d",
+	"manifest": "0f950cdee914fed155f169ca078d518a",
+	"setup": "4575979767b1a95893c6f4e4bf165b0b",
 	"schemas": [
 		{
 			"identifier": "check_if_address_object_in_group/schema.py",
 			"hash": "6ab78079cdba4b3af229361568ba0a1a"
+		},
+		{
+			"identifier": "delete_address_object/schema.py",
+			"hash": "47ce6272dc57f2a3a65027486f644d17"
 		},
 		{
 			"identifier": "remove_address_from_group/schema.py",

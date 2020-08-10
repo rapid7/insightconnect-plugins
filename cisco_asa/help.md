@@ -6,6 +6,7 @@
 
 * Check if address is in address group
 * Remove address from group
+* Delete Address Object
 
 # Requirements
 
@@ -51,6 +52,38 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Delete Address Object
+
+This action is used to delete an Address Object from an indicator.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object|string|None|True|Name of the address object to delete|None|InsightConnect Address|
+
+Example input:
+
+```
+{
+  "address_object": "InsightConnect Address"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Success if address object deleted|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Remove Address from Group
 
@@ -164,6 +197,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.0 - Add new action Delete Address Object
 * 1.1.0 - Add new action Remove Address from Group
 * 1.0.0 - Initial plugin
 
