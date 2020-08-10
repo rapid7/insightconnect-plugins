@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: microsoft_atp
 title: Microsoft Windows Defender ATP
 description: The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
-version: 4.1.0
+version: 4.3.0
 vendor: rapid7
 support: community
 status: []
@@ -240,7 +240,6 @@ types:
       type: string
       description: "Determination value"
       required: false
-
   machine_software:
      id:
        title: ID
@@ -389,6 +388,199 @@ types:
        type: string
        description: "Status"
        required: false
+  indicator_action:
+    "@odata.context":
+      title: "@Odata.Context"
+      type: string
+      description: "@odata.context"
+      required: false
+    id:
+      title: Indicator ID
+      type: string
+      description: Identity of the indicator entity
+      required: false
+    indicatorValue:
+      title: Indicator Value
+      type: string
+      description: "The potentially malicious indicator of one of the following types: IP addresses, URLs, domains, and SHA1 and SHA256 hashes"
+      required: false
+    indicatorType:
+      type: string
+      title: Indicator Type
+      description: Type of the indicator
+      example: Url
+      required: false
+    application:
+      type: string
+      title: Application
+      description: The application associated with the indicator
+      example: demo-test
+      required: false
+    action:
+      type: string
+      title: Action
+      description: The action that will be taken if the indicator will be discovered in the organization
+      example: AlertAndBlock
+      required: false
+    sourceType:
+      type: string
+      title: Source Type
+      description: User in case the Indicator created by a user (e.g. from the portal), AadApp in case it submitted using automated application via the API.
+      example: AadApp
+      required: false
+    source:
+      type: string
+      title: Source
+      description: The name of the user/application that submitted the indicator
+      example: test
+      required: false
+    createdBy:
+      type: string
+      title: Created By
+      description: Unique identity of the user/application that submitted the indicator
+      example: test
+      required: false
+    createdByDisplayName:
+      title: Created By Display Name
+      type: string
+      description: Created by display name
+      required: false
+    createdBySource:
+      title: Created By Source
+      type: string
+      description: Created by source
+      required: false
+    generateAlert:
+      title: Generate Alert
+      type: boolean
+      description: Generate alert
+      required: false
+    historicalDetection:
+      title: Historical Detection
+      type: boolean
+      description: Historical detection
+      required: false
+    lastUpdatedBy:
+      type: string
+      title: Last Updated By
+      description: Identity of the user/application that last updated the indicator
+      required: false
+    mitreTechniques:
+      title: MITRE Techniques
+      type: '[]string'
+      description: MITRE techniques
+      required: false
+    creationTimeDateTimeUtc:
+      type: string
+      title: Creation Time
+      description: The date and time when the indicator was created
+      required: false
+    expirationTime:
+      type: string
+      title: Expiration Time
+      description: The expiration time of the indicator
+      required: false
+    lastUpdateTime:
+      type: string
+      title: Last Update Time
+      description: The last time the indicator was updated
+      required: false
+    severity:
+      type: string
+      title: Severity
+      description: The severity of the indicator
+      required: false
+    title:
+      type: string
+      title: Title
+      description: Indicator alert title
+      required: false
+    description:
+      type: string
+      title: Description
+      description: Description of the indicator
+      required: false
+    recommendedActions:
+      type: string
+      title: Recommended Actions
+      description: Recommended actions for the indicator
+      required: false
+    rbacGroupIds:
+      title: RBAC Group IDs
+      type: '[]string'
+      description: RBAC group IDs
+      required: false
+    rbacGroupNames:
+      type: '[]string'
+      title: RBAC Group Names
+      description: RBAC device group names where the indicator is exposed and active. Empty list in case it exposed to all devices
+      required: false
+  vulnerability:
+    cvssV3:
+      title: CVSS V3
+      type: float
+      description: CVSS v3
+      required: false
+    description:
+      title: Description
+      type: string
+      description: Description
+      required: false
+    exploitInKit:
+      title: Exploit In Kit
+      type: boolean
+      description: Exploit in kit
+      required: false
+    exploitTypes:
+      title: Exploit Types
+      type: '[]string'
+      description: Exploit types
+      required: false
+    exploitUris:
+      title: Exploit URIs
+      type: '[]string'
+      description: Exploit URIs
+      required: false
+    exploitVerified:
+      title: Exploit Verified
+      type: boolean
+      description: Exploit verified
+      required: false
+    exposedMachines:
+      title: Exposed Machines
+      type: integer
+      description: Exposed machines
+      required: false
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    publicExploit:
+      title: Public Exploit
+      type: boolean
+      description: Public exploit
+      required: false
+    publishedOn:
+      title: Published On
+      type: string
+      description: Published on
+      required: false
+    severity:
+      title: Severity
+      type: string
+      description: Severity
+      required: false
+    updatedOn:
+      title: Updated On
+      type: string
+      description: Updated on
+      required: false
 
 connection:
   application_id:
@@ -593,6 +785,104 @@ actions:
         title: Machines
         description: List of machines with provided software
         type: '[]machine_software'
+        required: true
+  blacklist:
+    title: Blacklist
+    description: Submit or update new indicator
+    input:
+      indicator:
+        title: Indicator
+        description: A supported indicator to blacklist or unblacklist. Supported indicators are IP addresses, URLs, domains, and SHA1 and SHA256 hashes
+        type: string
+        example: 220e7d15b011d7fac48f2bd61114db1022197f7f
+        required: true
+      action:
+        title: Action
+        description: The action that will be taken if the indicator will be discovered in the organization
+        type: string
+        example: AlertAndBlock
+        default: AlertAndBlock
+        required: false
+        enum:
+          - Alert
+          - AlertAndBlock
+          - Allowed
+      application:
+        title: Application
+        description: The application associated with the indicator
+        type: string
+        example: demo-test
+        required: false
+      title:
+        title: Title
+        description: Indicator alert title
+        type: string
+        example: test
+        required: false
+      description:
+        title: Description
+        description: Description of the indicator
+        type: string
+        example: description
+        required: false
+      expiration_time:
+        title: Expiration Time
+        description: The expiration time of the indicator
+        type: string
+        example: "2020-12-12T00:00:00Z"
+        required: false
+      severity:
+        title: Severity
+        description: The severity of the indicator
+        type: string
+        example: High
+        default: High
+        required: false
+        enum:
+          - Informational
+          - Low
+          - Medium
+          - High
+      recommended_actions:
+        title: Recommended Actions
+        description: TI indicator alert recommended actions
+        type: string
+        example: nothing
+        required: false
+      rbac_group_names:
+        title: RBAC Group Names
+        description: List of RBAC group names the indicator would be applied to
+        type: '[]string'
+        example: '["group1","group2"]'
+        required: false
+      indicator_state:
+        title: Indicator State
+        description: True to add indicator, false to remove it from the list
+        type: boolean
+        example: true
+        default: false
+        required: false
+    output:
+      indicator_action_response:
+        title: Indicator Action Response
+        description: A response that includes the result of the action, and supplemental information about the action taken
+        type: indicator_action
+        required: false
+  get_machine_vulnerabilities:
+    title: Get Machine Vulnerabilities
+    description: Retrieves a collection of discovered vulnerabilities related to a given device
+    input:
+      machine:
+        title: Machine
+        description: Machine IP address, hostname or machine ID
+        type: string
+        example: 9de5069c5afe602b2ea0a04b66beb2c0cef77fdf
+        required: true
+    output:
+      vulnerabilities:
+        type: '[]vulnerability'
+        title: Vulnerabilities
+        description: List of vulnerabilities of the machine
         required: true
 
 triggers:
