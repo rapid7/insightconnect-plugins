@@ -25,7 +25,6 @@ def main():
             write_to_json(json_obj, path)
             print("Wrote manifest at " + path)
         else:
-            print(filename)
             logging.warning("ERROR: Wrong file type specified")
 
 
