@@ -254,3 +254,34 @@ actions:
         description: The information about the threat
         type: threat
         required: false
+
+  assign_user_to_investigation:
+    title: Assign User to Investigation
+    description: Assign a user to the specified investigation
+    input:
+      id:
+        title: ID
+        description: Investigation ID
+        type: string
+        example: 174e4f99-2ac7-4481-9301-4d24c34baf06
+        required: true
+      user_email_address:
+        title: User Email Address
+        description: The email address of the user to assign to this investigation, used to log into the insight platform
+        type: string
+        example: user@example.com
+        required: true
+    output:
+      success:
+        title: Success
+        description: Was the user assigned successfully
+        type: boolean
+        required: true
+      investigation:
+        title: Investigation
+        description: The investigation that was modified
+        type: investigation
+        required: true
+
+
+

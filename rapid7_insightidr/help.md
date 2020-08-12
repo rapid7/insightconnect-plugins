@@ -18,14 +18,78 @@ Do more with Investigations in [InsightIDR](https://www.rapid7.com/products/insi
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|The API key for InsightAppSec|None|
-|url|string|https://us.api.insight.rapid7.com|True|The URL endpoint for InsightAppSec. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|InsightIDR API key|None|None|
+|url|string|https://us.api.insight.rapid7.com|True|The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
 ### Actions
+
+#### Set Status of Investigation
+
+This action is used to set the status of the investigation with the given ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|The ID of the investigation to change the status of|None|None|
+|status|string|CLOSED|True|The new status for the investigation|['OPEN', 'CLOSED']|None|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|investigation|investigation|True|The investigation for which the status was set|
+
+Example output:
+
+```
+```
+
+#### Assign User to Investigation
+
+This action is used to assign a user to the specified investigation.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|Investigation ID|None|174e4f99-2ac7-4481-9301-4d24c34baf06|
+|user_email_address|string|None|True|The email address of the user to assign to this investigation, used to log into the insight platform|None|user@example.com|
+
+Example input:
+
+```
+{
+  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
+  "user_email_address": "user@example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|investigation|investigation|True|The investigation that was modified|
+|success|boolean|True|Was the user assigned successfully|
+
+Example output:
+
+```
+```
 
 #### Add Indicators to a Threat
 
@@ -33,13 +97,18 @@ This action is used to add InsightIDR threat indicators to a threat with the giv
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|domain_names|[]string|None|False|Domain names to add. e.g. ["rapid7.com","google.com"]|None|
-|hashes|[]string|None|False|Process hashes to add. e.g. ["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]|None|
-|ips|[]string|None|False|IP addresses to add. e.g. ["10.0.0.1","10.0.0.2"]|None|
-|key|string|None|True|The key of a threat for which the indicators are going to be added. e.g. c9404e11-b81a-429d-9400-05c531f229c3|None|
-|urls|[]string|None|False|URL's to add. e.g. ["https://example.com","https://test.com"]|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|domain_names|[]string|None|False|Domain names to add. e.g. ["rapid7.com","google.com"]|None|None|
+|hashes|[]string|None|False|Process hashes to add. e.g. ["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]|None|None|
+|ips|[]string|None|False|IP addresses to add. e.g. ["10.0.0.1","10.0.0.2"]|None|None|
+|key|string|None|True|The key of a threat for which the indicators are going to be added. e.g. c9404e11-b81a-429d-9400-05c531f229c3|None|None|
+|urls|[]string|None|False|URL's to add. e.g. ["https://example.com","https://test.com"]|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -70,13 +139,18 @@ This action is used to retrieve a page of investigations matching the given requ
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|end_time|date|None|False|An optional ISO formatted timestamp. Only investigations whose createTime is before this date will be returned by the api. If this parameter is omitted investigations with any created time may be returned|None|
-|index|integer|0|True|The optional zero based index of the page to retrieve. Must be an integer greater than or equal to zero|None|
-|size|integer|20|True|The optional size of the page to retrieve. Must be an integer greater than zero or less then or equal to 1000|None|
-|start_time|date|None|False|An optional ISO formatted timestamp. Only investigations whose created time is after this date will be returned by the API. If this parameter is omitted investigations with any created time may be returned|None|
-|statuses|string|CLOSED|False|An optional comma separated set of investigation statuses. Only investigation whose status match one of the entries in the list will be returned. If this parameter is omitted investigations with any status may be returned|['OPEN', 'CLOSED', 'EITHER']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|end_time|date|None|False|An optional-ISO formatted timestamp. Only investigations whose createTime is before this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned|None|None|
+|index|integer|0|True|The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0|None|None|
+|size|integer|20|True|The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 1000|None|None|
+|start_time|date|None|False|An optional ISO-formatted timestamp. Only investigations whose createTime is after this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned|None|None|
+|statuses|string|CLOSED|True|An optional-comma separated set of investigation statuses. Only the investigation whose status matches one of the entries in the list will be returned. If this parameter is omitted investigations with any status may be returned|['OPEN', 'CLOSED', 'EITHER']|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -116,42 +190,6 @@ Example output:
     "size": 20,
     "total_pages": 1,
     "total_data": 2
-  }
-}
-```
-
-#### Set Status of Investigation Action
-
-This action is used to set the status of the investigation with the given ID.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id|string|None|True|The ID of the investigation to change the status of|None|
-|status|string|EITHER|True|The new status for the investigation |['OPEN', 'CLOSED']|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigation|investigation|True|The investigation for which the status was set|
-
-Example output:
-
-```
-{
-  "investigation": {
-    "id": "22b92896-392e-43f6-b595-a6ae58b130ef",
-    "title": "test",
-    "status": "CLOSED",
-    "source": "MANUAL",
-    "assignee": {
-      "name": "example",
-      "email": "test@example.com"
-    },
-    "alerts": [],
-    "created_time": "2019-06-04T15:38:11.358Z"
   }
 }
 ```
