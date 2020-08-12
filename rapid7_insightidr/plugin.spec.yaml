@@ -238,7 +238,7 @@ actions:
         description: IP addresses to add. e.g. ["10.0.0.1","10.0.0.2"]
         type: "[]string"
         required: false
-        example: '["10.0.0.1","10.0.0.2"]'
+        example: ["10.0.0.1","10.0.0.2"]
       hashes:
         title: Process Hashes
         description: Process hashes to add. e.g. ["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]
@@ -250,13 +250,13 @@ actions:
         description: Domain names to add. e.g. ["rapid7.com","google.com"]
         type: "[]string"
         required: false
-        example: '["rapid7.com","google.com"]'
+        example: ["rapid7.com","google.com"]
       urls:
         title: URLs
         description: URL's to add. e.g. ["https://example.com","https://test.com"]
         type: "[]string"
         required: false
-        example: '["https://example.com","https://test.com"]'
+        example: ["https://example.com","https://test.com"]
     output:
       rejected_indicators:
         title: Rejected Indicators
