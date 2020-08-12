@@ -257,9 +257,6 @@ types:
     cvssv3:
       type: cvssv3_obj
       required: false
-    nvdDescription:
-      type: string
-      required: false
     relatedLinks:
       type: '[]string'
       required: false

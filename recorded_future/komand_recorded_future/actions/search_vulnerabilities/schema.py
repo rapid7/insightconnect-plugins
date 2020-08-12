@@ -602,8 +602,8 @@ class SearchVulnerabilitiesOutput(komand.Output):
         },
         "nvdDescription": {
           "type": "string",
-          "title": "NvdDescription",
-          "order": 17
+          "title": "NVD Description",
+          "order": 4
         },
         "rawrisk": {
           "type": "array",
@@ -627,7 +627,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "items": {
             "type": "string"
           },
-          "order": 18
+          "order": 17
         },
         "risk": {
           "$ref": "#/definitions/risk_obj",
