@@ -34,7 +34,7 @@ Example input:
 
 #### Set Status of Investigation
 
-This action is used to set the status of the investigation with the given ID.
+This action is used to set the status of the investigation by the Investigation ID.
 
 ##### Input
 
@@ -218,4 +218,3 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/)
-
