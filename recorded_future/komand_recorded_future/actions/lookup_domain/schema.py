@@ -89,7 +89,7 @@ class LookupDomainOutput(komand.Output):
       "order": 4
     },
     "entity": {
-      "$ref": "#/definitions/entity",
+      "$ref": "#/definitions/entity_obj",
       "title": "Entity",
       "description": "Entity",
       "order": 1
@@ -105,7 +105,7 @@ class LookupDomainOutput(komand.Output):
       "title": "Metrics",
       "description": "Metrics",
       "items": {
-        "$ref": "#/definitions/metrics"
+        "$ref": "#/definitions/metrics_obj"
       },
       "order": 6
     },
@@ -143,7 +143,7 @@ class LookupDomainOutput(komand.Output):
       "order": 9
     },
     "timestamps": {
-      "$ref": "#/definitions/timestamps",
+      "$ref": "#/definitions/timestamps_obj",
       "title": "Timestamps",
       "description": "Timestamps",
       "order": 2
@@ -166,9 +166,9 @@ class LookupDomainOutput(komand.Output):
         }
       }
     },
-    "entities": {
+    "entities_obj": {
       "type": "object",
-      "title": "entities",
+      "title": "entities_obj",
       "properties": {
         "count": {
           "type": "integer",
@@ -176,15 +176,15 @@ class LookupDomainOutput(komand.Output):
           "order": 1
         },
         "entity": {
-          "$ref": "#/definitions/entity",
+          "$ref": "#/definitions/entity_obj",
           "title": "Entity",
           "order": 2
         }
       },
       "definitions": {
-        "entity": {
+        "entity_obj": {
           "type": "object",
-          "title": "entity",
+          "title": "entity_obj",
           "properties": {
             "description": {
               "type": "string",
@@ -210,9 +210,9 @@ class LookupDomainOutput(komand.Output):
         }
       }
     },
-    "entity": {
+    "entity_obj": {
       "type": "object",
-      "title": "entity",
+      "title": "entity_obj",
       "properties": {
         "description": {
           "type": "string",
@@ -267,9 +267,9 @@ class LookupDomainOutput(komand.Output):
         }
       }
     },
-    "metrics": {
+    "metrics_obj": {
       "type": "object",
-      "title": "metrics",
+      "title": "metrics_obj",
       "properties": {
         "type": {
           "type": "string",
@@ -277,7 +277,7 @@ class LookupDomainOutput(komand.Output):
           "order": 1
         },
         "value": {
-          "type": "integer",
+          "type": "number",
           "title": "Value",
           "order": 2
         }
@@ -291,7 +291,7 @@ class LookupDomainOutput(komand.Output):
           "type": "array",
           "title": "Entities",
           "items": {
-            "$ref": "#/definitions/entities"
+            "$ref": "#/definitions/entities_obj"
           },
           "order": 1
         },
@@ -302,9 +302,9 @@ class LookupDomainOutput(komand.Output):
         }
       },
       "definitions": {
-        "entities": {
+        "entities_obj": {
           "type": "object",
-          "title": "entities",
+          "title": "entities_obj",
           "properties": {
             "count": {
               "type": "integer",
@@ -312,15 +312,15 @@ class LookupDomainOutput(komand.Output):
               "order": 1
             },
             "entity": {
-              "$ref": "#/definitions/entity",
+              "$ref": "#/definitions/entity_obj",
               "title": "Entity",
               "order": 2
             }
           },
           "definitions": {
-            "entity": {
+            "entity_obj": {
               "type": "object",
-              "title": "entity",
+              "title": "entity_obj",
               "properties": {
                 "description": {
                   "type": "string",
@@ -346,9 +346,9 @@ class LookupDomainOutput(komand.Output):
             }
           }
         },
-        "entity": {
+        "entity_obj": {
           "type": "object",
-          "title": "entity",
+          "title": "entity_obj",
           "properties": {
             "description": {
               "type": "string",
@@ -482,9 +482,9 @@ class LookupDomainOutput(komand.Output):
         }
       }
     },
-    "timestamps": {
+    "timestamps_obj": {
       "type": "object",
-      "title": "timestamps",
+      "title": "timestamps_obj",
       "properties": {
         "firstSeen": {
           "type": "string",

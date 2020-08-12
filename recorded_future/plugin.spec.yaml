@@ -9,7 +9,7 @@ status: []
 description: "Recorded Future arms threat analysts, security operators, and incident
   responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7
 InsightConnect, users can search domain lists, entity lists, and more"
-version: 1.6.0
+version: 2.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/recorded_future
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -34,7 +34,7 @@ types:
     date:
       type: string
       required: false
-  entity:
+  entity_obj:
     id:
       type: string
       required: false
@@ -47,23 +47,23 @@ types:
     description:
       type: string
       required: false
-  metrics:
+  metrics_obj:
     type:
       type: string
       required: false
     value:
-      type: integer
+      type: float
       required: false
-  entities:
+  entities_obj:
     count:
       type: integer
       required: false
     entity:
-      type: entity
+      type: entity_obj
       required: false
   relatedEntities:
     entities:
-      type: '[]entities'
+      type: '[]entities_obj'
       required: false
     type:
       type: string
@@ -127,7 +127,7 @@ types:
     url:
       type: string
       required: false
-  timestamps:
+  timestamps_obj:
     firstSeen:
       title: First Seen
       type: string
@@ -150,7 +150,7 @@ types:
       type: string
       required: false
       title: Criticality Label
-  cvss:
+  cvss_obj:
     confidentiality:
       type: string
       required: false
@@ -166,7 +166,7 @@ types:
       type: string
       required: false
     score:
-      type: integer
+      type: float
       required: false
     published:
       type: string
@@ -181,7 +181,16 @@ types:
       title: Access Vector
       type: string
       required: false
-
+    version:
+      type: string
+      required: false
+  cvssv3_obj:
+    attackComplexity:
+      type: string
+      required: false
+    attackVector:
+      type: string
+      required: false
   rawrisk_obj:
     rule:
       title: "Rule"
@@ -199,7 +208,7 @@ types:
       type: '[]counts'
       required: false
     cvss:
-      type: cvss
+      type: cvss_obj
       required: false
     cpe:
       type: '[]string'
@@ -209,7 +218,7 @@ types:
       type: string
       required: false
     entity:
-      type: entity
+      type: entity_obj
       required: false
     hashAlgorithm:
       title: Hash Algorithm
@@ -220,7 +229,7 @@ types:
       type: string
       required: false
     metrics:
-      type: '[]metrics'
+      type: '[]metrics_obj'
       required: false
     relatedEntities:
       title: Related Entities
@@ -237,10 +246,22 @@ types:
       type: '[]object'
       required: false
     timestamps:
-      type: timestamps
+      type: timestamps_obj
       required: false
     rawrisk:
       type: '[]rawrisk_obj'
+      required: false
+    commonNames:
+      type: '[]string'
+      required: false
+    cvssv3:
+      type: cvssv3_obj
+      required: false
+    nvdDescription:
+      type: string
+      required: false
+    relatedLinks:
+      type: '[]string'
       required: false
   location_data:
     continent:
@@ -295,7 +316,7 @@ types:
       type: '[]counts'
       required: false
     entity:
-      type: entity
+      type: entity_obj
       required: false
     hashAlgorithm:
       title: Hash Algorithm
@@ -306,7 +327,7 @@ types:
       type: string
       required: false
     metrics:
-      type: '[]metrics'
+      type: '[]metrics_obj'
       required: false
     relatedEntities:
       title: Related Entities
@@ -323,7 +344,7 @@ types:
       type: '[]object'
       required: false
     timestamps:
-      type: timestamps
+      type: timestamps_obj
       required: false
   location:
     asn:
@@ -364,7 +385,7 @@ connection:
     type: credential_secret_key
     description: API Key
     required: true
-    example: 9de5069c5afe602b2ea0a04b66beb2c0
+    example: {"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}
 
 actions:
   download_domain_risk_list:
@@ -494,11 +515,11 @@ actions:
         example: Domain look up performed by InsightConnect
     output:
       entity:
-        type: entity
+        type: entity_obj
         description: Entity
         required: false
       timestamps:
-        type: timestamps
+        type: timestamps_obj
         description: Timestamps
         required: false
       analystNotes:
@@ -519,7 +540,7 @@ actions:
       metrics:
         title: "Metrics"
         description: "Metrics"
-        type: "[]metrics"
+        type: "[]metrics_obj"
         required: false
       relatedEntities:
         title: "Related Entities"
@@ -553,7 +574,7 @@ actions:
         example: example
     output:
       entities:
-        type: '[]entity'
+        type: '[]entity_obj'
         description: Entities
         required: false
   lookup_entity_list:
@@ -567,7 +588,7 @@ actions:
         example: "report:Oe5eg5"
     output:
       entities:
-        type: '[]entity'
+        type: '[]entity_obj'
         description: Entities
         required: false
   download_hash_risk_list:
@@ -685,11 +706,11 @@ actions:
         example: Hash look up performed by InsightConnect
     output:
       entity:
-        type: entity
+        type: entity_obj
         description: Entity
         required: false
       timestamps:
-        type: timestamps
+        type: timestamps_obj
         description: Timestamps
         required: false
       analystNotes:
@@ -715,7 +736,7 @@ actions:
       metrics:
         title: "Metrics"
         description: "Metrics"
-        type: "[]metrics"
+        type: "[]metrics_obj"
         required: false
       relatedEntities:
         title: "Related Entities"
@@ -879,11 +900,11 @@ actions:
         example: IP look up performed by InsightConnect
     output:
       entity:
-        type: entity
+        type: entity_obj
         description: Entity
         required: false
       timestamps:
-        type: timestamps
+        type: timestamps_obj
         description: Timestamps
         required: false
       analystNotes:
@@ -904,7 +925,7 @@ actions:
       metrics:
         title: "Metrics"
         description: "Metrics"
-        type: "[]metrics"
+        type: "[]metrics_obj"
         required: false
       relatedEntities:
         title: "Related Entities"
@@ -1007,11 +1028,11 @@ actions:
         example: ShciZX
     output:
       entity:
-        type: entity
+        type: entity_obj
         description: Entity
         required: false
       timestamps:
-        type: timestamps
+        type: timestamps_obj
         description: Timestamps
         required: false
   download_vulnerability_risk_list:
@@ -1152,11 +1173,11 @@ actions:
         example: URL look up performed by InsightConnect
     output:
       entity:
-        type: entity
+        type: entity_obj
         description: Entity
         required: false
       timestamps:
-        type: timestamps
+        type: timestamps_obj
         description: Timestamps
         required: false
       analystNotes:
@@ -1172,7 +1193,7 @@ actions:
       metrics:
         title: "Metrics"
         description: "Metrics"
-        type: "[]metrics"
+        type: "[]metrics_obj"
         required: false
       relatedEntities:
         title: "Related Entities"

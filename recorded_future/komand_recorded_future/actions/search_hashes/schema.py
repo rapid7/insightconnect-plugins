@@ -122,9 +122,9 @@ class SearchHashesOutput(komand.Output):
         }
       }
     },
-    "entities": {
+    "entities_obj": {
       "type": "object",
-      "title": "entities",
+      "title": "entities_obj",
       "properties": {
         "count": {
           "type": "integer",
@@ -132,15 +132,15 @@ class SearchHashesOutput(komand.Output):
           "order": 1
         },
         "entity": {
-          "$ref": "#/definitions/entity",
+          "$ref": "#/definitions/entity_obj",
           "title": "Entity",
           "order": 2
         }
       },
       "definitions": {
-        "entity": {
+        "entity_obj": {
           "type": "object",
-          "title": "entity",
+          "title": "entity_obj",
           "properties": {
             "description": {
               "type": "string",
@@ -166,9 +166,9 @@ class SearchHashesOutput(komand.Output):
         }
       }
     },
-    "entity": {
+    "entity_obj": {
       "type": "object",
-      "title": "entity",
+      "title": "entity_obj",
       "properties": {
         "description": {
           "type": "string",
@@ -223,9 +223,9 @@ class SearchHashesOutput(komand.Output):
         }
       }
     },
-    "metrics": {
+    "metrics_obj": {
       "type": "object",
-      "title": "metrics",
+      "title": "metrics_obj",
       "properties": {
         "type": {
           "type": "string",
@@ -233,7 +233,7 @@ class SearchHashesOutput(komand.Output):
           "order": 1
         },
         "value": {
-          "type": "integer",
+          "type": "number",
           "title": "Value",
           "order": 2
         }
@@ -247,7 +247,7 @@ class SearchHashesOutput(komand.Output):
           "type": "array",
           "title": "Entities",
           "items": {
-            "$ref": "#/definitions/entities"
+            "$ref": "#/definitions/entities_obj"
           },
           "order": 1
         },
@@ -258,9 +258,9 @@ class SearchHashesOutput(komand.Output):
         }
       },
       "definitions": {
-        "entities": {
+        "entities_obj": {
           "type": "object",
-          "title": "entities",
+          "title": "entities_obj",
           "properties": {
             "count": {
               "type": "integer",
@@ -268,15 +268,15 @@ class SearchHashesOutput(komand.Output):
               "order": 1
             },
             "entity": {
-              "$ref": "#/definitions/entity",
+              "$ref": "#/definitions/entity_obj",
               "title": "Entity",
               "order": 2
             }
           },
           "definitions": {
-            "entity": {
+            "entity_obj": {
               "type": "object",
-              "title": "entity",
+              "title": "entity_obj",
               "properties": {
                 "description": {
                   "type": "string",
@@ -302,9 +302,9 @@ class SearchHashesOutput(komand.Output):
             }
           }
         },
-        "entity": {
+        "entity_obj": {
           "type": "object",
-          "title": "entity",
+          "title": "entity_obj",
           "properties": {
             "description": {
               "type": "string",
@@ -415,7 +415,7 @@ class SearchHashesOutput(komand.Output):
           "order": 1
         },
         "entity": {
-          "$ref": "#/definitions/entity",
+          "$ref": "#/definitions/entity_obj",
           "title": "Entity",
           "order": 2
         },
@@ -433,7 +433,7 @@ class SearchHashesOutput(komand.Output):
           "type": "array",
           "title": "Metrics",
           "items": {
-            "$ref": "#/definitions/metrics"
+            "$ref": "#/definitions/metrics_obj"
           },
           "order": 5
         },
@@ -467,7 +467,7 @@ class SearchHashesOutput(komand.Output):
           "order": 9
         },
         "timestamps": {
-          "$ref": "#/definitions/timestamps",
+          "$ref": "#/definitions/timestamps_obj",
           "title": "Timestamps",
           "order": 10
         }
@@ -489,9 +489,9 @@ class SearchHashesOutput(komand.Output):
             }
           }
         },
-        "entities": {
+        "entities_obj": {
           "type": "object",
-          "title": "entities",
+          "title": "entities_obj",
           "properties": {
             "count": {
               "type": "integer",
@@ -499,15 +499,15 @@ class SearchHashesOutput(komand.Output):
               "order": 1
             },
             "entity": {
-              "$ref": "#/definitions/entity",
+              "$ref": "#/definitions/entity_obj",
               "title": "Entity",
               "order": 2
             }
           },
           "definitions": {
-            "entity": {
+            "entity_obj": {
               "type": "object",
-              "title": "entity",
+              "title": "entity_obj",
               "properties": {
                 "description": {
                   "type": "string",
@@ -533,9 +533,9 @@ class SearchHashesOutput(komand.Output):
             }
           }
         },
-        "entity": {
+        "entity_obj": {
           "type": "object",
-          "title": "entity",
+          "title": "entity_obj",
           "properties": {
             "description": {
               "type": "string",
@@ -590,9 +590,9 @@ class SearchHashesOutput(komand.Output):
             }
           }
         },
-        "metrics": {
+        "metrics_obj": {
           "type": "object",
-          "title": "metrics",
+          "title": "metrics_obj",
           "properties": {
             "type": {
               "type": "string",
@@ -600,7 +600,7 @@ class SearchHashesOutput(komand.Output):
               "order": 1
             },
             "value": {
-              "type": "integer",
+              "type": "number",
               "title": "Value",
               "order": 2
             }
@@ -614,7 +614,7 @@ class SearchHashesOutput(komand.Output):
               "type": "array",
               "title": "Entities",
               "items": {
-                "$ref": "#/definitions/entities"
+                "$ref": "#/definitions/entities_obj"
               },
               "order": 1
             },
@@ -625,9 +625,9 @@ class SearchHashesOutput(komand.Output):
             }
           },
           "definitions": {
-            "entities": {
+            "entities_obj": {
               "type": "object",
-              "title": "entities",
+              "title": "entities_obj",
               "properties": {
                 "count": {
                   "type": "integer",
@@ -635,15 +635,15 @@ class SearchHashesOutput(komand.Output):
                   "order": 1
                 },
                 "entity": {
-                  "$ref": "#/definitions/entity",
+                  "$ref": "#/definitions/entity_obj",
                   "title": "Entity",
                   "order": 2
                 }
               },
               "definitions": {
-                "entity": {
+                "entity_obj": {
                   "type": "object",
-                  "title": "entity",
+                  "title": "entity_obj",
                   "properties": {
                     "description": {
                       "type": "string",
@@ -669,9 +669,9 @@ class SearchHashesOutput(komand.Output):
                 }
               }
             },
-            "entity": {
+            "entity_obj": {
               "type": "object",
-              "title": "entity",
+              "title": "entity_obj",
               "properties": {
                 "description": {
                   "type": "string",
@@ -805,9 +805,9 @@ class SearchHashesOutput(komand.Output):
             }
           }
         },
-        "timestamps": {
+        "timestamps_obj": {
           "type": "object",
-          "title": "timestamps",
+          "title": "timestamps_obj",
           "properties": {
             "firstSeen": {
               "type": "string",
@@ -859,9 +859,9 @@ class SearchHashesOutput(komand.Output):
         }
       }
     },
-    "timestamps": {
+    "timestamps_obj": {
       "type": "object",
-      "title": "timestamps",
+      "title": "timestamps_obj",
       "properties": {
         "firstSeen": {
           "type": "string",

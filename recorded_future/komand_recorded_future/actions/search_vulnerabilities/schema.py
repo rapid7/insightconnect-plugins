@@ -117,9 +117,9 @@ class SearchVulnerabilitiesOutput(komand.Output):
         }
       }
     },
-    "cvss": {
+    "cvss_obj": {
       "type": "object",
-      "title": "cvss",
+      "title": "cvss_obj",
       "properties": {
         "accessComplexity": {
           "type": "string",
@@ -162,15 +162,36 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "order": 6
         },
         "score": {
-          "type": "integer",
+          "type": "number",
           "title": "Score",
           "order": 5
+        },
+        "version": {
+          "type": "string",
+          "title": "Version",
+          "order": 10
         }
       }
     },
-    "entities": {
+    "cvssv3_obj": {
       "type": "object",
-      "title": "entities",
+      "title": "cvssv3_obj",
+      "properties": {
+        "attackComplexity": {
+          "type": "string",
+          "title": "AttackComplexity",
+          "order": 1
+        },
+        "attackVector": {
+          "type": "string",
+          "title": "AttackVector",
+          "order": 2
+        }
+      }
+    },
+    "entities_obj": {
+      "type": "object",
+      "title": "entities_obj",
       "properties": {
         "count": {
           "type": "integer",
@@ -178,15 +199,15 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "order": 1
         },
         "entity": {
-          "$ref": "#/definitions/entity",
+          "$ref": "#/definitions/entity_obj",
           "title": "Entity",
           "order": 2
         }
       },
       "definitions": {
-        "entity": {
+        "entity_obj": {
           "type": "object",
-          "title": "entity",
+          "title": "entity_obj",
           "properties": {
             "description": {
               "type": "string",
@@ -212,9 +233,9 @@ class SearchVulnerabilitiesOutput(komand.Output):
         }
       }
     },
-    "entity": {
+    "entity_obj": {
       "type": "object",
-      "title": "entity",
+      "title": "entity_obj",
       "properties": {
         "description": {
           "type": "string",
@@ -269,9 +290,9 @@ class SearchVulnerabilitiesOutput(komand.Output):
         }
       }
     },
-    "metrics": {
+    "metrics_obj": {
       "type": "object",
-      "title": "metrics",
+      "title": "metrics_obj",
       "properties": {
         "type": {
           "type": "string",
@@ -279,7 +300,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "order": 1
         },
         "value": {
-          "type": "integer",
+          "type": "number",
           "title": "Value",
           "order": 2
         }
@@ -311,7 +332,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "type": "array",
           "title": "Entities",
           "items": {
-            "$ref": "#/definitions/entities"
+            "$ref": "#/definitions/entities_obj"
           },
           "order": 1
         },
@@ -322,9 +343,9 @@ class SearchVulnerabilitiesOutput(komand.Output):
         }
       },
       "definitions": {
-        "entities": {
+        "entities_obj": {
           "type": "object",
-          "title": "entities",
+          "title": "entities_obj",
           "properties": {
             "count": {
               "type": "integer",
@@ -332,15 +353,15 @@ class SearchVulnerabilitiesOutput(komand.Output):
               "order": 1
             },
             "entity": {
-              "$ref": "#/definitions/entity",
+              "$ref": "#/definitions/entity_obj",
               "title": "Entity",
               "order": 2
             }
           },
           "definitions": {
-            "entity": {
+            "entity_obj": {
               "type": "object",
-              "title": "entity",
+              "title": "entity_obj",
               "properties": {
                 "description": {
                   "type": "string",
@@ -366,9 +387,9 @@ class SearchVulnerabilitiesOutput(komand.Output):
             }
           }
         },
-        "entity": {
+        "entity_obj": {
           "type": "object",
-          "title": "entity",
+          "title": "entity_obj",
           "properties": {
             "description": {
               "type": "string",
@@ -502,9 +523,9 @@ class SearchVulnerabilitiesOutput(komand.Output):
         }
       }
     },
-    "timestamps": {
+    "timestamps_obj": {
       "type": "object",
-      "title": "timestamps",
+      "title": "timestamps_obj",
       "properties": {
         "firstSeen": {
           "type": "string",
@@ -522,6 +543,14 @@ class SearchVulnerabilitiesOutput(komand.Output):
       "type": "object",
       "title": "vulnerability_search_data",
       "properties": {
+        "commonNames": {
+          "type": "array",
+          "title": "CommonNames",
+          "items": {
+            "type": "string"
+          },
+          "order": 15
+        },
         "counts": {
           "type": "array",
           "title": "Counts",
@@ -539,12 +568,17 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "order": 3
         },
         "cvss": {
-          "$ref": "#/definitions/cvss",
+          "$ref": "#/definitions/cvss_obj",
           "title": "Cvss",
           "order": 2
         },
+        "cvssv3": {
+          "$ref": "#/definitions/cvssv3_obj",
+          "title": "Cvssv3",
+          "order": 16
+        },
         "entity": {
-          "$ref": "#/definitions/entity",
+          "$ref": "#/definitions/entity_obj",
           "title": "Entity",
           "order": 5
         },
@@ -562,14 +596,14 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "type": "array",
           "title": "Metrics",
           "items": {
-            "$ref": "#/definitions/metrics"
+            "$ref": "#/definitions/metrics_obj"
           },
           "order": 8
         },
         "nvdDescription": {
           "type": "string",
-          "title": "NVD Description",
-          "order": 4
+          "title": "NvdDescription",
+          "order": 17
         },
         "rawrisk": {
           "type": "array",
@@ -586,6 +620,14 @@ class SearchVulnerabilitiesOutput(komand.Output):
             "$ref": "#/definitions/relatedEntities"
           },
           "order": 9
+        },
+        "relatedLinks": {
+          "type": "array",
+          "title": "RelatedLinks",
+          "items": {
+            "type": "string"
+          },
+          "order": 18
         },
         "risk": {
           "$ref": "#/definitions/risk_obj",
@@ -609,7 +651,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "order": 12
         },
         "timestamps": {
-          "$ref": "#/definitions/timestamps",
+          "$ref": "#/definitions/timestamps_obj",
           "title": "Timestamps",
           "order": 13
         }
@@ -631,9 +673,9 @@ class SearchVulnerabilitiesOutput(komand.Output):
             }
           }
         },
-        "cvss": {
+        "cvss_obj": {
           "type": "object",
-          "title": "cvss",
+          "title": "cvss_obj",
           "properties": {
             "accessComplexity": {
               "type": "string",
@@ -676,15 +718,36 @@ class SearchVulnerabilitiesOutput(komand.Output):
               "order": 6
             },
             "score": {
-              "type": "integer",
+              "type": "number",
               "title": "Score",
               "order": 5
+            },
+            "version": {
+              "type": "string",
+              "title": "Version",
+              "order": 10
             }
           }
         },
-        "entities": {
+        "cvssv3_obj": {
           "type": "object",
-          "title": "entities",
+          "title": "cvssv3_obj",
+          "properties": {
+            "attackComplexity": {
+              "type": "string",
+              "title": "AttackComplexity",
+              "order": 1
+            },
+            "attackVector": {
+              "type": "string",
+              "title": "AttackVector",
+              "order": 2
+            }
+          }
+        },
+        "entities_obj": {
+          "type": "object",
+          "title": "entities_obj",
           "properties": {
             "count": {
               "type": "integer",
@@ -692,15 +755,15 @@ class SearchVulnerabilitiesOutput(komand.Output):
               "order": 1
             },
             "entity": {
-              "$ref": "#/definitions/entity",
+              "$ref": "#/definitions/entity_obj",
               "title": "Entity",
               "order": 2
             }
           },
           "definitions": {
-            "entity": {
+            "entity_obj": {
               "type": "object",
-              "title": "entity",
+              "title": "entity_obj",
               "properties": {
                 "description": {
                   "type": "string",
@@ -726,9 +789,9 @@ class SearchVulnerabilitiesOutput(komand.Output):
             }
           }
         },
-        "entity": {
+        "entity_obj": {
           "type": "object",
-          "title": "entity",
+          "title": "entity_obj",
           "properties": {
             "description": {
               "type": "string",
@@ -783,9 +846,9 @@ class SearchVulnerabilitiesOutput(komand.Output):
             }
           }
         },
-        "metrics": {
+        "metrics_obj": {
           "type": "object",
-          "title": "metrics",
+          "title": "metrics_obj",
           "properties": {
             "type": {
               "type": "string",
@@ -793,7 +856,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
               "order": 1
             },
             "value": {
-              "type": "integer",
+              "type": "number",
               "title": "Value",
               "order": 2
             }
@@ -825,7 +888,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
               "type": "array",
               "title": "Entities",
               "items": {
-                "$ref": "#/definitions/entities"
+                "$ref": "#/definitions/entities_obj"
               },
               "order": 1
             },
@@ -836,9 +899,9 @@ class SearchVulnerabilitiesOutput(komand.Output):
             }
           },
           "definitions": {
-            "entities": {
+            "entities_obj": {
               "type": "object",
-              "title": "entities",
+              "title": "entities_obj",
               "properties": {
                 "count": {
                   "type": "integer",
@@ -846,15 +909,15 @@ class SearchVulnerabilitiesOutput(komand.Output):
                   "order": 1
                 },
                 "entity": {
-                  "$ref": "#/definitions/entity",
+                  "$ref": "#/definitions/entity_obj",
                   "title": "Entity",
                   "order": 2
                 }
               },
               "definitions": {
-                "entity": {
+                "entity_obj": {
                   "type": "object",
-                  "title": "entity",
+                  "title": "entity_obj",
                   "properties": {
                     "description": {
                       "type": "string",
@@ -880,9 +943,9 @@ class SearchVulnerabilitiesOutput(komand.Output):
                 }
               }
             },
-            "entity": {
+            "entity_obj": {
               "type": "object",
-              "title": "entity",
+              "title": "entity_obj",
               "properties": {
                 "description": {
                   "type": "string",
@@ -1016,9 +1079,9 @@ class SearchVulnerabilitiesOutput(komand.Output):
             }
           }
         },
-        "timestamps": {
+        "timestamps_obj": {
           "type": "object",
-          "title": "timestamps",
+          "title": "timestamps_obj",
           "properties": {
             "firstSeen": {
               "type": "string",

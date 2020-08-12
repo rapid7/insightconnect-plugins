@@ -49,15 +49,15 @@ class SearchEntityListsOutput(komand.Output):
       "title": "Entities",
       "description": "Entities",
       "items": {
-        "$ref": "#/definitions/entity"
+        "$ref": "#/definitions/entity_obj"
       },
       "order": 1
     }
   },
   "definitions": {
-    "entity": {
+    "entity_obj": {
       "type": "object",
-      "title": "entity",
+      "title": "entity_obj",
       "properties": {
         "description": {
           "type": "string",

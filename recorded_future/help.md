@@ -28,14 +28,12 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|API Key|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|api_key|credential_secret_key|None|True|API Key|None|None|
 
 Example input:
 
 ```
-{
-  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0"
-}
+
 ```
 
 ## Technical Details
@@ -106,13 +104,6 @@ This action is used to search for results related to a specific parent domain.
 Example input:
 
 ```
-{
-  "direction": "asc",
-  "from": 0,
-  "limit": 10,
-  "orderby": "Riskscore",
-  "parent": "example.com"
-}
 ```
 
 ##### Output
@@ -224,13 +215,6 @@ This action is used to search for data related to malware.
 Example input:
 
 ```
-{
-  "direction": "asc",
-  "freetext": "example",
-  "from": 0,
-  "limit": 10,
-  "orderby": "Riskscore"
-}
 ```
 
 ##### Output
@@ -298,7 +282,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|entities|[]entity|False|Entities|
+|entities|[]entity_obj|False|Entities|
 
 Example output:
 
@@ -612,7 +596,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|entities|[]entity|False|Entities|
+|entities|[]entity_obj|False|Entities|
 
 Example output:
 
@@ -665,8 +649,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|entity|entity|False|Entity|
-|timestamps|timestamps|False|Timestamps|
+|entity|entity_obj|False|Entity|
+|timestamps|timestamps_obj|False|Timestamps|
 
 Example output:
 
@@ -718,14 +702,14 @@ Example input:
 |----|----|--------|-----------|
 |analystNotes|[]string|False|Notes from an analyst|
 |counts|[]counts|False|Counts|
-|entity|entity|False|Entity|
+|entity|entity_obj|False|Entity|
 |intelCard|string|False|Intel card|
-|metrics|[]metrics|False|Metrics|
+|metrics|[]metrics_obj|False|Metrics|
 |relatedEntities|[]relatedEntities|False|Related entities|
 |risk|risk_obj|False|Risk|
 |sightings|[]sightings|False|Sightings|
 |threatLists|[]string|False|Threat lists|
-|timestamps|timestamps|False|Timestamps|
+|timestamps|timestamps_obj|False|Timestamps|
 
 Example output:
 
@@ -777,15 +761,15 @@ Example input:
 |----|----|--------|-----------|
 |analystNotes|[]string|False|Notes from an analyst|
 |counts|[]counts|False|Counts|
-|entity|entity|False|Entity|
+|entity|entity_obj|False|Entity|
 |hashAlgorithm|string|False|Hash Algorithm|
 |intelCard|string|False|Intel card|
-|metrics|[]metrics|False|Metrics|
+|metrics|[]metrics_obj|False|Metrics|
 |relatedEntities|[]relatedEntities|False|Related entities|
 |risk|risk_obj|False|Risk|
 |sightings|[]sightings|False|Sightings|
 |threatLists|[]string|False|Threat Lists|
-|timestamps|timestamps|False|Timestamps|
+|timestamps|timestamps_obj|False|Timestamps|
 
 Example output:
 
@@ -863,12 +847,12 @@ Example input:
 |----|----|--------|-----------|
 |analystNotes|[]string|False|Notes from an analyst|
 |counts|[]counts|False|Counts|
-|entity|entity|False|Entity|
-|metrics|[]metrics|False|Metrics|
+|entity|entity_obj|False|Entity|
+|metrics|[]metrics_obj|False|Metrics|
 |relatedEntities|[]relatedEntities|False|Related entities|
 |risk|risk_obj|False|Risk|
 |sightings|[]sightings|False|Sightings|
-|timestamps|timestamps|False|Timestamps|
+|timestamps|timestamps_obj|False|Timestamps|
 
 Example output:
 
@@ -1113,17 +1097,17 @@ Example input:
 |----|----|--------|-----------|
 |analystNotes|[]string|False|Notes from an analyst|
 |counts|[]counts|False|Counts|
-|entity|entity|False|Entity|
+|entity|entity_obj|False|Entity|
 |found|boolean|False|Has the IP been found in Recorded Future|
 |intelCard|string|False|Intel card|
 |location|location|False|Location|
-|metrics|[]metrics|False|Metrics|
+|metrics|[]metrics_obj|False|Metrics|
 |relatedEntities|[]relatedEntities|False|Related entities|
 |risk|risk_obj|False|Risk|
 |riskyCIDRIPs|[]riskyCIDRIP|False|Risky CIDR IPs|
 |sightings|[]sightings|False|Sightings|
 |threatLists|[]string|False|Threat lists|
-|timestamps|timestamps|False|Timestamps|
+|timestamps|timestamps_obj|False|Timestamps|
 
 Example output:
 
