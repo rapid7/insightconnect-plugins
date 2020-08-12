@@ -208,6 +208,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.0 - New Action Assign User to Investigation
 * 1.1.1 - New spec and help.md format for the Extension Library
 * 1.1.0 - New Action Add Indicators to a Threat
 * 1.0.0 - Initial plugin

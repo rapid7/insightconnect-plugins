@@ -6,7 +6,7 @@ from komand_rapid7_insightidr import connection, actions, triggers
 
 Name = "Rapid7 InsightIDR"
 Vendor = "rapid7"
-Version = "1.1.1"
+Version = "1.2.0"
 Description = "This plugin allows you to add indicators to a threat and see the status of investigations"
 
 
