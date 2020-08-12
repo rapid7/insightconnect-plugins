@@ -20,12 +20,16 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|InsightIDR API key|None|None|
-|url|string|https://us.api.insight.rapid7.com|True|The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|None|
+|api_key|credential_secret_key|None|True|InsightIDR API key|None|4472f2g7-991z-4w70-li11-7552w8qm0266|
+|url|string|https://us.api.insight.rapid7.com|True|The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|https://us.api.insight.rapid7.com|
 
 Example input:
 
 ```
+{
+  "api_key": "4472f2g7-991z-4w70-li11-7552w8qm0266",
+  "url": "https://us.api.insight.rapid7.com"
+}
 ```
 
 ## Technical Details
@@ -40,12 +44,16 @@ This action is used to set the status of the investigation by the Investigation 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|The ID of the investigation to change the status of|None|None|
-|status|string|CLOSED|True|The new status for the investigation|['OPEN', 'CLOSED']|None|
+|id|string|None|True|The ID of the investigation to change the status of|None|174e4f99-2ac7-4481-9301-4d24c34baf06|
+|status|string|CLOSED|True|The new status for the investigation|['OPEN', 'CLOSED']|CLOSED|
 
 Example input:
 
 ```
+{
+  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
+  "status": "CLOSED"
+}
 ```
 
 ##### Output
@@ -57,6 +65,20 @@ Example input:
 Example output:
 
 ```
+{
+  "investigation": {
+    "id": "13d353b2-8939-468d-97df-d707d0e262b6",
+    "title": "Test Investigation",
+    "status": "OPEN",
+    "source": "MANUAL",
+    "assignee": {
+      "name": "Example User",
+      "email": "user@example.com"
+    },
+    "alerts": [],
+    "created_time": "2020-08-12T13:40:18.718Z"
+  }
+}
 ```
 
 #### Assign User to Investigation
@@ -89,6 +111,21 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true,
+  "investigation": {
+    "id": "13d353b2-8939-468d-97df-d707d0e262b6",
+    "title": "Test Investigation",
+    "status": "OPEN",
+    "source": "MANUAL",
+    "assignee": {
+      "name": "Example User",
+      "email": "user@example.com"
+    },
+    "alerts": [],
+    "created_time": "2020-08-12T13:40:18.718Z"
+  }
+}
 ```
 
 #### Add Indicators to a Threat
@@ -99,15 +136,22 @@ This action is used to add InsightIDR threat indicators to a threat with the giv
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|domain_names|[]string|None|False|Domain names to add. e.g. ["rapid7.com","google.com"]|None|None|
-|hashes|[]string|None|False|Process hashes to add. e.g. ["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]|None|None|
-|ips|[]string|None|False|IP addresses to add. e.g. ["10.0.0.1","10.0.0.2"]|None|None|
-|key|string|None|True|The key of a threat for which the indicators are going to be added. e.g. c9404e11-b81a-429d-9400-05c531f229c3|None|None|
-|urls|[]string|None|False|URL's to add. e.g. ["https://example.com","https://test.com"]|None|None|
+|domain_names|[]string|None|False|Domain names to add. e.g. ["rapid7.com","google.com"]|None|["rapid7.com","google.com"]|
+|hashes|[]string|None|False|Process hashes to add. e.g. ["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]|None|["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]|
+|ips|[]string|None|False|IP addresses to add. e.g. ["10.0.0.1","10.0.0.2"]|None|["10.0.0.1","10.0.0.2"]|
+|key|string|None|True|The key of a threat for which the indicators are going to be added. e.g. c9404e11-b81a-429d-9400-05c531f229c3|None|c9404e11-b81a-429d-9400-05c531f229c3|
+|urls|[]string|None|False|URL's to add. e.g. ["https://example.com","https://test.com"]|None|["https://example.com","https://test.com"]|
 
 Example input:
 
 ```
+{
+  "domain_names": "[\"rapid7.com\",\"google.com\"]",
+  "hashes": "[\"A94A8FE5CCB19BA61C4C0873D391E987982FBBD3\",\"C3499C2729730A7F807EFB8676A92DCB6F8A3F8F\"]",
+  "ips": "[\"10.0.0.1\",\"10.0.0.2\"]",
+  "key": "c9404e11-b81a-429d-9400-05c531f229c3",
+  "urls": "[\"https://example.com\",\"https://test.com\"]"
+}
 ```
 
 ##### Output
@@ -141,15 +185,22 @@ This action is used to retrieve a page of investigations matching the given requ
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|end_time|date|None|False|An optional-ISO formatted timestamp. Only investigations whose createTime is before this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned|None|None|
-|index|integer|0|True|The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0|None|None|
-|size|integer|20|True|The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 1000|None|None|
-|start_time|date|None|False|An optional ISO-formatted timestamp. Only investigations whose createTime is after this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned|None|None|
-|statuses|string|CLOSED|True|An optional-comma separated set of investigation statuses. Only the investigation whose status matches one of the entries in the list will be returned. If this parameter is omitted investigations with any status may be returned|['OPEN', 'CLOSED', 'EITHER']|None|
+|end_time|date|None|False|An optional-ISO formatted timestamp. Only investigations whose createTime is before this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned|None|2020-06-01T12:11:13+05:30|
+|index|integer|0|True|The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0|None|0|
+|size|integer|20|True|The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 1000|None|20|
+|start_time|date|None|False|An optional ISO-formatted timestamp. Only investigations whose createTime is after this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned|None|2020-06-01T12:11:13+05:30|
+|statuses|string|CLOSED|True|An optional-comma separated set of investigation statuses. Only the investigation whose status matches one of the entries in the list will be returned. If this parameter is omitted investigations with any status may be returned|['OPEN', 'CLOSED', 'EITHER']|CLOSED|
 
 Example input:
 
 ```
+{
+  "end_time": "2020-06-01T12:11:13+05:30",
+  "index": 0,
+  "size": 20,
+  "start_time": "2020-06-01T12:11:13+05:30",
+  "statuses": "CLOSED"
+}
 ```
 
 ##### Output

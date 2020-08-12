@@ -132,12 +132,14 @@ connection:
     description: InsightIDR API key
     type: credential_secret_key
     required: true
+    example: 4472f2g7-991z-4w70-li11-7552w8qm0266
   url:
     title: URL
     description: The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com
     type: string
     required: true
     default: https://us.api.insight.rapid7.com
+    example: https://us.api.insight.rapid7.com
 
 actions:
   list_investigations:
@@ -150,6 +152,7 @@ actions:
         type: string
         required: true
         default: CLOSED
+        example: CLOSED
         enum:
         - "OPEN"
         - "CLOSED"
@@ -159,23 +162,27 @@ actions:
         description: An optional ISO-formatted timestamp. Only investigations whose createTime is after this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned
         type: date
         required: false
+        example: "2020-06-01T12:11:13+05:30"
       end_time:
         title: End Time
         description: An optional-ISO formatted timestamp. Only investigations whose createTime is before this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned
         type: date
         required: false
+        example: "2020-06-01T12:11:13+05:30"
       size:
         title: Size
         description: The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 1000
         type: integer
         required: true
         default: 20
+        example: 20
       index:
         title: Index
         description: The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0
         type: integer
         required: true
         default: 0
+        example: 0
     output:
       investigations:
         title: Investigations
@@ -198,12 +205,14 @@ actions:
         description: The ID of the investigation to change the status of
         type: string
         required: true
+        example: 174e4f99-2ac7-4481-9301-4d24c34baf06
       status:
         title: Status
         description: The new status for the investigation
         type: string
         required: true
         default: CLOSED
+        example: CLOSED
         enum:
         - "OPEN"
         - "CLOSED"
@@ -223,26 +232,31 @@ actions:
         description: The key of a threat for which the indicators are going to be added. e.g. c9404e11-b81a-429d-9400-05c531f229c3
         type: string
         required: true
+        example: c9404e11-b81a-429d-9400-05c531f229c3
       ips:
         title: IP Addresses
         description: IP addresses to add. e.g. ["10.0.0.1","10.0.0.2"]
         type: "[]string"
         required: false
+        example: '["10.0.0.1","10.0.0.2"]'
       hashes:
         title: Process Hashes
         description: Process hashes to add. e.g. ["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]
         type: "[]string"
         required: false
+        example: '["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]'
       domain_names:
         title: Domain Names
         description: Domain names to add. e.g. ["rapid7.com","google.com"]
         type: "[]string"
         required: false
+        example: '["rapid7.com","google.com"]'
       urls:
         title: URLs
         description: URL's to add. e.g. ["https://example.com","https://test.com"]
         type: "[]string"
         required: false
+        example: '["https://example.com","https://test.com"]'
     output:
       rejected_indicators:
         title: Rejected Indicators
