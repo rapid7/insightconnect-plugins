@@ -27,7 +27,7 @@ class AssignUserToInvestigation(komand.Action):
         try:
             response.raise_for_status()
         except Exception as e:
-            raise PluginException(cause="The IDR API returned an error",
+            raise PluginException(cause="The IDR API returned an error.",
                                   assistance="Usually this is the result of a bad user email or invalid investigation ID. Please see the following for more information:\n",
                                   data=response.text)
 
