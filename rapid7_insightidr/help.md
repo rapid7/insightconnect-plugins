@@ -234,7 +234,7 @@ Example output:
       "source": "MANUAL",
       "assignee": {
         "name": "example",
-        "email": "test@example.com"
+        "email": "user@example.com"
       },
       "alerts": [],
       "created_time": "2019-06-04T15:38:11.358Z"
