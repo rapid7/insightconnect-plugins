@@ -6,7 +6,7 @@ from komand_microsoft_atp import connection, actions, triggers
 
 Name = "Microsoft Windows Defender ATP"
 Vendor = "rapid7"
-Version = "4.3.0"
+Version = "4.4.0"
 Description = "The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files"
 
 
@@ -34,6 +34,8 @@ class ICONMicrosoftAtp(insightconnect_plugin_runtime.Plugin):
         self.add_action(actions.GetMachineInformation())
 
         self.add_action(actions.GetMachineVulnerabilities())
+
+        self.add_action(actions.GetSecurityRecommendations())
 
         self.add_action(actions.IsolateMachine())
 
