@@ -3,36 +3,45 @@ import re
 import sys
 import yaml
 import logging
+import markdown
+from bs4 import BeautifulSoup, NavigableString, Tag
 
 
 def main():
-    filename = ""
+    yaml = ""
+    md = ""
     path = ""
     correct_params = False
     try:
-        filename = sys.argv[1]
-        path = sys.argv[2]
+        yaml = sys.argv[1]
+        md = sys.argv[2]
+        path = sys.argv[3]
         correct_params = True
     except IndexError:
         logging.warning("ERROR: Insufficient parameters")
 
     if correct_params:
-        if verify_yaml(filename):
-            spec = open_and_read_spec(filename)
-            print("Read spec file at " + filename)
-            json_obj = parse_fields(spec)
+        if verify_yaml(yaml) and verify_md(md):
+            spec = open_and_read_spec(yaml)
+            print("Read spec file at " + yaml)
+            help_md = open_and_read_md(md)
+            print("Read md file at " + md)
+            json_obj = parse_fields(spec, help_md)
             print("Converted fields")
             write_to_json(json_obj, path)
             print("Wrote manifest at " + path)
         else:
-            logging.warning("ERROR: Wrong file type specified")
+            logging.warning("ERROR: Wrong file type(s) specified")
 
 
-def parse_fields(yaml_obj):
+# noinspection DuplicatedCode,DuplicatedCode
+def parse_fields(yaml_obj, md_obj):
     # Manifest Version -- mandatory
     manifest_obj = {"manifest_version": 1}
 
     resources = yaml_obj.get("resources")
+    if resources:
+        vendor_url = resources.get("vendor_url")
     cloud_ready = yaml_obj.get("cloud_ready")
     unique_name = yaml_obj.get("name")
     publisher = yaml_obj.get("vendor")
@@ -67,33 +76,43 @@ def parse_fields(yaml_obj):
 
     # Description -- mandatory
     # Tricky extraction of description from .md
-    manifest_obj["description"] = ""
+    manifest_obj["description"] = md_obj.get("Description")
 
     # Key Features -- mandatory
     # From .md
-    manifest_obj["key_features"] = []
+    manifest_obj["key_features"] = md_obj.get("Key Features")
 
     # Requirements -- Optional
     # Tricky reading from .md, due to different formatting....
-    manifest_obj["requirements"] = []
+    manifest_obj["requirements"] = md_obj.get("Requirements")
 
     # Resources -- optional
-    # Pull from .md
-    if resources:
-        vendor_url = resources.get("vendor_url")
-        if vendor_url:
-            manifest_obj["resources"] = [{"text": "Vendor Website", "url":vendor_url}]
-        else:
-            # Append references --> links from .md
-            manifest_obj["resources"] = []
+    # Equivalent to Links --> References from .md
+    manifest_obj["resources"] = md_obj.get("Links")
 
     # Version -- optional
     # Directly from yaml, parsed as string in manifest
     manifest_obj["version"] = str(yaml_obj.get("version"))
 
     # Version History....
-    # Should be from .md -- need to parse
-    manifest_obj["version_history"] = []
+    # Should be from .md -- small normalizations
+    versions = md_obj.get("Version History")
+    converted_versions_obj = []
+    version_changes = ""
+    version_number = ""
+    for version in versions:
+        version_info = version.split(" - ")
+        if version_info:
+            version_number = version_info[0].strip()
+            if len(version_info) >= 2:
+                version_changes = " - ".join(version_info[1:]).strip()
+            else:
+                version_changes = ""
+        else:
+            version_number = ""
+        version_obj = {"version": version_number, "date": "", "changes": version_changes}
+        converted_versions_obj.append(version_obj)
+    manifest_obj["version_history"] = converted_versions_obj
 
     # Publisher -- mandatory
     # "Vendor" field from yaml
@@ -126,7 +145,7 @@ def parse_fields(yaml_obj):
 
     if extension_type == "workflow" or extension_type == "plugin":
         if unique_name == "rapid7_insight_agent":
-            manifest_obj ["required_rapid7_features"] = ["orchestrator", "agent"]
+            manifest_obj["required_rapid7_features"] = ["orchestrator", "agent"]
         else:
             if not cloud_ready:
                 manifest_obj["required_rapid7_features"] = ["orchestrator"]
@@ -138,7 +157,7 @@ def parse_fields(yaml_obj):
     manifest_obj["status"] = yaml_obj.get("status")
 
     # Logos -- optional
-    manifest_obj["logos"] = {"primary": "extension.png", "secondary":[]}
+    manifest_obj["logos"] = {"primary": "extension.png", "secondary": []}
 
     # Display Options -- mandatory
     # No sense of this in spec/md -- only "credit_author" is valid
@@ -208,14 +227,128 @@ def parse_fields(yaml_obj):
     return manifest_obj
 
 
-def verify_yaml(file):
-    return file and re.match(r"^\S*.spec.yaml$", file)
-
-
 def open_and_read_spec(file):
     spec_file = open(file)
     loaded_spec = yaml.safe_load(spec_file)
     return loaded_spec
+
+
+def open_and_read_md(file):
+    markdown_file = open(file)
+    soup = md_convert_to_html(markdown_file)
+    md_dict = html_convert_to_dict(soup)
+    return md_dict
+
+
+def md_convert_to_html(file):
+    html = markdown.markdown(file.read())
+    soup = BeautifulSoup(html, features="html.parser")
+    return soup
+
+
+def html_convert_to_dict(soup):
+    header_dict = {}
+    # Find all top level headers
+    for header in soup.find_all("h1"):
+        key = header.get_text().strip()
+        text = ""
+        next_tag_block = header
+        while True:
+            next_tag_block = next_tag_block.nextSibling
+            # End of html
+            if next_tag_block is None:
+                break
+            # If a section is empty
+            # i.e. "Links"/"Requirements" section could be empty
+            if check_blank_section(str(next_tag_block)):
+                header_dict[key] = []
+                break
+            # If next node is text (usually does not add anything)
+            if isinstance(next_tag_block, NavigableString):
+                text += next_tag_block.strip()
+
+            # If next node is a tag
+            # ul tags are parsed out into strings accordingly
+            # h1 tags denote the end of a header section
+            # p tags include text that can be important for description/bullet points
+            if isinstance(next_tag_block, Tag):
+                if next_tag_block.name == "h1":
+                    header_dict[key] = text.strip().replace("\n", " ")
+                    break
+                if next_tag_block.name == "ul":
+                    is_list_with_links = False
+                    for x in next_tag_block:
+                        if isinstance(x, Tag):
+                            if "<li><a href" in str(x) and key == "Links":
+                                is_list_with_links = True
+                                break
+                    if is_list_with_links:
+                        link_dict = handle_list_with_links(next_tag_block)
+                        header_dict[key] = link_dict
+                    else:
+                        clean_text = handle_list(next_tag_block)
+                        if text != "":
+                            concat_string = text.lstrip(" ") + str(clean_text).replace("\'", "")
+                            header_dict[key] = concat_string
+                        else:
+                            header_dict[key] = clean_text
+                    break
+                if next_tag_block.name == "p" or next_tag_block.name == "blockquote":
+                    text += next_tag_block.get_text().replace(" \n", " ") + " "
+    return header_dict
+
+
+def handle_list_with_links(html):
+    soup_node = BeautifulSoup(str(html), features="html.parser")
+    link_dict = build_link_dict(soup_node)
+    return link_dict
+
+
+# Builds link data structure with url and description
+def build_link_dict(element):
+    return [{"text": li.get_text().split("\n")[0], "url": li.a.get("href")}
+            for ul in element('ul', recursive=False)
+            for li in ul('li', recursive=False)]
+
+
+def handle_list(html):
+    soup_node = BeautifulSoup(str(html), features="html.parser")
+    html_list_tree = build_list_tree(soup_node)
+    clean_text = clean_tree_to_string(html_list_tree)
+    return clean_text
+
+
+# Returns dictionary representing nested link structure
+def build_list_tree(element):
+    return [{li.get_text().split("\n")[0]: build_list_tree(li)}
+            for ul in element('ul', recursive=False)
+            for li in ul('li', recursive=False)]
+
+
+# Cleans nested list dictionary into a nicer string
+def clean_tree_to_string(d):
+    string_list = []
+    for list_element in d:
+        for key, value in list_element.items():
+            if len(value) != 0:
+                cleaned_data = clean_tree_to_string(value)
+                concat = key + " " + str(cleaned_data).replace("\'", "")
+                string_list.append(concat)
+            else:
+                string_list.append(key)
+    return string_list
+
+
+def check_blank_section(node):
+    return re.match(r"^.*This (plugin|workflow) does not contain any (requirements|references).", node)
+
+
+def verify_yaml(file):
+    return file and re.match(r"^\S*.spec.yaml$", file)
+
+
+def verify_md(file):
+    return file and re.match(r"^\S*help.md$", file)
 
 
 def write_to_json(obj, path):
