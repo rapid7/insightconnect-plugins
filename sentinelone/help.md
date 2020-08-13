@@ -51,13 +51,15 @@ This action searches for agents by IP address, MAC address, hostname, or device 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID|None|hostname123|
+|agent|string|None|False|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID. If empty, will return all active or inactive agents|None|hostname123|
+|agent_active|boolean|True|False|Should return active or inactive agents. True for active, false for inactive. Used when Agent is empty|None|True|
 
 Example input:
 
 ```
 {
-  "agent": "hostname123"
+  "agent": "hostname123",
+  "agent_active": true
 }
 ```
 
@@ -1180,7 +1182,7 @@ This trigger is used to get threats.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent_is_active|boolean|None|False|Include agents currently connected to the management console|None|None|
+|agent_is_active|boolean|True|False|Include agents currently connected to the management console|None|None|
 |classifications|[]string|None|False|List of classifications to search|None|None|
 |engines|[]string|None|False|Included engines|None|None|
 |frequency|integer|5|False|Poll frequency in seconds|None|None|
@@ -1501,6 +1503,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.0 - Add `agent_active` field to input in action Search Agents
 * 2.0.0 - Upgrade trigger input Agent is Active to default true
 * 1.4.0 - New actions Quarantine, Get Agent Details, Search Agents
 * 1.3.0 - Add new action Blacklist

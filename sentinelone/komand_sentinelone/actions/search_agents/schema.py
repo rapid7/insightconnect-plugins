@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     AGENT = "agent"
+    AGENT_ACTIVE = "agent_active"
     
 
 class Output:
@@ -24,13 +25,17 @@ class SearchAgentsInput(komand.Input):
     "agent": {
       "type": "string",
       "title": "Agent",
-      "description": "Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID",
+      "description": "Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID. If empty, will return all active or inactive agents",
       "order": 1
+    },
+    "agent_active": {
+      "type": "boolean",
+      "title": "Agent Active",
+      "description": "Should return active or inactive agents. True for active, false for inactive. Used when Agent is empty",
+      "default": true,
+      "order": 2
     }
-  },
-  "required": [
-    "agent"
-  ]
+  }
 }
     """)
 

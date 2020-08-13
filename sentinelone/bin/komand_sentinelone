@@ -6,7 +6,7 @@ from komand_sentinelone import connection, actions, triggers
 
 Name = "SentinelOne"
 Vendor = "rapid7"
-Version = "2.0.0"
+Version = "2.1.0"
 Description = "The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne"
 
 
