@@ -4,10 +4,10 @@ import komand
 from komand_rapid7_insightidr import connection, actions, triggers
 
 
-Name = 'Rapid7 InsightIDR'
-Vendor = 'rapid7'
-Version = '1.1.1'
-Description = 'This plugin allows you to add indicators to a threat and see the status of investigations'
+Name = "Rapid7 InsightIDR"
+Vendor = "rapid7"
+Version = "1.2.0"
+Description = "This plugin allows you to add indicators to a threat and see the status of investigations"
 
 
 class ICONRapid7Insightidr(komand.Plugin):
@@ -20,6 +20,8 @@ class ICONRapid7Insightidr(komand.Plugin):
                 connection=connection.Connection()
                 )
         self.add_action(actions.AddIndicatorsToAThreat())
+
+        self.add_action(actions.AssignUserToInvestigation())
 
         self.add_action(actions.ListInvestigations())
 
