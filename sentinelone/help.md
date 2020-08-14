@@ -1504,6 +1504,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.1 - Upgrade trigger Get Threats to only return threats since trigger start
 * 2.1.0 - Add `agent_active` field to input in action Search Agents
 * 2.0.0 - Upgrade trigger input Agent is Active to default true
 * 1.4.0 - New actions Quarantine, Get Agent Details, Search Agents
