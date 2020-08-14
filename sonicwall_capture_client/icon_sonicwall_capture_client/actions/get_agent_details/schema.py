@@ -12,7 +12,7 @@ class Input:
     
 
 class Output:
-    AGENT_INFORMATION = "agent_information"
+    AGENT = "agent"
     
 
 class GetAgentDetailsInput(insightconnect_plugin_runtime.Input):
@@ -44,15 +44,15 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "agent_information": {
+    "agent": {
       "$ref": "#/definitions/agent_information",
-      "title": "Agent Information",
+      "title": "Agent",
       "description": "Information about an agent",
       "order": 1
     }
   },
   "required": [
-    "agent_information"
+    "agent"
   ],
   "definitions": {
     "activeDirectory": {

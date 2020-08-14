@@ -33,7 +33,7 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
             install_token = searched_agents[0].get("installToken")
 
             return {
-                Output.AGENT_INFORMATION: insightconnect_plugin_runtime.helper.clean(
+                Output.AGENT: insightconnect_plugin_runtime.helper.clean(
                     self.connection.client.get_endpoint(device_id, install_token)
                 )
             }
