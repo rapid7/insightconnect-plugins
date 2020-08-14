@@ -51,8 +51,8 @@ This action searches for agents by IP address, MAC address, hostname, or device 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent|string|None|False|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID. If empty, will return all active or inactive agents|None|hostname123|
-|agent_active|boolean|True|False|Should return active or inactive agents. True for active, false for inactive. Used when Agent is empty|None|True|
+|agent|string|None|False|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID. If empty, this action will return all active or inactive agents depending on the value of the Agent Active input|None|hostname123|
+|agent_active|boolean|True|False|Return a list of all active or inactive agents when Agent input is not specified. Note that setting this to true for Active agents can return a very large amount of data|None|True|
 
 Example input:
 

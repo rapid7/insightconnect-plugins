@@ -25,13 +25,13 @@ class SearchAgentsInput(komand.Input):
     "agent": {
       "type": "string",
       "title": "Agent",
-      "description": "Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID. If empty, will return all active or inactive agents",
+      "description": "Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID. If empty, this action will return all active or inactive agents depending on the value of the Agent Active input.",
       "order": 1
     },
     "agent_active": {
       "type": "boolean",
       "title": "Agent Active",
-      "description": "Should return active or inactive agents. True for active, false for inactive. Used when Agent is empty",
+      "description": "Return a list of all active or inactive agents when Agent input is not specified. Note that setting this to true for Active agents can return a very large amount of data.",
       "default": true,
       "order": 2
     }
