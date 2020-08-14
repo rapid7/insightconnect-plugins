@@ -45,7 +45,8 @@ Example input:
 
 #### Search Agents
 
-This action searches for agents by IP address, MAC address, hostname, or device ID.
+This action searches for agents by IP address, MAC address, hostname, or device ID. It can also return all active or inactive agents when no agent address is provided using the `agent_active` parameter.
+Note that retrieving all active agents can return a very large amount of data depending on the number of agents you have in your environment.
 
 ##### Input
 
