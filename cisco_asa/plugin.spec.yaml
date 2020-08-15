@@ -169,7 +169,7 @@ actions:
         required: true
   add_address_to_group:
     title: Add Address to Group
-    description: Add an IP address associated with an existing Object to a Network Group
+    description: Add an Object to a Network Group by the Object IP address.
     input:
       address:
         title: Address
