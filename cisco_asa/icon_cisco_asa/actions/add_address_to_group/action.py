@@ -56,4 +56,3 @@ class AddAddressToGroup(insightconnect_plugin_runtime.Action):
             assistance="Check address input and try again. Allowed kind are: "
                        "IPv4Address, IPv6Address, IPv4Network."
         )
-
