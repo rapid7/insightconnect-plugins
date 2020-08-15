@@ -169,7 +169,7 @@ actions:
         required: true
   add_address_to_group:
     title: Add Address to Group
-    description: Add a preexisting Addresses to a Network Object Group from to allow them to block the host
+    description: Add an IP address associated with an existing Object to a Network Group
     input:
       address:
         title: Address
