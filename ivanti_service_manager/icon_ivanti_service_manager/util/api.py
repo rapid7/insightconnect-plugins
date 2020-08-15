@@ -19,21 +19,38 @@ class IvantiServiceManagerAPI:
         if len(employees) > 1:
             raise PluginException(
             cause='Multiple employees found.',
-            assistance=f'Multiple employees found using email provided - {identifier}. Please provide a full email address.'
+            assistance=f'Search for {identifier} returned more than 1 result. Please provide a unique identifier.'
         )
         if len(employees) == 0:
             raise PluginException(
             cause='No employees found.',
-            assistance=f'No employees found using email provided - {identifier}. Please validate and try again.'
+            assistance=f'No employees found using data provided - {identifier}. Please validate and try again.'
         )
 
         return employees[0]
 
-    def search_incident(self, incident_number):
-        return self._call_api("GET", f"odata/businessobject/incidents?$search={incident_number}")
+    def get_incident_by_number(self, incident_number: int) -> str:
+        incident = self._call_api(
+            "GET",
+            f"odata/businessobject/incidents$filter=IncidentNumber eq {incident_number}"
+        ).get('value')
+
+        if len(incident) == 0:
+            raise PluginException(
+            cause='No indidents found.',
+            assistance=f'No incident found using number provided - {incident_number}. Please validate and try again.'
+        )
+
+        return incident[0]
 
     def post_incident(self, payload: dict):
         return clean(self._call_api("POST", "odata/businessobject/incidents", json_data=payload))
+
+    def update_incident(self, incident_id: str ,payload: dict):
+        return clean(self._call_api("PUT", f"odata/businessobject/incidents('{incident_id}')", json_data=payload))
+
+    def delete_incident(self, incident_number: int):
+        return self._call_api("DELETE", f"odata/businessobject/incidents('{incident_id}')")
 
     def _call_api(self, method: str, path: str, json_data: dict = None, params: dict = None):
         response = {"text": ""}

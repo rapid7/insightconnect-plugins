@@ -13,5 +13,14 @@ class DeleteIncident(insightconnect_plugin_runtime.Action):
                 output=DeleteIncidentOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+
+        errors = self.connection.ivanti_service_manager_api.delete_incident(params.get(Input.INCIDENT_NUMBER))
+
+        if len(errors) != 0:
+            raise PluginException(cause='The response from the Ivanti Service Manager was not in the correct format.',
+                                  assistance='Contact support for help. See log for more details',
+                                  data=errors)
+
+        return {
+            Output.SUCCESS: true
+        }

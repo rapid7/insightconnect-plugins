@@ -717,7 +717,7 @@ actions:
         title: Status
         description: Status of the incident
         type: string
-        required: true
+        required: false
         default: Logged
         enum:
         - Logged
@@ -732,11 +732,11 @@ actions:
         title: Customer
         description: Email address of the customer
         type: string
-        required: true
+        required: false
         example: user@example.com
       assignee:
         title: Assignee
-        description: Name of the assignee as it appears in Ivanti Service Manager
+        description: Email address of the new assignee
         type: string
         required: false
         example: John Doe

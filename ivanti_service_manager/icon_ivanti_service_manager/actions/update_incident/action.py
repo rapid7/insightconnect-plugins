@@ -13,5 +13,7 @@ class UpdateIncident(insightconnect_plugin_runtime.Action):
                 output=UpdateIncidentOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
+
+        payload = self.connection.ivanti_service_manager_api.get_incident_by_number(params.get(Input.INCIDENT_NUMBER))
+
         return {}
