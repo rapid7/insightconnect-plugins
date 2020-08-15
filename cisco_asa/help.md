@@ -7,6 +7,7 @@
 * Check if address is in address group
 * Remove address from group
 * Delete Address Object
+* Add Address to Group
 
 # Requirements
 
@@ -52,6 +53,40 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Add Address to Group
+
+This action is used to add a preexisting Addresses to a Network Object Group from to allow them to block the host.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|Name of the address, which can be an IPv4 or IPv6 address|None|198.51.100.100|
+|group|string|None|True|Name of the group to add the address to|None|InsightConnect Block List|
+
+Example input:
+
+```
+{
+  "address": "198.51.100.100",
+  "group": "InsightConnect Block List"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Success if address add to group|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Delete Address Object
 
@@ -197,6 +232,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.0 - Add new action Add Address to Group
 * 1.2.0 - Add new action Delete Address Object
 * 1.1.0 - Add new action Remove Address from Group
 * 1.0.0 - Initial plugin
