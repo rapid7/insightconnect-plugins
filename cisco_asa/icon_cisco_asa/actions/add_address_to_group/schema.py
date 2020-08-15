@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add a preexisting Addresses to a Network Object Group from to allow them to block the host"
+    DESCRIPTION = "Add an Object to a Network Group by the Object IP address."
 
 
 class Input:
