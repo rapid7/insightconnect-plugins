@@ -57,7 +57,7 @@ Example input:
 #### Add Address to Group
 
 This action is used to add an IP address associated with an existing Object to a Network Group.
-It works by checking the IPv4 and IPv6 addresses across all Objects in Cisco ASA. If a match is found, it adds the object to the group.
+It works by checking the user-supplied IPv4 or IPv6 addresses across all Objects in Cisco ASA. If a match is found, it adds the object associated with the provided IP address to the group. This is useful when you don't know the Object by its name.
 
 ##### Input
 
