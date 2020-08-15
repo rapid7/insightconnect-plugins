@@ -11,6 +11,7 @@
 * E-mail address and password for SonicWall Capture Client
 
 # Documentation
+
 ## Setup
 
 The connection configuration accepts the following parameters:
@@ -24,11 +25,12 @@ Example input:
 ```
 {
   "credentials": {
-    "username": "user@example.com", 
+    "username": "user@example.com",
     "password": "mypassword"
   }
 }
 ```
+
 ## Technical Details
 
 ### Actions
