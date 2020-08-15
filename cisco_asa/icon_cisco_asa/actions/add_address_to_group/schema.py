@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add an Object to a Network Group by the Object IP address."
+    DESCRIPTION = "Add an Object to a Network Group by the Object IP address"
 
 
 class Input:
