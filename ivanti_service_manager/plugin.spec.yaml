@@ -703,49 +703,6 @@ actions:
         description: Newly created incident
         type: incident
         required: true
-  update_incident:
-    title: Update Incident
-    description: Update an existing incident in Ivanti Service Manager
-    input: 
-      incident_number:
-        title: Incident Number
-        description: Number of the incident to be updated
-        type: integer
-        required: true
-        example: 12345
-      status:
-        title: Status
-        description: Status of the incident
-        type: string
-        required: false
-        default: Logged
-        enum:
-        - Logged
-        - Active
-        - Waiting for Customer
-        - Waiting for 3rd Party
-        - Waiting for Resolution
-        - Resolved
-        - Closed
-        example: Waiting for Resolution
-      customer:
-        title: Customer
-        description: Email address of the customer
-        type: string
-        required: false
-        example: user@example.com
-      assignee:
-        title: Assignee
-        description: Email address of the new assignee
-        type: string
-        required: false
-        example: John Doe
-    output:
-      incident:
-        title: Incident
-        description: Newly created incident
-        type: incident
-        required: true
   delete_incident:
     title: Delete Incident
     description: Delete an incident

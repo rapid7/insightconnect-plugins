@@ -29,25 +29,8 @@ class IvantiServiceManagerAPI:
 
         return employees[0]
 
-    def get_incident_by_number(self, incident_number: int) -> str:
-        incident = self._call_api(
-            "GET",
-            f"odata/businessobject/incidents$filter=IncidentNumber eq {incident_number}"
-        ).get('value')
-
-        if len(incident) == 0:
-            raise PluginException(
-            cause='No indidents found.',
-            assistance=f'No incident found using number provided - {incident_number}. Please validate and try again.'
-        )
-
-        return incident[0]
-
     def post_incident(self, payload: dict):
         return clean(self._call_api("POST", "odata/businessobject/incidents", json_data=payload))
-
-    def update_incident(self, incident_id: str ,payload: dict):
-        return clean(self._call_api("PUT", f"odata/businessobject/incidents('{incident_id}')", json_data=payload))
 
     def delete_incident(self, incident_number: int):
         return self._call_api("DELETE", f"odata/businessobject/incidents('{incident_id}')")
