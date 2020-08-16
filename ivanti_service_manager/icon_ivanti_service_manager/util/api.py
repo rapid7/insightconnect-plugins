@@ -15,25 +15,39 @@ class IvantiServiceManagerAPI:
 
     def search_employee(self, identifier: str):
         employees = self._call_api("GET", f"odata/businessobject/employees?$search={identifier}").get("value")
-        
-        if len(employees) > 1:
-            raise PluginException(
-            cause='Multiple employees found.',
-            assistance=f'Search for {identifier} returned more than 1 result. Please provide a unique identifier.'
-        )
-        if len(employees) == 0:
-            raise PluginException(
+
+        if employees:
+            if len(employees) > 1:
+                raise PluginException(
+                cause='Multiple employees found.',
+                assistance=f'Search for {identifier} returned more than 1 result. Please provide a unique identifier.'
+            )
+            return employees[0]
+
+        raise PluginException(
             cause='No employees found.',
             assistance=f'No employees found using data provided - {identifier}. Please validate and try again.'
         )
 
-        return employees[0]
+    def get_incident_by_number(self, incident_number: int) -> str:
+        incident = self._call_api(
+            "GET",
+            f"odata/businessobject/incidents?$filter=IncidentNumber eq {incident_number}"
+        ).get('value')
+
+        if incident:
+            return incident[0]
+
+        raise PluginException(
+            cause='No incidents found.',
+            assistance=f'No incident found using number provided - {incident_number}. Please validate and try again.'
+        )
 
     def post_incident(self, payload: dict):
         return clean(self._call_api("POST", "odata/businessobject/incidents", json_data=payload))
 
     def delete_incident(self, incident_number: int):
-        return self._call_api("DELETE", f"odata/businessobject/incidents('{incident_id}')")
+        return self._call_api("DELETE", f"odata/businessobject/incidents('{incident_number}')")
 
     def _call_api(self, method: str, path: str, json_data: dict = None, params: dict = None):
         response = {"text": ""}
