@@ -1,6 +1,6 @@
 # Description
 
-Return information about a file from `bytes` type
+Return basic information about a file including its size and file type.
 
 # Key Features
 
