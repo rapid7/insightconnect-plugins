@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: file_info
 title: File Info
-description: Return information about a file from `bytes` type
+description: Return information about a file
 version: 1.0.0
 vendor: rapid7
 support: rapid7
