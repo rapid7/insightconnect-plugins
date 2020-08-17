@@ -26,7 +26,7 @@ class GetFileInfoInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "File",
       "displayType": "bytes",
-      "description": "File in bytes to get information for",
+      "description": "The file to analyze, represented in base64 (bytes type)",
       "format": "bytes",
       "order": 1
     }

@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="file_info-rapid7-plugin",
       version="1.0.0",
-      description="Return information about a file from `bytes` type",
+      description="Return information about a file",
       author="rapid7",
       author_email="",
       url="",

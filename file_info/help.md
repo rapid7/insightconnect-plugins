@@ -27,7 +27,7 @@ This action is used to get information about a file.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|bytes|None|True|File in bytes to get information for|None|cmFwaWQ3IGluc2lnaHQ=|
+|file|bytes|None|True|The file to analyze, represented in base64 (bytes type)|None|cmFwaWQ3IGluc2lnaHQ=|
 
 Example input:
 

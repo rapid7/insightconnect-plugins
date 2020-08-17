@@ -7,7 +7,7 @@ from icon_file_info import connection, actions, triggers
 Name = "File Info"
 Vendor = "rapid7"
 Version = "1.0.0"
-Description = "Return information about a file from `bytes` type"
+Description = "Return information about a file"
 
 
 class ICONFileInfo(insightconnect_plugin_runtime.Plugin):
