@@ -26,10 +26,8 @@ Example input:
 
 ```
 {
-  "credentials": {
-    "secretKey": "YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9"
-  },
-  "max_pages": 100
+  "credentials": "YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9",
+  "max_pages": 10
 }
 ```
 
@@ -102,7 +100,14 @@ Example input:
 
 ```
 {
-  "document": "VPN"
+  "created": "2019-07-04",
+  "document": "RDP",
+  "editorId": "a2c54f3d-48d0-48c4-b056-3a78181d777c",
+  "id": "a2c54f3d-48d0-48c4-b056-3a78181d777c",
+  "page": 0,
+  "revisionDate": "2019-07-04",
+  "size": 10,
+  "topicId": "a2c54f3d-48d0-48c4-b056-3a78181d777c"
 }
 ```
 
@@ -297,7 +302,15 @@ Example input:
 
 ```
 {
-  "name": "Firefox"
+  "created": "2019-07-04",
+  "disclosureDate": "2019-07-04",
+  "document": "RDP",
+  "editorId": "a2c54f3d-48d0-48c4-b056-3a78181d777c",
+  "id": "a2c54f3d-48d0-48c4-b056-3a78181d777c",
+  "name": "CVE-2020-3789",
+  "page": 0,
+  "revisionDate": "2019-07-04",
+  "size": 10
 }
 ```
 
