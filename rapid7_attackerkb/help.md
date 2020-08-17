@@ -477,7 +477,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.1 - Change `output` type for Get Vulnerability and Search Vulnerabilities actions
+* 1.0.1 - API changed for AttackerKb, add new `metadata` output type for Get Vulnerability and Search Vulnerabilities actions
 * 1.0.0 - Initial plugin
 
 # Links
