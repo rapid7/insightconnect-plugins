@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="rapid7_attackerkb-rapid7-plugin",
-      version="1.0.0",
+      version="1.0.1",
       description="AttackerKB is a knowledge base of vulnerabilities and informed opinions on what makes them valuable (or not) targets for exploitation",
       author="rapid7",
       author_email="",
