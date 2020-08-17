@@ -27,7 +27,7 @@ actions:
     input:
       file:
         title: File
-        description: File in bytes to get information for
+        description: The file to analyze, represented in base64 (bytes type)
         type: bytes
         required: true
         example: cmFwaWQ3IGluc2lnaHQ=
