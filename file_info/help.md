@@ -12,9 +12,11 @@ Return basic information about a file including its size and file type.
 _This plugin does not contain any requirements._
 
 # Documentation
+
 ## Setup
 
 _This plugin does not contain a connection._
+
 ## Technical Details
 
 ### Actions
@@ -60,6 +62,7 @@ _This plugin does not contain any triggers._
 ### Custom Output Types
 
 _This plugin does not contain any custom output types._
+
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
