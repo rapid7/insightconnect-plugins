@@ -8,6 +8,7 @@
 * Get alerts
 * Antivirus Scan
 * Get agent details
+* Check Tamper Protection status
 
 # Requirements
 
@@ -40,6 +41,41 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Check Tamper Protection Status
+
+This action is used to get tamper status by IP address, Hostname, MAC address or Device ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|True|Device ID, IPv4 address, IPv6 address, MAC address or hostname|None|198.51.100.100|
+
+Example input:
+
+```
+{
+  "agent": "198.51.100.100"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|tamper_status|tamper_protection_entity|True|Tamper status for provided agent|
+
+Example output:
+
+```
+{
+  "tamper_status": {
+    "enabled": true,
+    "password": "541298753620",
+    "previousPasswords": []
+  }
+```
 
 #### Blacklist
 
@@ -649,6 +685,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.3.0 - Add new action Check Tamper Protection Status
 * 4.2.0 - Add new action Get Agent Details
 * 4.1.0 - Add new action Antivirus Scan
 * 4.0.0 - Add new action Blacklist | Update "API region" title in connection to "API Region"

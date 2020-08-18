@@ -4,7 +4,7 @@ products: [insightconnect]
 name: sophos_central
 title: Sophos Central
 description: Sophos Central is a unified console for managing Sophos products. Using the Sophos Central plugin for Rapid7 InsightConnect, users can get alerts, endpoints, and SIEM events
-version: 4.2.0
+version: 4.3.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -601,4 +601,20 @@ actions:
         title: Agents
         description: Details for the matched agent
         type: endpoint_entry
+        required: true
+  check_tamper_protection_status:
+    title: Check Tamper Protection Status
+    description: Get tamper status by IP address, Hostname, MAC address or Device ID
+    input:
+      agent:
+        title: Agent
+        description: Device ID, IPv4 address, IPv6 address, MAC address or hostname
+        type: string
+        required: true
+        example: 198.51.100.100
+    output:
+      tamper_status:
+        title: Tamper Status
+        description: Tamper status for provided agent
+        type: tamper_protection_entity
         required: true
