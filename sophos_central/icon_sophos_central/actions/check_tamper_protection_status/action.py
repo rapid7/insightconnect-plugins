@@ -7,16 +7,18 @@ class CheckTamperProtectionStatus(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='check_tamper_protection_status',
-                description=Component.DESCRIPTION,
-                input=CheckTamperProtectionStatusInput(),
-                output=CheckTamperProtectionStatusOutput())
+            name='check_tamper_protection_status',
+            description=Component.DESCRIPTION,
+            input=CheckTamperProtectionStatusInput(),
+            output=CheckTamperProtectionStatusOutput())
 
     def run(self, params={}):
         return {
-            Output.TAMPER_STATUS: self.connection.client.tamper_status(
-                self.connection.client.get_endpoint_id(
-                    params.get(Input.AGENT)
-                )
-            )
+            Output.TAMPER_STATUS: {
+                "enabled": self.connection.client.tamper_status(
+                    self.connection.client.get_endpoint_id(
+                        params.get(Input.AGENT)
+                    )
+                ).get("enabled")
+            }
         }

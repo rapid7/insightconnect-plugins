@@ -45,7 +45,7 @@ class CheckTamperProtectionStatusOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "tamper_status": {
-      "$ref": "#/definitions/tamper_protection_entity",
+      "$ref": "#/definitions/check_tamper_protection_status",
       "title": "Tamper Status",
       "description": "Tamper status for provided agent",
       "order": 1
@@ -55,72 +55,20 @@ class CheckTamperProtectionStatusOutput(insightconnect_plugin_runtime.Output):
     "tamper_status"
   ],
   "definitions": {
-    "previous_password_entity": {
+    "check_tamper_protection_status": {
       "type": "object",
-      "title": "previous_password_entity",
-      "properties": {
-        "invalidated": {
-          "type": "string",
-          "title": "Invalidated",
-          "displayType": "date",
-          "format": "date-time",
-          "order": 1
-        },
-        "password": {
-          "type": "string",
-          "title": "Password",
-          "order": 2
-        }
-      }
-    },
-    "tamper_protection_entity": {
-      "type": "object",
-      "title": "tamper_protection_entity",
+      "title": "check_tamper_protection_status",
       "properties": {
         "enabled": {
           "type": "boolean",
           "title": "Enabled",
+          "description": "Return true when tamper protection is enable",
           "order": 1
-        },
-        "globally_enabled": {
-          "type": "boolean",
-          "title": "Globally Enabled",
-          "order": 2
-        },
-        "password": {
-          "type": "string",
-          "title": "Password",
-          "order": 3
-        },
-        "previous_passwords": {
-          "type": "array",
-          "title": "Previous Passwords",
-          "items": {
-            "$ref": "#/definitions/previous_password_entity"
-          },
-          "order": 4
         }
       },
-      "definitions": {
-        "previous_password_entity": {
-          "type": "object",
-          "title": "previous_password_entity",
-          "properties": {
-            "invalidated": {
-              "type": "string",
-              "title": "Invalidated",
-              "displayType": "date",
-              "format": "date-time",
-              "order": 1
-            },
-            "password": {
-              "type": "string",
-              "title": "Password",
-              "order": 2
-            }
-          }
-        }
-      }
+      "required": [
+        "enabled"
+      ]
     }
   }
 }

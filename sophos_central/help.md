@@ -64,17 +64,16 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|tamper_status|tamper_protection_entity|True|Tamper status for provided agent|
+|tamper_status|check_tamper_protection_status|True|Tamper status for provided agent|
 
 Example output:
 
 ```
 {
   "tamper_status": {
-    "enabled": true,
-    "password": "541298753620",
-    "previousPasswords": []
+    "enabled": true
   }
+}
 ```
 
 #### Blacklist

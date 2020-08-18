@@ -129,6 +129,12 @@ types:
       type: date
     password:
       type: string
+  check_tamper_protection_status:
+    enabled:
+      title: Enabled
+      description: Return true when tamper protection is enable
+      required: true
+      type: boolean
   tamper_protection_entity:
     enabled:
       type: boolean
@@ -616,5 +622,5 @@ actions:
       tamper_status:
         title: Tamper Status
         description: Tamper status for provided agent
-        type: tamper_protection_entity
+        type: check_tamper_protection_status
         required: true
