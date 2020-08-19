@@ -90,7 +90,7 @@ class ActivitiesListInput(komand.Input):
     },
     "created_at_gte": {
       "type": "string",
-      "title": "Greater Or Equal Date",
+      "title": "Greater or Equal Date",
       "description": "Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z",
       "order": 11
     },
@@ -102,7 +102,7 @@ class ActivitiesListInput(komand.Input):
     },
     "created_at_lte": {
       "type": "string",
-      "title": "Less Or Equal Date",
+      "title": "Less or Equal Date",
       "description": "Return activities created before or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z",
       "order": 9
     },
@@ -133,7 +133,7 @@ class ActivitiesListInput(komand.Input):
     "include_hidden": {
       "type": "boolean",
       "title": "Include Hidden",
-      "description": "Include internal activities hidden from display?",
+      "description": "Include internal activities hidden from display",
       "order": 2
     },
     "limit": {

@@ -25,13 +25,13 @@ class SearchAgentsInput(komand.Input):
     "agent": {
       "type": "string",
       "title": "Agent",
-      "description": "Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID. If empty, this action will return all active or inactive agents depending on the value of the Agent Active input.",
+      "description": "Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID. If empty, this action will return all active or inactive agents depending on the value of the Agent Active input",
       "order": 1
     },
     "agent_active": {
       "type": "boolean",
       "title": "Agent Active",
-      "description": "Return a list of all active or inactive agents when Agent input is not specified. Note that setting this to true for Active agents can return a very large amount of data.",
+      "description": "Return a list of all active or inactive agents when Agent input is not specified. Note that setting this to true for Active agents can return a very large amount of data",
       "default": true,
       "order": 2
     }
@@ -240,7 +240,7 @@ class SearchAgentsOutput(komand.Output):
         },
         "isUpToDate": {
           "type": "boolean",
-          "title": "Is Up To Date",
+          "title": "Is Up to Date",
           "description": "Indicates if the agent version is up to date",
           "order": 5
         },
