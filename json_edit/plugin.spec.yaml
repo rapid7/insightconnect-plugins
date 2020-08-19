@@ -4,7 +4,7 @@ products: [insightconnect]
 name: json_edit
 title: JSON Edit
 description: Provides the ability to edit JSON data
-version: 1.0.2
+version: 1.1.0
 vendor: rapid7
 support: community
 status: []
@@ -19,6 +19,16 @@ hub_tags:
   use_cases: [data_utility]
   keywords: [json, utilities]
   features: []
+types:
+  added_json:
+    key:
+      title: Key
+      description: JSON key
+      type: string
+    value:
+      title: Value
+      description: JSON value
+      type: string
 actions:
   update:
     title: Update
@@ -67,4 +77,26 @@ actions:
         title: JSON
         type: '[]object'
         description: Array of objects
+        required: true
+  add_key:
+    title: Add Key
+    description: Add a JSON key
+    input:
+      key:
+        title: Key
+        description: JSON key the to add
+        type: string
+        required: true
+        example: E-mail
+      value:
+        title: Value
+        description: Value to add
+        type: string
+        required: true
+        example: user@example.com
+    output:
+      json:
+        title: JSON
+        description: JSON object
+        type: added_json
         required: true
