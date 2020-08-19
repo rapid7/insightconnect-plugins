@@ -28,7 +28,7 @@ This action is used to add a JSON key.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|key|string|None|True|JSON key the to add|None|E-mail|
+|key|string|None|True|JSON key to add|None|E-mail|
 |value|string|None|True|Value to add|None|user@example.com|
 
 Example input:

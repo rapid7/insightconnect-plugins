@@ -84,7 +84,7 @@ actions:
     input:
       key:
         title: Key
-        description: JSON key the to add
+        description: JSON key to add
         type: string
         required: true
         example: E-mail

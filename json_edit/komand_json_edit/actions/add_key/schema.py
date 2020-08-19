@@ -25,7 +25,7 @@ class AddKeyInput(komand.Input):
     "key": {
       "type": "string",
       "title": "Key",
-      "description": "JSON key the to add",
+      "description": "JSON key to add",
       "order": 1
     },
     "value": {
