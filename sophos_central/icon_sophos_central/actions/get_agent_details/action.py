@@ -48,6 +48,6 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
     def _is_agent_found(agent, e):
         return e.get("hostname") == agent \
                or e.get("id") == agent \
-               or agent in e.get("ipv4Addresses") \
-               or agent in e.get("macAddresses") \
-               or agent in e.get("ipv6Addresses")
+               or agent in e.get("ipv4Addresses", []) \
+               or agent in e.get("macAddresses", []) \
+               or agent in e.get("ipv6Addresses", [])
