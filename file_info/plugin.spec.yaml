@@ -6,7 +6,7 @@ title: File Info
 description: Return information about a file
 version: 1.0.0
 vendor: rapid7
-support: rapid7
+support: community
 status: []
 tags:
 - file_info
