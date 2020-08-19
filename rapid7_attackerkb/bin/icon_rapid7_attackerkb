@@ -6,7 +6,7 @@ from icon_rapid7_attackerkb import connection, actions, triggers
 
 Name = "Rapid7 AttackerKB"
 Vendor = "rapid7"
-Version = "1.0.0"
+Version = "1.0.1"
 Description = "AttackerKB is a knowledge base of vulnerabilities and informed opinions on what makes them valuable (or not) targets for exploitation"
 
 

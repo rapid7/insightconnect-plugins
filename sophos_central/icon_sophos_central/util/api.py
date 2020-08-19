@@ -11,6 +11,41 @@ class SophosCentralAPI:
         self.tenant_id = tenant_id
         self.logger = logger
 
+    def get_endpoint_id(self, entity):
+        endpoint_id = None
+        page_key = None
+
+        for index in range(9999):
+            get_agent = self.get_endpoints(page_key=page_key)
+            page_key = get_agent.get("pages", {}).get("nextKey", None)
+
+            for e in get_agent.get("items", []):
+                if e.get("hostname") == entity:
+                    endpoint_id = e.get("id")
+                elif e.get("id") == entity:
+                    endpoint_id = e.get("id")
+                elif entity in e.get("ipv4Addresses", []):
+                    endpoint_id = e.get("id")
+                elif entity in e.get("macAddresses", []):
+                    endpoint_id = e.get("id")
+                elif entity in e.get("ipv6Addresses", []):
+                    endpoint_id = e.get("id")
+
+            if page_key is None or index > endpoint_id.get("pages", {}).get("total", 0):
+                break
+
+        if endpoint_id is None:
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND)
+
+        return endpoint_id
+
+    def tamper_status(self, endpoint_id):
+        return self._make_request(
+            "GET",
+            f"/endpoint/v1/endpoints/{endpoint_id}/tamper-protection",
+            "Tenant"
+        )
+
     def get_blacklists(self, page: int = 1):
         return self._make_request(
             "GET",

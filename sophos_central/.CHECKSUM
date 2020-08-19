@@ -1,7 +1,7 @@
 {
-	"spec": "94060f1d75632b26ab439bae7b652534",
-	"manifest": "47522382b0d3e264b9fe37e5f46aa250",
-	"setup": "a05bc3f45989a4a4db4d8871f8eb52a7",
+	"spec": "4108ee54b54cebe39944fa29327f660a",
+	"manifest": "414f606a4b15c28d1fee7e73539f019d",
+	"setup": "83611c8d02a9dc85b5c35ab54fd9a1f4",
 	"schemas": [
 		{
 			"identifier": "antivirus_scan/schema.py",
@@ -10,6 +10,10 @@
 		{
 			"identifier": "blacklist/schema.py",
 			"hash": "702e8f89a14e8b955df2ff9e79062401"
+		},
+		{
+			"identifier": "check_tamper_protection_status/schema.py",
+			"hash": "83e50f3e6a2c664fabc80ca2abace725"
 		},
 		{
 			"identifier": "get_agent_details/schema.py",
