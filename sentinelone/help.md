@@ -84,6 +84,11 @@ This action is used to add hashed indicator of compromise to global blacklist.
 Example input:
 
 ```
+{
+  "blacklist_state": true,
+  "description": "Hash Blacklisted from InsightConnect",
+  "hash": "3395856ce81f2b7382dee72602f798b642f14140"
+}
 ```
 
 ##### Output
@@ -573,6 +578,11 @@ This action is used to add hashed content to global blacklist. The input makes u
 Example input:
 
 ```
+{
+  "blacklist_state": true,
+  "description": "Hash Blacklisted from InsightConnect",
+  "hash": "3395856ce81f2b7382dee72602f798b642f14140"
+}
 ```
 
 ##### Output
@@ -1460,7 +1470,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.1.2 - Update help.md for the Extension Library
+* 3.0.0 - Update help.md for the Extension Library | Update title in action Blacklist by IOC Hash, Get Activities, Count Summary and Connect to Network
 * 2.1.1 - Upgrade trigger Get Threats to only return threats since trigger start
 * 2.1.0 - Add `agent_active` field to input in action Search Agents
 * 2.0.0 - Upgrade trigger input Agent is Active to default true
