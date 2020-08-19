@@ -3,6 +3,7 @@ import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
 
+
 class IvantiServiceManagerAPI:
     def __init__(self, api_key: str, url: str, verify_ssl: bool, logger: object):
         self.url = url + "/api/"
@@ -11,17 +12,24 @@ class IvantiServiceManagerAPI:
         self.api_key = api_key
 
     def get_employees(self):
-        return self._call_api("GET", "odata/businessobject/employees")
+        return self._call_api(
+            "GET",
+            "odata/businessobject/employees"
+        )
 
-    def search_employee(self, identifier: str):
-        employees = self._call_api("GET", f"odata/businessobject/employees?$search={identifier}").get("value")
+    def search_employee(self, identifier: str) -> dict:
+        employees = self._call_api(
+            "GET",
+            f"odata/businessobject/employees?$search={identifier}"
+        ).get("value")
 
         if employees:
             if len(employees) > 1:
                 raise PluginException(
-                cause='Multiple employees found.',
-                assistance=f'Search for {identifier} returned more than 1 result. Please provide a unique identifier.'
-            )
+                    cause='Multiple employees found.',
+                    assistance=f'Search for {identifier} returned more than 1 result.'\
+                    'Please provide a unique identifier.'
+                )
             return employees[0]
 
         raise PluginException(
@@ -43,11 +51,25 @@ class IvantiServiceManagerAPI:
             assistance=f'No incident found using number provided - {incident_number}. Please validate and try again.'
         )
 
-    def post_incident(self, payload: dict):
-        return clean(self._call_api("POST", "odata/businessobject/incidents", json_data=payload))
+    def post_incident(self, payload: dict) -> dict:
+        return clean(self._call_api(
+            "POST",
+            "odata/businessobject/incidents",
+            json_data=payload)
+        )
 
-    def delete_incident(self, incident_number: int):
-        return self._call_api("DELETE", f"odata/businessobject/incidents('{incident_number}')")
+    def update_incident(self, incident_number: str, payload: dict) -> dict:
+        return clean(self._call_api(
+            "PUT",
+            f"odata/businessobject/incidents('{incident_number}')",
+            json_data=payload)
+        )
+
+    def delete_incident(self, incident_number: int) -> dict:
+        return self._call_api(
+            "DELETE",
+            f"odata/businessobject/incidents('{incident_number}')"
+        )
 
     def _call_api(self, method: str, path: str, json_data: dict = None, params: dict = None):
         response = {"text": ""}

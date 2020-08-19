@@ -40,13 +40,6 @@ class CreateIncidentInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Category",
       "description": "Category of the incident",
-      "enum": [
-        "Capacity",
-        "Connectivity",
-        "How-To",
-        "Misconduct",
-        "Service Desk"
-      ],
       "order": 10
     },
     "customer": {
@@ -544,8 +537,8 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
         },
         "OrgUnitLink_RecID": {
           "type": "string",
-          "title": "OrgUnit Link RecID",
-          "description": "Organization Unit link rec ID",
+          "title": "Org Unit Link Rec ID",
+          "description": "Organization unit link rec ID",
           "order": 83
         },
         "OrganizationUnitID": {
@@ -568,7 +561,7 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
         },
         "OwnerTeam": {
           "type": "string",
-          "title": "Ownerr Team",
+          "title": "Owner Team",
           "description": "Owner team",
           "order": 49
         },
@@ -640,20 +633,20 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
         },
         "ProfileLink": {
           "type": "string",
-          "title": "Profile link",
+          "title": "Profile Link",
           "description": "Profile link",
           "order": 28
         },
         "ProfileLink_Category": {
           "type": "string",
-          "title": "Profile link Category",
+          "title": "Profile Link Category",
           "description": "Profile link category",
           "order": 26
         },
         "ProfileLink_RecID": {
           "type": "string",
-          "title": "Profile link RecID",
-          "description": "Profile link RecID",
+          "title": "Profile Link Rec ID",
+          "description": "Profile link Rec ID",
           "order": 27
         },
         "Progress Bar Position": {
@@ -664,8 +657,8 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
         },
         "RecId": {
           "type": "string",
-          "title": "RecId",
-          "description": "RecId",
+          "title": "Rec ID",
+          "description": "Rec ID",
           "order": 29
         },
         "ReportingOrgUnitID": {
@@ -724,7 +717,7 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
         },
         "SLALink_RecID": {
           "type": "string",
-          "title": "SLA Link RecID",
+          "title": "SLA Link Rec ID",
           "description": "SLA link rec ID",
           "order": 35
         },

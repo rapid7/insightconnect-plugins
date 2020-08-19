@@ -149,23 +149,23 @@ types:
       type: string
       required: false
     ProfileLink_Category:
-      title: Profile link Category
+      title: Profile Link Category
       description: Profile link category
       type: string
       required: false
     ProfileLink_RecID:
-      title: Profile link RecID
-      description: Profile link RecID
+      title: Profile Link Rec ID
+      description: Profile link Rec ID
       type: string
       required: false
     ProfileLink:
-      title: Profile link
+      title: Profile Link
       description: Profile link
       type: string
       required: false
     RecId:
-      title: RecId
-      description: RecId
+      title: Rec ID
+      description: Rec ID
       type: string
       required: false
     Resolution:
@@ -194,7 +194,7 @@ types:
       type: string
       required: false
     SLALink_RecID:
-      title: SLA Link RecID
+      title: SLA Link Rec ID
       description: SLA link rec ID
       type: string
       required: false
@@ -264,7 +264,7 @@ types:
       type: string
       required: false
     OwnerTeam:
-      title: Ownerr Team
+      title: Owner Team
       description: Owner team
       type: string
       required: false
@@ -434,8 +434,8 @@ types:
       type: string
       required: false
     OrgUnitLink_RecID:
-      title: OrgUnit Link RecID
-      description: Organization Unit link rec ID
+      title: Org Unit Link Rec ID
+      description: Organization unit link rec ID
       type: string
       required: false
     OrgUnitLink:
@@ -583,7 +583,7 @@ connection:
     example: 1A2B3CC4D5E67F8901G2HI345J6K7L89
   url:
     title: URL
-    description: API Access URL
+    description: API access URL
     type: string
     required: true
     example: 'https://example.com'
@@ -691,12 +691,6 @@ actions:
         description: Category of the incident
         type: string
         required: false
-        enum:
-        - Capacity
-        - Connectivity
-        - How-To
-        - Misconduct
-        - Service Desk
     output:
       incident:
         title: Incident
@@ -718,4 +712,77 @@ actions:
         title: Success
         description: Return true if the threat was updated
         type: boolean
+        required: true
+  update_incident:
+    title: Update Incident
+    description: Update an existing incident in Ivanti Service Manager
+    input: 
+      incident_number:
+        title: Incident Number
+        description: Number of the incident to be updated
+        type: integer
+        required: true
+        example: 12345
+      status:
+        title: Status
+        description: Status of the incident
+        type: string
+        required: false
+        default: Logged
+        enum:
+        - Logged
+        - Active
+        - Waiting for Customer
+        - Waiting for 3rd Party
+        - Waiting for Resolution
+        - Resolved
+        - Closed
+        example: Waiting for Resolution
+      customer:
+        title: Customer
+        description: Email address of the customer
+        type: string
+        required: false
+        example: user@example.com
+      assignee:
+        title: Assignee
+        description: User name or the email address on the new assignee
+        type: string
+        required: false
+        example: John Doe
+      category:
+        title: Category
+        description: Category of the incident
+        type: string
+        required: false
+        example: How-To
+      resolution:
+        title: Resolution
+        description: Resolution of the incident (required when setting status to Resolved)
+        type: string
+        required: false
+        example: This incident was resolved by InsightConnect
+      cause_code:
+        title: Cause Code
+        description: Cause code of the incident (required when setting status to Resolved)
+        type: string
+        required: false
+        example: Software
+        enum:
+        - Configuration
+        - Documentation Request
+        - Hardware
+        - Install Request
+        - Installation
+        - Linked Problem
+        - Other
+        - Reference Request
+        - Session Reset
+        - Software
+        - Training
+    output:
+      incident:
+        title: Incident
+        description: Newly created incident
+        type: incident
         required: true

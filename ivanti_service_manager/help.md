@@ -1,11 +1,12 @@
 # Description
 
-Ivanti Service Manager is a flexible and complete cloud-optimized, easily scalable and adaptable ITSM solution used for managing and automating ITSM processes
+[Ivanti Service Manager](https://www.ivanti.co.uk/products/service-manager) is a flexible and complete cloud-optimized, easily scalable and adaptable ITSM solution used for managing and automating ITSM processes
 
 # Key Features
 
-- Create incidents
-- Delete incidents
+* Create incidents
+* Update incidents
+* Delete incidents
 
 # Requirements
 
@@ -29,7 +30,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_secret_key|None|True|API key from account|None|1A2B3CC4D5E67F8901G2HI345J6K7L89|
 |ssl_verify|boolean|True|False|Validate TLS / SSL certificate|None|True|
-|url|string|None|True|API Access URL|None|https://example.com|
+|url|string|None|True|API access URL|None|https://example.com|
 
 Example input:
 
@@ -43,6 +44,136 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Update Incident
+
+This action is used to update an existing incident in Ivanti Service Manager.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|assignee|string|None|False|User name or the email address on the new assignee|None|John Doe|
+|category|string|None|False|Category of the incident|None|How-To|
+|cause_code|string|None|False|Cause code of the incident (required when setting status to Resolved)|['Configuration', 'Documentation Request', 'Hardware', 'Install Request', 'Installation', 'Linked Problem', 'Other', 'Reference Request', 'Session Reset', 'Software', 'Training']|Software|
+|customer|string|None|False|Email address of the customer|None|user@example.com|
+|incident_number|integer|None|True|Number of the incident to be updated|None|12345|
+|resolution|string|None|False|Resolution of the incident (required when setting status to Resolved)|None|This incident was resolved by InsightConnect|
+|status|string|Logged|False|Status of the incident|['Logged', 'Active', 'Waiting for Customer', 'Waiting for 3rd Party', 'Waiting for Resolution', 'Resolved', 'Closed']|Waiting for Resolution|
+
+Example input:
+
+```
+{
+  "assignee": "John Doe",
+  "category": "How-To",
+  "cause_code": "Software",
+  "customer": "user@example.com",
+  "incident_number": 12345,
+  "resolution": "This incident was resolved by InsightConnect",
+  "status": "Waiting for Resolution"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|incident|incident|True|Newly created incident|
+
+Example output:
+
+```
+{
+  "incident": {
+      "@odata.context": "https://example.com/HEAT/api/odata/$metadata#incidents/$entity",
+      "ClosedDuration": 0,
+      "CreatedBy": "user",
+      "CreatedDateTime": "2020-08-12T16:33:37-07:00",
+      "Email": "user@example.com",
+      "FirstCallResolution": false,
+      "IncidentNumber": 12345,
+      "IsNotification": true,
+      "IsVIP": false,
+      "IsWorkAround": false,
+      "LastModBy": "user",
+      "LastModDateTime": "2020-08-12T16:33:37-07:00",
+      "Phone": "+1 (415) 450 3428",
+      "Priority_Valid": "DA5FF948701D4022927500E08FCF574E",
+      "Priority": "5",
+      "ProfileFullName": "User",
+      "ProfileLink_Category": "Employee",
+      "ProfileLink_RecID": "2F851094BFE5437C97D19871D1C539C7",
+      "ProfileLink": "2F851094BFE5437C97D19871D1C539C7",
+      "RecId": "085867F47547496783005D95CB82D557",
+      "Service_Valid": "A912E98E55844765934A787FF3586F34",
+      "Service": "Service Desk",
+      "Source_Valid": "EF789CE160E742F99623DBB4D29C045C",
+      "Source": "Phone",
+      "Status_Valid": "AB3D0090B6D8471FB0D2720D301A22AF",
+      "Status": "Logged",
+      "Subject": "InsightConnect Test",
+      "Symptom": "Test incident created by InsightConnect",
+      "Urgency_Valid": "320F22CAA2984C87B06AEFD3DE6FFBBF",
+      "Urgency": "Low",
+      "LoginId": "user",
+      "Owner_Valid": "1087342EA6954D7D96140D64B452E597",
+      "Owner": "user",
+      "OwnerTeam_Valid": "2E4BABD54FB9420D94F836F0D9B80C47",
+      "OwnerTeam": "Service Management Team",
+      "OwnerType": "Employee",
+      "IsNewRecord": false,
+      "HoursOfOperation_Valid": "FF57246B2E0047D193C1AEC1011D746B",
+      "HoursOfOperation": "Weekly HOP",
+      "OwnerEmail": "user@example.com",
+      "OwnerTeamEmail": "user@example.com",
+      "OwnershipAssignmentEmail": "user@example.com",
+      "CustomerLocation_Valid": "6E4C36E8140B4BFD8AC4242BD7ED058B",
+      "CustomerLocation": "San Francisco",
+      "IsReportedByAlternateContact": false,
+      "OrganizationUnitID": "Consulting Services",
+      "ReportingOrgUnitID_Valid": "8B38681087C847A287D738621DA6BEE4",
+      "ReportingOrgUnitID": "Consulting Services",
+      "TypeOfIncident": "Request",
+      "TeamManagerEmail": "user@example.com",
+      "CustomerDepartment": "Corporate Services and Training",
+      "ActualService_Valid": "A912E98E55844765934A787FF3586F34",
+      "ActualService": "Service Desk",
+      "CostPerMinute_Currency": "USD",
+      "CostPerMinute": "0.4000",
+      "IsInFinalState": false,
+      "IsReclassifiedForResolution": false,
+      "ResolvedByIncidentNumber": 0,
+      "TotalTimeSpent": 0,
+      "OrgUnitLink_Category": "OrganizationalUnit",
+      "OrgUnitLink_RecID": "8B38681087C847A287D738621DA6BEE4",
+      "OrgUnitLink": "8B38681087C847A287D738621DA6BEE4",
+      "OwningOrgUnitId_Valid": "FA9C9DD75EF9455CBC892F65691A1E7F",
+      "OwningOrgUnitId": "Corporate IT Operations",
+      "ProgressBarPosition": "1",
+      "CreatedByType": "Web Client",
+      "ReadOnly": false,
+      "Cost_Currency": "USD",
+      "Cost": "0.0000",
+      "IsApprovalNeeded": false,
+      "Approver_Valid": "D8E9ECB03001437492B3BE453EDCBEE6",
+      "Approver": "user@example.com",
+      "IsDSMTaskExisted": false,
+      "SocialTextHeader": "Incident 11169: InsightConnect Test",
+      "IncidentNetworkUserName": "user",
+      "SendSurveyNotification": false,
+      "EntityLink_Category": "OrganizationalUnit",
+      "EntityLink_RecID": "8B38681087C847A287D738621DA6BEE4",
+      "EntityLink": "8B38681087C847A287D738621DA6BEE4",
+      "IsMasterIncident": false,
+      "IsResolvedByMaster": false,
+      "ServiceOwnerEmail": "user@example.com",
+      "IsRelatedIncidentUpdate": false,
+      "IsRelatedIncidentResolutionUpdate": false,
+      "IsUnRead": false
+  }
+}
+```
 
 #### Delete Incident
 
@@ -85,7 +216,7 @@ This action is used to create a new Ivanti Service Manager Incident record.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |assignee|string|None|False|Name of the assignee as it appears in Ivanti Service Manager|None|John Doe|
-|category|string|None|False|Category of the incident|['Capacity', 'Connectivity', 'How-To', 'Misconduct', 'Service Desk']|None|
+|category|string|None|False|Category of the incident|None|None|
 |customer|string|None|True|Email address of the customer|None|user@example.com|
 |description|string|None|True|Description of the incident|None|This incident was created using Insight Connect|
 |impact|string|None|False|Impact of the incident|['Low', 'Medium', 'High']|Medium|
@@ -237,7 +368,7 @@ _This plugin does not contain any triggers._
 |Cause Code Valid|string|False|Cause code valid|
 |Closed By|string|False|Closed by|
 |Closed Date Time|string|False|Closed date and time|
-|Closed Duration|string|False|Closed duration|
+|Closed Duration|int|False|Closed duration|
 |Cost|string|False|Cost|
 |Cost Per Minute|string|False|Cost per minute|
 |Cost Per Minute Currency|string|False|Cost per minute currency|
@@ -262,7 +393,7 @@ _This plugin does not contain any triggers._
 |Incident Network User Name|string|False|Incident network user name|
 |IncidentNumber|integer|False|Incident number|
 |Is Approval Needed|boolean|False|Is approval needed|
-|Is DSM Task Existed By|string|False|Is DSM task existed|
+|Is DSM Task Existed By|boolean|False|Is DSM task existed|
 |Is In Final State|boolean|False|Is the incident in its final state|
 |Is Master Incident|boolean|False|Is master incidint|
 |Is New Record|boolean|False|Is new record|
@@ -283,11 +414,11 @@ _This plugin does not contain any triggers._
 |Login ID|string|False|Login ID|
 |Org Unit Link|string|False|Organization unit link|
 |Org Unit Link Category|string|False|Organization unit link category|
-|OrgUnit Link RecID|string|False|Organization Unit link rec ID|
+|Org Unit Link Rec ID|string|False|Organization unit link rec ID|
 |Organization Unit ID|string|False|Organization unit ID|
 |Owner|string|False|Owner|
 |Owner Email|string|False|Owner email|
-|Ownerr Team|string|False|Owner team|
+|Owner Team|string|False|Owner team|
 |Owner Team Email|string|False|Owner team email|
 |Owner Team Valid|string|False|Owner team valid|
 |Owner Type|string|False|Owner type|
@@ -299,11 +430,11 @@ _This plugin does not contain any triggers._
 |Priority|string|False|Priority|
 |Priority Valid By|string|False|Priority valid by|
 |Profile Full Name|string|False|Full name of who raised the incident|
-|Profile link|string|False|Profile link|
-|Profile link Category|string|False|Profile link category|
-|Profile link RecID|string|False|Profile link RecID|
+|Profile Link|string|False|Profile link|
+|Profile Link Category|string|False|Profile link category|
+|Profile Link Rec ID|string|False|Profile link Rec ID|
 |Progress Bar Position|string|False|Progress bar position|
-|RecId|string|False|RecId|
+|Rec ID|string|False|Rec ID|
 |Reporting Org Unit ID|string|False|Reporting organization unit ID|
 |Reporting Org Unit ID Valid|string|False|Reporting organization unit ID valid|
 |Resolution|string|False|Resolution|
@@ -313,8 +444,8 @@ _This plugin does not contain any triggers._
 |SLA Display Text|string|False|SLA display text|
 |SLA Link|string|False|SLA link|
 |SLA Link Category|string|False|SLA link Category|
-|SLA Link RecID|string|False|SLA link rec ID|
-|Send Survey Notification|string|False|Send survey notification|
+|SLA Link Rec ID|string|False|SLA link rec ID|
+|Send Survey Notification|boolean|False|Send survey notification|
 |Service|string|False|Service|
 |Service Owner Email|string|False|Service owner email|
 |Service Valid|string|False|Service valid|
