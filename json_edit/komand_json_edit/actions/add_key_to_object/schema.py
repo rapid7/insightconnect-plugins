@@ -4,11 +4,12 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add a JSON key"
+    DESCRIPTION = "Add a key and value to an existing JSON object"
 
 
 class Input:
     KEY = "key"
+    OBJECT = "object"
     VALUE = "value"
     
 
@@ -16,7 +17,7 @@ class Output:
     JSON = "json"
     
 
-class AddKeyInput(komand.Input):
+class AddKeyToObjectInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -26,18 +27,24 @@ class AddKeyInput(komand.Input):
       "type": "string",
       "title": "Key",
       "description": "JSON key to add",
+      "order": 2
+    },
+    "object": {
+      "type": "object",
+      "title": "Object",
+      "description": "JSON object",
       "order": 1
     },
     "value": {
       "type": "string",
       "title": "Value",
       "description": "Value to add",
-      "order": 2
+      "order": 3
     }
   },
   "required": [
     "key",
-    "value"
+    "object"
   ]
 }
     """)
@@ -46,14 +53,14 @@ class AddKeyInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class AddKeyOutput(komand.Output):
+class AddKeyToObjectOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
     "json": {
-      "$ref": "#/definitions/added_json",
+      "type": "object",
       "title": "JSON",
       "description": "JSON object",
       "order": 1
@@ -61,27 +68,7 @@ class AddKeyOutput(komand.Output):
   },
   "required": [
     "json"
-  ],
-  "definitions": {
-    "added_json": {
-      "type": "object",
-      "title": "added_json",
-      "properties": {
-        "key": {
-          "type": "string",
-          "title": "Key",
-          "description": "JSON key",
-          "order": 1
-        },
-        "value": {
-          "type": "string",
-          "title": "Value",
-          "description": "JSON value",
-          "order": 2
-        }
-      }
-    }
-  }
+  ]
 }
     """)
 

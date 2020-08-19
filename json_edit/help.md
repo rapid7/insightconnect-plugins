@@ -20,22 +20,26 @@ _This plugin does not contain a connection._
 
 ### Actions
 
-#### Add Key
+#### Add Key to Object
 
-This action is used to add a JSON key.
+This action is used to add a key and value to an existing JSON object.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|key|string|None|True|JSON key to add|None|E-mail|
-|value|string|None|True|Value to add|None|user@example.com|
+|key|string|None|True|JSON key to add|None|e-mail|
+|object|object|None|True|JSON object|None|{"user": "Jon Doe"}|
+|value|string|None|False|Value to add|None|user@example.com|
 
 Example input:
 
 ```
 {
-  "key": "E-mail",
+  "object": {
+    "user": "Jon Doe"
+  },
+  "key": "e-mail",
   "value": "user@example.com"
 }
 ```
@@ -44,15 +48,15 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|json|added_json|True|JSON object|
+|json|object|True|JSON object|
 
 Example output:
 
 ```
 {
   "json": {
-    "key": "E-mail",
-    "value": "user@example.com"
+    "e-mail": "user@example.com",
+    "user": "Jon Doe"
   }
 }
 ```
@@ -169,7 +173,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.1.0 - New action Add Key
+* 1.1.0 - New action Add Key to Object
 * 1.0.2 - New spec and help.md format for the Extension Library
 * 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
 * 1.0.0 - Initial plugin

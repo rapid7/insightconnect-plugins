@@ -19,16 +19,6 @@ hub_tags:
   use_cases: [data_utility]
   keywords: [json, utilities]
   features: []
-types:
-  added_json:
-    key:
-      title: Key
-      description: JSON key
-      type: string
-    value:
-      title: Value
-      description: JSON value
-      type: string
 actions:
   update:
     title: Update
@@ -78,25 +68,30 @@ actions:
         type: '[]object'
         description: Array of objects
         required: true
-  add_key:
-    title: Add Key
-    description: Add a JSON key
+  add_key_to_object:
+    title: Add Key to Object
+    description: Add a key and value to an existing JSON object
     input:
+      object:
+        description: JSON object
+        type: object
+        required: true
+        example: '{"user": "Jon Doe"}'
       key:
         title: Key
         description: JSON key to add
         type: string
         required: true
-        example: E-mail
+        example: e-mail
       value:
         title: Value
         description: Value to add
         type: string
-        required: true
+        required: false
         example: user@example.com
     output:
       json:
         title: JSON
         description: JSON object
-        type: added_json
+        type: object
         required: true
