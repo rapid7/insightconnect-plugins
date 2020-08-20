@@ -28,12 +28,14 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|API Key|None|None|
+|api_key|credential_secret_key|None|True|API Key|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|
 
 Example input:
 
 ```
-
+{
+  "api_key": "{\"secretKey\": \"9de5069c5afe602b2ea0a04b66beb2c0\"}"
+}
 ```
 
 ## Technical Details
@@ -104,6 +106,13 @@ This action is used to search for results related to a specific parent domain.
 Example input:
 
 ```
+{
+  "direction": "asc",
+  "from": 0,
+  "limit": 10,
+  "orderby": "Riskscore",
+  "parent": "example.com"
+}
 ```
 
 ##### Output
