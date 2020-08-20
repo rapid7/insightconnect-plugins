@@ -47,6 +47,9 @@ This action is used to delete an Asset.
 Example input:
 
 ```
+{
+  "id": 21
+}
 ```
 
 ##### Output
@@ -58,6 +61,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Get Asset Group Assets
