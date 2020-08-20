@@ -34,6 +34,33 @@ Example input:
 
 ### Actions
 
+#### Delete an Asset
+
+This action is used to delete an Asset.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|integer|None|True|Asset ID|None|None|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|asset|asset|True|Asset details|
+|success|boolean|True|Was the operation successful|
+
+Example output:
+
+```
+```
+
 #### Get Asset Group Assets
 
 This action is used to get Asset Group Assets.

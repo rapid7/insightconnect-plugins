@@ -45,6 +45,8 @@ class ICONRapid7Insightvm(komand.Plugin):
 
         self.add_action(actions.CreateUser())
 
+        self.add_action(actions.DeleteAsset())
+
         self.add_action(actions.DeleteAssetGroup())
 
         self.add_action(actions.DeleteException())

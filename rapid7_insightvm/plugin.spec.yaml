@@ -3618,6 +3618,26 @@ actions:
         description: The identifiers of the associated resources
         type: '[]integer'
         required: false
+  delete_asset:
+    title: Delete an Asset
+    description: Delete an Asset
+    input:
+      id:
+        title: ID
+        description: Asset ID
+        type: integer
+        required: true
+    output:
+      success:
+        title: Success
+        description: Was the operation successful
+        type: boolean
+        required: true
+      asset:
+        title: Asset
+        description: Asset details
+        type: asset
+        required: true
 triggers:
   new_scans:
     title: New Scans
@@ -3675,3 +3695,4 @@ triggers:
         description: InsightVM vulnerability exception
         type: vulnerability_exception
         required: false
+
