@@ -53,7 +53,6 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|asset|asset|True|Asset details|
 |success|boolean|True|Was the operation successful|
 
 Example output:
@@ -4784,6 +4783,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.1.0 - New Action Delete Asset
 * 4.0.1 - Add the option to limit a scan to specific hosts
 * 4.0.0 - Fix output for Generate Adhoc SQL Report action
 * 3.6.0 - Add Get Asset Group Assets action

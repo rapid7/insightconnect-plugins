@@ -3633,11 +3633,6 @@ actions:
         description: Was the operation successful
         type: boolean
         required: true
-      asset:
-        title: Asset
-        description: Asset details
-        type: asset
-        required: true
 triggers:
   new_scans:
     title: New Scans
