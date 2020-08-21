@@ -244,6 +244,6 @@ actions:
         required: true
       is_asset_online:
         title: Is Asset Online
-        description: Is this agent connected to the insight platform. This usually indicates if the device is powered on. It may indicate network issues as well.
+        description: Is this agent connected to the insight platform. This usually indicates if the device is powered on. It may indicate network issues as well
         type: boolean
         required: true
