@@ -71,6 +71,13 @@ class IvantiServiceManagerAPI:
             f"odata/businessobject/incidents('{incident_number}')"
         )
 
+    def post_journal_note(self, payload: dict) -> dict:
+        return clean(self._call_api(
+            "POST",
+            f"odata/businessobject/journal__Notess",
+            json_data=payload)
+        )
+
     def _call_api(self, method: str, path: str, json_data: dict = None, params: dict = None):
         response = {"text": ""}
         headers = {

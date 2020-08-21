@@ -19,6 +19,8 @@ class ICONIvantiServiceManager(insightconnect_plugin_runtime.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_action(actions.AddNote())
+
         self.add_action(actions.CreateIncident())
 
         self.add_action(actions.DeleteIncident())

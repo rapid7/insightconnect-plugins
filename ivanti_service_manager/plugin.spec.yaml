@@ -573,6 +573,167 @@ types:
       description: Is un read
       type: boolean
       required: false
+  journal_note:
+    DisplayText:
+      title: Display Text
+      description: Display text
+      type: string
+      required: false
+    NotesBody:
+      title: Notes Body
+      description: Notes body
+      type: string
+      required: false
+    Source_Valid:
+      title: Source Valid
+      description: Source valid
+      type: string
+      required: false
+    Source:
+      title: Source
+      description: Source
+      type: string
+      required: false
+    TimeSpent:
+      title: Time Spent
+      description: Time spent
+      type: string
+      required: false
+    Category_Valid:
+      title: Category Valid
+      description: Category valid
+      type: string
+      required: false
+    Category:
+      title: Category
+      description: Category
+      type: string
+      required: false
+    CreatedBy:
+      title: Created By
+      description: Created by
+      type: string
+      required: false
+    CreatedDateTime:
+      title: Created Date Time
+      description: Created date and time
+      type: string
+      required: false
+    JournalType:
+      title: Journal Type
+      description: Journal type
+      type: string
+      required: false
+    LastModBy:
+      title: Last Mod By
+      description: Last modified by
+      type: string
+      required: false
+    LastModDateTime:
+      title: Last Mod Date Time
+      description: Last modified date and time
+      type: string
+      required: false
+    Owner_Valid:
+      title: Owner Valid
+      description: Owner valid
+      type: string
+      required: false
+    Owner:
+      title: Owner
+      description: Owner
+      type: string
+      required: false
+    OwnerTeam_Valid:
+      title: Owner Team Valid
+      description: Owner team valid
+      type: string
+      required: false
+    OwnerTeam:
+      title: Owner Team
+      description: Owner team
+      type: string
+      required: false
+    OwnerType:
+      title: Owner Type
+      description: Owner type
+      type: string
+      required: false
+    ParentLink_Category:
+      title: Parent Link Category
+      description: Parent link category
+      type: string
+      required: false
+    ParentLink_RecID:
+      title: Parent Link Rec ID
+      description: Parent link rec ID
+      type: string
+      required: false
+    ParentLink:
+      title: Parent Link
+      description: Parent link
+      type: string
+      required: false
+    RecId:
+      title: Rec ID
+      description: Rec ID
+      type: string
+      required: false
+    Subject:
+      title: Subject
+      description: Subject
+      type: string
+      required: false
+    TypeAlias:
+      title: Type Alias
+      description: Type alias
+      type: string
+      required: false
+    PublishToWeb:
+      title: Publish To Web
+      description: Publish to web
+      type: boolean
+      required: false
+    AttachmentName:
+      title: Attachment Name
+      description: Attachment name
+      type: string
+      required: false
+    AttachmentExtension:
+      title: Attachment Extension
+      description: Attachment extension
+      type: string
+      required: false
+    AttachmentData:
+      title: Attachment Data
+      description: Notes body
+      type: string
+      required: false
+    ReadOnly:
+      title: Read Only
+      description: Read only
+      type: boolean
+      required: false
+    IsNewRecord:
+      title: Is New Record
+      description: Is new record
+      type: boolean
+      required: false
+    IsUnRead:
+      title: Is Un Read
+      description: Is un read
+      type: boolean
+      required: false
+    ParentOwner:
+      title: Parent Owner
+      description: Parent owner
+      type: string
+      required: false
+    UnreadTransition:
+      title: Unread Transition
+      description: Unread transition
+      type: boolean
+      required: false
     
 connection:
   credentials:
@@ -728,7 +889,6 @@ actions:
         description: Status of the incident
         type: string
         required: false
-        default: Logged
         enum:
         - Logged
         - Active
@@ -785,4 +945,61 @@ actions:
         title: Incident
         description: Newly created incident
         type: incident
+        required: true
+  add_note:
+    title: Add Note
+    description: Adds a journal note to an incident
+    input:
+      incident_number:
+        title: Incident Number
+        description: Number of the incident to which the note will be added
+        type: integer
+        required: true
+        example: 12345
+      summary:
+        title: Summary
+        description: Summary of the note
+        type: string
+        required: true
+        example: Example note summary created from InsightConnect
+      notes:
+        title: Notes
+        description: Body of the note
+        type: string
+        required: false
+        example: Example note body created from InsightConnect
+      category:
+        title: Category
+        description: Category of the note
+        type: string
+        required: false
+        example: Memo
+        enum:
+        - Called Customer
+        - Customer Complaint
+        - Customer Feedback
+        - Customer Follow-up
+        - Customer Notes
+        - E-mailed Customer
+        - Left Voice Mail
+        - Memo
+        - Resolution Communication
+        - Status Update
+      source:
+        title: Source
+        description: Source of the note
+        type: string
+        required: false
+        example: Other
+        enum:
+        - E-mail
+        - Other
+        - Phone/Fax
+        - Self Service
+        - Voice Mail
+    output:
+      journal_note:
+        title: Journal Note
+        description: Journal note details
+        type: journal_note
         required: true

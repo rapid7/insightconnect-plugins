@@ -7,6 +7,7 @@
 * Create incidents
 * Update incidents
 * Delete incidents
+* Add note
 
 # Requirements
 
@@ -45,6 +46,67 @@ Example input:
 
 ### Actions
 
+#### Add Note
+
+This action adds a journal note to an incident.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|category|string|None|False|Category of the note|['Called Customer', 'Customer Complaint', 'Customer Feedback', 'Customer Follow-up', 'Customer Notes', 'E-mailed Customer', 'Left Voice Mail', 'Memo', 'Resolution Communication', 'Status Update']|Memo|
+|incident_number|integer|None|True|Number of the incident to which the note will be added|None|12345|
+|notes|string|None|False|Body of the note|None|Example note body created from InsightConnect|
+|source|string|None|False|Source of the note|['E-mail', 'Other', 'Phone/Fax', 'Self Service', 'Voice Mail']|Other|
+|summary|string|None|True|Summary of the note|None|Example note summary created from InsightConnect|
+
+Example input:
+
+```
+{
+  "category": "Memo",
+  "incident_number": 12345,
+  "notes": "Example note body created from InsightConnect",
+  "source": "Other",
+  "summary": "Example note summary created from InsightConnect"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|journal_note|journal_note|True|Journal note details|
+
+Example output:
+
+```
+{
+    "journal_note": {
+        "@odata.context": "https://rapid7.vantosi.com/HEAT/api/odata/$metadata#journal__notess/$entity",
+        "DisplayText": "Test note summary created by InsightConnect This is the body of the note created by InsightConnect",
+        "NotesBody": "This is the body of the note created by InsightConnect",
+        "Source_Valid": "3961856F36F5481DAC36273B68833AEC",
+        "Source": "E-mail",
+        "Category_Valid": "E8F5DACDE7EA411990CE1D0DC7D392F7",
+        "Category": "Customer Notes",
+        "CreatedBy": "user",
+        "CreatedDateTime": "2020-08-21T13:04:12-07:00",
+        "JournalType": "Notes",
+        "LastModBy": "user",
+        "LastModDateTime": "2020-08-21T13:04:13-07:00",
+        "ParentLink_RecID": "304631ACAB8A4EFD8D8E5AA334993426",
+        "RecId": "9F8299197F7C4FCBA0943EC384128237",
+        "Subject": "Test note summary created by InsightConnect",
+        "PublishToWeb": false,
+        "ReadOnly": false,
+        "IsNewRecord": false,
+        "IsUnRead": true,
+        "UnreadTransition": false
+    }
+}
+```
+
 #### Update Incident
 
 This action is used to update an existing incident in Ivanti Service Manager.
@@ -59,7 +121,7 @@ This action is used to update an existing incident in Ivanti Service Manager.
 |customer|string|None|False|Email address of the customer|None|user@example.com|
 |incident_number|integer|None|True|Number of the incident to be updated|None|12345|
 |resolution|string|None|False|Resolution of the incident (required when setting status to Resolved)|None|This incident was resolved by InsightConnect|
-|status|string|Logged|False|Status of the incident|['Logged', 'Active', 'Waiting for Customer', 'Waiting for 3rd Party', 'Waiting for Resolution', 'Resolved', 'Closed']|Waiting for Resolution|
+|status|string|None|False|Status of the incident|['Logged', 'Active', 'Waiting for Customer', 'Waiting for 3rd Party', 'Waiting for Resolution', 'Resolved', 'Closed']|Waiting for Resolution|
 
 Example input:
 
