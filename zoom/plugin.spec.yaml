@@ -399,6 +399,3 @@ events:
         title: Last Run Time
         description: The time of the last time events were retrieved
         type: string
-    # Not defined in spec but passed at configuration time
-    # batch_events: true (whether to return batch or single events)
-    # batch_size: 1000 (how many events to return in each response/page)
