@@ -50,7 +50,7 @@ class CheckAgentStatusOutput(insightconnect_plugin_runtime.Output):
     "is_asset_online": {
       "type": "boolean",
       "title": "Is Asset Online",
-      "description": "Is this asset online",
+      "description": "Is this agent connected to the insight platform. This usually indicates if the device is powered on. It may indicate network issues as well.",
       "order": 4
     },
     "is_currently_quarantined": {

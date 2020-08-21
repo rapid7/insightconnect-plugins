@@ -59,7 +59,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|is_asset_online|boolean|True|Is this asset online|
+|is_asset_online|boolean|True|Is this agent connected to the insight platform. This usually indicates if the device is powered on. It may indicate network issues as well.|
 |is_currently_quarantined|boolean|True|Is the device currently quarantined|
 |is_quarantine_requested|boolean|True|Is a quarantine action pending on this device|
 |is_unquarantine_requested|boolean|True|Is there a pending request to release quarantine on this device|
@@ -199,6 +199,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.1 - Documentation update
 * 1.0.0 - Initial plugin
 
 # Links
