@@ -386,7 +386,7 @@ events:
       - "hours"
       - "datetime"  # Future date
       default: cron
-    persistence:  # Any number of key/value pairs stored between runs
+    state:  # Any number of key/value pairs stored between runs
       last_event_time:  # Example
         title: Last Event Time
         description: The datetime of the last retrieved event
