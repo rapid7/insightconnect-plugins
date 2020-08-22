@@ -22,8 +22,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self):
         try:
-            employees = self.ivanti_service_manager_api.get_employees()
-            if not employees.get('value'):
+            if not self.ivanti_service_manager_api.get_employees().get('value'):
                 raise ConnectionTestException(
                     cause="Connection error.",
                     assistance="Problem with connecting to Ivanti Service Manager Server."

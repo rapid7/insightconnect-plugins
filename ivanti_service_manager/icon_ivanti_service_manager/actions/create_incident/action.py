@@ -13,11 +13,11 @@ class CreateIncident(insightconnect_plugin_runtime.Action):
                 output=CreateIncidentOutput())
 
     def run(self, params={}):
-        urgency = params.get(Input.URGENCY, None)
-        assignee = params.get(Input.ASSIGNEE, None)
-        source = params.get(Input.SOURCE, None)
-        impact = params.get(Input.IMPACT, None)
-        category = params.get(Input.CATEGORY, None)
+        urgency = params.get(Input.URGENCY)
+        assignee = params.get(Input.ASSIGNEE)
+        source = params.get(Input.SOURCE)
+        impact = params.get(Input.IMPACT)
+        category = params.get(Input.CATEGORY)
 
         payload = {
             'Subject': params.get(Input.SUMMARY),

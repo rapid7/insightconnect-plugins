@@ -13,9 +13,9 @@ class AddNote(insightconnect_plugin_runtime.Action):
                 output=AddNoteOutput())
 
     def run(self, params={}):
-        notes = params.get(Input.NOTES, None)
-        category = params.get(Input.CATEGORY, None)
-        source = params.get(Input.SOURCE, None)
+        notes = params.get(Input.NOTES)
+        category = params.get(Input.CATEGORY)
+        source = params.get(Input.SOURCE)
 
         payload = {
             'ParentLink_RecID': self.connection.ivanti_service_manager_api.get_incident_by_number(

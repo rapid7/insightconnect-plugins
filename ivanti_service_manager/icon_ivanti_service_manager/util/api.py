@@ -23,13 +23,14 @@ class IvantiServiceManagerAPI:
             f"odata/businessobject/employees?$search={identifier}"
         ).get("value")
 
+        if employees and len(employees) > 1:
+            raise PluginException(
+                cause='Multiple employees found.',
+                assistance=f'Search for {identifier} returned more than 1 result. '
+                           'Please provide a unique identifier.'
+            )
+
         if employees:
-            if len(employees) > 1:
-                raise PluginException(
-                    cause='Multiple employees found.',
-                    assistance=f'Search for {identifier} returned more than 1 result.'\
-                    'Please provide a unique identifier.'
-                )
             return employees[0]
 
         raise PluginException(

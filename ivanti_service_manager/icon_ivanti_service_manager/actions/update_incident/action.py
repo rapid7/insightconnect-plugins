@@ -14,26 +14,18 @@ class UpdateIncident(insightconnect_plugin_runtime.Action):
                 output=UpdateIncidentOutput())
 
     def run(self, params={}):
-        customer = params.get(Input.CUSTOMER, None)
-        assignee = params.get(Input.ASSIGNEE, None)
-        status = params.get(Input.STATUS, None)
-        category = params.get(Input.CATEGORY, None)
-        cause_code = params.get(Input.CAUSE_CODE, None)
-        resolution = params.get(Input.RESOLUTION, None)
+        customer = params.get(Input.CUSTOMER)
+        assignee = params.get(Input.ASSIGNEE)
+        status = params.get(Input.STATUS)
+        category = params.get(Input.CATEGORY)
+        cause_code = params.get(Input.CAUSE_CODE)
+        resolution = params.get(Input.RESOLUTION)
 
-        if not self._check_parameters_exist([customer, assignee, status, category, cause_code, resolution]):
+        if all((v is None or v == "") for v in [customer, assignee, status, category, cause_code, resolution]):
             raise PluginException(
                 cause='No parameters provided.',
                 assistance='No parameters provided to update. Please validate and try again.'
             )
-
-        # Nie mam pojecia czemu to nie dziala, jak testuje osobno to wszystko jest ok, ale w akcji nie dziala.
-        # A bylo by troche czysciej
-        # if all(v is None for v in [customer, assignee, status, category, cause_code, resolution]):
-        #     raise PluginException(
-        #         cause='No parameters provided.',
-        #         assistance='No parameters provided to update. Please validate and try again.'
-        #     )
         
         payload = {}
         if assignee:
@@ -61,13 +53,3 @@ class UpdateIncident(insightconnect_plugin_runtime.Action):
                 payload
             )
         }
-
-    @staticmethod
-    def _check_parameters_exist(variables: list) -> bool:
-        i = 0
-        for variable in variables:
-            if variable:
-                i += 1
-        if i == 0:
-            return False
-        return True
