@@ -32,7 +32,9 @@ class CreateIncident(insightconnect_plugin_runtime.Action):
         if urgency:
             payload['Urgency'] = urgency
         if assignee:
-            payload['Owner'] = assignee
+            payload['Owner'] = self.connection.ivanti_service_manager_api.search_employee(
+                params.get(Input.CUSTOMER)
+            ).get('LoginID')
         if source:
             payload['Source'] = source
         if impact:
