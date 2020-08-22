@@ -6,6 +6,8 @@
 
 * Check if address is in address group
 * Remove address from group
+* Delete Address Object
+* Add Address to Group
 
 # Requirements
 
@@ -38,7 +40,7 @@ Example input:
 ```
 {
   "credentials": {
-    "username": "admin", 
+    "username": "admin",
     "password": "mypassword"
   },
   "port": 443,
@@ -51,6 +53,73 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Add Address to Group
+
+This action is used to add an IP address associated with an existing Object to a Network Group.
+It works by checking the user-supplied IPv4 or IPv6 addresses across all Objects in Cisco ASA. If a match is found, it adds the object associated with the provided IP address to the group. This is useful when you don't know the Object by its name.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|Name of the address, which can be an IPv4 or IPv6 address|None|198.51.100.100|
+|group|string|None|True|Name of the group to add the address to|None|InsightConnect Block List|
+
+Example input:
+
+```
+{
+  "address": "198.51.100.100",
+  "group": "InsightConnect Block List"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Success if address add to group|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Delete Address Object
+
+This action is used to delete an Address Object by its object name.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object|string|None|True|Name of the address object to delete|None|MaliciousDomain|
+
+Example input:
+
+```
+{
+  "address_object": "MaliciousDomain"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Success if address object deleted|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Remove Address from Group
 
@@ -164,6 +233,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.0 - Add new action Add Address to Group
+* 1.2.0 - Add new action Delete Address Object
 * 1.1.0 - Add new action Remove Address from Group
 * 1.0.0 - Initial plugin
 

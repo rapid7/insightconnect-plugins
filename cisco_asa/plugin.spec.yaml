@@ -4,7 +4,7 @@ products: [insightconnect]
 name: cisco_asa
 title: Cisco Adaptive Security Appliance
 description: The Cisco ASA plugin allows you to automate the management of network objects
-version: 1.1.0
+version: 1.3.0
 vendor: rapid7
 support: community
 status: []
@@ -149,5 +149,43 @@ actions:
       success:
         title: Success
         description: Success if address removed from group
+        type: boolean
+        required: true
+  delete_address_object:
+    title: Delete Address Object
+    description: Delete an Address Object
+    input:
+      address_object:
+        title: Address Object
+        description: Name of the address object to delete
+        type: string
+        required: true
+        example: MaliciousDomain
+    output:
+      success:
+        title: Success
+        description: Success if address object deleted
+        type: boolean
+        required: true
+  add_address_to_group:
+    title: Add Address to Group
+    description: Add an Object to a Network Group by the Object IP address
+    input:
+      address:
+        title: Address
+        description: Name of the address, which can be an IPv4 or IPv6 address
+        type: string
+        required: true
+        example: 198.51.100.100
+      group:
+        title: Group
+        description: Name of the group to add the address to
+        type: string
+        required: true
+        example: InsightConnect Block List
+    output:
+      success:
+        title: Success
+        description: Success if address add to group
         type: boolean
         required: true

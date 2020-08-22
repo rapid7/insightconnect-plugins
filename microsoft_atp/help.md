@@ -47,6 +47,59 @@ Example input:
 
 ### Actions
 
+#### Get Security Recommendations
+
+This action is used to retrieve a list of security recommendations.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|machine|string|None|True|Machine IP address, hostname or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+
+Example input:
+
+```
+{
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|recommendations|[]recommendation|True|List of security recommendations|
+
+Example output:
+
+```
+{
+  "recommendations": [
+    {
+      "activeAlert": false,
+      "associatedThreats": [],
+      "configScoreImpact": 0.0,
+      "exposedMachinesCount": 1,
+      "exposureImpact": 0.0,
+      "id": "va-_-microsoft-_-.net_framework",
+      "nonProductivityImpactedAssets": 0,
+      "productName": ".net_framework",
+      "publicExploit": false,
+      "recommendationCategory": "Application",
+      "recommendationName": "Update Microsoft .net Framework",
+      "relatedComponent": ".net Framework",
+      "remediationType": "Update",
+      "severityScore": 0.0,
+      "status": "Active",
+      "totalMachineCount": 0,
+      "vendor": "microsoft",
+      "weaknesses": 1
+    }
+  ]
+}
+```
+
 #### Blacklist
 
 This action is used to submit or update new indicator.
@@ -662,6 +715,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.4.0 - Add new action Get Security Recommendations
 * 4.3.0 - Add new action Get Machine Vulnerabilities
 * 4.2.0 - Add new action Blacklist
 * 4.1.0 - Add new action Find Machines with Installed Software

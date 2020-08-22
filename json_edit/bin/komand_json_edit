@@ -4,10 +4,10 @@ import komand
 from komand_json_edit import connection, actions, triggers
 
 
-Name = 'JSON Edit'
-Vendor = 'rapid7'
-Version = '1.0.2'
-Description = 'Provides the ability to edit JSON data'
+Name = "JSON Edit"
+Vendor = "rapid7"
+Version = "1.1.0"
+Description = "Provides the ability to edit JSON data"
 
 
 class ICONJsonEdit(komand.Plugin):
@@ -19,6 +19,8 @@ class ICONJsonEdit(komand.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_action(actions.AddKeyToObject())
+
         self.add_action(actions.Delete())
 
         self.add_action(actions.Update())

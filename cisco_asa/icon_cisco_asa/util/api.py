@@ -24,6 +24,16 @@ class CiscoAsaAPI:
             }
         )
 
+    def add_to_group(self, object_id: str, group: str, all_members: list):
+        return self._call_api(
+            "PUT",
+            f"objects/networkobjectgroups/{object_id}",
+            json_data={
+                "name": group,
+                "members": all_members
+            }
+        )
+
     def get_groups(self):
         return self.run_with_pages("objects/networkobjectgroups")
 
@@ -36,6 +46,19 @@ class CiscoAsaAPI:
 
     def get_objects(self):
         return self.run_with_pages("objects/networkobjects")
+
+    def get_object(self, address_object_name: str):
+        for item in self.get_objects():
+            if item.get("name") == address_object_name or item.get("objectId") == address_object_name:
+                return item
+
+        return {}
+
+    def delete_address_object(self, object_id: str):
+        return self._call_api(
+            "DELETE",
+            f"objects/networkobjects/{object_id}"
+        )
 
     def run_with_pages(self, path):
         objects = []
@@ -80,6 +103,8 @@ class CiscoAsaAPI:
                 raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
+            if response.status_code == 404:
+                raise PluginException(preset=PluginException.Preset.NOT_FOUND)
             if response.status_code >= 400:
                 response_data = response.text
                 raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response_data)

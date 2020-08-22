@@ -32,6 +32,10 @@ class Investigations:
 
         return f'{console_url}idr/v1/investigations/{idr_id}/status/{status}'
 
+    @staticmethod
+    def set_user_for_investigation(base_url: str, investigation_id: str)->str:
+        return f'{base_url}idr/v1/investigations/{investigation_id}/assignee'
+
 
 class Threats:
 
