@@ -6,7 +6,7 @@ from komand_datetime import connection, actions, triggers
 
 Name = "Datetime"
 Vendor = "rapid7"
-Version = "2.0.6"
+Version = "2.1.0"
 Description = "This plugin manipulates timestamps using Python's maya library"
 
 
@@ -30,6 +30,10 @@ class ICONDatetime(insightconnect_plugin_runtime.Plugin):
         self.add_action(actions.SubtractFromDatetime())
 
         self.add_action(actions.TimeElapsed())
+
+        self.add_action(actions.ToLocaltime())
+
+        self.add_action(actions.ToUtc())
 
 
 def main():

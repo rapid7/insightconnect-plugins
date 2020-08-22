@@ -7,6 +7,8 @@ Timestamps, timezones, and Datetimes can be difficult to work with, especially w
 * Convert a Datetime to an Epoch and vice versa
 * Convert a Datetime to a specified format
 * Determine the elapsed time between two dates
+* Convert date from localtime to UTC
+* Convert date from UTC to localtime
 
 # Requirements
 
@@ -21,6 +23,75 @@ _This plugin does not contain a connection._
 ## Technical Details
 
 ### Actions
+
+#### To UTC
+
+This action is used to convert time from localtime to UTC.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|base_time|date|None|True|Datetime to convert|None|22 Jul 2020 21:20:33|
+|timezone|string|None|True|Timezone to convert from localtime|None|US/Eastern|
+
+Example input:
+
+```
+{
+  "base_time": "22 Jul 2020 21:20:33",
+  "timezone": "US/Eastern"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|converted_date|date|True|Date in UTC|
+
+Example output:
+
+```
+{
+  "converted_date": "2020-07-23T01:20:33.0Z"
+}
+
+```
+
+#### To Localtime
+
+This action is used to convert time from UTC to localtime.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|base_time|date|None|True|Datetime to convert|None|22 Jul 2020 21:20:33|
+|timezone|string|None|True|Timezone to convert from UTC to localtime|None|US/Eastern|
+
+Example input:
+
+```
+{
+  "base_time": "22 Jul 2020 21:20:33",
+  "timezone": "US/Eastern"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|converted_date|date|True|Date in localtime|
+
+Example output:
+
+```
+{
+  "converted_date": "2020-07-22T17:20:33.0Z"
+}
+```
 
 #### Get Datetime
 
@@ -228,9 +299,9 @@ This action is used to find the difference between two Datetime inputs.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|first_time|date|None|True|First date|None|2020-07-22T21:20:33.0Z|
+|first_time|date|None|True|First date|None|2020-07-22 21:20:33|
 |result_unit|string|None|True|Time unit of measurement for result|['Years', 'Months', 'Days', 'Hours', 'Minutes', 'Seconds']|Years|
-|second_time|date|None|True|Second date|None|2022-07-22T21:20:33.0Z|
+|second_time|date|None|True|Second date|None|2022-07-22 21:20:33|
 
 Example input:
 
@@ -274,6 +345,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.0 - New actions To UTC and To Localtime
 * 2.0.6 - Update to v4 Python plugin runtime 
 * 2.0.5 - New spec and help.md format for the Extension Library | Changed const string in params.get to Input constants | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
 * 2.0.4 - Update plugin tag from `utility` to `utilities` for Marketplace searchability

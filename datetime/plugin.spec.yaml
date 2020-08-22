@@ -4,7 +4,7 @@ products: [insightconnect]
 name: datetime
 title: Datetime
 description: This plugin manipulates timestamps using Python's maya library
-version: 2.0.6
+version: 2.1.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -222,3 +222,48 @@ actions:
         type: string
         description: Time unit of measurement
         required: true
+  to_localtime:
+    title: To Localtime
+    description: Convert time from UTC to localtime
+    input:
+      base_time:
+        title: Base Time
+        description: Datetime to convert
+        type: date
+        required: true
+        example: 22 Jul 2020 21:20:33
+      timezone:
+        title: Timezone
+        description: Timezone to convert from UTC to localtime
+        type: string
+        required: true
+        example: US/Eastern
+    output:
+      converted_date:
+        title: Converted Date
+        description: Date in localtime
+        type: date
+        required: true
+  to_utc:
+    title: To UTC
+    description: Convert time from localtime to UTC
+    input:
+      base_time:
+        title: Base Time
+        description: Datetime to convert
+        type: date
+        required: true
+        example: 22 Jul 2020 21:20:33
+      timezone:
+        title: Timezone
+        description: Timezone to convert from localtime
+        type: string
+        required: true
+        example: US/Eastern
+    output:
+      converted_date:
+        title: Converted Date
+        description: Date in UTC
+        type: date
+        required: true
+
