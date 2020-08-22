@@ -14,13 +14,52 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-## Connection
-
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
 ### Actions
+
+#### Add Key to Object
+
+This action is used to add a key and value to an existing JSON object.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|key|string|None|True|JSON key to add|None|e-mail|
+|object|object|None|True|JSON object|None|{"user": "Jon Doe"}|
+|value|string|None|False|Value to add|None|user@example.com|
+
+Example input:
+
+```
+{
+  "object": {
+    "user": "Jon Doe"
+  },
+  "key": "e-mail",
+  "value": "user@example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|json|object|True|JSON object|
+
+Example output:
+
+```
+{
+  "json": {
+    "e-mail": "user@example.com",
+    "user": "Jon Doe"
+  }
+}
+```
 
 #### Update
 
@@ -31,12 +70,17 @@ It will iterate through each dictionary but is not recursive so nested dictionar
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|array|[]object|None|False|Array of JSON objects|None|
-|object|object|None|False|JSON object|None|
-|key|string|None|True|JSON key to update|None|
-|value|string|None|True|New value|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|array|[]object|None|False|Array of JSON objects|None|None|
+|key|string|None|True|JSON key to update|None|None|
+|object|object|None|False|JSON object|None|None|
+|value|string|None|True|New value|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -74,11 +118,16 @@ It will iterate through each dictionary but is not recursive so nested dictionar
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|array|[]object|None|False|Array of JSON objects|None|
-|object|object|None|False|JSON object|None|
-|key|string|None|True|Key to remove|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|array|[]object|None|False|Array of JSON objects|None|None|
+|key|string|None|True|Key to remove|None|None|
+|object|object|None|False|JSON object|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -107,11 +156,16 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+#### added_json
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Key|string|False|JSON key|
+|Value|string|False|JSON value|
 
 ## Troubleshooting
 
@@ -119,6 +173,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.1.0 - New action Add Key to Object
 * 1.0.2 - New spec and help.md format for the Extension Library
 * 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
 * 1.0.0 - Initial plugin
