@@ -91,7 +91,7 @@ class AgentsSummaryOutput(komand.Output):
     },
     "up_to_date": {
       "type": "integer",
-      "title": "Up To Date Number",
+      "title": "Up to Date Number",
       "description": "Number of agents with the most up-to-date software version",
       "order": 1
     }
