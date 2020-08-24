@@ -31,7 +31,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_secret_key|None|True|API key from account|None|1A2B3CC4D5E67F8901G2HI345J6K7L89|
 |ssl_verify|boolean|True|False|Validate TLS / SSL certificate|None|True|
-|url|string|None|True|API access URL|None|https://example.com|
+|url|string|None|True|API access URL|None|https://ivanti.example.com|
 
 Example input:
 
@@ -39,7 +39,7 @@ Example input:
 {
   "credentials": "1A2B3CC4D5E67F8901G2HI345J6K7L89",
   "ssl_verify": true,
-  "url": "https://example.com"
+  "url": "https://ivanti.example.com"
 }
 ```
 ## Technical Details

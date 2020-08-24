@@ -747,7 +747,7 @@ connection:
     description: API access URL
     type: string
     required: true
-    example: 'https://example.com'
+    example: 'https://ivanti.example.com'
   ssl_verify:
     title: TLS / SSL Verify
     description: Validate TLS / SSL certificate

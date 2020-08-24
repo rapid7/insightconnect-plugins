@@ -6,11 +6,11 @@ from insightconnect_plugin_runtime.helper import clean
 
 class IvantiServiceManagerAPI:
     def __init__(self, api_key: str, url: str, verify_ssl: bool, logger: object):
-        self.url = url + "/api/"
+        self.url = url.rstrip('/').replace('/api', '') + '/api/'
         self.verify_ssl = verify_ssl
         self.logger = logger
         self.api_key = api_key
-
+        
     def get_employees(self):
         return self._call_api(
             "GET",
