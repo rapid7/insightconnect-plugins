@@ -232,7 +232,7 @@ class GetAgentDetailsOutput(komand.Output):
         },
         "isUpToDate": {
           "type": "boolean",
-          "title": "Is Up To Date",
+          "title": "Is Up to Date",
           "description": "Indicates if the agent version is up to date",
           "order": 5
         },
