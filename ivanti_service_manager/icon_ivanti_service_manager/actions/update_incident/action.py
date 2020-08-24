@@ -23,7 +23,7 @@ class UpdateIncident(insightconnect_plugin_runtime.Action):
 
         if all((v is None or v == "") for v in [customer, assignee, status, category, cause_code, resolution]):
             raise PluginException(
-                cause='No parameters provided.',
+                cause='At least one action input is required.',
                 assistance='No parameters provided to update. Please validate and try again.'
             )
         

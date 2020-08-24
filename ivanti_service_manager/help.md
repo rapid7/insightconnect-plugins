@@ -1,6 +1,6 @@
 # Description
 
-[Ivanti Service Manager](https://www.ivanti.co.uk/products/service-manager) is a flexible and complete cloud-optimized, easily scalable and adaptable ITSM solution used for managing and automating ITSM processes
+[Ivanti Service Manager](https://www.ivanti.co.uk/products/service-manager) is a flexible and complete cloud-optimized, easily scalable and adaptable ITSM solution used for managing and automating ITSM processes.
 
 # Key Features
 
@@ -11,16 +11,16 @@
 
 # Requirements
 
-* Requires an API Key from the product
+* Requires an API Key from Ivanti
 
 # Documentation
 ## Setup
 
-Follow below steps in order to generete an API Key in Ivanti Service Manager to use in this plugin:
+Follow the steps below to generate an API Key in Ivanti Service Manager to use with this plugin:
 1. From the Configuration console, click Configure > Security Controls > API Keys
 2. Select the relevant group created for REST API from the Key Groups section. 
 3. Click Add API Key. The application displays the New API Key page.
-4. Give the key an appropriate permissions to perform the action.
+4. Give the key the appropriate permissions to perform the action.
 5. Click Save Key. The generated REST API Key is saved with the details you entered.
 
 For more detailed instruction please refer to [Ivanti Service Manager API Guide](https://help.ivanti.com/ht/help/en_US/ISM/2020/admin/Content/Configure/API/Using-REST-API-Key.htm)
@@ -280,7 +280,7 @@ This action is used to create a new Ivanti Service Manager Incident record.
 |assignee|string|None|False|Name of the assignee as it appears in Ivanti Service Manager|None|John Doe|
 |category|string|None|False|Category of the incident|None|None|
 |customer|string|None|True|Email address of the customer|None|user@example.com|
-|description|string|None|True|Description of the incident|None|This incident was created using Insight Connect|
+|description|string|None|True|Description of the incident|None|This incident was created using InsightConnect|
 |impact|string|None|False|Impact of the incident|['Low', 'Medium', 'High']|Medium|
 |source|string|None|False|Source of incident report|['AutoTicket', 'Chat', 'Email', 'Fax', 'FrontRange Voice', 'Instant Message', 'Network Monitor', 'Phone', 'Self Service', 'Voice Mail', 'Walk-In']|Network Monitor|
 |status|string|Logged|True|Status of the incident|['Logged', 'Active', 'Waiting for Customer', 'Waiting for 3rd Party', 'Waiting for Resolution', 'Resolved', 'Closed']|Logged|
@@ -294,7 +294,7 @@ Example input:
 {
   "assignee": "John Doe",
   "customer": "user@example.com",
-  "description": "This incident was created using Insight Connect",
+  "description": "This incident was created using InsightConnect",
   "impact": "Medium",
   "source": "Network Monitor",
   "status": "Logged",

@@ -163,8 +163,8 @@ class AddNoteOutput(insightconnect_plugin_runtime.Output):
         },
         "IsUnRead": {
           "type": "boolean",
-          "title": "Is Un Read",
-          "description": "Is un read",
+          "title": "Is Unread",
+          "description": "Is unread",
           "order": 30
         },
         "JournalType": {

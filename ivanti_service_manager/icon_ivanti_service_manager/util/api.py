@@ -11,7 +11,7 @@ class IvantiServiceManagerAPI:
         self.logger = logger
         self.api_key = api_key
         
-    def get_employees(self):
+    def get_employees(self) -> dict:
         return self._call_api(
             "GET",
             "odata/businessobject/employees"

@@ -569,8 +569,8 @@ types:
       type: boolean
       required: false
     IsUnRead:
-      title: Is Un Read
-      description: Is un read
+      title: Is Unread
+      description: Is unread
       type: boolean
       required: false
   journal_note:
@@ -720,8 +720,8 @@ types:
       type: boolean
       required: false
     IsUnRead:
-      title: Is Un Read
-      description: Is un read
+      title: Is Unread
+      description: Is unread
       type: boolean
       required: false
     ParentOwner:
@@ -772,7 +772,7 @@ actions:
         description: Description of the incident
         type: string
         required: true
-        example: This incident was created using Insight Connect
+        example: This incident was created using InsightConnect
       customer:
         title: Customer
         description: Email address of the customer
