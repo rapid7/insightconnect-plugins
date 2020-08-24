@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 2.1.1
+version: 3.0.0
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
@@ -535,7 +535,7 @@ types:
       type: string
       required: false
     isUpToDate:
-      title: Is Up To Date
+      title: Is Up to Date
       description: Indicates if the agent version is up to date
       type: boolean
       required: false
@@ -885,11 +885,11 @@ actions:
         description: Result of hashing operation
         required: true
   blacklist_by_ioc_hash:
-    title: Blacklist by IoC Hash
+    title: Blacklist by IOC Hash
     description: Add hashed indicator of compromise to global blacklist
     input:
       hash:
-        title: IoC Hash
+        title: IOC Hash
         description: Indicator of compromise hash to add to blacklist
         type: string
         required: true
@@ -1053,7 +1053,7 @@ actions:
         required: false
       include_hidden:
         title: Include Hidden
-        description: Include internal activities hidden from display?
+        description: Include internal activities hidden from display
         type: boolean
         required: false
       skip:
@@ -1087,7 +1087,7 @@ actions:
         type: string
         required: false
       created_at_lte:
-        title: Less Or Equal Date
+        title: Less or Equal Date
         description: Return activities created before or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
         type: string
         required: false
@@ -1097,7 +1097,7 @@ actions:
         type: string
         required: false
       created_at_gte:
-        title: Greater Or Equal Date
+        title: Greater or Equal Date
         description: Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
         type: string
         required: false
@@ -1214,7 +1214,7 @@ actions:
         required: false
     output:
       up_to_date:
-        title: Up To Date Number
+        title: Up to Date Number
         description: Number of agents with the most up-to-date software version
         type: integer
         required: false
@@ -1419,7 +1419,7 @@ actions:
         type: integer
         required: false
   agents_connect:
-    title: Connect to network
+    title: Connect to Network
     description: Sends a connect to network command to all agents matching the input filter
     input:
       filter:
@@ -1433,20 +1433,19 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: false
-
   search_agents:
     title: Search Agents
     description: Search for agents
     input:
       agent:
         title: Agent
-        description: Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID. If empty, this action will return all active or inactive agents depending on the value of the Agent Active input.
+        description: Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID. If empty, this action will return all active or inactive agents depending on the value of the Agent Active input
         type: string
         example: hostname123
         required: false
       agent_active:
         title: Agent Active
-        description: Return a list of all active or inactive agents when Agent input is not specified. Note that setting this to true for Active agents can return a very large amount of data.
+        description: Return a list of all active or inactive agents when Agent input is not specified. Note that setting this to true for Active agents can return a very large amount of data
         type: boolean
         example: true
         default: true
@@ -1457,7 +1456,6 @@ actions:
         description: Detailed information about agents found
         type: "[]agent_data"
         required: false
-
   get_agent_details:
     title: Get Agent Details
     description: Retrieve agent details
@@ -1474,7 +1472,6 @@ actions:
         description: Detailed information about agent found
         type: agent_data
         required: false
-
   quarantine:
     title: Quarantine
     description: Isolate (quarantine) endpoint from the network 
@@ -1503,7 +1500,6 @@ actions:
         description: SentinelOne API call response data
         type: quarantine_response
         required: false
-
   blacklist:
     title: Blacklist
     description: Blacklist and unblacklist a SHA1 hash
