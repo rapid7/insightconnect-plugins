@@ -244,6 +244,6 @@ actions:
         required: true
       is_asset_online:
         title: Is Asset Online
-        description: Indicates that the agent is connected to the Insight platform. This means the device is powered on and is connected to Rapid7.
+        description: Indicates that the agent is connected to the Insight platform. This means the device is powered on and is connected to Rapid7
         type: boolean
         required: true
