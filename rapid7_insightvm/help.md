@@ -34,6 +34,38 @@ Example input:
 
 ### Actions
 
+#### Delete an Asset
+
+This action is used to delete an Asset.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|integer|None|True|Asset ID|None|None|
+
+Example input:
+
+```
+{
+  "id": 21
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was the operation successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 #### Get Asset Group Assets
 
 This action is used to get Asset Group Assets.
@@ -4757,6 +4789,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.1.0 - New action Delete Asset
 * 4.0.1 - Add the option to limit a scan to specific hosts
 * 4.0.0 - Fix output for Generate Adhoc SQL Report action
 * 3.6.0 - Add Get Asset Group Assets action

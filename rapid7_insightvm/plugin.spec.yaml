@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans
-version: 4.0.1
+version: 4.1.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -3618,6 +3618,21 @@ actions:
         description: The identifiers of the associated resources
         type: '[]integer'
         required: false
+  delete_asset:
+    title: Delete an Asset
+    description: Delete an Asset
+    input:
+      id:
+        title: ID
+        description: Asset ID
+        type: integer
+        required: true
+    output:
+      success:
+        title: Success
+        description: Was the operation successful
+        type: boolean
+        required: true
 triggers:
   new_scans:
     title: New Scans
@@ -3675,3 +3690,4 @@ triggers:
         description: InsightVM vulnerability exception
         type: vulnerability_exception
         required: false
+
