@@ -30,7 +30,7 @@ class BlacklistByIocHashInput(komand.Input):
     },
     "hash": {
       "type": "string",
-      "title": "IoC Hash",
+      "title": "IOC Hash",
       "description": "Indicator of compromise hash to add to blacklist",
       "order": 1
     }
