@@ -382,7 +382,7 @@ connection:
     type: credential_secret_key
     description: API Key
     required: true
-    example: '{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}'
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
 
 actions:
   download_domain_risk_list:
