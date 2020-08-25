@@ -1530,6 +1530,27 @@ actions:
         description: Return true if blacklist item was created or deleted
         type: boolean
         required: true
+  threats_fetch_file:
+    title: Threats Fetch File
+    description: Fetch a file associated with the threat that matches the filter. Your user role must have permissions to Fetch Threat File - Admin, IR Team, SOC
+    input:
+      password:
+        title: Password
+        description: File encryption password, min. length 10 characters and cannot contain whitespace
+        type: string
+        required: true
+        example: "Rapid7 Insightconnect"
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        type: object
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
 
 triggers:
   get_threats:

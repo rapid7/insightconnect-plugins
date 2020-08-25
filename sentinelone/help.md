@@ -30,16 +30,44 @@ Example input:
 
 ```
 {
-  "credentials": {
-    "username": "user@example.com",
-    "password": "mypassword
-  },
+  "credentials": "{\"username\": \"user@example.com\", \"password\": \"mypassword\"}",
   "url": "https://example.sentinelone.com"
 }
 ```
 ## Technical Details
 
 ### Actions
+
+#### Threats Fetch File
+
+This action is used to fetch a file associated with the threat that matches the filter. Your user role must have permissions to Fetch Threat File - Admin, IR Team, SOC.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|None|
+|password|string|None|True|File encryption password, min. length 10 characters and cannot contain whitespace|None|Rapid7 Insightconnect|
+
+Example input:
+
+```
+{
+  "password": "Rapid7 Insightconnect"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|False|Number of entities affected by the requested operation|
+
+Example output:
+
+```
+
+```
 
 #### Connect to Network
 
@@ -84,11 +112,6 @@ This action is used to add hashed indicator of compromise to global blacklist.
 Example input:
 
 ```
-{
-  "blacklist_state": true,
-  "description": "Hash Blacklisted from InsightConnect",
-  "hash": "3395856ce81f2b7382dee72602f798b642f14140"
-}
 ```
 
 ##### Output

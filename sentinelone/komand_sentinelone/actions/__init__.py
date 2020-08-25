@@ -26,3 +26,4 @@ from .mitigate_threat.action import MitigateThreat
 from .name_available.action import NameAvailable
 from .quarantine.action import Quarantine
 from .search_agents.action import SearchAgents
+from .threats_fetch_file.action import ThreatsFetchFile

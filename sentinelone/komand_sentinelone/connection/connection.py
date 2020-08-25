@@ -4,6 +4,8 @@ from .schema import ConnectionSchema, Input
 
 from komand_sentinelone.util.api import SentineloneAPI
 from komand.exceptions import ConnectionTestException, PluginException
+
+
 # from komand_sentinelone.util import api
 
 
@@ -108,6 +110,14 @@ class Connection(komand.Connection):
 
     def agents_action(self, action: str, agents_filter: str):
         return self._call_api("POST", "agents/actions/{}".format(action), {"filter": agents_filter})
+
+    def threats_fetch_file(self, password: str, agents_filter: dict) -> int:
+        return self._call_api("POST", "threats/fetch-file", {
+            "data": {
+                "password": password
+            },
+            "filter": agents_filter
+        })
 
     def agents_support_action(self, action: str, agents_filter: str, module: str):
         return self._call_api("POST", "private/agents/support-actions/{}".format(action), {
@@ -270,14 +280,15 @@ class Connection(komand.Connection):
                 ids.append(restriction.get("id"))
             return ids
 
-        raise PluginException(cause="The hash does not exist to unblacklist.", assistance="Please enter a hash that has been blacklisted.")
+        raise PluginException(cause="The hash does not exist to unblacklist.",
+                              assistance="Please enter a hash that has been blacklisted.")
 
     def delete_blacklist_item_by_hash(self, item_ids: str):
         return self._call_api("DELETE", "restrictions", json={
-          "data": {
-            "type": "black_hash",
-            "ids": item_ids
-          }
+            "data": {
+                "type": "black_hash",
+                "ids": item_ids
+            }
         }).get("errors", [])
 
     def _call_api(self, method, endpoint, json=None, params=None):
