@@ -26,7 +26,7 @@ class ToLocaltimeInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Base Time",
       "displayType": "date",
-      "description": "Datetime to convert",
+      "description": "Datetime to convert, eg. 22 Jul 2020 21:20:33. Milliseconds is not supported",
       "format": "date-time",
       "order": 1
     },

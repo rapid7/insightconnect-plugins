@@ -32,7 +32,7 @@ This action is used to convert time from localtime to UTC.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|base_time|date|None|True|Datetime to convert|None|22 Jul 2020 21:20:33|
+|base_time|date|None|True|Datetime to convert, eg. 22 Jul 2020 21:20:33. Milliseconds is not supported|None|22 Jul 2020 21:20:33|
 |timezone|string|None|True|Timezone to convert from localtime|None|US/Eastern|
 
 Example input:
@@ -67,7 +67,7 @@ This action is used to convert time from UTC to localtime.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|base_time|date|None|True|Datetime to convert|None|22 Jul 2020 21:20:33|
+|base_time|date|None|True|Datetime to convert, eg. 22 Jul 2020 21:20:33. Milliseconds is not supported|None|22 Jul 2020 21:20:33|
 |timezone|string|None|True|Timezone to convert from UTC to localtime|None|US/Eastern|
 
 Example input:

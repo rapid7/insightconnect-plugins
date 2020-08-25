@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import ToLocaltimeInput, ToLocaltimeOutput, Input, Output, Component
 # Custom imports below
 import maya
+from maya.core import parse
 
 
 class ToLocaltime(insightconnect_plugin_runtime.Action):
@@ -14,7 +15,7 @@ class ToLocaltime(insightconnect_plugin_runtime.Action):
             output=ToLocaltimeOutput())
 
     def run(self, params={}):
-        new_date = maya.MayaDT.from_rfc3339(params.get(Input.BASE_TIME))
+        new_date = parse(params.get(Input.BASE_TIME), timezone='UTC')
 
         return {
             Output.CONVERTED_DATE: maya.MayaDT.from_datetime(

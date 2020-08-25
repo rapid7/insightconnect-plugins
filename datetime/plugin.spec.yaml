@@ -228,7 +228,7 @@ actions:
     input:
       base_time:
         title: Base Time
-        description: Datetime to convert
+        description: Datetime to convert, eg. 22 Jul 2020 21:20:33. Milliseconds is not supported
         type: date
         required: true
         example: 22 Jul 2020 21:20:33
@@ -250,7 +250,7 @@ actions:
     input:
       base_time:
         title: Base Time
-        description: Datetime to convert
+        description: Datetime to convert, eg. 22 Jul 2020 21:20:33. Milliseconds is not supported
         type: date
         required: true
         example: 22 Jul 2020 21:20:33
