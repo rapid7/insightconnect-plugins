@@ -34,7 +34,7 @@ Example input:
 
 ```
 {
-  "api_key": "{\"secretKey\": \"9de5069c5afe602b2ea0a04b66beb2c0\"}"
+  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
@@ -224,6 +224,13 @@ This action is used to search for data related to malware.
 Example input:
 
 ```
+{
+  "direction": "asc",
+  "freetext": "example",
+  "from": 0,
+  "limit": 10,
+  "orderby": "Riskscore"
+}
 ```
 
 ##### Output
@@ -1262,6 +1269,9 @@ This action is used to fetch information about a specific vulnerability by CVE o
 Example input:
 
 ```
+{
+  "id": "CVE-2014-0160"
+}
 ```
 
 ##### Output
