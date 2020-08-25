@@ -34,7 +34,7 @@ types:
     date:
       type: string
       required: false
-  entity_obj:
+  entity:
     id:
       type: string
       required: false
@@ -47,28 +47,28 @@ types:
     description:
       type: string
       required: false
-  metrics_obj:
+  metrics:
     type:
       type: string
       required: false
     value:
       type: float
       required: false
-  entities_obj:
+  entities:
     count:
       type: integer
       required: false
     entity:
-      type: entity_obj
+      type: entity
       required: false
   relatedEntities:
     entities:
-      type: '[]entities_obj'
+      type: '[]entities'
       required: false
     type:
       type: string
       required: false
-  evidenceDetails_obj:
+  evidenceDetails:
     criticality:
       type: number
       required: false
@@ -86,7 +86,7 @@ types:
     timestamp:
       type: string
       required: false
-  risk_obj:
+  risk:
     criticality:
       type: number
       required: false
@@ -96,7 +96,7 @@ types:
       required: false
     evidenceDetails:
       title: Evidence Details
-      type: '[]evidenceDetails_obj'
+      type: '[]evidenceDetails'
       required: false
     riskSummary:
       title: Risk Summary
@@ -127,7 +127,7 @@ types:
     url:
       type: string
       required: false
-  timestamps_obj:
+  timestamps:
     firstSeen:
       title: First Seen
       type: string
@@ -150,7 +150,7 @@ types:
       type: string
       required: false
       title: Criticality Label
-  cvss_obj:
+  cvss:
     confidentiality:
       type: string
       required: false
@@ -184,14 +184,14 @@ types:
     version:
       type: string
       required: false
-  cvssv3_obj:
+  cvssv3:
     attackComplexity:
       type: string
       required: false
     attackVector:
       type: string
       required: false
-  rawrisk_obj:
+  rawrisk:
     rule:
       title: "Rule"
       type: string
@@ -208,7 +208,7 @@ types:
       type: '[]counts'
       required: false
     cvss:
-      type: cvss_obj
+      type: cvss
       required: false
     cpe:
       type: '[]string'
@@ -218,7 +218,7 @@ types:
       type: string
       required: false
     entity:
-      type: entity_obj
+      type: entity
       required: false
     hashAlgorithm:
       title: Hash Algorithm
@@ -229,14 +229,14 @@ types:
       type: string
       required: false
     metrics:
-      type: '[]metrics_obj'
+      type: '[]metrics'
       required: false
     relatedEntities:
       title: Related Entities
       type: '[]relatedEntities'
       required: false
     risk:
-      type: risk_obj
+      type: risk
       required: false
     sightings:
       type: '[]sightings'
@@ -246,16 +246,16 @@ types:
       type: '[]object'
       required: false
     timestamps:
-      type: timestamps_obj
+      type: timestamps
       required: false
     rawrisk:
-      type: '[]rawrisk_obj'
+      type: '[]rawrisk'
       required: false
     commonNames:
       type: '[]string'
       required: false
     cvssv3:
-      type: cvssv3_obj
+      type: cvssv3
       required: false
     relatedLinks:
       type: '[]string'
@@ -313,7 +313,7 @@ types:
       type: '[]counts'
       required: false
     entity:
-      type: entity_obj
+      type: entity
       required: false
     hashAlgorithm:
       title: Hash Algorithm
@@ -324,14 +324,14 @@ types:
       type: string
       required: false
     metrics:
-      type: '[]metrics_obj'
+      type: '[]metrics'
       required: false
     relatedEntities:
       title: Related Entities
       type: '[]relatedEntities'
       required: false
     risk:
-      type: risk_obj
+      type: risk
       required: false
     sightings:
       type: '[]sightings'
@@ -341,7 +341,7 @@ types:
       type: '[]object'
       required: false
     timestamps:
-      type: timestamps_obj
+      type: timestamps
       required: false
   location:
     asn:
@@ -512,11 +512,11 @@ actions:
         example: Domain look up performed by InsightConnect
     output:
       entity:
-        type: entity_obj
+        type: entity
         description: Entity
         required: false
       timestamps:
-        type: timestamps_obj
+        type: timestamps
         description: Timestamps
         required: false
       analystNotes:
@@ -537,7 +537,7 @@ actions:
       metrics:
         title: "Metrics"
         description: "Metrics"
-        type: "[]metrics_obj"
+        type: "[]metrics"
         required: false
       relatedEntities:
         title: "Related Entities"
@@ -557,7 +557,7 @@ actions:
       risk:
         title: "Risk"
         description: "Risk"
-        type: risk_obj
+        type: risk
         required: false
   search_entity_lists:
     title: Search Entity Lists
@@ -571,7 +571,7 @@ actions:
         example: example
     output:
       entities:
-        type: '[]entity_obj'
+        type: '[]entity'
         description: Entities
         required: false
   lookup_entity_list:
@@ -585,7 +585,7 @@ actions:
         example: "report:Oe5eg5"
     output:
       entities:
-        type: '[]entity_obj'
+        type: '[]entity'
         description: Entities
         required: false
   download_hash_risk_list:
@@ -703,11 +703,11 @@ actions:
         example: Hash look up performed by InsightConnect
     output:
       entity:
-        type: entity_obj
+        type: entity
         description: Entity
         required: false
       timestamps:
-        type: timestamps_obj
+        type: timestamps
         description: Timestamps
         required: false
       analystNotes:
@@ -733,7 +733,7 @@ actions:
       metrics:
         title: "Metrics"
         description: "Metrics"
-        type: "[]metrics_obj"
+        type: "[]metrics"
         required: false
       relatedEntities:
         title: "Related Entities"
@@ -753,7 +753,7 @@ actions:
       risk:
         title: "Risk"
         description: "Risk"
-        type: risk_obj
+        type: risk
         required: false
   download_IP_addresses_risk_list:
     title: Download IP Addresses Risk List
@@ -897,11 +897,11 @@ actions:
         example: IP look up performed by InsightConnect
     output:
       entity:
-        type: entity_obj
+        type: entity
         description: Entity
         required: false
       timestamps:
-        type: timestamps_obj
+        type: timestamps
         description: Timestamps
         required: false
       analystNotes:
@@ -922,7 +922,7 @@ actions:
       metrics:
         title: "Metrics"
         description: "Metrics"
-        type: "[]metrics_obj"
+        type: "[]metrics"
         required: false
       relatedEntities:
         title: "Related Entities"
@@ -947,7 +947,7 @@ actions:
       risk:
         title: Risk
         description: Risk
-        type: risk_obj
+        type: risk
         required: false
       riskyCIDRIPs:
         title: Risky CIDR IPs
@@ -1025,11 +1025,11 @@ actions:
         example: ShciZX
     output:
       entity:
-        type: entity_obj
+        type: entity
         description: Entity
         required: false
       timestamps:
-        type: timestamps_obj
+        type: timestamps
         description: Timestamps
         required: false
   download_vulnerability_risk_list:
@@ -1170,11 +1170,11 @@ actions:
         example: URL look up performed by InsightConnect
     output:
       entity:
-        type: entity_obj
+        type: entity
         description: Entity
         required: false
       timestamps:
-        type: timestamps_obj
+        type: timestamps
         description: Timestamps
         required: false
       analystNotes:
@@ -1190,7 +1190,7 @@ actions:
       metrics:
         title: "Metrics"
         description: "Metrics"
-        type: "[]metrics_obj"
+        type: "[]metrics"
         required: false
       relatedEntities:
         title: "Related Entities"
@@ -1205,5 +1205,5 @@ actions:
       risk:
         title: Risk
         description: Risk
-        type: risk_obj
+        type: risk
         required: false

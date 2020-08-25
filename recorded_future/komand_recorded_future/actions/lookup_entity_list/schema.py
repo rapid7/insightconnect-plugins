@@ -49,15 +49,15 @@ class LookupEntityListOutput(komand.Output):
       "title": "Entities",
       "description": "Entities",
       "items": {
-        "$ref": "#/definitions/entity_obj"
+        "$ref": "#/definitions/entity"
       },
       "order": 1
     }
   },
   "definitions": {
-    "entity_obj": {
+    "entity": {
       "type": "object",
-      "title": "entity_obj",
+      "title": "entity",
       "properties": {
         "description": {
           "type": "string",

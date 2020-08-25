@@ -106,13 +106,6 @@ This action is used to search for results related to a specific parent domain.
 Example input:
 
 ```
-{
-  "direction": "asc",
-  "from": 0,
-  "limit": 10,
-  "orderby": "Riskscore",
-  "parent": "example.com"
-}
 ```
 
 ##### Output
@@ -224,6 +217,13 @@ This action is used to search for data related to malware.
 Example input:
 
 ```
+{
+  "direction": "asc",
+  "freetext": "example",
+  "from": 0,
+  "limit": 10,
+  "orderby": "Riskscore"
+}
 ```
 
 ##### Output
@@ -291,7 +291,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|entities|[]entity_obj|False|Entities|
+|entities|[]entity|False|Entities|
 
 Example output:
 
@@ -540,9 +540,6 @@ This action is used to returns a list of hashes matching a specified risk rule.
 Example input:
 
 ```
-{
-  "list": "positive_malware_verdict"
-}
 ```
 
 ##### Output
@@ -605,7 +602,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|entities|[]entity_obj|False|Entities|
+|entities|[]entity|False|Entities|
 
 Example output:
 
@@ -658,8 +655,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|entity|entity_obj|False|Entity|
-|timestamps|timestamps_obj|False|Timestamps|
+|entity|entity|False|Entity|
+|timestamps|timestamps|False|Timestamps|
 
 Example output:
 
@@ -711,14 +708,14 @@ Example input:
 |----|----|--------|-----------|
 |analystNotes|[]string|False|Notes from an analyst|
 |counts|[]counts|False|Counts|
-|entity|entity_obj|False|Entity|
+|entity|entity|False|Entity|
 |intelCard|string|False|Intel card|
-|metrics|[]metrics_obj|False|Metrics|
+|metrics|[]metrics|False|Metrics|
 |relatedEntities|[]relatedEntities|False|Related entities|
-|risk|risk_obj|False|Risk|
+|risk|risk|False|Risk|
 |sightings|[]sightings|False|Sightings|
 |threatLists|[]string|False|Threat lists|
-|timestamps|timestamps_obj|False|Timestamps|
+|timestamps|timestamps|False|Timestamps|
 
 Example output:
 
@@ -770,15 +767,15 @@ Example input:
 |----|----|--------|-----------|
 |analystNotes|[]string|False|Notes from an analyst|
 |counts|[]counts|False|Counts|
-|entity|entity_obj|False|Entity|
+|entity|entity|False|Entity|
 |hashAlgorithm|string|False|Hash Algorithm|
 |intelCard|string|False|Intel card|
-|metrics|[]metrics_obj|False|Metrics|
+|metrics|[]metrics|False|Metrics|
 |relatedEntities|[]relatedEntities|False|Related entities|
-|risk|risk_obj|False|Risk|
+|risk|risk|False|Risk|
 |sightings|[]sightings|False|Sightings|
 |threatLists|[]string|False|Threat Lists|
-|timestamps|timestamps_obj|False|Timestamps|
+|timestamps|timestamps|False|Timestamps|
 
 Example output:
 
@@ -856,12 +853,12 @@ Example input:
 |----|----|--------|-----------|
 |analystNotes|[]string|False|Notes from an analyst|
 |counts|[]counts|False|Counts|
-|entity|entity_obj|False|Entity|
-|metrics|[]metrics_obj|False|Metrics|
+|entity|entity|False|Entity|
+|metrics|[]metrics|False|Metrics|
 |relatedEntities|[]relatedEntities|False|Related entities|
-|risk|risk_obj|False|Risk|
+|risk|risk|False|Risk|
 |sightings|[]sightings|False|Sightings|
-|timestamps|timestamps_obj|False|Timestamps|
+|timestamps|timestamps|False|Timestamps|
 
 Example output:
 
@@ -1106,17 +1103,17 @@ Example input:
 |----|----|--------|-----------|
 |analystNotes|[]string|False|Notes from an analyst|
 |counts|[]counts|False|Counts|
-|entity|entity_obj|False|Entity|
+|entity|entity|False|Entity|
 |found|boolean|False|Has the IP been found in Recorded Future|
 |intelCard|string|False|Intel card|
 |location|location|False|Location|
-|metrics|[]metrics_obj|False|Metrics|
+|metrics|[]metrics|False|Metrics|
 |relatedEntities|[]relatedEntities|False|Related entities|
-|risk|risk_obj|False|Risk|
+|risk|risk|False|Risk|
 |riskyCIDRIPs|[]riskyCIDRIP|False|Risky CIDR IPs|
 |sightings|[]sightings|False|Sightings|
 |threatLists|[]string|False|Threat lists|
-|timestamps|timestamps_obj|False|Timestamps|
+|timestamps|timestamps|False|Timestamps|
 
 Example output:
 

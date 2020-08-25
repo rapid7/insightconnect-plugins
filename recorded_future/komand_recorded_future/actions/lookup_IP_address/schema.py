@@ -92,7 +92,7 @@ class LookupIPAddressOutput(komand.Output):
       "order": 4
     },
     "entity": {
-      "$ref": "#/definitions/entity_obj",
+      "$ref": "#/definitions/entity",
       "title": "Entity",
       "description": "Entity",
       "order": 1
@@ -120,7 +120,7 @@ class LookupIPAddressOutput(komand.Output):
       "title": "Metrics",
       "description": "Metrics",
       "items": {
-        "$ref": "#/definitions/metrics_obj"
+        "$ref": "#/definitions/metrics"
       },
       "order": 6
     },
@@ -134,7 +134,7 @@ class LookupIPAddressOutput(komand.Output):
       "order": 7
     },
     "risk": {
-      "$ref": "#/definitions/risk_obj",
+      "$ref": "#/definitions/risk",
       "title": "Risk",
       "description": "Risk",
       "order": 11
@@ -167,7 +167,7 @@ class LookupIPAddressOutput(komand.Output):
       "order": 9
     },
     "timestamps": {
-      "$ref": "#/definitions/timestamps_obj",
+      "$ref": "#/definitions/timestamps",
       "title": "Timestamps",
       "description": "Timestamps",
       "order": 2
@@ -214,9 +214,9 @@ class LookupIPAddressOutput(komand.Output):
         }
       }
     },
-    "entities_obj": {
+    "entities": {
       "type": "object",
-      "title": "entities_obj",
+      "title": "entities",
       "properties": {
         "count": {
           "type": "integer",
@@ -224,15 +224,15 @@ class LookupIPAddressOutput(komand.Output):
           "order": 1
         },
         "entity": {
-          "$ref": "#/definitions/entity_obj",
+          "$ref": "#/definitions/entity",
           "title": "Entity",
           "order": 2
         }
       },
       "definitions": {
-        "entity_obj": {
+        "entity": {
           "type": "object",
-          "title": "entity_obj",
+          "title": "entity",
           "properties": {
             "description": {
               "type": "string",
@@ -258,9 +258,9 @@ class LookupIPAddressOutput(komand.Output):
         }
       }
     },
-    "entity_obj": {
+    "entity": {
       "type": "object",
-      "title": "entity_obj",
+      "title": "entity",
       "properties": {
         "description": {
           "type": "string",
@@ -284,9 +284,9 @@ class LookupIPAddressOutput(komand.Output):
         }
       }
     },
-    "evidenceDetails_obj": {
+    "evidenceDetails": {
       "type": "object",
-      "title": "evidenceDetails_obj",
+      "title": "evidenceDetails",
       "properties": {
         "criticality": {
           "type": "number",
@@ -443,9 +443,9 @@ class LookupIPAddressOutput(komand.Output):
         }
       }
     },
-    "metrics_obj": {
+    "metrics": {
       "type": "object",
-      "title": "metrics_obj",
+      "title": "metrics",
       "properties": {
         "type": {
           "type": "string",
@@ -467,7 +467,7 @@ class LookupIPAddressOutput(komand.Output):
           "type": "array",
           "title": "Entities",
           "items": {
-            "$ref": "#/definitions/entities_obj"
+            "$ref": "#/definitions/entities"
           },
           "order": 1
         },
@@ -478,9 +478,9 @@ class LookupIPAddressOutput(komand.Output):
         }
       },
       "definitions": {
-        "entities_obj": {
+        "entities": {
           "type": "object",
-          "title": "entities_obj",
+          "title": "entities",
           "properties": {
             "count": {
               "type": "integer",
@@ -488,15 +488,15 @@ class LookupIPAddressOutput(komand.Output):
               "order": 1
             },
             "entity": {
-              "$ref": "#/definitions/entity_obj",
+              "$ref": "#/definitions/entity",
               "title": "Entity",
               "order": 2
             }
           },
           "definitions": {
-            "entity_obj": {
+            "entity": {
               "type": "object",
-              "title": "entity_obj",
+              "title": "entity",
               "properties": {
                 "description": {
                   "type": "string",
@@ -522,9 +522,9 @@ class LookupIPAddressOutput(komand.Output):
             }
           }
         },
-        "entity_obj": {
+        "entity": {
           "type": "object",
-          "title": "entity_obj",
+          "title": "entity",
           "properties": {
             "description": {
               "type": "string",
@@ -550,9 +550,9 @@ class LookupIPAddressOutput(komand.Output):
         }
       }
     },
-    "risk_obj": {
+    "risk": {
       "type": "object",
-      "title": "risk_obj",
+      "title": "risk",
       "properties": {
         "criticality": {
           "type": "number",
@@ -568,7 +568,7 @@ class LookupIPAddressOutput(komand.Output):
           "type": "array",
           "title": "Evidence Details",
           "items": {
-            "$ref": "#/definitions/evidenceDetails_obj"
+            "$ref": "#/definitions/evidenceDetails"
           },
           "order": 3
         },
@@ -589,9 +589,9 @@ class LookupIPAddressOutput(komand.Output):
         }
       },
       "definitions": {
-        "evidenceDetails_obj": {
+        "evidenceDetails": {
           "type": "object",
-          "title": "evidenceDetails_obj",
+          "title": "evidenceDetails",
           "properties": {
             "criticality": {
               "type": "number",
@@ -702,9 +702,9 @@ class LookupIPAddressOutput(komand.Output):
         }
       }
     },
-    "timestamps_obj": {
+    "timestamps": {
       "type": "object",
-      "title": "timestamps_obj",
+      "title": "timestamps",
       "properties": {
         "firstSeen": {
           "type": "string",
