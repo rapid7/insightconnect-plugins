@@ -1,27 +1,35 @@
 {
-	"spec": "cff37aae89c8bda8db89d8f912c89698",
-	"manifest": "5298aa4f28d848e764780a3989b1462c",
-	"setup": "a4988f3109c28c40e5ac656302815ce5",
+	"spec": "2f0bd13e6a50d56175216663c709c052",
+	"manifest": "ff03c6d402216077ca076777d5c6c054",
+	"setup": "1e5302652eb07e2df165c6ecb354b469",
 	"schemas": [
 		{
 			"identifier": "add_address_object_to_address_group/schema.py",
-			"hash": "745ff2386c43d40240b69dcca9195d9b"
+			"hash": "49c59156c47f1046a1958facf354ee3d"
+		},
+		{
+			"identifier": "check_if_address_in_group/schema.py",
+			"hash": "4e48884a7971907a615ae7b1733af2b2"
 		},
 		{
 			"identifier": "create_address_object/schema.py",
-			"hash": "9eb9fc218c868d3d12106c9f57cc75bf"
+			"hash": "b75f2494f985875d57f2ed594a2c7942"
 		},
 		{
 			"identifier": "delete_address_object/schema.py",
-			"hash": "7d502e3c3c53a8b83b24be4995e29682"
+			"hash": "dfe03cedd447588a380c6deddc42949a"
 		},
 		{
 			"identifier": "get_address_objects/schema.py",
-			"hash": "921e863858a86b27f66cec56aeff31af"
+			"hash": "4d0ba17c1d5e3b3a958ead474e65a772"
 		},
 		{
 			"identifier": "get_policies/schema.py",
 			"hash": "3263ef5875238fc30b4af7165f0ef25b"
+		},
+		{
+			"identifier": "remove_address_object_from_group/schema.py",
+			"hash": "fd1c97b8bab64b973d3d627f59190d69"
 		},
 		{
 			"identifier": "connection/schema.py",

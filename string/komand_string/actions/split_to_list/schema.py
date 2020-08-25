@@ -31,7 +31,7 @@ class SplitToListInput(komand.Input):
     "string": {
       "type": "string",
       "title": "String Input",
-      "description": "String to convert e.g. Sentence one\\nSentence two",
+      "description": "String to break into an array",
       "order": 1
     }
   },

@@ -31,9 +31,88 @@ The connection configuration accepts the following parameters:
 |application_secret|credential_secret_key|None|True|The secret of the registered application that obtained the refresh token|None|None|
 |tenant_id|string|None|True|The ID of the directory that identifies the tenant|None|None|
 
+Example input:
+
+```
+{
+  "application_id": "abcd12345-ab12-1234-abcd-1ab2c3d4e5g6",
+  "application_secret": {
+    "secretKey": "abcdefghi12345678abcdef1234"
+  },
+  "tenant_id": "abcd12345-ab12-1234-abcd-1ab2c3d4e5g6"
+}
+```
+
+
 ## Technical Details
 
 ### Actions
+
+#### Revoke Sign-In Sessions
+
+This action invalidates all the refresh tokens issued to applications for a user (as well as session cookies in a user's browser), by resetting the signInSessionsValidFromDateTime user property to the current date-time.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|User ID|None|user@example.com|
+
+Example input:
+
+```
+{
+  "user_id": "user@example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was the operation successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Add User to Groups by ID
+
+This action is used to add a user to a set of groups by group ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|group_id|[]string|None|True|IDs of Groups to Add User to|None|['b4d41d4-eb13-4a33-99b5-7d7290df22e9']|
+|user_id|string|None|True|User ID e.g. user@example.com|None|user@example.com|
+
+Example input:
+
+```
+{
+  "group_id": ["b4d41d4-eb13-4a33-99b5-7d7290df22e9"],
+  "user_id": "user@example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Was operation successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Update User Information
 
@@ -516,6 +595,9 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.0 - New action Revoke Sign-In Sessions
+* 2.1.1 - Update incorrect title of `user_type` to User Type  |  Return `group_id` in Add User to Groups By IDs action's error message to improve debugging
+* 2.1.0 - New action Add User to Groups By IDs
 * 2.0.0 - New action Update User Info
 * 1.4.1 - Extension Library styling update
 * 1.4.0 - New trigger Risk Detection

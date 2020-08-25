@@ -36,6 +36,7 @@ class SearchInput(komand.Input):
       "type": "string",
       "title": "Query",
       "description": "The query term (ElasticSearch simple query string), default is *",
+      "default": "domain:example.com",
       "order": 1
     },
     "size": {

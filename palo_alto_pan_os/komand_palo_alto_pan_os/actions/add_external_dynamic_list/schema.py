@@ -66,7 +66,7 @@ class AddExternalDynamicListInput(komand.Input):
     "name": {
       "type": "string",
       "title": "The Name of the List",
-      "description": "An arbitrary name for the list. This name will be used to identify the list in PAN-OS",
+      "description": "An arbitrary name for the list. This name will be used to identify the list in the firewall",
       "order": 1
     },
     "repeat": {
@@ -84,7 +84,7 @@ class AddExternalDynamicListInput(komand.Input):
     "source": {
       "type": "string",
       "title": "Source",
-      "description": "The web site you will pull the list from e.g. http://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt",
+      "description": "The web site you will pull the list from e.g. https://www.example.com/test.txt",
       "order": 4
     },
     "time": {
@@ -147,7 +147,7 @@ class AddExternalDynamicListOutput(komand.Output):
     "code": {
       "type": "string",
       "title": "Code",
-      "description": "Response code from PAN-OS",
+      "description": "Response code from the firewall",
       "order": 2
     },
     "message": {

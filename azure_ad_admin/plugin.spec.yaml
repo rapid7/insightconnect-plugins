@@ -4,7 +4,7 @@ products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
 description: Perform administrative operations in Azure AD
-version: 2.0.0
+version: 2.2.0
 vendor: rapid7
 support: community
 status: []
@@ -451,6 +451,28 @@ actions:
         description: Was operation successful
         type: boolean
         required: false
+  add_user_to_groups_by_id:
+    title: Add User to Groups by ID
+    description: Add a user to a set of groups by group ID
+    input:
+      user_id:
+        title: User ID
+        description: User ID e.g. user@example.com
+        type: string
+        required: true
+        example: user@example.com
+      group_id:
+        title: Group IDs
+        description: IDs of Groups to Add User to
+        type: "[]string"
+        required: true
+        example: ["b4d41d4-eb13-4a33-99b5-7d7290df22e9"]
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: false
   remove_user_from_group:
     title: Remove User from Group
     description: Remove a user from a group
@@ -512,7 +534,7 @@ actions:
         required: true
         example: user@example.com
       user_type:
-        title: Department
+        title: User Type
         type: string
         description: A string value that can be used to classify user types in your directory, such as Member and Guest
         required: false
@@ -523,6 +545,23 @@ actions:
         description: Was operation successful
         type: boolean
         required: true
+  revoke_sign_in_sessions:
+    title: Revoke Sign-In Sessions
+    description: This will require the user to log back in after any page they are on is refreshed by invalidating all refresh tokens and cookies
+    input:
+      user_id:
+        title: User ID
+        description: User ID
+        type: string
+        example: user@example.com
+        required: true
+    output:
+      success:
+        title: Success
+        description: Was the operation successful
+        type: boolean
+        required: true
+
 triggers:
   risk_detection:
     title: Risk Detection

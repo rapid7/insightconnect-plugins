@@ -6,22 +6,27 @@ title: Jira
 vendor: rapid7
 support: rapid7
 status: []
-description: Jira is an issue tracking product, developed by Atlassian. It provides
-  bug tracking, issue tracking, and project management functions
-version: 4.0.2
+description: Automate the creation, search and management of issues, users, and alerting for Jira Software, Jira Server, and Jira ServiceDesk
+version: 6.0.3
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/jira
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.atlassian.com
+  docs_url: https://docs.rapid7.com/insightconnect/jira
 tags:
-- ticket
-- Jira
+  - ticket
+  - Jira
 hub_tags:
   use_cases: [remediation_management, threat_detection_and_response, reporting_and_analytics]
   keywords: [ticket, jira]
   features: []
 types:
   user:
+    accountId:
+      type: string
+      title: Account ID
+      description: User account ID
+      required: false
     name:
       type: string
       description: User name
@@ -120,14 +125,22 @@ connection:
   url:
     title: URL
     type: string
-    description: Jira URL, e.g. https://company.atlassian.net
-    default: https://company.atlassian.net
+    description: Jira URL
+    default: https://example.atlassian.net
     required: false
-  credentials:
-    title: Username and API Key
-    type: credential_username_password
-    description: Username and API key
+    example: https://example.atlassian.net
+  user:
+    title: User
+    type: string
+    description: Jira user email
     required: true
+    example: user@example.com
+  api_key:
+    title: API Key
+    type: credential_secret_key
+    description: Jira API key (Jira password is not supported)
+    required: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
 actions:
   transition_issue:
     title: Transition Issue
@@ -138,22 +151,26 @@ actions:
         type: string
         description: Issue ID
         required: true
+        example: 10001
       transition:
         title: Transition
         type: string
         description: ID or name of transition to perform, e.g. In Progress
         required: true
+        example: 31
       comment:
         title: Comment
         type: string
         description: Comment to add
         required: false
+        example: "Transition executed by InsightConnect"
       fields:
         title: Fields
         type: object
         description: 'Custom fields to assign. Fields used must be present on the screen used for project, issue, and transition type
            e.g: { "field1": { "attribute1": "value1" }, "field2": { "attribute2": "value2" }}'
         required: false
+        example: '{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }'
     output:
       success:
         title: Success
@@ -169,18 +186,21 @@ actions:
         type: string
         description: JQL search string to use
         required: true
+        example: 'project = "TEST"'
       max:
         title: Max
         type: integer
         description: Max results to return
         default: 10
         required: true
+        example: 10
       get_attachments:
         title: Get Attachments
         description: Get attachments from issue
         required: false
         type: boolean
         default: false
+        example: true
     output:
       issues:
         title: Issues
@@ -196,11 +216,13 @@ actions:
         type: string
         description: Issue ID
         required: true
+        example: 10001
       assignee:
         title: Assignee
         type: string
         description: Username of assignee
         required: true
+        example: user1
     output:
       success:
         title: Success
@@ -216,11 +238,13 @@ actions:
         type: string
         description: Issue ID
         required: true
+        example: 10001
       label:
         title: Label
         type: string
         description: Label to add. To add multiple labels, separate by commas
         required: true
+        example: documentation
     output:
       success:
         title: Success
@@ -236,6 +260,7 @@ actions:
         type: string
         description: Issue ID
         required: true
+        example: TEST-1
     output:
       count:
         title: Count
@@ -256,11 +281,13 @@ actions:
         type: string
         description: Issue ID
         required: true
+        example: 10001
       comment:
         title: Comment
         type: string
         description: Comment to add
         required: true
+        example: "This comment was added by InsightConnect"
     output:
       comment_id:
         title: Comment ID
@@ -276,12 +303,14 @@ actions:
         type: string
         description: Issue ID
         required: true
+        example: TEST-1
       get_attachments:
         title: Get Attachments
         description: Get attachments from issue
         required: false
         type: boolean
         default: false
+        example: false
     output:
       found:
         title: Found
@@ -302,12 +331,14 @@ actions:
         type: string
         description: Query String, e.g. Joe
         required: true
+        example: Joe
       max:
         title: Max
         type: integer
         description: Max results to return
         default: 10
         required: true
+        example: 10
     output:
       users:
         title: Users
@@ -322,7 +353,14 @@ actions:
         title: Username
         type: string
         description: Username
-        required: true
+        required: false
+        example: user1
+      account_id:
+        title: Account ID
+        type: string
+        description: Unique identifier for an Atlassian account
+        required: false
+        example: 5ec00968833be70b7e50df20
     output:
       success:
         title: Success
@@ -337,17 +375,20 @@ actions:
         title: Username
         type: string
         description: Username
-        required: true
+        required: false
+        example: user1
       email:
         title: Email
         type: string
         description: Email
         required: true
+        example: user1@example.com
       password:
         title: Password
         type: string
         description: Password
         required: false
+        example: mypassword
       notify:
         title: Notify
         type: boolean
@@ -355,8 +396,9 @@ actions:
         default: false
         required: true
         enum:
-        - true
-        - false
+          - true
+          - false
+        example: false
     output:
       success:
         title: Success
@@ -372,16 +414,19 @@ actions:
         type: string
         description: Issue ID
         required: true
+        example: 10001
       attachment_bytes:
         title: Attachment Bytes
         type: bytes
         description: Attachment bytes
         required: true
+        example: "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
       attachment_filename:
         title: Attachment Filename
         type: string
         description: Attachment filename. Must end with a filetype extension if possible
         required: true
+        example: document.pdf
     output:
       id:
         title: ID
@@ -397,6 +442,7 @@ actions:
         type: string
         description: Issue summary
         required: false
+        example: "Connect Jira to InsightConnect"
       type:
         title: Type
         type: string
@@ -404,33 +450,39 @@ actions:
           You can also specify a custom issue type. This input is case-sensitive
         default: Task
         required: false
+        example: Story
       description:
         title: Description
         type: string
         description: Issue description
         required: false
         default: ''
+        example: "Successfully connect Jira to InsightConnect to automate ticket management"
       project:
         title: Project
         description: Project ID
         type: string
         required: true
+        example: TEST
       fields:
         title: Fields
         type: object
         description: Custom fields to assign. Fields used must be present on the same
           screen as the Create screen in Jira
         required: false
+        example: '{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }'
       attachment_bytes:
-        title: Attachment bytes
+        title: Attachment Bytes
         type: bytes
         description: Attachment bytes
         required: false
+        example: "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
       attachment_filename:
-        title: Attachment filename
+        title: Attachment Filename
         type: string
         description: Attachment filename
         required: false
+        example: document.pdf
     output:
       issue:
         title: Issue
@@ -446,32 +498,38 @@ actions:
         description: Issue ID
         type: string
         required: true
+        example: TEST-1
       notify:
         title: Notify
         description: Will send a notification email about the issue updated. Admin and project admins credentials need to be used to disable the notification
         type: boolean
         required: true
         default: true
+        example: false
       summary:
         title: Summary
         description: Summary field on the issue
         type: string
         required: false
+        example: "Connect Jira to InsightConnect for Multiple Teams"
       description:
         title: Description
         description: Description field on the issue
         type: string
         required: false
+        example: "Update ticket with additional Jira information for others teams wanting to leverage InsightConnect"
       fields:
         title: Fields
         description: An object of fields and values to change
         type: object
         required: false
+        example: '{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }'
       update:
         title: Update
-        description:  An object that contains update operations to apply
+        description:  An object that contains update operations to apply, see examples at https://developer.atlassian.com/server/jira/platform/updating-an-issue-via-the-jira-rest-apis-6848604/
         type: object
         required: false
+        example: '{ "update": { "labels": [ {"add": "newlabel"} ] } }'
     output:
       success:
         title: Success
@@ -488,23 +546,27 @@ triggers:
         description: Project ID or name
         type: string
         required: true
+        example: TEST
       jql:
         title: JQL
         type: string
         description: JQL search string to use
         required: false
+        example: 'project = "TEST"'
       get_attachments:
         title: Get Attachments
         description: Get attachments from issue
         required: false
         type: boolean
         default: false
+        example: false
       poll_timeout:
-        title: Poll timeout
+        title: Poll Timeout
         description: Timeout between next poll, default 60
         required: false
         type: integer
         default: 60
+        example: 60
     output:
       issue:
         title: Issue

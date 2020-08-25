@@ -4,7 +4,7 @@ products: [insightconnect]
 name: fortinet_fortigate
 title: Fortinet FortiGate
 description: FortiGate Next Generation Firewalls (NGFWs) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection
-version: 1.0.0
+version: 5.0.0
 vendor: rapid7
 support: community
 status: []
@@ -514,7 +514,7 @@ types:
       type: string
       description: "Radius-MAC-auth-bypass"
       required: false
-  address_objects:
+  address_object:
     cache-ttl:
       title: "Cache-TTL"
       type: integer
@@ -612,18 +612,58 @@ connection:
     title: Hostname
     description: Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000
     required: true
+    example: example.com
   api_key:
     type: credential_secret_key
     title: API Key
     description: API key
     required: true
+    example: 2Fty5834tFpBdidePJnt9075MMdkUb
   ssl_verify:
     type: boolean
     title: SSL Verify
     description: SSL verify
     required: true
+    example: false
 
 actions:
+  check_if_address_in_group:
+    title: Check if Address in Group
+    description: Check if an IP address is in an address group
+    input:
+      group:
+        title: Group
+        description: Name of Address Group to check for address
+        type: string
+        required: true
+        example: InsightConnect Block Policy
+        order: 1
+      address:
+        title: Address
+        description: The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name
+        type: string
+        example: 198.51.100.100
+        required: true
+        order: 2
+      enable_search:
+        title: Enable Search
+        description: When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don't know the Address Object by its name
+        type: boolean
+        example: false
+        default: false
+        required: true
+        order: 3
+    output:
+      found:
+        title: Found
+        description: Was address found in group
+        type: boolean
+        required: true
+      address_objects:
+        title: Address Objects
+        description: The names of the address objects that match or contain the address
+        type: "[]string"
+        required: true
   get_policies:
     title: Get Policies
     description: Get policies
@@ -633,13 +673,13 @@ actions:
         description: Optional name to filter on
         type: string
         required: false
+        example: InsightConnect Block Policy
     output:
       policies:
         title: Policies
         description: Policies
         type: "[]policies"
         required: false
-
   get_address_objects:
     title: Get Address Objects
     description: Get address objects
@@ -649,36 +689,58 @@ actions:
         description: Optional name to filter on
         type: string
         required: false
+        example: MaliciousHost
+      subnet_filter:
+        title: Subnet Filter
+        description: Optional subnet to filter on
+        type: string
+        required: false
+        example: 198.51.100.100/32
+      fqdn_filter:
+        title: FQDN Filter
+        description: Optional FQDN to filter on
+        type: string
+        required: false
+        example: example.com
     output:
       address_objects:
         title: Address Objects
         description: A list of address objects
-        type: '[]object'
+        type: '[]address_object'
         required: true
-
   create_address_object:
     title: Create Address Object
     description: Create an address object
     input:
-      ip:
-        title: IP
-        description: IP
+      address:
+        title: Address
+        description: The address to assign to the Address Object. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name
         type: string
         required: true
-        order: 1
-      cidr:
-        title: CIDR
-        description: CIDR
-        type: integer
-        required: true
-        default: 32
+        example: 198.51.100.100
         order: 2
-      name:
-        title: Name
-        description: Optional name to give this address object. If not provided, the name will be the IP address
+      address_object:
+        title: Address Object
+        description: Optional name to give this address object. If not provided, the name will be the value of address input field
         type: string
         required: false
+        example: MaliciousHost
+        order: 1
+      whitelist:
+        title: Whitelist
+        description: This list contains a set of network object that should not be blocked. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name
+        type: "[]string"
+        example: ["198.51.100.100", "example.com", "192.0.2.0/24"]
+        required: false
         order: 3
+      skip_rfc1918:
+        title: Skip RFC 1918 (Private) IP Addresses
+        description: Skip private IP addresses as defined in RFC 1918
+        type: boolean
+        example: true
+        required: true
+        default: true
+        order: 4
     output:
       success:
         title: Success
@@ -690,24 +752,16 @@ actions:
         description: Information about the operation that was performed
         type: object
         required: true
-
   delete_address_object:
     title: Delete Address Object
     description: Delete an address object
     input:
-      ip:
-        title: IP
-        description: IP
+      address_object:
+        title: Address Object
+        description: Name of Address Object to delete
         type: string
+        example: MaliciousHost
         required: true
-        order: 1
-      cidr:
-        title: CIDR
-        description: CIDR
-        type: integer
-        required: true
-        default: 32
-        order: 2
     output:
       success:
         title: Success
@@ -719,21 +773,49 @@ actions:
         description: Information about the operation that was performed
         type: object
         required: true
-
   add_address_object_to_address_group:
     title: Add Address Object to Group
     description: Add an address object to an address group
     input:
-      group_name:
-        title: Group Name
+      group:
+        title: Group
         description: Group name
         type: string
         required: true
-      address_object_name:
-        title: Address Object Name
-        description: Address object name
+        example: InsightConnect Block List
+      address_object:
+        title: Address Object
+        description: Address object
         type: string
         required: true
+        example: MaliciousHost
+    output:
+      success:
+        title: Success
+        description: Was the operation successful
+        type: boolean
+        required: true
+      result_object:
+        title: Result Object
+        description: An object containing the results of the action
+        type: object
+        required: true
+  remove_address_object_from_group:
+    title: Remove Address Object from Group
+    description: Removes an address object from an address group
+    input:
+      group:
+        title: Group
+        description: Group name
+        type: string
+        required: true
+        example: InsightConnect Block List
+      address_object:
+        title: Address Object
+        description: Address object
+        type: string
+        required: true
+        example: MaliciousHost
     output:
       success:
         title: Success

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: microsoft_teams
 title: Microsoft Teams
 description: The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users
-version: 2.0.1
+version: 2.2.0
 vendor: rapid7
 support: community
 status: []
@@ -12,6 +12,7 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/microsoft_teams
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.microsoft.com
+  docs_url: https://insightconnect.help.rapid7.com/docs/microsoft-teams
 tags:
 - microsoft
 - teams
@@ -38,6 +39,69 @@ types:
         type: string
         description: "Description"
         required: false
+  hashes:
+    md5_hashes:
+      title: MD5 Hashes
+      description: Extracted MD5 Hashes from message
+      type: "[]string"
+      required: false
+    sha1_hashes:
+      title: SHA1 Hashes
+      description: Extracted SHA1 hashes from message
+      type: "[]string"
+      required: false
+    sha256_hashes:
+      title: SHA256 Hashes
+      description: Extracted SHA256 hashes from message
+      type: "[]string"
+      required: false
+  ip_addresses:
+    ipv4_addresses:
+      title: IPv4 Addressses
+      description: Extracted IPv4 addressses from message
+      type: "[]string"
+      required: false
+    ipv6_addresses:
+      title: IPv6 Addressses
+      description: Extracted IPv6 addresses from message
+      type: "[]string"
+      required: false
+  indicators:
+    domains:
+      title: Domains
+      description: Extracted domains from message
+      type: "[]string"
+      required: false
+    urls:
+      title: URLs
+      description: Extracted URLs from message
+      type: "[]string"
+      required: false
+    email_addresses:
+      title: Email Addresses
+      description: Extracted email addresses from message
+      type: "[]string"
+      required: false
+    hashes:
+      title: Hashes
+      description: Extracted hashes from message
+      type: hashes
+      required: false
+    ip_addresses:
+      title: IP Addressses
+      description: Extracted IP addresses from message
+      type: ip_addresses
+      required: false
+    mac_addresses:
+      title: MAC Addresses
+      description: Extracted MAC addresses from message
+      type: "[]string"
+      required: false
+    cves:
+      title: CVEs
+      description: Extracted CVEs from message
+      type: "[]string"
+      required: false
   channel:
     displayName:
       title: "Display Name"
@@ -123,6 +187,11 @@ types:
        type: string
        description: "ID"
        required: false
+     first_word:
+       title: First Word
+       description: Extracted first word from message (easy way to obtain a chat command)
+       type: string
+       required: false
   group:
       mailNickname:
         title: "Mail Nickname"
@@ -171,21 +240,25 @@ connection:
     description: Application (client) ID
     type: string
     required: true
+    example: 63a0cad6-ac64-435c-a221-5d37c97b763e
   directory_id:
     title: Directory ID
     description: Directory (tenant) ID
     type: string
     required: true
+    example: 9e538ff5-dcb2-46a9-9a28-f93b8250deb0
   application_secret:
     title: Application Secret
     description: Application secret
     type: credential_secret_key
     required: true
+    example: aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=
   username_password:
     type: credential_username_password
     title: "Credentials"
     description: "Username and password"
     required: true
+    example: '{ "username": "user", "password": "mypassword" }'
 
 triggers:
   new_message_received:
@@ -198,23 +271,41 @@ triggers:
         type: string
         required: true
         order: 1
+        example: InsightConnect Team
       channel_name:
         title: Channel Name
         description: Channel
         type: string
         required: true
         order: 2
+        example: InsightConnect Channel
       message_content:
         title: Message Content
         description: Regex to match new messages against
         type: string
         required: false
         order: 3
+        example: "[Tt]est"
     output:
       message:
         title: Message
         description: The message object that was created
         type: message
+        required: false
+      indicators:
+        title: Indicators
+        description: The indicators object that was extracted from message
+        type: indicators
+        required: false
+      channel_name:
+        title: Channel Name
+        description: Name of the channel where the message was posted
+        type: string
+        required: false
+      team_name:
+        title: Team Name
+        description: Name of the team to which the channel is assigned to
+        type: string
         required: false
 
 actions:
@@ -227,6 +318,7 @@ actions:
         description: Optional regex-capable team name to look for
         type: string
         required: false
+        example: InsightConnect Team
     output:
       teams:
         title: Teams
@@ -243,12 +335,14 @@ actions:
         type: string
         required: true
         order: 1
+        example: InsightConnect Team
       channel_name:
         title: Channel Name
         description: Optional regex-capable channel to look for
         type: string
         required: false
         order: 2
+        example: InsightConnect Channel
     output:
       channels:
         title: Channels
@@ -265,18 +359,28 @@ actions:
         type: string
         required: true
         order: 1
+        example: InsightConnect Team
       channel_name:
         title: Channel Name
         description: Channel
         type: string
         required: true
         order: 2
+        example: InsightConnect Channel
+      thread_id:
+        title: Thread ID
+        description: To post in a thread, select parent message ID
+        type: string
+        required: false
+        order: 3
+        example: 1595889908700
       message:
         title: Message
         description: Message to send
         type: string
         required: true
-        order: 3
+        order: 4
+        example: Hello!
     output:
       message:
         title: Message
@@ -293,24 +397,28 @@ actions:
         type: string
         required: true
         order: 1
+        example: xxxxx-xxxxx-xxxx-xxxx
       channel_guid:
         title: Channel GUID
         description: Channel GUID
         type: string
         required: true
         order: 2
+        example: xxxxx-xxxxx-xxxx-xxxx
       is_html:
         title: Is HTML
         description: Is the message HTML
         type: boolean
         required: true
         order: 3
+        example: false
       message:
         title: Message
         description: Message to send
         type: string
         required: true
         order: 4
+        example: Hello!
     output:
       message:
         title: Message
@@ -327,18 +435,28 @@ actions:
         type: string
         required: true
         order: 1
+        example: InsightConnect Team
       channel_name:
         title: Channel Name
         description: Channel name
         type: string
         required: true
         order: 2
+        example: InsightConnect Channel
+      thread_id:
+        title: Thread ID
+        description: To post in a thread, select parent message ID
+        type: string
+        required: false
+        order: 3
+        example: 1595889908700
       message_content:
         title: Message Content
         description: HTML content to send
         type: string
         required: true
-        order: 3
+        order: 4
+        example: "<b>Hello!</b>"
     output:
       message:
         title: Message
@@ -355,12 +473,14 @@ actions:
         type: string
         required: true
         order: 1
+        example: InsightConnect Team
       member_login:
         title: Member Login
         description: Member login e.g. user@example.com
         type: string
         required: true
         order: 2
+        example: user@example.com
     output:
       success:
         title: Success
@@ -377,12 +497,14 @@ actions:
         type: string
         required: true
         order: 1
+        example: InsightConnect Team
       member_login:
         title: Member Login
         description: Member Login e.g. user@example.com
         type: string
         required: true
         order: 2
+        example: user@example.com
     output:
       success:
         title: Success
@@ -399,18 +521,21 @@ actions:
         type: string
         required: true
         order: 1
+        example: InsightConnect Team
       channel_name:
         title: Channel Name
         description: Channel name
         type: string
         required: true
         order: 2
+        example: InsightConnect Channel
       channel_description:
         title: Channel Description
         description: Channel description
         type: string
         required: true
         order: 3
+        example: This is a test channel.
     output:
       success:
         title: Success
@@ -427,12 +552,14 @@ actions:
         type: string
         required: true
         order: 1
+        example: InsightConnect Team
       channel_name:
         title: Channel Name
         description: Channel name
         type: string
         required: true
         order: 2
+        example: InsightConnect Channel
     output:
       success:
         title: Success
@@ -449,36 +576,42 @@ actions:
         type: string
         required: true
         order: 1
+        example: test_group
       group_description:
         title: Group Description
         description: Group description
         type: string
         required: true
         order: 2
+        example: A test group
       mail_nickname:
         title: Mail Nickname
         description: The nickname for the email address of this group in Outlook
         type: string
         required: true
         order: 3
+        example: TestGroup
       mail_enabled:
         title: Mail Enabled
         description: Should e-mail should be enabled for this group
         type: boolean
         required: true
         order: 4
+        example: false
       owners:
         title: Owners
         description: A list of usernames to set as owners
         type: "string[]"
         required: false
         order: 5
+        example: ['user@example.com']
       members:
         title: Members
         description: A list of usernames to set as members
         type: "string[]"
         required: false
         order: 6
+        example: ['user@example.com']
     output:
       group:
         title: Group
@@ -494,11 +627,10 @@ actions:
         description: Team Name
         type: string
         required: true
+        example: Test Team
     output:
       success:
         title: Success
         description: Boolean indicating if this action was successful
         type: boolean
         required: true
-
-

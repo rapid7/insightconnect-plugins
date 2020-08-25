@@ -1,28 +1,26 @@
-import komand
-from .schema import UnisolateMachineInput, UnisolateMachineOutput
+import insightconnect_plugin_runtime
+from .schema import UnisolateMachineInput, UnisolateMachineOutput, Input, Output, Component
 # Custom imports below
 
 
-class UnisolateMachine(komand.Action):
+class UnisolateMachine(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
                 name='unisolate_machine',
-                description='Restore network connectivity to a machine',
+                description=Component.DESCRIPTION,
                 input=UnisolateMachineInput(),
                 output=UnisolateMachineOutput())
 
     def run(self, params={}):
         self.logger.info("Running...")
 
-        machine_id = params.get("machine_id")
-        comment = params.get("comment")
+        machine_id = self.connection.client.find_first_machine(params.get(Input.MACHINE)).get("id")
+        comment = params.get(Input.COMMENT)
 
         self.logger.info("Attempting to unisolate machine id: " + machine_id)
-        response = self.connection.unisolate_machine(machine_id, comment)
-        return {"machine_isolation_response": komand.helper.clean(response)}
-
-    def test(self):
-        self.connection.test()
-        payload = self.connection.fake_isolation_response()
-        return {"machine_isolation_response": payload}
+        return {
+            Output.MACHINE_ISOLATION_RESPONSE: insightconnect_plugin_runtime.helper.clean(
+                self.connection.client.unisolate_machine(machine_id, comment)
+            )
+        }

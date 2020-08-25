@@ -8,8 +8,7 @@ class Component:
 
 
 class Input:
-    CIDR = "cidr"
-    IP = "ip"
+    ADDRESS_OBJECT = "address_object"
     
 
 class Output:
@@ -23,23 +22,15 @@ class DeleteAddressObjectInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "cidr": {
-      "type": "integer",
-      "title": "CIDR",
-      "description": "CIDR",
-      "default": 32,
-      "order": 2
-    },
-    "ip": {
+    "address_object": {
       "type": "string",
-      "title": "IP",
-      "description": "IP",
+      "title": "Address Object",
+      "description": "Name of Address Object to delete",
       "order": 1
     }
   },
   "required": [
-    "cidr",
-    "ip"
+    "address_object"
   ]
 }
     """)

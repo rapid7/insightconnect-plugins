@@ -4,10 +4,10 @@ import komand
 from komand_carbon_black_response import connection, actions, triggers
 
 
-Name = 'Cb Response'
-Vendor = 'rapid7'
-Version = '3.1.8'
-Description = 'Automate information collection, endpoint isolation and hash blacklisting'
+Name = "VMware Carbon Black EDR"
+Vendor = "rapid7"
+Version = "3.1.10"
+Description = "Automate information collection, endpoint isolation and hash blacklisting"
 
 
 class ICONCarbonBlackResponse(komand.Plugin):

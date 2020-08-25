@@ -50,3 +50,12 @@ demo-*.tar.gz
 
 # Ignore test output generated from icon-plugin tool
 **/.output
+
+# Ignore .json files
+*.json
+**/*.json
+
+# Ignore archives
+**/*.rar
+**/*.7z
+**/*.zip

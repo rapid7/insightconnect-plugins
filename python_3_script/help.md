@@ -86,7 +86,7 @@ Example Output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -98,6 +98,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/python-2-or-3-script)
 * 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Add the ability to download and install third-party libraries for use while configuring the plugin Connection
 * 1.0.6 - Fix issue where undefined output exceptions were not being handled correctly

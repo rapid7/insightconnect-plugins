@@ -1,0 +1,35 @@
+{
+	"spec": "4108ee54b54cebe39944fa29327f660a",
+	"manifest": "414f606a4b15c28d1fee7e73539f019d",
+	"setup": "83611c8d02a9dc85b5c35ab54fd9a1f4",
+	"schemas": [
+		{
+			"identifier": "antivirus_scan/schema.py",
+			"hash": "391a4975524a07e94378847a2b046f92"
+		},
+		{
+			"identifier": "blacklist/schema.py",
+			"hash": "702e8f89a14e8b955df2ff9e79062401"
+		},
+		{
+			"identifier": "check_tamper_protection_status/schema.py",
+			"hash": "83e50f3e6a2c664fabc80ca2abace725"
+		},
+		{
+			"identifier": "get_agent_details/schema.py",
+			"hash": "a93cf6d2c54e939b4cb50b2ae72c1815"
+		},
+		{
+			"identifier": "get_alerts/schema.py",
+			"hash": "9d87a01d865cb8d3737b7109894e8121"
+		},
+		{
+			"identifier": "get_endpoints/schema.py",
+			"hash": "ace04e73e5a406b8091226953a31951d"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "12662a65e1c3e0081c5926bfb611b12a"
+		}
+	]
+}

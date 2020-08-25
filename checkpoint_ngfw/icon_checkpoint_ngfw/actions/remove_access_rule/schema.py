@@ -9,7 +9,6 @@ class Component:
 
 class Input:
     ACCESS_RULE_NAME = "access_rule_name"
-    DISCARD_OTHER_SESSIONS = "discard_other_sessions"
     LAYER = "layer"
     
 
@@ -30,13 +29,6 @@ class RemoveAccessRuleInput(komand.Input):
       "description": "Access rule name",
       "order": 1
     },
-    "discard_other_sessions": {
-      "type": "boolean",
-      "title": "Discard Other Sessions",
-      "description": "Discard all other user sessions. This can fix errors when objects are locked by other sessions",
-      "default": true,
-      "order": 3
-    },
     "layer": {
       "type": "string",
       "title": "Layer",
@@ -47,7 +39,6 @@ class RemoveAccessRuleInput(komand.Input):
   },
   "required": [
     "access_rule_name",
-    "discard_other_sessions",
     "layer"
   ]
 }

@@ -10,7 +10,6 @@ class Component:
 class Input:
     ACCESS_CONTROL_POLICY = "access_control_policy"
     DESKTOP_SECURITY_POLICY = "desktop_security_policy"
-    DISCARD_OTHER_SESSIONS = "discard_other_sessions"
     INSTALL_ON_ALL_CLUSTER_MEMBERS_OR_FAIL = "install_on_all_cluster_members_or_fail"
     POLICY_PACKAGE = "policy_package"
     QOS_POLICY = "qos_policy"
@@ -41,13 +40,6 @@ class InstallPolicyInput(komand.Input):
       "description": "Set to be true in order to install the Desktop Security policy. By default, the value is true if desktop security policy is enabled on the input policy package, otherwise false",
       "default": false,
       "order": 4
-    },
-    "discard_other_sessions": {
-      "type": "boolean",
-      "title": "Discard Other Sessions",
-      "description": "Discard all other user sessions. This can fix errors when objects are locked by other sessions",
-      "default": false,
-      "order": 8
     },
     "install_on_all_cluster_members_or_fail": {
       "type": "boolean",
@@ -93,7 +85,6 @@ class InstallPolicyInput(komand.Input):
   "required": [
     "access_control_policy",
     "desktop_security_policy",
-    "discard_other_sessions",
     "install_on_all_cluster_members_or_fail",
     "policy_package",
     "qos_policy",

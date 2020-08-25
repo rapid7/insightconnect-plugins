@@ -8,9 +8,10 @@ class Component:
 
 
 class Input:
-    CIDR = "cidr"
-    IP = "ip"
-    NAME = "name"
+    ADDRESS = "address"
+    ADDRESS_OBJECT = "address_object"
+    SKIP_RFC1918 = "skip_rfc1918"
+    WHITELIST = "whitelist"
     
 
 class Output:
@@ -24,29 +25,38 @@ class CreateAddressObjectInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "cidr": {
-      "type": "integer",
-      "title": "CIDR",
-      "description": "CIDR",
-      "default": 32,
-      "order": 2
-    },
-    "ip": {
+    "address": {
       "type": "string",
-      "title": "IP",
-      "description": "IP",
+      "title": "Address",
+      "description": "The address to assign to the Address Object. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name",
       "order": 1
     },
-    "name": {
+    "address_object": {
       "type": "string",
-      "title": "Name",
-      "description": "Optional name to give this address object. If not provided, the name will be the IP address",
+      "title": "Address Object",
+      "description": "Optional name to give this address object. If not provided, the name will be the value of address input field",
+      "order": 2
+    },
+    "skip_rfc1918": {
+      "type": "boolean",
+      "title": "Skip RFC 1918 (Private) IP Addresses",
+      "description": "Skip private IP addresses as defined in RFC 1918",
+      "default": true,
+      "order": 4
+    },
+    "whitelist": {
+      "type": "array",
+      "title": "Whitelist",
+      "description": "This list contains a set of network object that should not be blocked. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name",
+      "items": {
+        "type": "string"
+      },
       "order": 3
     }
   },
   "required": [
-    "cidr",
-    "ip"
+    "address",
+    "skip_rfc1918"
   ]
 }
     """)

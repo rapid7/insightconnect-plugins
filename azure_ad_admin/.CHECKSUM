@@ -1,11 +1,15 @@
 {
-	"spec": "03072a54eedf01effb30deda3e33ad62",
-	"manifest": "20b838e4c47a132227b2549617f3dd72",
-	"setup": "ba8cd146f76186058070a788ba902f07",
+	"spec": "d2d9d5d337d07fc0b8dd93e0a2b2b4c0",
+	"manifest": "9894c85a53d82ffb4a1d41c18fc4e4e0",
+	"setup": "afba138e5d96a621eecc2ce74f12d100",
 	"schemas": [
 		{
 			"identifier": "add_user_to_group/schema.py",
 			"hash": "66cc121df00cfbf1da5b1d0cd085bd3b"
+		},
+		{
+			"identifier": "add_user_to_groups_by_id/schema.py",
+			"hash": "027a3833dee0f4cf20fef087b5a65858"
 		},
 		{
 			"identifier": "create_user/schema.py",
@@ -36,8 +40,12 @@
 			"hash": "c72147c6efdd66cf4da2adc4c090920b"
 		},
 		{
+			"identifier": "revoke_sign_in_sessions/schema.py",
+			"hash": "9df98ea951103d439029a9b8622e104f"
+		},
+		{
 			"identifier": "update_user_info/schema.py",
-			"hash": "f80d7cfe4f27863d151f99e2e4ae20f8"
+			"hash": "945dd8a20a3d534537eb4b4ed99148a3"
 		},
 		{
 			"identifier": "connection/schema.py",

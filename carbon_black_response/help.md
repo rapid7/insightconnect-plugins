@@ -1,8 +1,8 @@
 # Description
 
-[Cb Response](https://www.carbonblack.com/products/cb-response/) is the most complete endpoint detection and response solution available to security teams. The InsigthConnect plugin allows you to automate information collection, endpoint isolation and hash blacklisting.
+[VMware Carbon Black EDR](https://www.carbonblack.com/products/edr/) is the most complete endpoint detection and response solution available to security teams. The InsightConnect plugin allows you to automate information collection, endpoint isolation and hash blacklisting.
 
-This plugin utilizes the [Cb Response REST API](https://developer.carbonblack.com/reference/enterprise-response/6.1/rest-api/).
+This plugin utilizes the [VMware Carbon Black EDR REST API](https://developer.carbonblack.com/guide/enterprise-response/).
 
 # Key Features
 
@@ -12,7 +12,7 @@ This plugin utilizes the [Cb Response REST API](https://developer.carbonblack.co
 
 # Requirements
 
-* Requires an API Key from Carbon Black Response
+* Requires an API Key from VMware Carbon Black EDR
 
 # Documentation
 
@@ -729,6 +729,8 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.1.10 - Rebrand plugin
+* 3.1.9 - Pin to latest version of cbapi (1.6.2) to fix broken isolate() function
 * 3.1.8 - New spec and help.md format for the Extension Library
 * 3.1.7 - Fix issue where Delete Watchlist action would not run successfully
 * 3.1.6 - Fix issue where output from the New Alert trigger did not match the output schema
@@ -747,5 +749,4 @@ This plugin does not contain any troubleshooting information.
 
 ## References
 
-* [Carbon Black REST API Reference](https://developer.carbonblack.com/reference/enterprise-response/6.1/rest-api/)
-
+* [VMware Carbon Black EDR REST API](https://developer.carbonblack.com/guide/enterprise-response/)

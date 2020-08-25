@@ -6,7 +6,7 @@ from icon_fortinet_fortigate import connection, actions, triggers
 
 Name = "Fortinet FortiGate"
 Vendor = "rapid7"
-Version = "1.0.0"
+Version = "5.0.0"
 Description = "FortiGate Next Generation Firewalls (NGFWs) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection"
 
 
@@ -21,6 +21,8 @@ class ICONFortinetFortigate(komand.Plugin):
                 )
         self.add_action(actions.AddAddressObjectToAddressGroup())
 
+        self.add_action(actions.CheckIfAddressInGroup())
+
         self.add_action(actions.CreateAddressObject())
 
         self.add_action(actions.DeleteAddressObject())
@@ -28,6 +30,8 @@ class ICONFortinetFortigate(komand.Plugin):
         self.add_action(actions.GetAddressObjects())
 
         self.add_action(actions.GetPolicies())
+
+        self.add_action(actions.RemoveAddressObjectFromGroup())
 
 
 def main():

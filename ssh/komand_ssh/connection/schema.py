@@ -25,7 +25,7 @@ class ConnectionSchema(komand.Input):
       "order": 4
     },
     "key": {
-      "$ref": "#/definitions/credential_asymmetric_key",
+      "$ref": "#/definitions/credential_secret_key",
       "title": "Key",
       "description": "A base64 encoded SSH private key to use to authenticate to remote server. A newline is required after the beginning and before the end marker",
       "order": 3
@@ -50,7 +50,7 @@ class ConnectionSchema(komand.Input):
       "order": 6
     },
     "username": {
-      "$ref": "#/definitions/credential_secret_key",
+      "type": "string",
       "title": "Username",
       "description": "User to run command as",
       "order": 1
@@ -63,24 +63,6 @@ class ConnectionSchema(komand.Input):
     "username"
   ],
   "definitions": {
-    "credential_asymmetric_key": {
-      "id": "credential_asymmetric_key",
-      "type": "object",
-      "title": "Credential: Asymmetric Key",
-      "description": "A shared key",
-      "properties": {
-        "privateKey": {
-          "type": "string",
-          "title": "Private Key",
-          "displayType": "password",
-          "description": "The private key",
-          "format": "password"
-        }
-      },
-      "required": [
-        "privateKey"
-      ]
-    },
     "credential_secret_key": {
       "id": "credential_secret_key",
       "type": "object",

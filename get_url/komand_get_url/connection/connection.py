@@ -10,3 +10,8 @@ class Connection(komand.Connection):
 
     def connect(self, params):
         pass
+
+    def test(self, params={}):
+        url = 'https://www.google.com'
+        komand.helper.check_url(url)
+        return {}

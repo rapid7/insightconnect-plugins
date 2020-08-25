@@ -4,10 +4,10 @@ import komand
 from komand_sentinelone import connection, actions, triggers
 
 
-Name = 'SentinelOne'
-Vendor = 'rapid7'
-Version = '1.2.0'
-Description = 'The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne'
+Name = "SentinelOne"
+Vendor = "rapid7"
+Version = "3.0.0"
+Description = "The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne"
 
 
 class ICONSentinelone(komand.Plugin):
@@ -51,11 +51,15 @@ class ICONSentinelone(komand.Plugin):
 
         self.add_action(actions.AppsByAgentIds())
 
+        self.add_action(actions.Blacklist())
+
         self.add_action(actions.BlacklistByContentHash())
 
         self.add_action(actions.BlacklistByIocHash())
 
         self.add_action(actions.CreateIocThreat())
+
+        self.add_action(actions.GetAgentDetails())
 
         self.add_action(actions.GetThreatSummary())
 
@@ -66,6 +70,10 @@ class ICONSentinelone(komand.Plugin):
         self.add_action(actions.MitigateThreat())
 
         self.add_action(actions.NameAvailable())
+
+        self.add_action(actions.Quarantine())
+
+        self.add_action(actions.SearchAgents())
 
 
 def main():

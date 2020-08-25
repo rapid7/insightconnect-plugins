@@ -14,7 +14,7 @@ for flexible policy management of large groups of dynamic addresses.
 # Requirements
 
 * An admin API key
-* The IP of the orchestrator must be set as a trusted host in Administrator > Settings (Edit button) > Trusted Hosts 
+* The IP of the orchestrator must be set as a trusted host in Settings > Administrator (Edit button) > Trusted Hosts 
 
 # Documentation
 
@@ -22,15 +22,113 @@ for flexible policy management of large groups of dynamic addresses.
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|API key|None|
-|hostname|string|None|True|Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000|None|
-|ssl_verify|boolean|None|True|SSL verify|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|API key|None|2Fty5834tFpBdidePJnt9075MMdkUb|
+|hostname|string|None|True|Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000|None|example.com|
+|ssl_verify|boolean|None|True|SSL verify|None|False|
+
+Example input:
+
+```
+{
+  "api_key": "2Fty5834tFpBdidePJnt9075MMdkUb",
+  "hostname": "example.com",
+  "ssl_verify": false
+}
+```
 
 ## Technical Details
 
 ### Actions
+
+#### Remove Address Object from Group
+
+This action removes an address object from an address group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object|string|None|True|Address object|None|MaliciousHost|
+|group|string|None|True|Group name|None|InsightConnect Block List|
+
+Example input:
+
+```
+{
+  "address_object": "MaliciousHost",
+  "group": "InsightConnect Block List"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|result_object|object|True|An object containing the results of the action|
+|success|boolean|True|Was the operation successful|
+
+Example output:
+
+```
+{
+  "success": true,
+  "result_object": {
+    "http_method": "PUT",
+    "revision": "ae0c665d9d5ad469c280efc424e00e29",
+    "revision_changed": true,
+    "old_revision": "94d82356a2bc4cb05963807103392ca3",
+    "mkey": "Test Group",
+    "status": "success",
+    "http_status": 200,
+    "vdom": "root",
+    "path": "firewall",
+    "name": "addrgrp",
+    "serial": "FGVM02TM20001791",
+    "version": "v6.2.3",
+    "build": 1066
+  }
+}
+```
+
+#### Check if Address in Group
+
+This action is used to check if an IP address is in an address group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name|None|198.51.100.100|
+|enable_search|boolean|False|True|When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don't know the Address Object by its name|None|False|
+|group|string|None|True|Name of Address Group to check for address|None|InsightConnect Block Policy|
+
+Example input:
+
+```
+{
+  "address": "198.51.100.100",
+  "enable_search": false,
+  "group": "InsightConnect Block Policy"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|address_objects|[]string|True|The names of the address objects that match or contain the address|
+|found|boolean|True|Was address found in group|
+
+Example output:
+
+```
+{
+  "found": true,
+  "address_objects": ["198.51.100.100/32"]
+}
+```
 
 #### Get Policies
 
@@ -38,9 +136,17 @@ This action is used to get policies.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|name_filter|string|None|False|Optional name to filter on|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|name_filter|string|None|False|Optional name to filter on|None|InsightConnect Block Policy|
+
+Example input:
+
+```
+{
+  "name_filter": "InsightConnect Block Policy"
+}
+```
 
 ##### Output
 
@@ -194,10 +300,19 @@ This action is used to add an address object to an address group.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|address_object_name|string|None|True|Address object name|None|
-|group_name|string|None|True|Group name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object|string|None|True|Address object|None|MaliciousHost|
+|group|string|None|True|Group name|None|InsightConnect Block List|
+
+Example input:
+
+```
+{
+  "address_object": "MaliciousHost",
+  "group": "InsightConnect Block List"
+}
+```
 
 ##### Output
 
@@ -235,11 +350,27 @@ This action is used to create an address object.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|cidr|integer|32|True|CIDR|None|
-|ip|string|None|True|IP|None|
-|name|string|None|False|Optional name to give this address object. If not provided, the name will be the IP address|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|The address to assign to the Address Object. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|198.51.100.100|
+|address_object|string|None|False|Optional name to give this address object. If not provided, the name will be the value of address input field|None|MaliciousHost|
+|skip_rfc1918|boolean|True|True|Skip private IP addresses as defined in RFC 1918|None|True|
+|whitelist|[]string|None|False|This list contains a set of network object that should not be blocked. This can be an IP address, CIDR IP address e.g. 198.51.100.0/24, or a domain name|None|["198.51.100.100", "example.com", "192.0.2.0/24"]|
+
+Example input:
+
+```
+{
+  "address": "198.51.100.100",
+  "address_object": "MaliciousHost",
+  "skip_rfc1918": true,
+  "whitelist": [
+    "198.51.100.100",
+    "example.com",
+    "192.0.2.0/24"
+  ]
+}
+```
 
 ##### Output
 
@@ -277,10 +408,17 @@ This action is used to delete an address object.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|cidr|integer|32|True|CIDR|None|
-|ip|string|None|True|IP|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object|string|None|True|Name of Address Object to delete|None|MaliciousHost|
+
+Example input:
+
+```
+{
+  "address_object": "MaliciousHost"
+}
+```
 
 ##### Output
 
@@ -318,15 +456,27 @@ This action is used to get address objects.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|name_filter|string|None|False|Optional name to filter on|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|fqdn_filter|string|None|False|Optional FQDN to filter on|None|example.com|
+|name_filter|string|None|False|Optional name to filter on|None|MaliciousHost|
+|subnet_filter|string|None|False|Optional subnet to filter on|None|198.51.100.100/32|
+
+Example input:
+
+```
+{
+  "fqdn_filter": "example.com",
+  "name_filter": "MaliciousHost",
+  "subnet_filter": "198.51.100.100/32"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|address_objects|[]object|True|A list of address objects|
+|address_objects|[]address_object|True|A list of address objects|
 
 Example output:
 
@@ -496,10 +646,20 @@ _This plugin does not contain any triggers._
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+To accomplish this, log into the FortiGate firewall. Go to the System tab -> Administrator subtab and then select and edit the API admin.
+Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51.100.100/32`
 
 # Version History
 
+* 5.0.0 - Improve input handling to allow IPs, CIDRs, and subnet masks in actions | Fix output of Get Address Objects action to return usable data | Update Get Address Objects action to allow for additional search parameters
+* 4.0.4 - Improve error messaging around HTTP 401 status codes to indicate that the InsightConnect orchestrator IP address not being in the trusted host list may be the cause
+* 4.0.3 - Improve assistance message when the API returns an Internal Server Errror
+* 4.0.2 - Support host URL in connection | Improve Create Address Object action to allow for IPs and CIDRs as input
+* 4.0.1 - Bug fix where some names were being incorrectly parsed in the Check if Address in Group action causing the action to fail
+* 4.0.0 - Update Create Address Object action to accept a RFC1918 whitelist | Add enable_search functionality to Check if Address in Group action
+* 3.0.0 - Revise action input/output naming schemes | Add example inputs | New action Remove Address Object from Group
+* 2.0.0 - Simplify the Create Address Object action to auto-detect the input type | Add whitelist safety check to Create Address Object action
+* 1.1.0 - New Action Check if IP is in Address Group
 * 1.0.0 - Initial plugin
 
 # Links

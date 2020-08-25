@@ -1,9 +1,9 @@
-import komand
-from .schema import GetFileIdFromAlertIdInput, GetFileIdFromAlertIdOutput
+import insightconnect_plugin_runtime
+from .schema import GetFileIdFromAlertIdInput, GetFileIdFromAlertIdOutput, Input, Output
 # Custom imports below
 
 
-class GetFileIdFromAlertId(komand.Action):
+class GetFileIdFromAlertId(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -14,19 +14,10 @@ class GetFileIdFromAlertId(komand.Action):
 
     def run(self, params={}):
         self.logger.info("Running...")
-        alert_id = params.get("alert_id")
+        alert_id = params.get(Input.ALERT_ID)
         self.logger.info("Looking for alerts matching ID: " + alert_id)
-        files = self.connection.get_files_from_alert_id(alert_id)
-        try:
-            files["file_list"] = files.pop("value")
-        except KeyError as k:
-            self.logger.error("Could not find 'value' key in file information response: " + str(k))
-            raise k
 
-        return {"file_information": komand.helper.clean(files)}
+        file_payload = self.connection.client.get_files_from_id(alert_id)
+        files = file_payload.get("value")
 
-    def test(self):
-        self.connection.test()
-        file_info = self.connection.fake_file_info()
-        file_info['file_list'] = file_info.pop('value')
-        return {"file_information": file_info}
+        return {Output.FILE_LIST: insightconnect_plugin_runtime.helper.clean(files)}

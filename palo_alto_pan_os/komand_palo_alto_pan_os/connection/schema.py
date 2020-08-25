@@ -24,13 +24,13 @@ class ConnectionSchema(komand.Input):
     "server": {
       "type": "string",
       "title": "Server",
-      "description": "URL pointing to instance of PAN-OS",
+      "description": "URL pointing to instance of a Palo Alto firewall",
       "order": 1
     },
     "verify_cert": {
       "type": "boolean",
       "title": "Verify Cert",
-      "description": "If true, validate the server's TLS certificate when contacting PAN-OS over HTTPS",
+      "description": "If true, validate the server's TLS certificate when contacting the firewall over HTTPS",
       "order": 3
     }
   },
@@ -51,12 +51,14 @@ class ConnectionSchema(komand.Input):
           "title": "Password",
           "displayType": "password",
           "description": "The password",
-          "format": "password"
+          "format": "password",
+          "order": 2
         },
         "username": {
           "type": "string",
           "title": "Username",
-          "description": "The username to log in with"
+          "description": "The username to log in with",
+          "order": 1
         }
       },
       "required": [

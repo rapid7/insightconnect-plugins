@@ -1,19 +1,23 @@
 {
-	"spec": "85a47cc91e1250ca5eb17fb3dd339d0c",
-	"manifest": "e8545c3322699314610eb7843f3dd862",
-	"setup": "dbcd29267e4279509db88b97934c753a",
+	"spec": "a4aa2b37f4d8d9cf322653ac83483494",
+	"manifest": "039158933dbf8d60ea16df70addb47e2",
+	"setup": "9f0621fc5924540ab0124e90f4832137",
 	"schemas": [
 		{
 			"identifier": "add_access_rule/schema.py",
-			"hash": "55d1d76024bbfb13bd2fbbe88cc36d5e"
+			"hash": "38ad3951cb894c6a01e187e4e6b881c9"
 		},
 		{
-			"identifier": "add_host/schema.py",
-			"hash": "d3939b7741d94413fc6c2c5168fd76b8"
+			"identifier": "add_address_object_to_group/schema.py",
+			"hash": "e8b0788faa151dab59c3b94f985641a1"
 		},
 		{
-			"identifier": "add_host_to_network_group/schema.py",
-			"hash": "3eec1926fcb61887fd83f522c2296f11"
+			"identifier": "check_if_address_in_group/schema.py",
+			"hash": "b8c2d8a5725dea7c931e9aada5cafc2d"
+		},
+		{
+			"identifier": "create_address_object/schema.py",
+			"hash": "15ba53005e80d150cdf8f8d2d79492be"
 		},
 		{
 			"identifier": "discard_all_sessions/schema.py",
@@ -21,19 +25,23 @@
 		},
 		{
 			"identifier": "install_policy/schema.py",
-			"hash": "ef6df220a36df938acf0c006b5d309e7"
+			"hash": "ac9bc0ae67d7a5034fa8d862fddbc745"
 		},
 		{
 			"identifier": "remove_access_rule/schema.py",
-			"hash": "63a13725d644e952c40f5648fa41382e"
+			"hash": "926b976f52d81c41f09e126877b3d335"
+		},
+		{
+			"identifier": "remove_address_object_from_group/schema.py",
+			"hash": "6825f19bc97b825c30b4b669ff96d499"
 		},
 		{
 			"identifier": "remove_host/schema.py",
-			"hash": "abbc51146a4b78255550ee1a28b06cc8"
+			"hash": "22f5aa69ae3e6a1279769e2bf60aa121"
 		},
 		{
 			"identifier": "set_threat_protection/schema.py",
-			"hash": "945dc4df598c84352be4b929c46f9442"
+			"hash": "9b9d5818e9de1e8a36386c6f611fbf2f"
 		},
 		{
 			"identifier": "show_access_rulebase/schema.py",
@@ -41,7 +49,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "38546f13eb46b61ed92c43b623fa8d93"
+			"hash": "d4e88a46218b46e0d11758138275af9d"
 		}
 	]
 }

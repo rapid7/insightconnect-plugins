@@ -19,25 +19,24 @@ This plugin uses the [Microsoft Teams API](https://docs.microsoft.com/en-us/grap
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|application_id|string|None|True|Application (client) ID|None|
-|application_secret|credential_secret_key|None|True|Application secret|None|
-|directory_id|string|None|True|Directory (tenant) ID|None|
-|username_password|credential_username_password|None|True|Username and password|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|application_id|string|None|True|Application (client) ID|None|63a0cad6-ac64-435c-a221-5d37c97b763e|
+|application_secret|credential_secret_key|None|True|Application secret|None|aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=|
+|directory_id|string|None|True|Directory (tenant) ID|None|9e538ff5-dcb2-46a9-9a28-f93b8250deb0|
+|username_password|credential_username_password|None|True|Username and password|None|{ "username": "user", "password": "mypassword" }|
 
 Example input:
 
 ```
 {
-  "application_id": "xxxxxxx-xxxxxx-xxxxx-xxxx",
-  "application_secret": {
-    "secretKey": "xxxxxxx"
-  },
-  "directory_id": "xxxx-xxxx-xxxx-xxxx-xxx",
+  "application_id": "63a0cad6-ac64-435c-a221-5d37c97b763e",
+  "application_secret": "aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=",
+  "directory_id": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0",
   "username_password": {
-    "password": "password",
-    "username": "user@example.com"
+    "username": "user",
+    "password": "mypassword"
+  }
 }
 ```
 
@@ -53,19 +52,21 @@ Regular expressions used by this action are Python specific.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|channel_name|string|None|True|Channel|None|
-|message|string|None|True|Message to send|None|
-|team_name|string|None|True|Team name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|channel_name|string|None|True|Channel|None|InsightConnect Channel|
+|message|string|None|True|Message to send|None|Hello!|
+|team_name|string|None|True|Team name|None|InsightConnect Team|
+|thread_id|string|None|False|To post in a thread, select parent message ID|None|1595889908700|
 
 Example input:
 
 ```
 {
-  "channel_name": "ICON Test Channel",
+  "channel_name": "InsightConnect Channel",
   "message": "Hello!",
-  "team_name": "ICON-Test-Everyone"
+  "team_name": "InsightConnect Team",
+  "thread_id": 1595889908700
 }
 ```
 
@@ -112,19 +113,21 @@ This action is used to send HTML as a message.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|channel_name|string|None|True|Channel name|None|
-|message_content|string|None|True|HTML content to send|None|
-|team_name|string|None|True|Team name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|channel_name|string|None|True|Channel name|None|InsightConnect Channel|
+|message_content|string|None|True|HTML content to send|None|<b>Hello!</b>|
+|team_name|string|None|True|Team name|None|InsightConnect Team|
+|thread_id|string|None|False|To post in a thread, select parent message ID|None|1595889908700|
 
 Example input:
 
 ```
 {
-  "channel_name": "ICON Test Channel",
+  "channel_name": "InsightConnect Channel",
   "message_content": "<b>Hello!</b>",
-  "team_name": "ICON-Test-Everyone"
+  "team_name": "InsightConnect Team",
+  "thread_id": 1595889908700
 }
 ```
 
@@ -171,12 +174,29 @@ This action sends a message using the GUID for the team and channel. This is mor
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|channel_guid|string|None|True|Channel GUID|None|
-|is_html|boolean|None|True|Is the message HTML|None|
-|message|string|None|True|Message to send|None|
-|team_guid|string|None|True|Team GUID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|channel_guid|string|None|True|Channel GUID|None|xxxxx-xxxxx-xxxx-xxxx|
+|is_html|boolean|None|True|Is the message HTML|None|False|
+|message|string|None|True|Message to send|None|Hello!|
+|team_guid|string|None|True|Team GUID|None|xxxxx-xxxxx-xxxx-xxxx|
+
+Example input:
+
+```
+{
+  "channel_name": "InsightConnect Channel",
+  "message": "Hello!",
+  "team_name": "InsightConnect Team",
+  "thread_id": 1595889908700
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|message|message|False|The message object that was created|
 
 Example input:
 
@@ -236,15 +256,15 @@ Regular expressions used by this action are Python specific.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|team_name|string|None|False|Optional regex-capable team name to look for|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|team_name|string|None|False|Optional regex-capable team name to look for|None|InsightConnect Team|
 
 Example input:
 
 ```
 {
-  "team_name": "Komand-Test-Everyone"
+  "team_name": "InsightConnect Team"
 }
 ```
 
@@ -263,7 +283,7 @@ Example output:
       "id": "7af08a76-01fe-4a1d-bfa1-84d2b5509cdd",
       "createdDateTime": "2019-10-14T17:18:55Z",
       "description": "A test team of everyone",
-      "displayName": "ICON-Test-Everyone",
+      "displayName": "InsightConnect Team",
       "externalGroupIds": [],
       "groupTypes": [
         "Unified"
@@ -302,17 +322,17 @@ Regular expressions used by this action are Python specific.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|channel_name|string|None|False|Optional regex-capable channel to look for|None|
-|team_name|string|None|True|Team name to look for|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|channel_name|string|None|False|Optional regex-capable channel to look for|None|InsightConnect Channel|
+|team_name|string|None|True|Team name to look for|None|InsightConnect Team|
 
 Example input:
 
 ```
 {
-  "channel_name": "Komand Test Channel",
-  "team_name": "Komand-Test-Everyone"
+  "channel_name": "InsightConnect Channel",
+  "team_name": "InsightConnect Team"
 }
 ```
 
@@ -344,17 +364,17 @@ This action is used to add a member to a team.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|member_login|string|None|True|Member login e.g. user@example.com|None|
-|team_name|string|None|True|Team name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|member_login|string|None|True|Member login e.g. user@example.com|None|user@example.com|
+|team_name|string|None|True|Team name|None|InsightConnect Team|
 
 Example input:
 
 ```
 {
   "member_login": "user@example.com",
-  "team_name": "ICON-Test-Everyone"
+  "team_name": "InsightConnect Team"
 }
 ```
 
@@ -378,19 +398,19 @@ This action is used to add a channel to a team.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|channel_description|string|None|True|Channel description|None|
-|channel_name|string|None|True|Channel name|None|
-|team_name|string|None|True|Team name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|channel_description|string|None|True|Channel description|None|This is a test channel.|
+|channel_name|string|None|True|Channel name|None|InsightConnect Channel|
+|team_name|string|None|True|Team name|None|InsightConnect Team|
 
 Example input:
 
 ```
 {
   "channel_description": "This is a test channel.",
-  "channel_name": "test_channel",
-  "team_name": "ICON-Test-Everyone"
+  "channel_name": "InsightConnect Channel",
+  "team_name": "InsightConnect Team"
 }
 ```
 
@@ -414,17 +434,17 @@ This action is used to remove a channel from a team.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|channel_name|string|None|True|Channel name|None|
-|team_name|string|None|True|Team name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|channel_name|string|None|True|Channel name|None|InsightConnect Channel|
+|team_name|string|None|True|Team name|None|InsightConnect Team|
 
 Example input:
 
 ```
 {
-  "channel_name": "test_channel",
-  "team_name": "ICON-Test-Everyone"
+  "channel_name": "InsightConnect Channel",
+  "team_name": "InsightConnect Team"
 }
 ```
 
@@ -448,17 +468,17 @@ This action is used to remove a member from a team.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|member_login|string|None|True|Member Login e.g. user@example.com|None|
-|team_name|string|None|True|Team name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|member_login|string|None|True|Member Login e.g. user@example.com|None|user@example.com|
+|team_name|string|None|True|Team name|None|InsightConnect Team|
 
 Example input:
 
 ```
 {
   "member_login": "user@example.com",
-  "team_name": "Komand-Test-Everyone"
+  "team_name": "InsightConnect Team"
 }
 ```
 
@@ -482,24 +502,30 @@ This action is used to create a group in Azure and enable it for Microsoft Teams
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|group_description|string|None|True|Group description|None|
-|group_name|string|None|True|Team name|None|
-|mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|
-|mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|
-|members|string[]|None|False|A list of usernames to set as members|None|
-|owners|string[]|None|False|A list of usernames to set as owners|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|group_description|string|None|True|Group description|None|A test group|
+|group_name|string|None|True|Team name|None|test_group|
+|mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|False|
+|mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|TestGroup|
+|members|string[]|None|False|A list of usernames to set as members|None|["user@example.com"]|
+|owners|string[]|None|False|A list of usernames to set as owners|None|["user@example.com"]|
 
 Example input:
 
 ```
+{
   "group_description": "A test group",
   "group_name": "test_group",
   "mail_enabled": false,
   "mail_nickname": "TestGroup",
-  "members": "['user@example.com']",
-  "owners": "['user@example.com']"
+  "members": [
+    "user@example.com"
+  ],
+  "owners": [
+    "user@example.com"
+  ]
+}
 ```
 
 ##### Output
@@ -545,9 +571,9 @@ This action is used to delete a team and the associated group from Azure.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|team_name|string|None|True|Team Name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|team_name|string|None|True|Team Name|None|Test Team|
 
 Example input:
 
@@ -581,19 +607,19 @@ Regular expressions used by this trigger are Python specific.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|channel_name|string|None|True|Channel|None|
-|message_content|string|None|False|Regex to match new messages against|None|
-|team_name|string|None|True|Team name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|channel_name|string|None|True|Channel|None|InsightConnect Channel|
+|message_content|string|None|False|Regex to match new messages against|None|[Tt]est|
+|team_name|string|None|True|Team name|None|InsightConnect Team|
 
 Example input:
 
 ```
 {
-  "channel_name": "ICON Test Channel",
+  "channel_name": "InsightConnect Channel",
   "message_content": "[Tt]est",
-  "team_name": "ICON-Test-Everyone"
+  "team_name": "InsightConnect Team"
 }
 ```
 
@@ -601,7 +627,10 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|channel_name|string|False|Name of the channel where the message was posted|
+|indicators|indicators|False|The indicators object that was extracted from message|
 |message|message|False|The message object that was created|
+|team_name|string|False|Name of the team to which the channel is assigned to|
 
 Example output:
 
@@ -625,11 +654,48 @@ Example output:
     },
     "body": {
       "contentType": "text",
-      "content": "Hello from InsightConnect!"
+      "content": "extract-indicators www.rapid7.com user@example.com ..."
     },
     "attachments": [],
     "mentions": [],
-    "reactions": []
+    "reactions": [],
+    "first_word": "extract-indicators"
+  },
+  "indicators": {
+    "domains": [
+      "www.rapid7.com"
+    ],
+    "urls": [
+      "https://www.rapid7.com"
+    ],
+    "email_addresses": [
+      "user@example.com"
+    ],
+    "hashes": {
+      "md5_hashes": [
+        "7cafac7ec5adaebf62257a4cf5aa63cb"
+      ],
+      "sha1_hashes": [
+        "df5f8044e02c1e72967dd6eed70aeab2bab234c5"
+      ],
+      "sha256_hashes": [
+        "711712cd0038f268a768fed960dacf57b6515d4ad3d1db2dfbca0be9680ed7d9"
+      ]
+    },
+    "ip_addresses": {
+      "ipv4_addresses": [
+        "198.51.100.1"
+      ],
+      "ipv6_addresses": [
+        "2001:db8:8:4::2"
+      ]
+    },
+    "mac_addresses": [
+      "00:00:0A:BB:28:FC"
+    ],
+    "cves": [
+      "CVE-2015-3429"
+    ]
   }
 }
 ```
@@ -644,6 +710,12 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.0 - Extract and return command security and network indicators in the New Message Received trigger
+* 2.1.0 - Update Send Message and Send HTML Message actions to accept `thread_id` input to support threaded replies | Update New Message Received trigger to output team and channel names so they can be passed into subsequent steps
+* 2.0.5 - Fix issue where auth token wasn't properly renewed
+* 2.0.4 - Fix issue where a message that only had an image in it could break the 'New Message Received' trigger
+* 2.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/microsoft-teams)
+* 2.0.2 - Fix issue where unexpected HTML messages would not trigger workflows
 * 2.0.1 - Update to Get Teams action to support more than 20 teams
 * 2.0.0 - Fix issue where send message would not work if there were too many teams | Removed regex capability for team and channel inputs which will speed up Send Message and Send HTML Message actions
 * 1.3.0 - New action Send Message by GUID

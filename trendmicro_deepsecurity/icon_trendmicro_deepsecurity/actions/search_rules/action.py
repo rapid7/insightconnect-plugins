@@ -43,15 +43,16 @@ class SearchRules(komand.Action):
                                                     data=json.dumps(data),
                                                     verify=self.connection.dsm_verify_ssl)
 
-            self.logger.info(cve)
+            self.logger.info(f"CVE: {cve}")
+            self.logger.info(f"url: {response.url}")
             self.logger.info(f"status: {response.status_code}")
             self.logger.info(f"reason: {response.reason}")
 
-            # Try to convert the response data to JSON
-            response_data = tryJSON(response)
-
             # Check response errors
             checkResponse(response)
+
+            # Try to convert the response data to JSON
+            response_data = tryJSON(response)
 
             # Check if matching IPS rules were found
             if response_data["intrusionPreventionRules"]:
@@ -67,6 +68,7 @@ class SearchRules(komand.Action):
 
         self.logger.info("Found rules for the following CVEs: " + ", ".join(matched_cves))
 
+        # Return matched rules
         return {Output.IPS_RULES: list(ips_rules),
                 Output.MATCHED_CVES: list(matched_cves),
                 Output.MISSED_CVES: list(missed_cves)}

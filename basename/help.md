@@ -38,15 +38,31 @@ This action is used to get the `basename` of a path.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|path|string|None|True|URL or file path|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|path|string|None|True|URL or file path|None|https://example.com/text.txt|
+
+Example input:
+
+```
+{
+  "path": "https://example.com/text.txt"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |basename|string|False|Basename result|
+
+Example output:
+
+```
+{
+  "basename": "text.txt"
+}
+```
 
 ### Triggers
 
@@ -62,6 +78,8 @@ If the input doesn't contain a slash `/` in the path the result will be the orig
 
 # Version History
 
+* 1.1.0 - Add missing `title` in action Basename | Use input and output constants | Add example input and output | Changed `Exception` to `PluginException` | Added "f" strings
+* 1.0.2 - Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Update plugin.spec.yaml to include `cloud_ready`
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Support web server mode
 * 0.1.1 - Update to v2 Python plugin architecture
@@ -72,4 +90,3 @@ If the input doesn't contain a slash `/` in the path the result will be the orig
 ## References
 
 * [Python Basename](https://docs.python.org/2/library/os.path.html#os.path.basename)
-

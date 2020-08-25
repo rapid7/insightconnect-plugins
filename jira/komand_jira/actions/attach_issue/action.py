@@ -1,6 +1,6 @@
 import komand
 from .schema import AttachIssueInput, AttachIssueOutput, Input, Output, Component
-from ...util import add_attachment
+from komand_jira.util.util import add_attachment
 
 # Custom imports below
 from komand.exceptions import PluginException

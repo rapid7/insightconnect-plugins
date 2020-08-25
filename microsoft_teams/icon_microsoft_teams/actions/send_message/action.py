@@ -15,17 +15,21 @@ class SendMessage(komand.Action):
                 output=SendMessageOutput())
 
     def run(self, params={}):
-        team_name = params.get(Input.TEAM_NAME)
-        channel_name = params.get(Input.CHANNEL_NAME)
         message = params.get(Input.MESSAGE)
 
-        teams = get_teams_from_microsoft(self.logger, self.connection, team_name)
+        teams = get_teams_from_microsoft(self.logger, self.connection, params.get(Input.TEAM_NAME))
         team_id = teams[0].get("id")
-        channels = get_channels_from_microsoft(self.logger, self.connection, team_id, channel_name)
-        channel_id = channels[0].get("id")
+        channels = get_channels_from_microsoft(self.logger, self.connection, team_id, params.get(Input.CHANNEL_NAME))
 
-        message = send_message(self.logger, self.connection, message, team_id, channel_id)
+        message = send_message(
+            self.logger,
+            self.connection,
+            message,
+            team_id,
+            channels[0].get("id"),
+            thread_id=params.get(Input.THREAD_ID, None)
+        )
 
-        clean_message = remove_null_and_clean(message)
-
-        return {Output.MESSAGE: clean_message}
+        return {
+            Output.MESSAGE: remove_null_and_clean(message)
+        }
