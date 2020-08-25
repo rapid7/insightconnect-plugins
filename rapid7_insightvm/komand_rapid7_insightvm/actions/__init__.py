@@ -10,6 +10,7 @@ from .create_scan_engine_pool.action import CreateScanEnginePool
 from .create_site.action import CreateSite
 from .create_tag.action import CreateTag
 from .create_user.action import CreateUser
+from .delete_asset.action import DeleteAsset
 from .delete_asset_group.action import DeleteAssetGroup
 from .delete_exception.action import DeleteException
 from .delete_scan_engine.action import DeleteScanEngine
