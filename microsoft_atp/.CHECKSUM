@@ -1,8 +1,16 @@
 {
-	"spec": "23e4e029e5af5e4ceedf6a2a7a2141a5",
-	"manifest": "52b474448b058d5f9942d2f0b8304e3e",
-	"setup": "754f9070058cab6a5dfdd27edc846a18",
+	"spec": "4592240c9531fe950f8c36fed94eaca1",
+	"manifest": "8996c4ad2ffec65dc94b46aca1bf821f",
+	"setup": "39a1d5700a6fcc50134cbf1cc8db3613",
 	"schemas": [
+		{
+			"identifier": "blacklist/schema.py",
+			"hash": "0d32433aef2c9482f5a5498766193b5c"
+		},
+		{
+			"identifier": "find_machines_with_installed_software/schema.py",
+			"hash": "d981612bfde23566c6a463963425f6a9"
+		},
 		{
 			"identifier": "get_file_id_from_alert_id/schema.py",
 			"hash": "e5288fd810dc0856a26733180d957e32"
@@ -14,6 +22,14 @@
 		{
 			"identifier": "get_machine_information/schema.py",
 			"hash": "dd8224ada56bb03f9b5760f95cf99301"
+		},
+		{
+			"identifier": "get_machine_vulnerabilities/schema.py",
+			"hash": "d6eb96785b6c62866a0210fa968d937c"
+		},
+		{
+			"identifier": "get_security_recommendations/schema.py",
+			"hash": "103ef019f8834ac9c95dd93950fff700"
 		},
 		{
 			"identifier": "isolate_machine/schema.py",

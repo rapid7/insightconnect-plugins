@@ -26,7 +26,7 @@ class GetThreats(komand.Trigger):
         }
 
         frequency = params.get("frequency", 5)
-        since = None
+        since = datetime.now()
 
         while True:
             if since:

@@ -59,6 +59,9 @@ class WindwosDefenderATP_API:
             'Accept': 'application/json'
         }
 
+    def find_machines(self, software: str):
+        return self._make_request("GET", f"Software/{software}/machineReferences", allow_empty=True)
+
     def get_machine_action(self, action_id: str) -> dict:
         return self._make_request("GET", f"machineactions/{action_id}")
 
@@ -80,6 +83,9 @@ class WindwosDefenderATP_API:
 
     def get_machine_information(self, machine_id: str) -> dict:
         return self._make_request("GET", f"machines/{machine_id}")
+
+    def get_machine_vulnerabilities(self, machine_id: str) -> dict:
+        return self._make_request("GET", f"machines/{machine_id}/vulnerabilities")
 
     def get_files_from_id(self, alert_id: str) -> dict:
         return self._make_request("GET", f"alerts/{alert_id}/files")
@@ -120,13 +126,26 @@ class WindwosDefenderATP_API:
 
         return self._make_request("GET", endpoint)
 
-    def _make_request(self, method: str, path: str, json_data: dict = None) -> dict:
+    def submit_or_update_indicator(self, payload) -> dict:
+        return self._make_request("POST", "indicators", json_data=payload)
+
+    def delete_indicator(self, indicator_id: str) -> dict:
+        return self._make_request("DELETE", f"indicators/{indicator_id}")
+
+    def search_indicators(self, query_parameters) -> dict:
+        return self._make_request("GET", f"indicators{query_parameters}")
+
+    def get_security_recommendations(self, machine_id: str) -> dict:
+        return self._make_request("GET", f"machines/{machine_id}/recommendations")
+
+    def _make_request(self, method: str, path: str, json_data: dict = None, allow_empty: bool = False) -> dict:
         self.check_and_refresh_api_token()
         return self._call_api(
             method,
-            f"https://api.securitycenter.windows.com/api/{path}",
+            f"{self.resource_url}/api/{path}",
             json_data=json_data,
-            headers=self.get_session_headers()
+            headers=self.get_session_headers(),
+            allow_empty=allow_empty
         )
 
     def _call_api(
@@ -136,7 +155,8 @@ class WindwosDefenderATP_API:
             params: dict = None,
             json_data: dict = None,
             data: dict = None,
-            headers: dict = None
+            headers: dict = None,
+            allow_empty: bool = False
     ) -> dict:
         response = {"text": ""}
         try:
@@ -153,6 +173,8 @@ class WindwosDefenderATP_API:
                 raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
+            if response.status_code == 404 and allow_empty:
+                return {}
             if response.status_code == 404:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
             if response.status_code == 400 and '"message":"Action is already in progress"' in response.text:
@@ -163,7 +185,9 @@ class WindwosDefenderATP_API:
             if response.status_code >= 400:
                 raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
             if 200 <= response.status_code < 300:
-                return response.json()
+                if response.text:
+                    return response.json()
+                return {}
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except json.decoder.JSONDecodeError as e:

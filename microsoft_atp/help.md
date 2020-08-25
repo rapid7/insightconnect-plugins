@@ -47,6 +47,226 @@ Example input:
 
 ### Actions
 
+#### Get Security Recommendations
+
+This action is used to retrieve a list of security recommendations.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|machine|string|None|True|Machine IP address, hostname or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+
+Example input:
+
+```
+{
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|recommendations|[]recommendation|True|List of security recommendations|
+
+Example output:
+
+```
+{
+  "recommendations": [
+    {
+      "activeAlert": false,
+      "associatedThreats": [],
+      "configScoreImpact": 0.0,
+      "exposedMachinesCount": 1,
+      "exposureImpact": 0.0,
+      "id": "va-_-microsoft-_-.net_framework",
+      "nonProductivityImpactedAssets": 0,
+      "productName": ".net_framework",
+      "publicExploit": false,
+      "recommendationCategory": "Application",
+      "recommendationName": "Update Microsoft .net Framework",
+      "relatedComponent": ".net Framework",
+      "remediationType": "Update",
+      "severityScore": 0.0,
+      "status": "Active",
+      "totalMachineCount": 0,
+      "vendor": "microsoft",
+      "weaknesses": 1
+    }
+  ]
+}
+```
+
+#### Blacklist
+
+This action is used to submit or update new indicator.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|action|string|AlertAndBlock|False|The action that will be taken if the indicator will be discovered in the organization|['Alert', 'AlertAndBlock', 'Allowed']|AlertAndBlock|
+|application|string|None|False|The application associated with the indicator|None|demo-test|
+|description|string|None|False|Description of the indicator|None|description|
+|expiration_time|string|None|False|The expiration time of the indicator|None|2020-12-12T00:00:00Z|
+|indicator|string|None|True|A supported indicator to blacklist or unblacklist. Supported indicators are IP addresses, URLs, domains, and SHA1 and SHA256 hashes|None|220e7d15b011d7fac48f2bd61114db1022197f7f|
+|indicator_state|boolean|False|False|True to add indicator, false to remove it from the list|None|True|
+|rbac_group_names|[]string|None|False|List of RBAC group names the indicator would be applied to|None|["group1","group2"]|
+|recommended_actions|string|None|False|TI indicator alert recommended actions|None|nothing|
+|severity|string|High|False|The severity of the indicator|['Informational', 'Low', 'Medium', 'High']|High|
+|title|string|None|False|Indicator alert title|None|test|
+
+Example input:
+
+```
+{
+  "action": "AlertAndBlock",
+  "application": "demo-test",
+  "description": "description",
+  "expiration_time": "2020-12-12T00:00:00Z",
+  "indicator": "220e7d15b011d7fac48f2bd61114db1022197f7f",
+  "indicator_state": true,
+  "rbac_group_names": [
+    "group1",
+    "group2"
+  ],
+  "recommended_actions": "nothing",
+  "severity": "High",
+  "title": "test"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|indicator_action_response|indicator_action|False|A response that includes the result of the action, and supplemental information about the action taken|
+
+Example output:
+
+```
+{
+  "indicator_action_response": {
+    "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#Indicators/$entity",
+    "action": "Alert",
+    "application": "application",
+    "category": 1,
+    "createdBy": "82f42fca-e931-4f03-b54c-47af94bd394d",
+    "createdByDisplayName": "WindowsDefenderATPSiemConnector",
+    "createdBySource": "PublicApi",
+    "creationTimeDateTimeUtc": "2020-07-30T19:01:56.6543461Z",
+    "description": "some description",
+    "expirationTime": "2020-12-12T00:00:00Z",
+    "generateAlert": true,
+    "historicalDetection": false,
+    "id": "11",
+    "indicatorType": "Url",
+    "indicatorValue": "http://google.com",
+    "lastUpdateTime": "2020-07-30T19:02:10.9680026Z",
+    "lastUpdatedBy": "82f42fca-e931-4f03-b54c-47af94bd394d",
+    "mitreTechniques": [],
+    "rbacGroupIds": [],
+    "rbacGroupNames": [],
+    "recommendedActions": "nothing",
+    "severity": "Informational",
+    "source": "WindowsDefenderATPSiemConnector",
+    "sourceType": "AadApp",
+    "title": "Title"
+  }
+}
+```
+
+#### Get Machine Vulnerabilities
+
+This action retrieves a collection of discovered vulnerabilities related to a given device.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|machine|string|None|True|Machine IP address, hostname or machine ID|None|9de5069c5afe602b2ea0a04b66beb2c0cef77fdf|
+
+Example input:
+
+```
+{
+  "machine": "9de5069c5afe602b2ea0a04b66beb2c0cef77fdf"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|vulnerabilities|[]vulnerability|True|List of vulnerabilities of the machine|
+
+Example output:
+
+```
+{
+  "vulnerabilities": [
+    {
+      "id": "CVE-2020-14711",
+      "name": "CVE-2020-14711",
+      "description": "Vulnerability in the Oracle VM VirtualBox product of Oracle Virtualization (component: Core).  Supported versions that are affected are Prior to 5.2.44, prior to 6.0.24 and  prior to 6.1.12. Easily exploitable vulnerability allows high privileged attacker with logon to the infrastructure where Oracle VM VirtualBox executes to compromise Oracle VM VirtualBox.  Successful attacks require human interaction from a person other than the attacker. Successful attacks of this vulnerability can result in takeover of Oracle VM VirtualBox.  Note: The CVE-2020-14711 is applicable to macOS host only. CVSS 3.1 Base Score 6.5 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:H/A:H).",
+      "severity": "Medium",
+      "cvssV3": 6.5,
+      "exposedMachines": 1,
+      "publishedOn": "2020-07-14T00:00:00Z",
+      "updatedOn": "2020-07-27T22:00:00Z",
+      "publicExploit": false,
+      "exploitVerified": false,
+      "exploitInKit": false,
+      "exploitTypes": [],
+      "exploitUris": []
+    }
+  ]
+}
+
+```
+
+#### Find Machines with Installed Software
+
+This action is used to retrieve a list of device references that have specific software installed.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|software|string|None|True|Name of the software to be searched|None|microsoft-_-edge|
+
+Example input:
+
+```
+{
+  "software": "microsoft-_-edge"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|machines|[]machine_software|True|List of machines with provided software|
+
+Example output:
+
+```
+{
+  "machines": [
+    {
+      "computerDnsName": "mseewin10",
+      "id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+      "osPlatform": "Windows10",
+      "rbacGroupId": 0
+    }
+  ]
+}
+```
+
 #### Get Machine Information
 
 This action is used to get details about a machine from its ID.
@@ -387,9 +607,9 @@ Example input:
 
 ```
 {
+  "frequency": 10,
   "key": "assignedTo",
-  "value": "Automation",
-  "frequency": 10
+  "value": "user@example.com"
 }
 ```
 
@@ -495,6 +715,10 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.4.0 - Add new action Get Security Recommendations
+* 4.3.0 - Add new action Get Machine Vulnerabilities
+* 4.2.0 - Add new action Blacklist
+* 4.1.0 - Add new action Find Machines with Installed Software
 * 4.0.0 - Add custom type to output in action Get Machine Information
 * 3.0.0 - Move connection functions to their own util class | Changed `Exception` to `PluginException` | Added error handling around "Action already in progress" state in Isolate Machine, Unisolate Machine, Stop and Quarantine File, and Run Antivirus Scan actions | Rename `machine_id` to `machine` in machine-related actions to support hostnames and IP addresses in addition to machine IDs.
 * 2.0.0 - Update to refactor connection and actions
