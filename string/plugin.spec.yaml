@@ -4,10 +4,11 @@ products: [insightconnect]
 name: string
 title: String Operations
 description: The String plugin provides common programmatic string operations
-version: 1.3.0
+version: 1.3.1
 vendor: rapid7
 support: community
 status: []
+cloud_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/string
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -29,6 +30,7 @@ actions:
         description: String to encode
         type: string
         required: true
+        example: hello
       encoding:
         type: string
         description: Encoding to use

@@ -237,14 +237,15 @@ This action is used to encode a string.
 |----|----|-------|--------|-----------|----|-------|
 |encoding|string|None|True|Encoding to use|['UTF-8', 'ASCII']|ASCII|
 |error_handling|string|None|True|Error handler to use for encoding and decoding|['strict', 'replace', 'ignore']|ignore|
-|string|string|None|True|String to encode|None|None|
+|string|string|None|True|String to encode|None|hello|
 
 Example input:
 
 ```
 {
   "encoding": "ASCII",
-  "error_handling": "ignore"
+  "error_handling": "ignore",
+  "string": "hello"
 }
 ```
 
@@ -309,6 +310,7 @@ If this is the case, consider using the Python 3 Script plugin instead.
 
 # Version History
 
+* 1.3.1 - Update to v4 Python plugin runtime
 * 1.3.0 - New action Length | Add example inputs
 * 1.2.1 - New spec and help.md format for the Extension Library
 * 1.2.0 - New action Trim

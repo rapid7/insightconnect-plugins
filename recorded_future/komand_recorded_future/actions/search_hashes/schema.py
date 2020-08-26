@@ -233,7 +233,7 @@ class SearchHashesOutput(komand.Output):
           "order": 1
         },
         "value": {
-          "type": "integer",
+          "type": "number",
           "title": "Value",
           "order": 2
         }
@@ -600,7 +600,7 @@ class SearchHashesOutput(komand.Output):
               "order": 1
             },
             "value": {
-              "type": "integer",
+              "type": "number",
               "title": "Value",
               "order": 2
             }
