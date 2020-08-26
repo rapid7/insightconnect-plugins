@@ -38,7 +38,7 @@ Example input:
 
 ```
 {
-  "url": "https://bit.ly/39HoYMu"
+  "url": "https://bit.ly/2X4meGl"
 }
 ```
 
@@ -96,6 +96,7 @@ Note that the API is limited to 10 requests per hour per IP address.
 
 # Version History
 
+* 1.0.5 - Update to v4 Python plugin runtime
 * 1.0.4 - Add example inputs
 * 1.0.3 - Use input and output constants | Changed `Exception` to `PluginException` | Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` | Add user nobody in Dockerfile
 * 1.0.2 - New spec and help.md format for the Extension Library
