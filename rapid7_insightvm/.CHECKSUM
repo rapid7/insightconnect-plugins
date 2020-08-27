@@ -1,5 +1,5 @@
 {
-	"spec": "0853c5465b032d36ea8f0b7c092fc831",
+	"spec": "860d6da5bccdd6baaafef8af029da589",
 	"manifest": "76baf8754d5dea5bd2b55e87eaa8eeed",
 	"setup": "1b9dc425e17927c62b143f7d19d1e9b7",
 	"schemas": [
@@ -225,7 +225,7 @@
 		},
 		{
 			"identifier": "list_inactive_assets/schema.py",
-			"hash": "2676db8f262c28019b913c2d3e52cab9"
+			"hash": "0d4aafcf9d5cef057ea929e86678db73"
 		},
 		{
 			"identifier": "list_reports/schema.py",

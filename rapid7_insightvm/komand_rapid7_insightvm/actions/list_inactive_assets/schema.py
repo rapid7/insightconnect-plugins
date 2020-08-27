@@ -28,7 +28,10 @@ class ListInactiveAssetsInput(komand.Input):
       "default": 14,
       "order": 1
     }
-  }
+  },
+  "required": [
+    "days_ago"
+  ]
 }
     """)
 

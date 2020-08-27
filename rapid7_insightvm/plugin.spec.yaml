@@ -3643,7 +3643,7 @@ actions:
         type: integer
         example: 14
         default: 14
-        requred: true
+        required: true
     output:
       assets:
         title: Assets

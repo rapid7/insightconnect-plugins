@@ -42,7 +42,7 @@ This action returns a list of inactive assets (limit 1000).
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|days_ago|integer|14|False|How many days ago should an asset be considered still active|None|14|
+|days_ago|integer|14|True|How many days ago should an asset be considered still active|None|14|
 
 Example input:
 
@@ -61,6 +61,114 @@ Example input:
 Example output:
 
 ```
+{
+  "assets": [
+    {
+      "addresses": [
+        {
+          "ip": "192.168.100.50"
+        }
+      ],
+      "assessedForPolicies": false,
+      "assessedForVulnerabilities": true,
+      "history": [
+        {
+          "date": "2020-08-18T20:04:09.508Z",
+          "scanId": 3,
+          "type": "SCAN",
+          "version": 1
+        }
+      ],
+      "hostName": "example-host",
+      "hostNames": [
+        {
+          "name": "example-host",
+          "source": "dns"
+        }
+      ],
+      "id": 2,
+      "ip": "192.168.100.50",
+      "links": [
+      ],
+      "os": "Ubuntu Linux 12.04",
+      "osFingerprint": {
+        "cpe": {
+          "part": "o",
+          "product": "ubuntu_linux",
+          "swEdition": "lts",
+          "v2.2": "cpe:/o:canonical:ubuntu_linux:12.04::~~lts~~~",
+          "v2.3": "cpe:2.3:o:canonical:ubuntu_linux:12.04:*:*:*:lts:*:*:*",
+          "vendor": "canonical",
+          "version": "12.04"
+        },
+        "description": "Ubuntu Linux 12.04",
+        "family": "Linux",
+        "id": 2,
+        "product": "Linux",
+        "systemName": "Ubuntu Linux",
+        "vendor": "Ubuntu",
+        "version": "12.04"
+      },
+      "rawRiskScore": 4251.2236328125,
+      "riskScore": 4251.2236328125,
+      "services": [
+        {
+          "configurations": [
+          ],
+          "family": "OpenSSH",
+          "links": [
+          ],
+          "name": "SSH",
+          "port": 22,
+          "product": "OpenSSH",
+          "protocol": "tcp",
+          "vendor": "OpenBSD",
+          "version": "5.9p1"
+        },
+        {
+          "configurations": [
+            {
+              "name": "bind.version",
+              "value": "Bind, James Bind."
+            }
+          ],
+          "family": "BIND",
+          "links": [
+          ],
+          "name": "DNS",
+          "port": 53,
+          "product": "BIND",
+          "protocol": "udp",
+          "version": "Bind, James Bind."
+        },
+        {
+          "configurations": [
+            {
+              "name": "bind.version",
+              "value": "Bind, James Bind."
+            }
+          ],
+          "family": "BIND",
+          "links": [
+          ],
+          "name": "DNS",
+          "port": 53,
+          "product": "BIND",
+          "protocol": "tcp",
+          "version": "Bind, James Bind."
+        }
+      ],
+      "vulnerabilities": {
+        "critical": 1,
+        "exploits": 1,
+        "malwareKits": 0,
+        "moderate": 5,
+        "severe": 7,
+        "total": 13
+      }
+    }
+  ]
+}
 ```
 
 #### Delete an Asset
