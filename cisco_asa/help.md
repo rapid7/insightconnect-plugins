@@ -54,6 +54,46 @@ Example input:
 
 ### Actions
 
+#### Create Address Object
+
+This action is used to create Address Object by the Object IP address.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|IP, CIDR, or domain name to assign to the Address Object|None|198.51.100.100|
+|address_object|string|None|False|Name of the Address Object, defaults to the value address in the address field if no name is given|None|InsightConnect Address Object|
+|skip_private_addresses|boolean|None|False|If set to true, any addresses that are defined in the RFC1918 space will not be blocked. e.g. 10/8, 172.16/12, 192.168/16|None|False|
+|whitelist|[]string|None|False|This list contains a set of hosts that should not be blocked. This can include IPs, CIDRs, and domains|None|["198.51.100.100"]|
+
+Example input:
+
+```
+{
+  "address": "198.51.100.100",
+  "address_object": "InsightConnect Address Object",
+  "skip_private_addresses": false,
+  "whitelist": [
+    "198.51.100.100"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Returns true if object was created|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 #### Add Address to Group
 
 This action is used to add an IP address associated with an existing Object to a Network Group.
@@ -233,6 +273,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.4.0 - Add new action Create Address Object
 * 1.3.0 - Add new action Add Address to Group
 * 1.2.0 - Add new action Delete Address Object
 * 1.1.0 - Add new action Remove Address from Group

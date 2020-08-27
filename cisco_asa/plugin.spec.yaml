@@ -4,7 +4,7 @@ products: [insightconnect]
 name: cisco_asa
 title: Cisco Adaptive Security Appliance
 description: The Cisco ASA plugin allows you to automate the management of network objects
-version: 1.3.0
+version: 1.4.0
 vendor: rapid7
 support: community
 status: []
@@ -187,5 +187,39 @@ actions:
       success:
         title: Success
         description: Success if address add to group
+        type: boolean
+        required: true
+  create_address_object:
+    title: Create Address Object
+    description: Create Address Object by the Object IP address
+    input:
+      address:
+        title: Address
+        description: IP, CIDR, or domain name to assign to the Address Object
+        type: string
+        required: true
+        example: 198.51.100.100
+      address_object:
+        title: Address Object
+        description: Name of the Address Object, defaults to the value address in the address field if no name is given
+        type: string
+        required: false
+        example: InsightConnect Address Object
+      skip_private_addresses:
+        title: Skip Private Addresses
+        description: If set to true, any addresses that are defined in the RFC1918 space will not be blocked. e.g. 10/8, 172.16/12, 192.168/16
+        type: boolean
+        required: false
+        example: false
+      whitelist:
+        title: Whitelist
+        description: This list contains a set of hosts that should not be blocked. This can include IPs, CIDRs, and domains
+        type: "[]string"
+        required: false
+        example: ["198.51.100.100"]
+    output:
+      success:
+        title: Success
+        description: Returns true if object was created
         type: boolean
         required: true
