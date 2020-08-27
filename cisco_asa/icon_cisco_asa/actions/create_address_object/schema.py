@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Create Address Object by the Object IP address"
+    DESCRIPTION = "Create address object by the object IP address"
 
 
 class Input:
@@ -27,13 +27,13 @@ class CreateAddressObjectInput(insightconnect_plugin_runtime.Input):
     "address": {
       "type": "string",
       "title": "Address",
-      "description": "IP, CIDR, or domain name to assign to the Address Object",
+      "description": "IP, CIDR, or domain name to assign to the address object",
       "order": 1
     },
     "address_object": {
       "type": "string",
       "title": "Address Object",
-      "description": "Name of the Address Object, defaults to the value address in the address field if no name is given",
+      "description": "Name of the address object, defaults to the value address in the address field if no name is given",
       "order": 2
     },
     "skip_private_addresses": {

@@ -191,17 +191,17 @@ actions:
         required: true
   create_address_object:
     title: Create Address Object
-    description: Create Address Object by the Object IP address
+    description: Create address object by the object IP address
     input:
       address:
         title: Address
-        description: IP, CIDR, or domain name to assign to the Address Object
+        description: IP, CIDR, or domain name to assign to the address object
         type: string
         required: true
         example: 198.51.100.100
       address_object:
         title: Address Object
-        description: Name of the Address Object, defaults to the value address in the address field if no name is given
+        description: Name of the address object, defaults to the value address in the address field if no name is given
         type: string
         required: false
         example: InsightConnect Address Object
