@@ -34,6 +34,35 @@ Example input:
 
 ### Actions
 
+#### List Inactive Assets
+
+This action returns a list of inactive assets (limit 1000).
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|days_ago|integer|14|False|How many days ago should an asset be considered still active|None|14|
+
+Example input:
+
+```
+{
+  "days_ago": 14
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|assets|[]asset|True|A list of inactive assets|
+
+Example output:
+
+```
+```
+
 #### Delete an Asset
 
 This action is used to delete an Asset.
@@ -47,9 +76,6 @@ This action is used to delete an Asset.
 Example input:
 
 ```
-{
-  "id": 21
-}
 ```
 
 ##### Output
@@ -4789,6 +4815,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.2.0 - New action List Inactive Assets
 * 4.1.0 - New action Delete Asset
 * 4.0.1 - Add the option to limit a scan to specific hosts
 * 4.0.0 - Fix output for Generate Adhoc SQL Report action

@@ -1,7 +1,7 @@
 {
-	"spec": "1923869e2daed432b13b069b39ab502c",
-	"manifest": "638e64356107d0131eb9aad552f28f63",
-	"setup": "8e2dae5a7b97b8fb5719df4952f56488",
+	"spec": "0853c5465b032d36ea8f0b7c092fc831",
+	"manifest": "76baf8754d5dea5bd2b55e87eaa8eeed",
+	"setup": "1b9dc425e17927c62b143f7d19d1e9b7",
 	"schemas": [
 		{
 			"identifier": "add_scan_engine_pool_engine/schema.py",
@@ -222,6 +222,10 @@
 		{
 			"identifier": "get_vulnerability_affected_assets/schema.py",
 			"hash": "7e22b140f5dd81d2afe542c1c87372df"
+		},
+		{
+			"identifier": "list_inactive_assets/schema.py",
+			"hash": "2676db8f262c28019b913c2d3e52cab9"
 		},
 		{
 			"identifier": "list_reports/schema.py",
