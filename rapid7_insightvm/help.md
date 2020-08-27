@@ -1803,7 +1803,7 @@ This action is used to create an asset group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|description|string|None|False|Asset group description|None|None|
+|description|string|None|True|Asset group description|None|None|
 |name|string|None|True|Asset group name|None|None|
 |searchCriteria|object|None|False|Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|None|
 |type|string|None|True|Asset group type|['dynamic', 'static']|None|
@@ -4923,6 +4923,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.2.1 - Fix to make Create Asset Group description required
 * 4.2.0 - New action List Inactive Assets
 * 4.1.0 - New action Delete Asset
 * 4.0.1 - Add the option to limit a scan to specific hosts
