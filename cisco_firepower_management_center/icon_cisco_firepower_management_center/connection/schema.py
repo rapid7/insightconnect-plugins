@@ -6,6 +6,7 @@ import json
 class Input:
     SERVER = "server"
     USERNAME_AND_PASSWORD = "username_and_password"
+    VERIFY_SSL = "verify_ssl"
     
 
 class ConnectionSchema(komand.Input):
@@ -25,6 +26,13 @@ class ConnectionSchema(komand.Input):
       "title": "Username and Password",
       "description": "Cisco username and password",
       "order": 2
+    },
+    "verify_ssl": {
+      "type": "boolean",
+      "title": "Verify SSL",
+      "description": "Check the server's SSL certificate",
+      "default": true,
+      "order": 3
     }
   },
   "required": [
@@ -42,12 +50,14 @@ class ConnectionSchema(komand.Input):
           "title": "Password",
           "displayType": "password",
           "description": "The password",
-          "format": "password"
+          "format": "password",
+          "order": 2
         },
         "username": {
           "type": "string",
           "title": "Username",
-          "description": "The username to log in with"
+          "description": "The username to log in with",
+          "order": 1
         }
       },
       "required": [

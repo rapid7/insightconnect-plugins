@@ -2,6 +2,7 @@ import komand
 from .schema import ConnectionSchema, Input
 from komand.exceptions import PluginException
 # Custom imports below
+from cisco_firepower_management_center.util.api import CiscoAsaAPI
 import fmcapi
 
 
@@ -16,6 +17,7 @@ class Connection(komand.Connection):
         self.username = username
         self.password = password
         self.host = params.get('server')
+        self.cisco_firepower_api = 
 
     def test(self):
         # TODO: Get log contents to pass to ConnectionTestException
