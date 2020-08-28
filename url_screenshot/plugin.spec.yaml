@@ -1,0 +1,50 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: url_screenshot
+title: Screenshot a URL
+description: Screenshot a URL from the Orchestrator
+version: 1.0.0
+vendor: rapid7
+support: community
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/url_screenshot
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+tags:
+- utilities
+- url
+hub_tags:
+  use_cases: [data_enrichment]
+  keywords: [utilities, analysis, url]
+  features: []
+actions:
+  screenshot:
+    title: Screenshot URL
+    description: Takes a screenshot of a URL from the Orchestrator
+    input:
+      url:
+        title: URL
+        type: string
+        description: URL to screenshot
+        required: true
+        order: 1
+      delay:
+        title: Delay
+        type: integer
+        description: Delay (in seconds) after page has loaded before screenshot
+        required: false
+        order: 2
+      full_page:
+        title: Full Page Capture
+        description: Export screenshot of "body" element instead of the default viewport.  This "body" element may have some formatting issues but should contain all elements of the page
+        type: boolean
+        required: true
+        default: false
+        order: 3
+    output:
+      screenshot:
+        title: Screenshot
+        description: The resulting PNG screenshot of the URL
+        type: bytes
+        required: false
