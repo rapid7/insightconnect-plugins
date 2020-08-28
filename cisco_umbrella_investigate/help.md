@@ -23,7 +23,9 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|Enter API key|None|1452d258-7c12-7c12-7c12-1452d25874c2|
+|api_key|credential_secret_key|None|True|Enter API key e.g. 1452d258-7c12-7c12-7c12-1452d25874c2|None|1452d258-7c12-7c12-7c12-1452d25874c2|
+
+The API key is a UUID-v4 [customer key](https://docs.umbrella.com/developer/enforcement-api/authentication-and-versioning/).
 
 Example input:
 

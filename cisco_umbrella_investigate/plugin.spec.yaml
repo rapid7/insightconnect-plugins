@@ -367,7 +367,7 @@ connection:
   api_key:
     title: API Key
     type: credential_secret_key
-    description: Enter API key
+    description: Enter API key e.g. 1452d258-7c12-7c12-7c12-1452d25874c2
     required: true
     example: 1452d258-7c12-7c12-7c12-1452d25874c2
 actions:
