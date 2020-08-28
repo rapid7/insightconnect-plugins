@@ -9,7 +9,7 @@ status: []
 description: This plugin utilizes Cisco Umbrella Investigate to get the most complete view of the relationships
   and evolution of Internet domains, IP addresses, and autonomous systems to pinpoint
   attackers infrastructures and predict future threats
-version: 2.0.0
+version: 3.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cisco_umbrella_investigate
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -367,8 +367,9 @@ connection:
   api_key:
     title: API Key
     type: credential_secret_key
-    description: Enter API key e.g. 1111-2222-3333-4444
+    description: Enter API key
     required: true
+    example: 1452d258-7c12-7c12-7c12-1452d25874c2
 actions:
   categorization:
     title: Domain Status and Categorization
@@ -376,9 +377,11 @@ actions:
       Labs team
     input:
       domains:
+        title: Domains
         type: '[]string'
         description: Domain names
         required: true
+        example: example.com
     output:
       categories:
         title: Categories
@@ -390,9 +393,11 @@ actions:
     description: Return co-occurrences for the specified domain
     input:
       domain:
+        title: Domain
         type: string
         description: Domain name
         required: true
+        example: example.com
     output:
       cooccurrences:
         title: Co-occurrences
@@ -407,11 +412,14 @@ actions:
     description: Returns a list of domain names that have been frequently seen
     input:
       domain:
+        title: Domain
         type: string
         description: Domain name
         required: true
+        example: example.com
     output:
       related:
+        title: Related
         description: Array of [domain name, scores] tuples where the score is the
           number of client IP requests to the site in 60 seconds from the time of
           the original lookup request
@@ -426,6 +434,7 @@ actions:
         type: string
         description: Domain name
         required: true
+        example: example.com
     output:
       dga_score:
         title: Domain Generation Algorithm
@@ -539,6 +548,7 @@ actions:
         type: string
         description: Domain name
         required: true
+        example: example.com
     output:
       domain_tags:
         title: Domain Tags
@@ -557,10 +567,13 @@ actions:
         type: string
         description: DNS record query type (A, NS, MX, TXT and CNAME are supported)
         required: false
+        example: A
       domain:
+        title: Domain
         type: string
         description: Domain name
         required: true
+        example: example.com
     output:
       rrs_tf:
         title: Resource Records
@@ -581,11 +594,13 @@ actions:
         type: string
         description: DNS record query type (A, NS, MX, TXT and CNAME are supported)
         required: false
-      IP:
+        example: NS
+      ip:
         title: IP Address
         type: string
         description: IP address
         required: true
+        example: 198.51.100.100
     output:
       rrs:
         title: Resource Records
@@ -607,6 +622,7 @@ actions:
         type: string
         description: Email address following rfc5322 conventions
         required: true
+        example: user@example.com
     output:
       email_whois:
         title: Email WHOIS
@@ -619,9 +635,11 @@ actions:
       WHOIS data returned in an array
     input:
       domain:
+        title: Domain
         type: string
         description: Domain name without wildcards and including TLD
         required: true
+        example: example.com
     output:
       whois:
         title: WHOIS
@@ -639,8 +657,10 @@ actions:
         type: string
         description: Nameserver's domain name
         required: true
+        example: 198.51.100.100
     output:
       domain:
+        title: Domain
         description: Array of WHOIS results for the domain provided with all available
           information
         type: '[]email_whois'
@@ -651,29 +671,36 @@ actions:
       (RegEx) to search against the Investigate database
     input:
       expression:
+        title: Expression
         type: string
         description: A standard RegEx pattern search
         required: true
+        example: ..example.com
       start:
+        title: Start
         type: string
         description: If specifying in absolute, use millisecond timestamp within the
           last 30 days as the Start. If specifying in relative, use either seconds,
           minutes, hours, days or weeks with a minus sign in front. As an example
           -1days, -1000minutes
         required: true
+        example: -1000minutes
       include_category:
         title: Include Category
         type: boolean
         description: Default is false, if set to true this will include security categories
           in the results and may slow the return times
         required: false
+        example: false
       limit:
         title: Request Limit
         type: integer
         description: Default is 1000, limit request response
         required: false
+        example: 1000
     output:
       expression:
+        title: Expression
         description: This is the RegEx in the query as seen from the API. If results
           from your query do not match what you may have expected, check to see that
           the RegEx matches the one you tried to enter and that characters are correctly
@@ -694,11 +721,13 @@ actions:
         type: boolean
         required: true
       limit:
+        title: Limit
         description: Default is 100, can be expanded to 1000 which is the maximum
           number of results for this endpoint
         type: integer
         required: true
       matches:
+        title: Matches
         description: 'Each match will contain the name of the domain matches, the
           and the first seen time, both in Epoch and ISO time format. This endpoint
           returns the security categories as strings rather than integers (eg: ''malware'',''botnet'',
@@ -709,13 +738,15 @@ actions:
     title: Latest Malicious Domains by IP
     description: Return associated malicious domains for an IP address
     input:
-      IP:
+      ip:
         title: IP Address
         type: string
         description: IP Address to check for malicious domains
         required: true
+        example: 198.51.100.100
     output:
       domains:
+        title: Domains
         description: The block list domain associated with the IP
         type: '[]string'
         required: true
@@ -723,21 +754,26 @@ actions:
     title: Samples by Domain
     description: Return all samples associated with the domain
     input:
-      URL:
+      url:
         title: URL
         type: string
-        description: Search sample by domain, IP or URL
+        description: Search sample by domain, IP
         required: true
+        example: example.com
       limit:
+        title: Limit
         type: string
         description: The number of responses; default of 10 as a limit on response,
           can be extended
         required: false
+        example: 10
       offset:
+        title: Offset
         type: string
         description: Default to 0, used to pagination between sets of data if limit
           is exceeded
         required: false
+        example: 10
       sortby:
         title: Sort By
         type: string
@@ -745,6 +781,7 @@ actions:
           'first-seen' sorts the samples in date descending order. 'last-seen' sorts
           the samples in ascending order. 'score' sorts the samples by the ThreatScore
         required: false
+        example: first-seen
     output:
       query:
         title: Query
@@ -764,15 +801,18 @@ actions:
         type: boolean
         required: true
       limit:
+        title: Limit
         description: Number of sample results
         type: integer
         required: true
       offset:
+        title: Offset
         description: The offset of the individual entities in the query’s response;
           used for pagination
         type: integer
         required: true
       samples:
+        title: Samples
         description: Information about the actual sample
         type: '[]sample_info'
         required: true
@@ -782,18 +822,24 @@ actions:
       memory
     input:
       hash:
+        title: Hash
         type: string
         description: Search sample by hash (SHA-256, SHA-1 or MD5)
         required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
       limit:
+        title: Limit
         type: string
         description: Default of 10, can be extended for a larger data set
         required: false
+        example: 10
       offset:
+        title: Offset
         type: string
         description: The offset of the individual entities in the query’s response,
           used for pagination
         required: false
+        example: 10
     output:
       sample:
         title: Sample
@@ -806,17 +852,23 @@ actions:
       analysis
     input:
       hash:
+        title: Hash
         type: string
         description: Search sample by hash (SHA-256, SHA-1 or MD5)
         required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
       limit:
+        title: Limit
         type: string
         description: Default of 10, can be extended for a larger data set
         required: false
+        example: 10
       offset:
+        title: Offset
         type: string
         description: Used to paginate between sets of data
         required: false
+        example: 5
     output:
       artifacts:
         title: Artifacts
@@ -828,17 +880,23 @@ actions:
     description: Return network activity information associated with a sample
     input:
       hash:
+        title: Hash
         type: string
         description: Search sample by hash (SHA-256, SHA-1 or MD5)
         required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
       limit:
+        title: Limit
         type: string
         description: Default of 10, can be extended for a larger data set
         required: false
+        example: 10
       offset:
+        title: Offset
         type: string
         description: Used to paginate between sets of data
         required: false
+        example: 10
     output:
       connections:
         title: Connections
@@ -850,17 +908,23 @@ actions:
     description: Return other samples associated with a sample
     input:
       hash:
+        title: Hash
         type: string
         description: Search sample by hash (SHA-256, SHA-1 or MD5)
         required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
       limit:
+        title: Limit
         type: string
         description: Default of 10, can be extended for a larger data set
         required: false
+        example: 10
       offset:
+        title: Offset
         type: string
         description: Used to paginate between sets of data
         required: false
+        example: 10
     output:
       samples:
         title: Samples

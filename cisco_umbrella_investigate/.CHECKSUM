@@ -1,7 +1,7 @@
 {
-	"spec": "0c23b266b18c706d4d486c7929108bc6",
-	"manifest": "61813bebdda813caad85dab7e730f58c",
-	"setup": "214ed05b94c535ff06c6d8fe28c2273b",
+	"spec": "e93ea231a3eb85ff360c96a55c492d82",
+	"manifest": "51cff9394540e9acb016a4cf8ae72db5",
+	"setup": "06b5ce90dffa9387f82ace51e0ae2a3d",
 	"schemas": [
 		{
 			"identifier": "categorization/schema.py",
@@ -25,7 +25,7 @@
 		},
 		{
 			"identifier": "latest_domains/schema.py",
-			"hash": "28102ca435efe361d552ae16b8a2d4d1"
+			"hash": "ee2918f8dab77db75a8d845955e2a97c"
 		},
 		{
 			"identifier": "ns_whois/schema.py",
@@ -41,7 +41,7 @@
 		},
 		{
 			"identifier": "rr_history_ip/schema.py",
-			"hash": "854581643954db49cf7d2977d4119624"
+			"hash": "2844aef848cfa69eca7057f17743df41"
 		},
 		{
 			"identifier": "sample/schema.py",
@@ -61,7 +61,7 @@
 		},
 		{
 			"identifier": "samples/schema.py",
-			"hash": "ada11d8cb95fdabfb935f7dec37bb21e"
+			"hash": "603ca07e9d28b2c412e822f3f57d2820"
 		},
 		{
 			"identifier": "search/schema.py",
@@ -73,7 +73,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "bc1f9bcd1c75c53f576552c10c9b91cf"
+			"hash": "47bdc850ee2ff96c7284dedea5cb13fd"
 		}
 	]
 }
