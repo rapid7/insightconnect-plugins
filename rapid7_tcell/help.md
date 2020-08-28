@@ -59,7 +59,7 @@ This action is used to fetch app name and app ID for all apps in a customer envi
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -2244,7 +2244,7 @@ an entity with the exact same data (e.g. IP groups), and in that case an excepti
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
 # Links

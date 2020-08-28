@@ -35,16 +35,33 @@ with the extracted fields only.
 Field numbers (e.g. `f1`) and a range of fields (e.g. `f5-7`) are used to defined the extraction.
 For example, to extract fields 1, 2, 4, 5, 6 the following fields value can be used: `f1, f2, f4-6`.
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|csv|bytes|None|True|Base64 encoded CSV file|None|
-|fields|string|None|True|Fields to filter E.g. f1, f2, f3-f6|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|csv|bytes|None|True|Base64 encoded CSV file|None|ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTIK|
+|fields|string|None|True|Fields to filter|None|f1, f2, f3-f6|
+
+Example input:
+
+```
+{
+  "csv": "ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTIK",
+  "fields": "f1, f2, f3-f6"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |filtered|bytes|True|Filtered CSV file|
+
+Example output:
+
+```
+{
+  "filtered": "ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTI="
+}
+```
 
 #### Filter String
 
@@ -55,10 +72,19 @@ This action is used to extract fields from a user supplied CSV string and return
 Field numbers (e.g. `f1`) and a range of fields (e.g. `f5-7`) are used to defined the extraction. For example, to extract fields
 1, 2, 4, 5, 6 the following fields value can be used: `f1, f2, f4-6`.
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|csv|string|None|True|CSV string|None|
-|fields|string|None|True|Fields to filter E.g. f1, f2, f3-f6|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|csv|string|None|True|CSV string|None|column1, column2\nvalue1, value2|
+|fields|string|None|True|Fields to filter|None|f1, f2, f3-f6|
+
+Example input:
+
+```
+{
+  "csv": "column1, column2\\nvalue1, value2",
+  "fields": "f1, f2, f3-f6"
+}
+```
 
 ##### Output
 
@@ -66,16 +92,33 @@ Field numbers (e.g. `f1`) and a range of fields (e.g. `f5-7`) are used to define
 |----|----|--------|-----------|
 |string|string|True|Filtered CSV string|
 
+Example output:
+
+```
+{
+  "string": "field1\nvalue1\nvalue1-1"
+}
+```
+
 #### To JSON
 
 This action is used to convert CSV to JSON.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|csv|bytes|None|True|Base64 encoded CSV file|None|
-|validation|boolean|False|True|Validate CSV data, error if not valid|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|csv|bytes|None|True|Base64 encoded CSV file|None|ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTIK|
+|validation|boolean|False|True|Validate CSV data, error if not valid|None|True|
+
+Example input:
+
+```
+{
+  "csv": "ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTIK",
+  "validation": true
+}
+```
 
 ##### Output
 
@@ -112,9 +155,17 @@ This action is used to convert a JSON array to CSV.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|json|[]object|None|True|JSON array to convert to CSV|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|json|[]object|None|True|JSON array to convert to CSV|None|[{"column1": "value1", " column2": " value2"}]|
+
+Example input:
+
+```
+{
+  "json": "[{\"column1\": \"value1\", \" column2\": \" value2\"}]"
+}
+```
 
 ##### Output
 
@@ -147,8 +198,9 @@ CSV files must not have non-CSV data such as comments.
 
 # Version History
 
+* 1.1.6 - Update to v4 Python plugin runtime
 * 1.1.5 - Use input and output constants | Change docker image from `komand/python-2-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Changed `Exception` to `PluginException`
-* 1.1.4 - New spec and help.md format for the Hub | Add missing title values for actions in plugin.spec.yaml
+* 1.1.4 - New spec and help.md format for the Extension Library | Add missing title values for actions in plugin.spec.yaml
 * 1.1.3 - Fix issue where connection tests were failing, output did not match spec
 * 1.1.2 - Support webserver mode
 * 1.1.1 - Fix JSON to CSV action to account for correct input type

@@ -61,7 +61,7 @@ class PutIncidentAttachmentInput(komand.Input):
     },
     "other_mime_type": {
       "type": "string",
-      "title": "Other MIME type",
+      "title": "Other MIME Type",
       "description": "User-specified MIME type not in the enumerated list",
       "order": 5
     },

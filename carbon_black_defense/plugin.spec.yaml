@@ -2,9 +2,9 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: carbon_black_defense
-title: Carbon Black Defense
+title: VMware Carbon Black Cloud Endpoint Standard
 description: Find events and retrieve details for specific events
-version: 2.0.0
+version: 2.0.1
 vendor: rapid7
 support: rapid7
 status: []
@@ -17,9 +17,10 @@ tags:
 - defense
 - antivirus
 - cloud
+- vmware
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [carbon black, defense, antivirus, cloud]
+  keywords: [carbon black, vmware, defense, antivirus, cloud]
   features: []
 types:
   hash:

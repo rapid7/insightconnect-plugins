@@ -25,13 +25,25 @@ This plugin utilizes the [Mimecast API](https://www.mimecast.com/developer/docum
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|access_key|credential_secret_key|None|True|The application access key|None|
-|app_id|string|None|True|Application ID|None|
-|app_key|credential_secret_key|None|True|The application key|None|
-|secret_key|credential_secret_key|None|True|The application secret key|None|
-|url|string|None|True|The URL for the Mimecast server|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|access_key|credential_secret_key|None|True|The application access key|None|eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi|
+|app_id|string|None|True|Application ID|None|78d2e4b1-8cc2-4806-nt79-6ef332a47374|
+|app_key|credential_secret_key|None|True|The application key|None|475x54c6-4f61-4fab-8be7-a0710f3859e3|
+|secret_key|credential_secret_key|None|True|The application secret key|None|FgHrtydiP4TynI+rTZF42Qu0FtGuhJtuNM5bDh82goJQHed9kJZ5t/ORwGnI5r2hkl/bzCosZ+KVapJFeaf3Yw==|
+|url|string|None|True|The URL for the Mimecast server|None|https://api.mimecast.com|
+
+Example input:
+
+```
+{
+  "access_key": "eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi",
+  "app_id": "78d2e4b1-8cc2-4806-nt79-6ef332a47374",
+  "app_key": "475x54c6-4f61-4fab-8be7-a0710f3859e3",
+  "secret_key": "FgHrtydiP4TynI+rTZF42Qu0FtGuhJtuNM5bDh82goJQHed9kJZ5t/ORwGnI5r2hkl/bzCosZ+KVapJFeaf3Yw==",
+  "url": "https://api.mimecast.com"
+}
+```
 
 ## Technical Details
 
@@ -43,15 +55,29 @@ This action is used to create a managed URL.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|action|string|block|True|Set to 'block' to blacklist the URL, 'permit' to whitelist it|['block', 'permit']|
-|comment|string|None|False|A comment about the why the URL is managed; for tracking purposes|None|
-|disable_log_click|boolean|None|True|Disable logging of user clicks on the URL|None|
-|disable_rewrite|boolean|None|True|Disable rewriting of this URL in emails. Applies only if action = 'permit'|None|
-|disable_user_awareness|boolean|None|True|Disable User Awareness challenges for this URL. Applies only if action = 'permit'|None|
-|match_type|string|explicit|True|Set to 'explicit' to block or permit only instances of the full URL. Set to 'domain' to block or permit any URL with the same domain|['explicit', 'domain']|
-|url|string|None|True|The URL to block or permit. Do not include a fragment|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|action|string|block|True|Set to 'block' to blacklist the URL, 'permit' to whitelist it|['block', 'permit']|block|
+|comment|string|None|False|A comment about the why the URL is managed; for tracking purposes|None|i'm blocking this because virustotal said it was malicious|
+|disable_log_click|boolean|None|True|Disable logging of user clicks on the URL|None|Flase|
+|disable_rewrite|boolean|None|True|Disable rewriting of this URL in emails. Applies only if action = 'permit'|None|True|
+|disable_user_awareness|boolean|None|True|Disable User Awareness challenges for this URL. Applies only if action = 'permit'|None|False|
+|match_type|string|explicit|True|Set to 'explicit' to block or permit only instances of the full URL. Set to 'domain' to block or permit any URL with the same domain|['explicit', 'domain']|explicit|
+|url|string|None|True|The URL to block or permit. Do not include a fragment|None|https://rapid7.com|
+
+Example input:
+
+```
+{
+  "action": "block",
+  "comment": "Deemed malicious by VirusTotal",
+  "disable_log_click": "Flase",
+  "disable_rewrite": true,
+  "disable_user_awareness": false,
+  "match_type": "explicit",
+  "url": "https://rapid7.com"
+}
+```
 
 ##### Output
 
@@ -86,16 +112,30 @@ This action is used to get information on a managed URL.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|action|string|none|False|Filter on whether or not the action is 'block' or 'permit'|['none', 'block', 'permit']|
-|disable_log_click|string|none|False|Filter on whether or not clicks are logged for this URL|['none', 'false', 'true']|
-|disable_rewrite|string|none|False|Filter on whether or not rewriting of this URL in emails is enabled|['none', 'false', 'true']|
-|disable_user_awareness|string|none|False|Filter on whether or not User Awareness challenges for this URL|['none', 'false', 'true']|
-|domain|string|None|False|The managed domain|None|
-|id|string|None|False|Filter on the Mimecast secure ID of the managed URL|None|
-|match_type|string|none|False|Filter on whether or not the match type is 'explicit' or 'domain'|['none', 'explicit', 'domain']|
-|scheme|string|None|False|Filter on whether or not the protocol is HTTP or HTTPS|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|action|string|none|False|Filter on whether or not the action is 'block' or 'permit'|['none', 'block', 'permit']|block|
+|disable_log_click|string|none|False|Filter on whether or not clicks are logged for this URL|['none', 'false', 'true']|True|
+|disable_rewrite|string|none|False|Filter on whether or not rewriting of this URL in emails is enabled|['none', 'false', 'true']|False|
+|disable_user_awareness|string|none|False|Filter on whether or not User Awareness challenges for this URL|['none', 'false', 'true']|False|
+|domain|string|None|False|The managed domain|None|rapid7.com|
+|id|string|None|False|Filter on the Mimecast secure ID of the managed URL|None|None|
+|match_type|string|none|False|Filter on whether or not the match type is 'explicit' or 'domain'|['none', 'explicit', 'domain']|domain|
+|scheme|string|None|False|Filter on whether or not the protocol is HTTP or HTTPS|None|http|
+
+Example input:
+
+```
+{
+  "action": "block",
+  "disable_log_click": true,
+  "disable_rewrite": false,
+  "disable_user_awareness": false,
+  "domain": "rapid7.com",
+  "match_type": "domain",
+  "scheme": "http"
+}
+```
 
 ##### Output
 
@@ -130,9 +170,17 @@ This action is used to remove a Managed URL from the blocked list.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id|string|None|True|The Mimecast secure ID of the managed URL|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|The Mimecast secure ID of the managed URL|None|wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLhHMy6V8J3VOvTNMW2G-txx3o4zL0YXqWxuCVlGQ-1viE|
+
+Example input:
+
+```
+{
+  "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLhHMy6V8J3VOvTNMW2G-txx3o4zL0YXqWxuCVlGQ-1viE"
+}
+```
 
 ##### Output
 
@@ -158,11 +206,21 @@ This action is used to permit or block a sender.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|action|string|block|True|Either 'permit' (to bypass spam checks) or 'block' (to reject the email)|['block', 'permit']|
-|sender|string|None|True|The email address of the external sender|None|
-|to|string|None|True|The email address of the internal recipient|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|action|string|block|True|Either 'permit' (to bypass spam checks) or 'block' (to reject the email)|['block', 'permit']|block|
+|sender|string|None|True|The email address of the external sender|None|user@example.com|
+|to|string|None|True|The email address of the internal recipient|None|user@example.com|
+
+Example input:
+
+```
+{
+  "action": "block",
+  "sender": "user@example.com",
+  "to": "user@example.com"
+}
+```
 
 ##### Output
 
@@ -193,18 +251,31 @@ This action is used to create a blocked sender policy.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|option|string|block_sender|True|The block, option must be: no_action or block_sender|['block_sender', 'no_action']|
-|description|string|None|True|A description for the policy which is kept with the email in the archive for future reference|None|
-|from_part|string|envelope_from|True|Must be: envelope_from, header_from or both|['envelope_from', 'header_from', 'both']|
-|from_type|string|everyone|True|Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone', 'internal_addresses', 'external_addresses', 'email_domain', 'profile_group', 'individual_email_address']|
-|from_value|string|None|False|Required if `From Type` is one of email_domain, profile_group, individual_email_address. Expected values: If `From Type` is email_domain, a domain name without the @ symbol. If `From Type` is profile_group, the ID of the profile group. If `From Type` is individual_email_address, an email address|None|
-|to_type|string|everyone|True|Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone', 'internal_addresses', 'external_addresses', 'email_domain', 'profile_group', 'individual_email_address']|
-|to_value|string|None|False|Required if `To Type` is one of email_domain, profile_group, individual_email_address. Expected values: If `To Type` is email_domain, a domain name without the @ symbol. If `To Type` is profile_group, the ID of the profile group. If `To Type` is individual_email_address, an email address|None|
-|source_ips|string|None|False|A comma separated list of IP addresses using CIDR notation (X.X.X.X/XX). When set the policy only applies for connections from matching addresses|None|
-|to_type|string|everyone|True|Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone', 'internal_addresses', 'external_addresses', 'email_domain', 'profile_group', 'individual_email_address']|
-|to_value|string|None|False|Required if `To Type` is one of email_domain, profile_group, individual_email_address. Expected values: If `To Type` is email_domain, a domain name without the @ symbol. If `To Type` is profile_group, the ID of the profile group. If `To Type` is individual_email_address, an email address|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|description|string|None|True|A description for the policy which is kept with the email in the archive for future reference|None|A description|
+|from_part|string|envelope_from|True|Must be: envelope_from, header_from or both|['envelope_from', 'header_from', 'both']|envelope_from|
+|from_type|string|everyone|True|Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone', 'internal_addresses', 'external_addresses', 'email_domain', 'profile_group', 'individual_email_address']|internal_addresses|
+|from_value|string|None|False|Required if `From Type` is one of email_domain, profile_group, individual_email_address. Expected values: If `From Type` is email_domain, a domain name without the @ symbol. If `From Type` is profile_group, the ID of the profile group. If `From Type` is individual_email_address, an email address|None|user@example.com|
+|option|string|block_sender|True|The block, option must be: no_action or block_sender|['block_sender', 'no_action']|block_sender|
+|source_ips|string|None|False|A comma separated list of IP addresses using CIDR notation (X.X.X.X/XX). When set the policy only applies for connections from matching addresses|None|198.51.100.0/24|
+|to_type|string|everyone|True|Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone', 'internal_addresses', 'external_addresses', 'email_domain', 'profile_group', 'individual_email_address']|everyone|
+|to_value|string|None|False|Required if `To Type` is one of email_domain, profile_group, individual_email_address. Expected values: If `To Type` is email_domain, a domain name without the @ symbol. If `To Type` is profile_group, the ID of the profile group. If `To Type` is individual_email_address, an email address|None|user@example.com|
+
+Example input:
+
+```
+{
+  "description": "A description",
+  "from_part": "envelope_from",
+  "from_type": "internal_addresses",
+  "from_value": "user@example.com",
+  "option": "block_sender",
+  "source_ips": "198.51.100.0/24",
+  "to_type": "everyone",
+  "to_value": "user@example.com"
+}
+```
 
 ##### Output
 
@@ -254,11 +325,21 @@ This action is used to add an email address or domain to a group.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|domain|string|None|False|A domain to add to a group. Use either email address or domain|None|
-|email_address|string|None|False|The email address of a user to add to a group. Use either email address or domain|None|
-|id|string|None|True|The Mimecast ID of the group to add to|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|domain|string|None|False|A domain to add to a group. Use either email address or domain|None|rapid7.com|
+|email_address|string|None|False|The email address of a user to add to a group. Use either email address or domain|None|user@example.com|
+|id|string|None|True|The Mimecast ID of the group to add to|None|eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA|
+
+Example input:
+
+```
+{
+  "domain": "rapid7.com",
+  "email_address": "user@example.com",
+  "id": "eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA"
+}
+```
 
 ##### Output
 
@@ -287,11 +368,21 @@ Delete on an email or domain that does not exist will result in no operation per
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|domain|string|None|False|A domain to remove from group. Use either email address or domain|None|
-|email_address|string|None|False|The email address to remove from group. Use either email address or domain|None|
-|id|string|None|True|The Mimecast ID of the group to remove from|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|domain|string|None|False|A domain to remove from group. Use either email address or domain|None|rapid7.com|
+|email_address|string|None|False|The email address to remove from group. Use either email address or domain|None|user@example.com|
+|id|string|None|True|The Mimecast ID of the group to remove from|None|eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA|
+
+Example input:
+
+```
+{
+  "domain": "rapid7.com",
+  "email_address": "user@example.com",
+  "id": "eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA"
+}
+```
 
 ##### Output
 
@@ -313,9 +404,17 @@ This action is used to decode a Mimecast encoded URL.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|encoded_url|string|None|True|The Mimecast encoded URL (e.g. https://protect-xx.mimecast.com/...)|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|encoded_url|string|None|True|The Mimecast encoded URL|None|https://protect-xx.mimecast.com/TXH7fhe|
+
+Example input:
+
+```
+{
+  "encoded_url": "https://protect-xx.mimecast.com/TXH7fhe"
+}
+```
 
 ##### Output
 
@@ -337,10 +436,19 @@ This action is used to find groups that match a given query.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|False|A string to query for|None|
-|source|string|cloud|True|A group source to filter on, either "cloud" or "ldap"|['cloud', 'ldap']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|False|A string to query for|None|mygroup|
+|source|string|cloud|True|A group source to filter on, either "cloud" or "ldap"|['cloud', 'ldap']|cloud|
+
+Example input:
+
+```
+{
+  "query": "mygroup",
+  "source": "cloud"
+}
+```
 
 ##### Output
 
@@ -379,13 +487,29 @@ This action is used to get TTP URL logs.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|from|string|None|False|Start date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is the start of the current day|None|
-|route|string|all|True|Filters logs by route, must be one of inbound, outbound, internal, or all|['all', 'inbound', 'outbound', 'internal']|
-|scan_result|string|all|True|Filters logs by scan result, must be one of clean, malicious, or all|['clean', 'malicious', 'all']|
-|to|string|None|False|End date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is time of request|None|
-|url_to_filter|string|None|False|Regular expression to filter on. e.g. `examp` will return only URLs with the letters examp in them|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|from|string|None|False|Start date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is the start of the current day|None|2018-11-22T14:49:18+0000|
+|max_pages|integer|100|False|Max pages returned, default 100|None|10|
+|page_size|integer|10|False|The number of logs returned per page, default value is 10|None|10|
+|route|string|all|True|Filters logs by route, must be one of inbound, outbound, internal, or all|['all', 'inbound', 'outbound', 'internal']|inbound|
+|scan_result|string|all|True|Filters logs by scan result, must be one of clean, malicious, or all|['clean', 'malicious', 'all']|malicious|
+|to|string|None|False|End date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is time of request|None|2018-11-22T14:49:18+0000|
+|url_to_filter|string|None|False|Regular expression to filter on. e.g. `examp` will return only URLs with the letters examp in them|None|exam.*|
+
+Example input:
+
+```
+{
+  "from": "2018-11-22T14:49:18+0000",
+  "max_pages": 10,
+  "page_size": 10,
+  "route": "inbound",
+  "scan_result": "malicious",
+  "to": "2018-11-22T14:49:18+0000",
+  "url_to_filter": "exam.*"
+}
+```
 
 ##### Output
 
@@ -506,9 +630,12 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Version History
 
+* 4.1.1 - Fix bug where the connection test would sometimes pass even with invalid credentials
+* 4.1.0 - Update Get TTP URL Logs action to use pagination
+* 4.0.1 - Add example inputs
 * 4.0.0 - Update Get TTP URL Logs to allow for better URL filtering
 * 3.1.0 - New action Delete Managed URL and Delete Group Member
-* 3.0.1 - New spec and help.md format for the Hub
+* 3.0.1 - New spec and help.md format for the Extension Library
 * 3.0.0 - Add URL in Get TTP URL Logs action to filter output | Update connection settings to the proper authentication supported by the Mimecast API
 * 2.5.0 - New action Decode URL
 * 2.4.0 - New action Get TTP URL Logs

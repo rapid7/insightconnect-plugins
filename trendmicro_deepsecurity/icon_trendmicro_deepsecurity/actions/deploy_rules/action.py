@@ -2,11 +2,10 @@ import komand
 from .schema import DeployRulesInput, DeployRulesOutput, Input, Output, Component
 # Custom imports below
 
-import requests
 import json
-
 from icon_trendmicro_deepsecurity.util.shared import tryJSON
 from icon_trendmicro_deepsecurity.util.shared import checkResponse
+
 
 class DeployRules(komand.Action):
 
@@ -30,29 +29,29 @@ class DeployRules(komand.Action):
         self.logger.info("Setting rules: ")
         self.logger.info(self.rules)
 
-        
         # Prepare request
         # Check if the rules should be assigned to a computer or policy
         if self.computer_or_policy == "computer":
             url = f"{self.connection.dsm_url}/api/computers/{self.id}/intrusionprevention/assignments"
         else:
             url = f"{self.connection.dsm_url}/api/policies/{self.id}/intrusionprevention/assignments"
-        
-        data = { "ruleIDs": self.rules }
+
+        data = {"ruleIDs": self.rules}
 
         # Set rules
         response = self.connection.session.post(url,
                                                 data=json.dumps(data),
-                                                verify=True)
+                                                verify=self.connection.dsm_verify_ssl)
 
+        self.logger.info(f"url: {response.url}")
         self.logger.info(f"status: {response.status_code}")
         self.logger.info(f"reason: {response.reason}")
 
-        # Try to convert the response data to JSON
-        response_data = tryJSON(response)
-
         # Check response errors
         checkResponse(response)
+
+        # Try to convert the response data to JSON
+        response_data = tryJSON(response)
 
         # Get a list of all rules assigned to the asset or policy
         rules_assigned = response_data["assignedRuleIDs"]

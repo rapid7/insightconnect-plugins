@@ -4,7 +4,7 @@ products: [insightconnect]
 name: get_url
 title: Get URL
 description: Get URL plugin downloads files by URL using HTTP, HTTPS, or FTP
-version: 1.0.1
+version: 2.0.0
 vendor: rapid7
 support: community
 status: []
@@ -32,18 +32,28 @@ triggers:
         type: string
         description: URL to Download
         required: true
+        example: 'https://example.com'
       poll:
         title: Poll
         description: Poll in seconds
         type: integer
         default: 60
         required: false
+        example: 60
       is_verify:
         title: Is Verify
         type: boolean
         description: Validate certificate
         required: true
         default: true
+        example: true
+      user_agent:
+        title: User Agent
+        type: string
+        description: Send requests with user agent
+        required: false
+        default: "Mozilla/5.0"
+        example: "Mozilla/5.0"
     output:
       bytes:
         title: Base64 Encoded File
@@ -65,23 +75,34 @@ actions:
         type: string
         description: URL to Download
         required: true
+        example: 'https://example.com'
       timeout:
         title: Timeout
         description: Timeout in seconds
         type: integer
         default: 60
         required: false
+        example: 60
       checksum:
         title: Checksum
         type: string
         description: Checksum verification (MD5, SHA1, SHA256)
         required: false
+        example: 0800fc577294c34e0b28ad2839435945
       is_verify:
         title: Is Verify
         type: boolean
         description: Validate certificate
         required: true
         default: true
+        example: true
+      user_agent:
+        title: User Agent
+        type: string
+        description: Send requests with user agent
+        required: false
+        default: "Mozilla/5.0"
+        example: "Mozilla/5.0"
     output:
       bytes:
         title: Base64 Encoded File

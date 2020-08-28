@@ -4,7 +4,7 @@ products: [insightconnect]
 name: trendmicro_deepsecurity
 title: Trend Micro Deep Security
 description: Utilize the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)
-version: 1.0.0
+version: 2.2.0
 vendor: rapid7
 support: community
 status: []
@@ -33,11 +33,20 @@ connection:
     type: string
     default: https://app.deepsecurity.trendmicro.com
     required: true
+    example: https://192.51.100.100:4119
   dsm_api_key:
     title: API Key
     description: API key of the Deep Security Manager
     type: credential_secret_key
     required: true
+    example: 12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234
+  dsm_verify_ssl:
+    title: SSL Verification
+    description: Check the certificate of the Deep Security Manager
+    type: boolean
+    default: true
+    required: true
+    example: true
 actions: 
   search_rules:
     title: Search
@@ -48,6 +57,7 @@ actions:
         type: "[]string"
         description: CVEs to protect against
         required: true
+        example: ["CVE-2005-0045","CVE-2014-0160","CVE-2017-0144","CVE-1337-1337"]
     output:
       ips_rules:
         title: IPS Rules
@@ -66,7 +76,7 @@ actions:
         required: false
   deploy_rules:
     title: Deploy
-    description: Deploy rules
+    description: Deploy IPS rules
     input:
       computer_or_policy:
         title: Target
@@ -76,24 +86,196 @@ actions:
         enum:
           - computer
           - policy 
+        example: policy
       id:
         title: ID
         type: integer
-        description: ID of the target asset or policy
+        description: ID of the target computer or policy
         required: true
+        example: 23
       rules:
         title: IPS Rules
         type: "[]integer"
         description: IPS rules to assign
         required: true
+        example: [108, 6745, 2874, 2875, 2876, 3317, 3318]
     output:
       rules_assigned:
         title: Rules Assigned
-        description: All rules currently assigned to the asset
+        description: All IPS rules currently assigned
         type: "[]integer"
         required: false
       rules_not_assigned:
         title: Not Assigned Rules
-        description: Unassigned rules
+        description: Unassigned IPS rules
         type: "[]integer"
+        required: false
+  list_rules:
+    title: List
+    description: List IPS rules
+    input:
+      scope:
+        title: Scope
+        type: string
+        description: Set the scope
+        required: true 
+        enum:
+          - computer
+          - policy 
+        example: policy
+      id:
+        title: ID
+        type: integer
+        description: ID of the computer or policy
+        required: true
+        example: 23
+    output:
+      rules_assigned:
+        title: Rules Assigned
+        description: All IPS rules currently assigned
+        type: "[]integer"
+        required: false
+      covered_cves:
+        title: CVEs
+        description: CVEs covered by the assigned rules
+        type: "[]string"
+        required: false
+      response_json:
+        title: Response JSON
+        description: Full response in JSON format
+        type: "object"
+        required: false
+  get_rule_details:
+    title: Get Details
+    description: Get detailed information of an IPS rule
+    input:
+      id:
+        title: IPS Rule ID
+        type: integer
+        description: IPS rule
+        required: true
+        example: 2874
+    output:
+      name:
+        title: Name
+        description: Name of the rule
+        type: string
+        required: false
+      description:
+        title: Description
+        description: Description of the rule
+        type: string
+        required: false
+      severity:
+        title: Severity
+        description: Severity level of the IPS rule
+        type: string
+        required: false
+      type:
+        title: Type
+        description: Rule type
+        type: string
+        required: false
+      cvss_score:
+        title: CVSS Score
+        description: CVSS score
+        type: string
+        required: false
+      cves:
+        title: CVEs
+        description: List of related CVEs
+        type: "[]string"
+        required: false
+      response_json:
+        title: Response JSON
+        description: Full response in JSON format
+        type: "object"
+        required: false
+  search_computers:
+    title: Search Computers
+    description: Search computers
+    input:
+      information:
+        title: Information
+        type: string
+        description: Determines the computer information to include in the response
+        required: true 
+        enum:
+          - "none"
+          - "all"
+          - "computerStatus"
+          - "tasks"
+          - "securityUpdates"
+          - "computerSettings"
+          - "allSecurityModules"
+          - "antiMalware"
+          - "webReputation"
+          - "activityMonitoring"
+          - "firewall"
+          - "intrusionPrevention"
+          - "integrityMonitoring"
+          - "logInspection"
+          - "applicationControl"
+          - "SAP"
+          - "interfaces"
+          - "ESXSummary"
+          - "allVirtualMachineSummaries"
+          - "azureARMVirtualMachineSummary"
+          - "azureVMVirtualMachineSummary"
+          - "ec2VirtualMachineSummary"
+          - "noConnectorVirtualMachineSummary"
+          - "vmwareVMVirtualMachineSummary"
+          - "vcloudVMVirtualMachineSummary"
+          - "workspaceVirtualMachineSummary"
+          - "gcpVirtualMachineSummary"
+        example: "none"
+        default: "none"
+      max_items:
+        title: Maximum Items
+        description: Limits the number of objects returned
+        type: integer
+        required: true
+        default: 5000
+        example: 5000
+      field_name:
+        title: Search Field
+        description: Name of the field to be tested
+        type: string
+        required: false
+        default: "hostName"
+        example: "hostName"
+      search_type:
+        title: Search Type
+        description: Select the search type
+        type: string
+        required: false
+        default: "string"
+        example: "string"
+        enum:
+          - "string"
+          - "integer"
+      string_value:
+        title: String Value
+        description: String to search for
+        type: string
+        required: false
+        default: ""
+        example: "MS-AD-SRV-%"
+      number_value:
+        title: Number Value
+        description: Number to search for
+        type: integer
+        required: false
+        default: ""
+        example: "42"
+    output:
+      computer_ids:
+        title: Computer IDs
+        description: IDs of matching computers
+        type: "[]integer"
+        required: false
+      response_json:
+        title: Response JSON
+        description: Full response in JSON format
+        type: "object"
         required: false

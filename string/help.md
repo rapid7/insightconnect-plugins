@@ -8,7 +8,7 @@ This plugin utilizes the Python 3 String library [set of methods](https://docs.p
 
 * Split a string to a list of elements
 * Split a string to an object
-* Upper and Lower case a string
+* Upper case, lower case, and trim a string
 
 # Requirements
 
@@ -24,16 +24,57 @@ _This plugin does not contain a connection._
 
 ### Actions
 
+#### Length
+
+This action is used to return the length of a string.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|string|string|None|True|String to return length of|None|return the number of characters in this string|
+
+Example input:
+
+```
+{
+  "string": "return the number of characters in this string"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|length|integer|True|Length of string|
+
+Example output:
+
+```
+{
+  "length": 46
+}
+```
+
 #### Split String to List
 
 This action is used to convert a string to a list of strings.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|string|string|None|True|String to convert e.g. Sentence one\nSentence two|None|
-|delimiter|string|None|False|The character used to split the string into slices for the list. The default is a newline, if not provided by the user|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|delimiter|string|None|False|The character used to split the string into slices for the list. The default is a newline, if not provided by the user|None|,|
+|string|string|None|True|String to break into an array|None|This,is,a,sentence|
+
+Example input:
+
+```
+{
+  "delimiter": ",",
+  "string": "This,is,a,sentence"
+}
+```
 
 ##### Output
 
@@ -68,11 +109,20 @@ It allows users the ability to use the green selector and choose a specific vari
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|string|string|None|True|String to convert e.g. USER=bob|None|
-|string_delimiter|string|None|False|The character used to split the string into slices for the list. The default is a space, if not provided by the user|None|
-|block_delimiter|string|None|False|The character used to split a block of text (e.g. paragraph) into slices before applying a split with the string delimiter. This is an optional parameter and necessary in more complex splitting situations where a character split isn't enough|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|block_delimiter|string|None|False|The character delimiter for the initial string split, applied before the string delimiter input. This parameter is optional but allows for more complex handling|None|None|
+|string|string|None|True|String to convert e.g. USER=Bob|None|User=Bob|
+|string_delimiter|string|None|False|The character used to split the string into slices for the list. The default is a space, if not provided by the user|None|=|
+
+Example input:
+
+```
+{
+  "string": "User=Bob",
+  "string_delimiter": "="
+}
+```
 
 ##### Output
 
@@ -119,9 +169,17 @@ This action is used to convert lowercase letters to uppercase.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|string|string|None|True|String to convert e.g. USER=bob|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|string|string|None|True|String to uppercase|None|uppercase this string|
+
+Example input:
+
+```
+{
+  "string": "uppercase this string"
+}
+```
 
 ##### Output
 
@@ -133,7 +191,7 @@ Example output:
 
 ```
 {
-  "upper": "LDAP"
+  "upper": "UPPERCASE THIS STRING"
 }
 ```
 
@@ -143,9 +201,17 @@ This action is used to convert uppercase letters to lowercase.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|string|string|None|True|String to convert e.g. USER=bob|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|string|string|None|True|String to convert e.g. USER=bob|None|LOWERCASE THIS STRING|
+
+Example input:
+
+```
+{
+  "string": "LOWERCASE THIS STRING"
+}
+```
 
 ##### Output
 
@@ -157,7 +223,7 @@ Example output:
 
 ```
 {
-  "lower": "hello"
+  "lower": "LOWERCASE THIS STRING"
 }
 ```
 
@@ -167,11 +233,21 @@ This action is used to encode a string.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|encoding|string|None|True|Encoding to use|['UTF-8', 'ASCII']|
-|error_handling|string|None|True|Error handler to use for encoding and decoding|['strict', 'replace', 'ignore']|
-|string|string|None|True|String to encode|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|encoding|string|None|True|Encoding to use|['UTF-8', 'ASCII']|ASCII|
+|error_handling|string|None|True|Error handler to use for encoding and decoding|['strict', 'replace', 'ignore']|ignore|
+|string|string|None|True|String to encode|None|hello|
+
+Example input:
+
+```
+{
+  "encoding": "ASCII",
+  "error_handling": "ignore",
+  "string": "hello"
+}
+```
 
 ##### Output
 
@@ -193,21 +269,29 @@ This action is used to trim a string of leading and trailing whitespace.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|string|string|None|True|String to trim|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|string|string|None|True|String to trim|None|Extra spaces at the end of this string     |
+
+Example input:
+
+```
+{
+  "string": "Extra spaces at the end of this string     "
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|trimmed|string|False|Trimmed string|
+|trimmed|string|True|Trimmed string|
 
 Example output:
 
 ```
 {
-  "trimmed": "hello"
+  "trimmed": "Extra spaces at the end of this string"
 }
 ```
 
@@ -226,7 +310,9 @@ If this is the case, consider using the Python 3 Script plugin instead.
 
 # Version History
 
-* 1.2.1 - New spec and help.md format for the Hub
+* 1.3.1 - Update to v4 Python plugin runtime
+* 1.3.0 - New action Length | Add example inputs
+* 1.2.1 - New spec and help.md format for the Extension Library
 * 1.2.0 - New action Trim
 * 1.1.0 - New action Set Encoding
 * 1.0.1 - Update plugin tag from `util` to `utilities` for Marketplace searchability

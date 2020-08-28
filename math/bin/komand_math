@@ -4,10 +4,10 @@ import komand
 from komand_math import connection, actions, triggers
 
 
-Name = 'Math'
-Vendor = 'rapid7'
-Version = '1.1.2'
-Description = 'Basic mathematical operations'
+Name = "Math"
+Vendor = "rapid7"
+Version = "1.2.0"
+Description = "Basic mathematical operations"
 
 
 class ICONMath(komand.Plugin):
@@ -20,6 +20,8 @@ class ICONMath(komand.Plugin):
                 connection=connection.Connection()
                 )
         self.add_action(actions.Calculate())
+
+        self.add_action(actions.Max())
 
 
 def main():

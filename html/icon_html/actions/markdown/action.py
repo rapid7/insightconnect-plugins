@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 import pypandoc
 import base64
 import re
 from .schema import MarkdownInput, MarkdownOutput
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class Markdown(komand.Action):
+class Markdown(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name='markdown',

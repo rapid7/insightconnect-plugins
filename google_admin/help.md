@@ -92,7 +92,7 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
-* 1.0.3 - New spec and help.md format for the Hub
+* 1.0.3 - New spec and help.md format for the Extension Library
 * 1.0.2 - Fix typo in plugin spec
 * 1.0.1 - Update to connection and troubleshooting documentation
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types

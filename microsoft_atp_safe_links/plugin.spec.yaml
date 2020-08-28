@@ -5,10 +5,11 @@ name: microsoft_atp_safe_links
 title: Microsoft Office 365 ATP Safe Links
 description: Helps protect your organization by providing time-of-click verification
   of web addresses (URLs) in email messages and Office documents
-version: 1.0.3
+version: 1.1.2
 vendor: rapid7
 support: rapid7
 status: []
+cloud_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/microsoft_atp_safe_links
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -32,9 +33,15 @@ actions:
         type: string
         description: Safe Link to be decoded
         required: true
+        example: "https://na01.safelinks.protection.outlook.com/?url=https%3A%2F%2Faomediacodec.github.io%2Fav1-spec%2Fav1-spec.pdf&data=04%7C01%7Cgfrost%40microsoft.com%7Cc01143f4353e426231d508d590e3a9c1%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C1%7C636574229902920663%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwifQ%3D%3D%7C-1&sdata=lLQibtMygoLH30UNXZcUZGAA1i%2FqNE%2Ff6fgotaX3uhI%3D&reserved=0"
     output:
       result:
         title: Result
         description: Result of the decoded Safe Link
         type: string
+        required: true
+      decoded:
+        title: Decoded
+        description: Whether or not we were able to decode the URL
+        type: boolean
         required: true

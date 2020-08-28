@@ -2,25 +2,26 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: carbon_black_response
-title: Cb Response
+title: VMware Carbon Black EDR
 vendor: rapid7
 support: rapid7
 status: []
 description: Automate information collection, endpoint isolation and hash blacklisting
-version: 3.1.8
+version: 3.1.10
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/carbon_black_response
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.carbonblack.com/
 tags:
 - carbon black
+- vmware
 - response
 - endpoint
 - cb
 - detection
 hub_tags:
   use_cases: [alerting_and_notifications, threat_detection_and_response]
-  keywords: [carbon black, response, endpoint, cb, detection]
+  keywords: [carbon black, vmware, response, endpoint, cb, detection]
   features: []
 enable_cache: true
 types:

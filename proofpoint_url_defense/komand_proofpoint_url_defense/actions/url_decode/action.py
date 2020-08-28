@@ -1,10 +1,10 @@
-import komand
-from .schema import UrlDecodeInput, UrlDecodeOutput
+import insightconnect_plugin_runtime
+from .schema import UrlDecodeInput, UrlDecodeOutput, Input, Output
 # Custom imports below
-import ppdecode
+from komand_proofpoint_url_defense.util.proofpoint_decoder import URLDefenseDecoder
 
 
-class UrlDecode(komand.Action):
+class UrlDecode(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
                 name='url_decode',
@@ -13,28 +13,22 @@ class UrlDecode(komand.Action):
                 output=UrlDecodeOutput())
 
     def run(self, params={}):
-        url = 'https://urldefense.proofpoint.com/v2/url?u='
-        if params.get("encoded_url").startswith(url):
+        in_url = params[Input.ENCODED_URL]
+        url_v2 = 'https://urldefense.proofpoint.com/'  # This is good for v1 as well
+        url_v3 = 'https://urldefense.com'
+
+        if in_url.startswith(url_v2) or in_url.startswith(url_v3):
             encoded_url = params.get("encoded_url")
-        else:
-            encoded_url = url + params.get("encoded_url")
+        else:  # We assume a v2 encoded URL, this is legacy behavior
+            encoded_url = f"https://urldefense.proofpoint.com/v2/url?u={in_url}"
+
+        decoder = URLDefenseDecoder()
 
         try:
-            decoded_url = ppdecode.ppdecode(encoded_url)
+            decoded_url = decoder.decode(encoded_url)
             self.logger.info('URL has been decoded')
-            return {'decoded_url': decoded_url['decoded_url']}
-        except Exception:
-            self.logger.error("Unexpected issue occurred decoding URL")
-            raise
+            return {Output.DECODED_URL: decoded_url, Output.DECODED: True}
+        except (Exception, ValueError) as e:
+            self.logger.error(f"Unexpected issue occurred decoding URL: {e}")
+            return {Output.DECODED_URL: in_url, Output.DECODED: False}
 
-    def test(self):
-        url = 'https://urldefense.proofpoint.com/v2/url?u=http-3A__www.example.org_url&d=BwdwBAg&c=TIwfCwdwWnrHy3gMA_uzZorHPsT2wfwvKrwfU'
-
-        try:
-            decoded_url = ppdecode.ppdecode(url)
-            self.logger.info('URL has been decoded')
-        except:
-            self.logger.error("Unexpected issue occurred decoding URL")
-            raise
-
-        return {'decoded_url': decoded_url['decoded_url']}

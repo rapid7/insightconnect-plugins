@@ -77,7 +77,7 @@ This action is used to retrieve a list of offenses currently in the system.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -243,7 +243,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.1 - New spec and help.md format for the Hub
+* 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Support web server mode | Update to new credential types | Rename "Add Data to Reference_Data Lists" action to "Add Data to Reference Data Lists"
 * 1.0.0 - Finalize plugin
 * 0.1.1 - SSL bug fix in SDK

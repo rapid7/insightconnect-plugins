@@ -11,6 +11,7 @@ class Input:
     CHANNEL_NAME = "channel_name"
     MESSAGE = "message"
     TEAM_NAME = "team_name"
+    THREAD_ID = "thread_id"
     
 
 class Output:
@@ -26,20 +27,26 @@ class SendMessageInput(komand.Input):
     "channel_name": {
       "type": "string",
       "title": "Channel Name",
-      "description": "Regex-capable channel",
+      "description": "Channel",
       "order": 2
     },
     "message": {
       "type": "string",
       "title": "Message",
       "description": "Message to send",
-      "order": 3
+      "order": 4
     },
     "team_name": {
       "type": "string",
       "title": "Team Name",
-      "description": "Regex-capable team name",
+      "description": "Team name",
       "order": 1
+    },
+    "thread_id": {
+      "type": "string",
+      "title": "Thread ID",
+      "description": "To post in a thread, select parent message ID",
+      "order": 3
     }
   },
   "required": [
@@ -133,6 +140,12 @@ class SendMessageOutput(komand.Output):
           "title": "Created Date Time",
           "description": "Created date time",
           "order": 3
+        },
+        "first_word": {
+          "type": "string",
+          "title": "First Word",
+          "description": "Extracted first word from message (easy way to obtain a chat command)",
+          "order": 9
         },
         "from": {
           "$ref": "#/definitions/from",

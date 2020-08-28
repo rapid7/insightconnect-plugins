@@ -162,9 +162,30 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "order": 6
         },
         "score": {
-          "type": "integer",
+          "type": "number",
           "title": "Score",
           "order": 5
+        },
+        "version": {
+          "type": "string",
+          "title": "Version",
+          "order": 10
+        }
+      }
+    },
+    "cvssv3": {
+      "type": "object",
+      "title": "cvssv3",
+      "properties": {
+        "attackComplexity": {
+          "type": "string",
+          "title": "AttackComplexity",
+          "order": 1
+        },
+        "attackVector": {
+          "type": "string",
+          "title": "AttackVector",
+          "order": 2
         }
       }
     },
@@ -243,7 +264,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
       "title": "evidenceDetails",
       "properties": {
         "criticality": {
-          "type": "integer",
+          "type": "number",
           "title": "Criticality",
           "order": 1
         },
@@ -279,8 +300,26 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "order": 1
         },
         "value": {
-          "type": "integer",
+          "type": "number",
           "title": "Value",
+          "order": 2
+        }
+      }
+    },
+    "rawrisk": {
+      "type": "object",
+      "title": "rawrisk",
+      "properties": {
+        "rule": {
+          "type": "string",
+          "title": "Rule",
+          "description": "Rule",
+          "order": 1
+        },
+        "timestamp": {
+          "type": "string",
+          "title": "Timestamp",
+          "description": "Timestamp",
           "order": 2
         }
       }
@@ -381,7 +420,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
       "title": "risk",
       "properties": {
         "criticality": {
-          "type": "integer",
+          "type": "number",
           "title": "Criticality",
           "order": 1
         },
@@ -420,7 +459,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "title": "evidenceDetails",
           "properties": {
             "criticality": {
-              "type": "integer",
+              "type": "number",
               "title": "Criticality",
               "order": 1
             },
@@ -504,6 +543,14 @@ class SearchVulnerabilitiesOutput(komand.Output):
       "type": "object",
       "title": "vulnerability_search_data",
       "properties": {
+        "commonNames": {
+          "type": "array",
+          "title": "CommonNames",
+          "items": {
+            "type": "string"
+          },
+          "order": 15
+        },
         "counts": {
           "type": "array",
           "title": "Counts",
@@ -524,6 +571,11 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "$ref": "#/definitions/cvss",
           "title": "Cvss",
           "order": 2
+        },
+        "cvssv3": {
+          "$ref": "#/definitions/cvssv3",
+          "title": "Cvssv3",
+          "order": 16
         },
         "entity": {
           "$ref": "#/definitions/entity",
@@ -553,6 +605,14 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "title": "NVD Description",
           "order": 4
         },
+        "rawrisk": {
+          "type": "array",
+          "title": "Rawrisk",
+          "items": {
+            "$ref": "#/definitions/rawrisk"
+          },
+          "order": 14
+        },
         "relatedEntities": {
           "type": "array",
           "title": "Related Entities",
@@ -560,6 +620,14 @@ class SearchVulnerabilitiesOutput(komand.Output):
             "$ref": "#/definitions/relatedEntities"
           },
           "order": 9
+        },
+        "relatedLinks": {
+          "type": "array",
+          "title": "RelatedLinks",
+          "items": {
+            "type": "string"
+          },
+          "order": 17
         },
         "risk": {
           "$ref": "#/definitions/risk",
@@ -650,9 +718,30 @@ class SearchVulnerabilitiesOutput(komand.Output):
               "order": 6
             },
             "score": {
-              "type": "integer",
+              "type": "number",
               "title": "Score",
               "order": 5
+            },
+            "version": {
+              "type": "string",
+              "title": "Version",
+              "order": 10
+            }
+          }
+        },
+        "cvssv3": {
+          "type": "object",
+          "title": "cvssv3",
+          "properties": {
+            "attackComplexity": {
+              "type": "string",
+              "title": "AttackComplexity",
+              "order": 1
+            },
+            "attackVector": {
+              "type": "string",
+              "title": "AttackVector",
+              "order": 2
             }
           }
         },
@@ -731,7 +820,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "title": "evidenceDetails",
           "properties": {
             "criticality": {
-              "type": "integer",
+              "type": "number",
               "title": "Criticality",
               "order": 1
             },
@@ -767,8 +856,26 @@ class SearchVulnerabilitiesOutput(komand.Output):
               "order": 1
             },
             "value": {
-              "type": "integer",
+              "type": "number",
               "title": "Value",
+              "order": 2
+            }
+          }
+        },
+        "rawrisk": {
+          "type": "object",
+          "title": "rawrisk",
+          "properties": {
+            "rule": {
+              "type": "string",
+              "title": "Rule",
+              "description": "Rule",
+              "order": 1
+            },
+            "timestamp": {
+              "type": "string",
+              "title": "Timestamp",
+              "description": "Timestamp",
               "order": 2
             }
           }
@@ -869,7 +976,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "title": "risk",
           "properties": {
             "criticality": {
-              "type": "integer",
+              "type": "number",
               "title": "Criticality",
               "order": 1
             },
@@ -908,7 +1015,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
               "title": "evidenceDetails",
               "properties": {
                 "criticality": {
-                  "type": "integer",
+                  "type": "number",
                   "title": "Criticality",
                   "order": 1
                 },

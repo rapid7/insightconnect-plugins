@@ -32,18 +32,26 @@ This action is used to return the supported hashes for a file type.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|bytes|bytes|None|True|Base64 encoded file bytes to hash|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|bytes|bytes|None|True|Base64 encoded file bytes to hash|None|aGVsbG8gd29ybGQ=|
+
+Example input:
+
+```
+{
+  "bytes": "aGVsbG8gd29ybGQ="
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|sha256|string|False|SHA256 hash|
-|sha512|string|False|SHA512 hash|
 |md5|string|False|MD5 hash|
 |sha1|string|False|SHA1 hash|
+|sha256|string|False|SHA256 hash|
+|sha512|string|False|SHA512 hash|
 
 Example output:
 
@@ -64,19 +72,26 @@ This action is used to return the supported hashes for a string.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|foo|string|None|False|None|None|
-|string|string|None|True|String of text to hash|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|string|string|None|True|String of text to hash|None|hello world|
+
+Example input:
+
+```
+{
+  "string": "hello world"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|sha256|string|False|SHA256 hash|
-|sha512|string|False|SHA512 hash|
 |md5|string|False|MD5 hash|
 |sha1|string|False|SHA1 hash|
+|sha256|string|False|SHA256 hash|
+|sha512|string|False|SHA512 hash|
 
 Example output:
 
@@ -105,7 +120,9 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.2 - New spec and help.md format for the Hub
+* 2.0.4 - Update to v4 Python plugin runtime
+* 2.0.3 - Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Use input and output constants | Remove test from actions
+* 2.0.2 - New spec and help.md format for the Extension Library
 * 2.0.1 - Add `utilities` plugin tag for Marketplace searchability
 * 2.0.0 - Rename "Hash a String" action to "Hash String"
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
@@ -118,4 +135,3 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [Hashlib](https://docs.python.org/3.4/library/hashlib.html)
-

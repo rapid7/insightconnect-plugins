@@ -1,6 +1,5 @@
 # Description
 
-
 [Azure](https://azure.microsoft.com) AD Admin performs administrative tasks in Azure AD.
 
 It uses the [User](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0) endpoint in
@@ -26,15 +25,138 @@ the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=g
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|app_id|string|None|True|The ID of the registered app that obtained the refresh token|None|
-|app_secret|credential_secret_key|None|True|The secret of the registered app that obtained the refresh token|None|
-|tenant_id|string|None|True|The ID of the directory that identifies the tenant|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|application_id|string|None|True|The ID of the registered application that obtained the refresh token|None|None|
+|application_secret|credential_secret_key|None|True|The secret of the registered application that obtained the refresh token|None|None|
+|tenant_id|string|None|True|The ID of the directory that identifies the tenant|None|None|
+
+Example input:
+
+```
+{
+  "application_id": "abcd12345-ab12-1234-abcd-1ab2c3d4e5g6",
+  "application_secret": {
+    "secretKey": "abcdefghi12345678abcdef1234"
+  },
+  "tenant_id": "abcd12345-ab12-1234-abcd-1ab2c3d4e5g6"
+}
+```
+
 
 ## Technical Details
 
 ### Actions
+
+#### Revoke Sign-In Sessions
+
+This action invalidates all the refresh tokens issued to applications for a user (as well as session cookies in a user's browser), by resetting the signInSessionsValidFromDateTime user property to the current date-time.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|User ID|None|user@example.com|
+
+Example input:
+
+```
+{
+  "user_id": "user@example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was the operation successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Add User to Groups by ID
+
+This action is used to add a user to a set of groups by group ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|group_id|[]string|None|True|IDs of Groups to Add User to|None|['b4d41d4-eb13-4a33-99b5-7d7290df22e9']|
+|user_id|string|None|True|User ID e.g. user@example.com|None|user@example.com|
+
+Example input:
+
+```
+{
+  "group_id": ["b4d41d4-eb13-4a33-99b5-7d7290df22e9"],
+  "user_id": "user@example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Was operation successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Update User Information
+
+This action is used to update a users information.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|city|string|None|False|The city in which the user is located|None|Boston|
+|country|string|None|False|The country or region in which the user is located; for example, US or UK|None|US|
+|department|string|None|False|The name for the department in which the user works|None|IT|
+|job_title|string|None|False|The user’s job title|None|Desktop Technician|
+|state|string|None|False|The state or province in the users address|None|MA|
+|user_id|string|None|True|User to updates ID|None|user@example.com|
+|user_type|string|None|False|A string value that can be used to classify user types in your directory, such as Member and Guest|None|Member|
+
+Example input:
+
+```
+{
+  "city": "Boston",
+  "country": "US",
+  "department": "Engineering",
+  "job_title": "Software Engineer",
+  "state": "MA",
+  "user_id": "user@example.com",
+  "user_type": "Member"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Create User and Notify
 
@@ -42,15 +164,20 @@ This action is used to create a user with a randomly generated password and send
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|account_enabled|boolean|True|False|True if the account is enabled; otherwise, false|None|
-|display_name|string|None|True|The name to display in the address book for the user e.g. displayName-value|None|
-|mail_nickname|string|None|False|The mail alias for the user e.g. mailNickname-value|None|
-|notify_email_body|string|None|False|Body of the email to be sent out. Use $password to place the generated password|None|
-|notify_from|string|None|True|User from which email notifcation will be sent|None|
-|notify_recipient|string|None|True|Email address of the account to be notified of user creation|None|
-|user_principal_name|string|None|True|The user principal name e.g. user@example.com|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|account_enabled|boolean|True|False|True if the account is enabled; otherwise, false|None|None|
+|display_name|string|None|True|The name to display in the address book for the user e.g. displayName-value|None|None|
+|mail_nickname|string|None|False|The mail alias for the user e.g. mailNickname-value|None|None|
+|notify_email_body|string|None|False|Body of the email to be sent out. Use $password to place the generated password|None|None|
+|notify_from|string|None|True|User from which email notifcation will be sent|None|None|
+|notify_recipient|string|None|True|Email address of the account to be notified of user creation|None|None|
+|user_principal_name|string|None|True|The user principal name e.g. user@example.com|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -72,9 +199,14 @@ This action is used to disable a user account. This action will not disable an a
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user_id|string|None|True|User ID to disable e.g. user@example.com|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|User ID to disable e.g. user@example.com|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -96,9 +228,14 @@ This action is used to enable a user account.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user_id|string|None|True|User ID to enable e.g. user@example.com|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|User ID to enable e.g. user@example.com|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -120,9 +257,14 @@ This action forces a user to change their password on their next successful logi
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user_id|string|None|True|User ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|User ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -144,9 +286,14 @@ This action is used to get user information.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user_id|string|None|True|User ID e.g. user@example.com|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|User ID e.g. user@example.com|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -182,9 +329,14 @@ This action is used to get a group by it's name.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|name|string|None|True|Name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|name|string|None|True|Name|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -235,10 +387,15 @@ This action is used to add a user to a group.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|group_name|string|None|True|Group Name e.g. My Azure Group|None|
-|user_id|string|None|True|User ID e.g. user@example.com|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|group_name|string|None|True|Group Name e.g. My Azure Group|None|None|
+|user_id|string|None|True|User ID e.g. user@example.com|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -260,10 +417,15 @@ This action is used to remove a user from a group.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|group_name|string|None|True|Group Name e.g. My Azure Group|None|
-|user_id|string|None|True|User ID e.g. user@example.com|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|group_name|string|None|True|Group Name e.g. My Azure Group|None|None|
+|user_id|string|None|True|User ID e.g. user@example.com|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -283,16 +445,21 @@ Example output:
 
 #### Risk Detection
 
-This trigger provides a list of both user and sign-in linked risk detections and associated information about the detection.
+This trigger provides list of both user and sign-in linked risk detections and associated information about the detection.
 
-#### Input
+##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|frequency|integer|60|False|Poll frequency in seconds|None|
-|risk_level|string|None|True|Risk level|['low', 'medium', 'high', 'hidden', 'none', 'all']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|frequency|integer|60|False|Poll frequency in seconds|None|None|
+|risk_level|string|None|True|Risk level|['low', 'medium', 'high', 'hidden', 'none', 'all']|None|
 
-#### Output
+Example input:
+
+```
+```
+
+##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -337,6 +504,10 @@ Example output:
     }
 }
 ```
+
+#### Risk Detection
+
+This trigger provides a list of both user and sign-in linked risk detections and associated information about the detection.
 
 ### Custom Output Types
 
@@ -424,9 +595,13 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.4.1 - Hub styling update
+* 2.2.0 - New action Revoke Sign-In Sessions
+* 2.1.1 - Update incorrect title of `user_type` to User Type  |  Return `group_id` in Add User to Groups By IDs action's error message to improve debugging
+* 2.1.0 - New action Add User to Groups By IDs
+* 2.0.0 - New action Update User Info
+* 1.4.1 - Extension Library styling update
 * 1.4.0 - New trigger Risk Detection
-* 1.3.1 - New spec and help.md format for the Hub
+* 1.3.1 - New spec and help.md format for the Extension Library
 * 1.3.0 - New action Create User
 * 1.2.0 - New actions Get Group by Name, Add User to Group, and Remove User from Group
 * 1.1.0 - New action Force User to Change Password

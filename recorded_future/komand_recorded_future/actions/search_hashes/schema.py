@@ -68,7 +68,6 @@ class SearchHashesInput(komand.Input):
         "Created",
         "Lastseen",
         "Firstseen",
-        "Lastseen",
         "Modified",
         "Riskscore",
         "Rules",
@@ -198,7 +197,7 @@ class SearchHashesOutput(komand.Output):
       "title": "evidenceDetails",
       "properties": {
         "criticality": {
-          "type": "integer",
+          "type": "number",
           "title": "Criticality",
           "order": 1
         },
@@ -234,7 +233,7 @@ class SearchHashesOutput(komand.Output):
           "order": 1
         },
         "value": {
-          "type": "integer",
+          "type": "number",
           "title": "Value",
           "order": 2
         }
@@ -336,7 +335,7 @@ class SearchHashesOutput(komand.Output):
       "title": "risk",
       "properties": {
         "criticality": {
-          "type": "integer",
+          "type": "number",
           "title": "Criticality",
           "order": 1
         },
@@ -375,7 +374,7 @@ class SearchHashesOutput(komand.Output):
           "title": "evidenceDetails",
           "properties": {
             "criticality": {
-              "type": "integer",
+              "type": "number",
               "title": "Criticality",
               "order": 1
             },
@@ -565,7 +564,7 @@ class SearchHashesOutput(komand.Output):
           "title": "evidenceDetails",
           "properties": {
             "criticality": {
-              "type": "integer",
+              "type": "number",
               "title": "Criticality",
               "order": 1
             },
@@ -601,7 +600,7 @@ class SearchHashesOutput(komand.Output):
               "order": 1
             },
             "value": {
-              "type": "integer",
+              "type": "number",
               "title": "Value",
               "order": 2
             }
@@ -703,7 +702,7 @@ class SearchHashesOutput(komand.Output):
           "title": "risk",
           "properties": {
             "criticality": {
-              "type": "integer",
+              "type": "number",
               "title": "Criticality",
               "order": 1
             },
@@ -742,7 +741,7 @@ class SearchHashesOutput(komand.Output):
               "title": "evidenceDetails",
               "properties": {
                 "criticality": {
-                  "type": "integer",
+                  "type": "number",
                   "title": "Criticality",
                   "order": 1
                 },

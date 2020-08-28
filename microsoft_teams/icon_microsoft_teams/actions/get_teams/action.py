@@ -18,7 +18,7 @@ class GetTeams(komand.Action):
         team_name = params.get(Input.TEAM_NAME, "")
 
         # The end of this filters for only MS Team enabled Teams
-        teams = get_teams_from_microsoft(self.logger, self.connection, team_name)
+        teams = get_teams_from_microsoft(self.logger, self.connection, team_name, False)
 
         clean_teams = []
         for team in teams:

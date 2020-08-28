@@ -26,13 +26,13 @@ class CheckDomainsAlternateNameserversInput(komand.Input):
     "domain": {
       "type": "string",
       "title": "Domain",
-      "description": "Domain to check. e.g. fbi.gov, google.com",
+      "description": "Domain to check, in alternate nameserver",
       "order": 1
     },
     "nameservers": {
       "type": "array",
       "title": "Nameservers",
-      "description": "Nameserver to check against. e.g [\\"1.1.1.1\\",\\"1.0.0.1\\"]",
+      "description": "Nameserver to check against",
       "items": {
         "type": "string"
       },

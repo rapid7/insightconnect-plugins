@@ -4,10 +4,10 @@ import komand
 from komand_markdown import connection, actions, triggers
 
 
-Name = 'Markdown'
-Vendor = 'rapid7'
-Version = '2.2.2'
-Description = 'Convert markdown to and from various popular formats'
+Name = "Markdown"
+Vendor = "rapid7"
+Version = "3.1.0"
+Description = "Convert markdown to and from various popular formats"
 
 
 class ICONMarkdown(komand.Plugin):
@@ -24,6 +24,8 @@ class ICONMarkdown(komand.Plugin):
         self.add_action(actions.MarkdownToHtml())
 
         self.add_action(actions.MarkdownToPdf())
+
+        self.add_action(actions.MarkdownToTxt())
 
 
 def main():

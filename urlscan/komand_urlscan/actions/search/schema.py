@@ -35,7 +35,8 @@ class SearchInput(komand.Input):
     "q": {
       "type": "string",
       "title": "Query",
-      "description": "The query term (ElasticSearch simple query string) e.g domain:urlscan.io, default is *",
+      "description": "The query term (ElasticSearch simple query string), default is *",
+      "default": "domain:example.com",
       "order": 1
     },
     "size": {

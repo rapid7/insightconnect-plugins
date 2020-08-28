@@ -1,7 +1,7 @@
 {
-	"spec": "61abca24a402e23445047b975872dd02",
-	"manifest": "324be42d6d910c6f4cb4a35091472436",
-	"setup": "443c4b61c92b600d190ed893b9b872d1",
+	"spec": "c9be745759cba4a05da1cc58de6b9efe",
+	"manifest": "ebec470ad2b0d861627534457377ff3f",
+	"setup": "664bfd37c8af5d8686078a675fce4560",
 	"schemas": [
 		{
 			"identifier": "add_scan_engine_pool_engine/schema.py",
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "create_asset_group/schema.py",
-			"hash": "a3850c7cf055200f7c80784728613335"
+			"hash": "0a450a625bf74954921bcc75232c7cef"
 		},
 		{
 			"identifier": "create_exception/schema.py",
@@ -46,6 +46,10 @@
 		{
 			"identifier": "create_user/schema.py",
 			"hash": "a2800b7cec9f88c70e8d5979005e31a8"
+		},
+		{
+			"identifier": "delete_asset/schema.py",
+			"hash": "8e735ded697a42dfcf96d3643887ce9f"
 		},
 		{
 			"identifier": "delete_asset_group/schema.py",
@@ -141,7 +145,7 @@
 		},
 		{
 			"identifier": "get_scan/schema.py",
-			"hash": "5df101027bf029f2b9f9ff1a701b8b93"
+			"hash": "c7c0d19e2793ff68f3c89145cb25e8a0"
 		},
 		{
 			"identifier": "get_scan_assets/schema.py",
@@ -220,6 +224,10 @@
 			"hash": "7e22b140f5dd81d2afe542c1c87372df"
 		},
 		{
+			"identifier": "list_inactive_assets/schema.py",
+			"hash": "0d4aafcf9d5cef057ea929e86678db73"
+		},
+		{
 			"identifier": "list_reports/schema.py",
 			"hash": "7d28763e16817b1bd736d251899e47c4"
 		},
@@ -261,7 +269,7 @@
 		},
 		{
 			"identifier": "scan/schema.py",
-			"hash": "ac5d75339d10ba89d8549ec5b63f49a0"
+			"hash": "4dd18c8bf4597ae99e38737820369277"
 		},
 		{
 			"identifier": "tag_asset/schema.py",
@@ -333,7 +341,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "7e0c90d946dd6c0802d09bf4a16d5c40"
+			"hash": "1eede25b638458591e05061b718ee106"
 		},
 		{
 			"identifier": "new_exception_request/schema.py",

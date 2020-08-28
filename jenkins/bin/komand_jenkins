@@ -4,10 +4,10 @@ import komand
 from komand_jenkins import connection, actions, triggers
 
 
-Name = 'Jenkins'
-Vendor = 'rapid7'
-Version = '1.1.1'
-Description = 'Reliably build, test, and deploy their software'
+Name = "Jenkins"
+Vendor = "rapid7"
+Version = "1.1.2"
+Description = "Reliably build, test, and deploy their software"
 
 
 class ICONJenkins(komand.Plugin):

@@ -24,7 +24,7 @@ class GetTeamsInput(komand.Input):
     "team_name": {
       "type": "string",
       "title": "Team Name",
-      "description": "Optional regex-capable optional team name to look for",
+      "description": "Optional regex-capable team name to look for",
       "order": 1
     }
   }

@@ -9,6 +9,8 @@ class Component:
 
 class Input:
     FROM = "from"
+    MAX_PAGES = "max_pages"
+    PAGE_SIZE = "page_size"
     ROUTE = "route"
     SCAN_RESULT = "scan_result"
     TO = "to"
@@ -30,6 +32,20 @@ class GetTtpUrlLogsInput(komand.Input):
       "title": "From",
       "description": "Start date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is the start of the current day",
       "order": 1
+    },
+    "max_pages": {
+      "type": "integer",
+      "title": "Max Pages",
+      "description": "Max pages returned, default 100",
+      "default": 100,
+      "order": 6
+    },
+    "page_size": {
+      "type": "integer",
+      "title": "Page Size",
+      "description": "The number of logs returned per page, default value is 10",
+      "default": 10,
+      "order": 7
     },
     "route": {
       "type": "string",

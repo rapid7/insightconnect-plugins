@@ -4,7 +4,7 @@ products: [insightconnect]
 name: virustotal_yara
 title: VirusTotal Yara
 description: Analyze files and URLs to detect malware, automatically share them with the security community
-version: 1.1.1
+version: 1.1.2
 vendor: rapid7
 support: community
 status: []
@@ -50,11 +50,13 @@ actions:
         title: File
         description: File to be scanned
         type: bytes
+        example: aGVsbG8gd29ybGQK=
         required: true
       rules:
         title: Yara Rules
         description: File containing Yara rules
         type: bytes
+        example: cnVsZSBoZWxsbwp7CglzdHJpbmdzOgoJCSRzaGVsbG8gPSAiSGVsbG8sIFdvcmxkIgoJY29uZGl0aW9uOgoJCSRzaGVsbG8KfQo=
         required: true
     output:
       results:

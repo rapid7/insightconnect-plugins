@@ -1,6 +1,5 @@
 # List third-party dependencies here, separated by newlines. 
 # All dependencies must be version-pinned, eg. requests==1.2.0
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
-rfapi==2.5.1
+rfapi==2.6.0
 xmltodict==0.11.0
-requests==2.22.0

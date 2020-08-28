@@ -2,7 +2,10 @@
 from komand.exceptions import PluginException
 from requests.models import Response
 
-def tryJSON(response : Response) -> dict:
+import json
+
+
+def tryJSON(response: Response) -> dict:
     """
     Try to convert response data to JSON
     """
@@ -15,17 +18,19 @@ def tryJSON(response : Response) -> dict:
                               data=response.text)
     return response_data
 
-def checkResponse(response : Response) -> None:
+
+def checkResponse(response: Response) -> None:
     """
     Check the response code and extract the error message
     """
+
     if response.status_code not in range(200, 299):
         response_data = tryJSON(response)
         if "message" in response_data:
-            message = f"{response.status_code}, {response_data['message']}"   
-        else:    
+            message = f"{response.status_code}, {response_data['message']}"
+        else:
             message = f"{response.status_code}, {response.text}"
 
         raise PluginException(cause="Received HTTP %d status code. The request was not successful." % response.status_code,
-                              assistance="Please check the server address and the rules to be assigned.",
+                              assistance=f"[{response.url}]",
                               data=message)

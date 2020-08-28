@@ -25,7 +25,7 @@ class CloseIssue(komand.Action):
 
         issue_params = {"state": "closed"}
         try:
-            issue = issue.edit(issue_params)
+            issue = issue.edit(**issue_params)
             return {'success': True}
         except:
             return {'success': False}

@@ -235,7 +235,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.0.0 - New spec and help.md format update for the Hub | Variable names updated as acronyms
+* 2.0.0 - New spec and help.md format update for the Extension Library | Variable names updated as acronyms
 * 1.0.1 - Update custom type and added HOSTNAME as a supported indicator type for Get Indicator Details
 * 1.0.0 - Initial plugin
 

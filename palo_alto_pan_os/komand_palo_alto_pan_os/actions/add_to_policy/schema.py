@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add a rule to a PAN-OS security policy"
+    DESCRIPTION = "Add a rule to a firewall security policy"
 
 
 class Input:
@@ -60,7 +60,7 @@ class AddToPolicyInput(komand.Input):
     },
     "hip_profiles": {
       "type": "string",
-      "title": "HIP profiles",
+      "title": "HIP Profiles",
       "description": "Host information profile",
       "order": 11
     },
@@ -131,7 +131,7 @@ class AddToPolicyOutput(komand.Output):
     "code": {
       "type": "string",
       "title": "Code",
-      "description": "Response code from PAN-OS",
+      "description": "Response code from firewall",
       "order": 2
     },
     "message": {

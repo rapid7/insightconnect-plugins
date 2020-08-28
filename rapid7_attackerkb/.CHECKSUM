@@ -1,0 +1,27 @@
+{
+	"spec": "722522747a73f443a9f7c4c570bfa108",
+	"manifest": "2e49064efd03df697e25b5de45e2be91",
+	"setup": "5915443fccf695828b92a3f979566c95",
+	"schemas": [
+		{
+			"identifier": "assessment/schema.py",
+			"hash": "d3f95ea149dee879f1619f9965942952"
+		},
+		{
+			"identifier": "assessments/schema.py",
+			"hash": "cc7d759df5b83aba7b91e74ba31db1a6"
+		},
+		{
+			"identifier": "topic/schema.py",
+			"hash": "b28d8a948065400431162294c0b880f3"
+		},
+		{
+			"identifier": "topics/schema.py",
+			"hash": "2a5056db02e1edcedb25951bf8b91382"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "d1c5aa521a5b95507c6b47f2dbb38cbc"
+		}
+	]
+}

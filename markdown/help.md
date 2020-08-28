@@ -10,7 +10,7 @@ This plugin utilizes [pandoc](https://pandoc.org/) via [pypandoc](https://pypi.p
 
 # Requirements
 
-_This plugin does not contain any requirements_
+_This plugin does not contain any requirements._
 
 # Documentation
 
@@ -28,15 +28,22 @@ This action is used to convert HTML to Markdown.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|html|bytes|None|True|HTML data|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|html|bytes|None|False|HTML data as bytes|None|None|
+|html_string|string|None|False|HTML data as string|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|markdown|bytes|False|Markdown data|
+|markdown|bytes|False|Markdown data as bytes|
+|markdown_string|bytes|False|Markdown data as string|
 
 #### Markdown to PDF
 
@@ -44,15 +51,26 @@ This action is used to convert Markdown to PDF.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|markdown|bytes|None|True|Markdown data|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|
+|markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|
+
+Example input:
+
+```
+{
+  "markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=",
+  "markdown_string": "# Rapid7 InsightConnect"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|pdf|bytes|False|PDF data|
+|pdf|bytes|False|PDF data as bytes|
+|pdf_string|string|False|PDF data as string|
 
 #### Markdown to HTML
 
@@ -60,15 +78,71 @@ This action is used to convert Markdown to HTML.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|markdown|bytes|None|True|Markdown data|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|
+|markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|
+
+Example input:
+
+```
+{
+  "markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=",
+  "markdown_string": "# Rapid7 InsightConnect"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|html|bytes|False|HTML data|
+|html|bytes|False|HTML data as bytes|
+|html_string|string|False|HTML data|
+
+Example output:
+
+```
+{
+  "html": "PGgxIGlkPSJyYXBpZDctaW5zaWdodGNvbm5lY3QiPlJhcGlkNyBJbnNpZ2h0Q29ubmVjdDwvaDE+Cg==",
+  "html_string": "\u003ch1 id=\"rapid7-insightconnect\"\u003eRapid7 InsightConnect\u003c/h1\u003e\n"
+}
+```
+
+#### Markdown to TXT
+
+This action is used to convert Markdown to TXT.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|
+|markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|
+
+Example input:
+
+```
+{
+  "markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=",
+  "markdown_string": "# Rapid7 InsightConnect"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|txt|bytes|False|TXT data as bytes|
+|txt_string|string|False|TXT data as string|
+
+Example output:
+
+```
+{
+  "txt_string": "Rapid7 InsightConnect\n",
+  "txt": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
+}
+```
 
 ### Triggers
 
@@ -84,7 +158,9 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.2.2 - New spec and help.md format for the Hub
+* 3.1.0 - New action: Markdown to TXT
+* 3.0.0 - Update Markdown to HTML and Markdown to PDF action titles and descriptions
+* 2.2.2 - New spec and help.md format for the Extension Library
 * 2.2.1 - Add `utilities` plugin tag for Marketplace searchability
 * 2.2.0 - PyPandoc bug fix | Support web server mode
 * 2.1.0 - Update to v2 Python plugin architecture | Change type of input/output to string
@@ -99,4 +175,3 @@ _This plugin does not contain any troubleshooting information._
 * [Markdown](https://en.wikipedia.org/wiki/Markdown)
 * [pandoc](https://pandoc.org/)
 * [pypandoc](https://pypi.python.org/pypi/pypandoc/)
-

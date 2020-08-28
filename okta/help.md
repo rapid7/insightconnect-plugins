@@ -18,10 +18,10 @@ to integrate their central user account system with a wide variety of other appl
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|okta_key|credential_secret_key|None|True|Okta key|None|
-|okta_url|string|None|True|Okta Domain e.g. dev-114295-admin.oktapreview.com|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|okta_key|credential_secret_key|None|True|Okta key|None|None|
+|okta_url|string|None|True|Okta Domain e.g. example.okta.com|None|None|
 
 ## Technical Details
 
@@ -33,9 +33,17 @@ This action returns an object containing all of a user's factors for MFA.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user_id|string|None|True|User ID to get factors for|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|User ID to get factors for|None|None|
+
+Example input:
+
+```
+{
+  "user_id" : "opfpfac5jbFkZppdt0h7"
+}
+```
 
 ##### Output
 
@@ -109,10 +117,15 @@ This action pushes a MFA challenge to a user's device and waits for a success or
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|factor_id|string|None|True|Factor ID of the user to push verification to|None|
-|user_id|string|None|True|User ID to push verification to|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|factor_id|string|None|True|Factor ID of the user to push verification to|None|None|
+|user_id|string|None|True|User ID to push verification to|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -136,9 +149,17 @@ as a whole.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|The email of the employee to suspend|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|The email of the employee to suspend|None|None|
+
+Example input:
+
+```
+{
+  "email" : "user@example.com"
+}
+```
 
 ##### Output
 
@@ -172,9 +193,17 @@ This action is used to reset all multifactors for a user by email.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|The email of the employee to reset factors|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|The email of the employee to reset factors|None|None|
+
+Example input:
+
+```
+{
+  "email" : "user@example.com"
+}
+```
 
 ##### Output
 
@@ -212,9 +241,17 @@ the API returning a successful result and the actual deactivation / deprovisioni
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|The email of the employee to deactivate|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|The email of the employee to deactivate|None|None|
+
+Example input:
+
+```
+{
+  "email": "user@example.com"
+}
+```
 
 ##### Output
 
@@ -248,10 +285,19 @@ This action is used to delete a user. If a user is not deprovisioned, this will 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|send_admin_email|boolean|False|True|Sends a deactivation email to the administrator if true. Default value is false|None|
-|user_email|string|None|True|The email of the user to delete|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|send_admin_email|boolean|False|True|Sends a deactivation email to the administrator if true. Default value is false|None|None|
+|user_email|string|None|True|The email of the user to delete|None|None|
+
+Example input:
+
+```
+{
+  "send_admin_email": True
+  "user_email": "user@example.com"
+}
+```
 
 ##### Output
 
@@ -273,9 +319,17 @@ This action is used to unsuspend a user.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|The email of the Okta user|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|The email of the Okta user|None|None|
+
+Example input:
+
+```
+{
+  "email": "user@example.com"
+}
+```
 
 ##### Output
 
@@ -309,9 +363,17 @@ This action is used to obtain information about a user.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|The email of the user to obtain information about|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|The email of the user to obtain information about|None|None|
+
+Example input:
+
+```
+{
+  "email": "user@example.com"
+}
+```
 
 ##### Output
 
@@ -416,10 +478,19 @@ This action is used to remove a user from an existing group.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|The email of the Okta user|None|
-|group_id|string|None|True|The ID of the group to which the user should be added|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|The email of the Okta user|None|None|
+|group_id|string|None|True|The ID of the group to which the user should be added|None|None|
+
+Example input:
+
+```
+{
+  "email": "user@example.com"
+  "group_id": "00g41ix8hKbsu74Ca4x6"
+}
+```
 
 ##### Output
 
@@ -443,10 +514,19 @@ This action is used to add a user to an existing group.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|The email of the Okta user|None|
-|group_id|string|None|True|The ID of the group to which the user should be added|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|The email of the Okta user|None|None|
+|group_id|string|None|True|The ID of the group to which the user should be added|None|None|
+
+Example input:
+
+```
+{
+  "email": "user@example.com"
+  "group_id": "00g41ix8hKbsu74Ca4x6"
+}
+```
 
 ##### Output
 
@@ -470,9 +550,17 @@ This action is used to list available groups.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|False|Query to list groups, otherwise all groups will be returned|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|False|Query to list groups, otherwise all groups will be returned|None|None|
+
+Example input:
+
+```
+{
+  "query": "group name here"
+}
+```
 
 ##### Output
 
@@ -538,14 +626,25 @@ This action is used to assign a user to an application for SSO and provisioning.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|applicationId|string|None|True|Application ID|None|
-|appuser|object|None|False|Application user model as JSON object, see https://developer.okta.com/docs/api/resources/apps#application-user-model|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|applicationId|string|None|True|Application ID|None|None|
+|appuser|object|None|False|Application user model as JSON object, see https://developer.okta.com/docs/api/resources/apps#application-user-model|None|None|
 
 `appuser` accepts a [application user model](https://developer.okta.com/docs/api/resources/apps#application-user-model) JSON object.
 
 Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|result|object|True|Result|
+
+Example output:
 
 ```
 {
@@ -564,17 +663,6 @@ Example input:
 }
 ```
 
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result|object|True|Result|
-
-Example output:
-
-```
-```
-
 #### Create User
 
 This action is used to create a new user.
@@ -587,14 +675,65 @@ e.g.: `{ "firstName": "Isaac", "lastName": "Brock", "email": "user@example.com",
 If configuring the `provider` and/or `recovery_question` inputs, for each used, their respective fields must be completed otherwise Okta will return an error.
 This action will attempt to prevent that be removing the entire input if it detects a missing field in that input.
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|activate|boolean|True|True|Executes activation lifecycle operation when creating the user|None|
-|credentials|credentials_input|None|False|Credentials for user|None|
-|groupIds|[]string|None|False|IDs of groups that user will be immediately added to at time of creation|None|
-|nextLogin|boolean|None|True|Change password next time the user logs in|None|
-|profile|object|None|True|Profile properties for user|None|
-|provider|boolean|False|True|Indicates whether to create a user with a specified authentication provider|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|activate|boolean|True|True|Executes activation lifecycle operation when creating the user|None|None|
+|credentials|credentials_input|None|False|Credentials for user|None|None|
+|groupIds|[]string|None|False|IDs of groups that user will be immediately added to at time of creation|None|None|
+|nextLogin|boolean|None|True|Change password next time the user logs in|None|None|
+|profile|object|None|True|Profile properties for user|None|None|
+|provider|boolean|False|True|Indicates whether to create a user with a specified authentication provider|None|None|
+
+Example input:
+
+```
+{
+  "activate": true,
+  "credentials": {
+    "password": {
+      "value": "blah"
+    },
+    "provider": {
+       "name": "OKTA",
+       "type": "OKTA"
+    },
+    "recovery_question": {
+      "answer": "Q",
+      "question": "A"
+    }
+  },
+  "groupIds": [
+    "00gftwyoqyVBvcpdn0h7"
+  ],
+  "nextLogin": false,
+  "profile": {
+    "city": "San Francisco",
+    "costCenter": "10",
+    "countryCode": "US",
+    "department": "Engineering",
+    "displayName": "Isaac Brock",
+    "division": "R&D",
+    "email": "user@example.com",
+    "employeeNumber": "187",
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "login": "user@example.com",
+    "mobilePhone": "+1-555-415-1337",
+    "nickName": "issac",
+    "organization": "Okta",
+    "preferredLanguage": "en-US",
+    "primaryPhone": "+1-555-514-1337",
+    "profileUrl": "http://www.example.com/profile",
+    "secondEmail": "user@example.com",
+    "state": "CA",
+    "streetAddress": "301 Brannan St.",
+    "title": "Director",
+    "userType": "Employee",
+    "zipCode": "94107"
+  },
+  "provider": false
+}
+```
 
 ##### Output
 
@@ -613,7 +752,6 @@ This action will attempt to prevent that be removing the entire input if it dete
 |statusChanged|string|False|When the status of the user changed, e.g. 2013-07-02T21:36:25.344Z|
 
 Example output:
-
 ```
 {
   "id": "00ug5xak4uqrOrj8Q0h7",
@@ -649,12 +787,104 @@ Example output:
       "href": "https://dev-114295.oktapreview.com/api/v1/users/00ug5xak4uqrOrj8Q0h7"
     }
   }
-}
 ```
 
 ### Triggers
 
-_This plugin does not contain any triggers._
+#### Monitor User Groups
+
+This trigger monitors a list of groups for user membership changes.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|group_ids|[]string|None|True|A list of group ID's|None|['00g41ix8hKbsu74Ca4x6', '00g41ieu5y7i9XEYE4x6']|
+|interval|integer|300|True|The time in seconds between checks for changes to the groups users|None|100|
+
+Example input:
+
+```
+{
+  "group_ids": ["00g41ix8hKbsu74Ca4x6", "00g41ieu5y7i9XEYE4x6"],
+  "interval": 100
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|users_added_from_groups|[]user_group|True|Users added to a group since the last check|
+|users_removed_from_groups|[]user_group|True|Users removed from a group since the last check|
+
+Example output:
+```
+{
+  "users_added_from_groups": [{
+	"group_name": "test1",
+	"group_id": "00g41ix8hKbsu74Ca4x6",
+	"users": [{
+	  "id": "00u44z4o0JgUYC0OO4x6",
+	  "status": "PASSWORD_EXPIRED",
+  	  "created": "2020-03-17T19:28:50.000Z",
+	  "activated": "2020-03-17T19:28:50.000Z",
+	  "statusChanged": "2020-03-17T19:28:50.000Z",
+	  "lastUpdated": "2020-03-17T19:28:50.000Z",
+	  "passwordChanged": "2020-03-17T19:28:50.000Z",
+	  "profile": {
+		"firstName": "doe",
+		"lastName": "test",
+		"login": "user@example.com",
+		"email": "user@example.com"
+	  },
+	  "credentials": {
+		"password": {},
+		"provider": {
+		  "type": "OKTA",
+		  "name": "OKTA"
+		}
+	  },
+	  "_links": {
+		"self": {
+		  "href": "https://example.okta.com/api/v1/users/00u44z4o0JgUYC0OO4x6"
+		}
+	  }
+	}]
+  }],
+  "users_removed_from_groups": [{
+	"group_name": "test1",
+	"group_id": "00g41ix8hKbsu74Ca4x6",
+	  "users": [{
+		"id": "00u44xracEYPXjhwy4x6",
+		"status": "PASSWORD_EXPIRED",
+		"created": "2020-03-17T19:28:27.000Z",
+		"activated": "2020-03-17T19:28:28.000Z",
+		"statusChanged": "2020-03-17T19:28:28.000Z",
+		"lastUpdated": "2020-03-17T19:28:28.000Z",
+		"passwordChanged": "2020-03-17T19:28:27.000Z",
+		"profile": {
+		  "firstName": "bob",
+		  "lastName": "test",
+		  "login": "user@example.com",
+		  "email": "user@example.com"
+		},
+		"credentials": {
+		  "password": {},
+		  "provider": {
+			"type": "OKTA",
+			"name": "OKTA"
+		  }
+		},
+		"_links": {
+		"self": {
+		  "href": "https://example.okta.com/api/v1/users/00u44xracEYPXjhwy4x6"
+		}
+	  }
+	}]
+  }]
+}
+```
 
 ### Custom Output Types
 
@@ -669,9 +899,13 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 3.4.3 - Fix issue where trigger did not return empty arrays when users were removed or added to group
+* 3.4.2 - Fix issue where Monitor User Groups trigger would erroneously detect logins as an addition/removal of a group member
+* 3.4.1 - Fix issue where Monitor User Groups trigger would continually detect the same new group addition
+* 3.4.0 - New trigger Monitor User Groups
 * 3.3.0 - New actions Get Factors and Send Push
 * 3.2.2 - Change docker image from `komand/python-2-plugin:2` to `komand/python-3-37-slim-plugin:3` | Use input and output constants | Changed variables names to more readable | Added "f" strings | Removed duplicated code
-* 3.2.1 - New spec and help.md format for the Hub
+* 3.2.1 - New spec and help.md format for the Extension Library
 * 3.2.0 - New action Delete User
 * 3.1.2 - Update connection test
 * 3.1.1 - Update descriptions

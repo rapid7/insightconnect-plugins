@@ -1,0 +1,1005 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: ivanti_service_manager
+title: Ivanti Service Manager
+description: Ivanti Service Manager is a flexible and complete cloud-optimized, easily scalable and adaptable ITSM solution used for managing and automating ITSM processes
+version: 1.0.0
+vendor: rapid7
+support: community
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/ivanti_service_manager
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.ivanti.com/
+tags: 
+- ivanti
+- service manager
+- itsm
+hub_tags:
+  use_cases: [reporting_and_analytics, user_management, threat_detection_and_response]
+  keywords: [ivanti, service, manager, itsm]
+  features: []
+
+types:
+  incident:
+    ActualCategory_Valid:
+      title: Actual Category Valid
+      description: Actual category valid
+      type: string
+      required: false
+    ActualCategory:
+      title: Actual Category
+      description: Actual category
+      type: string
+      required: false
+    Category_Valid:
+      title: Category Valid
+      description: Category valid
+      type: string
+      required: false
+    Category:
+      title: Category
+      description: Category
+      type: string
+      required: false
+    CauseCode_Valid:
+      title: Cause Code Valid
+      description: Cause code valid
+      type: string
+      required: false
+    CauseCode:
+      title: Cause Code
+      description: Cause code
+      type: string
+      required: false
+    ClosedBy:
+      title: Closed By
+      description: Closed by
+      type: string
+      required: false
+    ClosedDateTime:
+      title: Closed Date Time
+      description: Closed date and time
+      type: string
+      required: false
+    ClosedDuration:
+      title: Closed Duration
+      description: Closed duration
+      type: int
+      required: false
+    CreatedBy:
+      title: Created By
+      description: Created by
+      type: string
+      required: false
+    CreatedDateTime:
+      title: Created Date Time
+      description: Created date and time
+      type: string
+      required: false
+    Email:
+      title: Email
+      description: Email
+      type: string
+      required: false
+    FirstCallResolution:
+      title: First Call Resolution
+      description: First call resolution
+      type: boolean
+      required: false
+    Impact_Valid:
+      title: Impact Valid
+      description: Impact valid
+      type: string
+      required: false
+    Impact:
+      title: Impact
+      description: Impact
+      type: string
+      required: false
+    IncidentNumber:
+      title: IncidentNumber
+      description: Incident number
+      type: integer
+      required: false
+    IsNotification:
+      title: Is Notification
+      description: Is notification
+      type: boolean
+      required: false
+    IsVIP:
+      title: Is VIP
+      description: Is the ticket raised by VIP
+      type: boolean
+      required: false
+    IsWorkAround:
+      title: Is Work Around
+      description: Is there a workaround available
+      type: boolean
+      required: false
+    LastModBy:
+      title: Last Mod By
+      description: Last modified by
+      type: string
+      required: false
+    LastModDateTime:
+      title: Last Mod Date Time
+      description: Last modified date and time
+      type: string
+      required: false
+    Phone:
+      title: Phone
+      description: Phone
+      type: string
+      required: false
+    Priority_Valid:
+      title: Priority Valid By
+      description: Priority valid by
+      type: string
+      required: false
+    Priority:
+      title: Priority
+      description: Priority
+      type: string
+      required: false
+    ProfileFullName:
+      title: Profile Full Name
+      description: Full name of who raised the incident
+      type: string
+      required: false
+    ProfileLink_Category:
+      title: Profile Link Category
+      description: Profile link category
+      type: string
+      required: false
+    ProfileLink_RecID:
+      title: Profile Link Rec ID
+      description: Profile link Rec ID
+      type: string
+      required: false
+    ProfileLink:
+      title: Profile Link
+      description: Profile link
+      type: string
+      required: false
+    RecId:
+      title: Rec ID
+      description: Rec ID
+      type: string
+      required: false
+    Resolution:
+      title: Resolution
+      description: Resolution
+      type: string
+      required: false
+    Service_Valid:
+      title: Service Valid
+      description: Service valid
+      type: string
+      required: false
+    Service:
+      title: Service
+      description: Service
+      type: string
+      required: false
+    SLA:
+      title: SLA
+      description: SLA
+      type: string
+      required: false
+    SLALink_Category:
+      title: SLA Link Category
+      description: SLA link Category
+      type: string
+      required: false
+    SLALink_RecID:
+      title: SLA Link Rec ID
+      description: SLA link rec ID
+      type: string
+      required: false
+    SLALink:
+      title: SLA Link
+      description: SLA link
+      type: string
+      required: false
+    Source_Valid:
+      title: Source Valid
+      description: Source valid
+      type: string
+      required: false
+    Source:
+      title: Source
+      description: Source
+      type: string
+      required: false
+    Status_Valid:
+      title: Status Valid
+      description: Status valid
+      type: string
+      required: false
+    Status:
+      title: Status
+      description: Created by
+      type: string
+      required: false
+    Subject:
+      title: Subject
+      description: Incident subject
+      type: string
+      required: false
+    Symptom:
+      title: Symptom
+      description: Symptoms of the indident
+      type: string
+      required: false
+    Urgency_Valid:
+      title: Urgency Valid
+      description: Urgency valid
+      type: string
+      required: false
+    Urgency:
+      title: Urgency
+      description: Urgency
+      type: string
+      required: false
+    LoginId:
+      title: Login ID
+      description: Login ID
+      type: string
+      required: false
+    Owner_Valid:
+      title: Owner Valid
+      description: Owner valid
+      type: string
+      required: false
+    Owner:
+      title: Owner
+      description: Owner
+      type: string
+      required: false
+    OwnerTeam_Valid:
+      title: Owner Team Valid
+      description: Owner team valid
+      type: string
+      required: false
+    OwnerTeam:
+      title: Owner Team
+      description: Owner team
+      type: string
+      required: false
+    OwnerType:
+      title: Owner Type
+      description: Owner type
+      type: string
+      required: false
+    IsNewRecord:
+      title: Is New Record
+      description: Is new record
+      type: boolean
+      required: false
+    AlternateContactLink_Category:
+      title: Alternate Contact Link Category
+      description: Alternate contact link category
+      type: string
+      required: false
+    AlternateContactLink_RecID:
+      title: Alternate Contact Link Rec ID
+      description: Alternate contact link rec ID
+      type: string
+      required: false
+    AlternateContactLink:
+      title: Alternate Contact Link
+      description: Alternate contact link
+      type: string
+      required: false
+    ResolvedDateTime:
+      title: Resolved Date Time
+      description: Resolved date and time
+      type: string
+      required: false
+    ResolvedBy:
+      title: Resolved By
+      description: Resolved by
+      type: string
+      required: false
+    HoursOfOperation_Valid:
+      title: Hours Of Operation Valid
+      description: Hours of operation valid
+      type: string
+      required: false
+    HoursOfOperation:
+      title: Hours Of Operation
+      description: Created by
+      type: string
+      required: false
+    OwnerEmail:
+      title: Owner Email
+      description: Owner email
+      type: string
+      required: false
+    OwnerTeamEmail:
+      title: Owner Team Email
+      description: Owner team email
+      type: string
+      required: false
+    OwnershipAssignmentEmail:
+      title: Ownership Assignment Email
+      description: Ownership assignment email
+      type: string
+      required: false
+    CustomerLocation_Valid:
+      title: Customer Location Valid
+      description: Customer location valid
+      type: string
+      required: false
+    CustomerLocation:
+      title: Customer Location
+      description: Customer location
+      type: string
+      required: false
+    IsReportedByAlternateContact:
+      title: Is Reported By Alternate Contact
+      description: Is reported by alternate contact
+      type: boolean
+      required: false
+    OrganizationUnitID:
+      title: Organization Unit ID
+      description: Organization unit ID
+      type: string
+      required: false
+    ReportingOrgUnitID_Valid:
+      title: Reporting Org Unit ID Valid
+      description: Reporting organization unit ID valid
+      type: string
+      required: false
+    ReportingOrgUnitID:
+      title: Reporting Org Unit ID
+      description: Reporting organization unit ID
+      type: string
+      required: false
+    TypeOfIncident:
+      title: Type Of Incident
+      description: Type of incident
+      type: string
+      required: false
+    AlternateContactPhone:
+      title: Alternate Contact Phone
+      description: Altername contact phone number
+      type: string
+      required: false
+    TeamManagerEmail:
+      title: Team Manager Email
+      description: Team manager email
+      type: string
+      required: false
+    CustomerDepartment:
+      title: Customer Department
+      description: Customer department
+      type: string
+      required: false
+    ActualService_Valid:
+      title: Actual Service Valid
+      description: Actual service valid
+      type: string
+      required: false
+    ActualService:
+      title: Actual Service
+      description: Actual service
+      type: string
+      required: false
+    CostPerMinute_Currency:
+      title: Cost Per Minute Currency
+      description: Cost per minute currency
+      type: string
+      required: false
+    CostPerMinute_CurrencyValid:
+      title: Cost Per Minute Currency Valid
+      description: Cost per minute currency valid
+      type: string
+      required: false
+    CostPerMinute:
+      title: Cost Per Minute
+      description: Cost per minute
+      type: string
+      required: false
+    IsInFinalState:
+      title: Is In Final State
+      description: Is the incident in its final state
+      type: boolean
+      required: false
+    IsReclassifiedForResolution:
+      title: Is Reclassified For Resolution
+      description: Is reclassified for resolution
+      type: boolean
+      required: false
+    KnowledgeLink_Category:
+      title: Knowledge Link Category
+      description: Knowledge Link category
+      type: string
+      required: false
+    KnowledgeLink_RecID:
+      title: Knowledge Link Rec ID
+      description: Knowledge link rec ID
+      type: string
+      required: false
+    KnowledgeLink:
+      title: Knowledge Link
+      description: Knowledge link
+      type: string
+      required: false
+    OrgUnitLink_Category:
+      title: Org Unit Link Category
+      description: Organization unit link category
+      type: string
+      required: false
+    OrgUnitLink_RecID:
+      title: Org Unit Link Rec ID
+      description: Organization unit link rec ID
+      type: string
+      required: false
+    OrgUnitLink:
+      title: Org Unit Link
+      description: Organization unit link
+      type: string
+      required: false
+    OwningOrgUnitId Valid:
+      title: Owning Org Unit ID Valid
+      description: Owning org unit ID valid
+      type: string
+      required: false
+    OwningOrgUnitId:
+      title: Owning Org Unit ID
+      description: Owning org unit ID
+      type: string
+      required: false
+    Progress Bar Position:
+      title: Progress Bar Position
+      description: Progress bar position
+      type: string
+      required: false
+    CreatedByType:
+      title: Created By Type
+      description: Created by type
+      type: string
+      required: false
+    SLADisplayText:
+      title: SLA Display Text
+      description: SLA display text
+      type: string
+      required: false
+    Cost_Currency:
+      title: Cost Currency
+      description: Cost currency
+      type: string
+      required: false
+    Cost_CurrencyValid:
+      title: Cost Currency Valid
+      description: Cost currency valid
+      type: string
+      required: false
+    Cost:
+      title: Cost
+      description: Cost
+      type: string
+      required: false
+    IsApprovalNeeded:
+      title: Is Approval Needed
+      description: Is approval needed
+      type: boolean
+      required: false
+    Approver_Valid:
+      title: Approver Valid
+      description: Approver valid
+      type: string
+      required: false
+    Approver:
+      title: Approver
+      description: Approver
+      type: string
+      required: false
+    IsDSMTaskExisted:
+      title: Is DSM Task Existed By
+      description: Is DSM task existed
+      type: boolean
+      required: false
+    SocialTextHeader:
+      title: Social Text Header
+      description: Social text header
+      type: string
+      required: false
+    helpdesk_Priority_Valid:
+      title: Helpdesk Priority Valid
+      description: Helpdesk priority valid
+      type: string
+      required: false
+    helpdesk_Priority:
+      title: Helpdesk Priority
+      description: Helpdesk priority
+      type: string
+      required: false
+    IncidentNetworkUserName:
+      title: Incident Network User Name
+      description: Incident network user name
+      type: string
+      required: false
+    SendSurveyNotification:
+      title: Send Survey Notification
+      description: Send survey notification
+      type: boolean
+      required: false
+    EntityLink_Category:
+      title: Entity Link Category
+      description: Entity link category
+      type: string
+      required: false
+    EntityLink_RecID:
+      title: Entity Link Rec ID
+      description: Entity link rec ID
+      type: string
+      required: false
+    EntityLink:
+      title: Entity Link
+      description: Entity link
+      type: string
+      required: false
+    IsMasterIncident:
+      title: Is Master Incident
+      description: Is master incidint
+      type: boolean
+      required: false
+    IsResolvedByMaster:
+      title: Is Resolved By Master
+      description: Is resolved by master
+      type: boolean
+      required: false
+    ServiceOwnerEmail:
+      title: Service Owner Email
+      description: Service owner email
+      type: string
+      required: false
+    IsRelatedIncidentUpdate:
+      title: Is Related Incident Update
+      description: Is related incident update
+      type: boolean
+      required: false
+    IsRelatedIncidentResolutionUpdate:
+      title: Is Related Incident Resolution Update
+      description: Is related incident resolution update
+      type: boolean
+      required: false
+    IsUnRead:
+      title: Is Unread
+      description: Is unread
+      type: boolean
+      required: false
+  journal_note:
+    DisplayText:
+      title: Display Text
+      description: Display text
+      type: string
+      required: false
+    NotesBody:
+      title: Notes Body
+      description: Notes body
+      type: string
+      required: false
+    Source_Valid:
+      title: Source Valid
+      description: Source valid
+      type: string
+      required: false
+    Source:
+      title: Source
+      description: Source
+      type: string
+      required: false
+    TimeSpent:
+      title: Time Spent
+      description: Time spent
+      type: string
+      required: false
+    Category_Valid:
+      title: Category Valid
+      description: Category valid
+      type: string
+      required: false
+    Category:
+      title: Category
+      description: Category
+      type: string
+      required: false
+    CreatedBy:
+      title: Created By
+      description: Created by
+      type: string
+      required: false
+    CreatedDateTime:
+      title: Created Date Time
+      description: Created date and time
+      type: string
+      required: false
+    JournalType:
+      title: Journal Type
+      description: Journal type
+      type: string
+      required: false
+    LastModBy:
+      title: Last Mod By
+      description: Last modified by
+      type: string
+      required: false
+    LastModDateTime:
+      title: Last Mod Date Time
+      description: Last modified date and time
+      type: string
+      required: false
+    Owner_Valid:
+      title: Owner Valid
+      description: Owner valid
+      type: string
+      required: false
+    Owner:
+      title: Owner
+      description: Owner
+      type: string
+      required: false
+    OwnerTeam_Valid:
+      title: Owner Team Valid
+      description: Owner team valid
+      type: string
+      required: false
+    OwnerTeam:
+      title: Owner Team
+      description: Owner team
+      type: string
+      required: false
+    OwnerType:
+      title: Owner Type
+      description: Owner type
+      type: string
+      required: false
+    ParentLink_Category:
+      title: Parent Link Category
+      description: Parent link category
+      type: string
+      required: false
+    ParentLink_RecID:
+      title: Parent Link Rec ID
+      description: Parent link rec ID
+      type: string
+      required: false
+    ParentLink:
+      title: Parent Link
+      description: Parent link
+      type: string
+      required: false
+    RecId:
+      title: Rec ID
+      description: Rec ID
+      type: string
+      required: false
+    Subject:
+      title: Subject
+      description: Subject
+      type: string
+      required: false
+    TypeAlias:
+      title: Type Alias
+      description: Type alias
+      type: string
+      required: false
+    PublishToWeb:
+      title: Publish To Web
+      description: Publish to web
+      type: boolean
+      required: false
+    AttachmentName:
+      title: Attachment Name
+      description: Attachment name
+      type: string
+      required: false
+    AttachmentExtension:
+      title: Attachment Extension
+      description: Attachment extension
+      type: string
+      required: false
+    AttachmentData:
+      title: Attachment Data
+      description: Notes body
+      type: string
+      required: false
+    ReadOnly:
+      title: Read Only
+      description: Read only
+      type: boolean
+      required: false
+    IsNewRecord:
+      title: Is New Record
+      description: Is new record
+      type: boolean
+      required: false
+    IsUnRead:
+      title: Is Unread
+      description: Is unread
+      type: boolean
+      required: false
+    ParentOwner:
+      title: Parent Owner
+      description: Parent owner
+      type: string
+      required: false
+    UnreadTransition:
+      title: Unread Transition
+      description: Unread transition
+      type: boolean
+      required: false
+    
+connection:
+  credentials:
+    title: API Key
+    description: API key from account
+    type: credential_secret_key
+    required: true
+    example: 1A2B3CC4D5E67F8901G2HI345J6K7L89
+  url:
+    title: URL
+    description: API access URL
+    type: string
+    required: true
+    example: 'https://ivanti.example.com'
+  ssl_verify:
+    title: TLS / SSL Verify
+    description: Validate TLS / SSL certificate
+    type: boolean
+    default: true
+    required: false
+    example: true
+
+actions:
+  create_incident:
+    title: Create Incident
+    description: Create a new Ivanti Service Manager Incident record
+    input:
+      summary:
+        title: Summary
+        description: Summary of the incident
+        type: string
+        required: true
+        example: Incident Created By InsightConnect
+      description:
+        title: Description
+        description: Description of the incident
+        type: string
+        required: true
+        example: This incident was created using InsightConnect
+      customer:
+        title: Customer
+        description: Email address of the customer
+        type: string
+        required: true
+        example: user@example.com
+      status:
+        title: Status
+        description: Status of the incident
+        type: string
+        required: true
+        default: Logged
+        enum:
+        - Logged
+        - Active
+        - Waiting for Customer
+        - Waiting for 3rd Party
+        - Waiting for Resolution
+        - Resolved
+        - Closed
+        example: Logged
+      type:
+        title: Type
+        description: Type of the incident
+        type: string
+        required: true
+        enum:
+        - Request
+        - Failure
+        example: Failure
+      urgency:
+        title: Urgency
+        description: Urgency of the incident
+        type: string
+        required: false
+        enum:
+        - Low
+        - Medium
+        - High
+        example: Medium
+      assignee:
+        title: Assignee
+        description: Name of the assignee as it appears in Ivanti Service Manager
+        type: string
+        required: false
+        example: John Doe
+      source:
+        title: Source
+        description: Source of incident report
+        type: string
+        required: false
+        enum:
+        - AutoTicket
+        - Chat
+        - Email
+        - Fax
+        - FrontRange Voice
+        - Instant Message
+        - Network Monitor
+        - Phone
+        - Self Service
+        - Voice Mail
+        - Walk-In
+        example: Network Monitor
+      impact:
+        title: Impact
+        description: Impact of the incident
+        type: string
+        required: false
+        enum:
+        - Low
+        - Medium
+        - High
+        example: Medium
+      category:
+        title: Category
+        description: Category of the incident
+        type: string
+        required: false
+    output:
+      incident:
+        title: Incident
+        description: Newly created incident
+        type: incident
+        required: true
+  delete_incident:
+    title: Delete Incident
+    description: Delete an incident
+    input: 
+      incident_number:
+        title: Incident Number
+        description: Number of the incident to be updated
+        type: integer
+        required: true
+        example: 12345
+    output:
+      success:
+        title: Success
+        description: Return true if the threat was updated
+        type: boolean
+        required: true
+  update_incident:
+    title: Update Incident
+    description: Update an existing incident in Ivanti Service Manager
+    input: 
+      incident_number:
+        title: Incident Number
+        description: Number of the incident to be updated
+        type: integer
+        required: true
+        example: 12345
+      status:
+        title: Status
+        description: Status of the incident
+        type: string
+        required: false
+        enum:
+        - Logged
+        - Active
+        - Waiting for Customer
+        - Waiting for 3rd Party
+        - Waiting for Resolution
+        - Resolved
+        - Closed
+        example: Waiting for Resolution
+      customer:
+        title: Customer
+        description: Email address of the customer
+        type: string
+        required: false
+        example: user@example.com
+      assignee:
+        title: Assignee
+        description: User name or the email address on the new assignee
+        type: string
+        required: false
+        example: John Doe
+      category:
+        title: Category
+        description: Category of the incident
+        type: string
+        required: false
+        example: How-To
+      resolution:
+        title: Resolution
+        description: Resolution of the incident (required when setting status to Resolved)
+        type: string
+        required: false
+        example: This incident was resolved by InsightConnect
+      cause_code:
+        title: Cause Code
+        description: Cause code of the incident (required when setting status to Resolved)
+        type: string
+        required: false
+        example: Software
+        enum:
+        - Configuration
+        - Documentation Request
+        - Hardware
+        - Install Request
+        - Installation
+        - Linked Problem
+        - Other
+        - Reference Request
+        - Session Reset
+        - Software
+        - Training
+    output:
+      incident:
+        title: Incident
+        description: Newly created incident
+        type: incident
+        required: true
+  add_note:
+    title: Add Note
+    description: Adds a journal note to an incident
+    input:
+      incident_number:
+        title: Incident Number
+        description: Number of the incident to which the note will be added
+        type: integer
+        required: true
+        example: 12345
+      summary:
+        title: Summary
+        description: Summary of the note
+        type: string
+        required: true
+        example: Example note summary created from InsightConnect
+      notes:
+        title: Notes
+        description: Body of the note
+        type: string
+        required: false
+        example: Example note body created from InsightConnect
+      category:
+        title: Category
+        description: Category of the note
+        type: string
+        required: false
+        example: Memo
+        enum:
+        - Called Customer
+        - Customer Complaint
+        - Customer Feedback
+        - Customer Follow-up
+        - Customer Notes
+        - E-mailed Customer
+        - Left Voice Mail
+        - Memo
+        - Resolution Communication
+        - Status Update
+      source:
+        title: Source
+        description: Source of the note
+        type: string
+        required: false
+        example: Other
+        enum:
+        - E-mail
+        - Other
+        - Phone/Fax
+        - Self Service
+        - Voice Mail
+    output:
+      journal_note:
+        title: Journal Note
+        description: Journal note details
+        type: journal_note
+        required: true

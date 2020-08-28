@@ -14,108 +14,353 @@ This plugin utilizes the [Microsoft ATP API](https://docs.microsoft.com/en-us/wi
 # Requirements
 
 * Windows Defender Advanced Threat Protection application credentials
-* Authentication and Resource URLs for your instance of Windows ATP
 
 # Documentation
 
 ## Setup
 
+This plugin uses the Windows Defender ATP API. It will use an Azure application to connect to the API and run
+actions from InsightConnect.
+
+For information on how to setup your application and assign permissions go here:
+https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp
+
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|auth_url|string|None|True|Server used to obtain OAuth token. Example: https://login.windows.net/{Azure Tenant ID}/oauth2/token|None|
-|client_id|string|None|True|Client ID obtained from Windows Defender Security Center API settings|None|
-|client_secret|string|None|True|Client secret obtained when authorizing an application to connect to Windows Defender|None|
-|host|string|https://wdatp-alertexporter-us.securitycenter.windows.com|True|Base URL for endpoints, e.g. https://wdatp-alertexporter-us.securitycenter.windows.com|None|
-|resource_url|string|https://api.securitycenter.windows.com|False|This will be the server that will return information from the plug-in requests. This will typically be https://graph.windows.net (for alert information) or https://api.securitycenter.windows.com (for machine information and actions).|None|
-|seconds_ago|integer|0|False|Seconds before the first run of the trigger to check for alerts. If left blank, the trigger will start scanning from the time the workflow begins.|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|application_id|string|None|True|Application (client) ID|None|a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d|
+|application_secret|credential_secret_key|None|True|Application secret|None|kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=|
+|directory_id|string|None|True|Directory (tenant) ID|None|3a522933-ae5e-2b63-96ab-3c004b4f7f10|
+
+Example input:
+
+```
+{
+  "application_id": "a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d",
+  "application_secret": "kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=",
+  "directory_id": "3a522933-ae5e-2b63-96ab-3c004b4f7f10"
+}
+```
 
 ## Technical Details
 
 ### Actions
 
-#### Get Machine ID from Alert
+#### Get Security Recommendations
 
-This action is used to retrieve the machine ID related to an alert.
+This action is used to retrieve a list of security recommendations.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|alert_id|string|None|True|Alert ID to get a machine ID from|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|machine|string|None|True|Machine IP address, hostname or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|machine_information|machine_information_type|True|The machine ID related to the given Alert ID|
-
-Example output:
+Example input:
 
 ```
 {
-   "machine_information":{
-      "@odata.context":"https://api.securitycenter.windows.com/api/$metadata#Machines/$entity",
-      "id":"c6944fa14970633xxxxxxxx104167ef12557a6f",
-      "computerDnsName":"xxxxxxxx",
-      "firstSeen":"2018-11-07T17:59:46.4708884Z",
-      "lastSeen":"2018-11-28T07:29:48.8372663Z",
-      "osPlatform":"Windows10",
-      "lastIpAddress":"10.4.18.162",
-      "lastExternalIpAddress":"128.177.65.3",
-      "agentVersion":"10.4850.17134.191",
-      "osBuild":17134,
-      "healthStatus":"Active",
-      "rbacGroupId":0,
-      "riskScore":"Medium",
-      "isAadJoined":false,
-      "machineTags":[]
-   }
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
 }
 ```
 
-#### Get File ID from Alert
-
-This action is used to retrieve the file ID related to an alert.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|alert_id|string|None|True|Alert ID to get files from|None|
-
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|file_information|file_information|True|The file ID related to the given alert ID|
+|recommendations|[]recommendation|True|List of security recommendations|
 
 Example output:
 
 ```
 {
-    "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#Files",
-    "value": [
-        {
-            "sha1": "654f19c41d9662cf86be21bf0af5a88c38c56a9d",
-            "sha256": "2f905feec2798cee6f63da2c26758d86bfeaab954c01e20ac7085bf55fedde87",
-            "md5": "82849dc81d94056224445ea73dc6153a",
-            "globalPrevalence": 33,
-            "globalFirstObserved": "2018-07-17T18:17:27.5909748Z",
-            "globalLastObserved": "2018-08-06T16:07:12.9414137Z",
-            "windowsDefenderAVThreatName": null,
-            "size": 801112,
-            "fileType": "PortableExecutable",
-            "isPeFile": true,
-            "filePublisher": null,
-            "fileProductName": null,
-            "signer": "Microsoft Windows",
-            "issuer": "Microsoft Development PCA 2014",
-            "signerHash": "9e284231a4d1c53fc8d4492b09f65116bf97447f",
-            "isValidCertificate": true
-        }
-    ]
+  "recommendations": [
+    {
+      "activeAlert": false,
+      "associatedThreats": [],
+      "configScoreImpact": 0.0,
+      "exposedMachinesCount": 1,
+      "exposureImpact": 0.0,
+      "id": "va-_-microsoft-_-.net_framework",
+      "nonProductivityImpactedAssets": 0,
+      "productName": ".net_framework",
+      "publicExploit": false,
+      "recommendationCategory": "Application",
+      "recommendationName": "Update Microsoft .net Framework",
+      "relatedComponent": ".net Framework",
+      "remediationType": "Update",
+      "severityScore": 0.0,
+      "status": "Active",
+      "totalMachineCount": 0,
+      "vendor": "microsoft",
+      "weaknesses": 1
+    }
+  ]
+}
+```
+
+#### Blacklist
+
+This action is used to submit or update new indicator.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|action|string|AlertAndBlock|False|The action that will be taken if the indicator will be discovered in the organization|['Alert', 'AlertAndBlock', 'Allowed']|AlertAndBlock|
+|application|string|None|False|The application associated with the indicator|None|demo-test|
+|description|string|None|False|Description of the indicator|None|description|
+|expiration_time|string|None|False|The expiration time of the indicator|None|2020-12-12T00:00:00Z|
+|indicator|string|None|True|A supported indicator to blacklist or unblacklist. Supported indicators are IP addresses, URLs, domains, and SHA1 and SHA256 hashes|None|220e7d15b011d7fac48f2bd61114db1022197f7f|
+|indicator_state|boolean|False|False|True to add indicator, false to remove it from the list|None|True|
+|rbac_group_names|[]string|None|False|List of RBAC group names the indicator would be applied to|None|["group1","group2"]|
+|recommended_actions|string|None|False|TI indicator alert recommended actions|None|nothing|
+|severity|string|High|False|The severity of the indicator|['Informational', 'Low', 'Medium', 'High']|High|
+|title|string|None|False|Indicator alert title|None|test|
+
+Example input:
+
+```
+{
+  "action": "AlertAndBlock",
+  "application": "demo-test",
+  "description": "description",
+  "expiration_time": "2020-12-12T00:00:00Z",
+  "indicator": "220e7d15b011d7fac48f2bd61114db1022197f7f",
+  "indicator_state": true,
+  "rbac_group_names": [
+    "group1",
+    "group2"
+  ],
+  "recommended_actions": "nothing",
+  "severity": "High",
+  "title": "test"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|indicator_action_response|indicator_action|False|A response that includes the result of the action, and supplemental information about the action taken|
+
+Example output:
+
+```
+{
+  "indicator_action_response": {
+    "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#Indicators/$entity",
+    "action": "Alert",
+    "application": "application",
+    "category": 1,
+    "createdBy": "82f42fca-e931-4f03-b54c-47af94bd394d",
+    "createdByDisplayName": "WindowsDefenderATPSiemConnector",
+    "createdBySource": "PublicApi",
+    "creationTimeDateTimeUtc": "2020-07-30T19:01:56.6543461Z",
+    "description": "some description",
+    "expirationTime": "2020-12-12T00:00:00Z",
+    "generateAlert": true,
+    "historicalDetection": false,
+    "id": "11",
+    "indicatorType": "Url",
+    "indicatorValue": "http://google.com",
+    "lastUpdateTime": "2020-07-30T19:02:10.9680026Z",
+    "lastUpdatedBy": "82f42fca-e931-4f03-b54c-47af94bd394d",
+    "mitreTechniques": [],
+    "rbacGroupIds": [],
+    "rbacGroupNames": [],
+    "recommendedActions": "nothing",
+    "severity": "Informational",
+    "source": "WindowsDefenderATPSiemConnector",
+    "sourceType": "AadApp",
+    "title": "Title"
+  }
+}
+```
+
+#### Get Machine Vulnerabilities
+
+This action retrieves a collection of discovered vulnerabilities related to a given device.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|machine|string|None|True|Machine IP address, hostname or machine ID|None|9de5069c5afe602b2ea0a04b66beb2c0cef77fdf|
+
+Example input:
+
+```
+{
+  "machine": "9de5069c5afe602b2ea0a04b66beb2c0cef77fdf"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|vulnerabilities|[]vulnerability|True|List of vulnerabilities of the machine|
+
+Example output:
+
+```
+{
+  "vulnerabilities": [
+    {
+      "id": "CVE-2020-14711",
+      "name": "CVE-2020-14711",
+      "description": "Vulnerability in the Oracle VM VirtualBox product of Oracle Virtualization (component: Core).  Supported versions that are affected are Prior to 5.2.44, prior to 6.0.24 and  prior to 6.1.12. Easily exploitable vulnerability allows high privileged attacker with logon to the infrastructure where Oracle VM VirtualBox executes to compromise Oracle VM VirtualBox.  Successful attacks require human interaction from a person other than the attacker. Successful attacks of this vulnerability can result in takeover of Oracle VM VirtualBox.  Note: The CVE-2020-14711 is applicable to macOS host only. CVSS 3.1 Base Score 6.5 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:H/A:H).",
+      "severity": "Medium",
+      "cvssV3": 6.5,
+      "exposedMachines": 1,
+      "publishedOn": "2020-07-14T00:00:00Z",
+      "updatedOn": "2020-07-27T22:00:00Z",
+      "publicExploit": false,
+      "exploitVerified": false,
+      "exploitInKit": false,
+      "exploitTypes": [],
+      "exploitUris": []
+    }
+  ]
+}
+
+```
+
+#### Find Machines with Installed Software
+
+This action is used to retrieve a list of device references that have specific software installed.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|software|string|None|True|Name of the software to be searched|None|microsoft-_-edge|
+
+Example input:
+
+```
+{
+  "software": "microsoft-_-edge"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|machines|[]machine_software|True|List of machines with provided software|
+
+Example output:
+
+```
+{
+  "machines": [
+    {
+      "computerDnsName": "mseewin10",
+      "id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+      "osPlatform": "Windows10",
+      "rbacGroupId": 0
+    }
+  ]
+}
+```
+
+#### Get Machine Information
+
+This action is used to get details about a machine from its ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+
+Example input:
+
+```
+{
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|machine|machine|True|Machine information|
+
+Example output:
+
+```
+{
+  "machine": {
+    "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#Machines/$entity",
+    "id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+    "computerDnsName": "desktop-qo15on7",
+    "firstSeen": "2020-06-26T19:54:48.0962745Z",
+    "lastSeen": "2020-07-02T18:34:23.1871866Z",
+    "osPlatform": "Windows10",
+    "osProcessor": "x64",
+    "version": "2004",
+    "lastIpAddress": "198.51.100.100",
+    "lastExternalIpAddress": "198.51.100.100",
+    "agentVersion": "10.7150.19041.153",
+    "osBuild": 19041,
+    "healthStatus": "Active",
+    "rbacGroupId": 0,
+    "riskScore": "Medium",
+    "exposureLevel": "Low",
+    "machineTags": []
+  }
+}
+```
+
+#### Get Files from Alert
+
+This action is used to retrieve a list of file information objects related to an alert.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|alert_id|string|None|True|Alert ID to get files from|None|da637293198146839977_2089064327|
+
+Example input:
+
+```
+{
+  "alert_id": "da637293198146839977_2089064327"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|file_list|[]file_type|True|The file ID related to the given alert ID|
+
+Example output:
+
+```
+{
+  "file_list": [
+    {
+      "sha1": "f093e7767bb63ac973b697d3fd1d40a78b87b8bf",
+      "sha256": "470a75fe3da2ddf9d27fb3f9c96e6c665506ea7ba26ab89f0c89606f678ae4a2",
+      "md5": "a69acb01b99959efec7c0a2a8caa7545",
+      "globalPrevalence": 437,
+      "globalFirstObserved": "2015-11-01T02:48:27.1103102Z",
+      "globalLastObserved": "2020-07-05T07:58:26.8760293Z",
+      "size": 740544,
+      "isPeFile": true,
+      "signerHash": "006276223396f7510653e20f0d10cd1a5d97176e",
+      "isValidCertificate": false,
+      "determinationType": "Unknown",
+      "determinationValue": "HackTool:MSIL/AutoKms"
+    }
+  ]
 }
 ```
 
@@ -125,17 +370,27 @@ This action is used to isolate a machine from the network, but keep the connecti
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|machine_id|string|None|True|Machine ID|None|
-|isolation_type|string|None|True|Type of isolation to perform on target machine|['Full', 'Selective']|
-|comment|string|None|True|Comment to associate with the isolation action|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|True|Comment to associate with the isolation action|None|Isolated by InsightConnect|
+|isolation_type|string|None|True|Type of isolation to perform on target machine|['Full', 'Selective']|Full|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+
+Example input:
+
+```
+{
+  "comment": "Isolated by InsightConnect",
+  "isolation_type": "Full",
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|machine_isolation_response|machine_action_response|True|A response that includes the result of the action, and supplemental information about the action taken|
+|machine_isolation_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|
 
 Example output:
 
@@ -160,16 +415,25 @@ This action is used to restore network connectivity to a machine.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|machine_id|string|None|True|Machine ID|None|
-|comment|string|None|True|Comment to associate with the unisolate action|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|True|Comment to associate with the unisolate action|None|Unisolated by InsightConnect|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+
+Example input:
+
+```
+{
+  "comment": "Unisolated by InsightConnect",
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|machine_isolation_response|machine_action_response|True|A response that includes the result of the action, and supplemental information about the action taken|
+|machine_isolation_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|
 
 Example output:
 
@@ -194,17 +458,27 @@ This action is used to stop the execution of a file on a machine and delete it.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|machine_id|string|None|True|Machine ID|None|
-|comment|string|None|True|Comment to associate with the stop and quarantine action|None|
-|sha1|string|None|True|Sha1 of the file to stop and quarantine on the machine|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|True|Comment to associate with the stop and quarantine action|None|InsightConnect has stopped a file.|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|sha1|string|None|True|SHA1 hash of the file to stop and quarantine on the machine|None|ad0c0f2fa80411788e81a4567d1d8758b83cd76e|
+
+Example input:
+
+```
+{
+  "comment": "InsightConnect has stopped a file.",
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+  "sha1": "ad0c0f2fa80411788e81a4567d1d8758b83cd76e"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|stop_and_quarantine_response|stop_and_quarantine_response|True|A response that includes the result of the action, and supplemental information about the action taken|
+|stop_and_quarantine_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|
 
 Example output:
 
@@ -232,17 +506,27 @@ This action is used to initiate a Windows Defender antivirus scan on a machine.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|machine_id|string|None|True|Machine ID|None|
-|comment|string|None|True|Comment to associate with the antivirus scan action|None|
-|scan_type|string|None|True|The type of antivirus scan to run|['Full', 'Quick']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|True|Comment to associate with the antivirus scan action|None|InsightConnect has started an antivirus scan.|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|scan_type|string|None|True|The type of antivirus scan to run|['Full', 'Quick']|Full|
+
+Example input:
+
+```
+{
+  "comment": "InsightConnect has started an antivirus scan.",
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+  "scan_type": "Full"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|machine_action_response|machine_action_response|True|A response that includes the result of the action, and supplemental information about the action taken|
+|machine_action_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|
 
 Example output:
 
@@ -267,15 +551,23 @@ This action is used to retrieve details about an action taken on a machine.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|action_id|string|None|True|Action ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|action_id|string|None|True|Action ID|None|ffd1f0cb-68ad-44ea-bf90-d01061b965ec|
+
+Example input:
+
+```
+{
+  "action_id": "ffd1f0cb-68ad-44ea-bf90-d01061b965ec"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|machine_action_response|machine_action_response|True|A response that includes the result of the action, and supplemental information about the action taken|
+|machine_action_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|
 
 Example output:
 
@@ -296,269 +588,66 @@ Example output:
 
 ### Triggers
 
-#### Get Alerts for ID
-
-This trigger is used to get alerts by ID.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id|string|None|True|ID to get|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results|[]alert|True|All alerts that match the given ID|
-
-Example output:
-
-```
-{
-   "results":[
-      {
-         "AlertTime":"2018-11-07T18:59:10.2582627Z",
-         "ComputerDnsName":"xxxxxxxx",
-         "AlertTitle":"Suspicious Powershell commandline",
-         "Category":"SuspiciousActivity",
-         "Severity":"Medium",
-         "AlertId":"636772141692393966_614861963",
-         "LinkToWDATP":"https://securitycenter.windows.com/alert/636772141692393966_614861963",
-         "Sha1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "FileName":"powershell.exe",
-         "FilePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
-         "IoaDefinitionId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
-         "AlertPart":0,
-         "FullId":"636772141692393966_614861963:DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco=",
-         "LastProcessedTimeUtc":"2018-11-07T19:05:01.8993766Z",
-         "Source":"EDR",
-         "Md5":"95000560239032bc68b4c2fdfcdef913",
-         "Sha256":"d3f8fade829d2b7bd596c4504a6dae5c034e789b6a3defbe013bda7d14466677",
-         "LogOnUsers":"XXXXXXXX\\Administrator",
-         "MachineName":"XXXXXX",
-         "InternalIPv4List":"XXX.XXX.XXX.XXX",
-         "InternalIPv6List":"XXXXXXXXXX",
-         "FileHash":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "DeviceID":"c6944fa14970633adeecbabc104167ef12557a6f",
-         "Description":"A suspicious Powershell commandline was found on the machine. This commandline might be used during installation, exploration, or in some cases with lateral movement activities which are used by attackers to invoke modules, download external payloads, and get more information about the system. Attackers usually use Powershell to bypass security protection mechanisms by executing their payload in memory without touching the disk and leaving any trace.\r\nThe process powershell.exe was executing suspicious commandline \r\npowershell.exe  -NoExit -ExecutionPolicy Bypass -WindowStyle Hidden (New-Object System.Net.WebClient).DownloadFile('http://127.0.0.1/1.exe', 'C:\\test-WDATP-test\\invoice.exe'); Start-Process 'C:\\test-WDATP-test\\invoice.exe'",
-         "ExternalId":"418AE8AD3F8A1B26F9D02B09E0583A0AEBAC93E7",
-         "IocUniqueId":"DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco="
-      }
-   ]
-}
-```
-
-#### Get Alerts for Domain
-
-This trigger is used to get alerts by domain.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|domain|string|None|True|Domain to get|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results|[]alert|True|All alerts that match the given domain|
-
-Example output:
-
-```
-{
-   "results":[
-      {
-         "AlertTime":"2018-11-07T18:59:10.2582627Z",
-         "ComputerDnsName":"xxxxxxxx",
-         "AlertTitle":"Suspicious Powershell commandline",
-         "Category":"SuspiciousActivity",
-         "Severity":"Medium",
-         "AlertId":"636772141692393966_614861963",
-         "LinkToWDATP":"https://securitycenter.windows.com/alert/636772141692393966_614861963",
-         "Sha1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "FileName":"powershell.exe",
-         "FilePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
-         "IoaDefinitionId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
-         "AlertPart":0,
-         "FullId":"636772141692393966_614861963:DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco=",
-         "LastProcessedTimeUtc":"2018-11-07T19:05:01.8993766Z",
-         "Source":"EDR",
-         "Md5":"95000560239032bc68b4c2fdfcdef913",
-         "Sha256":"d3f8fade829d2b7bd596c4504a6dae5c034e789b6a3defbe013bda7d14466677",
-         "LogOnUsers":"XXXXXXXX\\Administrator",
-         "MachineName":"XXXXXX",
-         "InternalIPv4List":"XXX.XXX.XXX.XXX",
-         "InternalIPv6List":"XXXXXXXXXX",
-         "FileHash":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "DeviceID":"c6944fa14970633adeecbabc104167ef12557a6f",
-         "Description":"A suspicious Powershell commandline was found on the machine. This commandline might be used during installation, exploration, or in some cases with lateral movement activities which are used by attackers to invoke modules, download external payloads, and get more information about the system. Attackers usually use Powershell to bypass security protection mechanisms by executing their payload in memory without touching the disk and leaving any trace.\r\nThe process powershell.exe was executing suspicious commandline \r\npowershell.exe  -NoExit -ExecutionPolicy Bypass -WindowStyle Hidden (New-Object System.Net.WebClient).DownloadFile('http://127.0.0.1/1.exe', 'C:\\test-WDATP-test\\invoice.exe'); Start-Process 'C:\\test-WDATP-test\\invoice.exe'",
-         "ExternalId":"418AE8AD3F8A1B26F9D02B09E0583A0AEBAC93E7",
-         "IocUniqueId":"DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco="
-      }
-   ]
-}
-```
-
-#### Get Alerts for Actor
-
-This trigger is used to get alerts by an actor.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|actor|string|None|True|Actor to get|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results|[]alert|True|All alerts that match the given actor|
-
-Example output:
-
-```
-{
-   "results":[
-      {
-         "AlertTime":"2018-11-07T18:59:10.2582627Z",
-         "ComputerDnsName":"xxxxxxxx",
-         "AlertTitle":"Suspicious Powershell commandline",
-         "Category":"SuspiciousActivity",
-         "Severity":"Medium",
-         "AlertId":"636772141692393966_614861963",
-         "LinkToWDATP":"https://securitycenter.windows.com/alert/636772141692393966_614861963",
-         "Sha1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "FileName":"powershell.exe",
-         "FilePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
-         "IoaDefinitionId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
-         "AlertPart":0,
-         "FullId":"636772141692393966_614861963:DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco=",
-         "LastProcessedTimeUtc":"2018-11-07T19:05:01.8993766Z",
-         "Source":"EDR",
-         "Md5":"95000560239032bc68b4c2fdfcdef913",
-         "Sha256":"d3f8fade829d2b7bd596c4504a6dae5c034e789b6a3defbe013bda7d14466677",
-         "LogOnUsers":"XXXXXXXX\\Administrator",
-         "MachineName":"XXXXXX",
-         "InternalIPv4List":"XXX.XXX.XXX.XXX",
-         "InternalIPv6List":"XXXXXXXXXX",
-         "FileHash":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "DeviceID":"c6944fa14970633adeecbabc104167ef12557a6f",
-         "Description":"A suspicious Powershell commandline was found on the machine. This commandline might be used during installation, exploration, or in some cases with lateral movement activities which are used by attackers to invoke modules, download external payloads, and get more information about the system. Attackers usually use Powershell to bypass security protection mechanisms by executing their payload in memory without touching the disk and leaving any trace.\r\nThe process powershell.exe was executing suspicious commandline \r\npowershell.exe  -NoExit -ExecutionPolicy Bypass -WindowStyle Hidden (New-Object System.Net.WebClient).DownloadFile('http://127.0.0.1/1.exe', 'C:\\test-WDATP-test\\invoice.exe'); Start-Process 'C:\\test-WDATP-test\\invoice.exe'",
-         "ExternalId":"418AE8AD3F8A1B26F9D02B09E0583A0AEBAC93E7",
-         "IocUniqueId":"DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco="
-      }
-   ]
-}
-```
-
-#### Get Alerts by File Name
-
-This trigger is used to get alerts by file name.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|filename|string|None|True|File name to get|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results|[]alert|True|All alerts that match the given file name|
-
-Example output:
-
-```
-{
-   "results":[
-      {
-         "AlertTime":"2018-11-07T18:59:10.2582627Z",
-         "ComputerDnsName":"xxxxxxxx",
-         "AlertTitle":"Suspicious Powershell commandline",
-         "Category":"SuspiciousActivity",
-         "Severity":"Medium",
-         "AlertId":"636772141692393966_614861963",
-         "LinkToWDATP":"https://securitycenter.windows.com/alert/636772141692393966_614861963",
-         "Sha1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "FileName":"powershell.exe",
-         "FilePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
-         "IoaDefinitionId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
-         "AlertPart":0,
-         "FullId":"636772141692393966_614861963:DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco=",
-         "LastProcessedTimeUtc":"2018-11-07T19:05:01.8993766Z",
-         "Source":"EDR",
-         "Md5":"95000560239032bc68b4c2fdfcdef913",
-         "Sha256":"d3f8fade829d2b7bd596c4504a6dae5c034e789b6a3defbe013bda7d14466677",
-         "LogOnUsers":"XXXXXXXX\\Administrator",
-         "MachineName":"XXXXXX",
-         "InternalIPv4List":"XXX.XXX.XXX.XXX",
-         "InternalIPv6List":"XXXXXXXXXX",
-         "FileHash":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "DeviceID":"c6944fa14970633adeecbabc104167ef12557a6f",
-         "Description":"A suspicious Powershell commandline was found on the machine. This commandline might be used during installation, exploration, or in some cases with lateral movement activities which are used by attackers to invoke modules, download external payloads, and get more information about the system. Attackers usually use Powershell to bypass security protection mechanisms by executing their payload in memory without touching the disk and leaving any trace.\r\nThe process powershell.exe was executing suspicious commandline \r\npowershell.exe  -NoExit -ExecutionPolicy Bypass -WindowStyle Hidden (New-Object System.Net.WebClient).DownloadFile('http://127.0.0.1/1.exe', 'C:\\test-WDATP-test\\invoice.exe'); Start-Process 'C:\\test-WDATP-test\\invoice.exe'",
-         "ExternalId":"418AE8AD3F8A1B26F9D02B09E0583A0AEBAC93E7",
-         "IocUniqueId":"DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco="
-      }
-   ]
-}
-```
-
 #### Get Alerts Matching Key
 
 This trigger is used to get alerts that match a given key to its value.
 
+The valid key names are shown in the example output for this action. The key names and values must be exact case when
+looking for a match.
+
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|key|string|None|True|The key to look for in the alert|None|
-|value|string|None|True|The value to look for in the alert|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|frequency|integer|10|False|Poll frequency in seconds|None|10|
+|key|string|None|True|The key to look for in the alert. This key must match the case shown in the example output section in help|None|assignedTo|
+|value|string|None|True|The value to look for in the alert. The value must match the case of the value returned|None|user@example.com|
+
+Example input:
+
+```
+{
+  "frequency": 10,
+  "key": "assignedTo",
+  "value": "user@example.com"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|[]alert|True|All alerts that contain the given key and match its value|
+|alert|alert|True|An alert that contains the given key and matching value|
 
 Example output:
 
 ```
 {
-   "results":[
-      {
-         "AlertTime":"2018-11-07T18:59:10.2582627Z",
-         "ComputerDnsName":"xxxxxxxx",
-         "AlertTitle":"Suspicious Powershell commandline",
-         "Category":"SuspiciousActivity",
-         "Severity":"Medium",
-         "AlertId":"636772141692393966_614861963",
-         "LinkToWDATP":"https://securitycenter.windows.com/alert/636772141692393966_614861963",
-         "Sha1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "FileName":"powershell.exe",
-         "FilePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
-         "IoaDefinitionId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
-         "AlertPart":0,
-         "FullId":"636772141692393966_614861963:DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco=",
-         "LastProcessedTimeUtc":"2018-11-07T19:05:01.8993766Z",
-         "Source":"EDR",
-         "Md5":"95000560239032bc68b4c2fdfcdef913",
-         "Sha256":"d3f8fade829d2b7bd596c4504a6dae5c034e789b6a3defbe013bda7d14466677",
-         "LogOnUsers":"XXXXXXXX\\Administrator",
-         "MachineName":"XXXXXX",
-         "InternalIPv4List":"XXX.XXX.XXX.XXX",
-         "InternalIPv6List":"XXXXXXXXXX",
-         "FileHash":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "DeviceID":"c6944fa14970633adeecbabc104167ef12557a6f",
-         "Description":"A suspicious Powershell commandline was found on the machine. This commandline might be used during installation, exploration, or in some cases with lateral movement activities which are used by attackers to invoke modules, download external payloads, and get more information about the system. Attackers usually use Powershell to bypass security protection mechanisms by executing their payload in memory without touching the disk and leaving any trace.\r\nThe process powershell.exe was executing suspicious commandline \r\npowershell.exe  -NoExit -ExecutionPolicy Bypass -WindowStyle Hidden (New-Object System.Net.WebClient).DownloadFile('http://127.0.0.1/1.exe', 'C:\\test-WDATP-test\\invoice.exe'); Start-Process 'C:\\test-WDATP-test\\invoice.exe'",
-         "ExternalId":"418AE8AD3F8A1B26F9D02B09E0583A0AEBAC93E7",
-         "IocUniqueId":"DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco="
-      }
-   ]
+   "alert":{
+      "id":"da637292082891366787_322129023",
+      "incidentId":1,
+      "investigationId":1,
+      "assignedTo":"Automation",
+      "severity":"Informational",
+      "status":"Resolved",
+      "investigationState":"Benign",
+      "detectionSource":"WindowsDefenderAv",
+      "category":"Malware",
+      "title":"'EICAR_Test_File' malware was detected",
+      "description":"Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks.\n\nThis detection might indicate that the malware was stopped from delivering its payload. However, it is prudent to check the machine for signs of infection.",
+      "alertCreationTime":"2020-07-01T13:51:29.0741799Z",
+      "firstEventTime":"2020-07-01T13:49:55.2853766Z",
+      "lastEventTime":"2020-07-01T13:49:55.8520351Z",
+      "lastUpdateTime":"2020-07-02T20:11:23.0966667Z",
+      "resolvedTime":"2020-07-01T14:02:24.4812386Z",
+      "machineId":"2df36d707c1ee508xyFf77f3dbfc95db65bc4a73",
+      "computerDnsName":"example-desktop",
+      "aadTenantId":"5c824599-ab2c-43ab-651x-3b886d4f8f10",
+      "comments":[
+
+      ],
+      "evidence":[]
+   }
 }
 ```
 
@@ -568,50 +657,51 @@ This trigger is used to return all new alerts.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|frequency|integer|5|False|Poll frequency in seconds|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|frequency|integer|10|False|Poll frequency in seconds|None|10|
+
+Example input:
+
+```
+{
+  "frequency": 10
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|[]alert|True|All new alerts are returned|
+|alert|alert|True|Alert|
 
 Example output:
 
 ```
 {
-   "results":[
-      {
-         "AlertTime":"2018-11-07T18:59:10.2582627Z",
-         "ComputerDnsName":"xxxxxxxx",
-         "AlertTitle":"Suspicious Powershell commandline",
-         "Category":"SuspiciousActivity",
-         "Severity":"Medium",
-         "AlertId":"636772141692393966_614861963",
-         "LinkToWDATP":"https://securitycenter.windows.com/alert/636772141692393966_614861963",
-         "Sha1":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "FileName":"powershell.exe",
-         "FilePath":"C:\\Windows\\System32\\WindowsPowerShell\\v1.0",
-         "IoaDefinitionId":"7f1c3609-a3ff-40e2-995b-c01770161d68",
-         "AlertPart":0,
-         "FullId":"636772141692393966_614861963:DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco=",
-         "LastProcessedTimeUtc":"2018-11-07T19:05:01.8993766Z",
-         "Source":"EDR",
-         "Md5":"95000560239032bc68b4c2fdfcdef913",
-         "Sha256":"d3f8fade829d2b7bd596c4504a6dae5c034e789b6a3defbe013bda7d14466677",
-         "LogOnUsers":"XXXXXXXX\\Administrator",
-         "MachineName":"XXXXXX",
-         "InternalIPv4List":"XXX.XXX.XXX.XXX",
-         "InternalIPv6List":"XXXXXXXXXX",
-         "FileHash":"1b3b40fbc889fd4c645cc12c85d0805ac36ba254",
-         "DeviceID":"c6944fa14970633adeecbabc104167ef12557a6f",
-         "Description":"A suspicious Powershell commandline was found on the machine. This commandline might be used during installation, exploration, or in some cases with lateral movement activities which are used by attackers to invoke modules, download external payloads, and get more information about the system. Attackers usually use Powershell to bypass security protection mechanisms by executing their payload in memory without touching the disk and leaving any trace.\r\nThe process powershell.exe was executing suspicious commandline \r\npowershell.exe  -NoExit -ExecutionPolicy Bypass -WindowStyle Hidden (New-Object System.Net.WebClient).DownloadFile('http://127.0.0.1/1.exe', 'C:\\test-WDATP-test\\invoice.exe'); Start-Process 'C:\\test-WDATP-test\\invoice.exe'",
-         "ExternalId":"418AE8AD3F8A1B26F9D02B09E0583A0AEBAC93E7",
-         "IocUniqueId":"DEkMrsut7_rqWkwqIaCEcsytUIOl_Dvi56ShSB9wKco="
-      }
-   ]
+   "alert":{
+      "id":"da637292082891366787_322129023",
+      "incidentId":1,
+      "investigationId":1,
+      "assignedTo":"Automation",
+      "severity":"Informational",
+      "status":"Resolved",
+      "investigationState":"Benign",
+      "detectionSource":"WindowsDefenderAv",
+      "category":"Malware",
+      "title":"'EICAR_Test_File' malware was detected",
+      "description":"Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks.\n\nThis detection might indicate that the malware was stopped from delivering its payload. However, it is prudent to check the machine for signs of infection.",
+      "alertCreationTime":"2020-07-01T13:51:29.0741799Z",
+      "firstEventTime":"2020-07-01T13:49:55.2853766Z",
+      "lastEventTime":"2020-07-01T13:49:55.8520351Z",
+      "lastUpdateTime":"2020-07-02T20:11:23.0966667Z",
+      "resolvedTime":"2020-07-01T14:02:24.4812386Z",
+      "machineId":"2df36d707c1ee508xyFf77f3dbfc95db65bc4a73",
+      "computerDnsName":"example-desktop",
+      "aadTenantId":"5c824599-ab2c-43ab-651x-3b886d4f8f10",
+      "comments":[],
+      "evidence":[]
+   }
 }
 ```
 
@@ -625,7 +715,14 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.5.1 - New spec and help.md format for the Hub
+* 4.4.0 - Add new action Get Security Recommendations
+* 4.3.0 - Add new action Get Machine Vulnerabilities
+* 4.2.0 - Add new action Blacklist
+* 4.1.0 - Add new action Find Machines with Installed Software
+* 4.0.0 - Add custom type to output in action Get Machine Information
+* 3.0.0 - Move connection functions to their own util class | Changed `Exception` to `PluginException` | Added error handling around "Action already in progress" state in Isolate Machine, Unisolate Machine, Stop and Quarantine File, and Run Antivirus Scan actions | Rename `machine_id` to `machine` in machine-related actions to support hostnames and IP addresses in addition to machine IDs.
+* 2.0.0 - Update to refactor connection and actions
+* 1.5.1 - New spec and help.md format for the Extension Library
 * 1.5.0 - Fix issue where triggers always returned a blank payload
 * 1.4.0 - New trigger Get Alerts | New action Get Machine Action
 * 1.3.0 - New actions Stop and Quarantine File and Run Antivirus Scan
@@ -640,4 +737,3 @@ This plugin does not contain any troubleshooting information.
 * [Windows Defender ATP](https://www.microsoft.com/en-us/windowsforbusiness/windows-atp)
 * [Windows Defender ATP API Start Page](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/use-apis)
 * [Windows Defender ATP API Endpoints](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/exposed-apis-list)
-

@@ -30,7 +30,7 @@ class ConnectionSchema(komand.Input):
     "default_headers": {
       "type": "object",
       "title": "Default Headers",
-      "description": "Default headers to include in all requests associated with this connection e.g. { User-Agent: Komand }",
+      "description": "Default headers to include in all requests associated with this connection e.g. { User-Agent: InsightConnect }",
       "order": 2
     },
     "ssl_verify": {
@@ -57,12 +57,14 @@ class ConnectionSchema(komand.Input):
           "title": "Password",
           "displayType": "password",
           "description": "The password",
-          "format": "password"
+          "format": "password",
+          "order": 2
         },
         "username": {
           "type": "string",
           "title": "Username",
-          "description": "The username to log in with"
+          "description": "The username to log in with",
+          "order": 1
         }
       },
       "required": [

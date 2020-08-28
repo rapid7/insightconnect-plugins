@@ -1,0 +1,67 @@
+{
+	"spec": "8c145534c75b3830b06f59ac8667464d",
+	"manifest": "7280daa95ea56f830dd832ebc5be0cfe",
+	"setup": "dbe66041fe2ce88bb7e50c61aec5a722",
+	"schemas": [
+		{
+			"identifier": "create_patch_group_and_add_cves/schema.py",
+			"hash": "06e50a9ce549deddcc8a1a467ab60572"
+		},
+		{
+			"identifier": "create_patch_scan_template/schema.py",
+			"hash": "78bb62a5e3f77055e46a6980519579d3"
+		},
+		{
+			"identifier": "get_agent/schema.py",
+			"hash": "bd4900e521eb00ef0c86d6b73fd1fb55"
+		},
+		{
+			"identifier": "get_agent_status/schema.py",
+			"hash": "04de1dd48f8167524309551da6bbdc9e"
+		},
+		{
+			"identifier": "get_agents/schema.py",
+			"hash": "79eee50d7e4264b758433475be282045"
+		},
+		{
+			"identifier": "get_patch_deployment/schema.py",
+			"hash": "1e509a6baadb1be01473919aad6cf8e2"
+		},
+		{
+			"identifier": "get_patch_deployment_template_id/schema.py",
+			"hash": "8f8b04af979211d7da2d89352799f073"
+		},
+		{
+			"identifier": "get_patch_details/schema.py",
+			"hash": "77501bf845fbd281c9007415d7615023"
+		},
+		{
+			"identifier": "get_patch_scan_status/schema.py",
+			"hash": "88247e5f1e9d9fa4eeae0a8030aa6b2f"
+		},
+		{
+			"identifier": "get_scanned_machine_details/schema.py",
+			"hash": "f13b58495b12f1edbedfdb395dd55eba"
+		},
+		{
+			"identifier": "search_patches/schema.py",
+			"hash": "fc344937b62340d0da188153afe688b4"
+		},
+		{
+			"identifier": "start_patch_deployment/schema.py",
+			"hash": "a423b291913b7ba6b191f11400bb9d92"
+		},
+		{
+			"identifier": "start_patch_scan/schema.py",
+			"hash": "4f8149da8fdda6a4657ecbc8f3089371"
+		},
+		{
+			"identifier": "update_patch_group/schema.py",
+			"hash": "9155a31486b858b4a0dfbe051557b3b3"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "321c8a40358f95b991a244fabcdfc1c8"
+		}
+	]
+}

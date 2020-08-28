@@ -7,7 +7,7 @@ vendor: rapid7
 support: rapid7
 status: []
 description: Perform malware analysis with Palo Alto Wildfire
-version: 1.1.1
+version: 1.1.2
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/paloalto_wildfire
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -76,24 +76,28 @@ connection:
       or 10.3.4.50
     default: wildfire.paloaltonetworks.com
     required: true
+    example: wildfire.paloaltonetworks.com
   api_key:
     type: credential_secret_key
     title: Wildfire API Key
     description: Wildfire API Key, available at https://wildfire.paloaltonetworks.com/wildfire/account
       or on your appliance
     required: true
+    example: 5df698b6778e586b704460731b921e52
   proxy:
     type: object
     title: Proxy
     description: An optional dictionary containing proxy data, with HTTPS as the key,
       and the proxy path as the value
     required: false
+    example: '{ "https": "https://proxy.example.com" }'
   verify:
     type: boolean
     title: SSL Verify
     description: Verify the certificate
     default: true
     required: true
+    example: true
 actions:
   submit_file:
     title: Submit File
@@ -105,11 +109,13 @@ actions:
         title: File
         type: bytes
         required: true
+        example: "TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAA..."
       filename:
         title: Filename
         type: string
         description: Optional file name
         required: false
+        example: ImportantCompanyFinancialReport.pdf
     output:
       submission:
         title: Submission
@@ -126,6 +132,7 @@ actions:
         title: URL
         type: string
         required: true
+        example: http://paloaltonetworks.com/folder1/my-file.pdf
     output:
       submission:
         title: Submission
@@ -141,6 +148,7 @@ actions:
         title: URL
         type: string
         required: true
+        example: https://example.com
     output:
       submission:
         title: Submission
@@ -156,6 +164,7 @@ actions:
         title: Hash
         type: string
         required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
       format:
         description: 'Report format: PDF or XML'
         title: Format
@@ -164,6 +173,7 @@ actions:
         - xml
         type: string
         required: true
+        example: pdf
     output:
       report:
         title: Report
@@ -179,6 +189,7 @@ actions:
         title: Hash
         type: string
         required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
     output:
       file:
         title: File
@@ -194,6 +205,7 @@ actions:
         title: Hash
         required: true
         type: string
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
       platform:
         title: Platform
         description: Target analysis environment
@@ -207,6 +219,7 @@ actions:
         - Mac OS X Mountain Lion
         type: string
         required: true
+        example: "Windows XP, Adobe Reader 11, Flash 11, Office 2010"
     output:
       file:
         title: File
@@ -222,6 +235,7 @@ actions:
         title: Hash
         type: string
         required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
     output:
       verdict:
         title: Verdict

@@ -5,18 +5,18 @@ name: urlscan
 title: urlscan.io
 vendor: rapid7
 support: community
-status: [] 
+status: []
 description: Analyze URLs for malicious indicators using the URLScan website scanner
-version: 2.1.4
+version: 2.1.7
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/urlscan
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://urlscan.io/
 tags:
-- url
-- analysis
-- intel
-- urlscan
+  - url
+  - analysis
+  - intel
+  - urlscan
 hub_tags:
   use_cases: [threat_detection_and_response, data_enrichment]
   keywords: [url, analysis, intel, urlscan]
@@ -135,12 +135,164 @@ types:
     screenshotURL:
       type: string
       required: false
+  verdicts:
+    overall:
+      type: object
+      required: false
+    urlscan:
+      type: object
+      required: false
+    engines:
+      type: object
+      required: false
+    community:
+      type: object
+      required: false
+  scan_stats:
+    resourceStats:
+      type: '[]object'
+      required: false
+    protocolStats:
+      type: '[]object'
+      required: false
+    tlsStats:
+      type: '[]object'
+      required: false
+    serverStats:
+      type: '[]object'
+      required: false
+    domainStats:
+      type: '[]object'
+      required: false
+    regDomainStats:
+      type: '[]object'
+      required: false
+    secureRequests:
+      type: integer
+      required: false
+    securePercentage:
+      type: integer
+      required: false
+    IPv6Percentage:
+      type: integer
+      required: false
+    uniqCountries:
+      type: integer
+      required: false
+    totalLinks:
+      type: integer
+      required: false
+    malicious:
+      type: integer
+      required: false
+    adBlocked:
+      type: integer
+      required: false
+    ipStats:
+      type: '[]object'
+      required: false
+  meta:
+    processors:
+      type: object
+      required: false
+  lists:
+    ips:
+      type: '[]object'
+      required: false
+    countries:
+      type: '[]object'
+      required: false
+    asns:
+      type: '[]object'
+      required: false
+    domains:
+      type: '[]object'
+      required: false
+    servers:
+      type: '[]object'
+      required: false
+    urls:
+      type: '[]object'
+      required: false
+    linkDomains:
+      type: '[]object'
+      required: false
+    certificates:
+      type: '[]object'
+      required: false
+    hashes:
+      type: '[]object'
+      required: false
+  scan_page:
+    url:
+      type: string
+      required: false
+    domain:
+      type: string
+      required: false
+    country:
+      type: string
+      required: false
+    city:
+      type: string
+      required: false
+    server:
+      type: string
+      required: false
+    ip:
+      type: string
+      required: false
+    ptr:
+      type: string
+      required: false
+    asn:
+      type: string
+      required: false
+    asnname:
+      type: string
+      required: false
+  scan_task:
+    uuid:
+      type: string
+      required: false
+    time:
+      type: string
+      required: false
+    url:
+      type: string
+      required: false
+    visibility:
+      type: string
+      required: false
+    options:
+      type: object
+      required: false
+    method:
+      type: string
+      required: false
+    source:
+      type: string
+      required: false
+    userAgent:
+      type: string
+      required: false
+    reportURL:
+      type: string
+      required: false
+    screenshotURL:
+      type: string
+      required: false
+    domURL:
+      type: string
+      required: false
+
 connection:
   api_key:
     title: API Key for Saved Scans
     description: urlscan API key. Not required for the search action
     type: credential_secret_key
     required: false
+    example: '{"secretKey": "381cd93b-1946-9c73-1946-c916075eb9a3"}'
 actions:
   search:
     title: Search
@@ -148,28 +300,32 @@ actions:
     input:
       q:
         title: Query
-        description: The query term (ElasticSearch simple query string) e.g domain:urlscan.io,
-          default is *
+        description: The query term (ElasticSearch simple query string), default is *
         type: string
         required: true
+        example: domain:example.com
+        default: domain:example.com
       size:
         title: Size
         description: Number of results returned
         type: integer
         default: 100
         required: true
+        example: 45
       offset:
         title: Offset
         description: Offset of first result (for paginating)
         type: integer
         default: 0
         required: true
+        example: 1
       sort:
         title: Sort
         description: Sorting, specificied via $sort_field:$sort_order
         type: string
         default: _score
         required: true
+        example: _score
     output:
       total:
         title: Total
@@ -190,12 +346,14 @@ actions:
         type: string
         description: The URL to scan
         required: true
+        example: http://www.example.com
       public:
         type: boolean
         title: Public
         description: Set to false for a private scan
         required: true
         default: false
+        example: true
     output:
       scan_id:
         title: Scan ID
@@ -211,9 +369,40 @@ actions:
         type: string
         description: UUID of the scan to retrieve
         required: true
+        example: b1f3dab-ad7e-e2790803d6d0-76wFGijr
     output:
       scan_results:
         title: Scan Results
         description: Results of the scan report
         type: scan_results
+        required: true
+      task:
+        title: Task
+        description: Results of the task
+        type: object
+        required: true
+      page:
+        title: Page
+        description: Results of the page
+        type: object
+        required: true
+      lists:
+        title: Lists
+        description: Results of the lists
+        type: object
+        required: true
+      meta:
+        title: Meta
+        description: Results of the meta
+        type: object
+        required: true
+      stats:
+        title: Stats
+        description: Results of the stats
+        type: object
+        required: true
+      verdicts:
+        title: Verdicts
+        description: Results of the verdicts
+        type: object
         required: true
