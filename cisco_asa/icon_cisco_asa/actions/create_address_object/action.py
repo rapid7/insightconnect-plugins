@@ -28,11 +28,15 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
                 assistance="Address object was RFC 1918 (private)."
             )
 
-        if object_type != "IPv4Range" and whitelist and self.match_whitelist(address, whitelist, object_type):
-            raise PluginException(
-                cause="Address whitelisted.",
-                assistance="Address object matched whitelist."
-            )
+        if object_type != "IPv4Range" and whitelist:
+            whitelisted_item = self.match_whitelist(address, whitelist, object_type)
+            if whitelisted_item:
+                raise PluginException(
+                    cause=f"Address Object not created because the host {address} was "
+                          f"found in the whitelist as {whitelist}.",
+                    assistance=f"If you would like to block this host, remove {whitelisted_item} "
+                               f"from the whitelist and try again."
+                )
 
         self.connection.cisco_asa_api.create_address_object(name, object_type, address)
         return {
@@ -52,13 +56,13 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
 
         return "IPv4Address"
 
-    def match_whitelist(self, address: str, whitelist: list, object_type: str) -> bool:
+    def match_whitelist(self, address: str, whitelist: list, object_type: str) -> str:
         if address in whitelist:
             self.logger.info(f"Whitelist matched\n{address} was found in whitelist")
-            return True
+            return address
 
         if object_type == "IPv4FQDN":
-            return False
+            return ""
 
         # if 1.1.1.1/32 - remove /32
         trimmed_address = re.sub(r"/32$", "", address)
@@ -70,9 +74,9 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
                 ip = ip_address(trimmed_address)
                 if ip in net:
                     self.logger.info(f"Whitelist matched\nIP {address} was found in {item}")
-                    return True
+                    return item
 
-        return False
+        return ""
 
     @staticmethod
     def check_if_private(address: str) -> bool:
