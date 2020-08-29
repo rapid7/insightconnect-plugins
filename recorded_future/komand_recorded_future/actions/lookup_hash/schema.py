@@ -284,7 +284,7 @@ class LookupHashOutput(komand.Output):
           "order": 1
         },
         "value": {
-          "type": "integer",
+          "type": "number",
           "title": "Value",
           "order": 2
         }

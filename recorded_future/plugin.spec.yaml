@@ -9,7 +9,7 @@ status: []
 description: "Recorded Future arms threat analysts, security operators, and incident
   responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7
 InsightConnect, users can search domain lists, entity lists, and more"
-version: 1.5.5
+version: 2.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/recorded_future
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -52,7 +52,7 @@ types:
       type: string
       required: false
     value:
-      type: integer
+      type: float
       required: false
   entities:
     count:
@@ -166,7 +166,7 @@ types:
       type: string
       required: false
     score:
-      type: integer
+      type: float
       required: false
     published:
       type: string
@@ -181,6 +181,28 @@ types:
       title: Access Vector
       type: string
       required: false
+    version:
+      type: string
+      required: false
+  cvssv3:
+    attackComplexity:
+      type: string
+      required: false
+    attackVector:
+      type: string
+      required: false
+  rawrisk:
+    rule:
+      title: "Rule"
+      type: string
+      description: "Rule"
+      required: false
+    timestamp:
+      title: "Timestamp"
+      type: string
+      description: "Timestamp"
+      required: false
+
   vulnerability_search_data:
     counts:
       type: '[]counts'
@@ -225,6 +247,18 @@ types:
       required: false
     timestamps:
       type: timestamps
+      required: false
+    rawrisk:
+      type: '[]rawrisk'
+      required: false
+    commonNames:
+      type: '[]string'
+      required: false
+    cvssv3:
+      type: cvssv3
+      required: false
+    relatedLinks:
+      type: '[]string'
       required: false
   location_data:
     continent:
@@ -349,6 +383,7 @@ connection:
     description: API Key
     required: true
     example: 9de5069c5afe602b2ea0a04b66beb2c0
+
 actions:
   download_domain_risk_list:
     title: Download Domain Risk List
