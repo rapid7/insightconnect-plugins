@@ -6,7 +6,7 @@ from komand_palo_alto_pan_os import connection, actions, triggers
 
 Name = "Palo Alto Firewall"
 Vendor = "rapid7"
-Version = "6.0.0"
+Version = "6.0.1"
 Description = "Manage Palo Alto Networks firewall devices"
 
 

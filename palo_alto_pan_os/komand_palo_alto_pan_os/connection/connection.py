@@ -21,7 +21,10 @@ class Connection(komand.Connection):
         self.request = Request.new_session(self, username, password, hostname, verify_cert)
 
     def test(self):
-        if self.request.key:
-            return {"response": {"message": "Access token obtained"}}
+        if len(self.request.key) > 0:
+            return {
+                "success": True
+            }
         raise ConnectionTestException(
-            preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
+            preset=ConnectionTestException.Preset.USERNAME_PASSWORD
+        )
