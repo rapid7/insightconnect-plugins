@@ -201,7 +201,7 @@ actions:
         example: 198.51.100.100
       address_object:
         title: Address Object
-        description: Name of the address object, defaults to the value address in the address field if no name is given
+        description: Name of the address object, defaults to the value in the address field if no name is given
         type: string
         required: false
         example: MaliciousHost
