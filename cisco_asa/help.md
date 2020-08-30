@@ -70,7 +70,7 @@ Example input:
 ```
 {
   "address": "198.51.100.100",
-  "address_object": "InsightConnect Address Object",
+  "address_object": "MaliciousHost",
   "skip_private_addresses": false,
   "whitelist": [
     "198.51.100.100"
