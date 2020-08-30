@@ -5,10 +5,11 @@ from urllib.parse import urlparse
 from urllib.parse import urljoin
 import urllib
 import datetime, time
-import logging
+from komand.exceptions import PluginException
+
 
 class Investigate(object):
-    BASE_URL = 'https://investigate.api.opendns.com/'
+    BASE_URL = 'https://investigate.api.umbrella.com/'
     SUPPORTED_DNS_TYPES = [
         "A",
         "NS",
@@ -27,30 +28,31 @@ class Investigate(object):
     UNSUPPORTED_DNS_QUERY = "Supported query types are: {}".format(SUPPORTED_DNS_TYPES)
     SEARCH_ERR = "Start argument must be a datetime or a timedelta"
 
-    def __init__(self, api_key, proxies={}):
+    def __init__(self, api_key, logger, proxies={}):
         self.api_key = api_key
+        self.logger = logger
         self.proxies = proxies
         self._uris = {
-            "categorization":       "domains/categorization/",
-            "cooccurrences":        "recommendations/name/{}.json",
-            "domain_rr_history":    "dnsdb/name/{}/{}.json",
-            "ip_rr_history":        "dnsdb/ip/{}/{}.json",
-            "latest_domains":       "ips/{}/latest_domains",
-            "related":              "links/name/{}.json",
-            "security":             "security/name/{}.json",
-            "tags":                 "domains/{}/latest_tags",
-            "whois_email":          "whois/emails/{}",
-            "whois_ns":             "whois/nameservers/{}",
-            "whois_domain":         "whois/{}",
+            "categorization": "domains/categorization/",
+            "cooccurrences": "recommendations/name/{}.json",
+            "domain_rr_history": "dnsdb/name/{}/{}.json",
+            "ip_rr_history": "dnsdb/ip/{}/{}.json",
+            "latest_domains": "ips/{}/latest_domains",
+            "related": "links/name/{}.json",
+            "security": "security/name/{}.json",
+            "tags": "domains/{}/latest_tags",
+            "whois_email": "whois/emails/{}",
+            "whois_ns": "whois/nameservers/{}",
+            "whois_domain": "whois/{}",
             "whois_domain_history": "whois/{}/history",
-            "search":               "search/{}",
-            "samples":              "samples/{}",
-            "sample":               "sample/{}",
-            "sample_artifacts":     "sample/{}/artifacts",
-            "sample_connections":   "sample/{}/connections",
-            "sample_samples":       "sample/{}/samples",
-            "as_for_ip":            "bgp_routes/ip/{}/as_for_ip.json",
-            "prefixes_for_asn":     "bgp_routes/asn/{}/prefixes_for_asn.json"
+            "search": "search/{}",
+            "samples": "samples/{}",
+            "sample": "sample/{}",
+            "sample_artifacts": "sample/{}/artifacts",
+            "sample_connections": "sample/{}/connections",
+            "sample_samples": "sample/{}/samples",
+            "as_for_ip": "bgp_routes/ip/{}/as_for_ip.json",
+            "prefixes_for_asn": "bgp_routes/asn/{}/prefixes_for_asn.json"
         }
         self._auth_header = {"Authorization": "Bearer " + self.api_key}
 
@@ -58,8 +60,11 @@ class Investigate(object):
         '''A generic method to make GET requests to the OpenDNS Investigate API
         on the given URI.
         '''
-        return requests.get(urljoin(Investigate.BASE_URL, uri),
-            params=params, headers=self._auth_header, proxies=self.proxies
+        return requests.get(
+            urljoin(Investigate.BASE_URL, uri),
+            params=params,
+            headers=self._auth_header,
+            proxies=self.proxies
         )
 
     def post(self, uri, params={}, data={}):
@@ -73,9 +78,42 @@ class Investigate(object):
         )
 
     def _request_parse(self, method, *args):
-        r = method(*args)
-        r.raise_for_status()
-        return r.json()
+        response = {"text": ""}
+        try:
+            response = method(*args)
+
+            if response.status_code == 403:
+                raise PluginException(
+                    cause="Unauthorized.",
+                    assistance="Request had Authorization header but token was missing or invalid. "
+                               "Please ensure your API token is valid."
+                )
+            if response.status_code == 404:
+                raise PluginException(
+                    cause="Not found.",
+                    assistance="The requested item doesn't exist, check the syntax of your query or ensure "
+                               "the IP and/or domain are valid."
+                )
+            if response.status_code == 429:
+                raise PluginException(
+                    cause="Too many request.",
+                    assistance="Too many requests received in a given amount of time. "
+                               "You may have exceeded the rate limits for your organization or package."
+                )
+            if 400 <= response.status_code < 500:
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+            if response.status_code >= 500:
+                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+            if 200 <= response.status_code < 300:
+                return response.json()
+
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+        except json.decoder.JSONDecodeError as e:
+            self.logger.info(f"Invalid json: {e}")
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+        except requests.exceptions.HTTPError as e:
+            self.logger.info(f"Call to Cisco Umbrella Investigate failed: {e}")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
 
     def get_parse(self, uri, params={}):
         '''Convenience method to call get() on an arbitrary URI and parse the response
@@ -96,7 +134,9 @@ class Investigate(object):
 
     def _post_categorization(self, domains, labels):
         params = {'showLabels': True} if labels else {}
-        return self.post_parse(self._uris['categorization'], params,
+        return self.post_parse(
+            self._uris['categorization'],
+            params,
             json.dumps(domains)
         )
 
@@ -158,7 +198,10 @@ class Investigate(object):
         For details, see https://sgraph.opendns.com/docs/api#dnsrr_domain
         '''
         if query_type not in Investigate.SUPPORTED_DNS_TYPES:
-            raise PluginException(cause='Unable to retrieve resource record.', assistance=Investigate.UNSUPPORTED_DNS_QUERY)
+            raise PluginException(
+                cause='Unable to retrieve resource record.',
+                assistance=Investigate.UNSUPPORTED_DNS_QUERY
+            )
 
         # if this is an IP address, query the IP
         if Investigate.IP_PATTERN.match(query):
@@ -172,13 +215,16 @@ class Investigate(object):
         IP address, if any. Returns the list of malicious domains.
         '''
         if not Investigate.IP_PATTERN.match(ip):
-            raise PluginException(cause='Unable to retrieve domains for IP address.', assistance='Please try submitting another address.')
+            raise PluginException(
+                cause='Unable to retrieve domains for IP address.',
+                assistance='Please try submitting another address.'
+            )
 
         uri = self._uris["latest_domains"].format(ip)
         resp_json = self.get_parse(uri)
 
         # parse out the domain names
-        return [ val for d in resp_json for key, val in d.iteritems() if key == 'name' ]
+        return [val for d in resp_json for key, val in d.iteritems() if key == 'name']
 
     def domain_whois(self, domain):
         '''Gets whois information for a domain'''
@@ -205,7 +251,12 @@ class Investigate(object):
             params = {'limit': limit, 'offset': offset, 'sortField': sort_field}
         else:
             uri = self._uris["whois_ns"].format('')
-            params = {'nameServerList' : ','.join(nameservers), 'limit': limit, 'offset': offset, 'sortField': sort_field}
+            params = {
+                'nameServerList': ','.join(nameservers),
+                'limit': limit,
+                'offset': offset,
+                'sortField': sort_field
+            }
 
         resp_json = self.get_parse(uri, params=params)
         return resp_json
@@ -219,14 +270,19 @@ class Investigate(object):
             params = {'limit': limit, 'offset': offset, 'sortField': sort_field}
         else:
             uri = self._uris["whois_email"].format('')
-            params = {'emailList' : ','.join(emails), 'limit': limit, 'offset': offset, 'sortField': sort_field}
+            params = {
+                'emailList': ','.join(emails),
+                'limit': limit,
+                'offset': offset,
+                'sortField': sort_field
+            }
 
         resp_json = self.get_parse(uri, params=params)
         return resp_json
 
     def search(self, pattern, start=None, limit=None, include_category=None):
         '''Searches for domains that match a given pattern'''
-        
+
         params = dict()
 
         if start is None:
@@ -238,7 +294,7 @@ class Investigate(object):
             params['start'] = int(time.mktime(start.timetuple()) * 1000)
         else:
             raise PluginException(cause='Unable to retrieve domains for search.', assistance=Investigate.SEARCH_ERR)
-        
+
         if limit is not None and isinstance(limit, int):
             params['limit'] = limit
         if include_category is not None and isinstance(include_category, bool):
@@ -294,7 +350,10 @@ class Investigate(object):
     def as_for_ip(self, ip):
         '''Gets the AS information for a given IP address.'''
         if not Investigate.IP_PATTERN.match(ip):
-            raise PluginException(cause='Unable to retrieve AS for IP address.', assistance='Please try submitting another address.')
+            raise PluginException(
+                cause='Unable to retrieve AS for IP address.',
+                assistance='Please try submitting another address.'
+            )
 
         uri = self._uris["as_for_ip"].format(ip)
         resp_json = self.get_parse(uri)
