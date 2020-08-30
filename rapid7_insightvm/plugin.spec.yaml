@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans
-version: 4.1.0
+version: 4.2.1
 vendor: rapid7
 support: rapid7
 status: []
@@ -2567,7 +2567,7 @@ actions:
         title: Description
         description: Asset group description
         type: string
-        required: false
+        required: true
       searchCriteria:
         title: Search Criteria
         description: 'Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria'
@@ -3632,6 +3632,23 @@ actions:
         title: Success
         description: Was the operation successful
         type: boolean
+        required: true
+  list_inactive_assets:
+    title: List Inactive Assets
+    description: Returns a list of inactive assets (limit 1000) determined by how many days ago they were scanned
+    input:
+      days_ago:
+        title: Days Ago
+        description: How many days ago should an asset be considered still active
+        type: integer
+        example: 14
+        default: 14
+        required: true
+    output:
+      assets:
+        title: Assets
+        description: A list of inactive assets
+        type: "[]asset"
         required: true
 triggers:
   new_scans:

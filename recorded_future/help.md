@@ -34,9 +34,7 @@ Example input:
 
 ```
 {
-  "api_key": {
-      "secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"
-  }
+  "api_key": "{\"secretKey\": \"9de5069c5afe602b2ea0a04b66beb2c0\"}"
 }
 ```
 
@@ -229,9 +227,9 @@ Example input:
 {
   "direction": "asc",
   "freetext": "example",
-  "from": 1,
+  "from": 0,
   "limit": 10,
-  "orderby": Riskscore"
+  "orderby": "Riskscore"
 }
 ```
 
@@ -376,8 +374,8 @@ Example input:
 ```
 {
   "direction": "asc",
-  "freetext": "CVE",
-  "from": 1,
+  "freetext": "example",
+  "from": 0,
   "limit": 10,
   "orderby": "Riskscore"
 }
@@ -448,7 +446,7 @@ Example input:
 {
   "direction": "asc",
   "from": 0,
-  "ip_range": "209.0.0.0/24",
+  "ip_range": "198.51.100.0/24",
   "limit": 10,
   "orderby": "Lastseen"
 }
@@ -549,9 +547,6 @@ This action is used to returns a list of hashes matching a specified risk rule.
 Example input:
 
 ```
-{
-  "list": "positive_malware_verdict"
-}
 ```
 
 ##### Output
@@ -580,7 +575,7 @@ Example input:
 {
   "algorithm": "SHA-1",
   "direction": "asc",
-  "from": 2,
+  "from": 0,
   "limit": 10,
   "orderby": "Riskscore"
 }
@@ -698,7 +693,7 @@ This action is used to return information about a specific domain entry.
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|None|False|Add a comment to a domain|None|Domain look up performed by InsightConnect|
 |domain|string|None|True|Domain|None|example.com|
-|fields|[]string|None|False|List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities" , "risk" , "timestamps"]|None|['sightings', 'threatLists', 'intelCard']|
+|fields|[]string|None|False|List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities" , "risk" , "timestamps"]|None|["sightings", "threatLists", "intelCard"]|
 
 Example input:
 
@@ -706,7 +701,11 @@ Example input:
 {
   "comment": "Domain look up performed by InsightConnect",
   "domain": "example.com",
-  "fields": ["sightings", "threatLists", "intelCard"]
+  "fields": [
+    "sightings",
+    "threatLists",
+    "intelCard"
+  ]
 }
 ```
 
@@ -752,7 +751,7 @@ This action is used to retrieve information about a specified hash.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|None|False|Add a comment to a hash|None|Hash look up performed by InsightConnect|
-|fields|[]string|None|False|List of fields to include with results e.g ["timestamps", "sightings", "threatLists", "analystNotes", "counts", "entity", "hashAlgorithm", "intelCard", "metrics", "relatedEntities", "risk", "timestamps"]|None|['risk', 'timestamps', 'sightings']|
+|fields|[]string|None|False|List of fields to include with results e.g ["timestamps", "sightings", "threatLists", "analystNotes", "counts", "entity", "hashAlgorithm", "intelCard", "metrics", "relatedEntities", "risk", "timestamps"]|None|["risk", "timestamps", "sightings"]|
 |hash|string|None|True|Hash|None|44d88612fea8a8f36de82e1278abb02f|
 
 Example input:
@@ -760,8 +759,12 @@ Example input:
 ```
 {
   "comment": "Hash look up performed by InsightConnect",
-  "hash": "44d88612fea8a8f36de82e1278abb02f",
-  "fields": ["sightings", "risk", "timestamps"]
+  "fields": [
+    "risk",
+    "timestamps",
+    "sightings"
+  ],
+  "hash": "44d88612fea8a8f36de82e1278abb02f"
 }
 ```
 
@@ -834,7 +837,7 @@ This action is used to retrieve information about a specified URL.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|None|False|Add a comment to an IP address lookup for Recorded Future|None|URL look up performed by InsightConnect|
-|fields|[]string|None|False|List of fields to include with results e.g ["sightings", "analystNotes", "counts", "entity", "metrics", "relatedEntities", "risk", "timestamps"]|None|['relatedEntities', 'risk', 'sightings']|
+|fields|[]string|None|False|List of fields to include with results e.g ["sightings", "analystNotes", "counts", "entity", "metrics", "relatedEntities", "risk", "timestamps"]|None|["relatedEntities", "risk", "sightings"]|
 |url|string|None|True|URL|None|https://example.com|
 
 Example input:
@@ -842,8 +845,12 @@ Example input:
 ```
 {
   "comment": "URL look up performed by InsightConnect",
-  "url": "https://www.example.com",
-  "fields": ['relatedEntities', 'risk', 'sightings']
+  "fields": [
+    "relatedEntities",
+    "risk",
+    "sightings"
+  ],
+  "url": "https://example.com"
 }
 ```
 
@@ -1081,15 +1088,19 @@ This action is used to query for data related to a specific IP address.
 |----|----|-------|--------|-----------|----|-------|
 |IP_address|string|None|True|IP address|None|198.51.100.100|
 |comment|string|None|False|Add comment to IP address lookup for Recorded Future|None|IP look up performed by InsightConnect|
-|fields|[]string|None|False|List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities", "riskyCIDRIPs","risk", "location", "timestamps"]|None|['riskyCIDRIPs', 'risk', 'sightings']|
+|fields|[]string|None|False|List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities", "riskyCIDRIPs","risk", "location", "timestamps"]|None|["riskyCIDRIPs", "risk", "sightings"]|
 
 Example input:
 
 ```
 {
-  "comment": "IP look up performed by InsightConnect",
   "IP_address": "198.51.100.100",
-  "fields": ["riskyCIDRIP", "risk", "sightings"]
+  "comment": "IP look up performed by InsightConnect",
+  "fields": [
+    "riskyCIDRIPs",
+    "risk",
+    "sightings"
+  ]
 }
 ```
 
@@ -1302,6 +1313,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.0 - Add risk output to Lookup Vulnerability
 * 1.5.5 - Fix NoneType has no len() | Fix enums in search hashes
 * 1.5.4 - Add example inputs | Fix schema bug where `criticality` output was improperly defined as an integer in List Domain Risk Rules, List Hash Risk Rules, List IP Addresses Risk Rules and List Vulnerability Risk Rules actions
 * 1.5.3 - New spec and help.md format for the Extension Library

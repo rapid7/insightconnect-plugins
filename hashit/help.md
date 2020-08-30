@@ -32,9 +32,17 @@ This action is used to return the supported hashes for a file type.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|bytes|bytes|None|True|Base64 encoded file bytes to hash|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|bytes|bytes|None|True|Base64 encoded file bytes to hash|None|aGVsbG8gd29ybGQ=|
+
+Example input:
+
+```
+{
+  "bytes": "aGVsbG8gd29ybGQ="
+}
+```
 
 ##### Output
 
@@ -64,9 +72,17 @@ This action is used to return the supported hashes for a string.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|string|string|None|True|String of text to hash|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|string|string|None|True|String of text to hash|None|hello world|
+
+Example input:
+
+```
+{
+  "string": "hello world"
+}
+```
 
 ##### Output
 
@@ -104,6 +120,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.4 - Update to v4 Python plugin runtime
 * 2.0.3 - Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Use input and output constants | Remove test from actions
 * 2.0.2 - New spec and help.md format for the Extension Library
 * 2.0.1 - Add `utilities` plugin tag for Marketplace searchability

@@ -54,6 +54,7 @@ from .get_users.action import GetUsers
 from .get_vulnerabilities_by_cve.action import GetVulnerabilitiesByCve
 from .get_vulnerability.action import GetVulnerability
 from .get_vulnerability_affected_assets.action import GetVulnerabilityAffectedAssets
+from .list_inactive_assets.action import ListInactiveAssets
 from .list_reports.action import ListReports
 from .remove_asset_group_tags.action import RemoveAssetGroupTags
 from .remove_asset_tag.action import RemoveAssetTag
