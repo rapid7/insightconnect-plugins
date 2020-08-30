@@ -1,5 +1,5 @@
 import komand
-from .schema import SamplesInput, SamplesOutput
+from .schema import SamplesInput, SamplesOutput, Input
 # Custom imports below
 from komand.exceptions import PluginException
 
@@ -13,7 +13,7 @@ class Samples(komand.Action):
                 output=SamplesOutput())
 
     def run(self, params={}):
-        URL = params.get('URL')
+        URL = params.get(Input.URL)
         limit = params.get('limit', None)
         offset = params.get('offset', None)
         sortby = params.get('sortby', None)
@@ -30,7 +30,7 @@ class Samples(komand.Action):
         try:
             samples = self.connection.investigate.samples(URL, limit=limit, offset=offset, sortby=sortby)
         except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
         return samples
 
     def test(self):

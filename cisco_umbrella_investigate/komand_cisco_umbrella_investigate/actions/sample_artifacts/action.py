@@ -26,7 +26,7 @@ class SampleArtifacts(komand.Action):
         try:
             sample_artifacts = self.connection.investigate.sample_artifacts(hash, limit=limit, offset=offset)
         except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 
         if "error" in sample_artifacts:
             raise PluginException(cause='Unable to return artifact data.', assistance='Only Threat Grid customers have access to artifact data.')

@@ -18,7 +18,7 @@ class Cooccurrences(komand.Action):
         try:
             cooccurrences = self.connection.investigate.cooccurrences(domain)
         except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 
         founded = cooccurrences.get('found')
         if founded:
