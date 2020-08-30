@@ -21,7 +21,7 @@ class Categorization(komand.Action):
         try:
             remoteCategories = self.connection.investigate.categorization(domains, labels=True)
         except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 
         categories = []
         for key, value in remoteCategories.items():

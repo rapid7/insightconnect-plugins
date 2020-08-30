@@ -16,7 +16,7 @@ class Connection(komand.Connection):
     def connect(self, params={}):
         self.logger.info("Connect: Connecting..")
         self.key = params.get('api_key').get('secretKey')
-        self.investigate = investigate.Investigate(self.key)
+        self.investigate = investigate.Investigate(self.key, self.logger)
 
     def test(self):
         # Check key format
