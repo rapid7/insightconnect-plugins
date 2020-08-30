@@ -86,7 +86,7 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
             split_ = address.split("-")
             if len(address.split("-")) != 2:  # If this isn't 2, I'm not sure what the input was
                 raise PluginException(
-                    cause="Wrong input",
+                    cause="Improperly formatted input provided.",
                     assistance="Range should have one and only one dash"
                 )
             return ip_address(split_[0]).is_private and ip_address(split_[1]).is_private
