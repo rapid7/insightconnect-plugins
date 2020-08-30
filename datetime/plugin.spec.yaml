@@ -4,10 +4,11 @@ products: [insightconnect]
 name: datetime
 title: Datetime
 description: This plugin manipulates timestamps using Python's maya library
-version: 2.0.5
+version: 2.1.0
 vendor: rapid7
 support: rapid7
 status: []
+cloud_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/datetime
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -25,9 +26,10 @@ actions:
     input:
       format_string:
         type: string
-        description: 'Format string for the output. Example: %H:%M:%S or %d/%m/%Y'
+        description: Format string for the output
         required: true
         default: '%d %b %Y %H:%M:%S'
+        example: '%d %b %Y %H:%M:%S'
       use_rfc3339_format:
         title: Use RFC3339 Format
         type: boolean
@@ -35,6 +37,7 @@ actions:
           most compatible date format for timestamp manipulation. Enabling this will
           override the format string input
         required: true
+        example: true
     output:
       datetime:
         type: string
@@ -54,36 +57,43 @@ actions:
         type: date
         description: Datetime from which to subtract from
         required: true
+        example: 22 Jul 2020 21:20:33
       years:
         type: integer
         description: How many years to subtract from the specified Datetime
         required: true
         default: 0
+        example: 0
       months:
         type: integer
         description: How many months to subtract from the specified Datetime
         required: true
         default: 0
+        example: 0
       days:
         type: integer
         description: How many days to subtract from the specified Datetime
         required: true
         default: 0
+        example: 0
       hours:
         type: integer
         description: How many hours to subtract from the specified Datetime
         required: true
         default: 0
+        example: 0
       minutes:
         type: integer
         description: How many minutes to subtract from the specified Datetime
         required: true
         default: 0
+        example: 0
       seconds:
         type: integer
         description: How many seconds to subtract from the specified Datetime
         required: true
         default: 0
+        example: 0
     output:
       date:
         type: date
@@ -98,36 +108,43 @@ actions:
         type: date
         description: Datetime with which to add to
         required: true
+        example: 22 Jul 2020 21:20:33
       years:
         type: integer
         description: How many years to add to the specified Datetime
         required: true
         default: 0
+        example: 0
       months:
         type: integer
         description: How many months to add to the specified Datetime
         required: true
         default: 0
+        example: 0
       days:
         type: integer
         description: How many days to add to the specified Datetime
         required: true
         default: 0
+        example: 0
       hours:
         type: integer
         description: How many hours to add to the specified Datetime
         required: true
         default: 0
+        example: 0
       minutes:
         type: integer
         description: How many minutes to add to the specified Datetime
         required: true
         default: 0
+        example: 0
       seconds:
         type: integer
         description: How many seconds to add to the specified Datetime
         required: true
         default: 0
+        example: 0
     output:
       date:
         type: date
@@ -142,6 +159,7 @@ actions:
         type: number
         description: Epoch as integer or float
         required: true
+        example: 1595452833
     output:
       date:
         type: date
@@ -157,6 +175,7 @@ actions:
         type: date
         description: Date in RFC3339 format
         required: true
+        example: 22 Jul 2020 21:09:09
     output:
       epoch:
         title: Epoch
@@ -172,11 +191,13 @@ actions:
         type: date
         description: First date
         required: true
+        example: 2020-07-22T21:20:33.0Z
       second_time:
         title: Second Date
         type: date
         description: Second date
         required: true
+        example: 2022-07-22T21:20:33.0Z
       result_unit:
         title: Result Unit
         type: string
@@ -189,6 +210,7 @@ actions:
         - Hours
         - Minutes
         - Seconds
+        example: Years
     output:
       difference:
         title: Difference
@@ -200,3 +222,48 @@ actions:
         type: string
         description: Time unit of measurement
         required: true
+  to_localtime:
+    title: To Localtime
+    description: Convert time from UTC to localtime
+    input:
+      base_time:
+        title: Base Time
+        description: Datetime to convert, eg. 22 Jul 2020 21:20:33. Milliseconds is not supported
+        type: date
+        required: true
+        example: 22 Jul 2020 21:20:33
+      timezone:
+        title: Timezone
+        description: Timezone to convert from UTC to localtime
+        type: string
+        required: true
+        example: US/Eastern
+    output:
+      converted_date:
+        title: Converted Date
+        description: Date in localtime
+        type: date
+        required: true
+  to_utc:
+    title: To UTC
+    description: Convert time from localtime to UTC
+    input:
+      base_time:
+        title: Base Time
+        description: Datetime to convert, eg. 22 Jul 2020 21:20:33. Milliseconds is not supported
+        type: date
+        required: true
+        example: 22 Jul 2020 21:20:33
+      timezone:
+        title: Timezone
+        description: Timezone to convert from localtime
+        type: string
+        required: true
+        example: US/Eastern
+    output:
+      converted_date:
+        title: Converted Date
+        description: Date in UTC
+        type: date
+        required: true
+

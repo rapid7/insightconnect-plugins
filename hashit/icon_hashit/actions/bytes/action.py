@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 import base64
 import hashlib
 from .schema import BytesInput, BytesOutput, Input, Output, Component
@@ -7,7 +7,7 @@ from .schema import BytesInput, BytesOutput, Input, Output, Component
 # Custom imports below
 
 
-class Bytes(komand.Action):
+class Bytes(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

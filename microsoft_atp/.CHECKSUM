@@ -1,8 +1,16 @@
 {
-	"spec": "c1156db3c7024267bfd8b1f3fe54b58c",
-	"manifest": "7b54429adc4eb179350cb505027c9331",
-	"setup": "4b8c44a10fdddafc3d67008e5a05060c",
+	"spec": "4592240c9531fe950f8c36fed94eaca1",
+	"manifest": "8996c4ad2ffec65dc94b46aca1bf821f",
+	"setup": "39a1d5700a6fcc50134cbf1cc8db3613",
 	"schemas": [
+		{
+			"identifier": "blacklist/schema.py",
+			"hash": "0d32433aef2c9482f5a5498766193b5c"
+		},
+		{
+			"identifier": "find_machines_with_installed_software/schema.py",
+			"hash": "d981612bfde23566c6a463963425f6a9"
+		},
 		{
 			"identifier": "get_file_id_from_alert_id/schema.py",
 			"hash": "e5288fd810dc0856a26733180d957e32"
@@ -13,23 +21,31 @@
 		},
 		{
 			"identifier": "get_machine_information/schema.py",
-			"hash": "5debc70afde9a82671e5e4d142c2a759"
+			"hash": "dd8224ada56bb03f9b5760f95cf99301"
+		},
+		{
+			"identifier": "get_machine_vulnerabilities/schema.py",
+			"hash": "d6eb96785b6c62866a0210fa968d937c"
+		},
+		{
+			"identifier": "get_security_recommendations/schema.py",
+			"hash": "103ef019f8834ac9c95dd93950fff700"
 		},
 		{
 			"identifier": "isolate_machine/schema.py",
-			"hash": "fdc6f5b6ae4a472206229aed9f8e5cfd"
+			"hash": "b4df0cbd0f9af92eebf70df357134ab8"
 		},
 		{
 			"identifier": "run_antivirus_scan/schema.py",
-			"hash": "8ad8695735c2202735ddec208ba4f21d"
+			"hash": "c48880138c6abf1c2657a2809e0d99d6"
 		},
 		{
 			"identifier": "stop_and_quarantine_file/schema.py",
-			"hash": "1377a6e9e61f36f006c3cff3cf7bca00"
+			"hash": "e81fc53693233cd65f3f6f43f0838264"
 		},
 		{
 			"identifier": "unisolate_machine/schema.py",
-			"hash": "117bfa596d0f855a8cb4f92cf967e766"
+			"hash": "ab29c152d5761e1ad224cc81c40b05eb"
 		},
 		{
 			"identifier": "connection/schema.py",

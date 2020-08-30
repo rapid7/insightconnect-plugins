@@ -6,7 +6,7 @@ from komand_jira import connection, actions, triggers
 
 Name = "Jira"
 Vendor = "rapid7"
-Version = "6.0.1"
+Version = "6.0.3"
 Description = "Automate the creation, search and management of issues, users, and alerting for Jira Software, Jira Server, and Jira ServiceDesk"
 
 

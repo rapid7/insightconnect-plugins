@@ -1,4 +1,4 @@
-FROM komand/python-pypy3-plugin:2
+FROM rapid7/insightconnect-python-3-38-slim-plugin:4
 # The three supported python parent images are:
 # - komand/python-2-plugin
 # - komand/python-3-plugin
@@ -8,6 +8,8 @@ FROM komand/python-pypy3-plugin:2
 
 # Add any custom package dependencies here
 # NOTE: Add pip packages to requirements.txt
+
+RUN apk add git
 
 # End package dependencies
 

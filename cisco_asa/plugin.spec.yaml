@@ -1,0 +1,191 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: cisco_asa
+title: Cisco Adaptive Security Appliance
+description: The Cisco ASA plugin allows you to automate the management of network objects
+version: 1.3.0
+vendor: rapid7
+support: community
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cisco_asa
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.cisco.com
+tags:
+- asa
+- firewall
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [cisco, asa, firewall]
+  features: []
+
+types:
+  host:
+    kind:
+      title: Kind
+      type: string
+      description: Kind is the type of object e.g. IPv4Address, IPv4FQDN, etc.
+      required: false
+    value:
+      title: Value
+      type: string
+      description: The value of the object. This will be the actual IPv4, IPv6, FQDN, etc. address the object refers to.
+      required: false
+  address_objects:
+    host:
+      title: Host
+      type: host
+      description: Host
+      required: false
+    kind:
+      title: Kind
+      type: string
+      description: Kind
+      required: false
+    name:
+      title: Object Name
+      type: string
+      description: The name of the object
+      required: false
+    objectId:
+      title: Object ID
+      type: string
+      description: Object ID
+      required: false
+    selfLink:
+      title: Self Link
+      type: string
+      description: Self link
+      required: false
+
+connection:
+  credentials:
+    title: Credentials
+    description: Username and password
+    type: credential_username_password
+    required: true
+    example: '{"username": "admin", "password": "mypassword"}'
+  url:
+    title: URL
+    description: API Access URL
+    type: string
+    required: true
+    example: 'https://example.com'
+  ssl_verify:
+    title: TLS / SSL Verify
+    description: Validate TLS / SSL certificate
+    type: boolean
+    default: true
+    required: false
+    example: true
+  port:
+    title: Port
+    description: The port number for provided host
+    type: integer
+    default: 443
+    required: false
+    example: 443
+  user_agent:
+    title: User Agent
+    description: User agent for provided host
+    type: string
+    default: REST API Agent
+    required: false
+    example: REST API Agent
+
+actions:
+  check_if_address_object_in_group:
+    title: Check If Address in Group
+    description: Checks to see if an IP address, CIDR IP address, or domain is in a Group
+    input:
+      group:
+        title: Group
+        description: Name of address group to check
+        type: string
+        example: InsightConnect Block List
+        required: true
+      address:
+        title: Address
+        description: IP, CIDR, or domain name when Enable Search is off or Address Object name, object ID, IP, CIDR, or domain name if Enable Search is on
+        type: string
+        example: 198.51.100.100
+        required: true
+      enable_search:
+        title: Enable Search
+        description: Set to true to search contents of object by its name, ID, IP, CIDR, or domain name
+        type: boolean
+        example: false
+        default: false
+        required: true
+    output:
+      found:
+        title: Found
+        description: Was address found in group
+        type: boolean
+        required: true
+      address_objects:
+        title: Address Objects
+        description: List of found address objects
+        type: "[]address_objects"
+        required: false
+  remove_address_from_group:
+    title: Remove Address from Group
+    description: Remove an address from a group
+    input:
+      address:
+        title: Address
+        description: The IP address or FQDN to remove from group
+        type: string
+        required: true
+        example: 198.51.100.100
+      group:
+        title: Group
+        description: Name of the group to remove the address from
+        type: string
+        required: true
+        example: InsightConnect Block List
+    output:
+      success:
+        title: Success
+        description: Success if address removed from group
+        type: boolean
+        required: true
+  delete_address_object:
+    title: Delete Address Object
+    description: Delete an Address Object
+    input:
+      address_object:
+        title: Address Object
+        description: Name of the address object to delete
+        type: string
+        required: true
+        example: MaliciousDomain
+    output:
+      success:
+        title: Success
+        description: Success if address object deleted
+        type: boolean
+        required: true
+  add_address_to_group:
+    title: Add Address to Group
+    description: Add an Object to a Network Group by the Object IP address
+    input:
+      address:
+        title: Address
+        description: Name of the address, which can be an IPv4 or IPv6 address
+        type: string
+        required: true
+        example: 198.51.100.100
+      group:
+        title: Group
+        description: Name of the group to add the address to
+        type: string
+        required: true
+        example: InsightConnect Block List
+    output:
+      success:
+        title: Success
+        description: Success if address add to group
+        type: boolean
+        required: true

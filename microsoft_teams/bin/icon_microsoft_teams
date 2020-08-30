@@ -6,7 +6,7 @@ from icon_microsoft_teams import connection, actions, triggers
 
 Name = "Microsoft Teams"
 Vendor = "rapid7"
-Version = "2.0.5"
+Version = "2.2.0"
 Description = "The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users"
 
 

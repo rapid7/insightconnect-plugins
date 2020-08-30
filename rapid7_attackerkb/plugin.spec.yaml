@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_attackerkb
 title: Rapid7 AttackerKB
 description: AttackerKB is a knowledge base of vulnerabilities and informed opinions on what makes them valuable (or not) targets for exploitation
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: rapid7
 status: []
@@ -34,7 +34,7 @@ types:
       type: float
       required: false
       example: 4
-  tags:
+  metadata:
     commonEnterprise:
       title: Common Enterprise
       description: "The 'Common in enterprise' score"
@@ -107,6 +107,19 @@ types:
       type: float
       required: false
       example: 0
+  tags:
+    id:
+      title: ID
+      description: ID
+      type: string
+      required: false
+      example: 0
+    metadata:
+      title: Metadata
+      description: Metadata
+      type: metadata
+      required: false
+      example: 0
   topic:
     created:
       title: Created
@@ -164,7 +177,7 @@ types:
     tags:
       title: Tags
       description: The frequencies with which various tags appear on assessments
-      type: tags
+      type: '[]tags'
       required: false
   assessment:
     created:

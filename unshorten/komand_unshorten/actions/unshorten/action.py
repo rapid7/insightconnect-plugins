@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import UnshortenInput, UnshortenOutput, Input, Output, Component
 # Custom imports below
 import requests
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class Unshorten(komand.Action):
+class Unshorten(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

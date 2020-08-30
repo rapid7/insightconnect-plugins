@@ -29,9 +29,10 @@ class AnyRunAPI:
 
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.API_KEY)
+            if response.status_code == 429:
+                raise PluginException(preset=PluginException.Preset.RATE_LIMIT)
             if response.status_code >= 400:
-                response_data = response.json()
-                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response_data.message)
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
             if 200 <= response.status_code < 300:
                 return response.json()
 

@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import FilterStringInput, FilterStringOutput, Input, Output, Component
 # Custom imports below
 from komand_csv.util import utils
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class FilterString(komand.Action):
+class FilterString(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
