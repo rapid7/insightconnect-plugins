@@ -24,7 +24,7 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
         object_type = self.determine_address_type(address)
         if skip_private and object_type != "fqdn" and self.check_if_private(address):
             raise PluginException(
-                cause="Private address found.",
+                cause="Unable to create object for provided RFC 1918 (private) address.",
                 assistance="Address object was RFC 1918 (private)."
             )
 
