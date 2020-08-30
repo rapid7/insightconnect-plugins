@@ -1130,7 +1130,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 3.0.0 - Add `input` and `output` examples | Add `title` in `input` and `output` actions in plugin.spec | Update domain name in `investigate.py` | Improve error handling | Change `input` names to lowercase in action Latest Malicious Domains by IP, DNS RR History for IP Address and Samples by Domain
+* 3.0.0 - Add action input and output examples to documentation | Set `title` in action input and output sections in schema | Update domain name in `investigate.py` | Improve error handling | Change action input names to lowercase in action Latest Malicious Domains by IP, DNS RR History for IP Address and Samples by Domain
 * 2.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Co-occurrences
 * 1.0.2 - Added change allowing categorization to work with a Tier1 API key by utilizing the single domain API endpoint instead of the bulk API endpoint when a single-element array of domains is passed in
 * 1.0.1 - Add connection test | Fix where connection was returning "Wrong api_key" on valid keys | Run plugin as least privileged user | Update to use the `komand/python-3-slim-plugin` Docker image to reduce plugin size
@@ -1145,4 +1145,3 @@ This plugin does not contain any troubleshooting information.
 * [Cisco Umbrella Investigate](https://learn-umbrella.cisco.com/threat-intelligence/cisco-umbrella-investigate-overview)
 * [Python OpenDNS Investigate](https://github.com/opendns/pyinvestigate)
 * [Authentication](https://docs.umbrella.com/developer/enforcement-api/authentication-and-versioning/)
-
