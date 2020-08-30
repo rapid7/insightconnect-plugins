@@ -73,7 +73,7 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
                 net = ip_network(item, False)  # False means ignore the masked bits, otherwise they need to be 0
                 ip = ip_address(trimmed_address)
                 if ip in net:
-                    self.logger.info(f"Whitelist matched\nIP {address} was found in {item}")
+                    self.logger.info(f"Whitelist matched\nIP {address} was found in {item}.")
                     return item
 
         return ""
