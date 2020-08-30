@@ -19,12 +19,6 @@ This plugin utilizes the [Microsoft ATP API](https://docs.microsoft.com/en-us/wi
 
 ## Setup
 
-This plugin uses the Windows Defender ATP API. It will use an Azure application to connect to the API and run
-actions from InsightConnect.
-
-For information on how to setup your application and assign permissions go here:
-https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp
-
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -110,8 +104,8 @@ This action is used to submit or update new indicator.
 |----|----|-------|--------|-----------|----|-------|
 |action|string|AlertAndBlock|False|The action that will be taken if the indicator will be discovered in the organization|['Alert', 'AlertAndBlock', 'Allowed']|AlertAndBlock|
 |application|string|None|False|The application associated with the indicator|None|demo-test|
-|description|string|None|False|Description of the indicator|None|description|
-|expiration_time|string|None|False|The expiration time of the indicator|None|2020-12-12T00:00:00Z|
+|description|string|Indicator Blacklisted from InsightConnect|False|Description of the indicator|None|Indicator Blacklisted from InsightConnect|
+|expiration_time|string|None|False|The expiration time of the indicator, default value is one year from now|None|2020-12-12T00:00:00Z|
 |indicator|string|None|True|A supported indicator to blacklist or unblacklist. Supported indicators are IP addresses, URLs, domains, and SHA1 and SHA256 hashes|None|220e7d15b011d7fac48f2bd61114db1022197f7f|
 |indicator_state|boolean|False|False|True to add indicator, false to remove it from the list|None|True|
 |rbac_group_names|[]string|None|False|List of RBAC group names the indicator would be applied to|None|["group1","group2"]|
@@ -125,14 +119,11 @@ Example input:
 {
   "action": "AlertAndBlock",
   "application": "demo-test",
-  "description": "description",
+  "description": "Indicator Blacklisted from InsightConnect",
   "expiration_time": "2020-12-12T00:00:00Z",
   "indicator": "220e7d15b011d7fac48f2bd61114db1022197f7f",
   "indicator_state": true,
-  "rbac_group_names": [
-    "group1",
-    "group2"
-  ],
+  "rbac_group_names": "[\"group1\",\"group2\"]",
   "recommended_actions": "nothing",
   "severity": "High",
   "title": "test"
@@ -607,9 +598,7 @@ Example input:
 
 ```
 {
-  "frequency": 10,
-  "key": "assignedTo",
-  "value": "user@example.com"
+  "frequency": 10
 }
 ```
 
@@ -715,6 +704,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.4.1 - Add validation MD5 hash in Blacklist action | Set default value for Title, Expiration Time and Description input in action Blacklist
 * 4.4.0 - Add new action Get Security Recommendations
 * 4.3.0 - Add new action Get Machine Vulnerabilities
 * 4.2.0 - Add new action Blacklist
