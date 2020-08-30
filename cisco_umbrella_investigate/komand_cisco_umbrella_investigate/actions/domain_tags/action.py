@@ -17,7 +17,7 @@ class DomainTags(komand.Action):
         try:
             domain_tags = self.connection.investigate.domain_tags(domain)
         except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 
         if not domain_tags:
             self.logger.info("DomainTags: Run: No results")
