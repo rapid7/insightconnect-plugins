@@ -191,11 +191,11 @@ actions:
         required: true
   create_address_object:
     title: Create Address Object
-    description: Create address object by the object IP address
+    description: Create address object by the object IPv4 address, IPv6 address, CIDR, range, or domain name
     input:
       address:
         title: Address
-        description: IP, CIDR, or domain name to assign to the address object
+        description: IPv4 address, IPv6 address, CIDR, range, or domain name to assign to the address object
         type: string
         required: true
         example: 198.51.100.100

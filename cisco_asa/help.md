@@ -60,8 +60,8 @@ This action is used to create Address Object by the Object IP address.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|IP, CIDR, or domain name to assign to the address object|None|198.51.100.100|
-|address_object|string|None|False|Name of the address object, defaults to the value address in the address field if no name is given|None|InsightConnect Address Object|
+|address|string|None|True|IPv4 address, IPv6 address, CIDR, range, or domain name to assign to the address object|None|198.51.100.100|
+|address_object|string|None|False|Name of the address object, defaults to the value in the address field if no name is given|None|MaliciousHost|
 |skip_private_addresses|boolean|None|False|If set to true, any addresses that are defined in the RFC1918 space will not be blocked. e.g. 10/8, 172.16/12, 192.168/16|None|False|
 |whitelist|[]string|None|False|This list contains a set of hosts that should not be blocked. This can include IPs, CIDRs, and domains|None|["198.51.100.100"]|
 
