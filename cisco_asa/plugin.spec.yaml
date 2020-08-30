@@ -204,7 +204,7 @@ actions:
         description: Name of the address object, defaults to the value address in the address field if no name is given
         type: string
         required: false
-        example: InsightConnect Address Object
+        example: MaliciousHost
       skip_private_addresses:
         title: Skip Private Addresses
         description: If set to true, any addresses that are defined in the RFC1918 space will not be blocked. e.g. 10/8, 172.16/12, 192.168/16
