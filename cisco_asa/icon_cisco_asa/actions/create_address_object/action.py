@@ -58,7 +58,7 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
 
     def match_whitelist(self, address: str, whitelist: list, object_type: str) -> str:
         if address in whitelist:
-            self.logger.info(f"Whitelist matched\n{address} was found in whitelist")
+            self.logger.info(f"Whitelist matched\n{address} was found in whitelist.")
             return address
 
         if object_type == "IPv4FQDN":
