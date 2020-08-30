@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 3.0.0
+version: 3.1.0
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
@@ -1534,23 +1534,23 @@ actions:
     title: Threats Fetch File
     description: Fetch a file associated with the threat that matches the filter. Your user role must have permissions to Fetch Threat File - Admin, IR Team, SOC
     input:
+      id:
+        title: ID
+        description: Threat ID
+        type: integer
+        required: true
       password:
         title: Password
         description: File encryption password, min. length 10 characters and cannot contain whitespace
         type: string
         required: true
         example: "Rapid7 Insightconnect"
-      filter:
-        title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
-        type: object
-        required: true
     output:
-      affected:
-        title: Affected
-        description: Number of entities affected by the requested operation
-        type: integer
-        required: false
+      file:
+        title: File
+        description: File of data to be imported into Anomali ThreatStream
+        type: file
+        required: true
 
 triggers:
   get_threats:

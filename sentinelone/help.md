@@ -11,6 +11,7 @@ This plugin utilizes the SentinelOne API, the documentation is located in the Se
 * Blacklist hashes
 * Trigger workflows on security alerts
 * Manage threats
+* Fetch Threats File
 
 # Requirements
 
@@ -46,7 +47,7 @@ This action is used to fetch a file associated with the threat that matches the 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|None|
+|id|integer|None|True|Threat ID|None|None|
 |password|string|None|True|File encryption password, min. length 10 characters and cannot contain whitespace|None|Rapid7 Insightconnect|
 
 Example input:
@@ -61,7 +62,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|file|file|True|File of data to be imported into Anomali ThreatStream|
 
 Example output:
 
@@ -601,11 +602,6 @@ This action is used to add hashed content to global blacklist. The input makes u
 Example input:
 
 ```
-{
-  "blacklist_state": true,
-  "description": "Hash Blacklisted from InsightConnect",
-  "hash": "3395856ce81f2b7382dee72602f798b642f14140"
-}
 ```
 
 ##### Output
@@ -1493,6 +1489,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.0 - Add new action Threats Fetch File
 * 3.0.0 - Update help.md for the Extension Library | Update title in action Blacklist by IOC Hash, Get Activities, Count Summary and Connect to Network
 * 2.1.1 - Upgrade trigger Get Threats to only return threats since trigger start
 * 2.1.0 - Add `agent_active` field to input in action Search Agents

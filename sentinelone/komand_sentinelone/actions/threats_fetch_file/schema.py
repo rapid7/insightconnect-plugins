@@ -8,12 +8,12 @@ class Component:
 
 
 class Input:
-    FILTER = "filter"
+    ID = "id"
     PASSWORD = "password"
     
 
 class Output:
-    AFFECTED = "affected"
+    FILE = "file"
     
 
 class ThreatsFetchFileInput(komand.Input):
@@ -22,21 +22,21 @@ class ThreatsFetchFileInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "filter": {
-      "type": "object",
-      "title": "Filter JSON",
-      "description": "Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents",
-      "order": 2
+    "id": {
+      "type": "integer",
+      "title": "ID",
+      "description": "Threat ID",
+      "order": 1
     },
     "password": {
       "type": "string",
       "title": "Password",
       "description": "File encryption password, min. length 10 characters and cannot contain whitespace",
-      "order": 1
+      "order": 2
     }
   },
   "required": [
-    "filter",
+    "id",
     "password"
   ]
 }
@@ -52,11 +52,35 @@ class ThreatsFetchFileOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "affected": {
-      "type": "integer",
-      "title": "Affected",
-      "description": "Number of entities affected by the requested operation",
+    "file": {
+      "$ref": "#/definitions/file",
+      "title": "File",
+      "description": "File of data to be imported into Anomali ThreatStream",
       "order": 1
+    }
+  },
+  "required": [
+    "file"
+  ],
+  "definitions": {
+    "file": {
+      "id": "file",
+      "type": "object",
+      "title": "File",
+      "description": "File Object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "title": "Content",
+          "description": "File contents",
+          "format": "bytes"
+        },
+        "filename": {
+          "type": "string",
+          "title": "Filename",
+          "description": "Name of file"
+        }
+      }
     }
   }
 }
