@@ -19,6 +19,12 @@ This plugin utilizes the [Microsoft ATP API](https://docs.microsoft.com/en-us/wi
 
 ## Setup
 
+This plugin uses the Windows Defender ATP API. It will use an Azure application to connect to the API and run
+actions from InsightConnect.
+
+For information on how to setup your application and assign permissions go here:
+https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -123,7 +129,10 @@ Example input:
   "expiration_time": "2020-12-12T00:00:00Z",
   "indicator": "220e7d15b011d7fac48f2bd61114db1022197f7f",
   "indicator_state": true,
-  "rbac_group_names": "[\"group1\",\"group2\"]",
+  "rbac_group_names": [
+    "group1",
+    "group2"
+  ],
   "recommended_actions": "nothing",
   "severity": "High",
   "title": "test"
@@ -598,7 +607,9 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "frequency": 10,
+  "key": "assignedTo",
+  "value": "user@example.com"
 }
 ```
 
