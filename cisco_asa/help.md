@@ -4,11 +4,8 @@
 
 # Key Features
 
-* Check if address is in address group
-* Remove address from group
-* Delete Address Object
-* Add Address to Group
-* Create Address Object
+* Determine if a host is blocked by checking if it's found in an address group applied to a firewall rule
+* Block and unblock hosts from the firewall through object management
 
 # Requirements
 
