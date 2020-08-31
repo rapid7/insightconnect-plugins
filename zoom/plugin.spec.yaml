@@ -355,7 +355,7 @@ triggers:
         description: User Activity
         type: user_activity
         required: false
-events:
+tasks:
   user_activity_event:
     title: User Activity Event
     description: Retrieve user activity events
@@ -376,6 +376,7 @@ events:
         description: User Activity
         type: user_activity
         required: false
+        persist_state: true
     schedule:
       title: Schedule for retrieving events  # Title can be source specific
       type: string  # Always string?
