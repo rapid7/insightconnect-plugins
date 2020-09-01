@@ -21,7 +21,7 @@ tags:
 - links
 hub_tags:
   use_cases: [data_utility, threat_detection_and_response]
-  keywords: [ATP, Microsoft, safe, links, cloud-enabled]
+  keywords: [ATP, Microsoft, safe, links, cloud_enabled]
   features: []
 actions:
   decode:
