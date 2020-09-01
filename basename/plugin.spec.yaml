@@ -17,7 +17,7 @@ tags:
 - utilities
 hub_tags:
   use_cases: [data_utility]
-  keywords: [basename, utilities, cloud-enabled]
+  keywords: [basename, utilities, cloud_enabled]
   features: []
 actions:
   basename:
