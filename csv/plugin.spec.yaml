@@ -18,7 +18,7 @@ tags:
 - utilities
 hub_tags:
   use_cases: [data_utility]
-  keywords: [csv, utilities]
+  keywords: [csv, utilities, cloud-enabled]
   features: []
 actions:
   filter_string:
