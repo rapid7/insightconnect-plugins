@@ -10,6 +10,7 @@ class Component:
 class Input:
     COUNT = "count"
     QUERY = "query"
+    SEARCH_TIMEFRAME = "search_timeframe"
     
 
 class Output:
@@ -35,6 +36,12 @@ class SearchInput(komand.Input):
       "title": "Query",
       "description": "Run a search query (e.g. search *)",
       "order": 1
+    },
+    "search_timeframe": {
+      "type": "string",
+      "title": "Search Timeframe",
+      "description": "The specified timeframe for the search. Default searches over all time. Separated with dash, in the form of unix epoch timestamps, e.g. 1498824598-1598824598. If end time is left blank, it defaults to the current time",
+      "order": 3
     }
   },
   "required": [
