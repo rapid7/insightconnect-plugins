@@ -22,7 +22,7 @@ class RrHistory(komand.Action):
             else:
                 rr_history = self.connection.investigate.rr_history(domain, type)
         except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 
         return {"features": [rr_history.get("features")], "rrs_tf": rr_history.get("rrs_tf")}
 
