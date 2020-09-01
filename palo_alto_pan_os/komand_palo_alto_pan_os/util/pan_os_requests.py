@@ -19,24 +19,19 @@ class Request(object):
         url = hostname + "/api/"
         querystring = {"type": "keygen", "user": username, "password": password}
 
-        token_response = {"text": ""}
         try:
             session = requests.session()
             token_response = session.get(url, params=querystring, verify=verify_cert)
-            token_dict = xmltodict.parse(token_response.text)
+            token_dict = cls.get_output_with_exceptions(token_response)
             pan_os_key = token_dict["response"]["result"]["key"]
             connection.logger.info("Key obtained")
         except KeyError:
             raise ConnectionTestException(
                 preset=ConnectionTestException.Preset.USERNAME_PASSWORD
             )
-        except requests.exceptions.HTTPError as e:
-            connection.logger.info(f"Call to Palo Alto Firewall API failed: {e}")
-            raise ConnectionTestException(preset=PluginException.Preset.UNKNOWN, data=token_response.text)
-        except BaseException as e:
-            raise ConnectionTestException(cause='Unknown authentication error with PAN-OS.',
-                                          assistance='Contact support for help.',
-                                          data=e)
+        except PluginException as e:
+            raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e.data)
+
         return cls(logger=connection.logger, url=url, session=session, key=pan_os_key,
                    verify_cert=verify_cert)
 
@@ -51,7 +46,7 @@ class Request(object):
         querystring = {"type": "config", "action": "edit", "key": self.key, "xpath": xpath,
                        "element": element}
 
-        response = self.make_request("POST", querystring)
+        response = self.make_request("SESSION.POST", querystring)
         output = self.get_output_with_exceptions(response)
         return {"response": output}
 
@@ -64,7 +59,7 @@ class Request(object):
 
         querystring = {"type": "config", "action": "delete", "key": self.key, "xpath": xpath}
 
-        response = self.make_request("GET", querystring)
+        response = self.make_request("SESSION.GET", querystring)
         output = self.get_output_with_exceptions(response)
         return output
 
@@ -77,7 +72,7 @@ class Request(object):
 
         querystring = {"type": "config", "action": "get", "key": self.key, "xpath": xpath}
 
-        response = self.make_request("GET", querystring)
+        response = self.make_request("SESSION.GET", querystring)
         output = self.get_output_with_exceptions(response)
         return output
 
@@ -92,7 +87,7 @@ class Request(object):
         querystring = {"type": "config", "action": "set", "key": self.key, "xpath": xpath,
                        "element": element}
 
-        response = self.make_request("POST", querystring)
+        response = self.make_request("SESSION.POST", querystring)
         output = self.get_output_with_exceptions(response)
         return output
 
@@ -105,14 +100,14 @@ class Request(object):
 
         querystring = {"type": "config", "action": "show", "key": self.key, "xpath": xpath}
 
-        response = self.make_request("GET", querystring)
+        response = self.make_request("SESSION.GET", querystring)
         output = self.get_output_with_exceptions(response)
         return output
 
     def op(self, cmd: str) -> dict:
         querystring = {"type": "op", "key": self.key, "cmd": cmd}
 
-        response = self.make_request("GET", querystring)
+        response = self.make_request("SESSION.GET", querystring)
         output = self.get_output_with_exceptions(response)
         return output
 
@@ -120,19 +115,19 @@ class Request(object):
         querystring = {"type": "commit", "action": action,
                        "key": self.key, "cmd": cmd}
 
-        response = self.make_request("REQUEST_GET", querystring)
+        response = self.make_request("REQUESTS.GET", querystring)
         output = self.get_output_with_exceptions(response)
         return output
 
     def make_request(self, method, params):
         response = {"text": ""}
         try:
-            if method == "POST":
+            if method == "SESSION.POST":
                 response = self.session.post(self.url, params=params, verify=self.verify_cert)
-            elif method == "GET":
-                response = self.session.post(self.url, params=params, verify=self.verify_cert)
-            elif method == "REQUEST_GET":
-                response = self.session.post(self.url, params=params, verify=self.verify_cert)
+            elif method == "SESSION.GET":
+                response = self.session.get(self.url, params=params, verify=self.verify_cert)
+            elif method == "REQUESTS.GET":
+                response = requests.get(self.url, params=params, verify=self.verify_cert)
         except requests.exceptions.HTTPError as e:
             self.logger.info(f"Call to Palo Alto Firewall API failed: {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
@@ -142,19 +137,20 @@ class Request(object):
     @staticmethod
     def get_output_with_exceptions(response):
         if response.status_code == 401:
-            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
+            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
         if response.status_code == 403:
-            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
+            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response.text)
         if response.status_code == 404:
-            raise PluginException(preset=PluginException.Preset.NOT_FOUND)
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
         if 400 <= response.status_code < 500:
-            response_data = response.text
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response_data)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR)
 
         try:
             output = xmltodict.parse(response.text)
+        except requests.exceptions.HTTPError as e:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
         except TypeError:
             raise PluginException(cause='The response from PAN-OS was not the correct data type.',
                                   assistance='Contact support for help.',
@@ -176,7 +172,7 @@ class Request(object):
                                   assistance='Contact support for help.',
                                   data=f'{response.text}, error {e}')
 
-        if output['response']['@status'] == 'error':
+        if output.get('response', {}).get('@status') == 'error':
             error = output['response']['msg']
             error = json.dumps(error)
             raise PluginException(
