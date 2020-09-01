@@ -22,7 +22,7 @@ tags:
 - utilities
 hub_tags:
   use_cases: [data_utility]
-  keywords: [markdown, html, pdf, epub, docx, convert, utilities, cloud-enabled]
+  keywords: [markdown, html, pdf, epub, docx, convert, utilities, cloud_enabled]
   features: []
 actions:
   validate:
