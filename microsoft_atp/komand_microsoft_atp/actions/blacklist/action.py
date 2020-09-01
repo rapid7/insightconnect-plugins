@@ -3,6 +3,8 @@ import validators
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from .schema import BlacklistInput, BlacklistOutput, Input, Output, Component
+from datetime import datetime
+from datetime import timedelta
 
 
 class Blacklist(insightconnect_plugin_runtime.Action):
@@ -41,20 +43,35 @@ class Blacklist(insightconnect_plugin_runtime.Action):
         return indicators[0]
 
     def _create_or_update_indicator(self, params: dict) -> dict:
-        return self.connection.client.submit_or_update_indicator(self._create_payload(params))
+        payload = self._create_payload(params)
+        self.logger.info(f"payload: {payload}")
+        return self.connection.client.submit_or_update_indicator(payload)
 
     @staticmethod
     def _create_payload(params: dict) -> dict:
         indicator = params.get(Input.INDICATOR)
+        title = params.get(Input.TITLE)
+        if not title:
+            title = indicator
+
+        expiration_time = params.get(Input.EXPIRATION_TIME)
+        if not expiration_time:
+            one_year_from_now = datetime.now() + timedelta(days=365)
+            date_formatted = one_year_from_now.strftime("%Y-%m-%dT%H:%M:%SZ")
+            expiration_time = date_formatted
+
+        description = params.get(Input.DESCRIPTION)
+        if not description:
+            description = "Indicator Blacklisted from InsightConnect"
 
         return {
             "indicatorValue": params.get(Input.INDICATOR),
             "indicatorType": Blacklist._get_type(indicator),
             "action": params.get(Input.ACTION, "AlertAndBlock"),
             "application": params.get(Input.APPLICATION),
-            "title": params.get(Input.TITLE, indicator),
-            "description": params.get(Input.DESCRIPTION, indicator),
-            "expirationTime": params.get(Input.EXPIRATION_TIME),
+            "title": title,
+            "description": description,
+            "expirationTime": expiration_time,
             "severity": params.get(Input.SEVERITY, "High"),
             "recommendedActions": params.get(Input.RECOMMENDED_ACTIONS),
             "rbacGroupNames": params.get(Input.RBAC_GROUP_NAMES, [])
@@ -72,6 +89,11 @@ class Blacklist(insightconnect_plugin_runtime.Action):
             return "FileSha1"
         elif validators.sha256(indicator):
             return "FileSha256"
+        elif validators.md5(indicator):
+            raise PluginException(
+                cause="MD5 hash is not supported.",
+                assistance="API supported only SHA256 and SHA1. Please check provided hash and try again."
+            )
         raise PluginException(
             cause='Could not determine type of indicator.',
             assistance='Indicator not added.'
