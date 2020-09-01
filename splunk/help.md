@@ -411,7 +411,7 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
-* 3.0.3 - Add search input to action Search
+* 3.0.3 - Add `search_timeframe` input to action Search
 * 3.0.2 - Fix issue with typos in help.md and plugin description
 * 3.0.1 - New spec and help.md format for the Extension Library
 * 3.0.0 - Remove Komand-specific Alert trigger | Fix invalid output properties | Numerous typographical fixes | Improve error handling | Smaller plugin size due to slim SDK migration | New connection test code
