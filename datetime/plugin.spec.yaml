@@ -17,7 +17,7 @@ tags:
 - utilities
 hub_tags:
   use_cases: [data_utility]
-  keywords: [datetime, utilities, cloud-enabled]
+  keywords: [datetime, utilities, cloud_enabled]
   features: []
 actions:
   get_datetime:
