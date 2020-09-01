@@ -20,7 +20,7 @@ tags:
 cloud_ready: true
 hub_tags:
   use_cases: [data_enrichment, threat_detection_and_response]
-  keywords: [url, link, short, unshorten, cloud-enabled]
+  keywords: [url, link, short, unshorten, cloud_enabled]
   features: []
 enable_cache: false
 actions:
