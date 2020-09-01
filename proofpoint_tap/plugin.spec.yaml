@@ -19,7 +19,7 @@ tags:
 - parser
 hub_tags:
   use_cases: [alerting_and_notifications, threat_detection_and_response]
-  keywords: [Proofpoint, TAP, parser, cloud-enabled]
+  keywords: [Proofpoint, TAP, parser, cloud_enabled]
   features: []
 types:
   threat:
