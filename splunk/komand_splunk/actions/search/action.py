@@ -3,6 +3,7 @@ from .schema import SearchInput, SearchOutput, Input, Output, Component
 # Custom imports below
 import json
 from datetime import datetime
+from komand.exceptions import PluginException
 
 
 class Search(komand.Action):
@@ -44,8 +45,18 @@ class Search(komand.Action):
         datetime_format = "%Y-%m-%dT%H:%M:%S"
         if search_timeframe:
             split_search_timeframe = search_timeframe.split("-")
+            if not split_search_timeframe[0].isdigit():
+                raise PluginException(
+                    cause="Wrong search start timestamp.",
+                    assistance="Start time should only be number."
+                )
             start_time = datetime.fromtimestamp(int(split_search_timeframe[0])).strftime(datetime_format)
             if len(split_search_timeframe) > 1:
+                if not split_search_timeframe[1].isdigit():
+                    raise PluginException(
+                        cause="Wrong search end timestamp.",
+                        assistance="End time should only be number."
+                    )
                 end_time = datetime.fromtimestamp(int(split_search_timeframe[1])).strftime(datetime_format)
             else:
                 end_time = datetime.now().strftime(datetime_format)
