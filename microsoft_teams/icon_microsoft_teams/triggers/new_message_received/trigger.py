@@ -196,7 +196,8 @@ class NewMessageReceived(komand.Trigger):
                 "ipv6_addresses": self.remove_duplicates(self.extract_ipv6_addresses(message))
             },
             "mac_addresses": self.remove_duplicates(self.extract_macs(message)),
-            "cves": self.remove_duplicates(self.extract_cve(message))
+            "cves": self.remove_duplicates(self.extract_cve(message)),
+            "uuids": self.remove_duplicates(self.extract_uuid(message))
         }
 
     @staticmethod
@@ -242,6 +243,10 @@ class NewMessageReceived(komand.Trigger):
     @staticmethod
     def extract_md5(msg: str) -> list:
         return re.findall(r'(?m)\b[a-zA-Z0-9]{32}\b', msg)
+
+    @staticmethod
+    def extract_uuid(msg: str) -> list:
+        return re.findall(r'(?m)\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\b', msg)
 
     @staticmethod
     def extract_sha1(msg: str) -> list:
