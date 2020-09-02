@@ -20,20 +20,18 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|server|string|None|False|Enter the address for the server|None|https://www.example.com|
+|server|string|None|False|Enter the address for the server|None|www.example.com|
 |username_and_password|credential_username_password|None|True|Cisco username and password|None|{"username":"user1", "password":"mypassword"}|
-|verify_ssl|boolean|True|False|Check the server's SSL certificate|None|True|
 
 Example input:
 
 ```
 {
-  "server": "https://www.example.com",
+  "server": "www.example.com",
   "username_and_password": {
     "username": "user1",
     "password": "mypassword"
-  },
-  "verify_ssl": true
+  }
 }
 ```
 
@@ -125,6 +123,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - New action - Create Address Object
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 

@@ -1,7 +1,7 @@
 {
-	"spec": "03db9f4f5803f08a1f9047f8d9193632",
-	"manifest": "3836ac81a27820a7b39dc7e08c19b795",
-	"setup": "ca7a06b3f49ddc0755ef4f1aa997a05e",
+	"spec": "ddba761c87858a944baea3f9ee75f617",
+	"manifest": "9b7c0f2821fcf254acb7389b9b832382",
+	"setup": "9fa4c9e102edbda0463e32e14239a9ca",
 	"schemas": [
 		{
 			"identifier": "block_url_policy/schema.py",
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "f3f27182d48829c296b170ebe15c9f37"
+			"hash": "3892ccf9dc345abd2fe944f55485f589"
 		}
 	]
 }

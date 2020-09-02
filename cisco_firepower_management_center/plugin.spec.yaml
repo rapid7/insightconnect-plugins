@@ -7,7 +7,7 @@ vendor: rapid7
 status: []
 description: This plugin utilizes Cisco Firepower Management Center to create a new block URL policy
  Cisco Firepower Management Center is an administrative nerve center for managing critical Cisco network security solutions
-version: 1.0.2
+version: 1.1.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cisco_firepower_management_center
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -218,20 +218,13 @@ connection:
     type: string
     description: Enter the address for the server
     required: false
-    example: https://www.example.com
+    example: www.example.com
   username_and_password:
     title: Username and Password
     description: Cisco username and password
     type: credential_username_password
     required: true
     example: '{"username":"user1", "password":"mypassword"}'
-  verify_ssl:
-    title: Verify SSL
-    type: boolean
-    description: Check the server's SSL certificate
-    default: true
-    required: false
-    example: true
 
 actions:
   block_url_policy:
