@@ -102,6 +102,11 @@ types:
       description: Extracted CVEs from message
       type: "[]string"
       required: false
+    uuids:
+      title: UUIDs
+      description: Extracted UUIDs from message
+      type: "[]string"
+      required: false
   channel:
     displayName:
       title: "Display Name"

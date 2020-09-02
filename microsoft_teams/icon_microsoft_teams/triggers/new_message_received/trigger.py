@@ -197,7 +197,7 @@ class NewMessageReceived(komand.Trigger):
             },
             "mac_addresses": self.remove_duplicates(self.extract_macs(message)),
             "cves": self.remove_duplicates(self.extract_cve(message)),
-            "uuid": self.remove_duplicates(self.extract_uuid(message))
+            "uuids": self.remove_duplicates(self.extract_uuid(message))
         }
 
     @staticmethod

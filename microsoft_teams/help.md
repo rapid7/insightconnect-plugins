@@ -695,6 +695,9 @@ Example output:
     ],
     "cves": [
       "CVE-2015-3429"
+    ],
+    "uuids": [
+      "0123d45a-a412-d124-d124-cb124856a94d"
     ]
   }
 }
