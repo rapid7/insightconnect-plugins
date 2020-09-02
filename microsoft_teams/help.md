@@ -695,6 +695,9 @@ Example output:
     ],
     "cves": [
       "CVE-2015-3429"
+    ],
+    "uuids": [
+      "0123d45a-a412-d124-d124-cb124856a94d"
     ]
   }
 }
@@ -710,6 +713,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.1 - Automatically extract UUIDs in the New Message Received trigger
 * 2.2.0 - Extract and return command security and network indicators in the New Message Received trigger
 * 2.1.0 - Update Send Message and Send HTML Message actions to accept `thread_id` input to support threaded replies | Update New Message Received trigger to output team and channel names so they can be passed into subsequent steps
 * 2.0.5 - Fix issue where auth token wasn't properly renewed
