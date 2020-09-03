@@ -177,7 +177,7 @@ class Request(object):
             error = json.dumps(error)
             raise PluginException(
                 cause='PAN-OS returned an error in response to the request.',
-                assistance='Double that check inputs are valid. Contact support if this issue persists.',
+                assistance='Double-check that inputs are valid. Contact support if this issue persists.',
                 data=error
             )
 
