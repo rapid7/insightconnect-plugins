@@ -32,43 +32,63 @@ class CreateAddressObject(komand.Action):
         if whitelist:
             self._match_whitelist(address, whitelist)
 
-        with fmcapi.FMC(
-            host=self.connection.host,
-            username=self.connection.username,
-            password=self.connection.password,
-            autodeploy=True,
-            limit=10
-        ) as fmc1:
-            if address_type == 'ipv4' or address_type == 'ipv6':
+        try:
+            with fmcapi.FMC(
+                host=self.connection.host,
+                username=self.connection.username,
+                password=self.connection.password,
+                autodeploy=True,
+                limit=10
+            ) as fmc1:
                 return {
-                    Output.ADDRESS_OBJECT: self.create_host_object(fmc=fmc1, name=name, value=address)
+                    Output.ADDRESS_OBJECT: self.create_address_object(
+                        fmc=fmc1,
+                        name=name,
+                        value=address,
+                        object_type=address_type
+                    )
                 }
-            elif address_type == 'cidr':
-                return {
-                    Output.ADDRESS_OBJECT: self.create_network_object(fmc=fmc1, name=name, value=address)
-                }
-            elif address_type == 'fqdn':
-                return {
-                    Output.ADDRESS_OBJECT: self.create_fqdn_object(fmc=fmc1, name=name, value=address)
-                }
+        except TypeError:
+            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
 
-    def create_host_object(self, fmc: fmcapi.FMC, name: str, value: str) -> dict:
-        host = fmcapi.Hosts(fmc=fmc)
-        host.name = name
-        host.value = value
-        return host.post()
+    def create_address_object(self, fmc: fmcapi.FMC, name: str, value: str, object_type: str) -> dict:
+        if object_type == 'ipv4' or object_type == 'ipv6':
+            address_object = fmcapi.Hosts(fmc=fmc)
+        elif object_type == 'cidr':
+            address_object = fmcapi.Networks(fmc=fmc)
+        elif object_type == 'fqdn':
+            address_object = fmcapi.FQDNS(fmc=fmc)
 
-    def create_network_object(self, fmc: fmcapi.FMC, name: str, value: str) -> dict:
-        network = fmcapi.Hosts(fmc=fmc)
-        network.name = name
-        network.value = value
-        return network.post()
+        address_object.name = name
+        address_object.value = value
+        if address_object.post():
+            return address_object
+        
+        raise PluginException(
+            cause=f"Address Object - {name}, already exists.",
+            assistance=f"Please provide a different name for the address object and try again.")
+    
 
-    def create_fqdn_object(self, fmc: fmcapi.FMC, name: str, value: str) -> dict:
-        fqdn = fmcapi.Hosts(fmc=fmc)
-        fqdn.name = name
-        fqdn.value = value
-        return fqdn.post()
+    # def create_host_object(self, fmc: fmcapi.FMC, name: str, value: str) -> dict:
+    #     host = fmcapi.Hosts(fmc=fmc)
+    #     host.name = name
+    #     host.value = value
+    #     host.post()
+    #     return host.get()
+
+    # def create_network_object(self, fmc: fmcapi.FMC, name: str, value: str) -> dict:
+    #     network = fmcapi.Networks(fmc=fmc)
+    #     network.name = name
+    #     network.value = value
+    #     network.post()
+    #     return network.get()
+
+    # def create_fqdn_object(self, fmc: fmcapi.FMC, name: str, value: str) -> dict:
+    #     fqdn = fmcapi.FQDNS(fmc=fmc)
+    #     fqdn.name = name
+    #     fqdn.value = value
+    #     fqdn.post()
+    #     return fqdn.get()
 
     def _match_whitelist(self, address: str, whitelist: str) -> bool:
         trimmed_address = re.sub(r"/32$", "", address)

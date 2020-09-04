@@ -1,5 +1,5 @@
 {
-	"spec": "ddba761c87858a944baea3f9ee75f617",
+	"spec": "1decea9e8c7f32f0a6ecab6536c991c9",
 	"manifest": "9b7c0f2821fcf254acb7389b9b832382",
 	"setup": "9fa4c9e102edbda0463e32e14239a9ca",
 	"schemas": [
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "create_address_object/schema.py",
-			"hash": "09ca4ad20c0cbd6eed025e02f651bc8a"
+			"hash": "a1c650ede4fb947f252056d6c59aad18"
 		},
 		{
 			"identifier": "connection/schema.py",

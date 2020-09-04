@@ -90,7 +90,7 @@ class CreateAddressObjectOutput(komand.Output):
         "dnsResolution": {
           "type": "string",
           "title": "DNS Resolution",
-          "description": "Unique identifier of domain or device when override assigned to child domain. Used as path parameter to GET override details for a specific object on a specific target (device or domain)",
+          "description": "DNS resolution",
           "order": 12
         },
         "id": {
@@ -233,11 +233,23 @@ class CreateAddressObjectOutput(komand.Output):
               "description": "The details about the domain",
               "order": 2
             },
+            "ipType": {
+              "type": "string",
+              "title": "IP Type",
+              "description": "IP type",
+              "order": 5
+            },
             "lastUser": {
               "$ref": "#/definitions/metadata_user",
               "title": "Last User",
               "description": "This object defines details about the user",
               "order": 1
+            },
+            "parentType": {
+              "type": "string",
+              "title": "Parent Type",
+              "description": "Parent type",
+              "order": 6
             },
             "readOnly": {
               "$ref": "#/definitions/read_only",
@@ -350,9 +362,6 @@ class CreateAddressObjectOutput(komand.Output):
                   "order": 4
                 }
               },
-              "required": [
-                "type"
-              ],
               "definitions": {
                 "links": {
                   "type": "object",
@@ -423,9 +432,6 @@ class CreateAddressObjectOutput(komand.Output):
               "order": 4
             }
           },
-          "required": [
-            "type"
-          ],
           "definitions": {
             "links": {
               "type": "object",
@@ -683,11 +689,23 @@ class CreateAddressObjectOutput(komand.Output):
           "description": "The details about the domain",
           "order": 2
         },
+        "ipType": {
+          "type": "string",
+          "title": "IP Type",
+          "description": "IP type",
+          "order": 5
+        },
         "lastUser": {
           "$ref": "#/definitions/metadata_user",
           "title": "Last User",
           "description": "This object defines details about the user",
           "order": 1
+        },
+        "parentType": {
+          "type": "string",
+          "title": "Parent Type",
+          "description": "Parent type",
+          "order": 6
         },
         "readOnly": {
           "$ref": "#/definitions/read_only",
@@ -800,9 +818,6 @@ class CreateAddressObjectOutput(komand.Output):
               "order": 4
             }
           },
-          "required": [
-            "type"
-          ],
           "definitions": {
             "links": {
               "type": "object",
@@ -873,9 +888,6 @@ class CreateAddressObjectOutput(komand.Output):
           "order": 4
         }
       },
-      "required": [
-        "type"
-      ],
       "definitions": {
         "links": {
           "type": "object",

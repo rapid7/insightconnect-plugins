@@ -62,7 +62,7 @@ types:
       description: The unique UUID of the user
     type:
       title: Type
-      required: true
+      required: false
       type: string
       description: The user type
   domain:
@@ -118,6 +118,16 @@ types:
       required: false
       type: integer
       description: The last updated timestamp
+    ipType:
+      title: IP Type
+      required: false
+      type: string
+      description: IP type
+    parentType:
+      title: Parent Type
+      required: false
+      type: string
+      description: Parent type
   reference:
     name:
       title: Name
@@ -210,7 +220,7 @@ types:
       title: DNS Resolution
       required: false
       type: string
-      description: Unique identifier of domain or device when override assigned to child domain. Used as path parameter to GET override details for a specific object on a specific target (device or domain)
+      description: DNS resolution
 
 connection:
   server:

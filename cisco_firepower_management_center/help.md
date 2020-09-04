@@ -76,6 +76,34 @@ Example input:
 Example output:
 
 ```
+{
+  "address_object": {
+      "links": {
+        "self": "https://example.com/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/hosts/00000000-0000-0ed3-0000-012884903406",
+        "parent": "https://example.com/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/networkaddresses"
+      },
+      "type": "Host",
+      "value": "198.51.100.100",
+      "overridable": false,
+      "description": "Created by fmcapi.",
+      "id": "00000000-0000-0ed3-0000-012884903406",
+      "name": "TestAddressObjectHost",
+      "metadata": {
+        "timestamp": 1599230214106,
+        "lastUser": {
+          "name": "admin"
+        },
+        "domain": {
+          "name": "Global",
+          "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+          "type": "Domain"
+        },
+        "ipType": "V_4",
+        "parentType": "NetworkAddress"
+      },
+      "items": []
+  }
+}
 ```
 
 #### Block URL Policy
