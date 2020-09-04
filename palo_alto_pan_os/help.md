@@ -33,7 +33,10 @@ Example input:
 
 ```
 {
-  "credentials": "{\"username\":\"username\", \"password\":\"password\"}",
+  "credentials": {
+    "username":"username",
+    "password":"password"
+  },
   "server": "http://www.example.com",
   "verify_cert": true
 }
@@ -874,6 +877,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 6.0.1 - Improve error handling in `pa_os_request.py`
 * 6.0.0 - Update to Create Address Object to add Skip RFC 1918 input
 * 5.1.1 - Fix issue where IPv6 address were not supported
 * 5.1.0 - New action Add Address Object to Group
