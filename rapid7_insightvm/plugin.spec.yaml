@@ -3650,6 +3650,24 @@ actions:
         description: A list of inactive assets
         type: "[]asset"
         required: true
+  get_expiring_vulnerability_exceptions:
+    title: Get Expiring Vulnerability Exceptions
+    description: Return a list of expiring vulnerability exceptions
+    input:
+      expires_in_less_than:
+        title: Expires in Less Than
+        description: Number of days left until the exception expires
+        type: integer
+        example: 7
+        default: 7
+        required: true
+    output:
+      exceptions:
+        title: Exceptions
+        description: Exceptions about to expire
+        type: "[]vulnerability_exception"
+        required: false
+
 triggers:
   new_scans:
     title: New Scans

@@ -89,6 +89,8 @@ class ICONRapid7Insightvm(komand.Plugin):
 
         self.add_action(actions.GetAuthenticationSources())
 
+        self.add_action(actions.GetExpiringVulnerabilityExceptions())
+
         self.add_action(actions.GetRole())
 
         self.add_action(actions.GetRoles())

@@ -494,6 +494,15 @@ class VulnerabilityException:
         return f"{console_url}/api/3/vulnerability_exceptions/{id}"
 
     @staticmethod
+    def vulnerability_exceptions(console_url):
+        """
+        Get all vulnerability exceptions
+        :param console_url: URL to the InsightVM console
+        :return: pre-populated GET /api/3/vulnerability_exceptions
+        """
+        return f"{console_url}/api/3/vulnerability_exceptions"
+
+    @staticmethod
     def vulnerability_exception_expiration(console_url, id):
         """
         Interacts with vulnerability exception expiration

@@ -1,6 +1,6 @@
 {
-	"spec": "c9be745759cba4a05da1cc58de6b9efe",
-	"manifest": "ebec470ad2b0d861627534457377ff3f",
+	"spec": "d31490f6894ba238726f8343648fc738",
+	"manifest": "6be314201b5688b2f2f6c56422948a8e",
 	"setup": "664bfd37c8af5d8686078a675fce4560",
 	"schemas": [
 		{
@@ -134,6 +134,10 @@
 		{
 			"identifier": "get_authentication_sources/schema.py",
 			"hash": "c3f015b6666fedbd513f0348f42ff04e"
+		},
+		{
+			"identifier": "get_expiring_vulnerability_exceptions/schema.py",
+			"hash": "6d35295bed12ae2c7d8f6de2098c8363"
 		},
 		{
 			"identifier": "get_role/schema.py",
