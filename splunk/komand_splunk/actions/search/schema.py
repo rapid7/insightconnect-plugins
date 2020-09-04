@@ -40,7 +40,7 @@ class SearchInput(komand.Input):
     "search_timeframe": {
       "type": "string",
       "title": "Search Timeframe",
-      "description": "The specified timeframe for the search. Default searches over all time. Separated with dash, in the form of unix epoch timestamps, e.g. 1498824598-1598824598. If end time is left blank, it defaults to the current time",
+      "description": "The specified timeframe for the search. Default searches over all time. Separated with dash, in the form of Unix epoch timestamps, e.g. 1498824598-1598824598. If end time is left blank, it defaults to the current time",
       "order": 3
     }
   },

@@ -103,7 +103,7 @@ This action allows you run a search command in Splunk.
 |----|----|-------|--------|-----------|----|-------|
 |count|integer|100|True|The maximum number of results to return. Set to 0 for unlimited results|None|None|
 |query|string|None|True|Run a search query (e.g. search *)|None|None|
-|search_timeframe|string|None|False|The specified timeframe for the search. Default searches over all time. Separated with dash, in the form of unix epoch timestamps, e.g. 1498824598-1598824598. If end time is left blank, it defaults to the current time|None|1598984278-1598984478|
+|search_timeframe|string|None|False|The specified timeframe for the search. Default searches over all time. Separated with dash, in the form of Unix epoch timestamps, e.g. 1498824598-1598824598. If end time is left blank, it defaults to the current time|None|1598984278-1598984478|
 
 Example input:
 
