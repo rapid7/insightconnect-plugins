@@ -111,12 +111,12 @@ class Connection(komand.Connection):
     def agents_action(self, action: str, agents_filter: str):
         return self._call_api("POST", "agents/actions/{}".format(action), {"filter": agents_filter})
 
-    def fetch_threat_file(self, agent_filter: dict, password: str):
+    def download_file(self, agent_filter: dict, password: str):
         agent_filter["activityTypes"] = 86
         agent_filter["sortBy"] = "createdAt"
-        agent_filter["sortOrder"] = "asc"
+        agent_filter["sortOrder"] = "desc"
         activities = self.activities_list(agent_filter)
-        response = self._call_api("GET", activities["data"][-1]["data"]["filePath"][1:], full_response=True)
+        response = self._call_api("GET", activities["data"][0]["data"]["filePath"][1:], full_response=True)
         downloaded_zipfile = zipfile.ZipFile(io.BytesIO(response.content))
         downloaded_zipfile.setpassword(password.encode("UTF-8"))
 
@@ -307,7 +307,6 @@ class Connection(komand.Connection):
 
     def _call_api(self, method, endpoint, json=None, params=None, full_response: bool = False):
         endpoint = self.url + "web/api/v2.0/" + endpoint
-        self.logger.info("Calling endpoint: " + endpoint)
         headers = self.make_token_header()
 
         if json:

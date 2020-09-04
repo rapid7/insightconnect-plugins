@@ -32,5 +32,5 @@ class ThreatsFetchFile(komand.Action):
             del agent_filter["ids"]
 
         return {
-            Output.FILE: self.connection.fetch_threat_file(agent_filter, password)
+            Output.FILE: self.connection.download_file(agent_filter, password)
         }
