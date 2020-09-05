@@ -30,7 +30,7 @@ class CreateAddressObject(komand.Action):
                                                 f"{address} provided to be blocked.")
 
         if whitelist:
-            self._match_whitelist(address, whitelist)
+            self._match_whitelist(address, whitelist, address_type)
 
         try:
             with fmcapi.FMC(
@@ -62,53 +62,40 @@ class CreateAddressObject(komand.Action):
         address_object.name = name
         address_object.value = value
         if address_object.post():
-            return address_object
+            return address_object.get()
         
         raise PluginException(
             cause=f"Address Object - {name}, already exists.",
             assistance=f"Please provide a different name for the address object and try again.")
     
+    def _match_whitelist(self, address, whitelist, object_type):
+        if object_type == "fqdn":
+            if address in whitelist:
+                raise PluginException(
+                    cause=f"Address Object not created because the host {address} was found in the whitelist.",
+                    assistance="If you would like to block this host remove it from the whitelist and try again.")
+            else:
+                return False
 
-    # def create_host_object(self, fmc: fmcapi.FMC, name: str, value: str) -> dict:
-    #     host = fmcapi.Hosts(fmc=fmc)
-    #     host.name = name
-    #     host.value = value
-    #     host.post()
-    #     return host.get()
-
-    # def create_network_object(self, fmc: fmcapi.FMC, name: str, value: str) -> dict:
-    #     network = fmcapi.Networks(fmc=fmc)
-    #     network.name = name
-    #     network.value = value
-    #     network.post()
-    #     return network.get()
-
-    # def create_fqdn_object(self, fmc: fmcapi.FMC, name: str, value: str) -> dict:
-    #     fqdn = fmcapi.FQDNS(fmc=fmc)
-    #     fqdn.name = name
-    #     fqdn.value = value
-    #     fqdn.post()
-    #     return fqdn.get()
-
-    def _match_whitelist(self, address: str, whitelist: str) -> bool:
+        # if 1.1.1.1/32 - remove /32
         trimmed_address = re.sub(r"/32$", "", address)
-        if address in whitelist:
-            raise PluginException(
-                cause=f"Address Object not created because the host {address} was found in the whitelist as {address}.",
-                assistance=f"If you would like to block this host, remove {address} from the whitelist and try again.")
-        elif '/' not in trimmed_address:
-            pass
 
-        for address_object in whitelist:
-            if self._determine_address_type(address_object) == "cidr":
-                net = ip_network(address_object, False)
+        # if contains / we compare explicit matches, but not subnets in subnets
+        if '/' in trimmed_address:
+            return address in whitelist
+
+        # IP is in CIDR - Give the user a log message
+        for object in whitelist:
+            type = self._determine_address_type(object)
+            if type == "cidr":
+                net = ip_network(object, False) # False means ignore the masked bits, otherwise they need to be 0
                 ip = ip_address(trimmed_address)
                 if ip in net:
                     raise PluginException(
                         cause=f"Address Object not created because the host {address}"
-                              f" was found in the whitelist as {address_object}.",
+                              f" was found in the whitelist as {object}.",
                         assistance="If you would like to block this host,"
-                                   f" remove {address_object} from the whitelist and try again.")
+                                   f" remove {object} from the whitelist and try again.")
 
         return False
 
