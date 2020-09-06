@@ -124,6 +124,40 @@ types:
       description: Indicates whether this threat has been published
       type: boolean
       required: false
+  link:
+    rel:
+      title: Relation
+      description: Relation
+      type: string
+    href:
+      title: Href
+      description: Href
+      type: string
+  events:
+    labels:
+      title: Labels
+      description: List of labels
+      type: "[]string"
+    timestamp:
+      title: Timestamp
+      description: Timestamp
+      type: integer
+    sequence_number:
+      title: Sequence Number
+      description: Sequence number
+      type: integer
+    log_id:
+      title: Log ID
+      description: Log ID
+      type: string
+    message:
+      title: Message
+      description: Message
+      type: string
+    links:
+      title: Links
+      description: Links
+      type: "[]link"
 
 
 connection:
@@ -296,6 +330,19 @@ actions:
         description: The investigation that was modified
         type: investigation
         required: true
-
-
-
+  query:
+    title: Query
+    description: Query and return data using LEQL
+    input:
+      id:
+        title: ID
+        description: Log ID
+        type: string
+        example: 174e4f99-2ac7-4481-9301-4d24c34baf06
+        required: true
+    output:
+      events:
+        title: Events
+        description: Events from logs
+        type: "[]events"
+        required: true

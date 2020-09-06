@@ -36,6 +36,36 @@ Example input:
 
 ### Actions
 
+#### Query
+
+This action is used to query and return data using LEQL.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|Log ID|None|174e4f99-2ac7-4481-9301-4d24c34baf06|
+
+Example input:
+
+```
+{
+  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|events|[]events|True|Events from logs|
+
+Example output:
+
+```
+
+```
+
 #### Set Status of Investigation
 
 This action is used to set the status of the investigation by the Investigation ID.

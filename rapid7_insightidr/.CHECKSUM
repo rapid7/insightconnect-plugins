@@ -1,6 +1,6 @@
 {
-	"spec": "ea4eaeddb4653d54978ea51bfd1cf970",
-	"manifest": "240336937ffa21a654940468d015ff14",
+	"spec": "96026e7839cfc444783f592e2ef37294",
+	"manifest": "e9d79a0dcec4ea0fa09ee6817e24f213",
 	"setup": "e6c3fab7a2e9863f879aeb51dd590825",
 	"schemas": [
 		{
@@ -14,6 +14,10 @@
 		{
 			"identifier": "list_investigations/schema.py",
 			"hash": "4e86e2679ba128b413ddd4b74f60de67"
+		},
+		{
+			"identifier": "query/schema.py",
+			"hash": "230e4ce25d215dfe26f57138b6833cc0"
 		},
 		{
 			"identifier": "set_status_of_investigation_action/schema.py",

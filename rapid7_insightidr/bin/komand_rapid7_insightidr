@@ -25,6 +25,8 @@ class ICONRapid7Insightidr(komand.Plugin):
 
         self.add_action(actions.ListInvestigations())
 
+        self.add_action(actions.Query())
+
         self.add_action(actions.SetStatusOfInvestigationAction())
 
 
