@@ -14,8 +14,8 @@ resources:
   vendor_url: https://www.darktrace.com/
 tags:
 - darktrace
-- immune
-- system
+- nta
+- network
 hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [darktrace, nta, network]
