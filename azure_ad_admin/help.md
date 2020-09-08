@@ -34,6 +34,13 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
+{
+  "application_id": "abcd12345-ab12-1234-abcd-1ab2c3d4e5g6",
+  "application_secret": {
+    "secretKey": "abcdefghi12345678abcdef1234"
+  },
+  "tenant_id": "abcd12345-ab12-1234-abcd-1ab2c3d4e5g6"
+}
 ```
 
 
@@ -87,6 +94,10 @@ This action is used to add a user to a set of groups by group ID.
 Example input:
 
 ```
+{
+  "group_id": ["b4d41d4-eb13-4a33-99b5-7d7290df22e9"],
+  "user_id": "user@example.com"
+}
 ```
 
 ##### Output
