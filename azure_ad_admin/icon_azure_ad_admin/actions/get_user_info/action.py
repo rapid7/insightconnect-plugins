@@ -28,7 +28,7 @@ class GetUserInfo(komand.Action):
         result_enabled = requests.get(endpoint_for_account_enabled, headers=headers)
 
         if not result_enabled.status_code == 200:
-            self.logger.info("get account enable failed, retrying")
+            self.logger.info("Get account enabled failed, retrying...")
             time.sleep(5)  # adding retry
             result_enabled = requests.get(endpoint_for_account_enabled, headers=headers)
             if not result_enabled.status_code == 200:
