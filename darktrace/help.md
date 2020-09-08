@@ -36,7 +36,7 @@ Example input:
 
 #### Update Watched Domains
 
-This action is used to add or remove items from DarkTrace. If an indicator is added, DarkTrace will monitor network traffic for that URL and create alerts from it.
+This action is used to add or remove items from the Watched Domains list. If an indicator is added, DarkTrace will monitor network traffic for that URL and create alerts from it.
 
 ##### Input
 
