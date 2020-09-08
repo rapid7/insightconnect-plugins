@@ -11,6 +11,7 @@
 * Requires an API public and private Token from the DarkTrace
 
 # Documentation
+
 ## Setup
 
 The connection configuration accepts the following parameters:
