@@ -8,7 +8,7 @@
 
 # Requirements
 
-* Requires an API public and private Token from the DarkTrace
+* Requires a public and private API token
 
 # Documentation
 
