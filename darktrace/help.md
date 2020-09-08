@@ -4,7 +4,7 @@
 
 # Key Features
 
-* Update Watched Domains
+* Add or remove watched domains
 
 # Requirements
 
