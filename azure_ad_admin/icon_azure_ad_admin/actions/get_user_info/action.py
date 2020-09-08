@@ -2,8 +2,10 @@ import komand
 from .schema import GetUserInfoInput, GetUserInfoOutput, Input, Output, Component
 # Custom imports below
 import requests
+import time
 from komand.exceptions import PluginException
 from icon_azure_ad_admin.util.get_user_info import get_user_info
+
 
 
 class GetUserInfo(komand.Action):
@@ -26,9 +28,13 @@ class GetUserInfo(komand.Action):
         result_enabled = requests.get(endpoint_for_account_enabled, headers=headers)
 
         if not result_enabled.status_code == 200:
-            raise PluginException(cause="Get User Info failed.",
-                                  assistance="Unexpected return code from server.",
-                                  data=result.text)
+            self.logger.info("get account enable failed, retrying")
+            time.sleep(5)  # adding retry
+            result_enabled = requests.get(endpoint_for_account_enabled, headers=headers)
+            if not result_enabled.status_code == 200:
+                raise PluginException(cause="Get User Info failed.",
+                                      assistance="Unexpected return code from server.",
+                                      data=result.text)
 
         try:
             account_enabled = result_enabled.json().get("accountEnabled")
