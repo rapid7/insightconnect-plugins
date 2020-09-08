@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add or remove items from DarkTrace. If an indicator is added, DarkTrace will monitor network traffic for that URL and create alerts from it"
+    DESCRIPTION = "Add or remove items from the Watched Domains list. If an indicator is added, DarkTrace will monitor network traffic for that URL and create alerts from it"
 
 
 class Input:

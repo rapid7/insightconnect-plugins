@@ -20,7 +20,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |api_private_token|credential_secret_key|None|True|Enter API private token|None|1452d258-7c12-7c12-7c12-1452d25874c2|
 |api_public_token|credential_secret_key|None|True|Enter API public token|None|1452d258-7c12-7c12-7c12-1452d25874c2|
-|url|string|None|True|Connection URL|None|None|
+|url|string|None|True|API URL|None|None|
 
 Example input:
 
@@ -30,6 +30,7 @@ Example input:
   "api_public_token": "1452d258-7c12-7c12-7c12-1452d25874c2"
 }
 ```
+
 ## Technical Details
 
 ### Actions
@@ -87,6 +88,7 @@ _This plugin does not contain any triggers._
 ### Custom Output Types
 
 _This plugin does not contain any custom output types._
+
 ## Troubleshooting
 
 

@@ -24,7 +24,7 @@ connection:
   url:
     title: URL
     type: string
-    description: Connection URL
+    description: API URL
     required: true
   api_public_token:
     title: API Public Token

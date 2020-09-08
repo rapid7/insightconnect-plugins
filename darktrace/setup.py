@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="darktrace-rapid7-plugin",
       version="1.0.0",
-      description="This plugin utilizes DarkTrace to  detects novel attacks and insider threats at an early stage",
+      description="Automate the management of watched domains and alerting using the Darktrace plugin",
       author="rapid7",
       author_email="",
       url="",

@@ -7,7 +7,7 @@ from icon_darktrace import connection, actions, triggers
 Name = "DarkTrace"
 Vendor = "rapid7"
 Version = "1.0.0"
-Description = "This plugin utilizes DarkTrace to  detects novel attacks and insider threats at an early stage"
+Description = "Automate the management of watched domains and alerting using the Darktrace plugin"
 
 
 class ICONDarktrace(insightconnect_plugin_runtime.Plugin):

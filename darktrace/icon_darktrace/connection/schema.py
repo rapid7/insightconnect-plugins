@@ -30,7 +30,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "Connection URL",
+      "description": "API URL",
       "order": 1
     }
   },
