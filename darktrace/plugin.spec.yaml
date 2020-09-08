@@ -4,7 +4,7 @@ products: [insightconnect]
 name: darktrace
 title: DarkTrace
 version: 1.0.0
-description: This plugin utilizes DarkTrace to  detects novel attacks and insider threats at an early stage
+description: Automate the management of watched domains and alerting using the Darktrace plugin
 vendor: rapid7
 support: rapid7
 status: []
