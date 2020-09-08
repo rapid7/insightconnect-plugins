@@ -1,0 +1,99 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: darktrace
+title: DarkTrace
+version: 1.0.0
+description: This plugin utilizes DarkTrace to  detects novel attacks and insider threats at an early stage
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/darktrace
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.darktrace.com/
+tags:
+- darktrace
+- immune
+- system
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [darktrace, immune, system, detects]
+  features: []
+connection:
+  url:
+    title: URL
+    type: string
+    description: Connection URL
+    required: true
+  api_public_token:
+    title: API Public Token
+    type: credential_secret_key
+    description: Enter API public token
+    required: true
+    example: 1452d258-7c12-7c12-7c12-1452d25874c2
+  api_private_token:
+    title: API Private Token
+    type: credential_secret_key
+    description: Enter API private token
+    required: true
+    example: 1452d258-7c12-7c12-7c12-1452d25874c2
+actions:
+  update_watched_domains:
+    title: Update Watched Domains
+    description: Add or remove items from DarkTrace. If an indicator is added, DarkTrace will monitor network traffic for that URL and create alerts from it
+    input:
+      entry:
+        title: Entry
+        description: An external domain, hostname or IP address
+        type: string
+        required: true
+        example: 192.168.10.10
+      watched_domain_status:
+        title: Watched Domain Status
+        description: Determine whether item should be added or remove from the list. Set True to add, set false to remove
+        type: boolean
+        required: true
+        example: true
+      description:
+        title: Description
+        description: Description of the indicator
+        type: string
+        required: false
+        default: Watched Domains managed by InsightConnect
+        example: Watched Domains managed by InsightConnect
+      source:
+        title: Source
+        description: Source of an indicator
+        type: string
+        required: false
+        default: InsightConnect
+        example: InsightConnect
+      expiration_time:
+        title: Expiration Time
+        description: Expiration time of an indicator
+        type: string
+        required: false
+        example: 2020-04-03 15:23:20
+      hostname:
+        title: Hostname
+        description: Set to true to treat the added items as hostnames rather than domains
+        type: boolean
+        required: false
+        example: true
+    output:
+      success:
+        title: Success
+        description: Success
+        type: boolean
+        required: true
+      added:
+        title: Added
+        description: Added
+        type: integer
+        required: false
+      updated:
+        title: Updated
+        description: Updated
+        type: integer
+        required: false
