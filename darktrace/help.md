@@ -1,6 +1,6 @@
 # Description
 
-This plugin utilizes [DarkTrace](https://www.darktrace.com/) to  detects novel attacks and insider threats at an early stage
+[DarkTrace](https://www.darktrace.com/) is an AI cybersecurity company for threat detection and response across cloud, email, industrial and the network.
 
 # Key Features
 
