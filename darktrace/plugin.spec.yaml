@@ -18,7 +18,7 @@ tags:
 - system
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [darktrace, immune, system, detects]
+  keywords: [darktrace, nta, network]
   features: []
 connection:
   url:
