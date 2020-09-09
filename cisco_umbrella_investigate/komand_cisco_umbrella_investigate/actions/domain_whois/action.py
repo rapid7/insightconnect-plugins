@@ -17,7 +17,7 @@ class DomainWhois(komand.Action):
         try:
             domain_whois = self.connection.investigate.domain_whois(domain)
         except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 
         return {"whois": [domain_whois]}
 

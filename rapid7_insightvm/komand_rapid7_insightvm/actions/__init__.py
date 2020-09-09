@@ -10,6 +10,7 @@ from .create_scan_engine_pool.action import CreateScanEnginePool
 from .create_site.action import CreateSite
 from .create_tag.action import CreateTag
 from .create_user.action import CreateUser
+from .delete_asset.action import DeleteAsset
 from .delete_asset_group.action import DeleteAssetGroup
 from .delete_exception.action import DeleteException
 from .delete_scan_engine.action import DeleteScanEngine
@@ -53,6 +54,7 @@ from .get_users.action import GetUsers
 from .get_vulnerabilities_by_cve.action import GetVulnerabilitiesByCve
 from .get_vulnerability.action import GetVulnerability
 from .get_vulnerability_affected_assets.action import GetVulnerabilityAffectedAssets
+from .list_inactive_assets.action import ListInactiveAssets
 from .list_reports.action import ListReports
 from .remove_asset_group_tags.action import RemoveAssetGroupTags
 from .remove_asset_tag.action import RemoveAssetTag

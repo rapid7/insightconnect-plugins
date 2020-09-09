@@ -26,7 +26,7 @@ class Sample(komand.Action):
         try:
             sample = self.connection.investigate.sample(hash, limit=limit, offset=offset)
         except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 
         return sample
 

@@ -1,13 +1,13 @@
 import hashlib
 
-import komand
+import insightconnect_plugin_runtime
 from .schema import StringInput, StringOutput, Input, Output, Component
 
 
 # Custom imports below
 
 
-class String(komand.Action):
+class String(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

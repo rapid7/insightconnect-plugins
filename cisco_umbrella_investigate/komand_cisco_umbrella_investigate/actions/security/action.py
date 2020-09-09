@@ -17,7 +17,7 @@ class Security(komand.Action):
         try:
             security = self.connection.investigate.security(domain)
         except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 
         if not security:
             raise PluginException(cause='An empty response was given.', assistance='A security score for the domain may not exist, please try another query.')

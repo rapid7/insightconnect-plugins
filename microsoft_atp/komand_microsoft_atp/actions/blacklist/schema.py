@@ -52,12 +52,13 @@ class BlacklistInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Description",
       "description": "Description of the indicator",
+      "default": "Indicator Blacklisted from InsightConnect",
       "order": 5
     },
     "expiration_time": {
       "type": "string",
       "title": "Expiration Time",
-      "description": "The expiration time of the indicator",
+      "description": "The expiration time of the indicator, default value is one year from now",
       "order": 6
     },
     "indicator": {

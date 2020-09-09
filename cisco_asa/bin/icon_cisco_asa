@@ -6,7 +6,7 @@ from icon_cisco_asa import connection, actions, triggers
 
 Name = "Cisco Adaptive Security Appliance"
 Vendor = "rapid7"
-Version = "1.3.0"
+Version = "1.4.0"
 Description = "The Cisco ASA plugin allows you to automate the management of network objects"
 
 
@@ -22,6 +22,8 @@ class ICONCiscoAsa(insightconnect_plugin_runtime.Plugin):
         self.add_action(actions.AddAddressToGroup())
 
         self.add_action(actions.CheckIfAddressObjectInGroup())
+
+        self.add_action(actions.CreateAddressObject())
 
         self.add_action(actions.DeleteAddressObject())
 
