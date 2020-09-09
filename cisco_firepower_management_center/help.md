@@ -20,14 +20,20 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|domain|string|Global|False|Cisco FirePower Management Centre Domain|None|Global|
+|port|integer|443|False|The port number for provided host|None|443|
 |server|string|None|False|Enter the address for the server|None|www.example.com|
+|ssl_verify|boolean|True|False|Validate TLS / SSL certificate|None|True|
 |username_and_password|credential_username_password|None|True|Cisco username and password|None|{"username":"user1", "password":"mypassword"}|
 
 Example input:
 
 ```
 {
+  "domain": "Global",
+  "port": 443,
   "server": "www.example.com",
+  "ssl_verify": true,
   "username_and_password": {
     "username": "user1",
     "password": "mypassword"
@@ -39,6 +45,61 @@ Example input:
 
 ### Actions
 
+#### Delete Address Object
+
+This action deletes the address object.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address_object|string|None|True|Name of the address object to delete|None|MaliciousHost|
+
+Example input:
+
+```
+{
+  "address_object": "MaliciousHost"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|address_object|address_object|False|Returns information about the deleted address object|
+
+Example output:
+
+```
+{
+  "address_object": {
+    "dnsResolution": "IPV4_AND_IPV6",
+    "id": "00000000-0000-0ed3-0000-012884905524",
+    "links": {
+      "parent": "https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/networkaddresses",
+      "self": "https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/fqdns/00000000-0000-0ed3-0000-012884905524"
+    },
+    "metadata": {
+      "domain": {
+        "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+        "name": "Global",
+        "type": "Domain"
+      },
+      "lastUser": {
+        "name": "admin"
+      },
+      "parentType": "NetworkAddress",
+      "timestamp": 0
+    },
+    "name": "Example Object Created from InsightConnect",
+    "overridable": false,
+    "type": "FQDN",
+    "value": "www.example.com"
+  }
+}
+```
+
 #### Create Address Object
 
 This action creates a new address object.
@@ -48,7 +109,7 @@ This action creates a new address object.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |address|string|None|True|IP address, CIDR IP address, or domain name to assign to the Address Object|None|example.com|
-|address_object|string|None|False|Name of the Address Object, defaults to the value address in the address field if no name is given|None|MaliciousHost|
+|address_object|string|None|False|Name of the address object, defaults to the value address in the address field if no name is given|None|MaliciousHost|
 |skip_private_address|boolean|None|True|If set to true, any addresses that are defined in the RFC1918 space will not be blocked. e.g. 10/8, 172.16/12, 192.168/16|None|True|
 |whitelist|[]string|None|False|This list contains a set of hosts that should not be blocked. This can include IP addresses, CIDR IP addresses, and domains|None|["198.51.100.100", "192.0.2.0/24", "example.com"]|
 
@@ -78,30 +139,28 @@ Example output:
 ```
 {
   "address_object": {
-      "links": {
-        "self": "https://example.com/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/hosts/00000000-0000-0ed3-0000-012884903406",
-        "parent": "https://example.com/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/networkaddresses"
+    "dnsResolution": "IPV4_AND_IPV6",
+    "id": "00000000-0000-0ed3-0000-012884905524",
+    "links": {
+      "parent": "https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/networkaddresses",
+      "self": "https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/fqdns/00000000-0000-0ed3-0000-012884905524"
+    },
+    "metadata": {
+      "domain": {
+        "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+        "name": "Global",
+        "type": "Domain"
       },
-      "type": "Host",
-      "value": "198.51.100.100",
-      "overridable": false,
-      "description": "Created by fmcapi.",
-      "id": "00000000-0000-0ed3-0000-012884903406",
-      "name": "TestAddressObjectHost",
-      "metadata": {
-        "timestamp": 1599230214106,
-        "lastUser": {
-          "name": "admin"
-        },
-        "domain": {
-          "name": "Global",
-          "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
-          "type": "Domain"
-        },
-        "ipType": "V_4",
-        "parentType": "NetworkAddress"
+      "lastUser": {
+        "name": "admin"
       },
-      "items": []
+      "parentType": "NetworkAddress",
+      "timestamp": 0
+    },
+    "name": "Example Object Created from InsightConnect",
+    "overridable": false,
+    "type": "FQDN",
+    "value": "www.example.com"
   }
 }
 ```
@@ -151,7 +210,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.1.0 - New action - Create Address Object
+* 1.1.0 - New actions - Create Address Object, Delete Address Object
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 

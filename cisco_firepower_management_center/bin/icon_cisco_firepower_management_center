@@ -23,6 +23,8 @@ class ICONCiscoFirepowerManagementCenter(komand.Plugin):
 
         self.add_action(actions.CreateAddressObject())
 
+        self.add_action(actions.DeleteAddressObject())
+
 
 def main():
     """Run plugin"""

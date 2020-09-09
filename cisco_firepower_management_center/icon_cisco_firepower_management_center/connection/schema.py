@@ -4,7 +4,10 @@ import json
 
 
 class Input:
+    DOMAIN = "domain"
+    PORT = "port"
     SERVER = "server"
+    SSL_VERIFY = "ssl_verify"
     USERNAME_AND_PASSWORD = "username_and_password"
     
 
@@ -14,11 +17,32 @@ class ConnectionSchema(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "domain": {
+      "type": "string",
+      "title": "Domain",
+      "description": "Cisco FirePower Management Centre Domain",
+      "default": "Global",
+      "order": 5
+    },
+    "port": {
+      "type": "integer",
+      "title": "Port",
+      "description": "The port number for provided host",
+      "default": 443,
+      "order": 4
+    },
     "server": {
       "type": "string",
       "title": "Server Address",
       "description": "Enter the address for the server",
       "order": 1
+    },
+    "ssl_verify": {
+      "type": "boolean",
+      "title": "TLS / SSL Verify",
+      "description": "Validate TLS / SSL certificate",
+      "default": true,
+      "order": 3
     },
     "username_and_password": {
       "$ref": "#/definitions/credential_username_password",

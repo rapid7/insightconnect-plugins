@@ -5,7 +5,6 @@ import re
 import validators
 from ipaddress import ip_network, ip_address, IPv4Network, IPv6Network
 from komand.exceptions import PluginException
-import fmcapi
 
 
 class CreateAddressObject(komand.Action):
@@ -18,7 +17,6 @@ class CreateAddressObject(komand.Action):
                 output=CreateAddressObjectOutput())
 
     def run(self, params={}):
-        name = params.get(Input.ADDRESS_OBJECT, params.get(Input.ADDRESS))
         address = params.get(Input.ADDRESS)
         address_type = self._determine_address_type(address)
         whitelist = params.get(Input.WHITELIST)
@@ -32,41 +30,16 @@ class CreateAddressObject(komand.Action):
         if whitelist:
             self._match_whitelist(address, whitelist, address_type)
 
-        try:
-            with fmcapi.FMC(
-                host=self.connection.host,
-                username=self.connection.username,
-                password=self.connection.password,
-                autodeploy=True,
-                limit=10
-            ) as fmc1:
-                return {
-                    Output.ADDRESS_OBJECT: self.create_address_object(
-                        fmc=fmc1,
-                        name=name,
-                        value=address,
-                        object_type=address_type
-                    )
+        return {
+            Output.ADDRESS_OBJECT: self.connection.cisco_firepower_api.create_address_object(
+                address_type,
+                {
+                    "name": params.get(Input.ADDRESS_OBJECT, params.get(Input.ADDRESS)),
+                    "value": address
                 }
-        except TypeError:
-            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
-
-    def create_address_object(self, fmc: fmcapi.FMC, name: str, value: str, object_type: str) -> dict:
-        if object_type == 'ipv4' or object_type == 'ipv6':
-            address_object = fmcapi.Hosts(fmc=fmc)
-        elif object_type == 'cidr':
-            address_object = fmcapi.Networks(fmc=fmc)
-        elif object_type == 'fqdn':
-            address_object = fmcapi.FQDNS(fmc=fmc)
-
-        address_object.name = name
-        address_object.value = value
-        if address_object.post():
-            return address_object.get()
-        
-        raise PluginException(
-            cause=f"Address Object - {name}, already exists.",
-            assistance=f"Please provide a different name for the address object and try again.")
+            )
+        }
+         
     
     def _match_whitelist(self, address, whitelist, object_type):
         if object_type == "fqdn":

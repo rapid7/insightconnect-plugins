@@ -235,6 +235,27 @@ connection:
     type: credential_username_password
     required: true
     example: '{"username":"user1", "password":"mypassword"}'
+  ssl_verify:
+    title: TLS / SSL Verify
+    description: Validate TLS / SSL certificate
+    type: boolean
+    default: true
+    required: false
+    example: true
+  port:
+    title: Port
+    description: The port number for provided host
+    type: integer
+    default: 443
+    required: false
+    example: 443
+  domain:
+    title: Domain
+    description: Cisco FirePower Management Centre Domain
+    type: string
+    default: Global
+    required: false
+    example: Global
 
 actions:
   block_url_policy:
@@ -268,7 +289,7 @@ actions:
     input:
       address_object:
         title: Address Object
-        description: Name of the Address Object, defaults to the value address in the address field if no name is given
+        description: Name of the address object, defaults to the value address in the address field if no name is given
         type: string
         required: false
         example: MaliciousHost
@@ -294,5 +315,21 @@ actions:
       address_object:
         title: Address Object
         description: Returns information about the newly created address object
+        type: address_object
+        required: false
+  delete_address_object:
+    title: Delete Address Object
+    description: Deletes the address object
+    input:
+      address_object:
+        title: Address Object
+        description: Name of the address object to delete
+        type: string
+        required: true
+        example: MaliciousHost
+    output:
+      address_object:
+        title: Address Object
+        description: Returns information about the deleted address object
         type: address_object
         required: false

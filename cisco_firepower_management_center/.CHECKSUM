@@ -1,6 +1,6 @@
 {
-	"spec": "1decea9e8c7f32f0a6ecab6536c991c9",
-	"manifest": "9b7c0f2821fcf254acb7389b9b832382",
+	"spec": "e9009d8157e3b51fcc2041af993d4fce",
+	"manifest": "e15c368c70d1ca450f61f4a45c679af8",
 	"setup": "9fa4c9e102edbda0463e32e14239a9ca",
 	"schemas": [
 		{
@@ -9,11 +9,15 @@
 		},
 		{
 			"identifier": "create_address_object/schema.py",
-			"hash": "a1c650ede4fb947f252056d6c59aad18"
+			"hash": "2b617795aeecc8091c2ff5efc5299d75"
+		},
+		{
+			"identifier": "delete_address_object/schema.py",
+			"hash": "6912083a84588775f7691b9be3c9a42f"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "3892ccf9dc345abd2fe944f55485f589"
+			"hash": "f808d394b998418943dad69ea4d3f70d"
 		}
 	]
 }

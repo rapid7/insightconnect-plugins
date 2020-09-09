@@ -4,57 +4,32 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Creates a new address object"
+    DESCRIPTION = "Deletes the address object"
 
 
 class Input:
-    ADDRESS = "address"
     ADDRESS_OBJECT = "address_object"
-    SKIP_PRIVATE_ADDRESS = "skip_private_address"
-    WHITELIST = "whitelist"
     
 
 class Output:
     ADDRESS_OBJECT = "address_object"
     
 
-class CreateAddressObjectInput(komand.Input):
+class DeleteAddressObjectInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "address": {
-      "type": "string",
-      "title": "Address",
-      "description": "IP address, CIDR IP address, or domain name to assign to the Address Object",
-      "order": 2
-    },
     "address_object": {
       "type": "string",
       "title": "Address Object",
-      "description": "Name of the address object, defaults to the value address in the address field if no name is given",
+      "description": "Name of the address object to delete",
       "order": 1
-    },
-    "skip_private_address": {
-      "type": "boolean",
-      "title": "Skip Private Addresses",
-      "description": "If set to true, any addresses that are defined in the RFC1918 space will not be blocked. e.g. 10/8, 172.16/12, 192.168/16",
-      "order": 3
-    },
-    "whitelist": {
-      "type": "array",
-      "title": "Whitelist",
-      "description": "This list contains a set of hosts that should not be blocked. This can include IP addresses, CIDR IP addresses, and domains",
-      "items": {
-        "type": "string"
-      },
-      "order": 4
     }
   },
   "required": [
-    "address",
-    "skip_private_address"
+    "address_object"
   ]
 }
     """)
@@ -63,7 +38,7 @@ class CreateAddressObjectInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class CreateAddressObjectOutput(komand.Output):
+class DeleteAddressObjectOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
@@ -72,7 +47,7 @@ class CreateAddressObjectOutput(komand.Output):
     "address_object": {
       "$ref": "#/definitions/address_object",
       "title": "Address Object",
-      "description": "Returns information about the newly created address object",
+      "description": "Returns information about the deleted address object",
       "order": 1
     }
   },
