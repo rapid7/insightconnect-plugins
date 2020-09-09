@@ -37,7 +37,7 @@ Example input:
   "host": "ldaps://example.com",
   "port": 389,
   "use_ssl": true,
-  "username_password": {"username":"user1", "password":"mypassword"}
+  "username_password": "{\"username\":\"user1\", \"password\":\"mypassword\"}"
 }
 ```
 
@@ -106,7 +106,7 @@ Example input:
 ```
 {
   "account_disabled": "true",
-  "additional_parameters": {"telephoneNumber":"(617)555-1234"},
+  "additional_parameters": "{\"telephoneNumber\":\"(617)555-1234\"}",
   "domain_name": "example.com",
   "first_name": "John",
   "last_name": "Doe",
@@ -445,6 +445,7 @@ paired `\(\)` are supported
 
 # Version History
 
+* 3.2.10 _ Fix issue where escaped characters were not being handled correctly
 * 3.2.9 - Fix issue with error handling and logging for the Modify Groups action | Add example inputs | Update to use ldap3 2.7 and Python 3.8
 * 3.2.8 - Fix issue were adding objects to containers might fail
 * 3.2.7 - New spec and help.md format for the Extension Library
