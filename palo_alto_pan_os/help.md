@@ -33,10 +33,10 @@ Example input:
 
 ```
 {
-  "credentials": {
+  "credentials": "{
     "username":"username",
     "password":"password"
-  },
+  }",
   "server": "http://www.example.com",
   "verify_cert": true
 }
@@ -188,9 +188,7 @@ Example input:
 
 ```
 {
-  "device_name": "localhost.localdomain",
-  "policy_name": "InsightConnect Block Policy",
-  "virtual_system": "vsys1"
+  "xpath": "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='test_group']"
 }
 ```
 
@@ -333,6 +331,24 @@ This action is used to create a new security policy rule.
 Example input:
 
 ```
+{
+  "action": "drop",
+  "application": "any",
+  "description": "Block Rule",
+  "destination": "any",
+  "disable_server_response_inspection": false,
+  "disabled": false,
+  "dst_zone": "any",
+  "log_end": false,
+  "log_start": false,
+  "negate_destination": false,
+  "negate_source": false,
+  "rule_name": "ICON Block Rule",
+  "service": "any",
+  "source": "any",
+  "source_user": "any",
+  "src_zone": "any"
+}
 ```
 
 ##### Output
@@ -362,12 +378,16 @@ This action is used to create a new object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|element|string|None|True|XML representation of the object to be created|None|None|
-|xpath|string|None|True|Xpath location to create the new object|None|None|
+|element|string|None|True|XML representation of the object to be created|None|<application><member>8x8</member></application>|
+|xpath|string|None|True|Xpath location to create the new object|None|/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']|
 
 Example input:
 
 ```
+{
+  "element": "\u003capplication\u003e\u003cmember\u003e8x8\u003c/member\u003e\u003c/application\u003e",
+  "xpath": "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']"
+}
 ```
 
 ##### Output
@@ -460,12 +480,16 @@ This action is used to edit an existing object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|element|string|None|True|XML representation of the updated object. This replaces the previous object entirely, any unchanged attributes must be restated|None|None|
-|xpath|string|None|True|Xpath location of the object to edit|None|None|
+|element|string|None|True|XML representation of the updated object. This replaces the previous object entirely, any unchanged attributes must be restated|None|<application><member>8x8</member></application>|
+|xpath|string|None|True|Xpath location of the object to edit|None|/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']/application|
 
 Example input:
 
 ```
+{
+  "element": "\u003capplication\u003e\u003cmember\u003e8x8\u003c/member\u003e\u003c/application\u003e",
+  "xpath": "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']/application"
+}
 ```
 
 ##### Output
@@ -728,11 +752,14 @@ This action is used to run operational command.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|cmd|string|None|False|XML specifying operation to be completed|None|None|
+|cmd|string|None|False|XML specifying operation to be completed|None|<show><commit-locks/></show>|
 
 Example input:
 
 ```
+{
+  "cmd": "\u003cshow\u003e\u003ccommit-locks/\u003e\u003c/show\u003e"
+}
 ```
 
 ##### Output
@@ -770,7 +797,7 @@ This action is used to add a rule to a PAN-OS security policy.
 |rule_name|string|None|True|Name of the rule|None|ICON Block Rule|
 |service|string|None|False|Service type for which this rule will be applied e.g. HTTP, HTTPS, or any|None|any|
 |source|string|None|False|A source for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|any|
-|source_user|string|None|False|User that the network traffic originated from e.g. Joe Smith, or any|None|None|
+|source_user|string|None|False|User that the network traffic originated from e.g. Joe Smith, or any|None|Joe Smith|
 |src_zone|string|None|False|Zone in which the traffic originated e.g. server zone, or any|None|any|
 |update_active_or_candidate_configuration|string|None|True|Will apply the update to the active or candidate configuration. If active is chosen any uncommitted candidate configuration will be lost|['active', 'candidate']|active|
 |url_category|string|None|False|The URL category e.g. adult|None|adult|
@@ -787,6 +814,7 @@ Example input:
   "rule_name": "ICON Block Rule",
   "service": "any",
   "source": "any",
+  "source_user": "Joe Smith",
   "src_zone": "any",
   "update_active_or_candidate_configuration": "active",
   "url_category": "adult"
@@ -940,6 +968,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 6.0.2 - Add Input and Output examples
 * 6.0.1 - Improve error handling in `pa_os_request.py`
 * 6.0.0 - Update to Create Address Object to add Skip RFC 1918 input
 * 5.1.1 - Fix issue where IPv6 address were not supported

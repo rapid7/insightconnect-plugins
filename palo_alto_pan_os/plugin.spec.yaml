@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_pan_os
 title: Palo Alto Firewall
 description: Manage Palo Alto Networks firewall devices
-version: 6.0.1
+version: 6.0.2
 vendor: rapid7
 support: rapid7
 status: []
@@ -55,9 +55,9 @@ actions:
       rule_name:
         title: Rule Name
         description: Name of the rule
+        example: ICON Block Rule
         type: string
         required: true
-        example: ICON Block Rule
       source:
         title: Source
         description: Sources for which this rule will be applied e.g. 10.0.0.1, computername,
@@ -216,11 +216,13 @@ actions:
         type: string
         description: Xpath location to create the new object
         required: true
+        example: /config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']
       element:
         title: Element
         type: string
         description: XML representation of the object to be created
         required: true
+        example: "<application><member>8x8</member></application>"
     output:
       response:
         title: Response
@@ -236,12 +238,14 @@ actions:
         type: string
         description: Xpath location of the object to edit
         required: true
+        example: /config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']/application
       element:
         title: Element
         type: string
         description: XML representation of the updated object. This replaces the previous
           object entirely, any unchanged attributes must be restated
         required: true
+        example: "<application><member>8x8</member></application>"
     output:
       response:
         title: Response
@@ -257,7 +261,7 @@ actions:
         type: string
         description: XML specifying any commit arguments
         required: true
-        example: <commit></commit>
+        example: "<commit></commit>"
       action:
         title: Action
         type: string
@@ -280,6 +284,7 @@ actions:
         type: string
         description: XML specifying operation to be completed
         required: false
+        example: "<show><commit-locks/></show>"
     output:
       response:
         title: Response
@@ -409,7 +414,7 @@ actions:
           or any
         type: string
         required: false
-        examle: Joe Smith
+        example: Joe Smith
       src_zone:
         title: SRC Zone
         description: Zone in which the traffic originated e.g. server zone, or any
