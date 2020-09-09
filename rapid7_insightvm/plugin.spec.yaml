@@ -3679,10 +3679,10 @@ actions:
         example: 42
       date:
         title: Date
-        description: Expiration date. e.g. 2020-01-01T06:59:59.999Z
+        description: Expiration date. e.g. 2020-02-24T06:59:59.999Z
         type: string
         required: true
-        example: "2020-10-10T06:59:59.999Z"
+        example: "2020-02-24T06:59:59.999Z"
     output:
       success:
         title: Success

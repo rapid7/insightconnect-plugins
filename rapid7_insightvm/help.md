@@ -42,14 +42,14 @@ This action is used to update Vulnerability Exception Expiration Date.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|date|string|None|True|Expiration date. e.g. 2020-01-01T06:59:59.999Z|None|2020-10-10T06:59:59.999Z|
+|date|string|None|True|Expiration date. e.g. 2020-02-24T06:59:59.999Z|None|2020-02-24T06:59:59.999Z|
 |id|integer|None|True|Asset ID|None|42|
 
 Example input:
 
 ```
 {
-  "date": "2020-10-10T06:59:59.999Z",
+  "date": "2020-02-24T06:59:59.999Z",
   "id": 42
 }
 ```
