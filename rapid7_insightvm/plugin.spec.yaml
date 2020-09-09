@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans
-version: 4.2.1
+version: 4.3.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -3650,6 +3650,24 @@ actions:
         description: A list of inactive assets
         type: "[]asset"
         required: true
+  get_expiring_vulnerability_exceptions:
+    title: Get Expiring Vulnerability Exceptions
+    description: Return a list of expiring vulnerability exceptions
+    input:
+      expires_in_less_than:
+        title: Expires in Less Than
+        description: Number of days left until the exception expires
+        type: integer
+        example: 7
+        default: 7
+        required: true
+    output:
+      exceptions:
+        title: Exceptions
+        description: Exceptions about to expire
+        type: "[]vulnerability_exception"
+        required: false
+
 triggers:
   new_scans:
     title: New Scans

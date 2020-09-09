@@ -32,6 +32,7 @@ from .get_asset_tags.action import GetAssetTags
 from .get_asset_vulnerabilities.action import GetAssetVulnerabilities
 from .get_authentication_source.action import GetAuthenticationSource
 from .get_authentication_sources.action import GetAuthenticationSources
+from .get_expiring_vulnerability_exceptions.action import GetExpiringVulnerabilityExceptions
 from .get_role.action import GetRole
 from .get_roles.action import GetRoles
 from .get_scan.action import GetScan
