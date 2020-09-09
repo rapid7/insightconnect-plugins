@@ -28,7 +28,7 @@ class ADUtils:
         attribute = re.findall(r',..=', dn)
 
         # Ensure that special characters are escaped
-        character_list = ['\\', ',', '#', '+', '<', '>', ';', '"', '/']
+        character_list = [',', '#', '+', '<', '>', ';', '"', '/']
         for idx, value in enumerate(dn_list):
             for escaped_char in character_list:
                 if f'\{escaped_char}' not in value:
