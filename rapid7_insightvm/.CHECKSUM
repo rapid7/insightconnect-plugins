@@ -1,7 +1,7 @@
 {
-	"spec": "c9be745759cba4a05da1cc58de6b9efe",
-	"manifest": "ebec470ad2b0d861627534457377ff3f",
-	"setup": "664bfd37c8af5d8686078a675fce4560",
+	"spec": "b87a53a4e2a969cfa400c4f99fd1cd3f",
+	"manifest": "223283b2ac955d90b15a3aa3257d1efc",
+	"setup": "f78fc0bfacad433d315f002807a678fb",
 	"schemas": [
 		{
 			"identifier": "add_scan_engine_pool_engine/schema.py",
@@ -134,6 +134,10 @@
 		{
 			"identifier": "get_authentication_sources/schema.py",
 			"hash": "c3f015b6666fedbd513f0348f42ff04e"
+		},
+		{
+			"identifier": "get_expiring_vulnerability_exceptions/schema.py",
+			"hash": "6d35295bed12ae2c7d8f6de2098c8363"
 		},
 		{
 			"identifier": "get_role/schema.py",
