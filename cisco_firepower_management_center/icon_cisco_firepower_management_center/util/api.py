@@ -71,9 +71,9 @@ class CiscoFirePowerApi:
 
     def generate_token(self) -> str:
         response = requests.post(f"{self.url}fmc_platform/v1/auth/generatetoken",
-                                    headers={"Content-Type": "application/json"},
-                                    auth=(self.username, self.password),
-                                    verify=self.verify_ssl)
+                                 headers={"Content-Type": "application/json"},
+                                 auth=(self.username, self.password),
+                                 verify=self.verify_ssl)
 
         if not response.status_code == 204:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)

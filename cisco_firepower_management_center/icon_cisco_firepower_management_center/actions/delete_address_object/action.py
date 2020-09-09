@@ -14,8 +14,7 @@ class DeleteAddressObject(komand.Action):
                 output=DeleteAddressObjectOutput())
 
     def run(self, params={}):
-        name = params.get(Input.ADDRESS_OBJECT)
-        object_info = self.find_object_type_id(name)
+        object_info = self.find_object_type_id(params.get(Input.ADDRESS_OBJECT))
 
         return {
             Output.ADDRESS_OBJECT: self.connection.cisco_firepower_api.delete_address_object(
@@ -38,4 +37,4 @@ class DeleteAddressObject(komand.Action):
                         }
 
         raise PluginException(cause=f"The address object {name} does not exist in Cisco Firepower.",
-                                assistance="Please enter valid names and try again.")
+                              assistance="Please enter valid names and try again.")

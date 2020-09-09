@@ -24,8 +24,8 @@ class CreateAddressObject(komand.Action):
         if params.get(Input.SKIP_PRIVATE_ADDRESS) and address_type != "fqdn" and self._check_if_private(address,
                                                                                                         address_type):
             raise PluginException(cause="Private address provided to be blocked.",
-                                    assistance="Skip Private Address set to true but private IP: "
-                                                f"{address} provided to be blocked.")
+                                  assistance="Skip Private Address set to true but private IP: "
+                                             f"{address} provided to be blocked.")
 
         if whitelist:
             self._match_whitelist(address, whitelist, address_type)
@@ -39,8 +39,7 @@ class CreateAddressObject(komand.Action):
                 }
             )
         }
-         
-    
+
     def _match_whitelist(self, address, whitelist, object_type):
         if object_type == "fqdn":
             if address in whitelist:
