@@ -36,7 +36,7 @@ Example input:
 
 #### Update Vulnerability Exception Expiration Date
 
-This action is used to update Vulnerability Exception Expiration Date.
+This action is used to update vulnerability exception expiration dates.
 
 ##### Input
 
