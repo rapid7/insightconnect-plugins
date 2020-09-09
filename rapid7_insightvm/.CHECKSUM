@@ -1,5 +1,5 @@
 {
-	"spec": "68004fa3d39747485680b31b8cbf9212",
+	"spec": "fcc8a67902631e0e85376354ebd896ee",
 	"manifest": "cee11dbb1f0ec8cd8535161fe81fd4ad",
 	"setup": "18e154cb6b9761bb87e6d05eb5e4f61c",
 	"schemas": [
@@ -345,7 +345,7 @@
 		},
 		{
 			"identifier": "update_vulnerability_exception_expiration_date/schema.py",
-			"hash": "7bbec4a9e8f869a7ebeb40ba1c30494d"
+			"hash": "f2fd0debe19764a587619ebb8b49ea1f"
 		},
 		{
 			"identifier": "connection/schema.py",

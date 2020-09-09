@@ -3669,7 +3669,7 @@ actions:
         required: false
   update_vulnerability_exception_expiration_date:
     title: Update Vulnerability Exception Expiration Date
-    description: Update Vulnerability Exception Expiration Date
+    description: Update vulnerability exception expiration date
     input:
       id:
         title: ID
