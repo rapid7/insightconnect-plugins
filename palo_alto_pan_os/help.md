@@ -33,10 +33,10 @@ Example input:
 
 ```
 {
-  "credentials": "{
+  "credentials": {
     "username":"username",
     "password":"password"
-  }",
+  },
   "server": "http://www.example.com",
   "verify_cert": true
 }
@@ -188,7 +188,9 @@ Example input:
 
 ```
 {
-  "xpath": "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='test_group']"
+  "device_name": "localhost.localdomain",
+  "policy_name": "InsightConnect Block Policy",
+  "virtual_system": "vsys1"
 }
 ```
 
@@ -385,7 +387,7 @@ Example input:
 
 ```
 {
-  "element": "\u003capplication\u003e\u003cmember\u003e8x8\u003c/member\u003e\u003c/application\u003e",
+  "element": "<application><member>8x8</member></application>",
   "xpath": "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']"
 }
 ```
@@ -487,7 +489,7 @@ Example input:
 
 ```
 {
-  "element": "\u003capplication\u003e\u003cmember\u003e8x8\u003c/member\u003e\u003c/application\u003e",
+  "element": "<application><member>8x8</member></application>",
   "xpath": "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']/application"
 }
 ```
@@ -681,7 +683,7 @@ Example input:
 ```
 {
   "action": "all",
-  "cmd": "\u003ccommit\u003e\u003c/commit\u003e"
+  "cmd": "<commit></commit>"
 }
 ```
 
@@ -758,7 +760,7 @@ Example input:
 
 ```
 {
-  "cmd": "\u003cshow\u003e\u003ccommit-locks/\u003e\u003c/show\u003e"
+  "cmd": "<show><commit-locks/></show>"
 }
 ```
 

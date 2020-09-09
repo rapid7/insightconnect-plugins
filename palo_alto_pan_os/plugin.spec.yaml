@@ -739,16 +739,16 @@ actions:
         title: Policy Name
         description: Policy name
         type: string
-        example: InsightConnect Block Policy
         required: true
         order: 1
+        example: InsightConnect Block Policy
       device_name:
         title: Device Name
         description: Device name
         type: string
         default: "localhost.localdomain"
-        example: "localhost.localdomain"
         required: true
+        example: "localhost.localdomain"
         order: 2
       virtual_system:
         title: Virtual System Name
