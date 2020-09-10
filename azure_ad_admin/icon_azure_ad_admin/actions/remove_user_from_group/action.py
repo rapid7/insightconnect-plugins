@@ -25,7 +25,7 @@ class RemoveUserFromGroup(komand.Action):
         group_id = group.get("id")
 
         self.logger.info(f"Getting user info: {user_id}")
-        user_response = get_user_info(self.connection, user_id)
+        user_response = get_user_info(self.connection, user_id, self.logger)
         user_object = user_response.json()
         user_id = user_object.get("id")
 
