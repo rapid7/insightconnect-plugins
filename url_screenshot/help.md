@@ -35,6 +35,12 @@ This action is used to grab a screenshot of a URL from the Orchestrator.
 Example input:
 
 ```
+{
+  "delay": 200,
+  "full_page": false,
+  "url": "https://www.google.com"
+}
+
 ```
 
 ##### Output
