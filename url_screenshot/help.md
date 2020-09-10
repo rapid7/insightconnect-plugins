@@ -26,11 +26,16 @@ This action is used to grab a screenshot of a URL from the Orchestrator.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|delay|integer|None|False|Delay (in seconds) after page has loaded before screenshot|None|
-|full_page|boolean|False|True|Export screenshot of "body" element instead of the default viewport.  This "body" element may have some formatting issues but should contain all elements of the page|None|
-|url|string|None|True|URL to screenshot|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|delay|integer|None|False|Delay (in seconds) after page has loaded before screenshot|None|None|
+|full_page|boolean|False|True|Export screenshot of "body" element instead of the default viewport.  This "body" element may have some formatting issues but should contain all elements of the page|None|None|
+|url|string|None|True|URL to screenshot|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -59,6 +64,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.1 - Change icon/extension image
 * 1.0.0 - Initial plugin
 
 # Links

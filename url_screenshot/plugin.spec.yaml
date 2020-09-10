@@ -4,7 +4,7 @@ products: [insightconnect]
 name: url_screenshot
 title: Screenshot a URL
 description: Screenshot a URL from the Orchestrator
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
