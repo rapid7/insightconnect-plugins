@@ -12,8 +12,7 @@ def get_user_info(connection, user_id, logger):
         result = requests.get(endpoint, headers=headers)
     except Exception:
         counter = 0; # We are going to try this 5 times and give up.
-        while counter < 5:
-            counter += 1
+        for counter in range(1, 6):
             logger.info(f"Get user info failed, trying again, attempt {counter}.")
             logger.info(f"Sleeping for 5 seconds...")
             time.sleep(5)
