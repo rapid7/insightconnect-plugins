@@ -6,7 +6,7 @@ from icon_azure_ad_admin import connection, actions, triggers
 
 Name = "Azure AD Admin"
 Vendor = "rapid7"
-Version = "2.2.0"
+Version = "2.2.1"
 Description = "Perform administrative operations in Azure AD"
 
 
