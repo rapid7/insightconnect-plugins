@@ -6,8 +6,6 @@ from komand.exceptions import PluginException
 def get_user_info(connection, user_id, logger):
     endpoint = f"https://graph.microsoft.com/v1.0/{connection.tenant}/users/{user_id}"
     headers = connection.get_headers(connection.get_auth_token())
-    logger.info("Sleeping for 10")
-    time.sleep(10)
 
     result = None
     try:
