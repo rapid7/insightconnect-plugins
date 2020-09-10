@@ -563,10 +563,10 @@ actions:
     input:
       agent:
         title: Agent
-        description: Device to delete. Accepts IP address, MAC address, hostname, or device ID
-        type: string
+        description: Device(s) to delete. Accepts IP address, MAC address, hostname, or device ID
+        type: "[]string"
         required: true
-        example: Example-Hostname
+        example: ["Example-Hostname", "198.51.100.1"]
       whitelist:
         title: Whitelist
         description: This list contains a set of hosts that should not be deleted. This can include IPs, hostnames or device IDs
