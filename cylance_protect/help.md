@@ -17,13 +17,6 @@ The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/
 
 ## Setup
 
-You must create a Custom Application by following this procedure from the CylancePROTECT console:
-
-1. Go to the Integrations tab on the Settings page
-2. Click "Add Application"
-3. Provide a name for the integration and choose the permissions related to the actions you want to use
-4. Copy and paste the Application ID, Application Secret, and Tenant ID (from the Integrations tab) into the connection
-
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -48,6 +41,41 @@ Example input:
 
 ### Actions
 
+#### Delete Device from Console
+
+This action is used to delete an asset/device from the Console.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|True|Device to delete. Accepts IP address, MAC address, hostname, or device ID|None|Example-Hostname|
+|whitelist|[]string|None|False|This list contains a set of hosts that should not be deleted. This can include IPs, hostnames or device IDs|None|["198.51.100.100", "Example-Hostname", "1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
+
+Example input:
+
+```
+{
+  "agent": "Example-Hostname",
+  "whitelist": [
+    "198.51.100.100",
+    "Example-Hostname",
+    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Return true if the device was deleted|
+
+Example output:
+
+```
+```
+
 #### Update Agent Threat
 
 This action updates the status (waive or quarantine) of a convicted threat on a selected device.
@@ -64,14 +92,9 @@ Example input:
 
 ```
 {
-  "add_zones": [
-    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
-  ],
   "agent": "Example-Hostname",
-  "policy": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
-  "remove_zones": [
-    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
-  ]
+  "quarantine_state": true,
+  "threat_identifier": "44d88612fea8a8f36de82e1278abb02f"
 }
 ```
 
