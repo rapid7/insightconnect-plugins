@@ -70,7 +70,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.1 - Change icon/extension image
+* 1.0.1 - Change icon/extension image, update doc with example
 * 1.0.0 - Initial plugin
 
 # Links
