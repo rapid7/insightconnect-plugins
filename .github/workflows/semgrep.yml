@@ -1,0 +1,2 @@
+- name: semgrep-action
+  uses: returntocorp/semgrep-action@v1
