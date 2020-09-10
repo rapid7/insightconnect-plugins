@@ -37,7 +37,7 @@ Example input:
   "host": "ldaps://example.com",
   "port": 389,
   "use_ssl": true,
-  "username_password": {"username":"user1", "password":"mypassword"}
+  "username_password": "{\"username\":\"user1\", \"password\":\"mypassword\"}"
 }
 ```
 
@@ -45,25 +45,25 @@ Example input:
 
 ### Actions
 
-#### Modify Groups
+#### Modify Object
 
-This action is used to add or remove a user from an Active Directory group.
+This action is used to modify an Active Directory objects attributes.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|add_remove|string|None|True|Add or remove the group|['add', 'remove']|add|
-|distinguished_name|string|None|True|The distinguished name of the user whose membership will be modified|None|CN=user,OU=domain_users,DC=mydomain,DC=com|
-|group_dn|string|None|True|The Distinguished Name of the group to add or remove|None|CN=group_name,OU=domain_groups,DC=example,DC=com|
+|attribute_to_modify|string|None|True|The name of the attribute to modify|None|postalCode|
+|attribute_value|string|None|True|The value of the attribute|None|1100|
+|distinguished_name|string|None|True|The distinguished name of the object to modify|None|CN=user,OU=domain_users,DC=example,DC=com|
 
 Example input:
 
 ```
 {
-  "add_remove": "add",
-  "distinguished_name": "CN=user,OU=domain_users,DC=mydomain,DC=com",
-  "group_dn": "CN=group_name,OU=domain_groups,DC=example,DC=com"
+  "attribute_to_modify": "postalCode",
+  "attribute_value": 1100,
+  "distinguished_name": "CN=user,OU=domain_users,DC=example,DC=com"
 }
 ```
 
@@ -76,11 +76,45 @@ Example input:
 Example output:
 
 ```
+```
 
+#### Add or Remove an Object from Group
+
+This action is used to add or remove an object from an Active Directory group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|add_remove|string|None|True|Add or remove the group|['add', 'remove']|add|
+|distinguished_name|string|None|True|The distinguished name of the object whose membership will be modified|None|CN=user,OU=domain_users,DC=mydomain,DC=com|
+|group_dn|string|None|True|The Distinguished Name of the group to add or remove|None|CN=group_name,OU=domain_groups,DC=example,DC=com|
+
+Example input:
+
+```
 {
-  "success": true
+  "account_disabled": "true",
+  "additional_parameters": "{\"telephoneNumber\":\"(617)555-1234\"}",
+  "domain_name": "example.com",
+  "first_name": "John",
+  "last_name": "Doe",
+  "logon_name": "jdoe",
+  "password": "mypassword",
+  "user_ou": "Users",
+  "user_principal_name": "user@example.com"
 }
+```
 
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Operation status|
+
+Example output:
+
+```
 ```
 
 #### Add
@@ -106,7 +140,7 @@ Example input:
 ```
 {
   "account_disabled": "true",
-  "additional_parameters": {"telephoneNumber":"(617)555-1234"},
+  "additional_parameters": "{\"telephoneNumber\":\"(617)555-1234\"}",
   "domain_name": "example.com",
   "first_name": "John",
   "last_name": "Doe",
