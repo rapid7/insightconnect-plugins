@@ -29,12 +29,14 @@ actions:
         description: URL to screenshot
         required: true
         order: 1
+        example: "https://www.google.com"
       delay:
         title: Delay
         type: integer
         description: Delay (in seconds) after page has loaded before screenshot
         required: false
         order: 2
+        example: 5
       full_page:
         title: Full Page Capture
         description: Export screenshot of "body" element instead of the default viewport.  This "body" element may have some formatting issues but should contain all elements of the page
@@ -42,6 +44,7 @@ actions:
         required: true
         default: false
         order: 3
+        example: false
     output:
       screenshot:
         title: Screenshot

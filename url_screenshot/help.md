@@ -28,19 +28,18 @@ This action is used to grab a screenshot of a URL from the Orchestrator.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|delay|integer|None|False|Delay (in seconds) after page has loaded before screenshot|None|None|
-|full_page|boolean|False|True|Export screenshot of "body" element instead of the default viewport.  This "body" element may have some formatting issues but should contain all elements of the page|None|None|
-|url|string|None|True|URL to screenshot|None|None|
+|delay|integer|None|False|Delay (in seconds) after page has loaded before screenshot|None|5|
+|full_page|boolean|False|True|Export screenshot of "body" element instead of the default viewport.  This "body" element may have some formatting issues but should contain all elements of the page|None|False|
+|url|string|None|True|URL to screenshot|None|https://www.google.com|
 
 Example input:
 
 ```
 {
-  "delay": 200,
+  "delay": 5,
   "full_page": false,
   "url": "https://www.google.com"
 }
-
 ```
 
 ##### Output
