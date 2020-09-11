@@ -4,7 +4,7 @@ products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
 description: Perform administrative operations in Azure AD
-version: 2.2.2
+version: 2.2.3
 vendor: rapid7
 support: community
 status: []
