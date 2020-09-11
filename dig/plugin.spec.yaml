@@ -17,7 +17,7 @@ tags:
 - dns
 hub_tags:
   use_cases: [threat_detection_and_response, offensive_security]
-  keywords: [dig, dns]
+  keywords: [dig, dns, cloud_enabled]
   features: []
 actions:
   forward:
