@@ -595,6 +595,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.3 - Fix issue where Get User Info occasionally fails with an SSL error in secondary call for user status
 * 2.2.2 - Fix issue where retry expected a valid response
 * 2.2.1 - Fix issue where Get User Info occasionally fails with an SSL error
 * 2.2.0 - New action Revoke Sign-In Sessions
