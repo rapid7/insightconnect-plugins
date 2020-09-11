@@ -40,7 +40,6 @@ class ModifyObject(komand.Action):
         # Check that the distinguishedName is valid
         conn.search(search_base=dc,
                     search_filter=f'(distinguishedName={escaped_dn})',
-                    attributes=['userAccountControl']
                     )
         results = conn.response
         dn_test = [d['dn'] for d in results if 'dn' in d]
