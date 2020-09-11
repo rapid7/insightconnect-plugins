@@ -169,6 +169,7 @@ _This plugin has no references._
 
 # Version History
 
+* 2.0.3 - Upgrade to latest Python plugin runtime | Define `cloud_ready` in spec
 * 2.0.2 - Fix issue where com.br style domains could crash the plugin
 * 2.0.1 - Update to v4 Python plugin runtime
 * 2.0.0 - Add example inputs | Fix capitalization in the title of the `last_updated` output.

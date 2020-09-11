@@ -21,7 +21,7 @@ class GetUserInfo(komand.Action):
         user_id = params.get(Input.USER_ID)
 
         self.logger.info(f"Getting info for user: {user_id}")
-        result = get_user_info(self.connection, user_id)
+        result = get_user_info(self.connection, user_id, self.logger)
 
         headers = self.connection.get_headers(self.connection.get_auth_token())
         endpoint_for_account_enabled = f"https://graph.microsoft.com/v1.0/{self.connection.tenant}/users/{user_id}?$select=accountEnabled"
