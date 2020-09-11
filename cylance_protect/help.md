@@ -49,14 +49,17 @@ This action is used to delete an asset/device from the Console.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent|string|None|True|Device to delete. Accepts IP address, MAC address, hostname, or device ID|None|Example-Hostname|
+|agent|[]string|None|True|Device(s) to delete. Accepts IP address, MAC address, hostname, or device ID|None|["Example-Hostname", "198.51.100.1"]|
 |whitelist|[]string|None|False|This list contains a set of hosts that should not be deleted. This can include IPs, hostnames or device IDs|None|["198.51.100.100", "Example-Hostname", "1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
 
 Example input:
 
 ```
 {
-  "agent": "Example-Hostname",
+  "agent": [
+    "Example-Hostname",
+    "198.51.100.1"
+  ],
   "whitelist": [
     "198.51.100.100",
     "Example-Hostname",

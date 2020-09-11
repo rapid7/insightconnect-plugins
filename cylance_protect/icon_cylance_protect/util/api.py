@@ -107,6 +107,9 @@ class CylanceProtectAPI:
         device_id = device_id.replace('-', '').upper()
         return self._call_api("PUT", f"{self.url}/devicecommands/v2/{device_id}/lockdown?value=true", None)
 
+    def delete_device(self, payload):
+        return self._call_api("DELETE", f"{self.url}/devices/v2")
+
     def get_agents(self, page, page_size):
         return self._call_api("GET", f"{self.url}/devices/v2?page={page}?page_size={page_size}", "device:list")
 

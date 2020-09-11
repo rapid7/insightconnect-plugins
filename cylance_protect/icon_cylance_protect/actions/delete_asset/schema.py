@@ -23,9 +23,12 @@ class DeleteAssetInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "agent": {
-      "type": "string",
+      "type": "array",
       "title": "Agent",
-      "description": "Device to delete. Accepts IP address, MAC address, hostname, or device ID",
+      "description": "Device(s) to delete. Accepts IP address, MAC address, hostname, or device ID",
+      "items": {
+        "type": "string"
+      },
       "order": 1
     },
     "whitelist": {

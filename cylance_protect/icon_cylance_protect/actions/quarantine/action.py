@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import QuarantineInput, QuarantineOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
 # Custom imports below
-from icon_cylance_protect.util.find_functions import find_in_whitelist, find_agent_by_ip
+from icon_cylance_protect.util.find_helpers import find_in_whitelist, find_agent_by_ip
 import validators
 
 class Quarantine(insightconnect_plugin_runtime.Action):
