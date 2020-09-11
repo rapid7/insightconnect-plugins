@@ -31,7 +31,7 @@ class GetUserInfo(komand.Action):
             result_enabled = requests.get(endpoint_for_account_enabled, headers=headers)
         except Exception:
             for counter in range(1, 6):
-                self.logger.info(f"Get user info failed, trying again, attempt {counter}.")
+                self.logger.info(f"Get user enabled failed, trying again, attempt {counter}.")
                 self.logger.info(f"Sleeping for 5 seconds...")
                 time.sleep(5)
                 try:
