@@ -33,7 +33,10 @@ Example input:
 
 ```
 {
-  "credentials": "{\"username\":\"username\", \"password\":\"password\"}",
+  "credentials": {
+    "username":"username",
+    "password":"password"
+  },
   "server": "http://www.example.com",
   "verify_cert": true
 }
@@ -185,6 +188,11 @@ This action is used to get a policy.
 Example input:
 
 ```
+{
+  "device_name": "localhost.localdomain",
+  "policy_name": "InsightConnect Block Policy",
+  "virtual_system": "vsys1"
+}
 ```
 
 ##### Output
@@ -869,7 +877,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
-* 6.0.2 - Fix issue with IPv6 in Set Address Object
+* 6.0.2 - Fix issue where Set Network Object did not support IPv6
 * 6.0.1 - Improve error handling in `pa_os_request.py`
 * 6.0.0 - Update to Create Address Object to add Skip RFC 1918 input
 * 5.1.1 - Fix issue where IPv6 address were not supported
