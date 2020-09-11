@@ -88,7 +88,7 @@ This action is used to add a user to a set of groups by group ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|group_id|[]string|None|True|IDs of Groups to Add User to|None|['b4d41d4-eb13-4a33-99b5-7d7290df22e9']|
+|group_id|[]string|None|True|IDs of Groups to Add User to|None|["b4d41d4-eb13-4a33-99b5-7d7290df22e9"]|
 |user_id|string|None|True|User ID e.g. user@example.com|None|user@example.com|
 
 Example input:
@@ -136,8 +136,8 @@ Example input:
 {
   "city": "Boston",
   "country": "US",
-  "department": "Engineering",
-  "job_title": "Software Engineer",
+  "department": "IT",
+  "job_title": "Desktop Technician",
   "state": "MA",
   "user_id": "user@example.com",
   "user_type": "Member"
@@ -595,6 +595,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.2 - Fix issue where retry expected a valid response
+* 2.2.1 - Fix issue where Get User Info occasionally fails with an SSL error
 * 2.2.0 - New action Revoke Sign-In Sessions
 * 2.1.1 - Update incorrect title of `user_type` to User Type  |  Return `group_id` in Add User to Groups By IDs action's error message to improve debugging
 * 2.1.0 - New action Add User to Groups By IDs
