@@ -595,6 +595,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.2 - Fix issue where retry expected a valid response
 * 2.2.1 - Fix issue where Get User Info occasionally fails with an SSL error
 * 2.2.0 - New action Revoke Sign-In Sessions
 * 2.1.1 - Update incorrect title of `user_type` to User Type  |  Return `group_id` in Add User to Groups By IDs action's error message to improve debugging
