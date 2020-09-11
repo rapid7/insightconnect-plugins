@@ -4,15 +4,17 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Delete an asset/device from the Console"
+    DESCRIPTION = "Delete assets/devices from the Console"
 
 
 class Input:
-    AGENT = "agent"
+    AGENTS = "agents"
     WHITELIST = "whitelist"
     
 
 class Output:
+    DELETED = "deleted"
+    NOT_DELETED = "not_deleted"
     SUCCESS = "success"
     
 
@@ -22,9 +24,9 @@ class DeleteAssetInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "agent": {
+    "agents": {
       "type": "array",
-      "title": "Agent",
+      "title": "Agents",
       "description": "Device(s) to delete. Accepts IP address, MAC address, hostname, or device ID",
       "items": {
         "type": "string"
@@ -42,7 +44,7 @@ class DeleteAssetInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "agent"
+    "agents"
   ]
 }
     """)
@@ -57,10 +59,28 @@ class DeleteAssetOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "deleted": {
+      "type": "array",
+      "title": "Devices Deleted",
+      "description": "List of assets that were deleted",
+      "items": {
+        "type": "string"
+      },
+      "order": 3
+    },
+    "not_deleted": {
+      "type": "array",
+      "title": "Devices Not Deleted",
+      "description": "List of assets that were not deleted, either because of whitelist or because they were not found",
+      "items": {
+        "type": "string"
+      },
+      "order": 2
+    },
     "success": {
       "type": "boolean",
       "title": "Success",
-      "description": "Return true if the device was deleted",
+      "description": "Return true if at least one device was deleted",
       "order": 1
     }
   },

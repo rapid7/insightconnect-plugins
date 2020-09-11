@@ -17,34 +17,47 @@ class DeleteAsset(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         whitelist = params.get(Input.WHITELIST, None)
-        agents = params.get(Input.AGENT)
+        agents = params.get(Input.AGENTS)
 
-        device_ids = []
+        valid_ids = []
+        valid_devices = []
+        invalid_devices = []
         for agent in agents:
             if validators.ipv4(agent):
-                agent = find_agent_by_ip(agent)
+                agent = find_agent_by_ip(self.connection, agent)
 
             device_obj = self.connection.client.get_agent_details(agent)
 
-            if whitelist:
-                matches = find_in_whitelist(device_obj, whitelist)
-                if matches:
-                    raise PluginException(
-                        cause="Agent found in the whitelist.",
-                        assistance=f"If you would like to delete this host, remove {str(matches)[1:-1]} from the "
-                                   f"whitelist. "
-                    )
-            device_id = device_obj.get('id').replace('-', '').upper()
-            device_ids.append(device_id)
+            if device_obj:
+                if whitelist:
+                    matches = find_in_whitelist(device_obj, whitelist)
+                    if matches:
+                        invalid_devices.append(agent)
+                    else:
+                        valid_devices.append(agent)
+                        valid_ids = self.add_to_valid_devices(device_obj, valid_ids)
+                else:
+                    valid_devices.append(agent)
+                    valid_ids = self.add_to_valid_devices(device_obj, valid_ids)
+            else:
+                self.connection.logger.info("NOT FOUND %s" % agent)
+                invalid_devices.append(agent)
 
-        self.connection.logger.info("HEY", {device_ids})
-        success = self.connection.client.delete_device(device_ids)
+        payload = {"device_ids": valid_ids}
+        success = self.connection.client.delete_devices(payload)
         if not success:
             raise PluginException(
                 cause="One of the devices failed to delete.",
                 assistance=f"Example assistance"
             )
-            return {Output.OUTPUT: False}
+            return {Output.SUCCESS: False}
 
-        return {Output.OUTPUT: True}
+        return {Output.SUCCESS: True, Output.DELETED: valid_devices, Output.NOT_DELETED: invalid_devices}
+
+    def add_to_valid_devices(self, device_obj, valid_ids):
+        device_id = device_obj.get('id')
+        device_id.replace('-', '').upper()
+        valid_ids.append(device_id)
+        return valid_ids
+
 

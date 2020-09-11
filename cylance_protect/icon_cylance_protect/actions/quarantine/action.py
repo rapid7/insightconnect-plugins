@@ -19,7 +19,14 @@ class Quarantine(insightconnect_plugin_runtime.Action):
         agent = params.get(Input.AGENT)
 
         if validators.ipv4(agent):
-            agent = find_agent_by_ip(agent)
+            found_agent = find_agent_by_ip(self.connection, agent)
+            if found_agent:
+                agent = found_agent
+            else:
+                raise PluginException(
+                    cause="Agent not found.",
+                    assistance=f"Unable to find an agent with IP: {agent}, please ensure that the IP address is correct."
+                )
 
         device_obj = self.connection.client.get_agent_details(agent)
 

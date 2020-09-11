@@ -500,7 +500,7 @@ actions:
     description: Updates the status (waive or quarantine) of a convicted threat on a selected device
     input:
       agent:
-        title: Agent
+        title: Agentf
         description: Device to update threat on. Accepts IP address, MAC address, hostname, or device ID
         type: string
         required: true
@@ -558,11 +558,11 @@ actions:
         type: boolean
         required: true
   delete_asset:
-    title: Delete Device from Console
-    description: Delete an asset/device from the Console
+    title: Delete Device(s) from Console
+    description: Delete assets/devices from the Console
     input:
-      agent:
-        title: Agent
+      agents:
+        title: Agents
         description: Device(s) to delete. Accepts IP address, MAC address, hostname, or device ID
         type: "[]string"
         required: true
@@ -576,7 +576,17 @@ actions:
     output:
         success:
           title: Success
-          description: Return true if the device was deleted
+          description: Return true if at least one device was deleted
           type: boolean
           required: true
+        not_deleted:
+          title: Devices Not Deleted
+          description: List of assets that were not deleted, either because of whitelist or because they were not found
+          type: "[]string"
+          required: false
+        deleted:
+          title: Devices Deleted
+          description: List of assets that were deleted
+          type: "[]string"
+          required: false
 

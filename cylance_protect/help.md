@@ -41,31 +41,103 @@ Example input:
 
 ### Actions
 
-#### Delete Device from Console
+#### Delete Device(s) from Console
 
-This action is used to delete an asset/device from the Console.
+This action is used to delete assets/devices from the Console.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent|[]string|None|True|Device(s) to delete. Accepts IP address, MAC address, hostname, or device ID|None|["Example-Hostname", "198.51.100.1"]|
+|agents|[]string|None|True|Device(s) to delete. Accepts IP address, MAC address, hostname, or device ID|None|["Example-Hostname", "198.51.100.1"]|
 |whitelist|[]string|None|False|This list contains a set of hosts that should not be deleted. This can include IPs, hostnames or device IDs|None|["198.51.100.100", "Example-Hostname", "1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
 
 Example input:
 
 ```
-{
-  "agent": [
-    "Example-Hostname",
-    "198.51.100.1"
-  ],
-  "whitelist": [
-    "198.51.100.100",
-    "Example-Hostname",
-    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
-  ]
-}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|deleted|[]string|False|List of assets that were deleted|
+|not_deleted|[]string|False|List of assets that were not deleted, either because of whitelist or because they were not found|
+|success|boolean|True|Return true if at least one device was deleted|
+
+Example output:
+
+```
+```
+
+#### Delete Device(s) from Console
+
+This action is used to delete assets/devices from the Console.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agents|[]string|None|True|Device(s) to delete. Accepts IP address, MAC address, hostname, or device ID|None|["Example-Hostname", "198.51.100.1"]|
+|whitelist|[]string|None|False|This list contains a set of hosts that should not be deleted. This can include IPs, hostnames or device IDs|None|["198.51.100.100", "Example-Hostname", "1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Return true if the device was deleted|
+
+Example output:
+
+```
+```
+
+#### Delete Device(s) from Console
+
+This action is used to delete assets/devices from the Console.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agents|[]string|None|True|Device(s) to delete. Accepts IP address, MAC address, hostname, or device ID|None|["Example-Hostname", "198.51.100.1"]|
+|whitelist|[]string|None|False|This list contains a set of hosts that should not be deleted. This can include IPs, hostnames or device IDs|None|["198.51.100.100", "Example-Hostname", "1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Return true if the device was deleted|
+
+Example output:
+
+```
+```
+
+#### Delete Device(s) from Console
+
+This action is used to delete assets/devices from the Console.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agents|[]string|None|True|Device(s) to delete. Accepts IP address, MAC address, hostname, or device ID|None|["Example-Hostname", "198.51.100.1"]|
+|whitelist|[]string|None|False|This list contains a set of hosts that should not be deleted. This can include IPs, hostnames or device IDs|None|["198.51.100.100", "Example-Hostname", "1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
+
+Example input:
+
+```
 ```
 
 ##### Output
@@ -95,9 +167,14 @@ Example input:
 
 ```
 {
+  "add_zones": [
+    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
+  ],
   "agent": "Example-Hostname",
-  "quarantine_state": true,
-  "threat_identifier": "44d88612fea8a8f36de82e1278abb02f"
+  "policy": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
+  "remove_zones": [
+    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
+  ]
 }
 ```
 
