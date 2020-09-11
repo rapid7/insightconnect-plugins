@@ -20,7 +20,7 @@ class AddUserToGroupsById(komand.Action):
         user_id = params.get(Input.USER_ID)
 
         self.logger.info(f"Getting user info: {user_id}")
-        user_response = get_user_info(self.connection, user_id)
+        user_response = get_user_info(self.connection, user_id, self.logger)
         user_object = user_response.json()
         user = {
             "@odata.id": f"https://graph.microsoft.com/v1.0/{self.connection.tenant}/users/{user_object.get('id')}"
