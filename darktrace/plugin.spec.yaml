@@ -419,7 +419,7 @@ types:
       description: Filter type
       required: false
     id:
-      title: Id
+      title: ID
       type: string
       description: Id
       required: false
