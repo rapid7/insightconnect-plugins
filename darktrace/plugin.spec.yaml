@@ -501,7 +501,7 @@ types:
     pbid:
         title: Pbid
         type: integer
-        description: Pbid
+        description: Policy breach ID
         required: false
     time:
         title: Time
