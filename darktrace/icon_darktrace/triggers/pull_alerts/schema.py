@@ -9,7 +9,7 @@ class Component:
 
 class Input:
     
-    INTERVAL = "interval"
+    FREQUENCY = "frequency"
     
 
 class Output:
@@ -23,10 +23,10 @@ class PullAlertsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "interval": {
+    "frequency": {
       "type": "integer",
-      "title": "Interval",
-      "description": "Poll interval in seconds",
+      "title": "Frequency",
+      "description": "Poll frequency in seconds",
       "default": 300,
       "order": 1
     }

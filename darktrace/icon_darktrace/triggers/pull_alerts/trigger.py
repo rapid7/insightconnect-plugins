@@ -15,11 +15,12 @@ class PullAlerts(insightconnect_plugin_runtime.Trigger):
                 output=PullAlertsOutput())
 
     def run(self, params={}):
-        interval = params.get(Input.INTERVAL, 300)
+        frequency = params.get(Input.FREQUENCY, 300)
+        start_time = int(time.time() * 1000)
         while True:
             data = {}
             try:
-                data = self.connection.client.model_breaches(int((time.time() - interval) * 1000))
+                data = self.connection.client.model_breaches(start_time)
             except PluginException as e:
                 self.logger.info(f"{e.cause} {e.assistance} {e.data}")
             except Exception as e:
@@ -30,6 +31,7 @@ class PullAlerts(insightconnect_plugin_runtime.Trigger):
                     Output.RESULTS: data
                 })
             else:
-                self.logger.info(f"Empty response. Waiting for {interval} seconds")
+                self.logger.info(f"Empty response. Waiting for {frequency} seconds")
 
-            time.sleep(interval)
+            start_time = int((time.time() - frequency) * 1000)
+            time.sleep(frequency)

@@ -610,10 +610,10 @@ triggers:
     title: Pull Alerts
     description: Pull DarkTrace alerts and logs
     input:
-      interval:
-        title: Interval
+      frequency:
+        title: Frequency
         type: integer
-        description: Poll interval in seconds
+        description: Poll frequency in seconds
         default: 300
         example: 300
         required: false
