@@ -6,7 +6,7 @@ from komand_rapid7_insightvm import connection, actions, triggers
 
 Name = "Rapid7 InsightVM"
 Vendor = "rapid7"
-Version = "4.2.1"
+Version = "4.4.0"
 Description = "InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans"
 
 
@@ -88,6 +88,8 @@ class ICONRapid7Insightvm(komand.Plugin):
         self.add_action(actions.GetAuthenticationSource())
 
         self.add_action(actions.GetAuthenticationSources())
+
+        self.add_action(actions.GetExpiringVulnerabilityExceptions())
 
         self.add_action(actions.GetRole())
 
@@ -190,6 +192,8 @@ class ICONRapid7Insightvm(komand.Plugin):
         self.add_action(actions.UpdateUserRole())
 
         self.add_action(actions.UpdateUserSiteAccess())
+
+        self.add_action(actions.UpdateVulnerabilityExceptionExpirationDate())
 
 
 def main():
