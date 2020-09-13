@@ -24,12 +24,11 @@ class PullAlerts(insightconnect_plugin_runtime.Trigger):
         self.logger.info(f"Waiting for {frequency} seconds.")
         while True:
             data = []
-            start_time = int((time.time() - frequency) * 1000)
             time.sleep(frequency)
             try:
                 self.logger.info(f"Getting response for last {frequency} seconds.")
                 data = self.connection.client.model_breaches({
-                    "starttime": start_time,
+                    "starttime": int((time.time() - frequency) * 1000),
                     "did": params.get(Input.DID),
                     "minscore": params.get(Input.MINSCORE),
                     "pbid": params.get(Input.PBID),
