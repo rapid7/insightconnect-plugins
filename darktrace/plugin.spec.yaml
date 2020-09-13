@@ -607,7 +607,7 @@ actions:
         required: false
 triggers:
   pull_alerts:
-    title: Pull Alerts
+    title: Get Alerts
     description: Pull DarkTrace alerts and logs
     input:
       frequency:
