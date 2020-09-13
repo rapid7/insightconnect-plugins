@@ -1,7 +1,7 @@
 {
-	"spec": "89aa13cff9dda439099a81352632d3ed",
-	"manifest": "1e2a2cb0722821bad27dc5721274d3aa",
-	"setup": "958f8915e806e5f5bf6e72fc8fd9d770",
+	"spec": "cc0de4ef494ebce7dbbe46cb18e61261",
+	"manifest": "4622ded0ffdb3f46004f286fd361c564",
+	"setup": "6d83e3bed46cc4635191886ae02d50f6",
 	"schemas": [
 		{
 			"identifier": "update_watched_domains/schema.py",
@@ -10,6 +10,10 @@
 		{
 			"identifier": "connection/schema.py",
 			"hash": "8e20cf512e6c3063145da312114063e5"
+		},
+		{
+			"identifier": "pull_alerts/schema.py",
+			"hash": "f7445f1b5e59745584d62c8412681075"
 		}
 	]
 }

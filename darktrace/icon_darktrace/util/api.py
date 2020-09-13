@@ -12,11 +12,15 @@ class DarkTraceAPI:
         self.url = url.rstrip("/")
         self.public_token = public_token
         self.private_token = private_token
-        self.date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         self.logger = logger
 
     def get_status(self):
         return self._call_api("GET", "status")
+
+    def model_breaches(self, start_time):
+        return self._call_api("GET", "modelbreaches", params={
+            "starttime": start_time
+        })
 
     def update_intelfeed(self, status: bool, entry: str, description: str, source: str, expiration: str, hostname: bool):
         return self._call_api("POST", "intelfeed", data={
@@ -28,10 +32,10 @@ class DarkTraceAPI:
             "fulldetails": True
         })
 
-    def _get_signature(self, request: str) -> str:
+    def _get_signature(self, request: str, date: str) -> str:
         return hmac.new(
             self.private_token.encode('ASCII'),
-            f"{request}\n{self.public_token}\n{self.date}".encode('ASCII'),
+            f"{request}\n{self.public_token}\n{date}".encode('ASCII'),
             hashlib.sha1
         ).hexdigest()
 
@@ -39,10 +43,14 @@ class DarkTraceAPI:
             self,
             method: str,
             path: str,
-            data: dict = None
+            data: dict = None,
+            params: dict = None
     ) -> dict:
-        response = {"text": ""}
+        date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         query = None
+        if params:
+            query = parse.urlencode(params)
+
         if data:
             query = parse.urlencode(data)
 
@@ -52,8 +60,8 @@ class DarkTraceAPI:
 
         headers = {
             "DTAPI-Token": self.public_token,
-            "DTAPI-Date": self.date,
-            "DTAPI-Signature": self._get_signature(endpoint)
+            "DTAPI-Date": date,
+            "DTAPI-Signature": self._get_signature(endpoint, date)
         }
 
         try:
@@ -61,6 +69,7 @@ class DarkTraceAPI:
                 method,
                 f"{self.url}/{path}",
                 data=data,
+                params=params,
                 headers=headers
             )
 
@@ -80,6 +89,6 @@ class DarkTraceAPI:
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except json.decoder.JSONDecodeError as e:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
         except requests.exceptions.HTTPError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
