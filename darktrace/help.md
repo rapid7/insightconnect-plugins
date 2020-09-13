@@ -83,7 +83,191 @@ Example output:
 
 ### Triggers
 
-_This plugin does not contain any triggers._
+#### Get Alerts
+
+This trigger is used to trigger workflows on model breach alerts and logs.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|did|integer|None|False|ID of device modelled in the Darktrace system|None|1|
+|frequency|integer|300|False|Poll frequency in seconds|None|300|
+|minscore|integer|None|False|Return only breaches with a minimum score|None|0|
+|pbid|integer|None|False|Only return the model breach with the specified policy breach ID|None|300|
+|pid|integer|None|False|Only return model breaches for the specified model|None|300|
+|uuid|string|None|False|Only return model breaches for the specified model|None|fc707223-d2d2-475c-b09b-dec4e800eb2e|
+
+Example input:
+
+```
+{
+  "did": 1,
+  "frequency": 300,
+  "minscore": 0,
+  "pbid": 300,
+  "pid": 300,
+  "uuid": "fc707223-d2d2-475c-b09b-dec4e800eb2e"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|results|[]trigger_result|True|Alerts results|
+
+Example output:
+
+```
+{
+  "creationTime": 1599807740000,
+  "commentCount": 0,
+  "pbid": 11,
+  "time": 1599807736000,
+  "model": {
+    "then": {
+      "name": "System::Packet Loss",
+      "pid": 371,
+      "phid": 371,
+      "uuid": "b81117bc-2d11-4ed6-11d0-9dd2958cfbff",
+      "logic": {
+        "data": [
+          780
+        ],
+        "type": "componentList",
+        "version": 1
+      },
+      "throttle": 86400,
+      "sharedEndpoints": false,
+      "actions": {
+        "alert": true,
+        "antigena": {},
+        "breach": true,
+        "model": true,
+        "setPriority": false,
+        "setTag": false,
+        "setType": false
+      },
+      "tags": [],
+      "interval": 3600,
+      "sequenced": false,
+      "active": true,
+      "modified": "2020-09-01 00:11:34",
+      "activeTimes": {
+        "devices": {},
+        "tags": {},
+        "type": "exclusions",
+        "version": 2
+      },
+      "priority": 0,
+      "autoUpdatable": true,
+      "autoUpdate": true,
+      "autoSuppress": true,
+      "description": "Packet loss is higher than 30%. Sustained packet loss at or above this level will significantly impact Darktrace detections.\\n\\nAction: Investigate why Darktrace is missing so much traffic. Use the status page to see if the loss is occurring on specific subnets. This model indicates the packet loss is occurring before Darktrace ingestion rather than a problem with the appliance.",
+      "behaviour": "decreasing",
+      "defeats": [],
+      "created": {
+        "by": "System"
+      },
+      "edited": {
+        "by": "Nobody"
+      },
+      "version": 10
+    },
+    "now": {
+      "name": "System::Packet Loss",
+      "pid": 371,
+      "phid": 371,
+      "uuid": "b81117bc-2d11-4ed6-11d0-9dd2958cfbff",
+      "logic": {
+        "data": [
+          780
+        ],
+        "type": "componentList",
+        "version": 1
+      },
+      "throttle": 86400,
+      "sharedEndpoints": false,
+      "actions": {
+        "alert": true,
+        "antigena": {},
+        "breach": true,
+        "model": true,
+        "setPriority": false,
+        "setTag": false,
+        "setType": false
+      },
+      "tags": [],
+      "interval": 3600,
+      "sequenced": false,
+      "active": true,
+      "modified": "2020-09-01 00:11:34",
+      "activeTimes": {
+        "devices": {},
+        "tags": {},
+        "type": "exclusions",
+        "version": 2
+      },
+      "priority": 0,
+      "autoUpdatable": true,
+      "autoUpdate": true,
+      "autoSuppress": true,
+      "description": "Packet loss is higher than 30%. Sustained packet loss at or above this level will significantly impact Darktrace detections.\\n\\nAction: Investigate why Darktrace is missing so much traffic. Use the status page to see if the loss is occurring on specific subnets. This model indicates the packet loss is occurring before Darktrace ingestion rather than a problem with the appliance.",
+      "behaviour": "decreasing",
+      "defeats": [],
+      "created": {
+        "by": "System"
+      },
+      "edited": {
+        "by": "Nobody"
+      },
+      "message": "Increasing cooldown to 24 hours, as the 3.1 software update improved the recognition and reporting of packet loss feeding into Darktrace, which has resulted in this model firing more frequently than required.",
+      "version": 10
+    }
+  },
+  "triggeredComponents": [
+    {
+      "time": 1599807735000,
+      "cbid": 11,
+      "cid": 780,
+      "chid": 780,
+      "size": 1,
+      "threshold": 0,
+      "interval": 3600,
+      "logic": {
+        "data": {
+          "left": "A"
+        },
+        "version": "v0.1"
+      },
+      "metric": {
+        "mlid": 256,
+        "name": "capturelosstoomuchloss",
+        "label": "Capture loss Detected upstream"
+      },
+      "triggeredFilters": [
+        {
+          "cfid": 7657,
+          "id": "A",
+          "filterType": "Message",
+          "arguments": {
+            "value": ".*rate above [3-9][0-9]\\..*\\%$"
+          },
+          "comparatorType": "matches regular expression",
+          "trigger": {
+            "value": "Host ip-192-168-10-1: The capture loss script detected an estimated loss rate above 45.679%, worker drop rate: 0.000%"
+          }
+        }
+      ]
+    }
+  ],
+  "score": 0.278,
+  "device": {
+    "did": -1
+  }
+}
+```
 
 ### Custom Output Types
 
@@ -95,6 +279,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - Add new trigger Pull Alerts
 * 1.0.0 - Initial plugin
 
 # Links
