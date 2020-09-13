@@ -45,6 +45,40 @@ Example input:
 
 ### Actions
 
+#### Check If Address in Group
+
+This action checks if provided Address Object name or host exists in the Address Group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|Address Object name, or IP, CIDR, or domain name when Enable Search is on|None|MaliciousHost|
+|enable_search|boolean|False|False|Boolean to search for contents of Address Objects for IP, CIDR, domain|None|False|
+|group|string|None|True|Name of address group to check|None|MaliciousAddressGroup|
+
+Example input:
+
+```
+{
+  "address": "MaliciousHost",
+  "enable_search": false,
+  "group": "MaliciousAddressGroup"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|address_objects|[]address_object|False|List of found address objects|
+|found|boolean|True|Was address found in group|
+
+Example output:
+
+```
+```
+
 #### Delete Address Object
 
 This action deletes the address object.
@@ -219,4 +253,3 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [Cisco Firepower Management Center](https://www.cisco.com/c/en/us/products/security/firepower-management-center/index.html)
-

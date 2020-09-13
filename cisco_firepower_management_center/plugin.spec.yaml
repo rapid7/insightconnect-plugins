@@ -333,3 +333,37 @@ actions:
         description: Returns information about the deleted address object
         type: address_object
         required: false
+  check_if_address_in_group:
+    title: Check If Address in Group
+    description: Checks if provided Address Object name or host exists in the Address Group
+    input:
+      group:
+        title: Group
+        description: Name of address group to check
+        type: string
+        required: true
+        example: MaliciousAddressGroup
+      address:
+        title: Address
+        description: Address Object name, or IP, CIDR, or domain name when Enable Search is on
+        type: string
+        required: true
+        example: MaliciousHost
+      enable_search:
+        title: Enable Search
+        description: Boolean to search for contents of Address Objects for IP, CIDR, domain
+        type: boolean
+        required: false
+        default: false
+        example: false
+    output:
+      found:
+        title: Found
+        description: Was address found in group
+        type: boolean
+        required: true
+      address_objects:
+        title: Address Objects
+        description: List of found address objects
+        type: "[]address_object"
+        required: false
