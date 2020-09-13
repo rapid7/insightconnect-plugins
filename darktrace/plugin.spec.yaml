@@ -406,7 +406,7 @@ types:
     cfid:
       title: Cfid
       type: integer
-      description: Cfid
+      description: Component filter ID
       required: false
     comparatorType:
       title: Comparator Type
