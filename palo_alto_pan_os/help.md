@@ -56,7 +56,7 @@ This action adds an address object to an address group.
 |----|----|-------|--------|-----------|----|-------|
 |address_object|string|None|True|The name of the address object to add|None|198.51.100.100|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
-|group|string|None|True|Group name|None|ICON Block List|
+|group|string|None|True|Group name|None|InsightConnect Block List|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
 
 Example input:
@@ -65,7 +65,7 @@ Example input:
 {
   "address_object": "198.51.100.100",
   "device_name": "localhost.localdomain",
-  "group": "ICON Block List",
+  "group": "InsightConnect Block List",
   "virtual_system": "vsys1"
 }
 ```
@@ -101,7 +101,7 @@ This action checks to see if an IP address, CIDR IP address, or domain is in an 
 |address|string|None|True|The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name|None|198.51.100.100|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
 |enable_search|boolean|False|True|When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name|None|False|
-|group|string|None|True|Group name|None|ICON Block List|
+|group|string|None|True|Group name|None|InsightConnect Block List|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
 
 Example input:
@@ -111,7 +111,7 @@ Example input:
   "address": "198.51.100.100",
   "device_name": "localhost.localdomain",
   "enable_search": false,
-  "group": "ICON Block List",
+  "group": "InsightConnect Block List",
   "virtual_system": "vsys1"
 }
 ```
@@ -144,7 +144,7 @@ This action removes an address object from an address group.
 |----|----|-------|--------|-----------|----|-------|
 |address_object|string|None|True|The name of the address object to remove|None|Malicious Host|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
-|group|string|None|True|Group name|None|ICON Block List|
+|group|string|None|True|Group name|None|InsightConnect Block List|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
 
 Example input:
@@ -153,7 +153,7 @@ Example input:
 {
   "address_object": "Malicious Host",
   "device_name": "localhost.localdomain",
-  "group": "ICON Block List",
+  "group": "InsightConnect Block List",
   "virtual_system": "vsys1"
 }
 ```
@@ -324,7 +324,7 @@ This action is used to create a new security policy rule.
 |log_start|boolean|None|True|Generates a traffic log entry for the start of a session|None|False|
 |negate_destination|boolean|None|True|Negate destination|None|False|
 |negate_source|boolean|None|True|Negate source|None|False|
-|rule_name|string|None|True|Name of the rule|None|ICON Block Rule|
+|rule_name|string|None|True|Name of the rule|None|InsightConnect Block Rule|
 |service|string|None|True|Service type for which this rule will be applied e.g. HTTP, HTTPS, any|None|any|
 |source|string|None|True|Sources for which this rule will be applied e.g. 10.0.0.1, computername, any|None|any|
 |source_user|string|None|True|User that the network traffic originated from e.g. Joe Smith, any|None|any|
@@ -345,7 +345,7 @@ Example input:
   "log_start": false,
   "negate_destination": false,
   "negate_source": false,
-  "rule_name": "ICON Block Rule",
+  "rule_name": "InsightConnect Block Rule",
   "service": "any",
   "source": "any",
   "source_user": "any",
@@ -796,7 +796,7 @@ This action is used to add a rule to a PAN-OS security policy.
 |destination|string|None|False|A destination for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|any|
 |dst_zone|string|None|False|Zone which the traffic is going to e.g. server zone, or any|None|any|
 |hip_profiles|string|None|False|Host information profile|None|any|
-|rule_name|string|None|True|Name of the rule|None|ICON Block Rule|
+|rule_name|string|None|True|Name of the rule|None|InsightConnect Block Rule|
 |service|string|None|False|Service type for which this rule will be applied e.g. HTTP, HTTPS, or any|None|any|
 |source|string|None|False|A source for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|any|
 |source_user|string|None|False|User that the network traffic originated from e.g. Joe Smith, or any|None|Joe Smith|
@@ -813,7 +813,7 @@ Example input:
   "destination": "any",
   "dst_zone": "any",
   "hip_profiles": "any",
-  "rule_name": "ICON Block Rule",
+  "rule_name": "InsightConnect Block Rule",
   "service": "any",
   "source": "any",
   "source_user": "Joe Smith",
@@ -854,7 +854,7 @@ This action is used to remove a rule from a PAN-OS security policy.
 |destination|string|None|False|A Destination for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|any|
 |dst_zone|string|None|False|Zone which the traffic is going to e.g. server zone, or any|None|any|
 |hip_profiles|string|None|False|Host information profile|None|any|
-|rule_name|string|None|True|Name of the rule|None|ICON Block Rule|
+|rule_name|string|None|True|Name of the rule|None|InsightConnect Block Rule|
 |service|string|None|False|Service type for which this rule will be applied e.g. HTTP, HTTPS, any|None|any|
 |source|string|None|False|A source for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|any|
 |source_user|string|None|False|User that the network traffic originated from e.g. Joe Smith, or any|None|any|
@@ -871,7 +871,7 @@ Example input:
   "destination": "any",
   "dst_zone": "any",
   "hip_profiles": "any",
-  "rule_name": "ICON Block Rule",
+  "rule_name": "InsightConnect Block Rule",
   "service": "any",
   "source": "any",
   "source_user": "any",

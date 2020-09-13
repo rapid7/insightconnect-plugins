@@ -55,7 +55,7 @@ actions:
       rule_name:
         title: Rule Name
         description: Name of the rule
-        example: ICON Block Rule
+        example: InsightConnect Block Rule
         type: string
         required: true
       source:
@@ -369,7 +369,7 @@ actions:
         description: Name of the rule
         type: string
         required: true
-        example: ICON Block Rule
+        example: InsightConnect Block Rule
       update_active_or_candidate_configuration:
         title: Update Active or Candidate Configuration
         description: Will apply the update to the active or candidate configuration.
@@ -470,7 +470,7 @@ actions:
         description: Name of the rule
         type: string
         required: true
-        example: ICON Block Rule
+        example: InsightConnect Block Rule
       update_active_or_candidate_configuration:
         title: Update Active or Candidate Configuration
         description: Will apply the update to the active or candidate configuration.
@@ -817,7 +817,7 @@ actions:
         title: Group
         description: Group name
         type: string
-        example: ICON Block List
+        example: InsightConnect Block List
         required: true
         order: 1
       address:
@@ -877,7 +877,7 @@ actions:
         title: Group
         description: Group name
         type: string
-        example: ICON Block List
+        example: InsightConnect Block List
         required: true
         order: 2
       device_name:
@@ -917,7 +917,7 @@ actions:
         title: Group
         description: Group name
         type: string
-        example: ICON Block List
+        example: InsightConnect Block List
         required: true
         order: 2
       device_name:
