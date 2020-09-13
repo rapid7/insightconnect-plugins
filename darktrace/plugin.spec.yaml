@@ -310,7 +310,7 @@ types:
     pid:
       title: PID
       type: integer
-      description: PID
+      description: Policy ID
       required: false
     priority:
       title: Priority
