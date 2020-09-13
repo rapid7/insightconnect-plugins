@@ -435,7 +435,7 @@ types:
       description: Cbid
       required: false
     chid:
-      title: Chid
+      title: CHID
       type: integer
       description: Chid
       required: false
