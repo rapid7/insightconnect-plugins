@@ -1,13 +1,12 @@
 # Description
 
 [Cisco Firepower Management Center](https://www.cisco.com/c/en/us/products/security/firepower-management-center/index.html) is your administrative nerve center for managing critical Cisco network security solutions.
-The Cisco Firepower Management Center InsightConnect plugin allows you to create a new block URL policy.
+The Cisco Firepower Management Center InsightConnect plugin allows you to block URLs and hosts.
 
 # Key Features
 
 * Create block URL policy
-* Create address object
-* Delete address object
+* Address object management to block and unblock hosts
 
 # Requirements
 
@@ -36,10 +35,7 @@ Example input:
   "port": 443,
   "server": "www.example.com",
   "ssl_verify": true,
-  "username_and_password": {
-    "username": "user1",
-    "password": "mypassword"
-  }
+  "username_and_password": "{\"username\":\"user1\", \"password\":\"mypassword\"}"
 }
 ```
 
