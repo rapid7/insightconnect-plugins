@@ -608,7 +608,7 @@ actions:
 triggers:
   pull_alerts:
     title: Get Alerts
-    description: Pull DarkTrace alerts and logs
+    description: Trigger workflows on model breach alerts and logs
     input:
       frequency:
         title: Frequency
