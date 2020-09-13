@@ -440,7 +440,7 @@ types:
       description: Chid
       required: false
     cid:
-      title: Cid
+      title: CID
       type: integer
       description: Component ID
       required: false
