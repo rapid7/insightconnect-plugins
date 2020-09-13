@@ -83,9 +83,9 @@ Example output:
 
 ### Triggers
 
-#### Pull Alerts
+#### Get Alerts
 
-This trigger is used to pull DarkTrace alerts and logs.
+This trigger is used to trigger workflows on model breach alerts and logs.
 
 ##### Input
 
@@ -94,7 +94,7 @@ This trigger is used to pull DarkTrace alerts and logs.
 |did|integer|None|False|ID of device modelled in the Darktrace system|None|1|
 |frequency|integer|300|False|Poll frequency in seconds|None|300|
 |minscore|integer|None|False|Return only breaches with a minimum score|None|0|
-|pbid|integer|None|False|Only return the model breach with the specified ID|None|300|
+|pbid|integer|None|False|Only return the model breach with the specified policy breach ID|None|300|
 |pid|integer|None|False|Only return model breaches for the specified model|None|300|
 |uuid|string|None|False|Only return model breaches for the specified model|None|fc707223-d2d2-475c-b09b-dec4e800eb2e|
 

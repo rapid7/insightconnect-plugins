@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Pull DarkTrace alerts and logs"
+    DESCRIPTION = "Trigger workflows on model breach alerts and logs"
 
 
 class Input:
@@ -49,8 +49,8 @@ class PullAlertsInput(insightconnect_plugin_runtime.Input):
     },
     "pbid": {
       "type": "integer",
-      "title": "PbID",
-      "description": "Only return the model breach with the specified ID",
+      "title": "PBID",
+      "description": "Only return the model breach with the specified policy breach ID",
       "order": 4
     },
     "pid": {
@@ -290,8 +290,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "mlid": {
           "type": "integer",
-          "title": "Mlid",
-          "description": "Mlid",
+          "title": "MLID",
+          "description": "Metric logic ID",
           "order": 2
         },
         "name": {
@@ -542,14 +542,14 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "phid": {
               "type": "integer",
-              "title": "Phid",
-              "description": "Phid",
+              "title": "PHID",
+              "description": "Policy history ID",
               "order": 17
             },
             "pid": {
               "type": "integer",
               "title": "PID",
-              "description": "PID",
+              "description": "Policy ID",
               "order": 18
             },
             "priority": {
@@ -817,14 +817,14 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "phid": {
               "type": "integer",
-              "title": "Phid",
-              "description": "Phid",
+              "title": "PHID",
+              "description": "Policy history ID",
               "order": 16
             },
             "pid": {
               "type": "integer",
               "title": "PID",
-              "description": "PID",
+              "description": "Policy ID",
               "order": 17
             },
             "priority": {
@@ -1100,14 +1100,14 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "phid": {
           "type": "integer",
-          "title": "Phid",
-          "description": "Phid",
+          "title": "PHID",
+          "description": "Policy history ID",
           "order": 17
         },
         "pid": {
           "type": "integer",
           "title": "PID",
-          "description": "PID",
+          "description": "Policy ID",
           "order": 18
         },
         "priority": {
@@ -1375,14 +1375,14 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "phid": {
           "type": "integer",
-          "title": "Phid",
-          "description": "Phid",
+          "title": "PHID",
+          "description": "Policy history ID",
           "order": 16
         },
         "pid": {
           "type": "integer",
           "title": "PID",
-          "description": "PID",
+          "description": "Policy ID",
           "order": 17
         },
         "priority": {
@@ -1581,8 +1581,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "pbid": {
           "type": "integer",
-          "title": "Pbid",
-          "description": "Pbid",
+          "title": "PBID",
+          "description": "Policy breach ID",
           "order": 3
         },
         "score": {
@@ -1805,8 +1805,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "mlid": {
               "type": "integer",
-              "title": "Mlid",
-              "description": "Mlid",
+              "title": "MLID",
+              "description": "Metric logic ID",
               "order": 2
             },
             "name": {
@@ -2057,14 +2057,14 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                 },
                 "phid": {
                   "type": "integer",
-                  "title": "Phid",
-                  "description": "Phid",
+                  "title": "PHID",
+                  "description": "Policy history ID",
                   "order": 17
                 },
                 "pid": {
                   "type": "integer",
                   "title": "PID",
-                  "description": "PID",
+                  "description": "Policy ID",
                   "order": 18
                 },
                 "priority": {
@@ -2332,14 +2332,14 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                 },
                 "phid": {
                   "type": "integer",
-                  "title": "Phid",
-                  "description": "Phid",
+                  "title": "PHID",
+                  "description": "Policy history ID",
                   "order": 16
                 },
                 "pid": {
                   "type": "integer",
                   "title": "PID",
-                  "description": "PID",
+                  "description": "Policy ID",
                   "order": 17
                 },
                 "priority": {
@@ -2615,14 +2615,14 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "phid": {
               "type": "integer",
-              "title": "Phid",
-              "description": "Phid",
+              "title": "PHID",
+              "description": "Policy history ID",
               "order": 17
             },
             "pid": {
               "type": "integer",
               "title": "PID",
-              "description": "PID",
+              "description": "Policy ID",
               "order": 18
             },
             "priority": {
@@ -2890,14 +2890,14 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "phid": {
               "type": "integer",
-              "title": "Phid",
-              "description": "Phid",
+              "title": "PHID",
+              "description": "Policy history ID",
               "order": 16
             },
             "pid": {
               "type": "integer",
               "title": "PID",
-              "description": "PID",
+              "description": "Policy ID",
               "order": 17
             },
             "priority": {
@@ -3072,20 +3072,20 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "cbid": {
               "type": "integer",
-              "title": "Cbid",
-              "description": "Cbid",
+              "title": "CBID",
+              "description": "Component breach ID",
               "order": 1
             },
             "chid": {
               "type": "integer",
-              "title": "Chid",
-              "description": "Chid",
+              "title": "CHID",
+              "description": "Component history ID",
               "order": 2
             },
             "cid": {
               "type": "integer",
-              "title": "Cid",
-              "description": "Cid",
+              "title": "CID",
+              "description": "Component ID",
               "order": 3
             },
             "interval": {
@@ -3203,8 +3203,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                 },
                 "mlid": {
                   "type": "integer",
-                  "title": "Mlid",
-                  "description": "Mlid",
+                  "title": "MLID",
+                  "description": "Metric logic ID",
                   "order": 2
                 },
                 "name": {
@@ -3227,8 +3227,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                 },
                 "cfid": {
                   "type": "integer",
-                  "title": "Cfid",
-                  "description": "Cfid",
+                  "title": "CFID",
+                  "description": "Component filter ID",
                   "order": 2
                 },
                 "comparatorType": {
@@ -3245,8 +3245,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                 },
                 "id": {
                   "type": "string",
-                  "title": "Id",
-                  "description": "Id",
+                  "title": "ID",
+                  "description": "Identifier",
                   "order": 5
                 },
                 "trigger": {
@@ -3285,8 +3285,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "cfid": {
               "type": "integer",
-              "title": "Cfid",
-              "description": "Cfid",
+              "title": "CFID",
+              "description": "Component filter ID",
               "order": 2
             },
             "comparatorType": {
@@ -3303,8 +3303,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "id": {
               "type": "string",
-              "title": "Id",
-              "description": "Id",
+              "title": "ID",
+              "description": "Identifier",
               "order": 5
             },
             "trigger": {
@@ -3337,20 +3337,20 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "cbid": {
           "type": "integer",
-          "title": "Cbid",
-          "description": "Cbid",
+          "title": "CBID",
+          "description": "Component breach ID",
           "order": 1
         },
         "chid": {
           "type": "integer",
-          "title": "Chid",
-          "description": "Chid",
+          "title": "CHID",
+          "description": "Component history ID",
           "order": 2
         },
         "cid": {
           "type": "integer",
-          "title": "Cid",
-          "description": "Cid",
+          "title": "CID",
+          "description": "Component ID",
           "order": 3
         },
         "interval": {
@@ -3468,8 +3468,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "mlid": {
               "type": "integer",
-              "title": "Mlid",
-              "description": "Mlid",
+              "title": "MLID",
+              "description": "Metric logic ID",
               "order": 2
             },
             "name": {
@@ -3492,8 +3492,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "cfid": {
               "type": "integer",
-              "title": "Cfid",
-              "description": "Cfid",
+              "title": "CFID",
+              "description": "Component filter ID",
               "order": 2
             },
             "comparatorType": {
@@ -3510,8 +3510,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "id": {
               "type": "string",
-              "title": "Id",
-              "description": "Id",
+              "title": "ID",
+              "description": "Identifier",
               "order": 5
             },
             "trigger": {
@@ -3550,8 +3550,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "cfid": {
           "type": "integer",
-          "title": "Cfid",
-          "description": "Cfid",
+          "title": "CFID",
+          "description": "Component filter ID",
           "order": 2
         },
         "comparatorType": {
@@ -3568,8 +3568,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "id": {
           "type": "string",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "Identifier",
           "order": 5
         },
         "trigger": {
