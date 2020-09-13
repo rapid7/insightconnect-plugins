@@ -421,7 +421,7 @@ types:
     id:
       title: ID
       type: string
-      description: Id
+      description: Identifier
       required: false
     trigger:
       title: Trigger
