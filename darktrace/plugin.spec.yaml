@@ -184,7 +184,7 @@ types:
     phid:
       title: Phid
       type: integer
-      description: Phid
+      description: Policy history ID
       required: false
     pid:
       title: PID
