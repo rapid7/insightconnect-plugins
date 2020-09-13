@@ -319,7 +319,7 @@ actions:
         required: false
   delete_address_object:
     title: Delete Address Object
-    description: Deletes the address object
+    description: Deletes an address object
     input:
       address_object:
         title: Address Object

@@ -45,7 +45,7 @@ Example input:
 
 #### Delete Address Object
 
-This action deletes the address object.
+This action deletes an address object.
 
 ##### Input
 
