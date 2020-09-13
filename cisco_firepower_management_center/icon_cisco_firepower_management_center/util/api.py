@@ -25,11 +25,22 @@ class CiscoFirePowerApi:
 
         return self._call_api("POST", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}", json_data=payload)
 
-    def get_address_objects(self, endpoint: str) -> list:
-        return self.run_with_pages(f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}")
+    def get_address_objects(self, endpoint: str) -> dict:
+        return self._call_api("GET", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}")
 
     def get_address_object(self, endpoint, object_id):
         return self._call_api("GET", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}/{object_id}")
+
+    def get_expanded_address_objects(self):
+        address_objects = []
+        object_types = ['hosts', 'fqdns', 'networks', 'ranges']
+        for object_type in object_types:
+            address_objects.extend(self.run_with_pages(
+                f"fmc_config/v1/domain/{self.domain_uuid}/object/{object_type}",
+                expanded=True)
+            )
+
+        return address_objects
 
     def delete_address_object(self, endpoint: str, object_id: str) -> dict:
         return self._call_api("DELETE", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}/{object_id}")
