@@ -27,6 +27,15 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
+{
+  "credentials": {
+    "password": "password",
+    "username": "username"
+  },
+  "db": "test",
+  "host": "192.168.10.1",
+  "port": 1433
+}
 ```
 
 ## Technical Details
@@ -47,6 +56,10 @@ This action is used to run an SQL query.
 Example input:
 
 ```
+{
+  "parameters": [{"key1":"Jane"}],
+  "query": "select * from Person Where FirstName=?"
+}
 ```
 
 ##### Output
