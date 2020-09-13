@@ -44,4 +44,3 @@ class Connection(komand.Connection):
             else:
                 raise ConnectionTestException(cause='Unable to connect to Cisco Firepower Management Center.',
                                       assistance='Please check the log for more information.')
-
