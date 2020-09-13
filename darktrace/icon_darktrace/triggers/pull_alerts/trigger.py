@@ -22,7 +22,7 @@ class PullAlerts(insightconnect_plugin_runtime.Trigger):
         if frequency <= 0:
             raise PluginException(
                 cause="Input error.",
-                assistance="Frequency should be positive."
+                assistance="Polling frequency should be a number greater than 0."
             )
         self.logger.info(f"Waiting for {frequency} seconds.")
         while True:
