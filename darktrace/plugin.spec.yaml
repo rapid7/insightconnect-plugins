@@ -499,7 +499,7 @@ types:
         description: Comment count
         required: false
     pbid:
-        title: Pbid
+        title: PBID
         type: integer
         description: Policy breach ID
         required: false
