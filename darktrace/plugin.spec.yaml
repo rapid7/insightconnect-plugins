@@ -630,7 +630,7 @@ triggers:
         example: 0
         required: false
       pbid:
-        title: PbID
+        title: PBID
         type: integer
         description: Only return the model breach with the specified policy breach ID
         example: 300
