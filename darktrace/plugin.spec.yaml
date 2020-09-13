@@ -384,7 +384,7 @@ types:
     mlid:
       title: Mlid
       type: integer
-      description: Mlid
+      description: Metric logic ID
       required: false
     name:
       title: Name
