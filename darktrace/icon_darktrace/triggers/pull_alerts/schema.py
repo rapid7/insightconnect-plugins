@@ -25,8 +25,8 @@ class PullAlertsInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "interval": {
       "type": "integer",
-      "title": "Frequency",
-      "description": "Poll frequency in seconds",
+      "title": "Interval",
+      "description": "Poll interval in seconds",
       "default": 300,
       "order": 1
     }

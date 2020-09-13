@@ -611,9 +611,9 @@ triggers:
     description: Pull DarkTrace alerts and logs
     input:
       interval:
-        title: Frequency
+        title: Interval
         type: integer
-        description: Poll frequency in seconds
+        description: Poll interval in seconds
         default: 300
         example: 300
         required: false

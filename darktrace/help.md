@@ -91,7 +91,7 @@ This trigger is used to pull DarkTrace alerts and logs.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|interval|integer|300|False|Poll frequency in seconds|None|300|
+|interval|integer|300|False|Poll interval in seconds|None|300|
 
 Example input:
 
