@@ -16,6 +16,9 @@ class PullAlerts(insightconnect_plugin_runtime.Trigger):
 
     def run(self, params={}):
         frequency = params.get(Input.FREQUENCY, 300)
+        if not frequency:
+            frequency = 300
+
         if frequency <= 0:
             raise PluginException(
                 cause="Input error.",

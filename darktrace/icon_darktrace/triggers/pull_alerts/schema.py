@@ -32,7 +32,6 @@ class PullAlertsInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "DID",
       "description": "ID of device modelled in the Darktrace system",
-      "default": 300,
       "order": 2
     },
     "frequency": {
@@ -46,28 +45,24 @@ class PullAlertsInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Min Score",
       "description": "Return only breaches with a minimum score",
-      "default": 300,
       "order": 3
     },
     "pbid": {
       "type": "integer",
       "title": "PbID",
       "description": "Only return the model breach with the specified ID",
-      "default": 300,
       "order": 4
     },
     "pid": {
       "type": "integer",
       "title": "PID",
       "description": "Only return model breaches for the specified model",
-      "default": 300,
       "order": 5
     },
     "uuid": {
       "type": "string",
       "title": "UUID",
       "description": "Only return model breaches for the specified model",
-      "default": 300,
       "order": 6
     }
   }
