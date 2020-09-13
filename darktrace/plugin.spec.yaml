@@ -404,7 +404,7 @@ types:
       description: Arguments
       required: false
     cfid:
-      title: Cfid
+      title: CFID
       type: integer
       description: Component filter ID
       required: false
