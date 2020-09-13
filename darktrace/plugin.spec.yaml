@@ -442,7 +442,7 @@ types:
     cid:
       title: Cid
       type: integer
-      description: Cid
+      description: Component ID
       required: false
     interval:
       title: Interval
