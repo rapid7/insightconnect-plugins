@@ -303,7 +303,7 @@ types:
       description: Name
       required: false
     phid:
-      title: Phid
+      title: PHID
       type: integer
       description: Policy history ID
       required: false
