@@ -382,7 +382,7 @@ types:
       description: Label
       required: false
     mlid:
-      title: Mlid
+      title: MLID
       type: integer
       description: Metric logic ID
       required: false
