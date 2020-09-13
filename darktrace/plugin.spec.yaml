@@ -437,7 +437,7 @@ types:
     chid:
       title: CHID
       type: integer
-      description: Chid
+      description: Component history ID
       required: false
     cid:
       title: CID
