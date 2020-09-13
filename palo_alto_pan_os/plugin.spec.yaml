@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_pan_os
 title: Palo Alto Firewall
 description: Manage Palo Alto Networks firewall devices
-version: 6.0.2
+version: 6.0.3
 vendor: rapid7
 support: rapid7
 status: []
