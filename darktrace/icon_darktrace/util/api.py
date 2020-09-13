@@ -5,6 +5,7 @@ import json
 import requests
 from urllib import parse
 from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.helper import clean
 
 
 class DarkTraceAPI:
@@ -17,10 +18,8 @@ class DarkTraceAPI:
     def get_status(self):
         return self._call_api("GET", "status")
 
-    def model_breaches(self, start_time):
-        return self._call_api("GET", "modelbreaches", params={
-            "starttime": start_time
-        })
+    def model_breaches(self, params):
+        return self._call_api("GET", "modelbreaches", params=clean(params))
 
     def update_intelfeed(self, status: bool, entry: str, description: str, source: str, expiration: str, hostname: bool):
         return self._call_api("POST", "intelfeed", data={

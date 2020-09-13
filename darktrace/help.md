@@ -91,13 +91,23 @@ This trigger is used to pull DarkTrace alerts and logs.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|did|integer|300|False|ID of device modelled in the Darktrace system|None|300|
 |frequency|integer|300|False|Poll frequency in seconds|None|300|
+|minscore|integer|300|False|Return only breaches with a minimum score|None|300|
+|pbid|integer|300|False|Only return the model breach with the specified ID|None|300|
+|pid|integer|300|False|Only return model breaches for the specified model|None|300|
+|uuid|string|300|False|Only return model breaches for the specified model|None|300|
 
 Example input:
 
 ```
 {
-  "frequency": 300
+  "did": 300,
+  "frequency": 300,
+  "minscore": 300,
+  "pbid": 300,
+  "pid": 300,
+  "uuid": 300
 }
 ```
 

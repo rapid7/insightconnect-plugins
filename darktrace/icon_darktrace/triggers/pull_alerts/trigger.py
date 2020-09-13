@@ -16,22 +16,37 @@ class PullAlerts(insightconnect_plugin_runtime.Trigger):
 
     def run(self, params={}):
         frequency = params.get(Input.FREQUENCY, 300)
-        start_time = int(time.time() * 1000)
+        if frequency <= 0:
+            raise PluginException(
+                cause="Input error.",
+                assistance="Frequency should be positive."
+            )
+        self.logger.info(f"Waiting for {frequency} seconds.")
         while True:
-            data = {}
+            data = []
+            start_time = int((time.time() - frequency) * 1000)
+            time.sleep(frequency)
             try:
-                data = self.connection.client.model_breaches(start_time)
+                self.logger.info(f"Getting response for last {frequency} seconds.")
+                data = self.connection.client.model_breaches({
+                    "starttime": start_time,
+                    "did": params.get(Input.DID),
+                    "minscore": params.get(Input.MINSCORE),
+                    "pbid": params.get(Input.PBID),
+                    "pid": params.get(Input.PID),
+                    "uuid": params.get(Input.UUID)
+                })
             except PluginException as e:
                 self.logger.info(f"{e.cause} {e.assistance} {e.data}")
             except Exception as e:
                 self.logger.info(f"{e}")
 
             if data:
+                if isinstance(data, dict):
+                    data = [data]
+
                 self.send({
                     Output.RESULTS: data
                 })
             else:
-                self.logger.info(f"Empty response. Waiting for {frequency} seconds")
-
-            start_time = int((time.time() - frequency) * 1000)
-            time.sleep(frequency)
+                self.logger.info(f"Empty response. Waiting for {frequency} seconds.")

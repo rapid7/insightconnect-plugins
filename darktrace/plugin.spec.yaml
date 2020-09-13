@@ -617,6 +617,41 @@ triggers:
         default: 300
         example: 300
         required: false
+      did:
+        title: DID
+        type: integer
+        description: ID of device modelled in the Darktrace system
+        default: 300
+        example: 300
+        required: false
+      minscore:
+        title: Min Score
+        type: integer
+        description: Return only breaches with a minimum score
+        default: 300
+        example: 300
+        required: false
+      pbid:
+        title: PbID
+        type: integer
+        description: Only return the model breach with the specified ID
+        default: 300
+        example: 300
+        required: false
+      pid:
+        title: PID
+        type: integer
+        description: Only return model breaches for the specified model
+        default: 300
+        example: 300
+        required: false
+      uuid:
+        title: UUID
+        type: string
+        description: Only return model breaches for the specified model
+        default: 300
+        example: 300
+        required: false
     output:
       results:
         type: "[]trigger_result"
