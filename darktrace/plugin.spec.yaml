@@ -432,7 +432,7 @@ types:
     cbid:
       title: CBID
       type: integer
-      description: Cbid
+      description: Component breach ID
       required: false
     chid:
       title: CHID
