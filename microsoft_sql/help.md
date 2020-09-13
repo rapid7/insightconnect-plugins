@@ -117,7 +117,7 @@ This plugin uses version-specific drivers for Debian 9.x.
 
 # Version History
 
-* 1.0.2 - Fix execute insert and update
+* 1.0.2 - Fix Query action to support insert and update
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
@@ -127,4 +127,3 @@ This plugin uses version-specific drivers for Debian 9.x.
 
 * [pyodbc](https://github.com/mkleehammer/pyodbc/wiki)
 * [Microsoft SQL](https://www.microsoft.com/en-us/sql-server/default.aspx)
-
