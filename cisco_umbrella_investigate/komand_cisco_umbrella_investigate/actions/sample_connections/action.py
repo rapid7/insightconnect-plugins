@@ -26,7 +26,7 @@ class SampleConnections(komand.Action):
         try:
             sample_connections = self.connection.investigate.sample_connections(hash, limit=limit, offset=offset)
         except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
         return sample_connections
 
     def test(self):

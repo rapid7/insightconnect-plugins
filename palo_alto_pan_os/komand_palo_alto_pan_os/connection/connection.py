@@ -9,8 +9,9 @@ class Connection(komand.Connection):
 
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
+        self.request = None
 
-    def connect(self, params):
+    def connect(self, params={}):
         self.logger.info("Connect: Connecting..")
 
         hostname = params.get("server")
@@ -21,7 +22,10 @@ class Connection(komand.Connection):
         self.request = Request.new_session(self, username, password, hostname, verify_cert)
 
     def test(self):
-        if self.request.key:
-            return {"response": {"message": "Access token obtained"}}
+        if len(self.request.key) > 0:
+            return {
+                "success": True
+            }
         raise ConnectionTestException(
-            preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
+            preset=ConnectionTestException.Preset.USERNAME_PASSWORD
+        )

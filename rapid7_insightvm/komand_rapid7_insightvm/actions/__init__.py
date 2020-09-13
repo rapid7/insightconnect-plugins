@@ -32,6 +32,7 @@ from .get_asset_tags.action import GetAssetTags
 from .get_asset_vulnerabilities.action import GetAssetVulnerabilities
 from .get_authentication_source.action import GetAuthenticationSource
 from .get_authentication_sources.action import GetAuthenticationSources
+from .get_expiring_vulnerability_exceptions.action import GetExpiringVulnerabilityExceptions
 from .get_role.action import GetRole
 from .get_roles.action import GetRoles
 from .get_scan.action import GetScan
@@ -54,6 +55,7 @@ from .get_users.action import GetUsers
 from .get_vulnerabilities_by_cve.action import GetVulnerabilitiesByCve
 from .get_vulnerability.action import GetVulnerability
 from .get_vulnerability_affected_assets.action import GetVulnerabilityAffectedAssets
+from .list_inactive_assets.action import ListInactiveAssets
 from .list_reports.action import ListReports
 from .remove_asset_group_tags.action import RemoveAssetGroupTags
 from .remove_asset_tag.action import RemoveAssetTag
@@ -82,3 +84,4 @@ from .update_user.action import UpdateUser
 from .update_user_asset_group_access.action import UpdateUserAssetGroupAccess
 from .update_user_role.action import UpdateUserRole
 from .update_user_site_access.action import UpdateUserSiteAccess
+from .update_vulnerability_exception_expiration_date.action import UpdateVulnerabilityExceptionExpirationDate

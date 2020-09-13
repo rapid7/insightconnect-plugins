@@ -4,7 +4,7 @@ products: [insightconnect]
 name: microsoft_teams
 title: Microsoft Teams
 description: The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users
-version: 2.2.0
+version: 2.2.1
 vendor: rapid7
 support: community
 status: []
@@ -100,6 +100,11 @@ types:
     cves:
       title: CVEs
       description: Extracted CVEs from message
+      type: "[]string"
+      required: false
+    uuids:
+      title: UUIDs
+      description: Extracted UUIDs from message
       type: "[]string"
       required: false
   channel:

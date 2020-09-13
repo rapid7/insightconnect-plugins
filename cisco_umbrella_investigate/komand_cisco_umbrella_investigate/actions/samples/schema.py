@@ -8,10 +8,10 @@ class Component:
 
 
 class Input:
-    URL = "URL"
     LIMIT = "limit"
     OFFSET = "offset"
     SORTBY = "sortby"
+    URL = "url"
     
 
 class Output:
@@ -29,12 +29,6 @@ class SamplesInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "URL": {
-      "type": "string",
-      "title": "URL",
-      "description": "Search sample by domain, IP or URL",
-      "order": 1
-    },
     "limit": {
       "type": "string",
       "title": "Limit",
@@ -52,10 +46,16 @@ class SamplesInput(komand.Input):
       "title": "Sort By",
       "description": "Default is score. Choose from ['first-seen', 'last-seen', 'score']. 'first-seen' sorts the samples in date descending order. 'last-seen' sorts the samples in ascending order. 'score' sorts the samples by the ThreatScore",
       "order": 4
+    },
+    "url": {
+      "type": "string",
+      "title": "URL",
+      "description": "Search sample by domain, IP",
+      "order": 1
     }
   },
   "required": [
-    "URL"
+    "url"
   ]
 }
     """)

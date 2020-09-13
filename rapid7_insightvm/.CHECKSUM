@@ -1,7 +1,7 @@
 {
-	"spec": "1923869e2daed432b13b069b39ab502c",
-	"manifest": "638e64356107d0131eb9aad552f28f63",
-	"setup": "8e2dae5a7b97b8fb5719df4952f56488",
+	"spec": "629a56ad44dcfdb0485259725aa71645",
+	"manifest": "cee11dbb1f0ec8cd8535161fe81fd4ad",
+	"setup": "18e154cb6b9761bb87e6d05eb5e4f61c",
 	"schemas": [
 		{
 			"identifier": "add_scan_engine_pool_engine/schema.py",
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "create_asset_group/schema.py",
-			"hash": "a3850c7cf055200f7c80784728613335"
+			"hash": "0a450a625bf74954921bcc75232c7cef"
 		},
 		{
 			"identifier": "create_exception/schema.py",
@@ -136,6 +136,10 @@
 			"hash": "c3f015b6666fedbd513f0348f42ff04e"
 		},
 		{
+			"identifier": "get_expiring_vulnerability_exceptions/schema.py",
+			"hash": "6d35295bed12ae2c7d8f6de2098c8363"
+		},
+		{
 			"identifier": "get_role/schema.py",
 			"hash": "238158fb9c2705c78ddfe33945d319bf"
 		},
@@ -222,6 +226,10 @@
 		{
 			"identifier": "get_vulnerability_affected_assets/schema.py",
 			"hash": "7e22b140f5dd81d2afe542c1c87372df"
+		},
+		{
+			"identifier": "list_inactive_assets/schema.py",
+			"hash": "0d4aafcf9d5cef057ea929e86678db73"
 		},
 		{
 			"identifier": "list_reports/schema.py",
@@ -334,6 +342,10 @@
 		{
 			"identifier": "update_user_site_access/schema.py",
 			"hash": "115b4f827a0a570313fc4bc260d925e1"
+		},
+		{
+			"identifier": "update_vulnerability_exception_expiration_date/schema.py",
+			"hash": "25bc3fe35b772ba3c8d6b7e0824a4121"
 		},
 		{
 			"identifier": "connection/schema.py",

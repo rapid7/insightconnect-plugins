@@ -6,6 +6,8 @@ The Cisco Firepower Management Center InsightConnect plugin allows you to create
 # Key Features
 
 * Create block URL policy
+* Create address object
+* Delete address object
 
 # Requirements
 
@@ -129,7 +131,7 @@ Example output:
     "name": "Example Object Created from InsightConnect",
     "overridable": false,
     "type": "FQDN",
-    "value": "www.example.com"
+    "value": "example.com"
   }
 }
 ```
@@ -194,7 +196,7 @@ Example output:
     "name": "Example Object Created from InsightConnect",
     "overridable": false,
     "type": "FQDN",
-    "value": "www.example.com"
+    "value": "example.com"
   }
 }
 ```

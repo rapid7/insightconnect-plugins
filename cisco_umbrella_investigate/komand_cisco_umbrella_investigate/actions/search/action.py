@@ -44,7 +44,7 @@ class Search(komand.Action):
         try:
             search = self.connection.investigate.search(expression, start=start, limit=limit, include_category=include_category)
         except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
         return search
 
     def test(self):

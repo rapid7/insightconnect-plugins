@@ -22,7 +22,7 @@ class EmailWhois(komand.Action):
         try:
             email_whois = self.connection.investigate.email_whois(email)
         except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 
         one_email_whois = email_whois.get(email)
         if not one_email_whois:
