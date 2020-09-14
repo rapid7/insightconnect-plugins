@@ -1,0 +1,77 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: zscaler
+title: Zscaler
+version: 1.0.0
+description: Zscaler is a SaaS security platform that provides fast, secure connections between client applications, regardless of device, location, or network
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/zscaler
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.zscaler.com/
+tags:
+- zscaler
+- security
+- platform
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [zscaler, security, platform]
+  features: []
+
+types:
+  url_categorization:
+    url:
+      title: URL
+      type: string
+      description: Checked URL
+      required: false
+    urlClassifications:
+      title: URL Classifications
+      type: "[]string"
+      description: URL classifications
+      required: false
+    urlClassificationsWithSecurityAlert:
+      title: URL classifications with security alert
+      type: "[]string"
+      description: URL classifications with security alert
+      required: false
+
+connection:
+  url:
+    title: URL
+    type: string
+    description: API URL
+    required: true
+    example: admin.zscalerbeta.net
+  api_key:
+    title: API Key
+    type: credential_secret_key
+    description: Enter organization API key
+    required: true
+    example: 14M2d25A7c12
+  credentials:
+    title: Username and Password
+    description: Username and password to access Zscaler
+    type: credential_username_password
+    required: true
+    example: '{"username":"user@example.com", "password":"mypassword"}'
+actions:
+  lookup_url:
+    title: Lookup URL
+    description: Look up the categorization of the given set of URLs
+    input:
+      urls:
+        title: URLs
+        description: The given set of URLs to be looked up
+        type: "[]string"
+        required: true
+        example: ["example.com", "rapid7.com"]
+    output:
+      url_categorization:
+        title: URL Categorization
+        description: Information about given URLs
+        type: "[]url_categorization"
+        required: true
