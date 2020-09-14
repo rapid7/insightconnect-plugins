@@ -9,7 +9,8 @@
 # Requirements
 
 * Requires an organization API Key from Zscaler
-* Requires username and password fo Zscaler
+* [Requires a Zscaler organization API Key](https://help.zscaler.com/zia/api-getting-started)
+* Requires a Zscaler username and password
 
 
 # Documentation
