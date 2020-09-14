@@ -118,6 +118,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Add
@@ -163,11 +166,9 @@ Example input:
 Example output:
 
 ```
-
 {
   "success": true
 }
-
 ```
 
 #### Query
