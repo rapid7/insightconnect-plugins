@@ -5,14 +5,15 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_cylance_protect.util.find_helpers import find_in_whitelist, find_agent_by_ip
 import validators
 
+
 class Quarantine(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='quarantine',
-                description=Component.DESCRIPTION,
-                input=QuarantineInput(),
-                output=QuarantineOutput())
+            name='quarantine',
+            description=Component.DESCRIPTION,
+            input=QuarantineInput(),
+            output=QuarantineOutput())
 
     def run(self, params={}):
         whitelist = params.get(Input.WHITELIST, None)
@@ -25,7 +26,8 @@ class Quarantine(insightconnect_plugin_runtime.Action):
             else:
                 raise PluginException(
                     cause="Agent not found.",
-                    assistance=f"Unable to find an agent with IP: {agent}, please ensure that the IP address is correct."
+                    assistance=f"Unable to find an agent with IP: {agent},"
+                               f" please ensure that the IP address is correct."
                 )
 
         device_obj = self.connection.client.get_agent_details(agent)
@@ -37,7 +39,7 @@ class Quarantine(insightconnect_plugin_runtime.Action):
                     cause="Agent found in the whitelist.",
                     assistance=f"If you would like to block this host, remove {str(matches)[1:-1]} from the whitelist."
                 )
-        
+
         return {
             Output.LOCKDOWN_DETAILS: self.connection.client.device_lockdown(device_obj.get('id'))
         }

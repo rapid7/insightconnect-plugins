@@ -1,5 +1,3 @@
-from insightconnect_plugin_runtime.exceptions import PluginException
-
 def find_in_whitelist(device_obj: dict, whitelist: list) -> list:
     whitelist_values = []
 
@@ -30,4 +28,4 @@ def find_agent_by_ip(connection, ip_address: str) -> str:
                 if ip_address == ip:
                     return device.get('id')
         i += 1
-    return None
+    return ip_address
