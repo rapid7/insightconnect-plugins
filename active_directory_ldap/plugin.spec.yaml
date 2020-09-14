@@ -263,7 +263,7 @@ actions:
         required: false
   modify_object:
     title: Modify Object
-    description: Modify an Active Directory objects attributes
+    description: Modify the attributes for an Active Directory object
     input:
       distinguished_name:
         title: Distinguished Name
