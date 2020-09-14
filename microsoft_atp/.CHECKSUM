@@ -1,7 +1,7 @@
 {
-	"spec": "9980de779ca1221188c49f25e96e0f8e",
-	"manifest": "c50c3620559795deef155bbbc2ffea95",
-	"setup": "e74f94a5d2077cee87b6037a0fe198a7",
+	"spec": "67a3b1432a6ed2cc5e0bcc9c5a7c047b",
+	"manifest": "0089843cbd961b4b75ace8b795e06d3a",
+	"setup": "53aef53bc683e4b7045c1200154d529a",
 	"schemas": [
 		{
 			"identifier": "blacklist/schema.py",
@@ -26,6 +26,10 @@
 		{
 			"identifier": "get_machine_vulnerabilities/schema.py",
 			"hash": "d6eb96785b6c62866a0210fa968d937c"
+		},
+		{
+			"identifier": "get_missing_software_updates/schema.py",
+			"hash": "3ebafb48978fb85e11adbeb699a6a6df"
 		},
 		{
 			"identifier": "get_security_recommendations/schema.py",
