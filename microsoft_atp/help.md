@@ -87,16 +87,6 @@ Example output:
       "url": "https://catalog.update.microsoft.com/v7/site/Searc...",
       "cveAddressed": 68,
       "id": "4570333"
-    },
-    {
-      "name": "May 2019 Security Updates",
-      "productsNames": [
-        ".net_framework"
-      ],
-      "url": "https://catalog.update.microsoft.com/v7/site/Searc...",
-      "cveAddressed": 4,
-      "id": "4499405",
-      "machineMissedOn": 1
     }
   ]
 }
