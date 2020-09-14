@@ -6,7 +6,7 @@ from icon_darktrace import connection, actions, triggers
 
 Name = "DarkTrace"
 Vendor = "rapid7"
-Version = "1.0.0"
+Version = "1.1.0"
 Description = "Automate the management of watched domains and alerting using the Darktrace plugin"
 
 
@@ -19,6 +19,8 @@ class ICONDarktrace(insightconnect_plugin_runtime.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_trigger(triggers.PullAlerts())
+
         self.add_action(actions.UpdateWatchedDomains())
 
 
