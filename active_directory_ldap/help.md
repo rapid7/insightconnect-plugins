@@ -76,6 +76,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Add or Remove an Object from Group
@@ -479,7 +482,7 @@ paired `\(\)` are supported
 
 # Version History
 
-* 4.0.0 - New action Modify Object
+* 4.0.0 - New action Modify Object | rename Modify Groups action to Add or Remove an Object from Group
 * 3.2.10 - Fix issue where escaped characters were not being handled correctly
 * 3.2.9 - Fix issue with error handling and logging for the Modify Groups action | Add example inputs | Update to use ldap3 2.7 and Python 3.8
 * 3.2.8 - Fix issue were adding objects to containers might fail

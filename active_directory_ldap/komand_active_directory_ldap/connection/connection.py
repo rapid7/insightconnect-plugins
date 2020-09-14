@@ -18,7 +18,7 @@ class Connection(komand.Connection):
         ssl = params.get(Input.USE_SSL)
         host = params.get(Input.HOST)
         port = params.get(Input.PORT)
-        user_name = params.get(Input.USERNAME_PASSWORD.get('username'))
+        user_name = params.get(Input.USERNAME_PASSWORD).get('username')
         password = params.get(Input.USERNAME_PASSWORD).get('password')
         self.logger.info(f'Connecting to {host}{port}')
 
