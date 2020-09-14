@@ -37,7 +37,7 @@ Example input:
   "host": "ldaps://example.com",
   "port": 389,
   "use_ssl": true,
-  "username_password": "{\"username\":\"user1\", \"password\":\"mypassword\"}"
+  "username_password": {"username":"user1", "password":"mypassword"}
 }
 ```
 
@@ -54,7 +54,7 @@ This action is used to modify an Active Directory objects attributes.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |attribute_to_modify|string|None|True|The name of the attribute to modify|None|postalCode|
-|attribute_value|string|None|True|The value of the attribute|None|1100|
+|attribute_value|string|None|True|The value of the attribute|None|02114|
 |distinguished_name|string|None|True|The distinguished name of the object to modify|None|CN=user,OU=domain_users,DC=example,DC=com|
 
 Example input:
@@ -98,7 +98,7 @@ Example input:
 ```
 {
   "account_disabled": "true",
-  "additional_parameters": "{\"telephoneNumber\":\"(617)555-1234\"}",
+  "additional_parameters": {"telephoneNumber":"(617)555-1234"},
   "domain_name": "example.com",
   "first_name": "John",
   "last_name": "Doe",

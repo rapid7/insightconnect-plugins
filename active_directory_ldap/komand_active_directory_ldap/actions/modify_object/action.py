@@ -47,12 +47,10 @@ class ModifyObject(komand.Action):
         entries = result_list_object["entries"]
 
         dn_test = [d['dn'] for d in entries if 'dn' in d]
-        try:
-            dn_test[0]
-        except Exception as ex:
+        if len(dn_test) == 0:
             self.logger.error('The DN ' + dn + ' was not found')
             raise PluginException(cause='The DN was not found.',
-                                  assistance='The DN ' + dn + ' was not found') from ex
+                                  assistance='The DN ' + dn + ' was not found')
 
         # Update attribute
 
