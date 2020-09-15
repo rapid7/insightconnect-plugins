@@ -62,6 +62,9 @@ class WindwosDefenderATP_API:
     def find_machines(self, software: str):
         return self._make_request("GET", f"Software/{software}/machineReferences", allow_empty=True)
 
+    def get_missing_software_updates(self, machine_id: str):
+        return self._make_request("GET", f"machines/{machine_id}/getmissingkbs")
+
     def get_machine_action(self, action_id: str) -> dict:
         return self._make_request("GET", f"machineactions/{action_id}")
 
