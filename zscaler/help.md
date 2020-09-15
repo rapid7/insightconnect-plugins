@@ -51,7 +51,7 @@ Example input:
 
 #### Lookup URL
 
-This action is used to look up the categorization of the given set of URLs.
+This action is used to look up the categorization of a given set of URLs.
 
 ##### Input
 
