@@ -47,6 +47,51 @@ Example input:
 
 ### Actions
 
+#### Get Missing Software Updates
+
+This action is used to retrieve a list of software updates.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|machine|string|None|True|Machine IP address, hostname or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+
+Example input:
+
+```
+{
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|updates|[]update|True|List of updates|
+
+Example output:
+
+```
+{
+  "updates": [
+    {
+      "machineMissedOn": 1,
+      "name": "September 2020 Security Updates",
+      "osBuild": 17763,
+      "productsNames": [
+        "windows_10",
+        "internet_explorer"
+      ],
+      "url": "https://catalog.update.microsoft.com/v7/site/Searc...",
+      "cveAddressed": 68,
+      "id": "4570333"
+    }
+  ]
+}
+```
+
 #### Get Security Recommendations
 
 This action is used to retrieve a list of security recommendations.
@@ -715,6 +760,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.5.0 - Add new action Get Missing Software Updates
 * 4.4.1 - Add validation MD5 hash in Blacklist action | Set default value for Title, Expiration Time and Description input in action Blacklist
 * 4.4.0 - Add new action Get Security Recommendations
 * 4.3.0 - Add new action Get Machine Vulnerabilities
