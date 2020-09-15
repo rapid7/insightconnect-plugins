@@ -4,7 +4,7 @@
 
 # Key Features
 
-* Lookup URL
+* Lookup categories for a given URL
 
 # Requirements
 
