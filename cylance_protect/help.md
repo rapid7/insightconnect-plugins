@@ -113,14 +113,9 @@ Example input:
 
 ```
 {
-  "add_zones": [
-    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
-  ],
   "agent": "Example-Hostname",
-  "policy": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
-  "remove_zones": [
-    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
-  ]
+  "quarantine_state": true,
+  "threat_identifier": "44d88612fea8a8f36de82e1278abb02f"
 }
 ```
 
