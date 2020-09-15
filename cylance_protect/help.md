@@ -88,12 +88,14 @@ Example output:
 
 ```
 {
-    "deleted": ["10.0.2.15"],
-    "not_deleted": [
-      "2.2.2.2", 
-      "3.3.3.3"
-    ],
-    "success": true
+  "deleted": [
+    "10.0.2.15"
+  ],
+  "not_deleted": [
+    "2.2.2.2", 
+    "3.3.3.3"
+  ],
+  "success": true
 }
 ```
 
@@ -478,7 +480,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.5.0 - New action Delete Asset, rework utility function
+* 1.5.0 - New action Delete Asset | Rework utility function
 * 1.4.0 - New actions Update Agent Threat, Update Agent
 * 1.3.0 - New action Search Agents
 * 1.2.0 - New actions Search Threats, Get Devices Affected by Threat
