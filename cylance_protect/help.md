@@ -18,6 +18,13 @@ The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/
 
 ## Setup
 
+You must create a Custom Application by following this procedure from the CylancePROTECT console:
+
+1. Go to the Integrations tab on the Settings page
+2. Click "Add Application"
+3. Provide a name for the integration and choose the permissions related to the actions you want to use
+4. Copy and paste the Application ID, Application Secret, and Tenant ID (from the Integrations tab) into the connection
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
