@@ -7,7 +7,7 @@ vendor: rapid7
 status: []
 description: This plugin utilizes Cisco Firepower Management Center to create a new block URL policy
  Cisco Firepower Management Center is an administrative nerve center for managing critical Cisco network security solutions
-version: 1.1.0
+version: 1.2.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cisco_firepower_management_center
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -367,3 +367,39 @@ actions:
         description: List of found address objects
         type: "[]address_object"
         required: false
+  add_address_to_group:
+    title: Add Address to Group
+    description: Adds an existing address object to a group
+    input:
+      address:
+        title: Address
+        description: Name of address object
+        type: string
+        required: true
+        example: MaliciousHost
+      group:
+        title: Group
+        description: Name of address group to add the address to
+        type: string
+        required: true
+        example: MaliciousAddressGroup
+    output:
+      #TODO Add the output for the action
+  remove_address_from_group:
+    title: Remove Address from Group
+    description: Removes an address object from a group
+    input:
+      address:
+        title: Address
+        description: The hostname, an IP address or subnet address expressed in CIDR notation to remove from group
+        type: string
+        required: true
+        example: MaliciousHost
+      group:
+        title: Group
+        description: Name of the group to remove the address from
+        type: string
+        required: true
+        example: MaliciousAddressGroup
+    output:
+      #TODO Add the output for the action

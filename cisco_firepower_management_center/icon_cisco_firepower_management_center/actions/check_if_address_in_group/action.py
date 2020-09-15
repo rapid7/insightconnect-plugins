@@ -39,8 +39,8 @@ class CheckIfAddressInGroup(komand.Action):
 
         if enable_search:
             all_objects = self.connection.cisco_firepower_api.get_expanded_address_objects()
-            for address_object in all_objects:
-                for group_object in address_group_objects:
+            for group_object in address_group_objects:
+                for address_object in all_objects:
                     if address_object.get('name') == group_object.get('name') and self._check_address(
                                 address_object.get('value'),
                                 address_to_check
