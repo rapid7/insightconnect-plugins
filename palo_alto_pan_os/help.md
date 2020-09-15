@@ -54,18 +54,18 @@ This action adds an address object to an address group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_object|string|None|True|The name of the address object to add|None|Malicious IP|
+|address_object|string|None|True|The name of the address object to add|None|198.51.100.100|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
-|group|string|None|True|Group name|None|ICON Block List|
+|group|string|None|True|Group name|None|InsightConnect Block List|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
 
 Example input:
 
 ```
 {
-  "address_object": "Malicious IP",
+  "address_object": "198.51.100.100",
   "device_name": "localhost.localdomain",
-  "group": "ICON Block List",
+  "group": "InsightConnect Block List",
   "virtual_system": "vsys1"
 }
 ```
@@ -83,9 +83,9 @@ Example output:
 {
   "success": true,
   "address_objects": [
-    "198.51.100.100",
+    "example.com",
     "198.51.100.101",
-    "Malicious IP",
+    "198.51.100.100",
   ]
 }
 ```
@@ -101,7 +101,7 @@ This action checks to see if an IP address, CIDR IP address, or domain is in an 
 |address|string|None|True|The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name|None|198.51.100.100|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
 |enable_search|boolean|False|True|When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name|None|False|
-|group|string|None|True|Group name|None|ICON Block List|
+|group|string|None|True|Group name|None|InsightConnect Block List|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
 
 Example input:
@@ -111,7 +111,7 @@ Example input:
   "address": "198.51.100.100",
   "device_name": "localhost.localdomain",
   "enable_search": false,
-  "group": "ICON Block List",
+  "group": "InsightConnect Block List",
   "virtual_system": "vsys1"
 }
 ```
@@ -129,8 +129,7 @@ Example output:
 {
   "found": true,
   "address_objects": [
-    "1.1.1.1-24",
-    "Bad IP 2"
+    "198.51.100.100"
   ]
 }
 ```
@@ -145,7 +144,7 @@ This action removes an address object from an address group.
 |----|----|-------|--------|-----------|----|-------|
 |address_object|string|None|True|The name of the address object to remove|None|Malicious Host|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
-|group|string|None|True|Group name|None|ICON Block List|
+|group|string|None|True|Group name|None|InsightConnect Block List|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
 
 Example input:
@@ -154,7 +153,7 @@ Example input:
 {
   "address_object": "Malicious Host",
   "device_name": "localhost.localdomain",
-  "group": "ICON Block List",
+  "group": "InsightConnect Block List",
   "virtual_system": "vsys1"
 }
 ```
@@ -314,26 +313,44 @@ This action is used to create a new security policy rule.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|action|string|None|True|Action that will occur if an event meets the rule definitions|None|None|
-|application|string|None|True|Applications for which this rule will be applied e.g. adobe-cloud, dropbox,  any|None|None|
-|description|string|None|True|Description of the rule and what it does|None|None|
-|destination|string|None|True|Destinations for which this rule will be applied e.g. 10.0.0.1, computername, any|None|None|
-|disable_server_response_inspection|boolean|None|True|If true, the firewall will not inspect this traffic|None|None|
-|disabled|boolean|None|True|If true, rule is disabled|None|None|
-|dst_zone|string|None|True|Zone which the traffic is going to e.g. server zone, any|None|None|
-|log_end|boolean|None|True|Generates a traffic log entry for the end of a session|None|None|
-|log_start|boolean|None|True|Generates a traffic log entry for the start of a session|None|None|
-|negate_destination|boolean|None|True|Negate destination|None|None|
-|negate_source|boolean|None|True|Negate source|None|None|
-|rule_name|string|None|True|Name of the rule|None|None|
-|service|string|None|True|Service type for which this rule will be applied e.g. HTTP, HTTPS, any|None|None|
-|source|string|None|True|Sources for which this rule will be applied e.g. 10.0.0.1, computername, any|None|None|
-|source_user|string|None|True|User that the network traffic originated from e.g. Joe Smith, any|None|None|
-|src_zone|string|None|True|Zone in which the traffic originated e.g. server zone, any|None|None|
+|action|string|None|True|Action that will occur if an event meets the rule definitions|None|drop|
+|application|string|None|True|Applications for which this rule will be applied e.g. adobe-cloud, dropbox,  any|None|any|
+|description|string|None|True|Description of the rule and what it does|None|Block Rule|
+|destination|string|None|True|Destinations for which this rule will be applied e.g. 10.0.0.1, computername, any|None|any|
+|disable_server_response_inspection|boolean|None|True|If true, the firewall will not inspect this traffic|None|False|
+|disabled|boolean|None|True|If true, rule is disabled|None|False|
+|dst_zone|string|None|True|Zone which the traffic is going to e.g. server zone, any|None|any|
+|log_end|boolean|None|True|Generates a traffic log entry for the end of a session|None|False|
+|log_start|boolean|None|True|Generates a traffic log entry for the start of a session|None|False|
+|negate_destination|boolean|None|True|Negate destination|None|False|
+|negate_source|boolean|None|True|Negate source|None|False|
+|rule_name|string|None|True|Name of the rule|None|InsightConnect Block Rule|
+|service|string|None|True|Service type for which this rule will be applied e.g. HTTP, HTTPS, any|None|any|
+|source|string|None|True|Sources for which this rule will be applied e.g. 10.0.0.1, computername, any|None|any|
+|source_user|string|None|True|User that the network traffic originated from e.g. Joe Smith, any|None|any|
+|src_zone|string|None|True|Zone in which the traffic originated e.g. server zone, any|None|any|
 
 Example input:
 
 ```
+{
+  "action": "drop",
+  "application": "any",
+  "description": "Block Rule",
+  "destination": "any",
+  "disable_server_response_inspection": false,
+  "disabled": false,
+  "dst_zone": "any",
+  "log_end": false,
+  "log_start": false,
+  "negate_destination": false,
+  "negate_source": false,
+  "rule_name": "InsightConnect Block Rule",
+  "service": "any",
+  "source": "any",
+  "source_user": "any",
+  "src_zone": "any"
+}
 ```
 
 ##### Output
@@ -363,12 +380,16 @@ This action is used to create a new object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|element|string|None|True|XML representation of the object to be created|None|None|
-|xpath|string|None|True|Xpath location to create the new object|None|None|
+|element|string|None|True|XML representation of the object to be created|None|<application><member>8x8</member></application>|
+|xpath|string|None|True|Xpath location to create the new object|None|/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']|
 
 Example input:
 
 ```
+{
+  "element": "<application><member>8x8</member></application>",
+  "xpath": "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']"
+}
 ```
 
 ##### Output
@@ -398,11 +419,14 @@ This action is used to get candidate configuration.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|xpath|string|None|True|Xpath targeting the requested portion of the configuration|None|None|
+|xpath|string|None|True|Xpath targeting the requested portion of the configuration|None|/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='test_group']|
 
 Example input:
 
 ```
+{
+  "xpath": "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='test_group']"
+}
 ```
 
 ##### Output
@@ -419,24 +443,31 @@ Example output:
     "@status": "success",
     "@code": "19",
     "result": {
-      "-total-count": "2",
-      "-count": "2",
-      "entry": [
-       {
-          "-name": "intrazone-default",
-          "-__recordInfo": "{\"permission\":\"readonly\",\"xpathId\":\"predefined\",\"position\":\"default-security-rule\"}",
-          "action": "allow",
-          "log-start": "no",
-          "log-end": "no"
+      "@total-count": "1",
+      "@count": "1",
+      "entry": {
+        "@name": "test_group",
+        "@admin": "admin",
+        "@dirtyId": "4",
+        "@time": "2020/08/25 09:35:48",
+        "static": {
+          "@admin": "admin",
+          "@dirtyId": "4",
+          "@time": "2020/08/25 09:35:48",
+          "member": {
+            "@admin": "admin",
+            "@dirtyId": "4",
+            "@time": "2020/08/25 09:35:48",
+            "#text": "1.1.1.1"
+          }
         },
-        {
-          "-name": "interzone-default",
-          "-__recordInfo": "{\"permission\":\"readonly\",\"xpathId\":\"predefined\",\"position\":\"default-security-rule\"}",
-          "action": "deny",
-          "log-start": "no",
-          "log-end": "no"
+        "description": {
+          "@admin": "admin",
+          "@dirtyId": "4",
+          "@time": "2020/08/25 09:35:48",
+          "#text": "test"
         }
-      ]
+      }
     }
   }
 }
@@ -451,12 +482,16 @@ This action is used to edit an existing object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|element|string|None|True|XML representation of the updated object. This replaces the previous object entirely, any unchanged attributes must be restated|None|None|
-|xpath|string|None|True|Xpath location of the object to edit|None|None|
+|element|string|None|True|XML representation of the updated object. This replaces the previous object entirely, any unchanged attributes must be restated|None|<application><member>8x8</member></application>|
+|xpath|string|None|True|Xpath location of the object to edit|None|/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']/application|
 
 Example input:
 
 ```
+{
+  "element": "<application><member>8x8</member></application>",
+  "xpath": "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']/application"
+}
 ```
 
 ##### Output
@@ -486,11 +521,14 @@ This action is used to get an active configuration.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|xpath|string|None|True|Xpath targeting the requested portion of the configuration|None|None|
+|xpath|string|None|True|Xpath targeting the requested portion of the configuration|None|/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']|
 
 Example input:
 
 ```
+{
+  "xpath": "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']"
+}
 ```
 
 ##### Output
@@ -557,17 +595,25 @@ This action is used to query firewall logs.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|count|integer|20|False|Number of logs to retrieve (Max: 500, Default: 20)|None|None|
-|direction|string|None|False|Order in which to return the logs|['backward', 'forward']|None|
+|count|integer|20|False|Number of logs to retrieve (Max: 500, Default: 20)|None|20|
+|direction|string|None|False|Order in which to return the logs|['backward', 'forward']|backward|
 |filter|string|None|False|Search query. Format as a log filter expression|None|None|
-|interval|float|0.5|False|Time interval in seconds to wait between queries for commit job completion (Default: 0.5)|None|None|
-|log_type|string|None|False|Type of log to retrieve|['config', 'hipmatch', 'system', 'threat', 'traffic', 'url', 'wildfire']|None|
-|max_tries|integer|25|False|Maximum number of times to poll for job completion before timing out (Default: 25)|None|None|
-|skip|integer|0|False|Log retrieval offset, number of entries to skip, (Default: 0)|None|None|
+|interval|float|0.5|False|Time interval in seconds to wait between queries for commit job completion (Default: 0.5)|None|0.5|
+|log_type|string|None|False|Type of log to retrieve|['config', 'hipmatch', 'system', 'threat', 'traffic', 'url', 'wildfire']|config|
+|max_tries|integer|25|False|Maximum number of times to poll for job completion before timing out (Default: 25)|None|25|
+|skip|integer|0|False|Log retrieval offset, number of entries to skip, (Default: 0)|None|0|
 
 Example input:
 
 ```
+{
+  "count": 20,
+  "direction": "backward",
+  "interval": 0.5,
+  "log_type": "config",
+  "max_tries": 25,
+  "skip": 0
+}
 ```
 
 ##### Output
@@ -629,12 +675,16 @@ This action is used to commit the candidate configuration.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|action|string|all|False|Commit action (Default: 'all')|None|None|
-|cmd|string|None|True|XML specifying any commit arguments|None|None|
+|action|string|all|False|Commit action (Default: 'all')|None|all|
+|cmd|string|None|True|XML specifying any commit arguments|None|<commit></commit>|
 
 Example input:
 
 ```
+{
+  "action": "all",
+  "cmd": "<commit></commit>"
+}
 ```
 
 ##### Output
@@ -667,11 +717,14 @@ This action is used to delete an object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|xpath|string|None|True|Xpath targeting the object to delete|None|None|
+|xpath|string|None|True|Xpath targeting the object to delete|None|/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='test_group']|
 
 Example input:
 
 ```
+{
+  "xpath": "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='test_group']"
+}
 ```
 
 ##### Output
@@ -701,11 +754,14 @@ This action is used to run operational command.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|cmd|string|None|False|XML specifying operation to be completed|None|None|
+|cmd|string|None|False|XML specifying operation to be completed|None|<show><commit-locks/></show>|
 
 Example input:
 
 ```
+{
+  "cmd": "<show><commit-locks/></show>"
+}
 ```
 
 ##### Output
@@ -735,22 +791,36 @@ This action is used to add a rule to a PAN-OS security policy.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|action|string|None|False|Action that will occur if an event meets the rule definitions|None|None|
-|application|string|None|False|Application for which this rule will be applied e.g. adobe-cloud, dropbox, or  any|None|None|
-|destination|string|None|False|A destination for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|None|
-|dst_zone|string|None|False|Zone which the traffic is going to e.g. server zone, or any|None|None|
-|hip_profiles|string|None|False|Host information profile|None|None|
-|rule_name|string|None|True|Name of the rule|None|None|
-|service|string|None|False|Service type for which this rule will be applied e.g. HTTP, HTTPS, or any|None|None|
-|source|string|None|False|A source for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|None|
-|source_user|string|None|False|User that the network traffic originated from e.g. Joe Smith, or any|None|None|
-|src_zone|string|None|False|Zone in which the traffic originated e.g. server zone, or any|None|None|
-|update_active_or_candidate_configuration|string|None|True|Will apply the update to the active or candidate configuration. If active is chosen any uncommitted candidate configuration will be lost|['active', 'candidate']|None|
-|url_category|string|None|False|The URL category e.g. adult|None|None|
+|action|string|None|False|Action that will occur if an event meets the rule definitions|None|drop|
+|application|string|None|False|Application for which this rule will be applied e.g. adobe-cloud, dropbox, or  any|None|any|
+|destination|string|None|False|A destination for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|any|
+|dst_zone|string|None|False|Zone which the traffic is going to e.g. server zone, or any|None|any|
+|hip_profiles|string|None|False|Host information profile|None|any|
+|rule_name|string|None|True|Name of the rule|None|InsightConnect Block Rule|
+|service|string|None|False|Service type for which this rule will be applied e.g. HTTP, HTTPS, or any|None|any|
+|source|string|None|False|A source for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|any|
+|source_user|string|None|False|User that the network traffic originated from e.g. Joe Smith, or any|None|Joe Smith|
+|src_zone|string|None|False|Zone in which the traffic originated e.g. server zone, or any|None|any|
+|update_active_or_candidate_configuration|string|None|True|Will apply the update to the active or candidate configuration. If active is chosen any uncommitted candidate configuration will be lost|['active', 'candidate']|active|
+|url_category|string|None|False|The URL category e.g. adult|None|adult|
 
 Example input:
 
 ```
+{
+  "action": "drop",
+  "application": "any",
+  "destination": "any",
+  "dst_zone": "any",
+  "hip_profiles": "any",
+  "rule_name": "InsightConnect Block Rule",
+  "service": "any",
+  "source": "any",
+  "source_user": "Joe Smith",
+  "src_zone": "any",
+  "update_active_or_candidate_configuration": "active",
+  "url_category": "adult"
+}
 ```
 
 ##### Output
@@ -779,22 +849,36 @@ This action is used to remove a rule from a PAN-OS security policy.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|action|string|None|False|The action that will occur if an event meets the rule definitions|None|None|
-|application|string|None|False|Application for which this rule will be applied e.g. adobe-cloud, dropbox, or any|None|None|
-|destination|string|None|False|A Destination for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|None|
-|dst_zone|string|None|False|Zone which the traffic is going to e.g. server zone, or any|None|None|
-|hip_profiles|string|None|False|Host information profile|None|None|
-|rule_name|string|None|True|Name of the rule|None|None|
-|service|string|None|False|Service type for which this rule will be applied e.g. HTTP, HTTPS, any|None|None|
-|source|string|None|False|A source for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|None|
-|source_user|string|None|False|User that the network traffic originated from e.g. Joe Smith, or any|None|None|
-|src_zone|string|None|False|Zone in which the traffic originated e.g. server zone, or any|None|None|
-|update_active_or_candidate_configuration|string|None|True|Will apply the update to the active or candidate configuration. If active is chosen any uncommitted candidate configuration will be lost|['active', 'candidate']|None|
-|url_category|string|None|False|The URL category e.g. adult|None|None|
+|action|string|None|False|The action that will occur if an event meets the rule definitions|None|drop|
+|application|string|None|False|Application for which this rule will be applied e.g. adobe-cloud, dropbox, or any|None|any|
+|destination|string|None|False|A Destination for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|any|
+|dst_zone|string|None|False|Zone which the traffic is going to e.g. server zone, or any|None|any|
+|hip_profiles|string|None|False|Host information profile|None|any|
+|rule_name|string|None|True|Name of the rule|None|InsightConnect Block Rule|
+|service|string|None|False|Service type for which this rule will be applied e.g. HTTP, HTTPS, any|None|any|
+|source|string|None|False|A source for which this rule will be applied e.g. 10.0.0.1, computername, or any|None|any|
+|source_user|string|None|False|User that the network traffic originated from e.g. Joe Smith, or any|None|any|
+|src_zone|string|None|False|Zone in which the traffic originated e.g. server zone, or any|None|any|
+|update_active_or_candidate_configuration|string|None|True|Will apply the update to the active or candidate configuration. If active is chosen any uncommitted candidate configuration will be lost|['active', 'candidate']|active|
+|url_category|string|None|False|The URL category e.g. adult|None|adult|
 
 Example input:
 
 ```
+{
+  "action": "drop",
+  "application": "any",
+  "destination": "any",
+  "dst_zone": "any",
+  "hip_profiles": "any",
+  "rule_name": "InsightConnect Block Rule",
+  "service": "any",
+  "source": "any",
+  "source_user": "any",
+  "src_zone": "any",
+  "update_active_or_candidate_configuration": "active",
+  "url_category": "adult"
+}
 ```
 
 ##### Output
@@ -824,17 +908,26 @@ This action is used to add an external dynamic list.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|day|string||True|If repeat is weekly, choose a day to update|['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']|None|
-|description|string|None|True|A description of the list|None|None|
-|list_type|string|None|True|The type of list|['IP List', 'Domain List', 'URL List']|None|
-|name|string|None|True|An arbitrary name for the list. This name will be used to identify the list in the firewall|None|None|
-|repeat|string|None|True|The interval at which to retrieve updates from the list|['Five Minute', 'Hourly', 'Daily', 'Weekly']|None|
-|source|string|None|True|The web site you will pull the list from e.g. https://www.example.com/test.txt|None|None|
-|time|string||True|If repeat is daily or weekly, choose an hour on a 24 hour clock to update (Default: '')|['', '00', '01', '02', '03', '04', '05', '06', '07', 8, 9, '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']|None|
+|day|string||True|If repeat is weekly, choose a day to update|['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']|Monday|
+|description|string|None|True|A description of the list|None|List of IP's|
+|list_type|string|None|True|The type of list|['IP List', 'Domain List', 'URL List']|IP List|
+|name|string|None|True|An arbitrary name for the list. This name will be used to identify the list in the firewall|None|IP List|
+|repeat|string|None|True|The interval at which to retrieve updates from the list|['Five Minute', 'Hourly', 'Daily', 'Weekly']|Five Minute|
+|source|string|None|True|The web site you will pull the list from e.g. https://www.example.com/test.txt|None|https://www.example.com/test.txt|
+|time|string||True|If repeat is daily or weekly, choose an hour on a 24 hour clock to update (Default: '')|['', '00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']|00|
 
 Example input:
 
 ```
+{
+  "day": "Monday",
+  "description": "List of IP's",
+  "list_type": "IP List",
+  "name": "IP List",
+  "repeat": "Five Minute",
+  "source": "https://www.example.com/test.txt",
+  "time": "00"
+}
 ```
 
 ##### Output
@@ -877,6 +970,8 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 6.0.3 - Add Input and Output examples
+* 6.0.2 - Fix issue where Set Network Object did not support IPv6
 * 6.0.1 - Improve error handling in `pa_os_request.py`
 * 6.0.0 - Update to Create Address Object to add Skip RFC 1918 input
 * 5.1.1 - Fix issue where IPv6 address were not supported
