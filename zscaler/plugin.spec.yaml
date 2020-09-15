@@ -43,7 +43,7 @@ connection:
   url:
     title: URL
     type: string
-    description: API URL
+    description: Base URL, see https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details
     required: true
     example: admin.zscalerbeta.net
   api_key:
