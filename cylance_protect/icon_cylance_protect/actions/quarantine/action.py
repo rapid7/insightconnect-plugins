@@ -21,7 +21,7 @@ class Quarantine(insightconnect_plugin_runtime.Action):
 
         if validators.ipv4(agent):
             found_agent = find_agent_by_ip(self.connection, agent)
-            if found_agent:
+            if found_agent != agent:
                 agent = found_agent
             else:
                 raise PluginException(
