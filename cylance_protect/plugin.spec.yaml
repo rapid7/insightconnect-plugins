@@ -4,7 +4,7 @@ products: [insightconnect]
 name: cylance_protect
 title: BlackBerry CylancePROTECT
 description: Automate detection and response operations using CylancePROTECT
-version: 1.4.0
+version: 1.5.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -500,7 +500,7 @@ actions:
     description: Updates the status (waive or quarantine) of a convicted threat on a selected device
     input:
       agent:
-        title: Agentf
+        title: Agent
         description: Device to update threat on. Accepts IP address, MAC address, hostname, or device ID
         type: string
         required: true
@@ -558,7 +558,7 @@ actions:
         type: boolean
         required: true
   delete_asset:
-    title: Delete Device(s) from Console
+    title: Delete Asset
     description: Delete assets/devices from the Console
     input:
       agents:

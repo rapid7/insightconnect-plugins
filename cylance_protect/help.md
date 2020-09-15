@@ -8,6 +8,7 @@ The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/
 * Blacklist a malicious hash
 * Quarantine endpoints
 * Search threats
+* Delete assets
 
 # Requirements
 
@@ -41,7 +42,7 @@ Example input:
 
 ### Actions
 
-#### Delete Device(s) from Console
+#### Delete Asset
 
 This action is used to delete assets/devices from the Console.
 
@@ -55,6 +56,17 @@ This action is used to delete assets/devices from the Console.
 Example input:
 
 ```
+{
+  "agents": [
+    "Example-Hostname",
+    "198.51.100.1"
+  ],
+  "whitelist": [
+    "198.51.100.100",
+    "Example-Hostname",
+    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
+  ]
+}
 ```
 
 ##### Output
@@ -68,87 +80,14 @@ Example input:
 Example output:
 
 ```
-```
-
-#### Delete Device(s) from Console
-
-This action is used to delete assets/devices from the Console.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|agents|[]string|None|True|Device(s) to delete. Accepts IP address, MAC address, hostname, or device ID|None|["Example-Hostname", "198.51.100.1"]|
-|whitelist|[]string|None|False|This list contains a set of hosts that should not be deleted. This can include IPs, hostnames or device IDs|None|["198.51.100.100", "Example-Hostname", "1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Return true if the device was deleted|
-
-Example output:
-
-```
-```
-
-#### Delete Device(s) from Console
-
-This action is used to delete assets/devices from the Console.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|agents|[]string|None|True|Device(s) to delete. Accepts IP address, MAC address, hostname, or device ID|None|["Example-Hostname", "198.51.100.1"]|
-|whitelist|[]string|None|False|This list contains a set of hosts that should not be deleted. This can include IPs, hostnames or device IDs|None|["198.51.100.100", "Example-Hostname", "1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Return true if the device was deleted|
-
-Example output:
-
-```
-```
-
-#### Delete Device(s) from Console
-
-This action is used to delete assets/devices from the Console.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|agents|[]string|None|True|Device(s) to delete. Accepts IP address, MAC address, hostname, or device ID|None|["Example-Hostname", "198.51.100.1"]|
-|whitelist|[]string|None|False|This list contains a set of hosts that should not be deleted. This can include IPs, hostnames or device IDs|None|["198.51.100.100", "Example-Hostname", "1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Return true if the device was deleted|
-
-Example output:
-
-```
+{
+    "deleted": ["10.0.2.15"],
+    "not_deleted": [
+      "2.2.2.2", 
+      "3.3.3.3"
+    ],
+    "success": true
+}
 ```
 
 #### Update Agent Threat
@@ -537,6 +476,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.5.0 - New action Delete Asset, rework utility function
 * 1.4.0 - New actions Update Agent Threat, Update Agent
 * 1.3.0 - New action Search Agents
 * 1.2.0 - New actions Search Threats, Get Devices Affected by Threat

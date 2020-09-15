@@ -18,7 +18,6 @@ class CylanceProtectAPI:
         self.logger = logger
 
     def get_agent_details(self, agent):
-        self.logger.info(agent)
         devices = [{}]
         if len(agent) == 36 and match(r"((?:[[\da-fA-F]{8}-([\da-fA-F]{4}-){3}[\da-fA-F]{12}))", agent):
             devices = [self._call_api("GET", f"{self.url}/devices/v2/{agent}", "device:read")]
