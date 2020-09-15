@@ -25,8 +25,11 @@ class DeleteAsset(insightconnect_plugin_runtime.Action):
         for agent in agents:
             try:
                 if validators.ipv4(agent):
-                    agent = find_agent_by_ip(self.connection, agent)
-                device_obj = self.connection.client.get_agent_details(agent)
+                    ip_agent = find_agent_by_ip(self.connection, agent)
+                if ip_agent:
+                    device_obj = self.connection.client.get_agent_details(ip_agent)
+                else:
+                    device_obj = self.connection.client.get_agent_details(agent)
                 if device_obj:
                     if whitelist:
                         matches = find_in_whitelist(device_obj, whitelist)

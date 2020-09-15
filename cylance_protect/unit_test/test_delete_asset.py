@@ -12,19 +12,6 @@ from icon_cylance_protect.util.find_helpers import find_in_whitelist, find_agent
 
 class TestDeleteAsset(TestCase):
     def test_integration_delete_asset(self):
-        """
-        TODO: Implement assertions at the end of this test case
-
-        This is an integration test that will connect to the services your plugin uses. It should be used
-        as the basis for tests below that can run independent of a "live" connection.
-
-        This test assumes a normal plugin structure with a /tests directory. In that /tests directory should
-        be json samples that contain all the data needed to run this test. To generate samples run:
-
-        icon-plugin generate samples
-
-        """
-
         log = logging.getLogger("Test")
         test_conn = Connection()
         test_action = DeleteAsset()
@@ -50,8 +37,8 @@ class TestDeleteAsset(TestCase):
         test_conn.connect(connection_params)
         test_action.connection = test_conn
 
-        # results = test_action.run(action_params)
-        # self.assertEquals({"deleted": ["10.0.2.15"], "not_deleted": [], "success": true}, results)
+        results = test_action.run(action_params)
+        self.assertEqual({"deleted": ["10.0.2.15"], "not_deleted": [], "success": True}, results)
 
     def test_find_in_whitelist(self):
         dic = {'id': 'cf9c26cc-6d3d-454a-b242-7e9f565c6cf7', 'name': 'VAGRANT-PC', 'host_name': 'vagrant-pc',
@@ -72,7 +59,7 @@ class TestDeleteAsset(TestCase):
 
     def test_find_agent_by_ip(self):
         ip = "10.0.2.15"
-        ip_device_id = "07538729-cb7a-482b-9c91-4623123afb2a"
+        ip_device_id = "6be117da-2f5d-4645-8878-1bc6476a399a"
         log = logging.getLogger("Test")
         test_conn = Connection()
         test_action = DeleteAsset()
@@ -90,11 +77,9 @@ class TestDeleteAsset(TestCase):
         test_conn.connect(connection_params)
         test_action.connection = test_conn
 
-        self.assertEqual(find_agent_by_ip(test_action.connection, "1.1.1.1"), [])
-        # self.assertEqual(find_in_whitelist(dic, []), [])
-        # self.assertNotEqual(find_in_whitelist(dic, ["1.1.1.1", "2.2.2.2"]), ["1.1.1.1"])
-        # self.assertEqual(find_in_whitelist(dic, ['10.0.2.15']), ['10.0.2.15'])
-        # self.assertEqual(find_in_whitelist(dic, ['08-00-27-33-9F-CE']), ['08-00-27-33-9F-CE'])
-        # self.assertEqual(find_in_whitelist(dic, ['vagrant-pc']), ['vagrant-pc'])
+        self.assertEqual(find_agent_by_ip(test_action.connection, "1.1.1.1"), "1.1.1.1")
+        self.assertEqual(find_agent_by_ip(test_action.connection, ip), ip_device_id)
+        self.assertNotEqual(find_agent_by_ip(test_action.connection, ip), "1.1.1.1")
+        self.assertNotEqual(find_agent_by_ip(test_action.connection, ip), "10.0.2.15")
 
 
