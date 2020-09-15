@@ -61,7 +61,7 @@ connection:
 actions:
   lookup_url:
     title: Lookup URL
-    description: Look up the categorization of the given set of URLs
+    description: Look up the categorization of a given set of URLs
     input:
       urls:
         title: URLs
