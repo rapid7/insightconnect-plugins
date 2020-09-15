@@ -6,7 +6,7 @@ from komand_dig import connection, actions, triggers
 
 Name = "Dig"
 Vendor = "rapid7"
-Version = "1.0.5"
+Version = "1.0.6"
 Description = "Dig is used for forward and reverse DNS lookups"
 
 
