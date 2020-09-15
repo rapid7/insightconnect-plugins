@@ -30,7 +30,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "API URL",
+      "description": "Base URL, see https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details",
       "order": 1
     }
   },

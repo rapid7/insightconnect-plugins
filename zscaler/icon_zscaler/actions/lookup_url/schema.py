@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Look up the categorization of the given set of URLs"
+    DESCRIPTION = "Look up the categorization of a given set of URLs"
 
 
 class Input:
