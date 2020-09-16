@@ -5038,6 +5038,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.4.1 - Add improved error handling for List Inactive Assets action
 * 4.4.0 - New action Update Vulnerability Exception Expiration Date
 * 4.3.0 - New action Get Expiring Vulnerability Exceptions
 * 4.2.1 - Fix to make Create Asset Group description required
