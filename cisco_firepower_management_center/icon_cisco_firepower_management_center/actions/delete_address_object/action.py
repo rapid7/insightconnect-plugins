@@ -27,7 +27,7 @@ class DeleteAddressObject(komand.Action):
         object_types = ['hosts', 'fqdns', 'networks', 'ranges']
 
         for object_type in object_types:
-            objects = self.connection.cisco_firepower_api.get_address_objects(object_type)
+            objects = self.connection.cisco_firepower_api.get_address_objects(object_type).get('items')
             if objects:
                 for item in objects:
                     if item.get('name') == name:

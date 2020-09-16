@@ -17,12 +17,26 @@ The [Microsoft SQL](https://www.microsoft.com/en-us/sql-server/default.aspx) plu
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|True|Database username and password|None|
-|db|string|None|True|Database name|None|
-|host|string|None|True|Database hostname|None|
-|port|string|None|False|Database port. If blank port 1433 will be used|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|credentials|credential_username_password|None|True|Database username and password|None|None|
+|db|string|None|True|Database name|None|None|
+|host|string|None|True|Database hostname|None|None|
+|port|number|None|False|Database port. Port 1433 will be used if this is left blank|None|None|
+
+Example input:
+
+```
+{
+  "credentials": {
+    "password": "password",
+    "username": "username"
+  },
+  "db": "test",
+  "host": "192.168.10.1",
+  "port": 1433
+}
+```
 
 ## Technical Details
 
@@ -34,10 +48,19 @@ This action is used to run an SQL query.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|parameters|object|None|False|Parameters for query|None|
-|query|string|None|True|Query to run|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|parameters|[]object|None|False|Parameters for query. Parameters should be input as an ordered list of dictionaries e.g. [{"key1": "John Doe"},{"Key2": 23}] The values will be input into the query in order. Parameter values are represented by `?` in the query|None|None|
+|query|string|None|True|Query to run|None|None|
+
+Example input:
+
+```
+{
+  "parameters": [{"key1":"Jane"}],
+  "query": "select * from Person Where FirstName=?"
+}
+```
 
 ##### Output
 
@@ -94,6 +117,7 @@ This plugin uses version-specific drivers for Debian 9.x.
 
 # Version History
 
+* 1.0.2 - Fix Query action to support insert and update
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
@@ -103,4 +127,3 @@ This plugin uses version-specific drivers for Debian 9.x.
 
 * [pyodbc](https://github.com/mkleehammer/pyodbc/wiki)
 * [Microsoft SQL](https://www.microsoft.com/en-us/sql-server/default.aspx)
-

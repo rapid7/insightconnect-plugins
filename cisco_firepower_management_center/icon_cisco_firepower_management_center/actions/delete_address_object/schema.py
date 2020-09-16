@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Deletes the address object"
+    DESCRIPTION = "Deletes an address object"
 
 
 class Input:
