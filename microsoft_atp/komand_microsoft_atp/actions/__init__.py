@@ -5,6 +5,7 @@ from .get_file_id_from_alert_id.action import GetFileIdFromAlertId
 from .get_machine_action.action import GetMachineAction
 from .get_machine_information.action import GetMachineInformation
 from .get_machine_vulnerabilities.action import GetMachineVulnerabilities
+from .get_missing_software_updates.action import GetMissingSoftwareUpdates
 from .get_security_recommendations.action import GetSecurityRecommendations
 from .isolate_machine.action import IsolateMachine
 from .run_antivirus_scan.action import RunAntivirusScan
