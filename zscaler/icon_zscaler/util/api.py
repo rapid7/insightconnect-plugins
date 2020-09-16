@@ -21,6 +21,12 @@ class ZscalerAPI:
             "status"
         )
 
+    def get_hash_report(self, hash: str):
+        return self.authenticated_call(
+            "GET",
+            f"sandbox/report/{hash}?details=full",
+        ).json()
+
     def url_lookup(self, lookup_url: list):
         return self.authenticated_call(
             "POST",

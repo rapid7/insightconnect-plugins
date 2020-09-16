@@ -15,39 +15,55 @@
 # Documentation
 ## Setup
 
-To locate your base URI and key:
-
-1. Log in to the ZIA Admin Portal using your admin credentials. 
-2. Go to **Administration > API Key Management**.
-
-In order to view the API Key Management page, the admin must be assigned an admin role that includes the Authentication Configuration functional scope.
-
-In the **Organization API Key** tab, the base URI and key details are displayed within the table.
-
-For more information see the [Zscalar getting started guide](https://help.zscaler.com/zia/api-getting-started) on obtaining the API key and base URL.
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|Enter organization API key|None|14M2d25A7c12|
 |credentials|credential_username_password|None|True|Username and password to access Zscaler|None|{"username":"user@example.com", "password":"mypassword"}|
-|url|string|None|True|API URL|None|admin.zscalerbeta.net|
+|url|string|None|True|Base URL, see https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details|None|admin.zscalerbeta.net|
 
 Example input:
 
 ```
 {
   "api_key": "14M2d25A7c12",
-  "credentials": {
-    "username":"user@example.com",
-    "password":"mypassword"
-  },
+  "credentials": "{\"username\":\"user@example.com\", \"password\":\"mypassword\"}",
   "url": "admin.zscalerbeta.net"
 }
 ```
 ## Technical Details
 
 ### Actions
+
+#### Get Sandbox Report for Hash
+
+This action is used to get a full report for an MD5 hash of a file that was analyzed by Sandbox.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|hash|string|None|True|MD5 hash to analyze|None|9de5069c5afe602b2ea0a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "hash": "9de5069c5afe602b2ea0a04b66beb2c0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|full_report|object|True|Full report of an analyzed MD5 hash|
+
+Example output:
+
+```
+```
 
 #### Lookup URL
 
@@ -121,6 +137,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - New action Get Sandbox Report for Hash
 * 1.0.0 - Initial plugin
 
 # Links
