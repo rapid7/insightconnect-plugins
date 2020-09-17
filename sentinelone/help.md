@@ -67,7 +67,12 @@ Example input:
 Example output:
 
 ```
-
+{
+  "file": {
+    "filename": "report.txt",
+    "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
+  }
+}
 ```
 
 #### Connect to Network
@@ -607,6 +612,11 @@ This action is used to add hashed content to global blacklist. The input makes u
 Example input:
 
 ```
+{
+  "blacklist_state": true,
+  "description": "Hash Blacklisted from InsightConnect",
+  "hash": "3395856ce81f2b7382dee72602f798b642f14140"
+}
 ```
 
 ##### Output
