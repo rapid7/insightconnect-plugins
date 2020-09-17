@@ -60,7 +60,7 @@ This action is used to add or remove  URLs from a blacklist.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|blacklist_state|boolean|True|False|Set true to add an URL to blacklist, set false to remove URL from blacklist|None|True|
+|blacklist_state|boolean|True|False|True to blacklist a URL, false to unblacklist a URL|None|True|
 |urls|[]string|None|True|A given set of one or more URLs to update in the blacklist|None|["example.com", "rapid7.com"]|
 
 Example input:
@@ -79,7 +79,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|True|Information about add or remove URLs from blacklist|
+|success|boolean|True|Whether or not the request succeeded|
 
 Example output:
 
