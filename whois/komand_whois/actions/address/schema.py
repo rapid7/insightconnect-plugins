@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     ADDRESS = "address"
+    REGISTRAR = "registrar"
     
 
 class Output:
@@ -42,6 +43,20 @@ class AddressInput(insightconnect_plugin_runtime.Input):
       "title": "Address",
       "description": "IP to Lookup",
       "order": 1
+    },
+    "registrar": {
+      "type": "string",
+      "title": "Registrar",
+      "description": "Domain Registrar",
+      "default": "Autodetect",
+      "enum": [
+        "Autodetect",
+        "RIPE",
+        "ARIN",
+        "LACNIC",
+        "APNIC"
+      ],
+      "order": 2
     }
   },
   "required": [

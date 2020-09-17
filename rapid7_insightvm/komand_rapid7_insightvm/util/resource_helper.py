@@ -101,9 +101,11 @@ class ResourceHelper(object):
                     resource = {"raw": response.content}
             else:
                 try:
-                    error = response.json()["message"]
-                except KeyError:
-                    error = "Unknown error occurred. Please contact support or try again later."
+                    response = response.json()
+                    error = response.get("message", {})
+                except (KeyError, json.decoder.JSONDecodeError) as e:
+                    self.logger.error("Malformed JSON received.")
+                    error = f"Unknown error occurred. Please contact support or try again later.\nResponse:\n{response.text}\nException:\n{str(e)}"
 
                 status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
                 self.logger.error(f"{status_code_message} ({response.status_code}): {error}")

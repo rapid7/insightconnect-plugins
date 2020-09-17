@@ -2,13 +2,13 @@
 from setuptools import setup, find_packages
 
 
-setup(name="whois-rapid7-plugin",
-      version="3.0.0",
-      description="The WHOIS plugin enables address and domain lookups in the WHOIS databases",
+setup(name="zscaler-rapid7-plugin",
+      version="1.0.0",
+      description="Zscaler is a SaaS security platform that provides fast, secure connections between client applications, regardless of device, location, or network",
       author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
       install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_whois']
+      scripts=['bin/icon_zscaler']
       )
