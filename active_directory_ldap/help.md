@@ -97,15 +97,9 @@ Example input:
 
 ```
 {
-  "account_disabled": "true",
-  "additional_parameters": {"telephoneNumber":"(617)555-1234"},
-  "domain_name": "example.com",
-  "first_name": "John",
-  "last_name": "Doe",
-  "logon_name": "jdoe",
-  "password": "mypassword",
-  "user_ou": "Users",
-  "user_principal_name": "user@example.com"
+  "add_remove": "add",
+  "distinguished_name": "CN=user,OU=domain_users,DC=mydomain,DC=com",
+  "group_dn": "CN=group_name,OU=domain_groups,DC=example,DC=com"
 }
 ```
 
@@ -466,6 +460,8 @@ _This plugin does not contain any triggers._
 _This plugin does not contain any custom output types._
 
 ## Troubleshooting
+
+Distinguished Names with a `=` sign as part of the name e.g. CN=Robert = Bob Smith,OU=example,DC=rapid7,DC=com are not supported
 
 If you cannot connect, ensure that network access is available, and view the logs to identify any auth errors.
 
