@@ -1,11 +1,11 @@
 {
-	"spec": "4592240c9531fe950f8c36fed94eaca1",
-	"manifest": "8996c4ad2ffec65dc94b46aca1bf821f",
-	"setup": "39a1d5700a6fcc50134cbf1cc8db3613",
+	"spec": "67a3b1432a6ed2cc5e0bcc9c5a7c047b",
+	"manifest": "0089843cbd961b4b75ace8b795e06d3a",
+	"setup": "53aef53bc683e4b7045c1200154d529a",
 	"schemas": [
 		{
 			"identifier": "blacklist/schema.py",
-			"hash": "0d32433aef2c9482f5a5498766193b5c"
+			"hash": "fd8b7fdaf9388af316671bac2aeaa91d"
 		},
 		{
 			"identifier": "find_machines_with_installed_software/schema.py",
@@ -26,6 +26,10 @@
 		{
 			"identifier": "get_machine_vulnerabilities/schema.py",
 			"hash": "d6eb96785b6c62866a0210fa968d937c"
+		},
+		{
+			"identifier": "get_missing_software_updates/schema.py",
+			"hash": "3ebafb48978fb85e11adbeb699a6a6df"
 		},
 		{
 			"identifier": "get_security_recommendations/schema.py",

@@ -233,6 +233,15 @@ class NewMessageReceivedOutput(komand.Output):
             "type": "string"
           },
           "order": 2
+        },
+        "uuids": {
+          "type": "array",
+          "title": "UUIDs",
+          "description": "Extracted UUIDs from message",
+          "items": {
+            "type": "string"
+          },
+          "order": 8
         }
       },
       "definitions": {

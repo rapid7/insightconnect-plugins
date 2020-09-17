@@ -34,6 +34,121 @@ Example input:
 
 ### Actions
 
+#### Update Vulnerability Exception Expiration Date
+
+This action is used to update vulnerability exception expiration dates.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|date|string|None|True|Expiration date. e.g. 2020-02-24T06:59:59.999Z|None|2020-02-24T06:59:59.999Z|
+|id|integer|None|True|Asset ID|None|42|
+
+Example input:
+
+```
+{
+  "date": "2020-02-24T06:59:59.999Z",
+  "id": 42
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Get Expiring Vulnerability Exceptions
+
+This action is used to return a list of expiring vulnerabilities.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|expires_in_less_than|integer|7|True|Number of days left until the exception expires|None|7|
+
+Example input:
+
+```
+{
+  "expires_in_less_than": 7
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|exceptions|[]vulnerability_exception|False|Exceptions about to expire|
+
+Example output:
+
+```
+{
+  "exceptions": [
+    {
+      "expires": "2020-09-10T06:59:59.999Z",
+      "id": 1,
+      "links": [
+        {
+          "href": "https://example.com:3780/api/3/vulnerability_exceptions/1",
+          "rel": "self"
+        }
+      ],
+      "review": {
+        "comment": "Auto approved by submitter.",
+        "date": "2020-09-04T17:02:04.603Z",
+        "links": [
+          {
+            "id": 1,
+            "href": "https://example.com:3780/api/3/users/1",
+            "rel": "Reviewer"
+          }
+        ],
+        "name": "admin",
+        "user": 1
+      },
+      "scope": {
+        "links": [
+          {
+            "id": "ssh-default-account-admin-password-admin",
+            "href": "https://example.com:3780/api/3/vulnerabilities/ssh-default-account-admin-password-admin",
+            "rel": "Vulnerability"
+          }
+        ],
+        "type": "global",
+        "vulnerability": "ssh-default-account-admin-password-admin"
+      },
+      "state": "approved",
+      "submit": {
+        "date": "2020-09-04T17:02:04.557065Z",
+        "links": [
+          {
+            "id": 1,
+            "href": "https://example.com:3780/api/3/users/1",
+            "rel": "Submitter"
+          }
+        ],
+        "name": "admin",
+        "reason": "false positive",
+        "user": 1
+      }
+    }
+  ]
+}
+```
+
 #### List Inactive Assets
 
 This action returns a list of inactive assets (limit 1000).
@@ -4923,6 +5038,10 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.4.2 - Fix issue where Update Site Included Targets could throw exception
+* 4.4.1 - Add improved error handling for List Inactive Assets action
+* 4.4.0 - New action Update Vulnerability Exception Expiration Date
+* 4.3.0 - New action Get Expiring Vulnerability Exceptions
 * 4.2.1 - Fix to make Create Asset Group description required
 * 4.2.0 - New action List Inactive Assets
 * 4.1.0 - New action Delete Asset

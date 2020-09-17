@@ -4,10 +4,11 @@ products: [insightconnect]
 name: whois
 title: WHOIS
 description: The WHOIS plugin enables address and domain lookups in the WHOIS databases
-version: 2.0.2
+version: 3.0.0
 vendor: rapid7
 support: community
 status: []
+cloud_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/whois
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -120,6 +121,19 @@ actions:
         description: IP to Lookup
         example: 198.51.100.100
         required: true
+      registrar:
+        title: Registrar
+        type: string
+        description: Domain Registrar
+        example: Autodetect
+        required: false
+        default: Autodetect
+        enum:
+          - Autodetect
+          - RIPE
+          - ARIN
+          - LACNIC
+          - APNIC
     output:
       netname:
         title: Network Name

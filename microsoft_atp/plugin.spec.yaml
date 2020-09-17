@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: microsoft_atp
 title: Microsoft Windows Defender ATP
 description: The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
-version: 4.4.0
+version: 4.5.0
 vendor: rapid7
 support: community
 status: []
@@ -672,6 +672,43 @@ types:
       description: Weaknesses
       type: integer
       required: false
+  update:
+    id:
+      title: ID
+      description: Update ID
+      type: string
+      required: false
+    name:
+      title: Name
+      description: Update name
+      type: string
+      required: false
+    osBuild:
+      title: OS Build
+      description: Update OS build
+      type: integer
+      required: false
+    productsNames:
+      title: Products Names
+      description: Update products names
+      type: "[]string"
+      required: false
+    url:
+      title: URL
+      description: Update URL
+      type: string
+      required: false
+    machineMissedOn:
+      title: Machine Missed On
+      description: Update machine missed on
+      type: integer
+      required: false
+    cveAddressed:
+      title: CVE Addressed
+      description: Update CVE addressed
+      type: integer
+      required: false
+
 
 connection:
   application_id:
@@ -914,11 +951,12 @@ actions:
         title: Description
         description: Description of the indicator
         type: string
-        example: description
+        example: Indicator Blacklisted from InsightConnect
+        default: Indicator Blacklisted from InsightConnect
         required: false
       expiration_time:
         title: Expiration Time
-        description: The expiration time of the indicator
+        description: The expiration time of the indicator, default value is one year from now
         type: string
         example: "2020-12-12T00:00:00Z"
         required: false
@@ -990,6 +1028,22 @@ actions:
         title: Recommendations
         description: List of security recommendations
         type: '[]recommendation'
+        required: true
+  get_missing_software_updates:
+    title: Get Missing Software Updates
+    description: Retrieve a list of software updates
+    input:
+      machine:
+        title: Machine
+        description: Machine IP address, hostname or machine ID
+        type: string
+        example: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73
+        required: true
+    output:
+      updates:
+        title: Updates
+        description: List of updates
+        type: '[]update'
         required: true
 
 triggers:

@@ -15,6 +15,11 @@ class SetAddressObject(komand.Action):
                 output=SetAddressObjectOutput())
 
     def determine_address_type(self, address):
+        try:
+            ip_address(address)
+            return "ip-netmask"
+        except:
+            pass
         if re.search('[a-zA-Z]', address):
             return "fqdn"
         if re.search('/', address):

@@ -47,6 +47,51 @@ Example input:
 
 ### Actions
 
+#### Get Missing Software Updates
+
+This action is used to retrieve a list of software updates.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|machine|string|None|True|Machine IP address, hostname or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+
+Example input:
+
+```
+{
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|updates|[]update|True|List of updates|
+
+Example output:
+
+```
+{
+  "updates": [
+    {
+      "machineMissedOn": 1,
+      "name": "September 2020 Security Updates",
+      "osBuild": 17763,
+      "productsNames": [
+        "windows_10",
+        "internet_explorer"
+      ],
+      "url": "https://catalog.update.microsoft.com/v7/site/Searc...",
+      "cveAddressed": 68,
+      "id": "4570333"
+    }
+  ]
+}
+```
+
 #### Get Security Recommendations
 
 This action is used to retrieve a list of security recommendations.
@@ -110,8 +155,8 @@ This action is used to submit or update new indicator.
 |----|----|-------|--------|-----------|----|-------|
 |action|string|AlertAndBlock|False|The action that will be taken if the indicator will be discovered in the organization|['Alert', 'AlertAndBlock', 'Allowed']|AlertAndBlock|
 |application|string|None|False|The application associated with the indicator|None|demo-test|
-|description|string|None|False|Description of the indicator|None|description|
-|expiration_time|string|None|False|The expiration time of the indicator|None|2020-12-12T00:00:00Z|
+|description|string|Indicator Blacklisted from InsightConnect|False|Description of the indicator|None|Indicator Blacklisted from InsightConnect|
+|expiration_time|string|None|False|The expiration time of the indicator, default value is one year from now|None|2020-12-12T00:00:00Z|
 |indicator|string|None|True|A supported indicator to blacklist or unblacklist. Supported indicators are IP addresses, URLs, domains, and SHA1 and SHA256 hashes|None|220e7d15b011d7fac48f2bd61114db1022197f7f|
 |indicator_state|boolean|False|False|True to add indicator, false to remove it from the list|None|True|
 |rbac_group_names|[]string|None|False|List of RBAC group names the indicator would be applied to|None|["group1","group2"]|
@@ -125,7 +170,7 @@ Example input:
 {
   "action": "AlertAndBlock",
   "application": "demo-test",
-  "description": "description",
+  "description": "Indicator Blacklisted from InsightConnect",
   "expiration_time": "2020-12-12T00:00:00Z",
   "indicator": "220e7d15b011d7fac48f2bd61114db1022197f7f",
   "indicator_state": true,
@@ -715,6 +760,8 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.5.0 - Add new action Get Missing Software Updates
+* 4.4.1 - Add validation MD5 hash in Blacklist action | Set default value for Title, Expiration Time and Description input in action Blacklist
 * 4.4.0 - Add new action Get Security Recommendations
 * 4.3.0 - Add new action Get Machine Vulnerabilities
 * 4.2.0 - Add new action Blacklist

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="url_screenshot-rapid7-plugin",
-      version="1.0.0",
+      version="1.0.1",
       description="Screenshot a URL from the Orchestrator",
       author="rapid7",
       author_email="",

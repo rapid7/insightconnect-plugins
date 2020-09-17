@@ -82,6 +82,19 @@ class CiscoAsaAPI:
     def get_clock(self):
         return self._call_api("GET", "monitoring/clock")
 
+    def create_address_object(self, name: str, object_type: str, address: str) -> dict:
+        return self._call_api(
+            "POST",
+            f"objects/networkobjects",
+            json_data={
+                "name": name,
+                "host": {
+                    "kind": object_type,
+                    "value": address
+                }
+            }
+        )
+
     def _call_api(self, method: str, path: str, json_data: dict = None, params: dict = None):
         response = {"text": ""}
         headers = OrderedDict([
@@ -108,7 +121,7 @@ class CiscoAsaAPI:
             if response.status_code >= 400:
                 response_data = response.text
                 raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response_data)
-            if response.status_code == 204:
+            if response.status_code == 201 or response.status_code == 204:
                 return {}
             if 200 <= response.status_code < 300:
                 return response.json()

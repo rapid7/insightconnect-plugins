@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_pan_os
 title: Palo Alto Firewall
 description: Manage Palo Alto Networks firewall devices
-version: 6.0.0
+version: 6.0.3
 vendor: rapid7
 support: rapid7
 status: []
@@ -55,6 +55,7 @@ actions:
       rule_name:
         title: Rule Name
         description: Name of the rule
+        example: InsightConnect Block Rule
         type: string
         required: true
       source:
@@ -63,80 +64,95 @@ actions:
           any
         type: string
         required: true
+        example: any
       destination:
         title: Destination
         description: Destinations for which this rule will be applied e.g. 10.0.0.1,
           computername, any
         type: string
         required: true
+        example: any
       service:
         title: Service
         description: Service type for which this rule will be applied e.g. HTTP, HTTPS,
           any
         type: string
         required: true
+        example: any
       application:
         title: Application
         description: Applications for which this rule will be applied e.g. adobe-cloud,
           dropbox,  any
         type: string
         required: true
+        example: any
       action:
         title: Action
         description: Action that will occur if an event meets the rule definitions
         type: string
         required: true
+        example: drop
       source_user:
         title: Source User
         description: User that the network traffic originated from e.g. Joe Smith,
           any
         type: string
         required: true
+        example: any
       disable_server_response_inspection:
         title: Disable Server Response Inspection
         description: If true, the firewall will not inspect this traffic
         type: boolean
         required: true
+        example: false
       negate_source:
         title: Negate Source
         description: Negate source
         type: boolean
         required: true
+        example: false
       negate_destination:
         title: Negate Destination
         description: Negate destination
         type: boolean
         required: true
+        example: false
       disabled:
         title: Disabled
         description: If true, rule is disabled
         type: boolean
         required: true
+        example: false
       log_start:
         title: Log Start
         description: Generates a traffic log entry for the start of a session
         type: boolean
         required: true
+        example: false
       log_end:
         title: Log End
         description: Generates a traffic log entry for the end of a session
         type: boolean
         required: true
+        example: false
       description:
         title: Description
         description: Description of the rule and what it does
         type: string
         required: true
+        example: Block Rule
       src_zone:
         title: SRC Zone
         description: Zone in which the traffic originated e.g. server zone, any
         type: string
         required: true
+        example: any
       dst_zone:
         title: DST Zone
         description: Zone which the traffic is going to e.g. server zone, any
         type: string
         required: true
+        example: any
     output:
       response:
         title: Response
@@ -152,6 +168,7 @@ actions:
         type: string
         description: Xpath targeting the requested portion of the configuration
         required: true
+        example: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']
     output:
       response:
         title: Response
@@ -167,6 +184,7 @@ actions:
         type: string
         description: Xpath targeting the requested portion of the configuration
         required: true
+        example: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='test_group']
     output:
       response:
         title: Response
@@ -182,6 +200,7 @@ actions:
         type: string
         description: Xpath targeting the object to delete
         required: true
+        example: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='test_group']
     output:
       response:
         title: Response
@@ -197,11 +216,13 @@ actions:
         type: string
         description: Xpath location to create the new object
         required: true
+        example: /config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']
       element:
         title: Element
         type: string
         description: XML representation of the object to be created
         required: true
+        example: "<application><member>8x8</member></application>"
     output:
       response:
         title: Response
@@ -217,12 +238,14 @@ actions:
         type: string
         description: Xpath location of the object to edit
         required: true
+        example: /config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']/application
       element:
         title: Element
         type: string
         description: XML representation of the updated object. This replaces the previous
           object entirely, any unchanged attributes must be restated
         required: true
+        example: "<application><member>8x8</member></application>"
     output:
       response:
         title: Response
@@ -238,12 +261,14 @@ actions:
         type: string
         description: XML specifying any commit arguments
         required: true
+        example: "<commit></commit>"
       action:
         title: Action
         type: string
         description: 'Commit action (Default: ''all'')'
         default: all
         required: false
+        example: all
     output:
       response:
         title: Response
@@ -259,6 +284,7 @@ actions:
         type: string
         description: XML specifying operation to be completed
         required: false
+        example: "<show><commit-locks/></show>"
     output:
       response:
         title: Response
@@ -282,23 +308,27 @@ actions:
         - url
         - wildfire
         required: false
+        example: config
       count:
         title: Count
         type: integer
         description: 'Number of logs to retrieve (Max: 500, Default: 20)'
         default: 20
         required: false
+        example: 20
       skip:
         title: Skip
         type: integer
         description: 'Log retrieval offset, number of entries to skip, (Default: 0)'
         default: 0
         required: false
+        example: 0
       filter:
         title: Filter
         type: string
         description: Search query. Format as a log filter expression
         required: false
+        example:
       interval:
         title: Interval
         type: float
@@ -306,6 +336,7 @@ actions:
           job completion (Default: 0.5)'
         default: 0.5
         required: false
+        example: 0.5
       max_tries:
         title: Max Tries
         type: integer
@@ -313,6 +344,7 @@ actions:
           out (Default: 25)'
         default: 25
         required: false
+        example: 25
       direction:
         title: Direction
         type: string
@@ -321,6 +353,7 @@ actions:
         - backward
         - forward
         required: false
+        example: backward
     output:
       response:
         title: Response
@@ -336,6 +369,7 @@ actions:
         description: Name of the rule
         type: string
         required: true
+        example: InsightConnect Block Rule
       update_active_or_candidate_configuration:
         title: Update Active or Candidate Configuration
         description: Will apply the update to the active or candidate configuration.
@@ -345,61 +379,72 @@ actions:
         enum:
         - active
         - candidate
+        example: active
       source:
         title: Source
         description: A source for which this rule will be applied e.g. 10.0.0.1, computername,
           or any
         type: string
         required: false
+        example: any
       destination:
         title: Destination
         description: A destination for which this rule will be applied e.g. 10.0.0.1,
           computername, or any
         type: string
         required: false
+        example: any
       service:
         title: Service
         description: Service type for which this rule will be applied e.g. HTTP, HTTPS,
           or any
         type: string
         required: false
+        example: any
       application:
         title: Application
         description: Application for which this rule will be applied e.g. adobe-cloud,
           dropbox, or  any
         type: string
         required: false
+        example: any
       source_user:
         title: Source User
         description: User that the network traffic originated from e.g. Joe Smith,
           or any
         type: string
         required: false
+        example: Joe Smith
       src_zone:
         title: SRC Zone
         description: Zone in which the traffic originated e.g. server zone, or any
         type: string
         required: false
+        example: any
       dst_zone:
         title: DST Zone
         description: Zone which the traffic is going to e.g. server zone, or any
         type: string
         required: false
+        example: any
       url_category:
         title: URL Category
         description: The URL category e.g. adult
         type: string
         required: false
+        example: adult
       hip_profiles:
         title: HIP Profiles
         description: Host information profile
         type: string
         required: false
+        example: any
       action:
         title: Action
         description: Action that will occur if an event meets the rule definitions
         type: string
         required: false
+        example: drop
     output:
       status:
         title: Status
@@ -425,6 +470,7 @@ actions:
         description: Name of the rule
         type: string
         required: true
+        example: InsightConnect Block Rule
       update_active_or_candidate_configuration:
         title: Update Active or Candidate Configuration
         description: Will apply the update to the active or candidate configuration.
@@ -434,61 +480,72 @@ actions:
         enum:
         - active
         - candidate
+        example: active
       source:
         title: Source
         description: A source for which this rule will be applied e.g. 10.0.0.1, computername,
           or any
         type: string
         required: false
+        example: any
       destination:
         title: Destination
         description: A Destination for which this rule will be applied e.g. 10.0.0.1,
           computername, or any
         type: string
         required: false
+        example: any
       service:
         title: Service
         description: Service type for which this rule will be applied e.g. HTTP, HTTPS,
           any
         type: string
         required: false
+        example: any
       application:
         title: Application
         description: Application for which this rule will be applied e.g. adobe-cloud,
           dropbox, or any
         type: string
         required: false
+        example: any
       source_user:
         title: Source User
         description: User that the network traffic originated from e.g. Joe Smith,
           or any
         type: string
         required: false
+        example: any
       src_zone:
         title: SRC Zone
         description: Zone in which the traffic originated e.g. server zone, or any
         type: string
         required: false
+        example: any
       dst_zone:
         title: DST Zone
         description: Zone which the traffic is going to e.g. server zone, or any
         type: string
         required: false
+        example: any
       url_category:
         title: URL Category
         description: The URL category e.g. adult
         type: string
         required: false
+        example: adult
       hip_profiles:
         title: HIP Profiles
         description: Host information profile
         type: string
         required: false
+        example: any
       action:
         title: Action
         description: The action that will occur if an event meets the rule definitions
         type: string
         required: false
+        example: drop
     output:
       status:
         title: Status
@@ -515,6 +572,7 @@ actions:
           the list in the firewall
         type: string
         required: true
+        example: IP List
       list_type:
         title: List Type
         description: The type of list
@@ -524,16 +582,19 @@ actions:
         - IP List
         - Domain List
         - URL List
+        example: IP List
       description:
         title: Description
         description: A description of the list
         type: string
         required: true
+        example: List of IP's
       source:
         title: Source
         description: The web site you will pull the list from e.g. https://www.example.com/test.txt
         type: string
         required: true
+        example: https://www.example.com/test.txt
       repeat:
         title: Repeat
         description: The interval at which to retrieve updates from the list
@@ -544,6 +605,7 @@ actions:
         - Hourly
         - Daily
         - Weekly
+        example: Five Minute
       time:
         title: Time
         description: 'If repeat is daily or weekly, choose an hour on a 24 hour clock
@@ -560,8 +622,8 @@ actions:
         - '05'
         - '06'
         - '07'
-        - 08
-        - 09
+        - '08'
+        - '09'
         - '10'
         - '11'
         - '12'
@@ -577,6 +639,7 @@ actions:
         - '22'
         - '23'
         default: ''
+        example: '00'
       day:
         title: Day
         description: If repeat is weekly, choose a day to update
@@ -592,6 +655,7 @@ actions:
         - Saturday
         - Sunday
         default: ''
+        example: Monday
     output:
       status:
         title: Status
@@ -675,16 +739,16 @@ actions:
         title: Policy Name
         description: Policy name
         type: string
-        example: InsightConnect Block Policy
         required: true
         order: 1
+        example: InsightConnect Block Policy
       device_name:
         title: Device Name
         description: Device name
         type: string
         default: "localhost.localdomain"
-        example: "localhost.localdomain"
         required: true
+        example: "localhost.localdomain"
         order: 2
       virtual_system:
         title: Virtual System Name
@@ -753,7 +817,7 @@ actions:
         title: Group
         description: Group name
         type: string
-        example: ICON Block List
+        example: InsightConnect Block List
         required: true
         order: 1
       address:
@@ -813,7 +877,7 @@ actions:
         title: Group
         description: Group name
         type: string
-        example: ICON Block List
+        example: InsightConnect Block List
         required: true
         order: 2
       device_name:
@@ -846,14 +910,14 @@ actions:
         title: Address Object
         description: The name of the address object to add
         type: string
-        example: Malicious IP
+        example: 198.51.100.100
         required: true
         order: 1
       group:
         title: Group
         description: Group name
         type: string
-        example: ICON Block List
+        example: InsightConnect Block List
         required: true
         order: 2
       device_name:

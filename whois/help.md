@@ -92,12 +92,14 @@ This action is used to retrieve data about an IP address.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |address|string|None|True|IP to Lookup|None|198.51.100.100|
+|registrar|string|Autodetect|False|Domain Registrar|['Autodetect', 'RIPE', 'ARIN', 'LACNIC', 'APNIC']|Autodetect|
 
 Example input:
 
 ```
 {
-  "address": "198.51.100.100"
+  "address": "198.51.100.100",
+  "registrar": "Autodetect"
 }
 ```
 
@@ -169,6 +171,8 @@ _This plugin has no references._
 
 # Version History
 
+* 3.0.0 - Add input `registrar` for manual server selection to Address Lookup action
+* 2.0.3 - Upgrade to latest Python plugin runtime | Define `cloud_ready` in spec
 * 2.0.2 - Fix issue where com.br style domains could crash the plugin
 * 2.0.1 - Update to v4 Python plugin runtime
 * 2.0.0 - Add example inputs | Fix capitalization in the title of the `last_updated` output.

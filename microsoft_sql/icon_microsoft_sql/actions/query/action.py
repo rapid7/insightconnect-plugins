@@ -1,3 +1,5 @@
+import pyodbc as pyodbc
+
 import komand
 from .schema import QueryInput, QueryOutput, Input, Output, Component
 from komand.exceptions import PluginException
@@ -20,6 +22,8 @@ class Query(komand.Action):
     def run(self, params={}):
         query = params.get(Input.QUERY)
         parameters = params.get(Input.PARAMETERS)
+        if not parameters:
+            parameters = []
         cursor = self.connection.cnxn.cursor()
 
         parameter_tuple = tuple([value for param in parameters for value in param.values()])
@@ -34,8 +38,13 @@ class Query(komand.Action):
             self.connection.cnxn.close()
             db_exception.handle_exceptions(e, query)
 
-        rows = cursor.fetchall()
-        headers = cursor.description
+        try:
+            rows = cursor.fetchall()
+            headers = cursor.description
+        except pyodbc.ProgrammingError:
+            rows = []
+            headers = []
+
         self.connection.cnxn.commit()
         self.connection.cnxn.close()
 
@@ -49,7 +58,7 @@ class Query(komand.Action):
                     assistance='Please check that the table has been constructed properly.',
                     data=headers)
 
-        row_list = list()
+        row_list = []
         for row in rows:
             temp_dic = dict()
             for idx, item in enumerate(row):

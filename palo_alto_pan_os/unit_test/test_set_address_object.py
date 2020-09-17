@@ -74,6 +74,8 @@ class TestSetAddressObject(TestCase):
         self.assertEquals(test_action.determine_address_type("1.1.1.1/32"), "ip-netmask")
         self.assertEquals(test_action.determine_address_type("www.google.com"), "fqdn")
         self.assertEquals(test_action.determine_address_type("10.1.1.1-10.1.1.255"), "ip-range")
+        self.assertEquals(test_action.determine_address_type("1:2:3:4:5:6:7:8"), "ip-netmask")
+        self.assertEquals(test_action.determine_address_type("2001:0db8:85a3:0000:0000:8a2e:0370:7334"), "ip-netmask")
 
     def test_check_if_private(self):
         test_action = SetAddressObject()
