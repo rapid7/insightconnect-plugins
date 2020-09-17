@@ -26,10 +26,10 @@ class Query(komand.Action):
         self.logger.info(f'Escaped DN {escaped_query}')
 
         # find pars of `(` `)`
-        pairs = ADUtils.find_parentheses_pairs(escaped_query)
+        pairs = formatter.find_parentheses_pairs(escaped_query)
 
         # replace ( and ) when they are part of a name rather than a search parameter
-        escaped_query = ADUtils.escape_brackets_for_query(escaped_query, pairs)
+        escaped_query = formatter.escape_brackets_for_query(escaped_query, pairs)
         self.logger.info(f"Escaped query: {escaped_query}")
 
         conn.search(search_base=params.get('search_base'),

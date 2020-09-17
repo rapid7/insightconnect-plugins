@@ -22,11 +22,11 @@ class DisableUser(komand.Action):
         dn, search_base = formatter.format_dn(dn)
         self.logger.info(f'Escaped DN {dn}')
 
-        pairs = ADUtils.find_parentheses_pairs(dn)
+        pairs = formatter.find_parentheses_pairs(dn)
         self.logger.info(pairs)
         # replace ( and ) when they are part of a name rather than a search parameter
         if pairs:
-            dn = ADUtils.escape_brackets_for_query(dn, pairs)
+            dn = formatter.escape_brackets_for_query(dn, pairs)
 
         self.logger.info(f'Search DN {dn}')
 
