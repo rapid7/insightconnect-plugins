@@ -87,7 +87,7 @@ actions:
         example: ["example.com", "rapid7.com"]
       blacklist_state:
         title: Blacklist State
-        description: Set true to add an URL to blacklist, set false to remove URL from blacklist
+        description: True to blacklist a URL, false to unblacklist a URL
         type: boolean
         required: false
         default: true
