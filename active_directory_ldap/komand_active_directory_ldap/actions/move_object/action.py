@@ -21,6 +21,7 @@ class MoveObject(komand.Action):
         new_ou = params.get('new_ou')
         relative_dn = ''
         dn = formatter.format_dn(dn)[0]
+        dn = formatter.unescape_asterisk(dn)
         self.logger.info(f'Escaped DN {dn}')
 
         pattern = re.search(r'CN=[^,]*,', dn)

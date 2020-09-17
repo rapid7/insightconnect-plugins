@@ -47,7 +47,7 @@ class ModifyObject(komand.Action):
                                   assistance='The DN ' + dn + ' was not found')
 
         # Update attribute
-
+        dn = formatter.unescape_asterisk(dn)
         conn.modify(dn, {attribute: [(MODIFY_REPLACE, [attribute_value])]})
         result = conn.result
         output = result['description']

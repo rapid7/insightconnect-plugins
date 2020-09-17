@@ -5,7 +5,7 @@ from komand.exceptions import PluginException
 class ADUtils:
 
     @staticmethod
-    def dn_normalize(dn):
+    def dn_normalize(dn: str) -> str:
         """
         This method normalizes dn keys so that inputs are not case sensitive
         :param dn: A dn
@@ -18,18 +18,29 @@ class ADUtils:
         return dn
 
     @staticmethod
-    def dn_escape_and_split(dn):
+    def dn_escape_and_split(dn: str) -> list:
         """
         This method will split a dn into it's component peaces and then escape the needed characters
         :param dn:
         :return: Will return a list of the dn component peaces
         """
+        if dn[0] == ' ':
+            dn = dn[:0] + '\\ ' + dn[1:]
+        length = len(dn)-1
+        if dn[length] == ' ':
+            dn = dn[:length] + '\\ '
+
         dn_list = re.split(r',..=', dn)
         attribute = re.findall(r',..=', dn)
 
         # Ensure that special characters and non ascii characters are escaped
         character_list = [',', '#', '+', '<', '>', ';', '"']
-        non_ascii_list = {'á': '\E1', 'é': '\E9', 'í': '\ED', 'ó': '\F3', 'ú': '\FA', 'ñ': '\F1'}
+        non_ascii_list = {'á': '\\E1', 'é': '\\E9', 'í': '\\ED', 'ó': '\\F3', 'ú': '\\FA', 'ñ': '\\F1'}
+
+        # These are legal characters that some times need to be escaped and sometimes do not
+        # We make the use escape them correctly in their inputs if they want to use them
+        manual_escape = ['*', '=']
+
         for idx, value in enumerate(dn_list):
             # Escape special characters
             for escaped_char in character_list:
@@ -41,7 +52,7 @@ class ADUtils:
         # escape \\ as needed
         for idx, value in enumerate(dn_list):
             location = value.find('\\')
-            if not value[location + 1] in character_list and location != -1 and not value[location + 1] == '\\':
+            if not value[location + 1] in character_list and location != -1 and not value[location + 1] in manual_escape and not value[location + 1] == '\\':
                 dn_list[idx] = dn_list[idx][:location] + "\\\\" + dn_list[idx][location + 1:]
 
         # Re add the removed ,..= to dn_list strings then remove the unneeded comma
@@ -54,7 +65,7 @@ class ADUtils:
         return dn_list
 
     @staticmethod
-    def find_search_base(dn_list):
+    def find_search_base(dn_list: list) -> str:
         """
         This method will find a search base from a dn_list
         :param dn_list:
@@ -64,7 +75,7 @@ class ADUtils:
         search_base = ','.join(dc_list)
         return search_base
 
-    def format_dn(self, dn) -> tuple:
+    def format_dn(self, dn: str) -> tuple:
         """
         This method takes a dn and preforms all needed operations to make it ready for use with ldap
         :param dn: A dn
@@ -77,7 +88,17 @@ class ADUtils:
         return formatted_dn, search_base
 
     @staticmethod
-    def find_parentheses_pairs(query_string):
+    def unescape_asterisk(dn: str) -> str:
+        """
+        This method takes a dn with escaped asterisks and unescapes them
+        :param dn: A dn
+        :return: returns the unescaped dn
+        """
+        dn = dn.replace('\\*', '*')
+        return dn
+
+    @staticmethod
+    def find_parentheses_pairs(query_string: str) -> dict:
         """
         This method will find and return the indexes for parentheses pairs
         :param query_string: The string to evaluate
@@ -100,7 +121,7 @@ class ADUtils:
         return pairs
 
     @staticmethod
-    def escape_brackets_for_query(query, pairs):
+    def escape_brackets_for_query(query: str, pairs: dict) -> str:
         """
         This method will properly escape a query
         :param query: The string to evaluate
@@ -109,7 +130,7 @@ class ADUtils:
         """
         for key, value in pairs.items():
             temp_string = query
-            if temp_string.find('=', key, value) == -1:
+            if temp_string.find('\\=', key, value) == -1:
                 query = query[:value] + '\\29' + query[value + 1:]
                 query = query[:key] + '\\28' + query[key + 1:]
         return query

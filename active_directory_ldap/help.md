@@ -461,7 +461,10 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-Distinguished Names with a `=` sign as part of the name e.g. CN=Robert = Bob Smith,OU=example,DC=rapid7,DC=com are not supported
+Objects that contain an equals sign `=` or an asterisk `*` require the signs to be escaped.
+For example `CN=Robert = bob Smith,OU=domain_users,DC=rapid7,DC=com` must be escaped as`CN=Robert \= bob Smith,OU=domain_users,DC=mattsdomain,DC=local` in the input
+A second example would be `CN=C**l guy,OU=domain_users,DC=rapid7,DC=com`must be escaped as `CN=C\*\*l guy,OU=domain_users,DC=rapid7,DC=com`
+
 
 If you cannot connect, ensure that network access is available, and view the logs to identify any auth errors.
 

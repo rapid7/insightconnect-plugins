@@ -25,9 +25,11 @@ class ModifyGroups(komand.Action):
 
         # Normalize dn
         dn = formatter.format_dn(dn)[0]
+        dn = formatter.unescape_asterisk(dn)
         self.logger.info(f'Escaped DN {dn}')
         # Normalize group dn
         group_dn = formatter.format_dn(group_dn)[0]
+        group_dn = formatter.unescape_asterisk(group_dn)
         self.logger.info(f'Escaped group DN {group_dn}')
 
         if add_remove == 'add':

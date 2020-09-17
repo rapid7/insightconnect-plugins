@@ -22,6 +22,7 @@ class ResetPassword(komand.Action):
         conn = self.connection.conn
         ssl = self.connection.ssl
         dn = formatter.format_dn(dn)[0]
+        dn = formatter.unescape_asterisk(dn)
         self.logger.info(f'Escaped DN {dn}')
 
         if ssl is False:

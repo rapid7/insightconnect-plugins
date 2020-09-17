@@ -18,6 +18,7 @@ class ForcePasswordReset(komand.Action):
         conn = self.connection.conn
         dn = params.get('distinguished_name')
         dn = formatter.format_dn(dn)[0]
+        dn = formatter.unescape_asterisk(dn)
         self.logger.info(f'Escaped DN {dn}')
 
         password_expire = {"pwdLastSet": ('MODIFY_REPLACE', [0])}
