@@ -51,7 +51,7 @@ Example input:
 
 #### Delete Asset
 
-This action is used to delete assets/devices from the Console.
+This action is used to delete assets/devices from the Cylance console.
 
 ##### Input
 
