@@ -27,14 +27,23 @@ class ADUtils:
         dn_list = re.split(r',..=', dn)
         attribute = re.findall(r',..=', dn)
 
-        # Ensure that special characters are escaped
-        character_list = [',', '#', '+', '<', '>', ';', '"', '/']
+        # Ensure that special characters and non ascii characters are escaped
+        character_list = [',', '#', '+', '<', '>', ';', '"']
+        non_ascii_list = {'á': '\E1', 'é': '\E9', 'í': '\ED', 'ó': '\F3', 'ú': '\FA', 'ñ': '\F1'}
         for idx, value in enumerate(dn_list):
+            # Escape special characters
             for escaped_char in character_list:
-                if f'\{escaped_char}' not in value:
-                    dn_list[idx] = dn_list[idx].replace(escaped_char, f'\{escaped_char}')
+                if f'\\{escaped_char}' not in value:
+                    dn_list[idx] = dn_list[idx].replace(escaped_char, f'\\{escaped_char}')
+            # Escape non ascii characters
+            for non_ascii_char, escaped_char in non_ascii_list.items():
+                dn_list[idx] = dn_list[idx].replace(non_ascii_char, escaped_char)
+            # Escape \\ as needed
+            location = value.find('\\')
+            if not value[location + 1] in character_list and location != -1:
+                dn_list[idx] = dn_list[idx][:location] + "\\\\" + dn_list[idx][location + 1:]
 
-        # Re add the removed ,..= to temp  list strings then remove the unneeded comma
+        # Re add the removed ,..= to dn_list strings then remove the unneeded comma
         try:
             for idx, value in enumerate(attribute):
                 dn_list[idx + 1] = f'{value}{dn_list[idx+1]}'[1:]
@@ -42,6 +51,29 @@ class ADUtils:
             raise PluginException(cause='The input DN was invalid. ',
                                   assistance='Please double check input. Input was:{dn}') from e
         return dn_list
+
+    @staticmethod
+    def find_search_base(dn_list):
+        """
+        This method will find a search base from a dn_list
+        :param dn_list:
+        :return: Will return a properly formatted search base
+        """
+        dc_list = [s for s in dn_list if 'DC' in s]
+        search_base = ','.join(dc_list)
+        return search_base
+
+    def format_dn(self, dn) -> tuple:
+        """
+        This method takes a dn and preforms all needed operations to make it ready for use with ldap
+        :param dn: A dn
+        :return: Will return a properly formatted dn and search base as a tuple
+        """
+        dn = self.dn_normalize(dn)
+        dn_list = self.dn_escape_and_split(dn)
+        search_base = self.find_search_base(dn_list)
+        formatted_dn = ','.join(dn_list)
+        return formatted_dn, search_base
 
     @staticmethod
     def find_parentheses_pairs(query_string):
