@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Modify an Active Directory objects attributes"
+    DESCRIPTION = "Modify the attributes for an Active Directory object"
 
 
 class Input:

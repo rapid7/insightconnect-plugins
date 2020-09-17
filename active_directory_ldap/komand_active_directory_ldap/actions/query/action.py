@@ -29,7 +29,7 @@ class Query(komand.Action):
         pairs = ADUtils.find_parentheses_pairs(escaped_query)
 
         # replace ( and ) when they are part of a name rather than a search parameter
-        escaped_query = ADUtils.escape_brackets_for_query(escaped_query)
+        escaped_query = ADUtils.escape_brackets_for_query(escaped_query, pairs)
         self.logger.info(f"Escaped query: {escaped_query}")
 
         conn.search(search_base=params.get('search_base'),

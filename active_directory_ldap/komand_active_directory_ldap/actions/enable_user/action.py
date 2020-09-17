@@ -25,7 +25,7 @@ class EnableUser(komand.Action):
         pairs = ADUtils.find_parentheses_pairs(dn)
         # replace ( and ) when they are part of a name rather than a search parameter
         if pairs:
-            dn = ADUtils.escape_brackets_for_query(dn)
+            dn = ADUtils.escape_brackets_for_query(dn, pairs)
 
         self.logger.info(f'Search DN {dn}')
 

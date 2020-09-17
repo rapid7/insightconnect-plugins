@@ -26,7 +26,7 @@ class DisableUser(komand.Action):
         self.logger.info(pairs)
         # replace ( and ) when they are part of a name rather than a search parameter
         if pairs:
-            dn = ADUtils.escape_brackets_for_query(dn)
+            dn = ADUtils.escape_brackets_for_query(dn, pairs)
 
         self.logger.info(f'Search DN {dn}')
 

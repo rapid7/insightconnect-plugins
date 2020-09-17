@@ -62,7 +62,7 @@ Example input:
 ```
 {
   "attribute_to_modify": "postalCode",
-  "attribute_value": 1100,
+  "attribute_value": 02114,
   "distinguished_name": "CN=user,OU=domain_users,DC=example,DC=com"
 }
 ```
