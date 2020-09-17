@@ -5,7 +5,7 @@
 # Key Features
 
 * Lookup categories for a given URL
-* Add or remove an URLs from blacklist
+* Add or remove URLs from blacklist
 
 # Requirements
 
