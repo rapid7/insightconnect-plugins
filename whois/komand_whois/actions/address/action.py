@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import AddressInput, AddressOutput
+from .schema import AddressInput, AddressOutput, Input
 import re
 
 
@@ -79,7 +79,7 @@ class Address(insightconnect_plugin_runtime.Action):
         cmd = "%s %s" % (binary, params.get("address"))
         stdout = insightconnect_plugin_runtime.helper.exec_command(cmd)["stdout"]
         stdout = stdout.decode('utf-8')
-        results = self.parse_stdout(stdout=stdout)
+        results = self.parse_stdout(params.get(Input.REGISTRAR), stdout=stdout)
         results = insightconnect_plugin_runtime.helper.clean_dict(results)
 
         if not results:
@@ -117,8 +117,6 @@ class Address(insightconnect_plugin_runtime.Action):
             self.logger.info("Warning: No WHOIS registry detected from stdout, defaulting to ARIN...")
             registry = self.ARIN
 
-        self.logger.info("Info: Using registry: %s" % registry)
-
         return registry
 
     def _load_normalization_map(self, refer):
@@ -127,9 +125,14 @@ class Address(insightconnect_plugin_runtime.Action):
                              "Please contact support with the IP address used as input to this action." % refer)
         return self.NORMALIZATION_MAP[refer]
 
-    def parse_stdout(self, stdout):
+    def parse_stdout(self, registrar, stdout):
         pairs = self._get_stdout_pairs(stdout)
-        registry = self._get_registry(stdout=stdout)
+        if not registrar or registrar == "Autodetect":
+            registry = self._get_registry(stdout=stdout)
+        else:
+            registry = registrar.lower()
+
+        self.logger.info("Info: Using registry: %s" % registry)
 
         loaded_map = self._load_normalization_map(refer=registry)
 
