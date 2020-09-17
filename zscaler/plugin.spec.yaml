@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: zscaler
 title: Zscaler
-version: 1.0.0
+version: 1.1.0
 description: Zscaler is a SaaS security platform that provides fast, secure connections between client applications, regardless of device, location, or network
 vendor: rapid7
 support: rapid7
@@ -74,4 +74,27 @@ actions:
         title: URL Categorization
         description: Information about given URLs
         type: "[]url_categorization"
+        required: true
+  blacklist_url:
+    title: Blacklist URL
+    description: Add or remove an URLs from blacklist
+    input:
+      urls:
+        title: URLs
+        description: The given set of URLs or one URL to add or remove from blacklist
+        type: "[]string"
+        required: true
+        example: ["example.com", "rapid7.com"]
+      blacklist_state:
+        title: Blacklist State
+        description: Set true to add an URL to blacklist, set false to remove URL from blacklist
+        type: boolean
+        required: false
+        default: true
+        example: true
+    output:
+      success:
+        title: Success
+        description: Information about add or remove URLs from blacklist
+        type: boolean
         required: true

@@ -21,6 +21,17 @@ class ZscalerAPI:
             "status"
         )
 
+    def blacklist_url(self, blacklist_step: str, urls: list) -> bool:
+        response = self.authenticated_call(
+            "POST",
+            f"security/advanced/blacklistUrls?action={blacklist_step}",
+            data=json.dumps({
+                "blacklistUrls": urls
+            })
+        )
+
+        return 200 <= response.status_code < 300
+
     def url_lookup(self, lookup_url: list):
         return self.authenticated_call(
             "POST",

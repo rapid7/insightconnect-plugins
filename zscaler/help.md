@@ -11,13 +11,13 @@
 * [Requires a Zscaler organization API Key](https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey)
 * Requires a Zscaler username and password
 
-
 # Documentation
+
 ## Setup
 
 To locate your base URI and key:
 
-1. Log in to the ZIA Admin Portal using your admin credentials. 
+1. Log in to the ZIA Admin Portal using your admin credentials.
 2. Go to **Administration > API Key Management**.
 
 In order to view the API Key Management page, the admin must be assigned an admin role that includes the Authentication Configuration functional scope.
@@ -44,10 +44,49 @@ Example input:
   },
   "url": "admin.zscalerbeta.net"
 }
+
 ```
+
 ## Technical Details
 
 ### Actions
+
+#### Blacklist URL
+
+This action is used to add or remove an URLs from blacklist.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|blacklist_state|boolean|True|False|Set true to add an URL to blacklist, set false to remove URL from blacklist|None|True|
+|urls|[]string|None|True|The given set of URLs or one URL to add or remove from blacklist|None|["example.com", "rapid7.com"]|
+
+Example input:
+
+```
+{
+  "blacklist_state": true,
+  "urls": [
+    "example.com",
+    "rapid7.com"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Information about add or remove URLs from blacklist|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Lookup URL
 
@@ -121,6 +160,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - New action Blacklist URL
 * 1.0.0 - Initial plugin
 
 # Links
