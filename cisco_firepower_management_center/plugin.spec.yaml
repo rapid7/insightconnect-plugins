@@ -221,6 +221,129 @@ types:
       required: false
       type: string
       description: DNS resolution
+  network_address:
+    metadata:
+      title: Metadata
+      required: false
+      type: metadata
+      description: Defines read only details about the object - whether it is system defined, last user who modified the object etc
+    overridable:
+      title: Overridable
+      required: false
+      type: boolean
+      description: Boolean indicating whether object values can be overridden
+    name:
+      title: Name
+      required: false
+      type: string
+      description: User chosen resource name
+    description:
+      title: Description
+      required: false
+      type: string
+      description: User provided resource description
+    links:
+      title: Links
+      required: false
+      type: links
+      description: This defines the self referencing links for the given resource
+    id:
+      title: ID
+      required: false
+      type: string
+      description: Unique identifier of response object
+    type:
+      title: Type
+      required: false
+      type: string
+      description: Subtype of NetworkAddress (Host, Network, Range, NetworkGroup)
+    value:
+      title: Value
+      required: false
+      type: string
+      desciprtion: Actual value of child object
+    version:
+      title: Version
+      required: false
+      type: string
+      description: Version number of the response object
+    overrideTargetId:
+      title: Override Target ID
+      required: false
+      type: string
+      description: Unique identifier of domain or device when override assigned to child domain. Used as path parameter to GET override details for a specific object on a specific target
+  network_address_literal:
+    type:
+      title: Type
+      required: false
+      type: string
+      description: Type
+    value:
+      title: Value
+      required: false
+      type: string
+      description: Value
+  network_group:
+    metadata:
+      title: Metadata
+      required: false
+      type: metadata
+      description: Defines read only details about the object - whether it is system defined, last user who modified the object etc
+    objects:
+      title: Objects
+      required: false
+      type: "[]network_address"
+      description: The list of member network objects
+    literals:
+      title: Literals
+      required: false
+      type: "[]network_address_literal"
+      description: List of network values in group
+    overridable:
+      title: Overridable
+      required: false
+      type: boolean
+      description: Boolean indicating whether object values can be overridden
+    name:
+      title: Name
+      required: false
+      type: string
+      description: User chosen resource name
+    description:
+      title: Description
+      required: false
+      type: string
+      description: User provided resource description
+    links:
+      title: Links
+      required: false
+      type: links
+      description:
+    overrides:
+      title: Overrides
+      required: false
+      type: override
+      description: Defines the override details for this object
+    id:
+      title: ID
+      required: false
+      type: string
+      description: Unique identifier of response object
+    type:
+      title: Type
+      required: false
+      type: string
+      description: Type associated with the resource
+    version:
+      title: Version
+      required: false
+      type: string
+      description: Version number of the response object
+    overrideTargetId:
+      title: Type
+      required: false
+      type: string
+      description: Unique identifier of domain or device when override assigned to child domain. Used as path parameter to GET override details for a specific object on a specific target (device or domain)
 
 connection:
   server:
@@ -384,7 +507,11 @@ actions:
         required: true
         example: MaliciousAddressGroup
     output:
-      #TODO Add the output for the action
+      network_group:
+        title: Network Group
+        description: Returns information about the network group
+        type: network_group
+        required: false
   remove_address_from_group:
     title: Remove Address from Group
     description: Removes an address object from a group
@@ -402,4 +529,8 @@ actions:
         required: true
         example: MaliciousAddressGroup
     output:
-      #TODO Add the output for the action
+      network_group:
+        title: Network Group
+        description: Returns information about the network group
+        type: network_group
+        required: false

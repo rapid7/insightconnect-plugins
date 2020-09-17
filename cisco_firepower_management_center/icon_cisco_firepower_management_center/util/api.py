@@ -28,22 +28,28 @@ class CiscoFirePowerApi:
     def get_address_objects(self, endpoint: str) -> dict:
         return self._call_api("GET", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}")
 
-    def get_address_object(self, endpoint, object_id):
+    def get_address_object(self, endpoint: str, object_id: str) -> dict:
         return self._call_api("GET", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}/{object_id}")
-
-    def get_expanded_address_objects(self):
-        address_objects = []
-        object_types = ['hosts', 'fqdns', 'networks', 'ranges']
-        for object_type in object_types:
-            address_objects.extend(self.run_with_pages(
-                f"fmc_config/v1/domain/{self.domain_uuid}/object/{object_type}",
-                expanded=True)
-            )
-
-        return address_objects
 
     def delete_address_object(self, endpoint: str, object_id: str) -> dict:
         return self._call_api("DELETE", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}/{object_id}")
+
+    def get_network_addresses(self) -> list:
+        return self.run_with_pages(f"fmc_config/v1/domain/{self.domain_uuid}/object/networkaddresses", expanded=True)
+
+    def find_network_object(self, address_object: str) -> dict:
+        for item in self.get_network_addresses():
+            if item.get("name") == address_object or item.get("value") == address_object:
+                return item
+
+        return {}
+
+    def get_network_address(self, network_address_name: str) -> dict:
+        for item in self.get_network_addresses():
+            if item.get("name") == network_address_name or item.get("objectId") == network_address_name:
+                return item
+
+        return {}
 
     def get_address_groups(self) -> list:
         return self.run_with_pages(f"fmc_config/v1/domain/{self.domain_uuid}/object/networkgroups", expanded=True)
@@ -55,7 +61,14 @@ class CiscoFirePowerApi:
 
         return {}
 
-    def run_with_pages(self, path, expanded=False):
+    def update_address_group(self, payload):
+        return self._call_api(
+            "PUT",
+            f"fmc_config/v1/domain/{self.domain_uuid}/object/networkgroups/{payload.get('id')}",
+            json_data=payload
+        )
+
+    def run_with_pages(self, path: str, expanded: bool = False) -> list:
         objects = []
         limit = 100
         for page in range(0, 9999):

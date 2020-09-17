@@ -35,13 +35,156 @@ Example input:
   "port": 443,
   "server": "www.example.com",
   "ssl_verify": true,
-  "username_and_password": "{\"username\":\"user1\", \"password\":\"mypassword\"}"
+  "username_and_password": {
+    "username": "user1",
+    "password": "mypassword"
+  }
 }
 ```
 
 ## Technical Details
 
 ### Actions
+
+#### Remove Address from Group
+
+This action removes an address object from a group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|The hostname, an IP address or subnet address expressed in CIDR notation to remove from group|None|MaliciousHost|
+|group|string|None|True|Name of the group to remove the address from|None|MaliciousAddressGroup|
+
+Example input:
+
+```
+{
+  "address": "MaliciousHost",
+  "group": "MaliciousAddressGroup"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|network_group|network_group|False|Returns information about the network group|
+
+Example output:
+
+```
+{
+  "network_group": {
+    "links": {
+      "self": "https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/networkgroups/00000000-0000-0ed3-0000-021474836521"
+    },
+    "objects": [
+      {
+        "type": "Host",
+        "id": "00000000-0000-0ed3-0000-021474836502",
+        "name": "TestAddressObjectHost1"
+      },
+      {
+        "type": "FQDN",
+        "id": "00000000-0000-0ed3-0000-021474836483",
+        "name": "TestAddressObjectFQDN1"
+      },
+      {
+        "type": "Network",
+        "id": "00000000-0000-0ed3-0000-021474836598",
+        "name": "TestAddressObjectNetwork"
+      }
+    ],
+    "type": "NetworkGroup",
+    "overridable": false,
+    "id": "00000000-0000-0ed3-0000-021474836521",
+    "name": "TestAddressObjectGroup",
+    "metadata": {
+      "timestamp": 0,
+      "lastUser": {
+        "name": "admin"
+      },
+      "domain": {
+        "name": "Global",
+        "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+        "type": "Domain"
+      }
+    }
+  }
+}
+```
+
+#### Add Address to Group
+
+This action adds an existing address object to a group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|Name of address object|None|MaliciousHost|
+|group|string|None|True|Name of address group to add the address to|None|MaliciousAddressGroup|
+
+Example input:
+
+```
+{
+  "address": "MaliciousHost",
+  "group": "MaliciousAddressGroup"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|network_group|network_group|False|Returns information about the network group|
+
+Example output:
+
+```
+{
+  "network_group": {
+    "links": {
+      "self": "https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/networkgroups/00000000-0000-0ed3-0000-021474836521"
+    },
+    "objects": [
+      {
+        "type": "Host",
+        "id": "00000000-0000-0ed3-0000-021474836502",
+        "name": "TestAddressObjectHost1"
+      },
+      {
+        "type": "FQDN",
+        "id": "00000000-0000-0ed3-0000-021474836483",
+        "name": "TestAddressObjectFQDN1"
+      },
+      {
+        "type": "Network",
+        "id": "00000000-0000-0ed3-0000-021474836598",
+        "name": "TestAddressObjectNetwork"
+      }
+    ],
+    "type": "NetworkGroup",
+    "overridable": false,
+    "id": "00000000-0000-0ed3-0000-021474836521",
+    "name": "TestAddressObjectGroup",
+    "metadata": {
+      "timestamp": 0,
+      "lastUser": {
+        "name": "admin"
+      },
+      "domain": {
+        "name": "Global",
+        "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+        "type": "Domain"
+      }
+    }
+  }
+}
+```
 
 #### Check If Address in Group
 
@@ -242,6 +385,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.0 - New actions - Check If Address in Group, Add Address to Group, Remove Address from Group
 * 1.1.0 - New actions - Create Address Object, Delete Address Object
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
