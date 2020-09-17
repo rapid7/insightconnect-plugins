@@ -31,7 +31,10 @@ Example input:
 
 ```
 {
-  "credentials": "{\"username\": \"user@example.com\", \"password\": \"mypassword\"}",
+  "credentials": {
+    "username": "user@example.com",
+    "password": "mypassword
+  },
   "url": "https://example.sentinelone.com"
 }
 ```
