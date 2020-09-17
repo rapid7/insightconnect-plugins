@@ -81,7 +81,7 @@ actions:
     input:
       urls:
         title: URLs
-        description: The given set of URLs or one URL to add or remove from blacklist
+        description: A given set of one or more URLs to update in the blacklist
         type: "[]string"
         required: true
         example: ["example.com", "rapid7.com"]
