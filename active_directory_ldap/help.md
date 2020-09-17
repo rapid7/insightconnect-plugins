@@ -483,7 +483,7 @@ paired `\(\)` are supported
 
 # Version History
 
-* 4.0.0 - New action Modify Object | Rename Modify Groups action to 'Add or Remove an Object from Group'
+* 4.0.0 - New action Modify Object | Rename Modify Groups action to 'Add or Remove an Object from Group' | Fix issue where non ascii characters were not being escaped
 * 3.2.10 - Fix issue where escaped characters were not being handled correctly
 * 3.2.9 - Fix issue with error handling and logging for the Modify Groups action | Add example inputs | Update to use ldap3 2.7 and Python 3.8
 * 3.2.8 - Fix issue were adding objects to containers might fail

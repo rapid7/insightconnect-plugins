@@ -16,16 +16,14 @@ class Query(komand.Action):
                 output=QueryOutput())
 
     def run(self, params={}):
+        formatter = ADUtils()
         conn = self.connection.conn
         query = params.get('search_filter')
 
-        query = ADUtils.dn_normalize(query)
-        temp_list = ADUtils.dn_escape_and_split(query)
-        query_list = [s for s in temp_list if 'DC' in s]
-        query = ','.join(query_list)
-        escaped_query = ','.join(temp_list)
+        escaped_query = formatter.format_dn(query)[0]
         escaped_query = escaped_query.replace("\\>=", ">=")
         escaped_query = escaped_query.replace("\\<=", "<=")
+        self.logger.info(f'Escaped DN {escaped_query}')
 
         # find pars of `(` `)`
         pairs = ADUtils.find_parentheses_pairs(escaped_query)
