@@ -17,30 +17,28 @@ class ModifyObject(komand.Action):
                 output=ModifyObjectOutput())
 
     def run(self, params={}):
+        formatter = ADUtils()
         conn = self.connection.conn
         dn = params.get(Input.DISTINGUISHED_NAME)
         attribute = params.get(Input.ATTRIBUTE_TO_MODIFY)
         attribute_value = params.get(Input.ATTRIBUTE_VALUE)
-        dn = ADUtils.dn_normalize(dn)
-        temp_list = ADUtils.dn_escape_and_split(dn)
-        dc_list = [s for s in temp_list if 'DC' in s]
-        dc = ','.join(dc_list)
-        escaped_dn = ','.join(temp_list)
+        dn, search_base = formatter.format_dn(dn)
+        self.logger.info(f'Escaped DN {dn}')
 
-        pairs = ADUtils.find_parentheses_pairs(escaped_dn)
+        pairs = ADUtils.find_parentheses_pairs(dn)
         # replace ( and ) when they are part of a name rather than a search parameter
         if pairs:
             for key, value in pairs.items():
-                tempstring = escaped_dn
+                tempstring = dn
                 if tempstring.find('=', key, value) == -1:
-                    escaped_dn = escaped_dn[:value] + '\\29' + escaped_dn[value + 1:]
-                    escaped_dn = escaped_dn[:key] + '\\28' + escaped_dn[key + 1:]
+                    dn = dn[:value] + '\\29' + dn[value + 1:]
+                    dn = dn[:key] + '\\28' + dn[key + 1:]
 
-        self.logger.info(escaped_dn)
+        self.logger.info(dn)
 
         # Check that the distinguishedName is valid
-        conn.search(search_base=dc,
-                    search_filter=f'(distinguishedName={escaped_dn})',
+        conn.search(search_base=search_base,
+                    search_filter=f'(distinguishedName={dn})',
                     attributes=[ALL_ATTRIBUTES, ALL_OPERATIONAL_ATTRIBUTES])
         result = conn.response_to_json()
         result_list_object = loads(result)
@@ -54,7 +52,7 @@ class ModifyObject(komand.Action):
 
         # Update attribute
 
-        conn.modify(escaped_dn, {attribute: [(MODIFY_REPLACE, [attribute_value])]})
+        conn.modify(dn, {attribute: [(MODIFY_REPLACE, [attribute_value])]})
         result = conn.result
         output = result['description']
 

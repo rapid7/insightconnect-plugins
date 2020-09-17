@@ -15,7 +15,7 @@ class Connection(komand.Connection):
         """
         Connect to LDAP
         """
-        ssl = params.get(Input.USE_SSL)
+        self.ssl = params.get(Input.USE_SSL)
         host = params.get(Input.HOST)
         port = params.get(Input.PORT)
         user_name = params.get(Input.USERNAME_PASSWORD).get('username')
@@ -25,7 +25,7 @@ class Connection(komand.Connection):
         server = ldap3.Server(
                 host=host,
                 port=port,
-                use_ssl=ssl,
+                use_ssl=self.ssl,
                 get_info=ldap3.ALL)
 
         try:
