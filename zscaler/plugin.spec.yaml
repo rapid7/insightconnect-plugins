@@ -95,6 +95,6 @@ actions:
     output:
       success:
         title: Success
-        description: Information about add or remove URLs from blacklist
+        description: Whether or not the request succeeded
         type: boolean
         required: true
