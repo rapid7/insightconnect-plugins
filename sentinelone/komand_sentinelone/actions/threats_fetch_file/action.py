@@ -19,8 +19,8 @@ class ThreatsFetchFile(komand.Action):
 
         if len(password) <= 10 or " " in password:
             raise PluginException(
-                cause="Wrong password",
-                assistance="Password must have more than 10 characters and cannot contain whitespace"
+                cause="Wrong password.",
+                assistance="Password must have more than 10 characters and cannot contain whitespace."
             )
 
         agent_filter = {
