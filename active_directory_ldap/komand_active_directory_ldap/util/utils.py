@@ -97,3 +97,18 @@ class ADUtils:
             raise PluginException(cause="No matching opening parentheses at: " + str(temp_stack.pop()))
 
         return pairs
+
+    @staticmethod
+    def escape_brackets_for_query(query, pairs):
+        """
+        This method will properly escape a query
+        :param query: The string to evaluate
+        :param pairs: indexes of the start and end of brackets
+        :return: An escaped query
+        """
+        for key, value in pairs.items():
+            temp_string = query
+            if temp_string.find('=', key, value) == -1:
+                query = query[:value] + '\\29' + query[value + 1:]
+                query = query[:key] + '\\28' + query[key + 1:]
+        return query

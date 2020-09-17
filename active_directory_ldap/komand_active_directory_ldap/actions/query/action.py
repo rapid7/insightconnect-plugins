@@ -29,11 +29,7 @@ class Query(komand.Action):
         pairs = ADUtils.find_parentheses_pairs(escaped_query)
 
         # replace ( and ) when they are part of a name rather than a search parameter
-        for key, value in pairs.items():
-            tempstring = escaped_query
-            if tempstring.find('=', key, value) == -1:
-                escaped_query = escaped_query[:value] + '\\29' + escaped_query[value + 1:]
-                escaped_query = escaped_query[:key] + '\\28' + escaped_query[key + 1:]
+        escaped_query = ADUtils.escape_brackets_for_query(escaped_query)
         self.logger.info(f"Escaped query: {escaped_query}")
 
         conn.search(search_base=params.get('search_base'),
