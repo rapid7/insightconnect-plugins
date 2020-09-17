@@ -3,6 +3,7 @@ from .schema import UpdateSiteIncludedTargetsInput, UpdateSiteIncludedTargetsOut
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+import json
 
 
 class UpdateSiteIncludedTargets(komand.Action):
@@ -27,9 +28,10 @@ class UpdateSiteIncludedTargets(komand.Action):
             scope.extend(current_scope['addresses'])
 
         self.logger.info(f"Using {endpoint} ...")
+        payload={"rawbody": json.dumps(scope)}
         response = resource_helper.resource_request(endpoint=endpoint,
                                                     method='put',
-                                                    payload=scope)
+                                                    payload=payload)
 
         return {
             "id": params.get(Input.ID),
