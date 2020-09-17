@@ -41,12 +41,4 @@ class Query(komand.Action):
         result_list_object = json.loads(result_list_json)
         entries = result_list_object["entries"]
 
-        for entry in entries:
-            if entry.get("dn"):
-                entry["dn"] = entry["dn"].replace("\\", "")
-
-            if entry.get("attributes") and entry.get("attributes").get("distinguishedName"):
-                entry.get("attributes")["distinguishedName"] = \
-                    entry.get("attributes").get("distinguishedName").replace("\\", "")
-
         return {'results': entries}

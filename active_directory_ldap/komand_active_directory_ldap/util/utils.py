@@ -38,9 +38,10 @@ class ADUtils:
             # Escape non ascii characters
             for non_ascii_char, escaped_char in non_ascii_list.items():
                 dn_list[idx] = dn_list[idx].replace(non_ascii_char, escaped_char)
-            # Escape \\ as needed
+        # escape \\ as needed
+        for idx, value in enumerate(dn_list):
             location = value.find('\\')
-            if not value[location + 1] in character_list and location != -1:
+            if not value[location + 1] in character_list and location != -1 and not value[location + 1] == '\\':
                 dn_list[idx] = dn_list[idx][:location] + "\\\\" + dn_list[idx][location + 1:]
 
         # Re add the removed ,..= to dn_list strings then remove the unneeded comma
