@@ -47,7 +47,7 @@ Example input:
 
 #### Modify Object
 
-This action is used to modify an Active Directory objects attributes.
+This action is used to modify the attributes of an Active Directory object.
 
 ##### Input
 
