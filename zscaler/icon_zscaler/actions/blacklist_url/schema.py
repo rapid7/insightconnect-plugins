@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add or remove an URLs from blacklist"
+    DESCRIPTION = "Add or remove URLs from blacklist. This blocks a URL from being accessed"
 
 
 class Input:
@@ -32,7 +32,7 @@ class BlacklistUrlInput(insightconnect_plugin_runtime.Input):
     "urls": {
       "type": "array",
       "title": "URLs",
-      "description": "The given set of URLs or one URL to add or remove from blacklist",
+      "description": "A given set of one or more URLs to update in the blacklist",
       "items": {
         "type": "string"
       },

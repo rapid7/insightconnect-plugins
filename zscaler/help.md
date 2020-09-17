@@ -61,7 +61,7 @@ This action is used to add or remove an URLs from blacklist.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |blacklist_state|boolean|True|False|Set true to add an URL to blacklist, set false to remove URL from blacklist|None|True|
-|urls|[]string|None|True|The given set of URLs or one URL to add or remove from blacklist|None|["example.com", "rapid7.com"]|
+|urls|[]string|None|True|A given set of one or more URLs to update in the blacklist|None|["example.com", "rapid7.com"]|
 
 Example input:
 

@@ -95,7 +95,7 @@ class ZscalerAPI:
             if response.status_code == 404:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
             if 400 <= response.status_code < 500:
-                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.json().get("message", response.text))
             if response.status_code >= 500:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
