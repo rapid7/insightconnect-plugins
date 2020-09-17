@@ -77,7 +77,7 @@ actions:
         required: true
   blacklist_url:
     title: Blacklist URL
-    description: Add or remove an URLs from blacklist
+    description: Add or remove URLs from blacklist. This blocks a URL from being accessed
     input:
       urls:
         title: URLs
