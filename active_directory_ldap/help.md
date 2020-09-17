@@ -465,6 +465,10 @@ Objects that contain an equals sign `=` or an asterisk `*` require the signs to 
 For example `CN=Robert = bob Smith,OU=domain_users,DC=rapid7,DC=com` must be escaped as`CN=Robert \= bob Smith,OU=domain_users,DC=mattsdomain,DC=local` in the input
 A second example would be `CN=C**l guy,OU=domain_users,DC=rapid7,DC=com`must be escaped as `CN=C\*\*l guy,OU=domain_users,DC=rapid7,DC=com`
 
+This plugin does not support objects an unpaired `\(\)` as part of their names.
+paired `\(\)` are supported
+For example `CN=Robert (Bob) Smith,OU=domain_users,DC=rapid7,DC=com` is supported
+but `CN=Robert Bob) Smith,OU=domain_users,DC=rapid7,DC=com` is not
 
 If you cannot connect, ensure that network access is available, and view the logs to identify any auth errors.
 
@@ -476,9 +480,6 @@ SSL must be enabled for the Reset Password action to function.
 To look up a Distinguished Name (DN) in Microsoft AD use the query action. Use the search filter (sAMAccountName=objectname ) where
 objectname is the logon name of the user you are looking for. The DN can then be fed into another action by Repeating a collection for
 the query results, and then using the variable step $item.dn
-
-For the Query action, this plugin does not support objects that use `*`, `\`, or an unpaired `\(\)` as part of their names.
-paired `\(\)` are supported
 
 # Version History
 
