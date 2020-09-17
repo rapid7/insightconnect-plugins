@@ -54,7 +54,7 @@ Example input:
 
 #### Blacklist URL
 
-This action is used to add or remove an URLs from blacklist.
+This action is used to add or remove  URLs from a blacklist.
 
 ##### Input
 
