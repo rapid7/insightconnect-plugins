@@ -1548,7 +1548,7 @@ actions:
     output:
       file:
         title: File
-        description: File of data to be imported into Anomali ThreatStream
+        description: Base64 encoded threat file
         type: file
         required: true
 
