@@ -20,16 +20,14 @@ class Query(komand.Action):
         conn = self.connection.conn
         query = params.get('search_filter')
 
-        escaped_query = formatter.format_dn(query)[0]
-        escaped_query = escaped_query.replace("\\>=", ">=")
-        escaped_query = escaped_query.replace("\\<=", "<=")
-        self.logger.info(f'Escaped DN {escaped_query}')
+        query = query.replace("\\>=", ">=")
+        query = query.replace("\\<=", "<=")
 
         # find pars of `(` `)`
-        pairs = formatter.find_parentheses_pairs(escaped_query)
+        pairs = formatter.find_parentheses_pairs(query)
 
         # replace ( and ) when they are part of a name rather than a search parameter
-        escaped_query = formatter.escape_brackets_for_query(escaped_query, pairs)
+        escaped_query = formatter.escape_brackets_for_query(query, pairs)
         self.logger.info(f"Escaped query: {escaped_query}")
 
         conn.search(search_base=params.get('search_base'),
