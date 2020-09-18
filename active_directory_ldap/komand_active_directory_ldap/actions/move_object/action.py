@@ -15,11 +15,14 @@ class MoveObject(komand.Action):
                 output=MoveObjectOutput())
 
     def run(self, params={}):
+        formatter = ADUtils()
         conn = self.connection.conn
         dn = params.get('distinguished_name')
-        dn = ADUtils.dn_normalize(dn)
         new_ou = params.get('new_ou')
         relative_dn = ''
+        dn = formatter.format_dn(dn)[0]
+        dn = formatter.unescape_asterisk(dn)
+        self.logger.info(f'Escaped DN {dn}')
 
         pattern = re.search(r'CN=[^,]*,', dn)
         self.logger.debug(pattern)

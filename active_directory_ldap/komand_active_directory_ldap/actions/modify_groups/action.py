@@ -17,19 +17,20 @@ class ModifyGroups(komand.Action):
                 output=ModifyGroupsOutput())
 
     def run(self, params={}):
+        formatter = ADUtils()
         conn = self.connection.conn
         dn = params.get('distinguished_name')
         group_dn = params.get('group_dn')
         add_remove = params.get('add_remove')
 
         # Normalize dn
-        dn = ADUtils.dn_normalize(dn)
-        temp_list = ADUtils.dn_escape_and_split(dn)
-        dn = ','.join(temp_list)
+        dn = formatter.format_dn(dn)[0]
+        dn = formatter.unescape_asterisk(dn)
+        self.logger.info(f'Escaped DN {dn}')
         # Normalize group dn
-        group_dn = ADUtils.dn_normalize(group_dn)
-        temp_list = ADUtils.dn_escape_and_split(group_dn)
-        group_dn = ','.join(temp_list)
+        group_dn = formatter.format_dn(group_dn)[0]
+        group_dn = formatter.unescape_asterisk(group_dn)
+        self.logger.info(f'Escaped group DN {group_dn}')
 
         if add_remove == 'add':
             try:
