@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Blacklist or unblacklist a domain"
+    DESCRIPTION = "Blacklist or unblacklist a URLs"
 
 
 class Input:
@@ -25,14 +25,14 @@ class BlacklistUrlInput(insightconnect_plugin_runtime.Input):
     "blacklist_state": {
       "type": "boolean",
       "title": "Blacklist State",
-      "description": "True to blacklist a domain, false to unblacklist a domain",
+      "description": "True to blacklist a URL, false to unblacklist a URL",
       "default": true,
       "order": 2
     },
     "urls": {
       "type": "array",
       "title": "URLs",
-      "description": "A given set of one or more domain name to update in the blacklist",
+      "description": "A given set of one or more URLs to update in the blacklist",
       "items": {
         "type": "string"
       },

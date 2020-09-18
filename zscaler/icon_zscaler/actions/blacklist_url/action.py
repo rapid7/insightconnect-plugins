@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import BlacklistUrlInput, BlacklistUrlOutput, Input, Output, Component
 # Custom imports below
+from urllib.parse import urlparse
 
 
 class BlacklistUrl(insightconnect_plugin_runtime.Action):
@@ -19,6 +20,13 @@ class BlacklistUrl(insightconnect_plugin_runtime.Action):
         else:
             blacklist_step = "REMOVE_FROM_LIST"
 
+        urls = params.get(Input.URLS)
+        normalized_urls = []
+        for url in urls:
+            normalized_urls.append(
+                urlparse(url).hostname
+            )
+
         return {
-            Output.SUCCESS: self.connection.client.blacklist_url(blacklist_step, params.get(Input.URLS))
+            Output.SUCCESS: self.connection.client.blacklist_url(blacklist_step, normalized_urls)
         }
