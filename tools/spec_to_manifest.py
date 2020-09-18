@@ -5,37 +5,38 @@ import yaml
 import logging
 import markdown
 from bs4 import BeautifulSoup, NavigableString, Tag
+import glob
+from pprint import pprint
+
+
+"""
+Input: path to workflow directory
+Output: manifest.json file within specified directory
+"""
 
 
 def main():
-    yaml = ""
-    md = ""
-    path = ""
-    correct_params = False
-    try:
-        yaml = sys.argv[1]
-        md = sys.argv[2]
-        path = sys.argv[3]
-        correct_params = True
-    except IndexError:
-        logging.warning("ERROR: Insufficient parameters")
+    logging.basicConfig(format='%(message)s')
+    path = sys.argv[1]
+    yaml, md, icon = find_files(path)
+    if yaml and md and icon:
+        spec = open_and_read_spec(yaml)
+        print("Read spec file at " + yaml)
 
-    if correct_params:
-        if verify_yaml(yaml) and verify_md(md):
-            spec = open_and_read_spec(yaml)
-            print("Read spec file at " + yaml)
-            help_md = open_and_read_md(md)
-            print("Read md file at " + md)
-            json_obj = parse_fields(spec, help_md)
-            print("Converted fields")
-            write_to_json(json_obj, path)
-            print("Wrote manifest at " + path)
-        else:
-            logging.warning("ERROR: Wrong file type(s) specified")
+        help_md = open_and_read_md(md)
+        print("Read md file at " + md)
+
+        workflow_time = find_workflow_time(icon)
+        json_obj = parse_fields(spec, help_md, workflow_time)
+        print("Converted fields")
+
+        write_to_json(json_obj, path)
+        print("Wrote manifest at " + path)
+    else:
+        logging.warning("ERROR: A file was not found")
 
 
-# noinspection DuplicatedCode,DuplicatedCode
-def parse_fields(yaml_obj, md_obj):
+def parse_fields(yaml_obj, md_obj, time_saved):
     # Manifest Version -- mandatory
     manifest_obj = {"manifest_version": 1}
 
@@ -53,12 +54,15 @@ def parse_fields(yaml_obj, md_obj):
     extension_obj = {"type": extension_type}
     if extension_type == "workflow":
         extension_obj[extension_type] = unique_name + ".icon"
-    if extension_type == "plugin":
-        extension_obj["externalPluginName"] = unique_name
-        if cloud_ready:
-            extension_obj["cloudReady"] = "true"
-        else:
-            extension_obj["cloudReady"] = "false"
+        extension_obj["workflowTime"] = time_saved
+        extension_obj["pluginsUsed"] = md_obj.get("Plugins Used", [])
+
+    # if extension_type == "plugin":
+    #     extension_obj["externalPluginName"] = unique_name
+    #     if cloud_ready:
+    #         extension_obj["cloudReady"] = "true"
+    #     else:
+    #         extension_obj["cloudReady"] = "false"
 
     manifest_obj["extension"] = extension_obj
 
@@ -76,7 +80,7 @@ def parse_fields(yaml_obj, md_obj):
 
     # Description -- mandatory
     # Tricky extraction of description from .md
-    manifest_obj["description"] = md_obj.get("Description")
+    manifest_obj["description"] = clean_chars(md_obj.get("Description"))
 
     # Key Features -- mandatory
     # From .md
@@ -84,7 +88,10 @@ def parse_fields(yaml_obj, md_obj):
 
     # Requirements -- Optional
     # Tricky reading from .md, due to different formatting....
-    manifest_obj["requirements"] = md_obj.get("Requirements")
+    if md_obj.get("Requirements") == "None":
+        manifest_obj["requirements"] = []
+    else:
+        manifest_obj["requirements"] = md_obj.get("Requirements")
 
     # Resources -- optional
     # Equivalent to Links --> References from .md
@@ -99,7 +106,6 @@ def parse_fields(yaml_obj, md_obj):
     versions = md_obj.get("Version History")
     converted_versions_obj = []
     version_changes = ""
-    version_number = ""
     for version in versions:
         version_info = version.split(" - ")
         if version_info:
@@ -110,7 +116,7 @@ def parse_fields(yaml_obj, md_obj):
                 version_changes = ""
         else:
             version_number = ""
-        version_obj = {"version": version_number, "date": "", "changes": version_changes}
+        version_obj = {"version": version_number, "date": "", "changes": clean_chars(version_changes)}
         converted_versions_obj.append(version_obj)
     manifest_obj["version_history"] = converted_versions_obj
 
@@ -147,10 +153,10 @@ def parse_fields(yaml_obj, md_obj):
         if unique_name == "rapid7_insight_agent":
             manifest_obj["required_rapid7_features"] = ["orchestrator", "agent"]
         else:
-            if not cloud_ready:
-                manifest_obj["required_rapid7_features"] = ["orchestrator"]
-            else:
+            if cloud_ready or "cloud_enabled" in yaml_obj.get("hub_tags").get("keywords"):
                 manifest_obj["required_rapid7_features"] = []
+            else:
+                manifest_obj["required_rapid7_features"] = ["orchestrator"]
 
     # Status -- optional
     # From yaml
@@ -220,11 +226,87 @@ def parse_fields(yaml_obj, md_obj):
 
         manifest_obj["links"] = {"source_url": src, "license_url": lic}
 
+    manifest_obj["metadata"] = []
+
     # Processing Instructions -- optional
-    # No sense of this in yaml...
     manifest_obj["processing_instructions"] = []
 
     return manifest_obj
+
+
+def html_convert_to_dict(soup):
+    header_dict = {}
+    # Look through all top level headers ("Description, Key Features, Requirements, etc.)
+    for header in soup.find_all("h1"):
+        key = header.get_text().strip()
+        text = ""
+        html_node = header
+        p_links = []
+        while True:
+            html_node = html_node.nextSibling
+
+            # End of html, fill dictionary based on what has been filled in
+            if html_node is None:
+                if text:
+                    header_dict[key] = text
+                elif p_links:
+                    header_dict[key] = p_links
+                else:
+                    header_dict[key] = []
+                break
+
+            # If a section is empty
+            # i.e. "Links"/"Requirements" section could be empty
+            if check_blank_section(str(html_node)):
+                header_dict[key] = []
+                break
+
+            # If next node is only text, add and move on (rare)
+            if isinstance(html_node, NavigableString):
+                text += html_node.strip()
+
+            # If next node has a tag
+            # h1 tags denote the end of a header section
+            # ul tags are parsed out into strings accordingly
+            # h2 tag may have plugin info
+            # p tags include text that can be important for description/bullet points
+
+            if isinstance(html_node, Tag):
+                if html_node.name == "h1":
+                    header_dict[key] = clean_chars(text.strip().replace("\n", " "))
+                    break
+                if html_node.name == "ul":
+                    is_list_with_links = False
+                    if key == "Documentation":
+                        text += html_node.get_text().replace(" \n", " ") + " "
+                    else:
+                        for x in html_node:
+                            if isinstance(x, Tag):
+                                if "<li><a href" in str(x) and key == "Links":
+                                    is_list_with_links = True
+                                    break
+                        if is_list_with_links:
+                            link_dict = handle_list_with_links(html_node)
+                            header_dict[key] = link_dict
+                        else:
+                            clean_text = handle_list(html_node)
+                            if text != "":
+                                concat_string = text.lstrip(" ") + str(clean_text).replace("\"", "").rstrip(" ")
+                                header_dict[key] = concat_string
+                            else:
+                                header_dict[key] = clean_text
+                        break
+                if html_node.name == "h2":
+                    if html_node.text == "Technical Details":
+                        header_dict["Plugins Used"], html_node = get_used_plugins(html_node)
+                if html_node.name == "p" or html_node.name == "blockquote":
+
+                    # Found that some of the links section is not a list (instead a p tag)
+                    if "<a href=" in str(html_node.next) and key == "Links":
+                        p_links.append(get_p_link(html_node.next))
+                    else:
+                        text += html_node.get_text().replace(" \n", " ") + " "
+    return header_dict
 
 
 def open_and_read_spec(file):
@@ -237,65 +319,26 @@ def open_and_read_md(file):
     markdown_file = open(file)
     soup = md_convert_to_html(markdown_file)
     md_dict = html_convert_to_dict(soup)
+    md_dict = validate_dict(md_dict, ["Description", "Documentation", "Key Features", "Requirements", "Version History", "Links"])
     return md_dict
 
 
+def find_workflow_time(icon):
+    with open(icon) as file:
+        dic = json.loads(file.read())
+        seconds = dic.get("kom").get("workflowVersions")[0].get("humanCostSeconds")
+        return str(seconds) + " seconds"
+
+
 def md_convert_to_html(file):
-    html = markdown.markdown(file.read())
+    html = markdown.markdown(file.read(), extensions=["tables"])
     soup = BeautifulSoup(html, features="html.parser")
     return soup
 
 
-def html_convert_to_dict(soup):
-    header_dict = {}
-    # Find all top level headers
-    for header in soup.find_all("h1"):
-        key = header.get_text().strip()
-        text = ""
-        next_tag_block = header
-        while True:
-            next_tag_block = next_tag_block.nextSibling
-            # End of html
-            if next_tag_block is None:
-                break
-            # If a section is empty
-            # i.e. "Links"/"Requirements" section could be empty
-            if check_blank_section(str(next_tag_block)):
-                header_dict[key] = []
-                break
-            # If next node is text (usually does not add anything)
-            if isinstance(next_tag_block, NavigableString):
-                text += next_tag_block.strip()
-
-            # If next node is a tag
-            # ul tags are parsed out into strings accordingly
-            # h1 tags denote the end of a header section
-            # p tags include text that can be important for description/bullet points
-            if isinstance(next_tag_block, Tag):
-                if next_tag_block.name == "h1":
-                    header_dict[key] = text.strip().replace("\n", " ")
-                    break
-                if next_tag_block.name == "ul":
-                    is_list_with_links = False
-                    for x in next_tag_block:
-                        if isinstance(x, Tag):
-                            if "<li><a href" in str(x) and key == "Links":
-                                is_list_with_links = True
-                                break
-                    if is_list_with_links:
-                        link_dict = handle_list_with_links(next_tag_block)
-                        header_dict[key] = link_dict
-                    else:
-                        clean_text = handle_list(next_tag_block)
-                        if text != "":
-                            concat_string = text.lstrip(" ") + str(clean_text).replace("\'", "")
-                            header_dict[key] = concat_string
-                        else:
-                            header_dict[key] = clean_text
-                    break
-                if next_tag_block.name == "p" or next_tag_block.name == "blockquote":
-                    text += next_tag_block.get_text().replace(" \n", " ") + " "
-    return header_dict
+def get_p_link(string):
+    soup_node = BeautifulSoup(str(string), features="html.parser")
+    return {"text": soup_node.get_text(), "url": soup_node.a.get("href")}
 
 
 def handle_list_with_links(html):
@@ -306,9 +349,13 @@ def handle_list_with_links(html):
 
 # Builds link data structure with url and description
 def build_link_dict(element):
-    return [{"text": li.get_text().split("\n")[0], "url": li.a.get("href")}
-            for ul in element('ul', recursive=False)
-            for li in ul('li', recursive=False)]
+    try:
+        return [{"text": li.get_text().split("\n")[0], "url": li.a.get("href")}
+                for ul in element('ul', recursive=False)
+                for li in ul('li', recursive=False)]
+    except AttributeError:
+        logging.warning("List with hyperlinks is not formatted correctly. Please check the help.md file.")
+        return []
 
 
 def handle_list(html):
@@ -320,7 +367,7 @@ def handle_list(html):
 
 # Returns dictionary representing nested link structure
 def build_list_tree(element):
-    return [{li.get_text().split("\n")[0]: build_list_tree(li)}
+    return [{clean_chars(li.get_text().split("\n")[0]): build_list_tree(li)}
             for ul in element('ul', recursive=False)
             for li in ul('li', recursive=False)]
 
@@ -332,10 +379,10 @@ def clean_tree_to_string(d):
         for key, value in list_element.items():
             if len(value) != 0:
                 cleaned_data = clean_tree_to_string(value)
-                concat = key + " " + str(cleaned_data).replace("\'", "")
+                concat = key + " " + str(cleaned_data)
                 string_list.append(concat)
             else:
-                string_list.append(key)
+                string_list.append(str(key).rstrip(" ").replace("\"", "'"))
     return string_list
 
 
@@ -343,12 +390,50 @@ def check_blank_section(node):
     return re.match(r"^.*This (plugin|workflow) does not contain any (requirements|references).", node)
 
 
-def verify_yaml(file):
-    return file and re.match(r"^\S*.spec.yaml$", file)
+def validate_dict(md, sections):
+    keys = md.keys()
+    for section in sections:
+        if section not in keys:
+            logging.warning(f"WARNING: Markdown dictionary does not have %s key, an empty section will be added. This "
+                            f"warning is due to the help.md being improperly formatted. " % section)
+            if section in ["Description", "Documentation"]:
+                md[section] = ""
+            if section in ["Key Features", "Requirements", "Version History", "Links"]:
+                md[section] = []
+    return md
 
 
-def verify_md(file):
-    return file and re.match(r"^\S*help.md$", file)
+def get_used_plugins(table):
+    node = table
+    while node.find('td') == -1 or not node.find('td'):
+        node = node.nextSibling
+        if isinstance(node, Tag):
+            if node.getText() == "Troubleshooting":
+                break
+    entries = node.findAll('td')
+    plugin_list = []
+    for i in range(0, len(entries), 3):
+        plugin = {"plugin:": entries[i].text, "version": entries[i+1].text}
+        plugin_list.append(plugin)
+    return plugin_list, node
+
+
+def clean_chars(text):
+    text = text.replace("\u2019", "'")
+    text = text.replace("\u2018", "'")
+    text = text.replace("\"", "'")
+    return text
+
+
+def find_files(path):
+    try:
+        yaml = glob.glob(path + "/*.spec.yaml")[0]
+        md = glob.glob(path + "/help.md")[0]
+        icon = glob.glob(path + "/*.icon")[0]
+        return yaml, md, icon
+    except IndexError:
+        logging.warning(f"ERROR: One of the necessary files was not found. "
+                        f"Please check to see if your directory has the necessary files.")
 
 
 def write_to_json(obj, path):
