@@ -6,7 +6,7 @@ from icon_cylance_protect import connection, actions, triggers
 
 Name = "BlackBerry CylancePROTECT"
 Vendor = "rapid7"
-Version = "1.4.0"
+Version = "1.5.0"
 Description = "Automate detection and response operations using CylancePROTECT"
 
 
@@ -20,6 +20,8 @@ class ICONCylanceProtect(insightconnect_plugin_runtime.Plugin):
                 connection=connection.Connection()
                 )
         self.add_action(actions.Blacklist())
+
+        self.add_action(actions.DeleteAsset())
 
         self.add_action(actions.GetAgentDetails())
 
