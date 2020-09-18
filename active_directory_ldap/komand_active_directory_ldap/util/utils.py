@@ -24,9 +24,6 @@ class ADUtils:
         :param dn:
         :return: Will return a list of the dn component peaces
         """
-        # escape a possible starting space in the first object
-        if dn[3] == ' ':
-            dn = dn[:3] + '\\ ' + dn[4:]
 
         dn_list = re.split(r',..=', dn)
         attribute = re.findall(r',..=', dn)
@@ -40,13 +37,6 @@ class ADUtils:
         manual_escape = ['*', '=']
 
         for idx, value in enumerate(dn_list):
-            # escape starting and ending spaces
-            if dn_list[idx][0] == ' ':
-                dn_list[idx] = dn_list[idx][:0] + '\\ ' + dn_list[idx][1:]
-            length = len(dn_list[idx]) - 1
-            if dn_list[idx][length] == ' ' and not dn_list[idx][length] != '\\':
-                dn_list[idx] = dn_list[idx][:length] + '\\ '
-
             # Escape special characters
             for escaped_char in character_list:
                 if f'\\{escaped_char}' not in value:
@@ -57,7 +47,7 @@ class ADUtils:
         # escape \\ as needed
         for idx, value in enumerate(dn_list):
             location = value.find('\\')
-            if not value[location + 1] in character_list and location != -1 and not value[location + 1] in manual_escape and not value[location + 1] == '\\' and location - 1 == 0:
+            if not value[location + 1] in character_list and location != -1 and not value[location + 1] in manual_escape and not value[location + 1] == '\\':
                 dn_list[idx] = dn_list[idx][:location] + "\\\\" + dn_list[idx][location + 1:]
 
         # Re add the removed ,..= to dn_list strings then remove the unneeded comma
@@ -135,7 +125,7 @@ class ADUtils:
         """
         for key, value in pairs.items():
             temp_string = query
-            if temp_string.find('=', key, value) == -1:
+            if temp_string.find('=', key, value) == -1 or (temp_string.find('=', key, value) and temp_string[temp_string.find('=', key, value)-1] == '\\'):
                 query = query[:value] + '\\29' + query[value + 1:]
                 query = query[:key] + '\\28' + query[key + 1:]
         return query

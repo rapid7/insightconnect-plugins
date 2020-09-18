@@ -470,6 +470,9 @@ paired `\(\)` are supported
 For example `CN=Robert (Bob) Smith,OU=domain_users,DC=rapid7,DC=com` is supported
 but `CN=Robert Bob) Smith,OU=domain_users,DC=rapid7,DC=com` is not
 
+All inputs to the query action must be correctly escaped.
+  
+
 If you cannot connect, ensure that network access is available, and view the logs to identify any auth errors.
 
 For the Add User action it is recommended that SSL be enabled. Without SSL the action is only partially functional.
