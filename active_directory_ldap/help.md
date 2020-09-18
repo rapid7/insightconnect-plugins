@@ -462,7 +462,7 @@ _This plugin does not contain any custom output types._
 ## Troubleshooting
 
 Objects that contain an equals sign `=` or an asterisk `*` require the signs to be escaped.
-For example `CN=Robert = bob Smith,OU=domain_users,DC=rapid7,DC=com` must be escaped as`CN=Robert \= bob Smith,OU=domain_users,DC=mattsdomain,DC=local` in the input
+For example `CN=Robert = bob Smith,OU=domain_users,DC=rapid7,DC=com` must be escaped as`CN=Robert \= bob Smith,OU=domain_users,DC=mattsdomain,DC=local` in the input.
 A second example would be `CN=C**l guy,OU=domain_users,DC=rapid7,DC=com`. This must be escaped as `CN=C\*\*l guy,OU=domain_users,DC=rapid7,DC=com`.
 
 This plugin does not support objects and unpaired `\(\)` as part of their names.
