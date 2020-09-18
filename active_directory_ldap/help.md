@@ -468,7 +468,7 @@ A second example would be `CN=C**l guy,OU=domain_users,DC=rapid7,DC=com`. This m
 This plugin does not support objects and unpaired `\(\)` as part of their names.
 paired `\(\)` are supported
 For example `CN=Robert (Bob) Smith,OU=domain_users,DC=rapid7,DC=com` is supported
-but `CN=Robert Bob) Smith,OU=domain_users,DC=rapid7,DC=com` is not
+but `CN=Robert Bob) Smith,OU=domain_users,DC=rapid7,DC=com` is not.
 
 All inputs to the query action must be correctly escaped.
   
