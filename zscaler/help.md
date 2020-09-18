@@ -54,7 +54,7 @@ Example input:
 
 #### Blacklist URL
 
-This action is used to add or remove  URLs from a blacklist.
+This action is used to add or remove URLs from a blacklist. These URLs will appear in the "Blocked Malicious URLs" section on the Advanced Threats Policy page.
 
 ##### Input
 
