@@ -70,7 +70,7 @@ class ADUtils:
         search_base = ','.join(dc_list)
         return search_base
 
-    def format_dn(self, dn: str) -> tuple:
+    def format_dn(self, dn: str) -> (str, str):
         """
         This method takes a dn and preforms all needed operations to make it ready for use with ldap
         :param dn: A dn
