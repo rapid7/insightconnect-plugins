@@ -1542,7 +1542,7 @@ actions:
       password:
         title: Password
         description: File encryption password, min. length 10 characters and cannot contain whitespace
-        type: string
+        type: password
         required: true
         example: "Rapid7 Insightconnect"
     output:

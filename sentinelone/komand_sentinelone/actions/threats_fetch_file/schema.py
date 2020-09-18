@@ -31,7 +31,9 @@ class ThreatsFetchFileInput(komand.Input):
     "password": {
       "type": "string",
       "title": "Password",
+      "displayType": "password",
       "description": "File encryption password, min. length 10 characters and cannot contain whitespace",
+      "format": "password",
       "order": 2
     }
   },
@@ -55,7 +57,7 @@ class ThreatsFetchFileOutput(komand.Output):
     "file": {
       "$ref": "#/definitions/file",
       "title": "File",
-      "description": "File of data to be imported into Anomali ThreatStream",
+      "description": "Base64 encoded threat file",
       "order": 1
     }
   },

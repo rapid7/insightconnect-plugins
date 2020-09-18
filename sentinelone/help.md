@@ -18,6 +18,7 @@ This plugin utilizes the SentinelOne API, the documentation is located in the Se
 * Sentinel one API administrative credentials
 
 # Documentation
+
 ## Setup
 
 The connection configuration accepts the following parameters:
@@ -38,11 +39,12 @@ Example input:
   "url": "https://example.sentinelone.com"
 }
 ```
+
 ## Technical Details
 
 ### Actions
 
-#### Threats Fetch File
+#### Fetch Threats File
 
 This action is used to fetch a file associated with the threat that matches the filter. Your user role must have permissions to Fetch Threat File - Admin, IR Team, SOC.
 
@@ -51,7 +53,7 @@ This action is used to fetch a file associated with the threat that matches the 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|integer|None|True|Threat ID|None|None|
-|password|string|None|True|File encryption password, min. length 10 characters and cannot contain whitespace|None|Rapid7 Insightconnect|
+|password|password|None|True|File encryption password, min. length 10 characters and cannot contain whitespace|None|Rapid7 Insightconnect|
 
 Example input:
 
@@ -65,7 +67,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|file|file|True|File of data to be imported into Anomali ThreatStream|
+|file|file|True|Base64 encoded threat file|
 
 Example output:
 
@@ -568,7 +570,6 @@ Example output:
 
 This action is used to blacklist and unblacklist a SHA1 hash. The blacklist is attempted for Linux, Windows, and MacOS operating systems and for all sites that the user has permission to manage.
 Note that when attempting to unblacklist a SHA1 hash by setting `blacklist_state` to `false`, the SentinelOne API will always return success even if the hash was not blacklisted to begin with.
-
 
 ##### Input
 
