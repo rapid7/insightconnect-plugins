@@ -43,6 +43,12 @@ class ADUtils:
 
         for idx, value in enumerate(dn_list):
             # Escape special characters
+            if value[0] == ' ':
+                value = value[:0] + '\\ ' + value[1:]
+            length = len(value) - 1
+            if value[length] == ' ':
+                value = value[:length] + '\\ '
+
             for escaped_char in character_list:
                 if f'\\{escaped_char}' not in value:
                     dn_list[idx] = dn_list[idx].replace(escaped_char, f'\\{escaped_char}')
