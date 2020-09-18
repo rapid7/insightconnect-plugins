@@ -1531,7 +1531,7 @@ actions:
         type: boolean
         required: true
   threats_fetch_file:
-    title: Threats Fetch File
+    title: Fetch Threats File
     description: Fetch a file associated with the threat that matches the filter. Your user role must have permissions to Fetch Threat File - Admin, IR Team, SOC
     input:
       id:
