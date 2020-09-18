@@ -21,6 +21,17 @@ class ZscalerAPI:
             "status"
         )
 
+    def blacklist_url(self, blacklist_step: str, urls: list) -> bool:
+        response = self.authenticated_call(
+            "POST",
+            f"security/advanced/blacklistUrls?action={blacklist_step}",
+            data=json.dumps({
+                "blacklistUrls": urls
+            })
+        )
+
+        return 200 <= response.status_code < 300
+
     def url_lookup(self, lookup_url: list):
         return self.authenticated_call(
             "POST",
@@ -84,7 +95,7 @@ class ZscalerAPI:
             if response.status_code == 404:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
             if 400 <= response.status_code < 500:
-                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.json().get("message", response.text))
             if response.status_code >= 500:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
