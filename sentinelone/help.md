@@ -1507,7 +1507,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.1.0 - Add new action Threats Fetch File
+* 3.1.0 - Add new action Fetch Threats File
 * 3.0.0 - Update help.md for the Extension Library | Update title in action Blacklist by IOC Hash, Get Activities, Count Summary and Connect to Network
 * 2.1.1 - Upgrade trigger Get Threats to only return threats since trigger start
 * 2.1.0 - Add `agent_active` field to input in action Search Agents
