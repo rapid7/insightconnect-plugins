@@ -4,7 +4,7 @@ products: [insightconnect]
 name: active_directory_ldap
 title: Active Directory LDAP
 description: This plugin utilizes Microsoft\'s Active Directory service to create and manage domains, users, and objects within a network
-version: 3.2.10
+version: 4.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -190,13 +190,13 @@ actions:
         type: boolean
         required: false
   modify_groups:
-    title: Modify Groups
-    description: Add or remove a user from an Active Directory group
+    title: Add or Remove an Object from Group
+    description: Add or remove an object from an Active Directory group
     input:
       distinguished_name:
         title: Distinguished Name
         type: string
-        description: The distinguished name of the user whose membership will be modified
+        description: The distinguished name of the object whose membership will be modified
         required: true
         example: CN=user,OU=domain_users,DC=mydomain,DC=com
       group_dn:
@@ -258,6 +258,34 @@ actions:
         example: mypassword
     output:
       success:
+        description: Operation status
+        type: boolean
+        required: false
+  modify_object:
+    title: Modify Object
+    description: Modify the attributes for an Active Directory object
+    input:
+      distinguished_name:
+        title: Distinguished Name
+        type: string
+        description: The distinguished name of the object to modify
+        required: true
+        example: CN=user,OU=domain_users,DC=example,DC=com
+      attribute_to_modify:
+        title: Attribute to Modify
+        description: The name of the attribute to modify
+        type: string
+        required: true
+        example: postalCode
+      attribute_value:
+        title: Attribute Value
+        description: The value of the attribute
+        type: string
+        required: true
+        example: 02114
+    output:
+      success:
+        title: Success
         description: Operation status
         type: boolean
         required: false

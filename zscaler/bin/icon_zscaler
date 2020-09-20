@@ -6,7 +6,7 @@ from icon_zscaler import connection, actions, triggers
 
 Name = "Zscaler"
 Vendor = "rapid7"
-Version = "1.0.0"
+Version = "1.1.0"
 Description = "Zscaler is a SaaS security platform that provides fast, secure connections between client applications, regardless of device, location, or network"
 
 
@@ -19,6 +19,8 @@ class ICONZscaler(insightconnect_plugin_runtime.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_action(actions.BlacklistUrl())
+
         self.add_action(actions.LookupUrl())
 
 

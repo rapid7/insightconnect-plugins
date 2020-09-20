@@ -15,11 +15,11 @@ class Delete(komand.Action):
                 output=DeleteOutput())
 
     def run(self, params={}):
+        formatter = ADUtils()
         conn = self.connection.conn
         dn = params.get('distinguished_name')
-        dn = ADUtils.dn_normalize(dn)
-        temp_list = ADUtils.dn_escape_and_split(dn)
-        dn = ','.join(temp_list)
+        dn = formatter.format_dn(dn)[0]
+        dn = formatter.unescape_asterisk(dn)
         conn.delete(dn)
         result = conn.result
         output = result['description']

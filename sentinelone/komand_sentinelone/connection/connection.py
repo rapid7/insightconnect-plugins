@@ -4,7 +4,9 @@ from .schema import ConnectionSchema, Input
 
 from komand_sentinelone.util.api import SentineloneAPI
 from komand.exceptions import ConnectionTestException, PluginException
-# from komand_sentinelone.util import api
+import zipfile
+import io
+import base64
 
 
 class Connection(komand.Connection):
@@ -108,6 +110,31 @@ class Connection(komand.Connection):
 
     def agents_action(self, action: str, agents_filter: str):
         return self._call_api("POST", "agents/actions/{}".format(action), {"filter": agents_filter})
+
+    def download_file(self, agent_filter: dict, password: str):
+        self.get_auth_token(self.url, self.username, self.password)
+        agent_filter["activityTypes"] = 86
+        agent_filter["sortBy"] = "createdAt"
+        agent_filter["sortOrder"] = "desc"
+        activities = self.activities_list(agent_filter)
+        self.get_auth_token(self.url, self.username, self.password)
+        response = self._call_api("GET", activities["data"][0]["data"]["filePath"][1:], full_response=True)
+        downloaded_zipfile = zipfile.ZipFile(io.BytesIO(response.content))
+        downloaded_zipfile.setpassword(password.encode("UTF-8"))
+
+        return {
+            "filename": activities["data"][-1]["data"]["fileDisplayName"],
+            "content": base64.b64encode(downloaded_zipfile.read(downloaded_zipfile.infolist()[-1])).decode("utf-8")
+        }
+
+    def threats_fetch_file(self, password: str, agents_filter: dict) -> int:
+        self.get_auth_token(self.url, self.username, self.password)
+        return self._call_api("POST", "threats/fetch-file", {
+            "data": {
+                "password": password
+            },
+            "filter": agents_filter
+        })
 
     def agents_support_action(self, action: str, agents_filter: str, module: str):
         return self._call_api("POST", "private/agents/support-actions/{}".format(action), {
@@ -280,9 +307,8 @@ class Connection(komand.Connection):
           }
         }).get("errors", [])
 
-    def _call_api(self, method, endpoint, json=None, params=None):
+    def _call_api(self, method, endpoint, json=None, params=None, full_response: bool = False):
         endpoint = self.url + "web/api/v2.0/" + endpoint
-        self.logger.info("Calling endpoint: " + endpoint)
         headers = self.make_token_header()
 
         if json:
@@ -296,6 +322,9 @@ class Connection(komand.Connection):
 
         try:
             response.raise_for_status()
+            if full_response:
+                return response
+
             return response.json()
         except requests.HTTPError:
             raise Exception("API call failed: " + response.text)

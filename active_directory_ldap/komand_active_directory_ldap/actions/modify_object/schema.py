@@ -4,52 +4,48 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add or remove an object from an Active Directory group"
+    DESCRIPTION = "Modify the attributes for an Active Directory object"
 
 
 class Input:
-    ADD_REMOVE = "add_remove"
+    ATTRIBUTE_TO_MODIFY = "attribute_to_modify"
+    ATTRIBUTE_VALUE = "attribute_value"
     DISTINGUISHED_NAME = "distinguished_name"
-    GROUP_DN = "group_dn"
     
 
 class Output:
     SUCCESS = "success"
     
 
-class ModifyGroupsInput(komand.Input):
+class ModifyObjectInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "add_remove": {
+    "attribute_to_modify": {
       "type": "string",
-      "title": "Add or Remove",
-      "description": "Add or remove the group",
-      "enum": [
-        "add",
-        "remove"
-      ],
+      "title": "Attribute to Modify",
+      "description": "The name of the attribute to modify",
+      "order": 2
+    },
+    "attribute_value": {
+      "type": "string",
+      "title": "Attribute Value",
+      "description": "The value of the attribute",
       "order": 3
     },
     "distinguished_name": {
       "type": "string",
       "title": "Distinguished Name",
-      "description": "The distinguished name of the object whose membership will be modified",
+      "description": "The distinguished name of the object to modify",
       "order": 1
-    },
-    "group_dn": {
-      "type": "string",
-      "title": "Group DN",
-      "description": "The Distinguished Name of the group to add or remove",
-      "order": 2
     }
   },
   "required": [
-    "add_remove",
-    "distinguished_name",
-    "group_dn"
+    "attribute_to_modify",
+    "attribute_value",
+    "distinguished_name"
   ]
 }
     """)
@@ -58,7 +54,7 @@ class ModifyGroupsInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class ModifyGroupsOutput(komand.Output):
+class ModifyObjectOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
