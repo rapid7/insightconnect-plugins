@@ -1,7 +1,7 @@
 # Description
 
 [Cisco Firepower Management Center](https://www.cisco.com/c/en/us/products/security/firepower-management-center/index.html) is your administrative nerve center for managing critical Cisco network security solutions.
-The Cisco Firepower Management Center InsightConnect plugin allows you to create a new block URL policy.
+The Cisco Firepower Management Center InsightConnect plugin allows you to block URLs and hosts.
 
 # Key Features
 
@@ -218,6 +218,36 @@ Example input:
 Example output:
 
 ```
+{
+  "address_objects": [
+    {
+      "description": " ",
+      "dnsResolution": "IPV4_AND_IPV6",
+      "id": "00000000-0000-0ed3-0000-021474836483",
+      "links": {
+        "parent": "https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/networkaddresses",
+        "self": "https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/fqdns/00000000-0000-0ed3-0000-021474836483"
+      },
+      "metadata": {
+        "domain": {
+          "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+          "name": "Global",
+          "type": "Domain"
+        },
+        "lastUser": {
+          "name": "admin"
+        },
+        "parentType": "NetworkAddress",
+        "timestamp": 1600277332623
+      },
+      "name": "TestAddressObjectFQDN1",
+      "overridable": false,
+      "type": "FQDN",
+      "value": "example.com"
+    }
+  ],
+  "found": true
+}
 ```
 
 #### Delete Address Object
