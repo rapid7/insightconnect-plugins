@@ -6,7 +6,7 @@ from icon_cisco_firepower_management_center import connection, actions, triggers
 
 Name = "Cisco Firepower Management Center"
 Vendor = "rapid7"
-Version = "1.1.0"
+Version = "1.2.0"
 Description = "This plugin utilizes Cisco Firepower Management Center to create URL block policies and manage address objects to block hosts"
 
 
@@ -19,11 +19,17 @@ class ICONCiscoFirepowerManagementCenter(komand.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_action(actions.AddAddressToGroup())
+
         self.add_action(actions.BlockUrlPolicy())
+
+        self.add_action(actions.CheckIfAddressInGroup())
 
         self.add_action(actions.CreateAddressObject())
 
         self.add_action(actions.DeleteAddressObject())
+
+        self.add_action(actions.RemoveAddressFromGroup())
 
 
 def main():
