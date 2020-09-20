@@ -1,12 +1,13 @@
 # Description
 
 [Cisco Firepower Management Center](https://www.cisco.com/c/en/us/products/security/firepower-management-center/index.html) is your administrative nerve center for managing critical Cisco network security solutions.
-The Cisco Firepower Management Center InsightConnect plugin allows you to block URLs and hosts.
+The Cisco Firepower Management Center InsightConnect plugin allows you to block URLs and hosts. Firewall best practices for blocking and unblocking hosts is to add and remove address objects from a group attached to an existing firewall policy such as a deny-all rule.
+This can be accomplished using the address object management actions in this plugin.
 
 # Key Features
 
 * Create block URL policy
-* Address object management to block and unblock hosts
+* Address object management to block and unblock hosts, and check if a host is already blocked
 
 # Requirements
 
