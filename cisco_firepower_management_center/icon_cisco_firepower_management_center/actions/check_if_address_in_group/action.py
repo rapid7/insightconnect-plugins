@@ -3,6 +3,7 @@ from .schema import CheckIfAddressInGroupInput, CheckIfAddressInGroupOutput, Inp
 # Custom imports below
 import ipaddress
 import re
+import validators
 
 
 class CheckIfAddressInGroup(komand.Action):
@@ -61,10 +62,7 @@ class CheckIfAddressInGroup(komand.Action):
 
     @staticmethod
     def _check_cidr(ip_address, ip_cidr):
-        if not ip_address or not ip_cidr or not re.match(
-                r"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
-                ip_address
-        ):
+        if not ip_address or not ip_cidr or not validators.ipv4_cidr(ip_address):
             return False
 
         return "/" in ip_cidr and ipaddress.IPv4Address(ip_address) in ipaddress.ip_network(ip_cidr).hosts()
