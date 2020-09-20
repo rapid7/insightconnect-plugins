@@ -62,7 +62,7 @@ class CheckIfAddressInGroup(komand.Action):
 
     @staticmethod
     def _check_cidr(ip_address, ip_cidr):
-        if not ip_address or not ip_cidr or not validators.ipv4_cidr(ip_address):
+        if not ip_address or not ip_cidr or validators.ipv4_cidr(ip_address):
             return False
 
         return "/" in ip_cidr and ipaddress.IPv4Address(ip_address) in ipaddress.ip_network(ip_cidr).hosts()
