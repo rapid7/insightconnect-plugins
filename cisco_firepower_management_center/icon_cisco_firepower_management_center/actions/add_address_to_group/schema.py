@@ -24,7 +24,7 @@ class AddAddressToGroupInput(komand.Input):
   "properties": {
     "address": {
       "type": "string",
-      "title": "Address",
+      "title": "Address Object",
       "description": "Name of address object",
       "order": 1
     },

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Removes an address object from a group"
+    DESCRIPTION = "Removes an address from a group"
 
 
 class Input:
@@ -25,7 +25,7 @@ class RemoveAddressFromGroupInput(komand.Input):
     "address": {
       "type": "string",
       "title": "Address",
-      "description": "The hostname, an IP address or subnet address expressed in CIDR notation to remove from group",
+      "description": "The address object name, hostname, an IP address or subnet address expressed in CIDR notation to remove from group",
       "order": 1
     },
     "group": {

@@ -457,7 +457,7 @@ actions:
         type: address_object
         required: false
   check_if_address_in_group:
-    title: Check If Address in Group
+    title: Check if Address in Group
     description: Checks if provided Address Object name or host exists in the Address Group
     input:
       group:
@@ -495,7 +495,7 @@ actions:
     description: Adds an existing address object to a group
     input:
       address:
-        title: Address
+        title: Address Object
         description: Name of address object
         type: string
         required: true
@@ -514,11 +514,11 @@ actions:
         required: false
   remove_address_from_group:
     title: Remove Address from Group
-    description: Removes an address object from a group
+    description: Removes an address from a group
     input:
       address:
         title: Address
-        description: The hostname, an IP address or subnet address expressed in CIDR notation to remove from group
+        description: The address object name, hostname, an IP address or subnet address expressed in CIDR notation to remove from group
         type: string
         required: true
         example: MaliciousHost

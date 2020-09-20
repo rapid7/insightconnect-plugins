@@ -46,6 +46,70 @@ Example input:
 
 ### Actions
 
+#### Check if Address in Group
+
+This action checks if provided Address Object name or host exists in the Address Group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|Address Object name, or IP, CIDR, or domain name when Enable Search is on|None|MaliciousHost|
+|enable_search|boolean|False|False|Boolean to search for contents of Address Objects for IP, CIDR, domain|None|False|
+|group|string|None|True|Name of address group to check|None|MaliciousAddressGroup|
+
+Example input:
+
+```
+{
+  "address": "MaliciousHost",
+  "enable_search": false,
+  "group": "MaliciousAddressGroup"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|address_objects|[]address_object|False|List of found address objects|
+|found|boolean|True|Was address found in group|
+
+Example output:
+
+```
+{
+  "address_objects": [
+    {
+      "description": " ",
+      "dnsResolution": "IPV4_AND_IPV6",
+      "id": "00000000-0000-0ed3-0000-021474836483",
+      "links": {
+        "parent": "https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/networkaddresses",
+        "self": "https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/fqdns/00000000-0000-0ed3-0000-021474836483"
+      },
+      "metadata": {
+        "domain": {
+          "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
+          "name": "Global",
+          "type": "Domain"
+        },
+        "lastUser": {
+          "name": "admin"
+        },
+        "parentType": "NetworkAddress",
+        "timestamp": 1600277332623
+      },
+      "name": "TestAddressObjectFQDN1",
+      "overridable": false,
+      "type": "FQDN",
+      "value": "example.com"
+    }
+  ],
+  "found": true
+}
+```
+
 #### Remove Address from Group
 
 This action removes an address object from a group.
@@ -54,7 +118,7 @@ This action removes an address object from a group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|The hostname, an IP address or subnet address expressed in CIDR notation to remove from group|None|MaliciousHost|
+|address|string|None|True|The address object name, hostname, an IP address or subnet address expressed in CIDR notation to remove from group|None|MaliciousHost|
 |group|string|None|True|Name of the group to remove the address from|None|MaliciousAddressGroup|
 
 Example input:
@@ -183,70 +247,6 @@ Example output:
       }
     }
   }
-}
-```
-
-#### Check If Address in Group
-
-This action checks if provided Address Object name or host exists in the Address Group.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|Address Object name, or IP, CIDR, or domain name when Enable Search is on|None|MaliciousHost|
-|enable_search|boolean|False|False|Boolean to search for contents of Address Objects for IP, CIDR, domain|None|False|
-|group|string|None|True|Name of address group to check|None|MaliciousAddressGroup|
-
-Example input:
-
-```
-{
-  "address": "MaliciousHost",
-  "enable_search": false,
-  "group": "MaliciousAddressGroup"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|address_objects|[]address_object|False|List of found address objects|
-|found|boolean|True|Was address found in group|
-
-Example output:
-
-```
-{
-  "address_objects": [
-    {
-      "description": " ",
-      "dnsResolution": "IPV4_AND_IPV6",
-      "id": "00000000-0000-0ed3-0000-021474836483",
-      "links": {
-        "parent": "https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/networkaddresses",
-        "self": "https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/fqdns/00000000-0000-0ed3-0000-021474836483"
-      },
-      "metadata": {
-        "domain": {
-          "id": "e276abec-e0f2-11e3-8169-6d9ed49b625f",
-          "name": "Global",
-          "type": "Domain"
-        },
-        "lastUser": {
-          "name": "admin"
-        },
-        "parentType": "NetworkAddress",
-        "timestamp": 1600277332623
-      },
-      "name": "TestAddressObjectFQDN1",
-      "overridable": false,
-      "type": "FQDN",
-      "value": "example.com"
-    }
-  ],
-  "found": true
 }
 ```
 
