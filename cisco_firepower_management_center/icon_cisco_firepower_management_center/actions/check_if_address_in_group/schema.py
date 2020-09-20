@@ -33,7 +33,7 @@ class CheckIfAddressInGroupInput(komand.Input):
     "enable_search": {
       "type": "boolean",
       "title": "Enable Search",
-      "description": "When enabled, the Address input will accept an IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name.",
+      "description": "When enabled, the Address input will accept an IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name",
       "default": false,
       "order": 3
     },

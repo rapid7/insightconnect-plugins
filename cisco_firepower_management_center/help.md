@@ -55,7 +55,7 @@ This action checks if the provided Address Object name or host exists in an Addr
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |address|string|None|True|Address Object name, or IP, CIDR, or domain name when Enable Search is on|None|MaliciousHost|
-|enable_search|boolean|False|False|When enabled, the Address input will accept an IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name.|None|False|
+|enable_search|boolean|False|False|When enabled, the Address input will accept an IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name|None|False|
 |group|string|None|True|Name of address group to check|None|MaliciousAddressGroup|
 
 Example input:
