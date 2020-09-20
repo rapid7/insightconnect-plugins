@@ -48,7 +48,7 @@ Example input:
 
 #### Check if Address in Group
 
-This action checks if provided Address Object name or host exists in the Address Group.
+This action checks if the provided Address Object name or host exists in an Address Group. If you don't know the Address Object by name, set Enable Search to true to allow a network indicator search in the Group. This is useful when working directly with IPs and domains.
 
 ##### Input
 
@@ -425,4 +425,3 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [Cisco Firepower Management Center](https://www.cisco.com/c/en/us/products/security/firepower-management-center/index.html)
-
