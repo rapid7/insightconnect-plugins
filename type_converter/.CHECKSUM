@@ -1,0 +1,67 @@
+{
+	"spec": "d5bbb9a75e649bd18da0909216212250",
+	"manifest": "5e23940122b948de71b4995ef5387956",
+	"setup": "cd4cce0a531bb7a419ae42cb1c1d73b9",
+	"schemas": [
+		{
+			"identifier": "array_to_string/schema.py",
+			"hash": "9ad15682d980eb6a35bcc18f61beab1c"
+		},
+		{
+			"identifier": "boolean_to_integer/schema.py",
+			"hash": "0a3283bb1b34431c0f5351eafa0198c7"
+		},
+		{
+			"identifier": "boolean_to_string/schema.py",
+			"hash": "7478b8206a9dedff7d05080df9ffc7f1"
+		},
+		{
+			"identifier": "combine_arrays/schema.py",
+			"hash": "0b9f2e370e1fffa9e2f0786056f5c2f2"
+		},
+		{
+			"identifier": "integer_to_boolean/schema.py",
+			"hash": "ad69b2ccaf9f9d1eed950fe990f07a58"
+		},
+		{
+			"identifier": "integer_to_number/schema.py",
+			"hash": "0e8a08b97be11d596f16f598f752a1e7"
+		},
+		{
+			"identifier": "integer_to_string/schema.py",
+			"hash": "8484d1086ebdfd3859a893cdf4305cd0"
+		},
+		{
+			"identifier": "number_to_integer/schema.py",
+			"hash": "5653eb3326046e0ae62f3142f5fc53df"
+		},
+		{
+			"identifier": "object_to_string/schema.py",
+			"hash": "c37132032fb515d2bec4e0abd3521b0a"
+		},
+		{
+			"identifier": "string_to_boolean/schema.py",
+			"hash": "7cd568e1880e5618a470d774149c4ae9"
+		},
+		{
+			"identifier": "string_to_float/schema.py",
+			"hash": "6d23575be91850cf78a3f948894ffbca"
+		},
+		{
+			"identifier": "string_to_integer/schema.py",
+			"hash": "61f21244ee4ca0fb0557636f5a4d09ba"
+		},
+		{
+			"identifier": "string_to_list/schema.py",
+			"hash": "bce6a855d53a1900742797183e87de9b"
+		},
+		{
+			"identifier": "string_to_object/schema.py",
+			"hash": "c2e3ca2072915a0978644247fb147f62"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "da5382221ca2a33a2f854e17b068d502"
+		}
+	]
+}
