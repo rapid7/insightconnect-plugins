@@ -676,7 +676,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.1.0 - Add trigger Incident Added
+* 4.1.0 - Add trigger Incident Created
 * 4.0.0 - New Number output to create incidient action
 * 3.1.1 - New spec and help.md format for the Extension Library
 * 3.1.0 - Add action Get Incident Comments and Work Notes
