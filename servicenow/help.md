@@ -27,11 +27,6 @@ The connection configuration accepts the following parameters:
 |timeout|integer|30|False|The interval in seconds before abandoning an attempt to access ServiceNow|None|None|
 |url|string|None|True|The full URL for your instance of ServiceNow, e.g. https://instance.servicenow.com|None|None|
 
-Example input:
-
-```
-```
-
 ## Technical Details
 
 ### Actions
