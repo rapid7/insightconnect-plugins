@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="servicenow-rapid7-plugin",
-      version="4.0.0",
+      version="4.1.0",
       description="ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes",
       author="rapid7",
       author_email="",

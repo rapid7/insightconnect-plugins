@@ -27,6 +27,11 @@ The connection configuration accepts the following parameters:
 |timeout|integer|30|False|The interval in seconds before abandoning an attempt to access ServiceNow|None|None|
 |url|string|None|True|The full URL for your instance of ServiceNow, e.g. https://instance.servicenow.com|None|None|
 
+Example input:
+
+```
+```
+
 ## Technical Details
 
 ### Actions
@@ -592,6 +597,40 @@ Example output:
 
 ### Triggers
 
+#### Incident Added
+
+This trigger identifies if a new incident has been added.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|interval|integer|5|False|How often to detect new incidents (in seconds)|None|5|
+|query|string|None|False|Non-encoded query string to match incident records|None|short_description=Newbug|
+
+Example input:
+
+```
+{
+  "interval": 5,
+  "query": "short_description=Newbug"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|system_id|string|True|System ID of new incident|
+
+Example output:
+
+```
+{
+  "system_id": "45dd2115db1ebf00a7e99b3c8a9619da"
+}
+```
+
 #### Incident Changed
 
 This trigger reports changes of the given fields in the given Incident.
@@ -637,6 +676,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.1.0 - Add trigger Incident Added
 * 4.0.0 - New Number output to create incidient action
 * 3.1.1 - New spec and help.md format for the Extension Library
 * 3.1.0 - Add action Get Incident Comments and Work Notes
