@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Identifies if a new incident has been added"
+    DESCRIPTION = "Identifies if a new incident has been created"
 
 
 class Input:
@@ -18,7 +18,7 @@ class Output:
     SYSTEM_ID = "system_id"
     
 
-class IncidentAddedInput(komand.Input):
+class IncidentCreatedInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -45,7 +45,7 @@ class IncidentAddedInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class IncidentAddedOutput(komand.Output):
+class IncidentCreatedOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",

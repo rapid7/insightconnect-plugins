@@ -597,9 +597,9 @@ Example output:
 
 ### Triggers
 
-#### Incident Added
+#### Incident Created
 
-This trigger identifies if a new incident has been added.
+This trigger identifies if a new incident has been created.
 
 ##### Input
 
@@ -627,7 +627,7 @@ Example output:
 
 ```
 {
-  "system_id": "45dd2115db1ebf00a7e99b3c8a9619da"
+  "system_id": "280b3cb71b9f1450c9768622dd4bcb32"
 }
 ```
 

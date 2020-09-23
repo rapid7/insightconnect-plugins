@@ -1,19 +1,17 @@
 import komand
 import time
-from .schema import IncidentAddedInput, IncidentAddedOutput, Input, Output, Component
-
-
+from .schema import IncidentCreatedInput, IncidentCreatedOutput, Input, Output, Component
 # Custom imports below
 
 
-class IncidentAdded(komand.Trigger):
+class IncidentCreated(komand.Trigger):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='incident_added',
-            description=Component.DESCRIPTION,
-            input=IncidentAddedInput(),
-            output=IncidentAddedOutput())
+                name='incident_created',
+                description=Component.DESCRIPTION,
+                input=IncidentCreatedInput(),
+                output=IncidentCreatedOutput())
         self.found = {}
         self.url = ""
         self.method = "get"

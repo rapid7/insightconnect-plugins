@@ -401,9 +401,9 @@ triggers:
         description: JSON object representing changed fields (map of field name to previous and current values)
         type: object
         required: true
-  incident_added:
-    title: Incident Added
-    description: Identifies if a new incident has been added
+  incident_created:
+    title: Incident Created
+    description: Identifies if a new incident has been created
     input:
       query:
         title: Query
