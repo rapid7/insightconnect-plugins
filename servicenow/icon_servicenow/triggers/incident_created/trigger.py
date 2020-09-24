@@ -1,10 +1,13 @@
-import komand
+import insightconnect_plugin_runtime
 import time
 from .schema import IncidentCreatedInput, IncidentCreatedOutput, Input, Output, Component
 # Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
+from datetime import datetime, timezone, timedelta
+import pytz
 
 
-class IncidentCreated(komand.Trigger):
+class IncidentCreated(insightconnect_plugin_runtime.Trigger):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -12,57 +15,62 @@ class IncidentCreated(komand.Trigger):
                 description=Component.DESCRIPTION,
                 input=IncidentCreatedInput(),
                 output=IncidentCreatedOutput())
-        self.found = {}
-        self.url = ""
-        self.method = "get"
-        self.query = ""
+        self.last_poll_time = (datetime.now(tz=timezone.utc) - timedelta(seconds=1)).replace(microsecond=0)
+        self.most_recent_system_id = ""
+        self.last_sys_id = ""
 
-    def initialize(self):
-        if self.query:
-            response = self.connection.request.make_request(
-                self.url, self.method, params=self.query)
-        else:
-            response = self.connection.request.make_request(self.url, self.method)
+    def poll(self, url, method, query, utc):
+        response = self.connection.request.make_request(url, method, params=query)
 
         try:
-            results = response.get("resource").get("result")
+            results = response["resource"].get("result")
         except KeyError as e:
             raise PluginException(preset=PluginException.Preset.UNKNOWN,
                                   data=response.text) from e
 
-        sys_ids = [result.get("sys_id") for result in results]
-        for sys_id in sys_ids:
-            self.found[sys_id] = True
+        incidents = [(result.get("sys_created_on"), result.get("sys_id")) for result in results
+                     if result.get("sys_created_on") is not None and result.get("sys_id") is not None]
 
-    def poll(self):
-        if self.query:
-            response = self.connection.request.make_request(
-                self.url, self.method, params=self.query)
-        else:
-            response = self.connection.request.make_request(self.url, self.method)
+        # Incidents stored from least to most recent date
+        # Loop from most recent incident to least recent incident
+        for i in range(len(incidents)-1, -1, -1):
+            incident = incidents[i]
+            d = datetime.strptime(incident[0], "%Y-%m-%d %H:%M:%S")
 
-        try:
-            new_results = response.get("resource").get("result")
-        except KeyError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN,
-                                  data=response.text) from e
+            # Turn offset naive date into offset aware date
+            date_aware = utc.localize(d)
 
-        new_sys_ids = [result.get("sys_id") for result in new_results]
+            sys_id = incident[1]
 
-        for new_sys_id in new_sys_ids:
-            if new_sys_id not in self.found:
-                self.logger.info("Found new incident: %s", new_sys_id)
-                self.found[new_sys_id] = True
-                self.send({Output.SYSTEM_ID: new_sys_id})
+            # Since descending date list, an incident that is after last polling time can break the loop
+            # Other condition ensures no duplicate triggers
+            # if date_aware > self.last_poll_time and sys_id != self.last_sys_id:
+            if date_aware >= self.last_poll_time and sys_id != self.last_sys_id:
+                self.connection.logger.info(f"Found new incident: {sys_id}")
+                self.send({Output.SYSTEM_ID: sys_id})
+            else:
+                break
+
+        if incidents:
+            self.last_sys_id = incidents[len(incidents)-1][1]
+
+        # minus ~1 second to ensure that incidents between polls are not missed
+        adjusted_poll = datetime.now(tz=timezone.utc) - timedelta(seconds=1)
+        self.last_poll_time = adjusted_poll.replace(microsecond=0)
 
     def run(self, params={}):
-        self.url = self.connection.incident_url
+        url = self.connection.incident_url
+        method = "get"
+        utc = pytz.timezone('UTC')
+
+        # Pulls directly from SNOW db to grab creation date in UTC
+        query = {"sysparm_display_value": False, "sysparm_query": "ORDERBYsys_created_on"}
 
         if params.get(Input.QUERY):
-            self.query = {"sysparm_query": params.get(Input.QUERY)}
-
-        self.initialize()
+            query["sysparm_query"] = params.get(Input.QUERY) + "^ORDERBYsys_created_on"
+        else:
+            query["sysparm_query"] = "ORDERBYsys_created_on"
 
         while True:
-            self.poll()
+            self.poll(url, method, query, utc)
             time.sleep(params.get(Input.INTERVAL, 5))

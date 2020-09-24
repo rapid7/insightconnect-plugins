@@ -407,15 +407,15 @@ triggers:
     input:
       query:
         title: Query
-        description: Non-encoded query string to match incident records
+        description: Non-encoded query string to match new incident records (will poll for any new incident if query is omitted)
         type: string
         required: false
         example: short_description=Newbug
       interval:
         title: Interval
-        description: How often to detect new incidents (in seconds)
+        description: How often to poll for new incidents (in seconds)
         type: integer
-        required: false
+        required: true
         default: 5
         example: 5
     output:

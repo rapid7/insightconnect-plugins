@@ -600,8 +600,8 @@ This trigger identifies if a new incident has been created.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|interval|integer|5|False|How often to detect new incidents (in seconds)|None|5|
-|query|string|None|False|Non-encoded query string to match incident records|None|short_description=Newbug|
+|interval|integer|5|True|How often to poll for new incidents (in seconds)|None|5|
+|query|string|None|False|Non-encoded query string to match new incident records (will poll for any new incident if query is omitted)|None|short_description=Newbug|
 
 Example input:
 
