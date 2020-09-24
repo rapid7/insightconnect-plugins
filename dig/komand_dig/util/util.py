@@ -4,6 +4,9 @@ from komand_dig.util import util
 
 
 def safe_parse(regex):
+    if not regex:
+        return "NO MATCHES FOUND"
+
     regex = regex.group(1) if re else "NO MATCHES FOUND"
     return regex
 

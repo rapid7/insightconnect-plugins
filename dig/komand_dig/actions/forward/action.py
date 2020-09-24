@@ -29,6 +29,8 @@ class Forward(insightconnect_plugin_runtime.Action):
                 domain = util.safe_parse(re.search(r'SOA\t(\S+)', answer_section))
                 if util.not_empty(domain):
                     domain = domain.rstrip('.')
+                else:
+                    self.logger.info("No matches found for SOA in answer.")
                 ans = [domain]
             else:
                 ans = answer_section.split('\n')
