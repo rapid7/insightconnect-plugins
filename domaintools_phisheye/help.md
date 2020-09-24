@@ -177,7 +177,7 @@ If a term is searched for in the Domain List action but not monitored in PhishEy
 
 # Version History
 
-* 1.0.1 - Add `0` parameter to enum in Domain List action
+* 1.0.1 - Add `0` parameter to Days Back input in Domain List action to get current day results
 * 1.0.0 - Initial plugin
 
 # Links
