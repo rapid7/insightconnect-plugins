@@ -55,7 +55,7 @@ Example input:
 ```
 {
   "days_back": 1,
-  "query": "example"
+  "query": "rapid7"
 }
 ```
 
