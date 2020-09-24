@@ -27,10 +27,8 @@ Example input:
 
 ```
 {
-  "api_key": {
-    "secretKey": "11111-aaaaa-aaa11-111aa-aaa11"
-  },
-  "username": "username"
+  "api_key": "11111-aaaaa-aaa11-111aa-aaa11",
+  "username": "user1"
 }
 ```
 
@@ -47,15 +45,15 @@ Terms must be created (monitored) in PhishEye before they can be returned by thi
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|days_back|integer|None|False|Use this parameter in exceptional circumstances where you need to find domains up to seven days prior to the current date. Set the value to an integer in the range of 1-7|[1, 2, 3, 4, 5, 6, 7]|1|
+|days_back|integer|None|False|Use this parameter in exceptional circumstances where you need to find domains up to seven days prior to the current date. Set the value to an integer in the range of 1-7|[0, 1, 2, 3, 4, 5, 6, 7]|1|
 |query|string|None|True|Term for which the day's domains are desired|None|example|
 
 Example input:
 
 ```
 {
-  "query": "rapid7",
-  "days_back": 10
+  "days_back": 1,
+  "query": "example"
 }
 ```
 
@@ -177,6 +175,7 @@ If a term is searched for in the Domain List action but not monitored in PhishEy
 
 # Version History
 
+* 1.0.1 - Add `0` parameter to enum in Domain List action
 * 1.0.0 - Initial plugin
 
 # Links
