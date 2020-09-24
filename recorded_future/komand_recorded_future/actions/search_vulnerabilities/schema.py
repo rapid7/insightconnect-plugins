@@ -543,6 +543,14 @@ class SearchVulnerabilitiesOutput(komand.Output):
       "type": "object",
       "title": "vulnerability_search_data",
       "properties": {
+        "analystNotes": {
+          "type": "array",
+          "title": "Analyst Notes",
+          "items": {
+            "type": "object"
+          },
+          "order": 18
+        },
         "commonNames": {
           "type": "array",
           "title": "CommonNames",
