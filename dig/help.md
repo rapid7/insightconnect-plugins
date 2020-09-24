@@ -194,7 +194,7 @@ Common examples:
 
 # Version History
 
-* 1.0.7 - Improve error handling in Forward Lookup action
+* 1.0.7 - Fix bug in `safe_parse` function
 * 1.0.6 - Upgrade to latest Python plugin runtime | Define `cloud_ready` in spec
 * 1.0.5 - Update to v4 Python plugin runtime
 * 1.0.4 - Add example inputs
