@@ -27,8 +27,10 @@ Example input:
 
 ```
 {
-  "api_key": "11111-aaaaa-aaa11-111aa-aaa11",
-  "username": "user1"
+  "api_key": {
+    "secretKey": "11111-aaaaa-aaa11-111aa-aaa11"
+  },
+  "username": "username"
 }
 ```
 
