@@ -79,8 +79,8 @@ def parse_fields(yaml_obj, md_obj, time_saved):
     manifest_obj["overview"] = yaml_obj.get("description")
 
     # Description -- mandatory
-    # Tricky extraction of description from .md
-    manifest_obj["description"] = clean_chars(md_obj.get("Description"))
+    # "What you see when you click into an extension" -- also from spec, not help.md
+    manifest_obj["description"] = yaml_obj.get("description")
 
     # Key Features -- mandatory
     # From .md
