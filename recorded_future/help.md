@@ -106,6 +106,13 @@ This action is used to search for results related to a specific parent domain.
 Example input:
 
 ```
+{
+  "direction": "asc",
+  "from": 0,
+  "limit": 10,
+  "orderby": "Riskscore",
+  "parent": "example.com"
+}
 ```
 
 ##### Output
