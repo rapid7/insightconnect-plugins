@@ -1313,6 +1313,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.1 - Change `icon.png`
 * 2.0.0 - Add risk output to Lookup Vulnerability
 * 1.5.5 - Fix NoneType has no len() | Fix enums in search hashes
 * 1.5.4 - Add example inputs | Fix schema bug where `criticality` output was improperly defined as an integer in List Domain Risk Rules, List Hash Risk Rules, List IP Addresses Risk Rules and List Vulnerability Risk Rules actions
