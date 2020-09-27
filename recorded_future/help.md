@@ -106,13 +106,6 @@ This action is used to search for results related to a specific parent domain.
 Example input:
 
 ```
-{
-  "direction": "asc",
-  "from": 0,
-  "limit": 10,
-  "orderby": "Riskscore",
-  "parent": "example.com"
-}
 ```
 
 ##### Output
@@ -547,6 +540,9 @@ This action is used to returns a list of hashes matching a specified risk rule.
 Example input:
 
 ```
+{
+  "list": "positive_malware_verdict"
+}
 ```
 
 ##### Output
@@ -1269,9 +1265,6 @@ This action is used to fetch information about a specific vulnerability by CVE o
 Example input:
 
 ```
-{
-  "id": "CVE-2014-0160"
-}
 ```
 
 ##### Output

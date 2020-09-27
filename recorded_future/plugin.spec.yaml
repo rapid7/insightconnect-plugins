@@ -27,6 +27,67 @@ hub_tags:
 enable_cache: false
 language: python
 types:
+  context_entities:
+    description:
+      type: string
+      required: false
+    id:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    type:
+      type: string
+      required: false
+  labels:
+    id:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    type:
+      type: string
+      required: false
+  attributes:
+    context_entities:
+      type: "[]context_entities"
+      required: false
+    labels:
+      type: "[]labels"
+      required: false
+    note_entities:
+      type: "[]labels"
+      required: false
+    published:
+      type: string
+      required: false
+    text:
+      type: string
+      required: false
+    title:
+      type: string
+      required: false
+    topic:
+      type: context_entities
+      required: false
+    validated_on:
+      type: string
+      required: false
+    validation_urls:
+      type: "[]labels"
+      required: false
+  analystNote:
+    attributes:
+      type: attributes
+      required: false
+    id:
+      type: string
+      required: false
+    source:
+      type: labels
+      required: false
   counts:
     count:
       type: integer
@@ -262,7 +323,7 @@ types:
       required: false
     analystNotes:
       title: Analyst Notes
-      type: '[]object'
+      type: '[]analystNote'
       required: false
   location_data:
     continent:
