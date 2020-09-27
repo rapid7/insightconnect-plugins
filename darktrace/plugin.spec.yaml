@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: darktrace
 title: DarkTrace
-version: 1.1.0
+version: 1.1.1
 description: Automate the management of watched domains and alerting using the Darktrace plugin
 vendor: rapid7
 support: rapid7
@@ -625,9 +625,9 @@ triggers:
         required: false
       minscore:
         title: Min Score
-        type: integer
+        type: number
         description: Return only breaches with a minimum score
-        example: 0
+        example: 0.1
         required: false
       pbid:
         title: PBID

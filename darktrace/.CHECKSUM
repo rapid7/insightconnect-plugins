@@ -1,7 +1,7 @@
 {
-	"spec": "2803e24a3c3885b59ea6ecb8234f37e3",
-	"manifest": "4622ded0ffdb3f46004f286fd361c564",
-	"setup": "6d83e3bed46cc4635191886ae02d50f6",
+	"spec": "1ec4aeebc49d71cb5730d902ca33fc48",
+	"manifest": "e639aca28471b7af7775b90a8883dfc9",
+	"setup": "d24a377f7add7dfb1c11b0ab296a5cfd",
 	"schemas": [
 		{
 			"identifier": "update_watched_domains/schema.py",
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "pull_alerts/schema.py",
-			"hash": "b30f46c573c3cb56bc21075b684c2329"
+			"hash": "f02d554b326b08eac65ac745361423be"
 		}
 	]
 }

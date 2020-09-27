@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="darktrace-rapid7-plugin",
-      version="1.1.0",
+      version="1.1.1",
       description="Automate the management of watched domains and alerting using the Darktrace plugin",
       author="rapid7",
       author_email="",

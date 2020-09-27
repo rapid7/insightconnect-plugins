@@ -28,14 +28,18 @@ class PullAlerts(insightconnect_plugin_runtime.Trigger):
         while True:
             data = []
             time.sleep(frequency)
+            did = params.get(Input.DID, 0)
+            minscore = params.get(Input.MINSCORE, 0)
+            pbid = params.get(Input.PBID, 0)
+            pid = params.get(Input.PID, 0)
             try:
                 self.logger.info(f"Getting response for last {frequency} seconds.")
                 data = self.connection.client.model_breaches({
                     "starttime": int((time.time() - frequency) * 1000),
-                    "did": params.get(Input.DID),
-                    "minscore": params.get(Input.MINSCORE),
-                    "pbid": params.get(Input.PBID),
-                    "pid": params.get(Input.PID),
+                    "did": did if did != 0 else None,
+                    "minscore": minscore if minscore != 0 else None,
+                    "pbid": pbid if pbid != 0 else None,
+                    "pid": pid if pid != 0 else None,
                     "uuid": params.get(Input.UUID)
                 })
             except PluginException as e:

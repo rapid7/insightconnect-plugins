@@ -42,7 +42,7 @@ class PullAlertsInput(insightconnect_plugin_runtime.Input):
       "order": 1
     },
     "minscore": {
-      "type": "integer",
+      "type": "number",
       "title": "Min Score",
       "description": "Return only breaches with a minimum score",
       "order": 3
