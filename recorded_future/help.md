@@ -1265,6 +1265,9 @@ This action is used to fetch information about a specific vulnerability by CVE o
 Example input:
 
 ```
+{
+  "id": "CVE-2014-0160"
+}
 ```
 
 ##### Output
