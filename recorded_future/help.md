@@ -34,13 +34,46 @@ Example input:
 
 ```
 {
-  "api_key": "{\"secretKey\": \"9de5069c5afe602b2ea0a04b66beb2c0\"}"
+  "api_key": {
+    "secretKey":"9de5069c5afe602b2ea0a04b66beb2c0"
+  }
 }
 ```
 
 ## Technical Details
 
 ### Actions
+
+#### List URL Risk Rules
+
+This action is used to list available filtration rules for URL risk lists.
+
+##### Input
+
+_This action does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|risk_rules|[]risk_rule|True|Risk Rules for URL|
+
+Example output:
+
+```
+{
+  "risk_rules": [
+    {
+      "count": 2239,
+      "criticality": 3,
+      "criticalityLabel": "Malicious",
+      "description": "Compromised URL",
+      "name": "compromisedUrl",
+      "relatedEntities": []
+    }
+  ]
+}
+```
 
 #### List IP Addresses Risk Rules
 
@@ -1313,6 +1346,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.1.0 - Add new action List URL Risk Rules
 * 2.0.1 - Change `icon.png`
 * 2.0.0 - Add risk output to Lookup Vulnerability
 * 1.5.5 - Fix NoneType has no len() | Fix enums in search hashes

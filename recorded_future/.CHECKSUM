@@ -1,7 +1,7 @@
 {
-	"spec": "6699941ba2993be3ef23ff767deca892",
-	"manifest": "6b8a05445f7ae4d35bebed609819af0a",
-	"setup": "26dad3d5e8666ce083a76357ec6a3a67",
+	"spec": "724da2dc1c9d5cc7ff1250114e50886b",
+	"manifest": "62f33ccfb8cc264101fd11d384a92244",
+	"setup": "6b3bfc1eaeb8720264fd50365380e16c",
 	"schemas": [
 		{
 			"identifier": "download_IP_addresses_risk_list/schema.py",
@@ -30,6 +30,10 @@
 		{
 			"identifier": "list_hash_risk_rules/schema.py",
 			"hash": "34f2f9e2a90b2391c5088f2973b6c1b6"
+		},
+		{
+			"identifier": "list_url_risk_rules/schema.py",
+			"hash": "1d74e73cc21f93626103ac512a1955e0"
 		},
 		{
 			"identifier": "list_vulnerability_risk_rules/schema.py",
