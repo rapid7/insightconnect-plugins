@@ -1,7 +1,7 @@
 {
-	"spec": "6699941ba2993be3ef23ff767deca892",
-	"manifest": "6b8a05445f7ae4d35bebed609819af0a",
-	"setup": "26dad3d5e8666ce083a76357ec6a3a67",
+	"spec": "804bff30cc6363e46a74458fc5fa99bc",
+	"manifest": "a3abff743008ade3daca35fdf4a68d3a",
+	"setup": "db8c714c56662c4db2029a644391f71b",
 	"schemas": [
 		{
 			"identifier": "download_IP_addresses_risk_list/schema.py",
@@ -82,6 +82,10 @@
 		{
 			"identifier": "search_malware/schema.py",
 			"hash": "eae440de63306c0c22d50497b9776abf"
+		},
+		{
+			"identifier": "search_urls/schema.py",
+			"hash": "3efa8189363b6453605cfc67af199f7b"
 		},
 		{
 			"identifier": "search_vulnerabilities/schema.py",

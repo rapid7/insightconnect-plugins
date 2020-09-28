@@ -19,4 +19,5 @@ from .search_domains.action import SearchDomains
 from .search_entity_lists.action import SearchEntityLists
 from .search_hashes.action import SearchHashes
 from .search_malware.action import SearchMalware
+from .search_urls.action import SearchUrls
 from .search_vulnerabilities.action import SearchVulnerabilities

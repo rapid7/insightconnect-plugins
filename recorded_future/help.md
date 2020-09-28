@@ -34,13 +34,54 @@ Example input:
 
 ```
 {
-  "api_key": "{\"secretKey\": \"9de5069c5afe602b2ea0a04b66beb2c0\"}"
+  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
 ## Technical Details
 
 ### Actions
+
+#### Search URLs
+
+This action this action is used to search for data related to URLs.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|direction|string|None|False|Sort results ascending/descending|['asc', 'desc']|asc|
+|fields|[]string|None|False|Fields to include|['analystNotes', 'counts', 'enterpriseLists', 'entity', 'relatedEntities', 'metrics', 'risk', 'sightings', 'timestamps']|counts|
+|from|number|1|False|Number of initial records to skip|None|0|
+|limit|number|10|False|Number of results to retrieve, up to 100|None|10|
+|orderby|string|None|False|Which property to sort the results by|['Created', 'Criticality', 'Lastseen', 'Firstseen', 'Modified', 'Riskscore', 'Rules', 'Sevendayshits', 'Sixtydayshits', 'Totalhits']|Riskscore|
+|riskRule|string|None|False|Risk rule od data|['Historically Reported by Insikt Group', 'C&C URL', 'Compromised URL', 'Historically Reported as a Defanged URL', 'Historically Reported by DHS AIS', 'Historically Reported Fraudulent Content', 'Historically Reported in Threat List', 'Historically Detected Malicious Browser Exploits', 'Historically Detected Malware Distribution', 'Historically Detected Cryptocurrency Mining Techniques', 'Historically Detected Phishing Techniques', 'Active Phishing URL', 'Positive Malware Verdict', 'Ransomware Distribution URL', 'Recently Reported by Insikt Group', 'Recently Reported as a Defanged URL', 'Recently Reported by DHS AIS', 'Recently Reported Fraudulent Content', 'Recently Detected Malicious Browser Exploits', 'Recently Detected Malware Distribution', 'Recently Detected Cryptocurrency Mining Techniques', 'Recently Detected Phishing Techniques', 'Recently Referenced by Insikt Group', 'Recently Reported Spam or Unwanted Content', 'Recently Detected Suspicious Content', 'Recently Active URL on Weaponized Domain', 'Historically Referenced by Insikt Group', 'Historically Reported Spam or Unwanted Content', 'Historically Detected Suspicious Content']|Historically Reported by Insikt Group|
+|riskScore|string|None|False|Risk score of data|None|3/29|
+
+Example input:
+
+```
+{
+  "direction": "asc",
+  "fields": "counts",
+  "from": 0,
+  "limit": 10,
+  "orderby": "Riskscore",
+  "riskRule": "Historically Reported by Insikt Group",
+  "riskScore": "3/29"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|data|search_data|True|Search result|
+
+Example output:
+
+```
+```
 
 #### List IP Addresses Risk Rules
 
@@ -106,13 +147,6 @@ This action is used to search for results related to a specific parent domain.
 Example input:
 
 ```
-{
-  "direction": "asc",
-  "from": 0,
-  "limit": 10,
-  "orderby": "Riskscore",
-  "parent": "example.com"
-}
 ```
 
 ##### Output
@@ -547,6 +581,9 @@ This action is used to returns a list of hashes matching a specified risk rule.
 Example input:
 
 ```
+{
+  "list": "positive_malware_verdict"
+}
 ```
 
 ##### Output
@@ -1269,9 +1306,6 @@ This action is used to fetch information about a specific vulnerability by CVE o
 Example input:
 
 ```
-{
-  "id": "CVE-2014-0160"
-}
 ```
 
 ##### Output
@@ -1313,6 +1347,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.2.0 - Add new action Search URLs
 * 2.0.1 - Change `icon.png`
 * 2.0.0 - Add risk output to Lookup Vulnerability
 * 1.5.5 - Fix NoneType has no len() | Fix enums in search hashes
