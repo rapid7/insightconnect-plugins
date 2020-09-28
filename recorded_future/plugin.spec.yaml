@@ -1272,3 +1272,21 @@ actions:
         description: Risk
         type: risk
         required: false
+  lookup_alert:
+    title: Lookup Alert
+    description: Get information about an Alert
+    input:
+      alert_id:
+        title: Alert ID
+        description: Alert ID
+        type: string
+        example: xxxx
+        required: true
+    output:
+      alert:
+        title: Alert
+        description: Alert Details
+        type: object
+        required: true
+
+

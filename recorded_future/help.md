@@ -34,13 +34,42 @@ Example input:
 
 ```
 {
-  "api_key": {"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}
+  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
 ## Technical Details
 
 ### Actions
+
+#### Lookup Alert
+
+This action is used to get information about an Alert.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|alert_id|string|None|True|Alert ID|None|xxxx|
+
+Example input:
+
+```
+{
+  "alert_id": "xxxx"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|alert|object|True|Alert Details|
+
+Example output:
+
+```
+```
 
 #### List IP Addresses Risk Rules
 
@@ -224,13 +253,6 @@ This action is used to search for data related to malware.
 Example input:
 
 ```
-{
-  "direction": "asc",
-  "freetext": "example",
-  "from": 0,
-  "limit": 10,
-  "orderby": "Riskscore"
-}
 ```
 
 ##### Output

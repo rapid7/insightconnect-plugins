@@ -1,6 +1,6 @@
 {
-	"spec": "ff55013c881aa2a6345d61418e427af7",
-	"manifest": "6b8a05445f7ae4d35bebed609819af0a",
+	"spec": "16edc0edd4fbb0244c6ee39c1031e018",
+	"manifest": "b244fa9bd639ff9ce7d68a8f7c396a6b",
 	"setup": "26dad3d5e8666ce083a76357ec6a3a67",
 	"schemas": [
 		{
@@ -38,6 +38,10 @@
 		{
 			"identifier": "lookup_IP_address/schema.py",
 			"hash": "d2f1b1dd83e284479b5e58b3640ad533"
+		},
+		{
+			"identifier": "lookup_alert/schema.py",
+			"hash": "83ffd5582751535431799803ca7c3baf"
 		},
 		{
 			"identifier": "lookup_domain/schema.py",
