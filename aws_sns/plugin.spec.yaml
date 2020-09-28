@@ -1,0 +1,794 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: aws_sns
+title: AWS SNS
+description: Amazon Simple Notification Service (Amazon SNS) is a web service that enables you to build distributed web-enabled applications
+version: 0.1.0
+vendor: rapid7
+support: community
+status: []
+cloud_ready: false
+tags:
+  - aws
+types:
+  response_metadata:
+    request_id:
+      title: "Request Id"
+      type: string
+      description: "Unique identifier for the request"
+      required: true
+    http_status_code:
+      title: "Http Status Code"
+      type: integer
+      description: "HTTP status code for the request"
+      required: true
+  topic:
+    topic_arn:
+      title: "Topic Arn"
+      type: string
+      description: "The topics ARN"
+      required: false
+  subscription:
+    subscription_arn:
+      title: "Subscription Arn"
+      type: string
+      description: "The subscriptions ARN"
+      required: false
+    owner:
+      title: "Owner"
+      type: string
+      description: "The subscriptions owner"
+      required: false
+    protocol:
+      title: "Protocol"
+      type: string
+      description: "The subscriptions protocol"
+      required: false
+    endpoint:
+      title: "Endpoint"
+      type: string
+      description: "The subscriptions endpoint (format depends on the protocol)"
+      required: false
+    topic_arn:
+      title: "Topic Arn"
+      type: string
+      description: "The ARN of the subscriptions topic"
+      required: false
+  platform_application:
+    platform_application_arn:
+      title: "Platform Application Arn"
+      type: string
+      description: "PlatformApplicationArn for platform application object"
+      required: false
+    attributes:
+      title: "Attributes"
+      type: object
+      description: "Attributes for platform application object"
+      required: false
+  endpoint:
+    endpoint_arn:
+      title: "Endpoint Arn"
+      type: string
+      description: "EndpointArn for mobile app and device"
+      required: false
+    attributes:
+      title: "Attributes"
+      type: object
+      description: "Attributes for endpoint"
+      required: false
+connection:
+  aws_access_key_id:
+    title: "Aws Access Key Id"
+    description: "The ID of the AWS Access Key to use for authentication with AWS"
+    type: string
+    required: true
+  aws_secret_access_key:
+    title: "Aws Secret Access Key"
+    description: "The AWS Secret Access Key used for signing requests with the given\
+      \ AWS Access Key ID"
+    type: password
+    required: true
+  region:
+    title: "Region"
+    description: "The AWS Region to use for requests. An example would be us-east-1"
+    type: string
+    required: true
+actions:
+  add_permission:
+    title: "Add Permission"
+    description: "Adds a statement to a topics access control policy, granting access\
+      \ for the specified AWS accounts to the specified actions"
+    input:
+      topic_arn:
+        title: "Topic Arn"
+        type: string
+        description: "The ARN of the topic whose access control policy you wish to\
+          \ modify"
+        required: true
+      label:
+        title: "Label"
+        type: string
+        description: "A unique identifier for the new policy statement"
+        required: true
+      aws_account_id:
+        title: "Aws Account Id"
+        type: "[]string"
+        description: "The AWS account IDs of the users (principals) who will be given\
+          \ access to the specified actions"
+        required: true
+      action_name:
+        title: "Action Name"
+        type: "[]string"
+        description: "The action you want to allow for the specified principal(s)"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+  check_if_phone_number_is_opted_out:
+    title: "Check If Phone Number Is Opted Out"
+    description: "Accepts a phone number and indicates whether the phone holder has\
+      \ opted out of receiving SMS messages from your account"
+    input:
+      phone_number:
+        title: "Phone Number"
+        type: string
+        description: "The phone number for which you want to check the opt out status"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+      is_opted_out:
+        title: "Is Opted Out"
+        type: boolean
+        description: "Indicates whether the phone number is opted out:    true \u2013\
+          \ The phone number is opted out, meaning you cannot publish SMS messages\
+          \ to it"
+        required: false
+  confirm_subscription:
+    title: "Confirm Subscription"
+    description: "Verifies an endpoint owners intent to receive messages by validating\
+      \ the token sent to the endpoint by an earlier Subscribe action"
+    input:
+      topic_arn:
+        title: "Topic Arn"
+        type: string
+        description: "The ARN of the topic for which you wish to confirm a subscription"
+        required: true
+      token:
+        title: "Token"
+        type: string
+        description: "Short-lived token sent to an endpoint during the Subscribe action"
+        required: true
+      authenticate_on_unsubscribe:
+        title: "Authenticate On Unsubscribe"
+        type: string
+        description: "Disallows unauthenticated unsubscribes of the subscription"
+        required: false
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+      subscription_arn:
+        title: "Subscription Arn"
+        type: string
+        description: "The ARN of the created subscription"
+        required: false
+  create_platform_application:
+    title: "Create Platform Application"
+    description: "Creates a platform application object for one of the supported push\
+      \ notification services, such as APNS and GCM, to which devices and mobile apps\
+      \ may register"
+    input:
+      name:
+        title: "Name"
+        type: string
+        description: "Application names must be made up of only uppercase and lowercase\
+          \ ASCII letters, numbers, underscores, hyphens, and periods, and must be\
+          \ between 1 and 256 characters long"
+        required: true
+      platform:
+        title: "Platform"
+        type: string
+        description: "The following platforms are supported: ADM (Amazon Device Messaging),\
+          \ APNS (Apple Push Notification Service), APNS_SANDBOX, and GCM (Google\
+          \ Cloud Messaging)"
+        required: true
+      attributes:
+        title: "Attributes"
+        type: object
+        description: "For a list of attributes, see SetPlatformApplicationAttributes"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+      platform_application_arn:
+        title: "Platform Application Arn"
+        type: string
+        description: "PlatformApplicationArn is returned"
+        required: false
+  create_platform_endpoint:
+    title: "Create Platform Endpoint"
+    description: "Creates an endpoint for a device and mobile app on one of the supported\
+      \ push notification services, such as GCM and APNS"
+    input:
+      platform_application_arn:
+        title: "Platform Application Arn"
+        type: string
+        description: "PlatformApplicationArn returned from CreatePlatformApplication\
+          \ is used to create a an endpoint"
+        required: true
+      token:
+        title: "Token"
+        type: string
+        description: "Unique identifier created by the notification service for an\
+          \ app on a device"
+        required: true
+      custom_user_data:
+        title: "Custom User Data"
+        type: string
+        description: "Arbitrary user data to associate with the endpoint"
+        required: false
+      attributes:
+        title: "Attributes"
+        type: object
+        description: "For a list of attributes, see SetEndpointAttributes"
+        required: false
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+      endpoint_arn:
+        title: "Endpoint Arn"
+        type: string
+        description: "EndpointArn returned from CreateEndpoint action"
+        required: false
+  create_topic:
+    title: "Create Topic"
+    description: "Creates a topic to which notifications can be published"
+    input:
+      name:
+        title: "Name"
+        type: string
+        description: "The name of the topic you want to create"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+      topic_arn:
+        title: "Topic Arn"
+        type: string
+        description: "The Amazon Resource Name (ARN) assigned to the created topic"
+        required: false
+  delete_endpoint:
+    title: "Delete Endpoint"
+    description: "Deletes the endpoint for a device and mobile app from Amazon SNS"
+    input:
+      endpoint_arn:
+        title: "Endpoint Arn"
+        type: string
+        description: "EndpointArn of endpoint to delete"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+  delete_platform_application:
+    title: "Delete Platform Application"
+    description: "Deletes a platform application object for one of the supported push\
+      \ notification services, such as APNS and GCM"
+    input:
+      platform_application_arn:
+        title: "Platform Application Arn"
+        type: string
+        description: "PlatformApplicationArn of platform application object to delete"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+  delete_topic:
+    title: "Delete Topic"
+    description: "Deletes a topic and all its subscriptions"
+    input:
+      topic_arn:
+        title: "Topic Arn"
+        type: string
+        description: "The ARN of the topic you want to delete"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+  get_endpoint_attributes:
+    title: "Get Endpoint Attributes"
+    description: "Retrieves the endpoint attributes for a device on one of the supported\
+      \ push notification services, such as GCM and APNS"
+    input:
+      endpoint_arn:
+        title: "Endpoint Arn"
+        type: string
+        description: "EndpointArn for GetEndpointAttributes input"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+      attributes:
+        title: "Attributes"
+        type: object
+        description: "Attributes include the following:    CustomUserData -- arbitrary\
+          \ user data to associate with the endpoint"
+        required: false
+  get_platform_application_attributes:
+    title: "Get Platform Application Attributes"
+    description: "Retrieves the attributes of the platform application object for\
+      \ the supported push notification services, such as APNS and GCM"
+    input:
+      platform_application_arn:
+        title: "Platform Application Arn"
+        type: string
+        description: "PlatformApplicationArn for GetPlatformApplicationAttributesInput"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+      attributes:
+        title: "Attributes"
+        type: object
+        description: "Attributes include the following:    EventEndpointCreated --\
+          \ Topic ARN to which EndpointCreated event notifications should be sent"
+        required: false
+  get_sms_attributes:
+    title: "Get Sms Attributes"
+    description: "Returns the settings for sending SMS messages from your account"
+    input:
+      attributes:
+        title: "Attributes"
+        type: "[]string"
+        description: "A list of the individual attribute names, such as MonthlySpendLimit,\
+          \ for which you want values"
+        required: false
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+      attributes:
+        title: "Attributes"
+        type: object
+        description: "The SMS attribute names and their values"
+        required: false
+  get_subscription_attributes:
+    title: "Get Subscription Attributes"
+    description: "Returns all of the properties of a subscription"
+    input:
+      subscription_arn:
+        title: "Subscription Arn"
+        type: string
+        description: "The ARN of the subscription whose properties you want to get"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+      attributes:
+        title: "Attributes"
+        type: object
+        description: "A map of the subscriptions attributes"
+        required: false
+  get_topic_attributes:
+    title: "Get Topic Attributes"
+    description: "Returns all of the properties of a topic"
+    input:
+      topic_arn:
+        title: "Topic Arn"
+        type: string
+        description: "The ARN of the topic whose properties you want to get"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+      attributes:
+        title: "Attributes"
+        type: object
+        description: "A map of the topics attributes"
+        required: false
+  list_endpoints_by_platform_application:
+    title: "List Endpoints By Platform Application"
+    description: "Lists the endpoints and endpoint attributes for devices in a supported\
+      \ push notification service, such as GCM and APNS"
+    input:
+      platform_application_arn:
+        title: "Platform Application Arn"
+        type: string
+        description: "PlatformApplicationArn for ListEndpointsByPlatformApplicationInput\
+          \ action"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+      endpoints:
+        title: "Endpoints"
+        type: "[]endpoint"
+        description: "Endpoints returned for ListEndpointsByPlatformApplication action"
+        required: false
+  list_phone_numbers_opted_out:
+    title: "List Phone Numbers Opted Out"
+    description: "Returns a list of phone numbers that are opted out, meaning you\
+      \ cannot send SMS messages to them"
+    input:
+      next_token:
+        title: "Next Token"
+        type: string
+        description: "A NextToken string is used when you call the ListPhoneNumbersOptedOut\
+          \ action to retrieve additional records that are available after the first\
+          \ page of results"
+        required: false
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+      phone_numbers:
+        title: "Phone Numbers"
+        type: "[]string"
+        description: "A list of phone numbers that are opted out of receiving SMS\
+          \ messages"
+        required: false
+      next_token:
+        title: "Next Token"
+        type: string
+        description: "A NextToken string is returned when you call the ListPhoneNumbersOptedOut\
+          \ action if additional records are available after the first page of results"
+        required: false
+  list_platform_applications:
+    title: "List Platform Applications"
+    description: "Lists the platform application objects for the supported push notification\
+      \ services, such as APNS and GCM"
+    input: {}
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+      platform_applications:
+        title: "Platform Applications"
+        type: "[]platform_application"
+        description: "Platform applications returned when calling ListPlatformApplications\
+          \ action"
+        required: false
+  list_subscriptions:
+    title: "List Subscriptions"
+    description: "Returns a list of the requesters subscriptions"
+    input: {}
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+      subscriptions:
+        title: "Subscriptions"
+        type: "[]subscription"
+        description: "A list of subscriptions"
+        required: false
+  list_subscriptions_by_topic:
+    title: "List Subscriptions By Topic"
+    description: "Returns a list of the subscriptions to a specific topic"
+    input:
+      topic_arn:
+        title: "Topic Arn"
+        type: string
+        description: "The ARN of the topic for which you wish to find subscriptions"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+      subscriptions:
+        title: "Subscriptions"
+        type: "[]subscription"
+        description: "A list of subscriptions"
+        required: false
+  list_topics:
+    title: "List Topics"
+    description: "Returns a list of the requesters topics"
+    input: {}
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+      topics:
+        title: "Topics"
+        type: "[]topic"
+        description: "A list of topic ARNs"
+        required: false
+  opt_in_phone_number:
+    title: "Opt In Phone Number"
+    description: "Use this request to opt in a phone number that is opted out, which\
+      \ enables you to resume sending SMS messages to the number"
+    input:
+      phone_number:
+        title: "Phone Number"
+        type: string
+        description: "The phone number to opt in"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+  publish:
+    title: "Publish"
+    description: "Sends a message to all of a topics subscribed endpoints"
+    input:
+      topic_arn:
+        title: "Topic Arn"
+        type: string
+        description: "The topic you want to publish to"
+        required: false
+      target_arn:
+        title: "Target Arn"
+        type: string
+        description: "Either TopicArn or EndpointArn, but not both"
+        required: false
+      phone_number:
+        title: "Phone Number"
+        type: string
+        description: "The phone number to which you want to deliver an SMS message"
+        required: false
+      message:
+        title: "Message"
+        type: string
+        description: "The message you want to send to the topic"
+        required: true
+      subject:
+        title: "Subject"
+        type: string
+        description: "Optional parameter to be used as the Subject line when the message\
+          \ is delivered to email endpoints"
+        required: false
+      message_structure:
+        title: "Message Structure"
+        type: string
+        description: "Set MessageStructure to json if you want to send a different\
+          \ message for each protocol"
+        required: false
+      message_attributes:
+        title: "Message Attributes"
+        type: object
+        description: "Message attributes for Publish action"
+        required: false
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+      message_id:
+        title: "Message Id"
+        type: string
+        description: "Unique identifier assigned to the published message"
+        required: false
+  remove_permission:
+    title: "Remove Permission"
+    description: "Removes a statement from a topics access control policy"
+    input:
+      topic_arn:
+        title: "Topic Arn"
+        type: string
+        description: "The ARN of the topic whose access control policy you wish to\
+          \ modify"
+        required: true
+      label:
+        title: "Label"
+        type: string
+        description: "The unique label of the statement you want to remove"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+  set_endpoint_attributes:
+    title: "Set Endpoint Attributes"
+    description: "Sets the attributes for an endpoint for a device on one of the supported\
+      \ push notification services, such as GCM and APNS"
+    input:
+      endpoint_arn:
+        title: "Endpoint Arn"
+        type: string
+        description: "EndpointArn used for SetEndpointAttributes action"
+        required: true
+      attributes:
+        title: "Attributes"
+        type: object
+        description: "A map of the endpoint attributes"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+  set_platform_application_attributes:
+    title: "Set Platform Application Attributes"
+    description: "Sets the attributes of the platform application object for the supported\
+      \ push notification services, such as APNS and GCM"
+    input:
+      platform_application_arn:
+        title: "Platform Application Arn"
+        type: string
+        description: "PlatformApplicationArn for SetPlatformApplicationAttributes\
+          \ action"
+        required: true
+      attributes:
+        title: "Attributes"
+        type: object
+        description: "A map of the platform application attributes"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+  set_sms_attributes:
+    title: "Set Sms Attributes"
+    description: "Use this request to set the default settings for sending SMS messages\
+      \ and receiving daily SMS usage reports"
+    input:
+      attributes:
+        title: "Attributes"
+        type: object
+        description: "The default settings for sending SMS messages from your account"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+  set_subscription_attributes:
+    title: "Set Subscription Attributes"
+    description: "Allows a subscription owner to set an attribute of the topic to\
+      \ a new value"
+    input:
+      subscription_arn:
+        title: "Subscription Arn"
+        type: string
+        description: "The ARN of the subscription to modify"
+        required: true
+      attribute_name:
+        title: "Attribute Name"
+        type: string
+        description: "The name of the attribute you want to set"
+        required: true
+      attribute_value:
+        title: "Attribute Value"
+        type: string
+        description: "The new value for the attribute in JSON format"
+        required: false
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+  set_topic_attributes:
+    title: "Set Topic Attributes"
+    description: "Allows a topic owner to set an attribute of the topic to a new value"
+    input:
+      topic_arn:
+        title: "Topic Arn"
+        type: string
+        description: "The ARN of the topic to modify"
+        required: true
+      attribute_name:
+        title: "Attribute Name"
+        type: string
+        description: "The name of the attribute you want to set"
+        required: true
+      attribute_value:
+        title: "Attribute Value"
+        type: string
+        description: "The new value for the attribute"
+        required: false
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+  subscribe:
+    title: "Subscribe"
+    description: "Prepares to subscribe an endpoint by sending the endpoint a confirmation\
+      \ message"
+    input:
+      topic_arn:
+        title: "Topic Arn"
+        type: string
+        description: "The ARN of the topic you want to subscribe to"
+        required: true
+      protocol:
+        title: "Protocol"
+        type: string
+        description: "The protocol you want to use"
+        required: true
+      endpoint:
+        title: "Endpoint"
+        type: string
+        description: "The endpoint that you want to receive notifications"
+        required: false
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
+      subscription_arn:
+        title: "Subscription Arn"
+        type: string
+        description: "The ARN of the subscription, if the service was able to create\
+          \ a subscription immediately (without requiring endpoint owner confirmation)"
+        required: false
+  unsubscribe:
+    title: "Unsubscribe"
+    description: "Deletes a subscription"
+    input:
+      subscription_arn:
+        title: "Subscription Arn"
+        type: string
+        description: "The ARN of the subscription to be deleted"
+        required: true
+    output:
+      response_metadata:
+        title: "Response Metadata"
+        type: response_metadata
+        description: "Metadata about the response from AWS"
+        required: true
