@@ -580,6 +580,9 @@ This action is used to returns a list of hashes matching a specified risk rule.
 Example input:
 
 ```
+{
+  "list": "positive_malware_verdict"
+}
 ```
 
 ##### Output
@@ -1302,6 +1305,9 @@ This action is used to fetch information about a specific vulnerability by CVE o
 Example input:
 
 ```
+{
+  "id": "CVE-2014-0160"
+}
 ```
 
 ##### Output
