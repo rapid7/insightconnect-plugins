@@ -26,13 +26,14 @@ In order to view the API Key Management page, the admin must be assigned an admi
 In the **Organization API Key** tab, the base URI and key details are displayed within the table.
 
 For more information see the [Zscalar getting started guide](https://help.zscaler.com/zia/api-getting-started) on obtaining the API key and base URL.
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|Enter organization API key|None|14M2d25A7c12|
 |credentials|credential_username_password|None|True|Username and password to access Zscaler|None|{"username":"user@example.com", "password":"mypassword"}|
-|url|string|None|True|API URL|None|admin.zscalerbeta.net|
+|url|string|None|True|Base URL, see https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details|None|admin.zscalerbeta.net|
 
 Example input:
 
@@ -45,7 +46,6 @@ Example input:
   },
   "url": "admin.zscalerbeta.net"
 }
-
 ```
 
 ## Technical Details
@@ -61,7 +61,7 @@ This action is used to add or remove URLs from a blacklist. These URLs will appe
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |blacklist_state|boolean|True|False|True to blacklist a URL, false to unblacklist a URL|None|True|
-|urls|[]string|None|True|A given set of one or more URLs to update in the blacklist|None|["example.com", "rapid7.com"]|
+|urls|[]string|None|True|A given set of one or more URLs to update in the blacklist. URLs must include the scheme (http, https, etc)|None|["https://www.example.com", "http://rapid7.com"]|
 
 Example input:
 
@@ -69,8 +69,8 @@ Example input:
 {
   "blacklist_state": true,
   "urls": [
-    "example.com",
-    "rapid7.com"
+    "https://www.example.com",
+    "http://rapid7.com"
   ]
 }
 ```
@@ -97,7 +97,7 @@ This action is used to look up the categorization of a given set of URLs.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|urls|[]string|None|True|The given set of URLs to be looked up|None|["example.com", "rapid7.com"]|
+|urls|[]string|None|True|The given set of URLs to be looked up. URLs must not include the scheme (http, https, etc)|None|["example.com", "rapid7.com"]|
 
 Example input:
 
@@ -161,6 +161,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.1 - Improve documentation around action inputs
 * 1.1.0 - New action Blacklist URL
 * 1.0.0 - Initial plugin
 
