@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="domaintools_phisheye-rapid7-plugin",
-      version="1.0.0",
+      version="1.0.1",
       description="Monitor the Internet for 'Phishy' Domains",
       author="rapid7",
       author_email="",

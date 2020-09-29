@@ -4,7 +4,7 @@ products: [insightconnect]
 name: domaintools_phisheye
 title: DomainTools PhishEye
 description: Monitor the Internet for 'Phishy' Domains
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
@@ -110,6 +110,7 @@ actions:
         required: false
         example: 1
         enum:
+          - 0
           - 1
           - 2
           - 3
