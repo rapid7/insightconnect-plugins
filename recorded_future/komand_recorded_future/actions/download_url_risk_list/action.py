@@ -2,6 +2,7 @@ import komand
 import requests
 import xmltodict
 from .schema import DownloadUrlRiskListInput, DownloadUrlRiskListOutput, Input, Output, Component
+from komand.exceptions import PluginException
 # Custom imports below
 
 
@@ -63,3 +64,4 @@ class DownloadUrlRiskList(komand.Action):
             }
         except Exception as e:
             self.logger.error("Error: " + str(e))
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
