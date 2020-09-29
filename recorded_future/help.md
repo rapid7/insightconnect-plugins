@@ -33,9 +33,11 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
+{
   "api_key": {
     "secretKey":"9de5069c5afe602b2ea0a04b66beb2c0"
   }
+}
 ```
 
 ## Technical Details
@@ -1562,6 +1564,9 @@ This action is used to fetch information about a specific vulnerability by CVE o
 Example input:
 
 ```
+{
+  "id": "CVE-2014-0160"
+}
 ```
 
 ##### Output
