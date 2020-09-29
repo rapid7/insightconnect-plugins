@@ -40,7 +40,10 @@ Example input:
 ```
 {
   "api_key": "14M2d25A7c12",
-  "credentials": "{\"username\":\"user@example.com\", \"password\":\"mypassword\"}",
+  "credentials": {
+    "username":"user@example.com",
+    "password":"mypassword"
+  },
   "url": "admin.zscalerbeta.net"
 }
 ```
