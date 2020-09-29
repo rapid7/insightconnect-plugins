@@ -61,7 +61,7 @@ This action is used to add or remove URLs from a blacklist. These URLs will appe
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |blacklist_state|boolean|True|False|True to blacklist a URL, false to unblacklist a URL|None|True|
-|urls|[]string|None|True|A given set of one or more URLs to update in the blacklist. URLs must include the scheme (http, https, etc)|None|["https://www.example.com", "http://rapid7.com"]|
+|urls|[]string|None|True|A given set of one or more URLs or domains to update in the blacklist|None|["www.example.com", "http://rapid7.com"]|
 
 Example input:
 
@@ -69,7 +69,7 @@ Example input:
 {
   "blacklist_state": true,
   "urls": [
-    "https://www.example.com",
+    "www.example.com",
     "http://rapid7.com"
   ]
 }
@@ -97,7 +97,7 @@ This action is used to look up the categorization of a given set of URLs.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|urls|[]string|None|True|The given set of URLs to be looked up. URLs must not include the scheme (http, https, etc)|None|["example.com", "rapid7.com"]|
+|urls|[]string|None|True|The given set of URLs or domains to be looked up|None|["example.com", "https://rapid7.com"]|
 
 Example input:
 
@@ -105,7 +105,7 @@ Example input:
 {
   "urls": [
     "example.com",
-    "rapid7.com"
+    "https://rapid7.com"
   ]
 }
 ```
@@ -161,6 +161,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.2 - Change input `URLs` in actions Blacklist URL and Lookup URL to accepts URls and domains
 * 1.1.1 - Improve documentation around action inputs
 * 1.1.0 - New action Blacklist URL
 * 1.0.0 - Initial plugin

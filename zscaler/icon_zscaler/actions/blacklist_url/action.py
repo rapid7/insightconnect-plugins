@@ -23,6 +23,9 @@ class BlacklistUrl(insightconnect_plugin_runtime.Action):
         urls = params.get(Input.URLS)
         normalized_urls = []
         for url in urls:
+            if url and not url.startswith("http"):
+                url = f"http://{url}"
+
             normalized_urls.append(
                 urlparse(url).hostname
             )
