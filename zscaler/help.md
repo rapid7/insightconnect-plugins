@@ -147,6 +147,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.1 - Improve documentation around action inputs
 * 1.1.0 - New action Blacklist URL
 * 1.0.0 - Initial plugin
 
