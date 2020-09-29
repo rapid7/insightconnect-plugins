@@ -22,7 +22,7 @@ class CheckCidr(komand.Action):
         base = self.connection.base
         endpoint = 'check-block'
         url = f'{base}/{endpoint}'
-
+        eval(params)
         params = {
             'network': params.get(Input.CIDR),
             'maxAgeInDays': params.get(Input.DAYS),
