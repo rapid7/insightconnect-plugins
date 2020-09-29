@@ -14,7 +14,7 @@ for flexible policy management of large groups of dynamic addresses.
 # Requirements
 
 * An admin API key
-* The IP of the orchestrator must be set as a trusted host in Administrator > Settings (Edit button) > Trusted Hosts 
+* The IP of the orchestrator must be set as a trusted host in Settings > Administrator (Edit button) > Trusted Hosts 
 
 # Documentation
 
@@ -50,14 +50,14 @@ This action removes an address object from an address group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_object|string|None|True|Address object|None|198.51.100.100|
+|address_object|string|None|True|Address object|None|MaliciousHost|
 |group|string|None|True|Group name|None|InsightConnect Block List|
 
 Example input:
 
 ```
 {
-  "address_object": "198.51.100.100",
+  "address_object": "MaliciousHost",
   "group": "InsightConnect Block List"
 }
 ```
@@ -302,14 +302,14 @@ This action is used to add an address object to an address group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_object|string|None|True|Address object|None|198.51.100.100|
+|address_object|string|None|True|Address object|None|MaliciousHost|
 |group|string|None|True|Group name|None|InsightConnect Block List|
 
 Example input:
 
 ```
 {
-  "address_object": "198.51.100.100",
+  "address_object": "MaliciousHost",
   "group": "InsightConnect Block List"
 }
 ```
@@ -458,13 +458,17 @@ This action is used to get address objects.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name_filter|string|None|False|Optional name to filter on|None|198.51.100.100|
+|fqdn_filter|string|None|False|Optional FQDN to filter on|None|example.com|
+|name_filter|string|None|False|Optional name to filter on|None|MaliciousHost|
+|subnet_filter|string|None|False|Optional subnet to filter on|None|198.51.100.100/32|
 
 Example input:
 
 ```
 {
-  "name_filter": "198.51.100.100"
+  "fqdn_filter": "example.com",
+  "name_filter": "MaliciousHost",
+  "subnet_filter": "198.51.100.100/32"
 }
 ```
 
@@ -472,7 +476,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|address_objects|[]object|True|A list of address objects|
+|address_objects|[]address_object|True|A list of address objects|
 
 Example output:
 
@@ -642,10 +646,16 @@ _This plugin does not contain any triggers._
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+To accomplish this, log into the FortiGate firewall. Go to the System tab -> Administrator subtab and then select and edit the API admin.
+Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51.100.100/32`
 
 # Version History
 
+* 5.0.0 - Improve input handling to allow IPs, CIDRs, and subnet masks in actions | Fix output of Get Address Objects action to return usable data | Update Get Address Objects action to allow for additional search parameters
+* 4.0.4 - Improve error messaging around HTTP 401 status codes to indicate that the InsightConnect orchestrator IP address not being in the trusted host list may be the cause
+* 4.0.3 - Improve assistance message when the API returns an Internal Server Errror
+* 4.0.2 - Support host URL in connection | Improve Create Address Object action to allow for IPs and CIDRs as input
+* 4.0.1 - Bug fix where some names were being incorrectly parsed in the Check if Address in Group action causing the action to fail
 * 4.0.0 - Update Create Address Object action to accept a RFC1918 whitelist | Add enable_search functionality to Check if Address in Group action
 * 3.0.0 - Revise action input/output naming schemes | Add example inputs | New action Remove Address Object from Group
 * 2.0.0 - Simplify the Create Address Object action to auto-detect the input type | Add whitelist safety check to Create Address Object action

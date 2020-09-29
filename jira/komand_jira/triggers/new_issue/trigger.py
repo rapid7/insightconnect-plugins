@@ -3,7 +3,7 @@ import komand
 from .schema import NewIssueInput, NewIssueOutput, Input, Output
 # Custom imports below
 import time
-from ...util import normalize_issue, look_up_project
+from komand_jira.util.util import normalize_issue, look_up_project
 from komand.exceptions import PluginException
 
 

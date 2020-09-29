@@ -1,5 +1,6 @@
 import komand
 from .schema import ConnectionSchema
+from komand.exceptions import ConnectionTestException
 import sqlalchemy
 from sqlalchemy.orm import sessionmaker
 
@@ -51,7 +52,7 @@ class Connection(komand.Connection):
         self.params = params
         self.params['user'] = username
         self.params['password'] = password
-        
+
         type_connection_string = {
             'postgresql': Connection.postgres_conn_string,
             'postgres': Connection.postgres_conn_string,
@@ -66,8 +67,11 @@ class Connection(komand.Connection):
         self.logger.info("Connect: Connecting...")
 
     def test(self):
-        session = self.connection.session
-        if session:
-            return {"status": "operation success"}
-        else:
-            raise Exception("Connection was not active. Please check your connection settings.")
+        try:
+            self.connection.session.execute("select 1")
+            return True
+        except Exception as e:
+            raise ConnectionTestException(
+                cause="Unable to connect to the server.",
+                assistance="Check connection credentials."
+            )

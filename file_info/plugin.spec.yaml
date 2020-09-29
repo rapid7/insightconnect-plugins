@@ -1,0 +1,44 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: file_info
+title: File Info
+description: Return information about a file
+version: 1.0.0
+vendor: rapid7
+support: community
+status: []
+tags:
+- file_info
+- bytes
+hub_tags:
+  use_cases: [data_utility]
+  keywords: [file info, bytes, utilities]
+  features: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/file_info
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+enable_cache: false
+
+actions:
+  get_file_info:
+    title: Get File Info
+    description: Get information about a file
+    input:
+      file:
+        title: File
+        description: The file to analyze, represented in base64 (bytes type)
+        type: bytes
+        required: true
+        example: cmFwaWQ3IGluc2lnaHQ=
+    output:
+      file_size:
+        title: File Size
+        description: Return information about file size
+        type: integer
+        required: true
+      file_type:
+        title: File Type
+        description: Return information about file type
+        type: string
+        required: true

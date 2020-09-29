@@ -2,7 +2,7 @@ import komand
 from .schema import GetIssueInput, GetIssueOutput, Input, Output, Component
 
 # Custom imports below
-from ...util import normalize_issue
+from komand_jira.util.util import normalize_issue
 from komand.exceptions import PluginException
 
 

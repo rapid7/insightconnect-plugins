@@ -16,20 +16,24 @@ class RunAnalysis(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         files = None
+
         if params.get(Input.OBJ_TYPE) and \
                 params.get(Input.OBJ_TYPE) != 'file' and \
                 Input.FILE in params and params.get(Input.FILE).get('content'):
             raise PluginException(cause='Missing file content.', assistance='Complete the file input with base64 file content.')
+
         if params.get(Input.OBJ_TYPE) == 'file' and Input.OBJ_URL in params:
             raise PluginException(cause='Invalid input.',
                                   assistance='File submission from URL only possible with type "url" or "download".')
+
         if params.get(Input.OBJ_TYPE) != 'url' and Input.OBJ_EXT_BROWSER in params:
             raise PluginException(cause='Invalid input.',
                                   assistance='Browser name only possible with type "url".')
-        if params.get(Input.OBJ_TYPE) != 'download' and (
+
+        if params.get(Input.OBJ_TYPE) not in ["download", "url"] and (
                 Input.OBJ_EXT_USERAGENT in params or Input.OPT_PRIVACY_HIDESOURCE in params):
             raise PluginException(cause='Invalid input.',
-                                  assistance='User agent only possible with type "download".')
+                                  assistance='User agent only possible with type "download" or "url".')
 
         if params.get(Input.OBJ_TYPE) == 'file' and Input.FILE in params and params.get(Input.FILE).get('content'):
             file = params.get(Input.FILE)
@@ -37,7 +41,8 @@ class RunAnalysis(insightconnect_plugin_runtime.Action):
 
         if params.get(Input.FILE):
             params.pop(Input.FILE)
-        task_result = self.connection.any_run_api.run_analysis(params, files)
+
+        task_result = self.connection.any_run_api.run_analysis(json_data=params, files=files)
         return {
             Output.UUID: task_result.get("data", {}).get('taskid', None)
         }

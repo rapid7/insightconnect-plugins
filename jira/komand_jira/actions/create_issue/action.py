@@ -2,7 +2,7 @@ import komand
 from .schema import CreateIssueInput, CreateIssueOutput, Input, Output, Component
 
 # Custom imports below
-from ...util import look_up_project, normalize_issue, add_attachment
+from komand_jira.util.util import look_up_project, normalize_issue, add_attachment
 from komand.exceptions import ConnectionTestException, PluginException
 
 

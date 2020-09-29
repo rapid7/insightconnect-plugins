@@ -4,8 +4,9 @@ import json
 
 
 class Input:
-    CREDENTIALS = "credentials"
+    API_KEY = "api_key"
     URL = "url"
+    USER = "user"
     
 
 class ConnectionSchema(komand.Input):
@@ -14,48 +15,47 @@ class ConnectionSchema(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "credentials": {
-      "$ref": "#/definitions/credential_username_password",
-      "title": "Username and API Key",
-      "description": "Username and API key",
-      "order": 2
+    "api_key": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "API Key",
+      "description": "Jira API key (Jira password is not supported)",
+      "order": 3
     },
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "Jira URL, e.g. https://company.atlassian.net",
-      "default": "https://company.atlassian.net",
+      "description": "Jira URL",
+      "default": "https://example.atlassian.net",
       "order": 1
+    },
+    "user": {
+      "type": "string",
+      "title": "User",
+      "description": "Jira user email",
+      "order": 2
     }
   },
   "required": [
-    "credentials"
+    "api_key",
+    "user"
   ],
   "definitions": {
-    "credential_username_password": {
-      "id": "credential_username_password",
+    "credential_secret_key": {
+      "id": "credential_secret_key",
       "type": "object",
-      "title": "Credential: Username and Password",
-      "description": "A username and password combination",
+      "title": "Credential: Secret Key",
+      "description": "A shared secret key",
       "properties": {
-        "password": {
+        "secretKey": {
           "type": "string",
-          "title": "Password",
+          "title": "Secret Key",
           "displayType": "password",
-          "description": "The password",
-          "format": "password",
-          "order": 2
-        },
-        "username": {
-          "type": "string",
-          "title": "Username",
-          "description": "The username to log in with",
-          "order": 1
+          "description": "The shared secret key",
+          "format": "password"
         }
       },
       "required": [
-        "username",
-        "password"
+        "secretKey"
       ]
     }
   }

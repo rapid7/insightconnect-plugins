@@ -1,5 +1,5 @@
 import re
-from ipaddress import ip_network, ip_address
+from ipaddress import ip_network, ip_address, IPv4Network
 from komand.exceptions import PluginException
 
 
@@ -10,7 +10,8 @@ class Helpers(object):
         400: {"cause": "Bad Request: Request cannot be processed by the API.",
               "assistance": "Contact support for assistance."},
         401: {"cause": "Not Authorized: Request without successful login session.",
-              "assistance": "Ensure that the API key is correct."},
+              "assistance": "Ensure that the API key is correct,"
+                            " and that the IP address of the orchestrator has been added to the trusted hosts list"},
         403: {"cause": "Forbidden: Request is missing CSRF token or administrator is missing access profile permissions.",
               "assistance": "Ensure that the account being used has permission to preform this action."},
         404: {"cause": "Resource Not Found: Unable to find the specified resource.",
@@ -28,7 +29,9 @@ class Helpers(object):
                        " The offended source is temporarily blocked for certain amount of time.",
               "assistance": "Wait out the access timeout."},
         500: {"cause": "Internal Server Error: Internal error when processing the request.",
-              "assistance": "Contact support for assistance."}
+              "assistance": "Something went wrong and the API did not provide a reason."
+                            "This can happen when an object you're trying to create already exists or when an object you're trying to remove doesn't exist."
+                            "If the issue persists contact support for additional assistance."}
     }
 
     def __init__(self, logger):
@@ -94,3 +97,35 @@ class Helpers(object):
                     return True
 
         return False
+
+    def type_finder(self, host: str) -> str:
+        """determines the type of host ipmask or fqdn"""
+        type_ = "ipmask"
+        try:
+            host = ip_network(host)
+        except ValueError:
+            if re.match("^[0-9 .]+$", host):
+                return type_
+            elif host[-1].isdigit() or host[-2].isdigit():
+                raise PluginException(cause="The host input appears to be an invalid IP or domain name.",
+                                      assistance="Ensure that the host input is a valid IP or domain.",
+                                      data=host)
+            type_ = "fqdn"
+            return type_
+        return type_
+
+    def ipmask_converter(self, host: str) -> str:
+        """Converts a IP or netmask into a CIDR"""
+        try:
+            host = ip_network(host)
+        except ValueError:
+            host = host.replace(" ", "/")
+            host = ip_network(host)
+        return str(host)
+
+    def netmask_converter(self, host: str) -> str:
+        """Converts a CIDR or IP to a netmask"""
+        host = IPv4Network(host).with_netmask
+        host = str(host)
+        host = host.replace("/", " ")
+        return host
