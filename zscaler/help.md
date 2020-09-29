@@ -161,7 +161,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.1.2 - Change input `URLs` in actions Blacklist URL and Lookup URL to accepts URls and domains
+* 1.1.2 - Support both domains and URL inputs in the Blacklist URL and Lookup URL actions
 * 1.1.1 - Improve documentation around action inputs
 * 1.1.0 - New action Blacklist URL
 * 1.0.0 - Initial plugin
