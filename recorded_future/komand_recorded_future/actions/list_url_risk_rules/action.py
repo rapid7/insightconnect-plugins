@@ -1,6 +1,7 @@
 import komand
 import requests
 from .schema import ListUrlRiskRulesInput, ListUrlRiskRulesOutput, Output, Component
+from komand.exceptions import PluginException
 # Custom imports below
 
 
@@ -25,3 +26,4 @@ class ListUrlRiskRules(komand.Action):
             }
         except Exception as e:
             self.logger.error("Error: " + str(e))
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
