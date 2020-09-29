@@ -32,6 +32,10 @@
 			"hash": "34f2f9e2a90b2391c5088f2973b6c1b6"
 		},
 		{
+			"identifier": "list_url_risk_rules/schema.py",
+			"hash": "1d74e73cc21f93626103ac512a1955e0"
+		},
+		{
 			"identifier": "list_vulnerability_risk_rules/schema.py",
 			"hash": "20e908c1810efc789c386c4a1104acba"
 		},
@@ -89,7 +93,7 @@
 		},
 		{
 			"identifier": "search_vulnerabilities/schema.py",
-			"hash": "6a768063d2bbc2d332e03f21624c304c"
+			"hash": "a6470a6cc662d9b3c9d5c61aac828a60"
 		},
 		{
 			"identifier": "connection/schema.py",

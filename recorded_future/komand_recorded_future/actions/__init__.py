@@ -6,6 +6,7 @@ from .download_vulnerability_risk_list.action import DownloadVulnerabilityRiskLi
 from .list_IP_addresses_risk_rules.action import ListIPAddressesRiskRules
 from .list_domain_risk_rules.action import ListDomainRiskRules
 from .list_hash_risk_rules.action import ListHashRiskRules
+from .list_url_risk_rules.action import ListUrlRiskRules
 from .list_vulnerability_risk_rules.action import ListVulnerabilityRiskRules
 from .lookup_IP_address.action import LookupIPAddress
 from .lookup_domain.action import LookupDomain
