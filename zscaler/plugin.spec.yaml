@@ -65,7 +65,7 @@ actions:
     input:
       urls:
         title: URLs
-        description: The given set of URLs to be looked up
+        description: The given set of URLs to be looked up. URLs must not include the scheme (http, https, etc)
         type: "[]string"
         required: true
         example: ["example.com", "rapid7.com"]
@@ -81,10 +81,10 @@ actions:
     input:
       urls:
         title: URLs
-        description: A given set of one or more URLs to update in the blacklist
+        description: A given set of one or more URLs to update in the blacklist. URLs must include the scheme (http, https, etc)
         type: "[]string"
         required: true
-        example: ["example.com", "rapid7.com"]
+        example: ["https://www.example.com", "http://rapid7.com"]
       blacklist_state:
         title: Blacklist State
         description: True to blacklist a URL, false to unblacklist a URL
