@@ -1297,7 +1297,6 @@ actions:
         description: Number of initial records to skip
         type: number
         required: false
-        default: 1
         example: 0
       orderby:
         title: Order By
@@ -1325,28 +1324,12 @@ actions:
           - desc
         required: false
         example: asc
-      fields:
-        title: Fields
-        description: Fields to include
-        type: "[]string"
-        enum:
-          - analystNotes
-          - counts
-          - enterpriseLists
-          - entity
-          - relatedEntities
-          - metrics
-          - risk
-          - sightings
-          - timestamps
-        example: counts
-        required: false
       riskScore:
         title: Risk Score
         description: Risk score of data
         type: string
         required: false
-        example: 3/29
+        example: [0,100]
       riskRule:
         title: Risk Rule
         description: Risk rule od data
@@ -1388,4 +1371,50 @@ actions:
         title: Data
         description: Search result
         type: search_data
+        required: true
+  download_url_risk_list:
+    title: Download URL Risk List
+    description: This action returns a risk list of urls matching a filtration
+    input:
+      list:
+        title: List
+        description: The risk list to retrieve, left this field blank to retrieve default risk list
+        type: string
+        required: false
+        enum:
+          - Historically Reported by Insikt Group
+          - Compromised URL
+          - Historically Reported as a Defanged URL
+          - Historically Reported by DHS AIS
+          - Historically Reported Fraudulent Content
+          - Historically Reported in Threat List
+          - Large
+          - Historically Detected Malicious Browser Exploits
+          - Historically Detected Malware Distribution
+          - Historically Detected Cryptocurrency Mining Techniques
+          - Historically Detected Phishing Techniques
+          - Active Phishing URL
+          - Positive Malware Verdict
+          - Ransomware Distribution URL
+          - Recently Reported by Insikt Group
+          - Recently Reported as a Defanged URL
+          - Recently Reported by DHS AIS
+          - Recently Reported Fraudulent Content
+          - Recently Detected Malicious Browser Exploits
+          - Recently Detected Malware Distribution
+          - Recently Detected Cryptocurrency Mining Techniques
+          - Recently Detected Phishing Techniques
+          - Recently Referenced by Insikt Group
+          - Recently Reported Spam or Unwanted Content
+          - Recently Detected Suspicious Content
+          - Recently Active URL on Weaponized Domain
+          - Historically Referenced by Insikt Group
+          - Historically Reported Spam or Unwanted Content
+          - Historically Detected Suspicious Content
+        example: Historically Reported by Insikt Group
+    output:
+      risk_list:
+        title: Risk List
+        description: Risk list of matching URLs
+        type: object
         required: true

@@ -1,6 +1,7 @@
 import komand
 import json
 from .schema import SearchUrlsInput, SearchUrlsOutput, Component, Input
+from komand.exceptions import PluginException
 # Custom imports below
 
 
@@ -47,10 +48,16 @@ class SearchUrls(komand.Action):
         }
         risk_rule = riskRuleMap.get(params.get(Input.RISKRULE))
         if risk_rule:
-            params["riskRule"] = risk_rule
+            params[Input.RISKRULE] = risk_rule
+
+        params["fields"] = "analystNotes,counts,enterpriseLists,entity,metrics,relatedEntities,risk,timestamps,sightings"
+
+        if not params.get(Input.RISKSCORE):
+            params[Input.RISKSCORE] = None
 
         try:
             results = self.connection.client.search_urls(**params)
             return json.loads(results._req_response._content.decode("utf-8"))
         except Exception as e:
             self.logger.error("Error: " + str(e))
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)

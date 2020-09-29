@@ -2,6 +2,7 @@
 from .download_IP_addresses_risk_list.action import DownloadIPAddressesRiskList
 from .download_domain_risk_list.action import DownloadDomainRiskList
 from .download_hash_risk_list.action import DownloadHashRiskList
+from .download_url_risk_list.action import DownloadUrlRiskList
 from .download_vulnerability_risk_list.action import DownloadVulnerabilityRiskList
 from .list_IP_addresses_risk_rules.action import ListIPAddressesRiskRules
 from .list_domain_risk_rules.action import ListDomainRiskRules

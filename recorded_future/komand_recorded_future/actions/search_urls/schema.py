@@ -9,7 +9,6 @@ class Component:
 
 class Input:
     DIRECTION = "direction"
-    FIELDS = "fields"
     FROM = "from"
     LIMIT = "limit"
     ORDERBY = "orderby"
@@ -37,31 +36,10 @@ class SearchUrlsInput(komand.Input):
       ],
       "order": 4
     },
-    "fields": {
-      "type": "array",
-      "title": "Fields",
-      "description": "Fields to include",
-      "items": {
-        "type": "string"
-      },
-      "enum": [
-        "analystNotes",
-        "counts",
-        "enterpriseLists",
-        "entity",
-        "relatedEntities",
-        "metrics",
-        "risk",
-        "sightings",
-        "timestamps"
-      ],
-      "order": 5
-    },
     "from": {
       "type": "number",
       "title": "Offset",
       "description": "Number of initial records to skip",
-      "default": 1,
       "order": 2
     },
     "limit": {
@@ -124,13 +102,13 @@ class SearchUrlsInput(komand.Input):
         "Historically Reported Spam or Unwanted Content",
         "Historically Detected Suspicious Content"
       ],
-      "order": 7
+      "order": 6
     },
     "riskScore": {
       "type": "string",
       "title": "Risk Score",
       "description": "Risk score of data",
-      "order": 6
+      "order": 5
     }
   }
 }
