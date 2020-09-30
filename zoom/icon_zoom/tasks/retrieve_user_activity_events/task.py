@@ -1,8 +1,7 @@
 import insightconnect_plugin_runtime
-from .schema import RetrieveUserActivityEventsInput, RetrieveUserActivityEventsOutput, RetrieveUserActivityEventsState, Input, Output, Component
+from .schema import RetrieveUserActivityEventsInput, RetrieveUserActivityEventsOutput, RetrieveUserActivityEventsState, Input, Output, Component, State
 # Custom imports below
 from datetime import datetime, timedelta
-
 
 class RetrieveUserActivityEvents(insightconnect_plugin_runtime.Task):
 
@@ -14,10 +13,10 @@ class RetrieveUserActivityEvents(insightconnect_plugin_runtime.Task):
                 output=RetrieveUserActivityEventsOutput(),
                 state=RetrieveUserActivityEventsState())
 
-    def run(self, params={}):
+    def run(self, params={}, state={}):
         activity_type = params.get(Input.ACTIVITY_TYPE, "All")
         page_size = 1000
-        last_event_time = params.get("last_event_time", None)
+        last_event_time = state.get(State.LAST_EVENT_TIME, None)
 
         if last_event_time is None:
             # Pull events for past week to start
@@ -44,4 +43,4 @@ class RetrieveUserActivityEvents(insightconnect_plugin_runtime.Task):
             if activity_type == "All" or activity_type == event.get("type"):
                 new_events.append(event)
 
-        return {Output.USER_ACTIVITY_EVENTS: new_events}, {"last_event_time": last_event_time}
+        return {Output.USER_ACTIVITY_EVENTS: new_events}, {State.LAST_EVENT_TIME: last_event_time}
