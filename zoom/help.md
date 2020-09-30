@@ -37,9 +37,6 @@ Example input:
 }
 ```
 
-See the Zoom [Create a JWT App](https://marketplace.zoom.us/docs/guides/build/jwt-app) documentation for generating a 
-JWT App and obtaining your API key and secret.
-
 ## Technical Details
 
 ### Actions
@@ -220,6 +217,41 @@ Example output:
     "version": "-"
   }
 }
+```
+
+### Tasks
+
+#### Retrieve User Activity Events
+
+This task is used to retrieve zoom user activity events.
+
+It allows configuring schedules based on:
+  - cron
+  - minutes
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|activity_type|string|None|True|Type of user activity to match event|['Sign in', 'Sign out', 'All']|All|
+
+Example input:
+
+```
+{
+  "activity_type": "All"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|user_activity_events|[]user_activity|False|User Activity|
+
+Example output:
+
+```
 ```
 
 ### Custom Output Types

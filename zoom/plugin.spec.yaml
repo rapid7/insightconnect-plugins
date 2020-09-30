@@ -355,3 +355,36 @@ triggers:
         description: User Activity
         type: user_activity
         required: false
+tasks:
+  retrieve_user_activity_events:
+    title: Retrieve User Activity Events
+    description: Retrieve zoom user activity events
+    input:
+      activity_type:
+        title: Activity Type
+        description: Type of user activity to match event
+        type: string
+        required: true
+        enum:
+        - "Sign in"
+        - "Sign out"
+        - "All"
+        example: "All"
+    output:
+      user_activity_events:
+        title: User Activity Events
+        description: User Activity
+        type: '[]user_activity'
+        required: false
+    schedule:
+      title: Schedule for retrieving events
+      type: string
+      enum:
+      - "cron"
+      - "minutes"
+      default: minutes
+    state:
+      last_event_time:
+        title: Last Event Time
+        description: The datetime of the last retrieved user activity event
+        type: string
