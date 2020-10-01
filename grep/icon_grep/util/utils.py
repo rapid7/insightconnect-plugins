@@ -7,10 +7,10 @@ def run_grep(text: str, pattern: str, behavior: str) -> str:
         fp.write(text.encode())
         fp.seek(0)
         if behavior == 'Default':
-            matches = subprocess.check_output(['egrep', pattern, fp.name])
+            matches = subprocess.run(['egrep', pattern, fp.name], capture_output=True)
         elif behavior == 'Only matching':
-            matches = subprocess.check_output(['egrep', '-o', pattern, fp.name])
-    return matches.decode()
+            matches = subprocess.run(['egrep', '-o', pattern, fp.name], capture_output=True)
+    return matches.stdout.decode()
 
 
 def process_grep(result_lines: str) -> dict:
