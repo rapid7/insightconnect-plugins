@@ -69,6 +69,7 @@ actions:
         type: bytes
         description: Base64 encoded text
         required: true
+        example: SSBzZWUgdGhlIGRvZyAKIFRoZSBkb2cgc2VlcyBtZSAKIFRoaXMgbGluZSB0ZXN0cyBzdHVmZg==
       behavior:
         type: string
         description: Return entire matched lines or only matched pattern
