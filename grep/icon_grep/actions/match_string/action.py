@@ -18,7 +18,7 @@ class MatchString(komand.Action):
         pattern = params.get(Input.PATTERN)
         behavior = params.get(Input.BEHAVIOR)
 
-        output = utils.process_grep(utils.run_grep(text, pattern, behavior))
+        output = utils.process_grep(utils.run_grep(self.logger, text, pattern, behavior))
 
         return {
             Output.FOUND: output.get('found'),

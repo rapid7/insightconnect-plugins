@@ -1,9 +1,8 @@
-from komand.exceptions import PluginException
 import tempfile
 import subprocess
 
 
-def run_grep(text: str, pattern: str, behavior: str) -> str:
+def run_grep(log, text: str, pattern: str, behavior: str) -> str:
     with tempfile.NamedTemporaryFile() as fp:
         fp.write(text.encode())
         fp.seek(0)
@@ -12,9 +11,7 @@ def run_grep(text: str, pattern: str, behavior: str) -> str:
         elif behavior == 'Only matching':
             matches = subprocess.run(['egrep', '-o', pattern, fp.name], capture_output=True)
     if matches.stderr:
-        raise PluginException(cause='Grep returned an error.',
-                              assistance='Ensure that you pattern and data are correct',
-                              data=f'Error: {matches.stderr.decode()}, Pattern {pattern}')
+        log.error(matches.stderr.decode())
     return matches.stdout.decode()
 
 
