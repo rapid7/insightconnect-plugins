@@ -12,9 +12,9 @@ def run_grep(text: str, pattern: str, behavior: str) -> str:
         elif behavior == 'Only matching':
             matches = subprocess.run(['egrep', '-o', pattern, fp.name], capture_output=True)
     if matches.stderr:
-        raise from PluginException(cause='Grep returned an error.',
-                                   assistance='Ensure that you pattern and data are correct',
-                                   data=f'Error: {matches.stderr}, Pattern {pattern}')
+        raise PluginException(cause='Grep returned an error.',
+                              assistance='Ensure that you pattern and data are correct',
+                              data=f'Error: {matches.stderr.decode()}, Pattern {pattern}')
     return matches.stdout.decode()
 
 
