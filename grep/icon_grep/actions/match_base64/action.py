@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import MatchBase64Input, MatchBase64Output, Input, Output
 # Custom imports below
 from bs4 import UnicodeDammit
@@ -6,7 +6,7 @@ import base64
 from icon_grep.util import utils
 
 
-class MatchBase64(komand.Action):
+class MatchBase64(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

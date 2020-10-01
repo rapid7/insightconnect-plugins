@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import MatchStringInput, MatchStringOutput, Input, Output
 # Custom imports below
 from icon_grep.util import utils
 
 
-class MatchString(komand.Action):
+class MatchString(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

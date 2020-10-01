@@ -1,5 +1,6 @@
+from insightconnect_plugin_runtime.exceptions import PluginException
+from subprocess import run, CalledProcessError
 import tempfile
-import subprocess
 
 
 def run_grep(log: object, text: str, pattern: str, behavior: str) -> str:
@@ -7,11 +8,16 @@ def run_grep(log: object, text: str, pattern: str, behavior: str) -> str:
         fp.write(text.encode())
         fp.seek(0)
         if behavior == 'Default':
-            matches = subprocess.run(['egrep', pattern, fp.name], capture_output=True)
+            matches = run(['egrep', pattern, fp.name], capture_output=True)
         elif behavior == 'Only matching':
-            matches = subprocess.run(['egrep', '-o', pattern, fp.name], capture_output=True)
+            matches = run(['egrep', '-o', pattern, fp.name], capture_output=True)
     if matches.stderr:
         log.error(matches.stderr.decode())
+    try:
+        matches.check_returncode()
+    except CalledProcessError:
+        raise PluginException(cause='The grep process returned an error',
+                              )
     return matches.stdout.decode()
 
 
