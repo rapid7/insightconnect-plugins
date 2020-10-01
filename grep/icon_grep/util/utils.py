@@ -2,7 +2,7 @@ import tempfile
 import subprocess
 
 
-def run_grep(log, text: str, pattern: str, behavior: str) -> str:
+def run_grep(log: object, text: str, pattern: str, behavior: str) -> str:
     with tempfile.NamedTemporaryFile() as fp:
         fp.write(text.encode())
         fp.seek(0)
