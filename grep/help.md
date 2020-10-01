@@ -38,11 +38,21 @@ This action is used to find patterns in a base64 encoded document.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|behavior|string|Default|False|Return entire matched lines or only matched pattern|['Default', 'Only matching']|
-|data|bytes|None|True|Base64 encoded text|None|
-|pattern|string|None|True|Pattern to match|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|behavior|string|Default|False|Return entire matched lines or only matched pattern|['Default', 'Only matching']|Default|
+|data|bytes|None|True|Base64 encoded text|None|SSBzZWUgdGhlIGRvZyAKIFRoZSBkb2cgc2VlcyBtZSAKIFRoaXMgbGluZSB0ZXN0cyBzdHVmZg==|
+|pattern|string|None|True|Pattern to match|None|hello world|
+
+Example input:
+
+```
+{
+  "behavior": "Default",
+  "data": "SSBzZWUgdGhlIGRvZyAKIFRoZSBkb2cgc2VlcyBtZSAKIFRoaXMgbGluZSB0ZXN0cyBzdHVmZg==",
+  "pattern": "hello world"
+}
+```
 
 ##### Output
 
@@ -72,11 +82,21 @@ This action is used to find patterns in a string.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|behavior|string|Default|False|Return entire matched lines or only matched pattern|['Default', 'Only matching']|
-|pattern|string|None|True|Pattern to match|None|
-|text|string|None|True|String to match|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|behavior|string|Default|False|Return entire matched lines or only matched pattern|['Default', 'Only matching']|Default|
+|pattern|string|None|True|Pattern to match|None|hello world|
+|text|string|None|True|String to match|None|hello world \n hello world2|
+
+Example input:
+
+```
+{
+  "behavior": "Default",
+  "pattern": "hello world",
+  "text": "hello world \\n hello world2"
+}
+```
 
 ##### Output
 
@@ -113,6 +133,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.4 - Security fix for potential arbitrary code execution | Fix issue where grep would sometimes not find file to run against
 * 1.0.3 - New spec and help.md format for the Extension Library | Remove duplicated code | Remove saving to file when string action | Changed bare strings to Input.* in params.get | Removed unused function
 * 1.0.2 - Update to use the `komand/python-3-slim-plugin:2` Docker image to reduce plugin size
 * 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
