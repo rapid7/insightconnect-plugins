@@ -32,7 +32,7 @@ class BlacklistUrlInput(insightconnect_plugin_runtime.Input):
     "urls": {
       "type": "array",
       "title": "URLs",
-      "description": "A given set of one or more URLs to update in the blacklist",
+      "description": "A given set of one or more URLs to update in the blacklist. URLs must include the scheme (http, https, etc)",
       "items": {
         "type": "string"
       },
