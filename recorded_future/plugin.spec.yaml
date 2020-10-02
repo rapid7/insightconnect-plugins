@@ -1322,7 +1322,7 @@ actions:
         title: Alert ID
         description: Alert ID
         type: string
-        example: xxxx
+        example: fhS1El
         required: true
     output:
       alert:
