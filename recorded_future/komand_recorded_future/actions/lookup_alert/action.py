@@ -14,7 +14,7 @@ class LookupAlert(komand.Action):
                 output=LookupAlertOutput())
 
     def run(self, params={}):
-        alert_id = params.get("id")
+        alert_id = params.get(Input.ALERT_ID)
         alert = self.connection.client.lookup_alert(alert_id)
-        return alert
+        return {Output.ALERT: komand.helper.clean(alert.get("data"))}
 

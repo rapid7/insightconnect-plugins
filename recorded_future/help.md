@@ -135,13 +135,6 @@ This action is used to search for results related to a specific parent domain.
 Example input:
 
 ```
-{
-  "direction": "asc",
-  "from": 0,
-  "limit": 10,
-  "orderby": "Riskscore",
-  "parent": "example.com"
-}
 ```
 
 ##### Output
@@ -253,6 +246,13 @@ This action is used to search for data related to malware.
 Example input:
 
 ```
+{
+  "direction": "asc",
+  "freetext": "example",
+  "from": 0,
+  "limit": 10,
+  "orderby": "Riskscore"
+}
 ```
 
 ##### Output
@@ -1294,9 +1294,6 @@ This action is used to fetch information about a specific vulnerability by CVE o
 Example input:
 
 ```
-{
-  "id": "CVE-2014-0160"
-}
 ```
 
 ##### Output
@@ -1404,6 +1401,8 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+
+* 2.1.0 - New action Lookup Alert
 * 2.0.1 - Add CPE, Analyst Notes, and Related Entities to Lookup Vulnerability action output
 * 2.0.0 - Add risk output to Lookup Vulnerability
 * 1.5.5 - Fix NoneType has no len() | Fix enums in search hashes
