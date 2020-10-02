@@ -246,13 +246,6 @@ This action is used to search for data related to malware.
 Example input:
 
 ```
-{
-  "direction": "asc",
-  "freetext": "example",
-  "from": 0,
-  "limit": 10,
-  "orderby": "Riskscore"
-}
 ```
 
 ##### Output
@@ -569,9 +562,6 @@ This action is used to returns a list of hashes matching a specified risk rule.
 Example input:
 
 ```
-{
-  "list": "positive_malware_verdict"
-}
 ```
 
 ##### Output
@@ -1400,7 +1390,6 @@ _This plugin does not contain any custom output types._
 This plugin does not contain any troubleshooting information.
 
 # Version History
-
 
 * 2.1.0 - New action Lookup Alert
 * 2.0.1 - Add CPE, Analyst Notes, and Related Entities to Lookup Vulnerability action output
