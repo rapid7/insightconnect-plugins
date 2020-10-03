@@ -24,7 +24,7 @@ class GetSandboxReportForHashInput(insightconnect_plugin_runtime.Input):
     "hash": {
       "type": "string",
       "title": "Hash",
-      "description": "MD5 hash to analyze",
+      "description": "MD5 hash to get report",
       "order": 1
     }
   },

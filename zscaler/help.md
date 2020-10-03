@@ -17,17 +17,6 @@
 
 ## Setup
 
-To locate your base URI and key:
-
-1. Log in to the ZIA Admin Portal using your admin credentials.
-2. Go to **Administration > API Key Management**.
-
-In order to view the API Key Management page, the admin must be assigned an admin role that includes the Authentication Configuration functional scope.
-
-In the **Organization API Key** tab, the base URI and key details are displayed within the table.
-
-For more information see the [Zscalar getting started guide](https://help.zscaler.com/zia/api-getting-started) on obtaining the API key and base URL.
-
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -58,7 +47,7 @@ This action is used to get a full report for an MD5 hash of a file that was anal
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hash|string|None|True|MD5 hash to analyze|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|hash|string|None|True|MD5 hash to get report|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
