@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add or remove a user from an Active Directory group"
+    DESCRIPTION = "Add or remove an object from an Active Directory group"
 
 
 class Input:
@@ -36,7 +36,7 @@ class ModifyGroupsInput(komand.Input):
     "distinguished_name": {
       "type": "string",
       "title": "Distinguished Name",
-      "description": "The distinguished name of the user whose membership will be modified",
+      "description": "The distinguished name of the object whose membership will be modified",
       "order": 1
     },
     "group_dn": {

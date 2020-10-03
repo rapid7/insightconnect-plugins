@@ -11,12 +11,14 @@ This plugin utilizes the SentinelOne API, the documentation is located in the Se
 * Blacklist hashes
 * Trigger workflows on security alerts
 * Manage threats
+* Fetch Threats File
 
 # Requirements
 
 * Sentinel one API administrative credentials
 
 # Documentation
+
 ## Setup
 
 The connection configuration accepts the following parameters:
@@ -37,9 +39,46 @@ Example input:
   "url": "https://example.sentinelone.com"
 }
 ```
+
 ## Technical Details
 
 ### Actions
+
+#### Fetch Threats File
+
+This action is used to fetch a file associated with the threat that matches the filter. Your user role must have permissions to Fetch Threat File - Admin, IR Team, SOC.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|integer|None|True|Threat ID|None|None|
+|password|password|None|True|File encryption password, min. length 10 characters and cannot contain whitespace|None|Rapid7 Insightconnect|
+
+Example input:
+
+```
+{
+  "password": "Rapid7 Insightconnect"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|file|file|True|Base64 encoded threat file|
+
+Example output:
+
+```
+{
+  "file": {
+    "filename": "report.txt",
+    "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
+  }
+}
+```
 
 #### Connect to Network
 
@@ -531,7 +570,6 @@ Example output:
 
 This action is used to blacklist and unblacklist a SHA1 hash. The blacklist is attempted for Linux, Windows, and MacOS operating systems and for all sites that the user has permission to manage.
 Note that when attempting to unblacklist a SHA1 hash by setting `blacklist_state` to `false`, the SentinelOne API will always return success even if the hash was not blacklisted to begin with.
-
 
 ##### Input
 
@@ -1470,6 +1508,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.0 - Add new action Fetch Threats File
 * 3.0.0 - Update help.md for the Extension Library | Update title in action Blacklist by IOC Hash, Get Activities, Count Summary and Connect to Network
 * 2.1.1 - Upgrade trigger Get Threats to only return threats since trigger start
 * 2.1.0 - Add `agent_active` field to input in action Search Agents

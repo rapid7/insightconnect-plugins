@@ -28,8 +28,67 @@ class CiscoFirePowerApi:
     def get_address_objects(self, endpoint: str) -> dict:
         return self._call_api("GET", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}")
 
+    def get_address_object(self, endpoint: str, object_id: str) -> dict:
+        return self._call_api("GET", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}/{object_id}")
+
     def delete_address_object(self, endpoint: str, object_id: str) -> dict:
         return self._call_api("DELETE", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}/{object_id}")
+
+    def get_network_addresses(self) -> list:
+        return self.run_with_pages(f"fmc_config/v1/domain/{self.domain_uuid}/object/networkaddresses", expanded=True)
+
+    def find_network_object(self, address_object: str) -> dict:
+        for item in self.get_network_addresses():
+            if item.get("name") == address_object or item.get("value") == address_object:
+                return item
+
+        return {}
+
+    def get_network_address(self, network_address_name: str) -> dict:
+        for item in self.get_network_addresses():
+            if item.get("name") == network_address_name or item.get("objectId") == network_address_name:
+                return item
+
+        return {}
+
+    def get_address_groups(self) -> list:
+        return self.run_with_pages(f"fmc_config/v1/domain/{self.domain_uuid}/object/networkgroups", expanded=True)
+
+    def get_address_group(self, group_name: str) -> dict:
+        for item in self.get_address_groups():
+            if item.get("name") == group_name:
+                return item
+
+        return {}
+
+    def update_address_group(self, payload):
+        return self._call_api(
+            "PUT",
+            f"fmc_config/v1/domain/{self.domain_uuid}/object/networkgroups/{payload.get('id')}",
+            json_data=payload
+        )
+
+    def run_with_pages(self, path: str, expanded: bool = False) -> list:
+        objects = []
+        limit = 100
+        for page in range(0, 9999):
+            params = {
+                "limit": limit,
+                "offset": page * limit
+            }
+            if expanded:
+                params['expanded'] = True
+            response = self._call_api(
+                "GET",
+                path,
+                params=params
+            )
+            objects.extend(response.get("items", []))
+
+            if (page + 1) * limit >= response.get("paging", {}).get("pages", 0):
+                break
+
+        return objects
 
     def _call_api(self, method: str, path: str, json_data: dict = None, params: dict = None):
         response = {"text": ""}

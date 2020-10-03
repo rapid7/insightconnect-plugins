@@ -8,6 +8,7 @@ The [BlackBerry CylancePROTECT](https://www.cylance.com/en-us/platform/products/
 * Blacklist a malicious hash
 * Quarantine endpoints
 * Search threats
+* Delete assets
 
 # Requirements
 
@@ -48,6 +49,56 @@ Example input:
 
 ### Actions
 
+#### Delete Asset
+
+This action is used to delete assets/devices from the Cylance console.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agents|[]string|None|True|Device(s) to delete. Accepts IP address, MAC address, hostname, or device ID|None|["Example-Hostname", "198.51.100.1"]|
+|whitelist|[]string|None|False|This list contains a set of hosts that should not be deleted. This can include IPs, hostnames or device IDs|None|["198.51.100.100", "Example-Hostname", "1abc234d-5efa-6789-bcde-0f1abcde23f5"]|
+
+Example input:
+
+```
+{
+  "agents": [
+    "Example-Hostname",
+    "198.51.100.1"
+  ],
+  "whitelist": [
+    "198.51.100.100",
+    "Example-Hostname",
+    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|deleted|[]string|False|List of assets that were deleted|
+|not_deleted|[]string|False|List of assets that were not deleted, either because of whitelist or because they were not found|
+|success|boolean|True|Return true if at least one device was deleted|
+
+Example output:
+
+```
+{
+  "deleted": [
+    "10.0.2.15"
+  ],
+  "not_deleted": [
+    "2.2.2.2", 
+    "3.3.3.3"
+  ],
+  "success": true
+}
+```
+
 #### Update Agent Threat
 
 This action updates the status (waive or quarantine) of a convicted threat on a selected device.
@@ -64,14 +115,9 @@ Example input:
 
 ```
 {
-  "add_zones": [
-    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
-  ],
   "agent": "Example-Hostname",
-  "policy": "1abc234d-5efa-6789-bcde-0f1abcde23f5",
-  "remove_zones": [
-    "1abc234d-5efa-6789-bcde-0f1abcde23f5"
-  ]
+  "quarantine_state": true,
+  "threat_identifier": "44d88612fea8a8f36de82e1278abb02f"
 }
 ```
 
@@ -434,6 +480,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.5.0 - New action Delete Asset | Rework utility function
 * 1.4.0 - New actions Update Agent Threat, Update Agent
 * 1.3.0 - New action Search Agents
 * 1.2.0 - New actions Search Threats, Get Devices Affected by Threat

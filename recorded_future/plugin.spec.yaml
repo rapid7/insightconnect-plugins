@@ -9,7 +9,7 @@ status: []
 description: "Recorded Future arms threat analysts, security operators, and incident
   responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7
 InsightConnect, users can search domain lists, entity lists, and more"
-version: 2.0.0
+version: 2.0.1
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/recorded_future
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -27,6 +27,67 @@ hub_tags:
 enable_cache: false
 language: python
 types:
+  context_entities:
+    description:
+      type: string
+      required: false
+    id:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    type:
+      type: string
+      required: false
+  labels:
+    id:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    type:
+      type: string
+      required: false
+  attributes:
+    context_entities:
+      type: "[]context_entities"
+      required: false
+    labels:
+      type: "[]labels"
+      required: false
+    note_entities:
+      type: "[]labels"
+      required: false
+    published:
+      type: string
+      required: false
+    text:
+      type: string
+      required: false
+    title:
+      type: string
+      required: false
+    topic:
+      type: context_entities
+      required: false
+    validated_on:
+      type: string
+      required: false
+    validation_urls:
+      type: "[]labels"
+      required: false
+  analystNote:
+    attributes:
+      type: attributes
+      required: false
+    id:
+      type: string
+      required: false
+    source:
+      type: labels
+      required: false
   counts:
     count:
       type: integer
@@ -259,6 +320,10 @@ types:
       required: false
     relatedLinks:
       type: '[]string'
+      required: false
+    analystNotes:
+      title: Analyst Notes
+      type: '[]analystNote'
       required: false
   location_data:
     continent:
