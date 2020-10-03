@@ -59,6 +59,7 @@ Example input:
 
 ```
 {
+  "id": "939039647215561624",
   "password": "Rapid7 Insightconnect"
 }
 ```
