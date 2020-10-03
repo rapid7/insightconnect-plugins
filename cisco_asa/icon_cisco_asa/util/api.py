@@ -75,7 +75,7 @@ class CiscoAsaAPI:
     def create_address_object(self, name: str, object_type: str, address: str) -> dict:
         return self._call_api(
             "POST",
-            f"objects/networkobjects",
+            "objects/networkobjects",
             json_data={
                 "name": name,
                 "host": {

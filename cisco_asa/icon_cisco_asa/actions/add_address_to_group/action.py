@@ -30,7 +30,7 @@ class AddAddressToGroup(insightconnect_plugin_runtime.Action):
                 break
 
         if found:
-            self.logger.info(f"Address: {address} already in group: {group}")
+            self.logger.info(f"{address} already in {group_name}")
         else:
             all_members.append({
                 "kind": self._get_kind(address),

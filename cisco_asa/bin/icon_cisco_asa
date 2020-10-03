@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Cisco Adaptive Security Appliance"
 Vendor = "rapid7"
-Version = "1.4.0"
+Version = "1.4.1"
 Description = "The Cisco ASA plugin allows you to automate the management of network objects"
 
 
