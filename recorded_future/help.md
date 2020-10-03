@@ -34,7 +34,7 @@ Example input:
 
 ```
 {
-  "api_key": "{\"secretKey\": \"9de5069c5afe602b2ea0a04b66beb2c0\"}"
+  "api_key": {"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}
 }
 ```
 
@@ -547,6 +547,9 @@ This action is used to returns a list of hashes matching a specified risk rule.
 Example input:
 
 ```
+{
+  "list": "positive_malware_verdict"
+}
 ```
 
 ##### Output
@@ -1294,6 +1297,72 @@ Example output:
       "id": "S0eb_5",
       "name": "CVE-2017-0147",
       "type": "CyberVulnerability"
+    },
+    "nvdDescription": "Microsoft PowerPoint 2007 SP3, Word 2007 SP3, PowerPoint 2010 SP2, Word 2010 SP2, PowerPoint 2013 SP1, Word 2013 SP1, and PowerPoint 2013 RT SP1 allow remote attackers to execute arbitrary code or cause a denial of service (memory corruption) via a crafted Office document, aka \"Microsoft Office Memory Corruption Vulnerability.\"",
+    "cvss": {
+      "accessVector": "NETWORK",
+      "lastModified": "2018-10-12T22:09:00.000Z",
+      "published": "2015-07-14T21:59:00.000Z",
+      "score": 9.3,
+      "availability": "COMPLETE",
+      "confidentiality": "COMPLETE",
+      "version": "2.0",
+      "authentication": "NONE",
+      "accessComplexity": "MEDIUM",
+      "integrity": "COMPLETE"
+    },
+    "commonNames": [],
+    "cvssv3": {},
+    "intelCard": "https://app.recordedfuture.com/live/sc/entity/OjOAdZ",
+    "rawrisk": [
+      {
+        "rule": "linkedToCyberExploit",
+        "timestamp": "2017-01-09T20:10:40.000Z"
+      },
+      {
+        "rule": "linkedToIntrusionMethod",
+        "timestamp": "2016-10-25T00:00:00.000Z"
+      }
+    ],
+    "metrics": [
+      {
+        "type": "darkWebHits",
+        "value": 15
+      },
+      {
+        "type": "trendVolume",
+        "value": 1
+      },
+      {
+        "type": "whitlistedCount",
+        "value": 0
+      }
+    ],
+    "cpe": [
+      "cpe:2.3:a:microsoft:powerpoint:2013:sp1:*:*:*:*:*:*",
+      "cpe:2.3:a:microsoft:powerpoint:2010:sp2:*:*:*:*:*:*",
+      "cpe:2.3:a:microsoft:powerpoint:2013:sp1:*:*:rt:*:*:*",
+      "cpe:2.3:a:microsoft:word:2013:sp1:*:*:*:*:*:*",
+      "cpe:2.3:a:microsoft:word:2007:sp3:*:*:*:*:*:*",
+      "cpe:2.3:a:microsoft:powerpoint:2007:sp3:*:*:*:*:*:*",
+      "cpe:2.3:a:microsoft:word:2013:sp1:*:*:*:*:x64:*",
+      "cpe:2.3:a:microsoft:word:2010:sp2:*:*:*:x64:*:*",
+      "cpe:2.3:a:microsoft:word:2013:sp1:*:*:rt:*:*:*",
+      "cpe:2.3:a:microsoft:word:2010:sp2:*:*:*:x86:*:*"
+    ],
+    "analystNotes": [
+      {
+        "source": {
+          "id": "xxxxxx",
+          "name": "Example Group",
+          "type": "Source"
+        },
+        "attributes": {
+          "validated_on": "2018-07-16T04:00:00.000Z",
+          "published": "2018-07-16T04:00:00.000Z",
+          "text": "These are notes about the exploit.",
+        }
+      }
     }
   }
 }
@@ -1313,6 +1382,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.1 - Add CPE, Analyst Notes, and Related Entities to Lookup Vulnerability action output
 * 2.0.0 - Add risk output to Lookup Vulnerability
 * 1.5.5 - Fix NoneType has no len() | Fix enums in search hashes
 * 1.5.4 - Add example inputs | Fix schema bug where `criticality` output was improperly defined as an integer in List Domain Risk Rules, List Hash Risk Rules, List IP Addresses Risk Rules and List Vulnerability Risk Rules actions
