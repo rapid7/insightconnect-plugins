@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 3.1.0
+version: 3.2.0
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
@@ -1537,7 +1537,7 @@ actions:
       id:
         title: ID
         description: Threat ID
-        type: integer
+        type: string
         required: true
       password:
         title: Password
