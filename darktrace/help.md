@@ -115,7 +115,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|[]trigger_result|True|Alerts results|
+|results|[]results|True|Alerts results|
 
 Example output:
 
@@ -279,7 +279,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.1.1 - Fix input `0` for parameters DID, PBID, Min Score and PID in trigger Get Alerts
+* 1.1.1 - Fix input `0` for parameters DID, PBID, Min Score and PID in trigger Get Alerts | Create new custom type for trigger Get Alerts
 * 1.1.0 - Add new trigger Pull Alerts
 * 1.0.0 - Initial plugin
 
