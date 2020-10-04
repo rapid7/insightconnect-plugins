@@ -299,9 +299,9 @@ This action is used to find the difference between two Datetime inputs.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|first_time|date|None|True|First date|None|2020-07-22 21:20:33|
+|first_time|date|None|True|First date|None|2020-07-22T21:20:33.0Z|
 |result_unit|string|None|True|Time unit of measurement for result|['Years', 'Months', 'Days', 'Hours', 'Minutes', 'Seconds']|Years|
-|second_time|date|None|True|Second date|None|2022-07-22 21:20:33|
+|second_time|date|None|True|Second date|None|2022-07-22T21:20:33.0Z|
 
 Example input:
 
@@ -345,6 +345,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.1 - Update to latest plugin runtime with support for gevent worker class
 * 2.1.0 - New actions To UTC and To Localtime
 * 2.0.6 - Update to v4 Python plugin runtime 
 * 2.0.5 - New spec and help.md format for the Extension Library | Changed const string in params.get to Input constants | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
