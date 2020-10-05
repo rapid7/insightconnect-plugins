@@ -1,5 +1,5 @@
 {
-	"spec": "e7f8dae4f2f4f19167a14ee23a199e2b",
+	"spec": "9015c17a5a84076e711499ef0e069e62",
 	"manifest": "f085aa3c7500332f77d051fb54e3686a",
 	"setup": "db8c714c56662c4db2029a644391f71b",
 	"schemas": [
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "download_url_risk_list/schema.py",
-			"hash": "8acb2c6e02876c990f8fe41a9df3555f"
+			"hash": "1fe927ae4037355f820e504685b86147"
 		},
 		{
 			"identifier": "download_vulnerability_risk_list/schema.py",

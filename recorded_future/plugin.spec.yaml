@@ -1329,7 +1329,7 @@ actions:
         description: Risk score of data
         type: string
         required: false
-        example: [0,100]
+        example: "[0,100]"
       riskRule:
         title: Risk Rule
         description: Risk rule od data

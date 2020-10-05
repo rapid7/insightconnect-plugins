@@ -176,7 +176,7 @@ This action this action is used to search for data related to URLs.
 |limit|number|10|False|Number of results to retrieve, up to 100|None|10|
 |orderby|string|None|False|Which property to sort the results by|['Created', 'Criticality', 'Lastseen', 'Firstseen', 'Modified', 'Riskscore', 'Rules', 'Sevendayshits', 'Sixtydayshits', 'Totalhits']|Riskscore|
 |riskRule|string|None|False|Risk rule od data|['Historically Reported by Insikt Group', 'C&C URL', 'Compromised URL', 'Historically Reported as a Defanged URL', 'Historically Reported by DHS AIS', 'Historically Reported Fraudulent Content', 'Historically Reported in Threat List', 'Historically Detected Malicious Browser Exploits', 'Historically Detected Malware Distribution', 'Historically Detected Cryptocurrency Mining Techniques', 'Historically Detected Phishing Techniques', 'Active Phishing URL', 'Positive Malware Verdict', 'Ransomware Distribution URL', 'Recently Reported by Insikt Group', 'Recently Reported as a Defanged URL', 'Recently Reported by DHS AIS', 'Recently Reported Fraudulent Content', 'Recently Detected Malicious Browser Exploits', 'Recently Detected Malware Distribution', 'Recently Detected Cryptocurrency Mining Techniques', 'Recently Detected Phishing Techniques', 'Recently Referenced by Insikt Group', 'Recently Reported Spam or Unwanted Content', 'Recently Detected Suspicious Content', 'Recently Active URL on Weaponized Domain', 'Historically Referenced by Insikt Group', 'Historically Reported Spam or Unwanted Content', 'Historically Detected Suspicious Content']|Historically Reported by Insikt Group|
-|riskScore|string|None|False|Risk score of data|None|[0, 100]|
+|riskScore|string|None|False|Risk score of data|None|[0,100]|
 
 Example input:
 
@@ -187,10 +187,7 @@ Example input:
   "limit": 10,
   "orderby": "Riskscore",
   "riskRule": "Historically Reported by Insikt Group",
-  "riskScore": [
-    0,
-    100
-  ]
+  "riskScore": "[0,100]"
 }
 ```
 
@@ -1564,9 +1561,6 @@ This action is used to fetch information about a specific vulnerability by CVE o
 Example input:
 
 ```
-{
-  "id": "CVE-2014-0160"
-}
 ```
 
 ##### Output
