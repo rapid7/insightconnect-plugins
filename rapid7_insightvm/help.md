@@ -18,16 +18,25 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 ## Setup
 
+NOTE: The url must point to your local console, not the platform or cloud console.  
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Username and password|None|None|
-|url|string|None|True|URL to your InsightVM console, without trailing slashes, e.g. https://insightvm.example.com:3780|None|None|
+|url|string|None|True|URL to your InsightVM console, without trailing slashes, e.g. https://insightvm.example.com:3780|None|https://insightvm.example.com:3780|
 
 Example input:
 
 ```
+{
+  "url": "https://insightvm.example.com:3780",
+  "credentials": {
+      "username": "username",
+      "password": "password"
+  }
+}
 ```
 
 ## Technical Details
