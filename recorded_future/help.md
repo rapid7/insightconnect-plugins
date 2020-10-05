@@ -50,7 +50,7 @@ This action is used to get information about an Alert.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|alert_id|string|None|True|Alert ID|None|xxxx|
+|alert_id|string|None|True|Alert ID|None|fhS1El|
 
 Example input:
 
@@ -247,13 +247,6 @@ This action is used to search for results related to a specific parent domain.
 Example input:
 
 ```
-{
-  "direction": "asc",
-  "from": 0,
-  "limit": 10,
-  "orderby": "Riskscore",
-  "parent": "example.com"
-}
 ```
 
 ##### Output
@@ -365,13 +358,6 @@ This action is used to search for data related to malware.
 Example input:
 
 ```
-{
-  "direction": "asc",
-  "freetext": "example",
-  "from": 0,
-  "limit": 10,
-  "orderby": "Riskscore"
-}
 ```
 
 ##### Output
@@ -688,9 +674,6 @@ This action is used to returns a list of hashes matching a specified risk rule.
 Example input:
 
 ```
-{
-  "list": "positive_malware_verdict"
-}
 ```
 
 ##### Output
