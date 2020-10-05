@@ -1,7 +1,7 @@
 {
-	"spec": "e701dae982ae236a85fa4466db8f5450",
-	"manifest": "d07a340bbc80419c3f55eb3522eec16f",
-	"setup": "c4af75e4d847c1fc00ebd726c793a562",
+	"spec": "ae8a841f36a37ec0912379a4e0783c01",
+	"manifest": "86894ac0973771b61dfb8b2b9b62747d",
+	"setup": "2ae72630e414a22d06b624dadb67d6b6",
 	"schemas": [
 		{
 			"identifier": "activities_list/schema.py",
