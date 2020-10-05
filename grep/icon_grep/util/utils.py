@@ -4,6 +4,9 @@ import tempfile
 
 
 def run_grep(log: object, text: str, pattern: str, behavior: str) -> str:
+    if len(text) > 10000000:
+        raise PluginException(cause='The raw text size exceeded 100Mb.',
+                              assistance='The Grep plugin can only process text of size 100Mb or less')
     with tempfile.NamedTemporaryFile() as fp:
         fp.write(text.encode())
         fp.seek(0)
