@@ -1,5 +1,5 @@
 from insightconnect_plugin_runtime.exceptions import PluginException
-from subprocess import run, CalledProcessError
+from subprocess import run
 import tempfile
 
 
