@@ -1374,7 +1374,7 @@ actions:
         required: true
   download_url_risk_list:
     title: Download URL Risk List
-    description: This action returns a risk list of urls matching a filtration
+    description: This action returns a risk list of URLs matching a filtration
     input:
       list:
         title: List
