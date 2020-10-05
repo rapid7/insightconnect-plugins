@@ -2,6 +2,7 @@
 from .download_IP_addresses_risk_list.action import DownloadIPAddressesRiskList
 from .download_domain_risk_list.action import DownloadDomainRiskList
 from .download_hash_risk_list.action import DownloadHashRiskList
+from .download_url_risk_list.action import DownloadUrlRiskList
 from .download_vulnerability_risk_list.action import DownloadVulnerabilityRiskList
 from .list_IP_addresses_risk_rules.action import ListIPAddressesRiskRules
 from .list_domain_risk_rules.action import ListDomainRiskRules
@@ -20,4 +21,5 @@ from .search_domains.action import SearchDomains
 from .search_entity_lists.action import SearchEntityLists
 from .search_hashes.action import SearchHashes
 from .search_malware.action import SearchMalware
+from .search_urls.action import SearchUrls
 from .search_vulnerabilities.action import SearchVulnerabilities
