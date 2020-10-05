@@ -5038,6 +5038,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.4.3 - Update to error handling and documentation around console URL in connection
 * 4.4.2 - Fix issue where Update Site Included Targets could throw exception
 * 4.4.1 - Add improved error handling for List Inactive Assets action
 * 4.4.0 - New action Update Vulnerability Exception Expiration Date

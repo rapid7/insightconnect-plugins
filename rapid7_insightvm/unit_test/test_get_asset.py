@@ -37,4 +37,5 @@ class TestGetAsset(TestCase):
         test_action.connection = test_conn
         results = test_action.run(action_params)
 
-        self.assertEquals({}, results)
+        self.assertIsNotNone(results)
+        self.assertTrue("asset" in results.keys())
