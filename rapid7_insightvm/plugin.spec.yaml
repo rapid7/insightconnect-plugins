@@ -1640,11 +1640,13 @@ connection:
     description: URL to your InsightVM console, without trailing slashes, e.g. https://insightvm.example.com:3780
     type: string
     required: true
+    example: https://insightvm.example.com:3780
   credentials:
     title: Credentials
     description: Username and password
     type: credential_username_password
     required: true
+    example: {'username':'username', 'password':'password'}
 actions:
   scan:
     title: Scan
