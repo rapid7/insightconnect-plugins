@@ -44,6 +44,147 @@ Example input:
 
 ### Actions
 
+#### Lookup Alert
+
+This action is used to get information about an Alert.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|alert_id|string|None|True|Alert ID|None|fhS1El|
+
+Example input:
+
+```
+{
+  "alert_id": "fhS1El"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|alert|object|True|Alert Details|
+
+Example output:
+
+```
+{
+  "alert": {
+    "review": {
+      "status": "no-action"
+    },
+    "entities": [
+      {
+        "entity": {
+          "id": "faymwJ",
+          "name": "CVE-2015-4719",
+          "type": "CyberVulnerability",
+          "description": "The client API authentication mechanism in Pexip Infinity before 10 allows remote attackers to gain privileges via a crafted request."
+        },
+        "risk": {
+          "criticalityLabel": "High",
+          "documents": [
+            {
+              "references": [
+                {
+                  "fragment": "CVE-2015-4719 (infinity).",
+                  "entities": [
+                    {
+                      "id": "faymwJ",
+                      "name": "CVE-2015-4719",
+                      "type": "CyberVulnerability",
+                      "description": "The client API authentication mechanism in Pexip Infinity before 10 allows remote attackers to gain privileges via a crafted request."
+                    }
+                  ],
+                  "language": "eng"
+                }
+              ],
+              "source": {
+                "id": "Z3TZAQ",
+                "name": "Sesin at",
+                "type": "Source"
+              },
+              "url": "https://www.sesin.at/2020/10/02/cve-2015-4719-infinity/",
+              "title": "CVE-2015-4719 (infinity)"
+            },
+            {
+              "references": [
+                {
+                  "fragment": "New post from https://t.co/uXvPWJy6tj (CVE-2015-4719 (infinity)) has been published on https://t.co/Aw7GbAXNJr.",
+                  "entities": [
+                    {
+                      "id": "faymwJ",
+                      "name": "CVE-2015-4719",
+                      "type": "CyberVulnerability",
+                      "description": "The client API authentication mechanism in Pexip Infinity before 10 allows remote attackers to gain privileges via a crafted request."
+                    },
+                    {
+                      "id": "url:https://www.sesin.at/2020/10/02/cve-2015-4719-infinity/",
+                      "name": "https://www.sesin.at/2020/10/02/cve-2015-4719-infinity/",
+                      "type": "URL"
+                    },
+                    {
+                      "id": "url:https://www.sesin.at/",
+                      "name": "https://www.sesin.at/",
+                      "type": "URL"
+                    }
+                  ],
+                  "language": "eng"
+                }
+              ],
+              "source": {
+                "id": "BV5",
+                "name": "Twitter",
+                "type": "Source"
+              },
+              "url": "https://twitter.com/WolfgangSesin/statuses/1311902525512126464",
+              "title": "New post from https://t.co/uXvPWJy6tj (CVE-2015-4719 (infinity)) has been published on https://t.co/Aw7GbAXNJr"
+            }
+          ],
+          "evidence": [
+            {
+              "timestamp": "2020-09-25T07:17:09.000Z",
+              "criticalityLabel": "Low",
+              "evidenceString": "8 sightings on 8 sources including: SecurityDatabase Alerts Monitor Last 100 Alerts, vulmon.com, @NetHaxBot, @VulmonFeeds, @VulnSME. Most recent tweet: New/Modified vulnerability published September 23, 2020 at 07:15PM on the NVD: CVE-2015-4719 https://t.co/oso1bdme0I The client API authentication mechanism in Pexip Infinity before 10 allows remote attackers to gain privileges via a crafted request. Most recent link (Sep 25, 2020): https://twitter.com/SecRiskRptSME/statuses/1309391474354802688",
+              "rule": "Linked to Recent Cyber Exploit",
+              "criticality": 1
+            },
+            {
+              "timestamp": "2020-10-02T00:25:00.000Z",
+              "criticalityLabel": "High",
+              "evidenceString": "1 sighting on 1 source: Recorded Future Vulnerability Analysis. CVSS v3.1 Score (8.3) calculated using NIST reported CVSS Base Score (9.8) and Recorded Future Temporal Metrics. Base vector string: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H. Temporal vector string: E:U/RL:X/RC:U. Most recent link (Oct 2, 2020): https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-4719",
+              "rule": "NIST Severity: High",
+              "criticality": 3
+            }
+          ],
+          "criticality": 3
+        },
+        "trend": {},
+        "documents": []
+      }
+    ],
+    "url": "https://app.recordedfuture.com/live/sc/notification/?id=fhS1El",
+    "rule": {
+      "url": "https://app.recordedfuture.com/live/sc/ViewIdkobra_view_report_item_alert_editor?view_opts=%7B%22reportId%22%3A%22feScJA%22%2C%22bTitle%22%3Atrue%2C%22title%22%3A%22Global+Vulnerability+Risk%2C+Vulnerabilities%2C+New+Exploit+Chatter%22%7D&state.bNavbar=false",
+      "name": "Global Vulnerability Risk, Vulnerabilities, New Exploit Chatter",
+      "id": "feScJA"
+    },
+    "triggered": "2020-10-02T06:55:23.996Z",
+    "id": "fhS1El",
+    "counts": {
+      "references": 2,
+      "entities": 1,
+      "documents": 2
+    },
+    "title": "Global Vulnerability Risk, Vulnerabilities, New Exploit Chatter - ... is n...",
+    "type": "ENTITY"
+  }
+}
+```
+
 #### Download URL Risk List
 
 This action this action returns a risk list of urls matching a filtration.
@@ -1561,6 +1702,9 @@ This action is used to fetch information about a specific vulnerability by CVE o
 Example input:
 
 ```
+{
+  "id": "CVE-2014-0160"
+}
 ```
 
 ##### Output
@@ -1668,8 +1812,8 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.2.0 - Add new actions Search URLs and Download URL Risk List
-* 2.1.0 - Add new action List URL Risk Rules | Update Recorded Future logo
+* 2.2.0 - New actions Search URLs, Download URL Risk List and List URL Risk Rules | Update Recorded Future logo
+* 2.1.0 - New action Lookup Alert
 * 2.0.1 - Add CPE, Analyst Notes, and Related Entities to Lookup Vulnerability action output
 * 2.0.0 - Add risk output to Lookup Vulnerability
 * 1.5.5 - Fix NoneType has no len() | Fix enums in search hashes

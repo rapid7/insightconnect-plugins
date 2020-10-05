@@ -10,6 +10,7 @@ from .list_hash_risk_rules.action import ListHashRiskRules
 from .list_url_risk_rules.action import ListUrlRiskRules
 from .list_vulnerability_risk_rules.action import ListVulnerabilityRiskRules
 from .lookup_IP_address.action import LookupIPAddress
+from .lookup_alert.action import LookupAlert
 from .lookup_domain.action import LookupDomain
 from .lookup_entity_list.action import LookupEntityList
 from .lookup_hash.action import LookupHash

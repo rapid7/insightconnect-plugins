@@ -3,23 +3,24 @@ import os
 sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase
-from komand_rapid7_insightvm.connection.connection import Connection
-from komand_rapid7_insightvm.actions.get_asset import GetAsset
+from komand_recorded_future.connection.connection import Connection
+from komand_recorded_future.actions.lookup_alert import LookupAlert
 import json
 import logging
 
 
-class TestGetAsset(TestCase):
-    def test_integration_get_asset(self):
+class TestLookupAlert(TestCase):
+    def test_integration_lookup_alert(self):
+
         log = logging.getLogger("Test")
         test_conn = Connection()
-        test_action = GetAsset()
+        test_action = LookupAlert()
 
         test_conn.logger = log
         test_action.logger = log
 
         try:
-            with open("../tests/get_asset.json") as file:
+            with open("../tests/lookup_alert.json") as file:
                 test_json = json.loads(file.read()).get("body")
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
@@ -37,5 +38,7 @@ class TestGetAsset(TestCase):
         test_action.connection = test_conn
         results = test_action.run(action_params)
 
+        # TODO: The following assert should be updated to look for data from your action
+        # For example: self.assertEquals({"success": True}, results)
         self.assertIsNotNone(results)
-        self.assertTrue("asset" in results.keys())
+        self.assertTrue("alert" in results.keys())
