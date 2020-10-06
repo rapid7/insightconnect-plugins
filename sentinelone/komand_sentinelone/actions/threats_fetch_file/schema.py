@@ -23,7 +23,7 @@ class ThreatsFetchFileInput(komand.Input):
   "title": "Variables",
   "properties": {
     "id": {
-      "type": "integer",
+      "type": "string",
       "title": "ID",
       "description": "Threat ID",
       "order": 1

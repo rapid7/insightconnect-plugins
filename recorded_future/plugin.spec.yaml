@@ -9,7 +9,7 @@ status: []
 description: "Recorded Future arms threat analysts, security operators, and incident
   responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7
 InsightConnect, users can search domain lists, entity lists, and more"
-version: 2.0.1
+version: 2.1.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/recorded_future
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -439,6 +439,48 @@ types:
       title: Score
       description: Score
       type: integer
+      required: false
+  review:
+    status:
+      type: string
+      required: false
+  rule:
+    id:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    url:
+      type: string
+      required: false
+  alert:
+    counts:
+      type: counts
+      required: false
+    entities:
+      type: "[]entities"
+      required: false
+    id:
+      type: string
+      required: false
+    review:
+      type: review
+      required: false
+    rule:
+      type: rule
+      required: false
+    title:
+      type: string
+      required: false
+    triggered:
+      type: string
+      required: false
+    type:
+      type: string
+      required: false
+    url:
+      type: string
       required: false
 
 connection:
@@ -1272,3 +1314,21 @@ actions:
         description: Risk
         type: risk
         required: false
+  lookup_alert:
+    title: Lookup Alert
+    description: Get information about an Alert
+    input:
+      alert_id:
+        title: Alert ID
+        description: Alert ID
+        type: string
+        example: fhS1El
+        required: true
+    output:
+      alert:
+        title: Alert
+        description: Alert Details
+        type: object
+        required: true
+
+
