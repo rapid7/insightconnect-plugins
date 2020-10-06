@@ -18,8 +18,6 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 ## Setup
 
-The URL must point to your local console, not the platform or cloud console.  
-
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -30,13 +28,7 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
-{
-  "url": "https://insightvm.example.com:3780",
-  "credentials": {
-      "username": "username",
-      "password": "password"
-  }
-}
+
 ```
 
 ## Technical Details
@@ -1772,10 +1764,16 @@ This action is used to search for assets using a filtered asset search.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |searchCriteria|object|None|True|Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|None|
+|size|string|None|False|The number of records to retrieve if blank or 0 all assets that match the search will be returned|None|100|
+|sort|string|None|False|The criteria to sort the records by, in the format property[,ASC|DESC]. The default sort order is ascending. Multiple sort criteria can be specified using multiple sort query parameters.|None|risk-score[,DESC]|
 
 Example input:
 
 ```
+{
+  "size": 100,
+  "sort": "risk-score[,DESC]"
+}
 ```
 
 ##### Output
@@ -5047,6 +5045,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.5.0 - Update to Asset Search action to allow sorting and control over the size of the return
 * 4.4.3 - Update to error handling and documentation around console URL in connection
 * 4.4.2 - Fix issue where Update Site Included Targets could throw exception
 * 4.4.1 - Add improved error handling for List Inactive Assets action

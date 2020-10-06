@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans
-version: 4.4.3
+version: 4.5.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -2182,6 +2182,18 @@ actions:
         description: 'Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria'
         type: object
         required: true
+      size:
+        title: Size
+        description: The number of records to retrieve if blank or 0 all assets that match the search will be returned
+        type: string
+        required: false
+        example: 100
+      sort:
+        title: Sort
+        description: The criteria to sort the records by, in the format property[,ASC|DESC]. The default sort order is ascending. Multiple sort criteria can be specified using multiple sort query parameters.
+        type: string
+        required: false
+        example: risk-score[,DESC]
     output:
       assets:
         title: Assets

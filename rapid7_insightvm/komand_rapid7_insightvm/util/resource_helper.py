@@ -149,10 +149,10 @@ class ResourceHelper(object):
         while True:
             self.logger.info(f"Fetching results from page {current_page}")
             params['page'] = current_page
-            response = self._get_resource_page(endpoint=endpoint,
-                                               method=method,
-                                               params=params,
-                                               payload=payload)
+            response = self.get_resource_page(endpoint=endpoint,
+                                              method=method,
+                                              params=params,
+                                              payload=payload)
 
             resources += response.resources  # Grab resources and append to total
             self.logger.info(f"Got {len(response.resources)} resources "
@@ -167,7 +167,7 @@ class ResourceHelper(object):
 
         return resources
 
-    def _get_resource_page(self, endpoint: str, method: str, params: dict, payload: dict) -> RequestResult:
+    def get_resource_page(self, endpoint: str, method: str, params: dict, payload: dict) -> RequestResult:
         """
         Retrieves resources from a security console
         :param endpoint: Endpoint to reach
