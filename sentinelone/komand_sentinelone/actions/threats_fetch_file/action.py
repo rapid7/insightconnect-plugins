@@ -24,7 +24,7 @@ class ThreatsFetchFile(komand.Action):
             )
 
         agent_filter = {
-            "ids": [str(threat_id)]
+            "ids": [threat_id]
         }
         self.connection.threats_fetch_file(params.get(Input.PASSWORD), agent_filter)
         if agent_filter["ids"]:
