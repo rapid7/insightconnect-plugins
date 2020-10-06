@@ -187,7 +187,7 @@ Example output:
 
 #### Download URL Risk List
 
-This action this action returns a risk list of urls matching a filtration.
+This action returns a risk list of URLs matching a filtration.
 
 ##### Input
 
