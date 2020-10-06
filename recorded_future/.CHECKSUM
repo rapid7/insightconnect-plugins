@@ -1,5 +1,5 @@
 {
-	"spec": "d276679e3e1503771963d76fb6a37ead",
+	"spec": "dd6974ac839db20b865ee0ce0d9588fc",
 	"manifest": "1436826e7a6a4de4e5fc34583a31e307",
 	"setup": "db8c714c56662c4db2029a644391f71b",
 	"schemas": [
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "download_url_risk_list/schema.py",
-			"hash": "1fe927ae4037355f820e504685b86147"
+			"hash": "d3b261d48b9666d1116abe8327d5d8f4"
 		},
 		{
 			"identifier": "download_vulnerability_risk_list/schema.py",
@@ -37,7 +37,7 @@
 		},
 		{
 			"identifier": "list_url_risk_rules/schema.py",
-			"hash": "1d74e73cc21f93626103ac512a1955e0"
+			"hash": "c003ff11e3078ad45cf76a01458a1ef9"
 		},
 		{
 			"identifier": "list_vulnerability_risk_rules/schema.py",
@@ -97,7 +97,7 @@
 		},
 		{
 			"identifier": "search_urls/schema.py",
-			"hash": "67634b011f75eb7d824d4d7de4c8ce33"
+			"hash": "c00508fd06156adce6d358d750cb1469"
 		},
 		{
 			"identifier": "search_vulnerabilities/schema.py",

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action is used to search for data related to URLs"
+    DESCRIPTION = "Search for data related to URLs"
 
 
 class Input:

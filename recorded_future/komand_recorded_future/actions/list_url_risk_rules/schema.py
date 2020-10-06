@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action used to list available filtration rules for URL risk lists"
+    DESCRIPTION = "List available filtration rules for URL risk lists"
 
 
 class Input:
