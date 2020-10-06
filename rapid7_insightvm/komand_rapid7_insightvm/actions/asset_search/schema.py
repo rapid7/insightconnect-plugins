@@ -30,7 +30,7 @@ class AssetSearchInput(komand.Input):
       "order": 1
     },
     "size": {
-      "type": "string",
+      "type": "number",
       "title": "Size",
       "description": "The number of records to retrieve if blank or 0 all assets that match the search will be returned",
       "order": 2

@@ -1764,7 +1764,7 @@ This action is used to search for assets using a filtered asset search.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |searchCriteria|object|None|True|Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|None|
-|size|string|None|False|The number of records to retrieve if blank or 0 all assets that match the search will be returned|None|100|
+|size|number|None|False|The number of records to retrieve if blank or 0 all assets that match the search will be returned|None|100|
 |sort|string|None|False|The criteria to sort the records by, in the format property[,ASC|DESC]. The default sort order is ascending. Multiple sort criteria can be specified using multiple sort query parameters.|None|risk-score[,DESC]|
 
 Example input:
