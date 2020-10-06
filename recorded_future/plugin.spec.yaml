@@ -1332,7 +1332,7 @@ actions:
         required: true
   list_url_risk_rules:
     title: List URL Risk Rules
-    description: This action used to list available filtration rules for URL risk lists
+    description: List available filtration rules for URL risk lists
     output:
       risk_rules:
         title: Risk Rules
