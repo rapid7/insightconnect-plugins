@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: darktrace
 title: DarkTrace
-version: 1.1.1
+version: 2.0.0
 description: Automate the management of watched domains and alerting using the Darktrace plugin
 vendor: rapid7
 support: rapid7
@@ -261,12 +261,12 @@ types:
     phid:
       title: PHID
       type: integer
-      description: PHID
+      description: Policy history ID
       required: false
     pid:
       title: PID
       type: integer
-      description: PID
+      description: Policy ID
       required: false
     priority:
       title: Priority
@@ -387,7 +387,7 @@ types:
     pid:
       title: PID
       type: integer
-      description: PID
+      description: Policy ID
       required: false
     priority:
       title: Priority
@@ -482,7 +482,7 @@ types:
     mlid:
       title: MLID
       type: integer
-      description: MLID
+      description: Metric logic ID
       required: false
     name:
       title: Name
@@ -493,17 +493,17 @@ types:
     cfid:
       title: CFID
       type: integer
-      description: CFID
+      description: Component filter ID
       required: false
     comparatorType:
-      title: Comparatortype
+      title: Comparator Type
       type: string
-      description: Comparatortype
+      description: Comparator type
       required: false
     filterType:
-      title: Filtertype
+      title: Filter Type
       type: string
-      description: Filtertype
+      description: Filter type
       required: false
     id:
       title: ID
@@ -514,17 +514,17 @@ types:
     cbid:
       title: CBID
       type: integer
-      description: CBID
+      description: Component breach ID
       required: false
     chid:
       title: CHID
       type: integer
-      description: CHID
+      description: Component history ID
       required: false
     cid:
       title: CID
       type: integer
-      description: CID
+      description: Component ID
       required: false
     interval:
       title: Interval
@@ -585,7 +585,7 @@ types:
     pbid:
       title: PBID
       type: integer
-      description: PBID
+      description: Policy breach ID
       required: false
     score:
       title: Score

@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "DarkTrace"
 Vendor = "rapid7"
-Version = "1.1.1"
+Version = "2.0.0"
 Description = "Automate the management of watched domains and alerting using the Darktrace plugin"
 
 
