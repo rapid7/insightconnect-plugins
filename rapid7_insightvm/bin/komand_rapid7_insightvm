@@ -23,7 +23,7 @@ def main():
             monkey.patch_all()
 
     import komand
-    from komand_rapid7_insightvm import connection, actions, triggers, tasks
+    from komand_rapid7_insightvm import connection, actions, triggers
 
     class ICONRapid7Insightvm(komand.Plugin):
         def __init__(self):

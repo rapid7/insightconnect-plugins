@@ -1917,6 +1917,269 @@ Example Output:
 }
 ```
 
+Example output:
+
+```
+{
+  "assets": [
+    {
+      "hostName": "iagent2-win10",
+      "id": 234,
+      "mac": "00:50:56:94:C6:7E",
+      "users": [
+        {
+          "fullName": "LocalService",
+          "id": -1,
+          "name": "LocalService"
+        },
+        {
+          "id": -1,
+          "name": "NetworkService",
+          "fullName": "NetworkService"
+        }
+      ],
+      "configurations": [
+        {
+          "name": "cpuinfo",
+          "value": "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz"
+        },
+        {
+          "value": "{}",
+          "name": "proxies"
+        }
+      ],
+      "history": [
+        {
+          "scanId": 3,
+          "type": "SCAN",
+          "version": 1,
+          "date": "2020-08-18T22:10:39.197Z"
+        },
+        {
+          "date": "2020-08-18T22:36:44.807Z",
+          "type": "AGENT-IMPORT",
+          "version": 2
+        }
+      ],
+      "ids": [
+        {
+          "id": "1C361442-440C-B64E-97BF-F0222329E87D",
+          "source": "CSPRODUCT"
+        },
+        {
+          "source": "R7 Agent",
+          "id": "3e8a7a2bab217e280c8ca3f4a1f5e544"
+        }
+      ],
+      "riskScore": 543979.25,
+      "links": [
+        {
+          "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+          "rel": "self"
+        },
+        {
+          "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+          "rel": "Software"
+        }
+      ],
+      "os": "Microsoft Windows 10 Enterprise Edition",
+      "osFingerprint": {
+        "vendor": "Microsoft",
+        "architecture": "x86_64",
+        "cpe": {
+          "v2.2": "cpe:/o:microsoft:windows_10:-:gold:~~~~x86~",
+          "v2.3": "cpe:2.3:o:microsoft:windows_10:-:gold:*:*:*:*:x86:...",
+          "vendor": "microsoft",
+          "version": "-",
+          "part": "o",
+          "product": "windows_10",
+          "targetHW": "x86",
+          "update": "gold"
+        },
+        "family": "Windows",
+        "id": 254,
+        "product": "Windows 10 Enterprise Edition",
+        "description": "Microsoft Windows 10 Enterprise Edition",
+        "systemName": "Microsoft Windows",
+        "type": "Workstation"
+      },
+      "vulnerabilities": {
+        "total": 777,
+        "critical": 654,
+        "exploits": 257,
+        "malwareKits": 0,
+        "moderate": 15,
+        "severe": 108
+      },
+      "addresses": [
+        {
+          "ip": "10.4.19.117",
+          "mac": "00:50:56:94:C6:7E"
+        }
+      ],
+      "assessedForVulnerabilities": true,
+      "hostNames": [
+        {
+          "name": "iagent2-win10",
+          "source": "other"
+        }
+      ],
+      "ip": "10.4.19.117",
+      "assessedForPolicies": false,
+      "rawRiskScore": 543979.25,
+      "services": [
+        {
+          "port": 135,
+          "protocol": "tcp",
+          "links": [
+            {
+              "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+              "rel": "self"
+            },
+            {
+              "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+              "rel": "Configurations"
+            }
+          ],
+          "name": "DCE Endpoint Resolution"
+        },
+        {
+          "name": "CIFS Name Service",
+          "port": 137,
+          "protocol": "udp",
+          "configurations": [
+            {
+              "name": "advertised-name-1",
+              "value": "IAGENT2-WIN10 (File Server Service)"
+            },
+            {
+              "name": "advertised-name-2",
+              "value": "IAGENT2-WIN10 (Computer Name)"
+            }
+          ],
+          "links": [
+            {
+              "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+              "rel": "self"
+            },
+            {
+              "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+              "rel": "Configurations"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "addresses": [
+        {
+          "ip": "10.4.26.214",
+          "mac": "00:50:56:94:E9:87"
+        }
+      ],
+      "assessedForPolicies": false,
+      "assessedForVulnerabilities": true,
+      "ids": [
+        {
+          "source": "Endpoint Agent",
+          "id": "33dd6c5c32e662d2eb96d75c0a379454"
+        },
+        {
+          "id": "33dd6c5c32e662d2eb96d75c0a379454",
+          "source": "R7 Agent"
+        }
+      ],
+      "ip": "10.4.26.214",
+      "os": "Microsoft Windows 10 Enterprise Edition 1803",
+      "hostNames": [
+        {
+          "name": "iagent1-win10",
+          "source": "other"
+        }
+      ],
+      "id": 2474,
+      "users": [
+        {
+          "id": -1,
+          "name": "LocalService",
+          "fullName": "LocalService"
+        },
+        {
+          "fullName": "NetworkService",
+          "id": -1,
+          "name": "NetworkService"
+        }
+      ],
+      "configurations": [
+        {
+          "name": "cpuinfo",
+          "value": "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz"
+        },
+        {
+          "name": "proxies",
+          "value": "{}"
+        }
+      ],
+      "history": [
+        {
+          "date": "2020-09-01T21:47:08.800Z",
+          "type": "AGENT-IMPORT",
+          "version": 1
+        },
+        {
+          "date": "2020-09-02T03:47:05.618Z",
+          "type": "AGENT-IMPORT",
+          "version": 2
+        }
+      ],
+      "rawRiskScore": 40026.30859375,
+      "hostName": "iagent1-win10",
+      "links": [
+        {
+          "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+          "rel": "self"
+        },
+        {
+          "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+          "rel": "Software"
+        }
+      ],
+      "mac": "00:50:56:94:E9:87",
+      "osFingerprint": {
+        "type": "Workstation",
+        "architecture": "x86_64",
+        "cpe": {
+          "part": "o",
+          "product": "windows_10",
+          "targetHW": "x86",
+          "update": "gold",
+          "v2.2": "cpe:/o:microsoft:windows_10:-:gold:~~~~x86~",
+          "v2.3": "cpe:2.3:o:microsoft:windows_10:-:gold:*:*:*:*:x86:...",
+          "vendor": "microsoft",
+          "version": "-"
+        },
+        "description": "Microsoft Windows 10 Enterprise Edition 1803",
+        "id": 519,
+        "product": "Windows 10 Enterprise Edition",
+        "family": "Windows",
+        "systemName": "Microsoft Windows",
+        "vendor": "Microsoft",
+        "version": "1803"
+      },
+      "riskScore": 40026.30859375,
+      "vulnerabilities": {
+        "moderate": 20,
+        "severe": 131,
+        "total": 184,
+        "critical": 33,
+        "exploits": 0,
+        "malwareKits": 0
+      }
+    }
+  ]
+}
+```
+
 #### Create Asset Group
 
 This action is used to create an asset group.
