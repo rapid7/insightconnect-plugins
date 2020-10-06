@@ -1812,7 +1812,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.2.0 - New actions Search URLs, Download URL Risk List and List URL Risk Rules | Update Recorded Future logo | In action Lookup Vulnerability change input ID to uppercase for CVE
+* 2.2.0 - New actions Search URLs, Download URL Risk List and List URL Risk Rules | Update Recorded Future logo | Allow both upper and lowercase CVE in Lookup Vulnerability action
 * 2.1.0 - New action Lookup Alert
 * 2.0.1 - Add CPE, Analyst Notes, and Related Entities to Lookup Vulnerability action output
 * 2.0.0 - Add risk output to Lookup Vulnerability
