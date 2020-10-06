@@ -306,7 +306,7 @@ Example output:
 
 #### Search URLs
 
-This action this action is used to search for data related to URLs.
+This action is used to search for data related to URLs.
 
 ##### Input
 
