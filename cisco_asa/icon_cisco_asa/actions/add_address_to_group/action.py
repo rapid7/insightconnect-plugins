@@ -22,7 +22,6 @@ class AddAddressToGroup(insightconnect_plugin_runtime.Action):
             raise PluginException(cause=f"The group {group} does not exist in Cisco ASA.",
                                   assistance="Please enter valid name and try again.")
 
-        object_id = group.get("objectID")
         all_members = group.get("members")
         found = False
         for member in all_members:
@@ -30,13 +29,15 @@ class AddAddressToGroup(insightconnect_plugin_runtime.Action):
                 found = True
                 break
 
-        if not found:
+        if found:
+            self.logger.info(f"{address} already in {group_name}")
+        else:
             all_members.append({
                 "kind": self._get_kind(address),
                 "value": address
             })
 
-            self.connection.cisco_asa_api.add_to_group(object_id, group_name, all_members)
+            self.connection.cisco_asa_api.update_group(group.get("objectId"), group_name, all_members)
 
         return {
             Output.SUCCESS: True
