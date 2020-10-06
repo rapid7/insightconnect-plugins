@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Dig"
 Vendor = "rapid7"
-Version = "1.0.8"
+Version = "1.0.7"
 Description = "Dig is used for forward and reverse DNS lookups"
 
 
