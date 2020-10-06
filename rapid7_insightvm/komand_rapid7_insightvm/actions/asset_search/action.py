@@ -33,6 +33,7 @@ class AssetSearch(komand.Action):
             resources = resource_helper.resource_request(endpoint=endpoint,
                                                          method='post', params=parameters,
                                                          payload=search_criteria)
+            resources = resources['resources']
         else:
             resources = []
             current_page = 0
