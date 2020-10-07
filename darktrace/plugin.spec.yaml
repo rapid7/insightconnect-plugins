@@ -701,7 +701,7 @@ triggers:
       minscore:
         title: Min Score
         type: integer
-        description: Return only breaches with a minimum score
+        description: Return only breaches with a minimum score. Valid values are 0-100.
         example: 10
         required: false
       pbid:

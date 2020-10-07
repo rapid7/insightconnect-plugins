@@ -27,7 +27,6 @@ class PullAlerts(insightconnect_plugin_runtime.Trigger):
         self.logger.info(f"Waiting for {frequency} seconds.")
         while True:
             data = []
-            # time.sleep(frequency)
             did = params.get(Input.DID, 0)
             minscore = params.get(Input.MINSCORE, 0)/100
             pbid = params.get(Input.PBID, 0)
@@ -56,3 +55,5 @@ class PullAlerts(insightconnect_plugin_runtime.Trigger):
                 })
             else:
                 self.logger.info(f"Empty response. Waiting for {frequency} seconds.")
+
+            time.sleep(frequency)
