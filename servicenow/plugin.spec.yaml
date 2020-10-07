@@ -67,17 +67,20 @@ connection:
     description: The full URL for your instance of ServiceNow, e.g. https://instance.servicenow.com
     type: string
     required: true
+    example: https://instance.servicenow.com
   client_login:
     title: Client Login Information
     description: The ServiceNow username and password for basic authentication API interaction
     type: credential_username_password
     required: true
+    example: '{"username":"user1", "password":"mypassword"}'
   timeout:
     title: Timeout
     description: The interval in seconds before abandoning an attempt to access ServiceNow
     type: integer
     required: false
     default: 30
+    example: 30
 actions:
   create_incident:
     title: Create Incident

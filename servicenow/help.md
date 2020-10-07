@@ -23,13 +23,21 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|client_login|credential_username_password|None|True|The ServiceNow username and password for basic authentication API interaction|None|None|
-|timeout|integer|30|False|The interval in seconds before abandoning an attempt to access ServiceNow|None|None|
-|url|string|None|True|The full URL for your instance of ServiceNow, e.g. https://instance.servicenow.com|None|None|
+|client_login|credential_username_password|None|True|The ServiceNow username and password for basic authentication API interaction|None|{"username":"user1", "password":"mypassword"}|
+|timeout|integer|30|False|The interval in seconds before abandoning an attempt to access ServiceNow|None|30|
+|url|string|None|True|The full URL for your instance of ServiceNow, e.g. https://instance.servicenow.com|None|https://instance.servicenow.com|
 
 Example input:
 
 ```
+{
+  "client_login": {
+    "username": "user1", 
+    "password": "mypassword"
+  },
+  "timeout": 30,
+  "url": "https://instance.servicenow.com"
+}
 ```
 
 ## Technical Details
