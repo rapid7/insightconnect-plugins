@@ -1,7 +1,7 @@
 import requests
 import json
-from komand.exceptions import PluginException
-from komand.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 
 class RequestHelper(object):

@@ -23,9 +23,22 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|client_login|credential_username_password|None|True|The ServiceNow username and password for basic authentication API interaction|None|None|
-|timeout|integer|30|False|The interval in seconds before abandoning an attempt to access ServiceNow|None|None|
-|url|string|None|True|The full URL for your instance of ServiceNow, e.g. https://instance.servicenow.com|None|None|
+|client_login|credential_username_password|None|True|The ServiceNow username and password for basic authentication API interaction|None|{"username":"user1", "password":"mypassword"}|
+|timeout|integer|30|False|The interval in seconds before abandoning an attempt to access ServiceNow|None|30|
+|url|string|None|True|The full URL for your instance of ServiceNow, e.g. https://instance.servicenow.com|None|https://instance.servicenow.com|
+
+Example input:
+
+```
+{
+  "client_login": {
+    "username": "user1", 
+    "password": "mypassword"
+  },
+  "timeout": 30,
+  "url": "https://instance.servicenow.com"
+}
+```
 
 ## Technical Details
 
@@ -87,6 +100,7 @@ Example output:
 
 ```
 {
+  "number": "123"
   "system_id": "daa10e5ddb5ef7002e12ff00ba9619db"
 }
 ```
@@ -592,6 +606,48 @@ Example output:
 
 ### Triggers
 
+#### Incident Created
+
+This trigger identifies if a new incident has been created.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|frequency|integer|5|True|How often to poll for new incidents (in seconds)|None|5|
+|query|string|None|False|Non-encoded query string to match new incident records (will poll for any new incident if query is omitted)|None|short_description=Newbug|
+
+Example input:
+
+```
+{
+  "frequency": 5,
+  "query": "short_description=Newbug"
+}
+```
+
+Example input (advanced query):
+```
+{
+  "frequency": 10,
+  "query": "short_description='Description with quotes'^active=true^priority=5"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|system_id|string|True|System ID of new incident|
+
+Example output:
+
+```
+{
+  "system_id": "280b3cb71b9f1450c9768622dd4bcb32"
+}
+```
+
 #### Incident Changed
 
 This trigger reports changes of the given fields in the given Incident.
@@ -637,7 +693,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.0.0 - New Number output to create incidient action
+* 4.1.0 - Add trigger Incident Created
+* 4.0.0 - New Number output to create incident action
 * 3.1.1 - New spec and help.md format for the Extension Library
 * 3.1.0 - Add action Get Incident Comments and Work Notes
 * 3.0.0 - Rewrite in Python | Renamed incident specific actions | New actions Create CI, Get CI, Update CI, Search CI
@@ -659,4 +716,3 @@ _This plugin does not contain any troubleshooting information._
 * [ServiceNow API](https://developer.servicenow.com/app.do#!/rest_api_doc?v=fuji&id=c_TableAPI)
 * [ServiceNow User Administration](http://wiki.servicenow.com/index.php?title=User_Administration)
 * [ServiceNow Operators](http://wiki.servicenow.com/index.php?title=Operators_Available_for_Filters_and_Queries)
-
