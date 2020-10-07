@@ -1,7 +1,7 @@
 {
-	"spec": "31ce5b108b708de72c58225ae2300860",
-	"manifest": "1161a744bc4cf2d6af3e13711d2dafeb",
-	"setup": "1895a7ee91ea7fae6e957a1c6370d137",
+	"spec": "dd6974ac839db20b865ee0ce0d9588fc",
+	"manifest": "1436826e7a6a4de4e5fc34583a31e307",
+	"setup": "db8c714c56662c4db2029a644391f71b",
 	"schemas": [
 		{
 			"identifier": "download_IP_addresses_risk_list/schema.py",
@@ -14,6 +14,10 @@
 		{
 			"identifier": "download_hash_risk_list/schema.py",
 			"hash": "bd2f33b8aced26a133bbf9cfeb53e82f"
+		},
+		{
+			"identifier": "download_url_risk_list/schema.py",
+			"hash": "d3b261d48b9666d1116abe8327d5d8f4"
 		},
 		{
 			"identifier": "download_vulnerability_risk_list/schema.py",
@@ -32,12 +36,20 @@
 			"hash": "34f2f9e2a90b2391c5088f2973b6c1b6"
 		},
 		{
+			"identifier": "list_url_risk_rules/schema.py",
+			"hash": "c003ff11e3078ad45cf76a01458a1ef9"
+		},
+		{
 			"identifier": "list_vulnerability_risk_rules/schema.py",
 			"hash": "20e908c1810efc789c386c4a1104acba"
 		},
 		{
 			"identifier": "lookup_IP_address/schema.py",
 			"hash": "d2f1b1dd83e284479b5e58b3640ad533"
+		},
+		{
+			"identifier": "lookup_alert/schema.py",
+			"hash": "83ffd5582751535431799803ca7c3baf"
 		},
 		{
 			"identifier": "lookup_domain/schema.py",
@@ -61,7 +73,7 @@
 		},
 		{
 			"identifier": "lookup_vulnerability/schema.py",
-			"hash": "8befbcf98a2fb536fb328bedceb1c49e"
+			"hash": "a8fae435861853780207e0152098500f"
 		},
 		{
 			"identifier": "search_IP_addresses/schema.py",
@@ -84,8 +96,12 @@
 			"hash": "eae440de63306c0c22d50497b9776abf"
 		},
 		{
+			"identifier": "search_urls/schema.py",
+			"hash": "c00508fd06156adce6d358d750cb1469"
+		},
+		{
 			"identifier": "search_vulnerabilities/schema.py",
-			"hash": "6a768063d2bbc2d332e03f21624c304c"
+			"hash": "a6470a6cc662d9b3c9d5c61aac828a60"
 		},
 		{
 			"identifier": "connection/schema.py",

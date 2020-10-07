@@ -29,6 +29,7 @@ class DomainListInput(komand.Input):
       "title": "Days Back",
       "description": "Use this parameter in exceptional circumstances where you need to find domains up to seven days prior to the current date. Set the value to an integer in the range of 1-7",
       "enum": [
+        0,
         1,
         2,
         3,
