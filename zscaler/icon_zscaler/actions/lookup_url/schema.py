@@ -24,7 +24,7 @@ class LookupUrlInput(insightconnect_plugin_runtime.Input):
     "urls": {
       "type": "array",
       "title": "URLs",
-      "description": "The given set of URLs to be looked up",
+      "description": "The given set of URLs or domains to be looked up",
       "items": {
         "type": "string"
       },
