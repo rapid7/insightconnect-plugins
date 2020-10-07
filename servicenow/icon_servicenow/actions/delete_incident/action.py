@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import DeleteIncidentInput, DeleteIncidentOutput, Input, Output, Component
 # Custom imports below
 
 
-class DeleteIncident(komand.Action):
+class DeleteIncident(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
