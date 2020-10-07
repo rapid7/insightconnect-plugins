@@ -34,14 +34,22 @@ class MicrosoftIntuneAPI:
     def search_managed_devices(self, device):
         if validators.uuid(device):
             return list(filter(lambda iter_device: iter_device['userId'] == device or iter_device['id'] == device,
-                               self._call_api("GET", f"deviceManagement/managedDevices")["value"]))
+                               self._call_api("GET", "deviceManagement/managedDevices")["value"]))
         elif validators.email(device):
-            filtering_params = ['emailAddress']
+            param = 'emailAddress'
         else:
-            filtering_params = ['deviceName']
-        filtering_params = " or ".join(map(lambda param: f"{param} eq '{device}'", filtering_params))
+            param = 'deviceName'
 
-        return self._call_api("GET", f"deviceManagement/managedDevices?$filter={filtering_params}")["value"]
+        value = self._call_api("GET", f"deviceManagement/managedDevices?$filter={param} eq '{device}'")["value"]
+        if value:
+            return value
+
+        device = device.strip().lower()
+        return list(filter(
+            lambda iter_device: iter_device['emailAddress'].lower() == device or iter_device[
+                'userPrincipalName'].lower() == device,
+            self._call_api("GET", "deviceManagement/managedDevices")["value"]
+        ))
 
     def windows_defender_update_signatures(self, managed_device):
         return self._call_api(
