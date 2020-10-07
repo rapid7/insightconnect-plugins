@@ -4,6 +4,9 @@ from komand_dig.util import util
 
 
 def safe_parse(regex):
+    if not regex:
+        return "NO MATCHES FOUND"
+
     regex = regex.group(1) if re else "NO MATCHES FOUND"
     return regex
 
@@ -25,17 +28,17 @@ def execute_command(logger, cmd, answer_section_regex, flags):
     ns = util.safe_parse(re.search('SERVER: (.+?)#', stdout))
     # Grab number of answers
     answers = util.safe_parse(re.search(r'ANSWER: ([0-9]+)', stdout))
+    answer_section = None
     if util.not_empty(answers):
         answers = int(answers)
 
-    answer_section = None
-    # We need answers to continue
-    if answers > 0:
-        # Grab resolved address section
-        if flags is None:
-            answer_section = util.safe_parse(re.search(answer_section_regex, stdout))
-        else:
-            answer_section = util.safe_parse(re.search(answer_section_regex, stdout, flags=flags))
+        # We need answers to continue
+        if answers > 0:
+            # Grab resolved address section
+            if flags is None:
+                answer_section = util.safe_parse(re.search(answer_section_regex, stdout))
+            else:
+                answer_section = util.safe_parse(re.search(answer_section_regex, stdout, flags=flags))
 
     if status != "NOERROR":
         stdout = f'Resolution failed, nameserver {ns} returned {status} status'
