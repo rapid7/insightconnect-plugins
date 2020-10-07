@@ -92,6 +92,7 @@ Example output:
 
 ```
 {
+  "number": "123"
   "system_id": "daa10e5ddb5ef7002e12ff00ba9619db"
 }
 ```
@@ -683,8 +684,12 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+<<<<<<< HEAD
 * 4.1.0 - Add trigger Incident Created
 * 4.0.0 - New Number output to create incidient action
+=======
+* 4.0.0 - Return incident number on Create Incident action
+>>>>>>> 2fead53174bf66ede51d7624ca350ec97d600912
 * 3.1.1 - New spec and help.md format for the Extension Library
 * 3.1.0 - Add action Get Incident Comments and Work Notes
 * 3.0.0 - Rewrite in Python | Renamed incident specific actions | New actions Create CI, Get CI, Update CI, Search CI
