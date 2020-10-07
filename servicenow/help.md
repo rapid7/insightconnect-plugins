@@ -617,6 +617,7 @@ Example input:
   "query": "short_description=Newbug"
 }
 ```
+
 Example input (advanced query):
 ```
 {
