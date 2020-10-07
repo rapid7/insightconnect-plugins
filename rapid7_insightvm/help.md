@@ -5314,7 +5314,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 4.5.0 - Update to Asset Search action to allow sorting and control over the size of the return
+* 4.5.0 - Update to Asset Search action to allow search result limiting and sorting
 * 4.4.3 - Update to error handling and documentation around console URL in connection
 * 4.4.2 - Fix issue where Update Site Included Targets could throw exception
 * 4.4.1 - Add improved error handling for List Inactive Assets action

@@ -2184,7 +2184,7 @@ actions:
         required: true
       size:
         title: Size
-        description: The number of records to retrieve if blank or 0 all assets that match the search will be returned
+        description: The number of records to retrieve. If blank or '0' all assets that match the search will be returned
         type: number
         required: false
         example: 100
@@ -3763,4 +3763,3 @@ triggers:
         description: InsightVM vulnerability exception
         type: vulnerability_exception
         required: false
-
