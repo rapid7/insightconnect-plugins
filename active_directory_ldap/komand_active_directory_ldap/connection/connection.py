@@ -21,6 +21,7 @@ class Connection(komand.Connection):
         user_name = params.get(Input.USERNAME_PASSWORD).get('username')
         password = params.get(Input.USERNAME_PASSWORD).get('password')
         if host.find(':') != -1:
+            self.logger.info('Port was provided in hostname, using value from Port field instead')
             host = host.split(':')
             host = host[0]
         self.logger.info(f'Connecting to {host}:{port}')

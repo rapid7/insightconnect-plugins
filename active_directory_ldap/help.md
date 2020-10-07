@@ -37,7 +37,7 @@ Example input:
   "host": "ldaps://example.com",
   "port": 389,
   "use_ssl": true,
-  "username_password": "{\"username\":\"user1\", \"password\":\"mypassword\"}"
+  "username_password": {"username":"user1", "password":"mypassword"}
 }
 ```
 
@@ -98,7 +98,7 @@ Example input:
 ```
 {
   "account_disabled": "true",
-  "additional_parameters": "{\"telephoneNumber\":\"(617)555-1234\"}",
+  "additional_parameters": {"telephoneNumber":"(617)555-1234"},
   "domain_name": "example.com",
   "first_name": "John",
   "last_name": "Doe",
