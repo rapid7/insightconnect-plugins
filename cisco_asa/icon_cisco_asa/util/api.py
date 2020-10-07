@@ -24,16 +24,6 @@ class CiscoAsaAPI:
             }
         )
 
-    def add_to_group(self, object_id: str, group: str, all_members: list):
-        return self._call_api(
-            "PUT",
-            f"objects/networkobjectgroups/{object_id}",
-            json_data={
-                "name": group,
-                "members": all_members
-            }
-        )
-
     def get_groups(self):
         return self.run_with_pages("objects/networkobjectgroups")
 
@@ -85,7 +75,7 @@ class CiscoAsaAPI:
     def create_address_object(self, name: str, object_type: str, address: str) -> dict:
         return self._call_api(
             "POST",
-            f"objects/networkobjects",
+            "objects/networkobjects",
             json_data={
                 "name": name,
                 "host": {
