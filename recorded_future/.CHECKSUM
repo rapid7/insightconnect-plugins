@@ -1,7 +1,7 @@
 {
-	"spec": "db2e08c4f12a53f3bc0179a18d98fb1e",
-	"manifest": "c55ff8f34de3407de8115bd02f2392ea",
-	"setup": "6b3bfc1eaeb8720264fd50365380e16c",
+	"spec": "dd6974ac839db20b865ee0ce0d9588fc",
+	"manifest": "1436826e7a6a4de4e5fc34583a31e307",
+	"setup": "db8c714c56662c4db2029a644391f71b",
 	"schemas": [
 		{
 			"identifier": "download_IP_addresses_risk_list/schema.py",
@@ -14,6 +14,10 @@
 		{
 			"identifier": "download_hash_risk_list/schema.py",
 			"hash": "bd2f33b8aced26a133bbf9cfeb53e82f"
+		},
+		{
+			"identifier": "download_url_risk_list/schema.py",
+			"hash": "d3b261d48b9666d1116abe8327d5d8f4"
 		},
 		{
 			"identifier": "download_vulnerability_risk_list/schema.py",
@@ -30,6 +34,10 @@
 		{
 			"identifier": "list_hash_risk_rules/schema.py",
 			"hash": "34f2f9e2a90b2391c5088f2973b6c1b6"
+		},
+		{
+			"identifier": "list_url_risk_rules/schema.py",
+			"hash": "c003ff11e3078ad45cf76a01458a1ef9"
 		},
 		{
 			"identifier": "list_vulnerability_risk_rules/schema.py",
@@ -86,6 +94,10 @@
 		{
 			"identifier": "search_malware/schema.py",
 			"hash": "eae440de63306c0c22d50497b9776abf"
+		},
+		{
+			"identifier": "search_urls/schema.py",
+			"hash": "c00508fd06156adce6d358d750cb1469"
 		},
 		{
 			"identifier": "search_vulnerabilities/schema.py",
