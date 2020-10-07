@@ -13,6 +13,7 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 # Requirements
 
 * Username and password for a user with the necessary permissions
+* The URL must point to your local console, not the platform or cloud console.
 
 # Documentation
 

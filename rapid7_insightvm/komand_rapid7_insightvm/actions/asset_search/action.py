@@ -38,10 +38,10 @@ class AssetSearch(komand.Action):
             resources = []
             current_page = 0
             page_size = 100
-            results_retreved = 0
-            while results_retreved <= size:
-                if results_retreved + page_size > size:
-                    page_size = size - results_retreved
+            rresults_retrieved = 0
+            while rresults_retrieved <= size:
+                if rresults_retrieved + page_size > size:
+                    page_size = size - rresults_retrieved
                 self.logger.info(f"Fetching results from page {current_page}")
                 parameters = {'sort': sort, 'page': current_page, 'size': page_size}
                 response = resource_helper.get_resource_page(endpoint=endpoint,
@@ -49,7 +49,7 @@ class AssetSearch(komand.Action):
                                                              payload=search_criteria)
 
                 resources += response.resources  # Grab resources and append to total
-                results_retreved += len(response.resources)
+                rresults_retrieved += len(response.resources)
                 if (response.total_pages == 0) or ((response.total_pages - 1) == response.page_num):
                     self.logger.info("All pages consumed, returning results...")
                     break  # exit the loop
