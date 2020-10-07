@@ -28,7 +28,13 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
-
+{
+  "url": "https://insightvm.example.com:3780",
+  "credentials": {
+      "username": "username",
+      "password": "password"
+  }
+}
 ```
 
 ## Technical Details
@@ -1923,7 +1929,7 @@ Example output:
 {
   "assets": [
     {
-      "hostName": "iagent2-win10",
+      "hostName": "example-win10",
       "id": 234,
       "mac": "00:50:56:94:C6:7E",
       "users": [
@@ -1974,11 +1980,11 @@ Example output:
       "riskScore": 543979.25,
       "links": [
         {
-          "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+          "href": "https://example.rapid7.com:3780/...",
           "rel": "self"
         },
         {
-          "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+          "href": "https://example.rapid7.com:3780/...",
           "rel": "Software"
         }
       ],
@@ -2013,7 +2019,7 @@ Example output:
       },
       "addresses": [
         {
-          "ip": "10.4.19.117",
+          "ip": "192.168.1.1",
           "mac": "00:50:56:94:C6:7E"
         }
       ],
@@ -2024,7 +2030,7 @@ Example output:
           "source": "other"
         }
       ],
-      "ip": "10.4.19.117",
+      "ip": "192.168.1.1",
       "assessedForPolicies": false,
       "rawRiskScore": 543979.25,
       "services": [
@@ -2033,11 +2039,11 @@ Example output:
           "protocol": "tcp",
           "links": [
             {
-              "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+              "href": "https://example.rapid7.com:3780/...",
               "rel": "self"
             },
             {
-              "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+              "href": "https://example.rapid7.com:3780/...",
               "rel": "Configurations"
             }
           ],
@@ -2050,20 +2056,20 @@ Example output:
           "configurations": [
             {
               "name": "advertised-name-1",
-              "value": "IAGENT2-WIN10 (File Server Service)"
+              "value": "EXAMPLE-WIN10 (File Server Service)"
             },
             {
               "name": "advertised-name-2",
-              "value": "IAGENT2-WIN10 (Computer Name)"
+              "value": "EXAMPLE-WIN10 (Computer Name)"
             }
           ],
           "links": [
             {
-              "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+              "href": "https://example.rapid7.com:3780/...",
               "rel": "self"
             },
             {
-              "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+              "href": "https://example.rapid7.com:3780/...",
               "rel": "Configurations"
             }
           ]
@@ -2073,7 +2079,7 @@ Example output:
     {
       "addresses": [
         {
-          "ip": "10.4.26.214",
+          "ip": "192.168.1.1",
           "mac": "00:50:56:94:E9:87"
         }
       ],
@@ -2089,11 +2095,11 @@ Example output:
           "source": "R7 Agent"
         }
       ],
-      "ip": "10.4.26.214",
+      "ip": "192.168.1.1",
       "os": "Microsoft Windows 10 Enterprise Edition 1803",
       "hostNames": [
         {
-          "name": "iagent1-win10",
+          "name": "example-win10",
           "source": "other"
         }
       ],
@@ -2136,11 +2142,11 @@ Example output:
       "hostName": "iagent1-win10",
       "links": [
         {
-          "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+          "href": "https://example.rapid7.com:3780/...",
           "rel": "self"
         },
         {
-          "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+          "href": "https://example.rapid7.com:3780/...",
           "rel": "Software"
         }
       ],
