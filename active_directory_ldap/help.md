@@ -37,7 +37,7 @@ Example input:
   "host": "ldaps://example.com",
   "port": 389,
   "use_ssl": true,
-  "username_password": {"username":"user1", "password":"mypassword"}
+  "username_password": "{\"username\":\"user1\", \"password\":\"mypassword\"}"
 }
 ```
 
@@ -54,7 +54,7 @@ This action is used to modify the attributes of an Active Directory object.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |attribute_to_modify|string|None|True|The name of the attribute to modify|None|postalCode|
-|attribute_value|string|None|True|The value of the attribute|None|02114|
+|attribute_value|string|None|True|The value of the attribute|None|1100|
 |distinguished_name|string|None|True|The distinguished name of the object to modify|None|CN=user,OU=domain_users,DC=example,DC=com|
 
 Example input:
@@ -62,7 +62,7 @@ Example input:
 ```
 {
   "attribute_to_modify": "postalCode",
-  "attribute_value": 02114,
+  "attribute_value": 1100,
   "distinguished_name": "CN=user,OU=domain_users,DC=example,DC=com"
 }
 ```
@@ -97,9 +97,15 @@ Example input:
 
 ```
 {
-  "add_remove": "add",
-  "distinguished_name": "CN=user,OU=domain_users,DC=mydomain,DC=com",
-  "group_dn": "CN=group_name,OU=domain_groups,DC=example,DC=com"
+  "account_disabled": "true",
+  "additional_parameters": "{\"telephoneNumber\":\"(617)555-1234\"}",
+  "domain_name": "example.com",
+  "first_name": "John",
+  "last_name": "Doe",
+  "logon_name": "jdoe",
+  "password": "mypassword",
+  "user_ou": "Users",
+  "user_principal_name": "user@example.com"
 }
 ```
 
@@ -140,7 +146,7 @@ Example input:
 ```
 {
   "account_disabled": "true",
-  "additional_parameters": {"telephoneNumber":"(617)555-1234"},
+  "additional_parameters": "{\"telephoneNumber\":\"(617)555-1234\"}",
   "domain_name": "example.com",
   "first_name": "John",
   "last_name": "Doe",
@@ -486,6 +492,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 4.0.1 - Fix issue were logging of connection info did not display hostname correctly
 * 4.0.0 - New action Modify Object | Rename Modify Groups action to 'Add or Remove an Object from Group' | Fix issue where non-ASCII characters were not being escaped
 * 3.2.10 - Fix issue where escaped characters were not being handled correctly
 * 3.2.9 - Fix issue with error handling and logging for the Modify Groups action | Add example inputs | Update to use ldap3 2.7 and Python 3.8
