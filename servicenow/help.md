@@ -617,7 +617,7 @@ Example input:
   "query": "short_description=Newbug"
 }
 ```
-
+Example input (advanced query):
 ```
 {
   "frequency": 10,
@@ -707,4 +707,3 @@ _This plugin does not contain any troubleshooting information._
 * [ServiceNow API](https://developer.servicenow.com/app.do#!/rest_api_doc?v=fuji&id=c_TableAPI)
 * [ServiceNow User Administration](http://wiki.servicenow.com/index.php?title=User_Administration)
 * [ServiceNow Operators](http://wiki.servicenow.com/index.php?title=Operators_Available_for_Filters_and_Queries)
-
