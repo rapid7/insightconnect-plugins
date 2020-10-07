@@ -86,4 +86,4 @@ class IncidentCreated(insightconnect_plugin_runtime.Trigger):
 
         while True:
             self.poll(url, method, query, utc)
-            time.sleep(params.get(Input.INTERVAL, 5))
+            time.sleep(params.get(Input.frequency, 5))

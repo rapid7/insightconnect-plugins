@@ -27,6 +27,11 @@ The connection configuration accepts the following parameters:
 |timeout|integer|30|False|The interval in seconds before abandoning an attempt to access ServiceNow|None|None|
 |url|string|None|True|The full URL for your instance of ServiceNow, e.g. https://instance.servicenow.com|None|None|
 
+Example input:
+
+```
+```
+
 ## Technical Details
 
 ### Actions
@@ -600,15 +605,22 @@ This trigger identifies if a new incident has been created.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|interval|integer|5|True|How often to poll for new incidents (in seconds)|None|5|
+|frequency|integer|5|True|How often to poll for new incidents (in seconds)|None|5|
 |query|string|None|False|Non-encoded query string to match new incident records (will poll for any new incident if query is omitted)|None|short_description=Newbug|
 
 Example input:
 
 ```
 {
-  "interval": 5,
+  "frequency": 5,
   "query": "short_description=Newbug"
+}
+```
+
+```
+{
+  "frequency": 10,
+  "query": "short_description='Description with quotes'^active=true^priority=5"
 }
 ```
 

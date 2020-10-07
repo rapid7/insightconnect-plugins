@@ -9,7 +9,7 @@ class Component:
 
 class Input:
     
-    INTERVAL = "interval"
+    FREQUENCY = "frequency"
     QUERY = "query"
     
 
@@ -24,9 +24,9 @@ class IncidentCreatedInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "interval": {
+    "frequency": {
       "type": "integer",
-      "title": "Interval",
+      "title": "Frequency",
       "description": "How often to poll for new incidents (in seconds)",
       "default": 5,
       "order": 2
@@ -39,7 +39,7 @@ class IncidentCreatedInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "interval"
+    "frequency"
   ]
 }
     """)

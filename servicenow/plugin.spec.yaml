@@ -411,8 +411,8 @@ triggers:
         type: string
         required: false
         example: short_description=Newbug
-      interval:
-        title: Interval
+      frequency:
+        title: Frequency
         description: How often to poll for new incidents (in seconds)
         type: integer
         required: true
@@ -424,4 +424,3 @@ triggers:
         description: System ID of new incident
         type: string
         required: true
-
