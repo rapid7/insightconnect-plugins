@@ -133,7 +133,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.4 - Security fix for potential arbitrary code execution | Fix issue where grep may not find file to run against
+* 1.0.4 - Security fix for potential arbitrary code execution | Fix issue where Grep may not find file to run against
 * 1.0.3 - New spec and help.md format for the Extension Library | Remove duplicated code | Remove saving to file when string action | Changed bare strings to Input.* in params.get | Removed unused function
 * 1.0.2 - Update to use the `komand/python-3-slim-plugin:2` Docker image to reduce plugin size
 * 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
