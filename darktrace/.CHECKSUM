@@ -1,11 +1,11 @@
 {
-	"spec": "b36746081961380d8141c41bef258f8b",
-	"manifest": "7b9a9afac398abd1a178b2c1d92be87b",
+	"spec": "87c2fdb5d32adabf809b2e150f87fd29",
+	"manifest": "e0d57f39909f11b8b41f87a5550d99a3",
 	"setup": "6e230ca33e0056cb751a740099c044fc",
 	"schemas": [
 		{
 			"identifier": "update_watched_domains/schema.py",
-			"hash": "ead4cca47ec24782d07062101a15bba0"
+			"hash": "ab8c2e92de2498eb2193682806ed214e"
 		},
 		{
 			"identifier": "connection/schema.py",

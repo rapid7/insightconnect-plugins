@@ -2,7 +2,7 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: darktrace
-title: DarkTrace
+title: Darktrace
 version: 2.0.0
 description: Automate the management of watched domains and alerting using the Darktrace plugin
 vendor: rapid7
@@ -624,7 +624,7 @@ connection:
 actions:
   update_watched_domains:
     title: Update Watched Domains
-    description: Add or remove items from the Watched Domains list. If an indicator is added, DarkTrace will monitor network traffic for that URL and create alerts from it
+    description: Add or remove items from the Watched Domains list. If an indicator is added, Darktrace will monitor network traffic for that URL and create alerts from it
     input:
       entry:
         title: Entry
