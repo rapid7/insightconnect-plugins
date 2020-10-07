@@ -700,9 +700,9 @@ triggers:
         required: false
       minscore:
         title: Min Score
-        type: number
+        type: integer
         description: Return only breaches with a minimum score
-        example: 0.1
+        example: 10
         required: false
       pbid:
         title: PBID

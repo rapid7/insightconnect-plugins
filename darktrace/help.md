@@ -93,7 +93,7 @@ This trigger is used to trigger workflows on model breach alerts and logs.
 |----|----|-------|--------|-----------|----|-------|
 |did|integer|None|False|ID of device modelled in the Darktrace system|None|1|
 |frequency|integer|300|False|Poll frequency in seconds|None|300|
-|minscore|number|None|False|Return only breaches with a minimum score|None|0.1|
+|minscore|integer|None|False|Return only breaches with a minimum score|None|10|
 |pbid|integer|None|False|Only return the model breach with the specified policy breach ID|None|300|
 |pid|integer|None|False|Only return model breaches for the specified model|None|300|
 |uuid|string|None|False|Only return model breaches for the specified model|None|fc707223-d2d2-475c-b09b-dec4e800eb2e|
@@ -104,7 +104,7 @@ Example input:
 {
   "did": 1,
   "frequency": 300,
-  "minscore": 0.1,
+  "minscore": 10,
   "pbid": 300,
   "pid": 300,
   "uuid": "fc707223-d2d2-475c-b09b-dec4e800eb2e"
@@ -279,7 +279,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.0 - Fix input `0` for parameters DID, PBID, Min Score and PID in trigger Get Alerts | Create new custom type for trigger Get Alerts
+* 2.0.0 - Fix input `0` for parameters DID, PBID, Min Score and PID in trigger Get Alerts | Create new custom type for trigger Get Alerts | Change type of input parameter Min Score to integer in trigger Get Alerts
 * 1.1.0 - Add new trigger Pull Alerts
 * 1.0.0 - Initial plugin
 
