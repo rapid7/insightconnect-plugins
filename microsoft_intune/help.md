@@ -261,6 +261,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.1 - Improve e-mail search in Search Devices action by performing an extended all device search for  `emailAddress` and `userPrincipalName` when email is not found
 * 1.2.0 - Add new action Manage Device
 * 1.1.0 - Add new actions Search Devices and Wipe
 * 1.0.0 - Initial plugin creation, action Antivirus Scan added
