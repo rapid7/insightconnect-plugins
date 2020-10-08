@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+
 import json
 from past.builtins import basestring
 from future.utils import iteritems
@@ -6,7 +7,6 @@ import sys
 from collections import OrderedDict
 from jinja2 import Template
 import os
-
 
 # set to true if you don't want to try to generate nested types
 OBJECTS_ONLY = False
@@ -17,7 +17,7 @@ this_dir = os.path.dirname(__file__)
 rel_path = "templates/template.json_to_spec.j2"
 abs_path_template = os.path.join(this_dir,rel_path)
 
-with open(filename) as data_file:    
+with open(filename) as data_file:
     data = json.load(data_file)
 
 with open(abs_path_template) as f:
@@ -32,13 +32,13 @@ output = OrderedDict()
 def type_name_unused(name):
     if not name in types:
         return name
-    i = 0 
+    i = 0
     while True:
         name = '%s_%d' % (name, i)
         if not name in types:
             return name
         i += 1
-    
+
 def detect_type(name, value, level=0):
    if isinstance(value, basestring):
        return 'string'
@@ -56,7 +56,7 @@ def detect_type(name, value, level=0):
 
    if isinstance(value, dict):
        keys = sorted(value.keys())
-       if len(keys) == 0 or OBJECTS_ONLY: 
+       if len(keys) == 0 or OBJECTS_ONLY:
            return 'object'
        list_key = str(keys)
        if list_key in type_refs:
