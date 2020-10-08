@@ -1,8 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import ManageDeviceInput, ManageDeviceOutput, Input, Output, Component
-from insightconnect_plugin_runtime.exceptions import PluginException
 # Custom imports below
-import validators
 
 
 class ManageDevice(insightconnect_plugin_runtime.Action):
