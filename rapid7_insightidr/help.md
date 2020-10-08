@@ -66,12 +66,27 @@ Example output:
 {
   "events": [
     {
-      "sequence_number": 1211198512587571200,
-      "timestamp": 1602109074533,
       "labels": [],
       "log_id": "1b1a111d-d1fb-1a12-1651-eb1ff61a651a",
-      "message": "{\"sourceName\":\"Microsoft-Windows-Windows Defender\",\"eventCode\":1150,\"computerName\":\"iagent1-win10\",\"sid\":\"a-1-1-11\",\"isDomainController\":false,\"eventData\":{\"engineVersion\":\"1.1.17500.4\",\"signatureVersion\":\"1.325.351.0\",\"unused\":null,\"data\":[],\"platformVersion\":\"4.18.2009.7\",\"productName\":\"%%827\"},\"timeWritten\":\"2020-10-07T22:17:52.173455200Z\"}",
-      "sequence_number_str": "1211198512587571200"
+      "message": {
+        "computerName": "iagent1-win10",
+        "eventCode": 1111,
+        "eventData": {
+          "data": [],
+          "engineVersion": "1.1.17300.4",
+          "platformVersion": "4.18.2007.8",
+          "productName": "%827",
+          "signatureVersion": "1.321.836.0",
+          "unused": null
+        },
+        "isDomainController": false,
+        "sid": "S-1-5-18",
+        "sourceName": "Microsoft-Windows-Windows Defender",
+        "timeWritten": "2020-08-07T21:44:12.335999900Z"
+      },
+      "sequence_number": 1211198512587571200,
+      "sequence_number_str": "1211198512587571200",
+      "timestamp": 1596836653511
     }
   ]
 }

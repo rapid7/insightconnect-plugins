@@ -58,6 +58,18 @@ class QueryOutput(komand.Output):
     "events"
   ],
   "definitions": {
+    "eventData": {
+      "type": "object",
+      "title": "eventData",
+      "properties": {
+        "oaState": {
+          "type": "string",
+          "title": "OA State",
+          "description": "OA state",
+          "order": 1
+        }
+      }
+    },
     "events": {
       "type": "object",
       "title": "events",
@@ -87,7 +99,7 @@ class QueryOutput(komand.Output):
           "order": 4
         },
         "message": {
-          "type": "string",
+          "$ref": "#/definitions/message",
           "title": "Message",
           "description": "Message",
           "order": 5
@@ -106,6 +118,18 @@ class QueryOutput(komand.Output):
         }
       },
       "definitions": {
+        "eventData": {
+          "type": "object",
+          "title": "eventData",
+          "properties": {
+            "oaState": {
+              "type": "string",
+              "title": "OA State",
+              "description": "OA state",
+              "order": 1
+            }
+          }
+        },
         "link": {
           "type": "object",
           "title": "link",
@@ -121,6 +145,61 @@ class QueryOutput(komand.Output):
               "title": "Relation",
               "description": "Relation",
               "order": 1
+            }
+          }
+        },
+        "message": {
+          "type": "object",
+          "title": "message",
+          "properties": {
+            "computerName": {
+              "type": "string",
+              "title": "Computer Name",
+              "order": 3
+            },
+            "eventCode": {
+              "type": "integer",
+              "title": "Event Code",
+              "order": 2
+            },
+            "eventData": {
+              "$ref": "#/definitions/eventData",
+              "title": "Event Data",
+              "order": 6
+            },
+            "isDomainController": {
+              "type": "boolean",
+              "title": "Is Domain Controller",
+              "order": 5
+            },
+            "sid": {
+              "type": "string",
+              "title": "SID",
+              "order": 4
+            },
+            "sourceName": {
+              "type": "string",
+              "title": "Source Name",
+              "order": 1
+            },
+            "timeWritten": {
+              "type": "string",
+              "title": "Time Written",
+              "order": 7
+            }
+          },
+          "definitions": {
+            "eventData": {
+              "type": "object",
+              "title": "eventData",
+              "properties": {
+                "oaState": {
+                  "type": "string",
+                  "title": "OA State",
+                  "description": "OA state",
+                  "order": 1
+                }
+              }
             }
           }
         }
@@ -141,6 +220,61 @@ class QueryOutput(komand.Output):
           "title": "Relation",
           "description": "Relation",
           "order": 1
+        }
+      }
+    },
+    "message": {
+      "type": "object",
+      "title": "message",
+      "properties": {
+        "computerName": {
+          "type": "string",
+          "title": "Computer Name",
+          "order": 3
+        },
+        "eventCode": {
+          "type": "integer",
+          "title": "Event Code",
+          "order": 2
+        },
+        "eventData": {
+          "$ref": "#/definitions/eventData",
+          "title": "Event Data",
+          "order": 6
+        },
+        "isDomainController": {
+          "type": "boolean",
+          "title": "Is Domain Controller",
+          "order": 5
+        },
+        "sid": {
+          "type": "string",
+          "title": "SID",
+          "order": 4
+        },
+        "sourceName": {
+          "type": "string",
+          "title": "Source Name",
+          "order": 1
+        },
+        "timeWritten": {
+          "type": "string",
+          "title": "Time Written",
+          "order": 7
+        }
+      },
+      "definitions": {
+        "eventData": {
+          "type": "object",
+          "title": "eventData",
+          "properties": {
+            "oaState": {
+              "type": "string",
+              "title": "OA State",
+              "description": "OA state",
+              "order": 1
+            }
+          }
         }
       }
     }

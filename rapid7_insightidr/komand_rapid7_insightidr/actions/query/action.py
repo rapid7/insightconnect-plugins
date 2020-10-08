@@ -38,14 +38,14 @@ class Query(komand.Action):
         except json.decoder.JSONDecodeError:
             self.logger.error(f'InsightIDR response: {response}')
             raise PluginException(cause='The response from InsightIDR was not in the correct format.',
-                                  assistance='Contact support for help. See log for more details')
+                                  assistance='Contact support for help. See log for more details.')
 
         try:
             result_response = []
             events = result.get("events", [])
             if events:
                 for event in events:
-                    event["message"] = event["message"].replace('\n', '\\n')
+                    event["message"] = json.loads(event["message"].replace('\n', '\\n'))
                     result_response.append(event)
 
             return {
@@ -54,4 +54,4 @@ class Query(komand.Action):
         except KeyError:
             self.logger.error(result)
             raise PluginException(cause='The response from InsightIDR was not in the correct format.',
-                                  assistance='Contact support for help. See log for more details')
+                                  assistance='Contact support for help. See log for more details.')
