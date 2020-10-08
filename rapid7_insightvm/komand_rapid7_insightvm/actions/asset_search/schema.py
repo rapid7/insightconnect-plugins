@@ -10,7 +10,8 @@ class Component:
 class Input:
     SEARCHCRITERIA = "searchCriteria"
     SIZE = "size"
-    SORT = "sort"
+    SORT_CRITERIA = "sort_criteria"
+    SORT_ORDER = "sort_order"
     
 
 class Output:
@@ -32,14 +33,20 @@ class AssetSearchInput(komand.Input):
     "size": {
       "type": "number",
       "title": "Size",
-      "description": "The number of records to retrieve if blank or 0 all assets that match the search will be returned",
+      "description": "The number of records to retrieve. If blank or '0' all assets that match the search will be returned",
       "order": 2
     },
-    "sort": {
+    "sort_criteria": {
       "type": "string",
-      "title": "Sort",
-      "description": "The criteria to sort the records by, in the format property[,ASC|DESC]. The default sort order is ascending. Multiple sort criteria can be specified using multiple sort query parameters.",
+      "title": "Sort Criteria",
+      "description": "The criteria to sort the records byMultiple sort criteria can be specified using multiple sort query parameters as comma seprated values.",
       "order": 3
+    },
+    "sort_order": {
+      "type": "string",
+      "title": "Sort Order",
+      "description": "The order will be sorted in ascending or decending. Enter order in a comma as seperated values coresponding to sort criteria. If a criteria dose not have a order it will defult to ascending",
+      "order": 4
     }
   },
   "required": [

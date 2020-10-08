@@ -1646,7 +1646,7 @@ connection:
     description: Username and password
     type: credential_username_password
     required: true
-    example: {'username':'username', 'password':'password'}
+    example: '{"username":"username", "password":"password"}'
 actions:
   scan:
     title: Scan
@@ -2188,12 +2188,18 @@ actions:
         type: number
         required: false
         example: 100
-      sort:
-        title: Sort
-        description: The criteria to sort the records by, in the format property[,ASC|DESC]. The default sort order is ascending. Multiple sort criteria can be specified using multiple sort query parameters.
+      sort_criteria:
+        title: Sort Criteria
+        description: The criteria to sort the records byMultiple sort criteria can be specified using multiple sort query parameters as comma seprated values.
         type: string
         required: false
-        example: risk-score[,DESC]
+        example: risk-score, host-type, criticality-tag
+      sort_order:
+        title: Sort Order
+        description: The order will be sorted in ascending (ASC) or descending (DESC). Enter order in a comma as seperated values coresponding to sort criteria. If a criteria dose not have a order it will defult to ascending
+        type: string
+        required: false
+        example: ASC, DESC, DESC
     output:
       assets:
         title: Assets

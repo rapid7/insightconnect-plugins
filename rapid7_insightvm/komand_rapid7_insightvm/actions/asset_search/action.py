@@ -19,9 +19,13 @@ class AssetSearch(komand.Action):
         resource_helper = ResourceHelper(self.connection.session, self.logger)
         search_criteria = params.get(Input.SEARCHCRITERIA)
         size = params.get(Input.SIZE, 0)
-        sort = params.get(Input.SORT, '')
+        sort_criteria = params.get(Input.SORT_CRITERIA, '')
+        sort_order = params.get(Input.SORT_ORDER, '')
         self.logger.info(f'Performing filtered asset search with criteria {search_criteria}')
         endpoint = endpoints.Asset.search(self.connection.console_url)
+        if sort_criteria:
+            sort_list = sort_criteria.split(',')
+
 
         if size == 0:
             parameters = {'sort': sort}
