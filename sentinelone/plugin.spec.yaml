@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 3.0.0
+version: 4.0.0
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
@@ -1529,6 +1529,27 @@ actions:
         title: Success
         description: Return true if blacklist item was created or deleted
         type: boolean
+        required: true
+  threats_fetch_file:
+    title: Fetch Threats File
+    description: Fetch a file associated with the threat that matches the filter. Your user role must have permissions to Fetch Threat File - Admin, IR Team, SOC
+    input:
+      id:
+        title: ID
+        description: Threat ID
+        type: string
+        required: true
+      password:
+        title: Password
+        description: File encryption password, min. length 10 characters and cannot contain whitespace
+        type: password
+        required: true
+        example: "Rapid7 Insightconnect"
+    output:
+      file:
+        title: File
+        description: Base64 encoded threat file
+        type: file
         required: true
 
 triggers:

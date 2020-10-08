@@ -14,12 +14,13 @@ class ForcePasswordReset(komand.Action):
                 output=ForcePasswordResetOutput())
 
     def run(self, params={}):
+        formatter = ADUtils()
         conn = self.connection.conn
         dn = params.get('distinguished_name')
-        dn = ADUtils.dn_normalize(dn)
-        temp_list = ADUtils.dn_escape_and_split(dn)
-        escaped_dn = ','.join(temp_list)
+        dn = formatter.format_dn(dn)[0]
+        dn = formatter.unescape_asterisk(dn)
+        self.logger.info(f'Escaped DN {dn}')
 
         password_expire = {"pwdLastSet": ('MODIFY_REPLACE', [0])}
-        success = conn.modify(dn=escaped_dn, changes=password_expire)
+        success = conn.modify(dn=dn, changes=password_expire)
         return {'success': success}

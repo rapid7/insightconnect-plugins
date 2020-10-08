@@ -47,12 +47,11 @@ It accepts a domain name of type `string` and one of the following record types:
 Example input:
 
 ```
-
 {
-  "domain": "google.com",
-  "query": "A"
+  "domain": "rapid7.com",
+  "query": "MX",
+  "resolver": "8.8.8.8"
 }
-
 ```
 
 ##### Output
@@ -113,11 +112,10 @@ This action is used to request a reverse lookup for an IP address.
 Example input:
 
 ```
-
 {
-  "address": "8.8.8.8"
+  "address": "1.2.3.4",
+  "resolver": "8.8.8.8"
 }
-
 ```
 
 ##### Output
@@ -142,6 +140,18 @@ On success, the raw output will look like the following:
   "fulloutput": "\n; <<>> Dig 9.9.5-9+deb8u9-Debian <<>> -x 8.8.8.8\n;; global options: +cmd\n;; Got answer:\n;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 59406\n;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version: 0, flags:; udp: 512\n;; QUESTION SECTION:\n;8.8.8.8.in-addr.arpa.\t\tIN\tPTR\n\n;; ANSWER SECTION:\n8.8.8.8.in-addr.arpa.\t68133\tIN\tPTR\tgoogle-public-dns-a.google.com.\n\n;; Query time: 22 msec\n;; SERVER: 10.0.2.3#53(10.0.2.3)\n;; WHEN: Thu Jan 26 23:43:43 UTC 2017\n;; MSG SIZE  rcvd: 93\n\n"
 }
 
+```
+
+Example output:
+
+```
+{
+  "status": "NOERROR",
+  "answer": "dns.google",
+  "fulloutput": "\n; <<>> DiG 9.14.8 <<>> -x 8.8.8.8\n;; global optio...",
+  "nameserver": "192.168.65.1",
+  "question": "8.8.8.8"
+}
 ```
 
 ### Triggers
@@ -184,6 +194,8 @@ Common examples:
 
 # Version History
 
+* 1.0.7 - Fix bug in `safe_parse` function | Fix bug when `answers` in function `execute_command` is str
+* 1.0.6 - Upgrade to latest Python plugin runtime | Define `cloud_ready` in spec
 * 1.0.5 - Update to v4 Python plugin runtime
 * 1.0.4 - Add example inputs
 * 1.0.3 - Use input and output constants | Change docker image from `komand/python-2-slim-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Added "f" strings | Remove duplicate code | Add user nobody to Dockerfile

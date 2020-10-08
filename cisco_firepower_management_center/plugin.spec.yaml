@@ -4,10 +4,10 @@ products: [insightconnect]
 name: cisco_firepower_management_center
 title: Cisco Firepower Management Center
 vendor: rapid7
+support: community
 status: []
-description: This plugin utilizes Cisco Firepower Management Center to create a new block URL policy
- Cisco Firepower Management Center is an administrative nerve center for managing critical Cisco network security solutions
-version: 1.0.1
+description: This plugin utilizes Cisco Firepower Management Center to create URL block policies and manage address objects to block hosts
+version: 1.2.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cisco_firepower_management_center
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -33,6 +33,317 @@ types:
       required: true
       type: string
       description: URL to block (max 400 chars)
+  links:
+    parent:
+      title: Parent
+      required: false
+      type: string
+      description: Full resource URL path to reference the parent (if any) for this resource
+    self:
+      title: Self
+      required: false
+      type: string
+      description: Full resource URL path to reference this particular resource
+  metadata_user:
+    name:
+      title: Name
+      required: false
+      type: string
+      description: Name of the user
+    links:
+      title: Links
+      required: false
+      type: links
+      description: This defines the self referencing links for the given resource
+    id:
+      title: ID
+      required: false
+      type: string
+      description: The unique UUID of the user
+    type:
+      title: Type
+      required: false
+      type: string
+      description: The user type
+  domain:
+    name:
+      title: Name
+      required: false
+      type: string
+      description: Name of the domain
+    links:
+      title: Links
+      required: false
+      type: links
+      description: This defines the self referencing links for the given resource
+    id:
+      title: ID
+      required: false
+      type: string
+      description: Unique UUID of this domain
+    type:
+      title: Type
+      required: false
+      type: string
+      description: Domain type definition
+  read_only:
+    reason:
+      title: Reason
+      required: false
+      type: string
+      description: Reason the resource is read only - SYSTEM (if it is system defined), RBAC (if user RBAC permissions make it read only) or DOMAIN (if resource is read only in current domain)
+    state:
+      title: State
+      required: false
+      type: boolean
+      description: True if this resource is read only and false otherwise
+  metadata:
+    lastUser:
+      title: Last User
+      required: false
+      type: metadata_user
+      description: This object defines details about the user
+    domain:
+      title: Domain
+      required: false
+      type: domain
+      description: The details about the domain
+    readOnly:
+      title: Read Only
+      required: false
+      type: read_only
+      description: Defines the read only conditions if the referenced resource is read only
+    timestamp:
+      title: Timestamp
+      required: false
+      type: integer
+      description: The last updated timestamp
+    ipType:
+      title: IP Type
+      required: false
+      type: string
+      description: IP type
+    parentType:
+      title: Parent Type
+      required: false
+      type: string
+      description: Parent type
+  reference:
+    name:
+      title: Name
+      required: false
+      type: string
+      description: User chosen resource name
+    links:
+      title: Links
+      required: false
+      type: links
+      description: This defines the self referencing links for the given resource
+    id:
+      title: ID
+      required: false
+      type: string
+      description: Unique identifier representing resource
+    type:
+      title: Type
+      required: false
+      type: string
+      description: Response object associated with resource
+  override:
+    parent:
+      title: Parent
+      required: false
+      type: reference
+      description: Contains parent reference information
+    target:
+      title: Target
+      required: false
+      type: reference
+      description: Contains target reference information
+  address_object:
+    metadata:
+      title: Metadata
+      required: false
+      type: metadata
+      description: Defines read only details about the object - whether it is system defined, last user who modified the object etc
+    overridable:
+      title: Overridable
+      required: false
+      type: boolean
+      description: Boolean indicating whether object values can be overridden
+    name:
+      title: Name
+      required: false
+      type: string
+      description: User assigned resource name
+    description:
+      title: Description
+      required: false
+      type: string
+      description: User provided resource description
+    links:
+      title: Links
+      required: false
+      type: links
+      description: This defines the self referencing links for the given resource
+    overrides:
+      title: Overrides
+      required: false
+      type: override
+      description: Defines the override details for this object
+    id:
+      title: ID
+      required: false
+      type: string
+      description: Unique identifier representing response object
+    type:
+      title: Type
+      required: false
+      type: string
+      description: The unique type of this object
+    value:
+      title: Value
+      required: false
+      type: string
+      description: Actual value of the network
+    version:
+      title: Version
+      required: false
+      type: string
+      description: Version number of the response object
+    overrideTargetId:
+      title: Override Target ID
+      required: false
+      type: string
+      description: Unique identifier of domain or device when override assigned to child domain. Used as path parameter to GET override details for a specific object on a specific target (device or domain)
+    dnsResolution:
+      title: DNS Resolution
+      required: false
+      type: string
+      description: DNS resolution
+  network_address:
+    metadata:
+      title: Metadata
+      required: false
+      type: metadata
+      description: Defines read only details about the object - whether it is system defined, last user who modified the object etc
+    overridable:
+      title: Overridable
+      required: false
+      type: boolean
+      description: Boolean indicating whether object values can be overridden
+    name:
+      title: Name
+      required: false
+      type: string
+      description: User chosen resource name
+    description:
+      title: Description
+      required: false
+      type: string
+      description: User provided resource description
+    links:
+      title: Links
+      required: false
+      type: links
+      description: This defines the self referencing links for the given resource
+    id:
+      title: ID
+      required: false
+      type: string
+      description: Unique identifier of response object
+    type:
+      title: Type
+      required: false
+      type: string
+      description: Subtype of NetworkAddress (Host, Network, Range, NetworkGroup)
+    value:
+      title: Value
+      required: false
+      type: string
+      desciprtion: Actual value of child object
+    version:
+      title: Version
+      required: false
+      type: string
+      description: Version number of the response object
+    overrideTargetId:
+      title: Override Target ID
+      required: false
+      type: string
+      description: Unique identifier of domain or device when override assigned to child domain. Used as path parameter to GET override details for a specific object on a specific target
+  network_address_literal:
+    type:
+      title: Type
+      required: false
+      type: string
+      description: Type
+    value:
+      title: Value
+      required: false
+      type: string
+      description: Value
+  network_group:
+    metadata:
+      title: Metadata
+      required: false
+      type: metadata
+      description: Defines read only details about the object - whether it is system defined, last user who modified the object etc
+    objects:
+      title: Objects
+      required: false
+      type: "[]network_address"
+      description: The list of member network objects
+    literals:
+      title: Literals
+      required: false
+      type: "[]network_address_literal"
+      description: List of network values in group
+    overridable:
+      title: Overridable
+      required: false
+      type: boolean
+      description: Boolean indicating whether object values can be overridden
+    name:
+      title: Name
+      required: false
+      type: string
+      description: User chosen resource name
+    description:
+      title: Description
+      required: false
+      type: string
+      description: User provided resource description
+    links:
+      title: Links
+      required: false
+      type: links
+      description:
+    overrides:
+      title: Overrides
+      required: false
+      type: override
+      description: Defines the override details for this object
+    id:
+      title: ID
+      required: false
+      type: string
+      description: Unique identifier of response object
+    type:
+      title: Type
+      required: false
+      type: string
+      description: Type associated with the resource
+    version:
+      title: Version
+      required: false
+      type: string
+      description: Version number of the response object
+    overrideTargetId:
+      title: Type
+      required: false
+      type: string
+      description: Unique identifier of domain or device when override assigned to child domain. Used as path parameter to GET override details for a specific object on a specific target (device or domain)
 
 connection:
   server:
@@ -40,11 +351,35 @@ connection:
     type: string
     description: Enter the address for the server
     required: false
+    example: www.example.com
   username_and_password:
     title: Username and Password
     description: Cisco username and password
     type: credential_username_password
     required: true
+    example: '{"username":"user1", "password":"mypassword"}'
+  ssl_verify:
+    title: TLS / SSL Verify
+    description: Validate TLS / SSL certificate
+    type: boolean
+    default: true
+    required: false
+    example: true
+  port:
+    title: Port
+    description: The port number for provided host
+    type: integer
+    default: 443
+    required: false
+    example: 443
+  domain:
+    title: Domain
+    description: Cisco FirePower Management Centre Domain
+    type: string
+    default: Global
+    required: false
+    example: Global
+
 actions:
   block_url_policy:
     title: Block URL Policy
@@ -71,3 +406,131 @@ actions:
         title: Success
         required: true
         description: Success
+  create_address_object:
+    title: Create Address Object
+    description: Creates a new address object
+    input:
+      address_object:
+        title: Address Object
+        description: Name of the address object, defaults to the value address in the address field if no name is given
+        type: string
+        required: false
+        example: MaliciousHost
+      address:
+        title: Address
+        description: IP address, CIDR IP address, or domain name to assign to the Address Object
+        type: string
+        required: true
+        example: example.com
+      skip_private_address:
+        title: Skip Private Addresses
+        description: If set to true, any addresses that are defined in the RFC1918 space will not be blocked. e.g. 10/8, 172.16/12, 192.168/16
+        type: boolean
+        required: true
+        example: true
+      whitelist:
+        title: Whitelist
+        description: This list contains a set of hosts that should not be blocked. This can include IP addresses, CIDR IP addresses, and domains
+        type: "[]string"
+        required: false
+        example: ["198.51.100.100", "192.0.2.0/24", "example.com" ]
+    output:
+      address_object:
+        title: Address Object
+        description: Returns information about the newly created address object
+        type: address_object
+        required: false
+  delete_address_object:
+    title: Delete Address Object
+    description: Deletes an address object
+    input:
+      address_object:
+        title: Address Object
+        description: Name of the address object to delete
+        type: string
+        required: true
+        example: MaliciousHost
+    output:
+      address_object:
+        title: Address Object
+        description: Returns information about the deleted address object
+        type: address_object
+        required: false
+  check_if_address_in_group:
+    title: Check if Address in Group
+    description: Checks if provided Address Object name or host exists in the Address Group
+    input:
+      group:
+        title: Group
+        description: Name of address group to check
+        type: string
+        required: true
+        example: MaliciousAddressGroup
+      address:
+        title: Address
+        description: Address Object name, or IP, CIDR, or domain name when Enable Search is on
+        type: string
+        required: true
+        example: MaliciousHost
+      enable_search:
+        title: Enable Search
+        description: When enabled, the Address input will accept an IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name
+        type: boolean
+        required: false
+        default: false
+        example: false
+    output:
+      found:
+        title: Found
+        description: Was address found in group
+        type: boolean
+        required: true
+      address_objects:
+        title: Address Objects
+        description: List of found address objects
+        type: "[]address_object"
+        required: false
+  add_address_to_group:
+    title: Add Address to Group
+    description: Adds an existing address object to a group
+    input:
+      address:
+        title: Address Object
+        description: Name of address object
+        type: string
+        required: true
+        example: MaliciousHost
+      group:
+        title: Group
+        description: Name of address group to add the address to
+        type: string
+        required: true
+        example: MaliciousAddressGroup
+    output:
+      network_group:
+        title: Network Group
+        description: Returns information about the network group
+        type: network_group
+        required: false
+  remove_address_from_group:
+    title: Remove Address from Group
+    description: Removes an address from a group
+    input:
+      address:
+        title: Address
+        description: The address object name, hostname, an IP address or subnet address expressed in CIDR notation to remove from group
+        type: string
+        required: true
+        example: MaliciousHost
+      group:
+        title: Group
+        description: Name of the group to remove the address from
+        type: string
+        required: true
+        example: MaliciousAddressGroup
+    output:
+      network_group:
+        title: Network Group
+        description: Returns information about the network group
+        type: network_group
+        required: false

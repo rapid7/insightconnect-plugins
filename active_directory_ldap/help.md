@@ -45,25 +45,25 @@ Example input:
 
 ### Actions
 
-#### Modify Groups
+#### Modify Object
 
-This action is used to add or remove a user from an Active Directory group.
+This action is used to modify the attributes of an Active Directory object.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|add_remove|string|None|True|Add or remove the group|['add', 'remove']|add|
-|distinguished_name|string|None|True|The distinguished name of the user whose membership will be modified|None|CN=user,OU=domain_users,DC=mydomain,DC=com|
-|group_dn|string|None|True|The Distinguished Name of the group to add or remove|None|CN=group_name,OU=domain_groups,DC=example,DC=com|
+|attribute_to_modify|string|None|True|The name of the attribute to modify|None|postalCode|
+|attribute_value|string|None|True|The value of the attribute|None|1100|
+|distinguished_name|string|None|True|The distinguished name of the object to modify|None|CN=user,OU=domain_users,DC=example,DC=com|
 
 Example input:
 
 ```
 {
-  "add_remove": "add",
-  "distinguished_name": "CN=user,OU=domain_users,DC=mydomain,DC=com",
-  "group_dn": "CN=group_name,OU=domain_groups,DC=example,DC=com"
+  "attribute_to_modify": "postalCode",
+  "attribute_value": 1100,
+  "distinguished_name": "CN=user,OU=domain_users,DC=example,DC=com"
 }
 ```
 
@@ -76,11 +76,51 @@ Example input:
 Example output:
 
 ```
-
 {
   "success": true
 }
+```
 
+#### Add or Remove an Object from Group
+
+This action is used to add or remove an object from an Active Directory group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|add_remove|string|None|True|Add or remove the group|['add', 'remove']|add|
+|distinguished_name|string|None|True|The distinguished name of the object whose membership will be modified|None|CN=user,OU=domain_users,DC=mydomain,DC=com|
+|group_dn|string|None|True|The Distinguished Name of the group to add or remove|None|CN=group_name,OU=domain_groups,DC=example,DC=com|
+
+Example input:
+
+```
+{
+  "account_disabled": "true",
+  "additional_parameters": {"telephoneNumber":"(617)555-1234"},
+  "domain_name": "example.com",
+  "first_name": "John",
+  "last_name": "Doe",
+  "logon_name": "jdoe",
+  "password": "mypassword",
+  "user_ou": "Users",
+  "user_principal_name": "user@example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Operation status|
+
+Example output:
+
+```
+{
+  "success": true
+}
 ```
 
 #### Add
@@ -126,11 +166,9 @@ Example input:
 Example output:
 
 ```
-
 {
   "success": true
 }
-
 ```
 
 #### Query
@@ -429,6 +467,18 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
+Objects that contain an equals sign `=` or an asterisk `*` require the signs to be escaped.
+For example `CN=Robert = bob Smith,OU=domain_users,DC=rapid7,DC=com` must be escaped as`CN=Robert \= bob Smith,OU=domain_users,DC=mattsdomain,DC=local` in the input.
+A second example would be `CN=C**l guy,OU=domain_users,DC=rapid7,DC=com`. This must be escaped as `CN=C\*\*l guy,OU=domain_users,DC=rapid7,DC=com`.
+
+This plugin does not support objects and unpaired `\(\)` as part of their names.
+Paired `\(\)` are supported.
+For example `CN=Robert (Bob) Smith,OU=domain_users,DC=rapid7,DC=com` is supported
+but `CN=Robert Bob) Smith,OU=domain_users,DC=rapid7,DC=com` is not.
+
+All inputs to the query action must be correctly escaped.
+  
+
 If you cannot connect, ensure that network access is available, and view the logs to identify any auth errors.
 
 For the Add User action it is recommended that SSL be enabled. Without SSL the action is only partially functional.
@@ -440,11 +490,11 @@ To look up a Distinguished Name (DN) in Microsoft AD use the query action. Use t
 objectname is the logon name of the user you are looking for. The DN can then be fed into another action by Repeating a collection for
 the query results, and then using the variable step $item.dn
 
-For the Query action, this plugin does not support objects that use `*`, `\`, or an unpaired `\(\)` as part of their names.
-paired `\(\)` are supported
-
 # Version History
 
+* 4.0.1 - Fix issue were logging of connection info did not display hostname correctly
+* 4.0.0 - New action Modify Object | Rename Modify Groups action to 'Add or Remove an Object from Group' | Fix issue where non-ASCII characters were not being escaped
+* 3.2.10 - Fix issue where escaped characters were not being handled correctly
 * 3.2.9 - Fix issue with error handling and logging for the Modify Groups action | Add example inputs | Update to use ldap3 2.7 and Python 3.8
 * 3.2.8 - Fix issue were adding objects to containers might fail
 * 3.2.7 - New spec and help.md format for the Extension Library

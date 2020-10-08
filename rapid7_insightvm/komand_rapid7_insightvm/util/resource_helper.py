@@ -101,9 +101,14 @@ class ResourceHelper(object):
                     resource = {"raw": response.content}
             else:
                 try:
-                    error = response.json()["message"]
-                except KeyError:
-                    error = "Unknown error occurred. Please contact support or try again later."
+                    response_json = response.json()
+                    error = response_json.get("message", {})
+                except (KeyError, json.decoder.JSONDecodeError) as e:
+                    self.logger.error("Malformed JSON received.")
+                    if "text/html" in response.text:
+                        error = f"An error occurred.\nVerify your connection is pointing to your local console and not `exposure-analytics.insight.rapid7.com`.\nStatus Code: {response.status_code}\nResponse:\n{response.text}\nException:\n{str(e)}"
+                    else:
+                        error = f"An error occurred.\nStatus Code: {response.status_code}\nResponse:\n{response.text}\nException:\n{str(e)}"
 
                 status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
                 self.logger.error(f"{status_code_message} ({response.status_code}): {error}")

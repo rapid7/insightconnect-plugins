@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetCiInput, GetCiOutput, Input, Output, Component
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class GetCi(komand.Action):
+class GetCi(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

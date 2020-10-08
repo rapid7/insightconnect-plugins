@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans
-version: 4.2.1
+version: 4.4.3
 vendor: rapid7
 support: rapid7
 status: []
@@ -1640,11 +1640,13 @@ connection:
     description: URL to your InsightVM console, without trailing slashes, e.g. https://insightvm.example.com:3780
     type: string
     required: true
+    example: https://insightvm.example.com:3780
   credentials:
     title: Credentials
     description: Username and password
     type: credential_username_password
     required: true
+    example: {'username':'username', 'password':'password'}
 actions:
   scan:
     title: Scan
@@ -3650,6 +3652,48 @@ actions:
         description: A list of inactive assets
         type: "[]asset"
         required: true
+  get_expiring_vulnerability_exceptions:
+    title: Get Expiring Vulnerability Exceptions
+    description: Return a list of expiring vulnerability exceptions
+    input:
+      expires_in_less_than:
+        title: Expires in Less Than
+        description: Number of days left until the exception expires
+        type: integer
+        example: 7
+        default: 7
+        required: true
+    output:
+      exceptions:
+        title: Exceptions
+        description: Exceptions about to expire
+        type: "[]vulnerability_exception"
+        required: false
+  update_vulnerability_exception_expiration_date:
+    title: Update Vulnerability Exception Expiration Date
+    description: Update vulnerability exception expiration date
+    input:
+      id:
+        title: ID
+        description: Asset ID
+        type: integer
+        required: true
+        example: 42
+      date:
+        title: Date
+        description: Expiration date. e.g. 2020-02-24T06:59:59.999Z
+        type: string
+        required: true
+        example: "2020-02-24T06:59:59.999Z"
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+        example: True
+
+
 triggers:
   new_scans:
     title: New Scans

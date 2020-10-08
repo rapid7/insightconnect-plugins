@@ -16,13 +16,14 @@ class ResetPassword(komand.Action):
                 output=ResetPasswordOutput())
 
     def run(self, params={}):
+        formatter = ADUtils()
         dn = params.get('distinguished_name')
-        dn = ADUtils.dn_normalize(dn)
-        temp_list = ADUtils.dn_escape_and_split(dn)
-        dn = ','.join(temp_list)
         new_password = params.get('new_password')
         conn = self.connection.conn
         ssl = self.connection.ssl
+        dn = formatter.format_dn(dn)[0]
+        dn = formatter.unescape_asterisk(dn)
+        self.logger.info(f'Escaped DN {dn}')
 
         if ssl is False:
             raise PluginException(cause='SSL must be enabled',

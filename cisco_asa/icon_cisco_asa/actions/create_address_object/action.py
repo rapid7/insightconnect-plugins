@@ -17,7 +17,11 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         address = params.get(Input.ADDRESS)
-        name = params.get(Input.ADDRESS_OBJECT, address.replace(":", "-").replace("/", "-"))
+        name = params.get(Input.ADDRESS_OBJECT)
+
+        if not name:
+            name = address.replace(":", "-").replace("/", "-")
+
         whitelist = params.get(Input.WHITELIST)
         skip_private = params.get(Input.SKIP_PRIVATE_ADDRESSES)
 

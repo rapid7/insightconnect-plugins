@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SearchIncidentInput, SearchIncidentOutput, Input, Output, Component
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class SearchIncident(komand.Action):
+class SearchIncident(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

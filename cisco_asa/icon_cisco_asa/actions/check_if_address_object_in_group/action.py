@@ -21,6 +21,7 @@ class CheckIfAddressObjectInGroup(insightconnect_plugin_runtime.Action):
 
         found = False
         object_names_to_return = []
+
         if enable_search:
             object_results = self.connection.cisco_asa_api.get_objects()
             self.logger.info(f"Searching through {len(object_results)} address objects.")

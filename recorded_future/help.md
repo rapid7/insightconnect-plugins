@@ -34,13 +34,443 @@ Example input:
 
 ```
 {
-  "api_key": "{\"secretKey\": \"9de5069c5afe602b2ea0a04b66beb2c0\"}"
+  "api_key": {
+    "secretKey":"9de5069c5afe602b2ea0a04b66beb2c0"
+  }
 }
 ```
 
 ## Technical Details
 
 ### Actions
+
+#### Lookup Alert
+
+This action is used to get information about an Alert.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|alert_id|string|None|True|Alert ID|None|fhS1El|
+
+Example input:
+
+```
+{
+  "alert_id": "fhS1El"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|alert|object|True|Alert Details|
+
+Example output:
+
+```
+{
+  "alert": {
+    "review": {
+      "status": "no-action"
+    },
+    "entities": [
+      {
+        "entity": {
+          "id": "faymwJ",
+          "name": "CVE-2015-4719",
+          "type": "CyberVulnerability",
+          "description": "The client API authentication mechanism in Pexip Infinity before 10 allows remote attackers to gain privileges via a crafted request."
+        },
+        "risk": {
+          "criticalityLabel": "High",
+          "documents": [
+            {
+              "references": [
+                {
+                  "fragment": "CVE-2015-4719 (infinity).",
+                  "entities": [
+                    {
+                      "id": "faymwJ",
+                      "name": "CVE-2015-4719",
+                      "type": "CyberVulnerability",
+                      "description": "The client API authentication mechanism in Pexip Infinity before 10 allows remote attackers to gain privileges via a crafted request."
+                    }
+                  ],
+                  "language": "eng"
+                }
+              ],
+              "source": {
+                "id": "Z3TZAQ",
+                "name": "Sesin at",
+                "type": "Source"
+              },
+              "url": "https://www.sesin.at/2020/10/02/cve-2015-4719-infinity/",
+              "title": "CVE-2015-4719 (infinity)"
+            },
+            {
+              "references": [
+                {
+                  "fragment": "New post from https://t.co/uXvPWJy6tj (CVE-2015-4719 (infinity)) has been published on https://t.co/Aw7GbAXNJr.",
+                  "entities": [
+                    {
+                      "id": "faymwJ",
+                      "name": "CVE-2015-4719",
+                      "type": "CyberVulnerability",
+                      "description": "The client API authentication mechanism in Pexip Infinity before 10 allows remote attackers to gain privileges via a crafted request."
+                    },
+                    {
+                      "id": "url:https://www.sesin.at/2020/10/02/cve-2015-4719-infinity/",
+                      "name": "https://www.sesin.at/2020/10/02/cve-2015-4719-infinity/",
+                      "type": "URL"
+                    },
+                    {
+                      "id": "url:https://www.sesin.at/",
+                      "name": "https://www.sesin.at/",
+                      "type": "URL"
+                    }
+                  ],
+                  "language": "eng"
+                }
+              ],
+              "source": {
+                "id": "BV5",
+                "name": "Twitter",
+                "type": "Source"
+              },
+              "url": "https://twitter.com/WolfgangSesin/statuses/1311902525512126464",
+              "title": "New post from https://t.co/uXvPWJy6tj (CVE-2015-4719 (infinity)) has been published on https://t.co/Aw7GbAXNJr"
+            }
+          ],
+          "evidence": [
+            {
+              "timestamp": "2020-09-25T07:17:09.000Z",
+              "criticalityLabel": "Low",
+              "evidenceString": "8 sightings on 8 sources including: SecurityDatabase Alerts Monitor Last 100 Alerts, vulmon.com, @NetHaxBot, @VulmonFeeds, @VulnSME. Most recent tweet: New/Modified vulnerability published September 23, 2020 at 07:15PM on the NVD: CVE-2015-4719 https://t.co/oso1bdme0I The client API authentication mechanism in Pexip Infinity before 10 allows remote attackers to gain privileges via a crafted request. Most recent link (Sep 25, 2020): https://twitter.com/SecRiskRptSME/statuses/1309391474354802688",
+              "rule": "Linked to Recent Cyber Exploit",
+              "criticality": 1
+            },
+            {
+              "timestamp": "2020-10-02T00:25:00.000Z",
+              "criticalityLabel": "High",
+              "evidenceString": "1 sighting on 1 source: Recorded Future Vulnerability Analysis. CVSS v3.1 Score (8.3) calculated using NIST reported CVSS Base Score (9.8) and Recorded Future Temporal Metrics. Base vector string: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H. Temporal vector string: E:U/RL:X/RC:U. Most recent link (Oct 2, 2020): https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-4719",
+              "rule": "NIST Severity: High",
+              "criticality": 3
+            }
+          ],
+          "criticality": 3
+        },
+        "trend": {},
+        "documents": []
+      }
+    ],
+    "url": "https://app.recordedfuture.com/live/sc/notification/?id=fhS1El",
+    "rule": {
+      "url": "https://app.recordedfuture.com/live/sc/ViewIdkobra_view_report_item_alert_editor?view_opts=%7B%22reportId%22%3A%22feScJA%22%2C%22bTitle%22%3Atrue%2C%22title%22%3A%22Global+Vulnerability+Risk%2C+Vulnerabilities%2C+New+Exploit+Chatter%22%7D&state.bNavbar=false",
+      "name": "Global Vulnerability Risk, Vulnerabilities, New Exploit Chatter",
+      "id": "feScJA"
+    },
+    "triggered": "2020-10-02T06:55:23.996Z",
+    "id": "fhS1El",
+    "counts": {
+      "references": 2,
+      "entities": 1,
+      "documents": 2
+    },
+    "title": "Global Vulnerability Risk, Vulnerabilities, New Exploit Chatter - ... is n...",
+    "type": "ENTITY"
+  }
+}
+```
+
+#### Download URL Risk List
+
+This action returns a risk list of URLs matching a filtration.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|list|string|None|False|The risk list to retrieve, left this field blank to retrieve default risk list|['Historically Reported by Insikt Group', 'Compromised URL', 'Historically Reported as a Defanged URL', 'Historically Reported by DHS AIS', 'Historically Reported Fraudulent Content', 'Historically Reported in Threat List', 'Large', 'Historically Detected Malicious Browser Exploits', 'Historically Detected Malware Distribution', 'Historically Detected Cryptocurrency Mining Techniques', 'Historically Detected Phishing Techniques', 'Active Phishing URL', 'Positive Malware Verdict', 'Ransomware Distribution URL', 'Recently Reported by Insikt Group', 'Recently Reported as a Defanged URL', 'Recently Reported by DHS AIS', 'Recently Reported Fraudulent Content', 'Recently Detected Malicious Browser Exploits', 'Recently Detected Malware Distribution', 'Recently Detected Cryptocurrency Mining Techniques', 'Recently Detected Phishing Techniques', 'Recently Referenced by Insikt Group', 'Recently Reported Spam or Unwanted Content', 'Recently Detected Suspicious Content', 'Recently Active URL on Weaponized Domain', 'Historically Referenced by Insikt Group', 'Historically Reported Spam or Unwanted Content', 'Historically Detected Suspicious Content']|Historically Reported by Insikt Group|
+
+Example input:
+
+```
+{
+  "list": "Historically Reported by Insikt Group"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|risk_list|object|True|Risk list of matching URLs|
+
+Example output:
+
+```
+{
+  "risk_list": {
+    "stix:STIX_Package": {
+      "@id": "RF:Package-3010d88d-7551-4e3e-a5c7-27120c6a7fb9",
+      "@timestamp": "2020-09-29T16:56:54.355Z",
+      "@version": "1.2",
+      "@xmlns": "http://xml/metadataSharing.xsd",
+      "@xmlns:FileObj": "http://cybox.mitre.org/objects#FileObject-2",
+      "@xmlns:RF": "http://stix.recordedfuture.com/",
+      "@xmlns:URIObj": "http://cybox.mitre.org/objects#URIObject-2",
+      "@xmlns:cybox": "http://cybox.mitre.org/cybox-2",
+      "@xmlns:cyboxCommon": "http://cybox.mitre.org/common-2",
+      "@xmlns:cyboxVocabs": "http://cybox.mitre.org/default_vocabularies-2",
+      "@xmlns:indicator": "http://stix.mitre.org/Indicator-2",
+      "@xmlns:stix": "http://stix.mitre.org/stix-1",
+      "@xmlns:stixCommon": "http://stix.mitre.org/common-1",
+      "@xmlns:stixVocabs": "http://stix.mitre.org/default_vocabularies-1",
+      "@xmlns:ttp": "http://stix.mitre.org/TTP-1",
+      "stix:Indicators": {
+        "stix:Indicator": [
+          {
+            "@id": "RF:Indicator-7cbc818a-4b71-360f-9764-350ad972f259",
+            "@timestamp": "2020-09-29T16:56:54.355Z",
+            "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+            "@xsi:type": "indicator:IndicatorType",
+            "indicator:Confidence": {
+              "stixCommon:Description": "Recorded Future Risk Score",
+              "stixCommon:Value": "91"
+            },
+            "indicator:Description": "Current risk: Very Malicious.Triggers 3 of 29 rules",
+            "indicator:Indicated_TTP": [
+              {
+                "stixCommon:Confidence": {
+                  "stixCommon:Value": {
+                    "#text": "Low",
+                    "@xsi:type": "stixVocabs:HighMediumLowVocab-1.0"
+                  }
+                },
+                "stixCommon:TTP": {
+                  "@id": "RF:TTP-5b76b9e8-c56a-329f-93e5-607d53910606",
+                  "@timestamp": "2019-12-07T23:10:05.000Z",
+                  "@xsi:type": "ttp:TTPType",
+                  "ttp:Description": "4 sightings on 1 source: Recorded Future URL Analysis.",
+                  "ttp:Title": "Risk Rule: Historically Detected Malicious Browser Exploits"
+                }
+              }
+            ],
+            "indicator:Observable": {
+              "@id": "RF:Observable-dfaf650a-752f-3888-b23e-d26acd059d71",
+              "cybox:Object": {
+                "@id": "RF:URL-29171cf8-fcc0-35ff-a06e-4c56a52584c0",
+                "cybox:Properties": {
+                  "@xsi:type": "URIObj:URIObjectType",
+                  "URIObj:Value": {
+                    "#text": "http://bolizarsospos.com/raph9xccgxt",
+                    "@condition": "Equals"
+                  }
+                }
+              }
+            },
+            "indicator:Producer": {
+              "stixCommon:Description": "Recorded Future",
+              "stixCommon:References": {
+                "stixCommon:Reference": "https://app.recordedfuture.com/live/sc/entity/url%!A(MISSING)http%!A(MISSING)%!F(MISSING)%!F(MISSING)bolizarsospos.com%!F(MISSING)raph9xccgxt"
+              }
+            },
+            "indicator:Title": "URL http://bolizarsospos.com/raph9xccgxt",
+            "indicator:Type": {
+              "#text": "URL Watchlist",
+              "@xsi:type": "stixVocabs:IndicatorTypeVocab-1.1"
+            },
+            "indicator:Valid_Time_Position": {
+              "indicator:End_Time": {
+                "#text": "2020-09-29T23:59:59.000Z",
+                "@precision": "second"
+              },
+              "indicator:Start_Time": {
+                "#text": "2020-09-29T00:00:00.000Z",
+                "@precision": "second"
+              }
+            }
+          }
+        ]
+      },
+      "stix:STIX_Header": {
+        "stix:Description": "Recorded Future STIX"
+      }
+    }
+  }
+}
+```
+
+#### Search URLs
+
+This action is used to search for data related to URLs.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|direction|string|None|False|Sort results ascending/descending|['asc', 'desc']|asc|
+|from|number|None|False|Number of initial records to skip|None|0|
+|limit|number|10|False|Number of results to retrieve, up to 100|None|10|
+|orderby|string|None|False|Which property to sort the results by|['Created', 'Criticality', 'Lastseen', 'Firstseen', 'Modified', 'Riskscore', 'Rules', 'Sevendayshits', 'Sixtydayshits', 'Totalhits']|Riskscore|
+|riskRule|string|None|False|Risk rule od data|['Historically Reported by Insikt Group', 'C&C URL', 'Compromised URL', 'Historically Reported as a Defanged URL', 'Historically Reported by DHS AIS', 'Historically Reported Fraudulent Content', 'Historically Reported in Threat List', 'Historically Detected Malicious Browser Exploits', 'Historically Detected Malware Distribution', 'Historically Detected Cryptocurrency Mining Techniques', 'Historically Detected Phishing Techniques', 'Active Phishing URL', 'Positive Malware Verdict', 'Ransomware Distribution URL', 'Recently Reported by Insikt Group', 'Recently Reported as a Defanged URL', 'Recently Reported by DHS AIS', 'Recently Reported Fraudulent Content', 'Recently Detected Malicious Browser Exploits', 'Recently Detected Malware Distribution', 'Recently Detected Cryptocurrency Mining Techniques', 'Recently Detected Phishing Techniques', 'Recently Referenced by Insikt Group', 'Recently Reported Spam or Unwanted Content', 'Recently Detected Suspicious Content', 'Recently Active URL on Weaponized Domain', 'Historically Referenced by Insikt Group', 'Historically Reported Spam or Unwanted Content', 'Historically Detected Suspicious Content']|Historically Reported by Insikt Group|
+|riskScore|string|None|False|Risk score of data|None|[0,100]|
+
+Example input:
+
+```
+{
+  "direction": "asc",
+  "from": 0,
+  "limit": 10,
+  "orderby": "Riskscore",
+  "riskRule": "Historically Reported by Insikt Group",
+  "riskScore": "[0,100]"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|data|search_data|True|Search result|
+
+Example output:
+
+```
+{
+  "data": {
+    "results": [
+      {
+        "analystNotes": [
+          {
+            "source": {
+              "id": "VKz42X",
+              "name": "Insikt Group",
+              "type": "Source"
+            },
+            "attributes": {
+              "validated_on": "2018-04-24T04:00:00.000Z",
+              "published": "2018-04-24T04:00:00.000Z",
+              "text": "On April 24, 2018 around 7:30am EST, MyEtherWallet (MEW) shared via Twitter that a number of Domain Name System (DNS) registration servers were hijacked to redirect users to a phishing site, including Google Public DNS 8.8.8.8/8.8.4.4. Those who were redirected to the phishing site were prompted to enter their MEW account information, allowing attackers to gain access to their account and ultimately steal their cryptocurrency. It is not certain exactly how much money the cyber criminals were able to steal total. Current estimates are around $150,000 or 216 Ether. Around 1:30pm EST later the same day, MyEtherWallet tweeted that the issue had been resolved. MyEtherWallet is a popular cryptocurrency web app designed for users to store and send ether and ethereum-based tokens.",
+              "topic": {
+                "id": "TXSFt0",
+                "name": "Flash Report",
+                "type": "Topic",
+                "description": "Overview analysis of a current event. Can include technical details and indicators of compromise."
+              },
+              "title": "MyEtherWallet DNS servers hijacked",
+              "note_entities": [
+                {
+                  "id": "Smo9TW",
+                  "name": "MyEtherWallet.com",
+                  "type": "Company"
+                }
+              ],
+              "context_entities": [
+                {
+                  "id": "ip:8.8.4.4",
+                  "name": "8.8.4.4",
+                  "type": "IpAddress"
+                }
+              ],
+              "validation_urls": [
+                {
+                  "id": "url:url:https://www.coindesk.com/150k-stolen-myetherwallet-users-dns-server-hijacking/",
+                  "name": "url:https://www.coindesk.com/150k-stolen-myetherwallet-users-dns-server-hijacking/",
+                  "type": "URL"
+                }
+              ]
+            },
+            "id": "V3-CAc"
+          }
+        ],
+        "enterpriseLists": [],
+        "timestamps": {
+          "firstSeen": "2020-09-24T00:00:00.000Z",
+          "lastSeen": "2020-09-24T23:59:59.000Z"
+        },
+        "risk": {
+          "criticalityLabel": "Unusual",
+          "score": 5,
+          "evidenceDetails": [
+            {
+              "mitigationString": "",
+              "timestamp": "2018-04-24T00:00:00.000Z",
+              "criticalityLabel": "Unusual",
+              "evidenceString": "1 sighting on 1 source: Insikt Group. 1 report: MyEtherWallet DNS servers hijacked (Apr 24, 2018).",
+              "rule": "Historically Reported by Insikt Group",
+              "criticality": 1
+            }
+          ],
+          "riskString": "1/29",
+          "rules": 1,
+          "criticality": 1,
+          "riskSummary": "1 of 29 Risk Rules currently observed."
+        },
+        "sightings": [],
+        "entity": {
+          "id": "url:https://myetherwallet.com/",
+          "name": "https://myetherwallet.com/",
+          "type": "URL"
+        },
+        "counts": [
+          {
+            "count": 1,
+            "date": "2018-04-24"
+          }
+        ],
+        "metrics": [
+          {
+            "type": "whitlistedCount",
+            "value": 0
+          }
+        ],
+        "relatedEntities": []
+      }
+    ]
+  },
+  "counts": {
+    "returned": 1,
+    "total": 157
+  }
+}
+
+```
+
+#### List URL Risk Rules
+
+This action is used to list available filtration rules for URL risk lists.
+
+##### Input
+
+_This action does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|risk_rules|[]risk_rule|True|Risk Rules for URL|
+
+Example output:
+
+```
+{
+  "risk_rules": [
+    {
+      "count": 2239,
+      "criticality": 3,
+      "criticalityLabel": "Malicious",
+      "description": "Compromised URL",
+      "name": "compromisedUrl",
+      "relatedEntities": []
+    }
+  ]
+}
+```
 
 #### List IP Addresses Risk Rules
 
@@ -547,6 +977,9 @@ This action is used to returns a list of hashes matching a specified risk rule.
 Example input:
 
 ```
+{
+  "list": "positive_malware_verdict"
+}
 ```
 
 ##### Output
@@ -1294,6 +1727,72 @@ Example output:
       "id": "S0eb_5",
       "name": "CVE-2017-0147",
       "type": "CyberVulnerability"
+    },
+    "nvdDescription": "Microsoft PowerPoint 2007 SP3, Word 2007 SP3, PowerPoint 2010 SP2, Word 2010 SP2, PowerPoint 2013 SP1, Word 2013 SP1, and PowerPoint 2013 RT SP1 allow remote attackers to execute arbitrary code or cause a denial of service (memory corruption) via a crafted Office document, aka \"Microsoft Office Memory Corruption Vulnerability.\"",
+    "cvss": {
+      "accessVector": "NETWORK",
+      "lastModified": "2018-10-12T22:09:00.000Z",
+      "published": "2015-07-14T21:59:00.000Z",
+      "score": 9.3,
+      "availability": "COMPLETE",
+      "confidentiality": "COMPLETE",
+      "version": "2.0",
+      "authentication": "NONE",
+      "accessComplexity": "MEDIUM",
+      "integrity": "COMPLETE"
+    },
+    "commonNames": [],
+    "cvssv3": {},
+    "intelCard": "https://app.recordedfuture.com/live/sc/entity/OjOAdZ",
+    "rawrisk": [
+      {
+        "rule": "linkedToCyberExploit",
+        "timestamp": "2017-01-09T20:10:40.000Z"
+      },
+      {
+        "rule": "linkedToIntrusionMethod",
+        "timestamp": "2016-10-25T00:00:00.000Z"
+      }
+    ],
+    "metrics": [
+      {
+        "type": "darkWebHits",
+        "value": 15
+      },
+      {
+        "type": "trendVolume",
+        "value": 1
+      },
+      {
+        "type": "whitlistedCount",
+        "value": 0
+      }
+    ],
+    "cpe": [
+      "cpe:2.3:a:microsoft:powerpoint:2013:sp1:*:*:*:*:*:*",
+      "cpe:2.3:a:microsoft:powerpoint:2010:sp2:*:*:*:*:*:*",
+      "cpe:2.3:a:microsoft:powerpoint:2013:sp1:*:*:rt:*:*:*",
+      "cpe:2.3:a:microsoft:word:2013:sp1:*:*:*:*:*:*",
+      "cpe:2.3:a:microsoft:word:2007:sp3:*:*:*:*:*:*",
+      "cpe:2.3:a:microsoft:powerpoint:2007:sp3:*:*:*:*:*:*",
+      "cpe:2.3:a:microsoft:word:2013:sp1:*:*:*:*:x64:*",
+      "cpe:2.3:a:microsoft:word:2010:sp2:*:*:*:x64:*:*",
+      "cpe:2.3:a:microsoft:word:2013:sp1:*:*:rt:*:*:*",
+      "cpe:2.3:a:microsoft:word:2010:sp2:*:*:*:x86:*:*"
+    ],
+    "analystNotes": [
+      {
+        "source": {
+          "id": "xxxxxx",
+          "name": "Example Group",
+          "type": "Source"
+        },
+        "attributes": {
+          "validated_on": "2018-07-16T04:00:00.000Z",
+          "published": "2018-07-16T04:00:00.000Z",
+          "text": "These are notes about the exploit.",
+        }
+      }
     }
   }
 }
@@ -1313,6 +1812,9 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.2.0 - New actions Search URLs, Download URL Risk List and List URL Risk Rules | Update Recorded Future logo | Allow both upper and lowercase CVE in Lookup Vulnerability action
+* 2.1.0 - New action Lookup Alert
+* 2.0.1 - Add CPE, Analyst Notes, and Related Entities to Lookup Vulnerability action output
 * 2.0.0 - Add risk output to Lookup Vulnerability
 * 1.5.5 - Fix NoneType has no len() | Fix enums in search hashes
 * 1.5.4 - Add example inputs | Fix schema bug where `criticality` output was improperly defined as an integer in List Domain Risk Rules, List Hash Risk Rules, List IP Addresses Risk Rules and List Vulnerability Risk Rules actions

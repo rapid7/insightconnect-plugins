@@ -1,13 +1,13 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 # Custom imports below
 import requests
 from requests.auth import HTTPBasicAuth
 from icon_servicenow.util.request_helper import RequestHelper
-from komand.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
 
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())

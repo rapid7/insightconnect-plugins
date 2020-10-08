@@ -271,6 +271,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.4.1 - Fix None check in actions Add Address to Group and Create Address Object
 * 1.4.0 - Add new action Create Address Object
 * 1.3.0 - Add new action Add Address to Group
 * 1.2.0 - Add new action Delete Address Object

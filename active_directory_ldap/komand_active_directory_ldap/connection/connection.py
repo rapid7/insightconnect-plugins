@@ -1,6 +1,6 @@
 import komand
 from komand.exceptions import ConnectionTestException
-from .schema import ConnectionSchema
+from .schema import ConnectionSchema, Input
 # Custom imports below
 import ldap3
 from ldap3.core import exceptions
@@ -15,25 +15,27 @@ class Connection(komand.Connection):
         """
         Connect to LDAP
         """
-        self.ssl = params.get('use_ssl')
-        self.logger.info("Connecting to %s:%d" % (params['host'], params['port']))
-
-        params['port'] = params.get('port') or 389
-
-        use_ssl = False
-        if params.get('use_ssl'):
-            use_ssl = True
+        self.ssl = params.get(Input.USE_SSL)
+        host = params.get(Input.HOST)
+        port = params.get(Input.PORT)
+        user_name = params.get(Input.USERNAME_PASSWORD).get('username')
+        password = params.get(Input.USERNAME_PASSWORD).get('password')
+        if host.find(':') != -1:
+            self.logger.info('Port was provided in hostname, using value from Port field instead')
+            host = host.split(':')
+            host = host[0]
+        self.logger.info(f'Connecting to {host}:{port}')
 
         server = ldap3.Server(
-                host=params['host'],
-                port=params['port'],
-                use_ssl=use_ssl,
+                host=host,
+                port=port,
+                use_ssl=self.ssl,
                 get_info=ldap3.ALL)
 
         try:
             conn = ldap3.Connection(server=server,
-                                    user=params.get('username_password').get('username'),
-                                    password=params.get('username_password').get('password'),
+                                    user=user_name,
+                                    password=password,
                                     auto_encode=True,
                                     auto_escape=True,
                                     auto_bind=True,
@@ -52,8 +54,8 @@ class Connection(komand.Connection):
         except:
             try:
                 conn = ldap3.Connection(server=server,
-                                        user=params.get('username_password').get('username'),
-                                        password=params.get('username_password').get('password'),
+                                        user=user_name,
+                                        password=password,
                                         auto_referrals=False,
                                         auto_bind=True)
             except exceptions.LDAPBindError as e:
