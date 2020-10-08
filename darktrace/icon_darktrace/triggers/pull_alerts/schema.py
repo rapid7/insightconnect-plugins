@@ -44,7 +44,7 @@ class PullAlertsInput(insightconnect_plugin_runtime.Input):
     "minscore": {
       "type": "integer",
       "title": "Min Score",
-      "description": "Return only breaches with a minimum score",
+      "description": "Return only breaches with a minimum score. Valid values are 0-100.",
       "order": 3
     },
     "pbid": {
@@ -84,7 +84,7 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
       "title": "Results",
       "description": "Alerts results",
       "items": {
-        "$ref": "#/definitions/trigger_result"
+        "$ref": "#/definitions/results"
       },
       "order": 1
     }
@@ -127,16 +127,16 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
           "description": "Set priority",
           "order": 5
         },
-        "setTag": {
-          "type": "boolean",
-          "title": "Settag",
-          "description": "Settag",
-          "order": 6
-        },
         "setType": {
           "type": "boolean",
-          "title": "Settype",
-          "description": "Settype",
+          "title": "Set Type",
+          "description": "Set type",
+          "order": 6
+        },
+        "tagTTL": {
+          "type": "integer",
+          "title": "Tag TTL",
+          "description": "Tag TTL",
           "order": 7
         }
       }
@@ -171,18 +171,6 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "arguments": {
-      "type": "object",
-      "title": "arguments",
-      "properties": {
-        "value": {
-          "type": "string",
-          "title": "Value",
-          "description": "Value",
-          "order": 1
-        }
-      }
-    },
     "created": {
       "type": "object",
       "title": "created",
@@ -195,27 +183,140 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "data": {
-      "type": "object",
-      "title": "data",
-      "properties": {
-        "left": {
-          "type": "string",
-          "title": "Left",
-          "description": "Left",
-          "order": 1
-        }
-      }
-    },
     "device": {
       "type": "object",
       "title": "device",
       "properties": {
         "did": {
           "type": "integer",
-          "title": "Did",
-          "description": "Did",
+          "title": "DID",
+          "description": "DID",
           "order": 1
+        },
+        "firstSeen": {
+          "type": "integer",
+          "title": "First Seen",
+          "description": "First seen",
+          "order": 2
+        },
+        "hostname": {
+          "type": "string",
+          "title": "Hostname",
+          "description": "Hostname",
+          "order": 3
+        },
+        "ip": {
+          "type": "string",
+          "title": "IP",
+          "description": "IP",
+          "order": 4
+        },
+        "ips": {
+          "type": "array",
+          "title": "IPs",
+          "description": "IPs",
+          "items": {
+            "$ref": "#/definitions/ips"
+          },
+          "order": 5
+        },
+        "lastSeen": {
+          "type": "integer",
+          "title": "Last Seen",
+          "description": "Last seen",
+          "order": 6
+        },
+        "macaddress": {
+          "type": "string",
+          "title": "MAC Address",
+          "description": "MAC address",
+          "order": 7
+        },
+        "sid": {
+          "type": "integer",
+          "title": "SID",
+          "description": "SID",
+          "order": 8
+        },
+        "typelabel": {
+          "type": "string",
+          "title": "Typelabel",
+          "description": "Typelabel",
+          "order": 9
+        },
+        "typename": {
+          "type": "string",
+          "title": "Typename",
+          "description": "Typename",
+          "order": 10
+        },
+        "vendor": {
+          "type": "string",
+          "title": "Vendor",
+          "description": "Vendor",
+          "order": 11
+        }
+      },
+      "definitions": {
+        "ips": {
+          "type": "object",
+          "title": "ips",
+          "properties": {
+            "ip": {
+              "type": "string",
+              "title": "IP",
+              "description": "IP",
+              "order": 1
+            },
+            "sid": {
+              "type": "integer",
+              "title": "SID",
+              "description": "SID",
+              "order": 2
+            },
+            "time": {
+              "type": "string",
+              "title": "Time",
+              "description": "Time",
+              "order": 3
+            },
+            "timems": {
+              "type": "integer",
+              "title": "Timems",
+              "description": "Timems",
+              "order": 4
+            }
+          }
+        }
+      }
+    },
+    "ips": {
+      "type": "object",
+      "title": "ips",
+      "properties": {
+        "ip": {
+          "type": "string",
+          "title": "IP",
+          "description": "IP",
+          "order": 1
+        },
+        "sid": {
+          "type": "integer",
+          "title": "SID",
+          "description": "SID",
+          "order": 2
+        },
+        "time": {
+          "type": "string",
+          "title": "Time",
+          "description": "Time",
+          "order": 3
+        },
+        "timems": {
+          "type": "integer",
+          "title": "Timems",
+          "description": "Timems",
+          "order": 4
         }
       }
     },
@@ -223,13 +324,10 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "logic",
       "properties": {
-        "data": {
-          "type": "array",
-          "title": "Data",
-          "description": "Data",
-          "items": {
-            "type": "integer"
-          },
+        "targetScore": {
+          "type": "integer",
+          "title": "Target Score",
+          "description": "Target score",
           "order": 1
         },
         "type": {
@@ -250,31 +348,11 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "logic_0",
       "properties": {
-        "data": {
-          "$ref": "#/definitions/data",
-          "title": "Data",
-          "description": "Data",
-          "order": 1
-        },
         "version": {
           "type": "string",
           "title": "Version",
           "description": "Version",
-          "order": 2
-        }
-      },
-      "definitions": {
-        "data": {
-          "type": "object",
-          "title": "data",
-          "properties": {
-            "left": {
-              "type": "string",
-              "title": "Left",
-              "description": "Left",
-              "order": 1
-            }
-          }
+          "order": 1
         }
       }
     },
@@ -306,6 +384,12 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "model",
       "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 3
+        },
         "now": {
           "$ref": "#/definitions/now",
           "title": "Now",
@@ -354,16 +438,16 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
               "description": "Set priority",
               "order": 5
             },
-            "setTag": {
-              "type": "boolean",
-              "title": "Settag",
-              "description": "Settag",
-              "order": 6
-            },
             "setType": {
               "type": "boolean",
-              "title": "Settype",
-              "description": "Settype",
+              "title": "Set Type",
+              "description": "Set type",
+              "order": 6
+            },
+            "tagTTL": {
+              "type": "integer",
+              "title": "Tag TTL",
+              "description": "Tag TTL",
               "order": 7
             }
           }
@@ -414,13 +498,10 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "logic",
           "properties": {
-            "data": {
-              "type": "array",
-              "title": "Data",
-              "description": "Data",
-              "items": {
-                "type": "integer"
-              },
+            "targetScore": {
+              "type": "integer",
+              "title": "Target Score",
+              "description": "Target score",
               "order": 1
             },
             "type": {
@@ -473,8 +554,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "autoUpdate": {
               "type": "boolean",
-              "title": "Autoupdate",
-              "description": "Autoupdate",
+              "title": "Auto Update",
+              "description": "Auto update",
               "order": 6
             },
             "behaviour": {
@@ -575,7 +656,7 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
               "title": "Tags",
               "description": "Tags",
               "items": {
-                "type": "object"
+                "type": "string"
               },
               "order": 22
             },
@@ -633,16 +714,16 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                   "description": "Set priority",
                   "order": 5
                 },
-                "setTag": {
-                  "type": "boolean",
-                  "title": "Settag",
-                  "description": "Settag",
-                  "order": 6
-                },
                 "setType": {
                   "type": "boolean",
-                  "title": "Settype",
-                  "description": "Settype",
+                  "title": "Set Type",
+                  "description": "Set type",
+                  "order": 6
+                },
+                "tagTTL": {
+                  "type": "integer",
+                  "title": "Tag TTL",
+                  "description": "Tag TTL",
                   "order": 7
                 }
               }
@@ -693,13 +774,10 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
               "type": "object",
               "title": "logic",
               "properties": {
-                "data": {
-                  "type": "array",
-                  "title": "Data",
-                  "description": "Data",
-                  "items": {
-                    "type": "integer"
-                  },
+                "targetScore": {
+                  "type": "integer",
+                  "title": "Target Score",
+                  "description": "Target score",
                   "order": 1
                 },
                 "type": {
@@ -818,7 +896,7 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
             "phid": {
               "type": "integer",
               "title": "PHID",
-              "description": "Policy history ID",
+              "description": "PHID",
               "order": 16
             },
             "pid": {
@@ -841,8 +919,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "sharedEndpoints": {
               "type": "boolean",
-              "title": "Sharedendpoints",
-              "description": "Sharedendpoints",
+              "title": "Shared Endpoints",
+              "description": "Shared endpoints",
               "order": 20
             },
             "tags": {
@@ -850,7 +928,7 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
               "title": "Tags",
               "description": "Tags",
               "items": {
-                "type": "object"
+                "type": "string"
               },
               "order": 21
             },
@@ -908,16 +986,16 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                   "description": "Set priority",
                   "order": 5
                 },
-                "setTag": {
-                  "type": "boolean",
-                  "title": "Settag",
-                  "description": "Settag",
-                  "order": 6
-                },
                 "setType": {
                   "type": "boolean",
-                  "title": "Settype",
-                  "description": "Settype",
+                  "title": "Set Type",
+                  "description": "Set type",
+                  "order": 6
+                },
+                "tagTTL": {
+                  "type": "integer",
+                  "title": "Tag TTL",
+                  "description": "Tag TTL",
                   "order": 7
                 }
               }
@@ -968,13 +1046,10 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
               "type": "object",
               "title": "logic",
               "properties": {
-                "data": {
-                  "type": "array",
-                  "title": "Data",
-                  "description": "Data",
-                  "items": {
-                    "type": "integer"
-                  },
+                "targetScore": {
+                  "type": "integer",
+                  "title": "Target Score",
+                  "description": "Target score",
                   "order": 1
                 },
                 "type": {
@@ -1031,8 +1106,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "autoUpdate": {
           "type": "boolean",
-          "title": "Autoupdate",
-          "description": "Autoupdate",
+          "title": "Auto Update",
+          "description": "Auto update",
           "order": 6
         },
         "behaviour": {
@@ -1133,7 +1208,7 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
           "title": "Tags",
           "description": "Tags",
           "items": {
-            "type": "object"
+            "type": "string"
           },
           "order": 22
         },
@@ -1191,16 +1266,16 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
               "description": "Set priority",
               "order": 5
             },
-            "setTag": {
-              "type": "boolean",
-              "title": "Settag",
-              "description": "Settag",
-              "order": 6
-            },
             "setType": {
               "type": "boolean",
-              "title": "Settype",
-              "description": "Settype",
+              "title": "Set Type",
+              "description": "Set type",
+              "order": 6
+            },
+            "tagTTL": {
+              "type": "integer",
+              "title": "Tag TTL",
+              "description": "Tag TTL",
               "order": 7
             }
           }
@@ -1251,13 +1326,10 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "logic",
           "properties": {
-            "data": {
-              "type": "array",
-              "title": "Data",
-              "description": "Data",
-              "items": {
-                "type": "integer"
-              },
+            "targetScore": {
+              "type": "integer",
+              "title": "Target Score",
+              "description": "Target score",
               "order": 1
             },
             "type": {
@@ -1276,335 +1348,60 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "then": {
+    "results": {
       "type": "object",
-      "title": "then",
-      "properties": {
-        "actions": {
-          "$ref": "#/definitions/actions",
-          "title": "Actions",
-          "description": "Actions",
-          "order": 1
-        },
-        "active": {
-          "type": "boolean",
-          "title": "Active",
-          "description": "Active",
-          "order": 2
-        },
-        "activeTimes": {
-          "$ref": "#/definitions/activeTimes",
-          "title": "Active Times",
-          "description": "Active times",
-          "order": 3
-        },
-        "autoSuppress": {
-          "type": "boolean",
-          "title": "Auto Suppress",
-          "description": "Auto suppress",
-          "order": 4
-        },
-        "autoUpdatable": {
-          "type": "boolean",
-          "title": "Auto Updatable",
-          "description": "Auto updatable",
-          "order": 5
-        },
-        "autoUpdate": {
-          "type": "boolean",
-          "title": "Auto Update",
-          "description": "Auto update",
-          "order": 6
-        },
-        "behaviour": {
-          "type": "string",
-          "title": "Behaviour",
-          "description": "Behaviour",
-          "order": 7
-        },
-        "created": {
-          "$ref": "#/definitions/created",
-          "title": "Created",
-          "description": "Created",
-          "order": 8
-        },
-        "defeats": {
-          "type": "array",
-          "title": "Defeats",
-          "description": "Defeats",
-          "items": {
-            "type": "object"
-          },
-          "order": 9
-        },
-        "description": {
-          "type": "string",
-          "title": "Description",
-          "description": "Description",
-          "order": 10
-        },
-        "edited": {
-          "$ref": "#/definitions/created",
-          "title": "Edited",
-          "description": "Edited",
-          "order": 11
-        },
-        "interval": {
-          "type": "integer",
-          "title": "Interval",
-          "description": "Interval",
-          "order": 12
-        },
-        "logic": {
-          "$ref": "#/definitions/logic",
-          "title": "Logic",
-          "description": "Logic",
-          "order": 13
-        },
-        "modified": {
-          "type": "string",
-          "title": "Modified",
-          "description": "Modified",
-          "order": 14
-        },
-        "name": {
-          "type": "string",
-          "title": "Name",
-          "description": "Name",
-          "order": 15
-        },
-        "phid": {
-          "type": "integer",
-          "title": "PHID",
-          "description": "Policy history ID",
-          "order": 16
-        },
-        "pid": {
-          "type": "integer",
-          "title": "PID",
-          "description": "Policy ID",
-          "order": 17
-        },
-        "priority": {
-          "type": "integer",
-          "title": "Priority",
-          "description": "Priority",
-          "order": 18
-        },
-        "sequenced": {
-          "type": "boolean",
-          "title": "Sequenced",
-          "description": "Sequenced",
-          "order": 19
-        },
-        "sharedEndpoints": {
-          "type": "boolean",
-          "title": "Sharedendpoints",
-          "description": "Sharedendpoints",
-          "order": 20
-        },
-        "tags": {
-          "type": "array",
-          "title": "Tags",
-          "description": "Tags",
-          "items": {
-            "type": "object"
-          },
-          "order": 21
-        },
-        "throttle": {
-          "type": "integer",
-          "title": "Throttle",
-          "description": "Throttle",
-          "order": 22
-        },
-        "uuid": {
-          "type": "string",
-          "title": "UUID",
-          "description": "UUID",
-          "order": 23
-        },
-        "version": {
-          "type": "integer",
-          "title": "Version",
-          "description": "Version",
-          "order": 24
-        }
-      },
-      "definitions": {
-        "actions": {
-          "type": "object",
-          "title": "actions",
-          "properties": {
-            "alert": {
-              "type": "boolean",
-              "title": "Alert",
-              "description": "Alert",
-              "order": 1
-            },
-            "antigena": {
-              "type": "object",
-              "title": "Antigena",
-              "description": "Antigena",
-              "order": 2
-            },
-            "breach": {
-              "type": "boolean",
-              "title": "Breach",
-              "description": "Breach",
-              "order": 3
-            },
-            "model": {
-              "type": "boolean",
-              "title": "Model",
-              "description": "Model",
-              "order": 4
-            },
-            "setPriority": {
-              "type": "boolean",
-              "title": "Set Priority",
-              "description": "Set priority",
-              "order": 5
-            },
-            "setTag": {
-              "type": "boolean",
-              "title": "Settag",
-              "description": "Settag",
-              "order": 6
-            },
-            "setType": {
-              "type": "boolean",
-              "title": "Settype",
-              "description": "Settype",
-              "order": 7
-            }
-          }
-        },
-        "activeTimes": {
-          "type": "object",
-          "title": "activeTimes",
-          "properties": {
-            "devices": {
-              "type": "object",
-              "title": "Devices",
-              "description": "Devices",
-              "order": 1
-            },
-            "tags": {
-              "type": "object",
-              "title": "Tags",
-              "description": "Tags",
-              "order": 2
-            },
-            "type": {
-              "type": "string",
-              "title": "Type",
-              "description": "Type",
-              "order": 3
-            },
-            "version": {
-              "type": "integer",
-              "title": "Version",
-              "description": "Version",
-              "order": 4
-            }
-          }
-        },
-        "created": {
-          "type": "object",
-          "title": "created",
-          "properties": {
-            "by": {
-              "type": "string",
-              "title": "By",
-              "description": "By",
-              "order": 1
-            }
-          }
-        },
-        "logic": {
-          "type": "object",
-          "title": "logic",
-          "properties": {
-            "data": {
-              "type": "array",
-              "title": "Data",
-              "description": "Data",
-              "items": {
-                "type": "integer"
-              },
-              "order": 1
-            },
-            "type": {
-              "type": "string",
-              "title": "Type",
-              "description": "Type",
-              "order": 2
-            },
-            "version": {
-              "type": "integer",
-              "title": "Version",
-              "description": "Version",
-              "order": 3
-            }
-          }
-        }
-      }
-    },
-    "trigger_result": {
-      "type": "object",
-      "title": "trigger_result",
+      "title": "results",
       "properties": {
         "commentCount": {
           "type": "integer",
           "title": "Comment Count",
           "description": "Comment count",
-          "order": 2
+          "order": 1
         },
         "creationTime": {
           "type": "integer",
           "title": "Creation Time",
           "description": "Creation time",
-          "order": 1
+          "order": 2
         },
         "device": {
           "$ref": "#/definitions/device",
           "title": "Device",
           "description": "Device",
-          "order": 8
+          "order": 3
         },
         "model": {
           "$ref": "#/definitions/model",
           "title": "Model",
           "description": "Model",
-          "order": 5
+          "order": 4
         },
         "pbid": {
           "type": "integer",
           "title": "PBID",
           "description": "Policy breach ID",
-          "order": 3
+          "order": 5
         },
         "score": {
           "type": "number",
           "title": "Score",
           "description": "Score",
-          "order": 7
+          "order": 6
         },
         "time": {
           "type": "integer",
           "title": "Time",
           "description": "Time",
-          "order": 4
+          "order": 7
         },
         "triggeredComponents": {
           "type": "array",
           "title": "Triggered Components",
-          "description": "Triggered components",
+          "description": "Triggeredcomponents",
           "items": {
             "$ref": "#/definitions/triggeredComponents"
           },
-          "order": 6
+          "order": 8
         }
       },
       "definitions": {
@@ -1642,16 +1439,16 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
               "description": "Set priority",
               "order": 5
             },
-            "setTag": {
-              "type": "boolean",
-              "title": "Settag",
-              "description": "Settag",
-              "order": 6
-            },
             "setType": {
               "type": "boolean",
-              "title": "Settype",
-              "description": "Settype",
+              "title": "Set Type",
+              "description": "Set type",
+              "order": 6
+            },
+            "tagTTL": {
+              "type": "integer",
+              "title": "Tag TTL",
+              "description": "Tag TTL",
               "order": 7
             }
           }
@@ -1686,18 +1483,6 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "arguments": {
-          "type": "object",
-          "title": "arguments",
-          "properties": {
-            "value": {
-              "type": "string",
-              "title": "Value",
-              "description": "Value",
-              "order": 1
-            }
-          }
-        },
         "created": {
           "type": "object",
           "title": "created",
@@ -1706,18 +1491,6 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
               "type": "string",
               "title": "By",
               "description": "By",
-              "order": 1
-            }
-          }
-        },
-        "data": {
-          "type": "object",
-          "title": "data",
-          "properties": {
-            "left": {
-              "type": "string",
-              "title": "Left",
-              "description": "Left",
               "order": 1
             }
           }
@@ -1728,9 +1501,134 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "did": {
               "type": "integer",
-              "title": "Did",
-              "description": "Did",
+              "title": "DID",
+              "description": "DID",
               "order": 1
+            },
+            "firstSeen": {
+              "type": "integer",
+              "title": "First Seen",
+              "description": "First seen",
+              "order": 2
+            },
+            "hostname": {
+              "type": "string",
+              "title": "Hostname",
+              "description": "Hostname",
+              "order": 3
+            },
+            "ip": {
+              "type": "string",
+              "title": "IP",
+              "description": "IP",
+              "order": 4
+            },
+            "ips": {
+              "type": "array",
+              "title": "IPs",
+              "description": "IPs",
+              "items": {
+                "$ref": "#/definitions/ips"
+              },
+              "order": 5
+            },
+            "lastSeen": {
+              "type": "integer",
+              "title": "Last Seen",
+              "description": "Last seen",
+              "order": 6
+            },
+            "macaddress": {
+              "type": "string",
+              "title": "MAC Address",
+              "description": "MAC address",
+              "order": 7
+            },
+            "sid": {
+              "type": "integer",
+              "title": "SID",
+              "description": "SID",
+              "order": 8
+            },
+            "typelabel": {
+              "type": "string",
+              "title": "Typelabel",
+              "description": "Typelabel",
+              "order": 9
+            },
+            "typename": {
+              "type": "string",
+              "title": "Typename",
+              "description": "Typename",
+              "order": 10
+            },
+            "vendor": {
+              "type": "string",
+              "title": "Vendor",
+              "description": "Vendor",
+              "order": 11
+            }
+          },
+          "definitions": {
+            "ips": {
+              "type": "object",
+              "title": "ips",
+              "properties": {
+                "ip": {
+                  "type": "string",
+                  "title": "IP",
+                  "description": "IP",
+                  "order": 1
+                },
+                "sid": {
+                  "type": "integer",
+                  "title": "SID",
+                  "description": "SID",
+                  "order": 2
+                },
+                "time": {
+                  "type": "string",
+                  "title": "Time",
+                  "description": "Time",
+                  "order": 3
+                },
+                "timems": {
+                  "type": "integer",
+                  "title": "Timems",
+                  "description": "Timems",
+                  "order": 4
+                }
+              }
+            }
+          }
+        },
+        "ips": {
+          "type": "object",
+          "title": "ips",
+          "properties": {
+            "ip": {
+              "type": "string",
+              "title": "IP",
+              "description": "IP",
+              "order": 1
+            },
+            "sid": {
+              "type": "integer",
+              "title": "SID",
+              "description": "SID",
+              "order": 2
+            },
+            "time": {
+              "type": "string",
+              "title": "Time",
+              "description": "Time",
+              "order": 3
+            },
+            "timems": {
+              "type": "integer",
+              "title": "Timems",
+              "description": "Timems",
+              "order": 4
             }
           }
         },
@@ -1738,13 +1636,10 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "logic",
           "properties": {
-            "data": {
-              "type": "array",
-              "title": "Data",
-              "description": "Data",
-              "items": {
-                "type": "integer"
-              },
+            "targetScore": {
+              "type": "integer",
+              "title": "Target Score",
+              "description": "Target score",
               "order": 1
             },
             "type": {
@@ -1765,31 +1660,11 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "logic_0",
           "properties": {
-            "data": {
-              "$ref": "#/definitions/data",
-              "title": "Data",
-              "description": "Data",
-              "order": 1
-            },
             "version": {
               "type": "string",
               "title": "Version",
               "description": "Version",
-              "order": 2
-            }
-          },
-          "definitions": {
-            "data": {
-              "type": "object",
-              "title": "data",
-              "properties": {
-                "left": {
-                  "type": "string",
-                  "title": "Left",
-                  "description": "Left",
-                  "order": 1
-                }
-              }
+              "order": 1
             }
           }
         },
@@ -1821,6 +1696,12 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "model",
           "properties": {
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "Name",
+              "order": 3
+            },
             "now": {
               "$ref": "#/definitions/now",
               "title": "Now",
@@ -1869,16 +1750,16 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                   "description": "Set priority",
                   "order": 5
                 },
-                "setTag": {
-                  "type": "boolean",
-                  "title": "Settag",
-                  "description": "Settag",
-                  "order": 6
-                },
                 "setType": {
                   "type": "boolean",
-                  "title": "Settype",
-                  "description": "Settype",
+                  "title": "Set Type",
+                  "description": "Set type",
+                  "order": 6
+                },
+                "tagTTL": {
+                  "type": "integer",
+                  "title": "Tag TTL",
+                  "description": "Tag TTL",
                   "order": 7
                 }
               }
@@ -1929,13 +1810,10 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
               "type": "object",
               "title": "logic",
               "properties": {
-                "data": {
-                  "type": "array",
-                  "title": "Data",
-                  "description": "Data",
-                  "items": {
-                    "type": "integer"
-                  },
+                "targetScore": {
+                  "type": "integer",
+                  "title": "Target Score",
+                  "description": "Target score",
                   "order": 1
                 },
                 "type": {
@@ -1988,8 +1866,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                 },
                 "autoUpdate": {
                   "type": "boolean",
-                  "title": "Autoupdate",
-                  "description": "Autoupdate",
+                  "title": "Auto Update",
+                  "description": "Auto update",
                   "order": 6
                 },
                 "behaviour": {
@@ -2090,7 +1968,7 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                   "title": "Tags",
                   "description": "Tags",
                   "items": {
-                    "type": "object"
+                    "type": "string"
                   },
                   "order": 22
                 },
@@ -2148,16 +2026,16 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                       "description": "Set priority",
                       "order": 5
                     },
-                    "setTag": {
-                      "type": "boolean",
-                      "title": "Settag",
-                      "description": "Settag",
-                      "order": 6
-                    },
                     "setType": {
                       "type": "boolean",
-                      "title": "Settype",
-                      "description": "Settype",
+                      "title": "Set Type",
+                      "description": "Set type",
+                      "order": 6
+                    },
+                    "tagTTL": {
+                      "type": "integer",
+                      "title": "Tag TTL",
+                      "description": "Tag TTL",
                       "order": 7
                     }
                   }
@@ -2208,13 +2086,10 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                   "type": "object",
                   "title": "logic",
                   "properties": {
-                    "data": {
-                      "type": "array",
-                      "title": "Data",
-                      "description": "Data",
-                      "items": {
-                        "type": "integer"
-                      },
+                    "targetScore": {
+                      "type": "integer",
+                      "title": "Target Score",
+                      "description": "Target score",
                       "order": 1
                     },
                     "type": {
@@ -2333,7 +2208,7 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                 "phid": {
                   "type": "integer",
                   "title": "PHID",
-                  "description": "Policy history ID",
+                  "description": "PHID",
                   "order": 16
                 },
                 "pid": {
@@ -2356,8 +2231,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                 },
                 "sharedEndpoints": {
                   "type": "boolean",
-                  "title": "Sharedendpoints",
-                  "description": "Sharedendpoints",
+                  "title": "Shared Endpoints",
+                  "description": "Shared endpoints",
                   "order": 20
                 },
                 "tags": {
@@ -2365,7 +2240,7 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                   "title": "Tags",
                   "description": "Tags",
                   "items": {
-                    "type": "object"
+                    "type": "string"
                   },
                   "order": 21
                 },
@@ -2423,16 +2298,16 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                       "description": "Set priority",
                       "order": 5
                     },
-                    "setTag": {
-                      "type": "boolean",
-                      "title": "Settag",
-                      "description": "Settag",
-                      "order": 6
-                    },
                     "setType": {
                       "type": "boolean",
-                      "title": "Settype",
-                      "description": "Settype",
+                      "title": "Set Type",
+                      "description": "Set type",
+                      "order": 6
+                    },
+                    "tagTTL": {
+                      "type": "integer",
+                      "title": "Tag TTL",
+                      "description": "Tag TTL",
                       "order": 7
                     }
                   }
@@ -2483,13 +2358,10 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                   "type": "object",
                   "title": "logic",
                   "properties": {
-                    "data": {
-                      "type": "array",
-                      "title": "Data",
-                      "description": "Data",
-                      "items": {
-                        "type": "integer"
-                      },
+                    "targetScore": {
+                      "type": "integer",
+                      "title": "Target Score",
+                      "description": "Target score",
                       "order": 1
                     },
                     "type": {
@@ -2546,8 +2418,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "autoUpdate": {
               "type": "boolean",
-              "title": "Autoupdate",
-              "description": "Autoupdate",
+              "title": "Auto Update",
+              "description": "Auto update",
               "order": 6
             },
             "behaviour": {
@@ -2648,7 +2520,7 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
               "title": "Tags",
               "description": "Tags",
               "items": {
-                "type": "object"
+                "type": "string"
               },
               "order": 22
             },
@@ -2706,16 +2578,16 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                   "description": "Set priority",
                   "order": 5
                 },
-                "setTag": {
-                  "type": "boolean",
-                  "title": "Settag",
-                  "description": "Settag",
-                  "order": 6
-                },
                 "setType": {
                   "type": "boolean",
-                  "title": "Settype",
-                  "description": "Settype",
+                  "title": "Set Type",
+                  "description": "Set type",
+                  "order": 6
+                },
+                "tagTTL": {
+                  "type": "integer",
+                  "title": "Tag TTL",
+                  "description": "Tag TTL",
                   "order": 7
                 }
               }
@@ -2766,13 +2638,10 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
               "type": "object",
               "title": "logic",
               "properties": {
-                "data": {
-                  "type": "array",
-                  "title": "Data",
-                  "description": "Data",
-                  "items": {
-                    "type": "integer"
-                  },
+                "targetScore": {
+                  "type": "integer",
+                  "title": "Target Score",
+                  "description": "Target score",
                   "order": 1
                 },
                 "type": {
@@ -2891,7 +2760,7 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
             "phid": {
               "type": "integer",
               "title": "PHID",
-              "description": "Policy history ID",
+              "description": "PHID",
               "order": 16
             },
             "pid": {
@@ -2914,8 +2783,8 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "sharedEndpoints": {
               "type": "boolean",
-              "title": "Sharedendpoints",
-              "description": "Sharedendpoints",
+              "title": "Shared Endpoints",
+              "description": "Shared endpoints",
               "order": 20
             },
             "tags": {
@@ -2923,7 +2792,7 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
               "title": "Tags",
               "description": "Tags",
               "items": {
-                "type": "object"
+                "type": "string"
               },
               "order": 21
             },
@@ -2981,16 +2850,16 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
                   "description": "Set priority",
                   "order": 5
                 },
-                "setTag": {
-                  "type": "boolean",
-                  "title": "Settag",
-                  "description": "Settag",
-                  "order": 6
-                },
                 "setType": {
                   "type": "boolean",
-                  "title": "Settype",
-                  "description": "Settype",
+                  "title": "Set Type",
+                  "description": "Set type",
+                  "order": 6
+                },
+                "tagTTL": {
+                  "type": "integer",
+                  "title": "Tag TTL",
+                  "description": "Tag TTL",
                   "order": 7
                 }
               }
@@ -3041,13 +2910,10 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
               "type": "object",
               "title": "logic",
               "properties": {
-                "data": {
-                  "type": "array",
-                  "title": "Data",
-                  "description": "Data",
-                  "items": {
-                    "type": "integer"
-                  },
+                "targetScore": {
+                  "type": "integer",
+                  "title": "Target Score",
+                  "description": "Target score",
                   "order": 1
                 },
                 "type": {
@@ -3135,59 +3001,15 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
             }
           },
           "definitions": {
-            "arguments": {
-              "type": "object",
-              "title": "arguments",
-              "properties": {
-                "value": {
-                  "type": "string",
-                  "title": "Value",
-                  "description": "Value",
-                  "order": 1
-                }
-              }
-            },
-            "data": {
-              "type": "object",
-              "title": "data",
-              "properties": {
-                "left": {
-                  "type": "string",
-                  "title": "Left",
-                  "description": "Left",
-                  "order": 1
-                }
-              }
-            },
             "logic_0": {
               "type": "object",
               "title": "logic_0",
               "properties": {
-                "data": {
-                  "$ref": "#/definitions/data",
-                  "title": "Data",
-                  "description": "Data",
-                  "order": 1
-                },
                 "version": {
                   "type": "string",
                   "title": "Version",
                   "description": "Version",
-                  "order": 2
-                }
-              },
-              "definitions": {
-                "data": {
-                  "type": "object",
-                  "title": "data",
-                  "properties": {
-                    "left": {
-                      "type": "string",
-                      "title": "Left",
-                      "description": "Left",
-                      "order": 1
-                    }
-                  }
+                  "order": 1
                 }
               }
             },
@@ -3219,55 +3041,29 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
               "type": "object",
               "title": "triggeredFilters",
               "properties": {
-                "arguments": {
-                  "$ref": "#/definitions/arguments",
-                  "title": "Arguments",
-                  "description": "Arguments",
-                  "order": 1
-                },
                 "cfid": {
                   "type": "integer",
                   "title": "CFID",
                   "description": "Component filter ID",
-                  "order": 2
+                  "order": 1
                 },
                 "comparatorType": {
                   "type": "string",
                   "title": "Comparator Type",
                   "description": "Comparator type",
-                  "order": 3
+                  "order": 2
                 },
                 "filterType": {
                   "type": "string",
                   "title": "Filter Type",
                   "description": "Filter type",
-                  "order": 4
+                  "order": 3
                 },
                 "id": {
                   "type": "string",
                   "title": "ID",
-                  "description": "Identifier",
-                  "order": 5
-                },
-                "trigger": {
-                  "$ref": "#/definitions/arguments",
-                  "title": "Trigger",
-                  "description": "Trigger",
-                  "order": 6
-                }
-              },
-              "definitions": {
-                "arguments": {
-                  "type": "object",
-                  "title": "arguments",
-                  "properties": {
-                    "value": {
-                      "type": "string",
-                      "title": "Value",
-                      "description": "Value",
-                      "order": 1
-                    }
-                  }
+                  "description": "ID",
+                  "order": 4
                 }
               }
             }
@@ -3277,55 +3073,301 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "triggeredFilters",
           "properties": {
-            "arguments": {
-              "$ref": "#/definitions/arguments",
-              "title": "Arguments",
-              "description": "Arguments",
-              "order": 1
-            },
             "cfid": {
               "type": "integer",
               "title": "CFID",
               "description": "Component filter ID",
-              "order": 2
+              "order": 1
             },
             "comparatorType": {
               "type": "string",
               "title": "Comparator Type",
               "description": "Comparator type",
-              "order": 3
+              "order": 2
             },
             "filterType": {
               "type": "string",
               "title": "Filter Type",
               "description": "Filter type",
-              "order": 4
+              "order": 3
             },
             "id": {
               "type": "string",
               "title": "ID",
-              "description": "Identifier",
+              "description": "ID",
+              "order": 4
+            }
+          }
+        }
+      }
+    },
+    "then": {
+      "type": "object",
+      "title": "then",
+      "properties": {
+        "actions": {
+          "$ref": "#/definitions/actions",
+          "title": "Actions",
+          "description": "Actions",
+          "order": 1
+        },
+        "active": {
+          "type": "boolean",
+          "title": "Active",
+          "description": "Active",
+          "order": 2
+        },
+        "activeTimes": {
+          "$ref": "#/definitions/activeTimes",
+          "title": "Active Times",
+          "description": "Active times",
+          "order": 3
+        },
+        "autoSuppress": {
+          "type": "boolean",
+          "title": "Auto Suppress",
+          "description": "Auto suppress",
+          "order": 4
+        },
+        "autoUpdatable": {
+          "type": "boolean",
+          "title": "Auto Updatable",
+          "description": "Auto updatable",
+          "order": 5
+        },
+        "autoUpdate": {
+          "type": "boolean",
+          "title": "Auto Update",
+          "description": "Auto update",
+          "order": 6
+        },
+        "behaviour": {
+          "type": "string",
+          "title": "Behaviour",
+          "description": "Behaviour",
+          "order": 7
+        },
+        "created": {
+          "$ref": "#/definitions/created",
+          "title": "Created",
+          "description": "Created",
+          "order": 8
+        },
+        "defeats": {
+          "type": "array",
+          "title": "Defeats",
+          "description": "Defeats",
+          "items": {
+            "type": "object"
+          },
+          "order": 9
+        },
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "description": "Description",
+          "order": 10
+        },
+        "edited": {
+          "$ref": "#/definitions/created",
+          "title": "Edited",
+          "description": "Edited",
+          "order": 11
+        },
+        "interval": {
+          "type": "integer",
+          "title": "Interval",
+          "description": "Interval",
+          "order": 12
+        },
+        "logic": {
+          "$ref": "#/definitions/logic",
+          "title": "Logic",
+          "description": "Logic",
+          "order": 13
+        },
+        "modified": {
+          "type": "string",
+          "title": "Modified",
+          "description": "Modified",
+          "order": 14
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 15
+        },
+        "phid": {
+          "type": "integer",
+          "title": "PHID",
+          "description": "PHID",
+          "order": 16
+        },
+        "pid": {
+          "type": "integer",
+          "title": "PID",
+          "description": "Policy ID",
+          "order": 17
+        },
+        "priority": {
+          "type": "integer",
+          "title": "Priority",
+          "description": "Priority",
+          "order": 18
+        },
+        "sequenced": {
+          "type": "boolean",
+          "title": "Sequenced",
+          "description": "Sequenced",
+          "order": 19
+        },
+        "sharedEndpoints": {
+          "type": "boolean",
+          "title": "Shared Endpoints",
+          "description": "Shared endpoints",
+          "order": 20
+        },
+        "tags": {
+          "type": "array",
+          "title": "Tags",
+          "description": "Tags",
+          "items": {
+            "type": "string"
+          },
+          "order": 21
+        },
+        "throttle": {
+          "type": "integer",
+          "title": "Throttle",
+          "description": "Throttle",
+          "order": 22
+        },
+        "uuid": {
+          "type": "string",
+          "title": "UUID",
+          "description": "UUID",
+          "order": 23
+        },
+        "version": {
+          "type": "integer",
+          "title": "Version",
+          "description": "Version",
+          "order": 24
+        }
+      },
+      "definitions": {
+        "actions": {
+          "type": "object",
+          "title": "actions",
+          "properties": {
+            "alert": {
+              "type": "boolean",
+              "title": "Alert",
+              "description": "Alert",
+              "order": 1
+            },
+            "antigena": {
+              "type": "object",
+              "title": "Antigena",
+              "description": "Antigena",
+              "order": 2
+            },
+            "breach": {
+              "type": "boolean",
+              "title": "Breach",
+              "description": "Breach",
+              "order": 3
+            },
+            "model": {
+              "type": "boolean",
+              "title": "Model",
+              "description": "Model",
+              "order": 4
+            },
+            "setPriority": {
+              "type": "boolean",
+              "title": "Set Priority",
+              "description": "Set priority",
               "order": 5
             },
-            "trigger": {
-              "$ref": "#/definitions/arguments",
-              "title": "Trigger",
-              "description": "Trigger",
+            "setType": {
+              "type": "boolean",
+              "title": "Set Type",
+              "description": "Set type",
               "order": 6
+            },
+            "tagTTL": {
+              "type": "integer",
+              "title": "Tag TTL",
+              "description": "Tag TTL",
+              "order": 7
             }
-          },
-          "definitions": {
-            "arguments": {
+          }
+        },
+        "activeTimes": {
+          "type": "object",
+          "title": "activeTimes",
+          "properties": {
+            "devices": {
               "type": "object",
-              "title": "arguments",
-              "properties": {
-                "value": {
-                  "type": "string",
-                  "title": "Value",
-                  "description": "Value",
-                  "order": 1
-                }
-              }
+              "title": "Devices",
+              "description": "Devices",
+              "order": 1
+            },
+            "tags": {
+              "type": "object",
+              "title": "Tags",
+              "description": "Tags",
+              "order": 2
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "description": "Type",
+              "order": 3
+            },
+            "version": {
+              "type": "integer",
+              "title": "Version",
+              "description": "Version",
+              "order": 4
+            }
+          }
+        },
+        "created": {
+          "type": "object",
+          "title": "created",
+          "properties": {
+            "by": {
+              "type": "string",
+              "title": "By",
+              "description": "By",
+              "order": 1
+            }
+          }
+        },
+        "logic": {
+          "type": "object",
+          "title": "logic",
+          "properties": {
+            "targetScore": {
+              "type": "integer",
+              "title": "Target Score",
+              "description": "Target score",
+              "order": 1
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "description": "Type",
+              "order": 2
+            },
+            "version": {
+              "type": "integer",
+              "title": "Version",
+              "description": "Version",
+              "order": 3
             }
           }
         }
@@ -3400,59 +3442,15 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "definitions": {
-        "arguments": {
-          "type": "object",
-          "title": "arguments",
-          "properties": {
-            "value": {
-              "type": "string",
-              "title": "Value",
-              "description": "Value",
-              "order": 1
-            }
-          }
-        },
-        "data": {
-          "type": "object",
-          "title": "data",
-          "properties": {
-            "left": {
-              "type": "string",
-              "title": "Left",
-              "description": "Left",
-              "order": 1
-            }
-          }
-        },
         "logic_0": {
           "type": "object",
           "title": "logic_0",
           "properties": {
-            "data": {
-              "$ref": "#/definitions/data",
-              "title": "Data",
-              "description": "Data",
-              "order": 1
-            },
             "version": {
               "type": "string",
               "title": "Version",
               "description": "Version",
-              "order": 2
-            }
-          },
-          "definitions": {
-            "data": {
-              "type": "object",
-              "title": "data",
-              "properties": {
-                "left": {
-                  "type": "string",
-                  "title": "Left",
-                  "description": "Left",
-                  "order": 1
-                }
-              }
+              "order": 1
             }
           }
         },
@@ -3484,55 +3482,29 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "triggeredFilters",
           "properties": {
-            "arguments": {
-              "$ref": "#/definitions/arguments",
-              "title": "Arguments",
-              "description": "Arguments",
-              "order": 1
-            },
             "cfid": {
               "type": "integer",
               "title": "CFID",
               "description": "Component filter ID",
-              "order": 2
+              "order": 1
             },
             "comparatorType": {
               "type": "string",
               "title": "Comparator Type",
               "description": "Comparator type",
-              "order": 3
+              "order": 2
             },
             "filterType": {
               "type": "string",
               "title": "Filter Type",
               "description": "Filter type",
-              "order": 4
+              "order": 3
             },
             "id": {
               "type": "string",
               "title": "ID",
-              "description": "Identifier",
-              "order": 5
-            },
-            "trigger": {
-              "$ref": "#/definitions/arguments",
-              "title": "Trigger",
-              "description": "Trigger",
-              "order": 6
-            }
-          },
-          "definitions": {
-            "arguments": {
-              "type": "object",
-              "title": "arguments",
-              "properties": {
-                "value": {
-                  "type": "string",
-                  "title": "Value",
-                  "description": "Value",
-                  "order": 1
-                }
-              }
+              "description": "ID",
+              "order": 4
             }
           }
         }
@@ -3542,55 +3514,29 @@ class PullAlertsOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "triggeredFilters",
       "properties": {
-        "arguments": {
-          "$ref": "#/definitions/arguments",
-          "title": "Arguments",
-          "description": "Arguments",
-          "order": 1
-        },
         "cfid": {
           "type": "integer",
           "title": "CFID",
           "description": "Component filter ID",
-          "order": 2
+          "order": 1
         },
         "comparatorType": {
           "type": "string",
           "title": "Comparator Type",
           "description": "Comparator type",
-          "order": 3
+          "order": 2
         },
         "filterType": {
           "type": "string",
           "title": "Filter Type",
           "description": "Filter type",
-          "order": 4
+          "order": 3
         },
         "id": {
           "type": "string",
           "title": "ID",
-          "description": "Identifier",
-          "order": 5
-        },
-        "trigger": {
-          "$ref": "#/definitions/arguments",
-          "title": "Trigger",
-          "description": "Trigger",
-          "order": 6
-        }
-      },
-      "definitions": {
-        "arguments": {
-          "type": "object",
-          "title": "arguments",
-          "properties": {
-            "value": {
-              "type": "string",
-              "title": "Value",
-              "description": "Value",
-              "order": 1
-            }
-          }
+          "description": "ID",
+          "order": 4
         }
       }
     }

@@ -4,40 +4,42 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Create a new ServiceNow CI record"
+    DESCRIPTION = "Identifies if a new incident has been created"
 
 
 class Input:
-    CREATE_DATA = "create_data"
-    TABLE = "table"
+    
+    FREQUENCY = "frequency"
+    QUERY = "query"
     
 
 class Output:
+    
     SYSTEM_ID = "system_id"
     
 
-class CreateCiInput(insightconnect_plugin_runtime.Input):
+class IncidentCreatedInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "create_data": {
-      "type": "object",
-      "title": "Create Data",
-      "description": "JSON object containing the fields and values to create a new CI",
+    "frequency": {
+      "type": "integer",
+      "title": "Frequency",
+      "description": "How often to poll for new incidents (in seconds)",
+      "default": 5,
       "order": 2
     },
-    "table": {
+    "query": {
       "type": "string",
-      "title": "Table",
-      "description": "The ServiceNow table where the new CI record will be inserted",
+      "title": "Query",
+      "description": "Non-encoded query string to match new incident records (will poll for any new incident if query is omitted)",
       "order": 1
     }
   },
   "required": [
-    "create_data",
-    "table"
+    "frequency"
   ]
 }
     """)
@@ -46,7 +48,7 @@ class CreateCiInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class CreateCiOutput(insightconnect_plugin_runtime.Output):
+class IncidentCreatedOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
@@ -55,7 +57,7 @@ class CreateCiOutput(insightconnect_plugin_runtime.Output):
     "system_id": {
       "type": "string",
       "title": "System ID",
-      "description": "System ID of the new CI created",
+      "description": "System ID of new incident",
       "order": 1
     }
   },
