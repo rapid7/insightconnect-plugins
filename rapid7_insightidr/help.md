@@ -63,6 +63,18 @@ Example input:
 Example output:
 
 ```
+{
+  "events": [
+    {
+      "sequence_number": 1211198512587571200,
+      "timestamp": 1602109074533,
+      "labels": [],
+      "log_id": "1b1a111d-d1fb-1a12-1651-eb1ff61a651a",
+      "message": "{\"sourceName\":\"Microsoft-Windows-Windows Defender\",\"eventCode\":1150,\"computerName\":\"iagent1-win10\",\"sid\":\"a-1-1-11\",\"isDomainController\":false,\"eventData\":{\"engineVersion\":\"1.1.17500.4\",\"signatureVersion\":\"1.325.351.0\",\"unused\":null,\"data\":[],\"platformVersion\":\"4.18.2009.7\",\"productName\":\"%%827\"},\"timeWritten\":\"2020-10-07T22:17:52.173455200Z\"}",
+      "sequence_number_str": "1211198512587571200"
+    }
+  ]
+}
 
 ```
 
@@ -301,6 +313,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.0 - New Action Query
 * 1.2.0 - New Action Assign User to Investigation
 * 1.1.1 - New spec and help.md format for the Extension Library
 * 1.1.0 - New Action Add Indicators to a Threat

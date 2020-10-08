@@ -19,22 +19,21 @@ class Query(komand.Action):
 
     def run(self, params={}):
         time_now = int(time.time())
-        endpoint = QueryLogs.get_query_logs(self.connection.url, params.get(Input.ID))
         request = ResourceHelper(self.connection.session, self.logger)
-        response = request.resource_request(endpoint, 'get', params={
-            "from": time_now - 21600,
-            "to": time_now
-        })
+        request_params = {
+            "from": (time_now - 7776000) * 1000,
+            "to": time_now * 1000
+        }
+        response = request.resource_request(
+            QueryLogs.get_query_logs(self.connection.url, params.get(Input.ID)),
+            'get',
+            params=request_params
+        )
 
-        self.logger.info(f"response: {response}")
         try:
             result = json.loads(response['resource'])
             if response["status"] == 202:
-                response = request.resource_request(result["links"][0]["href"], 'get', params={
-                    "from": time_now - 21600,
-                    "to": time_now
-                })
-                self.logger.info(f"response2: {response}")
+                response = request.resource_request(result["links"][0]["href"], 'get', params=request_params)
                 result = json.loads(response['resource'])
         except json.decoder.JSONDecodeError:
             self.logger.error(f'InsightIDR response: {response}')
@@ -42,8 +41,15 @@ class Query(komand.Action):
                                   assistance='Contact support for help. See log for more details')
 
         try:
+            result_response = []
+            events = result.get("events", [])
+            if events:
+                for event in events:
+                    event["message"] = event["message"].replace('\n', '\\n')
+                    result_response.append(event)
+
             return {
-                Output.EVENTS: result["events"]
+                Output.EVENTS: result_response
             }
         except KeyError:
             self.logger.error(result)
