@@ -34,9 +34,7 @@ Example input:
 
 ```
 {
-  "api_key": {
-    "secretKey":"9de5069c5afe602b2ea0a04b66beb2c0"
-  }
+  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
@@ -58,7 +56,7 @@ Example input:
 
 ```
 {
-  "alert_id": "fhS1El"
+  "frequency": 10
 }
 ```
 
@@ -199,7 +197,7 @@ Example input:
 
 ```
 {
-  "list": "Historically Reported by Insikt Group"
+  "frequency": 10
 }
 ```
 
@@ -323,12 +321,7 @@ Example input:
 
 ```
 {
-  "direction": "asc",
-  "from": 0,
-  "limit": 10,
-  "orderby": "Riskscore",
-  "riskRule": "Historically Reported by Insikt Group",
-  "riskScore": "[0,100]"
+  "frequency": 10
 }
 ```
 
@@ -537,11 +530,7 @@ Example input:
 
 ```
 {
-  "direction": "asc",
-  "from": 0,
-  "limit": 10,
-  "orderby": "Riskscore",
-  "parent": "example.com"
+  "frequency": 10
 }
 ```
 
@@ -655,11 +644,7 @@ Example input:
 
 ```
 {
-  "direction": "asc",
-  "freetext": "example",
-  "from": 0,
-  "limit": 10,
-  "orderby": "Riskscore"
+  "frequency": 10
 }
 ```
 
@@ -720,7 +705,7 @@ Example input:
 
 ```
 {
-  "freetext": "example"
+  "frequency": 10
 }
 ```
 
@@ -775,7 +760,7 @@ Example input:
 
 ```
 {
-  "list": "active_phishing_url"
+  "frequency": 10
 }
 ```
 
@@ -803,11 +788,7 @@ Example input:
 
 ```
 {
-  "direction": "asc",
-  "freetext": "example",
-  "from": 0,
-  "limit": 10,
-  "orderby": "Riskscore"
+  "frequency": 10
 }
 ```
 
@@ -874,11 +855,7 @@ Example input:
 
 ```
 {
-  "direction": "asc",
-  "from": 0,
-  "ip_range": "198.51.100.0/24",
-  "limit": 10,
-  "orderby": "Lastseen"
+  "frequency": 10
 }
 ```
 
@@ -978,7 +955,7 @@ Example input:
 
 ```
 {
-  "list": "positive_malware_verdict"
+  "frequency": 10
 }
 ```
 
@@ -1006,11 +983,7 @@ Example input:
 
 ```
 {
-  "algorithm": "SHA-1",
-  "direction": "asc",
-  "from": 0,
-  "limit": 10,
-  "orderby": "Riskscore"
+  "frequency": 10
 }
 ```
 
@@ -1034,7 +1007,7 @@ Example input:
 
 ```
 {
-  "entity_list_id": "report:Oe5eg5"
+  "frequency": 10
 }
 ```
 
@@ -1087,7 +1060,7 @@ Example input:
 
 ```
 {
-  "malware_ID": "ShciZX"
+  "frequency": 10
 }
 ```
 
@@ -1132,13 +1105,7 @@ Example input:
 
 ```
 {
-  "comment": "Domain look up performed by InsightConnect",
-  "domain": "example.com",
-  "fields": [
-    "sightings",
-    "threatLists",
-    "intelCard"
-  ]
+  "frequency": 10
 }
 ```
 
@@ -1191,13 +1158,7 @@ Example input:
 
 ```
 {
-  "comment": "Hash look up performed by InsightConnect",
-  "fields": [
-    "risk",
-    "timestamps",
-    "sightings"
-  ],
-  "hash": "44d88612fea8a8f36de82e1278abb02f"
+  "frequency": 10
 }
 ```
 
@@ -1277,13 +1238,7 @@ Example input:
 
 ```
 {
-  "comment": "URL look up performed by InsightConnect",
-  "fields": [
-    "relatedEntities",
-    "risk",
-    "sightings"
-  ],
-  "url": "https://example.com"
+  "frequency": 10
 }
 ```
 
@@ -1331,7 +1286,7 @@ Example input:
 
 ```
 {
-  "list": "malware_delivery"
+  "frequency": 10
 }
 ```
 
@@ -1527,13 +1482,7 @@ Example input:
 
 ```
 {
-  "IP_address": "198.51.100.100",
-  "comment": "IP look up performed by InsightConnect",
-  "fields": [
-    "riskyCIDRIPs",
-    "risk",
-    "sightings"
-  ]
+  "frequency": 10
 }
 ```
 
@@ -1585,7 +1534,7 @@ Example input:
 
 ```
 {
-  "list": "nist_severity_critical"
+  "frequency": 10
 }
 ```
 
@@ -1703,7 +1652,7 @@ Example input:
 
 ```
 {
-  "id": "CVE-2014-0160"
+  "frequency": 10
 }
 ```
 
@@ -1800,7 +1749,34 @@ Example output:
 
 ### Triggers
 
-_This plugin does not contain any triggers._
+#### 
+
+This trigger is used to .
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|frequency|int|10|True|Frequency|None|10|
+
+Example input:
+
+```
+{
+  "frequency": 10
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|alert|alert|True|Alert|
+
+Example output:
+
+```
+```
 
 ### Custom Output Types
 

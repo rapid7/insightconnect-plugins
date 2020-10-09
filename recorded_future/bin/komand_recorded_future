@@ -34,6 +34,8 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_trigger(triggers.GetNewAlerts())
+
             self.add_action(actions.DownloadIPAddressesRiskList())
 
             self.add_action(actions.DownloadDomainRiskList())
