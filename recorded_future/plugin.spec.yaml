@@ -1479,6 +1479,8 @@ actions:
 
 triggers:
   get_new_alerts:
+    title: Get New Alerts
+    description: Get New Alerts
     input:
       frequency:
         title: Frequency

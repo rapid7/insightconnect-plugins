@@ -56,7 +56,7 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "alert_id": "fhS1El"
 }
 ```
 
@@ -197,7 +197,7 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "list": "Historically Reported by Insikt Group"
 }
 ```
 
@@ -321,7 +321,12 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "direction": "asc",
+  "from": 0,
+  "limit": 10,
+  "orderby": "Riskscore",
+  "riskRule": "Historically Reported by Insikt Group",
+  "riskScore": "[0,100]"
 }
 ```
 
@@ -530,7 +535,11 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "direction": "asc",
+  "from": 0,
+  "limit": 10,
+  "orderby": "Riskscore",
+  "parent": "example.com"
 }
 ```
 
@@ -643,9 +652,6 @@ This action is used to search for data related to malware.
 Example input:
 
 ```
-{
-  "frequency": 10
-}
 ```
 
 ##### Output
@@ -705,7 +711,7 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "freetext": "example"
 }
 ```
 
@@ -760,7 +766,7 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "list": "active_phishing_url"
 }
 ```
 
@@ -788,7 +794,11 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "direction": "asc",
+  "freetext": "example",
+  "from": 0,
+  "limit": 10,
+  "orderby": "Riskscore"
 }
 ```
 
@@ -855,7 +865,11 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "direction": "asc",
+  "from": 0,
+  "ip_range": "198.51.100.0/24",
+  "limit": 10,
+  "orderby": "Lastseen"
 }
 ```
 
@@ -954,9 +968,6 @@ This action is used to returns a list of hashes matching a specified risk rule.
 Example input:
 
 ```
-{
-  "frequency": 10
-}
 ```
 
 ##### Output
@@ -983,7 +994,11 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "algorithm": "SHA-1",
+  "direction": "asc",
+  "from": 0,
+  "limit": 10,
+  "orderby": "Riskscore"
 }
 ```
 
@@ -1007,7 +1022,7 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "entity_list_id": "report:Oe5eg5"
 }
 ```
 
@@ -1060,7 +1075,7 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "malware_ID": "ShciZX"
 }
 ```
 
@@ -1105,7 +1120,13 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "comment": "Domain look up performed by InsightConnect",
+  "domain": "example.com",
+  "fields": [
+    "sightings",
+    "threatLists",
+    "intelCard"
+  ]
 }
 ```
 
@@ -1158,7 +1179,13 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "comment": "Hash look up performed by InsightConnect",
+  "fields": [
+    "risk",
+    "timestamps",
+    "sightings"
+  ],
+  "hash": "44d88612fea8a8f36de82e1278abb02f"
 }
 ```
 
@@ -1238,7 +1265,13 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "comment": "URL look up performed by InsightConnect",
+  "fields": [
+    "relatedEntities",
+    "risk",
+    "sightings"
+  ],
+  "url": "https://example.com"
 }
 ```
 
@@ -1286,7 +1319,7 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "list": "malware_delivery"
 }
 ```
 
@@ -1482,7 +1515,13 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "IP_address": "198.51.100.100",
+  "comment": "IP look up performed by InsightConnect",
+  "fields": [
+    "riskyCIDRIPs",
+    "risk",
+    "sightings"
+  ]
 }
 ```
 
@@ -1534,7 +1573,7 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "list": "nist_severity_critical"
 }
 ```
 
@@ -1652,7 +1691,7 @@ Example input:
 
 ```
 {
-  "frequency": 10
+  "id": "CVE-2014-0160"
 }
 ```
 
@@ -1749,9 +1788,9 @@ Example output:
 
 ### Triggers
 
-#### 
+#### Get New Alerts
 
-This trigger is used to .
+This trigger is used to get new alerts.
 
 ##### Input
 
@@ -1776,6 +1815,23 @@ Example input:
 Example output:
 
 ```
+{
+  "alert": {
+    "review": {
+      "status": "no-action"
+    },
+    "url": "https://app.recordedfuture.com/live/sc/notification/?id=fnbTO7",
+    "rule": {
+      "url": "https://app.recordedfuture.com/live/sc/ViewIdkobra_view_report_item_alert_editor?view_opts=%7B%22reportId%22%3A%22feScJA%22%2C%22bTitle%22%3Atrue%2C%22title%22%3A%22Global+Vulnerability+Risk%2C+Vulnerabilities%2C+New+Exploit+Chatter%22%7D&state.bNavbar=false",
+      "name": "Global Vulnerability Risk, Vulnerabilities, New Exploit Chatter",
+      "id": "feScJA"
+    },
+    "triggered": "2020-10-09T16:08:21.948Z",
+    "id": "fnbTO7",
+    "title": "Global Vulnerability Risk, Vulnerabilities, New Exploit Chatter - ... is n...",
+    "type": "ENTITY"
+  }
+}
 ```
 
 ### Custom Output Types
