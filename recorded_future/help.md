@@ -34,7 +34,9 @@ Example input:
 
 ```
 {
-  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0"
+  "api_key": {
+    "secretKey":"9de5069c5afe602b2ea0a04b66beb2c0"
+  }
 }
 ```
 
@@ -652,6 +654,13 @@ This action is used to search for data related to malware.
 Example input:
 
 ```
+{
+  "direction": "asc",
+  "freetext": "example",
+  "from": 0,
+  "limit": 10,
+  "orderby": "Riskscore"
+}
 ```
 
 ##### Output
@@ -968,6 +977,9 @@ This action is used to returns a list of hashes matching a specified risk rule.
 Example input:
 
 ```
+{
+  "list": "positive_malware_verdict"
+}
 ```
 
 ##### Output
