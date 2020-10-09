@@ -24,7 +24,7 @@ class DownloadIPAddressesRiskListInput(komand.Input):
     "list": {
       "type": "string",
       "title": "List",
-      "description": "The risk list to retrieve",
+      "description": "The risk list to retrieve, leaving the list parameter blank results in the default risk list",
       "enum": [
         "current_cc_server",
         "cyber_exploit_signal_medium",
