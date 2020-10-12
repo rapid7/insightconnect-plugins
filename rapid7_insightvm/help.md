@@ -1770,7 +1770,7 @@ This action is used to search for assets using a filtered asset search.
 |searchCriteria|object|None|True|Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|None|
 |size|number|None|False|The number of records to retrieve. If blank or '0' all assets that match the search will be returned|None|100|
 |sort_criteria|string|None|False|The criteria to sort the records byMultiple sort criteria can be specified using multiple sort query parameters as comma seprated values.|None|risk-score, host-type, criticality-tag|
-|sort_order|string|None|False|The order will be sorted in ascending or decending. Enter order in a comma as seperated values coresponding to sort criteria. If a criteria dose not have a order it will defult to ascending|None|ascending, decending, decending|
+|sort_order|string|None|False|The order will be sorted in ascending (asc) or descending (desc). Enter order in a comma as seperated values coresponding to sort criteria. If a criteria dose not have a order it will defult to ascending|None|asc, desc, desc|
 
 Example input:
 
@@ -1778,7 +1778,7 @@ Example input:
 {
   "size": 100,
   "sort_criteria": "risk-score, host-type, criticality-tag",
-  "sort_order": "ascending, decending, decending"
+  "sort_order": "asc, desc, desc"
 }
 ```
 

@@ -45,7 +45,7 @@ class AssetSearchInput(komand.Input):
     "sort_order": {
       "type": "string",
       "title": "Sort Order",
-      "description": "The order will be sorted in ascending or decending. Enter order in a comma as seperated values coresponding to sort criteria. If a criteria dose not have a order it will defult to ascending",
+      "description": "The order will be sorted in ascending (asc) or descending (desc). Enter order in a comma as seperated values coresponding to sort criteria. If a criteria dose not have a order it will defult to ascending",
       "order": 4
     }
   },

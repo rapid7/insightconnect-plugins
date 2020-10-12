@@ -2196,10 +2196,10 @@ actions:
         example: risk-score, host-type, criticality-tag
       sort_order:
         title: Sort Order
-        description: The order will be sorted in ascending (ASC) or descending (DESC). Enter order in a comma as seperated values coresponding to sort criteria. If a criteria dose not have a order it will defult to ascending
+        description: The order will be sorted in ascending (asc) or descending (desc). Enter order in a comma as seperated values coresponding to sort criteria. If a criteria dose not have a order it will defult to ascending
         type: string
         required: false
-        example: ASC, DESC, DESC
+        example: asc, desc, desc
     output:
       assets:
         title: Assets

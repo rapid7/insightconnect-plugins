@@ -1,5 +1,5 @@
 {
-	"spec": "0b39d9a0f8391fcef25d3288dabe88a2",
+	"spec": "949989e419c3b78858abb9a60e9c847f",
 	"manifest": "7b8172175a1e23ac96767f6f72ed1063",
 	"setup": "c3da5580d35ecb33f3cc1811a99b128b",
 	"schemas": [
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "asset_search/schema.py",
-			"hash": "545cb387e51105ab6369a435c07003c0"
+			"hash": "53739569316c31ad8587917c8970540d"
 		},
 		{
 			"identifier": "create_asset_group/schema.py",
