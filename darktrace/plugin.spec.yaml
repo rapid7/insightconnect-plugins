@@ -2,8 +2,8 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: darktrace
-title: DarkTrace
-version: 1.1.0
+title: Darktrace
+version: 2.0.0
 description: Automate the management of watched domains and alerting using the Darktrace plugin
 vendor: rapid7
 support: rapid7
@@ -21,6 +21,83 @@ hub_tags:
   keywords: [darktrace, nta, network]
   features: []
 types:
+  ips:
+    ip:
+      title: IP
+      type: string
+      description: IP
+      required: false
+    sid:
+      title: SID
+      type: integer
+      description: SID
+      required: false
+    time:
+      title: Time
+      type: string
+      description: Time
+      required: false
+    timems:
+      title: Timems
+      type: integer
+      description: Timems
+      required: false
+  device:
+    did:
+      title: DID
+      type: integer
+      description: DID
+      required: false
+    firstSeen:
+      title: First Seen
+      type: integer
+      description: First seen
+      required: false
+    hostname:
+      title: Hostname
+      type: string
+      description: Hostname
+      required: false
+    ip:
+      title: IP
+      type: string
+      description: IP
+      required: false
+    ips:
+      title: IPs
+      type: "[]ips"
+      description: IPs
+      required: false
+    lastSeen:
+      title: Last Seen
+      type: integer
+      description: Last seen
+      required: false
+    macaddress:
+      title: MAC Address
+      type: string
+      description: MAC address
+      required: false
+    sid:
+      title: SID
+      type: integer
+      description: SID
+      required: false
+    typelabel:
+      title: Typelabel
+      type: string
+      description: Typelabel
+      required: false
+    typename:
+      title: Typename
+      type: string
+      description: Typename
+      required: false
+    vendor:
+      title: Vendor
+      type: string
+      description: Vendor
+      required: false
   actions:
     alert:
       title: Alert
@@ -47,15 +124,15 @@ types:
       type: boolean
       description: Set priority
       required: false
-    setTag:
-      title: Settag
-      type: boolean
-      description: Settag
-      required: false
     setType:
-      title: Settype
+      title: Set Type
       type: boolean
-      description: Settype
+      description: Set type
+      required: false
+    tagTTL:
+      title: Tag TTL
+      type: integer
+      description: Tag TTL
       required: false
   activeTimes:
     devices:
@@ -85,10 +162,10 @@ types:
       description: By
       required: false
   logic:
-    data:
-      title: Data
-      type: "[]integer"
-      description: Data
+    targetScore:
+      title: Target Score
+      type: integer
+      description: Target score
       required: false
     type:
       title: Type
@@ -127,9 +204,9 @@ types:
       description: Auto updatable
       required: false
     autoUpdate:
-      title: Autoupdate
+      title: Auto Update
       type: boolean
-      description: Autoupdate
+      description: Auto update
       required: false
     behaviour:
       title: Behaviour
@@ -208,7 +285,7 @@ types:
       required: false
     tags:
       title: Tags
-      type: "[]object"
+      type: "[]string"
       description: Tags
       required: false
     throttle:
@@ -305,7 +382,7 @@ types:
     phid:
       title: PHID
       type: integer
-      description: Policy history ID
+      description: PHID
       required: false
     pid:
       title: PID
@@ -323,13 +400,13 @@ types:
       description: Sequenced
       required: false
     sharedEndpoints:
-      title: Sharedendpoints
+      title: Shared Endpoints
       type: boolean
-      description: Sharedendpoints
+      description: Shared endpoints
       required: false
     tags:
       title: Tags
-      type: "[]object"
+      type: "[]string"
       description: Tags
       required: false
     throttle:
@@ -358,18 +435,39 @@ types:
       type: then
       description: Then
       required: false
-  data:
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+  right:
     left:
       title: Left
       type: string
       description: Left
       required: false
-  logic_0:
-    data:
-      title: Data
-      type: data
-      description: Data
+    operator:
+      title: Operator
+      type: string
+      description: Operator
       required: false
+    right:
+      title: Right
+      type: string
+      description: Right
+      required: false
+  data_0:
+    operator:
+      title: Operator
+      type: string
+      description: Operator
+      required: false
+    right:
+      title: Right
+      type: right
+      description: Right
+      required: false
+  logic_0:
     version:
       title: Version
       type: string
@@ -391,18 +489,7 @@ types:
       type: string
       description: Name
       required: false
-  arguments:
-    value:
-      title: Value
-      type: string
-      description: Value
-      required: false
   triggeredFilters:
-    arguments:
-      title: Arguments
-      type: arguments
-      description: Arguments
-      required: false
     cfid:
       title: CFID
       type: integer
@@ -421,12 +508,7 @@ types:
     id:
       title: ID
       type: string
-      description: Identifier
-      required: false
-    trigger:
-      title: Trigger
-      type: arguments
-      description: Trigger
+      description: ID
       required: false
   triggeredComponents:
     cbid:
@@ -479,55 +561,48 @@ types:
       type: "[]triggeredFilters"
       description: Triggered filters
       required: false
-  device:
-    did:
-      title: Did
+  results:
+    commentCount:
+      title: Comment Count
       type: integer
-      description: Did
+      description: Comment count
+      required: false
+    creationTime:
+      title: Creation Time
+      type: integer
+      description: Creation time
+      required: false
+    device:
+      title: Device
+      type: device
+      description: Device
+      required: false
+    model:
+      title: Model
+      type: model
+      description: Model
+      required: false
+    pbid:
+      title: PBID
+      type: integer
+      description: Policy breach ID
+      required: false
+    score:
+      title: Score
+      type: float
+      description: Score
+      required: false
+    time:
+      title: Time
+      type: integer
+      description: Time
+      required: false
+    triggeredComponents:
+      title: Triggered Components
+      type: "[]triggeredComponents"
+      description: Triggeredcomponents
       required: false
 
-
-  trigger_result:
-    creationTime:
-        title: Creation Time
-        type: integer
-        description: Creation time
-        required: false
-    commentCount:
-        title: Comment Count
-        type: integer
-        description: Comment count
-        required: false
-    pbid:
-        title: PBID
-        type: integer
-        description: Policy breach ID
-        required: false
-    time:
-        title: Time
-        type: integer
-        description: Time
-        required: false
-    model:
-        title: Model
-        type: model
-        description: Model
-        required: false
-    triggeredComponents:
-        title: Triggered Components
-        type: "[]triggeredComponents"
-        description: Triggered components
-        required: false
-    score:
-        title: Score
-        type: float
-        description: Score
-        required: false
-    device:
-        title: Device
-        type: device
-        description: Device
-        required: false
 connection:
   url:
     title: URL
@@ -549,7 +624,7 @@ connection:
 actions:
   update_watched_domains:
     title: Update Watched Domains
-    description: Add or remove items from the Watched Domains list. If an indicator is added, DarkTrace will monitor network traffic for that URL and create alerts from it
+    description: Add or remove items from the Watched Domains list. If an indicator is added, Darktrace will monitor network traffic for that URL and create alerts from it
     input:
       entry:
         title: Entry
@@ -626,8 +701,8 @@ triggers:
       minscore:
         title: Min Score
         type: integer
-        description: Return only breaches with a minimum score
-        example: 0
+        description: Return only breaches with a minimum score. Valid values are 0-100.
+        example: 10
         required: false
       pbid:
         title: PBID
@@ -649,7 +724,7 @@ triggers:
         required: false
     output:
       results:
-        type: "[]trigger_result"
+        type: "[]results"
         title: Results
         description: Alerts results
         required: true
