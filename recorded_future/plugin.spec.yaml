@@ -1484,7 +1484,7 @@ triggers:
     input:
       frequency:
         title: Frequency
-        description: Frequency
+        description: Frequency (in seconds)
         type: int
         default: 10
         example: 10
