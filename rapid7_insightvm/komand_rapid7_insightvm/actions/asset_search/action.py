@@ -45,7 +45,7 @@ class AssetSearch(komand.Action):
                                                                params=parameters,
                                                                payload=search_criteria)
         elif size <= 100:
-            parameters.append(size)
+            parameters.append(('size', size))
             resources = resource_helper.resource_request(endpoint=endpoint,
                                                          method='post',
                                                          params=parameters,
