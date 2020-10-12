@@ -224,8 +224,8 @@ class ResourceHelper(object):
         try:
             request_method = getattr(self.session, method.lower())
             headers = {
-                'Content-Type": "application/json',
-                'Accept": "application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             }
             if not payload:
                 response = request_method(url=endpoint,
