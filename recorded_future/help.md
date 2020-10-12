@@ -34,9 +34,7 @@ Example input:
 
 ```
 {
-  "api_key": {
-    "secretKey":"9de5069c5afe602b2ea0a04b66beb2c0"
-  }
+  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
@@ -538,13 +536,6 @@ This action is used to search for results related to a specific parent domain.
 Example input:
 
 ```
-{
-  "direction": "asc",
-  "from": 0,
-  "limit": 10,
-  "orderby": "Riskscore",
-  "parent": "example.com"
-}
 ```
 
 ##### Output
@@ -658,15 +649,6 @@ This action is used to search for data related to malware.
 Example input:
 
 ```
-{
-  "direction": "asc",
-  "firstSeen": "2016-06-15 07:54:38.286000",
-  "freetext": "example",
-  "from": 0,
-  "limit": 10,
-  "list": "fKXuF0",
-  "orderby": "Riskscore"
-}
 ```
 
 ##### Output
@@ -1903,9 +1885,6 @@ This action is used to fetch information about a specific vulnerability by CVE o
 Example input:
 
 ```
-{
-  "id": "CVE-2014-0160"
-}
 ```
 
 ##### Output
@@ -2009,7 +1988,7 @@ This trigger is used to get new alerts.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|frequency|int|10|True|Frequency|None|10|
+|frequency|int|10|True|Frequency (in seconds)|None|10|
 
 Example input:
 
@@ -2057,6 +2036,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.1.0 - New trigger Get New Alerts
 * 3.0.0 - Add input `fields` to Search Domains, Search Hashes, Search IP Addresses, Search Vulnerabilities, Search Malware and Lookup Malware actions | Add `riskRule` and `riskScore` filter criteria to Search Domains, Search Hashes, Search IP Addresses and Search Vulnerabilities actions | Add `list` and `firstSeen` filter criteria to Search Malware action | Update description for `list` parameter in Download IP Addresses Risk List, Download Vulnerability Risk List, Download Domain Risk List and Download Hash Risk List actions
 * 2.2.0 - New actions Search URLs, Download URL Risk List and List URL Risk Rules | Update Recorded Future logo | Allow both upper and lowercase CVE in Lookup Vulnerability action
 * 2.1.0 - New action Lookup Alert
