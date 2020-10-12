@@ -13,6 +13,8 @@ class Input:
     IP_RANGE = "ip_range"
     LIMIT = "limit"
     ORDERBY = "orderby"
+    RISKRULE = "riskRule"
+    RISKSCORE = "riskScore"
     
 
 class Output:
@@ -71,6 +73,64 @@ class SearchIPAddressesInput(komand.Input):
         "Totalhits"
       ],
       "order": 3
+    },
+    "riskRule": {
+      "type": "string",
+      "title": "Risk Rule",
+      "description": "Filters the results by risk rule",
+      "enum": [
+        "Threat Actor Used Infrastructure",
+        "Historically Reported by Insikt Group",
+        "Inside Possible Bogus BGP Route",
+        "Historical Botnet Traffic",
+        "Nameserver for C\\u0026C Server",
+        "Historical C\\u0026C Server",
+        "Cyber Exploit Signal - Critical",
+        "Cyber Exploit Signal - Important",
+        "Cyber Exploit Signal - Medium",
+        "Recent Host of Many DDNS Names",
+        "Historically Reported as a Defanged IP",
+        "Historically Reported by DHS AIS",
+        "Resolution of Fast Flux DNS Name",
+        "Historically Reported in Threat List",
+        "Historical Honeypot Sighting",
+        "Honeypot Host",
+        "Recently Active C\\u0026C Server",
+        "Recent C\\u0026C Server",
+        "Historically Linked to Intrusion Method",
+        "Historically Linked to APT",
+        "Historically Linked to Cyber Attack",
+        "Malicious Packet Source",
+        "Malware Delivery",
+        "Historical Multicategory Blacklist",
+        "Historical Open Proxies",
+        "Phishing Host",
+        "Historical Positive Malware Verdict",
+        "Recorded Future Predictive Risk Model",
+        "Actively Communicating C\\u0026C Server",
+        "Recently Reported by Insikt Group",
+        "Recent Spam Source",
+        "Recent SSH/Dictionary Attacker",
+        "Recent Bad SSL Association",
+        "Recent Threat Researcher",
+        "Recently Defaced Site",
+        "Historically Referenced by Insikt Group",
+        "Trending in Recorded Future Analyst Community",
+        "Historical Spam Source",
+        "Historical SSH/Dictionary Attacker",
+        "Historical Bad SSL Association",
+        "Historical Threat Researcher",
+        "Tor Node",
+        "Unusual IP",
+        "Vulnerable Host"
+      ],
+      "order": 6
+    },
+    "riskScore": {
+      "type": "string",
+      "title": "Risk Score",
+      "description": "Filters the results by risk score",
+      "order": 7
     }
   },
   "required": [
