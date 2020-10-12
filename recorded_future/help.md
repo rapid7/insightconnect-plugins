@@ -34,7 +34,9 @@ Example input:
 
 ```
 {
-  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0"
+  "api_key": {
+    "secretKey":"9de5069c5afe602b2ea0a04b66beb2c0"
+  }
 }
 ```
 
@@ -536,6 +538,13 @@ This action is used to search for results related to a specific parent domain.
 Example input:
 
 ```
+{
+  "direction": "asc",
+  "from": 0,
+  "limit": 10,
+  "orderby": "Riskscore",
+  "parent": "example.com"
+}
 ```
 
 ##### Output
@@ -649,6 +658,15 @@ This action is used to search for data related to malware.
 Example input:
 
 ```
+{
+  "direction": "asc",
+  "firstSeen": "2016-06-15 07:54:38.286000",
+  "freetext": "example",
+  "from": 0,
+  "limit": 10,
+  "list": "fKXuF0",
+  "orderby": "Riskscore"
+}
 ```
 
 ##### Output
@@ -1885,6 +1903,9 @@ This action is used to fetch information about a specific vulnerability by CVE o
 Example input:
 
 ```
+{
+  "id": "CVE-2014-0160"
+}
 ```
 
 ##### Output
