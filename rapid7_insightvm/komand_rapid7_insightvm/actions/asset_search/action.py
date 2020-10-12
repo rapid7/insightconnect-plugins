@@ -23,42 +23,41 @@ class AssetSearch(komand.Action):
         sort_order = params.get(Input.SORT_ORDER, '')
         self.logger.info(f'Performing filtered asset search with criteria {search_criteria}')
         endpoint = endpoints.Asset.search(self.connection.console_url)
-        if sort_criteria:
-            sort_list = sort_criteria.split(',')
+        parameters = list()
 
+        # strip spaces
+        sort_order = sort_order.replace(' ', '')
+        sort_criteria = sort_criteria.replace(' ', '')
+
+        if sort_criteria:
+            criteria_list = sort_criteria.split(',')
+            order_list = sort_order.split(',')
+            for idx, item in enumerate(criteria_list):
+                try:
+                    parameters.append(('sort', f'{item},{order_list[idx]}'))
+                except IndexError:
+                    parameters.append(('sort', f'{item},asc'))
 
         if size == 0:
-            parameters = {'sort': sort}
+            parameters.append(('size', 100))
             resources = resource_helper.paged_resource_request(endpoint=endpoint,
-                                                               method='post', params=parameters,
+                                                               method='post',
+                                                               params=parameters,
                                                                payload=search_criteria)
         elif size <= 100:
-            parameters = {'size': size, 'sort': sort}
+            parameters.append(size)
             resources = resource_helper.resource_request(endpoint=endpoint,
-                                                         method='post', params=parameters,
+                                                         method='post',
+                                                         params=parameters,
                                                          payload=search_criteria)
             resources = resources['resources']
         else:
-            resources = []
-            current_page = 0
-            page_size = 100
-            results_retrieved = 0
-            while results_retrieved <= size:
-                if results_retrieved + page_size > size:
-                    page_size = size - results_retrieved
-                self.logger.info(f"Fetching results from page {current_page}")
-                parameters = {'sort': sort, 'page': current_page, 'size': page_size}
-                response = resource_helper.get_resource_page(endpoint=endpoint,
-                                                             method='post', params=parameters,
-                                                             payload=search_criteria)
-
-                resources += response.resources  # Grab resources and append to total
-                results_retrieved += len(response.resources)
-                if (response.total_pages == 0) or ((response.total_pages - 1) == response.page_num):
-                    self.logger.info("All pages consumed, returning results...")
-                    break  # exit the loop
-                else:
-                    self.logger.info("More pages exist, fetching...")
-                    current_page += 1
+            parameters.append(('size', 100))
+            number_of_results = size
+            resources = resource_helper.paged_resource_request(endpoint=endpoint,
+                                                               method='post',
+                                                               params=parameters,
+                                                               payload=search_criteria,
+                                                               number_of_results=number_of_results)
 
         return {Output.ASSETS: resources}
