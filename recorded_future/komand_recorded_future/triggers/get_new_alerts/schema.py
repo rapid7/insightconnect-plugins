@@ -26,7 +26,7 @@ class GetNewAlertsInput(komand.Input):
     "frequency": {
       "type": "integer",
       "title": "Frequency",
-      "description": "Frequency",
+      "description": "Frequency (in seconds)",
       "default": 10,
       "order": 1
     }
