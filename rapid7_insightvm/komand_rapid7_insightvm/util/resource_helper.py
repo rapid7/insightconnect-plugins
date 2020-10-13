@@ -182,7 +182,7 @@ class ResourceHelper(object):
 
         while True:
             self.logger.info(f'Fetching results from page {current_page}')
-            parameters['page'] = [current_page]
+            parameters['page'] = current_page
             if number_of_results != 0:
                 if results_retrieved + parameters['size'] > number_of_results:
                     parameters['size'] = number_of_results - results_retrieved
