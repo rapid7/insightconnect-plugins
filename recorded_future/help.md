@@ -2001,7 +2001,51 @@ Example output:
 
 ### Triggers
 
-_This plugin does not contain any triggers._
+#### Get New Alerts
+
+This trigger is used to get new alerts.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|frequency|int|10|True|Frequency (in seconds)|None|10|
+
+Example input:
+
+```
+{
+  "frequency": 10
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|alert|alert|True|Alert|
+
+Example output:
+
+```
+{
+  "alert": {
+    "review": {
+      "status": "no-action"
+    },
+    "url": "https://app.recordedfuture.com/live/sc/notification/?id=fnbTO7",
+    "rule": {
+      "url": "https://app.recordedfuture.com/live/sc/ViewIdkobra_view_report_item_alert_editor?view_opts=%7B%22reportId%22%3A%22feScJA%22%2C%22bTitle%22%3Atrue%2C%22title%22%3A%22Global+Vulnerability+Risk%2C+Vulnerabilities%2C+New+Exploit+Chatter%22%7D&state.bNavbar=false",
+      "name": "Global Vulnerability Risk, Vulnerabilities, New Exploit Chatter",
+      "id": "deXcBA"
+    },
+    "triggered": "2020-10-09T16:08:21.948Z",
+    "id": "deZcB9",
+    "title": "Global Vulnerability Risk, Vulnerabilities, New Exploit Chatter - ... is n...",
+    "type": "ENTITY"
+  }
+}
+```
 
 ### Custom Output Types
 
@@ -2013,6 +2057,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.1.0 - New trigger Get New Alerts
 * 3.0.0 - Add input `fields` to Search Domains, Search Hashes, Search IP Addresses, Search Vulnerabilities, Search Malware and Lookup Malware actions | Add `riskRule` and `riskScore` filter criteria to Search Domains, Search Hashes, Search IP Addresses and Search Vulnerabilities actions | Add `list` and `firstSeen` filter criteria to Search Malware action | Update description for `list` parameter in Download IP Addresses Risk List, Download Vulnerability Risk List, Download Domain Risk List and Download Hash Risk List actions
 * 2.2.0 - New actions Search URLs, Download URL Risk List and List URL Risk Rules | Update Recorded Future logo | Allow both upper and lowercase CVE in Lookup Vulnerability action
 * 2.1.0 - New action Lookup Alert
