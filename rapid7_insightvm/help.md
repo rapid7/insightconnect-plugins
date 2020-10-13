@@ -35,6 +35,7 @@ Example input:
   "credentials": {
       "username": "username",
       "password": "password"
+    }
 }
 ```
 
