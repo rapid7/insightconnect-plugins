@@ -20,10 +20,8 @@ class Connection(komand.Connection):
         port = params.get(Input.PORT)
         user_name = params.get(Input.USERNAME_PASSWORD).get('username')
         password = params.get(Input.USERNAME_PASSWORD).get('password')
-        if host.find(':') != -1:
-            self.logger.info('Port was provided in hostname, using value from Port field instead')
-            host = host.split(':')
-            host = host[0]
+
+        host = self.host_formater(host)
         self.logger.info(f'Connecting to {host}:{port}')
 
         server = ldap3.Server(
@@ -80,3 +78,10 @@ class Connection(komand.Connection):
             raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED)
 
         return {'connection': 'successful'}
+
+    def host_formater(self, host):
+        if host.find(':') != -1:
+            self.logger.info('Port was provided in hostname, using value from Port field instead')
+            host = host.split(':')
+            host = host[0]
+        return host
