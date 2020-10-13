@@ -1646,7 +1646,7 @@ connection:
     description: Username and password
     type: credential_username_password
     required: true
-    example: '{"username":"username", "password":"password"}'
+    example: '{"username": "username", "password": "password"}'
 actions:
   scan:
     title: Scan
