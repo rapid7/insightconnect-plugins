@@ -1779,7 +1779,10 @@ Example input:
 ```
 {
   "size": 100,
-  "sort_criteria": {"risk-score": "asc","criticality-tag":"desc"}
+  "sort_criteria": {
+    "risk-score": "asc", 
+    "criticality-tag": "desc"
+  }
 }
 ```
 
