@@ -2191,16 +2191,10 @@ actions:
         example: 100
       sort_criteria:
         title: Sort Criteria
-        description: How to sort the records. Multiple criteria can be specified using multiple sort query parameters as comma-separated values.
-        type: string
+        description: An object that sorts by criteria. Multiple criteria can be specified with an order of ascending or descending
+        type: object
         required: false
-        example: risk-score, host-type, criticality-tag
-      sort_order:
-        title: Sort Order
-        description: Sort ordering for sort criteria. Ordering should be comma-separated and correspond to the sort criteria input.
-        type: string
-        required: false
-        example: asc, desc, desc
+        example: '{"risk-score": "asc","criticality-tag":"desc"}'
     output:
       assets:
         title: Assets

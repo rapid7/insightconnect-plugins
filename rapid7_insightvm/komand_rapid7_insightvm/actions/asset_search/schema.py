@@ -11,7 +11,6 @@ class Input:
     SEARCHCRITERIA = "searchCriteria"
     SIZE = "size"
     SORT_CRITERIA = "sort_criteria"
-    SORT_ORDER = "sort_order"
     
 
 class Output:
@@ -38,16 +37,10 @@ class AssetSearchInput(komand.Input):
       "order": 2
     },
     "sort_criteria": {
-      "type": "string",
+      "type": "object",
       "title": "Sort Criteria",
-      "description": "The criteria to sort the records byMultiple sort criteria can be specified using multiple sort query parameters as comma seprated values.",
+      "description": "An object that sorts by criteria. Multiple criteria can be specified with an order of ascending or descending",
       "order": 3
-    },
-    "sort_order": {
-      "type": "string",
-      "title": "Sort Order",
-      "description": "The order will be sorted in ascending (asc) or descending (desc). Enter order in a comma as seperated values coresponding to sort criteria. If a criteria dose not have a order it will defult to ascending",
-      "order": 4
     }
   },
   "required": [

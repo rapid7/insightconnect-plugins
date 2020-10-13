@@ -19,24 +19,13 @@ class AssetSearch(komand.Action):
         resource_helper = ResourceHelper(self.connection.session, self.logger)
         search_criteria = params.get(Input.SEARCHCRITERIA)
         size = params.get(Input.SIZE, 0)
-        sort_criteria = params.get(Input.SORT_CRITERIA, '')
-        sort_order = params.get(Input.SORT_ORDER, '')
+        sort_criteria = params.get(Input.SORT_CRITERIA, dict())
         self.logger.info(f'Performing filtered asset search with criteria {search_criteria}')
         endpoint = endpoints.Asset.search(self.connection.console_url)
         parameters = list()
 
-        # strip spaces
-        sort_order = sort_order.replace(' ', '')
-        sort_criteria = sort_criteria.replace(' ', '')
-
-        if sort_criteria:
-            criteria_list = sort_criteria.split(',')
-            order_list = sort_order.split(',')
-            for idx, item in enumerate(criteria_list):
-                try:
-                    parameters.append(('sort', f'{item},{order_list[idx]}'))
-                except IndexError:
-                    parameters.append(('sort', f'{item},asc'))
+        for key, item in sort_criteria:
+            parameters.append(('sort', f'{key},{item}'))
 
         if size == 0:
             parameters.append(('size', 100))

@@ -13,12 +13,12 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 # Requirements
 
 * Username and password for a user with the necessary permissions
-* The URL must point to your local console, not the platform or cloud console.
 
 # Documentation
 
 ## Setup
 
+The URL must point to your local console, not the platform or cloud console.
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -30,8 +30,10 @@ Example input:
 
 ```
 {
-  "credentials": "{\"username\":\"username\", \"password\":\"password\"}",
-  "url": "https://insightvm.example.com:3780"
+  "url": "https://insightvm.example.com:3780",
+  "credentials": {
+      "username": "username",
+      "password": "password"
 }
 ```
 
@@ -1769,16 +1771,14 @@ This action is used to search for assets using a filtered asset search.
 |----|----|-------|--------|-----------|----|-------|
 |searchCriteria|object|None|True|Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|None|
 |size|number|0|False|The number of records to retrieve. If blank or '0' all assets that match the search will be returned|None|100|
-|sort_criteria|string|None|False|The criteria to sort the records byMultiple sort criteria can be specified using multiple sort query parameters as comma seprated values.|None|risk-score, host-type, criticality-tag|
-|sort_order|string|None|False|The order will be sorted in ascending (asc) or descending (desc). Enter order in a comma as seperated values coresponding to sort criteria. If a criteria dose not have a order it will defult to ascending|None|asc, desc, desc|
+|sort_criteria|object|None|False|An object that sorts by criteria. Multiple criteria can be specified with an order of ascending or descending|None|{"risk-score": "asc","criticality-tag":"desc"}|
 
 Example input:
 
 ```
 {
   "size": 100,
-  "sort_criteria": "risk-score, host-type, criticality-tag",
-  "sort_order": "asc, desc, desc"
+  "sort_criteria": {"risk-score": "asc","criticality-tag":"desc"}"
 }
 ```
 
