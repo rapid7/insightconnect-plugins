@@ -29,6 +29,10 @@ class TestResult(NamedTuple):
 
 
 class RequestParams(object):
+    """
+    This class is transforms a dictionary of parameters into a list of tuples,
+    and allows for there easy manipulation.
+    """
 
     def __init__(self, params: [tuple]):
         self.params = params
