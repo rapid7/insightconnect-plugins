@@ -1773,7 +1773,7 @@ This action is used to search for assets using a filtered asset search.
 |----|----|-------|--------|-----------|----|-------|
 |searchCriteria|object|None|True|Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|None|
 |size|number|0|False|The number of records to retrieve. If blank or '0' all assets that match the search will be returned|None|100|
-|sort_criteria|object|None|False|An object that sorts by criteria. Multiple criteria can be specified with an order of ascending or descending|None|{"risk-score": "asc","criticality-tag":"desc"}|
+|sort_criteria|object|None|False|An object that sorts by criteria. Multiple criteria can be specified with an order of ascending or descending|None|{"risk-score": "asc", "criticality-tag": "desc"}|
 
 Example input:
 
