@@ -2190,7 +2190,7 @@ actions:
         example: 100
       sort_criteria:
         title: Sort Criteria
-        description: The criteria to sort the records byMultiple sort criteria can be specified using multiple sort query parameters as comma seprated values.
+        description: How to sort the records. Multiple criteria can be specified using multiple sort query parameters as comma-separated values.
         type: string
         required: false
         example: risk-score, host-type, criticality-tag
