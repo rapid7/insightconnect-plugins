@@ -19,6 +19,7 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 ## Setup
 
 The URL must point to your local console, not the platform or cloud console.
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
