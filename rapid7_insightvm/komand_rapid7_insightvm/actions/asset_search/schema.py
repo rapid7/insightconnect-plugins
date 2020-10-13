@@ -9,6 +9,8 @@ class Component:
 
 class Input:
     SEARCHCRITERIA = "searchCriteria"
+    SIZE = "size"
+    SORT_CRITERIA = "sort_criteria"
     
 
 class Output:
@@ -26,6 +28,19 @@ class AssetSearchInput(komand.Input):
       "title": "Search Criteria",
       "description": "Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria",
       "order": 1
+    },
+    "size": {
+      "type": "number",
+      "title": "Size",
+      "description": "The number of records to retrieve. If blank or '0' all assets that match the search will be returned",
+      "default": 0,
+      "order": 2
+    },
+    "sort_criteria": {
+      "type": "object",
+      "title": "Sort Criteria",
+      "description": "An object that sorts by criteria. Multiple criteria can be specified with an order of ascending or descending",
+      "order": 3
     }
   },
   "required": [
