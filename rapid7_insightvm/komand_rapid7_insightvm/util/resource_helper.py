@@ -30,8 +30,8 @@ class TestResult(NamedTuple):
 
 class RequestParams(object):
     """
-    This class is transforms a dictionary of parameters into a list of tuples,
-    and allows for there easy manipulation.
+    This class transforms a dictionary of parameters into a list of tuples,
+    and allows for their easy manipulation. Accommodates multiple query parameters needed for sorting/filtering requests.
     """
 
     def __init__(self, params: [tuple]):
