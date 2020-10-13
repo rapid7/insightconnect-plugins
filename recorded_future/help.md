@@ -532,6 +532,8 @@ This action is used to search for results related to a specific parent domain.
 |limit|number|None|True|Number of results to retrieve, up to 100|None|10|
 |orderby|string|None|True|Which property to sort the results by|['Created', 'Firstseen', 'Lastseen', 'Modified', 'Riskscore', 'Rules', 'Sevendayshits', 'Sixtydayshits', 'Totalhits']|Riskscore|
 |parent|string|None|True|Parent domain, if any|None|example.com|
+|riskRule|string|None|False|Filters the results by risk rule|['Historically Reported by Insikt Group', 'Newly Registered Certificate With Potential for Abuse - DNS Sandwich', 'Newly Registered Certificate With Potential for Abuse - Typo or Homograph', 'C&C Nameserver', 'C&C DNS Name', 'C&C URL', 'Compromised URL', 'Historical COVID-19-Related Domain Lure', 'Recently Resolved to Host of Many DDNS Names', 'Historically Reported as a Defanged DNS Name', 'Historically Reported by DHS AIS', 'Recent Fast Flux DNS Name', 'Historically Reported Fraudulent Content', 'Historically Reported in Threat List', 'Historically Linked to Cyber Attack', 'Historical Malware Analysis DNS Name', 'Historically Detected Malware Operation', 'Historically Detected Cryptocurrency Mining Techniques', 'Blacklisted DNS Name', 'Historical Phishing Lure', 'Historically Detected Phishing Techniques', 'Active Phishing URL', 'Recorded Future Predictive Risk Model', 'Historical Punycode Domain', 'Ransomware Distribution URL', 'Ransomware Payment DNS Name', 'Recently Reported by Insikt Group', 'Recent COVID-19-Related Domain Lure - Malicious', 'Recent COVID-19-Related Domain Lure - Suspicious', 'Recently Reported as a Defanged DNS Name', 'Recently Reported by DHS AIS', 'Recently Reported Fraudulent Content', 'Recently Linked to Cyber Attack', 'Recent Malware Analysis DNS Name', 'Recently Detected Malware Operation', 'Recently Detected Cryptocurrency Mining Techniques', 'Recent Phishing Lure - Malicious', 'Recent Phishing Lure - Suspicious', 'Recently Detected Phishing Techniques', 'Recent Punycode Domain', 'Recently Referenced by Insikt Group', 'Recently Reported Spam or Unwanted Content', 'URL Recently Linked to Suspicious Content', 'Recent Threat Researcher', 'Recent Typosquat Similarity - DNS Sandwich', 'Recent Typosquat Similarity - Typo or Homograph', 'Recently Active Weaponized Domain', 'Recently Defaced Site', 'Historically Referenced by Insikt Group', 'Recently Resolved to Malicious IP', 'Recently Resolved to Suspicious IP', 'Recently Resolved to Unusual IP', 'Recently Resolved to Very Malicious IP', 'Trending in Recorded Future Analyst Community', 'Historically Reported Spam or Unwanted Content', 'URL Historically Linked to Suspicious Content', 'Historical Threat Researcher', 'Historical Typosquat Similarity - DNS Sandwich', 'Historical Typosquat Similarity - Typo or Homograph', 'Historically Active Weaponized Domain']|Active Phishing URL|
+|riskScore|string|None|False|Filters the results by risk score|None|[1,100]|
 
 Example input:
 
@@ -646,9 +648,11 @@ This action is used to search for data related to malware.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |direction|string|asc|True|Sort results ascending/descending|['asc', 'desc']|asc|
+|firstSeen|string|None|False|Filters the results by first seen|None|2016-06-15 07:54:38.286000|
 |freetext|string|None|False|Freetext search|None|example|
 |from|number|0|True|Number of initial records to skip|None|0|
 |limit|number|None|True|Number of results to retrieve, up to 100|None|10|
+|list|string|None|False|Filters the results by list ID|None|fKXuF0|
 |orderby|string|None|True|Which property to sort the results by|['Created', 'Lastseen', 'Firstseen', 'Modified', 'Riskscore', 'Rules', 'Sevendayshits', 'Sixtydayshits', 'Totalhits']|Riskscore|
 
 Example input:
@@ -656,9 +660,11 @@ Example input:
 ```
 {
   "direction": "asc",
+  "firstSeen": "2016-06-15 07:54:38.286000",
   "freetext": "example",
   "from": 0,
   "limit": 10,
+  "list": "fKXuF0",
   "orderby": "Riskscore"
 }
 ```
@@ -769,7 +775,7 @@ This action returns a risk list of domains matching a filtration rule.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|list|string|None|False|The risk list to retrieve|['active_phishing_url', 'blacklisted_dns_name', 'cc_dns_name', 'cc_nameserver', 'cc_url', 'compromised_url', 'historical_malware_analysis_dns_name', 'historically_linked_to_cyber_attack', 'large', 'ransomware_distribution_url', 'ransomware_payment_dns_name', 'recent_fast_flux_dns_name', 'recent_malware_analysis_dns_name', 'recently_linked_to_cyber_attack', 'recently_resolved_to_host_of_many_ddns_names', 'recently_resolved_to_malicious_ip', 'recently_resolved_to_suspicious_ip', 'recently_resolved_to_unusual_ip', 'recently_resolved_to_very_malicious_ip', 'sinkhole_dns_name', 'typosquat_similarity__dns_sandwich', 'typosquat_similarity__typo_or_homograph']|active_phishing_url|
+|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|['active_phishing_url', 'blacklisted_dns_name', 'cc_dns_name', 'cc_nameserver', 'cc_url', 'compromised_url', 'historical_malware_analysis_dns_name', 'historically_linked_to_cyber_attack', 'large', 'ransomware_distribution_url', 'ransomware_payment_dns_name', 'recent_fast_flux_dns_name', 'recent_malware_analysis_dns_name', 'recently_linked_to_cyber_attack', 'recently_resolved_to_host_of_many_ddns_names', 'recently_resolved_to_malicious_ip', 'recently_resolved_to_suspicious_ip', 'recently_resolved_to_unusual_ip', 'recently_resolved_to_very_malicious_ip', 'sinkhole_dns_name', 'typosquat_similarity__dns_sandwich', 'typosquat_similarity__typo_or_homograph']|active_phishing_url|
 
 Example input:
 
@@ -798,6 +804,8 @@ This action is used to search for data related to vulnerabilities.
 |from|number|0|True|Number of initial records to skip|None|0|
 |limit|number|None|True|Number of results to retrieve, up to 100|None|10|
 |orderby|string|None|True|Which property to sort the results by|['Created', 'Lastseen', 'Firstseen', 'Modified', 'Riskscore', 'Rules', 'Sevendayshits', 'Sixtydayshits', 'Totalhits']|Riskscore|
+|riskRule|string|None|False|Filters the results by risk rule|['Historically Reported by Insikt Group', 'Web Reporting Prior to CVSS Score', 'Cyber Exploit Signal - Critical', 'Cyber Exploit Signal - Important', 'Cyber Exploit Signal - Medium', 'Historical Suspected Exploit/Tool Development in the Wild', 'Historical Observed Exploit/Tool Development in the Wild', 'Historically Exploited in the Wild by Malware', 'Linked to Historical Cyber Exploit', 'Historically Linked to Exploit Kit', 'Historically Linked to Malware', 'Historically Linked to Remote Access Trojan', 'Historically Linked to Ransomware', 'Linked to Recent Cyber Exploit', 'Recently Linked to Exploit Kit', 'Recently Linked to Malware', 'Recently Linked to Remote Access Trojan', 'Recently Linked to Ransomware', 'Exploited in the Wild by Malware', 'NIST Severity - Critical', 'Duplicate of Vulnerability in NVD', 'NIST Severity - High', 'NIST Severity - Low', 'NIST Severity - Medium', 'Web Reporting Prior to NVD Disclosure', 'Historical Unverified Proof of Concept Available', 'Historical Verified Proof of Concept Available', 'Historical Verified Proof of Concept Available Using Remote Execution', 'Recently Reported by Insikt Group', 'Recent Suspected Exploit/Tool Development in the Wild', 'Exploited in the Wild by Recently Active Malware', 'Recent Unverified Proof of Concept Available', 'Recent Verified Proof of Concept Available', 'Recent Verified Proof of Concept Available Using Remote Execution', 'Recently Referenced by Insikt Group', 'Recently Linked to Penetration Testing Tools', 'Historically Referenced by Insikt Group', 'Historically Linked to Penetration Testing Tools']|NIST Severity - Critical|
+|riskScore|string|None|False|Filters the results by risk score|None|[1,100]|
 
 Example input:
 
@@ -807,7 +815,9 @@ Example input:
   "freetext": "example",
   "from": 0,
   "limit": 10,
-  "orderby": "Riskscore"
+  "orderby": "Riskscore",
+  "riskRule": "NIST Severity - Critical",
+  "riskScore": "[1,100]"
 }
 ```
 
@@ -869,6 +879,8 @@ This action is used to for data related to a specified IP range.
 |ip_range|string|None|True|IP address range to search|None|198.51.100.0/24|
 |limit|number|None|True|Number of results to retrieve, up to 100|None|10|
 |orderby|string|None|True|Which property to sort the results by|['Created', 'Lastseen', 'Firstseen', 'Modified', 'Riskscore', 'Rules', 'Sevendayshits', 'Sixtydayshits', 'Totalhits']|Lastseen|
+|riskRule|string|None|False|Filters the results by risk rule|['Threat Actor Used Infrastructure', 'Historically Reported by Insikt Group', 'Inside Possible Bogus BGP Route', 'Historical Botnet Traffic', 'Nameserver for C&C Server', 'Historical C&C Server', 'Cyber Exploit Signal - Critical', 'Cyber Exploit Signal - Important', 'Cyber Exploit Signal - Medium', 'Recent Host of Many DDNS Names', 'Historically Reported as a Defanged IP', 'Historically Reported by DHS AIS', 'Resolution of Fast Flux DNS Name', 'Historically Reported in Threat List', 'Historical Honeypot Sighting', 'Honeypot Host', 'Recently Active C&C Server', 'Recent C&C Server', 'Historically Linked to Intrusion Method', 'Historically Linked to APT', 'Historically Linked to Cyber Attack', 'Malicious Packet Source', 'Malware Delivery', 'Historical Multicategory Blacklist', 'Historical Open Proxies', 'Phishing Host', 'Historical Positive Malware Verdict', 'Recorded Future Predictive Risk Model', 'Actively Communicating C&C Server', 'Recently Reported by Insikt Group', 'Recent Spam Source', 'Recent SSH/Dictionary Attacker', 'Recent Bad SSL Association', 'Recent Threat Researcher', 'Recently Defaced Site', 'Historically Referenced by Insikt Group', 'Trending in Recorded Future Analyst Community', 'Historical Spam Source', 'Historical SSH/Dictionary Attacker', 'Historical Bad SSL Association', 'Historical Threat Researcher', 'Tor Node', 'Unusual IP', 'Vulnerable Host']|Malware Delivery|
+|riskScore|string|None|False|Filters the results by risk score|None|[1,100]|
 
 Example input:
 
@@ -878,7 +890,9 @@ Example input:
   "from": 0,
   "ip_range": "198.51.100.0/24",
   "limit": 10,
-  "orderby": "Lastseen"
+  "orderby": "Lastseen",
+  "riskRule": "Malware Delivery",
+  "riskScore": "[1,100]"
 }
 ```
 
@@ -972,7 +986,7 @@ This action is used to returns a list of hashes matching a specified risk rule.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|list|string|None|False|The risk list to retrieve|['large', 'linked_to_attack_vector', 'linked_to_cyber_attack', 'linked_to_malware', 'linked_to_vulnerability', 'positive_malware_verdict', 'threat_researcher']|positive_malware_verdict|
+|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|['large', 'linked_to_attack_vector', 'linked_to_cyber_attack', 'linked_to_malware', 'linked_to_vulnerability', 'positive_malware_verdict', 'threat_researcher']|positive_malware_verdict|
 
 Example input:
 
@@ -1001,6 +1015,8 @@ This action is used to search for data related to hashes of a specified type.
 |from|number|0|True|Number of initial records to skip|None|0|
 |limit|number|None|True|Number of results to retrieve, up to 100|None|10|
 |orderby|string|None|True|Which property to sort the results by|['Created', 'Lastseen', 'Firstseen', 'Modified', 'Riskscore', 'Rules', 'Sevendayshits', 'Sixtydayshits', 'Totalhits']|Riskscore|
+|riskRule|string|None|False|Filters the results by risk rule|['Reported by Insikt Group', 'Historically Reported in Threat List', 'Linked to Cyber Attack', 'Linked to Malware', 'Linked to Attack Vector', 'Linked to Vulnerability', 'Malware SSL Certificate Fingerprint', 'Observed in Underground Virus Testing Sites', 'Positive Malware Verdict', 'Recently Active Targeting Vulnerabilities in the Wild', 'Referenced by Insikt Group', 'Trending in Recorded Future Analyst Community', 'Threat Researcher']|Positive Malware Verdict|
+|riskScore|string|None|False|Filters the results by risk score|None|[1,100]|
 
 Example input:
 
@@ -1010,7 +1026,9 @@ Example input:
   "direction": "asc",
   "from": 0,
   "limit": 10,
-  "orderby": "Riskscore"
+  "orderby": "Riskscore",
+  "riskRule": "Positive Malware Verdict",
+  "riskScore": "[1,100]"
 }
 ```
 
@@ -1019,6 +1037,189 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|search_data|False|Data|
+
+Example output:
+
+```
+{
+  "counts": {
+    "returned": 10,
+    "total": 78366
+  },
+  "data": {
+    "results": [
+      {
+        "entity": {
+          "id": "hash:c48786b8d8dc9d4ac0764ecb28044135",
+          "name": "c48786b8d8dc9d4ac0764ecb28044135",
+          "type": "Hash"
+        },
+        "relatedEntities": [
+          {
+            "type": "RelatedHash",
+            "entities": [
+              {
+                "count": 4,
+                "entity": {
+                  "name": "1101a6b0736ad5cb9ed57b0e062248396488545383f9cd2759...",
+                  "type": "Hash",
+                  "id": "hash:1101a6b0736ad5cb9ed57b0e062248396488545383f9c..."
+                }
+              },
+            ]
+          }
+        ],
+        "risk": {
+          "riskSummary": "2 of 12 Risk Rules currently observed.",
+          "rules": 2,
+          "score": 25,
+          "criticality": 2,
+          "criticalityLabel": "Suspicious",
+          "evidenceDetails": [
+            {
+              "evidenceString": "1 sighting on 1 source: VirusTotal. Most recent li...",
+              "mitigationString": "",
+              "rule": "Linked to Malware",
+              "timestamp": "2020-02-02T20:07:51.000Z",
+              "criticality": 2,
+              "criticalityLabel": "Suspicious"
+            },
+            {
+              "criticalityLabel": "Suspicious",
+              "evidenceString": "1 sighting on 1 source: VirusTotal. Mitigated by R...",
+              "mitigationString": "Mitigated by ReversingLabs reputation.",
+              "rule": "Positive Malware Verdict",
+              "timestamp": "2020-02-02T00:00:00.000Z",
+              "criticality": 2
+            }
+          ],
+          "riskString": "2/12"
+        },
+        "sightings": [
+          {
+            "url": "https://www.virustotal.com/gui/file/1101a6b0736ad5...",
+            "fragment": "last_seen - 2020-02-02 20:07:51 1101a6b0736ad5cb9e...",
+            "published": "2020-02-02T20:07:51.000Z",
+            "source": "VirusTotal",
+            "title": "Antivirus scan for 1101a6b0736ad5cb9ed57b0e0622483...",
+            "type": "first"
+          },
+          {
+            "fragment": "ReversingLabs report for SHA-256 1101a6b0736ad5cb9...",
+            "published": "2020-02-01T09:38:05.000Z",
+            "source": "ReversingLabs",
+            "title": "ReversingLabs scan for SHA-256 1101a6b0736ad5cb9ed...",
+            "type": "recentInfoSec",
+            "url": "https://a1000.reversinglabs.com/accounts/login/?ne..."
+          }
+        ],
+        "threatLists": [],
+        "analystNotes": [],
+        "counts": [
+          {
+            "count": 2,
+            "date": "2020-02-01"
+          }
+        ],
+        "hashAlgorithm": "MD5",
+        "intelCard": "https://app.recordedfuture.com/live/sc/entity/hash...",
+        "metrics": [
+          {
+            "type": "pasteHits",
+            "value": 0
+          }
+        ],
+        "timestamps": {
+          "firstSeen": "2020-02-03T18:03:49.580Z",
+          "lastSeen": "2020-02-09T06:38:12.726Z"
+        }
+      },
+      {
+        "analystNotes": [],
+        "hashAlgorithm": "MD5",
+        "relatedEntities": [
+          {
+            "entities": [
+              {
+                "count": 7,
+                "entity": {
+                  "id": "hash:d7a95886c8dc5021fa4dda5176c59e4f3e590b49efa51...",
+                  "name": "d7a95886c8dc5021fa4dda5176c59e4f3e590b49efa510b740...",
+                  "type": "Hash"
+                }
+              }
+            ],
+            "type": "RelatedHash"
+          }
+        ],
+        "timestamps": {
+          "firstSeen": "2019-04-24T08:13:55.161Z",
+          "lastSeen": "2019-10-02T19:47:27.938Z"
+        },
+        "risk": {
+          "rules": 2,
+          "score": 25,
+          "criticality": 2,
+          "criticalityLabel": "Suspicious",
+          "evidenceDetails": [
+            {
+              "timestamp": "2019-04-23T19:17:02.000Z",
+              "criticality": 2,
+              "criticalityLabel": "Suspicious",
+              "evidenceString": "1 sighting on 1 source: VirusTotal. Most recent li...",
+              "mitigationString": "",
+              "rule": "Linked to Malware"
+            }
+          ],
+          "riskString": "2/12",
+          "riskSummary": "2 of 12 Risk Rules currently observed."
+        },
+        "sightings": [
+          {
+            "type": "mostRecent",
+            "url": "https://a1000.reversinglabs.com/accounts/login/?ne...",
+            "fragment": "ReversingLabs report for SHA-256 d7a95886c8dc5021f...",
+            "published": "2019-04-23T20:20:44.000Z",
+            "source": "ReversingLabs",
+            "title": "ReversingLabs scan for SHA-256 d7a95886c8dc5021fa4..."
+          },
+          {
+            "fragment": "ReversingLabs report for SHA-256 d7a95886c8dc5021f...",
+            "published": "2019-04-23T20:20:44.000Z",
+            "source": "ReversingLabs",
+            "title": "ReversingLabs scan for SHA-256 d7a95886c8dc5021fa4...",
+            "type": "recentInfoSec",
+            "url": "https://a1000.reversinglabs.com/accounts/login/?ne..."
+          }
+        ],
+        "threatLists": [],
+        "counts": [
+          {
+            "count": 7,
+            "date": "2019-04-23"
+          }
+        ],
+        "entity": {
+          "type": "Hash",
+          "id": "hash:83fc4b1052f1b8cb9c8da36419a850e1",
+          "name": "83fc4b1052f1b8cb9c8da36419a850e1"
+        },
+        "intelCard": "https://app.recordedfuture.com/live/sc/entity/hash...",
+        "metrics": [
+          {
+            "value": 0,
+            "type": "pasteHits"
+          },
+          {
+            "type": "darkWebHits",
+            "value": 0
+          }
+        ]
+      }
+    ]
+  }
+}
+```
 
 #### Lookup Entity List
 
@@ -1325,7 +1526,7 @@ This action is used to fetch a risk list of the IP addresses that match a specif
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|list|string|None|False|The risk list to retrieve|['current_cc_server', 'cyber_exploit_signal_medium', 'historical_bad_ssl_association', 'historical_botnet_traffic', 'historical_cc_server', 'historical_honeypot_sighting', 'historical_multicategory_blacklist', 'historical_open_proxies', 'historical_positive_malware_verdict', 'historical_spam_source', 'historical_sshdictionary_attacker', 'historical_threat_researcher', 'historically_linked_to_apt', 'historically_linked_to_cyber_attack', 'historically_linked_to_intrusion_method', 'honeypot_host', 'inside_possible_bogus_bgp_route', 'large', 'malicious_packet_source', 'malware_delivery', 'nameserver_for_cc_server', 'phishing_host', 'recent_botnet_traffic', 'recent_cc_server', 'recent_honeypot_sighting', 'recent_host_of_many_ddns_names', 'recent_multicategory_blacklist', 'recent_open_proxies', 'recent_positive_malware_verdict', 'recent_spam_source', 'recent_sshdictionary_attacker', 'recent_threat_researcher', 'recently_linked_to_apt', 'recently_linked_to_cyber_attack', 'recently_linked_to_intrusion_method', 'resolution_of_fast_flux_dns_name', 'tor_node', 'unusual_ip', 'vulnerable_host']|malware_delivery|
+|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|['current_cc_server', 'cyber_exploit_signal_medium', 'historical_bad_ssl_association', 'historical_botnet_traffic', 'historical_cc_server', 'historical_honeypot_sighting', 'historical_multicategory_blacklist', 'historical_open_proxies', 'historical_positive_malware_verdict', 'historical_spam_source', 'historical_sshdictionary_attacker', 'historical_threat_researcher', 'historically_linked_to_apt', 'historically_linked_to_cyber_attack', 'historically_linked_to_intrusion_method', 'honeypot_host', 'inside_possible_bogus_bgp_route', 'large', 'malicious_packet_source', 'malware_delivery', 'nameserver_for_cc_server', 'phishing_host', 'recent_botnet_traffic', 'recent_cc_server', 'recent_honeypot_sighting', 'recent_host_of_many_ddns_names', 'recent_multicategory_blacklist', 'recent_open_proxies', 'recent_positive_malware_verdict', 'recent_spam_source', 'recent_sshdictionary_attacker', 'recent_threat_researcher', 'recently_linked_to_apt', 'recently_linked_to_cyber_attack', 'recently_linked_to_intrusion_method', 'resolution_of_fast_flux_dns_name', 'tor_node', 'unusual_ip', 'vulnerable_host']|malware_delivery|
 
 Example input:
 
@@ -1579,7 +1780,7 @@ This action is used to fetch a risk list of vulnerabilities matching a specified
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|list|string|None|False|The risk list to retrieve|['cyber_exploit_signal_critical', 'cyber_exploit_signal_important', 'cyber_exploit_signal_medium', 'historical_scanner_uptake', 'historically_linked_to_exploit_kit', 'historically_linked_to_malware', 'historically_linked_to_ransomware', 'historically_linked_to_remote_access_trojan', 'large', 'linked_to_recent_cyber_exploit', 'nist_severity_critical', 'nist_severity_high', 'nist_severity_low', 'nist_severity_medium', 'recent_scanner_uptake', 'recently_linked_to_exploit_kit', 'recently_linked_to_malware', 'recently_linked_to_ransomware', 'recently_linked_to_remote_access_trojan', 'web_reporting_prior_to_nvd_disclosure']|nist_severity_critical|
+|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|['cyber_exploit_signal_critical', 'cyber_exploit_signal_important', 'cyber_exploit_signal_medium', 'historical_scanner_uptake', 'historically_linked_to_exploit_kit', 'historically_linked_to_malware', 'historically_linked_to_ransomware', 'historically_linked_to_remote_access_trojan', 'large', 'linked_to_recent_cyber_exploit', 'nist_severity_critical', 'nist_severity_high', 'nist_severity_low', 'nist_severity_medium', 'recent_scanner_uptake', 'recently_linked_to_exploit_kit', 'recently_linked_to_malware', 'recently_linked_to_ransomware', 'recently_linked_to_remote_access_trojan', 'web_reporting_prior_to_nvd_disclosure']|nist_severity_critical|
 
 Example input:
 
@@ -1800,7 +2001,51 @@ Example output:
 
 ### Triggers
 
-_This plugin does not contain any triggers._
+#### Get New Alerts
+
+This trigger is used to get new alerts.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|frequency|int|10|True|Frequency (in seconds)|None|10|
+
+Example input:
+
+```
+{
+  "frequency": 10
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|alert|alert|True|Alert|
+
+Example output:
+
+```
+{
+  "alert": {
+    "review": {
+      "status": "no-action"
+    },
+    "url": "https://app.recordedfuture.com/live/sc/notification/?id=fnbTO7",
+    "rule": {
+      "url": "https://app.recordedfuture.com/live/sc/ViewIdkobra_view_report_item_alert_editor?view_opts=%7B%22reportId%22%3A%22feScJA%22%2C%22bTitle%22%3Atrue%2C%22title%22%3A%22Global+Vulnerability+Risk%2C+Vulnerabilities%2C+New+Exploit+Chatter%22%7D&state.bNavbar=false",
+      "name": "Global Vulnerability Risk, Vulnerabilities, New Exploit Chatter",
+      "id": "deXcBA"
+    },
+    "triggered": "2020-10-09T16:08:21.948Z",
+    "id": "deZcB9",
+    "title": "Global Vulnerability Risk, Vulnerabilities, New Exploit Chatter - ... is n...",
+    "type": "ENTITY"
+  }
+}
+```
 
 ### Custom Output Types
 
@@ -1812,6 +2057,8 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.1.0 - New trigger Get New Alerts
+* 3.0.0 - Add input `fields` to Search Domains, Search Hashes, Search IP Addresses, Search Vulnerabilities, Search Malware and Lookup Malware actions | Add `riskRule` and `riskScore` filter criteria to Search Domains, Search Hashes, Search IP Addresses and Search Vulnerabilities actions | Add `list` and `firstSeen` filter criteria to Search Malware action | Update description for `list` parameter in Download IP Addresses Risk List, Download Vulnerability Risk List, Download Domain Risk List and Download Hash Risk List actions
 * 2.2.0 - New actions Search URLs, Download URL Risk List and List URL Risk Rules | Update Recorded Future logo | Allow both upper and lowercase CVE in Lookup Vulnerability action
 * 2.1.0 - New action Lookup Alert
 * 2.0.1 - Add CPE, Analyst Notes, and Related Entities to Lookup Vulnerability action output

@@ -24,7 +24,7 @@ class DownloadHashRiskListInput(komand.Input):
     "list": {
       "type": "string",
       "title": "List",
-      "description": "The risk list to retrieve",
+      "description": "The risk list to retrieve, leaving the list parameter blank results in the default risk list",
       "enum": [
         "large",
         "linked_to_attack_vector",

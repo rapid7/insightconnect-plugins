@@ -13,6 +13,8 @@ class Input:
     FROM = "from"
     LIMIT = "limit"
     ORDERBY = "orderby"
+    RISKRULE = "riskRule"
+    RISKSCORE = "riskScore"
     
 
 class Output:
@@ -71,6 +73,58 @@ class SearchVulnerabilitiesInput(komand.Input):
         "Totalhits"
       ],
       "order": 3
+    },
+    "riskRule": {
+      "type": "string",
+      "title": "Risk Rule",
+      "description": "Filters the results by risk rule",
+      "enum": [
+        "Historically Reported by Insikt Group",
+        "Web Reporting Prior to CVSS Score",
+        "Cyber Exploit Signal - Critical",
+        "Cyber Exploit Signal - Important",
+        "Cyber Exploit Signal - Medium",
+        "Historical Suspected Exploit/Tool Development in the Wild",
+        "Historical Observed Exploit/Tool Development in the Wild",
+        "Historically Exploited in the Wild by Malware",
+        "Linked to Historical Cyber Exploit",
+        "Historically Linked to Exploit Kit",
+        "Historically Linked to Malware",
+        "Historically Linked to Remote Access Trojan",
+        "Historically Linked to Ransomware",
+        "Linked to Recent Cyber Exploit",
+        "Recently Linked to Exploit Kit",
+        "Recently Linked to Malware",
+        "Recently Linked to Remote Access Trojan",
+        "Recently Linked to Ransomware",
+        "Exploited in the Wild by Malware",
+        "NIST Severity - Critical",
+        "Duplicate of Vulnerability in NVD",
+        "NIST Severity - High",
+        "NIST Severity - Low",
+        "NIST Severity - Medium",
+        "Web Reporting Prior to NVD Disclosure",
+        "Historical Unverified Proof of Concept Available",
+        "Historical Verified Proof of Concept Available",
+        "Historical Verified Proof of Concept Available Using Remote Execution",
+        "Recently Reported by Insikt Group",
+        "Recent Suspected Exploit/Tool Development in the Wild",
+        "Exploited in the Wild by Recently Active Malware",
+        "Recent Unverified Proof of Concept Available",
+        "Recent Verified Proof of Concept Available",
+        "Recent Verified Proof of Concept Available Using Remote Execution",
+        "Recently Referenced by Insikt Group",
+        "Recently Linked to Penetration Testing Tools",
+        "Historically Referenced by Insikt Group",
+        "Historically Linked to Penetration Testing Tools"
+      ],
+      "order": 6
+    },
+    "riskScore": {
+      "type": "string",
+      "title": "Risk Score",
+      "description": "Filters the results by risk score",
+      "order": 7
     }
   },
   "required": [

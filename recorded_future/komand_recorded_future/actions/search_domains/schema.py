@@ -13,6 +13,8 @@ class Input:
     LIMIT = "limit"
     ORDERBY = "orderby"
     PARENT = "parent"
+    RISKRULE = "riskRule"
+    RISKSCORE = "riskScore"
     
 
 class Output:
@@ -71,6 +73,80 @@ class SearchDomainsInput(komand.Input):
       "title": "Parent",
       "description": "Parent domain, if any",
       "order": 5
+    },
+    "riskRule": {
+      "type": "string",
+      "title": "Risk Rule",
+      "description": "Filters the results by risk rule",
+      "enum": [
+        "Historically Reported by Insikt Group",
+        "Newly Registered Certificate With Potential for Abuse - DNS Sandwich",
+        "Newly Registered Certificate With Potential for Abuse - Typo or Homograph",
+        "C\\u0026C Nameserver",
+        "C\\u0026C DNS Name",
+        "C\\u0026C URL",
+        "Compromised URL",
+        "Historical COVID-19-Related Domain Lure",
+        "Recently Resolved to Host of Many DDNS Names",
+        "Historically Reported as a Defanged DNS Name",
+        "Historically Reported by DHS AIS",
+        "Recent Fast Flux DNS Name",
+        "Historically Reported Fraudulent Content",
+        "Historically Reported in Threat List",
+        "Historically Linked to Cyber Attack",
+        "Historical Malware Analysis DNS Name",
+        "Historically Detected Malware Operation",
+        "Historically Detected Cryptocurrency Mining Techniques",
+        "Blacklisted DNS Name",
+        "Historical Phishing Lure",
+        "Historically Detected Phishing Techniques",
+        "Active Phishing URL",
+        "Recorded Future Predictive Risk Model",
+        "Historical Punycode Domain",
+        "Ransomware Distribution URL",
+        "Ransomware Payment DNS Name",
+        "Recently Reported by Insikt Group",
+        "Recent COVID-19-Related Domain Lure - Malicious",
+        "Recent COVID-19-Related Domain Lure - Suspicious",
+        "Recently Reported as a Defanged DNS Name",
+        "Recently Reported by DHS AIS",
+        "Recently Reported Fraudulent Content",
+        "Recently Linked to Cyber Attack",
+        "Recent Malware Analysis DNS Name",
+        "Recently Detected Malware Operation",
+        "Recently Detected Cryptocurrency Mining Techniques",
+        "Recent Phishing Lure - Malicious",
+        "Recent Phishing Lure - Suspicious",
+        "Recently Detected Phishing Techniques",
+        "Recent Punycode Domain",
+        "Recently Referenced by Insikt Group",
+        "Recently Reported Spam or Unwanted Content",
+        "URL Recently Linked to Suspicious Content",
+        "Recent Threat Researcher",
+        "Recent Typosquat Similarity - DNS Sandwich",
+        "Recent Typosquat Similarity - Typo or Homograph",
+        "Recently Active Weaponized Domain",
+        "Recently Defaced Site",
+        "Historically Referenced by Insikt Group",
+        "Recently Resolved to Malicious IP",
+        "Recently Resolved to Suspicious IP",
+        "Recently Resolved to Unusual IP",
+        "Recently Resolved to Very Malicious IP",
+        "Trending in Recorded Future Analyst Community",
+        "Historically Reported Spam or Unwanted Content",
+        "URL Historically Linked to Suspicious Content",
+        "Historical Threat Researcher",
+        "Historical Typosquat Similarity - DNS Sandwich",
+        "Historical Typosquat Similarity - Typo or Homograph",
+        "Historically Active Weaponized Domain"
+      ],
+      "order": 6
+    },
+    "riskScore": {
+      "type": "string",
+      "title": "Risk Score",
+      "description": "Filters the results by risk score",
+      "order": 7
     }
   },
   "required": [
