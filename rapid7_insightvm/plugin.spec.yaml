@@ -2194,7 +2194,7 @@ actions:
         description: JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)
         type: object
         required: false
-        example: '{"risk-score": "asc","criticality-tag":"desc"}'
+        example: '{"risk-score": "asc", "criticality-tag": "desc"}'
     output:
       assets:
         title: Assets
