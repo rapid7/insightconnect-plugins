@@ -4,7 +4,7 @@ products: [insightconnect]
 name: trendmicro_apex
 title: Trend Micro Apex
 description: Report suspicious objects and files to block on Apex firewall
-version: 3.0.1
+version: 4.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -591,7 +591,7 @@ types:
       type: string
 actions:
   add_file_to_udso_list:
-    title: Add File to UDSO List
+    title: Blacklist File
     description: Add a file to the UDSO list of the Apex Security Manager
     input:
       file:
@@ -605,18 +605,19 @@ actions:
         description: What action to do with the data sent
         required: true
         type: string
-        default: "LOG"
+        default: QUARANTINE
         enum:
           - BLOCK
           - LOG
           - QUARANTINE
         example: QUARANTINE
-      notes:
-        title: Notes
+      description:
+        title: Description
         type: string
-        description: Notes about why the file is being quarantined (256 characters max)
+        description: Description for why the hash is blacklisted
         required: false
-        example: "This file is malware"
+        default: File Blacklisted from InsightConnect
+        example: File Blacklisted from InsightConnect
     output:
       success:
         title: Success

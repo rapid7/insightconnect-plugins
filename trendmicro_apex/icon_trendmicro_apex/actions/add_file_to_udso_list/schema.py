@@ -8,8 +8,8 @@ class Component:
 
 
 class Input:
+    DESCRIPTION = "description"
     FILE = "file"
-    NOTES = "notes"
     SCAN_ACTION = "scan_action"
     
 
@@ -23,23 +23,24 @@ class AddFileToUdsoListInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "description": {
+      "type": "string",
+      "title": "Description",
+      "description": "Description for why the hash is blacklisted",
+      "default": "File Blacklisted from InsightConnect",
+      "order": 3
+    },
     "file": {
       "$ref": "#/definitions/file",
       "title": "File",
       "description": "File to be marked as suspicious",
       "order": 1
     },
-    "notes": {
-      "type": "string",
-      "title": "Notes",
-      "description": "Notes about why the file is being quarantined (256 characters max)",
-      "order": 3
-    },
     "scan_action": {
       "type": "string",
       "title": "Scan Action",
       "description": "What action to do with the data sent",
-      "default": "LOG",
+      "default": "QUARANTINE",
       "enum": [
         "BLOCK",
         "LOG",
