@@ -2187,6 +2187,7 @@ actions:
         description: The number of records to retrieve. If blank or '0' all assets that match the search will be returned
         type: number
         required: false
+        default: 0
         example: 100
       sort_criteria:
         title: Sort Criteria

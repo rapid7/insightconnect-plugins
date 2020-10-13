@@ -34,6 +34,7 @@ class AssetSearchInput(komand.Input):
       "type": "number",
       "title": "Size",
       "description": "The number of records to retrieve. If blank or '0' all assets that match the search will be returned",
+      "default": 0,
       "order": 2
     },
     "sort_criteria": {
