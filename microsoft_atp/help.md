@@ -760,7 +760,6 @@ This plugin does not contain any troubleshooting information.
 # Version History
 
 * 4.5.1 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/microsoft-defender-ATP)
-
 * 4.5.0 - Add new action Get Missing Software Updates
 * 4.4.1 - Add validation MD5 hash in Blacklist action | Set default value for Title, Expiration Time and Description input in action Blacklist
 * 4.4.0 - Add new action Get Security Recommendations
