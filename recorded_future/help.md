@@ -34,9 +34,7 @@ Example input:
 
 ```
 {
-  "api_key": {
-    "secretKey":"9de5069c5afe602b2ea0a04b66beb2c0"
-  }
+  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
@@ -66,7 +64,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|alert|object|True|Alert Details|
+|alert|alert|True|Alert Details|
 
 Example output:
 
@@ -538,13 +536,6 @@ This action is used to search for results related to a specific parent domain.
 Example input:
 
 ```
-{
-  "direction": "asc",
-  "from": 0,
-  "limit": 10,
-  "orderby": "Riskscore",
-  "parent": "example.com"
-}
 ```
 
 ##### Output

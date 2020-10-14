@@ -1546,7 +1546,7 @@ actions:
       alert:
         title: Alert
         description: Alert Details
-        type: object
+        type: alert
         required: true
   list_url_risk_rules:
     title: List URL Risk Rules
