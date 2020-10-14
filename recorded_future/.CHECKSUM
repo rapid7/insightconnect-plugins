@@ -1,7 +1,7 @@
 {
-	"spec": "68dc99f93a95f336086179db39d098a7",
-	"manifest": "99c8251cb0c786575c5401b2d35bca35",
-	"setup": "eb2cbab6614e0cdd7ddf1be965fe63a3",
+	"spec": "b7270d7e4f35315158093b2d2c253e0a",
+	"manifest": "2f2cc2b3ba30e1f81f804130fff55b82",
+	"setup": "b682d6b91b16b36d76a7e532917dc1cf",
 	"schemas": [
 		{
 			"identifier": "download_IP_addresses_risk_list/schema.py",
@@ -49,7 +49,7 @@
 		},
 		{
 			"identifier": "lookup_alert/schema.py",
-			"hash": "83ffd5582751535431799803ca7c3baf"
+			"hash": "ce0469ff9f36623d52f0ad51334a6165"
 		},
 		{
 			"identifier": "lookup_domain/schema.py",
