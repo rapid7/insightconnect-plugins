@@ -47,4 +47,5 @@ class AddFileToUdsoList(komand.Action):
                 self.logger.error(f"Received status code: {response.status_code}")
                 self.logger.error(f"Response was: {response.text}")
             raise PluginException(assistance="Please verify the connection details and input data.",
-                                  cause=f"Error processing the Apex request: {rex}")
+                                  cause="Error processing the Apex request.",
+                                  data=rex)

@@ -1,11 +1,11 @@
 {
-	"spec": "e77ca15042bb3b19c33400503d8ca217",
+	"spec": "b239c67bd4319d11563cefea782284da",
 	"manifest": "9dc292650badb75527d19a885fc570b5",
 	"setup": "7e8a9d7aa4657d816f87857b40476ac0",
 	"schemas": [
 		{
 			"identifier": "add_file_to_udso_list/schema.py",
-			"hash": "ccdb1598b91d6532fcc76d6fbafeba7a"
+			"hash": "ef59b54e5ed3520f57160176ef222594"
 		},
 		{
 			"identifier": "blacklist/schema.py",

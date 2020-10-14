@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add a file to the UDSO list of the Apex Security Manager"
+    DESCRIPTION = "Add a file to the User-defined Suspicious Object (UDSO) list of the Apex Security Manager"
 
 
 class Input:
@@ -26,7 +26,7 @@ class AddFileToUdsoListInput(komand.Input):
     "description": {
       "type": "string",
       "title": "Description",
-      "description": "Description for why the hash is blacklisted",
+      "description": "Description for why the hash is blacklisted (256 characters max)",
       "default": "File Blacklisted from InsightConnect",
       "order": 3
     },

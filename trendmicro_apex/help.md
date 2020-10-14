@@ -55,7 +55,7 @@ This action is used to add a file to the User-defined Suspicious Object (UDSO) l
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|description|string|File Blacklisted from InsightConnect|False|Description for why the hash is blacklisted|None|File Blacklisted from InsightConnect|
+|description|string|File Blacklisted from InsightConnect|False|Description for why the hash is blacklisted (256 characters max)|None|File Blacklisted from InsightConnect|
 |file|file|None|True|File to be marked as suspicious|None|{"filename": "setup.exe", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|
 |scan_action|string|QUARANTINE|True|What action to do with the data sent|['BLOCK', 'LOG', 'QUARANTINE']|QUARANTINE|
 
