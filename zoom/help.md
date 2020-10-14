@@ -225,7 +225,7 @@ Example output:
 
 This task is used to retrieve zoom user activity events.
 
-It allows configuring schedules based on:
+Supported schedule types for this task include:
   - cron
   - minutes
 
