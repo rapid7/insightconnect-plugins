@@ -79,9 +79,20 @@ class Connection(komand.Connection):
 
         return {'connection': 'successful'}
 
-    def host_formater(self, host):
-        if host.find(':') != -1:
+    def host_formater(self, host: str) -> str:
+        """
+        Formats The host as needed for the connection
+        """
+        colon = host.count(':')
+        if colon > 0:
             self.logger.info('Port was provided in hostname, using value from Port field instead')
             host = host.split(':')
-            host = host[0]
+            if colon == 1:
+                host = host[0]
+            elif colon == 2:
+                host = f'{host[0]}:{host[1]}'
+            else:
+                raise ConnectionTestException(cause='There are too many colons in the host name.',
+                                              assistance=' Check that the host name is correct',
+                                              data=host)
         return host
