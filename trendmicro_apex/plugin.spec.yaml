@@ -614,7 +614,7 @@ actions:
       description:
         title: Description
         type: string
-        description: Description for why the hash is blacklisted
+        description: Description for why the hash is blacklisted (256 characters max)
         required: false
         default: File Blacklisted from InsightConnect
         example: File Blacklisted from InsightConnect
