@@ -991,6 +991,9 @@ This action is used to returns a list of hashes matching a specified risk rule.
 Example input:
 
 ```
+{
+  "list": "positive_malware_verdict"
+}
 ```
 
 ##### Output
