@@ -592,7 +592,7 @@ types:
 actions:
   add_file_to_udso_list:
     title: Blacklist File
-    description: Add a file to the UDSO list of the Apex Security Manager
+    description: Add a file to the User-defined Suspicious Object (UDSO) list of the Apex Security Manager
     input:
       file:
         title: File
