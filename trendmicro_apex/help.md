@@ -49,7 +49,7 @@ Example input:
 
 #### Blacklist File
 
-This action is used to add a file to the UDSO list of the Apex Security Manager.
+This action is used to add a file to the User-defined Suspicious Object (UDSO) list of the Apex Security Manager.
 
 ##### Input
 
