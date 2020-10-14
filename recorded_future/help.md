@@ -33,8 +33,8 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
-{
-  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0"
+"api_key": {
+  "secretKey":"9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
@@ -536,6 +536,13 @@ This action is used to search for results related to a specific parent domain.
 Example input:
 
 ```
+{
+  "direction": "asc",
+  "from": 0,
+  "limit": 10,
+  "orderby": "Riskscore",
+  "parent": "example.com"
+}
 ```
 
 ##### Output
@@ -1891,6 +1898,9 @@ This action is used to fetch information about a specific vulnerability by CVE o
 Example input:
 
 ```
+{
+  "id": "CVE-2014-0160"
+}
 ```
 
 ##### Output
