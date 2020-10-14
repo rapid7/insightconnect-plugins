@@ -33,8 +33,10 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
-"api_key": {
-  "secretKey":"9de5069c5afe602b2ea0a04b66beb2c0"
+{
+  "api_key": {
+    "secretKey":"9de5069c5afe602b2ea0a04b66beb2c0"
+  }
 }
 ```
 
