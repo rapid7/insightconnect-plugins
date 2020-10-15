@@ -56,7 +56,11 @@ class RequestParams(object):
 
     # Allows users to set values from this object in the same way you would set values from a dictionary
     def __setitem__(self, key, value):
-        self.params.append((key, value))
+        for idx, item in enumerate(self.params):
+            if key in item:
+                self.params[idx] = (key, value)
+            else:
+                self.params.append((key, value))
 
 
 class ResourceHelper(object):
@@ -190,6 +194,7 @@ class ResourceHelper(object):
         while True:
             self.logger.info(f'Fetching results from page {current_page}')
             parameters['page'] = current_page
+            self.logger.info(f"{parameters['page']}")
             if number_of_results != 0:
                 if results_retrieved + parameters['size'] > number_of_results:
                     parameters['size'] = number_of_results - results_retrieved
