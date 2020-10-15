@@ -724,7 +724,7 @@ Example input:
 
 ```
 {
-    "asset_id": "234"
+  "asset_id": "234"
 }
 ```
 
