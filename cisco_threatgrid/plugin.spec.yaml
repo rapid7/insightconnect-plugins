@@ -2077,14 +2077,14 @@ connection:
     title: API Key
     description: API Key
     type: credential_secret_key
-    example: '{"secretKey":"8lzx2lnr7uwyu27abc7jjo0ezo3"}'
+    example: 8lzx2lnr7uwyu27abc7jjo0ezo3
     required: true
   ssl_verify:
     title: SSL Verify
     description: SSL Verify
     type: boolean
     default: False
-    exmaple: False
+    example: False
     required: true
 
 

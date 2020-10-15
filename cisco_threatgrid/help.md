@@ -21,16 +21,17 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|API Key|None|{"secretKey":"8lzx2lnr7uwyu27abc7jjo0ezo3"}|
+|api_key|credential_secret_key|None|True|API Key|None|8lzx2lnr7uwyu27abc7jjo0ezo3|
 |region|string|US|True|Region|['US', 'Europe']|US|
-|ssl_verify|boolean|False|True|SSL Verify|None|None|
+|ssl_verify|boolean|False|True|SSL Verify|None|False|
 
 Example input:
 
 ```
 {
-  "api_key": "{\"secretKey\":\"8lzx2lnr7uwyu27abc7jjo0ezo3\"}",
-  "region": "US"
+  "api_key": "8lzx2lnr7uwyu27abc7jjo0ezo3",
+  "region": "US",
+  "ssl_verify": false
 }
 ```
 
