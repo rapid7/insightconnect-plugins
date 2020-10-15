@@ -18,24 +18,19 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 ## Setup
 
-The URL must point to your local console, not the platform or cloud console.
-
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and password|None|{"username":"username", "password":"password"}|
+|credentials|credential_username_password|None|True|Username and password|None|{"username": "username", "password": "password"}|
 |url|string|None|True|URL to your InsightVM console, without trailing slashes, e.g. https://insightvm.example.com:3780|None|https://insightvm.example.com:3780|
 
 Example input:
 
 ```
 {
-  "url": "https://insightvm.example.com:3780",
-  "credentials": {
-      "username": "username",
-      "password": "password"
-    }
+  "credentials": "{\"username\": \"username\", \"password\": \"password\"}",
+  "url": "https://insightvm.example.com:3780"
 }
 ```
 
@@ -709,6 +704,12 @@ Example Output:
 
 ```
 
+Example output:
+
+```
+
+```
+
 #### Get Asset Software
 
 This action is used to get software found on an asset. Can only be used if the asset has first been scanned.
@@ -1097,6 +1098,73 @@ Example Output:
   ]
 }
 
+```
+
+Example output:
+
+```
+{
+  "vulnerability": {
+    "added": "2015-08-11",
+    "exploits": 0,
+    "pci": {
+      "adjustedCVSSScore": 10,
+      "adjustedSeverityScore": 5,
+      "fail": true,
+      "status": "Fail"
+    },
+    "cvss": {
+      "links": [
+        {
+          "href": "https://nvd.nist.gov/vuln-metrics/cvss/v2-calculat...",
+          "rel": "CVSS v2 Calculator"
+        }
+      ],
+      "v2": {
+        "vector": "AV:N/AC:L/Au:N/C:C/I:C/A:C",
+        "accessVector": "N",
+        "authentication": "N",
+        "availabilityImpact": "C",
+        "confidentialityImpact": "C",
+        "exploitScore": 9.9968,
+        "impactScore": 10.0008,
+        "integrityImpact": "C",
+        "accessComplexity": "L",
+        "score": 10
+      }
+    },
+    "denialOfService": false,
+    "severity": "Critical",
+    "description": {
+      "html": "<p>Adobe Flash Player before 18.0.0.232 on Windows...",
+      "text": "Adobe Flash Player before 18.0.0.232 on Windows an..."
+    },
+    "links": [
+      {
+        "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+        "rel": "self"
+      },
+      {
+        "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+        "rel": "Vulnerability Checks"
+      }
+    ],
+    "modified": "2015-10-22",
+    "published": "2015-08-11",
+    "riskScore": 815.27,
+    "severityScore": 10,
+    "title": "APSB15-19: Security updates available for Adobe Fl...",
+    "categories": [
+      "Adobe",
+      "Adobe Flash"
+    ],
+    "cves": [
+      "CVE-2015-5125"
+    ],
+    "id": "adobe-flash-apsb15-19-cve-2015-5125",
+    "malwareKits": 0
+  }
+}
 ```
 
 #### Create Tag
@@ -1773,17 +1841,14 @@ This action is used to search for assets using a filtered asset search.
 |----|----|-------|--------|-----------|----|-------|
 |searchCriteria|object|None|True|Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|None|
 |size|number|0|False|The number of records to retrieve. If blank or '0' all assets that match the search will be returned|None|100|
-|sort_criteria|object|None|False|An object that sorts by criteria. Multiple criteria can be specified with an order of ascending or descending|None|{"risk-score": "asc", "criticality-tag": "desc"}|
+|sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|
 
 Example input:
 
 ```
 {
   "size": 100,
-  "sort_criteria": {
-    "risk-score": "asc", 
-    "criticality-tag": "desc"
-  }
+  "sort_criteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}"
 }
 ```
 
@@ -5319,6 +5384,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.6.0 - Update Get Asset Vulnerabilities with new output | Fix issue with RequestParams object set action
 * 4.5.0 - Update to Asset Search action to allow search result limiting and sorting
 * 4.4.3 - Update to error handling and documentation around console URL in connection
 * 4.4.2 - Fix issue where Update Site Included Targets could throw exception

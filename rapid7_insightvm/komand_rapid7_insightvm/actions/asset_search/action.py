@@ -24,8 +24,8 @@ class AssetSearch(komand.Action):
         endpoint = endpoints.Asset.search(self.connection.console_url)
         parameters = list()
 
-        for key, item in sort_criteria:
-            parameters.append(('sort', f'{key},{item}'))
+        for key, value in sort_criteria.items():
+            parameters.append(('sort', f'{key},{value}'))
 
         if size == 0:
             parameters.append(('size', 100))
