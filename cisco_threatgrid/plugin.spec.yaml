@@ -2098,6 +2098,7 @@ actions:
         type: string
         description: SHA256
         required: true
+        example: 02699626f388ed830012e5b787640e71c56d42d8
     output:
       sample_report_list:
         title: Sample Report List
@@ -2113,6 +2114,7 @@ actions:
         type: string
         description: Domain to search for
         required: true
+        example: example.com
     output:
       sample_report:
         title: Sample Report
@@ -2128,6 +2130,7 @@ actions:
         type: string
         description: Sample ID to search for
         required: true
+        example: 87e6c357fafbc2cfcec1e1432aa03eee
     output:
       sample_report:
         title: Sample Report
@@ -2143,41 +2146,49 @@ actions:
         description: The URL to submit for analysis
         type: string
         required: true
+        example: http://www.example.com
       callback_url:
         title: Callback URL
         description: A URL where the results will POST to, upon completion of analysis
         type: string
         required: false
+        example: http://www.example.com
       email_notification:
         title: Email Notification
         description: If true, sends an email to the email address of the user that submitted the sample, upon completion of the sample analysis
         type: boolean
         required: false
+        example: user@example.com
       network_exit:
         title: Network Exit
         description: Any outgoing network traffic that is generated during the analysis to appear to exit from the Network Exit Location
         type: string
         required: false
+        example: US - Pennsylvania - Philadelphia
       playbook:
         title: Playbook
         description: Name of a playbook to apply to this sample run
         type: string
         required: false
+        example: Random Cursor Movement with Image Recognition
       private:
         title: Private
         description: Mark sample as private if not set to 'false' or any other value
         type: string
         required: false
+        example: false
       tags:
         type: string
         title: Tags
         description: A comma-separated list of tags applied to this sample
         required: false
+        example: malware, trojan, phishing
       vm:
         type: string
         title: VM
         description: A string identifying a specific VM to use. See the linked configuration endpoint
         required: false
+        example: rcn-work-022
     output:
       results:
         type: submit_sample_results
@@ -2193,51 +2204,61 @@ actions:
         description: The sample file
         type: file
         required: true
+        example: UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==
       callback_url:
         title: Callback URL
         description: A URL where the results will `POST` to, upon completion of analysis
         type: string
         required: false
+        example: http://www.example.com
       email_notification:
         title: Email Notification
         description: If true, sends an email to the email address of the user that submitted the sample, upon completion of the sample analysis
         type: boolean
         required: false
+        example: user@example.com
       network_exit:
         title: Network Exit
         description: Any outgoing network traffic that is generated during the analysis to appear to exit from the Network Exit Location
         type: string
         required: false
+        example: US - Pennsylvania - Philadelphia
       playbook:
         title: Playbook
         description: Name of a playbook to apply to this sample run
         type: string
         required: false
+        example: Random Cursor Movement with Image Recognition
       private:
         title: Private
         description: If present, and set to any value but `false` the sample will be marked private
         type: string
         required: false
+        example: false
       sample_filename:
         type: string
         title: Sample Filename
         description: Filename to use to override the default filename
         required: false
+        example: example.exe
       sample_password:
         type: string
         title: Sample Password
         description: Password used to open the submitted archive or document
         required: false
+        example: password
       tags:
         type: string
         title: Tags
         description: A comma-separated list of tags applied to this sample
         required: false
+        example: spyware, malware, phishing
       vm:
         type: string
         title: VM
         description: A string identifying a specific VM to use. See the linked configuration endpoint
         required: false
+        example: rcn-work-022
     output:
       results:
         type: submit_sample_results
@@ -2253,6 +2274,7 @@ actions:
         description: ID in ThreatGrid of sample
         type: string
         required: true
+        example: 232526zz0a501081e3058f6hwdfcfd7mp
     output:
       artifact_report:
         title: Artifact Report
