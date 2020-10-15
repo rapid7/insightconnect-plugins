@@ -18,13 +18,13 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 ## Setup
 
-The URL must point to your local console, not the platform or cloud console.  
+The URL must point to your local console, not the platform or cloud console.
 
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and password|None|None|
+|credentials|credential_username_password|None|True|Username and password|None|{"username": "username", "password": "password"}|
 |url|string|None|True|URL to your InsightVM console, without trailing slashes, e.g. https://insightvm.example.com:3780|None|https://insightvm.example.com:3780|
 
 Example input:
@@ -35,7 +35,7 @@ Example input:
   "credentials": {
       "username": "username",
       "password": "password"
-  }
+    }
 }
 ```
 
@@ -709,6 +709,7 @@ Example Output:
 
 ```
 
+
 #### Get Asset Software
 
 This action is used to get software found on an asset. Can only be used if the asset has first been scanned.
@@ -722,6 +723,9 @@ This action is used to get software found on an asset. Can only be used if the a
 Example input:
 
 ```
+{
+  "asset_id": "234"
+}
 ```
 
 ##### Output
@@ -1097,6 +1101,73 @@ Example Output:
   ]
 }
 
+```
+
+Example output:
+
+```
+{
+  "vulnerability": {
+    "added": "2015-08-11",
+    "exploits": 0,
+    "pci": {
+      "adjustedCVSSScore": 10,
+      "adjustedSeverityScore": 5,
+      "fail": true,
+      "status": "Fail"
+    },
+    "cvss": {
+      "links": [
+        {
+          "href": "https://nvd.nist.gov/vuln-metrics/cvss/v2-calculat...",
+          "rel": "CVSS v2 Calculator"
+        }
+      ],
+      "v2": {
+        "vector": "AV:N/AC:L/Au:N/C:C/I:C/A:C",
+        "accessVector": "N",
+        "authentication": "N",
+        "availabilityImpact": "C",
+        "confidentialityImpact": "C",
+        "exploitScore": 9.9968,
+        "impactScore": 10.0008,
+        "integrityImpact": "C",
+        "accessComplexity": "L",
+        "score": 10
+      }
+    },
+    "denialOfService": false,
+    "severity": "Critical",
+    "description": {
+      "html": "<p>Adobe Flash Player before 18.0.0.232 on Windows...",
+      "text": "Adobe Flash Player before 18.0.0.232 on Windows an..."
+    },
+    "links": [
+      {
+        "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+        "rel": "self"
+      },
+      {
+        "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+        "rel": "Vulnerability Checks"
+      }
+    ],
+    "modified": "2015-10-22",
+    "published": "2015-08-11",
+    "riskScore": 815.27,
+    "severityScore": 10,
+    "title": "APSB15-19: Security updates available for Adobe Fl...",
+    "categories": [
+      "Adobe",
+      "Adobe Flash"
+    ],
+    "cves": [
+      "CVE-2015-5125"
+    ],
+    "id": "adobe-flash-apsb15-19-cve-2015-5125",
+    "malwareKits": 0
+  }
+}
 ```
 
 #### Create Tag
@@ -1772,10 +1843,19 @@ This action is used to search for assets using a filtered asset search.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |searchCriteria|object|None|True|Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|None|
+|size|number|0|False|The number of records to retrieve. If blank or '0' all assets that match the search will be returned|None|100|
+|sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|
 
 Example input:
 
 ```
+{
+  "size": 100,
+  "sort_criteria": {
+    "risk-score": "asc", 
+    "criticality-tag": "desc"
+  }
+}
 ```
 
 ##### Output
@@ -1915,6 +1995,269 @@ Example Output:
               "total": 14
           }
       }
+  ]
+}
+```
+
+Example output:
+
+```
+{
+  "assets": [
+    {
+      "hostName": "example-win10",
+      "id": 234,
+      "mac": "00:50:56:94:C6:7E",
+      "users": [
+        {
+          "fullName": "LocalService",
+          "id": -1,
+          "name": "LocalService"
+        },
+        {
+          "id": -1,
+          "name": "NetworkService",
+          "fullName": "NetworkService"
+        }
+      ],
+      "configurations": [
+        {
+          "name": "cpuinfo",
+          "value": "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz"
+        },
+        {
+          "value": "{}",
+          "name": "proxies"
+        }
+      ],
+      "history": [
+        {
+          "scanId": 3,
+          "type": "SCAN",
+          "version": 1,
+          "date": "2020-08-18T22:10:39.197Z"
+        },
+        {
+          "date": "2020-08-18T22:36:44.807Z",
+          "type": "AGENT-IMPORT",
+          "version": 2
+        }
+      ],
+      "ids": [
+        {
+          "id": "1C361442-440C-B64E-97BF-F0222329E87D",
+          "source": "CSPRODUCT"
+        },
+        {
+          "source": "R7 Agent",
+          "id": "3e8a7a2bab217e280c8ca3f4a1f5e544"
+        }
+      ],
+      "riskScore": 543979.25,
+      "links": [
+        {
+          "href": "https://example.rapid7.com:3780/...",
+          "rel": "self"
+        },
+        {
+          "href": "https://example.rapid7.com:3780/...",
+          "rel": "Software"
+        }
+      ],
+      "os": "Microsoft Windows 10 Enterprise Edition",
+      "osFingerprint": {
+        "vendor": "Microsoft",
+        "architecture": "x86_64",
+        "cpe": {
+          "v2.2": "cpe:/o:microsoft:windows_10:-:gold:~~~~x86~",
+          "v2.3": "cpe:2.3:o:microsoft:windows_10:-:gold:*:*:*:*:x86:...",
+          "vendor": "microsoft",
+          "version": "-",
+          "part": "o",
+          "product": "windows_10",
+          "targetHW": "x86",
+          "update": "gold"
+        },
+        "family": "Windows",
+        "id": 254,
+        "product": "Windows 10 Enterprise Edition",
+        "description": "Microsoft Windows 10 Enterprise Edition",
+        "systemName": "Microsoft Windows",
+        "type": "Workstation"
+      },
+      "vulnerabilities": {
+        "total": 777,
+        "critical": 654,
+        "exploits": 257,
+        "malwareKits": 0,
+        "moderate": 15,
+        "severe": 108
+      },
+      "addresses": [
+        {
+          "ip": "192.168.1.1",
+          "mac": "00:50:56:94:C6:7E"
+        }
+      ],
+      "assessedForVulnerabilities": true,
+      "hostNames": [
+        {
+          "name": "iagent2-win10",
+          "source": "other"
+        }
+      ],
+      "ip": "192.168.1.1",
+      "assessedForPolicies": false,
+      "rawRiskScore": 543979.25,
+      "services": [
+        {
+          "port": 135,
+          "protocol": "tcp",
+          "links": [
+            {
+              "href": "https://example.rapid7.com:3780/...",
+              "rel": "self"
+            },
+            {
+              "href": "https://example.rapid7.com:3780/...",
+              "rel": "Configurations"
+            }
+          ],
+          "name": "DCE Endpoint Resolution"
+        },
+        {
+          "name": "CIFS Name Service",
+          "port": 137,
+          "protocol": "udp",
+          "configurations": [
+            {
+              "name": "advertised-name-1",
+              "value": "EXAMPLE-WIN10 (File Server Service)"
+            },
+            {
+              "name": "advertised-name-2",
+              "value": "EXAMPLE-WIN10 (Computer Name)"
+            }
+          ],
+          "links": [
+            {
+              "href": "https://example.rapid7.com:3780/...",
+              "rel": "self"
+            },
+            {
+              "href": "https://example.rapid7.com:3780/...",
+              "rel": "Configurations"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "addresses": [
+        {
+          "ip": "192.168.1.1",
+          "mac": "00:50:56:94:E9:87"
+        }
+      ],
+      "assessedForPolicies": false,
+      "assessedForVulnerabilities": true,
+      "ids": [
+        {
+          "source": "Endpoint Agent",
+          "id": "33dd6c5c32e662d2eb96d75c0a379454"
+        },
+        {
+          "id": "33dd6c5c32e662d2eb96d75c0a379454",
+          "source": "R7 Agent"
+        }
+      ],
+      "ip": "192.168.1.1",
+      "os": "Microsoft Windows 10 Enterprise Edition 1803",
+      "hostNames": [
+        {
+          "name": "example-win10",
+          "source": "other"
+        }
+      ],
+      "id": 2474,
+      "users": [
+        {
+          "id": -1,
+          "name": "LocalService",
+          "fullName": "LocalService"
+        },
+        {
+          "fullName": "NetworkService",
+          "id": -1,
+          "name": "NetworkService"
+        }
+      ],
+      "configurations": [
+        {
+          "name": "cpuinfo",
+          "value": "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz"
+        },
+        {
+          "name": "proxies",
+          "value": "{}"
+        }
+      ],
+      "history": [
+        {
+          "date": "2020-09-01T21:47:08.800Z",
+          "type": "AGENT-IMPORT",
+          "version": 1
+        },
+        {
+          "date": "2020-09-02T03:47:05.618Z",
+          "type": "AGENT-IMPORT",
+          "version": 2
+        }
+      ],
+      "rawRiskScore": 40026.30859375,
+      "hostName": "iagent1-win10",
+      "links": [
+        {
+          "href": "https://example.rapid7.com:3780/...",
+          "rel": "self"
+        },
+        {
+          "href": "https://example.rapid7.com:3780/...",
+          "rel": "Software"
+        }
+      ],
+      "mac": "00:50:56:94:E9:87",
+      "osFingerprint": {
+        "type": "Workstation",
+        "architecture": "x86_64",
+        "cpe": {
+          "part": "o",
+          "product": "windows_10",
+          "targetHW": "x86",
+          "update": "gold",
+          "v2.2": "cpe:/o:microsoft:windows_10:-:gold:~~~~x86~",
+          "v2.3": "cpe:2.3:o:microsoft:windows_10:-:gold:*:*:*:*:x86:...",
+          "vendor": "microsoft",
+          "version": "-"
+        },
+        "description": "Microsoft Windows 10 Enterprise Edition 1803",
+        "id": 519,
+        "product": "Windows 10 Enterprise Edition",
+        "family": "Windows",
+        "systemName": "Microsoft Windows",
+        "vendor": "Microsoft",
+        "version": "1803"
+      },
+      "riskScore": 40026.30859375,
+      "vulnerabilities": {
+        "moderate": 20,
+        "severe": 131,
+        "total": 184,
+        "critical": 33,
+        "exploits": 0,
+        "malwareKits": 0
+      }
+    }
   ]
 }
 ```
@@ -5047,6 +5390,8 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.6.0 - Update Get Asset Vulnerabilities with new output | Fix issue with RequestParams object set function
+* 4.5.0 - Update to Asset Search action to allow search result limiting and sorting
 * 4.4.3 - Update to error handling and documentation around console URL in connection
 * 4.4.2 - Fix issue where Update Site Included Targets could throw exception
 * 4.4.1 - Add improved error handling for List Inactive Assets action

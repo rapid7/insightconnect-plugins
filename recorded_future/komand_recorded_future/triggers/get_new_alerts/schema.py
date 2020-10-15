@@ -4,32 +4,35 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get information about an Alert"
+    DESCRIPTION = "Get New Alerts"
 
 
 class Input:
-    ALERT_ID = "alert_id"
+    
+    FREQUENCY = "frequency"
     
 
 class Output:
+    
     ALERT = "alert"
     
 
-class LookupAlertInput(komand.Input):
+class GetNewAlertsInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "alert_id": {
-      "type": "string",
-      "title": "Alert ID",
-      "description": "Alert ID",
+    "frequency": {
+      "type": "integer",
+      "title": "Frequency",
+      "description": "Frequency (in seconds)",
+      "default": 10,
       "order": 1
     }
   },
   "required": [
-    "alert_id"
+    "frequency"
   ]
 }
     """)
@@ -38,7 +41,7 @@ class LookupAlertInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class LookupAlertOutput(komand.Output):
+class GetNewAlertsOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
@@ -47,7 +50,7 @@ class LookupAlertOutput(komand.Output):
     "alert": {
       "$ref": "#/definitions/alert",
       "title": "Alert",
-      "description": "Alert Details",
+      "description": "Alert",
       "order": 1
     }
   },
