@@ -19,10 +19,20 @@
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|API Key|None|
-|region|string|US|True|Region|['US', 'Europe']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|API Key|None|{"secretKey":"8lzx2lnr7uwyu27abc7jjo0ezo3"}|
+|region|string|US|True|Region|['US', 'Europe']|US|
+|ssl_verify|boolean|False|True|SSL Verify|None|None|
+
+Example input:
+
+```
+{
+  "api_key": "{\"secretKey\":\"8lzx2lnr7uwyu27abc7jjo0ezo3\"}",
+  "region": "US"
+}
+```
 
 ## Technical Details
 
@@ -34,9 +44,14 @@ This action is used to search for a sample report matching the given domain. e.g
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|domain|string|None|True|Domain to search for|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|domain|string|None|True|Domain to search for|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -165,9 +180,14 @@ This action is used to search for a sample report matching the given ID. e.g. ra
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|sample_id|string|None|True|Sample ID to search for|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|sample_id|string|None|True|Sample ID to search for|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -296,9 +316,14 @@ This action is used to search for a sample report matching the given hash. e.g. 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|sha256|string|None|True|SHA256|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|sha256|string|None|True|SHA256|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -416,24 +441,29 @@ This action submits a sample to Threat Grid for analysis.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|callback_url|string|None|False|A URL where the results will `POST` to, upon completion of analysis|None|
-|email_notification|boolean|None|False|If true, sends an email to the email address of the user that submitted the sample, upon completion of the sample analysis|None|
-|network_exit|string|None|False|Any outgoing network traffic that is generated during the analysis to appear to exit from the Network Exit Location|None|
-|playbook|string|None|False|Name of a playbook to apply to this sample run|None|
-|private|string|None|False|If present, and set to any value but `false` the sample will be marked private|None|
-|sample|file|None|True|The sample file|None|
-|sample_filename|string|None|False|Filename to use to override the default filename|None|
-|sample_password|string|None|False|Password used to open the submitted archive or document|None|
-|tags|string|None|False|A comma-separated list of tags applied to this sample|None|
-|vm|string|None|False|A string identifying a specific VM to use. See the linked configuration endpoint|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|callback_url|string|None|False|A URL where the results will `POST` to, upon completion of analysis|None|None|
+|email_notification|boolean|None|False|If true, sends an email to the email address of the user that submitted the sample, upon completion of the sample analysis|None|None|
+|network_exit|string|None|False|Any outgoing network traffic that is generated during the analysis to appear to exit from the Network Exit Location|None|None|
+|playbook|string|None|False|Name of a playbook to apply to this sample run|None|None|
+|private|string|None|False|If present, and set to any value but `false` the sample will be marked private|None|None|
+|sample|file|None|True|The sample file|None|None|
+|sample_filename|string|None|False|Filename to use to override the default filename|None|None|
+|sample_password|string|None|False|Password used to open the submitted archive or document|None|None|
+|tags|string|None|False|A comma-separated list of tags applied to this sample|None|None|
+|vm|string|None|False|A string identifying a specific VM to use. See the linked configuration endpoint|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|object|False|Results from submit sample|
+|results|submit_sample_results|False|Results from submit sample|
 
 Example output:
 
@@ -466,9 +496,14 @@ This action retrieves analysis on a sample with the given ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|sample_id|string|None|True|ID in ThreadGrid of sample|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|sample_id|string|None|True|ID in ThreatGrid of sample|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -563,16 +598,21 @@ This action is used to submit a URL to Threat Grid for analysis.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|callback_url|string|None|False|A URL where the results will `POST` to, upon completion of analysis|None|
-|email_notification|boolean|None|False|If true, sends an email to the email address of the user that submitted the sample, upon completion of the sample analysis|None|
-|network_exit|string|None|False|Any outgoing network traffic that is generated during the analysis to appear to exit from the Network Exit Location|None|
-|playbook|string|None|False|Name of a playbook to apply to this sample run|None|
-|private|string|None|False|If present, and set to any value but `false` the sample will be marked private|None|
-|tags|string|None|False|A comma-separated list of tags applied to this sample|None|
-|url|string|None|True|The URL to submit for analysis|None|
-|vm|string|None|False|A string identifying a specific VM to use. See the linked configuration endpoint|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|callback_url|string|None|False|A URL where the results will POST to, upon completion of analysis|None|None|
+|email_notification|boolean|None|False|If true, sends an email to the email address of the user that submitted the sample, upon completion of the sample analysis|None|None|
+|network_exit|string|None|False|Any outgoing network traffic that is generated during the analysis to appear to exit from the Network Exit Location|None|None|
+|playbook|string|None|False|Name of a playbook to apply to this sample run|None|None|
+|private|string|None|False|Mark sample as private if not set to 'false' or any other value|None|None|
+|tags|string|None|False|A comma-separated list of tags applied to this sample|None|None|
+|url|string|None|True|The URL to submit for analysis|None|None|
+|vm|string|None|False|A string identifying a specific VM to use. See the linked configuration endpoint|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
