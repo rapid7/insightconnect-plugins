@@ -709,11 +709,6 @@ Example Output:
 
 ```
 
-Example output:
-
-```
-
-```
 
 #### Get Asset Software
 
