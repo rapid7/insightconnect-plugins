@@ -1,6 +1,6 @@
 # Description
 
-This plugin is obsolete. The functionality of this plugin has been superseded with the following product features.   
+This plugin is obsolete. The functionality of this plugin has been superseded with the following product features:
 [Global Artifacts](https://docs.rapid7.com/insightconnect/manage-global-artifacts/)  
 [Custom Loop Variables](https://docs.rapid7.com/insightconnect/loop-step/)  
 
@@ -141,6 +141,5 @@ _This plugin does not contain any troubleshooting information._
 # Links
 
 ## References
-
 
 
