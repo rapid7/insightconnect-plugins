@@ -1,5 +1,9 @@
 # Description
 
+This plugin is obsolete. The functionality of this plugin has been superseded with the following product features.   
+[Global Artifacts](https://docs.rapid7.com/insightconnect/manage-global-artifacts/)  
+[Custom Loop Variables](https://docs.rapid7.com/insightconnect/loop-step/)  
+
 The Storage plugin is a utility that stores information across loops and workflows. It is intended to make extracting small pieces of information from complicated workflows easier.
 
 This should not be used to store large objects, such as images or entire emails.
