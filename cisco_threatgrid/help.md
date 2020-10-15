@@ -47,11 +47,14 @@ This action is used to search for a sample report matching the given domain. e.g
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|domain|string|None|True|Domain to search for|None|None|
+|domain|string|None|True|Domain to search for|None|example.com|
 
 Example input:
 
 ```
+{
+  "domain": "example.com"
+}
 ```
 
 ##### Output
@@ -183,11 +186,14 @@ This action is used to search for a sample report matching the given ID. e.g. ra
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|sample_id|string|None|True|Sample ID to search for|None|None|
+|sample_id|string|None|True|Sample ID to search for|None|87e6c357fafbc2cfcec1e1432aa03eee|
 
 Example input:
 
 ```
+{
+  "sample_id": "87e6c357fafbc2cfcec1e1432aa03eee"
+}
 ```
 
 ##### Output
@@ -319,11 +325,14 @@ This action is used to search for a sample report matching the given hash. e.g. 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|sha256|string|None|True|SHA256|None|None|
+|sha256|string|None|True|SHA256|None|02699626f388ed830012e5b787640e71c56d42d8|
 
 Example input:
 
 ```
+{
+  "sha256": "02699626f388ed830012e5b787640e71c56d42d8"
+}
 ```
 
 ##### Output
@@ -444,20 +453,32 @@ This action submits a sample to Threat Grid for analysis.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|callback_url|string|None|False|A URL where the results will `POST` to, upon completion of analysis|None|None|
-|email_notification|boolean|None|False|If true, sends an email to the email address of the user that submitted the sample, upon completion of the sample analysis|None|None|
-|network_exit|string|None|False|Any outgoing network traffic that is generated during the analysis to appear to exit from the Network Exit Location|None|None|
-|playbook|string|None|False|Name of a playbook to apply to this sample run|None|None|
-|private|string|None|False|If present, and set to any value but `false` the sample will be marked private|None|None|
-|sample|file|None|True|The sample file|None|None|
-|sample_filename|string|None|False|Filename to use to override the default filename|None|None|
-|sample_password|string|None|False|Password used to open the submitted archive or document|None|None|
-|tags|string|None|False|A comma-separated list of tags applied to this sample|None|None|
-|vm|string|None|False|A string identifying a specific VM to use. See the linked configuration endpoint|None|None|
+|callback_url|string|None|False|A URL where the results will `POST` to, upon completion of analysis|None|http://www.example.com|
+|email_notification|boolean|None|False|If true, sends an email to the email address of the user that submitted the sample, upon completion of the sample analysis|None|user@example.com|
+|network_exit|string|None|False|Any outgoing network traffic that is generated during the analysis to appear to exit from the Network Exit Location|None|US - Pennsylvania - Philadelphia|
+|playbook|string|None|False|Name of a playbook to apply to this sample run|None|Random Cursor Movement with Image Recognition|
+|private|string|None|False|If present, and set to any value but `false` the sample will be marked private|None|False|
+|sample|file|None|True|The sample file|None|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
+|sample_filename|string|None|False|Filename to use to override the default filename|None|example.exe|
+|sample_password|string|None|False|Password used to open the submitted archive or document|None|password|
+|tags|string|None|False|A comma-separated list of tags applied to this sample|None|spyware, malware, phishing|
+|vm|string|None|False|A string identifying a specific VM to use. See the linked configuration endpoint|None|rcn-work-022|
 
 Example input:
 
 ```
+{
+  "callback_url": "http://www.example.com",
+  "email_notification": "user@example.com",
+  "network_exit": "US - Pennsylvania - Philadelphia",
+  "playbook": "Random Cursor Movement with Image Recognition",
+  "private": false,
+  "sample": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
+  "sample_filename": "example.exe",
+  "sample_password": "password",
+  "tags": "spyware, malware, phishing",
+  "vm": "rcn-work-022"
+}
 ```
 
 ##### Output
@@ -499,11 +520,14 @@ This action retrieves analysis on a sample with the given ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|sample_id|string|None|True|ID in ThreatGrid of sample|None|None|
+|sample_id|string|None|True|ID in ThreatGrid of sample|None|232526zz0a501081e3058f6hwdfcfd7mp|
 
 Example input:
 
 ```
+{
+  "sample_id": "232526zz0a501081e3058f6hwdfcfd7mp"
+}
 ```
 
 ##### Output
@@ -601,18 +625,28 @@ This action is used to submit a URL to Threat Grid for analysis.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|callback_url|string|None|False|A URL where the results will POST to, upon completion of analysis|None|None|
-|email_notification|boolean|None|False|If true, sends an email to the email address of the user that submitted the sample, upon completion of the sample analysis|None|None|
-|network_exit|string|None|False|Any outgoing network traffic that is generated during the analysis to appear to exit from the Network Exit Location|None|None|
-|playbook|string|None|False|Name of a playbook to apply to this sample run|None|None|
-|private|string|None|False|Mark sample as private if not set to 'false' or any other value|None|None|
-|tags|string|None|False|A comma-separated list of tags applied to this sample|None|None|
-|url|string|None|True|The URL to submit for analysis|None|None|
-|vm|string|None|False|A string identifying a specific VM to use. See the linked configuration endpoint|None|None|
+|callback_url|string|None|False|A URL where the results will POST to, upon completion of analysis|None|http://www.example.com|
+|email_notification|boolean|None|False|If true, sends an email to the email address of the user that submitted the sample, upon completion of the sample analysis|None|user@example.com|
+|network_exit|string|None|False|Any outgoing network traffic that is generated during the analysis to appear to exit from the Network Exit Location|None|US - Pennsylvania - Philadelphia|
+|playbook|string|None|False|Name of a playbook to apply to this sample run|None|Random Cursor Movement with Image Recognition|
+|private|string|None|False|Mark sample as private if not set to 'false' or any other value|None|False|
+|tags|string|None|False|A comma-separated list of tags applied to this sample|None|malware, trojan, phishing|
+|url|string|None|True|The URL to submit for analysis|None|http://www.example.com|
+|vm|string|None|False|A string identifying a specific VM to use. See the linked configuration endpoint|None|rcn-work-022|
 
 Example input:
 
 ```
+{
+  "callback_url": "http://www.example.com",
+  "email_notification": "user@example.com",
+  "network_exit": "US - Pennsylvania - Philadelphia",
+  "playbook": "Random Cursor Movement with Image Recognition",
+  "private": false,
+  "tags": "malware, trojan, phishing",
+  "url": "http://www.example.com",
+  "vm": "rcn-work-022"
+}
 ```
 
 ##### Output
