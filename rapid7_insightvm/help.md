@@ -5390,7 +5390,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 4.6.0 - Update Get Asset Vulnerabilities with new output | Fix issue with RequestParams object set action
+* 4.6.0 - Update Get Asset Vulnerabilities with new output | Fix issue with RequestParams object set function
 * 4.5.0 - Update to Asset Search action to allow search result limiting and sorting
 * 4.4.3 - Update to error handling and documentation around console URL in connection
 * 4.4.2 - Fix issue where Update Site Included Targets could throw exception
