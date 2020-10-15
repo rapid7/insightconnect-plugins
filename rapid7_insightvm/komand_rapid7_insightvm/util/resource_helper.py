@@ -110,9 +110,10 @@ class ResourceHelper(object):
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
+
             if not params:
                 params = {}
-            if params == list:
+            if isinstance(params, list):
                 parameters = RequestParams.from_tuples(params)
             else:
                 parameters = RequestParams.from_dict(params)

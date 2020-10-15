@@ -5,7 +5,7 @@ name: rapid7_insightvm
 title: Rapid7 InsightVM
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans
 version: 4.6.0
-vendor: rapid7
+vendor: matt
 support: rapid7
 status: []
 resources:
@@ -1801,6 +1801,7 @@ actions:
         description: ID of the asset for which to find software
         type: string
         required: true
+        example: "234"
     output:
       software:
         title: Software
