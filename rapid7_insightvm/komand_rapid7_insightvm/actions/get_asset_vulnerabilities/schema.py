@@ -89,11 +89,17 @@ class GetAssetVulnerabilitiesOutput(komand.Output):
           },
           "order": 4
         },
+        "since": {
+          "type": "string",
+          "title": "Since",
+          "description": "Date vulnerability was first detected",
+          "order": 5
+        },
         "status": {
           "type": "string",
           "title": "Status",
           "description": "Status, ie. vulnerable",
-          "order": 5
+          "order": 6
         }
       },
       "definitions": {

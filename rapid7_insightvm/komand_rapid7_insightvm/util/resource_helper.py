@@ -40,7 +40,7 @@ class RequestParams(object):
     @classmethod
     def from_dict(cls, params: dict):
         params_list = list()
-        for key, item in params:
+        for key, item in params.items():
             params_list.append((key, item))
         return cls(params=params_list)
 
@@ -106,8 +106,11 @@ class ResourceHelper(object):
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
+
             if not params:
-                params = {}
+                params = {
+                    'size': 500
+                }
             if params == list:
                 parameters = RequestParams.from_tuples(params)
             else:
