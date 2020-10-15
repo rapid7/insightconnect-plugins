@@ -18,6 +18,8 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 ## Setup
 
+The URL must point to your local console, not the platform or cloud console.
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -29,8 +31,11 @@ Example input:
 
 ```
 {
-  "credentials": "{\"username\": \"username\", \"password\": \"password\"}",
-  "url": "https://insightvm.example.com:3780"
+  "url": "https://insightvm.example.com:3780",
+  "credentials": {
+      "username": "username",
+      "password": "password"
+    }
 }
 ```
 
@@ -1848,7 +1853,10 @@ Example input:
 ```
 {
   "size": 100,
-  "sort_criteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}"
+  "sort_criteria": {
+    "risk-score": "asc", 
+    "criticality-tag": "desc"
+  }
 }
 ```
 
