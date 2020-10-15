@@ -131,7 +131,7 @@ types:
       type: string
     href:
       title: HREF
-      description: Href
+      description: HREF
       type: string
   eventData:
     oaState:
