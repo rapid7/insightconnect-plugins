@@ -40,7 +40,7 @@ class RequestParams(object):
     @classmethod
     def from_dict(cls, params: dict):
         params_list = list()
-        for key, item in params:
+        for key, item in params.items():
             params_list.append((key, item))
         return cls(params=params_list)
 
@@ -56,7 +56,11 @@ class RequestParams(object):
 
     # Allows users to set values from this object in the same way you would set values from a dictionary
     def __setitem__(self, key, value):
-        self.params.append((key, value))
+        for idx, item in enumerate(self.params):
+            if key in item:
+                self.params[idx] = (key, value)
+            else:
+                self.params.append((key, value))
 
 
 class ResourceHelper(object):
@@ -106,9 +110,10 @@ class ResourceHelper(object):
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
+
             if not params:
                 params = {}
-            if params == list:
+            if isinstance(params, list):
                 parameters = RequestParams.from_tuples(params)
             else:
                 parameters = RequestParams.from_dict(params)
