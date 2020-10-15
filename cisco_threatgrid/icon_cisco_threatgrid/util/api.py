@@ -113,19 +113,6 @@ class ThreatGrid:
             authentication="data",
         )
 
-    def get_sample(self, id):
-        """
-         Retrieves the Sample Info record of a submission.
-         :param id:
-         :return:
-         """
-        return self._call_api(
-            "POST",
-            f"/api/v2/samples/{id}",
-            action_name="Retrieve Sample",
-            authentication="data",
-        )
-
     def search_domain(self, q):
         """
          Makes a query to Threat Grid looking for a specific Domain
