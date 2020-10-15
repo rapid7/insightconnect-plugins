@@ -130,7 +130,7 @@ types:
       description: Relation
       type: string
     href:
-      title: Href
+      title: HREF
       description: Href
       type: string
   eventData:
