@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Cisco ThreatGrid"
 Vendor = "rapid7"
-Version = "1.4.0"
+Version = "2.0.0"
 Description = "This plugin retrieves malware reports, report samples and URLs for analysis to Cisco ThreatGrid server Cisco ThreatGrid combines advanced sandboxing with threat intelligence into one unified solution to protect organizations from malware"
 
 

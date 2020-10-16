@@ -1,7 +1,7 @@
 {
-	"spec": "8e0c6aa67e61ea5fb0841fe9641cae90",
-	"manifest": "05c383389e611f588dd1bc61efb03ea7",
-	"setup": "d0d5212a2815665b2627d8642c2960a2",
+	"spec": "fc13c87d2fa3475e902312aacc47c8a9",
+	"manifest": "43b2b5e0649f74e4a745e4afb5921160",
+	"setup": "f36940097b0edd8673746f45e56fc556",
 	"schemas": [
 		{
 			"identifier": "get_sample_analysis/schema.py",

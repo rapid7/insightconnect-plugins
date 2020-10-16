@@ -554,7 +554,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.4.0 - Fix issue where Search for Sample by Domain would fail | Removed Search for Sample by ID
+* 2.0.0 - Fix issue where Search for Sample by Domain would fail | Removed Search for Sample by ID | Update to Search for Sample Report by Sha256 to only return one output object
 * 1.2.2 - New action Submit URL
 * 1.2.1 - Bug fix for action Get Sample Analysis
 * 1.2.0 - New action Get Sample Analysis

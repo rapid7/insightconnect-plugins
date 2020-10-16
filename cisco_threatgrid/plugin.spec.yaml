@@ -5,7 +5,7 @@ name: cisco_threatgrid
 title: Cisco ThreatGrid
 description: This plugin retrieves malware reports, report samples and URLs for analysis to Cisco ThreatGrid server
  Cisco ThreatGrid combines advanced sandboxing with threat intelligence into one unified solution to protect organizations from malware
-version: 1.4.0
+version: 2.0.0
 vendor: rapid7
 support: rapid7
 status: []
