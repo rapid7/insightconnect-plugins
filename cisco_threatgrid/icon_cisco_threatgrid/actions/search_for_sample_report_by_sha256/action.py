@@ -24,13 +24,13 @@ class SearchForSampleReportBySha256(komand.Action):
             raise PluginException(cause="ThreatGrid query for domain failed.",
                                   assistance=f"ThreatGrid query failed, check your API key.\n "
                                   f"Exception returned was: {e} \n"
-                                  f"Response returned was: {result.text}")
+                                  f"Response returned was: {str(results)}")
 
         try:
             result = results.get("data").get("items")[0]
         except Exception:
             raise PluginException(cause=f"Could not find sample with sha256 {sha256}.",
                                   assistance=f"Please check your input.\n",
-                                  data=str(results))
+                                  data=results.text)
 
         return {Output.SAMPLE_REPORT_LIST: komand.helper.clean(result)}

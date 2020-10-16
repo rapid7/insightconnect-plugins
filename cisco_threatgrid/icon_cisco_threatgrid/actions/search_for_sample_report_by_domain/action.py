@@ -33,7 +33,7 @@ class SearchForSampleReportByDomain(komand.Action):
         except json.JSONDecodeError:
             raise PluginException(
                 preset=ConnectionTestException.Preset.INVALID_JSON,
-                data=result.text
+                data=str(result)
             )
 
         if results:
