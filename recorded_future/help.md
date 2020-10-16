@@ -66,7 +66,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|alert|object|True|Alert Details|
+|alert|alert|True|Alert Details|
 
 Example output:
 
@@ -2057,6 +2057,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.1.1 - Fix issue where Lookup Alert was returning a generic object
 * 3.1.0 - New trigger Get New Alerts
 * 3.0.0 - Add input `fields` to Search Domains, Search Hashes, Search IP Addresses, Search Vulnerabilities, Search Malware and Lookup Malware actions | Add `riskRule` and `riskScore` filter criteria to Search Domains, Search Hashes, Search IP Addresses and Search Vulnerabilities actions | Add `list` and `firstSeen` filter criteria to Search Malware action | Update description for `list` parameter in Download IP Addresses Risk List, Download Vulnerability Risk List, Download Domain Risk List and Download Hash Risk List actions
 * 2.2.0 - New actions Search URLs, Download URL Risk List and List URL Risk Rules | Update Recorded Future logo | Allow both upper and lowercase CVE in Lookup Vulnerability action
