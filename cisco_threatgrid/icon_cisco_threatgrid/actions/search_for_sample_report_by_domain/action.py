@@ -19,6 +19,9 @@ class SearchForSampleReportByDomain(komand.Action):
         in_domain = params.get(Input.DOMAIN)
         domain = urlparse(in_domain).netloc
 
+        if not domain: # url parse couldn't make sense of the input, use what the user gave us.
+            domain = in_domain
+
         self.logger.info(f"Searching for domain: {domain}")
         result = self.connection.api.search_domain(
             q=domain
