@@ -146,7 +146,7 @@ class ThreatGrid:
         )
 
     def search_sha256(self, q):
-        data = {"q": q, "advance": "true"}
+        data = {"term": "checksum", "q": q, "advance": "true"}
         return self._call_api(
             "GET",
             "/api/v2/search/submissions",

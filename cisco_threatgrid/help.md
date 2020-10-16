@@ -200,7 +200,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|sample_report_list|[]sample_report|True|Sample report list|
+|sample_report_list|sample_report|True|Sample report list|
 
 Example output:
 

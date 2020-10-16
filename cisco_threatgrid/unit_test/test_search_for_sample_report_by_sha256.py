@@ -51,4 +51,4 @@ class TestSearchForSampleReportBySha256(TestCase):
         results = test_action.run(action_params)
 
         self.assertIsNotNone(results)
-        self.assertTrue("sample_report" in results.keys())
+        self.assertTrue("sample_report_list" in results.keys())

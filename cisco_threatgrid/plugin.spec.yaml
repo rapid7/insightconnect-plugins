@@ -2103,7 +2103,7 @@ actions:
       sample_report_list:
         title: Sample Report List
         description: Sample report list
-        type: "[]sample_report"
+        type: sample_report
         required: true
   search_for_sample_report_by_domain:
     title: Search for a Sample Report by URL
