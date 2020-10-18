@@ -35,7 +35,7 @@ class Query(komand.Action):
             if response["status"] == 202:
                 response = request.resource_request(result["links"][0]["href"], 'get', params=request_params)
                 result = json.loads(response['resource'])
-        except json.decoder.JSONDecodeError:
+        except (json.decoder.JSONDecodeError, IndexError, KeyError):
             self.logger.error(f'InsightIDR response: {response}')
             raise PluginException(cause='The response from InsightIDR was not in the correct format.',
                                   assistance='Contact support for help. See log for more details.')
