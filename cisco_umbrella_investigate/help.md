@@ -39,6 +39,129 @@ Example input:
 
 ### Actions
 
+#### Timeline
+
+This action shows when a domain, IP or URL was given attribution of a particular security categorization or threat type.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|name|string|None|True|Domain name, IP address or URL|None|example.com|
+
+Example input:
+
+```
+{
+  "name": "example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|timeline|[]timeline|True|Provided data for a queried domain name, IP address or URL|
+
+Example output:
+
+```
+{
+  "timeline": [
+    {
+      "attacks": [
+        "WebCryptoMiner"
+      ],
+      "categories": [
+        "Cryptomining",
+        "Potentially Harmful"
+      ],
+      "threatTypes": [
+        "Potentially Unwanted Application"
+      ],
+      "timestamp": 1518718964025
+    }
+  ]
+}
+```
+
+#### Passive DNS
+
+This action provides historical data from our resolvers for domains, IPs, and other resource records.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|name|string|None|True|Domain name, IP address or text|None|example.com|
+|recordType|string|A|False|The record types (A, NS, MX, TXT, CNAME) to return, use commas to separate multiple record types|None|A|
+|resource_records|string|Domain|True|Resource records for which historical data is provided|['Domain', 'Name', 'IP Address', 'Raw Text', 'Timeline']|Domain|
+
+Example input:
+
+```
+{
+  "name": "example.com",
+  "recordType": "A",
+  "resource_records": "Domain"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|pageInfo|page_info|False|Information about page|
+|recordInfo|record_info|False|Information about record|
+|records|[]records|False|Provided records for a queried domain name, IP address or text|
+|timeline_data|[]dns_timeline|False|Snapshot of passive DNS and categorization history for a queried domain name|
+
+Example output:
+
+```
+{
+  "records": [
+    {
+      "minTtl": 86400,
+      "maxTtl": 86400,
+      "firstSeen": 1403611920,
+      "lastSeen": 1602604809,
+      "name": "umbrella.com",
+      "type": "NS",
+      "rr": "auth1.opendns.com.",
+      "securityCategories": [],
+      "contentCategories": ["Software/Technology"],
+      "firstSeenISO": "2014-06-24T12:12Z",
+      "lastSeenISO": "2020-10-13T16:00Z"
+    },
+    {
+      "minTtl": 86400,
+      "maxTtl": 86400,
+      "firstSeen": 1403611920,
+      "lastSeen": 1602604809,
+      "name": "umbrella.com",
+      "type": "NS",
+      "rr": "auth2.opendns.com.",
+      "securityCategories": [],
+      "contentCategories": ["Software/Technology"],
+      "firstSeenISO": "2014-06-24T12:12Z",
+      "lastSeenISO": "2020-10-13T16:00Z"
+    }
+  ],
+  "pageInfo": {
+    "hasMoreRecords": false,
+    "offset": 0,
+    "limit": 500,
+    "totalNumRecords": 2
+  },
+  "recordInfo": {
+    "minTtl": 86400,
+    "maxTtl": 86400,
+    "totalMaliciousIP": 0
+  }
+}
+```
+
 #### DNS RR History for IP Address
 
 This action is used to return the history that umbrella has seen for a given IP address.
@@ -86,7 +209,6 @@ Example output:
   "rrs": []
 }
 ```
-
 
 #### WHOIS by Nameserver
 
@@ -480,7 +602,6 @@ Example input:
 |features|[]feature|True|Features|
 |rrs_tf|[]resource_record|True|RRS TF|
 
-
 Example output:
 
 ```
@@ -565,7 +686,6 @@ Example output:
           "type": "A",
           "rr": "93.184.216.34",
           "class": "IN"
-        
       ],
       "first_seen": "2020-08-26",
       "last_seen": "2020-08-26"
@@ -663,7 +783,6 @@ Example output:
 ```
 
 ```
-
 
 #### Sample Artifacts
 
@@ -855,7 +974,6 @@ Example output:
 ```
 
 ```
-
 
 #### Domain Status and Categorization
 
@@ -1122,7 +1240,170 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+#### category
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Content Categories|array|False|The Umbrella content category or categories that match this domain. If none match, the return will be blank|
+|Name|string|False|Domain name|
+|Security Categories|array|False|The Umbrella security category, or categories, that match this domain or that this domain is associated with. If none match, the return will be blank|
+|Status|integer|False|The status will be '-1' if the domain is believed to be malicious, '1' if the domain is believed to be benign, '0' if it hasn't been classified yet|
+
+#### dns_timeline
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Date|date|False|The date|
+|DNS Data|array|False|Contains the DNS record type and data that started/stopped being seen on the given date|
+
+#### email_whois
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Domains|[]whois_domain|True|Domains registered by this email and whether the domain is current, meaning currently registered by this email address|
+|Limit|integer|True|Total number of results for this page of results, default 500|
+|More Data Available|boolean|True|Whether or not there are more than 500 results for this email, either yes or no|
+|Total Results|integer|False|Total number of results for this email|
+
+#### feature
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Age|integer|False|The day in days between now and the last request for this domain. This value is only useful if present. A low score helps isolate attack domains that are short-lived|
+|ASNs|array|False|List of ASN numbers the IPs are in|
+|ASNs Count|integer|False|Number of ASNs the IPs map to|
+|Base Domain|string|True|The base domain of the requested domain|
+|CNAME|boolean|False|Returns true if a CNAME record has been seen for this domain name|
+|Country Codes|array|False|List of country codes (ex: US, FR, TW) for the IPs the name maps to|
+|Country Count|integer|False|Number of countries the IPs are hosted in|
+|Div Rips|number|False|The number of prefixes over the number of IPs|
+|FF Candidate|boolean|False|If the domain name looks like a candidate for fast flux. This does not necessarily mean the domain is in fast flux, but rather that the IP address the domain resolves to changes rapidly (or has changed rapidly)|
+|Geo Distance Mean|number|False|Mean distance between the geo median and each location, in kilometers|
+|Geo Distance Sum|number|False|Minimum sum of distance between locations, in kilometers|
+|Is Subdomain|boolean|True|Returns true if the requested domain is a subdomain of another|
+|Locations|array|False|List of geo coordinates (WGS84 datum, decimal format) the IPs are mapping to|
+|Locations Count|integer|False|Number of distinct geo coordinates the IPs are mapping to|
+|Mail Exchanger|boolean|False|If an MX query for this domain name has been seen|
+|Non Routable|boolean|False|If one of the IPs is in a reserved, non-routable IP range|
+|Prefixes|array|False|List of network prefixes the IPs map to|
+|Prefixes Count|integer|False|Number of network prefixes the IPs map to|
+|Rips|integer|False|Number of IPs seen for the domain name|
+|Rips Stability|number|False|1.0 divided by the number of times the set of IP addresses changed|
+|TTL Max|integer|False|Maximum amount of time set that DNS records should be cached|
+|TTL Mean|number|False|Average amount of time set that DNS records should be cached|
+|TTL Median|number|False|Median amount of time set that DNS records should be cached|
+|TTL Min|integer|False|Minimum amount of time set that DNS records should be cached|
+|TTL Standard Deviation|number|False|Standard deviation of the amount of time set that DNS records should be cached|
+
+#### ip_feature
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Div Ld2|number|True|ld2_count divided by the number of records|
+|Div Ld2 1|number|True|ld2_1_count divided by the number of records|
+|Div Ld2 2|number|True|ld2_2_count divided by the number of records|
+|Div Ld3|number|True|ld3_count divided by the number of records|
+|Ld2 1 Count|integer|True|Number of 2-level names, without the TLD, mapping to the given IP (for www.example.com, this considers example)|
+|Ld2 2 Count|integer|True|Number of 3-level names, without the TLD, mapping to a given IP (for www.example.com, this considers www.example)|
+|Ld2 Count|integer|True|Number of 2-level names mapping to the given IP (for www.example.com, this considers example.com)|
+|Ld3 Count|integer|True|Number of 3-level names mapping to the given IP (for www.example.com, this considers www.example.com)|
+|Rr Count|integer|True|Number of records of that type mapping to the given IP|
+
+#### ip_resource_record
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Class|string|True|DNS class type|
+|Name|string|True|The looked up IP address|
+|Rr|string|True|Resource record owner|
+|Ttl|integer|False|Time to live for this record|
+|Type|string|True|Query type|
+
+#### page_info
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Has More Records|boolean|False|Whether the query has more records|
+|Limit|integer|False|The maximum number of records to return|
+|Offset|integer|False|The amount by which to offset the records|
+|Total Number Of Records|integer|False|Total number of records provided for a query|
+
+#### record_info
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Maximum TTL|integer|False|The maximum TTL for the record in seconds|
+|Minimum TTL|integer|False|The minimum TTL for the record in seconds|
+|Total Malicious Domain|integer|False|Total number of malicious domains for a query|
+|Total Malicious IP|integer|False|Total number of malicious IPs for a query|
+
+#### records
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Content Categories|array|False|The Umbrella content categories|
+|First Seen|integer|False|The first time a query was seen by Umbrella for the domain, in epoch time|
+|First Seen ISO|string|False|The first time a query was seen by Umbrella for the domain, in ISO date and time format|
+|Last Seen|integer|False|The last time a query was seen by Umbrella for the domain, in epoch time|
+|Last Seen ISO|string|False|The last time a query was seen by Umbrella for the domain, in ISO date and time format|
+|Maximum TTL|integer|False|The maximum TTL for the record in seconds|
+|Minimum TTL|integer|False|The minimum TTL for the record in seconds|
+|Name|string|False|The query|
+|RR|string|False|The DNS resource record (RR)|
+|Security Categories|array|False|The Umbrella security categories|
+|Type|string|False|The DNS record type|
+
+#### resource_record
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Class|string|False|DNS class type|
+|First Seen|string|True|Date when the domain was first seen to our DNS database|
+|Last Seen|string|True|Date when domain was last seen in our DNS database|
+|Name|string|False|Name of the domain|
+|RR|string|False|Resource record IP for the domain|
+|TTL|integer|False|TTL of the domain|
+|Type|string|False|Query type|
+
+#### sample_info
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|AV Results|array|True|AntiVirus results according to ClamAV. A sample can have more than one signature if it is possibly detected under more than one family of malware. A sample may also have no signatures associated|
+|FirstSeen|number|True|The epoch time stamp for when this sample was first seen by Threat Grid|
+|LastSeen|number|True|The epoch time stamp for when this sample was last seen by Threat Grid. The lastSeen and firstSeen will often be the same if the sample is more recent|
+|MagicType|string|True|A ‘magic type’ is better understood as a file type. Specifically, it is the output of the Linux “file” utility|
+|MD5|string|True|The MD5 checksum of the sample, as above, can be searched in /sample/ endpoint|
+|SHA1|string|True|The SHA1 checksum of the sample. As above, can be searched in /sample/ endpoint|
+|SHA256|string|True|The SHA256 checksum of the sample. This checksum is important if you’d like to find out more about this sample in the /sample/ endpoint|
+|Size|integer|True|The size of the sample in bytes|
+|ThreatScore|integer|True|A threatScore is a measure of the amount of system weakening, obfuscation, persistence, modification, data exfiltration, and other behaviors which may be a threat to the host system’s integrity|
+|Visible|boolean|True|Boolean, either true or false. For internal Umbrella use only, please ignore|
+
+#### tag_date
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Begin|string|True|The date of adding the domain to the block list. If the domain is currently in the block list, this date will be 'Current'|
+|Category|string|True|The Umbrella security category or categories that match this domain|
+|End|string|True|The date of removing the domain to the block list. If the domain is currently in the block list, this date will be 'Current'|
+|URL|string|True|The full URL containing the malicious code at the domain requested. Return is null if URL is not available|
+
+#### timeline
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Attacks|array|False|Which named attacks, if any, matched the input|
+|Categories|array|False|Which Umbrella security category, if any, matched the input|
+|Threat Types|array|False|Which threat type, if any, matched in the input|
+|Timestamp|integer|False|The time when the attribution for this domain or URL changed. This is given in epoch (unix) time stamps|
+
+#### whois_domain
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Current|boolean|True|Whether the domain is current, meaning currently registered by this email address|
+|Domain|string|True|Domain registered by this email|
 
 ## Troubleshooting
 
@@ -1130,6 +1411,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.1.0 - Add Passive DNS and Timeline actions
 * 3.0.0 - Add action input and output examples to documentation | Set `title` in action input and output sections in schema | Update domain name in `investigate.py` | Improve error handling | Change action input names to lowercase in action Latest Malicious Domains by IP, DNS RR History for IP Address and Samples by Domain
 * 2.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Co-occurrences
 * 1.0.2 - Added change allowing categorization to work with a Tier1 API key by utilizing the single domain API endpoint instead of the bulk API endpoint when a single-element array of domains is passed in
