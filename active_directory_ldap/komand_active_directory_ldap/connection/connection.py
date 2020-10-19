@@ -79,7 +79,7 @@ class Connection(komand.Connection):
 
         return {'connection': 'successful'}
 
-    def host_formater(self, host: str) -> str:
+    def host_formatter(self, host: str) -> str:
         """
         Formats The host as needed for the connection
         """
