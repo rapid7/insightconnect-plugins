@@ -21,7 +21,7 @@ class Connection(komand.Connection):
         user_name = params.get(Input.USERNAME_PASSWORD).get('username')
         password = params.get(Input.USERNAME_PASSWORD).get('password')
 
-        host = self.host_formater(host)
+        host = self.host_formatter(host)
         self.logger.info(f'Connecting to {host}:{port}')
 
         server = ldap3.Server(
