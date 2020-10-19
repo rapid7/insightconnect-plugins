@@ -1249,12 +1249,19 @@ _This plugin does not contain any triggers._
 |Security Categories|array|False|The Umbrella security category, or categories, that match this domain or that this domain is associated with. If none match, the return will be blank|
 |Status|integer|False|The status will be '-1' if the domain is believed to be malicious, '1' if the domain is believed to be benign, '0' if it hasn't been classified yet|
 
+#### dnsData
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|IP Data|ipData|False|Contains data that started/stopped being seen on the given date|
+|Record Type|string|False|The DNS record type|
+
 #### dns_timeline
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |Date|date|False|The date|
-|DNS Data|array|False|Contains the DNS record type and data that started/stopped being seen on the given date|
+|DNS Data|[]dnsData|False|Contains the DNS record type and data that started/stopped being seen on the given date|
 
 #### email_whois
 
@@ -1294,6 +1301,13 @@ _This plugin does not contain any triggers._
 |TTL Median|number|False|Median amount of time set that DNS records should be cached|
 |TTL Min|integer|False|Minimum amount of time set that DNS records should be cached|
 |TTL Standard Deviation|number|False|Standard deviation of the amount of time set that DNS records should be cached|
+
+#### ipData
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|No Longer Seen|[]string|False|Data that stopped being seen on the given date, may contain domains, IP addresses, and TXT records|
+|Start Seen|[]string|False|Data that started being seen on the given date, may contain domains, IP addresses, and TXT records|
 
 #### ip_feature
 
@@ -1341,7 +1355,7 @@ _This plugin does not contain any triggers._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Content Categories|array|False|The Umbrella content categories|
+|Content Categories|[]string|False|The Umbrella content categories|
 |First Seen|integer|False|The first time a query was seen by Umbrella for the domain, in epoch time|
 |First Seen ISO|string|False|The first time a query was seen by Umbrella for the domain, in ISO date and time format|
 |Last Seen|integer|False|The last time a query was seen by Umbrella for the domain, in epoch time|
@@ -1350,7 +1364,7 @@ _This plugin does not contain any triggers._
 |Minimum TTL|integer|False|The minimum TTL for the record in seconds|
 |Name|string|False|The query|
 |RR|string|False|The DNS resource record (RR)|
-|Security Categories|array|False|The Umbrella security categories|
+|Security Categories|[]string|False|The Umbrella security categories|
 |Type|string|False|The DNS record type|
 
 #### resource_record
@@ -1393,9 +1407,9 @@ _This plugin does not contain any triggers._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Attacks|array|False|Which named attacks, if any, matched the input|
-|Categories|array|False|Which Umbrella security category, if any, matched the input|
-|Threat Types|array|False|Which threat type, if any, matched in the input|
+|Attacks|[]string|False|Which named attacks, if any, matched the input|
+|Categories|[]string|False|Which Umbrella security category, if any, matched the input|
+|Threat Types|[]string|False|Which threat type, if any, matched in the input|
 |Timestamp|integer|False|The time when the attribution for this domain or URL changed. This is given in epoch (unix) time stamps|
 
 #### whois_domain

@@ -17,6 +17,8 @@ class PassiveDns(komand.Action):
         name = params.get(Input.NAME)
         resource_records = params.get(Input.RESOURCE_RECORDS)
         record_type = params.get(Input.RECORDTYPE)
+        if record_type:
+            record_type = record_type.replace(" ", "")
         try:
             response = self.connection.investigate.get_dns(
                 name,

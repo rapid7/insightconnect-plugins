@@ -103,6 +103,50 @@ class PassiveDnsOutput(komand.Output):
     }
   },
   "definitions": {
+    "dnsData": {
+      "type": "object",
+      "title": "dnsData",
+      "properties": {
+        "ipData": {
+          "$ref": "#/definitions/ipData",
+          "title": "IP Data",
+          "description": "Contains data that started/stopped being seen on the given date",
+          "order": 1
+        },
+        "recordType": {
+          "type": "string",
+          "title": "Record Type",
+          "description": "The DNS record type",
+          "order": 2
+        }
+      },
+      "definitions": {
+        "ipData": {
+          "type": "object",
+          "title": "ipData",
+          "properties": {
+            "noLongerSeen": {
+              "type": "array",
+              "title": "No Longer Seen",
+              "description": "Data that stopped being seen on the given date, may contain domains, IP addresses, and TXT records",
+              "items": {
+                "type": "string"
+              },
+              "order": 2
+            },
+            "startSeen": {
+              "type": "array",
+              "title": "Start Seen",
+              "description": "Data that started being seen on the given date, may contain domains, IP addresses, and TXT records",
+              "items": {
+                "type": "string"
+              },
+              "order": 1
+            }
+          }
+        }
+      }
+    },
     "dns_timeline": {
       "type": "object",
       "title": "dns_timeline",
@@ -119,7 +163,104 @@ class PassiveDnsOutput(komand.Output):
           "type": "array",
           "title": "DNS Data",
           "description": "Contains the DNS record type and data that started/stopped being seen on the given date",
+          "items": {
+            "$ref": "#/definitions/dnsData"
+          },
           "order": 2
+        }
+      },
+      "definitions": {
+        "dnsData": {
+          "type": "object",
+          "title": "dnsData",
+          "properties": {
+            "ipData": {
+              "$ref": "#/definitions/ipData",
+              "title": "IP Data",
+              "description": "Contains data that started/stopped being seen on the given date",
+              "order": 1
+            },
+            "recordType": {
+              "type": "string",
+              "title": "Record Type",
+              "description": "The DNS record type",
+              "order": 2
+            }
+          },
+          "definitions": {
+            "ipData": {
+              "type": "object",
+              "title": "ipData",
+              "properties": {
+                "noLongerSeen": {
+                  "type": "array",
+                  "title": "No Longer Seen",
+                  "description": "Data that stopped being seen on the given date, may contain domains, IP addresses, and TXT records",
+                  "items": {
+                    "type": "string"
+                  },
+                  "order": 2
+                },
+                "startSeen": {
+                  "type": "array",
+                  "title": "Start Seen",
+                  "description": "Data that started being seen on the given date, may contain domains, IP addresses, and TXT records",
+                  "items": {
+                    "type": "string"
+                  },
+                  "order": 1
+                }
+              }
+            }
+          }
+        },
+        "ipData": {
+          "type": "object",
+          "title": "ipData",
+          "properties": {
+            "noLongerSeen": {
+              "type": "array",
+              "title": "No Longer Seen",
+              "description": "Data that stopped being seen on the given date, may contain domains, IP addresses, and TXT records",
+              "items": {
+                "type": "string"
+              },
+              "order": 2
+            },
+            "startSeen": {
+              "type": "array",
+              "title": "Start Seen",
+              "description": "Data that started being seen on the given date, may contain domains, IP addresses, and TXT records",
+              "items": {
+                "type": "string"
+              },
+              "order": 1
+            }
+          }
+        }
+      }
+    },
+    "ipData": {
+      "type": "object",
+      "title": "ipData",
+      "properties": {
+        "noLongerSeen": {
+          "type": "array",
+          "title": "No Longer Seen",
+          "description": "Data that stopped being seen on the given date, may contain domains, IP addresses, and TXT records",
+          "items": {
+            "type": "string"
+          },
+          "order": 2
+        },
+        "startSeen": {
+          "type": "array",
+          "title": "Start Seen",
+          "description": "Data that started being seen on the given date, may contain domains, IP addresses, and TXT records",
+          "items": {
+            "type": "string"
+          },
+          "order": 1
         }
       }
     },
@@ -191,6 +332,9 @@ class PassiveDnsOutput(komand.Output):
           "type": "array",
           "title": "Content Categories",
           "description": "The Umbrella content categories",
+          "items": {
+            "type": "string"
+          },
           "order": 1
         },
         "firstSeen": {
@@ -245,6 +389,9 @@ class PassiveDnsOutput(komand.Output):
           "type": "array",
           "title": "Security Categories",
           "description": "The Umbrella security categories",
+          "items": {
+            "type": "string"
+          },
           "order": 10
         },
         "type": {

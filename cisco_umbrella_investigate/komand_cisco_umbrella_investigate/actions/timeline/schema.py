@@ -66,18 +66,27 @@ class TimelineOutput(komand.Output):
           "type": "array",
           "title": "Attacks",
           "description": "Which named attacks, if any, matched the input",
+          "items": {
+            "type": "string"
+          },
           "order": 2
         },
         "categories": {
           "type": "array",
           "title": "Categories",
           "description": "Which Umbrella security category, if any, matched the input",
+          "items": {
+            "type": "string"
+          },
           "order": 1
         },
         "threatTypes": {
           "type": "array",
           "title": "Threat Types",
           "description": "Which threat type, if any, matched in the input",
+          "items": {
+            "type": "string"
+          },
           "order": 3
         },
         "timestamp": {

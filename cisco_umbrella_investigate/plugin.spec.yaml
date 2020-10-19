@@ -28,7 +28,7 @@ types:
     contentCategories:
       title: Content Categories
       description: The Umbrella content categories
-      type: array
+      type: "[]string"
       required: false
     firstSeen:
       title: First Seen
@@ -73,7 +73,7 @@ types:
     securityCategories:
       title: Security Categories
       description: The Umbrella security categories
-      type: array
+      type: "[]string"
       required: false
     type:
       title: Type
@@ -122,6 +122,28 @@ types:
       description: Total number of malicious IPs for a query
       type: integer
       required: false
+  ipData:
+    startSeen:
+      title: Start Seen
+      type: "[]string"
+      description: Data that started being seen on the given date, may contain domains, IP addresses, and TXT records
+      required: false
+    noLongerSeen:
+      title: No Longer Seen
+      type: "[]string"
+      description: Data that stopped being seen on the given date, may contain domains, IP addresses, and TXT records
+      required: false
+  dnsData:
+    ipData:
+      title: IP Data
+      type: ipData
+      description: Contains data that started/stopped being seen on the given date
+      required: false
+    recordType:
+      title: Record Type
+      type: string
+      description: The DNS record type
+      required: false
   dns_timeline:
     date:
       title: Date
@@ -131,23 +153,23 @@ types:
     dnsData:
       title: DNS Data
       description: Contains the DNS record type and data that started/stopped being seen on the given date
-      type: array
+      type: "[]dnsData"
       required: false
   timeline:
     categories:
       title: Categories
       description: Which Umbrella security category, if any, matched the input
-      type: array
+      type: "[]string"
       required: false
     attacks:
       title: Attacks
       description: Which named attacks, if any, matched the input
-      type: array
+      type: "[]string"
       required: false
     threatTypes:
       title: Threat Types
       description: Which threat type, if any, matched in the input
-      type: array
+      type: "[]string"
       required: false
     timestamp:
       title: Timestamp
