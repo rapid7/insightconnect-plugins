@@ -39,7 +39,7 @@ class AssetSearchInput(komand.Input):
     "sort_criteria": {
       "type": "object",
       "title": "Sort Criteria",
-      "description": "An object that sorts by criteria. Multiple criteria can be specified with an order of ascending or descending",
+      "description": "JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)",
       "order": 3
     }
   },

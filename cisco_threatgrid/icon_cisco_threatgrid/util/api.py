@@ -4,11 +4,13 @@ from komand.exceptions import PluginException
 
 
 class ThreatGrid:
-    def __init__(self, base_url, logger, api_key):
+    def __init__(self, base_url, logger, api_key, ssl_verify=False):
         self._base_url = base_url
         self.logger = logger
         self.api_key = api_key
+
         self.session = Session()
+        self.session.verify = ssl_verify
 
     def test_api(self):
         return self._call_api(
@@ -118,7 +120,7 @@ class ThreatGrid:
          :return: request
          """
 
-        data = {"term": "sample.filename", "q": q, "advance": "true"}
+        data = {"term": "domain", "q": q, "advance": "true"}
         self.logger.info(f"Looking for sample with domain filename: {q}")
         return self._call_api(
             "GET",
@@ -144,7 +146,7 @@ class ThreatGrid:
         )
 
     def search_sha256(self, q):
-        data = {"term": "sample.filename", "q": q, "advance": "true"}
+        data = {"term": "checksum", "q": q, "advance": "true"}
         return self._call_api(
             "GET",
             "/api/v2/search/submissions",

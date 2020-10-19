@@ -19,10 +19,21 @@
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|API Key|None|
-|region|string|US|True|Region|['US', 'Europe']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|API Key|None|8lzx2lnr7uwyu27abc7jjo0ezo3|
+|region|string|US|True|Region|['US', 'Europe']|US|
+|ssl_verify|boolean|False|True|SSL Verify|None|False|
+
+Example input:
+
+```
+{
+  "api_key": "8lzx2lnr7uwyu27abc7jjo0ezo3",
+  "region": "US",
+  "ssl_verify": false
+}
+```
 
 ## Technical Details
 
@@ -34,140 +45,17 @@ This action is used to search for a sample report matching the given domain. e.g
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|domain|string|None|True|Domain to search for|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|domain|string|None|True|Domain to search for|None|example.com|
 
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|sample_report|sample_report|True|Sample report|
-
-Example output:
+Example input:
 
 ```
 {
-  "sample_report": {
-    "properties": {},
-    "tags": [],
-    "vm_runtime": 120,
-    "md5": "01e083cf123affd286e285684f6fe014",
-    "private": false,
-    "organization_id": 93361,
-    "state": "succ",
-    "login": "testguy",
-    "sha1": "19149708ad7e2bddb1d302623f086b4c37631c06",
-    "sample": "c9cd3526cf122367ae81e97f3d75f19a",
-    "filename": "www.rapid7.com_.url",
-    "analysis": {
-      "metadata": {
-        "sandcastle_env": {
-          "controlsubject": "win7-x64-intel-2018.08.09",
-          "vm": "win7-x64",
-          "vm_id": "c9cd3526cf122367ae81e97f3d75f19a",
-          "sample_executed": 1561487649,
-          "analysis_end": "2019-06-25T18:36:45Z",
-          "analysis_features": [],
-          "analysis_start": "2019-06-25T18:33:23Z",
-          "display_name": "Windows 7 64-bit",
-          "run_time": 120,
-          "sandcastle": "3.5.33.16246.1a4501ed0-1",
-          "current_os": "7601.18798.amd64fre.win7sp1_gdr.150316-1654"
-        },
-        "submitted_file": {
-          "magic": "MS Windows 95 Internet shortcut text (URL=<http://www.rapid7.com>), ASCII text",
-          "sha1": "19149708ad7e2bddb1d302623f086b4c37631c06",
-          "filename": "www.rapid7.com_.url",
-          "sha256": "ddb5cd39884a96aedcc64a3609b9b61916a1902c6ca881f6707438ef66b0a6ec",
-          "type": "url",
-          "md5": "01e083cf123affd286e285684f6fe014"
-        },
-        "general_details": {
-          "report_created": "2019-06-25T18:36:55Z",
-          "sandbox_version": "pilot-d",
-          "sandbox_id": "mtv-work-060"
-        },
-        "malware_desc": [
-          {
-            "sha1": "19149708ad7e2bddb1d302623f086b4c37631c06",
-            "magic": "MS Windows 95 Internet shortcut text (URL=<http://www.rapid7.com>), ASCII text",
-            "filename": "www.rapid7.com_.url",
-            "size": 45,
-            "sha256": "ddb5cd39884a96aedcc64a3609b9b61916a1902c6ca881f6707438ef66b0a6ec",
-            "type": "url",
-            "md5": "01e083cf123affd286e285684f6fe014"
-          }
-        ],
-        "analyzed_file": {
-          "magic": "MS Windows 95 Internet shortcut text (URL=<http://www.rapid7.com>), ASCII text",
-          "sha1": "19149708ad7e2bddb1d302623f086b4c37631c06",
-          "filename": "www.rapid7.com_.url",
-          "sha256": "ddb5cd39884a96aedcc64a3609b9b61916a1902c6ca881f6707438ef66b0a6ec",
-          "type": "url",
-          "md5": "01e083cf123affd286e285684f6fe014"
-        }
-      },
-      "behaviors": [
-        {
-          "name": "js-uses-fromcharcode",
-          "threat": 40,
-          "title": "JavaScript Obfuscation Using \"fromCharCode()\" Function"
-        },
-        {
-          "name": "http-response-redirect",
-          "threat": 25,
-          "title": "HTTP Redirection Response"
-        },
-        {
-          "name": "network-communications-http-get-url",
-          "threat": 6,
-          "title": "Outbound HTTP GET Request From URL Submission"
-        },
-        {
-          "name": "modified-file-in-user-dir",
-          "threat": 56,
-          "title": "Process Modified File in a User Directory"
-        },
-        {
-          "name": "js-contains-massive-strings",
-          "threat": 64,
-          "title": "Javascript Contains an Excessively Long String"
-        },
-        {
-          "name": "network-dns-safe-categories",
-          "threat": 19,
-          "title": "Cisco Umbrella Detected A Likely Benign Domain"
-        },
-        {
-          "name": "network-fast-flux-domain",
-          "threat": 7,
-          "title": "DNS Response Contains Low Time to Live (TTL) Value"
-        },
-        {
-          "name": "network-only-safe-domains-contacted",
-          "threat": 19,
-          "title": "Sample Contacts Only Benign Domains"
-        }
-      ],
-      "threat_score": 64
-    },
-    "status": "job_done",
-    "submitted_at": "2019-06-25T18:33:22Z",
-    "sha256": "ddb5cd39884a96aedcc64a3609b9b61916a1902c6ca881f6707438ef66b0a6ec"
-  }
+  "domain": "example.com"
 }
 ```
-
-#### Search for a Sample Report by ID
-
-This action is used to search for a sample report matching the given ID. e.g. rapid7.com.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|sample_id|string|None|True|Sample ID to search for|None|
 
 ##### Output
 
@@ -296,15 +184,23 @@ This action is used to search for a sample report matching the given hash. e.g. 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|sha256|string|None|True|SHA256|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|sha256|string|None|True|SHA256|None|02699626f388ed830012e5b787640e71c56d42d8|
+
+Example input:
+
+```
+{
+  "sha256": "02699626f388ed830012e5b787640e71c56d42d8"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|sample_report_list|[]sample_report|True|Sample report list|
+|sample_report_list|sample_report|True|Sample report list|
 
 Example output:
 
@@ -416,24 +312,41 @@ This action submits a sample to Threat Grid for analysis.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|callback_url|string|None|False|A URL where the results will `POST` to, upon completion of analysis|None|
-|email_notification|boolean|None|False|If true, sends an email to the email address of the user that submitted the sample, upon completion of the sample analysis|None|
-|network_exit|string|None|False|Any outgoing network traffic that is generated during the analysis to appear to exit from the Network Exit Location|None|
-|playbook|string|None|False|Name of a playbook to apply to this sample run|None|
-|private|string|None|False|If present, and set to any value but `false` the sample will be marked private|None|
-|sample|file|None|True|The sample file|None|
-|sample_filename|string|None|False|Filename to use to override the default filename|None|
-|sample_password|string|None|False|Password used to open the submitted archive or document|None|
-|tags|string|None|False|A comma-separated list of tags applied to this sample|None|
-|vm|string|None|False|A string identifying a specific VM to use. See the linked configuration endpoint|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|callback_url|string|None|False|A URL where the results will `POST` to, upon completion of analysis|None|http://www.example.com|
+|email_notification|boolean|None|False|If true, sends an email to the email address of the user that submitted the sample, upon completion of the sample analysis|None|user@example.com|
+|network_exit|string|None|False|Any outgoing network traffic that is generated during the analysis to appear to exit from the Network Exit Location|None|US - Pennsylvania - Philadelphia|
+|playbook|string|None|False|Name of a playbook to apply to this sample run|None|Random Cursor Movement with Image Recognition|
+|private|string|None|False|If present, and set to any value but `false` the sample will be marked private|None|False|
+|sample|file|None|True|The sample file|None|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
+|sample_filename|string|None|False|Filename to use to override the default filename|None|example.exe|
+|sample_password|string|None|False|Password used to open the submitted archive or document|None|password|
+|tags|string|None|False|A comma-separated list of tags applied to this sample|None|spyware, malware, phishing|
+|vm|string|None|False|A string identifying a specific VM to use. See the linked configuration endpoint|None|rcn-work-022|
+
+Example input:
+
+```
+{
+  "callback_url": "http://www.example.com",
+  "email_notification": "user@example.com",
+  "network_exit": "US - Pennsylvania - Philadelphia",
+  "playbook": "Random Cursor Movement with Image Recognition",
+  "private": false,
+  "sample": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
+  "sample_filename": "example.exe",
+  "sample_password": "password",
+  "tags": "spyware, malware, phishing",
+  "vm": "rcn-work-022"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|object|False|Results from submit sample|
+|results|submit_sample_results|False|Results from submit sample|
 
 Example output:
 
@@ -466,9 +379,17 @@ This action retrieves analysis on a sample with the given ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|sample_id|string|None|True|ID in ThreadGrid of sample|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|sample_id|string|None|True|ID in ThreatGrid of sample|None|232526zz0a501081e3058f6hwdfcfd7mp|
+
+Example input:
+
+```
+{
+  "sample_id": "232526zz0a501081e3058f6hwdfcfd7mp"
+}
+```
 
 ##### Output
 
@@ -563,16 +484,31 @@ This action is used to submit a URL to Threat Grid for analysis.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|callback_url|string|None|False|A URL where the results will `POST` to, upon completion of analysis|None|
-|email_notification|boolean|None|False|If true, sends an email to the email address of the user that submitted the sample, upon completion of the sample analysis|None|
-|network_exit|string|None|False|Any outgoing network traffic that is generated during the analysis to appear to exit from the Network Exit Location|None|
-|playbook|string|None|False|Name of a playbook to apply to this sample run|None|
-|private|string|None|False|If present, and set to any value but `false` the sample will be marked private|None|
-|tags|string|None|False|A comma-separated list of tags applied to this sample|None|
-|url|string|None|True|The URL to submit for analysis|None|
-|vm|string|None|False|A string identifying a specific VM to use. See the linked configuration endpoint|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|callback_url|string|None|False|A URL where the results will POST to, upon completion of analysis|None|http://www.example.com|
+|email_notification|boolean|None|False|If true, sends an email to the email address of the user that submitted the sample, upon completion of the sample analysis|None|user@example.com|
+|network_exit|string|None|False|Any outgoing network traffic that is generated during the analysis to appear to exit from the Network Exit Location|None|US - Pennsylvania - Philadelphia|
+|playbook|string|None|False|Name of a playbook to apply to this sample run|None|Random Cursor Movement with Image Recognition|
+|private|string|None|False|Mark sample as private if not set to 'false' or any other value|None|False|
+|tags|string|None|False|A comma-separated list of tags applied to this sample|None|malware, trojan, phishing|
+|url|string|None|True|The URL to submit for analysis|None|http://www.example.com|
+|vm|string|None|False|A string identifying a specific VM to use. See the linked configuration endpoint|None|rcn-work-022|
+
+Example input:
+
+```
+{
+  "callback_url": "http://www.example.com",
+  "email_notification": "user@example.com",
+  "network_exit": "US - Pennsylvania - Philadelphia",
+  "playbook": "Random Cursor Movement with Image Recognition",
+  "private": false,
+  "tags": "malware, trojan, phishing",
+  "url": "http://www.example.com",
+  "vm": "rcn-work-022"
+}
+```
 
 ##### Output
 
@@ -618,6 +554,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Fix issue where Search for Sample by Domain would fail | Removed Search for Sample by ID | Update to Search for Sample Report by SHA256 to only return one output object
 * 1.2.2 - New action Submit URL
 * 1.2.1 - Bug fix for action Get Sample Analysis
 * 1.2.0 - New action Get Sample Analysis
