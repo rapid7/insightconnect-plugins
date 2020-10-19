@@ -2,6 +2,8 @@ import insightconnect_plugin_runtime
 from .schema import UpdateAgentInput, UpdateAgentOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
 # Custom imports below
+from icon_cylance_protect.util.find_helpers import find_agent_by_ip
+import validators
 
 
 class UpdateAgent(insightconnect_plugin_runtime.Action):
@@ -14,7 +16,12 @@ class UpdateAgent(insightconnect_plugin_runtime.Action):
                 output=UpdateAgentOutput())
 
     def run(self, params={}):
-        agent = self.connection.client.get_agent_details(params.get(Input.AGENT))
+        # If IPv4, attempt to find its ID first
+        agent = params.get(Input.AGENT)
+        if validators.ipv4(agent):
+            agent = find_agent_by_ip(self.connection, agent)
+
+        agent = self.connection.client.get_agent_details(agent)
         policy = params.get(Input.POLICY)
 
         if policy == "":
