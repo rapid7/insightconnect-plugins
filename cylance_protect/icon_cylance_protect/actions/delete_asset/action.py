@@ -33,13 +33,13 @@ class DeleteAsset(insightconnect_plugin_runtime.Action):
                 else:
                     device_obj = self.connection.client.get_agent_details(agent)
 
-                # Device was found in Cylance
                 if device_obj:
+                    # Device was found in Cylance
                     if whitelist:
                         # Any whitelisted devices will not be deleted
                         matches = find_in_whitelist(device_obj, whitelist)
                         if matches:
-                            self.connection.logger.info(f"{agent} found in whitelist. Will not delete.")
+                            self.logger.info(f"{agent} found in whitelist. Will not delete.")
                             invalid_devices.append(agent)
                         else:
                             valid_devices.append(agent)
@@ -47,11 +47,9 @@ class DeleteAsset(insightconnect_plugin_runtime.Action):
                     else:
                         valid_devices.append(agent)
                         valid_ids = self.add_to_valid_devices(device_obj, valid_ids)
-                # Device was not found, therefore invalid to delete
-                else:
-                    self.connection.logger.info(f"{agent} device was not found.")
-                    invalid_devices.append(agent)
+            # Device was not found, therefore invalid to delete
             except PluginException:
+                self.logger.info(f"{agent} device was not found.")
                 invalid_devices.append(agent)
 
         if not valid_ids:
