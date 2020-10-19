@@ -9,11 +9,11 @@ class Component:
 
 class Input:
     THREAT_IDENTIFIER = "threat_identifier"
-    
+
 
 class Output:
     AGENTS = "agents"
-    
+
 
 class SearchThreatAgentsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""

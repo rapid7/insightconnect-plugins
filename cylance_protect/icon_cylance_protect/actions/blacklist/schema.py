@@ -11,11 +11,11 @@ class Input:
     BLACKLIST_STATE = "blacklist_state"
     DESCRIPTION = "description"
     HASH = "hash"
-    
+
 
 class Output:
     SUCCESS = "success"
-    
+
 
 class BlacklistInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""

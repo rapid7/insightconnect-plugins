@@ -9,11 +9,11 @@ class Component:
 
 class Input:
     AGENT = "agent"
-    
+
 
 class Output:
     AGENTS = "agents"
-    
+
 
 class SearchAgentsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
