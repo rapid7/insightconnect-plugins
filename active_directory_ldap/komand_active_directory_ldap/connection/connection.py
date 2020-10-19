@@ -83,16 +83,16 @@ class Connection(komand.Connection):
         """
         Formats The host as needed for the connection
         """
-        colon = host.count(':')
-        if colon > 0:
+        colons = host.count(':')
+        if colons > 0:
             self.logger.info('Port was provided in hostname, using value from Port field instead')
             host = host.split(':')
-            if colon == 1:
+            if colons == 1:
                 host = host[0]
-            elif colon == 2:
+            elif colons == 2:
                 host = f'{host[0]}:{host[1]}'
             else:
-                raise ConnectionTestException(cause='There are too many colons in the host name.',
-                                              assistance=' Check that the host name is correct',
+                raise ConnectionTestException(cause=f'There are too many colons ({colons}) in the host name ({host}).',
+                                              assistance='Check that the host name is correct',
                                               data=host)
         return host
