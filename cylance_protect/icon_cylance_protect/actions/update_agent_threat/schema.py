@@ -11,11 +11,11 @@ class Input:
     AGENT = "agent"
     QUARANTINE_STATE = "quarantine_state"
     THREAT_IDENTIFIER = "threat_identifier"
-    
+
 
 class Output:
     SUCCESS = "success"
-    
+
 
 class UpdateAgentThreatInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
