@@ -1,7 +1,6 @@
 import json
 import re
 import requests
-from urllib.parse import urlparse
 from urllib.parse import urljoin
 import urllib
 import datetime, time
@@ -52,7 +51,13 @@ class Investigate(object):
             "sample_connections": "sample/{}/connections",
             "sample_samples": "sample/{}/samples",
             "as_for_ip": "bgp_routes/ip/{}/as_for_ip.json",
-            "prefixes_for_asn": "bgp_routes/asn/{}/prefixes_for_asn.json"
+            "prefixes_for_asn": "bgp_routes/asn/{}/prefixes_for_asn.json",
+            "timeline": "timeline/{}",
+            "passive_dns_timeline": "pdns/timeline/{}",
+            "passive_dns_domain": "pdns/domain/{}",
+            "passive_dns_name": "pdns/name/{}",
+            "passive_dns_ip": "pdns/ip/{}",
+            "passive_dns_raw": "pdns/raw/{}"
         }
         self._auth_header = {"Authorization": "Bearer " + self.api_key}
 
@@ -367,3 +372,22 @@ class Investigate(object):
         resp_json = self.get_parse(uri)
 
         return resp_json
+
+    def get_timeline(self, name):
+        uri = urljoin(self._uris['timeline'], name)
+        return self.get_parse(uri)
+
+    def get_dns(self, name, resource_records, record_type):
+        if resource_records == "Domain":
+            passive_dns = "passive_dns_domain"
+        elif resource_records == "Name":
+            passive_dns = "passive_dns_name"
+        elif resource_records == "IP Address":
+            passive_dns = "passive_dns_ip"
+        elif resource_records == "Timeline":
+            passive_dns = "passive_dns_timeline"
+        else:
+            passive_dns = "passive_dns_raw"
+            name = f"\"{name}\""
+        uri = urljoin(self._uris[passive_dns], name)
+        return self.get_parse(uri, params={'recordType': record_type})
