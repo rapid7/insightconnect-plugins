@@ -71,13 +71,15 @@ class ResourceHelper(object):
     the __init__ function during instantiation.
     """
 
-    _ERRORS = {
-        400: "Bad Request",
-        401: "Unauthorized",
-        404: "Not Found",
-        500: "Internal Server Error",
-        503: "Service Unavailable",
-        000: "Unknown Status Code"
+    # Currently only handling the most common requests exceptions more can be added as needed
+    Request_exceptions = {
+        requests.HTTPError: '',
+        requests.ConnectionError: '',
+        requests.Timeout: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
+        requests.ConnectTimeout: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
+        requests.ReadTimeout: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
+        requests.TooManyRedirects: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
+        'Unhandled exception': 'contact support for assistance'
     }
 
     def __init__(self, session, logger):
@@ -104,20 +106,21 @@ class ResourceHelper(object):
         :param json_response: Boolean to return raw response
         :return: Dict containing the JSON response body
         """
+
+        request_method = getattr(self.session, method.lower())
+        headers = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+
+        if not params:
+            params = {}
+        if isinstance(params, list):
+            parameters = RequestParams.from_tuples(params)
+        else:
+            parameters = RequestParams.from_dict(params)
+
         try:
-            request_method = getattr(self.session, method.lower())
-            headers = {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-
-            if not params:
-                params = {}
-            if isinstance(params, list):
-                parameters = RequestParams.from_tuples(params)
-            else:
-                parameters = RequestParams.from_dict(params)
-
             if payload is None:
                 response = request_method(url=endpoint, headers=headers, params=parameters.params, verify=False)
             elif 'rawbody' in payload.keys():
@@ -126,39 +129,22 @@ class ResourceHelper(object):
             else:
                 response = request_method(url=endpoint, headers=headers, params=parameters.params, json=payload, verify=False)
         except requests.RequestException as e:
-            self.logger.error(e)
-            raise
+            assistance = self.Request_exceptions.get(e, self.Request_exceptions['Unhandled exception'])
+            raise PluginException(cause=e,
+                                  assistance=assistance)
 
+        self.resource_request_status_code_check(response)
+
+        if json_response:
+            try:
+                resource = response.json()
+            except json.decoder.JSONDecodeError as e:
+                raise PluginException(cause=f'Error: Received an unexpected response from InsightVM '
+                                            f'(non-JSON or no response was received). ',
+                                      assistance=f'Contact support for help. Exception returned was {e}',
+                                      data=response.text)
         else:
-            if response.status_code in [200, 201]:  # 200 is documented, 201 is undocumented
-                if json_response:
-                    try:
-                        resource = response.json()
-                    except json.decoder.JSONDecodeError as e:
-                        raise PluginException(cause=f'Error: Received an unexpected response from InsightVM '
-                                                    f'(non-JSON or no response was received). '
-                                                    f'Response was: {response.content}',
-                                              assistance=f'Exception returned was {e}')
-                else:
-                    resource = {'raw': response.content}
-            else:
-                try:
-                    response_json = response.json()
-                    error = response_json.get('message', {})
-                except (KeyError, json.decoder.JSONDecodeError) as e:
-                    self.logger.error('Malformed JSON received.')
-                    if 'text/html' in response.text:
-                        error = f'An error occurred.\nVerify your connection is pointing to your local console and not `exposure-analytics.insight.rapid7.com`.\nStatus Code: {response.status_code}\nResponse:\n{response.text}\nException:\n{str(e)}'
-                    else:
-                        error = f'An error occurred.\nStatus Code: {response.status_code}\nResponse:\n{response.text}\nException:\n{str(e)}'
-
-                status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
-                self.logger.error(f'{status_code_message} ({response.status_code}): {error}')
-
-                if response.status_code == 404:
-                    raise ResourceNotFound(error)
-                else:
-                    raise Exception(error)
+            resource = {'raw': response.test}
 
         return resource
 
@@ -230,12 +216,12 @@ class ResourceHelper(object):
         # Get size and page from list of dict param type
 
         self.logger.info(f'Fetching up to {params["size"]} resources from endpoint page {params["page"]} ...')
+        request_method = getattr(self.session, method.lower())
+        headers = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
         try:
-            request_method = getattr(self.session, method.lower())
-            headers = {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
             if not payload:
                 response = request_method(url=endpoint,
                                           verify=False,
@@ -250,31 +236,56 @@ class ResourceHelper(object):
                                           json=payload
                                           )
         except requests.RequestException as e:
-            self.logger.error(e)
-            raise
+            assistance = self.Request_exceptions.get(e, self.Request_exceptions['Unhandled exception'])
+            raise PluginException(cause=e,
+                                  assistance=assistance)
 
-        else:
-            if response.status_code in [200, 201]:  # 200 is documented, 201 is undocumented
+        self.resource_request_status_code_check(response)
+        response_json = response.json()
+
+        r = RequestResult(page_num=response_json['page']['number'],
+                          total_pages=response_json['page']['totalPages'],
+                          resources=response_json['resources'])
+
+        return r
+
+    @staticmethod
+    def resource_request_status_code_check(response):
+        """
+        Checks for non 2xx status codes and if json_response is true converts response to JSON
+        :param response: A requests response
+        """
+        _ERRORS = {
+            400: "Bad Request",
+            401: "Unauthorized",
+            404: "Not Found",
+            500: "Internal Server Error",
+            503: "Service Unavailable",
+            000: "Unknown Status Code"
+        }
+
+        _ASSISTANCE = {
+            400: "Bad Request",
+            401: "Ensure that the user name and password are correct.",
+            404: "Ensure that the requested resource exists.",
+            500: "If this issue persists contact support for assistance.",
+            503: "If this issue persists contact support for assistance.",
+            000: "If this issue persists contact support for assistance."
+        }
+        _CHECK_CONSOLE = 'Verify your connection is pointing to your local console and not `exposure-analytics.insight.rapid7.com`'
+        if response.status_code not in [200, 201]:  # 200 is documented, 201 is undocumented
+            status_code_message = _ERRORS.get(response.status_code, _ERRORS[000])
+            assistance = _ASSISTANCE.get(response.status_code, _ASSISTANCE[000])
+            try:
                 response_json = response.json()
-
-                r = RequestResult(page_num=response_json['page']['number'],
-                                  total_pages=response_json['page']['totalPages'],
-                                  resources=response_json['resources'])
-
-                return r
-            else:
-                try:
-                    error = response.json()["message"]
-                except KeyError:
-                    error = 'Unknown error occurred. Please contact support or try again later.'
-
-                status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
-                self.logger.error(f'{status_code_message} ({response.status_code}): {error}')
-
-                if response.status_code == 404:
-                    raise ResourceNotFound(error)
-                else:
-                    raise Exception(error)
+                error = response_json.get('message', {})
+            except (KeyError, json.decoder.JSONDecodeError):
+                raise PluginException(cause=f'Malformed JSON received along with a status code of {status_code_message}',
+                                      assistance=f'{_CHECK_CONSOLE} {assistance}',
+                                      data=response.text)
+            raise PluginException(cause=f'InsightVM returned an error message. {status_code_message}',
+                                  assistance=assistance,
+                                  data=error)
 
     def v1_authenticate(self, console_url: str):
         """
