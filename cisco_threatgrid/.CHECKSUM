@@ -1,7 +1,7 @@
 {
-	"spec": "03814d7d7fcaf1929c90f645c43c7f49",
-	"manifest": "461dd6f5b512ea847bc279fed23a6558",
-	"setup": "a9339b4233e5b166cb8d89042b111ec5",
+	"spec": "fc13c87d2fa3475e902312aacc47c8a9",
+	"manifest": "43b2b5e0649f74e4a745e4afb5921160",
+	"setup": "f36940097b0edd8673746f45e56fc556",
 	"schemas": [
 		{
 			"identifier": "get_sample_analysis/schema.py",
@@ -12,12 +12,8 @@
 			"hash": "5eead5cd8f53d9d57bd2d949578173c3"
 		},
 		{
-			"identifier": "search_for_sample_report_by_id/schema.py",
-			"hash": "a84ef4ae4878579ddf6c97c67075d296"
-		},
-		{
 			"identifier": "search_for_sample_report_by_sha256/schema.py",
-			"hash": "af7e0139359da1ec70af3c776d48ddd6"
+			"hash": "277e071fd7431bea26cc815957bc9252"
 		},
 		{
 			"identifier": "submit_sample/schema.py",
@@ -29,7 +25,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "5b61b43682391f03fd29373e7e875a2b"
+			"hash": "762fa5e24c2dc3a5f454e7755c4c13b9"
 		}
 	]
 }
