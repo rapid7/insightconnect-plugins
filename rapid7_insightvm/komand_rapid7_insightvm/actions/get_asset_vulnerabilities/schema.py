@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     ASSET_ID = "asset_id"
+    GET_RISK_SCORE = "get_risk_score"
     
 
 class Output:
@@ -26,6 +27,12 @@ class GetAssetVulnerabilitiesInput(komand.Input):
       "title": "Asset ID",
       "description": "ID of the asset for which to find vulnerabilities",
       "order": 1
+    },
+    "get_risk_score": {
+      "type": "boolean",
+      "title": "Get Risk Score",
+      "description": "Return risk score allong with other vulnerability data",
+      "order": 2
     }
   },
   "required": [

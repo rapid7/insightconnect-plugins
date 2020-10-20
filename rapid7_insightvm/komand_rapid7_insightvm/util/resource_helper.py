@@ -236,18 +236,18 @@ class ResourceHelper(object):
                                           json=payload
                                           )
         except requests.RequestException as e:
-            assistance = self.Request_exceptions.get(e, self.Request_exceptions['Unhandled exception'])
+            assistance = self.Request_exceptions.get(type(e), self.Request_exceptions['Unhandled exception'])
             raise PluginException(cause=e,
                                   assistance=assistance)
 
         self.resource_request_status_code_check(response)
         response_json = response.json()
 
-        r = RequestResult(page_num=response_json['page']['number'],
-                          total_pages=response_json['page']['totalPages'],
-                          resources=response_json['resources'])
+        result = RequestResult(page_num=response_json['page']['number'],
+                               total_pages=response_json['page']['totalPages'],
+                               resources=response_json['resources'])
 
-        return r
+        return result
 
     @staticmethod
     def resource_request_status_code_check(response):
