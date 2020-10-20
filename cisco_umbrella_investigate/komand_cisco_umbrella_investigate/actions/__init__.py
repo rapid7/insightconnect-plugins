@@ -6,6 +6,7 @@ from .domain_whois.action import DomainWhois
 from .email_whois.action import EmailWhois
 from .latest_domains.action import LatestDomains
 from .ns_whois.action import NsWhois
+from .passive_dns.action import PassiveDns
 from .related.action import Related
 from .rr_history.action import RrHistory
 from .rr_history_ip.action import RrHistoryIp
@@ -16,3 +17,4 @@ from .sample_samples.action import SampleSamples
 from .samples.action import Samples
 from .search.action import Search
 from .security.action import Security
+from .timeline.action import Timeline
