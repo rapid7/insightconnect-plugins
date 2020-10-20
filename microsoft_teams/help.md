@@ -505,8 +505,8 @@ This action is used to create a group in Azure and enable it for Microsoft Teams
 |group_name|string|None|True|Team name|None|test_group|
 |mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|False|
 |mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|TestGroup|
-|members|string[]|None|False|A list of usernames to set as members|None|[user@example.com]|
-|owners|string[]|None|False|A list of usernames to set as owners|None|[user@example.com]|
+|members|string[]|None|False|A list of usernames to set as members|None|["user@example.com"]|
+|owners|string[]|None|False|A list of usernames to set as owners|None|["user@example.com"]|
 
 Example input:
 
