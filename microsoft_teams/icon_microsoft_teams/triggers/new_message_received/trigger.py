@@ -293,10 +293,9 @@ class NewMessageReceived(komand.Trigger):
 
         return normalized_mac_addresses
 
-    def split_message_to_words(self, message):
+    def split_message_to_words(self, message) -> [str]:
         message_content = message.get("body", {}).get("content", "")
         if message.get("body", {}).get("contentType", "").lower() == "html":
             message_content = strip_html(message_content)
 
         return message_content.split(" ")
-
