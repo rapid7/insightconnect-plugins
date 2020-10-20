@@ -20,14 +20,15 @@ class GetAssetVulnerabilities(komand.Action):
         resource_helper = ResourceHelper(self.connection.session, self.logger)
         asset_id = params.get(Input.ASSET_ID)
         risk_score = params.get(Input.GET_RISK_SCORE, False)
-        endpoint = endpoints.VulnerabilityResult.vulnerabilities_for_asset(self.connection.console_url, asset_id)
 
+        endpoint = endpoints.VulnerabilityResult.vulnerabilities_for_asset(self.connection.console_url, asset_id)
         resources = resource_helper.paged_resource_request(endpoint=endpoint,
                                                            method='get')
         if not risk_score:
             return {Output.VULNERABILITIES: resources}
         else:
-            temp = self.get_vulnerabilities(resources)
+            resources = self.get_vulnerabilities(resources)
+            return {Output.VULNERABILITIES: resources}
 
     async def async_get_vulnerabilities(self, vuln_ids):
         connection = self.connection.async_connection
@@ -47,8 +48,10 @@ class GetAssetVulnerabilities(komand.Action):
             vuln_ids.append(resource.get('id'))
         vulnerabilities = asyncio.run(self.async_get_vulnerabilities(vuln_ids))
         for vulnerability in vulnerabilities:
-            risk_score.append({vulnerability['id']: vulnerability['riskScore']})
+            risk_score.append({'id': vulnerability['id'], 'riskScore': vulnerability['riskScore']})
         sorted_resources = sorted(resources, key=itemgetter('id'))
         sorted_risk_score = sorted(risk_score, key=itemgetter('id'))
         for i in range(0, len(sorted_resources), 1):
             sorted_resources[i]['riskScore'] = sorted_risk_score[i]['riskScore']
+        sorted_resources = sorted(sorted_resources, key=itemgetter('riskScore'), reverse=True)
+        return sorted_resources

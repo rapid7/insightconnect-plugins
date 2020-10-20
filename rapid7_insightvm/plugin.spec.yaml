@@ -860,6 +860,11 @@ types:
       title: Status
       type: string
       required: false
+    risk_score:
+      title: Risk Score
+      description: The risk score for the vulnerability
+      type: float
+      required: false
   site:
     assets:
       title: Assets

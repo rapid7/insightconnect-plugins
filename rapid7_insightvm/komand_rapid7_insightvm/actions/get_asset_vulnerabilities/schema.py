@@ -96,6 +96,12 @@ class GetAssetVulnerabilitiesOutput(komand.Output):
           },
           "order": 4
         },
+        "risk_score": {
+          "type": "number",
+          "title": "Risk Score",
+          "description": "The risk score for the vulnerability",
+          "order": 7
+        },
         "since": {
           "type": "string",
           "title": "Since",
