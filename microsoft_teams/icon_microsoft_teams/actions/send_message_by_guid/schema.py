@@ -183,8 +183,20 @@ class SendMessageByGuidOutput(komand.Output):
           "title": "Web URL",
           "description": "Web URL",
           "order": 4
+        },
+        "words": {
+          "type": "array",
+          "title": "Words",
+          "description": "The message split by spaces into a list of words. This list makes finding and using parameters in chat commands easier",
+          "items": {
+            "type": "string"
+          },
+          "order": 10
         }
       },
+      "required": [
+        "words"
+      ],
       "definitions": {
         "body": {
           "type": "object",

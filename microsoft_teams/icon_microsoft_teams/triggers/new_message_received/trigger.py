@@ -57,6 +57,7 @@ class NewMessageReceived(komand.Trigger):
                 for message in sorted_messages:  # For each new message
                     message = remove_null_and_clean(message)
                     message["first_word"] = self.extract_first_word(message.get("body", {}).get("content", ""))
+                    message["words"] = self.split_message_to_words(message)
                     if maya.parse(message.get("createdDateTime")) > last_time_we_checked:
                         self.logger.info("Analyzing message...")
                         if message_content:  # Do we have a reg ex
@@ -291,3 +292,10 @@ class NewMessageReceived(komand.Trigger):
             normalized_mac_addresses.append(mac_address.replace("-", ":"))
 
         return normalized_mac_addresses
+
+    def split_message_to_words(self, message) -> [str]:
+        message_content = message.get("body", {}).get("content", "")
+        if message.get("body", {}).get("contentType", "").lower() == "html":
+            message_content = strip_html(message_content)
+
+        return message_content.split(" ")
