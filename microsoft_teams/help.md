@@ -33,7 +33,10 @@ Example input:
   "application_id": "63a0cad6-ac64-435c-a221-5d37c97b763e",
   "application_secret": "aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=",
   "directory_id": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0",
-  "username_password": "{ \"username\": \"user\", \"password\": \"mypassword\" }"
+  "username_password": {
+    "username": "user",
+    "password": "mypassword"
+  }
 }
 ```
 
@@ -122,7 +125,7 @@ Example input:
 ```
 {
   "channel_name": "InsightConnect Channel",
-  "message_content": "\u003cb\u003eHello!\u003c/b\u003e",
+  "message_content": "<b>Hello!</b>",
   "team_name": "InsightConnect Team",
   "thread_id": 1595889908700
 }
