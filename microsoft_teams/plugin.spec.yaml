@@ -201,7 +201,7 @@ types:
        title: Words
        description: The message split by spaces into a list of words. This list makes finding and using paramters in chat commands easier
        type: "[]string"
-       required: false
+       required: true
   group:
       mailNickname:
         title: "Mail Nickname"
