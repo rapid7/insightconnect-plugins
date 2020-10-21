@@ -39,8 +39,9 @@ class ResourceHelper(object):
 
     # Currently only handling the most common requests exceptions more can be added as needed
     Request_exceptions = {
-        requests.HTTPError: '',
-        requests.ConnectionError: '',
+        requests.HTTPError: ' If this issue persists contact support for assistance.',
+        requests.ConnectionError: 'Unable to connect to IVM consul.'
+                                  ' If this issue persists contact support for assistance',
         requests.Timeout: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
         requests.ConnectTimeout: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
         requests.ReadTimeout: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
@@ -95,7 +96,7 @@ class ResourceHelper(object):
             else:
                 response = request_method(url=endpoint, headers=headers, params=parameters.params, json=payload, verify=False)
         except requests.RequestException as e:
-            assistance = self.Request_exceptions.get(e, self.Request_exceptions['Unhandled exception'])
+            assistance = self.Request_exceptions.get(type(e), self.Request_exceptions['Unhandled exception'])
             raise PluginException(cause=e,
                                   assistance=assistance)
 
