@@ -35,7 +35,10 @@ class AsyncRequests:
             parameters = RequestParams.from_tuples(params)
         else:
             parameters = RequestParams.from_dict(params)
-        response = await session.request(url=endpoint, method=method, json=payload, params=parameters)
+        if payload:
+            response = await session.request(url=endpoint, method=method, json=payload, params=parameters.params)
+        else:
+            response = await session.request(url=endpoint, method=method, params=parameters.params)
         resource_request_status_code_check(response.text(), response.status)
         if json_response:
             try:
