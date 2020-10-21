@@ -193,9 +193,6 @@ class SendHtmlMessageOutput(komand.Output):
           "order": 10
         }
       },
-      "required": [
-        "words"
-      ],
       "definitions": {
         "body": {
           "type": "object",
