@@ -99,7 +99,7 @@ class ResourceHelper(object):
             raise PluginException(cause=e,
                                   assistance=assistance)
 
-        resource_request_status_code_check(response)
+        resource_request_status_code_check(response.text, response.status_code)
 
         if json_response:
             try:
@@ -206,7 +206,7 @@ class ResourceHelper(object):
             raise PluginException(cause=e,
                                   assistance=assistance)
 
-        resource_request_status_code_check(response)
+        resource_request_status_code_check(response.text, response.status_code)
         response_json = response.json()
 
         result = RequestResult(page_num=response_json['page']['number'],

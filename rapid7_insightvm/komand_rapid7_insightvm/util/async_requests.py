@@ -1,4 +1,3 @@
-import asyncio
 import aiohttp
 from typing import Collection
 from komand.exceptions import PluginException
@@ -36,6 +35,7 @@ class AsyncRequests:
         else:
             parameters = RequestParams.from_dict(params)
         response = await session.request(url=endpoint, method=method, json=payload, params=parameters)
+        resource_request_status_code_check(response.text(), response.status)
         if json_response:
             try:
                 resp_json = await response.json()
@@ -43,11 +43,3 @@ class AsyncRequests:
                 raise PluginException()
             return resp_json
         return response.text()
-
-    async def async_get_vulnerabilities(self, vuln_ids):
-        async with self.get_async_session() as async_session:
-            tasks: [asyncio.Future] = []
-            for vuln_id in vuln_ids:
-                tasks.append(asyncio.ensure_future(self.async_request(async_session, vuln_id)))
-            vulnerabilities = await asyncio.gather(*tasks)
-            return vulnerabilities
