@@ -18,6 +18,8 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 ## Setup
 
+The URL must point to your local console, not the platform or cloud console.
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -29,8 +31,11 @@ Example input:
 
 ```
 {
-  "credentials": "{\"username\": \"username\", \"password\": \"password\"}",
-  "url": "https://insightvm.example.com:3780"
+  "url": "https://insightvm.example.com:3780",
+  "credentials": {
+      "username": "username",	
+      "password": "password"	
+    }
 }
 ```
 
@@ -641,12 +646,16 @@ This action is used to get vulnerabilities found on an asset. Can only be used i
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_id|string|None|True|ID of the asset for which to find vulnerabilities|None|None|
-|get_risk_score|boolean|None|False|Return risk score allong with other vulnerability data|None|None|
+|asset_id|string|None|True|ID of the asset for which to find vulnerabilities|None|234|
+|get_risk_score|boolean|None|False|Return risk score allong with other vulnerability data|None|True|
 
 Example input:
 
 ```
+{
+  "asset_id": 234,
+  "get_risk_score": true
+}
 ```
 
 ##### Output
@@ -1853,7 +1862,10 @@ Example input:
 ```
 {
   "size": 100,
-  "sort_criteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}"
+  "sort_criteria": {
+    "risk-score": "asc",
+    "criticality-tag": "desc"
+  }
 }
 ```
 

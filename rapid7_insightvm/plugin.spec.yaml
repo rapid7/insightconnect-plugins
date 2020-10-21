@@ -1791,11 +1791,13 @@ actions:
         description: ID of the asset for which to find vulnerabilities
         type: string
         required: true
+        example: 234
       get_risk_score:
         title: Get Risk Score
         description: Return risk score allong with other vulnerability data
         type: boolean
         required: false
+        example: true
     output:
       vulnerabilities:
         title: Vulnerabilities

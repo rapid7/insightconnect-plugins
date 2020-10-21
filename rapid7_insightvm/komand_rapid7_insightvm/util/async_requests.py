@@ -16,7 +16,8 @@ class AsyncRequests:
         """
         return aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=False), auth=self.auth)
 
-    async def async_request(self, session, endpoint: str, method: str = 'get', params: Collection = None, payload: dict = None,
+    @staticmethod
+    async def async_request(session, endpoint: str, method: str = 'get', params: Collection = None, payload: dict = None,
                             json_response: bool = True):
         """
         Sends a asynchronous request to APIv3 with the provided endpoint and optional method/payload
