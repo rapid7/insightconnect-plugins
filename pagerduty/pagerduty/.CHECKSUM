@@ -1,0 +1,43 @@
+{
+	"spec": "6ee6ef5eb67c093102f2ad7cfd80b117",
+	"manifest": "a76cb10eab12d7e50359fb8d5ce3adf0",
+	"setup": "c47e74c295009fa65dd18ad6ca440165",
+	"schemas": [
+		{
+			"identifier": "create_user/schema.py",
+			"hash": "d20d7c28c305fdcebb96939510679ae7"
+		},
+		{
+			"identifier": "delete_user_by_id/schema.py",
+			"hash": "55d6f98c36228cc8b294303f54eae49c"
+		},
+		{
+			"identifier": "get_on_call/schema.py",
+			"hash": "1b84037296f55d5ab97735237ac46c24"
+		},
+		{
+			"identifier": "get_user_by_email/schema.py",
+			"hash": "79d23d5f0c61caa02bb2728c940e4503"
+		},
+		{
+			"identifier": "get_user_by_id/schema.py",
+			"hash": "43da47a5a74bc83c3652b398f29db719"
+		},
+		{
+			"identifier": "send_acknowledge_event/schema.py",
+			"hash": "24b59e94be441385f0ce8770647cfa60"
+		},
+		{
+			"identifier": "send_resolve_event/schema.py",
+			"hash": "74ea18af0ba61eb8dc40923971eb7d85"
+		},
+		{
+			"identifier": "send_trigger_event/schema.py",
+			"hash": "2a003fe3014831f80493498c143d302f"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "80f4aea21f43406ebe4afe09f912b280"
+		}
+	]
+}
