@@ -19,8 +19,8 @@ class Connection(komand.Connection):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
     def connect(self, params):
-        username = params.get(Input.CREDENTIALS.get('username'))
-        password = params.get(Input.CREDENTIALS.get('password'))
+        username = params.get(Input.CREDENTIALS).get('username')
+        password = params.get(Input.CREDENTIALS).get('password')
         self.console_url = params.get(Input.URL)
 
         self.session = Session()
