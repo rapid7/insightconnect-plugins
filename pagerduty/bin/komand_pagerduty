@@ -4,10 +4,10 @@ import komand
 from komand_pagerduty import connection, actions, triggers
 
 
-Name = 'PagerDuty'
-Vendor = 'rapid7'
-Version = '2.0.1'
-Description = 'Leverage PagerDuty for incident management and response'
+Name = "PagerDuty"
+Vendor = "rapid7"
+Version = "2.0.1"
+Description = "Leverage PagerDuty for incident management and response"
 
 
 class ICONPagerduty(komand.Plugin):
@@ -22,6 +22,8 @@ class ICONPagerduty(komand.Plugin):
         self.add_action(actions.CreateUser())
 
         self.add_action(actions.DeleteUserById())
+
+        self.add_action(actions.GetOnCall())
 
         self.add_action(actions.GetUserByEmail())
 

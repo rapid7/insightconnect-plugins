@@ -4,7 +4,7 @@ products: [insightconnect]
 name: pagerduty
 title: PagerDuty
 description: Leverage PagerDuty for incident management and response
-version: 2.0.1
+version: 2.1.0
 vendor: rapid7
 support: community
 status: []
@@ -69,6 +69,15 @@ types:
       - read_only_user
       - user
 actions:
+  get_on_call:
+    title: Get List of Users On Call
+    description: Get List of Users on Call
+    output:
+      users:
+        title: Users List
+        description: Users List
+        type: "[]user"
+        required: true
   get_user_by_email:
     title: Get User by Email
     description: Get a User by Email

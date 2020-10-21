@@ -1,7 +1,7 @@
 {
-	"spec": "86056c1c910ff696f9b6beceaaee758b",
-	"manifest": "0e53e4e58629dadb6f1096fb56cfef23",
-	"setup": "422574e595d902c145a8593b66cb8ecb",
+	"spec": "7cb7cc89311496ccc2d38fd7fd7b0de2",
+	"manifest": "39c0db0df9c8fca65f43cd653fd5c6a4",
+	"setup": "d7d8492d918bbe998356f2b0b4a65371",
 	"schemas": [
 		{
 			"identifier": "create_user/schema.py",
@@ -10,6 +10,10 @@
 		{
 			"identifier": "delete_user_by_id/schema.py",
 			"hash": "11b87088f070c1d3cfa26b8ab0275c68"
+		},
+		{
+			"identifier": "get_on_call/schema.py",
+			"hash": "b5497c0fb8945c28f897e6d1d11a2a9d"
 		},
 		{
 			"identifier": "get_user_by_email/schema.py",

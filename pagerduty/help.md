@@ -20,15 +20,42 @@ The PagerDuty plugin makes requests to the V2 API.
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|API Key|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|API Key|None|None|
 
-This plugin requires an API key or user token to authenticate to PagerDuty.
+Example input:
+
+```
+```
 
 ## Technical Details
 
 ### Actions
+
+#### Get List of Users On Call
+
+This action is used to get List of Users on Call.
+
+##### Input
+
+_This action does not contain any inputs._
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|users|[]user|True|Users List|
+
+Example output:
+
+```
+```
 
 #### Send Acknowledge Event
 
@@ -36,20 +63,25 @@ This action is used to acknowledge an incident.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|incident_key|string|None|True|Incident Key|None|
-|service_key|string|None|False|Service Key|None|
-|details|object|None|False|An arbitrary JSON object containing any data you'd like included in the incident log.|None|
-|description|string|None|False|Text that will appear in the incident's log associated with this event|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|description|string|None|False|Text that will appear in the incident's log associated with this event|None|None|
+|details|object|None|False|An arbitrary JSON object containing any data you'd like included in the incident log|None|None|
+|incident_key|string|None|True|Incident Key|None|None|
+|service_key|string|None|True|Service Key (aka Integration Key)|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|Status|
-|message|string|False|Message|
 |incident_key|string|False|Incident Key|
+|message|string|False|Message|
+|status|string|False|Status|
 
 #### Create User
 
@@ -57,19 +89,24 @@ This action is used to create a user.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|Email|None|
-|role|string|None|False|Role|['admin', 'limited_user', 'owner', 'read_only_user', 'user']|
-|name|string|None|True|Name|None|
-|from_email|string|None|True|Email of creating user|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|Email|None|None|
+|from_email|string|None|True|Email of creating user|None|None|
+|name|string|None|True|Name|None|None|
+|role|string|None|False|Role|['admin', 'limited_user', 'owner', 'read_only_user', 'user']|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|user|user|False|User|
 |success|boolean|False|True if created|
+|user|user|False|User|
 
 #### Get User by Email
 
@@ -77,9 +114,14 @@ This action is used to get information about a user by email address.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|Email|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|Email|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -94,22 +136,27 @@ This action is used to trigger an incident.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|client_url|string|None|False|The URL of the monitoring client that is triggering this event|None|
-|client|string|None|False|The name of the monitoring client that is triggering this event|None|
-|description|string|None|True|Text that will appear in the incident's log associated with this event|None|
-|contexts|[]object|None|False|Additional context objects|None|
-|service_key|string|None|False|Service Key|None|
-|details|object|None|False|An arbitrary JSON object containing any data you'd like included in the incident log.|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|client|string|None|False|The name of the monitoring client that is triggering this event|None|None|
+|client_url|string|None|False|The URL of the monitoring client that is triggering this event|None|None|
+|contexts|[]object|None|False|Additional context objects|None|None|
+|description|string|None|True|Text that will appear in the incident's log associated with this event|None|None|
+|details|object|None|False|An arbitrary JSON object containing any data you'd like included in the incident log|None|None|
+|service_key|string|None|True|Service Key (aka Integration Key)|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|Status|
-|message|string|False|Message|
 |incident_key|string|False|Incident Key|
+|message|string|False|Message|
+|status|string|False|Status|
 
 #### Delete User by ID
 
@@ -117,16 +164,21 @@ This action is used to delete a user by id.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id|string|None|True|User ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|User ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|user|user|False|User|
 |success|boolean|False|True if deleted|
+|user|user|False|User|
 
 #### Send Resolve Event
 
@@ -134,20 +186,25 @@ This action is used to resolve an incident.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|incident_key|string|None|True|Incident Key|None|
-|service_key|string|None|False|Service Key|None|
-|details|object|None|False|An arbitrary JSON object containing any data you'd like included in the incident log.|None|
-|description|string|None|False|Text that will appear in the incident's log associated with this event|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|description|string|None|False|Text that will appear in the incident's log associated with this event|None|None|
+|details|object|None|False|An arbitrary JSON object containing any data you'd like included in the incident log|None|None|
+|incident_key|string|None|True|Incident Key|None|None|
+|service_key|string|None|True|Service Key (aka Integration Key)|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|Status|
-|message|string|False|Message|
 |incident_key|string|False|Incident Key|
+|message|string|False|Message|
+|status|string|False|Status|
 
 #### Get User by ID
 
@@ -155,9 +212,14 @@ This action is used to get information about a user by ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id|string|None|True|User ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|User ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -180,6 +242,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.0 - New action Get On Call
 * 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Fix issue to make 'service_key' required in Send Resolve Request action
 * 1.0.1 - Update to [PagerDuty REST API v2](https://v2.developer.pagerduty.com/docs/migrating-to-api-v2)
