@@ -33,10 +33,7 @@ Example input:
   "application_id": "63a0cad6-ac64-435c-a221-5d37c97b763e",
   "application_secret": "aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=",
   "directory_id": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0",
-  "username_password": {
-    "username": "user",
-    "password": "mypassword"
-  }
+  "username_password": "{ \"username\": \"user\", \"password\": \"mypassword\" }"
 }
 ```
 
@@ -125,7 +122,7 @@ Example input:
 ```
 {
   "channel_name": "InsightConnect Channel",
-  "message_content": "<b>Hello!</b>",
+  "message_content": "\u003cb\u003eHello!\u003c/b\u003e",
   "team_name": "InsightConnect Team",
   "thread_id": 1595889908700
 }
@@ -713,6 +710,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.3.1 - Fix issue where a blank input could crash the plugin
 * 2.3.0 - Added `words` to message output type. This allows for easier use of parameters in Teams trigger messages
 * 2.2.1 - Automatically extract UUIDs in the New Message Received trigger
 * 2.2.0 - Extract and return command security and network indicators in the New Message Received trigger
