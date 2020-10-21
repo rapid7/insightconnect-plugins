@@ -30,7 +30,12 @@ class GetAssetVulnerabilities(komand.Action):
             resources = self.get_vulnerabilities(resources)
             return {Output.VULNERABILITIES: resources}
 
-    async def async_get_vulnerabilities(self, vuln_ids):
+    async def async_get_vulnerabilities(self, vuln_ids: list) -> list:
+        """
+        Prepares a list of vulnerability ids for asynchronous API calls
+        :param vuln_ids: A list of vulnerability ids
+        :return: A list of vulnerability details
+        """
         connection = self.connection.async_connection
         async with connection.get_async_session() as async_session:
             tasks: [asyncio.Future] = []
@@ -41,7 +46,12 @@ class GetAssetVulnerabilities(komand.Action):
             vulnerabilities = await asyncio.gather(*tasks)
             return vulnerabilities
 
-    def get_vulnerabilities(self, resources):
+    def get_vulnerabilities(self, resources: list) -> list:
+        """
+        Finds risk Scores for a list of asset_vulnerabilities at attaches them
+        :param resources: A list of asset_vulnerabilities
+        :return: A list of asset_vulnerabilities with risk Scores
+        """
         vuln_ids = list()
         risk_score = list()
         for resource in resources:

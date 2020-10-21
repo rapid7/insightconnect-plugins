@@ -39,7 +39,7 @@ class RequestParams(object):
 
 def resource_request_status_code_check(response_text: str, status_code: str) -> None:
     """
-
+    Checks for non 2xx status codes and raises an exception if found
     :param response_text: The text of the response
     :param status_code: response status code
     :return: None
@@ -54,7 +54,7 @@ def resource_request_status_code_check(response_text: str, status_code: str) -> 
     }
 
     _ASSISTANCE = {
-        400: "Bad Request",
+        400: "If this issue persists contact support for assistance.",
         401: "Ensure that the user name and password are correct.",
         404: "Ensure that the requested resource exists.",
         500: "If this issue persists contact support for assistance.",
