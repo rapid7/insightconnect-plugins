@@ -667,7 +667,6 @@ Example input:
 Example Output:
 
 ```
-
 {
   "vulnerabilities": [{
     "id": "tlsv1_1-enabled",
@@ -711,14 +710,6 @@ Example Output:
     "status": "vulnerable"
   }]
 }
-
-```
-
-
-Example output:
-
-```
-
 ```
 
 #### Get Asset Software
