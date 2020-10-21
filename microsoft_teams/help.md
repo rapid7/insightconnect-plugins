@@ -713,7 +713,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.3.1 - Fix issue where a blank input could crash the plugin
+* 2.3.1 - Fix issue where New Message Received could crash on all HTML message
 * 2.3.0 - Added `words` to message output type. This allows for easier use of parameters in Teams trigger messages
 * 2.2.1 - Automatically extract UUIDs in the New Message Received trigger
 * 2.2.0 - Extract and return command security and network indicators in the New Message Received trigger
