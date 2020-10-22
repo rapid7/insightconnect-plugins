@@ -38,6 +38,162 @@ types:
       type: "[]string"
       description: URL classifications with security alert
       required: false
+  Classification:
+    Category:
+      title: Category
+      type: string
+      description: Category
+      required: false
+    DetectedMalware:
+      title: Detected Malware
+      type: string
+      description: Detected malware
+      required: false
+    Score:
+      title: Score
+      type: integer
+      description: Score
+      required: false
+    Type:
+      title: Type
+      type: string
+      description: Type
+      required: false
+  FileProperties:
+    DigitalCerificate:
+      title: Digital Cerificate
+      type: string
+      description: Digital cerificate
+      required: false
+    FileSize:
+      title: File Size
+      type: integer
+      description: File size
+      required: false
+    FileType:
+      title: File Type
+      type: string
+      description: File type
+      required: false
+    Issuer:
+      title: Issuer
+      type: string
+      description: Issuer
+      required: false
+    MD5:
+      title: MD5
+      type: string
+      description: MD5
+      required: false
+    RootCA:
+      title: Root CA
+      type: string
+      description: Root CA
+      required: false
+    SHA1:
+      title: SHA1
+      type: string
+      description: SHA1
+      required: false
+    SSDeep:
+      title: SS Deep
+      type: string
+      description: SS deep
+      required: false
+    Sha256:
+      title: SHA256
+      type: string
+      description: SHA256
+      required: false
+  PersistenceSummary:
+    Risk:
+      title: Risk
+      type: string
+      description: Risk
+      required: false
+    Signature:
+      title: Signature
+      type: string
+      description: Signature
+      required: false
+    SignatureSources:
+      title: Signature Sources
+      type: "[]string"
+      description: Signature sources
+      required: false
+  Summary:
+    Category:
+      title: Category
+      type: string
+      description: Category
+      required: false
+    Duration:
+      title: Duration
+      type: integer
+      description: Duration
+      required: false
+    FileType:
+      title: File Type
+      type: string
+      description: File type
+      required: false
+    StartTime:
+      title: Start Time
+      type: integer
+      description: Start time
+      required: false
+    Status:
+      title: Status
+      type: string
+      description: Status
+      required: false
+  FullDetails:
+    Classification:
+      title: Classification
+      type: Classification
+      description: Classification
+      required: false
+    FileProperties:
+      title: File Properties
+      type: FileProperties
+      description: File properties
+      required: false
+    Persistence:
+      title: Persistence
+      type: "[]PersistenceSummary"
+      description: Persistence
+      required: false
+    SecurityBypass:
+      title: Security Bypass
+      type: "[]PersistenceSummary"
+      description: Security bypass
+      required: false
+    Summary:
+      title: Summary
+      type: Summary
+      description: Summary
+      required: false
+    Networking:
+      title: Networking
+      type: "[]PersistenceSummary"
+      description: Networking
+      required: false
+    Stealth:
+      title: Stealth
+      type: "[]PersistenceSummary"
+      description: Stealth
+      required: false
+    SystemSummary:
+      title: System Summary
+      type: "[]PersistenceSummary"
+      description: System summary
+      required: false
+  full_report:
+    FullDetails:
+      title: Full Details
+      type: FullDetails
+      description: Full details
+      required: false
 
 connection:
   url:
@@ -112,5 +268,5 @@ actions:
       full_report:
         title: Full Report
         description: Full report of an analyzed MD5 hash
-        type: object
+        type: full_report
         required: true

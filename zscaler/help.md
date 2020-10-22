@@ -61,7 +61,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|full_report|object|True|Full report of an analyzed MD5 hash|
+|full_report|full_report|True|Full report of an analyzed MD5 hash|
 
 Example output:
 
