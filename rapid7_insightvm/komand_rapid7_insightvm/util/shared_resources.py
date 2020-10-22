@@ -69,7 +69,7 @@ def resource_request_status_code_check(response_text: str, status_code: str) -> 
         status_code_message = _ERRORS.get(status_code, _ERRORS[000])
         assistance = _ASSISTANCE.get(status_code, _ASSISTANCE[000])
         try:
-            response_json = json.dumps(response_text)
+            response_json = json.loads(response_text)
             error = response_json.get('message', {})
         except (KeyError, json.decoder.JSONDecodeError):
             raise PluginException(cause=f'Malformed JSON received along with a status code of {status_code_message}',
