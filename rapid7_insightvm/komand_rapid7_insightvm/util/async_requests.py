@@ -20,7 +20,7 @@ class AsyncRequests:
     async def async_request(session, endpoint: str, method: str = 'get', params: Collection = None, payload: dict = None,
                             json_response: bool = True):
         """
-        Sends a asynchronous request to APIv3 with the provided endpoint and optional method/payload
+        Sends an asynchronous request to APIv3 with the provided endpoint and optional method/body
         :param session" The asynchronous session
         :param endpoint: Endpoint for the APIv3 call defined in endpoints.py
         :param method: HTTP method for the API request
