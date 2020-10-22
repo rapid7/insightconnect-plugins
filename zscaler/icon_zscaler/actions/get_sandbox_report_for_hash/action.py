@@ -19,7 +19,7 @@ class GetSandboxReportForHash(insightconnect_plugin_runtime.Action):
         if not validators.md5(hash_to_analyze):
             raise PluginException(
                 cause="Provided hash is not supported.",
-                assistance="API supported only MD5 hash. Please check provided hash and try again."
+                assistance="The API only supports MD5 hashes. Please check the provided hash and try again."
             )
         return {
             Output.FULL_REPORT: self.connection.client.get_hash_report(hash_to_analyze)
