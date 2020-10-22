@@ -15,6 +15,18 @@
 
 ## Setup
 
+1. Create an Azure Active Directory application.
+2. Assign the following API Permissions to the application:
+    * Within Microsoft Graph select Delegated Permissions and pick below permissions under DeviceManagementManagedDevices:
+        * DeviceManagementManagedDevices.PrivilegedOperations.All
+        * DeviceManagementManagedDevices.Read.All
+        * DeviceManagementManagedDevices.ReadWrite.All
+    * Please note, these API Permissions require administrator consent.
+3. Create a new secret and copy and paste the secret value into the connection.
+4. Copy and paste the 'Application (client) ID' and 'Directory (tenant) ID' (from the Overview tab) into the connection.
+
+For detailed instructions refer to [Microsoft Documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal).
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -31,7 +43,10 @@ Example input:
 {
   "client_id": "a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d",
   "client_secret": "kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=",
-  "credentials": "{\"username\": \"user@example.com\", \"password\": \"mypassword\"}",
+  "credentials": {
+    "username": "user@example.com",
+    "password": "mypassword"
+  },
   "tenant_id": "3a522933-ae5e-2b63-96ab-3c004b4f7f10",
   "url": "https://graph.microsoft.com"
 }
