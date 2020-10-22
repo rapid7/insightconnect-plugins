@@ -10,13 +10,13 @@ class Component:
 class Input:
     AGENTS = "agents"
     WHITELIST = "whitelist"
-    
+
 
 class Output:
     DELETED = "deleted"
     NOT_DELETED = "not_deleted"
     SUCCESS = "success"
-    
+
 
 class DeleteAssetInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""

@@ -20,10 +20,8 @@ class Connection(komand.Connection):
         port = params.get(Input.PORT)
         user_name = params.get(Input.USERNAME_PASSWORD).get('username')
         password = params.get(Input.USERNAME_PASSWORD).get('password')
-        if host.find(':') != -1:
-            self.logger.info('Port was provided in hostname, using value from Port field instead')
-            host = host.split(':')
-            host = host[0]
+
+        host = self.host_formatter(host)
         self.logger.info(f'Connecting to {host}:{port}')
 
         server = ldap3.Server(
@@ -80,3 +78,21 @@ class Connection(komand.Connection):
             raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED)
 
         return {'connection': 'successful'}
+
+    def host_formatter(self, host: str) -> str:
+        """
+        Formats The host as needed for the connection
+        """
+        colons = host.count(':')
+        if colons > 0:
+            self.logger.info('Port was provided in hostname, using value from Port field instead')
+            host = host.split(':')
+            if colons == 1:
+                host = host[0]
+            elif colons == 2:
+                host = f'{host[0]}:{host[1]}'
+            else:
+                raise ConnectionTestException(cause=f'There are too many colons ({colons}) in the host name ({host}).',
+                                              assistance='Check that the host name is correct',
+                                              data=host)
+        return host

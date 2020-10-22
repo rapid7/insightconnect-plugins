@@ -10,11 +10,11 @@ class Component:
 class Input:
     AGENT = "agent"
     WHITELIST = "whitelist"
-    
+
 
 class Output:
     LOCKDOWN_DETAILS = "lockdown_details"
-    
+
 
 class QuarantineInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""

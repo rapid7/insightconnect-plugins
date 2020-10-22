@@ -6,6 +6,7 @@ import json
 class Input:
     API_KEY = "api_key"
     REGION = "region"
+    SSL_VERIFY = "ssl_verify"
     
 
 class ConnectionSchema(komand.Input):
@@ -30,11 +31,19 @@ class ConnectionSchema(komand.Input):
         "Europe"
       ],
       "order": 1
+    },
+    "ssl_verify": {
+      "type": "boolean",
+      "title": "SSL Verify",
+      "description": "SSL Verify",
+      "default": false,
+      "order": 3
     }
   },
   "required": [
     "api_key",
-    "region"
+    "region",
+    "ssl_verify"
   ],
   "definitions": {
     "credential_secret_key": {

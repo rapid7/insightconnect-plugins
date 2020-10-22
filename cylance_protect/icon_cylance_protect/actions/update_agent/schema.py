@@ -12,11 +12,11 @@ class Input:
     AGENT = "agent"
     POLICY = "policy"
     REMOVE_ZONES = "remove_zones"
-    
+
 
 class Output:
     SUCCESS = "success"
-    
+
 
 class UpdateAgentInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
