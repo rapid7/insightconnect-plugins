@@ -6,7 +6,7 @@ from .shared_resources import *
 
 class AsyncRequests:
 
-    def __init__(self, username, password):
+    def __init__(self, username: str, password: str):
         self.auth = aiohttp.BasicAuth(login=username, password=password)
 
     def get_async_session(self) -> aiohttp.ClientSession:
