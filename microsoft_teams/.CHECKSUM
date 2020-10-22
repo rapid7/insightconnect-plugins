@@ -1,7 +1,7 @@
 {
-	"spec": "87d9e315f05a735ab8d91d0bf6c037f7",
-	"manifest": "1cadd0ff558cdcbd7bfabdbefb015659",
-	"setup": "3f97fa96284294e5b5c035533d60b3a8",
+	"spec": "6bdeca54677925eb44ba2cb1de78ae61",
+	"manifest": "b67b4fb28ac14a3327f42af04d4a6d68",
+	"setup": "c4f47dfb1fddaacb09db8fdc92bc2b93",
 	"schemas": [
 		{
 			"identifier": "add_channel_to_team/schema.py",
