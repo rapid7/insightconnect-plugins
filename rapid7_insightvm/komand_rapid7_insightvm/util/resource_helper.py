@@ -38,7 +38,7 @@ class ResourceHelper(object):
     """
 
     # Currently only handling the most common requests exceptions more can be added as needed
-    Request_exceptions = {
+    REQUEST_EXCEPTIONS = {
         requests.HTTPError: '',
         requests.ConnectionError: '',
         requests.Timeout: 'Ensure proper network connectivity between the InsightConnect orchestrator and the InsightVM console',
