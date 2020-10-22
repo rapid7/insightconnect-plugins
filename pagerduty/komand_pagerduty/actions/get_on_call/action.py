@@ -1,7 +1,6 @@
 import komand
 from .schema import GetOnCallInput, GetOnCallOutput, Input, Output, Component
 # Custom imports below
-import pypd
 from komand.exceptions import PluginException
 
 
