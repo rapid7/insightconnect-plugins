@@ -182,10 +182,10 @@ Example input:
 
 ```
 {
-  "channel_guid": "xxxxx-xxxxx-xxxx-xxxx",
-  "is_html": false,
+  "channel_name": "InsightConnect Channel",
   "message": "Hello!",
-  "team_guid": "xxxxx-xxxxx-xxxx-xxxx"
+  "team_name": "InsightConnect Team",
+  "thread_id": 1595889908700
 }
 ```
 

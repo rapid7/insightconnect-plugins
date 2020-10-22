@@ -3,6 +3,7 @@ from .schema import SendHtmlMessageInput, SendHtmlMessageOutput, Input, Output, 
 # Custom imports below
 from icon_microsoft_teams.util.teams_utils import get_teams_from_microsoft, get_channels_from_microsoft, send_html_message
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
+from icon_microsoft_teams.util.words_utils import add_words_values_to_message
 
 
 class SendHtmlMessage(komand.Action):
@@ -30,8 +31,9 @@ class SendHtmlMessage(komand.Action):
             thread_id=params.get(Input.THREAD_ID, None)
         )
 
-
+        message = remove_null_and_clean(message)
+        message = add_words_values_to_message(message)
 
         return {
-            Output.MESSAGE: remove_null_and_clean(message)
+            Output.MESSAGE: message
         }
