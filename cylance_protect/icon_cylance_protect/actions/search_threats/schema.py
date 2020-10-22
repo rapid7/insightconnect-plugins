@@ -10,11 +10,11 @@ class Component:
 class Input:
     SCORE = "score"
     THREAT_IDENTIFIER = "threat_identifier"
-    
+
 
 class Output:
     THREATS = "threats"
-    
+
 
 class SearchThreatsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""

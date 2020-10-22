@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: servicenow
 title: ServiceNow
 description: ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes
-version: 4.0.0
+version: 4.1.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -67,17 +67,20 @@ connection:
     description: The full URL for your instance of ServiceNow, e.g. https://instance.servicenow.com
     type: string
     required: true
+    example: https://instance.servicenow.com
   client_login:
     title: Client Login Information
     description: The ServiceNow username and password for basic authentication API interaction
     type: credential_username_password
     required: true
+    example: '{"username":"user1", "password":"mypassword"}'
   timeout:
     title: Timeout
     description: The interval in seconds before abandoning an attempt to access ServiceNow
     type: integer
     required: false
     default: 30
+    example: 30
 actions:
   create_incident:
     title: Create Incident
@@ -400,4 +403,27 @@ triggers:
         title: Changed Fields
         description: JSON object representing changed fields (map of field name to previous and current values)
         type: object
+        required: true
+  incident_created:
+    title: Incident Created
+    description: Identifies if a new incident has been created
+    input:
+      query:
+        title: Query
+        description: Non-encoded query string to match new incident records (will poll for any new incident if query is omitted)
+        type: string
+        required: false
+        example: short_description=Newbug
+      frequency:
+        title: Frequency
+        description: How often to poll for new incidents (in seconds)
+        type: integer
+        required: true
+        default: 5
+        example: 5
+    output:
+      system_id:
+        title: System ID
+        description: System ID of new incident
+        type: string
         required: true

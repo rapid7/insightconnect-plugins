@@ -28,13 +28,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.api.refresh_access_token()
 
     def test(self):
-        self.logger.info("Starting connection test:")   
+        self.logger.info("Starting connection test:")
 
         try:
             self.api.search_managed_devices("nonexistinguser@example.com")
         except PluginException as e:
             raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e)
 
-        self.logger.info("Successfully finished connection testing:")   
+        self.logger.info("Successfully finished connection testing:")
 
         return {}

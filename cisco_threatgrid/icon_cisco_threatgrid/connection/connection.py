@@ -19,10 +19,12 @@ class Connection(komand.Connection):
         else:
             self.base_url = "https://panacea.threatgrid.com"
 
+        ssl_verify = params.get(Input.SSL_VERIFY, False)
         self.api: ThreatGrid = ThreatGrid(
             api_key=params.get(Input.API_KEY).get("secretKey"),
             base_url=self.base_url,
             logger=self.logger,
+            ssl_verify=ssl_verify
         )
 
     def test(self):

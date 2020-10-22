@@ -48,7 +48,7 @@ class CylanceProtectAPI:
                 cause="Agent not found.",
                 assistance=f"Unable to find any agents using identifier provided: {agent}."
             )
-            
+
         return agents
 
     def search_agents(self, agent: str, device_list: list) -> list:
