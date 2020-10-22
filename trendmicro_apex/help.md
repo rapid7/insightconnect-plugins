@@ -757,7 +757,7 @@ For example, the agent / endpoint actions require that the Apex Endpoint Sensor 
 
 # Version History
 
-* 4.0.0 - Change action title Add File to UDSO to Blacklist File | Change input name Notes to Description in action Blacklist File
+* 4.0.0 - Change action title from "Add File to UDSO" to "Blacklist File" | Change input name Notes to Description in Blacklist File action
 * 3.0.1 - Fix issue in URL parameter of Connection where an extraneous forward-slash would not pass the connection test
 * 3.0.0 - Update action Add to UDSO List to Blacklist
 * 2.0.0 - Update action Execute Agent Action to Quarantine
