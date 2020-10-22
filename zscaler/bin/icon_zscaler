@@ -36,7 +36,6 @@ def main():
             )
             self.add_action(actions.BlacklistUrl())
 
-            self.add_action(actions.LookupUrl())
             self.add_action(actions.GetSandboxReportForHash())
 
             self.add_action(actions.LookupUrl())

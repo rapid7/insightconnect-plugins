@@ -67,8 +67,8 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
         },
         "DetectedMalware": {
           "type": "string",
-          "title": "Detectedmalware",
-          "description": "Detectedmalware",
+          "title": "Detected Malware",
+          "description": "Detected malware",
           "order": 2
         },
         "Score": {
@@ -91,20 +91,20 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "DigitalCerificate": {
           "type": "string",
-          "title": "Digitalcerificate",
-          "description": "Digitalcerificate",
+          "title": "Digital Cerificate",
+          "description": "Digital cerificate",
           "order": 1
         },
         "FileSize": {
           "type": "integer",
-          "title": "Filesize",
-          "description": "Filesize",
+          "title": "File Size",
+          "description": "File size",
           "order": 2
         },
         "FileType": {
           "type": "string",
-          "title": "Filetype",
-          "description": "Filetype",
+          "title": "File Type",
+          "description": "File type",
           "order": 3
         },
         "Issuer": {
@@ -115,32 +115,32 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
         },
         "MD5": {
           "type": "string",
-          "title": "Md5",
-          "description": "Md5",
+          "title": "MD5",
+          "description": "MD5",
           "order": 5
         },
         "RootCA": {
           "type": "string",
-          "title": "Rootca",
-          "description": "Rootca",
+          "title": "Root CA",
+          "description": "Root CA",
           "order": 6
         },
         "SHA1": {
           "type": "string",
-          "title": "Sha1",
-          "description": "Sha1",
+          "title": "SHA1",
+          "description": "SHA1",
           "order": 7
         },
         "SSDeep": {
           "type": "string",
-          "title": "Ssdeep",
-          "description": "Ssdeep",
+          "title": "SS Deep",
+          "description": "SS deep",
           "order": 8
         },
         "Sha256": {
           "type": "string",
-          "title": "Sha256",
-          "description": "Sha256",
+          "title": "SHA256",
+          "description": "SHA256",
           "order": 9
         }
       }
@@ -157,8 +157,8 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
         },
         "FileProperties": {
           "$ref": "#/definitions/FileProperties",
-          "title": "Fileproperties",
-          "description": "Fileproperties",
+          "title": "File Properties",
+          "description": "File properties",
           "order": 2
         },
         "Networking": {
@@ -181,8 +181,8 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
         },
         "SecurityBypass": {
           "type": "array",
-          "title": "Securitybypass",
-          "description": "Securitybypass",
+          "title": "Security Bypass",
+          "description": "Security bypass",
           "items": {
             "$ref": "#/definitions/PersistenceSummary"
           },
@@ -205,8 +205,8 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
         },
         "SystemSummary": {
           "type": "array",
-          "title": "Systemsummary",
-          "description": "Systemsummary",
+          "title": "System Summary",
+          "description": "System summary",
           "items": {
             "$ref": "#/definitions/PersistenceSummary"
           },
@@ -226,8 +226,8 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
             },
             "DetectedMalware": {
               "type": "string",
-              "title": "Detectedmalware",
-              "description": "Detectedmalware",
+              "title": "Detected Malware",
+              "description": "Detected malware",
               "order": 2
             },
             "Score": {
@@ -250,20 +250,20 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "DigitalCerificate": {
               "type": "string",
-              "title": "Digitalcerificate",
-              "description": "Digitalcerificate",
+              "title": "Digital Cerificate",
+              "description": "Digital cerificate",
               "order": 1
             },
             "FileSize": {
               "type": "integer",
-              "title": "Filesize",
-              "description": "Filesize",
+              "title": "File Size",
+              "description": "File size",
               "order": 2
             },
             "FileType": {
               "type": "string",
-              "title": "Filetype",
-              "description": "Filetype",
+              "title": "File Type",
+              "description": "File type",
               "order": 3
             },
             "Issuer": {
@@ -274,32 +274,32 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
             },
             "MD5": {
               "type": "string",
-              "title": "Md5",
-              "description": "Md5",
+              "title": "MD5",
+              "description": "MD5",
               "order": 5
             },
             "RootCA": {
               "type": "string",
-              "title": "Rootca",
-              "description": "Rootca",
+              "title": "Root CA",
+              "description": "Root CA",
               "order": 6
             },
             "SHA1": {
               "type": "string",
-              "title": "Sha1",
-              "description": "Sha1",
+              "title": "SHA1",
+              "description": "SHA1",
               "order": 7
             },
             "SSDeep": {
               "type": "string",
-              "title": "Ssdeep",
-              "description": "Ssdeep",
+              "title": "SS Deep",
+              "description": "SS deep",
               "order": 8
             },
             "Sha256": {
               "type": "string",
-              "title": "Sha256",
-              "description": "Sha256",
+              "title": "SHA256",
+              "description": "SHA256",
               "order": 9
             }
           }
@@ -322,8 +322,8 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
             },
             "SignatureSources": {
               "type": "array",
-              "title": "Signaturesources",
-              "description": "Signaturesources",
+              "title": "Signature Sources",
+              "description": "Signature sources",
               "items": {
                 "type": "string"
               },
@@ -349,14 +349,14 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
             },
             "FileType": {
               "type": "string",
-              "title": "Filetype",
-              "description": "Filetype",
+              "title": "File Type",
+              "description": "File type",
               "order": 3
             },
             "StartTime": {
               "type": "integer",
-              "title": "Starttime",
-              "description": "Starttime",
+              "title": "Start Time",
+              "description": "Start time",
               "order": 4
             },
             "Status": {
@@ -387,8 +387,8 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
         },
         "SignatureSources": {
           "type": "array",
-          "title": "Signaturesources",
-          "description": "Signaturesources",
+          "title": "Signature Sources",
+          "description": "Signature sources",
           "items": {
             "type": "string"
           },
@@ -414,14 +414,14 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
         },
         "FileType": {
           "type": "string",
-          "title": "Filetype",
-          "description": "Filetype",
+          "title": "File Type",
+          "description": "File type",
           "order": 3
         },
         "StartTime": {
           "type": "integer",
-          "title": "Starttime",
-          "description": "Starttime",
+          "title": "Start Time",
+          "description": "Start time",
           "order": 4
         },
         "Status": {
@@ -456,8 +456,8 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
             },
             "DetectedMalware": {
               "type": "string",
-              "title": "Detectedmalware",
-              "description": "Detectedmalware",
+              "title": "Detected Malware",
+              "description": "Detected malware",
               "order": 2
             },
             "Score": {
@@ -480,20 +480,20 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "DigitalCerificate": {
               "type": "string",
-              "title": "Digitalcerificate",
-              "description": "Digitalcerificate",
+              "title": "Digital Cerificate",
+              "description": "Digital cerificate",
               "order": 1
             },
             "FileSize": {
               "type": "integer",
-              "title": "Filesize",
-              "description": "Filesize",
+              "title": "File Size",
+              "description": "File size",
               "order": 2
             },
             "FileType": {
               "type": "string",
-              "title": "Filetype",
-              "description": "Filetype",
+              "title": "File Type",
+              "description": "File type",
               "order": 3
             },
             "Issuer": {
@@ -504,32 +504,32 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
             },
             "MD5": {
               "type": "string",
-              "title": "Md5",
-              "description": "Md5",
+              "title": "MD5",
+              "description": "MD5",
               "order": 5
             },
             "RootCA": {
               "type": "string",
-              "title": "Rootca",
-              "description": "Rootca",
+              "title": "Root CA",
+              "description": "Root CA",
               "order": 6
             },
             "SHA1": {
               "type": "string",
-              "title": "Sha1",
-              "description": "Sha1",
+              "title": "SHA1",
+              "description": "SHA1",
               "order": 7
             },
             "SSDeep": {
               "type": "string",
-              "title": "Ssdeep",
-              "description": "Ssdeep",
+              "title": "SS Deep",
+              "description": "SS deep",
               "order": 8
             },
             "Sha256": {
               "type": "string",
-              "title": "Sha256",
-              "description": "Sha256",
+              "title": "SHA256",
+              "description": "SHA256",
               "order": 9
             }
           }
@@ -546,8 +546,8 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
             },
             "FileProperties": {
               "$ref": "#/definitions/FileProperties",
-              "title": "Fileproperties",
-              "description": "Fileproperties",
+              "title": "File Properties",
+              "description": "File properties",
               "order": 2
             },
             "Networking": {
@@ -570,8 +570,8 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
             },
             "SecurityBypass": {
               "type": "array",
-              "title": "Securitybypass",
-              "description": "Securitybypass",
+              "title": "Security Bypass",
+              "description": "Security bypass",
               "items": {
                 "$ref": "#/definitions/PersistenceSummary"
               },
@@ -594,8 +594,8 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
             },
             "SystemSummary": {
               "type": "array",
-              "title": "Systemsummary",
-              "description": "Systemsummary",
+              "title": "System Summary",
+              "description": "System summary",
               "items": {
                 "$ref": "#/definitions/PersistenceSummary"
               },
@@ -615,8 +615,8 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
                 },
                 "DetectedMalware": {
                   "type": "string",
-                  "title": "Detectedmalware",
-                  "description": "Detectedmalware",
+                  "title": "Detected Malware",
+                  "description": "Detected malware",
                   "order": 2
                 },
                 "Score": {
@@ -639,20 +639,20 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
               "properties": {
                 "DigitalCerificate": {
                   "type": "string",
-                  "title": "Digitalcerificate",
-                  "description": "Digitalcerificate",
+                  "title": "Digital Cerificate",
+                  "description": "Digital cerificate",
                   "order": 1
                 },
                 "FileSize": {
                   "type": "integer",
-                  "title": "Filesize",
-                  "description": "Filesize",
+                  "title": "File Size",
+                  "description": "File size",
                   "order": 2
                 },
                 "FileType": {
                   "type": "string",
-                  "title": "Filetype",
-                  "description": "Filetype",
+                  "title": "File Type",
+                  "description": "File type",
                   "order": 3
                 },
                 "Issuer": {
@@ -663,32 +663,32 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
                 },
                 "MD5": {
                   "type": "string",
-                  "title": "Md5",
-                  "description": "Md5",
+                  "title": "MD5",
+                  "description": "MD5",
                   "order": 5
                 },
                 "RootCA": {
                   "type": "string",
-                  "title": "Rootca",
-                  "description": "Rootca",
+                  "title": "Root CA",
+                  "description": "Root CA",
                   "order": 6
                 },
                 "SHA1": {
                   "type": "string",
-                  "title": "Sha1",
-                  "description": "Sha1",
+                  "title": "SHA1",
+                  "description": "SHA1",
                   "order": 7
                 },
                 "SSDeep": {
                   "type": "string",
-                  "title": "Ssdeep",
-                  "description": "Ssdeep",
+                  "title": "SS Deep",
+                  "description": "SS deep",
                   "order": 8
                 },
                 "Sha256": {
                   "type": "string",
-                  "title": "Sha256",
-                  "description": "Sha256",
+                  "title": "SHA256",
+                  "description": "SHA256",
                   "order": 9
                 }
               }
@@ -711,8 +711,8 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
                 },
                 "SignatureSources": {
                   "type": "array",
-                  "title": "Signaturesources",
-                  "description": "Signaturesources",
+                  "title": "Signature Sources",
+                  "description": "Signature sources",
                   "items": {
                     "type": "string"
                   },
@@ -738,14 +738,14 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
                 },
                 "FileType": {
                   "type": "string",
-                  "title": "Filetype",
-                  "description": "Filetype",
+                  "title": "File Type",
+                  "description": "File type",
                   "order": 3
                 },
                 "StartTime": {
                   "type": "integer",
-                  "title": "Starttime",
-                  "description": "Starttime",
+                  "title": "Start Time",
+                  "description": "Start time",
                   "order": 4
                 },
                 "Status": {
@@ -776,8 +776,8 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
             },
             "SignatureSources": {
               "type": "array",
-              "title": "Signaturesources",
-              "description": "Signaturesources",
+              "title": "Signature Sources",
+              "description": "Signature sources",
               "items": {
                 "type": "string"
               },
@@ -803,14 +803,14 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
             },
             "FileType": {
               "type": "string",
-              "title": "Filetype",
-              "description": "Filetype",
+              "title": "File Type",
+              "description": "File type",
               "order": 3
             },
             "StartTime": {
               "type": "integer",
-              "title": "Starttime",
-              "description": "Starttime",
+              "title": "Start Time",
+              "description": "Start time",
               "order": 4
             },
             "Status": {
