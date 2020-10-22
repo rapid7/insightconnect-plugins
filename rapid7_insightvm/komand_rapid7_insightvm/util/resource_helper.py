@@ -41,7 +41,7 @@ class ResourceHelper(object):
     Request_exceptions = {
         requests.HTTPError: '',
         requests.ConnectionError: '',
-        requests.Timeout: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
+        requests.Timeout: 'Ensure proper network connectivity between the InsightConnect orchestrator and the InsightVM console',
         requests.ConnectTimeout: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
         requests.ReadTimeout: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
         requests.TooManyRedirects: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
