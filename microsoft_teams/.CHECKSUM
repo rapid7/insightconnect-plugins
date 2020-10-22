@@ -1,7 +1,7 @@
 {
-	"spec": "ea3036df8f58c7a35cf3d27ffcd94037",
-	"manifest": "85ae105c0f9ebf307021529648d0b2a5",
-	"setup": "142fc60a1e740c12047ce52324d165b3",
+	"spec": "ca518f86f57438959ec7f483af8c10f5",
+	"manifest": "1cadd0ff558cdcbd7bfabdbefb015659",
+	"setup": "3f97fa96284294e5b5c035533d60b3a8",
 	"schemas": [
 		{
 			"identifier": "add_channel_to_team/schema.py",
@@ -37,15 +37,15 @@
 		},
 		{
 			"identifier": "send_html_message/schema.py",
-			"hash": "b1dac99106d5e8e04c9f180614a5cd4b"
+			"hash": "8681bc69f4dcba8293940413a2834242"
 		},
 		{
 			"identifier": "send_message/schema.py",
-			"hash": "46cdc7202618e9e463e6a5b6b3573449"
+			"hash": "11b3437cdef0875763fb38df0675b0eb"
 		},
 		{
 			"identifier": "send_message_by_guid/schema.py",
-			"hash": "9f55b4c263f230ee5507fe9e5deee461"
+			"hash": "3da8ea0b6eb5c71d6b48e13c9c1d03cd"
 		},
 		{
 			"identifier": "connection/schema.py",
@@ -53,7 +53,7 @@
 		},
 		{
 			"identifier": "new_message_received/schema.py",
-			"hash": "be69266c63b680399f214a3c3bb47d09"
+			"hash": "4d0636dfcc2a8d46e9f3dfe364c2fb99"
 		}
 	]
 }
