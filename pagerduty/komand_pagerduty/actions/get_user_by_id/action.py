@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetUserByIdInput, GetUserByIdOutput
 # Custom imports below
 import pypd
 from komand_pagerduty.util.util import empty_user, normalize_user
 
 
-class GetUserById(komand.Action):
+class GetUserById(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
                 name='get_user_by_id',

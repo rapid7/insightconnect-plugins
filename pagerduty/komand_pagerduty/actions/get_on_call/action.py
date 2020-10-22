@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetOnCallInput, GetOnCallOutput, Input, Output, Component
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class GetOnCall(komand.Action):
+class GetOnCall(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -39,4 +39,4 @@ class GetOnCall(komand.Action):
             user_response = self.connection.api_connection.get(f"https://api.pagerduty.com/users/{user_id}")
             users.append(user_response.json().get("user"))
 
-        return {Output.USERS: komand.helper.clean(users)}
+        return {Output.USERS: insightconnect_plugin_runtime.helper.clean(users)}

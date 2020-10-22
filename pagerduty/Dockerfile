@@ -1,4 +1,4 @@
-FROM komand/python-3-37-slim-plugin:3
+FROM rapid7/insightconnect-python-3-38-slim-plugin:4
 # The three supported python parent images are:
 # - komand/python-2-plugin
 # - komand/python-3-plugin
