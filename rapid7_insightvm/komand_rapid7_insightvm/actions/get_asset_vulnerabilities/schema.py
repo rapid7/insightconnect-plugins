@@ -31,7 +31,7 @@ class GetAssetVulnerabilitiesInput(komand.Input):
     "get_risk_score": {
       "type": "boolean",
       "title": "Get Risk Score",
-      "description": "Return risk score allong with other vulnerability data",
+      "description": "Return risk score along with other vulnerability data",
       "order": 2
     }
   },

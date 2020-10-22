@@ -1,5 +1,5 @@
 {
-	"spec": "0869b6e47db5557d3ec9ecd4b09c193c",
+	"spec": "2b5b37ce865b6d2a97ad02614f9898d2",
 	"manifest": "c134c7fd62bcb61675e744d3d5224990",
 	"setup": "7e727a03d87fd5066e64758575ae9538",
 	"schemas": [
@@ -125,7 +125,7 @@
 		},
 		{
 			"identifier": "get_asset_vulnerabilities/schema.py",
-			"hash": "a2c65971699b480505d034e64926fba3"
+			"hash": "2f0bf6da187bde3df66f67cbd5050c94"
 		},
 		{
 			"identifier": "get_authentication_source/schema.py",
