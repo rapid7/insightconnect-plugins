@@ -29,7 +29,7 @@ class GetOnCall(komand.Action):
         user_ids = []
         for oncall_object in response_object.get("oncalls"):
             try:
-                user_ids.append(oncall_object.get("user").get("id"))
+                user_ids.append(oncall_object["user"]["id"])
             except Exception as e:
                 self.logger.info(f"User ID not available: {str(e)}")
                 pass
