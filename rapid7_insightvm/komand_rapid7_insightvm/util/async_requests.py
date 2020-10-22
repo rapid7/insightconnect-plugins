@@ -21,7 +21,7 @@ class AsyncRequests:
                             json_response: bool = True):
         """
         Sends an asynchronous request to APIv3 with the provided endpoint and optional method/body
-        :param session" The asynchronous session
+        :param session: The asynchronous session
         :param endpoint: Endpoint for the APIv3 call defined in endpoints.py
         :param method: HTTP method for the API request
         :param params: URL parameters to append to the request
