@@ -45,12 +45,9 @@ class SearchForSampleReportBySha256Output(komand.Output):
   "title": "Variables",
   "properties": {
     "sample_report_list": {
-      "type": "array",
+      "$ref": "#/definitions/sample_report",
       "title": "Sample Report List",
       "description": "Sample report list",
-      "items": {
-        "$ref": "#/definitions/sample_report"
-      },
       "order": 1
     }
   },

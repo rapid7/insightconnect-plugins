@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Recorded Future"
 Vendor = "rapid7"
-Version = "2.0.1"
+Version = "3.1.1"
 Description = "Recorded Future arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7 InsightConnect, users can search domain lists, entity lists, and more"
 
 
@@ -34,11 +34,15 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_trigger(triggers.GetNewAlerts())
+
             self.add_action(actions.DownloadIPAddressesRiskList())
 
             self.add_action(actions.DownloadDomainRiskList())
 
             self.add_action(actions.DownloadHashRiskList())
+
+            self.add_action(actions.DownloadUrlRiskList())
 
             self.add_action(actions.DownloadVulnerabilityRiskList())
 
@@ -48,9 +52,13 @@ def main():
 
             self.add_action(actions.ListHashRiskRules())
 
+            self.add_action(actions.ListUrlRiskRules())
+
             self.add_action(actions.ListVulnerabilityRiskRules())
 
             self.add_action(actions.LookupIPAddress())
+
+            self.add_action(actions.LookupAlert())
 
             self.add_action(actions.LookupDomain())
 
@@ -73,6 +81,8 @@ def main():
             self.add_action(actions.SearchHashes())
 
             self.add_action(actions.SearchMalware())
+
+            self.add_action(actions.SearchUrls())
 
             self.add_action(actions.SearchVulnerabilities())
 

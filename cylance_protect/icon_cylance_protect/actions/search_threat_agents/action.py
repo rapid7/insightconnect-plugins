@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import SearchThreatAgentsInput, SearchThreatAgentsOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 # Custom imports below
 
 

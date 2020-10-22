@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import MatchBase64Input, MatchBase64Output, Input, Output
 # Custom imports below
 from bs4 import UnicodeDammit
@@ -6,7 +6,7 @@ import base64
 from icon_grep.util import utils
 
 
-class MatchBase64(komand.Action):
+class MatchBase64(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -23,18 +23,13 @@ class MatchBase64(komand.Action):
             self.logger.debug("Error decoding")
             self.logger.debug(ex)
             decoded = UnicodeDammit.detwingle(data).decode('utf-8', errors='ignore')
+        pattern = params.get(Input.PATTERN)
+        behavior = params.get(Input.BEHAVIOR)
 
-        output = utils.process_grep(
-            utils.cat_lines(
-                self.logger,
-                decoded,
-                params.get(Input.PATTERN),
-                params.get(Input.BEHAVIOR)
-            )
-        )
+        output = utils.process_grep(utils.run_grep(self.logger, decoded, pattern, behavior))
 
         return {
-            Output.FOUND: output.get(utils.FOUND),
-            Output.HITS: output.get(utils.HITS),
-            Output.MATCHES: output.get(utils.MATCHES)
+            Output.FOUND: output.get('found'),
+            Output.HITS: output.get('hits'),
+            Output.MATCHES: output.get('matches')
         }

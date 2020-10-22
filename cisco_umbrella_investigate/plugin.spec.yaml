@@ -9,7 +9,7 @@ status: []
 description: This plugin utilizes Cisco Umbrella Investigate to get the most complete view of the relationships
   and evolution of Internet domains, IP addresses, and autonomous systems to pinpoint
   attackers infrastructures and predict future threats
-version: 3.0.0
+version: 3.1.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cisco_umbrella_investigate
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -24,6 +24,158 @@ hub_tags:
   features: []
 language: python
 types:
+  records:
+    contentCategories:
+      title: Content Categories
+      description: The Umbrella content categories
+      type: "[]string"
+      required: false
+    firstSeen:
+      title: First Seen
+      description: The first time a query was seen by Umbrella for the domain, in epoch time
+      type: integer
+      required: false
+    firstSeenISO:
+      title: First Seen ISO
+      description: The first time a query was seen by Umbrella for the domain, in ISO date and time format
+      type: string
+      required: false
+    lastSeen:
+      title: Last Seen
+      description: The last time a query was seen by Umbrella for the domain, in epoch time
+      type: integer
+      required: false
+    lastSeenISO:
+      title: Last Seen ISO
+      description: The last time a query was seen by Umbrella for the domain, in ISO date and time format
+      type: string
+      required: false
+    maxTtl:
+      title: Maximum TTL
+      description: The maximum TTL for the record in seconds
+      type: integer
+      required: false
+    minTtl:
+      title: Minimum TTL
+      description: The minimum TTL for the record in seconds
+      type: integer
+      required: false
+    name:
+      title: Name
+      description: The query
+      type: string
+      required: false
+    rr:
+      title: RR
+      description: The DNS resource record (RR)
+      type: string
+      required: false
+    securityCategories:
+      title: Security Categories
+      description: The Umbrella security categories
+      type: "[]string"
+      required: false
+    type:
+      title: Type
+      description: The DNS record type
+      type: string
+      required: false
+  page_info:
+    hasMoreRecords:
+      title: Has More Records
+      description: Whether the query has more records
+      type: boolean
+      required: false
+    offset:
+      title: Offset
+      description: The amount by which to offset the records
+      type: integer
+      required: false
+    limit:
+      title: Limit
+      description: The maximum number of records to return
+      type: integer
+      required: false
+    totalNumRecords:
+      title: Total Number Of Records
+      description: Total number of records provided for a query
+      type: integer
+      required: false
+  record_info:
+    minTtl:
+      title: Minimum TTL
+      description: The minimum TTL for the record in seconds
+      type: integer
+      required: false
+    maxTtl:
+      title: Maximum TTL
+      description: The maximum TTL for the record in seconds
+      type: integer
+      required: false
+    totalMaliciousDomain:
+      title: Total Malicious Domain
+      description: Total number of malicious domains for a query
+      type: integer
+      required: false
+    totalMaliciousIP:
+      title: Total Malicious IP
+      description: Total number of malicious IPs for a query
+      type: integer
+      required: false
+  ipData:
+    startSeen:
+      title: Start Seen
+      type: "[]string"
+      description: Data that started being seen on the given date, may contain domains, IP addresses, and TXT records
+      required: false
+    noLongerSeen:
+      title: No Longer Seen
+      type: "[]string"
+      description: Data that stopped being seen on the given date, may contain domains, IP addresses, and TXT records
+      required: false
+  dnsData:
+    ipData:
+      title: IP Data
+      type: ipData
+      description: Contains data that started/stopped being seen on the given date
+      required: false
+    recordType:
+      title: Record Type
+      type: string
+      description: The DNS record type
+      required: false
+  dns_timeline:
+    date:
+      title: Date
+      description: The date
+      type: date
+      required: false
+    dnsData:
+      title: DNS Data
+      description: Contains the DNS record type and data that started/stopped being seen on the given date
+      type: "[]dnsData"
+      required: false
+  timeline:
+    categories:
+      title: Categories
+      description: Which Umbrella security category, if any, matched the input
+      type: "[]string"
+      required: false
+    attacks:
+      title: Attacks
+      description: Which named attacks, if any, matched the input
+      type: "[]string"
+      required: false
+    threatTypes:
+      title: Threat Types
+      description: Which threat type, if any, matched in the input
+      type: "[]string"
+      required: false
+    timestamp:
+      title: Timestamp
+      description: The time when the attribution for this domain or URL changed. This is given in epoch (unix) time stamps
+      type: integer
+      required: false
   category:
     name:
       type: string
@@ -931,3 +1083,70 @@ actions:
         description: Samples
         type: array
         required: true
+  timeline:
+    title: Timeline
+    description: Shows when a domain, IP or URL was given attribution of a particular security categorization or threat type (indicators of compromise)
+    input:
+      name:
+        title: Name
+        type: string
+        description: Domain name, IP address or URL
+        required: true
+        example: example.com
+    output:
+      timeline:
+        title: Timeline
+        description: Provided data for a queried domain name, IP address or URL
+        type: '[]timeline'
+        required: true
+  passive_dns:
+    title: Passive DNS
+    description: Provides historical data from our resolvers for domains, IPs, and other resource records
+    input:
+      resource_records:
+        title: Resource Records
+        type: string
+        description: Resource records for which historical data is provided
+        enum:
+          - Domain
+          - Name
+          - IP Address
+          - Raw Text
+          - Timeline
+        required: true
+        default: Domain
+        example: Domain
+      name:
+        title: Name
+        type: string
+        description: Domain name, IP address or text
+        required: true
+        example: example.com
+      recordType:
+        title: Record Type
+        description: The record types (A, NS, MX, TXT, CNAME) to return, use commas to separate multiple record types
+        type: string
+        required: false
+        default: A
+        example: A
+    output:
+      records:
+        title: Records
+        description: Provided records for a queried domain name, IP address or text
+        type: '[]records'
+        required: false
+      pageInfo:
+        title: Page Info
+        description: Information about page
+        type: page_info
+        required: false
+      recordInfo:
+        title: Record Info
+        description: Information about record
+        type: record_info
+        required: false
+      timeline_data:
+        title: Timeline Data
+        description: Snapshot of passive DNS and categorization history for a queried domain name
+        type: '[]dns_timeline'
+        required: false

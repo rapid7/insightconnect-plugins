@@ -12,10 +12,20 @@
 * [Requires a Zscaler organization API Key](https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey)
 * Requires a Zscaler username and password
 
-
 # Documentation
 
 ## Setup
+
+To locate your base URI and key:
+
+1. Log in to the ZIA Admin Portal using your admin credentials.
+2. Go to **Administration > API Key Management**.
+
+In order to view the API Key Management page, the admin must be assigned an admin role that includes the Authentication Configuration functional scope.
+
+In the **Organization API Key** tab, the base URI and key details are displayed within the table.
+
+For more information see the [Zscalar getting started guide](https://help.zscaler.com/zia/api-getting-started) on obtaining the API key and base URL.
 
 The connection configuration accepts the following parameters:
 
@@ -30,7 +40,10 @@ Example input:
 ```
 {
   "api_key": "14M2d25A7c12",
-  "credentials": "{\"username\":\"user@example.com\", \"password\":\"mypassword\"}",
+  "credentials": {
+    "username":"user@example.com",
+    "password":"mypassword"
+  },
   "url": "admin.zscalerbeta.net"
 }
 ```
@@ -77,7 +90,7 @@ This action is used to add or remove URLs from a blacklist. These URLs will appe
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |blacklist_state|boolean|True|False|True to blacklist a URL, false to unblacklist a URL|None|True|
-|urls|[]string|None|True|A given set of one or more URLs to update in the blacklist. URLs must include the scheme (http, https, etc)|None|["https://www.example.com", "http://rapid7.com"]|
+|urls|[]string|None|True|A given set of one or more URLs or domains to update in the blacklist|None|["www.example.com", "http://rapid7.com"]|
 
 Example input:
 
@@ -85,7 +98,7 @@ Example input:
 {
   "blacklist_state": true,
   "urls": [
-    "https://www.example.com",
+    "www.example.com",
     "http://rapid7.com"
   ]
 }
@@ -113,7 +126,7 @@ This action is used to look up the categorization of a given set of URLs.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|urls|[]string|None|True|The given set of URLs to be looked up. URLs must not include the scheme (http, https, etc)|None|["example.com", "rapid7.com"]|
+|urls|[]string|None|True|The given set of URLs or domains to be looked up|None|["example.com", "https://rapid7.com"]|
 
 Example input:
 
@@ -121,7 +134,7 @@ Example input:
 {
   "urls": [
     "example.com",
-    "rapid7.com"
+    "https://rapid7.com"
   ]
 }
 ```
@@ -178,6 +191,7 @@ _This plugin does not contain any troubleshooting information._
 # Version History
 
 * 1.2.0 - New action Get Sandbox Report for Hash
+* 1.1.2 - Support both domains and URL inputs in the Blacklist URL and Lookup URL actions
 * 1.1.1 - Improve documentation around action inputs
 * 1.1.0 - New action Blacklist URL
 * 1.0.0 - Initial plugin
