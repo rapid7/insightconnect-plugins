@@ -45,7 +45,7 @@ class ResourceHelper(object):
         requests.ConnectTimeout: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
         requests.ReadTimeout: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
         requests.TooManyRedirects: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
-        'Unhandled exception': 'contact support for assistance'
+        'Unhandled exception': 'Contact support for assistance'
     }
 
     def __init__(self, session, logger):
