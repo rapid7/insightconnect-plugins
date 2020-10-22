@@ -30,6 +30,8 @@ class SendHtmlMessage(komand.Action):
             thread_id=params.get(Input.THREAD_ID, None)
         )
 
+
+
         return {
             Output.MESSAGE: remove_null_and_clean(message)
         }

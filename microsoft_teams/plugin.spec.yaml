@@ -196,12 +196,12 @@ types:
        title: First Word
        description: Extracted first word from message (easy way to obtain a chat command)
        type: string
-       required: false
+       required: true
      words:
        title: Words
        description: The message split by spaces into a list of words. This list makes finding and using parameters in chat commands easier
        type: "[]string"
-       required: false
+       required: true
   group:
       mailNickname:
         title: "Mail Nickname"

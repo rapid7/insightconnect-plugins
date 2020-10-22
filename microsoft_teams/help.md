@@ -33,10 +33,7 @@ Example input:
   "application_id": "63a0cad6-ac64-435c-a221-5d37c97b763e",
   "application_secret": "aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=",
   "directory_id": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0",
-  "username_password": {
-    "username": "user",
-    "password": "mypassword"
-  }
+  "username_password": "{ \"username\": \"user\", \"password\": \"mypassword\" }"
 }
 ```
 
@@ -125,7 +122,7 @@ Example input:
 ```
 {
   "channel_name": "InsightConnect Channel",
-  "message_content": "<b>Hello!</b>",
+  "message_content": "\u003cb\u003eHello!\u003c/b\u003e",
   "team_name": "InsightConnect Team",
   "thread_id": 1595889908700
 }
@@ -185,10 +182,10 @@ Example input:
 
 ```
 {
-  "channel_name": "InsightConnect Channel",
+  "channel_guid": "xxxxx-xxxxx-xxxx-xxxx",
+  "is_html": false,
   "message": "Hello!",
-  "team_name": "InsightConnect Team",
-  "thread_id": 1595889908700
+  "team_guid": "xxxxx-xxxxx-xxxx-xxxx"
 }
 ```
 
@@ -508,8 +505,8 @@ This action is used to create a group in Azure and enable it for Microsoft Teams
 |group_name|string|None|True|Team name|None|test_group|
 |mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|False|
 |mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|TestGroup|
-|members|string[]|None|False|A list of usernames to set as members|None|["user@example.com"]|
-|owners|string[]|None|False|A list of usernames to set as owners|None|["user@example.com"]|
+|members|string[]|None|False|A list of usernames to set as members|None|[user@example.com]|
+|owners|string[]|None|False|A list of usernames to set as owners|None|[user@example.com]|
 
 Example input:
 
