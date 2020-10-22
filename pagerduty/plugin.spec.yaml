@@ -70,7 +70,7 @@ types:
       - user
 actions:
   get_on_call:
-    title: Get List of Users on Call
+    title: Get On-Call Users
     description: Get List of Users on Call
     output:
       users:
