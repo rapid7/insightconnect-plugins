@@ -48,20 +48,40 @@ class GetAssetVulnerabilities(komand.Action):
 
     def get_vulnerabilities(self, resources: list) -> list:
         """
-        Finds risk Scores for a list of asset_vulnerabilities at attaches them
+        Finds risk scores for a list of asset_vulnerabilities and attaches them
         :param resources: A list of asset_vulnerabilities
-        :return: A list of asset_vulnerabilities with risk Scores
+        :return: A list of asset_vulnerabilities with risk scores
         """
         vuln_ids = list()
         risk_score = list()
         for resource in resources:
-            vuln_ids.append(resource.get('id'))
+            try:
+                vuln_ids.append(resource['id'])
+            except KeyError:
+                self.logger.error(f'The following recourse did not have an ID:\n{resource}')
+                continue
+
         vulnerabilities = asyncio.run(self.async_get_vulnerabilities(vuln_ids))
+
         for vulnerability in vulnerabilities:
             risk_score.append({'id': vulnerability['id'], 'riskScore': vulnerability['riskScore']})
+
+        sorted_resources = self.add_risk_scores_to_resources(resources, risk_score)
+        return sorted_resources
+
+    @staticmethod
+    def add_risk_scores_to_resources(resources: list, risk_scores: list) -> list:
+        """
+        Sorts asset_vulnerabilities and appends risk scores to them. Returns asset_vulnerabilities list
+        sorted by risk score descending
+        :param resources: A list of asset_vulnerabilities
+        :param risk_scores: A list of risk scores
+        :return: A sorted list of asset_vulnerabilities with risk scores attached
+        """
         sorted_resources = sorted(resources, key=itemgetter('id'))
-        sorted_risk_score = sorted(risk_score, key=itemgetter('id'))
+        sorted_risk_score = sorted(risk_scores, key=itemgetter('id'))
         for i in range(0, len(sorted_resources), 1):
             sorted_resources[i]['riskScore'] = sorted_risk_score[i]['riskScore']
+
         sorted_resources = sorted(sorted_resources, key=itemgetter('riskScore'), reverse=True)
         return sorted_resources

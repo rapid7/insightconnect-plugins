@@ -38,16 +38,17 @@ class ResourceHelper(object):
     """
 
     # Currently only handling the most common requests exceptions more can be added as needed
-    Request_exceptions = {
+    REQUEST_EXCEPTIONS = {
         requests.HTTPError: ' If this issue persists contact support for assistance.',
         requests.ConnectionError: 'Unable to connect to IVM consul.'
                                   ' If this issue persists contact support for assistance',
-        requests.Timeout: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
+        requests.Timeout: 'Ensure proper network connectivity between the InsightConnect orchestrator and the InsightVM console',
         requests.ConnectTimeout: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
         requests.ReadTimeout: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
-        requests.TooManyRedirects: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
-        'Unhandled exception': 'contact support for assistance'
+        requests.TooManyRedirects: 'Ensure proper network connectivity between the orchestrator and the IVM consul'
     }
+    # For request exceptions not in REQUEST_EXCEPTIONS
+    UNHANDLED_EXCEPTION = 'Contact support for assistance'
 
     def __init__(self, session, logger):
         """
@@ -96,7 +97,7 @@ class ResourceHelper(object):
             else:
                 response = request_method(url=endpoint, headers=headers, params=parameters.params, json=payload, verify=False)
         except requests.RequestException as e:
-            assistance = self.Request_exceptions.get(type(e), self.Request_exceptions['Unhandled exception'])
+            assistance = self.REQUEST_EXCEPTIONS.get(type(e), self.UNHANDLED_EXCEPTION)
             raise PluginException(cause=e,
                                   assistance=assistance)
 
@@ -203,7 +204,7 @@ class ResourceHelper(object):
                                           json=payload
                                           )
         except requests.RequestException as e:
-            assistance = self.Request_exceptions.get(type(e), self.Request_exceptions['Unhandled exception'])
+            assistance = self.REQUEST_EXCEPTIONS.get(type(e),  self.UNHANDLED_EXCEPTION)
             raise PluginException(cause=e,
                                   assistance=assistance)
 

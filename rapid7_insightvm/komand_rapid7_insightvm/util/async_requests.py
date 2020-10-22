@@ -6,7 +6,7 @@ from .shared_resources import *
 
 class AsyncRequests:
 
-    def __init__(self, username, password):
+    def __init__(self, username: str, password: str):
         self.auth = aiohttp.BasicAuth(login=username, password=password)
 
     def get_async_session(self) -> aiohttp.ClientSession:
@@ -20,8 +20,8 @@ class AsyncRequests:
     async def async_request(session, endpoint: str, method: str = 'get', params: Collection = None, payload: dict = None,
                             json_response: bool = True):
         """
-        Sends a asynchronous request to APIv3 with the provided endpoint and optional method/payload
-        :param session" The asynchronous session
+        Sends an asynchronous request to APIv3 with the provided endpoint and optional method/body
+        :param session: The asynchronous session
         :param endpoint: Endpoint for the APIv3 call defined in endpoints.py
         :param method: HTTP method for the API request
         :param params: URL parameters to append to the request
@@ -35,15 +35,19 @@ class AsyncRequests:
             parameters = RequestParams.from_tuples(params)
         else:
             parameters = RequestParams.from_dict(params)
+
         if payload:
             response = await session.request(url=endpoint, method=method, json=payload, params=parameters.params)
         else:
             response = await session.request(url=endpoint, method=method, params=parameters.params)
         resource_request_status_code_check(response.text(), response.status)
+
         if json_response:
             try:
                 resp_json = await response.json()
             except aiohttp.ContentTypeError:
-                raise PluginException()
+                raise PluginException(cause='InsightVM returned malformed JSON. ',
+                                      assistance='If this issue persists contact support for assistance.\n',
+                                      data=response.text())
             return resp_json
         return response.text()

@@ -1794,7 +1794,7 @@ actions:
         example: 234
       get_risk_score:
         title: Get Risk Score
-        description: Return risk score allong with other vulnerability data
+        description: Return risk score along with other vulnerability data
         type: boolean
         required: false
         example: true
