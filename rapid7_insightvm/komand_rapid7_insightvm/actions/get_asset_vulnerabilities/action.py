@@ -48,7 +48,7 @@ class GetAssetVulnerabilities(komand.Action):
 
     def get_vulnerabilities(self, resources: list) -> list:
         """
-        Finds risk Scores for a list of asset_vulnerabilities at attaches them
+        Finds risk scores for a list of asset_vulnerabilities and attaches them
         :param resources: A list of asset_vulnerabilities
         :return: A list of asset_vulnerabilities with risk Scores
         """
