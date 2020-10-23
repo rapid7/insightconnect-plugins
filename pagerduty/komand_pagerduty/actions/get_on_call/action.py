@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import GetOnCallInput, GetOnCallOutput, Input, Output, Component
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
+import asyncio
 
 
 class GetOnCall(insightconnect_plugin_runtime.Action):
@@ -34,9 +35,17 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
                 self.logger.info(f"User ID not available: {str(e)}")
                 pass
 
-        users = []
-        for user_id in user_ids:
-            user_response = self.connection.api_connection.get(f"https://api.pagerduty.com/users/{user_id}")
-            users.append(user_response.json().get("user"))
+        users = asyncio.run(self.async_get_users(user_ids))
 
         return {Output.USERS: insightconnect_plugin_runtime.helper.clean(users)}
+
+    async def async_get_users(self, user_ids: list) -> list:
+        connection = self.connection.async_connection
+        async with connection.get_async_session() as async_session:
+            tasks: [asyncio.Future] = []
+            for user_id in user_ids:
+                url = f"https://api.pagerduty.com/users/{user_id}"
+                tasks.append(asyncio.ensure_future(connection.async_requests(session=async_session, url=url,
+                                                                             method="get")))
+                users = await asyncio.gather(*tasks)
+                return users

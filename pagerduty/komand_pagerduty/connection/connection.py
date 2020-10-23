@@ -3,6 +3,7 @@ from .schema import ConnectionSchema
 # Custom imports below
 import pypd
 import requests
+from komand_pagerduty.util.async_requests import AsyncRequests
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -25,6 +26,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
             "Authorization": f"Token token={key}"
         }
         self.api_connection.headers = headers
+
+        self.async_connection = AsyncRequests(api_key=key)
+
 
     def test(self):
         response = self.api_connection.get("https://api.pagerduty.com/users")
