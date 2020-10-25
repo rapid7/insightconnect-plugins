@@ -44,8 +44,8 @@ class ListInvestigationsInput(komand.Input):
     "size": {
       "type": "integer",
       "title": "Size",
-      "description": "The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 1000",
-      "default": 20,
+      "description": "The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 1000. Default value is 1000",
+      "default": 1000,
       "order": 4
     },
     "start_time": {
