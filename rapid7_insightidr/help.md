@@ -271,7 +271,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.2.1 - Change default value in parameter `Size` to 1000 in List Investigations action
+* 1.2.1 - Change default value in the `size` input parameter to 1000 in List Investigations action
 * 1.2.0 - New Action Assign User to Investigation
 * 1.1.1 - New spec and help.md format for the Extension Library
 * 1.1.0 - New Action Add Indicators to a Threat
