@@ -41,7 +41,7 @@ class ResourceHelper(object):
     REQUEST_EXCEPTIONS = {
         requests.HTTPError: ' If this issue persists contact support for assistance.',
         requests.ConnectionError: 'Unable to connect to IVM consul.'
-                                  ' If this issue persists contact support for assistance',
+                                  'If this issue persists contact support for assistance.',
         requests.Timeout: 'Ensure proper network connectivity between the InsightConnect orchestrator and the InsightVM console',
         requests.ConnectTimeout: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
         requests.ReadTimeout: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
