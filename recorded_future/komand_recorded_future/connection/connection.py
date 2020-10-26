@@ -28,7 +28,7 @@ class Connection(komand.Connection):
     def setup_custom_header(self):
         try: # This may not be defined in local komand instances.
             version = self.meta.version
-        except:
+        except AttributeError:
             version = "test-version"
 
         self.logger.info(f"Plugin Version: {version}")
