@@ -2,7 +2,7 @@ import komand
 from .schema import DeleteAssetInput, DeleteAssetOutput, Input, Output, Component
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 class DeleteAsset(komand.Action):
 
@@ -14,7 +14,7 @@ class DeleteAsset(komand.Action):
                 output=DeleteAssetOutput())
 
     def run(self, params={}):
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
 
         asset_id = params.get(Input.ID)
         endpoint = endpoints.Asset.assets(self.connection.console_url, asset_id)
