@@ -27,7 +27,7 @@ class Connection(komand.Connection):
         return demo_test.demo_test(self.token, self.logger)
 
     def setup_custom_header(self):
-        with open("../plugin.spec.yaml") as f:
+        with open("../../plugin.spec.yaml") as f:
             spec = yaml.load(f)
 
         return spec.get("version")
