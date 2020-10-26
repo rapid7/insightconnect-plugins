@@ -4,6 +4,7 @@ from .schema import ConnectionSchema
 from rfapi import ApiV2Client
 from komand_recorded_future.util import demo_test
 import yaml
+import pprint
 
 
 class Connection(komand.Connection):
@@ -27,9 +28,14 @@ class Connection(komand.Connection):
         return demo_test.demo_test(self.token, self.logger)
 
     def setup_custom_header(self):
-        with open("../../plugin.spec.yaml") as f:
-            spec = yaml.load(f)
+        version = "test-version"
+        try: # This may not be defined in local komand instances.
+            version = self.meta.version
+        except:
+            pass
 
-        return spec.get("version")
+        self.logger.info(f"Plugin Version: {version}")
+
+        return version
 
 
