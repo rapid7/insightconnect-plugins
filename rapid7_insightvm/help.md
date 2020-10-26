@@ -664,7 +664,7 @@ Example input:
 |----|----|--------|-----------|
 |vulnerabilities|[]asset_vulnerability|False|Vulnerabilities found on the asset|
 
-Example Output:
+Example output:
 
 ```
 {
