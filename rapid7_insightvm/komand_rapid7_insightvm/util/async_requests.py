@@ -45,7 +45,7 @@ class AsyncRequests:
             try:
                 resp_json = await response.json()
             except aiohttp.ContentTypeError:
-                raise PluginException(cause='InsightVM returned malformed JSON. ',
+                raise PluginException(cause='InsightVM returned malformed JSON.',
                                       assistance='If this issue persists contact support for assistance.\n',
                                       data=response.text())
             return resp_json
