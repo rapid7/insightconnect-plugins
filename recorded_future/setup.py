@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="recorded_future-rapid7-plugin",
-      version="3.1.1",
+      version="3.1.2",
       description="Recorded Future arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7 InsightConnect, users can search domain lists, entity lists, and more",
       author="rapid7",
       author_email="",
