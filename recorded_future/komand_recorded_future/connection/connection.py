@@ -3,8 +3,6 @@ from .schema import ConnectionSchema
 # Custom imports below
 from rfapi import ApiV2Client
 from komand_recorded_future.util import demo_test
-import yaml
-import pprint
 
 
 class Connection(komand.Connection):
