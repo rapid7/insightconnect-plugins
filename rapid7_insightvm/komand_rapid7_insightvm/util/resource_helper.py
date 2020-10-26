@@ -38,14 +38,16 @@ class ResourceHelper(object):
     """
 
     # Currently only handling the most common requests exceptions more can be added as needed
+    _ENSURECONNECTIVITY = 'Ensure proper network connectivity between the InsightConnect orchestrator and the IVM console'
+
     REQUEST_EXCEPTIONS = {
         requests.HTTPError: 'If this issue persists contact support for assistance.',
         requests.ConnectionError: 'Unable to connect to IVM console.'
                                   'If this issue persists contact support for assistance.',
-        requests.Timeout: 'Ensure proper network connectivity between the InsightConnect orchestrator and the InsightVM console',
-        requests.ConnectTimeout: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
-        requests.ReadTimeout: 'Ensure proper network connectivity between the orchestrator and the IVM consul',
-        requests.TooManyRedirects: 'Ensure proper network connectivity between the InsightConnect orchestrator and the IVM console'
+        requests.Timeout: _ENSURECONNECTIVITY,
+        requests.ConnectTimeout: _ENSURECONNECTIVITY,
+        requests.ReadTimeout: _ENSURECONNECTIVITY,
+        requests.TooManyRedirects: _ENSURECONNECTIVITY
     }
     # For request exceptions not in REQUEST_EXCEPTIONS
     UNHANDLED_EXCEPTION = 'Contact support for assistance'
