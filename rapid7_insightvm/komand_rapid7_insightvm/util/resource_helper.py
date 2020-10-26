@@ -138,7 +138,7 @@ class ResourceHelper(object):
                 'size': 500,
                 'page': current_page
             }
-        if params == list:
+        if isinstance(params, list):
             parameters = RequestParams.from_tuples(params)
         else:
             parameters = RequestParams.from_dict(params)
