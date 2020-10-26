@@ -26,11 +26,10 @@ class Connection(komand.Connection):
         return demo_test.demo_test(self.token, self.logger)
 
     def setup_custom_header(self):
-        version = "test-version"
         try: # This may not be defined in local komand instances.
             version = self.meta.version
         except:
-            pass
+            version = "test-version"
 
         self.logger.info(f"Plugin Version: {version}")
 
