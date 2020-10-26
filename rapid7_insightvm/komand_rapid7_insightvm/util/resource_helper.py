@@ -39,7 +39,7 @@ class ResourceHelper(object):
 
     # Currently only handling the most common requests exceptions more can be added as needed
     REQUEST_EXCEPTIONS = {
-        requests.HTTPError: ' If this issue persists contact support for assistance.',
+        requests.HTTPError: 'If this issue persists contact support for assistance.',
         requests.ConnectionError: 'Unable to connect to IVM console.'
                                   'If this issue persists contact support for assistance.',
         requests.Timeout: 'Ensure proper network connectivity between the InsightConnect orchestrator and the InsightVM console',
