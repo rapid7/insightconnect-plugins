@@ -58,7 +58,7 @@ class GetAssetVulnerabilities(komand.Action):
             try:
                 vuln_ids.append(resource['id'])
             except KeyError:
-                self.logger.error(f'The following recourse did not have an ID:\n{resource}')
+                self.logger.error(f'The following resource did not have an ID:\n{resource}')
                 continue
 
         vulnerabilities = asyncio.run(self.async_get_vulnerabilities(vuln_ids))
