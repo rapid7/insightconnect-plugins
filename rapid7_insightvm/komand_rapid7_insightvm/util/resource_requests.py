@@ -1,4 +1,3 @@
-from . import endpoints
 from .shared_resources import *
 import json
 import requests

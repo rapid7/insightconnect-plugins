@@ -1,10 +1,16 @@
 import aiohttp
 from typing import Collection
+from .shared_resources import RequestParams, resource_request_status_code_check
 from komand.exceptions import PluginException
-from .shared_resources import *
 
 
 class AsyncRequests:
+    """
+    Class for helper methods for making async requests against the APIv3. A new instance should
+    be instantiated within the action/trigger being developed. New methods should be
+    created as instance methods to allow reference of the logger and session passed to
+    the __init__ function during instantiation.
+    """
 
     def __init__(self, username: str, password: str):
         self.auth = aiohttp.BasicAuth(login=username, password=password)

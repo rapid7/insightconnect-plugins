@@ -392,8 +392,8 @@ Example Output:
         "mac": "00:50:56:8A:3D:8C"
       }
     ],
-    "assessedForPolicies": False,
-    "assessedForVulnerabilities": True,
+    "assessedForPolicies": false,
+    "assessedForVulnerabilities": true,
     "history": [
       {
         "date": "2018-08-28T11:06:47.738Z",
@@ -1878,8 +1878,8 @@ Example Output:
                   "mac": "00:50:56:8A:3D:8C"
               }
           ],
-          "assessedForPolicies": False,
-          "assessedForVulnerabilities": True,
+          "assessedForPolicies": false,
+          "assessedForVulnerabilities": true,
           "history": [
               {
                   "date": "2018-08-28T11:06:47.738Z",
