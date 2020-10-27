@@ -81,9 +81,10 @@ class ResourceRequests(object):
         """
 
         request_method = getattr(self.session, method.lower())
-
+        if not payload:
+            payload = dict()
         if not params:
-            params = {}
+            params = dict()
         if isinstance(params, list):
             parameters = RequestParams.from_tuples(params)
         else:
@@ -131,6 +132,8 @@ class ResourceRequests(object):
         last_page = False
 
         # Handle various scenarios where params may be passed
+        if not payload:
+            payload = dict()
         if not params:
             params = {
                 'size': 500,

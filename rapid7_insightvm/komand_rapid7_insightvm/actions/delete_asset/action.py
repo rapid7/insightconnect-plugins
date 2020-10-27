@@ -4,6 +4,7 @@ from .schema import DeleteAssetInput, DeleteAssetOutput, Input, Output, Componen
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
+
 class DeleteAsset(komand.Action):
 
     def __init__(self):
