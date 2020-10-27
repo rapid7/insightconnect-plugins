@@ -23,6 +23,7 @@ class MockResponse():
 
 class MockSession():
     def __init__(self):
+        self.counter = 0
         self.headers = dict()
 
     def get(self, url, verify, **kwargs):
@@ -33,9 +34,12 @@ class MockSession():
         if url == 'bad password':
             mock_response.status_code = 401
         if url == 'paged_request':
-            temp = json.loads(mock_response.text)
-            temp['page']['number'] += 1
-            mock_response.text = json.dumps(temp)
+            if self.counter > 0:
+                temp = json.loads(mock_response.text)
+                temp['page']['number'] += 1
+                mock_response.text = json.dumps(temp)
+            self.counter += 1
+
         return mock_response
 
 
@@ -55,7 +59,7 @@ class TestResourceRequests(TestCase):
         test_object = resource_requests.ResourceRequests(logger=logger, session=session)
         response = test_object.resource_request('google')
         self.assertIsNotNone(response)
-        self.assertEqual(response.get('resources'), 'data')
+        self.assertEqual(response.get('resources'), [{"thing1": "data"}, {"thing2": "data"}])
 
     def test_resource_request_requests_exception(self):
         logger = logging.getLogger('logger')
@@ -78,6 +82,27 @@ class TestPagedResourceRequest(TestCase):
         logger = logging.getLogger('logger')
         session = MockSession()
         test_object = resource_requests.ResourceRequests(logger=logger, session=session)
-        response = test_object.paged_resource_request('google')
+        response = test_object.paged_resource_request('paged_request')
         self.assertIsNotNone(response)
-        #self.assertEqual(response.get('resources'), 'data')
+        self.assertEqual(response,
+                         [{"thing1": "data"}, {"thing2": "data"}, {"thing1": "data"}, {"thing2": "data"}])
+
+    def test_paged_resource_request_with_params_dict(self):
+        logger = logging.getLogger('logger')
+        session = MockSession()
+        test_object = resource_requests.ResourceRequests(logger=logger, session=session)
+        response = test_object.paged_resource_request('paged_request', params={'size': 100})
+        self.assertIsNotNone(response)
+        self.assertEqual(response,
+                         [{"thing1": "data"}, {"thing2": "data"}, {"thing1": "data"}, {"thing2": "data"}])
+
+    def test_paged_resource_request_with_params_tuple(self):
+        logger = logging.getLogger('logger')
+        session = MockSession()
+        test_object = resource_requests.ResourceRequests(logger=logger, session=session)
+        response = test_object.paged_resource_request('paged_request', params=[('size', 100)])
+        self.assertIsNotNone(response)
+        self.assertEqual(response,
+                         [{'thing1': 'data'}, {'thing2': 'data'}, {'thing1': 'data'}, {'thing2': 'data'}])
+
+
