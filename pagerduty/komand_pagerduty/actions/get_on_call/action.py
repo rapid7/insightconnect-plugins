@@ -30,7 +30,7 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
         for oncall_object in response_object.get("oncalls"):
             try:
                 user_ids.append(oncall_object["user"]["id"])
-            except Exception as e:
+            except KeyError as e:
                 self.logger.info(f"User ID not available: {str(e)}")
                 pass
 
