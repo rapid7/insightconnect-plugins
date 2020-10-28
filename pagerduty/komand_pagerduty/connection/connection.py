@@ -18,7 +18,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         key = params.get('api_key').get('secretKey')
         pypd.api_key = key
-        self.logger.debug("Connecting: %s", key)
         pypd.Incident.find(maximum=1)
 
         self.api_connection = requests.Session()

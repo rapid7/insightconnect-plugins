@@ -31,8 +31,10 @@ class AsyncRequests:
 
         extras = {"json": body, "params": params}
         response = await session.request(url=url, method=method, **extras)
-        self.status_code_handling(response.text(), response.status)
-        return response.json()
+        text = await response.text()
+        status = response.status
+        self.status_code_handling(text, status)
+        return await response.json()
 
     @ staticmethod
     def status_code_handling(response_text, status_code):

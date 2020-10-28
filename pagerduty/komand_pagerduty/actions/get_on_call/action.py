@@ -15,7 +15,6 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
                 output=GetOnCallOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
         """Get list of users"""
 
         response = self.connection.api_connection.get("https://api.pagerduty.com/oncalls")
@@ -47,5 +46,9 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
                 url = f"https://api.pagerduty.com/users/{user_id}"
                 tasks.append(asyncio.ensure_future(connection.async_request(session=async_session, url=url,
                                                                              method="get")))
-                users = await asyncio.gather(*tasks)
+                user_objects = await asyncio.gather(*tasks)
+                # extract "users" value from object
+                users = list()
+                for user in user_objects:
+                    users.append(user.get('user'))
                 return users
