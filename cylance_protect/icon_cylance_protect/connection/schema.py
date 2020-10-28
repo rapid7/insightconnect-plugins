@@ -8,7 +8,7 @@ class Input:
     APPLICATION_SECRET = "application_secret"
     TENANT_ID = "tenant_id"
     URL = "url"
-    
+
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
     schema = json.loads("""

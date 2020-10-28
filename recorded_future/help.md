@@ -2038,6 +2038,7 @@ This plugin does not contain any troubleshooting information.
 # Version History
 
 * 4.0.0 - Remove `fields` input in Lookup Domain, Lookup Hash, Lookup IP Address and Lookup URL actions - all fields will now be returned
+* 3.1.2 - Update to request headers to add plugin information
 * 3.1.1 - Fix issue where Lookup Alert was returning a generic object
 * 3.1.0 - New trigger Get New Alerts
 * 3.0.0 - Add input `fields` to Search Domains, Search Hashes, Search IP Addresses, Search Vulnerabilities, Search Malware and Lookup Malware actions | Add `riskRule` and `riskScore` filter criteria to Search Domains, Search Hashes, Search IP Addresses and Search Vulnerabilities actions | Add `list` and `firstSeen` filter criteria to Search Malware action | Update description for `list` parameter in Download IP Addresses Risk List, Download Vulnerability Risk List, Download Domain Risk List and Download Hash Risk List actions

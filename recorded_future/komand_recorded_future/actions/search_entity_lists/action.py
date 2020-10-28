@@ -15,7 +15,7 @@ class SearchEntityLists(komand.Action):
     def run(self, params={}):
         try:
             query_params = params
-            query_headers = {"X-RFToken": self.connection.token}
+            query_headers = self.connection.headers
             results = requests.get(
                 "https://api.recordedfuture.com/v2/entitylist/search",
                 params=query_params,

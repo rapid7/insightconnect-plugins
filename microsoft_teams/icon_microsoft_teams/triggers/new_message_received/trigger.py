@@ -5,7 +5,7 @@ from .schema import NewMessageReceivedInput, NewMessageReceivedOutput, Input, Ou
 from komand.exceptions import PluginException
 from icon_microsoft_teams.util.teams_utils import get_teams_from_microsoft, get_channels_from_microsoft
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
-from icon_microsoft_teams.util.strip_html import strip_html
+from icon_microsoft_teams.util.words_utils import add_words_values_to_message
 from typing import Pattern
 import re
 import requests
@@ -56,7 +56,7 @@ class NewMessageReceived(komand.Trigger):
 
                 for message in sorted_messages:  # For each new message
                     message = remove_null_and_clean(message)
-                    message["first_word"] = self.extract_first_word(message.get("body", {}).get("content", ""))
+                    message = add_words_values_to_message(message)
                     if maya.parse(message.get("createdDateTime")) > last_time_we_checked:
                         self.logger.info("Analyzing message...")
                         if message_content:  # Do we have a reg ex

@@ -713,6 +713,9 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.0 - Update to make `words` and `first_word` required values in the `message` custom type
+* 2.3.1 - Fix issue where the New Message Received trigger could crash on an HTML message
+* 2.3.0 - Added `words` to message output type. This allows for easier use of parameters in Teams trigger messages
 * 2.2.1 - Automatically extract UUIDs in the New Message Received trigger
 * 2.2.0 - Extract and return command security and network indicators in the New Message Received trigger
 * 2.1.0 - Update Send Message and Send HTML Message actions to accept `thread_id` input to support threaded replies | Update New Message Received trigger to output team and channel names so they can be passed into subsequent steps

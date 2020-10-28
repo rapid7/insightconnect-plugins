@@ -33,8 +33,8 @@ Example input:
 {
   "url": "https://insightvm.example.com:3780",
   "credentials": {
-      "username": "username",
-      "password": "password"
+      "username": "username",	
+      "password": "password"	
     }
 }
 ```
@@ -646,11 +646,16 @@ This action is used to get vulnerabilities found on an asset. Can only be used i
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_id|string|None|True|ID of the asset for which to find vulnerabilities|None|None|
+|asset_id|string|None|True|ID of the asset for which to find vulnerabilities|None|234|
+|get_risk_score|boolean|None|False|Return risk score allong with other vulnerability data|None|True|
 
 Example input:
 
 ```
+{
+  "asset_id": 234,
+  "get_risk_score": true
+}
 ```
 
 ##### Output
@@ -662,7 +667,6 @@ Example input:
 Example Output:
 
 ```
-
 {
   "vulnerabilities": [{
     "id": "tlsv1_1-enabled",
@@ -706,9 +710,7 @@ Example Output:
     "status": "vulnerable"
   }]
 }
-
 ```
-
 
 #### Get Asset Software
 
@@ -718,7 +720,7 @@ This action is used to get software found on an asset. Can only be used if the a
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_id|string|None|True|ID of the asset for which to find software|None|None|
+|asset_id|string|None|True|ID of the asset for which to find software|None|234|
 
 Example input:
 
@@ -1852,7 +1854,7 @@ Example input:
 {
   "size": 100,
   "sort_criteria": {
-    "risk-score": "asc", 
+    "risk-score": "asc",
     "criticality-tag": "desc"
   }
 }
@@ -5390,6 +5392,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.7.0 - Update Get Asset Vulnerabilities with new input and output
 * 4.6.0 - Update Get Asset Vulnerabilities with new output | Fix issue with RequestParams object set function
 * 4.5.0 - Update to Asset Search action to allow search result limiting and sorting
 * 4.4.3 - Update to error handling and documentation around console URL in connection

@@ -41,7 +41,7 @@ class LookupIPAddress(komand.Action):
                 query_params["comment"] = comment
 
             # move to raw, API was unable to handle error data returned
-            headers = {"X-RFToken": self.connection.token}
+            headers = self.connection.headers
             resp = requests.get(
                 f"https://api.recordedfuture.com/v2/ip/{ip_address}",
                 params=query_params,
