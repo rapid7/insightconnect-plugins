@@ -85,14 +85,23 @@ class Connection(komand.Connection):
         """
         colons = host.count(':')
         if colons > 0:
-            self.logger.info('Port was provided in hostname, using value from Port field instead')
             host = host.split(':')
             if colons == 1:
-                host = host[0]
+                if host[1].find('//') != -1:
+                    host = host[1][2:]
+                else:
+                    #self.logger.info('Port was provided in hostname, using value from Port field instead')
+                    host = host[0]
             elif colons == 2:
-                host = f'{host[0]}:{host[1]}'
+                #self.logger.info('Port was provided in hostname, using value from Port field instead')
+                host = host[1]
+                if host.find('//') != -1:
+                    host = host[2:]
             else:
                 raise ConnectionTestException(cause=f'There are too many colons ({colons}) in the host name ({host}).',
                                               assistance='Check that the host name is correct',
                                               data=host)
+        backslash = host.find('/')
+        if backslash != -1:
+            host = host[:backslash]
         return host
