@@ -27,7 +27,7 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
         response_object = response.json()
 
         user_ids = []
-        for oncall_object in response_object.get("oncalls"):
+        for oncall_object in response_object.get("oncalls", []):
             try:
                 user_ids.append(oncall_object["user"]["id"])
             except KeyError as e:
