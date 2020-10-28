@@ -31,7 +31,7 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
             try:
                 user_ids.append(oncall_object["user"]["id"])
             except KeyError as e:
-                self.logger.info(f"User ID not available: {str(e)}")
+                self.logger.warning(f"User ID not available: {str(e)}")
                 pass
 
         users = asyncio.run(self.async_get_users(user_ids))
