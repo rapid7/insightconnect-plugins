@@ -27,6 +27,10 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
+{
+  "api_key": {
+    "secretKey": "psXnCzE4ELyNmiWgLzT4"
+}
 ```
 
 ## Technical Details
@@ -50,6 +54,102 @@ _This action does not contain any inputs._
 Example output:
 
 ```
+{
+    "users": [
+        {
+            "name": "user",
+            "email": "user@example.com",
+            "time_zone": "America/New_York",
+            "color": "purple",
+            "avatar_url": "https://secure.gravatar.com/avatar/8aa943422112d40809d90abcb1dbd9c8.png?d=mm&r=PG",
+            "billed": true,
+            "role": "owner",
+            "description": null,
+            "invitation_sent": false,
+            "job_title": null,
+            "teams": [],
+            "contact_methods": [
+                {
+                    "id": "PLXR19K",
+                    "type": "email_contact_method_reference",
+                    "summary": "Default",
+                    "self": "https://api.pagerduty.com/users/PBYG9ZF/contact_methods/PLXR19K",
+                    "html_url": null
+                }
+            ],
+            "notification_rules": [
+                {
+                    "id": "PTAI1D0",
+                    "type": "assignment_notification_rule_reference",
+                    "summary": "0 minutes: channel PLXR19K",
+                    "self": "https://api.pagerduty.com/users/PBYG9ZF/notification_rules/PTAI1D0",
+                    "html_url": null
+                },
+                {
+                    "id": "PXN62SQ",
+                    "type": "assignment_notification_rule_reference",
+                    "summary": "0 minutes: channel PLXR19K",
+                    "self": "https://api.pagerduty.com/users/PBYG9ZF/notification_rules/PXN62SQ",
+                    "html_url": null
+                }
+            ],
+            "coordinated_incidents": [],
+            "id": "PBYG9ZF",
+            "type": "user",
+            "summary": "Emily Kim",
+            "self": "https://api.pagerduty.com/users/PBYG9ZF",
+            "html_url": "https://rapid7-1.pagerduty.com/users/PBYG9ZF"
+        },
+        {
+            "name": "user2",
+            "email": "user2@example.com",
+            "time_zone": "America/New_York",
+            "color": "red",
+            "avatar_url": "https://secure.gravatar.com/avatar/0232003bb841231433a0779771360902.png?d=mm&r=PG",
+            "billed": true,
+            "role": "user",
+            "description": null,
+            "invitation_sent": false,
+            "job_title": null,
+            "teams": [],
+            "contact_methods": [
+                {
+                    "id": "PX35LTU",
+                    "type": "email_contact_method_reference",
+                    "summary": "Default",
+                    "self": "https://api.pagerduty.com/users/PUQ7882/contact_methods/PX35LTU",
+                    "html_url": null
+                }
+            ],
+            "notification_rules": [
+                {
+                    "id": "PPQ1HLY",
+                    "type": "assignment_notification_rule_reference",
+                    "summary": "0 minutes: channel PX35LTU",
+                    "self": "https://api.pagerduty.com/users/PUQ7882/notification_rules/PPQ1HLY",
+                    "html_url": null
+                },
+                {
+                    "id": "PSMPIAL",
+                    "type": "assignment_notification_rule_reference",
+                    "summary": "0 minutes: channel PX35LTU",
+                    "self": "https://api.pagerduty.com/users/PUQ7882/notification_rules/PSMPIAL",
+                    "html_url": null
+                }
+            ],
+            "coordinated_incidents": [],
+            "id": "PUQ7882",
+            "type": "user",
+            "summary": "Joey",
+            "self": "https://api.pagerduty.com/users/PUQ7882",
+            "html_url": "https://rapid7-1.pagerduty.com/users/PUQ7882"
+        }
+    ],
+    "limit": 25,
+    "offset": 0,
+    "total": null,
+    "more": false
+}
 ```
 
 #### Send Acknowledge Event
