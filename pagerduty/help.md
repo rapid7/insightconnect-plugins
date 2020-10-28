@@ -29,7 +29,7 @@ Example input:
 ```
 {
   "api_key": {
-    "secretKey": "psXnCzE4ELyNmiWgLzT4"
+    "secretKey": "stRbCzL92kpAfwCkSiA9"
 }
 ```
 
@@ -96,7 +96,7 @@ Example output:
             "coordinated_incidents": [],
             "id": "PBYG9ZF",
             "type": "user",
-            "summary": "Emily Kim",
+            "summary": "user1",
             "self": "https://api.pagerduty.com/users/PBYG9ZF",
             "html_url": "https://rapid7-1.pagerduty.com/users/PBYG9ZF"
         },
