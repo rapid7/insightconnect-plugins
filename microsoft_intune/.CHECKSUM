@@ -1,7 +1,7 @@
 {
-	"spec": "eb0d9db7af1e04cc897686b57030de69",
-	"manifest": "0749fd4a6b2b005b1554dee5dbf8feb3",
-	"setup": "bf5ebb6e0aa41a5296d74ffa9a06e07d",
+	"spec": "f6ac3ef9b882a4d40753dea695a3135a",
+	"manifest": "a3572eb8423150162711d7047de26528",
+	"setup": "299ba9d66338fde4f1164294501b78ad",
 	"schemas": [
 		{
 			"identifier": "antivirus_scan/schema.py",
