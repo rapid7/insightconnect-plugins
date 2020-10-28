@@ -38,7 +38,7 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
 
         return {Output.USERS: insightconnect_plugin_runtime.helper.clean(users)}
 
-    async def async_get_users(self, user_ids: list) -> list:
+    async def async_get_users(self, user_ids: [str]) -> list:
         connection = self.connection.async_connection
         async with connection.get_async_session() as async_session:
             tasks: [asyncio.Future] = []

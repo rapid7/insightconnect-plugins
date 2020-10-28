@@ -27,10 +27,6 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
-{
-  "api_key": {
-    "secretKey": "stRbCzL92kpAfwCkSiA9"
-}
 ```
 
 ## Technical Details
