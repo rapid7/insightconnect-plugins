@@ -35,7 +35,7 @@ Example input:
 
 #### Get On-Call Users
 
-This action is used to get List of Users on Call.
+This action is used to get a list of users on call.
 
 ##### Input
 
