@@ -38,7 +38,7 @@ class ResourceRequests(object):
         'Content-Type': 'application/json',
         'Accept': 'application/json'
     }
-    _ENSURECONNECTIVITY = 'Ensure proper network connectivity between the InsightConnect orchestrator and the IVM console'
+    _ENSURECONNECTIVITY = 'Ensure proper network connectivity between the InsightConnect orchestrator and the InsightVM console'
 
     # Currently only handling the most common requests exceptions more can be added as needed
     _REQUEST_EXCEPTIONS = {
