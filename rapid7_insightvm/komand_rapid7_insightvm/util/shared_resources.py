@@ -35,7 +35,7 @@ class RequestParams(object):
             if key in item:
                 self.params[idx] = (key, value)
                 updated = True
-        # The key dose not exist in the list of tuples add the key
+        # The key does not exist in the list of tuples - add the key
         if not updated:
             self.params.append((key, value))
 
