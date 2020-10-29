@@ -4,7 +4,6 @@ from .schema import GetAssetVulnerabilitiesInput, GetAssetVulnerabilitiesOutput,
 import asyncio
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
-from operator import itemgetter
 
 
 class GetAssetVulnerabilities(komand.Action):

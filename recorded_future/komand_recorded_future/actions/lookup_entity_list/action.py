@@ -15,7 +15,7 @@ class LookupEntityList(komand.Action):
     def run(self, params={}):
         try:
             list_id = params.get("entity_list_id")
-            query_headers = {"X-RFToken": self.connection.token}
+            query_headers = self.connection.headers
             query_url = "https://api.recordedfuture.com/v2/entitylist/" + list_id
             results = requests.get(query_url, headers=query_headers)
             return results.json()
