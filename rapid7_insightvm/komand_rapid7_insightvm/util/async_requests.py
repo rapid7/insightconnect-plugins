@@ -20,7 +20,10 @@ class AsyncRequests:
         Create and return a new aiohttp ClientSession
         :return: aiohttp ClientSession
         """
-        return aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=False), auth=self.auth)
+        # Per aiohttp verify_ssl is deprecated, and use ssl=False should be used instead
+        # However during testing I confirmed that this behaves differently, and some times
+        # causes request to fail. For now reverting to verify_ssl
+        return aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False), auth=self.auth)
 
     @staticmethod
     async def async_request(session, endpoint: str, method: str = 'get', params: Collection = None, payload: dict = None,
@@ -44,8 +47,10 @@ class AsyncRequests:
 
         extras = {"json": payload, "params": parameters.params}
         response = await session.request(url=endpoint, method=method, **extras)
+        text = await response.text()
+        status = response.status
 
-        resource_request_status_code_check(response.text(), response.status)
+        resource_request_status_code_check(text, status)
 
         if json_response:
             try:
@@ -55,4 +60,4 @@ class AsyncRequests:
                                       assistance='If this issue persists contact support for assistance.\n',
                                       data=response.text())
             return resp_json
-        return response.text()
+        return text

@@ -159,7 +159,7 @@ class ResourceRequests(object):
 
             resources += response.resources  # Grab resources and append to total
             self.logger.info(f'Got {len(response.resources)} resources '
-                             f'from page {response.page_num} / {response.total_pages}')
+                             f'from page {(response.page_num+1)} / {response.total_pages}')
 
             if (response.total_pages == 0) or ((response.total_pages - 1) == response.page_num):
                 self.logger.info("All pages consumed, returning results...")
