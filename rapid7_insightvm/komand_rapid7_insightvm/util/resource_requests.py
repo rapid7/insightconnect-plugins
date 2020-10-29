@@ -106,7 +106,7 @@ class ResourceRequests(object):
             try:
                 resource = response.json()
             except json.decoder.JSONDecodeError as e:
-                raise PluginException(cause=f'Error: Received an unexpected response from InsightVM '
+                raise PluginException(cause=f'Received an unexpected response from InsightVM '
                                             f'(non-JSON or no response was received). ',
                                       assistance=f'Contact support for help. Exception returned was {e}',
                                       data=response.text)
