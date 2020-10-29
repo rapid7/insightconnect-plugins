@@ -76,7 +76,7 @@ class ValidateUser:
     """
     Validates that a user exists and has the correct permissions
     """
-    def __init__(self, session, logger):
+    def __init__(self, session: requests.Session, logger: logging.Logger):
         """
         Creates a new instance of ValidateUser
         :param session: Session object available to Komand actions/triggers, usually self.connection.session
