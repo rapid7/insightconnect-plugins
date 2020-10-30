@@ -27,6 +27,10 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
+{
+  "api_key": {
+    "secretKey": "stRbCzL92kpAfwCkSiA9"
+}
 ```
 
 ## Technical Details
@@ -161,11 +165,6 @@ This action is used to acknowledge an incident.
 |incident_key|string|None|True|Incident Key|None|None|
 |service_key|string|None|True|Service Key (aka Integration Key)|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -187,11 +186,6 @@ This action is used to create a user.
 |name|string|None|True|Name|None|None|
 |role|string|None|False|Role|['admin', 'limited_user', 'owner', 'read_only_user', 'user']|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -208,11 +202,6 @@ This action is used to get information about a user by email address.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |email|string|None|True|Email|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -236,11 +225,6 @@ This action is used to trigger an incident.
 |details|object|None|False|An arbitrary JSON object containing any data you'd like included in the incident log|None|None|
 |service_key|string|None|True|Service Key (aka Integration Key)|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -258,11 +242,6 @@ This action is used to delete a user by id.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|User ID|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -284,11 +263,6 @@ This action is used to resolve an incident.
 |incident_key|string|None|True|Incident Key|None|None|
 |service_key|string|None|True|Service Key (aka Integration Key)|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -306,11 +280,6 @@ This action is used to get information about a user by ID.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|User ID|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
