@@ -74,7 +74,7 @@ actions:
     description: Get list of on-call users
     output:
       users:
-        title: Users List
+        title: Users
         description: Users List
         type: "[]user"
         required: true
