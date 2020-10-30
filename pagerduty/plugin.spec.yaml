@@ -71,7 +71,7 @@ types:
 actions:
   get_on_call:
     title: Get On-Call Users
-    description: Get List of Users on Call
+    description: Get list of on-call users
     output:
       users:
         title: Users List
