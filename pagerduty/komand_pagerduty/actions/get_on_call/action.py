@@ -15,7 +15,7 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
                 output=GetOnCallOutput())
 
     def run(self, params={}):
-        """Get list of users"""
+        # Get list of users
 
         response = self.connection.api_connection.get("https://api.pagerduty.com/oncalls")
         try:
