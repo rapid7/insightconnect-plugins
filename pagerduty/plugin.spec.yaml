@@ -75,7 +75,7 @@ actions:
     output:
       users:
         title: Users
-        description: Users List
+        description: List of on-call users
         type: "[]user"
         required: true
   get_user_by_email:
