@@ -27,6 +27,84 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Update Blacklist Zones
+
+This action is used to block or unblock address or network by adding or removing from a blacklist network zone.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|IP address, Network range, or CIDR to block|None|198.51.100.1|
+|blacklist_state|boolean|True|False|True to block, false to unblock|None|True|
+|name|string|None|True|Name of blacklist zone|None|Insight Connect Blacklist Zone|
+
+Example input:
+
+```
+{
+  "address": "198.51.100.1",
+  "blacklist_state": true,
+  "name": "Insight Connect Blacklist Zone"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|True if action successfully executed|
+|zone_list|object|True|Updated zone list|
+
+Example output:
+
+```
+{
+  "success": true,
+  "zone_list": {
+    "_links": {
+      "deactivate": {
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        },
+        "href": "https://example.okta.com/api/v1/zones/nzohxvr9QzHuWqXI65d7/lifecycle/deactivate"
+      },
+      "self": {
+        "hints": {
+          "allow": [
+            "GET",
+            "PUT",
+            "DELETE"
+          ]
+        },
+        "href": "https://example.okta.com/api/v1/zones/nzohxvr9QzHuWqXI65d7"
+      }
+    },
+    "created": "2020-11-01T01:00:47.000Z",
+    "gateways": [
+      {
+        "type": "RANGE",
+        "value": "1.1.1.1-1.1.1.1"
+      },
+      {
+        "type": "RANGE",
+        "value": "1.1.2.3-1.1.2.5"
+      }
+    ],
+    "id": "nzohxvr9QzHuWqXI65d5",
+    "lastUpdated": "2020-11-01T23:36:53.000Z",
+    "name": "testzone",
+    "proxies": null,
+    "status": "ACTIVE",
+    "system": false,
+    "type": "IP"
+  }
+}
+
+```
+
 #### Get Okta User Factors
 
 This action returns an object containing all of a user's factors for MFA.
@@ -752,6 +830,7 @@ Example input:
 |statusChanged|string|False|When the status of the user changed, e.g. 2013-07-02T21:36:25.344Z|
 
 Example output:
+
 ```
 {
   "id": "00ug5xak4uqrOrj8Q0h7",
@@ -819,69 +898,70 @@ Example input:
 |users_removed_from_groups|[]user_group|True|Users removed from a group since the last check|
 
 Example output:
+
 ```
 {
   "users_added_from_groups": [{
-	"group_name": "test1",
-	"group_id": "00g41ix8hKbsu74Ca4x6",
-	"users": [{
-	  "id": "00u44z4o0JgUYC0OO4x6",
-	  "status": "PASSWORD_EXPIRED",
-  	  "created": "2020-03-17T19:28:50.000Z",
-	  "activated": "2020-03-17T19:28:50.000Z",
-	  "statusChanged": "2020-03-17T19:28:50.000Z",
-	  "lastUpdated": "2020-03-17T19:28:50.000Z",
-	  "passwordChanged": "2020-03-17T19:28:50.000Z",
-	  "profile": {
-		"firstName": "doe",
-		"lastName": "test",
-		"login": "user@example.com",
-		"email": "user@example.com"
-	  },
-	  "credentials": {
-		"password": {},
-		"provider": {
-		  "type": "OKTA",
-		  "name": "OKTA"
-		}
-	  },
-	  "_links": {
-		"self": {
-		  "href": "https://example.okta.com/api/v1/users/00u44z4o0JgUYC0OO4x6"
-		}
-	  }
-	}]
+    "group_name": "test1",
+    "group_id": "00g41ix8hKbsu74Ca4x6",
+    "users": [{
+      "id": "00u44z4o0JgUYC0OO4x6",
+      "status": "PASSWORD_EXPIRED",
+      "created": "2020-03-17T19:28:50.000Z",
+      "activated": "2020-03-17T19:28:50.000Z",
+      "statusChanged": "2020-03-17T19:28:50.000Z",
+      "lastUpdated": "2020-03-17T19:28:50.000Z",
+      "passwordChanged": "2020-03-17T19:28:50.000Z",
+      "profile": {
+        "firstName": "doe",
+        "lastName": "test",
+        "login": "user@example.com",
+        "email": "user@example.com"
+      },
+      "credentials": {
+        "password": {},
+        "provider": {
+          "type": "OKTA",
+          "name": "OKTA"
+        }
+      },
+      "_links": {
+        "self": {
+          "href": "https://example.okta.com/api/v1/users/00u44z4o0JgUYC0OO4x6"
+        }
+      }
+    }]
   }],
   "users_removed_from_groups": [{
-	"group_name": "test1",
-	"group_id": "00g41ix8hKbsu74Ca4x6",
-	  "users": [{
-		"id": "00u44xracEYPXjhwy4x6",
-		"status": "PASSWORD_EXPIRED",
-		"created": "2020-03-17T19:28:27.000Z",
-		"activated": "2020-03-17T19:28:28.000Z",
-		"statusChanged": "2020-03-17T19:28:28.000Z",
-		"lastUpdated": "2020-03-17T19:28:28.000Z",
-		"passwordChanged": "2020-03-17T19:28:27.000Z",
-		"profile": {
-		  "firstName": "bob",
-		  "lastName": "test",
-		  "login": "user@example.com",
-		  "email": "user@example.com"
-		},
-		"credentials": {
-		  "password": {},
-		  "provider": {
-			"type": "OKTA",
-			"name": "OKTA"
-		  }
-		},
-		"_links": {
-		"self": {
-		  "href": "https://example.okta.com/api/v1/users/00u44xracEYPXjhwy4x6"
-		}
-	  }
-	}]
+    "group_name": "test1",
+    "group_id": "00g41ix8hKbsu74Ca4x6",
+      "users": [{
+        "id": "00u44xracEYPXjhwy4x6",
+        "status": "PASSWORD_EXPIRED",
+        "created": "2020-03-17T19:28:27.000Z",
+        "activated": "2020-03-17T19:28:28.000Z",
+        "statusChanged": "2020-03-17T19:28:28.000Z",
+        "lastUpdated": "2020-03-17T19:28:28.000Z",
+        "passwordChanged": "2020-03-17T19:28:27.000Z",
+        "profile": {
+          "firstName": "bob",
+          "lastName": "test",
+          "login": "user@example.com",
+          "email": "user@example.com"
+        },
+        "credentials": {
+          "password": {},
+          "provider": {
+            "type": "OKTA",
+            "name": "OKTA"
+          }
+        },
+        "_links": {
+        "self": {
+          "href": "https://example.okta.com/api/v1/users/00u44xracEYPXjhwy4x6"
+        }
+      }
+    }]
   }]
 }
 ```
@@ -899,6 +979,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 3.5.0 - New action Update Blacklist Zones
 * 3.4.3 - Fix issue where trigger did not return empty arrays when users were removed or added to group
 * 3.4.2 - Fix issue where Monitor User Groups trigger would erroneously detect logins as an addition/removal of a group member
 * 3.4.1 - Fix issue where Monitor User Groups trigger would continually detect the same new group addition

@@ -1,7 +1,7 @@
 {
-	"spec": "44a042a11a950ba94968247a3af9f804",
-	"manifest": "11061d0eb7bd6596b9b940188a8e75cc",
-	"setup": "390939b4e7510b8f5e549941b6344185",
+	"spec": "99c114cbb0c3df1a032d6d22074882c8",
+	"manifest": "fed470393a5190aeb5704650d41aa3e3",
+	"setup": "f1e24f4e0f3d6e321b4ef954075ec619",
 	"schemas": [
 		{
 			"identifier": "add_user_to_group/schema.py",
@@ -54,6 +54,10 @@
 		{
 			"identifier": "unsuspend_user/schema.py",
 			"hash": "ab62ae562b35b25fe96493ee49bf0cdd"
+		},
+		{
+			"identifier": "update_blacklist_zones/schema.py",
+			"hash": "ea81c61e1c327de7dbd8f262826b9845"
 		},
 		{
 			"identifier": "connection/schema.py",

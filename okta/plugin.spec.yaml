@@ -7,7 +7,7 @@ vendor: rapid7
 support: rapid7
 status: []
 description: Secure identity management and single sign-on to any application
-version: 3.4.3
+version: 3.5.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/okta
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -152,6 +152,96 @@ types:
       type: string
     users:
       type: "[]user"
+  hints:
+    allow:
+      title: Allow
+      type: "[]string"
+      description: Allow
+      required: false
+  deactivate:
+    hints:
+      title: Hints
+      type: hints
+      description: Hints
+      required: false
+    href:
+      title: Href
+      type: string
+      description: Href
+      required: false
+  zone_links:
+    deactivate:
+      title: Deactivate
+      type: deactivate
+      description: Deactivate
+      required: false
+    self:
+      title: Self
+      type: deactivate
+      description: Self
+      required: false
+  gateways:
+    type:
+      title: Type
+      type: string
+      description: Type
+      required: false
+    value:
+      title: Value
+      type: string
+      description: Value
+      required: false
+  zone_list:
+    zone_links:
+      title: Zone Links
+      type: zone_links
+      description: Zone links
+      required: false
+    created:
+      title: Created
+      type: string
+      description: Created
+      required: false
+    gateways:
+      title: Gateways
+      type: "[]gateways"
+      description: Gateways
+      required: false
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    lastUpdated:
+      title: Last Updated
+      type: string
+      description: Last updated
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    proxies:
+      title: Proxies
+      type: "[]gateways"
+      description: Proxies
+      required: false
+    status:
+      title: Status
+      type: string
+      description: Status
+      required: false
+    system:
+      title: System
+      type: boolean
+      description: System
+      required: false
+    type:
+      title: Type
+      type: string
+      description: Type
+      required: false
 
 connection:
   okta_url:
@@ -605,3 +695,37 @@ actions:
         description: The user ID of the Okta user
         type: string
         required: false
+  update_blacklist_zones:
+    title: Update Blacklist Zones
+    description: Block or unblock address or network by adding or removing from a blacklist network zone
+    input:
+      name:
+        title: Name
+        description: Name of blacklist zone
+        type: string
+        required: true
+        example: Insight Connect Blacklist Zone
+      address:
+        title: Address
+        description: IP address, Network range, or CIDR to block
+        type: string
+        required: true
+        example: 198.51.100.1
+      blacklist_state:
+        title: Blacklist State
+        description: True to block, false to unblock
+        type: boolean
+        required: false
+        default: True
+        example: True
+    output:
+      zone_list:
+        title: Zone List
+        description: Updated zone list
+        type: object
+        required: true
+      success:
+        title: Success
+        description: True if action successfully executed
+        type: boolean
+        required: true
