@@ -2,7 +2,6 @@ import json
 import re
 import sys
 import yaml
-import logging
 import markdown
 from bs4 import BeautifulSoup, Tag
 import glob
@@ -14,24 +13,23 @@ Output: manifest.json file within specified directory
 
 
 def main():
-    logging.basicConfig(format='%(message)s')
     path = sys.argv[1]
     yaml, md, icon = find_files(path)
     if yaml and md and icon:
         spec = open_and_read_spec(yaml)
-        logging.info(f"Read spec file at {yaml}")
+        print(f"Read spec file at {yaml}")
 
         help_md = open_and_read_md(md)
-        logging.info(f"Read md file at {md}")
+        print(f"Read md file at {md}")
 
         workflow_meta_info = find_workflow_meta_info(icon)
         json_obj = fill_fields(spec, help_md, workflow_meta_info)
-        logging.info(f"Converted fields")
+        print(f"Converted fields")
 
         write_to_json(json_obj, path)
-        logging.info(f"Wrote manifest at {path}")
+        print(f"Wrote manifest at {path}")
     else:
-        logging.warning("ERROR: A file was not found")
+        print("ERROR: A file was not found")
 
 
 # Create a dictionary with keys being h1 headers and values being the text within those h1 sections
@@ -340,7 +338,7 @@ def find_workflow_meta_info(icon: str) -> dict:
             meta_info["Seconds"] = f"{str(seconds)} seconds"
             meta_info["Steps"] = len(steps)
     except FileNotFoundError:
-        logging.warning(f"No such file {icon}")
+        print(f"No such file {icon}")
     return meta_info
 
 
@@ -572,7 +570,7 @@ def find_files(path):
         icon_file = glob.glob(f"{path}/*.icon")[0]
         return yaml_file, md_file, icon_file
     except IndexError:
-        logging.warning(f"ERROR: One of the necessary files was not found. "
+        print(f"ERROR: One of the necessary files was not found. "
                         f"Please check to see if your directory has the necessary files.")
 
 
