@@ -9,13 +9,13 @@ class Component:
 
 class Input:
     COMMENT = "comment"
-    FIELDS = "fields"
     URL = "url"
     
 
 class Output:
     ANALYSTNOTES = "analystNotes"
     COUNTS = "counts"
+    ENTERPRISELISTS = "enterpriseLists"
     ENTITY = "entity"
     METRICS = "metrics"
     RELATEDENTITIES = "relatedEntities"
@@ -34,15 +34,6 @@ class LookupUrlInput(komand.Input):
       "type": "string",
       "title": "Comment",
       "description": "Add a comment to an IP address lookup for Recorded Future",
-      "order": 3
-    },
-    "fields": {
-      "type": "array",
-      "title": "Fields",
-      "description": "List of fields to include with results e.g [\\"sightings\\", \\"analystNotes\\", \\"counts\\", \\"entity\\", \\"metrics\\", \\"relatedEntities\\", \\"risk\\", \\"timestamps\\"]",
-      "items": {
-        "type": "string"
-      },
       "order": 2
     },
     "url": {
@@ -85,6 +76,15 @@ class LookupUrlOutput(komand.Output):
         "$ref": "#/definitions/counts"
       },
       "order": 4
+    },
+    "enterpriseLists": {
+      "type": "array",
+      "title": "Enterprise Lists",
+      "description": "Enterprise lists",
+      "items": {
+        "$ref": "#/definitions/enterpriseLists"
+      },
+      "order": 9
     },
     "entity": {
       "$ref": "#/definitions/entity",
@@ -146,6 +146,50 @@ class LookupUrlOutput(komand.Output):
           "type": "string",
           "title": "Date",
           "order": 2
+        }
+      }
+    },
+    "enterpriseLists": {
+      "type": "object",
+      "title": "enterpriseLists",
+      "properties": {
+        "added": {
+          "type": "string",
+          "title": "Added",
+          "description": "Added",
+          "order": 1
+        },
+        "list": {
+          "$ref": "#/definitions/list",
+          "title": "List",
+          "description": "List",
+          "order": 2
+        }
+      },
+      "definitions": {
+        "list": {
+          "type": "object",
+          "title": "list",
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "ID",
+              "description": "ID",
+              "order": 1
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "Name",
+              "order": 2
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "description": "Type",
+              "order": 3
+            }
+          }
         }
       }
     },
@@ -247,6 +291,30 @@ class LookupUrlOutput(komand.Output):
           "type": "string",
           "title": "Timestamp",
           "order": 5
+        }
+      }
+    },
+    "list": {
+      "type": "object",
+      "title": "list",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "ID",
+          "order": 1
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 2
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type",
+          "order": 3
         }
       }
     },
