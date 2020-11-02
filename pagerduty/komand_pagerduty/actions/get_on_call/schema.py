@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get List of Users on Call"
+    DESCRIPTION = "Get list of on-call users"
 
 
 class Input:
@@ -31,8 +31,8 @@ class GetOnCallOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "users": {
       "type": "array",
-      "title": "Users List",
-      "description": "Users List",
+      "title": "Users",
+      "description": "List of on-call users",
       "items": {
         "$ref": "#/definitions/user"
       },

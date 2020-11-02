@@ -102,7 +102,7 @@ Example output:
         },
         {
             "name": "user2",
-            "email": "user2@example.com",
+            "email": "user@example.com",
             "time_zone": "America/New_York",
             "color": "red",
             "avatar_url": "https://secure.gravatar.com/avatar/0232003bb841231433a0779771360902.png?d=mm&r=PG",
