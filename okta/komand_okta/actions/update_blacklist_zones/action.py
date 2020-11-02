@@ -70,7 +70,7 @@ class UpdateBlacklistZones(komand.Action):
             if len(new_gateways) == len(gateways):
                 raise PluginException(
                     cause=f"The address {value} does not exist in provided Okta zone {name}.",
-                    assistance="Please enter valid address and try again."
+                    assistance="Please enter an address that is blacklisted and try again."
                 )
             else:
                 update_url = requests.compat.urljoin(
