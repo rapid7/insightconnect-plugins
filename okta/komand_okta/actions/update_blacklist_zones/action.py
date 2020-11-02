@@ -47,7 +47,7 @@ class UpdateBlacklistZones(komand.Action):
             for gateway in gateways:
                 if self.check_value(gateway, value):
                     raise PluginException(cause=f"The address {value} already exist in provided Okta zone {name}.",
-                                          assistance="Please enter valid address and try again.")
+                                          assistance="Please enter an address that is not in the blacklist zone.")
 
             gateways.append({
                 "type": value_type,
