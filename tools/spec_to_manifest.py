@@ -29,7 +29,7 @@ def main():
         write_to_json(json_obj, path)
         print(f"Wrote manifest at {path}")
     else:
-        print("ERROR: A file was not found")
+        print("ERROR: A file was not found. Will not generate manifest.")
 
 
 def find_files(path):
