@@ -138,6 +138,29 @@ def handle_documentation(documentation: str) -> [dict]:
     return plugins
 
 
+def get_plugins_list(table: str) -> [dict]:
+    """
+    Creates a plugin list from an html table
+    :param table: The html table to parse through
+    :return: A list of plugins and their versions
+    """
+    soup = BeautifulSoup(table, features="html.parser")
+
+    # Denotes the start of a html table
+    entries = soup.findAll('td')
+
+    if entries:
+        plugin_list = []
+        for i in range(0, len(entries), 3):
+            plugin = {"plugin:": entries[i].text, "version": entries[i + 1].text}
+            plugin_list.append(plugin)
+        return plugin_list
+
+    # No plugins were used
+    else:
+        return []
+
+
 def handle_key_features(key_features: str) -> list:
     """
     Gathers info for the Key Features section
@@ -234,29 +257,6 @@ def handle_links(links_block: str) -> [dict]:
     list_with_links = get_list_items_with_links(references_only)
 
     return list_with_links
-
-
-def get_plugins_list(table: str) -> [dict]:
-    """
-    Creates a plugin list from an html table
-    :param table: The html table to parse through
-    :return: A list of plugins and their versions
-    """
-    soup = BeautifulSoup(table, features="html.parser")
-
-    # Denotes the start of a html table
-    entries = soup.findAll('td')
-
-    if entries:
-        plugin_list = []
-        for i in range(0, len(entries), 3):
-            plugin = {"plugin:": entries[i].text, "version": entries[i + 1].text}
-            plugin_list.append(plugin)
-        return plugin_list
-
-    # No plugins were used
-    else:
-        return []
 
 
 def get_list_items(html_list: str, list_tag: str) -> list:
