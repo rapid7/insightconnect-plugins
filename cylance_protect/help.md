@@ -480,6 +480,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.5.1 - Bug fixes in Delete Asset, hostname whitelisting, and IP address inputs
 * 1.5.0 - New action Delete Asset | Rework utility function
 * 1.4.0 - New actions Update Agent Threat, Update Agent
 * 1.3.0 - New action Search Agents

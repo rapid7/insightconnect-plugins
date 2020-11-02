@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans
-version: 4.4.3
+version: 4.7.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -850,10 +850,20 @@ types:
       title: Results
       type: '[]asset_vulnerability_result'
       required: false
+    since:
+      description: The date when this vulnerability was first detected
+      title: Since
+      type: string
+      required: false
     status:
       description: Status, ie. vulnerable
       title: Status
       type: string
+      required: false
+    risk_score:
+      title: Risk Score
+      description: The risk score for the vulnerability
+      type: float
       required: false
   site:
     assets:
@@ -1646,7 +1656,7 @@ connection:
     description: Username and password
     type: credential_username_password
     required: true
-    example: {'username':'username', 'password':'password'}
+    example: '{"username": "username", "password": "password"}'
 actions:
   scan:
     title: Scan
@@ -1781,6 +1791,13 @@ actions:
         description: ID of the asset for which to find vulnerabilities
         type: string
         required: true
+        example: 234
+      get_risk_score:
+        title: Get Risk Score
+        description: Return risk score along with other vulnerability data
+        type: boolean
+        required: false
+        example: true
     output:
       vulnerabilities:
         title: Vulnerabilities
@@ -1796,6 +1813,7 @@ actions:
         description: ID of the asset for which to find software
         type: string
         required: true
+        example: "234"
     output:
       software:
         title: Software
@@ -2182,6 +2200,19 @@ actions:
         description: 'Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria'
         type: object
         required: true
+      size:
+        title: Size
+        description: The number of records to retrieve. If blank or '0' all assets that match the search will be returned
+        type: number
+        required: false
+        default: 0
+        example: 100
+      sort_criteria:
+        title: Sort Criteria
+        description: JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)
+        type: object
+        required: false
+        example: '{"risk-score": "asc", "criticality-tag": "desc"}'
     output:
       assets:
         title: Assets
@@ -3751,4 +3782,3 @@ triggers:
         description: InsightVM vulnerability exception
         type: vulnerability_exception
         required: false
-

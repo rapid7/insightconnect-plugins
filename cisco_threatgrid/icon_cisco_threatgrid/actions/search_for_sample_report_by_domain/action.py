@@ -4,7 +4,7 @@ from komand.exceptions import ConnectionTestException
 from .schema import SearchForSampleReportByDomainInput, SearchForSampleReportByDomainOutput, Input, Output, Component
 # Custom imports below
 import json
-
+from urllib.parse import urlparse
 
 class SearchForSampleReportByDomain(komand.Action):
 
@@ -16,26 +16,29 @@ class SearchForSampleReportByDomain(komand.Action):
                 output=SearchForSampleReportByDomainOutput())
 
     def run(self, params={}):
-        domain = params.get(Input.DOMAIN)
+        in_domain = params.get(Input.DOMAIN)
+        domain = urlparse(in_domain).netloc
 
-        domain_filename = domain + "_.url"
+        if not domain: # url parse couldn't make sense of the input, use what the user gave us.
+            domain = in_domain
+
+        self.logger.info(f"Searching for domain: {domain}")
         result = self.connection.api.search_domain(
-            q=domain_filename
+            q=domain
         )
 
         # Custom error handler for action
         try:
             results = result.get("data").get("items")
-            if len(results) < 1:
-                raise PluginException(cause=f"Could not find sample with domain {domain}",
-                                      assistance=f"Please check your input domain and verify it matches the sample "
-                                                 f"filename. It should look exactly like \'{domain_filename}\'")
         except json.JSONDecodeError:
             raise PluginException(
                 preset=ConnectionTestException.Preset.INVALID_JSON,
-                data=results.text
+                data=str(result)
             )
 
-        result_object = results[0].get("item")
+        if results:
+            result_object = results[0].get("item")
+        else:
+            result_object = {"status": f"Report not found for domain: {domain}"}
 
         return {Output.SAMPLE_REPORT: komand.helper.clean(result_object)}

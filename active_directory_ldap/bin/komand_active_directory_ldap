@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Active Directory LDAP"
 Vendor = "rapid7"
-Version = "4.0.1"
+Version = "4.0.2"
 Description = "This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network"
 
 

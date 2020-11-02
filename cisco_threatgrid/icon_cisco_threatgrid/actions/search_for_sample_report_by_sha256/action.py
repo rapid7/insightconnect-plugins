@@ -18,24 +18,20 @@ class SearchForSampleReportBySha256(komand.Action):
         sha256 = params.get(Input.SHA256)
 
         self.logger.info(f"Looking for sample with sha246 filename: {sha256}")
-        result = self.connection.api.search_sha256(q=sha256)
-
         try:
-            results = result.get("data").get("items")
+            results = self.connection.api.search_sha256(q=sha256)
         except requests.HTTPError as e:
             raise PluginException(cause="ThreatGrid query for domain failed.",
                                   assistance=f"ThreatGrid query failed, check your API key.\n "
-                                  f"Exception returned was: {e} \n"
-                                  f"Response returned was: {result.text}")
+                                  f"Exception returned was: {e}")
 
-        if len(results) < 1:
+        try:
+            result = results.get("data").get("items")[0]
+        except IndexError:
+            result = {"status": f"Report not found for SHA256: {sha256}"}
+        except Exception:
             raise PluginException(cause=f"Could not find sample with sha256 {sha256}.",
-                                  assistance=f"Please check your input.")
+                                  assistance=f"Please check your input.\n",
+                                  data=str(results))
 
-        # If someone reports a common file or URL, this will return multiple reports. I'm not sure
-        # how to narrow down that result by just the hash
-        report_list = []
-        for result in results:
-            report_list.append(result.get("item"))
-
-        return {Output.SAMPLE_REPORT_LIST: komand.helper.clean(report_list)}
+        return {Output.SAMPLE_REPORT_LIST: komand.helper.clean(result)}
