@@ -9,13 +9,13 @@ class Component:
 
 class Input:
     COMMENT = "comment"
-    FIELDS = "fields"
     HASH = "hash"
     
 
 class Output:
     ANALYSTNOTES = "analystNotes"
     COUNTS = "counts"
+    ENTERPRISELISTS = "enterpriseLists"
     ENTITY = "entity"
     HASHALGORITHM = "hashAlgorithm"
     INTELCARD = "intelCard"
@@ -37,15 +37,6 @@ class LookupHashInput(komand.Input):
       "type": "string",
       "title": "Comment",
       "description": "Add a comment to a hash",
-      "order": 3
-    },
-    "fields": {
-      "type": "array",
-      "title": "Fields",
-      "description": "List of fields to include with results e.g [\\"timestamps\\", \\"sightings\\", \\"threatLists\\", \\"analystNotes\\", \\"counts\\", \\"entity\\", \\"hashAlgorithm\\", \\"intelCard\\", \\"metrics\\", \\"relatedEntities\\", \\"risk\\", \\"timestamps\\"]",
-      "items": {
-        "type": "string"
-      },
       "order": 2
     },
     "hash": {
@@ -88,6 +79,15 @@ class LookupHashOutput(komand.Output):
         "$ref": "#/definitions/counts"
       },
       "order": 4
+    },
+    "enterpriseLists": {
+      "type": "array",
+      "title": "Enterprise Lists",
+      "description": "Enterprise lists",
+      "items": {
+        "$ref": "#/definitions/enterpriseLists"
+      },
+      "order": 12
     },
     "entity": {
       "$ref": "#/definitions/entity",
@@ -170,6 +170,50 @@ class LookupHashOutput(komand.Output):
           "type": "string",
           "title": "Date",
           "order": 2
+        }
+      }
+    },
+    "enterpriseLists": {
+      "type": "object",
+      "title": "enterpriseLists",
+      "properties": {
+        "added": {
+          "type": "string",
+          "title": "Added",
+          "description": "Added",
+          "order": 1
+        },
+        "list": {
+          "$ref": "#/definitions/list",
+          "title": "List",
+          "description": "List",
+          "order": 2
+        }
+      },
+      "definitions": {
+        "list": {
+          "type": "object",
+          "title": "list",
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "ID",
+              "description": "ID",
+              "order": 1
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "Name",
+              "order": 2
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "description": "Type",
+              "order": 3
+            }
+          }
         }
       }
     },
@@ -271,6 +315,30 @@ class LookupHashOutput(komand.Output):
           "type": "string",
           "title": "Timestamp",
           "order": 5
+        }
+      }
+    },
+    "list": {
+      "type": "object",
+      "title": "list",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "ID",
+          "order": 1
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 2
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type",
+          "order": 3
         }
       }
     },
