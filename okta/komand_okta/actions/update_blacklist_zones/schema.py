@@ -27,7 +27,7 @@ class UpdateBlacklistZonesInput(komand.Input):
     "address": {
       "type": "string",
       "title": "Address",
-      "description": "IP address, Network range, or CIDR to block",
+      "description": "IP address, Network range, or CIDR to block or unblock",
       "order": 2
     },
     "blacklist_state": {
@@ -68,7 +68,7 @@ class UpdateBlacklistZonesOutput(komand.Output):
       "order": 2
     },
     "zone_list": {
-      "type": "object",
+      "$ref": "#/definitions/zone_list",
       "title": "Zone List",
       "description": "Updated zone list",
       "order": 1
@@ -77,7 +77,359 @@ class UpdateBlacklistZonesOutput(komand.Output):
   "required": [
     "success",
     "zone_list"
-  ]
+  ],
+  "definitions": {
+    "deactivate": {
+      "type": "object",
+      "title": "deactivate",
+      "properties": {
+        "hints": {
+          "$ref": "#/definitions/hints",
+          "title": "Hints",
+          "description": "Hints",
+          "order": 1
+        },
+        "href": {
+          "type": "string",
+          "title": "Href",
+          "description": "Href",
+          "order": 2
+        }
+      },
+      "definitions": {
+        "hints": {
+          "type": "object",
+          "title": "hints",
+          "properties": {
+            "allow": {
+              "type": "array",
+              "title": "Allow",
+              "description": "Allow",
+              "items": {
+                "type": "string"
+              },
+              "order": 1
+            }
+          }
+        }
+      }
+    },
+    "gateways": {
+      "type": "object",
+      "title": "gateways",
+      "properties": {
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type",
+          "order": 1
+        },
+        "value": {
+          "type": "string",
+          "title": "Value",
+          "description": "Value",
+          "order": 2
+        }
+      }
+    },
+    "hints": {
+      "type": "object",
+      "title": "hints",
+      "properties": {
+        "allow": {
+          "type": "array",
+          "title": "Allow",
+          "description": "Allow",
+          "items": {
+            "type": "string"
+          },
+          "order": 1
+        }
+      }
+    },
+    "zone_links": {
+      "type": "object",
+      "title": "zone_links",
+      "properties": {
+        "deactivate": {
+          "$ref": "#/definitions/deactivate",
+          "title": "Deactivate",
+          "description": "Deactivate",
+          "order": 1
+        },
+        "self": {
+          "$ref": "#/definitions/deactivate",
+          "title": "Self",
+          "description": "Self",
+          "order": 2
+        }
+      },
+      "definitions": {
+        "deactivate": {
+          "type": "object",
+          "title": "deactivate",
+          "properties": {
+            "hints": {
+              "$ref": "#/definitions/hints",
+              "title": "Hints",
+              "description": "Hints",
+              "order": 1
+            },
+            "href": {
+              "type": "string",
+              "title": "Href",
+              "description": "Href",
+              "order": 2
+            }
+          },
+          "definitions": {
+            "hints": {
+              "type": "object",
+              "title": "hints",
+              "properties": {
+                "allow": {
+                  "type": "array",
+                  "title": "Allow",
+                  "description": "Allow",
+                  "items": {
+                    "type": "string"
+                  },
+                  "order": 1
+                }
+              }
+            }
+          }
+        },
+        "hints": {
+          "type": "object",
+          "title": "hints",
+          "properties": {
+            "allow": {
+              "type": "array",
+              "title": "Allow",
+              "description": "Allow",
+              "items": {
+                "type": "string"
+              },
+              "order": 1
+            }
+          }
+        }
+      }
+    },
+    "zone_list": {
+      "type": "object",
+      "title": "zone_list",
+      "properties": {
+        "created": {
+          "type": "string",
+          "title": "Created",
+          "description": "Created",
+          "order": 2
+        },
+        "gateways": {
+          "type": "array",
+          "title": "Gateways",
+          "description": "Gateways",
+          "items": {
+            "$ref": "#/definitions/gateways"
+          },
+          "order": 3
+        },
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "ID",
+          "order": 4
+        },
+        "lastUpdated": {
+          "type": "string",
+          "title": "Last Updated",
+          "description": "Last updated",
+          "order": 5
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 6
+        },
+        "proxies": {
+          "type": "array",
+          "title": "Proxies",
+          "description": "Proxies",
+          "items": {
+            "$ref": "#/definitions/gateways"
+          },
+          "order": 7
+        },
+        "status": {
+          "type": "string",
+          "title": "Status",
+          "description": "Status",
+          "order": 8
+        },
+        "system": {
+          "type": "boolean",
+          "title": "System",
+          "description": "System",
+          "order": 9
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type",
+          "order": 10
+        },
+        "zone_links": {
+          "$ref": "#/definitions/zone_links",
+          "title": "Zone Links",
+          "description": "Zone links",
+          "order": 1
+        }
+      },
+      "definitions": {
+        "deactivate": {
+          "type": "object",
+          "title": "deactivate",
+          "properties": {
+            "hints": {
+              "$ref": "#/definitions/hints",
+              "title": "Hints",
+              "description": "Hints",
+              "order": 1
+            },
+            "href": {
+              "type": "string",
+              "title": "Href",
+              "description": "Href",
+              "order": 2
+            }
+          },
+          "definitions": {
+            "hints": {
+              "type": "object",
+              "title": "hints",
+              "properties": {
+                "allow": {
+                  "type": "array",
+                  "title": "Allow",
+                  "description": "Allow",
+                  "items": {
+                    "type": "string"
+                  },
+                  "order": 1
+                }
+              }
+            }
+          }
+        },
+        "gateways": {
+          "type": "object",
+          "title": "gateways",
+          "properties": {
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "description": "Type",
+              "order": 1
+            },
+            "value": {
+              "type": "string",
+              "title": "Value",
+              "description": "Value",
+              "order": 2
+            }
+          }
+        },
+        "hints": {
+          "type": "object",
+          "title": "hints",
+          "properties": {
+            "allow": {
+              "type": "array",
+              "title": "Allow",
+              "description": "Allow",
+              "items": {
+                "type": "string"
+              },
+              "order": 1
+            }
+          }
+        },
+        "zone_links": {
+          "type": "object",
+          "title": "zone_links",
+          "properties": {
+            "deactivate": {
+              "$ref": "#/definitions/deactivate",
+              "title": "Deactivate",
+              "description": "Deactivate",
+              "order": 1
+            },
+            "self": {
+              "$ref": "#/definitions/deactivate",
+              "title": "Self",
+              "description": "Self",
+              "order": 2
+            }
+          },
+          "definitions": {
+            "deactivate": {
+              "type": "object",
+              "title": "deactivate",
+              "properties": {
+                "hints": {
+                  "$ref": "#/definitions/hints",
+                  "title": "Hints",
+                  "description": "Hints",
+                  "order": 1
+                },
+                "href": {
+                  "type": "string",
+                  "title": "Href",
+                  "description": "Href",
+                  "order": 2
+                }
+              },
+              "definitions": {
+                "hints": {
+                  "type": "object",
+                  "title": "hints",
+                  "properties": {
+                    "allow": {
+                      "type": "array",
+                      "title": "Allow",
+                      "description": "Allow",
+                      "items": {
+                        "type": "string"
+                      },
+                      "order": 1
+                    }
+                  }
+                }
+              }
+            },
+            "hints": {
+              "type": "object",
+              "title": "hints",
+              "properties": {
+                "allow": {
+                  "type": "array",
+                  "title": "Allow",
+                  "description": "Allow",
+                  "items": {
+                    "type": "string"
+                  },
+                  "order": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
     """)
 

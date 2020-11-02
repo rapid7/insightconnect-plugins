@@ -35,7 +35,7 @@ This action is used to block or unblock address or network by adding or removing
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|IP address, Network range, or CIDR to block|None|198.51.100.1|
+|address|string|None|True|IP address, Network range, or CIDR to block or unblock|None|198.51.100.1|
 |blacklist_state|boolean|True|False|True to block, false to unblock|None|True|
 |name|string|None|True|Name of blacklist zone|None|Insight Connect Blacklist Zone|
 
@@ -54,7 +54,7 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |success|boolean|True|True if action successfully executed|
-|zone_list|object|True|Updated zone list|
+|zone_list|zone_list|True|Updated zone list|
 
 Example output:
 

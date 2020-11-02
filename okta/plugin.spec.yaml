@@ -707,7 +707,7 @@ actions:
         example: Insight Connect Blacklist Zone
       address:
         title: Address
-        description: IP address, Network range, or CIDR to block
+        description: IP address, Network range, or CIDR to block or unblock
         type: string
         required: true
         example: 198.51.100.1
@@ -722,7 +722,7 @@ actions:
       zone_list:
         title: Zone List
         description: Updated zone list
-        type: object
+        type: zone_list
         required: true
       success:
         title: Success

@@ -88,7 +88,7 @@ class UpdateBlacklistZones(komand.Action):
 
         return {
             Output.SUCCESS: True,
-            Output.ZONE_LIST: response.json()
+            Output.ZONE_LIST: komand.helper.clean(response.json())
         }
 
     @staticmethod
