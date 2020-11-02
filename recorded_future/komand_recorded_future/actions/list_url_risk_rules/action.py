@@ -16,7 +16,7 @@ class ListUrlRiskRules(komand.Action):
 
     def run(self, params={}):
         try:
-            query_headers = {"X-RFToken": self.connection.token}
+            query_headers = self.connection.headers
             results = requests.get(
                 "https://api.recordedfuture.com/v2/url/riskrules",
                 headers=query_headers

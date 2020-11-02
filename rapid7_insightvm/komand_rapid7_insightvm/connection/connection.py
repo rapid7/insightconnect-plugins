@@ -1,10 +1,11 @@
 import komand
-from .schema import ConnectionSchema
+from .schema import ConnectionSchema, Input
 # Custom imports below
 import urllib3
 from requests import Session
 from requests.auth import HTTPBasicAuth
 from requests.exceptions import RequestException
+from komand_rapid7_insightvm.util import async_requests
 from collections import namedtuple
 from komand_rapid7_insightvm.util import endpoints
 
@@ -14,16 +15,18 @@ class Connection(komand.Connection):
     def __init__(self):
         self.session = None
         self.console_url = None
+        self.async_connection = None
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
     def connect(self, params):
-        username = params["credentials"]["username"]
-        password = params["credentials"]["password"]
-        self.console_url = params["url"]
+        username = params.get(Input.CREDENTIALS).get('username')
+        password = params.get(Input.CREDENTIALS).get('password')
+        self.console_url = params.get(Input.URL)
 
         self.session = Session()
         self.session.auth = HTTPBasicAuth(username=username,
                                           password=password)
+        self.async_connection = async_requests.AsyncRequests(username, password)
 
         # Suppress insecure request messages
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)

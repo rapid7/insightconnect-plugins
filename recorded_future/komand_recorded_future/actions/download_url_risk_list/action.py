@@ -53,7 +53,7 @@ class DownloadUrlRiskList(komand.Action):
             if risk_list:
                 query_params[Input.LIST] = risk_list
 
-            query_headers = {"X-RFToken": self.connection.token}
+            query_headers = self.connection.headers
             results = requests.get(
                 "https://api.recordedfuture.com/v2/url/risklist",
                 params=query_params,
