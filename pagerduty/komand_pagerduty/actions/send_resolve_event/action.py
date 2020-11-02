@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SendResolveEventInput, SendResolveEventOutput
 # Custom imports below
 import pypd
 
 
-class SendResolveEvent(komand.Action):
+class SendResolveEvent(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
