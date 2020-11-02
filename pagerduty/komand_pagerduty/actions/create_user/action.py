@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CreateUserInput, CreateUserOutput
 # Custom imports below
 import pypd
 from komand_pagerduty.util.util import empty_user, normalize_user
 
 
-class CreateUser(komand.Action):
+class CreateUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
                 name='create_user',

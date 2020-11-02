@@ -16,20 +16,26 @@ class LookupUrl(komand.Action):
     def run(self, params={}):
         try:
             url = params.get(Input.URL)
-            fields = params.get(Input.FIELDS)
             comment = params.get(Input.COMMENT)
-            if not len(fields):
-                fields = None
+
+            fields = [
+                "analystNotes",
+                "counts",
+                "enterpriseLists",
+                "entity",
+                "metrics",
+                "relatedEntities",
+                "risk",
+                "sightings",
+                "timestamps"
+            ]
+
             if not len(comment):
                 comment = None
 
             url_report = self.connection.client.lookup_url(
                 url=url, fields=fields, comment=comment
             )
-            if url_report.get("warnings", False):
-                self.logger.info(
-                    'Option for fields are: ["sightings","threatLists","analystNotes","counts","entity","hashAlgorithm","intelCard","metrics", "relatedEntities" ,"risk" ,"timestamps"]'
-                )
 
             return komand.helper.clean(url_report["data"])
 

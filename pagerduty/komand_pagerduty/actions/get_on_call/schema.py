@@ -4,60 +4,44 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get a User by ID"
+    DESCRIPTION = "Get list of on-call users"
 
 
 class Input:
-    ID = "id"
-    
+    pass
 
 class Output:
-    FOUND = "found"
-    USER = "user"
+    USERS = "users"
     
 
-class GetUserByIdInput(insightconnect_plugin_runtime.Input):
+class GetOnCallInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
-   {
-  "type": "object",
-  "title": "Variables",
-  "properties": {
-    "id": {
-      "type": "string",
-      "title": "User ID",
-      "description": "User ID",
-      "order": 1
-    }
-  },
-  "required": [
-    "id"
-  ]
-}
+   {}
     """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
-class GetUserByIdOutput(insightconnect_plugin_runtime.Output):
+class GetOnCallOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "found": {
-      "type": "boolean",
-      "title": "Found",
-      "description": "True if found",
+    "users": {
+      "type": "array",
+      "title": "Users",
+      "description": "List of on-call users",
+      "items": {
+        "$ref": "#/definitions/user"
+      },
       "order": 1
-    },
-    "user": {
-      "$ref": "#/definitions/user",
-      "title": "User",
-      "description": "User",
-      "order": 2
     }
   },
+  "required": [
+    "users"
+  ],
   "definitions": {
     "user": {
       "type": "object",
