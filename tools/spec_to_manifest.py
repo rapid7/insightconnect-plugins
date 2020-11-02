@@ -32,6 +32,54 @@ def main():
         print("ERROR: A file was not found")
 
 
+def find_files(path):
+    try:
+        yaml_file = glob.glob(f"{path}/*.spec.yaml")[0]
+        md_file = glob.glob(f"{path}/help.md")[0]
+        icon_file = glob.glob(f"{path}/*.icon")[0]
+        return yaml_file, md_file, icon_file
+    except IndexError:
+        print(f"ERROR: One of the necessary files was not found. "
+              f"Please check to see if your directory has the necessary files.")
+
+
+def open_and_read_spec(file):
+    spec_file = open(file)
+    loaded_spec = yaml.safe_load(spec_file)
+    return loaded_spec
+
+
+def open_and_read_md(markdown_file):
+    with open(markdown_file) as md:
+        # Converts markdown into html for easier parsing
+        html_text = markdown.markdown(md.read(), extensions=["tables"])
+
+        md_dict = html_convert_to_dict(html_text)
+    return md_dict
+
+
+def html_convert_to_dict(html):
+    """
+    Fills in help.md info in a dict
+    :param html: The html that was converted from help.md
+    :return: Dictionary with all relevant info from help.md
+    """
+    info_dict = dict()
+
+    # Breaks up html (i.e. markdown file) based on its headers
+    h1_blocks = get_html_chunks(html, "h1", ["Usage"])
+
+    info_dict["Description"] = clean_to_plaintext(h1_blocks.get("Description"))
+
+    info_dict["Plugins Used"] = handle_documentation(h1_blocks.get("Documentation"))
+    info_dict["Key Features"] = handle_key_features(h1_blocks.get("Key Features"))
+    info_dict["Requirements"] = handle_requirements(h1_blocks.get("Requirements"))
+    info_dict["Version History"] = handle_version_history(h1_blocks.get("Version History"))
+    info_dict["Links"] = handle_links(h1_blocks.get("Links"))
+
+    return info_dict
+
+
 # Create a dictionary with keys being h1 headers and values being the text within those h1 sections
 # This includes any tags as well (h2, p, etc)
 def get_html_chunks(html: str, tag: str, exceptions=None) -> dict:
@@ -69,28 +117,6 @@ def get_html_chunks(html: str, tag: str, exceptions=None) -> dict:
     html_chunks[key] = html_block
 
     return html_chunks
-
-
-def html_convert_to_dict(html):
-    """
-    Fills in help.md info in a dict
-    :param html: The html that was converted from help.md
-    :return: Dictionary with all relevant info from help.md
-    """
-    info_dict = dict()
-
-    # Breaks up html (i.e. markdown file) based on its headers
-    h1_blocks = get_html_chunks(html, "h1", ["Usage"])
-
-    info_dict["Description"] = clean_to_plaintext(h1_blocks.get("Description"))
-
-    info_dict["Plugins Used"] = handle_documentation(h1_blocks.get("Documentation"))
-    info_dict["Key Features"] = handle_key_features(h1_blocks.get("Key Features"))
-    info_dict["Requirements"] = handle_requirements(h1_blocks.get("Requirements"))
-    info_dict["Version History"] = handle_version_history(h1_blocks.get("Version History"))
-    info_dict["Links"] = handle_links(h1_blocks.get("Links"))
-
-    return info_dict
 
 
 def handle_documentation(documentation: str) -> [dict]:
@@ -224,7 +250,7 @@ def get_plugins_list(table: str) -> [dict]:
     if entries:
         plugin_list = []
         for i in range(0, len(entries), 3):
-            plugin = {"plugin:": entries[i].text, "version": entries[i+1].text}
+            plugin = {"plugin:": entries[i].text, "version": entries[i + 1].text}
             plugin_list.append(plugin)
         return plugin_list
 
@@ -546,32 +572,6 @@ def create_tags(hub_tags: dict) -> dict:
     obj = {"categories": categories, "third_party_products": third_party_products, "keywords": keywords}
 
     return obj
-
-
-def open_and_read_spec(file):
-    spec_file = open(file)
-    loaded_spec = yaml.safe_load(spec_file)
-    return loaded_spec
-
-
-def open_and_read_md(markdown_file):
-    with open(markdown_file) as md:
-        # Converts markdown into html for easier parsing
-        html_text = markdown.markdown(md.read(), extensions=["tables"])
-
-        md_dict = html_convert_to_dict(html_text)
-    return md_dict
-
-
-def find_files(path):
-    try:
-        yaml_file = glob.glob(f"{path}/*.spec.yaml")[0]
-        md_file = glob.glob(f"{path}/help.md")[0]
-        icon_file = glob.glob(f"{path}/*.icon")[0]
-        return yaml_file, md_file, icon_file
-    except IndexError:
-        print(f"ERROR: One of the necessary files was not found. "
-                        f"Please check to see if your directory has the necessary files.")
 
 
 def write_to_json(obj, path):
