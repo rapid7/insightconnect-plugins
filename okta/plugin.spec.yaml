@@ -704,7 +704,7 @@ actions:
         description: Name of blacklist zone
         type: string
         required: true
-        example: Insight Connect Blacklist Zone
+        example: InsightConnect Blacklist Zone
       address:
         title: Address
         description: IP address, Network range, or CIDR to block or unblock
