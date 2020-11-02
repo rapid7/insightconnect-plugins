@@ -19,17 +19,17 @@ def main():
     yaml, md, icon = find_files(path)
     if yaml and md and icon:
         spec = open_and_read_spec(yaml)
-        logging.info("Read spec file at " + yaml)
+        logging.info(f"Read spec file at {yaml}")
 
         help_md = open_and_read_md(md)
-        logging.info("Read md file at " + md)
+        logging.info(f"Read md file at {md}")
 
         workflow_meta_info = find_workflow_meta_info(icon)
         json_obj = fill_fields(spec, help_md, workflow_meta_info)
-        logging.info("Converted fields")
+        logging.info(f"Converted fields")
 
         write_to_json(json_obj, path)
-        logging.info("Wrote manifest at " + path)
+        logging.info(f"Wrote manifest at {path}")
     else:
         logging.warning("ERROR: A file was not found")
 
@@ -226,7 +226,7 @@ def get_plugins_list(table: str) -> [dict]:
     if entries:
         plugin_list = []
         for i in range(0, len(entries), 3):
-            plugin = {"plugin:": entries[i].text, "version": entries[i + 1].text}
+            plugin = {"plugin:": entries[i].text, "version": entries[i+1].text}
             plugin_list.append(plugin)
         return plugin_list
 
@@ -495,7 +495,7 @@ def create_workflow_extension(workflow_name: str, meta_info: dict, plugins: [dic
     """
     obj = dict()
     obj["type"] = "workflow"
-    obj["file"] = workflow_name + ".icon"
+    obj["file"] = f"{workflow_name}.icon"
     obj["workflowTime"] = meta_info["Seconds"]
     obj["pluginsUsed"] = plugins
     obj["workflowSteps"] = meta_info["Steps"]
@@ -567,9 +567,9 @@ def open_and_read_md(markdown_file):
 
 def find_files(path):
     try:
-        yaml_file = glob.glob(path + "/*.spec.yaml")[0]
-        md_file = glob.glob(path + "/help.md")[0]
-        icon_file = glob.glob(path + "/*.icon")[0]
+        yaml_file = glob.glob(f"{path}/*.spec.yaml")[0]
+        md_file = glob.glob(f"{path}/help.md")[0]
+        icon_file = glob.glob(f"{path}/*.icon")[0]
         return yaml_file, md_file, icon_file
     except IndexError:
         logging.warning(f"ERROR: One of the necessary files was not found. "
