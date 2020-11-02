@@ -49,7 +49,7 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|users|[]user|True|Users List|
+|users|[]user|True|List of on-call users|
 
 Example output:
 
