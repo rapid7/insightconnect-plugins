@@ -38,7 +38,7 @@ class UpdateBlacklistZones(komand.Action):
                 break
 
         if not zone:
-            raise PluginException(cause=f"Name {name} does not exist in Okta zones. ",
+            raise PluginException(cause=f"Name {name} does not exist in Okta zones.",
                                   assistance="Please enter valid zone name and try again.")
 
         zone_id = zone.get("id")
@@ -87,7 +87,6 @@ class UpdateBlacklistZones(komand.Action):
             )
 
         return {
-            Output.SUCCESS: True,
             Output.ZONE_LIST: komand.helper.clean(response.json())
         }
 

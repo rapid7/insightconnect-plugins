@@ -14,7 +14,6 @@ class Input:
     
 
 class Output:
-    SUCCESS = "success"
     ZONE_LIST = "zone_list"
     
 
@@ -61,12 +60,6 @@ class UpdateBlacklistZonesOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "success": {
-      "type": "boolean",
-      "title": "Success",
-      "description": "True if action successfully executed",
-      "order": 2
-    },
     "zone_list": {
       "$ref": "#/definitions/zone_list",
       "title": "Zone List",
@@ -75,7 +68,6 @@ class UpdateBlacklistZonesOutput(komand.Output):
     }
   },
   "required": [
-    "success",
     "zone_list"
   ],
   "definitions": {
@@ -91,8 +83,8 @@ class UpdateBlacklistZonesOutput(komand.Output):
         },
         "href": {
           "type": "string",
-          "title": "Href",
-          "description": "Href",
+          "title": "HREF",
+          "description": "HREF",
           "order": 2
         }
       },
@@ -177,8 +169,8 @@ class UpdateBlacklistZonesOutput(komand.Output):
             },
             "href": {
               "type": "string",
-              "title": "Href",
-              "description": "Href",
+              "title": "HREF",
+              "description": "HREF",
               "order": 2
             }
           },
@@ -301,8 +293,8 @@ class UpdateBlacklistZonesOutput(komand.Output):
             },
             "href": {
               "type": "string",
-              "title": "Href",
-              "description": "Href",
+              "title": "HREF",
+              "description": "HREF",
               "order": 2
             }
           },
@@ -387,8 +379,8 @@ class UpdateBlacklistZonesOutput(komand.Output):
                 },
                 "href": {
                   "type": "string",
-                  "title": "Href",
-                  "description": "Href",
+                  "title": "HREF",
+                  "description": "HREF",
                   "order": 2
                 }
               },

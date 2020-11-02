@@ -1,5 +1,5 @@
 {
-	"spec": "8c15e41c39e4c703130d06e0a283f489",
+	"spec": "d080ab322267476b51ac0502398e3ec3",
 	"manifest": "fed470393a5190aeb5704650d41aa3e3",
 	"setup": "f1e24f4e0f3d6e321b4ef954075ec619",
 	"schemas": [
@@ -57,7 +57,7 @@
 		},
 		{
 			"identifier": "update_blacklist_zones/schema.py",
-			"hash": "9e220000bc76fbaede763574259527ed"
+			"hash": "b9b32e17a9f26153a16b258dc9ec97ce"
 		},
 		{
 			"identifier": "connection/schema.py",

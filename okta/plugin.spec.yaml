@@ -165,9 +165,9 @@ types:
       description: Hints
       required: false
     href:
-      title: Href
+      title: HREF
       type: string
-      description: Href
+      description: HREF
       required: false
   zone_links:
     deactivate:
@@ -723,9 +723,4 @@ actions:
         title: Zone List
         description: Updated zone list
         type: zone_list
-        required: true
-      success:
-        title: Success
-        description: True if action successfully executed
-        type: boolean
         required: true
