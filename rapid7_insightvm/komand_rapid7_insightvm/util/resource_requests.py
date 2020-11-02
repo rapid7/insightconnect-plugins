@@ -5,6 +5,8 @@ import urllib3
 from komand.exceptions import PluginException
 from typing import NamedTuple, Collection
 
+# Suppress insecure request messages
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 class RequestResult(NamedTuple):
     """
@@ -64,9 +66,6 @@ class ResourceRequests(object):
         self.logger = logger
         self.session = session
         self.session.headers.update(self._HEADERS)
-
-        # Suppress insecure request messages
-        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
     def resource_request(self, endpoint: str, method: str = 'get', params: Collection = None, payload: dict = None,
                          json_response: bool = True) -> dict:
@@ -195,7 +194,13 @@ class ResourceRequests(object):
             raise PluginException(cause=e, assistance=assistance)
 
         resource_request_status_code_check(response.text, response.status_code)
-        response_json = response.json()
+        try:
+            response_json = response.json()
+        except json.decoder.JSONDecodeError as e:
+            raise PluginException(cause=f'Received an unexpected response from InsightVM '
+                                        f'(non-JSON or no response was received). ',
+                                  assistance=f'Contact support for help. Exception returned was {e}',
+                                  data=response.text)
 
         result = RequestResult(page_num=response_json['page']['number'],
                                total_pages=response_json['page']['totalPages'],

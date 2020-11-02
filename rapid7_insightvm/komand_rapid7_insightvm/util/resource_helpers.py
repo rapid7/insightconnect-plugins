@@ -1,8 +1,14 @@
 import defusedxml.ElementTree as etree
 import urllib3
 import re
+from requests import Session
+from logging import Logger
+from komand.exceptions import PluginException
 from .exceptions import ResourceNotFound
 from . import endpoints, resource_requests
+
+# Suppress insecure request messages
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 class V1Session:
@@ -10,18 +16,17 @@ class V1Session:
     Used to authenticate and deauthenticate from the v1 API
     """
 
+    _SUPPORT = 'Contact support for assistance'
+
     def __init__(self, session, logger):
         """
         Creates a new instance of V1Session
-        :param session: Session object available to Komand actions/triggers, usually self.connection.session
-        :param logger: Logger object available to Komand actions/triggers, usually self.logger
+        :param session: Session object available to InsightConnect actions/triggers, usually self.connection.session
+        :param logger: Logger object available to InsightConnect actions/triggers, usually self.logger
         :return: ResourceHelper object
         """
         self.logger = logger
         self.session = session
-
-        # Suppress insecure request messages
-        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
     def v1_authenticate(self, console_url: str):
         """
@@ -42,11 +47,13 @@ class V1Session:
             self.logger.info('Successfully authenticated to APIv1')
             self.session.headers.update(headers)
         elif response.status_code == 302:
-            error = "ERROR: Authentication for APIv1 was not valid"
-            raise Exception(error)
+            error = "Authentication for APIv1 was not valid"
+            raise PluginException(cause=error,
+                                  assistance=self._SUPPORT)
         else:
-            error = "ERROR: Failed to obtain an APIv1 session ID."
-            raise Exception(error)
+            error = "Failed to obtain an APIv1 session ID."
+            raise PluginException(cause=error,
+                                  assistance=self._SUPPORT)
 
     def v1_deauthenticate(self, console_url: str):
         """
@@ -68,27 +75,29 @@ class V1Session:
             self.session.headers.pop('nexposeCCSessionID')
             self.session.headers.pop('Cookie')
         else:
-            error = "ERROR: Failed to log out via APIv1"
-            raise Exception(error)
+            error = 'Failed to log out via APIv1'
+            raise PluginException(cause=error,
+                                  assistance=self._SUPPORT)
 
 
 class ValidateUser:
     """
     Validates that a user exists and has the correct permissions
     """
-    def __init__(self, session: requests.Session, logger: logging.Logger):
+
+    _SUPPORT = 'Contact support for assistance'
+    _BADJSON = 'Unexpected response from InsightVM'
+
+    def __init__(self, session: Session, logger: Logger):
         """
         Creates a new instance of ValidateUser
-        :param session: Session object available to Komand actions/triggers, usually self.connection.session
-        :param logger: Logger object available to Komand actions/triggers, usually self.logger
+        :param session: Session object available to InsightConnect actions/triggers, usually self.connection.session
+        :param logger: Logger object available to InsightConnect actions/triggers, usually self.logger
         :return: ResourceHelper object
         """
         self.logger = logger
         self.session = session
         self.requests = resource_requests.ResourceRequests(session=self.session, logger=self.logger)
-
-        # Suppress insecure request messages
-        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
     def validate_role_exists(self, console_url: str, role_id: str) -> dict:
         """
@@ -121,41 +130,57 @@ class ValidateUser:
         :param user: dict containing the details for a user (from the InsightVM API or matching the format)
         :return: The user dict with updated permissions if required
         """
-        endpoint = endpoints.Role.roles(console_url, user['role']['id'])
+        try:
+            endpoint = endpoints.Role.roles(console_url, user['role']['id'])
+        except KeyError:
+            raise PluginException(cause=self._BADJSON,
+                                  assistance=self._SUPPORT)
         role = self.requests.resource_request(endpoint=endpoint)
 
         # Set All Sites permission if required and not set
-        if not user['role']['allSites']:
-            for permission in ("all-permissions", "manage-sites", "manage-tags"):
-                if permission in role['privileges']:
-                    self.logger.info(
-                        f"Setting 'Access All Sites' to 'true' as it is required based "
-                        f"on the permissions for the role '{user['role']['id']}'"
-                    )
-                    user['role']['allSites'] = True
-                    break
+        try:
+            if not user['role']['allSites']:
+                for permission in ("all-permissions", "manage-sites", "manage-tags"):
+                    if permission in role['privileges']:
+                        self.logger.info(
+                            f"Setting 'Access All Sites' to 'true' as it is required based "
+                            f"on the permissions for the role '{user['role']['id']}'"
+                        )
+                        user['role']['allSites'] = True
+                        break
+        except KeyError:
+            raise PluginException(cause=self._BADJSON,
+                                  assistance=self._SUPPORT)
 
         # Set All Asset Groups permission if required and not set
-        if not user['role']['allAssetGroups']:
-            for permission in ("all-permissions", "manage-dynamic-asset-groups"):
-                if permission in role['privileges']:
-                    self.logger.info(
-                        f"Setting 'Access All Asset Groups' to 'true' as it is required based "
-                        f"on the permissions for the role '{user['role']['id']}'"
-                    )
-                    user['role']['allAssetGroups'] = True
-                    break
+        try:
+            if not user['role']['allAssetGroups']:
+                for permission in ("all-permissions", "manage-dynamic-asset-groups"):
+                    if permission in role['privileges']:
+                        self.logger.info(
+                            f"Setting 'Access All Asset Groups' to 'true' as it is required based "
+                            f"on the permissions for the role '{user['role']['id']}'"
+                        )
+                        user['role']['allAssetGroups'] = True
+                        break
+        except KeyError:
+            raise PluginException(cause=self._BADJSON,
+                                  assistance=self._SUPPORT)
 
         # Set superuser permission if required and not set
         # Do this silently as it isn't exposed to the user of the plugin and
         # appears to simply be an internal setting that custom roles cannot have
-
-        if not user['role']['superuser'] and (user['role']['id'] == 'global-admin'):
-            user['role']['superuser'] = True
+        try:
+            if not user['role']['superuser'] and (user['role']['id'] == 'global-admin'):
+                user['role']['superuser'] = True
+        except KeyError:
+            raise PluginException(cause=self._BADJSON,
+                                  assistance=self._SUPPORT)
 
         return user
 
-    def validate_user_email(self, email: str) -> None:
+    @staticmethod
+    def validate_user_email(email: str) -> None:
         """
         Validate a user email address string.
         :param email: Email address to validate
@@ -164,9 +189,9 @@ class ValidateUser:
         email_regex = re.compile(r'[^@]+@[^@]+\.[^@]+')
 
         if not email_regex.match(email):
-            error = 'ERROR: Email address for user account was not valid!'
-            self.logger.error(error)
-            raise Exception(error)
+            error = 'The email address for user account was not valid!'
+            raise PluginException(cause=error,
+                                  assistance='Ensure that the email address is correct')
 
     def validate_user(self, console_url: str, user: dict) -> dict:
         """
