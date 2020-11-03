@@ -20,8 +20,11 @@ class Query(komand.Action):
     def run(self, params={}):
         time_now = int(time.time())
         request = ResourceHelper(self.connection.session, self.logger)
+        # 7776000 - is for three months from now.
+        # It is here because InsightDR keep logs for three months in hot storage
+        three_months_seconds = 7776000
         request_params = {
-            "from": (time_now - 7776000) * 1000,
+            "from": (time_now - three_months_seconds) * 1000,
             "to": time_now * 1000
         }
         response = request.resource_request(

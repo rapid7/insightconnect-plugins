@@ -36,7 +36,7 @@ Example input:
 
 ### Actions
 
-#### Query
+#### Get Query Results
 
 This action is used to query and return data using LEQL.
 
@@ -328,7 +328,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.3.0 - New action Query
+* 1.3.0 - New action Get Query Results
 * 1.2.0 - New Action Assign User to Investigation
 * 1.1.1 - New spec and help.md format for the Extension Library
 * 1.1.0 - New Action Add Indicators to a Threat

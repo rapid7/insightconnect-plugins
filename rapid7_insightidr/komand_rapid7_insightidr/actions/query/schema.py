@@ -62,11 +62,158 @@ class QueryOutput(komand.Output):
       "type": "object",
       "title": "eventData",
       "properties": {
+        "asSignatureCreationTime": {
+          "type": "string",
+          "title": "As Signature Creation Time",
+          "description": "As signature creation time",
+          "order": 6
+        },
+        "assignatureVersion": {
+          "type": "string",
+          "title": "As Signature Version",
+          "description": "As signature version",
+          "order": 4
+        },
+        "avSignatureCreationTime": {
+          "type": "string",
+          "title": "AV Signature Creation Time",
+          "description": "AV signature creation time",
+          "order": 20
+        },
+        "avsignatureVersion": {
+          "type": "string",
+          "title": "AV Signature Version",
+          "description": "AV signature version",
+          "order": 21
+        },
+        "bmState": {
+          "type": "string",
+          "title": "BMS State",
+          "description": "BMS state",
+          "order": 11
+        },
+        "data": {
+          "type": "array",
+          "title": "Data",
+          "description": "Data",
+          "items": {
+            "type": "object"
+          },
+          "order": 18
+        },
+        "engineVersion": {
+          "type": "string",
+          "title": "Engine Version",
+          "description": "Engine version",
+          "order": 10
+        },
+        "ioavState": {
+          "type": "string",
+          "title": "IOAV State",
+          "description": "IOAV state",
+          "order": 5
+        },
+        "lastAsSignatureAge": {
+          "type": "string",
+          "title": "Last As Signature Age",
+          "description": "Last as signature age",
+          "order": 2
+        },
+        "lastAvSignatureAge": {
+          "type": "string",
+          "title": "Last AV Signature Age",
+          "description": "Last AV signature age",
+          "order": 22
+        },
+        "lastFullScanAge": {
+          "type": "string",
+          "title": "Last Full Scan Age",
+          "description": "Last full scan age",
+          "order": 25
+        },
+        "lastFullScanEndTime": {
+          "type": "string",
+          "title": "Last Full Scan End Time",
+          "description": "Last full scan end time",
+          "order": 13
+        },
+        "lastFullScanSource": {
+          "type": "string",
+          "title": "Last Full Scan Source",
+          "description": "Last full scan source",
+          "order": 7
+        },
+        "lastFullScanStartTime": {
+          "type": "string",
+          "title": "Last Full Scan Start Time",
+          "description": "Last full scan start time",
+          "order": 9
+        },
+        "lastQuickScanAge": {
+          "type": "string",
+          "title": "Last Quick Scan Age",
+          "description": "Last quick scan age",
+          "order": 17
+        },
+        "lastQuickScanEndTime": {
+          "type": "string",
+          "title": "Last Quick Scan End Time",
+          "description": "Last quick scan end time",
+          "order": 19
+        },
+        "lastQuickScanSource": {
+          "type": "string",
+          "title": "Last Quick Scan Source",
+          "description": "Last quick scan source",
+          "order": 12
+        },
+        "lastQuickScanStartTime": {
+          "type": "string",
+          "title": "Last Quick Scan Start Time",
+          "description": "Last quick scan start time",
+          "order": 24
+        },
+        "nriEngineVersion": {
+          "type": "string",
+          "title": "NRI Engine Version",
+          "description": "NRI engine version",
+          "order": 23
+        },
+        "nriSignatureVersion": {
+          "type": "string",
+          "title": "NRI Signature Version",
+          "description": "NRI Signature Version",
+          "order": 8
+        },
         "oaState": {
           "type": "string",
           "title": "OA State",
           "description": "OA state",
           "order": 1
+        },
+        "platformVersion": {
+          "type": "string",
+          "title": "Platform Version",
+          "description": "Platform version",
+          "order": 16
+        },
+        "productName": {
+          "type": "string",
+          "title": "Product Name",
+          "description": "Product name",
+          "order": 14
+        },
+        "productStatus": {
+          "type": "string",
+          "title": "Product Status",
+          "description": "Product status",
+          "order": 3
+        },
+        "rtpState": {
+          "type": "string",
+          "title": "RTP State",
+          "description": "RTP state",
+          "order": 15
         }
       }
     },
@@ -122,11 +269,158 @@ class QueryOutput(komand.Output):
           "type": "object",
           "title": "eventData",
           "properties": {
+            "asSignatureCreationTime": {
+              "type": "string",
+              "title": "As Signature Creation Time",
+              "description": "As signature creation time",
+              "order": 6
+            },
+            "assignatureVersion": {
+              "type": "string",
+              "title": "As Signature Version",
+              "description": "As signature version",
+              "order": 4
+            },
+            "avSignatureCreationTime": {
+              "type": "string",
+              "title": "AV Signature Creation Time",
+              "description": "AV signature creation time",
+              "order": 20
+            },
+            "avsignatureVersion": {
+              "type": "string",
+              "title": "AV Signature Version",
+              "description": "AV signature version",
+              "order": 21
+            },
+            "bmState": {
+              "type": "string",
+              "title": "BMS State",
+              "description": "BMS state",
+              "order": 11
+            },
+            "data": {
+              "type": "array",
+              "title": "Data",
+              "description": "Data",
+              "items": {
+                "type": "object"
+              },
+              "order": 18
+            },
+            "engineVersion": {
+              "type": "string",
+              "title": "Engine Version",
+              "description": "Engine version",
+              "order": 10
+            },
+            "ioavState": {
+              "type": "string",
+              "title": "IOAV State",
+              "description": "IOAV state",
+              "order": 5
+            },
+            "lastAsSignatureAge": {
+              "type": "string",
+              "title": "Last As Signature Age",
+              "description": "Last as signature age",
+              "order": 2
+            },
+            "lastAvSignatureAge": {
+              "type": "string",
+              "title": "Last AV Signature Age",
+              "description": "Last AV signature age",
+              "order": 22
+            },
+            "lastFullScanAge": {
+              "type": "string",
+              "title": "Last Full Scan Age",
+              "description": "Last full scan age",
+              "order": 25
+            },
+            "lastFullScanEndTime": {
+              "type": "string",
+              "title": "Last Full Scan End Time",
+              "description": "Last full scan end time",
+              "order": 13
+            },
+            "lastFullScanSource": {
+              "type": "string",
+              "title": "Last Full Scan Source",
+              "description": "Last full scan source",
+              "order": 7
+            },
+            "lastFullScanStartTime": {
+              "type": "string",
+              "title": "Last Full Scan Start Time",
+              "description": "Last full scan start time",
+              "order": 9
+            },
+            "lastQuickScanAge": {
+              "type": "string",
+              "title": "Last Quick Scan Age",
+              "description": "Last quick scan age",
+              "order": 17
+            },
+            "lastQuickScanEndTime": {
+              "type": "string",
+              "title": "Last Quick Scan End Time",
+              "description": "Last quick scan end time",
+              "order": 19
+            },
+            "lastQuickScanSource": {
+              "type": "string",
+              "title": "Last Quick Scan Source",
+              "description": "Last quick scan source",
+              "order": 12
+            },
+            "lastQuickScanStartTime": {
+              "type": "string",
+              "title": "Last Quick Scan Start Time",
+              "description": "Last quick scan start time",
+              "order": 24
+            },
+            "nriEngineVersion": {
+              "type": "string",
+              "title": "NRI Engine Version",
+              "description": "NRI engine version",
+              "order": 23
+            },
+            "nriSignatureVersion": {
+              "type": "string",
+              "title": "NRI Signature Version",
+              "description": "NRI Signature Version",
+              "order": 8
+            },
             "oaState": {
               "type": "string",
               "title": "OA State",
               "description": "OA state",
               "order": 1
+            },
+            "platformVersion": {
+              "type": "string",
+              "title": "Platform Version",
+              "description": "Platform version",
+              "order": 16
+            },
+            "productName": {
+              "type": "string",
+              "title": "Product Name",
+              "description": "Product name",
+              "order": 14
+            },
+            "productStatus": {
+              "type": "string",
+              "title": "Product Status",
+              "description": "Product status",
+              "order": 3
+            },
+            "rtpState": {
+              "type": "string",
+              "title": "RTP State",
+              "description": "RTP state",
+              "order": 15
             }
           }
         },
@@ -136,8 +430,8 @@ class QueryOutput(komand.Output):
           "properties": {
             "href": {
               "type": "string",
-              "title": "Href",
-              "description": "Href",
+              "title": "HREF",
+              "description": "HREF",
               "order": 2
             },
             "rel": {
@@ -193,11 +487,158 @@ class QueryOutput(komand.Output):
               "type": "object",
               "title": "eventData",
               "properties": {
+                "asSignatureCreationTime": {
+                  "type": "string",
+                  "title": "As Signature Creation Time",
+                  "description": "As signature creation time",
+                  "order": 6
+                },
+                "assignatureVersion": {
+                  "type": "string",
+                  "title": "As Signature Version",
+                  "description": "As signature version",
+                  "order": 4
+                },
+                "avSignatureCreationTime": {
+                  "type": "string",
+                  "title": "AV Signature Creation Time",
+                  "description": "AV signature creation time",
+                  "order": 20
+                },
+                "avsignatureVersion": {
+                  "type": "string",
+                  "title": "AV Signature Version",
+                  "description": "AV signature version",
+                  "order": 21
+                },
+                "bmState": {
+                  "type": "string",
+                  "title": "BMS State",
+                  "description": "BMS state",
+                  "order": 11
+                },
+                "data": {
+                  "type": "array",
+                  "title": "Data",
+                  "description": "Data",
+                  "items": {
+                    "type": "object"
+                  },
+                  "order": 18
+                },
+                "engineVersion": {
+                  "type": "string",
+                  "title": "Engine Version",
+                  "description": "Engine version",
+                  "order": 10
+                },
+                "ioavState": {
+                  "type": "string",
+                  "title": "IOAV State",
+                  "description": "IOAV state",
+                  "order": 5
+                },
+                "lastAsSignatureAge": {
+                  "type": "string",
+                  "title": "Last As Signature Age",
+                  "description": "Last as signature age",
+                  "order": 2
+                },
+                "lastAvSignatureAge": {
+                  "type": "string",
+                  "title": "Last AV Signature Age",
+                  "description": "Last AV signature age",
+                  "order": 22
+                },
+                "lastFullScanAge": {
+                  "type": "string",
+                  "title": "Last Full Scan Age",
+                  "description": "Last full scan age",
+                  "order": 25
+                },
+                "lastFullScanEndTime": {
+                  "type": "string",
+                  "title": "Last Full Scan End Time",
+                  "description": "Last full scan end time",
+                  "order": 13
+                },
+                "lastFullScanSource": {
+                  "type": "string",
+                  "title": "Last Full Scan Source",
+                  "description": "Last full scan source",
+                  "order": 7
+                },
+                "lastFullScanStartTime": {
+                  "type": "string",
+                  "title": "Last Full Scan Start Time",
+                  "description": "Last full scan start time",
+                  "order": 9
+                },
+                "lastQuickScanAge": {
+                  "type": "string",
+                  "title": "Last Quick Scan Age",
+                  "description": "Last quick scan age",
+                  "order": 17
+                },
+                "lastQuickScanEndTime": {
+                  "type": "string",
+                  "title": "Last Quick Scan End Time",
+                  "description": "Last quick scan end time",
+                  "order": 19
+                },
+                "lastQuickScanSource": {
+                  "type": "string",
+                  "title": "Last Quick Scan Source",
+                  "description": "Last quick scan source",
+                  "order": 12
+                },
+                "lastQuickScanStartTime": {
+                  "type": "string",
+                  "title": "Last Quick Scan Start Time",
+                  "description": "Last quick scan start time",
+                  "order": 24
+                },
+                "nriEngineVersion": {
+                  "type": "string",
+                  "title": "NRI Engine Version",
+                  "description": "NRI engine version",
+                  "order": 23
+                },
+                "nriSignatureVersion": {
+                  "type": "string",
+                  "title": "NRI Signature Version",
+                  "description": "NRI Signature Version",
+                  "order": 8
+                },
                 "oaState": {
                   "type": "string",
                   "title": "OA State",
                   "description": "OA state",
                   "order": 1
+                },
+                "platformVersion": {
+                  "type": "string",
+                  "title": "Platform Version",
+                  "description": "Platform version",
+                  "order": 16
+                },
+                "productName": {
+                  "type": "string",
+                  "title": "Product Name",
+                  "description": "Product name",
+                  "order": 14
+                },
+                "productStatus": {
+                  "type": "string",
+                  "title": "Product Status",
+                  "description": "Product status",
+                  "order": 3
+                },
+                "rtpState": {
+                  "type": "string",
+                  "title": "RTP State",
+                  "description": "RTP state",
+                  "order": 15
                 }
               }
             }
@@ -211,8 +652,8 @@ class QueryOutput(komand.Output):
       "properties": {
         "href": {
           "type": "string",
-          "title": "Href",
-          "description": "Href",
+          "title": "HREF",
+          "description": "HREF",
           "order": 2
         },
         "rel": {
@@ -268,11 +709,158 @@ class QueryOutput(komand.Output):
           "type": "object",
           "title": "eventData",
           "properties": {
+            "asSignatureCreationTime": {
+              "type": "string",
+              "title": "As Signature Creation Time",
+              "description": "As signature creation time",
+              "order": 6
+            },
+            "assignatureVersion": {
+              "type": "string",
+              "title": "As Signature Version",
+              "description": "As signature version",
+              "order": 4
+            },
+            "avSignatureCreationTime": {
+              "type": "string",
+              "title": "AV Signature Creation Time",
+              "description": "AV signature creation time",
+              "order": 20
+            },
+            "avsignatureVersion": {
+              "type": "string",
+              "title": "AV Signature Version",
+              "description": "AV signature version",
+              "order": 21
+            },
+            "bmState": {
+              "type": "string",
+              "title": "BMS State",
+              "description": "BMS state",
+              "order": 11
+            },
+            "data": {
+              "type": "array",
+              "title": "Data",
+              "description": "Data",
+              "items": {
+                "type": "object"
+              },
+              "order": 18
+            },
+            "engineVersion": {
+              "type": "string",
+              "title": "Engine Version",
+              "description": "Engine version",
+              "order": 10
+            },
+            "ioavState": {
+              "type": "string",
+              "title": "IOAV State",
+              "description": "IOAV state",
+              "order": 5
+            },
+            "lastAsSignatureAge": {
+              "type": "string",
+              "title": "Last As Signature Age",
+              "description": "Last as signature age",
+              "order": 2
+            },
+            "lastAvSignatureAge": {
+              "type": "string",
+              "title": "Last AV Signature Age",
+              "description": "Last AV signature age",
+              "order": 22
+            },
+            "lastFullScanAge": {
+              "type": "string",
+              "title": "Last Full Scan Age",
+              "description": "Last full scan age",
+              "order": 25
+            },
+            "lastFullScanEndTime": {
+              "type": "string",
+              "title": "Last Full Scan End Time",
+              "description": "Last full scan end time",
+              "order": 13
+            },
+            "lastFullScanSource": {
+              "type": "string",
+              "title": "Last Full Scan Source",
+              "description": "Last full scan source",
+              "order": 7
+            },
+            "lastFullScanStartTime": {
+              "type": "string",
+              "title": "Last Full Scan Start Time",
+              "description": "Last full scan start time",
+              "order": 9
+            },
+            "lastQuickScanAge": {
+              "type": "string",
+              "title": "Last Quick Scan Age",
+              "description": "Last quick scan age",
+              "order": 17
+            },
+            "lastQuickScanEndTime": {
+              "type": "string",
+              "title": "Last Quick Scan End Time",
+              "description": "Last quick scan end time",
+              "order": 19
+            },
+            "lastQuickScanSource": {
+              "type": "string",
+              "title": "Last Quick Scan Source",
+              "description": "Last quick scan source",
+              "order": 12
+            },
+            "lastQuickScanStartTime": {
+              "type": "string",
+              "title": "Last Quick Scan Start Time",
+              "description": "Last quick scan start time",
+              "order": 24
+            },
+            "nriEngineVersion": {
+              "type": "string",
+              "title": "NRI Engine Version",
+              "description": "NRI engine version",
+              "order": 23
+            },
+            "nriSignatureVersion": {
+              "type": "string",
+              "title": "NRI Signature Version",
+              "description": "NRI Signature Version",
+              "order": 8
+            },
             "oaState": {
               "type": "string",
               "title": "OA State",
               "description": "OA state",
               "order": 1
+            },
+            "platformVersion": {
+              "type": "string",
+              "title": "Platform Version",
+              "description": "Platform version",
+              "order": 16
+            },
+            "productName": {
+              "type": "string",
+              "title": "Product Name",
+              "description": "Product name",
+              "order": 14
+            },
+            "productStatus": {
+              "type": "string",
+              "title": "Product Status",
+              "description": "Product status",
+              "order": 3
+            },
+            "rtpState": {
+              "type": "string",
+              "title": "RTP State",
+              "description": "RTP state",
+              "order": 15
             }
           }
         }
