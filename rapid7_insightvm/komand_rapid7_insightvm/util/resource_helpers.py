@@ -47,12 +47,10 @@ class V1Session:
             self.logger.info('Successfully authenticated to APIv1')
             self.session.headers.update(headers)
         elif response.status_code == 302:
-            error = "Authentication for APIv1 was not valid"
-            raise PluginException(cause=error,
+            raise PluginException(cause="Authentication for APIv1 was not valid",
                                   assistance=self._SUPPORT)
         else:
-            error = "Failed to obtain an APIv1 session ID."
-            raise PluginException(cause=error,
+            raise PluginException(cause="Failed to obtain an APIv1 session ID.",
                                   assistance=self._SUPPORT)
 
     def v1_deauthenticate(self, console_url: str):
@@ -75,8 +73,7 @@ class V1Session:
             self.session.headers.pop('nexposeCCSessionID')
             self.session.headers.pop('Cookie')
         else:
-            error = 'Failed to log out via APIv1'
-            raise PluginException(cause=error,
+            raise PluginException(cause='Failed to log out via APIv1',
                                   assistance=self._SUPPORT)
 
 
@@ -84,9 +81,6 @@ class ValidateUser:
     """
     Validates that a user exists and has the correct permissions
     """
-
-    _SUPPORT = 'Contact support for assistance'
-    _BADJSON = 'Unexpected response from InsightVM'
 
     def __init__(self, session: Session, logger: Logger):
         """
@@ -133,8 +127,7 @@ class ValidateUser:
         try:
             endpoint = endpoints.Role.roles(console_url, user['role']['id'])
         except KeyError:
-            raise PluginException(cause=self._BADJSON,
-                                  assistance=self._SUPPORT)
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON)
         role = self.requests.resource_request(endpoint=endpoint)
 
         # Set All Sites permission if required and not set
@@ -149,8 +142,7 @@ class ValidateUser:
                         user['role']['allSites'] = True
                         break
         except KeyError:
-            raise PluginException(cause=self._BADJSON,
-                                  assistance=self._SUPPORT)
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON)
 
         # Set All Asset Groups permission if required and not set
         try:
@@ -164,8 +156,7 @@ class ValidateUser:
                         user['role']['allAssetGroups'] = True
                         break
         except KeyError:
-            raise PluginException(cause=self._BADJSON,
-                                  assistance=self._SUPPORT)
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON)
 
         # Set superuser permission if required and not set
         # Do this silently as it isn't exposed to the user of the plugin and
@@ -174,8 +165,7 @@ class ValidateUser:
             if not user['role']['superuser'] and (user['role']['id'] == 'global-admin'):
                 user['role']['superuser'] = True
         except KeyError:
-            raise PluginException(cause=self._BADJSON,
-                                  assistance=self._SUPPORT)
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON)
 
         return user
 
@@ -189,8 +179,7 @@ class ValidateUser:
         email_regex = re.compile(r'[^@]+@[^@]+\.[^@]+')
 
         if not email_regex.match(email):
-            error = 'The email address for user account was not valid!'
-            raise PluginException(cause=error,
+            raise PluginException(cause='The email address for user account was not valid',
                                   assistance='Ensure that the email address is correct')
 
     def validate_user(self, console_url: str, user: dict) -> dict:
