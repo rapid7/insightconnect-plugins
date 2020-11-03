@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add a conversation member to a channel. This operation is only supported on channels with a channelMembershipType of private. Calls with any other channelMembershipType will return a 400 Bad Request response"
+    DESCRIPTION = "Add a conversation member to a private channel"
 
 
 class Input:

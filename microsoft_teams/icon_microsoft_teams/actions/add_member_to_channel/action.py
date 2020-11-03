@@ -3,6 +3,7 @@ from .schema import AddMemberToChannelInput, AddMemberToChannelOutput, Input, Ou
 # Custom imports below
 from icon_microsoft_teams.util.teams_utils import get_channels_from_microsoft
 from icon_microsoft_teams.util.azure_ad_utils import get_user_info, get_group_id_from_name, add_user_to_channel
+from komand.exceptions import PluginException
 
 
 class AddMemberToChannel(komand.Action):
@@ -18,13 +19,32 @@ class AddMemberToChannel(komand.Action):
     def run(self, params={}):
         group_id = get_group_id_from_name(self.logger, self.connection, params.get(Input.GROUP_NAME))
         channels = get_channels_from_microsoft(self.logger, self.connection, group_id, params.get(Input.CHANNEL_NAME))
-
+        user_id = get_user_info(self.logger, self.connection, params.get(Input.MEMBER_LOGIN))
+        try:
+            channel_id = channels[0].get("id")
+            user_id = user_id.get("id")
+            if not channel_id:
+                raise PluginException(
+                    cause="Channel not exist.",
+                    assistance="Please check that channel name is correct."
+                )
+            if not user_id:
+                raise PluginException(
+                    cause="User not exist.",
+                    assistance="Please check that member login is correct."
+                )
+        except IndexError as e:
+            raise PluginException(
+                cause="Channel not exist.",
+                assistance="If the issue persists please contact support.",
+                data=e
+            )
         return {
             Output.SUCCESS: add_user_to_channel(
                 self.logger,
                 self.connection,
                 group_id,
-                channels[0].get("id"),
-                get_user_info(self.logger, self.connection, params.get(Input.MEMBER_LOGIN)).get("id")
+                channel_id,
+                user_id
             )
         }

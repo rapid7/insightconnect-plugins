@@ -74,7 +74,7 @@ def add_user_to_group(logger: Logger, connection: komand.connection, group_id: s
         return True
 
     raise PluginException(cause=f"Unexpected response from server when adding user to group. Response code: "
-                                f"{result.status_code}",
+                                f"{result.status_code}.",
                           assistance="Please contact Rapid7 support with the following error information.",
                           data=result.text)
 
@@ -97,8 +97,8 @@ def remove_user_from_group(logger: Logger, connection: komand.connection, group_
     try:
         result.raise_for_status()
     except Exception as e:
-        raise PluginException(cause=f"Unable to remove user from group:\nUser:{user_id}\nGroup:{group_id}",
-                              assistance=result.text) from e
+        raise PluginException(cause=f"Unable to remove user from group:\nUser:{user_id}\nGroup:{group_id}.",
+                              assistance=f"{result.text}.") from e
 
     # https://docs.microsoft.com/en-us/graph/api/group-post-members
     # 204 no content
@@ -106,7 +106,7 @@ def remove_user_from_group(logger: Logger, connection: komand.connection, group_
         return True
 
     raise PluginException(cause=f"Unexpected response from server when removing user from group. Response code: "
-                                f"{result.status_code}",
+                                f"{result.status_code}.",
                           assistance="Please contact Rapid7 support with the following error information.",
                           data=result.text)
 
@@ -169,7 +169,7 @@ def create_group(logger: Logger,
             raise PluginException(PluginException.Preset.INVALID_JSON) from e
 
     raise PluginException(cause=f"Unexpected response from server when creating group {group_name}. Response code: "
-                                f"{result.status_code}",
+                                f"{result.status_code}.",
                           assistance="Please contact Rapid7 support with the following error information.",
                           data=result.text)
 
@@ -221,8 +221,8 @@ def delete_group(logger: Logger, connection: komand.connection, group_name: str)
         return True
 
     raise PluginException(
-        cause=f"The server returned an unexpected result while deleting group.\nGroup name: {group_name}",
-        assistance="Please contact Rapid7 support with the following information",
+        cause=f"The server returned an unexpected result while deleting the '{group_name}' group.",
+        assistance="Please contact Rapid7 support with the following information:",
         data=result.text
     )
 
@@ -305,7 +305,7 @@ def enable_teams_for_group(logger, connection, group_id):
     logger.info(f"Enabling team with: {endpoint}")
     result = requests.put(endpoint, json=payload, headers=headers)
     if result.status_code == 201:
-        logger.info("Team was enabled successfully")
+        logger.info("Team was enabled successfully.")
         return True
 
     # https://docs.microsoft.com/en-us/graph/api/team-put-teams?view=graph-rest-1.0&tabs=http
@@ -316,7 +316,7 @@ def enable_teams_for_group(logger, connection, group_id):
         sleep(10)
         result = requests.put(endpoint, json=payload, headers=headers)
         if result.status_code == 201:
-            logger.info("Team was enabled successfully")
+            logger.info("Team was enabled successfully.")
             return True
 
     raise PluginException(cause=f"Could not enable Teams for group with ID: {group_id}.",
@@ -327,9 +327,9 @@ def enable_teams_for_group(logger, connection, group_id):
                                f"Response:\n{result.text}")
 
 
-def add_user_to_owners(logger: Logger, connection: komand.connection, group_id: str, user_id: str) -> bool:
+def add_user_to_owners(logger: Logger, connection: komand.connection.Connection, group_id: str, user_id: str) -> bool:
     endpoint = f"https://graph.microsoft.com/beta/groups/{group_id}/owners/$ref"
-    logger.info(f"Adding user to group owners with: {endpoint}.")
+    logger.info(f"Adding user to group owners with: {endpoint}")
 
     result = requests.post(
         endpoint,
@@ -338,30 +338,46 @@ def add_user_to_owners(logger: Logger, connection: komand.connection, group_id: 
         },
         headers=connection.get_headers()
     )
+    if result.status_code == 204:
+        logger.info("User was added successfully.")
+        return True
+    if result.status_code == 400:
+        logger.info("Unable to add user to group owners. The user is already one of a group owners.")
+        return True
+    elif result.status_code == 401:
+        raise PluginException(
+            cause="Invalid credentials.",
+            assistance="Please check that provided credentials are correct."
+        )
+    elif result.status_code == 403:
+        raise PluginException(
+            cause="The account configured in your plugin connection is unauthorized to access this service.",
+            assistance="Verify the permissions for your account and try again."
+        )
+    elif result.status_code == 404:
+        raise PluginException(
+            cause="Invalid username or group provided.",
+            assistance="Please check that provided username and group are correct."
+        )
     try:
         result.raise_for_status()
     except Exception as e:
         raise PluginException(
             cause=f"Unable to add user to group owners:\nUser:{user_id}\nGroup:{group_id}.",
-            assistance=f"{result.text}",
+            assistance=f"{result.text}.",
             data=e
         )
-
-    if result.status_code == 204:
-        logger.info("User was added successfully.")
-        return True
-
     raise PluginException(
         cause=f"Unexpected response from server when adding user to group owners. Response code: {result.status_code}.",
-        assistance="Please contact Rapid7 support with the following error information.",
+        assistance="Please contact Rapid7 support with the following error information:",
         data=result.text
     )
 
 
-def add_user_to_channel(logger: Logger, connection: komand.connection, group_id: str, channel_id: str,
+def add_user_to_channel(logger: Logger, connection: komand.connection.Connection, group_id: str, channel_id: str,
                         user_id: str) -> bool:
     endpoint = f"https://graph.microsoft.com/beta/teams/{group_id}/channels/{channel_id}/members/"
-    logger.info(f"Adding user to channel with: {endpoint}.")
+    logger.info(f"Adding user to channel with: {endpoint}")
 
     result = requests.post(
         endpoint,
@@ -372,6 +388,27 @@ def add_user_to_channel(logger: Logger, connection: komand.connection, group_id:
         },
         headers=connection.get_headers()
     )
+    if result.status_code == 201:
+        logger.info("User was added successfully.")
+        return True
+    if result.status_code == 400:
+        logger.info("Unable to add user to channel. The user has already been added to the channel.")
+        return True
+    elif result.status_code == 401:
+        raise PluginException(
+            cause="Invalid credentials.",
+            assistance="Please check that provided credentials are correct."
+        )
+    elif result.status_code == 403:
+        raise PluginException(
+            cause="The account configured in your plugin connection is unauthorized to access this service.",
+            assistance="Verify the permissions for your account and try again."
+        )
+    elif result.status_code == 404:
+        raise PluginException(
+            cause="Invalid username, group or channel provided.",
+            assistance="Please check that provided username, group and channel are correct."
+        )
     try:
         result.raise_for_status()
     except Exception as e:
@@ -380,13 +417,8 @@ def add_user_to_channel(logger: Logger, connection: komand.connection, group_id:
             assistance=f"{result.text}.",
             data=e
         )
-
-    if result.status_code == 201:
-        logger.info("User was added successfully.")
-        return True
-
     raise PluginException(
         cause=f"Unexpected response from server when adding user to channel. Response code: {result.status_code}.",
-        assistance="Please contact Rapid7 support with the following error information.",
+        assistance="Please contact Rapid7 support with the following error information:",
         data=result.text
     )

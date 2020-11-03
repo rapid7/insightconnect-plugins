@@ -646,7 +646,7 @@ actions:
         required: true
   add_group_owner:
     title: Add Group Owner
-    description: Add a user to the group's owners, the owners are a set of non-admin users who are allowed to modify the group object
+    description: Add a user to the group's list of owners
     input:
       member_login:
         title: Member Login
@@ -668,7 +668,7 @@ actions:
         required: true
   add_member_to_channel:
     title: Add Member to Channel
-    description: Add a conversation member to a channel. This operation is only supported on channels with a channelMembershipType of private. Calls with any other channelMembershipType will return a 400 Bad Request response
+    description: Add a conversation member to a private channel
     input:
       member_login:
         title: Member Login

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add a user to the group's owners, the owners are a set of non-admin users who are allowed to modify the group object"
+    DESCRIPTION = "Add a user to the group's list of owners"
 
 
 class Input:

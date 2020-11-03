@@ -82,7 +82,7 @@ Example output:
 
 #### Add Group Owner
 
-This action is used to add a user to the group's owners, the owners are a set of non-admin users who are allowed to modify the group object.
+This action is used to add a user to a group's list of owners. The owners are a set of non-admin users who are allowed to modify the group object.
 
 ##### Input
 
