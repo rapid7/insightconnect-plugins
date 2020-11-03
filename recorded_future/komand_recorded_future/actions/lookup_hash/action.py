@@ -13,21 +13,28 @@ class LookupHash(komand.Action):
 
     def run(self, params={}):
         try:
-            hash_ID = params.get(Input.HASH)
-            fields = params.get(Input.FIELDS)
+            hash_id = params.get(Input.HASH)
             comment = params.get(Input.COMMENT)
 
-            if not fields or not len(fields):
-                fields = None
+            fields = [
+                "analystNotes",
+                "counts",
+                "enterpriseLists",
+                "entity",
+                "intelCard",
+                "metrics",
+                "relatedEntities",
+                "risk",
+                "sightings",
+                "threatLists",
+                "timestamps",
+                "hashAlgorithm"
+            ]
 
             if not comment:
                 comment = None
 
-            hash_report = self.connection.client.lookup_hash(hash_ID, fields=fields, comment=comment)
-            if hash_report.get("warnings", False):
-                self.logger.info(
-                    'Option for fields are: ["sightings","threatLists","analystNotes","counts","entity","hashAlgorithm","intelCard","metrics", "relatedEntities" ,"risk" ,"timestamps"]'
-                )
+            hash_report = self.connection.client.lookup_hash(hash_id, fields=fields, comment=comment)
 
             return komand.helper.clean(hash_report["data"])
 

@@ -5,7 +5,7 @@ from .schema import NewMessageReceivedInput, NewMessageReceivedOutput, Input, Ou
 from komand.exceptions import PluginException
 from icon_microsoft_teams.util.teams_utils import get_teams_from_microsoft, get_channels_from_microsoft
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
-from icon_microsoft_teams.util.words_utils import add_words_values_to_message
+from icon_microsoft_teams.util.words_utils import add_words_values_to_message, strip_html
 from typing import Pattern
 import re
 import requests

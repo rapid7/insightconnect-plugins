@@ -874,6 +874,7 @@ _This plugin does not contain any troubleshooting information._
 # Version History
 
 * 3.1.0 - New actions Add Group Owner and Add Member to Channel
+* 3.0.1 - Fix import error in New Message Received trigger
 * 3.0.0 - Update to make `words` and `first_word` required values in the `message` custom type
 * 2.3.1 - Fix issue where the New Message Received trigger could crash on an HTML message
 * 2.3.0 - Added `words` to message output type. This allows for easier use of parameters in Teams trigger messages

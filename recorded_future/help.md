@@ -1327,19 +1327,13 @@ This action is used to return information about a specific domain entry.
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|None|False|Add a comment to a domain|None|Domain look up performed by InsightConnect|
 |domain|string|None|True|Domain|None|example.com|
-|fields|[]string|None|False|List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities" , "risk" , "timestamps"]|None|["sightings", "threatLists", "intelCard"]|
 
 Example input:
 
 ```
 {
   "comment": "Domain look up performed by InsightConnect",
-  "domain": "example.com",
-  "fields": [
-    "sightings",
-    "threatLists",
-    "intelCard"
-  ]
+  "domain": "example.com"
 }
 ```
 
@@ -1349,6 +1343,7 @@ Example input:
 |----|----|--------|-----------|
 |analystNotes|[]string|False|Notes from an analyst|
 |counts|[]counts|False|Counts|
+|enterpriseLists|[]enterpriseLists|False|Enterprise lists|
 |entity|entity|False|Entity|
 |intelCard|string|False|Intel card|
 |metrics|[]metrics|False|Metrics|
@@ -1385,7 +1380,6 @@ This action is used to retrieve information about a specified hash.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|None|False|Add a comment to a hash|None|Hash look up performed by InsightConnect|
-|fields|[]string|None|False|List of fields to include with results e.g ["timestamps", "sightings", "threatLists", "analystNotes", "counts", "entity", "hashAlgorithm", "intelCard", "metrics", "relatedEntities", "risk", "timestamps"]|None|["risk", "timestamps", "sightings"]|
 |hash|string|None|True|Hash|None|44d88612fea8a8f36de82e1278abb02f|
 
 Example input:
@@ -1393,11 +1387,6 @@ Example input:
 ```
 {
   "comment": "Hash look up performed by InsightConnect",
-  "fields": [
-    "risk",
-    "timestamps",
-    "sightings"
-  ],
   "hash": "44d88612fea8a8f36de82e1278abb02f"
 }
 ```
@@ -1408,6 +1397,7 @@ Example input:
 |----|----|--------|-----------|
 |analystNotes|[]string|False|Notes from an analyst|
 |counts|[]counts|False|Counts|
+|enterpriseLists|[]enterpriseLists|False|Enterprise lists|
 |entity|entity|False|Entity|
 |hashAlgorithm|string|False|Hash Algorithm|
 |intelCard|string|False|Intel card|
@@ -1471,7 +1461,6 @@ This action is used to retrieve information about a specified URL.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|None|False|Add a comment to an IP address lookup for Recorded Future|None|URL look up performed by InsightConnect|
-|fields|[]string|None|False|List of fields to include with results e.g ["sightings", "analystNotes", "counts", "entity", "metrics", "relatedEntities", "risk", "timestamps"]|None|["relatedEntities", "risk", "sightings"]|
 |url|string|None|True|URL|None|https://example.com|
 
 Example input:
@@ -1479,11 +1468,6 @@ Example input:
 ```
 {
   "comment": "URL look up performed by InsightConnect",
-  "fields": [
-    "relatedEntities",
-    "risk",
-    "sightings"
-  ],
   "url": "https://example.com"
 }
 ```
@@ -1494,6 +1478,7 @@ Example input:
 |----|----|--------|-----------|
 |analystNotes|[]string|False|Notes from an analyst|
 |counts|[]counts|False|Counts|
+|enterpriseLists|[]enterpriseLists|False|Enterprise lists|
 |entity|entity|False|Entity|
 |metrics|[]metrics|False|Metrics|
 |relatedEntities|[]relatedEntities|False|Related entities|
@@ -1722,19 +1707,13 @@ This action is used to query for data related to a specific IP address.
 |----|----|-------|--------|-----------|----|-------|
 |IP_address|string|None|True|IP address|None|198.51.100.100|
 |comment|string|None|False|Add comment to IP address lookup for Recorded Future|None|IP look up performed by InsightConnect|
-|fields|[]string|None|False|List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities", "riskyCIDRIPs","risk", "location", "timestamps"]|None|["riskyCIDRIPs", "risk", "sightings"]|
 
 Example input:
 
 ```
 {
   "IP_address": "198.51.100.100",
-  "comment": "IP look up performed by InsightConnect",
-  "fields": [
-    "riskyCIDRIPs",
-    "risk",
-    "sightings"
-  ]
+  "comment": "IP look up performed by InsightConnect"
 }
 ```
 
@@ -1744,6 +1723,7 @@ Example input:
 |----|----|--------|-----------|
 |analystNotes|[]string|False|Notes from an analyst|
 |counts|[]counts|False|Counts|
+|enterpriseLists|[]enterpriseLists|False|Enterprise lists|
 |entity|entity|False|Entity|
 |found|boolean|False|Has the IP been found in Recorded Future|
 |intelCard|string|False|Intel card|
@@ -1753,7 +1733,7 @@ Example input:
 |risk|risk|False|Risk|
 |riskyCIDRIPs|[]riskyCIDRIP|False|Risky CIDR IPs|
 |sightings|[]sightings|False|Sightings|
-|threatLists|[]string|False|Threat lists|
+|threatLists|[]threatLists|False|Threat lists|
 |timestamps|timestamps|False|Timestamps|
 
 Example output:
@@ -2057,6 +2037,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.0.0 - Remove `fields` input in Lookup Domain, Lookup Hash, Lookup IP Address and Lookup URL actions - all fields will now be returned
 * 3.1.2 - Update to request headers to add plugin information
 * 3.1.1 - Fix issue where Lookup Alert was returning a generic object
 * 3.1.0 - New trigger Get New Alerts
