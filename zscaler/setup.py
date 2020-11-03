@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="zscaler-rapid7-plugin",
-      version="1.1.2",
+      version="1.2.0",
       description="Zscaler is a SaaS security platform that provides fast, secure connections between client applications, regardless of device, location, or network",
       author="rapid7",
       author_email="",

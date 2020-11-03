@@ -353,11 +353,11 @@ actions:
         example: "2020-06-01T12:11:13+05:30"
       size:
         title: Size
-        description: The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 1000
+        description: The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 1000. Default value is 1000
         type: integer
         required: true
-        default: 20
-        example: 20
+        default: 1000
+        example: 1000
       index:
         title: Index
         description: The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0

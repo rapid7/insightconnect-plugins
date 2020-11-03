@@ -9,7 +9,7 @@ status: []
 description: "Recorded Future arms threat analysts, security operators, and incident
   responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7
 InsightConnect, users can search domain lists, entity lists, and more"
-version: 3.1.1
+version: 4.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/recorded_future
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -27,6 +27,54 @@ hub_tags:
 enable_cache: false
 language: python
 types:
+  list:
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    type:
+      title: Type
+      type: string
+      description: Type
+      required: false
+  enterpriseLists:
+    added:
+      title: Added
+      type: string
+      description: Added
+      required: false
+    list:
+      title: List
+      type: list
+      description: List
+      required: false
+  threatLists:
+    description:
+      title: Description
+      type: string
+      description: Description
+      required: false
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    type:
+      title: Type
+      type: string
+      description: Type
+      required: false
   context_entities:
     description:
       type: string
@@ -677,12 +725,6 @@ actions:
         description: Domain
         required: true
         example: example.com
-      fields:
-        title: Fields
-        description: List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities" , "risk" , "timestamps"]
-        type: "[]string"
-        required: false
-        example: ["sightings", "threatLists", "intelCard"]
       comment:
         title: Comment
         description: Add a comment to a domain
@@ -737,6 +779,11 @@ actions:
         title: "Risk"
         description: "Risk"
         type: risk
+        required: false
+      enterpriseLists:
+        title: Enterprise Lists
+        description: Enterprise lists
+        type: "[]enterpriseLists"
         required: false
   search_entity_lists:
     title: Search Entity Lists
@@ -894,12 +941,6 @@ actions:
         description: Hash
         required: true
         example: 44d88612fea8a8f36de82e1278abb02f
-      fields:
-        title: "Fields"
-        description: List of fields to include with results e.g ["timestamps", "sightings", "threatLists", "analystNotes", "counts", "entity", "hashAlgorithm", "intelCard", "metrics", "relatedEntities", "risk", "timestamps"]
-        type: "[]string"
-        required: false
-        example: ["risk", "timestamps", "sightings" ]
       comment:
         title: Comment
         description: Add a comment to a hash
@@ -959,6 +1000,11 @@ actions:
         title: "Risk"
         description: "Risk"
         type: risk
+        required: false
+      enterpriseLists:
+        title: Enterprise Lists
+        description: Enterprise lists
+        type: "[]enterpriseLists"
         required: false
   download_IP_addresses_risk_list:
     title: Download IP Addresses Risk List
@@ -1145,12 +1191,6 @@ actions:
         type: string
         required: true
         example: 198.51.100.100
-      fields:
-        title: Fields
-        description: List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities", "riskyCIDRIPs","risk", "location", "timestamps"]
-        type: "[]string"
-        required: false
-        example: ["riskyCIDRIPs","risk", "sightings"]
       comment:
         title: Comment
         description: Add comment to IP address lookup for Recorded Future
@@ -1199,7 +1239,7 @@ actions:
       threatLists:
         title: "Threat Lists"
         description: "Threat lists"
-        type: "[]string"
+        type: "[]threatLists"
         required: false
       location:
         title: "Location"
@@ -1215,6 +1255,11 @@ actions:
         title: Risky CIDR IPs
         description: Risky CIDR IPs
         type: "[]riskyCIDRIP"
+        required: false
+      enterpriseLists:
+        title: Enterprise Lists
+        description: Enterprise lists
+        type: "[]enterpriseLists"
         required: false
       found:
         title: Found
@@ -1481,12 +1526,6 @@ actions:
         description: URL
         required: true
         example: https://example.com
-      fields:
-        title: Fields
-        description: List of fields to include with results e.g ["sightings", "analystNotes", "counts", "entity", "metrics", "relatedEntities", "risk", "timestamps"]
-        type: "[]string"
-        required: false
-        example: ["relatedEntities", "risk", "sightings"]
       comment:
         title: Comment
         description: Add a comment to an IP address lookup for Recorded Future
@@ -1531,6 +1570,11 @@ actions:
         title: Risk
         description: Risk
         type: risk
+        required: false
+      enterpriseLists:
+        title: Enterprise Lists
+        description: Enterprise lists
+        type: "[]enterpriseLists"
         required: false
   lookup_alert:
     title: Lookup Alert

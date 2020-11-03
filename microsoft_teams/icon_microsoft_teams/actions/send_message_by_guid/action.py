@@ -3,6 +3,7 @@ from .schema import SendMessageByGuidInput, SendMessageByGuidOutput, Input, Outp
 # Custom imports below
 from icon_microsoft_teams.util.teams_utils import send_html_message, send_message
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
+from icon_microsoft_teams.util.words_utils import add_words_values_to_message
 
 
 class SendMessageByGuid(komand.Action):
@@ -26,5 +27,6 @@ class SendMessageByGuid(komand.Action):
             message = send_message(self.logger, self.connection, message_content, team_guid, channel_guid)
 
         clean_message = remove_null_and_clean(message)
+        clean_message = add_words_values_to_message(clean_message)
 
         return {Output.MESSAGE: clean_message}

@@ -17,19 +17,31 @@ class LookupIPAddress(komand.Action):
     def run(self, params={}):
         try:
             ip_address = params.get(Input.IP_ADDRESS)
-            fields = params.get(Input.FIELDS)
             comment = params.get(Input.COMMENT)
 
-            query_params = {}
-
-            if fields and len(fields):
-                query_params["fields"] = ",".join(fields)
+            query_params = {
+                "fields": ",".join([
+                    "analystNotes",
+                    "counts",
+                    "enterpriseLists",
+                    "entity",
+                    "intelCard",
+                    "metrics",
+                    "relatedEntities",
+                    "risk",
+                    "sightings",
+                    "threatLists",
+                    "timestamps",
+                    "location",
+                    "riskyCIDRIPs"
+                ])
+            }
 
             if comment and len(comment):
                 query_params["comment"] = comment
 
             # move to raw, API was unable to handle error data returned
-            headers = {"X-RFToken": self.connection.token}
+            headers = self.connection.headers
             resp = requests.get(
                 f"https://api.recordedfuture.com/v2/ip/{ip_address}",
                 params=query_params,
@@ -37,16 +49,11 @@ class LookupIPAddress(komand.Action):
             )
             data = resp.json()
 
-            if data.get("warnings", False):
-                self.logger.info(
-                    'Option for fields are: ["sightings","threatLists","analystNotes","counts","entity","hashAlgorithm","intelCard","metrics", "relatedEntities" ,"risk" ,"timestamps"]'
-                )
-
             # IP Not found
             if data.get("error", {}).get("message", "") == "Not found":
-                    self.logger.error("Error: " + json.dumps(data.get("error")))
-                    self.logger.error(f"IP {ip_address} not found")
-                    return {"found": False}
+                self.logger.error("Error: " + json.dumps(data.get("error")))
+                self.logger.error(f"IP {ip_address} not found")
+                return {"found": False}
 
             if data.get("error", False):
                 self.logger.error("Error:" + json.dumps(data.get("error")))
@@ -57,6 +64,6 @@ class LookupIPAddress(komand.Action):
 
         except Exception as e:
             if isinstance(e, dict):
-                raise PluginException(cause=(f"Error: ", json.dumps(e)))
+                raise PluginException(cause=("Error: ", json.dumps(e)))
 
             raise PluginException(cause=f"Error: {e}")
