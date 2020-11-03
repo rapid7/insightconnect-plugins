@@ -105,10 +105,7 @@ class ResourceRequests(object):
             try:
                 resource = response.json()
             except json.decoder.JSONDecodeError as e:
-                raise PluginException(cause=f'Received an unexpected response from InsightVM '
-                                            f'(non-JSON or no response was received). ',
-                                      assistance=f'Contact support for help. Exception returned was {e}',
-                                      data=response.text)
+                raise PluginException(preset=PluginException.Preset.INVALID_JSON)
         else:
             resource = {'raw': response.text}
 
@@ -197,10 +194,7 @@ class ResourceRequests(object):
         try:
             response_json = response.json()
         except json.decoder.JSONDecodeError as e:
-            raise PluginException(cause=f'Received an unexpected response from InsightVM '
-                                        f'(non-JSON or no response was received). ',
-                                  assistance=f'Contact support for help. Exception returned was {e}',
-                                  data=response.text)
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON)
 
         result = RequestResult(page_num=response_json['page']['number'],
                                total_pages=response_json['page']['totalPages'],
