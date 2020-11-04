@@ -1,17 +1,18 @@
 import insightconnect_plugin_runtime
 from .schema import ReverseInput, ReverseOutput, Input, Output, Component
+# Custom imports below
 import re
-from komand_dig.util import util
+from icon_dns.util import util
 
 
 class Reverse(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='reverse',
-            description=Component.DESCRIPTION,
-            input=ReverseInput(),
-            output=ReverseOutput())
+                name='reverse',
+                description=Component.DESCRIPTION,
+                input=ReverseInput(),
+                output=ReverseOutput())
 
     def run(self, params={}):
         if len(params.get(Input.RESOLVER, '')) > 0:
@@ -28,7 +29,6 @@ class Reverse(insightconnect_plugin_runtime.Action):
             address = util.safe_parse(re.search(r'\s(\S+)\n', answer_section))
             if util.not_empty(address):
                 address = address.rstrip('.')
-
         return {
             Output.FULLOUTPUT: command_output['fulloutput'],
             Output.QUESTION: params.get(Input.ADDRESS),

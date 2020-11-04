@@ -4,10 +4,10 @@ import os
 import json
 from sys import argv
 
-Name = "Dig"
+Name = "DNS"
 Vendor = "rapid7"
-Version = "1.0.7"
-Description = "Dig is used for forward and reverse DNS lookups"
+Version = "2.0.0"
+Description = "DNS is used for forward and reverse DNS lookups"
 
 
 def main():
@@ -23,9 +23,9 @@ def main():
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
-    from komand_dig import connection, actions, triggers
+    from icon_dns import connection, actions, triggers
 
-    class ICONDig(insightconnect_plugin_runtime.Plugin):
+    class ICONDns(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -40,7 +40,7 @@ def main():
 
 
     """Run plugin"""
-    cli = insightconnect_plugin_runtime.CLI(ICONDig())
+    cli = insightconnect_plugin_runtime.CLI(ICONDns())
     cli.run()
 
 

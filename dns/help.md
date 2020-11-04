@@ -1,6 +1,6 @@
 # Description
 
-[Dig](https://linux.die.net/man/1/dig), or Domain Information Groper, is a network administration command-line tool for querying Domain Name System (DNS) name servers. This plugin uses Dig to make forward and reverse DNS requests.
+DNS plugin is used for forward and reverse DNS lookups. This plugin uses [Dig](https://linux.die.net/man/1/dig), or Domain Information Groper, which is a network administration command-line tool for querying Domain Name System (DNS) name servers.
 
 # Key Features
 
@@ -60,7 +60,7 @@ Example input:
 |----|----|--------|-----------|
 |all_answers|[]string|False|A list of all answers found|
 |answer|string|False|Answer received|
-|fulloutput|string|False|Full Dig output|
+|fulloutput|string|False|Full DNS output|
 |last_answer|string|False|The last answer found in the answers section|
 |nameserver|string|False|Nameserver that fulfilled request|
 |question|string|False|Question asked|
@@ -87,7 +87,6 @@ Example output:
 On failure, the raw output will look like the following:
 
 ```
-
 {
   "status": "NOERROR",
   "answer": "google-public-dns-a.google.com",
@@ -123,7 +122,7 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |answer|string|False|Answer received|
-|fulloutput|string|False|Full Dig output|
+|fulloutput|string|False|Full DNS output|
 |nameserver|string|False|Nameserver that fulfilled request|
 |question|string|False|Question asked|
 |status|string|False|Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED ...]|
@@ -131,7 +130,6 @@ Example input:
 On success, the raw output will look like the following:
 
 ```
-
 {
   "status": "NOERROR",
   "answer": "google-public-dns-a.google.com",
@@ -185,7 +183,7 @@ BADVERS
 ```
 
 You can test the `status` variable in a Decision or Filter step to check for its value.
-For example, in your workflow, if the resolution doesn't return an answer, then you may want to attempt a second lookup from a passive DNS service.
+For example, in your workflow, if the resolution doesn't return an answer, then you may want to attempt a second lookup from a passive Domain Name System service.
 
 Common examples:
 
@@ -194,6 +192,7 @@ Common examples:
 
 # Version History
 
+* 2.0.0 - Rename Dig plugin to DNS
 * 1.0.7 - Fix bug in `safe_parse` function | Fix bug when `answers` in function `execute_command` is str
 * 1.0.6 - Upgrade to latest Python plugin runtime | Define `cloud_ready` in spec
 * 1.0.5 - Update to v4 Python plugin runtime
@@ -215,4 +214,3 @@ Common examples:
 
 * [Dig](https://linux.die.net/man/1/dig)
 * [DNS Status Code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml)
-

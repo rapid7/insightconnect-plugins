@@ -2,13 +2,13 @@
 from setuptools import setup, find_packages
 
 
-setup(name="dig-rapid7-plugin",
-      version="1.0.7",
-      description="Dig is used for forward and reverse DNS lookups",
+setup(name="dns-rapid7-plugin",
+      version="2.0.0",
+      description="DNS is used for forward and reverse DNS lookups",
       author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
       install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_dig']
+      scripts=['bin/icon_dns']
       )

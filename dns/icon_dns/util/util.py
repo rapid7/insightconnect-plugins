@@ -1,6 +1,6 @@
 import re
 import insightconnect_plugin_runtime
-from komand_dig.util import util
+from icon_dns.util import util
 
 
 def safe_parse(regex):

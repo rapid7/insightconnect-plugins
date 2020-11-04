@@ -1,23 +1,23 @@
 plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
-name: dig
-title: Dig
-description: Dig is used for forward and reverse DNS lookups
-version: 1.0.7
+name: dns
+title: DNS
+description: DNS is used for forward and reverse DNS lookups
+version: 2.0.0
 vendor: rapid7
 support: community
 status: []
 cloud_ready: true
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/dig
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/dns
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-- dig
 - dns
+- dig
 hub_tags:
   use_cases: [threat_detection_and_response, offensive_security]
-  keywords: [dig, dns]
+  keywords: [dns, dig]
   features: []
 actions:
   forward:
@@ -50,7 +50,7 @@ actions:
         example: MX
     output:
       fulloutput:
-        description: Full Dig output
+        description: Full DNS output
         title: Full Output
         type: string
         required: false
@@ -101,7 +101,7 @@ actions:
         example: 1.2.3.4
     output:
       fulloutput:
-        description: Full Dig output
+        description: Full DNS output
         title: Full Output
         type: string
         required: false

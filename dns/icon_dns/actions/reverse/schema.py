@@ -4,63 +4,43 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Forward DNS Query"
+    DESCRIPTION = "Reverse DNS Query"
 
 
 class Input:
-    DOMAIN = "domain"
-    QUERY = "query"
+    ADDRESS = "address"
     RESOLVER = "resolver"
     
 
 class Output:
-    ALL_ANSWERS = "all_answers"
     ANSWER = "answer"
     FULLOUTPUT = "fulloutput"
-    LAST_ANSWER = "last_answer"
     NAMESERVER = "nameserver"
     QUESTION = "question"
     STATUS = "status"
     
 
-class ForwardInput(insightconnect_plugin_runtime.Input):
+class ReverseInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "domain": {
+    "address": {
       "type": "string",
-      "title": "Domain",
-      "description": "Domain name to resolve",
-      "order": 1
-    },
-    "query": {
-      "type": "string",
-      "title": "Query",
-      "description": "Query type e.g. ANY, A, MX, NS, etc",
-      "enum": [
-        "A",
-        "AAAA",
-        "ANY",
-        "CNAME",
-        "MX",
-        "NS",
-        "PTR",
-        "SOA"
-      ],
-      "order": 3
+      "title": "Address",
+      "description": "Internet address to resolve",
+      "order": 2
     },
     "resolver": {
       "type": "string",
       "title": "Resolver",
       "description": "Resolver. Leave blank to use default resolver for the system",
-      "order": 2
+      "order": 1
     }
   },
   "required": [
-    "domain",
-    "query"
+    "address"
   ]
 }
     """)
@@ -69,21 +49,12 @@ class ForwardInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class ForwardOutput(insightconnect_plugin_runtime.Output):
+class ReverseOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "all_answers": {
-      "type": "array",
-      "title": "All Answers",
-      "description": "A list of all answers found",
-      "items": {
-        "type": "string"
-      },
-      "order": 6
-    },
     "answer": {
       "type": "string",
       "title": "Answer",
@@ -93,14 +64,8 @@ class ForwardOutput(insightconnect_plugin_runtime.Output):
     "fulloutput": {
       "type": "string",
       "title": "Full Output",
-      "description": "Full Dig output",
+      "description": "Full DNS output",
       "order": 1
-    },
-    "last_answer": {
-      "type": "string",
-      "title": "Last Answer",
-      "description": "The last answer found in the answers section",
-      "order": 7
     },
     "nameserver": {
       "type": "string",

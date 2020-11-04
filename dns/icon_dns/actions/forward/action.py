@@ -1,17 +1,18 @@
 import insightconnect_plugin_runtime
 from .schema import ForwardInput, ForwardOutput, Input, Output, Component
+# Custom imports below
 import re
-from komand_dig.util import util
+from icon_dns.util import util
 
 
 class Forward(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='forward',
-            description=Component.DESCRIPTION,
-            input=ForwardInput(),
-            output=ForwardOutput())
+                name='forward',
+                description=Component.DESCRIPTION,
+                input=ForwardInput(),
+                output=ForwardOutput())
 
     def run(self, params={}):
         if len(params.get(Input.RESOLVER, '')) > 0:
@@ -36,7 +37,6 @@ class Forward(insightconnect_plugin_runtime.Action):
                     ans.append('NO MATCHES FOUND')
                 ans = [util.safe_parse(re.search(r'\s(\S+)$', answer)) for answer in ans]
                 ans = [answer.rstrip('.') for answer in ans]
-
         return {
             Output.FULLOUTPUT: command_output['fulloutput'],
             Output.QUESTION: params.get(Input.DOMAIN),
