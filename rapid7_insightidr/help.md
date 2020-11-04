@@ -38,7 +38,7 @@ Example input:
 
 #### Get Query Results
 
-This action is used to query and return data using LEQL.
+This action is used to get query results for a LEQL query by query ID.
 
 ##### Input
 
