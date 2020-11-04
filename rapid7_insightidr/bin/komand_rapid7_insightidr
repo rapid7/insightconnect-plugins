@@ -44,8 +44,6 @@ def main():
 
             self.add_action(actions.SetStatusOfInvestigationAction())
 
-            self.add_action(actions.SetStatusOfInvestigationAction())
-
 
     """Run plugin"""
     cli = komand.CLI(ICONRapid7Insightidr())

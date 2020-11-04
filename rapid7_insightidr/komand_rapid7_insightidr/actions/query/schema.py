@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Query and return data using LEQL"
+    DESCRIPTION = "Get query results for a LEQL query by query ID"
 
 
 class Input:

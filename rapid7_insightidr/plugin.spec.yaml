@@ -480,7 +480,7 @@ actions:
         required: true
   query:
     title: Get Query Results
-    description: Query and return data using LEQL
+    description: Get query results for a LEQL query by query ID
     input:
       id:
         title: ID
