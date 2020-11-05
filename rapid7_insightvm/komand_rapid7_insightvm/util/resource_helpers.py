@@ -110,7 +110,7 @@ class ValidateUser:
             roles = self.requests.resource_request(endpoint=endpoint)['resources']
             role_ids = [r['id'] for r in roles]
 
-            error = f"ERROR: Specified role ID ({role_id}) does not exist, valid role IDs: {role_ids}"
+            error = f"Specified role ID ({role_id}) does not exist, valid role IDs: {role_ids}"
             self.logger.error(error)
             raise ResourceNotFound(error)
 
