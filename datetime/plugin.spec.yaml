@@ -272,14 +272,14 @@ actions:
     input:
       base_timestamp:
         title: Base Timestamp
-        description: Timestamp used for calculating a new delta timestamp
+        description: Timestamp used for calculating a new delta timestamp, to use current time set up base timestamp parameter as 'now' or leave this parameter empty
         type: string
         required: false
         default: now
         example: 22 Jul 2020 21:20:33
       time_amount:
         title: Time Amount
-        description: The amount of time units used for the calculation
+        description: The amount of time units to add to the base timestamp to get the future time
         type: integer
         enum:
         - 1
@@ -346,7 +346,7 @@ actions:
         example: 20
       time_unit:
         title: Time Unit
-        description: Units of time used for the calculation
+        description: Units of time used for the future timestamp calculation
         type: string
         enum:
         - Seconds

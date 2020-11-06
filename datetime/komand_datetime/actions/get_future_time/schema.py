@@ -27,14 +27,14 @@ class GetFutureTimeInput(insightconnect_plugin_runtime.Input):
     "base_timestamp": {
       "type": "string",
       "title": "Base Timestamp",
-      "description": "Timestamp used for calculating a new delta timestamp",
+      "description": "Timestamp used for calculating a new delta timestamp, to use current time set up base timestamp parameter as 'now' or leave this parameter empty",
       "default": "now",
       "order": 1
     },
     "time_amount": {
       "type": "integer",
       "title": "Time Amount",
-      "description": "The amount of time units used for the calculation",
+      "description": "The amount of time units to add to the base timestamp to get the future time",
       "enum": [
         1,
         2,
@@ -102,7 +102,7 @@ class GetFutureTimeInput(insightconnect_plugin_runtime.Input):
     "time_unit": {
       "type": "string",
       "title": "Time Unit",
-      "description": "Units of time used for the calculation",
+      "description": "Units of time used for the future timestamp calculation",
       "enum": [
         "Seconds",
         "Minutes",
