@@ -29,11 +29,11 @@ types:
 connection:
   host:
     title: Host
-    description: Server Host, e.g. ldap://example.com. Must use either ldap:// or ldaps://
+    description: Server Host, e.g. example.com
       for SSL prefix
     type: string
     required: true
-    example: ldaps://example.com
+    example: example.com
   port:
     title: Port
     description: Port, e.g. 389
