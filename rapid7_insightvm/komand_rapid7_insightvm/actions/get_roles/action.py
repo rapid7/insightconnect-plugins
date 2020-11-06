@@ -3,7 +3,7 @@ from .schema import GetRolesInput, GetRolesOutput
 # Custom imports below
 import re
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
 class GetRoles(komand.Action):
@@ -16,7 +16,7 @@ class GetRoles(komand.Action):
                 output=GetRolesOutput())
 
     def run(self, params={}):
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
         endpoint = endpoints.Role.roles(self.connection.console_url)
         self.logger.info("Using %s ..." % endpoint)
 

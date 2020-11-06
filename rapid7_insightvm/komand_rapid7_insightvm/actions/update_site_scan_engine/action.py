@@ -2,7 +2,7 @@ import komand
 from .schema import UpdateSiteScanEngineInput, UpdateSiteScanEngineOutput
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
 class UpdateSiteScanEngine(komand.Action):
@@ -15,7 +15,7 @@ class UpdateSiteScanEngine(komand.Action):
                 output=UpdateSiteScanEngineOutput())
 
     def run(self, params={}):
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
         site_id = params.get('site_id')
         engine_id = params.get('engine_id')
         endpoint = endpoints.Site.site_engine(self.connection.console_url, site_id)
