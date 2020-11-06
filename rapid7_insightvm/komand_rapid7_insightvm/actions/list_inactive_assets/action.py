@@ -2,7 +2,7 @@ import komand
 from .schema import ListInactiveAssetsInput, ListInactiveAssetsOutput, Input, Output, Component
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
 class ListInactiveAssets(komand.Action):
@@ -15,7 +15,7 @@ class ListInactiveAssets(komand.Action):
                 output=ListInactiveAssetsOutput())
 
     def run(self, params={}):
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
 
         days_ago = params.get(Input.DAYS_AGO)
         endpoint = endpoints.Asset.asset_search(self.connection.console_url)
