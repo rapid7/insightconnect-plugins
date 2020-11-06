@@ -1,6 +1,6 @@
 # Description
 
-DNS plugin is used for forward and reverse DNS lookups. This plugin uses [Dig](https://linux.die.net/man/1/dig), or Domain Information Groper, which is a network administration command-line tool for querying Domain Name System (DNS) name servers.
+The DNS plugin is used for forward and reverse DNS lookups. This plugin uses [Dig](https://linux.die.net/man/1/dig), or Domain Information Groper, which is a network administration command-line tool for querying Domain Name System (DNS) name servers.
 
 # Key Features
 
@@ -216,4 +216,3 @@ Common examples:
 
 * [Dig](https://linux.die.net/man/1/dig)
 * [DNS Status Code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml)
-
