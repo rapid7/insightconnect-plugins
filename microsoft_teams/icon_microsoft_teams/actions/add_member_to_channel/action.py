@@ -25,17 +25,17 @@ class AddMemberToChannel(komand.Action):
             user_id = user_id.get("id")
             if not channel_id:
                 raise PluginException(
-                    cause="Channel not exist.",
+                    cause="The specified channel does not exist.",
                     assistance="Please check that channel name is correct."
                 )
             if not user_id:
                 raise PluginException(
-                    cause="User not exist.",
+                    cause="The specified user does not exist.",
                     assistance="Please check that member login is correct."
                 )
         except IndexError as e:
             raise PluginException(
-                cause="Channel not exist.",
+                cause="The specified channel does not exist.",
                 assistance="If the issue persists please contact support.",
                 data=e
             )

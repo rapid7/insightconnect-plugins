@@ -32,7 +32,7 @@ def get_user_info(logger: Logger, connection: komand.connection, user_login: str
         users = response_json.get("value")
     except Exception as e:
         raise PluginException(cause="Get user info returned an unexpected response.",
-                              assistance="Please contact Rapid7 support with the following information.",
+                              assistance="Please contact Rapid7 support with the following information:",
                               data=result.text) from e
     try:
         user = users[0]
@@ -75,7 +75,7 @@ def add_user_to_group(logger: Logger, connection: komand.connection, group_id: s
 
     raise PluginException(cause=f"Unexpected response from server when adding user to group. Response code: "
                                 f"{result.status_code}.",
-                          assistance="Please contact Rapid7 support with the following error information.",
+                          assistance="Please contact Rapid7 support with the following error information:",
                           data=result.text)
 
 
@@ -107,7 +107,7 @@ def remove_user_from_group(logger: Logger, connection: komand.connection, group_
 
     raise PluginException(cause=f"Unexpected response from server when removing user from group. Response code: "
                                 f"{result.status_code}.",
-                          assistance="Please contact Rapid7 support with the following error information.",
+                          assistance="Please contact Rapid7 support with the following error information:",
                           data=result.text)
 
 
@@ -170,7 +170,7 @@ def create_group(logger: Logger,
 
     raise PluginException(cause=f"Unexpected response from server when creating group {group_name}. Response code: "
                                 f"{result.status_code}.",
-                          assistance="Please contact Rapid7 support with the following error information.",
+                          assistance="Please contact Rapid7 support with the following error information:",
                           data=result.text)
 
 

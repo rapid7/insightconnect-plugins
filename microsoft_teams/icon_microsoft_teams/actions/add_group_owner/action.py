@@ -19,7 +19,7 @@ class AddGroupOwner(komand.Action):
         user_id = get_user_info(self.logger, self.connection, params.get(Input.MEMBER_LOGIN))
         if not user_id or not user_id.get("id"):
             raise PluginException(
-                cause="User not exist.",
+                cause="The specified user does not exist.",
                 assistance="Please check that member login is correct."
             )
         return {
