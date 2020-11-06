@@ -492,7 +492,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
-* 4.0.3 - Fix issue with connection documentation
+* 4.0.3 - Fix issue with connection documentation incorrectly stating a protocol prefix is required
 * 4.0.2 - Fix issue where some host names were being incorrectly parsed
 * 4.0.1 - Fix issue were logging of connection info did not display hostname correctly
 * 4.0.0 - New action Modify Object | Rename Modify Groups action to 'Add or Remove an Object from Group' | Fix issue where non-ASCII characters were not being escaped
