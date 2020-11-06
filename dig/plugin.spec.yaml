@@ -2,9 +2,9 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: dig
-title: Dig
-description: Dig is used for forward and reverse DNS lookups
-version: 1.0.7
+title: DNS
+description: DNS is used for forward and reverse DNS lookups
+version: 2.0.0
 vendor: rapid7
 support: community
 status: []
@@ -50,7 +50,7 @@ actions:
         example: MX
     output:
       fulloutput:
-        description: Full Dig output
+        description: Full DNS output
         title: Full Output
         type: string
         required: false
@@ -101,7 +101,7 @@ actions:
         example: 1.2.3.4
     output:
       fulloutput:
-        description: Full Dig output
+        description: Full DNS output
         title: Full Output
         type: string
         required: false

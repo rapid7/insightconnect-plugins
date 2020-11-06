@@ -44,6 +44,76 @@ Example input:
 
 ### Actions
 
+#### Add Member to Channel
+
+This action is used to add a conversation member to a channel. This operation is only supported on channels with a channelMembershipType of private. Calls with any other channelMembershipType will return a 400 Bad Request response.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|channel_name|string|None|True|Name of the channel to which the member is to be added|None|InsightConnect Channel|
+|group_name|string|None|True|Name of the group in which the channel is located|None|InsightConnect Team|
+|member_login|string|None|True|The login of the group member to be added to a channel|None|user@example.com|
+
+Example input:
+
+```
+{
+  "channel_name": "InsightConnect Channel",
+  "group_name": "InsightConnect Team",
+  "member_login": "user@example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Boolean indicating if this action was successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Add Group Owner
+
+This action is used to add a user to a group's list of owners. The owners are a set of non-admin users who are allowed to modify the group object.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|group_name|string|None|True|Name of the group or team to which the member is to be added as the owner|None|InsightConnect Team|
+|member_login|string|None|True|The login of the group member to be added as the owner|None|user@example.com|
+
+Example input:
+
+```
+{
+  "group_name": "InsightConnect Team",
+  "member_login": "user@example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Boolean indicating if this action was successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 #### Send Message
 
 This action is used to send a message.
@@ -705,7 +775,97 @@ Example output:
 
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+#### body
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Content|string|False|Content|
+|Content Type|string|False|Content type|
+
+#### channel
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Description|string|False|Description|
+|Display Name|string|False|Display name|
+|ID|string|False|ID|
+
+#### from
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|User|user|False|User|
+
+#### group
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Created Date Time|string|False|Created date time|
+|Description|string|False|Description|
+|Display Name|string|False|Display name|
+|ID|string|False|ID|
+|Mail|string|False|Mail|
+|Mail Enabled|boolean|False|Mail enabled|
+|Mail Nickname|string|False|Mail nickname|
+|Security Enabled|boolean|False|Security enabled|
+
+#### hashes
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|MD5 Hashes|[]string|False|Extracted MD5 Hashes from message|
+|SHA1 Hashes|[]string|False|Extracted SHA1 hashes from message|
+|SHA256 Hashes|[]string|False|Extracted SHA256 hashes from message|
+
+#### indicators
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|CVEs|[]string|False|Extracted CVEs from message|
+|Domains|[]string|False|Extracted domains from message|
+|Email Addresses|[]string|False|Extracted email addresses from message|
+|Hashes|hashes|False|Extracted hashes from message|
+|IP Addressses|ip_addresses|False|Extracted IP addresses from message|
+|MAC Addresses|[]string|False|Extracted MAC addresses from message|
+|URLs|[]string|False|Extracted URLs from message|
+|UUIDs|[]string|False|Extracted UUIDs from message|
+
+#### ip_addresses
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|IPv4 Addressses|[]string|False|Extracted IPv4 addressses from message|
+|IPv6 Addressses|[]string|False|Extracted IPv6 addresses from message|
+
+#### message
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Body|body|False|Body|
+|Created Date Time|string|False|Created date time|
+|First Word|string|True|Extracted first word from message (easy way to obtain a chat command)|
+|From|from|False|From|
+|ID|string|False|ID|
+|Importance|string|False|Importance|
+|Locale|string|False|Locale|
+|Message Type|string|False|Message type|
+|Web URL|string|False|Web URL|
+|Words|[]string|True|The message split by spaces into a list of words. This list makes finding and using parameters in chat commands easier|
+
+#### team
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Description|string|False|Description|
+|Display Name|string|False|Display name|
+|ID|string|False|ID|
+
+#### user
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Display name|string|False|Display name|
+|ID|string|False|ID|
 
 ## Troubleshooting
 
@@ -713,6 +873,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.0 - New actions Add Group Owner and Add Member to Channel
+* 3.0.1 - Fix import error in New Message Received trigger
 * 3.0.0 - Update to make `words` and `first_word` required values in the `message` custom type
 * 2.3.1 - Fix issue where the New Message Received trigger could crash on an HTML message
 * 2.3.0 - Added `words` to message output type. This allows for easier use of parameters in Teams trigger messages
