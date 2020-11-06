@@ -34,4 +34,4 @@ class Connection(komand.Connection):
             raise ConnectionTestException(
                 cause=f'An unknown error occurred.'
                       f' InsightIDR responded with a {response.status_code} code.',
-                assistance=' See log for more details. If the problem persists, please contact support.')
+                assistance='See log for more details. If the problem persists, please contact support.')
