@@ -19,7 +19,7 @@ class ConnectionSchema(komand.Input):
     "host": {
       "type": "string",
       "title": "Host",
-      "description": "Server Host, e.g. example.com for SSL prefix",
+      "description": "Server Host, e.g. example.com",
       "order": 1
     },
     "port": {

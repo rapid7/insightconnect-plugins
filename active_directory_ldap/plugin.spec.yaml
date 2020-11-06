@@ -30,7 +30,6 @@ connection:
   host:
     title: Host
     description: Server Host, e.g. example.com
-      for SSL prefix
     type: string
     required: true
     example: example.com

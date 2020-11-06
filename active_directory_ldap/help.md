@@ -37,7 +37,7 @@ Example input:
   "host": "example.com",
   "port": 389,
   "use_ssl": true,
-  "username_password": {"username":"user1", "password":"mypassword"}
+  "username_password": "{\"username\":\"user1\", \"password\":\"mypassword\"}"
 }
 ```
 
@@ -97,15 +97,9 @@ Example input:
 
 ```
 {
-  "account_disabled": "true",
-  "additional_parameters": {"telephoneNumber":"(617)555-1234"},
-  "domain_name": "example.com",
-  "first_name": "John",
-  "last_name": "Doe",
-  "logon_name": "jdoe",
-  "password": "mypassword",
-  "user_ou": "Users",
-  "user_principal_name": "user@example.com"
+  "add_remove": "add",
+  "distinguished_name": "CN=user,OU=domain_users,DC=mydomain,DC=com",
+  "group_dn": "CN=group_name,OU=domain_groups,DC=example,DC=com"
 }
 ```
 
@@ -146,7 +140,7 @@ Example input:
 ```
 {
   "account_disabled": "true",
-  "additional_parameters": {"telephoneNumber":"(617)555-1234"},
+  "additional_parameters": "{\"telephoneNumber\":\"(617)555-1234\"}",
   "domain_name": "example.com",
   "first_name": "John",
   "last_name": "Doe",
