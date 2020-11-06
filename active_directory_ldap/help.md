@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|host|string|None|True|Server Host, e.g. ldap://example.com. Must use either ldap:// or ldaps:// for SSL prefix|None|ldaps://example.com|
+|host|string|None|True|Server Host, e.g. example.com|None|example.com|
 |port|integer|389|True|Port, e.g. 389|None|389|
 |use_ssl|boolean|None|True|Use SSL?|None|True|
 |username_password|credential_username_password|None|True|Username and password|None|{"username":"user1", "password":"mypassword"}|
@@ -34,7 +34,7 @@ Example input:
 
 ```
 {
-  "host": "ldaps://example.com",
+  "host": "example.com",
   "port": 389,
   "use_ssl": true,
   "username_password": {"username":"user1", "password":"mypassword"}
