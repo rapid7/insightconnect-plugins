@@ -182,7 +182,7 @@ class QueryOutput(komand.Output):
         "nriSignatureVersion": {
           "type": "string",
           "title": "NRI Signature Version",
-          "description": "NRI Signature Version",
+          "description": "NRI signature version",
           "order": 8
         },
         "oaState": {
@@ -389,7 +389,7 @@ class QueryOutput(komand.Output):
             "nriSignatureVersion": {
               "type": "string",
               "title": "NRI Signature Version",
-              "description": "NRI Signature Version",
+              "description": "NRI signature version",
               "order": 8
             },
             "oaState": {
@@ -607,7 +607,7 @@ class QueryOutput(komand.Output):
                 "nriSignatureVersion": {
                   "type": "string",
                   "title": "NRI Signature Version",
-                  "description": "NRI Signature Version",
+                  "description": "NRI signature version",
                   "order": 8
                 },
                 "oaState": {
@@ -829,7 +829,7 @@ class QueryOutput(komand.Output):
             "nriSignatureVersion": {
               "type": "string",
               "title": "NRI Signature Version",
-              "description": "NRI Signature Version",
+              "description": "NRI signature version",
               "order": 8
             },
             "oaState": {
