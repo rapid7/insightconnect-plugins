@@ -18,7 +18,7 @@ class GetDomainVisits(insightconnect_plugin_runtime.Action):
             if not params.get(Input.DOMAIN):
                 raise PluginException(
                     cause="Input error.",
-                    assistance="When input 'Most Recent' is true domain input is required."
+                    assistance="The 'domain' input is required when 'Most Recent' input is true."
                 )
             return {
                 Output.DOMAIN_VISITS: self.connection.client.destinations_most_recent_request(
