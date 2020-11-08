@@ -1,6 +1,6 @@
 # Description
 
-This plugin utilizes Cisco Umbrella to get the most complete view of the relationships and evolution of Internet domains, IP addresses, and autonomous systems to pinpoint attackers infrastructures and predict future threats
+This plugin utilizes Cisco Umbrella to get the most complete view of the relationships and evolution of internet domains, IP addresses, and autonomous systems to pinpoint attackers infrastructures and predict future threats
 
 # Key Features
 
