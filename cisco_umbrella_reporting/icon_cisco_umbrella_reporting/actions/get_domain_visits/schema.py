@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get a list of computers that visited a domain for the last 24 hours"
+    DESCRIPTION = "Get a list of computers that visited a domain within the last 24 hours"
 
 
 class Input:
@@ -109,7 +109,7 @@ class GetDomainVisitsOutput(insightconnect_plugin_runtime.Output):
         "originLabel": {
           "type": "string",
           "title": "Origin Label",
-          "description": "Human readable name for the identity, matches the one seen in the dashboard",
+          "description": "Human-readable name for the identity, matching the one seen in the dashboard",
           "order": 4
         },
         "originType": {

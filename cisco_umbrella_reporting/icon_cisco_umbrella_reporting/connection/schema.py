@@ -18,19 +18,19 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "Enter API key",
+      "description": "Cisco Umbrella API key",
       "order": 1
     },
     "api_secret": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Secret Key",
-      "description": "Enter secret key",
+      "description": "Cisco Umbrella API secret key",
       "order": 2
     },
     "organization_id": {
       "type": "string",
       "title": "Organization ID",
-      "description": "ID of your organization",
+      "description": "ID of your Cisco Umbrella organization",
       "order": 3
     }
   },

@@ -20,9 +20,9 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|Enter API key|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|api_secret|credential_secret_key|None|True|Enter secret key|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|organization_id|string|None|True|ID of your organization|None|2961483|
+|api_key|credential_secret_key|None|True|Cisco Umbrella API key|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|api_secret|credential_secret_key|None|True|Cisco Umbrella API secret key|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|organization_id|string|None|True|ID of your Cisco Umbrella organization|None|2961483|
 
 Example input:
 
