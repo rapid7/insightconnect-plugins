@@ -9,7 +9,7 @@ This plugin utilizes Cisco Umbrella to get the most complete view of the relatio
 
 # Requirements
 
-* Requires an API Key and Secret from the Cisco Umbrella
+* Requires an API Key and Secret from Cisco Umbrella
 * Requires organization ID
 
 # Documentation
