@@ -37,7 +37,7 @@ connection:
     example: 9de5069c5afe602b2ea0a04b66beb2c0
   organization_id:
     title: Organization ID
-    description: ID of your organization
+    description: ID of your Cisco Umbrella organization
     type: string
     required: true
     example: 2961483
@@ -117,4 +117,3 @@ actions:
         description: List of computers that visited a domain
         type: "[]record"
         required: true
-
