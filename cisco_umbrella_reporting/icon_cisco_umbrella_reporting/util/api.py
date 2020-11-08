@@ -2,7 +2,8 @@ import json
 import requests
 from requests.auth import HTTPBasicAuth
 from insightconnect_plugin_runtime.exceptions import PluginException
-
+from logging import Logger
+from typing import Optional
 
 class CiscoUmbrellaReportingAPI:
     def __init__(self, api_key: str, api_secret: str, organization_id: str, logger: object):
