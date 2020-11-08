@@ -31,7 +31,7 @@ connection:
     example: 9de5069c5afe602b2ea0a04b66beb2c0
   api_secret:
     title: API Secret Key
-    description: Enter secret key
+    description: Cisco Umbrella API secret key
     type: credential_secret_key
     required: true
     example: 9de5069c5afe602b2ea0a04b66beb2c0
