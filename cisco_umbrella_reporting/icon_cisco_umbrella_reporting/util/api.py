@@ -6,7 +6,7 @@ from logging import Logger
 from typing import Optional
 
 class CiscoUmbrellaReportingAPI:
-    def __init__(self, api_key: str, api_secret: str, organization_id: str, logger: object):
+    def __init__(self, api_key: str, api_secret: str, organization_id: str, logger: Logger):
         self.url = "https://reports.api.umbrella.com/v1/"
         self.api_secret = api_secret
         self.api_key = api_key
