@@ -10,7 +10,7 @@ import time
 import uuid
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util import util
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 from komand.exceptions import PluginException
 
 
@@ -110,7 +110,7 @@ class NewScans(komand.Trigger):
                f"AND dsite.site_id IN ({','.join(site_ids)})"
 
     def get_sites_within_scope(self, site_regex):
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
         endpoint = endpoints.Site.sites(self.connection.console_url)
 
         sites = resource_helper.paged_resource_request(endpoint=endpoint)

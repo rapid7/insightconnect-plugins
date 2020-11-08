@@ -6,7 +6,7 @@ import io
 import uuid
 from komand_rapid7_insightvm.util import util
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 from komand.exceptions import PluginException
 
 
@@ -57,7 +57,7 @@ class GetScanAssets(komand.Action):
                 scan_site_id = row["site_id"]
 
         # Get assets of site of scan
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
         search_criteria = {
             "filters": [
                 {

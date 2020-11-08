@@ -1,5 +1,5 @@
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 import komand
 from komand.exceptions import PluginException
 import time
@@ -13,7 +13,7 @@ def adhoc_sql_report(connection, logger, report_payload: dict):
     :param report_payload: string of generated SQL report contents
     :return: String of generated SQL report contents
     """
-    resource_helper = ResourceHelper(connection.session, logger)
+    resource_helper = ResourceRequests(connection.session, logger)
 
     # Create Report
     endpoint = endpoints.Report.create(connection.console_url)

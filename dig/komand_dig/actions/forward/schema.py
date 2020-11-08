@@ -93,7 +93,7 @@ class ForwardOutput(insightconnect_plugin_runtime.Output):
     "fulloutput": {
       "type": "string",
       "title": "Full Output",
-      "description": "Full Dig output",
+      "description": "Full DNS output",
       "order": 1
     },
     "last_answer": {

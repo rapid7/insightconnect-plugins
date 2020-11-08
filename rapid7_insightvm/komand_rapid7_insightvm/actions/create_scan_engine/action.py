@@ -2,7 +2,7 @@ import komand
 from .schema import CreateScanEngineInput, CreateScanEngineOutput
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 from komand.exceptions import PluginException
 
 
@@ -18,7 +18,7 @@ class CreateScanEngine(komand.Action):
     def run(self, params={}):
         # Note: ID is not a required payload parameter despite the API docs saying it is
         # Providing it actually causes the request to fail
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
         endpoint = endpoints.ScanEngine.scan_engines(self.connection.console_url)
         payload = params
 

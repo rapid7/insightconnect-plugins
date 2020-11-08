@@ -3,7 +3,7 @@ import time
 from .schema import NewExceptionRequestInput, NewExceptionRequestOutput, Input, Output, Component
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
 class NewExceptionRequest(komand.Trigger):
@@ -19,7 +19,7 @@ class NewExceptionRequest(komand.Trigger):
         """Run the trigger"""
 
         # get most recent vulnerability exception request - since they're sequential, find highest id
-        resource_helper = resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
         endpoint = endpoints.VulnerabilityException.vulnerability_exceptions(self.connection.console_url)
         std_params = {"sort": "id,desc"}
         response = resource_helper.paged_resource_request(endpoint=endpoint, method='get', params=std_params)
