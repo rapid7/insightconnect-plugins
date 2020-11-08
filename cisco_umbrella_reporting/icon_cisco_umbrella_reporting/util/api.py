@@ -31,7 +31,7 @@ class CiscoUmbrellaReportingAPI:
             }
         )
 
-    def _call_api(self, method: str, path: str, json_data: dict = None, params: dict = None) -> dict:
+    def _call_api(self, method: str, path: str, json_data: Optional[dict] = None, params: Optional[dict] = None) -> dict:
         response = {"text": ""}
 
         try:
