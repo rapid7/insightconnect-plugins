@@ -60,7 +60,7 @@ types:
       required: false
     originLabel:
       title: Origin Label
-      description: Human readable name for the identity, matches the one seen in the dashboard
+      description: Human-readable name for the identity, matching the one seen in the dashboard
       type: string
       required: false
     categories:
