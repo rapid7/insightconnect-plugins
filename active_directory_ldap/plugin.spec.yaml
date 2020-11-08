@@ -4,7 +4,7 @@ products: [insightconnect]
 name: active_directory_ldap
 title: Active Directory LDAP
 description: "This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network"
-version: 4.0.2
+version: 4.0.3
 vendor: rapid7
 support: rapid7
 status: []
@@ -29,11 +29,10 @@ types:
 connection:
   host:
     title: Host
-    description: Server Host, e.g. ldap://example.com. Must use either ldap:// or ldaps://
-      for SSL prefix
+    description: Server Host, e.g. example.com
     type: string
     required: true
-    example: ldaps://example.com
+    example: example.com
   port:
     title: Port
     description: Port, e.g. 389

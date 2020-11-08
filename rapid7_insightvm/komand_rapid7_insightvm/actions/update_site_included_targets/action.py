@@ -2,7 +2,7 @@ import komand
 from .schema import UpdateSiteIncludedTargetsInput, UpdateSiteIncludedTargetsOutput, Input
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 import json
 
 
@@ -17,7 +17,7 @@ class UpdateSiteIncludedTargets(komand.Action):
 
     def run(self, params={}):
         scope = params.get(Input.INCLUDED_TARGETS)
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
         endpoint = endpoints.Site.site_included_targets(self.connection.console_url, params.get(Input.ID))
 
         # Pull current site scope in order to append to list instead of overwriting

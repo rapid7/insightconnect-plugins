@@ -2,7 +2,8 @@ import komand
 from .schema import CreateUserInput, CreateUserOutput
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
+from komand_rapid7_insightvm.util.resource_helpers import ValidateUser
 
 
 class CreateUser(komand.Action):
@@ -15,7 +16,8 @@ class CreateUser(komand.Action):
                 output=CreateUserOutput())
 
     def run(self, params={}):
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        validate = ValidateUser(self.connection.session, self.logger)
         endpoint = endpoints.User.users(self.connection.console_url)
         self.logger.info("Using %s ..." % endpoint)
 
@@ -42,7 +44,7 @@ class CreateUser(komand.Action):
                 del(payload[k])
 
         # Validate/fix the user configuration
-        payload = resource_helper.validate_user(self.connection.console_url, payload)
+        payload = validate.validate_user(self.connection.console_url, payload)
 
         response = resource_helper.resource_request(endpoint=endpoint, method='post', payload=payload)
 
