@@ -172,7 +172,7 @@ types:
     nriSignatureVersion:
       title: NRI Signature Version
       type: string
-      description: NRI Signature Version
+      description: NRI signature version
       required: false
     lastFullScanStartTime:
       title: Last Full Scan Start Time
