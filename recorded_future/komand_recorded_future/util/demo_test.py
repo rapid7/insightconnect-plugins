@@ -16,24 +16,20 @@ def demo_test(token):
             return {"status": "Success"}
         elif response.status_code == 401:
             raise ConnectionTestException(
-                cause="Invalid API Key.",
-                assistance="Please check that provided API key is correct."
+                preset=ConnectionTestException.Preset.API_KEY
             )
         elif response.status_code == 403:
             raise ConnectionTestException(
-                cause="The account configured in your plugin connection is unauthorized to access this service.",
-                assistance="Verify the permissions for your account and try again."
+                preset=ConnectionTestException.Preset.UNAUTHORIZED
             )
         elif response.status_code == 404:
             raise ConnectionTestException(
-                cause="Invalid or unreachable endpoint provided.",
-                assistance="Verify the endpoint/URL/hostname configured in your plugin connection is correct."
+                preset=ConnectionTestException.Preset.NOT_FOUND
             )
         elif response.status_code >= 400:
             raise ConnectionTestException(
-                 cause="Something unexpected occurred.",
-                 assistance="Check the logs and if the issue persists please contact support.",
-                 data=response.text
+                preset=ConnectionTestException.Preset.UNKNOWN,
+                data=response.text
             )
     except requests.exceptions.ConnectionError as e:
         raise ConnectionTestException(
