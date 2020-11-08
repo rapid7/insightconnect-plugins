@@ -2,7 +2,7 @@ import komand
 from .schema import TagAssetGroupInput, TagAssetGroupOutput
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
 class TagAssetGroup(komand.Action):
@@ -15,7 +15,7 @@ class TagAssetGroup(komand.Action):
                 output=TagAssetGroupOutput())
 
     def run(self, params={}):
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
         asset_group_id = params.get("asset_group_id")
         tag_id = params.get("tag_id")
         endpoint = endpoints.AssetGroup.asset_group_tags(self.connection.console_url, asset_group_id, tag_id)

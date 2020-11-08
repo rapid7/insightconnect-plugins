@@ -4,10 +4,10 @@ import os
 import json
 from sys import argv
 
-Name = "Dig"
+Name = "DNS"
 Vendor = "rapid7"
-Version = "1.0.7"
-Description = "Dig is used for forward and reverse DNS lookups"
+Version = "2.0.0"
+Description = "DNS is used for forward and reverse DNS lookups"
 
 
 def main():
