@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 1.2.1
+version: 1.3.0
 vendor: rapid7
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_insightidr
@@ -124,6 +124,188 @@ types:
       description: Indicates whether this threat has been published
       type: boolean
       required: false
+  link:
+    rel:
+      title: Relation
+      description: Relation
+      type: string
+    href:
+      title: HREF
+      description: HREF
+      type: string
+  eventData:
+    oaState:
+      title: OA State
+      type: string
+      description: OA state
+      required: false
+    lastAsSignatureAge:
+      title: Last As Signature Age
+      type: string
+      description: Last as signature age
+      required: false
+    productStatus:
+      title: Product Status
+      type: string
+      description: Product status
+      required: false
+    assignatureVersion:
+      title: As Signature Version
+      type: string
+      description: As signature version
+      required: false
+    ioavState:
+      title: IOAV State
+      type: string
+      description: IOAV state
+      required: false
+    asSignatureCreationTime:
+      title: As Signature Creation Time
+      type: string
+      description: As signature creation time
+      required: false
+    lastFullScanSource:
+      title: Last Full Scan Source
+      type: string
+      description: Last full scan source
+      required: false
+    nriSignatureVersion:
+      title: NRI Signature Version
+      type: string
+      description: NRI signature version
+      required: false
+    lastFullScanStartTime:
+      title: Last Full Scan Start Time
+      type: string
+      description: Last full scan start time
+      required: false
+    engineVersion:
+      title: Engine Version
+      type: string
+      description: Engine version
+      required: false
+    bmState:
+      title: BMS State
+      type: string
+      description: BMS state
+      required: false
+    lastQuickScanSource:
+      title: Last Quick Scan Source
+      type: string
+      description: Last quick scan source
+      required: false
+    lastFullScanEndTime:
+      title: Last Full Scan End Time
+      type: string
+      description: Last full scan end time
+      required: false
+    productName:
+      title: Product Name
+      type: string
+      description: Product name
+      required: false
+    rtpState:
+      title: RTP State
+      type: string
+      description: RTP state
+      required: false
+    platformVersion:
+      title: Platform Version
+      type: string
+      description: Platform version
+      required: false
+    lastQuickScanAge:
+      title: Last Quick Scan Age
+      type: string
+      description: Last quick scan age
+      required: false
+    data:
+      title: Data
+      type: "[]object"
+      description: Data
+      required: false
+    lastQuickScanEndTime:
+      title: Last Quick Scan End Time
+      type: string
+      description: Last quick scan end time
+      required: false
+    avSignatureCreationTime:
+      title: AV Signature Creation Time
+      type: string
+      description: AV signature creation time
+      required: false
+    avsignatureVersion:
+      title: AV Signature Version
+      type: string
+      description: AV signature version
+      required: false
+    lastAvSignatureAge:
+      title: Last AV Signature Age
+      type: string
+      description: Last AV signature age
+      required: false
+    nriEngineVersion:
+      title: NRI Engine Version
+      type: string
+      description: NRI engine version
+      required: false
+    lastQuickScanStartTime:
+      title: Last Quick Scan Start Time
+      type: string
+      description: Last quick scan start time
+      required: false
+    lastFullScanAge:
+      title: Last Full Scan Age
+      type: string
+      description: Last full scan age
+      required: false
+  message:
+    sourceName:
+      title: Source Name
+      type: string
+    eventCode:
+      title: Event Code
+      type: integer
+    computerName:
+      title: Computer Name
+      type: string
+    sid:
+      title: SID
+      type: string
+    isDomainController:
+      title: Is Domain Controller
+      type: boolean
+    eventData:
+      title: Event Data
+      type: eventData
+    timeWritten:
+      title: Time Written
+      type: string
+  events:
+    labels:
+      title: Labels
+      description: List of labels
+      type: "[]string"
+    timestamp:
+      title: Timestamp
+      description: Timestamp
+      type: integer
+    sequence_number:
+      title: Sequence Number
+      description: Sequence number
+      type: integer
+    log_id:
+      title: Log ID
+      description: Log ID
+      type: string
+    message:
+      title: Message
+      description: Message
+      type: message
+    links:
+      title: Links
+      description: Links
+      type: "[]link"
 
 
 connection:
@@ -296,6 +478,19 @@ actions:
         description: The investigation that was modified
         type: investigation
         required: true
-
-
-
+  query:
+    title: Get Query Results
+    description: Get query results for a LEQL query by query ID
+    input:
+      id:
+        title: ID
+        description: Log ID
+        type: string
+        example: 174e4f99-2ac7-4481-9301-4d24c34baf06
+        required: true
+    output:
+      events:
+        title: Events
+        description: Events from logs
+        type: "[]events"
+        required: true
