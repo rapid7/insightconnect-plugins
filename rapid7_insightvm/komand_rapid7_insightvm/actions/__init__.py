@@ -3,6 +3,7 @@ from .add_scan_engine_pool_engine.action import AddScanEnginePoolEngine
 from .add_user_asset_group_access.action import AddUserAssetGroupAccess
 from .add_user_site_access.action import AddUserSiteAccess
 from .asset_search.action import AssetSearch
+from .asset_vulnerability_solution.action import AssetVulnerabilitySolution
 from .create_asset_group.action import CreateAssetGroup
 from .create_exception.action import CreateException
 from .create_scan_engine.action import CreateScanEngine

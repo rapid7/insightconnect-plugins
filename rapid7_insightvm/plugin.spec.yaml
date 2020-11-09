@@ -3723,7 +3723,22 @@ actions:
         type: boolean
         required: true
         example: True
-
+  asset_vulnerability_solution:
+    title: Asset Vulnerability Solution
+    description: determin the details required to remediate vulnerabilities on a given asset.
+    input:
+      asset_id:
+        title: Asset ID
+        description: The identifier of the asset
+        type: integer
+        required: true
+        example: 423
+      vulnerability_ids:
+        title: vulnerability Ids
+        description: A list of identifiers of the vulnerabilities.
+        type: "[]string"
+        required: true
+        example: ["flash_player-cve-2017-11305",""]
 
 triggers:
   new_scans:

@@ -1,6 +1,6 @@
 {
-	"spec": "90b9f81d084c09f6072522d4ece8562b",
-	"manifest": "24eedc1017c131f1c778505d7ba7af15",
+	"spec": "64aaee5430a67e45d6c4e36d26998822",
+	"manifest": "a7981cd14b6fab3c17eccc98979ac0de",
 	"setup": "7071ad02127f725656027c8d40ab1907",
 	"schemas": [
 		{
@@ -18,6 +18,10 @@
 		{
 			"identifier": "asset_search/schema.py",
 			"hash": "1cfbfa384b0d5e9b1533cd59825679cb"
+		},
+		{
+			"identifier": "asset_vulnerability_solution/schema.py",
+			"hash": "b7a5b931aae57830e30256beb23c6878"
 		},
 		{
 			"identifier": "create_asset_group/schema.py",

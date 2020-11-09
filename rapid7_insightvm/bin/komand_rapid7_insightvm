@@ -46,6 +46,8 @@ def main():
 
             self.add_action(actions.AssetSearch())
 
+            self.add_action(actions.AssetVulnerabilitySolution())
+
             self.add_action(actions.CreateAssetGroup())
 
             self.add_action(actions.CreateException())

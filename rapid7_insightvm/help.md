@@ -18,8 +18,6 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 ## Setup
 
-The URL must point to your local console, not the platform or cloud console.
-
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -31,17 +29,41 @@ Example input:
 
 ```
 {
-  "url": "https://insightvm.example.com:3780",
-  "credentials": {
-      "username": "username",	
-      "password": "password"	
-    }
+  "credentials": "{\"username\": \"username\", \"password\": \"password\"}",
+  "url": "https://insightvm.example.com:3780"
 }
 ```
 
 ## Technical Details
 
 ### Actions
+
+#### Asset Vulnerability Solution
+
+This action is used to determin the details required to remediate vulnerabilities on a given asset..
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|asset_id|integer|None|True|The identifier of the asset|None|423|
+|vulnerability_ids|[]string|None|True|A list of identifiers of the vulnerabilities.|None|["flash_player-cve-2017-11305", ""]|
+
+Example input:
+
+```
+{
+  "asset_id": 423,
+  "vulnerability_ids": [
+    "flash_player-cve-2017-11305",
+    ""
+  ]
+}
+```
+
+##### Output
+
+_This action does not contain any outputs._
 
 #### Update Vulnerability Exception Expiration Date
 
@@ -647,7 +669,7 @@ This action is used to get vulnerabilities found on an asset. Can only be used i
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |asset_id|string|None|True|ID of the asset for which to find vulnerabilities|None|234|
-|get_risk_score|boolean|None|False|Return risk score allong with other vulnerability data|None|True|
+|get_risk_score|boolean|None|False|Return risk score along with other vulnerability data|None|True|
 
 Example input:
 
@@ -725,9 +747,6 @@ This action is used to get software found on an asset. Can only be used if the a
 Example input:
 
 ```
-{
-  "asset_id": "234"
-}
 ```
 
 ##### Output
@@ -1853,10 +1872,7 @@ Example input:
 ```
 {
   "size": 100,
-  "sort_criteria": {
-    "risk-score": "asc",
-    "criticality-tag": "desc"
-  }
+  "sort_criteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}"
 }
 ```
 
