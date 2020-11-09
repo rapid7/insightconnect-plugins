@@ -40,7 +40,7 @@ Example input:
 
 #### Asset Vulnerability Solution
 
-This action is used to determin the details required to remediate vulnerabilities on a given asset..
+This action returns the highest-superceding rollup solutions for a list of vulnerabilities on an asset..
 
 ##### Input
 
@@ -63,7 +63,9 @@ Example input:
 
 ##### Output
 
-_This action does not contain any outputs._
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|vulnerabilities_solution|[]vulnerability_solution|True|highest-superceding rollup solutions for a vulnerabilities on an asset|
 
 #### Update Vulnerability Exception Expiration Date
 
@@ -674,10 +676,6 @@ This action is used to get vulnerabilities found on an asset. Can only be used i
 Example input:
 
 ```
-{
-  "asset_id": 234,
-  "get_risk_score": true
-}
 ```
 
 ##### Output

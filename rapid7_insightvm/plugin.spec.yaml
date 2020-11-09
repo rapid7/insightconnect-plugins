@@ -1644,6 +1644,13 @@ types:
       description: The vulnerabilities that would be remediated
       type: '[]remediation_vulnerability'
       required: true
+  vulnerability_solution:
+    links:
+      description: Hypermedia links to corresponding or related resources
+      title: Links
+      type: '[]link'
+      required: false
+
 connection:
   url:
     title: URL
@@ -3725,7 +3732,7 @@ actions:
         example: True
   asset_vulnerability_solution:
     title: Asset Vulnerability Solution
-    description: determin the details required to remediate vulnerabilities on a given asset.
+    description: Returns the highest-superceding rollup solutions for a list of vulnerabilities on an asset.
     input:
       asset_id:
         title: Asset ID
@@ -3739,6 +3746,12 @@ actions:
         type: "[]string"
         required: true
         example: ["flash_player-cve-2017-11305",""]
+    output:
+      vulnerabilities_solution:
+        title: Vulnerabilities Solution
+        description: highest-superceding rollup solutions for a vulnerabilities on an asset
+        type: "[]vulnerability_solution"
+        required: true
 
 triggers:
   new_scans:
