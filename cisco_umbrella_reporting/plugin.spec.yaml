@@ -96,7 +96,7 @@ types:
 actions:
   get_domain_visits:
     title: Get Domain Visits
-    description: Get a list of computers that visited a domain within the last 24 hours
+    description: Get a list of computers that visited a domain within the last 24 hours for up to 500 computers.
     input:
       most_recent:
         title: Most Recent
