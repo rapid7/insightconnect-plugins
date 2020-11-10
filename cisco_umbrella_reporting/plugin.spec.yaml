@@ -107,7 +107,7 @@ actions:
         example: true
       address:
         title: Address
-        description: Domain or IP address to search for visits
+        description: Domain, IP address, or URL to search for computer visits. If a URL is provided it will be converted to a domain or IP address. If this field is empty, it will return activities for all domains in the organization.
         type: string
         required: false
         example: example.com
