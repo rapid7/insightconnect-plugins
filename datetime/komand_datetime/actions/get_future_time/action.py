@@ -15,7 +15,7 @@ class GetFutureTime(insightconnect_plugin_runtime.Action):
                 output=GetFutureTimeOutput())
 
     def run(self, params={}):
-        if params.get(Input.BASE_TIMESTAMP) == "now" or not params.get(Input.BASE_TIMESTAMP):
+        if not params.get(Input.BASE_TIMESTAMP):
             new_timestamp = maya.MayaDT.from_rfc3339(datetime.now())
         else:
             new_timestamp = maya.MayaDT.from_rfc3339(params.get(Input.BASE_TIMESTAMP))
