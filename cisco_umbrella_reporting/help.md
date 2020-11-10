@@ -46,15 +46,13 @@ This action is used to get a list of computers that visited a domain for the las
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|False|Domain or IP address to search for visits|None|example.com|
-|most_recent|boolean|True|False|Set to true to get the most recent DNS requests for a domain, if set to false data will be get only for last 24h|None|True|
+|address|string|None|False|Domain, IP address, or URL to search for computer visits. If a URL is provided it will be converted to a domain or IP address. If this field is empty, it will return activities for all domains in the organization.|None|example.com|
 
 Example input:
 
 ```
 {
-  "address": "example.com",
-  "most_recent": true
+  "address": "example.com"
 }
 ```
 

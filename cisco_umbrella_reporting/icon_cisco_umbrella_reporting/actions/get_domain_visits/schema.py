@@ -4,12 +4,11 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get a list of computers that visited a domain within the last 24 hours"
+    DESCRIPTION = "Get a list of computers that visited a domain within the last 24 hours for up to 500 computers."
 
 
 class Input:
     ADDRESS = "address"
-    MOST_RECENT = "most_recent"
     
 
 class Output:
@@ -25,14 +24,7 @@ class GetDomainVisitsInput(insightconnect_plugin_runtime.Input):
     "address": {
       "type": "string",
       "title": "Address",
-      "description": "Domain or IP address to search for visits",
-      "order": 2
-    },
-    "most_recent": {
-      "type": "boolean",
-      "title": "Most Recent",
-      "description": "Set to true to get the most recent DNS requests for a domain, if set to false data will be get only for last 24h",
-      "default": true,
+      "description": "Domain, IP address, or URL to search for computer visits. If a URL is provided it will be converted to a domain or IP address. If this field is empty, it will return activities for all domains in the organization.",
       "order": 1
     }
   }
