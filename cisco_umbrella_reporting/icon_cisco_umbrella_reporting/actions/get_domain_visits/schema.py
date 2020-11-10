@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    DOMAIN = "domain"
+    ADDRESS = "address"
     MOST_RECENT = "most_recent"
     
 
@@ -22,16 +22,16 @@ class GetDomainVisitsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "domain": {
+    "address": {
       "type": "string",
-      "title": "Domain",
-      "description": "Domain to search for visits",
+      "title": "Address",
+      "description": "Domain or IP address to search for visits",
       "order": 2
     },
     "most_recent": {
       "type": "boolean",
       "title": "Most Recent",
-      "description": "Set to true to get the most recent DNS requests for a domain",
+      "description": "Set to true to get the most recent DNS requests for a domain, if set to false data will be get only for last 24h",
       "default": true,
       "order": 1
     }

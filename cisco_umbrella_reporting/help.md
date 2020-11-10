@@ -46,14 +46,14 @@ This action is used to get a list of computers that visited a domain for the las
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|domain|string|None|False|Domain to search for visits|None|example.com|
-|most_recent|boolean|True|False|Set to true to get the most recent DNS requests for a domain|None|True|
+|address|string|None|False|Domain or IP address to search for visits|None|example.com|
+|most_recent|boolean|True|False|Set to true to get the most recent DNS requests for a domain, if set to false data will be get only for last 24h|None|True|
 
 Example input:
 
 ```
 {
-  "domain": "example.com",
+  "address": "example.com",
   "most_recent": true
 }
 ```
@@ -67,23 +67,25 @@ Example input:
 Example output:
 
 ```
-[
-  {
-    "tags": [],
-    "originId": 121212121,
-    "originType": "AD Users",
-    "internalIp": "198.51.100.100",
-    "externalIp": "198.51.100.100",
-    "categories": [
-      "Dynamic DNS",
-      "Web Hosting"
-    ],
-    "destination": "example.com",
-    "originLabel": "User (user@example.com)",
-    "actionTaken": "BLOCKED",
-    "datetime": "2020-11-05T23:29:55.000Z"
-  }
-]
+{
+  "domain_visits": [
+    {
+      "tags": [],
+      "originId": 121212121,
+      "originType": "AD Users",
+      "internalIp": "198.51.100.100",
+      "externalIp": "198.51.100.100",
+      "categories": [
+        "Dynamic DNS",
+        "Web Hosting"
+      ],
+      "destination": "example.com",
+      "originLabel": "User (user@example.com)",
+      "actionTaken": "BLOCKED",
+      "datetime": "2020-11-05T23:29:55.000Z"
+    }
+  ]
+}
 ```
 
 ### Triggers
