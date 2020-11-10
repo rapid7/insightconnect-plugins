@@ -36,6 +36,63 @@ Example input:
 
 ### Actions
 
+#### Get Query Results
+
+This action is used to get query results for a LEQL query by query ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|Log ID|None|174e4f99-2ac7-4481-9301-4d24c34baf06|
+
+Example input:
+
+```
+{
+  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|events|[]events|True|Events from logs|
+
+Example output:
+
+```
+{
+  "events": [
+    {
+      "labels": [],
+      "log_id": "1b1a111d-d1fb-1a12-1651-eb1ff61a651a",
+      "message": {
+        "computerName": "iagent1-win10",
+        "eventCode": 1111,
+        "eventData": {
+          "data": [],
+          "engineVersion": "1.1.17300.4",
+          "platformVersion": "4.18.2007.8",
+          "productName": "%827",
+          "signatureVersion": "1.321.836.0",
+          "unused": null
+        },
+        "isDomainController": false,
+        "sid": "S-1-5-18",
+        "sourceName": "Microsoft-Windows-Windows Defender",
+        "timeWritten": "2020-08-07T21:44:12.335999900Z"
+      },
+      "sequence_number": 1211198512587571200,
+      "sequence_number_str": "1211198512587571200",
+      "timestamp": 1596836653511
+    }
+  ]
+}
+
+```
+
 #### Set Status of Investigation
 
 This action is used to set the status of the investigation by the Investigation ID.
@@ -271,6 +328,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.0 - New action Get Query Results
 * 1.2.1 - Change default value in the `size` input parameter to 1000 in List Investigations action
 * 1.2.0 - New Action Assign User to Investigation
 * 1.1.1 - New spec and help.md format for the Extension Library

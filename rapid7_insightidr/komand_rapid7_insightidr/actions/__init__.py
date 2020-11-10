@@ -2,4 +2,5 @@
 from .add_indicators_to_a_threat.action import AddIndicatorsToAThreat
 from .assign_user_to_investigation.action import AssignUserToInvestigation
 from .list_investigations.action import ListInvestigations
+from .query.action import Query
 from .set_status_of_investigation_action.action import SetStatusOfInvestigationAction
