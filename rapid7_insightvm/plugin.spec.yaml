@@ -1650,6 +1650,11 @@ types:
       title: Links
       type: '[]link'
       required: false
+    resources:
+      title: solution_resources
+      description: solutions to vulnerabilities
+      type: object
+      required: false
 
 connection:
   url:
