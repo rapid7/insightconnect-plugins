@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get a list of computers that visited a domain within the last 24 hours for up to 500 computers."
+    DESCRIPTION = "Get a list of computers that visited a domain within the last 24 hours for up to 500 computers"
 
 
 class Input:
@@ -24,7 +24,7 @@ class GetDomainVisitsInput(insightconnect_plugin_runtime.Input):
     "address": {
       "type": "string",
       "title": "Address",
-      "description": "Domain, IP address, or URL to search for computer visits. If a URL is provided it will be converted to a domain or IP address. If this field is empty, it will return activities for all domains in the organization.",
+      "description": "Domain, IP address, or URL to search for computer visits. If a URL is provided it will be stripped down to a domain or IP address. If this field is empty, it will return activities for all domains in the organization",
       "order": 1
     }
   }

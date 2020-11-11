@@ -48,7 +48,7 @@ It accepts the following address types as input: domains, IPs, and URLs. URLs wi
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|False|Domain, IP address, or URL to search for computer visits. If a URL is provided it will be converted to a domain or IP address. If this field is empty, it will return activities for all domains in the organization.|None|example.com|
+|address|string|None|False|Domain, IP address, or URL to search for computer visits. If a URL is provided it will be stripped down to a domain or IP address. If this field is empty, it will return activities for all domains in the organization|None|example.com|
 
 Example input:
 
