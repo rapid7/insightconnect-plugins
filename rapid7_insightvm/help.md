@@ -75,7 +75,70 @@ Example input:
 Example output:
 
 ```
-
+{
+  "vulnerabilities_solution": [
+    {
+      "links": [
+        {
+          "href": "https://ivm-console.rapid7.com:3780/api/3/assets/234/vulnerabilities/flash_player-cve-2017-11305/solution",
+          "rel": "self"
+        }
+      ],
+      "resources": [
+        {
+          "appliesTo": "Adobe Flash on Microsoft Windows",
+          "confidence": "exact",
+          "estimate": "PT20M",
+          "id": "adobe-flash-windows-upgrade-latest",
+          "links": [
+            {
+              "href": "https://ivm-consolelax.rapid7.com:3780/api/3/solutions/adobe-flash-windows-upgrade-latest",
+              "rel": "self"
+            },
+            {
+              "href": "https://ivm-console.rapid7.com:3780/api/3/solutions/adobe-flash-windows-upgrade-latest/prerequisites",
+              "rel": "Prerequisites"
+            },
+            {
+              "href": "https://ivm-console.rapid7.com:3780/api/3/solutions/adobe-flash-windows-upgrade-latest/supersedes",
+              "rel": "Supersedes"
+            }
+          ],
+          "matches": [
+            {
+              "confidence": "exact",
+              "fingerprint": {
+                "description": "Adobe Flash 18.0.0.209",
+                "family": "Flash",
+                "product": "Flash",
+                "vendor": "Adobe",
+                "version": "18.0.0.209"
+              },
+              "links": [
+                {
+                  "href": "https://ivm-console.rapid7.com:3780/api/3/solutions/adobe-flash-upgrade-28-0-0-126-windows",
+                  "id": "adobe-flash-upgrade-28-0-0-126-windows",
+                  "rel": "Solution"
+                }
+              ],
+              "solution": "adobe-flash-upgrade-28-0-0-126-windows",
+              "type": "software"
+            }
+          ],
+          "steps": {
+            "html": "\u003cp\u003e\r\n\u003cp\u003eAdobe Flash Player can be downloaded from the \r\n\u003ca href=\"http://get.adobe.com/flash/\"\u003eFlash Player Download Center\u003c/a\u003e, or from the \r\n\u003ca href=\"http://helpx.adobe.com/flash-player/kb/archived-flash-player-versions.html\"\u003earchived Flash Players page\u003c/a\u003e. \u003c/p\u003e\u003c/p\u003e",
+            "text": "Adobe Flash Player can be downloaded from the Flash Player Download Center (http://get.adobe.com/flash/), or from the archived Flash Players page (http://helpx.adobe.com/flash-player/kb/archived-flash-player-versions.html)."
+          },
+          "summary": {
+            "html": "Upgrade to the latest version of Adobe Flash Player for Windows",
+            "text": "Upgrade to the latest version of Adobe Flash Player for Windows"
+          },
+          "type": "configuration"
+        }
+      ]
+    }
+  ]
+}
 ```
 
 #### Update Vulnerability Exception Expiration Date
@@ -1889,7 +1952,8 @@ Example input:
 {
   "size": 100,
   "sort_criteria": {
-    "risk-score": "asc", "criticality-tag": "desc"
+    "risk-score": "asc",
+    "criticality-tag": "desc"
   }
 }
 ```
