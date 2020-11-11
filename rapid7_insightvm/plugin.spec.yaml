@@ -43,6 +43,91 @@ types:
       title: Rel
       type: string
       required: false
+  fingerprint:
+    description:
+      title: Description
+      type: string
+      required: false
+    family:
+      title: Family
+      type: string
+      required: false
+    product:
+      title: Product
+      type: string
+      required: false
+    vendor:
+      title: Vendor
+      type: string
+      required: false
+    version:
+      title: Version
+      type: string
+      required: false
+  match:
+    confidence:
+      title: Confidence
+      type: string
+      required: false
+    fingerprint:
+      title: Fingerprint
+      type: fingerprint
+      required: false
+  step:
+    html:
+      title: HTML
+      type: string
+      required: false
+    text:
+      title: text
+      type: string
+      required: false
+  summary:
+    html:
+      title: HTML
+      type: string
+      required: false
+    text:
+      title: text
+      type: string
+      required: false
+  resources:
+    appliesTo:
+      title: Applies To
+      type: string
+      required: false
+    confidence:
+      title: Confidence
+      type: string
+      required: false
+    estimate:
+      title: Estimate
+      type: string
+      required: false
+    id:
+      title: ID
+      type: string
+      required: false
+    links:
+      title: links
+      type: '[]link'
+      required: false
+    type:
+      title: Type
+      type: string
+      required: false
+    matches:
+      title: Matches
+      type: '[]match'
+      required: false
+    steps:
+      title: Steps
+      type: step
+      required: false
+    summary:
+      title: Summary
+      type: summary
+      required: false
   address:
     ip:
       description: IPv4 or IPv6 address
@@ -1653,7 +1738,7 @@ types:
     resources:
       title: solution_resources
       description: solutions to vulnerabilities
-      type: object
+      type: '[]object'
       required: false
 
 connection:

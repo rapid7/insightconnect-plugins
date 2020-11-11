@@ -67,6 +67,12 @@ Example input:
 |----|----|--------|-----------|
 |vulnerabilities_solution|[]vulnerability_solution|True|highest-superceding rollup solutions for a vulnerabilities on an asset|
 
+Example output:
+
+```
+
+```
+
 #### Update Vulnerability Exception Expiration Date
 
 This action is used to update vulnerability exception expiration dates.
@@ -676,10 +682,6 @@ This action is used to get vulnerabilities found on an asset. Can only be used i
 Example input:
 
 ```
-{
-  "asset_id": 234,
-  "get_risk_score": true
-}
 ```
 
 ##### Output
@@ -749,9 +751,6 @@ This action is used to get software found on an asset. Can only be used if the a
 Example input:
 
 ```
-{
-  "asset_id": "234"
-}
 ```
 
 ##### Output

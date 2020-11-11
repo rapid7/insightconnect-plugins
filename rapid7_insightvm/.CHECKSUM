@@ -1,5 +1,5 @@
 {
-	"spec": "a03869c77c75deae8e25f1239b7a8f79",
+	"spec": "022e0c43c1e2c7b34b9c8e06a431f3e3",
 	"manifest": "a7981cd14b6fab3c17eccc98979ac0de",
 	"setup": "7071ad02127f725656027c8d40ab1907",
 	"schemas": [
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "asset_vulnerability_solution/schema.py",
-			"hash": "6621744de97f5685655eeb7892266ec3"
+			"hash": "75ce23eaadcf9f78fec32e035d8ec7aa"
 		},
 		{
 			"identifier": "create_asset_group/schema.py",
