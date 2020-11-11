@@ -40,7 +40,9 @@ Example input:
 
 #### Get Domain Visits
 
-This action is used to get a list of computers that visited a domain for the last 24 hours.
+This action is used to get a list of computers that visited an address for the last 24 hours, up to 500 results of computers that accessed the address
+.
+It accepts the following address types as input: domains, IPs, and URLs. URLs will automatically be stripped down to the domain since the Umbrella API does not accept URLs. If no address is provided, then the action will return activities for all domains in the organization.
 
 ##### Input
 
