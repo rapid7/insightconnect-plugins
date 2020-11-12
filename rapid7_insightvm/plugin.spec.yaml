@@ -3822,7 +3822,7 @@ actions:
         example: True
   asset_vulnerability_solution:
     title: Asset Vulnerability Solution
-    description: Returns the highest-superceding rollup solutions for a list of vulnerabilities on an asset.
+    description: Returns the highest-superceding rollup solutions for a list of vulnerabilities on an asset
     input:
       asset_id:
         title: Asset ID
