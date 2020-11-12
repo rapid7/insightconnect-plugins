@@ -3835,7 +3835,7 @@ actions:
         description: A list of identifiers of the vulnerabilities
         type: "[]string"
         required: true
-        example: ["flash_player-cve-2017-11305",""]
+        example: ["flash_player-cve-2017-11305"]
     output:
       vulnerabilities_solution:
         title: Vulnerabilities Solutions

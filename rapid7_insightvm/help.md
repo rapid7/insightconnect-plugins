@@ -43,7 +43,7 @@ Example input:
 
 ### Actions
 
-#### Asset Vulnerability Solution
+#### Get Asset Vulnerability Solutions
 
 This action returns the highest-superceding rollup solutions for a list of vulnerabilities on an asset.
 
