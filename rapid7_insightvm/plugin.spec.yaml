@@ -3839,7 +3839,7 @@ actions:
     output:
       vulnerabilities_solution:
         title: Vulnerabilities Solution
-        description: highest-superceding rollup solutions for a vulnerabilities on an asset
+        description: Highest-superceding rollup solutions for a vulnerabilities on an asset
         type: "[]vulnerability_solution"
         required: true
 
