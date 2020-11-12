@@ -45,7 +45,7 @@ Example input:
 
 #### Asset Vulnerability Solution
 
-This action returns the highest-superceding rollup solutions for a list of vulnerabilities on an asset..
+This action returns the highest-superceding rollup solutions for a list of vulnerabilities on an asset.
 
 ##### Input
 
