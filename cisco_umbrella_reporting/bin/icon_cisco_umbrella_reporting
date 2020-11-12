@@ -4,10 +4,10 @@ import os
 import json
 from sys import argv
 
-Name = "Datetime"
+Name = "Cisco Umbrella Reporting"
 Vendor = "rapid7"
-Version = "2.2.0"
-Description = "This plugin manipulates timestamps using Python's maya library"
+Version = "1.0.0"
+Description = "This plugin utilizes Cisco Umbrella to get the most complete view of the relationships and evolution of Internet domains, IP addresses, and autonomous systems to pinpoint attackers infrastructures and predict future threats"
 
 
 def main():
@@ -23,9 +23,9 @@ def main():
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
-    from komand_datetime import connection, actions, triggers
+    from icon_cisco_umbrella_reporting import connection, actions, triggers
 
-    class ICONDatetime(insightconnect_plugin_runtime.Plugin):
+    class ICONCiscoUmbrellaReporting(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -34,27 +34,11 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
-            self.add_action(actions.AddToDatetime())
-
-            self.add_action(actions.DateFromEpoch())
-
-            self.add_action(actions.EpochFromDate())
-
-            self.add_action(actions.GetDatetime())
-
-            self.add_action(actions.GetFutureTime())
-
-            self.add_action(actions.SubtractFromDatetime())
-
-            self.add_action(actions.TimeElapsed())
-
-            self.add_action(actions.ToLocaltime())
-
-            self.add_action(actions.ToUtc())
+            self.add_action(actions.GetDomainVisits())
 
 
     """Run plugin"""
-    cli = insightconnect_plugin_runtime.CLI(ICONDatetime())
+    cli = insightconnect_plugin_runtime.CLI(ICONCiscoUmbrellaReporting())
     cli.run()
 
 
