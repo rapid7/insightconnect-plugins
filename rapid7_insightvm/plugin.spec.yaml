@@ -3832,7 +3832,7 @@ actions:
         example: 423
       vulnerability_ids:
         title: vulnerability Ids
-        description: A list of identifiers of the vulnerabilities.
+        description: A list of identifiers of the vulnerabilities
         type: "[]string"
         required: true
         example: ["flash_player-cve-2017-11305",""]
