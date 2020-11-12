@@ -3831,7 +3831,7 @@ actions:
         required: true
         example: 423
       vulnerability_ids:
-        title: vulnerability Ids
+        title: Vulnerability IDs
         description: A list of identifiers of the vulnerabilities
         type: "[]string"
         required: true
