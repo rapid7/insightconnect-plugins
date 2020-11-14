@@ -279,6 +279,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.1 - Updated help.md file
 * 2.0.0 - Fix input `0` for parameters DID, PBID, Min Score and PID in trigger Get Alerts | Create new custom type for trigger Get Alerts | Change type of input parameter Min Score to integer in trigger Get Alerts
 * 1.1.0 - Add new trigger Pull Alerts
 * 1.0.0 - Initial plugin

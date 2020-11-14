@@ -1,7 +1,7 @@
 {
-	"spec": "87c2fdb5d32adabf809b2e150f87fd29",
-	"manifest": "e0d57f39909f11b8b41f87a5550d99a3",
-	"setup": "6e230ca33e0056cb751a740099c044fc",
+	"spec": "5a03b0e3129550d228c7a45c142c4a28",
+	"manifest": "bc09ae86c6d088e0809af3d30f1f3512",
+	"setup": "48fc7b8153e8b8e057f13ef9828bcb77",
 	"schemas": [
 		{
 			"identifier": "update_watched_domains/schema.py",
