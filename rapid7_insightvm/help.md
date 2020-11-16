@@ -5226,7 +5226,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 4.8.0 - New action Asset Vulnerability Solution
+* 4.8.0 - New action Get Asset Vulnerability Solutions
 * 4.7.1 - Code refactor and bug fixes
 * 4.7.0 - Update Get Asset Vulnerabilities with new input and output
 * 4.6.0 - Update Get Asset Vulnerabilities with new output | Fix issue with RequestParams object set function
