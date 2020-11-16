@@ -3827,7 +3827,7 @@ actions:
       asset_id:
         title: Asset ID
         description: The identifier of the asset
-        type: integer
+        type: string
         required: true
         example: 423
       vulnerability_ids:
@@ -3838,7 +3838,7 @@ actions:
         example: ["flash_player-cve-2017-11305"]
     output:
       vulnerabilities_solution:
-        title: Vulnerabilities Solutions
+        title: Solutions for Vulnerabilities
         description: Highest-superceding rollup solutions for a vulnerabilities on an asset
         type: "[]vulnerability_solution"
         required: true

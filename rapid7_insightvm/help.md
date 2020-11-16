@@ -51,7 +51,7 @@ This action returns the highest-superceding rollup solutions for a list of vulne
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_id|integer|None|True|The identifier of the asset|None|423|
+|asset_id|string|None|True|The identifier of the asset|None|423|
 |vulnerability_ids|[]string|None|True|A list of identifiers of the vulnerabilities|None|["flash_player-cve-2017-11305"]|
 
 Example input:
@@ -69,7 +69,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|vulnerabilities_solution|[]vulnerability_solution|True|highest-superceding rollup solutions for a vulnerabilities on an asset|
+|vulnerabilities_solution|[]vulnerability_solution|True|Highest-superceding rollup solutions for a vulnerabilities on an asset|
 
 Example output:
 
