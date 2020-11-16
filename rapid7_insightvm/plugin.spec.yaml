@@ -1736,7 +1736,7 @@ types:
       type: '[]link'
       required: false
     resources:
-      title: solution_resources
+      title: Solutions
       description: Solutions to vulnerabilities
       type: '[]resources'
       required: false
