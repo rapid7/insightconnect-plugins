@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans
-version: 4.7.1
+version: 4.8.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -42,6 +42,91 @@ types:
       description: Link relation type following RFC 5988
       title: Rel
       type: string
+      required: false
+  fingerprint:
+    description:
+      title: Description
+      type: string
+      required: false
+    family:
+      title: Family
+      type: string
+      required: false
+    product:
+      title: Product
+      type: string
+      required: false
+    vendor:
+      title: Vendor
+      type: string
+      required: false
+    version:
+      title: Version
+      type: string
+      required: false
+  match:
+    confidence:
+      title: Confidence
+      type: string
+      required: false
+    fingerprint:
+      title: Fingerprint
+      type: fingerprint
+      required: false
+  step:
+    html:
+      title: HTML
+      type: string
+      required: false
+    text:
+      title: text
+      type: string
+      required: false
+  summary:
+    html:
+      title: HTML
+      type: string
+      required: false
+    text:
+      title: text
+      type: string
+      required: false
+  resources:
+    appliesTo:
+      title: Applies To
+      type: string
+      required: false
+    confidence:
+      title: Confidence
+      type: string
+      required: false
+    estimate:
+      title: Estimate
+      type: string
+      required: false
+    id:
+      title: ID
+      type: string
+      required: false
+    links:
+      title: links
+      type: '[]link'
+      required: false
+    type:
+      title: Type
+      type: string
+      required: false
+    matches:
+      title: Matches
+      type: '[]match'
+      required: false
+    steps:
+      title: Steps
+      type: step
+      required: false
+    summary:
+      title: Summary
+      type: summary
       required: false
   address:
     ip:
@@ -1644,6 +1729,18 @@ types:
       description: The vulnerabilities that would be remediated
       type: '[]remediation_vulnerability'
       required: true
+  vulnerability_solution:
+    links:
+      description: Hypermedia links to corresponding or related resources
+      title: Links
+      type: '[]link'
+      required: false
+    resources:
+      title: Solutions
+      description: Solutions to vulnerabilities
+      type: '[]resources'
+      required: false
+
 connection:
   url:
     title: URL
@@ -3723,7 +3820,28 @@ actions:
         type: boolean
         required: true
         example: True
-
+  asset_vulnerability_solution:
+    title: Get Asset Vulnerability Solutions
+    description: Returns the highest-superceding rollup solutions for a list of vulnerabilities on an asset
+    input:
+      asset_id:
+        title: Asset ID
+        description: The identifier of the asset
+        type: string
+        required: true
+        example: 423
+      vulnerability_ids:
+        title: Vulnerability IDs
+        description: A list of identifiers of the vulnerabilities
+        type: "[]string"
+        required: true
+        example: ["flash_player-cve-2017-11305"]
+    output:
+      vulnerabilities_solution:
+        title: Solutions for Vulnerabilities
+        description: Highest-superceding rollup solutions for a vulnerabilities on an asset
+        type: "[]vulnerability_solution"
+        required: true
 
 triggers:
   new_scans:

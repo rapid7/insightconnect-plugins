@@ -33,15 +33,112 @@ Example input:
 {
   "url": "https://insightvm.example.com:3780",
   "credentials": {
-      "username": "username",	
-      "password": "password"	
-    }
+    "username": "username",
+    "password": "password"
+  }
 }
 ```
 
 ## Technical Details
 
 ### Actions
+
+#### Get Asset Vulnerability Solutions
+
+This action returns the highest-superceding rollup solutions for a list of vulnerabilities on an asset.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|asset_id|string|None|True|The identifier of the asset|None|423|
+|vulnerability_ids|[]string|None|True|A list of identifiers of the vulnerabilities|None|["flash_player-cve-2017-11305"]|
+
+Example input:
+
+```
+{
+  "asset_id": 423,
+  "vulnerability_ids": [
+    "flash_player-cve-2017-11305"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|vulnerabilities_solution|[]vulnerability_solution|True|Highest-superceding rollup solutions for a vulnerabilities on an asset|
+
+Example output:
+
+```
+{
+  "vulnerabilities_solution": [
+    {
+      "links": [
+        {
+          "href": "https://ivm-console.rapid7.com:3780/api/3/assets/234/vulnerabilities/flash_player-cve-2017-11305/solution",
+          "rel": "self"
+        }
+      ],
+      "resources": [
+        {
+          "appliesTo": "Adobe Flash on Microsoft Windows",
+          "confidence": "exact",
+          "estimate": "PT20M",
+          "id": "adobe-flash-windows-upgrade-latest",
+          "links": [
+            {
+              "href": "https://ivm-consolelax.rapid7.com:3780/api/3/solutions/adobe-flash-windows-upgrade-latest",
+              "rel": "self"
+            },
+            {
+              "href": "https://ivm-console.rapid7.com:3780/api/3/solutions/adobe-flash-windows-upgrade-latest/prerequisites",
+              "rel": "Prerequisites"
+            },
+            {
+              "href": "https://ivm-console.rapid7.com:3780/api/3/solutions/adobe-flash-windows-upgrade-latest/supersedes",
+              "rel": "Supersedes"
+            }
+          ],
+          "matches": [
+            {
+              "confidence": "exact",
+              "fingerprint": {
+                "description": "Adobe Flash 18.0.0.209",
+                "family": "Flash",
+                "product": "Flash",
+                "vendor": "Adobe",
+                "version": "18.0.0.209"
+              },
+              "links": [
+                {
+                  "href": "https://ivm-console.rapid7.com:3780/api/3/solutions/adobe-flash-upgrade-28-0-0-126-windows",
+                  "id": "adobe-flash-upgrade-28-0-0-126-windows",
+                  "rel": "Solution"
+                }
+              ],
+              "solution": "adobe-flash-upgrade-28-0-0-126-windows",
+              "type": "software"
+            }
+          ],
+          "steps": {
+            "html": "\u003cp\u003e\r\n\u003cp\u003eAdobe Flash Player can be downloaded from the \r\n\u003ca href=\"http://get.adobe.com/flash/\"\u003eFlash Player Download Center\u003c/a\u003e, or from the \r\n\u003ca href=\"http://helpx.adobe.com/flash-player/kb/archived-flash-player-versions.html\"\u003earchived Flash Players page\u003c/a\u003e. \u003c/p\u003e\u003c/p\u003e",
+            "text": "Adobe Flash Player can be downloaded from the Flash Player Download Center (http://get.adobe.com/flash/), or from the archived Flash Players page (http://helpx.adobe.com/flash-player/kb/archived-flash-player-versions.html)."
+          },
+          "summary": {
+            "html": "Upgrade to the latest version of Adobe Flash Player for Windows",
+            "text": "Upgrade to the latest version of Adobe Flash Player for Windows"
+          },
+          "type": "configuration"
+        }
+      ]
+    }
+  ]
+}
+```
 
 #### Update Vulnerability Exception Expiration Date
 
@@ -647,14 +744,14 @@ This action is used to get vulnerabilities found on an asset. Can only be used i
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |asset_id|string|None|True|ID of the asset for which to find vulnerabilities|None|234|
-|get_risk_score|boolean|None|False|Return risk score allong with other vulnerability data|None|True|
+|get_risk_score|boolean|None|False|Return risk score along with other vulnerability data|None|True|
 
 Example input:
 
 ```
-{
-  "asset_id": 234,
-  "get_risk_score": true
+{	
+  "asset_id": 234,	
+  "get_risk_score": true	
 }
 ```
 
@@ -725,8 +822,8 @@ This action is used to get software found on an asset. Can only be used if the a
 Example input:
 
 ```
-{
-  "asset_id": "234"
+{	
+  "asset_id": "234"	
 }
 ```
 
@@ -5129,6 +5226,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.8.0 - New action Get Asset Vulnerability Solutions
 * 4.7.1 - Code refactor and bug fixes
 * 4.7.0 - Update Get Asset Vulnerabilities with new input and output
 * 4.6.0 - Update Get Asset Vulnerabilities with new output | Fix issue with RequestParams object set function
