@@ -40,7 +40,7 @@ class GenerateAdhocSqlReport(komand.Action):
         report_contents = util.adhoc_sql_report(self.connection, self.logger, report_payload)
 
         try:
-            base_64_report = base64.b64encode(report_contents['raw'])
+            base_64_report = base64.b64encode(report_contents['raw'].encode('utf-8'))
         except base64.binascii.Error as e:
             raise PluginException(cause="Error: Failed to base64 encode report contents due to incorrect padding.",
                                   assistance=f"Exception returned was {e}")

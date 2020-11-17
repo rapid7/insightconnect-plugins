@@ -39,7 +39,7 @@ class TopRemediations(komand.Action):
         # Structure returned remediations
         remediations = {}
         try:
-            csv_report = csv.DictReader(io.StringIO(report_contents['raw'].decode('utf-8')))
+            csv_report = csv.DictReader(io.StringIO(report_contents['raw']))
         except Exception as e:
             raise PluginException(cause="Error: Failed to process query response for top remediations.",
                                   assistance=f"Exception returned was {e}")
@@ -72,7 +72,7 @@ class TopRemediations(komand.Action):
         self.logger.info("Processing assets of top remediations")
         asset_report_contents = util.adhoc_sql_report(self.connection, self.logger, asset_report_payload)
         try:
-            csv_report = csv.DictReader(io.StringIO(asset_report_contents['raw'].decode('utf-8')))
+            csv_report = csv.DictReader(io.StringIO(asset_report_contents['raw']))
         except Exception as e:
             raise PluginException(cause="Error: Failed to process query response for remediation assets.",
                                   assistance=f"Exception returned was {e}")
@@ -107,7 +107,7 @@ class TopRemediations(komand.Action):
         vulnerability_report_contents = util.adhoc_sql_report(self.connection, self.logger,
                                                               vulnerability_report_payload)
         try:
-            csv_report = csv.DictReader(io.StringIO(vulnerability_report_contents['raw'].decode('utf-8')))
+            csv_report = csv.DictReader(io.StringIO(vulnerability_report_contents['raw']))
         except Exception as e:
             raise PluginException(cause="Error: Failed to process query response for remediation vulnerabilities.",
                                   assistance=f"Exception returned was {e}")
