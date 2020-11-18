@@ -147,7 +147,7 @@ class NewScans(komand.Trigger):
 
         site_scans = defaultdict(list)
         try:
-            csv_report = csv.DictReader(io.StringIO(report_contents['raw'].decode('utf-8')))
+            csv_report = csv.DictReader(io.StringIO(report_contents['raw']))
         except Exception as e:
             raise PluginException(cause="Error: Failed to process query response while fetching site scans.",
                                   assistance=f"Exception returned was {e}")

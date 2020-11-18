@@ -43,7 +43,7 @@ class GetScanAssets(komand.Action):
         scan_site_id = None
 
         try:
-            csv_report = csv.DictReader(io.StringIO(report_contents['raw'].decode('utf-8')))
+            csv_report = csv.DictReader(io.StringIO(report_contents['raw']))
         except Exception as e:
             raise PluginException(cause=f"Error: Failed to process query response for assets returned for "
                                         f"scan ID {scan_id}.",
