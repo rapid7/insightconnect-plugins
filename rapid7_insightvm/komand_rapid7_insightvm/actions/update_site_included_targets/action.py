@@ -28,7 +28,7 @@ class UpdateSiteIncludedTargets(komand.Action):
             scope.extend(current_scope['addresses'])
 
         self.logger.info(f"Using {endpoint} ...")
-        payload={"rawbody": json.dumps(scope)}
+        payload = {"rawbody": scope}
         response = resource_helper.resource_request(endpoint=endpoint,
                                                     method='put',
                                                     payload=payload)
