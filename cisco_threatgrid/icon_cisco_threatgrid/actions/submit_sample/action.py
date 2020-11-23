@@ -1,25 +1,26 @@
 import komand
 from .schema import SubmitSampleInput, SubmitSampleOutput, Input, Output, Component
+
 # Custom imports below
 import base64
 from komand.exceptions import PluginException
 
 
 class SubmitSample(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='submit_sample',
-                description=Component.DESCRIPTION,
-                input=SubmitSampleInput(),
-                output=SubmitSampleOutput())
+            name="submit_sample",
+            description=Component.DESCRIPTION,
+            input=SubmitSampleInput(),
+            output=SubmitSampleOutput(),
+        )
 
     def run(self, params={}):
 
         # File handling
         file_ = params.get(Input.SAMPLE, None)
         try:
-            file_bytes = base64.b64decode(file_['content'])
+            file_bytes = base64.b64decode(file_["content"])
         except Exception:
             raise PluginException(cause=PluginException.Preset.BASE64_DECODE, data=file_["content"])
 

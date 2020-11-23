@@ -1,17 +1,18 @@
 import insightconnect_plugin_runtime
 from .schema import BlacklistUrlInput, BlacklistUrlOutput, Input, Output, Component
+
 # Custom imports below
 from urllib.parse import urlparse
 
 
 class BlacklistUrl(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='blacklist_url',
-                description=Component.DESCRIPTION,
-                input=BlacklistUrlInput(),
-                output=BlacklistUrlOutput())
+            name="blacklist_url",
+            description=Component.DESCRIPTION,
+            input=BlacklistUrlInput(),
+            output=BlacklistUrlOutput(),
+        )
 
     def run(self, params={}):
         blacklist_state = params.get(Input.BLACKLIST_STATE, True)
@@ -26,9 +27,7 @@ class BlacklistUrl(insightconnect_plugin_runtime.Action):
             if url and not url.startswith("http"):
                 url = f"http://{url}"
 
-            normalized_urls.append(
-                urlparse(url).hostname
-            )
+            normalized_urls.append(urlparse(url).hostname)
 
         return {
             Output.SUCCESS: self.connection.client.blacklist_url(blacklist_step, normalized_urls)

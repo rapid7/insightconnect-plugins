@@ -15,7 +15,9 @@ class Request(object):
         self.verify_cert = verify_cert
 
     @classmethod
-    def new_session(cls, connection: Connection, username: str, password: str, hostname: str, verify_cert: bool):
+    def new_session(
+        cls, connection: Connection, username: str, password: str, hostname: str, verify_cert: bool
+    ):
         url = hostname + "/api/"
         querystring = {"type": "keygen", "user": username, "password": password}
 
@@ -26,14 +28,17 @@ class Request(object):
             pan_os_key = token_dict["response"]["result"]["key"]
             connection.logger.info("Key obtained")
         except KeyError:
-            raise ConnectionTestException(
-                preset=ConnectionTestException.Preset.USERNAME_PASSWORD
-            )
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
         except PluginException as e:
             raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e.data)
 
-        return cls(logger=connection.logger, url=url, session=session, key=pan_os_key,
-                   verify_cert=verify_cert)
+        return cls(
+            logger=connection.logger,
+            url=url,
+            session=session,
+            key=pan_os_key,
+            verify_cert=verify_cert,
+        )
 
     def edit_(self, xpath: str, element: str) -> dict:
         """
@@ -43,8 +48,13 @@ class Request(object):
         :return Response from PAN-OS
         """
 
-        querystring = {"type": "config", "action": "edit", "key": self.key, "xpath": xpath,
-                       "element": element}
+        querystring = {
+            "type": "config",
+            "action": "edit",
+            "key": self.key,
+            "xpath": xpath,
+            "element": element,
+        }
 
         response = self.make_request("SESSION.POST", querystring)
         output = self.get_output_with_exceptions(response)
@@ -84,8 +94,13 @@ class Request(object):
         :return Response from PAN-OS
         """
 
-        querystring = {"type": "config", "action": "set", "key": self.key, "xpath": xpath,
-                       "element": element}
+        querystring = {
+            "type": "config",
+            "action": "set",
+            "key": self.key,
+            "xpath": xpath,
+            "element": element,
+        }
 
         response = self.make_request("SESSION.POST", querystring)
         output = self.get_output_with_exceptions(response)
@@ -112,8 +127,7 @@ class Request(object):
         return output
 
     def commit(self, action: str, cmd: str) -> dict:
-        querystring = {"type": "commit", "action": action,
-                       "key": self.key, "cmd": cmd}
+        querystring = {"type": "commit", "action": action, "key": self.key, "cmd": cmd}
 
         response = self.make_request("REQUESTS.GET", querystring)
         output = self.get_output_with_exceptions(response)
@@ -137,7 +151,9 @@ class Request(object):
     @staticmethod
     def get_output_with_exceptions(response):
         if response.status_code == 401:
-            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
+            raise PluginException(
+                preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text
+            )
         if response.status_code == 403:
             raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response.text)
         if response.status_code == 404:
@@ -152,33 +168,43 @@ class Request(object):
         except requests.exceptions.HTTPError as e:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
         except TypeError:
-            raise PluginException(cause='The response from PAN-OS was not the correct data type.',
-                                  assistance='Contact support for help.',
-                                  data=response.text)
+            raise PluginException(
+                cause="The response from PAN-OS was not the correct data type.",
+                assistance="Contact support for help.",
+                data=response.text,
+            )
         except ValueError:
-            raise PluginException(cause='The response from PAN-OS was not the correct form (XML).',
-                                  assistance='Contact support for help.',
-                                  data=response.text)
+            raise PluginException(
+                cause="The response from PAN-OS was not the correct form (XML).",
+                assistance="Contact support for help.",
+                data=response.text,
+            )
         except ParsingInterrupted:
-            raise PluginException(cause='The response from PAN-OS was not the correct form (XML).',
-                                  assistance='Contact support for help.',
-                                  data=response.text)
+            raise PluginException(
+                cause="The response from PAN-OS was not the correct form (XML).",
+                assistance="Contact support for help.",
+                data=response.text,
+            )
         except SyntaxError:
-            raise PluginException(cause='The response from PAN-OS was malformed.',
-                                  assistance='Contact support for help.',
-                                  data=response.text)
+            raise PluginException(
+                cause="The response from PAN-OS was malformed.",
+                assistance="Contact support for help.",
+                data=response.text,
+            )
         except BaseException as e:
-            raise PluginException(cause='An unknown error occurred when parsing the PAN-OS response.',
-                                  assistance='Contact support for help.',
-                                  data=f'{response.text}, error {e}')
+            raise PluginException(
+                cause="An unknown error occurred when parsing the PAN-OS response.",
+                assistance="Contact support for help.",
+                data=f"{response.text}, error {e}",
+            )
 
-        if output.get('response', {}).get('@status') == 'error':
-            error = output['response']['msg']
+        if output.get("response", {}).get("@status") == "error":
+            error = output["response"]["msg"]
             error = json.dumps(error)
             raise PluginException(
-                cause='PAN-OS returned an error in response to the request.',
-                assistance='Double-check that inputs are valid. Contact support if this issue persists.',
-                data=error
+                cause="PAN-OS returned an error in response to the request.",
+                assistance="Double-check that inputs are valid. Contact support if this issue persists.",
+                data=error,
             )
 
         return output

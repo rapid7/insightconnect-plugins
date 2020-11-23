@@ -1,5 +1,6 @@
 import komand
 from .schema import GetUserInfoInput, GetUserInfoOutput, Input, Output, Component
+
 # Custom imports below
 import requests
 import time
@@ -7,15 +8,14 @@ from komand.exceptions import PluginException
 from icon_azure_ad_admin.util.get_user_info import get_user_info
 
 
-
 class GetUserInfo(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='get_user_info',
+            name="get_user_info",
             description=Component.DESCRIPTION,
             input=GetUserInfoInput(),
-            output=GetUserInfoOutput())
+            output=GetUserInfoOutput(),
+        )
 
     def run(self, params={}):
         user_id = params.get(Input.USER_ID)
@@ -43,9 +43,11 @@ class GetUserInfo(komand.Action):
                     pass  # we got an exception, force pass and try again
 
         if not result_enabled or not result_enabled.status_code == 200:
-            raise PluginException(cause="Get User Info failed.",
-                                  assistance="Unexpected response from server.",
-                                  data=str(result))
+            raise PluginException(
+                cause="Get User Info failed.",
+                assistance="Unexpected response from server.",
+                data=str(result),
+            )
 
         try:
             account_enabled = result_enabled.json().get("accountEnabled")

@@ -82,7 +82,7 @@ def parse_fields(yaml_obj):
     if resources:
         vendor_url = resources.get("vendor_url")
         if vendor_url:
-            manifest_obj["resources"] = [{"text": "Vendor Website", "url":vendor_url}]
+            manifest_obj["resources"] = [{"text": "Vendor Website", "url": vendor_url}]
         else:
             # Append references --> links from .md
             manifest_obj["resources"] = []
@@ -126,7 +126,7 @@ def parse_fields(yaml_obj):
 
     if extension_type == "workflow" or extension_type == "plugin":
         if unique_name == "rapid7_insight_agent":
-            manifest_obj ["required_rapid7_features"] = ["orchestrator", "agent"]
+            manifest_obj["required_rapid7_features"] = ["orchestrator", "agent"]
         else:
             if not cloud_ready:
                 manifest_obj["required_rapid7_features"] = ["orchestrator"]
@@ -138,7 +138,7 @@ def parse_fields(yaml_obj):
     manifest_obj["status"] = yaml_obj.get("status")
 
     # Logos -- optional
-    manifest_obj["logos"] = {"primary": "extension.png", "secondary":[]}
+    manifest_obj["logos"] = {"primary": "extension.png", "secondary": []}
 
     # Display Options -- mandatory
     # No sense of this in spec/md -- only "credit_author" is valid
@@ -157,8 +157,11 @@ def parse_fields(yaml_obj):
 
     # Tags.keywords -- optional
     keywords = hub_tags.get("keywords")
-    manifest_obj["tags"] = {"categories": categories, "third_party_products": third_party_products,
-                            "keywords": keywords}
+    manifest_obj["tags"] = {
+        "categories": categories,
+        "third_party_products": third_party_products,
+        "keywords": keywords,
+    }
 
     # Documentation -- optional
     documentation_obj = {}
@@ -185,7 +188,11 @@ def parse_fields(yaml_obj):
                     type_of_media = "image"
                 if re.match(video_pattern, media["name"]):
                     type_of_media = "video"
-                media_info = {"source": media.get("name"), "title": media.get("title"), "type": type_of_media}
+                media_info = {
+                    "source": media.get("name"),
+                    "title": media.get("title"),
+                    "type": type_of_media,
+                }
                 media_list.append(media_info)
             manifest_obj["media"] = media_list
 

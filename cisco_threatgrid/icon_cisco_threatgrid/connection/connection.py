@@ -24,7 +24,7 @@ class Connection(komand.Connection):
             api_key=params.get(Input.API_KEY).get("secretKey"),
             base_url=self.base_url,
             logger=self.logger,
-            ssl_verify=ssl_verify
+            ssl_verify=ssl_verify,
         )
 
     def test(self):

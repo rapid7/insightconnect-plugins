@@ -1,6 +1,7 @@
 import komand
 import time
 from .schema import MessagesInput, MessagesOutput
+
 # Custom imports below
 from komand_twitter.util import util
 
@@ -18,10 +19,11 @@ class Messages(komand.Trigger):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='messages',
-            description='Monitor received messages',
+            name="messages",
+            description="Monitor received messages",
             input=MessagesInput(),
-            output=MessagesOutput())
+            output=MessagesOutput(),
+        )
 
     def run(self, params={}):
         if not self.connection.client:
@@ -51,16 +53,24 @@ class Messages(komand.Trigger):
 
             if len(messages) > 0:  # Only trigger if messages exist.
                 self.trigger_on_messages(messages=messages)
-                self.logger.info("Run: Trigger done. Sleeping {seconds} seconds.".format(seconds=self.interval))
+                self.logger.info(
+                    "Run: Trigger done. Sleeping {seconds} seconds.".format(seconds=self.interval)
+                )
             else:
                 self.logger.info(
-                    "Run: No new messages. Sleeping {seconds} seconds.".format(seconds=self.interval))
+                    "Run: No new messages. Sleeping {seconds} seconds.".format(
+                        seconds=self.interval
+                    )
+                )
 
             time.sleep(self.interval)
 
-    '''Fetches new messages from Twitter and then sets the sleep time appropriately.'''
+    """Fetches new messages from Twitter and then sets the sleep time appropriately."""
+
     def get_messages(self):
-        messages = self.connection.client.GetDirectMessages(count=self.MAX_MENTION_COUNT, since_id=self.cached_id)
+        messages = self.connection.client.GetDirectMessages(
+            count=self.MAX_MENTION_COUNT, since_id=self.cached_id
+        )
         message_count = len(messages)
         self.logger.info("Get Messages: Got {count} messages.".format(count=message_count))
 
@@ -69,8 +79,9 @@ class Messages(komand.Trigger):
 
         return messages
 
-    '''Takes a list of messages, matches them against the user-supplied pattern, and returns a new list containing
-        the filtered messages'''
+    """Takes a list of messages, matches them against the user-supplied pattern, and returns a new list containing
+        the filtered messages"""
+
     def filter_messages(self, messages):
         filtered_messages = list()
 
@@ -80,7 +91,8 @@ class Messages(komand.Trigger):
 
         return filtered_messages
 
-    '''Takes a list of messages and sends triggers for them. Writes the first ID (latest) to cache file.'''
+    """Takes a list of messages and sends triggers for them. Writes the first ID (latest) to cache file."""
+
     def trigger_on_messages(self, messages):
         for index, message in enumerate(messages):
             if index == 0:
@@ -88,29 +100,32 @@ class Messages(komand.Trigger):
                 with komand.helper.open_cachefile(self.CACHE_FILE_NAME) as cache_file:
                     cache_file.write(str(message.id))
 
-            self.logger.info("Trigger On Messages: Sending trigger for message {id}.".format(id=message.id))
+            self.logger.info(
+                "Trigger On Messages: Sending trigger for message {id}.".format(id=message.id)
+            )
             payload = self.create_trigger_payload(message)
             self.send(payload)
 
-    '''Creates a a payload to send from a message.'''
+    """Creates a a payload to send from a message."""
+
     def create_trigger_payload(self, message):
         payload = {
-            'msg': message.text.encode('ascii', 'ignore'),
-            'user': message.sender_screen_name.encode('ascii', 'ignore'),
+            "msg": message.text.encode("ascii", "ignore"),
+            "user": message.sender_screen_name.encode("ascii", "ignore"),
             # Cast to string to mitigate long integer bug in product
-            'id': str(message.id),
-            'created_at': message.created_at.encode('ascii', 'ignore'),
-            'sender_id': message.sender_id,
-            'sender_created_at': message.sender.created_at.encode('ascii', 'ignore'),
-            'sender_default_profile': message.sender.default_profile,
-            'sender_default_profile_image': message.sender.default_profile_image,
-            'sender_description': message.sender.description.encode('ascii', 'ignore'),
-            'sender_followers_count': message.sender.followers_count,
-            'sender_friends_count': message.sender.friends_count,
-            'sender_lang': message.sender.lang.encode('ascii', 'ignore'),
-            'sender_location': message.sender.location.encode('ascii', 'ignore'),
-            'sender_name': message.sender.name.encode('ascii', 'ignore'),
-            'recipient_id': message.recipient_id
+            "id": str(message.id),
+            "created_at": message.created_at.encode("ascii", "ignore"),
+            "sender_id": message.sender_id,
+            "sender_created_at": message.sender.created_at.encode("ascii", "ignore"),
+            "sender_default_profile": message.sender.default_profile,
+            "sender_default_profile_image": message.sender.default_profile_image,
+            "sender_description": message.sender.description.encode("ascii", "ignore"),
+            "sender_followers_count": message.sender.followers_count,
+            "sender_friends_count": message.sender.friends_count,
+            "sender_lang": message.sender.lang.encode("ascii", "ignore"),
+            "sender_location": message.sender.location.encode("ascii", "ignore"),
+            "sender_name": message.sender.name.encode("ascii", "ignore"),
+            "recipient_id": message.recipient_id,
         }
         self.logger.info("Create Trigger Payload: Created {payload}".format(payload=payload))
         return payload

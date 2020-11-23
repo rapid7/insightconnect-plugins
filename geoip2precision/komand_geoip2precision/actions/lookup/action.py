@@ -1,5 +1,6 @@
 import komand
 from .schema import LookupInput, LookupOutput
+
 # Custom imports below
 import geoip2.webservice
 
@@ -7,13 +8,14 @@ import geoip2.webservice
 class Lookup(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='lookup',
-                description='Lookup IP address information',
-                input=LookupInput(),
-                output=LookupOutput())
+            name="lookup",
+            description="Lookup IP address information",
+            input=LookupInput(),
+            output=LookupOutput(),
+        )
 
     def run(self, params={}):
-        address = params.get('address')
+        address = params.get("address")
         user = self.connection.user
         license = self.connection.license
 
@@ -21,14 +23,14 @@ class Lookup(komand.Action):
         client = geoip2.webservice.Client(user, license)
 
         try:
-        # Make request to insights service
-          response = client.insights(address)
+            # Make request to insights service
+            response = client.insights(address)
         except geoip2.errors.AuthenticationError:
-          self.logger.error('Authentication failed')
-          raise
+            self.logger.error("Authentication failed")
+            raise
         except ValueError:
-          self.logger.error('Invalid address provided')
-          raise
+            self.logger.error("Invalid address provided")
+            raise
 
         # Parse data from response
         asn = int(response.traits.autonomous_system_number)
@@ -43,19 +45,20 @@ class Lookup(komand.Action):
         longitude = str(response.location.longitude)
         latitude = str(response.location.latitude)
 
-        dic = {"address": address,
-          "asn": asn,
-          "org": org,
-          "domain": domain,
-          "time_zone": time_zone,
-          "city": city,
-          "state": state,
-          "postal": postal,
-          "country": country,
-          "registered_country": registered_country,
-          "longitude": longitude,
-          "latitude": latitude,
-        }   
+        dic = {
+            "address": address,
+            "asn": asn,
+            "org": org,
+            "domain": domain,
+            "time_zone": time_zone,
+            "city": city,
+            "state": state,
+            "postal": postal,
+            "country": country,
+            "registered_country": registered_country,
+            "longitude": longitude,
+            "latitude": latitude,
+        }
 
         return dic
 
@@ -68,9 +71,9 @@ class Lookup(komand.Action):
 
         # Test user ID and license key
         try:
-          response = client.insights() 
-        except geoip2.errors.AuthenticationError: 
-          self.logger.error('Invalid user ID or license key')
-          raise
-          
+            response = client.insights()
+        except geoip2.errors.AuthenticationError:
+            self.logger.error("Invalid user ID or license key")
+            raise
+
         return {}

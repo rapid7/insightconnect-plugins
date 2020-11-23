@@ -1,18 +1,19 @@
 import komand
 from .schema import CreateUserpolicyInput, CreateUserpolicyOutput
+
 # Custom imports below
 import requests
 import xml.etree.ElementTree as ET
 
 
 class CreateUserpolicy(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='create_userpolicy',
-                description='Creates a user firewall policy',
-                input=CreateUserpolicyInput(),
-                output=CreateUserpolicyOutput())
+            name="create_userpolicy",
+            description="Creates a user firewall policy",
+            input=CreateUserpolicyInput(),
+            output=CreateUserpolicyOutput(),
+        )
 
     def run(self, params={}):
         username = self.connection.username
@@ -32,12 +33,13 @@ class CreateUserpolicy(komand.Action):
         url = "https://{}/webconsole/APIController?".format(host + ":" + str(port))
         # Authentication
         auth = "<Request><Login><Username>{}</Username><Password>{}</Password></Login>".format(
-            username,
-            password
+            username, password
         )
 
         # Start of the operation to add a firewall policy
-        start = "<Set operation=\"add\"><SecurityPolicy><Name>{}</Name>".format(userpolicy["SecurityPolicy"]["Name"])
+        start = '<Set operation="add"><SecurityPolicy><Name>{}</Name>'.format(
+            userpolicy["SecurityPolicy"]["Name"]
+        )
 
         base_xml = "<Description>{}</Description><Status>{}</Status><IPFamily>{}</IPFamily>".format(
             userpolicy["SecurityPolicy"]["Description"],
@@ -45,11 +47,14 @@ class CreateUserpolicy(komand.Action):
             userpolicy["SecurityPolicy"]["IPFamily"],
         )
         # Sets position xml
-        if userpolicy["SecurityPolicy"]["Position"] == "after" or userpolicy["SecurityPolicy"]["Position"] == "before":
+        if (
+            userpolicy["SecurityPolicy"]["Position"] == "after"
+            or userpolicy["SecurityPolicy"]["Position"] == "before"
+        ):
             position = "<{}>{}</{}>".format(
                 userpolicy["SecurityPolicy"]["Position"],
                 userpolicy["SecurityPolicy"]["PositionPolicyName"],
-                userpolicy["SecurityPolicy"]["Position"]
+                userpolicy["SecurityPolicy"]["Position"],
             )
         else:
             position = userpolicy["SecurityPolicy"]["Position"]
@@ -132,18 +137,24 @@ class CreateUserpolicy(komand.Action):
         # End of Policy String
         end = ""
         end += "<IntrusionPrevention>{}</IntrusionPrevention>".format(
-            userpolicy["SecurityPolicy"]["IntrusionPrevention"])
+            userpolicy["SecurityPolicy"]["IntrusionPrevention"]
+        )
         end += "<TrafficShapingPolicy>{}</TrafficShapingPolicy>".format(
-            userpolicy["SecurityPolicy"]["TrafficShapingPolicy"])
+            userpolicy["SecurityPolicy"]["TrafficShapingPolicy"]
+        )
         end += "<SourceSecurityHeartbeat>{}</SourceSecurityHeartbeat>".format(
-            userpolicy["SecurityPolicy"]["SourceSecurityHeartbeat"])
+            userpolicy["SecurityPolicy"]["SourceSecurityHeartbeat"]
+        )
         end += "<MinimumSourceHBPermitted />"
         end += "<DestSecurityHeartbeat>{}</DestSecurityHeartbeat>".format(
-            userpolicy["SecurityPolicy"]["DestSecurityHeartbeat"])
+            userpolicy["SecurityPolicy"]["DestSecurityHeartbeat"]
+        )
         end += "<MinimumDestinationHBPermitted /></SecurityPolicy></Set></Request>"
 
         # Build request url
-        request_string = "{}{}{}{}{}{}{}{}".format(auth, start, position_xml, base_xml, policy_type, policy, end_policy, end)
+        request_string = "{}{}{}{}{}{}{}{}".format(
+            auth, start, position_xml, base_xml, policy_type, policy, end_policy, end
+        )
 
         status_code = 00
         status_response = "default"
@@ -175,10 +186,11 @@ class CreateUserpolicy(komand.Action):
         except Exception as e:
             self.logger.error("An error has occurred while adding a User policy: ", e)
             raise
-        return {"response": {
-            "status_code": status_code,
-            "status_response": status_response,
-            "invalid_params": invalid_params
+        return {
+            "response": {
+                "status_code": status_code,
+                "status_response": status_response,
+                "invalid_params": invalid_params,
             }
         }
 
@@ -188,7 +200,8 @@ class CreateUserpolicy(komand.Action):
         host = self.connection.host
         port = self.connection.port
         request_string = "<Request><Login><Username>{}</Username><Password>{}</Password></Login><Get><User></User></Get></Request>".format(
-            username, password)
+            username, password
+        )
         url = "https://{}/webconsole/APIController?".format(host + ":" + str(port))
         try:
             response = requests.get(url, files={"reqxml": (None, request_string)}, verify=False)

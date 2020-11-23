@@ -1,6 +1,7 @@
 import komand
 import time
 from .schema import NewModulesInput, NewModulesOutput
+
 # Custom imports below
 import requests
 
@@ -8,14 +9,17 @@ import requests
 class NewModules(komand.Trigger):
     CACHE_FILE_NAME = "metasploit_modules"
     cache_file = None
-    _META_JSON = "https://github.com/rapid7/metasploit-framework/raw/master/db/modules_metadata_base.json"
+    _META_JSON = (
+        "https://github.com/rapid7/metasploit-framework/raw/master/db/modules_metadata_base.json"
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='new_modules',
-                description='Checks for new Metasploit modules',
-                input=NewModulesInput(),
-                output=NewModulesOutput())
+            name="new_modules",
+            description="Checks for new Metasploit modules",
+            input=NewModulesInput(),
+            output=NewModulesOutput(),
+        )
 
     def run(self, params={}):
         """Run the trigger"""

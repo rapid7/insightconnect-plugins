@@ -1,16 +1,17 @@
 import komand
 from .schema import GetEnterpriseGroupsInput, GetEnterpriseGroupsOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class GetEnterpriseGroups(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_enterprise_groups',
-                description=Component.DESCRIPTION,
-                input=GetEnterpriseGroupsInput(),
-                output=GetEnterpriseGroupsOutput())
+            name="get_enterprise_groups",
+            description=Component.DESCRIPTION,
+            input=GetEnterpriseGroupsInput(),
+            output=GetEnterpriseGroupsOutput(),
+        )
 
     def run(self, params={}):
         client = self.connection.box_connection
@@ -28,7 +29,7 @@ class GetEnterpriseGroups(komand.Action):
                 "type": group.type,
                 "id": group.object_id,
                 "name": group.name,
-                "group_type": group.group_type
+                "group_type": group.group_type,
             }
             group_list.append(group_object)
 
@@ -40,4 +41,3 @@ class GetEnterpriseGroups(komand.Action):
                     return {Output.GROUPS: komand.helper.clean([group])}
 
         return {Output.GROUPS: komand.helper.clean(group_list)}
-    

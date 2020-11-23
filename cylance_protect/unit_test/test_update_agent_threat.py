@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from icon_cylance_protect.connection.connection import Connection
@@ -45,7 +46,6 @@ class TestUpdateAgentThreat(TestCase):
             """
             self.fail(message)
 
-
         test_conn.connect(connection_params)
         test_action.connection = test_conn
         results = test_action.run(action_params)
@@ -54,7 +54,7 @@ class TestUpdateAgentThreat(TestCase):
         self.fail("Unimplemented test case")
 
         # TODO: The following assert should be updated to look for data from your action
-        # For example: self.assertEquals({"success": True}, results) 
+        # For example: self.assertEquals({"success": True}, results)
         self.assertEquals({}, results)
 
     def test_update_agent_threat(self):

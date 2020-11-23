@@ -19,7 +19,7 @@ for_sale_category = {
     "computers": "sya syp",
     "electronics": "ela",
     "farm+garden": "gra",
-    "free" : "zip",
+    "free": "zip",
     "furniture": "fua",
     "garage sale": "gms",
     "general": "foa",
@@ -37,5 +37,5 @@ for_sale_category = {
     "toys+games": "taa",
     "trailers": "tra",
     "video gaming": "vga",
-    "wanted": "waa"
+    "wanted": "waa",
 }

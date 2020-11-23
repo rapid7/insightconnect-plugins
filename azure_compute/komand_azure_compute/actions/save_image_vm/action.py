@@ -36,17 +36,16 @@ class SaveImageVm(komand.Action):
             data["destinationContainerName"] = destination_container_name
             data["overwriteVhds"] = overwrite_vhds
 
-            url = f"{server}/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft" \
-                  f".Compute/virtualMachines/{vm}/capture?api-version={api_version}"
+            url = (
+                f"{server}/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft"
+                f".Compute/virtualMachines/{vm}/capture?api-version={api_version}"
+            )
 
             # New Request, Call API and response data
             resp = requests.post(
                 url,
-                headers={
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer %s" % token,
-                },
-                data=json.dumps(data)
+                headers={"Content-Type": "application/json", "Authorization": "Bearer %s" % token,},
+                data=json.dumps(data),
             )
 
             status_code = resp.status_code

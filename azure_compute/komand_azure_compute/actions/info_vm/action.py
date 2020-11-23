@@ -29,34 +29,35 @@ class InfoVm(komand.Action):
             resource_group = params.get(Input.RESOURCEGROUP, "")
 
             url_dict = {}
-            url_dict["modelViewAndInstanceView"] = f"/subscriptions/{subscription_id}/resourceGroups/" \
-                                                   f"{resource_group}/providers/Microsoft.Compute/virtualMachines/" \
-                                                   f"{vm}?$expand=instanceView&api-version={api_version}"
-            url_dict["instanceView"] = f"/subscriptions/{subscription_id}/resourceGroups/" \
-                                       f"{resource_group}/providers/Microsoft.Compute" \
-                                       f"/virtualMachines/{vm}/InstanceView?api-version={api_version}"
-            url_dict["modelView"] = f"/subscriptions/{subscription_id}/resourceGroups/" \
-                                    f"{resource_group}/providers/Microsoft.Compute/virtualMachines/" \
-                                    f"{vm}?api-version={api_version}"
+            url_dict["modelViewAndInstanceView"] = (
+                f"/subscriptions/{subscription_id}/resourceGroups/"
+                f"{resource_group}/providers/Microsoft.Compute/virtualMachines/"
+                f"{vm}?$expand=instanceView&api-version={api_version}"
+            )
+            url_dict["instanceView"] = (
+                f"/subscriptions/{subscription_id}/resourceGroups/"
+                f"{resource_group}/providers/Microsoft.Compute"
+                f"/virtualMachines/{vm}/InstanceView?api-version={api_version}"
+            )
+            url_dict["modelView"] = (
+                f"/subscriptions/{subscription_id}/resourceGroups/"
+                f"{resource_group}/providers/Microsoft.Compute/virtualMachines/"
+                f"{vm}?api-version={api_version}"
+            )
 
             url = server + url_dict[mode]
 
             # New Request, Call API and response data
             resp = requests.get(
                 url,
-                headers={
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer %s" % token,
-                },
+                headers={"Content-Type": "application/json", "Authorization": "Bearer %s" % token,},
             )
 
             # Handle decoding json
             try:
                 result_dic = resp.json()
             except json.decoder.JSONDecodeError as e:
-                raise PluginException(
-                    preset=PluginException.Preset.INVALID_JSON, data=resp.read()
-                )
+                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=resp.read())
 
             return result_dic
         # Handle exception

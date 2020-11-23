@@ -1,19 +1,20 @@
 import insightconnect_plugin_runtime
 from .schema import DeleteIncidentInput, DeleteIncidentOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class DeleteIncident(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='delete_incident',
-                description=Component.DESCRIPTION,
-                input=DeleteIncidentInput(),
-                output=DeleteIncidentOutput())
+            name="delete_incident",
+            description=Component.DESCRIPTION,
+            input=DeleteIncidentInput(),
+            output=DeleteIncidentOutput(),
+        )
 
     def run(self, params={}):
-        url = f'{self.connection.incident_url}/{params.get(Input.SYSTEM_ID)}'
+        url = f"{self.connection.incident_url}/{params.get(Input.SYSTEM_ID)}"
         method = "delete"
 
         response = self.connection.request.make_request(url, method)
@@ -23,6 +24,4 @@ class DeleteIncident(insightconnect_plugin_runtime.Action):
         else:
             success = False
 
-        return {
-            Output.SUCCESS: success
-        }
+        return {Output.SUCCESS: success}

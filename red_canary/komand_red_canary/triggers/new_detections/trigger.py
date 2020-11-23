@@ -74,6 +74,4 @@ class NewDetections(komand.Trigger):
 
                 time.sleep(params.get("frequency", 5))
             except Exception as e:
-                raise Exception(
-                    "An error occurred while reading detections: {}".format(e)
-                )
+                raise Exception("An error occurred while reading detections: {}".format(e))

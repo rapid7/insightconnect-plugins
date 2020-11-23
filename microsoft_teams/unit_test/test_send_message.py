@@ -25,7 +25,7 @@ class TestGetTeams(TestCase):
         run_params = {
             "team_name": "Dream Team",
             "channel_name": "test123",
-            "message": "Hello from a Unit Test!"
+            "message": "Hello from a Unit Test!",
         }
 
         result = test_action.run(run_params)

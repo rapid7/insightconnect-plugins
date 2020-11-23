@@ -81,5 +81,5 @@ class NewEvents(komand.Trigger):
                 time.sleep(params.get("frequency", 5))
             except Exception as e:
                 raise PluginException(
-                    cause='An error occurred while reading events.',
-                    assistance=f'{e}')
+                    cause="An error occurred while reading events.", assistance=f"{e}"
+                )

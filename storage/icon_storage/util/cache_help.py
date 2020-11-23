@@ -3,7 +3,7 @@ import base64
 import ast
 
 
-class CacheHelp():
+class CacheHelp:
     def __init__(self):
         cwd = os.getcwd()
         if "komand-plugins" in cwd:  # we are working locally
@@ -36,7 +36,7 @@ class CacheHelp():
 
     def _get_dict_from_store(self):
         if self._check_dict_file(self.DICT_FILE):
-            with open(self.DICT_FILE, 'rb') as file_:
+            with open(self.DICT_FILE, "rb") as file_:
                 encoded_bytes = file_.read()
                 encoded_string = encoded_bytes.decode()
                 decoded_dict = base64.b64decode(encoded_string)
@@ -48,7 +48,7 @@ class CacheHelp():
     def _save_dict_to_store(self, dict):
         bytes_dict = str(dict).encode()
         encoded_dict = base64.b64encode(bytes_dict)
-        with open(self.DICT_FILE, 'wb') as file_:
+        with open(self.DICT_FILE, "wb") as file_:
             file_.write(encoded_dict)
 
     def _delete_dict_file(self):

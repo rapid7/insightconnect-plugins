@@ -4,13 +4,13 @@ from komand_sentinelone.util.helper import Helper
 
 
 class AgentsSummary(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='agents_summary',
-                description=Component.DESCRIPTION,
-                input=AgentsSummaryInput(),
-                output=AgentsSummaryOutput())
+            name="agents_summary",
+            description=Component.DESCRIPTION,
+            input=AgentsSummaryInput(),
+            output=AgentsSummaryOutput(),
+        )
 
     def run(self, params={}):
         response = self.connection.agents_summary(

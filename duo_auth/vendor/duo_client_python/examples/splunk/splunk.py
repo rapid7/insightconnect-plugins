@@ -14,7 +14,6 @@ from urlparse import urlparse
 
 
 class BaseLog(object):
-
     def __init__(self, admin_api, path, logname):
         self.admin_api = admin_api
         self.path = path
@@ -61,7 +60,7 @@ class BaseLog(object):
 
         last_timestamp = 0
         for event in self.events:
-            last_timestamp = max(last_timestamp, event['timestamp'])
+            last_timestamp = max(last_timestamp, event["timestamp"])
 
         path = self.get_last_timestamp_path()
         f = open(path, "w")
@@ -84,44 +83,44 @@ class AdministratorLog(BaseLog):
         BaseLog.__init__(self, admin_api, path, "administrator")
 
     def get_events(self):
-        self.events = self.admin_api.get_administrator_log(
-            mintime=self.mintime,
-        )
+        self.events = self.admin_api.get_administrator_log(mintime=self.mintime,)
 
     def print_events(self):
         """
         Print events in a format suitable for Splunk.
         """
         for event in self.events:
-            event['ctime'] = time.ctime(event['timestamp'])
-            event['actionlabel'] = {
-                'admin_login': "Admin Login",
-                'admin_create': "Create Admin",
-                'admin_update': "Update Admin",
-                'admin_delete': "Delete Admin",
-                'customer_update': "Update Customer",
-                'group_create': "Create Group",
-                'group_udpate': "Update Group",
-                'group_delete': "Delete Group",
-                'integration_create': "Create Integration",
-                'integration_update': "Update Integration",
-                'integration_delete': "Delete Integration",
-                'phone_create': "Create Phone",
-                'phone_update': "Update Phone",
-                'phone_delete': "Delete Phone",
-                'user_create': "Create User",
-                'user_update': "Update User",
-                'user_delete': "Delete User"}.get(
-                event['action'], event['action'])
+            event["ctime"] = time.ctime(event["timestamp"])
+            event["actionlabel"] = {
+                "admin_login": "Admin Login",
+                "admin_create": "Create Admin",
+                "admin_update": "Update Admin",
+                "admin_delete": "Delete Admin",
+                "customer_update": "Update Customer",
+                "group_create": "Create Group",
+                "group_udpate": "Update Group",
+                "group_delete": "Delete Group",
+                "integration_create": "Create Integration",
+                "integration_update": "Update Integration",
+                "integration_delete": "Delete Integration",
+                "phone_create": "Create Phone",
+                "phone_update": "Update Phone",
+                "phone_delete": "Delete Phone",
+                "user_create": "Create User",
+                "user_update": "Update User",
+                "user_delete": "Delete User",
+            }.get(event["action"], event["action"])
 
-            fmtstr = '%(timestamp)s,' \
-                     'host="%(host)s", ' \
-                     'eventtype="%(eventtype)s", ' \
-                     'username="%(username)s", ' \
-                     'action="%(actionlabel)s"'
-            if event['object']:
+            fmtstr = (
+                "%(timestamp)s,"
+                'host="%(host)s", '
+                'eventtype="%(eventtype)s", '
+                'username="%(username)s", '
+                'action="%(actionlabel)s"'
+            )
+            if event["object"]:
                 fmtstr += ', object="%(object)s"'
-            if event['description']:
+            if event["description"]:
                 fmtstr += ', description="%(description)s"'
 
             print(fmtstr % event)
@@ -132,19 +131,17 @@ class AuthenticationLog(BaseLog):
         BaseLog.__init__(self, admin_api, path, "authentication")
 
     def get_events(self):
-        self.events = self.admin_api.get_authentication_log(
-            mintime=self.mintime,
-        )
+        self.events = self.admin_api.get_authentication_log(mintime=self.mintime,)
 
     def print_events(self):
         """
         Print events in a format suitable for Splunk.
         """
         for event in self.events:
-            event['ctime'] = time.ctime(event['timestamp'])
+            event["ctime"] = time.ctime(event["timestamp"])
 
             fmtstr = (
-                '%(timestamp)s,'
+                "%(timestamp)s,"
                 'host="%(host)s", '
                 'eventtype="%(eventtype)s", '
                 'username="%(username)s", '
@@ -164,25 +161,25 @@ class TelephonyLog(BaseLog):
         BaseLog.__init__(self, admin_api, path, "telephony")
 
     def get_events(self):
-        self.events = self.admin_api.get_telephony_log(
-            mintime=self.mintime,
-        )
+        self.events = self.admin_api.get_telephony_log(mintime=self.mintime,)
 
     def print_events(self):
         """
         Print events in a format suitable for Splunk.
         """
         for event in self.events:
-            event['ctime'] = time.ctime(event['timestamp'])
-            event['host'] = self.admin_api.host
+            event["ctime"] = time.ctime(event["timestamp"])
+            event["host"] = self.admin_api.host
 
-            fmtstr = '%(timestamp)s,' \
-                     'host="%(host)s", ' \
-                     'eventtype="%(eventtype)s", ' \
-                     'context="%(context)s", ' \
-                     'type="%(type)s", ' \
-                     'phone="%(phone)s", ' \
-                     'credits="%(credits)s"'
+            fmtstr = (
+                "%(timestamp)s,"
+                'host="%(host)s", '
+                'eventtype="%(eventtype)s", '
+                'context="%(context)s", '
+                'type="%(type)s", '
+                'phone="%(phone)s", '
+                'credits="%(credits)s"'
+            )
 
             print(fmtstr % event)
 
@@ -194,16 +191,13 @@ def admin_api_from_config(config_path):
     """
     config = six.moves.configparser.ConfigParser()
     config.read(config_path)
-    config_d = dict(config.items('duo'))
+    config_d = dict(config.items("duo"))
     ca_certs = config_d.get("ca_certs", None)
     if ca_certs is None:
         ca_certs = config_d.get("ca", None)
 
     ret = duo_client.Admin(
-        ikey=config_d['ikey'],
-        skey=config_d['skey'],
-        host=config_d['host'],
-        ca_certs=ca_certs,
+        ikey=config_d["ikey"], skey=config_d["skey"], host=config_d["host"], ca_certs=ca_certs,
     )
 
     http_proxy = config_d.get("http_proxy", None)
@@ -211,7 +205,7 @@ def admin_api_from_config(config_path):
         proxy_parsed = urlparse(http_proxy)
         proxy_host = proxy_parsed.hostname
         proxy_port = proxy_parsed.port
-        ret.set_proxy(host = proxy_host, port = proxy_port)
+        ret.set_proxy(host=proxy_host, port=proxy_port)
 
     return ret
 
@@ -237,5 +231,5 @@ def main():
         log.run()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

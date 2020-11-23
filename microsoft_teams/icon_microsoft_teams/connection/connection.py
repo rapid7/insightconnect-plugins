@@ -1,5 +1,6 @@
 import komand
 from .schema import ConnectionSchema, Input
+
 # Custom imports below
 from komand.exceptions import ConnectionTestException, PluginException
 import requests
@@ -7,7 +8,6 @@ import time
 
 
 class Connection(komand.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
@@ -37,7 +37,7 @@ class Connection(komand.Connection):
             "client_id": self.app_id,
             "client_secret": self.app_secret,
             "username": self.username,
-            "password": self.password
+            "password": self.password,
         }
 
         if self.refresh_token:
@@ -49,25 +49,31 @@ class Connection(komand.Connection):
         try:
             result.raise_for_status()
         except Exception as e:
-            raise PluginException(cause="Authentication to Microsoft Graph failed.",
-                                  assistance=f"Some common causes for this error include an invalid username, password, or connection settings."
-                                             f"Verify you are using the correct domain name for your user, and verify that user has access to "
-                                             f"the target tenant. Verify you can log into Office365 with the user account as well.\n"
-                                             f"The result returned was:\n{result.text}",
-                                  data=e) from e
+            raise PluginException(
+                cause="Authentication to Microsoft Graph failed.",
+                assistance=f"Some common causes for this error include an invalid username, password, or connection settings."
+                f"Verify you are using the correct domain name for your user, and verify that user has access to "
+                f"the target tenant. Verify you can log into Office365 with the user account as well.\n"
+                f"The result returned was:\n{result.text}",
+                data=e,
+            ) from e
 
         result_json = result.json()
         self.api_token = result_json.get("access_token")
         self.refresh_token = result_json.get("refresh_token")
 
-        self.logger.info(f"Authentication was successful, token is: ******************{self.api_token[-5:]}")
+        self.logger.info(
+            f"Authentication was successful, token is: ******************{self.api_token[-5:]}"
+        )
         self.logger.info(f"Detected Permissions: {result_json.get('scope')}")
 
     def check_and_refresh_api_token(self, force_refresh_token=False):
         self.time_now = time.time()
         self.logger.info(f"Time Now: {self.time_now}")
         self.logger.info(f"Time Ago: {self.time_ago}")
-        if (self.time_now - self.time_ago) > 3500 or force_refresh_token:  # 1 hour in seconds (minus some buffer time)
+        if (
+            self.time_now - self.time_ago
+        ) > 3500 or force_refresh_token:  # 1 hour in seconds (minus some buffer time)
             self.logger.info("Refreshing auth token")
             self.get_token()
             self.time_ago = time.time()
@@ -76,18 +82,19 @@ class Connection(komand.Connection):
 
     def get_headers(self, forceRefreshToken=False):
         self.check_and_refresh_api_token(forceRefreshToken)
-        headers = {
-            "Authorization": f"Bearer {self.api_token}",
-            "Content-Type": "application/json"
-        }
+        headers = {"Authorization": f"Bearer {self.api_token}", "Content-Type": "application/json"}
         return headers
 
     def test(self):
         try:
             self.check_and_refresh_api_token()
         except PluginException as e:
-            raise ConnectionTestException(cause="Unable to get authentication token.",
-                                          assistance="Please check your connection settings.") from e
+            raise ConnectionTestException(
+                cause="Unable to get authentication token.",
+                assistance="Please check your connection settings.",
+            ) from e
         if not self.api_token:
-            raise ConnectionTestException(cause="No authentication token found.",
-                                          assistance="Please check your connection settings.")
+            raise ConnectionTestException(
+                cause="No authentication token found.",
+                assistance="Please check your connection settings.",
+            )

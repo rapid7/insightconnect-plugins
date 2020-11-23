@@ -1,17 +1,18 @@
 import komand
 from .schema import QueryDataWithArielInput, QueryDataWithArielOutput
+
 # Custom imports below
 from komand_qradar.util import helpers
 
 
 class QueryDataWithAriel(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='query_data_with_ariel',
-                description='Asynchronously query data using the Ariel Query Language',
-                input=QueryDataWithArielInput(),
-                output=QueryDataWithArielOutput())
+            name="query_data_with_ariel",
+            description="Asynchronously query data using the Ariel Query Language",
+            input=QueryDataWithArielInput(),
+            output=QueryDataWithArielOutput(),
+        )
 
     def run(self, params={}):
         url = self.connection.url
@@ -44,6 +45,6 @@ class QueryDataWithAriel(komand.Action):
             success = helpers.test_auth(self.logger, url, basic_auth=auth)
 
         if not success:
-            raise Exception('Test: Failed authentication')
+            raise Exception("Test: Failed authentication")
 
         return {}

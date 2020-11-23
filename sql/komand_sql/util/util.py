@@ -16,13 +16,16 @@ def generate_results(conn_type, connection, query, parameters, logger):
             operation = a["Operation"]
         except KeyError:
             rows_affected = a["Plan Rows"]
-            operation = 'unknown'
+            operation = "unknown"
         except Exception as e:
             logger.info(e)
-            operation = 'unknown'
+            operation = "unknown"
 
-    rows = connection.session.execute(query) if len(
-        parameters) == 0 else connection.session.execute(query, parameters)
+    rows = (
+        connection.session.execute(query)
+        if len(parameters) == 0
+        else connection.session.execute(query, parameters)
+    )
     if rows.is_insert or operation == "Insert":
         connection.session.commit()
         return {"status": "successfully inserted %d rows" % int(rows_affected)}

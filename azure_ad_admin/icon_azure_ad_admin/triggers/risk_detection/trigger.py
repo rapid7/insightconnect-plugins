@@ -10,13 +10,13 @@ import json
 
 
 class RiskDetection(komand.Trigger):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='risk_detection',
-                description=Component.DESCRIPTION,
-                input=RiskDetectionInput(),
-                output=RiskDetectionOutput())
+            name="risk_detection",
+            description=Component.DESCRIPTION,
+            input=RiskDetectionInput(),
+            output=RiskDetectionOutput(),
+        )
         self.risk_level = ""
         self.found = {}
 
@@ -24,14 +24,16 @@ class RiskDetection(komand.Trigger):
         new_risks = self.get_risks()
 
         try:
-            result = new_risks['value']
+            result = new_risks["value"]
         except KeyError:
-            raise PluginException(cause='Unexpected output format.',
-                                  assistance='The output from Azure Active Directory was not in the expected format. Please contact support for help.',
-                                  data=new_risks)
+            raise PluginException(
+                cause="Unexpected output format.",
+                assistance="The output from Azure Active Directory was not in the expected format. Please contact support for help.",
+                data=new_risks,
+            )
 
         for risk in result:
-            self.found[risk.get('id')] = True
+            self.found[risk.get("id")] = True
 
     def get_risks(self):
         headers = self.connection.get_headers(self.connection.get_auth_token())
@@ -39,7 +41,9 @@ class RiskDetection(komand.Trigger):
         if self.risk_level and self.risk_level != "all":
             risk_detect_endpoint = f"https://graph.microsoft.com/beta/{self.connection.tenant}/riskDetections?$filter=riskLevel eq '{self.risk_level}'"
         else:
-            risk_detect_endpoint = f"https://graph.microsoft.com/beta/{self.connection.tenant}/riskDetections"
+            risk_detect_endpoint = (
+                f"https://graph.microsoft.com/beta/{self.connection.tenant}/riskDetections"
+            )
 
         new_risks = requests.get(risk_detect_endpoint, headers=headers)
 
@@ -47,7 +51,8 @@ class RiskDetection(komand.Trigger):
             raise PluginException(
                 cause=f"Risk Detections returned an unexpected response: {new_risks.status_code}",
                 assistance="Please contact support for help.",
-                data=new_risks.text)
+                data=new_risks.text,
+            )
 
         try:
             return new_risks.json()
@@ -58,15 +63,17 @@ class RiskDetection(komand.Trigger):
         new_risks = self.get_risks()
 
         try:
-            result = remove_null_and_clean(new_risks['value'])
+            result = remove_null_and_clean(new_risks["value"])
         except KeyError:
-            raise PluginException(cause='Unexpected output format.',
-                                  assistance='The output from Azure Active Directory was not in the expected format. Please contact support for help.',
-                                  data=new_risks)
+            raise PluginException(
+                cause="Unexpected output format.",
+                assistance="The output from Azure Active Directory was not in the expected format. Please contact support for help.",
+                data=new_risks,
+            )
 
         for risk in result:
-            if risk.get('id') not in self.found:
-                self.found[risk.get('id')] = True
+            if risk.get("id") not in self.found:
+                self.found[risk.get("id")] = True
                 self.send({Output.RISK: risk})
 
     def run(self, params={}):

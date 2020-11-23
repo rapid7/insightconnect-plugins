@@ -1,5 +1,6 @@
 import komand
 from .schema import SubscribeOutput, SubscribeInput
+
 # Custom imports below
 from komand_phabricator.util.editor import ManiphesEdit
 from komand_phabricator.util.editor import TestAction
@@ -10,10 +11,11 @@ class Subscribe(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='subscribe',
-                description='Add users or projects as subscribers',
-                input=SubscribeInput(),
-                output=SubscribeOutput())
+            name="subscribe",
+            description="Add users or projects as subscribers",
+            input=SubscribeInput(),
+            output=SubscribeOutput(),
+        )
 
     def run(self, params={}):
 
@@ -21,8 +23,8 @@ class Subscribe(komand.Action):
             self.logger.error("Subscribe: Run: Empty Phabricator object")
             raise Exception("Subscribe: Run: Empty Phabricator object")
 
-        id = params.get('id',None)
-        subscribes = params.get('subscribes', None)
+        id = params.get("id", None)
+        subscribes = params.get("subscribes", None)
 
         users = self.getSubscribesFromPHID(subscribes, "USER")
         projects = self.getSubscribesFromPHID(subscribes, "PROJ")
@@ -42,10 +44,18 @@ class Subscribe(komand.Action):
             raise e
 
         if id is None:
-            self.logger.error("Subscribe: Run: Problem with adding projects and users {0} to subscribers".format(founded))
-            raise Exception("Subscribe: Run: Problem with adding projects and users {0} to subscribers".format(founded))
+            self.logger.error(
+                "Subscribe: Run: Problem with adding projects and users {0} to subscribers".format(
+                    founded
+                )
+            )
+            raise Exception(
+                "Subscribe: Run: Problem with adding projects and users {0} to subscribers".format(
+                    founded
+                )
+            )
 
-        return {"message":"Subscribes added"}
+        return {"message": "Subscribes added"}
 
     def getSubscribesFromPHID(self, subscribes, name):
         elements = []

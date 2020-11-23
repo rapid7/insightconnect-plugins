@@ -1,24 +1,32 @@
 import komand
-from .schema import CheckIfAddressObjectInGroupInput, CheckIfAddressObjectInGroupOutput, Input, Output, Component
+from .schema import (
+    CheckIfAddressObjectInGroupInput,
+    CheckIfAddressObjectInGroupOutput,
+    Input,
+    Output,
+    Component,
+)
+
 # Custom imports below
 from komand.exceptions import PluginException
 from komand_palo_alto_pan_os.util.ip_check import IpCheck
 
-class CheckIfAddressObjectInGroup(komand.Action):
 
+class CheckIfAddressObjectInGroup(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='check_if_address_object_in_group',
-                description=Component.DESCRIPTION,
-                input=CheckIfAddressObjectInGroupInput(),
-                output=CheckIfAddressObjectInGroupOutput())
+            name="check_if_address_object_in_group",
+            description=Component.DESCRIPTION,
+            input=CheckIfAddressObjectInGroupInput(),
+            output=CheckIfAddressObjectInGroupOutput(),
+        )
 
     def run(self, params={}):
         group_name = params.get(Input.GROUP)
         address_to_check = params.get(Input.ADDRESS)
         device_name = params.get(Input.DEVICE_NAME)
         virtual_system = params.get(Input.VIRTUAL_SYSTEM)
-        enable_search= params.get(Input.ENABLE_SEARCH)
+        enable_search = params.get(Input.ENABLE_SEARCH)
 
         xpath = f"/config/devices/entry[@name='{device_name}']/vsys/entry[@name='{virtual_system}']/address-group/entry[@name='{group_name}']"
         response = self.connection.request.get_(xpath)
@@ -27,9 +35,11 @@ class CheckIfAddressObjectInGroup(komand.Action):
         # Make the call and get the address group
         ip_objects = response.get("response", {}).get("result", {}).get("entry", {}).get("static")
         if not ip_objects:
-            raise PluginException(cause="PAN OS returned an unexpected response.",
-                                  assistance=f"Could not find group {group_name}, or group was empty. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {virtual_system}",
-                                  data=response)
+            raise PluginException(
+                cause="PAN OS returned an unexpected response.",
+                assistance=f"Could not find group {group_name}, or group was empty. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {virtual_system}",
+                data=response,
+            )
 
         # Extract all the address objects from the address group
         self.logger.info(f"Searching through {len(ip_objects)} address objects.")
@@ -68,17 +78,25 @@ class CheckIfAddressObjectInGroup(komand.Action):
                 # Now try and deal with that address object
                 if get_entry:
                     # Find an entry that's either ip-something or fqdn
-                    key_to_get = list(filter(lambda x: (x.startswith("ip-") or x == "fqdn"), list(get_entry.keys())))[0]
+                    key_to_get = list(
+                        filter(
+                            lambda x: (x.startswith("ip-") or x == "fqdn"), list(get_entry.keys())
+                        )
+                    )[0]
                     address_object = get_entry.get(key_to_get)
 
                     # Depending on how PAN OS is feeling on a given day, it will either have a string or list returned
                     # in the XML for the key we just found
                     if type(address_object) is str:
-                        if ip_checker.check_address_against_object(address_object, address_to_check):
+                        if ip_checker.check_address_against_object(
+                            address_object, address_to_check
+                        ):
                             object_names_to_return.append(name)
                             found = True
                     else:
-                        if ip_checker.check_address_against_object(address_object.get("#text", ""), address_to_check):
+                        if ip_checker.check_address_against_object(
+                            address_object.get("#text", ""), address_to_check
+                        ):
                             object_names_to_return.append(name)
                             found = True
 

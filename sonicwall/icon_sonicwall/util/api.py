@@ -36,19 +36,23 @@ class SonicWallAPI:
         except PluginException as _:
             pass
 
-        raise PluginException(cause="The address group does not exist in SonicWall.",
-                              assistance="Please enter valid names and try again.")
+        raise PluginException(
+            cause="The address group does not exist in SonicWall.",
+            assistance="Please enter valid names and try again.",
+        )
 
     def get_group_type(self, name):
         group = self.get_group(name)
-        for groups in group.get('address_group', {}):
-            if 'ipv4' in groups:
-                return 'ipv4'
-            if 'ipv6' in groups:
-                return 'ipv6'
+        for groups in group.get("address_group", {}):
+            if "ipv4" in groups:
+                return "ipv4"
+            if "ipv6" in groups:
+                return "ipv6"
 
-        raise PluginException(cause="The address group does not exist in SonicWall.",
-                              assistance="Please enter valid names and try again.")
+        raise PluginException(
+            cause="The address group does not exist in SonicWall.",
+            assistance="Please enter valid names and try again.",
+        )
 
     def get_address_object(self, name):
         self.login()
@@ -56,21 +60,20 @@ class SonicWallAPI:
             try:
                 address_object = self._call_api("get", f"address-objects/{object_type}/name/{name}")
                 if address_object:
-                    return {
-                        "object_type": object_type,
-                        "address_object": address_object
-                    }
+                    return {"object_type": object_type, "address_object": address_object}
             except PluginException as _:
                 continue
 
         self.logout()
         raise PluginException(
             cause="The address object does not exist in SonicWall.",
-            assistance="Please enter valid names and try again."
+            assistance="Please enter valid names and try again.",
         )
 
     def add_address_object_to_group(self, group_type, group_name, payload):
-        return self._make_request("put", f"address-groups/{group_type}/name/{group_name}", json_data=payload)
+        return self._make_request(
+            "put", f"address-groups/{group_type}/name/{group_name}", json_data=payload
+        )
 
     def create_address_object(self, object_type, payload):
         if object_type == "cidr":
@@ -86,22 +89,26 @@ class SonicWallAPI:
             if self._call_api("get", f"zones/name/{zone_name}"):
                 return True
         except PluginException as _:
-            raise PluginException(cause=f"The zone: {zone_name} does not exist in SonicWall.",
-                                  assistance="Please enter valid zone name and try again.")
+            raise PluginException(
+                cause=f"The zone: {zone_name} does not exist in SonicWall.",
+                assistance="Please enter valid zone name and try again.",
+            )
         finally:
             self.logout()
 
     def invoke_cli_command(self, payload):
         self.login()
         try:
-            response = self._call_api("POST", f"direct/cli", data=payload, content_type='text/plain')
+            response = self._call_api(
+                "POST", f"direct/cli", data=payload, content_type="text/plain"
+            )
         except PluginException as e:
             raise PluginException(cause=e.cause, assistance=e.assistance, data=e.data)
         finally:
             self.logout()
 
         return response
-        
+
     def _make_request(self, method, path, json_data=None):
         self.login()
         try:
@@ -114,21 +121,28 @@ class SonicWallAPI:
 
         return response
 
-    def _call_api(self, method, path, json_data=None, auth=None, content_type='application/json', data=None):
+    def _call_api(
+        self, method, path, json_data=None, auth=None, content_type="application/json", data=None
+    ):
         response = {"text": ""}
-        headers = OrderedDict([
-            ('Accept', 'application/json'),
-            ('Content-Type', content_type),
-            ('Accept-Encoding', 'application/json'),
-            ('charset', 'UTF-8')
-        ])
+        headers = OrderedDict(
+            [
+                ("Accept", "application/json"),
+                ("Content-Type", content_type),
+                ("Accept-Encoding", "application/json"),
+                ("charset", "UTF-8"),
+            ]
+        )
         try:
-            response = requests.request(method, self.url + path,
-                                        json=json_data,
-                                        data=data,
-                                        auth=auth,
-                                        headers=headers,
-                                        verify=self.verify_ssl)
+            response = requests.request(
+                method,
+                self.url + path,
+                json=json_data,
+                data=data,
+                auth=auth,
+                headers=headers,
+                verify=self.verify_ssl,
+            )
 
             if response.status_code == 401:
                 raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)

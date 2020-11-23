@@ -1,16 +1,17 @@
 import komand
 from .schema import RetrieveInput, RetrieveOutput, Component
+
 # Custom imports below
 
 
 class Retrieve(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='retrieve',
-                description=Component.DESCRIPTION,
-                input=RetrieveInput(),
-                output=RetrieveOutput())
+            name="retrieve",
+            description=Component.DESCRIPTION,
+            input=RetrieveInput(),
+            output=RetrieveOutput(),
+        )
 
     def run(self, params={}):
         client = self.connection.client
@@ -18,17 +19,23 @@ class Retrieve(komand.Action):
         try:
             client.session_create()
         except Exception as e:
-            raise Exception("Unable to connect to OTRS webservice! Please check your connection information and \
+            raise Exception(
+                "Unable to connect to OTRS webservice! Please check your connection information and \
             that you have properly configured OTRS webservice. Information on configuring the webservice can be found\
-            in the Connection help")
+            in the Connection help"
+            )
 
         clean_data = {}
         try:
-            ticket = client.ticket_get_by_id(params.get("ticket_id"), articles=True, attachments=True, dynamic_fields=True)
+            ticket = client.ticket_get_by_id(
+                params.get("ticket_id"), articles=True, attachments=True, dynamic_fields=True
+            )
             ticket_data = ticket.to_dct()
             clean_data = komand.helper.clean(ticket_data)
         except Exception as e:
-            self.logger.error("Ticket may not exist, please check to make sure the ticket exists ", e)
+            self.logger.error(
+                "Ticket may not exist, please check to make sure the ticket exists ", e
+            )
             raise
 
         # Type formatting for other actions
@@ -52,7 +59,12 @@ class Retrieve(komand.Action):
                     article["Attachment"] = cleaned_attachment
             clean_data["Ticket"]["Article"] = cleaned_articles
 
-            for property in ["EscalationTime", "EscalationResponseTime", "EscalationSolutionTime", "EscalationUpdateTime"]:
+            for property in [
+                "EscalationTime",
+                "EscalationResponseTime",
+                "EscalationSolutionTime",
+                "EscalationUpdateTime",
+            ]:
                 val = clean_data["Ticket"].get(property)
                 if len(val) and isinstance(val, str) and str.isnumeric(val):
                     clean_data["Ticket"][property] = int(clean_data["Ticket"][property])
@@ -69,14 +81,19 @@ class Retrieve(komand.Action):
                 clean_data["Ticket"]["DynamicField"] = clean_df
 
         except Exception as e:
-            self.logger.error("Ticket {} missing Article data! Unable to format data".format(str(params.get("ticket_id"))), e)
+            self.logger.error(
+                "Ticket {} missing Article data! Unable to format data".format(
+                    str(params.get("ticket_id"))
+                ),
+                e,
+            )
             raise
-
-
 
         try:
             clean_data["Ticket"]["TicketID"] = int(clean_data["Ticket"]["TicketID"])
         except Exception as e:
-            self.logger.error("Ticket {} missing Ticket ID!".format(str(params.get("ticket_id"))), e)
+            self.logger.error(
+                "Ticket {} missing Ticket ID!".format(str(params.get("ticket_id"))), e
+            )
             raise
         return clean_data

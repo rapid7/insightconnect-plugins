@@ -1,12 +1,12 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
+
 # Custom imports below
 from icon_sonicwall.util.api import SonicWallAPI
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.sonicwall_api = None
@@ -19,7 +19,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             password=params.get(Input.CREDENTIALS).get("password"),
             url=params.get(Input.URL),
             port=params.get(Input.PORT, 443),
-            logger=self.logger
+            logger=self.logger,
         )
 
     def test(self):
@@ -27,7 +27,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
             if self.sonicwall_api.login().get("status", {}).get("success", False):
                 return {}
         except PluginException as e:
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED, data=e)
+            raise ConnectionTestException(
+                preset=ConnectionTestException.Preset.UNAUTHORIZED, data=e
+            )
         finally:
             self.sonicwall_api.logout()
 

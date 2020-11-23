@@ -1,19 +1,20 @@
 import insightconnect_plugin_runtime
 from .schema import UpdateIncidentInput, UpdateIncidentOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class UpdateIncident(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='update_incident',
-                description=Component.DESCRIPTION,
-                input=UpdateIncidentInput(),
-                output=UpdateIncidentOutput())
+            name="update_incident",
+            description=Component.DESCRIPTION,
+            input=UpdateIncidentInput(),
+            output=UpdateIncidentOutput(),
+        )
 
     def run(self, params={}):
-        url = f'{self.connection.incident_url}/{params.get(Input.SYSTEM_ID)}'
+        url = f"{self.connection.incident_url}/{params.get(Input.SYSTEM_ID)}"
         payload = params.get(Input.UPDATE_DATA)
         method = "put"
 
@@ -24,6 +25,4 @@ class UpdateIncident(insightconnect_plugin_runtime.Action):
         else:
             success = False
 
-        return {
-            Output.SUCCESS: success
-        }
+        return {Output.SUCCESS: success}

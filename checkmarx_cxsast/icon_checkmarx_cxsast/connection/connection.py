@@ -6,7 +6,6 @@ from icon_checkmarx_cxsast.util.api import CheckmarxCxSAST
 
 
 class Connection(komand.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
@@ -21,10 +20,10 @@ class Connection(komand.Connection):
 
         self.logger.info("Connect: Connecting...")
         self.client = CheckmarxCxSAST(
-          params["host"],
-          self.logger,
-          params["credentials"]["username"],
-          params["credentials"]["password"],
+            params["host"],
+            self.logger,
+            params["credentials"]["username"],
+            params["credentials"]["password"],
         )
 
     def test(self):

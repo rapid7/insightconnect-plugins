@@ -46,7 +46,9 @@ def xz_decompress(file_bytes):
 
 
 def lz_decompress(file_bytes):
-    decompressed = lzma.decompress(file_bytes, format=lzma.FORMAT_ALONE)  # lzma.FORMAT_ALONE = LZMA mode
+    decompressed = lzma.decompress(
+        file_bytes, format=lzma.FORMAT_ALONE
+    )  # lzma.FORMAT_ALONE = LZMA mode
     return decompressed
 
 
@@ -59,14 +61,15 @@ def zip_decompress(file_bytes):
 
     zip_object = ZipFile(zip_file, "r")
     decompressed = {name: zip_object.read(name) for name in zip_object.namelist()}
-    file_list = list(map(lambda file: {"filename": file[0], "content": file[1]}, decompressed.items()))
-    files={}
+    file_list = list(
+        map(lambda file: {"filename": file[0], "content": file[1]}, decompressed.items())
+    )
+    files = {}
     for fil in file_list:
-        #ignore hidden files, files with no name, and decompress gz files
-        if os.path.basename(fil["filename"])!="" and os.path.basename(fil["filename"])[0]!='.':
+        # ignore hidden files, files with no name, and decompress gz files
+        if os.path.basename(fil["filename"]) != "" and os.path.basename(fil["filename"])[0] != ".":
             if ".gz" in fil["filename"]:
                 files[fil["filename"]] = gzip_decompress(fil["content"])
             else:
-                files[fil["filename"]]=fil["content"]
+                files[fil["filename"]] = fil["content"]
     return files if len(files) != 1 else files[list(files.keys())[0]]
-

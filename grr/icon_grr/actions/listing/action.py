@@ -1,34 +1,35 @@
 import komand
 from .schema import ListingInput, ListingOutput
+
 # Custom imports below
 import json
 from google.protobuf.json_format import MessageToJson
 
 
 class Listing(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='listing',
-            description='Looks for exposed secrets in the git commit history and branches',
+            name="listing",
+            description="Looks for exposed secrets in the git commit history and branches",
             input=ListingInput(),
-            output=ListingOutput())
+            output=ListingOutput(),
+        )
         self.grrapi = None
         self.query = None
         self.result = {}
 
     def run(self, params={}):
         self.grrapi = self.connection.grrapi
-        if params.get('hunts'):
+        if params.get("hunts"):
             self.hunts()
-        if params.get('hunt_approvals'):
+        if params.get("hunt_approvals"):
             self.hunt_approvals()
-        if params.get('grr_binaries'):
+        if params.get("grr_binaries"):
             self.grr_binaries()
-        if params.get('clients'):
-            query = params.get('query').encode("utf-8", "ignore")
+        if params.get("clients"):
+            query = params.get("query").encode("utf-8", "ignore")
             self.clients(query)
-        return {'result': self.result}
+        return {"result": self.result}
 
     def hunts(self):
         try:
@@ -66,15 +67,15 @@ class Listing(komand.Action):
             result = {}
             count = 0
             if not search_results:
-                return {'results': 'No clients found'}
+                return {"results": "No clients found"}
             for client in search_results:
                 data = client.data
                 data = MessageToJson(data)
                 result["client%s" % count] = json.loads(data)
                 count += 1
             if result == {}:
-                self.logger.error('No clients found with provided query.')
-                return {'results': 'No clients have been found'}
+                self.logger.error("No clients found with provided query.")
+                return {"results": "No clients have been found"}
             self.result = komand.helper.clean(result)
         except Exception as e:
             self.logger.error(e)
@@ -94,12 +95,12 @@ class Listing(komand.Action):
             self.result = komand.helper.clean(result)
         except Exception as e:
             self.logger.error(e)
-            self.logger.error('No GRR Binaries')
-            return {'results': 'No GRR Binaries have been found'}
+            self.logger.error("No GRR Binaries")
+            return {"results": "No GRR Binaries have been found"}
 
     def test(self):
         self.grrapi = self.connection.grrapi
         if self.grrapi:
-            return {'results': 'Ready to list'}
+            return {"results": "Ready to list"}
         if not self.grrapi:
-            return {'results': 'Not ready. Please check your connection with the GRR Client'}
+            return {"results": "Not ready. Please check your connection with the GRR Client"}

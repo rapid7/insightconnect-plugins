@@ -25,25 +25,22 @@ class VmInSubscription(komand.Action):
             # Add request property
             subscription_id = params.get(Input.SUBSCRIPTIONID)
 
-            url = f"{server}/subscriptions/{subscription_id}/providers/Microsoft.Compute/" \
-                  f"virtualmachines?api-version={api_version}"
+            url = (
+                f"{server}/subscriptions/{subscription_id}/providers/Microsoft.Compute/"
+                f"virtualmachines?api-version={api_version}"
+            )
 
             # New Request, Call API and response data
             resp = requests.get(
                 url,
-                headers={
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer %s" % token,
-                },
+                headers={"Content-Type": "application/json", "Authorization": "Bearer %s" % token,},
             )
 
             # Handle decoding json
             try:
                 result_dic = resp.json()
             except json.decoder.JSONDecodeError as e:
-                raise PluginException(
-                    preset=PluginException.Preset.INVALID_JSON, data=resp.read()
-                )
+                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=resp.read())
 
             return result_dic
         # Handle exception

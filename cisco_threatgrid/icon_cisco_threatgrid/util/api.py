@@ -72,7 +72,7 @@ class ThreatGrid:
                 raise PluginException(
                     cause=f"An error was received when running {action_name}.",
                     assistance=f"Request status code of {resp.status_code} was returned.\n{custom_error.get(resp.status_code, 000)}",
-                    data=resp.text
+                    data=resp.text,
                 )
 
             try:
@@ -86,8 +86,7 @@ class ThreatGrid:
 
         except Exception as e:
             self.logger.error(
-                f"An error had occurred : {e}"
-                "If the issue persists please contact support"
+                f"An error had occurred : {e}" "If the issue persists please contact support"
             )
             raise
 
@@ -95,8 +94,10 @@ class ThreatGrid:
             results = resp.json()
             return results
         except JSONDecodeError:
-            raise PluginException(cause=f"Error: Received an unexpected response from {action_name}.",
-                                  assistance=f"(non-JSON or no response was received). Response was: {resp.text}")
+            raise PluginException(
+                cause=f"Error: Received an unexpected response from {action_name}.",
+                assistance=f"(non-JSON or no response was received). Response was: {resp.text}",
+            )
 
     def submit_sample(self, data, files):
         """

@@ -23,12 +23,12 @@ class TestRemoveUserFromGroup(TestCase):
 
         action_params = {
             "user_id": "user@example.com",
-            "group_name": "Azure AD Test Security Group"
+            "group_name": "Azure AD Test Security Group",
         }
 
         test_connection.connect(connection_params)
         test_remove.connection = test_connection
 
         result = test_remove.run(action_params)
-        expected = {'success': True}
+        expected = {"success": True}
         self.assertEqual(result, expected)

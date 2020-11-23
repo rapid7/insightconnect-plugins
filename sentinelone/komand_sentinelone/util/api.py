@@ -17,15 +17,17 @@ class SentineloneAPI:
                 output = requests.get(endpoint, headers=self.token_header)
 
                 if output.status_code is 200 and output.json()["pagination"]["totalItems"] >= 1:
-                    results.append(output.json()['data'][0])
+                    results.append(output.json()["data"][0])
                     if results_length:
                         if len(results) >= results_length:
                             break
 
         else:
-            output = requests.get(f"{self.url}web/api/v2.0/agents?isActive={agent_active}", headers=self.token_header)
-            results.extend(output.json()['data'])
-        return loads(dumps(results).replace('null', '"None"'))
+            output = requests.get(
+                f"{self.url}web/api/v2.0/agents?isActive={agent_active}", headers=self.token_header
+            )
+            results.extend(output.json()["data"])
+        return loads(dumps(results).replace("null", '"None"'))
 
     @staticmethod
     def __get_searches(agent_details: str) -> list:

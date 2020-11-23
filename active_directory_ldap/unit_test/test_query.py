@@ -4,6 +4,7 @@ from komand_active_directory_ldap.connection import Connection
 import logging
 import json
 
+
 class TestQuery(TestCase):
     def test_query(self):
         # # This is a live test. Run icon-lab set and uncomment to run

@@ -16,34 +16,22 @@ class ZscalerAPI:
         self.cookie = None
 
     def get_status(self):
-        return self.authenticated_call(
-            "GET",
-            "status"
-        )
+        return self.authenticated_call("GET", "status")
 
     def blacklist_url(self, blacklist_step: str, urls: list) -> bool:
         response = self.authenticated_call(
             "POST",
             f"security/advanced/blacklistUrls?action={blacklist_step}",
-            data=json.dumps({
-                "blacklistUrls": urls
-            })
+            data=json.dumps({"blacklistUrls": urls}),
         )
 
         return 200 <= response.status_code < 300
 
     def get_hash_report(self, hash: str):
-        return self.authenticated_call(
-            "GET",
-            f"sandbox/report/{hash}?details=full",
-        ).json()
+        return self.authenticated_call("GET", f"sandbox/report/{hash}?details=full",).json()
 
     def url_lookup(self, lookup_url: list):
-        return self.authenticated_call(
-            "POST",
-            "urlLookup",
-            data=json.dumps(lookup_url)
-        ).json()
+        return self.authenticated_call("POST", "urlLookup", data=json.dumps(lookup_url)).json()
 
     def get_authenticate_cookie(self):
         timestamp = str(int(time.time() * 1000))
@@ -54,56 +42,49 @@ class ZscalerAPI:
                 "apiKey": self.obfuscate_api_key(timestamp),
                 "username": self.username,
                 "password": self.password,
-                "timestamp": timestamp
-            }
+                "timestamp": timestamp,
+            },
         )
 
         return response.headers.get("Set-Cookie")
 
-    def authenticated_call(
-            self,
-            method: str,
-            path: str,
-            data: str = None
-    ) -> Response:
+    def authenticated_call(self, method: str, path: str, data: str = None) -> Response:
         return self._call_api(
             method,
             path,
             data,
             headers={
-                'content-type': "application/json",
-                'cache-control': "no-cache",
-                'cookie': self.get_authenticate_cookie()
-            }
+                "content-type": "application/json",
+                "cache-control": "no-cache",
+                "cookie": self.get_authenticate_cookie(),
+            },
         )
 
     def _call_api(
-            self,
-            method: str,
-            path: str,
-            data: str = None,
-            json_data: dict = None,
-            headers: dict = None
+        self, method: str, path: str, data: str = None, json_data: dict = None, headers: dict = None
     ) -> Response:
         try:
             response = requests.request(
-                method,
-                f"{self.url}/{path}",
-                data=data,
-                json=json_data,
-                headers=headers
+                method, f"{self.url}/{path}", data=data, json=json_data, headers=headers
             )
 
             if response.status_code == 401:
-                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
+                raise PluginException(
+                    preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text
+                )
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
             if response.status_code == 404:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
             if 400 <= response.status_code < 500:
-                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.json().get("message", response.text))
+                raise PluginException(
+                    preset=PluginException.Preset.UNKNOWN,
+                    data=response.json().get("message", response.text),
+                )
             if response.status_code >= 500:
-                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+                raise PluginException(
+                    preset=PluginException.Preset.SERVER_ERROR, data=response.text
+                )
 
             if 200 <= response.status_code < 300:
                 return response

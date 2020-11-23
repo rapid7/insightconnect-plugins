@@ -9,9 +9,9 @@ class IpCheck:
                 return "ip_address"
         except ValueError:
             pass
-        if re.search('[a-zA-Z]', address):
+        if re.search("[a-zA-Z]", address):
             return "fqdn"
-        if re.search('/', address):
+        if re.search("/", address):
             return "ip_range"
 
         return "unknown"  # This could be wildcard, in which case we can't handle it elegantly

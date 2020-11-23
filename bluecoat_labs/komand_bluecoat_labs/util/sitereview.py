@@ -24,9 +24,11 @@ class SiteReview(object):
         else:
             days = response["CategorizationResult"]["ratingDtsCutoff"]
             more_or_less = "<"
-            if response["CategorizationResult"]["ratingDts"] == 'OLDER':
+            if response["CategorizationResult"]["ratingDts"] == "OLDER":
                 more_or_less = ">"
-            self.category = response["CategorizationResult"]["categorization"]['categorization']["name"]
+            self.category = response["CategorizationResult"]["categorization"]["categorization"][
+                "name"
+            ]
             self.date = f"{more_or_less} {days}"
             self.url = response["CategorizationResult"]["url"]
 
@@ -35,7 +37,9 @@ def main(url):
     review = SiteReview()
     response = review.site_review(url)
     review.check_response(response)
-    site_review_json = [{"url": review.url, "date_since_last_checked": review.date, "category": review.category}]
+    site_review_json = [
+        {"url": review.url, "date_since_last_checked": review.date, "category": review.category}
+    ]
     return site_review_json
 
 

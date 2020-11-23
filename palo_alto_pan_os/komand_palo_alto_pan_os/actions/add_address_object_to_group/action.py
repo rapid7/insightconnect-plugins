@@ -1,16 +1,24 @@
 import komand
-from .schema import AddAddressObjectToGroupInput, AddAddressObjectToGroupOutput, Input, Output, Component
+from .schema import (
+    AddAddressObjectToGroupInput,
+    AddAddressObjectToGroupOutput,
+    Input,
+    Output,
+    Component,
+)
+
 # Custom imports below
 from komand.exceptions import PluginException
 
-class AddAddressObjectToGroup(komand.Action):
 
+class AddAddressObjectToGroup(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='add_address_object_to_group',
-                description=Component.DESCRIPTION,
-                input=AddAddressObjectToGroupInput(),
-                output=AddAddressObjectToGroupOutput())
+            name="add_address_object_to_group",
+            description=Component.DESCRIPTION,
+            input=AddAddressObjectToGroupInput(),
+            output=AddAddressObjectToGroupOutput(),
+        )
 
     def run(self, params={}):
         address_object = params.get(Input.ADDRESS_OBJECT)
@@ -22,12 +30,19 @@ class AddAddressObjectToGroup(komand.Action):
         xpath = f"/config/devices/entry[@name='{device_name}']/vsys/entry[@name='{virtual_system}']/address-group/entry[@name='{group_name}']"
         response = self.connection.request.get_(xpath)
 
-        address_objects = response.get("response", {}).get("result", {}).get("entry", {}).get("static", {}).get(
-            "member")
+        address_objects = (
+            response.get("response", {})
+            .get("result", {})
+            .get("entry", {})
+            .get("static", {})
+            .get("member")
+        )
         if not address_objects:
-            raise PluginException(cause="Palo Alto firewall returned an unexpected response.",
-                                  assistance=f"Could not find group {group_name}, or group was empty. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {virtual_system}",
-                                  data=response)
+            raise PluginException(
+                cause="Palo Alto firewall returned an unexpected response.",
+                assistance=f"Could not find group {group_name}, or group was empty. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {virtual_system}",
+                data=response,
+            )
 
         # We got the group, now pull out all the address object names
         names = []
@@ -37,7 +52,6 @@ class AddAddressObjectToGroup(komand.Action):
             else:
                 names.append(name.get("#text"))
 
-
         # Append the address_object
         if not address_object in names:
             names.append(address_object)
@@ -46,7 +60,9 @@ class AddAddressObjectToGroup(komand.Action):
             # Send it back ot the API
             self.connection.request.edit_(xpath, xml_str)
         else:
-            self.logger.info(f"Address Object \"{address_object}\" was already in group \"{group_name}\". Skipping append.")
+            self.logger.info(
+                f'Address Object "{address_object}" was already in group "{group_name}". Skipping append.'
+            )
 
         return {Output.SUCCESS: True, Output.ADDRESS_OBJECTS: names}
 
@@ -55,7 +71,6 @@ class AddAddressObjectToGroup(komand.Action):
         for name in names:
             members += f"<member>{name}</member>"
 
-        xml_template = f"<entry name=\"{group_name}\"><static>{members}</static></entry>"
+        xml_template = f'<entry name="{group_name}"><static>{members}</static></entry>'
 
         return xml_template
-

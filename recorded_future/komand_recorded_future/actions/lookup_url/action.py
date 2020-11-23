@@ -27,15 +27,13 @@ class LookupUrl(komand.Action):
                 "relatedEntities",
                 "risk",
                 "sightings",
-                "timestamps"
+                "timestamps",
             ]
 
             if not len(comment):
                 comment = None
 
-            url_report = self.connection.client.lookup_url(
-                url=url, fields=fields, comment=comment
-            )
+            url_report = self.connection.client.lookup_url(url=url, fields=fields, comment=comment)
 
             return komand.helper.clean(url_report["data"])
 

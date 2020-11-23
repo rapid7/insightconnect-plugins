@@ -1,5 +1,6 @@
 import komand
 from .schema import ListAllIncidentsInput, ListAllIncidentsOutput
+
 # Custom imports below
 import requests
 
@@ -10,10 +11,11 @@ class ListAllIncidents(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='list_all_incidents',
-                description='List all incidents triggered by the CloudLock policy engine',
-                input=ListAllIncidentsInput(),
-                output=ListAllIncidentsOutput())
+            name="list_all_incidents",
+            description="List all incidents triggered by the CloudLock policy engine",
+            input=ListAllIncidentsInput(),
+            output=ListAllIncidentsOutput(),
+        )
 
     def run(self, params={}):
         severity = params.get("severity")
@@ -42,7 +44,6 @@ class ListAllIncidents(komand.Action):
             raise error
 
         return {"incidents": incidents}
-
 
     def test(self):
         url = "https://api.cloudlock.com/api/v2/activities"

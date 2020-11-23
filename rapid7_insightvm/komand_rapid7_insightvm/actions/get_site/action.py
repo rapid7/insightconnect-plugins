@@ -1,18 +1,19 @@
 import komand
 from .schema import GetSiteInput, GetSiteOutput
+
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
 class GetSite(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_site',
-                description='Get a site by ID',
-                input=GetSiteInput(),
-                output=GetSiteOutput())
+            name="get_site",
+            description="Get a site by ID",
+            input=GetSiteInput(),
+            output=GetSiteOutput(),
+        )
 
     def run(self, params={}):
         resource_helper = ResourceRequests(self.connection.session, self.logger)

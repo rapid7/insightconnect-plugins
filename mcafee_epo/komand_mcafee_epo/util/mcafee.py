@@ -66,8 +66,7 @@ class Client:
         is_json = params.setdefault(":output", "json") == "json"
         # Add the security token, unless this is the request to get it.
         params.setdefault(
-            "orion.user.security.token",
-            self._get_token(_skip=name == "core.getSecurityToken"),
+            "orion.user.security.token", self._get_token(_skip=name == "core.getSecurityToken"),
         )
         url = urljoin(self.url, "remote/{}".format(name))
 

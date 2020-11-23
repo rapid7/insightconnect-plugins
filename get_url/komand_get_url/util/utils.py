@@ -5,7 +5,6 @@ from komand.exceptions import PluginException
 
 
 class Utils(object):
-
     def __init__(self, action):
         self.logger = action.logger
 
@@ -14,8 +13,10 @@ class Utils(object):
         if url.startswith("http://") or url.startswith("https://") or url.startswith("ftp://"):
             return True
         self.logger.info(f"GetURL: Unsupported URL prefix: {url}")
-        raise PluginException(preset=PluginException.Preset.UNKNOWN,
-                              assistance=f"GetURL: Unsupported URL prefix: {url}")
+        raise PluginException(
+            preset=PluginException.Preset.UNKNOWN,
+            assistance=f"GetURL: Unsupported URL prefix: {url}",
+        )
 
     def get_headers(self, url_object):
         """Return cache related headers from urllib2 headers dictonary"""
@@ -24,7 +25,9 @@ class Utils(object):
             lm = url_object.headers.get("last-modified")
             return {"etag": etag, "last-modified": lm}
 
-        self.logger.error("GetHeaders: Error occurred while obtaining etag and last-modified headers")
+        self.logger.error(
+            "GetHeaders: Error occurred while obtaining etag and last-modified headers"
+        )
 
     def hash_url(self, url):
         """Creates a dictionary containing hashes from a url of type string"""
@@ -46,7 +49,7 @@ class Utils(object):
             "url": meta.get("url"),
             "last-modified": headers.get("last-modified"),
             "etag": headers.get("etag"),
-            "file": meta.get("file")
+            "file": meta.get("file"),
         }
         with komand.helper.open_cachefile(meta["metafile"]) as f:
             json.dump(data, f)
@@ -60,6 +63,8 @@ class Utils(object):
             return data
         except Exception as e:
             self.logger.error(f"CheckUrlMetaFile: Error while retreving meta file, error {e}")
-            raise PluginException(preset=PluginException.Preset.UNKNOWN,
-                                  assistance="Error while retreving meta file",
-                                  data=e)
+            raise PluginException(
+                preset=PluginException.Preset.UNKNOWN,
+                assistance="Error while retreving meta file",
+                data=e,
+            )

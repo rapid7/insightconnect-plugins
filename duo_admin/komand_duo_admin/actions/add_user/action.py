@@ -1,17 +1,18 @@
 import komand
 from komand.exceptions import PluginException
 from .schema import AddUserInput, AddUserOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class AddUser(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_user",
             description=Component.DESCRIPTION,
             input=AddUserInput(),
-            output=AddUserOutput())
+            output=AddUserOutput(),
+        )
 
     def run(self, params={}):
         max_aliases = 4
@@ -27,8 +28,7 @@ class AddUser(komand.Action):
 
         if len(alias) > max_aliases:
             raise PluginException(
-                cause="Invalid input",
-                assistance="Alias parameter must contain 4 or less aliases"
+                cause="Invalid input", assistance="Alias parameter must contain 4 or less aliases"
             )
 
         aliases = {}
@@ -45,12 +45,12 @@ class AddUser(komand.Action):
                 email=email,
                 firstname=first_name,
                 lastname=last_name,
-                **aliases)
+                **aliases,
+            )
             resp = komand.helper.clean(resp)
             return {Output.RESPONSE: resp}
         except RuntimeError as e:
             self.logger.error(f"An error has occurred: {str(e)}")
             raise PluginException(
-                preset=PluginException.Preset.INVALID_JSON,
-                data=f"An error has occurred: {str(e)}"
+                preset=PluginException.Preset.INVALID_JSON, data=f"An error has occurred: {str(e)}"
             )

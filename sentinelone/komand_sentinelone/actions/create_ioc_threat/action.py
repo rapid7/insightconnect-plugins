@@ -1,16 +1,17 @@
 import komand
 from .schema import CreateIocThreatInput, CreateIocThreatOutput, Input, Output
+
 # Custom imports below
 
 
 class CreateIocThreat(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='create_ioc_threat',
-                description='Create an IOC threat',
-                input=CreateIocThreatInput(),
-                output=CreateIocThreatOutput())
+            name="create_ioc_threat",
+            description="Create an IOC threat",
+            input=CreateIocThreatInput(),
+            output=CreateIocThreatOutput(),
+        )
 
     def run(self, params={}):
         hash_ = params.get(Input.HASH)

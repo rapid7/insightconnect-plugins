@@ -3,12 +3,20 @@ import json
 from time import sleep
 
 from unittest import TestCase, mock
-from icon_microsoft_teams.util.azure_ad_utils import get_user_info, add_user_to_group, remove_user_from_group, create_group, get_group_id_from_name, delete_group, enable_teams_for_group
+from icon_microsoft_teams.util.azure_ad_utils import (
+    get_user_info,
+    add_user_to_group,
+    remove_user_from_group,
+    create_group,
+    get_group_id_from_name,
+    delete_group,
+    enable_teams_for_group,
+)
 from icon_microsoft_teams.connection.connection import Connection
 from komand.exceptions import PluginException
 
 
-class MockConnection():
+class MockConnection:
     def __init__(self):
         self.tenant_id = "fake_tenant_id"
 
@@ -26,7 +34,7 @@ def mocked_requests_get(*args, **kwargs):
         def json(self):
             return self.json_data
 
-    if args[0] == f'https://graph.microsoft.com/v1.0/fake_tenant_id/groups/fake_group_id/team':
+    if args[0] == f"https://graph.microsoft.com/v1.0/fake_tenant_id/groups/fake_group_id/team":
         return MockResponse({}, 400)
 
     print(f"Failed api call: {args[0]}")
@@ -69,14 +77,24 @@ class TestAzureADUtils(TestCase):
         # Komand-Test_Everyone
         # jmcadams@komanddev.onmicrosoft.com
         try:
-            remove_user_from_group(log, connection, "7af08a76-01fe-4a1d-bfa1-84d2b5509cdd", "08290005-23ba-46b4-a377-b381d651a2fb")
+            remove_user_from_group(
+                log,
+                connection,
+                "7af08a76-01fe-4a1d-bfa1-84d2b5509cdd",
+                "08290005-23ba-46b4-a377-b381d651a2fb",
+            )
             log.info("Successfully removed user.")
         except Exception as e:
             log.info("Remove user failed!")
             print(e)
             pass
         sleep(10)
-        result = add_user_to_group(log, connection, "7af08a76-01fe-4a1d-bfa1-84d2b5509cdd", "08290005-23ba-46b4-a377-b381d651a2fb")
+        result = add_user_to_group(
+            log,
+            connection,
+            "7af08a76-01fe-4a1d-bfa1-84d2b5509cdd",
+            "08290005-23ba-46b4-a377-b381d651a2fb",
+        )
 
         self.assertTrue(result)
 
@@ -94,15 +112,24 @@ class TestAzureADUtils(TestCase):
         # Komand-Test_Everyone
         # jmcadams@komanddev.onmicrosoft.com
         try:
-            add_user_to_group(log, connection, "7af08a76-01fe-4a1d-bfa1-84d2b5509cdd",
-                              "08290005-23ba-46b4-a377-b381d651a2fb")
+            add_user_to_group(
+                log,
+                connection,
+                "7af08a76-01fe-4a1d-bfa1-84d2b5509cdd",
+                "08290005-23ba-46b4-a377-b381d651a2fb",
+            )
             log.info("Successfully addeded user.")
         except Exception as e:
             log.info("Add user failed!")
             print(e)
             pass
         sleep(10)
-        result = remove_user_from_group(log, connection, "7af08a76-01fe-4a1d-bfa1-84d2b5509cdd", "08290005-23ba-46b4-a377-b381d651a2fb")
+        result = remove_user_from_group(
+            log,
+            connection,
+            "7af08a76-01fe-4a1d-bfa1-84d2b5509cdd",
+            "08290005-23ba-46b4-a377-b381d651a2fb",
+        )
 
         self.assertTrue(result)
 
@@ -120,18 +147,20 @@ class TestAzureADUtils(TestCase):
         owners = ["jmcadams@komanddev.onmicrosoft.com"]
         members = ["jschipp@komanddev.onmicrosoft.com", "jmcadams@komanddev.onmicrosoft.com"]
 
-        result = create_group(log,
-                              connection,
-                              "test_group_delete_me",
-                              "A test group to delete",
-                              "nickname_goes_here",
-                              True,
-                              owners,
-                              members)
+        result = create_group(
+            log,
+            connection,
+            "test_group_delete_me",
+            "A test group to delete",
+            "nickname_goes_here",
+            True,
+            owners,
+            members,
+        )
 
         self.assertIsNotNone(result)
-        self.assertEqual(result.get('displayName'), 'test_group_delete_me')
-        self.assertEqual(result.get('description'), 'A test group to delete')
+        self.assertEqual(result.get("displayName"), "test_group_delete_me")
+        self.assertEqual(result.get("description"), "A test group to delete")
 
     def test_get_group_id(self):
         log = logging.getLogger()
@@ -180,20 +209,22 @@ class TestAzureADUtils(TestCase):
         except Exception:
             pass
 
-        result = create_group(log,
-                              connection,
-                              "test_group_delete_me",
-                              "A test group to delete",
-                              "nickname_goes_here",
-                              True,
-                              None,
-                              None)
+        result = create_group(
+            log,
+            connection,
+            "test_group_delete_me",
+            "A test group to delete",
+            "nickname_goes_here",
+            True,
+            None,
+            None,
+        )
 
         self.assertIsNotNone(result)
-        self.assertEqual(result.get('displayName'), 'test_group_delete_me')
-        self.assertEqual(result.get('description'), 'A test group to delete')
+        self.assertEqual(result.get("displayName"), "test_group_delete_me")
+        self.assertEqual(result.get("description"), "A test group to delete")
 
-        group_id = result.get('id')
+        group_id = result.get("id")
         success = enable_teams_for_group(log, connection, group_id)
 
         self.assertTrue(success)
@@ -210,7 +241,11 @@ class TestAzureADUtils(TestCase):
 
         # verify 5 attempts were made to enable the team
         self.assertEqual(mockGet.call_count, 5)
-        self.assertEqual(mockGet.call_args_list[0][0][0],
-                         'https://graph.microsoft.com/v1.0/fake_tenant_id/groups/fake_group_id/team')
-        self.assertEqual(mockGet.call_args_list[4][0][0],
-                         'https://graph.microsoft.com/v1.0/fake_tenant_id/groups/fake_group_id/team')
+        self.assertEqual(
+            mockGet.call_args_list[0][0][0],
+            "https://graph.microsoft.com/v1.0/fake_tenant_id/groups/fake_group_id/team",
+        )
+        self.assertEqual(
+            mockGet.call_args_list[4][0][0],
+            "https://graph.microsoft.com/v1.0/fake_tenant_id/groups/fake_group_id/team",
+        )

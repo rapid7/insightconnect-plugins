@@ -7,10 +7,11 @@ from .schema import SubmitLogDataInput, SubmitLogDataOutput
 class SubmitLogData(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='submit_log_data',
-                description='Submits JSON to a specified log within an InsightOps logset',
-                input=SubmitLogDataInput(),
-                output=SubmitLogDataOutput())
+            name="submit_log_data",
+            description="Submits JSON to a specified log within an InsightOps logset",
+            input=SubmitLogDataInput(),
+            output=SubmitLogDataOutput(),
+        )
 
     def run(self, params={}):
         url = self.connection.postdataurl
@@ -28,7 +29,7 @@ class SubmitLogData(komand.Action):
     def test(self):
         service_url = "/management/logs"
         url = self.connection.insighturl + service_url
-        headers = {'x-api-key': self.connection.api_key}
+        headers = {"x-api-key": self.connection.api_key}
         try:
             resp = requests.get(url, headers=headers)
             cleaned_resp = komand.helper.clean(resp.json())

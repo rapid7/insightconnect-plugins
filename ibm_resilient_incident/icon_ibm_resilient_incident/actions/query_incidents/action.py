@@ -6,10 +6,11 @@ from .schema import QueryIncidentsInput, QueryIncidentsOutput
 class QueryIncidents(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='query_incidents',
-                description='Query for incidents.',
-                input=QueryIncidentsInput(),
-                output=QueryIncidentsOutput())
+            name="query_incidents",
+            description="Query for incidents.",
+            input=QueryIncidentsInput(),
+            output=QueryIncidentsOutput(),
+        )
 
     def run(self, params={}):
         org_id = params.get("organization_id")

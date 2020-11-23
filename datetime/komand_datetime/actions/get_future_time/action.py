@@ -1,18 +1,19 @@
 import insightconnect_plugin_runtime
 from .schema import GetFutureTimeInput, GetFutureTimeOutput, Input, Output, Component
+
 # Custom imports below
 from datetime import datetime, timedelta
 import maya
 
 
 class GetFutureTime(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_future_time',
-                description=Component.DESCRIPTION,
-                input=GetFutureTimeInput(),
-                output=GetFutureTimeOutput())
+            name="get_future_time",
+            description=Component.DESCRIPTION,
+            input=GetFutureTimeInput(),
+            output=GetFutureTimeOutput(),
+        )
 
     def run(self, params={}):
         if not params.get(Input.BASE_TIMESTAMP):
@@ -35,9 +36,6 @@ class GetFutureTime(insightconnect_plugin_runtime.Action):
             new_timestamp = new_timestamp + timedelta(seconds=time_amount)
         return {
             Output.TIMESTAMP: maya.MayaDT.from_datetime(
-                new_timestamp.datetime(
-                    to_timezone=params.get(Input.TIME_ZONE),
-                    naive=True
-                )
+                new_timestamp.datetime(to_timezone=params.get(Input.TIME_ZONE), naive=True)
             ).rfc3339()
         }

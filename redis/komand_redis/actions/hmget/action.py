@@ -1,16 +1,17 @@
 import komand
 from .schema import HmgetInput, HmgetOutput
+
 # Custom imports below
 
 
 class Hmget(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='hmget',
-                description='Returns the values associated with the specified fields in the hash stored at key',
-                input=HmgetInput(),
-                output=HmgetOutput())
+            name="hmget",
+            description="Returns the values associated with the specified fields in the hash stored at key",
+            input=HmgetInput(),
+            output=HmgetOutput(),
+        )
 
     def run(self, params={}):
         key = params["key"]
@@ -29,7 +30,7 @@ class Hmget(komand.Action):
         if result:
             v = {}
             for key, val in result.items():
-                v[key.decode('utf-8')] = val.decode('utf-8')
+                v[key.decode("utf-8")] = val.decode("utf-8")
             result = v
 
         return {"values": result}

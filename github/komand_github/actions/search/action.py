@@ -6,10 +6,11 @@ from .schema import SearchInput, SearchOutput
 class Search(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='search',
-                description='Search GitHub for data',
-                input=SearchInput(),
-                output=SearchOutput())
+            name="search",
+            description="Search GitHub for data",
+            input=SearchInput(),
+            output=SearchOutput(),
+        )
 
     def run(self, params={}):
         try:
@@ -18,7 +19,7 @@ class Search(komand.Action):
             results = requests.get(
                 "https://api.github.com/search/" + search_type,
                 params=search_params,
-                auth=self.connection.basic_auth
+                auth=self.connection.basic_auth,
             )
             return {"results": results.json()}
         except Exception as e:

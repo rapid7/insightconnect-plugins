@@ -27,15 +27,14 @@ class DeleteVm(komand.Action):
             subscription_id = params.get(Input.SUBSCRIPTIONID)
             resource_group = params.get(Input.RESOURCEGROUP)
 
-            url = f"{server}/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft" \
-                  f".Compute/virtualMachines/{vm}?api-version={api_version}"
+            url = (
+                f"{server}/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft"
+                f".Compute/virtualMachines/{vm}?api-version={api_version}"
+            )
             # New Request, Call API and response data
             resp = requests.delete(
                 url,
-                headers={
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer %s" % token,
-                },
+                headers={"Content-Type": "application/json", "Authorization": "Bearer %s" % token,},
             )
 
             status_code = resp.status_code

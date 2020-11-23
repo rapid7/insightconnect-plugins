@@ -1,5 +1,6 @@
 import komand
 from .schema import UnsubscribeInput, UnsubscribeOutput
+
 # Custom imports below
 from komand_phabricator.util.editor import ManiphesEdit
 from komand_phabricator.util.editor import TestAction
@@ -11,10 +12,11 @@ class Unsubscribe(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='unsubscribe',
-                description='Remove yourself as a subscriber',
-                input=UnsubscribeInput(),
-                output=UnsubscribeOutput())
+            name="unsubscribe",
+            description="Remove yourself as a subscriber",
+            input=UnsubscribeInput(),
+            output=UnsubscribeOutput(),
+        )
 
     def run(self, params={}):
 
@@ -22,7 +24,7 @@ class Unsubscribe(komand.Action):
             self.logger.error("Unsubscribe: Run: Empty Phabricator object")
             raise Exception("Unsubscribe: Run: Empty Phabricator object")
 
-        id = params.get('id',None)
+        id = params.get("id", None)
 
         searchedUser = self.connection.phab.user.whoami()
 
@@ -41,10 +43,18 @@ class Unsubscribe(komand.Action):
             raise Exception("Unsubscribe: Run: Problem with request".format(e.errno, e.strerror))
 
         if id is None:
-            self.logger.error("Unsubscribe: Run: Problem with adding projects and users {0} to subscribers".format(self.foundedSubscribes))
-            raise Exception("Unsubscribe: Run: Problem with adding projects and users {0} to subscribers".format(self.foundedSubscribes))
+            self.logger.error(
+                "Unsubscribe: Run: Problem with adding projects and users {0} to subscribers".format(
+                    self.foundedSubscribes
+                )
+            )
+            raise Exception(
+                "Unsubscribe: Run: Problem with adding projects and users {0} to subscribers".format(
+                    self.foundedSubscribes
+                )
+            )
 
-        return {"message":"Removed"}
+        return {"message": "Removed"}
 
     def getSubscribesFromPHID(self, subscribes, name):
         elements = []

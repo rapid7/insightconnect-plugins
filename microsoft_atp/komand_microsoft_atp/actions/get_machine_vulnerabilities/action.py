@@ -1,16 +1,23 @@
 import insightconnect_plugin_runtime
-from .schema import Input, Output, Component, GetMachineVulnerabilitiesInput, GetMachineVulnerabilitiesOutput
+from .schema import (
+    Input,
+    Output,
+    Component,
+    GetMachineVulnerabilitiesInput,
+    GetMachineVulnerabilitiesOutput,
+)
+
 # Custom imports below
 
 
 class GetMachineVulnerabilities(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='get_machine_vulnerabilities',
+            name="get_machine_vulnerabilities",
             description=Component.DESCRIPTION,
             input=GetMachineVulnerabilitiesInput(),
-            output=GetMachineVulnerabilitiesOutput())
+            output=GetMachineVulnerabilitiesOutput(),
+        )
 
     def run(self, params={}):
         self.logger.info("Running...")

@@ -1,17 +1,18 @@
 import komand
 from .schema import CertificateInput, CertificateOutput
+
 # Custom imports below
 import requests
 
 
 class Certificate(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='certificate',
-                description='Retrieve root certificates',
-                input=CertificateInput(),
-                output=CertificateOutput())
+            name="certificate",
+            description="Retrieve root certificates",
+            input=CertificateInput(),
+            output=CertificateOutput(),
+        )
 
     def run(self, params={}):
         try:

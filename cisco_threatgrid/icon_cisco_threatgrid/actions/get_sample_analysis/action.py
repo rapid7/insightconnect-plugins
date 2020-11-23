@@ -27,13 +27,9 @@ class GetSampleAnalysis(komand.Action):
 
         artifacts = clean_artifact(api.get_artifact_analysis(sample_id=sample_id))
         iocs = clean_data(api.get_ioc_analysis(sample_id=sample_id))
-        network_streams = clean_data(
-            api.get_network_streams_analysis(sample_id=sample_id)
-        )
+        network_streams = clean_data(api.get_network_streams_analysis(sample_id=sample_id))
         processes = clean_data(api.get_processes_analysis(sample_id=sample_id))
-        annotations = clean_annotations(
-            api.get_annotations_analysis(sample_id=sample_id)
-        )
+        annotations = clean_annotations(api.get_annotations_analysis(sample_id=sample_id))
         metadata = clean_data(api.get_metadata_analysis(sample_id=sample_id))
 
         # self.logger.info(artifacts)
@@ -99,9 +95,7 @@ def clean_artifact(artifact_data):
                     # Clean sections
                     if v.get("forensics").get("sections", False):
                         if isinstance(v.get("forensics").get("sections"), dict):
-                            v["forensics"]["sections"] = [
-                                v.get("forensics").get("sections")
-                            ]
+                            v["forensics"]["sections"] = [v.get("forensics").get("sections")]
                     # Clean exports
                     exports = []
                     if v.get("forensics").get("exports", False):

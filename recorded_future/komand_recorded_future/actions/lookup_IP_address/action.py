@@ -20,21 +20,23 @@ class LookupIPAddress(komand.Action):
             comment = params.get(Input.COMMENT)
 
             query_params = {
-                "fields": ",".join([
-                    "analystNotes",
-                    "counts",
-                    "enterpriseLists",
-                    "entity",
-                    "intelCard",
-                    "metrics",
-                    "relatedEntities",
-                    "risk",
-                    "sightings",
-                    "threatLists",
-                    "timestamps",
-                    "location",
-                    "riskyCIDRIPs"
-                ])
+                "fields": ",".join(
+                    [
+                        "analystNotes",
+                        "counts",
+                        "enterpriseLists",
+                        "entity",
+                        "intelCard",
+                        "metrics",
+                        "relatedEntities",
+                        "risk",
+                        "sightings",
+                        "threatLists",
+                        "timestamps",
+                        "location",
+                        "riskyCIDRIPs",
+                    ]
+                )
             }
 
             if comment and len(comment):

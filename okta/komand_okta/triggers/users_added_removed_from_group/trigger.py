@@ -1,20 +1,26 @@
 import komand
 import time
-from .schema import UsersAddedRemovedFromGroupInput, UsersAddedRemovedFromGroupOutput, Input, Output, Component
+from .schema import (
+    UsersAddedRemovedFromGroupInput,
+    UsersAddedRemovedFromGroupOutput,
+    Input,
+    Output,
+    Component,
+)
+
 # Custom imports below
 from komand.exceptions import PluginException
 from komand_okta.util import helpers
 
 
 class UsersAddedRemovedFromGroup(komand.Trigger):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='users_added_removed_from_group',
-                description=Component.DESCRIPTION,
-                input=UsersAddedRemovedFromGroupInput(),
-                output=UsersAddedRemovedFromGroupOutput())
-
+            name="users_added_removed_from_group",
+            description=Component.DESCRIPTION,
+            input=UsersAddedRemovedFromGroupInput(),
+            output=UsersAddedRemovedFromGroupOutput(),
+        )
 
     def run(self, params={}):
         """Run the trigger"""
@@ -31,9 +37,11 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             try:
                 data = response.json()
             except ValueError:
-                raise PluginException(cause='Returned data was not in JSON format.',
-                                      assistance="Double-check that group ID's are all valid.",
-                                      data=response.text)
+                raise PluginException(
+                    cause="Returned data was not in JSON format.",
+                    assistance="Double-check that group ID's are all valid.",
+                    data=response.text,
+                )
             helpers.raise_based_on_error_code(response)
             data = komand.helper.clean(data)
             current_list.append({group: data})
@@ -44,9 +52,11 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             try:
                 data = response.json()
             except ValueError:
-                raise PluginException(cause='Returned data was not in JSON format.',
-                                      assistance="Double check that group ID's are all valid.",
-                                      data=response.text)
+                raise PluginException(
+                    cause="Returned data was not in JSON format.",
+                    assistance="Double check that group ID's are all valid.",
+                    data=response.text,
+                )
             helpers.raise_based_on_error_code(response)
             group_names.append(data["profile"]["name"])
 
@@ -60,9 +70,11 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                 try:
                     data = response.json()
                 except ValueError:
-                    raise PluginException(cause='Returned data was not in JSON format.',
-                                          assistance="Double check that group ID's are all valid.",
-                                          data=response.text)
+                    raise PluginException(
+                        cause="Returned data was not in JSON format.",
+                        assistance="Double check that group ID's are all valid.",
+                        data=response.text,
+                    )
                 helpers.raise_based_on_error_code(response)
                 data = komand.helper.clean(data)
                 new_list.append({group: data})
@@ -94,16 +106,33 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                         removed_users.append(old_user)
 
                 if added_users:
-                    added.append({"group_name": group_names[index], "group_id": value, "users": added_users})
+                    added.append(
+                        {"group_name": group_names[index], "group_id": value, "users": added_users}
+                    )
                 if removed_users:
-                    removed.append({"group_name": group_names[index], "group_id": value, "users": removed_users})
+                    removed.append(
+                        {
+                            "group_name": group_names[index],
+                            "group_id": value,
+                            "users": removed_users,
+                        }
+                    )
 
             if added and removed:
-                self.send({Output.USERS_ADDED_FROM_GROUPS: added, Output.USERS_REMOVED_FROM_GROUPS: removed})
+                self.send(
+                    {
+                        Output.USERS_ADDED_FROM_GROUPS: added,
+                        Output.USERS_REMOVED_FROM_GROUPS: removed,
+                    }
+                )
             elif added and not removed:
-                self.send({Output.USERS_ADDED_FROM_GROUPS: added, Output.USERS_REMOVED_FROM_GROUPS: []})
+                self.send(
+                    {Output.USERS_ADDED_FROM_GROUPS: added, Output.USERS_REMOVED_FROM_GROUPS: []}
+                )
             elif removed and not added:
-                self.send({Output.USERS_REMOVED_FROM_GROUPS: removed, Output.USERS_ADDED_FROM_GROUPS: []})
+                self.send(
+                    {Output.USERS_REMOVED_FROM_GROUPS: removed, Output.USERS_ADDED_FROM_GROUPS: []}
+                )
 
             current_list = new_list
 

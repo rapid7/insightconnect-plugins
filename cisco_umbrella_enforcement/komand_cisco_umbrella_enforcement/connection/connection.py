@@ -1,11 +1,11 @@
 import komand
 from .schema import ConnectionSchema
+
 # Custom imports below
 from ..api import *
 
 
 class Connection(komand.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
@@ -18,7 +18,7 @@ class Connection(komand.Connection):
             raise Exception("Connection: connect: Empty key")
 
         key = key.lower()
-        p = re.compile('[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}')
+        p = re.compile("[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}")
         m = p.match(key)
         if not m:
             self.logger.error("Connection: connect: Wrong key")

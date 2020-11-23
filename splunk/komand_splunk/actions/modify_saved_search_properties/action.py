@@ -1,5 +1,12 @@
 import komand
-from .schema import ModifySavedSearchPropertiesInput, ModifySavedSearchPropertiesOutput, Input, Output, Component
+from .schema import (
+    ModifySavedSearchPropertiesInput,
+    ModifySavedSearchPropertiesOutput,
+    Input,
+    Output,
+    Component,
+)
+
 # Custom imports below
 import json
 from json import JSONDecodeError
@@ -7,13 +14,13 @@ from komand.exceptions import PluginException
 
 
 class ModifySavedSearchProperties(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='modify_saved_search_properties',
-                description=Component.DESCRIPTION,
-                input=ModifySavedSearchPropertiesInput(),
-                output=ModifySavedSearchPropertiesOutput())
+            name="modify_saved_search_properties",
+            description=Component.DESCRIPTION,
+            input=ModifySavedSearchPropertiesInput(),
+            output=ModifySavedSearchPropertiesOutput(),
+        )
 
     def run(self, params={}):
         saved_search_name = params.get(Input.SAVED_SEARCH_NAME)

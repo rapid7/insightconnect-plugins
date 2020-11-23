@@ -3,7 +3,6 @@ import ipaddress
 
 
 class PublishException(Exception):
-
     def __init__(self, code: str, message: str, errors: [dict]):
         super().__init__()
 
@@ -14,9 +13,7 @@ class PublishException(Exception):
     @classmethod
     def from_json_response(cls, json_: dict):
         return cls(
-            code=json_.get("code", ""),
-            message=json_.get("message", ""),
-            errors=json_.get("errors")
+            code=json_.get("code", ""), message=json_.get("message", ""), errors=json_.get("errors")
         )
 
     def get_errors(self) -> [str]:

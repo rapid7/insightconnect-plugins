@@ -26,8 +26,6 @@ class GetFindings(komand.Action):
             if results.get("Findings"):
                 for finding in results["Findings"]:
                     findings.append(finding)
-            results = client.get_findings(
-                Filters=filters, NextToken=results.get("NextToken")
-            )
+            results = client.get_findings(Filters=filters, NextToken=results.get("NextToken"))
 
         return {Output.FINDINGS: findings}

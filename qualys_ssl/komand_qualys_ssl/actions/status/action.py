@@ -1,17 +1,18 @@
 import komand
 from .schema import StatusInput, StatusOutput
+
 # Custom imports below
 import requests
 
 
 class Status(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='status',
-                description='Retrieve status codes',
-                input=StatusInput(),
-                output=StatusOutput())
+            name="status",
+            description="Retrieve status codes",
+            input=StatusInput(),
+            output=StatusOutput(),
+        )
 
     def run(self, params={}):
         try:

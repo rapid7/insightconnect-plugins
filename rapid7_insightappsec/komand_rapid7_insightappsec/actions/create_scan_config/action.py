@@ -1,18 +1,19 @@
 import insightconnect_plugin_runtime
 from .schema import CreateScanConfigInput, CreateScanConfigOutput, Input, Output
+
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import ScanConfig
 from komand_rapid7_insightappsec.util.resource_helper import ResourceHelper
 
 
 class CreateScanConfig(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='create_scan_config',
-                description='Create a new scan configuration',
-                input=CreateScanConfigInput(),
-                output=CreateScanConfigOutput())
+            name="create_scan_config",
+            description="Create a new scan configuration",
+            input=CreateScanConfigInput(),
+            output=CreateScanConfigOutput(),
+        )
 
     def run(self, params={}):
         config_name = params.get(Input.CONFIG_NAME)
@@ -22,9 +23,13 @@ class CreateScanConfig(insightconnect_plugin_runtime.Action):
         request = ResourceHelper(self.connection.session, self.logger)
 
         url = ScanConfig.scan_config(self.connection.url)
-        payload = {'name': config_name, 'description': config_description,
-                   'app': {'id': app_id}, 'attack_template': {'id': attack_template_id}}
+        payload = {
+            "name": config_name,
+            "description": config_description,
+            "app": {"id": app_id},
+            "attack_template": {"id": attack_template_id},
+        }
 
-        response = request.resource_request(url, 'post', payload=payload)
+        response = request.resource_request(url, "post", payload=payload)
 
-        return {Output.STATUS: response['status']}
+        return {Output.STATUS: response["status"]}

@@ -12,29 +12,21 @@ class CheckmarxCxSAST:
         self._auth_token = None
         self.session = Session()
         token = self.fetch_token()
-        self.session.headers.update({
-            "Authorization": f"{token.get('token_type')} {token.get('access_token')}",
-            "Accept": "application/json",
-            "Content-Type": "application/json;v=1.0",
-            "cxOrigin": "Rapid7 - InsightConnect"
-        })
+        self.session.headers.update(
+            {
+                "Authorization": f"{token.get('token_type')} {token.get('access_token')}",
+                "Accept": "application/json",
+                "Content-Type": "application/json;v=1.0",
+                "cxOrigin": "Rapid7 - InsightConnect",
+            }
+        )
 
     def _call_api(
-        self,
-        method,
-        endpoint,
-        params=None,
-        data=None,
-        action_name=None,
-        custom_error=None,
+        self, method, endpoint, params=None, data=None, action_name=None, custom_error=None,
     ):
         url = self._base_url + "/cxrestapi" + endpoint
         req = Request(
-            url=url,
-            headers=self.session.headers,
-            method=method,
-            params=params,
-            data=data,
+            url=url, headers=self.session.headers, method=method, params=params, data=data,
         )
 
         try:
@@ -47,7 +39,7 @@ class CheckmarxCxSAST:
                     cause=f"An error was received when running {action_name}.",
                     assistance=f"""Request status code of {resp.status_code}
                         was returned.\n{custom_error.get(resp.status_code, 000)}""",
-                    data=resp.text
+                    data=resp.text,
                 )
 
             try:
@@ -65,8 +57,7 @@ class CheckmarxCxSAST:
 
         except Exception as e:
             self.logger.error(
-                f"An error had occurred : {e}"
-                "If the issue persists please contact support"
+                f"An error had occurred : {e}" "If the issue persists please contact support"
             )
             raise
 
@@ -93,7 +84,7 @@ class CheckmarxCxSAST:
                 "scope": "sast_rest_api",
                 "client_id": "resource_owner_client",
                 "client_secret": "014DF517-39D1-4453-B7B3-9930C563627C",
-            }
+            },
         )
         return self.auth_token
 
@@ -102,10 +93,7 @@ class CheckmarxCxSAST:
 
     def create_project(self, project):
         return self._call_api(
-            "POST",
-            "/projects",
-            action_name="Create Project",
-            data=json.dumps(project),
+            "POST", "/projects", action_name="Create Project", data=json.dumps(project),
         )
 
     def create_branched_project(self, id, project):
@@ -126,15 +114,8 @@ class CheckmarxCxSAST:
 
     def create_scan(self, scan):
         return self._call_api(
-            "POST",
-            "/sast/scans",
-            action_name="Create Scan",
-            data=json.dumps(scan),
+            "POST", "/sast/scans", action_name="Create Scan", data=json.dumps(scan),
         )
 
     def get_scan_details(self, id):
-        return self._call_api(
-            "GET",
-            f"/sast/scans/{id}",
-            action_name="Get Scan Details",
-        )
+        return self._call_api("GET", f"/sast/scans/{id}", action_name="Get Scan Details",)

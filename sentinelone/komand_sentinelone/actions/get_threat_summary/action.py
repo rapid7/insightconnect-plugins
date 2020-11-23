@@ -1,16 +1,17 @@
 import komand
 from .schema import GetThreatSummaryInput, GetThreatSummaryOutput
+
 # Custom imports below
 
 
 class GetThreatSummary(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='get_threat_summary',
-            description='Gets summary of all threats',
+            name="get_threat_summary",
+            description="Gets summary of all threats",
             input=GetThreatSummaryInput(),
-            output=GetThreatSummaryOutput())
+            output=GetThreatSummaryOutput(),
+        )
 
     def run(self, params={}):
         self.logger.info("Starting step")

@@ -1,17 +1,15 @@
 import komand
 from .schema import QueryInput, QueryOutput
+
 # Custom imports below
 from komand_sql.util.util import generate_results
 
 
 class Query(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='query',
-                description='SQL query',
-                input=QueryInput(),
-                output=QueryOutput())
+            name="query", description="SQL query", input=QueryInput(), output=QueryOutput()
+        )
 
     def run(self, params={}):
         query = params.get("query")
@@ -24,11 +22,9 @@ class Query(komand.Action):
 
         return results
 
-
     def test(self, params={}):
         session = self.connection.connection.session
         if session:
             return {"status": "operation success"}
         else:
             raise Exception("Connection was not active. Please check your connection settings.")
-
