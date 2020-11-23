@@ -11,4 +11,4 @@ jobs:
           fetch-depth: 1
 
       - name: Lint
-          run: black . --check
+        run: black . --check
