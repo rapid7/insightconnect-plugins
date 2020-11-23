@@ -40,7 +40,7 @@ class TopRemediations(komand.Action):
         # Structure returned remediations
         remediations = {}
         try:
-            csv_report = csv.DictReader(io.StringIO(report_contents['raw']))
+            csv_report = csv.DictReader(io.StringIO(report_contents["raw"]))
         except Exception as e:
             raise PluginException(
                 cause="Error: Failed to process query response for top remediations.",
@@ -77,7 +77,7 @@ class TopRemediations(komand.Action):
             self.connection, self.logger, asset_report_payload
         )
         try:
-            csv_report = csv.DictReader(io.StringIO(asset_report_contents['raw']))
+            csv_report = csv.DictReader(io.StringIO(asset_report_contents["raw"]))
         except Exception as e:
             raise PluginException(
                 cause="Error: Failed to process query response for remediation assets.",
@@ -121,7 +121,7 @@ class TopRemediations(komand.Action):
             self.connection, self.logger, vulnerability_report_payload
         )
         try:
-            csv_report = csv.DictReader(io.StringIO(vulnerability_report_contents['raw']))
+            csv_report = csv.DictReader(io.StringIO(vulnerability_report_contents["raw"]))
         except Exception as e:
             raise PluginException(
                 cause="Error: Failed to process query response for remediation vulnerabilities.",

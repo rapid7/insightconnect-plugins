@@ -31,8 +31,8 @@ class UpdateSiteExcludedTargets(komand.Action):
 
         self.logger.info(f"Using {endpoint} ...")
         payload = {"rawbody": scope}
-        response = resource_helper.resource_request(endpoint=endpoint,
-                                                    method='put',
-                                                    payload=payload)
+        response = resource_helper.resource_request(
+            endpoint=endpoint, method="put", payload=payload
+        )
 
         return {"id": params.get(Input.ID), "links": response["links"]}
