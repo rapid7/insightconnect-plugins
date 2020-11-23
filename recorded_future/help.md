@@ -1341,7 +1341,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|analystNotes|[]string|False|Notes from an analyst|
+|analystNotes|[]analystNote|False|Notes from an analyst|
 |counts|[]counts|False|Counts|
 |enterpriseLists|[]enterpriseLists|False|Enterprise lists|
 |entity|entity|False|Entity|
@@ -1350,7 +1350,7 @@ Example input:
 |relatedEntities|[]relatedEntities|False|Related entities|
 |risk|risk|False|Risk|
 |sightings|[]sightings|False|Sightings|
-|threatLists|[]string|False|Threat lists|
+|threatLists|[]threatLists|False|Threat lists|
 |timestamps|timestamps|False|Timestamps|
 
 Example output:
@@ -2037,6 +2037,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.0.2 - Fix type of output parameters `analystNotes` and `threatLists` in Lookup Domain action
 * 4.0.1 - Improve connection error messaging
 * 4.0.0 - Remove `fields` input in Lookup Domain, Lookup Hash, Lookup IP Address and Lookup URL actions - all fields will now be returned
 * 3.1.2 - Update to request headers to add plugin information
