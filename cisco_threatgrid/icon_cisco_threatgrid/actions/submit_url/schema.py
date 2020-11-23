@@ -176,7 +176,7 @@ class SubmitUrlOutput(komand.Output):
           "title": "Tags",
           "description": "Tags",
           "items": {
-            "type": "object"
+            "type": "string"
           },
           "order": 12
         },
@@ -287,7 +287,7 @@ class SubmitUrlOutput(komand.Output):
               "title": "Tags",
               "description": "Tags",
               "items": {
-                "type": "object"
+                "type": "string"
               },
               "order": 12
             },

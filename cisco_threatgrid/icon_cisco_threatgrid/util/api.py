@@ -1,4 +1,4 @@
-from requests import Session, Request, HTTPError
+from requests import Session, Request
 from json import JSONDecodeError
 from komand.exceptions import PluginException
 
@@ -8,7 +8,6 @@ class ThreatGrid:
         self._base_url = base_url
         self.logger = logger
         self.api_key = api_key
-
         self.session = Session()
         self.session.verify = ssl_verify
 
@@ -18,7 +17,7 @@ class ThreatGrid:
             "/api/v3/docs",
             action_name="Connection Test",
             params={"api": "/api/v3/users/:login/api-key"},
-            authentication="data",
+            authentication="data"
         )
 
     def _call_api(
@@ -29,9 +28,8 @@ class ThreatGrid:
         data=None,
         json=None,
         action_name=None,
-        custom_error=None,
         authentication=None,
-        files=None,
+        files=None
     ):
         url = self._base_url + endpoint
 
@@ -60,48 +58,50 @@ class ThreatGrid:
             data=data,
             json=json,
             headers=self.session.headers,
-            files=files,
+            files=files
         )
-
-        try:
-            # Prep request
-            req = req.prepare()
-            resp = self.session.send(req)
-            # Check for custom errors
-            if custom_error and resp.status_code not in range(200, 299):
-                raise PluginException(
-                    cause=f"An error was received when running {action_name}.",
-                    assistance=f"Request status code of {resp.status_code} was returned.\n{custom_error.get(resp.status_code, 000)}",
-                    data=resp.text
-                )
-
-            try:
-                resp.raise_for_status()
-            except HTTPError as e:
-                raise PluginException(
-                    cause=f"ThreatGrid request for {action_name} failed.",
-                    assistance=f"ThreatGrid request failed, check your API key.\n "
-                    f"Exception returned was: {e}\nResponse was {resp.text} ",
-                )
-
-        except Exception as e:
-            self.logger.error(
-                f"An error had occurred : {e}"
-                "If the issue persists please contact support"
+        # Prep request
+        req = req.prepare()
+        resp = self.session.send(req)
+        if resp.status_code == 401:
+            raise PluginException(
+                cause=f"ThreatGrid request for {action_name} failed. Invalid API key provided.",
+                assistance="Verify your API key is correct and try again."
             )
-            raise
-
+        if resp.status_code == 403:
+            raise PluginException(
+                cause=f"ThreatGrid request for {action_name} failed. Unauthorized access to this service.",
+                assistance="Verify the permissions for your account and try again."
+            )
+        if resp.status_code == 404:
+            raise PluginException(
+                cause=f"ThreatGrid request for {action_name} failed. The requested item was not found.",
+                assistance="Check the syntax of your query and try again."
+            )
+        if 400 <= resp.status_code < 500:
+            raise PluginException(
+                preset=PluginException.Preset.UNKNOWN,
+                data=resp.text
+            )
+        if resp.status_code >= 500:
+            raise PluginException(
+                preset=PluginException.Preset.SERVER_ERROR,
+                data=resp.text
+            )
         try:
-            results = resp.json()
-            return results
+            return resp.json()
         except JSONDecodeError:
-            raise PluginException(cause=f"Error: Received an unexpected response from {action_name}.",
-                                  assistance=f"(non-JSON or no response was received). Response was: {resp.text}")
+            raise PluginException(
+                cause=f"Error: Received an unexpected response from {action_name}.",
+                assistance="(non-JSON or no response was received)",
+                data=resp.text
+            )
 
-    def submit_sample(self, data, files):
+    def submit_sample(self, data: object, files: object):
         """
          Submit Sample to Threat Grid for analysis
          :param data:
+         :param files:
          :return:
          """
         return self._call_api(
@@ -110,95 +110,95 @@ class ThreatGrid:
             data=data,
             files=files,
             action_name="Submit Sample",
-            authentication="data",
+            authentication="data"
         )
 
-    def search_domain(self, q):
+    def search_domain(self, domain: str):
         """
          Makes a query to Threat Grid looking for a specific Domain
-         :param q: Domain
+         :param domain: Domain
          :return: request
          """
 
-        data = {"term": "domain", "q": q, "advance": "true"}
-        self.logger.info(f"Looking for sample with domain filename: {q}")
+        data = {"term": "domain", "q": domain, "advance": "true"}
+        self.logger.info(f"Looking for sample with domain filename: {domain}")
         return self._call_api(
             "GET",
             "/api/v2/search/submissions",
             data=data,
             action_name="Search by Domain",
-            authentication="data",
+            authentication="data"
         )
 
-    def search_id(self, q):
+    def search_id(self, query_id: str):
         """
          Makes a query to Threat Grid, looking for a specific ID
-         :param q: ID
+         :param query_id: ID
          :return: request
          """
-        data = {"term": "sample.filename", "q": q, "advance": "true"}
+        data = {"term": "sample.filename", "q": query_id, "advance": "true"}
         return self._call_api(
             "GET",
             "/api/v2/search/submissions",
             data=data,
             action_name="Search by ID",
-            authentication="data",
+            authentication="data"
         )
 
-    def search_sha256(self, q):
-        data = {"term": "checksum", "q": q, "advance": "true"}
+    def search_sha256(self, sha256: str):
+        data = {"term": "checksum", "q": sha256, "advance": "true"}
         return self._call_api(
             "GET",
             "/api/v2/search/submissions",
             data=data,
             action_name="Search by SHA256",
-            authentication="data",
+            authentication="data"
         )
 
-    def get_artifact_analysis(self, sample_id):
+    def get_artifact_analysis(self, sample_id: str):
         return self._call_api(
             method="GET",
             endpoint=f"/api/v2/samples/{sample_id}/analysis/artifacts",
             action_name="Get Artifact Analysis",
-            authentication="data",
+            authentication="data"
         )
 
-    def get_ioc_analysis(self, sample_id):
+    def get_ioc_analysis(self, sample_id: str):
         return self._call_api(
             method="GET",
             endpoint=f"/api/v2/samples/{sample_id}/analysis/iocs",
             action_name="Get IOC Analysis",
-            authentication="data",
+            authentication="data"
         )
 
-    def get_network_streams_analysis(self, sample_id):
+    def get_network_streams_analysis(self, sample_id: str):
         return self._call_api(
             method="GET",
             endpoint=f"/api/v2/samples/{sample_id}/analysis/network_streams",
             action_name="Get Network Streams Analysis",
-            authentication="data",
+            authentication="data"
         )
 
-    def get_processes_analysis(self, sample_id):
+    def get_processes_analysis(self, sample_id: str):
         return self._call_api(
             method="GET",
             endpoint=f"/api/v2/samples/{sample_id}/analysis/processes",
             action_name="Get Processes Analysis",
-            authentication="data",
+            authentication="data"
         )
 
-    def get_annotations_analysis(self, sample_id):
+    def get_annotations_analysis(self, sample_id: str):
         return self._call_api(
             method="GET",
             endpoint=f"/api/v2/samples/{sample_id}/analysis/annotations",
             action_name="Get Annotation Analysis",
-            authentication="data",
+            authentication="data"
         )
 
-    def get_metadata_analysis(self, sample_id):
+    def get_metadata_analysis(self, sample_id: str):
         return self._call_api(
             method="GET",
             endpoint=f"/api/v2/samples/{sample_id}/analysis/metadata",
             action_name="Get Metadata Analysis",
-            authentication="data",
+            authentication="data"
         )

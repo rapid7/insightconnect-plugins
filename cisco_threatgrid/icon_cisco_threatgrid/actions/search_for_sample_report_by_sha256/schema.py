@@ -24,7 +24,7 @@ class SearchForSampleReportBySha256Input(komand.Input):
     "sha256": {
       "type": "string",
       "title": "SHA256",
-      "description": "SHA256",
+      "description": "SHA256 hash",
       "order": 1
     }
   },
@@ -47,7 +47,7 @@ class SearchForSampleReportBySha256Output(komand.Output):
     "sample_report_list": {
       "$ref": "#/definitions/sample_report",
       "title": "Sample Report List",
-      "description": "Sample report list",
+      "description": "Sample report list matching the given hash",
       "order": 1
     }
   },
