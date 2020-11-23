@@ -9,8 +9,11 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools black
 
       - name: Lint
         run: |
-          pip3 install black
           python3 -m black --check .
