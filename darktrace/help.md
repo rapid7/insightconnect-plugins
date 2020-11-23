@@ -1,6 +1,6 @@
 # Description
 
-[DarkTrace](https://www.darktrace.com/) is an AI cybersecurity company for threat detection and response across cloud, email, industrial and the network.
+Powered by Cyber AI, [Darktrace’s Enterprise Immune System](https://www.darktrace.com/en/) detects and responds to unpredictable cyber-threats across your dynamic workforce – from email, cloud, and collaboration platforms, to distributed clients and the corporate network.
 
 # Key Features
 
@@ -37,7 +37,7 @@ Example input:
 
 #### Update Watched Domains
 
-This action is used to add or remove items from the Watched Domains list. If an indicator is added, DarkTrace will monitor network traffic for that URL and create alerts from it.
+This action is used to add or remove items from the Watched Domains list. If an indicator is added, Darktrace will monitor network traffic for that URL and create alerts from it.
 
 ##### Input
 
@@ -279,6 +279,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.1 - Updated help.md file
 * 2.0.0 - Fix input `0` for parameters DID, PBID, Min Score and PID in trigger Get Alerts | Create new custom type for trigger Get Alerts | Change type of input parameter Min Score to integer in trigger Get Alerts
 * 1.1.0 - Add new trigger Pull Alerts
 * 1.0.0 - Initial plugin
@@ -287,4 +288,4 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [DarkTrace](https://www.darktrace.com/)
+* [Darktrace](https://www.darktrace.com/)
