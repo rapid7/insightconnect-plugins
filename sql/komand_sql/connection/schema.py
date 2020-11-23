@@ -44,7 +44,12 @@ class ConnectionSchema(komand.Input):
     "type": {
       "type": "string",
       "title": "Type",
-      "description": "Database type (i.e. mysql, postgres... etc.)",
+      "description": "Database type (MSSQL, MySQL, PostgreSQL)",
+      "enum": [
+        "MSSQL",
+        "MySQL",
+        "PostgreSQL"
+      ],
       "order": 1
     }
   },
