@@ -11,4 +11,6 @@ jobs:
           fetch-depth: 1
 
       - name: Lint
-        run: pip install black && black . --check
+        run: |
+          pip3 install black
+          python3 -m black --check .
