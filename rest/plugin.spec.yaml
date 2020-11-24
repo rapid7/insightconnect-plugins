@@ -2,9 +2,9 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: rest
-title: REST
-description: The REST plugin to make it easy to integrate with RESTful services
-version: 3.0.3
+title: HTTP Request
+description: The HTTP Request plugin to make it easy to integrate with RESTful services
+version: 3.0.4
 vendor: rapid7
 support: community
 status: []
@@ -14,13 +14,14 @@ resources:
   docs_url: https://insightconnect.help.rapid7.com/docs/rest
 tags:
 - rest
+- request
 - http
 - rpc
 - microservices
 - api
 hub_tags:
   use_cases: [data_utility]
-  keywords: [rest, http, rpc, microservices, api]
+  keywords: [rest, request, http, rpc, microservices, api]
   features: []
 enable_cache: true
 connection:
@@ -99,7 +100,7 @@ actions:
         required: false
       body:
         title: Body
-        description: Payload to submit to the server when making the REST call
+        description: Payload to submit to the server when making the HTTP request call
         type: object
         required: false
     output:
@@ -140,7 +141,7 @@ actions:
         required: false
       body:
         title: Body
-        description: Payload to submit to the server when making the REST call
+        description: Payload to submit to the server when making the HTTP request call
         type: object
         required: false
     output:
@@ -181,7 +182,7 @@ actions:
         required: false
       body:
         title: Body
-        description: Payload to submit to the server when making the REST call
+        description: Payload to submit to the server when making the HTTP request call
         type: object
         required: false
     output:
@@ -222,7 +223,7 @@ actions:
         required: false
       body:
         title: Body
-        description: Payload to submit to the server when making the REST call
+        description: Payload to submit to the server when making the HTTP request call
         type: object
         required: false
     output:

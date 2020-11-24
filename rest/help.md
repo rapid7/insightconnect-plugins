@@ -1,6 +1,6 @@
 # Description
 
-[REST](https://en.wikipedia.org/wiki/Representational_state_transfer), or REpresentational State Transfer, is an architectural style for providing standards between computer systems on the web, making it easier for systems to communicate with each other. This plugin makes a DELETE, GET, PATCH, POST, or PUT request to the provided URI.
+[HTTP Request](https://en.wikipedia.org/wiki/Representational_state_transfer), or Representational State Transfer, is an architectural style for providing standards between computer systems on the web, making it easier for systems to communicate with each other. This plugin makes a DELETE, GET, PATCH, POST, or PUT request to the provided URI.
 
 # Key Features
 
@@ -23,12 +23,17 @@ Check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/rest) f
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|base_url|string|None|True|Base URL e.g. https://httpbin.org|None|
-|basic_auth_credentials|credential_username_password|None|False||None|
-|default_headers|object|None|False|Default headers to include in all requests associated with this connection e.g. { User-Agent: InsightConnect }|None|
-|ssl_verify|boolean|True|True|Verify SSL certificate|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|base_url|string|None|True|Base URL e.g. https://httpbin.org|None|None|
+|basic_auth_credentials|credential_username_password|None|False||None|None|
+|default_headers|object|None|False|Default headers to include in all requests associated with this connection e.g. { User-Agent: InsightConnect }|None|None|
+|ssl_verify|boolean|True|True|Verify SSL certificate|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -40,11 +45,16 @@ This action is used to make a PUT request.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|body|object|None|False|Payload to submit to the server when making the REST call|None|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|
-|route|string|None|True|The route to append to the base URL e.g. /org/users|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|body|object|None|False|Payload to submit to the server when making the HTTP request call|None|None|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
+|route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -101,11 +111,16 @@ This action is used to make a POST request.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|body|object|None|False|Payload to submit to the server when making the REST call|None|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|
-|route|string|None|True|The route to append to the base URL e.g. /org/users|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|body|object|None|False|Payload to submit to the server when making the HTTP request call|None|None|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
+|route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -162,11 +177,16 @@ This action is used to make a PATCH request.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|body|object|None|False|Payload to submit to the server when making the REST call|None|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|
-|route|string|None|True|The route to append to the base URL e.g. /org/users|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|body|object|None|False|Payload to submit to the server when making the HTTP request call|None|None|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
+|route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -220,10 +240,15 @@ This action is used to make a GET request.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|
-|route|string|None|True|The route to append to the base URL e.g. /org/users|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
+|route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -262,11 +287,16 @@ This action is used to make a DELETE request.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|body|object|None|False|Payload to submit to the server when making the REST call|None|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|
-|route|string|None|True|The route to append to the base URL e.g. /org/users|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|body|object|None|False|Payload to submit to the server when making the HTTP request call|None|None|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
+|route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -330,6 +360,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 3.0.4 - Update Rest plugin title to HTTP Request
 * 3.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/rest)
 * 3.0.2 - Update to v3 Python plugin architecture | Support get endpoints returning lists
 * 3.0.1 - New spec and help.md format for the Extension Library
@@ -346,5 +377,5 @@ Any issues connecting to the remote service should be present in the log of the 
 
 ## References
 
-* [REST Architecture Style](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
-* [InsightConnect REST Plugin Guide](https://insightconnect.help.rapid7.com/docs/rest)
+* [HTTP Request Architecture Style](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
+* [InsightConnect HTTP Request Plugin Guide](https://insightconnect.help.rapid7.com/docs/rest)
