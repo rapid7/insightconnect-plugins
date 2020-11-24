@@ -323,7 +323,7 @@ Example input:
 
 ```
 {
-   "input": {
+  "input": {
     "object": ["rapid", "7"],
     "rapid7": "value"
   }
