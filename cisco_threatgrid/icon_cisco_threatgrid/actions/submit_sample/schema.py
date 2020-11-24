@@ -211,7 +211,7 @@ class SubmitSampleOutput(komand.Output):
           "title": "Tags",
           "description": "Tags",
           "items": {
-            "type": "object"
+            "type": "string"
           },
           "order": 12
         },
@@ -322,7 +322,7 @@ class SubmitSampleOutput(komand.Output):
               "title": "Tags",
               "description": "Tags",
               "items": {
-                "type": "object"
+                "type": "string"
               },
               "order": 12
             },

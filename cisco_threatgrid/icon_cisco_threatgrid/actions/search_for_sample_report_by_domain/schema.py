@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Search for a sample report matching the given domain. e.g. rapid7.com"
+    DESCRIPTION = "Search for a sample report matching the given domain e.g. example.com"
 
 
 class Input:
@@ -47,7 +47,7 @@ class SearchForSampleReportByDomainOutput(komand.Output):
     "sample_report": {
       "$ref": "#/definitions/sample_report",
       "title": "Sample Report",
-      "description": "Sample report",
+      "description": "Sample report matching the given domain",
       "order": 1
     }
   },
