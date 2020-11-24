@@ -16,6 +16,6 @@ class SearchAgents(komand.Action):
         return {
             Output.AGENTS: self.connection.client.search_agents(
                 params.get(Input.AGENT),
-                params.get(Input.AGENT_ACTIVE, True)
+                agent_active=params.get(Input.AGENT_ACTIVE, True)
             )
         }
