@@ -2037,7 +2037,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 4.0.2 - Fix type of output parameters `analystNotes` and `threatLists` in Lookup Domain action
+* 4.0.2 - Return full `analystNotes` and `threatLists` data outputs in Lookup Domain action
 * 4.0.1 - Improve connection error messaging
 * 4.0.0 - Remove `fields` input in Lookup Domain, Lookup Hash, Lookup IP Address and Lookup URL actions - all fields will now be returned
 * 3.1.2 - Update to request headers to add plugin information
