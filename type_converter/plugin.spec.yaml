@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: type_converter
 title: Type Converter
 description: Type Converter is a utility plugin for converting data types within a Rapid7 InsightConnect workflow
-version: 1.6.0
+version: 1.6.1
 vendor: rapid7
 support: rapid7
 status: []
@@ -17,7 +17,7 @@ tags:
 - cast
 hub_tags:
   use_cases: [data_utility]
-  keywords: [utilities, type, cast]
+  keywords: [utilities, type, cast, cloud_enabled]
   features: []
 actions:
   boolean_to_integer:
