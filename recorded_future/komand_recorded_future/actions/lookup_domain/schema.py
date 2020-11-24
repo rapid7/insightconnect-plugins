@@ -66,7 +66,7 @@ class LookupDomainOutput(komand.Output):
       "title": "Analyst Notes",
       "description": "Notes from an analyst",
       "items": {
-        "type": "string"
+        "$ref": "#/definitions/analystNote"
       },
       "order": 3
     },
@@ -138,7 +138,7 @@ class LookupDomainOutput(komand.Output):
       "title": "Threat Lists",
       "description": "Threat lists",
       "items": {
-        "type": "string"
+        "$ref": "#/definitions/threatLists"
       },
       "order": 9
     },
@@ -150,6 +150,326 @@ class LookupDomainOutput(komand.Output):
     }
   },
   "definitions": {
+    "analystNote": {
+      "type": "object",
+      "title": "analystNote",
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/attributes",
+          "title": "Attributes",
+          "order": 1
+        },
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "order": 2
+        },
+        "source": {
+          "$ref": "#/definitions/labels",
+          "title": "Source",
+          "order": 3
+        }
+      },
+      "definitions": {
+        "attributes": {
+          "type": "object",
+          "title": "attributes",
+          "properties": {
+            "context_entities": {
+              "type": "array",
+              "title": "Context Entities",
+              "items": {
+                "$ref": "#/definitions/context_entities"
+              },
+              "order": 1
+            },
+            "labels": {
+              "type": "array",
+              "title": "Labels",
+              "items": {
+                "$ref": "#/definitions/labels"
+              },
+              "order": 2
+            },
+            "note_entities": {
+              "type": "array",
+              "title": "Note Entities",
+              "items": {
+                "$ref": "#/definitions/labels"
+              },
+              "order": 3
+            },
+            "published": {
+              "type": "string",
+              "title": "Published",
+              "order": 4
+            },
+            "text": {
+              "type": "string",
+              "title": "Text",
+              "order": 5
+            },
+            "title": {
+              "type": "string",
+              "title": "Title",
+              "order": 6
+            },
+            "topic": {
+              "$ref": "#/definitions/context_entities",
+              "title": "Topic",
+              "order": 7
+            },
+            "validated_on": {
+              "type": "string",
+              "title": "Validated On",
+              "order": 8
+            },
+            "validation_urls": {
+              "type": "array",
+              "title": "Validation Urls",
+              "items": {
+                "$ref": "#/definitions/labels"
+              },
+              "order": 9
+            }
+          },
+          "definitions": {
+            "context_entities": {
+              "type": "object",
+              "title": "context_entities",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "title": "Description",
+                  "order": 1
+                },
+                "id": {
+                  "type": "string",
+                  "title": "Id",
+                  "order": 2
+                },
+                "name": {
+                  "type": "string",
+                  "title": "Name",
+                  "order": 3
+                },
+                "type": {
+                  "type": "string",
+                  "title": "Type",
+                  "order": 4
+                }
+              }
+            },
+            "labels": {
+              "type": "object",
+              "title": "labels",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "title": "Id",
+                  "order": 1
+                },
+                "name": {
+                  "type": "string",
+                  "title": "Name",
+                  "order": 2
+                },
+                "type": {
+                  "type": "string",
+                  "title": "Type",
+                  "order": 3
+                }
+              }
+            }
+          }
+        },
+        "context_entities": {
+          "type": "object",
+          "title": "context_entities",
+          "properties": {
+            "description": {
+              "type": "string",
+              "title": "Description",
+              "order": 1
+            },
+            "id": {
+              "type": "string",
+              "title": "Id",
+              "order": 2
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "order": 3
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "order": 4
+            }
+          }
+        },
+        "labels": {
+          "type": "object",
+          "title": "labels",
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "Id",
+              "order": 1
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "order": 2
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "order": 3
+            }
+          }
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "title": "attributes",
+      "properties": {
+        "context_entities": {
+          "type": "array",
+          "title": "Context Entities",
+          "items": {
+            "$ref": "#/definitions/context_entities"
+          },
+          "order": 1
+        },
+        "labels": {
+          "type": "array",
+          "title": "Labels",
+          "items": {
+            "$ref": "#/definitions/labels"
+          },
+          "order": 2
+        },
+        "note_entities": {
+          "type": "array",
+          "title": "Note Entities",
+          "items": {
+            "$ref": "#/definitions/labels"
+          },
+          "order": 3
+        },
+        "published": {
+          "type": "string",
+          "title": "Published",
+          "order": 4
+        },
+        "text": {
+          "type": "string",
+          "title": "Text",
+          "order": 5
+        },
+        "title": {
+          "type": "string",
+          "title": "Title",
+          "order": 6
+        },
+        "topic": {
+          "$ref": "#/definitions/context_entities",
+          "title": "Topic",
+          "order": 7
+        },
+        "validated_on": {
+          "type": "string",
+          "title": "Validated On",
+          "order": 8
+        },
+        "validation_urls": {
+          "type": "array",
+          "title": "Validation Urls",
+          "items": {
+            "$ref": "#/definitions/labels"
+          },
+          "order": 9
+        }
+      },
+      "definitions": {
+        "context_entities": {
+          "type": "object",
+          "title": "context_entities",
+          "properties": {
+            "description": {
+              "type": "string",
+              "title": "Description",
+              "order": 1
+            },
+            "id": {
+              "type": "string",
+              "title": "Id",
+              "order": 2
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "order": 3
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "order": 4
+            }
+          }
+        },
+        "labels": {
+          "type": "object",
+          "title": "labels",
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "Id",
+              "order": 1
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "order": 2
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "order": 3
+            }
+          }
+        }
+      }
+    },
+    "context_entities": {
+      "type": "object",
+      "title": "context_entities",
+      "properties": {
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "order": 1
+        },
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "order": 2
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "order": 3
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "order": 4
+        }
+      }
+    },
     "counts": {
       "type": "object",
       "title": "counts",
@@ -308,6 +628,27 @@ class LookupDomainOutput(komand.Output):
           "type": "string",
           "title": "Timestamp",
           "order": 5
+        }
+      }
+    },
+    "labels": {
+      "type": "object",
+      "title": "labels",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "order": 1
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "order": 2
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "order": 3
         }
       }
     },
@@ -547,6 +888,36 @@ class LookupDomainOutput(komand.Output):
           "type": "string",
           "title": "Url",
           "order": 6
+        }
+      }
+    },
+    "threatLists": {
+      "type": "object",
+      "title": "threatLists",
+      "properties": {
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "description": "Description",
+          "order": 1
+        },
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "ID",
+          "order": 2
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 3
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type",
+          "order": 4
         }
       }
     },
