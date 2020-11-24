@@ -21,15 +21,25 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Database username and password|None|None|
-|db|string|None|True|Database name|None|None|
-|host|string|None|True|Database hostname|None|None|
-|port|string|None|False|Database port|None|None|
-|type|string|None|True|Database type (i.e. mysql, postgres... etc.)|None|None|
+|credentials|credential_username_password|None|True|Database username and password|None|{ "username": "user@example.com", "password": "mypassword"}|
+|db|string|None|True|Database name|None|database_name|
+|host|string|None|True|Database hostname|None|198.51.100.1|
+|port|string|None|False|Database port|None|443|
+|type|string|None|True|Database type (MSSQL, MySQL, PostgreSQL)|['MSSQL', 'MySQL', 'PostgreSQL']|MySQL|
 
 Example input:
 
 ```
+{
+  "credentials": {
+    "username": "user@example.com",
+    "password": "mypassword"
+  },
+  "db": "database_name",
+  "host": "198.51.100.1",
+  "port": 443,
+  "type": "MySQL"
+}
 ```
 
 ## Technical Details
@@ -90,6 +100,7 @@ For the SQL query action, be sure that your query is valid SQL.
 
 # Version History
 
+* 2.0.7 - Add supported databases as a drop-down list | Add example inputs
 * 2.0.6 - Fix issue where connection test always success
 * 2.0.5 - New spec and help.md format for the Extension Library
 * 2.0.4 - Add support for Microsoft SQL server
@@ -105,4 +116,3 @@ For the SQL query action, be sure that your query is valid SQL.
 ## References
 
 * [SQLAlchemy](http://docs.sqlalchemy.org/en/latest/)
-

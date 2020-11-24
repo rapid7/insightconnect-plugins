@@ -9,7 +9,7 @@ class SentineloneAPI:
         self.url = url
         self.token_header = make_token_header
 
-    def search_agents(self, agent_details: str, agent_active, results_length: int = 0) -> list:
+    def search_agents(self, agent_details: str, agent_active: bool = True, results_length: int = 0) -> list:
         results = []
         if agent_details:
             for search in self.__get_searches(agent_details):

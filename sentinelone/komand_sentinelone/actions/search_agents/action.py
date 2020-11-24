@@ -16,6 +16,7 @@ class SearchAgents(komand.Action):
     def run(self, params={}):
         return {
             Output.AGENTS: self.connection.client.search_agents(
-                params.get(Input.AGENT), params.get(Input.AGENT_ACTIVE, True)
+                params.get(Input.AGENT),
+                agent_active=params.get(Input.AGENT_ACTIVE, True)
             )
         }

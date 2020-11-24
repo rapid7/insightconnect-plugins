@@ -16,7 +16,7 @@ class Quarantine(komand.Action):
 
     def run(self, params={}):
         agent = params.get(Input.AGENT)
-        agents = self.connection.client.search_agents(agent, 2)
+        agents = self.connection.client.search_agents(agent, results_length=2)
         whitelist = params.get(Input.WHITELIST, None)
 
         not_affected = {"response": {"data": {"affected": 0}}}
@@ -62,10 +62,20 @@ class Quarantine(komand.Action):
     @staticmethod
     def __find_in_whitelist(agent_obj: dict, whitelist: list):
         for key, value in agent_obj.items():
-            if key in ["inet", "externalIp", "computerName", "id", "uuid"]:
+            if key in ['externalIp', 'computerName', 'id', 'uuid']:
                 if value in whitelist:
                     raise PluginException(
                         cause="Agent found in the whitelist.",
                         assistance=f"If you would like to block this host, remove {value} from the whitelist and try again.",
                     )
+            if key == "networkInterfaces":
+                network_dict = value[0]
+                for network_key, network_val in network_dict.items():
+                    if network_key in ["inet", "inet6"]:
+                        for ip_address in network_val:
+                            if ip_address in whitelist:
+                                raise PluginException(
+                                    cause="Agent found in the whitelist.",
+                                    assistance=f"If you would like to block this host, remove {ip_address} from the whitelist and try again."
+                                )
         return
