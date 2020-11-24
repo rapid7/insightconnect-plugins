@@ -92,8 +92,7 @@ class ThreatGrid:
             return resp.json()
         except JSONDecodeError:
             raise PluginException(
-                cause=f"Error: Received an unexpected response from {action_name}.",
-                assistance="(non-JSON or no response was received)",
+                preset=PluginException.Preset.INVALID_JSON,
                 data=resp.text
             )
 
