@@ -4,7 +4,7 @@ products: [insightconnect]
 name: sql
 title: SQL
 description: The SQL plugin allows you to run SQL queries
-version: 2.0.6
+version: 2.0.7
 vendor: rapid7
 support: community
 status: []
@@ -22,27 +22,36 @@ hub_tags:
   features: []
 connection:
   type:
-    description: Database type (i.e. mysql, postgres... etc.)
+    description: Database type (MSSQL, MySQL, PostgreSQL)
     type: string
     required: true
+    enum:
+      - MSSQL
+      - MySQL
+      - PostgreSQL
+    example: MySQL
   host:
     description: Database hostname
     type: string
     required: true
+    example: 198.51.100.1
   port:
     description: Database port
     type: string
     required: false
+    example: 443
   db:
     description: Database name
     title: DB
     type: string
     required: true
+    example: database_name
   credentials:
     title: DB Credentials
     description: Database username and password
     type: credential_username_password
     required: true
+    example: '{ "username": "user@example.com", "password": "mypassword"}'
 actions:
   query:
     title: Query

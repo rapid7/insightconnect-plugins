@@ -1509,6 +1509,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.1 - Fix Agent Active parameter in Get Agent Details action | Update Quarantine action whitelist for IP addresses
 * 4.0.0 - Update ID input for Fetch Threats File action to a string
 * 3.1.0 - Add new action Fetch Threats File
 * 3.0.0 - Update help.md for the Extension Library | Update title in action Blacklist by IOC Hash, Get Activities, Count Summary and Connect to Network
