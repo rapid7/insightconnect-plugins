@@ -47,7 +47,7 @@ This action is used to make a PUT request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body|object|None|False|Payload to submit to the server when making the HTTP request call|None|None|
+|body|object|None|False|Payload to submit to the server when making the HTTP Request call|None|None|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
 
@@ -113,7 +113,7 @@ This action is used to make a POST request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body|object|None|False|Payload to submit to the server when making the HTTP request call|None|None|
+|body|object|None|False|Payload to submit to the server when making the HTTP Request call|None|None|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
 
@@ -179,7 +179,7 @@ This action is used to make a PATCH request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body|object|None|False|Payload to submit to the server when making the HTTP request call|None|None|
+|body|object|None|False|Payload to submit to the server when making the HTTP Request call|None|None|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
 
@@ -289,7 +289,7 @@ This action is used to make a DELETE request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body|object|None|False|Payload to submit to the server when making the HTTP request call|None|None|
+|body|object|None|False|Payload to submit to the server when making the HTTP Request call|None|None|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
 
@@ -360,7 +360,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
-* 3.0.4 - Update Rest plugin title to HTTP Request
+* 3.0.4 - Update REST plugin title to HTTP Request
 * 3.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/rest)
 * 3.0.2 - Update to v3 Python plugin architecture | Support get endpoints returning lists
 * 3.0.1 - New spec and help.md format for the Extension Library

@@ -100,7 +100,7 @@ actions:
         required: false
       body:
         title: Body
-        description: Payload to submit to the server when making the HTTP request call
+        description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
     output:
@@ -141,7 +141,7 @@ actions:
         required: false
       body:
         title: Body
-        description: Payload to submit to the server when making the HTTP request call
+        description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
     output:
@@ -182,7 +182,7 @@ actions:
         required: false
       body:
         title: Body
-        description: Payload to submit to the server when making the HTTP request call
+        description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
     output:
@@ -223,7 +223,7 @@ actions:
         required: false
       body:
         title: Body
-        description: Payload to submit to the server when making the HTTP request call
+        description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
     output:

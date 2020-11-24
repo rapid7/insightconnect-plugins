@@ -29,7 +29,7 @@ class PutInput(komand.Input):
     "body": {
       "type": "object",
       "title": "Body",
-      "description": "Payload to submit to the server when making the HTTP request call",
+      "description": "Payload to submit to the server when making the HTTP Request call",
       "order": 3
     },
     "headers": {
