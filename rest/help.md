@@ -1,19 +1,15 @@
 # Description
 
-[HTTP Request](https://en.wikipedia.org/wiki/Representational_state_transfer), or Representational State Transfer, is an architectural style for providing standards between computer systems on the web, making it easier for systems to communicate with each other. This plugin makes a DELETE, GET, PATCH, POST, or PUT request to the provided URI.
+The HTTP Requests plugin allows users to automate HTTP requests to API services such as [RESTful based services](https://en.wikipedia.org/wiki/Representational_state_transfer).
+This plugin is often used to integrate with ad-hoc 3rd party API's in a workflow without going through the process of [building a new plugin](https://komand.github.io/python/index.html). It supports DELETE, GET, PATCH, POST, or PUT requests to the provided URI.
 
 # Key Features
 
-* Use DELETE to delete a resource identified by a URI
-* Use GET to read or retrieve a representation of a resource
-* Use PATCH to update or modify resources
-* Use POST to create new resources
-* Use PUT to update or replace resources
+* Quickly integrate with 3rd party API's over HTTP
 
 # Requirements
 
-* Varies depending on the API the plugin is interacting with
-* A RESTFUL HTTP/HTTPS resource
+* A RESTFUL HTTP/HTTPS resource and supported authentication, if any
 
 # Documentation
 
