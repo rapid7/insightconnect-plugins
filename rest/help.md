@@ -23,7 +23,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |base_url|string|None|True|Base URL e.g. https://httpbin.org|None|None|
 |basic_auth_credentials|credential_username_password|None|False||None|None|
-|default_headers|object|None|False|Default headers to include in all requests associated with this connection e.g. { User-Agent: InsightConnect }|None|None|
+|default_headers|object|None|False|Default headers to include in all requests associated with this connection e.g. { "User-Agent": "Rapid7 InsightConnect" }|None|None|
 |ssl_verify|boolean|True|True|Verify SSL certificate|None|None|
 
 Example input:

@@ -33,7 +33,7 @@ connection:
   default_headers:
     title: Default Headers
     description: 'Default headers to include in all requests associated with this
-      connection e.g. { User-Agent: InsightConnect }'
+      connection e.g. { "User-Agent": "Rapid7 InsightConnect" }'
     type: object
     required: false
   ssl_verify:
