@@ -29,6 +29,15 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
+{
+  "base_url": "https://httpbin.org/",
+  "basic_auth_credentials": {
+    "username": "user@example.com",
+    "password": "mypassword"
+  },
+  "default_headers": { "User-Agent": "Rapid7 InsightConnect"},
+  "ssl_verify": true
+}
 ```
 
 ## Technical Details
@@ -356,7 +365,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
-* 3.0.4 - Update REST plugin title to HTTP Request
+* 3.0.4 - Update REST plugin title to HTTP Requests
 * 3.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/rest)
 * 3.0.2 - Update to v3 Python plugin architecture | Support get endpoints returning lists
 * 3.0.1 - New spec and help.md format for the Extension Library
