@@ -30,22 +30,26 @@ connection:
     description: Base URL e.g. https://httpbin.org
     type: string
     required: true
+    example: https://httpbin.org/
   default_headers:
     title: Default Headers
     description: 'Default headers to include in all requests associated with this
       connection e.g. { "User-Agent": "Rapid7 InsightConnect" }'
     type: object
     required: false
+    example: '{ "User-Agent": "Rapid7 InsightConnect"}'
   ssl_verify:
     title: SSL Verify
     type: boolean
     description: Verify SSL certificate
     required: true
     default: true
+    example: true
   basic_auth_credentials:
     title: Basic Auth Credentials
     type: credential_username_password
     required: false
+    example: '{"username": "user@example.com", "password": "mypassword"}'
 actions:
   get:
     title: GET
@@ -56,12 +60,14 @@ actions:
         description: The route to append to the base URL e.g. /org/users
         type: string
         required: true
+        example: /org/users
       headers:
         title: Headers
         description: Headers to use for the request. These will override any default
           headers
         type: object
         required: false
+        example: '{"Host": "rapid7.com"}'
     output:
       body_object:
         title: Body Object
@@ -92,17 +98,20 @@ actions:
         description: The route to append to the base URL e.g. /org/users
         type: string
         required: true
+        example: /org/users
       headers:
         title: Headers
         description: Headers to use for the request. These will override any default
           headers
         type: object
         required: false
+        example: '{"Host": "rapid7.com"}'
       body:
         title: Body
         description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
+        example: '{"user": "user@example.com"}'
     output:
       body_object:
         title: Body Object
@@ -133,17 +142,20 @@ actions:
         description: The route to append to the base URL e.g. /org/users
         type: string
         required: true
+        example: /org/users
       headers:
         title: Headers
         description: Headers to use for the request. These will override any default
           headers
         type: object
         required: false
+        example: '{"Host": "rapid7.com"}'
       body:
         title: Body
         description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
+        example: '{"user": "user@example.com"}'
     output:
       body_object:
         title: Body Object
@@ -174,17 +186,20 @@ actions:
         description: The route to append to the base URL e.g. /org/users
         type: string
         required: true
+        example: /org/users
       headers:
         title: Headers
         description: Headers to use for the request. These will override any default
           headers
         type: object
         required: false
+        example: '{"Host": "rapid7.com"}'
       body:
         title: Body
         description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
+        example: '{"user": "user@example.com"}'
     output:
       body_object:
         title: Body Object
@@ -215,17 +230,20 @@ actions:
         description: The route to append to the base URL e.g. /org/users
         type: string
         required: true
+        example: /org/users
       headers:
         title: Headers
         description: Headers to use for the request. These will override any default
           headers
         type: object
         required: false
+        example: '{"Host": "rapid7.com"}'
       body:
         title: Body
         description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
+        example: '{"user": "user@example.com"}'
     output:
       body_object:
         title: Body Object
