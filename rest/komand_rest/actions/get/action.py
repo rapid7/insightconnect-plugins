@@ -3,7 +3,6 @@ from .schema import GetInput, GetOutput
 # Custom imports below
 from komand_rest.util.util import Common
 import requests
-import json
 
 
 class Get(komand.Action):

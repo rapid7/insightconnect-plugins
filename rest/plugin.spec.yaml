@@ -2,9 +2,9 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: rest
-title: REST
-description: The REST plugin to make it easy to integrate with RESTful services
-version: 3.0.3
+title: HTTP Requests
+description: The HTTP Requests plugin to make it easy to integrate with RESTful services
+version: 3.0.4
 vendor: rapid7
 support: community
 status: []
@@ -14,13 +14,14 @@ resources:
   docs_url: https://insightconnect.help.rapid7.com/docs/rest
 tags:
 - rest
+- request
 - http
 - rpc
 - microservices
 - api
 hub_tags:
   use_cases: [data_utility]
-  keywords: [rest, http, rpc, microservices, api]
+  keywords: [rest, request, http, rpc, microservices, api]
   features: []
 enable_cache: true
 connection:
@@ -29,22 +30,26 @@ connection:
     description: Base URL e.g. https://httpbin.org
     type: string
     required: true
+    example: https://httpbin.org/
   default_headers:
     title: Default Headers
     description: 'Default headers to include in all requests associated with this
-      connection e.g. { User-Agent: InsightConnect }'
+      connection e.g. { "User-Agent": "Rapid7 InsightConnect" }'
     type: object
     required: false
+    example: '{ "User-Agent": "Rapid7 InsightConnect"}'
   ssl_verify:
     title: SSL Verify
     type: boolean
     description: Verify SSL certificate
     required: true
     default: true
+    example: true
   basic_auth_credentials:
     title: Basic Auth Credentials
     type: credential_username_password
     required: false
+    example: '{"username": "user@example.com", "password": "mypassword"}'
 actions:
   get:
     title: GET
@@ -55,12 +60,14 @@ actions:
         description: The route to append to the base URL e.g. /org/users
         type: string
         required: true
+        example: /org/users
       headers:
         title: Headers
         description: Headers to use for the request. These will override any default
           headers
         type: object
         required: false
+        example: '{"Host": "rapid7.com"}'
     output:
       body_object:
         title: Body Object
@@ -91,17 +98,20 @@ actions:
         description: The route to append to the base URL e.g. /org/users
         type: string
         required: true
+        example: /org/users
       headers:
         title: Headers
         description: Headers to use for the request. These will override any default
           headers
         type: object
         required: false
+        example: '{"Host": "rapid7.com"}'
       body:
         title: Body
-        description: Payload to submit to the server when making the REST call
+        description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
+        example: '{"user": "user@example.com"}'
     output:
       body_object:
         title: Body Object
@@ -132,17 +142,20 @@ actions:
         description: The route to append to the base URL e.g. /org/users
         type: string
         required: true
+        example: /org/users
       headers:
         title: Headers
         description: Headers to use for the request. These will override any default
           headers
         type: object
         required: false
+        example: '{"Host": "rapid7.com"}'
       body:
         title: Body
-        description: Payload to submit to the server when making the REST call
+        description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
+        example: '{"user": "user@example.com"}'
     output:
       body_object:
         title: Body Object
@@ -173,17 +186,20 @@ actions:
         description: The route to append to the base URL e.g. /org/users
         type: string
         required: true
+        example: /org/users
       headers:
         title: Headers
         description: Headers to use for the request. These will override any default
           headers
         type: object
         required: false
+        example: '{"Host": "rapid7.com"}'
       body:
         title: Body
-        description: Payload to submit to the server when making the REST call
+        description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
+        example: '{"user": "user@example.com"}'
     output:
       body_object:
         title: Body Object
@@ -214,17 +230,20 @@ actions:
         description: The route to append to the base URL e.g. /org/users
         type: string
         required: true
+        example: /org/users
       headers:
         title: Headers
         description: Headers to use for the request. These will override any default
           headers
         type: object
         required: false
+        example: '{"Host": "rapid7.com"}'
       body:
         title: Body
-        description: Payload to submit to the server when making the REST call
+        description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
+        example: '{"user": "user@example.com"}'
     output:
       body_object:
         title: Body Object
