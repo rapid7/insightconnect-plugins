@@ -34,8 +34,8 @@ Example input:
     "password": "mypassword"
   },
   "default_headers": {
-    "User-Agent": "Rapid7 InsightConnect"	
-  }
+    "User-Agent": "Rapid7 InsightConnect"
+  },
   "ssl_verify": true
 }
 ```
