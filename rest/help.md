@@ -29,7 +29,10 @@ Example input:
 ```
 {
   "base_url": "https://httpbin.org/",
-  "basic_auth_credentials": "{\"username\": \"user@example.com\", \"password\": \"mypassword\"}",
+  "basic_auth_credentials": {
+    "username": "user@example.com", 
+    "password": "mypassword"
+  },
   "default_headers": "{ \"User-Agent\": \"Rapid7 InsightConnect\"}",
   "ssl_verify": true
 }
@@ -55,8 +58,12 @@ Example input:
 
 ```
 {
-  "body": "{\"user\": \"user@example.com\"}",
-  "headers": "{\"Host\": \"rapid7.com\"}",
+  "body": {
+    "user": "user@example.com"
+  },
+  "headers": {
+    "Host": "rapid7.com"
+  },
   "route": "/org/users"
 }
 ```
@@ -126,8 +133,12 @@ Example input:
 
 ```
 {
-  "body": "{\"user\": \"user@example.com\"}",
-  "headers": "{\"Host\": \"rapid7.com\"}",
+  "body": {
+    "user": "user@example.com"
+  },
+  "headers": {
+    "Host": "rapid7.com"
+  },
   "route": "/org/users"
 }
 ```
@@ -197,8 +208,12 @@ Example input:
 
 ```
 {
-  "body": "{\"user\": \"user@example.com\"}",
-  "headers": "{\"Host\": \"rapid7.com\"}",
+  "body": {
+    "user": "user@example.com"
+  },
+  "headers": {
+    "Host": "rapid7.com"
+  },
   "route": "/org/users"
 }
 ```
@@ -264,7 +279,9 @@ Example input:
 
 ```
 {
-  "headers": "{\"Host\": \"rapid7.com\"}",
+  "headers": {
+    "Host": "rapid7.com"
+  },
   "route": "/org/users"
 }
 ```
@@ -316,8 +333,12 @@ Example input:
 
 ```
 {
-  "body": "{\"user\": \"user@example.com\"}",
-  "headers": "{\"Host\": \"rapid7.com\"}",
+  "body": {
+    "user": "user@example.com"
+  },
+  "headers": {
+    "Host": "rapid7.com"
+  },
   "route": "/org/users"
 }
 ```
