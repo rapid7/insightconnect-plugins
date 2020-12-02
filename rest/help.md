@@ -33,7 +33,7 @@ Example input:
     "username": "user@example.com",
     "password": "mypassword"
   },
-  "default_headers": {	  "default_headers": "{ \"User-Agent\": \"Rapid7 InsightConnect\"}",
+  "default_headers": {
     "User-Agent": "Rapid7 InsightConnect"	
   }
   "ssl_verify": true
