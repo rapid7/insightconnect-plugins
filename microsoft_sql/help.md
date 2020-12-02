@@ -1,5 +1,7 @@
 # Description
 
+**Note**: This plugin is obsolete and is superseded by the SQL plugin.
+
 The [Microsoft SQL](https://www.microsoft.com/en-us/sql-server/default.aspx) plugin allows user to run queries against Microsoft SQL databases.
 
 # Key Features
