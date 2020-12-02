@@ -30,10 +30,12 @@ Example input:
 {
   "base_url": "https://httpbin.org/",
   "basic_auth_credentials": {
-    "username": "user@example.com", 
+    "username": "user@example.com",
     "password": "mypassword"
   },
-  "default_headers": "{ \"User-Agent\": \"Rapid7 InsightConnect\"}",
+  "default_headers": {	  "default_headers": "{ \"User-Agent\": \"Rapid7 InsightConnect\"}",
+    "User-Agent": "Rapid7 InsightConnect"	
+  }
   "ssl_verify": true
 }
 ```
