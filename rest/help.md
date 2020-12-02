@@ -19,16 +19,19 @@
 
 ## Setup
 
-Check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/rest) for more details on how to configure this plugin.
-
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|base_url|string|None|True|Base URL e.g. https://httpbin.org|None|
-|basic_auth_credentials|credential_username_password|None|False||None|
-|default_headers|object|None|False|Default headers to include in all requests associated with this connection e.g. { User-Agent: InsightConnect }|None|
-|ssl_verify|boolean|True|True|Verify SSL certificate|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|base_url|string|None|True|Base URL e.g. https://httpbin.org|None|None|
+|basic_auth_credentials|credential_username_password|None|False||None|None|
+|default_headers|object|None|False|Default headers to include in all requests associated with this connection e.g. { User-Agent: InsightConnect }|None|None|
+|ssl_verify|boolean|True|True|Verify SSL certificate|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -40,11 +43,16 @@ This action is used to make a PUT request.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|body|object|None|False|Payload to submit to the server when making the REST call|None|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|
-|route|string|None|True|The route to append to the base URL e.g. /org/users|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|body|object|None|False|Payload to submit to the server when making the REST call|None|None|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
+|route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -101,11 +109,16 @@ This action is used to make a POST request.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|body|object|None|False|Payload to submit to the server when making the REST call|None|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|
-|route|string|None|True|The route to append to the base URL e.g. /org/users|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|body|object|None|False|Payload to submit to the server when making the REST call|None|None|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
+|route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -162,11 +175,16 @@ This action is used to make a PATCH request.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|body|object|None|False|Payload to submit to the server when making the REST call|None|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|
-|route|string|None|True|The route to append to the base URL e.g. /org/users|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|body|object|None|False|Payload to submit to the server when making the REST call|None|None|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
+|route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -220,10 +238,15 @@ This action is used to make a GET request.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|
-|route|string|None|True|The route to append to the base URL e.g. /org/users|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
+|route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -262,11 +285,16 @@ This action is used to make a DELETE request.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|body|object|None|False|Payload to submit to the server when making the REST call|None|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|
-|route|string|None|True|The route to append to the base URL e.g. /org/users|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|body|object|None|False|Payload to submit to the server when making the REST call|None|None|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
+|route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
