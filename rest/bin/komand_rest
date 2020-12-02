@@ -4,10 +4,11 @@ import os
 import json
 from sys import argv
 
-Name = "REST"
+Name = "HTTP Requests"
 Vendor = "rapid7"
 Version = "3.0.5"
-Description = "The REST plugin to make it easy to integrate with RESTful services"
+Description = "The HTTP Requests plugin to make it easy to integrate with RESTful services"
+
 
 def main():
     if 'http' in argv:

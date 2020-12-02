@@ -1,13 +1,7 @@
 {
-<<<<<<< HEAD
-	"spec": "8fecdcb32220d016f59d9055a4c46103",
-	"manifest": "76a866be8e88c2e61a59faa536609f53",
-	"setup": "8df9c687db1b0c446cce76ba3ed20da3",
-=======
-	"spec": "e6d80e24972d62ad50cc3876cd3e5041",
-	"manifest": "42d4d91e1ccca2a2bd4c26dbc99048f3",
-	"setup": "0fd179657edfdaa549fc12451804db7d",
->>>>>>> master
+	"spec": "873fa58ce04d09d4d41962c0736ed176",
+	"manifest": "f2ac5c86a2f33ff9982efa1cc73bfd10",
+	"setup": "2dcabe2b07ea1917559c0af1e219cf22",
 	"schemas": [
 		{
 			"identifier": "delete/schema.py",
@@ -31,8 +25,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-<<<<<<< HEAD
-			"hash": "a2e10084720923bf49f441328c258f17"
+			"hash": "5e5ebf622e44e2c660583bb0e64f21f0"
 		},
 		{
 			"identifier": "komand/schema.py",
@@ -65,9 +58,6 @@
 		{
 			"identifier": "throw_exception_trigger/schema.py",
 			"hash": "a6d9bc70c4e5d9120fa39abf37dcd17c"
-=======
-			"hash": "5e5ebf622e44e2c660583bb0e64f21f0"
->>>>>>> master
 		}
 	]
 }

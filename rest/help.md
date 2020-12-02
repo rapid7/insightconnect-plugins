@@ -19,23 +19,18 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|base_url|string|None|True|Base URL e.g. https://httpbin.org|None|None|
-|basic_auth_credentials|credential_username_password|None|False||None|None|
-|default_headers|object|None|False|Default headers to include in all requests associated with this connection e.g. { User-Agent: InsightConnect }|None|None|
-|ssl_verify|boolean|True|True|Verify SSL certificate|None|None|
+|base_url|string|None|True|Base URL e.g. https://httpbin.org|None|https://httpbin.org/|
+|basic_auth_credentials|credential_username_password|None|False||None|{"username": "user@example.com", "password": "mypassword"}|
+|default_headers|object|None|False|Default headers to include in all requests associated with this connection e.g. { "User-Agent": "Rapid7 InsightConnect" }|None|{ "User-Agent": "Rapid7 InsightConnect"}|
+|ssl_verify|boolean|True|True|Verify SSL certificate|None|True|
 
 Example input:
 
 ```
 {
   "base_url": "https://httpbin.org/",
-  "basic_auth_credentials": {
-    "username": "user@example.com",
-    "password": "mypassword"
-  },
-  "default_headers": {
-    "User-Agent": "Rapid7 InsightConnect"
-  },
+  "basic_auth_credentials": "{\"username\": \"user@example.com\", \"password\": \"mypassword\"}",
+  "default_headers": "{ \"User-Agent\": \"Rapid7 InsightConnect\"}",
   "ssl_verify": true
 }
 ```
@@ -52,20 +47,16 @@ This action is used to make a PUT request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body|object|None|False|Payload to submit to the server when making the REST call|None|None|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
-|route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
+|body|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "user@example.com"}|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
+|route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
 
 Example input:
 
 ```
 {
-  "body": {
-    "user": "user@example.com"
-  },
-  "headers": {
-    "Host": "rapid7.com"
-  },
+  "body": "{\"user\": \"user@example.com\"}",
+  "headers": "{\"Host\": \"rapid7.com\"}",
   "route": "/org/users"
 }
 ```
@@ -127,20 +118,16 @@ This action is used to make a POST request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body|object|None|False|Payload to submit to the server when making the REST call|None|None|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
-|route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
+|body|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "user@example.com"}|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
+|route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
 
 Example input:
 
 ```
 {
-  "body": {
-    "user": "user@example.com"
-  },
-  "headers": {
-    "Host": "rapid7.com"
-  },
+  "body": "{\"user\": \"user@example.com\"}",
+  "headers": "{\"Host\": \"rapid7.com\"}",
   "route": "/org/users"
 }
 ```
@@ -202,21 +189,16 @@ This action is used to make a PATCH request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-<<<<<<< HEAD
-|body|object|None|False|Payload to submit to the server when making the REST call|None|None|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
-|route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
+|body|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "user@example.com"}|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
+|route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
 
 Example input:
 
 ```
 {
-  "body": {
-    "user": "user@example.com"
-  },
-  "headers": {
-    "Host": "rapid7.com"
-  },
+  "body": "{\"user\": \"user@example.com\"}",
+  "headers": "{\"Host\": \"rapid7.com\"}",
   "route": "/org/users"
 }
 ```
@@ -275,16 +257,14 @@ This action is used to make a GET request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
-|route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
+|route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
 
 Example input:
 
 ```
 {
-  "headers": {
-    "Host": "rapid7.com"
-  },
+  "headers": "{\"Host\": \"rapid7.com\"}",
   "route": "/org/users"
 }
 ```
@@ -328,20 +308,16 @@ This action is used to make a DELETE request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body|object|None|False|Payload to submit to the server when making the REST call|None|None|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
-|route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
+|body|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "user@example.com"}|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
+|route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
 
 Example input:
 
 ```
 {
-  "body": {
-    "user": "user@example.com"
-  },
-  "headers": {
-    "Host": "rapid7.com"
-  },
+  "body": "{\"user\": \"user@example.com\"}",
+  "headers": "{\"Host\": \"rapid7.com\"}",
   "route": "/org/users"
 }
 ```
