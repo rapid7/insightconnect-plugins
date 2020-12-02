@@ -28,11 +28,6 @@ The connection configuration accepts the following parameters:
 |default_headers|object|None|False|Default headers to include in all requests associated with this connection e.g. { User-Agent: InsightConnect }|None|None|
 |ssl_verify|boolean|True|True|Verify SSL certificate|None|None|
 
-Example input:
-
-```
-```
-
 ## Technical Details
 
 ### Actions
@@ -48,11 +43,6 @@ This action is used to make a PUT request.
 |body|object|None|False|Payload to submit to the server when making the REST call|None|None|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -115,11 +105,6 @@ This action is used to make a POST request.
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -181,11 +166,6 @@ This action is used to make a PATCH request.
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -243,11 +223,6 @@ This action is used to make a GET request.
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -290,11 +265,6 @@ This action is used to make a DELETE request.
 |body|object|None|False|Payload to submit to the server when making the REST call|None|None|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|None|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
