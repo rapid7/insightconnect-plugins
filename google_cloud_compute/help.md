@@ -710,7 +710,7 @@ Example output:
 
 #### Update Firewall
 
-This action is used to updates the specified firewall rule with the data included in the request.
+This action is used to update the specified firewall rule with the data included in the request.
 
 ##### Input
 
