@@ -640,7 +640,7 @@ Example output:
 
 #### List Firewalls
 
-This action is used to retrieves a list of persistent disks contained within the specified zone.
+This action is used to retrieve a list of persistent disks contained within the specified zone.
 
 ##### Input
 
