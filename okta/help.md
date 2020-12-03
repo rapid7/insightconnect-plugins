@@ -977,6 +977,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 3.5.1 - Update to trigger to add logging
 * 3.5.0 - New action Update Blacklist Zones
 * 3.4.3 - Fix issue where trigger did not return empty arrays when users were removed or added to group
 * 3.4.2 - Fix issue where Monitor User Groups trigger would erroneously detect logins as an addition/removal of a group member

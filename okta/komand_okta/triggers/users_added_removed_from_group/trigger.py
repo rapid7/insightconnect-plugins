@@ -99,12 +99,17 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                     removed.append({"group_name": group_names[index], "group_id": value, "users": removed_users})
 
             if added and removed:
+                self.logger.info("Users added and removed, sending to orchestrator.")
                 self.send({Output.USERS_ADDED_FROM_GROUPS: added, Output.USERS_REMOVED_FROM_GROUPS: removed})
             elif added and not removed:
+                self.logger.info("Users added, sending to orchestrator.")
                 self.send({Output.USERS_ADDED_FROM_GROUPS: added, Output.USERS_REMOVED_FROM_GROUPS: []})
             elif removed and not added:
+                self.logger.info("Users removed, sending to orchestrator.")
                 self.send({Output.USERS_REMOVED_FROM_GROUPS: removed, Output.USERS_ADDED_FROM_GROUPS: []})
 
             current_list = new_list
 
-            time.sleep(params.get(Input.INTERVAL, 300))
+            sleep_time = params.get(Input.INTERVAL, 300)
+            self.logger.info(f"Loop complete, sleeping for {sleep_time}...")
+            time.sleep(sleep_time)
