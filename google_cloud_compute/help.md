@@ -485,7 +485,7 @@ Example output:
 
 #### Delete Snapshots
 
-This action is used to deletes the specified snapshot resource.
+This action is used to delete the specified snapshot resource.
 
 ##### Input
 
