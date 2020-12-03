@@ -791,7 +791,7 @@ Example output:
 
 #### Delete Firewall
 
-This action is used to deletes the specified firewall.
+This action is used to delete the specified firewall.
 
 ##### Input
 
