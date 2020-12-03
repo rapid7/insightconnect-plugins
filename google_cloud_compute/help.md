@@ -144,7 +144,7 @@ Example output:
 
 #### Get Firewall
 
-This action is used to get firewall.
+This action is used to get firewall rule information
 
 ##### Input
 
