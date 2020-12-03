@@ -278,7 +278,7 @@ Example output:
 
 #### Detach Disk
 
-This action is used to detaches a disk from an instance.
+This action is used to detach a disk from an instance.
 
 ##### Input
 
