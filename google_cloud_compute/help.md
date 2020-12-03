@@ -1014,7 +1014,7 @@ Example output:
 
 #### Stop Instance
 
-This action is used to stops a running instance, shutting it down cleanly, and allows you to restart the instance at a later time.
+This action is used to stop a running instance, shutting it down cleanly, and allows you to restart the instance at a later time.
 
 ##### Input
 
