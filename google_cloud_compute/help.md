@@ -855,7 +855,7 @@ Example output:
 
 #### List Instances
 
-This action is used to retrieves the list of instances contained within the specified zone.
+This action is used to retrieve the list of instances contained within the specified zone.
 
 ##### Input
 
