@@ -1081,7 +1081,7 @@ Example output:
 
 #### Start Instance
 
-This action is used to starts an instance.
+This action is used to start an instance.
 
 ##### Input
 
