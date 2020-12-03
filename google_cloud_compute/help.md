@@ -209,7 +209,7 @@ Example output:
 
 #### Attach Disk
 
-This action is used to attaches an existing disk resource to an instance.
+This action is used to attach an existing disk resource to an instance.
 
 ##### Input
 
@@ -1174,4 +1174,3 @@ Error values use the standard HTTP codes (200 OK, 404 Not Found, etc)
 
 * [Google Cloud](https://cloud.google.com/)
 * [Google Compute Engine](https://cloud.google.com/compute/docs/)
-
