@@ -48,7 +48,7 @@ class CreateIncident(insightconnect_plugin_runtime.Action):
         number = result.get("number", "")
 
         if sys_id is None:
-            raise PluginException(cause=f'Error: create_incident failed - no system_id returned.',
+            raise PluginException(cause='Error: create_incident failed - no system_id returned.',
                                   assistance=f'Response: {response.text}')
 
         return {
