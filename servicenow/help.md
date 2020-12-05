@@ -32,7 +32,7 @@ Example input:
 ```
 {
   "client_login": {
-    "username": "user1", 
+    "username": "user1",
     "password": "mypassword"
   },
   "timeout": 30,
@@ -82,11 +82,40 @@ This action is used to create a new ServiceNow Incident record.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|create_data|object|None|False|JSON object containing the fields and values to create a new incident|None|None|
+|assigned_to|string|None|False|User ID of person assigned to the incident|None|user|
+|assignment_group|string|None|False|Assignment group name of the incident|None|Team Development Code Reviewers|
+|business_service|string|None|False|Name of business service|None|All|
+|caller|string|None|False|User ID of incident caller|None|user|
+|category|string|None|False|Category code of incident|None|software|
+|configuration_item|string|None|False|Configuration item code of the incident|None|int-jenkins|
+|contact_type|string|None|False|Contact type of the incident|None|email|
+|description|string|None|False|Full description of incident|None|Full details about new employee hire|
+|impact|string|None|False|Impact of the indicent|None|Medium|
+|priority|string|None|False|Priority of the incident|None|Planning|
+|short_description|string|None|False|Short description of incident|None|New employee hire|
+|state|string|None|False|State name of the incident|None|In Progress|
+|subcategory|string|None|False|Subcategory code of incident (available values depends on the `Category` field)|None|email|
+|urgency|string|None|False|Urgency of the incident|None|Medium|
 
 Example input:
 
 ```
+{
+  "assigned_to": "user",
+  "assignment_group": "Team Development Code Reviewers",
+  "business_service": "All",
+  "caller": "user",
+  "category": "software",
+  "configuration_item": "int-jenkins",
+  "contact_type": "email",
+  "description": "Full details about new employee hire",
+  "impact": "Medium",
+  "priority": "Planning",
+  "short_description": "New employee hire",
+  "state": "In Progress",
+  "subcategory": "email",
+  "urgency": "Medium"
+}
 ```
 
 ##### Output
@@ -521,12 +550,42 @@ This action is used to update a ServiceNow Incident with the given data.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|system_id|string|None|True|System ID of the Incident record to update|None|None|
-|update_data|object|None|True|JSON object containing the fields and values to update|None|None|
+|assigned_to|string|None|False|User ID of person assigned to the incident|None|user|
+|assignment_group|string|None|False|Assignment group name of the incident|None|Recommendation Admin|
+|business_service|string|None|False|Name of business service|None|All|
+|caller|string|None|False|User ID of incident caller|None|user|
+|category|string|None|False|Category code of incident|None|hardware|
+|configuration_item|string|None|False|Configuration item code of the incident|None|int-jenkins|
+|contact_type|string|None|False|Contact type of the incident|None|phone|
+|description|string|None|False|Full description of incident|None|Full details about new employee hire update|
+|impact|string|None|False|Impact of the indicent|None|Medium|
+|priority|string|None|False|Priority of the incident|None|Planning|
+|short_description|string|None|False|Short description of incident|None|New employee hire update|
+|state|string|None|False|State name of the incident|None|On Hold|
+|subcategory|string|None|False|Subcategory code of incident (available values depends on the `Category` field)|None|monitor|
+|system_id|string|None|True|System ID of the Incident record to update|None|ee7e6b24dbf4e450e9faa5730596192b|
+|urgency|string|None|False|Urgency of the incident|None|Medium|
 
 Example input:
 
 ```
+{
+  "assigned_to": "user",
+  "assignment_group": "Recommendation Admin",
+  "business_service": "All",
+  "caller": "user",
+  "category": "hardware",
+  "configuration_item": "int-jenkins",
+  "contact_type": "phone",
+  "description": "Full details about new employee hire update",
+  "impact": "Medium",
+  "priority": "Planning",
+  "short_description": "New employee hire update",
+  "state": "On Hold",
+  "subcategory": "monitor",
+  "system_id": "ee7e6b24dbf4e450e9faa5730596192b",
+  "urgency": "Medium"
+}
 ```
 
 ##### Output
@@ -693,6 +752,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.2.0 - Add input fields to Create Incident and Update Incident action instead of JSON object
 * 4.1.0 - Add trigger Incident Created
 * 4.0.0 - New Number output to create incident action
 * 3.1.1 - New spec and help.md format for the Extension Library
