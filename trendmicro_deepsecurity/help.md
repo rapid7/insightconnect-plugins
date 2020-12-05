@@ -330,6 +330,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.1 - Improve the search for IPS rules
 * 2.2.0 - Add new action Search Computers to receive a list and details of computers matching the search criteria
 * 2.1.0 - Add new actions Get Details and List to receive assigned IPS rules from computers and policies
 * 2.0.0 - Add an option to toggle DSM certificate verification in the connection
