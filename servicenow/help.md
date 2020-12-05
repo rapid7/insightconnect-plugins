@@ -737,8 +737,9 @@ Example output:
   "changed_fields": {
     "description": {
       "previous": "Description 1",
-      "current": "Description 2"}
+      "current": "Description 2"
     }
+  }
 }
 ```
 
