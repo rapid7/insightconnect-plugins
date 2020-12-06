@@ -59,12 +59,12 @@ Example input:
 
 ```
 {
-  "vulnerabilities": [
-    "CVE-2005-0045",
-    "CVE-2014-0160",
-    "CVE-2017-0144",
-    "CVE-1337-1337"
-  ]
+  "field_name": "hostName",
+  "information": "none",
+  "max_items": 5000,
+  "number_value": "42",
+  "search_type": "string",
+  "string_value": "MS-AD-SRV-%"
 }
 ```
 
@@ -227,7 +227,7 @@ Search for matching IPS rules in Deep Security by CVE ID
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|vulnerabilities|[]string|None|True|CVEs to protect against|None|['CVE-2005-0045', 'CVE-2014-0160', 'CVE-2017-0144', 'CVE-1337-1337']|
+|vulnerabilities|[]string|None|True|CVEs to protect against|None|["CVE-2005-0045", "CVE-2014-0160", "CVE-2017-0144", "CVE-1337-1337"]|
 
 Example input:
 
