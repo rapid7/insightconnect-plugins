@@ -9,13 +9,12 @@
 # Requirements
 
 * Trend Micro Deep Security
+* [Create an API key for Deep Security](https://help.deepsecurity.trendmicro.com/api-key.html)
+* Create a new connection and enter the Deep Security Manager URL and API key
 
 # Documentation
 
 ## Setup
-
-* [Create an API key for Deep Security](https://help.deepsecurity.trendmicro.com/api-key.html)
-* Create a new connection and enter the Deep Security Manager URL and API key
 
 The connection configuration accepts the following parameters:
 
@@ -24,6 +23,18 @@ The connection configuration accepts the following parameters:
 |dsm_api_key|credential_secret_key|None|True|API key of the Deep Security Manager|None|12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234|
 |dsm_url|string|https://app.deepsecurity.trendmicro.com|True|URL of the Deep Security Manager|None|https://192.51.100.100:4119|
 |dsm_verify_ssl|boolean|True|True|Check the certificate of the Deep Security Manager|None|True|
+
+Example input:
+
+```
+{
+  "dsm_api_key": "12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234",
+  "dsm_url": "https://192.51.100.100:4119",
+  "dsm_verify_ssl": true
+}
+```
+
+
 
 ## Technical Details
 
@@ -48,11 +59,12 @@ Example input:
 
 ```
 {
-  "information": "none",
-  "max_items": 10,
-  "field_name": "hostName",
-  "search_type": "string",
-  "string_value": "MS-AD-SRV-%"
+  "vulnerabilities": [
+    "CVE-2005-0045",
+    "CVE-2014-0160",
+    "CVE-2017-0144",
+    "CVE-1337-1337"
+  ]
 }
 ```
 
@@ -176,8 +188,8 @@ Example input:
 
 ```
 {
-  "computer_or_policy": "policy",
-  "id": 23
+  "id": 23,
+  "scope": "policy"
 }
 ```
 
@@ -280,7 +292,15 @@ Example input:
 {
   "computer_or_policy": "policy",
   "id": 23,
-  "rules": [108, 6745, 2874, 2875, 2876, 3317, 3318]
+  "rules": [
+    108,
+    6745,
+    2874,
+    2875,
+    2876,
+    3317,
+    3318
+  ]
 }
 ```
 
