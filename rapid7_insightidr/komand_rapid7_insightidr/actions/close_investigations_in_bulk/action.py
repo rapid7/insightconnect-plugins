@@ -55,7 +55,7 @@ class CloseInvestigationsInBulk(komand.Action):
         except json.decoder.JSONDecodeError:
             self.logger.error(f'InsightIDR response: {response}')
             raise PluginException(
-                cause='The response from InsightIDR was not in the correct format.',
+                cause='The response from InsightIDR was not in the expected format.',
                 assistance='Contact support for help. See log for more details',
                 data=response
             )
