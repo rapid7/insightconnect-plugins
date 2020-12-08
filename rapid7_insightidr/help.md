@@ -38,7 +38,7 @@ Example input:
 
 #### Close Investigations in Bulk
 
-This action is used to close all investigations that match the parameters.
+This action is used to close all investigations that fall in a date range.
 
 ##### Input
 
