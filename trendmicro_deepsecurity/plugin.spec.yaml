@@ -57,7 +57,7 @@ actions:
         type: "[]string"
         description: CVEs to protect against
         required: true
-        example: ['CVE-2005-0045','CVE-2014-0160','CVE-2017-0144','CVE-1337-1337']
+        example: ["CVE-2005-0045","CVE-2014-0160","CVE-2017-0144","CVE-1337-1337"]
     output:
       ips_rules:
         title: IPS Rules
