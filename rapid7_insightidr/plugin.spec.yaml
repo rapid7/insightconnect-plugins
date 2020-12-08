@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 1.3.0
+version: 1.4.0
 vendor: rapid7
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_insightidr
@@ -493,4 +493,54 @@ actions:
         title: Events
         description: Events from logs
         type: "[]events"
+        required: true
+  close_investigations_in_bulk:
+    title: Close Investigations in Bulk
+    description: Close all investigations that match the parameters
+    input:
+      source:
+        title: Source
+        description: The name of an investigation source
+        type: string
+        example: MANUAL
+        default: MANUAL
+        required: false
+        enum:
+          - ALERT
+          - MANUAL
+          - HUNT
+      datetime_from:
+        title: Datetime From
+        description: An ISO formatted timestamp, default last week
+        type: string
+        example: 2018-07-01T00:00:00Z
+        required: false
+      datetime_to:
+        title: Datetime To
+        description: The category of alerts that should be closed, when empty use now
+        type: string
+        example: 2018-07-01T00:00:00Z
+        required: false
+      max_investigations_to_close:
+        title: Max Investigations to Close
+        description: The category of alerts that should be closed
+        type: integer
+        example: 10
+        required: false
+      alert_type:
+        title: Alert Type
+        description: The category of alerts that should be closed
+        type: string
+        example: Account Created
+        required: false
+    output:
+      ids:
+        title: IDs
+        description: The ids of the investigations that were closed by the request
+        type: "[]string"
+        required: true
+      num_closed:
+        title: Num Closed
+        description: The number of investigations closed by the request
+        type: integer
         required: true

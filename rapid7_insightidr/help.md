@@ -36,6 +36,50 @@ Example input:
 
 ### Actions
 
+#### Close Investigations in Bulk
+
+This action is used to close all investigations that match the parameters.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|alert_type|string|None|False|The category of alerts that should be closed|None|Account Created|
+|datetime_from|string|None|False|An ISO formatted timestamp, default last week|None|2018-07-01T00:00:00Z|
+|datetime_to|string|None|False|The category of alerts that should be closed, when empty use now|None|2018-07-01T00:00:00Z|
+|max_investigations_to_close|integer|None|False|The category of alerts that should be closed|None|10|
+|source|string|MANUAL|False|The name of an investigation source|['ALERT', 'MANUAL', 'HUNT']|MANUAL|
+
+Example input:
+
+```
+{
+  "alert_type": "Account Created",
+  "datetime_from": "2018-07-01T00:00:00Z",
+  "datetime_to": "2018-07-01T00:00:00Z",
+  "max_investigations_to_close": 10,
+  "source": "MANUAL"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ids|[]string|True|The ids of the investigations that were closed by the request|
+|num_closed|integer|True|The number of investigations closed by the request|
+
+Example output:
+
+```
+{
+  "ids": [
+    "6c7db8d1-abc5-b9da-dd71-1a3ffffe8a16"
+  ],
+  "num_closed": 3
+}
+```
+
 #### Get Query Results
 
 This action is used to get query results for a LEQL query by query ID.
@@ -328,6 +372,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.4.0 - New action Close Investigations in bulk
 * 1.3.0 - New action Get Query Results
 * 1.2.1 - Change default value in the `size` input parameter to 1000 in List Investigations action
 * 1.2.0 - New Action Assign User to Investigation
