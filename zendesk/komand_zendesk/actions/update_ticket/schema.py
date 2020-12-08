@@ -311,7 +311,7 @@ class UpdateTicketOutput(komand.Output):
           "order": 7
         },
         "group_id": {
-          "type": "integer",
+          "type": "string",
           "title": "Group ID",
           "order": 8
         },

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: zendesk
 title: Zendesk
 description: Regulate customer communications by managing tickets and users in Zendesk data
-version: 2.0.0
+version: 2.0.1
 vendor: rapid7
 support: community
 status: []
@@ -62,7 +62,7 @@ types:
       type: string
     group_id:
       title: Group ID
-      type: integer
+      type: string
     requester_id:
       title: Requester ID
       type: string
@@ -274,7 +274,7 @@ actions:
         required: false
       group_id:
         title: Group ID
-        type: integer
+        type: string
         description: Group ID
         required: false
       requester_id:

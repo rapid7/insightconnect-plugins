@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="zendesk-rapid7-plugin",
-      version="2.0.0",
+      version="2.0.1",
       description="Regulate customer communications by managing tickets and users in Zendesk data",
       author="rapid7",
       author_email="",
