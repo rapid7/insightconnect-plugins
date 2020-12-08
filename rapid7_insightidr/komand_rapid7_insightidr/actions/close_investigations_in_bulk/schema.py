@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Close all investigations that match the parameters"
+    DESCRIPTION = "This action is used to close all investigations that fall within a date range."
 
 
 class Input:
@@ -41,7 +41,7 @@ class CloseInvestigationsInBulkInput(komand.Input):
     "datetime_to": {
       "type": "string",
       "title": "Datetime To",
-      "description": "The category of alerts that should be closed, when empty use now",
+      "description": "An ISO formatted timestamp of the ending date range, when empty use now",
       "order": 3
     },
     "max_investigations_to_close": {
