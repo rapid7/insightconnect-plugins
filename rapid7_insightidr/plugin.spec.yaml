@@ -523,7 +523,7 @@ actions:
         required: false
       max_investigations_to_close:
         title: Max Investigations to Close
-        description: The category of alerts that should be closed
+        description: An optional maximum number of alerts to close with this request. If this parameter is not specified then there is no maximum. If this limit is exceeded, then an Error is returned
         type: integer
         example: 10
         required: false

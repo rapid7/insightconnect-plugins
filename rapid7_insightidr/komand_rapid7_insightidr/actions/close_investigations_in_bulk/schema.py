@@ -47,7 +47,7 @@ class CloseInvestigationsInBulkInput(komand.Input):
     "max_investigations_to_close": {
       "type": "integer",
       "title": "Max Investigations to Close",
-      "description": "The category of alerts that should be closed",
+      "description": "An optional maximum number of alerts to close with this request. If this parameter is not specified then there is no maximum. If this limit is exceeded, then an Error is returned",
       "order": 4
     },
     "source": {
