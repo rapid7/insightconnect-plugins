@@ -45,8 +45,8 @@ This action is used to close all investigations that match the parameters.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |alert_type|string|None|False|The category of alerts that should be closed|None|Account Created|
-|datetime_from|string|None|False|An ISO formatted timestamp, default last week|None|2018-07-01T00:00:00Z|
-|datetime_to|string|None|False|The category of alerts that should be closed, when empty use now|None|2018-07-01T00:00:00Z|
+|datetime_from|string|None|False|An ISO formatted timestamp, default last week|None|2018-07-01 00:00:00|
+|datetime_to|string|None|False|The category of alerts that should be closed, when empty use now|None|2018-07-01 00:00:00|
 |max_investigations_to_close|integer|None|False|The category of alerts that should be closed|None|10|
 |source|string|MANUAL|False|The name of an investigation source|['ALERT', 'MANUAL', 'HUNT']|MANUAL|
 
@@ -372,7 +372,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.4.0 - New action Close Investigations in bulk
+* 1.4.0 - New action Close Investigations in Bulk
 * 1.3.0 - New action Get Query Results
 * 1.2.1 - Change default value in the `size` input parameter to 1000 in List Investigations action
 * 1.2.0 - New Action Assign User to Investigation
