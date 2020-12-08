@@ -1,5 +1,5 @@
 {
-	"spec": "d2ca34633d754e128751788b5aae2137",
+	"spec": "6961141510dbff9c833ec50e85d4ad25",
 	"manifest": "a906e2e8b4f751f76d32e1a9bb44c995",
 	"setup": "8bdfea310200c087187bc3f06b5e5a33",
 	"schemas": [
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "close_investigations_in_bulk/schema.py",
-			"hash": "bc60f816bf00cab1aae055f04661ff60"
+			"hash": "fbddd8d67edf7c0df6125ff08d0c7827"
 		},
 		{
 			"identifier": "list_investigations/schema.py",

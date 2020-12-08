@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action is used to close all investigations that fall within a date range."
+    DESCRIPTION = "This action is used to close all investigations that fall within a date range"
 
 
 class Input:
@@ -35,13 +35,17 @@ class CloseInvestigationsInBulkInput(komand.Input):
     "datetime_from": {
       "type": "string",
       "title": "Datetime From",
+      "displayType": "date",
       "description": "An ISO formatted timestamp, default last week",
+      "format": "date-time",
       "order": 2
     },
     "datetime_to": {
       "type": "string",
       "title": "Datetime To",
+      "displayType": "date",
       "description": "An ISO formatted timestamp of the ending date range, when empty use now",
+      "format": "date-time",
       "order": 3
     },
     "max_investigations_to_close": {

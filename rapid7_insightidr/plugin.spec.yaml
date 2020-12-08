@@ -496,7 +496,7 @@ actions:
         required: true
   close_investigations_in_bulk:
     title: Close Investigations in Bulk
-    description: This action is used to close all investigations that fall within a date range.
+    description: This action is used to close all investigations that fall within a date range
     input:
       source:
         title: Source
@@ -512,13 +512,13 @@ actions:
       datetime_from:
         title: Datetime From
         description: An ISO formatted timestamp, default last week
-        type: string
+        type: date
         example: 2018-07-01T00:00:00Z
         required: false
       datetime_to:
         title: Datetime To
         description: An ISO formatted timestamp of the ending date range, when empty use now
-        type: string
+        type: date
         example: 2018-07-01T00:00:00Z
         required: false
       max_investigations_to_close:

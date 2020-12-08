@@ -36,8 +36,6 @@ class CloseInvestigationsInBulk(komand.Action):
             timestamp_to = datetime.now().replace(microsecond=0).isoformat()
             timestamp_to = f"{timestamp_to}Z"
 
-        self.logger.info(f"{timestamp_from}")
-
         response = request.resource_request(
             endpoint,
             'post',
