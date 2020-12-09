@@ -24,6 +24,7 @@ class BlacklistUrl(insightconnect_plugin_runtime.Action):
         normalized_urls = []
         for url in urls:
             if url and not url.startswith("http"):
+                self.logger.info("URL did not start with http prefix, prefixing URL...")
                 url = f"http://{url}"
 
             normalized_urls.append(

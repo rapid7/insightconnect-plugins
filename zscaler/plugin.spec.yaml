@@ -233,7 +233,7 @@ actions:
         required: true
   blacklist_url:
     title: Blacklist URL
-    description: Blacklist or unblacklist a URLs
+    description: Blacklist or unblacklist URLs
     input:
       urls:
         title: URLs
