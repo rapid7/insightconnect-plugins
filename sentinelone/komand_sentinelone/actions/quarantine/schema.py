@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     AGENT = "agent"
+    CASE_SENSITIVE = "case_sensitive"
     QUARANTINE_STATE = "quarantine_state"
     WHITELIST = "whitelist"
     
@@ -29,6 +30,13 @@ class QuarantineInput(komand.Input):
       "description": "Agent to perform quarantine action on. Accepts IP address, MAC address, hostname, UUID or agent ID",
       "order": 1
     },
+    "case_sensitive": {
+      "type": "boolean",
+      "title": "Case Sensitive",
+      "description": "Looks up the specified Agent in a case-sensitive manner. Setting this value to false may result in longer run times and unintended results",
+      "default": true,
+      "order": 4
+    },
     "quarantine_state": {
       "type": "boolean",
       "title": "Quarantine State",
@@ -47,6 +55,7 @@ class QuarantineInput(komand.Input):
   },
   "required": [
     "agent",
+    "case_sensitive",
     "quarantine_state"
   ]
 }
