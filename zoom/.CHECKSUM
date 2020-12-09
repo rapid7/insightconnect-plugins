@@ -1,5 +1,5 @@
 {
-	"spec": "fa9e97db312359b2ee349ddca6deb16f",
+	"spec": "149de67bf79bee3c1a06f6392815d192",
 	"manifest": "12b838a86ddb27376902e5b30c7381b2",
 	"setup": "ef5528db64f23d2f468414430c6cb421",
 	"schemas": [
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "retrieve_user_activity_events/schema.py",
-			"hash": "09485261605408686aa0578e8f7a136b"
+			"hash": "db7734e31f3cf3f878ae8dd108b228a5"
 		},
 		{
 			"identifier": "user_activity_event/schema.py",

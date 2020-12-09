@@ -371,7 +371,7 @@ tasks:
         - "All"
         example: "All"
     output:
-      user_activity_events:
+      events:
         title: User Activity Events
         description: User Activity
         type: '[]user_activity'

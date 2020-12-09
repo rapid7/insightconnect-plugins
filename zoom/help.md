@@ -247,11 +247,31 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|user_activity_events|[]user_activity|False|User Activity|
+|events|[]user_activity|False|User Activity|
 
 Example output:
 
 ```
+{
+  "events": [
+    {
+      "version": "5.4.58903.1122",
+      "client_type": "mac",
+      "email": "zyoutz+user@example.com",
+      "ip_address": "208.118.227.19",
+      "time": "2020-12-06T17:44:46Z",
+      "type": "Sign in"
+    },
+    {
+      "time": "2020-12-06T23:18:37Z",
+      "type": "Sign out",
+      "version": "5.4.58903.1122",
+      "client_type": "mac",
+      "email": "zyoutz+user@example.com",
+      "ip_address": "208.118.227.19"
+    }
+  ]
+}
 ```
 
 ### Custom Output Types

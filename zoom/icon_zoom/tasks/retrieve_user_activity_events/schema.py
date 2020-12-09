@@ -16,7 +16,7 @@ class State:
     
 
 class Output:
-    USER_ACTIVITY_EVENTS = "user_activity_events"
+    EVENTS = "events"
     
 
 class RetrieveUserActivityEventsInput(insightconnect_plugin_runtime.Input):
@@ -73,7 +73,7 @@ class RetrieveUserActivityEventsOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "user_activity_events": {
+    "events": {
       "type": "array",
       "title": "User Activity Events",
       "description": "User Activity",

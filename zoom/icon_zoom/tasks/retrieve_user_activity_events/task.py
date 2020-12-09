@@ -43,4 +43,4 @@ class RetrieveUserActivityEvents(insightconnect_plugin_runtime.Task):
             if activity_type == "All" or activity_type == event.get("type"):
                 new_events.append(event)
 
-        return {Output.USER_ACTIVITY_EVENTS: new_events}, {State.LAST_EVENT_TIME: last_event_time}
+        return {Output.EVENTS: new_events}, {State.LAST_EVENT_TIME: last_event_time}
