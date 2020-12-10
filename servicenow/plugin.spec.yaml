@@ -87,7 +87,7 @@ actions:
     description: Create a new ServiceNow Incident record
     input:
       caller:
-        title: Caller / User ID
+        title: Caller/User ID
         description: User ID of incident caller
         type: string
         required: false
