@@ -18,7 +18,7 @@ class LookupUrl(insightconnect_plugin_runtime.Action):
         lookup_urls = []
         for url in urls:
             if url and not url.startswith("http"):
-                self.logger.info("URL did not start with http prefix, prefixing URL...")
+                self.logger.info(f"URL did not begin with protocol, prefixing with http://{url} ...")
                 url = f"http://{url}"
 
             lookup_urls.append(
