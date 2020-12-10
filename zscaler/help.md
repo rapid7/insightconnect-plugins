@@ -11,6 +11,7 @@
 
 * [Requires a Zscaler organization API Key](https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey)
 * Requires a Zscaler username and password
+* [Requires a Zscaler base URI](https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey), such as: https://admin.zscalerbeta.net 
 
 # Documentation
 
@@ -247,7 +248,7 @@ _This plugin does not contain any triggers._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Digital Cerificate|string|False|Digital cerificate|
+|Digital Certificate|string|False|Digital certificate|
 |File Size|integer|False|File size|
 |File Type|string|False|File type|
 |Issuer|string|False|Issuer|

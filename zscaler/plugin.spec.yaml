@@ -61,9 +61,9 @@ types:
       required: false
   FileProperties:
     DigitalCerificate:
-      title: Digital Cerificate
+      title: Digital Certificate
       type: string
-      description: Digital cerificate
+      description: Digital certificate
       required: false
     FileSize:
       title: File Size
