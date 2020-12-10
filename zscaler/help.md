@@ -308,6 +308,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.1 - Usability updates and updated icon
 * 1.2.0 - New action Get Sandbox Report for Hash
 * 1.1.2 - Support both domains and URL inputs in the Blacklist URL and Lookup URL actions
 * 1.1.1 - Improve documentation around action inputs
