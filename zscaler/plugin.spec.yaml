@@ -199,9 +199,9 @@ connection:
   url:
     title: URL
     type: string
-    description: Base URL, see https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details
+    description: Base URL, ex. 'https://admin.zscalerbeta.net'. See https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details
     required: true
-    example: admin.zscalerbeta.net
+    example: https://admin.zscalerbeta.net
   api_key:
     title: API Key
     type: credential_secret_key

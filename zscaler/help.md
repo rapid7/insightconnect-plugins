@@ -33,7 +33,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|Enter organization API key|None|14M2d25A7c12|
 |credentials|credential_username_password|None|True|Username and password to access Zscaler|None|{"username":"user@example.com", "password":"mypassword"}|
-|url|string|None|True|Base URL, see https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details|None|admin.zscalerbeta.net|
+|url|string|None|True|Base URL, ex. 'https://admin.zscalerbeta.net'. See https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details|None|https://admin.zscalerbeta.net|
 
 Example input:
 
@@ -44,7 +44,7 @@ Example input:
     "username":"user@example.com",
     "password":"mypassword"
   },
-  "url": "admin.zscalerbeta.net"
+  "url": "https://admin.zscalerbeta.net"
 }
 ```
 
