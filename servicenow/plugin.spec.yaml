@@ -10,6 +10,7 @@ support: rapid7
 status: []
 resources:
   vendor_url: https://www.servicenow.com/
+  docs_url: https://docs.rapid7.com/insightconnect/servicenow
 tags:
 - servicenow
 - incident
