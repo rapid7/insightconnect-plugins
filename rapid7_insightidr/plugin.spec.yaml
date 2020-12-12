@@ -517,7 +517,7 @@ actions:
         required: false
       datetime_to:
         title: Datetime To
-        description: An ISO formatted timestamp of the ending date range, when empty use now
+        description: An ISO formatted timestamp of the ending date range, current time if left blank
         type: date
         example: 2018-07-01T00:00:00Z
         required: false
