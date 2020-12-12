@@ -536,7 +536,7 @@ actions:
     output:
       ids:
         title: IDs
-        description: The ids of the investigations that were closed by the request
+        description: The IDs of the investigations that were closed by the request
         type: "[]string"
         required: true
       num_closed:
