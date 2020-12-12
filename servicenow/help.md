@@ -753,7 +753,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.2.0 - Add input fields to Create Incident and Update Incident action instead of JSON object
+* 5.0.0 - Add input fields to Create Incident and Update Incident action instead of JSON object
 * 4.1.0 - Add trigger Incident Created
 * 4.0.0 - New Number output to create incident action
 * 3.1.1 - New spec and help.md format for the Extension Library

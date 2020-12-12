@@ -55,7 +55,7 @@ class CreateIncidentInput(insightconnect_plugin_runtime.Input):
     },
     "caller": {
       "type": "string",
-      "title": "Caller / User ID",
+      "title": "Caller/User ID",
       "description": "User ID of incident caller",
       "order": 1
     },
