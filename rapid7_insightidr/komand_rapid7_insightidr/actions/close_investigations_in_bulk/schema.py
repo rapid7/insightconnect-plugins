@@ -44,14 +44,14 @@ class CloseInvestigationsInBulkInput(komand.Input):
       "type": "string",
       "title": "Datetime To",
       "displayType": "date",
-      "description": "An ISO formatted timestamp of the ending date range, when empty use now",
+      "description": "An ISO formatted timestamp of the ending date range, current time if left blank",
       "format": "date-time",
       "order": 3
     },
     "max_investigations_to_close": {
       "type": "integer",
       "title": "Max Investigations to Close",
-      "description": "An optional maximum number of alerts to close with this request. If this parameter is not specified then there is no maximum. If this limit is exceeded, then an Error is returned",
+      "description": "An optional maximum number of alerts to close with this request. If this parameter is not specified then there is no maximum. If this limit is exceeded, then an error is returned",
       "order": 4
     },
     "source": {
@@ -83,7 +83,7 @@ class CloseInvestigationsInBulkOutput(komand.Output):
     "ids": {
       "type": "array",
       "title": "IDs",
-      "description": "The ids of the investigations that were closed by the request",
+      "description": "The IDs of the investigations that were closed by the request",
       "items": {
         "type": "string"
       },
