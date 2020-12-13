@@ -142,22 +142,20 @@ class Connection(komand.Connection):
             "data": {"module": module}
         })
 
-    def get_threat_summary(self):
-        """ Output a summary of current threats in the system grouped by
-        mitigation level. """
+    def get_threat_summary(self, limit: int = 10, offset: int = 0):
+        endpoint = f"threats?limit={limit}&skip={offset}"
 
-        endpoint = self.url + 'web/api/v2.0/threats'
-        self.logger.info("Getting summary of threats from: " + endpoint)
-        headers = self.make_token_header()
-        results = requests.get(endpoint, headers=headers)
+        threats = self._call_api("GET", endpoint)
+        all_threads_count = threats["pagination"]["totalItems"]
+        all_threads_data = threats["data"]
 
-        if results.status_code is not 200:
-            raise ConnectionTestException(
-                cause="Request for threat summary failed at: " + endpoint,
-                assistance="Repsonse was: " + results.text
-            )
+        while all_threads_count > len(all_threads_data):
+            offset += limit
+            next_threats = self._call_api("GET", endpoint)
+            all_threads_data += next_threats["data"]
 
-        return results.json()
+        threats["data"] = all_threads_data
+        return threats
 
     def blacklist_by_content_hash(self, hash_value: str):
         endpoint = self.url + 'web/api/v2.0/threats/add-to-blacklist'
