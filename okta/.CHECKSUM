@@ -1,71 +1,75 @@
 {
-	"spec": "2d0ea679599bfea6ee52821da3c13990",
-	"manifest": "05174b189f692d9a9f5c432f99622449",
-	"setup": "245ebde1530b8d74b515d2307a47df78",
+	"spec": "8b4d2912c050c32df98f4c3037a6b14d",
+	"manifest": "dc31b1edaaaeae2d4591468ee9b02ba9",
+	"setup": "d2bfbb91a3df01a2c522b03dde4cbcc7",
 	"schemas": [
 		{
 			"identifier": "add_user_to_group/schema.py",
-			"hash": "2f182057461654f58f8ccf74cd0780ba"
+			"hash": "eaa4ed529b9e0a7df4c510fb47cf16bc"
 		},
 		{
 			"identifier": "assign_user_to_app_sso/schema.py",
-			"hash": "70d73e12fb323a5f1a88de381a016d49"
+			"hash": "dff59a3cf4584d040839330abff2847c"
 		},
 		{
 			"identifier": "create_user/schema.py",
-			"hash": "578c665e836442dd8f18abebd4481380"
+			"hash": "f1e04c46db7e64bc90bdce33d9b51af4"
 		},
 		{
 			"identifier": "deactivate_user/schema.py",
-			"hash": "6742054ef385936bf5989b25356ec62e"
+			"hash": "777fd0654662ead8300f4be0bee741dd"
 		},
 		{
 			"identifier": "delete_user/schema.py",
-			"hash": "45cb3c3622d55f3e78ae2f5cedac3b75"
+			"hash": "3269bc76cd60ade5dd0fea8c1a17b8c1"
 		},
 		{
 			"identifier": "get_factors/schema.py",
-			"hash": "a1896d68c1c99b7795c0109faeedcbd5"
+			"hash": "6603ef12b04e9bf8dd1768197120a568"
 		},
 		{
 			"identifier": "get_user/schema.py",
-			"hash": "a31c8d8b90fc66006a37f748fed36c8f"
+			"hash": "352e720eb7fe8ab735908d3ef1682b7f"
 		},
 		{
 			"identifier": "list_groups/schema.py",
-			"hash": "935dc1d6162dc29c24fd224668b4552f"
+			"hash": "7877693b0ddc749d16e94f1af31a089e"
 		},
 		{
 			"identifier": "remove_user_from_group/schema.py",
-			"hash": "7dd210127b90c220431672d10b1f0801"
+			"hash": "1cd395c5cd669138fcf40508097d7e5d"
 		},
 		{
 			"identifier": "reset_factors/schema.py",
-			"hash": "7051e1a894b1a309e62b5ec118abe4b8"
+			"hash": "cb546f1c33cc997ad4ba7ada4431bc20"
 		},
 		{
 			"identifier": "send_push/schema.py",
-			"hash": "78caee720226e944c8fb997f60dc4843"
+			"hash": "2a19ed90fb80bf3d55a8bf2e15080431"
 		},
 		{
 			"identifier": "suspend_user/schema.py",
-			"hash": "f59d4b691fea385fd301029241e6a77a"
+			"hash": "411c37b686d4b11aa7b3c76f8d07fce4"
 		},
 		{
 			"identifier": "unsuspend_user/schema.py",
-			"hash": "ab62ae562b35b25fe96493ee49bf0cdd"
+			"hash": "70fe7d7835586cdfb4868cdac12e276b"
 		},
 		{
 			"identifier": "update_blacklist_zones/schema.py",
-			"hash": "b9b32e17a9f26153a16b258dc9ec97ce"
+			"hash": "ece9c3bb6c1bf84da117a4ebd00695a1"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "bfa42ee8af8ffff15a607a85326e9e11"
+			"hash": "b7f5e5f9977588267b9ee7d8c86bb34d"
+		},
+		{
+			"identifier": "retrieve_system_log_events/schema.py",
+			"hash": "ca0d58803de011b10358f11934e63342"
 		},
 		{
 			"identifier": "users_added_removed_from_group/schema.py",
-			"hash": "520df88feacc02d2bae4d7c04d513eaa"
+			"hash": "43490fe8bdc5f11fecbcf612f755d263"
 		}
 	]
 }

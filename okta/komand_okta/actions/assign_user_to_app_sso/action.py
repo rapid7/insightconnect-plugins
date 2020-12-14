@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AssignUserToAppSsoInput, AssignUserToAppSsoOutput, Input, Component
 # Custom imports below
 import requests
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class AssignUserToAppSso(komand.Action):
+class AssignUserToAppSso(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name='assign_user_to_app_sso',

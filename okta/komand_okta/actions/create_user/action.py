@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CreateUserInput, CreateUserOutput, Input, Component
 # Custom imports below
 import json
 import requests
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class CreateUser(komand.Action):
+class CreateUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name='create_user',
@@ -66,7 +66,7 @@ class CreateUser(komand.Action):
                 if data['transitioningToStatus'] == 'ACTIVE':
                     self.logger.info("Okta: In-progress asynchronous status transition")
             # Possibly None is not of type u'string' on some null keys in response
-            return komand.helper.clean(data)
+            return insightconnect_plugin_runtime.helper.clean(data)
 
         # Failure
         else:

@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 import time
 from .schema import UsersAddedRemovedFromGroupInput, UsersAddedRemovedFromGroupOutput, Input, Output, Component
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_okta.util import helpers
 
 
-class UsersAddedRemovedFromGroup(komand.Trigger):
+class UsersAddedRemovedFromGroup(insightconnect_plugin_runtime.Trigger):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -35,7 +35,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                                       assistance="Double-check that group ID's are all valid.",
                                       data=response.text)
             helpers.raise_based_on_error_code(response)
-            data = komand.helper.clean(data)
+            data = insightconnect_plugin_runtime.helper.clean(data)
             current_list.append({group: data})
 
             # Get group names
@@ -64,7 +64,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                                           assistance="Double check that group ID's are all valid.",
                                           data=response.text)
                 helpers.raise_based_on_error_code(response)
-                data = komand.helper.clean(data)
+                data = insightconnect_plugin_runtime.helper.clean(data)
                 new_list.append({group: data})
 
             added = list()

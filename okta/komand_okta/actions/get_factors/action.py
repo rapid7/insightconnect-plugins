@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetFactorsInput, GetFactorsOutput, Input, Output, Component
 # Custom imports below
 import requests
 import json
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class GetFactors(komand.Action):
+class GetFactors(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

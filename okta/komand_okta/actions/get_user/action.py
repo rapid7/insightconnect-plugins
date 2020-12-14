@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetUserInput, GetUserOutput, Input, Output, Component
 # Custom imports below
 import requests
 import urllib.parse
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class GetUser(komand.Action):
+class GetUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name='get_user',
@@ -27,7 +27,7 @@ class GetUser(komand.Action):
         data[Output.FOUND] = True
 
         if response.status_code == 200:
-            return komand.helper.clean(data)
+            return insightconnect_plugin_runtime.helper.clean(data)
 
         if 'errorSummary' in data:
             if response.status_code == 404:

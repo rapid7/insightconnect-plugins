@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
-    from komand_okta import connection, actions, triggers
+    import insightconnect_plugin_runtime
+    from komand_okta import connection, actions, triggers, tasks
 
-    class ICONOkta(komand.Plugin):
+    class ICONOkta(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -64,9 +64,11 @@ def main():
 
             self.add_action(actions.UpdateBlacklistZones())
 
+            self.add_task(tasks.RetrieveSystemLogEvents())
+
 
     """Run plugin"""
-    cli = komand.CLI(ICONOkta())
+    cli = insightconnect_plugin_runtime.CLI(ICONOkta())
     cli.run()
 
 

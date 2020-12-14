@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import UpdateBlacklistZonesInput, UpdateBlacklistZonesOutput, Input, Output, Component
 # Custom imports below
 import validators
 import requests
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class UpdateBlacklistZones(komand.Action):
+class UpdateBlacklistZones(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -87,7 +87,7 @@ class UpdateBlacklistZones(komand.Action):
             )
 
         return {
-            Output.ZONE_LIST: komand.helper.clean(response.json())
+            Output.ZONE_LIST: insightconnect_plugin_runtime.helper.clean(response.json())
         }
 
     @staticmethod

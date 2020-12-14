@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import DeleteUserInput, DeleteUserOutput, Input, Output, Component
 # Custom imports below
 import requests
 import urllib.parse
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class DeleteUser(komand.Action):
+class DeleteUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name='delete_user',

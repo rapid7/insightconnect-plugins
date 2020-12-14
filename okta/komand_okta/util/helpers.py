@@ -1,7 +1,7 @@
 import urllib.parse
 from requests import Response
 import requests
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 
 def group_response(response, user_id):

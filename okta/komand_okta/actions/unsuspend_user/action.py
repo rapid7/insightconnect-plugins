@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import UnsuspendUserInput, UnsuspendUserOutput, Input, Output, Component
 # Custom imports below
 import requests
 import urllib.parse
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class UnsuspendUser(komand.Action):
+class UnsuspendUser(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

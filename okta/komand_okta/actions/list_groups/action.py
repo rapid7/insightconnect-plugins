@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ListGroupsInput, ListGroupsOutput, Input, Output, Component
 # Custom imports below
 import requests
 import urllib.parse
 from komand_okta.util.helpers import raise_based_on_error_code
 
-class ListGroups(komand.Action):
+class ListGroups(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name='list_groups',

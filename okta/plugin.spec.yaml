@@ -724,3 +724,32 @@ actions:
         description: Updated zone list
         type: zone_list
         required: true
+tasks:
+  retrieve_system_log_events:
+    title: Retrieve System Log Events
+    description: Retrieve okta system log events
+    input:
+      filter:
+        title: Filter
+        description: Filter to limit events returned
+        type: string
+        required: false
+        example: "event_type+eq+%22user.session.start%22"
+    output:
+      events:
+        title: System Log Events
+        description: System Logs
+        type: '[]object'
+        required: false
+    schedule:
+      title: Schedule for retrieving events
+      type: string
+      enum:
+      - "cron"
+      - "minutes"
+      default: minutes
+    state:
+      last_event_time:
+        title: Last Event Time
+        description: The datetime of the last retrieved system log event
+        type: string
