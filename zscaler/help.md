@@ -5,12 +5,13 @@
 # Key Features
 
 * Lookup categories for a given URL
-* Add or remove URLs from blacklist
+* Blacklist or unblacklist URLs
 
 # Requirements
 
 * [Requires a Zscaler organization API Key](https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey)
 * Requires a Zscaler username and password
+* [Requires a Zscaler base URI](https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey), such as: https://admin.zscalerbeta.net 
 
 # Documentation
 
@@ -33,7 +34,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|Enter organization API key|None|14M2d25A7c12|
 |credentials|credential_username_password|None|True|Username and password to access Zscaler|None|{"username":"user@example.com", "password":"mypassword"}|
-|url|string|None|True|Base URL, see https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details|None|admin.zscalerbeta.net|
+|url|string|None|True|Base URL, ex. 'https://admin.zscalerbeta.net'. See https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details|None|https://admin.zscalerbeta.net|
 
 Example input:
 
@@ -44,7 +45,7 @@ Example input:
     "username":"user@example.com",
     "password":"mypassword"
   },
-  "url": "admin.zscalerbeta.net"
+  "url": "https://admin.zscalerbeta.net"
 }
 ```
 
@@ -247,7 +248,7 @@ _This plugin does not contain any triggers._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Digital Cerificate|string|False|Digital cerificate|
+|Digital Certificate|string|False|Digital certificate|
 |File Size|integer|False|File size|
 |File Type|string|False|File type|
 |Issuer|string|False|Issuer|
@@ -308,6 +309,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.1 - Usability updates and updated icon
 * 1.2.0 - New action Get Sandbox Report for Hash
 * 1.1.2 - Support both domains and URL inputs in the Blacklist URL and Lookup URL actions
 * 1.1.1 - Improve documentation around action inputs
