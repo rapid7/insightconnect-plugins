@@ -17,10 +17,12 @@ class UrlDecode(insightconnect_plugin_runtime.Action):
         url_v2 = 'https://urldefense.proofpoint.com/'  # This is good for v1 as well
         url_v3 = 'https://urldefense.com'
 
+        in_url = in_url.replace("hxxp", "http").replace("[.]", ".")
+
         if in_url.startswith(url_v2) or in_url.startswith(url_v3):
             encoded_url = params.get("encoded_url")
         else:  # We assume a v2 encoded URL, this is legacy behavior
-            encoded_url = f"https://urldefense.proofpoint.com/v2/url?u={in_url}"
+            encoded_url = f"https://urldefense.proofpoint.com/v2/url?u={in_url}&d="
 
         decoder = URLDefenseDecoder()
 
@@ -31,4 +33,3 @@ class UrlDecode(insightconnect_plugin_runtime.Action):
         except (Exception, ValueError) as e:
             self.logger.error(f"Unexpected issue occurred decoding URL: {e}")
             return {Output.DECODED_URL: in_url, Output.DECODED: False}
-
