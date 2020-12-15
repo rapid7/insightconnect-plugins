@@ -25,6 +25,16 @@ The connection configuration accepts the following parameters:
 |dsm_url|string|https://app.deepsecurity.trendmicro.com|True|URL of the Deep Security Manager|None|https://192.51.100.100:4119|
 |dsm_verify_ssl|boolean|True|True|Check the certificate of the Deep Security Manager|None|True|
 
+Example input:
+
+```
+{
+  "dsm_api_key": "12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234",
+  "dsm_url": "https://192.51.100.100:4119",
+  "dsm_verify_ssl": true
+}
+```
+
 ## Technical Details
 
 ### Actions
@@ -48,9 +58,10 @@ Example input:
 
 ```
 {
-  "information": "none",
-  "max_items": 10,
   "field_name": "hostName",
+  "information": "none",
+  "max_items": 5000,
+  "number_value": "42",
   "search_type": "string",
   "string_value": "MS-AD-SRV-%"
 }
@@ -176,8 +187,8 @@ Example input:
 
 ```
 {
-  "computer_or_policy": "policy",
-  "id": 23
+  "id": 23,
+  "scope": "policy"
 }
 ```
 
@@ -215,7 +226,7 @@ Search for matching IPS rules in Deep Security by CVE ID
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|vulnerabilities|[]string|None|True|CVEs to protect against|None|['CVE-2005-0045', 'CVE-2014-0160', 'CVE-2017-0144', 'CVE-1337-1337']|
+|vulnerabilities|[]string|None|True|CVEs to protect against|None|["CVE-2005-0045", "CVE-2014-0160", "CVE-2017-0144", "CVE-1337-1337"]|
 
 Example input:
 
@@ -280,7 +291,15 @@ Example input:
 {
   "computer_or_policy": "policy",
   "id": 23,
-  "rules": [108, 6745, 2874, 2875, 2876, 3317, 3318]
+  "rules": [
+    108,
+    6745,
+    2874,
+    2875,
+    2876,
+    3317,
+    3318
+  ]
 }
 ```
 
@@ -330,6 +349,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.1 - Improve the search for IPS rules
 * 2.2.0 - Add new action Search Computers to receive a list and details of computers matching the search criteria
 * 2.1.0 - Add new actions Get Details and List to receive assigned IPS rules from computers and policies
 * 2.0.0 - Add an option to toggle DSM certificate verification in the connection
