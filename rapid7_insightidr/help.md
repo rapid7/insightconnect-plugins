@@ -328,7 +328,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.3.1 - Change input ID description in Get Query Results action
+* 1.3.1 - Fix ID input description in Get Query Results action
 * 1.3.0 - New action Get Query Results
 * 1.2.1 - Change default value in the `size` input parameter to 1000 in List Investigations action
 * 1.2.0 - New Action Assign User to Investigation
