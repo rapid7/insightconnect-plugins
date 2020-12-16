@@ -3,7 +3,7 @@ import time
 from .schema import GetThreatsInput, GetThreatsOutput, Input, Output
 # Custom imports below
 from datetime import datetime
-
+import traceback
 
 class GetThreats(komand.Trigger):
 
@@ -50,4 +50,6 @@ class GetThreats(komand.Trigger):
     def send_first_threat(self, data):
         threat = data[0]
         self.logger.info("Threat found: " + threat["id"])
-        self.send({Output.THREAT: komand.helper.clean(threat)})
+        cleaned = komand.helper.clean(threat)
+        self.logger.info("Successful clean")
+        self.send({Output.THREAT: cleaned})

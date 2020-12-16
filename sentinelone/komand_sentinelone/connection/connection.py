@@ -325,6 +325,7 @@ class Connection(komand.Connection):
             if full_response:
                 return response
 
+            self.logger.info(f"RESPONSE IS: {response.json()}")
             return response.json()
         except requests.HTTPError:
             raise Exception("API call failed: " + response.text)

@@ -22,5 +22,5 @@ class AgentsDecommission(komand.Action):
             )
 
         return {
-            Output.AFFECTED: self.connection.agents_action("decommission", agent_filter).get("affected", 0)
+            Output.AFFECTED: self.connection.agents_action("decommission", agent_filter).get("data").get("affected", 0)
         }
