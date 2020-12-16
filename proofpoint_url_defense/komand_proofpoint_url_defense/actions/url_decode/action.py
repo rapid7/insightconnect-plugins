@@ -20,7 +20,7 @@ class UrlDecode(insightconnect_plugin_runtime.Action):
         in_url = in_url.replace("hxxp", "http").replace("[.]", ".")
 
         if in_url.startswith(url_v2) or in_url.startswith(url_v3):
-            encoded_url = params.get("encoded_url")
+            encoded_url = in_url
         else:  # We assume a v2 encoded URL, this is legacy behavior
             encoded_url = f"https://urldefense.proofpoint.com/v2/url?u={in_url}&d="
 
