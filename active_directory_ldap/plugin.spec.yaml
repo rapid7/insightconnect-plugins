@@ -53,6 +53,7 @@ connection:
     description: Username and password
     required: true
     example: '{"username":"user1", "password":"mypassword"}'
+
 actions:
   query:
     title: Query

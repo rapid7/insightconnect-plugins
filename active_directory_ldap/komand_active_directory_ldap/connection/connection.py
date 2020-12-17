@@ -37,7 +37,7 @@ class Connection(komand.Connection):
                                     auto_encode=True,
                                     auto_escape=True,
                                     auto_bind=True,
-                                    auto_referrals=False,
+                                    auto_referrals=True,
                                     authentication=ldap3.NTLM)
         except exceptions.LDAPBindError as e:
             self.logger.error(f'ldap3 returned the following error {e}')
@@ -54,7 +54,7 @@ class Connection(komand.Connection):
                 conn = ldap3.Connection(server=server,
                                         user=user_name,
                                         password=password,
-                                        auto_referrals=False,
+                                        auto_referrals=True,
                                         auto_bind=True)
             except exceptions.LDAPBindError as e:
                 self.logger.error(f'ldap3 returned the following error {e}')
