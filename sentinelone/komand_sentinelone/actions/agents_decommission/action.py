@@ -1,9 +1,9 @@
-import komand
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import AgentsDecommissionInput, AgentsDecommissionOutput, Input, Output, Component
 
 
-class AgentsDecommission(komand.Action):
+class AgentsDecommission(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

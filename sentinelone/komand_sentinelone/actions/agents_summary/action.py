@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AgentsSummaryInput, AgentsSummaryOutput, Input, Output, Component
 from komand_sentinelone.util.helper import Helper
 
 
-class AgentsSummary(komand.Action):
+class AgentsSummary(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

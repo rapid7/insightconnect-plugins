@@ -1,8 +1,8 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AgentsConnectInput, AgentsConnectOutput, Input, Output, Component
 
 
-class AgentsConnect(komand.Action):
+class AgentsConnect(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

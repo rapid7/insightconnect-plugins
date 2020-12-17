@@ -1,9 +1,9 @@
-import komand
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import AgentsUninstallInput, AgentsUninstallOutput, Input, Output, Component
 
 
-class AgentsUninstall(komand.Action):
+class AgentsUninstall(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

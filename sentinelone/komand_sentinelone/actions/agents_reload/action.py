@@ -1,8 +1,8 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AgentsReloadInput, AgentsReloadOutput, Input, Output, Component
 
 
-class AgentsReload(komand.Action):
+class AgentsReload(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

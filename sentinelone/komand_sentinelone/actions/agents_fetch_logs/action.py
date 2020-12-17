@@ -1,8 +1,8 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AgentsFetchLogsInput, AgentsFetchLogsOutput, Input, Output, Component
 
 
-class AgentsFetchLogs(komand.Action):
+class AgentsFetchLogs(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

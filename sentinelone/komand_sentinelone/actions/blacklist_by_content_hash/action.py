@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import BlacklistByContentHashInput, BlacklistByContentHashOutput, Input, Output
 # Custom imports below
 
 
-class BlacklistByContentHash(komand.Action):
+class BlacklistByContentHash(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

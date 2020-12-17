@@ -1,9 +1,9 @@
-import komand
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import AgentsShutdownInput, AgentsShutdownOutput, Input, Output, Component
 
 
-class AgentsShutdown(komand.Action):
+class AgentsShutdown(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

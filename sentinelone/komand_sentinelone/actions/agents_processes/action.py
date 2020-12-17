@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AgentsProcessesInput, AgentsProcessesOutput, Input, Output, Component
 from komand_sentinelone.util.helper import Helper
 
 
-class AgentsProcesses(komand.Action):
+class AgentsProcesses(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -18,7 +18,7 @@ class AgentsProcesses(komand.Action):
         data = []
         if "data" in response:
             for i in response.get("data"):
-                data.append(komand.helper.clean_dict(i))
+                data.append(insightconnect_plugin_runtime.helper.clean_dict(i))
 
         return {
             Output.AGENTS_PROCESSES: data

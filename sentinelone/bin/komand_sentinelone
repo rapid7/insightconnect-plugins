@@ -5,8 +5,8 @@ import json
 from sys import argv
 
 Name = "SentinelOne"
-Vendor = "rapid7"
-Version = "4.1.0"
+Vendor = "ned-test"
+Version = "4.1.1"
 Description = "The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne"
 
 
@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from komand_sentinelone import connection, actions, triggers
 
-    class ICONSentinelone(komand.Plugin):
+    class ICONSentinelone(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -94,7 +94,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONSentinelone())
+    cli = insightconnect_plugin_runtime.CLI(ICONSentinelone())
     cli.run()
 
 

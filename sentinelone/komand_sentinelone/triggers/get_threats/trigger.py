@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 import time
 from .schema import GetThreatsInput, GetThreatsOutput, Input, Output
 # Custom imports below
 from datetime import datetime
 import traceback
 
-class GetThreats(komand.Trigger):
+class GetThreats(insightconnect_plugin_runtime.Trigger):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -50,6 +50,4 @@ class GetThreats(komand.Trigger):
     def send_first_threat(self, data):
         threat = data[0]
         self.logger.info("Threat found: " + threat["id"])
-        cleaned = komand.helper.clean(threat)
-        self.logger.info("Successful clean")
-        self.send({Output.THREAT: cleaned})
+        self.send({Output.THREAT: insightconnect_plugin_runtime.helper.clean(threat)})

@@ -1,15 +1,15 @@
-import komand
+import insightconnect_plugin_runtime
 import requests
 from .schema import ConnectionSchema, Input
 
 from komand_sentinelone.util.api import SentineloneAPI
-from komand.exceptions import ConnectionTestException, PluginException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 import zipfile
 import io
 import base64
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
 
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
@@ -312,9 +312,9 @@ class Connection(komand.Connection):
         headers = self.make_token_header()
 
         if json:
-            json = komand.helper.clean(json)
+            json = insightconnect_plugin_runtime.helper.clean(json)
         if params:
-            params = komand.helper.clean(params)
+            params = insightconnect_plugin_runtime.helper.clean(params)
 
         response = requests.request(
             method, endpoint, json=json, params=params, headers=headers
