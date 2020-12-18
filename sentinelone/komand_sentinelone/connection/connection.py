@@ -308,7 +308,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         }).get("errors", [])
 
     def _call_api(self, method, endpoint, json=None, params=None, full_response: bool = False):
-        endpoint = self.url + "web/api/v2.0/" + endpoint
+        endpoint = self.url + "web/api/v2.1/" + endpoint
         headers = self.make_token_header()
 
         if json:
@@ -325,7 +325,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             if full_response:
                 return response
 
-            self.logger.info(f"RESPONSE IS: {response.json()}")
+            # self.logger.info(f"RESPONSE IS: {response.json()}")
             return response.json()
         except requests.HTTPError:
             raise Exception("API call failed: " + response.text)

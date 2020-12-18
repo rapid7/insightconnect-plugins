@@ -57,393 +57,1561 @@ class GetThreatSummaryOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "definitions": {
-    "data": {
+    "actionsCounters": {
       "type": "object",
-      "title": "data",
+      "title": "actionsCounters",
       "properties": {
-        "agentComputerName": {
+        "failed": {
+          "type": "integer",
+          "title": "Failed",
+          "description": "Failed",
+          "order": 1
+        },
+        "pendingReboot": {
+          "type": "integer",
+          "title": "Pendingreboot",
+          "description": "Pendingreboot",
+          "order": 2
+        },
+        "success": {
+          "type": "integer",
+          "title": "Success",
+          "description": "Success",
+          "order": 3
+        },
+        "total": {
+          "type": "integer",
+          "title": "Total",
+          "description": "Total",
+          "order": 4
+        }
+      }
+    },
+    "agentDetectionInfo": {
+      "type": "object",
+      "title": "agentDetectionInfo",
+      "properties": {
+        "accountId": {
           "type": "string",
-          "title": "Agent Computer Name",
-          "description": "Agent computer name",
-          "order": 31
+          "title": "Accountid",
+          "description": "Accountid",
+          "order": 1
+        },
+        "accountName": {
+          "type": "string",
+          "title": "Accountname",
+          "description": "Accountname",
+          "order": 2
         },
         "agentDomain": {
           "type": "string",
-          "title": "Agent Domain",
-          "description": "Agent domain",
-          "order": 59
+          "title": "Agentdomain",
+          "description": "Agentdomain",
+          "order": 3
+        },
+        "agentIpV4": {
+          "type": "string",
+          "title": "Agentipv4",
+          "description": "Agentipv4",
+          "order": 4
+        },
+        "agentIpV6": {
+          "type": "string",
+          "title": "Agentipv6",
+          "description": "Agentipv6",
+          "order": 5
+        },
+        "agentLastLoggedInUserName": {
+          "type": "string",
+          "title": "Agentlastloggedinusername",
+          "description": "Agentlastloggedinusername",
+          "order": 6
+        },
+        "agentMitigationMode": {
+          "type": "string",
+          "title": "Agentmitigationmode",
+          "description": "Agentmitigationmode",
+          "order": 7
+        },
+        "agentOsName": {
+          "type": "string",
+          "title": "Agentosname",
+          "description": "Agentosname",
+          "order": 8
+        },
+        "agentOsRevision": {
+          "type": "string",
+          "title": "Agentosrevision",
+          "description": "Agentosrevision",
+          "order": 9
+        },
+        "agentRegisteredAt": {
+          "type": "string",
+          "title": "Agentregisteredat",
+          "description": "Agentregisteredat",
+          "order": 10
+        },
+        "agentUuid": {
+          "type": "string",
+          "title": "Agentuuid",
+          "description": "Agentuuid",
+          "order": 11
+        },
+        "agentVersion": {
+          "type": "string",
+          "title": "Agentversion",
+          "description": "Agentversion",
+          "order": 12
+        },
+        "externalIp": {
+          "type": "string",
+          "title": "Externalip",
+          "description": "Externalip",
+          "order": 13
+        },
+        "groupId": {
+          "type": "string",
+          "title": "Groupid",
+          "description": "Groupid",
+          "order": 14
+        },
+        "groupName": {
+          "type": "string",
+          "title": "Groupname",
+          "description": "Groupname",
+          "order": 15
+        },
+        "siteId": {
+          "type": "string",
+          "title": "Siteid",
+          "description": "Siteid",
+          "order": 16
+        },
+        "siteName": {
+          "type": "string",
+          "title": "Sitename",
+          "description": "Sitename",
+          "order": 17
+        }
+      }
+    },
+    "agentRealtimeInfo": {
+      "type": "object",
+      "title": "agentRealtimeInfo",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "title": "Accountid",
+          "description": "Accountid",
+          "order": 1
+        },
+        "accountName": {
+          "type": "string",
+          "title": "Accountname",
+          "description": "Accountname",
+          "order": 2
+        },
+        "activeThreats": {
+          "type": "integer",
+          "title": "Activethreats",
+          "description": "Activethreats",
+          "order": 3
+        },
+        "agentComputerName": {
+          "type": "string",
+          "title": "Agentcomputername",
+          "description": "Agentcomputername",
+          "order": 4
+        },
+        "agentDecommissionedAt": {
+          "type": "boolean",
+          "title": "Agentdecommissionedat",
+          "description": "Agentdecommissionedat",
+          "order": 5
+        },
+        "agentDomain": {
+          "type": "string",
+          "title": "Agentdomain",
+          "description": "Agentdomain",
+          "order": 6
         },
         "agentId": {
           "type": "string",
-          "title": "Agent ID",
-          "description": "Agent ID",
-          "order": 15
+          "title": "Agentid",
+          "description": "Agentid",
+          "order": 7
         },
         "agentInfected": {
           "type": "boolean",
-          "title": "Agent Infected",
-          "description": "Agent infected",
-          "order": 60
-        },
-        "agentIp": {
-          "type": "string",
-          "title": "Agent IP",
-          "description": "Agent IP",
+          "title": "Agentinfected",
+          "description": "Agentinfected",
           "order": 8
         },
         "agentIsActive": {
           "type": "boolean",
-          "title": "Agent is Active",
-          "description": "Agent is Active",
-          "order": 56
+          "title": "Agentisactive",
+          "description": "Agentisactive",
+          "order": 9
         },
         "agentIsDecommissioned": {
           "type": "boolean",
-          "title": "Agent is Decommissioned",
-          "description": "Agent is Decommissioned",
-          "order": 48
+          "title": "Agentisdecommissioned",
+          "description": "Agentisdecommissioned",
+          "order": 10
         },
         "agentMachineType": {
           "type": "string",
-          "title": "Agent Machine Type",
-          "description": "Agent machine type",
-          "order": 39
+          "title": "Agentmachinetype",
+          "description": "Agentmachinetype",
+          "order": 11
+        },
+        "agentMitigationMode": {
+          "type": "string",
+          "title": "Agentmitigationmode",
+          "description": "Agentmitigationmode",
+          "order": 12
         },
         "agentNetworkStatus": {
           "type": "string",
-          "title": "Agent Network Status",
-          "description": "Agent network status",
-          "order": 9
+          "title": "Agentnetworkstatus",
+          "description": "Agentnetworkstatus",
+          "order": 13
+        },
+        "agentOsName": {
+          "type": "string",
+          "title": "Agentosname",
+          "description": "Agentosname",
+          "order": 14
+        },
+        "agentOsRevision": {
+          "type": "string",
+          "title": "Agentosrevision",
+          "description": "Agentosrevision",
+          "order": 15
         },
         "agentOsType": {
           "type": "string",
-          "title": "Agent OS Type",
-          "description": "Agent OS type",
-          "order": 47
+          "title": "Agentostype",
+          "description": "Agentostype",
+          "order": 16
+        },
+        "agentUuid": {
+          "type": "string",
+          "title": "Agentuuid",
+          "description": "Agentuuid",
+          "order": 17
         },
         "agentVersion": {
           "type": "string",
-          "title": "Agent Version",
-          "description": "Agent version",
-          "order": 11
-        },
-        "annotation": {
-          "type": "string",
-          "title": "Annotation",
-          "description": "Annotation",
-          "order": 50
-        },
-        "annotationUrl": {
-          "type": "string",
-          "title": "Annotation URL",
-          "description": "Annotation URL",
-          "order": 55
-        },
-        "browserType": {
-          "type": "string",
-          "title": "Browser Type",
-          "description": "Browser type",
-          "order": 25
-        },
-        "certId": {
-          "type": "string",
-          "title": "Cert ID",
-          "description": "Cert ID",
-          "order": 21
-        },
-        "classification": {
-          "type": "string",
-          "title": "Classification",
-          "description": "Classification",
-          "order": 2
-        },
-        "classificationSource": {
-          "type": "string",
-          "title": "Classification Source",
-          "description": "Classification source",
-          "order": 30
-        },
-        "classifierName": {
-          "type": "string",
-          "title": "Classifiername",
-          "description": "Classifiername",
-          "order": 38
-        },
-        "cloudVerdict": {
-          "type": "string",
-          "title": "Cloud Verdict",
-          "description": "Cloud verdict",
-          "order": 28
-        },
-        "collectionId": {
-          "type": "string",
-          "title": "Collection ID",
-          "description": "Collection ID",
-          "order": 23
-        },
-        "createdAt": {
-          "type": "string",
-          "title": "Created At",
-          "description": "Created At",
+          "title": "Agentversion",
+          "description": "Agentversion",
           "order": 18
         },
-        "createdDate": {
+        "groupId": {
           "type": "string",
-          "title": "Created Date",
-          "description": "Created date",
-          "order": 45
+          "title": "Groupid",
+          "description": "Groupid",
+          "order": 19
         },
-        "description": {
+        "groupName": {
           "type": "string",
-          "title": "Description",
-          "description": "Description",
-          "order": 35
+          "title": "Groupname",
+          "description": "Groupname",
+          "order": 20
         },
-        "engines": {
+        "networkInterfaces": {
           "type": "array",
-          "title": "Engines",
-          "description": "Engines",
+          "title": "Networkinterfaces",
+          "description": "Networkinterfaces",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/networkInterfaces"
           },
+          "order": 21
+        },
+        "operationalState": {
+          "type": "string",
+          "title": "Operationalstate",
+          "description": "Operationalstate",
           "order": 22
         },
-        "fileContentHash": {
-          "type": "string",
-          "title": "File Content Hash",
-          "description": "File content hash",
-          "order": 42
-        },
-        "fileCreatedDate": {
-          "type": "string",
-          "title": "File Created Date",
-          "description": "File created date",
-          "order": 6
-        },
-        "fileData": {
-          "type": "object",
-          "title": "File Data",
-          "description": "File data",
-          "order": 14
-        },
-        "fileDisplayName": {
-          "type": "string",
-          "title": "File Display Name",
-          "description": "File display name",
-          "order": 17
-        },
-        "fileExtensionType": {
-          "type": "string",
-          "title": "File Extension Type",
-          "description": "File extension type",
-          "order": 16
-        },
-        "fileIsDotNet": {
+        "rebootRequired": {
           "type": "boolean",
-          "title": "File is Dotnet",
-          "description": "File is dotnet",
-          "order": 41
+          "title": "Rebootrequired",
+          "description": "Rebootrequired",
+          "order": 23
         },
-        "fileIsExecutable": {
-          "type": "boolean",
-          "title": "File is Executable",
-          "description": "File is executable",
-          "order": 7
+        "scanAbortedAt": {
+          "type": "string",
+          "title": "Scanabortedat",
+          "description": "Scanabortedat",
+          "order": 24
         },
-        "fileIsSystem": {
-          "type": "boolean",
-          "title": "File is System",
-          "description": "File is system",
+        "scanFinishedAt": {
+          "type": "string",
+          "title": "Scanfinishedat",
+          "description": "Scanfinishedat",
+          "order": 25
+        },
+        "scanStartedAt": {
+          "type": "string",
+          "title": "Scanstartedat",
+          "description": "Scanstartedat",
           "order": 26
         },
-        "fileMaliciousContent": {
-          "type": "boolean",
-          "title": "File Malicious Content",
-          "description": "File malicious content",
-          "order": 62
-        },
-        "fileObjectId": {
+        "scanStatus": {
           "type": "string",
-          "title": "File Object ID",
-          "description": "File object ID",
+          "title": "Scanstatus",
+          "description": "Scanstatus",
+          "order": 27
+        },
+        "siteId": {
+          "type": "string",
+          "title": "Siteid",
+          "description": "Siteid",
+          "order": 28
+        },
+        "siteName": {
+          "type": "string",
+          "title": "Sitename",
+          "description": "Sitename",
+          "order": 29
+        },
+        "userActionsNeeded": {
+          "type": "array",
+          "title": "Useractionsneeded",
+          "description": "Useractionsneeded",
+          "items": {
+            "type": "object"
+          },
+          "order": 30
+        }
+      },
+      "definitions": {
+        "networkInterfaces": {
+          "type": "object",
+          "title": "networkInterfaces",
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "Id",
+              "description": "Id",
+              "order": 1
+            },
+            "inet": {
+              "type": "array",
+              "title": "Inet",
+              "description": "Inet",
+              "items": {
+                "type": "string"
+              },
+              "order": 2
+            },
+            "inet6": {
+              "type": "array",
+              "title": "Inet6",
+              "description": "Inet6",
+              "items": {
+                "type": "string"
+              },
+              "order": 3
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "Name",
+              "order": 4
+            },
+            "physical": {
+              "type": "string",
+              "title": "Physical",
+              "description": "Physical",
+              "order": 5
+            }
+          }
+        }
+      }
+    },
+    "containerInfo": {
+      "type": "object",
+      "title": "containerInfo",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "Id",
+          "order": 1
+        },
+        "image": {
+          "type": "string",
+          "title": "Image",
+          "description": "Image",
+          "order": 2
+        },
+        "labels": {
+          "type": "array",
+          "title": "Labels",
+          "description": "Labels",
+          "items": {
+            "type": "object"
+          },
+          "order": 3
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
           "order": 4
+        }
+      }
+    },
+    "data": {
+      "type": "object",
+      "title": "data",
+      "properties": {
+        "agentDetectionInfo": {
+          "$ref": "#/definitions/agentDetectionInfo",
+          "title": "Agentdetectioninfo",
+          "description": "Agentdetectioninfo",
+          "order": 1
         },
-        "filePath": {
-          "type": "string",
-          "title": "File Path",
-          "description": "File path",
-          "order": 36
+        "agentRealtimeInfo": {
+          "$ref": "#/definitions/agentRealtimeInfo",
+          "title": "Agentrealtimeinfo",
+          "description": "Agentrealtimeinfo",
+          "order": 2
         },
-        "fileSha256": {
-          "type": "string",
-          "title": "File SHA 256",
-          "description": "File SHA 256",
-          "order": 34
-        },
-        "fileVerificationType": {
-          "type": "string",
-          "title": "File Verification Type",
-          "description": "File verification type",
-          "order": 51
-        },
-        "fromCloud": {
-          "type": "boolean",
-          "title": "From Cloud",
-          "description": "From cloud",
-          "order": 57
-        },
-        "fromScan": {
-          "type": "boolean",
-          "title": "From Scan",
-          "description": "From scan",
-          "order": 37
+        "containerInfo": {
+          "$ref": "#/definitions/containerInfo",
+          "title": "Containerinfo",
+          "description": "Containerinfo",
+          "order": 3
         },
         "id": {
           "type": "string",
-          "title": "ID",
-          "description": "ID",
-          "order": 13
-        },
-        "inQuarantine": {
-          "type": "boolean",
-          "title": "In Quarantine",
-          "description": "In quarantine",
-          "order": 24
+          "title": "Id",
+          "description": "Id",
+          "order": 4
         },
         "indicators": {
           "type": "array",
           "title": "Indicators",
           "description": "Indicators",
           "items": {
-            "type": "integer"
-          },
-          "order": 29
-        },
-        "isCertValid": {
-          "type": "boolean",
-          "title": "Is Cert Valid",
-          "description": "Is cert valid",
-          "order": 40
-        },
-        "isInteractiveSession": {
-          "type": "boolean",
-          "title": "Is Interactive Session",
-          "description": "Is interactive session",
-          "order": 10
-        },
-        "isPartialStory": {
-          "type": "boolean",
-          "title": "Is Partial Story",
-          "description": "Is partial story",
-          "order": 49
-        },
-        "maliciousGroupId": {
-          "type": "string",
-          "title": "Malicious Group ID",
-          "description": "Malicious group ID",
-          "order": 54
-        },
-        "maliciousProcessArguments": {
-          "type": "string",
-          "title": "Malicious Process Arguments",
-          "description": "Malicious process arguments",
-          "order": 20
-        },
-        "markedAsBenign": {
-          "type": "boolean",
-          "title": "Marked as Benign",
-          "description": "Marked as Benign",
-          "order": 27
-        },
-        "mitigationActions": {
-          "type": "array",
-          "title": "Mitigation Actions",
-          "description": "Mitigation actions",
-          "items": {
-            "type": "string"
+            "type": "object"
           },
           "order": 5
         },
-        "mitigationMode": {
-          "type": "string",
-          "title": "Mitigation Mode",
-          "description": "Mitigation mode",
-          "order": 58
-        },
-        "mitigationReport": {
-          "type": "object",
-          "title": "Mitigation Report",
-          "description": "Mitigation report",
-          "order": 12
+        "kubernetesInfo": {
+          "$ref": "#/definitions/kubernetesInfo",
+          "title": "Kubernetesinfo",
+          "description": "Kubernetesinfo",
+          "order": 6
         },
         "mitigationStatus": {
-          "type": "string",
-          "title": "Mitigation Status",
-          "description": "Mitigation status",
-          "order": 32
+          "type": "array",
+          "title": "Mitigationstatus",
+          "description": "Mitigationstatus",
+          "items": {
+            "$ref": "#/definitions/mitigationStatus"
+          },
+          "order": 7
         },
-        "publisher": {
-          "type": "string",
-          "title": "Publisher",
-          "description": "Publisher",
-          "order": 52
-        },
-        "rank": {
-          "type": "integer",
-          "title": "Rank",
-          "description": "Rank",
-          "order": 44
-        },
-        "resolved": {
-          "type": "boolean",
-          "title": "Resolved",
-          "description": "Resolved",
-          "order": 33
-        },
-        "siteId": {
-          "type": "string",
-          "title": "Site ID",
-          "description": "Site ID",
-          "order": 43
-        },
-        "siteName": {
-          "type": "string",
-          "title": "Site Name",
-          "description": "Site name",
-          "order": 3
-        },
-        "threatAgentVersion": {
-          "type": "string",
-          "title": "Threat Agent Version",
-          "description": "Threat agent version",
-          "order": 61
-        },
-        "threatName": {
-          "type": "string",
-          "title": "Threat Name",
-          "description": "Threat name",
-          "order": 53
-        },
-        "updatedAt": {
-          "type": "string",
-          "title": "Updated At",
-          "description": "Updated at",
-          "order": 46
-        },
-        "username": {
-          "type": "string",
-          "title": "Username",
-          "description": "Username",
-          "order": 1
+        "threatInfo": {
+          "$ref": "#/definitions/threatInfo",
+          "title": "Threatinfo",
+          "description": "Threatinfo",
+          "order": 8
         },
         "whiteningOptions": {
           "type": "array",
-          "title": "Whitening Options",
-          "description": "Whitening options",
+          "title": "Whiteningoptions",
+          "description": "Whiteningoptions",
           "items": {
             "type": "string"
           },
-          "order": 19
+          "order": 9
+        }
+      },
+      "definitions": {
+        "actionsCounters": {
+          "type": "object",
+          "title": "actionsCounters",
+          "properties": {
+            "failed": {
+              "type": "integer",
+              "title": "Failed",
+              "description": "Failed",
+              "order": 1
+            },
+            "pendingReboot": {
+              "type": "integer",
+              "title": "Pendingreboot",
+              "description": "Pendingreboot",
+              "order": 2
+            },
+            "success": {
+              "type": "integer",
+              "title": "Success",
+              "description": "Success",
+              "order": 3
+            },
+            "total": {
+              "type": "integer",
+              "title": "Total",
+              "description": "Total",
+              "order": 4
+            }
+          }
+        },
+        "agentDetectionInfo": {
+          "type": "object",
+          "title": "agentDetectionInfo",
+          "properties": {
+            "accountId": {
+              "type": "string",
+              "title": "Accountid",
+              "description": "Accountid",
+              "order": 1
+            },
+            "accountName": {
+              "type": "string",
+              "title": "Accountname",
+              "description": "Accountname",
+              "order": 2
+            },
+            "agentDomain": {
+              "type": "string",
+              "title": "Agentdomain",
+              "description": "Agentdomain",
+              "order": 3
+            },
+            "agentIpV4": {
+              "type": "string",
+              "title": "Agentipv4",
+              "description": "Agentipv4",
+              "order": 4
+            },
+            "agentIpV6": {
+              "type": "string",
+              "title": "Agentipv6",
+              "description": "Agentipv6",
+              "order": 5
+            },
+            "agentLastLoggedInUserName": {
+              "type": "string",
+              "title": "Agentlastloggedinusername",
+              "description": "Agentlastloggedinusername",
+              "order": 6
+            },
+            "agentMitigationMode": {
+              "type": "string",
+              "title": "Agentmitigationmode",
+              "description": "Agentmitigationmode",
+              "order": 7
+            },
+            "agentOsName": {
+              "type": "string",
+              "title": "Agentosname",
+              "description": "Agentosname",
+              "order": 8
+            },
+            "agentOsRevision": {
+              "type": "string",
+              "title": "Agentosrevision",
+              "description": "Agentosrevision",
+              "order": 9
+            },
+            "agentRegisteredAt": {
+              "type": "string",
+              "title": "Agentregisteredat",
+              "description": "Agentregisteredat",
+              "order": 10
+            },
+            "agentUuid": {
+              "type": "string",
+              "title": "Agentuuid",
+              "description": "Agentuuid",
+              "order": 11
+            },
+            "agentVersion": {
+              "type": "string",
+              "title": "Agentversion",
+              "description": "Agentversion",
+              "order": 12
+            },
+            "externalIp": {
+              "type": "string",
+              "title": "Externalip",
+              "description": "Externalip",
+              "order": 13
+            },
+            "groupId": {
+              "type": "string",
+              "title": "Groupid",
+              "description": "Groupid",
+              "order": 14
+            },
+            "groupName": {
+              "type": "string",
+              "title": "Groupname",
+              "description": "Groupname",
+              "order": 15
+            },
+            "siteId": {
+              "type": "string",
+              "title": "Siteid",
+              "description": "Siteid",
+              "order": 16
+            },
+            "siteName": {
+              "type": "string",
+              "title": "Sitename",
+              "description": "Sitename",
+              "order": 17
+            }
+          }
+        },
+        "agentRealtimeInfo": {
+          "type": "object",
+          "title": "agentRealtimeInfo",
+          "properties": {
+            "accountId": {
+              "type": "string",
+              "title": "Accountid",
+              "description": "Accountid",
+              "order": 1
+            },
+            "accountName": {
+              "type": "string",
+              "title": "Accountname",
+              "description": "Accountname",
+              "order": 2
+            },
+            "activeThreats": {
+              "type": "integer",
+              "title": "Activethreats",
+              "description": "Activethreats",
+              "order": 3
+            },
+            "agentComputerName": {
+              "type": "string",
+              "title": "Agentcomputername",
+              "description": "Agentcomputername",
+              "order": 4
+            },
+            "agentDecommissionedAt": {
+              "type": "boolean",
+              "title": "Agentdecommissionedat",
+              "description": "Agentdecommissionedat",
+              "order": 5
+            },
+            "agentDomain": {
+              "type": "string",
+              "title": "Agentdomain",
+              "description": "Agentdomain",
+              "order": 6
+            },
+            "agentId": {
+              "type": "string",
+              "title": "Agentid",
+              "description": "Agentid",
+              "order": 7
+            },
+            "agentInfected": {
+              "type": "boolean",
+              "title": "Agentinfected",
+              "description": "Agentinfected",
+              "order": 8
+            },
+            "agentIsActive": {
+              "type": "boolean",
+              "title": "Agentisactive",
+              "description": "Agentisactive",
+              "order": 9
+            },
+            "agentIsDecommissioned": {
+              "type": "boolean",
+              "title": "Agentisdecommissioned",
+              "description": "Agentisdecommissioned",
+              "order": 10
+            },
+            "agentMachineType": {
+              "type": "string",
+              "title": "Agentmachinetype",
+              "description": "Agentmachinetype",
+              "order": 11
+            },
+            "agentMitigationMode": {
+              "type": "string",
+              "title": "Agentmitigationmode",
+              "description": "Agentmitigationmode",
+              "order": 12
+            },
+            "agentNetworkStatus": {
+              "type": "string",
+              "title": "Agentnetworkstatus",
+              "description": "Agentnetworkstatus",
+              "order": 13
+            },
+            "agentOsName": {
+              "type": "string",
+              "title": "Agentosname",
+              "description": "Agentosname",
+              "order": 14
+            },
+            "agentOsRevision": {
+              "type": "string",
+              "title": "Agentosrevision",
+              "description": "Agentosrevision",
+              "order": 15
+            },
+            "agentOsType": {
+              "type": "string",
+              "title": "Agentostype",
+              "description": "Agentostype",
+              "order": 16
+            },
+            "agentUuid": {
+              "type": "string",
+              "title": "Agentuuid",
+              "description": "Agentuuid",
+              "order": 17
+            },
+            "agentVersion": {
+              "type": "string",
+              "title": "Agentversion",
+              "description": "Agentversion",
+              "order": 18
+            },
+            "groupId": {
+              "type": "string",
+              "title": "Groupid",
+              "description": "Groupid",
+              "order": 19
+            },
+            "groupName": {
+              "type": "string",
+              "title": "Groupname",
+              "description": "Groupname",
+              "order": 20
+            },
+            "networkInterfaces": {
+              "type": "array",
+              "title": "Networkinterfaces",
+              "description": "Networkinterfaces",
+              "items": {
+                "$ref": "#/definitions/networkInterfaces"
+              },
+              "order": 21
+            },
+            "operationalState": {
+              "type": "string",
+              "title": "Operationalstate",
+              "description": "Operationalstate",
+              "order": 22
+            },
+            "rebootRequired": {
+              "type": "boolean",
+              "title": "Rebootrequired",
+              "description": "Rebootrequired",
+              "order": 23
+            },
+            "scanAbortedAt": {
+              "type": "string",
+              "title": "Scanabortedat",
+              "description": "Scanabortedat",
+              "order": 24
+            },
+            "scanFinishedAt": {
+              "type": "string",
+              "title": "Scanfinishedat",
+              "description": "Scanfinishedat",
+              "order": 25
+            },
+            "scanStartedAt": {
+              "type": "string",
+              "title": "Scanstartedat",
+              "description": "Scanstartedat",
+              "order": 26
+            },
+            "scanStatus": {
+              "type": "string",
+              "title": "Scanstatus",
+              "description": "Scanstatus",
+              "order": 27
+            },
+            "siteId": {
+              "type": "string",
+              "title": "Siteid",
+              "description": "Siteid",
+              "order": 28
+            },
+            "siteName": {
+              "type": "string",
+              "title": "Sitename",
+              "description": "Sitename",
+              "order": 29
+            },
+            "userActionsNeeded": {
+              "type": "array",
+              "title": "Useractionsneeded",
+              "description": "Useractionsneeded",
+              "items": {
+                "type": "object"
+              },
+              "order": 30
+            }
+          },
+          "definitions": {
+            "networkInterfaces": {
+              "type": "object",
+              "title": "networkInterfaces",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "title": "Id",
+                  "description": "Id",
+                  "order": 1
+                },
+                "inet": {
+                  "type": "array",
+                  "title": "Inet",
+                  "description": "Inet",
+                  "items": {
+                    "type": "string"
+                  },
+                  "order": 2
+                },
+                "inet6": {
+                  "type": "array",
+                  "title": "Inet6",
+                  "description": "Inet6",
+                  "items": {
+                    "type": "string"
+                  },
+                  "order": 3
+                },
+                "name": {
+                  "type": "string",
+                  "title": "Name",
+                  "description": "Name",
+                  "order": 4
+                },
+                "physical": {
+                  "type": "string",
+                  "title": "Physical",
+                  "description": "Physical",
+                  "order": 5
+                }
+              }
+            }
+          }
+        },
+        "containerInfo": {
+          "type": "object",
+          "title": "containerInfo",
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "Id",
+              "description": "Id",
+              "order": 1
+            },
+            "image": {
+              "type": "string",
+              "title": "Image",
+              "description": "Image",
+              "order": 2
+            },
+            "labels": {
+              "type": "array",
+              "title": "Labels",
+              "description": "Labels",
+              "items": {
+                "type": "object"
+              },
+              "order": 3
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "Name",
+              "order": 4
+            }
+          }
+        },
+        "kubernetesInfo": {
+          "type": "object",
+          "title": "kubernetesInfo",
+          "properties": {
+            "cluster": {
+              "type": "string",
+              "title": "Cluster",
+              "description": "Cluster",
+              "order": 1
+            },
+            "controllerKind": {
+              "type": "string",
+              "title": "Controllerkind",
+              "description": "Controllerkind",
+              "order": 2
+            },
+            "controllerLabels": {
+              "type": "array",
+              "title": "Controllerlabels",
+              "description": "Controllerlabels",
+              "items": {
+                "type": "object"
+              },
+              "order": 3
+            },
+            "controllerName": {
+              "type": "string",
+              "title": "Controllername",
+              "description": "Controllername",
+              "order": 4
+            },
+            "namespace": {
+              "type": "string",
+              "title": "Namespace",
+              "description": "Namespace",
+              "order": 5
+            },
+            "namespaceLabels": {
+              "type": "array",
+              "title": "Namespacelabels",
+              "description": "Namespacelabels",
+              "items": {
+                "type": "object"
+              },
+              "order": 6
+            },
+            "node": {
+              "type": "string",
+              "title": "Node",
+              "description": "Node",
+              "order": 7
+            },
+            "pod": {
+              "type": "string",
+              "title": "Pod",
+              "description": "Pod",
+              "order": 8
+            },
+            "podLabels": {
+              "type": "array",
+              "title": "Podlabels",
+              "description": "Podlabels",
+              "items": {
+                "type": "object"
+              },
+              "order": 9
+            }
+          }
+        },
+        "mitigationStatus": {
+          "type": "object",
+          "title": "mitigationStatus",
+          "properties": {
+            "action": {
+              "type": "string",
+              "title": "Action",
+              "description": "Action",
+              "order": 1
+            },
+            "actionsCounters": {
+              "$ref": "#/definitions/actionsCounters",
+              "title": "Actionscounters",
+              "description": "Actionscounters",
+              "order": 2
+            },
+            "agentSupportsReport": {
+              "type": "boolean",
+              "title": "Agentsupportsreport",
+              "description": "Agentsupportsreport",
+              "order": 3
+            },
+            "groupNotFound": {
+              "type": "boolean",
+              "title": "Groupnotfound",
+              "description": "Groupnotfound",
+              "order": 4
+            },
+            "lastUpdate": {
+              "type": "string",
+              "title": "Lastupdate",
+              "description": "Lastupdate",
+              "order": 5
+            },
+            "latestReport": {
+              "type": "string",
+              "title": "Latestreport",
+              "description": "Latestreport",
+              "order": 6
+            },
+            "status": {
+              "type": "string",
+              "title": "Status",
+              "description": "Status",
+              "order": 7
+            }
+          },
+          "definitions": {
+            "actionsCounters": {
+              "type": "object",
+              "title": "actionsCounters",
+              "properties": {
+                "failed": {
+                  "type": "integer",
+                  "title": "Failed",
+                  "description": "Failed",
+                  "order": 1
+                },
+                "pendingReboot": {
+                  "type": "integer",
+                  "title": "Pendingreboot",
+                  "description": "Pendingreboot",
+                  "order": 2
+                },
+                "success": {
+                  "type": "integer",
+                  "title": "Success",
+                  "description": "Success",
+                  "order": 3
+                },
+                "total": {
+                  "type": "integer",
+                  "title": "Total",
+                  "description": "Total",
+                  "order": 4
+                }
+              }
+            }
+          }
+        },
+        "networkInterfaces": {
+          "type": "object",
+          "title": "networkInterfaces",
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "Id",
+              "description": "Id",
+              "order": 1
+            },
+            "inet": {
+              "type": "array",
+              "title": "Inet",
+              "description": "Inet",
+              "items": {
+                "type": "string"
+              },
+              "order": 2
+            },
+            "inet6": {
+              "type": "array",
+              "title": "Inet6",
+              "description": "Inet6",
+              "items": {
+                "type": "string"
+              },
+              "order": 3
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "Name",
+              "order": 4
+            },
+            "physical": {
+              "type": "string",
+              "title": "Physical",
+              "description": "Physical",
+              "order": 5
+            }
+          }
+        },
+        "threatInfo": {
+          "type": "object",
+          "title": "threatInfo",
+          "properties": {
+            "analystVerdict": {
+              "type": "string",
+              "title": "Analystverdict",
+              "description": "Analystverdict",
+              "order": 1
+            },
+            "analystVerdictDescription": {
+              "type": "string",
+              "title": "Analystverdictdescription",
+              "description": "Analystverdictdescription",
+              "order": 2
+            },
+            "automaticallyResolved": {
+              "type": "boolean",
+              "title": "Automaticallyresolved",
+              "description": "Automaticallyresolved",
+              "order": 3
+            },
+            "browserType": {
+              "type": "string",
+              "title": "Browsertype",
+              "description": "Browsertype",
+              "order": 4
+            },
+            "certificateId": {
+              "type": "string",
+              "title": "Certificateid",
+              "description": "Certificateid",
+              "order": 5
+            },
+            "classification": {
+              "type": "string",
+              "title": "Classification",
+              "description": "Classification",
+              "order": 6
+            },
+            "classificationSource": {
+              "type": "string",
+              "title": "Classificationsource",
+              "description": "Classificationsource",
+              "order": 7
+            },
+            "cloudFilesHashVerdict": {
+              "type": "string",
+              "title": "Cloudfileshashverdict",
+              "description": "Cloudfileshashverdict",
+              "order": 8
+            },
+            "collectionId": {
+              "type": "string",
+              "title": "Collectionid",
+              "description": "Collectionid",
+              "order": 9
+            },
+            "confidenceLevel": {
+              "type": "string",
+              "title": "Confidencelevel",
+              "description": "Confidencelevel",
+              "order": 10
+            },
+            "createdAt": {
+              "type": "string",
+              "title": "Createdat",
+              "description": "Createdat",
+              "order": 11
+            },
+            "detectionType": {
+              "type": "string",
+              "title": "Detectiontype",
+              "description": "Detectiontype",
+              "order": 12
+            },
+            "engines": {
+              "type": "array",
+              "title": "Engines",
+              "description": "Engines",
+              "items": {
+                "type": "string"
+              },
+              "order": 13
+            },
+            "externalTicketExists": {
+              "type": "boolean",
+              "title": "Externalticketexists",
+              "description": "Externalticketexists",
+              "order": 14
+            },
+            "externalTicketId": {
+              "type": "string",
+              "title": "Externalticketid",
+              "description": "Externalticketid",
+              "order": 15
+            },
+            "failedActions": {
+              "type": "boolean",
+              "title": "Failedactions",
+              "description": "Failedactions",
+              "order": 16
+            },
+            "fileExtension": {
+              "type": "string",
+              "title": "Fileextension",
+              "description": "Fileextension",
+              "order": 17
+            },
+            "fileExtensionType": {
+              "type": "string",
+              "title": "Fileextensiontype",
+              "description": "Fileextensiontype",
+              "order": 18
+            },
+            "filePath": {
+              "type": "string",
+              "title": "Filepath",
+              "description": "Filepath",
+              "order": 19
+            },
+            "fileSize": {
+              "type": "integer",
+              "title": "Filesize",
+              "description": "Filesize",
+              "order": 20
+            },
+            "fileVerificationType": {
+              "type": "string",
+              "title": "Fileverificationtype",
+              "description": "Fileverificationtype",
+              "order": 21
+            },
+            "identifiedAt": {
+              "type": "string",
+              "title": "Identifiedat",
+              "description": "Identifiedat",
+              "order": 22
+            },
+            "incidentStatus": {
+              "type": "string",
+              "title": "Incidentstatus",
+              "description": "Incidentstatus",
+              "order": 23
+            },
+            "incidentStatusDescription": {
+              "type": "string",
+              "title": "Incidentstatusdescription",
+              "description": "Incidentstatusdescription",
+              "order": 24
+            },
+            "initiatedBy": {
+              "type": "string",
+              "title": "Initiatedby",
+              "description": "Initiatedby",
+              "order": 25
+            },
+            "initiatedByDescription": {
+              "type": "string",
+              "title": "Initiatedbydescription",
+              "description": "Initiatedbydescription",
+              "order": 26
+            },
+            "initiatingUserId": {
+              "type": "string",
+              "title": "Initiatinguserid",
+              "description": "Initiatinguserid",
+              "order": 27
+            },
+            "initiatingUsername": {
+              "type": "string",
+              "title": "Initiatingusername",
+              "description": "Initiatingusername",
+              "order": 28
+            },
+            "isFileless": {
+              "type": "boolean",
+              "title": "Isfileless",
+              "description": "Isfileless",
+              "order": 29
+            },
+            "isValidCertificate": {
+              "type": "boolean",
+              "title": "Isvalidcertificate",
+              "description": "Isvalidcertificate",
+              "order": 30
+            },
+            "maliciousProcessArguments": {
+              "type": "string",
+              "title": "Maliciousprocessarguments",
+              "description": "Maliciousprocessarguments",
+              "order": 31
+            },
+            "md5": {
+              "type": "string",
+              "title": "Md5",
+              "description": "Md5",
+              "order": 32
+            },
+            "mitigatedPreemptively": {
+              "type": "boolean",
+              "title": "Mitigatedpreemptively",
+              "description": "Mitigatedpreemptively",
+              "order": 33
+            },
+            "mitigationStatus": {
+              "type": "string",
+              "title": "Mitigationstatus",
+              "description": "Mitigationstatus",
+              "order": 34
+            },
+            "mitigationStatusDescription": {
+              "type": "string",
+              "title": "Mitigationstatusdescription",
+              "description": "Mitigationstatusdescription",
+              "order": 35
+            },
+            "originatorProcess": {
+              "type": "string",
+              "title": "Originatorprocess",
+              "description": "Originatorprocess",
+              "order": 36
+            },
+            "pendingActions": {
+              "type": "boolean",
+              "title": "Pendingactions",
+              "description": "Pendingactions",
+              "order": 37
+            },
+            "processUser": {
+              "type": "string",
+              "title": "Processuser",
+              "description": "Processuser",
+              "order": 38
+            },
+            "publisherName": {
+              "type": "string",
+              "title": "Publishername",
+              "description": "Publishername",
+              "order": 39
+            },
+            "reachedEventsLimit": {
+              "type": "boolean",
+              "title": "Reachedeventslimit",
+              "description": "Reachedeventslimit",
+              "order": 40
+            },
+            "rebootRequired": {
+              "type": "boolean",
+              "title": "Rebootrequired",
+              "description": "Rebootrequired",
+              "order": 41
+            },
+            "sha1": {
+              "type": "string",
+              "title": "Sha1",
+              "description": "Sha1",
+              "order": 42
+            },
+            "sha256": {
+              "type": "string",
+              "title": "Sha256",
+              "description": "Sha256",
+              "order": 43
+            },
+            "storyline": {
+              "type": "string",
+              "title": "Storyline",
+              "description": "Storyline",
+              "order": 44
+            },
+            "threatId": {
+              "type": "string",
+              "title": "Threatid",
+              "description": "Threatid",
+              "order": 45
+            },
+            "threatName": {
+              "type": "string",
+              "title": "Threatname",
+              "description": "Threatname",
+              "order": 46
+            },
+            "updatedAt": {
+              "type": "string",
+              "title": "Updatedat",
+              "description": "Updatedat",
+              "order": 47
+            }
+          }
+        }
+      }
+    },
+    "kubernetesInfo": {
+      "type": "object",
+      "title": "kubernetesInfo",
+      "properties": {
+        "cluster": {
+          "type": "string",
+          "title": "Cluster",
+          "description": "Cluster",
+          "order": 1
+        },
+        "controllerKind": {
+          "type": "string",
+          "title": "Controllerkind",
+          "description": "Controllerkind",
+          "order": 2
+        },
+        "controllerLabels": {
+          "type": "array",
+          "title": "Controllerlabels",
+          "description": "Controllerlabels",
+          "items": {
+            "type": "object"
+          },
+          "order": 3
+        },
+        "controllerName": {
+          "type": "string",
+          "title": "Controllername",
+          "description": "Controllername",
+          "order": 4
+        },
+        "namespace": {
+          "type": "string",
+          "title": "Namespace",
+          "description": "Namespace",
+          "order": 5
+        },
+        "namespaceLabels": {
+          "type": "array",
+          "title": "Namespacelabels",
+          "description": "Namespacelabels",
+          "items": {
+            "type": "object"
+          },
+          "order": 6
+        },
+        "node": {
+          "type": "string",
+          "title": "Node",
+          "description": "Node",
+          "order": 7
+        },
+        "pod": {
+          "type": "string",
+          "title": "Pod",
+          "description": "Pod",
+          "order": 8
+        },
+        "podLabels": {
+          "type": "array",
+          "title": "Podlabels",
+          "description": "Podlabels",
+          "items": {
+            "type": "object"
+          },
+          "order": 9
+        }
+      }
+    },
+    "mitigationStatus": {
+      "type": "object",
+      "title": "mitigationStatus",
+      "properties": {
+        "action": {
+          "type": "string",
+          "title": "Action",
+          "description": "Action",
+          "order": 1
+        },
+        "actionsCounters": {
+          "$ref": "#/definitions/actionsCounters",
+          "title": "Actionscounters",
+          "description": "Actionscounters",
+          "order": 2
+        },
+        "agentSupportsReport": {
+          "type": "boolean",
+          "title": "Agentsupportsreport",
+          "description": "Agentsupportsreport",
+          "order": 3
+        },
+        "groupNotFound": {
+          "type": "boolean",
+          "title": "Groupnotfound",
+          "description": "Groupnotfound",
+          "order": 4
+        },
+        "lastUpdate": {
+          "type": "string",
+          "title": "Lastupdate",
+          "description": "Lastupdate",
+          "order": 5
+        },
+        "latestReport": {
+          "type": "string",
+          "title": "Latestreport",
+          "description": "Latestreport",
+          "order": 6
+        },
+        "status": {
+          "type": "string",
+          "title": "Status",
+          "description": "Status",
+          "order": 7
+        }
+      },
+      "definitions": {
+        "actionsCounters": {
+          "type": "object",
+          "title": "actionsCounters",
+          "properties": {
+            "failed": {
+              "type": "integer",
+              "title": "Failed",
+              "description": "Failed",
+              "order": 1
+            },
+            "pendingReboot": {
+              "type": "integer",
+              "title": "Pendingreboot",
+              "description": "Pendingreboot",
+              "order": 2
+            },
+            "success": {
+              "type": "integer",
+              "title": "Success",
+              "description": "Success",
+              "order": 3
+            },
+            "total": {
+              "type": "integer",
+              "title": "Total",
+              "description": "Total",
+              "order": 4
+            }
+          }
+        }
+      }
+    },
+    "networkInterfaces": {
+      "type": "object",
+      "title": "networkInterfaces",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "Id",
+          "order": 1
+        },
+        "inet": {
+          "type": "array",
+          "title": "Inet",
+          "description": "Inet",
+          "items": {
+            "type": "string"
+          },
+          "order": 2
+        },
+        "inet6": {
+          "type": "array",
+          "title": "Inet6",
+          "description": "Inet6",
+          "items": {
+            "type": "string"
+          },
+          "order": 3
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 4
+        },
+        "physical": {
+          "type": "string",
+          "title": "Physical",
+          "description": "Physical",
+          "order": 5
         }
       }
     },
@@ -462,6 +1630,297 @@ class GetThreatSummaryOutput(insightconnect_plugin_runtime.Output):
           "title": "Total Items",
           "description": "Total items",
           "order": 1
+        }
+      }
+    },
+    "threatInfo": {
+      "type": "object",
+      "title": "threatInfo",
+      "properties": {
+        "analystVerdict": {
+          "type": "string",
+          "title": "Analystverdict",
+          "description": "Analystverdict",
+          "order": 1
+        },
+        "analystVerdictDescription": {
+          "type": "string",
+          "title": "Analystverdictdescription",
+          "description": "Analystverdictdescription",
+          "order": 2
+        },
+        "automaticallyResolved": {
+          "type": "boolean",
+          "title": "Automaticallyresolved",
+          "description": "Automaticallyresolved",
+          "order": 3
+        },
+        "browserType": {
+          "type": "string",
+          "title": "Browsertype",
+          "description": "Browsertype",
+          "order": 4
+        },
+        "certificateId": {
+          "type": "string",
+          "title": "Certificateid",
+          "description": "Certificateid",
+          "order": 5
+        },
+        "classification": {
+          "type": "string",
+          "title": "Classification",
+          "description": "Classification",
+          "order": 6
+        },
+        "classificationSource": {
+          "type": "string",
+          "title": "Classificationsource",
+          "description": "Classificationsource",
+          "order": 7
+        },
+        "cloudFilesHashVerdict": {
+          "type": "string",
+          "title": "Cloudfileshashverdict",
+          "description": "Cloudfileshashverdict",
+          "order": 8
+        },
+        "collectionId": {
+          "type": "string",
+          "title": "Collectionid",
+          "description": "Collectionid",
+          "order": 9
+        },
+        "confidenceLevel": {
+          "type": "string",
+          "title": "Confidencelevel",
+          "description": "Confidencelevel",
+          "order": 10
+        },
+        "createdAt": {
+          "type": "string",
+          "title": "Createdat",
+          "description": "Createdat",
+          "order": 11
+        },
+        "detectionType": {
+          "type": "string",
+          "title": "Detectiontype",
+          "description": "Detectiontype",
+          "order": 12
+        },
+        "engines": {
+          "type": "array",
+          "title": "Engines",
+          "description": "Engines",
+          "items": {
+            "type": "string"
+          },
+          "order": 13
+        },
+        "externalTicketExists": {
+          "type": "boolean",
+          "title": "Externalticketexists",
+          "description": "Externalticketexists",
+          "order": 14
+        },
+        "externalTicketId": {
+          "type": "string",
+          "title": "Externalticketid",
+          "description": "Externalticketid",
+          "order": 15
+        },
+        "failedActions": {
+          "type": "boolean",
+          "title": "Failedactions",
+          "description": "Failedactions",
+          "order": 16
+        },
+        "fileExtension": {
+          "type": "string",
+          "title": "Fileextension",
+          "description": "Fileextension",
+          "order": 17
+        },
+        "fileExtensionType": {
+          "type": "string",
+          "title": "Fileextensiontype",
+          "description": "Fileextensiontype",
+          "order": 18
+        },
+        "filePath": {
+          "type": "string",
+          "title": "Filepath",
+          "description": "Filepath",
+          "order": 19
+        },
+        "fileSize": {
+          "type": "integer",
+          "title": "Filesize",
+          "description": "Filesize",
+          "order": 20
+        },
+        "fileVerificationType": {
+          "type": "string",
+          "title": "Fileverificationtype",
+          "description": "Fileverificationtype",
+          "order": 21
+        },
+        "identifiedAt": {
+          "type": "string",
+          "title": "Identifiedat",
+          "description": "Identifiedat",
+          "order": 22
+        },
+        "incidentStatus": {
+          "type": "string",
+          "title": "Incidentstatus",
+          "description": "Incidentstatus",
+          "order": 23
+        },
+        "incidentStatusDescription": {
+          "type": "string",
+          "title": "Incidentstatusdescription",
+          "description": "Incidentstatusdescription",
+          "order": 24
+        },
+        "initiatedBy": {
+          "type": "string",
+          "title": "Initiatedby",
+          "description": "Initiatedby",
+          "order": 25
+        },
+        "initiatedByDescription": {
+          "type": "string",
+          "title": "Initiatedbydescription",
+          "description": "Initiatedbydescription",
+          "order": 26
+        },
+        "initiatingUserId": {
+          "type": "string",
+          "title": "Initiatinguserid",
+          "description": "Initiatinguserid",
+          "order": 27
+        },
+        "initiatingUsername": {
+          "type": "string",
+          "title": "Initiatingusername",
+          "description": "Initiatingusername",
+          "order": 28
+        },
+        "isFileless": {
+          "type": "boolean",
+          "title": "Isfileless",
+          "description": "Isfileless",
+          "order": 29
+        },
+        "isValidCertificate": {
+          "type": "boolean",
+          "title": "Isvalidcertificate",
+          "description": "Isvalidcertificate",
+          "order": 30
+        },
+        "maliciousProcessArguments": {
+          "type": "string",
+          "title": "Maliciousprocessarguments",
+          "description": "Maliciousprocessarguments",
+          "order": 31
+        },
+        "md5": {
+          "type": "string",
+          "title": "Md5",
+          "description": "Md5",
+          "order": 32
+        },
+        "mitigatedPreemptively": {
+          "type": "boolean",
+          "title": "Mitigatedpreemptively",
+          "description": "Mitigatedpreemptively",
+          "order": 33
+        },
+        "mitigationStatus": {
+          "type": "string",
+          "title": "Mitigationstatus",
+          "description": "Mitigationstatus",
+          "order": 34
+        },
+        "mitigationStatusDescription": {
+          "type": "string",
+          "title": "Mitigationstatusdescription",
+          "description": "Mitigationstatusdescription",
+          "order": 35
+        },
+        "originatorProcess": {
+          "type": "string",
+          "title": "Originatorprocess",
+          "description": "Originatorprocess",
+          "order": 36
+        },
+        "pendingActions": {
+          "type": "boolean",
+          "title": "Pendingactions",
+          "description": "Pendingactions",
+          "order": 37
+        },
+        "processUser": {
+          "type": "string",
+          "title": "Processuser",
+          "description": "Processuser",
+          "order": 38
+        },
+        "publisherName": {
+          "type": "string",
+          "title": "Publishername",
+          "description": "Publishername",
+          "order": 39
+        },
+        "reachedEventsLimit": {
+          "type": "boolean",
+          "title": "Reachedeventslimit",
+          "description": "Reachedeventslimit",
+          "order": 40
+        },
+        "rebootRequired": {
+          "type": "boolean",
+          "title": "Rebootrequired",
+          "description": "Rebootrequired",
+          "order": 41
+        },
+        "sha1": {
+          "type": "string",
+          "title": "Sha1",
+          "description": "Sha1",
+          "order": 42
+        },
+        "sha256": {
+          "type": "string",
+          "title": "Sha256",
+          "description": "Sha256",
+          "order": 43
+        },
+        "storyline": {
+          "type": "string",
+          "title": "Storyline",
+          "description": "Storyline",
+          "order": 44
+        },
+        "threatId": {
+          "type": "string",
+          "title": "Threatid",
+          "description": "Threatid",
+          "order": 45
+        },
+        "threatName": {
+          "type": "string",
+          "title": "Threatname",
+          "description": "Threatname",
+          "order": 46
+        },
+        "updatedAt": {
+          "type": "string",
+          "title": "Updatedat",
+          "description": "Updatedat",
+          "order": 47
         }
       }
     }
