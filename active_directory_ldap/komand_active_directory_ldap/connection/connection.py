@@ -29,14 +29,13 @@ class Connection(komand.Connection):
                 host=host,
                 port=port,
                 use_ssl=self.ssl,
+                allowed_referral_hosts=[("*", True)],
                 get_info=ldap3.ALL)
 
         try:
             conn = ldap3.Connection(server=server,
                                     user=user_name,
                                     password=password,
-                                    auto_encode=True,
-                                    auto_escape=True,
                                     auto_bind=True,
                                     auto_referrals=referrals,
                                     authentication=ldap3.NTLM)
@@ -51,6 +50,9 @@ class Connection(komand.Connection):
             raise ConnectionTestException(
                 preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
         except:
+            # An exception here is likely caused because the ldap server dose use NTLM
+            # A basic auth connection will be tried instead
+            self.logger.info("Failed to connect to the server with NTLM, attempting to connect with basic auth")
             try:
                 conn = ldap3.Connection(server=server,
                                         user=user_name,
@@ -91,10 +93,10 @@ class Connection(komand.Connection):
                 if host[1].find('//') != -1:
                     host = host[1][2:]
                 else:
-                    #self.logger.info('Port was provided in hostname, using value from Port field instead')
+                    self.logger.info('Port was provided in hostname, using value from Port field instead')
                     host = host[0]
             elif colons == 2:
-                #self.logger.info('Port was provided in hostname, using value from Port field instead')
+                self.logger.info('Port was provided in hostname, using value from Port field instead')
                 host = host[1]
                 if host.find('//') != -1:
                     host = host[2:]

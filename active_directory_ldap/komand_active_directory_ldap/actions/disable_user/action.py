@@ -54,7 +54,7 @@ class DisableUser(komand.Action):
         account_status = account_status | user_account_flag
 
         conn.modify(dn, {'userAccountControl': [(MODIFY_REPLACE, [account_status])]})
-        self.logger.info(conn.result)
+        #self.logger.info(conn.result)
         result = conn.result
         output = result['description']
 
