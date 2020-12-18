@@ -16,11 +16,13 @@ class UrlDecode(insightconnect_plugin_runtime.Action):
         in_url = params[Input.ENCODED_URL]
         url_v2 = 'https://urldefense.proofpoint.com/'  # This is good for v1 as well
         url_v3 = 'https://urldefense.com'
-
+        is_hxxp = in_url.startswith("hxxp")
         in_url = in_url.replace("hxxp", "http").replace("[.]", ".")
 
         if in_url.startswith(url_v2) or in_url.startswith(url_v3):
             encoded_url = in_url
+        elif is_hxxp:
+            encoded_url = f"https://urldefense.proofpoint.com/v1/url?u={in_url}&k="
         else:  # We assume a v2 encoded URL, this is legacy behavior
             encoded_url = f"https://urldefense.proofpoint.com/v2/url?u={in_url}&d="
 
