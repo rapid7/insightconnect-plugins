@@ -18,6 +18,7 @@ class Connection(komand.Connection):
         self.ssl = params.get(Input.USE_SSL)
         host = params.get(Input.HOST)
         port = params.get(Input.PORT)
+        referrals = params.get(Input.AUTO_REFERRALS)
         user_name = params.get(Input.USERNAME_PASSWORD).get('username')
         password = params.get(Input.USERNAME_PASSWORD).get('password')
 
@@ -37,7 +38,7 @@ class Connection(komand.Connection):
                                     auto_encode=True,
                                     auto_escape=True,
                                     auto_bind=True,
-                                    auto_referrals=True,
+                                    auto_referrals=referrals,
                                     authentication=ldap3.NTLM)
         except exceptions.LDAPBindError as e:
             self.logger.error(f'ldap3 returned the following error {e}')
@@ -54,7 +55,7 @@ class Connection(komand.Connection):
                 conn = ldap3.Connection(server=server,
                                         user=user_name,
                                         password=password,
-                                        auto_referrals=True,
+                                        auto_referrals=referrals,
                                         auto_bind=True)
             except exceptions.LDAPBindError as e:
                 self.logger.error(f'ldap3 returned the following error {e}')

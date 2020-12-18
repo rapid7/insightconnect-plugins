@@ -29,7 +29,6 @@ class TestHostFormatter(TestCase):
         conn.logger = logger
         conn.connect(params)
 
-
     def test_host_formatter(self):
         host_types = ['10.10.10.10', '11.11.11.11:345', 'ldaps://12.12.12.12', 'ldaps://14.14.14.14:345',
                       'mydomain.com', 'mydomain.com:345', 'ldaps://mydomain.com', 'ldaps://mydomain.com:345',
