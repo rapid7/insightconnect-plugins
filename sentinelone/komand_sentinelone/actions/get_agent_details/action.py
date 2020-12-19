@@ -14,7 +14,8 @@ class GetAgentDetails(komand.Action):
 
     def run(self, params={}):
         agent = params.get(Input.AGENT)
-        output = self.connection.client.search_agents(agent)
+        case_sensitive = params.get(Input.CASE_SENSITIVE)
+        output = self.connection.client.search_agents(agent, case_sensitive=case_sensitive)
 
         if len(output) > 1:
             self.logger.info(f"Multiple agents found that matched the query: {agent}. We will only act upon the first match")

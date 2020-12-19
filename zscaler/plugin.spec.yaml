@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: zscaler
 title: Zscaler
-version: 1.2.0
+version: 1.2.1
 description: Zscaler is a SaaS security platform that provides fast, secure connections between client applications, regardless of device, location, or network
 vendor: rapid7
 support: rapid7
@@ -61,9 +61,9 @@ types:
       required: false
   FileProperties:
     DigitalCerificate:
-      title: Digital Cerificate
+      title: Digital Certificate
       type: string
-      description: Digital cerificate
+      description: Digital certificate
       required: false
     FileSize:
       title: File Size
@@ -199,9 +199,9 @@ connection:
   url:
     title: URL
     type: string
-    description: Base URL, see https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details
+    description: Base URL, ex. 'https://admin.zscalerbeta.net'. See https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details
     required: true
-    example: admin.zscalerbeta.net
+    example: https://admin.zscalerbeta.net
   api_key:
     title: API Key
     type: credential_secret_key
@@ -233,7 +233,7 @@ actions:
         required: true
   blacklist_url:
     title: Blacklist URL
-    description: Blacklist or unblacklist a URLs
+    description: Blacklist or unblacklist URLs
     input:
       urls:
         title: URLs

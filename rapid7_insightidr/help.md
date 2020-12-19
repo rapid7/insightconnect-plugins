@@ -44,7 +44,7 @@ This action is used to get query results for a LEQL query by query ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Log ID|None|174e4f99-2ac7-4481-9301-4d24c34baf06|
+|id|string|None|True|Query ID|None|174e4f99-2ac7-4481-9301-4d24c34baf06|
 
 Example input:
 
@@ -328,6 +328,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.1 - Fix ID input description in Get Query Results action
 * 1.3.0 - New action Get Query Results
 * 1.2.1 - Change default value in the `size` input parameter to 1000 in List Investigations action
 * 1.2.0 - New Action Assign User to Investigation

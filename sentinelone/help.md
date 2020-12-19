@@ -52,7 +52,7 @@ This action is used to fetch a file associated with the threat that matches the 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Threat ID|None|None|
+|id|string|None|True|Threat ID|None|939039647215561624|
 |password|password|None|True|File encryption password, min. length 10 characters and cannot contain whitespace|None|Rapid7 Insightconnect|
 
 Example input:
@@ -119,14 +119,12 @@ This action is used to add hashed indicator of compromise to global blacklist.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |agent_id|string|None|True|Agent ID|None|None|
-|hash|string|None|True|Indicator of compromise hash to add to blacklist|None|None|
+|hash|string|None|True|Indicator of compromise hash to add to blacklist|None|3395856ce81f2b7382dee72602f798b642f14140|
 
 Example input:
 
 ```
 {
-  "blacklist_state": true,
-  "description": "Hash Blacklisted from InsightConnect",
   "hash": "3395856ce81f2b7382dee72602f798b642f14140"
 }
 ```
@@ -612,14 +610,12 @@ This action is used to add hashed content to global blacklist. The input makes u
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hash|string|None|True|Content hash to add to blacklist|None|None|
+|hash|string|None|True|Content hash to add to blacklist|None|3395856ce81f2b7382dee72602f798b642f14140|
 
 Example input:
 
 ```
 {
-  "blacklist_state": true,
-  "description": "Hash Blacklisted from InsightConnect",
   "hash": "3395856ce81f2b7382dee72602f798b642f14140"
 }
 ```
@@ -683,12 +679,14 @@ This action is used to retrieve agent details.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID|None|hostname123|
+|case_sensitive|boolean|True|True|Looks up the specified Agent in a case-sensitive manner. Setting this to false may result in longer run times and unintended results|None|True|
 
 Example input:
 
 ```
 {
-  "agent": "hostname123"
+  "agent": "hostname123",
+  "case_sensitive": true
 }
 ```
 
@@ -1019,6 +1017,7 @@ This action is used to isolate (quarantine) endpoint from the network.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |agent|string|None|True|Agent to perform quarantine action on. Accepts IP address, MAC address, hostname, UUID or agent ID|None|hostname123|
+|case_sensitive|boolean|True|True|Looks up the specified Agent in a case-sensitive manner. Setting this value to false may result in longer run times and unintended results|None|True|
 |quarantine_state|boolean|None|True|True to quarantine host, false to unquarantine host|None|True|
 |whitelist|[]string|None|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs|None|["198.51.100.100", "hostname123", "901345720792880606", "28db47168fa54f89aeed99769ac8d4dc"]|
 
@@ -1027,6 +1026,7 @@ Example input:
 ```
 {
   "agent": "hostname123",
+  "case_sensitive": true,
   "quarantine_state": true,
   "whitelist": [
     "198.51.100.100",
@@ -1068,13 +1068,15 @@ Note that retrieving all active agents can return a very large amount of data de
 |----|----|-------|--------|-----------|----|-------|
 |agent|string|None|False|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID. If empty, this action will return all active or inactive agents depending on the value of the Agent Active input|None|hostname123|
 |agent_active|boolean|True|False|Return a list of all active or inactive agents when Agent input is not specified. Note that setting this to true for Active agents can return a very large amount of data|None|True|
+|case_sensitive|boolean|True|True|Looks up agents in a case-sensitive manner. Setting this value to false may result in longer run times and unintended results|None|True|
 
 Example input:
 
 ```
 {
   "agent": "hostname123",
-  "agent_active": true
+  "agent_active": true,
+  "case_sensitive": true
 }
 ```
 
@@ -1509,7 +1511,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.0.2 - Add a loop in `get_threat_summary` action to get all threads recursively
+* 4.1.0 - Add case sensitivity option for Agent lookups
 * 4.0.1 - Fix Agent Active parameter in Get Agent Details action | Update Quarantine action whitelist for IP addresses
 * 4.0.0 - Update ID input for Fetch Threats File action to a string
 * 3.1.0 - Add new action Fetch Threats File

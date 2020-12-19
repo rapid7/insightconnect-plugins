@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 4.0.2
+version: 4.1.0
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
@@ -701,7 +701,7 @@ types:
       required: false
     domain:
       title: Domain
-      description: Network domain 
+      description: Network domain
       type: string
       required: false
     locationType:
@@ -878,6 +878,7 @@ actions:
         description: Content hash to add to blacklist
         type: string
         required: true
+        example: "3395856ce81f2b7382dee72602f798b642f14140"
     output:
       result:
         title: Result
@@ -893,6 +894,7 @@ actions:
         description: Indicator of compromise hash to add to blacklist
         type: string
         required: true
+        example: "3395856ce81f2b7382dee72602f798b642f14140"
       agent_id:
         title: Agent ID
         description: Agent ID
@@ -1450,6 +1452,13 @@ actions:
         example: true
         default: true
         required: false
+      case_sensitive:
+        title: Case Sensitive
+        description: Looks up agents in a case-sensitive manner. Setting this value to false may result in longer run times and unintended results
+        type: boolean
+        example: true
+        default: true
+        required: true
     output:
       agents:
         title: Agents
@@ -1466,6 +1475,13 @@ actions:
         type: string
         example: hostname123
         required: true
+      case_sensitive:
+        title: Case Sensitive
+        description: Looks up the specified Agent in a case-sensitive manner. Setting this to false may result in longer run times and unintended results
+        type: boolean
+        example: true
+        default: true
+        required: true
     output:
       agent:
         title: Agent
@@ -1474,7 +1490,7 @@ actions:
         required: false
   quarantine:
     title: Quarantine
-    description: Isolate (quarantine) endpoint from the network 
+    description: Isolate (quarantine) endpoint from the network
     input:
       agent:
         title: Agent
@@ -1494,6 +1510,13 @@ actions:
         type: "[]string"
         example: ["198.51.100.100", "hostname123", "901345720792880606", "28db47168fa54f89aeed99769ac8d4dc"]
         required: false
+      case_sensitive:
+        title: Case Sensitive
+        description: Looks up the specified Agent in a case-sensitive manner. Setting this value to false may result in longer run times and unintended results
+        type: boolean
+        example: true
+        default: true
+        required: true
     output:
       response:
         title: Response
@@ -1539,6 +1562,7 @@ actions:
         description: Threat ID
         type: string
         required: true
+        example: "939039647215561624"
       password:
         title: Password
         description: File encryption password, min. length 10 characters and cannot contain whitespace

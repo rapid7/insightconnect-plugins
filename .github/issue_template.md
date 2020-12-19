@@ -1,6 +1,6 @@
 ### Prerequisites
 
-* [ ] Are you running the latest version of [icon-plugin](https://komand.github.io/python/start.html)?
+* [ ] Are you running the latest version of [icon-plugin](https://docs.rapid7.com/insightconnect/getting-started/)?
 * [ ] Did you verify your credentials for the connection?
 * [ ] Provide your plugin input in JSON
 * [ ] Provide your plugin output in JSON

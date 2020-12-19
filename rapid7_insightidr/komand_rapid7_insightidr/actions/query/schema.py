@@ -24,7 +24,7 @@ class QueryInput(komand.Input):
     "id": {
       "type": "string",
       "title": "ID",
-      "description": "Log ID",
+      "description": "Query ID",
       "order": 1
     }
   },
