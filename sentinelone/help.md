@@ -125,6 +125,8 @@ Example input:
 
 ```
 {
+  "blacklist_state": true,
+  "description": "Hash Blacklisted from InsightConnect",
   "hash": "3395856ce81f2b7382dee72602f798b642f14140"
 }
 ```
@@ -1511,6 +1513,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.1.1 - Add a loop in `get_threat_summary` action to get all threads recursively
 * 4.1.0 - Add case sensitivity option for Agent lookups
 * 4.0.1 - Fix Agent Active parameter in Get Agent Details action | Update Quarantine action whitelist for IP addresses
 * 4.0.0 - Update ID input for Fetch Threats File action to a string

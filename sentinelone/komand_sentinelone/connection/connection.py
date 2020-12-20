@@ -142,7 +142,7 @@ class Connection(komand.Connection):
             "data": {"module": module}
         })
 
-    def get_threat_summary(self, limit: int = 10, offset: int = 0):
+    def get_threat_summary(self, limit: int = 1000, offset: int = 0):
         endpoint = f"threats?limit={limit}&skip={offset}"
 
         threats = self._call_api("GET", endpoint)
