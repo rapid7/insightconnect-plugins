@@ -325,7 +325,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             if full_response:
                 return response
 
-            # self.logger.info(f"RESPONSE IS: {response.json()}")
+            # self.logger.info(f"RESPONSE IS:\n\n{response.json()} \n\n")
             return response.json()
         except requests.HTTPError:
             raise Exception("API call failed: " + response.text)

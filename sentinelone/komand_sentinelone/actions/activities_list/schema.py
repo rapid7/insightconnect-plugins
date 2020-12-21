@@ -109,13 +109,13 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
     "cursor": {
       "type": "string",
       "title": "Cursor Position",
-      "description": "Cursor position returned by the last request. Should be used for iterating over more than 1000 items, example YWdlbnRfaWQ6NTgwMjkzODE=",
+      "description": "Cursor position returned by the last request. Should be used for iterating over more than 1000 items.",
       "order": 13
     },
     "group_ids": {
       "type": "array",
       "title": "Group IDS",
-      "description": "Get a list of activities",
+      "description": "List of Group IDs",
       "items": {
         "type": "string"
       },
@@ -124,7 +124,7 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
     "ids": {
       "type": "array",
       "title": "Activity IDS",
-      "description": "If true, total number of items will not be calculated, which speeds up execution time",
+      "description": "List of Activity IDs",
       "items": {
         "type": "string"
       },
@@ -140,6 +140,7 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Limit",
       "description": "Limit number of returned items (1-100)",
+      "default": 10,
       "order": 16
     },
     "site_ids": {

@@ -1,11 +1,11 @@
 {
-	"spec": "ffb7388fe7f0ac10e405de0ef4ba3399",
-	"manifest": "2904604574415ee3331d2ad765719c74",
-	"setup": "34482f3c25a89ea274cca3428aff1e4c",
+	"spec": "f3d18a380159ebce10f614615de04cbf",
+	"manifest": "0916318e47f4016adf5384a2ae78c885",
+	"setup": "32bb5e88f14f42e534154998e2d29d22",
 	"schemas": [
 		{
 			"identifier": "activities_list/schema.py",
-			"hash": "0fb3b44cd57e52aa1d4ae63d31914870"
+			"hash": "0774f94a32c6b4a260ef65e37a04fd06"
 		},
 		{
 			"identifier": "activities_types/schema.py",

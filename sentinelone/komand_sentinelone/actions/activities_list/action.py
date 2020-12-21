@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 
 from .schema import ActivitiesListInput, ActivitiesListOutput, Input, Output, Component
 from komand_sentinelone.util.helper import Helper
-
+import json
 
 class ActivitiesList(insightconnect_plugin_runtime.Action):
 
@@ -39,6 +39,10 @@ class ActivitiesList(insightconnect_plugin_runtime.Action):
             "createdAt__gte": params.get(Input.CREATED_AT_GTE, None),
         })
 
+        self.logger.info("UNCLEANED RESPONSE IS:\n\n")
+        self.logger.info(json.dumps(response))
+        self.logger.info("\n\n\n")
+
         data = []
         if Output.DATA in response:
             for i in response.get(Output.DATA):
@@ -46,5 +50,5 @@ class ActivitiesList(insightconnect_plugin_runtime.Action):
 
         return {
             Output.DATA: data,
-            Output.PAGINATION: response.get(Output.PAGINATION),
+            Output.PAGINATION: insightconnect_plugin_runtime.helper.clean(response.get(Output.PAGINATION)),
         }

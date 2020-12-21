@@ -5,7 +5,7 @@ import json
 from sys import argv
 
 Name = "SentinelOne"
-Vendor = "ned-test"
+Vendor = "rapid7"
 Version = "4.1.1"
 Description = "The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne"
 

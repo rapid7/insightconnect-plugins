@@ -1408,39 +1408,46 @@ actions:
     input:
       group_ids:
         title: Group IDS
-        description: Get a list of activities
+        description: List of Group IDs
         type: '[]string'
         required: false
+        example: ["500000000000000000"]
       include_hidden:
         title: Include Hidden
         description: Include internal activities hidden from display
         type: boolean
         required: false
+        example: true
       skip:
         title: Skip First N Items
         description: Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead
         type: integer
         required: false
+        example: 0
       site_ids:
         title: Site IDS
         description: List of Site IDs to filter by
         type: '[]string'
         required: false
+        example: ["5000000000000001"]
       agent_ids:
         title: Agent IDS
         description: Return activities related to specified agent ids
         type: '[]string'
         required: false
+        example: ["9000000000000000"]
       skip_count:
         title: Skip Count
         description: If true, total number of items will not be calculated, which speeds up execution time
         type: boolean
         required: false
+        example: false
       ids:
         title: Activity IDS
-        description: If true, total number of items will not be calculated, which speeds up execution time
+        description: List of Activity IDs
         type: '[]string'
         required: false
+        example: ["800000000000000008"]
       created_at_lt:
         title: Less Then Date
         description: Return activities created before this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
@@ -1456,6 +1463,7 @@ actions:
         description: Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
         type: string
         required: false
+        example: "2020-12-18T23:02:22.796800Z"
       created_at_gte:
         title: Greater or Equal Date
         description: Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
@@ -1468,24 +1476,29 @@ actions:
         required: false
       cursor:
         title: Cursor Position
-        description: Cursor position returned by the last request. Should be used for iterating over more than 1000 items, example YWdlbnRfaWQ6NTgwMjkzODE=
+        description: Cursor position returned by the last request. Should be used for iterating over more than 1000 items.
         type: string
         required: false
+        example: "YWdlbnRfaWQ6NTgwMjkzODE="
       count_only:
         title: Count Only
         description: If true, only total number of items will be returned, without any of the actual objects
         type: boolean
         required: false
+        example: false
       account_ids:
         title: Account IDS
         description: List of Account IDs to filter by
         type: '[]string'
         required: false
+        example: ["400000000000000000"]
       limit:
         title: Limit
         description: Limit number of returned items (1-100)
         type: integer
         required: false
+        example: 10
+        default: 10
       sort_by:
         title: Sort By
         description: The column to sort the results by
@@ -1495,16 +1508,20 @@ actions:
           - id
           - activityType
           - createdAt
+        example: "createdAt"
+        default: "createdAt"
       activity_types:
         title: Activity Types
         description: Return only these activity codes
         type: '[]string'
         required: false
+        example: ["22", "23"]
       threat_ids:
         title: Threat IDS
         description: Return only these activity codes
         type: '[]string'
         required: false
+        example: ["1"]
       sort_order:
         title: Sort Order
         description: Sort direction
@@ -1513,16 +1530,20 @@ actions:
           - asc
           - desc
         required: false
+        default: "asc"
+        example: "asc"
       user_emails:
         title: User Emails
         description: Email of the user who invoked the activity (If applicable)
         type: '[]string'
         required: false
+        example: ["example@domain.com"]
       user_ids:
         title: User IDS
         description: The user who invoked the activity (If applicable)
         type: '[]string'
         required: false
+        example: ["500000000000000003"]
     output:
       data:
         title: Data
