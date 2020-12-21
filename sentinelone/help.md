@@ -153,10 +153,10 @@ This action is used to get a list of activities.
 |agent_ids|[]string|None|False|Return activities related to specified agent ids|None|["9000000000000000"]|
 |count_only|boolean|None|False|If true, only total number of items will be returned, without any of the actual objects|None|False|
 |created_at_between|string|None|False|Return activities created within this range (inclusive), example 1514978764288-1514978999999|None|None|
-|created_at_gt|string|None|False|Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|2020-12-18T23:02:22.796800Z|
-|created_at_gte|string|None|False|Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|None|
-|created_at_lt|string|None|False|Return activities created before this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|None|
-|created_at_lte|string|None|False|Return activities created before or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|None|
+|created_at_gt|string|None|False|Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|2020-12-18T18:49:26.257525Z|
+|created_at_gte|string|None|False|Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|None|
+|created_at_lt|string|None|False|Return activities created before this date in ISO-8601|None|2020-12-20T18:49:26.257525Z|
+|created_at_lte|string|None|False|Return activities created before or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|None|
 |cursor|string|None|False|Cursor position returned by the last request. Should be used for iterating over more than 1000 items.|None|YWdlbnRfaWQ6NTgwMjkzODE=|
 |group_ids|[]string|None|False|List of Group IDs|None|["500000000000000000"]|
 |ids|[]string|None|False|List of Activity IDs|None|["800000000000000008"]|
@@ -165,8 +165,8 @@ This action is used to get a list of activities.
 |site_ids|[]string|None|False|List of Site IDs to filter by|None|["5000000000000001"]|
 |skip|integer|None|False|Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead|None|0|
 |skip_count|boolean|None|False|If true, total number of items will not be calculated, which speeds up execution time|None|False|
-|sort_by|string|None|False|The column to sort the results by|['id', 'activityType', 'createdAt']|id|
-|sort_order|string|None|False|Sort direction|['asc', 'desc']|asc|
+|sort_by|string|createdAt|False|The column to sort the results by|['id', 'activityType', 'createdAt']|createdAt|
+|sort_order|string|asc|False|Sort direction|['asc', 'desc']|asc|
 |threat_ids|[]string|None|False|Return only these activity codes|None|["1"]|
 |user_emails|[]string|None|False|Email of the user who invoked the activity (If applicable)|None|["example@domain.com"]|
 |user_ids|[]string|None|False|The user who invoked the activity (If applicable)|None|["500000000000000003"]|
@@ -186,7 +186,8 @@ Example input:
     "9000000000000000"
   ],
   "count_only": false,
-  "created_at_gt": "2020-12-18T23:02:22.796800Z",
+  "created_at_gt": "2020-12-18T18:49:26.257525Z",
+  "created_at_lt": "2020-12-20T18:49:26.257525Z",
   "cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
   "group_ids": [
     "500000000000000000"
@@ -201,7 +202,7 @@ Example input:
   ],
   "skip": 0,
   "skip_count": false,
-  "sort_by": "id",
+  "sort_by": "createdAt",
   "sort_order": "asc",
   "threat_ids": [
     "1"
@@ -220,7 +221,6 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|[]activities_list|True|Result of activities list|
-|pagination|pagination|True|Pagination object|
 
 Example output:
 

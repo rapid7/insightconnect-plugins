@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 
 from .schema import ActivitiesListInput, ActivitiesListOutput, Input, Output, Component
 from komand_sentinelone.util.helper import Helper
-import json
+
 
 class ActivitiesList(insightconnect_plugin_runtime.Action):
 
@@ -39,16 +39,29 @@ class ActivitiesList(insightconnect_plugin_runtime.Action):
             "createdAt__gte": params.get(Input.CREATED_AT_GTE, None),
         })
 
-        self.logger.info("UNCLEANED RESPONSE IS:\n\n")
-        self.logger.info(json.dumps(response))
-        self.logger.info("\n\n\n")
-
         data = []
+        self.add_to_data(data, response)
+
+        limit = params.get(Input.LIMIT, None)
+
+        pagination = response.get("pagination")
+        next_cursor = pagination.get("nextCursor")
+        while next_cursor and not limit:
+            response = self.connection.activities_list({
+                "cursor": next_cursor,
+            })
+
+            data = self.add_to_data(data, response)
+            pagination = response.get("pagination")
+            next_cursor = pagination.get("nextCursor")
+
+        return {
+            Output.DATA: data
+        }
+
+    @staticmethod
+    def add_to_data(data, response):
         if Output.DATA in response:
             for i in response.get(Output.DATA):
                 data.append(insightconnect_plugin_runtime.helper.clean_dict(i))
-
-        return {
-            Output.DATA: data,
-            Output.PAGINATION: insightconnect_plugin_runtime.helper.clean(response.get(Output.PAGINATION)),
-        }
+        return data

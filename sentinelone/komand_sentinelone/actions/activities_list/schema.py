@@ -34,7 +34,6 @@ class Input:
 
 class Output:
     DATA = "data"
-    PAGINATION = "pagination"
     
 
 class ActivitiesListInput(insightconnect_plugin_runtime.Input):
@@ -85,25 +84,25 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
     "created_at_gt": {
       "type": "string",
       "title": "Greater Then Date",
-      "description": "Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z",
+      "description": "Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z",
       "order": 10
     },
     "created_at_gte": {
       "type": "string",
       "title": "Greater or Equal Date",
-      "description": "Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z",
+      "description": "Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z",
       "order": 11
     },
     "created_at_lt": {
       "type": "string",
       "title": "Less Then Date",
-      "description": "Return activities created before this date in ISO-8601, example 2018-02-27T04:49:26.257525Z",
+      "description": "Return activities created before this date in ISO-8601",
       "order": 8
     },
     "created_at_lte": {
       "type": "string",
       "title": "Less or Equal Date",
-      "description": "Return activities created before or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z",
+      "description": "Return activities created before or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z",
       "order": 9
     },
     "cursor": {
@@ -168,6 +167,7 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Sort By",
       "description": "The column to sort the results by",
+      "default": "createdAt",
       "enum": [
         "id",
         "activityType",
@@ -179,6 +179,7 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Sort Order",
       "description": "Sort direction",
+      "default": "asc",
       "enum": [
         "asc",
         "desc"
@@ -234,17 +235,10 @@ class ActivitiesListOutput(insightconnect_plugin_runtime.Output):
         "$ref": "#/definitions/activities_list"
       },
       "order": 1
-    },
-    "pagination": {
-      "$ref": "#/definitions/pagination",
-      "title": "Pagination",
-      "description": "Pagination object",
-      "order": 2
     }
   },
   "required": [
-    "data",
-    "pagination"
+    "data"
   ],
   "definitions": {
     "activities_list": {
@@ -358,24 +352,6 @@ class ActivitiesListOutput(insightconnect_plugin_runtime.Output):
           "title": "UserId",
           "description": "The user who invoked the activity (If applicable)",
           "order": 2
-        }
-      }
-    },
-    "pagination": {
-      "type": "object",
-      "title": "pagination",
-      "properties": {
-        "nextCursor": {
-          "type": "string",
-          "title": "Next Cursor",
-          "description": "Next cursor",
-          "order": 2
-        },
-        "totalItems": {
-          "type": "integer",
-          "title": "Total Items",
-          "description": "Total items",
-          "order": 1
         }
       }
     }

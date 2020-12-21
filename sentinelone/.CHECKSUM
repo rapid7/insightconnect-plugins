@@ -1,11 +1,11 @@
 {
-	"spec": "f3d18a380159ebce10f614615de04cbf",
+	"spec": "bd313fc9222d117d9375d0695cc95542",
 	"manifest": "0916318e47f4016adf5384a2ae78c885",
 	"setup": "32bb5e88f14f42e534154998e2d29d22",
 	"schemas": [
 		{
 			"identifier": "activities_list/schema.py",
-			"hash": "0774f94a32c6b4a260ef65e37a04fd06"
+			"hash": "ee7b895941c2855277339766e5d8a76e"
 		},
 		{
 			"identifier": "activities_types/schema.py",
