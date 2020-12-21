@@ -26,7 +26,7 @@ In order to view the API Key Management page, the admin must be assigned an admi
 
 In the **Organization API Key** tab, the base URI and key details are displayed within the table.
 
-For more information see the [Zscalar getting started guide](https://help.zscaler.com/zia/api-getting-started) on obtaining the API key and base URL.
+For more information see the [Zscaler getting started guide](https://help.zscaler.com/zia/api-getting-started) on obtaining the API key and base URL.
 
 The connection configuration accepts the following parameters:
 
