@@ -1,11 +1,11 @@
 {
-	"spec": "7b070ad9b41ea0bfb8b9dc6740ef05af",
+	"spec": "b0707e250f3ce73c2f2c444d285c74eb",
 	"manifest": "4f4c943511e51e0aa21658cdba7bc976",
 	"setup": "fbb34f52df213a07d58a1c3adca8f216",
 	"schemas": [
 		{
 			"identifier": "create_scan_config/schema.py",
-			"hash": "bff6210bd1f501117604026154878f92"
+			"hash": "03bc1b00a47278fa6150a75d14b08f63"
 		},
 		{
 			"identifier": "delete_scan/schema.py",

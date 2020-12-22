@@ -262,6 +262,28 @@ actions:
         type: string
         required: true
         example: "11111111-0000-0000-0000-000000000000"
+      assignment_environment:
+        title: Assignment Environment
+        description: Where the scan will run from ON_PREMISE or CLOUD
+        required: true
+        type: string
+        enum:
+        - CLOUD
+        - ON_PREMISE
+        example: CLOUD
+      assignment_id:
+        title: Engine group UUID
+        description: The UUID of the engine Group
+        required: true
+        type: string
+        example: "78c85b01-2a23-404d-ac5a-18324d8e3bda"
+      assignment_type:
+        title: Assignment type
+        description: The type of engine assignment
+        required: true
+        type: string
+        example: ENGINE_GROUP
+        default: ENGINE_GROUP
     output:
       status:
         title: Status

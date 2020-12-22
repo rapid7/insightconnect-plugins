@@ -77,6 +77,9 @@ This action is used to create a new scan configuration.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |app_id|string|None|True|App UUID|None|78c85b01-2a23-404d-ac5a-18324d8e3bda|
+|assignment_environment|string|None|True|Where the scan will run from ON_PREMISE or CLOUD|['CLOUD', 'ON_PREMISE']|CLOUD|
+|assignment_id|string|None|True|The UUID of the engine Group|None|78c85b01-2a23-404d-ac5a-18324d8e3bda|
+|assignment_type|string|ENGINE_GROUP|True|The type of engine assignment|None|ENGINE_GROUP|
 |attack_template_id|string|None|True|Attack template UUID|None|11111111-0000-0000-0000-000000000000|
 |config_description|string|None|False|The description of the scan configuration|None|Description for scan config|
 |config_name|string|None|True|The name of the scan configuration|None|Scan Config 1|
@@ -86,6 +89,9 @@ Example input:
 ```
 {
   "app_id": "78c85b01-2a23-404d-ac5a-18324d8e3bda",
+  "assignment_environment": "CLOUD",
+  "assignment_id": "78c85b01-2a23-404d-ac5a-18324d8e3bda",
+  "assignment_type": "ENGINE_GROUP",
   "attack_template_id": "11111111-0000-0000-0000-000000000000",
   "config_description": "Description for scan config",
   "config_name": "Scan Config 1"
@@ -120,7 +126,7 @@ Example input:
 
 ```
 {
-  "scan_config_id": "6a33ae79-5ebd-44a9-9a0a-f269876e90c9"
+  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
 }
 ```
 
@@ -246,7 +252,7 @@ Example input:
 
 ```
 {
-  "scan_config_id": "6a33ae79-5ebd-44a9-9a0a-f269876e90c9"
+  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
 }
 ```
 
@@ -411,7 +417,9 @@ Example input:
 
 ```
 {
-  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+  "index": 0,
+  "size": 50,
+  "sort": "scan.submit_time,DESC"
 }
 ```
 
