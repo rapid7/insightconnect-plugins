@@ -45,7 +45,8 @@ class GetSchedulesOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "data": {
       "type": "array",
-      "title": "Response data",
+      "title": "Response Data",
+      "description": "Response data",
       "items": {
         "$ref": "#/definitions/schedule"
       },
@@ -53,7 +54,8 @@ class GetSchedulesOutput(insightconnect_plugin_runtime.Output):
     },
     "links": {
       "type": "array",
-      "title": "Links to data",
+      "title": "Links to Data",
+      "description": "Links to data",
       "items": {
         "$ref": "#/definitions/link"
       },
@@ -62,6 +64,7 @@ class GetSchedulesOutput(insightconnect_plugin_runtime.Output):
     "metadata": {
       "type": "object",
       "title": "Metadata",
+      "description": "Metadata for the scedules",
       "order": 1
     }
   },

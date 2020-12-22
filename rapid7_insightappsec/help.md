@@ -59,9 +59,9 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|[]schedule|False||
-|links|[]link|False||
-|metadata|object|False||
+|data|[]schedule|False|Response data|
+|links|[]link|False|Links to data|
+|metadata|object|False|Metadata for the scedules|
 
 Example output:
 
@@ -126,7 +126,7 @@ Example input:
 
 ```
 {
-  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+  "scan_config_id": "6a33ae79-5ebd-44a9-9a0a-f269876e90c9"
 }
 ```
 
@@ -252,7 +252,7 @@ Example input:
 
 ```
 {
-  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+  "scan_config_id": "6a33ae79-5ebd-44a9-9a0a-f269876e90c9"
 }
 ```
 
@@ -417,9 +417,7 @@ Example input:
 
 ```
 {
-  "index": 0,
-  "size": 50,
-  "sort": "scan.submit_time,DESC"
+  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
 }
 ```
 
@@ -537,7 +535,7 @@ Example input:
 
 ```
 {
-  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+  "scan_id": "c762adbe-1636-4c70-9787-5f22c2dc5af8"
 }
 ```
 
@@ -617,7 +615,7 @@ Example input:
 
 ```
 {
-  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+  "scan_id": "c762adbe-1636-4c70-9787-5f22c2dc5af8"
 }
 ```
 
@@ -658,6 +656,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.0
 * 1.0.2 - Update to v4 Python plugin runtime | Add example inputs
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin

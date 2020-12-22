@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightappsec
 title: Rapid7 InsightAppSec
 description: This plugin allows for the creation, configuration, and starting of scans. The plugin can also retrieve scan results and logging related to the execution of the scan
-version: 1.0.2
+version: 2.0.0
 vendor: rapid7
 status: []
 support: rapid7
@@ -272,13 +272,13 @@ actions:
         - ON_PREMISE
         example: CLOUD
       assignment_id:
-        title: Engine group UUID
+        title: Engine Group UUID
         description: The UUID of the engine Group
         required: true
         type: string
         example: "78c85b01-2a23-404d-ac5a-18324d8e3bda"
       assignment_type:
-        title: Assignment type
+        title: Assignment Type
         description: The type of engine assignment
         required: true
         type: string
@@ -588,16 +588,16 @@ actions:
     output:
       metadata:
         title: Metadata
-        description:
+        description: Metadata for the scedules
         type: object
         required: false
       data:
-        title: Response data
-        description:
+        title: Response Data
+        description: Response data
         type: '[]schedule'
         required: false
       links:
-        title: Links to data
-        description:
+        title: Links to Data
+        description: Links to data
         type: '[]link'
         required: false

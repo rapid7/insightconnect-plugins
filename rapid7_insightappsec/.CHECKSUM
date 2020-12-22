@@ -1,11 +1,11 @@
 {
-	"spec": "b0707e250f3ce73c2f2c444d285c74eb",
-	"manifest": "4f4c943511e51e0aa21658cdba7bc976",
-	"setup": "fbb34f52df213a07d58a1c3adca8f216",
+	"spec": "a4a5e44bec51189d5ee0d41946c1d1db",
+	"manifest": "5a38e25d7bc8fd438537baf35d69eb18",
+	"setup": "db1333242ad3d49bd16db23646ef67c9",
 	"schemas": [
 		{
 			"identifier": "create_scan_config/schema.py",
-			"hash": "03bc1b00a47278fa6150a75d14b08f63"
+			"hash": "5410354475ef6b505c3dd63bdde6f6cd"
 		},
 		{
 			"identifier": "delete_scan/schema.py",
@@ -45,7 +45,7 @@
 		},
 		{
 			"identifier": "get_schedules/schema.py",
-			"hash": "1c685e0d6e2111bd1b0b318da00ff7b0"
+			"hash": "9638c5b2d225d357e2fc67062fc2b93a"
 		},
 		{
 			"identifier": "submit_scan/schema.py",

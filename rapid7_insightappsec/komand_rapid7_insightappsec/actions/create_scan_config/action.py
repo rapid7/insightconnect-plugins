@@ -27,7 +27,7 @@ class CreateScanConfig(insightconnect_plugin_runtime.Action):
         url = ScanConfig.scan_config(self.connection.url)
         payload = {'name': config_name, 'description': config_description,
                    'app': {'id': app_id}, 'attack_template': {'id': attack_template_id},
-                    'assignment': {'environment': assignment_environment, 'id': assignment_id, 'type': assignment_type}}
+                   'assignment': {'environment': assignment_environment, 'id': assignment_id, 'type': assignment_type}}
 
         response = request.resource_request(url, 'post', payload=payload)
 
