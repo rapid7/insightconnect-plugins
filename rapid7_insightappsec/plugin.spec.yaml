@@ -187,6 +187,38 @@ types:
       description: The current delay between HTTP requests
       type: number
       required: false
+  frequency:
+    type:
+      title:
+      description:
+      type: string
+      required: false
+    interval:
+      title:
+      description:
+      type: integer
+      required: false
+  schedule:
+    id:
+      title: Assigned UUID of Schedule
+      description:
+      type: string
+      required: false
+    name:
+      title: Name of Schedule
+      description:
+      type: string
+      required: false
+    enabled:
+      title: Enable the schedule
+      description:
+      type: boolean
+      required: false
+    first_start:
+      title: Date String for the start of the schedule
+      description:
+      type: string
+      required: false
 connection:
   api_key:
     title: API Key
@@ -520,4 +552,30 @@ actions:
         title: Events
         description: An array of event logs and their dates
         type: '[]event_log'
+        required: false
+  get_schedules:
+    title: Get All Schedules
+    description: Get a page of Schedules
+    input:
+      sort:
+        title: Sort
+        description: How to sort the response
+        type: string
+        required: false
+        example: ASC
+    output:
+      metadata:
+        title: Metadata
+        description:
+        type: object
+        required: false
+      data:
+        title: Response data
+        description:
+        type: '[]schedule'
+        required: false
+      links:
+        title: Links to data
+        description:
+        type: '[]link'
         required: false

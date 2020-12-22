@@ -9,6 +9,7 @@ from .get_scan_engine_events.action import GetScanEngineEvents
 from .get_scan_execution_details.action import GetScanExecutionDetails
 from .get_scan_platform_events.action import GetScanPlatformEvents
 from .get_scans.action import GetScans
+from .get_schedules.action import GetSchedules
 from .submit_scan.action import SubmitScan
 from .submit_scan_action.action import SubmitScanAction
 from .update_scan_config.action import UpdateScanConfig

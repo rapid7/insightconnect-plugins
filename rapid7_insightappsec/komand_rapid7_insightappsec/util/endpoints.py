@@ -60,3 +60,22 @@ class Scans:
         :return: pre-populated ias/v1/scans/{scan_id}/platform-events/
         """
         return f'{console_url}ias/v1/scans/{scan_id}/platform-events/'
+
+class Schedule:
+
+    @staticmethod
+    def get_schedules(console_url: str):
+        """
+        URI for a page of all Schedules
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/schedules/
+        """
+        return f'{console_url}ias/v1/schedules/'
+
+    @staticmethod
+    def create_schedule(console_url: str):
+        """
+        URI to schedule the scan of a scan_config
+        :param console_url: URL to the IAS console
+        """
+        return f'{console_url}ias/v1/schedules/'

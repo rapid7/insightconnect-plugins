@@ -1,6 +1,6 @@
 {
-	"spec": "ca1cf3944cafc0fb4046fcead009f7bf",
-	"manifest": "fe5f80af635722681924d3efd61b9f58",
+	"spec": "7b070ad9b41ea0bfb8b9dc6740ef05af",
+	"manifest": "4f4c943511e51e0aa21658cdba7bc976",
 	"setup": "fbb34f52df213a07d58a1c3adca8f216",
 	"schemas": [
 		{
@@ -42,6 +42,10 @@
 		{
 			"identifier": "get_scans/schema.py",
 			"hash": "0f4014ab76a6728415a815b6089545a7"
+		},
+		{
+			"identifier": "get_schedules/schema.py",
+			"hash": "1c685e0d6e2111bd1b0b318da00ff7b0"
 		},
 		{
 			"identifier": "submit_scan/schema.py",

@@ -28,9 +28,7 @@ Example input:
 
 ```
 {
-  "api_key": {
-      "secretKey": "abc12345-abc1-2345-abc1-abc123456789"
-  },
+  "api_key": "abc12345-abc1-2345-abc1-abc123456789",
   "url": "https://us.api.insight.rapid7.com"
 }
 ```
@@ -38,6 +36,37 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Get All Schedules
+
+This action is used to get a page of Schedules.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|sort|string|None|False|How to sort the response|None|ASC|
+
+Example input:
+
+```
+{
+  "sort": "ASC"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|data|[]schedule|False||
+|links|[]link|False||
+|metadata|object|False||
+
+Example output:
+
+```
+```
 
 #### Create Scan Config
 
@@ -217,9 +246,7 @@ Example input:
 
 ```
 {
-  "index": 0,
-  "size": 0,
-  "sort": "scanconfig.name,DESC"
+  "scan_config_id": "6a33ae79-5ebd-44a9-9a0a-f269876e90c9"
 }
 ```
 
@@ -384,9 +411,7 @@ Example input:
 
 ```
 {
-  "index": 0,
-  "size": 50,
-  "sort": "scan.submit_time,DESC"
+  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
 }
 ```
 
@@ -504,7 +529,7 @@ Example input:
 
 ```
 {
-  "scan_id": "c762adbe-1636-4c70-9787-5f22c2dc5af8"
+  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
 }
 ```
 
@@ -584,7 +609,7 @@ Example input:
 
 ```
 {
-  "scan_id": "c762adbe-1636-4c70-9787-5f22c2dc5af8"
+  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
 }
 ```
 
