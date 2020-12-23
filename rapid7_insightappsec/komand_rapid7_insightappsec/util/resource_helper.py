@@ -86,7 +86,7 @@ class ResourceHelper(object):
         last_page = False
 
         if not params.get('size'):
-            params = {
-                'size': 500,
-                'page': current_page
-            }
+            params['size'] = 50
+
+        if not params.get('index'):
+            params['index'] = 50
