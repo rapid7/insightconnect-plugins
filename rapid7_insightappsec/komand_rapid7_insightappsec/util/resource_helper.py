@@ -67,3 +67,26 @@ class ResourceHelper(object):
             status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
             self.logger.error(f'{status_code_message} ({response.status_code}): {error}')
             raise Exception(f'Insight AppSec returned a status code of {response.status_code}: {status_code_message}')
+
+    def paged_resource_request(self, endpoint: str, method: str = 'get', params: dict = None,
+                               payload: dict = None, number_of_results: int = 0) -> dict:
+        """
+        Sends a paged request to API with the provided endpoint and optional method/payload
+        :param endpoint: Endpoint for the API call defined in endpoints.py
+        :param method: HTTP method for the API request
+        :param params: URL parameters to append to the request
+        :param payload: JSON body for the API request if required
+        :param number_of_results: The total number of results to retrieve. 0 is unlimited
+        :return: Dict containing the JSON response body
+        """
+
+        resources = []
+        current_page = 0
+        results_retrieved = 0
+        last_page = False
+
+        if not params.get('size'):
+            params = {
+                'size': 500,
+                'page': current_page
+            }
