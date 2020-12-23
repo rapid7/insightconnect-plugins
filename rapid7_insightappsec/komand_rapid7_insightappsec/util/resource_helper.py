@@ -11,9 +11,11 @@ class ResourceHelper(object):
 
     _ERRORS = {
         400: "Bad Request",
-        401: "Unauthorized",
+        401: "Unauthenticated",
         403: "Unauthorized",
         404: "Not Found",
+        409: "Action Conflict",
+        415: "Unsupported Media Type",
         500: "Internal Server Error",
         503: "Service Unavailable",
         000: "Unknown Status Code"
@@ -54,7 +56,7 @@ class ResourceHelper(object):
             self.logger.error(e)
             raise
 
-        if response.status_code in range(200, 299):
+        if response.status_code in range(200, 204, 299):
             resource = response.text
             return {'resource': resource, 'status': response.status_code}
         else:

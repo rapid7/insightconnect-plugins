@@ -234,6 +234,35 @@ connection:
     default: https://us.api.insight.rapid7.com
     example: https://us.api.insight.rapid7.com
 actions:
+  get_apps:
+    title: Get All Apps
+    description: Get a page of all apps
+    input:
+      index:
+        title: Index
+        description: The page index to start form. If blank, index will be 0
+        type: integer
+        required: false
+        example: 0
+      size:
+        title: Size
+        description: The number of entries on each page. If blank, size will be 50
+        type: integer
+        required: false
+        example: 0
+      sort:
+        title: Sort
+        description: How to sort the scan configs. If blank, sort will be alphabetical
+          by scan config name
+        type: string
+        required: false
+        example: "DESC"
+    output:
+      app_configs:
+        title: App Configs
+        description: A list of app configurations
+#        type: '[]app_config'
+        required: false
   create_scan_config:
     title: Create Scan Config
     description: Create a new scan configuration
@@ -584,7 +613,7 @@ actions:
         description: How to sort the response
         type: string
         required: false
-        example: ASC
+        example: "ASC"
     output:
       metadata:
         title: Metadata

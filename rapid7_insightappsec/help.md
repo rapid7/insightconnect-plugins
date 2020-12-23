@@ -126,7 +126,7 @@ Example input:
 
 ```
 {
-  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+  "scan_config_id": "6a33ae79-5ebd-44a9-9a0a-f269876e90c9"
 }
 ```
 
@@ -218,7 +218,7 @@ Example input:
 
 ```
 {
-  "scan_config_id": "4569288e-2bb4-416e-a4ee-4f7add18afe0"
+  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
 }
 ```
 
@@ -252,7 +252,9 @@ Example input:
 
 ```
 {
-  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+  "index": 0,
+  "size": 0,
+  "sort": "scanconfig.name,DESC"
 }
 ```
 
@@ -537,7 +539,7 @@ Example input:
 
 ```
 {
-  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+  "scan_id": "c762adbe-1636-4c70-9787-5f22c2dc5af8"
 }
 ```
 
@@ -617,7 +619,7 @@ Example input:
 
 ```
 {
-  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+  "scan_id": "c762adbe-1636-4c70-9787-5f22c2dc5af8"
 }
 ```
 

@@ -1,3 +1,137 @@
+class Apps:
+
+    @staticmethod
+    def get_apps(console_url: str):
+        """
+        URI for all App operations
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/apps/
+        """
+        return f'{console_url}ias/v1/apps/'
+
+    @staticmethod
+    def create_app(console_url: str):
+        """
+        URI for all App operations
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/apps/
+        """
+        return f'{console_url}ias/v1/apps/'
+
+    @staticmethod
+    def get_app(console_url: str, app_id: str):
+        """
+        URI for all App operations
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/apps/UUID/
+        """
+        return f'{console_url}ias/vi/apps/{app_id}/'
+
+    @staticmethod
+    def update_app(console_url: str, app_id: str):
+        """
+        URI for all App operations
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/apps/UUID/
+        """
+        return f'{console_url}ias/v1/apps/{app_id}/'
+
+    @staticmethod
+    def delete_app(console_url: str, app_id: str):
+        """
+        URI for all App operations
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/apps/UUID/
+        """
+        return f'{console_url}ias/vi/apps/{app_id}/'
+
+    @staticmethod
+    def get_app_users(console_url: str, app_id: str):
+        """
+        URI for all App operations
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/apps/UUID/users/
+        """
+        return f'{console_url}ias/vi/apps/{app_id}/users/'
+
+    @staticmethod
+    def add_app_user(console_url: str, app_id: str):
+        """
+        URI for all App operations
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/apps/UID/users/
+        """
+        return f'{console_url}ias/vi/apps/{app_id}/users/'
+
+    @staticmethod
+    def remove_app_user(console_url: str, app_id: str, user_id: str):
+        """
+        URI for all App operations
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/apps/UUID/users/UUID/
+        """
+        return f'{console_url}ias/vi/apps/{app_id}/users/{user_id}/'
+
+
+class AttackTemplates:
+    def get_attack_templates(console_url: str):
+        """
+        URI for all attack template operations
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/attack-templates/
+        """
+        return f'{console_url}ias/vi/attack-templates/'
+
+    def get_attack_template(console_url: str, attack_template_id: str):
+        """
+        URI for all attack template operations
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/attack-templates/UUID/
+        """
+        return f'{console_url}ias/vi/attack-templates/{attack_template_id}/'
+
+class Blackouts:
+    def get_blackouts(console_url: str):
+        """
+        URI for all blackout operations
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/blackouts/
+        """
+        return f'{console_url}ias/vi/blackouts/'
+
+    def create_blackout(console_url: str):
+        """
+        URI for all blackout operations
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/blackouts/
+        """
+        return f'{console_url}ias/vi/blackouts/'
+
+    def get_blackout(console_url: str, blackout_id: str):
+        """
+        URI for all blackout operations
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/blackouts/UUID/
+        """
+        return f'{console_url}ias/vi/blackouts/{blackout_id}/'
+
+    def update_blackout(concole_url: str, blackout_id: str):
+        """
+        URI for all blackout operations
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/blackouts/UUID/
+        """
+        return f'{console_url}ias/vi/blackouts/{blackout_id}/'
+
+    def delete_blackout(concole_url: str, blackout_id: str):
+        """
+        URI for all blackout operations
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/blackouts/UUID/
+        """
+        return f'{console_url}ias/vi/blackouts/{blackout_id}/'
+
+
 class ScanConfig:
 
     @staticmethod
