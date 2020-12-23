@@ -45,13 +45,13 @@ class CreateScanConfigInput(insightconnect_plugin_runtime.Input):
     },
     "assignment_id": {
       "type": "string",
-      "title": "Engine group UUID",
+      "title": "Engine Group UUID",
       "description": "The UUID of the engine Group",
       "order": 6
     },
     "assignment_type": {
       "type": "string",
-      "title": "Assignment type",
+      "title": "Assignment Type",
       "description": "The type of engine assignment",
       "default": "ENGINE_GROUP",
       "order": 7
