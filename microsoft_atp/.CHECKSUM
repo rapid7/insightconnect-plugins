@@ -1,7 +1,7 @@
 {
-	"spec": "0e10b6621cc45113f2584363c5fe9d35",
-	"manifest": "80428c03f7e4da4b6bf9be39729a0a90",
-	"setup": "a40a05695b1558e9e06d7830664528a6",
+	"spec": "457f709c68ce278ef688dd56b20c5eb0",
+	"manifest": "dfca1399817f98a83395b1e3d381eb38",
+	"setup": "46a9bc136b9dc1915ce8e7ac27e54f7d",
 	"schemas": [
 		{
 			"identifier": "blacklist/schema.py",
@@ -14,6 +14,10 @@
 		{
 			"identifier": "get_file_id_from_alert_id/schema.py",
 			"hash": "e5288fd810dc0856a26733180d957e32"
+		},
+		{
+			"identifier": "get_installed_software/schema.py",
+			"hash": "3ec5e17de958b70154b142fe98bb72a9"
 		},
 		{
 			"identifier": "get_machine_action/schema.py",
@@ -32,12 +36,20 @@
 			"hash": "3ebafb48978fb85e11adbeb699a6a6df"
 		},
 		{
+			"identifier": "get_related_machines/schema.py",
+			"hash": "66b66fc4590d339f5b5caa108031bf4e"
+		},
+		{
 			"identifier": "get_security_recommendations/schema.py",
 			"hash": "103ef019f8834ac9c95dd93950fff700"
 		},
 		{
 			"identifier": "isolate_machine/schema.py",
 			"hash": "b4df0cbd0f9af92eebf70df357134ab8"
+		},
+		{
+			"identifier": "manage_tags/schema.py",
+			"hash": "6880a8faa04bb580f4f6829291cf226d"
 		},
 		{
 			"identifier": "run_antivirus_scan/schema.py",

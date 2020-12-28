@@ -9,9 +9,11 @@ import sys
 import re
 import string
 from base64 import urlsafe_b64decode
+
 if sys.version_info[0] < 3:
     from urllib import unquote
     import HTMLParser
+
     htmlparser = HTMLParser.HTMLParser()
     unescape = htmlparser.unescape
     from string import maketrans
@@ -29,7 +31,7 @@ class URLDefenseDecoder(object):
         URLDefenseDecoder.v1_pattern = re.compile(r'u=(?P<url>.+?)&k=')
         URLDefenseDecoder.v2_pattern = re.compile(r'u=(?P<url>.+?)&[dc]=')
         URLDefenseDecoder.v3_pattern = re.compile(r'v3/__(?P<url>.+?)__;(?P<enc_bytes>.*?)!')
-        URLDefenseDecoder.v3_token_pattern = re.compile("\*(\*.)?")
+        URLDefenseDecoder.v3_token_pattern = re.compile(r"\*(\*.)?")
         URLDefenseDecoder.v3_run_mapping = {}
         run_values = string.ascii_uppercase + string.ascii_lowercase + string.digits + '-' + '_'
         run_length = 2

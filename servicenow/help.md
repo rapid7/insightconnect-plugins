@@ -31,10 +31,7 @@ Example input:
 
 ```
 {
-  "client_login": {
-    "username": "user1",
-    "password": "mypassword"
-  },
+  "client_login": "{\"username\":\"user1\", \"password\":\"mypassword\"}",
   "timeout": 30,
   "url": "https://instance.servicenow.com"
 }
@@ -754,6 +751,7 @@ _This plugin does not contain any troubleshooting information._
 # Version History
 
 * 5.0.0 - Add input fields to Create Incident and Update Incident action instead of JSON object
+* 4.1.2 - Fix input parameter in Incident Created trigger
 * 4.1.1 - Add `docs_url` to plugin spec with link to plugin setup guide
 * 4.1.0 - Add trigger Incident Created
 * 4.0.0 - New Number output to create incident action

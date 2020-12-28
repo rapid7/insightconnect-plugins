@@ -46,6 +46,171 @@ Example input:
 
 ### Actions
 
+#### Get Related Machines
+
+This action is used to get machines related to an file hash(SHA1), domain or username indicator.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|indicator|string|None|True|File hash(SHA1), domain or username indicator|None|example.com|
+
+Example input:
+
+```
+{
+  "indicator": "example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|machines|[]machine|True|Machines related to an file hash(SHA1), domain or username indicator|
+
+Example output:
+
+```
+{
+  "machines": [
+    {
+      "exposureLevel": "Medium",
+      "lastIpAddress": "10.0.2.15",
+      "machineTags": [
+        "tag1",
+        "tag2"
+      ],
+      "agentVersion": "10.5850.17763.348",
+      "lastSeen": "2020-12-08T10:37:41.2907723Z",
+      "osBuild": 17763,
+      "osPlatform": "Windows10",
+      "rbacGroupId": 0,
+      "computerDnsName": "msedgewin10",
+      "firstSeen": "2020-12-08T09:33:03.1262943Z",
+      "osProcessor": "x64",
+      "version": "1809",
+      "deviceValue": "Normal",
+      "healthStatus": "Active",
+      "id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+      "isAadJoined": false,
+      "lastExternalIpAddress": "83.220.117.67",
+      "riskScore": "None"
+    }
+  ]
+}
+```
+
+#### Manage Tags
+
+This action is used to add or remove machine tags.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|machine|string|None|True|Machine IP address, hostname, or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|tag|string|None|True|The tag value|None|example tag|
+|type|boolean|True|True|True to add tag, false to remove it|None|True|
+
+Example input:
+
+```
+{
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+  "tag": "example tag",
+  "type": true
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|manage_tags_response|manage_tags_response|True|A response that includes updated tags and supplemental information about the machine|
+
+Example output:
+
+```
+{
+  "manage_tags_response": {
+    "computerDnsName": "msedgewin10",
+    "deviceValue": "Normal",
+    "machineTags": ["tag1", "tag2", "example tag"],
+    "riskScore": "None",
+    "@odata.context": "https://api.securitycenter.windows.com/api/$metada...",
+    "id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+    "osProcessor": "x64",
+    "rbacGroupId": 0,
+    "version": "1809",
+    "osPlatform": "Windows10",
+    "agentVersion": "10.5850.17763.348",
+    "exposureLevel": "Medium",
+    "isAadJoined": false,
+    "lastExternalIpAddress": "83.220.117.67",
+    "lastIpAddress": "10.0.2.15",
+    "osBuild": 17763,
+    "firstSeen": "2020-12-08T09:33:03.1262943Z",
+    "healthStatus": "Active",
+    "lastSeen": "2020-12-08T10:37:41.2907723Z"
+  }
+}
+```
+
+#### Get Installed Software
+
+This action retrieves a collection of installed software related to a given machine IP address, hostname, or machine ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|machine|string|None|True|Machine IP address, hostname, or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+
+Example input:
+
+```
+{
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|software|[]software|True|List of installed software on the machine|
+
+Example output:
+
+```
+{
+  "software": [
+    {
+      "publicExploit": true,
+      "vendor": "microsoft",
+      "weaknesses": 1056,
+      "activeAlert": false,
+      "exposedMachines": 1,
+      "id": "microsoft-_-windows_10",
+      "impactScore": 63.8,
+      "name": "windows_10"
+    },
+    {
+      "exposedMachines": 0,
+      "id": "microsoft-_-edge_chromium-based",
+      "impactScore": 0,
+      "name": "edge_chromium-based",
+      "publicExploit": false,
+      "vendor": "microsoft",
+      "weaknesses": 0,
+      "activeAlert": false
+    }
+  ]
+}
+```
+
 #### Get Missing Software Updates
 
 This action is used to retrieve a list of software updates.
@@ -751,7 +916,226 @@ Example output:
 
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+#### alert
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|AAD Tenant ID|string|False|AAD tenant ID|
+|Alert Creation Time|string|False|Alert creation time|
+|Assigned To|string|False|Assigned To|
+|Category|string|False|Category|
+|Classification|string|False|Classification|
+|Computer DNS Name|string|False|Computer DNS name|
+|Description|string|False|Description|
+|Detection Source|string|False|Detection source|
+|Determination|string|False|Determination|
+|First Event Time|string|False|First event time|
+|ID|string|False|ID|
+|Incident ID|integer|False|Incident ID|
+|Investigation ID|integer|False|Investigation ID|
+|Investigation State|string|False|Investigation state|
+|Last Event Time|string|False|Last event time|
+|Last Update Time|string|False|Last update time|
+|Machine ID|string|False|Machine ID|
+|RBAC Group Name|string|False|RBAC group name|
+|Related User|related_user_object|False|Related user|
+|Resolved Time|string|False|Resolved time|
+|Severity|string|False|Severity|
+|Status|string|False|Status|
+|Threat Family Name|string|False|Threat family name|
+|Title|string|False|Title|
+
+#### file_type
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Determination Type|string|False|Determination type|
+|Determination Value|string|False|Determination value|
+|File Product Name|string|False|File product name|
+|File Publisher|string|False|File publisher|
+|File Type|string|False|File type|
+|Global First Observed|string|False|Global first observed|
+|Global Last Observed|string|False|Global last observed|
+|Global Prevalence|integer|False|Global prevalence|
+|Is PE File|boolean|False|Is PE File|
+|Is Valid Certificate|boolean|False|Is valid certificate|
+|Issuer|string|False|Issuer|
+|MD5|string|False|MD5|
+|SHA1|string|False|SHA1|
+|SHA256|string|False|SHA256|
+|Signer|string|False|Signer|
+|Signer Hash|string|False|Signer hash|
+|Size|integer|False|Size|
+
+#### indicator_action
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|@Odata.Context|string|False|@odata.context|
+|Action|string|False|The action that will be taken if the indicator will be discovered in the organization|
+|Application|string|False|The application associated with the indicator|
+|Created By|string|False|Unique identity of the user/application that submitted the indicator|
+|Created By Display Name|string|False|Created by display name|
+|Created By Source|string|False|Created by source|
+|Creation Time|string|False|The date and time when the indicator was created|
+|Description|string|False|Description of the indicator|
+|Expiration Time|string|False|The expiration time of the indicator|
+|Generate Alert|boolean|False|Generate alert|
+|Historical Detection|boolean|False|Historical detection|
+|Indicator ID|string|False|Identity of the indicator entity|
+|Indicator Type|string|False|Type of the indicator|
+|Indicator Value|string|False|The potentially malicious indicator of one of the following types: IP addresses, URLs, domains, and SHA1 and SHA256 hashes|
+|Last Update Time|string|False|The last time the indicator was updated|
+|Last Updated By|string|False|Identity of the user/application that last updated the indicator|
+|MITRE Techniques|[]string|False|MITRE techniques|
+|RBAC Group IDs|[]string|False|RBAC group IDs|
+|RBAC Group Names|[]string|False|RBAC device group names where the indicator is exposed and active. Empty list in case it exposed to all devices|
+|Recommended Actions|string|False|Recommended actions for the indicator|
+|Severity|string|False|The severity of the indicator|
+|Source|string|False|The name of the user/application that submitted the indicator|
+|Source Type|string|False|User in case the Indicator created by a user (e.g. from the portal), AadApp in case it submitted using automated application via the API.|
+|Title|string|False|Indicator alert title|
+
+#### machine
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Agent Version|string|False|Agent version|
+|Computer DNS Name|string|False|Computer DNS name|
+|Exposure Level|string|False|Exposure level|
+|First Seen|string|False|First seen|
+|Health Status|string|False|Health status|
+|ID|string|False|ID|
+|Last External IP Address|string|False|Last external IP address|
+|Last IP Address|string|False|Last IP address|
+|Last Seen|string|False|Last seen|
+|Machine Tags|[]string|False|Machine Tags|
+|OS Build|integer|False|OS build|
+|OS Platform|string|False|OS platform|
+|OS Processor|string|False|OS processor|
+|RBAC Group ID|integer|False|RBAC group ID|
+|Risk Score|string|False|Risk score|
+|Version|string|False|Version|
+
+#### machine_action
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Creation Date Time UTC|string|False|Creation date time UTC|
+|Error HResult|integer|False|Error HResult|
+|ID|string|False|ID|
+|Last Update Date Time UTC|string|False|Last update date time UTC|
+|Machine ID|string|False|Machine ID|
+|Requestor|string|False|Requestor|
+|Requestor Comment|string|False|Requestor comment|
+|Status|string|False|Status|
+
+#### machine_software
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Computer DNS Name|string|False|Computer DNS name|
+|ID|string|False|ID|
+|OS Platform|string|False|OS platform|
+|RBAC Group ID|number|False|RBAC group ID|
+|RBAC Group Name|string|False|RBAC group name|
+
+#### manage_tags_response
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|@Odata.Context|string|False|@odata.context|
+|Agent Version|string|False|Agent version|
+|Computer DNS Name|string|False|Computer DNS name|
+|Device Value|string|False|Device value|
+|Exposure Level|string|False|Exposure level|
+|First Seen|string|False|First seen|
+|Health Status|string|False|Health status|
+|ID|string|False|ID|
+|Is AAD Joined|boolean|False|Is AAD joined|
+|Last External IP Address|string|False|Last external IP address|
+|Last IP Address|string|False|Last IP address|
+|Last Seen|string|False|Last seen|
+|Machine Tags|[]string|False|Machine tags|
+|OS Build|integer|False|OS build|
+|OS Platform|string|False|OS platform|
+|OS Processor|string|False|OS Processor|
+|RBAC Group ID|integer|False|RBAC group ID|
+|Risk Score|string|False|Risk score|
+|Version|string|False|Version|
+
+#### recommendation
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Active Alert|boolean|False|Active alert|
+|Associated Threats|[]string|False|Associated threats|
+|Config Score Impact|float|False|Config score impact|
+|Exposed Machines Count|integer|False|Exposed machines count|
+|Exposure Impact|float|False|Exposure impact|
+|ID|string|False|ID|
+|Non Productivity Impacted Assets|integer|False|Non productivity impacted assets|
+|Product Name|string|False|Product name|
+|Public Exploit|boolean|False|Public exploit|
+|Recommendation Category|string|False|Recommendation category|
+|Recommendation Name|string|False|Recommendation name|
+|Related Component|string|False|Related component|
+|Remediation Type|string|False|Remediation type|
+|Severity Score|float|False|Severity score|
+|Status|string|False|Status|
+|Total Machine Count|integer|False|Total machine count|
+|Vendor|string|False|Vendor|
+|Weaknesses|integer|False|Weaknesses|
+
+#### related_user_object
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Domain Name|string|False|Domain name|
+|User Name|string|False|User name|
+
+#### software
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Active Alert|boolean|False|Active alert|
+|Exposed Machines|integer|False|Exposed machines|
+|ID|string|False|ID|
+|Impact Score|float|False|Impact score|
+|Name|string|False|Name|
+|Public Exploit|boolean|False|Public exploit|
+|Vendor|string|False|Vendor|
+|Weaknesses|integer|False|Weaknesses|
+
+#### update
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|CVE Addressed|integer|False|Update CVE addressed|
+|ID|string|False|Update ID|
+|Machine Missed On|integer|False|Update machine missed on|
+|Name|string|False|Update name|
+|OS Build|integer|False|Update OS build|
+|Products Names|[]string|False|Update products names|
+|URL|string|False|Update URL|
+
+#### vulnerability
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|CVSS V3|float|False|CVSS v3|
+|Description|string|False|Description|
+|Exploit In Kit|boolean|False|Exploit in kit|
+|Exploit Types|[]string|False|Exploit types|
+|Exploit URIs|[]string|False|Exploit URIs|
+|Exploit Verified|boolean|False|Exploit verified|
+|Exposed Machines|integer|False|Exposed machines|
+|ID|string|False|ID|
+|Name|string|False|Name|
+|Public Exploit|boolean|False|Public exploit|
+|Published On|string|False|Published on|
+|Severity|string|False|Severity|
+|Updated On|string|False|Updated on|
 
 ## Troubleshooting
 
@@ -759,6 +1143,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.6.0 - Add new actions Get Installed Software, Get Related Machines and Manage Tags
 * 4.5.1 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/microsoft-defender-ATP)
 * 4.5.0 - Add new action Get Missing Software Updates
 * 4.4.1 - Add validation MD5 hash in Blacklist action | Set default value for Title, Expiration Time and Description input in action Blacklist
