@@ -31,7 +31,10 @@ Example input:
 
 ```
 {
-  "client_login": "{\"username\":\"user1\", \"password\":\"mypassword\"}",
+  "client_login": {
+    "username": "user1",
+    "password": "mypassword"
+  },
   "timeout": 30,
   "url": "https://instance.servicenow.com"
 }
