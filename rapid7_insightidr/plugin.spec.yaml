@@ -478,6 +478,7 @@ actions:
         description: The investigation that was modified
         type: investigation
         required: true
+
   query:
     title: Get Query Results
     description: Get query results for a LEQL query by query ID
@@ -493,4 +494,62 @@ actions:
         title: Events
         description: Events from logs
         type: "[]events"
+        required: true
+
+  advanced_query:
+    title: Advanced Query
+    description: Realtime query into Insight IDR logs
+    input:
+      query:
+        title: Query
+        description: Query
+        type: string
+        example: "where(user=adagentadmin, loose)"
+        required: true
+      time_from:
+        title: Time From
+        description: Beginning time and date for the query
+        type: string
+        example: "Something goes here"
+        required: false
+      time_to:
+        title: Time To
+        description: Ending date and time for the query
+        type: string
+        example: "Something goes here"
+        required: false
+      log:
+        title: Log
+        description: Log to search
+        type: string
+        example: Firewall Activity
+        required: true
+        enum:
+          - Advanced Malware Alert
+          - Active Directory Admin Activity
+          - Asset Authentication
+          - Cloud Service Admin Activity
+          - Cloud Service Activity
+          - DNS Query
+          - Endpoint Activity
+          - EndPoint Agent
+          - Exploit Mitigation Alert
+          - File Access Activity
+          - File Modification Activity
+          - Firewall Activity
+          - Network Flow
+          - Host To IP Observations
+          - IDS Alert
+          - Ingress Authentication
+          - Raw Log
+          - SSO Authentication
+          - Unparsed Data
+          - Third Party Alert
+          - Virus Alert
+          - Web Proxy Activity
+    output:
+      results:
+        title: Query Results
+        description: Qurey Results
+        type: "[]object"
         required: true

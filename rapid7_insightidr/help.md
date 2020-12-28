@@ -36,6 +36,41 @@ Example input:
 
 ### Actions
 
+#### Advanced Query
+
+This action is used to realtime query into Insight IDR logs.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|log|string|None|True|Log to search|['Advanced Malware Alert', 'Active Directory Admin Activity', 'Asset Authentication', 'Cloud Service Admin Activity', 'Cloud Service Activity', 'DNS Query', 'Endpoint Activity', 'EndPoint Agent', 'Exploit Mitigation Alert', 'File Access Activity', 'File Modification Activity', 'Firewall Activity', 'Network Flow', 'Host To IP Observations', 'IDS Alert', 'Ingress Authentication', 'Raw Log', 'SSO Authentication', 'Unparsed Data', 'Third Party Alert', 'Virus Alert', 'Web Proxy Activity']|Firewall Activity|
+|query|string|None|True|Query|None|where(user=adagentadmin, loose)|
+|time_from|string|None|False|Beginning time and date for the query|None|Something goes here|
+|time_to|string|None|False|Ending date and time for the query|None|Something goes here|
+
+Example input:
+
+```
+{
+  "log": "Firewall Activity",
+  "query": "where(user=adagentadmin, loose)",
+  "time_from": "Something goes here",
+  "time_to": "Something goes here"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|results|[]object|True|Qurey Results|
+
+Example output:
+
+```
+```
+
 #### Get Query Results
 
 This action is used to get query results for a LEQL query by query ID.
