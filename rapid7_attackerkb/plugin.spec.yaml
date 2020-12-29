@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_attackerkb
 title: Rapid7 AttackerKB
 description: AttackerKB is a knowledge base of vulnerabilities and informed opinions on what makes them valuable (or not) targets for exploitation
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: rapid7
 status: []
