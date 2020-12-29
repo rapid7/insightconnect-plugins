@@ -82,7 +82,7 @@ class AdvancedQueryInput(komand.Input):
       "type": "integer",
       "title": "timeout",
       "description": "Time in seconds to wait for the query to return. If exceeded the plugin will throw an error",
-      "default": 3600,
+      "default": 60,
       "order": 4
     }
   },

@@ -48,7 +48,7 @@ This action is used to realtime query into Insight IDR logs.
 |query|string|None|True|Query|None|where(user=adagentadmin, loose)|
 |time_from|string|None|True|Beginning time and date for the query|None|01-01-2020|
 |time_to|string|None|False|Ending date and time for the query. If this is left blank, the current time will be used|None|12-31-2020|
-|timeout|int|3600|True|Time in seconds to wait for the query to return. If exceeded the plugin will throw an error|None|3600|
+|timeout|int|60|True|Time in seconds to wait for the query to return. If exceeded the plugin will throw an error|None|60|
 
 Example input:
 
@@ -58,7 +58,7 @@ Example input:
   "query": "where(user=adagentadmin, loose)",
   "time_from": "01-01-2020",
   "time_to": "12-31-2020",
-  "timeout": 3600
+  "timeout": 60
 }
 ```
 

@@ -522,8 +522,8 @@ actions:
         title: timeout
         description: Time in seconds to wait for the query to return. If exceeded the plugin will throw an error
         type: int
-        example: 3600
-        default: 3600
+        example: 60
+        default: 60
         required: true
       log:
         title: Log
