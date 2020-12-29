@@ -44,10 +44,11 @@ This action is used to realtime query into Insight IDR logs.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|log|string|None|True|Log to search|['Advanced Malware Alert', 'Active Directory Admin Activity', 'Asset Authentication', 'Cloud Service Admin Activity', 'Cloud Service Activity', 'DNS Query', 'Endpoint Activity', 'EndPoint Agent', 'Exploit Mitigation Alert', 'File Access Activity', 'File Modification Activity', 'Firewall Activity', 'Network Flow', 'Host To IP Observations', 'IDS Alert', 'Ingress Authentication', 'Raw Log', 'SSO Authentication', 'Unparsed Data', 'Third Party Alert', 'Virus Alert', 'Web Proxy Activity']|Firewall Activity|
+|log|string|None|True|Log to search|['Advanced Malware Alert', 'Active Directory', 'Admin Activity', 'Alert Audit Log', 'Asset Authentication', 'Cloud Service Admin Activity', 'Cloud Service Activity', 'DNS Query', 'Endpoint Activity', 'Endpoint Agents', 'Exploit Mitigation Alert', 'File Access Activity', 'File Modification Activity', 'Firewall Activity', 'Log Updates', 'Network Flow', 'Host To IP Observations', 'IDS Alert', 'Ingress Authentication', 'Raw Log', 'SSO Authentication', 'Unparsed Data', 'Third Party Alert', 'Virus Alert', 'Web Access Log', 'Windows Defender', 'Web Proxy Activity']|Firewall Activity|
 |query|string|None|True|Query|None|where(user=adagentadmin, loose)|
-|time_from|string|None|False|Beginning time and date for the query|None|01-01-2020|
-|time_to|string|None|False|Ending date and time for the query|None|12-31-2020|
+|time_from|string|None|True|Beginning time and date for the query|None|01-01-2020|
+|time_to|string|None|False|Ending date and time for the query. If this is left blank, the current time will be used|None|12-31-2020|
+|timeout|int|3600|True|Time in seconds to wait for the query to return. If exceeded the plugin will throw an error|None|3600|
 
 Example input:
 
@@ -56,7 +57,8 @@ Example input:
   "log": "Firewall Activity",
   "query": "where(user=adagentadmin, loose)",
   "time_from": "01-01-2020",
-  "time_to": "12-31-2020"
+  "time_to": "12-31-2020",
+  "timeout": 3600
 }
 ```
 
@@ -64,7 +66,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|[]object|True|Qurey Results|
+|results|[]events|True|Qurey Results|
 
 Example output:
 

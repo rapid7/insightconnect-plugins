@@ -3,6 +3,7 @@ from .schema import AdvancedQueryInput, AdvancedQueryOutput, Input, Output, Comp
 from komand.exceptions import PluginException
 # Custom imports below
 import time
+import json
 from dateutil.parser import parse, ParserError
 
 
@@ -18,6 +19,7 @@ class AdvancedQuery(komand.Action):
     def run(self, params={}):
         query = params.get(Input.QUERY)
         log_name = params.get(Input.LOG)
+        timeout = params.get(Input.TIMEOUT)
 
         time_from_string = params.get(Input.TIME_FROM)
         time_to_string = params.get(Input.TIME_TO)
@@ -32,8 +34,14 @@ class AdvancedQuery(komand.Action):
         callback_url, log_entries = self.maybe_get_log_entries(log_id, query, time_from, time_to)
 
         if not log_entries:
-            log_entries = self.get_results_from_callback(callback_url)
+            log_entries = self.get_results_from_callback(callback_url, timeout)
 
+        log_entries = komand.helper.clean(log_entries)
+
+        for log_entry in log_entries:
+            log_entry["message"] = json.loads(log_entry.get("message", "{}"))
+
+        self.logger.info(f"Sending results to orchestrator.")
         return {Output.RESULTS: log_entries}
 
     def parse_dates(self, time_from_string: str, time_to_string: str) -> (int, int):
@@ -59,13 +67,14 @@ class AdvancedQuery(komand.Action):
                                   data=e)
         return time_from, time_to
 
-    def get_results_from_callback(self, callback_url: str) -> [object]:
+    def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:
         """
         Get log entries from a callback URL
 
         @param callback_url: str
         @return: list of log entries
         """
+        self.logger.info(f"Trying to get results from callback URL: {callback_url}")
         response = self.connection.session.get(callback_url)
         try:
             response.raise_for_status()
@@ -73,8 +82,13 @@ class AdvancedQuery(komand.Action):
             raise PluginException(cause="Failed to get logs from InsightIDR",
                                   assistance=f"Could not get logs from: {callback_url}",
                                   data=response.text)
+        results_object = response.json()
+        log_entries = results_object.get("events")
 
-        while not response.status_code == 200:
+        counter = timeout
+        while not log_entries and counter > 0:
+            self.logger.info("Results were not ready. Sleeping 1 second and trying again.")
+            self.logger.info(f"Time left: {counter}")
             time.sleep(1)
             response = self.connection.session.get(callback_url)
 
@@ -86,8 +100,11 @@ class AdvancedQuery(komand.Action):
                                       assistance=f"Could not get logs from: {callback_url}",
                                       data=response.text)
 
-        results_object = response.json()
-        return results_object.get("events")
+            results_object = response.json()
+            log_entries = results_object.get("events")
+            counter-=1
+
+        return log_entries
 
     def maybe_get_log_entries(self, log_id: str, query: str, time_from: int, time_to: int) -> (str, [object]):
         """
@@ -112,6 +129,8 @@ class AdvancedQuery(komand.Action):
             "to": time_to
         }
 
+        self.logger.info(f"Getting logs from: {endpoint}")
+        self.logger.info(f"Using parameters: {params}")
         response = self.connection.session.get(endpoint, params=params)
         try:
             response.raise_for_status()
@@ -121,11 +140,12 @@ class AdvancedQuery(komand.Action):
                                   data=response.text)
 
         results_object = response.json()
-
         potential_results = results_object.get("events")
         if potential_results:
+            self.logger.info("Got results immediately, returning.")
             return None, potential_results
         else:
+            self.logger.info("Got a callback url. Polling results...")
             return results_object.get("links")[0].get("href"), None
 
     def get_log_id(self, log_name: str) -> str:
@@ -136,8 +156,9 @@ class AdvancedQuery(komand.Action):
         @return: str
         """
         endpoint = f"{self.connection.url}log_search/management/logs"
-        response = self.connection.session.get(endpoint)
 
+        self.logger.info(f"Getting log entries from: {endpoint}")
+        response = self.connection.session.get(endpoint)
         try:
             response.raise_for_status()
         except Exception:
@@ -148,6 +169,10 @@ class AdvancedQuery(komand.Action):
         logs = response.json().get("logs")
 
         id = ""
+
+        for log in logs:
+            print(log.get('name'))
+
         for log in logs:
             name = log.get('name')
             self.logger.info(f"Checking {log_name} against {name}")
@@ -157,8 +182,10 @@ class AdvancedQuery(komand.Action):
                 break
 
         if id:
+            self.logger.info(f"Found log with name {log_name} and ID: {id}")
             return id
 
+        self.logger.error(f"Could not find log with name {log_name}")
         raise PluginException(cause="Could not find specified log.",
                               assistance=f"Could not find log with name: {log_name}")
 

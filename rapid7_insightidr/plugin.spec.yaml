@@ -511,13 +511,20 @@ actions:
         description: Beginning time and date for the query
         type: string
         example: "01-01-2020"
-        required: false
+        required: true
       time_to:
         title: Time To
-        description: Ending date and time for the query
+        description: Ending date and time for the query. If this is left blank, the current time will be used
         type: string
         example: "12-31-2020"
         required: false
+      timeout:
+        title: timeout
+        description: Time in seconds to wait for the query to return. If exceeded the plugin will throw an error
+        type: int
+        example: 3600
+        default: 3600
+        required: true
       log:
         title: Log
         description: Log to search
@@ -526,17 +533,20 @@ actions:
         required: true
         enum:
           - Advanced Malware Alert
-          - Active Directory Admin Activity
+          - Active Directory
+          - Admin Activity
+          - Alert Audit Log
           - Asset Authentication
           - Cloud Service Admin Activity
           - Cloud Service Activity
           - DNS Query
           - Endpoint Activity
-          - EndPoint Agent
+          - Endpoint Agents
           - Exploit Mitigation Alert
           - File Access Activity
           - File Modification Activity
           - Firewall Activity
+          - Log Updates
           - Network Flow
           - Host To IP Observations
           - IDS Alert
@@ -546,10 +556,12 @@ actions:
           - Unparsed Data
           - Third Party Alert
           - Virus Alert
+          - Web Access Log
+          - Windows Defender
           - Web Proxy Activity
     output:
       results:
         title: Query Results
         description: Qurey Results
-        type: "[]object"
+        type: "[]events"
         required: true

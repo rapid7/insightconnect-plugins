@@ -34,7 +34,7 @@ class TestAdvancedQuery(TestCase):
         results = test_action.run(action_params)
 
         self.assertTrue("results" in results.keys())
-        self.assertTrue(len(results) > 0)
+        self.assertTrue(len(results.get("results")) > 0)
 
     def test_get_log(self):
         action_params, connection_params, test_action, test_conn = self.setup()
