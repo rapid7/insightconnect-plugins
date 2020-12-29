@@ -83,7 +83,7 @@ class TestAdvancedQuery(TestCase):
         self.assertEquals(res8, 1609394400000)
 
         not_used, now_result = test_action.parse_dates(time_test1, None)
-        self.assertIsNotNone(now_result) 
+        self.assertIsNotNone(now_result)
 
         with self.assertRaises(PluginException):
             test_action.parse_dates("AAA", None)

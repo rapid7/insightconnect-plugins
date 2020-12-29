@@ -35,7 +35,15 @@ class AdvancedQuery(komand.Action):
 
         return {Output.RESULTS: log_entries}
 
-    def parse_dates(self, time_from_string, time_to_string):
+    def parse_dates(self, time_from_string: str, time_to_string: str) -> (int, int):
+        """
+        Parse incoming dates and return millisecond epoch time
+
+        @param time_from_string: str
+        @param time_to_string: str
+        @return: (int, int)
+        """
+
         # Parse times to epoch milliseconds
         try:
             time_from = int(parse(time_from_string).timestamp()) * 1000
@@ -50,7 +58,13 @@ class AdvancedQuery(komand.Action):
                                   data=e)
         return time_from, time_to
 
-    def get_results_from_callback(self, callback_url):
+    def get_results_from_callback(self, callback_url: str) -> [object]:
+        """
+        Get log entries from a callback URL
+
+        @param callback_url: str
+        @return: list of log entries
+        """
         response = self.connection.session.get(callback_url)
         try:
             response.raise_for_status()
@@ -74,7 +88,22 @@ class AdvancedQuery(komand.Action):
         results_object = response.json()
         return results_object.get("events")
 
-    def maybe_get_log_entries(self, log_id, query, time_from, time_to):
+    def maybe_get_log_entries(self, log_id: str, query: str, time_from: int, time_to: int) -> (str, [object]):
+        """
+        Make a call to the API and ask politely for log results.
+
+        If the query runs exceptionally fast the API will return results immediately. In this case, we will return the
+        results as the second return entry in the return tuple. The first element of the tuple will be None
+
+        Usually, the API will return a 202 with callback URL to poll for results. If this is the case, we
+        return the URL as the first entry in the tuple return. The second element in the return tuple will be None
+
+        @param log_id: str
+        @param query: str
+        @param time_from: int
+        @param time_to: int
+        @return: (callback url, list of log entries)
+        """
         endpoint = f"{self.connection.url}log_search/query/logs/{log_id}"
         params = {
             "query": query,
@@ -98,7 +127,13 @@ class AdvancedQuery(komand.Action):
         else:
             return results_object.get("links")[0].get("href"), None
 
-    def get_log_id(self, log_name):
+    def get_log_id(self, log_name: str) -> str:
+        """
+        Gets a log ID for a given log name
+
+        @param log_name: str
+        @return: str
+        """
         endpoint = f"{self.connection.url}log_search/management/logs"
         response = self.connection.session.get(endpoint)
 
