@@ -53,7 +53,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def get_auth_token(self, url, username, password):
         # TODO: Need to make a token timeout here for 7 days
-        final_url = url + "web/api/v2.0/users/login"
+        final_url = url + "web/api/v2.1/users/login"
 
         auth_headers = {
             "username": username,
@@ -109,7 +109,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return self._call_api("GET", "private/agents/summary", None, {"siteIds": site_ids, "accountIds": account_ids})
 
     def agents_action(self, action: str, agents_filter: str):
-        return self._call_api("POST", "agents/actions/{}".format(action), {"filter": agents_filter})
+        return self._call_api("POST", f"agents/actions/{action}", {"filter": agents_filter})
 
     def download_file(self, agent_filter: dict, password: str):
         self.get_auth_token(self.url, self.username, self.password)

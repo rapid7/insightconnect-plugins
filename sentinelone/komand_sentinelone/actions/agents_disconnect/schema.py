@@ -24,7 +24,7 @@ class AgentsDisconnectInput(insightconnect_plugin_runtime.Input):
     "filter": {
       "type": "object",
       "title": "Filter JSON",
-      "description": "Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats",
+      "description": "Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions\\u0026api=disconnect-from-network)",
       "order": 1
     }
   },

@@ -24,7 +24,7 @@ class AgentsAbortScanInput(insightconnect_plugin_runtime.Input):
     "filter": {
       "type": "object",
       "title": "Filter JSON",
-      "description": "Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents",
+      "description": "Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions\\u0026api=abort-scan)",
       "order": 1
     }
   },

@@ -86,7 +86,7 @@ This action sends a connect to network command to all agents matching the input 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|None|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=connect-to-network)|None|None|
 
 Example input:
 
@@ -122,6 +122,8 @@ Example input:
 
 ```
 {
+  "blacklist_state": true,
+  "description": "Hash Blacklisted from InsightConnect",
   "hash": "3395856ce81f2b7382dee72602f798b642f14140"
 }
 ```
@@ -263,7 +265,7 @@ This action aborts running scan on all agents matching the input filter.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|None|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=abort-scan)|None|None|
 
 Example input:
 
@@ -292,7 +294,7 @@ This action decommissions all agents matching the input filter.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId|None|None|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=decommission)|None|None|
 
 Example input:
 
@@ -321,7 +323,7 @@ This action disconnects agents associated to marked threats from network.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats|None|None|
+|filter|object|None|True|Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=disconnect-from-network)|None|None|
 
 Example input:
 
@@ -350,7 +352,7 @@ This action sends a fetch logs command to all agents matching the input filter.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|None|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=fetch-logs)|None|None|
 
 Example input:
 

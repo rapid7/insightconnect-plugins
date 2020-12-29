@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Decommissions all agents matching the input filter"
+    DESCRIPTION = "Decommissions all agents matching the input filter, agents must be inactive before decommisioning"
 
 
 class Input:
@@ -24,7 +24,7 @@ class AgentsDecommissionInput(insightconnect_plugin_runtime.Input):
     "filter": {
       "type": "object",
       "title": "Filter JSON",
-      "description": "Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId",
+      "description": "Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions\\u0026api=decommission)",
       "order": 1
     }
   },

@@ -1637,11 +1637,11 @@ actions:
         required: true
   agents_decommission:
     title: Agent Decommission
-    description: Decommissions all agents matching the input filter
+    description: Decommissions all agents matching the input filter, agents must be inactive before decommisioning
     input:
       filter:
         title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId
+        description: Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=decommission)
         type: object
         required: true
     output:
@@ -1656,7 +1656,7 @@ actions:
     input:
       filter:
         title: Filter JSON
-        description: Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats
+        description: Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=disconnect-from-network)
         type: object
         required: true
     output:
@@ -1771,7 +1771,7 @@ actions:
     input:
       filter:
         title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=fetch-logs)
         type: object
         required: true
     output:
@@ -1786,7 +1786,7 @@ actions:
     input:
       filter:
         title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=abort-scan)
         type: object
         required: true
     output:
@@ -1801,7 +1801,7 @@ actions:
     input:
       filter:
         title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=connect-to-network)
         type: object
         required: true
     output:

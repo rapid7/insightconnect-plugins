@@ -12,6 +12,12 @@ class AgentsInitiate(insightconnect_plugin_runtime.Action):
                 output=AgentsInitiateOutput())
 
     def run(self, params={}):
+        response = self.connection.agents_action("initiate-scan", params.get(Input.FILTER, ""))
+
+        affected = 0
+        if response.get("data"):
+            affected = response.get("data").get("affected", 0)
+
         return {
-            Output.AFFECTED: self.connection.agents_action("initiate-scan", params.get(Input.FILTER, "")).get("affected", 0)
+            Output.AFFECTED: affected
         }

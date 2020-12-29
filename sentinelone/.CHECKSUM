@@ -1,5 +1,5 @@
 {
-	"spec": "bd313fc9222d117d9375d0695cc95542",
+	"spec": "70b9e684d01d39a656844ff5dd949dac",
 	"manifest": "0916318e47f4016adf5384a2ae78c885",
 	"setup": "32bb5e88f14f42e534154998e2d29d22",
 	"schemas": [
@@ -13,23 +13,23 @@
 		},
 		{
 			"identifier": "agents_abort_scan/schema.py",
-			"hash": "b4b42601c00e1f6821365931112efe15"
+			"hash": "4af50aceb79032cd2fa864222cd823c2"
 		},
 		{
 			"identifier": "agents_connect/schema.py",
-			"hash": "3f99bc852cf34f70c3b13421c3f7ac82"
+			"hash": "09893eac21af64e1b8806316f9ef1579"
 		},
 		{
 			"identifier": "agents_decommission/schema.py",
-			"hash": "ec10f55987ece3b0e2a8200e8dcd27cf"
+			"hash": "4423dc739bf48622ecfb71a94389d07b"
 		},
 		{
 			"identifier": "agents_disconnect/schema.py",
-			"hash": "3639db0abceefee77302939286b6a0b2"
+			"hash": "76bea441debfa6011c696f844e3fef58"
 		},
 		{
 			"identifier": "agents_fetch_logs/schema.py",
-			"hash": "7a7de4d1e4705bf003429745cb2a21b1"
+			"hash": "752b8f43f20566c9cfb22c676dccc7b6"
 		},
 		{
 			"identifier": "agents_initiate/schema.py",
