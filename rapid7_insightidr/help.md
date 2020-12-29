@@ -46,8 +46,8 @@ This action is used to realtime query into Insight IDR logs.
 |----|----|-------|--------|-----------|----|-------|
 |log|string|None|True|Log to search|['Advanced Malware Alert', 'Active Directory Admin Activity', 'Asset Authentication', 'Cloud Service Admin Activity', 'Cloud Service Activity', 'DNS Query', 'Endpoint Activity', 'EndPoint Agent', 'Exploit Mitigation Alert', 'File Access Activity', 'File Modification Activity', 'Firewall Activity', 'Network Flow', 'Host To IP Observations', 'IDS Alert', 'Ingress Authentication', 'Raw Log', 'SSO Authentication', 'Unparsed Data', 'Third Party Alert', 'Virus Alert', 'Web Proxy Activity']|Firewall Activity|
 |query|string|None|True|Query|None|where(user=adagentadmin, loose)|
-|time_from|string|None|False|Beginning time and date for the query|None|Something goes here|
-|time_to|string|None|False|Ending date and time for the query|None|Something goes here|
+|time_from|string|None|False|Beginning time and date for the query|None|01-01-2020|
+|time_to|string|None|False|Ending date and time for the query|None|12-31-2020|
 
 Example input:
 
@@ -55,8 +55,8 @@ Example input:
 {
   "log": "Firewall Activity",
   "query": "where(user=adagentadmin, loose)",
-  "time_from": "Something goes here",
-  "time_to": "Something goes here"
+  "time_from": "01-01-2020",
+  "time_to": "12-31-2020"
 }
 ```
 
@@ -363,6 +363,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.4.0 - New action Advanced Query
 * 1.3.1 - Fix ID input description in Get Query Results action
 * 1.3.0 - New action Get Query Results
 * 1.2.1 - Change default value in the `size` input parameter to 1000 in List Investigations action

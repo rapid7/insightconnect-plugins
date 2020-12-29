@@ -22,6 +22,7 @@ class AdvancedQuery(komand.Action):
         time_from_string = params.get(Input.TIME_FROM)
         time_to_string = params.get(Input.TIME_TO)
 
+        # Time To is optional, if not specified, time to is set to now
         time_from, time_to = self.parse_dates(time_from_string, time_to_string)
 
         log_id = self.get_log_id(log_name)
@@ -37,10 +38,10 @@ class AdvancedQuery(komand.Action):
 
     def parse_dates(self, time_from_string: str, time_to_string: str) -> (int, int):
         """
-        Parse incoming dates and return millisecond epoch time
+        Parse incoming dates and return them as millisecond epoch time
 
         @param time_from_string: str
-        @param time_to_string: str
+        @param time_to_string: str (optional, if it's a falsey value, time to will be set to Now)
         @return: (int, int)
         """
 
