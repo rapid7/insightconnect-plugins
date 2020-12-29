@@ -86,7 +86,14 @@ class AdvancedQuery(komand.Action):
         log_entries = results_object.get("events")
 
         counter = timeout
-        while not log_entries and counter > 0:
+        while not log_entries and counter >= 0:
+            counter -= 1
+            if counter < 0:
+                raise PluginException(cause="Time out exceeded",
+                                      assistance="Time out for the query results was exceeded. Try simplifying your"
+                                                 " query or extending the timeout period")
+            
+
             self.logger.info("Results were not ready. Sleeping 1 second and trying again.")
             self.logger.info(f"Time left: {counter}")
             time.sleep(1)
@@ -102,7 +109,6 @@ class AdvancedQuery(komand.Action):
 
             results_object = response.json()
             log_entries = results_object.get("events")
-            counter-=1
 
         return log_entries
 
