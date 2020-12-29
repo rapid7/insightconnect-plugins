@@ -364,7 +364,7 @@ actions:
         type: integer
         required: true
         default: 0
-        example: 0
+        example: 1
     output:
       investigations:
         title: Investigations
@@ -519,7 +519,7 @@ actions:
         example: "12-31-2020"
         required: false
       timeout:
-        title: timeout
+        title: Timeout
         description: Time in seconds to wait for the query to return. If exceeded the plugin will throw an error
         type: int
         example: 60

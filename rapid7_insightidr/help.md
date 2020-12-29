@@ -351,7 +351,7 @@ This action is used to retrieve a page of investigations matching the given requ
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |end_time|date|None|False|An optional-ISO formatted timestamp. Only investigations whose createTime is before this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned|None|2020-06-01T12:11:13+05:30|
-|index|integer|0|True|The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0|None|0|
+|index|integer|0|True|The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0|None|1|
 |size|integer|1000|True|The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 1000. Default value is 1000|None|1000|
 |start_time|date|None|False|An optional ISO-formatted timestamp. Only investigations whose createTime is after this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned|None|2020-06-01T12:11:13+05:30|
 |statuses|string|CLOSED|True|An optional-comma separated set of investigation statuses. Only the investigation whose status matches one of the entries in the list will be returned. If this parameter is omitted investigations with any status may be returned|['OPEN', 'CLOSED', 'EITHER']|CLOSED|
@@ -361,7 +361,7 @@ Example input:
 ```
 {
   "end_time": "2020-06-01T12:11:13+05:30",
-  "index": 0,
+  "index": 1,
   "size": 1000,
   "start_time": "2020-06-01T12:11:13+05:30",
   "statuses": "CLOSED"

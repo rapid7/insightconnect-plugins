@@ -171,9 +171,6 @@ class AdvancedQuery(komand.Action):
         id = ""
 
         for log in logs:
-            print(log.get('name'))
-
-        for log in logs:
             name = log.get('name')
             self.logger.info(f"Checking {log_name} against {name}")
             if name == log_name:
