@@ -562,6 +562,6 @@ actions:
     output:
       results:
         title: Query Results
-        description: Qurey Results
+        description: Query Results
         type: "[]events"
         required: true
