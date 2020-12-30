@@ -92,10 +92,11 @@ class AdvancedQuery(komand.Action):
                 raise PluginException(cause="Time out exceeded",
                                       assistance="Time out for the query results was exceeded. Try simplifying your"
                                                  " query or extending the timeout period")
-            
+
 
             self.logger.info("Results were not ready. Sleeping 1 second and trying again.")
             self.logger.info(f"Time left: {counter}")
+            self.logger.info(f"Progress: {results_object.get('progress')}")
             time.sleep(1)
             response = self.connection.session.get(callback_url)
 
@@ -103,8 +104,8 @@ class AdvancedQuery(komand.Action):
             try:
                 response.raise_for_status()
             except Exception:
-                raise PluginException(cause="Failed to get logs from InsightIDR",
-                                      assistance=f"Could not get logs from: {callback_url}",
+                raise PluginException(cause="Failed to get logs from InsightIDR\n",
+                                      assistance=f"Could not get logs from: {callback_url}\n",
                                       data=response.text)
 
             results_object = response.json()
@@ -141,8 +142,8 @@ class AdvancedQuery(komand.Action):
         try:
             response.raise_for_status()
         except Exception:
-            raise PluginException(cause="Failed to get logs from InsightIDR",
-                                  assistance=f"Could not get logs from: {endpoint}",
+            raise PluginException(cause="Failed to get logs from InsightIDR\n",
+                                  assistance=f"Could not get logs from: {endpoint}\n",
                                   data=response.text)
 
         results_object = response.json()
