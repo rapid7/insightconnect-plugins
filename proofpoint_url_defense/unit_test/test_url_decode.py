@@ -19,7 +19,7 @@ class TestUrlDecode(TestCase):
         test_action.logger = log
 
         try:
-            with open("../tests/url_decode_http_with_one_slash.json") as file:
+            with open("../tests/url_decode.json") as file:
                 test_json = json.loads(file.read()).get("body")
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
@@ -59,7 +59,7 @@ class TestUrlDecode(TestCase):
         test_action.logger = log
 
         try:
-            with open("../tests/url_decode_http_with_one_slash.json") as file:
+            with open("../tests/url_decode.json") as file:
                 test_json = json.loads(file.read()).get("body")
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
