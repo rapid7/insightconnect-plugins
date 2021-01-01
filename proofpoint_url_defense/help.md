@@ -69,6 +69,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.2.3 - Fix decoded URL scheme
 * 1.2.2 - Fully decode URLs which contain hxxp as the protocol in action URL Decode
 * 1.2.1 - Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Update plugin.spec.yaml to include `cloud_ready`
 * 1.2.0 - Update to URL Decode to add `decoded` as an output variable
