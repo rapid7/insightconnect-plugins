@@ -16,7 +16,6 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                 input=UsersAddedRemovedFromGroupInput(),
                 output=UsersAddedRemovedFromGroupOutput())
 
-
     def run(self, params={}):
         """Run the trigger"""
         group_list = params.get(Input.GROUP_IDS)
