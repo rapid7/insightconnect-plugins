@@ -142,17 +142,17 @@ class Connection(komand.Connection):
             "data": {"module": module}
         })
 
-    def get_threat_summary(self, limit: int = 1000, offset: int = 0):
-        endpoint = f"threats?limit={limit}&skip={offset}"
+    def get_threat_summary(self, limit: int = 1000):
+        first_page_endpoint = f"threats?limit={limit}"
 
-        threats = self._call_api("GET", endpoint)
-        all_threads_count = threats["pagination"]["totalItems"]
+        threats = self._call_api("GET", first_page_endpoint)
         all_threads_data = threats["data"]
+        next_cursor = threats["pagination"]["nextCursor"]
 
-        while all_threads_count > len(all_threads_data):
-            offset += limit
-            next_threats = self._call_api("GET", endpoint)
+        while next_cursor:
+            next_threats = self._call_api("GET", f"{first_page_endpoint}&cursor={next_cursor}")
             all_threads_data += next_threats["data"]
+            next_cursor = next_threats["pagination"]["nextCursor"]
 
         threats["data"] = all_threads_data
         return threats
