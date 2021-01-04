@@ -55,6 +55,17 @@ class Asset:
         """
         return f"{console_url}/api/3/assets/search"
 
+    @staticmethod
+    def asset_vulnerability_solution(console_url, asset_id, vulnerability_id):
+        """
+        Returns the highest-superceding rollup solutions for a vulnerability on an asset.
+        :param console_url: URL to the InsightVM console
+        :param asset_id: ID of the asset with which to interact
+        :param vulnerability_id: ID of the vulnerability to get a solution for
+        :return:  url
+        """
+        return f"{console_url}/api/3/assets/{asset_id}/vulnerabilities/{vulnerability_id}/solution"
+
 
 class AssetGroup:
 

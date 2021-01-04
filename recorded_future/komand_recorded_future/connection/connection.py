@@ -23,10 +23,10 @@ class Connection(komand.Connection):
         self.client = ApiV2Client(auth=self.token, app_name=self.app_name, app_version=self.app_version)
 
     def test(self):
-        return demo_test.demo_test(self.token, self.logger)
+        return demo_test.demo_test(self.token)
 
     def setup_custom_header(self):
-        try: # This may not be defined in local komand instances.
+        try:  # This may not be defined in local komand instances.
             version = self.meta.version
         except AttributeError:
             version = "test-version"
@@ -34,5 +34,3 @@ class Connection(komand.Connection):
         self.logger.info(f"Plugin Version: {version}")
 
         return version
-
-

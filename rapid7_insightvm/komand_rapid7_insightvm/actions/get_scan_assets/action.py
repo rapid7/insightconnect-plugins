@@ -6,7 +6,7 @@ import io
 import uuid
 from komand_rapid7_insightvm.util import util
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 from komand.exceptions import PluginException
 
 
@@ -43,7 +43,7 @@ class GetScanAssets(komand.Action):
         scan_site_id = None
 
         try:
-            csv_report = csv.DictReader(io.StringIO(report_contents['raw'].decode('utf-8')))
+            csv_report = csv.DictReader(io.StringIO(report_contents['raw']))
         except Exception as e:
             raise PluginException(cause=f"Error: Failed to process query response for assets returned for "
                                         f"scan ID {scan_id}.",
@@ -57,7 +57,7 @@ class GetScanAssets(komand.Action):
                 scan_site_id = row["site_id"]
 
         # Get assets of site of scan
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
         search_criteria = {
             "filters": [
                 {

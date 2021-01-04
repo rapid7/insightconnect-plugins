@@ -3,7 +3,7 @@ from .schema import GetAssetVulnerabilitiesInput, GetAssetVulnerabilitiesOutput,
 # Custom imports below
 import asyncio
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 from operator import itemgetter
 
 
@@ -17,7 +17,7 @@ class GetAssetVulnerabilities(komand.Action):
                 output=GetAssetVulnerabilitiesOutput())
 
     def run(self, params={}):
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
         asset_id = params.get(Input.ASSET_ID)
         risk_score = params.get(Input.GET_RISK_SCORE, False)
 

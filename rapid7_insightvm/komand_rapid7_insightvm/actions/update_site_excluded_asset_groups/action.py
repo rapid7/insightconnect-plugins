@@ -2,7 +2,7 @@ import komand
 from .schema import UpdateSiteExcludedAssetGroupsInput, UpdateSiteExcludedAssetGroupsOutput, Input
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
 class UpdateSiteExcludedAssetGroups(komand.Action):
@@ -16,7 +16,7 @@ class UpdateSiteExcludedAssetGroups(komand.Action):
 
     def run(self, params={}):
         scope = params.get(Input.EXCLUDED_ASSET_GROUPS)
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
         endpoint = endpoints.Site.site_excluded_asset_groups(self.connection.console_url, params.get(Input.ID))
 
         # Pull current site scope in order to append to list instead of overwriting

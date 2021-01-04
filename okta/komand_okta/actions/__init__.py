@@ -12,3 +12,4 @@ from .reset_factors.action import ResetFactors
 from .send_push.action import SendPush
 from .suspend_user.action import SuspendUser
 from .unsuspend_user.action import UnsuspendUser
+from .update_blacklist_zones.action import UpdateBlacklistZones

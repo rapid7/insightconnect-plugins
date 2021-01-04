@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Datetime"
 Vendor = "rapid7"
-Version = "2.1.1"
+Version = "2.2.0"
 Description = "This plugin manipulates timestamps using Python's maya library"
 
 
@@ -41,6 +41,8 @@ def main():
             self.add_action(actions.EpochFromDate())
 
             self.add_action(actions.GetDatetime())
+
+            self.add_action(actions.GetFutureTime())
 
             self.add_action(actions.SubtractFromDatetime())
 

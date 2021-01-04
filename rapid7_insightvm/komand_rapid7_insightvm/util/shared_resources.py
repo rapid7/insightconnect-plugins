@@ -30,11 +30,14 @@ class RequestParams(object):
 
     # Allows users to set values from this object in the same way you would set values from a dictionary
     def __setitem__(self, key, value):
+        updated = False
         for idx, item in enumerate(self.params):
             if key in item:
                 self.params[idx] = (key, value)
-            else:
-                self.params.append((key, value))
+                updated = True
+        # The key does not exist in the list of tuples - add the key
+        if not updated:
+            self.params.append((key, value))
 
 
 def resource_request_status_code_check(response_text: str, status_code: str) -> None:

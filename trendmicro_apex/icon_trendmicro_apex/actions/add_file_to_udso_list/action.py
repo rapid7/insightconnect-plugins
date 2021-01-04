@@ -1,7 +1,6 @@
 import komand
 from .schema import AddFileToUdsoListInput, AddFileToUdsoListOutput, Input, Output, Component
 # Custom imports below
-import base64
 import json
 import requests
 from komand.exceptions import PluginException
@@ -19,10 +18,9 @@ class AddFileToUdsoList(komand.Action):
         self.api_path = '/WebApp/API/SuspiciousObjectResource/FileUDSO'
         self.api_http_method = 'PUT'
 
-
     def run(self, params={}):
         payload_notes = ''
-        user_notes = params.get(Input.NOTES)
+        user_notes = params.get(Input.DESCRIPTION)
         if user_notes:
             payload_notes = user_notes
         payload_scan_action = params.get(Input.SCAN_ACTION)
@@ -49,6 +47,5 @@ class AddFileToUdsoList(komand.Action):
                 self.logger.error(f"Received status code: {response.status_code}")
                 self.logger.error(f"Response was: {response.text}")
             raise PluginException(assistance="Please verify the connection details and input data.",
-                                  cause=f"Error processing the Apex request: {rex}")
-
-        return {Output.SUCCESS : False}
+                                  cause="Error processing the Apex request.",
+                                  data=rex)

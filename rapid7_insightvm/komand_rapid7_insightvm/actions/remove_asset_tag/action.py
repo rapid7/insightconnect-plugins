@@ -2,7 +2,7 @@ import komand
 from .schema import RemoveAssetTagInput, RemoveAssetTagOutput
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
 class RemoveAssetTag(komand.Action):
@@ -15,7 +15,7 @@ class RemoveAssetTag(komand.Action):
                 output=RemoveAssetTagOutput())
 
     def run(self, params={}):
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
         tag_id = params.get("tag_id")
         asset_id = params.get("asset_id")
         endpoint = endpoints.Asset.asset_tags(self.connection.console_url, asset_id, tag_id)

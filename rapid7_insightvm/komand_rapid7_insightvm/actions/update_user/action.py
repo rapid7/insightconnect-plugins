@@ -2,7 +2,8 @@ import komand
 from .schema import UpdateUserInput, UpdateUserOutput
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
+from komand_rapid7_insightvm.util.resource_helpers import ValidateUser
 
 
 class UpdateUser(komand.Action):
@@ -15,7 +16,8 @@ class UpdateUser(komand.Action):
                 output=UpdateUserOutput())
 
     def run(self, params={}):
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        validate = ValidateUser(self.connection.session, self.logger)
         endpoint = endpoints.User.users(self.connection.console_url, params.get('id'))
         self.logger.info("Using %s ..." % endpoint)
 
@@ -42,7 +44,7 @@ class UpdateUser(komand.Action):
                 del (payload[k])
 
         # Validate/fix the user configuration
-        payload = resource_helper.validate_user(self.connection.console_url, payload)
+        payload = validate.validate_user(self.connection.console_url, payload)
 
         response = resource_helper.resource_request(endpoint=endpoint, method='put', payload=payload)
 

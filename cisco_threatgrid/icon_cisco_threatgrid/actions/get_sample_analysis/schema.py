@@ -70,13 +70,13 @@ class GetSampleAnalysisOutput(komand.Output):
     "metadata_report": {
       "$ref": "#/definitions/metadata_report",
       "title": "Metadata Report",
-      "description": "Metadata Analysis",
+      "description": "Metadata analysis",
       "order": 6
     },
     "network_streams_report": {
       "$ref": "#/definitions/network_streams_report",
       "title": "Network Streams Report",
-      "description": "Network Streams Report",
+      "description": "Network streams analysis",
       "order": 3
     },
     "processes_report": {

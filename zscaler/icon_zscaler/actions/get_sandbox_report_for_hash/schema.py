@@ -91,8 +91,8 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "DigitalCerificate": {
           "type": "string",
-          "title": "Digital Cerificate",
-          "description": "Digital cerificate",
+          "title": "Digital Certificate",
+          "description": "Digital certificate",
           "order": 1
         },
         "FileSize": {
@@ -250,8 +250,8 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "DigitalCerificate": {
               "type": "string",
-              "title": "Digital Cerificate",
-              "description": "Digital cerificate",
+              "title": "Digital Certificate",
+              "description": "Digital certificate",
               "order": 1
             },
             "FileSize": {
@@ -480,8 +480,8 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "DigitalCerificate": {
               "type": "string",
-              "title": "Digital Cerificate",
-              "description": "Digital cerificate",
+              "title": "Digital Certificate",
+              "description": "Digital certificate",
               "order": 1
             },
             "FileSize": {
@@ -639,8 +639,8 @@ class GetSandboxReportForHashOutput(insightconnect_plugin_runtime.Output):
               "properties": {
                 "DigitalCerificate": {
                   "type": "string",
-                  "title": "Digital Cerificate",
-                  "description": "Digital cerificate",
+                  "title": "Digital Certificate",
+                  "description": "Digital certificate",
                   "order": 1
                 },
                 "FileSize": {

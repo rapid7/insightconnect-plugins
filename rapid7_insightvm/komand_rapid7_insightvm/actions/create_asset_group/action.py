@@ -2,7 +2,7 @@ import komand
 from .schema import CreateAssetGroupInput, CreateAssetGroupOutput
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
 class CreateAssetGroup(komand.Action):
@@ -20,7 +20,7 @@ class CreateAssetGroup(komand.Action):
         if params.get('searchCriteria') == {}:
             params.pop('searchCriteria')
 
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
         self.logger.info("Creating asset group with name %s and type %s" % (params['name'], params['type']))
         endpoint = endpoints.AssetGroup.asset_groups(self.connection.console_url)
 

@@ -47,6 +47,42 @@ Example input:
 
 ### Actions
 
+#### Blacklist File
+
+This action is used to add a file to the User-defined Suspicious Object (UDSO) list of the Apex Security Manager.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|description|string|File Blacklisted from InsightConnect|False|Description for why the hash is blacklisted (256 characters max)|None|File Blacklisted from InsightConnect|
+|file|file|None|True|File to be marked as suspicious|None|{"filename": "setup.exe", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|
+|scan_action|string|QUARANTINE|True|What action to do with the data sent|['BLOCK', 'LOG', 'QUARANTINE']|QUARANTINE|
+
+Example input:
+
+```
+{
+  "description": "File Blacklisted from InsightConnect",
+  "file": {"filename": "setup.exe", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="},
+  "scan_action": "QUARANTINE"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Whether or not the action was successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 #### Blacklist
 
 This action is used to blacklist an IP, URL, file SHA1 hash or domain in the UDSO list.
@@ -706,42 +742,6 @@ Example output:
 }
 ```
 
-#### Add File to UDSO List
-
-This action is used to add a file to the UDSO list of the Apex Security Manager.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|file|file|None|True|File to be marked as suspicious|None|{"filename": "setup.exe", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|
-|notes|string|None|False|Notes about why the file is being quarantined (256 characters max)|None|This file is malware|
-|scan_action|string|LOG|True|What action to do with the data sent|['BLOCK', 'LOG', 'QUARANTINE']|QUARANTINE|
-
-Example input:
-
-```
-{
-  "file": {"filename": "setup.exe", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="},
-  "notes": "This file is malware",
-  "scan_action": "QUARANTINE"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Whether or not the action was successful|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
 ### Triggers
 
 _This plugin does not contain any triggers._
@@ -757,6 +757,7 @@ For example, the agent / endpoint actions require that the Apex Endpoint Sensor 
 
 # Version History
 
+* 4.0.0 - Change action title from "Add File to UDSO" to "Blacklist File" | Change input name Notes to Description in Blacklist File action
 * 3.0.1 - Fix issue in URL parameter of Connection where an extraneous forward-slash would not pass the connection test
 * 3.0.0 - Update action Add to UDSO List to Blacklist
 * 2.0.0 - Update action Execute Agent Action to Quarantine

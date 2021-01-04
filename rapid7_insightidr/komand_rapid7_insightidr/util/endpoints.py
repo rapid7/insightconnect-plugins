@@ -33,7 +33,7 @@ class Investigations:
         return f'{console_url}idr/v1/investigations/{idr_id}/status/{status}'
 
     @staticmethod
-    def set_user_for_investigation(base_url: str, investigation_id: str)->str:
+    def set_user_for_investigation(base_url: str, investigation_id: str) -> str:
         return f'{base_url}idr/v1/investigations/{investigation_id}/assignee'
 
 
@@ -49,3 +49,17 @@ class Threats:
         """
 
         return f'{console_url}idr/v1/customthreats/key/{key}/indicators/add'
+
+
+class QueryLogs:
+
+    @staticmethod
+    def get_query_logs(console_url: str, log_id: str):
+        """
+        URI for adding get_query_logs
+        :param console_url: URL to the InsightIDR console
+        :param log_id: The ID of a log for which the indicators are going to be added
+        :return: pre-populated /query/logs/{log_id}
+        """
+
+        return f'{console_url}query/logs/{log_id}'

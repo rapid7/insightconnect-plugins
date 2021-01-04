@@ -3,7 +3,7 @@ from .schema import GetAssetGroupsInput, GetAssetGroupsOutput
 # Custom imports below
 import re
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
 class GetAssetGroups(komand.Action):
@@ -16,7 +16,7 @@ class GetAssetGroups(komand.Action):
                 output=GetAssetGroupsOutput())
 
     def run(self, params={}):
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
         name = params.get("name")
 
         endpoint = endpoints.AssetGroup.asset_groups(self.connection.console_url)

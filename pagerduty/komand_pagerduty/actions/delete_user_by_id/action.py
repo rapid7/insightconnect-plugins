@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import DeleteUserByIdInput, DeleteUserByIdOutput
 # Custom imports below
 import pypd
 from komand_pagerduty.util.util import empty_user, normalize_user
 
 
-class DeleteUserById(komand.Action):
+class DeleteUserById(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
                 name='delete_user_by_id',

@@ -33,15 +33,112 @@ Example input:
 {
   "url": "https://insightvm.example.com:3780",
   "credentials": {
-      "username": "username",	
-      "password": "password"	
-    }
+    "username": "username",
+    "password": "password"
+  }
 }
 ```
 
 ## Technical Details
 
 ### Actions
+
+#### Get Asset Vulnerability Solutions
+
+This action returns the highest-superceding rollup solutions for a list of vulnerabilities on an asset.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|asset_id|string|None|True|The identifier of the asset|None|423|
+|vulnerability_ids|[]string|None|True|A list of identifiers of the vulnerabilities|None|["flash_player-cve-2017-11305"]|
+
+Example input:
+
+```
+{
+  "asset_id": 423,
+  "vulnerability_ids": [
+    "flash_player-cve-2017-11305"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|vulnerabilities_solution|[]vulnerability_solution|True|Highest-superceding rollup solutions for a vulnerabilities on an asset|
+
+Example output:
+
+```
+{
+  "vulnerabilities_solution": [
+    {
+      "links": [
+        {
+          "href": "https://ivm-console.rapid7.com:3780/api/3/assets/234/vulnerabilities/flash_player-cve-2017-11305/solution",
+          "rel": "self"
+        }
+      ],
+      "resources": [
+        {
+          "appliesTo": "Adobe Flash on Microsoft Windows",
+          "confidence": "exact",
+          "estimate": "PT20M",
+          "id": "adobe-flash-windows-upgrade-latest",
+          "links": [
+            {
+              "href": "https://ivm-consolelax.rapid7.com:3780/api/3/solutions/adobe-flash-windows-upgrade-latest",
+              "rel": "self"
+            },
+            {
+              "href": "https://ivm-console.rapid7.com:3780/api/3/solutions/adobe-flash-windows-upgrade-latest/prerequisites",
+              "rel": "Prerequisites"
+            },
+            {
+              "href": "https://ivm-console.rapid7.com:3780/api/3/solutions/adobe-flash-windows-upgrade-latest/supersedes",
+              "rel": "Supersedes"
+            }
+          ],
+          "matches": [
+            {
+              "confidence": "exact",
+              "fingerprint": {
+                "description": "Adobe Flash 18.0.0.209",
+                "family": "Flash",
+                "product": "Flash",
+                "vendor": "Adobe",
+                "version": "18.0.0.209"
+              },
+              "links": [
+                {
+                  "href": "https://ivm-console.rapid7.com:3780/api/3/solutions/adobe-flash-upgrade-28-0-0-126-windows",
+                  "id": "adobe-flash-upgrade-28-0-0-126-windows",
+                  "rel": "Solution"
+                }
+              ],
+              "solution": "adobe-flash-upgrade-28-0-0-126-windows",
+              "type": "software"
+            }
+          ],
+          "steps": {
+            "html": "\u003cp\u003e\r\n\u003cp\u003eAdobe Flash Player can be downloaded from the \r\n\u003ca href=\"http://get.adobe.com/flash/\"\u003eFlash Player Download Center\u003c/a\u003e, or from the \r\n\u003ca href=\"http://helpx.adobe.com/flash-player/kb/archived-flash-player-versions.html\"\u003earchived Flash Players page\u003c/a\u003e. \u003c/p\u003e\u003c/p\u003e",
+            "text": "Adobe Flash Player can be downloaded from the Flash Player Download Center (http://get.adobe.com/flash/), or from the archived Flash Players page (http://helpx.adobe.com/flash-player/kb/archived-flash-player-versions.html)."
+          },
+          "summary": {
+            "html": "Upgrade to the latest version of Adobe Flash Player for Windows",
+            "text": "Upgrade to the latest version of Adobe Flash Player for Windows"
+          },
+          "type": "configuration"
+        }
+      ]
+    }
+  ]
+}
+```
 
 #### Update Vulnerability Exception Expiration Date
 
@@ -346,7 +443,7 @@ Example input:
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 |resources|[]integer|False|The identifiers of the associated resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -381,7 +478,7 @@ Example input:
 |----|----|--------|-----------|
 |asset|asset|True|Asset details|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -392,8 +489,8 @@ Example Output:
         "mac": "00:50:56:8A:3D:8C"
       }
     ],
-    "assessedForPolicies": False,
-    "assessedForVulnerabilities": True,
+    "assessedForPolicies": false,
+    "assessedForVulnerabilities": true,
     "history": [
       {
         "date": "2018-08-28T11:06:47.738Z",
@@ -535,7 +632,7 @@ Example input:
 |----|----|--------|-----------|
 |tags|[]tag|True|List of tags|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -647,14 +744,14 @@ This action is used to get vulnerabilities found on an asset. Can only be used i
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |asset_id|string|None|True|ID of the asset for which to find vulnerabilities|None|234|
-|get_risk_score|boolean|None|False|Return risk score allong with other vulnerability data|None|True|
+|get_risk_score|boolean|None|False|Return risk score along with other vulnerability data|None|True|
 
 Example input:
 
 ```
-{
-  "asset_id": 234,
-  "get_risk_score": true
+{	
+  "asset_id": 234,	
+  "get_risk_score": true	
 }
 ```
 
@@ -664,7 +761,7 @@ Example input:
 |----|----|--------|-----------|
 |vulnerabilities|[]asset_vulnerability|False|Vulnerabilities found on the asset|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -725,8 +822,8 @@ This action is used to get software found on an asset. Can only be used if the a
 Example input:
 
 ```
-{
-  "asset_id": "234"
+{	
+  "asset_id": "234"	
 }
 ```
 
@@ -736,7 +833,7 @@ Example input:
 |----|----|--------|-----------|
 |software|[]software|False|Software found on the asset|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -785,7 +882,7 @@ Example input:
 |status|string|False|Scan status (aborted, unknown, running, finished, stopped, error, paused, dispatched or integrating)|
 |vulnerabilities|vulnerabilities_count|False|Counts of vulnerabilities found within the scan|
 
-Example Output:
+Example output:
 
 ```
 
@@ -835,7 +932,7 @@ Example input:
 |----|----|--------|-----------|
 |assets|[]asset|False|Assets|
 
-Example Output:
+Example output:
 
 ```
 
@@ -923,7 +1020,7 @@ Example input:
 |id|integer|False|Identifier of the resource created|
 |links|[]link|False|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 
@@ -970,7 +1067,7 @@ Example input:
 |----|----|--------|-----------|
 |report|file|True|Base64 encoded file making up the report|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -1003,7 +1100,7 @@ Example input:
 |----|----|--------|-----------|
 |report|bytes|False|Base64 encoded report|
 
-Example Output:
+Example output:
 
 ```
 
@@ -1036,7 +1133,7 @@ Example input:
 |found|boolean|False|Whether optional user supplied report name was found|
 |list|[]report_id|False|List of report identifiers|
 
-Example Output:
+Example output:
 
 ```
 
@@ -1078,7 +1175,7 @@ Example input:
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 |resources|[]integer|True|The identifiers of the associated resources|
 
-Example Output:
+Example output:
 
 ```
 
@@ -1196,7 +1293,7 @@ Example input:
 |----|----|--------|-----------|
 |id|integer|True|ID of the created tag|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -1225,7 +1322,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -1260,7 +1357,7 @@ Example input:
 |----|----|--------|-----------|
 |tags|[]tag|True|List of tags|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -1360,7 +1457,7 @@ Example input:
 |----|----|--------|-----------|
 |tag|tag|True|Tag Details|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -1440,7 +1537,7 @@ Example input:
 |----|----|--------|-----------|
 |site_ids|[]integer|True|Site IDs associated with the tag|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -1471,7 +1568,7 @@ Example input:
 |----|----|--------|-----------|
 |assets|[]tag_asset|True|Asset IDs and tag association sources for the tag|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -1514,7 +1611,7 @@ Example input:
 |----|----|--------|-----------|
 |asset_group_ids|[]integer|True|Asset group IDs associated with the tag|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -1547,7 +1644,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -1581,7 +1678,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -1615,7 +1712,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -1649,7 +1746,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -1683,7 +1780,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -1718,7 +1815,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -1753,7 +1850,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -1788,7 +1885,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -1823,7 +1920,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -1866,7 +1963,7 @@ Example input:
 |----|----|--------|-----------|
 |assets|[]asset|True|List of asset details returned by the search|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -1878,8 +1975,8 @@ Example Output:
                   "mac": "00:50:56:8A:3D:8C"
               }
           ],
-          "assessedForPolicies": False,
-          "assessedForVulnerabilities": True,
+          "assessedForPolicies": false,
+          "assessedForVulnerabilities": true,
           "history": [
               {
                   "date": "2018-08-28T11:06:47.738Z",
@@ -2001,269 +2098,6 @@ Example Output:
 }
 ```
 
-Example output:
-
-```
-{
-  "assets": [
-    {
-      "hostName": "example-win10",
-      "id": 234,
-      "mac": "00:50:56:94:C6:7E",
-      "users": [
-        {
-          "fullName": "LocalService",
-          "id": -1,
-          "name": "LocalService"
-        },
-        {
-          "id": -1,
-          "name": "NetworkService",
-          "fullName": "NetworkService"
-        }
-      ],
-      "configurations": [
-        {
-          "name": "cpuinfo",
-          "value": "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz"
-        },
-        {
-          "value": "{}",
-          "name": "proxies"
-        }
-      ],
-      "history": [
-        {
-          "scanId": 3,
-          "type": "SCAN",
-          "version": 1,
-          "date": "2020-08-18T22:10:39.197Z"
-        },
-        {
-          "date": "2020-08-18T22:36:44.807Z",
-          "type": "AGENT-IMPORT",
-          "version": 2
-        }
-      ],
-      "ids": [
-        {
-          "id": "1C361442-440C-B64E-97BF-F0222329E87D",
-          "source": "CSPRODUCT"
-        },
-        {
-          "source": "R7 Agent",
-          "id": "3e8a7a2bab217e280c8ca3f4a1f5e544"
-        }
-      ],
-      "riskScore": 543979.25,
-      "links": [
-        {
-          "href": "https://example.rapid7.com:3780/...",
-          "rel": "self"
-        },
-        {
-          "href": "https://example.rapid7.com:3780/...",
-          "rel": "Software"
-        }
-      ],
-      "os": "Microsoft Windows 10 Enterprise Edition",
-      "osFingerprint": {
-        "vendor": "Microsoft",
-        "architecture": "x86_64",
-        "cpe": {
-          "v2.2": "cpe:/o:microsoft:windows_10:-:gold:~~~~x86~",
-          "v2.3": "cpe:2.3:o:microsoft:windows_10:-:gold:*:*:*:*:x86:...",
-          "vendor": "microsoft",
-          "version": "-",
-          "part": "o",
-          "product": "windows_10",
-          "targetHW": "x86",
-          "update": "gold"
-        },
-        "family": "Windows",
-        "id": 254,
-        "product": "Windows 10 Enterprise Edition",
-        "description": "Microsoft Windows 10 Enterprise Edition",
-        "systemName": "Microsoft Windows",
-        "type": "Workstation"
-      },
-      "vulnerabilities": {
-        "total": 777,
-        "critical": 654,
-        "exploits": 257,
-        "malwareKits": 0,
-        "moderate": 15,
-        "severe": 108
-      },
-      "addresses": [
-        {
-          "ip": "192.168.1.1",
-          "mac": "00:50:56:94:C6:7E"
-        }
-      ],
-      "assessedForVulnerabilities": true,
-      "hostNames": [
-        {
-          "name": "iagent2-win10",
-          "source": "other"
-        }
-      ],
-      "ip": "192.168.1.1",
-      "assessedForPolicies": false,
-      "rawRiskScore": 543979.25,
-      "services": [
-        {
-          "port": 135,
-          "protocol": "tcp",
-          "links": [
-            {
-              "href": "https://example.rapid7.com:3780/...",
-              "rel": "self"
-            },
-            {
-              "href": "https://example.rapid7.com:3780/...",
-              "rel": "Configurations"
-            }
-          ],
-          "name": "DCE Endpoint Resolution"
-        },
-        {
-          "name": "CIFS Name Service",
-          "port": 137,
-          "protocol": "udp",
-          "configurations": [
-            {
-              "name": "advertised-name-1",
-              "value": "EXAMPLE-WIN10 (File Server Service)"
-            },
-            {
-              "name": "advertised-name-2",
-              "value": "EXAMPLE-WIN10 (Computer Name)"
-            }
-          ],
-          "links": [
-            {
-              "href": "https://example.rapid7.com:3780/...",
-              "rel": "self"
-            },
-            {
-              "href": "https://example.rapid7.com:3780/...",
-              "rel": "Configurations"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "addresses": [
-        {
-          "ip": "192.168.1.1",
-          "mac": "00:50:56:94:E9:87"
-        }
-      ],
-      "assessedForPolicies": false,
-      "assessedForVulnerabilities": true,
-      "ids": [
-        {
-          "source": "Endpoint Agent",
-          "id": "33dd6c5c32e662d2eb96d75c0a379454"
-        },
-        {
-          "id": "33dd6c5c32e662d2eb96d75c0a379454",
-          "source": "R7 Agent"
-        }
-      ],
-      "ip": "192.168.1.1",
-      "os": "Microsoft Windows 10 Enterprise Edition 1803",
-      "hostNames": [
-        {
-          "name": "example-win10",
-          "source": "other"
-        }
-      ],
-      "id": 2474,
-      "users": [
-        {
-          "id": -1,
-          "name": "LocalService",
-          "fullName": "LocalService"
-        },
-        {
-          "fullName": "NetworkService",
-          "id": -1,
-          "name": "NetworkService"
-        }
-      ],
-      "configurations": [
-        {
-          "name": "cpuinfo",
-          "value": "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz"
-        },
-        {
-          "name": "proxies",
-          "value": "{}"
-        }
-      ],
-      "history": [
-        {
-          "date": "2020-09-01T21:47:08.800Z",
-          "type": "AGENT-IMPORT",
-          "version": 1
-        },
-        {
-          "date": "2020-09-02T03:47:05.618Z",
-          "type": "AGENT-IMPORT",
-          "version": 2
-        }
-      ],
-      "rawRiskScore": 40026.30859375,
-      "hostName": "iagent1-win10",
-      "links": [
-        {
-          "href": "https://example.rapid7.com:3780/...",
-          "rel": "self"
-        },
-        {
-          "href": "https://example.rapid7.com:3780/...",
-          "rel": "Software"
-        }
-      ],
-      "mac": "00:50:56:94:E9:87",
-      "osFingerprint": {
-        "type": "Workstation",
-        "architecture": "x86_64",
-        "cpe": {
-          "part": "o",
-          "product": "windows_10",
-          "targetHW": "x86",
-          "update": "gold",
-          "v2.2": "cpe:/o:microsoft:windows_10:-:gold:~~~~x86~",
-          "v2.3": "cpe:2.3:o:microsoft:windows_10:-:gold:*:*:*:*:x86:...",
-          "vendor": "microsoft",
-          "version": "-"
-        },
-        "description": "Microsoft Windows 10 Enterprise Edition 1803",
-        "id": 519,
-        "product": "Windows 10 Enterprise Edition",
-        "family": "Windows",
-        "systemName": "Microsoft Windows",
-        "vendor": "Microsoft",
-        "version": "1803"
-      },
-      "riskScore": 40026.30859375,
-      "vulnerabilities": {
-        "moderate": 20,
-        "severe": 131,
-        "total": 184,
-        "critical": 33,
-        "exploits": 0,
-        "malwareKits": 0
-      }
-    }
-  ]
-}
-```
-
 #### Create Asset Group
 
 This action is used to create an asset group.
@@ -2288,7 +2122,7 @@ Example input:
 |----|----|--------|-----------|
 |id|integer|True|ID of the created tag|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -2326,7 +2160,7 @@ Example input:
 |id|integer|True|The identifier of the created site|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -2372,7 +2206,7 @@ Example input:
 |id|integer|True|The identifier of the updated site|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -2410,7 +2244,7 @@ Example input:
 |id|integer|True|The identifier of the updated site|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -2448,7 +2282,7 @@ Example input:
 |id|integer|True|The identifier of the updated site|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -2486,7 +2320,7 @@ Example input:
 |id|integer|True|The identifier of the updated site|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -2524,7 +2358,7 @@ Example input:
 |id|integer|True|The identifier of the updated site|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -2559,7 +2393,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -2593,7 +2427,7 @@ Example input:
 |----|----|--------|-----------|
 |asset_groups|[]asset_group|True|List of asset groups|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -2665,7 +2499,7 @@ Example input:
 |----|----|--------|-----------|
 |asset_group|asset_group|True|Asset group|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -2735,7 +2569,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -2770,7 +2604,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -2804,7 +2638,7 @@ Example input:
 |----|----|--------|-----------|
 |sites|[]site|True|List of sites|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -2921,7 +2755,7 @@ Example input:
 |----|----|--------|-----------|
 |site|site|True|Site details|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -3035,7 +2869,7 @@ Example input:
 |----|----|--------|-----------|
 |vulnerabilities|[]vulnerability|True|Vulnerability details|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -3145,7 +2979,7 @@ Example input:
 |----|----|--------|-----------|
 |assets|[]asset|False|Assets|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -3264,7 +3098,7 @@ Example input:
 |----|----|--------|-----------|
 |scans|[]scan|True|List of scan details|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -3326,7 +3160,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -3360,7 +3194,7 @@ Example input:
 |----|----|--------|-----------|
 |shared_secret|string|True|Scan engine pairing shared secret|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -3390,7 +3224,7 @@ Example input:
 |----|----|--------|-----------|
 |scan_engines|[]scan_engine|True|List of scan engines details|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -3588,7 +3422,7 @@ Example input:
 |----|----|--------|-----------|
 |scan_engine|scan_engine|True|Scan engine details|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -3656,7 +3490,7 @@ Example input:
 |id|integer|True|Scan engine ID|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -3696,7 +3530,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -3730,7 +3564,7 @@ Example input:
 |----|----|--------|-----------|
 |scan_engine_pools|[]scan_engine_pool|True|List of scan engine pool details|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -3803,7 +3637,7 @@ Example input:
 |----|----|--------|-----------|
 |scan_engine_pool|scan_engine_pool|True|Scan engine pool details|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -3858,7 +3692,7 @@ Example input:
 |id|integer|True|Scan engine pool ID|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -3899,7 +3733,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -3934,7 +3768,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -3968,7 +3802,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -4003,7 +3837,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -4045,7 +3879,7 @@ Example input:
 |id|integer|True|The vulnerability exception that was created|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -4085,7 +3919,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -4119,7 +3953,7 @@ Example input:
 |----|----|--------|-----------|
 |vulnerability|vulnerability|True|The details of the vulnerability requested|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -4223,7 +4057,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -4258,7 +4092,7 @@ Example input:
 |----|----|--------|-----------|
 |authentication_sources|[]authentication_source|True|List of authentication sources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -4304,7 +4138,7 @@ Example input:
 |----|----|--------|-----------|
 |authentication_source|authentication_source|True|User authentication source|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -4348,7 +4182,7 @@ Example input:
 |----|----|--------|-----------|
 |roles|[]role|True|List of roles|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -4443,7 +4277,7 @@ Example input:
 |----|----|--------|-----------|
 |role|role|True|Role details|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -4522,7 +4356,7 @@ Example input:
 |----|----|--------|-----------|
 |users|[]user_account|True|List of user account details|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -4648,7 +4482,7 @@ Example input:
 |----|----|--------|-----------|
 |user|user_account|True|User account details|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -4781,7 +4615,7 @@ Example input:
 |id|integer|True|The identifier of the created user account|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -4829,7 +4663,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -4863,7 +4697,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -4897,7 +4731,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -4931,7 +4765,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -4968,7 +4802,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -5003,7 +4837,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -5038,7 +4872,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -5073,7 +4907,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -5108,7 +4942,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -5143,7 +4977,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -5178,7 +5012,7 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -5216,7 +5050,7 @@ Example input:
 |----|----|--------|-----------|
 |remediations|[]remediation|True|List of top remediations|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -5279,7 +5113,7 @@ Example input:
 |----|----|--------|-----------|
 |exception|vulnerability_exception|False|InsightVM vulnerability exception|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -5350,7 +5184,7 @@ Example input:
 |----|----|--------|-----------|
 |scan|scan|False|InsightVM Scan|
 
-Example Output:
+Example output:
 
 ```
 {
@@ -5392,6 +5226,9 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.8.1 - Fixed an issue where some actions were expecting bytes data and were getting strings instead
+* 4.8.0 - New action Get Asset Vulnerability Solutions
+* 4.7.1 - Code refactor and bug fixes
 * 4.7.0 - Update Get Asset Vulnerabilities with new input and output
 * 4.6.0 - Update Get Asset Vulnerabilities with new output | Fix issue with RequestParams object set function
 * 4.5.0 - Update to Asset Search action to allow search result limiting and sorting

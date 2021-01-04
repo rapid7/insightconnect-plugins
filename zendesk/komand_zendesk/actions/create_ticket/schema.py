@@ -77,7 +77,7 @@ class CreateTicketInput(komand.Input):
       "order": 6
     },
     "group_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Group ID",
       "description": "Group ID",
       "order": 7

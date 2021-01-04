@@ -3,7 +3,7 @@ from .schema import GetScanEnginePoolsInput, GetScanEnginePoolsOutput
 # Custom imports below
 import re
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
 class GetScanEnginePools(komand.Action):
@@ -16,7 +16,7 @@ class GetScanEnginePools(komand.Action):
                 output=GetScanEnginePoolsOutput())
 
     def run(self, params={}):
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
         name = params.get("name")
         endpoint = endpoints.ScanEnginePool.scan_engine_pools(self.connection.console_url)
         engine_pools = resource_helper.resource_request(endpoint=endpoint)

@@ -10,6 +10,7 @@ class Component:
 class Input:
     AGENT = "agent"
     AGENT_ACTIVE = "agent_active"
+    CASE_SENSITIVE = "case_sensitive"
     
 
 class Output:
@@ -34,8 +35,18 @@ class SearchAgentsInput(komand.Input):
       "description": "Return a list of all active or inactive agents when Agent input is not specified. Note that setting this to true for Active agents can return a very large amount of data",
       "default": true,
       "order": 2
+    },
+    "case_sensitive": {
+      "type": "boolean",
+      "title": "Case Sensitive",
+      "description": "Looks up agents in a case-sensitive manner. Setting this value to false may result in longer run times and unintended results",
+      "default": true,
+      "order": 3
     }
-  }
+  },
+  "required": [
+    "case_sensitive"
+  ]
 }
     """)
 

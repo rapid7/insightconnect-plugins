@@ -10,12 +10,12 @@ class Component:
 class Input:
     IP_ADDRESS = "IP_address"
     COMMENT = "comment"
-    FIELDS = "fields"
     
 
 class Output:
     ANALYSTNOTES = "analystNotes"
     COUNTS = "counts"
+    ENTERPRISELISTS = "enterpriseLists"
     ENTITY = "entity"
     FOUND = "found"
     INTELCARD = "intelCard"
@@ -45,15 +45,6 @@ class LookupIPAddressInput(komand.Input):
       "type": "string",
       "title": "Comment",
       "description": "Add comment to IP address lookup for Recorded Future",
-      "order": 3
-    },
-    "fields": {
-      "type": "array",
-      "title": "Fields",
-      "description": "List of fields to include with results e.g [\\"sightings\\", \\"threatLists\\", \\"analystNotes\\", \\"counts\\", \\"entity\\", \\"intelCard\\", \\"metrics\\", \\"relatedEntities\\", \\"riskyCIDRIPs\\",\\"risk\\", \\"location\\", \\"timestamps\\"]",
-      "items": {
-        "type": "string"
-      },
       "order": 2
     }
   },
@@ -91,6 +82,15 @@ class LookupIPAddressOutput(komand.Output):
       },
       "order": 4
     },
+    "enterpriseLists": {
+      "type": "array",
+      "title": "Enterprise Lists",
+      "description": "Enterprise lists",
+      "items": {
+        "$ref": "#/definitions/enterpriseLists"
+      },
+      "order": 13
+    },
     "entity": {
       "$ref": "#/definitions/entity",
       "title": "Entity",
@@ -101,7 +101,7 @@ class LookupIPAddressOutput(komand.Output):
       "type": "boolean",
       "title": "Found",
       "description": "Has the IP been found in Recorded Future",
-      "order": 13
+      "order": 14
     },
     "intelCard": {
       "type": "string",
@@ -162,7 +162,7 @@ class LookupIPAddressOutput(komand.Output):
       "title": "Threat Lists",
       "description": "Threat lists",
       "items": {
-        "type": "string"
+        "$ref": "#/definitions/threatLists"
       },
       "order": 9
     },
@@ -211,6 +211,50 @@ class LookupIPAddressOutput(komand.Output):
           "type": "string",
           "title": "Date",
           "order": 2
+        }
+      }
+    },
+    "enterpriseLists": {
+      "type": "object",
+      "title": "enterpriseLists",
+      "properties": {
+        "added": {
+          "type": "string",
+          "title": "Added",
+          "description": "Added",
+          "order": 1
+        },
+        "list": {
+          "$ref": "#/definitions/list",
+          "title": "List",
+          "description": "List",
+          "order": 2
+        }
+      },
+      "definitions": {
+        "list": {
+          "type": "object",
+          "title": "list",
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "ID",
+              "description": "ID",
+              "order": 1
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "Name",
+              "order": 2
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "description": "Type",
+              "order": 3
+            }
+          }
         }
       }
     },
@@ -318,6 +362,30 @@ class LookupIPAddressOutput(komand.Output):
     "ip": {
       "type": "object",
       "title": "ip",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "ID",
+          "order": 1
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 2
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type",
+          "order": 3
+        }
+      }
+    },
+    "list": {
+      "type": "object",
+      "title": "list",
       "properties": {
         "id": {
           "type": "string",
@@ -699,6 +767,36 @@ class LookupIPAddressOutput(komand.Output):
           "type": "string",
           "title": "Url",
           "order": 6
+        }
+      }
+    },
+    "threatLists": {
+      "type": "object",
+      "title": "threatLists",
+      "properties": {
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "description": "Description",
+          "order": 1
+        },
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "ID",
+          "order": 2
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 3
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type",
+          "order": 4
         }
       }
     },

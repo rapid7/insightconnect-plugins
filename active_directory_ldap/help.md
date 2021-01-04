@@ -25,8 +25,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|auto_referrals|boolean|True|True|Allows the plugin to follow referrals from the specified Active Directory server to other Active Directory servers|None|True|
-|host|string|None|True|Server Host, e.g. ldap://example.com. Must use either ldap:// or ldaps:// for SSL prefix|None|ldaps://example.com|
+|host|string|None|True|Server Host, e.g. example.com|None|example.com|
 |port|integer|389|True|Port, e.g. 389|None|389|
 |use_ssl|boolean|None|True|Use SSL?|None|True|
 |username_password|credential_username_password|None|True|Username and password|None|{"username":"user1", "password":"mypassword"}|
@@ -35,8 +34,7 @@ Example input:
 
 ```
 {
-  "auto_referrals": true,
-  "host": "ldaps://example.com",
+  "host": "example.com",
   "port": 389,
   "use_ssl": true,
   "username_password": {"username":"user1", "password":"mypassword"}
@@ -489,6 +487,7 @@ the query results, and then using the variable step $item.dn
 # Version History
 
 * 5.0.0 - Add new input to connection to allow for Auto Referrals | A number of bug fixes
+* 4.0.3 - Fix issue with connection documentation incorrectly stating a protocol prefix is required
 * 4.0.2 - Fix issue where some host names were being incorrectly parsed
 * 4.0.1 - Fix issue were logging of connection info did not display hostname correctly
 * 4.0.0 - New action Modify Object | Rename Modify Groups action to 'Add or Remove an Object from Group' | Fix issue where non-ASCII characters were not being escaped

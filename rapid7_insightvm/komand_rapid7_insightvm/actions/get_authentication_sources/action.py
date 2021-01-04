@@ -3,7 +3,7 @@ from .schema import GetAuthenticationSourcesInput, GetAuthenticationSourcesOutpu
 # Custom imports below
 import re
 from komand_rapid7_insightvm.util import endpoints
-from komand_rapid7_insightvm.util.resource_helper import ResourceHelper
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
 class GetAuthenticationSources(komand.Action):
@@ -16,7 +16,7 @@ class GetAuthenticationSources(komand.Action):
                 output=GetAuthenticationSourcesOutput())
 
     def run(self, params={}):
-        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
         endpoint = endpoints.AuthenticationSource.authentication_sources(self.connection.console_url)
         self.logger.info("Using %s ..." % endpoint)
 

@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: darktrace
 title: Darktrace
-version: 2.0.0
+version: 2.0.1
 description: Automate the management of watched domains and alerting using the Darktrace plugin
 vendor: rapid7
 support: rapid7
