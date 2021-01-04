@@ -985,7 +985,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
-* 3.5.2 - Fix issue where trigger get only 1000 users
+* 3.5.2 - Fix issue where Monitor User Groups trigger would be limited to 1000 users
 * 3.5.1 - Update to add additional logging to Monitor User Groups trigger
 * 3.5.0 - New action Update Blacklist Zones
 * 3.4.3 - Fix issue where trigger did not return empty arrays when users were removed or added to group
