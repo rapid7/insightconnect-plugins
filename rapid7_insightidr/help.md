@@ -36,6 +36,132 @@ Example input:
 
 ### Actions
 
+#### Get All Logs
+
+This action is used to request used to list all Logs for an account.
+
+##### Input
+
+_This action does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|logs|logsets_info|True|Specific logs from an account|
+
+Example output:
+
+```
+{
+  "log": {
+    "log": {
+      "id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f",
+      "name": "Windows Defender",
+      "tokens": [
+        "bc38a911-65f1-4755-cca3-a330a6336b3a"
+      ],
+      "structures": [
+        "1238a911-65f1-4755-cca3-a330a6336b3a"
+      ],
+      "user_data": {
+        "platform_managed": "true"
+      },
+      "source_type": "token",
+      "token_seed": null,
+      "retention_period": "default",
+      "links": [
+        {
+          "rel": "Related",
+          "href": "https://example.com"
+        }
+      ],
+      "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a",
+      "logsets_info": [
+        {
+          "id": "bc38a911-65f1-4755-cca3-a330a6336b3a",
+          "name": "Unparsed Data",
+          "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a",
+          "links": [
+            {
+              "rel": "Self",
+              "href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+#### Get a Log
+
+This action is used to request used to get a specific Log from an account.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|Query ID|None|174e4f99-2ac7-4481-9301-4d24c34baf06|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|log|logsets_info|True|Specific log from an account|
+
+Example output:
+
+```
+{
+  "log": {
+    "log": {
+      "id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f",
+      "name": "Windows Defender",
+      "tokens": [
+        "bc38a911-65f1-4755-cca3-a330a6336b3a"
+      ],
+      "structures": [
+        "1238a911-65f1-4755-cca3-a330a6336b3a"
+      ],
+      "user_data": {
+        "platform_managed": "true"
+      },
+      "source_type": "token",
+      "token_seed": null,
+      "retention_period": "default",
+      "links": [
+        {
+          "rel": "Related",
+          "href": "https://example.com"
+        }
+      ],
+      "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a",
+      "logsets_info": [
+        {
+          "id": "bc38a911-65f1-4755-cca3-a330a6336b3a",
+          "name": "Unparsed Data",
+          "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a",
+          "links": [
+            {
+              "rel": "Self",
+              "href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+
 #### Get Query Results
 
 This action is used to get query results for a LEQL query by query ID.
@@ -328,6 +454,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.4.0 - New actions Get a Log and Get All Logs
 * 1.3.1 - Fix ID input description in Get Query Results action
 * 1.3.0 - New action Get Query Results
 * 1.2.1 - Change default value in the `size` input parameter to 1000 in List Investigations action
