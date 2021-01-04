@@ -20,11 +20,16 @@ This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy).
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|False|Zendesk API key|None|
-|credentials|credential_username_password|None|True|Email and password|None|
-|subdomain|string|None|True|Zendesk subdomain|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|False|Zendesk API key|None|None|
+|credentials|credential_username_password|None|True|Email and password|None|None|
+|subdomain|string|None|True|Zendesk subdomain|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -36,10 +41,10 @@ This action is used to search Zendesk.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|item|string|None|True|Search item E.g. password reset|None|
-|type|string|None|True|Search type|['User', 'Organization', 'Ticket']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|item|string|None|True|Search item E.g. password reset|None|None|
+|type|string|None|True|Search type|['User', 'Organization', 'Ticket']|None|
 
 Example input:
 
@@ -132,9 +137,9 @@ This action is used to delete a ticket.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|ticket_id|string|None|True|Delete ticket|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ticket_id|string|None|True|Delete ticket|None|None|
 
 Example input:
 
@@ -156,9 +161,9 @@ This action is used to delete an organization membership.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|membership_id|string|None|True|ID of membership to delete E.g. 1657574807|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|membership_id|string|None|True|ID of membership to delete E.g. 1657574807|None|None|
 
 Example input:
 
@@ -180,9 +185,9 @@ This action is used to retrieve user information.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user_id|string|None|True|ID of user to show E.g. 20444826487|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|ID of user to show E.g. 20444826487|None|None|
 
 Example input:
 
@@ -204,9 +209,9 @@ This action is used to suspend a user.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user_id|string|None|True|ID of user to delete E.g. 20444826487|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|ID of user to delete E.g. 20444826487|None|None|
 
 Example input:
 
@@ -228,9 +233,9 @@ This action is used to delete a user.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user_id|string|None|True|ID of user to delete E.g. 20444826487|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|ID of user to delete E.g. 20444826487|None|None|
 
 Example input:
 
@@ -252,23 +257,23 @@ This action is used to create a ticket.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|assignee_id|string|None|False|Assignee ID|None|
-|attachment|file|None|False|Optional file attachment|None|
-|collaborator_ids|[]string|None|False|List of collaborator IDs|None|
-|description|string|None|True|Ticket description|None|
-|due_at|date|None|False|Time ticket is due|None|
-|external_id|string|None|False|Support ticket ID|None|
-|group_id|integer|None|False|Group ID|None|
-|priority|string|None|False|Ticket priority|['Urgent', 'High', 'Normal', 'Low', '']|
-|problem_id|string|None|False|For tickets of type 'incident', the numeric ID of the problem the incident is linked to|None|
-|recipient|string|None|False|ID of user recipient|None|
-|requester_id|string|None|False|ID of user requesting support|None|
-|status|string|None|False|Ticket status|['New', 'Open', 'Pending', 'Hold', 'Solved', 'Closed', '']|
-|subject|string|None|True|Subject of ticket|None|
-|tags|[]string|None|False|Tags describing ticket|None|
-|type|string|None|False|Ticket type|['Problem', 'Incident', 'Task', 'Question', '']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|assignee_id|string|None|False|Assignee ID|None|None|
+|attachment|file|None|False|Optional file attachment|None|None|
+|collaborator_ids|[]string|None|False|List of collaborator IDs|None|None|
+|description|string|None|True|Ticket description|None|None|
+|due_at|date|None|False|Time ticket is due|None|None|
+|external_id|string|None|False|Support ticket ID|None|None|
+|group_id|string|None|False|Group ID|None|None|
+|priority|string|None|False|Ticket priority|['Urgent', 'High', 'Normal', 'Low', '']|None|
+|problem_id|string|None|False|For tickets of type 'incident', the numeric ID of the problem the incident is linked to|None|None|
+|recipient|string|None|False|ID of user recipient|None|None|
+|requester_id|string|None|False|ID of user requesting support|None|None|
+|status|string|None|False|Ticket status|['New', 'Open', 'Pending', 'Hold', 'Solved', 'Closed', '']|None|
+|subject|string|None|True|Subject of ticket|None|None|
+|tags|[]string|None|False|Tags describing ticket|None|None|
+|type|string|None|False|Ticket type|['Problem', 'Incident', 'Task', 'Question', '']|None|
 
 Example input:
 
@@ -313,23 +318,23 @@ This action is used to update ticket.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|assignee_id|string|None|False|Assignee ID|None|
-|collaborator_ids|[]string|None|False|List of collaborator IDs|None|
-|comment|comment|None|False|Comment|None|
-|due_at|date|None|False|Time ticket is due|None|
-|external_id|string|None|False|Support ticket ID|None|
-|group_id|string|None|False|Group ID|None|
-|priority|string|None|False|Ticket priority|['Urgent', 'High', 'Normal', 'Low', '']|
-|problem_id|string|None|False|For tickets of type 'incident', the numeric ID of the problem the incident is linked to|None|
-|recipient|string|None|False|ID of user recipient|None|
-|requester_id|string|None|True|ID of user requesting support|None|
-|status|string|None|False|Ticket status|['New', 'Open', 'Pending', 'Hold', 'Solved', 'Closed', '']|
-|subject|string|None|False|Subject of ticket|None|
-|tags|[]string|None|False|Tags describing ticket|None|
-|ticket_id|string|None|True|Ticket ID|None|
-|type|string|None|False|Ticket type|['Problem', 'Incident', 'Task', 'Question', '']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|assignee_id|string|None|False|Assignee ID|None|None|
+|collaborator_ids|[]string|None|False|List of collaborator IDs|None|None|
+|comment|comment|None|False|Comment|None|None|
+|due_at|date|None|False|Time ticket is due|None|None|
+|external_id|string|None|False|Support ticket ID|None|None|
+|group_id|string|None|False|Group ID|None|None|
+|priority|string|None|False|Ticket priority|['Urgent', 'High', 'Normal', 'Low', '']|None|
+|problem_id|string|None|False|For tickets of type 'incident', the numeric ID of the problem the incident is linked to|None|None|
+|recipient|string|None|False|ID of user recipient|None|None|
+|requester_id|string|None|True|ID of user requesting support|None|None|
+|status|string|None|False|Ticket status|['New', 'Open', 'Pending', 'Hold', 'Solved', 'Closed', '']|None|
+|subject|string|None|False|Subject of ticket|None|None|
+|tags|[]string|None|False|Tags describing ticket|None|None|
+|ticket_id|string|None|True|Ticket ID|None|None|
+|type|string|None|False|Ticket type|['Problem', 'Incident', 'Task', 'Question', '']|None|
 
 Example input:
 
@@ -423,9 +428,9 @@ This action is used to show all organization memberships.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user_id|string|None|True|ID of user to show E.g. 20444826487|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|ID of user to show E.g. 20444826487|None|None|
 
 Example input:
 
@@ -483,6 +488,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.1 - Change custom output type `group_id` from integer to string | Change `group_id` input type from integer to string in Create Ticket action
 * 2.0.0 - Remove unwanted input fields, add comment field in action Update Ticket | Fix enum fields issue with Create Ticket action
 * 1.1.1 - New spec and help.md format for the Extension Library
 * 1.1.0 - Updated Search action to return multiple results

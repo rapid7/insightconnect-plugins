@@ -1,7 +1,7 @@
 {
-	"spec": "722522747a73f443a9f7c4c570bfa108",
-	"manifest": "2e49064efd03df697e25b5de45e2be91",
-	"setup": "5915443fccf695828b92a3f979566c95",
+	"spec": "080c5c6f8e1b2ab82d9f743fd5157031",
+	"manifest": "3705fdc011b385cfed43be48cec989fb",
+	"setup": "d729df4d41e0f846d96e9ec9ed656837",
 	"schemas": [
 		{
 			"identifier": "assessment/schema.py",

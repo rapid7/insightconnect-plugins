@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Blacklist or unblacklist a URLs"
+    DESCRIPTION = "Blacklist or unblacklist URLs"
 
 
 class Input:
