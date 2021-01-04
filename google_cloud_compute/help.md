@@ -32,7 +32,7 @@ This plugin requires network access to the Google Cloud Compute Engine API.
 |auth_provider_x509_cert_url|string|https://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|https://www.googleapis.com/oauth2/v1/certs|
 |auth_uri|string|https://accounts.google.com/o/oauth2/auth|True|OAUTH2 Auth URI|None|https://accounts.google.com/o/oauth2/auth|
 |client_email|string|None|True|Client email from service credentials|None|user@example.com|
-|client_id|string|None|True|Client ID|None|1.0955422267383389e+20|
+|client_id|string|None|True|Client ID|None|109554222673833892525|
 |client_x509_cert_url|string|None|True|x509 cert URL from service credentials|None|https://www.googleapis.com/robot/v1/metadata/x509/914010354256-compute%40developer.gserviceaccount.com|
 |host|string|https://www.googleapis.com/compute/|True|Google Cloud Compute Server|None|https://www.googleapis.com/compute/|
 |private_key|credential_asymmetric_key|None|True|Private key from service credentials|None|-----BEGIN PRIVATE KEY-----MIIEvQIBAFANBgkqhkiG8w0BAQEFAASCBKcwggSjAgEAAoIBAQCpaAjyOCpEqm8Z-----END PRIVATE KEY-----|
@@ -47,7 +47,7 @@ Example input:
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "client_email": "user@example.com",
-  "client_id": 109554222673833890000,
+  "client_id": "109554222673833892525",
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/914010354256-compute%40developer.gserviceaccount.com",
   "host": "https://www.googleapis.com/compute/",
   "private_key": "-----BEGIN PRIVATE KEY-----MIIEvQIBAFANBgkqhkiG8w0BAQEFAASCBKcwggSjAgEAAoIBAQCpaAjyOCpEqm8Z-----END PRIVATE KEY-----",
@@ -60,6 +60,72 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Get Firewall Details
+
+This action is used to retrieve details on a firewall including its rulesets.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|firewall|string|None|True|Name of the firewall to return|None|my-firewall-1|
+
+Example input:
+
+```
+{
+  "firewall": "my-firewall-1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|allowed|[]allowed|False|The list of allow rules specified by this firewall. Each rule specifies a protocol and port-range tuple that describes a permitted connection|
+|creationTimestamp|string|False|Creation timestamp|
+|description|string|False|A textual description of the operation, which is set when the operation is created|
+|id|string|False|The unique identifier for the resource. This identifier is defined by the server|
+|kind|string|False|Type of the resource. Always compute#firewall for firewall rules|
+|name|string|False|Name of the resource, provided by the client when the resource is created|
+|network|string|False|URL of the network resource for this firewall rule. If not specified when creating a firewall rule, the default network is used: global/networks/default|
+|selfLink|string|False|Server-defined URL for the resource|
+|sourceRanges|[]string|False|If source ranges are specified, the firewall will apply only to traffic that has source IP address in these ranges|
+|sourceTags|[]string|False|If source tags are specified, the firewall will apply only to traffic with source IP that belongs to a tag listed in source tags|
+|targetTags|[]string|False|A list of instance tags indicating sets of instances located in the network that may make network connections as specified in allowed[]|
+
+-Example output:
+
+```
+{
+  "direction": "INGRESS",
+  "name": "my-firewall",
+  "kind": "compute#firewall",
+  "priority": 1000,
+  "selfLink": "https://www.googleapis.com/compute/v1/projects/vat...",
+  "disabled": false,
+  "id": "3087548654547145622",
+  "logConfig": {
+    "enable": false
+  },
+  "sourceRanges": [
+    "192.168.2.0/24"
+  ],
+  "targetTags": [
+    "http"
+  ],
+  "allowed": [
+    {
+      "IPProtocol": "all"
+    }
+  ],
+  "creationTimestamp": "2020-11-18T11:01:13.970-08:00",
+  "description": "",
+  "network": "https://www.googleapis.com/compute/v1/projects/vat..."
+}
+```
+
 
 #### List Disks
 
@@ -139,71 +205,6 @@ Example output:
   "kind": "compute#diskList",
   "nextPageToken": "Cj8I3o-xq8KP7QI6NAoCGAMKAyDQDwoCGAIKByDQ5Iz6zBoKAhgBCgwqCmluc3RhbmNlLTEKCiDDuuOI-JLb8AU=",
   "selfLink": "https://www.googleapis.com/compute/v1/projects/my-project-id/zones/us-central1-a/disks"
-}
-```
-
-#### Get Firewall
-
-This action is used to get firewall rule information
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|firewall|string|None|True|Name of the firewall rule to return|None|my-firewall-1|
-
-Example input:
-
-```
-{
-  "firewall": "my-firewall-1"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|allowed|[]allowed|False|The list of allow rules specified by this firewall. Each rule specifies a protocol and port-range tuple that describes a permitted connection|
-|creationTimestamp|string|False|Creation timestamp|
-|description|string|False|A textual description of the operation, which is set when the operation is created|
-|id|string|False|The unique identifier for the resource. This identifier is defined by the server|
-|kind|string|False|Type of the resource. Always compute#firewall for firewall rules|
-|name|string|False|Name of the resource, provided by the client when the resource is created|
-|network|string|False|URL of the network resource for this firewall rule. If not specified when creating a firewall rule, the default network is used: global/networks/default|
-|selfLink|string|False|Server-defined URL for the resource|
-|sourceRanges|[]string|False|If source ranges are specified, the firewall will apply only to traffic that has source IP address in these ranges|
-|sourceTags|[]string|False|If source tags are specified, the firewall will apply only to traffic with source IP that belongs to a tag listed in source tags|
-|targetTags|[]string|False|A list of instance tags indicating sets of instances located in the network that may make network connections as specified in allowed[]|
-
-Example output:
-
-```
-{
-  "direction": "INGRESS",
-  "name": "my-firewall",
-  "kind": "compute#firewall",
-  "priority": 1000,
-  "selfLink": "https://www.googleapis.com/compute/v1/projects/vat...",
-  "disabled": false,
-  "id": "3087548654547145622",
-  "logConfig": {
-    "enable": false
-  },
-  "sourceRanges": [
-    "192.168.2.0/24"
-  ],
-  "targetTags": [
-    "http"
-  ],
-  "allowed": [
-    {
-      "IPProtocol": "all"
-    }
-  ],
-  "creationTimestamp": "2020-11-18T11:01:13.970-08:00",
-  "description": "",
-  "network": "https://www.googleapis.com/compute/v1/projects/vat..."
 }
 ```
 
@@ -347,7 +348,7 @@ Example output:
 
 #### Snapshot Disk
 
-This action is used to creates a snapshot of a specified persistent disk.
+This action is used to create a snapshot of a specified persistent disk.
 
 ##### Input
 
@@ -422,7 +423,7 @@ Example output:
 
 #### List Snapshots
 
-This action is used to retrieves the list of Snapshot resources contained within the specified project.
+This action is used to retrieve the list of Snapshot resources contained within the specified project.
 
 ##### Input
 
@@ -549,7 +550,7 @@ Example output:
 
 #### Insert Firewall
 
-This action is used to creates a firewall rule in the specified project using the data included in the request.
+This action is used to create a firewall rule in the specified project using the data included in the request.
 
 ##### Input
 
@@ -1014,7 +1015,7 @@ Example output:
 
 #### Stop Instance
 
-This action is used to stop a running instance, shutting it down cleanly, and allows you to restart the instance at a later time.
+This action is used to stop a running instance, shut it down cleanly, and allow you to restart the instance at a later time.
 
 ##### Input
 

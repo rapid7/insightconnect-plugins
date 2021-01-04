@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieves the list of firewall rules available to the specified project"
+    DESCRIPTION = "This action is used to retrieve a list of persistent disks contained within the specified zone."
 
 
 class Input:

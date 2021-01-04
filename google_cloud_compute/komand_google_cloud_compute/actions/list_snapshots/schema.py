@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieves the list of Snapshot resources contained within the specified project"
+    DESCRIPTION = "This action is used to retrieve the list of Snapshot resources contained within the specified project."
 
 
 class Input:

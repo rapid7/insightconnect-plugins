@@ -1,5 +1,5 @@
 {
-	"spec": "d06027d85ebaf8e551b6963e14118556",
+	"spec": "268a18c1eb2917500d4f633b77e438b0",
 	"manifest": "2c4d8b3c37171c4779830b3b175978d1",
 	"setup": "eb75070569e552747721ce0a4b662b91",
 	"schemas": [
@@ -25,19 +25,19 @@
 		},
 		{
 			"identifier": "disk_snapshot/schema.py",
-			"hash": "7f3b2506e45fe84b34c6e7808f3a6eef"
+			"hash": "8067a358255e6da365d31f6fc715a39a"
 		},
 		{
 			"identifier": "get_firewall/schema.py",
-			"hash": "3fedb3dc1d3532e29ef2ee722582b88d"
+			"hash": "8ef798513612819bc8771156b923a30f"
 		},
 		{
 			"identifier": "insert_firewall/schema.py",
-			"hash": "020a5f8f13740ff5c21a961f420f2cec"
+			"hash": "f14f4b6c4c2b49b70464b47571435f03"
 		},
 		{
 			"identifier": "list_firewalls/schema.py",
-			"hash": "608147623459e848bda8b4124eec01fe"
+			"hash": "a284fb66cb50dfbd331dcdf710a9fe9b"
 		},
 		{
 			"identifier": "list_instances/schema.py",
@@ -45,7 +45,7 @@
 		},
 		{
 			"identifier": "list_snapshots/schema.py",
-			"hash": "d8fcd27a0a841a38c028e5e50e29b81d"
+			"hash": "eae481c802b8ebc9b56f69d06fad9c8c"
 		},
 		{
 			"identifier": "start_instance/schema.py",
@@ -53,7 +53,7 @@
 		},
 		{
 			"identifier": "stop_instance/schema.py",
-			"hash": "b4ac7d259147e836d48054e5d3a38278"
+			"hash": "86df5f7673e70e64d1e27a3b841a3b42"
 		},
 		{
 			"identifier": "update_firewall/schema.py",

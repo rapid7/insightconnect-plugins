@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get firewall"
+    DESCRIPTION = "Retrieve details on a firewall including its rulesets"
 
 
 class Input:
@@ -34,7 +34,7 @@ class GetFirewallInput(insightconnect_plugin_runtime.Input):
     "firewall": {
       "type": "string",
       "title": "Firewall Name",
-      "description": "Name of the firewall rule to return",
+      "description": "Name of the firewall to return",
       "order": 1
     }
   },

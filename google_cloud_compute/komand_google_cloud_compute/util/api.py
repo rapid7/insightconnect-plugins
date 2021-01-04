@@ -33,14 +33,14 @@ class GoogleCloudComputeAPI:
         )
         return self.execute(request)
 
-    def insert_firewall(self, body: map):
+    def insert_firewall(self, body: dict):
         request = self.service.firewalls().insert(
             project=self.project_id,
             body=body
         )
         return self.execute(request)
 
-    def update_firewall(self, firewall: str, body: map):
+    def update_firewall(self, firewall: str, body: dict):
         request = self.service.firewalls().update(
             project=self.project_id,
             firewall=firewall,
@@ -55,7 +55,7 @@ class GoogleCloudComputeAPI:
         )
         return self.execute(request)
 
-    def disk_snapshot(self, zone: str, disk: str, snapshot_body: map):
+    def disk_snapshot(self, zone: str, disk: str, snapshot_body: dict):
         request = self.service.disks().createSnapshot(
             project=self.project_id,
             zone=zone,

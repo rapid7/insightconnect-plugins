@@ -366,7 +366,7 @@ connection:
     type: string
     description: Client ID
     required: true
-    example: 109554222673833892525
+    example: "109554222673833892525"
   client_x509_cert_url:
     title: Client X509 Cert URL
     type: string
@@ -748,7 +748,7 @@ actions:
         required: false
   disk_snapshot:
     title: Snapshot Disk
-    description: Creates a snapshot of a specified persistent disk
+    description: This action is used to create a snapshot of a specified persistent disk.
     input:
       zone:
         type: string
@@ -912,8 +912,8 @@ actions:
         required: false
   list_snapshots:
     title: List Snapshots
-    description: Retrieves the list of Snapshot resources contained within the specified
-      project
+    description: This action is used to retrieve the list of Snapshot resources
+      contained within the specified project.
     input:
       filter:
         type: string
@@ -1097,13 +1097,13 @@ actions:
         type: string
         required: false
   get_firewall:
-    title: Get Firewall
-    description: Get firewall
+    title: Get Firewall Details
+    description: Retrieve details on a firewall including its rulesets
     input:
       firewall:
         type: string
         title: Firewall Name
-        description: Name of the firewall rule to return
+        description: Name of the firewall to return
         required: true
         example: my-firewall-1
     output:
@@ -1172,8 +1172,8 @@ actions:
         required: false
   insert_firewall:
     title: Insert Firewall
-    description: Creates a firewall rule in the specified project using the data included
-      in the request
+    description: This action is used to create a firewall rule in the specified project
+      using the data included in the request.
     input:
       name:
         description: Name of the resource, provided by the client when the resource
@@ -1347,7 +1347,8 @@ actions:
         required: false
   list_firewalls:
     title: List Firewalls
-    description: Retrieves the list of firewall rules available to the specified project
+    description: This action is used to retrieve a list of persistent disks contained
+      within the specified zone.
     input:
       filter:
         type: string
@@ -1778,8 +1779,8 @@ actions:
         required: false
   stop_instance:
     title: Stop Instance
-    description: Stops a running instance, shutting it down cleanly, and allows you
-      to restart the instance at a later time
+    description: This action is used to stop a running instance, shut it down cleanly,
+      and allow you to restart the instance at a later time.
     input:
       zone:
         type: string
