@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Proofpoint URL Defense"
 Vendor = "rapid7"
-Version = "1.2.2"
+Version = "1.2.3"
 Description = "Decode Proofpoint encoded URLs"
 
 
