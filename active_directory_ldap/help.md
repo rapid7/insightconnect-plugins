@@ -54,7 +54,7 @@ This action is used to modify the attributes of an Active Directory object.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |attribute_to_modify|string|None|True|The name of the attribute to modify|None|postalCode|
-|attribute_value|string|None|True|The value of the attribute|None|1100|
+|attribute_value|string|None|True|The value of the attribute|None|2114|
 |distinguished_name|string|None|True|The distinguished name of the object to modify|None|CN=user,OU=domain_users,DC=example,DC=com|
 
 Example input:
@@ -117,7 +117,7 @@ Example output:
 }
 ```
 
-#### Add
+#### Add User
 
 This action is used to add the specified Active Directory user.
 
@@ -125,7 +125,7 @@ This action is used to add the specified Active Directory user.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|account_disabled|string|True|True|Set this to true to disable the user account at creation|['true', 'false']|True|
+|account_disabled|boolean|True|True|Set this to true to disable the user account at creation|None|True|
 |additional_parameters|object|None|False|Add additional user parameters in JSON format|None|{"telephoneNumber":"(617)555-1234"}|
 |domain_name|string|None|True|The domain name this user will belong to|None|example.com|
 |first_name|string|None|True|User's first name|None|John|

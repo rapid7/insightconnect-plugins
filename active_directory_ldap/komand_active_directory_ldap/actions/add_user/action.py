@@ -27,7 +27,7 @@ class AddUser(komand.Action):
         additional_parameters = params.get('additional_parameters')
         user_principal_name = params.get('user_principal_name')
 
-        if account_disabled == 'true':
+        if account_disabled:
             user_account_control = 514
         else:
             user_account_control = 512

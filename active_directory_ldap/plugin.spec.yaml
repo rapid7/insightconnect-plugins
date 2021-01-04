@@ -98,7 +98,7 @@ actions:
         type: boolean
         required: false
   add_user:
-    title: Add
+    title: Add User
     description: Adds the specified Active Directory user
     input:
       domain_name:
@@ -140,14 +140,11 @@ actions:
         example: mypassword
       account_disabled:
         title: Account Disabled
-        type: string
-        enum:
-        - 'true'
-        - 'false'
+        type: boolean
         description: Set this to true to disable the user account at creation
         required: true
-        default: 'true'
-        example: 'true'
+        default: true
+        example: true
       user_principal_name:
         title: User Principal Name
         description: The users principal name
