@@ -24,13 +24,16 @@ class ModifyGroups(komand.Action):
         add_remove = params.get('add_remove')
 
         # Normalize dn
-        dn = formatter.format_dn(dn)[0]
+        dn, search_base = formatter.format_dn(dn)
         dn = formatter.unescape_asterisk(dn)
         self.logger.info(f'Escaped DN {dn}')
         # Normalize group dn
         group_dn = formatter.format_dn(group_dn)[0]
         group_dn = formatter.unescape_asterisk(group_dn)
         self.logger.info(f'Escaped group DN {group_dn}')
+
+        # Check that dn exists in AD
+        self.check_that_user_dn_is_valid(conn, dn, search_base)
 
         if add_remove == 'add':
             try:
@@ -52,3 +55,23 @@ class ModifyGroups(komand.Action):
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
         return {'success': group}
+
+    def check_that_user_dn_is_valid(self, conn, user_dn: str, search_base: str) -> None:
+        formatter = ADUtils()
+        pairs = formatter.find_parentheses_pairs(user_dn)
+        # replace ( and ) when they are part of a name rather than a search parameter
+        if pairs:
+            user_dn = formatter.escape_brackets_for_query(user_dn, pairs)
+
+        conn.search(search_base=search_base,
+                    search_filter=f'(distinguishedName={user_dn})',
+                    attributes=['userAccountControl']
+                    )
+        results = conn.response
+        dn_test = [d['dn'] for d in results if 'dn' in d]
+        try:
+            dn_test[0]
+        except Exception as ex:
+            self.logger.error('The DN ' + user_dn + ' was not found')
+            raise PluginException(cause='The DN was not found',
+                                  assistance='The DN ' + user_dn + ' was not found') from ex
