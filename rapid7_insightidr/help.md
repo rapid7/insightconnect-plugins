@@ -38,7 +38,7 @@ Example input:
 
 #### Advanced Query
 
-This action is used to realtime query into Insight IDR logs.
+This action is used to run realtime queries into Insight IDR logs.
 
 ##### Input
 
