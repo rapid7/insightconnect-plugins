@@ -38,7 +38,7 @@ Example input:
 
 #### Get All Logs
 
-This action is used to request used to list all Logs for an account.
+This action is used to request a list of all Logs for an account.
 
 ##### Input
 
