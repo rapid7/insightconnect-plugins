@@ -108,6 +108,9 @@ This action is used to request used to get a specific Log from an account.
 Example input:
 
 ```
+{
+  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06"
+}
 ```
 
 ##### Output
@@ -160,7 +163,6 @@ Example output:
   }
 }
 ```
-
 
 #### Get Query Results
 
