@@ -97,7 +97,7 @@ Example output:
 
 #### Get a Log
 
-This action is used to request used to get a specific Log from an account.
+This action is used to get a specific log from an account.
 
 ##### Input
 
