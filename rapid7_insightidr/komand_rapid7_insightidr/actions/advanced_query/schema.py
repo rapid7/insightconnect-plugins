@@ -108,7 +108,7 @@ class AdvancedQueryOutput(komand.Output):
     "results": {
       "type": "array",
       "title": "Query Results",
-      "description": "Qurey Results",
+      "description": "Query Results",
       "items": {
         "$ref": "#/definitions/events"
       },
