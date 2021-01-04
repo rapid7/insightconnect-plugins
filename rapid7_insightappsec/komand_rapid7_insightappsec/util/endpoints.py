@@ -25,7 +25,7 @@ class Apps:
         :param console_url: URL to the InsightAppSec console
         :return: pre-populated ias/v1/apps/UUID/
         """
-        return f'{console_url}ias/vi/apps/{app_id}/'
+        return f'{console_url}ias/v1/apps/{app_id}/'
 
     @staticmethod
     def update_app(console_url: str, app_id: str):
@@ -43,7 +43,7 @@ class Apps:
         :param console_url: URL to the InsightAppSec console
         :return: pre-populated ias/v1/apps/UUID/
         """
-        return f'{console_url}ias/vi/apps/{app_id}/'
+        return f'{console_url}ias/v1/apps/{app_id}/'
 
     @staticmethod
     def get_app_users(console_url: str, app_id: str):
@@ -52,16 +52,16 @@ class Apps:
         :param console_url: URL to the InsightAppSec console
         :return: pre-populated ias/v1/apps/UUID/users/
         """
-        return f'{console_url}ias/vi/apps/{app_id}/users/'
+        return f'{console_url}ias/v1/apps/{app_id}/users/'
 
     @staticmethod
     def add_app_user(console_url: str, app_id: str):
         """
         URI for all App operations
         :param console_url: URL to the InsightAppSec console
-        :return: pre-populated ias/v1/apps/UID/users/
+        :return: pre-populated ias/v1/apps/UUID/users/
         """
-        return f'{console_url}ias/vi/apps/{app_id}/users/'
+        return f'{console_url}ias/v1/apps/{app_id}/users/'
 
     @staticmethod
     def remove_app_user(console_url: str, app_id: str, user_id: str):
@@ -70,7 +70,7 @@ class Apps:
         :param console_url: URL to the InsightAppSec console
         :return: pre-populated ias/v1/apps/UUID/users/UUID/
         """
-        return f'{console_url}ias/vi/apps/{app_id}/users/{user_id}/'
+        return f'{console_url}ias/v1/apps/{app_id}/users/{user_id}/'
 
 
 class AttackTemplates:
@@ -80,7 +80,7 @@ class AttackTemplates:
         :param console_url: URL to the InsightAppSec console
         :return: pre-populated ias/v1/attack-templates/
         """
-        return f'{console_url}ias/vi/attack-templates/'
+        return f'{console_url}ias/v1/attack-templates/'
 
     def get_attack_template(console_url: str, attack_template_id: str):
         """
@@ -88,7 +88,7 @@ class AttackTemplates:
         :param console_url: URL to the InsightAppSec console
         :return: pre-populated ias/v1/attack-templates/UUID/
         """
-        return f'{console_url}ias/vi/attack-templates/{attack_template_id}/'
+        return f'{console_url}ias/v1/attack-templates/{attack_template_id}/'
 
 class Blackouts:
     def get_blackouts(console_url: str):
@@ -97,7 +97,7 @@ class Blackouts:
         :param console_url: URL to the InsightAppSec console
         :return: pre-populated ias/v1/blackouts/
         """
-        return f'{console_url}ias/vi/blackouts/'
+        return f'{console_url}ias/v1/blackouts/'
 
     def create_blackout(console_url: str):
         """
@@ -105,7 +105,7 @@ class Blackouts:
         :param console_url: URL to the InsightAppSec console
         :return: pre-populated ias/v1/blackouts/
         """
-        return f'{console_url}ias/vi/blackouts/'
+        return f'{console_url}ias/v1/blackouts/'
 
     def get_blackout(console_url: str, blackout_id: str):
         """
@@ -113,7 +113,7 @@ class Blackouts:
         :param console_url: URL to the InsightAppSec console
         :return: pre-populated ias/v1/blackouts/UUID/
         """
-        return f'{console_url}ias/vi/blackouts/{blackout_id}/'
+        return f'{console_url}ias/v1/blackouts/{blackout_id}/'
 
     def update_blackout(concole_url: str, blackout_id: str):
         """
@@ -121,7 +121,7 @@ class Blackouts:
         :param console_url: URL to the InsightAppSec console
         :return: pre-populated ias/v1/blackouts/UUID/
         """
-        return f'{console_url}ias/vi/blackouts/{blackout_id}/'
+        return f'{console_url}ias/v1/blackouts/{blackout_id}/'
 
     def delete_blackout(concole_url: str, blackout_id: str):
         """
@@ -129,7 +129,7 @@ class Blackouts:
         :param console_url: URL to the InsightAppSec console
         :return: pre-populated ias/v1/blackouts/UUID/
         """
-        return f'{console_url}ias/vi/blackouts/{blackout_id}/'
+        return f'{console_url}ias/v1/blackouts/{blackout_id}/'
 
 
 class ScanConfig:

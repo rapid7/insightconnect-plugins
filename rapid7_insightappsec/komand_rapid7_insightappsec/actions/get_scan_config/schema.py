@@ -13,6 +13,9 @@ class Input:
 
 class Output:
     APP_ID = "app_id"
+    ASSIGNMENT_ENVIRONMENT = "assignment_environment"
+    ASSIGNMENT_ID = "assignment_id"
+    ASSIGNMENT_TYPE = "assignment_type"
     ATTACK_TEMPLATE_ID = "attack_template_id"
     CONFIG_DESCRIPTION = "config_description"
     CONFIG_NAME = "config_name"
@@ -56,6 +59,24 @@ class GetScanConfigOutput(insightconnect_plugin_runtime.Output):
       "description": "App UUID",
       "order": 4
     },
+    "assignment_environment": {
+      "type": "string",
+      "title": "Scan Engine Environment",
+      "description": "Where the scan engine runs, cloud or on-premise",
+      "order": 6
+    },
+    "assignment_id": {
+      "type": "string",
+      "title": "Assignment ID",
+      "description": "UUID of the engine group assignment",
+      "order": 7
+    },
+    "assignment_type": {
+      "type": "string",
+      "title": "Type Of Assignment",
+      "description": "A static string",
+      "order": 8
+    },
     "attack_template_id": {
       "type": "string",
       "title": "Attack Template ID",
@@ -81,7 +102,7 @@ class GetScanConfigOutput(insightconnect_plugin_runtime.Output):
       "items": {
         "type": "string"
       },
-      "order": 6
+      "order": 9
     },
     "id": {
       "type": "string",
@@ -96,7 +117,7 @@ class GetScanConfigOutput(insightconnect_plugin_runtime.Output):
       "items": {
         "$ref": "#/definitions/link"
       },
-      "order": 7
+      "order": 10
     }
   },
   "definitions": {

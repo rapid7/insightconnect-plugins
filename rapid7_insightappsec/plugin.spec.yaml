@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightappsec
 title: Rapid7 InsightAppSec
 description: This plugin allows for the creation, configuration, and starting of scans. The plugin can also retrieve scan results and logging related to the execution of the scan
-version: 2.0.0
+version: 3.0.0
 vendor: rapid7
 status: []
 support: rapid7
@@ -138,8 +138,7 @@ types:
   scan_details:
     logged_in:
       title: Logged-In
-      description: A flag which indicates if the scan is using authentication during
-        the scan
+      description: A flag which indicates if the scan is using authentication during the scan
       type: boolean
       required: false
     links_in_queue:
@@ -216,7 +215,34 @@ types:
       required: false
     first_start:
       title: Date String for the start of the schedule
-      description:
+      description: A date string used to start a schedule
+      type: string
+      required: false
+  app:
+    app_id:
+      title: Application ID
+      description: Application UUID
+      type: string
+      required: false
+    app_name:
+      title: Application Name
+      description: The name of the application
+      type: string
+      required: false
+    app_description:
+      title: Application Description
+      description: Describe the application
+      type: string
+      required: false
+    app_links:
+      title: Links
+      description: A list of links
+      type: '[]link'
+      required: false
+  uuid:
+    id:
+      title: An ID string
+      description: A string to identify a user, application, scan, engine, blackout
       type: string
       required: false
 connection:
@@ -238,30 +264,182 @@ actions:
     title: Get All Apps
     description: Get a page of all apps
     input:
-      index:
-        title: Index
-        description: The page index to start form. If blank, index will be 0
-        type: integer
-        required: false
-        example: 0
-      size:
-        title: Size
-        description: The number of entries on each page. If blank, size will be 50
-        type: integer
-        required: false
-        example: 0
       sort:
         title: Sort
-        description: How to sort the scan configs. If blank, sort will be alphabetical
-          by scan config name
+        description: How to sort the response
         type: string
         required: false
-        example: "DESC"
+        example: "ASC"
     output:
-      app_configs:
-        title: App Configs
-        description: A list of app configurations
-#        type: '[]app_config'
+      metadata:
+        title: Metadata
+        description: Metadata for the app results
+        type: object
+        required: false
+      data:
+        title: Response Data
+        description: Response data
+        type: '[]app'
+        required: false
+      links:
+        title: Links to Data
+        description: Links to data
+        type: '[]link'
+        required: false
+  create_app:
+    title: Create App
+    description: Create a new app asset
+    input:
+      app_name:
+        title: Application Name
+        description: The name of the application
+        type: string
+        required: true
+        example: "Name Of the APP"
+      app_description:
+        title: Application Description
+        description: Describe the application
+        type: string
+        required: false
+        example: "An optional description"
+    output:
+      app_id:
+        title: Application ID
+        description: Application UUID
+        type: string
+        required: true
+  get_app:
+    title: Get One App
+    description: Get limited details about an existing App
+    input:
+      app_id:
+        title: Application ID
+        description: Application UUID
+        type: string
+        required: true
+        example: "78c85b01-2a23-404d-ac5a-18324d8e3bda"
+    output:
+      app_id:
+        title: Application ID
+        description: Application UUID
+        type: string
+        required: false
+      app_name:
+        title: Application Name
+        description: The name of the application
+        type: string
+        required: false
+      app_description:
+        title: Application Description
+        description: Describe the application
+        type: string
+        required: false
+      links:
+        title: Links
+        description: A list of links
+        type: '[]link'
+        required: false
+  delete_app:
+    title: Delete Application
+    description: De;ete an existing application
+    input:
+      app_id:
+        title: Application ID
+        description: Application UUID
+        type: string
+        required: true
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    output:
+      status:
+        title: Status
+        description: Status code of the request
+        type: integer
+        required: false
+  update_app:
+    title: Update an Existing Application
+    description: Update the name or description of an existing Application
+    input:
+      app_id:
+        title: Application ID
+        description: Application UUID
+        type: string
+        required: true
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+      app_name:
+        title: Application Name
+        description: The name of an application
+        type: string
+        required: true
+      app_description:
+        title: Application Description
+        decription: Describe the application
+        type: string
+        required: false
+    output:
+      status:
+        title: Status
+        description: Status code of the request
+        type: integer
+        required: false
+  get_app_users:
+    title: Get Users Associated With an Application
+    description: A list of users with access to an application
+    input:
+      app_id:
+        title: Application ID
+        description: Application UUID
+        type: string
+        required: true
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    output:
+      user_id:
+        title: Application User
+        description: A list of users UUID
+        type: '[]uuid'
+        required: false
+  add_app_user:
+    title: Associate a User to an Application
+    description: Add a user for access to an application
+    input:
+      app_id:
+        title: Application ID
+        description: Application UUID
+        type: 'uuid'
+        required: true
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+      user_id:
+        title: User ID
+        description: User UUID
+        type: 'uuid'
+        required: true
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    output:
+      status:
+        title: Status
+        description: Status code of the request
+        type: integer
+        required: false
+  remove_app_user:
+    title: Dissociate a User From an Application
+    description: Remove a user from accessing an application
+    input:
+      app_id:
+        title: Application ID
+        description: Application UUID
+        type: 'uuid'
+        required: true
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+      user_id:
+        title: User ID
+        description: User UUID
+        type: 'uuid'
+        required: true
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    output:
+      status:
+        title: Status
+        description: Status code of the request
+        type: integer
         required: false
   create_scan_config:
     title: Create Scan Config
@@ -355,6 +533,21 @@ actions:
         description: Attack template UUID
         type: string
         required: false
+      assignment_environment:
+        title: Scan Engine Environment
+        description: Where the scan engine runs, cloud or on-premise
+        type: string
+        required: false
+      assignment_id:
+        title: Assignment ID
+        description: UUID of the engine group assignment
+        type: string
+        required: false
+      assignment_type:
+        title: Type Of Assignment
+        description: A static string
+        type: string
+        required: false
       errors:
         title: Errors
         description: A list of errors that detail any current validation failures
@@ -374,7 +567,7 @@ actions:
         description: Scan configuration UUID
         type: string
         required: true
-        example: "a709c972-cb1f-4790-bfce-6ab74653900c"
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       config_name:
         title: Name
         description: The name of the scan configuration

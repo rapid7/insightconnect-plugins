@@ -99,6 +99,7 @@ class GetSchedulesOutput(insightconnect_plugin_runtime.Output):
         "first_start": {
           "type": "string",
           "title": "Date String for the start of the schedule",
+          "description": "A date string used to start a schedule",
           "order": 4
         },
         "id": {

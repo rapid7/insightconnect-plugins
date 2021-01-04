@@ -56,7 +56,7 @@ class ResourceHelper(object):
             self.logger.error(e)
             raise
 
-        if response.status_code in range(200, 204, 299):
+        if response.status_code in range(200, 299):
             resource = response.text
             return {'resource': resource, 'status': response.status_code, 'headers': response.headers}
         else:

@@ -34,11 +34,23 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_action(actions.AddAppUser())
+
+            self.add_action(actions.CreateApp())
+
             self.add_action(actions.CreateScanConfig())
+
+            self.add_action(actions.DeleteApp())
 
             self.add_action(actions.DeleteScan())
 
             self.add_action(actions.DeleteScanConfig())
+
+            self.add_action(actions.GetApp())
+
+            self.add_action(actions.GetAppUsers())
+
+            self.add_action(actions.GetApps())
 
             self.add_action(actions.GetScan())
 
@@ -56,9 +68,13 @@ def main():
 
             self.add_action(actions.GetSchedules())
 
+            self.add_action(actions.RemoveAppUser())
+
             self.add_action(actions.SubmitScan())
 
             self.add_action(actions.SubmitScanAction())
+
+            self.add_action(actions.UpdateApp())
 
             self.add_action(actions.UpdateScanConfig())
 
