@@ -66,7 +66,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|[]events|True|Qurey Results|
+|results|[]events|True|Query Results|
 
 Example output:
 
