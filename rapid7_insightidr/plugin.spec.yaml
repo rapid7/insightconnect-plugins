@@ -559,6 +559,6 @@ actions:
     output:
       logs:
         title: Logs
-        description: Specific logs from an account
+        description: All logs
         type: logsets_info
         required: true
