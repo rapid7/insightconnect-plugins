@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 1.4.0
+version: 1.5.0
 vendor: rapid7
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_insightidr
@@ -306,6 +306,49 @@ types:
       title: Links
       description: Links
       type: "[]link"
+  links:
+    href:
+      title: HREF
+      type: string
+      description: HREF
+      required: false
+    rel:
+      title: REL
+      type: string
+      description: REL
+      required: false
+  user_data:
+    platform_managed:
+      title: Platform Managed
+      type: string
+      description: Platform managed
+      required: false
+  logsets_info:
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    links:
+      title: Links
+      type: "[]links"
+      description: Links
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    rrn:
+      title: RRN
+      type: string
+      description: RRN
+      required: false
+    user_data:
+      title: User Data
+      type: user_data
+      description: User data
+      required: false
 
 
 connection:
@@ -494,6 +537,31 @@ actions:
         title: Events
         description: Events from logs
         type: "[]events"
+        required: true
+  get_a_log:
+    title: Get a Log
+    description: Get a specific log from an account
+    input:
+      id:
+        title: ID
+        description: Query ID
+        type: string
+        example: 174e4f99-2ac7-4481-9301-4d24c34baf06
+        required: true
+    output:
+      log:
+        title: Log
+        description: Requested log
+        type: logsets_info
+        required: true
+  get_all_logs:
+    title: Get All Logs
+    description: Request used to list all logs for an account
+    output:
+      logs:
+        title: Logs
+        description: All logs
+        type: logsets_info
         required: true
 
   advanced_query:
