@@ -550,7 +550,7 @@ actions:
     output:
       log:
         title: Log
-        description: Specific log from an account
+        description: Requested log
         type: logsets_info
         required: true
   get_all_logs:
