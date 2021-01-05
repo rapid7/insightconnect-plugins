@@ -34,6 +34,13 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
+{
+  "application_id": "abcd12345-ab12-1234-abcd-1ab2c3d4e5g6",
+  "application_secret": {
+    "secretKey": "abcdefghi12345678abcdef1234"
+  },
+  "tenant_id": "abcd12345-ab12-1234-abcd-1ab2c3d4e5g6"
+}
 ```
 
 
