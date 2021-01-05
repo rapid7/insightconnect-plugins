@@ -555,7 +555,7 @@ actions:
         required: true
   get_all_logs:
     title: Get All Logs
-    description: Request used to list all Logs for an account
+    description: Request used to list all logs for an account
     output:
       logs:
         title: Logs
