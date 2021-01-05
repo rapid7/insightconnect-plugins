@@ -34,13 +34,6 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
-{
-  "application_id": "abcd12345-ab12-1234-abcd-1ab2c3d4e5g6",
-  "application_secret": {
-    "secretKey": "abcdefghi12345678abcdef1234"
-  },
-  "tenant_id": "abcd12345-ab12-1234-abcd-1ab2c3d4e5g6"
-}
 ```
 
 
@@ -95,7 +88,9 @@ Example input:
 
 ```
 {
-  "group_id": ["b4d41d4-eb13-4a33-99b5-7d7290df22e9"],
+  "group_id": [
+    "b4d41d4-eb13-4a33-99b5-7d7290df22e9"
+  ],
   "user_id": "user@example.com"
 }
 ```
@@ -595,6 +590,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.4 - Fix issue where Get User Info would fail on a disabled account
 * 2.2.3 - Fix issue where Get User Info occasionally fails with an SSL error in secondary call for user status
 * 2.2.2 - Fix issue where retry expected a valid response
 * 2.2.1 - Fix issue where Get User Info occasionally fails with an SSL error
