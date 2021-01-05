@@ -48,7 +48,7 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|logs|logsets_info|True|Specific logs from an account|
+|logs|logsets_info|True|All logs|
 
 Example output:
 
@@ -117,7 +117,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|log|logsets_info|True|Specific log from an account|
+|log|logsets_info|True|Requested log|
 
 Example output:
 

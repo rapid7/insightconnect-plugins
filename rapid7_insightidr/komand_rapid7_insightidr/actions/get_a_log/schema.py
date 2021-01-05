@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Request used to get a specific Log from an account"
+    DESCRIPTION = "Get a specific log from an account"
 
 
 class Input:
@@ -47,7 +47,7 @@ class GetALogOutput(komand.Output):
     "log": {
       "$ref": "#/definitions/logsets_info",
       "title": "Log",
-      "description": "Specific log from an account",
+      "description": "Requested log",
       "order": 1
     }
   },
