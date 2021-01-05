@@ -552,6 +552,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.5.0 - New actions Get a Log and Get All Logs
 * 1.4.0 - New action Advanced Query
 * 1.3.1 - Fix ID input description in Get Query Results action
 * 1.3.0 - New action Get Query Results
