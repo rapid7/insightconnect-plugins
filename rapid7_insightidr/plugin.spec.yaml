@@ -539,7 +539,7 @@ actions:
         required: true
   get_a_log:
     title: Get a Log
-    description: Request used to get a specific Log from an account
+    description: Get a specific log from an account
     input:
       id:
         title: ID
