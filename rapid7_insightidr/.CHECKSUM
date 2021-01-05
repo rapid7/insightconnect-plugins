@@ -8,6 +8,10 @@
 			"hash": "07220b8bb98f9e08a8a0c323c2d81c1e"
 		},
 		{
+			"identifier": "advanced_query/schema.py",
+			"hash": "e43e8602f13b714319fd3494e90ed802"
+		},
+		{
 			"identifier": "assign_user_to_investigation/schema.py",
 			"hash": "ec59468fd861033f427686449183dc23"
 		},

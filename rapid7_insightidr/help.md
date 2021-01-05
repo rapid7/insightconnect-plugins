@@ -36,6 +36,102 @@ Example input:
 
 ### Actions
 
+#### Advanced Query
+
+This action is used to run realtime queries into Insight IDR logs.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|log|string|None|True|Log to search|['Advanced Malware Alert', 'Active Directory', 'Admin Activity', 'Alert Audit Log', 'Asset Authentication', 'Cloud Service Admin Activity', 'Cloud Service Activity', 'DNS Query', 'Endpoint Activity', 'Endpoint Agents', 'Exploit Mitigation Alert', 'File Access Activity', 'File Modification Activity', 'Firewall Activity', 'Log Updates', 'Network Flow', 'Host To IP Observations', 'IDS Alert', 'Ingress Authentication', 'Raw Log', 'SSO Authentication', 'Unparsed Data', 'Third Party Alert', 'Virus Alert', 'Web Access Log', 'Windows Defender', 'Web Proxy Activity']|Firewall Activity|
+|query|string|None|True|Query|None|where(user=adagentadmin, loose)|
+|time_from|string|None|True|Beginning time and date for the query|None|01-01-2020|
+|time_to|string|None|False|Ending date and time for the query. If this is left blank, the current time will be used|None|12-31-2020|
+|timeout|int|60|True|Time in seconds to wait for the query to return. If exceeded the plugin will throw an error|None|60|
+
+Example input:
+
+```
+{
+  "log": "Firewall Activity",
+  "query": "where(user=adagentadmin, loose)",
+  "time_from": "01-01-2020",
+  "time_to": "12-31-2020",
+  "timeout": 60
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|results|[]events|True|Query Results|
+
+Example output:
+
+```
+{
+  "results": [
+    {
+      "labels": [],
+      "timestamp": 1601598638768,
+      "sequence_number": 123456789123456789,
+      "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313",
+      "message": {
+        "timestamp": "2020-10-02T00:29:14.649Z",
+        "destination_asset": "iagent-win7",
+        "source_asset_address": "10.4.22.107",
+        "destination_asset_address": "example-host",
+        "destination_local_account": "user",
+        "logon_type": "NETWORK",
+        "result": "SUCCESS",
+        "new_authentication": "false",
+        "service": "ntlmssp ",
+        "source_json": {
+          "sourceName": "Microsoft-Windows-Security-Auditing",
+          "insertionStrings": [
+            "S-1-0-0",
+            "-",
+            "-",
+            "0x0",
+            "X-X-X-XXXXXXXXXXX",
+            "user@example.com",
+            "example-host",
+            "0x204f163c",
+            "3",
+            "NtLmSsp ",
+            "NTLM",
+            "",
+            "{00000000-0000-0000-0000-000000000000}",
+            "-",
+            "NTLM V2",
+            "128",
+            "0x0",
+            "-",
+            "192.168.50.1",
+            "59090"
+          ],
+          "eventCode": 4624,
+          "computerName": "example-host",
+          "sid": "",
+          "isDomainController": false,
+          "eventData": null,
+          "timeWritten": "2020-10-02T00:29:13.670722000Z"
+        }
+      },
+      "links": [
+        {
+          "rel": "Context",
+          "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"
+        }
+      ],
+      "sequence_number_str": "123456789123456789"
+    }
+  ]
+}
+```
+
 #### Get All Logs
 
 This action is used to request a list of all Logs for an account.
@@ -383,7 +479,7 @@ This action is used to retrieve a page of investigations matching the given requ
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |end_time|date|None|False|An optional-ISO formatted timestamp. Only investigations whose createTime is before this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned|None|2020-06-01T12:11:13+05:30|
-|index|integer|0|True|The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0|None|0|
+|index|integer|0|True|The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0|None|1|
 |size|integer|1000|True|The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 1000. Default value is 1000|None|1000|
 |start_time|date|None|False|An optional ISO-formatted timestamp. Only investigations whose createTime is after this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned|None|2020-06-01T12:11:13+05:30|
 |statuses|string|CLOSED|True|An optional-comma separated set of investigation statuses. Only the investigation whose status matches one of the entries in the list will be returned. If this parameter is omitted investigations with any status may be returned|['OPEN', 'CLOSED', 'EITHER']|CLOSED|
@@ -393,7 +489,7 @@ Example input:
 ```
 {
   "end_time": "2020-06-01T12:11:13+05:30",
-  "index": 0,
+  "index": 1,
   "size": 1000,
   "start_time": "2020-06-01T12:11:13+05:30",
   "statuses": "CLOSED"
@@ -456,7 +552,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.4.0 - New actions Get a Log and Get All Logs
+* 1.4.0 - New action Advanced Query
 * 1.3.1 - Fix ID input description in Get Query Results action
 * 1.3.0 - New action Get Query Results
 * 1.2.1 - Change default value in the `size` input parameter to 1000 in List Investigations action
