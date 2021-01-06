@@ -1566,6 +1566,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.1.1 - Update the Get Threat Summary action to return all threat summaries instead of 10
 * 4.1.0 - Add case sensitivity option for Agent lookups
 * 4.0.1 - Fix Agent Active parameter in Get Agent Details action | Update Quarantine action whitelist for IP addresses
 * 4.0.0 - Update ID input for Fetch Threats File action to a string
