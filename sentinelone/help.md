@@ -672,6 +672,8 @@ Example input:
 
 ```
 {
+  "blacklist_state": true,
+  "description": "Hash Blacklisted from InsightConnect",
   "hash": "3395856ce81f2b7382dee72602f798b642f14140"
 }
 ```
