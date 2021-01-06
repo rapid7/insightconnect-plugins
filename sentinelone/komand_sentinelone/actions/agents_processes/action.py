@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import AgentsProcessesInput, AgentsProcessesOutput, Input, Output, Component
 from komand_sentinelone.util.helper import Helper
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class AgentsProcesses(insightconnect_plugin_runtime.Action):
@@ -13,13 +14,18 @@ class AgentsProcesses(insightconnect_plugin_runtime.Action):
                 output=AgentsProcessesOutput())
 
     def run(self, params={}):
-        response = self.connection.agents_processes(Helper.join_or_empty(params.get(Input.IDS, [])))
+        # response = self.connection.agents_processes(Helper.join_or_empty(params.get(Input.IDS, [])))
+        #
+        # data = []
+        # if "data" in response:
+        #     for i in response.get("data"):
+        #         data.append(insightconnect_plugin_runtime.helper.clean_dict(i))
+        #
+        # return {
+        #     Output.AGENTS_PROCESSES: data
+        # }
 
-        data = []
-        if "data" in response:
-            for i in response.get("data"):
-                data.append(insightconnect_plugin_runtime.helper.clean_dict(i))
+        raise PluginException(cause="This action is obsolete. The associated SentinelOne endpoint for this action is not supported.",
+                              assistance="Please use the 'Agents Applications' action instead. The endpoint used in"
+                                         " 'Agent Applications' has replaced said endpoint.")
 
-        return {
-            Output.AGENTS_PROCESSES: data
-        }

@@ -16,6 +16,9 @@ class BlacklistByContentHash(insightconnect_plugin_runtime.Action):
         hash_value = params.get(Input.HASH)
         result = self.connection.blacklist_by_content_hash(hash_value)
         result_data = result.get('data')
+
+        # On the next major version bump, this "blacklist_data" object can be removed and
+        # be replaced with the "affected" property inside said object
         new_result = {
             'blacklist_data': result_data
         }

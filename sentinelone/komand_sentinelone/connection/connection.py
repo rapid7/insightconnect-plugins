@@ -75,8 +75,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         # Some consoles do not support v2.1 but some actions are not included in 2.0
         # Instead, try getting an auth token from 2.1 first, then rollback to 2.0 if needed
         # Find the list of supported consoles for each API in the SentinelOne API docs
-
-        if r.status_code is not 200:
+        if r.status_code != 200:
             if version == "2.1":
                 self.logger.info("API v2.1 failed...trying v2.0")
                 token = self.get_auth_token(url, username, password, version="2.0")
@@ -182,7 +181,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         headers = self.make_token_header()
         results = requests.get(endpoint, headers=headers)
 
-        if results.status_code is not 200:
+        if results.status_code != 200:
             raise ConnectionTestException(
                 cause="Request for threat summary failed at: " + endpoint,
                 assistance="Repsonse was: " + results.text
@@ -206,7 +205,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         }
 
         results = requests.post(endpoint, json=body, headers=headers)
-        if results.status_code is not 200:
+        if results.status_code != 200:
             raise Exception("Could not blacklist file hash, result was: " + results.text)
 
         return results.json()
@@ -227,7 +226,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         }
 
         results = requests.post(endpoint, json=body, headers=headers)
-        if results.status_code is not 200:
+        if results.status_code != 200:
             raise Exception("Could not blacklist IoC hash, result was: " + results.text)
 
         self.logger.info("Blacklist result: " + str(results))  # Will nicely print status code
@@ -362,7 +361,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
             if full_response:
                 return response
 
-            # self.logger.info(f"RESPONSE IS:\n\n{response.json()} \n\n")
             return response.json()
         except requests.HTTPError:
             raise Exception("API call failed: " + response.text)

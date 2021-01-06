@@ -12,8 +12,6 @@ import logging
 class TestAgentsProcesses(TestCase):
     def test_integration_agents_processes(self):
         """
-        TODO: Implement assertions at the end of this test case
-
         This is an integration test that will connect to the services your plugin uses. It should be used
         as the basis for tests below that can run independent of a "live" connection.
 
@@ -50,23 +48,6 @@ class TestAgentsProcesses(TestCase):
         test_action.connection = test_conn
         results = test_action.run(action_params)
 
-        # TODO: Remove this line
-        self.fail("Unimplemented test case")
+        # TODO: Remove agents_processes action with next major version bump
+        self.fail("This is action is obsolete. Delete this action on the next major version bump")
 
-        # TODO: The following assert should be updated to look for data from your action
-        # For example: self.assertEquals({"success": True}, results) 
-        self.assertEquals({}, results)
-
-    def test_agents_processes(self):
-        """
-        TODO: Implement test cases here
-
-        Here you can mock the connection with data returned from the above integration test.
-        For information on mocking and unit testing please go here:
-
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
-
-        You can either create a formal Mock for this, or you can create a fake connection class to pass to your
-        action for testing.
-        """
-        self.fail("Unimplemented Test Case")

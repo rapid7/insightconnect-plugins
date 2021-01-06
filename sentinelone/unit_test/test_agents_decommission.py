@@ -7,13 +7,12 @@ from komand_sentinelone.connection.connection import Connection
 from komand_sentinelone.actions.agents_decommission import AgentsDecommission
 import json
 import logging
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class TestAgentsDecommission(TestCase):
     def test_integration_agents_decommission(self):
         """
-        TODO: Implement assertions at the end of this test case
-
         This is an integration test that will connect to the services your plugin uses. It should be used
         as the basis for tests below that can run independent of a "live" connection.
 
@@ -49,24 +48,8 @@ class TestAgentsDecommission(TestCase):
         test_conn.connect(connection_params)
         test_action.connection = test_conn
         results = test_action.run(action_params)
+        self.assertTrue("affected" in results.keys())
 
-        # TODO: Remove this line
-        self.fail("Unimplemented test case")
-
-        # TODO: The following assert should be updated to look for data from your action
-        # For example: self.assertEquals({"success": True}, results) 
-        self.assertEquals({}, results)
-
-    def test_agents_decommission(self):
-        """
-        TODO: Implement test cases here
-
-        Here you can mock the connection with data returned from the above integration test.
-        For information on mocking and unit testing please go here:
-
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
-
-        You can either create a formal Mock for this, or you can create a fake connection class to pass to your
-        action for testing.
-        """
-        self.fail("Unimplemented Test Case")
+        # Check to throw exception if an incomplete filter is given
+        action_params = {'filter': {}}
+        self.assertRaises(PluginException, test_action.run, action_params)

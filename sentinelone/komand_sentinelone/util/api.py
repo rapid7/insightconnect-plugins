@@ -27,7 +27,7 @@ class SentineloneAPI:
                     endpoint = f"{self.url}web/api/v{api_version}/agents?{search}={agent}"
                     output = requests.get(endpoint, headers=self.token_header)
 
-                    if output.status_code is 200 and output.json()["pagination"]["totalItems"] >= 1:
+                    if output.status_code == 200 and output.json()["pagination"]["totalItems"] >= 1:
                         results.append(output.json()['data'][0])
 
                 if results_length:

@@ -14,7 +14,6 @@ class AgentsDecommission(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         agent_filter = params.get(Input.FILTER, "")
-        self.logger.info(agent_filter)
         if "ids" not in agent_filter and "groupIds" not in agent_filter and "filterId" not in agent_filter:
             raise PluginException(
                 cause="Wrong filter parameter",
