@@ -32,7 +32,10 @@ Example input:
 
 ```
 {
-  "credentials": "{\"username\": \"user@example.com\", \"password\": \"mypassword\"}",
+  "credentials": {
+    "username": "user@example.com",
+    "password": "mypassword
+  },
   "url": "https://example.sentinelone.com"
 }
 ```
@@ -91,6 +94,13 @@ This action sends a connect to network command to all agents matching the input 
 Example input:
 
 ```
+{
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  }
+}
 ```
 
 ##### Output
@@ -103,13 +113,13 @@ Example output:
 
 ```
 {
-  "affected": 0
+  "affected": 1
 }
 ```
 
 #### Blacklist by IOC Hash
 
-This action is used to add hashed indicator of compromise to global blacklist.
+This action is obsolete, please use the other blacklist actions.
 
 ##### Input
 
@@ -121,11 +131,6 @@ This action is used to add hashed indicator of compromise to global blacklist.
 Example input:
 
 ```
-{
-  "blacklist_state": true,
-  "description": "Hash Blacklisted from InsightConnect",
-  "hash": "3395856ce81f2b7382dee72602f798b642f14140"
-}
 ```
 
 ##### Output
@@ -270,6 +275,13 @@ This action aborts running scan on all agents matching the input filter.
 Example input:
 
 ```
+{
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  }
+}
 ```
 
 ##### Output
@@ -299,6 +311,13 @@ This action decommissions all agents matching the input filter.
 Example input:
 
 ```
+{
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  }
+}
 ```
 
 ##### Output
@@ -328,6 +347,13 @@ This action disconnects agents associated to marked threats from network.
 Example input:
 
 ```
+{
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  }
+}
 ```
 
 ##### Output
@@ -357,6 +383,13 @@ This action sends a fetch logs command to all agents matching the input filter.
 Example input:
 
 ```
+{
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  }
+}
 ```
 
 ##### Output
@@ -386,6 +419,13 @@ This action sends a scan command to all agents matching the input filter.
 Example input:
 
 ```
+{
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  }
+}
 ```
 
 ##### Output
@@ -404,7 +444,7 @@ Example output:
 
 #### Agents Processes
 
-This action is used to retrieve running processes for a specific agent.
+The endpoint for this action is obsolete. Please use the 'Agents Applications' action instead.
 
 ##### Input
 
@@ -460,6 +500,13 @@ This action is used to reload an agent module (applies to Windows agents only).
 Example input:
 
 ```
+{
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  }
+}
 ```
 
 ##### Output
@@ -489,6 +536,13 @@ This action sends a restart command to all agents matching the input filter.
 Example input:
 
 ```
+{
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  }
+}
 ```
 
 ##### Output
@@ -518,6 +572,13 @@ This action sends a shutdown command to all agents matching the input filter.
 Example input:
 
 ```
+{
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  }
+}
 ```
 
 ##### Output
@@ -542,12 +603,20 @@ This action is used to summary of agents by numbers.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|account_ids|[]string|None|False|List of Account IDs to filter by|None|None|
-|site_ids|[]string|None|False|List of Site IDs to filter by|None|None|
+|account_ids|[]string|None|False|List of Account IDs to filter by|None|["4000000000000000000"]|
+|site_ids|[]string|None|False|List of Site IDs to filter by|None|["500000000000000000"]|
 
 Example input:
 
 ```
+{
+  "account_ids": [
+    "4000000000000000000"
+  ],
+  "site_ids": [
+    "500000000000000000"
+  ]
+}
 ```
 
 ##### Output
@@ -564,6 +633,14 @@ Example input:
 Example output:
 
 ```
+{
+  "decommissioned": 4,
+  "infected": 0,
+  "out_of_date": 0,
+  "online": 1,
+  "total": 2,
+  "up_to_date": 2
+}
 ```
 
 #### Uninstall
@@ -579,6 +656,13 @@ This action sends an uninstall command to all agents matching the input filter.
 Example input:
 
 ```
+{
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  }
+}
 ```
 
 ##### Output
@@ -608,6 +692,11 @@ This action is used to retrieve running applications for a specific agent.
 Example input:
 
 ```
+{
+  "ids": [
+    "1000000000000000000"
+  ]
+}
 ```
 
 ##### Output
@@ -952,13 +1041,18 @@ This action is used to mark a threat as resolved.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|target_scope|string|None|True|Scope to be used for exclusions|['group', 'site', 'tenant']|None|
-|threat_id|string|None|True|ID of a threat|None|None|
-|whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|None|
+|target_scope|string|None|True|Scope to be used for exclusions|['group', 'site', 'tenant']|site|
+|threat_id|string|None|True|ID of a threat|None|1000000000000000000|
+|whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']||
 
 Example input:
 
 ```
+{
+  "target_scope": "site",
+  "threat_id": "1000000000000000000",
+  "whitening_option": "path"
+}
 ```
 
 ##### Output
@@ -990,6 +1084,11 @@ This action is used to mark a suspicious threat as a threat.
 Example input:
 
 ```
+{
+  "target_scope": "site",
+  "threat_id": "1000000000000000000",
+  "whitening_option": "path"
+}
 ```
 
 ##### Output
@@ -1020,6 +1119,10 @@ This action is used to apply a mitigation action to a threat.
 Example input:
 
 ```
+{
+  "action": "quarantine",
+  "threat_id": "1062263006535199341"
+}
 ```
 
 ##### Output
@@ -1049,6 +1152,9 @@ This action is the account name available for this account.
 Example input:
 
 ```
+{
+  "name": "test"
+}
 ```
 
 ##### Output
@@ -1568,6 +1674,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.2.0 - Fix various Agent actions with new API version
 * 4.1.1 - Update the Get Threat Summary action to return all threat summaries instead of 10
 * 4.1.0 - Add case sensitivity option for Agent lookups
 * 4.0.1 - Fix Agent Active parameter in Get Agent Details action | Update Quarantine action whitelist for IP addresses

@@ -1245,7 +1245,7 @@ actions:
         required: true
   blacklist_by_ioc_hash:
     title: Blacklist by IOC Hash
-    description: (OBSOLETE -- Use the other blacklist actions) Add hashed indicator of compromise to global blacklist
+    description: This action is obsolete, please use the other blacklist actions.
     input:
       hash:
         title: IOC Hash
@@ -1308,6 +1308,7 @@ actions:
         description: ID of a threat
         type: string
         required: true
+        example: 1000000000000000000
       action:
         title: Action
         description: Mitigation action
@@ -1319,6 +1320,7 @@ actions:
         - kill
         - remediate
         - un-quarantine
+        example: quarantine
     output:
       affected:
         title: Affected
@@ -1334,6 +1336,7 @@ actions:
         description: ID of a threat
         type: string
         required: true
+        example: "1000000000000000000"
       target_scope:
         title: Target Scope
         description: Scope to be used for exclusions
@@ -1343,6 +1346,7 @@ actions:
         - group
         - site
         - tenant
+        example: site
       whitening_option:
         title: Whitening Option
         description: Selected whitening option
@@ -1355,6 +1359,7 @@ actions:
         - file-type
         - file_hash
         - path
+        example: path
     output:
       affected:
         title: Affected
@@ -1370,6 +1375,7 @@ actions:
         description: ID of a threat
         type: string
         required: true
+        example: 1000000000000000000
       target_scope:
         title: Target Scope
         description: Scope to be used for exclusions
@@ -1379,6 +1385,7 @@ actions:
         - group
         - site
         - tenant
+        example: site
       whitening_option:
         title: Whitening Option
         description: Selected whitening option
@@ -1391,6 +1398,7 @@ actions:
         - file-type
         - file_hash
         - path
+        example: path
     output:
       affected:
         title: Affected
@@ -1564,6 +1572,7 @@ actions:
         description: Agent ID list
         type: '[]string'
         required: true
+        example: ["1000000000000000000"]
     output:
       data:
         title: Agent Applications
@@ -1579,42 +1588,50 @@ actions:
         description: List of Site IDs to filter by
         type: '[]string'
         required: false
+        example: ["500000000000000000"]
       account_ids:
         title: Account IDS
         description: List of Account IDs to filter by
         type: '[]string'
         required: false
+        example: ["4000000000000000000"]
     output:
       up_to_date:
         title: Up to Date Number
         description: Number of agents with the most up-to-date software version
         type: integer
         required: false
+        example: 2
       out_of_date:
         title: Out of Date Number
         description: Number of agents running an older software version
         type: integer
         required: false
+        example: 1
       total:
         title: Total
         description: Number of installed active agents
         type: integer
         required: false
+        example: 2
       online:
         title: Online
         description: Number of online agents
         type: integer
         required: false
+        example: 2
       decommissioned:
         title: Decommissioned
         description: Number of decommissioned agents
         type: integer
         required: false
+        example: 0
       infected:
         title: Infected
         description: Number of agents with at least one active threat
         type: integer
         required: false
+        example: 1
   name_available:
     title: Available Name
     description: Is the account name available for this account
@@ -1624,6 +1641,7 @@ actions:
         description: Account Name to validate
         type: string
         required: true
+        example: test
     output:
       available:
         title: Available
@@ -1805,6 +1823,7 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: false
+        example: 1
   search_agents:
     title: Search Agents
     description: Search for agents
