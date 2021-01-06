@@ -7,6 +7,7 @@ from insightconnect_plugin_runtime.exceptions import ConnectionTestException, Pl
 import zipfile
 import io
 import base64
+import time
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -16,6 +17,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.username = None
         self.password = None
         self.url = None
+        self.api_version = None
+        self.token = None
 
     def connect(self, params):
         """
@@ -51,9 +54,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
             return 9
         return 0
 
-    def get_auth_token(self, url, username, password):
+    def get_auth_token(self, url, username, password, version="2.1"):
         # TODO: Need to make a token timeout here for 7 days
-        final_url = url + "web/api/v2.1/users/login"
+        final_url = f"{url}web/api/v{version}/users/login"
 
         auth_headers = {
             "username": username,
@@ -66,13 +69,36 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 cause="Could not authorize with SentinelOne instance at: " + final_url,
                 assistance="Your 'username' in connection configuration should be an e-mail address. Check if your e-mail address is correct. Response was: " + r.text
             )
-        if r.status_code is not 200:
-            raise ConnectionTestException(
-                cause="Could not authorize with SentinelOne instance at: " + final_url,
-                assistance="Response was: " + r.text
-            )
 
-        self.token = r.json().get('data').get('token')
+        token = ""
+
+        # Some consoles do not support v2.1 but some actions are not included in 2.0
+        # Instead, try getting an auth token from 2.1 first, then rollback to 2.0 if needed
+        # Find the list of supported consoles for each API in the SentinelOne API docs
+
+        if r.status_code is not 200:
+            if version == "2.1":
+                self.logger.info("API v2.1 failed...trying v2.0")
+                token = self.get_auth_token(url, username, password, version="2.0")
+
+            # We know the connection failed when both 2.1 and 2.0 do not give 200 responses
+            if not token:
+                raise ConnectionTestException(
+                    cause="Could not authorize with SentinelOne instance at: " + final_url,
+                    assistance="Response was: " + r.text
+                )
+
+        if version == "2.0":
+            return r.json().get('data').get('token')
+
+        # When we do not have a token, we know that 2.1 responded with no problems
+        # If we do, we know that it came from 2.0 and we can use that in our actions
+        if token:
+            self.token = token
+            self.api_version = "2.0"
+        else:
+            self.token = r.json().get('data').get('token')
+            self.api_version = "2.1"
 
         return self.token
 
@@ -102,6 +128,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def apps_by_agent_ids(self, identifiers: str):
         return self._call_api("GET", "agents/applications", None, {"ids": identifiers})
 
+    # Obsolete endpoint, replaced with Applications endpoint
     def agents_processes(self, identifiers: str):
         return self._call_api("GET", "agents/processes", None, {"ids": identifiers})
 
@@ -117,6 +144,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
         agent_filter["sortBy"] = "createdAt"
         agent_filter["sortOrder"] = "desc"
         activities = self.activities_list(agent_filter)
+        while not activities["data"]:
+            self.logger.info("Waiting for successful threat file upload...waiting 5 seconds")
+            time.sleep(5)
+            activities = self.activities_list(agent_filter)
         self.get_auth_token(self.url, self.username, self.password)
         response = self._call_api("GET", activities["data"][0]["data"]["filePath"][1:], full_response=True)
         downloaded_zipfile = zipfile.ZipFile(io.BytesIO(response.content))
@@ -137,7 +168,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         })
 
     def agents_support_action(self, action: str, agents_filter: str, module: str):
-        return self._call_api("POST", "private/agents/support-actions/{}".format(action), {
+        return self._call_api("POST", f"private/agents/support-actions/{action}", {
             "filter": agents_filter,
             "data": {"module": module}
         })
@@ -146,7 +177,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         """ Output a summary of current threats in the system grouped by
         mitigation level. """
 
-        endpoint = self.url + 'web/api/v2.0/threats'
+        endpoint = f"{self.url}web/api/v{self.api_version}/threats"
         self.logger.info("Getting summary of threats from: " + endpoint)
         headers = self.make_token_header()
         results = requests.get(endpoint, headers=headers)
@@ -160,14 +191,14 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return results.json()
 
     def blacklist_by_content_hash(self, hash_value: str):
-        endpoint = self.url + 'web/api/v2.0/threats/add-to-blacklist'
+        endpoint = f"{self.url}web/api/v{self.api_version}/threats/add-to-blacklist"
         self.logger.info("Attempting to blacklist file: " + hash_value)
         self.logger.info("Using endpoint: " + endpoint)
 
         headers = self.make_token_header()
         body = {
             "filter": {
-                "contentHash": hash_value
+                "contentHashes": hash_value
             },
             "data": {
                 "targetScope": "site"
@@ -178,11 +209,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
         if results.status_code is not 200:
             raise Exception("Could not blacklist file hash, result was: " + results.text)
 
-        self.logger.info("Blacklist result: " + str(results))  # Will nicely print status code
         return results.json()
 
     def blacklist_by_ioc_hash(self, hash_value: str, agent_id: str):
-        endpoint = self.url + 'web/api/v2.0/private/threats/ioc-add-to-blacklist'
+        endpoint = f"{self.url}web/api/v{self.api_version}/private/threats/ioc-add-to-blacklist"
         self.logger.info("Attempting to blacklist IoC hash: " + hash_value)
         self.logger.info("Using endpoint: " + endpoint)
 
@@ -203,18 +233,14 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Blacklist result: " + str(results))  # Will nicely print status code
         return results.json()
 
-    def create_ioc_threat(
-            self, hash_, group_id, path, agent_id,
-            annotation=None, annotation_url=None
-    ):
+    def create_ioc_threat(self, hash_, group_id, path, agent_id, note=""):
         body = {
             "data": [{
                 "hash": hash_,
                 "group_id": group_id,
                 "path": path,
-                "agent_id": agent_id,
-                "annotation": annotation,
-                "annotation_url": annotation_url,
+                "agentId": agent_id,
+                "note": note,
             }]
         }
         response = self._call_api(
@@ -242,8 +268,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 "targetScope": target_scope
             }
         }
+        # Mark as threat does not exist in v2.1
         return self._call_api(
-            "POST", "threats/mark-as-benign", body
+            "POST", "threats/mark-as-benign", body, override_api_version="2.0"
         )["data"]["affected"]
 
     def mark_as_threat(self, threat_id, whitening_option, target_scope):
@@ -256,8 +283,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 "targetScope": target_scope
             }
         }
+
+        # Mark as threat does not exist in v2.1
         return self._call_api(
-            "POST", "threats/mark-as-threat", body
+            "POST", "threats/mark-as-threat", body, override_api_version="2.0"
         )["data"]["affected"]
 
     def get_threats(self, params):
@@ -297,18 +326,26 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 ids.append(restriction.get("id"))
             return ids
 
-        raise PluginException(cause="The hash does not exist to unblacklist.", assistance="Please enter a hash that has been blacklisted.")
+        raise PluginException(cause="The hash does not exist to unblacklist.",
+                              assistance="Please enter a hash that has been blacklisted.")
 
     def delete_blacklist_item_by_hash(self, item_ids: str):
         return self._call_api("DELETE", "restrictions", json={
-          "data": {
-            "type": "black_hash",
-            "ids": item_ids
-          }
+            "data": {
+                "type": "black_hash",
+                "ids": item_ids
+            }
         }).get("errors", [])
 
-    def _call_api(self, method, endpoint, json=None, params=None, full_response: bool = False):
-        endpoint = self.url + "web/api/v2.1/" + endpoint
+    def _call_api(self, method, endpoint, json=None, params=None, full_response: bool = False,
+                  override_api_version: str = ""):
+        # We want to use the same api from the token creation,
+        # But some actions require 2.0 and not 2.1 (and vice versa), in that case just pass in the right version
+        api_version = self.api_version
+        if override_api_version:
+            api_version = override_api_version
+        endpoint = self.url + f"web/api/v{api_version}/" + endpoint
+
         headers = self.make_token_header()
 
         if json:

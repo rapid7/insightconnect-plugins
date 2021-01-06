@@ -426,6 +426,24 @@ Example input:
 Example output:
 
 ```
+{
+  "agents_processes": [
+    {
+      "installedDate": "2020-08-21T15:41:46.327000Z",
+      "name": "Microsoft .NET Framework 4.5",
+      "publisher": "Microsoft Corporation",
+      "size": 39732,
+      "version": "4.5.50709"
+    },
+    {
+      "installedDate": "2020-08-21T15:59:05.422000Z",
+      "name": "Mozilla Maintenance Service",
+      "publisher": "Mozilla",
+      "size": 307,
+      "version": "79.0"
+    }
+  ]
+}
 ```
 
 #### Agents Reload
@@ -654,8 +672,6 @@ Example input:
 
 ```
 {
-  "blacklist_state": true,
-  "description": "Hash Blacklisted from InsightConnect",
   "hash": "3395856ce81f2b7382dee72602f798b642f14140"
 }
 ```
@@ -684,11 +700,10 @@ This action is used to create a threat from an IOC event.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent_id|string|None|True|Agent ID for the slim threat|None|None|
-|annotation|string|None|True|Vigilance annotation|None|None|
-|annotation_url|string|None|True|Vigilance annotation URL|None|None|
+|agentId|string|None|True|Agent ID for the slim threat|None|None|
 |group_id|string|None|False|Group ID|None|None|
 |hash|string|None|True|SHA1 hash|None|None|
+|note|string|None|False|Note|None|None|
 |path|string|None|False|Path|None|None|
 
 Example input:

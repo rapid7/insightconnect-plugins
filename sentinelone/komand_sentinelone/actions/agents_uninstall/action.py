@@ -21,6 +21,10 @@ class AgentsUninstall(insightconnect_plugin_runtime.Action):
                 assistance="One of the following filter arguments must be supplied - ids, groupIds, filterId"
             )
 
+        response = self.connection.agents_action("uninstall", agent_filter)
+
+        affected = response.get("data", {}).get("affected", 0)
+
         return {
-            Output.AFFECTED: self.connection.agents_action("uninstall", agent_filter).get("affected", 0)
+            Output.AFFECTED: affected
         }

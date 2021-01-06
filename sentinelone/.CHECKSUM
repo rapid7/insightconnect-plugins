@@ -1,5 +1,5 @@
 {
-	"spec": "70b9e684d01d39a656844ff5dd949dac",
+	"spec": "511317627650d5be40a05abcfe92829b",
 	"manifest": "0916318e47f4016adf5384a2ae78c885",
 	"setup": "32bb5e88f14f42e534154998e2d29d22",
 	"schemas": [
@@ -37,7 +37,7 @@
 		},
 		{
 			"identifier": "agents_processes/schema.py",
-			"hash": "2e7098a92a65b5ce87a4d369261af854"
+			"hash": "9ff2915c4543bf018ca6e221fb6c0e63"
 		},
 		{
 			"identifier": "agents_reload/schema.py",
@@ -61,7 +61,7 @@
 		},
 		{
 			"identifier": "apps_by_agent_ids/schema.py",
-			"hash": "cc19d128d4b11fa85d0e5311a799b9cf"
+			"hash": "5acb77104723a6d43853f56d5ae058d4"
 		},
 		{
 			"identifier": "blacklist/schema.py",
@@ -73,11 +73,11 @@
 		},
 		{
 			"identifier": "blacklist_by_ioc_hash/schema.py",
-			"hash": "20b8194f0268f907fd6aaf48b50cd1d3"
+			"hash": "f7f82983a2c17b419199c3c68f697d05"
 		},
 		{
 			"identifier": "create_ioc_threat/schema.py",
-			"hash": "964738a2d6782b33500fcc348c920602"
+			"hash": "4b4f6cc626e45cefafe7c15c6c4b9a23"
 		},
 		{
 			"identifier": "get_agent_details/schema.py",

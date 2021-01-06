@@ -8,11 +8,10 @@ class Component:
 
 
 class Input:
-    AGENT_ID = "agent_id"
-    ANNOTATION = "annotation"
-    ANNOTATION_URL = "annotation_url"
+    AGENTID = "agentId"
     GROUP_ID = "group_id"
     HASH = "hash"
+    NOTE = "note"
     PATH = "path"
     
 
@@ -26,29 +25,17 @@ class CreateIocThreatInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "agent_id": {
+    "agentId": {
       "type": "string",
       "title": "Agent ID",
       "description": "Agent ID for the slim threat",
       "order": 2
     },
-    "annotation": {
-      "type": "string",
-      "title": "Annotation",
-      "description": "Vigilance annotation",
-      "order": 3
-    },
-    "annotation_url": {
-      "type": "string",
-      "title": "Annotation URL",
-      "description": "Vigilance annotation URL",
-      "order": 4
-    },
     "group_id": {
       "type": "string",
       "title": "Group ID",
       "description": "Group ID",
-      "order": 5
+      "order": 4
     },
     "hash": {
       "type": "string",
@@ -56,17 +43,21 @@ class CreateIocThreatInput(insightconnect_plugin_runtime.Input):
       "description": "SHA1 hash",
       "order": 1
     },
+    "note": {
+      "type": "string",
+      "title": "Note",
+      "description": "Note",
+      "order": 3
+    },
     "path": {
       "type": "string",
       "title": "Path",
       "description": "Path",
-      "order": 6
+      "order": 5
     }
   },
   "required": [
-    "agent_id",
-    "annotation",
-    "annotation_url",
+    "agentId",
     "hash"
   ]
 }

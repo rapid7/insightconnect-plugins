@@ -13,6 +13,10 @@ class NameAvailable(insightconnect_plugin_runtime.Action):
                 output=NameAvailableOutput())
 
     def run(self, params={}):
+        response = self.connection.name_available(params.get("name"))
+
+        available = response.get("data", {}).get("available", False)
+
         return {
-            Output.AVAILABLE: self.connection.name_available(params.get("name")).get("available", False)
+            Output.AVAILABLE: available
         }

@@ -84,7 +84,7 @@ class AppsByAgentIdsOutput(insightconnect_plugin_runtime.Output):
           "order": 3
         },
         "size": {
-          "type": "string",
+          "type": "integer",
           "title": "Size",
           "description": "Size of installed application",
           "order": 4

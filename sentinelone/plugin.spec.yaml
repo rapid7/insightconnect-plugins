@@ -147,7 +147,7 @@ types:
     size:
       title: Size
       description: Size of installed application
-      type: string
+      type: integer
       required: false
     name:
       title: Name
@@ -1245,7 +1245,7 @@ actions:
         required: true
   blacklist_by_ioc_hash:
     title: Blacklist by IOC Hash
-    description: Add hashed indicator of compromise to global blacklist
+    description: (OBSOLETE -- Use the other blacklist actions) Add hashed indicator of compromise to global blacklist
     input:
       hash:
         title: IOC Hash
@@ -1273,21 +1273,16 @@ actions:
         description: SHA1 hash
         type: string
         required: true
-      agent_id:
+      agentId:
         title: Agent ID
         description: Agent ID for the slim threat
         type: string
         required: true
-      annotation:
-        title: Annotation
-        description: Vigilance annotation
+      note:
+        title: Note
+        description: Note
         type: string
-        required: true
-      annotation_url:
-        title: Annotation URL
-        description: Vigilance annotation URL
-        type: string
-        required: true
+        required: false
       group_id:
         title: Group ID
         description: Group ID
@@ -1667,7 +1662,7 @@ actions:
         required: false
   agents_processes:
     title: Agents Processes
-    description: Retrieve running processes for a specific agent
+    description: The endpoint for this action is obsolete. Please use the 'Agents Applications' action instead.
     input:
       ids:
         title: IDS

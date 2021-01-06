@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add hashed indicator of compromise to global blacklist"
+    DESCRIPTION = "(OBSOLETE -- Use the other blacklist actions) Add hashed indicator of compromise to global blacklist"
 
 
 class Input:

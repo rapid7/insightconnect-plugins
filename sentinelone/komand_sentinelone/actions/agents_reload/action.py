@@ -12,10 +12,14 @@ class AgentsReload(insightconnect_plugin_runtime.Action):
                 output=AgentsReloadOutput())
 
     def run(self, params={}):
-        return {
-            Output.AFFECTED: self.connection.agents_support_action(
+        response = self.connection.agents_support_action(
                 "reload",
                 params.get(Input.FILTER, None),
                 params.get(Input.MODULE, None)
-            ).get("affected", 0)
+            )
+
+        affected = response.get("data", {}).get("affected", 0)
+
+        return {
+            Output.AFFECTED: affected
         }

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieve running processes for a specific agent"
+    DESCRIPTION = "The endpoint for this action is obsolete. Please use the 'Agents Applications' action instead."
 
 
 class Input:

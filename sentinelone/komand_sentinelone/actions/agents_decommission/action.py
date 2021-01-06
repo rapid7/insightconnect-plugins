@@ -23,9 +23,7 @@ class AgentsDecommission(insightconnect_plugin_runtime.Action):
 
         response = self.connection.agents_action("decommission", agent_filter)
 
-        affected = 0
-        if response.get("data"):
-            affected = response.get("data").get("affected", 0)
+        affected = response.get("data", {}).get("affected", 0)
 
         return {
             Output.AFFECTED: affected

@@ -9,7 +9,8 @@ class SentineloneAPI:
         self.url = url
         self.token_header = make_token_header
 
-    def search_agents(self, agent_details: str, agent_active: bool = True, case_sensitive: bool = True, results_length: int = 0) -> list:
+    def search_agents(self, agent_details: str, agent_active: bool = True, case_sensitive: bool = True,
+                      results_length: int = 0, api_version: str = "2.0") -> list:
         results = []
         if agent_details:
             for search in self.__get_searches(agent_details):
@@ -23,7 +24,7 @@ class SentineloneAPI:
                         agents = [agent_details.lower()]
 
                 for agent in agents:
-                    endpoint = f"{self.url}web/api/v2.0/agents?{search}={agent}"
+                    endpoint = f"{self.url}web/api/v{api_version}/agents?{search}={agent}"
                     output = requests.get(endpoint, headers=self.token_header)
 
                     if output.status_code is 200 and output.json()["pagination"]["totalItems"] >= 1:
@@ -34,7 +35,7 @@ class SentineloneAPI:
                         return self.clean_results(results)
 
         else:
-            output = requests.get(f"{self.url}web/api/v2.0/agents?isActive={agent_active}", headers=self.token_header)
+            output = requests.get(f"{self.url}web/api/v{api_version}/agents?isActive={agent_active}", headers=self.token_header)
             results.extend(output.json()['data'])
         return self.clean_results(results)
 

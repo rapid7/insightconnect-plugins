@@ -13,14 +13,17 @@ class AgentsRestart(insightconnect_plugin_runtime.Action):
                 output=AgentsRestartOutput())
 
     def run(self, params={}):
-        agent_filter = params.get(Input.FILTER, None)
+        agent_filter = params.get(Input.FILTER, "")
         if "ids" not in agent_filter and "groupIds" not in agent_filter and "filterId" not in agent_filter:
-            self.logger.error("One of the following filter arguments must be supplied - ids, groupIds, filterId")
             raise PluginException(
                 cause="Wrong filter parameter",
                 assistance="One of the following filter arguments must be supplied - ids, groupIds, filterId"
             )
 
+        response = self.connection.agents_action("restart-machine", agent_filter)
+
+        affected = response.get("data", {}).get("affected", 0)
+
         return {
-            Output.AFFECTED: self.connection.agents_action("restart-machine", agent_filter).get("affected", 0)
+            Output.AFFECTED: affected
         }
