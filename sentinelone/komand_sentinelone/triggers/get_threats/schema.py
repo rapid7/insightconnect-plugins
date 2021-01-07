@@ -1356,8 +1356,8 @@ class GetThreatsOutput(insightconnect_plugin_runtime.Output):
             },
             "md5": {
               "type": "string",
-              "title": "Md5",
-              "description": "Md5",
+              "title": "MD5",
+              "description": "MD5",
               "order": 32
             },
             "mitigatedPreemptively": {
@@ -1416,14 +1416,14 @@ class GetThreatsOutput(insightconnect_plugin_runtime.Output):
             },
             "sha1": {
               "type": "string",
-              "title": "Sha1",
-              "description": "Sha1",
+              "title": "SHA1",
+              "description": "SHA1",
               "order": 42
             },
             "sha256": {
               "type": "string",
-              "title": "Sha256",
-              "description": "Sha256",
+              "title": "SHA256",
+              "description": "SHA256",
               "order": 43
             },
             "storyline": {
@@ -1840,8 +1840,8 @@ class GetThreatsOutput(insightconnect_plugin_runtime.Output):
         },
         "md5": {
           "type": "string",
-          "title": "Md5",
-          "description": "Md5",
+          "title": "MD5",
+          "description": "MD5",
           "order": 32
         },
         "mitigatedPreemptively": {
@@ -1900,14 +1900,14 @@ class GetThreatsOutput(insightconnect_plugin_runtime.Output):
         },
         "sha1": {
           "type": "string",
-          "title": "Sha1",
-          "description": "Sha1",
+          "title": "SHA1",
+          "description": "SHA1",
           "order": 42
         },
         "sha256": {
           "type": "string",
-          "title": "Sha256",
-          "description": "Sha256",
+          "title": "SHA256",
+          "description": "SHA256",
           "order": 43
         },
         "storyline": {

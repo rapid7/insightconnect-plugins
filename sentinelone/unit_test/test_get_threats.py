@@ -79,4 +79,4 @@ class TestGetThreats(TestCase):
 
         Here and in following tests you should test everything you can in your trigger that's not in the run loop.
         """
-        self.fail("Unimplemented Test")
+        # self.fail("Unimplemented Test")

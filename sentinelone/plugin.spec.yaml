@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 4.2.0
+version: 5.0.0
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
@@ -153,37 +153,6 @@ types:
       title: Name
       description: Name of installed application
       type: string
-      required: false
-  agents_processes:
-    startTime:
-      title: Start time
-      description: Start time
-      type: string
-      required: false
-    processName:
-      title: Process name
-      description: Process name
-      type: string
-      required: false
-    memoryUsage:
-      title: Memory usage
-      description: Memory usage (MB)
-      type: integer
-      required: false
-    cpuUsage:
-      title: CPU Usage
-      description: CPU Usage (%)
-      type: integer
-      required: false
-    executablePath:
-      title: Executable path
-      description: Executable path
-      type: string
-      required: false
-    pid:
-      title: PID
-      description: Process ID
-      type: integer
       required: false
   blacklist_data:
     affected:
@@ -746,9 +715,9 @@ types:
       description: "Maliciousprocessarguments"
       required: false
     md5:
-      title: "Md5"
+      title: "MD5"
       type: string
-      description: "Md5"
+      description: "MD5"
       required: false
     mitigatedPreemptively:
       title: "Mitigatedpreemptively"
@@ -796,14 +765,14 @@ types:
       description: "Rebootrequired"
       required: false
     sha1:
-      title: "Sha1"
+      title: "SHA1"
       type: string
-      description: "Sha1"
+      description: "SHA1"
       required: false
     sha256:
-      title: "Sha256"
+      title: "SHA256"
       type: string
-      description: "Sha256"
+      description: "SHA256"
       required: false
     storyline:
       title: "Storyline"
@@ -1243,27 +1212,6 @@ actions:
         type: blacklist_data
         description: Result of hashing operation
         required: true
-  blacklist_by_ioc_hash:
-    title: Blacklist by IOC Hash
-    description: This action is obsolete, please use the other blacklist actions.
-    input:
-      hash:
-        title: IOC Hash
-        description: Indicator of compromise hash to add to blacklist
-        type: string
-        required: true
-        example: "3395856ce81f2b7382dee72602f798b642f14140"
-      agent_id:
-        title: Agent ID
-        description: Agent ID
-        type: string
-        required: true
-    output:
-      result:
-        title: Result
-        type: blacklist_data
-        description: Result of hashing operation
-        required: true
   create_ioc_threat:
     title: Create IOC Threat
     description: Create a threat from an IOC event
@@ -1273,26 +1221,31 @@ actions:
         description: SHA1 hash
         type: string
         required: true
+        example: "A94A8FE5CCB19BA61C4C0873D391E987982FBBD3"
       agentId:
         title: Agent ID
         description: Agent ID for the slim threat
         type: string
         required: true
+        example: "1000000000000000000"
       note:
         title: Note
         description: Note
         type: string
         required: false
+        example: "Note"
       group_id:
         title: Group ID
         description: Group ID
         type: string
         required: false
+        example: "1000000000000000001"
       path:
         title: Path
         description: Path
         type: string
         required: false
+        example: "path"
     output:
       affected:
         title: Affected
@@ -1426,7 +1379,7 @@ actions:
         description: Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead
         type: integer
         required: false
-        example: 0
+        example: 1
       site_ids:
         title: Site IDS
         description: List of Site IDs to filter by
@@ -1444,7 +1397,7 @@ actions:
         description: If true, total number of items will not be calculated, which speeds up execution time
         type: boolean
         required: false
-        example: false
+        example: true
       ids:
         title: Activity IDS
         description: List of Activity IDs
@@ -1462,6 +1415,7 @@ actions:
         description: Return activities created before or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z
         type: string
         required: false
+        example: "2020-12-20T18:49:26.257525Z"
       created_at_gt:
         title: Greater Then Date
         description: Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z
@@ -1473,14 +1427,16 @@ actions:
         description: Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z
         type: string
         required: false
+        example: "2020-12-20T18:49:26.257525Z"
       created_at_between:
         title: Between Dates
         description: Return activities created within this range (inclusive), example 1514978764288-1514978999999
         type: string
         required: false
+        example: "1514978764288-1514978999999"
       cursor:
         title: Cursor Position
-        description: Cursor position returned by the last request. Should be used for iterating over more than 1000 items.
+        description: Cursor position returned by the last request. Should be used for iterating over more than 1000 items
         type: string
         required: false
         example: "YWdlbnRfaWQ6NTgwMjkzODE="
@@ -1489,7 +1445,7 @@ actions:
         description: If true, only total number of items will be returned, without any of the actual objects
         type: boolean
         required: false
-        example: false
+        example: true
       account_ids:
         title: Account IDS
         description: List of Account IDs to filter by
@@ -1535,7 +1491,7 @@ actions:
           - desc
         required: false
         default: "asc"
-        example: "asc"
+        example: asc
       user_emails:
         title: User Emails
         description: Email of the user who invoked the activity (If applicable)
@@ -1657,6 +1613,7 @@ actions:
         description: Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=decommission)
         type: object
         required: true
+        example: '{"ids": ["1000000000000000000"]}'
     output:
       affected:
         title: Affected
@@ -1672,26 +1629,12 @@ actions:
         description: Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=disconnect-from-network)
         type: object
         required: true
+        example: '{"ids": ["1000000000000000000"]}'
     output:
       affected:
         title: Affected
         description: Number of entities affected by the requested operation
         type: integer
-        required: false
-  agents_processes:
-    title: Agents Processes
-    description: The endpoint for this action is obsolete. Please use the 'Agents Applications' action instead.
-    input:
-      ids:
-        title: IDS
-        description: Agent ID list
-        type: '[]string'
-        required: true
-    output:
-      agents_processes:
-        title: Agents Processes
-        description: Agents processes entities
-        type: '[]agents_processes'
         required: false
   agents_initiate:
     title: Initiate Scan
@@ -1702,6 +1645,7 @@ actions:
         description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
         type: object
         required: true
+        example: '{"ids": ["1000000000000000000"]}'
     output:
       affected:
         title: Affected
@@ -1717,6 +1661,7 @@ actions:
         description: Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId
         type: object
         required: true
+        example: '{"ids": ["1000000000000000000"]}'
     output:
       affected:
         title: Affected
@@ -1732,6 +1677,7 @@ actions:
         description: Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId
         type: object
         required: true
+        example: '{"ids": ["1000000000000000000"]}'
     output:
       affected:
         title: Affected
@@ -1747,6 +1693,7 @@ actions:
         description: Applied filter - only matched agents will be affected by the requested action. Note - One of the following filter arguments must be supplied - ids, groupIds, filterId
         type: object
         required: true
+        example: '{"ids": ["1000000000000000000"]}'
     output:
       affected:
         title: Affected
@@ -1762,6 +1709,7 @@ actions:
         description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
         type: object
         required: true
+        example: '{"ids": ["1000000000000000000"]}'
       module:
         title: Data Module
         description: Agent module to reload
@@ -1772,6 +1720,7 @@ actions:
           - static
           - agent
           - log
+        example: monitor
     output:
       affected:
         title: Affected
@@ -1787,6 +1736,7 @@ actions:
         description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=fetch-logs)
         type: object
         required: true
+        example: '{"ids": ["1000000000000000000"]}'
     output:
       affected:
         title: Affected
@@ -1802,6 +1752,7 @@ actions:
         description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=abort-scan)
         type: object
         required: true
+        example: '{"ids": ["1000000000000000000"]}'
     output:
       affected:
         title: Affected
@@ -1817,6 +1768,7 @@ actions:
         description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=connect-to-network)
         type: object
         required: true
+        example: '{"ids": ["1000000000000000000"]}'
     output:
       affected:
         title: Affected
@@ -1975,28 +1927,33 @@ triggers:
         description: Include resolved threats
         type: boolean
         required: false
+        example: true
       classifications:
         title: Classifications
         description: List of classifications to search
         type: '[]string'
         required: false
+        example: [""]
       agent_is_active:
         title: Agent is Active
         description: Include agents currently connected to the management console
         type: boolean
         default: true
         required: false
+        example: true
       engines:
         title: Engines
         description: Included engines
         type: '[]string'
         required: false
+        example: [""]
       frequency:
         title: Frequency
         description: Poll frequency in seconds
         type: integer
         required: false
         default: 5
+        example: 5
     output:
       threat:
         title: Threat

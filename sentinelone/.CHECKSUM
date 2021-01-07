@@ -1,11 +1,11 @@
 {
-	"spec": "6c7324373dbcd09f8af3e76f0d220ea2",
-	"manifest": "27a2b57d661c6901fa03506301209ede",
-	"setup": "149677e381f8bf9c9a8da98eb4c0c5cf",
+	"spec": "bc8bafbabcb8df1ee2cde40c8849f594",
+	"manifest": "c6c068e9df15083c54e2f91956c36ba1",
+	"setup": "9e2e768650f11d3164025daf467c2461",
 	"schemas": [
 		{
 			"identifier": "activities_list/schema.py",
-			"hash": "ee7b895941c2855277339766e5d8a76e"
+			"hash": "ed2e41c787b65bf2619e6aa7c384dbb3"
 		},
 		{
 			"identifier": "activities_types/schema.py",
@@ -34,10 +34,6 @@
 		{
 			"identifier": "agents_initiate/schema.py",
 			"hash": "7e93327059d485ad3e4be9675a197d43"
-		},
-		{
-			"identifier": "agents_processes/schema.py",
-			"hash": "9ff2915c4543bf018ca6e221fb6c0e63"
 		},
 		{
 			"identifier": "agents_reload/schema.py",
@@ -72,10 +68,6 @@
 			"hash": "23eb1246095def5a124d1ead8fecc93f"
 		},
 		{
-			"identifier": "blacklist_by_ioc_hash/schema.py",
-			"hash": "f7f82983a2c17b419199c3c68f697d05"
-		},
-		{
 			"identifier": "create_ioc_threat/schema.py",
 			"hash": "4b4f6cc626e45cefafe7c15c6c4b9a23"
 		},
@@ -85,7 +77,7 @@
 		},
 		{
 			"identifier": "get_threat_summary/schema.py",
-			"hash": "9d72305d6a917dc2c8c8263e5846d7aa"
+			"hash": "fb0b1e7adc49874bb3c723854d617924"
 		},
 		{
 			"identifier": "mark_as_benign/schema.py",
@@ -121,7 +113,7 @@
 		},
 		{
 			"identifier": "get_threats/schema.py",
-			"hash": "65cf004734204af8b6b532d5fffaaf7f"
+			"hash": "3d8ea8a1eccf3f1f8af9b5955bdd87ff"
 		}
 	]
 }

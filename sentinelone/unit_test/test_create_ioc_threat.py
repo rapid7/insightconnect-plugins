@@ -49,5 +49,5 @@ class TestCreateIocThreat(TestCase):
         test_conn.connect(connection_params)
         test_action.connection = test_conn
         results = test_action.run(action_params)
-
+        
         self.assertTrue(len(results.get("data")) >= 0)

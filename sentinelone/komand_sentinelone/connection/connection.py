@@ -127,10 +127,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def apps_by_agent_ids(self, identifiers: str):
         return self._call_api("GET", "agents/applications", None, {"ids": identifiers})
 
-    # Obsolete endpoint, replaced with Applications endpoint
-    def agents_processes(self, identifiers: str):
-        return self._call_api("GET", "agents/processes", None, {"ids": identifiers})
-
     def agents_summary(self, site_ids, account_ids):
         return self._call_api("GET", "private/agents/summary", None, {"siteIds": site_ids, "accountIds": account_ids})
 
@@ -208,33 +204,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         return results.json()
 
-    def blacklist_by_ioc_hash(self, hash_value: str, agent_id: str):
-        endpoint = f"{self.url}web/api/v{self.api_version}/private/threats/ioc-add-to-blacklist"
-        self.logger.info("Attempting to blacklist IoC hash: " + hash_value)
-        self.logger.info("Using endpoint: " + endpoint)
-
-        headers = self.make_token_header()
-
-        # Note: AgentID according to the API is optional, however, api will throw error if omitted
-        body = {
-            "data": [{
-                "hash": hash_value,
-                "agentId": agent_id
-            }]
-        }
-
-        results = requests.post(endpoint, json=body, headers=headers)
-        if results.status_code != 200:
-            raise Exception("Could not blacklist IoC hash, result was: " + results.text)
-
-        self.logger.info("Blacklist result: " + str(results))  # Will nicely print status code
-        return results.json()
-
     def create_ioc_threat(self, hash_, group_id, path, agent_id, note=""):
         body = {
             "data": [{
                 "hash": hash_,
-                "group_id": group_id,
+                "groupId": group_id,
                 "path": path,
                 "agentId": agent_id,
                 "note": note,

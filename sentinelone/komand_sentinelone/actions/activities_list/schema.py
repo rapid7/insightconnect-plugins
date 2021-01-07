@@ -108,7 +108,7 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
     "cursor": {
       "type": "string",
       "title": "Cursor Position",
-      "description": "Cursor position returned by the last request. Should be used for iterating over more than 1000 items.",
+      "description": "Cursor position returned by the last request. Should be used for iterating over more than 1000 items",
       "order": 13
     },
     "group_ids": {

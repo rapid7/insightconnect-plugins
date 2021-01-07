@@ -48,4 +48,5 @@ class TestGetThreatSummary(TestCase):
         test_action.connection = test_conn
         results = test_action.run(action_params)
 
-        self.assertTrue(len(results.get("data") >= 0))
+        self.assertTrue(len(results.get("data")) >= 0)
+        self.assertTrue(results.get("pagination"))
