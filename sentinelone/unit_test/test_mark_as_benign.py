@@ -12,8 +12,6 @@ import logging
 class TestMarkAsBenign(TestCase):
     def test_integration_mark_as_benign(self):
         """
-        TODO: Implement assertions at the end of this test case
-
         This is an integration test that will connect to the services your plugin uses. It should be used
         as the basis for tests below that can run independent of a "live" connection.
 

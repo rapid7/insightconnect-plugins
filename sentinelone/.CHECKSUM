@@ -1,5 +1,5 @@
 {
-	"spec": "4a7be86d1197c30c6cba3fc288c4a1b1",
+	"spec": "00ec134430a5e2b30cf1ff2ac61945fd",
 	"manifest": "c6c068e9df15083c54e2f91956c36ba1",
 	"setup": "9e2e768650f11d3164025daf467c2461",
 	"schemas": [
@@ -65,11 +65,11 @@
 		},
 		{
 			"identifier": "blacklist_by_content_hash/schema.py",
-			"hash": "23eb1246095def5a124d1ead8fecc93f"
+			"hash": "8ae45aa8f56fc5c2dd177f8e5fbac025"
 		},
 		{
 			"identifier": "create_ioc_threat/schema.py",
-			"hash": "4b4f6cc626e45cefafe7c15c6c4b9a23"
+			"hash": "d871e78b6173bb3fe5c38a148d8958e4"
 		},
 		{
 			"identifier": "get_agent_details/schema.py",

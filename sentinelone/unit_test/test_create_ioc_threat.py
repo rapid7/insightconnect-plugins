@@ -12,8 +12,6 @@ import logging
 class TestCreateIocThreat(TestCase):
     def test_integration_create_ioc_threat(self):
         """
-        TODO: Implement assertions at the end of this test case
-
         This is an integration test that will connect to the services your plugin uses. It should be used
         as the basis for tests below that can run independent of a "live" connection.
 
@@ -49,5 +47,5 @@ class TestCreateIocThreat(TestCase):
         test_conn.connect(connection_params)
         test_action.connection = test_conn
         results = test_action.run(action_params)
-        
+
         self.assertTrue(len(results.get("data")) >= 0)

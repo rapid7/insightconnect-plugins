@@ -658,7 +658,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|result|blacklist_data|True|Result of hashing operation|
+|affected|integer|False|Number of entities affected by the requested operation|
 
 Example output:
 
@@ -679,7 +679,7 @@ This action is used to create a threat from an IOC event.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |agentId|string|None|True|Agent ID for the slim threat|None|1000000000000000000|
-|group_id|string|None|False|Group ID|None|1000000000000000001|
+|groupId|string|None|False|Group ID|None|1000000000000000001|
 |hash|string|None|True|SHA1 hash|None|A94A8FE5CCB19BA61C4C0873D391E987982FBBD3|
 |note|string|None|False|Note|None|Note|
 |path|string|None|False|Path|None|path|
@@ -689,7 +689,7 @@ Example input:
 ```
 {
   "agentId": "1000000000000000000",
-  "group_id": "1000000000000000001",
+  "groupId": "1000000000000000001",
   "hash": "A94A8FE5CCB19BA61C4C0873D391E987982FBBD3",
   "note": "Note",
   "path": "path"
@@ -1041,13 +1041,13 @@ This action is the account name available for this account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name|string|None|True|Account Name to validate|None|test|
+|name|string|None|True|Account Name to validate|None|example|
 
 Example input:
 
 ```
 {
-  "name": "test"
+  "name": "example"
 }
 ```
 

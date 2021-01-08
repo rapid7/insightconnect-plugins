@@ -154,12 +154,6 @@ types:
       description: Name of installed application
       type: string
       required: false
-  blacklist_data:
-    affected:
-      title: Affected
-      type: integer
-      description: Affected
-      required: false
   pagination:
     totalItems:
       title: Total Items
@@ -1207,11 +1201,12 @@ actions:
         required: true
         example: "3395856ce81f2b7382dee72602f798b642f14140"
     output:
-      result:
-        title: Result
-        type: blacklist_data
-        description: Result of hashing operation
-        required: true
+      affected:
+        title: Affected
+        type: integer
+        description: Number of entities affected by the requested operation
+        required: false
+        example: 1
   create_ioc_threat:
     title: Create IOC Threat
     description: Create a threat from an IOC event
@@ -1234,7 +1229,7 @@ actions:
         type: string
         required: false
         example: "Note"
-      group_id:
+      groupId:
         title: Group ID
         description: Group ID
         type: string
@@ -1597,7 +1592,7 @@ actions:
         description: Account Name to validate
         type: string
         required: true
-        example: test
+        example: "example"
     output:
       available:
         title: Available

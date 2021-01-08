@@ -48,4 +48,4 @@ class TestBlacklistByContentHash(TestCase):
         test_action.connection = test_conn
         results = test_action.run(action_params)
 
-        self.assertIsNotNone(results.get("result").get("blacklist_data"))
+        self.assertTrue("affected" in results.keys())

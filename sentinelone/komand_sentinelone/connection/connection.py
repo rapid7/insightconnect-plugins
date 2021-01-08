@@ -311,7 +311,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def _call_api(self, method, endpoint, json=None, params=None, full_response: bool = False,
                   override_api_version: str = ""):
-        # We want to use the same api from the token creation,
+
+        # We prefer to use the same api version from the token creation,
         # But some actions require 2.0 and not 2.1 (and vice versa), in that case just pass in the right version
         api_version = self.api_version
         if override_api_version:

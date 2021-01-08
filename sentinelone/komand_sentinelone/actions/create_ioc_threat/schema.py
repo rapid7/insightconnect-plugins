@@ -9,7 +9,7 @@ class Component:
 
 class Input:
     AGENTID = "agentId"
-    GROUP_ID = "group_id"
+    GROUPID = "groupId"
     HASH = "hash"
     NOTE = "note"
     PATH = "path"
@@ -31,7 +31,7 @@ class CreateIocThreatInput(insightconnect_plugin_runtime.Input):
       "description": "Agent ID for the slim threat",
       "order": 2
     },
-    "group_id": {
+    "groupId": {
       "type": "string",
       "title": "Group ID",
       "description": "Group ID",

@@ -12,7 +12,7 @@ class Input:
     
 
 class Output:
-    RESULT = "result"
+    AFFECTED = "affected"
     
 
 class BlacklistByContentHashInput(insightconnect_plugin_runtime.Input):
@@ -44,28 +44,11 @@ class BlacklistByContentHashOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "result": {
-      "$ref": "#/definitions/blacklist_data",
-      "title": "Result",
-      "description": "Result of hashing operation",
+    "affected": {
+      "type": "integer",
+      "title": "Affected",
+      "description": "Number of entities affected by the requested operation",
       "order": 1
-    }
-  },
-  "required": [
-    "result"
-  ],
-  "definitions": {
-    "blacklist_data": {
-      "type": "object",
-      "title": "blacklist_data",
-      "properties": {
-        "affected": {
-          "type": "integer",
-          "title": "Affected",
-          "description": "Affected",
-          "order": 1
-        }
-      }
     }
   }
 }
