@@ -200,7 +200,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         results = requests.post(endpoint, json=body, headers=headers)
         if results.status_code != 200:
-            raise Exception("Could not blacklist file hash, result was: " + results.text)
+            raise PluginException(cause="Could not blacklist file hash.",
+                                  assistance="Result was: " + results.text)
 
         return results.json()
 
@@ -335,7 +336,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
             return response.json()
         except requests.HTTPError:
-            raise Exception("API call failed: " + response.text)
+            raise PluginException(cause="API call failed: " + response.text)
 
     def test(self):
         self.get_auth_token(self.url, self.username, self.password)

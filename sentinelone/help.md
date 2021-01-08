@@ -138,7 +138,7 @@ This action is used to get a list of activities.
 |sort_by|string|createdAt|False|The column to sort the results by|['id', 'activityType', 'createdAt']|createdAt|
 |sort_order|string|asc|False|Sort direction|['asc', 'desc']|asc|
 |threat_ids|[]string|None|False|Return only these activity codes|None|["1"]|
-|user_emails|[]string|None|False|Email of the user who invoked the activity (If applicable)|None|["example@domain.com"]|
+|user_emails|[]string|None|False|Email of the user who invoked the activity (If applicable)|None|["user@example.com"]|
 |user_ids|[]string|None|False|The user who invoked the activity (If applicable)|None|["500000000000000003"]|
 
 Example input:
@@ -181,7 +181,7 @@ Example input:
     "1"
   ],
   "user_emails": [
-    "example@domain.com"
+    "user@example.com"
   ],
   "user_ids": [
     "500000000000000003"

@@ -1497,7 +1497,7 @@ actions:
         description: Email of the user who invoked the activity (If applicable)
         type: '[]string'
         required: false
-        example: ["example@domain.com"]
+        example: ["user@example.com"]
       user_ids:
         title: User IDS
         description: The user who invoked the activity (If applicable)
