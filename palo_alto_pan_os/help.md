@@ -970,6 +970,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 6.0.4 - Update error handling in Add Address Object to Group, Check if Address in Group, Get Policy, Remove Address Object from Group
 * 6.0.3 - Add Input and Output examples
 * 6.0.2 - Fix issue where Set Network Object did not support IPv6
 * 6.0.1 - Improve error handling in `pa_os_request.py`
