@@ -1,6 +1,6 @@
 {
-	"spec": "00ec134430a5e2b30cf1ff2ac61945fd",
-	"manifest": "c6c068e9df15083c54e2f91956c36ba1",
+	"spec": "9fec2840f4ad1908ab612c7abd17c997",
+	"manifest": "1232da51599c0c7132b9a5981ec2557e",
 	"setup": "9e2e768650f11d3164025daf467c2461",
 	"schemas": [
 		{
@@ -12,48 +12,16 @@
 			"hash": "d990386bc2687a38b4deeaca3e31ab66"
 		},
 		{
-			"identifier": "agents_abort_scan/schema.py",
-			"hash": "4af50aceb79032cd2fa864222cd823c2"
-		},
-		{
-			"identifier": "agents_connect/schema.py",
-			"hash": "09893eac21af64e1b8806316f9ef1579"
-		},
-		{
-			"identifier": "agents_decommission/schema.py",
-			"hash": "4423dc739bf48622ecfb71a94389d07b"
-		},
-		{
-			"identifier": "agents_disconnect/schema.py",
-			"hash": "76bea441debfa6011c696f844e3fef58"
-		},
-		{
-			"identifier": "agents_fetch_logs/schema.py",
-			"hash": "752b8f43f20566c9cfb22c676dccc7b6"
-		},
-		{
-			"identifier": "agents_initiate/schema.py",
-			"hash": "7e93327059d485ad3e4be9675a197d43"
+			"identifier": "agents_action/schema.py",
+			"hash": "895a77a592b8633d6bbbea2912076277"
 		},
 		{
 			"identifier": "agents_reload/schema.py",
 			"hash": "7fcc3b057529e4b7b6f81f0d2e63bd2a"
 		},
 		{
-			"identifier": "agents_restart/schema.py",
-			"hash": "a17cdb69f440f2c7b6a1046cb42baea8"
-		},
-		{
-			"identifier": "agents_shutdown/schema.py",
-			"hash": "d049a9a0a9011ed9be2614dc09a76e3d"
-		},
-		{
 			"identifier": "agents_summary/schema.py",
 			"hash": "6586d52d0aa5c344df97c2d308057dfe"
-		},
-		{
-			"identifier": "agents_uninstall/schema.py",
-			"hash": "645698f75fb23e624cbb26bde369809a"
 		},
 		{
 			"identifier": "apps_by_agent_ids/schema.py",

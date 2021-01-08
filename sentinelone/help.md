@@ -41,6 +41,38 @@ Example input:
 
 ### Actions
 
+#### Run Agent Action
+
+This action is used to perform actions relating to your SentinelOne agents. This will help manage your assets connected to your SentinelOne console. Documentation for these actions can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|action|string|None|True|Agent action to run|['abort-scan', 'connect', 'decommission', 'disconnect', 'fetch-logs', 'initiate-scan', 'restart-machine', 'shutdown', 'uninstall']|connect|
+|filter|object|{}|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents. Note - decommission, disconnect, restart-machine, shutdown and uninstall actions require that one of the following filter arguments be supplied - ids, groupIds, filterId|None|{"ids": ["1000000000000000000"]}|
+
+Example input:
+
+```
+{
+  "action": "connect",
+  "filter": "{\"ids\": [\"1000000000000000000\"]}"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|False|Number of entities affected by the requested operation|
+
+```
+{
+  "affected": 0
+}
+```
+
 #### Fetch Threats File
 
 This action is used to fetch a file associated with the threat that matches the filter. Your user role must have permissions to Fetch Threat File - Admin, IR Team, SOC.
@@ -75,38 +107,6 @@ Example output:
     "filename": "report.txt",
     "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
   }
-}
-```
-
-#### Connect to Network
-
-This action sends a connect to network command to all agents matching the input filter.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=connect-to-network)|None|{"ids": ["1000000000000000000"]}|
-
-Example input:
-
-```
-{
-  "filter": "{\"ids\": [\"1000000000000000000\"]}"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
-
-Example output:
-
-```
-{
-  "affected": 1
 }
 ```
 
@@ -228,166 +228,6 @@ Example output:
 }
 ```
 
-#### Agents Abort Scan
-
-This action aborts running scan on all agents matching the input filter.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=abort-scan)|None|{"ids": ["1000000000000000000"]}|
-
-Example input:
-
-```
-{
-  "filter": "{\"ids\": [\"1000000000000000000\"]}"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
-
-Example output:
-
-```
-{
-  "affected": 0
-}
-```
-
-#### Agent Decommission
-
-This action decommissions all agents matching the input filter.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=decommission)|None|{"ids": ["1000000000000000000"]}|
-
-Example input:
-
-```
-{
-  "filter": "{\"ids\": [\"1000000000000000000\"]}"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
-
-Example output:
-
-```
-{
-  "affected": 0
-}
-```
-
-#### Disconnect Agents
-
-This action disconnects agents associated to marked threats from network.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=disconnect-from-network)|None|{"ids": ["1000000000000000000"]}|
-
-Example input:
-
-```
-{
-  "filter": "{\"ids\": [\"1000000000000000000\"]}"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
-
-Example output:
-
-```
-{
-  "affected": 0
-}
-```
-
-#### Agents Fetch Logs
-
-This action sends a fetch logs command to all agents matching the input filter.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=fetch-logs)|None|{"ids": ["1000000000000000000"]}|
-
-Example input:
-
-```
-{
-  "filter": "{\"ids\": [\"1000000000000000000\"]}"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
-
-Example output:
-
-```
-{
-  "affected": 0
-}
-```
-
-#### Initiate Scan
-
-This action sends a scan command to all agents matching the input filter.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|{"ids": ["1000000000000000000"]}|
-
-Example input:
-
-```
-{
-  "filter": "{\"ids\": [\"1000000000000000000\"]}"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
-
-Example output:
-
-```
-{
-  "affected": 0
-}
-```
-
 #### Agents Reload
 
 This action is used to reload an agent module (applies to Windows agents only).
@@ -405,70 +245,6 @@ Example input:
 {
   "filter": "{\"ids\": [\"1000000000000000000\"]}",
   "module": "monitor"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
-
-Example output:
-
-```
-{
-  "affected": 0
-}
-```
-
-#### Agents Restart
-
-This action sends a restart command to all agents matching the input filter.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - One of the following filter arguments must be supplied - ids, groupIds, filterId|None|{"ids": ["1000000000000000000"]}|
-
-Example input:
-
-```
-{
-  "filter": "{\"ids\": [\"1000000000000000000\"]}"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
-
-Example output:
-
-```
-{
-  "affected": 0
-}
-```
-
-#### Agents Shutdown
-
-This action sends a shutdown command to all agents matching the input filter.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId|None|{"ids": ["1000000000000000000"]}|
-
-Example input:
-
-```
-{
-  "filter": "{\"ids\": [\"1000000000000000000\"]}"
 }
 ```
 
@@ -531,38 +307,6 @@ Example output:
   "online": 1,
   "total": 2,
   "up_to_date": 2
-}
-```
-
-#### Uninstall
-
-This action sends an uninstall command to all agents matching the input filter.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId|None|{"ids": ["1000000000000000000"]}|
-
-Example input:
-
-```
-{
-  "filter": "{\"ids\": [\"1000000000000000000\"]}"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
-
-Example output:
-
-```
-{
-  "affected": 0
 }
 ```
 
@@ -1568,7 +1312,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 5.0.0 - Fix various Agent actions | Bump to API version 2.1 where possible | Delete obsolete Blacklist by IOC Hash and Agent Processes
+* 5.0.0 - Consolidate various Agent actions | Bump to API version 2.1 where possible | Delete obsolete Blacklist by IOC Hash and Agent Processes
 * 4.1.1 - Update the Get Threat Summary action to return all threat summaries instead of 10
 * 4.1.0 - Add case sensitivity option for Agent lookups
 * 4.0.1 - Fix Agent Active parameter in Get Agent Details action | Update Quarantine action whitelist for IP addresses

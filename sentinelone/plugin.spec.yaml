@@ -1599,102 +1599,6 @@ actions:
         description: Account Name to validate
         type: boolean
         required: true
-  agents_decommission:
-    title: Agent Decommission
-    description: Decommissions all agents matching the input filter, agents must be inactive before decommisioning
-    input:
-      filter:
-        title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=decommission)
-        type: object
-        required: true
-        example: '{"ids": ["1000000000000000000"]}'
-    output:
-      affected:
-        title: Affected
-        description: Number of entities affected by the requested operation
-        type: integer
-        required: false
-  agents_disconnect:
-    title: Disconnect Agents
-    description: Disconnects agents associated to marked threats from network
-    input:
-      filter:
-        title: Filter JSON
-        description: Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=disconnect-from-network)
-        type: object
-        required: true
-        example: '{"ids": ["1000000000000000000"]}'
-    output:
-      affected:
-        title: Affected
-        description: Number of entities affected by the requested operation
-        type: integer
-        required: false
-  agents_initiate:
-    title: Initiate Scan
-    description: Sends a scan command to all agents matching the input filter
-    input:
-      filter:
-        title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
-        type: object
-        required: true
-        example: '{"ids": ["1000000000000000000"]}'
-    output:
-      affected:
-        title: Affected
-        description: Number of entities affected by the requested operation
-        type: integer
-        required: false
-  agents_uninstall:
-    title: Uninstall
-    description: Sends an uninstall command to all agents matching the input filter
-    input:
-      filter:
-        title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId
-        type: object
-        required: true
-        example: '{"ids": ["1000000000000000000"]}'
-    output:
-      affected:
-        title: Affected
-        description: Number of entities affected by the requested operation
-        type: integer
-        required: false
-  agents_shutdown:
-    title: Agents Shutdown
-    description: Sends a shutdown command to all agents matching the input filter
-    input:
-      filter:
-        title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId
-        type: object
-        required: true
-        example: '{"ids": ["1000000000000000000"]}'
-    output:
-      affected:
-        title: Affected
-        description: Number of entities affected by the requested operation
-        type: integer
-        required: false
-  agents_restart:
-    title: Agents Restart
-    description: Sends a restart command to all agents matching the input filter
-    input:
-      filter:
-        title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Note - One of the following filter arguments must be supplied - ids, groupIds, filterId
-        type: object
-        required: true
-        example: '{"ids": ["1000000000000000000"]}'
-    output:
-      affected:
-        title: Affected
-        description: Number of entities affected by the requested operation
-        type: integer
-        required: false
   agents_reload:
     title: Agents Reload
     description: Reload an agent module (applies to Windows agents only)
@@ -1722,55 +1626,40 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: false
-  agents_fetch_logs:
-    title: Agents Fetch Logs
-    description: Sends a fetch logs command to all agents matching the input filter
+  agents_action:
+    title: Run Agent Action
+    description: Perform actions relating to your SentinelOne agents. This will help manage your assets connected to your SentinelOne console. Documentation for these actions can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions
     input:
       filter:
         title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=fetch-logs)
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents. Note - decommission, disconnect, restart-machine, shutdown and uninstall actions require that one of the following filter arguments be supplied - ids, groupIds, filterId
         type: object
         required: true
         example: '{"ids": ["1000000000000000000"]}'
+        default: '{}'
+      action:
+        title: Agent Action
+        description: Agent action to run
+        type: string
+        required: true
+        enum:
+          - abort-scan
+          - connect
+          - decommission
+          - disconnect
+          - fetch-logs
+          - initiate-scan
+          - restart-machine
+          - shutdown
+          - uninstall
+        example: "connect"
     output:
       affected:
         title: Affected
         description: Number of entities affected by the requested operation
         type: integer
         required: false
-  agents_abort_scan:
-    title: Agents Abort Scan
-    description: Aborts running scan on all agents matching the input filter
-    input:
-      filter:
-        title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=abort-scan)
-        type: object
-        required: true
-        example: '{"ids": ["1000000000000000000"]}'
-    output:
-      affected:
-        title: Affected
-        description: Number of entities affected by the requested operation
-        type: integer
-        required: false
-  agents_connect:
-    title: Connect to Network
-    description: Sends a connect to network command to all agents matching the input filter
-    input:
-      filter:
-        title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents (filter parameters can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions&api=connect-to-network)
-        type: object
-        required: true
-        example: '{"ids": ["1000000000000000000"]}'
-    output:
-      affected:
-        title: Affected
-        description: Number of entities affected by the requested operation
-        type: integer
-        required: false
-        example: 1
+
   search_agents:
     title: Search Agents
     description: Search for agents

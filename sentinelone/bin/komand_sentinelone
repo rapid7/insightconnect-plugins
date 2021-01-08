@@ -40,27 +40,11 @@ def main():
 
             self.add_action(actions.ActivitiesTypes())
 
-            self.add_action(actions.AgentsAbortScan())
-
-            self.add_action(actions.AgentsConnect())
-
-            self.add_action(actions.AgentsDecommission())
-
-            self.add_action(actions.AgentsDisconnect())
-
-            self.add_action(actions.AgentsFetchLogs())
-
-            self.add_action(actions.AgentsInitiate())
+            self.add_action(actions.AgentsAction())
 
             self.add_action(actions.AgentsReload())
 
-            self.add_action(actions.AgentsRestart())
-
-            self.add_action(actions.AgentsShutdown())
-
             self.add_action(actions.AgentsSummary())
-
-            self.add_action(actions.AgentsUninstall())
 
             self.add_action(actions.AppsByAgentIds())
 
