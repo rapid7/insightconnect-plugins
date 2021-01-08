@@ -27,7 +27,7 @@ class GetPolicy(komand.Action):
         except AttributeError:
             raise PluginException(
                 cause="PAN OS returned an unexpected response.",
-                assistance=f"Could not find policy '{name}'. Check the name, virutal system name, and device name.\ndevice name: {device_name}\nvirtual system: {vsys}",
+                assistance=f"Could not find policy '{name}'. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {vsys}",
                 data=response)
 
         entry_action = entry.get("action")
