@@ -1,5 +1,5 @@
 import komand
-from .schema import (CheckIfAddressObjectInGroupInput, CheckIfAddressObjectInGroupOutput, Input, Output, Component)
+from .schema import CheckIfAddressObjectInGroupInput, CheckIfAddressObjectInGroupOutput, Input, Output, Component
 
 # Custom imports below
 from komand.exceptions import PluginException
