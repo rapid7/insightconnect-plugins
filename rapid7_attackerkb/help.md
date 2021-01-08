@@ -6,6 +6,7 @@
 
 * Search for vulnerabilities
 * Obtain vulnerability assessment information
+* Maximum size for the API is 500
 
 # Requirements
 
