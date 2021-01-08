@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_attackerkb
 title: Rapid7 AttackerKB
 description: AttackerKB is a knowledge base of vulnerabilities and informed opinions on what makes them valuable (or not) targets for exploitation
-version: 1.0.2
+version: 1.0.3
 vendor: rapid7
 support: rapid7
 status: []
@@ -307,7 +307,7 @@ actions:
         description: "Pagination page number, default value is 0"
         required: false
         default: 0
-        example: 0
+        example: 1
       size:
         title: Size
         type: integer
@@ -383,7 +383,7 @@ actions:
         description: "Pagination page number, default value is 0"
         required: false
         default: 0
-        example: 0
+        example: 1
       size:
         title: Size
         type: integer

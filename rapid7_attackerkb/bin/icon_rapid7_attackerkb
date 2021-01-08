@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Rapid7 AttackerKB"
 Vendor = "rapid7"
-Version = "1.0.2"
+Version = "1.0.3"
 Description = "AttackerKB is a knowledge base of vulnerabilities and informed opinions on what makes them valuable (or not) targets for exploitation"
 
 
