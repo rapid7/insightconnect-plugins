@@ -15,7 +15,7 @@
 
 # Requirements
 
-* Firewall credentials
+* Access to Palo Alto Next Generation firewall or Palo Alto Panorama device
 
 # Documentation
 
