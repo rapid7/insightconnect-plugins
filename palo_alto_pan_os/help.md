@@ -1,6 +1,6 @@
 # Description
 
-[PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os) is the software that runs all Palo Alto Networks next-generation firewalls. This plugin utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api) to provide programmatic management of the Palo Alto firewall appliance(s).
+[PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os) is the software that runs all Palo Alto Networks next-generation firewalls. This plugin utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api) to provide programmatic management of the Palo Alto firewall appliance(s). It supports managing firewalls individually or centralized via [Panorama](https://www.paloaltonetworks.com/network-security/panorama).
 
 # Key Features
 
@@ -26,7 +26,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Username and password|None|{"username":"username", "password":"password"}|
-|server|string|None|True|URL pointing to instance of a Palo Alto firewall|None|http://www.example.com|
+|server|string|None|True|URL pointing to instance of Panorama or an individual Palo Alto firewall|None|http://www.example.com|
 |verify_cert|boolean|None|True|If true, validate the server's TLS certificate when contacting the firewall over HTTPS|None|True|
 
 Example input:
