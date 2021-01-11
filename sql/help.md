@@ -9,9 +9,10 @@ This plugin allows users to run and execute queries against a SQL database.
 
 # Requirements
 
-* Type of SQL database
+* Type of SQL database (MSSQL, MySQL, PostgreSQL)
 * The host and port of your SQL database
-* Credentials for your SQL database
+* Name of your SQL database
+* Credentials (username and password) for your SQL database
 
 # Documentation
 
@@ -54,12 +55,18 @@ This action is used to run an arbitrary SQL query against the connected database
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|parameters|object|None|False|Parameters for query|None|None|
-|query|string|None|True|Query to run|None|None|
+|parameters|object|None|False|Parameters for query|None|{ "x": "example_user" }|
+|query|string|None|True|Query to run|None|SELECT * FROM example|
 
 Example input:
 
 ```
+{
+  "parameters": {
+    "x": "example_user"
+  },
+  "query": "SELECT * FROM example"
+}
 ```
 
 ##### Output
@@ -73,16 +80,22 @@ Example input:
 Example output:
 
 ```
-"output": {
-  "status": "operation success",
+{
   "header": [
-    "PluginName"
+    "name",
+    "surname",
+    "index",
+    "alias"
   ],
   "results": [
     {
-      "PluginName": "Test Plugin Name"
+      "name": "User",
+      "index": "1",
+      "Surname": "Example",
+      "alias": "Test"
     }
-  ]
+  ],
+  "status": "operation success"
 }
 ```
 
@@ -100,6 +113,7 @@ For the SQL query action, be sure that your query is valid SQL.
 
 # Version History
 
+* 3.0.0 - Add example input and title in connection and Query action | Update python version to `python-3-37-plugin:3` | Add `USER` in Dockerfile | Update `psycopg2` and `mysqlclient` version | Code refactor in connection.py, util.py and Query action.py
 * 2.0.7 - Add supported databases as a drop-down list | Add example inputs
 * 2.0.6 - Fix issue where connection test always success
 * 2.0.5 - New spec and help.md format for the Extension Library
