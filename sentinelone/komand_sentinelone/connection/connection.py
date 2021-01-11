@@ -262,7 +262,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         )["data"]["affected"]
 
     def get_threats(self, params):
-        return self._call_api("GET", "threats", params=params)
+        # GET /threats has different response schemas for 2.1 and 2.0
+        # Use 2.0 endpoint to be consistent and support as many S1 consoles as possible
+        return self._call_api("GET", "threats", params=params, override_api_version="2.0")
 
     def create_blacklist_item(self, blacklist_hash: str, description: str):
         sites = self._call_api("GET", "sites").get("data", {}).get("sites", [])

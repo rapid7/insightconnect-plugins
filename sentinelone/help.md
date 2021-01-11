@@ -584,7 +584,7 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|[]data|False|Data|
+|data|[]threat_data|False|Data|
 |errors|[]object|False|Errors|
 |pagination|pagination|False|Pagination|
 
@@ -1017,7 +1017,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|threat|data|False|Threat|
+|threat|threat_data|False|Threat|
 
 Example output:
 
@@ -1225,7 +1225,7 @@ Example output:
 |----|----|--------|-----------|
 |Affected|integer|False|Affected|
 
-#### data
+#### threat_data
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|

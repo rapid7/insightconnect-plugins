@@ -165,674 +165,316 @@ types:
       type: string
       description: Next cursor
       required: false
-  agentDetectionInfo:
-    accountId:
-      title: "Accountid"
+  threat_data:
+    username:
+      title: Username
       type: string
-      description: "Accountid"
-      required: false
-    accountName:
-      title: "Accountname"
-      type: string
-      description: "Accountname"
-      required: false
-    agentDomain:
-      title: "Agentdomain"
-      type: string
-      description: "Agentdomain"
-      required: false
-    agentIpV4:
-      title: "Agentipv4"
-      type: string
-      description: "Agentipv4"
-      required: false
-    agentIpV6:
-      title: "Agentipv6"
-      type: string
-      description: "Agentipv6"
-      required: false
-    agentLastLoggedInUserName:
-      title: "Agentlastloggedinusername"
-      type: string
-      description: "Agentlastloggedinusername"
-      required: false
-    agentMitigationMode:
-      title: "Agentmitigationmode"
-      type: string
-      description: "Agentmitigationmode"
-      required: false
-    agentOsName:
-      title: "Agentosname"
-      type: string
-      description: "Agentosname"
-      required: false
-    agentOsRevision:
-      title: "Agentosrevision"
-      type: string
-      description: "Agentosrevision"
-      required: false
-    agentRegisteredAt:
-      title: "Agentregisteredat"
-      type: string
-      description: "Agentregisteredat"
-      required: false
-    agentUuid:
-      title: "Agentuuid"
-      type: string
-      description: "Agentuuid"
-      required: false
-    agentVersion:
-      title: "Agentversion"
-      type: string
-      description: "Agentversion"
-      required: false
-    externalIp:
-      title: "Externalip"
-      type: string
-      description: "Externalip"
-      required: false
-    groupId:
-      title: "Groupid"
-      type: string
-      description: "Groupid"
-      required: false
-    groupName:
-      title: "Groupname"
-      type: string
-      description: "Groupname"
-      required: false
-    siteId:
-      title: "Siteid"
-      type: string
-      description: "Siteid"
-      required: false
-    siteName:
-      title: "Sitename"
-      type: string
-      description: "Sitename"
-      required: false
-  networkInterfaces:
-    id:
-      title: "Id"
-      type: string
-      description: "Id"
-      required: false
-    inet:
-      title: "Inet"
-      type: "[]string"
-      description: "Inet"
-      required: false
-    inet6:
-      title: "Inet6"
-      type: "[]string"
-      description: "Inet6"
-      required: false
-    name:
-      title: "Name"
-      type: string
-      description: "Name"
-      required: false
-    physical:
-      title: "Physical"
-      type: string
-      description: "Physical"
-      required: false
-  agentRealtimeInfo:
-    accountId:
-      title: "Accountid"
-      type: string
-      description: "Accountid"
-      required: false
-    accountName:
-      title: "Accountname"
-      type: string
-      description: "Accountname"
-      required: false
-    activeThreats:
-      title: "Activethreats"
-      type: integer
-      description: "Activethreats"
-      required: false
-    agentComputerName:
-      title: "Agentcomputername"
-      type: string
-      description: "Agentcomputername"
-      required: false
-    agentDecommissionedAt:
-      title: "Agentdecommissionedat"
-      type: boolean
-      description: "Agentdecommissionedat"
-      required: false
-    agentDomain:
-      title: "Agentdomain"
-      type: string
-      description: "Agentdomain"
-      required: false
-    agentId:
-      title: "Agentid"
-      type: string
-      description: "Agentid"
-      required: false
-    agentInfected:
-      title: "Agentinfected"
-      type: boolean
-      description: "Agentinfected"
-      required: false
-    agentIsActive:
-      title: "Agentisactive"
-      type: boolean
-      description: "Agentisactive"
-      required: false
-    agentIsDecommissioned:
-      title: "Agentisdecommissioned"
-      type: boolean
-      description: "Agentisdecommissioned"
-      required: false
-    agentMachineType:
-      title: "Agentmachinetype"
-      type: string
-      description: "Agentmachinetype"
-      required: false
-    agentMitigationMode:
-      title: "Agentmitigationmode"
-      type: string
-      description: "Agentmitigationmode"
-      required: false
-    agentNetworkStatus:
-      title: "Agentnetworkstatus"
-      type: string
-      description: "Agentnetworkstatus"
-      required: false
-    agentOsName:
-      title: "Agentosname"
-      type: string
-      description: "Agentosname"
-      required: false
-    agentOsRevision:
-      title: "Agentosrevision"
-      type: string
-      description: "Agentosrevision"
-      required: false
-    agentOsType:
-      title: "Agentostype"
-      type: string
-      description: "Agentostype"
-      required: false
-    agentUuid:
-      title: "Agentuuid"
-      type: string
-      description: "Agentuuid"
-      required: false
-    agentVersion:
-      title: "Agentversion"
-      type: string
-      description: "Agentversion"
-      required: false
-    groupId:
-      title: "Groupid"
-      type: string
-      description: "Groupid"
-      required: false
-    groupName:
-      title: "Groupname"
-      type: string
-      description: "Groupname"
-      required: false
-    networkInterfaces:
-      title: "Networkinterfaces"
-      type: "[]networkInterfaces"
-      description: "Networkinterfaces"
-      required: false
-    operationalState:
-      title: "Operationalstate"
-      type: string
-      description: "Operationalstate"
-      required: false
-    rebootRequired:
-      title: "Rebootrequired"
-      type: boolean
-      description: "Rebootrequired"
-      required: false
-    scanAbortedAt:
-      title: "Scanabortedat"
-      type: string
-      description: "Scanabortedat"
-      required: false
-    scanFinishedAt:
-      title: "Scanfinishedat"
-      type: string
-      description: "Scanfinishedat"
-      required: false
-    scanStartedAt:
-      title: "Scanstartedat"
-      type: string
-      description: "Scanstartedat"
-      required: false
-    scanStatus:
-      title: "Scanstatus"
-      type: string
-      description: "Scanstatus"
-      required: false
-    siteId:
-      title: "Siteid"
-      type: string
-      description: "Siteid"
-      required: false
-    siteName:
-      title: "Sitename"
-      type: string
-      description: "Sitename"
-      required: false
-    userActionsNeeded:
-      title: "Useractionsneeded"
-      type: "[]object"
-      description: "Useractionsneeded"
-      required: false
-  containerInfo:
-    id:
-      title: "Id"
-      type: string
-      description: "Id"
-      required: false
-    image:
-      title: "Image"
-      type: string
-      description: "Image"
-      required: false
-    labels:
-      title: "Labels"
-      type: "[]object"
-      description: "Labels"
-      required: false
-    name:
-      title: "Name"
-      type: string
-      description: "Name"
-      required: false
-  kubernetesInfo:
-    cluster:
-      title: "Cluster"
-      type: string
-      description: "Cluster"
-      required: false
-    controllerKind:
-      title: "Controllerkind"
-      type: string
-      description: "Controllerkind"
-      required: false
-    controllerLabels:
-      title: "Controllerlabels"
-      type: "[]object"
-      description: "Controllerlabels"
-      required: false
-    controllerName:
-      title: "Controllername"
-      type: string
-      description: "Controllername"
-      required: false
-    namespace:
-      title: "Namespace"
-      type: string
-      description: "Namespace"
-      required: false
-    namespaceLabels:
-      title: "Namespacelabels"
-      type: "[]object"
-      description: "Namespacelabels"
-      required: false
-    node:
-      title: "Node"
-      type: string
-      description: "Node"
-      required: false
-    pod:
-      title: "Pod"
-      type: string
-      description: "Pod"
-      required: false
-    podLabels:
-      title: "Podlabels"
-      type: "[]object"
-      description: "Podlabels"
-      required: false
-  actionsCounters:
-    failed:
-      title: "Failed"
-      type: integer
-      description: "Failed"
-      required: false
-    pendingReboot:
-      title: "Pendingreboot"
-      type: integer
-      description: "Pendingreboot"
-      required: false
-    success:
-      title: "Success"
-      type: integer
-      description: "Success"
-      required: false
-    total:
-      title: "Total"
-      type: integer
-      description: "Total"
-      required: false
-  mitigationStatus:
-    action:
-      title: "Action"
-      type: string
-      description: "Action"
-      required: false
-    actionsCounters:
-      title: "Actionscounters"
-      type: actionsCounters
-      description: "Actionscounters"
-      required: false
-    agentSupportsReport:
-      title: "Agentsupportsreport"
-      type: boolean
-      description: "Agentsupportsreport"
-      required: false
-    groupNotFound:
-      title: "Groupnotfound"
-      type: boolean
-      description: "Groupnotfound"
-      required: false
-    lastUpdate:
-      title: "Lastupdate"
-      type: string
-      description: "Lastupdate"
-      required: false
-    latestReport:
-      title: "Latestreport"
-      type: string
-      description: "Latestreport"
-      required: false
-    status:
-      title: "Status"
-      type: string
-      description: "Status"
-      required: false
-  threatInfo:
-    analystVerdict:
-      title: "Analystverdict"
-      type: string
-      description: "Analystverdict"
-      required: false
-    analystVerdictDescription:
-      title: "Analystverdictdescription"
-      type: string
-      description: "Analystverdictdescription"
-      required: false
-    automaticallyResolved:
-      title: "Automaticallyresolved"
-      type: boolean
-      description: "Automaticallyresolved"
-      required: false
-    browserType:
-      title: "Browsertype"
-      type: string
-      description: "Browsertype"
-      required: false
-    certificateId:
-      title: "Certificateid"
-      type: string
-      description: "Certificateid"
+      description: Username
       required: false
     classification:
-      title: "Classification"
+      title: Classification
       type: string
-      description: "Classification"
+      description: Classification
       required: false
-    classificationSource:
-      title: "Classificationsource"
+    siteName:
+      title: Site Name
       type: string
-      description: "Classificationsource"
+      description: Site name
       required: false
-    cloudFilesHashVerdict:
-      title: "Cloudfileshashverdict"
+    fileObjectId:
+      title: File Object ID
       type: string
-      description: "Cloudfileshashverdict"
+      description: File object ID
       required: false
-    collectionId:
-      title: "Collectionid"
+    mitigationActions:
+      title: Mitigation Actions
+      type: '[]string'
+      description: Mitigation actions
+      required: false
+    fileCreatedDate:
+      title: File Created Date
       type: string
-      description: "Collectionid"
+      description: File created date
       required: false
-    confidenceLevel:
-      title: "Confidencelevel"
-      type: string
-      description: "Confidencelevel"
-      required: false
-    createdAt:
-      title: "Createdat"
-      type: string
-      description: "Createdat"
-      required: false
-    detectionType:
-      title: "Detectiontype"
-      type: string
-      description: "Detectiontype"
-      required: false
-    engines:
-      title: "Engines"
-      type: "[]string"
-      description: "Engines"
-      required: false
-    externalTicketExists:
-      title: "Externalticketexists"
+    fileIsExecutable:
+      title: File is Executable
       type: boolean
-      description: "Externalticketexists"
+      description: File is executable
       required: false
-    externalTicketId:
-      title: "Externalticketid"
+    agentIp:
+      title: Agent IP
       type: string
-      description: "Externalticketid"
+      description: Agent IP
       required: false
-    failedActions:
-      title: "Failedactions"
+    agentNetworkStatus:
+      title: Agent Network Status
+      type: string
+      description: Agent network status
+      required: false
+    isInteractiveSession:
+      title: Is Interactive Session
       type: boolean
-      description: "Failedactions"
+      description: Is interactive session
       required: false
-    fileExtension:
-      title: "Fileextension"
+    agentVersion:
+      title: Agent Version
       type: string
-      description: "Fileextension"
+      description: Agent version
       required: false
-    fileExtensionType:
-      title: "Fileextensiontype"
-      type: string
-      description: "Fileextensiontype"
-      required: false
-    filePath:
-      title: "Filepath"
-      type: string
-      description: "Filepath"
-      required: false
-    fileSize:
-      title: "Filesize"
-      type: integer
-      description: "Filesize"
-      required: false
-    fileVerificationType:
-      title: "Fileverificationtype"
-      type: string
-      description: "Fileverificationtype"
-      required: false
-    identifiedAt:
-      title: "Identifiedat"
-      type: string
-      description: "Identifiedat"
-      required: false
-    incidentStatus:
-      title: "Incidentstatus"
-      type: string
-      description: "Incidentstatus"
-      required: false
-    incidentStatusDescription:
-      title: "Incidentstatusdescription"
-      type: string
-      description: "Incidentstatusdescription"
-      required: false
-    initiatedBy:
-      title: "Initiatedby"
-      type: string
-      description: "Initiatedby"
-      required: false
-    initiatedByDescription:
-      title: "Initiatedbydescription"
-      type: string
-      description: "Initiatedbydescription"
-      required: false
-    initiatingUserId:
-      title: "Initiatinguserid"
-      type: string
-      description: "Initiatinguserid"
-      required: false
-    initiatingUsername:
-      title: "Initiatingusername"
-      type: string
-      description: "Initiatingusername"
-      required: false
-    isFileless:
-      title: "Isfileless"
-      type: boolean
-      description: "Isfileless"
-      required: false
-    isValidCertificate:
-      title: "Isvalidcertificate"
-      type: boolean
-      description: "Isvalidcertificate"
-      required: false
-    maliciousProcessArguments:
-      title: "Maliciousprocessarguments"
-      type: string
-      description: "Maliciousprocessarguments"
-      required: false
-    md5:
-      title: "MD5"
-      type: string
-      description: "MD5"
-      required: false
-    mitigatedPreemptively:
-      title: "Mitigatedpreemptively"
-      type: boolean
-      description: "Mitigatedpreemptively"
-      required: false
-    mitigationStatus:
-      title: "Mitigationstatus"
-      type: string
-      description: "Mitigationstatus"
-      required: false
-    mitigationStatusDescription:
-      title: "Mitigationstatusdescription"
-      type: string
-      description: "Mitigationstatusdescription"
-      required: false
-    originatorProcess:
-      title: "Originatorprocess"
-      type: string
-      description: "Originatorprocess"
-      required: false
-    pendingActions:
-      title: "Pendingactions"
-      type: boolean
-      description: "Pendingactions"
-      required: false
-    processUser:
-      title: "Processuser"
-      type: string
-      description: "Processuser"
-      required: false
-    publisherName:
-      title: "Publishername"
-      type: string
-      description: "Publishername"
-      required: false
-    reachedEventsLimit:
-      title: "Reachedeventslimit"
-      type: boolean
-      description: "Reachedeventslimit"
-      required: false
-    rebootRequired:
-      title: "Rebootrequired"
-      type: boolean
-      description: "Rebootrequired"
-      required: false
-    sha1:
-      title: "SHA1"
-      type: string
-      description: "SHA1"
-      required: false
-    sha256:
-      title: "SHA256"
-      type: string
-      description: "SHA256"
-      required: false
-    storyline:
-      title: "Storyline"
-      type: string
-      description: "Storyline"
-      required: false
-    threatId:
-      title: "Threatid"
-      type: string
-      description: "Threatid"
-      required: false
-    threatName:
-      title: "Threatname"
-      type: string
-      description: "Threatname"
-      required: false
-    updatedAt:
-      title: "Updatedat"
-      type: string
-      description: "Updatedat"
-      required: false
-  data:
-    agentDetectionInfo:
-      title: "Agentdetectioninfo"
-      type: agentDetectionInfo
-      description: "Agentdetectioninfo"
-      required: false
-    agentRealtimeInfo:
-      title: "Agentrealtimeinfo"
-      type: agentRealtimeInfo
-      description: "Agentrealtimeinfo"
-      required: false
-    containerInfo:
-      title: "Containerinfo"
-      type: containerInfo
-      description: "Containerinfo"
+    mitigationReport:
+      title: Mitigation Report
+      type: object
+      description: Mitigation report
       required: false
     id:
-      title: "Id"
+      title: ID
       type: string
-      description: "Id"
+      description: ID
       required: false
-    indicators:
-      title: "Indicators"
-      type: "[]object"
-      description: "Indicators"
+    fileData:
+      title: File Data
+      type: object
+      description: File data
       required: false
-    kubernetesInfo:
-      title: "Kubernetesinfo"
-      type: kubernetesInfo
-      description: "Kubernetesinfo"
+    agentId:
+      title: Agent ID
+      type: string
+      description: Agent ID
       required: false
-    mitigationStatus:
-      title: "Mitigationstatus"
-      type: "[]mitigationStatus"
-      description: "Mitigationstatus"
+    fileExtensionType:
+      title: File Extension Type
+      type: string
+      description: File extension type
       required: false
-    threatInfo:
-      title: "Threatinfo"
-      type: threatInfo
-      description: "Threatinfo"
+    fileDisplayName:
+      title: File Display Name
+      type: string
+      description: File display name
+      required: false
+    createdAt:
+      title: Created At
+      type: string
+      description: Created At
       required: false
     whiteningOptions:
-      title: "Whiteningoptions"
-      type: "[]string"
-      description: "Whiteningoptions"
+      title: Whitening Options
+      type: '[]string'
+      description: Whitening options
+      required: false
+    maliciousProcessArguments:
+      title: Malicious Process Arguments
+      type: string
+      description: Malicious process arguments
+      required: false
+    certId:
+      title: Cert ID
+      type: string
+      description: Cert ID
+      required: false
+    engines:
+      title: Engines
+      type: '[]string'
+      description: Engines
+      required: false
+    collectionId:
+      title: Collection ID
+      type: string
+      description: Collection ID
+      required: false
+    inQuarantine:
+      title: In Quarantine
+      type: boolean
+      description: In quarantine
+      required: false
+    browserType:
+      title: Browser Type
+      type: string
+      description: Browser type
+      required: false
+    fileIsSystem:
+      title: File is System
+      type: boolean
+      description: File is system
+      required: false
+    markedAsBenign:
+      title: Marked as Benign
+      type: boolean
+      description: Marked as Benign
+      required: false
+    cloudVerdict:
+      title: Cloud Verdict
+      type: string
+      description: Cloud verdict
+      required: false
+    indicators:
+      title: Indicators
+      type: '[]integer'
+      description: Indicators
+      required: false
+    classificationSource:
+      title: Classification Source
+      type: string
+      description: Classification source
+      required: false
+    agentComputerName:
+      title: Agent Computer Name
+      type: string
+      description: Agent computer name
+      required: false
+    mitigationStatus:
+      title: Mitigation Status
+      type: string
+      description: Mitigation status
+      required: false
+    resolved:
+      title: Resolved
+      type: boolean
+      description: Resolved
+      required: false
+    fileSha256:
+      title: File SHA 256
+      type: string
+      description: File SHA 256
+      required: false
+    description:
+      title: Description
+      type: string
+      description: Description
+      required: false
+    filePath:
+      title: File Path
+      type: string
+      description: File path
+      required: false
+    fromScan:
+      title: From Scan
+      type: boolean
+      description: From scan
+      required: false
+    classifierName:
+      title: Classifiername
+      type: string
+      description: Classifiername
+      required: false
+    agentMachineType:
+      title: Agent Machine Type
+      type: string
+      description: Agent machine type
+      required: false
+    isCertValid:
+      title: Is Cert Valid
+      type: boolean
+      description: Is cert valid
+      required: false
+    fileIsDotNet:
+      title: File is Dotnet
+      type: boolean
+      description: File is dotnet
+      required: false
+    fileContentHash:
+      title: File Content Hash
+      type: string
+      description: File content hash
+      required: false
+    siteId:
+      title: Site ID
+      type: string
+      description: Site ID
+      required: false
+    rank:
+      title: Rank
+      type: integer
+      description: Rank
+      required: false
+    createdDate:
+      title: Created Date
+      type: string
+      description: Created date
+      required: false
+    updatedAt:
+      title: Updated At
+      type: string
+      description: Updated at
+      required: false
+    agentOsType:
+      title: Agent OS Type
+      type: string
+      description: Agent OS type
+      required: false
+    agentIsDecommissioned:
+      title: Agent is Decommissioned
+      type: boolean
+      description: Agent is Decommissioned
+      required: false
+    isPartialStory:
+      title: Is Partial Story
+      type: boolean
+      description: Is partial story
+      required: false
+    annotation:
+      title: Annotation
+      type: string
+      description: Annotation
+      required: false
+    fileVerificationType:
+      title: File Verification Type
+      type: string
+      description: File verification type
+      required: false
+    publisher:
+      title: Publisher
+      type: string
+      description: Publisher
+      required: false
+    threatName:
+      title: Threat Name
+      type: string
+      description: Threat name
+      required: false
+    maliciousGroupId:
+      title: Malicious Group ID
+      type: string
+      description: Malicious group ID
+      required: false
+    annotationUrl:
+      title: Annotation URL
+      type: string
+      description: Annotation URL
+      required: false
+    agentIsActive:
+      title: Agent is Active
+      type: boolean
+      description: Agent is Active
+      required: false
+    fromCloud:
+      title: From Cloud
+      type: boolean
+      description: From cloud
+      required: false
+    mitigationMode:
+      title: Mitigation Mode
+      type: string
+      description: Mitigation mode
+      required: false
+    agentDomain:
+      title: Agent Domain
+      type: string
+      description: Agent domain
+      required: false
+    agentInfected:
+      title: Agent Infected
+      type: boolean
+      description: Agent infected
+      required: false
+    threatAgentVersion:
+      title: Threat Agent Version
+      type: string
+      description: Threat agent version
+      required: false
+    fileMaliciousContent:
+      title: File Malicious Content
+      type: boolean
+      description: File malicious content
       required: false
   agent_data:
     scanFinishedAt:
@@ -1186,7 +828,7 @@ actions:
         required: false
       data:
         title: Data
-        type: '[]data'
+        type: '[]threat_data'
         description: Data
         required: false
   blacklist_by_content_hash:
@@ -1842,5 +1484,5 @@ triggers:
       threat:
         title: Threat
         description: Threat
-        type: data
+        type: threat_data
         required: false
