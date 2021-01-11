@@ -1,12 +1,11 @@
 # Description
 
-[Rapid7's AttackerKB](http://attackerkb.com/) is a knowledge base of vulnerabilities and informed opinions on what makes them valuable (or not) targets for exploitation
+[Rapid7's AttackerKB](http://attackerkb.com/) is a knowledge base of vulnerabilities and informed opinions on what makes them valuable (or not) targets for exploitation. The maximum size value is 500. 
 
 # Key Features
 
 * Search for vulnerabilities
 * Obtain vulnerability assessment information
-* Maximum size for the API is 500
 
 # Requirements
 
