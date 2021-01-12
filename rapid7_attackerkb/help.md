@@ -1,6 +1,6 @@
 # Description
 
-[Rapid7's AttackerKB](http://attackerkb.com/) is a knowledge base of vulnerabilities and informed opinions on what makes them valuable (or not) targets for exploitation. The maximum size value is 500. 
+[Rapid7's AttackerKB](http://attackerkb.com/) is a knowledge base of vulnerabilities and informed opinions on what makes them valuable (or not) targets for exploitation. 
 
 # Key Features
 
@@ -294,7 +294,7 @@ This action is used to return all topics.
 |editorId|string|None|False|The UUID of a contributor|None|a2c54f3d-48d0-48c4-b056-3a78181d777c|
 |id|string|None|False|The UUID of a specific topic to return|None|a2c54f3d-48d0-48c4-b056-3a78181d777c|
 |name|string|None|False|Text to query the name parameter. A substring match is performed|None|CVE-2020-3789|
-|page|integer|0|False|Pagination page number, default value is 0|None|1|
+|page|integer|0|False|Pagination page number, default value is 0, example value is 1|None|1|
 |revisionDate|string|None|False|Return all topics that were last edited on the given date, eg. 2019-07-04|None|2019-07-04|
 |size|integer|10|False|The number of topics returned per page, default value is 10|None|10|
 
