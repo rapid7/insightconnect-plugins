@@ -311,7 +311,7 @@ actions:
       size:
         title: Size
         type: integer
-        description: "The number of topics returned per page, default value is 10"
+        description: "The number of topics returned per page, default value is 10, maximum size value is 500"
         required: false
         default: 10
         example: 10
@@ -387,7 +387,7 @@ actions:
       size:
         title: Size
         type: integer
-        description: "The number of assessments returned per page, default value is 10"
+        description: "The number of assessments returned per page, default value is 10, maximum size value is 500"
         required: false
         default: 10
         example: 10
