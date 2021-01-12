@@ -93,7 +93,7 @@ This action is used to return all assessments.
 |id|string|None|False|The UUID of a specific assessment to return|None|a2c54f3d-48d0-48c4-b056-3a78181d777c|
 |page|integer|0|False|Pagination page number, default value is 0|None|1|
 |revisionDate|string|None|False|Return all assessments that were last edited on the given date, eg. 2019-07-04|None|2019-07-04|
-|size|integer|10|False|The number of assessments returned per page, default value is 10, maximum size value is 500|None|10|
+|size|integer|10|False|The number of assessments returned per page, default value is 10|None|10|
 |topicId|string|None|False|The UUID of the topic this assessment was based on|None|a2c54f3d-48d0-48c4-b056-3a78181d777c|
 
 Example input:
@@ -296,7 +296,7 @@ This action is used to return all topics.
 |name|string|None|False|Text to query the name parameter. A substring match is performed|None|CVE-2020-3789|
 |page|integer|0|False|Pagination page number, default value is 0, example value is 1|None|1|
 |revisionDate|string|None|False|Return all topics that were last edited on the given date, eg. 2019-07-04|None|2019-07-04|
-|size|integer|10|False|The number of topics returned per page, default value is 10, maximum size value is 500|None|10|
+|size|integer|10|False|The number of topics returned per page, default value is 10|None|10|
 
 Example input:
 
