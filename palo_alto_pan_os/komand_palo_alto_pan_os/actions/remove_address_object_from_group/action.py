@@ -8,10 +8,10 @@ class RemoveAddressObjectFromGroup(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='remove_address_object_from_group',
-                description=Component.DESCRIPTION,
-                input=RemoveAddressObjectFromGroupInput(),
-                output=RemoveAddressObjectFromGroupOutput())
+            name='remove_address_object_from_group',
+            description=Component.DESCRIPTION,
+            input=RemoveAddressObjectFromGroupInput(),
+            output=RemoveAddressObjectFromGroupOutput())
 
     def run(self, params={}):
         address_object_name = params.get(Input.ADDRESS_OBJECT)
@@ -22,11 +22,15 @@ class RemoveAddressObjectFromGroup(komand.Action):
         xpath = f"/config/devices/entry[@name='{device_name}']/vsys/entry[@name='{virtual_system}']/address-group/entry[@name='{group_name}']"
         response = self.connection.request.get_(xpath)
 
-        address_objects = response.get("response", {}).get("result", {}).get("entry", {}).get("static", {}).get("member")
-        if not address_objects:
-            raise PluginException(cause="PAN OS returned an unexpected response.",
-                                  assistance=f"Could not find group {group_name}, or group was empty. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {virtual_system}",
-                                  data=response)
+        try:
+            address_objects = response.get("response").get("result").get("entry").get("static").get("member")
+
+        except AttributeError:
+            raise PluginException(
+                cause="PAN OS returned an unexpected response.",
+                assistance=f"Could not find group '{group_name}', or group was empty. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {virtual_system}",
+                data=response
+            )
 
         found = False
         names = []
@@ -52,4 +56,3 @@ class RemoveAddressObjectFromGroup(komand.Action):
         xml_template = f"<entry name=\"{group_name}\"><static>{members}</static></entry>"
 
         return xml_template
-
