@@ -26,6 +26,7 @@ class UpdateAppInput(insightconnect_plugin_runtime.Input):
     "app_description": {
       "type": "string",
       "title": "Application Description",
+      "description": "Describe the application",
       "order": 3
     },
     "app_id": {

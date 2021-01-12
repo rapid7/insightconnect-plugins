@@ -37,6 +37,66 @@ Example input:
 
 ### Actions
 
+#### Dissociate a User from an Application
+
+This action is used to remove a user from accessing an application.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|app_id|uuid|None|True|Application UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
+|user_id|uuid|None|True|User UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
+
+Example input:
+
+```
+{
+  "app_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "user_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|status|integer|False|Status code of the request|
+
+Example output:
+
+```
+```
+
+#### Get Users Associated with an Application
+
+This action is used to a list of users with access to an application.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|app_id|string|None|True|Application UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
+
+Example input:
+
+```
+{
+  "app_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|user_id|[]uuid|False|A list of users UUID|
+
+Example output:
+
+```
+```
+
 #### Submit Scan
 
 This action is used to submit a new scan.
@@ -66,40 +126,6 @@ Example output:
 ```
 {
   "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-}
-```
-
-#### Dissociate a User From an Application
-
-This action is used to remove a user from accessing an application.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|app_id|uuid|None|True|Application UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
-|user_id|uuid|None|True|User UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
-
-Example input:
-
-```
-{
-  "app_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "user_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|status|integer|False|Status code of the request|
-
-Example output:
-
-```
-{
-  "status": 204
 }
 ```
 
@@ -137,48 +163,6 @@ Example output:
 }
 ```
 
-#### Get Users Associated With an Application
-
-This action is used to a list of users with access to an application.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|app_id|string|None|True|Application UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
-
-Example input:
-
-```
-{
-  "app_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|user_id|[]uuid|False|A list of users UUID|
-
-Example output:
-
-```
-{
-  "user_id": [
-    {
-      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-    },
-    {
-      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-    },
-    {
-      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-    }
-  ]
-}
-```
-
 #### Update an Existing Application
 
 This action is used to update the name or description of an existing Application.
@@ -187,7 +171,7 @@ This action is used to update the name or description of an existing Application
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|app_description|string|None|False||None|None|
+|app_description|string|None|False|Describe the application|None|None|
 |app_id|string|None|True|Application UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
 |app_name|string|None|True|The name of an application|None|None|
 
@@ -568,7 +552,7 @@ Example input:
 
 ```
 {
-  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+  "scan_config_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
 }
 ```
 
@@ -669,7 +653,7 @@ Example input:
 
 ```
 {
-  "scan_config_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxxxxxxxxxx"
 }
 ```
 
@@ -704,7 +688,10 @@ Example input:
 
 ```
 {
-  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+  "include-errors": false,
+  "index": 0,
+  "size": 100,
+  "sort": "scanconfig.name,DESC"
 }
 ```
 
@@ -857,7 +844,9 @@ Example input:
 
 ```
 {
-  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+  "index": 0,
+  "size": 50,
+  "sort": "scan.submit_time,DESC"
 }
 ```
 

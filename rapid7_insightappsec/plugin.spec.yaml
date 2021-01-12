@@ -393,7 +393,7 @@ actions:
         required: true
       app_description:
         title: Application Description
-        decription: Describe the application
+        description: Describe the application
         type: string
         required: false
     output:
@@ -403,7 +403,7 @@ actions:
         type: integer
         required: false
   get_app_users:
-    title: Get Users Associated With an Application
+    title: Get Users Associated with an Application
     description: A list of users with access to an application
     input:
       app_id:
@@ -441,7 +441,7 @@ actions:
         type: integer
         required: false
   remove_app_user:
-    title: Dissociate a User From an Application
+    title: Dissociate a User from an Application
     description: Remove a user from accessing an application
     input:
       app_id:
@@ -566,7 +566,7 @@ actions:
         type: string
         required: false
       assignment_type:
-        title: Type Of Assignment
+        title: Type of Assignment
         description: A static string
         type: string
         required: false

@@ -73,7 +73,7 @@ class GetScanConfigOutput(insightconnect_plugin_runtime.Output):
     },
     "assignment_type": {
       "type": "string",
-      "title": "Type Of Assignment",
+      "title": "Type of Assignment",
       "description": "A static string",
       "order": 8
     },
