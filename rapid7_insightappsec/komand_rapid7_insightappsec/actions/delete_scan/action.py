@@ -3,7 +3,8 @@ from .schema import DeleteScanInput, DeleteScanOutput, Input, Output
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import Scans
 from komand_rapid7_insightappsec.util.resource_helper import ResourceHelper
-
+from insightconnect_plugin_runtime.exceptions import PluginException
+import json
 
 class DeleteScan(insightconnect_plugin_runtime.Action):
 
@@ -16,10 +17,17 @@ class DeleteScan(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         scan_id = params.get(Input.SCAN_ID)
+        scan_id = scan_id['id']
         request = ResourceHelper(self.connection.session, self.logger)
 
         url = Scans.scans(self.connection.url)
         url = f'{url}{scan_id}'
+        try:
+            response = request.resource_request(url, 'delete')
 
-        response = request.resource_request(url, 'delete')
+        except json.decoder.JSONDecodeError:
+            self.logger.error(f'InsightAppSec response: {response}')
+            raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
+                            ' See log for more details')
+
         return {Output.STATUS: response['status']}

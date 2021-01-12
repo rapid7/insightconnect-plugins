@@ -12,7 +12,7 @@ class Input:
     
 
 class Output:
-    STATUS = "status"
+    SCAN_ID = "scan_id"
     
 
 class SubmitScanInput(insightconnect_plugin_runtime.Input):
@@ -22,7 +22,7 @@ class SubmitScanInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "scan_config_id": {
-      "type": "string",
+      "$ref": "#/definitions/uuid",
       "title": "Scan Config ID",
       "description": "UUID of the scan config to use",
       "order": 1
@@ -30,7 +30,21 @@ class SubmitScanInput(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "scan_config_id"
-  ]
+  ],
+  "definitions": {
+    "uuid": {
+      "type": "object",
+      "title": "uuid",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "An ID string",
+          "description": "A string to identify a user, application, scan, engine, blackout",
+          "order": 1
+        }
+      }
+    }
+  }
 }
     """)
 
@@ -44,13 +58,16 @@ class SubmitScanOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "status": {
-      "type": "integer",
-      "title": "Status",
-      "description": "Status code of the request",
+    "scan_id": {
+      "type": "string",
+      "title": "Scan ID",
+      "description": "Scan UUID",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "scan_id"
+  ]
 }
     """)
 

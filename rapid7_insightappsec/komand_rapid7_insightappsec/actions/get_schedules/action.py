@@ -19,9 +19,11 @@ class GetSchedules(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         # TODO: Implement run function
         sort = params.get(Input.SORT)
+        index = params.get(Input.INDEX)
+        size = params.get(Input.SIZE)
         resource_helper = ResourceHelper(self.connection.session, self.logger)
         endpoint = Schedule.get_schedules(self.connection.url)
-        response = resource_helper.resource_request(endpoint, method="GET", params={"sort":sort})
+        response = resource_helper.resource_request(endpoint, method="GET", params={"sort":sort, "index":index, "size":size})
         try:
             response = json.loads(response["resource"])
         except json.decoder.JSONDecodeError:

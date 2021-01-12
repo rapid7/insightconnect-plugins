@@ -24,7 +24,13 @@ class CreateApp(insightconnect_plugin_runtime.Action):
         url = Apps.create_app(self.connection.url)
         payload = {'name': app_name, 'description': app_description}
 
-        response = request.resource_request(url, 'post', payload=payload)
+        try:
+            response = request.resource_request(url, 'post', payload=payload)
+        except json.decoder.JSONDecodeError:
+            self.logger.error(f'InsightAppSec response: {response}')
+            raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
+                            ' See log for more details')
+
         uuid = response.get("headers")
         uuid = uuid.get("Location")
         parts = uuid.split('/')

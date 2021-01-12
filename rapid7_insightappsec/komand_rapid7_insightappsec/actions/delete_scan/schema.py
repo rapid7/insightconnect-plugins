@@ -22,7 +22,7 @@ class DeleteScanInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "scan_id": {
-      "type": "string",
+      "$ref": "#/definitions/uuid",
       "title": "Scan ID",
       "description": "The scans UUID",
       "order": 1
@@ -30,7 +30,21 @@ class DeleteScanInput(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "scan_id"
-  ]
+  ],
+  "definitions": {
+    "uuid": {
+      "type": "object",
+      "title": "uuid",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "An ID string",
+          "description": "A string to identify a user, application, scan, engine, blackout",
+          "order": 1
+        }
+      }
+    }
+  }
 }
     """)
 

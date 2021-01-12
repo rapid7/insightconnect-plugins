@@ -18,7 +18,7 @@ class Input:
     
 
 class Output:
-    STATUS = "status"
+    SCAN_CONFIG_ID = "scan_config_id"
     
 
 class CreateScanConfigInput(insightconnect_plugin_runtime.Input):
@@ -37,6 +37,7 @@ class CreateScanConfigInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Assignment Environment",
       "description": "Where the scan will run from ON_PREMISE or CLOUD",
+      "default": "CLOUD",
       "enum": [
         "CLOUD",
         "ON_PREMISE"
@@ -96,10 +97,10 @@ class CreateScanConfigOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "status": {
-      "type": "integer",
-      "title": "Status",
-      "description": "Status code of the request",
+    "scan_config_id": {
+      "type": "string",
+      "title": "Application ID",
+      "description": "Application UUID",
       "order": 1
     }
   }

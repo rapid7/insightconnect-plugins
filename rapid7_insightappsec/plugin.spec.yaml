@@ -245,6 +245,12 @@ types:
       description: A string to identify a user, application, scan, engine, blackout
       type: string
       required: false
+  target:
+    url:
+      title: URL
+      description: URL to define an application
+      type: string
+      required: false
 connection:
   api_key:
     title: API Key
@@ -269,7 +275,22 @@ actions:
         description: How to sort the response
         type: string
         required: false
+        default: "ASC"
         example: "ASC"
+      index:
+        title: Index
+        description: The page number of the return data set
+        type: integer
+        required: false
+        default: 0
+        example: 0
+      size:
+        title: Size
+        description: The data set size or the max number of apps to return per page
+        type: integer
+        required: false
+        default: 100
+        example: 100
     output:
       metadata:
         title: Metadata
@@ -277,8 +298,8 @@ actions:
         type: object
         required: false
       data:
-        title: Response Data
-        description: Response data
+        title: App Data
+        description: App data
         type: '[]app'
         required: false
       links:
@@ -315,9 +336,9 @@ actions:
       app_id:
         title: Application ID
         description: Application UUID
-        type: string
+        type: 'uuid'
         required: true
-        example: "78c85b01-2a23-404d-ac5a-18324d8e3bda"
+        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
     output:
       app_id:
         title: Application ID
@@ -462,7 +483,7 @@ actions:
         description: App UUID
         type: string
         required: true
-        example: "78c85b01-2a23-404d-ac5a-18324d8e3bda"
+        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
       attack_template_id:
         title: Attack Template ID
         description: Attack template UUID
@@ -478,12 +499,13 @@ actions:
         - CLOUD
         - ON_PREMISE
         example: CLOUD
+        default: CLOUD
       assignment_id:
         title: Engine Group UUID
         description: The UUID of the engine Group
         required: true
         type: string
-        example: "78c85b01-2a23-404d-ac5a-18324d8e3bda"
+        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
       assignment_type:
         title: Assignment Type
         description: The type of engine assignment
@@ -492,10 +514,10 @@ actions:
         example: ENGINE_GROUP
         default: ENGINE_GROUP
     output:
-      status:
-        title: Status
-        description: Status code of the request
-        type: integer
+      scan_config_id:
+        title: Application ID
+        description: Application UUID
+        type: string
         required: false
   get_scan_config:
     title: Get Scan Config
@@ -506,7 +528,7 @@ actions:
         description: Scan configuration UUID
         type: string
         required: true
-        example: "6a33ae79-5ebd-44a9-9a0a-f269876e90c9"
+        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
     output:
       id:
         title: UUID
@@ -585,13 +607,36 @@ actions:
         description: App UUID
         type: string
         required: true
-        example: "78c85b01-2a23-404d-ac5a-18324d8e3bda"
+        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
       attack_template_id:
         title: Attack Template ID
         description: Attack template UUID
         type: string
         required: true
         example: "11111111-0000-0000-0000-000000000000"
+      assignment_environment:
+        title: Assignment Environment
+        description: Where the scan will run from ON_PREMISE or CLOUD
+        required: false
+        type: string
+        enum:
+        - CLOUD
+        - ON_PREMISE
+        example: CLOUD
+        default: CLOUD
+      assignment_id:
+        title: Engine Group UUID
+        description: The UUID of the engine Group
+        required: false
+        type: string
+        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+      assignment_type:
+        title: Assignment Type
+        description: The type of engine assignment
+        required: false
+        type: string
+        example: ENGINE_GROUP
+        default: ENGINE_GROUP
     output:
       status:
         title: Status
@@ -607,7 +652,7 @@ actions:
         description: Scan configuration UUID
         type: string
         required: true
-        example: "4569288e-2bb4-416e-a4ee-4f7add18afe0"
+        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
     output:
       status:
         title: Status
@@ -618,47 +663,66 @@ actions:
     title: Get Scan Configs
     description: Get a page of scan configurations, based on supplied pagination parameters
     input:
+      sort:
+        title: Sort
+        description: How to sort the response
+        type: string
+        required: false
+        default: "ASC"
+        example: "scanconfig.name,DESC"
       index:
         title: Index
-        description: The page index to start form. If blank, index will be 0
+        description: The page number of the return data set
         type: integer
         required: false
+        default: 0
         example: 0
       size:
         title: Size
-        description: The number of entries on each page. If blank, size will be 50
+        description: The data set size or the max number of apps to return per page
         type: integer
         required: false
-        example: 0
-      sort:
-        title: Sort
-        description: How to sort the scan configs. If blank, sort will be alphabetical
-          by scan config name
-        type: string
+        default: 100
+        example: 100
+      include-errors:
+        title: Validation Errors
+        description: Iclude validation errors in scan configs, can be expensive
+        type: boolean
         required: false
-        example: "scanconfig.name,DESC"
+        default: true
+        example: false
     output:
-      scan_configs:
+      metadata:
+        title: Metadata
+        description: Metadata for the scan results
+        type: object
+        required: false
+      data:
         title: Scan Configs
         description: A list of scan configurations
         type: '[]scan_config'
         required: false
+      links:
+        title: Links to Data
+        description: Links to data
+        type: '[]link'
+        required: false
   submit_scan:
-    title: Sumbit Scan
+    title: Submit Scan
     description: Submit a new scan
     input:
       scan_config_id:
         title: Scan Config ID
         description: UUID of the scan config to use
+        type: 'uuid'
+        required: true
+        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    output:
+      scan_id:
+        title: Scan ID
+        description: Scan UUID
         type: string
         required: true
-        example: "a709c972-cb1f-4790-bfce-6ab74653900c"
-    output:
-      status:
-        title: Status
-        description: Status code of the request
-        type: integer
-        required: false
   get_scan:
     title: Get Scan
     description: Get a scan
@@ -668,7 +732,7 @@ actions:
         description: The scans UUID
         type: string
         required: true
-        example: "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
     output:
       scan:
         title: Scan
@@ -699,10 +763,20 @@ actions:
         required: false
         example: "scan.submit_time,DESC"
     output:
-      scans:
+      metadata:
+        title: Metadata
+        description: Metadata for the scan results
+        type: object
+        required: false
+      data:
         title: Scans
         description: A list of scans
         type: '[]scan'
+        required: false
+      links:
+        title: Links to Data
+        description: Links to data
+        type: '[]link'
         required: false
   delete_scan:
     title: Delete Scan
@@ -711,9 +785,9 @@ actions:
       scan_id:
         title: Scan ID
         description: The scans UUID
-        type: string
+        type: 'uuid'
         required: true
-        example: "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+        example: "xxxxxxxx-xxxx-xxxx-xxxxxxxxxxxx"
     output:
       status:
         title: Status
@@ -727,9 +801,9 @@ actions:
       scan_id:
         title: Scan ID
         description: Scan UUID
-        type: string
+        type: 'uuid'
         required: true
-        example: "008eaffe-90ce-4de9-8601-40414391c21c"
+        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
       action:
         title: Action
         description: Action to take
@@ -758,7 +832,7 @@ actions:
         description: Scan UUID
         type: string
         required: true
-        example: "c762adbe-1636-4c70-9787-5f22c2dc5af8"
+        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
     output:
       events:
         title: Events
@@ -774,7 +848,7 @@ actions:
         description: Scan UUID
         type: string
         required: true
-        example: "c762adbe-1636-4c70-9787-5f22c2dc5af8"
+        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
     output:
       details:
         title: Details
@@ -790,7 +864,7 @@ actions:
         description: Scan UUID
         type: string
         required: true
-        example: "c762adbe-1636-4c70-9787-5f22c2dc5af8"
+        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
     output:
       events:
         title: Events
@@ -807,6 +881,20 @@ actions:
         type: string
         required: false
         example: "ASC"
+      index:
+        title: Index
+        description: The page number of the return data set
+        type: integer
+        required: false
+        default: 0
+        example: 0
+      size:
+        title: Size
+        description: The data set size or the max number of apps to return per page
+        type: integer
+        required: false
+        default: 100
+        example: 100
     output:
       metadata:
         title: Metadata

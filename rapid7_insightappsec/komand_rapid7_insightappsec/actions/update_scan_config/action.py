@@ -3,6 +3,8 @@ from .schema import UpdateScanConfigInput, UpdateScanConfigOutput, Input, Output
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import ScanConfig
 from komand_rapid7_insightappsec.util.resource_helper import ResourceHelper
+from insightconnect_plugin_runtime.exceptions import PluginException
+import json
 
 
 class UpdateScanConfig(insightconnect_plugin_runtime.Action):
@@ -20,13 +22,22 @@ class UpdateScanConfig(insightconnect_plugin_runtime.Action):
         config_description = params.get(Input.CONFIG_DESCRIPTION)
         app_id = params.get(Input.APP_ID)
         attack_template_id = params.get(Input.ATTACK_TEMPLATE_ID)
+        assignment_environment = params.get(Input.ASSIGNMENT_ENVIRONMENT)
+        assignment_id = params.get(Input.ASSIGNMENT_ID)
+        assignment_type = params.get(Input.ASSIGNMENT_TYPE)
         request = ResourceHelper(self.connection.session, self.logger)
 
         url = ScanConfig.scan_config(self.connection.url)
         url = f'{url}{scan_config_id}'
         payload = {'name': config_name, 'description': config_description,
-                   'app': {'id': app_id}, 'attack_template': {'id': attack_template_id}}
+                   'app': {'id': app_id}, 'attack_template': {'id': attack_template_id}, 'assignment': {'environment': assignment_environment, 'type': assignment_type}}
 
-        response = request.resource_request(url, 'put', payload=payload)
+        try:
+            response = request.resource_request(url, 'put', payload=payload)
+
+        except json.decoder.JSONDecodeError:
+            self.logger.error(f'InsightAppSec response: {response}')
+            raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
+                                        ' See log for more details')
 
         return {Output.STATUS: response['status']}

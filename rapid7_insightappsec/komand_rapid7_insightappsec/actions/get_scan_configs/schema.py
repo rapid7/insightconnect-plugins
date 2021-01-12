@@ -8,13 +8,16 @@ class Component:
 
 
 class Input:
+    INCLUDEERRORS = "include-errors"
     INDEX = "index"
     SIZE = "size"
     SORT = "sort"
     
 
 class Output:
-    SCAN_CONFIGS = "scan_configs"
+    DATA = "data"
+    LINKS = "links"
+    METADATA = "metadata"
     
 
 class GetScanConfigsInput(insightconnect_plugin_runtime.Input):
@@ -23,23 +26,33 @@ class GetScanConfigsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "include-errors": {
+      "type": "boolean",
+      "title": "Validation Errors",
+      "description": "Iclude validation errors in scan configs, can be expensive",
+      "default": true,
+      "order": 4
+    },
     "index": {
       "type": "integer",
       "title": "Index",
-      "description": "The page index to start form. If blank, index will be 0",
-      "order": 1
+      "description": "The page number of the return data set",
+      "default": 0,
+      "order": 2
     },
     "size": {
       "type": "integer",
       "title": "Size",
-      "description": "The number of entries on each page. If blank, size will be 50",
-      "order": 2
+      "description": "The data set size or the max number of apps to return per page",
+      "default": 100,
+      "order": 3
     },
     "sort": {
       "type": "string",
       "title": "Sort",
-      "description": "How to sort the scan configs. If blank, sort will be alphabetical by scan config name",
-      "order": 3
+      "description": "How to sort the response",
+      "default": "ASC",
+      "order": 1
     }
   }
 }
@@ -55,13 +68,28 @@ class GetScanConfigsOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "scan_configs": {
+    "data": {
       "type": "array",
       "title": "Scan Configs",
       "description": "A list of scan configurations",
       "items": {
         "$ref": "#/definitions/scan_config"
       },
+      "order": 2
+    },
+    "links": {
+      "type": "array",
+      "title": "Links to Data",
+      "description": "Links to data",
+      "items": {
+        "$ref": "#/definitions/link"
+      },
+      "order": 3
+    },
+    "metadata": {
+      "type": "object",
+      "title": "Metadata",
+      "description": "Metadata for the scan results",
       "order": 1
     }
   },

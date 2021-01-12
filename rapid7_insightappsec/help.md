@@ -37,6 +37,38 @@ Example input:
 
 ### Actions
 
+#### Submit Scan
+
+This action is used to submit a new scan.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|scan_config_id|uuid|None|True|UUID of the scan config to use|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
+
+Example input:
+
+```
+{
+  "scan_config_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|scan_id|string|True|Scan UUID|
+
+Example output:
+
+```
+{
+  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+}
+```
+
 #### Dissociate a User From an Application
 
 This action is used to remove a user from accessing an application.
@@ -66,6 +98,9 @@ Example input:
 Example output:
 
 ```
+{
+  "status": 204
+}
 ```
 
 #### Associate a User to an Application
@@ -97,6 +132,9 @@ Example input:
 Example output:
 
 ```
+{
+  "status": 201
+}
 ```
 
 #### Get Users Associated With an Application
@@ -215,13 +253,13 @@ This action is used to get limited details about an existing App.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|app_id|string|None|True|Application UUID|None|78c85b01-2a23-404d-ac5a-18324d8e3bda|
+|app_id|uuid|None|True|Application UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx|
 
 Example input:
 
 ```
 {
-  "app_id": "78c85b01-2a23-404d-ac5a-18324d8e3bda"
+  "app_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
 }
 ```
 
@@ -292,12 +330,16 @@ This action is used to get a page of all apps.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|sort|string|None|False|How to sort the response|None|ASC|
+|index|integer|0|False|The page number of the return data set|None|0|
+|size|integer|100|False|The data set size or the max number of apps to return per page|None|100|
+|sort|string|ASC|False|How to sort the response|None|ASC|
 
 Example input:
 
 ```
 {
+  "index": 0,
+  "size": 100,
   "sort": "ASC"
 }
 ```
@@ -306,13 +348,65 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|[]app|False|Response data|
+|data|[]app|False|App data|
 |links|[]link|False|Links to data|
 |metadata|object|False|Metadata for the app results|
 
 Example output:
 
 ```
+{
+  "data": [
+    {
+      "description": "https://betadash.example.com",
+      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
+      "links": [
+        {
+          "href": "https://us.api.insight.rapid7.com:443/ias/v1/apps/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
+          "rel": "self"
+        }
+      ],
+      "name": "ZA4-betadash.example.com"
+    },
+    {
+      "description": "http://literature.example.com/",
+      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
+      "links": [
+        {
+          "href": "https://us.api.insight.rapid7.com:443/ias/v1/apps/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
+          "rel": "self"
+        }
+      ],
+      "name": "36-007-0-literature.example.com/"
+    }
+  ],
+  "links": [
+    {
+      "href": "https://us.api.insight.rapid7.com:443/ias/v1/apps?index=0\u0026size=2",
+      "rel": "first"
+    },
+    {
+      "href": "https://us.api.insight.rapid7.com:443/ias/v1/apps",
+      "rel": "self"
+    },
+    {
+      "href": "https://us.api.insight.rapid7.com:443/ias/v1/apps?index=1\u0026size=2",
+      "rel": "next"
+    },
+    {
+      "href": "https://us.api.insight.rapid7.com:443/ias/v1/apps?index=793\u0026size=2",
+      "rel": "last"
+    }
+  ],
+  "metadata": {
+    "index": 0,
+    "size": 2,
+    "total_data": 1587,
+    "total_pages": 794
+  }
+}
+
+
 ```
 
 #### Get All Schedules
@@ -323,12 +417,16 @@ This action is used to get a page of Schedules.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|index|integer|0|False|The page number of the return data set|None|0|
+|size|integer|100|False|The data set size or the max number of apps to return per page|None|100|
 |sort|string|None|False|How to sort the response|None|ASC|
 
 Example input:
 
 ```
 {
+  "index": 0,
+  "size": 100,
   "sort": "ASC"
 }
 ```
@@ -344,6 +442,72 @@ Example input:
 Example output:
 
 ```
+{
+  "data": [
+    {
+      "enabled": true,
+      "first_start": "2020-11-16T18:30:00-05:00[US/Eastern]",
+      "frequency": {
+        "interval": 0,
+        "type": "ONCE"
+      },
+      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "links": [
+        {
+          "href": "https://us.api.insight.rapid7.com:443/ias/v1/schedules/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+          "rel": "self"
+        }
+        ],
+        "name": "rescan",
+        "scan_config": {
+          "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        }
+      },
+      {
+        "enabled": true,
+        "first_start": "2019-10-23T16:15:00-04:00[US/Eastern]",
+        "frequency": {
+          "interval": 0,
+          "type": "ONCE"
+        },
+        "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "links": [
+        {
+          "href": "https://us.api.insight.rapid7.com:443/ias/v1/schedules/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+          "rel": "self"
+        }
+      ],
+      "name": "rescan",
+      "scan_config": {
+        "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+      }
+    }
+  ],
+  "links": [
+    {
+      "href": "https://us.api.insight.rapid7.com:443/ias/v1/schedules?index=0\u0026size=2",
+      "rel": "first"
+      },
+      {
+        "href": "https://us.api.insight.rapid7.com:443/ias/v1/schedules",
+        "rel": "self"
+      },
+      {
+        "href": "https://us.api.insight.rapid7.com:443/ias/v1/schedules?index=1\u0026size=2",
+        "rel": "next"
+      },
+      {
+        "href": "https://us.api.insight.rapid7.com:443/ias/v1/schedules?index=382\u0026size=2",
+        "rel": "last"
+      }
+    ],
+    "metadata": {
+      "index": 0,
+      "size": 2,
+      "total_data": 765,
+      "total_pages": 383
+    }
+  }
 ```
 
 #### Create Scan Config
@@ -354,9 +518,9 @@ This action is used to create a new scan configuration.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|app_id|string|None|True|App UUID|None|78c85b01-2a23-404d-ac5a-18324d8e3bda|
-|assignment_environment|string|None|True|Where the scan will run from ON_PREMISE or CLOUD|['CLOUD', 'ON_PREMISE']|CLOUD|
-|assignment_id|string|None|True|The UUID of the engine Group|None|78c85b01-2a23-404d-ac5a-18324d8e3bda|
+|app_id|string|None|True|App UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
+|assignment_environment|string|CLOUD|True|Where the scan will run from ON_PREMISE or CLOUD|['CLOUD', 'ON_PREMISE']|CLOUD|
+|assignment_id|string|None|True|The UUID of the engine Group|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
 |assignment_type|string|ENGINE_GROUP|True|The type of engine assignment|None|ENGINE_GROUP|
 |attack_template_id|string|None|True|Attack template UUID|None|11111111-0000-0000-0000-000000000000|
 |config_description|string|None|False|The description of the scan configuration|None|Description for scan config|
@@ -366,9 +530,9 @@ Example input:
 
 ```
 {
-  "app_id": "78c85b01-2a23-404d-ac5a-18324d8e3bda",
+  "app_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
   "assignment_environment": "CLOUD",
-  "assignment_id": "78c85b01-2a23-404d-ac5a-18324d8e3bda",
+  "assignment_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
   "assignment_type": "ENGINE_GROUP",
   "attack_template_id": "11111111-0000-0000-0000-000000000000",
   "config_description": "Description for scan config",
@@ -380,13 +544,13 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|integer|False|Status code of the request|
+|scan_config_id|string|False|Application UUID|
 
 Example output:
 
 ```
 {
-  "status": 201
+  "scan_config_id": "00000000-0000-0000-000000000000"
 }
 ```
 
@@ -398,13 +562,13 @@ This action is used to get a scan configuration.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|scan_config_id|string|None|True|Scan configuration UUID|None|6a33ae79-5ebd-44a9-9a0a-f269876e90c9|
+|scan_config_id|string|None|True|Scan configuration UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx|
 
 Example input:
 
 ```
 {
-  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
 }
 ```
 
@@ -453,7 +617,10 @@ This action is used to update an existing scan configuration.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|app_id|string|None|True|App UUID|None|78c85b01-2a23-404d-ac5a-18324d8e3bda|
+|app_id|string|None|True|App UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx|
+|assignment_environment|string|CLOUD|False|Where the scan will run from ON_PREMISE or CLOUD|['CLOUD', 'ON_PREMISE']|CLOUD|
+|assignment_id|string|None|False|The UUID of the engine Group|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
+|assignment_type|string|ENGINE_GROUP|False|The type of engine assignment|None|ENGINE_GROUP|
 |attack_template_id|string|None|True|Attack template UUID|None|11111111-0000-0000-0000-000000000000|
 |config_description|string|None|False|The description of the scan configuration|None|Description of scan config|
 |config_name|string|None|True|The name of the scan configuration|None|Scan Config 1|
@@ -463,7 +630,10 @@ Example input:
 
 ```
 {
-  "app_id": "78c85b01-2a23-404d-ac5a-18324d8e3bda",
+  "app_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
+  "assignment_environment": "CLOUD",
+  "assignment_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "assignment_type": "ENGINE_GROUP",
   "attack_template_id": "11111111-0000-0000-0000-000000000000",
   "config_description": "Description of scan config",
   "config_name": "Scan Config 1",
@@ -493,13 +663,13 @@ This action is used to delete an existing scan config.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|scan_config_id|string|None|True|Scan configuration UUID|None|4569288e-2bb4-416e-a4ee-4f7add18afe0|
+|scan_config_id|string|None|True|Scan configuration UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx|
 
 Example input:
 
 ```
 {
-  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+  "scan_config_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
 }
 ```
 
@@ -525,17 +695,16 @@ This action is used to get a page of scan configurations, based on supplied pagi
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|index|integer|None|False|The page index to start form. If blank, index will be 0|None|0|
-|size|integer|None|False|The number of entries on each page. If blank, size will be 50|None|0|
-|sort|string|None|False|How to sort the scan configs. If blank, sort will be alphabetical by scan config name|None|scanconfig.name,DESC|
+|include-errors|boolean|True|False|Iclude validation errors in scan configs, can be expensive|None|False|
+|index|integer|0|False|The page number of the return data set|None|0|
+|size|integer|100|False|The data set size or the max number of apps to return per page|None|100|
+|sort|string|ASC|False|How to sort the response|None|scanconfig.name,DESC|
 
 Example input:
 
 ```
 {
-  "index": 0,
-  "size": 0,
-  "sort": "scanconfig.name,DESC"
+  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
 }
 ```
 
@@ -543,95 +712,83 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|scan_configs|[]scan_config|False|A list of scan configurations|
+|data|[]scan_config|False|A list of scan configurations|
+|links|[]link|False|Links to data|
+|metadata|object|False|Metadata for the scan results|
 
 Example output:
 
 ```
 {
-  "scan_configs": [
+  "data": [
     {
-      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
-      "config_name": "Test_create_action",
-      "config_description": "test create",
-      "app_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
-      "attack_template_id": "11111111-0000-0000-0000-000000000000",
-      "errors": [
-        "Seed URL list must not be empty",
-        "Crawling Scope Constraint list must not be empty"
-      ],
+      "app": {
+        "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+      },
+      "assignment": {
+        "environment": "CLOUD",
+        "type": "ENGINE_GROUP"
+      },
+      "attack_template": {
+        "id": "11111111-0000-0000-0000-000000000004"
+      },
+      "description": "no auth",
+      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
       "links": [
-        {
-          "rel": "self",
-          "href": "https://us.api.insight.rapid7.com:443/ias/v1/scan-configs/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
-        }
-      ]
-    },
-    {
-      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
-      "config_name": "Test_create_action",
-      "config_description": "test create",
-      "app_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
-      "attack_template_id": "11111111-0000-0000-0000-000000000000",
-      "errors": [
-        "Seed URL list must not be empty",
-        "Crawling Scope Constraint list must not be empty"
-      ],
-      "links": [
-        {
-          "rel": "self",
-          "href": "https://us.api.insight.rapid7.com:443/ias/v1/scan-configs/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
-        }
-      ]
-    },
-    {
-      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
-      "config_name": "update_test",
-      "config_description": "testing update",
-      "app_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
-      "attack_template_id": "11111111-0000-0000-0000-000000000000",
-      "errors": [],
-      "links": [
-        {
-          "rel": "self",
-          "href": "https://us.api.insight.rapid7.com:443/ias/v1/scan-configs/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
-        }
-      ]
-    }
-  ]
-}
-```
-
-#### Sumbit Scan
-
-This action is used to submit a new scan.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|scan_config_id|string|None|True|UUID of the scan config to use|None|a709c972-cb1f-4790-bfce-6ab74653900c|
-
-Example input:
-
-```
-{
-  "scan_config_id": "a709c972-cb1f-4790-bfce-6ab74653900c"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|status|integer|False|Status code of the request|
-
-Example output:
-
-```
-{
-  "status": 201
-}
+         {
+           "href": "https://us.api.insight.rapid7.com:443/ias/v1/scan-configs/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+           "rel": "self"
+         }
+       ],
+       "name": "00-000-0-EX-WK-Across-CORP"
+     },
+     {
+       "app": {
+         "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+       },
+       "assignment": {
+         "environment": "CLOUD",
+         "type": "ENGINE_GROUP"
+         },
+         "attack_template": {
+           "id": "11111111-0000-0000-0000-000000000004"
+         },
+         "description": "LOHING LOCKED OUT 8/6/2020\nuser: scan@example.com (keepass)",
+         "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+         "links": [
+           {
+             "href": "https://us.api.insight.rapid7.com:443/ias/v1/scan-configs/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+             "rel": "self"
+           }
+         ],
+         "name": "00-003-0-EX3-BE-HCE-EES-LCL-www.test-community"
+       }
+     ],
+     "links": [
+       {
+         "href": "https://us.api.insight.rapid7.com:443/ias/v1/scan-configs?index=0\u0026size=2",
+         "rel": "first"
+       },
+       {
+         "href": "https://us.api.insight.rapid7.com:443/ias/v1/scan-configs",
+         "rel": "self"
+       },
+       {
+         "href": "https://us.api.insight.rapid7.com:443/ias/v1/scan-configs?index=1\u0026size=2",
+         "rel": "next"
+       },
+       {
+         "href": "https://us.api.insight.rapid7.com:443/ias/v1/scan-configs?index=793\u0026size=2",
+         "rel": "last"
+       }
+     ],
+     "metadata": {
+       "index": 0,
+       "size": 2,
+       "total_data": 1587,
+       "total_pages": 794
+     }
+   }
 ```
 
 #### Get Scan
@@ -642,13 +799,13 @@ This action is used to get a scan.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|scan_id|string|None|True|The scans UUID|None|b0b343aa-7fc2-4a9a-bc18-5ac64df7791a|
+|scan_id|string|None|True|The scans UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx|
 
 Example input:
 
 ```
 {
-  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
 }
 ```
 
@@ -700,9 +857,7 @@ Example input:
 
 ```
 {
-  "index": 0,
-  "size": 50,
-  "sort": "scan.submit_time,DESC"
+  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
 }
 ```
 
@@ -710,33 +865,86 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|scans|[]scan|False|A list of scans|
+|data|[]scan|False|A list of scans|
+|links|[]link|False|Links to data|
+|metadata|object|False|Metadata for the scan results|
 
 Example output:
 
 ```
 {
-  "scans": [
+  "data": [
     {
-      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
-      "app_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
-      "scan_config_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
-      "submitter": {
-        "type": "USER",
+      "app": {
         "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
       },
-      "submit_time": "2019-01-08T22:04:46.402",
-      "completion_time": "2019-01-08T22:53:38.385",
-      "status": "COMPLETE",
-      "failure_reason": "",
+      "completion_time": "2020-09-18T05:17:19.023323",
+      "failure_reason": "BAD_AUTH",
+      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
       "links": [
         {
-          "rel": "self",
-          "href": "https://us.api.insight.rapid7.com:443/ias/v1/scans/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+          "href": "https://us.api.insight.rapid7.com:443/ias/v1/scans/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
+          "rel": "self"
         }
-      ]
+      ],
+      "scan_config": {
+        "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+      },
+      "status": "FAILED",
+      "submit_time": "2020-09-18T05:01:20.444567",
+      "submitter": {
+        "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
+        "type": "USER"
+      }
+    },
+    {
+      "app": {
+        "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+      },
+      "completion_time": "2020-09-20T05:26:43.782992",
+      "failure_reason": "NETWORK_UNAVAILABLE",
+      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
+      "links": [
+        {
+          "href": "https://us.api.insight.rapid7.com:443/ias/v1/scans/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
+          "rel": "self"
+        }
+      ],
+      "scan_config": {
+        "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+      },
+      "status": "FAILED",
+      "submit_time": "2020-09-20T05:01:24.252861",
+      "submitter": {
+        "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
+        "type": "USER"
+      }
     }
-  ]
+  ],
+  "links": [
+    {
+      "href": "https://us.api.insight.rapid7.com:443/ias/v1/scans?index=0\u0026size=2",
+      "rel": "first"
+    },
+    {
+      "href": "https://us.api.insight.rapid7.com:443/ias/v1/scans",
+      "rel": "self"
+    },
+    {
+      "href": "https://us.api.insight.rapid7.com:443/ias/v1/scans?index=1\u0026size=2",
+      "rel": "next"
+    },
+    {
+      "href": "https://us.api.insight.rapid7.com:443/ias/v1/scans?index=13461\u0026size=2",
+      "rel": "last"
+    }
+  ],
+  "metadata": {
+    "index": 0,
+    "size": 2,
+    "total_data": 26924,
+    "total_pages": 13462
+  }
 }
 ```
 
@@ -748,13 +956,13 @@ This action is used to delete a scan.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|scan_id|string|None|True|The scans UUID|None|b0b343aa-7fc2-4a9a-bc18-5ac64df7791a|
+|scan_id|uuid|None|True|The scans UUID|None|xxxxxxxx-xxxx-xxxx-xxxxxxxxxxxx|
 
 Example input:
 
 ```
 {
-  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxxxxxxxxxx"
 }
 ```
 
@@ -781,14 +989,14 @@ This action is used to submit a new scan action.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |action|string|Pause|True|Action to take|['Pause', 'Resume', 'Stop', 'Cancel', 'Authenticate']|Pause|
-|scan_id|string|None|True|Scan UUID|None|008eaffe-90ce-4de9-8601-40414391c21c|
+|scan_id|uuid|None|True|Scan UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
 
 Example input:
 
 ```
 {
   "action": "Pause",
-  "scan_id": "008eaffe-90ce-4de9-8601-40414391c21c"
+  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 }
 ```
 
@@ -814,13 +1022,13 @@ This action is used to get the engine events from a scan.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|scan_id|string|None|True|Scan UUID|None|c762adbe-1636-4c70-9787-5f22c2dc5af8|
+|scan_id|string|None|True|Scan UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx|
 
 Example input:
 
 ```
 {
-  "scan_id": "c762adbe-1636-4c70-9787-5f22c2dc5af8"
+  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
 }
 ```
 
@@ -851,13 +1059,13 @@ This action is used to get real-time details of the execution of a scan.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|scan_id|string|None|True|Scan UUID|None|c762adbe-1636-4c70-9787-5f22c2dc5af8|
+|scan_id|string|None|True|Scan UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx|
 
 Example input:
 
 ```
 {
-  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
 }
 ```
 
@@ -894,13 +1102,13 @@ This action is used to get the platform events from a scan.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|scan_id|string|None|True|Scan UUID|None|c762adbe-1636-4c70-9787-5f22c2dc5af8|
+|scan_id|string|None|True|Scan UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx|
 
 Example input:
 
 ```
 {
-  "scan_id": "b0b343aa-7fc2-4a9a-bc18-5ac64df7791a"
+  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
 }
 ```
 
@@ -941,6 +1149,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.0.0 - Update all actions with better error logging routine and adding all the current endpoints and actions that were missing in previous versions
 * 2.0.0
 * 1.0.2 - Update to v4 Python plugin runtime | Add example inputs
 * 1.0.1 - New spec and help.md format for the Extension Library

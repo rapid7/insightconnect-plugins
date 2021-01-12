@@ -8,6 +8,8 @@ class Component:
 
 
 class Input:
+    INDEX = "index"
+    SIZE = "size"
     SORT = "sort"
     
 
@@ -23,6 +25,20 @@ class GetSchedulesInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "index": {
+      "type": "integer",
+      "title": "Index",
+      "description": "The page number of the return data set",
+      "default": 0,
+      "order": 2
+    },
+    "size": {
+      "type": "integer",
+      "title": "Size",
+      "description": "The data set size or the max number of apps to return per page",
+      "default": 100,
+      "order": 3
+    },
     "sort": {
       "type": "string",
       "title": "Sort",

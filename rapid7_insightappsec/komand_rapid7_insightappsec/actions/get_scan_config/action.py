@@ -3,6 +3,7 @@ from .schema import GetScanConfigInput, GetScanConfigOutput, Input, Output
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import ScanConfig
 from komand_rapid7_insightappsec.util.resource_helper import ResourceHelper
+from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 
 
@@ -27,14 +28,17 @@ class GetScanConfig(insightconnect_plugin_runtime.Action):
             result = json.loads(response['resource'])
         except json.decoder.JSONDecodeError:
             self.logger.error(f'InsightAppSec response: {response}')
-            raise Exception('The response from InsightAppSec was not in JSON format. Contact support for help.'
-                            ' See log for more details')
+            raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
+                                        ' See log for more details')
         try:
             return {Output.ID: result['id'], Output.CONFIG_NAME: result['name'],
+                    Output.ASSIGNMENT_ENVIRONMENT: result['assignment']['environment'],
+                    Output.ASSIGNMENT_ID: result['assignment']['id'],
+                    Output.ASSIGNMENT_TYPE: result['assignment']['type'],
                     Output.CONFIG_DESCRIPTION: result.get('description', ''), Output.APP_ID: result['app']['id'],
                     Output.ATTACK_TEMPLATE_ID: result['attack_template']['id'],
                     Output.ERRORS: result.get('errors', list()), Output.LINKS: result['links']}
         except KeyError:
             self.logger.error(result)
-            raise Exception('The response from InsightAppSec was not in the correct format. Contact support for help.'
-                            ' See log for more details')
+            raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
+                                        ' See log for more details')

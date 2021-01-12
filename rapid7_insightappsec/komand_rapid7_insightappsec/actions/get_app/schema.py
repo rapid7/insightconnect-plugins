@@ -25,7 +25,7 @@ class GetAppInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "app_id": {
-      "type": "string",
+      "$ref": "#/definitions/uuid",
       "title": "Application ID",
       "description": "Application UUID",
       "order": 1
@@ -33,7 +33,21 @@ class GetAppInput(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "app_id"
-  ]
+  ],
+  "definitions": {
+    "uuid": {
+      "type": "object",
+      "title": "uuid",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "An ID string",
+          "description": "A string to identify a user, application, scan, engine, blackout",
+          "order": 1
+        }
+      }
+    }
+  }
 }
     """)
 

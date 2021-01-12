@@ -3,6 +3,7 @@ from .schema import GetScanInput, GetScanOutput, Input, Output
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import Scans
 from komand_rapid7_insightappsec.util.resource_helper import ResourceHelper
+from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 
 
@@ -27,8 +28,8 @@ class GetScan(insightconnect_plugin_runtime.Action):
             result = json.loads(response['resource'])
         except json.decoder.JSONDecodeError:
             self.logger.error(f'InsightAppSec response: {response}')
-            raise Exception('The response from InsightAppSec was not in JSON format. Contact support for help.'
-                            ' See log for more details')
+            raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
+                                        ' See log for more details')
 
         try:
             output = {'id': result['id'], 'app_id': result['app']['id'], 'scan_config_id': result['scan_config']['id'],
@@ -38,5 +39,5 @@ class GetScan(insightconnect_plugin_runtime.Action):
             return {Output.SCAN: output}
         except KeyError:
             self.logger.error(result)
-            raise Exception('The response from InsightAppSec was not in the correct format. Contact support for help.'
-                            ' See log for more details')
+            raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
+                                        ' See log for more details')

@@ -9,6 +9,9 @@ class Component:
 
 class Input:
     APP_ID = "app_id"
+    ASSIGNMENT_ENVIRONMENT = "assignment_environment"
+    ASSIGNMENT_ID = "assignment_id"
+    ASSIGNMENT_TYPE = "assignment_type"
     ATTACK_TEMPLATE_ID = "attack_template_id"
     CONFIG_DESCRIPTION = "config_description"
     CONFIG_NAME = "config_name"
@@ -30,6 +33,30 @@ class UpdateScanConfigInput(insightconnect_plugin_runtime.Input):
       "title": "App ID",
       "description": "App UUID",
       "order": 4
+    },
+    "assignment_environment": {
+      "type": "string",
+      "title": "Assignment Environment",
+      "description": "Where the scan will run from ON_PREMISE or CLOUD",
+      "default": "CLOUD",
+      "enum": [
+        "CLOUD",
+        "ON_PREMISE"
+      ],
+      "order": 6
+    },
+    "assignment_id": {
+      "type": "string",
+      "title": "Engine Group UUID",
+      "description": "The UUID of the engine Group",
+      "order": 7
+    },
+    "assignment_type": {
+      "type": "string",
+      "title": "Assignment Type",
+      "description": "The type of engine assignment",
+      "default": "ENGINE_GROUP",
+      "order": 8
     },
     "attack_template_id": {
       "type": "string",

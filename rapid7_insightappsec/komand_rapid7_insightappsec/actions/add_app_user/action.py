@@ -36,5 +36,3 @@ class AddAppUser(insightconnect_plugin_runtime.Action):
                 self.logger.error(f'InsightAppSec response: {response}')
                 raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
                                 ' See log for more details')
-
-                return {Output.STATUS: response['status']}

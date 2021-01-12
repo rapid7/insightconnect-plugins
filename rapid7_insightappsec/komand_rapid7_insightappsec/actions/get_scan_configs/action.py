@@ -3,6 +3,7 @@ from .schema import GetScanConfigsInput, GetScanConfigsOutput, Input, Output
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import ScanConfig
 from komand_rapid7_insightappsec.util.resource_helper import ResourceHelper
+from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 
 
@@ -16,28 +17,25 @@ class GetScanConfigs(insightconnect_plugin_runtime.Action):
                 output=GetScanConfigsOutput())
 
     def run(self, params={}):
-        request = ResourceHelper(self.connection.session, self.logger)
-
-        url = ScanConfig.scan_config(self.connection.url)
-
-        request_params = dict()
-        for item in params:
-            if params[item]:
-                request_params[item] = params[item]
-        response = request.resource_request(url, 'get', params=request_params)
+        sort = params.get(Input.SORT)
+        index = params.get(Input.INDEX)
+        size = params.get(Input.SIZE)
+        include_errors = params.get(Input.INCLUDEERRORS)
+        resource_helper = ResourceHelper(self.connection.session, self.logger)
+        endpoint = ScanConfig.scan_config(self.connection.url)
+        response = resource_helper.resource_request(endpoint, method="GET", params={"sort":sort, "index":index, "size":size, "include-errors":include_errors})
         try:
-            result = json.loads(response['resource'])
-            result = result['data']
+            response = json.loads(response["resource"])
         except json.decoder.JSONDecodeError:
             self.logger.error(f'InsightAppSec response: {response}')
-            raise Exception('The response from InsightAppSec was not in JSON format. Contact support for help.'
+            raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
                             ' See log for more details')
-
-        output = list()
-        for item in result:
-            temp = {'id': item['id'], 'config_name': item['name'],
-                    'config_description': item.get('description', ''), 'app_id': item['app']['id'],
-                    'attack_template_id': item['attack_template']['id'],
-                    'errors': item.get('errors', list()), 'links': item['links']}
-            output.append(temp)
-        return {Output.SCAN_CONFIGS: output}
+        try:
+            metadata = response['metadata']
+            data = response['data']
+            links = response['links']
+        except KeyError:
+            self.logger.error(f'InsightAppSec response: {response}')
+            raise PluginException(cause='The response from InsightAppSec was malformed.', assistance='Contact support for help.'
+                            ' See log for more details')
+        return {Output.METADATA:metadata, Output.DATA:data, Output.LINKS:links}

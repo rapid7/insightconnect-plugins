@@ -14,7 +14,9 @@ class Input:
     
 
 class Output:
-    SCANS = "scans"
+    DATA = "data"
+    LINKS = "links"
+    METADATA = "metadata"
     
 
 class GetScansInput(insightconnect_plugin_runtime.Input):
@@ -55,13 +57,28 @@ class GetScansOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "scans": {
+    "data": {
       "type": "array",
       "title": "Scans",
       "description": "A list of scans",
       "items": {
         "$ref": "#/definitions/scan"
       },
+      "order": 2
+    },
+    "links": {
+      "type": "array",
+      "title": "Links to Data",
+      "description": "Links to data",
+      "items": {
+        "$ref": "#/definitions/link"
+      },
+      "order": 3
+    },
+    "metadata": {
+      "type": "object",
+      "title": "Metadata",
+      "description": "Metadata for the scan results",
       "order": 1
     }
   },

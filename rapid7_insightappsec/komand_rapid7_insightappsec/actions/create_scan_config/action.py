@@ -3,7 +3,8 @@ from .schema import CreateScanConfigInput, CreateScanConfigOutput, Input, Output
 # Custom imports below
 from komand_rapid7_insightappsec.util.endpoints import ScanConfig
 from komand_rapid7_insightappsec.util.resource_helper import ResourceHelper
-
+from insightconnect_plugin_runtime.exceptions import PluginException
+import json
 
 class CreateScanConfig(insightconnect_plugin_runtime.Action):
 
@@ -27,8 +28,17 @@ class CreateScanConfig(insightconnect_plugin_runtime.Action):
         url = ScanConfig.scan_config(self.connection.url)
         payload = {'name': config_name, 'description': config_description,
                    'app': {'id': app_id}, 'attack_template': {'id': attack_template_id},
-                   'assignment': {'environment': assignment_environment, 'id': assignment_id, 'type': assignment_type}}
+                   'assignment': {'environment': assignment_environment, 'type': assignment_type}}
+        try:
+            response = request.resource_request(url, 'post', payload=payload)
 
-        response = request.resource_request(url, 'post', payload=payload)
+        except json.decoder.JSONDecodeError:
+            self.logger.error(f'InsightAppSec response: {response}')
+            raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
+                            ' See log for more details')
 
-        return {Output.STATUS: response['status']}
+        uuid = response.get("headers")
+        uuid = uuid.get("Location")
+        parts = uuid.split('/')
+        scan_config_id = parts[-1]
+        return {Output.SCAN_CONFIG_ID:scan_config_id}
