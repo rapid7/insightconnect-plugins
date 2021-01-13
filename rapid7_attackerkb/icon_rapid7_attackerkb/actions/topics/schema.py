@@ -68,7 +68,7 @@ class TopicsInput(komand.Input):
     "page": {
       "type": "integer",
       "title": "Page",
-      "description": "Pagination page number, default value is 0",
+      "description": "Pagination page number, default value is 0, example value is 1",
       "default": 0,
       "order": 8
     },
@@ -81,7 +81,7 @@ class TopicsInput(komand.Input):
     "size": {
       "type": "integer",
       "title": "Size",
-      "description": "The number of topics returned per page, default value is 10",
+      "description": "The number of topics returned per page, default value is 10, maximum size value is 500",
       "default": 10,
       "order": 9
     }
