@@ -4,21 +4,21 @@ sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase
 from komand_rapid7_insightidr.connection.connection import Connection
-from komand_rapid7_insightidr.actions.advanced_query_on_log import AdvancedQuery
+from komand_rapid7_insightidr.actions.advanced_query_on_log import AdvancedQueryOnLog
 from komand.exceptions import PluginException
 import json
 import logging
 
 
-class TestAdvancedQuery(TestCase):
+class TestAdvancedQueryOnLog(TestCase):
     def setup(self):
         log = logging.getLogger("Test")
         test_conn = Connection()
-        test_action = AdvancedQuery()
+        test_action = AdvancedQueryOnLog()
         test_conn.logger = log
         test_action.logger = log
         try:
-            with open("../tests/advanced_query.json") as file:
+            with open("../tests/advanced_query_on_log.json") as file:
                 test_json = json.loads(file.read()).get("body")
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
@@ -43,7 +43,7 @@ class TestAdvancedQuery(TestCase):
         test_action.connection = test_conn
         result = test_action.get_log_id("Active Directory")
 
-        self.assertIsNone(result) # Best we can do here, the log ID will change based on the instance used.
+        self.assertIsNotNone(result) # Best we can do here, the log ID will change based on the instance used.
 
     def test_get_log_fails(self):
         action_params, connection_params, test_action, test_conn = self.setup()

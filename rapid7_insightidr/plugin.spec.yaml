@@ -605,3 +605,69 @@ actions:
         description: Query Results
         type: "[]events"
         required: true
+
+  advanced_query_on_log_set:
+    title: Advanced Query on Log Set
+    description: Realtime query into an Insight IDR log set
+    input:
+      query:
+        title: Query
+        description: Query
+        type: string
+        example: "where(user=adagentadmin, loose)"
+        required: true
+      time_from:
+        title: Time From
+        description: Beginning time and date for the query
+        type: string
+        example: "01-01-2020"
+        required: true
+      time_to:
+        title: Time To
+        description: Ending date and time for the query. If this is left blank, the current time will be used
+        type: string
+        example: "12-31-2020"
+        required: false
+      timeout:
+        title: Timeout
+        description: Time in seconds to wait for the query to return. If exceeded the plugin will throw an error
+        type: int
+        example: 60
+        default: 60
+        required: true
+      log_set:
+        title: Log Set
+        description: Log Set to search
+        type: string
+        example: Firewall Activity
+        required: true
+        enum:
+          - Advanced Malware Alert
+          - Active Directory Admin Activity
+          - Asset Authentication
+          - Cloud Service Admin Activity
+          - Cloud Service Activity
+          - DNS Query
+          - Endpoint Activity
+          - EndPoint Agent
+          - Exploit Mitigation Alert
+          - File Access Activity
+          - File Modification Activity
+          - Firewall Activity
+          - Network Flow
+          - Host To IP Observations
+          - IDS Alert
+          - Ingress Authentication
+          - Raw Log
+          - SSO Authentication
+          - Unparsed Data
+          - Third Party Alert
+          - Virus Alert
+          - Web Proxy Activity
+
+    output:
+      results:
+        title: Query Results
+        description: Query Results
+        type: "[]events"
+        required: true

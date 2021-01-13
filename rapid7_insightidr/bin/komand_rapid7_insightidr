@@ -38,6 +38,8 @@ def main():
 
             self.add_action(actions.AdvancedQueryOnLog())
 
+            self.add_action(actions.AdvancedQueryOnLogSet())
+
             self.add_action(actions.AssignUserToInvestigation())
 
             self.add_action(actions.GetALog())
