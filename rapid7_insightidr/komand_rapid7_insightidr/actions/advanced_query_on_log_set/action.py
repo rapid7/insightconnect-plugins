@@ -1,7 +1,11 @@
+from dateutil.parser import ParserError
 import komand
 from .schema import AdvancedQueryOnLogSetInput, AdvancedQueryOnLogSetOutput, Input, Output, Component
 # Custom imports below
+import time
+import json
 from komand.exceptions import PluginException
+from dateutil.parser import parse, ParserError
 
 
 class AdvancedQueryOnLogSet(komand.Action):
@@ -15,7 +19,7 @@ class AdvancedQueryOnLogSet(komand.Action):
 
     def run(self, params={}):
         query = params.get(Input.QUERY)
-        log_set_name = params.get(Input.LOG)
+        log_set_name = params.get(Input.LOG_SET)
         timeout = params.get(Input.TIMEOUT)
 
         time_from_string = params.get(Input.TIME_FROM)
@@ -125,7 +129,7 @@ class AdvancedQueryOnLogSet(komand.Action):
         @param time_to: int
         @return: (callback url, list of log entries)
         """
-        endpoint = f"{self.connection.url}log_search/query/logs/{log_id}"
+        endpoint = f"{self.connection.url}log_search/query/logsets/{log_id}"
         params = {
             "query": query,
             "from": time_from,
@@ -138,8 +142,8 @@ class AdvancedQueryOnLogSet(komand.Action):
         try:
             response.raise_for_status()
         except Exception:
-            raise PluginException(cause="Failed to get logs from InsightIDR\n",
-                                  assistance=f"Could not get logs from: {endpoint}\n",
+            raise PluginException(cause="Failed to get log sets from InsightIDR\n",
+                                  assistance=f"Could not get log sets from: {endpoint}\n",
                                   data=response.text)
 
         results_object = response.json()
@@ -165,8 +169,8 @@ class AdvancedQueryOnLogSet(komand.Action):
         try:
             response.raise_for_status()
         except Exception:
-            raise PluginException(cause="Failed to get logs from InsightIDR",
-                                  assistance=f"Could not get logs from: {endpoint}",
+            raise PluginException(cause="Failed to get log sets from InsightIDR",
+                                  assistance=f"Could not get log sets from: {endpoint}",
                                   data=response.text)
 
         log_sets = response.json().get("logsets")
@@ -177,14 +181,14 @@ class AdvancedQueryOnLogSet(komand.Action):
             name = log_set.get('name')
             self.logger.info(f"Checking {log_name} against {name}")
             if name == log_name:
-                self.logger.info("Log found.")
+                self.logger.info("Log set found.")
                 id = log_set.get("id")
                 break
 
         if id:
-            self.logger.info(f"Found log with name {log_name} and ID: {id}")
+            self.logger.info(f"Found log set with name {log_name} and ID: {id}")
             return id
 
-        self.logger.error(f"Could not find log with name {log_name}")
-        raise PluginException(cause="Could not find specified log.",
-                              assistance=f"Could not find log with name: {log_name}")
+        self.logger.error(f"Could not find log set with name {log_name}")
+        raise PluginException(cause="Could not find specified log set.",
+                              assistance=f"Could not find log set with name: {log_name}")
