@@ -71,7 +71,65 @@ Example input:
 Example output:
 
 ```
-
+{
+  "results": [
+    {
+      "labels": [],
+      "timestamp": 1601598638768,
+      "sequence_number": 123456789123456789,
+      "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313",
+      "message": {
+        "timestamp": "2020-10-02T00:29:14.649Z",
+        "destination_asset": "iagent-win7",
+        "source_asset_address": "10.4.22.107",
+        "destination_asset_address": "example-host",
+        "destination_local_account": "user",
+        "logon_type": "NETWORK",
+        "result": "SUCCESS",
+        "new_authentication": "false",
+        "service": "ntlmssp ",
+        "source_json": {
+          "sourceName": "Microsoft-Windows-Security-Auditing",
+          "insertionStrings": [
+            "S-1-0-0",
+            "-",
+            "-",
+            "0x0",
+            "X-X-X-XXXXXXXXXXX",
+            "user@example.com",
+            "example-host",
+            "0x204f163c",
+            "3",
+            "NtLmSsp ",
+            "NTLM",
+            "",
+            "{00000000-0000-0000-0000-000000000000}",
+            "-",
+            "NTLM V2",
+            "128",
+            "0x0",
+            "-",
+            "192.168.50.1",
+            "59090"
+          ],
+          "eventCode": 4624,
+          "computerName": "example-host",
+          "sid": "",
+          "isDomainController": false,
+          "eventData": null,
+          "timeWritten": "2020-10-02T00:29:13.670722000Z"
+        }
+      },
+      "links": [
+        {
+          "rel": "Context",
+          "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"
+        }
+      ],
+      "sequence_number_str": "123456789123456789"
+    }
+  ]
+}
 ```
 
 #### Advanced Query on Log
