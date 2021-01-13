@@ -36,7 +36,7 @@ def main():
             )
             self.add_action(actions.AddIndicatorsToAThreat())
 
-            self.add_action(actions.AdvancedQuery())
+            self.add_action(actions.AdvancedQueryOnLog())
 
             self.add_action(actions.AssignUserToInvestigation())
 

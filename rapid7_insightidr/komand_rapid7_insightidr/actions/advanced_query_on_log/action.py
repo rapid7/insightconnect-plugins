@@ -1,5 +1,5 @@
 import komand
-from .schema import AdvancedQueryInput, AdvancedQueryOutput, Input, Output, Component
+from .schema import AdvancedQueryOnLogInput, AdvancedQueryOnLogOutput, Input, Output, Component
 from komand.exceptions import PluginException
 # Custom imports below
 import time
@@ -7,14 +7,14 @@ import json
 from dateutil.parser import parse, ParserError
 
 
-class AdvancedQuery(komand.Action):
+class AdvancedQueryOnLog(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='advanced_query',
+                name='advanced_query_on_log',
                 description=Component.DESCRIPTION,
-                input=AdvancedQueryInput(),
-                output=AdvancedQueryOutput())
+                input=AdvancedQueryOnLogInput(),
+                output=AdvancedQueryOnLogOutput())
 
     def run(self, params={}):
         query = params.get(Input.QUERY)

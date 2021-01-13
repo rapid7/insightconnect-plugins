@@ -564,9 +564,9 @@ actions:
         type: logsets_info
         required: true
 
-  advanced_query:
-    title: Advanced Query
-    description: Realtime query into Insight IDR logs
+  advanced_query_on_log:
+    title: Advanced Query on Log
+    description: Realtime query into an Insight IDR log
     input:
       query:
         title: Query
@@ -599,34 +599,6 @@ actions:
         type: string
         example: Firewall Activity
         required: true
-        enum:
-          - Advanced Malware Alert
-          - Active Directory
-          - Admin Activity
-          - Alert Audit Log
-          - Asset Authentication
-          - Cloud Service Admin Activity
-          - Cloud Service Activity
-          - DNS Query
-          - Endpoint Activity
-          - Endpoint Agents
-          - Exploit Mitigation Alert
-          - File Access Activity
-          - File Modification Activity
-          - Firewall Activity
-          - Log Updates
-          - Network Flow
-          - Host To IP Observations
-          - IDS Alert
-          - Ingress Authentication
-          - Raw Log
-          - SSO Authentication
-          - Unparsed Data
-          - Third Party Alert
-          - Virus Alert
-          - Web Access Log
-          - Windows Defender
-          - Web Proxy Activity
     output:
       results:
         title: Query Results

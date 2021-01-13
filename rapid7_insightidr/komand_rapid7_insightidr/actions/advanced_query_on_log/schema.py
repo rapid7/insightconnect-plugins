@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Realtime query into Insight IDR logs"
+    DESCRIPTION = "Realtime query into an Insight IDR log"
 
 
 class Input:
@@ -19,7 +19,7 @@ class Output:
     RESULTS = "results"
     
 
-class AdvancedQueryInput(komand.Input):
+class AdvancedQueryOnLogInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -29,35 +29,6 @@ class AdvancedQueryInput(komand.Input):
       "type": "string",
       "title": "Log",
       "description": "Log to search",
-      "enum": [
-        "Advanced Malware Alert",
-        "Active Directory",
-        "Admin Activity",
-        "Alert Audit Log",
-        "Asset Authentication",
-        "Cloud Service Admin Activity",
-        "Cloud Service Activity",
-        "DNS Query",
-        "Endpoint Activity",
-        "Endpoint Agents",
-        "Exploit Mitigation Alert",
-        "File Access Activity",
-        "File Modification Activity",
-        "Firewall Activity",
-        "Log Updates",
-        "Network Flow",
-        "Host To IP Observations",
-        "IDS Alert",
-        "Ingress Authentication",
-        "Raw Log",
-        "SSO Authentication",
-        "Unparsed Data",
-        "Third Party Alert",
-        "Virus Alert",
-        "Web Access Log",
-        "Windows Defender",
-        "Web Proxy Activity"
-      ],
       "order": 5
     },
     "query": {
@@ -99,7 +70,7 @@ class AdvancedQueryInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class AdvancedQueryOutput(komand.Output):
+class AdvancedQueryOnLogOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",

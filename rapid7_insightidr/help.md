@@ -36,15 +36,15 @@ Example input:
 
 ### Actions
 
-#### Advanced Query
+#### Advanced Query on Log
 
-This action is used to run realtime queries into Insight IDR logs.
+This action is used to realtime query into Insight IDR logs.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|log|string|None|True|Log to search|['Advanced Malware Alert', 'Active Directory', 'Admin Activity', 'Alert Audit Log', 'Asset Authentication', 'Cloud Service Admin Activity', 'Cloud Service Activity', 'DNS Query', 'Endpoint Activity', 'Endpoint Agents', 'Exploit Mitigation Alert', 'File Access Activity', 'File Modification Activity', 'Firewall Activity', 'Log Updates', 'Network Flow', 'Host To IP Observations', 'IDS Alert', 'Ingress Authentication', 'Raw Log', 'SSO Authentication', 'Unparsed Data', 'Third Party Alert', 'Virus Alert', 'Web Access Log', 'Windows Defender', 'Web Proxy Activity']|Firewall Activity|
+|log|string|None|True|Log to search|None|Firewall Activity|
 |query|string|None|True|Query|None|where(user=adagentadmin, loose)|
 |time_from|string|None|True|Beginning time and date for the query|None|01-01-2020|
 |time_to|string|None|False|Ending date and time for the query. If this is left blank, the current time will be used|None|12-31-2020|
@@ -204,9 +204,6 @@ This action is used to get a specific log from an account.
 Example input:
 
 ```
-{
-  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06"
-}
 ```
 
 ##### Output
