@@ -100,7 +100,6 @@ class AdvancedQueryOnLogSet(komand.Action):
             time.sleep(1)
             response = self.connection.session.get(callback_url)
 
-            # TODO: need to know what happens if we poll for a query that's not done
             try:
                 response.raise_for_status()
             except Exception:
