@@ -23,13 +23,13 @@ class AddAppUserInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "app_id": {
-      "$ref": "#/definitions/uuid",
+      "type": "string",
       "title": "Application ID",
       "description": "Application UUID",
       "order": 1
     },
     "user_id": {
-      "$ref": "#/definitions/uuid",
+      "type": "string",
       "title": "User ID",
       "description": "User UUID",
       "order": 2
@@ -38,21 +38,7 @@ class AddAppUserInput(insightconnect_plugin_runtime.Input):
   "required": [
     "app_id",
     "user_id"
-  ],
-  "definitions": {
-    "uuid": {
-      "type": "object",
-      "title": "uuid",
-      "properties": {
-        "id": {
-          "type": "string",
-          "title": "An ID string",
-          "description": "A string to identify a user, application, scan, engine, blackout",
-          "order": 1
-        }
-      }
-    }
-  }
+  ]
 }
     """)
 

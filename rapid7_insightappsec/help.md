@@ -45,8 +45,8 @@ This action is used to remove a user from accessing an application.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|app_id|uuid|None|True|Application UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
-|user_id|uuid|None|True|User UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
+|app_id|string|None|True|Application UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
+|user_id|string|None|True|User UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
 
 Example input:
 
@@ -66,6 +66,9 @@ Example input:
 Example output:
 
 ```
+{
+  "status": 204
+}
 ```
 
 #### Get Users Associated with an Application
@@ -90,11 +93,24 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|user_id|[]uuid|False|A list of users UUID|
+|user_id|[]submitter|False|A list of users UUID|
 
 Example output:
 
 ```
+{
+  "user_id": [
+    {
+      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    },
+    {
+      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    },
+    {
+      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    }
+  ]
+}
 ```
 
 #### Submit Scan
@@ -105,7 +121,7 @@ This action is used to submit a new scan.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|scan_config_id|uuid|None|True|UUID of the scan config to use|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
+|scan_config_id|string|None|True|UUID of the scan config to use|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
 
 Example input:
 
@@ -137,8 +153,8 @@ This action is used to add a user for access to an application.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|app_id|uuid|None|True|Application UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
-|user_id|uuid|None|True|User UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
+|app_id|string|None|True|Application UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
+|user_id|string|None|True|User UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
 
 Example input:
 
@@ -237,7 +253,7 @@ This action is used to get limited details about an existing App.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|app_id|uuid|None|True|Application UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx|
+|app_id|string|None|True|Application UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx|
 
 Example input:
 
@@ -504,7 +520,7 @@ This action is used to create a new scan configuration.
 |----|----|-------|--------|-----------|----|-------|
 |app_id|string|None|True|App UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
 |assignment_environment|string|CLOUD|True|Where the scan will run from ON_PREMISE or CLOUD|['CLOUD', 'ON_PREMISE']|CLOUD|
-|assignment_id|string|None|True|The UUID of the engine Group|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
+|assignment_id|string|default|True|The UUID of the engine Group|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
 |assignment_type|string|ENGINE_GROUP|True|The type of engine assignment|None|ENGINE_GROUP|
 |attack_template_id|string|None|True|Attack template UUID|None|11111111-0000-0000-0000-000000000000|
 |config_description|string|None|False|The description of the scan configuration|None|Description for scan config|
@@ -603,7 +619,7 @@ This action is used to update an existing scan configuration.
 |----|----|-------|--------|-----------|----|-------|
 |app_id|string|None|True|App UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx|
 |assignment_environment|string|CLOUD|False|Where the scan will run from ON_PREMISE or CLOUD|['CLOUD', 'ON_PREMISE']|CLOUD|
-|assignment_id|string|None|False|The UUID of the engine Group|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
+|assignment_id|string|default|False|The UUID of the engine Group|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
 |assignment_type|string|ENGINE_GROUP|False|The type of engine assignment|None|ENGINE_GROUP|
 |attack_template_id|string|None|True|Attack template UUID|None|11111111-0000-0000-0000-000000000000|
 |config_description|string|None|False|The description of the scan configuration|None|Description of scan config|
@@ -653,7 +669,7 @@ Example input:
 
 ```
 {
-  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  "scan_config_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
 }
 ```
 
@@ -688,10 +704,7 @@ Example input:
 
 ```
 {
-  "include-errors": false,
-  "index": 0,
-  "size": 100,
-  "sort": "scanconfig.name,DESC"
+  "scan_config_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
 }
 ```
 
@@ -740,7 +753,7 @@ Example output:
          "attack_template": {
            "id": "11111111-0000-0000-0000-000000000004"
          },
-         "description": "LOHING LOCKED OUT 8/6/2020\nuser: scan@example.com (keepass)",
+         "description": "LOHING LOCKED OUT 8/6/2020\nuser: user@example.com",
          "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
          "links": [
            {
@@ -945,7 +958,7 @@ This action is used to delete a scan.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|scan_id|uuid|None|True|The scans UUID|None|xxxxxxxx-xxxx-xxxx-xxxxxxxxxxxx|
+|scan_id|string|None|True|The scans UUID|None|xxxxxxxx-xxxx-xxxx-xxxxxxxxxxxx|
 
 Example input:
 
@@ -978,7 +991,7 @@ This action is used to submit a new scan action.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |action|string|Pause|True|Action to take|['Pause', 'Resume', 'Stop', 'Cancel', 'Authenticate']|Pause|
-|scan_id|uuid|None|True|Scan UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
+|scan_id|string|None|True|Scan UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
 
 Example input:
 
@@ -1138,8 +1151,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 3.0.0 - Update all actions with better error logging routine and adding all the current endpoints and actions that were missing in previous versions
-* 2.0.0
+* 2.0.0 - Update all actions with better error logging routine and adding all the current endpoints and actions that were missing in previous versions
 * 1.0.2 - Update to v4 Python plugin runtime | Add example inputs
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin

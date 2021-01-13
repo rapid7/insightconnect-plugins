@@ -49,6 +49,7 @@ class UpdateScanConfigInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Engine Group UUID",
       "description": "The UUID of the engine Group",
+      "default": "default",
       "order": 7
     },
     "assignment_type": {

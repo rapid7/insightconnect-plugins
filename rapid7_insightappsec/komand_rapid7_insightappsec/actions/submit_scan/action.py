@@ -17,7 +17,6 @@ class SubmitScan(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         scan_config_id = params.get(Input.SCAN_CONFIG_ID)
-        scan_config_id = scan_config_id['id']
         request = ResourceHelper(self.connection.session, self.logger)
 
         url = Scans.scans(self.connection.url)

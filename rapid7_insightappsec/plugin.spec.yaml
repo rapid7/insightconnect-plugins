@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightappsec
 title: Rapid7 InsightAppSec
 description: This plugin allows for the creation, configuration, and starting of scans. The plugin can also retrieve scan results and logging related to the execution of the scan
-version: 3.0.0
+version: 2.0.0
 vendor: rapid7
 status: []
 support: rapid7
@@ -77,6 +77,22 @@ types:
     attack_template_id:
       title: Attack Template ID
       description: Attack template UUID
+      type: string
+      required: false
+    assignment_environment:
+      title: Scan Environment
+      description: Which of two environments are used to run the scan action
+        (Rapid7 Cloud or a custom engine group)
+      type: string
+      required: false
+    assignment_type:
+      title: Scan Engine Group
+      description: This is always the string engine_group
+      type: string
+      required: false
+    assignment_id:
+      title: Scan Engine Group ID
+      description: UUID of a scan engine group.  No ID used for default groups
       type: string
       required: false
     errors:
@@ -239,12 +255,6 @@ types:
       description: A list of links
       type: '[]link'
       required: false
-  uuid:
-    id:
-      title: An ID string
-      description: A string to identify a user, application, scan, engine, blackout
-      type: string
-      required: false
   target:
     url:
       title: URL
@@ -336,7 +346,7 @@ actions:
       app_id:
         title: Application ID
         description: Application UUID
-        type: 'uuid'
+        type: string
         required: true
         example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
     output:
@@ -416,7 +426,7 @@ actions:
       user_id:
         title: Application User
         description: A list of users UUID
-        type: '[]uuid'
+        type: '[]submitter'
         required: false
   add_app_user:
     title: Associate a User to an Application
@@ -425,13 +435,13 @@ actions:
       app_id:
         title: Application ID
         description: Application UUID
-        type: 'uuid'
+        type: string
         required: true
         example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       user_id:
         title: User ID
         description: User UUID
-        type: 'uuid'
+        type: string
         required: true
         example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
     output:
@@ -447,13 +457,13 @@ actions:
       app_id:
         title: Application ID
         description: Application UUID
-        type: 'uuid'
+        type: string
         required: true
         example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       user_id:
         title: User ID
         description: User UUID
-        type: 'uuid'
+        type: string
         required: true
         example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
     output:
@@ -506,6 +516,7 @@ actions:
         required: true
         type: string
         example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        default: "default"
       assignment_type:
         title: Assignment Type
         description: The type of engine assignment
@@ -630,6 +641,7 @@ actions:
         required: false
         type: string
         example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        default: "default"
       assignment_type:
         title: Assignment Type
         description: The type of engine assignment
@@ -714,7 +726,7 @@ actions:
       scan_config_id:
         title: Scan Config ID
         description: UUID of the scan config to use
-        type: 'uuid'
+        type: string
         required: true
         example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
     output:
@@ -785,7 +797,7 @@ actions:
       scan_id:
         title: Scan ID
         description: The scans UUID
-        type: 'uuid'
+        type: string
         required: true
         example: "xxxxxxxx-xxxx-xxxx-xxxxxxxxxxxx"
     output:
@@ -801,7 +813,7 @@ actions:
       scan_id:
         title: Scan ID
         description: Scan UUID
-        type: 'uuid'
+        type: string
         required: true
         example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
       action:

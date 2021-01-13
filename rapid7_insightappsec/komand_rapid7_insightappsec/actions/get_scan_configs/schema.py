@@ -122,6 +122,24 @@ class GetScanConfigsOutput(insightconnect_plugin_runtime.Output):
           "description": "App UUID",
           "order": 4
         },
+        "assignment_environment": {
+          "type": "string",
+          "title": "Scan Environment",
+          "description": "Which of two environments are used to run the scan action (Rapid7 Cloud or a custom engine group)",
+          "order": 6
+        },
+        "assignment_id": {
+          "type": "string",
+          "title": "Scan Engine Group ID",
+          "description": "UUID of a scan engine group.  No ID used for default groups",
+          "order": 8
+        },
+        "assignment_type": {
+          "type": "string",
+          "title": "Scan Engine Group",
+          "description": "This is always the string engine_group",
+          "order": 7
+        },
         "attack_template_id": {
           "type": "string",
           "title": "Attack Template ID",
@@ -147,7 +165,7 @@ class GetScanConfigsOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
-          "order": 6
+          "order": 9
         },
         "id": {
           "type": "string",
@@ -162,7 +180,7 @@ class GetScanConfigsOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "$ref": "#/definitions/link"
           },
-          "order": 7
+          "order": 10
         }
       },
       "definitions": {

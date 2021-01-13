@@ -31,6 +31,10 @@ class GetScanConfig(insightconnect_plugin_runtime.Action):
             raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
                                         ' See log for more details')
         try:
+            result['assignment']['id']
+        except KeyError:
+            result['assignment']['id'] = "default"
+        try:
             return {Output.ID: result['id'], Output.CONFIG_NAME: result['name'],
                     Output.ASSIGNMENT_ENVIRONMENT: result['assignment']['environment'],
                     Output.ASSIGNMENT_ID: result['assignment']['id'],

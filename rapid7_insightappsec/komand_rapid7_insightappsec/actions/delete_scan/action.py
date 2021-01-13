@@ -17,7 +17,6 @@ class DeleteScan(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         scan_id = params.get(Input.SCAN_ID)
-        scan_id = scan_id['id']
         request = ResourceHelper(self.connection.session, self.logger)
 
         url = Scans.scans(self.connection.url)

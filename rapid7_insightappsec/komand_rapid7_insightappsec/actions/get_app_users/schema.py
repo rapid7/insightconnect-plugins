@@ -49,20 +49,26 @@ class GetAppUsersOutput(insightconnect_plugin_runtime.Output):
       "title": "Application User",
       "description": "A list of users UUID",
       "items": {
-        "$ref": "#/definitions/uuid"
+        "$ref": "#/definitions/submitter"
       },
       "order": 1
     }
   },
   "definitions": {
-    "uuid": {
+    "submitter": {
       "type": "object",
-      "title": "uuid",
+      "title": "submitter",
       "properties": {
         "id": {
           "type": "string",
-          "title": "An ID string",
-          "description": "A string to identify a user, application, scan, engine, blackout",
+          "title": "ID",
+          "description": "The submitters UUID",
+          "order": 2
+        },
+        "submitter_type": {
+          "type": "string",
+          "title": "Type",
+          "description": "The type of the submitter e.g. USER",
           "order": 1
         }
       }

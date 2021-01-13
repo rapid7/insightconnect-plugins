@@ -37,7 +37,7 @@ class SubmitScanActionInput(insightconnect_plugin_runtime.Input):
       "order": 2
     },
     "scan_id": {
-      "$ref": "#/definitions/uuid",
+      "type": "string",
       "title": "Scan ID",
       "description": "Scan UUID",
       "order": 1
@@ -46,21 +46,7 @@ class SubmitScanActionInput(insightconnect_plugin_runtime.Input):
   "required": [
     "action",
     "scan_id"
-  ],
-  "definitions": {
-    "uuid": {
-      "type": "object",
-      "title": "uuid",
-      "properties": {
-        "id": {
-          "type": "string",
-          "title": "An ID string",
-          "description": "A string to identify a user, application, scan, engine, blackout",
-          "order": 1
-        }
-      }
-    }
-  }
+  ]
 }
     """)
 
