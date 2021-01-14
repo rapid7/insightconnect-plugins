@@ -576,7 +576,7 @@ actions:
         required: true
       time_from:
         title: Time From
-        description: Beginning time and date for the query. The format is flexible and will work with simple dates to full ISO time
+        description: Beginning time and date for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
         type: string
         example: "01-01-2020T00:00:00"
         required: true
