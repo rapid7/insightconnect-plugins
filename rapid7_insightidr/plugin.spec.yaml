@@ -584,7 +584,7 @@ actions:
         title: Time To
         description: Ending date and time for the query. If this is left blank, the current time will be used. The format is flexible and will work with simple dates to full ISO time
         type: string
-        example: "12-31-202012-31-2020T00:00:00"
+        example: "12-31-2020T00:00:00"
         required: false
       timeout:
         title: Timeout
