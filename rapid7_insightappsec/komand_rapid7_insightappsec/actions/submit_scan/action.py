@@ -25,7 +25,7 @@ class SubmitScan(insightconnect_plugin_runtime.Action):
         try:
             response = request.resource_request(url, 'post', payload=payload)
 
-        except json.decoder.JSONDecodeError:
+        except (json.decoder.JSONDecodeError, TypeError, KeyError):
             self.logger.error(f'InsightAppSec response: {response}')
             raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
                                         ' See log for more details')

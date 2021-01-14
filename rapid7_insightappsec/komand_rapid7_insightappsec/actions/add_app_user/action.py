@@ -30,7 +30,7 @@ class AddAppUser(insightconnect_plugin_runtime.Action):
         else:
             try:
                 result = json.loads(response['resource'])
-            except json.decoder.JSONDecodeError:
+            except (json.decoder.JSONDecodeError, TypeError, KeyError):
                 self.logger.error(f'InsightAppSec response: {response}')
                 raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
                                 ' See log for more details')
