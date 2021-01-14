@@ -134,7 +134,7 @@ Example output:
 
 #### Advanced Query on Log
 
-This action is used to realtime query into Insight IDR logs.
+This action is used to realtime query into Insight IDR logs. This action should be used if querying an individual service or device. 
 
 ##### Input
 
@@ -230,7 +230,7 @@ Example output:
 
 #### Get All Logs
 
-This action is used to request a list of all Logs for an account.
+This action is used to request a list of all Logs for an account. This action should be used when querying multiple related services. 
 
 ##### Input
 
