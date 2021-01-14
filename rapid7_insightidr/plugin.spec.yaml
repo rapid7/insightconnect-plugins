@@ -566,25 +566,25 @@ actions:
 
   advanced_query_on_log:
     title: Advanced Query on Log
-    description: Realtime query into an Insight IDR log
+    description: Realtime query into an Insight IDR log. This will query individual logs for results
     input:
       query:
         title: Query
-        description: Query
+        description: LQL Query
         type: string
         example: "where(user=adagentadmin, loose)"
         required: true
       time_from:
         title: Time From
-        description: Beginning time and date for the query
+        description: Beginning time and date for the query. The format is flexible and will work with simple dates to full ISO time
         type: string
-        example: "01-01-2020"
+        example: "01-01-2020T00:00:00"
         required: true
       time_to:
         title: Time To
-        description: Ending date and time for the query. If this is left blank, the current time will be used
+        description: Ending date and time for the query. If this is left blank, the current time will be used. The format is flexible and will work with simple dates to full ISO time
         type: string
-        example: "12-31-2020"
+        example: "12-31-202012-31-2020T00:00:00"
         required: false
       timeout:
         title: Timeout
@@ -608,25 +608,25 @@ actions:
 
   advanced_query_on_log_set:
     title: Advanced Query on Log Set
-    description: Realtime query into an Insight IDR log set
+    description: Realtime query into an Insight IDR log set. This will query entire log sets for results
     input:
       query:
         title: Query
-        description: Query
+        description: LQL Query
         type: string
         example: "where(user=adagentadmin, loose)"
         required: true
       time_from:
         title: Time From
-        description: Beginning time and date for the query
+        description: Beginning time and date for the query. The format is flexible and will work with simple dates to full ISO time
         type: string
-        example: "01-01-2020"
+        example: "01-01-2020T00:00:00"
         required: true
       time_to:
         title: Time To
-        description: Ending date and time for the query. If this is left blank, the current time will be used
+        description: Ending date and time for the query. If this is left blank, the current time will be used. The format is flexible and will work with simple dates to full ISO time
         type: string
-        example: "12-31-2020"
+        example: "12-31-2020T00:00:00"
         required: false
       timeout:
         title: Timeout

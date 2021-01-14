@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Realtime query into an Insight IDR log"
+    DESCRIPTION = "Realtime query into an Insight IDR log. This will query individual logs for results"
 
 
 class Input:
@@ -34,19 +34,19 @@ class AdvancedQueryOnLogInput(komand.Input):
     "query": {
       "type": "string",
       "title": "Query",
-      "description": "Query",
+      "description": "LQL Query",
       "order": 1
     },
     "time_from": {
       "type": "string",
       "title": "Time From",
-      "description": "Beginning time and date for the query",
+      "description": "Beginning time and date for the query. The format is flexible and will work with simple dates to full ISO time",
       "order": 2
     },
     "time_to": {
       "type": "string",
       "title": "Time To",
-      "description": "Ending date and time for the query. If this is left blank, the current time will be used",
+      "description": "Ending date and time for the query. If this is left blank, the current time will be used. The format is flexible and will work with simple dates to full ISO time",
       "order": 3
     },
     "timeout": {
