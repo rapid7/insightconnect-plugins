@@ -648,7 +648,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.0 - Update to refactor advanced query. Split Advanced Query into two new actions Advanced Query on Log and Advanced Query on Log Set
+* 2.0.0 - Refactor and split Advanced Query into two new actions Advanced Query on Log and Advanced Query on Log Set
 * 1.5.0 - New actions Get a Log and Get All Logs
 * 1.4.0 - New action Advanced Query
 * 1.3.1 - Fix ID input description in Get Query Results action
