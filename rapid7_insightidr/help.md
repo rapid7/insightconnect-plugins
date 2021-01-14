@@ -40,6 +40,8 @@ Example input:
 
 This action is used to realtime query into an Insight IDR log set.
 
+This action should be used when querying a collection of related services.
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -134,7 +136,9 @@ Example output:
 
 #### Advanced Query on Log
 
-This action is used to realtime query into Insight IDR logs. This action should be used if querying an individual service or device. 
+This action is used to realtime query into Insight IDR logs. 
+
+This action should be used if querying an individual service or device. 
 
 ##### Input
 
