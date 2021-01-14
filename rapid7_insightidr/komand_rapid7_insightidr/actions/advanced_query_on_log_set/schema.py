@@ -64,13 +64,13 @@ class AdvancedQueryOnLogSetInput(komand.Input):
     "time_from": {
       "type": "string",
       "title": "Time From",
-      "description": "Beginning time and date for the query. The format is flexible and will work with simple dates to full ISO time",
+      "description": "Beginning time and date for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)",
       "order": 2
     },
     "time_to": {
       "type": "string",
       "title": "Time To",
-      "description": "Ending date and time for the query. If this is left blank, the current time will be used. The format is flexible and will work with simple dates to full ISO time",
+      "description": "Ending date and time for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)",
       "order": 3
     },
     "timeout": {

@@ -48,8 +48,8 @@ This action should be used when querying a collection of related services.
 |----|----|-------|--------|-----------|----|-------|
 |log_set|string|None|True|Log Set to search|['Advanced Malware Alert', 'Active Directory Admin Activity', 'Asset Authentication', 'Cloud Service Admin Activity', 'Cloud Service Activity', 'DNS Query', 'Endpoint Activity', 'EndPoint Agent', 'Exploit Mitigation Alert', 'File Access Activity', 'File Modification Activity', 'Firewall Activity', 'Network Flow', 'Host To IP Observations', 'IDS Alert', 'Ingress Authentication', 'Raw Log', 'SSO Authentication', 'Unparsed Data', 'Third Party Alert', 'Virus Alert', 'Web Proxy Activity']|Firewall Activity|
 |query|string|None|True|LQL Query|None|where(user=adagentadmin, loose)|
-|time_from|string|None|True|Beginning time and date for the query. The format is flexible and will work with simple dates to full ISO time|None|01-01-2020T00:00:00|
-|time_to|string|None|False|Ending date and time for the query. If this is left blank, the current time will be used. The format is flexible and will work with simple dates to full ISO time|None|12-31-2020T00:00:00|
+|time_from|string|None|True|Beginning time and date for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|01-01-2020T00:00:00|
+|time_to|string|None|False|Ending date and time for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|12-31-2020T00:00:00|
 |timeout|int|60|True|Time in seconds to wait for the query to return. If exceeded the plugin will throw an error|None|60|
 
 Example input:
@@ -59,7 +59,7 @@ Example input:
   "log": "Firewall Activity",
   "query": "where(user=adagentadmin, loose)",
   "time_from": "01-01-2020T00:00:00",
-  "time_to": "12-31-202012-31-2020T00:00:00",
+  "time_to": "12-31-2020T00:00:00",
   "timeout": 60
 }
 ```
@@ -146,8 +146,8 @@ This action should be used if querying an individual service or device.
 |----|----|-------|--------|-----------|----|-------|
 |log|string|None|True|Log to search|None|Firewall Activity|
 |query|string|None|True|LQL Query|None|where(user=adagentadmin, loose)|
-|time_from|string|None|True|Beginning time and date for the query. The format is flexible and will work with simple dates to full ISO time|None|01-01-2020T00:00:00|
-|time_to|string|None|False|Ending date and time for the query. If this is left blank, the current time will be used. The format is flexible and will work with simple dates to full ISO time|None|12-31-202012-31-2020T00:00:00|
+|time_from|string|None|True|Beginning time and date for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|01-01-2020T00:00:00|
+|time_to|string|None|False|Ending date and time for the query. If this is left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|12-31-2020T00:00:00|
 |timeout|int|60|True|Time in seconds to wait for the query to return. If exceeded the plugin will throw an error|None|60|
 
 Example input:
@@ -157,7 +157,7 @@ Example input:
   "log": "Firewall Activity",
   "query": "where(user=adagentadmin, loose)",
   "time_from": "01-01-2020T00:00:00",
-  "time_to": "12-31-202012-31-2020T00:00:00",
+  "time_to": "12-31-2020T00:00:00",
   "timeout": 60
 }
 ```
@@ -304,9 +304,6 @@ This action is used to get a specific log from an account.
 Example input:
 
 ```
-{
-  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06"
-}
 ```
 
 ##### Output
