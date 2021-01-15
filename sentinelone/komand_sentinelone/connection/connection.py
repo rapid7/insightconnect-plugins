@@ -78,7 +78,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         # Find the list of supported consoles for each API in the SentinelOne API docs
         if r.status_code != 200:
             if version == "2.1":
-                self.logger.info("API v2.1 failed...trying v2.0")
+                self.logger.info("API v2.1 failed... trying v2.0")
                 token = self.get_auth_token(url, username, password, version="2.0")
 
             # We know the connection failed when both 2.1 and 2.0 do not give 200 responses
