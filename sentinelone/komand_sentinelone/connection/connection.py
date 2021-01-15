@@ -8,6 +8,7 @@ import zipfile
 import io
 import base64
 import time
+from komand_sentinelone.util.helper import Helper
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -66,7 +67,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         r = requests.post(final_url, json=auth_headers)
         if r.status_code == 401:
             raise ConnectionTestException(
-                cause="Could not authorize with SentinelOne instance at: " + final_url,
+                cause=f"Could not authorize with SentinelOne instance at: {final_url}.",
                 assistance="Your 'username' in connection configuration should be an e-mail address. Check if your e-mail address is correct. Response was: " + r.text
             )
 
@@ -83,8 +84,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
             # We know the connection failed when both 2.1 and 2.0 do not give 200 responses
             if not token:
                 raise ConnectionTestException(
-                    cause="Could not authorize with SentinelOne instance at: " + final_url,
-                    assistance="Response was: " + r.text
+                    cause=f"Could not authorize with SentinelOne instance at: {final_url}.",
+                    assistance=f"Response was: {r.text}"
                 )
 
         if version == "2.0":
@@ -140,7 +141,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         agent_filter["sortOrder"] = "desc"
         activities = self.activities_list(agent_filter)
         while not activities["data"]:
-            self.logger.info("Waiting for successful threat file upload...waiting 5 seconds")
+            self.logger.info("Waiting 5 seconds for successful threat file upload...")
             time.sleep(5)
             activities = self.activities_list(agent_filter)
         self.get_auth_token(self.url, self.username, self.password)
@@ -171,12 +172,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def get_threat_summary(self, limit: int = 1000):
         first_page_endpoint = f"threats?limit={limit}"
 
-        threats = self._call_api("GET", first_page_endpoint)
+        # API v2.0 and 2.1 have different responses -- revert to 2.0
+        threats = self._call_api("GET", first_page_endpoint, override_api_version="2.0")
         all_threads_data = threats["data"]
         next_cursor = threats["pagination"]["nextCursor"]
 
         while next_cursor:
-            next_threats = self._call_api("GET", f"{first_page_endpoint}&cursor={next_cursor}")
+            next_threats = self._call_api("GET", f"{first_page_endpoint}&cursor={next_cursor}", override_api_version="2.0")
             all_threads_data += next_threats["data"]
             next_cursor = next_threats["pagination"]["nextCursor"]
 
@@ -201,7 +203,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         results = requests.post(endpoint, json=body, headers=headers)
         if results.status_code != 200:
             raise PluginException(cause="Could not blacklist file hash.",
-                                  assistance="Result was: " + results.text)
+                                  assistance=f"Result was: {results.text}")
 
         return results.json()
 
@@ -272,20 +274,43 @@ class Connection(insightconnect_plugin_runtime.Connection):
         for site in sites:
             site_ids.append(site.get("id"))
         errors = []
-        for os_type in ["linux", "windows", "macos"]:
-            errors.extend(self._call_api("POST", "restrictions", json={
-                "data": {
-                    "value": blacklist_hash,
-                    "type": "black_hash",
-                    "osType": os_type,
-                    "description": description
-                },
-                "filter": {
-                    "siteIds": site_ids
-                }
-            }).get("errors", []))
+
+        already_blacklisted = self.get_existing_blacklist(blacklist_hash)
+
+        if already_blacklisted:
+            self.logger.info(f"{blacklist_hash} has already been blacklisted.")
+        else:
+            for os_type in ["linux", "windows", "macos"]:
+                errors.extend(self._call_api("POST", "restrictions", json={
+                    "data": {
+                        "value": blacklist_hash,
+                        "type": "black_hash",
+                        "osType": os_type,
+                        "description": description
+                    },
+                    "filter": {
+                        "siteIds": site_ids
+                    }
+                }).get("errors", []))
 
         return errors
+
+    def get_existing_blacklist(self, blacklist_hash: str):
+        ids = self.get_item_ids_by_hash(blacklist_hash)
+        ids = Helper.join_or_empty(ids)
+        if not ids:
+            return False
+
+        response = self._call_api("GET", "restrictions", params={
+            "type": "black_hash",
+            "ids": ids,
+        })
+
+        existing_os_types = []
+        for blacklist_entry in response.get("data", []):
+            existing_os_types.append(blacklist_entry.get("osType"))
+
+        return set(existing_os_types) == {"linux", "windows", "macos"}
 
     def get_item_ids_by_hash(self, blacklist_hash: str):
         response = self._call_api("GET", "restrictions", params={
@@ -300,8 +325,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 ids.append(restriction.get("id"))
             return ids
 
-        raise PluginException(cause="The hash does not exist to unblacklist.",
-                              assistance="Please enter a hash that has been blacklisted.")
+        errors = "\n".join(response.get("errors"))
+
+        raise PluginException(cause="An error occured when trying to unblacklist.",
+                              assistance=f"The following error(s) occured: {errors}")
 
     def delete_blacklist_item_by_hash(self, item_ids: str):
         return self._call_api("DELETE", "restrictions", json={

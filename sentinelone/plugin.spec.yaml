@@ -1013,7 +1013,7 @@ actions:
         example: true
       skip:
         title: Skip First N Items
-        description: Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead
+        description: Skip first number of items (0-1000). Will return the number entries specified in the 'limit' input (default is 10)
         type: integer
         required: false
         example: 1
@@ -1071,12 +1071,6 @@ actions:
         type: string
         required: false
         example: "1514978764288-1514978999999"
-      cursor:
-        title: Cursor Position
-        description: Cursor position returned by the last request. Should be used for iterating over more than 1000 items
-        type: string
-        required: false
-        example: "YWdlbnRfaWQ6NTgwMjkzODE="
       count_only:
         title: Count Only
         description: If true, only total number of items will be returned, without any of the actual objects
@@ -1091,7 +1085,7 @@ actions:
         example: ["400000000000000000"]
       limit:
         title: Limit
-        description: Limit number of returned items (1-100)
+        description: Limit number of returned items (1-1000)
         type: integer
         required: false
         example: 10
@@ -1274,7 +1268,7 @@ actions:
     input:
       filter:
         title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents. Note - decommission, disconnect, restart-machine, shutdown and uninstall actions require that one of the following filter arguments be supplied - ids, groupIds, filterId
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents. Note - decommission, disconnect, restart-machine, shutdown and uninstall actions require that one of the following filter arguments be supplied - ids, groupIds, or filterId
         type: object
         required: true
         example: '{"ids": ["1000000000000000000"]}'

@@ -42,7 +42,7 @@ class AgentsActionInput(insightconnect_plugin_runtime.Input):
     "filter": {
       "type": "object",
       "title": "Filter JSON",
-      "description": "Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents. Note - decommission, disconnect, restart-machine, shutdown and uninstall actions require that one of the following filter arguments be supplied - ids, groupIds, filterId",
+      "description": "Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents. Note - decommission, disconnect, restart-machine, shutdown and uninstall actions require that one of the following filter arguments be supplied - ids, groupIds, or filterId",
       "default": "{}",
       "order": 1
     }

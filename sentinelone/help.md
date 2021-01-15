@@ -50,7 +50,7 @@ This action is used to perform actions relating to your SentinelOne agents. This
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |action|string|None|True|Agent action to run|['abort-scan', 'connect', 'decommission', 'disconnect', 'fetch-logs', 'initiate-scan', 'restart-machine', 'shutdown', 'uninstall']|connect|
-|filter|object|{}|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents. Note - decommission, disconnect, restart-machine, shutdown and uninstall actions require that one of the following filter arguments be supplied - ids, groupIds, filterId|None|{"ids": ["1000000000000000000"]}|
+|filter|object|{}|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents. Note - decommission, disconnect, restart-machine, shutdown and uninstall actions require that one of the following filter arguments be supplied - ids, groupIds, or filterId|None|{"ids": ["1000000000000000000"]}|
 
 Example input:
 
@@ -127,13 +127,12 @@ This action is used to get a list of activities.
 |created_at_gte|string|None|False|Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|2020-12-20T18:49:26.257525Z|
 |created_at_lt|string|None|False|Return activities created before this date in ISO-8601|None|2020-12-20T18:49:26.257525Z|
 |created_at_lte|string|None|False|Return activities created before or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|2020-12-20T18:49:26.257525Z|
-|cursor|string|None|False|Cursor position returned by the last request. Should be used for iterating over more than 1000 items|None|YWdlbnRfaWQ6NTgwMjkzODE=|
 |group_ids|[]string|None|False|List of Group IDs|None|["500000000000000000"]|
 |ids|[]string|None|False|List of Activity IDs|None|["800000000000000008"]|
 |include_hidden|boolean|None|False|Include internal activities hidden from display|None|True|
-|limit|integer|10|False|Limit number of returned items (1-100)|None|10|
+|limit|integer|10|False|Limit number of returned items (1-1000)|None|10|
 |site_ids|[]string|None|False|List of Site IDs to filter by|None|["5000000000000001"]|
-|skip|integer|None|False|Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead|None|1|
+|skip|integer|None|False|Skip first number of items (0-1000). Will return the number entries specified in the 'limit' input (default is 10)|None|1|
 |skip_count|boolean|None|False|If true, total number of items will not be calculated, which speeds up execution time|None|True|
 |sort_by|string|createdAt|False|The column to sort the results by|['id', 'activityType', 'createdAt']|createdAt|
 |sort_order|string|asc|False|Sort direction|['asc', 'desc']|asc|
@@ -161,7 +160,6 @@ Example input:
   "created_at_gte": "2020-12-20T18:49:26.257525Z",
   "created_at_lt": "2020-12-20T18:49:26.257525Z",
   "created_at_lte": "2020-12-20T18:49:26.257525Z",
-  "cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
   "group_ids": [
     "500000000000000000"
   ],

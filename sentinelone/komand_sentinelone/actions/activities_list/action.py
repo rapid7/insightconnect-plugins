@@ -24,10 +24,9 @@ class ActivitiesList(insightconnect_plugin_runtime.Action):
             "ids": Helper.join_or_empty(params.get(Input.IDS, [])),
             "createdAt__lt": params.get(Input.CREATED_AT_LT, None),
             "createdAt__lte": params.get(Input.CREATED_AT_LTE, None),
-            "cursor": params.get(Input.CURSOR, None),
             "countOnly": params.get(Input.COUNT_ONLY, False),
             "accountIds": Helper.join_or_empty(params.get(Input.ACCOUNT_IDS, [])),
-            "limit": params.get(Input.LIMIT, 10),
+            "limit": params.get(Input.LIMIT, 1000),
             "sortBy": params.get(Input.SORT_BY, None),
             "createdAt__gt": params.get(Input.CREATED_AT_GT, None),
             "createdAt__between": params.get(Input.CREATED_AT_BETWEEN, None),
@@ -42,7 +41,7 @@ class ActivitiesList(insightconnect_plugin_runtime.Action):
         data = []
         self.add_to_data(data, response)
 
-        limit = params.get(Input.LIMIT, None)
+        limit = params.get(Input.LIMIT, 1000)
 
         pagination = response.get("pagination")
         next_cursor = pagination.get("nextCursor")

@@ -17,7 +17,6 @@ class Input:
     CREATED_AT_GTE = "created_at_gte"
     CREATED_AT_LT = "created_at_lt"
     CREATED_AT_LTE = "created_at_lte"
-    CURSOR = "cursor"
     GROUP_IDS = "group_ids"
     IDS = "ids"
     INCLUDE_HIDDEN = "include_hidden"
@@ -49,7 +48,7 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
       "items": {
         "type": "string"
       },
-      "order": 15
+      "order": 14
     },
     "activity_types": {
       "type": "array",
@@ -58,7 +57,7 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
       "items": {
         "type": "string"
       },
-      "order": 18
+      "order": 17
     },
     "agent_ids": {
       "type": "array",
@@ -73,7 +72,7 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
       "type": "boolean",
       "title": "Count Only",
       "description": "If true, only total number of items will be returned, without any of the actual objects",
-      "order": 14
+      "order": 13
     },
     "created_at_between": {
       "type": "string",
@@ -105,12 +104,6 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
       "description": "Return activities created before or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z",
       "order": 9
     },
-    "cursor": {
-      "type": "string",
-      "title": "Cursor Position",
-      "description": "Cursor position returned by the last request. Should be used for iterating over more than 1000 items",
-      "order": 13
-    },
     "group_ids": {
       "type": "array",
       "title": "Group IDS",
@@ -138,9 +131,9 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
     "limit": {
       "type": "integer",
       "title": "Limit",
-      "description": "Limit number of returned items (1-100)",
+      "description": "Limit number of returned items (1-1000)",
       "default": 10,
-      "order": 16
+      "order": 15
     },
     "site_ids": {
       "type": "array",
@@ -154,7 +147,7 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
     "skip": {
       "type": "integer",
       "title": "Skip First N Items",
-      "description": "Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead",
+      "description": "Skip first number of items (0-1000). Will return the number entries specified in the 'limit' input (default is 10)",
       "order": 3
     },
     "skip_count": {
@@ -173,7 +166,7 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
         "activityType",
         "createdAt"
       ],
-      "order": 17
+      "order": 16
     },
     "sort_order": {
       "type": "string",
@@ -184,7 +177,7 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
         "asc",
         "desc"
       ],
-      "order": 20
+      "order": 19
     },
     "threat_ids": {
       "type": "array",
@@ -193,7 +186,7 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
       "items": {
         "type": "string"
       },
-      "order": 19
+      "order": 18
     },
     "user_emails": {
       "type": "array",
@@ -202,7 +195,7 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
       "items": {
         "type": "string"
       },
-      "order": 21
+      "order": 20
     },
     "user_ids": {
       "type": "array",
@@ -211,7 +204,7 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
       "items": {
         "type": "string"
       },
-      "order": 22
+      "order": 21
     }
   }
 }

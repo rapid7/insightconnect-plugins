@@ -33,7 +33,7 @@ class Blacklist(insightconnect_plugin_runtime.Action):
             success_result = True
         else:
             raise PluginException(cause='The response from SentinelOne was not in the correct format.',
-                                  assistance='Contact support for help. See log for more details',
+                                  assistance='Contact support for help. See log for more details.',
                                   data=errors)
 
         return {
