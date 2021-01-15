@@ -55,17 +55,17 @@ This action is used to run an arbitrary SQL query against the connected database
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|parameters|object|None|False|Parameters for query|None|{ "x": "example_user" }|
-|query|string|None|True|Query to run|None|SELECT * FROM example|
+|parameters|object|None|False|Parameters for query|None|{ "name": "user" }|
+|query|string|None|True|Query to run|None|SELECT * FROM example WHERE name=:name|
 
 Example input:
 
 ```
 {
   "parameters": {
-    "x": "example_user"
+    "name": "user" 
   },
-  "query": "SELECT * FROM example"
+  "query": "SELECT * FROM example WHERE name=:name"
 }
 ```
 

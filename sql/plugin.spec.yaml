@@ -65,14 +65,14 @@ actions:
         description: Query to run
         type: string
         required: true
-        example: SELECT * FROM example
+        example: "SELECT * FROM example WHERE name=:name"
       parameters:
         title: Parameters
         description: Parameters for query
         type: object
         required: false
         example: '{
-          "x": "example_user"
+          "name": "user"
         }'
     output:
       status:
