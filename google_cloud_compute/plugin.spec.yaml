@@ -912,7 +912,7 @@ actions:
         required: false
   list_snapshots:
     title: List Snapshots
-    description: This action is used to retrieve the list of Snapshot resources
+    description: Retrieve a list of Snapshot resources
       contained within the specified project.
     input:
       filter:
