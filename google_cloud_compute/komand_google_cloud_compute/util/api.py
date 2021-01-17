@@ -149,7 +149,7 @@ class GoogleCloudComputeAPI:
         )
         return self.execute(request)
 
-    def list_snapshots(self, filter: None, max_results: None, order_by: None, page_token: None):
+    def list_snapshots(self, filter = None, max_results = None, order_by = None, page_token = None):
         if not filter:
             filter = None
         if not max_results:
