@@ -1347,8 +1347,8 @@ actions:
         required: false
   list_firewalls:
     title: List Firewalls
-    description: This action is used to retrieve a list of persistent disks contained
-      within the specified zone.
+    description: Retrieve a list of persistent disks contained
+      within the specified zone
     input:
       filter:
         type: string
