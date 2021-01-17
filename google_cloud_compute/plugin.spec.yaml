@@ -1780,7 +1780,7 @@ actions:
   stop_instance:
     title: Stop Instance
     description: This action is used to stop a running instance, shut it down cleanly,
-      and allow you to restart the instance at a later time.
+      and allow for a restart of the instance at a later time
     input:
       zone:
         type: string
