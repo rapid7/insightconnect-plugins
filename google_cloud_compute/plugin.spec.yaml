@@ -1173,7 +1173,7 @@ actions:
   insert_firewall:
     title: Insert Firewall
     description: This action is used to create a firewall rule in the specified project
-      using the data included in the request.
+      using the data included in the request
     input:
       name:
         description: Name of the resource, provided by the client when the resource
