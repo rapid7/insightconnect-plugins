@@ -1172,7 +1172,7 @@ actions:
         required: false
   insert_firewall:
     title: Insert Firewall
-    description: This action is used to create a firewall rule in the specified project
+    description: Create a firewall rule in the specified project
       using the data included in the request
     input:
       name:
