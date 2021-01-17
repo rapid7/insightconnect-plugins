@@ -913,7 +913,7 @@ actions:
   list_snapshots:
     title: List Snapshots
     description: Retrieve a list of Snapshot resources
-      contained within the specified project.
+      contained within the specified project
     input:
       filter:
         type: string
