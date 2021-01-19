@@ -652,6 +652,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.1 - Fix issue where long-running queries could crash the plugin
 * 2.0.0 - Refactor and split Advanced Query into two new actions Advanced Query on Log and Advanced Query on Log Set
 * 1.5.0 - New actions Get a Log and Get All Logs
 * 1.4.0 - New action Advanced Query
