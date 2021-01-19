@@ -29,13 +29,11 @@ class GetApp(insightconnect_plugin_runtime.Action):
             result = json.loads(response['resource'])
         except (json.decoder.JSONDecodeError, TypeError, KeyError):
             self.logger.error(f'InsightAppSec response: {response}')
-            raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
-                            ' See log for more details')
+            raise PluginException(cause=PluginException.Preset.INVALID_JSON, assistance=PluginException.Preset.INVALID_JSON)
 
         try:
             output = {'app_name':result['name'], 'app_id':result['id'], 'app_description':result['description'], 'links':result['links']}
         except KeyError:
             self.logger.error(result)
-            raise PluginException(cause='The response from InsightAppSec was malformed.', assistance='Contact support for help.'
-                            ' See log for more details')
+            raise PluginException(cause=PluginException.Preset.INVALID_JSON, assistance=PluginException.Preset.INVALID_JSON)
         return output

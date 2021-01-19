@@ -28,8 +28,7 @@ class GetScan(insightconnect_plugin_runtime.Action):
             result = json.loads(response['resource'])
         except (json.decoder.JSONDecodeError, TypeError, KeyError):
             self.logger.error(f'InsightAppSec response: {response}')
-            raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
-                                        ' See log for more details')
+            raise PluginException(cause=PluginException.Preset.INVALID_JSON, assistance=PluginException.Preset.INVALID_JSON)
 
         try:
             output = {'id': result['id'], 'app_id': result['app']['id'], 'scan_config_id': result['scan_config']['id'],
@@ -39,5 +38,4 @@ class GetScan(insightconnect_plugin_runtime.Action):
             return {Output.SCAN: output}
         except KeyError:
             self.logger.error(result)
-            raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
-                                        ' See log for more details')
+            raise PluginException(cause=PluginException.Preset.INVALID_JSON, assistance=PluginException.Preset.INVALID_JSON)

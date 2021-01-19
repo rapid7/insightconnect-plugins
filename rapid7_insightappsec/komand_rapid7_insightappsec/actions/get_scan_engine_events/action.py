@@ -26,6 +26,5 @@ class GetScanEngineEvents(insightconnect_plugin_runtime.Action):
             result = json.loads(response['resource'])
         except (json.decoder.JSONDecodeError, TypeError, KeyError):
             self.logger.error(f'InsightAppSec response: {response}')
-            raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
-                                        ' See log for more details')
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
         return {Output.EVENTS: result}

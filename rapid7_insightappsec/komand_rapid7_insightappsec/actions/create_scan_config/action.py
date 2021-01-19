@@ -34,8 +34,7 @@ class CreateScanConfig(insightconnect_plugin_runtime.Action):
 
         except (json.decoder.JSONDecodeError, TypeError, KeyError):
             self.logger.error(f'InsightAppSec response: {response}')
-            raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
-                            ' See log for more details')
+            raise PluginException(cause=PluginException.Preset.INVALID_JSON, assistance=PluginException.Preset.INVALID_JSON)
 
         uuid = response.get("headers")
         uuid = uuid.get("Location")

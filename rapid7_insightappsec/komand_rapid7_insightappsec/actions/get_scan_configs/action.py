@@ -28,14 +28,12 @@ class GetScanConfigs(insightconnect_plugin_runtime.Action):
             response = json.loads(response["resource"])
         except (json.decoder.JSONDecodeError, TypeError, KeyError):
             self.logger.error(f'InsightAppSec response: {response}')
-            raise PluginException(cause='The response from InsightAppSec was not in JSON format.', assistance='Contact support for help.'
-                            ' See log for more details')
+            raise PluginException(cause=PluginException.Preset.INVALID_JSON, assistance=PluginException.Preset.INVALID_JSON)
         try:
             metadata = response['metadata']
             data = response['data']
             links = response['links']
         except KeyError:
             self.logger.error(f'InsightAppSec response: {response}')
-            raise PluginException(cause='The response from InsightAppSec was malformed.', assistance='Contact support for help.'
-                            ' See log for more details')
+            raise PluginException(cause=PluginException.Preset.INVALID_JSON, assistance=PluginException.Preset.INVALID_JSON)
         return {Output.METADATA:metadata, Output.DATA:data, Output.LINKS:links}
