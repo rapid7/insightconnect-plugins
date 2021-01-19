@@ -32,7 +32,10 @@ Example input:
 
 ```
 {
-  "credentials": "{\"username\": \"user@example.com\", \"password\": \"mypassword\"}",
+  "credentials": {
+    "username": "user@example.com",
+    "password": "mypassword"
+  },
   "url": "https://example.sentinelone.com"
 }
 ```
@@ -57,7 +60,11 @@ Example input:
 ```
 {
   "action": "connect",
-  "filter": "{\"ids\": [\"1000000000000000000\"]}"
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  }
 }
 ```
 
@@ -241,7 +248,11 @@ Example input:
 
 ```
 {
-  "filter": "{\"ids\": [\"1000000000000000000\"]}",
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  },
   "module": "monitor"
 }
 ```
@@ -1310,7 +1321,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 5.0.0 - Consolidate various Agent actions | Bump to API version 2.1 where possible | Delete obsolete Blacklist by IOC Hash and Agent Processes
+* 5.0.0 - Consolidate various Agent actions | Use API version 2.1 where possible | Delete obsolete Blacklist by IOC Hash and Agent Processes
 * 4.1.1 - Update the Get Threat Summary action to return all threat summaries instead of 10
 * 4.1.0 - Add case sensitivity option for Agent lookups
 * 4.0.1 - Fix Agent Active parameter in Get Agent Details action | Update Quarantine action whitelist for IP addresses
