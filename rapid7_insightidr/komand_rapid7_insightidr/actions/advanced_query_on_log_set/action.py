@@ -109,11 +109,12 @@ class AdvancedQueryOnLogSet(komand.Action):
 
             results_object = response.json()
             log_entries = results_object.get("events")
-            try:
-                callback_url = results_object.get("links")[0].get("href")
-            except Exception:
-                raise PluginException(PluginException.Preset.INVALID_JSON,
-                                      data=results_object)
+            if not log_entries:
+                try:
+                    callback_url = results_object.get("links")[0].get("href")
+                except Exception:
+                    raise PluginException(PluginException.Preset.INVALID_JSON,
+                                          data=results_object)
 
         return log_entries
 
