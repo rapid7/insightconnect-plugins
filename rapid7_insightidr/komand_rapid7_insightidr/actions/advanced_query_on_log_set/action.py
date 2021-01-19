@@ -1,24 +1,25 @@
+from dateutil.parser import ParserError
 import komand
-from .schema import AdvancedQueryInput, AdvancedQueryOutput, Input, Output, Component
-from komand.exceptions import PluginException
+from .schema import AdvancedQueryOnLogSetInput, AdvancedQueryOnLogSetOutput, Input, Output, Component
 # Custom imports below
 import time
 import json
+from komand.exceptions import PluginException
 from dateutil.parser import parse, ParserError
 
 
-class AdvancedQuery(komand.Action):
+class AdvancedQueryOnLogSet(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='advanced_query',
+                name='advanced_query_on_log_set',
                 description=Component.DESCRIPTION,
-                input=AdvancedQueryInput(),
-                output=AdvancedQueryOutput())
+                input=AdvancedQueryOnLogSetInput(),
+                output=AdvancedQueryOnLogSetOutput())
 
     def run(self, params={}):
         query = params.get(Input.QUERY)
-        log_name = params.get(Input.LOG)
+        log_set_name = params.get(Input.LOG_SET)
         timeout = params.get(Input.TIMEOUT)
 
         time_from_string = params.get(Input.TIME_FROM)
@@ -27,11 +28,11 @@ class AdvancedQuery(komand.Action):
         # Time To is optional, if not specified, time to is set to now
         time_from, time_to = self.parse_dates(time_from_string, time_to_string)
 
-        log_id = self.get_log_id(log_name)
+        log_set_id = self.get_log_set_id(log_set_name)
 
         # The IDR API will SOMETIMES return results immediately.
         # It will return results if it gets them. If not, we'll get a call back URL to work on
-        callback_url, log_entries = self.maybe_get_log_entries(log_id, query, time_from, time_to)
+        callback_url, log_entries = self.maybe_get_log_entries(log_set_id, query, time_from, time_to)
 
         if not log_entries:
             log_entries = self.get_results_from_callback(callback_url, timeout)
@@ -93,14 +94,12 @@ class AdvancedQuery(komand.Action):
                                       assistance="Time out for the query results was exceeded. Try simplifying your"
                                                  " query or extending the timeout period")
 
-
             self.logger.info("Results were not ready. Sleeping 1 second and trying again.")
             self.logger.info(f"Time left: {counter}")
             self.logger.info(f"Progress: {results_object.get('progress')}")
             time.sleep(1)
             response = self.connection.session.get(callback_url)
 
-            # TODO: need to know what happens if we poll for a query that's not done
             try:
                 response.raise_for_status()
             except Exception:
@@ -110,6 +109,12 @@ class AdvancedQuery(komand.Action):
 
             results_object = response.json()
             log_entries = results_object.get("events")
+            if not log_entries:
+                try:
+                    callback_url = results_object.get("links")[0].get("href")
+                except Exception:
+                    raise PluginException(PluginException.Preset.INVALID_JSON,
+                                          data=results_object)
 
         return log_entries
 
@@ -129,7 +134,7 @@ class AdvancedQuery(komand.Action):
         @param time_to: int
         @return: (callback url, list of log entries)
         """
-        endpoint = f"{self.connection.url}log_search/query/logs/{log_id}"
+        endpoint = f"{self.connection.url}log_search/query/logsets/{log_id}"
         params = {
             "query": query,
             "from": time_from,
@@ -142,8 +147,8 @@ class AdvancedQuery(komand.Action):
         try:
             response.raise_for_status()
         except Exception:
-            raise PluginException(cause="Failed to get logs from InsightIDR\n",
-                                  assistance=f"Could not get logs from: {endpoint}\n",
+            raise PluginException(cause="Failed to get log sets from InsightIDR\n",
+                                  assistance=f"Could not get log sets from: {endpoint}\n",
                                   data=response.text)
 
         results_object = response.json()
@@ -155,44 +160,40 @@ class AdvancedQuery(komand.Action):
             self.logger.info("Got a callback url. Polling results...")
             return results_object.get("links")[0].get("href"), None
 
-    def get_log_id(self, log_name: str) -> str:
+    def get_log_set_id(self, log_name: str) -> str:
         """
         Gets a log ID for a given log name
 
         @param log_name: str
         @return: str
         """
-        endpoint = f"{self.connection.url}log_search/management/logs"
+        endpoint = f"{self.connection.url}log_search/management/logsets"
 
         self.logger.info(f"Getting log entries from: {endpoint}")
         response = self.connection.session.get(endpoint)
         try:
             response.raise_for_status()
         except Exception:
-            raise PluginException(cause="Failed to get logs from InsightIDR",
-                                  assistance=f"Could not get logs from: {endpoint}",
+            raise PluginException(cause="Failed to get log sets from InsightIDR",
+                                  assistance=f"Could not get log sets from: {endpoint}",
                                   data=response.text)
 
-        logs = response.json().get("logs")
+        log_sets = response.json().get("logsets")
 
         id = ""
 
-        for log in logs:
-            name = log.get('name')
+        for log_set in log_sets:
+            name = log_set.get('name')
             self.logger.info(f"Checking {log_name} against {name}")
             if name == log_name:
-                self.logger.info("Log found.")
-                id = log.get("id")
+                self.logger.info("Log set found.")
+                id = log_set.get("id")
                 break
 
         if id:
-            self.logger.info(f"Found log with name {log_name} and ID: {id}")
+            self.logger.info(f"Found log set with name {log_name} and ID: {id}")
             return id
 
-        self.logger.error(f"Could not find log with name {log_name}")
-        raise PluginException(cause="Could not find specified log.",
-                              assistance=f"Could not find log with name: {log_name}")
-
-
-
-
+        self.logger.error(f"Could not find log set with name {log_name}")
+        raise PluginException(cause="Could not find specified log set.",
+                              assistance=f"Could not find log set with name: {log_name}")

@@ -4,21 +4,21 @@ sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase
 from komand_rapid7_insightidr.connection.connection import Connection
-from komand_rapid7_insightidr.actions.advanced_query import AdvancedQuery
+from komand_rapid7_insightidr.actions.advanced_query_on_log_set import AdvancedQueryOnLogSet
 from komand.exceptions import PluginException
 import json
 import logging
 
 
-class TestAdvancedQuery(TestCase):
+class TestAdvancedQueryOnLogSet(TestCase):
     def setup(self):
         log = logging.getLogger("Test")
         test_conn = Connection()
-        test_action = AdvancedQuery()
+        test_action = AdvancedQueryOnLogSet()
         test_conn.logger = log
         test_action.logger = log
         try:
-            with open("../tests/advanced_query.json") as file:
+            with open("../tests/advanced_query_on_log_set.json") as file:
                 test_json = json.loads(file.read()).get("body")
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
@@ -41,9 +41,9 @@ class TestAdvancedQuery(TestCase):
 
         test_conn.connect(connection_params)
         test_action.connection = test_conn
-        result = test_action.get_log_id("Active Directory")
+        result = test_action.get_log_set_id("Asset Authentication")
 
-        self.assertIsNone(result) # Best we can do here, the log ID will change based on the instance used.
+        self.assertIsNotNone(result) # Best we can do here, the log ID will change based on the instance used.
 
     def test_get_log_fails(self):
         action_params, connection_params, test_action, test_conn = self.setup()
@@ -51,7 +51,7 @@ class TestAdvancedQuery(TestCase):
         test_conn.connect(connection_params)
         test_action.connection = test_conn
         with self.assertRaises(PluginException):
-            test_action.get_log_id("Do not find this log")
+            test_action.get_log_set_id("Do not find this log")
 
     def test_parse_dates(self):
         action_params, connection_params, test_action, test_conn = self.setup()
