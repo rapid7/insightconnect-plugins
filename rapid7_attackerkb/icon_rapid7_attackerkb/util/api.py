@@ -10,7 +10,7 @@ class AttackerKB:
     def __init__(self, token: str, logger: Logger, max_pages: int):
         self.logger = logger
         self.token = token
-        self.base_url = "https://api.attackerkb.com/"
+        self.base_url = "https://api.attackerkb.com/v1/"
         if max_pages:
             self.max_pages = max_pages
         else:

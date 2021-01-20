@@ -1,8 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AgentsReloadInput, AgentsReloadOutput, Input, Output, Component
 
 
-class AgentsReload(komand.Action):
+class AgentsReload(insightconnect_plugin_runtime.Action):
+
     def __init__(self):
         super(self.__class__, self).__init__(
             name="agents_reload",
@@ -12,8 +13,14 @@ class AgentsReload(komand.Action):
         )
 
     def run(self, params={}):
+        response = self.connection.agents_support_action(
+                "reload",
+                params.get(Input.FILTER, None),
+                params.get(Input.MODULE, None)
+            )
+
+        affected = response.get("data", {}).get("affected", 0)
+
         return {
-            Output.AFFECTED: self.connection.agents_support_action(
-                "reload", params.get(Input.FILTER, None), params.get(Input.MODULE, None)
-            ).get("affected", 0)
+            Output.AFFECTED: affected
         }

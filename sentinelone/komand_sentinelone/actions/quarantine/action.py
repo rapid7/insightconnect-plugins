@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import QuarantineInput, QuarantineOutput, Input, Output, Component
-from komand.exceptions import PluginException
-
+from insightconnect_plugin_runtime.exceptions import PluginException
 # Custom imports below
 
 
-class Quarantine(komand.Action):
+class Quarantine(insightconnect_plugin_runtime.Action):
+
     def __init__(self):
         super(self.__class__, self).__init__(
             name="quarantine",
@@ -16,7 +16,8 @@ class Quarantine(komand.Action):
 
     def run(self, params={}):
         agent = params.get(Input.AGENT)
-        agents = self.connection.client.search_agents(agent, results_length=2)
+        case_sensitive = params.get(Input.CASE_SENSITIVE)
+        agents = self.connection.client.search_agents(agent, case_sensitive=case_sensitive, results_length=2)
         whitelist = params.get(Input.WHITELIST, None)
 
         not_affected = {"response": {"data": {"affected": 0}}}

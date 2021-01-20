@@ -61,7 +61,7 @@ class IO(object):
     def is_custom(self):
         """
         Returns whether or not the IO is of a custom/non-standard type.
-        Standard types defined at https://komand.github.io/python/spec.html#base-types
+        Standard types defined at Standard types defined at https://docs.rapid7.com/insightconnect/plugin-spec/#base-types
         :return: Boolean indicating if a type is custom
         """
         # Strip off possible list indicator and compare against standard types

@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "SentinelOne"
 Vendor = "rapid7"
-Version = "4.0.1"
+Version = "5.0.0"
 Description = "The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne"
 
 
@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from komand_sentinelone import connection, actions, triggers
 
-    class ICONSentinelone(komand.Plugin):
+    class ICONSentinelone(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -40,37 +40,17 @@ def main():
 
             self.add_action(actions.ActivitiesTypes())
 
-            self.add_action(actions.AgentsAbortScan())
-
-            self.add_action(actions.AgentsConnect())
-
-            self.add_action(actions.AgentsDecommission())
-
-            self.add_action(actions.AgentsDisconnect())
-
-            self.add_action(actions.AgentsFetchLogs())
-
-            self.add_action(actions.AgentsInitiate())
-
-            self.add_action(actions.AgentsProcesses())
+            self.add_action(actions.AgentsAction())
 
             self.add_action(actions.AgentsReload())
 
-            self.add_action(actions.AgentsRestart())
-
-            self.add_action(actions.AgentsShutdown())
-
             self.add_action(actions.AgentsSummary())
-
-            self.add_action(actions.AgentsUninstall())
 
             self.add_action(actions.AppsByAgentIds())
 
             self.add_action(actions.Blacklist())
 
             self.add_action(actions.BlacklistByContentHash())
-
-            self.add_action(actions.BlacklistByIocHash())
 
             self.add_action(actions.CreateIocThreat())
 
@@ -94,7 +74,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONSentinelone())
+    cli = insightconnect_plugin_runtime.CLI(ICONSentinelone())
     cli.run()
 
 

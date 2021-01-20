@@ -30,7 +30,7 @@ class ConnectionSchema(komand.Input):
     "default_headers": {
       "type": "object",
       "title": "Default Headers",
-      "description": "Default headers to include in all requests associated with this connection e.g. { User-Agent: InsightConnect }",
+      "description": "Default headers to include in all requests associated with this connection e.g. { \\"User-Agent\\": \\"Rapid7 InsightConnect\\" }",
       "order": 2
     },
     "ssl_verify": {

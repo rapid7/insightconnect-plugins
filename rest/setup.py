@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name="rest-rapid7-plugin",
-      version="3.0.3",
-      description="The REST plugin to make it easy to integrate with RESTful services",
+      version="3.0.5",
+      description="The HTTP Requests plugin to make it easy to integrate with RESTful services",
       author="rapid7",
       author_email="",
       url="",

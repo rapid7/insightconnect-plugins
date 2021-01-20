@@ -4,7 +4,7 @@ from .schema import (
     GetSampleAnalysisOutput,
     Input,
     Output,
-    Component,
+    Component
 )
 
 # Custom imports below
@@ -17,7 +17,7 @@ class GetSampleAnalysis(komand.Action):
             name="get_sample_analysis",
             description=Component.DESCRIPTION,
             input=GetSampleAnalysisInput(),
-            output=GetSampleAnalysisOutput(),
+            output=GetSampleAnalysisOutput()
         )
 
     def run(self, params={}):
@@ -25,14 +25,24 @@ class GetSampleAnalysis(komand.Action):
 
         api: ThreatGrid = self.connection.api
 
-        artifacts = clean_artifact(api.get_artifact_analysis(sample_id=sample_id))
-        iocs = clean_data(api.get_ioc_analysis(sample_id=sample_id))
-        network_streams = clean_data(api.get_network_streams_analysis(sample_id=sample_id))
-        processes = clean_data(api.get_processes_analysis(sample_id=sample_id))
-        annotations = clean_annotations(api.get_annotations_analysis(sample_id=sample_id))
-        metadata = clean_data(api.get_metadata_analysis(sample_id=sample_id))
-
-        # self.logger.info(artifacts)
+        artifacts = clean_artifact(
+            api.get_artifact_analysis(sample_id=sample_id)
+        )
+        iocs = clean_data(
+            api.get_ioc_analysis(sample_id=sample_id)
+        )
+        network_streams = clean_data(
+            api.get_network_streams_analysis(sample_id=sample_id)
+        )
+        processes = clean_data(
+            api.get_processes_analysis(sample_id=sample_id)
+        )
+        annotations = clean_annotations(
+            api.get_annotations_analysis(sample_id=sample_id)
+        )
+        metadata = clean_data(
+            api.get_metadata_analysis(sample_id=sample_id)
+        )
 
         report = {
             Output.ARTIFACT_REPORT: artifacts,
@@ -40,15 +50,14 @@ class GetSampleAnalysis(komand.Action):
             Output.NETWORK_STREAMS_REPORT: network_streams,
             Output.PROCESSES_REPORT: processes,
             Output.ANNOTATIONS_REPORT: annotations,
-            Output.METADATA_REPORT: metadata,
+            Output.METADATA_REPORT: metadata
         }
-
         return komand.helper.clean(report)
 
 
 def clean_data(analysis_data):
     """
-    Normilizes items from data for custom types
+    Normalizes items from data for custom types
     :param analysis_data API get analysis request
     :return:
     """

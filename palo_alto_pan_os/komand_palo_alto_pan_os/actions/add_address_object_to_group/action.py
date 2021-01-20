@@ -30,18 +30,14 @@ class AddAddressObjectToGroup(komand.Action):
         xpath = f"/config/devices/entry[@name='{device_name}']/vsys/entry[@name='{virtual_system}']/address-group/entry[@name='{group_name}']"
         response = self.connection.request.get_(xpath)
 
-        address_objects = (
-            response.get("response", {})
-            .get("result", {})
-            .get("entry", {})
-            .get("static", {})
-            .get("member")
-        )
-        if not address_objects:
+        try:
+            address_objects = (response.get("response").get("result").get("entry").get("static").get("member"))
+
+        except AttributeError:
             raise PluginException(
-                cause="Palo Alto firewall returned an unexpected response.",
-                assistance=f"Could not find group {group_name}, or group was empty. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {virtual_system}",
-                data=response,
+                cause="PAN OS returned an unexpected response.",
+                assistance=f"Could not find group '{group_name}', or group was empty. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {virtual_system}",
+                data=response
             )
 
         # We got the group, now pull out all the address object names
@@ -60,9 +56,7 @@ class AddAddressObjectToGroup(komand.Action):
             # Send it back ot the API
             self.connection.request.edit_(xpath, xml_str)
         else:
-            self.logger.info(
-                f'Address Object "{address_object}" was already in group "{group_name}". Skipping append.'
-            )
+            self.logger.info(f"Address Object '{address_object}' was already in group '{group_name}'. Skipping append.")
 
         return {Output.SUCCESS: True, Output.ADDRESS_OBJECTS: names}
 
@@ -71,6 +65,6 @@ class AddAddressObjectToGroup(komand.Action):
         for name in names:
             members += f"<member>{name}</member>"
 
-        xml_template = f'<entry name="{group_name}"><static>{members}</static></entry>'
+        xml_template = f"<entry name='{group_name}'><static>{members}</static></entry>"
 
         return xml_template

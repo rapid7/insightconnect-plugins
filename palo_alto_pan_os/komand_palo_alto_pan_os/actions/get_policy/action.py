@@ -8,11 +8,10 @@ from komand.exceptions import PluginException
 class GetPolicy(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="get_policy",
+            name='get_policy',
             description=Component.DESCRIPTION,
             input=GetPolicyInput(),
-            output=GetPolicyOutput(),
-        )
+            output=GetPolicyOutput())
 
     def run(self, params={}):
         name = params.get(Input.POLICY_NAME)
@@ -23,50 +22,48 @@ class GetPolicy(komand.Action):
 
         response = self.connection.request.get_(xpath)
 
-        entry = response.get("response", {}).get("result", {}).get("entry", {})
-        if not entry:
+        try:
+            entry = response.get("response").get("result").get("entry")
+
+        except AttributeError:
             raise PluginException(
                 cause="PAN OS returned an unexpected response.",
-                assistance=f"Could not find policy {name}. Check the name, virutal system name, and device name.\ndevice name: {device_name}\nvirtual system: {vsys}",
-                data=response,
-            )
+                assistance=f"Could not find policy '{name}'. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {vsys}",
+                data=response)
 
-        to = self.get_entries(entry, "to")
-        from_ = self.get_entries(entry, "from")
-        source = self.get_entries(entry, "source")
-        destination = self.get_entries(entry, "destination")
-        source_user = self.get_entries(entry, "source-user")
-        category = self.get_entries(entry, "category")
-        application = self.get_entries(entry, "application")
-        service = self.get_entries(entry, "service")
-        hip_profiles = self.get_entries(entry, "hip-profiles")
-        action = entry.get("action", {}).get("#text")
+        entry_action = entry.get("action")
+        if type(entry_action) is dict:
+            action = entry_action.get("#text")
+        else:
+            action = entry_action
 
-        output_object = {
-            Output.TO: to,
-            Output.FROM: from_,
-            Output.SOURCE: source,
-            Output.DESTINATION: destination,
-            Output.SOURCE_USER: source_user,
-            Output.CATEGORY: category,
-            Output.APPLICATION: application,
-            Output.SERVICE: service,
-            Output.HIP_PROFILES: hip_profiles,
-            Output.ACTION: action,
+        return {
+            Output.TO: self.get_entries(entry, "to"),
+            Output.FROM: self.get_entries(entry, "from"),
+            Output.SOURCE: self.get_entries(entry, "source"),
+            Output.DESTINATION: self.get_entries(entry, "destination"),
+            Output.SOURCE_USER: self.get_entries(entry, "source-user"),
+            Output.CATEGORY: self.get_entries(entry, "category"),
+            Output.APPLICATION: self.get_entries(entry, "application"),
+            Output.SERVICE: self.get_entries(entry, "service"),
+            Output.HIP_PROFILES: self.get_entries(entry, "hip-profiles"),
+            Output.ACTION: action
         }
-
-        return output_object
 
     def get_entries(self, entry, key):
         out = []
 
-        entries = entry.get(key, {})
-        member = entries.get("member")
+        member = entry.get(key, {}).get("member")
 
-        if type(member) is list:
+        if type(member) is str:
+            out.append(member)
+        elif type(member) is list:
             for m in member:
-                out.append(m.get("#text", ""))
-        elif member:
+                if type(m) is dict:
+                    out.append(m.get("#text", ""))
+                if type(m) is str:
+                    out.append(m)
+        elif type(member) is dict:
             out.append(member.get("#text", ""))
 
         return out

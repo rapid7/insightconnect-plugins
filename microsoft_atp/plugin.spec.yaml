@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: microsoft_atp
 title: Microsoft Windows Defender ATP
 description: The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
-version: 4.5.1
+version: 4.6.0
 vendor: rapid7
 support: community
 status: []
@@ -22,6 +22,143 @@ hub_tags:
   features: []
 
 types:
+  manage_tags_response:
+    "@odata.context":
+      title: "@Odata.Context"
+      type: string
+      description: "@odata.context"
+      required: false
+    agentVersion:
+      title: Agent Version
+      type: string
+      description: Agent version
+      required: false
+    computerDnsName:
+      title: Computer DNS Name
+      type: string
+      description: Computer DNS name
+      required: false
+    deviceValue:
+      title: Device Value
+      type: string
+      description: Device value
+      required: false
+    exposureLevel:
+      title: Exposure Level
+      type: string
+      description: Exposure level
+      required: false
+    firstSeen:
+      title: First Seen
+      type: string
+      description: First seen
+      required: false
+    healthStatus:
+      title: Health Status
+      type: string
+      description: Health status
+      required: false
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    isAadJoined:
+      title: Is AAD Joined
+      type: boolean
+      description: Is AAD joined
+      required: false
+    lastExternalIpAddress:
+      title: Last External IP Address
+      type: string
+      description: Last external IP address
+      required: false
+    lastIpAddress:
+      title: Last IP Address
+      type: string
+      description: Last IP address
+      required: false
+    lastSeen:
+      title: Last Seen
+      type: string
+      description: Last seen
+      required: false
+    machineTags:
+      title: Machine Tags
+      type: "[]string"
+      description: Machine tags
+      required: false
+    osBuild:
+      title: OS Build
+      type: integer
+      description: OS build
+      required: false
+    osPlatform:
+      title: OS Platform
+      type: string
+      description: OS platform
+      required: false
+    osProcessor:
+      title: OS Processor
+      type: string
+      description: OS Processor
+      required: false
+    rbacGroupId:
+      title: RBAC Group ID
+      type: integer
+      description: RBAC group ID
+      required: false
+    riskScore:
+      title: Risk Score
+      type: string
+      description: Risk score
+      required: false
+    version:
+      title: Version
+      type: string
+      description: Version
+      required: false
+  software:
+    activeAlert:
+      title: Active Alert
+      type: boolean
+      description: Active alert
+      required: false
+    exposedMachines:
+      title: Exposed Machines
+      type: integer
+      description: Exposed machines
+      required: false
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    impactScore:
+      title: Impact Score
+      type: float
+      description: Impact score
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    publicExploit:
+      title: Public Exploit
+      type: boolean
+      description: Public exploit
+      required: false
+    vendor:
+      title: Vendor
+      type: string
+      description: Vendor
+      required: false
+    weaknesses:
+      title: Weaknesses
+      type: integer
+      description: Weaknesses
+      required: false
   related_user_object:
     domainName:
       title: "Domain Name"
@@ -1045,6 +1182,67 @@ actions:
         title: Updates
         description: List of updates
         type: '[]update'
+        required: true
+  get_installed_software:
+    title: Get Installed Software
+    description: Retrieves a collection of installed software related to a given machine IP address, hostname, or machine ID
+    input:
+      machine:
+        title: Machine
+        description: Machine IP address, hostname, or machine ID
+        type: string
+        example: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73
+        required: true
+    output:
+      software:
+        title: Software
+        description: List of installed software on the machine
+        type: '[]software'
+        required: true
+  manage_tags:
+    title: Manage Tags
+    description: Add or remove machine tags
+    input:
+      machine:
+        title: Machine
+        description: Machine IP address, hostname, or machine ID
+        type: string
+        example: 2df36d707c1ee5084cef77f3dbfc95db65bc4a73
+        required: true
+      tag:
+        title: Tag
+        description: The tag value
+        type: string
+        example: example tag
+        required: true
+      type:
+        title: Type
+        description: True to add tag, false to remove it
+        type: boolean
+        example: true
+        default: true
+        required: true
+    output:
+      manage_tags_response:
+        title: Manage Tags Response
+        description: A response that includes updated tags and supplemental information about the machine
+        type: manage_tags_response
+        required: true
+  get_related_machines:
+    title: Get Related Machines
+    description: Get machines related to an file hash(SHA1), domain or username indicator
+    input:
+      indicator:
+        title: Indicator
+        description: File hash(SHA1), domain or username indicator
+        type: string
+        example: example.com
+        required: true
+    output:
+      machines:
+        title: Machines
+        description: Machines related to an file hash(SHA1), domain or username indicator
+        type: '[]machine'
         required: true
 
 triggers:

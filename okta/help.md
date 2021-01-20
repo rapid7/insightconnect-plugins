@@ -23,6 +23,11 @@ The connection configuration accepts the following parameters:
 |okta_key|credential_secret_key|None|True|Okta key|None|None|
 |okta_url|string|None|True|Okta Domain e.g. example.okta.com|None|None|
 
+Example input:
+
+```
+```
+
 ## Technical Details
 
 ### Actions
@@ -876,14 +881,17 @@ This trigger monitors a list of groups for user membership changes.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|group_ids|[]string|None|True|A list of group ID's|None|['00g41ix8hKbsu74Ca4x6', '00g41ieu5y7i9XEYE4x6']|
+|group_ids|[]string|None|True|A list of group ID's|None|["00g41ix8hKbsu74Ca4x6", "00g41ieu5y7i9XEYE4x6"]|
 |interval|integer|300|True|The time in seconds between checks for changes to the groups users|None|100|
 
 Example input:
 
 ```
 {
-  "group_ids": ["00g41ix8hKbsu74Ca4x6", "00g41ieu5y7i9XEYE4x6"],
+  "group_ids": [
+    "00g41ix8hKbsu74Ca4x6",
+    "00g41ieu5y7i9XEYE4x6"
+  ],
   "interval": 100
 }
 ```
@@ -977,6 +985,8 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 3.5.2 - Fix issue where Monitor User Groups trigger would be limited to 1000 users
+* 3.5.1 - Update to add additional logging to Monitor User Groups trigger
 * 3.5.0 - New action Update Blacklist Zones
 * 3.4.3 - Fix issue where trigger did not return empty arrays when users were removed or added to group
 * 3.4.2 - Fix issue where Monitor User Groups trigger would erroneously detect logins as an addition/removal of a group member

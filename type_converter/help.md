@@ -358,7 +358,7 @@ Example input:
 
 ```
 {
-  "input": "true"
+  "input": true
 }
 ```
 
@@ -390,7 +390,7 @@ Example input:
 
 ```
 {
-  "input": "123.456"
+  "input": 123.456
 }
 ```
 
@@ -423,7 +423,7 @@ Example input:
 
 ```
 {
-  "input": " 123",
+  "input": 123,
   "strip": true
 }
 ```
@@ -458,7 +458,7 @@ Example input:
 ```
 {
   "delimiter": "",
-  "input": "Rapid7\nInsightconnect"
+  "input": "Rapid7 Insightconnect"
 }
 ```
 
@@ -493,7 +493,10 @@ Example input:
 
 ```
 {
-  "input": "{\"object\":[\"rapid\",\"7\"],\"rapid7\":\"value\"}"
+  "input": {
+    "object": ["rapid", "7"],
+    "rapid7": "value"
+  }
 }
 ```
 
@@ -531,6 +534,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.6.1 - Add Cloud Enabled tag
 * 1.6.0 - New action Combine Arrays
 * 1.5.2 - Rewrite plugin in Python 3 | Configure as Cloud Plugin
 * 1.5.1 - New spec and help.md format for the Extension Library
