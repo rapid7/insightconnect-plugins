@@ -18,11 +18,13 @@ class UploadSslCertificate(komand.Action):
     def run(self, params={}):
         format_type = params["format"]
         url = self.connection.url
-        upload_ssl_cert_url = "/SecureSphere/api/v1/conf/webServices/{}/{}/{}/sslCertificates/{}".format(
-            params["sitename"],
-            params["servergroupname"],
-            params["webservicename"],
-            params["sslkeyname"],
+        upload_ssl_cert_url = (
+            "/SecureSphere/api/v1/conf/webServices/{}/{}/{}/sslCertificates/{}".format(
+                params["sitename"],
+                params["servergroupname"],
+                params["webservicename"],
+                params["sslkeyname"],
+            )
         )
         # Logic for checking what format type
         if format_type == "pem":

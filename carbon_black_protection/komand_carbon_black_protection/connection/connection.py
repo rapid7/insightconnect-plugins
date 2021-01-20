@@ -19,5 +19,8 @@ class Connection(komand.Connection):
         self.session = requests.Session()
         self.verify = params.get("ssl_verify")
         self.session.headers.update(
-            {"x-auth-token": token, "content-type": "application/json",}
+            {
+                "x-auth-token": token,
+                "content-type": "application/json",
+            }
         )

@@ -337,8 +337,8 @@ class Investigate(object):
 
     def sample_artifacts(self, hash, limit=None, offset=None):
         """
-            Return an object representing artifacts associated with an input hash
-            NOTE: Only available to Threat Grid customers
+        Return an object representing artifacts associated with an input hash
+        NOTE: Only available to Threat Grid customers
         """
 
         uri = self._uris["sample_artifacts"].format(hash)

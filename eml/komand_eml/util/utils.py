@@ -77,12 +77,20 @@ def attachments(mail, log):
             log.debug("Content not string")
         content = content.replace("\r\n", "")
         attachments_list.append(
-            {"filename": filename, "content": content, "content_type": part.get_content_type(),}
+            {
+                "filename": filename,
+                "content": content,
+                "content_type": part.get_content_type(),
+            }
         )
 
     if count == 0:
         log.debug("No attachment")
         attachments_list.append(
-            {"filename": "", "content": "", "content_type": "",}
+            {
+                "filename": "",
+                "content": "",
+                "content_type": "",
+            }
         )
     return attachments_list

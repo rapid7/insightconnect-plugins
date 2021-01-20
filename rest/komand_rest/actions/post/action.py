@@ -20,7 +20,9 @@ class Post(komand.Action):
 
         req_headers = Common.merge_dicts(self.connection.default_headers, headers)
         url = parse.urljoin(self.connection.base_url, route)
-        response = requests.post(url, headers=req_headers, json=body, verify=self.connection.ssl_verify)
+        response = requests.post(
+            url, headers=req_headers, json=body, verify=self.connection.ssl_verify
+        )
         body_object = {}
         try:
             body_object = response.json()

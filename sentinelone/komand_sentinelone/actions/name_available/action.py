@@ -5,7 +5,6 @@ from .schema import NameAvailableInput, NameAvailableOutput, Input, Output, Comp
 
 
 class NameAvailable(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
             name="name_available",
@@ -19,6 +18,4 @@ class NameAvailable(insightconnect_plugin_runtime.Action):
 
         available = response.get("data", {}).get("available", False)
 
-        return {
-            Output.AVAILABLE: available
-        }
+        return {Output.AVAILABLE: available}

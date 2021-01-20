@@ -243,7 +243,11 @@ class Admin(client.Client):
         params = {
             "mintime": mintime,
         }
-        response = self.json_api_call("GET", "/admin/v1/logs/administrator", params,)
+        response = self.json_api_call(
+            "GET",
+            "/admin/v1/logs/administrator",
+            params,
+        )
         for row in response:
             row["eventtype"] = "administrator"
             row["host"] = self.host
@@ -379,7 +383,9 @@ class Admin(client.Client):
             params["maxtime"] = "{:d}".format(int(params["maxtime"]))
 
         response = self.json_api_call(
-            "GET", "/admin/v{}/logs/authentication".format(api_version), params,
+            "GET",
+            "/admin/v{}/logs/authentication".format(api_version),
+            params,
         )
 
         if api_version == 1:
@@ -417,7 +423,11 @@ class Admin(client.Client):
         params = {
             "mintime": mintime,
         }
-        response = self.json_api_call("GET", "/admin/v1/logs/telephony", params,)
+        response = self.json_api_call(
+            "GET",
+            "/admin/v1/logs/telephony",
+            params,
+        )
         for row in response:
             row["eventtype"] = "telephony"
             row["host"] = self.host
@@ -653,16 +663,16 @@ class Admin(client.Client):
         return self.json_api_call("POST", path, params)
 
     def get_user_bypass_codes(self, user_id):
-        """ Gets a list of bypass codes associated with a user.
+        """Gets a list of bypass codes associated with a user.
 
-            Params:
-                user_id (str) - The user id.
+        Params:
+            user_id (str) - The user id.
 
-            Returns:
-                A list of bypass code dicts.
+        Returns:
+            A list of bypass code dicts.
 
-            Notes:
-                Raises RuntimeError on error.
+        Notes:
+            Raises RuntimeError on error.
         """
         user_id = six.moves.urllib.parse.quote_plus(str(user_id))
         path = "/admin/v1/users/" + user_id + "/bypass_codes"
@@ -766,17 +776,17 @@ class Admin(client.Client):
         return self.json_api_call("DELETE", path, {})
 
     def get_user_u2ftokens(self, user_id):
-        """ Returns an array of u2ftokens associated
-            with a user.
+        """Returns an array of u2ftokens associated
+        with a user.
 
-            Params:
-                user_id (str) - The user id.
+        Params:
+            user_id (str) - The user id.
 
-            Returns:
-                An array of u2ftoken dicts.
+        Returns:
+            An array of u2ftoken dicts.
 
-            Notes:
-                Raises RuntimeError on error.
+        Notes:
+            Raises RuntimeError on error.
         """
         user_id = six.moves.urllib.parse.quote_plus(str(user_id))
         path = "/admin/v1/users/" + user_id + "/u2ftokens"
@@ -1667,7 +1677,10 @@ class Admin(client.Client):
         return self.json_api_call(
             "GET",
             "/admin/v2/groups/" + group_id + "/users",
-            {"limit": str(limit), "offset": str(offset),},
+            {
+                "limit": str(limit),
+                "offset": str(offset),
+            },
         )
 
     def create_group(
@@ -2060,7 +2073,12 @@ class Admin(client.Client):
         return response
 
     def update_admin(
-        self, admin_id, name=None, phone=None, password=None, password_change_required=None,
+        self,
+        admin_id,
+        name=None,
+        phone=None,
+        password=None,
+        password_change_required=None,
     ):
         """
         Update one or more attributes of an administrator.
@@ -2175,29 +2193,29 @@ class Admin(client.Client):
         return self.json_api_call("DELETE", "/admin/v1/logo", params={})
 
     def get_u2ftokens(self):
-        """ Returns a list of u2ftokens.
+        """Returns a list of u2ftokens.
 
-            Returns:
-                Returns a list of u2ftoken dicts.
+        Returns:
+            Returns a list of u2ftoken dicts.
 
-            Notes:
-                Raises RuntimeError on error.
+        Notes:
+            Raises RuntimeError on error.
         """
         response = self.json_api_call("GET", "/admin/v1/u2ftokens", {})
         return response
 
     def get_u2ftoken_by_id(self, registration_id):
-        """ Returns u2ftoken specified by registration_id.
+        """Returns u2ftoken specified by registration_id.
 
-            Params:
-                registration_id (str): The registration id of the
-                    u2ftoken to fetch.
+        Params:
+            registration_id (str): The registration id of the
+                u2ftoken to fetch.
 
-            Returns:
-                Returns a u2ftoken dict.
+        Returns:
+            Returns a u2ftoken dict.
 
-            Notes:
-                Raises RuntimeError on error.
+        Notes:
+            Raises RuntimeError on error.
         """
         registration_id = six.moves.urllib.parse.quote_plus(str(registration_id))
         path = "/admin/v1/u2ftokens/" + registration_id
@@ -2205,15 +2223,15 @@ class Admin(client.Client):
         return response
 
     def delete_u2ftoken(self, registration_id):
-        """ Deletes a u2ftoken. If the u2ftoken is already
-            deleted, does nothing.
+        """Deletes a u2ftoken. If the u2ftoken is already
+        deleted, does nothing.
 
-            Params:
-                registration_id (str): The registration id of the
-                    u2ftoken.
+        Params:
+            registration_id (str): The registration id of the
+                u2ftoken.
 
-            Notes:
-                Raises RuntimeError on error.
+        Notes:
+            Raises RuntimeError on error.
         """
         registration_id = six.moves.urllib.parse.quote_plus(str(registration_id))
         path = "/admin/v1/u2ftokens/" + registration_id
@@ -2221,26 +2239,26 @@ class Admin(client.Client):
         return response
 
     def get_bypass_codes(self):
-        """ Gets a list of bypass codes.
+        """Gets a list of bypass codes.
 
-            Returns:
-                Returns a list of bypass code dicts.
+        Returns:
+            Returns a list of bypass code dicts.
 
-            Notes:
-                Raises RuntimeError on error.
+        Notes:
+            Raises RuntimeError on error.
         """
         response = self.json_api_call("GET", "/admin/v1/bypass_codes", {})
         return response
 
     def delete_bypass_code_by_id(self, bypass_code_id):
-        """ Deletes a bypass code. If the bypass code is already
-            deleted, does nothing.
+        """Deletes a bypass code. If the bypass code is already
+        deleted, does nothing.
 
-            Params:
-                bypass_code_id (str): The id of the bypass code.
+        Params:
+            bypass_code_id (str): The id of the bypass code.
 
-            Notes:
-                Raises RuntimeError on error.
+        Notes:
+            Raises RuntimeError on error.
         """
         registration_id = six.moves.urllib.parse.quote_plus(str(bypass_code_id))
         path = "/admin/v1/bypass_codes/" + bypass_code_id

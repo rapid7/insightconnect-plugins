@@ -6,7 +6,14 @@ import duo_client.client
 from . import util
 import base64
 
-JSON_BODY = {"data": "abc123", "alpha": ["a", "b", "c", "d"], "info": {"test": 1, "another": 2,}}
+JSON_BODY = {
+    "data": "abc123",
+    "alpha": ["a", "b", "c", "d"],
+    "info": {
+        "test": 1,
+        "another": 2,
+    },
+}
 JSON_STRING = '{"alpha":["a","b","c","d"],"data":"abc123","info":{"another":2,"test":1}}'
 
 
@@ -18,17 +25,20 @@ class TestQueryParameters(unittest.TestCase):
     def assert_canon_params(self, params, expected):
         params = duo_client.client.normalize_params(params)
         self.assertEqual(
-            duo_client.client.canon_params(params), expected,
+            duo_client.client.canon_params(params),
+            expected,
         )
 
     def test_zero_params(self):
         self.assert_canon_params(
-            {}, "",
+            {},
+            "",
         )
 
     def test_one_param(self):
         self.assert_canon_params(
-            {"realname": ["First Last"]}, "realname=First%20Last",
+            {"realname": ["First Last"]},
+            "realname=First%20Last",
         )
 
     def test_two_params(self):
@@ -86,7 +96,11 @@ class TestQueryParameters(unittest.TestCase):
 
     def test_sort_order_with_common_prefix(self):
         self.assert_canon_params(
-            {"foo_bar": "2", "foo": "1",}, "foo=1&foo_bar=2",
+            {
+                "foo_bar": "2",
+                "foo": "1",
+            },
+            "foo=1&foo_bar=2",
         )
 
 

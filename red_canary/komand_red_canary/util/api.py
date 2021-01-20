@@ -158,7 +158,9 @@ class RedCanary3:
             s.mount("https://", retry_adapter)
 
             try:
-                response = s.send(prepped,)
+                response = s.send(
+                    prepped,
+                )
             except urllib3.exceptions.ProtocolError:
                 self.logger.info("[-] Connection aborted. Retrying request")
                 response = s.send(prepped)

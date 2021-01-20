@@ -23,8 +23,10 @@ class ThreatDescriptors(komand.Action):
                 query_params[param] = params[param]
         self.logger.info(query_params)
         try:
-            auth_url = "https://graph.facebook.com/v2.8/threat_descriptors?access_token={}|{}&".format(
-                self.connection.appid, self.connection.appsecret
+            auth_url = (
+                "https://graph.facebook.com/v2.8/threat_descriptors?access_token={}|{}&".format(
+                    self.connection.appid, self.connection.appsecret
+                )
             )
             query_url = auth_url + urlencode(query_params)
             self.logger.info(query_url)

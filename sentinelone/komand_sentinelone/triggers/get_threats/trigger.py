@@ -7,13 +7,13 @@ from datetime import datetime
 
 
 class GetThreats(insightconnect_plugin_runtime.Trigger):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='get_threats',
-            description='Get threats',
+            name="get_threats",
+            description="Get threats",
             input=GetThreatsInput(),
-            output=GetThreatsOutput())
+            output=GetThreatsOutput(),
+        )
 
     def run(self, params={}):
         self.logger.info("Get Threats: trigger started")

@@ -15,5 +15,6 @@ class CreateBranchedProject(komand.Action):
 
     def run(self, params={}):
         return self.connection.client.create_branched_project(
-            id=params.get("id"), project=params.get("project"),
+            id=params.get("id"),
+            project=params.get("project"),
         )

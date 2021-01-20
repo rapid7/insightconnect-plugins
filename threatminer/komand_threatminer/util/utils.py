@@ -38,7 +38,9 @@ def extract_json_data(response: requests.Response) -> Dict:
 def check_status_code(code: int, expected_range: Iterable, cause="", assistance="", data=""):
     if code not in expected_range:
         raise PluginException(
-            cause=cause, assistance=assistance, data=data,
+            cause=cause,
+            assistance=assistance,
+            data=data,
         )
 
 

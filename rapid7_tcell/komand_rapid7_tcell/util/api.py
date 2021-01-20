@@ -151,7 +151,12 @@ class TCell:
         kwargs = clean(kwargs)
 
         resp = request(
-            method, api_url, headers={"Authorization": "Bearer " + self.api_key,}, **kwargs
+            method,
+            api_url,
+            headers={
+                "Authorization": "Bearer " + self.api_key,
+            },
+            **kwargs,
         )
 
         try:

@@ -45,8 +45,10 @@ class SetSecurityPolicyRule(komand.Action):
         log_end = self._BOOL_TO_VALUE[log_end]
 
         # Build xpath and element
-        xpath = "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='{0}']".format(
-            rule_name
+        xpath = (
+            "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='{0}']".format(
+                rule_name
+            )
         )
         element = (
             "<source><member>{source}</member></source>"

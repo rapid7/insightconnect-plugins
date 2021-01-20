@@ -28,7 +28,10 @@ class ZscalerAPI:
         return 200 <= response.status_code < 300
 
     def get_hash_report(self, hash: str):
-        return self.authenticated_call("GET", f"sandbox/report/{hash}?details=full",).json()
+        return self.authenticated_call(
+            "GET",
+            f"sandbox/report/{hash}?details=full",
+        ).json()
 
     def url_lookup(self, lookup_url: list):
         return self.authenticated_call("POST", "urlLookup", data=json.dumps(lookup_url)).json()

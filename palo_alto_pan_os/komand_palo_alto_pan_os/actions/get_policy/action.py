@@ -8,10 +8,11 @@ from komand.exceptions import PluginException
 class GetPolicy(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='get_policy',
+            name="get_policy",
             description=Component.DESCRIPTION,
             input=GetPolicyInput(),
-            output=GetPolicyOutput())
+            output=GetPolicyOutput(),
+        )
 
     def run(self, params={}):
         name = params.get(Input.POLICY_NAME)
@@ -29,7 +30,8 @@ class GetPolicy(komand.Action):
             raise PluginException(
                 cause="PAN OS returned an unexpected response.",
                 assistance=f"Could not find policy '{name}'. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {vsys}",
-                data=response)
+                data=response,
+            )
 
         entry_action = entry.get("action")
         if type(entry_action) is dict:
@@ -47,7 +49,7 @@ class GetPolicy(komand.Action):
             Output.APPLICATION: self.get_entries(entry, "application"),
             Output.SERVICE: self.get_entries(entry, "service"),
             Output.HIP_PROFILES: self.get_entries(entry, "hip-profiles"),
-            Output.ACTION: action
+            Output.ACTION: action,
         }
 
     def get_entries(self, entry, key):

@@ -12,7 +12,6 @@ from komand_sentinelone.util.helper import Helper
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.username = None
@@ -65,7 +64,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         if r.status_code == 401:
             raise ConnectionTestException(
                 cause=f"Could not authorize with SentinelOne instance at: {final_url}.",
-                assistance="Your 'username' in connection configuration should be an e-mail address. Check if your e-mail address is correct. Response was: " + r.text
+                assistance="Your 'username' in connection configuration should be an e-mail address. Check if your e-mail address is correct. Response was: "
+                + r.text,
             )
 
         token = ""
@@ -82,11 +82,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
             if not token:
                 raise ConnectionTestException(
                     cause=f"Could not authorize with SentinelOne instance at: {final_url}.",
-                    assistance=f"Response was: {r.text}"
+                    assistance=f"Response was: {r.text}",
                 )
 
         if version == "2.0":
-            return r.json().get('data').get('token')
+            return r.json().get("data").get("token")
 
         # When we do not have a token, we know that 2.1 responded with no problems
         # If we do, we know that it came from 2.0 and we can use that in our actions
@@ -94,7 +94,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.token = token
             self.api_version = "2.0"
         else:
-            self.token = r.json().get('data').get('token')
+            self.token = r.json().get("data").get("token")
             self.api_version = "2.1"
 
         return self.token
@@ -164,10 +164,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
         )
 
     def agents_support_action(self, action: str, agents_filter: str, module: str):
-        return self._call_api("POST", f"private/agents/support-actions/{action}", {
-            "filter": agents_filter,
-            "data": {"module": module}
-        })
+        return self._call_api(
+            "POST",
+            f"private/agents/support-actions/{action}",
+            {"filter": agents_filter, "data": {"module": module}},
+        )
 
     def get_threat_summary(self, limit: int = 1000):
         first_page_endpoint = f"threats?limit={limit}"
@@ -178,7 +179,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         next_cursor = threats["pagination"]["nextCursor"]
 
         while next_cursor:
-            next_threats = self._call_api("GET", f"{first_page_endpoint}&cursor={next_cursor}", override_api_version="2.0")
+            next_threats = self._call_api(
+                "GET", f"{first_page_endpoint}&cursor={next_cursor}", override_api_version="2.0"
+            )
             all_threads_data += next_threats["data"]
             next_cursor = next_threats["pagination"]["nextCursor"]
 
@@ -191,31 +194,27 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Using endpoint: " + endpoint)
 
         headers = self.make_token_header()
-        body = {
-            "filter": {
-                "contentHashes": hash_value
-            },
-            "data": {
-                "targetScope": "site"
-            }
-        }
+        body = {"filter": {"contentHashes": hash_value}, "data": {"targetScope": "site"}}
 
         results = requests.post(endpoint, json=body, headers=headers)
         if results.status_code != 200:
-            raise PluginException(cause="Could not blacklist file hash.",
-                                  assistance=f"Result was: {results.text}")
+            raise PluginException(
+                cause="Could not blacklist file hash.", assistance=f"Result was: {results.text}"
+            )
 
         return results.json()
 
     def create_ioc_threat(self, hash_, group_id, path, agent_id, note=""):
         body = {
-            "data": [{
-                "hash": hash_,
-                "groupId": group_id,
-                "path": path,
-                "agentId": agent_id,
-                "note": note,
-            }]
+            "data": [
+                {
+                    "hash": hash_,
+                    "groupId": group_id,
+                    "path": path,
+                    "agentId": agent_id,
+                    "note": note,
+                }
+            ]
         }
         response = self._call_api("POST", "private/threats/ioc-create-threats", body)
 
@@ -232,9 +231,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
             "data": {"whiteningOption": whitening_option, "targetScope": target_scope},
         }
         # Mark as threat does not exist in v2.1
-        return self._call_api(
-            "POST", "threats/mark-as-benign", body, override_api_version="2.0"
-        )["data"]["affected"]
+        return self._call_api("POST", "threats/mark-as-benign", body, override_api_version="2.0")[
+            "data"
+        ]["affected"]
 
     def mark_as_threat(self, threat_id, whitening_option, target_scope):
         body = {
@@ -243,9 +242,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         }
 
         # Mark as threat does not exist in v2.1
-        return self._call_api(
-            "POST", "threats/mark-as-threat", body, override_api_version="2.0"
-        )["data"]["affected"]
+        return self._call_api("POST", "threats/mark-as-threat", body, override_api_version="2.0")[
+            "data"
+        ]["affected"]
 
     def get_threats(self, params):
         # GET /threats has different response schemas for 2.1 and 2.0
@@ -265,17 +264,21 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.logger.info(f"{blacklist_hash} has already been blacklisted.")
         else:
             for os_type in ["linux", "windows", "macos"]:
-                errors.extend(self._call_api("POST", "restrictions", json={
-                    "data": {
-                        "value": blacklist_hash,
-                        "type": "black_hash",
-                        "osType": os_type,
-                        "description": description
-                    },
-                    "filter": {
-                        "siteIds": site_ids
-                    }
-                }).get("errors", []))
+                errors.extend(
+                    self._call_api(
+                        "POST",
+                        "restrictions",
+                        json={
+                            "data": {
+                                "value": blacklist_hash,
+                                "type": "black_hash",
+                                "osType": os_type,
+                                "description": description,
+                            },
+                            "filter": {"siteIds": site_ids},
+                        },
+                    ).get("errors", [])
+                )
 
         return errors
 
@@ -285,10 +288,14 @@ class Connection(insightconnect_plugin_runtime.Connection):
         if not ids:
             return False
 
-        response = self._call_api("GET", "restrictions", params={
-            "type": "black_hash",
-            "ids": ids,
-        })
+        response = self._call_api(
+            "GET",
+            "restrictions",
+            params={
+                "type": "black_hash",
+                "ids": ids,
+            },
+        )
 
         existing_os_types = []
         for blacklist_entry in response.get("data", []):
@@ -310,19 +317,25 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         errors = "\n".join(response.get("errors"))
 
-        raise PluginException(cause="An error occured when trying to unblacklist.",
-                              assistance=f"The following error(s) occured: {errors}")
+        raise PluginException(
+            cause="An error occured when trying to unblacklist.",
+            assistance=f"The following error(s) occured: {errors}",
+        )
 
     def delete_blacklist_item_by_hash(self, item_ids: str):
-        return self._call_api("DELETE", "restrictions", json={
-            "data": {
-                "type": "black_hash",
-                "ids": item_ids
-            }
-        }).get("errors", [])
+        return self._call_api(
+            "DELETE", "restrictions", json={"data": {"type": "black_hash", "ids": item_ids}}
+        ).get("errors", [])
 
-    def _call_api(self, method, endpoint, json=None, params=None, full_response: bool = False,
-                  override_api_version: str = ""):
+    def _call_api(
+        self,
+        method,
+        endpoint,
+        json=None,
+        params=None,
+        full_response: bool = False,
+        override_api_version: str = "",
+    ):
 
         # We prefer to use the same api version from the token creation,
         # But some actions require 2.0 and not 2.1 (and vice versa), in that case just pass in the right version

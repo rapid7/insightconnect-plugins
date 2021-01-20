@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_rest.connection.connection import Connection
@@ -32,7 +33,6 @@ class TestPost(TestCase):
             """
             self.fail(message)
 
-
         test_conn.connect(connection_params)
         test_action.connection = test_conn
         results = test_action.run(action_params)
@@ -41,4 +41,3 @@ class TestPost(TestCase):
         self.assertTrue("status" in results.keys())
         self.assertTrue("headers" in results.keys())
         self.assertTrue("body_string" in results.keys())
-

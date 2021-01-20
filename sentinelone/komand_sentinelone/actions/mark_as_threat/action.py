@@ -5,7 +5,6 @@ from .schema import MarkAsThreatInput, MarkAsThreatOutput, Input, Output
 
 
 class MarkAsThreat(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
             name="mark_as_threat",

@@ -19,7 +19,9 @@ class AddCollaborator(komand.Action):
         try:
             results = r.put(
                 "https://api.github.com/repos/{}/{}/collaborators/{}".format(
-                    params.get("organization"), params.get("repository"), params.get("username"),
+                    params.get("organization"),
+                    params.get("repository"),
+                    params.get("username"),
                 ),
                 auth=self.connection.basic_auth,
                 params={"permission": params.get("permission")},

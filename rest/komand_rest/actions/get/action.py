@@ -17,11 +17,9 @@ class Get(komand.Action):
         route = params.get("route")
         headers = params.get("headers", {})
 
-        req_headers = Common.merge_dicts(self.connection.default_headers,
-                                         headers)
+        req_headers = Common.merge_dicts(self.connection.default_headers, headers)
         url = parse.urljoin(self.connection.base_url, route)
-        response = requests.get(url, headers=req_headers,
-                                verify=self.connection.ssl_verify)
+        response = requests.get(url, headers=req_headers, verify=self.connection.ssl_verify)
         body_object = {}
         try:
             body_object = response.json()

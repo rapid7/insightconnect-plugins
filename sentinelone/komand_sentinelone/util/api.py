@@ -9,8 +9,14 @@ class SentineloneAPI:
         self.url = url
         self.token_header = make_token_header
 
-    def search_agents(self, agent_details: str, agent_active: bool = True, case_sensitive: bool = True,
-                      results_length: int = 0, api_version: str = "2.0") -> list:
+    def search_agents(
+        self,
+        agent_details: str,
+        agent_active: bool = True,
+        case_sensitive: bool = True,
+        results_length: int = 0,
+        api_version: str = "2.0",
+    ) -> list:
         results = []
         if agent_details:
             for search in self.__get_searches(agent_details):
@@ -28,15 +34,18 @@ class SentineloneAPI:
                     output = requests.get(endpoint, headers=self.token_header)
 
                     if output.status_code == 200 and output.json()["pagination"]["totalItems"] >= 1:
-                        results.append(output.json()['data'][0])
+                        results.append(output.json()["data"][0])
 
                 if results_length:
                     if len(results) >= results_length:
                         return self.clean_results(results)
 
         else:
-            output = requests.get(f"{self.url}web/api/v{api_version}/agents?isActive={agent_active}", headers=self.token_header)
-            results.extend(output.json()['data'])
+            output = requests.get(
+                f"{self.url}web/api/v{api_version}/agents?isActive={agent_active}",
+                headers=self.token_header,
+            )
+            results.extend(output.json()["data"])
         return self.clean_results(results)
 
     @staticmethod
@@ -52,4 +61,4 @@ class SentineloneAPI:
 
     @staticmethod
     def clean_results(results):
-        return loads(dumps(results).replace('null', '"None"'))
+        return loads(dumps(results).replace("null", '"None"'))

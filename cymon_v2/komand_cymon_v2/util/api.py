@@ -27,7 +27,13 @@ class CymonV2:
         url = "ioc/search/{}/{}".format(search_by, value)
 
         return self._call_api(
-            "GET", url, "hits", params={"start_date": start_date, "end_date": end_date,}
+            "GET",
+            url,
+            "hits",
+            params={
+                "start_date": start_date,
+                "end_date": end_date,
+            },
         )
 
     def list_all_feeds(self, privacy):
@@ -36,7 +42,14 @@ class CymonV2:
         if privacy == "all":
             privacy = None
 
-        return self._call_api("GET", url, "feeds", params={"privacy": privacy,})
+        return self._call_api(
+            "GET",
+            url,
+            "feeds",
+            params={
+                "privacy": privacy,
+            },
+        )
 
     def list_user_feeds(self):
         url = "feeds/me"

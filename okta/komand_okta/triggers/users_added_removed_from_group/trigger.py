@@ -17,10 +17,11 @@ import re
 class UsersAddedRemovedFromGroup(komand.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='users_added_removed_from_group',
-                description=Component.DESCRIPTION,
-                input=UsersAddedRemovedFromGroupInput(),
-                output=UsersAddedRemovedFromGroupOutput())
+            name="users_added_removed_from_group",
+            description=Component.DESCRIPTION,
+            input=UsersAddedRemovedFromGroupInput(),
+            output=UsersAddedRemovedFromGroupOutput(),
+        )
 
     def run(self, params={}):
         """Run the trigger"""
@@ -88,13 +89,22 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
 
             if added and removed:
                 self.logger.info("Users added and removed, sending to orchestrator.")
-                self.send({Output.USERS_ADDED_FROM_GROUPS: added, Output.USERS_REMOVED_FROM_GROUPS: removed})
+                self.send(
+                    {
+                        Output.USERS_ADDED_FROM_GROUPS: added,
+                        Output.USERS_REMOVED_FROM_GROUPS: removed,
+                    }
+                )
             elif added and not removed:
                 self.logger.info("Users added, sending to orchestrator.")
-                self.send({Output.USERS_ADDED_FROM_GROUPS: added, Output.USERS_REMOVED_FROM_GROUPS: []})
+                self.send(
+                    {Output.USERS_ADDED_FROM_GROUPS: added, Output.USERS_REMOVED_FROM_GROUPS: []}
+                )
             elif removed and not added:
                 self.logger.info("Users removed, sending to orchestrator.")
-                self.send({Output.USERS_REMOVED_FROM_GROUPS: removed, Output.USERS_ADDED_FROM_GROUPS: []})
+                self.send(
+                    {Output.USERS_REMOVED_FROM_GROUPS: removed, Output.USERS_ADDED_FROM_GROUPS: []}
+                )
 
             current_list = new_list
 
@@ -105,9 +115,9 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
     def get_users_in_group_list(self, group_list, okta_url):
         current_list = []
         for group in group_list:
-            current_list.append({
-                group: self.get_users_in_group(f"{okta_url}/api/v1/groups/{group}/users")
-            })
+            current_list.append(
+                {group: self.get_users_in_group(f"{okta_url}/api/v1/groups/{group}/users")}
+            )
 
         return current_list
 
@@ -118,7 +128,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
         links = response.headers.get("Link", "").split(", ")
         for link in links:
             if 'rel="next"' in link:
-                matched_link = re.match('<(.*?)>', link)
+                matched_link = re.match("<(.*?)>", link)
                 if matched_link:
                     next_link = matched_link.group(1)
 
@@ -128,9 +138,11 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
         try:
             data = response.json()
         except ValueError:
-            raise PluginException(cause='Returned data was not in JSON format.',
-                                  assistance="Double-check that group ID's are all valid.",
-                                  data=response.text)
+            raise PluginException(
+                cause="Returned data was not in JSON format.",
+                assistance="Double-check that group ID's are all valid.",
+                data=response.text,
+            )
 
         helpers.raise_based_on_error_code(response)
         returned_data.extend(komand.helper.clean(data))

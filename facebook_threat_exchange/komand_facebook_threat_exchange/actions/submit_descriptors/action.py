@@ -24,8 +24,10 @@ class SubmitDescriptors(komand.Action):
         self.logger.info(query_params)
         payload = urlencode(query_params)
         try:
-            auth_url = "https://graph.facebook.com/v2.8/threat_descriptors?access_token={}|{}".format(
-                self.connection.appid, self.connection.appsecret
+            auth_url = (
+                "https://graph.facebook.com/v2.8/threat_descriptors?access_token={}|{}".format(
+                    self.connection.appid, self.connection.appsecret
+                )
             )
             response = requests.post(url=auth_url, data=payload)
             data = response.json()

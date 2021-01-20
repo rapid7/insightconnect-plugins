@@ -14,7 +14,10 @@ class GetUser(komand.Action):
         )
 
     def run(self, params={}):
-        response = self.connection.request("GET", ("users", params.get("user_id")),)
+        response = self.connection.request(
+            "GET",
+            ("users", params.get("user_id")),
+        )
         if response.ok:
             return {"user": response.json()}
         else:

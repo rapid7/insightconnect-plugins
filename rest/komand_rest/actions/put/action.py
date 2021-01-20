@@ -20,7 +20,9 @@ class Put(komand.Action):
 
         req_headers = Common.merge_dicts(self.connection.default_headers, headers)
         url = parse.urljoin(self.connection.base_url, route)
-        response = requests.put(url, headers=req_headers, json=body, verify=self.connection.ssl_verify)
+        response = requests.put(
+            url, headers=req_headers, json=body, verify=self.connection.ssl_verify
+        )
         body_object = {}
         try:
             body_object = response.json()
@@ -30,7 +32,6 @@ class Put(komand.Action):
         # https://stackoverflow.com/questions/32319845/python-requests-gives-none-response-where-json-data-is-expected
         if body_object == None:
             body_object = {}
-
 
         resp_headers = Common.copy_dict(response.headers)
         return {

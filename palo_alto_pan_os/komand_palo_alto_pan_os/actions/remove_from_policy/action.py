@@ -37,8 +37,10 @@ class RemoveFromPolicy(komand.Action):
             policy_type = True
 
         # Set xpath to security polices
-        xpath = "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='{0}']".format(
-            rule_name
+        xpath = (
+            "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='{0}']".format(
+                rule_name
+            )
         )
 
         # Get current policy config

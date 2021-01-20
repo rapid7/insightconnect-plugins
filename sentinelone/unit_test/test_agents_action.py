@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_sentinelone.connection.connection import Connection
@@ -23,7 +24,9 @@ class TestAgentsAction(TestCase):
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
         except Exception as e:
-            self.fail("Likely could not find tests in test directory. Generate and fill out samples to fix this.")
+            self.fail(
+                "Likely could not find tests in test directory. Generate and fill out samples to fix this."
+            )
         return action_params, connection_params, test_action, test_conn, log
 
     def test_agents_action_abort_scan(self):

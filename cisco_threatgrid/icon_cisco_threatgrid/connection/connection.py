@@ -35,6 +35,6 @@ class Connection(komand.Connection):
         except PluginException:
             raise ConnectionTestException(
                 cause="Connection Test Failed.",
-                assistance="Please check that your API key is correct."
+                assistance="Please check that your API key is correct.",
             )
         return {}

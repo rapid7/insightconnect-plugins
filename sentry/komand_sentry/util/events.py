@@ -53,7 +53,13 @@ def submit_event(logger, event_json, dsn, sentry_version):
         "sentry_secret={}, sentry_client=komand/1.0.0"
     ).format(sentry_version, int(time.time()), dsn_data["public_key"], dsn_data["secret_key"])
 
-    response = post(api_url, json=event_json, headers={"X-Sentry-Auth": sentry_auth_header,})
+    response = post(
+        api_url,
+        json=event_json,
+        headers={
+            "X-Sentry-Auth": sentry_auth_header,
+        },
+    )
 
     try:
         response.raise_for_status()

@@ -58,7 +58,10 @@ class Connection(komand.Connection):
         response = requests.request(
             http_method,
             url,
-            headers={"Content-Type": "application/json", "Authorization": "Bearer %s" % token,},
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": "Bearer %s" % token,
+            },
         )
 
         if response.status_code == 401:

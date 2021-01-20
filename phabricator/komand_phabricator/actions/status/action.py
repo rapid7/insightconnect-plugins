@@ -34,7 +34,11 @@ class Status(komand.Action):
 
         maniphest = ManiphesEdit(self.connection.phab, action=self, objectIdentifier=id)
         try:
-            id = maniphest.edit([{"type": "status", "value": status},])
+            id = maniphest.edit(
+                [
+                    {"type": "status", "value": status},
+                ]
+            )
         except Exception as e:
             self.logger.error("Status: Run: Problem with request".format(e.errno, e.strerror))
             raise e

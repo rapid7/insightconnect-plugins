@@ -20,7 +20,10 @@ class GetOrganizationUsers(komand.Action):
         else:
             urlparts = ("org", "users")
 
-        response = self.connection.request("GET", urlparts,)
+        response = self.connection.request(
+            "GET",
+            urlparts,
+        )
         if response.ok:
             return {"users": response.json()}
         else:

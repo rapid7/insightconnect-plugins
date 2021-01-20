@@ -27,7 +27,10 @@ class Connection(komand.Connection):
             threatq_host=self.host,
             auth={
                 "clientid": self.clientid,
-                "auth": {"email": self.email, "password": self.password,},
+                "auth": {
+                    "email": self.email,
+                    "password": self.password,
+                },
             },
             proxy=self.proxy,
         )

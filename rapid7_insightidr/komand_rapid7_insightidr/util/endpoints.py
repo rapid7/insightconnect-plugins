@@ -60,11 +60,10 @@ class QueryLogs:
         :return: pre-populated /query/logs/{log_id}
         """
 
-        return f'{console_url}query/logs/{log_id}'
+        return f"{console_url}query/logs/{log_id}"
 
 
 class Logs:
-
     @staticmethod
     def get_a_log(console_url: str, log_id: str):
         """
@@ -74,7 +73,7 @@ class Logs:
         :return: pre-populated /management/logs/{logId}
         """
 
-        return f'{console_url}management/logs/{log_id}'
+        return f"{console_url}management/logs/{log_id}"
 
     @staticmethod
     def get_all_logs(console_url: str):
@@ -84,4 +83,4 @@ class Logs:
         :return: pre-populated /management/logs
         """
 
-        return f'{console_url}management/logs'
+        return f"{console_url}management/logs"

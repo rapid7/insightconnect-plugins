@@ -17,7 +17,8 @@ class ListHashRiskRules(komand.Action):
             risklist = params.get("list")
             query_headers = self.connection.headers
             results = requests.get(
-                "https://api.recordedfuture.com/v2/hash/riskrules", headers=query_headers,
+                "https://api.recordedfuture.com/v2/hash/riskrules",
+                headers=query_headers,
             ).json()
             return {"risk_rules": results["data"]["results"]}
         except Exception as e:

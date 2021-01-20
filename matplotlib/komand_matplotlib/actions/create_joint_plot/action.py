@@ -52,7 +52,10 @@ class CreateJointPlot(komand.Action):
 
         # bbox_inches is required to ensure that labels are cut off
         plot.savefig("plot.png", bbox_inches="tight")
-        with open("plot.png", "rb",) as f:
+        with open(
+            "plot.png",
+            "rb",
+        ) as f:
             plot = base64.b64encode(f.read())
 
         return {"csv": params.get("csv_data"), "plot": plot.decode("utf-8")}

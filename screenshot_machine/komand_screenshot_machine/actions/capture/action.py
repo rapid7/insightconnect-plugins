@@ -65,7 +65,13 @@ class Capture(komand.Action):
             + (params.get("format") or "JPG")
         )
 
-        return {"url": url, "screenshot": {"filename": filename, "content": content,}}
+        return {
+            "url": url,
+            "screenshot": {
+                "filename": filename,
+                "content": content,
+            },
+        }
 
     def test(self):
         """TODO: Test action"""

@@ -52,7 +52,9 @@ class Send(komand.Action):
             msg.attach(part)
 
         client.sendmail(
-            params.get(Input.EMAIL_FROM), emails, msg.as_string(),
+            params.get(Input.EMAIL_FROM),
+            emails,
+            msg.as_string(),
         )
         client.quit()
         return {Output.RESULT: "ok"}

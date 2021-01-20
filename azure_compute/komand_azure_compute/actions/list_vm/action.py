@@ -30,7 +30,10 @@ class ListVm(komand.Action):
             # New Request, Call API and response data
             resp = requests.get(
                 url,
-                headers={"Content-Type": "application/json", "Authorization": "Bearer %s" % token,},
+                headers={
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer %s" % token,
+                },
             )
 
             # Handle decoding json

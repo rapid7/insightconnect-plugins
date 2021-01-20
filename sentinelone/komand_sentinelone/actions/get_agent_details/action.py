@@ -5,7 +5,6 @@ from .schema import GetAgentDetailsInput, GetAgentDetailsOutput, Input, Output, 
 
 
 class GetAgentDetails(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_agent_details",
@@ -17,7 +16,9 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         agent = params.get(Input.AGENT)
         case_sensitive = params.get(Input.CASE_SENSITIVE)
-        output = self.connection.client.search_agents(agent, case_sensitive=case_sensitive, api_version=self.connection.api_version)
+        output = self.connection.client.search_agents(
+            agent, case_sensitive=case_sensitive, api_version=self.connection.api_version
+        )
 
         if len(output) > 1:
             self.logger.info(

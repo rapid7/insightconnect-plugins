@@ -1,6 +1,7 @@
 import komand
 from .schema import AdvancedQueryOnLogInput, AdvancedQueryOnLogOutput, Input, Output, Component
 from komand.exceptions import PluginException
+
 # Custom imports below
 import time
 import json
@@ -8,13 +9,13 @@ from dateutil.parser import parse, ParserError
 
 
 class AdvancedQueryOnLog(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='advanced_query_on_log',
-                description=Component.DESCRIPTION,
-                input=AdvancedQueryOnLogInput(),
-                output=AdvancedQueryOnLogOutput())
+            name="advanced_query_on_log",
+            description=Component.DESCRIPTION,
+            input=AdvancedQueryOnLogInput(),
+            output=AdvancedQueryOnLogOutput(),
+        )
 
     def run(self, params={}):
         query = params.get(Input.QUERY)
@@ -62,9 +63,11 @@ class AdvancedQueryOnLog(komand.Action):
                 # Now in millisecond epoch time
                 time_to = int(time.time()) * 1000
         except ParserError as e:
-            raise PluginException(cause="Could not parse given date.",
-                                  assistance="The date given was in an unrecognizable format.",
-                                  data=e)
+            raise PluginException(
+                cause="Could not parse given date.",
+                assistance="The date given was in an unrecognizable format.",
+                data=e,
+            )
         return time_from, time_to
 
     def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:
@@ -79,9 +82,11 @@ class AdvancedQueryOnLog(komand.Action):
         try:
             response.raise_for_status()
         except Exception:
-            raise PluginException(cause="Failed to get logs from InsightIDR",
-                                  assistance=f"Could not get logs from: {callback_url}",
-                                  data=response.text)
+            raise PluginException(
+                cause="Failed to get logs from InsightIDR",
+                assistance=f"Could not get logs from: {callback_url}",
+                data=response.text,
+            )
         results_object = response.json()
         log_entries = results_object.get("events")
 
@@ -89,10 +94,11 @@ class AdvancedQueryOnLog(komand.Action):
         while not log_entries and counter >= 0:
             counter -= 1
             if counter < 0:
-                raise PluginException(cause="Time out exceeded",
-                                      assistance="Time out for the query results was exceeded. Try simplifying your"
-                                                 " query or extending the timeout period")
-
+                raise PluginException(
+                    cause="Time out exceeded",
+                    assistance="Time out for the query results was exceeded. Try simplifying your"
+                    " query or extending the timeout period",
+                )
 
             self.logger.info("Results were not ready. Sleeping 1 second and trying again.")
             self.logger.info(f"Time left: {counter}")
@@ -103,9 +109,11 @@ class AdvancedQueryOnLog(komand.Action):
             try:
                 response.raise_for_status()
             except Exception:
-                raise PluginException(cause="Failed to get logs from InsightIDR\n",
-                                      assistance=f"Could not get logs from: {callback_url}\n",
-                                      data=response.text)
+                raise PluginException(
+                    cause="Failed to get logs from InsightIDR\n",
+                    assistance=f"Could not get logs from: {callback_url}\n",
+                    data=response.text,
+                )
 
             results_object = response.json()
             log_entries = results_object.get("events")
@@ -113,12 +121,13 @@ class AdvancedQueryOnLog(komand.Action):
                 try:
                     callback_url = results_object.get("links")[0].get("href")
                 except Exception:
-                    raise PluginException(PluginException.Preset.INVALID_JSON,
-                                          data=results_object)
+                    raise PluginException(PluginException.Preset.INVALID_JSON, data=results_object)
 
         return log_entries
 
-    def maybe_get_log_entries(self, log_id: str, query: str, time_from: int, time_to: int) -> (str, [object]):
+    def maybe_get_log_entries(
+        self, log_id: str, query: str, time_from: int, time_to: int
+    ) -> (str, [object]):
         """
         Make a call to the API and ask politely for log results.
 
@@ -135,11 +144,7 @@ class AdvancedQueryOnLog(komand.Action):
         @return: (callback url, list of log entries)
         """
         endpoint = f"{self.connection.url}log_search/query/logs/{log_id}"
-        params = {
-            "query": query,
-            "from": time_from,
-            "to": time_to
-        }
+        params = {"query": query, "from": time_from, "to": time_to}
 
         self.logger.info(f"Getting logs from: {endpoint}")
         self.logger.info(f"Using parameters: {params}")
@@ -147,9 +152,11 @@ class AdvancedQueryOnLog(komand.Action):
         try:
             response.raise_for_status()
         except Exception:
-            raise PluginException(cause="Failed to get logs from InsightIDR\n",
-                                  assistance=f"Could not get logs from: {endpoint}\n",
-                                  data=response.text)
+            raise PluginException(
+                cause="Failed to get logs from InsightIDR\n",
+                assistance=f"Could not get logs from: {endpoint}\n",
+                data=response.text,
+            )
 
         results_object = response.json()
         potential_results = results_object.get("events")
@@ -174,16 +181,18 @@ class AdvancedQueryOnLog(komand.Action):
         try:
             response.raise_for_status()
         except Exception:
-            raise PluginException(cause="Failed to get logs from InsightIDR",
-                                  assistance=f"Could not get logs from: {endpoint}",
-                                  data=response.text)
+            raise PluginException(
+                cause="Failed to get logs from InsightIDR",
+                assistance=f"Could not get logs from: {endpoint}",
+                data=response.text,
+            )
 
         logs = response.json().get("logs")
 
         id = ""
 
         for log in logs:
-            name = log.get('name')
+            name = log.get("name")
             self.logger.info(f"Checking {log_name} against {name}")
             if name == log_name:
                 self.logger.info("Log found.")
@@ -195,9 +204,7 @@ class AdvancedQueryOnLog(komand.Action):
             return id
 
         self.logger.error(f"Could not find log with name {log_name}")
-        raise PluginException(cause="Could not find specified log.",
-                              assistance=f"Could not find log with name: {log_name}")
-
-
-
-
+        raise PluginException(
+            cause="Could not find specified log.",
+            assistance=f"Could not find log with name: {log_name}",
+        )

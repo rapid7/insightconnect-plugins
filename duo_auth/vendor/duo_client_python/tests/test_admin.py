@@ -142,8 +142,7 @@ class TestAdmin(unittest.TestCase):
         self.assertEqual(util.params_to_dict(args), {"account_id": [self.client.account_id]})
 
     def test_get_user_u2ftokens(self):
-        """ Test to get u2ftokens by user id.
-        """
+        """Test to get u2ftokens by user id."""
         response = self.client.get_user_u2ftokens("DU012345678901234567")
         uri, args = response["uri"].split("?")
 
@@ -152,8 +151,7 @@ class TestAdmin(unittest.TestCase):
         self.assertEqual(util.params_to_dict(args), {"account_id": [self.client.account_id]})
 
     def test_get_u2ftokens_with_params(self):
-        """ Test to get u2ftokens with params.
-        """
+        """Test to get u2ftokens with params."""
         response = list(self.client_list.get_u2ftokens())[0]
         uri, args = response["uri"].split("?")
 
@@ -162,8 +160,7 @@ class TestAdmin(unittest.TestCase):
         self.assertEqual(util.params_to_dict(args), {"account_id": [self.client_list.account_id]})
 
     def test_get_u2ftokens_without_params(self):
-        """ Test to get u2ftokens without params.
-        """
+        """Test to get u2ftokens without params."""
         response = list(self.client_list.get_u2ftokens())[0]
         uri, args = response["uri"].split("?")
 
@@ -172,8 +169,7 @@ class TestAdmin(unittest.TestCase):
         self.assertEqual(util.params_to_dict(args), {"account_id": [self.client_list.account_id]})
 
     def test_get_u2ftoken_by_id(self):
-        """ Test to get u2ftoken by registration id.
-        """
+        """Test to get u2ftoken by registration id."""
         response = self.client.get_u2ftoken_by_id("DU012345678901234567")
         uri, args = response["uri"].split("?")
 
@@ -182,8 +178,7 @@ class TestAdmin(unittest.TestCase):
         self.assertEqual(util.params_to_dict(args), {"account_id": [self.client.account_id]})
 
     def test_delete_u2ftoken(self):
-        """ Test to delete u2ftoken by registration id.
-        """
+        """Test to delete u2ftoken by registration id."""
         response = self.client.delete_u2ftoken("DU012345678901234567")
         uri, args = response["uri"].split("?")
 
@@ -192,8 +187,7 @@ class TestAdmin(unittest.TestCase):
         self.assertEqual(util.params_to_dict(args), {"account_id": [self.client.account_id]})
 
     def test_get_user_bypass_codes(self):
-        """ Test to get bypass codes by user id.
-        """
+        """Test to get bypass codes by user id."""
         response = self.client.get_user_bypass_codes("DU012345678901234567")
         uri, args = response["uri"].split("?")
 
@@ -202,8 +196,7 @@ class TestAdmin(unittest.TestCase):
         self.assertEqual(util.params_to_dict(args), {"account_id": [self.client.account_id]})
 
     def test_get_bypass_codes(self):
-        """ Test to get bypass codes.
-        """
+        """Test to get bypass codes."""
         response = list(self.client_list.get_bypass_codes())[0]
         uri, args = response["uri"].split("?")
 
@@ -212,8 +205,7 @@ class TestAdmin(unittest.TestCase):
         self.assertEqual(util.params_to_dict(args), {"account_id": [self.client_list.account_id]})
 
     def test_delete_bypass_code_by_id(self):
-        """ Test to delete a bypass code by id.
-        """
+        """Test to delete a bypass code by id."""
         response = self.client.delete_bypass_code_by_id("DU012345678901234567")
         uri, args = response["uri"].split("?")
 
@@ -222,8 +214,7 @@ class TestAdmin(unittest.TestCase):
         self.assertEqual(util.params_to_dict(args), {"account_id": [self.client.account_id]})
 
     def test_get_authentication_log_v1(self):
-        """ Test to get authentication log on version 1 api.
-        """
+        """Test to get authentication log on version 1 api."""
         response = self.client_list.get_authentication_log(api_version=1)[0]
         uri, args = response["uri"].split("?")
 
@@ -232,8 +223,7 @@ class TestAdmin(unittest.TestCase):
         self.assertEqual(util.params_to_dict(args)["account_id"], [self.client_list.account_id])
 
     def test_get_authentication_log_v2(self):
-        """ Test to get authentication log on version 1 api.
-        """
+        """Test to get authentication log on version 1 api."""
         response = self.client_authlog.get_authentication_log(api_version=2)
         uri, args = response["uri"].split("?")
 
@@ -242,8 +232,7 @@ class TestAdmin(unittest.TestCase):
         self.assertEqual(util.params_to_dict(args)["account_id"], [self.client_authlog.account_id])
 
     def test_get_groups(self):
-        """ Test for getting list of all groups
-        """
+        """Test for getting list of all groups"""
         response = self.client.get_groups()
         uri, args = response["uri"].split("?")
 
@@ -252,8 +241,7 @@ class TestAdmin(unittest.TestCase):
         self.assertEqual(util.params_to_dict(args), {"account_id": [self.client.account_id]})
 
     def test_get_group_v1(self):
-        """ Test for v1 API of getting specific group details
-        """
+        """Test for v1 API of getting specific group details"""
         with warnings.catch_warnings(record=True) as w:
             warnings.simplefilter("always")
 
@@ -270,8 +258,7 @@ class TestAdmin(unittest.TestCase):
             self.assertEqual(util.params_to_dict(args), {"account_id": [self.client.account_id]})
 
     def test_get_group_v2(self):
-        """ Test for v2 API of getting specific group details
-        """
+        """Test for v2 API of getting specific group details"""
         response = self.client.get_group("ABC123", api_version=2)
         uri, args = response["uri"].split("?")
 
@@ -280,8 +267,7 @@ class TestAdmin(unittest.TestCase):
         self.assertEqual(util.params_to_dict(args), {"account_id": [self.client.account_id]})
 
     def test_get_group_users(self):
-        """ Test for getting list of users associated with a group
-        """
+        """Test for getting list of users associated with a group"""
         response = self.client.get_group_users("ABC123")
         uri, args = response["uri"].split("?")
 
@@ -289,12 +275,15 @@ class TestAdmin(unittest.TestCase):
         self.assertEqual(uri, "/admin/v2/groups/ABC123/users")
         self.assertEqual(
             util.params_to_dict(args),
-            {"account_id": [self.client.account_id], "limit": ["100"], "offset": ["0"],},
+            {
+                "account_id": [self.client.account_id],
+                "limit": ["100"],
+                "offset": ["0"],
+            },
         )
 
     def test_delete_group(self):
-        """ Test for deleting a group
-        """
+        """Test for deleting a group"""
         response = self.client.delete_group("ABC123")
         uri, args = response["uri"].split("?")
 
@@ -303,8 +292,7 @@ class TestAdmin(unittest.TestCase):
         self.assertEqual(util.params_to_dict(args), {"account_id": [self.client.account_id]})
 
     def test_modify_group(self):
-        """ Test for modifying a group
-        """
+        """Test for modifying a group"""
         response = self.client.modify_group("ABC123")
         self.assertEqual(response["method"], "POST")
         self.assertEqual(response["uri"], "/admin/v1/groups/ABC123")

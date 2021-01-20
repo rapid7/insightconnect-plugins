@@ -38,7 +38,11 @@ class Subscribe(komand.Action):
 
         maniphest = ManiphesEdit(self.connection.phab, action=self, objectIdentifier=id)
         try:
-            id = maniphest.edit([{"type": "subscribers.add", "value": self.foundedSubscribes},])
+            id = maniphest.edit(
+                [
+                    {"type": "subscribers.add", "value": self.foundedSubscribes},
+                ]
+            )
         except Exception as e:
             self.logger.error("Subscribe: Run: Problem with request".format(e.errno, e.strerror))
             raise e

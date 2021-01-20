@@ -111,7 +111,12 @@ class SalesforceAPI:
         self.logger.info("SalesforceAPI: Trying to reach endpoint: " + api_url)
 
         response = request(
-            method, api_url, headers={"Authorization": "Bearer " + self.access_token,}, **kwargs
+            method,
+            api_url,
+            headers={
+                "Authorization": "Bearer " + self.access_token,
+            },
+            **kwargs,
         )
 
         try:

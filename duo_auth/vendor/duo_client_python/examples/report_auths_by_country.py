@@ -41,5 +41,8 @@ print("[+] Report of auth counts by country:")
 reporter.writerow(("Country", "Auth Count"))
 for row in auths_descending:
     reporter.writerow(
-        [row[0], row[1],]
+        [
+            row[0],
+            row[1],
+        ]
     )

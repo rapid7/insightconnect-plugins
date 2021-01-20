@@ -21,7 +21,10 @@ class DeleteOrganizationUser(komand.Action):
         else:
             urlparts = ("org", "users", user_id)
 
-        response = self.connection.request("DELETE", urlparts,)
+        response = self.connection.request(
+            "DELETE",
+            urlparts,
+        )
         message = response.json().get("message", "")
         if response.ok:
             return {"success": True, "message": message}

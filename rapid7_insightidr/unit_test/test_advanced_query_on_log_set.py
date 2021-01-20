@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_rapid7_insightidr.connection.connection import Connection
@@ -23,7 +24,9 @@ class TestAdvancedQueryOnLogSet(TestCase):
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
         except Exception as e:
-            self.fail("Likely could not find tests in test directory. Generate and fill out samples to fix this.")
+            self.fail(
+                "Likely could not find tests in test directory. Generate and fill out samples to fix this."
+            )
         return action_params, connection_params, test_action, test_conn
 
     def test_integration_advanced_query(self):
@@ -43,7 +46,9 @@ class TestAdvancedQueryOnLogSet(TestCase):
         test_action.connection = test_conn
         result = test_action.get_log_set_id("Asset Authentication")
 
-        self.assertIsNotNone(result) # Best we can do here, the log ID will change based on the instance used.
+        self.assertIsNotNone(
+            result
+        )  # Best we can do here, the log ID will change based on the instance used.
 
     def test_get_log_fails(self):
         action_params, connection_params, test_action, test_conn = self.setup()
@@ -77,7 +82,7 @@ class TestAdvancedQueryOnLogSet(TestCase):
         self.assertEquals(res2, 1577858400000)
         self.assertEquals(res3, 1577923261000)
         self.assertEquals(res4, 257148000000)
-        self.assertIsNotNone(res5) # This will be today @ 1:25 PM.
+        self.assertIsNotNone(res5)  # This will be today @ 1:25 PM.
         self.assertEquals(res6, 1580184000000)
         self.assertEquals(res7, 1577858400000)
         self.assertEquals(res8, 1609394400000)

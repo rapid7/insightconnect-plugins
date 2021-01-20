@@ -17,8 +17,8 @@ class UrlDecode(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         in_url = params[Input.ENCODED_URL]
-        url_v2 = 'https://urldefense.proofpoint.com/'  # This is good for v1 as well
-        url_v3 = 'https://urldefense.com'
+        url_v2 = "https://urldefense.proofpoint.com/"  # This is good for v1 as well
+        url_v3 = "https://urldefense.com"
         is_hxxp = in_url.startswith("hxxp")
         in_url = in_url.replace("hxxp", "http").replace("[.]", ".")
 
@@ -33,16 +33,13 @@ class UrlDecode(insightconnect_plugin_runtime.Action):
 
         try:
             decoded_url = decoder.decode(encoded_url)
-            self.logger.info('URL has been decoded')
-            if re.compile('http:/[^/]').match(decoded_url):
-                decoded_url = decoded_url.replace('http:/', 'http://')
-            if re.compile('https:/[^/]').match(decoded_url):
-                decoded_url = decoded_url.replace('https:/', 'https://')
+            self.logger.info("URL has been decoded")
+            if re.compile("http:/[^/]").match(decoded_url):
+                decoded_url = decoded_url.replace("http:/", "http://")
+            if re.compile("https:/[^/]").match(decoded_url):
+                decoded_url = decoded_url.replace("https:/", "https://")
 
-            return {
-                Output.DECODED_URL: decoded_url,
-                Output.DECODED: True
-            }
+            return {Output.DECODED_URL: decoded_url, Output.DECODED: True}
         except (Exception, ValueError) as e:
             self.logger.error(f"Unexpected issue occurred decoding URL: {e}")
             return {Output.DECODED_URL: in_url, Output.DECODED: False}

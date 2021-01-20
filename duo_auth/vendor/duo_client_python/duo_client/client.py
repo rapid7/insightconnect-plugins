@@ -358,13 +358,29 @@ class Client(object):
                     if "message_detail" in data:
                         raise_error(
                             "Received %s %s (%s)"
-                            % (response.status, data["message"], data["message_detail"],)
+                            % (
+                                response.status,
+                                data["message"],
+                                data["message_detail"],
+                            )
                         )
                     else:
-                        raise_error("Received %s %s" % (response.status, data["message"],))
+                        raise_error(
+                            "Received %s %s"
+                            % (
+                                response.status,
+                                data["message"],
+                            )
+                        )
             except (ValueError, KeyError, TypeError):
                 pass
-            raise_error("Received %s %s" % (response.status, response.reason,))
+            raise_error(
+                "Received %s %s"
+                % (
+                    response.status,
+                    response.reason,
+                )
+            )
         try:
             data = json.loads(data)
             if data["stat"] != "OK":

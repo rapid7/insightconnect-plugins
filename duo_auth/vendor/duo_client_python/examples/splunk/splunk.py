@@ -39,9 +39,9 @@ class BaseLog(object):
 
     def get_mintime(self):
         """
-            Updates self.mintime which is the minimum timestamp of
-            log events we want to fetch.
-            self.mintime is > all event timestamps we have already fetched.
+        Updates self.mintime which is the minimum timestamp of
+        log events we want to fetch.
+        self.mintime is > all event timestamps we have already fetched.
         """
         try:
             # Only fetch events that come after timestamp of last event
@@ -52,7 +52,7 @@ class BaseLog(object):
 
     def write_last_timestamp(self):
         """
-            Store last_timestamp so that we don't fetch the same events again
+        Store last_timestamp so that we don't fetch the same events again
         """
         if not self.events:
             # Do not update last_timestamp
@@ -83,7 +83,9 @@ class AdministratorLog(BaseLog):
         BaseLog.__init__(self, admin_api, path, "administrator")
 
     def get_events(self):
-        self.events = self.admin_api.get_administrator_log(mintime=self.mintime,)
+        self.events = self.admin_api.get_administrator_log(
+            mintime=self.mintime,
+        )
 
     def print_events(self):
         """
@@ -131,7 +133,9 @@ class AuthenticationLog(BaseLog):
         BaseLog.__init__(self, admin_api, path, "authentication")
 
     def get_events(self):
-        self.events = self.admin_api.get_authentication_log(mintime=self.mintime,)
+        self.events = self.admin_api.get_authentication_log(
+            mintime=self.mintime,
+        )
 
     def print_events(self):
         """
@@ -161,7 +165,9 @@ class TelephonyLog(BaseLog):
         BaseLog.__init__(self, admin_api, path, "telephony")
 
     def get_events(self):
-        self.events = self.admin_api.get_telephony_log(mintime=self.mintime,)
+        self.events = self.admin_api.get_telephony_log(
+            mintime=self.mintime,
+        )
 
     def print_events(self):
         """
@@ -197,7 +203,10 @@ def admin_api_from_config(config_path):
         ca_certs = config_d.get("ca", None)
 
     ret = duo_client.Admin(
-        ikey=config_d["ikey"], skey=config_d["skey"], host=config_d["host"], ca_certs=ca_certs,
+        ikey=config_d["ikey"],
+        skey=config_d["skey"],
+        host=config_d["host"],
+        ca_certs=ca_certs,
     )
 
     http_proxy = config_d.get("http_proxy", None)
