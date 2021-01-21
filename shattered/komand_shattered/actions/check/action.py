@@ -24,9 +24,7 @@ class Check(komand.Action):
             r = requests.post(url, files=files)
             data = r.json()
         except requests.exceptions.HTTPError:
-            self.logger.error(
-                "Requests: HTTPError: status code %s for %s", str(resp.status_code), url
-            )
+            self.logger.error("Requests: HTTPError: status code %s for %s", str(resp.status_code), url)
             raise
         return data["file"]
 
@@ -35,8 +33,6 @@ class Check(komand.Action):
             url = "http://shattered.io/sample/submit"
             r = requests.post(url).json()
         except requests.exceptions.HTTPError:
-            self.logger.error(
-                "Requests: HTTPError: status code %s for %s", str(resp.status_code), url
-            )
+            self.logger.error("Requests: HTTPError: status code %s for %s", str(resp.status_code), url)
             raise
         return r

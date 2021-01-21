@@ -41,9 +41,7 @@ class DeactivatedList(komand.Action):
             # encode data
             url_values = urllib.urlencode(data)
 
-            url = (
-                server + "/organizations/" + params.get("id_or_name") + "/memberships?" + url_values
-            )
+            url = server + "/organizations/" + params.get("id_or_name") + "/memberships?" + url_values
             # api GetBoardsByMember response array board
             resp = urllib2.urlopen(url)
             # handle decoding json
@@ -81,14 +79,10 @@ class DeactivatedList(komand.Action):
         )
 
         # perform the HTTP requests, if possible uses OAuth authentication
-        response = requests.request(
-            http_method, url, headers={"Content-Type": "application/json"}, auth=oauth
-        )
+        response = requests.request(http_method, url, headers={"Content-Type": "application/json"}, auth=oauth)
 
         if response.status_code == 401:
-            raise Exception(
-                "Unauthorized: %s (HTTP status: %s)" % (response.text, response.status_code)
-            )
+            raise Exception("Unauthorized: %s (HTTP status: %s)" % (response.text, response.status_code))
         if response.status_code != 200:
             raise Exception("%s (HTTP status: %s)" % (response.text, response.status_code))
 

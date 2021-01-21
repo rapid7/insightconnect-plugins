@@ -22,9 +22,7 @@ class DeleteFeed(komand.Action):
                 self.logger.info("No feeds were found that match the specified feed ID!")
                 return {"success": False}
         except Exception as e:
-            raise Exception(
-                "Error: {error}\n Please contact support for assistance.".format(error=e)
-            )
+            raise Exception("Error: {error}\n Please contact support for assistance.".format(error=e))
 
         if len(feeds) > 1 and not force_deletion:
             self.logger.error(
@@ -37,14 +35,10 @@ class DeleteFeed(komand.Action):
             try:
                 feed.delete()
             except Exception:
-                self.logger.error(
-                    "Error: Unable to delete feed ID {id}".format(id=attempted_to_find)
-                )
+                self.logger.error("Error: Unable to delete feed ID {id}".format(id=attempted_to_find))
                 return {"success": False}
 
-            self.logger.info(
-                "Success: Deleted feed {name} with ID {id}".format(name=feed.name, id=feed.id)
-            )
+            self.logger.info("Success: Deleted feed {name} with ID {id}".format(name=feed.name, id=feed.id))
             return {"success": True}
 
     def test(self):

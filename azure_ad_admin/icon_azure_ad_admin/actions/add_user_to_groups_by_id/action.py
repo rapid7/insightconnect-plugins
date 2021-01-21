@@ -23,14 +23,14 @@ class AddUserToGroupsById(komand.Action):
         self.logger.info(f"Getting user info: {user_id}")
         user_response = get_user_info(self.connection, user_id, self.logger)
         user_object = user_response.json()
-        user = {
-            "@odata.id": f"https://graph.microsoft.com/v1.0/{self.connection.tenant}/users/{user_object.get('id')}"
-        }
+        user = {"@odata.id": f"https://graph.microsoft.com/v1.0/{self.connection.tenant}/users/{user_object.get('id')}"}
 
         headers = self.connection.get_headers(self.connection.get_auth_token())
 
         for group_id in group_ids:
-            add_to_group_endpoint = f"https://graph.microsoft.com/v1.0/{self.connection.tenant}/groups/{group_id}/members/$ref"
+            add_to_group_endpoint = (
+                f"https://graph.microsoft.com/v1.0/{self.connection.tenant}/groups/{group_id}/members/$ref"
+            )
             result = requests.post(add_to_group_endpoint, json=user, headers=headers)
             if not result.status_code == 204:
                 raise PluginException(

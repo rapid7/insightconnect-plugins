@@ -20,9 +20,7 @@ class GetRule(insightconnect_plugin_runtime.Action):
         rule_id, ruleset_id = params.get(Input.RULE_ID), params.get(Input.RULESET_ID)
 
         try:
-            rule = clean(
-                self.connection.client.rulesets.rules(ruleset_id=ruleset_id, rule_id=rule_id)
-            )
+            rule = clean(self.connection.client.rulesets.rules(ruleset_id=ruleset_id, rule_id=rule_id))
         except (ThreatStackAPIError, ThreatStackClientError, APIRateLimitError) as e:
             raise PluginException(cause="An error occurred!", assistance=e)
 

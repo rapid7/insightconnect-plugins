@@ -28,9 +28,7 @@ def parse_cef(s):
         if len(fields) == 7:
             break
     else:
-        raise PluginException(
-            cause="Wrong value", assistance="CEF string does not have enough pipe characters"
-        )
+        raise PluginException(cause="Wrong value", assistance="CEF string does not have enough pipe characters")
 
     if "CEF:0" not in fields[0]:
         raise PluginException(cause="Wrong value", assistance="CEF string is missing CEF:0 header")

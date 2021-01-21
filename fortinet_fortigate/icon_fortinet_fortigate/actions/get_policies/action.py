@@ -24,9 +24,7 @@ class GetPolicies(komand.Action):
         if filter_:
             get_params = {"filter": f"name=@{filter_}"}
 
-        response = self.connection.session.get(
-            endpoint, params=get_params, verify=self.connection.ssl_verify
-        )
+        response = self.connection.session.get(endpoint, params=get_params, verify=self.connection.ssl_verify)
 
         try:
             json_response = response.json()

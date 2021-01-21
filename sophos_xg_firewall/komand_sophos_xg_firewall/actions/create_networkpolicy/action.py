@@ -32,14 +32,10 @@ class CreateNetworkpolicy(komand.Action):
         networkpolicy = params["policy"]
         url = "https://{}/webconsole/APIController?".format(host + ":" + str(port))
         # Authentication
-        auth = "<Request><Login><Username>{}</Username><Password>{}</Password></Login>".format(
-            username, password
-        )
+        auth = "<Request><Login><Username>{}</Username><Password>{}</Password></Login>".format(username, password)
 
         # Start of the operation to add a firewall policy
-        start = '<Set operation="add"><SecurityPolicy><Name>{}</Name>'.format(
-            networkpolicy["SecurityPolicy"]["Name"]
-        )
+        start = '<Set operation="add"><SecurityPolicy><Name>{}</Name>'.format(networkpolicy["SecurityPolicy"]["Name"])
 
         base_xml = "<Description>{}</Description><Status>{}</Status><IPFamily>{}</IPFamily>".format(
             networkpolicy["SecurityPolicy"]["Description"],

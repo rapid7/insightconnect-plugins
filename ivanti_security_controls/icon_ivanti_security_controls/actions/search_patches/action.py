@@ -14,8 +14,4 @@ class SearchPatches(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {
-            Output.VULNERABILITIES: self.connection.ivanti_api.search_patches(
-                params.get(Input.SECURITY_ID)
-            )
-        }
+        return {Output.VULNERABILITIES: self.connection.ivanti_api.search_patches(params.get(Input.SECURITY_ID))}

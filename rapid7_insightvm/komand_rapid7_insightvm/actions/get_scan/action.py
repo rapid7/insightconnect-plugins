@@ -48,9 +48,7 @@ class GetScan(komand.Action):
                 except KeyError:
                     reason = "Unknown error occurred. Please contact support or try again later."
                 except json.decoder.JSONDecodeError:
-                    raise PluginException(
-                        preset=PluginException.Preset.INVALID_JSON, data=reason.text
-                    )
+                    raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=reason.text)
 
                 status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
                 self.logger.error(

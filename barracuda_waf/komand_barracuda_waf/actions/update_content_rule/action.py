@@ -15,9 +15,7 @@ class UpdateContentRule(komand.Action):
         action = "virtual_services"
         self.connection.connector.check_required_params(params, ["id", "virtual_service_id"])
 
-        action = (
-            action + "/" + params.get("virtual_service_id") + "/content_rules/" + params.get("id")
-        )
+        action = action + "/" + params.get("virtual_service_id") + "/content_rules/" + params.get("id")
 
         del params["id"]
         del params["virtual_service_id"]

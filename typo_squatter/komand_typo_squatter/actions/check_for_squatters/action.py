@@ -23,9 +23,7 @@ class CheckForSquatters(komand.Action):
         flag = (
             ""
             if not params.get("flag")
-            else (
-                params.get("flag") if params.get("flag")[0:2] == "--" else "--" + params.get("flag")
-            )
+            else (params.get("flag") if params.get("flag")[0:2] == "--" else "--" + params.get("flag"))
         )
         path = tempfile.mkdtemp() + "/"
         fname = "results.json"

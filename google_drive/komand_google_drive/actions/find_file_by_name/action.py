@@ -25,9 +25,7 @@ class FindFileByName(komand.Action):
                 response = (
                     self.connection.service.files()
                     .list(
-                        q="name = '{name}' and ('{parent_id}' in parents)".format(
-                            name=filename, parent_id=parent_id
-                        ),
+                        q="name = '{name}' and ('{parent_id}' in parents)".format(name=filename, parent_id=parent_id),
                         spaces="drive",
                         fields="files(id, name)",
                     )
@@ -37,9 +35,7 @@ class FindFileByName(komand.Action):
                 response = (
                     self.connection.service.files()
                     .list(
-                        q="name != '{name}' and ('{parent_id}' in parents)".format(
-                            name=filename, parent_id=parent_id
-                        ),
+                        q="name != '{name}' and ('{parent_id}' in parents)".format(name=filename, parent_id=parent_id),
                         spaces="drive",
                         fields="files(id, name)",
                     )

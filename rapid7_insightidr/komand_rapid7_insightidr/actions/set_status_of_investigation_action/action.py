@@ -28,9 +28,7 @@ class SetStatusOfInvestigationAction(komand.Action):
         status = params.get(Input.STATUS)
         request = ResourceHelper(self.connection.session, self.logger)
 
-        endpoint = Investigations.set_the_status_of_an_investigation(
-            self.connection.url, idr_id, status
-        )
+        endpoint = Investigations.set_the_status_of_an_investigation(self.connection.url, idr_id, status)
         response = request.resource_request(endpoint, "put")
 
         try:

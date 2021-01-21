@@ -16,9 +16,7 @@ class ShowMemberships(komand.Action):
 
     def run(self, params={}):
         mem_array = []
-        for org_memb in self.connection.client.users.organization_memberships(
-            user_id=params.get("user_id")
-        ):
+        for org_memb in self.connection.client.users.organization_memberships(user_id=params.get("user_id")):
             memb_obj = {
                 "id": org_memb.id,
                 "user_id": org_memb.user_id,

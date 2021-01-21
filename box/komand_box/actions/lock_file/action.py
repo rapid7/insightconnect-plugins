@@ -16,9 +16,7 @@ class LockFile(komand.Action):
     def run(self, params={}):
         client = self.connection.box_connection
         try:
-            lock = client.file(file_id=params.get("file_id")).lock(
-                prevent_download=params.get("download_prevented")
-            )
+            lock = client.file(file_id=params.get("file_id")).lock(prevent_download=params.get("download_prevented"))
             return {"status": True}
         except:
             return {"status": False}

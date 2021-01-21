@@ -20,9 +20,7 @@ class EnrollUser(komand.Action):
         expiration = params.get(Input.TIME_TO_EXPIRATION)
 
         try:
-            self.connection.admin_api.enroll_user(
-                username=username, email=email, valid_secs=expiration
-            )
+            self.connection.admin_api.enroll_user(username=username, email=email, valid_secs=expiration)
         except RuntimeError:
             return {Output.SUCCESS: False}
 

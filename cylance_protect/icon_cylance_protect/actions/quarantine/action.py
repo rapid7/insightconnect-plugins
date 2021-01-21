@@ -41,6 +41,4 @@ class Quarantine(insightconnect_plugin_runtime.Action):
                     assistance=f"If you would like to block this host, remove {str(matches)[1:-1]} from the whitelist.",
                 )
 
-        return {
-            Output.LOCKDOWN_DETAILS: self.connection.client.device_lockdown(device_obj.get("id"))
-        }
+        return {Output.LOCKDOWN_DETAILS: self.connection.client.device_lockdown(device_obj.get("id"))}

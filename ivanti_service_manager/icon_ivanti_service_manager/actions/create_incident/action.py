@@ -23,9 +23,9 @@ class CreateIncident(insightconnect_plugin_runtime.Action):
         payload = {
             "Subject": params.get(Input.SUMMARY),
             "Symptom": params.get(Input.DESCRIPTION),
-            "ProfileLink": self.connection.ivanti_service_manager_api.search_employee(
-                params.get(Input.CUSTOMER)
-            ).get("RecId"),
+            "ProfileLink": self.connection.ivanti_service_manager_api.search_employee(params.get(Input.CUSTOMER)).get(
+                "RecId"
+            ),
             "Status": params.get(Input.STATUS),
             "TypeOfIncident": params.get(Input.TYPE),
         }

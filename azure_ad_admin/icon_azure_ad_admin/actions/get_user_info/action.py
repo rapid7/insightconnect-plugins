@@ -24,7 +24,9 @@ class GetUserInfo(komand.Action):
         result = get_user_info(self.connection, user_id, self.logger)
 
         headers = self.connection.get_headers(self.connection.get_auth_token())
-        endpoint_for_account_enabled = f"https://graph.microsoft.com/v1.0/{self.connection.tenant}/users/{user_id}?$select=accountEnabled"
+        endpoint_for_account_enabled = (
+            f"https://graph.microsoft.com/v1.0/{self.connection.tenant}/users/{user_id}?$select=accountEnabled"
+        )
 
         result_enabled = None
         try:
@@ -59,8 +61,12 @@ class GetUserInfo(komand.Action):
 
         # I didn't want to use clean in case a user is looking for a key that came back as null
         # businessPhones is a list, thus the special check for that key
+
+        # If account is disabled, this will fail also, so there's a special
+        # case for that as well. It comes back as a boolean.
         for key in full_result.keys():
-            if not full_result.get(key):
+            # If you do a falsey here, False trips the if. Thus have to do a manual check for None or len 0
+            if full_result.get(key) == None:
                 if not key == "businessPhones":
                     full_result[key] = ""
                 else:

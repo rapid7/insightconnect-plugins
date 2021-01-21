@@ -32,9 +32,7 @@ class Scan(komand.Action):
             self.logger.error("An error occurred: %s" % e)
         else:
             scanned_hosts = scanner.all_hosts()  # grab hosts that were scanned
-            results = list(
-                map(lambda host: scanner[host], scanned_hosts)
-            )  # create list of scan results
+            results = list(map(lambda host: scanner[host], scanned_hosts))  # create list of scan results
 
             results = komand.helper.clean(results)
 

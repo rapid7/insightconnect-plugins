@@ -14,13 +14,9 @@ class AddFeed(komand.Action):
 
     def run(self, params={}):
         feed_url = params["feed_url"]
-        configured_feeds = [
-            f for f in self.connection.carbon_black.select(Feed) if f.feed_url == feed_url
-        ]
+        configured_feeds = [f for f in self.connection.carbon_black.select(Feed) if f.feed_url == feed_url]
         if configured_feeds:
-            self.logger.info(
-                "Warning: Feeds already configured for this url: {0:s}:".format(feed_url)
-            )
+            self.logger.info("Warning: Feeds already configured for this url: {0:s}:".format(feed_url))
             for feed in configured_feeds:
                 self.logger.info(feed)
             if not params["force"]:

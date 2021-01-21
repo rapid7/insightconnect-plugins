@@ -47,9 +47,7 @@ def get_text(data: dict) -> list:
                         sentences.append(data[section][top_level][description])
                     if isinstance(data[section][top_level][description], dict):
                         for bottom_level in data[section][top_level][description]:
-                            sentences.append(
-                                data[section][top_level][description][bottom_level]["description"]
-                            )
+                            sentences.append(data[section][top_level][description][bottom_level]["description"])
 
     # Get plugin's description
     if "description" in data:

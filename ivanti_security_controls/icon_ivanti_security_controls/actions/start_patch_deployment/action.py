@@ -47,9 +47,7 @@ class StartPatchDeployment(insightconnect_plugin_runtime.Action):
         )
 
     def get_template_id(self, template_name: str) -> str:
-        get_response = self.connection.ivanti_api.get_patch_deployment_template_by_name(
-            template_name
-        )
+        get_response = self.connection.ivanti_api.get_patch_deployment_template_by_name(template_name)
         if get_response.get("count"):
             return get_response.get("value")[0].get("id")
 

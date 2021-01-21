@@ -27,9 +27,7 @@ class AddUser(komand.Action):
         username = params.get(Input.USERNAME)
 
         if len(alias) > max_aliases:
-            raise PluginException(
-                cause="Invalid input", assistance="Alias parameter must contain 4 or less aliases"
-            )
+            raise PluginException(cause="Invalid input", assistance="Alias parameter must contain 4 or less aliases")
 
         aliases = {}
         if alias:
@@ -51,6 +49,4 @@ class AddUser(komand.Action):
             return {Output.RESPONSE: resp}
         except RuntimeError as e:
             self.logger.error(f"An error has occurred: {str(e)}")
-            raise PluginException(
-                preset=PluginException.Preset.INVALID_JSON, data=f"An error has occurred: {str(e)}"
-            )
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=f"An error has occurred: {str(e)}")

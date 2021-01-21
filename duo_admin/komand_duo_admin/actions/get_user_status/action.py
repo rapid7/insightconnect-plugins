@@ -19,9 +19,7 @@ class GetUserStatus(komand.Action):
         users = self.connection.admin_api.get_users()
 
         if not users:
-            raise PluginException(
-                preset=PluginException.Preset.NOT_FOUND, data="Error: No users exist!"
-            )
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data="Error: No users exist!")
 
         for user in users:
             if user["username"] != username:
@@ -29,6 +27,4 @@ class GetUserStatus(komand.Action):
 
             return {Output.STATUS: user["status"], Output.USER_ID: user["user_id"]}
         else:
-            raise PluginException(
-                preset=PluginException.Preset.NOT_FOUND, data="Error: No users exist!"
-            )
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data="Error: No users exist!")

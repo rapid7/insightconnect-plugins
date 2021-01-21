@@ -24,9 +24,7 @@ class SearchEvents(komand.Action):
             events["total"] = results["total"]
             events["data"] = []
             for hit in results["data"]:
-                events["data"].append(
-                    {str(k): (str(v) if isinstance(v, unicode) else v) for k, v in hit.items()}
-                )
+                events["data"].append({str(k): (str(v) if isinstance(v, unicode) else v) for k, v in hit.items()})
             return {"events": events}
         except texceptions.APIError as apie:
             err = "ThreatQ SDK: APIError: reason %s" % apie.message

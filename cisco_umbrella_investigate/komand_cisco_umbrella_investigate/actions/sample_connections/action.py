@@ -26,9 +26,7 @@ class SampleConnections(komand.Action):
             offset = 0
 
         try:
-            sample_connections = self.connection.investigate.sample_connections(
-                hash, limit=limit, offset=offset
-            )
+            sample_connections = self.connection.investigate.sample_connections(hash, limit=limit, offset=offset)
         except Exception as e:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
         return sample_connections

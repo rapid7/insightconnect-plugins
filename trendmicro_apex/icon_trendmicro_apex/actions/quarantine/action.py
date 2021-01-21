@@ -16,9 +16,7 @@ class Quarantine(komand.Action):
         )
 
     def run(self, params={}):
-        return self.connection.api.execute(
-            "post", "/WebApp/API/AgentResource/ProductAgents", self._get_payload(params)
-        )
+        return self.connection.api.execute("post", "/WebApp/API/AgentResource/ProductAgents", self._get_payload(params))
 
     def _get_payload(self, params):
         agent = params.get(Input.AGENT)

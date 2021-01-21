@@ -38,8 +38,6 @@ class GetScannedMachineDetails(insightconnect_plugin_runtime.Action):
                 cause=f"No patch scan machine found with hostname {hostname} for scan ID {scan_id}.",
                 assistance="Please provide valid hostname.",
             )
-        detected_patches = self.connection.ivanti_api.get_detected_patches(scan_id, machine_id)[
-            "value"
-        ]
+        detected_patches = self.connection.ivanti_api.get_detected_patches(scan_id, machine_id)["value"]
 
         return {Output.PATCH_SCAN_MACHINE: machine, Output.DETECTED_PATCHES: detected_patches}

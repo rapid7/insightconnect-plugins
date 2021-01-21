@@ -39,9 +39,7 @@ class SecurityPolicy:
                 output[i] = "any"
             except TypeError:
                 self.logger.info(f"Current policy {policy}")
-                self.logger.info(
-                    f"The current policy has no policy config for {i}: Setting to any."
-                )
+                self.logger.info(f"The current policy has no policy config for {i}: Setting to any.")
                 output[i] = "any"
             except BaseException:
                 raise PluginException(
@@ -211,27 +209,19 @@ class ExternalList:
 
         if repeat == "daily":
             if not time:
-                raise PluginException(
-                    cause="Time of day not defined", assistance="Contact support for help."
-                )
+                raise PluginException(cause="Time of day not defined", assistance="Contact support for help.")
             element = (
                 "<type><{list_type}>"
                 "<recurring><daily><at>{time}</at></daily></recurring>"
                 "<description>{description}</description>"
                 "<url>{source}</url>"
-                "</{list_type}></type>".format(
-                    list_type=list_type, time=time, description=description, source=source
-                )
+                "</{list_type}></type>".format(list_type=list_type, time=time, description=description, source=source)
             )
         elif repeat == "weekly":
             if not time:
-                raise PluginException(
-                    cause="Time of day not defined", assistance="Contact support for help."
-                )
+                raise PluginException(cause="Time of day not defined", assistance="Contact support for help.")
             if not day:
-                raise PluginException(
-                    cause="Day of week not defined", assistance="Contact support for help."
-                )
+                raise PluginException(cause="Day of week not defined", assistance="Contact support for help.")
             element = (
                 "<type><{list_type}>"
                 "<recurring><weekly><day-of-week>{day}</day-of-week>"

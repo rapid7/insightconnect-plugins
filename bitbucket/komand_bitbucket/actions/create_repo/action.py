@@ -25,20 +25,12 @@ class CreateRepo(komand.Action):
                 "has_wiki": params.get(Input.HAS_WIKI),
             }
             self.connection.bucket_session.headers.update({"Content-Type": "application/json"})
-            api_call = (
-                self.connection.base_api
-                + "/repositories/"
-                + self.connection.username
-                + "/"
-                + repo_name
-            )
+            api_call = self.connection.base_api + "/repositories/" + self.connection.username + "/" + repo_name
             repo = self.connection.bucket_session.post(api_call, data=json.dumps(repository))
             repo_obj = repo.json()
 
             if "name" not in repo_obj:
-                raise PluginException(
-                    cause="Create repository error.", assistance="Repository not created"
-                )
+                raise PluginException(cause="Create repository error.", assistance="Repository not created")
 
             try:
                 repo_info = helpers.clean_json(

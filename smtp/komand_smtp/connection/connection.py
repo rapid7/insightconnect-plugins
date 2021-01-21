@@ -18,9 +18,7 @@ class Connection(komand.Connection):
             self.client.starttls()
 
         if params.get("credentials").get("username") and params.get("credentials").get("password"):
-            self.client.login(
-                params.get("credentials").get("username"), params.get("credentials").get("password")
-            )
+            self.client.login(params.get("credentials").get("username"), params.get("credentials").get("password"))
 
         return self.client
 

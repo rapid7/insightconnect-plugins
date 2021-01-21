@@ -31,7 +31,9 @@ class RemoveUserFromGroup(komand.Action):
         user_id = user_object.get("id")
 
         headers = self.connection.get_headers(self.connection.get_auth_token())
-        remove_from_group_endpoint = f"https://graph.microsoft.com/v1.0/{self.connection.tenant}/groups/{group_id}/members/{user_id}/$ref"
+        remove_from_group_endpoint = (
+            f"https://graph.microsoft.com/v1.0/{self.connection.tenant}/groups/{group_id}/members/{user_id}/$ref"
+        )
         result = requests.delete(remove_from_group_endpoint, headers=headers)
 
         if not result.status_code == 204:

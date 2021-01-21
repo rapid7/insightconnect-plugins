@@ -23,9 +23,7 @@ class ListInactiveAssets(komand.Action):
         self.logger.info("Using %s ..." % endpoint)
 
         payload = {
-            "filters": [
-                {"field": "last-scan-date", "operator": "is-earlier-than", "value": days_ago}
-            ],
+            "filters": [{"field": "last-scan-date", "operator": "is-earlier-than", "value": days_ago}],
             "match": "all",
         }
         assets = resource_helper.resource_request(endpoint, method="post", payload=payload)

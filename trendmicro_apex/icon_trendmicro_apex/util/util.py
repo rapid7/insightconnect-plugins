@@ -26,16 +26,10 @@ class TaskType:
         }.get(task_type)
 
 
-def create_base64_checksum(
-    http_method: str, raw_url: str, raw_header: str, request_body: str
-) -> str:
+def create_base64_checksum(http_method: str, raw_url: str, raw_header: str, request_body: str) -> str:
     """Create a base64 encoded hash string for an Apex JWT token"""
-    string_to_hash = (
-        http_method.upper() + "|" + raw_url.lower() + "|" + raw_header + "|" + request_body
-    )
-    base64_hash_string = base64.b64encode(
-        hashlib.sha256(str.encode(string_to_hash)).digest()
-    ).decode("utf-8")
+    string_to_hash = http_method.upper() + "|" + raw_url.lower() + "|" + raw_header + "|" + request_body
+    base64_hash_string = base64.b64encode(hashlib.sha256(str.encode(string_to_hash)).digest()).decode("utf-8")
     return base64_hash_string
 
 

@@ -9,7 +9,6 @@ from .schema import (
 )
 
 # Custom imports below
-import requests
 
 
 class SearchForSampleReportBySha256(komand.Action):
@@ -23,26 +22,20 @@ class SearchForSampleReportBySha256(komand.Action):
 
     def run(self, params={}):
         sha256 = params.get(Input.SHA256)
-
-        self.logger.info(f"Looking for sample with sha246 filename: {sha256}")
-        try:
-            results = self.connection.api.search_sha256(q=sha256)
-        except requests.HTTPError as e:
-            raise PluginException(
-                cause="ThreatGrid query for domain failed.",
-                assistance=f"ThreatGrid query failed, check your API key.\n "
-                f"Exception returned was: {e}",
-            )
-
+        self.logger.info(f"Looking for sample with SHA256: {sha256}")
+        results = self.connection.api.search_sha256(sha256=sha256)
         try:
             result = results.get("data").get("items")[0]
         except IndexError:
-            result = {"status": f"Report not found for SHA256: {sha256}"}
-        except Exception:
             raise PluginException(
-                cause=f"Could not find sample with sha256 {sha256}.",
-                assistance=f"Please check your input.\n",
+                cause=f"Report not found for SHA256: {sha256}.",
+                assistance="Please check your input.\n",
                 data=str(results),
             )
-
+        except AttributeError:
+            raise PluginException(
+                cause=f"Could not find sample with SHA256 {sha256}.",
+                assistance="Please check your input.\n",
+                data=str(results),
+            )
         return {Output.SAMPLE_REPORT_LIST: komand.helper.clean(result)}

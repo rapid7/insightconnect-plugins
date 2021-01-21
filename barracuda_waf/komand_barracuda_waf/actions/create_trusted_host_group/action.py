@@ -15,9 +15,7 @@ class CreateTrustedHostGroup(komand.Action):
         action = "trusted_host_groups"
         self.connection.connector.check_required_params(params, ["name"])
 
-        r = self.connection.connector.post(
-            action, self.connection.connector.get_dict_from_params(params, ["name"])
-        )
+        r = self.connection.connector.post(action, self.connection.connector.get_dict_from_params(params, ["name"]))
 
         self.connection.connector.raise_error_when_not_in_status(201)
 

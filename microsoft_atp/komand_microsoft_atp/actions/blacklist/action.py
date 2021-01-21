@@ -22,21 +22,17 @@ class Blacklist(insightconnect_plugin_runtime.Action):
 
         return {
             Output.INDICATOR_ACTION_RESPONSE: insightconnect_plugin_runtime.helper.clean(
-                self._create_or_update_indicator(params)
-                if indicator_state
-                else self._delete_indicator(params)
+                self._create_or_update_indicator(params) if indicator_state else self._delete_indicator(params)
             )
         }
 
     def _delete_indicator(self, params: dict) -> dict:
         indicator = params.get(Input.INDICATOR)
-        indicators = self.connection.client.search_indicators(
-            f"?$top=1&$filter=indicatorValue+eq+'{indicator}'"
-        ).get("value")
+        indicators = self.connection.client.search_indicators(f"?$top=1&$filter=indicatorValue+eq+'{indicator}'").get(
+            "value"
+        )
         if len(indicators) == 0:
-            raise PluginException(
-                cause="Did not find indicator to delete.", assistance="Indicator not deleted."
-            )
+            raise PluginException(cause="Did not find indicator to delete.", assistance="Indicator not deleted.")
         if len(indicators) > 1:
             self.logger.info("Multiple indicators found. We will only act upon the first match.")
 
@@ -95,6 +91,4 @@ class Blacklist(insightconnect_plugin_runtime.Action):
                 cause="MD5 hash is not supported.",
                 assistance="API supported only SHA256 and SHA1. Please check provided hash and try again.",
             )
-        raise PluginException(
-            cause="Could not determine type of indicator.", assistance="Indicator not added."
-        )
+        raise PluginException(cause="Could not determine type of indicator.", assistance="Indicator not added.")

@@ -32,14 +32,10 @@ class CreateUserpolicy(komand.Action):
         userpolicy = params["policy"]
         url = "https://{}/webconsole/APIController?".format(host + ":" + str(port))
         # Authentication
-        auth = "<Request><Login><Username>{}</Username><Password>{}</Password></Login>".format(
-            username, password
-        )
+        auth = "<Request><Login><Username>{}</Username><Password>{}</Password></Login>".format(username, password)
 
         # Start of the operation to add a firewall policy
-        start = '<Set operation="add"><SecurityPolicy><Name>{}</Name>'.format(
-            userpolicy["SecurityPolicy"]["Name"]
-        )
+        start = '<Set operation="add"><SecurityPolicy><Name>{}</Name>'.format(userpolicy["SecurityPolicy"]["Name"])
 
         base_xml = "<Description>{}</Description><Status>{}</Status><IPFamily>{}</IPFamily>".format(
             userpolicy["SecurityPolicy"]["Description"],
@@ -47,10 +43,7 @@ class CreateUserpolicy(komand.Action):
             userpolicy["SecurityPolicy"]["IPFamily"],
         )
         # Sets position xml
-        if (
-            userpolicy["SecurityPolicy"]["Position"] == "after"
-            or userpolicy["SecurityPolicy"]["Position"] == "before"
-        ):
+        if userpolicy["SecurityPolicy"]["Position"] == "after" or userpolicy["SecurityPolicy"]["Position"] == "before":
             position = "<{}>{}</{}>".format(
                 userpolicy["SecurityPolicy"]["Position"],
                 userpolicy["SecurityPolicy"]["PositionPolicyName"],

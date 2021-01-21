@@ -21,9 +21,7 @@ class ListBinaries(komand.Action):
                 ("start", params.get("start", 0)),
             ]
 
-            results = self.connection.carbon_black.get_object(
-                "/api/v1/binary", query_parameters=query_params
-            )
+            results = self.connection.carbon_black.get_object("/api/v1/binary", query_parameters=query_params)
         except Exception as ex:
             self.logger.error("Failed to get binaries: %s", ex)
             raise ex

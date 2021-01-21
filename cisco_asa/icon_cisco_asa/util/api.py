@@ -44,10 +44,7 @@ class CiscoAsaAPI:
 
     def get_object(self, address_object_name: str):
         for item in self.get_objects():
-            if (
-                item.get("name") == address_object_name
-                or item.get("objectId") == address_object_name
-            ):
+            if item.get("name") == address_object_name or item.get("objectId") == address_object_name:
                 return item
 
         return {}
@@ -79,9 +76,7 @@ class CiscoAsaAPI:
 
     def _call_api(self, method: str, path: str, json_data: dict = None, params: dict = None):
         response = {"text": ""}
-        headers = OrderedDict(
-            [("Content-Type", "application/json"), ("User-Agent", self.user_agent)]
-        )
+        headers = OrderedDict([("Content-Type", "application/json"), ("User-Agent", self.user_agent)])
 
         try:
             response = requests.request(

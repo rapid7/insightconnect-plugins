@@ -49,9 +49,7 @@ class CreateAddressObject(komand.Action):
 
             endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/address"
 
-            response = self.connection.session.post(
-                endpoint, json=payload, verify=self.connection.ssl_verify
-            )
+            response = self.connection.session.post(endpoint, json=payload, verify=self.connection.ssl_verify)
             try:
                 json_response = response.json()
             except ValueError:

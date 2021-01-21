@@ -22,9 +22,7 @@ class GetAssetVulnerabilities(komand.Action):
         asset_id = params.get(Input.ASSET_ID)
         risk_score = params.get(Input.GET_RISK_SCORE, False)
 
-        endpoint = endpoints.VulnerabilityResult.vulnerabilities_for_asset(
-            self.connection.console_url, asset_id
-        )
+        endpoint = endpoints.VulnerabilityResult.vulnerabilities_for_asset(self.connection.console_url, asset_id)
         resources = resource_helper.paged_resource_request(endpoint=endpoint, method="get")
         if not risk_score:
             return {Output.VULNERABILITIES: resources}
@@ -42,14 +40,10 @@ class GetAssetVulnerabilities(komand.Action):
         async with connection.get_async_session() as async_session:
             tasks: [asyncio.Future] = []
             for vuln_id in vuln_ids:
-                endpoint = endpoints.Vulnerability.vulnerability(
-                    self.connection.console_url, vuln_id
-                )
+                endpoint = endpoints.Vulnerability.vulnerability(self.connection.console_url, vuln_id)
                 tasks.append(
                     asyncio.ensure_future(
-                        connection.async_request(
-                            session=async_session, endpoint=endpoint, method="get"
-                        )
+                        connection.async_request(session=async_session, endpoint=endpoint, method="get")
                     )
                 )
             vulnerabilities = await asyncio.gather(*tasks)

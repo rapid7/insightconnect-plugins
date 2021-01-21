@@ -18,9 +18,7 @@ class CreateIssue(komand.Action):
         try:
             issue = {
                 "title": params.get(Input.TITLE),
-                "priority": (
-                    "major" if params.get(Input.PRIORITY) == "None" else params.get(Input.PRIORITY)
-                ),
+                "priority": ("major" if params.get(Input.PRIORITY) == "None" else params.get(Input.PRIORITY)),
                 "kind": ("bug" if params.get(Input.KIND) == "None" else params.get(Input.KIND)),
                 "state": ("new" if params.get(Input.STATE) == "None" else params.get(Input.STATE)),
             }

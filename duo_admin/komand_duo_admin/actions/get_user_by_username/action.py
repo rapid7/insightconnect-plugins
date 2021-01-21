@@ -22,6 +22,4 @@ class GetUserByUsername(komand.Action):
             return results
 
         except (TypeError, IndexError) as e:
-            raise PluginException(
-                preset=PluginException.Preset.SERVER_ERROR, data=f"User not found. Error: {e}"
-            )
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=f"User not found. Error: {e}")

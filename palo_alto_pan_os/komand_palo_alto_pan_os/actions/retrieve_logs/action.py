@@ -109,8 +109,7 @@ class RetrieveLogs(komand.Action):
                 self.logger.info("Job not completed, waiting before re-polling...")
                 time.sleep(interval)
         raise PluginException(
-            cause="Maximum polling attempts reached before response could be returned."
-            " Queued job had ID.",
+            cause="Maximum polling attempts reached before response could be returned." " Queued job had ID.",
             assistance="Try again later. If the issue persists, please contact support.",
             data=str(job_id),
         )

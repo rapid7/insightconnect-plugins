@@ -16,9 +16,7 @@ class Connection(komand.Connection):
         self.proxy = None
 
     def connect(self, params):
-        url = "{}://{}:{}".format(
-            params.get("protocol"), params.get("host").rstrip("/"), params.get("port")
-        )
+        url = "{}://{}:{}".format(params.get("protocol"), params.get("host").rstrip("/"), params.get("port"))
         self.password = params.get("credentials").get("password")
         self.username = params.get("credentials").get("username")
         self.verify = params.get("verify", True)

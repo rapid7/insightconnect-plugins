@@ -32,6 +32,4 @@ class FilterString(insightconnect_plugin_runtime.Action):
         elif not csv_good:
             raise PluginException(cause="Wrong input", assistance="Improper syntax in CSV bytes")
         else:
-            raise PluginException(
-                cause="Wrong input", assistance="Improper syntax in fields string"
-            )
+            raise PluginException(cause="Wrong input", assistance="Improper syntax in fields string")

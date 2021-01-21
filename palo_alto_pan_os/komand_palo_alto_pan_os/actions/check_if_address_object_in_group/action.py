@@ -1,11 +1,5 @@
 import komand
-from .schema import (
-    CheckIfAddressObjectInGroupInput,
-    CheckIfAddressObjectInGroupOutput,
-    Input,
-    Output,
-    Component,
-)
+from .schema import CheckIfAddressObjectInGroupInput, CheckIfAddressObjectInGroupOutput, Input, Output, Component
 
 # Custom imports below
 from komand.exceptions import PluginException
@@ -33,11 +27,13 @@ class CheckIfAddressObjectInGroup(komand.Action):
 
         # Get the contents of the address group to check and extract all the address object names
         # Make the call and get the address group
-        ip_objects = response.get("response", {}).get("result", {}).get("entry", {}).get("static")
-        if not ip_objects:
+        try:
+            ip_objects = response.get("response").get("result").get("entry").get("static")
+
+        except AttributeError:
             raise PluginException(
                 cause="PAN OS returned an unexpected response.",
-                assistance=f"Could not find group {group_name}, or group was empty. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {virtual_system}",
+                assistance=f"Could not find group '{group_name}', or group was empty. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {virtual_system}",
                 data=response,
             )
 
@@ -73,30 +69,31 @@ class CheckIfAddressObjectInGroup(komand.Action):
                 # For each name, go and grab the Address Object
                 object_xpath = f"/config/devices/entry[@name='{device_name}']/vsys/entry[@name='{virtual_system}']/address/entry[@name='{name}']"
                 object_result = self.connection.request.get_(object_xpath)
-                get_entry = object_result.get("response", {}).get("result", {}).get("entry", {})
+
+                try:
+                    get_entry = object_result.get("response").get("result").get("entry")
+
+                except AttributeError:
+                    raise PluginException(
+                        cause="PAN OS returned an unexpected response.",
+                        assistance=f"Address object '{name}' was not found. Check the name and try again.",
+                        date=object_result,
+                    )
 
                 # Now try and deal with that address object
                 if get_entry:
                     # Find an entry that's either ip-something or fqdn
-                    key_to_get = list(
-                        filter(
-                            lambda x: (x.startswith("ip-") or x == "fqdn"), list(get_entry.keys())
-                        )
-                    )[0]
+                    key_to_get = list(filter(lambda x: (x.startswith("ip-") or x == "fqdn"), list(get_entry.keys())))[0]
                     address_object = get_entry.get(key_to_get)
 
                     # Depending on how PAN OS is feeling on a given day, it will either have a string or list returned
                     # in the XML for the key we just found
                     if type(address_object) is str:
-                        if ip_checker.check_address_against_object(
-                            address_object, address_to_check
-                        ):
+                        if ip_checker.check_address_against_object(address_object, address_to_check):
                             object_names_to_return.append(name)
                             found = True
                     else:
-                        if ip_checker.check_address_against_object(
-                            address_object.get("#text", ""), address_to_check
-                        ):
+                        if ip_checker.check_address_against_object(address_object.get("#text", ""), address_to_check):
                             object_names_to_return.append(name)
                             found = True
 

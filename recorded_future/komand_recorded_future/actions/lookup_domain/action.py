@@ -33,9 +33,7 @@ class LookupDomain(komand.Action):
 
             if not comment:
                 comment = None
-            domain_report = self.connection.client.lookup_domain(
-                domain, fields=fields, comment=comment
-            )
+            domain_report = self.connection.client.lookup_domain(domain, fields=fields, comment=comment)
             if domain_report.get("warnings", False):
                 self.logger.warning(f"Warning: {domain_report.get('warnings')}")
             return komand.helper.clean(domain_report["data"])

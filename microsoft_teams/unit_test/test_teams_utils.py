@@ -27,9 +27,7 @@ class TestTeamsUtils(TestCase):
 
         test_connection.connect(connection_params)
 
-        result = create_channel(
-            log, test_connection, TEAM_ID, TEST_CHANNEL_NAME, "some really cool test description"
-        )
+        result = create_channel(log, test_connection, TEAM_ID, TEST_CHANNEL_NAME, "some really cool test description")
 
         # This code is used to bulk create channels. Needed to max out a team with channels to test
         # pagination
@@ -51,9 +49,7 @@ class TestTeamsUtils(TestCase):
 
         test_connection.connect(connection_params)
 
-        channels = get_channels_from_microsoft(
-            log, test_connection, TEAM_ID, TEST_CHANNEL_NAME, True
-        )
+        channels = get_channels_from_microsoft(log, test_connection, TEAM_ID, TEST_CHANNEL_NAME, True)
         channel_id = channels[0].get("id")
 
         result = delete_channel(log, test_connection, TEAM_ID, channel_id)

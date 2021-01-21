@@ -31,8 +31,7 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
         ):
             raise PluginException(
                 cause="Private address provided to be blocked.",
-                assistance="Skip Private Address set to true but private IP: "
-                f"{address} provided to be blocked.",
+                assistance="Skip Private Address set to true but private IP: " f"{address} provided to be blocked.",
             )
 
         if whitelist:

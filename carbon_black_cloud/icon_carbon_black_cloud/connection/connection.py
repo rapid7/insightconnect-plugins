@@ -41,12 +41,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             device = next((x for x in results if str(x.get("id", "")) == agent), None)
         if agent_type == agent_typer.IP_ADDRESS:
             device = next(
-                (
-                    x
-                    for x in results
-                    if x.get("last_internal_ip_address") == agent
-                    or x.get("last_external_ip_address")
-                ),
+                (x for x in results if x.get("last_internal_ip_address") == agent or x.get("last_external_ip_address")),
                 None,
             )
         if agent_type == agent_typer.HOSTNAME:
@@ -95,9 +90,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                     assistance="Change any spaces in the name to underscores. Look through your list of API Keys and see if there is an existing key with the same name.",
                     data=result.text,
                 )
-            if (
-                result.status_code == 503
-            ):  # This is usually an API limit error or server error, try again
+            if result.status_code == 503:  # This is usually an API limit error or server error, try again
                 time.sleep(5)
                 if retry:
                     return self.post_to_api(url, payload, False)

@@ -59,9 +59,7 @@ class Connection(komand.Connection):
                 test_result = Result(status, response.json()["message"])
 
         if not test_result.status:
-            raise ConnectionTestException(
-                "Connectivity test to InsightVM Console failed: %s" % test_result.message
-            )
+            raise ConnectionTestException("Connectivity test to InsightVM Console failed: %s" % test_result.message)
         else:
             self.logger.info("Connectivity test to InsightVM Console passed")
             return

@@ -52,9 +52,7 @@ class UpdatePatchGroup(insightconnect_plugin_runtime.Action):
         if patch_group.isdigit() and self.check_patch_group_exists(patch_group):
             patch_group_id = patch_group
         else:
-            get_patch_group_response = self.connection.ivanti_api.get_patch_group_by_name(
-                patch_group
-            )
+            get_patch_group_response = self.connection.ivanti_api.get_patch_group_by_name(patch_group)
             if get_patch_group_response.get("count"):
                 patch_group_id = get_patch_group_response.get("value")[0].get("id")
 

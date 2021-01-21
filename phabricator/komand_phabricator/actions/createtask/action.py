@@ -31,9 +31,7 @@ class Createtask(komand.Action):
 
         maniphest = ManiphesEdit(self.connection.phab, action=self)
         try:
-            id = maniphest.edit(
-                [{"type": "title", "value": title}, {"type": "description", "value": description}]
-            )
+            id = maniphest.edit([{"type": "title", "value": title}, {"type": "description", "value": description}])
         except Exception as e:
             self.logger.error("Createtask: Run: Problem with request".format(e.errno, e.strerror))
             raise Exception("Createtask: Run: Problem with request".format(e.errno, e.strerror))

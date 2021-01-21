@@ -65,9 +65,7 @@ class QueryReport(komand.Action):
                 request["request"]["features"] = features_list
             # all features were invalid
             else:
-                self.logger.error(
-                    "feature input was invalid." " valid features are te av and extraction."
-                )
+                self.logger.error("feature input was invalid." " valid features are te av and extraction.")
                 raise ValueError("invalid feature")
         if quota:
             request["request"]["quota"] = quota
@@ -93,16 +91,12 @@ class QueryReport(komand.Action):
             else:
                 label = response_json["response"]["status"]["label"]
                 message = response_json["response"]["status"]["message"]
-                self.logger.error(
-                    "There was a issue with the return from Checkpoint: {}".format(message)
-                )
+                self.logger.error("There was a issue with the return from Checkpoint: {}".format(message))
                 raise Exception("Checkpoint error {code} {label}".format(code=code, label=label))
 
         else:
             status_code_message = self._HTTPERROR.get(response.status_code, self._HTTPERROR[000])
-            self.logger.error(
-                "{status} ({code})".format(status=status_code_message, code=response.status_code)
-            )
+            self.logger.error("{status} ({code})".format(status=status_code_message, code=response.status_code))
             raise Exception("HTTP Error code{}".format(response.status_code))
 
     def test(self):

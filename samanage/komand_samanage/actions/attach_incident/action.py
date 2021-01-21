@@ -18,9 +18,7 @@ class AttachIncident(komand.Action):
         attachment_bytes = params.get("attachment_bytes")
         attachment_name = params.get("attachment_name")
 
-        attachment = self.connection.api.attach_file_to_incident(
-            incident_id, attachment_bytes, attachment_name
-        )
+        attachment = self.connection.api.attach_file_to_incident(incident_id, attachment_bytes, attachment_name)
 
         return {"attachment": attachment}
 

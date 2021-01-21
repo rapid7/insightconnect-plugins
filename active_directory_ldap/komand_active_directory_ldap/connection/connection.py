@@ -57,17 +57,13 @@ class Connection(komand.Connection):
                 )
             except exceptions.LDAPBindError as e:
                 self.logger.error(f"ldap3 returned the following error {e}")
-                raise ConnectionTestException(
-                    preset=ConnectionTestException.Preset.USERNAME_PASSWORD
-                )
+                raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
             except exceptions.LDAPAuthorizationDeniedResult as e:
                 self.logger.error(f"ldap3 returned the following error {e}")
                 raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED)
             except exceptions.LDAPSocketOpenError as e:
                 self.logger.error(f"ldap3 returned the following error {e}")
-                raise ConnectionTestException(
-                    preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE
-                )
+                raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
 
         self.logger.info("Connected!")
         self.conn = conn

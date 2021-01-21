@@ -65,9 +65,7 @@ class ProvisionUser(komand.Action):
         try:
             status = response.json().get("status")
         except Exception as e:
-            self.logger.error(
-                f"Provision user failed.\n" f"Exception was: {e}\n" f"Response was: {response.text}"
-            )
+            self.logger.error(f"Provision user failed.\n" f"Exception was: {e}\n" f"Response was: {response.text}")
             raise e
 
         # Check status

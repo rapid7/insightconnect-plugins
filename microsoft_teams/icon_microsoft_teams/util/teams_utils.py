@@ -5,9 +5,7 @@ from logging import Logger
 import komand.connection
 
 
-def get_teams_from_microsoft(
-    logger: Logger, connection: komand.connection, team_name=None, explicit=True
-) -> list:
+def get_teams_from_microsoft(logger: Logger, connection: komand.connection, team_name=None, explicit=True) -> list:
     """
     This will get teams from the Graph API. If a team_name is provided it will only return that team, or throw
     an error if that team is not found
@@ -38,9 +36,7 @@ def get_teams_from_microsoft(
     try:
         teams_result.raise_for_status()
     except Exception as e:
-        raise PluginException(
-            cause="Attempt to get teams failed.", assistance=teams_result.text
-        ) from e
+        raise PluginException(cause="Attempt to get teams failed.", assistance=teams_result.text) from e
     try:
         teams = teams_result.json().get("value")
     except Exception as e:
@@ -53,9 +49,7 @@ def get_teams_from_microsoft(
         try:
             new_teams = requests.get(nextlink, headers=headers)
         except Exception as e:
-            raise PluginException(
-                cause="Attempt to get paginated teams failed.", assistance=teams_result.text
-            ) from e
+            raise PluginException(cause="Attempt to get paginated teams failed.", assistance=teams_result.text) from e
         nextlink = new_teams.json().get("@odata.nextLink", "")
         teams.extend(new_teams.json().get("value"))
 
@@ -105,17 +99,13 @@ def get_channels_from_microsoft(
     if explicit:
         channels_url = f"https://graph.microsoft.com/beta/{connection.tenant_id}/teams/{team_id}/channels?filter=displayName eq '{channel_name}'"
     else:
-        channels_url = (
-            f"https://graph.microsoft.com/beta/{connection.tenant_id}/teams/{team_id}/channels"
-        )
+        channels_url = f"https://graph.microsoft.com/beta/{connection.tenant_id}/teams/{team_id}/channels"
     headers = connection.get_headers()
     channels_result = requests.get(channels_url, headers=headers)
     try:
         channels_result.raise_for_status()
     except Exception as e:
-        raise PluginException(
-            cause="Attempt to get channels failed.", assistance=channels_result.text
-        ) from e
+        raise PluginException(cause="Attempt to get channels failed.", assistance=channels_result.text) from e
     try:
         channels = channels_result.json().get("value")
     except Exception as e:
@@ -134,8 +124,7 @@ def get_channels_from_microsoft(
         else:
             raise PluginException(
                 cause=f"Channel {channel_name} was not found.",
-                assistance=f"Please verify {channel_name} is a valid channel for the team "
-                f"with id: {team_id}",
+                assistance=f"Please verify {channel_name} is a valid channel for the team " f"with id: {team_id}",
             )
 
     return channels
@@ -160,9 +149,7 @@ def send_message(
     :param thread_id: string
     :return: dict
     """
-    send_message_url = (
-        f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
-    )
+    send_message_url = f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
 
     if thread_id:
         send_message_url = send_message_url + f"/{thread_id}/replies"
@@ -201,9 +188,7 @@ def send_html_message(
     :param thread_id: string
     :return: dict
     """
-    send_message_url = (
-        f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
-    )
+    send_message_url = f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
 
     if thread_id:
         send_message_url = send_message_url + f"/{thread_id}/replies"
@@ -248,21 +233,15 @@ def create_channel(
     try:
         result.raise_for_status()
     except Exception as e:
-        raise PluginException(
-            cause=f"Create channel {channel_name} failed.", assistance=result.text
-        ) from e
+        raise PluginException(cause=f"Create channel {channel_name} failed.", assistance=result.text) from e
 
     if not result.status_code == 201:
-        raise PluginException(
-            cause=f"Create channel returned an unexpected result.", assistance=result.text
-        )
+        raise PluginException(cause=f"Create channel returned an unexpected result.", assistance=result.text)
 
     return True
 
 
-def delete_channel(
-    logger: Logger, connection: komand.connection, team_id: str, channel_id: str
-) -> bool:
+def delete_channel(logger: Logger, connection: komand.connection, team_id: str, channel_id: str) -> bool:
     """
     Deletes a channel for a given team
 
@@ -273,7 +252,9 @@ def delete_channel(
     :return: boolean
     """
 
-    delete_channel_endpoint = f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/teams/{team_id}/channels/{channel_id}"
+    delete_channel_endpoint = (
+        f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/teams/{team_id}/channels/{channel_id}"
+    )
 
     headers = connection.get_headers()
 
@@ -283,13 +264,9 @@ def delete_channel(
     try:
         result.raise_for_status()
     except Exception as e:
-        raise PluginException(
-            cause=f"Delete channel {channel_id} failed.", assistance=result.text
-        ) from e
+        raise PluginException(cause=f"Delete channel {channel_id} failed.", assistance=result.text) from e
 
     if not result.status_code == 204:
-        raise PluginException(
-            cause=f"Delete channel returned an unexpected result.", assistance=result.text
-        )
+        raise PluginException(cause=f"Delete channel returned an unexpected result.", assistance=result.text)
 
     return True

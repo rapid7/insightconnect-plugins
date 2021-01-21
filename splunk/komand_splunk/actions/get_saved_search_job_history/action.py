@@ -36,9 +36,7 @@ class GetSavedSearchJobHistory(komand.Action):
             )
 
         try:
-            history_json = json.loads(
-                json.dumps(history, default=lambda o: o.__dict__, sort_keys=True, indent=4)
-            )
+            history_json = json.loads(json.dumps(history, default=lambda o: o.__dict__, sort_keys=True, indent=4))
         except JSONDecodeError as e:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON) from e
 

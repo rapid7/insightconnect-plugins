@@ -38,9 +38,7 @@ class DeleteAddressObject(komand.Action):
 
         endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/address"
 
-        response = self.connection.session.delete(
-            endpoint, params=params_payload, verify=self.connection.ssl_verify
-        )
+        response = self.connection.session.delete(endpoint, params=params_payload, verify=self.connection.ssl_verify)
 
         try:
             json_response = response.json()

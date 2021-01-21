@@ -22,10 +22,7 @@ class SearchByName(komand.Action):
         return {
             "result": [
                 {
-                    "_ref": (
-                        "record:host/ZG5zLmhvc3QkLl9kZWZhdWx0LmNvbS5pbmZvLmFieA:"
-                        "abx.info.com/default"
-                    ),
+                    "_ref": ("record:host/ZG5zLmhvc3QkLl9kZWZhdWx0LmNvbS5pbmZvLmFieA:" "abx.info.com/default"),
                     "ipv4addrs": [
                         {
                             "_ref": (
@@ -42,10 +39,7 @@ class SearchByName(komand.Action):
                     "view": "default",
                 },
                 {
-                    "_ref": (
-                        "record:host/ZG5zLmhvc3QkLl9kZWZhdWx0LmNvbS5pbmZvLnRlc3Qz:"
-                        "test3.info.com/default"
-                    ),
+                    "_ref": ("record:host/ZG5zLmhvc3QkLl9kZWZhdWx0LmNvbS5pbmZvLnRlc3Qz:" "test3.info.com/default"),
                     "ipv4addrs": [
                         {
                             "_ref": (

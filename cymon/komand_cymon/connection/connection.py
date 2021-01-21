@@ -13,8 +13,7 @@ class Connection(komand.Connection):
 
         if now >= end:
             raise Exception(
-                "Error: The Cymon service has been discontinued. "
-                "Please transition off of using this plugin."
+                "Error: The Cymon service has been discontinued. " "Please transition off of using this plugin."
             )
         else:
             self.logger.warning(

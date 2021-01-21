@@ -41,8 +41,7 @@ class NewAdvisory(komand.Trigger):
 
         if r.status_code != 200:
             self.logger.error(
-                "ERROR: Invalid request; returned {} for the following "
-                "query:\n{}".format(r.status_code, query)
+                "ERROR: Invalid request; returned {} for the following " "query:\n{}".format(r.status_code, query)
             )
             return []
 

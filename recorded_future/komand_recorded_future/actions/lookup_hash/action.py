@@ -34,9 +34,7 @@ class LookupHash(komand.Action):
             if not comment:
                 comment = None
 
-            hash_report = self.connection.client.lookup_hash(
-                hash_id, fields=fields, comment=comment
-            )
+            hash_report = self.connection.client.lookup_hash(hash_id, fields=fields, comment=comment)
 
             return komand.helper.clean(hash_report["data"])
 

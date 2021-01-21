@@ -80,9 +80,7 @@ class Blacklist(komand.Action):
         user_notes = params.get(Input.DESCRIPTION)
         if user_notes:
             if len(user_notes) > self.MAX_NOTES_LENGTH:
-                self.logger.warning(
-                    f"Note: exceeds maximum length, truncated to {self.MAX_NOTES_LENGTH} characters"
-                )
+                self.logger.warning(f"Note: exceeds maximum length, truncated to {self.MAX_NOTES_LENGTH} characters")
             payload_notes = user_notes[: self.MAX_NOTES_LENGTH]
         indicator = params.get(Input.INDICATOR).lower()
         payload_type = self.get_data_type(indicator)

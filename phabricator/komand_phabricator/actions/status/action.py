@@ -27,14 +27,16 @@ class Status(komand.Action):
         status = params.get("status", None)
 
         if not status in self.validStatuses:
-            self.logger.error(
-                "Status: Run: You must set valid status {0}".format(self.validStatuses)
-            )
+            self.logger.error("Status: Run: You must set valid status {0}".format(self.validStatuses))
             raise Exception("Status: Run: You must set valid status {0}".format(self.validStatuses))
 
         maniphest = ManiphesEdit(self.connection.phab, action=self, objectIdentifier=id)
         try:
-            id = maniphest.edit([{"type": "status", "value": status},])
+            id = maniphest.edit(
+                [
+                    {"type": "status", "value": status},
+                ]
+            )
         except Exception as e:
             self.logger.error("Status: Run: Problem with request".format(e.errno, e.strerror))
             raise e

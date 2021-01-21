@@ -53,9 +53,7 @@ class DiskSnapshot(komand.Action):
             if any(sourceDiskEncryptionKey.values()):
                 data["sourceDiskEncryptionKey"] = sourceDiskEncryptionKey
 
-            url = server + "/projects/{0}/zones/{1}/disks/{2}/createSnapshot".format(
-                project_id, zone, disk
-            )
+            url = server + "/projects/{0}/zones/{1}/disks/{2}/createSnapshot".format(project_id, zone, disk)
 
             # new Request Request
             request = urllib2.Request(

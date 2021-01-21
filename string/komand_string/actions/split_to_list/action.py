@@ -24,9 +24,7 @@ class SplitToList(insightconnect_plugin_runtime.Action):
 
         delimiter = params.get("delimiter")
         if delimiter == "":
-            self.logger.info(
-                "User did not supply a string delimiter. " "Defaulting to a newline character."
-            )
+            self.logger.info("User did not supply a string delimiter. " "Defaulting to a newline character.")
             delimiter = "\n"
 
         return {"list": string.split(delimiter)}

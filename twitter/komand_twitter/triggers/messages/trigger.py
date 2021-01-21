@@ -53,24 +53,16 @@ class Messages(komand.Trigger):
 
             if len(messages) > 0:  # Only trigger if messages exist.
                 self.trigger_on_messages(messages=messages)
-                self.logger.info(
-                    "Run: Trigger done. Sleeping {seconds} seconds.".format(seconds=self.interval)
-                )
+                self.logger.info("Run: Trigger done. Sleeping {seconds} seconds.".format(seconds=self.interval))
             else:
-                self.logger.info(
-                    "Run: No new messages. Sleeping {seconds} seconds.".format(
-                        seconds=self.interval
-                    )
-                )
+                self.logger.info("Run: No new messages. Sleeping {seconds} seconds.".format(seconds=self.interval))
 
             time.sleep(self.interval)
 
     """Fetches new messages from Twitter and then sets the sleep time appropriately."""
 
     def get_messages(self):
-        messages = self.connection.client.GetDirectMessages(
-            count=self.MAX_MENTION_COUNT, since_id=self.cached_id
-        )
+        messages = self.connection.client.GetDirectMessages(count=self.MAX_MENTION_COUNT, since_id=self.cached_id)
         message_count = len(messages)
         self.logger.info("Get Messages: Got {count} messages.".format(count=message_count))
 
@@ -100,9 +92,7 @@ class Messages(komand.Trigger):
                 with komand.helper.open_cachefile(self.CACHE_FILE_NAME) as cache_file:
                     cache_file.write(str(message.id))
 
-            self.logger.info(
-                "Trigger On Messages: Sending trigger for message {id}.".format(id=message.id)
-            )
+            self.logger.info("Trigger On Messages: Sending trigger for message {id}.".format(id=message.id))
             payload = self.create_trigger_payload(message)
             self.send(payload)
 

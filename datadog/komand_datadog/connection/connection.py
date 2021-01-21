@@ -28,7 +28,6 @@ class Connection(komand.Connection):
             raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
         else:
             raise ConnectionTestException(
-                cause=f"Unknown connection error: Status code {result.status_code}."
-                f" Error message {result.text}",
+                cause=f"Unknown connection error: Status code {result.status_code}." f" Error message {result.text}",
                 assistance="Contact support for help",
             )

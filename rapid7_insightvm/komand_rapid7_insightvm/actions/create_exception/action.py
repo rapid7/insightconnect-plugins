@@ -38,10 +38,6 @@ class CreateException(komand.Action):
             payload.pop("expires", None)
         payload["state"] = "Under Review"
 
-        endpoint = endpoints.VulnerabilityException.vulnerability_exceptions(
-            self.connection.console_url
-        )
-        response = resource_helper.resource_request(
-            endpoint=endpoint, method="post", payload=payload
-        )
+        endpoint = endpoints.VulnerabilityException.vulnerability_exceptions(self.connection.console_url)
+        response = resource_helper.resource_request(endpoint=endpoint, method="post", payload=payload)
         return response

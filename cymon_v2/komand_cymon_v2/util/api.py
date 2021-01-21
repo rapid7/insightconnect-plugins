@@ -9,15 +9,10 @@ class CymonV2:
         self.base_url = "https://api.cymon.io/v2/"
 
         if username is None or password is None:
-            logger.warn(
-                "Cymon API V2 credentials were not provided (anonymous), "
-                "some actions will not be available"
-            )
+            logger.warn("Cymon API V2 credentials were not provided (anonymous), " "some actions will not be available")
         else:
             try:
-                auth_info = self._call_api(
-                    "POST", "auth/login", json={"username": username, "password": password}
-                )
+                auth_info = self._call_api("POST", "auth/login", json={"username": username, "password": password})
                 self.token = auth_info["jwt"]
                 logger.info("Cymon API V2 authentication successful")
             except Exception as e:
@@ -27,7 +22,13 @@ class CymonV2:
         url = "ioc/search/{}/{}".format(search_by, value)
 
         return self._call_api(
-            "GET", url, "hits", params={"start_date": start_date, "end_date": end_date,}
+            "GET",
+            url,
+            "hits",
+            params={
+                "start_date": start_date,
+                "end_date": end_date,
+            },
         )
 
     def list_all_feeds(self, privacy):
@@ -36,7 +37,14 @@ class CymonV2:
         if privacy == "all":
             privacy = None
 
-        return self._call_api("GET", url, "feeds", params={"privacy": privacy,})
+        return self._call_api(
+            "GET",
+            url,
+            "feeds",
+            params={
+                "privacy": privacy,
+            },
+        )
 
     def list_user_feeds(self):
         url = "feeds/me"
@@ -53,9 +61,7 @@ class CymonV2:
 
         return self._call_api("GET", url)
 
-    def create_feed(
-        self, name, description, link, tos, logo, privacy, tags, admins, members, guests
-    ):
+    def create_feed(self, name, description, link, tos, logo, privacy, tags, admins, members, guests):
         url = "feeds"
 
         json = {
@@ -79,9 +85,7 @@ class CymonV2:
         else:
             raise Exception("Could not create a feed; {}".format(message))
 
-    def update_feed(
-        self, feed_id, description, link, tos, logo, privacy, tags, admins, members, guests
-    ):
+    def update_feed(self, feed_id, description, link, tos, logo, privacy, tags, admins, members, guests):
         url = "feeds/{}".format(feed_id)
 
         json = {

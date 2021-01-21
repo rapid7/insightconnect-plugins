@@ -33,9 +33,7 @@ class Retrieve(komand.Action):
             ticket_data = ticket.to_dct()
             clean_data = komand.helper.clean(ticket_data)
         except Exception as e:
-            self.logger.error(
-                "Ticket may not exist, please check to make sure the ticket exists ", e
-            )
+            self.logger.error("Ticket may not exist, please check to make sure the ticket exists ", e)
             raise
 
         # Type formatting for other actions
@@ -82,9 +80,7 @@ class Retrieve(komand.Action):
 
         except Exception as e:
             self.logger.error(
-                "Ticket {} missing Article data! Unable to format data".format(
-                    str(params.get("ticket_id"))
-                ),
+                "Ticket {} missing Article data! Unable to format data".format(str(params.get("ticket_id"))),
                 e,
             )
             raise
@@ -92,8 +88,6 @@ class Retrieve(komand.Action):
         try:
             clean_data["Ticket"]["TicketID"] = int(clean_data["Ticket"]["TicketID"])
         except Exception as e:
-            self.logger.error(
-                "Ticket {} missing Ticket ID!".format(str(params.get("ticket_id"))), e
-            )
+            self.logger.error("Ticket {} missing Ticket ID!".format(str(params.get("ticket_id"))), e)
             raise
         return clean_data

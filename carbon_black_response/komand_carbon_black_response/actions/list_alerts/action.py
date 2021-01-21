@@ -20,9 +20,7 @@ class ListAlerts(komand.Action):
             ("start", params.get("start", 0)),
         ]
         try:
-            results = self.connection.carbon_black.get_object(
-                "/api/v1/alert", query_parameters=query_params
-            )["results"]
+            results = self.connection.carbon_black.get_object("/api/v1/alert", query_parameters=query_params)["results"]
         except Exception as ex:
             self.logger.error("Failed to get alerts: %s", ex)
             raise ex

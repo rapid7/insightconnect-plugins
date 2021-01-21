@@ -22,9 +22,7 @@ class Parse(komand.Action):
             eml_file = base64.b64decode(params.get(Input.EML_FILE)).decode("utf-8")
         except Exception as ex:
             self.logger.debug(ex)
-            self.logger.debug(
-                "Failed to parse message as UTF-8, attempting to detwingle first before retrying parse"
-            )
+            self.logger.debug("Failed to parse message as UTF-8, attempting to detwingle first before retrying parse")
             eml_file = UnicodeDammit.detwingle(base64.b64decode(params.get(Input.EML_FILE))).decode(
                 "utf-8", errors="ignore"
             )

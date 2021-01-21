@@ -30,9 +30,7 @@ class LookupDomain(komand.Action):
         if not querystring.keys():
             querystring = None
 
-        results = hibp.get_request(
-            url=self._BASE_URL, params=querystring, key=self.connection.api_key
-        )
+        results = hibp.get_request(url=self._BASE_URL, params=querystring, key=self.connection.api_key)
         if results:
             return {Output.FOUND: True, Output.BREACHES: results}
         return {Output.FOUND: False}

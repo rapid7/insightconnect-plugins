@@ -11,9 +11,7 @@ def normalize_comment(source, logger=logging.getLogger()):
     return comment
 
 
-def normalize_issue(
-    issue, get_attachments=False, include_raw_fields=False, logger=logging.getLogger()
-):
+def normalize_issue(issue, get_attachments=False, include_raw_fields=False, logger=logging.getLogger()):
     url = issue.permalink().split(" - ", 1)[0]
 
     if issue.fields.resolution:

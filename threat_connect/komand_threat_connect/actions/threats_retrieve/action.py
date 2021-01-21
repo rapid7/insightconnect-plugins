@@ -70,10 +70,7 @@ class ThreatsRetrieve(komand.Action):
             threat_obj = {
                 "id": (threat.id or -1),
                 "name": (threat.name or ""),
-                "date_added": (
-                    datetime.datetime.strptime(threat.date_added, "%Y-%d-%mT%H:%M:%SZ").isoformat()
-                    or ""
-                ),
+                "date_added": (datetime.datetime.strptime(threat.date_added, "%Y-%d-%mT%H:%M:%SZ").isoformat() or ""),
                 "weblink": (threat.weblink or ""),
             }
             threat_obj_list.append(threat_obj)

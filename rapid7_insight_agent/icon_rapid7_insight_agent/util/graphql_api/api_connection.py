@@ -67,9 +67,7 @@ class ApiConnection:
         }
 
         results_object = self._post_payload(unquarantine_payload)
-        failed = (
-            results_object.get("data").get("unquarantineAssets").get("results")[0].get("failed")
-        )
+        failed = results_object.get("data").get("unquarantineAssets").get("results")[0].get("failed")
         return not failed
 
     def get_agent_status(self, agent_id: str) -> dict:
@@ -99,13 +97,9 @@ class ApiConnection:
 
         is_online = True if agent_status == "ONLINE" else False
         is_quarantine_requested = True if quarantine_state == "QUARANTINE_IN_PROGRESS" else False
-        is_unquarantine_requested = (
-            True if quarantine_state == "UNQUARANTINE_IN_PROGRESS" else False
-        )
+        is_unquarantine_requested = True if quarantine_state == "UNQUARANTINE_IN_PROGRESS" else False
         is_is_quarantined = (
-            True
-            if (quarantine_state == "QUARANTINED" or quarantine_state == "UNQUARANTINE_IN_PROGRESS")
-            else False
+            True if (quarantine_state == "QUARANTINED" or quarantine_state == "UNQUARANTINE_IN_PROGRESS") else False
         )
 
         return {
@@ -117,9 +111,7 @@ class ApiConnection:
 
     def connection_test(self) -> bool:
         # Return the first org to verify the connection works
-        graph_ql_payload = {
-            "query": "{ organizations(first: 1) { edges { node { id } } totalCount } }"
-        }
+        graph_ql_payload = {"query": "{ organizations(first: 1) { edges { node { id } } totalCount } }"}
 
         # If no exceptions are thrown, we have a valid connection
         self._post_payload(graph_ql_payload)
@@ -236,13 +228,7 @@ class ApiConnection:
         self.logger.info(f"Getting all agents...")
         results_object = self._post_payload(payload)
 
-        has_next_page = (
-            results_object.get("data")
-            .get("organization")
-            .get("assets")
-            .get("pageInfo")
-            .get("hasNextPage")
-        )
+        has_next_page = results_object.get("data").get("organization").get("assets").get("pageInfo").get("hasNextPage")
         agents.extend(self._get_agents_from_result_object(results_object))
         self.logger.info(f"Initial agents received.")
 
@@ -254,9 +240,7 @@ class ApiConnection:
         self.logger.info(f"Extra pages of agents: {has_next_page}")
         while has_next_page:
             self.logger.info(f"Getting next page of agents.")
-            has_next_page, results_object, next_agents = self._get_next_page_of_agents(
-                results_object
-            )
+            has_next_page, results_object, next_agents = self._get_next_page_of_agents(results_object)
             agent = self._find_agent_in_agents(next_agents, agent_input, agent_type)
             if agent:
                 return agent
@@ -276,34 +260,20 @@ class ApiConnection:
         :return: tuple (boolean, dict (results), list (agents))
         """
         self.logger.info(f"Getting next page of agents.")
-        next_cursor = (
-            results_object.get("data")
-            .get("organization")
-            .get("assets")
-            .get("pageInfo")
-            .get("endCursor")
-        )
+        next_cursor = results_object.get("data").get("organization").get("assets").get("pageInfo").get("endCursor")
         payload = {
             "query": "query( $orgId:String! $nextCursor:String! ) { organization(id: $orgId) { assets( first: 10000, after: $nextCursor ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
             "variables": {"orgId": self.org_key, "nextCursor": next_cursor},
         }
         results_object = self._post_payload(payload)
 
-        has_next_page = (
-            results_object.get("data")
-            .get("organization")
-            .get("assets")
-            .get("pageInfo")
-            .get("hasNextPage")
-        )
+        has_next_page = results_object.get("data").get("organization").get("assets").get("pageInfo").get("hasNextPage")
 
         next_agents = self._get_agents_from_result_object(results_object)
 
         return has_next_page, results_object, next_agents
 
-    def _find_agent_in_agents(
-        self, agents: [dict], agent_input: str, agent_type: str
-    ) -> Optional[dict]:
+    def _find_agent_in_agents(self, agents: [dict], agent_input: str, agent_type: str) -> Optional[dict]:
         """
         Given a list of agent objects, find the agent that matches our input.
 
@@ -318,9 +288,7 @@ class ApiConnection:
         self.logger.info(f"Searching for: {agent_input}")
         self.logger.info(f"Search type: {agent_type}")
         for agent in agents:
-            if (
-                agent and len(agent) and agent.get("host")
-            ):  # Some hosts come back None...need to check for that
+            if agent and len(agent) and agent.get("host"):  # Some hosts come back None...need to check for that
                 if agent_type == agent_typer.IP_ADDRESS:
                     if agent_input == agent.get("host").get("primaryAddress").get("ip"):
                         return agent
@@ -335,11 +303,7 @@ class ApiConnection:
                     # MAC addresses can come in with : or - as a separator, remove all of it and compare
                     stripped_input_mac = agent_input.replace("-", "").replace(":", "")
                     stripped_target_mac = (
-                        agent.get("host")
-                        .get("primaryAddress")
-                        .get("mac")
-                        .replace("-", "")
-                        .replace(":", "")
+                        agent.get("host").get("primaryAddress").get("mac").replace("-", "").replace(":", "")
                     )
                     if stripped_input_mac == stripped_target_mac:
                         return agent

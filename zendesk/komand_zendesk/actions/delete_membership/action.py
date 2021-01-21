@@ -16,9 +16,7 @@ class DeleteMembership(komand.Action):
 
     def run(self, params={}):
         try:
-            org_mem = self.connection.client.organization_memberships(
-                id=params.get("membership_id")
-            )
+            org_mem = self.connection.client.organization_memberships(id=params.get("membership_id"))
             self.connection.client.organization_memberships.delete(org_mem)
             return {"status": True}
         except zenpy.lib.exception.APIException as e:

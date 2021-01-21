@@ -22,9 +22,7 @@ class UpdateIssue(komand.Action):
             if key in params:
                 issue_update_json[key] = params[key]
 
-        issue = self.connection.sentry_connection.request(
-            "PUT", "issues/{}/".format(issue_id), json=issue_update_json
-        )
+        issue = self.connection.sentry_connection.request("PUT", "issues/{}/".format(issue_id), json=issue_update_json)
 
         return {"issue": issue}
 

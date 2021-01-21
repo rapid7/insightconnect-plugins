@@ -20,9 +20,7 @@ class GetFileContents(komand.Action):
         mime_type = params.get("mime_type")
 
         try:
-            response = (
-                self.connection.service.files().export(fileId=file_id, mimeType=mime_type).execute()
-            )
+            response = self.connection.service.files().export(fileId=file_id, mimeType=mime_type).execute()
         except googleapiclient.errors.HttpError as e:
             self.logger.error(e)
             raise

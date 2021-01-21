@@ -34,9 +34,7 @@ class GetAssetGroups(komand.Action):
             for g in groups:
                 if regex.match(g["name"]):
                     filtered_groups.append(g)
-            self.logger.info(
-                "Returning %d asset groups based on filters..." % (len(filtered_groups))
-            )
+            self.logger.info("Returning %d asset groups based on filters..." % (len(filtered_groups)))
             groups = filtered_groups
 
         return {"asset_groups": groups}

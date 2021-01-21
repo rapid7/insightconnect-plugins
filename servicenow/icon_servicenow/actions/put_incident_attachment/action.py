@@ -33,9 +33,7 @@ class PutIncidentAttachment(insightconnect_plugin_runtime.Action):
         )
         method = "post"
 
-        response = self.connection.request.make_request(
-            url, method, payload=payload, content_type=content_type
-        )
+        response = self.connection.request.make_request(url, method, payload=payload, content_type=content_type)
 
         try:
             result = response["resource"].get("result")

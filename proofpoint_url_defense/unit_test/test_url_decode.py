@@ -38,9 +38,7 @@ class TestUrlDecode(TestCase):
 
         # test V2
         results = test_action.run(action_params)
-        self.assertEquals(
-            {"decoded_url": "http://www.example.org/url", "decode_success": True}, results
-        )
+        self.assertEquals({"decoded_url": "http://www.example.org/url", "decode_success": True}, results)
 
         # test V3
         action_params[

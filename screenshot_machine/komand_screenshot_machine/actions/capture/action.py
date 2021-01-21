@@ -44,9 +44,7 @@ class Capture(komand.Action):
         }
 
         if self.connection.secret:
-            hash_ = hashlib.md5(
-                (params["url"] + self.connection.secret).encode("ascii")
-            ).hexdigest()
+            hash_ = hashlib.md5((params["url"] + self.connection.secret).encode("ascii")).hexdigest()
             params["hash"] = hash_
 
         res = requests.get(self.connection.base, params=params)
@@ -65,7 +63,13 @@ class Capture(komand.Action):
             + (params.get("format") or "JPG")
         )
 
-        return {"url": url, "screenshot": {"filename": filename, "content": content,}}
+        return {
+            "url": url,
+            "screenshot": {
+                "filename": filename,
+                "content": content,
+            },
+        }
 
     def test(self):
         """TODO: Test action"""

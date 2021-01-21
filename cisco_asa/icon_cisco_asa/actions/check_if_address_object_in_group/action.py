@@ -72,7 +72,4 @@ class CheckIfAddressObjectInGroup(insightconnect_plugin_runtime.Action):
         ):
             return False
 
-        return (
-            "/" in ip_cidr
-            and ipaddress.IPv4Address(ip_address) in ipaddress.ip_network(ip_cidr).hosts()
-        )
+        return "/" in ip_cidr and ipaddress.IPv4Address(ip_address) in ipaddress.ip_network(ip_cidr).hosts()

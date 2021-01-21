@@ -28,7 +28,10 @@ class ZscalerAPI:
         return 200 <= response.status_code < 300
 
     def get_hash_report(self, hash: str):
-        return self.authenticated_call("GET", f"sandbox/report/{hash}?details=full",).json()
+        return self.authenticated_call(
+            "GET",
+            f"sandbox/report/{hash}?details=full",
+        ).json()
 
     def url_lookup(self, lookup_url: list):
         return self.authenticated_call("POST", "urlLookup", data=json.dumps(lookup_url)).json()
@@ -64,14 +67,10 @@ class ZscalerAPI:
         self, method: str, path: str, data: str = None, json_data: dict = None, headers: dict = None
     ) -> Response:
         try:
-            response = requests.request(
-                method, f"{self.url}/{path}", data=data, json=json_data, headers=headers
-            )
+            response = requests.request(method, f"{self.url}/{path}", data=data, json=json_data, headers=headers)
 
             if response.status_code == 401:
-                raise PluginException(
-                    preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text
-                )
+                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
             if response.status_code == 404:
@@ -82,9 +81,7 @@ class ZscalerAPI:
                     data=response.json().get("message", response.text),
                 )
             if response.status_code >= 500:
-                raise PluginException(
-                    preset=PluginException.Preset.SERVER_ERROR, data=response.text
-                )
+                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
             if 200 <= response.status_code < 300:
                 return response

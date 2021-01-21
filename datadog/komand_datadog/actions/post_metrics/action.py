@@ -27,9 +27,7 @@ class PostMetrics(komand.Action):
         self.logger.info(payload)
 
         url = Metrics.post_metrics(self.connection.url)
-        response = request.resource_request(
-            url, "post", params=self.connection.auth, payload=payload
-        )
+        response = request.resource_request(url, "post", params=self.connection.auth, payload=payload)
         result = response.get("resource")
         if result.get("errors"):
             error = result["errors"]

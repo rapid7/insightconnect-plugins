@@ -19,13 +19,9 @@ class UpdateAssetGroupSearchCriteria(komand.Action):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         asset_group_id = params.get("id")
         search_criteria = params.get("searchCriteria")
-        endpoint = endpoints.AssetGroup.asset_group_search_criteria(
-            self.connection.console_url, asset_group_id
-        )
+        endpoint = endpoints.AssetGroup.asset_group_search_criteria(self.connection.console_url, asset_group_id)
         self.logger.info("Using %s ..." % endpoint)
 
-        response = resource_helper.resource_request(
-            endpoint=endpoint, method="put", payload=search_criteria
-        )
+        response = resource_helper.resource_request(endpoint=endpoint, method="put", payload=search_criteria)
 
         return response

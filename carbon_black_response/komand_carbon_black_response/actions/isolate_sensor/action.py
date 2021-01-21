@@ -16,18 +16,10 @@ class IsolateSensor(komand.Action):
 
     def run(self, params={}):
         try:
-            sensor = (
-                self.connection.carbon_black.select(Sensor)
-                .where("hostname:" + params.get("hostname"))
-                .first()
-            )
+            sensor = self.connection.carbon_black.select(Sensor).where("hostname:" + params.get("hostname")).first()
             self.logger.info(
                 "List size is: %d"
-                % len(
-                    self.connection.carbon_black.select(Sensor).where(
-                        "hostname:" + params.get("hostname")
-                    )
-                )
+                % len(self.connection.carbon_black.select(Sensor).where("hostname:" + params.get("hostname")))
             )
             sensor.isolate()
         except Exception as ex:

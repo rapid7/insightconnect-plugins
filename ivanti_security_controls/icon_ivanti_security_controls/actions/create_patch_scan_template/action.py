@@ -35,11 +35,7 @@ class CreatePatchScanTemplate(insightconnect_plugin_runtime.Action):
 
         template_id = self.connection.ivanti_api.create_patch_scan_template(payload).get("id")
         if template_id:
-            return {
-                Output.PATCH_SCAN_TEMPLATE: self.connection.ivanti_api.get_patch_scan_template(
-                    template_id
-                )
-            }
+            return {Output.PATCH_SCAN_TEMPLATE: self.connection.ivanti_api.get_patch_scan_template(template_id)}
 
         raise PluginException(
             cause="Invalid API response.",

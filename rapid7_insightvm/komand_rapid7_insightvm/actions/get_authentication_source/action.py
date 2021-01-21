@@ -17,9 +17,7 @@ class GetAuthenticationSource(komand.Action):
 
     def run(self, params={}):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
-        endpoint = endpoints.AuthenticationSource.authentication_sources(
-            self.connection.console_url, params.get("id")
-        )
+        endpoint = endpoints.AuthenticationSource.authentication_sources(self.connection.console_url, params.get("id"))
         self.logger.info("Using %s ..." % endpoint)
 
         response = resource_helper.resource_request(endpoint=endpoint)

@@ -21,9 +21,7 @@ class CreateTopic(komand.Action):
         if params.get("project_id"):
             project_id = params.get("project_id")
 
-        topic_name = "projects/{project_id}/topics/{topic}".format(
-            project_id=project_id, topic=topic
-        )
+        topic_name = "projects/{project_id}/topics/{topic}".format(project_id=project_id, topic=topic)
 
         publisher = pubsub.PublisherClient(credentials=self.connection.credentials)
         new_topic = publisher.create_topic(topic_name)

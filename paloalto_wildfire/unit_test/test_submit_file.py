@@ -29,8 +29,6 @@ class TestSubmitFile(TestCase):
 
         actual = sf.run(action_params)
 
-        expected = {
-            "submission": {"supported_file_type": False, "filename": "Unknown", "url": "Unknown"}
-        }
+        expected = {"submission": {"supported_file_type": False, "filename": "Unknown", "url": "Unknown"}}
         self.assertEqual(actual, expected)
         pass

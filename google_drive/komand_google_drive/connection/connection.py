@@ -47,9 +47,7 @@ class Connection(komand.Connection):
             auth["private_key"] = auth["private_key"].replace("\\n", "\n", -1)
 
         # Build a Google credentials object
-        credentials = oauth2client.service_account.ServiceAccountCredentials.from_json_keyfile_dict(
-            auth, scopes=scopes
-        )
+        credentials = oauth2client.service_account.ServiceAccountCredentials.from_json_keyfile_dict(auth, scopes=scopes)
 
         # Delegate control to 'admin_user'
         delegated_credentials = credentials.create_delegated(admin_user)

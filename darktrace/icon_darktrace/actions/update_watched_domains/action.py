@@ -18,16 +18,12 @@ class UpdateWatchedDomains(insightconnect_plugin_runtime.Action):
         response = self.connection.client.update_intelfeed(
             params.get(Input.WATCHED_DOMAIN_STATUS),
             params.get(Input.ENTRY),
-            self._get_default(
-                params, Input.DESCRIPTION, "Watched Domains managed by InsightConnect"
-            ),
+            self._get_default(params, Input.DESCRIPTION, "Watched Domains managed by InsightConnect"),
             self._get_default(params, Input.SOURCE, "InsightConnect"),
             self._get_default(
                 params,
                 Input.EXPIRATION_TIME,
-                (datetime.datetime.now() + datetime.timedelta(days=30)).strftime(
-                    "%Y-%m-%d %H:%M:%S"
-                ),
+                (datetime.datetime.now() + datetime.timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S"),
             ),
             params.get(Input.HOSTNAME, False),
         )

@@ -48,6 +48,5 @@ class Connection(insightconnect_plugin_runtime.Connection):
         else:
             raise ConnectionTestException(
                 preset=ConnectionTestException.Preset.UNKNOWN,
-                data=f'{response.get("status", "Not available")}, '
-                f'{response.get("text", "Not available")}',
+                data=f'{response.get("status", "Not available")}, ' f'{response.get("text", "Not available")}',
             )

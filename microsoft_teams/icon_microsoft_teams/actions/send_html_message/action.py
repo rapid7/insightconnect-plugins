@@ -25,9 +25,7 @@ class SendHtmlMessage(komand.Action):
 
         teams = get_teams_from_microsoft(self.logger, self.connection, params.get(Input.TEAM_NAME))
         team_id = teams[0].get("id")
-        channels = get_channels_from_microsoft(
-            self.logger, self.connection, team_id, params.get(Input.CHANNEL_NAME)
-        )
+        channels = get_channels_from_microsoft(self.logger, self.connection, team_id, params.get(Input.CHANNEL_NAME))
 
         message = send_html_message(
             self.logger,

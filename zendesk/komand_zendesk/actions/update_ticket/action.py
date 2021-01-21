@@ -19,38 +19,20 @@ class UpdateTicket(komand.Action):
 
         ticket = client.tickets(id=params.get("ticket_id"))
 
-        ticket.assignee_id = (
-            ticket.assignee_id if params.get("assignee_id") is None else params.get("assignee_id")
-        )
+        ticket.assignee_id = ticket.assignee_id if params.get("assignee_id") is None else params.get("assignee_id")
         ticket.collaborator_ids = (
-            ticket.collaborator_ids
-            if params.get("collaborator_ids") is None
-            else params.get("collaborator_ids")
+            ticket.collaborator_ids if params.get("collaborator_ids") is None else params.get("collaborator_ids")
         )
         ticket.due_at = ticket.due_at if params.get("due_at") is None else params.get("due_at")
-        ticket.external_id = (
-            ticket.external_id if params.get("external_id") is None else params.get("external_id")
-        )
-        ticket.group_id = (
-            ticket.group_id if params.get("group_id") is None else params.get("group_id")
-        )
-        ticket.problem_id = (
-            ticket.problem_id if params.get("problem_id") is None else params.get("problem_id")
-        )
-        ticket.recipient = (
-            ticket.recipient if params.get("recipient") is None else params.get("recipient")
-        )
-        ticket.requester_id = (
-            ticket.requester_id
-            if params.get("requester_id") is None
-            else params.get("requester_id")
-        )
+        ticket.external_id = ticket.external_id if params.get("external_id") is None else params.get("external_id")
+        ticket.group_id = ticket.group_id if params.get("group_id") is None else params.get("group_id")
+        ticket.problem_id = ticket.problem_id if params.get("problem_id") is None else params.get("problem_id")
+        ticket.recipient = ticket.recipient if params.get("recipient") is None else params.get("recipient")
+        ticket.requester_id = ticket.requester_id if params.get("requester_id") is None else params.get("requester_id")
         ticket.subject = ticket.subject if params.get("subject") is None else params.get("subject")
         ticket.tags = ticket.tags if params.get("tags") is None else params.get("tags")
         ticket.type = (
-            ticket.type
-            if (params.get("type")) is None or params.get("type") == ""
-            else params.get("type").lower()
+            ticket.type if (params.get("type")) is None or params.get("type") == "" else params.get("type").lower()
         )
         ticket.status = (
             ticket.status

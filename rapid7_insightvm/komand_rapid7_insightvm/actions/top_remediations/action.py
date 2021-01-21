@@ -73,9 +73,7 @@ class TopRemediations(komand.Action):
 
         # Structure and add remediation assets to remediations
         self.logger.info("Processing assets of top remediations")
-        asset_report_contents = util.adhoc_sql_report(
-            self.connection, self.logger, asset_report_payload
-        )
+        asset_report_contents = util.adhoc_sql_report(self.connection, self.logger, asset_report_payload)
         try:
             csv_report = csv.DictReader(io.StringIO(asset_report_contents["raw"]))
         except Exception as e:
@@ -86,9 +84,7 @@ class TopRemediations(komand.Action):
         for row in csv_report:
             # Only track assets up to the asset limit
             asset_limit = params.get(Input.ASSET_LIMIT)
-            if (asset_limit == 0) or (
-                len(remediations[row["solution_id"]]["assets"]) < asset_limit
-            ):
+            if (asset_limit == 0) or (len(remediations[row["solution_id"]]["assets"]) < asset_limit):
                 asset = {
                     "id": int(row["asset_id"]),
                     "hostName": row["host_name"],
@@ -96,9 +92,7 @@ class TopRemediations(komand.Action):
                     "mac": row["mac_address"],
                     "os": row["name"],
                     "riskScore": int(float(row["riskscore"])),
-                    "criticalityTag": TopRemediations.highest_criticality(
-                        row["criticality_tag"].split(",")
-                    ),
+                    "criticalityTag": TopRemediations.highest_criticality(row["criticality_tag"].split(",")),
                 }
                 remediations[row["solution_id"]]["assets"].append(asset)
 
@@ -111,9 +105,7 @@ class TopRemediations(komand.Action):
         }
         # Add scope if set in action
         if (params.get(Input.SCOPE) != "none") and (len(params.get(Input.SCOPE_IDS)) > 0):
-            vulnerability_report_payload["scope"] = {
-                params.get(Input.SCOPE): params.get(Input.SCOPE_IDS)
-            }
+            vulnerability_report_payload["scope"] = {params.get(Input.SCOPE): params.get(Input.SCOPE_IDS)}
 
         # Structure and add remediation vulnerabilities to remediations
         self.logger.info("Processing vulnerabilities of top remediations")
@@ -130,9 +122,7 @@ class TopRemediations(komand.Action):
         for row in csv_report:
             # Only track vulnerabilities up to the vulnerability limit
             vuln_limit = params.get(Input.VULNERABILITY_LIMIT)
-            if (vuln_limit == 0) or (
-                len(remediations[row["solution_id"]]["vulnerabilities"]) < vuln_limit
-            ):
+            if (vuln_limit == 0) or (len(remediations[row["solution_id"]]["vulnerabilities"]) < vuln_limit):
                 vulnerability = {
                     "id": int(row["vulnerability_id"]),
                     "title": row["title"],

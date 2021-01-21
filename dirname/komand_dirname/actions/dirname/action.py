@@ -19,9 +19,7 @@ class Dirname(komand.Action):
         dirname = os.path.dirname(path)
         if dirname is None or dirname == "":
             self.logger.error("Not able to retrieve dirname of %s", path)
-            raise PluginException(
-                cause="Dirname is empty", assistance=f"Not able to retrieve dirname of {path}"
-            )
+            raise PluginException(cause="Dirname is empty", assistance=f"Not able to retrieve dirname of {path}")
         return {Output.DIRNAME: dirname}
 
     def test(self, params={}):

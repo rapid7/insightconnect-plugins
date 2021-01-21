@@ -12,9 +12,7 @@ class Connection(komand.Connection):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
     def connect(self, params={}):
-        url = "{}://{}:{}".format(
-            params.get("protocol").lower(), params.get("host"), params.get("port")
-        )
+        url = "{}://{}:{}".format(params.get("protocol").lower(), params.get("host"), params.get("port"))
         api_key = params.get("api_key").get("secretKey")
         self.verify = params.get("verify", True)
         self.logger.info("URL: %s", url)

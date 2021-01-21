@@ -30,9 +30,7 @@ class CreateAddressObject(komand.Action):
             is_private = ipaddress.ip_address(user_ip_address).is_private
         except ValueError as e:
             # example: `ValueError: 'hello world' does not appear to be an IPv4 or IPv6 address`
-            raise PluginException(
-                cause=f"Invalid IP address provided: {user_ip_address}", assistance=e
-            )
+            raise PluginException(cause=f"Invalid IP address provided: {user_ip_address}", assistance=e)
 
         if skip_rfc1918 and is_private:
             return {
@@ -43,9 +41,7 @@ class CreateAddressObject(komand.Action):
             }
 
         try:
-            if len(whitelist) > 0 and check_if_ip_in_whitelist(
-                ip_address=user_ip_address, whitelist=whitelist
-            ):
+            if len(whitelist) > 0 and check_if_ip_in_whitelist(ip_address=user_ip_address, whitelist=whitelist):
                 return {
                     Output.HOST_OBJECT: {},
                     Output.SUCCESS: False,
@@ -79,10 +75,7 @@ class CreateAddressObject(komand.Action):
                 Output.ERROR_MESSAGE: e.get_errors()[0],
             }
         except PluginException as e:
-            if (
-                "Multiple objects have the same" in e.assistance
-                or "More than one object named" in e.assistance
-            ):
+            if "Multiple objects have the same" in e.assistance or "More than one object named" in e.assistance:
                 return {
                     Output.HOST_OBJECT: {},
                     Output.SUCCESS: False,

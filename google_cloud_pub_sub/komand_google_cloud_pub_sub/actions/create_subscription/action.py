@@ -22,9 +22,7 @@ class CreateSubscription(komand.Action):
         if params.get("project_id"):
             project_id = params.get("project_id")
 
-        topic_name = "projects/{project_id}/topics/{topic}".format(
-            project_id=project_id, topic=topic
-        )
+        topic_name = "projects/{project_id}/topics/{topic}".format(project_id=project_id, topic=topic)
         sub_name = "projects/{project}/subscriptions/{subscription}".format(
             project=project_id, subscription=subscription_name
         )

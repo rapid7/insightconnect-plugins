@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import BlacklistInput, BlacklistOutput, Input, Output, Component
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import re
 
 
-class Blacklist(komand.Action):
+class Blacklist(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="blacklist",
@@ -37,7 +37,7 @@ class Blacklist(komand.Action):
         else:
             raise PluginException(
                 cause="The response from SentinelOne was not in the correct format.",
-                assistance="Contact support for help. See log for more details",
+                assistance="Contact support for help. See log for more details.",
                 data=errors,
             )
 

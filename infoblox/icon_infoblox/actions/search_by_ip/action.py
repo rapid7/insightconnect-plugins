@@ -22,8 +22,4 @@ class SearchByIp(komand.Action):
         return {"result": result}
 
     def test(self):
-        return {
-            "result": [
-                ("fixedaddress/ZG5zLmZpeGVkX2FkZHJlc3MkMTAuMTAuMTAuNS4wLi4:" "10.10.10.5/default")
-            ]
-        }
+        return {"result": [("fixedaddress/ZG5zLmZpeGVkX2FkZHJlc3MkMTAuMTAuMTAuNS4wLi4:" "10.10.10.5/default")]}

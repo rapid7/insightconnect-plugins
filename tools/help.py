@@ -61,7 +61,7 @@ class IO(object):
     def is_custom(self):
         """
         Returns whether or not the IO is of a custom/non-standard type.
-        Standard types defined at https://komand.github.io/python/spec.html#base-types
+        Standard types defined at Standard types defined at https://docs.rapid7.com/insightconnect/plugin-spec/#base-types
         :return: Boolean indicating if a type is custom
         """
         # Strip off possible list indicator and compare against standard types
@@ -243,11 +243,7 @@ class PluginSpec(object):
             io = [IO.from_dict(raw={k: v}) for k, v in properties.items()]
             custom_types.append(CustomType(identifier=identifier, properties=io))
 
-        connection = (
-            PluginComponent.new_connection(raw=spec.get("connection"))
-            if spec.get("connection")
-            else None
-        )
+        connection = PluginComponent.new_connection(raw=spec.get("connection")) if spec.get("connection") else None
         actions = (
             [PluginComponent.new_action(raw={k: v}) for k, v in spec.get("actions").items()]
             if spec.get("actions")
@@ -310,10 +306,7 @@ class Help(object):
         :param inputs: List of IO objects for a component
         :return: Markdown table as a string
         """
-        table = (
-            "|Name|Type|Default|Required|Description|Enum|\n"
-            "|----|----|-------|--------|-----------|----|\n"
-        )
+        table = "|Name|Type|Default|Required|Description|Enum|\n" "|----|----|-------|--------|-----------|----|\n"
 
         for counter, io in enumerate(sorted(inputs), 1):
             # if io.is_custom:
@@ -358,14 +351,10 @@ class Help(object):
         :param section_type: ComponentType enum value representing the section type to generate
         :return: Markdown section as a string
         """
-        assert (
-            section_type != ComponentType.connection
-        ), "generate_component_section does not support connections!"
+        assert section_type != ComponentType.connection, "generate_component_section does not support connections!"
 
         # Both actions and triggers are of type PluginComponent - so they can be swapped in/out in the code below
-        components = (
-            self.spec.actions if section_type == ComponentType.action else self.spec.triggers
-        )
+        components = self.spec.actions if section_type == ComponentType.action else self.spec.triggers
         singular = "action" if section_type == ComponentType.action else "trigger"
 
         markdown = f"## {singular.capitalize()}s{self.MD_BREAK}"
@@ -380,13 +369,10 @@ class Help(object):
             base = f"This {singular}" if has_s else f"This {singular} is used to"
             description = component.description[0].lower() + component.description[1:]
 
-            markdown += (
-                f"### {component.title}{self.MD_BREAK}" f"{base} {description}.{self.MD_BREAK}"
-            )
+            markdown += f"### {component.title}{self.MD_BREAK}" f"{base} {description}.{self.MD_BREAK}"
             if component.inputs:
                 markdown += (
-                    f"#### Input{self.MD_BREAK}"
-                    f"{self._generate_input_table(inputs=component.inputs)}{self.MD_BREAK}"
+                    f"#### Input{self.MD_BREAK}" f"{self._generate_input_table(inputs=component.inputs)}{self.MD_BREAK}"
                 )
             if component.outputs:
                 markdown += (
@@ -410,9 +396,7 @@ class Help(object):
         except ValueError:  # Title not found at all in the description
             leads_with_title = False
 
-        description = self.spec.description.replace(
-            self.spec.title, "", 1 if leads_with_title else 0
-        )
+        description = self.spec.description.replace(self.spec.title, "", 1 if leads_with_title else 0)
         markdown = (
             f"## About{self.MD_BREAK}"
             f"[{self.spec.title}](LINK TO PRODUCT/VENDOR WEBSITE) {description}."
@@ -457,19 +441,14 @@ class Help(object):
         )
 
         # Workflows
-        markdown += (
-            f"## Workflows{self.MD_BREAK}"
-            f"Examples:{self.MD_BREAK}"
-            f"* EXAMPLE HERE {self.MD_BREAK}"
-        )
+        markdown += f"## Workflows{self.MD_BREAK}" f"Examples:{self.MD_BREAK}" f"* EXAMPLE HERE {self.MD_BREAK}"
 
         # Versions
         markdown += f"## Versions{self.MD_BREAK}" f"* 1.0.0 - Initial plugin{self.MD_BREAK}"
 
         # References
         markdown += (
-            f"## References{self.MD_BREAK}"
-            f"* [{self.spec.title}](LINK TO PRODUCT/VENDOR WEBSITE){self.MD_BREAK}"
+            f"## References{self.MD_BREAK}" f"* [{self.spec.title}](LINK TO PRODUCT/VENDOR WEBSITE){self.MD_BREAK}"
         )
 
         # Custom Types

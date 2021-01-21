@@ -40,7 +40,9 @@ class ForSale(komand.Action):
 
         # Make request
         resp = craigslist.CraigslistForSale(
-            site=params.get("site"), category=cat, filters=the_filter,
+            site=params.get("site"),
+            category=cat,
+            filters=the_filter,
         )
 
         # Iterate through returned object of dicts

@@ -27,9 +27,7 @@ class RunAsynchronously(komand.Action):
         r = self.connection.session().post(url, json=params["input"])
 
         if r.status_code != requests.codes.ok:
-            raise Exception(
-                "Failure to create job, bad request code: " + str(r.status_code) + str("text")
-            )
+            raise Exception("Failure to create job, bad request code: " + str(r.status_code) + str("text"))
 
         job = r.json()
         return {"job_id": job["job_id"], "url": job["job_url"]}

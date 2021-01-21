@@ -25,9 +25,7 @@ class RemoveUserFromGroup(komand.Action):
             return {Output.SUCCESS: False}
 
         """ Remove user from group by id"""
-        url = requests.compat.urljoin(
-            self.connection.okta_url, f"/api/v1/groups/{group_id}/users/{user_id}"
-        )
+        url = requests.compat.urljoin(self.connection.okta_url, f"/api/v1/groups/{group_id}/users/{user_id}")
         response = self.connection.session.delete(url)
 
         return helpers.group_response(response, user_id)

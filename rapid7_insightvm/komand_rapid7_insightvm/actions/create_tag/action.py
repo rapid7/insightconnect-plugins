@@ -25,8 +25,6 @@ class CreateTag(komand.Action):
         self.logger.info("Creating tag with name %s and type %s" % (params["name"], params["type"]))
         endpoint = endpoints.Tag.tags(self.connection.console_url)
 
-        response = resource_helper.resource_request(
-            endpoint=endpoint, method="post", payload=params
-        )
+        response = resource_helper.resource_request(endpoint=endpoint, method="post", payload=params)
 
         return {"id": response["id"]}

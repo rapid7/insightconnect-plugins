@@ -39,8 +39,6 @@ class UpdateUserRole(komand.Action):
         payload = validate.validate_user(self.connection.console_url, payload)
 
         # Modify the role if validated
-        response = resource_helper.resource_request(
-            endpoint=endpoint, method="put", payload=payload
-        )
+        response = resource_helper.resource_request(endpoint=endpoint, method="put", payload=payload)
 
         return response

@@ -13,6 +13,4 @@ class Connection(komand.Connection):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
     def connect(self, params):
-        raise PluginException(
-            cause="This plugin is obsolete. Please use the Google Web Risk plugin instead."
-        )
+        raise PluginException(cause="This plugin is obsolete. Please use the Google Web Risk plugin instead.")

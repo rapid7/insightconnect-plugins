@@ -49,10 +49,7 @@ class Connection(komand.Connection):
         elif response.status_code == 404:
             raise ConnectionTestException(
                 cause=f"Unable to reach Jira instance at: {self.url}.",
-                assistance="Verify the Jira server at the URL configured in your plugin "
-                "connection is correct.",
+                assistance="Verify the Jira server at the URL configured in your plugin " "connection is correct.",
             )
         else:
-            raise ConnectionTestException(
-                cause=f"Unhandled error occurred.", assistance=response.content
-            )
+            raise ConnectionTestException(cause=f"Unhandled error occurred.", assistance=response.content)

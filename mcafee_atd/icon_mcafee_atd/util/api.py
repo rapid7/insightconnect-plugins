@@ -5,9 +5,7 @@ from .mcafee_request import McAfeeRequest
 
 
 class McAfeeATDAPI:
-    def __init__(
-        self, mc_afee_request: McAfeeRequest, username: str, password: str, logger: object
-    ):
+    def __init__(self, mc_afee_request: McAfeeRequest, username: str, password: str, logger: object):
         self.mc_afee_request = mc_afee_request
         self.username = username
         self.password = password
@@ -41,9 +39,7 @@ class McAfeeATDAPI:
         return self._make_login_request(
             "POST",
             "fileupload.php",
-            json_data={
-                "data": json.dumps({"data": {"url": url_for_file, "submitType": type_number}})
-            },
+            json_data={"data": json.dumps({"data": {"url": url_for_file, "submitType": type_number}})},
             files={"amas_filename": base64.decodebytes(file.get("content").encode("utf-8"))},
         )
 
@@ -65,9 +61,7 @@ class McAfeeATDAPI:
         return self._make_login_request("GET", "samplestatus.php", params={param: task_id})
 
     def submit_hash(self, md5_hash: str):
-        submit_hash = self._make_login_request(
-            "POST", "atdHashLookup.php", {"data": json.dumps({"md5": md5_hash})}
-        )
+        submit_hash = self._make_login_request("POST", "atdHashLookup.php", {"data": json.dumps({"md5": md5_hash})})
 
         if not submit_hash.get("success", False):
             raise PluginException(
@@ -89,9 +83,7 @@ class McAfeeATDAPI:
             headers={
                 "Accept": "application/vnd.ve.v1.0+json",
                 "Content-Type": "application/json",
-                "VE-SDK-API": base64.encodebytes(f"{self.username}:{self.password}".encode())
-                .decode("utf-8")
-                .rstrip(),
+                "VE-SDK-API": base64.encodebytes(f"{self.username}:{self.password}".encode()).decode("utf-8").rstrip(),
             },
         )
 
@@ -100,9 +92,7 @@ class McAfeeATDAPI:
             user_id = session_response.get("results", {}).get("userId")
             return {
                 "Accept": "application/vnd.ve.v1.0+json",
-                "VE-SDK-API": base64.encodebytes(f"{session}:{user_id}".encode())
-                .decode("utf-8")
-                .rstrip(),
+                "VE-SDK-API": base64.encodebytes(f"{session}:{user_id}".encode()).decode("utf-8").rstrip(),
             }
 
         raise ConnectionTestException(ConnectionTestException.Preset.USERNAME_PASSWORD)

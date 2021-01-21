@@ -18,9 +18,7 @@ class GetScanEnginePool(komand.Action):
     def run(self, params={}):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         engine_pool_id = params.get("id")
-        endpoint = endpoints.ScanEnginePool.scan_engine_pools(
-            self.connection.console_url, engine_pool_id
-        )
+        endpoint = endpoints.ScanEnginePool.scan_engine_pools(self.connection.console_url, engine_pool_id)
         response = resource_helper.resource_request(endpoint=endpoint)
 
         # Add the engines key if it is the Default Engine Pool

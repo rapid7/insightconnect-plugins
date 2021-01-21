@@ -23,12 +23,8 @@ class Lookup(komand.Action):
     def _build_threat_types(params: dict) -> [str]:
         threat_types = []
         Lookup._check_threat_type(threat_types, params, Input.THREAT_TYPE_MALWARE, "MALWARE")
-        Lookup._check_threat_type(
-            threat_types, params, Input.THREAT_TYPE_UNWANTED, "UNWANTED_SOFTWARE"
-        )
-        Lookup._check_threat_type(
-            threat_types, params, Input.THREAT_TYPE_SOCIAL, "SOCIAL_ENGINEERING"
-        )
+        Lookup._check_threat_type(threat_types, params, Input.THREAT_TYPE_UNWANTED, "UNWANTED_SOFTWARE")
+        Lookup._check_threat_type(threat_types, params, Input.THREAT_TYPE_SOCIAL, "SOCIAL_ENGINEERING")
         return threat_types
 
     def run(self, params={}):

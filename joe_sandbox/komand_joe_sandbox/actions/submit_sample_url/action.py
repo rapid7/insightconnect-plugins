@@ -21,7 +21,5 @@ class SubmitSampleUrl(komand.Action):
 
         additional_parameters.update({"accept-tac": 1})
 
-        webids = self.connection.api.submit_sample_url(
-            sample_url, parameters, additional_parameters
-        )
+        webids = self.connection.api.submit_sample_url(sample_url, parameters, additional_parameters)
         return webids

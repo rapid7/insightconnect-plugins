@@ -15,7 +15,9 @@ class DeleteRepo(komand.Action):
 
     def run(self, params={}):
         try:
-            api_call = f"{self.connection.base_api}/repositories/{self.connection.username}/{params.get(Input.TITLE).lower()}"
+            api_call = (
+                f"{self.connection.base_api}/repositories/{self.connection.username}/{params.get(Input.TITLE).lower()}"
+            )
             repo = self.connection.bucket_session.delete(api_call)
             if repo.status_code == 204:
                 self.logger.info("Run:Repo Successfully deleted")

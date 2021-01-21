@@ -40,9 +40,7 @@ class PostEvent(komand.Action):
                 payload[item] = temp[item]
 
         url = Events.events(self.connection.url)
-        response = request.resource_request(
-            url, "post", params=self.connection.auth, payload=payload
-        )
+        response = request.resource_request(url, "post", params=self.connection.auth, payload=payload)
         result = response.get("resource")
         if result.get("errors"):
             error = result["errors"]
@@ -54,9 +52,7 @@ class PostEvent(komand.Action):
                     result["event"][item] = ""
         except KeyError:
             self.logger.error(result)
-            raise Exception(
-                "Data returned from Datadog was in an unexpected format. Contact support for help."
-            )
+            raise Exception("Data returned from Datadog was in an unexpected format. Contact support for help.")
 
         if result["event"].get("tags") == "":
             result["event"]["tags"] = []

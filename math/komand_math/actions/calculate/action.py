@@ -30,11 +30,5 @@ class Calculate(komand.Action):
 
     @staticmethod
     def execute_equation(eq):
-        eq = str().join(
-            [
-                c
-                for c in eq
-                if (c.isdecimal() or c in ["+", "-", "*", "/", "**", "%", "(", ")", "."])
-            ]
-        )
+        eq = str().join([c for c in eq if (c.isdecimal() or c in ["+", "-", "*", "/", "**", "%", "(", ")", "."])])
         return simple_eval(eq)

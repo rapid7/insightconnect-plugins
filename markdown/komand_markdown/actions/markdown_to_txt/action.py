@@ -21,8 +21,7 @@ class MarkdownToTxt(komand.Action):
         markdown_string = params.get(Input.MARKDOWN_STRING)
 
         if not (
-            ((markdown_string is None) ^ (markdown_bytes is None))
-            or ((markdown_string == "") ^ (markdown_bytes == ""))
+            ((markdown_string is None) ^ (markdown_bytes is None)) or ((markdown_string == "") ^ (markdown_bytes == ""))
         ):
             raise Exception("You must define one of Markdown or Markdown String")
 

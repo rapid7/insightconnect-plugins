@@ -10,7 +10,7 @@ class AttackerKB:
     def __init__(self, token: str, logger: Logger, max_pages: int):
         self.logger = logger
         self.token = token
-        self.base_url = "https://api.attackerkb.com/"
+        self.base_url = "https://api.attackerkb.com/v1/"
         if max_pages:
             self.max_pages = max_pages
         else:
@@ -25,9 +25,7 @@ class AttackerKB:
         headers = {"Authorization": f"basic {self.token}"}
 
         try:
-            response = request(
-                "GET", self.base_url + path, params=komand.helper.clean(params), headers=headers
-            )
+            response = request("GET", self.base_url + path, params=komand.helper.clean(params), headers=headers)
             response.raise_for_status()
             return komand.helper.clean(response.json())
         except HTTPError as httpError:

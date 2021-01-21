@@ -29,8 +29,7 @@ class ApproveFileLocally(komand.Action):
             self.logger.info(f"Call to Carbon Black raised exception: {e}")
             raise PluginException(
                 cause="Call to Carbon Black failed!",
-                assistance="The connection may not be configured properly or an invalid"
-                " file ID was found.",
+                assistance="The connection may not be configured properly or an invalid" " file ID was found.",
             )
 
         file_instance_object = file_info_request.json()
@@ -38,9 +37,7 @@ class ApproveFileLocally(komand.Action):
 
         self.logger.info("Approving local file...")
 
-        r = self.connection.session.put(
-            url, json.dumps(file_instance_object), verify=self.connection.verify
-        )
+        r = self.connection.session.put(url, json.dumps(file_instance_object), verify=self.connection.verify)
 
         try:
             r.raise_for_status()
@@ -49,8 +46,7 @@ class ApproveFileLocally(komand.Action):
             self.logger.info(f"Call to Carbon Black raised exception: {e}")
             raise PluginException(
                 cause="Call to Carbon Black failed",
-                assistance="The connection may not be configured properly, please"
-                "check your connection settings.",
+                assistance="The connection may not be configured properly, please" "check your connection settings.",
             )
 
         result = komand.helper.clean(r.json())

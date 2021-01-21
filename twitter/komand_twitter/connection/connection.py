@@ -63,7 +63,5 @@ class Connection(komand.Connection):
         self.logger.info(
             "Connect: Connected! ID: {id}, "
             "Username: {username}, "
-            "ScreenName: {screen_name}".format(
-                id=user_id, username=username, screen_name=self.screen_name
-            )
+            "ScreenName: {screen_name}".format(id=user_id, username=username, screen_name=self.screen_name)
         )

@@ -21,8 +21,6 @@ class UpdateUserSiteAccess(komand.Action):
         payload = params.get("site_ids")
         self.logger.info("Using %s ..." % endpoint)
 
-        response = resource_helper.resource_request(
-            endpoint=endpoint, method="put", payload=payload
-        )
+        response = resource_helper.resource_request(endpoint=endpoint, method="put", payload=payload)
 
         return response

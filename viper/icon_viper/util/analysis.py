@@ -19,9 +19,7 @@ class Analysis(ViperBase):
 
     def delete(self):
         if self.malware_sha256 is None:
-            raise PluginException(
-                cause="Error: ", assistance="Deleting an Analysis is not supported in this context."
-            )
+            raise PluginException(cause="Error: ", assistance="Deleting an Analysis is not supported in this context.")
 
         url = (
             self.pathName.format(project_name=self.project_name, malware_sha256=self.malware_sha256)

@@ -57,11 +57,7 @@ class Create(komand.Action):
                 basics[basic_param] = params.get(basic_param)
                 del params[basic_param]
             else:
-                raise Exception(
-                    "Parameter {} was not found. This is required to create a ticket".format(
-                        basic_param
-                    )
-                )
+                raise Exception("Parameter {} was not found. This is required to create a ticket".format(basic_param))
         # left over params added to other_basics
         other_basics = {}
         for k, v in params.items():

@@ -17,9 +17,7 @@ class StringToInteger(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         if not params.get(Input.STRIP, True) and not re.match(r"^\d+", params.get(Input.INPUT)):
-            raise PluginException(
-                cause="Converting error", assistance="When strip is enabled only number is allowed"
-            )
+            raise PluginException(cause="Converting error", assistance="When strip is enabled only number is allowed")
         try:
             return {Output.OUTPUT: int(params.get(Input.INPUT))}
         except Exception as e:

@@ -26,14 +26,10 @@ class Ping(komand.Action):
         count = str(count)
 
         if resolve_hostname:
-            response = subprocess.Popen(
-                ["ping -c " + count + " " + host], stdout=subprocess.PIPE, shell=True
-            )
+            response = subprocess.Popen(["ping -c " + count + " " + host], stdout=subprocess.PIPE, shell=True)
             (output, err) = response.communicate()
         else:
-            response = subprocess.Popen(
-                ["ping -n -c " + count + " " + host], stdout=subprocess.PIPE, shell=True
-            )
+            response = subprocess.Popen(["ping -n -c " + count + " " + host], stdout=subprocess.PIPE, shell=True)
             (output, err) = response.communicate()
 
         output = output.decode("utf-8")
@@ -47,24 +43,16 @@ class Ping(komand.Action):
             except AttributeError:
                 self.logger.error("The regular expression search for transmitted packets failed")
                 self.logger.error("Standard Output: %s", output)
-                raise PluginException(
-                    cause="An AttributeError occurred.", assistance="Please see log for details."
-                )
+                raise PluginException(cause="An AttributeError occurred.", assistance="Please see log for details.")
             except ValueError:
-                self.logger.error(
-                    "The transmitted packets value is not valid. The value was %s" % transmitted
-                )
+                self.logger.error("The transmitted packets value is not valid. The value was %s" % transmitted)
                 self.logger.error("Standard Output: %s" % output)
-                raise PluginException(
-                    cause="A ValueError occurred.", assistance="Please see log for details."
-                )
+                raise PluginException(cause="A ValueError occurred.", assistance="Please see log for details.")
             except:
                 self.logger.error("Standard Output: %s", output)
                 self.logger.error("Return form regex %s" % temp)
                 self.logger.error("Substring built by regex %s" % sub)
-                raise PluginException(
-                    preset=PluginException.Preset.UNKNOWN, assistance="Please see log for details."
-                )
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, assistance="Please see log for details.")
 
             try:
                 temp = re.search(r"\d* packets r", output)
@@ -79,24 +67,16 @@ class Ping(komand.Action):
             except AttributeError:
                 self.logger.error("The regular expression search for received packets failed")
                 self.logger.error("Standard Output: %s", output)
-                raise PluginException(
-                    cause="An AttributeError occurred.", assistance="Please see log for details."
-                )
+                raise PluginException(cause="An AttributeError occurred.", assistance="Please see log for details.")
             except ValueError:
-                self.logger.error(
-                    "The received packets value is not valid. The value was %s", received
-                )
+                self.logger.error("The received packets value is not valid. The value was %s", received)
                 self.logger.error("Standard Output: %s", output)
-                raise PluginException(
-                    cause="A ValueError occurred.", assistance="Please see log for details."
-                )
+                raise PluginException(cause="A ValueError occurred.", assistance="Please see log for details.")
             except:
                 self.logger.error("Standard Output: %s", output)
                 self.logger.error("Return form regex %s", temp)
                 self.logger.error("Substring built by regex %s", sub)
-                raise PluginException(
-                    preset=PluginException.Preset.UNKNOWN, assistance="Please see log for details."
-                )
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, assistance="Please see log for details.")
 
             try:
                 temp = re.search(r"received.* packet loss", output)
@@ -107,24 +87,16 @@ class Ping(komand.Action):
             except AttributeError:
                 self.logger.error("The regular expression search for % packet loss failed")
                 self.logger.error("Standard Output: %s", output)
-                raise PluginException(
-                    cause="An AttributeError occurred.", assistance="Please see log for details."
-                )
+                raise PluginException(cause="An AttributeError occurred.", assistance="Please see log for details.")
             except ValueError:
-                self.logger.error(
-                    "The % packet loss value is not valid. The value was %s", packet_loss
-                )
+                self.logger.error("The % packet loss value is not valid. The value was %s", packet_loss)
                 self.logger.error("Standard Output: %s", output)
-                raise PluginException(
-                    cause="A ValueError occurred.", assistance="Please see log for details."
-                )
+                raise PluginException(cause="A ValueError occurred.", assistance="Please see log for details.")
             except:
                 self.logger.error("Standard Output: %s", output)
                 self.logger.error("return form regex %s", temp)
                 self.logger.error("substring built by regex %s", sub)
-                raise PluginException(
-                    preset=PluginException.Preset.UNKNOWN, assistance="Please see log for details."
-                )
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, assistance="Please see log for details.")
 
             try:
                 temp = re.search(r"mdev.*", output)
@@ -150,16 +122,12 @@ class Ping(komand.Action):
             except AttributeError:
                 self.logger.error("The regular expression search for average latency failed")
                 self.logger.error("Standard Output: %s", output)
-                raise PluginException(
-                    cause="An AttributeError occurred.", assistance="Please see log for details."
-                )
+                raise PluginException(cause="An AttributeError occurred.", assistance="Please see log for details.")
             except:
                 self.logger.error("Standard Output: %s", output)
                 self.logger.error("Return form regex %s", temp)
                 self.logger.error("Substring built by regex %s", sub)
-                raise PluginException(
-                    preset=PluginException.Preset.UNKNOWN, assistance="Please see log for details."
-                )
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, assistance="Please see log for details.")
 
             return {
                 "reply": True,
@@ -178,9 +146,7 @@ class Ping(komand.Action):
         else:
             self.logger.error("Standard Output: %s", output)
             self.logger.error("Standard Error: %s", err)
-            raise PluginException(
-                preset=PluginException.Preset.UNKNOWN, assistance="Please see log for details."
-            )
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, assistance="Please see log for details.")
 
     def test(self):
         response = subprocess.Popen(["ping -c 4 127.0.0.1"], stdout=subprocess.PIPE, shell=True)

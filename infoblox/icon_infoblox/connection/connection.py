@@ -18,8 +18,6 @@ class Connection(komand.Connection):
         username = params.get("credentials").get("username")
         password = params.get("credentials").get("password")
 
-        self.infoblox_connection = InfobloxConnection(
-            url, api_version, username, password, self.logger
-        )
+        self.infoblox_connection = InfobloxConnection(url, api_version, username, password, self.logger)
 
         self.logger.info("Connect: Infoblox connection established successfully")

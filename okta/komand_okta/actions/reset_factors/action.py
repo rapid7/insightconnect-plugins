@@ -40,9 +40,7 @@ class ResetFactors(komand.Action):
                 data = response.json()
                 error_code = data["errorCode"]
                 error_summary = data["errorSummary"]
-                self.logger.error(
-                    f"Okta: {response.status_code} error. Error code: {error_code}. {error_summary}"
-                )
+                self.logger.error(f"Okta: {response.status_code} error. Error code: {error_code}. {error_summary}")
                 raise PluginException(cause="Reset factors error", assistance=data["errorSummary"])
 
         return {Output.EMAIL: email, Output.USER_ID: user_id, Output.SUCCESS: True}

@@ -15,9 +15,7 @@ class Request(object):
         self.verify_cert = verify_cert
 
     @classmethod
-    def new_session(
-        cls, connection: Connection, username: str, password: str, hostname: str, verify_cert: bool
-    ):
+    def new_session(cls, connection: Connection, username: str, password: str, hostname: str, verify_cert: bool):
         url = hostname + "/api/"
         querystring = {"type": "keygen", "user": username, "password": password}
 
@@ -151,9 +149,7 @@ class Request(object):
     @staticmethod
     def get_output_with_exceptions(response):
         if response.status_code == 401:
-            raise PluginException(
-                preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text
-            )
+            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
         if response.status_code == 403:
             raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response.text)
         if response.status_code == 404:

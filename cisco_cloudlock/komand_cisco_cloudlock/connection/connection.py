@@ -12,9 +12,7 @@ class Connection(komand.Connection):
 
     def connect(self, params={}):
         api_key_prelim = params.get("api_key").get("secretKey")
-        api_key = (
-            "Bearer %s" % api_key_prelim
-        )  # Prefix token with 'Bearer ' to comply with header requirement
+        api_key = "Bearer %s" % api_key_prelim  # Prefix token with 'Bearer ' to comply with header requirement
 
         headers = {
             "Accept": "application/json",

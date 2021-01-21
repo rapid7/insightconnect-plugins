@@ -28,9 +28,7 @@ class CheckIfAddressInGroup(komand.Action):
         found = False
         object_names_to_return = []
 
-        address_group_objects = self.connection.cisco_firepower_api.get_address_group(
-            group_name
-        ).get("objects", [])
+        address_group_objects = self.connection.cisco_firepower_api.get_address_group(group_name).get("objects", [])
         for item in address_group_objects:
             if item.get("name") == address_to_check:
                 object_names_to_return.append(
@@ -46,9 +44,9 @@ class CheckIfAddressInGroup(komand.Action):
             all_objects = self.connection.cisco_firepower_api.get_network_addresses()
             for group_object in address_group_objects:
                 for address_object in all_objects:
-                    if address_object.get("name") == group_object.get(
-                        "name"
-                    ) and self._check_address(address_object.get("value"), address_to_check):
+                    if address_object.get("name") == group_object.get("name") and self._check_address(
+                        address_object.get("value"), address_to_check
+                    ):
                         object_names_to_return.append(address_object)
                         found = True
 
@@ -67,7 +65,4 @@ class CheckIfAddressInGroup(komand.Action):
         if not ip_address or not ip_cidr or not validators.ipv4(ip_address):
             return False
 
-        return (
-            "/" in ip_cidr
-            and ipaddress.IPv4Address(ip_address) in ipaddress.ip_network(ip_cidr).hosts()
-        )
+        return "/" in ip_cidr and ipaddress.IPv4Address(ip_address) in ipaddress.ip_network(ip_cidr).hosts()

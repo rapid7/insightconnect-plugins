@@ -27,9 +27,7 @@ class SearchDocuments(komand.Action):
         if routing:
             params["routing"] = routing
 
-        results = helpers.get_search(
-            self.logger, host, index, type_, query, username, password, params
-        )
+        results = helpers.get_search(self.logger, host, index, type_, query, username, password, params)
         if not results:
             raise Exception("Run: Document search not run")
 

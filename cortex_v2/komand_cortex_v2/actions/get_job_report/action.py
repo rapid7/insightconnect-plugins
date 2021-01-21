@@ -29,8 +29,6 @@ class GetJobReport(komand.Action):
             self.logger.error(e)
             raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
         except CortexException as e:
-            raise ConnectionTestException(
-                cause="Failed to get job report.", assistance="{}.".format(e)
-            )
+            raise ConnectionTestException(cause="Failed to get job report.", assistance="{}.".format(e))
 
         return {"report": report_to_dict(report)}

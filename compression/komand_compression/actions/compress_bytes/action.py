@@ -19,9 +19,7 @@ class CompressBytes(komand.Action):
         file_bytes_b64 = params.get("bytes")  # Base64 encoded file as string
         self.logger.info("Run: Will compress %s with %s", file_bytes_b64, algorithm)
 
-        file_bytes = utils.base64_decode(
-            file_bytes_b64
-        )  # Decode base64 so we can manipulate the file
+        file_bytes = utils.base64_decode(file_bytes_b64)  # Decode base64 so we can manipulate the file
 
         compressed = compressor.dispatch_compress(algorithm=algorithm, file_bytes=file_bytes)
         self.logger.info("Run: Compressed file is: %s", compressed)

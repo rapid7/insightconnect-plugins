@@ -21,9 +21,7 @@ class Publish(komand.Action):
             project_id = params.get("project_id")
 
         message_bytes = str.encode(message)
-        topic_name = "projects/{project_id}/topics/{topic}".format(
-            project_id=project_id, topic=topic
-        )
+        topic_name = "projects/{project_id}/topics/{topic}".format(project_id=project_id, topic=topic)
 
         publisher = pubsub.PublisherClient(credentials=self.connection.credentials)
 

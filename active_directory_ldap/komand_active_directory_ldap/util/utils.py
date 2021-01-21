@@ -124,9 +124,7 @@ class ADUtils:
                 pairs[temp_stack.pop()] = idx
 
         if len(temp_stack) > 0:
-            raise PluginException(
-                cause="No matching opening parentheses at: " + str(temp_stack.pop())
-            )
+            raise PluginException(cause="No matching opening parentheses at: " + str(temp_stack.pop()))
 
         return pairs
 
@@ -141,8 +139,7 @@ class ADUtils:
         for key, value in pairs.items():
             temp_string = query
             if temp_string.find("=", key, value) == -1 or (
-                temp_string.find("=", key, value)
-                and temp_string[temp_string.find("=", key, value) - 1] == "\\"
+                temp_string.find("=", key, value) and temp_string[temp_string.find("=", key, value) - 1] == "\\"
             ):
                 query = query[:value] + "\\29" + query[value + 1 :]
                 query = query[:key] + "\\28" + query[key + 1 :]

@@ -61,11 +61,7 @@ class Update(komand.Action):
                 filename = attachment["filename"]
                 content = attachment["content"]
                 mimetype = mimetypes.guess_type(filename)
-                attachments.append(
-                    Attachment.create_basic(
-                        Content=content, ContentType=mimetype[0], Filename=filename
-                    )
-                )
+                attachments.append(Attachment.create_basic(Content=content, ContentType=mimetype[0], Filename=filename))
 
         ticket_id = params.get("TicketID")
         del params["TicketID"]

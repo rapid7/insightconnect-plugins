@@ -90,9 +90,7 @@ class NewMessageReceived(komand.Trigger):
                             self.send(
                                 {
                                     Output.MESSAGE: message,
-                                    Output.INDICATORS: self.get_indicators(
-                                        message.get("body", {}).get("content", "")
-                                    ),
+                                    Output.INDICATORS: self.get_indicators(message.get("body", {}).get("content", "")),
                                 }
                             )
                     else:
@@ -142,9 +140,7 @@ class NewMessageReceived(komand.Trigger):
         except Exception:
             self.logger.info("Get messages failed, refreshing token and trying again.")
             time.sleep(10)  # sleep for 10 seconds to make sure we're not killing the API
-            headers = self.connection.get_headers(
-                True
-            )  # This will force a refresh of our auth token
+            headers = self.connection.get_headers(True)  # This will force a refresh of our auth token
             messages_result = requests.get(messages_endpoint, headers=headers)
             try:
                 messages_result.raise_for_status()
@@ -183,9 +179,7 @@ class NewMessageReceived(komand.Trigger):
         team_id = team[0].get("id")
         channel = get_channels_from_microsoft(self.logger, self.connection, team_id, channel_name)
         channel_id = channel[0].get("id")
-        messages_endpoint = (
-            f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
-        )
+        messages_endpoint = f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
         return messages_endpoint
 
     def get_indicators(self, message: str) -> object:
@@ -237,9 +231,7 @@ class NewMessageReceived(komand.Trigger):
 
     @staticmethod
     def extract_ipv4_addresses(msg: str) -> list:
-        return re.findall(
-            r"(?m)\b[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}(?:/[0-9]{1,2})?\b", msg
-        )
+        return re.findall(r"(?m)\b[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}(?:/[0-9]{1,2})?\b", msg)
 
     @staticmethod
     def extract_ipv6_addresses(msg: str) -> list:

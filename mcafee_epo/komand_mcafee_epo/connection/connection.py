@@ -30,9 +30,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 self.logger.info("Connected")
         except Exception:
             self.logger.error("Error connecting to Mcafee EPO")
-            raise ConnectionTestException(
-                cause="Connection error.", assistance="Error connecting to McAfee EPO"
-            )
+            raise ConnectionTestException(cause="Connection error.", assistance="Error connecting to McAfee EPO")
 
     def test(self):
         try:

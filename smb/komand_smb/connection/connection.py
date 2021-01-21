@@ -62,9 +62,7 @@ class Connection(komand.Connection):
         try:
             echo_response = self.conn.echo(message.encode())
         except Exception as e:
-            raise ConnectionTestException(
-                cause="Connectivity test to SMB server failed.", assistance=e
-            )
+            raise ConnectionTestException(cause="Connectivity test to SMB server failed.", assistance=e)
 
         if echo_response.decode() == message:
             self.logger.info("Connectivity test to SMB server was successful")

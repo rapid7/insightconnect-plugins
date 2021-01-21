@@ -22,13 +22,9 @@ class CreateAssetGroup(komand.Action):
             params.pop("searchCriteria")
 
         resource_helper = ResourceRequests(self.connection.session, self.logger)
-        self.logger.info(
-            "Creating asset group with name %s and type %s" % (params["name"], params["type"])
-        )
+        self.logger.info("Creating asset group with name %s and type %s" % (params["name"], params["type"]))
         endpoint = endpoints.AssetGroup.asset_groups(self.connection.console_url)
 
-        response = resource_helper.resource_request(
-            endpoint=endpoint, method="post", payload=params
-        )
+        response = resource_helper.resource_request(endpoint=endpoint, method="post", payload=params)
 
         return {"id": response["id"]}

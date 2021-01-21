@@ -18,9 +18,7 @@ class Note(ViperBase):
 
     def save(self):
         if self.malware_sha256 is None:
-            raise PluginException(
-                cause="Error: ", assistance="Updating a Note is not supported in this context."
-            )
+            raise PluginException(cause="Error: ", assistance="Updating a Note is not supported in this context.")
 
         data = {"title": self.title, "body": self.body}
 
@@ -33,15 +31,11 @@ class Note(ViperBase):
 
     def add(self):
         if self.malware_sha256 is None:
-            raise PluginException(
-                cause="Error: ", assistance="Updating a Note is not supported in this context."
-            )
+            raise PluginException(cause="Error: ", assistance="Updating a Note is not supported in this context.")
 
         data = {"title": self.title, "body": self.body}
 
-        url = self.pathName.format(
-            project_name=self.project_name, malware_sha256=self.malware_sha256
-        )
+        url = self.pathName.format(project_name=self.project_name, malware_sha256=self.malware_sha256)
         note = super()._post(self.config, url, data)
 
         if note.get("data") and note.get("data").get("id"):
@@ -49,9 +43,7 @@ class Note(ViperBase):
 
     def delete(self):
         if self.malware_sha256 is None:
-            raise PluginException(
-                cause="Error: ", assistance="Deleting a Note is not supported in this context."
-            )
+            raise PluginException(cause="Error: ", assistance="Deleting a Note is not supported in this context.")
 
         url = (
             self.pathName.format(project_name=self.project_name, malware_sha256=self.malware_sha256)

@@ -67,9 +67,7 @@ class SubmitUrl(komand.Action):
             if "error" in out:
                 if "error-message" in out["error"]:
                     error = out["error"]["error-message"]
-                    raise PluginException(
-                        cause="Received an error response from Wildfire.", assistance=f"{error}."
-                    )
+                    raise PluginException(cause="Received an error response from Wildfire.", assistance=f"{error}.")
                 else:
                     self.logger.info(out)
                     raise PluginException(

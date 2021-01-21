@@ -50,9 +50,7 @@ class StartPatchScan(insightconnect_plugin_runtime.Action):
         try:
             operation_location_url = scan.headers.get("Operation-Location")
             polling2.poll(
-                lambda: self.connection.ivanti_api.get_operation_location(
-                    operation_location_url
-                ).get("percentComplete")
+                lambda: self.connection.ivanti_api.get_operation_location(operation_location_url).get("percentComplete")
                 == 100,
                 step=10,
                 timeout=max_poll_time,
@@ -68,9 +66,7 @@ class StartPatchScan(insightconnect_plugin_runtime.Action):
                 assistance=f"This scan has exceeded the maximum poll time of {max_poll_time}.",
             )
 
-        operation_location = self.connection.ivanti_api.get_operation_location(
-            operation_location_url
-        )
+        operation_location = self.connection.ivanti_api.get_operation_location(operation_location_url)
         scan_details = scan.json()
         scan_details["isComplete"] = True
         scan_details["updatedOn"] = operation_location["lastAction"]

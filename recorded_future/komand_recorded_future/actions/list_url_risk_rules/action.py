@@ -18,9 +18,7 @@ class ListUrlRiskRules(komand.Action):
     def run(self, params={}):
         try:
             query_headers = self.connection.headers
-            results = requests.get(
-                "https://api.recordedfuture.com/v2/url/riskrules", headers=query_headers
-            ).json()
+            results = requests.get("https://api.recordedfuture.com/v2/url/riskrules", headers=query_headers).json()
             return {Output.RISK_RULES: results["data"]["results"]}
         except Exception as e:
             self.logger.error("Error: " + str(e))

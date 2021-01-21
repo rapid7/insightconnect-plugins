@@ -8,9 +8,7 @@ def handle_exceptions(e: pyodbc.Error, query: str):
     :param e: A pyodbc.Error object to be raised and give context
     :param query: The query that the plugin attempted to run
     """
-    _ASSISTANCE = (
-        "Double-check the query string and refer to the error code for additional information."
-    )
+    _ASSISTANCE = "Double-check the query string and refer to the error code for additional information."
     _DATA = f"Error code: {e}\nQuery string: {query}"
 
     cause = {

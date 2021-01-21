@@ -29,8 +29,7 @@ class CreateAddressObject(komand.Action):
         ):
             raise PluginException(
                 cause="Private address provided to be blocked.",
-                assistance="Skip Private Address set to true but private IP: "
-                f"{address} provided to be blocked.",
+                assistance="Skip Private Address set to true but private IP: " f"{address} provided to be blocked.",
             )
 
         if whitelist:
@@ -67,9 +66,7 @@ class CreateAddressObject(komand.Action):
         for object in whitelist:
             type = self._determine_address_type(object)
             if type == "cidr":
-                net = ip_network(
-                    object, False
-                )  # False means ignore the masked bits, otherwise they need to be 0
+                net = ip_network(object, False)  # False means ignore the masked bits, otherwise they need to be 0
                 ip = ip_address(trimmed_address)
                 if ip in net:
                     raise PluginException(

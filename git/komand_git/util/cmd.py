@@ -44,9 +44,7 @@ class Cmd:
             raise e
 
         if exit_code != 0:
-            raise OSError(
-                "Command execution failed: {}\nExit code: {}\n{}".format(command, exit_code, stderr)
-            )
+            raise OSError("Command execution failed: {}\nExit code: {}\n{}".format(command, exit_code, stderr))
 
         self.logger.info("Call: Command executed successfully")
         return stdout.rstrip()

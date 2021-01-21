@@ -41,13 +41,9 @@ class RemoveAddressObjectFromGroup(komand.Action):
 
         group["member"] = group_members
 
-        endpoint = (
-            f"https://{self.connection.host}/api/v2/cmdb/firewall/addrgrp/{group.get('name')}"
-        )
+        endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/addrgrp/{group.get('name')}"
 
-        response = self.connection.session.put(
-            endpoint, json=group, verify=self.connection.ssl_verify
-        )
+        response = self.connection.session.put(endpoint, json=group, verify=self.connection.ssl_verify)
 
         try:
             json_response = response.json()

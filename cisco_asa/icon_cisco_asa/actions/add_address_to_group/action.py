@@ -37,9 +37,7 @@ class AddAddressToGroup(insightconnect_plugin_runtime.Action):
         else:
             all_members.append({"kind": self._get_kind(address), "value": address})
 
-            self.connection.cisco_asa_api.update_group(
-                group.get("objectId"), group_name, all_members
-            )
+            self.connection.cisco_asa_api.update_group(group.get("objectId"), group_name, all_members)
 
         return {Output.SUCCESS: True}
 
@@ -54,6 +52,5 @@ class AddAddressToGroup(insightconnect_plugin_runtime.Action):
 
         raise PluginException(
             cause=f"Kind not detected from address: {address}",
-            assistance="Check address input and try again. Allowed kind are: "
-            "IPv4Address, IPv6Address, IPv4Network.",
+            assistance="Check address input and try again. Allowed kind are: " "IPv4Address, IPv6Address, IPv4Network.",
         )

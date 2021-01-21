@@ -56,14 +56,7 @@ class SearchEvents(komand.Action):
         search_index_event_id = []
         search_event_id = []
         should_search_index = (
-            published
-            or analysis
-            or threat_level
-            or organization
-            or date_until
-            or date_from
-            or tag
-            or event
+            published or analysis or threat_level or organization or date_until or date_from or tag or event
         )
         should_search = values or type_attribute or category
 
@@ -81,10 +74,7 @@ class SearchEvents(komand.Action):
             try:
                 search_index_events = search_index_events["response"]
             except KeyError:
-                self.logger.error(
-                    "Returned events were not formatted correctly, "
-                    + json.dumps(search_index_events)
-                )
+                self.logger.error("Returned events were not formatted correctly, " + json.dumps(search_index_events))
                 raise
             for event in search_index_events:
                 try:
@@ -94,23 +84,17 @@ class SearchEvents(komand.Action):
                     raise
 
         if should_search:
-            search_events = client.search(
-                values=values, type_attribute=type_attribute, category=category
-            )
+            search_events = client.search(values=values, type_attribute=type_attribute, category=category)
             try:
                 search_events = search_events["response"]
             except KeyError:
-                self.logger.error(
-                    "Returned events were not formatted correctly, " + json.dumps(search_events)
-                )
+                self.logger.error("Returned events were not formatted correctly, " + json.dumps(search_events))
                 raise
             for eventWrapper in search_events:
                 try:
                     event = eventWrapper["Event"]
                 except KeyError:
-                    self.logger.error(
-                        "Event was not formatted correctly, " + json.dumps(eventWrapper)
-                    )
+                    self.logger.error("Event was not formatted correctly, " + json.dumps(eventWrapper))
                     raise
                 try:
                     search_event_id.append(event["id"])

@@ -29,8 +29,4 @@ class StopAndQuarantineFile(insightconnect_plugin_runtime.Action):
         self.logger.info("Attempting to stop and quarantine file: " + sha1_id)
         self.logger.info("Attempting to stop and quarantine file on machine: " + machine_id)
         response = self.connection.client.stop_and_quarantine_file(machine_id, sha1_id, comment)
-        return {
-            Output.STOP_AND_QUARANTINE_RESPONSE: insightconnect_plugin_runtime.helper.clean(
-                response
-            )
-        }
+        return {Output.STOP_AND_QUARANTINE_RESPONSE: insightconnect_plugin_runtime.helper.clean(response)}

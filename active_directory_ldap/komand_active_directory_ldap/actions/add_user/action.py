@@ -47,9 +47,7 @@ class AddUser(komand.Action):
         self.logger.info("User DN=" + dn)
 
         if ssl is False:
-            self.logger.info(
-                "Warning SSL is not enabled. User password can not be set. User account will be disabled"
-            )
+            self.logger.info("Warning SSL is not enabled. User password can not be set. User account will be disabled")
 
         parameters = {
             "givenName": first_name,

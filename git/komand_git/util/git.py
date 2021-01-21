@@ -30,9 +30,7 @@ class GitRepository:
             raise Exception("Protocol not found")
 
         if self.protocol not in self.ALLOWED_PROTOCOLS:
-            self.logger.error(
-                "ValidateProtocol: Protocol {} is not supported".format(self.protocol)
-            )
+            self.logger.error("ValidateProtocol: Protocol {} is not supported".format(self.protocol))
             raise Exception("Protocol not supported: {}".format(self.protocol))
 
     def clone_repository(self):
@@ -41,9 +39,7 @@ class GitRepository:
         self.cmd.call("mkdir -p ~/.ssh")
         self.cmd.call("ssh-keyscan -H {} >> ~/.ssh/known_hosts".format(self.hostname))
         repository_name = "{}_{}".format(self.repository_name, uuid.uuid4())
-        self.cmd.call(
-            "git clone {} {}".format(self.user_repository_url, repository_name), self.secret
-        )
+        self.cmd.call("git clone {} {}".format(self.user_repository_url, repository_name), self.secret)
         os.chdir(repository_name)
         try:
             self.cmd.call('git config user.email "komand@example.com"')
@@ -92,9 +88,7 @@ class GitRepository:
                 with open(path, "wb") as f:
                     f.write(bytes_contents)
             except OSError as e:
-                self.logger.error(
-                    "Open: OSError: Cannot write to file {}:\n{}".format(path, str(e))
-                )
+                self.logger.error("Open: OSError: Cannot write to file {}:\n{}".format(path, str(e)))
                 raise e
 
     def append_line_to_file(self, path, line):
@@ -119,9 +113,7 @@ class GitRepository:
                             f.write("\n")
                     f.write(line)
             except OSError as e:
-                self.logger.error(
-                    "Open: OSError: Cannot write to file {}:\n{}".format(path, str(e))
-                )
+                self.logger.error("Open: OSError: Cannot write to file {}:\n{}".format(path, str(e)))
                 raise e
 
     def _get_hostname(self):

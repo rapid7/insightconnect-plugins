@@ -13,7 +13,5 @@ class DeleteTag(komand.Action):
         )
 
     def run(self, params={}):
-        project.Project(self.connection.config, params.get(Input.PROJECT_NAME)).get_tag(
-            params.get(Input.ID)
-        ).delete()
+        project.Project(self.connection.config, params.get(Input.PROJECT_NAME)).get_tag(params.get(Input.ID)).delete()
         return {}

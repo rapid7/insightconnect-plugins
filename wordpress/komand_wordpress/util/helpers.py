@@ -18,10 +18,7 @@ def try_req(f):
             if resp.status_code >= 200 and resp.status_code <= 399:
                 return resp
         except requests.exceptions.HTTPError:
-            self.logger.error(
-                "Requests: HTTPError: status code %s for %s"
-                % (str(resp.status_code), ", ".join(args))
-            )
+            self.logger.error("Requests: HTTPError: status code %s for %s" % (str(resp.status_code), ", ".join(args)))
         except requests.exceptions.Timeout:
             self.logger.error("Requests: Timeout for %s" % ", ".join(args))
         except requests.exceptions.TooManyRedirects:
@@ -68,9 +65,7 @@ def get_users(host, auth, search=None):
         if resp.status_code >= 200 and resp.status_code <= 399:
             return resp.json()
     except requests.exceptions.HTTPError:
-        self.logger.error(
-            "Requests: HTTPError: status code %s for %s" % (str(resp.status_code), ", ".join(args))
-        )
+        self.logger.error("Requests: HTTPError: status code %s for %s" % (str(resp.status_code), ", ".join(args)))
     except requests.exceptions.Timeout:
         self.logger.error("Requests: Timeout for %s" % ", ".join(args))
     except requests.exceptions.TooManyRedirects:
@@ -88,9 +83,7 @@ def test_auth(host, auth):
         if resp.status_code >= 200 and resp.status_code <= 399:
             return True
     except requests.exceptions.HTTPError:
-        self.logger.error(
-            "Requests: HTTPError: status code %s for %s" % (str(resp.status_code), ", ".join(args))
-        )
+        self.logger.error("Requests: HTTPError: status code %s for %s" % (str(resp.status_code), ", ".join(args)))
     except requests.exceptions.Timeout:
         self.logger.error("Requests: Timeout for %s" % ", ".join(args))
     except requests.exceptions.TooManyRedirects:

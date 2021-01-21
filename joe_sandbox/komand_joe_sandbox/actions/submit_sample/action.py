@@ -26,19 +26,15 @@ class SubmitSample(komand.Action):
             sample_bytes = b64decode(sample)
         except binascii.Error:
             raise Exception(
-                'Unable to decode base64 input for "sample". '
-                "Contents of the file must be encoded with base64!"
+                'Unable to decode base64 input for "sample". ' "Contents of the file must be encoded with base64!"
             )
 
         try:
             cookbook_bytes = b64decode(cookbook) if cookbook else None
         except binascii.Error:
             raise Exception(
-                'Unable to decode base64 input for "cookbook". '
-                "Contents of the file must be encoded with base64!"
+                'Unable to decode base64 input for "cookbook". ' "Contents of the file must be encoded with base64!"
             )
 
-        webids = self.connection.api.submit_sample(
-            sample_bytes, cookbook_bytes, parameters, additional_parameters
-        )
+        webids = self.connection.api.submit_sample(sample_bytes, cookbook_bytes, parameters, additional_parameters)
         return webids

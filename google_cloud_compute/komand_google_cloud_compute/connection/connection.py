@@ -23,9 +23,7 @@ class Connection(komand.Connection):
         }
 
         if "\\n" in params.get("private_key").get("privateKey"):
-            params.get["private_key"] = (
-                params.get("private_key").get("privateKey").replace("\\n", "\n", -1)
-            )
+            params.get["private_key"] = params.get("private_key").get("privateKey").replace("\\n", "\n", -1)
 
         creds.update(params)
 

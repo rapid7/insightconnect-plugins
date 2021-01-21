@@ -40,9 +40,7 @@ class SearchForTag(komand.Trigger):
                     try:
                         item = client.untag(in_event["Event"]["uuid"], tag=tag)
                     except KeyError:
-                        self.logger.error(
-                            "While removing the tags something went wrong, " + in_event
-                        )
+                        self.logger.error("While removing the tags something went wrong, " + in_event)
             if event_id:
                 self.send({"events": event_id})
             time.sleep(interval)

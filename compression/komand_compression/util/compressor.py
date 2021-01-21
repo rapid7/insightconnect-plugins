@@ -55,16 +55,12 @@ def bzip_compress(file_bytes):
 
 
 def xz_compress(file_bytes):
-    compressed = lzma.compress(
-        data=file_bytes
-    )  # Use default parameter argument of format=LZMA.FORMAT_XZ
+    compressed = lzma.compress(data=file_bytes)  # Use default parameter argument of format=LZMA.FORMAT_XZ
     return compressed
 
 
 def lz_compress(file_bytes):
-    compressed = lzma.compress(
-        data=file_bytes, format=lzma.FORMAT_ALONE
-    )  # lzma.FORMAT_ALONE = LZMA
+    compressed = lzma.compress(data=file_bytes, format=lzma.FORMAT_ALONE)  # lzma.FORMAT_ALONE = LZMA
     return compressed
 
 
@@ -72,9 +68,7 @@ def zip_compress(file_bytes, tmpdir=""):
     if file_bytes != None:
         algorithm = zipfile.ZIP_DEFLATED  # sets compression type to deflated (standard for .zip)
         zip_object = ZipFile("/tmp/compressed.zip", "w", algorithm)  # zip archive created in temp
-        zip_object.writestr(
-            "compressed", file_bytes
-        )  # TODO use magic to corectly name files in arcive
+        zip_object.writestr("compressed", file_bytes)  # TODO use magic to corectly name files in arcive
         zip_object.close()
         in_file = open("/tmp/compressed.zip", "rb")
         compressed = in_file.read()

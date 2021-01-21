@@ -62,18 +62,14 @@ class Connection(komand.Connection):
         self.api_token = result_json.get("access_token")
         self.refresh_token = result_json.get("refresh_token")
 
-        self.logger.info(
-            f"Authentication was successful, token is: ******************{self.api_token[-5:]}"
-        )
+        self.logger.info(f"Authentication was successful, token is: ******************{self.api_token[-5:]}")
         self.logger.info(f"Detected Permissions: {result_json.get('scope')}")
 
     def check_and_refresh_api_token(self, force_refresh_token=False):
         self.time_now = time.time()
         self.logger.info(f"Time Now: {self.time_now}")
         self.logger.info(f"Time Ago: {self.time_ago}")
-        if (
-            self.time_now - self.time_ago
-        ) > 3500 or force_refresh_token:  # 1 hour in seconds (minus some buffer time)
+        if (self.time_now - self.time_ago) > 3500 or force_refresh_token:  # 1 hour in seconds (minus some buffer time)
             self.logger.info("Refreshing auth token")
             self.get_token()
             self.time_ago = time.time()

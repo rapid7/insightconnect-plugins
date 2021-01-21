@@ -37,7 +37,16 @@ class Unsubscribe(komand.Action):
 
         maniphest = ManiphesEdit(self.connection.phab, action=self, objectIdentifier=id)
         try:
-            id = maniphest.edit([{"type": "subscribers.remove", "value": [foundUserPhid,]},])
+            id = maniphest.edit(
+                [
+                    {
+                        "type": "subscribers.remove",
+                        "value": [
+                            foundUserPhid,
+                        ],
+                    },
+                ]
+            )
         except Exception as e:
             self.logger.error("Unsubscribe: Run: Problem with request".format(e.errno, e.strerror))
             raise Exception("Unsubscribe: Run: Problem with request".format(e.errno, e.strerror))

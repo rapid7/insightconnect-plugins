@@ -19,16 +19,12 @@ class DeleteWatchlist(komand.Action):
         force_deletion = params["force"]
 
         try:
-            watchlists = [
-                self.connection.carbon_black.select(Watchlist, watchlist_id, force_init=True)
-            ]
+            watchlists = [self.connection.carbon_black.select(Watchlist, watchlist_id, force_init=True)]
             if not watchlists:
                 self.logger.info("No watchlists were found that match the specified watchlist ID!")
                 return {"success": False}
         except Exception as e:
-            raise Exception(
-                "Error: {error}\n Please contact support for assistance.".format(error=e)
-            )
+            raise Exception("Error: {error}\n Please contact support for assistance.".format(error=e))
 
         if len(watchlists) > 1 and not force_deletion:
             self.logger.error(
@@ -41,15 +37,11 @@ class DeleteWatchlist(komand.Action):
             try:
                 watchlist.delete()
             except Exception:
-                self.logger.error(
-                    "Error: Unable to delete watchlist ID {id}".format(id=watchlist.name)
-                )
+                self.logger.error("Error: Unable to delete watchlist ID {id}".format(id=watchlist.name))
                 return {"success": False}
 
             self.logger.info(
-                "Success: Deleted watchlist {name} with ID {id}".format(
-                    name=watchlist.name, id=watchlist.id
-                )
+                "Success: Deleted watchlist {name} with ID {id}".format(name=watchlist.name, id=watchlist.id)
             )
             return {"success": True}
 

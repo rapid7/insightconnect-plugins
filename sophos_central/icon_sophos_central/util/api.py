@@ -40,9 +40,7 @@ class SophosCentralAPI:
         return endpoint_id
 
     def tamper_status(self, endpoint_id):
-        return self._make_request(
-            "GET", f"/endpoint/v1/endpoints/{endpoint_id}/tamper-protection", "Tenant"
-        )
+        return self._make_request("GET", f"/endpoint/v1/endpoints/{endpoint_id}/tamper-protection", "Tenant")
 
     def get_blacklists(self, page: int = 1):
         return self._make_request(
@@ -64,9 +62,7 @@ class SophosCentralAPI:
         )
 
     def antivirus_scan(self, uuid: str):
-        return self._make_request(
-            "POST", f"/endpoint/v1/endpoints/{uuid}/scans", "Tenant", json_data={}
-        )
+        return self._make_request("POST", f"/endpoint/v1/endpoints/{uuid}/scans", "Tenant", json_data={})
 
     def get_alerts(self, since: str = None, key: str = None):
         params = {"pageTotal": True}
@@ -131,14 +127,10 @@ class SophosCentralAPI:
     def _call_api(self, method, url, params=None, json_data=None, data=None, headers=None):
         response = {"text": ""}
         try:
-            response = requests.request(
-                method, url, json=json_data, data=data, params=params, headers=headers
-            )
+            response = requests.request(method, url, json=json_data, data=data, params=params, headers=headers)
 
             if response.status_code == 400:
-                raise PluginException(
-                    cause="Bad request.", assistance="The API client sent a malformed request."
-                )
+                raise PluginException(cause="Bad request.", assistance="The API client sent a malformed request.")
             if response.status_code == 401:
                 raise PluginException(
                     cause="Unauthorized.",

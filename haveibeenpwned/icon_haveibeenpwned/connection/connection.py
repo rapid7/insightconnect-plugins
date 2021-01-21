@@ -31,15 +31,11 @@ class Connection(komand.Connection):
             if r.status_code == 401:
                 raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
             if r.status_code == 503:
-                raise ConnectionTestException(
-                    preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE
-                )
+                raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
             json_ = r.json()
 
         except json.decoder.JSONDecodeError:
-            raise ConnectionTestException(
-                preset=ConnectionTestException.Preset.INVALID_JSON, data=r.text
-            )
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.INVALID_JSON, data=r.text)
         except Exception as e:
             self.logger.error(e)
             raise

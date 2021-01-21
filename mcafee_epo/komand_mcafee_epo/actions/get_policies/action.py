@@ -16,11 +16,7 @@ class GetPolicies(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         try:
-            return {
-                Output.POLICIES_RETURNED: self.connection.client(
-                    "policy.find", params.get(Input.SEARCH_TEXT)
-                )
-            }
+            return {Output.POLICIES_RETURNED: self.connection.client("policy.find", params.get(Input.SEARCH_TEXT))}
         except Exception as e:
             raise PluginException(
                 cause="Error",

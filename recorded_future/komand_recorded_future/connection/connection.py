@@ -21,9 +21,7 @@ class Connection(komand.Connection):
             "X-RFToken": self.token,
         }
 
-        self.client = ApiV2Client(
-            auth=self.token, app_name=self.app_name, app_version=self.app_version
-        )
+        self.client = ApiV2Client(auth=self.token, app_name=self.app_name, app_version=self.app_version)
 
     def test(self):
         return demo_test.demo_test(self.token)

@@ -27,9 +27,7 @@ class Connection(komand.Connection):
             self.github_user = github.Github(self.username, self.secret)
             user_info = self.github_user.get_user()
             self.user = self.github_user.get_user(self.username)
-            self.github_session_user = requests.get(
-                self.api_prefix, auth=(self.username, self.secret), verify=True
-            )
+            self.github_session_user = requests.get(self.api_prefix, auth=(self.username, self.secret), verify=True)
             if str(self.github_session_user.status_code).startswith("2"):
                 self.logger.info("Connect: Login successful")
             else:

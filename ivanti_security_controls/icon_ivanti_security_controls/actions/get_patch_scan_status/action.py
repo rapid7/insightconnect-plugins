@@ -14,7 +14,5 @@ class GetPatchScanStatus(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        patch_scan_status_details = self.connection.ivanti_api.get_patch_scan_status_details(
-            params.get(Input.SCAN_ID)
-        )
+        patch_scan_status_details = self.connection.ivanti_api.get_patch_scan_status_details(params.get(Input.SCAN_ID))
         return {Output.PATCH_SCAN_STATUS_DETAILS: patch_scan_status_details}

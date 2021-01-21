@@ -19,8 +19,7 @@ class Connection(komand.Connection):
         HTTPError: PluginException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD),
         ValueError: PluginException(
             cause="Unable to connect to Splunk at the provided address.",
-            assistance="Check that the Connection contains the correct host or IP address "
-            "and not in URL format.",
+            assistance="Check that the Connection contains the correct host or IP address " "and not in URL format.",
         ),
         ParseError: PluginException(
             cause="Splunk returned an unreadable response",
@@ -80,9 +79,7 @@ class Connection(komand.Connection):
 
         self.scheme = "https"
         if not params.get(Input.USE_SSL):
-            self.logger.info(
-                "Connect: An insecure HTTP session will be used and SSL/TLS verify will be ignored."
-            )
+            self.logger.info("Connect: An insecure HTTP session will be used and SSL/TLS verify will be ignored.")
             self.scheme = "http"
             self.verify = False
 
@@ -90,9 +87,7 @@ class Connection(komand.Connection):
             self.verify = True
             if not params.get(Input.SSL_VERIFY):
                 self.verify = False
-                self.logger.info(
-                    "Connect: SSL/TLS verification of the Splunk server's certificate is not enabled."
-                )
+                self.logger.info("Connect: SSL/TLS verification of the Splunk server's certificate is not enabled.")
 
         self.client = self._create_client(is_enterprise_license=(license_type == "Enterprise"))
 

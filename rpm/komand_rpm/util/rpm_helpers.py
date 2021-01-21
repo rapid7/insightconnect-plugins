@@ -75,9 +75,7 @@ class RPMHelper(object):
             else:
                 self.logger.info("AddKey: Key successfully added from %s" % url)
         else:
-            raise Exception(
-                "AddKey: Key could not be downloaded: %s" % proc["stderr"].decode("utf-8")
-            )
+            raise Exception("AddKey: Key could not be downloaded: %s" % proc["stderr"].decode("utf-8"))
 
     def _modify_repofile(self, path):
         """prepares the repofile by subbing in variables and returning a list of repo ids"""
@@ -263,15 +261,11 @@ class RPMHelper(object):
                     if found_label.endswith(".rpm"):
                         os.remove(script_temp)
                         return temp_dir + found_label
-            self.logger.error(
-                "DownloadPackage: " + (proc["stdout"] + proc["stderr"]).decode("utf-8")
-            )
+            self.logger.error("DownloadPackage: " + (proc["stdout"] + proc["stderr"]).decode("utf-8"))
             os.remove(script_temp)
             raise Exception("DownloadPackage: Package unable to be downloaded.")
         else:
-            self.logger.error(
-                "DownloadPackage: " + (proc["stdout"] + proc["stderr"]).decode("utf-8")
-            )
+            self.logger.error("DownloadPackage: " + (proc["stdout"] + proc["stderr"]).decode("utf-8"))
             os.remove(script_temp)
             raise Exception("DownloadPackage: Package unable to be downloaded.")
 
@@ -319,7 +313,5 @@ class RPMHelper(object):
             raise Exception("ListPackage: Package unable to be found with 'list'")
         else:
             # fix this with decorators?
-            package_list = self._add_rpm_exts(
-                self._trim_epochs(proc["stdout"].decode("utf-8").splitlines())
-            )
+            package_list = self._add_rpm_exts(self._trim_epochs(proc["stdout"].decode("utf-8").splitlines()))
             return package_list

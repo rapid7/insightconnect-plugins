@@ -55,9 +55,7 @@ class NewScans(komand.Trigger):
             try:
                 cache_site_scans = json.loads(util.read_from_cache(self.CACHE_FILE_NAME))
             except ValueError as e:
-                raise PluginException(
-                    cause="Failed to load cache file", assistance=f"Exception returned was {e}"
-                )
+                raise PluginException(cause="Failed to load cache file", assistance=f"Exception returned was {e}")
 
             # Send scans based on configuration
             for site_id, scans in site_scans.items():
@@ -90,9 +88,7 @@ class NewScans(komand.Trigger):
                     scan_details["siteName"] = scan.get("site_name")
 
                     # Submit scan for trigger
-                    self.logger.info(
-                        f"Submitting trigger event for scan (Scan ID: {scan['scan_id']})"
-                    )
+                    self.logger.info(f"Submitting trigger event for scan (Scan ID: {scan['scan_id']})")
                     self.send({Output.SCAN: scan_details})
 
                     # Update cache
@@ -103,9 +99,7 @@ class NewScans(komand.Trigger):
             try:
                 util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(cache_site_scans))
             except TypeError as e:
-                raise PluginException(
-                    cause="Failed to save cache to file", assistance=f"Exception returned was {e}"
-                )
+                raise PluginException(cause="Failed to save cache to file", assistance=f"Exception returned was {e}")
 
             # Sleep for configured frequency in minutes
             time.sleep(params.get(Input.FREQUENCY, 5) * 60)
@@ -133,9 +127,7 @@ class NewScans(komand.Trigger):
         for s in sites:
             if regex.match(s["name"]):
                 site_ids.append(s["id"])
-        self.logger.info(
-            f"Identified {len(site_ids)} sites within trigger scope based on regular expression filter"
-        )
+        self.logger.info(f"Identified {len(site_ids)} sites within trigger scope based on regular expression filter")
 
         return site_ids
 

@@ -19,9 +19,7 @@ class CylanceProtectAPI:
 
     def get_agent_details(self, agent):
         devices = [{}]
-        if len(agent) == 36 and match(
-            r"((?:[[\da-fA-F]{8}-([\da-fA-F]{4}-){3}[\da-fA-F]{12}))", agent
-        ):
+        if len(agent) == 36 and match(r"((?:[[\da-fA-F]{8}-([\da-fA-F]{4}-){3}[\da-fA-F]{12}))", agent):
             devices = [self._call_api("GET", f"{self.url}/devices/v2/{agent}", "device:read")]
         elif match(r"((?:[\da-fA-F]{2}[:\-]){5}[\da-fA-F]{2})", agent):
             ret = self._call_api("GET", f"{self.url}/devices/v2/macaddress/{agent}", "device:read")
@@ -102,35 +100,23 @@ class CylanceProtectAPI:
         return matching_devices
 
     def create_blacklist_item(self, payload):
-        return self._call_api(
-            "POST", f"{self.url}/globallists/v2", "globallist:create", json_data=payload
-        )
+        return self._call_api("POST", f"{self.url}/globallists/v2", "globallist:create", json_data=payload)
 
     def delete_blacklist_item(self, payload):
-        return self._call_api(
-            "DELETE", f"{self.url}/globallists/v2", "globallist:delete", json_data=payload
-        )
+        return self._call_api("DELETE", f"{self.url}/globallists/v2", "globallist:delete", json_data=payload)
 
     def device_lockdown(self, device_id):
         device_id = device_id.replace("-", "").upper()
-        return self._call_api(
-            "PUT", f"{self.url}/devicecommands/v2/{device_id}/lockdown?value=true", None
-        )
+        return self._call_api("PUT", f"{self.url}/devicecommands/v2/{device_id}/lockdown?value=true", None)
 
     def delete_devices(self, payload):
-        return self._call_api(
-            "DELETE", f"{self.url}/devices/v2", "device:delete", json_data=payload
-        )
+        return self._call_api("DELETE", f"{self.url}/devices/v2", "device:delete", json_data=payload)
 
     def get_agents(self, page, page_size):
-        return self._call_api(
-            "GET", f"{self.url}/devices/v2?page={page}?page_size={page_size}", "device:list"
-        )
+        return self._call_api("GET", f"{self.url}/devices/v2?page={page}?page_size={page_size}", "device:list")
 
     def search_threats(self, identifiers):
-        threats = self._call_api(
-            "GET", f"{self.url}/threats/v2?page=1&page_size=100", "threat:list"
-        ).get("page_items")
+        threats = self._call_api("GET", f"{self.url}/threats/v2?page=1&page_size=100", "threat:list").get("page_items")
         matching_threats = []
         for identifier in identifiers:
             if match("^[a-fA-F\d]{32}$", identifier):
@@ -155,35 +141,25 @@ class CylanceProtectAPI:
         return clean(matching_threats)
 
     def get_threat_devices(self, sha256, page, page_size):
-        return self._call_api(
-            "GET", f"{self.url}/threats/v2/{sha256}/devices?page={page}?page_size={page_size}", None
-        )
+        return self._call_api("GET", f"{self.url}/threats/v2/{sha256}/devices?page={page}?page_size={page_size}", None)
 
     def update_agent_threat(self, agent_id, payload):
-        return self._call_api(
-            "POST", f"{self.url}/devices/v2/{agent_id}/threats", "threat:update", json_data=payload
-        )
+        return self._call_api("POST", f"{self.url}/devices/v2/{agent_id}/threats", "threat:update", json_data=payload)
 
     def update_agent(self, agent_id, payload):
-        return self._call_api(
-            "PUT", f"{self.url}/devices/v2/{agent_id}", "device:update", json_data=payload
-        )
+        return self._call_api("PUT", f"{self.url}/devices/v2/{agent_id}", "device:update", json_data=payload)
 
     def get_policies(self, page):
         return self._call_api("GET", f"{self.url}/policies/v2?page={page}", "policy:list")
 
     def _call_api(self, method, url, scope, params=None, json_data=None):
         token = self.generate_token(scope)
-        return self._make_request(
-            method, url, params, json_data, headers={"Authorization": f"Bearer {token}"}
-        )
+        return self._make_request(method, url, params, json_data, headers={"Authorization": f"Bearer {token}"})
 
     def _make_request(self, method, url, params=None, json_data=None, data=None, headers=None):
         response = {"text": ""}
         try:
-            response = requests.request(
-                method, url, json=json_data, data=data, params=params, headers=headers
-            )
+            response = requests.request(method, url, json=json_data, data=data, params=params, headers=headers)
 
             if response.status_code == 400:
                 raise PluginException(cause="Bad request.", data=response.text)
@@ -241,13 +217,7 @@ class CylanceProtectAPI:
         response = self._make_request(
             method="POST",
             url=f"{self.url}/auth/v2/token",
-            data=json.dumps(
-                {
-                    "auth_token": jwt.encode(claims, self.app_secret, algorithm="HS256").decode(
-                        "utf-8"
-                    )
-                }
-            ),
+            data=json.dumps({"auth_token": jwt.encode(claims, self.app_secret, algorithm="HS256").decode("utf-8")}),
             headers={"Content-Type": "application/json; charset=utf-8"},
         )
 

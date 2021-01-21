@@ -32,9 +32,7 @@ class ExecuteOne(komand.Action):
             return {"row": row}
 
         except presto.DatabaseError as e:
-            self.logger.error(
-                "There was an error with your SQL query: %s" % e[0]["failureInfo"]["message"]
-            )
+            self.logger.error("There was an error with your SQL query: %s" % e[0]["failureInfo"]["message"])
         except Exception as e:
             self.logger.error("An unknown error occurred: %s" % e)
 

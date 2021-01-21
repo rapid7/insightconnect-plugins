@@ -31,8 +31,6 @@ class Connection(komand.Connection):
         result = self.session.get(url)
 
         if result.status_code != 200:
-            raise ConnectionTestException(
-                preset=ConnectionTestException.Preset.INVALID_JSON, data=result.text
-            )
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.INVALID_JSON, data=result.text)
 
         return {"connection": "successful"}

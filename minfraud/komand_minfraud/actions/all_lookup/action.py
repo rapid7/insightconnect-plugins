@@ -520,9 +520,7 @@ class AllLookup(komand.Action):
         # Additional info
         brand = str(insights.credit_card.brand)
         country = str(insights.credit_card.country)
-        is_issued_in_billing_address_country = (
-            insights.credit_card.is_issued_in_billing_address_country
-        )
+        is_issued_in_billing_address_country = insights.credit_card.is_issued_in_billing_address_country
         is_prepaid = insights.credit_card.is_prepaid
         type = insights.credit_card.type
         credit_card = {

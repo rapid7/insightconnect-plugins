@@ -24,14 +24,10 @@ class RetrieveOffenses(komand.Action):
         range = params.get("range")
 
         if token:
-            r = helpers.get_offenses(
-                self.logger, url, token=token, fields=fields, filter=filter, range=range
-            )
+            r = helpers.get_offenses(self.logger, url, token=token, fields=fields, filter=filter, range=range)
         else:
             auth = helpers.encode_basic_auth(username, password)
-            r = helpers.get_offenses(
-                self.logger, url, basic_auth=auth, fields=fields, filter=filter, range=range
-            )
+            r = helpers.get_offenses(self.logger, url, basic_auth=auth, fields=fields, filter=filter, range=range)
 
         return {"offenses": r}
 

@@ -24,9 +24,7 @@ class BlockUser(komand.Action):
             "Content-Type": "application/json",
         }
 
-        response = requests.put(
-            url, headers=headers, auth=(self.connection.username, self.connection.secret)
-        )
+        response = requests.put(url, headers=headers, auth=(self.connection.username, self.connection.secret))
 
         try:
             data = response.json()

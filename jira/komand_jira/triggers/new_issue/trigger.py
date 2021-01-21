@@ -32,9 +32,7 @@ class NewIssue(komand.Trigger):
         new_issues = self.connection.client.search_issues(self.jql, startAt=0)
         for issue in new_issues:
             if issue.id not in self.found:
-                output = normalize_issue(
-                    issue, get_attachments=self.get_attachments, logger=self.logger
-                )
+                output = normalize_issue(issue, get_attachments=self.get_attachments, logger=self.logger)
                 self.found[issue.id] = True
                 self.logger.debug("found: %s", output)
                 self.send({Output.ISSUE: output})

@@ -8,8 +8,7 @@ class RetrieveIndicators(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="retrieve_indicators",
-            description="Fetches a list of all indicators of compromise "
-            "associated with all confirmed detections",
+            description="Fetches a list of all indicators of compromise " "associated with all confirmed detections",
             input=RetrieveIndicatorsInput(),
             output=RetrieveIndicatorsOutput(),
         )

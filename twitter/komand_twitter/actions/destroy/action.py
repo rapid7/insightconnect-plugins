@@ -25,9 +25,7 @@ class Destroy(komand.Action):
                 # Step 3: Report back with casualties
                 return {"destroyed": True}
         except:
-            self.logger.error(
-                "Direct message %s doesn't exist, it may not have been destroyed by us.", message_id
-            )
+            self.logger.error("Direct message %s doesn't exist, it may not have been destroyed by us.", message_id)
             return {"destroyed": False}
             # Step 3b: False target was acquired. No enemy casualties.
         # Step 3c: Fall back.

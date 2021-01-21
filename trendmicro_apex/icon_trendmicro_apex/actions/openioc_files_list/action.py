@@ -30,12 +30,8 @@ class OpeniocFilesList(komand.Action):
             "FileHashIDList": params.get(Input.FILE_HASH_ID_LIST, []),
             "PageSize": params.get(Input.PAGE_SIZE, 10),
             "PageNumber": params.get(Input.PAGE_NUMBER, 1),
-            "SortingColumn": self.SORTING_COLUMNS.get(
-                params.get(Input.SORTING_COLUMN, "FileAddedDatetime")
-            ),
-            "SortingDirection": self.SORTING_DIRECTION.get(
-                params.get(Input.SORTING_DIRECTION, "Descending")
-            ),
+            "SortingColumn": self.SORTING_COLUMNS.get(params.get(Input.SORTING_COLUMN, "FileAddedDatetime")),
+            "SortingDirection": self.SORTING_DIRECTION.get(params.get(Input.SORTING_DIRECTION, "Descending")),
         }
 
         if params.get(Input.FUZZY_MATCH_STRING):

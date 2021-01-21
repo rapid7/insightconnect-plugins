@@ -67,9 +67,7 @@ class UpdateIncident(komand.Action):
 
         # If we made it this far, and this call fails, something really unexpected happened.
         if not original_incident_response.status_code == 200:
-            raise PluginException(
-                preset=PluginException.Preset.SERVER_ERROR, data=original_incident_response.text
-            )
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=original_incident_response.text)
 
         try:
             original_incident = original_incident_response.json()

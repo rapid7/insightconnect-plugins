@@ -27,14 +27,10 @@ class AddDataToReferenceDataLists(komand.Action):
             payload["timeout_type"] = params.get("timeout_type")
 
         if token:
-            r = helpers.add_data_to_reference_data_lists(
-                self.logger, url, token=token, payload=payload
-            )
+            r = helpers.add_data_to_reference_data_lists(self.logger, url, token=token, payload=payload)
         else:
             auth = helpers.encode_basic_auth(username, password)
-            r = helpers.add_data_to_reference_data_lists(
-                self.logger, url, basic_auth=auth, payload=payload
-            )
+            r = helpers.add_data_to_reference_data_lists(self.logger, url, basic_auth=auth, payload=payload)
 
         if not r:
             raise Exception("Run: Error adding data to reference list")

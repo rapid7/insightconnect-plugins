@@ -27,9 +27,7 @@ class GetComments(komand.Action):
 
         comments = issue.fields.comment.comments or []
 
-        results = list(
-            map(lambda comment: normalize_comment(comment, logger=self.logger), comments)
-        )
+        results = list(map(lambda comment: normalize_comment(comment, logger=self.logger), comments))
         results = komand.helper.clean(results)
 
         count = len(results)

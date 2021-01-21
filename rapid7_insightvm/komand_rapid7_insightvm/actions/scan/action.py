@@ -26,9 +26,7 @@ class Scan(komand.Action):
 
         if hosts:
             payload = {"hosts": hosts}
-            response = resource_helper.resource_request(
-                endpoint=endpoint, method="post", payload=payload
-            )
+            response = resource_helper.resource_request(endpoint=endpoint, method="post", payload=payload)
         else:
             response = resource_helper.resource_request(endpoint=endpoint, method="post")
 

@@ -226,10 +226,7 @@ class HippocampeAPI:
             response = {}
         elif "error" in response:
             error = response["error"]
-            self.logger.warn(
-                "HippocampeAPI: An error occurred, but some "
-                "data was returned successfully: " + error
-            )
+            self.logger.warn("HippocampeAPI: An error occurred, but some " "data was returned successfully: " + error)
             del response["error"]
         self.logger.info("HippocampeAPI: API call successful")
 

@@ -64,9 +64,7 @@ class Kolide:
                 )
 
         except Exception as e:
-            self.logger.error(
-                f"An error had occurred : {e}" "If the issue persists please contact support"
-            )
+            self.logger.error(f"An error had occurred : {e}" "If the issue persists please contact support")
             raise
 
         try:
@@ -82,15 +80,11 @@ class Kolide:
         return self._call_api("GET", "/v1/kolide/me", action_name="Connection Test")
 
     def create_query(self, payload):
-        return self._call_api(
-            "POST", "/v1/kolide/queries", json=payload, action_name="Create Query"
-        )
+        return self._call_api("POST", "/v1/kolide/queries", json=payload, action_name="Create Query")
 
     def run_query(self, payload):
         self.logger.info(json.dumps(payload))
-        return self._call_api(
-            "POST", "/v1/kolide/queries/run", json=payload, action_name="Run Query"
-        )
+        return self._call_api("POST", "/v1/kolide/queries/run", json=payload, action_name="Run Query")
 
     def get_query(self, queryID):
         return self._call_api("GET", f"/v1/kolide/queries/{queryID}", action_name="Get Query")

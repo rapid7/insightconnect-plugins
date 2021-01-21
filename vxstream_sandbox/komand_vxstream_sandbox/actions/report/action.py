@@ -54,9 +54,7 @@ class Report(komand.Action):
         if "analysis" not in output:
             return output
 
-        for apicall in output["analysis"]["runtime"]["targets"]["target"]["apicalls"]["chronology"][
-            "apicall"
-        ]:
+        for apicall in output["analysis"]["runtime"]["targets"]["target"]["apicalls"]["chronology"]["apicall"]:
             if not isinstance(apicall["parameters"]["parameter"], list):
                 apicall["parameters"]["parameter"] = [apicall["parameters"]["parameter"]]
 
@@ -88,8 +86,7 @@ class Report(komand.Action):
         data = response.json()
         if data["response_code"] != 0:
             self.logger.error(
-                "API returned response code %d. Check that the API key and secret are correct."
-                % data["response_code"]
+                "API returned response code %d. Check that the API key and secret are correct." % data["response_code"]
             )
             raise Exception('VxStream Sandbox - "Report" - Invalid credentials')
 

@@ -20,6 +20,4 @@ class ModifyHost(komand.Action):
         return {"_ref": ref}
 
     def test(self):
-        return {
-            "_ref": "record:host/ZG5zLmhvc3QkLl9kZWZhdWx0LmNvbS5pbmZvLmFieA" ":abx.info.com/default"
-        }
+        return {"_ref": "record:host/ZG5zLmhvc3QkLl9kZWZhdWx0LmNvbS5pbmZvLmFieA" ":abx.info.com/default"}

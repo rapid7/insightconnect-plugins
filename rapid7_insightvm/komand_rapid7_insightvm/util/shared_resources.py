@@ -66,7 +66,9 @@ def resource_request_status_code_check(response_text: str, status_code: str) -> 
         503: _CONTACT_SUPPORT,
         000: _CONTACT_SUPPORT,
     }
-    _CHECK_CONSOLE = "Verify your connection is pointing to your local console and not `exposure-analytics.insight.rapid7.com`"
+    _CHECK_CONSOLE = (
+        "Verify your connection is pointing to your local console and not `exposure-analytics.insight.rapid7.com`"
+    )
 
     if status_code not in [200, 201]:  # 200 is documented, 201 is undocumented
         status_code_message = _ERRORS.get(status_code, _ERRORS[000])

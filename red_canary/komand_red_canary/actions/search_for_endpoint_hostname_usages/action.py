@@ -17,8 +17,6 @@ class SearchForEndpointHostnameUsages(komand.Action):
         endpoint_hostname = params.get("endpoint_hostname")
         max_results = params.get("max_results", 100)
 
-        results = self.connection.api.search_for_endpoint_hostname_usages(
-            endpoint_hostname, max_results
-        )
+        results = self.connection.api.search_for_endpoint_hostname_usages(endpoint_hostname, max_results)
 
         return {"results": results}

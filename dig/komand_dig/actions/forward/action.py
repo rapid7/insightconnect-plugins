@@ -19,9 +19,7 @@ class Forward(insightconnect_plugin_runtime.Action):
         else:
             cmd = f"{params.get(Input.DOMAIN)} {params.get(Input.QUERY)}"
 
-        command_output = util.execute_command(
-            self.logger, cmd, r"ANSWER SECTION:\n(.*)\n\n;;", re.DOTALL
-        )
+        command_output = util.execute_command(self.logger, cmd, r"ANSWER SECTION:\n(.*)\n\n;;", re.DOTALL)
         answer_section = command_output["answer_section"]
         if answer_section is None:
             ans = ["Not found"]

@@ -71,9 +71,7 @@ class Project(ViperBase):
         return analyses
 
     def get_analysis(self, id):
-        response = super()._get(
-            self.config, self.pathName + self.name + "/analysis/" + str(id) + "/"
-        )
+        response = super()._get(self.config, self.pathName + self.name + "/analysis/" + str(id) + "/")
 
         if "data" not in response:
             raise PluginException(

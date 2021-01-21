@@ -23,7 +23,5 @@ class Connection(komand.Connection):
             self.logger.info("Connect: Connection Failed")
             sys.exit(1)
 
-        self.threat_connect = threatconnect.ThreatConnect(
-            api_access_id, api_secret_key, api_default_org, api_base_url
-        )
+        self.threat_connect = threatconnect.ThreatConnect(api_access_id, api_secret_key, api_default_org, api_base_url)
         self.threat_connect.set_tcl_console_level("debug")

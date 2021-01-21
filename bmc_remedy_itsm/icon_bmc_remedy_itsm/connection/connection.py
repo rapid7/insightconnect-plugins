@@ -28,9 +28,7 @@ class Connection(komand.Connection):
         self.logger.info(f"Logging into URL: {self.url}")
 
         try:
-            response = self.session.post(
-                login_endpoint, data=self.auth_payload, verify=Input.SSL_VERIFY
-            )
+            response = self.session.post(login_endpoint, data=self.auth_payload, verify=Input.SSL_VERIFY)
         except requests.exceptions.ConnectionError as e:
             # These if statements will ensure that the args variables have a length of 1 or more. I do not know how they would not but just in case
             if len(e.args) < 1:
@@ -61,9 +59,7 @@ class Connection(komand.Connection):
                     f" or a firewall blocking the connection.",
                     data=e,
                 )
-        self.logger.info(
-            f"Result of authentication request: ****************************{response.text[-5:]}"
-        )
+        self.logger.info(f"Result of authentication request: ****************************{response.text[-5:]}")
         self.jwt = response.text
 
     def make_headers_and_refresh_token(self):

@@ -37,9 +37,7 @@ class CreateTarget(komand.Action):
             raise ValueError("IP address should have only 4 octets." + host_range)
         firstIPLastOctet = newbreakdown[3]
         for j in range(int(firstIPLastOctet), (int(lastIPLastOctet) + 1)):
-            IPtoTest = (
-                newbreakdown[0] + "." + newbreakdown[1] + "." + newbreakdown[2] + "." + str(j)
-            )
+            IPtoTest = newbreakdown[0] + "." + newbreakdown[1] + "." + newbreakdown[2] + "." + str(j)
             try:
                 ipaddress.ip_address(IPtoTest)
             except ValueError:
@@ -111,15 +109,11 @@ class CreateTarget(komand.Action):
                 "message": "Error creating target: " + str(err),
             }
         except:
-            self.logger.error(
-                "Error creating target: "
-                + " | ".join([str(sys.exc_info()[0]), str(sys.exc_info()[1])])
-            )
+            self.logger.error("Error creating target: " + " | ".join([str(sys.exc_info()[0]), str(sys.exc_info()[1])]))
             return {
                 "target_id": "",
                 "success": False,
-                "message": "Error creating target: "
-                + " | ".join([str(sys.exc_info()[0]), str(sys.exc_info()[1])]),
+                "message": "Error creating target: " + " | ".join([str(sys.exc_info()[0]), str(sys.exc_info()[1])]),
             }
 
         return {

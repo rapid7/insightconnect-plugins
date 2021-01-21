@@ -47,6 +47,4 @@ class Vsites(komand.Action):
         return {"vsites": data}
 
     def test(self):
-        return {
-            "vsites": [{"id": "", "service_group": [], "name": "", "active_on": 0, "comments": []}]
-        }
+        return {"vsites": [{"id": "", "service_group": [], "name": "", "active_on": 0, "comments": []}]}

@@ -34,8 +34,7 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
 
         if len(searched_agents) > 1:
             self.logger.info(
-                f"Multiple agents found that matched the query: {searched_agents}."
-                f"We will act upon the first match"
+                f"Multiple agents found that matched the query: {searched_agents}." f"We will act upon the first match"
             )
 
         if len(searched_agents) > 0:

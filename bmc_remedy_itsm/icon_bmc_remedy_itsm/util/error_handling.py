@@ -38,9 +38,7 @@ class ErrorHelper(object):
         if result.status_code not in range(200, 299):
             raw = result.text
             status_code_message = self._ERROR_CODES.get(result.status_code, self._ERROR_CODES[000])
-            status_code_assistance = self._ERROR_ASSISTANCE.get(
-                result.status_code, self._ERROR_ASSISTANCE[000]
-            )
+            status_code_assistance = self._ERROR_ASSISTANCE.get(result.status_code, self._ERROR_ASSISTANCE[000])
             raise PluginException(
                 cause=f"A {status_code_message} error code was returned",
                 assistance=status_code_assistance,

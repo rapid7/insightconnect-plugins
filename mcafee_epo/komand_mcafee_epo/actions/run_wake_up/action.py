@@ -20,9 +20,7 @@ class RunWakeUp(insightconnect_plugin_runtime.Action):
             params = {}
 
         try:
-            wake_up_response = self.connection.client(
-                "system.wakeupAgent", params.get(Input.SYSTEM_NAME)
-            )
+            wake_up_response = self.connection.client("system.wakeupAgent", params.get(Input.SYSTEM_NAME))
 
             return {
                 Output.COMPLETED: int(re.search(r"completed: (\d+)", wake_up_response).group(1)),
@@ -30,6 +28,4 @@ class RunWakeUp(insightconnect_plugin_runtime.Action):
                 Output.EXPIRED: int(re.search(r"expired: (\d+)", wake_up_response).group(1)),
             }
         except Exception as e:
-            raise PluginException(
-                cause="Error", assistance=f"Could not wake up a system. Error: {e}"
-            )
+            raise PluginException(cause="Error", assistance=f"Could not wake up a system. Error: {e}")

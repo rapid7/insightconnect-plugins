@@ -37,11 +37,7 @@ def pipeline_data_to_json(pipeline, metadata={}):
 
 
 def repository_data_to_json(repository, metadata={}):
-    return {
-        "pipelines": list(
-            map(lambda p: pipeline_data_to_json(p, metadata), repository.get("pipelines", []))
-        )
-    }
+    return {"pipelines": list(map(lambda p: pipeline_data_to_json(p, metadata), repository.get("pipelines", [])))}
 
 
 def issue_reference_to_json(issue):

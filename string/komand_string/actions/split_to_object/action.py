@@ -21,9 +21,7 @@ class SplitToObject(insightconnect_plugin_runtime.Action):
         bd = params.get("block_delimiter")
 
         if not sd:
-            self.logger.info(
-                "User did not supply a string delimiter. " "Defaulting to a space character."
-            )
+            self.logger.info("User did not supply a string delimiter. " "Defaulting to a space character.")
             sd = " "
 
         if not string:
@@ -47,9 +45,7 @@ class SplitToObject(insightconnect_plugin_runtime.Action):
                     # Assign 1st element as key, 2nd as value to dict
                     d[pair[0].strip('"')] = pair[1].strip('"')
                 else:
-                    self.logger.info(
-                        "Skipping {count} element split: {pair}".format(count=c, pair=pair)
-                    )
+                    self.logger.info("Skipping {count} element split: {pair}".format(count=c, pair=pair))
             return {"object": d}
 
         # Single key:value pair split e.g. USER=bob
@@ -58,9 +54,7 @@ class SplitToObject(insightconnect_plugin_runtime.Action):
             self.logger.info("User input to split: %s -> %s", string, list_)
             d[list_[0]] = list_[1]
         except (ValueError, IndexError):
-            self.logger.error(
-                "It looks like the input contained more than a single key:value split."
-            )
+            self.logger.error("It looks like the input contained more than a single key:value split.")
             raise PluginException(
                 cause="Action failed! Unable to split string cleanly.",
                 assistance="Please try specifying the block delimiter for more multi-key:value input.",

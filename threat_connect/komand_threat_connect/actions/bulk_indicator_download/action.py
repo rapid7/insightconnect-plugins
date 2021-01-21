@@ -60,16 +60,10 @@ class BulkIndicatorDownload(komand.Action):
                 "id": indicator.id,
                 "owner_name": (indicator.owner_name or ""),
                 "date_added": (
-                    datetime.datetime.strptime(
-                        indicator.date_added, "%Y-%d-%mT%H:%M:%SZ"
-                    ).isoformat()
-                    or ""
+                    datetime.datetime.strptime(indicator.date_added, "%Y-%d-%mT%H:%M:%SZ").isoformat() or ""
                 ),
                 "last_modified": (
-                    datetime.datetime.strptime(
-                        indicator.last_modified, "%Y-%d-%mT%H:%M:%SZ"
-                    ).isoformat()
-                    or ""
+                    datetime.datetime.strptime(indicator.last_modified, "%Y-%d-%mT%H:%M:%SZ").isoformat() or ""
                 ),
                 "rating": (indicator.rating or ""),
                 "threat_assess_rating": (str(indicator.threat_assess_rating) or ""),

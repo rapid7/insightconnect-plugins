@@ -49,10 +49,7 @@ def mocked_requests_get(*args, headers):
 
     if args[0] == "http://test.url/api/arsys/v1/entry/HPD:IncidentInterface?sort=Submit Date.desc":
         return MockResponse(mock_get_new_incidents_payload, 200)
-    if (
-        args[0]
-        == "http://test.url/api/arsys/v1/entry/HPD:IncidentInterface?sort=Submit Date.desc&limit=1"
-    ):
+    if args[0] == "http://test.url/api/arsys/v1/entry/HPD:IncidentInterface?sort=Submit Date.desc&limit=1":
         return MockResponse(mock_get_new_incidents_payload, 200)
 
     print(f"Attempted to get:\n{args[0]}")

@@ -73,9 +73,9 @@ class Scan(komand.Action):
 
     def new_task(self):
         time.sleep(5)
-        self.taskid = json.loads(
-            requests.get("http://" + self.api_host + ":" + self.api_port + "/task/new").text
-        )["taskid"]
+        self.taskid = json.loads(requests.get("http://" + self.api_host + ":" + self.api_port + "/task/new").text)[
+            "taskid"
+        ]
 
     def set_options(self, params={}):
         if not self.headers:
@@ -91,32 +91,22 @@ class Scan(komand.Action):
     def start_scan(self):
         payload = {"url": self.url}
         payload = {str(key): str(value) for key, value in payload.items()}
-        self.sql_url = (
-            "http://" + self.api_host + ":" + self.api_port + "/scan/" + self.taskid + "/start"
-        )
-        start_scan = json.loads(
-            requests.post(self.sql_url, data=json.dumps(payload), headers=self.headers).text
-        )
+        self.sql_url = "http://" + self.api_host + ":" + self.api_port + "/scan/" + self.taskid + "/start"
+        start_scan = json.loads(requests.post(self.sql_url, data=json.dumps(payload), headers=self.headers).text)
 
     def get_data(self):
         self.data = json.loads(
-            requests.get(
-                "http://" + self.api_host + ":" + self.api_port + "/scan/" + self.taskid + "/log"
-            ).text
+            requests.get("http://" + self.api_host + ":" + self.api_port + "/scan/" + self.taskid + "/log").text
         )["log"]
 
     def get_status_code(self):
         self.status = json.loads(
-            requests.get(
-                "http://" + self.api_host + ":" + self.api_port + "/scan/" + self.taskid + "/status"
-            ).text
+            requests.get("http://" + self.api_host + ":" + self.api_port + "/scan/" + self.taskid + "/status").text
         )["status"]
 
     def delete_task(self):
         if json.loads(
-            requests.get(
-                "http://" + self.api_host + ":" + self.api_port + "/task/" + self.taskid + "/delete"
-            ).text
+            requests.get("http://" + self.api_host + ":" + self.api_port + "/task/" + self.taskid + "/delete").text
         )["success"]:
             return True
         return False
@@ -125,16 +115,12 @@ class Scan(komand.Action):
         self.api_host = self.connection.api_host
         self.api_port = self.connection.api_port
         time.sleep(5)
-        req_check = json.loads(
-            requests.get("http://" + self.api_host + ":" + self.api_port + "/task/new").text
-        )
+        req_check = json.loads(requests.get("http://" + self.api_host + ":" + self.api_port + "/task/new").text)
         taskid = req_check["taskid"]
         failed = {"result": "failed"}
         if taskid:
             delete_task = json.loads(
-                requests.get(
-                    "http://" + self.api_host + ":" + self.api_port + "/task/" + taskid + "/delete"
-                ).text
+                requests.get("http://" + self.api_host + ":" + self.api_port + "/task/" + taskid + "/delete").text
             )
             return req_check
         else:

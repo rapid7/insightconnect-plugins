@@ -29,9 +29,7 @@ class CreateArchive(komand.Action):
         for f in files:
             with open(path + f["filename"], "w") as fi:
                 fi.write(f["content"])
-        compressed_file = compressor.dispatch_compress(
-            algorithm=algorithm, file_bytes=None, tmpdir=path
-        )
+        compressed_file = compressor.dispatch_compress(algorithm=algorithm, file_bytes=None, tmpdir=path)
         self.logger.info("Run: Compressed file is: %s", compressed_file)
 
         # Now re-encode the bytes in base64 so other plugins can use it

@@ -36,9 +36,7 @@ class RunAnalysis(insightconnect_plugin_runtime.Action):
             )
 
         if params.get(Input.OBJ_TYPE) != "url" and Input.OBJ_EXT_BROWSER in params:
-            raise PluginException(
-                cause="Invalid input.", assistance='Browser name only possible with type "url".'
-            )
+            raise PluginException(cause="Invalid input.", assistance='Browser name only possible with type "url".')
 
         if params.get(Input.OBJ_TYPE) not in ["download", "url"] and (
             Input.OBJ_EXT_USERAGENT in params or Input.OPT_PRIVACY_HIDESOURCE in params
@@ -48,11 +46,7 @@ class RunAnalysis(insightconnect_plugin_runtime.Action):
                 assistance='User agent only possible with type "download" or "url".',
             )
 
-        if (
-            params.get(Input.OBJ_TYPE) == "file"
-            and Input.FILE in params
-            and params.get(Input.FILE).get("content")
-        ):
+        if params.get(Input.OBJ_TYPE) == "file" and Input.FILE in params and params.get(Input.FILE).get("content"):
             file = params.get(Input.FILE)
             files = {
                 "file": (

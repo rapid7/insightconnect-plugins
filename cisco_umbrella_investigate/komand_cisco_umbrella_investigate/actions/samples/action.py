@@ -30,9 +30,7 @@ class Samples(komand.Action):
             offset = 0
 
         try:
-            samples = self.connection.investigate.samples(
-                URL, limit=limit, offset=offset, sortby=sortby
-            )
+            samples = self.connection.investigate.samples(URL, limit=limit, offset=offset, sortby=sortby)
         except Exception as e:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
         return samples

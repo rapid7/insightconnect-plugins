@@ -22,11 +22,21 @@ class CheckmarxCxSAST:
         )
 
     def _call_api(
-        self, method, endpoint, params=None, data=None, action_name=None, custom_error=None,
+        self,
+        method,
+        endpoint,
+        params=None,
+        data=None,
+        action_name=None,
+        custom_error=None,
     ):
         url = self._base_url + "/cxrestapi" + endpoint
         req = Request(
-            url=url, headers=self.session.headers, method=method, params=params, data=data,
+            url=url,
+            headers=self.session.headers,
+            method=method,
+            params=params,
+            data=data,
         )
 
         try:
@@ -56,9 +66,7 @@ class CheckmarxCxSAST:
                 )
 
         except Exception as e:
-            self.logger.error(
-                f"An error had occurred : {e}" "If the issue persists please contact support"
-            )
+            self.logger.error(f"An error had occurred : {e}" "If the issue persists please contact support")
             raise
 
         try:
@@ -93,7 +101,10 @@ class CheckmarxCxSAST:
 
     def create_project(self, project):
         return self._call_api(
-            "POST", "/projects", action_name="Create Project", data=json.dumps(project),
+            "POST",
+            "/projects",
+            action_name="Create Project",
+            data=json.dumps(project),
         )
 
     def create_branched_project(self, id, project):
@@ -114,8 +125,15 @@ class CheckmarxCxSAST:
 
     def create_scan(self, scan):
         return self._call_api(
-            "POST", "/sast/scans", action_name="Create Scan", data=json.dumps(scan),
+            "POST",
+            "/sast/scans",
+            action_name="Create Scan",
+            data=json.dumps(scan),
         )
 
     def get_scan_details(self, id):
-        return self._call_api("GET", f"/sast/scans/{id}", action_name="Get Scan Details",)
+        return self._call_api(
+            "GET",
+            f"/sast/scans/{id}",
+            action_name="Get Scan Details",
+        )

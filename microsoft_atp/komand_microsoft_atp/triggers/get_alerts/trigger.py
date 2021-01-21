@@ -29,9 +29,7 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
             most_recent_result = all_results.get("value")[0]
             most_recent_time_string = most_recent_result.get("alertCreationTime")
         else:
-            self.logger.info(
-                "No current alerts found, setting time to start looking to 2010-10-01."
-            )
+            self.logger.info("No current alerts found, setting time to start looking to 2010-10-01.")
             most_recent_time_string = "2010-01-01T00:00:00.000000Z"  # We don't have any alerts yet
 
         # Start looking for new results
@@ -40,17 +38,13 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
 
             self.logger.info("Looking for new alerts.")
             self.logger.info(f"Query params:{query_params}")
-            current_results_result = self.connection.client.get_all_alerts(
-                query_parameters=query_params
-            )
+            current_results_result = self.connection.client.get_all_alerts(query_parameters=query_params)
             current_results = current_results_result.json()
 
             # If new results available, return each of them, update the time we saw the latest result
             current_results_list = current_results.get("value", [])
             if len(current_results_list):
-                self.logger.info(
-                    f"New results found, returning {len(current_results_list)} results."
-                )
+                self.logger.info(f"New results found, returning {len(current_results_list)} results.")
                 for alert in current_results_list:
                     self.send({Output.ALERT: insightconnect_plugin_runtime.helper.clean(alert)})
                 self.logger.info(f"\nUpdating time from.\n")

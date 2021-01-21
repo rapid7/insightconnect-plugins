@@ -37,9 +37,7 @@ class ListReports(komand.Action):
         # Get pages
         try:
             # Build API URL
-            page_endpoint = endpoints.Report.list_reports(
-                self.connection.console_url, page, size, sort
-            )
+            page_endpoint = endpoints.Report.list_reports(self.connection.console_url, page, size, sort)
             page_resp = self.connection.session.get(url=page_endpoint, verify=False)
             self.logger.info(page_resp.json())
             page_dict = page_resp.json()["page"]
@@ -88,9 +86,7 @@ class ListReports(komand.Action):
                                             self.logger.info("Found entry matching %s", name)
                                             return {
                                                 "found": True,
-                                                "list": [
-                                                    {"name": report["name"], "id": report["id"]}
-                                                ],
+                                                "list": [{"name": report["name"], "id": report["id"]}],
                                             }
 
                                     reports.append(

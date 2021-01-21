@@ -59,9 +59,7 @@ class HaveIBeenPwned(object):
                         " Will retry after back off of: {0} sec".format(back_off)
                     )
                     time.sleep(back_off)  # Wait to slow down request rate
-                    return self.get_request(
-                        url, params, max_attempts=max_attempts - 1
-                    )  # Retry get_request
+                    return self.get_request(url, params, max_attempts=max_attempts - 1)  # Retry get_request
             raise Exception(
                 "Too many requests. The rate limit has been exceeded. Back off has failed."
                 " Please run fewer workflows with the Have I been Pwned plugin"
@@ -74,9 +72,7 @@ class HaveIBeenPwned(object):
                 " and try again. If the issue persists, contact support."
             )
         else:
-            self.logger.error(
-                "An unknown error occurred status code: {0}".format(response.status_code)
-            )
+            self.logger.error("An unknown error occurred status code: {0}".format(response.status_code))
             raise Exception("{0} error".format(response.status_code))
 
     def get_password(self, hash_start: str) -> list:

@@ -20,14 +20,10 @@ class ManageDevice(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         device_name = params.get(Input.DEVICE)
-        device = self.connection.api.get_device_by_uuid_if_not_whitelisted(
-            device_name, params.get(Input.WHITELIST)
-        )
+        device = self.connection.api.get_device_by_uuid_if_not_whitelisted(device_name, params.get(Input.WHITELIST))
 
         if device:
-            response = self.connection.api.managed_device_action(
-                device["id"], self.actions[params.get(Input.TYPE)]
-            )
+            response = self.connection.api.managed_device_action(device["id"], self.actions[params.get(Input.TYPE)])
             self.logger.info(f"response: {response}")
 
             return {Output.SUCCESS: not response}

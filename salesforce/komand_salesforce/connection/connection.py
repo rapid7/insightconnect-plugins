@@ -18,9 +18,7 @@ class Connection(komand.Connection):
         password = params.get("salesforce_account_username_and_password").get("password")
         security_token = params.get("security_token").get("secretKey")
 
-        self.api = SalesforceAPI(
-            client_id, client_secret, username, password, security_token, self.logger
-        )
+        self.api = SalesforceAPI(client_id, client_secret, username, password, security_token, self.logger)
 
         self.logger.info("Connect: Connection successful")
 

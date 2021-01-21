@@ -65,13 +65,7 @@ def serialize_alternate_ids(data: Dict):
 
 def generate_link_attr(d: Dict):
     """Generates valid content API URL"""
-    d.update(
-        {
-            "link": urljoin(
-                "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/", d.get("identifier")
-            )
-        }
-    )
+    d.update({"link": urljoin("https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/", d.get("identifier"))})
 
 
 def pop_non_relevant_module_fields(data: Dict):

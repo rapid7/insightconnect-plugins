@@ -37,9 +37,7 @@ class RemoveMemberFromCards(komand.Action):
             url = server + "/cards/" + params.get("card_id") + "/idMembers/" + id_member
 
             # new Request Request
-            request = urllib2.Request(
-                url, data=json.dumps(data), headers={"Content-Type": "application/json"}
-            )
+            request = urllib2.Request(url, data=json.dumps(data), headers={"Content-Type": "application/json"})
             request.get_method = lambda: "DELETE"
 
             # Call api and response data
@@ -79,14 +77,10 @@ class RemoveMemberFromCards(komand.Action):
         )
 
         # perform the HTTP requests, if possible uses OAuth authentication
-        response = requests.request(
-            http_method, url, headers={"Content-Type": "application/json"}, auth=oauth
-        )
+        response = requests.request(http_method, url, headers={"Content-Type": "application/json"}, auth=oauth)
 
         if response.status_code == 401:
-            raise Exception(
-                "Unauthorized: %s (HTTP status: %s)" % (response.text, response.status_code)
-            )
+            raise Exception("Unauthorized: %s (HTTP status: %s)" % (response.text, response.status_code))
         if response.status_code != 200:
             raise Exception("%s (HTTP status: %s)" % (response.text, response.status_code))
 

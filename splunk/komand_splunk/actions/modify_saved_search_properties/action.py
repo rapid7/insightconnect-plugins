@@ -27,9 +27,7 @@ class ModifySavedSearchProperties(komand.Action):
         properties = params.get(Input.PROPERTIES)
 
         try:
-            param_dict = json.loads(
-                json.dumps(properties, default=lambda o: o.__dict__, indent=4, sort_keys=True)
-            )
+            param_dict = json.loads(json.dumps(properties, default=lambda o: o.__dict__, indent=4, sort_keys=True))
 
             saved_search_to_update = self.connection.client.saved_searches[saved_search_name]
             saved_search_to_update.update(**param_dict).refresh()

@@ -21,13 +21,7 @@ class Usage(komand.Action):
         if token != "" and token != None:
             return utils.query_api(request_url, token)
         else:
-            return {
-                "response": {
-                    "Errors": [
-                        {"Error": "This call requires a token to identify the requested account"}
-                    ]
-                }
-            }
+            return {"response": {"Errors": [{"Error": "This call requires a token to identify the requested account"}]}}
 
     def test(self):
         base_url = self.connection.server
@@ -36,10 +30,4 @@ class Usage(komand.Action):
         if token != "" and token != None:
             return utils.test_api(request_url, token)
         else:
-            return {
-                "response": {
-                    "Errors": [
-                        {"Error": "This call requires a token to identify the requested account"}
-                    ]
-                }
-            }
+            return {"response": {"Errors": [{"Error": "This call requires a token to identify the requested account"}]}}

@@ -36,9 +36,7 @@ class RemoveFromQuarantine(komand.Action):
                 find = self.connection.ers.get_anc_endpoint(x["id"])
                 if find["ErsAncEndpoint"]["macAddress"] == mac_address:
                     self.logger.error(results)
-                    raise Exception(
-                        "{} was not removed. See log for more details".format(mac_address)
-                    )
+                    raise Exception("{} was not removed. See log for more details".format(mac_address))
             return {"success": True}
         except KeyError:
             self.logger.error("Raw results from ANC endpoint query: " + str(results))

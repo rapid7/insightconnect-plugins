@@ -17,11 +17,7 @@ class DeleteFile(komand.Action):
 
     def run(self, params={}):
         try:
-            sensor = (
-                self.connection.carbon_black.select(Sensor)
-                .where("hostname:%s" % params.get("hostname"))
-                .first()
-            )
+            sensor = self.connection.carbon_black.select(Sensor).where("hostname:%s" % params.get("hostname")).first()
             if sensor is None:
                 self.logger.info("Failed to delete %s" % params.get("object_path"))
                 return {"success": False}
@@ -43,14 +39,12 @@ class DeleteFile(komand.Action):
             raise
         except cbapi.response.live_response_api.LiveResponseError as e:
             self.logger.error(
-                "Error occurred: error during the execution of a Live Response command on an endpoint. Details: %s"
-                % e
+                "Error occurred: error during the execution of a Live Response command on an endpoint. Details: %s" % e
             )
             raise
         except cbapi.errors.ApiError as e:
             self.logger.error(
-                "Error occurred: attempted to execute a command that is not supported by the sensor. Details: %s"
-                % e
+                "Error occurred: attempted to execute a command that is not supported by the sensor. Details: %s" % e
             )
             raise
         except cbapi.errors.ServerError as e:

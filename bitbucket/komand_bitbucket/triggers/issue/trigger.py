@@ -8,9 +8,7 @@ from komand.exceptions import PluginException
 
 from .schema import IssueInput, IssueOutput, Input, Output, Component
 
-requests.packages.urllib3.disable_warnings(
-    requests.packages.urllib3.exceptions.InsecureRequestWarning
-)
+requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
 
 # Custom imports below
@@ -46,9 +44,7 @@ class Issue(komand.Trigger):
             # kind : 'bug, enhancement, proposal, task' - defualt = bug
             (
                 'and priority = "%s"',
-                (
-                    "major" if params.get(Input.PRIORITY) == "None" else params.get(Input.PRIORITY)
-                ).lower(),
+                ("major" if params.get(Input.PRIORITY) == "None" else params.get(Input.PRIORITY)).lower(),
             ),
             # priority 'trivial, minor, major, critical, blocker' - defualt = major
             (
@@ -64,9 +60,7 @@ class Issue(komand.Trigger):
             q_params += " " + ele[0] % (ele[1])
 
         while True:
-            timestamp = datetime.datetime.strftime(
-                datetime.datetime.utcnow(), "%Y-%m-%dT%H:%M:%S"
-            ).replace(" ", "T")
+            timestamp = datetime.datetime.strftime(datetime.datetime.utcnow(), "%Y-%m-%dT%H:%M:%S").replace(" ", "T")
             if int(timestamp[15]) != 0:
                 timestamp = timestamp[:15] + str(int(timestamp[15]) - 1) + timestamp[16:]
             self.logger.info(timestamp)
@@ -113,9 +107,7 @@ class Issue(komand.Trigger):
 
                 if response.status_code >= 400:
                     error = response.json()
-                    raise PluginException(
-                        cause="Server response error", assistance=error["error"]["message"]
-                    )
+                    raise PluginException(cause="Server response error", assistance=error["error"]["message"])
 
             except requests.exceptions.RequestException as e:
                 raise PluginException(cause="Server error", data=e)

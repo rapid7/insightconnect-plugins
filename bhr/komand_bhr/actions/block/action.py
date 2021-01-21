@@ -19,9 +19,7 @@ class Block(komand.Action):
         source = params.get("source")
         why = params.get("why")
         client = self.connection.client
-        result = client.block(
-            cidr, source, why, duration=duration, autoscale=autoscale, skip_whitelist=skip_whitelist
-        )
+        result = client.block(cidr, source, why, duration=duration, autoscale=autoscale, skip_whitelist=skip_whitelist)
         return {"result": result}
 
     def test(self):

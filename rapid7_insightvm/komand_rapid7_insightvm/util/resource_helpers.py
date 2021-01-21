@@ -52,13 +52,9 @@ class V1Session:
             self.logger.info("Successfully authenticated to APIv1")
             self.session.headers.update(headers)
         elif response.status_code == 302:
-            raise PluginException(
-                cause="Authentication for APIv1 was not valid", assistance=self._SUPPORT
-            )
+            raise PluginException(cause="Authentication for APIv1 was not valid", assistance=self._SUPPORT)
         else:
-            raise PluginException(
-                cause="Failed to obtain an APIv1 session ID.", assistance=self._SUPPORT
-            )
+            raise PluginException(cause="Failed to obtain an APIv1 session ID.", assistance=self._SUPPORT)
 
     def v1_deauthenticate(self, console_url: str):
         """
@@ -67,12 +63,8 @@ class V1Session:
         """
         self.session.headers.update({"Content-Type": "text/xml"})
         session_id = self.session.headers.get("nexposeCCSessionID", "")
-        logout_request = (
-            f'<?xml version="1.0" encoding="UTF-8"?><LogoutRequest session-id="{session_id}"/>'
-        )
-        response = self.session.post(
-            f"{console_url}/api/1.1/xml", data=logout_request, verify=False
-        )
+        logout_request = f'<?xml version="1.0" encoding="UTF-8"?><LogoutRequest session-id="{session_id}"/>'
+        response = self.session.post(f"{console_url}/api/1.1/xml", data=logout_request, verify=False)
 
         if response.status_code == 200:
             xml_response = etree.fromstring(response.text)
@@ -80,9 +72,7 @@ class V1Session:
             if int(status) == 1:
                 self.logger.info("Successfully logged out of APIv1 session")
             else:
-                self.logger.info(
-                    "Session ID for logout not valid, removing APIv1 session ID headers"
-                )
+                self.logger.info("Session ID for logout not valid, removing APIv1 session ID headers")
             self.session.headers.pop("nexposeCCSessionID")
             self.session.headers.pop("Cookie")
         else:

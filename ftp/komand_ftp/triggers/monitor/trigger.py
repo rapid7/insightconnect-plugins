@@ -61,9 +61,7 @@ class Monitor(komand.Trigger):
                         self.logger.info(path + "/" + name + " size is " + str(lstatval.st_size))
                     if monitor_time:
                         tmp_array.append(int(lstatval.st_mtime))
-                        self.logger.info(
-                            path + "/" + name + " time is " + time.ctime(int(lstatval.st_mtime))
-                        )
+                        self.logger.info(path + "/" + name + " time is " + time.ctime(int(lstatval.st_mtime)))
                     if monitor_mode:
                         tmp_array.append(lstatval.st_mode)
                         self.logger.info(path + "/" + name + " mode is " + str(lstatval.st_mode))

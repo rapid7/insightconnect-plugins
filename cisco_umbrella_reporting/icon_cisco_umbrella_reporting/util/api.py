@@ -22,9 +22,7 @@ class CiscoUmbrellaReportingAPI:
         )
 
     def security_activity_report(self) -> dict:
-        return self._call_api(
-            "GET", f"organizations/{self.organization_id}/security-activity", {"limit": 500}
-        )
+        return self._call_api("GET", f"organizations/{self.organization_id}/security-activity", {"limit": 500})
 
     def _call_api(
         self,

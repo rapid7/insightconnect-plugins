@@ -20,9 +20,7 @@ class Connection(komand.Connection):
 
     def test(self):
         # Check key format
-        pattern = re.compile(
-            "^[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}$"
-        )
+        pattern = re.compile("^[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}$")
         if not pattern.match(self.key):
             raise ConnectionTestException(
                 cause="Invalid API key.",
@@ -45,8 +43,6 @@ class Connection(komand.Connection):
         elif response.status_code == 429:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.RATE_LIMIT)
         else:
-            raise ConnectionTestException(
-                preset=ConnectionTestException.Preset.UNKNOWN, data=response.text
-            )
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNKNOWN, data=response.text)
 
         return False

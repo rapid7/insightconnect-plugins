@@ -8,9 +8,7 @@ import dateutil.tz
 from .schema import IssueInput, IssueOutput
 
 
-requests.packages.urllib3.disable_warnings(
-    requests.packages.urllib3.exceptions.InsecureRequestWarning
-)
+requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
 # Custom imports below
 
 
@@ -36,9 +34,7 @@ class Issue(komand.Trigger):
         if now_year == issue_year:
             for i in range(0, len(issue_day)):
                 if now_day[i] == issue_day[i] and i == 0:
-                    if (int(issue_day[i]) + 1) > int(
-                        now_day[i]
-                    ) and issue_dict not in self.omit_list:
+                    if (int(issue_day[i]) + 1) > int(now_day[i]) and issue_dict not in self.omit_list:
                         return True
                 return False
         return False
@@ -73,9 +69,7 @@ class Issue(komand.Trigger):
         is_dst = time.daylight and time.localtime().tm_isdst > 0
         utc_offset = -(time.altzone if is_dst else time.timezone)
         timezone = time.tzname[time.daylight]
-        time_now = str(datetime.datetime.now(dateutil.tz.tzoffset(timezone, utc_offset))).replace(
-            " ", "T"
-        )
+        time_now = str(datetime.datetime.now(dateutil.tz.tzoffset(timezone, utc_offset))).replace(" ", "T")
         self.logger.info(utc_offset)
         self.logger.info(time.timezone)
         return time_now
@@ -112,25 +106,11 @@ class Issue(komand.Trigger):
             api_call = self.connection.api_prefix + "/repos/" + org + "/" + repo + "/issues"
             self.logger.info("Monitoring issues for repository %s in organization %s", repo, org)
         elif assign and repo:
-            api_call = (
-                self.connection.api_prefix
-                + "/repos/"
-                + self.connection.username
-                + "/"
-                + repo
-                + "/issues"
-            )
+            api_call = self.connection.api_prefix + "/repos/" + self.connection.username + "/" + repo + "/issues"
             data["assignee"] = assign
             self.logger.info("Monitoring issues for assignee %s on repository %s", assign, repo)
         else:
-            api_call = (
-                self.connection.api_prefix
-                + "/repos/"
-                + self.connection.username
-                + "/"
-                + repo
-                + "/issues"
-            )
+            api_call = self.connection.api_prefix + "/repos/" + self.connection.username + "/" + repo + "/issues"
             self.logger.info("Monitoring issues for repository %s", repo)
 
         while True:

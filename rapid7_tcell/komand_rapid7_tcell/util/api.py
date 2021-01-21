@@ -38,9 +38,7 @@ class TCell:
         try:
             response = self.call_api("POST", "apps/" + app_id + "/tags", json={"tags": tags})
         except Exception as e:
-            self.logger.error(
-                "Failed to change tags to {} for app {}: {}".format(tags, app_id, str(e))
-            )
+            self.logger.error("Failed to change tags to {} for app {}: {}".format(tags, app_id, str(e)))
             return False
         return response.get("message") == "Request successful"
 
@@ -82,9 +80,7 @@ class TCell:
     def list_inline_scripts(self, app_id, from_=None, to=None, per_page=10, page=1):
         params = {"from": from_, "to": to, "per_page": per_page, "page": page}
         params = clean(params)
-        return self.call_api(
-            "GET", "apps/" + app_id + "/inline_scripts", params=params, allow_404=True
-        )
+        return self.call_api("GET", "apps/" + app_id + "/inline_scripts", params=params, allow_404=True)
 
     def get_package_details(self, app_id, package_id):
         return self.call_api("GET", "apps/" + app_id + "/packages/" + str(package_id))
@@ -109,9 +105,7 @@ class TCell:
         try:
             response = self.call_api("POST", "apps/" + app_id + "/configs/revert/" + str(id_))
         except Exception as e:
-            self.logger.error(
-                "Failed to revert config to {} for app {}: {}".format(id_, app_id, str(e))
-            )
+            self.logger.error("Failed to revert config to {} for app {}: {}".format(id_, app_id, str(e)))
             return False
         return response.get("result").get("message") == "Successfully reverted"
 
@@ -119,22 +113,16 @@ class TCell:
         return self.call_api("POST", "apps/" + app_id + "/configs", json=config)
 
     def add_ips_to_blacklist(self, app_id, ips):
-        return self.call_api(
-            "POST", "apps/" + app_id + "/configs/blockedips/blacklistedips", json={"ips": ips}
-        )
+        return self.call_api("POST", "apps/" + app_id + "/configs/blockedips/blacklistedips", json={"ips": ips})
 
     def remove_ips_from_blacklist(self, app_id, ips):
-        return self.call_api(
-            "DELETE", "apps/" + app_id + "/configs/blockedips/blacklistedips", json={"ips": ips}
-        )
+        return self.call_api("DELETE", "apps/" + app_id + "/configs/blockedips/blacklistedips", json={"ips": ips})
 
     def get_events(self, app_id, source, filter_=None, from_=None):
         params = {"filter": filter_, "from": from_}
         params = clean(params)
 
-        return self.call_api(
-            "GET", "apps/" + app_id + "/sources/" + source + "/table", params=params, allow_404=True
-        )
+        return self.call_api("GET", "apps/" + app_id + "/sources/" + source + "/table", params=params, allow_404=True)
 
     def create_ip_group(self, group):
         return self.call_api("POST", "ipgroups", json=group)
@@ -151,7 +139,12 @@ class TCell:
         kwargs = clean(kwargs)
 
         resp = request(
-            method, api_url, headers={"Authorization": "Bearer " + self.api_key,}, **kwargs
+            method,
+            api_url,
+            headers={
+                "Authorization": "Bearer " + self.api_key,
+            },
+            **kwargs,
         )
 
         try:

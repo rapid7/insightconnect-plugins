@@ -18,15 +18,11 @@ class FindIssues(komand.Action):
         """Search for issues"""
         max_results = params.get(Input.MAX)
         get_attachments = params.get(Input.GET_ATTACHMENTS, False)
-        issues = self.connection.client.search_issues(
-            jql_str=params[Input.JQL], maxResults=max_results
-        )
+        issues = self.connection.client.search_issues(jql_str=params[Input.JQL], maxResults=max_results)
 
         results = list(
             map(
-                lambda issue: normalize_issue(
-                    issue, get_attachments=get_attachments, logger=self.logger
-                ),
+                lambda issue: normalize_issue(issue, get_attachments=get_attachments, logger=self.logger),
                 issues,
             )
         )

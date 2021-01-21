@@ -36,9 +36,7 @@ class DownloadReport(komand.Action):
 
             file_format = "FORMAT_{}".format(params["file_format"])
 
-            scan.download(
-                scan_file, chapter=chapter, format=getattr(ScanExportRequest, file_format)
-            )
+            scan.download(scan_file, chapter=chapter, format=getattr(ScanExportRequest, file_format))
 
             with open(scan_file, "rb") as r:
                 data = r.read()

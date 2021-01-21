@@ -25,9 +25,7 @@ class SuspendUser(komand.Action):
             return {Output.SUCCESS: False}
 
         """ Deactivate the user by id """
-        url = requests.compat.urljoin(
-            self.connection.okta_url, f"/api/v1/users/{user_id}/lifecycle/suspend"
-        )
+        url = requests.compat.urljoin(self.connection.okta_url, f"/api/v1/users/{user_id}/lifecycle/suspend")
         response = self.connection.session.post(url)
 
         if response.status_code == 404:

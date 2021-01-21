@@ -48,9 +48,7 @@ class Knock(komand.Action):
             s.shutdown(1)
             s.close()
         except error:
-            self.logger.info(
-                "TCP Knock: No response from server (this does not mean a failed knock)"
-            )
+            self.logger.info("TCP Knock: No response from server (this does not mean a failed knock)")
 
     def udp_knock(self, port):
         self.logger.info("UDP Knock: Using UDP for packet type")
@@ -59,9 +57,7 @@ class Knock(komand.Action):
             s = socket(AF_INET, SOCK_DGRAM)
             s.sendto(bytes("1", "utf-8"), (self.__IP_HOST, port))
         except error:
-            self.logger.info(
-                "UDP Knock: No response from server (this does not mean a failed knock)"
-            )
+            self.logger.info("UDP Knock: No response from server (this does not mean a failed knock)")
 
     def test(self):
         """TODO: Test action"""

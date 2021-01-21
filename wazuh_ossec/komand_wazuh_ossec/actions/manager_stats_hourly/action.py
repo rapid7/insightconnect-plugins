@@ -26,9 +26,7 @@ class ManagerStatsHourly(komand.Action):
             stats = resp.json()["data"]["averages"]
             interactions = resp.json()["data"]["interactions"]
         except requests.exceptions.HTTPError:
-            self.logger.error(
-                "Requests: HTTPError: status code %s for %s" % (str(resp.status_code), url)
-            )
+            self.logger.error("Requests: HTTPError: status code %s for %s" % (str(resp.status_code), url))
             raise Exception("Requests: Connect: Failed response from server {}".format(url))
         stats = {"averages": stats, "interactions": interactions, "error": resp.json()["error"]}
         self.logger.info("Normalized Response: %s", stats)
@@ -42,9 +40,7 @@ class ManagerStatsHourly(komand.Action):
             r = resp.json()
             self.logger.info("Raw Response: %s", r)
         except requests.exceptions.HTTPError:
-            self.logger.error(
-                "Requests: HTTPError: status code %s for %s" % (str(resp.status_code), url)
-            )
+            self.logger.error("Requests: HTTPError: status code %s for %s" % (str(resp.status_code), url))
             raise Exception("Requests: Connect: Failed response from server {}".format(url))
 
         if r["error"] == 0:

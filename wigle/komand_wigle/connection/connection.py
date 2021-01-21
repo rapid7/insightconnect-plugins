@@ -15,9 +15,7 @@ class Connection(komand.Connection):
         api_name = params.get("name")
         api_token = params.get("token").get("secretKey")
 
-        self.call_api = partial(
-            call_api_and_validate_response, logger=self.logger, auth=(api_name, api_token)
-        )
+        self.call_api = partial(call_api_and_validate_response, logger=self.logger, auth=(api_name, api_token))
 
         self.call_api("get", "profile/user", "Provided credentials are invalid")
 

@@ -13,6 +13,4 @@ class CreateProject(komand.Action):
         )
 
     def run(self, params={}):
-        return {
-            Output.PROJECT: project.Project.create(self.connection.config, params.get(Input.NAME))
-        }
+        return {Output.PROJECT: project.Project.create(self.connection.config, params.get(Input.NAME))}

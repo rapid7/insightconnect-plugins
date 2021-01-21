@@ -32,22 +32,18 @@ class Projects(komand.Action):
 
         maniphest = ManiphesEdit(self.connection.phab, action=self, objectIdentifier=id)
         try:
-            id = maniphest.edit([{"type": "subscribers.add", "value": foundedProjects},])
+            id = maniphest.edit(
+                [
+                    {"type": "subscribers.add", "value": foundedProjects},
+                ]
+            )
         except Exception as e:
             self.logger.error("Projects: Run: Problem with request".format(e.errno, e.strerror))
             raise e
 
         if id is None:
-            self.logger.error(
-                "Projects: Run: Problem with adding projects {0} to subscribers".format(
-                    foundedProjects
-                )
-            )
-            raise Exception(
-                "Projects: Run: Problem with adding projects {0} to subscribers".format(
-                    foundedProjects
-                )
-            )
+            self.logger.error("Projects: Run: Problem with adding projects {0} to subscribers".format(foundedProjects))
+            raise Exception("Projects: Run: Problem with adding projects {0} to subscribers".format(foundedProjects))
 
         return {"message": "Projects added"}
 

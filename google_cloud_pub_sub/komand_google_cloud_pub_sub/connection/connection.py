@@ -21,11 +21,7 @@ class Connection(komand.Connection):
         scopes = ["https://www.googleapis.com/auth/cloud-platform"]
 
         if admin_user:
-            self.logger.info(
-                "Connecting to {email} as {admin}".format(
-                    email=auth["client_email"], admin=admin_user
-                )
-            )
+            self.logger.info("Connecting to {email} as {admin}".format(email=auth["client_email"], admin=admin_user))
         else:
             self.logger.info("Connection to {} as service account".format(auth["client_email"]))
 

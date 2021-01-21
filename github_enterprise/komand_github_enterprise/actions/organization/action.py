@@ -44,9 +44,7 @@ class Organization(komand.Action):
     def test(self):
         try:
             api_call = self.connection.api_prefix + "/user"
-            response = requests.get(
-                api_call, auth=(self.connection.username, self.connection.secret), verify=False
-            )
+            response = requests.get(api_call, auth=(self.connection.username, self.connection.secret), verify=False)
             if response.status_code == 200:
                 return {"status": "Success"}
         except requests.exceptions.RequestException as e:

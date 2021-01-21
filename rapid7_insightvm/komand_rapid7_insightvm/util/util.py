@@ -19,9 +19,7 @@ def adhoc_sql_report(connection, logger, report_payload: dict):
     endpoint = endpoints.Report.create(connection.console_url)
 
     logger.info(f"Creating report configuration with name: {report_payload['name']}")
-    response = resource_helper.resource_request(
-        endpoint=endpoint, method="post", payload=report_payload
-    )
+    response = resource_helper.resource_request(endpoint=endpoint, method="post", payload=report_payload)
     report_id = response.get("id")
 
     # Generate Report
@@ -39,8 +37,7 @@ def adhoc_sql_report(connection, logger, report_payload: dict):
     # Wait for report completion
     if report_instance_id is None:
         raise PluginException(
-            cause="Error: Failed to generate report, report instance ID was not returned with "
-            "generate request.",
+            cause="Error: Failed to generate report, report instance ID was not returned with " "generate request.",
             assistance="Review the report configuration and InsightVM console logs; then try again.",
         )
 
@@ -50,18 +47,13 @@ def adhoc_sql_report(connection, logger, report_payload: dict):
         time.sleep(30)
         report_status_response = resource_helper.resource_request(endpoint=endpoint)
         logger.info(
-            f"Report ID {report_id}, instance ID {report_instance_id} status: "
-            f"{report_status_response['status']}"
+            f"Report ID {report_id}, instance ID {report_instance_id} status: " f"{report_status_response['status']}"
         )
 
-        if ("status" in report_status_response) and (
-            report_status_response["status"] in ("aborted", "failed")
-        ):
+        if ("status" in report_status_response) and (report_status_response["status"] in ("aborted", "failed")):
             raise PluginException(
-                cause=f"Error: Report failed to generated with status "
-                f"{report_status_response['status']}.",
-                assistance="Review the report configuration and InsightVM logs prior "
-                "to trying again.",
+                cause=f"Error: Report failed to generated with status " f"{report_status_response['status']}.",
+                assistance="Review the report configuration and InsightVM logs prior " "to trying again.",
             )
 
     # Download report

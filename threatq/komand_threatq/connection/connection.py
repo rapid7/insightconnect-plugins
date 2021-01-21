@@ -27,7 +27,10 @@ class Connection(komand.Connection):
             threatq_host=self.host,
             auth={
                 "clientid": self.clientid,
-                "auth": {"email": self.email, "password": self.password,},
+                "auth": {
+                    "email": self.email,
+                    "password": self.password,
+                },
             },
             proxy=self.proxy,
         )
@@ -48,9 +51,7 @@ class Connection(komand.Connection):
         }
         auth_headers = {"content-type": "application/json"}
 
-        auth_response = requests.post(
-            auth_url, data=json.dumps(auth_body), headers=auth_headers, verify=False
-        )
+        auth_response = requests.post(auth_url, data=json.dumps(auth_body), headers=auth_headers, verify=False)
         auth_response_dict = json.loads(auth_response.text)
         auth_token = auth_response_dict["access_token"]
 

@@ -24,7 +24,16 @@ class CreateDocument(komand.Action):
 
         self.logger.info(f"Document created with ID: {document_id}")
 
-        doc_request = [{"insertText": {"location": {"index": 1,}, "text": doc_body}}]
+        doc_request = [
+            {
+                "insertText": {
+                    "location": {
+                        "index": 1,
+                    },
+                    "text": doc_body,
+                }
+            }
+        ]
 
         doc_result_insert_text = (
             self.connection.doc_service.documents()

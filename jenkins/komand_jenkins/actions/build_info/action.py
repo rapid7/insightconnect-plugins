@@ -36,8 +36,7 @@ class BuildInfo(komand.Action):
             self.logger.error(e)
             self.logger.error("Raw build_info: " + json.dumps(output))
             raise Exception(
-                "An expected value in the build info return was not found."
-                " Check the error log for more information"
+                "An expected value in the build info return was not found." " Check the error log for more information"
             )
 
         return {Output.BUILD_INFO: build_info}

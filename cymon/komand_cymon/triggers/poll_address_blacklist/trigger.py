@@ -34,9 +34,7 @@ class PollAddressBlacklist(komand.Trigger):
                 resp = komand.helper.open_url(url, Authorization=token)
                 dic = json.loads(resp.read())
             except:
-                self.logger.error(
-                    "Address Blacklist request failed..trying again in %s seconds", freq
-                )
+                self.logger.error("Address Blacklist request failed..trying again in %s seconds", freq)
                 time.sleep(freq)
                 continue
 

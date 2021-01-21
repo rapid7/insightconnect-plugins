@@ -23,8 +23,7 @@ class CheckScanDone(komand.Trigger):
                 stat = self.connection.scanner.get_scan_status(scan_id)
             except:
                 self.logger.error(
-                    "Error trying to get scan status: "
-                    + " | ".join([str(sys.exc_info()[0]), str(sys.exc_info()[1])])
+                    "Error trying to get scan status: " + " | ".join([str(sys.exc_info()[0]), str(sys.exc_info()[1])])
                 )
                 return
             if stat == "Done":

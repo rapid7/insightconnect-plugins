@@ -88,9 +88,7 @@ class CheckIfAddressInGroup(komand.Action):
         current_offset = 0
 
         while True:
-            response = self.connection.get_groups(
-                details_level=DetailsLevel.full, limit=limit, offset=current_offset
-            )
+            response = self.connection.get_groups(details_level=DetailsLevel.full, limit=limit, offset=current_offset)
 
             objects = response["objects"]
             if not objects:

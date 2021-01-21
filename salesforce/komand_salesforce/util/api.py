@@ -97,9 +97,7 @@ class SalesforceAPI:
 
     def _get_version(self):
         versions = self._call_api("GET", "")
-        max_version = next(
-            v for v in versions if float(v["version"]) == max(float(v["version"]) for v in versions)
-        )
+        max_version = next(v for v in versions if float(v["version"]) == max(float(v["version"]) for v in versions))
         self.instance_url += "v" + max_version["version"] + "/"
 
     def _call_api(self, method, url, data=None, json=None, params=None):
@@ -111,7 +109,12 @@ class SalesforceAPI:
         self.logger.info("SalesforceAPI: Trying to reach endpoint: " + api_url)
 
         response = request(
-            method, api_url, headers={"Authorization": "Bearer " + self.access_token,}, **kwargs
+            method,
+            api_url,
+            headers={
+                "Authorization": "Bearer " + self.access_token,
+            },
+            **kwargs,
         )
 
         try:

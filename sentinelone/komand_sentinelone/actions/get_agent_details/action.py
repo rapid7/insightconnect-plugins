@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetAgentDetailsInput, GetAgentDetailsOutput, Input, Output, Component
 
 # Custom imports below
 
 
-class GetAgentDetails(komand.Action):
+class GetAgentDetails(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_agent_details",
@@ -15,7 +15,10 @@ class GetAgentDetails(komand.Action):
 
     def run(self, params={}):
         agent = params.get(Input.AGENT)
-        output = self.connection.client.search_agents(agent)
+        case_sensitive = params.get(Input.CASE_SENSITIVE)
+        output = self.connection.client.search_agents(
+            agent, case_sensitive=case_sensitive, api_version=self.connection.api_version
+        )
 
         if len(output) > 1:
             self.logger.info(

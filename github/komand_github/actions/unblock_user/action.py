@@ -24,9 +24,7 @@ class UnblockUser(komand.Action):
             "Content-Type": "application/json",
         }
 
-        response = requests.delete(
-            url, headers=headers, auth=(self.connection.username, self.connection.secret)
-        )
+        response = requests.delete(url, headers=headers, auth=(self.connection.username, self.connection.secret))
 
         try:
             data = response.json()

@@ -66,9 +66,7 @@ class SentryConnection:
         try:
             response.raise_for_status()
         except Exception as e:
-            self.logger.error(
-                "Requests: Exception: Failed to call {}: {}".format(api_url, response.status_code)
-            )
+            self.logger.error("Requests: Exception: Failed to call {}: {}".format(api_url, response.status_code))
             raise e
 
         return response

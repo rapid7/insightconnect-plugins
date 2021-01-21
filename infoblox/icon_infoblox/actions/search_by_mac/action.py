@@ -22,10 +22,7 @@ class SearchByMac(komand.Action):
         return {
             "result": [
                 {
-                    "_ref": (
-                        "fixedaddress/ZG5zLmZpeGVkX2FkZHJlc3MkMTAuMTAuMTAuMi4wLi4:"
-                        "10.10.10.2/default"
-                    ),
+                    "_ref": ("fixedaddress/ZG5zLmZpeGVkX2FkZHJlc3MkMTAuMTAuMTAuMi4wLi4:" "10.10.10.2/default"),
                     "ipv4addr": "10.10.10.2",
                     "mac": "aa:bb:cc:11:22:33",
                     "network_view": "default",

@@ -22,8 +22,6 @@ class UpdateTagSearchCriteria(komand.Action):
         endpoint = endpoints.Tag.tag_search_criteria(self.connection.console_url, tag_id)
         self.logger.info("Using %s ..." % endpoint)
 
-        response = resource_helper.resource_request(
-            endpoint=endpoint, method="put", payload=search_criteria
-        )
+        response = resource_helper.resource_request(endpoint=endpoint, method="put", payload=search_criteria)
 
         return response

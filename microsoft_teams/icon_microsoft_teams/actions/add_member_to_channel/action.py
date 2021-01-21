@@ -21,12 +21,8 @@ class AddMemberToChannel(komand.Action):
         )
 
     def run(self, params={}):
-        group_id = get_group_id_from_name(
-            self.logger, self.connection, params.get(Input.GROUP_NAME)
-        )
-        channels = get_channels_from_microsoft(
-            self.logger, self.connection, group_id, params.get(Input.CHANNEL_NAME)
-        )
+        group_id = get_group_id_from_name(self.logger, self.connection, params.get(Input.GROUP_NAME))
+        channels = get_channels_from_microsoft(self.logger, self.connection, group_id, params.get(Input.CHANNEL_NAME))
         user_id = get_user_info(self.logger, self.connection, params.get(Input.MEMBER_LOGIN))
         try:
             channel_id = channels[0].get("id")
@@ -47,8 +43,4 @@ class AddMemberToChannel(komand.Action):
                 assistance="If the issue persists please contact support.",
                 data=e,
             )
-        return {
-            Output.SUCCESS: add_user_to_channel(
-                self.logger, self.connection, group_id, channel_id, user_id
-            )
-        }
+        return {Output.SUCCESS: add_user_to_channel(self.logger, self.connection, group_id, channel_id, user_id)}

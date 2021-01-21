@@ -36,9 +36,7 @@ class Subscription(komand.Trigger):
             except Exception as e:
                 self.logger.error("Message string: {}".format(message_string))
                 self.logger.error("Message list: {}".format(self.message_list))
-                raise Exception(
-                    "An unknown error occurred. Dumping buffer to log. Error: {}".format(e)
-                )
+                raise Exception("An unknown error occurred. Dumping buffer to log. Error: {}".format(e))
 
         subscription = params.get("subscription")
         project_id = self.connection.project

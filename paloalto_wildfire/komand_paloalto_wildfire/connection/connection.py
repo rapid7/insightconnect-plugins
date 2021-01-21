@@ -21,6 +21,4 @@ class Connection(komand.Connection):
         else:
             proxy = {}
 
-        self.client = pyldfire.WildFire(
-            self.api_key, host=self.host, verify=params.get("verify"), proxies=proxy
-        )
+        self.client = pyldfire.WildFire(self.api_key, host=self.host, verify=params.get("verify"), proxies=proxy)

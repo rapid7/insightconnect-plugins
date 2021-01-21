@@ -22,9 +22,9 @@ class ListProcesses(komand.Action):
 
         try:
             # TODO: Verify this is returning useful data
-            results = self.connection.carbon_black.get_object(
-                "/api/v1/process", query_parameters=query_params
-            )["results"]
+            results = self.connection.carbon_black.get_object("/api/v1/process", query_parameters=query_params)[
+                "results"
+            ]
         except Exception as ex:
             self.logger.error("Failed to list process: %s", ex)
             raise ex

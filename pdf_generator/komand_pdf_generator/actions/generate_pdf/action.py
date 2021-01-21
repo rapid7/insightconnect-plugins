@@ -30,9 +30,7 @@ class GeneratePdf(komand.Action):
         text = "\n".join(
             wrapped
             for line in text.splitlines()
-            for wrapped in wrap(
-                line, width=70, expand_tabs=False, replace_whitespace=False, drop_whitespace=False
-            )
+            for wrapped in wrap(line, width=70, expand_tabs=False, replace_whitespace=False, drop_whitespace=False)
         )
         text = escape(text)
         html_content = html_template.format(text)

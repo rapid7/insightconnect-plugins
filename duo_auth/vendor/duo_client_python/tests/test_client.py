@@ -6,7 +6,14 @@ import duo_client.client
 from . import util
 import base64
 
-JSON_BODY = {"data": "abc123", "alpha": ["a", "b", "c", "d"], "info": {"test": 1, "another": 2,}}
+JSON_BODY = {
+    "data": "abc123",
+    "alpha": ["a", "b", "c", "d"],
+    "info": {
+        "test": 1,
+        "another": 2,
+    },
+}
 JSON_STRING = '{"alpha":["a","b","c","d"],"data":"abc123","info":{"another":2,"test":1}}'
 
 
@@ -18,17 +25,20 @@ class TestQueryParameters(unittest.TestCase):
     def assert_canon_params(self, params, expected):
         params = duo_client.client.normalize_params(params)
         self.assertEqual(
-            duo_client.client.canon_params(params), expected,
+            duo_client.client.canon_params(params),
+            expected,
         )
 
     def test_zero_params(self):
         self.assert_canon_params(
-            {}, "",
+            {},
+            "",
         )
 
     def test_one_param(self):
         self.assert_canon_params(
-            {"realname": ["First Last"]}, "realname=First%20Last",
+            {"realname": ["First Last"]},
+            "realname=First%20Last",
         )
 
     def test_two_params(self):
@@ -86,7 +96,11 @@ class TestQueryParameters(unittest.TestCase):
 
     def test_sort_order_with_common_prefix(self):
         self.assert_canon_params(
-            {"foo_bar": "2", "foo": "1",}, "foo=1&foo_bar=2",
+            {
+                "foo_bar": "2",
+                "foo": "1",
+            },
+            "foo=1&foo_bar=2",
         )
 
 
@@ -171,12 +185,7 @@ class TestCanonicalize(unittest.TestCase):
 
     def test_v4_with_json(self):
         hashed_body = hashlib.sha512(JSON_STRING.encode("utf-8")).hexdigest()
-        expected = (
-            "Tue, 04 Jul 2017 14:12:00\n"
-            "POST\n"
-            "foo.bar52.com\n"
-            "/Foo/BaR2/qux\n\n" + hashed_body
-        )
+        expected = "Tue, 04 Jul 2017 14:12:00\n" "POST\n" "foo.bar52.com\n" "/Foo/BaR2/qux\n\n" + hashed_body
         params = duo_client.client.Client.canon_json(JSON_BODY)
         actual = duo_client.client.canonicalize(
             "POST",
@@ -271,10 +280,7 @@ class TestRequest(unittest.TestCase):
 
     # usful args for testing
     args_in = {"foo": ["bar"], "baz": ["qux", "quux=quuux", "foobar=foobar&barbaz=barbaz"]}
-    args_out = dict(
-        (key, [six.moves.urllib.parse.quote(v) for v in val])
-        for (key, val) in list(args_in.items())
-    )
+    args_out = dict((key, [six.moves.urllib.parse.quote(v) for v in val]) for (key, val) in list(args_in.items()))
 
     def setUp(self):
         self.client = duo_client.client.Client("test_ikey", "test_akey", "example.com")

@@ -48,9 +48,7 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
             for user_id in user_ids:
                 url = f"https://api.pagerduty.com/users/{user_id}"
                 tasks.append(
-                    asyncio.ensure_future(
-                        connection.async_request(session=async_session, url=url, method="get")
-                    )
+                    asyncio.ensure_future(connection.async_request(session=async_session, url=url, method="get"))
                 )
                 user_objects = await asyncio.gather(*tasks)
                 # extract "users" value from object

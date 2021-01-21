@@ -36,18 +36,14 @@ class ConfluenceTests(unittest.TestCase):
 
         # result = html.get_element_by_id("Content").__str__()
 
-        self.assertEqual(
-            result, SAMPLE_XML, "Got '%s' while expecting '%s'." % (result, SAMPLE_XML)
-        )
+        self.assertEqual(result, SAMPLE_XML, "Got '%s' while expecting '%s'." % (result, SAMPLE_XML))
 
     def test_storePageContent(self):
         self.conf.storePageContent(page="test", space="ds", content=SAMPLE_WIKI)
         result = self.conf.getPage(page="test", space="ds")["content"]
         print(":".join("{0:x}".format(ord(c)) for c in result))
         print(":".join("{0:x}".format(ord(c)) for c in SAMPLE_XML))
-        self.assertEqual(
-            result, SAMPLE_WIKI, "Got '%s' while expecting '%s'." % (result, SAMPLE_XML)
-        )
+        self.assertEqual(result, SAMPLE_WIKI, "Got '%s' while expecting '%s'." % (result, SAMPLE_XML))
 
 
 class Confluence5Tests(ConfluenceTests):

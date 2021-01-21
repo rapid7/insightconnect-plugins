@@ -32,20 +32,14 @@ class PollDocuments(komand.Trigger):
 
         while True:
             try:
-                results = helpers.get_search(
-                    self.logger, host, index, type_, query, username, password, params
-                )
+                results = helpers.get_search(self.logger, host, index, type_, query, username, password, params)
             except:
-                self.logger.error(
-                    "Poll Documents: poll failed... trying again in %i seconds" % frequency
-                )
+                self.logger.error("Poll Documents: poll failed... trying again in %i seconds" % frequency)
                 time.sleep(frequency)
                 continue
 
             if not results or "hits" not in results:
-                self.logger.error(
-                    "Poll Documents: poll failed... trying again in %i seconds" % frequency
-                )
+                self.logger.error("Poll Documents: poll failed... trying again in %i seconds" % frequency)
                 time.sleep(frequency)
                 continue
 

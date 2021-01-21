@@ -30,28 +30,19 @@ class CreateSchedule(komand.Action):
         month30s = [4, 6, 9, 11]
         if month in month31s:
             if day > 31 or day < 0:
-                raise ValueError(
-                    "Day is invalid, should be between 0 and 31 for month " + str(month)
-                )
+                raise ValueError("Day is invalid, should be between 0 and 31 for month " + str(month))
         elif month in month30s:
             if day > 30 or day < 0:
-                raise ValueError(
-                    "Day is invalid, should be between 0 and 30 for month " + str(month)
-                )
+                raise ValueError("Day is invalid, should be between 0 and 30 for month " + str(month))
         else:
             if self.isLeapYear(year):
                 if day > 29 or day < 0:
                     raise ValueError(
-                        "Day is invalid, should be between 0 and 29 for month "
-                        + str(month)
-                        + " and year "
-                        + year
+                        "Day is invalid, should be between 0 and 29 for month " + str(month) + " and year " + year
                     )
             else:
                 if day > 28 or day < 0:
-                    raise ValueError(
-                        "Day is invalid, should be between 0 and 28 for month " + str(month)
-                    )
+                    raise ValueError("Day is invalid, should be between 0 and 28 for month " + str(month))
         if year < 0:
             raise ValueError("Year is invalid, sorry, we dont deal with BC")
         return
@@ -147,14 +138,12 @@ class CreateSchedule(komand.Action):
                 )
         except:
             self.logger.error(
-                "Error creating schedule: "
-                + " | ".join([str(sys.exc_info()[0]), str(sys.exc_info()[1])])
+                "Error creating schedule: " + " | ".join([str(sys.exc_info()[0]), str(sys.exc_info()[1])])
             )
             return {
                 "schedule_id": "",
                 "success": False,
-                "message": "Error creating schedule: "
-                + " | ".join([str(sys.exc_info()[0]), str(sys.exc_info()[1])]),
+                "message": "Error creating schedule: " + " | ".join([str(sys.exc_info()[0]), str(sys.exc_info()[1])]),
             }
 
         return {

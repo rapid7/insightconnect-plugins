@@ -25,9 +25,7 @@ class Connection(komand.Connection):
         scheme = "https://" if params["ssl_verify"] else "http://"
         self._base_url = scheme + base_uri
 
-        self.api = Cherwell(
-            self._base_url, self.logger, username, password, client_id, authentication_mode
-        )
+        self.api = Cherwell(self._base_url, self.logger, username, password, client_id, authentication_mode)
 
     def test(self):
         try:

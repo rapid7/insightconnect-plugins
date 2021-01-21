@@ -26,9 +26,7 @@ class ShowAccessRulebase(komand.Action):
             "use-object-dictionary": True,
         }
 
-        result = requests.post(
-            url, headers=headers, json=payload, verify=self.connection.ssl_verify
-        )
+        result = requests.post(url, headers=headers, json=payload, verify=self.connection.ssl_verify)
 
         try:
             result.raise_for_status()

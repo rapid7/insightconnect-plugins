@@ -41,7 +41,12 @@ class UploadFile(komand.Action):
 
         newfile = (
             self.connection.service.files()
-            .create(body=file_metadata, media_body=media, supportsTeamDrives=True, fields="id",)
+            .create(
+                body=file_metadata,
+                media_body=media,
+                supportsTeamDrives=True,
+                fields="id",
+            )
             .execute()
             .get("id")
         )

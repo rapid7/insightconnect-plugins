@@ -35,9 +35,7 @@ class RunSynchronously(komand.Action):
 
         # Check status code of executed workflow
         if r.status_code != requests.codes.ok:
-            raise Exception(
-                "Failure to create job, bad request code: " + str(r.status_code) + str(r.text)
-            )
+            raise Exception("Failure to create job, bad request code: " + str(r.status_code) + str(r.text))
 
         job = r.json()
 

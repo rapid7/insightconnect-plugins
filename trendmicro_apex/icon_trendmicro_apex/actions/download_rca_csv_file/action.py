@@ -21,9 +21,7 @@ class DownloadRcaCsvFile(komand.Action):
                 "/WebApp/OSCE_iES/OsceIes/ApiEntry",
                 {
                     "Url": "V1/Task/ShowFootPrintCsv",
-                    "TaskType": util.TaskType.value_of(
-                        params.get(Input.TASK_TYPE, util.DEFAULT_TASK_TYPE)
-                    ),
+                    "TaskType": util.TaskType.value_of(params.get(Input.TASK_TYPE, util.DEFAULT_TASK_TYPE)),
                     "Payload": {
                         "agentGuid": params.get(Input.AGENT_GUID),
                         "scanSummaryGuid": params.get(Input.SCAN_SUMMARY_GUID),

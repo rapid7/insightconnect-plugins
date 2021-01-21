@@ -32,8 +32,6 @@ class GetJobDetails(komand.Action):
             self.logger.error(e)
             raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
         except Exception as e:
-            raise ConnectionTestException(
-                cause="Unable to retrieve job details.", assistance="{}.".format(e)
-            )
+            raise ConnectionTestException(cause="Unable to retrieve job details.", assistance="{}.".format(e))
 
         return {"job": job}

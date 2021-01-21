@@ -20,9 +20,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                     "type": "service_account",
                     "project_id": params.get(Input.PROJECT_ID),
                     "private_key_id": params.get(Input.PRIVATE_KEY_ID),
-                    "private_key": params.get(Input.PRIVATE_KEY)
-                    .get("privateKey")
-                    .replace("\\n", "\n", -1),
+                    "private_key": params.get(Input.PRIVATE_KEY).get("privateKey").replace("\\n", "\n", -1),
                     "client_email": params.get(Input.CLIENT_EMAIL),
                     "client_id": params.get(Input.CLIENT_ID),
                     "auth_uri": params.get(Input.AUTH_URI),

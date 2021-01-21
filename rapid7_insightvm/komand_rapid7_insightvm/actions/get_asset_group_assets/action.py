@@ -18,9 +18,7 @@ class GetAssetGroupAssets(komand.Action):
     def run(self, params={}):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         asset_group_id = params.get(Input.ID)
-        endpoint = endpoints.AssetGroup.asset_group_assets(
-            self.connection.console_url, asset_group_id
-        )
+        endpoint = endpoints.AssetGroup.asset_group_assets(self.connection.console_url, asset_group_id)
         self.logger.info("Using %s ..." % endpoint)
         asset_group_assets = resource_helper.resource_request(endpoint)
 

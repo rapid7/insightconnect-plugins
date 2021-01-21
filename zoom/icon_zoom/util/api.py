@@ -20,9 +20,7 @@ class ZoomAPI:
     def delete_user(self, user_id, params):
         return self._call_api("DELETE", f"{self.url}/users/{user_id}", params=params)
 
-    def get_user_activity_events(
-        self, start_date=None, end_date=None, page_size=None, next_page_token=None
-    ):
+    def get_user_activity_events(self, start_date=None, end_date=None, page_size=None, next_page_token=None):
         activities_url = f"{self.url}/report/activities"
 
         events = []
@@ -54,8 +52,7 @@ class ZoomAPI:
                 resp = json.loads(response.text)
                 raise PluginException(
                     cause=resp.get("message"),
-                    assistance="Verify your JWT App API key and Secret configured in your "
-                    "connection is correct.",
+                    assistance="Verify your JWT App API key and Secret configured in your " "connection is correct.",
                 )
             if response.status_code == 404:
                 resp = json.loads(response.text)
@@ -64,8 +61,7 @@ class ZoomAPI:
                 else:
                     raise PluginException(
                         cause=resp.get("message"),
-                        assistance=f"The object at {url} does not exist. Verify the ID and fields "
-                        f"used are valid.",
+                        assistance=f"The object at {url} does not exist. Verify the ID and fields " f"used are valid.",
                     )
             # Success; no content
             if response.status_code == 204:

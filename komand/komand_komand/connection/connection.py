@@ -22,9 +22,7 @@ class Connection(komand.Connection):
         url = self.credentials.base_url + "/v2/jobs/" + uid
         r = self.session().get(url)
         if r.status_code != requests.codes.ok:
-            self.logger.error(
-                "Failure to get job bad status code : " + str(r.status_code) + str(r.text)
-            )
+            self.logger.error("Failure to get job bad status code : " + str(r.status_code) + str(r.text))
             return None
 
         job = r.json()

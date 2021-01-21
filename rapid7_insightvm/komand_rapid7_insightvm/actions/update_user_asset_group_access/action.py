@@ -17,14 +17,10 @@ class UpdateUserAssetGroupAccess(komand.Action):
 
     def run(self, params={}):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
-        endpoint = endpoints.User.user_asset_groups(
-            self.connection.console_url, params.get("user_id")
-        )
+        endpoint = endpoints.User.user_asset_groups(self.connection.console_url, params.get("user_id"))
         payload = params.get("asset_group_ids")
         self.logger.info("Using %s ..." % endpoint)
 
-        response = resource_helper.resource_request(
-            endpoint=endpoint, method="put", payload=payload
-        )
+        response = resource_helper.resource_request(endpoint=endpoint, method="put", payload=payload)
 
         return response

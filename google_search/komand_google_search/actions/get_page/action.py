@@ -21,9 +21,7 @@ class GetPage(komand.Action):
             response = googlesearch.get_page(url)
             return {"web_page": response.decode("utf-8")}
         else:
-            self.logger.info(
-                "A valid URL was not passed, be sure to include the prefix e.g. http://"
-            )
+            self.logger.info("A valid URL was not passed, be sure to include the prefix e.g. http://")
             raise Exception("A valid URL was not passed")
 
     def test(self):

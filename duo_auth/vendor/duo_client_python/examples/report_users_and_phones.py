@@ -37,5 +37,10 @@ reporter.writerow(("Username", "Phone Number", "Type", "Platform"))
 for user in users:
     for phone in user["phones"]:
         reporter.writerow(
-            [user["username"], phone["number"], phone["type"], phone["platform"],]
+            [
+                user["username"],
+                phone["number"],
+                phone["type"],
+                phone["platform"],
+            ]
         )

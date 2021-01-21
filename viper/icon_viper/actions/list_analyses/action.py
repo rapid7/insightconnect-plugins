@@ -14,7 +14,5 @@ class ListAnalyses(komand.Action):
 
     def run(self, params={}):
         return {
-            Output.ANALYSES: project.Project(
-                self.connection.config, params.get(Input.PROJECT_NAME)
-            ).list_analyses()
+            Output.ANALYSES: project.Project(self.connection.config, params.get(Input.PROJECT_NAME)).list_analyses()
         }

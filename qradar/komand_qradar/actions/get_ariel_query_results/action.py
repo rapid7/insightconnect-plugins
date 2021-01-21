@@ -26,9 +26,7 @@ class GetArielQueryResults(komand.Action):
             r = helpers.get_ariel_query_results(self.logger, url, token=token, search_id=search_id)
         else:
             auth = helpers.encode_basic_auth(username, password)
-            r = helpers.get_ariel_query_results(
-                self.logger, url, basic_auth=auth, search_id=search_id
-            )
+            r = helpers.get_ariel_query_results(self.logger, url, basic_auth=auth, search_id=search_id)
 
         if not r:
             raise Exception("Run: Error getting ariel query results")

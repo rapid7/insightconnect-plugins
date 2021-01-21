@@ -14,9 +14,7 @@ class CreateGlobalAclRule(komand.Action):
     def run(self, params={}):
         action = "security_policies"
         self.connection.connector.check_required_params(params, ["policy_id", "global_acl"])
-        self.connection.connector.check_required_params(
-            params.get("global_acl"), ["name", "extended_match"]
-        )
+        self.connection.connector.check_required_params(params.get("global_acl"), ["name", "extended_match"])
         if "extended_match_sequence" not in params.get("global_acl"):
             self.connection.connector.raise_error("Required param: extended_match_sequence")
 

@@ -27,12 +27,8 @@ class AssignUserToAppSso(komand.Action):
             data = response.json()
         except ValueError:
             self.logger.error("An error has occurred: " + response.content)
-            raise PluginException(
-                cause="An unexpected error has occurred", assistance=response.content
-            )
+            raise PluginException(cause="An unexpected error has occurred", assistance=response.content)
 
         if "errorSummary" in data:
             self.logger.error(data)
-            raise PluginException(
-                cause="An unexpected error has occurred", assistance=data["errorSummary"]
-            )
+            raise PluginException(cause="An unexpected error has occurred", assistance=data["errorSummary"])

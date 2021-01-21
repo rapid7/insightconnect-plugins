@@ -71,10 +71,7 @@ class SignaturesRetrieve(komand.Action):
                 "id": signature.id,
                 "name": signature.name,
                 "date_added": (
-                    datetime.datetime.strptime(
-                        signature.date_added, "%Y-%d-%mT%H:%M:%SZ"
-                    ).isoformat()
-                    or ""
+                    datetime.datetime.strptime(signature.date_added, "%Y-%d-%mT%H:%M:%SZ").isoformat() or ""
                 ),
                 "weblink": signature.weblink,
             }

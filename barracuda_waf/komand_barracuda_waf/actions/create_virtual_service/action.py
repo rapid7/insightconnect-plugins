@@ -13,9 +13,7 @@ class CreateVirtualService(komand.Action):
 
     def run(self, params={}):
         action = "virtual_services"
-        self.connection.connector.check_required_params(
-            params, ["name", "type", "port", "address", "address_version"]
-        )
+        self.connection.connector.check_required_params(params, ["name", "type", "port", "address", "address_version"])
 
         r = self.connection.connector.post(
             action,

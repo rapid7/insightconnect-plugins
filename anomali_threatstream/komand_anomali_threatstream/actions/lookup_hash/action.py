@@ -32,9 +32,7 @@ class LookupHash(komand.Action):
         self.request.params.update({"md5": params["hash"], "limit": 1000, "offset": 0})
 
         while self.continue_paging:
-            response = self.connection.session.send(
-                self.request.prepare(), verify=self.request.verify
-            )
+            response = self.connection.session.send(self.request.prepare(), verify=self.request.verify)
             if response.status_code not in range(200, 299):
                 raise PluginException(
                     cause="Received %d HTTP status code from ThreatStream." % response.status_code,
@@ -46,9 +44,7 @@ class LookupHash(komand.Action):
             try:
                 response_data = response.json()
             except JSONDecodeError:
-                raise PluginException(
-                    preset=PluginException.Preset.INVALID_JSON, data=response.text
-                )
+                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
             try:
                 # Check pagination indicator. A "null" value means no more pages.

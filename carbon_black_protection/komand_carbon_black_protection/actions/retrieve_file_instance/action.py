@@ -36,8 +36,7 @@ class RetrieveFileInstance(komand.Action):
             self.logger.error(f"Call to Carbon Black caused the following error: {e}")
             raise PluginException(
                 cause="Call to Carbon Black failed",
-                assistance="The connection may not be configured properly, please"
-                "check your connection settings.",
+                assistance="The connection may not be configured properly, please" "check your connection settings.",
             )
         else:
             file_catalog_entry = response.json()

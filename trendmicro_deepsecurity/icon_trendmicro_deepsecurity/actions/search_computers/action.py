@@ -71,9 +71,7 @@ class SearchComputers(komand.Action):
             data = {"maxItems": self.max_items}
 
         # Send request
-        response = self.connection.session.post(
-            url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl
-        )
+        response = self.connection.session.post(url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl)
 
         self.logger.info(f"url: {response.url}")
         self.logger.info(f"status: {response.status_code}")

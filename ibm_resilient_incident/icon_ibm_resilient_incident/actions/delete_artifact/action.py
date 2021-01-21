@@ -17,11 +17,8 @@ class DeleteArtifact(komand.Action):
         inc_id = params.get("incident_id")
         artifact_id = params.get("artifact_id")
 
-        url = (
-            self.connection.API_BASE
-            + "/orgs/{org_id}/incidents/{inc_id}/artifacts/{artifact_id}".format(
-                org_id=org_id, inc_id=inc_id, artifact_id=artifact_id
-            )
+        url = self.connection.API_BASE + "/orgs/{org_id}/incidents/{inc_id}/artifacts/{artifact_id}".format(
+            org_id=org_id, inc_id=inc_id, artifact_id=artifact_id
         )
 
         self.logger.info("Deleting artifact %s on incident %s..." % (artifact_id, inc_id))

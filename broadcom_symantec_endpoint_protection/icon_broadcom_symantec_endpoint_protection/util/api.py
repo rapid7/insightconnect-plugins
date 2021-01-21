@@ -77,9 +77,7 @@ class APIClient(object):
         :return: aiohttp ClientSession
         """
 
-        return aiohttp.ClientSession(
-            connector=aiohttp.TCPConnector(verify_ssl=False), headers=self._get_headers()
-        )
+        return aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False), headers=self._get_headers())
 
     @classmethod
     def new_client(
@@ -113,9 +111,7 @@ class APIClient(object):
         auth_body = {"username": username, "password": password, "domain": domain}
         headers = {"Content-Type": "application/json"}
         response = requests.post(url=auth_url, json=auth_body, headers=headers, verify=False)
-        logger.info(
-            f"Received status code '{response.status_code}' from Symantec Endpoint Protection console."
-        )
+        logger.info(f"Received status code '{response.status_code}' from Symantec Endpoint Protection console.")
 
         if response.status_code == 200:
             try:
@@ -128,8 +124,7 @@ class APIClient(object):
             except KeyError:
                 raise APIException(
                     status_code=None,
-                    message="Symantec Endpoint Protection did not return the "
-                    "authentication token!",
+                    message="Symantec Endpoint Protection did not return the " "authentication token!",
                 )
             logger.info("Authentication with Symantec Endpoint Protection console successful!")
             return cls(base_url=url, auth_token=auth_token, logger=logger)
@@ -138,8 +133,7 @@ class APIClient(object):
         else:
             raise APIException(
                 status_code=None,
-                message=f"An unhandled response was received from Symantec Endpoint "
-                f"Protection: {response.text}",
+                message=f"An unhandled response was received from Symantec Endpoint " f"Protection: {response.text}",
             )
 
     def get_computer(self, computer_name: str = "*", mac_address: str = "*") -> Optional[Agent]:
@@ -172,13 +166,10 @@ class APIClient(object):
         else:
             raise APIException(
                 status_code=None,
-                message=f"An unhandled response was received from Symantec Endpoint "
-                f"Protection: {response.text}",
+                message=f"An unhandled response was received from Symantec Endpoint " f"Protection: {response.text}",
             )
 
-    async def _do_blacklist_files_request(
-        self, body: dict, session: aiohttp.ClientSession
-    ) -> Optional[str]:
+    async def _do_blacklist_files_request(self, body: dict, session: aiohttp.ClientSession) -> Optional[str]:
         """
         Send a blacklist file request asynchronously
         :param body: Parameters required for the API call
@@ -213,8 +204,7 @@ class APIClient(object):
         else:
             raise APIException(
                 status_code=None,
-                message=f"An unhandled response was received from Symantec Endpoint "
-                f"Protection: {response.text}",
+                message=f"An unhandled response was received from Symantec Endpoint " f"Protection: {response.text}",
             )
 
     async def _blacklist_files(
@@ -245,11 +235,7 @@ class APIClient(object):
                     "hashType": hash_type.value,
                     "name": name,
                 }
-                tasks.append(
-                    asyncio.ensure_future(
-                        self._do_blacklist_files_request(body=body, session=async_session)
-                    )
-                )
+                tasks.append(asyncio.ensure_future(self._do_blacklist_files_request(body=body, session=async_session)))
             blacklist_ids = await asyncio.gather(*tasks)
         return blacklist_ids
 
@@ -312,8 +298,7 @@ class APIClient(object):
         else:
             raise APIException(
                 status_code=None,
-                message=f"An unhandled response was received from Symantec Endpoint "
-                f"Protection: {response.text}",
+                message=f"An unhandled response was received from Symantec Endpoint " f"Protection: {response.text}",
             )
 
     def get_all_accessible_domains(self) -> [Domain]:
@@ -342,6 +327,5 @@ class APIClient(object):
         else:
             raise APIException(
                 status_code=None,
-                message=f"An unhandled response was received from Symantec Endpoint "
-                f"Protection: {response.text}",
+                message=f"An unhandled response was received from Symantec Endpoint " f"Protection: {response.text}",
             )

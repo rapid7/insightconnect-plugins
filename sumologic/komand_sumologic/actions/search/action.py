@@ -20,9 +20,7 @@ class Search(komand.Action):
 
     def run(self, params={}):
         params["timeout"] = params.get("timeout") or 60
-        params["from_time"] = params.get("from_time") or str(
-            int(time.time() * 1000) - TWENTY_FOUR_HOURS_AGO
-        )
+        params["from_time"] = params.get("from_time") or str(int(time.time() * 1000) - TWENTY_FOUR_HOURS_AGO)
 
         params["to_time"] = params.get("to_time") or str(int(time.time() * 1000))
 
@@ -69,9 +67,7 @@ class Search(komand.Action):
             self.logger.debug("Returned results: %s %d", status, count)
 
             if limit:
-                results = self.connection.client.search_job_messages(
-                    sj, limit=page_limit, offset=offset
-                )
+                results = self.connection.client.search_job_messages(sj, limit=page_limit, offset=offset)
 
                 if results:
                     fields = results.get("fields")

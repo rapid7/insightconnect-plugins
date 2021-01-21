@@ -22,9 +22,7 @@ class ListSavedSearches(komand.Action):
         # Do all this nonsense to get our results into json array
         for saved_search in saved_searches:
             # Create JSON string from SavedSearch object
-            new_json = json.dumps(
-                saved_search, default=lambda o: o.__dict__, sort_keys=True, indent=4
-            )
+            new_json = json.dumps(saved_search, default=lambda o: o.__dict__, sort_keys=True, indent=4)
 
             # Append JSON-serializable object to list
             saved_searches_json.append(json.loads(new_json))

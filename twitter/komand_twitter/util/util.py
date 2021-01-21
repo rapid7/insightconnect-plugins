@@ -24,9 +24,7 @@ class Common:
     def strip_mention_out_of_tweet(username, tweet):
         user_mention = "@{username}".format(username=username)
 
-        if (
-            user_mention not in tweet
-        ):  # If the user (ie. @MyAccount) is not found, return tweet as-is.
+        if user_mention not in tweet:  # If the user (ie. @MyAccount) is not found, return tweet as-is.
             return tweet
 
         while user_mention in tweet:  # Loop through the tweet until it is totally sanitized
@@ -42,9 +40,7 @@ class Common:
     @staticmethod
     def determine_sleep_duration(count, limit):
         percentage_new_mentions = (float(count) / float(limit)) * 100
-        if (
-            percentage_new_mentions >= 50
-        ):  # If count >= 50% limit, return high activity sleep duration.
+        if percentage_new_mentions >= 50:  # If count >= 50% limit, return high activity sleep duration.
             return Common.SleepDuration.HIGH_ACTIVITY
         else:
             return Common.SleepDuration.LOW_ACTIVITY

@@ -18,9 +18,7 @@ class PatchIncident(komand.Action):
         inc_id = params.get("incident_id")
         patch = params.get("patch")
 
-        url = self.connection.API_BASE + "/orgs/{org_id}/incidents/{inc_id}".format(
-            org_id=org_id, inc_id=inc_id
-        )
+        url = self.connection.API_BASE + "/orgs/{org_id}/incidents/{inc_id}".format(org_id=org_id, inc_id=inc_id)
 
         patch = json.dumps(patch)
 

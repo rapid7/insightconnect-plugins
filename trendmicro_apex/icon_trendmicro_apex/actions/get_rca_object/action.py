@@ -20,9 +20,7 @@ class GetRcaObject(komand.Action):
             "/WebApp/OSCE_iES/OsceIes/ApiEntry",
             {
                 "Url": "V1/Content/ShowContent",
-                "TaskType": util.TaskType.value_of(
-                    params.get(Input.TASK_TYPE, util.DEFAULT_TASK_TYPE)
-                ),
+                "TaskType": util.TaskType.value_of(params.get(Input.TASK_TYPE, util.DEFAULT_TASK_TYPE)),
                 "TaskId": params.get(Input.TASK_ID),
                 "ContentId": params.get(Input.CONTENT_ID),
                 "TopN": params.get(Input.LIMIT),

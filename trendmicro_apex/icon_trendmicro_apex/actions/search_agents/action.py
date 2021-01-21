@@ -34,15 +34,11 @@ class SearchAgents(komand.Action):
                 else:
                     query_params["host_name"] = agent_id
 
-            quoted_param = urllib.parse.quote(
-                "&".join([k + "=" + v for k, v in query_params.items()])
-            )
+            quoted_param = urllib.parse.quote("&".join([k + "=" + v for k, v in query_params.items()]))
             if quoted_param:
                 quoted_param = "?" + quoted_param
 
-        agents = self.connection.api.execute(
-            "get", "/WebApp/API/AgentResource/ProductAgents" + quoted_param, ""
-        )
+        agents = self.connection.api.execute("get", "/WebApp/API/AgentResource/ProductAgents" + quoted_param, "")
 
         if agents.get("result_code", 0) == 1:
             f = agents.get("result_content")

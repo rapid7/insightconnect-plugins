@@ -39,8 +39,7 @@ class MicrosoftIntuneAPI:
         if validators.uuid(device):
             return list(
                 filter(
-                    lambda iter_device: iter_device["userId"] == device
-                    or iter_device["id"] == device,
+                    lambda iter_device: iter_device["userId"] == device or iter_device["id"] == device,
                     self._call_api("GET", "deviceManagement/managedDevices")["value"],
                 )
             )
@@ -49,9 +48,7 @@ class MicrosoftIntuneAPI:
         else:
             param = "deviceName"
 
-        value = self._call_api(
-            "GET", f"deviceManagement/managedDevices?$filter={param} eq '{device}'"
-        )["value"]
+        value = self._call_api("GET", f"deviceManagement/managedDevices?$filter={param} eq '{device}'")["value"]
         if value:
             return value
 
@@ -96,9 +93,7 @@ class MicrosoftIntuneAPI:
         )
         if 200 <= response.status_code < 300:
             token = self._handle_json_to_dict(response)["access_token"]
-            self.logger.info(
-                f"Access Token: ******************** {str(token[len(token) - 5:len(token)])}"
-            )
+            self.logger.info(f"Access Token: ******************** {str(token[len(token) - 5:len(token)])}")
             return token
         if response.status_code == 400:
             raise PluginException(
@@ -108,9 +103,7 @@ class MicrosoftIntuneAPI:
 
         raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
-    def _call_api(
-        self, method, endpoint, params=None, request_body=None, retry_on_unauthenticated=True
-    ):
+    def _call_api(self, method, endpoint, params=None, request_body=None, retry_on_unauthenticated=True):
         response = self._request(
             method,
             self.api_url + endpoint,
@@ -132,9 +125,7 @@ class MicrosoftIntuneAPI:
         elif response.status_code == 401 and retry_on_unauthenticated is True:
             self.logger.info("Token expired, reauthenticating...")
             self.refresh_access_token()
-            return self._call_api(
-                method, endpoint, params, request_body, retry_on_unauthenticated=False
-            )
+            return self._call_api(method, endpoint, params, request_body, retry_on_unauthenticated=False)
 
         raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
 

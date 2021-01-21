@@ -49,9 +49,7 @@ class UpdateDocument(komand.Action):
         if timeout:
             params["timeout"] = timeout
 
-        results = helpers.post_update(
-            self.logger, host, index, type_, id_, script, username, password, params
-        )
+        results = helpers.post_update(self.logger, host, index, type_, id_, script, username, password, params)
 
         if not results:
             raise Exception("Run: Document was not updated")

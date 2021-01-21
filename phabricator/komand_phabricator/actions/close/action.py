@@ -22,7 +22,11 @@ class Close(komand.Action):
 
         maniphest = ManiphesEdit(self.connection.phab, action=self, objectIdentifier=id)
         try:
-            id = maniphest.edit([{"type": "status", "value": "resolved"},])
+            id = maniphest.edit(
+                [
+                    {"type": "status", "value": "resolved"},
+                ]
+            )
         except Exception as e:
             self.logger.error("Close: Run: Problem with request".format(e.errno, e.strerror))
             raise e

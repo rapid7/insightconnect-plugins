@@ -43,8 +43,6 @@ class CreateSite(komand.Action):
                 del payload[k]
 
         self.logger.info(f"Sending Payload: {payload}")
-        response = resource_helper.resource_request(
-            endpoint=endpoint, method="post", payload=payload
-        )
+        response = resource_helper.resource_request(endpoint=endpoint, method="post", payload=payload)
 
         return response

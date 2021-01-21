@@ -34,9 +34,7 @@ class CreateWorkspace(komand.Action):
                 "ComputeTypeName": workspace_properties["compute_type_name"],
                 "RootVolumeSizeGib": workspace_properties["root_volume_size"],
                 "RunningMode": workspace_properties["running_mode"],
-                "RunningModeAutoStopTimeoutInMinutes": workspace_properties[
-                    "running_mode_auto_stop_time_out"
-                ],
+                "RunningModeAutoStopTimeoutInMinutes": workspace_properties["running_mode_auto_stop_time_out"],
                 "UserVolumeSizeGib": workspace_properties["user_volume_size"],
             },
         }
@@ -61,9 +59,7 @@ class CreateWorkspace(komand.Action):
                 )
 
         try:
-            result = self.connection.aws.client("workspaces").create_workspaces(
-                Workspaces=[payload]
-            )
+            result = self.connection.aws.client("workspaces").create_workspaces(Workspaces=[payload])
         except:
             raise PluginException(cause="An unknown error occurred", data=result)
 

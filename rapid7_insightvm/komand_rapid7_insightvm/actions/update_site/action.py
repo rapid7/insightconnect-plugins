@@ -27,8 +27,6 @@ class UpdateSite(komand.Action):
             "scanTemplateId": params.get(Input.SCAN_TEMPLATE_ID),
         }
 
-        response = resource_helper.resource_request(
-            endpoint=endpoint, method="put", payload=update_site
-        )
+        response = resource_helper.resource_request(endpoint=endpoint, method="put", payload=update_site)
 
         return {"id": params.get(Input.ID), "links": response["links"]}

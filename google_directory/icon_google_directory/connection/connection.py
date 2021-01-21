@@ -28,9 +28,7 @@ class Connection(komand.Connection):
         auth_uri = params.get(Input.AUTH_URI)
         token_uri = params.get(Input.TOKEN_URI)
         auth_provider_x509_cert_url = params.get(Input.AUTH_PROVIDER_X509_CERT_URL)
-        self.scopes = [
-            params.get(Input.OAUTH_SCOPE, "https://www.googleapis.com/auth/admin.directory.user")
-        ]
+        self.scopes = [params.get(Input.OAUTH_SCOPE, "https://www.googleapis.com/auth/admin.directory.user")]
         if self.scopes == ["https://www.googleapis.com/auth/admin.directory.user.readonly"]:
             self.read_only = True
         self.logger.info(f"Using OAuth scope ({self.scopes}) for connections")
@@ -54,9 +52,7 @@ class Connection(komand.Connection):
             auth["private_key"] = auth["private_key"].replace("\\n", "\n", -1)
 
         # Build a Google credentials object
-        self.credentials = service_account.Credentials.from_service_account_info(
-            auth, scopes=self.scopes
-        )
+        self.credentials = service_account.Credentials.from_service_account_info(auth, scopes=self.scopes)
 
         # Delegate to admin user
         self.configure_delegation(admin_user)

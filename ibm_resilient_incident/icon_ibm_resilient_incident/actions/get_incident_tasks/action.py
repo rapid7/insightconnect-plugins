@@ -16,9 +16,7 @@ class GetIncidentTasks(komand.Action):
         org_id = params.get("organization_id")
         inc_id = params.get("incident_id")
 
-        url = self.connection.API_BASE + "/orgs/{org_id}/incidents/{inc_id}/tasks".format(
-            org_id=org_id, inc_id=inc_id
-        )
+        url = self.connection.API_BASE + "/orgs/{org_id}/incidents/{inc_id}/tasks".format(org_id=org_id, inc_id=inc_id)
 
         self.logger.info("Retrieving tasks for incident %s..." % inc_id)
         try:

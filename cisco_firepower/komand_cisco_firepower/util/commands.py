@@ -15,9 +15,7 @@ def generate_add_host_command(ip):
 
 def generate_set_os_command(host_dict, ip):
     os = host_dict.get("operating_system", {})
-    return SetOS.format(
-        name=os.get("name"), vendor=os.get("vendor"), version=os.get("version"), address=ip
-    )
+    return SetOS.format(name=os.get("name"), vendor=os.get("vendor"), version=os.get("version"), address=ip)
 
 
 def generate_set_source_command(source_id):

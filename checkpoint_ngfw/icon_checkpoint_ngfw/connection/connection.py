@@ -116,9 +116,7 @@ class Connection(komand.Connection):
             uid = session.get("uid")
             discard_payload = {"uid": uid}
 
-            requests.post(
-                url_discard, json=discard_payload, headers=headers, verify=self.ssl_verify
-            )
+            requests.post(url_discard, json=discard_payload, headers=headers, verify=self.ssl_verify)
 
         self.publish()  # Yes, you have to publish that you are not publishing
         self.logout()
@@ -139,17 +137,13 @@ class Connection(komand.Connection):
             if "object is locked" in result.text:
                 if self.discard_sessions:
                     self.discard_all_sessions()
-                    result = requests.post(
-                        url, headers=headers, json=payload, verify=self.ssl_verify
-                    )
+                    result = requests.post(url, headers=headers, json=payload, verify=self.ssl_verify)
 
             # try to see if we still have a bad request
             try:
                 result.raise_for_status()
             except Exception as e:
-                raise PluginException(
-                    cause=f"Call to {url} failed.", assistance=result.text, data=e
-                )
+                raise PluginException(cause=f"Call to {url} failed.", assistance=result.text, data=e)
 
         self.publish()
         self.logout()
@@ -165,9 +159,7 @@ class Connection(komand.Connection):
         try:
             result.raise_for_status()
         except Exception as e:
-            raise PluginException(
-                cause=f"Could not find group {name}.", assistance=result.text, data=e
-            )
+            raise PluginException(cause=f"Could not find group {name}.", assistance=result.text, data=e)
         return result.json()
 
     def get_groups(self, details_level: DetailsLevel, limit: int = 500, offset: int = 0) -> dict:
@@ -193,9 +185,7 @@ class Connection(komand.Connection):
         try:
             result.raise_for_status()
         except Exception as e:
-            raise PluginException(
-                cause="Unable to get groups from Check Point NGFW.", assistance=result.text, data=e
-            )
+            raise PluginException(cause="Unable to get groups from Check Point NGFW.", assistance=result.text, data=e)
 
         return result.json()
 
@@ -229,16 +219,13 @@ class Connection(komand.Connection):
         try:
             result.raise_for_status()
         except Exception as e:
-            raise PluginException(
-                cause=f"Install policy failed: {url}", assistance=result.text, data=e
-            )
+            raise PluginException(cause=f"Install policy failed: {url}", assistance=result.text, data=e)
         return result
 
     def test(self):
         if not self.sid:
             raise ConnectionTestException(
-                cause=f"Unable to authenticate to the Check Point server at: "
-                f"{self.server_ip}:{self.server_port}",
+                cause=f"Unable to authenticate to the Check Point server at: " f"{self.server_ip}:{self.server_port}",
                 assistance="Please check your connection settings and try again.",
             )
         return {"success": True}

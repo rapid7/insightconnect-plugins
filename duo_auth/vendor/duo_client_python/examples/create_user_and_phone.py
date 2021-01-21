@@ -34,23 +34,34 @@ PHONE_TYPE = get_next_arg("phone type (e.g. mobile): ")
 PHONE_PLATFORM = get_next_arg("phone platform (e.g. google android): ")
 
 # Create and return a new user object.
-user = admin_api.add_user(username=USERNAME, realname=REALNAME,)
+user = admin_api.add_user(
+    username=USERNAME,
+    realname=REALNAME,
+)
 print("Created user:")
 pprint.pprint(user)
 
 # Create and return a new phone object.
-phone = admin_api.add_phone(number=PHONE_NUMBER, type=PHONE_TYPE, platform=PHONE_PLATFORM,)
+phone = admin_api.add_phone(
+    number=PHONE_NUMBER,
+    type=PHONE_TYPE,
+    platform=PHONE_PLATFORM,
+)
 print("Created phone:")
 pprint.pprint(phone)
 
 # Associate the user with the phone.
 admin_api.add_user_phone(
-    user_id=user["user_id"], phone_id=phone["phone_id"],
+    user_id=user["user_id"],
+    phone_id=phone["phone_id"],
 )
 print("Added phone", phone["number"], "to user", user["username"])
 
 # Send two SMS messages to the phone with information about installing
 # the app for PHONE_PLATFORM and activating it with this Duo account.
-act_sent = admin_api.send_sms_activation_to_phone(phone_id=phone["phone_id"], install="1",)
+act_sent = admin_api.send_sms_activation_to_phone(
+    phone_id=phone["phone_id"],
+    install="1",
+)
 print("SMS activation sent to", phone["number"] + ":")
 pprint.pprint(act_sent)

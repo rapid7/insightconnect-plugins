@@ -38,9 +38,7 @@ class TestSetAddressObject(TestCase):
         results = test_action.run(action_params)
 
         self.assertIsNotNone(results)
-        self.assertEquals(
-            {"code": "20", "message": "command succeeded", "status": "success"}, results
-        )
+        self.assertEquals({"code": "20", "message": "command succeeded", "status": "success"}, results)
 
     def test_in_whitelist(self):
         test_action = SetAddressObject()
@@ -50,19 +48,13 @@ class TestSetAddressObject(TestCase):
         self.assertTrue(test_action.match_whitelist("1.1.1.1/32", ["1.1.1.1/32"], "ip-netmask"))
         self.assertFalse(test_action.match_whitelist("1.1.1.2", ["1.1.1.1/32"], "ip-netmask"))
         self.assertTrue(
-            test_action.match_whitelist(
-                "1.1.1.1", ["www.google.com", "5.5.5.5", "1.1.1.1/32"], "ip-netmask"
-            )
+            test_action.match_whitelist("1.1.1.1", ["www.google.com", "5.5.5.5", "1.1.1.1/32"], "ip-netmask")
         )
         self.assertTrue(
-            test_action.match_whitelist(
-                "www.google.com", ["www.google.com", "5.5.5.5", "1.1.1.1/32"], "fqdn"
-            )
+            test_action.match_whitelist("www.google.com", ["www.google.com", "5.5.5.5", "1.1.1.1/32"], "fqdn")
         )
         self.assertFalse(
-            test_action.match_whitelist(
-                "aadroid.net", ["www.google.com", "5.5.5.5", "1.1.1.1/32"], "fqdn"
-            )
+            test_action.match_whitelist("aadroid.net", ["www.google.com", "5.5.5.5", "1.1.1.1/32"], "fqdn")
         )
         self.assertTrue(test_action.match_whitelist("1.1.1.1", ["1.1.1.1"], "ip-range"))
         self.assertFalse(test_action.match_whitelist("1.1.1.1/24", ["1.1.1.1"], "ip-range"))
@@ -71,13 +63,9 @@ class TestSetAddressObject(TestCase):
         test_action = SetAddressObject()
         test_action.logger = logging.getLogger("test")
 
-        self.assertTrue(
-            test_action.match_whitelist("1.1.1.1/24", ["1.1.1.1", "1.1.1.1/24"], "ip-netmask")
-        )
+        self.assertTrue(test_action.match_whitelist("1.1.1.1/24", ["1.1.1.1", "1.1.1.1/24"], "ip-netmask"))
         self.assertTrue(test_action.match_whitelist("1.1.1.1", ["1.1.1.1/24"], "ip-netmask"))
-        self.assertFalse(
-            test_action.match_whitelist("1.1.1.1/24", ["1.1.1.1", "1.1.1.1/32"], "ip-netmask")
-        )
+        self.assertFalse(test_action.match_whitelist("1.1.1.1/24", ["1.1.1.1", "1.1.1.1/32"], "ip-netmask"))
 
     def test_get_address_type(self):
         test_action = SetAddressObject()

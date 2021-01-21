@@ -51,8 +51,6 @@ class CreateUser(komand.Action):
         # Validate/fix the user configuration
         payload = validate.validate_user(self.connection.console_url, payload)
 
-        response = resource_helper.resource_request(
-            endpoint=endpoint, method="post", payload=payload
-        )
+        response = resource_helper.resource_request(endpoint=endpoint, method="post", payload=payload)
 
         return response

@@ -19,8 +19,4 @@ class DeleteHost(komand.Action):
         return {"_ref": ref}
 
     def test(self):
-        return {
-            "_ref": (
-                "record:host/ZG5zLmhvc3QkLl9kZWZhdWx0LmNvbS5pbmZvLnRlc3Q1" ":test5.info.com/default"
-            )
-        }
+        return {"_ref": ("record:host/ZG5zLmhvc3QkLl9kZWZhdWx0LmNvbS5pbmZvLnRlc3Q1" ":test5.info.com/default")}

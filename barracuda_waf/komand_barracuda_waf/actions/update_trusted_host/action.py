@@ -16,9 +16,7 @@ class UpdateTrustedHost(komand.Action):
         name = params.get("name")
         group_name = params.get("group_name")
         if not name or not group_name:
-            self.connection.connector.raise_error(
-                "Policy ID, attack group ID and attack ID can't be empty"
-            )
+            self.connection.connector.raise_error("Policy ID, attack group ID and attack ID can't be empty")
 
         action = action + "/" + group_name + "/trusted_hosts/" + name
 

@@ -18,8 +18,6 @@ class Split(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         flags = shared.constructFlags(params)
         regex = params.get(Input.IN_REGEX)
-        split = re.split(
-            regex, params.get(Input.IN_STRING), maxsplit=params.get(Input.MAX_SPLIT), flags=flags
-        )
+        split = re.split(regex, params.get(Input.IN_STRING), maxsplit=params.get(Input.MAX_SPLIT), flags=flags)
 
         return {Output.RESULT: split}

@@ -27,6 +27,4 @@ class Run(komand.Action):
                 raise Exception("Output type was None. Ensure that output has a non-None data type")
             return out
         except UnboundLocalError:
-            raise Exception(
-                "No output was returned. Check supplied script to ensure that it returns output"
-            )
+            raise Exception("No output was returned. Check supplied script to ensure that it returns output")

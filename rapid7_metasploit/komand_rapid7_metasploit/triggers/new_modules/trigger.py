@@ -9,9 +9,7 @@ import requests
 class NewModules(komand.Trigger):
     CACHE_FILE_NAME = "metasploit_modules"
     cache_file = None
-    _META_JSON = (
-        "https://github.com/rapid7/metasploit-framework/raw/master/db/modules_metadata_base.json"
-    )
+    _META_JSON = "https://github.com/rapid7/metasploit-framework/raw/master/db/modules_metadata_base.json"
 
     def __init__(self):
         super(self.__class__, self).__init__(

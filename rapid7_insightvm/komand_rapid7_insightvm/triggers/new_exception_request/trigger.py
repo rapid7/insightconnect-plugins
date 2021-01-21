@@ -21,13 +21,9 @@ class NewExceptionRequest(komand.Trigger):
 
         # get most recent vulnerability exception request - since they're sequential, find highest id
         resource_helper = ResourceRequests(self.connection.session, self.logger)
-        endpoint = endpoints.VulnerabilityException.vulnerability_exceptions(
-            self.connection.console_url
-        )
+        endpoint = endpoints.VulnerabilityException.vulnerability_exceptions(self.connection.console_url)
         std_params = {"sort": "id,desc"}
-        response = resource_helper.paged_resource_request(
-            endpoint=endpoint, method="get", params=std_params
-        )
+        response = resource_helper.paged_resource_request(endpoint=endpoint, method="get", params=std_params)
         last_id = 0
         for r in response:
             if r["id"] > last_id:

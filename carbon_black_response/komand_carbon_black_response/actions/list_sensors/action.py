@@ -22,16 +22,12 @@ class ListSensors(komand.Action):
         id = params.get("id", "")
         try:
             if not id:
-                results = self.connection.carbon_black.get_object(
-                    "/api/v1/sensor", query_parameters=query_params
-                )
+                results = self.connection.carbon_black.get_object("/api/v1/sensor", query_parameters=query_params)
             else:
                 # Returns single sensor if ID is supplied
                 results = []
                 results.append(
-                    self.connection.carbon_black.get_object(
-                        "/api/v1/sensor/%s" % id, query_parameters=query_params
-                    )
+                    self.connection.carbon_black.get_object("/api/v1/sensor/%s" % id, query_parameters=query_params)
                 )
             updated_results = []
             for result in results:

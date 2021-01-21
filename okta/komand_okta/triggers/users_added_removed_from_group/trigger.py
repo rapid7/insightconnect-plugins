@@ -11,6 +11,7 @@ from .schema import (
 # Custom imports below
 from komand.exceptions import PluginException
 from komand_okta.util import helpers
+import re
 
 
 class UsersAddedRemovedFromGroup(komand.Trigger):
@@ -26,26 +27,10 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
         """Run the trigger"""
         group_list = params.get(Input.GROUP_IDS)
         okta_url = self.connection.okta_url
-        current_list = list()
+        current_list = self.get_users_in_group_list(group_list, okta_url)
         group_names = list()
 
         for group in group_list:
-            api = f"{okta_url}/api/v1/groups/{group}/users"
-            # Build a reference list to check for updates against
-            response = self.connection.session.get(api)
-
-            try:
-                data = response.json()
-            except ValueError:
-                raise PluginException(
-                    cause="Returned data was not in JSON format.",
-                    assistance="Double-check that group ID's are all valid.",
-                    data=response.text,
-                )
-            helpers.raise_based_on_error_code(response)
-            data = komand.helper.clean(data)
-            current_list.append({group: data})
-
             # Get group names
             group_name_api = f"{okta_url}/api/v1/groups/{group}"
             response = self.connection.session.get(group_name_api)
@@ -61,23 +46,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             group_names.append(data["profile"]["name"])
 
         while True:
-            new_list = list()
-            for group in group_list:
-                api = f"{okta_url}/api/v1/groups/{group}/users"
-
-                response = self.connection.session.get(api)
-
-                try:
-                    data = response.json()
-                except ValueError:
-                    raise PluginException(
-                        cause="Returned data was not in JSON format.",
-                        assistance="Double check that group ID's are all valid.",
-                        data=response.text,
-                    )
-                helpers.raise_based_on_error_code(response)
-                data = komand.helper.clean(data)
-                new_list.append({group: data})
+            new_list = self.get_users_in_group_list(group_list, okta_url)
 
             added = list()
             removed = list()
@@ -106,9 +75,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                         removed_users.append(old_user)
 
                 if added_users:
-                    added.append(
-                        {"group_name": group_names[index], "group_id": value, "users": added_users}
-                    )
+                    added.append({"group_name": group_names[index], "group_id": value, "users": added_users})
                 if removed_users:
                     removed.append(
                         {
@@ -119,21 +86,51 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                     )
 
             if added and removed:
-                self.send(
-                    {
-                        Output.USERS_ADDED_FROM_GROUPS: added,
-                        Output.USERS_REMOVED_FROM_GROUPS: removed,
-                    }
-                )
+                self.logger.info("Users added and removed, sending to orchestrator.")
+                self.send({Output.USERS_ADDED_FROM_GROUPS: added, Output.USERS_REMOVED_FROM_GROUPS: removed})
             elif added and not removed:
-                self.send(
-                    {Output.USERS_ADDED_FROM_GROUPS: added, Output.USERS_REMOVED_FROM_GROUPS: []}
-                )
+                self.logger.info("Users added, sending to orchestrator.")
+                self.send({Output.USERS_ADDED_FROM_GROUPS: added, Output.USERS_REMOVED_FROM_GROUPS: []})
             elif removed and not added:
-                self.send(
-                    {Output.USERS_REMOVED_FROM_GROUPS: removed, Output.USERS_ADDED_FROM_GROUPS: []}
-                )
+                self.logger.info("Users removed, sending to orchestrator.")
+                self.send({Output.USERS_REMOVED_FROM_GROUPS: removed, Output.USERS_ADDED_FROM_GROUPS: []})
 
             current_list = new_list
 
-            time.sleep(params.get(Input.INTERVAL, 300))
+            sleep_time = params.get(Input.INTERVAL, 300)
+            self.logger.info(f"Loop complete, sleeping for {sleep_time}...")
+            time.sleep(sleep_time)
+
+    def get_users_in_group_list(self, group_list, okta_url):
+        current_list = []
+        for group in group_list:
+            current_list.append({group: self.get_users_in_group(f"{okta_url}/api/v1/groups/{group}/users")})
+
+        return current_list
+
+    def get_users_in_group(self, api_url):
+        returned_data = []
+        response = self.connection.session.get(api_url)
+        next_link = None
+        links = response.headers.get("Link", "").split(", ")
+        for link in links:
+            if 'rel="next"' in link:
+                matched_link = re.match("<(.*?)>", link)
+                if matched_link:
+                    next_link = matched_link.group(1)
+
+        if next_link:
+            returned_data.extend(self.get_users_in_group(next_link))
+
+        try:
+            data = response.json()
+        except ValueError:
+            raise PluginException(
+                cause="Returned data was not in JSON format.",
+                assistance="Double-check that group ID's are all valid.",
+                data=response.text,
+            )
+
+        helpers.raise_based_on_error_code(response)
+        returned_data.extend(komand.helper.clean(data))
+        return returned_data

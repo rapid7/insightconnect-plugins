@@ -64,18 +64,8 @@ class IncidentsRetrieve(komand.Action):
             incident_obj = {
                 "id": incident.id,
                 "name": incident.name,
-                "date_added": (
-                    datetime.datetime.strptime(
-                        incident.date_added, "%Y-%d-%mT%H:%M:%SZ"
-                    ).isoformat()
-                    or ""
-                ),
-                "event_date": (
-                    datetime.datetime.strptime(
-                        incident.event_date, "%Y-%d-%mT%H:%M:%SZ"
-                    ).isoformat()
-                    or ""
-                ),
+                "date_added": (datetime.datetime.strptime(incident.date_added, "%Y-%d-%mT%H:%M:%SZ").isoformat() or ""),
+                "event_date": (datetime.datetime.strptime(incident.event_date, "%Y-%d-%mT%H:%M:%SZ").isoformat() or ""),
                 "weblink": incident.weblink,
             }
             incident_obj_list.append(incident_obj)

@@ -14,9 +14,7 @@ class DoProxiedDatasourceCall(komand.Action):
         )
 
     def run(self, params={}):
-        urlparts = ["datasources", "proxy", params.get("datasource_id")] + params.get("path").strip(
-            "/"
-        ).split("/")
+        urlparts = ["datasources", "proxy", params.get("datasource_id")] + params.get("path").strip("/").split("/")
 
         response = self.connection.request("GET", urlparts, params=params.get("parameters"))
         if response.ok:

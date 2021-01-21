@@ -26,11 +26,8 @@ class SubmitCookbook(komand.Action):
             cookbook_bytes = b64decode(cookbook) if cookbook else None
         except binascii.Error:
             raise Exception(
-                'Unable to decode base64 input for "cookbook". '
-                "Contents of the file must be encoded with base64!"
+                'Unable to decode base64 input for "cookbook". ' "Contents of the file must be encoded with base64!"
             )
 
-        webids = self.connection.api.submit_cookbook(
-            cookbook_bytes, parameters, additional_parameters
-        )
+        webids = self.connection.api.submit_cookbook(cookbook_bytes, parameters, additional_parameters)
         return webids

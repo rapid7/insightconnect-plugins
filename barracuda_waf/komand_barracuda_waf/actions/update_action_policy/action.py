@@ -17,13 +17,9 @@ class UpdateActionPolicy(komand.Action):
         attack_group_id = params.get("attack_group_id")
         action_id = params.get("action_id")
         if not policy_id or not attack_group_id or not action_id:
-            self.connection.connector.raise_error(
-                "Policy ID, attack group ID and attack ID can't be empty"
-            )
+            self.connection.connector.raise_error("Policy ID, attack group ID and attack ID can't be empty")
 
-        action = (
-            action + "/" + policy_id + "/attack_groups/" + attack_group_id + "/actions/" + action_id
-        )
+        action = action + "/" + policy_id + "/attack_groups/" + attack_group_id + "/actions/" + action_id
 
         r = self.connection.connector.put(action, params.get("action_policy"))
 

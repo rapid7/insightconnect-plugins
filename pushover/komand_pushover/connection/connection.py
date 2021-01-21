@@ -33,7 +33,5 @@ class Connection(komand.Connection):
             if res.json().get("token", "") == "invalid":
                 raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
             else:
-                raise ConnectionTestException(
-                    preset=ConnectionTestException.Preset.UNKNOWN, data=res.text
-                )
+                raise ConnectionTestException(preset=ConnectionTestException.Preset.UNKNOWN, data=res.text)
         return False

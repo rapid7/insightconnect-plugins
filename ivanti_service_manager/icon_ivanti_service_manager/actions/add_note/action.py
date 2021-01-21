@@ -32,8 +32,4 @@ class AddNote(insightconnect_plugin_runtime.Action):
         if source:
             payload["Source"] = source
 
-        return {
-            Output.JOURNAL_NOTE: self.connection.ivanti_service_manager_api.post_journal_note(
-                payload
-            )
-        }
+        return {Output.JOURNAL_NOTE: self.connection.ivanti_service_manager_api.post_journal_note(payload)}

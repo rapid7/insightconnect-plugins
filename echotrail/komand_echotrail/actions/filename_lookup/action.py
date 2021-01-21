@@ -24,9 +24,7 @@ class FilenameLookup(komand.Action):
         response = requests.get(url, headers=headers)
 
         if response.status_code == 403:
-            raise Exception(
-                "Invalid API key provided. Verify your API key configured in your connection is correct."
-            )
+            raise Exception("Invalid API key provided. Verify your API key configured in your connection is correct.")
         elif response.status_code == 404:
             raise Exception(
                 "Unable to reach instance at {url}. Verify the server at the URL configured in your plugin connection is correct."

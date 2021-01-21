@@ -46,9 +46,7 @@ class ModifyObject(komand.Action):
         dn_test = [d["dn"] for d in entries if "dn" in d]
         if len(dn_test) == 0:
             self.logger.error("The DN " + dn + " was not found")
-            raise PluginException(
-                cause="The DN was not found.", assistance="The DN " + dn + " was not found"
-            )
+            raise PluginException(cause="The DN was not found.", assistance="The DN " + dn + " was not found")
 
         # Update attribute
         dn = formatter.unescape_asterisk(dn)

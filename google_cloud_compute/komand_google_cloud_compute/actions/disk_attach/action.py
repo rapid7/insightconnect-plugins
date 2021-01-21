@@ -29,9 +29,7 @@ class DiskAttach(komand.Action):
             data = {}
             data["source"] = params.get("source", "")
 
-            url = server + "/projects/{0}/zones/{1}/instances/{2}/attachDisk".format(
-                project_id, zone, instance
-            )
+            url = server + "/projects/{0}/zones/{1}/instances/{2}/attachDisk".format(project_id, zone, instance)
 
             # new Request Request
             request = urllib2.Request(

@@ -23,9 +23,7 @@ class SubmitUrlForScan(komand.Action):
         if params[Input.PUBLIC]:
             body["public"] = "on"
 
-        response = requests.post(
-            f"{self.connection.server}/scan", headers=self.connection.headers, data=body
-        )
+        response = requests.post(f"{self.connection.server}/scan", headers=self.connection.headers, data=body)
 
         try:
             out = response.json()

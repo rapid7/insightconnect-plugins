@@ -46,6 +46,4 @@ class Connection(komand.Connection):
         except TimeoutExpired as e:
             raise Exception("Error: Installing Python dependencies exceeded timeout") from e
         except CalledProcessError as e:
-            raise Exception(
-                "Error: Non-zero exit code returned. Message: %s" % e.output.decode("UTF8")
-            ) from e
+            raise Exception("Error: Non-zero exit code returned. Message: %s" % e.output.decode("UTF8")) from e

@@ -35,9 +35,7 @@ class GetScanEnginePools(komand.Action):
             for e in engine_pools:
                 if regex.match(e["name"]):
                     filtered_engine_pools.append(e)
-            self.logger.info(
-                "Returning %d scan engine pools based on filters..." % (len(filtered_engine_pools))
-            )
+            self.logger.info("Returning %d scan engine pools based on filters..." % (len(filtered_engine_pools)))
             engine_pools = filtered_engine_pools
 
         # Add an engines key to the default engine pool if it's in the list...

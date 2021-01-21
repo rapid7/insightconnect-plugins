@@ -31,9 +31,7 @@ class Auth(komand.Action):
             username = params.get(Input.USERNAME)
 
         if (username and user_id) or (user_id is None and username is None):
-            raise PluginException(
-                cause="Wrong input", assistance="Only user_id or username should be used. Not both."
-            )
+            raise PluginException(cause="Wrong input", assistance="Only user_id or username should be used. Not both.")
 
         response = self.connection.auth_api.auth(
             factor=params[Input.FACTOR],

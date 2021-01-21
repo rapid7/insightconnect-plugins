@@ -18,13 +18,13 @@ class ConnectionSchema(komand.Input):
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "API Key",
+      "description": "Enter API key e.g. 8lzx2lnr7uwyu27abc7jjo0ezo3",
       "order": 2
     },
     "region": {
       "type": "string",
       "title": "Region",
-      "description": "Region",
+      "description": "Select a region e.g. US",
       "default": "US",
       "enum": [
         "US",
@@ -35,7 +35,7 @@ class ConnectionSchema(komand.Input):
     "ssl_verify": {
       "type": "boolean",
       "title": "SSL Verify",
-      "description": "SSL Verify",
+      "description": "SSL verify",
       "default": false,
       "order": 3
     }

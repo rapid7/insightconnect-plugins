@@ -38,8 +38,6 @@ class Connection(komand.Connection):
         response = self.session.send(self.request.prepare(), verify=self.request.verify)
 
         if response.status_code not in range(200, 299):
-            raise ConnectionTestException(
-                preset=ConnectionTestException.Preset.INVALID_JSON, data=response.text
-            )
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.INVALID_JSON, data=response.text)
 
         return {"connection": "successful"}

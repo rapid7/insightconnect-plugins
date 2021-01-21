@@ -115,9 +115,7 @@ class Address(insightconnect_plugin_runtime.Action):
         elif list(filter(lambda l: self.RIPE in l.lower(), lines)):
             registry = self.RIPE
         else:
-            self.logger.info(
-                "Warning: No WHOIS registry detected from stdout, defaulting to ARIN..."
-            )
+            self.logger.info("Warning: No WHOIS registry detected from stdout, defaulting to ARIN...")
             registry = self.ARIN
 
         return registry

@@ -19,9 +19,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         password = params.get(Input.CREDENTIALS).get("password")
         ssl_verify = params.get(Input.SSL_VERIFY)
 
-        self.ivanti_api = IvantiSecurityControlsAPI(
-            host, port, ssl_verify, username, password, self.logger
-        )
+        self.ivanti_api = IvantiSecurityControlsAPI(host, port, ssl_verify, username, password, self.logger)
 
     def test(self):
         try:

@@ -52,9 +52,7 @@ class ChangeGroup(komand.Action):
         try:
             status = response.json().get("status")
         except Exception as e:
-            self.logger.error(
-                f"Change group failed.\n" f"Exception was: {e}\n" f"Response was: {response.text}"
-            )
+            self.logger.error(f"Change group failed.\n" f"Exception was: {e}\n" f"Response was: {response.text}")
             raise e
 
         # Check status

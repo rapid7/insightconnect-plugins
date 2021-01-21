@@ -18,9 +18,7 @@ class GetWhois(komand.Action):
         compact_record = not not params.get("compact_record")
         query = params["query"]
         self.logger.info("Query: %s", query)
-        results = self.connection.whois.get_whois_details(
-            query=query, compact_record=compact_record
-        )
+        results = self.connection.whois.get_whois_details(query=query, compact_record=compact_record)
         if results:
             results = util.clean_dict_recursive(results)
 

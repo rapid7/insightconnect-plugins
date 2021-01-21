@@ -42,9 +42,9 @@ class RemoveAddressFromGroup(komand.Action):
     def _generate_payload(address: str, address_object: dict, address_group: dict) -> dict:
         found = False
         for address_group_object in address_group.get("objects"):
-            if address_group_object.get("name") == address_object.get(
-                "name"
-            ) or address_group_object.get("value") == address_object.get("value"):
+            if address_group_object.get("name") == address_object.get("name") or address_group_object.get(
+                "value"
+            ) == address_object.get("value"):
                 address_group.get("objects").remove(address_group_object)
                 found = True
 

@@ -35,13 +35,11 @@ class GetHostIdFromHostname(komand.Action):
 
             except JSONDecodeError as e:
                 raise Exception(
-                    f"Error: Malformed response received from FireEye HX appliance. "
-                    f"Got: {response.text}"
+                    f"Error: Malformed response received from FireEye HX appliance. " f"Got: {response.text}"
                 ) from e
             except (KeyError, IndexError) as e:
                 raise Exception(
-                    "Error: Unknown error received from FireEye HX appliance "
-                    "(no error cause reported)."
+                    "Error: Unknown error received from FireEye HX appliance " "(no error cause reported)."
                 ) from e
         try:
             response_json = response.json()
@@ -49,8 +47,7 @@ class GetHostIdFromHostname(komand.Action):
             host_id = entries[0]["_id"]
         except (JSONDecodeError, KeyError) as e:
             raise Exception(
-                f"Error: Malformed response received from FireEye HX appliance. "
-                f"Response was {response.text}"
+                f"Error: Malformed response received from FireEye HX appliance. " f"Response was {response.text}"
             ) from e
 
         # IndexError from accessing an item in `entries` when one did not exist, so no matches. Return a failure.

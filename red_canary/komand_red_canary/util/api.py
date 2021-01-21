@@ -158,7 +158,9 @@ class RedCanary3:
             s.mount("https://", retry_adapter)
 
             try:
-                response = s.send(prepped,)
+                response = s.send(
+                    prepped,
+                )
             except urllib3.exceptions.ProtocolError:
                 self.logger.info("[-] Connection aborted. Retrying request")
                 response = s.send(prepped)
@@ -182,9 +184,7 @@ class RedCanary3:
                         assistance="Double-check the API authorization key from your Red Canary account at https://<customer_id>.my.redcanary.co/users/edit.",
                     )
                 raise Exception(
-                    "Failed to call Red Canary v3 API: {} {}".format(
-                        response.status_code, response.content
-                    )
+                    "Failed to call Red Canary v3 API: {} {}".format(response.status_code, response.content)
                 )
 
             json_response = komand.helper.clean(response.json())
@@ -195,9 +195,7 @@ class RedCanary3:
                     break
             else:
                 if len(data) > 0:
-                    self.logger.info(
-                        "Empty results returned by API. " "Assuming no more results are available."
-                    )
+                    self.logger.info("Empty results returned by API. " "Assuming no more results are available.")
                     self._clean_empty_results(results)
                     break
                 else:

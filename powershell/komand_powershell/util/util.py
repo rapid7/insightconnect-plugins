@@ -132,9 +132,7 @@ default_domain = {udomain}
         f.write("\r\n" + host_ip + " " + host_name)
 
     # Runs the script on the host
-    powershell_session = winrm.Session(
-        host_connection, auth=(username, password), transport="kerberos"
-    )
+    powershell_session = winrm.Session(host_connection, auth=(username, password), transport="kerberos")
 
     # Forces the protocol to not fail with self signed certs
     p = winrm.Protocol(
@@ -170,9 +168,7 @@ def credssp(action, host_ip, powershell_script, username, password, port):
     action.logger.debug("Host Connection: " + host_connection)
     action.logger.debug("PowerShell script: " + powershell_script)
 
-    powershell_session = winrm.Session(
-        host_connection, auth=(username, password), transport="credssp"
-    )
+    powershell_session = winrm.Session(host_connection, auth=(username, password), transport="credssp")
     # Forces the Protocol to not fail with self signed certs
     p = winrm.Protocol(
         endpoint=host_connection,

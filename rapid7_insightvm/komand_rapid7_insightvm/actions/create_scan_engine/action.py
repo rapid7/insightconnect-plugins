@@ -25,9 +25,7 @@ class CreateScanEngine(komand.Action):
 
         self.logger.info("Creating scan engine...")
         try:
-            response = resource_helper.resource_request(
-                endpoint=endpoint, method="post", payload=payload
-            )
+            response = resource_helper.resource_request(endpoint=endpoint, method="post", payload=payload)
         except Exception as e:
             if "An unexpected error occurred." in str(e):
                 error = "Security console failed to connect to scan engine"

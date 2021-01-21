@@ -20,8 +20,4 @@ class ProcessBytes(komand.Action):
         sed_list = params.get(Input.EXPRESSION)
         sed_opts = params.get(Input.OPTIONS)
 
-        return {
-            Output.OUTPUT: base64.b64encode(Helper.process(input_str, sed_list, sed_opts)).decode(
-                "utf-8"
-            )
-        }
+        return {Output.OUTPUT: base64.b64encode(Helper.process(input_str, sed_list, sed_opts)).decode("utf-8")}

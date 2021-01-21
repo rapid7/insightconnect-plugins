@@ -25,9 +25,7 @@ class AddUserToGroup(komand.Action):
         try:
             membership = client.group(group_id=group_id).add_member(user, role)
         except Exception as e:
-            raise PluginException(
-                cause="Add user to group failed.", assistance=f"Exception returned was {e}"
-            )
+            raise PluginException(cause="Add user to group failed.", assistance=f"Exception returned was {e}")
 
         membership_object = {
             "user_id": membership.user.object_id,

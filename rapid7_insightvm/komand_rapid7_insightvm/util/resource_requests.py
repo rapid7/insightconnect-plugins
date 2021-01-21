@@ -40,7 +40,9 @@ class ResourceRequests(object):
 
     # Static headers for all requests
     _HEADERS = {"Content-Type": "application/json", "Accept": "application/json"}
-    _ENSURECONNECTIVITY = "Ensure proper network connectivity between the InsightConnect orchestrator and the InsightVM console"
+    _ENSURECONNECTIVITY = (
+        "Ensure proper network connectivity between the InsightConnect orchestrator and the InsightVM console"
+    )
 
     # Currently only handling the most common requests exceptions more can be added as needed
     _REQUEST_EXCEPTIONS = {
@@ -156,9 +158,7 @@ class ResourceRequests(object):
                     parameters["size"] = number_of_results - results_retrieved
                     last_page = True
 
-            response = self.get_resource_page(
-                endpoint=endpoint, method=method, params=parameters, payload=payload
-            )
+            response = self.get_resource_page(endpoint=endpoint, method=method, params=parameters, payload=payload)
 
             resources += response.resources  # Grab resources and append to total
             self.logger.info(
@@ -178,9 +178,7 @@ class ResourceRequests(object):
 
         return resources
 
-    def get_resource_page(
-        self, endpoint: str, method: str, params: RequestParams, payload: dict
-    ) -> RequestResult:
+    def get_resource_page(self, endpoint: str, method: str, params: RequestParams, payload: dict) -> RequestResult:
         """
         Retrieves resources from a security console
         :param endpoint: Endpoint to reach
@@ -191,9 +189,7 @@ class ResourceRequests(object):
         """
         # Get size and page from list of dict param type
 
-        self.logger.info(
-            f'Fetching up to {params["size"]} resources from endpoint page {params["page"]} ...'
-        )
+        self.logger.info(f'Fetching up to {params["size"]} resources from endpoint page {params["page"]} ...')
         request_method = getattr(self.session, method.lower())
 
         extras = {"json": payload, "params": params.params}

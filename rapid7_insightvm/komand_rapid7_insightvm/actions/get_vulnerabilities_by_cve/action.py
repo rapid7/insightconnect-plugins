@@ -22,17 +22,13 @@ class GetVulnerabilitiesByCve(komand.Action):
         self.logger.info(f"Using {endpoint}...")
         params = {"search": cve_id}
 
-        results = resource_helper.paged_resource_request(
-            endpoint=endpoint, method="get", params=params
-        )
+        results = resource_helper.paged_resource_request(endpoint=endpoint, method="get", params=params)
 
         # Get unique vulnerability IDs
         vuln_ids = set()
         for r in results:
             vuln_ids.add(r["vulnerability"])
-        self.logger.info(
-            f"Received {len(vuln_ids)} vulnerability IDs from search, getting details..."
-        )
+        self.logger.info(f"Received {len(vuln_ids)} vulnerability IDs from search, getting details...")
         # Get vulnerability details
         vulns = []
         for v in vuln_ids:

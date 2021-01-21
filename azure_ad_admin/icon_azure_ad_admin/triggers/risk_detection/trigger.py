@@ -41,9 +41,7 @@ class RiskDetection(komand.Trigger):
         if self.risk_level and self.risk_level != "all":
             risk_detect_endpoint = f"https://graph.microsoft.com/beta/{self.connection.tenant}/riskDetections?$filter=riskLevel eq '{self.risk_level}'"
         else:
-            risk_detect_endpoint = (
-                f"https://graph.microsoft.com/beta/{self.connection.tenant}/riskDetections"
-            )
+            risk_detect_endpoint = f"https://graph.microsoft.com/beta/{self.connection.tenant}/riskDetections"
 
         new_risks = requests.get(risk_detect_endpoint, headers=headers)
 

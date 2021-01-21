@@ -38,9 +38,7 @@ class Connection(komand.Connection):
             self.logger.error(response)
             raise ConnectionTestException(
                 cause="Server request failed.",
-                assistance="Status code is {}, see log for details.".format(
-                    response["meta"]["status"]
-                ),
+                assistance="Status code is {}, see log for details.".format(response["meta"]["status"]),
                 data=response["fail"],
             )
 

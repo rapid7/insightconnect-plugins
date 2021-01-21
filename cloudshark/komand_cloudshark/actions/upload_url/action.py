@@ -45,9 +45,7 @@ class UploadUrl(komand.Action):
             results = json.loads(resp.text)
             return results
         except requests.exceptions.HTTPError:
-            self.logger.error(
-                "Requests: HTTPError: status code %s for %s", str(resp.status_code), url
-            )
+            self.logger.error("Requests: HTTPError: status code %s for %s", str(resp.status_code), url)
         Exception("CloudShark: Failed")
 
     def test(self):

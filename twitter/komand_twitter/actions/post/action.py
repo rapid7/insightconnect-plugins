@@ -7,9 +7,7 @@ from komand_twitter.util import util
 
 class Post(komand.Action):
     def __init__(self):
-        super(self.__class__, self).__init__(
-            name="post", description="Tweet", input=PostInput(), output=PostOutput()
-        )
+        super(self.__class__, self).__init__(name="post", description="Tweet", input=PostInput(), output=PostOutput())
 
     def run(self, params={}):
         tweet = params.get("msg")
@@ -21,22 +19,16 @@ class Post(komand.Action):
 
         if tweet_length == 0:
             assert "Run: Tweet length was 0. Make sure property 'msg' is marked required."
-            raise Exception(
-                "Twitter: Tweet length was 0. Make sure property 'msg' is marked required."
-            )
+            raise Exception("Twitter: Tweet length was 0. Make sure property 'msg' is marked required.")
 
-        if (
-            tweet_length > self.connection.TWEET_MAX_LENGTH
-        ):  # Requirement: Truncate tweet is greater than max length
+        if tweet_length > self.connection.TWEET_MAX_LENGTH:  # Requirement: Truncate tweet is greater than max length
             self.logger.info(
                 "Run: Tweet was greater than maximum allowed length by Twitter ({length}/{max_length}). "
                 "Tweet will be truncated"
             ).format(length=tweet_length, max_length=self.connection.TWEET_MAX_LENGTH)
             tweet = tweet[: self.connection.TWEET_MAX_LENGTH]
 
-        tweet = util.Common.strip_mention_out_of_tweet(
-            username=self.connection.screen_name, tweet=tweet
-        )
+        tweet = util.Common.strip_mention_out_of_tweet(username=self.connection.screen_name, tweet=tweet)
         post = self.connection.client.PostUpdate(tweet).AsDict()
 
         if not post:

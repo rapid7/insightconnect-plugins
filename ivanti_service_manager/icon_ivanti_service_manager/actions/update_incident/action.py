@@ -22,10 +22,7 @@ class UpdateIncident(insightconnect_plugin_runtime.Action):
         cause_code = params.get(Input.CAUSE_CODE)
         resolution = params.get(Input.RESOLUTION)
 
-        if all(
-            (v is None or v == "")
-            for v in [customer, assignee, status, category, cause_code, resolution]
-        ):
+        if all((v is None or v == "") for v in [customer, assignee, status, category, cause_code, resolution]):
             raise PluginException(
                 cause="At least one action input is required.",
                 assistance="Provide at least one input to update and try again.",
@@ -33,13 +30,9 @@ class UpdateIncident(insightconnect_plugin_runtime.Action):
 
         payload = {}
         if assignee:
-            payload["Owner"] = self.connection.ivanti_service_manager_api.search_employee(
-                assignee
-            ).get("LoginID")
+            payload["Owner"] = self.connection.ivanti_service_manager_api.search_employee(assignee).get("LoginID")
         if customer:
-            payload["ProfileLink"] = self.connection.ivanti_service_manager_api.search_employee(
-                customer
-            ).get("RecId")
+            payload["ProfileLink"] = self.connection.ivanti_service_manager_api.search_employee(customer).get("RecId")
         if status:
             payload["Status"] = status
         if category:

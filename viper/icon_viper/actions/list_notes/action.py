@@ -13,8 +13,4 @@ class ListNotes(komand.Action):
         )
 
     def run(self, params={}):
-        return {
-            Output.NOTES: project.Project(
-                self.connection.config, params.get(Input.PROJECT_NAME)
-            ).list_notes()
-        }
+        return {Output.NOTES: project.Project(self.connection.config, params.get(Input.PROJECT_NAME)).list_notes()}

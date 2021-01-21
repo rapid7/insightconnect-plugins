@@ -20,8 +20,6 @@ class DeleteException(komand.Action):
 
         id_ = params["exception_id"]
 
-        endpoint = endpoints.VulnerabilityException.vulnerability_exception(
-            self.connection.console_url, id_
-        )
+        endpoint = endpoints.VulnerabilityException.vulnerability_exception(self.connection.console_url, id_)
         response = resource_helper.resource_request(endpoint=endpoint, method="delete")
         return response

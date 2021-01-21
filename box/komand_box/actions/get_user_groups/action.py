@@ -22,9 +22,7 @@ class GetUserGroups(komand.Action):
 
         self.logger.info(f"Looking for user groups with user ID: {user_id}")
         # The API method for memberships didn't work, thus doing it manually
-        box_response = client.make_request(
-            "get", f"https://api.box.com/2.0/users/{user_id}/memberships"
-        )
+        box_response = client.make_request("get", f"https://api.box.com/2.0/users/{user_id}/memberships")
 
         if not box_response or not box_response.ok:
             raise PluginException(

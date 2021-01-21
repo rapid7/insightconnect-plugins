@@ -90,9 +90,7 @@ class IvantiSecurityControlsAPI:
                 return agents
 
     def start_patch_scan(self, payload):
-        return self._call_api(
-            "POST", f"{self.url}/patch/scans", json_data=payload, return_response=True
-        )
+        return self._call_api("POST", f"{self.url}/patch/scans", json_data=payload, return_response=True)
 
     def get_patch_scan_machines(self, scan_id):
         return self._call_api("GET", f"{self.url}/patch/scans/{scan_id}/machines")
@@ -101,9 +99,7 @@ class IvantiSecurityControlsAPI:
         return self._call_api("GET", f"{self.url}/patch/scans/{scan_id}", allow_404=allow_404)
 
     def get_detected_patches(self, scan_id, machine_id):
-        return self._call_api(
-            "GET", f"{self.url}/patch/scans/{scan_id}/machines/{machine_id}/patches"
-        )
+        return self._call_api("GET", f"{self.url}/patch/scans/{scan_id}/machines/{machine_id}/patches")
 
     def get_patch_deployment(self, deployment_id):
         return self._call_api("GET", f"{self.url}/patch/deployments/{deployment_id}")
@@ -112,9 +108,7 @@ class IvantiSecurityControlsAPI:
         return self._call_api("GET", f"{self.url}/patch/deployments/{deployment_id}/machines")
 
     def get_patch_deployment_machine(self, deployment_id, machine_id):
-        return self._call_api(
-            "GET", f"{self.url}/patch/deployments/{deployment_id}/machines/{machine_id}"
-        )
+        return self._call_api("GET", f"{self.url}/patch/deployments/{deployment_id}/machines/{machine_id}")
 
     def create_patch_group(self, payload):
         return self._call_api("POST", f"{self.url}/patch/groups", json_data=payload)
@@ -123,9 +117,7 @@ class IvantiSecurityControlsAPI:
         return self._call_api("GET", f"{self.url}/patch/groups/{patch_group_id}", allow_404=True)
 
     def add_cves_to_patch_group(self, patch_group_id, payload):
-        return self._call_api(
-            "POST", f"{self.url}/patch/groups/{patch_group_id}/patches/cves", json_data=payload
-        )
+        return self._call_api("POST", f"{self.url}/patch/groups/{patch_group_id}/patches/cves", json_data=payload)
 
     def create_patch_scan_template(self, payload):
         return self._call_api("POST", f"{self.url}/patch/scanTemplates", json_data=payload)
@@ -137,9 +129,7 @@ class IvantiSecurityControlsAPI:
         payload = {
             "clearText": self.password,
         }
-        self._call_api(
-            "DELETE", f"{self.url}/sessioncredentials", allow_404=True, return_response=True
-        )
+        self._call_api("DELETE", f"{self.url}/sessioncredentials", allow_404=True, return_response=True)
         return self._call_api("POST", f"{self.url}/sessioncredentials", json_data=payload)
 
     def get_operation_location(self, url):
@@ -150,31 +140,23 @@ class IvantiSecurityControlsAPI:
         return self._call_api("GET", f"{self.url}/patch/deploytemplates", params=params)
 
     def start_patch_download(self, scan_id):
-        return self._call_api(
-            "POST", f"{self.url}/patch/downloads/scans/{scan_id}", return_response=True
-        )
+        return self._call_api("POST", f"{self.url}/patch/downloads/scans/{scan_id}", return_response=True)
 
     def get_patch_scan_by_name(self, scan_name):
         params = {"name": scan_name, "count": 1}
         return self._call_api("GET", f"{self.url}/patch/scans", params=params)
 
     def start_patch_deployment(self, payload):
-        return self._call_api(
-            "POST", f"{self.url}/patch/deployments", json_data=payload, return_response=True
-        )
+        return self._call_api("POST", f"{self.url}/patch/deployments", json_data=payload, return_response=True)
 
     def get_patch_group_by_name(self, patch_group_name):
         params = {"name": patch_group_name, "count": 1}
         return self._call_api("GET", f"{self.url}/patch/groups", params=params)
 
     def add_patches_to_patch_group(self, patch_group_id, payload):
-        return self._call_api(
-            "POST", f"{self.url}/patch/groups/{patch_group_id}/patches", json_data=payload
-        )
+        return self._call_api("POST", f"{self.url}/patch/groups/{patch_group_id}/patches", json_data=payload)
 
-    def _call_api(
-        self, method, url, params=None, json_data=None, allow_404=False, return_response=False
-    ):
+    def _call_api(self, method, url, params=None, json_data=None, allow_404=False, return_response=False):
         try:
             response = requests.request(
                 method,
@@ -192,9 +174,7 @@ class IvantiSecurityControlsAPI:
                 else:
                     raise PluginException(preset=PluginException.Preset.NOT_FOUND)
             if response.status_code == 409:
-                raise PluginException(
-                    cause="Conflict.", assistance="Resource with this name already exists."
-                )
+                raise PluginException(cause="Conflict.", assistance="Resource with this name already exists.")
             if 200 <= response.status_code < 300:
                 if return_response:
                     return response

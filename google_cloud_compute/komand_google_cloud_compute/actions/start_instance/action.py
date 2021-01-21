@@ -25,9 +25,7 @@ class StartInstance(komand.Action):
             instance = params.get("instance")
             zone = params.get("zone")
 
-            url = server + "/projects/{0}/zones/{1}/instances/{2}/start".format(
-                project_id, zone, instance
-            )
+            url = server + "/projects/{0}/zones/{1}/instances/{2}/start".format(project_id, zone, instance)
 
             # Call API
             request = urllib2.Request(

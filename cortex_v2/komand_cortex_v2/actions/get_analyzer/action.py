@@ -29,13 +29,9 @@ class GetAnalyzer(komand.Action):
                 raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
             except ServiceUnavailableError as e:
                 self.logger.error(e)
-                raise ConnectionTestException(
-                    preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE
-                )
+                raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
             except CortexException as e:
-                raise ConnectionTestException(
-                    cause="Failed to get analyzers.", assistance="{}.".format(e)
-                )
+                raise ConnectionTestException(cause="Failed to get analyzers.", assistance="{}.".format(e))
         else:
             try:
                 analyzers = api.analyzers.find_all({}, range="all")
@@ -44,12 +40,8 @@ class GetAnalyzer(komand.Action):
                 raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
             except ServiceUnavailableError as e:
                 self.logger.error(e)
-                raise ConnectionTestException(
-                    preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE
-                )
+                raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
             except CortexException as e:
-                raise ConnectionTestException(
-                    cause="Failed to get analyzers.", assistance="{}.".format(e)
-                )
+                raise ConnectionTestException(cause="Failed to get analyzers.", assistance="{}.".format(e))
 
         return {"list": analyzers_to_dicts(analyzers)}

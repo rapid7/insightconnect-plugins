@@ -14,18 +14,14 @@ class GetPatchDeployment(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        patch_deployment = self.connection.ivanti_api.get_patch_deployment(
-            params.get(Input.DEPLOYMENT_ID)
-        )
+        patch_deployment = self.connection.ivanti_api.get_patch_deployment(params.get(Input.DEPLOYMENT_ID))
 
         if params.get(Input.MACHINE_ID):
             machine_info = self.connection.ivanti_api.get_patch_deployment_machine(
                 params.get(Input.DEPLOYMENT_ID), params.get(Input.MACHINE_ID)
             )
         else:
-            machine_info = self.connection.ivanti_api.get_patch_deployment_machines(
-                params.get(Input.DEPLOYMENT_ID)
-            )
+            machine_info = self.connection.ivanti_api.get_patch_deployment_machines(params.get(Input.DEPLOYMENT_ID))
 
         return {
             Output.PATCH_DEPLOYMENT_DETAILS: patch_deployment,

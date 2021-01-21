@@ -27,11 +27,7 @@ class GetAlertsByHostId(komand.Action):
             raw: str = response.text
 
             # Unkludge the kludgefest "valid JSON" (lol) response from FireEye
-            objects = [
-                komand.helper.clean(json.loads(l))
-                for l in raw.splitlines()
-                if (not l.isnumeric() and len(l))
-            ]
+            objects = [komand.helper.clean(json.loads(l)) for l in raw.splitlines() if (not l.isnumeric() and len(l))]
 
             return {Output.ALERTS: objects}
         else:
@@ -43,11 +39,9 @@ class GetAlertsByHostId(komand.Action):
 
             except JSONDecodeError as e:
                 raise Exception(
-                    f"Error: Malformed response received from FireEye HX appliance. "
-                    f"Got: {response.text}"
+                    f"Error: Malformed response received from FireEye HX appliance. " f"Got: {response.text}"
                 ) from e
             except (KeyError, IndexError) as e:
                 raise Exception(
-                    "Error: Unknown error received from FireEye HX appliance "
-                    "(no error cause reported)."
+                    "Error: Unknown error received from FireEye HX appliance " "(no error cause reported)."
                 ) from e

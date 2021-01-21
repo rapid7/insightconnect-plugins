@@ -7,6 +7,5 @@ class APIException(Exception):
 
     def __str__(self) -> str:
         return (
-            f"\nAn error occurred with the Insight Agent API.\n"
-            f"{self.cause}\n{self.assistance}\nData: {self.data}"
+            f"\nAn error occurred with the Insight Agent API.\n" f"{self.cause}\n{self.assistance}\nData: {self.data}"
         )

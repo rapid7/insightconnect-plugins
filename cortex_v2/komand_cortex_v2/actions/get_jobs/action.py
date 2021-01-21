@@ -50,8 +50,6 @@ class GetJobs(komand.Action):
             self.logger.error(e)
             raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
         except Exception as e:
-            raise ConnectionTestException(
-                cause="Failed to obtain the list of jobs.", assistance="{}.".format(e)
-            )
+            raise ConnectionTestException(cause="Failed to obtain the list of jobs.", assistance="{}.".format(e))
 
         return {"list": jobs}

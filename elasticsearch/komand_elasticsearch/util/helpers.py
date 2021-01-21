@@ -39,9 +39,7 @@ def put_index(log, host, index, type_, id_, document, username=None, password=No
         if not username:
             resp = requests.put(url, json=document, headers=headers)
         else:
-            resp = requests.put(
-                url, json=document, auth=HTTPBasicAuth(username, password), headers=headers
-            )
+            resp = requests.put(url, json=document, auth=HTTPBasicAuth(username, password), headers=headers)
 
         if resp.status_code >= 200 and resp.status_code <= 399:
             return resp.json()
@@ -69,9 +67,7 @@ def post_index(log, host, index, type_, document, username=None, password=None, 
         if not username:
             resp = requests.post(url, json=document, headers=headers)
         else:
-            resp = requests.post(
-                url, json=document, auth=HTTPBasicAuth(username, password), headers=headers
-            )
+            resp = requests.post(url, json=document, auth=HTTPBasicAuth(username, password), headers=headers)
 
         if resp.status_code >= 200 and resp.status_code <= 399:
             return resp.json()
@@ -99,9 +95,7 @@ def post_update(log, host, index, type_, id_, script, username=None, password=No
         if not username:
             resp = requests.post(url, json=script, headers=headers)
         else:
-            resp = requests.post(
-                url, json=script, auth=HTTPBasicAuth(username, password), headers=headers
-            )
+            resp = requests.post(url, json=script, auth=HTTPBasicAuth(username, password), headers=headers)
 
         if resp.status_code >= 200 and resp.status_code <= 399:
             return resp.json()
@@ -134,9 +128,7 @@ def get_search(log, host, index, type_, query=None, username=None, password=None
         if not username:
             resp = requests.get(url, json=query, headers=headers)
         else:
-            resp = requests.get(
-                url, json=query, auth=HTTPBasicAuth(username, password), headers=headers
-            )
+            resp = requests.get(url, json=query, auth=HTTPBasicAuth(username, password), headers=headers)
 
         if resp.status_code >= 200 and resp.status_code <= 399:
             return resp.json()

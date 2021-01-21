@@ -16,9 +16,7 @@ class IncidentCreated(insightconnect_plugin_runtime.Trigger):
             input=IncidentCreatedInput(),
             output=IncidentCreatedOutput(),
         )
-        self.last_poll_time = (datetime.now(tz=timezone.utc) - timedelta(seconds=1)).replace(
-            microsecond=0
-        )
+        self.last_poll_time = (datetime.now(tz=timezone.utc) - timedelta(seconds=1)).replace(microsecond=0)
         self.most_recent_system_id = ""
         self.last_sys_id = ""
 
@@ -74,8 +72,7 @@ class IncidentCreated(insightconnect_plugin_runtime.Trigger):
 
             else:
                 self.connection.logger.warning(
-                    f"Warning: An incident could not be read -- the incident "
-                    f"did not have the necessary values."
+                    f"Warning: An incident could not be read -- the incident " f"did not have the necessary values."
                 )
 
         # minus ~1 second to ensure that incidents between polls are not missed
@@ -97,4 +94,4 @@ class IncidentCreated(insightconnect_plugin_runtime.Trigger):
 
         while True:
             self.poll(url, method, query, utc)
-            time.sleep(params.get(Input.frequency, 5))
+            time.sleep(params.get(Input.FREQUENCY, 5))

@@ -5,9 +5,7 @@ from komand.exceptions import ConnectionTestException
 def demo_test(token):
     demo_url = "https://api.recordedfuture.com/v2/hash/demoevents?limit=1"
     if not token:
-        raise ConnectionTestException(
-            cause="Missing API Key.", assistance="Please provide API key."
-        )
+        raise ConnectionTestException(cause="Missing API Key.", assistance="Please provide API key.")
     try:
         test_headers = {"X-RFToken": token}
         response = requests.get(demo_url, headers=test_headers)
@@ -20,9 +18,7 @@ def demo_test(token):
         elif response.status_code == 404:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.NOT_FOUND)
         elif response.status_code >= 400:
-            raise ConnectionTestException(
-                preset=ConnectionTestException.Preset.UNKNOWN, data=response.text
-            )
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNKNOWN, data=response.text)
     except requests.exceptions.ConnectionError as e:
         raise ConnectionTestException(
             cause="A network problem occurred.",

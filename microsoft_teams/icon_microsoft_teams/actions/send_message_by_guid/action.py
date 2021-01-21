@@ -23,13 +23,9 @@ class SendMessageByGuid(komand.Action):
         message_content = params.get(Input.MESSAGE)
 
         if is_html:
-            message = send_html_message(
-                self.logger, self.connection, message_content, team_guid, channel_guid
-            )
+            message = send_html_message(self.logger, self.connection, message_content, team_guid, channel_guid)
         else:
-            message = send_message(
-                self.logger, self.connection, message_content, team_guid, channel_guid
-            )
+            message = send_message(self.logger, self.connection, message_content, team_guid, channel_guid)
 
         clean_message = remove_null_and_clean(message)
         clean_message = add_words_values_to_message(clean_message)

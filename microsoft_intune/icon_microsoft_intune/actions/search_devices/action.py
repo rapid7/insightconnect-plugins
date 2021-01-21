@@ -14,6 +14,4 @@ class SearchDevices(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {
-            Output.DEVICES: self.connection.api.search_managed_devices(params.get(Input.DEVICE))
-        }
+        return {Output.DEVICES: self.connection.api.search_managed_devices(params.get(Input.DEVICE))}

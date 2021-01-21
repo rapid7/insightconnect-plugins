@@ -28,13 +28,10 @@ class Connection(komand.Connection):
         except jbxapi.MissingParameterError as e:
             raise ConnectionTestException(
                 cause=str(e),
-                assistance="Please make sure that you are using Joe Sandbox "
-                "according to the documentation.",
+                assistance="Please make sure that you are using Joe Sandbox " "according to the documentation.",
             )
         except jbxapi.InvalidParameterError as e:
-            raise ConnectionTestException(
-                cause=str(e), assistance="If the issue persists please contact support."
-            )
+            raise ConnectionTestException(cause=str(e), assistance="If the issue persists please contact support.")
         except jbxapi.InvalidApiKeyError:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
         except jbxapi.ServerOfflineError:

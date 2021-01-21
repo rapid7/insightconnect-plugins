@@ -13,8 +13,4 @@ class ListTags(komand.Action):
         )
 
     def run(self, params={}):
-        return {
-            Output.TAGS: project.Project(
-                self.connection.config, params.get(Input.PROJECT_NAME)
-            ).list_tags()
-        }
+        return {Output.TAGS: project.Project(self.connection.config, params.get(Input.PROJECT_NAME)).list_tags()}

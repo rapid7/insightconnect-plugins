@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import QuarantineInput, QuarantineOutput, Input, Output, Component
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 
 
-class Quarantine(komand.Action):
+class Quarantine(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="quarantine",
@@ -16,7 +16,8 @@ class Quarantine(komand.Action):
 
     def run(self, params={}):
         agent = params.get(Input.AGENT)
-        agents = self.connection.client.search_agents(agent, results_length=2)
+        case_sensitive = params.get(Input.CASE_SENSITIVE)
+        agents = self.connection.client.search_agents(agent, case_sensitive=case_sensitive, results_length=2)
         whitelist = params.get(Input.WHITELIST, None)
 
         not_affected = {"response": {"data": {"affected": 0}}}
@@ -52,17 +53,14 @@ class Quarantine(komand.Action):
 
     @staticmethod
     def __check_disconnected(agent_obj: dict) -> bool:
-        if (
-            agent_obj["networkStatus"] == "disconnected"
-            or agent_obj["networkStatus"] == "disconnecting"
-        ):
+        if agent_obj["networkStatus"] == "disconnected" or agent_obj["networkStatus"] == "disconnecting":
             return True
         return False
 
     @staticmethod
     def __find_in_whitelist(agent_obj: dict, whitelist: list):
         for key, value in agent_obj.items():
-            if key in ['externalIp', 'computerName', 'id', 'uuid']:
+            if key in ["externalIp", "computerName", "id", "uuid"]:
                 if value in whitelist:
                     raise PluginException(
                         cause="Agent found in the whitelist.",
@@ -76,6 +74,6 @@ class Quarantine(komand.Action):
                             if ip_address in whitelist:
                                 raise PluginException(
                                     cause="Agent found in the whitelist.",
-                                    assistance=f"If you would like to block this host, remove {ip_address} from the whitelist and try again."
+                                    assistance=f"If you would like to block this host, remove {ip_address} from the whitelist and try again.",
                                 )
         return

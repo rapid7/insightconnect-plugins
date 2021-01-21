@@ -36,9 +36,7 @@ class WindwosDefenderATP_API:
             },
         )
         self.api_token = result_json.get("access_token")
-        self.logger.info(
-            f"Authentication was successful, token is: ******************{self.api_token[-5:]}"
-        )
+        self.logger.info(f"Authentication was successful, token is: ******************{self.api_token[-5:]}")
 
     def check_and_refresh_api_token(self, force_refresh_token: bool = False):
         self.time_now = time.time()
@@ -46,9 +44,7 @@ class WindwosDefenderATP_API:
         self.logger.info(f"Time Ago: {self.time_ago}")
         self.logger.info(f"Seconds elapsed:{int(self.time_now - self.time_ago)}")
 
-        if (
-            self.time_now - self.time_ago
-        ) > 3500 or force_refresh_token:  # 1 hour in seconds (minus some buffer time)
+        if (self.time_now - self.time_ago) > 3500 or force_refresh_token:  # 1 hour in seconds (minus some buffer time)
             self.logger.info("Refreshing auth token")
             self.get_token()
             self.time_ago = time.time()
@@ -86,7 +82,7 @@ class WindwosDefenderATP_API:
         raise PluginException(preset=PluginException.Preset.NOT_FOUND)
 
     def get_machines(self) -> dict:
-        return self._make_request("GET", f"machines")
+        return self._make_request("GET", "machines")
 
     def get_machine_information(self, machine_id: str) -> dict:
         return self._make_request("GET", f"machines/{machine_id}")
@@ -105,9 +101,7 @@ class WindwosDefenderATP_API:
         )
 
     def unisolate_machine(self, id_: str, comment: str) -> dict:
-        return self._make_request(
-            "POST", f"machines/{id_}/unisolate", json_data={"Comment": comment}
-        )
+        return self._make_request("POST", f"machines/{id_}/unisolate", json_data={"Comment": comment})
 
     def run_antivirus_scan(self, machine_id: str, scan_type: str, comment: str) -> dict:
         self.logger.info(
@@ -121,9 +115,7 @@ class WindwosDefenderATP_API:
         )
 
     def stop_and_quarantine_file(self, machine_id: str, sha1_id: str, comment: str) -> dict:
-        self.logger.info(
-            f"Stop and quarantine file with: {machine_id}, SHA1_ID: {sha1_id}, comment: {comment}"
-        )
+        self.logger.info(f"Stop and quarantine file with: {machine_id}, SHA1_ID: {sha1_id}, comment: {comment}")
 
         return self._make_request(
             "POST",
@@ -150,9 +142,25 @@ class WindwosDefenderATP_API:
     def get_security_recommendations(self, machine_id: str) -> dict:
         return self._make_request("GET", f"machines/{machine_id}/recommendations")
 
-    def _make_request(
-        self, method: str, path: str, json_data: dict = None, allow_empty: bool = False
-    ) -> dict:
+    def get_installed_software(self, machine: str) -> dict:
+        return self._make_request("GET", f"machines/{machine}/software")
+
+    def manage_tags(self, machine: str, tag: str, action_type: str) -> dict:
+        return self._make_request("POST", f"machines/{machine}/tags", json_data={"Value": tag, "Action": action_type})
+
+    def get_related_machines(self, indicator: str, indicator_type: str) -> dict:
+        return self._make_request("GET", f"{indicator_type}/{indicator}/machines")
+
+    def find_machine_id(self, machine_identification: str) -> str:
+        if re.match(r"^[a-z0-9]{40}$", machine_identification.lower()):
+            return machine_identification
+        machines = self.get_machines()
+        for machine in machines.get("value"):
+            for key in ["computerDnsName", "lastIpAddress", "lastExternalIpAddress"]:
+                if machine.get(key) == machine_identification:
+                    return machine.get("id")
+
+    def _make_request(self, method: str, path: str, json_data: dict = None, allow_empty: bool = False) -> dict:
         self.check_and_refresh_api_token()
         return self._call_api(
             method,
@@ -174,24 +182,17 @@ class WindwosDefenderATP_API:
     ) -> dict:
         response = {"text": ""}
         try:
-            response = requests.request(
-                method, url, json=json_data, params=params, data=data, headers=headers
-            )
+            response = requests.request(method, url, json=json_data, params=params, data=data, headers=headers)
 
             if response.status_code == 401:
-                raise PluginException(
-                    preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text
-                )
+                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
             if response.status_code == 404 and allow_empty:
                 return {}
             if response.status_code == 404:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
-            if (
-                response.status_code == 400
-                and '"message":"Action is already in progress"' in response.text
-            ):
+            if response.status_code == 400 and '"message":"Action is already in progress"' in response.text:
                 self.logger.info("Action is already in progress")
                 return {"status": "InProgress"}
             if response.status_code >= 400:

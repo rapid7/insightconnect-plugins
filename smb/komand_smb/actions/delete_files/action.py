@@ -4,9 +4,7 @@ from .schema import DeleteFilesInput, DeleteFilesOutput, Input, Output
 # Custom imports below
 import smb
 
-smb.smb_structs.SUPPORT_SMB2 = (
-    False  # Disable SMB2 support in order to allow deletion with wildcard pattern
-)
+smb.smb_structs.SUPPORT_SMB2 = False  # Disable SMB2 support in order to allow deletion with wildcard pattern
 
 
 class DeleteFiles(komand.Action):

@@ -28,9 +28,7 @@ class CreatePatchGroupAndAddCves(insightconnect_plugin_runtime.Action):
         patch_group_id = patch_group_details.get("id")
 
         if patch_group_id:
-            self.connection.ivanti_api.add_cves_to_patch_group(
-                patch_group_id, {"cves": params.get(Input.CVES)}
-            )
+            self.connection.ivanti_api.add_cves_to_patch_group(patch_group_id, {"cves": params.get(Input.CVES)})
             return {Output.PATCH_GROUP: patch_group_details}
 
         raise PluginException(

@@ -38,9 +38,7 @@ def execute_command(logger, cmd, answer_section_regex, flags):
             if flags is None:
                 answer_section = util.safe_parse(re.search(answer_section_regex, stdout))
             else:
-                answer_section = util.safe_parse(
-                    re.search(answer_section_regex, stdout, flags=flags)
-                )
+                answer_section = util.safe_parse(re.search(answer_section_regex, stdout, flags=flags))
 
     if status != "NOERROR":
         stdout = f"Resolution failed, nameserver {ns} returned {status} status"

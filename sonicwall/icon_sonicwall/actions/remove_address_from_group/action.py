@@ -24,9 +24,7 @@ class RemoveAddressFromGroup(insightconnect_plugin_runtime.Action):
         address_object = params.get(Input.ADDRESS_OBJECT)
         group_name = params.get(Input.GROUP)
         group_type = self.connection.sonicwall_api.get_group_type(group_name)
-        object_type = self.connection.sonicwall_api.get_address_object(address_object).get(
-            "object_type"
-        )
+        object_type = self.connection.sonicwall_api.get_address_object(address_object).get("object_type")
 
         if not self.check_address_object_in_group(address_object, group_name, group_type):
             raise PluginException(
@@ -42,14 +40,10 @@ class RemoveAddressFromGroup(insightconnect_plugin_runtime.Action):
 
         return {Output.STATUS: self.connection.sonicwall_api.invoke_cli_command(payload)}
 
-    def check_address_object_in_group(
-        self, address_object: str, group_name: str, group_type: str
-    ) -> bool:
+    def check_address_object_in_group(self, address_object: str, group_name: str, group_type: str) -> bool:
         address_group = self.connection.sonicwall_api.get_group(group_name)
         address_objects_names = []
-        address_objects = (
-            address_group.get("address_group", {}).get(group_type, {}).get("address_object", {})
-        )
+        address_objects = address_group.get("address_group", {}).get(group_type, {}).get("address_object", {})
         object_types = ["ipv4", "ipv6", "mac", "fqdn"]
         for object_type in object_types:
             address_objects_names.extend(address_objects.get(object_type, []))

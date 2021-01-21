@@ -17,7 +17,5 @@ class Connection(komand.Connection):
         cmd = "/usr/bin/foremost"
         r = komand.helper.exec_command(cmd)
         if r["rcode"] != 0:
-            raise ConnectionTestException(
-                cause="Command error", assistance="Foremost returned with non-zero status"
-            )
+            raise ConnectionTestException(cause="Command error", assistance="Foremost returned with non-zero status")
         return {}

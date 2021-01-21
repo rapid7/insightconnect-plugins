@@ -40,9 +40,7 @@ class ThreatIndicators(komand.Action):
             app_secret = self.connection.appsecret
             type_ = "IP_ADDRESS"
             text = ""
-            query_params = urlencode(
-                {"access_token": app_id + "|" + app_secret, "type": type_, "text": text}
-            )
+            query_params = urlencode({"access_token": app_id + "|" + app_secret, "type": type_, "text": text})
             url = "https://graph.facebook.com/v2.8/threat_indicators?"
             response = requests.get(url + query_params)
             data = response.json()

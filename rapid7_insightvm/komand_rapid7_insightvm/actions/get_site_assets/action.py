@@ -39,8 +39,7 @@ class GetSiteAssets(komand.Action):
 
             resources += response.resources  # Grab resources and append to total
             self.logger.info(
-                "Got %d assets from page %d / %d"
-                % (len(response.resources), response.page_num, response.total_pages)
+                "Got %d assets from page %d / %d" % (len(response.resources), response.page_num, response.total_pages)
             )
 
             if (response.total_pages == 0) or ((response.total_pages - 1) == response.page_num):
@@ -53,9 +52,7 @@ class GetSiteAssets(komand.Action):
         return {"assets": resources}
 
     def get_assets(self, endpoint, endpoint_page, size=500):
-        self.logger.info(
-            "Fetching up to %d assets from endpoint page %d ..." % (size, endpoint_page)
-        )
+        self.logger.info("Fetching up to %d assets from endpoint page %d ..." % (size, endpoint_page))
         try:
             response = self.connection.session.get(
                 url=endpoint, verify=False, params={"size": size, "page": endpoint_page}
@@ -83,9 +80,7 @@ class GetSiteAssets(komand.Action):
                 except KeyError:
                     reason = "Unknown error occurred. Please contact support or try again later."
                 except json.decoder.JSONDecodeError:
-                    raise PluginException(
-                        preset=PluginException.Preset.INVALID_JSON, data=reason.text
-                    )
+                    raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=reason.text)
 
                 status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
                 self.logger.error(

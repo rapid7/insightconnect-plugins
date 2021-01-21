@@ -64,9 +64,7 @@ class ListRules(komand.Action):
             self.logger.info(f"No rules found!")
 
         hits = len(response_data["intrusionPreventionRules"])
-        self.logger.info(
-            f"Found {hits} rules covering the following CVEs: \n" + ", ".join(covered_cves)
-        )
+        self.logger.info(f"Found {hits} rules covering the following CVEs: \n" + ", ".join(covered_cves))
 
         # Return assigned rules and covered CVEs
         return {

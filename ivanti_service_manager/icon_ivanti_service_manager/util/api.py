@@ -15,9 +15,7 @@ class IvantiServiceManagerAPI:
         return self._call_api("GET", "odata/businessobject/employees")
 
     def search_employee(self, identifier: str) -> dict:
-        employees = self._call_api(
-            "GET", f"odata/businessobject/employees?$search={identifier}"
-        ).get("value")
+        employees = self._call_api("GET", f"odata/businessobject/employees?$search={identifier}").get("value")
 
         if employees and len(employees) > 1:
             raise PluginException(
@@ -51,19 +49,13 @@ class IvantiServiceManagerAPI:
         return clean(self._call_api("POST", "odata/businessobject/incidents", json_data=payload))
 
     def update_incident(self, incident_number: str, payload: dict) -> dict:
-        return clean(
-            self._call_api(
-                "PUT", f"odata/businessobject/incidents('{incident_number}')", json_data=payload
-            )
-        )
+        return clean(self._call_api("PUT", f"odata/businessobject/incidents('{incident_number}')", json_data=payload))
 
     def delete_incident(self, incident_number: int) -> dict:
         return self._call_api("DELETE", f"odata/businessobject/incidents('{incident_number}')")
 
     def post_journal_note(self, payload: dict) -> dict:
-        return clean(
-            self._call_api("POST", f"odata/businessobject/journal__Notess", json_data=payload)
-        )
+        return clean(self._call_api("POST", f"odata/businessobject/journal__Notess", json_data=payload))
 
     def _call_api(self, method: str, path: str, json_data: dict = None, params: dict = None):
         response = {"text": ""}

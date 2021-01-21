@@ -24,12 +24,8 @@ class Connection(komand.Connection):
         base_ftp_class = ftplib.FTP
         if secure:
             base_ftp_class = ftplib.FTP_TLS
-        my_session_factory = ftputil.session.session_factory(
-            base_class=base_ftp_class, use_passive_mode=passive
-        )
+        my_session_factory = ftputil.session.session_factory(base_class=base_ftp_class, use_passive_mode=passive)
         try:
-            self.ftp_host = ftputil.FTPHost(
-                host, username, password, session_factory=my_session_factory
-            )
+            self.ftp_host = ftputil.FTPHost(host, username, password, session_factory=my_session_factory)
         except ftputil.error.PermanentError as e:
             raise e

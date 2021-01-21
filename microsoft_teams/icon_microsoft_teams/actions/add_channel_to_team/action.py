@@ -22,8 +22,6 @@ class AddChannelToTeam(komand.Action):
         teams = get_teams_from_microsoft(self.logger, self.connection, team_name)
         team_id = teams[0].get("id")
 
-        success = create_channel(
-            self.logger, self.connection, team_id, channel_name, channel_description
-        )
+        success = create_channel(self.logger, self.connection, team_id, channel_name, channel_description)
 
         return {Output.SUCCESS: success}

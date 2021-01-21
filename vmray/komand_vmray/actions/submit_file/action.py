@@ -26,27 +26,15 @@ class SubmitFile(komand.Action):
         try:
             file_bytes = base64.b64decode(file_.get("content"))
         except:
-            raise Exception(
-                "Error decoding base64, contents of the file must be encoded with base64!"
-            )
+            raise Exception("Error decoding base64, contents of the file must be encoded with base64!")
 
         mime_types, check_pass = self.connection.api.check_filetype(file_bytes)
         if check_pass:
-            self.logger.info(
-                f"File types {mime_types} found for file {file_name} and are supported by VMRay"
-            )
+            self.logger.info(f"File types {mime_types} found for file {file_name} and are supported by VMRay")
             resp = self.connection.api.submit_file(file_name, file_bytes, optional_params)
             clean_data = komand.helper.clean(resp)
             return {"results": clean_data}
         else:
             self.logger.error(f"File types, not supported by VMRay: {mime_types}")
-            self.logger.error(
-                f"Here is a list of supported file types {self.connection.api.SUPPORTED_FILETYPES}"
-            )
-            return {
-                "results": {
-                    "errors": [
-                        {"files": f"File types found are not supported by VMRay {mime_types}"}
-                    ]
-                }
-            }
+            self.logger.error(f"Here is a list of supported file types {self.connection.api.SUPPORTED_FILETYPES}")
+            return {"results": {"errors": [{"files": f"File types found are not supported by VMRay {mime_types}"}]}}

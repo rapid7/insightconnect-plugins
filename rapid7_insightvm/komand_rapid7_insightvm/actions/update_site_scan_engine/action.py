@@ -22,8 +22,6 @@ class UpdateSiteScanEngine(komand.Action):
         endpoint = endpoints.Site.site_engine(self.connection.console_url, site_id)
 
         self.logger.info("Updating site scan engine...")
-        response = resource_helper.resource_request(
-            endpoint=endpoint, method="put", payload=engine_id
-        )
+        response = resource_helper.resource_request(endpoint=endpoint, method="put", payload=engine_id)
 
         return response

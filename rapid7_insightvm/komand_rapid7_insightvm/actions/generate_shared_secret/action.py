@@ -20,9 +20,7 @@ class GenerateSharedSecret(komand.Action):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         v1_session = V1Session(self.connection.session, self.logger)
         time_to_live = params.get("time_to_live")
-        endpoint = endpoints.SharedSecret.generate_shared_secret(
-            self.connection.console_url, time_to_live
-        )
+        endpoint = endpoints.SharedSecret.generate_shared_secret(self.connection.console_url, time_to_live)
 
         # Auth to APIv1 and make the request, then deauth
         v1_session.v1_authenticate(self.connection.console_url)

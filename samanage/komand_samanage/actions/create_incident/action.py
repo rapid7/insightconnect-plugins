@@ -140,13 +140,9 @@ class CreateIncident(komand.Action):
                     }
                 ],
                 "tags": [{"id": 18482, "name": "hardware", "taggings_count": 337059}],
-                "incidents": [
-                    {"id": 31851783, "href": "https://api.samanage.com/incidents/31851783.json"}
-                ],
+                "incidents": [{"id": 31851783, "href": "https://api.samanage.com/incidents/31851783.json"}],
                 "changes": [],
-                "solutions": [
-                    {"id": 795104, "href": "https://api.samanage.com/solutions/795104.json"}
-                ],
+                "solutions": [{"id": 795104, "href": "https://api.samanage.com/solutions/795104.json"}],
                 "associated_sla_names": [],
                 "total_time_spent": 0,
                 "tasks": [],

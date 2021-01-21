@@ -16,9 +16,9 @@ class DeleteIncident(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         errors = self.connection.ivanti_service_manager_api.delete_incident(
-            self.connection.ivanti_service_manager_api.get_incident_by_number(
-                params.get(Input.INCIDENT_NUMBER)
-            ).get("RecId")
+            self.connection.ivanti_service_manager_api.get_incident_by_number(params.get(Input.INCIDENT_NUMBER)).get(
+                "RecId"
+            )
         )
 
         if len(errors) != 0:

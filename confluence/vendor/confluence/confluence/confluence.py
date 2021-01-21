@@ -50,9 +50,7 @@ def attach_file(server, token, space, title, files):
                 existing_page["id"],
                 repr(attachment),
             )
-            server.confluence1.addAttachment(
-                token, existing_page["id"], attachment, xmlrpclib.Binary(byts)
-            )
+            server.confluence1.addAttachment(token, existing_page["id"], attachment, xmlrpclib.Binary(byts))
             logging.info("done")
         except Exception:
             logging.exception("Unable to attach %s", filename)
@@ -111,9 +109,7 @@ class Confluence(object):
 
     DEFAULT_OPTIONS = {"server": "http://localhost:8090", "verify": True}
 
-    def __init__(
-        self, profile=None, url="http://localhost:8090/", username=None, password=None, appid=None
-    ):
+    def __init__(self, profile=None, url="http://localhost:8090/", username=None, password=None, appid=None):
         """
         Returns a Confluence object by loading the connection details from the `config.ini` file.
 
@@ -164,9 +160,7 @@ class Confluence(object):
                     return possible
             return None
 
-        config = ConfigParser.SafeConfigParser(
-            defaults={"user": None, "pass": None, "appid": appid}
-        )
+        config = ConfigParser.SafeConfigParser(defaults={"user": None, "pass": None, "appid": appid})
 
         config_file = findfile("config.ini")
         logging.debug(config_file)
@@ -197,9 +191,7 @@ class Confluence(object):
         options["username"] = username
         options["password"] = password
 
-        socket.setdefaulttimeout(
-            120
-        )  # without this there is no timeout, and this may block the requests
+        socket.setdefaulttimeout(120)  # without this there is no timeout, and this may block the requests
         # 60 - getPages() timeout one with this !
         self._server = xmlrpclib.ServerProxy(
             options["server"] + "/rpc/xmlrpc", allow_none=True
@@ -381,13 +373,9 @@ class Confluence(object):
                 sourcePageId = self.getPageId(sourcePageId, space)
 
             if self._token2:
-                self._server.confluence2.movePage(
-                    self._token2, str(sourcePageId), str(targetPageId), position
-                )
+                self._server.confluence2.movePage(self._token2, str(sourcePageId), str(targetPageId), position)
             else:
-                self._server.confluence1.movePage(
-                    self._token2, str(sourcePageId), str(targetPageId), position
-                )
+                self._server.confluence1.movePage(self._token2, str(sourcePageId), str(targetPageId), position)
 
     def storePageContent(self, page, space, content, convert_wiki=True, parent_page=None):
         """
@@ -541,9 +529,7 @@ class Confluence(object):
                 data[page] = pages[page]
                 continue
             if renderedPage.find('<div class="error">') > 0:
-                t = re.findall(
-                    '<div class="error">(.*?)</div>', renderedPage, re.IGNORECASE | re.MULTILINE
-                )
+                t = re.findall('<div class="error">(.*?)</div>', renderedPage, re.IGNORECASE | re.MULTILINE)
                 for x in t:
                     logging.debug("\n    %s" % t)
                     if x not in stats:

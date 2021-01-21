@@ -18,7 +18,5 @@ class UpdateRemediationState(komand.Action):
         remediation_state = params.get("remediation_state", "remediated")
         comment = params.get("comment")
 
-        detection = self.connection.api.update_remediation_state(
-            detection_id, remediation_state, comment
-        )
+        detection = self.connection.api.update_remediation_state(detection_id, remediation_state, comment)
         return {"detection": detection}

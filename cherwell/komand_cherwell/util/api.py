@@ -30,9 +30,7 @@ class Cherwell:
         url = self._base_url + endpoint
 
         if "Authorization" not in self.session.headers:
-            Cherwell.TOKEN = self._token(
-                self.client_id, self.username, self.password, self.authentication_mode
-            )
+            Cherwell.TOKEN = self._token(self.client_id, self.username, self.password, self.authentication_mode)
             self.session.headers.update(
                 {
                     "Authorization": f"Bearer {Cherwell.TOKEN}",
@@ -77,9 +75,7 @@ class Cherwell:
                 )
 
         except Exception as e:
-            self.logger.error(
-                f"An error had occurred : {e}" "If the issue persists please contact support"
-            )
+            self.logger.error(f"An error had occurred : {e}" "If the issue persists please contact support")
             raise
 
         try:
@@ -91,9 +87,7 @@ class Cherwell:
                 f"(non-JSON or no response was received). Response was: {resp.text}"
             )
 
-    def _token(
-        self, client_id: str, username: str, password: str, authentication_mode: str, debug=False
-    ) -> str:
+    def _token(self, client_id: str, username: str, password: str, authentication_mode: str, debug=False) -> str:
         """
         Issues an authorization request to the Cherwell server asking for an access token.
         :param client_id: Client ID
@@ -155,14 +149,10 @@ class Cherwell:
             )
 
     def get_businessobjectsummary(self, busOb):
-        return self._call_api(
-            "GET", f"/CherwellAPI/api/V1/getbusinessobjectsummary/busobname/{busOb}"
-        )
+        return self._call_api("GET", f"/CherwellAPI/api/V1/getbusinessobjectsummary/busobname/{busOb}")
 
     def get_businessobjectschema(self, busObId):
-        return self._call_api(
-            "GET", f"/CherwellAPI/api/V1/getbusinessobjectschema/busobid/{busObId}"
-        )
+        return self._call_api("GET", f"/CherwellAPI/api/V1/getbusinessobjectschema/busobid/{busObId}")
 
     def get_searchresults(self, search_params):
         ERROR_MESSAGES = {
@@ -184,9 +174,7 @@ class Cherwell:
         )
 
     def get_businessobjecttemplate(self, bo_template):
-        return self._call_api(
-            "POST", "/CherwellAPI/api/V1/GetBusinessObjectTemplate", data=json.dumps(bo_template)
-        )
+        return self._call_api("POST", "/CherwellAPI/api/V1/GetBusinessObjectTemplate", data=json.dumps(bo_template))
 
     def get_incident(self, busobid, publicid):
         return self._call_api(
@@ -204,9 +192,7 @@ class Cherwell:
         )
 
     def get_serviceinfo(self):
-        return self._call_api(
-            "GET", "/CherwellAPI/api/V1/serviceinfo", action_name="Connection Test"
-        )
+        return self._call_api("GET", "/CherwellAPI/api/V1/serviceinfo", action_name="Connection Test")
 
     def update_incident(self, business_object):
         return self._call_api(

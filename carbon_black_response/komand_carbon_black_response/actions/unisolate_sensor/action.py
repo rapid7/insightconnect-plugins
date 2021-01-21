@@ -16,11 +16,7 @@ class UnisolateSensor(komand.Action):
 
     def run(self, params={}):
         try:
-            sensor = (
-                self.connection.carbon_black.select(Sensor)
-                .where("hostname:" + params.get("hostname"))
-                .first()
-            )
+            sensor = self.connection.carbon_black.select(Sensor).where("hostname:" + params.get("hostname")).first()
             sensor.unisolate()
         except Exception as ex:
             self.logger.error("Failed to unisolate sensor: %s", ex)

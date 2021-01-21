@@ -70,14 +70,10 @@ class DarkTraceAPI:
         }
 
         try:
-            response = requests.request(
-                method, f"{self.url}/{path}", data=data, params=params, headers=headers
-            )
+            response = requests.request(method, f"{self.url}/{path}", data=data, params=params, headers=headers)
 
             if response.status_code == 401:
-                raise PluginException(
-                    preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text
-                )
+                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
             if response.status_code == 404:

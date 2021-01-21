@@ -61,9 +61,7 @@ class CreateTicket(komand.Action):
                     params.get("attachment")["content"],
                     target_name=params.get("attachment")["filename"],
                 )  #  content_type=None, content_url=None, file_name=None
-                ticket.comment = Comment(
-                    body=params.get("description"), uploads=[upload_instance.token]
-                )
+                ticket.comment = Comment(body=params.get("description"), uploads=[upload_instance.token])
 
         returned_ticket = client.tickets.create(ticket).ticket
         ticket_obj = {

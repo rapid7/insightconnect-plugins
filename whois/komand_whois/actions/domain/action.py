@@ -16,9 +16,7 @@ class Domain(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        domain = str(
-            params.get(Input.DOMAIN)
-        )  # Comes in as unicode - whois library has assert for type on str
+        domain = str(params.get(Input.DOMAIN))  # Comes in as unicode - whois library has assert for type on str
         self.logger.info("Getting whois information for %s" % domain)
 
         if not self.is_valid_domain(domain=domain):
@@ -28,17 +26,13 @@ class Domain(insightconnect_plugin_runtime.Action):
             )
 
         try:
-            lookup_results = whois.query(
-                domain, ignore_returncode=1
-            )  # ignore_returncode required for plugin
+            lookup_results = whois.query(domain, ignore_returncode=1)  # ignore_returncode required for plugin
         except Exception as e:
             self.logger.error("Error occurred: %s" % e)
             raise
         else:
             serializable_results = lookup_results.get_json_serializable()
-            serializable_results = insightconnect_plugin_runtime.helper.clean_dict(
-                serializable_results
-            )
+            serializable_results = insightconnect_plugin_runtime.helper.clean_dict(serializable_results)
 
             return serializable_results
 

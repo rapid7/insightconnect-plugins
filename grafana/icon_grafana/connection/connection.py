@@ -32,9 +32,7 @@ class Connection(komand.Connection):
             )
             try:
                 self.logger.info("Connection: Connecting to API")
-                response = requests.request(
-                    method=method, url=url, auth=auth, headers=headers, **kwargs
-                )
+                response = requests.request(method=method, url=url, auth=auth, headers=headers, **kwargs)
             except requests.exceptions.RequestException as e:
                 self.logger.error("Connection: Failed to connect to API - %s" % e)
                 raise e

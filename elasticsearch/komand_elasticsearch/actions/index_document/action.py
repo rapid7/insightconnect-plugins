@@ -41,13 +41,9 @@ class IndexDocument(komand.Action):
             params["timeout"] = timeout
 
         if not id_:
-            results = helpers.post_index(
-                self.logger, host, index, type_, document, username, password, params
-            )
+            results = helpers.post_index(self.logger, host, index, type_, document, username, password, params)
         else:
-            results = helpers.put_index(
-                self.logger, host, index, type_, id_, document, username, password, params
-            )
+            results = helpers.put_index(self.logger, host, index, type_, id_, document, username, password, params)
 
         if not results:
             raise Exception("Run: Document was not indexed")

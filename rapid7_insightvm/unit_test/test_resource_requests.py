@@ -71,9 +71,7 @@ class TestResourceRequests(TestCase):
         logger = logging.getLogger("logger")
         session = MockSession()
         test_object = resource_requests.ResourceRequests(logger=logger, session=session)
-        with pytest.raises(
-            PluginException, match="InsightVM returned an error message. Unauthorized"
-        ):
+        with pytest.raises(PluginException, match="InsightVM returned an error message. Unauthorized"):
             response = test_object.resource_request("bad password")
 
 

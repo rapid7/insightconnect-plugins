@@ -29,8 +29,6 @@ class CreateScanEnginePool(komand.Action):
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
         self.logger.info("Creating scan engine pool...")
-        response = resource_helper.resource_request(
-            endpoint=endpoint, method="post", payload=params
-        )
+        response = resource_helper.resource_request(endpoint=endpoint, method="post", payload=params)
 
         return response

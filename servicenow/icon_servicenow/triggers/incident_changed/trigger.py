@@ -37,9 +37,7 @@ class IncidentChanged(insightconnect_plugin_runtime.Trigger):
             try:
                 current_incident = response["resource"].get("result")
             except KeyError as e:
-                raise PluginException(
-                    preset=PluginException.Preset.UNKNOWN, data=response.text
-                ) from e
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text) from e
 
             # Compare previous and new incident results
             changed_fields = {}

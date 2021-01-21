@@ -35,9 +35,7 @@ class Cisco_Api(object):
     def delete(self, uri, params={}):
         """A generic method to make DELETE requests to the OpenDNS Enforcement API on the given URI."""
         params["customerKey"] = self.customer_key
-        return requests.delete(
-            urljoin(Cisco_Api.BASE_URL, uri), params=params, headers={}, proxies={}
-        )
+        return requests.delete(urljoin(Cisco_Api.BASE_URL, uri), params=params, headers={}, proxies={})
 
     def _request_parse(self, method, *args):
         r = method(*args)

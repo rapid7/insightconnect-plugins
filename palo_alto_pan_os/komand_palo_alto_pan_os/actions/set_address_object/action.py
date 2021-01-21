@@ -49,9 +49,7 @@ class SetAddressObject(komand.Action):
         for object in whitelist:
             type = self.determine_address_type(object)
             if type == "ip-netmask":
-                net = ip_network(
-                    object, False
-                )  # False means ignore the masked bits, otherwise they need to be 0
+                net = ip_network(object, False)  # False means ignore the masked bits, otherwise they need to be 0
                 ip = ip_address(trimmed_address)
                 if ip in net:
                     self.logger.info(f" Whitelist matched\nIP {address} was found in {object}")

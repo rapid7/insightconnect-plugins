@@ -19,30 +19,20 @@ class ExtractArchive(komand.Action):
         archive = params.get("archive")
         file_bytes_b64 = archive["content"]  # Base64 encoded file as string
         fname = archive["filename"]
-        file_bytes = utils.base64_decode(
-            file_bytes_b64
-        )  # Decode base64 so we can manipulate the file
+        file_bytes = utils.base64_decode(file_bytes_b64)  # Decode base64 so we can manipulate the file
 
-        compression_type = utils.determine_compression_type(
-            file_bytes
-        )  # Determine compression type
-        decompressed_file = decompressor.dispatch_decompress(
-            algorithm=compression_type, file_bytes=file_bytes
-        )
+        compression_type = utils.determine_compression_type(file_bytes)  # Determine compression type
+        decompressed_file = decompressor.dispatch_decompress(algorithm=compression_type, file_bytes=file_bytes)
         self.logger.info("Run: Decompressed file is: %s", type(decompressed_file))
         decompressed_file_b64_string = {}
         return_array = []
         if isinstance(decompressed_file, dict):
             for fil in decompressed_file:
                 decompressed_file_b64 = utils.base64_encode(decompressed_file[fil])
-                decompressed_file_b64_string[fil.split("/")[-1]] = decompressed_file_b64.decode(
-                    "utf-8"
-                )
+                decompressed_file_b64_string[fil.split("/")[-1]] = decompressed_file_b64.decode("utf-8")
             for key in decompressed_file_b64_string.keys():
                 if key != fname:
-                    return_array.append(
-                        {"filename": key, "content": decompressed_file_b64_string[key]}
-                    )
+                    return_array.append({"filename": key, "content": decompressed_file_b64_string[key]})
         else:
             decompressed_file_b64 = utils.base64_encode(decompressed_file)
             decompressed_file_b64_string = decompressed_file_b64.decode("utf-8")

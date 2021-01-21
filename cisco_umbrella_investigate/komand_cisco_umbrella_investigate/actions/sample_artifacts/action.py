@@ -26,9 +26,7 @@ class SampleArtifacts(komand.Action):
             offset = 0
 
         try:
-            sample_artifacts = self.connection.investigate.sample_artifacts(
-                hash, limit=limit, offset=offset
-            )
+            sample_artifacts = self.connection.investigate.sample_artifacts(hash, limit=limit, offset=offset)
         except Exception as e:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 

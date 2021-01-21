@@ -26,9 +26,7 @@ class CreateScan(komand.Action):
                     "text_targets": ", ".join(params["targets"]),
                 },
             }
-            post_body["settings"].update(
-                {"description": params["description"]} if "description" in params else {}
-            )
+            post_body["settings"].update({"description": params["description"]} if "description" in params else {})
             conn["url"] += "/scans"
             conn["headers"].update({"content-type": "application/json"})
             conn.update({"json": post_body})

@@ -18,9 +18,7 @@ class InstallPolicy(komand.Action):
         payload = {
             "policy-package": params.get(Input.POLICY_PACKAGE),
             "targets": params.get(Input.TARGETS),
-            "install-on-all-cluster-members-or-fail": params.get(
-                Input.INSTALL_ON_ALL_CLUSTER_MEMBERS_OR_FAIL
-            ),
+            "install-on-all-cluster-members-or-fail": params.get(Input.INSTALL_ON_ALL_CLUSTER_MEMBERS_OR_FAIL),
             "access": params.get(Input.ACCESS_CONTROL_POLICY),
             "desktop-security": params.get(Input.DESKTOP_SECURITY_POLICY),
             "qos": params.get(Input.QOS_POLICY),

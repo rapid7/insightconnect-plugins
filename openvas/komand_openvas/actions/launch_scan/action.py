@@ -23,9 +23,7 @@ class LaunchScan(komand.Action):
         if schedule:
             schedule = str(schedule)
         try:
-            scan_id, target_id = self.connection.scanner.launch_scan(
-                target=target, profile=profile, schedule=schedule
-            )
+            scan_id, target_id = self.connection.scanner.launch_scan(target=target, profile=profile, schedule=schedule)
         except RemoteVersionError:
             return {
                 "success": False,

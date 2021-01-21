@@ -28,8 +28,6 @@ class Connection(komand.Connection):
         self.logger.info(result)
 
         if result != "CEF:0|Komand|Komand|1|2|Some Event|Low| _cefVer=0.1\n":
-            raise ConnectionTestException(
-                cause="Test failed!", assistance=f"Create CEF String failed: {result}"
-            )
+            raise ConnectionTestException(cause="Test failed!", assistance=f"Create CEF String failed: {result}")
 
         return {}

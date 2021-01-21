@@ -19,9 +19,7 @@ class RemoveScanEnginePoolEngine(komand.Action):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         engine_pool_id = params.get("pool_id")
         engine_id = params.get("engine_id")
-        endpoint = endpoints.ScanEnginePool.scan_engine_pool_engines(
-            self.connection.console_url, engine_pool_id
-        )
+        endpoint = endpoints.ScanEnginePool.scan_engine_pool_engines(self.connection.console_url, engine_pool_id)
 
         response = resource_helper.resource_request(endpoint=endpoint)
         current_engines = response["resources"]

@@ -17,6 +17,4 @@ class SiteReviewer(komand.Action):
             results = sitereview.main(params.get(Input.TARGET_URL))
             return {Output.SITE_REVIEW_RESULTS: results}
         except Exception:
-            raise Exception(
-                "Unexpected issue occurred when reviewing site. Contact support for help"
-            )
+            raise Exception("Unexpected issue occurred when reviewing site. Contact support for help")

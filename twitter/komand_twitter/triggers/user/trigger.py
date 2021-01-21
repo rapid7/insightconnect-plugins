@@ -34,25 +34,19 @@ class User(komand.Trigger):
         self.screen_name = params.get("screen_name")
         if not self.screen_name:
             assert "Run: screen_name parameter was empty. Make sure input is marked required."
-            raise Exception(
-                "Run: screen_name parameter was empty. Make sure input is marked required."
-            )
+            raise Exception("Run: screen_name parameter was empty. Make sure input is marked required.")
 
         # Make doubly sure it defaults to the original value, just in case?
         self.interval = params.get("interval", util.Common.SleepDuration.HIGH_ACTIVITY)
         # Open and auto-close the file to create the cache file on very first start up
-        with komand.helper.open_cachefile(
-            self.CACHE_FILE_NAME + "_" + self.screen_name
-        ) as cache_file:
+        with komand.helper.open_cachefile(self.CACHE_FILE_NAME + "_" + self.screen_name) as cache_file:
             self.logger.info("Run: Got or created cache file: {file}".format(file=cache_file))
 
         while True:
             self.logger.info("Run: Iterating main loop")
 
             # Open cache file and read the latest ID from the previous fetch.
-            with komand.helper.open_cachefile(
-                self.CACHE_FILE_NAME + "_" + self.screen_name
-            ) as cache_file:
+            with komand.helper.open_cachefile(self.CACHE_FILE_NAME + "_" + self.screen_name) as cache_file:
                 self.cached_id = cache_file.readline()
 
             self.logger.info("Run: Cached id is {id}.".format(id=self.cached_id))
@@ -61,13 +55,9 @@ class User(komand.Trigger):
 
             if len(tweets) > 0:  # Only trigger if tweets exist.
                 self.trigger_on_tweets(tweets=tweets)
-                self.logger.info(
-                    "Run: Trigger done. Sleeping {seconds} seconds.".format(seconds=self.interval)
-                )
+                self.logger.info("Run: Trigger done. Sleeping {seconds} seconds.".format(seconds=self.interval))
             else:
-                self.logger.info(
-                    "Run: No new tweets. Sleeping {seconds} seconds.".format(seconds=self.interval)
-                )
+                self.logger.info("Run: No new tweets. Sleeping {seconds} seconds.".format(seconds=self.interval))
 
             time.sleep(self.interval)
 
@@ -88,14 +78,10 @@ class User(komand.Trigger):
         for index, tweet in enumerate(tweets):
             if index == 0:
                 # Write this ID to cache file since it is most up-to-date
-                with komand.helper.open_cachefile(
-                    self.CACHE_FILE_NAME + "_" + self.screen_name
-                ) as cache_file:
+                with komand.helper.open_cachefile(self.CACHE_FILE_NAME + "_" + self.screen_name) as cache_file:
                     cache_file.write(str(tweet.id))
 
-            self.logger.info(
-                "Trigger On Tweets: Sending trigger for tweet {id}.".format(id=tweet.id)
-            )
+            self.logger.info("Trigger On Tweets: Sending trigger for tweet {id}.".format(id=tweet.id))
             payload = self.create_trigger_payload(tweet)
             self.send(payload)
 

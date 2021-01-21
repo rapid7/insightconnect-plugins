@@ -32,9 +32,7 @@ class ExecuteScript(komand.Action):
             raise Exception("While decoding the base64 into bytes the following error occurred" + e)
         except:
             self.logger.error("Base64 input " + encoded_powershell_script)
-            raise Exception(
-                "Something went wrong decoding the base64 script into bytes. See log for more information"
-            )
+            raise Exception("Something went wrong decoding the base64 script into bytes. See log for more information")
         try:
             powershell_script = powershell_script.decode("utf-8")
         except base64.binascii.Error as e:
@@ -49,8 +47,7 @@ class ExecuteScript(komand.Action):
             self.logger.error("Base64 input " + encoded_powershell_script)
             self.logger.error("Base64 decoded as bytes" + powershell_script)
             raise Exception(
-                "Something went wrong decoding the base64 script bytes into utf-8."
-                " See log for more information"
+                "Something went wrong decoding the base64 script bytes into utf-8." " See log for more information"
             )
 
         # This will run PowerShell on the linux VM

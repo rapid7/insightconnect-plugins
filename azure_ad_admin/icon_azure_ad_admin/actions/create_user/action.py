@@ -9,9 +9,7 @@ import string
 import random
 
 
-def _pw_gen(
-    size: int = 16, chars: [str] = string.ascii_letters + string.digits + string.punctuation
-) -> (str):
+def _pw_gen(size: int = 16, chars: [str] = string.ascii_letters + string.digits + string.punctuation) -> (str):
     def gen(size: int = 16) -> str:
         return "".join(random.choice(chars) for _ in range(size))
 
@@ -110,9 +108,7 @@ class CreateUser(komand.Action):
     def send_message(self, message: dict, mailbox_id: str) -> bool:
         headers = self.connection.get_headers(self.connection.get_auth_token())
         from_user = mailbox_id
-        endpoint_formatted = (
-            f"https://graph.microsoft.com/v1.0/{self.connection.tenant}/users/{from_user}/sendMail"
-        )
+        endpoint_formatted = f"https://graph.microsoft.com/v1.0/{self.connection.tenant}/users/{from_user}/sendMail"
         result = requests.post(endpoint_formatted, headers=headers, data=message)
 
         try:

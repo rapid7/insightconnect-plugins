@@ -71,9 +71,7 @@ class SonicWallAPI:
         )
 
     def add_address_object_to_group(self, group_type, group_name, payload):
-        return self._make_request(
-            "put", f"address-groups/{group_type}/name/{group_name}", json_data=payload
-        )
+        return self._make_request("put", f"address-groups/{group_type}/name/{group_name}", json_data=payload)
 
     def create_address_object(self, object_type, payload):
         if object_type == "cidr":
@@ -99,9 +97,7 @@ class SonicWallAPI:
     def invoke_cli_command(self, payload):
         self.login()
         try:
-            response = self._call_api(
-                "POST", f"direct/cli", data=payload, content_type="text/plain"
-            )
+            response = self._call_api("POST", f"direct/cli", data=payload, content_type="text/plain")
         except PluginException as e:
             raise PluginException(cause=e.cause, assistance=e.assistance, data=e.data)
         finally:
@@ -121,9 +117,7 @@ class SonicWallAPI:
 
         return response
 
-    def _call_api(
-        self, method, path, json_data=None, auth=None, content_type="application/json", data=None
-    ):
+    def _call_api(self, method, path, json_data=None, auth=None, content_type="application/json", data=None):
         response = {"text": ""}
         headers = OrderedDict(
             [

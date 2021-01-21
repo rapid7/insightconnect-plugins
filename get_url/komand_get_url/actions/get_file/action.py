@@ -81,6 +81,4 @@ class GetFile(komand.Action):
 
         # If file hasn't been returned then we fail
         self.logger.info(f"GetURL: Download failed for {url}")
-        raise PluginException(
-            preset=PluginException.Preset.UNKNOWN, assistance=f"Download failed for {url}"
-        )
+        raise PluginException(preset=PluginException.Preset.UNKNOWN, assistance=f"Download failed for {url}")

@@ -55,9 +55,7 @@ class Receive(komand.Trigger):
             try:
                 auth = auth_header.split()[2]
             except:
-                self.logger.error(
-                    "Authorization header is incomplete, expecting e.g.: Basic dGVzdAo="
-                )
+                self.logger.error("Authorization header is incomplete, expecting e.g.: Basic dGVzdAo=")
                 return False
 
             # Retrieve user:pass from Basic Authorization value

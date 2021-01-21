@@ -38,9 +38,7 @@ class GetScanEngines(komand.Action):
             for e in engines:
                 if regex.match(e["name"]):
                     filtered_engines.append(e)
-            self.logger.info(
-                "Returning %d scan engines based on filters..." % (len(filtered_engines))
-            )
+            self.logger.info("Returning %d scan engines based on filters..." % (len(filtered_engines)))
             engines = filtered_engines
 
         if address:
@@ -49,9 +47,7 @@ class GetScanEngines(komand.Action):
             for e in engines:
                 if regex.match(e["address"]):
                     filtered_engines.append(e)
-            self.logger.info(
-                "Returning %d scan engines based on filters..." % (len(filtered_engines))
-            )
+            self.logger.info("Returning %d scan engines based on filters..." % (len(filtered_engines)))
             engines = filtered_engines
 
         # Remove the default engine pool if it's in the list...

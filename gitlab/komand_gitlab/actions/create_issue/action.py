@@ -51,9 +51,7 @@ class CreateIssue(komand.Action):
         if params.get("due_date"):
             issue_params.append(("due_date", params.get("due_date")))
         if params.get("merge_request"):
-            issue_params.append(
-                ("merge_request_to_resolve_discussions_of", params.get("merge_request"))
-            )
+            issue_params.append(("merge_request_to_resolve_discussions_of", params.get("merge_request")))
         if params.get("discussion_resolve"):
             issue_params.append(("discussion_to_resolve", params.get("discussion_resolve")))
 

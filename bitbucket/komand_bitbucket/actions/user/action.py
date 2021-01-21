@@ -14,20 +14,14 @@ class User(komand.Action):
     def run(self, params={}):
         try:
             self.connection.bucket_session.headers.update({"Content-Type": "application/json"})
-            user = self.connection.bucket_session.get(
-                f"{self.connection.base_api}/users/{params.get(Input.USERNAME)}"
-            )
+            user = self.connection.bucket_session.get(f"{self.connection.base_api}/users/{params.get(Input.USERNAME)}")
             user_obj = user.json()
             if user.status_code == 200:
                 user_info = helpers.clean_json(
                     {
-                        "username": user_obj["username"]
-                        if "username" in user_obj
-                        else params.get(Input.USERNAME),
+                        "username": user_obj["username"] if "username" in user_obj else params.get(Input.USERNAME),
                         "url": "https://bitbucket.org/" + params.get(Input.USERNAME),
-                        "display name": user_obj["display_name"]
-                        if "display_name" in user_obj
-                        else "",
+                        "display name": user_obj["display_name"] if "display_name" in user_obj else "",
                         "website": user_obj["website"] if "website" in user_obj else "",
                         "location": user_obj["location"] if "location" in user_obj else "",
                     }

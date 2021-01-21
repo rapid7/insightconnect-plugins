@@ -20,9 +20,7 @@ class NewApprovalRequest(komand.Trigger):
         poll_rate = params.get("poll_rate", 10)
         self.logger.info("Looking for new approval requests...")
 
-        url = (
-            self.connection.host + "/api/bit9platform/v1/approvalRequest?q=status:1&q=id>{id}"
-        )  # status:1 = submitted
+        url = self.connection.host + "/api/bit9platform/v1/approvalRequest?q=status:1&q=id>{id}"  # status:1 = submitted
 
         while True:
             with komand.helper.open_cachefile("cb_protection_new_approval_request") as cache_file:
@@ -45,9 +43,7 @@ class NewApprovalRequest(komand.Trigger):
                     self.send({"approval_request": request})
 
                     # Write to cache as soon as we have it in case the trigger is killed mid-parse. This will prevent duplicate triggering
-                    with komand.helper.open_cachefile(
-                        "cb_protection_new_approval_request"
-                    ) as cache_file:
+                    with komand.helper.open_cachefile("cb_protection_new_approval_request") as cache_file:
                         cache_file.seek(0)
                         cache_file.write(str(request["id"]))
 

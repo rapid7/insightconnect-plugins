@@ -45,9 +45,7 @@ def match_whitelist(agent, whitelist, logger):
     for object in whitelist:
         type = determine_agent_type(object)
         if type == IP_NETMASK:
-            net = ip_network(
-                object, False
-            )  # False means ignore the masked bits, otherwise they need to be 0
+            net = ip_network(object, False)  # False means ignore the masked bits, otherwise they need to be 0
             ip = ip_address(trimmed_address)
             if ip in net:
                 logger.info(f" Whitelist matched\nIP {agent} was found in {object}")

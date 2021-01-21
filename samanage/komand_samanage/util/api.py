@@ -12,9 +12,7 @@ class SamanageAPI:
     def __init__(self, token, is_eu_customer, logger):
         self.token = token
         self.logger = logger
-        self.api_url = (
-            "https://apieu.samanage.com/" if is_eu_customer else "https://api.samanage.com/"
-        )
+        self.api_url = "https://apieu.samanage.com/" if is_eu_customer else "https://api.samanage.com/"
         # Test the connection
         self.list_incidents()
 
@@ -30,9 +28,7 @@ class SamanageAPI:
         url = "incidents/{}".format(incident_id)
         json = {"incident": {"add_to_tag_list": ", ".join(tags)}}
 
-        return self._call_api(
-            "PUT", url, json=json, params={"layout": "long", "audit_archive": True}
-        )
+        return self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
 
     def create_incident(
         self,
@@ -65,9 +61,7 @@ class SamanageAPI:
         }
         json = komand.helper.clean(json)
 
-        return self._call_api(
-            "POST", url, json=json, params={"layout": "long", "audit_archive": True}
-        )
+        return self._call_api("POST", url, json=json, params={"layout": "long", "audit_archive": True})
 
     def comment_incident(self, incident_id, body, is_private):
         url = "incidents/{}/comments".format(incident_id)
@@ -85,18 +79,14 @@ class SamanageAPI:
 
         json = {"incident": {"assignee": {"email": assignee}}}
 
-        return self._call_api(
-            "PUT", url, json=json, params={"layout": "long", "audit_archive": True}
-        )
+        return self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
 
     def change_incident_state(self, incident_id, state):
         url = "incidents/{}".format(incident_id)
 
         json = {"incident": {"state": state}}
 
-        return self._call_api(
-            "PUT", url, json=json, params={"layout": "long", "audit_archive": True}
-        )
+        return self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
 
     def attach_file_to_incident(self, incident_id, attachment_bytes, attachment_name):
         self.logger.info("Attaching a file to an incident {}".format(incident_id))
@@ -134,9 +124,7 @@ class SamanageAPI:
     def list_users(self):
         return self._call_api("GET", "users")
 
-    def create_user(
-        self, email, name=None, phone=None, mobile_phone=None, role=None, department=None
-    ):
+    def create_user(self, email, name=None, phone=None, mobile_phone=None, role=None, department=None):
         json = {
             "user": {
                 "email": email,
@@ -179,8 +167,6 @@ class SamanageAPI:
                 # Auth failure returns: HTTP/1.1" 401 None b''
                 if not response.content:
                     raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
-            raise Exception(
-                "API returned an error: {} {}".format(response.status_code, response.content)
-            )
+            raise Exception("API returned an error: {} {}".format(response.status_code, response.content))
 
         return komand.helper.clean(response.json())

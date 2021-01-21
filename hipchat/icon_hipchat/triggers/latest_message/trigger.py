@@ -115,9 +115,7 @@ class LatestMessage(komand.Trigger):
         )
 
         if response.status_code == 401:
-            raise Exception(
-                "Unauthorized: %s (HTTP status: %s)" % (response.text, response.status_code)
-            )
+            raise Exception("Unauthorized: %s (HTTP status: %s)" % (response.text, response.status_code))
         if response.status_code != 200:
             raise Exception("%s (HTTP status: %s)" % (response.text, response.status_code))
 

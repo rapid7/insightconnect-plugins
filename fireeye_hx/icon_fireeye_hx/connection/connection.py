@@ -39,11 +39,9 @@ class Connection(komand.Connection):
 
             except JSONDecodeError as e:
                 raise ConnectionTestException(
-                    cause=f"Malformed response received from FireEye HX appliance. "
-                    f"Got: {response.text}"
+                    cause=f"Malformed response received from FireEye HX appliance. " f"Got: {response.text}"
                 ) from e
             except (KeyError, IndexError) as e:
                 raise ConnectionTestException(
-                    cause="Unknown error received from FireEye HX appliance "
-                    "(no error cause reported)."
+                    cause="Unknown error received from FireEye HX appliance " "(no error cause reported)."
                 ) from e

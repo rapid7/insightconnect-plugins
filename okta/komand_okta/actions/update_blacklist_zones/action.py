@@ -54,9 +54,7 @@ class UpdateBlacklistZones(komand.Action):
             gateways.append({"type": value_type, "value": value})
             zone["gateways"] = gateways
 
-            update_url = requests.compat.urljoin(
-                self.connection.okta_url, f"/api/v1/zones/{zone_id}"
-            )
+            update_url = requests.compat.urljoin(self.connection.okta_url, f"/api/v1/zones/{zone_id}")
         else:
             new_gateways = []
             for gateway in gateways:
@@ -71,9 +69,7 @@ class UpdateBlacklistZones(komand.Action):
                     assistance="Please enter an address that is blacklisted and try again.",
                 )
             else:
-                update_url = requests.compat.urljoin(
-                    self.connection.okta_url, f"/api/v1/zones/{zone_id}"
-                )
+                update_url = requests.compat.urljoin(self.connection.okta_url, f"/api/v1/zones/{zone_id}")
                 zone["gateways"] = new_gateways
 
         response = self.connection.session.put(update_url, json=zone)
@@ -84,7 +80,4 @@ class UpdateBlacklistZones(komand.Action):
 
     @staticmethod
     def check_value(gateway: dict, value: str):
-        return (
-            gateway.get("value") == value
-            or gateway.get("value").replace(" ", "") == f"{value}-{value}"
-        )
+        return gateway.get("value") == value or gateway.get("value").replace(" ", "") == f"{value}-{value}"

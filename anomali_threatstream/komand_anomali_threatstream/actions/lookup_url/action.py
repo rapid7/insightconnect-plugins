@@ -24,14 +24,10 @@ class LookupUrl(komand.Action):
         # Pagination flag and results placeholder
         self.continue_paging, self.results = True, list()
         # Update the request with the supplied domain, page size, and offset
-        self.request.params.update(
-            {"url": "{url}".format(url=params.get("url")), "limit": 1000, "offset": 0}
-        )
+        self.request.params.update({"url": "{url}".format(url=params.get("url")), "limit": 1000, "offset": 0})
 
         while self.continue_paging:
-            response = self.connection.session.send(
-                self.request.prepare(), verify=self.request.verify
-            )
+            response = self.connection.session.send(self.request.prepare(), verify=self.request.verify)
 
             if response.status_code not in range(200, 299):
                 raise PluginException(
@@ -44,9 +40,7 @@ class LookupUrl(komand.Action):
             try:
                 response_data = response.json()
             except JSONDecodeError:
-                raise PluginException(
-                    preset=PluginException.Preset.INVALID_JSON, data=response.text
-                )
+                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
             try:
                 # Check pagination indicator. A "null" value means no more pages.

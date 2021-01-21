@@ -37,10 +37,7 @@ def mocked_requests_get(*args, headers, json=None):
 
     mock_object = {"values": {"Status": "Assigned", "Entry ID": "INC000000000108"}}
 
-    if (
-        args[0]
-        == "http://test.url/api/arsys/v1/entry/HPD%3AIncidentInterface/INC000000000108|INC000000000108"
-    ):
+    if args[0] == "http://test.url/api/arsys/v1/entry/HPD%3AIncidentInterface/INC000000000108|INC000000000108":
         if not json:  # If there's no body, this is a get, else it's a put
             return MockResponse(mock_object, 200)
         return MockResponse(mock_object, 204)

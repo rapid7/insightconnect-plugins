@@ -45,9 +45,7 @@ def canon_params(params):
     # this is normalized the same as for OAuth 1.0,
     # http://tools.ietf.org/html/rfc5849#section-3.4.1.3.2
     args = []
-    for (key, vals) in sorted(
-        (six.moves.urllib.parse.quote(key, "~"), vals) for (key, vals) in list(params.items())
-    ):
+    for (key, vals) in sorted((six.moves.urllib.parse.quote(key, "~"), vals) for (key, vals) in list(params.items())):
         for val in sorted(six.moves.urllib.parse.quote(val, "~") for val in vals):
             args.append("%s=%s" % (key, val))
     return "&".join(args)
@@ -141,9 +139,7 @@ def normalize_params(params):
             return [value]
         return value
 
-    return dict(
-        (encode(key), [encode(v) for v in to_list(value)]) for (key, value) in list(params.items())
-    )
+    return dict((encode(key), [encode(v) for v in to_list(value)]) for (key, value) in list(params.items()))
 
 
 class Client(object):
@@ -358,13 +354,29 @@ class Client(object):
                     if "message_detail" in data:
                         raise_error(
                             "Received %s %s (%s)"
-                            % (response.status, data["message"], data["message_detail"],)
+                            % (
+                                response.status,
+                                data["message"],
+                                data["message_detail"],
+                            )
                         )
                     else:
-                        raise_error("Received %s %s" % (response.status, data["message"],))
+                        raise_error(
+                            "Received %s %s"
+                            % (
+                                response.status,
+                                data["message"],
+                            )
+                        )
             except (ValueError, KeyError, TypeError):
                 pass
-            raise_error("Received %s %s" % (response.status, response.reason,))
+            raise_error(
+                "Received %s %s"
+                % (
+                    response.status,
+                    response.reason,
+                )
+            )
         try:
             data = json.loads(data)
             if data["stat"] != "OK":

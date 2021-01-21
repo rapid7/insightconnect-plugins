@@ -24,8 +24,4 @@ class GetDomainVisits(insightconnect_plugin_runtime.Action):
                 ).get("requests", [])
             }
 
-        return {
-            Output.DOMAIN_VISITS: self.connection.client.security_activity_report().get(
-                "requests", []
-            )
-        }
+        return {Output.DOMAIN_VISITS: self.connection.client.security_activity_report().get("requests", [])}

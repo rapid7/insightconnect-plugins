@@ -22,9 +22,7 @@ def call_api_and_validate_response(
     try:
         response.raise_for_status()
     except Exception as e:
-        logger.error(
-            "CallAPI: {}: {} {}".format(error_message, response.status_code, response.text)
-        )
+        logger.error("CallAPI: {}: {} {}".format(error_message, response.status_code, response.text))
         raise e
 
     try:

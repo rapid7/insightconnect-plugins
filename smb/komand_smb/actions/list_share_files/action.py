@@ -44,20 +44,15 @@ class ListShareFiles(komand.Action):
                         "short_name": f.short_name,
                         "is_directory": f.isDirectory,
                         "create_time": self.datetime_with_timezone(f.create_time, tz).isoformat(),
-                        "last_access_time": self.datetime_with_timezone(
-                            f.last_access_time, tz
-                        ).isoformat(),
-                        "last_write_time": self.datetime_with_timezone(
-                            f.last_write_time, tz
-                        ).isoformat(),
+                        "last_access_time": self.datetime_with_timezone(f.last_access_time, tz).isoformat(),
+                        "last_write_time": self.datetime_with_timezone(f.last_write_time, tz).isoformat(),
                         "file_size": f.file_size,
                     }
                 )
         except smb.smb_structs.OperationFailure as e:
             self.logger.error(e)
             raise Exception(
-                "Failed to list files from share. This may occur when the share name or path are not "
-                "valid."
+                "Failed to list files from share. This may occur when the share name or path are not " "valid."
             ) from e
         except smb.base.SMBTimeout as e:
             raise Exception(

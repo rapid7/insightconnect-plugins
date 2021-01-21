@@ -83,11 +83,7 @@ class Submit(komand.Action):
 
         if stype == "url":
             self.logger.info("URL specified")
-            if (
-                not data.startswith("http://")
-                and not data.startswith("https://")
-                and not data.startswith("ftp://")
-            ):
+            if not data.startswith("http://") and not data.startswith("https://") and not data.startswith("ftp://"):
                 self.logger.error("The URLs must start with http:// or https:// or ftp://")
                 raise Exception("Invalid URL format")
             req["url"] = (None, data)

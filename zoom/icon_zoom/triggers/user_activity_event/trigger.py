@@ -23,16 +23,12 @@ class UserActivityEvent(insightconnect_plugin_runtime.Trigger):
         # Get current time in UTC as starting point of trigger events
         now = datetime.utcnow()
         last_event_time = now.strftime("%Y-%m-%dT%H:%M:%SZ")
-        self.logger.info(
-            f"Initializing trigger, only events after {last_event_time} will be processed"
-        )
+        self.logger.info(f"Initializing trigger, only events after {last_event_time} will be processed")
 
         # Keep processing until trigger is shut down
         while True:
             # Zoom doesn't document max page_size; setting to 1000 with ability to increase in future
-            events = self.connection.zoom_api.get_user_activity_events(
-                last_event_time, page_size=page_size
-            )
+            events = self.connection.zoom_api.get_user_activity_events(last_event_time, page_size=page_size)
 
             # Process events from oldest to newest; returned newest to oldest
             for event in reversed(events):

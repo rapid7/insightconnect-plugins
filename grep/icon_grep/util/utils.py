@@ -14,9 +14,7 @@ def run_grep(log: object, text: str, pattern: str, behavior: str) -> str:
             matches = run(["egrep", "-o", pattern, fp.name], capture_output=True)
 
     if matches.returncode == 2:
-        raise PluginException(
-            cause="The grep process returned an error", assistance=matches.stderr.decode()
-        )
+        raise PluginException(cause="The grep process returned an error", assistance=matches.stderr.decode())
     if matches.stderr:
         log.error(matches.stderr.decode())
     return matches.stdout.decode()

@@ -19,8 +19,4 @@ class AddFixedAddress(komand.Action):
         return {"_ref": ref}
 
     def test(self):
-        return {
-            "_ref": (
-                "fixedaddress/ZG5zLmZpeGVkX2FkZHJlc3MkMTAuMTAuMTAuOC4wLi4:" "10.10.10.8/default"
-            )
-        }
+        return {"_ref": ("fixedaddress/ZG5zLmZpeGVkX2FkZHJlc3MkMTAuMTAuMTAuOC4wLi4:" "10.10.10.8/default")}

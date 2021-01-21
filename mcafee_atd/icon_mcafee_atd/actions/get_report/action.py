@@ -29,7 +29,5 @@ class GetReport(insightconnect_plugin_runtime.Action):
         response = self.connection.mcafee_atd_api.get_report(analyse_id, return_type, type_id)
         return {
             Output.FILE: base64.b64encode(response.content).decode("utf-8"),
-            Output.REPORT: self.connection.mcafee_atd_api.get_report(
-                analyse_id, "json", type_id
-            ).json(),
+            Output.REPORT: self.connection.mcafee_atd_api.get_report(analyse_id, "json", type_id).json(),
         }

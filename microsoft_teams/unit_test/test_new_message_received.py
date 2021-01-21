@@ -98,6 +98,4 @@ class TestNewMessageReceived(TestCase):
             ):
                 endpoint = nmr.setup_endpoint("channel", "team")
 
-        self.assertEqual(
-            "https://graph.microsoft.com/beta/teams/team/channels/channel/messages", endpoint
-        )
+        self.assertEqual("https://graph.microsoft.com/beta/teams/team/channels/channel/messages", endpoint)

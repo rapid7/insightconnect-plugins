@@ -22,9 +22,7 @@ class SetEncoding(insightconnect_plugin_runtime.Action):
         try:
             output = string.encode(encoding_val, error_handler)
         except UnicodeError:
-            raise PluginException(
-                cause="Encoding failed.", assistance="Could not encode given string."
-            )
+            raise PluginException(cause="Encoding failed.", assistance="Could not encode given string.")
 
         output = output.decode(encoding_val, error_handler)
 

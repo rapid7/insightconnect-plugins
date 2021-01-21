@@ -29,7 +29,5 @@ class ReviewException(komand.Action):
         endpoint = endpoints.VulnerabilityException.vulnerability_exception_status(
             self.connection.console_url, id_, review
         )
-        response = resource_helper.resource_request(
-            endpoint=endpoint, method="post", payload=payload
-        )
+        response = resource_helper.resource_request(endpoint=endpoint, method="post", payload=payload)
         return response

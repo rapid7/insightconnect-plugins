@@ -26,7 +26,5 @@ class Connection(komand.Connection):
         try:
             self.phab = Phabricator(host=hostname, token=token)
         except ConfigurationError as e:
-            self.logger.error(
-                "Connection: Connect: Configuration error({0}): {1}".format(e.errno, e.strerror)
-            )
+            self.logger.error("Connection: Connect: Configuration error({0}): {1}".format(e.errno, e.strerror))
             raise e

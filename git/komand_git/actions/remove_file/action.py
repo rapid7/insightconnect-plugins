@@ -30,9 +30,7 @@ class RemoveFile(komand.Action):
             result["commit_url"] = git_repository.get_commit_url(commit_hash)
             result["success"] = True
         except Exception as e:
-            self.logger.error(
-                "RemoveFile: Exception: Failed to remove {}:\n{}".format(file_path, str(e))
-            )
+            self.logger.error("RemoveFile: Exception: Failed to remove {}:\n{}".format(file_path, str(e)))
             result["success"] = True
 
         return komand.helper.clean_dict(result)

@@ -31,27 +31,19 @@ class CiscoFirePowerApi:
         if object_type == "cidr":
             endpoint = "networks"
 
-        return self._call_api(
-            "POST", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}", json_data=payload
-        )
+        return self._call_api("POST", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}", json_data=payload)
 
     def get_address_objects(self, endpoint: str) -> dict:
         return self._call_api("GET", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}")
 
     def get_address_object(self, endpoint: str, object_id: str) -> dict:
-        return self._call_api(
-            "GET", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}/{object_id}"
-        )
+        return self._call_api("GET", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}/{object_id}")
 
     def delete_address_object(self, endpoint: str, object_id: str) -> dict:
-        return self._call_api(
-            "DELETE", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}/{object_id}"
-        )
+        return self._call_api("DELETE", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}/{object_id}")
 
     def get_network_addresses(self) -> list:
-        return self.run_with_pages(
-            f"fmc_config/v1/domain/{self.domain_uuid}/object/networkaddresses", expanded=True
-        )
+        return self.run_with_pages(f"fmc_config/v1/domain/{self.domain_uuid}/object/networkaddresses", expanded=True)
 
     def find_network_object(self, address_object: str) -> dict:
         for item in self.get_network_addresses():
@@ -62,18 +54,13 @@ class CiscoFirePowerApi:
 
     def get_network_address(self, network_address_name: str) -> dict:
         for item in self.get_network_addresses():
-            if (
-                item.get("name") == network_address_name
-                or item.get("objectId") == network_address_name
-            ):
+            if item.get("name") == network_address_name or item.get("objectId") == network_address_name:
                 return item
 
         return {}
 
     def get_address_groups(self) -> list:
-        return self.run_with_pages(
-            f"fmc_config/v1/domain/{self.domain_uuid}/object/networkgroups", expanded=True
-        )
+        return self.run_with_pages(f"fmc_config/v1/domain/{self.domain_uuid}/object/networkgroups", expanded=True)
 
     def get_address_group(self, group_name: str) -> dict:
         for item in self.get_address_groups():

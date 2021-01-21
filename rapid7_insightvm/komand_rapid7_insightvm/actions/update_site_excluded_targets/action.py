@@ -19,9 +19,7 @@ class UpdateSiteExcludedTargets(komand.Action):
     def run(self, params={}):
         scope = params.get(Input.EXCLUDED_TARGETS)
         resource_helper = ResourceRequests(self.connection.session, self.logger)
-        endpoint = endpoints.Site.site_excluded_targets(
-            self.connection.console_url, params.get(Input.ID)
-        )
+        endpoint = endpoints.Site.site_excluded_targets(self.connection.console_url, params.get(Input.ID))
 
         # Pull current site scope in order to append to list instead of overwriting
         if not params.get(Input.OVERWRITE):
@@ -31,8 +29,6 @@ class UpdateSiteExcludedTargets(komand.Action):
 
         self.logger.info(f"Using {endpoint} ...")
         payload = {"rawbody": scope}
-        response = resource_helper.resource_request(
-            endpoint=endpoint, method="put", payload=payload
-        )
+        response = resource_helper.resource_request(endpoint=endpoint, method="put", payload=payload)
 
         return {"id": params.get(Input.ID), "links": response["links"]}

@@ -32,14 +32,10 @@ class CreateNonhttpbasedpolicy(komand.Action):
         nonhttpbased = params["policy"]
         url = "https://{}/webconsole/APIController?".format(host + ":" + str(port))
         # Authentication
-        auth = "<Request><Login><Username>{}</Username><Password>{}</Password></Login>".format(
-            username, password
-        )
+        auth = "<Request><Login><Username>{}</Username><Password>{}</Password></Login>".format(username, password)
 
         # Start of the operation to add a firewall policy
-        start = '<Set operation="add"><SecurityPolicy><Name>{}</Name>'.format(
-            nonhttpbased["SecurityPolicy"]["Name"]
-        )
+        start = '<Set operation="add"><SecurityPolicy><Name>{}</Name>'.format(nonhttpbased["SecurityPolicy"]["Name"])
 
         base_xml = "<Description>{}</Description><Status>{}</Status><IPFamily>{}</IPFamily>".format(
             nonhttpbased["SecurityPolicy"]["Description"],
@@ -150,9 +146,7 @@ class CreateNonhttpbasedpolicy(komand.Action):
         policy += mplist
         policy += "</MappedPortList>"
         # Rewrite Source Address
-        policy += "<RewriteSourceAddress>{}</RewriteSourceAddress>".format(
-            nonhttpbased["RewriteSourceAddress"]
-        )
+        policy += "<RewriteSourceAddress>{}</RewriteSourceAddress>".format(nonhttpbased["RewriteSourceAddress"])
         # Outbound Address
         policy += "<OutboundAddress>{}</OutboundAddress>".format(nonhttpbased["OutboundAddress"])
         # Match Identity

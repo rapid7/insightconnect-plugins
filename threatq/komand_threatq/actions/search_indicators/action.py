@@ -24,9 +24,7 @@ class SearchIndicators(komand.Action):
             indicators["total"] = results["total"]
             indicators["data"] = []
             for hit in results["data"]:
-                indicators["data"].append(
-                    {str(k): (str(v) if isinstance(v, unicode) else v) for k, v in hit.items()}
-                )
+                indicators["data"].append({str(k): (str(v) if isinstance(v, unicode) else v) for k, v in hit.items()})
             return {"indicators": indicators}
         except texceptions.APIError as apie:
             err = "ThreatQ SDK: APIError: reason %s" % apie.message

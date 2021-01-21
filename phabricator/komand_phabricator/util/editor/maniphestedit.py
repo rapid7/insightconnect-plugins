@@ -12,9 +12,7 @@ class ManiphesEdit:
             if self.objectIdentifier is None:
                 deb = self.phab.maniphest.edit(transactions=transactions)
             else:
-                deb = self.phab.maniphest.edit(
-                    transactions=transactions, objectIdentifier=self.objectIdentifier
-                )
+                deb = self.phab.maniphest.edit(transactions=transactions, objectIdentifier=self.objectIdentifier)
 
             return str(deb["object"]["id"])
         except ValueError as e:

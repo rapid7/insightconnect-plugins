@@ -23,9 +23,7 @@ class AsyncRequests:
         # Per aiohttp verify_ssl is deprecated, and use ssl=False should be used instead
         # However during testing I confirmed that this behaves differently, and some times
         # causes request to fail. For now reverting to verify_ssl
-        return aiohttp.ClientSession(
-            connector=aiohttp.TCPConnector(verify_ssl=False), auth=self.auth
-        )
+        return aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False), auth=self.auth)
 
     @staticmethod
     async def async_request(

@@ -21,9 +21,7 @@ class GetAlerts(insightconnect_plugin_runtime.Action):
         end = params.get(Input.END)
 
         try:
-            alerts = clean(
-                [alert for alert in self.connection.client.alerts.list(start=start, end=end)]
-            )
+            alerts = clean([alert for alert in self.connection.client.alerts.list(start=start, end=end)])
         except (ThreatStackAPIError, ThreatStackClientError, APIRateLimitError) as e:
             raise PluginException(cause="An error occurred!", assistance=e)
 

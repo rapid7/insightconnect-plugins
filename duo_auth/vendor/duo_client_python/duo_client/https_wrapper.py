@@ -33,10 +33,10 @@ class InvalidCertificateException(six.moves.http_client.HTTPException):
     def __init__(self, host, cert, reason):
         """Constructor.
 
-    Args:
-      host: The hostname the connection was made to.
-      cert: The SSL certificate (as a dictionary) the host returned.
-    """
+        Args:
+          host: The hostname the connection was made to.
+          cert: The SSL certificate (as a dictionary) the host returned.
+        """
         six.moves.http_client.HTTPException.__init__(self)
         self.host = host
         self.cert = cert
@@ -46,8 +46,7 @@ class InvalidCertificateException(six.moves.http_client.HTTPException):
         return (
             "Host %s returned an invalid certificate (%s): %s\n"
             "To learn more, see "
-            "http://code.google.com/appengine/kb/general.html#rpcssl"
-            % (self.host, self.reason, self.cert)
+            "http://code.google.com/appengine/kb/general.html#rpcssl" % (self.host, self.reason, self.cert)
         )
 
 
@@ -56,21 +55,19 @@ class CertValidatingHTTPSConnection(six.moves.http_client.HTTPConnection):
 
     default_port = six.moves.http_client.HTTPS_PORT
 
-    def __init__(
-        self, host, port=None, key_file=None, cert_file=None, ca_certs=None, strict=None, **kwargs
-    ):
+    def __init__(self, host, port=None, key_file=None, cert_file=None, ca_certs=None, strict=None, **kwargs):
         """Constructor.
 
-    Args:
-      host: The hostname. Can be in 'host:port' form.
-      port: The port. Defaults to 443.
-      key_file: A file containing the client's private key
-      cert_file: A file containing the client's certificates
-      ca_certs: A file contianing a set of concatenated certificate authority
-          certs for validating the server against.
-      strict: When true, causes BadStatusLine to be raised if the status line
-          can't be parsed as a valid HTTP/1.0 or 1.1 status line.
-    """
+        Args:
+          host: The hostname. Can be in 'host:port' form.
+          port: The port. Defaults to 443.
+          key_file: A file containing the client's private key
+          cert_file: A file containing the client's certificates
+          ca_certs: A file contianing a set of concatenated certificate authority
+              certs for validating the server against.
+          strict: When true, causes BadStatusLine to be raised if the status line
+              can't be parsed as a valid HTTP/1.0 or 1.1 status line.
+        """
         six.moves.http_client.HTTPConnection.__init__(self, host, port, strict, **kwargs)
         self.key_file = key_file
         self.cert_file = cert_file
@@ -83,11 +80,11 @@ class CertValidatingHTTPSConnection(six.moves.http_client.HTTPConnection):
     def _GetValidHostsForCert(self, cert):
         """Returns a list of valid host globs for an SSL certificate.
 
-    Args:
-      cert: A dictionary representing an SSL certificate.
-    Returns:
-      list: A list of valid host globs.
-    """
+        Args:
+          cert: A dictionary representing an SSL certificate.
+        Returns:
+          list: A list of valid host globs.
+        """
         if "subjectAltName" in cert:
             return [x[1] for x in cert["subjectAltName"] if x[0].lower() == "dns"]
         else:
@@ -96,12 +93,12 @@ class CertValidatingHTTPSConnection(six.moves.http_client.HTTPConnection):
     def _ValidateCertificateHostname(self, cert, hostname):
         """Validates that a given hostname is valid for an SSL certificate.
 
-    Args:
-      cert: A dictionary representing an SSL certificate.
-      hostname: The hostname to test.
-    Returns:
-      bool: Whether or not the hostname is valid for this certificate.
-    """
+        Args:
+          cert: A dictionary representing an SSL certificate.
+          hostname: The hostname to test.
+        Returns:
+          bool: Whether or not the hostname is valid for this certificate.
+        """
         hosts = self._GetValidHostsForCert(cert)
         for host in hosts:
             host_re = host.replace(".", "\.").replace("*", "[^.]*")

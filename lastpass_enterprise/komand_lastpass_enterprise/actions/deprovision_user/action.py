@@ -52,9 +52,7 @@ class DeprovisionUser(komand.Action):
         try:
             status = response.json().get("status")
         except Exception as e:
-            self.logger.error(
-                f"Deprovision user failed.\n" f"Exception was: {e}" f"Response was: {response.text}"
-            )
+            self.logger.error(f"Deprovision user failed.\n" f"Exception was: {e}" f"Response was: {response.text}")
             raise e
 
         # Check status

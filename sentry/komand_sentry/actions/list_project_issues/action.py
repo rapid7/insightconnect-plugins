@@ -18,9 +18,7 @@ class ListProjectIssues(komand.Action):
         organization_slug = params["organization_slug"]
         project_slug = params["project_slug"]
 
-        query_params = {
-            key: params.get(key, None) for key in ("statsPeriod", "shortIdLookup", "query")
-        }
+        query_params = {key: params.get(key, None) for key in ("statsPeriod", "shortIdLookup", "query")}
 
         url = "projects/{}/{}/issues/".format(organization_slug, project_slug)
         issues = self.connection.sentry_connection.request(

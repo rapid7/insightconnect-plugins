@@ -32,9 +32,7 @@ class Job(komand.Trigger):
 
         last_job_id = ""
 
-        self.logger.info(
-            "Looking for messages from id=%s with status=%s", self.last_job_id, self.status
-        )
+        self.logger.info("Looking for messages from id=%s with status=%s", self.last_job_id, self.status)
 
         for job in jobs:
 

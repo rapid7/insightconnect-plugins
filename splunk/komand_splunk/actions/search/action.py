@@ -49,18 +49,14 @@ class Search(komand.Action):
                 cause="Invalid search start timestamp.",
                 assistance="Start time should only be a number.",
             )
-        start_time = datetime.fromtimestamp(int(split_search_timeframe[0])).strftime(
-            datetime_format
-        )
+        start_time = datetime.fromtimestamp(int(split_search_timeframe[0])).strftime(datetime_format)
         if len(split_search_timeframe) > 1:
             if not split_search_timeframe[1].isdigit():
                 raise PluginException(
                     cause="Invalid search end timestamp.",
                     assistance="End time should only be a number.",
                 )
-            end_time = datetime.fromtimestamp(int(split_search_timeframe[1])).strftime(
-                datetime_format
-            )
+            end_time = datetime.fromtimestamp(int(split_search_timeframe[1])).strftime(datetime_format)
         else:
             end_time = datetime.now().strftime(datetime_format)
 

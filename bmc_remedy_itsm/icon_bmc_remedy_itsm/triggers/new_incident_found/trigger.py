@@ -28,9 +28,7 @@ class NewIncidentFound(komand.Trigger):
 
         while True:
             new_incident_json = self._get_new_incidents()
-            self._check_new_incidents_and_send(
-                compiled_query, self.maya_initial_incident_date, new_incident_json
-            )
+            self._check_new_incidents_and_send(compiled_query, self.maya_initial_incident_date, new_incident_json)
 
             interval = params.get(Input.INTERVAL, 15)
             self.logger.info(f"Sleeping for {interval} seconds\n")
@@ -68,18 +66,12 @@ class NewIncidentFound(komand.Trigger):
                 incident_to_check = incident.get("values")
                 maya_new_date = maya.parse(incident_to_check.get("Submit Date"))
 
-                if (
-                    maya_new_date > maya_initial_incident_date
-                ):  # We have a new incident, see if we need to send it
+                if maya_new_date > maya_initial_incident_date:  # We have a new incident, see if we need to send it
                     new_incident_description = incident_to_check.get("Description")
-                    self.logger.info(
-                        f"New incident found with description: {new_incident_description}"
-                    )
+                    self.logger.info(f"New incident found with description: {new_incident_description}")
 
                     if not compiled_query or compiled_query.match(new_incident_description):
-                        self.logger.info(
-                            f"Returning incident with description: {new_incident_description}"
-                        )
+                        self.logger.info(f"Returning incident with description: {new_incident_description}")
                         self.send({Output.INCIDENT: komand.helper.clean(incident)})
                     else:
                         self.logger.info(f"Incident did not match query: {compiled_query}")
@@ -91,13 +83,9 @@ class NewIncidentFound(komand.Trigger):
 
         :return: dict - json content from get new incidents
         """
-        new_incident_query_endpoint = (
-            "/api/arsys/v1/entry/HPD:IncidentInterface?sort=Submit Date.desc"
-        )
+        new_incident_query_endpoint = "/api/arsys/v1/entry/HPD:IncidentInterface?sort=Submit Date.desc"
         new_incident_url = urllib.parse.urljoin(self.connection.url, new_incident_query_endpoint)
-        headers = (
-            self.connection.make_headers_and_refresh_token()
-        )  # This will refresh the auth token
+        headers = self.connection.make_headers_and_refresh_token()  # This will refresh the auth token
 
         try:
             new_incidents_result = requests.get(new_incident_url, headers=headers)
@@ -121,9 +109,7 @@ class NewIncidentFound(komand.Trigger):
 
         :return: MayaDT - Submitted date of the most recent incident on the server
         """
-        initial_query_endpoint = (
-            "/api/arsys/v1/entry/HPD:IncidentInterface?sort=Submit Date.desc&limit=1"
-        )
+        initial_query_endpoint = "/api/arsys/v1/entry/HPD:IncidentInterface?sort=Submit Date.desc&limit=1"
         get_incident_url = urllib.parse.urljoin(self.connection.url, initial_query_endpoint)
         headers = self.connection.make_headers_and_refresh_token()
         initial_incident_request = requests.get(get_incident_url, headers=headers)
@@ -142,12 +128,8 @@ class NewIncidentFound(komand.Trigger):
         except json.JSONDecodeError as e:
             raise PluginException(PluginException.Preset.INVALID_JSON) from e
 
-        initial_incident_id = (
-            initial_incident_json.get("entries")[0].get("values").get("Request ID")
-        )
-        initial_incident_submitted_date = (
-            initial_incident_json.get("entries")[0].get("values").get("Submit Date")
-        )
+        initial_incident_id = initial_incident_json.get("entries")[0].get("values").get("Request ID")
+        initial_incident_submitted_date = initial_incident_json.get("entries")[0].get("values").get("Submit Date")
 
         self.logger.info(
             f"Initial incident found with ID: {initial_incident_id} "

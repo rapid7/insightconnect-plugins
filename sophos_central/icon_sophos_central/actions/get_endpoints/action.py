@@ -14,8 +14,4 @@ class GetEndpoints(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {
-            Output.ITEMS: self.connection.client.get_endpoints(params.get(Input.SINCE)).get(
-                "items", []
-            )
-        }
+        return {Output.ITEMS: self.connection.client.get_endpoints(params.get(Input.SINCE)).get("items", [])}

@@ -38,9 +38,7 @@ class RunAnalyzer(komand.Action):
             self.logger.error(e)
             raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
         except CortexException as e:
-            raise ConnectionTestException(
-                cause="Failed to run analyzer.", assistance="{}.".format(e)
-            )
+            raise ConnectionTestException(cause="Failed to run analyzer.", assistance="{}.".format(e))
         except Exception as e:
             # A bad analyzer returns: AttributeError: 'NoneType' object has no attribute 'id'
             raise ConnectionTestException(

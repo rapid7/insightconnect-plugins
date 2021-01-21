@@ -46,9 +46,7 @@ def get_record(logger: Logger, api_key: str, app_id: str, record_id: str, verify
     logger.info(f"Getting record: {record_id} from application {app_id}")
     logger.info(f"URL: {RECORD_ENDPOINT}")
 
-    response = requests.get(
-        RECORD_ENDPOINT, params=params, headers=headers, data=body, verify=verify_ssl
-    )
+    response = requests.get(RECORD_ENDPOINT, params=params, headers=headers, data=body, verify=verify_ssl)
 
     try:
         response.raise_for_status()
@@ -68,9 +66,7 @@ def get_record(logger: Logger, api_key: str, app_id: str, record_id: str, verify
     return output
 
 
-def write_record(
-    logger: Logger, api_key: str, app_id: str, record_body: object, verify_ssl: bool
-) -> dict:
+def write_record(logger: Logger, api_key: str, app_id: str, record_body: object, verify_ssl: bool) -> dict:
     headers = {"X-Cybozu-API-Token": api_key, "Content-Type": "application/json"}
 
     body = {"app": app_id, "record": [record_body]}

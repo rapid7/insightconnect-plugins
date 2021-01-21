@@ -39,9 +39,7 @@ class ERS(object):
 
         self.ise.headers.update({"ACCEPT": "application/json", "Content-Type": "application/json"})
 
-        resp = self.ise.get(
-            "{0}/config/endpoint/name/{1}".format(self.url_base, name), verify=False
-        )
+        resp = self.ise.get("{0}/config/endpoint/name/{1}".format(self.url_base, name), verify=False)
         if resp.status_code == 401:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
         if resp.reason == "Not Found":
@@ -53,9 +51,7 @@ class ERS(object):
 
         self.ise.headers.update({"ACCEPT": "application/json", "Content-Type": "application/json"})
 
-        resp = self.ise.get(
-            "{0}/config/endpoint/{1}".format(self.url_base, endpoint_id), verify=False
-        )
+        resp = self.ise.get("{0}/config/endpoint/{1}".format(self.url_base, endpoint_id), verify=False)
         if resp.status_code == 401:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
         if resp.reason == "Not Found":
@@ -87,9 +83,7 @@ class ERS(object):
 
         self.ise.headers.update({"ACCEPT": "application/json", "Content-Type": "application/json"})
 
-        resp = self.ise.get(
-            "{0}/config/ancendpoint/{1}".format(self.url_base, endpoint_id), verify=False
-        )
+        resp = self.ise.get("{0}/config/ancendpoint/{1}".format(self.url_base, endpoint_id), verify=False)
         if resp.status_code == 401:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
         if resp.reason == "Not Found":
@@ -104,14 +98,10 @@ class ERS(object):
 
         if not is_valid:
             raise Exception(
-                "Mac Address is not valid {0}. Must be in the form of AA:BB:CC:00:11:22".format(
-                    mac_address
-                )
+                "Mac Address is not valid {0}. Must be in the form of AA:BB:CC:00:11:22".format(mac_address)
             )
         else:
-            self.ise.headers.update(
-                {"Accept": "application/json", "Content-Type": "application/json"}
-            )
+            self.ise.headers.update({"Accept": "application/json", "Content-Type": "application/json"})
 
             payload = {
                 "OperationAdditionalData": {
@@ -123,13 +113,9 @@ class ERS(object):
             }
             payload = json.dumps(payload)
 
-            resp = self.ise.put(
-                "{0}/config/ancendpoint/apply".format(self.url_base), data=payload, verify=False
-            )
+            resp = self.ise.put("{0}/config/ancendpoint/apply".format(self.url_base), data=payload, verify=False)
             if resp.status_code == 401:
-                raise ConnectionTestException(
-                    preset=ConnectionTestException.Preset.USERNAME_PASSWORD
-                )
+                raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
 
     def clean_anc_end_point(self, mac_address: str):
 
@@ -137,18 +123,12 @@ class ERS(object):
 
         if not is_valid:
             raise Exception(
-                "Mac Address is not valid {0}. Must be in the form of AA:BB:CC:00:11:22".format(
-                    mac_address
-                )
+                "Mac Address is not valid {0}. Must be in the form of AA:BB:CC:00:11:22".format(mac_address)
             )
         else:
 
             headers = {"Accept": "application/json", "Content-Type": "application/json"}
-            payload = {
-                "OperationAdditionalData": {
-                    "additionalData": [{"name": "macAddress", "value": mac_address}]
-                }
-            }
+            payload = {"OperationAdditionalData": {"additionalData": [{"name": "macAddress", "value": mac_address}]}}
             payload = json.dumps(payload)
 
             resp = self.ise.put(
@@ -158,6 +138,4 @@ class ERS(object):
                 verify=False,
             )
             if resp.status_code == 401:
-                raise ConnectionTestException(
-                    preset=ConnectionTestException.Preset.USERNAME_PASSWORD
-                )
+                raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)

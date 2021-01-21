@@ -14,7 +14,9 @@ def get_user_info(logger: Logger, connection: komand.connection, user_login: str
     :param user_login: string
     :return: object (user information dictionary)
     """
-    endpoint = f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/users?$filter=userPrincipalName eq '{user_login}'"
+    endpoint = (
+        f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/users?$filter=userPrincipalName eq '{user_login}'"
+    )
     headers = connection.get_headers()
 
     logger.info(f"Getting user information from:\n{endpoint}")
@@ -23,9 +25,7 @@ def get_user_info(logger: Logger, connection: komand.connection, user_login: str
     try:
         result.raise_for_status()
     except Exception as e:
-        raise PluginException(
-            cause=f"Unable to get user {user_login}", assistance=result.text
-        ) from e
+        raise PluginException(cause=f"Unable to get user {user_login}", assistance=result.text) from e
 
     logger.info(f"Getting user information return code:{result.status_code}")
     try:
@@ -49,9 +49,7 @@ def get_user_info(logger: Logger, connection: komand.connection, user_login: str
     return user
 
 
-def add_user_to_group(
-    logger: Logger, connection: komand.connection, group_id: str, user_id: str
-) -> bool:
+def add_user_to_group(logger: Logger, connection: komand.connection, group_id: str, user_id: str) -> bool:
     """
     This will add a user to a group
 
@@ -61,15 +59,11 @@ def add_user_to_group(
     :param user_id: string
     :return: boolean
     """
-    endpoint = (
-        f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/groups/{group_id}/members/$ref"
-    )
+    endpoint = f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/groups/{group_id}/members/$ref"
     headers = connection.get_headers()
 
     logger.info(f"Adding user with: {endpoint}")
-    user_payload = {
-        "@odata.id": f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/users/{user_id}"
-    }
+    user_payload = {"@odata.id": f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/users/{user_id}"}
 
     result = requests.post(endpoint, json=user_payload, headers=headers)
     try:
@@ -85,16 +79,13 @@ def add_user_to_group(
         return True
 
     raise PluginException(
-        cause=f"Unexpected response from server when adding user to group. Response code: "
-        f"{result.status_code}.",
+        cause=f"Unexpected response from server when adding user to group. Response code: " f"{result.status_code}.",
         assistance="Please contact Rapid7 support with the following error information:",
         data=result.text,
     )
 
 
-def remove_user_from_group(
-    logger: Logger, connection: komand.connection, group_id: str, user_id: str
-) -> bool:
+def remove_user_from_group(logger: Logger, connection: komand.connection, group_id: str, user_id: str) -> bool:
     """
     Removes a user from a group
 
@@ -177,9 +168,7 @@ def create_group(
     try:
         result.raise_for_status()
     except Exception as e:
-        raise PluginException(
-            cause=f"Unable to create group: {group_name}", assistance=result.text
-        ) from e
+        raise PluginException(cause=f"Unable to create group: {group_name}", assistance=result.text) from e
 
     # https://docs.microsoft.com/en-us/graph/api/group-post-groups?view=graph-rest-1.0&tabs=http
     if result.status_code == 201:
@@ -211,9 +200,7 @@ def create_user_paylaod(logger: Logger, connection: komand.connection, group_lis
         logger.info(f"Getting user ID: {user_login}")
         user_object = get_user_info(logger, connection, user_login)
         user_id = user_object.get("id")
-        user_odata_thing = (
-            f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/users/{user_id}"
-        )
+        user_odata_thing = f"https://graph.microsoft.com/v1.0/{connection.tenant_id}/users/{user_id}"
         user_payload.append(user_odata_thing)
 
     return user_payload
@@ -351,9 +338,7 @@ def enable_teams_for_group(logger, connection, group_id):
     )
 
 
-def add_user_to_owners(
-    logger: Logger, connection: komand.connection.Connection, group_id: str, user_id: str
-) -> bool:
+def add_user_to_owners(logger: Logger, connection: komand.connection.Connection, group_id: str, user_id: str) -> bool:
     endpoint = f"https://graph.microsoft.com/beta/groups/{group_id}/owners/$ref"
     logger.info(f"Adding user to group owners with: {endpoint}")
 
@@ -366,9 +351,7 @@ def add_user_to_owners(
         logger.info("User was added successfully.")
         return True
     if result.status_code == 400:
-        logger.info(
-            "Unable to add user to group owners. The user is already one of a group owners."
-        )
+        logger.info("Unable to add user to group owners. The user is already one of a group owners.")
         return True
     elif result.status_code == 401:
         raise PluginException(
@@ -423,9 +406,7 @@ def add_user_to_channel(
         logger.info("User was added successfully.")
         return True
     if result.status_code == 400:
-        logger.info(
-            "Unable to add user to channel. The user has already been added to the channel."
-        )
+        logger.info("Unable to add user to channel. The user has already been added to the channel.")
         return True
     elif result.status_code == 401:
         raise PluginException(

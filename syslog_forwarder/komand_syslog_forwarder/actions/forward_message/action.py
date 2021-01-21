@@ -49,9 +49,7 @@ class ForwardMessage(komand.Action):
                 sock.connect((dsthost, port))
                 sent = sock.send(data)
             else:
-                raise Exception(
-                    "Error: Unhandled protocol selected! Please contact support for assistance."
-                )
+                raise Exception("Error: Unhandled protocol selected! Please contact support for assistance.")
 
             if sent != data_len:
                 self.logger.info("Run: Sent bytes didn't match input")

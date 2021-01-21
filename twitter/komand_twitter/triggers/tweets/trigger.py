@@ -56,13 +56,9 @@ class Tweets(komand.Trigger):
 
             if len(tweets) > 0:  # Only trigger if tweets exist.
                 self.trigger_on_tweets(tweets=tweets)
-                self.logger.info(
-                    "Run: Trigger done. Sleeping {seconds} seconds.".format(seconds=self.interval)
-                )
+                self.logger.info("Run: Trigger done. Sleeping {seconds} seconds.".format(seconds=self.interval))
             else:
-                self.logger.info(
-                    "Run: No new tweets. Sleeping {seconds} seconds.".format(seconds=self.interval)
-                )
+                self.logger.info("Run: No new tweets. Sleeping {seconds} seconds.".format(seconds=self.interval))
 
             time.sleep(self.interval)
 
@@ -86,9 +82,7 @@ class Tweets(komand.Trigger):
                 with komand.helper.open_cachefile(self.CACHE_FILE_NAME) as cache_file:
                     cache_file.write(str(tweet.id))
 
-            self.logger.info(
-                "Trigger On Tweets: Sending trigger for tweet {id}.".format(id=tweet.id)
-            )
+            self.logger.info("Trigger On Tweets: Sending trigger for tweet {id}.".format(id=tweet.id))
             payload = self.create_trigger_payload(tweet)
             self.send(payload)
 

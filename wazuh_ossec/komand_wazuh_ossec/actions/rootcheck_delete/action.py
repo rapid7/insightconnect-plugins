@@ -33,9 +33,7 @@ class RootcheckDelete(komand.Action):
             if "data" in r:
                 r["message"] = r.pop("data")
         except requests.exceptions.HTTPError:
-            self.logger.error(
-                "Requests: HTTPError: status code %s for %s" % (str(resp.status_code), url)
-            )
+            self.logger.error("Requests: HTTPError: status code %s for %s" % (str(resp.status_code), url))
             raise Exception("Requests: Connect: Failed response from server {}".format(url))
         self.logger.info("Normalized Response: %s", r)
         return r
@@ -47,9 +45,7 @@ class RootcheckDelete(komand.Action):
             r = resp.json()
             self.logger.info("Raw Response: %s", r)
         except requests.exceptions.HTTPError:
-            self.logger.error(
-                "Requests: HTTPError: status code %s for %s" % (str(resp.status_code), url)
-            )
+            self.logger.error("Requests: HTTPError: status code %s for %s" % (str(resp.status_code), url))
             raise Exception("Requests: Connect: Failed response from server {}".format(url))
 
         if r["error"] == 0:

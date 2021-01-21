@@ -97,10 +97,7 @@ class CreateUser(komand.Action):
                                     # Iterate over list of errorSummary objects
                                     for error in data["errorCauses"]:
                                         if "errorSummary" in error:
-                                            if (
-                                                "An object with this field already exists"
-                                                in error["errorSummary"]
-                                            ):
+                                            if "An object with this field already exists" in error["errorSummary"]:
                                                 raise PluginException(
                                                     cause="Okta: Create user failed. The user may already exist",
                                                     assistance=error["errorSummary"],

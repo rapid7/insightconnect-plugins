@@ -24,7 +24,13 @@ class Assign(komand.Action):
         id = params.get("id", None)
         user = params.get("user", None)
 
-        searchedUser = self.connection.phab.user.search(constraints={"usernames": [user,]})
+        searchedUser = self.connection.phab.user.search(
+            constraints={
+                "usernames": [
+                    user,
+                ]
+            }
+        )
 
         if not searchedUser.data:
             self.logger.error("Assign: Run: Can't find user")
@@ -34,7 +40,11 @@ class Assign(komand.Action):
 
         maniphest = ManiphesEdit(self.connection.phab, action=self, objectIdentifier=id)
         try:
-            id = maniphest.edit([{"type": "owner", "value": foundUserPhid},])
+            id = maniphest.edit(
+                [
+                    {"type": "owner", "value": foundUserPhid},
+                ]
+            )
         except Exception as e:
             self.logger.error("Assign: Run: Problem with request".format(e.errno, e.strerror))
             raise e

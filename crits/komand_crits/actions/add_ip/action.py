@@ -12,9 +12,7 @@ class AddIp(komand.Action):
         )
 
     def run(self, params={}):
-        response = self.connection.crits.add_ip(
-            ip=params["ip"], type_=params["type"], source=params["source"]
-        )
+        response = self.connection.crits.add_ip(ip=params["ip"], type_=params["type"], source=params["source"])
         return {"response": utils.make_response(response)}
 
     def test(self):

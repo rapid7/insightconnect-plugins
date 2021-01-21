@@ -65,9 +65,7 @@ class Connector:
                     auth=auth,
                 )
             elif method == "get":
-                r = requests.get(
-                    action_url, params=params, verify=self._verify, headers=self._headers, auth=auth
-                )
+                r = requests.get(action_url, params=params, verify=self._verify, headers=self._headers, auth=auth)
             elif method == "put":
                 r = requests.put(
                     action_url,
@@ -77,9 +75,7 @@ class Connector:
                     auth=auth,
                 )
             elif method == "delete":
-                r = requests.delete(
-                    action_url, verify=self._verify, headers=self._headers, auth=auth
-                )
+                r = requests.delete(action_url, verify=self._verify, headers=self._headers, auth=auth)
         except Exception as e:
             Connector.raise_error(str(e))
 

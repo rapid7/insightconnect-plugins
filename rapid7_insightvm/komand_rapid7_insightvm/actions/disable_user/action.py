@@ -30,8 +30,6 @@ class DisableUser(komand.Action):
 
         # Set status
         payload["enabled"] = False
-        response = resource_helper.resource_request(
-            endpoint=endpoint, method="put", payload=payload
-        )
+        response = resource_helper.resource_request(endpoint=endpoint, method="put", payload=payload)
 
         return response

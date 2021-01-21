@@ -22,9 +22,7 @@ class PaloAltoMineMeldAPI:
         return self._call_api("GET", f"{self.url}/config/data/{list_name}_indicators")
 
     def health_check(self):
-        return (
-            self._call_api("GET", f"{self.url}/config/full", full_response=True).status_code == 200
-        )
+        return self._call_api("GET", f"{self.url}/config/full", full_response=True).status_code == 200
 
     def _call_api(self, method, url, params=None, json_data=None, full_response: bool = False):
         response = {"text": ""}
@@ -42,9 +40,7 @@ class PaloAltoMineMeldAPI:
                 raise PluginException(preset=PluginException.Preset.API_KEY)
             if response.status_code >= 400:
                 response_data = response.json()
-                raise PluginException(
-                    preset=PluginException.Preset.UNKNOWN, data=response_data.message
-                )
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response_data.message)
 
             if 200 <= response.status_code < 300:
                 if full_response:

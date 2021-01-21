@@ -1,17 +1,8 @@
 import komand
 from komand.exceptions import PluginException
-from komand.exceptions import ConnectionTestException
-from .schema import (
-    SearchForSampleReportByDomainInput,
-    SearchForSampleReportByDomainOutput,
-    Input,
-    Output,
-    Component,
-)
+from .schema import SearchForSampleReportByDomainInput, SearchForSampleReportByDomainOutput, Input, Output, Component
 
 # Custom imports below
-import json
-from urllib.parse import urlparse
 
 
 class SearchForSampleReportByDomain(komand.Action):
@@ -24,26 +15,21 @@ class SearchForSampleReportByDomain(komand.Action):
         )
 
     def run(self, params={}):
-        in_domain = params.get(Input.DOMAIN)
-        domain = urlparse(in_domain).netloc
-
-        if not domain:  # url parse couldn't make sense of the input, use what the user gave us.
-            domain = in_domain
-
+        domain = params.get(Input.DOMAIN)
         self.logger.info(f"Searching for domain: {domain}")
-        result = self.connection.api.search_domain(q=domain)
-
-        # Custom error handler for action
+        result = self.connection.api.search_domain(domain=domain)
         try:
-            results = result.get("data").get("items")
-        except json.JSONDecodeError:
+            results = result.get("data").get("items")[0].get("item")
+        except IndexError:
             raise PluginException(
-                preset=ConnectionTestException.Preset.INVALID_JSON, data=str(result)
+                cause=f"Report not found for domain: {domain}.",
+                assistance="Please check your input.\n",
+                data=str(result),
             )
-
-        if results:
-            result_object = results[0].get("item")
-        else:
-            result_object = {"status": f"Report not found for domain: {domain}"}
-
-        return {Output.SAMPLE_REPORT: komand.helper.clean(result_object)}
+        except AttributeError:
+            raise PluginException(
+                cause=f"Could not find sample for domain {domain}.",
+                assistance="Please check your input.\n",
+                data=str(result),
+            )
+        return {Output.SAMPLE_REPORT: komand.helper.clean(results)}

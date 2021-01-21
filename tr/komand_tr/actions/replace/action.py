@@ -26,9 +26,7 @@ class Replace(komand.Action):
             return {"result": result}
         else:
             self.logger.error(
-                "KomandHelper: ExecCommand: Failed to execute: {}\n{}".format(
-                    command, proc["stderr"].decode("utf-8")
-                )
+                "KomandHelper: ExecCommand: Failed to execute: {}\n{}".format(command, proc["stderr"].decode("utf-8"))
             )
             raise Exception("Text processing failed:\n{}".format(proc["stderr"].decode("utf-8")))
 

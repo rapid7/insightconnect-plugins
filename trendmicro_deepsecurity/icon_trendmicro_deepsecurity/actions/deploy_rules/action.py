@@ -33,20 +33,14 @@ class DeployRules(komand.Action):
         # Prepare request
         # Check if the rules should be assigned to a computer or policy
         if self.computer_or_policy == "computer":
-            url = (
-                f"{self.connection.dsm_url}/api/computers/{self.id}/intrusionprevention/assignments"
-            )
+            url = f"{self.connection.dsm_url}/api/computers/{self.id}/intrusionprevention/assignments"
         else:
-            url = (
-                f"{self.connection.dsm_url}/api/policies/{self.id}/intrusionprevention/assignments"
-            )
+            url = f"{self.connection.dsm_url}/api/policies/{self.id}/intrusionprevention/assignments"
 
         data = {"ruleIDs": self.rules}
 
         # Set rules
-        response = self.connection.session.post(
-            url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl
-        )
+        response = self.connection.session.post(url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl)
 
         self.logger.info(f"url: {response.url}")
         self.logger.info(f"status: {response.status_code}")

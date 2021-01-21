@@ -53,24 +53,16 @@ class Mentions(komand.Trigger):
 
             if len(mentions) > 0:  # Only trigger if mentions exist.
                 self.trigger_on_mentions(mentions=mentions)
-                self.logger.info(
-                    "Run: Trigger done. Sleeping {seconds} seconds.".format(seconds=self.interval)
-                )
+                self.logger.info("Run: Trigger done. Sleeping {seconds} seconds.".format(seconds=self.interval))
             else:
-                self.logger.info(
-                    "Run: No new mentions. Sleeping {seconds} seconds.".format(
-                        seconds=self.interval
-                    )
-                )
+                self.logger.info("Run: No new mentions. Sleeping {seconds} seconds.".format(seconds=self.interval))
 
             time.sleep(self.interval)
 
     """Fetches new mentions from Twitter and then sets the sleep time appropriately."""
 
     def get_mentions(self):
-        mentions = self.connection.client.GetMentions(
-            count=self.MAX_MENTION_COUNT, since_id=self.cached_id
-        )
+        mentions = self.connection.client.GetMentions(count=self.MAX_MENTION_COUNT, since_id=self.cached_id)
         mention_count = len(mentions)
         self.logger.info("Get Mentions: Got {count} mentions.".format(count=mention_count))
 
@@ -100,9 +92,7 @@ class Mentions(komand.Trigger):
                 with komand.helper.open_cachefile(self.CACHE_FILE_NAME) as cache_file:
                     cache_file.write(str(mention.id))
 
-            self.logger.info(
-                "Trigger On Mentions: Sending trigger for mention {id}.".format(id=mention.id)
-            )
+            self.logger.info("Trigger On Mentions: Sending trigger for mention {id}.".format(id=mention.id))
             payload = self.create_trigger_payload(mention)
             self.send(payload)
 

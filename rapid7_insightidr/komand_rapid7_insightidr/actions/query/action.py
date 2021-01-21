@@ -34,9 +34,7 @@ class Query(komand.Action):
         try:
             result = json.loads(response["resource"])
             if response["status"] == 202:
-                response = request.resource_request(
-                    result["links"][0]["href"], "get", params=request_params
-                )
+                response = request.resource_request(result["links"][0]["href"], "get", params=request_params)
                 result = json.loads(response["resource"])
         except (json.decoder.JSONDecodeError, IndexError, KeyError):
             self.logger.error(f"InsightIDR response: {response}")

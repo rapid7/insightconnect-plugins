@@ -41,8 +41,7 @@ class CreatePortList(komand.Action):
             return {
                 "port_list_id": "",
                 "success": False,
-                "message": "Error creating port list: "
-                + " | ".join([str(sys.exc_info()[0]), str(sys.exc_info()[1])]),
+                "message": "Error creating port list: " + " | ".join([str(sys.exc_info()[0]), str(sys.exc_info()[1])]),
             }
 
         return {

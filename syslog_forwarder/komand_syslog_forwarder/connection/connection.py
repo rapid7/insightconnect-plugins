@@ -22,9 +22,7 @@ class Connection(komand.Connection):
             self.logger.info("Connect: UDP socket requested")
             self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         else:
-            raise Exception(
-                "Error: Unhandled protocol selected! Please contact support for assistance."
-            )
+            raise Exception("Error: Unhandled protocol selected! Please contact support for assistance.")
 
         if type(self.sock) is socket.socket:
             self.logger.info("Connect: Created socket object")

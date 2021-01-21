@@ -28,9 +28,7 @@ class SendMessage(komand.Action):
                 self.logger.info("SendMessage: retry interval too short - setting to 30 seconds")
                 params["retry"] = 30
             if params.get("expire", 0) == 0:
-                self.logger.info(
-                    "SendMessage: emergency priority set but expiry not defined, setting expiry to 1 hour"
-                )
+                self.logger.info("SendMessage: emergency priority set but expiry not defined, setting expiry to 1 hour")
                 params["expiry"] = 3600
         else:
             params.pop("retry", None)

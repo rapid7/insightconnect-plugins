@@ -27,9 +27,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             if self.sonicwall_api.login().get("status", {}).get("success", False):
                 return {}
         except PluginException as e:
-            raise ConnectionTestException(
-                preset=ConnectionTestException.Preset.UNAUTHORIZED, data=e
-            )
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED, data=e)
         finally:
             self.sonicwall_api.logout()
 

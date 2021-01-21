@@ -112,9 +112,7 @@ class Connection(komand.Connection):
         msg_value = self.__custom_unpack(data[4:8], self.ONE_UINT)
         msg_value = first(msg_value)
 
-        self.logger.debug(
-            "Got message details for type {}, and size {}".format(msg_type, msg_value)
-        )
+        self.logger.debug("Got message details for type {}, and size {}".format(msg_type, msg_value))
         return MessageDetails(msg_type, msg_value)
 
     def __generate_certificate(self):

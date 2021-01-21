@@ -6,9 +6,7 @@ from .schema import SetInput, SetOutput
 
 class Set(komand.Action):
     def __init__(self):
-        super(self.__class__, self).__init__(
-            name="set", description="Set", input=SetInput(), output=SetOutput()
-        )
+        super(self.__class__, self).__init__(name="set", description="Set", input=SetInput(), output=SetOutput())
 
     def run(self, params={}):
         reply = "OK"

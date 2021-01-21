@@ -35,9 +35,7 @@ class CreateUser(komand.Action):
             if params.get(param_obj[0]):
                 user_attributes[param_obj[1]] = params.get(param_obj[0])
         self.logger.info(user_attributes)
-        new_user = client.create_user(
-            params.get("name"), login=params.get("login"), **user_attributes
-        )
+        new_user = client.create_user(params.get("name"), login=params.get("login"), **user_attributes)
         self.logger.info(new_user._response_object)
         user_id = new_user._response_object.get("id")
         user_obj = {

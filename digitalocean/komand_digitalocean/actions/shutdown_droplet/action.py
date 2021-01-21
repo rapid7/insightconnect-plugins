@@ -29,9 +29,7 @@ class ShutdownDroplet(komand.Action):
             if response.status_code == 201:
                 return {"success": True}
             else:
-                self.logger.error(
-                    "Status code: %s, message: %s", response.status_code, response.json()["message"]
-                )
+                self.logger.error("Status code: %s, message: %s", response.status_code, response.json()["message"])
                 Exception("Non-201 status code received")
         except requests.exceptions.RequestException:
             self.logger.error("An unexpected error occurred during the API request")
@@ -46,9 +44,7 @@ class ShutdownDroplet(komand.Action):
             if response.status_code == 200:
                 return {}
             else:
-                self.logger.error(
-                    "Status code: %s, message: %s", response.status_code, response.json()["message"]
-                )
+                self.logger.error("Status code: %s, message: %s", response.status_code, response.json()["message"])
                 Exception("Non-200 status code received")
         except requests.exceptions.RequestException:
             self.logger.error("An unexpected error occurred during the API request")

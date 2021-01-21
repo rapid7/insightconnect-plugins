@@ -47,8 +47,7 @@ class GetScanAssets(komand.Action):
             csv_report = csv.DictReader(io.StringIO(report_contents["raw"]))
         except Exception as e:
             raise PluginException(
-                cause=f"Error: Failed to process query response for assets returned for "
-                f"scan ID {scan_id}.",
+                cause=f"Error: Failed to process query response for assets returned for " f"scan ID {scan_id}.",
                 assistance=f"Exception returned was {e}",
             )
 
@@ -68,9 +67,7 @@ class GetScanAssets(komand.Action):
         self.logger.info("Performing filtered asset search with criteria %s" % search_criteria)
         endpoint = endpoints.Asset.search(self.connection.console_url)
 
-        site_assets = resource_helper.paged_resource_request(
-            endpoint=endpoint, method="post", payload=search_criteria
-        )
+        site_assets = resource_helper.paged_resource_request(endpoint=endpoint, method="post", payload=search_criteria)
 
         # Filter assets to specific scan assets
         filtered_assets = [asset for asset in site_assets if asset["id"] in scan_asset_ids]

@@ -23,6 +23,4 @@ class ModifyUser(komand.Action):
             results = komand.helper.clean(user)
             return {Output.USER: results}
         except Exception as e:
-            raise PluginException(
-                preset=PluginException.Preset.NOT_FOUND, data=f"Error: User not found. {e}"
-            )
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=f"Error: User not found. {e}")

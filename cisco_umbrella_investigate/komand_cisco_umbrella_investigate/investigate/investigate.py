@@ -110,9 +110,7 @@ class Investigate(object):
             if 400 <= response.status_code < 500:
                 raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
             if response.status_code >= 500:
-                raise PluginException(
-                    preset=PluginException.Preset.SERVER_ERROR, data=response.text
-                )
+                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
             if 200 <= response.status_code < 300:
                 return response.json()
 
@@ -157,9 +155,7 @@ class Investigate(object):
         elif type(domains) is list:
             return self._post_categorization(domains, labels)
         else:
-            raise PluginException(
-                cause="Unable to retrieve domain information.", assistance=Investigate.DOMAIN_ERR
-            )
+            raise PluginException(cause="Unable to retrieve domain information.", assistance=Investigate.DOMAIN_ERR)
 
     def cooccurrences(self, domain):
         """Get the cooccurrences of the given domain.
@@ -250,9 +246,7 @@ class Investigate(object):
         resp_json = self.get_parse(uri, params)
         return resp_json
 
-    def ns_whois(
-        self, nameservers, limit=DEFAULT_LIMIT, offset=DEFAULT_OFFSET, sort_field=DEFAULT_SORT
-    ):
+    def ns_whois(self, nameservers, limit=DEFAULT_LIMIT, offset=DEFAULT_OFFSET, sort_field=DEFAULT_SORT):
         """Gets the domains that have been registered with a nameserver or
         nameservers"""
         if not isinstance(nameservers, list):
@@ -270,9 +264,7 @@ class Investigate(object):
         resp_json = self.get_parse(uri, params=params)
         return resp_json
 
-    def email_whois(
-        self, emails, limit=DEFAULT_LIMIT, offset=DEFAULT_OFFSET, sort_field=DEFAULT_SORT
-    ):
+    def email_whois(self, emails, limit=DEFAULT_LIMIT, offset=DEFAULT_OFFSET, sort_field=DEFAULT_SORT):
         """Gets the domains that have been registered with a given email
         address
         """
@@ -300,15 +292,11 @@ class Investigate(object):
             start = datetime.timedelta(days=30)
 
         if isinstance(start, datetime.timedelta):
-            params["start"] = int(
-                time.mktime((datetime.datetime.utcnow() - start).timetuple()) * 1000
-            )
+            params["start"] = int(time.mktime((datetime.datetime.utcnow() - start).timetuple()) * 1000)
         elif isinstance(start, datetime.datetime):
             params["start"] = int(time.mktime(start.timetuple()) * 1000)
         else:
-            raise PluginException(
-                cause="Unable to retrieve domains for search.", assistance=Investigate.SEARCH_ERR
-            )
+            raise PluginException(cause="Unable to retrieve domains for search.", assistance=Investigate.SEARCH_ERR)
 
         if limit is not None and isinstance(limit, int):
             params["limit"] = limit
@@ -337,8 +325,8 @@ class Investigate(object):
 
     def sample_artifacts(self, hash, limit=None, offset=None):
         """
-            Return an object representing artifacts associated with an input hash
-            NOTE: Only available to Threat Grid customers
+        Return an object representing artifacts associated with an input hash
+        NOTE: Only available to Threat Grid customers
         """
 
         uri = self._uris["sample_artifacts"].format(hash)

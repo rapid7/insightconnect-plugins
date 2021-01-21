@@ -21,9 +21,7 @@ class GetIssueData(komand.Action):
         response = self.connection.request("GET", ("repositories", repo_id, "issues", issue_number))
         if response.ok:
             return {
-                "data": helper.issue_data_to_json(
-                    response.json(), {"repo_id": repo_id, "issue_number": issue_number}
-                )
+                "data": helper.issue_data_to_json(response.json(), {"repo_id": repo_id, "issue_number": issue_number})
             }
         else:
             self.logger.error("ZenHub API: " + response.json().get("message", ""))

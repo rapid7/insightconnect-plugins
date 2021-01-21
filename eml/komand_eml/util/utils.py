@@ -15,22 +15,14 @@ def body(b, log):
                     payload = part.get_payload(decode=True).decode("utf-8")
                 except Exception as ex:
                     log.debug(ex)
-                    log.debug(
-                        "Failed to parse message as UTF-8, attempting to detwingle first before retrying parse"
-                    )
-                    payload = UnicodeDammit.detwingle(part.get_payload(decode=True)).decode(
-                        "utf-8", errors="ignore"
-                    )
+                    log.debug("Failed to parse message as UTF-8, attempting to detwingle first before retrying parse")
+                    payload = UnicodeDammit.detwingle(part.get_payload(decode=True)).decode("utf-8", errors="ignore")
             elif content_type == "text/html" and "attachment" not in content_disposition:
                 try:
-                    payload = (
-                        part.get_payload(decode=True).decode("utf-8").replace("\n", "")
-                    )  # decode
+                    payload = part.get_payload(decode=True).decode("utf-8").replace("\n", "")  # decode
                 except Exception as ex:
                     log.debug(ex)
-                    log.debug(
-                        "Failed to parse message as UTF-8, attempting to detwingle first before retrying parse"
-                    )
+                    log.debug("Failed to parse message as UTF-8, attempting to detwingle first before retrying parse")
                     payload = (
                         UnicodeDammit.detwingle(part.get_payload(decode=True))
                         .decode("utf-8", errors="ignore")
@@ -45,9 +37,7 @@ def body(b, log):
             log.warning(e)
             log.debug("\uE05A".encode("unicode-escape"))
             return (
-                UnicodeDammit.detwingle(b.get_payload(decode=True))
-                .decode("utf-8", errors="ignore")
-                .replace("\n", "")
+                UnicodeDammit.detwingle(b.get_payload(decode=True)).decode("utf-8", errors="ignore").replace("\n", "")
             )
 
 
@@ -77,12 +67,20 @@ def attachments(mail, log):
             log.debug("Content not string")
         content = content.replace("\r\n", "")
         attachments_list.append(
-            {"filename": filename, "content": content, "content_type": part.get_content_type(),}
+            {
+                "filename": filename,
+                "content": content,
+                "content_type": part.get_content_type(),
+            }
         )
 
     if count == 0:
         log.debug("No attachment")
         attachments_list.append(
-            {"filename": "", "content": "", "content_type": "",}
+            {
+                "filename": "",
+                "content": "",
+                "content_type": "",
+            }
         )
     return attachments_list

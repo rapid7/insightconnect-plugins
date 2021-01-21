@@ -29,10 +29,7 @@ class GetScreenshots(komand.Action):
         try:
             r = requests.get(endpoint)
             r.raise_for_status()
-            if (
-                r.headers["Content-Type"] == "image/jpeg"
-                or r.headers["Content-Type"] == "application/zip"
-            ):
+            if r.headers["Content-Type"] == "image/jpeg" or r.headers["Content-Type"] == "application/zip":
                 content = r.content
                 return {"screenshots": base64.b64encode(content).decode("UTF-8")}
 

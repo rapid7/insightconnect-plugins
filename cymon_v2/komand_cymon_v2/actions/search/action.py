@@ -24,9 +24,7 @@ class Search(komand.Action):
             search_by = search_by[: search_by.index("_")]
             self.logger.info('Changing "search_by" value to "{}" endpoint'.format(search_by))
         except ValueError:
-            self.logger.info(
-                '"search_by" value is already a correct endpoint: {}'.format(search_by)
-            )
+            self.logger.info('"search_by" value is already a correct endpoint: {}'.format(search_by))
 
         hits = self.connection.api.search(search_by, value, start_date, end_date)
         return {"hits": hits}

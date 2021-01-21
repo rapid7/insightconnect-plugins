@@ -25,9 +25,7 @@ class FindUsers(komand.Action):
 
         results = list(
             map(
-                lambda user: normalize_user(
-                    user, is_cloud=self.connection.is_cloud, logger=self.logger
-                ),
+                lambda user: normalize_user(user, is_cloud=self.connection.is_cloud, logger=self.logger),
                 users,
             )
         )

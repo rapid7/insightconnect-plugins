@@ -19,9 +19,7 @@ class UnsuspendUser(komand.Action):
     def run(self, params={}):
         """ Get the user by email """
         email = params.get(Input.EMAIL)
-        url = requests.compat.urljoin(
-            self.connection.okta_url, f"/api/v1/users/{urllib.parse.quote(email)}"
-        )
+        url = requests.compat.urljoin(self.connection.okta_url, f"/api/v1/users/{urllib.parse.quote(email)}")
 
         """ Search for the user by email to get the ID """
         response = self.connection.session.get(url)
@@ -34,9 +32,7 @@ class UnsuspendUser(komand.Action):
 
         user_id = data["id"]
         """ Deactivate the user by id """
-        url = requests.compat.urljoin(
-            self.connection.okta_url, f"/api/v1/users/{user_id}/lifecycle/unsuspend"
-        )
+        url = requests.compat.urljoin(self.connection.okta_url, f"/api/v1/users/{user_id}/lifecycle/unsuspend")
         response = self.connection.session.post(url)
         if response.status_code == 404:
             raise PluginException(

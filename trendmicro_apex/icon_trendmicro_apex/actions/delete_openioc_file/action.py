@@ -16,9 +16,7 @@ class DeleteOpeniocFile(komand.Action):
         )
 
     def run(self, params={}):
-        quoted_param = urllib.parse.quote(
-            json.dumps({"FileHashIDList": params.get(Input.FILE_HASH_ID_LIST)})
-        )
+        quoted_param = urllib.parse.quote(json.dumps({"FileHashIDList": params.get(Input.FILE_HASH_ID_LIST)}))
         return self.connection.api.execute(
             "delete", f"/WebApp/IOCBackend/OpenIOCResource/File?param={quoted_param}", ""
         )

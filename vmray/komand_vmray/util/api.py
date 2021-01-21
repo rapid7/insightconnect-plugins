@@ -90,9 +90,7 @@ class VMRay:
     def test_call(self):
         return self._call_api("GET", "/rest/system_info")
 
-    def _call_api(
-        self, method, endpoint_url, files=None, params=None, data=None, json=None, action_name=None
-    ):
+    def _call_api(self, method, endpoint_url, files=None, params=None, data=None, json=None, action_name=None):
         url = self.url + endpoint_url
         headers = {"Authorization": f"api_key {self.api_key}"}
         req = Request(
@@ -142,9 +140,7 @@ class VMRay:
             endpoint_url = f"/rest/analysis/{analysis_id}"
         else:
             endpoint_url = "/rest/analysis"
-        return self._call_api(
-            "GET", endpoint_url=endpoint_url, params=optional_params, action_name="Get Analysis"
-        )
+        return self._call_api("GET", endpoint_url=endpoint_url, params=optional_params, action_name="Get Analysis")
 
     def get_samples(self, sample_type, sample, optional_params):
         if sample_type not in ["all", "sample_id"]:
@@ -154,9 +150,7 @@ class VMRay:
         else:
             endpoint_url = "/rest/sample"
 
-        return self._call_api(
-            "GET", endpoint_url=endpoint_url, params=optional_params, action_name="Get Samples"
-        )
+        return self._call_api("GET", endpoint_url=endpoint_url, params=optional_params, action_name="Get Samples")
 
     def submit_file(self, name, file_bytes, optional_params):
         files = {"sample_file": (f"{name}", file_bytes)}
@@ -174,9 +168,7 @@ class VMRay:
         optional_params.update({"sample_url": url})
         endpoint_url = "/rest/sample/submit"
 
-        return self._call_api(
-            "POST", endpoint_url=endpoint_url, params=optional_params, action_name="Submit URL"
-        )
+        return self._call_api("POST", endpoint_url=endpoint_url, params=optional_params, action_name="Submit URL")
 
     def check_filetype(self, content, filename=None):
         """

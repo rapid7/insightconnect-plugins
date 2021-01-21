@@ -30,7 +30,11 @@ class Claim(komand.Action):
 
         maniphest = ManiphesEdit(self.connection.phab, action=self, objectIdentifier=id)
         try:
-            id = maniphest.edit([{"type": "owner", "value": foundUserPhid},])
+            id = maniphest.edit(
+                [
+                    {"type": "owner", "value": foundUserPhid},
+                ]
+            )
         except Exception as e:
             self.logger.error("Claim: Run: Problem with request".format(e.errno, e.strerror))
             raise e

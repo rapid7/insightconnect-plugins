@@ -96,9 +96,7 @@ class Lookup(komand.Action):
             self.logger.info("Gateway Timeout: Deadline exceeded (retry your request).")
             return False
         else:  # We received an undocumented status code, so return False
-            assert "Undocumented status code received: {status_code}".format(
-                status_code=status_code
-            )
+            assert "Undocumented status code received: {status_code}".format(status_code=status_code)
             return False
 
     @staticmethod

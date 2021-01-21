@@ -168,9 +168,7 @@ class TestAddAccessRule(TestCase):
 
         test_connection.connect(connection_params)
         test_action.connection = test_connection
-        with self.assertRaises(
-            Exception
-        ):  # When the add rule call is retried it will throw an exception
+        with self.assertRaises(Exception):  # When the add rule call is retried it will throw an exception
             test_action.run(action_params)
 
         # This asserts that we've called the mock with these arguments

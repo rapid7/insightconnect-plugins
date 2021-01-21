@@ -26,8 +26,7 @@ class Connection(komand.Connection):
         elif response.status_code == 404:
             raise ConnectionTestException(
                 cause="Unable to reach instance at: %s." % url,
-                assistance="Verify the server at the URL configured in your plugin "
-                "connection is correct.",
+                assistance="Verify the server at the URL configured in your plugin " "connection is correct.",
             )
         elif response.status_code == 429:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.RATE_LIMIT)

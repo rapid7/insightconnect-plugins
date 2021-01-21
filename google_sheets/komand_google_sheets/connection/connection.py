@@ -25,11 +25,7 @@ class Connection(komand.Connection):
         scopes = ["https://www.googleapis.com/auth/drive"]
 
         if admin_user:
-            self.logger.info(
-                "Connecting to {email} as {admin}".format(
-                    email=auth["client_email"], admin=admin_user
-                )
-            )
+            self.logger.info("Connecting to {email} as {admin}".format(email=auth["client_email"], admin=admin_user))
         else:
             self.logger.info("Connection to {} as service account".format(auth["client_email"]))
 
@@ -48,9 +44,7 @@ class Connection(komand.Connection):
 
         else:
             try:
-                credentials = service_account.Credentials.from_service_account_info(
-                    auth, scopes=scopes
-                )
+                credentials = service_account.Credentials.from_service_account_info(auth, scopes=scopes)
             except ValueError:
                 raise ConnectionTestException.Preset.API_KEY
 

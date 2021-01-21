@@ -32,9 +32,7 @@ class CreatePublicnonhttpbasedpolicy(komand.Action):
         pubnonhttppolicy = params["policy"]
         url = "https://{}/webconsole/APIController?".format(host + ":" + str(port))
         # Authentication
-        auth = "<Request><Login><Username>{}</Username><Password>{}</Password></Login>".format(
-            username, password
-        )
+        auth = "<Request><Login><Username>{}</Username><Password>{}</Password></Login>".format(username, password)
 
         # Start of the operation to add a firewall policy
         start = '<Set operation="add"><SecurityPolicy><Name>{}</Name>'.format(
@@ -157,9 +155,7 @@ class CreatePublicnonhttpbasedpolicy(komand.Action):
             if invalid_params == "":
                 invalid_params = "None"
         except Exception as e:
-            self.logger.error(
-                "An error has occurred while adding a Public Non HTTP based policy: ", e
-            )
+            self.logger.error("An error has occurred while adding a Public Non HTTP based policy: ", e)
             raise
         return {
             "response": {

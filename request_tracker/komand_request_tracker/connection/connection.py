@@ -23,9 +23,7 @@ class Connection(komand.Connection):
         try:
             if not tracker.login():
                 self.logger.error("RequestTracker: Connect: error %s", params)
-                raise Exception(
-                    "RequestTracker: Connect: user could not be authenticated please try again."
-                )
+                raise Exception("RequestTracker: Connect: user could not be authenticated please try again.")
         except rt.ConnectionError as e:
             self.logger.error("RequestTracker: Connect: error %s", str(e))
             raise Exception("RequestTracker: Connect: Failed to connect to server {}".format(url))

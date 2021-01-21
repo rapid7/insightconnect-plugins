@@ -20,7 +20,5 @@ class Wipe(insightconnect_plugin_runtime.Action):
 
             return {Output.SUCCESS: True}
 
-        self.logger.info(
-            f"Managed device: {params.get(Input.DEVICE)} was not wiped because it was whitelisted"
-        )
+        self.logger.info(f"Managed device: {params.get(Input.DEVICE)} was not wiped because it was whitelisted")
         return {Output.SUCCESS: False}

@@ -72,9 +72,7 @@ class Finger(komand.Action):
             d["Login From"] = "Never logged in"
         else:
             d["Login Status"] = komand.helper.extract_value(r"\n", "On since", r"\s(.*)\n", stdout)
-            d["Login From"] = komand.helper.extract_value(
-                r"\n", "On since", r"\s.* from (\S+)\n", stdout
-            )
+            d["Login From"] = komand.helper.extract_value(r"\n", "On since", r"\s.* from (\S+)\n", stdout)
 
         # Grab Last mail read/No mail.
         mail = ["No mail.", "No unread mail"]
@@ -82,24 +80,16 @@ class Finger(komand.Action):
             if "\n" + msg + "\n" in stdout:
                 d["Mail Status"] = msg.rstrip(".")
                 break
-            d["Mail Status"] = komand.helper.extract_value(
-                r"\n", "Mail last read", r"\s(.*)\n", stdout
-            )
+            d["Mail Status"] = komand.helper.extract_value(r"\n", "Mail last read", r"\s(.*)\n", stdout)
 
         # Grab login name
-        d["Login"] = komand.helper.extract_value(
-            r"\n", "(?:Login|Login name)", r": (\S+)\s", stdout
-        )
+        d["Login"] = komand.helper.extract_value(r"\n", "(?:Login|Login name)", r": (\S+)\s", stdout)
         # Grab full name
-        d["Name"] = komand.helper.extract_value(
-            r"\s", "(?:Name|In real life)", r":\s(.*)\s", stdout
-        )
+        d["Name"] = komand.helper.extract_value(r"\s", "(?:Name|In real life)", r":\s(.*)\s", stdout)
         # Grab home dself.irectory
         d["Directory"] = komand.helper.extract_value("\n", "Directory", r":\s(\S+)\s+", stdout)
         # Grab forward maself.il address
-        d["Mail forwarded to"] = komand.helper.extract_value(
-            r"\n", "Mail forwarded to", r"\s(\S+)\n", stdout
-        )
+        d["Mail forwarded to"] = komand.helper.extract_value(r"\n", "Mail forwarded to", r"\s(\S+)\n", stdout)
         # Grab plan
         if "\nNo Plan.\n" in stdout:
             d["Plan"] = "No plan"
