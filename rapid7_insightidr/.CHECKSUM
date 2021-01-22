@@ -1,15 +1,31 @@
 {
-	"spec": "075140ef4070214053e1700be23715f6",
-	"manifest": "3857b125cdcaac3199ac3ff4002faa52",
-	"setup": "02f2dfa47aa3eedb3aef60bb5bf46831",
+	"spec": "1ff71683a4b54d4fe46bb22759a08351",
+	"manifest": "b0b7b455bf6edbe8a5b879d80da74a85",
+	"setup": "56f18c0cdb25c4920f67c9d513f1d9bd",
 	"schemas": [
 		{
 			"identifier": "add_indicators_to_a_threat/schema.py",
 			"hash": "07220b8bb98f9e08a8a0c323c2d81c1e"
 		},
 		{
+			"identifier": "advanced_query_on_log/schema.py",
+			"hash": "ddb0bdc274fc1073a686fc33f15b46bb"
+		},
+		{
+			"identifier": "advanced_query_on_log_set/schema.py",
+			"hash": "8db5fc7b78919efb7cb50554b3d48e77"
+		},
+		{
 			"identifier": "assign_user_to_investigation/schema.py",
 			"hash": "ec59468fd861033f427686449183dc23"
+		},
+		{
+			"identifier": "get_a_log/schema.py",
+			"hash": "8e608b8c51768f9ae9a7334f4f361996"
+		},
+		{
+			"identifier": "get_all_logs/schema.py",
+			"hash": "84dcee2a59a2c04ad36c554412e1e932"
 		},
 		{
 			"identifier": "list_investigations/schema.py",
