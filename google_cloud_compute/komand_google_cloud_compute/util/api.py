@@ -14,9 +14,9 @@ class GoogleCloudComputeAPI:
         )
         return self.execute(request)
 
-    def list_firewalls(self, filter: None, max_results: None, order_by: None, page_token: None):
-        if not filter:
-            filter = None
+    def list_firewalls(self, filter_: None, max_results: None, order_by: None, page_token: None):
+        if not filter_:
+            filter_ = None
         if not max_results:
             max_results = None
         if not order_by:
@@ -26,7 +26,7 @@ class GoogleCloudComputeAPI:
 
         request = self.service.firewalls().list(
             project=self.project_id,
-            filter=filter,
+            filter=filter_,
             maxResults=max_results,
             orderBy=order_by,
             pageToken=page_token
@@ -93,9 +93,9 @@ class GoogleCloudComputeAPI:
         )
         return self.execute(request)
 
-    def disk_list(self, zone: str, filter: None, max_results: None, order_by: None, page_token: None):
-        if not filter:
-            filter = None
+    def disk_list(self, zone: str, filter_: None, max_results: None, order_by: None, page_token: None):
+        if not filter_:
+            filter_ = None
         if not max_results:
             max_results = None
         if not order_by:
@@ -106,7 +106,7 @@ class GoogleCloudComputeAPI:
         request = self.service.disks().list(
             project=self.project_id,
             zone=zone,
-            filter=filter,
+            filter=filter_,
             maxResults=max_results,
             orderBy=order_by,
             pageToken=page_token
@@ -129,9 +129,9 @@ class GoogleCloudComputeAPI:
         )
         return self.execute(request)
 
-    def list_instances(self, zone: str, filter: None, max_results: None, order_by: None, page_token: None):
-        if not filter:
-            filter = None
+    def list_instances(self, zone: str, filter_: None, max_results: None, order_by: None, page_token: None):
+        if not filter_:
+            filter_ = None
         if not max_results:
             max_results = None
         if not order_by:
@@ -142,16 +142,16 @@ class GoogleCloudComputeAPI:
         request = self.service.instances().list(
             project=self.project_id,
             zone=zone,
-            filter=filter,
+            filter=filter_,
             maxResults=max_results,
             orderBy=order_by,
             pageToken=page_token
         )
         return self.execute(request)
 
-    def list_snapshots(self, filter = None, max_results = None, order_by = None, page_token = None):
-        if not filter:
-            filter = None
+    def list_snapshots(self, filter_ = None, max_results = None, order_by = None, page_token = None):
+        if not filter_:
+            filter_ = None
         if not max_results:
             max_results = None
         if not order_by:
@@ -161,7 +161,7 @@ class GoogleCloudComputeAPI:
 
         request = self.service.snapshots().list(
             project=self.project_id,
-            filter=filter,
+            filter=filter_,
             maxResults=max_results,
             orderBy=order_by,
             pageToken=page_token
