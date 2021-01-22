@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AttachIssueInput, AttachIssueOutput, Input, Output, Component
 from komand_jira.util.util import add_attachment
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class AttachIssue(komand.Action):
+class AttachIssue(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

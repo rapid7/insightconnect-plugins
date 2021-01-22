@@ -1,13 +1,13 @@
-import komand
+import insightconnect_plugin_runtime
 
 from .schema import NewIssueInput, NewIssueOutput, Input, Output
 # Custom imports below
 import time
 from komand_jira.util.util import normalize_issue, look_up_project
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class NewIssue(komand.Trigger):
+class NewIssue(insightconnect_plugin_runtime.Trigger):
 
     def __init__(self):
         super(self.__class__, self).__init__(
