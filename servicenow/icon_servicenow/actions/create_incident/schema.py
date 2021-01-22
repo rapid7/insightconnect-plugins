@@ -8,7 +8,20 @@ class Component:
 
 
 class Input:
-    CREATE_DATA = "create_data"
+    ASSIGNED_TO = "assigned_to"
+    ASSIGNMENT_GROUP = "assignment_group"
+    BUSINESS_SERVICE = "business_service"
+    CALLER = "caller"
+    CATEGORY = "category"
+    CONFIGURATION_ITEM = "configuration_item"
+    CONTACT_TYPE = "contact_type"
+    DESCRIPTION = "description"
+    IMPACT = "impact"
+    PRIORITY = "priority"
+    SHORT_DESCRIPTION = "short_description"
+    STATE = "state"
+    SUBCATEGORY = "subcategory"
+    URGENCY = "urgency"
     
 
 class Output:
@@ -22,11 +35,89 @@ class CreateIncidentInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "create_data": {
-      "type": "object",
-      "title": "Create Data",
-      "description": "JSON object containing the fields and values to create a new incident",
+    "assigned_to": {
+      "type": "string",
+      "title": "Assigned To",
+      "description": "User ID of person assigned to the incident",
+      "order": 12
+    },
+    "assignment_group": {
+      "type": "string",
+      "title": "Assignment Group",
+      "description": "Assignment group name of the incident",
+      "order": 11
+    },
+    "business_service": {
+      "type": "string",
+      "title": "Business Service",
+      "description": "Name of business service",
+      "order": 4
+    },
+    "caller": {
+      "type": "string",
+      "title": "Caller/User ID",
+      "description": "User ID of incident caller",
       "order": 1
+    },
+    "category": {
+      "type": "string",
+      "title": "Category",
+      "description": "Category code of incident",
+      "order": 2
+    },
+    "configuration_item": {
+      "type": "string",
+      "title": "Configuration Item",
+      "description": "Configuration item code of the incident",
+      "order": 5
+    },
+    "contact_type": {
+      "type": "string",
+      "title": "Contact Type",
+      "description": "Contact type of the incident",
+      "order": 6
+    },
+    "description": {
+      "type": "string",
+      "title": "Description",
+      "description": "Full description of incident",
+      "order": 14
+    },
+    "impact": {
+      "type": "string",
+      "title": "Impact",
+      "description": "Impact of the indicent",
+      "order": 8
+    },
+    "priority": {
+      "type": "string",
+      "title": "Priority",
+      "description": "Priority of the incident",
+      "order": 10
+    },
+    "short_description": {
+      "type": "string",
+      "title": "Short Description",
+      "description": "Short description of incident",
+      "order": 13
+    },
+    "state": {
+      "type": "string",
+      "title": "State",
+      "description": "State name of the incident",
+      "order": 7
+    },
+    "subcategory": {
+      "type": "string",
+      "title": "Subcategory",
+      "description": "Subcategory code of incident (available values depends on the `Category` field)",
+      "order": 3
+    },
+    "urgency": {
+      "type": "string",
+      "title": "Urgency",
+      "description": "Urgency of the incident",
+      "order": 9
     }
   }
 }
