@@ -1,9 +1,10 @@
 from googleapiclient.errors import HttpError
+from googleapiclient.discover import Resource
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class GoogleCloudComputeAPI:
-    def __init__(self, service, project_id: str):
+    def __init__(self, service: Resource, project_id: str):
         self.service = service
         self.project_id = project_id
 
@@ -14,7 +15,7 @@ class GoogleCloudComputeAPI:
         )
         return self.execute(request)
 
-    def list_firewalls(self, filter_: None, max_results: None, order_by: None, page_token: None):
+    def list_firewalls(self, filter_=None, max_results=None, order_by=None, page_token=None):
         if not filter_:
             filter_ = None
         if not max_results:
@@ -93,7 +94,7 @@ class GoogleCloudComputeAPI:
         )
         return self.execute(request)
 
-    def disk_list(self, zone: str, filter_: None, max_results: None, order_by: None, page_token: None):
+    def disk_list(self, zone: str, filter_=None, max_results=None, order_by=None, page_token=None):
         if not filter_:
             filter_ = None
         if not max_results:
@@ -129,7 +130,7 @@ class GoogleCloudComputeAPI:
         )
         return self.execute(request)
 
-    def list_instances(self, zone: str, filter_: None, max_results: None, order_by: None, page_token: None):
+    def list_instances(self, zone: str, filter_=None, max_results=None, order_by=None, page_token=None):
         if not filter_:
             filter_ = None
         if not max_results:
@@ -149,7 +150,7 @@ class GoogleCloudComputeAPI:
         )
         return self.execute(request)
 
-    def list_snapshots(self, filter_ = None, max_results = None, order_by = None, page_token = None):
+    def list_snapshots(self, filter_=None, max_results=None, order_by=None, page_token=None):
         if not filter_:
             filter_ = None
         if not max_results:

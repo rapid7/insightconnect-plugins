@@ -431,6 +431,7 @@ actions:
         description: Set pageToken to the nextPageToken returned by a previous list
           request to get the next page of results
         required: false
+        example: CkYIpsyE6vCM7QI6OwoCGAEKAiAACgIYAgoHINDkjPrMGgoCGAIKFCoSZGVmYXVsdC1hbGxvdy1pY21wCgoggvCxhNin4rIJ
     output:
       items:
         description: A list of disk resources
@@ -1362,7 +1363,7 @@ actions:
         description: The maximum number of results per page that should be returned.
           Acceptable values are 0 to 500. Default 500
         required: false
-        example: 0
+        example: 500
       orderBy:
         type: string
         title: OrderBy
@@ -1739,7 +1740,7 @@ actions:
         description: The maximum number of results per page that should be returned.
           Acceptable values are 0 to 500. Default 500
         required: false
-        example: 0
+        example: 500
       orderBy:
         type: string
         title: OrderBy
