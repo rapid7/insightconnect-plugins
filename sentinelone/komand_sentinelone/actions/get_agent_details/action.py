@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetAgentDetailsInput, GetAgentDetailsOutput, Input, Output, Component
 # Custom imports below
 
 
-class GetAgentDetails(komand.Action):
+class GetAgentDetails(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -15,7 +15,7 @@ class GetAgentDetails(komand.Action):
     def run(self, params={}):
         agent = params.get(Input.AGENT)
         case_sensitive = params.get(Input.CASE_SENSITIVE)
-        output = self.connection.client.search_agents(agent, case_sensitive=case_sensitive)
+        output = self.connection.client.search_agents(agent, case_sensitive=case_sensitive, api_version=self.connection.api_version)
 
         if len(output) > 1:
             self.logger.info(f"Multiple agents found that matched the query: {agent}. We will only act upon the first match")

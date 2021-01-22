@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 1.4.0
+version: 2.0.1
 vendor: rapid7
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_insightidr
@@ -306,6 +306,49 @@ types:
       title: Links
       description: Links
       type: "[]link"
+  links:
+    href:
+      title: HREF
+      type: string
+      description: HREF
+      required: false
+    rel:
+      title: REL
+      type: string
+      description: REL
+      required: false
+  user_data:
+    platform_managed:
+      title: Platform Managed
+      type: string
+      description: Platform managed
+      required: false
+  logsets_info:
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    links:
+      title: Links
+      type: "[]links"
+      description: Links
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    rrn:
+      title: RRN
+      type: string
+      description: RRN
+      required: false
+    user_data:
+      title: User Data
+      type: user_data
+      description: User data
+      required: false
 
 
 connection:
@@ -495,28 +538,53 @@ actions:
         description: Events from logs
         type: "[]events"
         required: true
+  get_a_log:
+    title: Get a Log
+    description: Get a specific log from an account
+    input:
+      id:
+        title: ID
+        description: Query ID
+        type: string
+        example: 174e4f99-2ac7-4481-9301-4d24c34baf06
+        required: true
+    output:
+      log:
+        title: Log
+        description: Requested log
+        type: logsets_info
+        required: true
+  get_all_logs:
+    title: Get All Logs
+    description: Request used to list all logs for an account
+    output:
+      logs:
+        title: Logs
+        description: All logs
+        type: logsets_info
+        required: true
 
-  advanced_query:
-    title: Advanced Query
-    description: Realtime query into Insight IDR logs
+  advanced_query_on_log:
+    title: Advanced Query on Log
+    description: Realtime query into an Insight IDR log. This will query individual logs for results
     input:
       query:
         title: Query
-        description: Query
+        description: LQL Query
         type: string
         example: "where(user=adagentadmin, loose)"
         required: true
       time_from:
         title: Time From
-        description: Beginning time and date for the query
+        description: Beginning time and date for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
         type: string
-        example: "01-01-2020"
+        example: "01-01-2020T00:00:00"
         required: true
       time_to:
         title: Time To
-        description: Ending date and time for the query. If this is left blank, the current time will be used
+        description: Ending date and time for the query. If this is left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
         type: string
-        example: "12-31-2020"
+        example: "12-31-2020T00:00:00"
         required: false
       timeout:
         title: Timeout
@@ -531,22 +599,61 @@ actions:
         type: string
         example: Firewall Activity
         required: true
+    output:
+      results:
+        title: Query Results
+        description: Query Results
+        type: "[]events"
+        required: true
+
+  advanced_query_on_log_set:
+    title: Advanced Query on Log Set
+    description: Realtime query into an Insight IDR log set. This will query entire log sets for results
+    input:
+      query:
+        title: Query
+        description: LQL Query
+        type: string
+        example: "where(user=adagentadmin, loose)"
+        required: true
+      time_from:
+        title: Time From
+        description: Beginning time and date for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
+        type: string
+        example: "01-01-2020T00:00:00"
+        required: true
+      time_to:
+        title: Time To
+        description: Ending date and time for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
+        type: string
+        example: "12-31-2020T00:00:00"
+        required: false
+      timeout:
+        title: Timeout
+        description: Time in seconds to wait for the query to return. If exceeded the plugin will throw an error
+        type: int
+        example: 60
+        default: 60
+        required: true
+      log_set:
+        title: Log Set
+        description: Log Set to search
+        type: string
+        example: Firewall Activity
+        required: true
         enum:
           - Advanced Malware Alert
-          - Active Directory
-          - Admin Activity
-          - Alert Audit Log
+          - Active Directory Admin Activity
           - Asset Authentication
           - Cloud Service Admin Activity
           - Cloud Service Activity
           - DNS Query
           - Endpoint Activity
-          - Endpoint Agents
+          - EndPoint Agent
           - Exploit Mitigation Alert
           - File Access Activity
           - File Modification Activity
           - Firewall Activity
-          - Log Updates
           - Network Flow
           - Host To IP Observations
           - IDS Alert
@@ -556,9 +663,8 @@ actions:
           - Unparsed Data
           - Third Party Alert
           - Virus Alert
-          - Web Access Log
-          - Windows Defender
           - Web Proxy Activity
+
     output:
       results:
         title: Query Results
