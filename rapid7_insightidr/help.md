@@ -304,8 +304,8 @@ This action is used to get a specific log from an account.
 Example input:
 
 ```
-{	
-  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06"	
+{
+  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06"
 }
 ```
 
@@ -369,8 +369,8 @@ This action is used to close all investigations that fall within a date range.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |alert_type|string|None|False|The category of alerts that should be closed|None|Account Created|
-|datetime_from|date|None|False|An ISO formatted timestamp, default last week|None|2018-07-01 00:00:00|
-|datetime_to|date|None|False|An ISO formatted timestamp of the ending date range, current time if left blank|None|2018-07-01 00:00:00|
+|datetime_from|date|None|False|An ISO formatted timestamp, default last week|None|2018-07-01T00:00:00Z|
+|datetime_to|date|None|False|An ISO formatted timestamp of the ending date range, current time if left blank|None|2018-07-01T00:00:00Z|
 |max_investigations_to_close|integer|None|False|An optional maximum number of alerts to close with this request. If this parameter is not specified then there is no maximum. If this limit is exceeded, then an error is returned|None|10|
 |source|string|MANUAL|False|The name of an investigation source|['ALERT', 'MANUAL', 'HUNT']|MANUAL|
 
@@ -696,9 +696,9 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.0 - New action Close Investigations in Bulk
 * 2.0.1 - Fix issue where long-running queries could crash the plugin
 * 2.0.0 - Refactor and split Advanced Query into two new actions Advanced Query on Log and Advanced Query on Log Set
-* 1.6.0 - New action Close Investigations in Bulk
 * 1.5.0 - New actions Get a Log and Get All Logs
 * 1.4.0 - New action Advanced Query
 * 1.3.1 - Fix ID input description in Get Query Results action
