@@ -2,6 +2,7 @@ import komand
 from .schema import SearchInput, SearchOutput
 # Custom imports below
 import time
+from requests import HTTPError
 
 TWENTY_FOUR_HOURS_AGO = 86400000
 
@@ -28,16 +29,21 @@ class Search(komand.Action):
 
         params['timezone'] = params.get('timezone') or 'UTC'
 
-        sj = self.connection.client.search_job(
-                params['query'], 
-                params['from_time'], 
-                params['to_time'], 
-                params['timezone'])
+        try:
+            sj = self.connection.client.search_job(
+                    params['query'],
+                    params['from_time'],
+                    params['to_time'],
+                    params['timezone']
+            )
 
-        self.logger.info("Running query: %s", params)
+            self.logger.info("Running query: %s", params)
 
-        delay = 2 
-        status = self.connection.client.search_job_status(sj)
+            delay = 2
+            status = self.connection.client.search_job_status(sj)
+        except HTTPError as e:
+            self.logger.error("Error request: %s", e.response.text or "Empty response")
+            raise HTTPError(e)
 
         while status['state'] != states.DONE:
             self.logger.debug("Running query status: %s", status['state'])
