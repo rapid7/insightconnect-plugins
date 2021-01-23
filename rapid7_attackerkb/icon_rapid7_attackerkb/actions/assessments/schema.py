@@ -68,7 +68,7 @@ class AssessmentsInput(komand.Input):
     "size": {
       "type": "integer",
       "title": "Size",
-      "description": "The number of assessments returned per page, default value is 10",
+      "description": "The number of assessments returned per page, default value is 10, maximum size value is 500",
       "default": 10,
       "order": 8
     },

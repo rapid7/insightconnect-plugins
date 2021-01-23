@@ -1,6 +1,6 @@
 # Description
 
-[Rapid7's AttackerKB](http://attackerkb.com/) is a knowledge base of vulnerabilities and informed opinions on what makes them valuable (or not) targets for exploitation
+[Rapid7's AttackerKB](http://attackerkb.com/) is a knowledge base of vulnerabilities and informed opinions on what makes them valuable (or not) targets for exploitation. 
 
 # Key Features
 
@@ -91,9 +91,9 @@ This action is used to return all assessments.
 |document|string|None|False|Text to query the document parameter. A substring match is performed, eg. RDP|None|RDP|
 |editorId|string|None|False|The UUID of a contributor|None|a2c54f3d-48d0-48c4-b056-3a78181d777c|
 |id|string|None|False|The UUID of a specific assessment to return|None|a2c54f3d-48d0-48c4-b056-3a78181d777c|
-|page|integer|0|False|Pagination page number, default value is 0|None|0|
+|page|integer|0|False|Pagination page number, default value is 0|None|1|
 |revisionDate|string|None|False|Return all assessments that were last edited on the given date, eg. 2019-07-04|None|2019-07-04|
-|size|integer|10|False|The number of assessments returned per page, default value is 10|None|10|
+|size|integer|10|False|The number of assessments returned per page, default value is 10, maximum size value is 500|None|10|
 |topicId|string|None|False|The UUID of the topic this assessment was based on|None|a2c54f3d-48d0-48c4-b056-3a78181d777c|
 
 Example input:
@@ -104,7 +104,7 @@ Example input:
   "document": "RDP",
   "editorId": "a2c54f3d-48d0-48c4-b056-3a78181d777c",
   "id": "a2c54f3d-48d0-48c4-b056-3a78181d777c",
-  "page": 0,
+  "page": 1,
   "revisionDate": "2019-07-04",
   "size": 10,
   "topicId": "a2c54f3d-48d0-48c4-b056-3a78181d777c"
@@ -294,9 +294,9 @@ This action is used to return all topics.
 |editorId|string|None|False|The UUID of a contributor|None|a2c54f3d-48d0-48c4-b056-3a78181d777c|
 |id|string|None|False|The UUID of a specific topic to return|None|a2c54f3d-48d0-48c4-b056-3a78181d777c|
 |name|string|None|False|Text to query the name parameter. A substring match is performed|None|CVE-2020-3789|
-|page|integer|0|False|Pagination page number, default value is 0|None|0|
+|page|integer|0|False|Pagination page number, default value is 0, example value is 1|None|1|
 |revisionDate|string|None|False|Return all topics that were last edited on the given date, eg. 2019-07-04|None|2019-07-04|
-|size|integer|10|False|The number of topics returned per page, default value is 10|None|10|
+|size|integer|10|False|The number of topics returned per page, default value is 10, maximum size value is 500|None|10|
 
 Example input:
 
@@ -308,7 +308,7 @@ Example input:
   "editorId": "a2c54f3d-48d0-48c4-b056-3a78181d777c",
   "id": "a2c54f3d-48d0-48c4-b056-3a78181d777c",
   "name": "CVE-2020-3789",
-  "page": 0,
+  "page": 1,
   "revisionDate": "2019-07-04",
   "size": 10
 }
@@ -490,6 +490,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.3 - Update to add the maximum size into help documentation
+* 1.0.2 - Update API URL to v1
 * 1.0.1 - API changed for AttackerKb, add new `metadata` output type for Get Vulnerability and Search Vulnerabilities actions
 * 1.0.0 - Initial plugin
 

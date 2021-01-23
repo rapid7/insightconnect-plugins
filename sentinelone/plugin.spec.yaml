@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 4.0.1
+version: 5.0.0
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
@@ -147,49 +147,12 @@ types:
     size:
       title: Size
       description: Size of installed application
-      type: string
+      type: integer
       required: false
     name:
       title: Name
       description: Name of installed application
       type: string
-      required: false
-  agents_processes:
-    startTime:
-      title: Start time
-      description: Start time
-      type: string
-      required: false
-    processName:
-      title: Process name
-      description: Process name
-      type: string
-      required: false
-    memoryUsage:
-      title: Memory usage
-      description: Memory usage (MB)
-      type: integer
-      required: false
-    cpuUsage:
-      title: CPU Usage
-      description: CPU Usage (%)
-      type: integer
-      required: false
-    executablePath:
-      title: Executable path
-      description: Executable path
-      type: string
-      required: false
-    pid:
-      title: PID
-      description: Process ID
-      type: integer
-      required: false
-  blacklist_data:
-    affected:
-      title: Affected
-      type: integer
-      description: Affected
       required: false
   pagination:
     totalItems:
@@ -202,7 +165,7 @@ types:
       type: string
       description: Next cursor
       required: false
-  data:
+  threat_data:
     username:
       title: Username
       type: string
@@ -701,7 +664,7 @@ types:
       required: false
     domain:
       title: Domain
-      description: Network domain 
+      description: Network domain
       type: string
       required: false
     locationType:
@@ -865,7 +828,7 @@ actions:
         required: false
       data:
         title: Data
-        type: '[]data'
+        type: '[]threat_data'
         description: Data
         required: false
   blacklist_by_content_hash:
@@ -878,32 +841,14 @@ actions:
         description: Content hash to add to blacklist
         type: string
         required: true
+        example: "3395856ce81f2b7382dee72602f798b642f14140"
     output:
-      result:
-        title: Result
-        type: blacklist_data
-        description: Result of hashing operation
-        required: true
-  blacklist_by_ioc_hash:
-    title: Blacklist by IOC Hash
-    description: Add hashed indicator of compromise to global blacklist
-    input:
-      hash:
-        title: IOC Hash
-        description: Indicator of compromise hash to add to blacklist
-        type: string
-        required: true
-      agent_id:
-        title: Agent ID
-        description: Agent ID
-        type: string
-        required: true
-    output:
-      result:
-        title: Result
-        type: blacklist_data
-        description: Result of hashing operation
-        required: true
+      affected:
+        title: Affected
+        type: integer
+        description: Number of entities affected by the requested operation
+        required: false
+        example: 1
   create_ioc_threat:
     title: Create IOC Threat
     description: Create a threat from an IOC event
@@ -913,31 +858,31 @@ actions:
         description: SHA1 hash
         type: string
         required: true
-      agent_id:
+        example: "A94A8FE5CCB19BA61C4C0873D391E987982FBBD3"
+      agentId:
         title: Agent ID
         description: Agent ID for the slim threat
         type: string
         required: true
-      annotation:
-        title: Annotation
-        description: Vigilance annotation
+        example: "1000000000000000000"
+      note:
+        title: Note
+        description: Note
         type: string
-        required: true
-      annotation_url:
-        title: Annotation URL
-        description: Vigilance annotation URL
-        type: string
-        required: true
-      group_id:
+        required: false
+        example: "Note"
+      groupId:
         title: Group ID
         description: Group ID
         type: string
         required: false
+        example: "1000000000000000001"
       path:
         title: Path
         description: Path
         type: string
         required: false
+        example: "path"
     output:
       affected:
         title: Affected
@@ -953,6 +898,7 @@ actions:
         description: ID of a threat
         type: string
         required: true
+        example: 1000000000000000000
       action:
         title: Action
         description: Mitigation action
@@ -964,6 +910,7 @@ actions:
         - kill
         - remediate
         - un-quarantine
+        example: quarantine
     output:
       affected:
         title: Affected
@@ -979,6 +926,7 @@ actions:
         description: ID of a threat
         type: string
         required: true
+        example: "1000000000000000000"
       target_scope:
         title: Target Scope
         description: Scope to be used for exclusions
@@ -988,6 +936,7 @@ actions:
         - group
         - site
         - tenant
+        example: site
       whitening_option:
         title: Whitening Option
         description: Selected whitening option
@@ -1000,6 +949,7 @@ actions:
         - file-type
         - file_hash
         - path
+        example: path
     output:
       affected:
         title: Affected
@@ -1015,6 +965,7 @@ actions:
         description: ID of a threat
         type: string
         required: true
+        example: 1000000000000000000
       target_scope:
         title: Target Scope
         description: Scope to be used for exclusions
@@ -1024,6 +975,7 @@ actions:
         - group
         - site
         - tenant
+        example: site
       whitening_option:
         title: Whitening Option
         description: Selected whitening option
@@ -1036,6 +988,7 @@ actions:
         - file-type
         - file_hash
         - path
+        example: path
     output:
       affected:
         title: Affected
@@ -1048,84 +1001,95 @@ actions:
     input:
       group_ids:
         title: Group IDS
-        description: Get a list of activities
+        description: List of Group IDs
         type: '[]string'
         required: false
+        example: ["500000000000000000"]
       include_hidden:
         title: Include Hidden
         description: Include internal activities hidden from display
         type: boolean
         required: false
+        example: true
       skip:
         title: Skip First N Items
-        description: Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead
+        description: Skip first number of items (0-1000). Will return the number entries specified in the 'limit' input (default is 10)
         type: integer
         required: false
+        example: 1
       site_ids:
         title: Site IDS
         description: List of Site IDs to filter by
         type: '[]string'
         required: false
+        example: ["5000000000000001"]
       agent_ids:
         title: Agent IDS
         description: Return activities related to specified agent ids
         type: '[]string'
         required: false
+        example: ["9000000000000000"]
       skip_count:
         title: Skip Count
         description: If true, total number of items will not be calculated, which speeds up execution time
         type: boolean
         required: false
+        example: true
       ids:
         title: Activity IDS
-        description: If true, total number of items will not be calculated, which speeds up execution time
+        description: List of Activity IDs
         type: '[]string'
         required: false
+        example: ["800000000000000008"]
       created_at_lt:
         title: Less Then Date
-        description: Return activities created before this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
+        description: Return activities created before this date in ISO-8601
         type: string
         required: false
+        example: "2020-12-20T18:49:26.257525Z"
       created_at_lte:
         title: Less or Equal Date
-        description: Return activities created before or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
+        description: Return activities created before or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z
         type: string
         required: false
+        example: "2020-12-20T18:49:26.257525Z"
       created_at_gt:
         title: Greater Then Date
-        description: Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
+        description: Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z
         type: string
         required: false
+        example: "2020-12-18T18:49:26.257525Z"
       created_at_gte:
         title: Greater or Equal Date
-        description: Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z
+        description: Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z
         type: string
         required: false
+        example: "2020-12-20T18:49:26.257525Z"
       created_at_between:
         title: Between Dates
         description: Return activities created within this range (inclusive), example 1514978764288-1514978999999
         type: string
         required: false
-      cursor:
-        title: Cursor Position
-        description: Cursor position returned by the last request. Should be used for iterating over more than 1000 items, example YWdlbnRfaWQ6NTgwMjkzODE=
-        type: string
-        required: false
+        example: "1514978764288-1514978999999"
       count_only:
         title: Count Only
         description: If true, only total number of items will be returned, without any of the actual objects
         type: boolean
         required: false
+        example: true
       account_ids:
         title: Account IDS
         description: List of Account IDs to filter by
         type: '[]string'
         required: false
+        example: ["400000000000000000"]
       limit:
         title: Limit
-        description: Limit number of returned items (1-100)
+        description: Limit number of returned items (1-1000)
         type: integer
         required: false
+        example: 10
+        default: 10
       sort_by:
         title: Sort By
         description: The column to sort the results by
@@ -1135,16 +1099,20 @@ actions:
           - id
           - activityType
           - createdAt
+        example: "createdAt"
+        default: "createdAt"
       activity_types:
         title: Activity Types
         description: Return only these activity codes
         type: '[]string'
         required: false
+        example: ["22", "23"]
       threat_ids:
         title: Threat IDS
         description: Return only these activity codes
         type: '[]string'
         required: false
+        example: ["1"]
       sort_order:
         title: Sort Order
         description: Sort direction
@@ -1153,26 +1121,25 @@ actions:
           - asc
           - desc
         required: false
+        default: "asc"
+        example: asc
       user_emails:
         title: User Emails
         description: Email of the user who invoked the activity (If applicable)
         type: '[]string'
         required: false
+        example: ["user@example.com"]
       user_ids:
         title: User IDS
         description: The user who invoked the activity (If applicable)
         type: '[]string'
         required: false
+        example: ["500000000000000003"]
     output:
       data:
         title: Data
         description: Result of activities list
         type: '[]activities_list'
-        required: true
-      pagination:
-        title: Pagination
-        description: Pagination object
-        type: pagination
         required: true
   activities_types:
     title: Get Activity Types
@@ -1192,6 +1159,7 @@ actions:
         description: Agent ID list
         type: '[]string'
         required: true
+        example: ["1000000000000000000"]
     output:
       data:
         title: Agent Applications
@@ -1207,42 +1175,50 @@ actions:
         description: List of Site IDs to filter by
         type: '[]string'
         required: false
+        example: ["500000000000000000"]
       account_ids:
         title: Account IDS
         description: List of Account IDs to filter by
         type: '[]string'
         required: false
+        example: ["4000000000000000000"]
     output:
       up_to_date:
         title: Up to Date Number
         description: Number of agents with the most up-to-date software version
         type: integer
         required: false
+        example: 2
       out_of_date:
         title: Out of Date Number
         description: Number of agents running an older software version
         type: integer
         required: false
+        example: 1
       total:
         title: Total
         description: Number of installed active agents
         type: integer
         required: false
+        example: 2
       online:
         title: Online
         description: Number of online agents
         type: integer
         required: false
+        example: 2
       decommissioned:
         title: Decommissioned
         description: Number of decommissioned agents
         type: integer
         required: false
+        example: 0
       infected:
         title: Infected
         description: Number of agents with at least one active threat
         type: integer
         required: false
+        example: 1
   name_available:
     title: Available Name
     description: Is the account name available for this account
@@ -1252,117 +1228,13 @@ actions:
         description: Account Name to validate
         type: string
         required: true
+        example: "example"
     output:
       available:
         title: Available
         description: Account Name to validate
         type: boolean
         required: true
-  agents_decommission:
-    title: Agent Decommission
-    description: Decommissions all agents matching the input filter
-    input:
-      filter:
-        title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId
-        type: object
-        required: true
-    output:
-      affected:
-        title: Affected
-        description: Number of entities affected by the requested operation
-        type: integer
-        required: false
-  agents_disconnect:
-    title: Disconnect Agents
-    description: Disconnects agents associated to marked threats from network
-    input:
-      filter:
-        title: Filter JSON
-        description: Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats
-        type: object
-        required: true
-    output:
-      affected:
-        title: Affected
-        description: Number of entities affected by the requested operation
-        type: integer
-        required: false
-  agents_processes:
-    title: Agents Processes
-    description: Retrieve running processes for a specific agent
-    input:
-      ids:
-        title: IDS
-        description: Agent ID list
-        type: '[]string'
-        required: true
-    output:
-      agents_processes:
-        title: Agents Processes
-        description: Agents processes entities
-        type: '[]agents_processes'
-        required: false
-  agents_initiate:
-    title: Initiate Scan
-    description: Sends a scan command to all agents matching the input filter
-    input:
-      filter:
-        title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
-        type: object
-        required: true
-    output:
-      affected:
-        title: Affected
-        description: Number of entities affected by the requested operation
-        type: integer
-        required: false
-  agents_uninstall:
-    title: Uninstall
-    description: Sends an uninstall command to all agents matching the input filter
-    input:
-      filter:
-        title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId
-        type: object
-        required: true
-    output:
-      affected:
-        title: Affected
-        description: Number of entities affected by the requested operation
-        type: integer
-        required: false
-  agents_shutdown:
-    title: Agents Shutdown
-    description: Sends a shutdown command to all agents matching the input filter
-    input:
-      filter:
-        title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId
-        type: object
-        required: true
-    output:
-      affected:
-        title: Affected
-        description: Number of entities affected by the requested operation
-        type: integer
-        required: false
-  agents_restart:
-    title: Agents Restart
-    description: Sends a restart command to all agents matching the input filter
-    input:
-      filter:
-        title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Note - One of the following filter arguments must be supplied - ids, groupIds, filterId
-        type: object
-        required: true
-    output:
-      affected:
-        title: Affected
-        description: Number of entities affected by the requested operation
-        type: integer
-        required: false
   agents_reload:
     title: Agents Reload
     description: Reload an agent module (applies to Windows agents only)
@@ -1372,6 +1244,7 @@ actions:
         description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
         type: object
         required: true
+        example: '{"ids": ["1000000000000000000"]}'
       module:
         title: Data Module
         description: Agent module to reload
@@ -1382,57 +1255,47 @@ actions:
           - static
           - agent
           - log
+        example: monitor
     output:
       affected:
         title: Affected
         description: Number of entities affected by the requested operation
         type: integer
         required: false
-  agents_fetch_logs:
-    title: Agents Fetch Logs
-    description: Sends a fetch logs command to all agents matching the input filter
+  agents_action:
+    title: Run Agent Action
+    description: Perform actions relating to your SentinelOne agents. This will help manage your assets connected to your SentinelOne console. Documentation for these actions can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions
     input:
       filter:
         title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents. Note - decommission, disconnect, restart-machine, shutdown and uninstall actions require that one of the following filter arguments be supplied - ids, groupIds, or filterId
         type: object
         required: true
+        example: '{"ids": ["1000000000000000000"]}'
+        default: '{}'
+      action:
+        title: Agent Action
+        description: Agent action to run
+        type: string
+        required: true
+        enum:
+          - abort-scan
+          - connect
+          - decommission
+          - disconnect
+          - fetch-logs
+          - initiate-scan
+          - restart-machine
+          - shutdown
+          - uninstall
+        example: "connect"
     output:
       affected:
         title: Affected
         description: Number of entities affected by the requested operation
         type: integer
         required: false
-  agents_abort_scan:
-    title: Agents Abort Scan
-    description: Aborts running scan on all agents matching the input filter
-    input:
-      filter:
-        title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
-        type: object
-        required: true
-    output:
-      affected:
-        title: Affected
-        description: Number of entities affected by the requested operation
-        type: integer
-        required: false
-  agents_connect:
-    title: Connect to Network
-    description: Sends a connect to network command to all agents matching the input filter
-    input:
-      filter:
-        title: Filter JSON
-        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
-        type: object
-        required: true
-    output:
-      affected:
-        title: Affected
-        description: Number of entities affected by the requested operation
-        type: integer
-        required: false
+
   search_agents:
     title: Search Agents
     description: Search for agents
@@ -1450,6 +1313,13 @@ actions:
         example: true
         default: true
         required: false
+      case_sensitive:
+        title: Case Sensitive
+        description: Looks up agents in a case-sensitive manner. Setting this value to false may result in longer run times and unintended results
+        type: boolean
+        example: true
+        default: true
+        required: true
     output:
       agents:
         title: Agents
@@ -1466,6 +1336,13 @@ actions:
         type: string
         example: hostname123
         required: true
+      case_sensitive:
+        title: Case Sensitive
+        description: Looks up the specified Agent in a case-sensitive manner. Setting this to false may result in longer run times and unintended results
+        type: boolean
+        example: true
+        default: true
+        required: true
     output:
       agent:
         title: Agent
@@ -1474,7 +1351,7 @@ actions:
         required: false
   quarantine:
     title: Quarantine
-    description: Isolate (quarantine) endpoint from the network 
+    description: Isolate (quarantine) endpoint from the network
     input:
       agent:
         title: Agent
@@ -1494,6 +1371,13 @@ actions:
         type: "[]string"
         example: ["198.51.100.100", "hostname123", "901345720792880606", "28db47168fa54f89aeed99769ac8d4dc"]
         required: false
+      case_sensitive:
+        title: Case Sensitive
+        description: Looks up the specified Agent in a case-sensitive manner. Setting this value to false may result in longer run times and unintended results
+        type: boolean
+        example: true
+        default: true
+        required: true
     output:
       response:
         title: Response
@@ -1539,6 +1423,7 @@ actions:
         description: Threat ID
         type: string
         required: true
+        example: "939039647215561624"
       password:
         title: Password
         description: File encryption password, min. length 10 characters and cannot contain whitespace
@@ -1562,31 +1447,36 @@ triggers:
         description: Include resolved threats
         type: boolean
         required: false
+        example: true
       classifications:
         title: Classifications
         description: List of classifications to search
         type: '[]string'
         required: false
+        example: [""]
       agent_is_active:
         title: Agent is Active
         description: Include agents currently connected to the management console
         type: boolean
         default: true
         required: false
+        example: true
       engines:
         title: Engines
         description: Included engines
         type: '[]string'
         required: false
+        example: [""]
       frequency:
         title: Frequency
         description: Poll frequency in seconds
         type: integer
         required: false
         default: 5
+        example: 5
     output:
       threat:
         title: Threat
         description: Threat
-        type: data
+        type: threat_data
         required: false
