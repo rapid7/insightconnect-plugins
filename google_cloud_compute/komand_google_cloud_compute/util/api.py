@@ -1,5 +1,5 @@
 from googleapiclient.errors import HttpError
-from googleapiclient.discover import Resource
+from googleapiclient.discovery import Resource
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
