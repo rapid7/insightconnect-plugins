@@ -21,6 +21,49 @@ _This plugin does not contain a connection._
 
 ### Actions
 
+#### Array Diff
+
+This action is used to get the difference between two arrays.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|array1|[]string|None|True|First array|None|["rapid7", "insight_connect", "example"]|
+|array2|[]string|None|True|Second array|None|["rapid7", "insight_connect"]|
+
+Example input:
+
+```
+{
+  "array1": [
+    "rapid7",
+    "insight_connect",
+    "example"
+  ],
+  "array2": [
+    "rapid7",
+    "insight_connect"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|difference_array|[]string|True|Difference array|
+
+Example output:
+
+```
+{
+  "difference_array": [
+    "example"
+  ]
+}
+```
+
 #### Combine Arrays
 
 This action is used to combine and deduplicate one or more arrays into a larger array.
@@ -534,6 +577,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.7.0 - New action Array Diff
 * 1.6.1 - Add Cloud Enabled tag
 * 1.6.0 - New action Combine Arrays
 * 1.5.2 - Rewrite plugin in Python 3 | Configure as Cloud Plugin
