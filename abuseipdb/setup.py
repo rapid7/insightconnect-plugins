@@ -3,12 +3,12 @@ from setuptools import setup, find_packages
 
 
 setup(name="abuseipdb-rapid7-plugin",
-      version="5.0.3",
+      version="5.0.4",
       description="Enables the look up of IP reports, provides list and details of blacklisted IPs, and submissions of abusive IPs",
       author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
-      install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
+      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_abuseipdb']
       )

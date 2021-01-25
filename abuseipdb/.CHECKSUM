@@ -1,27 +1,27 @@
 {
-	"spec": "510e9a81c3ad53dc72a173ab1541f8ff",
-	"manifest": "96447e9ed47cd50e1af8a13adddd36b9",
-	"setup": "ff3ccd7c93331a70dcd42be6f393c02e",
+	"spec": "25c2f96d9c8d4cffdc9af7809784cff9",
+	"manifest": "f6aa564000b304dd37086d75d881c4a7",
+	"setup": "2f47e293ee84eb3bd1845b7c5f161d00",
 	"schemas": [
 		{
 			"identifier": "check_cidr/schema.py",
-			"hash": "b19f6a4ab1e2f39e8a6aabbabe463d63"
+			"hash": "dea92b37791d025d7c7fe788db6a06e2"
 		},
 		{
 			"identifier": "check_ip/schema.py",
-			"hash": "a3b9e680009f3fab2b134f368004224b"
+			"hash": "b015694a0abe21e1efc016ce843dfd4d"
 		},
 		{
 			"identifier": "get_blacklist/schema.py",
-			"hash": "0ba2b1d476a2351bc7db808cb3ff6462"
+			"hash": "85e7e679a99804f185f56a540ffa73fc"
 		},
 		{
 			"identifier": "report_ip/schema.py",
-			"hash": "522148fce14773f9c6447fb8cdd0a354"
+			"hash": "b9931570833afe3d72d305582951c23d"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "e8f7bd175d6ecd76b01cfb6df6970683"
+			"hash": "ea25f7440b9f5d2de1cb0262728b8df4"
 		}
 	]
 }
