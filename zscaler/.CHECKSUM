@@ -1,11 +1,15 @@
 {
-	"spec": "4026515e5eb78275ea7f3bcb70685a6a",
-	"manifest": "5d71bcfa39aaa76cf1ebd67192bef6bd",
-	"setup": "97f8b9cf18d8e4b9f15857c9abcf1d67",
+	"spec": "8a46b482ca337a2cfa468f6d2a7985d2",
+	"manifest": "f3df91c314afd4860e3d64a8f3db86c9",
+	"setup": "705e97c956d56ac9ad81a56fe0ea8d0f",
 	"schemas": [
 		{
 			"identifier": "blacklist_url/schema.py",
 			"hash": "986cb199f2e6492f47f560e909ce9aec"
+		},
+		{
+			"identifier": "get_blacklist_url/schema.py",
+			"hash": "3c3a8f4c3e70f8fca42a0a144a9136b4"
 		},
 		{
 			"identifier": "get_sandbox_report_for_hash/schema.py",
