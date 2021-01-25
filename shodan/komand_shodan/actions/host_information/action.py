@@ -1,61 +1,41 @@
-import komand
-from .schema import HostInformationInput, HostInformationOutput
+import insightconnect_plugin_runtime
+from .schema import HostInformationInput, HostInformationOutput, Input, Output
 # Custom imports below
-import json
+from insightconnect_plugin_runtime.exceptions import PluginException
 import shodan
-import sys
 
 
-class HostInformation(komand.Action):
+class HostInformation(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='host_information',
-                description='Return Services Found for the Given IP',
-                input=HostInformationInput(),
-                output=HostInformationOutput())
+            name='host_information',
+            description='Return Services Found for the Given IP',
+            input=HostInformationInput(),
+            output=HostInformationOutput())
 
     def run(self, params={}):
-        ip = params.get('ip')
-        token = self.connection.token
-        api = shodan.Shodan(token)
-
-        #Error handling if Shodan does not return a 200 response
         try:
-            response = api.host(ip)
+            response = shodan.Shodan(self.connection.token).host(params.get(Input.IP))
         except shodan.exception.APIError as e:
-            raise Exception('Shodan: {}'.format(e))
+            raise PluginException(
+                preset=PluginException.Preset.SERVER_ERROR,
+                data=e
+            )
 
-        #Pull banner info from results
         data = response['data']
         data_list = []
         for item in data:
-          data_list.append(item['data'])
+            data_list.append(item['data'])
 
-        #Generate final dic to return
-        dic = {
-          'ip_str': response.get('ip_str'),
-          'asn': response.get('asn'),
-          'hostnames': response.get('hostnames'),
-          'org': response.get('org'),
-          'country_name': response.get('country_name'),
-          'country_code': response.get('country_code'),
-          'os': response.get('os'),
-          'ports': response.get('ports'),
-          'data': data_list
-          }
-
-        # None returns error during type validation
-        return komand.helper.clean_dict(dic)
-
-    def test(self):
-        token = self.connection.token
-        api = shodan.Shodan(token)
-
-        #Test authentication
-        try:
-          response = api.info()
-        except shodan.exception.APIError as e:
-          raise Exception('Test: {}'.format(e))
-
-        return {}
+        return insightconnect_plugin_runtime.helper.clean_dict({
+            Output.IP_STR: response.get('ip_str'),
+            Output.ASN: response.get('asn'),
+            Output.HOSTNAMES: response.get('hostnames'),
+            Output.ORG: response.get('org'),
+            Output.COUNTRY_NAME: response.get('country_name'),
+            Output.COUNTRY_CODE: response.get('country_code'),
+            Output.OS: response.get('os'),
+            Output.PORTS: response.get('ports'),
+            Output.DATA: data_list
+        })
