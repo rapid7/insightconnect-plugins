@@ -29,18 +29,21 @@ class GetScansInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Index",
       "description": "The page index to start form. If blank, index will be 0",
+      "default": 0,
       "order": 1
     },
     "size": {
       "type": "integer",
       "title": "Size",
       "description": "The number of entries on each page. If blank, size will be 50",
+      "default": 50,
       "order": 2
     },
     "sort": {
       "type": "string",
       "title": "Sort",
       "description": "How to sort the scans. If blank, sort will be alphabetical by scan name",
+      "default": "ASC",
       "order": 3
     }
   }

@@ -285,8 +285,8 @@ actions:
         description: How to sort the response
         type: string
         required: false
-        default: "ASC"
-        example: "ASC"
+        default: ASC
+        example: ASC
       index:
         title: Index
         description: The page number of the return data set
@@ -326,13 +326,13 @@ actions:
         description: The name of the application
         type: string
         required: true
-        example: "Name Of the APP"
+        example: Name Of the APP
       app_description:
         title: Application Description
         description: Describe the application
         type: string
         required: false
-        example: "An optional description"
+        example: An optional description
     output:
       app_id:
         title: Application ID
@@ -348,7 +348,7 @@ actions:
         description: Application UUID
         type: string
         required: true
-        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx
     output:
       app_id:
         title: Application ID
@@ -372,7 +372,7 @@ actions:
         required: false
   delete_app:
     title: Delete Application
-    description: De;ete an existing application
+    description: Delete an existing application
     input:
       app_id:
         title: Application ID
@@ -401,11 +401,13 @@ actions:
         description: The name of an application
         type: string
         required: true
+        example: Application Name
       app_description:
         title: Application Description
         description: Describe the application
         type: string
         required: false
+        example: Do not scan during business hours
     output:
       status:
         title: Status
@@ -481,25 +483,25 @@ actions:
         description: The name of the scan configuration
         type: string
         required: true
-        example: "Scan Config 1"
+        example: Scan Config 1
       config_description:
         title: Description
         description: The description of the scan configuration
         type: string
         required: false
-        example: "Description for scan config"
+        example: Description for scan config
       app_id:
         title: App ID
         description: App UUID
         type: string
         required: true
-        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       attack_template_id:
         title: Attack Template ID
         description: Attack template UUID
         type: string
         required: true
-        example: "11111111-0000-0000-0000-000000000000"
+        example: 11111111-0000-0000-0000-000000000000
       assignment_environment:
         title: Assignment Environment
         description: Where the scan will run from ON_PREMISE or CLOUD
@@ -515,8 +517,8 @@ actions:
         description: The UUID of the engine Group
         required: true
         type: string
-        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-        default: "default"
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        default: default
       assignment_type:
         title: Assignment Type
         description: The type of engine assignment
@@ -539,7 +541,7 @@ actions:
         description: Scan configuration UUID
         type: string
         required: true
-        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx
     output:
       id:
         title: UUID
@@ -606,25 +608,25 @@ actions:
         description: The name of the scan configuration
         type: string
         required: true
-        example: "Scan Config 1"
+        example: Scan Config 1
       config_description:
         title: Description
         description: The description of the scan configuration
         type: string
         required: false
-        example: "Description of scan config"
+        example: Description of scan config
       app_id:
         title: App ID
         description: App UUID
         type: string
         required: true
-        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx
       attack_template_id:
         title: Attack Template ID
         description: Attack template UUID
         type: string
         required: true
-        example: "11111111-0000-0000-0000-000000000000"
+        example: 11111111-0000-0000-0000-000000000000
       assignment_environment:
         title: Assignment Environment
         description: Where the scan will run from ON_PREMISE or CLOUD
@@ -640,8 +642,8 @@ actions:
         description: The UUID of the engine Group
         required: false
         type: string
-        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-        default: "default"
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        default: default
       assignment_type:
         title: Assignment Type
         description: The type of engine assignment
@@ -664,7 +666,7 @@ actions:
         description: Scan configuration UUID
         type: string
         required: true
-        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx
     output:
       status:
         title: Status
@@ -680,8 +682,8 @@ actions:
         description: How to sort the response
         type: string
         required: false
-        default: "ASC"
-        example: "scanconfig.name,DESC"
+        default: ASC
+        example: scanconfig.name,DESC
       index:
         title: Index
         description: The page number of the return data set
@@ -701,7 +703,7 @@ actions:
         description: Iclude validation errors in scan configs, can be expensive
         type: boolean
         required: false
-        default: true
+        default: false
         example: false
     output:
       metadata:
@@ -728,7 +730,7 @@ actions:
         description: UUID of the scan config to use
         type: string
         required: true
-        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
     output:
       scan_id:
         title: Scan ID
@@ -744,7 +746,7 @@ actions:
         description: The scans UUID
         type: string
         required: true
-        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx
     output:
       scan:
         title: Scan
@@ -760,12 +762,14 @@ actions:
         description: The page index to start form. If blank, index will be 0
         type: integer
         required: false
+        default: 0
         example: 0
       size:
         title: Size
         description: The number of entries on each page. If blank, size will be 50
         type: integer
         required: false
+        default: 50
         example: 50
       sort:
         title: Sort
@@ -773,7 +777,8 @@ actions:
           scan name
         type: string
         required: false
-        example: "scan.submit_time,DESC"
+        default: ASC
+        example: scan.submit_time,DESC
     output:
       metadata:
         title: Metadata
@@ -799,7 +804,7 @@ actions:
         description: The scans UUID
         type: string
         required: true
-        example: "xxxxxxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        example: xxxxxxxx-xxxx-xxxx-xxxxxxxxxxxx
     output:
       status:
         title: Status
@@ -815,7 +820,7 @@ actions:
         description: Scan UUID
         type: string
         required: true
-        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       action:
         title: Action
         description: Action to take
@@ -828,7 +833,7 @@ actions:
         - Stop
         - Cancel
         - Authenticate
-        example: "Pause"
+        example: Pause
     output:
       status:
         title: Status
@@ -844,7 +849,7 @@ actions:
         description: Scan UUID
         type: string
         required: true
-        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx
     output:
       events:
         title: Events
@@ -860,7 +865,7 @@ actions:
         description: Scan UUID
         type: string
         required: true
-        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx
     output:
       details:
         title: Details
@@ -876,7 +881,7 @@ actions:
         description: Scan UUID
         type: string
         required: true
-        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx
     output:
       events:
         title: Events
@@ -892,7 +897,8 @@ actions:
         description: How to sort the response
         type: string
         required: false
-        example: "ASC"
+        default: ASC
+        example: ASC
       index:
         title: Index
         description: The page number of the return data set

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "De;ete an existing application"
+    DESCRIPTION = "Delete an existing application"
 
 
 class Input:

@@ -43,6 +43,7 @@ class GetSchedulesInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Sort",
       "description": "How to sort the response",
+      "default": "ASC",
       "order": 1
     }
   }

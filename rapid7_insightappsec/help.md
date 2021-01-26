@@ -187,15 +187,17 @@ This action is used to update the name or description of an existing Application
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|app_description|string|None|False|Describe the application|None|None|
+|app_description|string|None|False|Describe the application|None|Do not scan during business hours|
 |app_id|string|None|True|Application UUID|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
-|app_name|string|None|True|The name of an application|None|None|
+|app_name|string|None|True|The name of an application|None|Application Name|
 
 Example input:
 
 ```
 {
-  "app_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  "app_description": "Do not scan during business hours",
+  "app_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "app_name": "Application Name"
 }
 ```
 
@@ -419,7 +421,7 @@ This action is used to get a page of Schedules.
 |----|----|-------|--------|-----------|----|-------|
 |index|integer|0|False|The page number of the return data set|None|0|
 |size|integer|100|False|The data set size or the max number of apps to return per page|None|100|
-|sort|string|None|False|How to sort the response|None|ASC|
+|sort|string|ASC|False|How to sort the response|None|ASC|
 
 Example input:
 
@@ -695,7 +697,7 @@ This action is used to get a page of scan configurations, based on supplied pagi
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|include-errors|boolean|True|False|Iclude validation errors in scan configs, can be expensive|None|False|
+|include-errors|boolean|False|False|Iclude validation errors in scan configs, can be expensive|None|False|
 |index|integer|0|False|The page number of the return data set|None|0|
 |size|integer|100|False|The data set size or the max number of apps to return per page|None|100|
 |sort|string|ASC|False|How to sort the response|None|scanconfig.name,DESC|
@@ -849,9 +851,9 @@ This action is used to get a page of scans, based on supplied pagination paramet
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|index|integer|None|False|The page index to start form. If blank, index will be 0|None|0|
-|size|integer|None|False|The number of entries on each page. If blank, size will be 50|None|50|
-|sort|string|None|False|How to sort the scans. If blank, sort will be alphabetical by scan name|None|scan.submit_time,DESC|
+|index|integer|0|False|The page index to start form. If blank, index will be 0|None|0|
+|size|integer|50|False|The number of entries on each page. If blank, size will be 50|None|50|
+|sort|string|ASC|False|How to sort the scans. If blank, sort will be alphabetical by scan name|None|scan.submit_time,DESC|
 
 Example input:
 
@@ -997,8 +999,7 @@ Example input:
 
 ```
 {
-  "action": "Pause",
-  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  "scan_config_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 }
 ```
 

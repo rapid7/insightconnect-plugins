@@ -22,7 +22,6 @@ class GetScanExecutionDetails(insightconnect_plugin_runtime.Action):
 
         url = Scans.scan_execution_details(self.connection.url, scan_id)
         response = request.resource_request(url, 'get')
-        response = "This won't work"
         try:
             result = json.loads(response['resource'])
         except (json.decoder.JSONDecodeError, TypeError, KeyError):

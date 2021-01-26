@@ -1,5 +1,5 @@
 {
-	"spec": "e8aa2a84b26b3ebcc17a1b7aa9c9514a",
+	"spec": "99a4784a4c33eaf4a6548b541e47264f",
 	"manifest": "444bc8b2c8f41a6ce46033db2e1c9409",
 	"setup": "db1333242ad3d49bd16db23646ef67c9",
 	"schemas": [
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "delete_app/schema.py",
-			"hash": "e11d801c7925888e7ee6097256fbcc76"
+			"hash": "1ee113a42816006d1351c2816eca8a81"
 		},
 		{
 			"identifier": "delete_scan/schema.py",
@@ -49,7 +49,7 @@
 		},
 		{
 			"identifier": "get_scan_configs/schema.py",
-			"hash": "c0b54a41e66a53fd636a1d62fe4c2a34"
+			"hash": "833611ebc0ee7035aad6cfe033db13a8"
 		},
 		{
 			"identifier": "get_scan_engine_events/schema.py",
@@ -65,11 +65,11 @@
 		},
 		{
 			"identifier": "get_scans/schema.py",
-			"hash": "7e7aae675115b993c2613e635608cc49"
+			"hash": "d2f3b3bfd680ce034b787533b27ea357"
 		},
 		{
 			"identifier": "get_schedules/schema.py",
-			"hash": "399565dc933ede708bb5fd2140c5f952"
+			"hash": "d148d5bc2b3337d2f7c1777ea8008fb7"
 		},
 		{
 			"identifier": "remove_app_user/schema.py",

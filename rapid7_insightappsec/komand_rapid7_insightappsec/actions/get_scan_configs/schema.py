@@ -30,7 +30,7 @@ class GetScanConfigsInput(insightconnect_plugin_runtime.Input):
       "type": "boolean",
       "title": "Validation Errors",
       "description": "Iclude validation errors in scan configs, can be expensive",
-      "default": true,
+      "default": false,
       "order": 4
     },
     "index": {
