@@ -281,7 +281,7 @@ When the user is not found, the action returns:
 
 #### Delete User
 
-This action is used to delete a user. If a user is not deprovisioned, this will deprovision a user, a second delete will be needed to remove the user. Warning: This action annot be recovered from.
+This action is used to delete a user. If a user is not deprovisioned, this will deprovision a user, a second delete will be needed to remove the user. Warning: This action cannot be recovered from.
 
 ##### Input
 

@@ -1140,7 +1140,7 @@ _This plugin does not contain any custom output types._
 * 2.1.6 - Vendored dependencies
 * 2.1.5 - New spec and help.md format for the Extension Library
 * 2.1.4 - Bug fix for New Events trigger where PluginException was not supported in SDK image | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
-* 2.1.3 - Bug fix for New Detection trigger cache where additional dates were being added to the cache file. When the cache was loaded from the file it would set the lastest cache to an older date, allowing old detections to be triggered on
+* 2.1.3 - Bug fix for New Detection trigger cache where additional dates were being added to the cache file. When the cache was loaded from the file it would set the latest cache to an older date, allowing old detections to be triggered on
 * 2.1.2 - Bug fix for New Detection where needed to be loaded every time the trigger was called
 * 2.1.1 - Bug fix for connection test
 * 2.1.0 - Updated caching for New Events and New Detection triggers. Caching will now use date vs. caching a separate event ID. The trigger also has the option of setting a date offset for testing workflows

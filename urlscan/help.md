@@ -3,7 +3,7 @@
 The [URLScan](https://urlscan.io/) plugin uses URLScan to analyze URLs for malicious indicators.
 
 This plugin utilizes the [URLScan API](https://urlscan.io/about-api/) to search for URLs and retrieve reports
-on potential malicous indicators.
+on potential malicious indicators.
 
 # Key Features
 
@@ -49,7 +49,7 @@ This action is used to search urlscan.io.
 |offset|integer|0|True|Offset of first result (for paginating)|None|1|
 |q|string|domain:example.com|True|The query term (ElasticSearch simple query string), default is *|None|domain:example.com|
 |size|integer|100|True|Number of results returned|None|45|
-|sort|string|_score|True|Sorting, specificied via $sort_field:$sort_order|None|_score|
+|sort|string|_score|True|Sorting, specified via $sort_field:$sort_order|None|_score|
 
 Example input:
 

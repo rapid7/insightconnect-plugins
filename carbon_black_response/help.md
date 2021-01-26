@@ -737,7 +737,7 @@ This plugin does not contain any troubleshooting information.
 * 3.1.5 - Update connection tests
 * 3.1.4 - Update descriptions
 * 3.1.3 - Pull the ConnectionCacheKey update from SDK
-* 3.1.2 - Fixed List Sensors action from failing when sensor dosen't exist
+* 3.1.2 - Fixed List Sensors action from failing when sensor doesn't exist
 * 3.1.1 - New input parameters for List Sensors action
 * 3.1.0 - Added action List Sensors
 * 3.0.0 - Plugin audited and various minor bugs corrected

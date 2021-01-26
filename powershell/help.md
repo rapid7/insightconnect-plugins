@@ -9,7 +9,7 @@
 # Requirements
 
 * For local Orchestrator execution, ensure connectivity to any network resources the script will use
-* For remote server execution, a PowerShell-enabled server annd administrative credentials
+* For remote server execution, a PowerShell-enabled server and administrative credentials
 
 # Documentation
 
@@ -134,7 +134,7 @@ Any errors generated on the remote computer by the PowerShell code
 are forwarded to the log file.
 
 Run this PowerShell command on a Windows host first to set up a unsigned certificate for authentication:
-This will not be needed if the host alredy has a SSL certificate set up for Winrm
+This will not be needed if the host already has an SSL certificate set up for Winrm
 
 ```
 

@@ -41,7 +41,7 @@ This action is used to search for OTRS tickets.
 |----|----|-------|--------|-----------|----|-------|
 |cust_id|string|None|False|Customer ID|None|None|
 |dynamic_fields|[]search_dynamic_field|None|False|Fields as array of objects e.g. [{"name":"TestName1","value":"TestValue1", "operation":"Equals"},{"name":"TestName2","value":"TestValue2"}]. The value field is what will be searched for|None|None|
-|external_params|[]external_param|None|False|A key value object thats not a Dynamic Field e.g [{"Title":"Test Ticket"}]|None|None|
+|external_params|[]external_param|None|False|A key value object that's not a Dynamic Field e.g [{"Title":"Test Ticket"}]|None|None|
 |queue|string|None|False|Queue to search in|None|None|
 
 Example input:

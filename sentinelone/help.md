@@ -1293,7 +1293,7 @@ Example output:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|action|string|False|Action descripted in the activity|
+|action|string|False|Action described in the activity|
 |descriptionTemplate|string|False|Activity description template as seen in activity page|
 |id|float|False|Activity type ID|
 

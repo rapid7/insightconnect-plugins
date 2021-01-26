@@ -96,7 +96,7 @@ Example output:
 
 #### Extract Archive
 
-This action is used to exctract file archive.
+This action is used to extract file archive.
 
 ##### Input
 

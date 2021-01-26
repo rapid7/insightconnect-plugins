@@ -196,7 +196,7 @@ _This plugin does not contain any custom output types._
 * 2.1.0 - Add Download File action
 * 2.0.0 - Update to use new credential types
 * 1.2.1 - Fixed a bug that caused an error if Folder ID was left blank
-* 1.2.0 - Add the ablity to rename and force a MIME type on the overwrite action
+* 1.2.0 - Add the ability to rename and force a MIME type on the overwrite action
 * 1.1.0 - Add overwrite file action and search file action
 * 1.0.0 - Initial plugin
 

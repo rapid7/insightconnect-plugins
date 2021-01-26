@@ -334,7 +334,7 @@ _This plugin does not contain any triggers._
 
 ## Troubleshooting
 
-There's a rate limit on the free API service. The following error messags `429 Client Error: Too Many Requests for url` indicates that threshold has been hit.
+There's a rate limit on the free API service. The following error messages `429 Client Error: Too Many Requests for url` indicates that threshold has been hit.
 
 # Version History
 

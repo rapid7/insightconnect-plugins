@@ -56,7 +56,7 @@ This action is used to mount a drive for analysis
 
 #### Clam AV
 
-This action is used to scan a directory with ClamAV. This action requires the host to have clamav installed.
+This action is used to scan a directory with ClamAV. This action requires the host to have clamAV installed.
 
 ##### Input
 

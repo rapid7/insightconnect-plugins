@@ -237,7 +237,7 @@ Example output:
 
 #### Update Issue
 
-This action is used to update an individual issues's attributes (only the attributes submitted are modified).
+This action is used to update an individual issue's attributes (only the attributes submitted are modified).
 
 ##### Input
 

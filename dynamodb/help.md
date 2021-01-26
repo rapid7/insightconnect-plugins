@@ -38,7 +38,7 @@ This action will insert the provided data into the specified table.
 
 Optionally, you can specify a ConditionExpression which can prevent Dynamo from accepting writes if the conditions
 are met. For example, if you had a primary key of "myid", you could set this to "attribute_not_exist(myid)" to reject
-the insert if a key with the same value as this object already existed. Otherwise, the default behvior of Dynamo is to
+the insert if a key with the same value as this object already existed. Otherwise, the default behavior of Dynamo is to
 overwrite the existing record.
 
 ##### Input

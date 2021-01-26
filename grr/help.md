@@ -224,7 +224,7 @@ This action is used to start a hunt on clients.
 |hunt_name|string|None|False|The name of the class implementing the hunt to run|None|
 |client_limit|integer|None|False|Maximum number of clients participating in the hunt. Best practice is for all hunts to use a limit to start with and remove it only when client impact has been assessed by looking at hunt stats. Note that this limit can be overshot by a small number of clients if there are multiple workers running |None|
 |oversized_file_policy|string|None|False|What should GRR do with files that are larger than max_size|['SKIP', 'HASH_TRUNCATED', 'DOWNLOAD_TRUNCATED']|
-|xdev|string|None|False|Behavior when ecountering device boundaries while doing recursive searches|['NEVER', 'ALWAYS', 'LOCAL']|
+|xdev|string|None|False|Behavior when encountering device boundaries while doing recursive searches|['NEVER', 'ALWAYS', 'LOCAL']|
 |mode|string|None|False|When should searching stop? Stop after one hit or search for all|['FIRST_HIT', 'ALL_HITS']|
 |max_size|integer|None|False|The maximum size of files|None|
 |bytes_after|integer|None|False|Include this many bytes after the hit|None|

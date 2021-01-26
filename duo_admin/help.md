@@ -145,7 +145,7 @@ Example output:
 This action is used to get the account status of a user. If no users exist this action returns 'No results', and if the specified user does not exist it returns 'No user'.
 Also, for both these conditions `user_id` will return `None`.
 
-If the user is found, the action returns one of the following statuses: active, bypass, disabled, or locked out, and the user's ID. The user's ID can be used as input to actions in thie plugin that require a User ID.
+If the user is found, the action returns one of the following statuses: active, bypass, disabled, or locked out, and the user's ID. The user's ID can be used as input to actions in the plugin that require a User ID.
 
 ##### Input
 
