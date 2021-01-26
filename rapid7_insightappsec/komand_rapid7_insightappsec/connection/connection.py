@@ -31,6 +31,4 @@ class Connection(insightconnect_plugin_runtime.Connection):
             return response.json()
         else:
             self.logger.error(response.text)
-            raise Exception(f'An unknown error occurred.'
-                            f' InsightAppSec responded with a {response.status_code} code.'
-                            f' See log for more details. If the problem persists, please contact support.')
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNKNOWN, cause=ConnectionTestException.Preset.UNKNOWN, assistance=ConnectionTestException.Preset.UNKNOWN )
