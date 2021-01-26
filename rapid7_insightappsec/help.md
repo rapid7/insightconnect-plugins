@@ -706,7 +706,10 @@ Example input:
 
 ```
 {
-  "scan_config_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+  "include-errors": false,
+  "index": 0,
+  "size": 100,
+  "sort": "scanconfig.name,DESC"
 }
 ```
 
@@ -859,9 +862,7 @@ Example input:
 
 ```
 {
-  "index": 0,
-  "size": 50,
-  "sort": "scan.submit_time,DESC"
+  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
 }
 ```
 
