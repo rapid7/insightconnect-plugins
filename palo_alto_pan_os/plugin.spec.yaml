@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_pan_os
 title: Palo Alto Firewall
 description: Manage Palo Alto Networks firewall devices
-version: 6.0.3
+version: 6.0.4
 vendor: rapid7
 support: rapid7
 status: []
@@ -31,7 +31,7 @@ connection:
   server:
     title: Server
     type: string
-    description: URL pointing to instance of a Palo Alto firewall
+    description: URL pointing to instance of Panorama or an individual Palo Alto firewall
     required: true
     example: http://www.example.com
   credentials:

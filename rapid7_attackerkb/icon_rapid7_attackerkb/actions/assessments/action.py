@@ -13,5 +13,5 @@ class Assessments(komand.Action):
 
     def run(self, params={}):
         return {
-            Output.DATA: self.connection.attackerKB_api.call_api_pages(f"assessments", params=params)
+            Output.DATA: self.connection.attackerKB_api.call_api_pages("assessments", params=params)
         }
