@@ -25,7 +25,10 @@ The connection configuration accepts the following parameters:
 |credentials|credential_username_password|None|True|OTRS username and password|None|None|
 |server|string|None|True|OTRS Server|None|None|
 
-To create a REST web service please save a copy [GenericTicketConnectorREST.yml](https://gitlab.com/rhab/PyOTRS/raw/master/webservices_templates/GenericTicketConnectorREST.yml)
+Example input:
+
+```
+```
 
 ## Technical Details
 

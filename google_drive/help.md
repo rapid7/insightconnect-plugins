@@ -20,18 +20,23 @@ This plugin utilizes the [Google Drive API](https://developers.google.com/drive/
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|private_key|password|None|True|Private Key from service credentials|None|
-|admin_user|string|None|True|Admin user to impersonate, e.g. user@example.com|None|
-|private_key_id|password|None|True|Private Key ID from service credentials|None|
-|token_uri|string|https://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|
-|auth_provider_x509_cert_url|string|https://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|
-|auth_uri|string|https://accounts.google.com/o/oauth2/auth|True|None|None|
-|client_email|string|None|True|Client email from service credentials|None|
-|client_id|string|None|True|Client ID|None|
-|project_id|string|None|True|Project ID from service credentials|None|
-|client_x509_cert_url|string|None|True|x509 cert URL from service credentials|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|admin_user|string|None|True|Admin user to impersonate, e.g. admin@domain.com|None|None|
+|auth_provider_x509_cert_url|string|https://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|None|
+|auth_uri|string|https://accounts.google.com/o/oauth2/auth|True|OAUTH2 Auth URI|None|None|
+|client_email|string|None|True|Client email from service credentials|None|None|
+|client_id|string|None|True|Client ID|None|None|
+|client_x509_cert_url|string|None|True|X509 cert URL from service credentials|None|None|
+|private_key|credential_asymmetric_key|None|True|Private Key from service credentials|None|None|
+|private_key_id|string|None|True|Private Key ID from service credentials|None|None|
+|project_id|string|None|True|Project ID from service credentials|None|None|
+|token_uri|string|https://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -43,11 +48,16 @@ This action is used to find a file ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|parent_id|string|None|False|The ID of the parent folder|None|
-|filename_operator|string|None|True|How the filename search will be performed. =,!=, or contains|['=', '!=', 'contains']|
-|filename|string|None|True|The name of the file to search for|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|filename|string|None|True|The name of the file to search for|None|None|
+|filename_operator|string|None|True|How the filename search will be performed. =,!=, or contains|['=', '!=', 'contains']|None|
+|parent_id|string|None|False|The ID of the parent folder|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -105,18 +115,23 @@ This action is used to upload a file to Google Drive.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|google_file_type|string|None|True|The file type that Google will convert the file to|['Docs', 'Sheets', 'Slides']|
-|folder_id|string|None|False|Folder to put the file in|None|
-|file|file|None|True|The file to upload|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|file|file|None|True|The file to upload|None|None|
+|folder_id|string|None|False|Folder to put the file in|None|None|
+|google_file_type|string|None|True|The file type that Google will convert the file to|['Docs', 'Sheets', 'Slides']|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|file_link|string|False|A direct link to the created file|
 |file_id|string|False|Return the ID of the file created on Google Drive|
+|file_link|string|False|A direct link to the created file|
 
 Example output:
 
@@ -135,12 +150,17 @@ This action is used to overwrites a file with new data.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|content|bytes|None|True|The new data that will overwrite the old file|None|
-|new_mime_type|string|None|True|Select a new MIME type for the file|['Docs', 'Sheets', 'Slides']|
-|new_file_name|string|None|False|Select a new file name. e.g. testfile.csv|None|
-|file_id|string|None|True|The file ID for the file that will be overwritten|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|content|bytes|None|True|The new data that will overwrite the old file|None|None|
+|file_id|string|None|True|The file ID for the file that will be overwritten|None|None|
+|new_file_name|string|None|False|Select a new file name. e.g. testfile.csv|None|None|
+|new_mime_type|string|None|True|Select a new MIME type for the file|['Docs', 'Sheets', 'Slides']|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -159,10 +179,15 @@ This action is used to get the contents of a file on Google Drive.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|file_id|string|None|True|The file ID for the file that will be returned|None|
-|mime_type|string|None|True|The MIME Type to export the file as e.g. */* , text/plain|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|file_id|string|None|True|The file ID for the file that will be returned|None|None|
+|mime_type|string|None|True|The MIME Type to export the file as e.g. */* , text/plain|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -196,7 +221,7 @@ _This plugin does not contain any custom output types._
 * 2.1.0 - Add Download File action
 * 2.0.0 - Update to use new credential types
 * 1.2.1 - Fixed a bug that caused an error if Folder ID was left blank
-* 1.2.0 - Add the ablity to rename and force a MIME type on the overwrite action
+* 1.2.0 - Add the ability to rename and force a MIME type on the overwrite action
 * 1.1.0 - Add overwrite file action and search file action
 * 1.0.0 - Initial plugin
 

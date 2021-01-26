@@ -18,12 +18,15 @@
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_token|credential_secret_key|None|True|Red Canary API authentication token|None|
-|customer_id|string|None|True|Customer ID or name e.g. example from https://example.my.redcanary.co|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_token|credential_secret_key|None|True|Red Canary API authentication token|None|None|
+|customer_id|string|None|True|Customer ID or name e.g. example from https://example.my.redcanary.co|None|None|
 
-The `customer_id` is the name or ID in the Red Canary web portal domain e.g. `example` in `https://example.my.redcanary.co`.
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -35,10 +38,15 @@ This action is used to fetch a list of all indicators of compromise associated w
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|detection_id|integer|None|True|ID of detection e.g. 12|None|
-|max_results|integer|100|False|Maximum number of indicators to return|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|detection_id|integer|None|True|ID of detection e.g. 12|None|None|
+|max_results|integer|100|False|Maximum number of indicators to return|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -148,9 +156,14 @@ This action is used to deactivate an activity monitor.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|activity_monitor_id|integer|None|True|Activity Monitor identifier|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|activity_monitor_id|integer|None|True|Activity Monitor identifier|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -200,9 +213,14 @@ This action is used to fetch a specific activity monitor by unique identifier.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|activity_monitor_id|integer|None|True|Activity Monitor identifier|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|activity_monitor_id|integer|None|True|Activity Monitor identifier|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -252,9 +270,14 @@ This action is used to retrieve an event by unique identifier.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|event_id|integer|None|True|Event ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|event_id|integer|None|True|Event ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -350,15 +373,20 @@ This action is used to create a new activity monitor.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|active|boolean|True|True|If the activity monitor is active and identifying matches|None|
-|file_modification_types_monitored|[]string|None|True|Types of file modifications this monitor will trigger upon|None|
-|file_paths_monitored|[]string|None|True|List of case insensitive file path globstrings this monitor will trigger upon|None|
-|name|string|None|True|Descriptive name of the activity monitor|None|
-|type|string|file_modification|True|Type of the activity monitor, such as file_modification|None|
-|usernames_excluded|[]string|None|False|List of case insensitive globstrings that select which usernames this monitor will filter out|None|
-|usernames_matched|[]string|None|False|List of case insensitive globstrings that select which usernames this monitor will match against|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|active|boolean|True|True|If the activity monitor is active and identifying matches|None|None|
+|file_modification_types_monitored|[]string|None|True|Types of file modifications this monitor will trigger upon|None|None|
+|file_paths_monitored|[]string|None|True|List of case insensitive file path globstrings this monitor will trigger upon|None|None|
+|name|string|None|True|Descriptive name of the activity monitor|None|None|
+|type|string|file_modification|True|Type of the activity monitor, such as file_modification|None|None|
+|usernames_excluded|[]string|None|False|List of case insensitive globstrings that select which usernames this monitor will filter out|None|None|
+|usernames_matched|[]string|None|False|List of case insensitive globstrings that select which usernames this monitor will match against|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -408,11 +436,16 @@ This action is used to update detection remediation state.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|comment|string|None|False|Comment describing the reason why the detection was remediated in this manner|None|
-|detection_id|integer|None|True|ID of detection e.g. 12|None|
-|remediation_state|string|remediated|True|Way in which the detection was remediated|['remediated', 'not_remediated_false_positive', 'not_remediated_sanctioned_activity', 'not_remediated_unwarranted']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|False|Comment describing the reason why the detection was remediated in this manner|None|None|
+|detection_id|integer|None|True|ID of detection e.g. 12|None|None|
+|remediation_state|string|remediated|True|Way in which the detection was remediated|['remediated', 'not_remediated_false_positive', 'not_remediated_sanctioned_activity', 'not_remediated_unwarranted']|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -506,9 +539,14 @@ This action is used to mark a detection as acknowledged.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|detection_id|integer|None|True|ID of detection e.g. 12|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|detection_id|integer|None|True|ID of detection e.g. 12|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -590,10 +628,15 @@ This action is used to find usages of a MAC address.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|mac_address|string|None|True|MAC Address to find usages for (e.g. 00-14-22-01-23-45)|None|
-|max_results|integer|100|False|Maximum number of results to return|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|mac_address|string|None|True|MAC Address to find usages for (e.g. 00-14-22-01-23-45)|None|None|
+|max_results|integer|100|False|Maximum number of results to return|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -615,10 +658,15 @@ This action is used to find usages of an endpoint hostname.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|endpoint_hostname|string|None|True|Endpoint Hostname to find usages for (e.g. foo-endpoint.bardomain.com)|None|
-|max_results|integer|100|False|Maximum number of results to return|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|endpoint_hostname|string|None|True|Endpoint Hostname to find usages for (e.g. foo-endpoint.bardomain.com)|None|None|
+|max_results|integer|100|False|Maximum number of results to return|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -640,9 +688,14 @@ This action is used to fetch a list of all activity monitor matches, sorted by t
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|max_results|integer|100|False|Maximum number of matches to return|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|max_results|integer|100|False|Maximum number of matches to return|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -664,9 +717,14 @@ This action is used to fetch a list of activity monitors.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|max_results|integer|100|False|Maximum number of activity monitors to return|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|max_results|integer|100|False|Maximum number of activity monitors to return|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -886,10 +944,15 @@ This action is used to find usages of an IP address.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|ip_address|string|None|True|IPv4 or IPv6 address to find usages for|None|
-|max_results|integer|100|False|Maximum number of results to return|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ip_address|string|None|True|IPv4 or IPv6 address to find usages for|None|None|
+|max_results|integer|100|False|Maximum number of results to return|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -913,11 +976,16 @@ This trigger is used to check for new events.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|date_offset|date|None|False|Set past date to pull events from that time forward|None|
-|force_offset|boolean|None|False|Forces offset no matter what's in the cache|None|
-|frequency|integer|5|True|How often the trigger should check for new events in seconds|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|date_offset|date|None|False|Set past date to pull events from that time forward|None|None|
+|force_offset|boolean|None|False|Forces offset no matter what's in the cache|None|None|
+|frequency|integer|5|True|How often the trigger should check for new events in seconds|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -1013,10 +1081,15 @@ This trigger is used to check for new matches for a specific activity monitor.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|activity_monitor_id|integer|None|True|Activity Monitor identifier e.g. 12345|None|
-|frequency|integer|5|True|How often the trigger should check for new matches in seconds|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|activity_monitor_id|integer|None|True|Activity Monitor identifier e.g. 12345|None|None|
+|frequency|integer|5|True|How often the trigger should check for new matches in seconds|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -1035,11 +1108,16 @@ This trigger is used to check for new detections.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|date_offset|date|None|False|Date to start pulling detections from|None|
-|force_offset|boolean|None|False|Force offset date even if a cache exists|None|
-|frequency|integer|5|True|How often the trigger should check for new detections in seconds|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|date_offset|date|None|False|Date to start pulling detections from|None|None|
+|force_offset|boolean|None|False|Force offset date even if a cache exists|None|None|
+|frequency|integer|5|True|How often the trigger should check for new detections in seconds|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -1140,7 +1218,7 @@ _This plugin does not contain any custom output types._
 * 2.1.6 - Vendored dependencies
 * 2.1.5 - New spec and help.md format for the Extension Library
 * 2.1.4 - Bug fix for New Events trigger where PluginException was not supported in SDK image | Update to use the `komand/python-3-37-slim-plugin:3` Docker image to reduce plugin size
-* 2.1.3 - Bug fix for New Detection trigger cache where additional dates were being added to the cache file. When the cache was loaded from the file it would set the lastest cache to an older date, allowing old detections to be triggered on
+* 2.1.3 - Bug fix for New Detection trigger cache where additional dates were being added to the cache file. When the cache was loaded from the file it would set the latest cache to an older date, allowing old detections to be triggered on
 * 2.1.2 - Bug fix for New Detection where needed to be loaded every time the trigger was called
 * 2.1.1 - Bug fix for connection test
 * 2.1.0 - Updated caching for New Events and New Detection triggers. Caching will now use date vs. caching a separate event ID. The trigger also has the option of setting a date offset for testing workflows

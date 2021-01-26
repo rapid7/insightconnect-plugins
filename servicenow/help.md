@@ -27,6 +27,11 @@ The connection configuration accepts the following parameters:
 |timeout|integer|30|False|The interval in seconds before abandoning an attempt to access ServiceNow|None|None|
 |url|string|None|True|The full URL for your instance of ServiceNow, e.g. https://instance.servicenow.com|None|None|
 
+Example input:
+
+```
+```
+
 ## Technical Details
 
 ### Actions
@@ -637,7 +642,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.0.0 - New Number output to create incidient action
+* 4.0.0 - New Number output to create incident action
 * 3.1.1 - New spec and help.md format for the Extension Library
 * 3.1.0 - Add action Get Incident Comments and Work Notes
 * 3.0.0 - Rewrite in Python | Renamed incident specific actions | New actions Create CI, Get CI, Update CI, Search CI

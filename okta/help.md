@@ -23,6 +23,11 @@ The connection configuration accepts the following parameters:
 |okta_key|credential_secret_key|None|True|Okta key|None|None|
 |okta_url|string|None|True|Okta Domain e.g. example.okta.com|None|None|
 
+Example input:
+
+```
+```
+
 ## Technical Details
 
 ### Actions
@@ -40,9 +45,6 @@ This action returns an object containing all of a user's factors for MFA.
 Example input:
 
 ```
-{
-  "user_id" : "opfpfac5jbFkZppdt0h7"
-}
 ```
 
 ##### Output
@@ -156,9 +158,6 @@ as a whole.
 Example input:
 
 ```
-{
-  "email" : "user@example.com"
-}
 ```
 
 ##### Output
@@ -200,9 +199,6 @@ This action is used to reset all multifactors for a user by email.
 Example input:
 
 ```
-{
-  "email" : "user@example.com"
-}
 ```
 
 ##### Output
@@ -248,9 +244,6 @@ the API returning a successful result and the actual deactivation / deprovisioni
 Example input:
 
 ```
-{
-  "email": "user@example.com"
-}
 ```
 
 ##### Output
@@ -281,7 +274,7 @@ When the user is not found, the action returns:
 
 #### Delete User
 
-This action is used to delete a user. If a user is not deprovisioned, this will deprovision a user, a second delete will be needed to remove the user. Warning: This action annot be recovered from.
+This action is used to delete a user. If a user is not deprovisioned, this will deprovision a user, a second delete will be needed to remove the user. Warning: This action cannot be recovered from.
 
 ##### Input
 
@@ -293,10 +286,6 @@ This action is used to delete a user. If a user is not deprovisioned, this will 
 Example input:
 
 ```
-{
-  "send_admin_email": True
-  "user_email": "user@example.com"
-}
 ```
 
 ##### Output
@@ -326,9 +315,6 @@ This action is used to unsuspend a user.
 Example input:
 
 ```
-{
-  "email": "user@example.com"
-}
 ```
 
 ##### Output
@@ -370,9 +356,6 @@ This action is used to obtain information about a user.
 Example input:
 
 ```
-{
-  "email": "user@example.com"
-}
 ```
 
 ##### Output
@@ -486,10 +469,6 @@ This action is used to remove a user from an existing group.
 Example input:
 
 ```
-{
-  "email": "user@example.com"
-  "group_id": "00g41ix8hKbsu74Ca4x6"
-}
 ```
 
 ##### Output
@@ -522,10 +501,6 @@ This action is used to add a user to an existing group.
 Example input:
 
 ```
-{
-  "email": "user@example.com"
-  "group_id": "00g41ix8hKbsu74Ca4x6"
-}
 ```
 
 ##### Output
@@ -557,9 +532,6 @@ This action is used to list available groups.
 Example input:
 
 ```
-{
-  "query": "group name here"
-}
 ```
 
 ##### Output
@@ -687,52 +659,6 @@ This action will attempt to prevent that be removing the entire input if it dete
 Example input:
 
 ```
-{
-  "activate": true,
-  "credentials": {
-    "password": {
-      "value": "blah"
-    },
-    "provider": {
-       "name": "OKTA",
-       "type": "OKTA"
-    },
-    "recovery_question": {
-      "answer": "Q",
-      "question": "A"
-    }
-  },
-  "groupIds": [
-    "00gftwyoqyVBvcpdn0h7"
-  ],
-  "nextLogin": false,
-  "profile": {
-    "city": "San Francisco",
-    "costCenter": "10",
-    "countryCode": "US",
-    "department": "Engineering",
-    "displayName": "Isaac Brock",
-    "division": "R&D",
-    "email": "user@example.com",
-    "employeeNumber": "187",
-    "firstName": "Isaac",
-    "lastName": "Brock",
-    "login": "user@example.com",
-    "mobilePhone": "+1-555-415-1337",
-    "nickName": "issac",
-    "organization": "Okta",
-    "preferredLanguage": "en-US",
-    "primaryPhone": "+1-555-514-1337",
-    "profileUrl": "http://www.example.com/profile",
-    "secondEmail": "user@example.com",
-    "state": "CA",
-    "streetAddress": "301 Brannan St.",
-    "title": "Director",
-    "userType": "Employee",
-    "zipCode": "94107"
-  },
-  "provider": false
-}
 ```
 
 ##### Output
@@ -799,14 +725,17 @@ This trigger monitors a list of groups for user membership changes.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|group_ids|[]string|None|True|A list of group ID's|None|['00g41ix8hKbsu74Ca4x6', '00g41ieu5y7i9XEYE4x6']|
+|group_ids|[]string|None|True|A list of group ID's|None|["00g41ix8hKbsu74Ca4x6", "00g41ieu5y7i9XEYE4x6"]|
 |interval|integer|300|True|The time in seconds between checks for changes to the groups users|None|100|
 
 Example input:
 
 ```
 {
-  "group_ids": ["00g41ix8hKbsu74Ca4x6", "00g41ieu5y7i9XEYE4x6"],
+  "group_ids": [
+    "00g41ix8hKbsu74Ca4x6",
+    "00g41ieu5y7i9XEYE4x6"
+  ],
   "interval": 100
 }
 ```

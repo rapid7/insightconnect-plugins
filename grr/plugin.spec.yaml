@@ -4,7 +4,7 @@ products: [insightconnect]
 name: grr
 title: Google Rapid Response
 description: Organize and start threat hunts using GRR
-version: 2.0.1
+version: 2.1.1
 vendor: rapid7
 support: community
 status: []

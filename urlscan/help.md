@@ -3,7 +3,7 @@
 The [URLScan](https://urlscan.io/) plugin uses URLScan to analyze URLs for malicious indicators.
 
 This plugin utilizes the [URLScan API](https://urlscan.io/about-api/) to search for URLs and retrieve reports
-on potential malicous indicators.
+on potential malicious indicators.
 
 # Key Features
 
@@ -28,9 +28,7 @@ Example input:
 
 ```
 {
-  "api_key": {
-    "secretKey": “381cd93b-1946-9c73-1946-c916075eb9a3"
-  }
+  "api_key": "{\"secretKey\": \"381cd93b-1946-9c73-1946-c916075eb9a3\"}"
 }
 ```
 

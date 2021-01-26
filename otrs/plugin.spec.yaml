@@ -4,7 +4,7 @@ products: [insightconnect]
 name: otrs
 title: OTRS
 description: Create and manage OTRS tickets
-version: 5.0.1
+version: 5.1.1
 vendor: rapid7
 support: community
 status: []

@@ -10,7 +10,7 @@ There are multiple ways to contribute beyond writing code. These include:
 - Submit an updated or brand new plugin!  We are always eager for new
   integrations or features. Don't know where to start? Check out the [developer documentation].
 
-Here is a short list of do's and don'ts to make sure *your* valuable contributions actually make
+Here is a short list of dos and don'ts to make sure *your* valuable contributions actually make
 it into production.  If you do not care to follow these rules, your contribution **will** be rejected. Sorry!
 
 ## Code Contributions

@@ -22,10 +22,15 @@ directories with ClamAV.
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|access_key|credential_secret_key|None|True|Access Key ID|None|
-|secret_key|credential_secret_key|None|True|Secret access key|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|access_key|credential_secret_key|None|True|Access Key ID|None|None|
+|secret_key|credential_secret_key|None|True|Secret access key|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -35,52 +40,36 @@ The connection configuration accepts the following parameters:
 
 This action is used to mount a drive for analysis
 
-#### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|directory|string|None|True|Directory|None|
-|device|string|None|True|Device|None|
-|filesystem_type|string|None|True|Filesystem Type|None|
-
-#### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|instance_id|string|None|True|Instance ID|None|
-|region|string|None|True|Region|None|
-|private_key|string|None|True|Private Key|None|
-|user|string|None|True|User Name|None|
-|directory|string|False|Directory|
-|status|string|False|Status|
-
 #### Clam AV
 
-This action is used to scan a directory with ClamAV. This action requires the host to have clamav installed.
+This action is used to scan a directory with ClamAV. This action requires the host to have clamAV installed.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|instance_id|string|None|True|Instance ID|None|
-|region|string|None|True|Region|None|
-|private_key|string|None|True|Private Key|None|
-|user|string|None|True|User Name|None|
-|directory|string|None|True|Directory|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|device|string|None|True|Device|None|None|
+|directory|string|None|True|Directory|None|None|
+|instance_id|string|None|True|Instance ID|None|None|
+|private_key|string|None|True|Private key|None|None|
+|region|string|None|True|Region|None|None|
+|user|string|None|True|User name|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|file_name|string|False|File Name|
-|file_location|string|False|File Location|
-|hash_value|string|False|Hash Value|
-|owner|string|False|Owner|
-|time_created|string|False|Time Created|
+|directory|string|False|Directory|
+|status|string|False|Status|
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

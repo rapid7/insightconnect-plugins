@@ -19,9 +19,15 @@ triage application issues to other ticketing systems, quickly and effectively wh
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|token|credential_token|None|True|Sentry Auth Token|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|Sentry Auth Token|None|None|
+|url|string|https://sentry.io/api/0/|True|Sentry API URL|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -33,17 +39,22 @@ This action is used to create a new Sentry event.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|dsn|string|None|True|DSN configuration of a Sentry project (e.g. 'https://public:secret@sentry.example.com/1')|None|
-|sentry_version|integer|7|False|The protocol version. The current version of the protocol is '7'|None|
-|event_json|EventJSON|None|True|Data describing the event|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|dsn|string|None|True|DSN configuration of a Sentry project (e.g. 'https://public:secret@sentry.example.com/1')|None|None|
+|event_json|EventJSON|None|True|Data describing the event|None|None|
+|sentry_version|integer|7|False|The protocol version. The current version of the protocol is '7'|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|id|string|False|ID of a newly created event|
+|id|string|True|ID of a newly created event|
 
 Example output:
 
@@ -61,19 +72,24 @@ This action is used to return a list of issues (groups) bound to a project.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|organization_slug|string|None|True|The slug of the organization the issues belong to|None|
-|query|string|None|False|An optional Sentry structured search query. If not provided an implied 'is:unresolved; is assumed|None|
-|statsPeriod|string||False|An optional stat period (can be one of '24h', '14d', and '')|['24h', '14d', '']|
-|shortIdLookup|boolean|None|False|If this is set to true then short IDs are looked up by this function as well. This can cause the return value of the function to return an event issue of a different project which is why this is an opt-in. Set to 1 to enable|None|
-|project_slug|string|None|True|The slug of the project the issues belong to|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|organization_slug|string|None|True|The slug of the organization the issues belong to|None|None|
+|project_slug|string|None|True|The slug of the project the issues belong to|None|None|
+|query|string|None|False|An optional Sentry structured search query. If not provided an implied 'is:unresolved; is assumed|None|None|
+|shortIdLookup|boolean|None|False|If this is set to true then short IDs are looked up by this function as well. This can cause the return value of the function to return an event issue of a different project which is why this is an opt-in. Set to 1 to enable|None|None|
+|statsPeriod|string||False|An optional stat period (can be one of '24h', '14d', and '')|['24h', '14d', '']|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|issues|[]Issue|False|A list of issues (groups) bound to a project|
+|issues|[]Issue|True|A list of issues (groups) bound to a project|
 
 Example output:
 
@@ -142,15 +158,20 @@ This action is used to list an issue's events.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|issue_id|string|None|True|The ID of the issue to retrieve|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|issue_id|string|None|True|The ID of the issue to retrieve|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|events|[]Event|False|Issue's events|
+|events|[]Event|True|Issue's events|
 
 Example output:
 
@@ -237,25 +258,30 @@ Example output:
 
 #### Update Issue
 
-This action is used to update an individual issues's attributes (only the attributes submitted are modified).
+This action is used to update an individual issue's attributes (only the attributes submitted are modified).
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|status|string|None|False|The new status for the issue. Valid values are 'resolved', 'resolvedInNextRelease', 'unresolved', and 'ignored'|['resolved', 'resolvedInNextRelease', 'unresolved', 'ignored']|
-|assignedTo|string|None|False|The actor ID (or username) of the user or team that should be assigned to this issue|None|
-|hasSeen|boolean|None|False|In case this API call is invoked with a user context this allows changing of the flag that indicates if the user has seen the event|None|
-|issue_id|string|None|True|The ID of the group to retrieve|None|
-|isSubscribed|boolean|None|False||None|
-|isPublic|boolean|None|False|Sets the issue to public or private|None|
-|isBookmarked|boolean|None|False|In case this API call is invoked with a user context this allows changing of the bookmark flag|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|assignedTo|string|None|False|The actor ID (or username) of the user or team that should be assigned to this issue|None|None|
+|hasSeen|boolean|None|False|In case this API call is invoked with a user context this allows changing of the flag that indicates if the user has seen the event|None|None|
+|isBookmarked|boolean|None|False|In case this API call is invoked with a user context this allows changing of the bookmark flag|None|None|
+|isPublic|boolean|None|False|Sets the issue to public or private|None|None|
+|isSubscribed|boolean|None|False|In case this API call is invoked with a user context this allows subscribing to/unsubscribing from this issue|None|None|
+|issue_id|string|None|True|The ID of the group to retrieve|None|None|
+|status|string|None|False|The new status for the issue. Valid values are 'resolved', 'resolvedInNextRelease', 'unresolved', and 'ignored'|['resolved', 'resolvedInNextRelease', 'unresolved', 'ignored']|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|issue|Issue|False|Updated issue|
+|issue|Issue|True|Updated issue|
 
 Example output:
 
