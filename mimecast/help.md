@@ -630,6 +630,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Version History
 
+* 4.1.2 - Fix bug in connection test where it could succeed when an empty response was returned
 * 4.1.1 - Fix bug where the connection test would sometimes pass even with invalid credentials
 * 4.1.0 - Update Get TTP URL Logs action to use pagination
 * 4.0.1 - Add example inputs
