@@ -293,7 +293,7 @@ actions:
         type: integer
         required: false
         default: 0
-        example: 0
+        example: 1
       size:
         title: Size
         description: The data set size or the max number of apps to return per page
@@ -690,7 +690,7 @@ actions:
         type: integer
         required: false
         default: 0
-        example: 0
+        example: 1
       size:
         title: Size
         description: The data set size or the max number of apps to return per page
@@ -704,7 +704,7 @@ actions:
         type: boolean
         required: false
         default: false
-        example: false
+        example: true
     output:
       metadata:
         title: Metadata
@@ -763,7 +763,7 @@ actions:
         type: integer
         required: false
         default: 0
-        example: 0
+        example: 1
       size:
         title: Size
         description: The number of entries on each page. If blank, size will be 50
@@ -905,7 +905,7 @@ actions:
         type: integer
         required: false
         default: 0
-        example: 0
+        example: 1
       size:
         title: Size
         description: The data set size or the max number of apps to return per page

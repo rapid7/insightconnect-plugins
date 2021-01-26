@@ -332,7 +332,7 @@ This action is used to get a page of all apps.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|index|integer|0|False|The page number of the return data set|None|0|
+|index|integer|0|False|The page number of the return data set|None|1|
 |size|integer|100|False|The data set size or the max number of apps to return per page|None|100|
 |sort|string|ASC|False|How to sort the response|None|ASC|
 
@@ -340,7 +340,7 @@ Example input:
 
 ```
 {
-  "index": 0,
+  "index": 1,
   "size": 100,
   "sort": "ASC"
 }
@@ -419,7 +419,7 @@ This action is used to get a page of Schedules.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|index|integer|0|False|The page number of the return data set|None|0|
+|index|integer|0|False|The page number of the return data set|None|1|
 |size|integer|100|False|The data set size or the max number of apps to return per page|None|100|
 |sort|string|ASC|False|How to sort the response|None|ASC|
 
@@ -427,7 +427,7 @@ Example input:
 
 ```
 {
-  "index": 0,
+  "index": 1,
   "size": 100,
   "sort": "ASC"
 }
@@ -570,7 +570,7 @@ Example input:
 
 ```
 {
-  "scan_config_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
 }
 ```
 
@@ -671,7 +671,7 @@ Example input:
 
 ```
 {
-  "scan_config_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxxxxxxxxxx"
 }
 ```
 
@@ -697,8 +697,8 @@ This action is used to get a page of scan configurations, based on supplied pagi
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|include-errors|boolean|False|False|Iclude validation errors in scan configs, can be expensive|None|False|
-|index|integer|0|False|The page number of the return data set|None|0|
+|include-errors|boolean|False|False|Iclude validation errors in scan configs, can be expensive|None|True|
+|index|integer|0|False|The page number of the return data set|None|1|
 |size|integer|100|False|The data set size or the max number of apps to return per page|None|100|
 |sort|string|ASC|False|How to sort the response|None|scanconfig.name,DESC|
 
@@ -706,10 +706,7 @@ Example input:
 
 ```
 {
-  "include-errors": false,
-  "index": 0,
-  "size": 100,
-  "sort": "scanconfig.name,DESC"
+  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
 }
 ```
 
@@ -854,7 +851,7 @@ This action is used to get a page of scans, based on supplied pagination paramet
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|index|integer|0|False|The page index to start form. If blank, index will be 0|None|0|
+|index|integer|0|False|The page index to start form. If blank, index will be 0|None|1|
 |size|integer|50|False|The number of entries on each page. If blank, size will be 50|None|50|
 |sort|string|ASC|False|How to sort the scans. If blank, sort will be alphabetical by scan name|None|scan.submit_time,DESC|
 
