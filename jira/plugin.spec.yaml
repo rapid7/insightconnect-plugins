@@ -5,9 +5,10 @@ name: jira
 title: Jira
 vendor: rapid7
 support: rapid7
+cloud_ready: true
 status: []
 description: Automate the creation, search and management of issues, users, and alerting for Jira Software, Jira Server, and Jira ServiceDesk
-version: 6.0.3
+version: 6.0.4
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/jira
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -310,7 +311,7 @@ actions:
         required: false
         type: boolean
         default: false
-        example: false
+        example: true
     output:
       found:
         title: Found
@@ -382,7 +383,7 @@ actions:
         type: string
         description: Email
         required: true
-        example: user1@example.com
+        example: user@example.com
       password:
         title: Password
         type: string
@@ -398,7 +399,7 @@ actions:
         enum:
           - true
           - false
-        example: false
+        example: true
     output:
       success:
         title: Success
@@ -505,7 +506,7 @@ actions:
         type: boolean
         required: true
         default: true
-        example: false
+        example: true
       summary:
         title: Summary
         description: Summary field on the issue
@@ -559,7 +560,7 @@ triggers:
         required: false
         type: boolean
         default: false
-        example: false
+        example: true
       poll_timeout:
         title: Poll Timeout
         description: Timeout between next poll, default 60

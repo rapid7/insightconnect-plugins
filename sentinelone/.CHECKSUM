@@ -1,127 +1,87 @@
 {
-	"spec": "0088a92f48351db3ac50b1b524ec1936",
-	"manifest": "1d3496c109633701e6c3b5885ca824cf",
-	"setup": "95e5f816110bae315c447b563e490fec",
+	"spec": "a9350efd00d4b43afc11f5410d5a1b7c",
+	"manifest": "1232da51599c0c7132b9a5981ec2557e",
+	"setup": "9e2e768650f11d3164025daf467c2461",
 	"schemas": [
 		{
 			"identifier": "activities_list/schema.py",
-			"hash": "e9a57a8e97cc6bf79d8d984dc44c0749"
+			"hash": "b5e139f052fd49c1da45aa657cda89d1"
 		},
 		{
 			"identifier": "activities_types/schema.py",
-			"hash": "5e7a87efc45bf5b30625b622ac019574"
+			"hash": "d990386bc2687a38b4deeaca3e31ab66"
 		},
 		{
-			"identifier": "agents_abort_scan/schema.py",
-			"hash": "af534fe33c3358709107029e174b6614"
-		},
-		{
-			"identifier": "agents_connect/schema.py",
-			"hash": "2c6aab8586ce2e57551e8ec6c6c4da2e"
-		},
-		{
-			"identifier": "agents_decommission/schema.py",
-			"hash": "67788cf8462cab724bbfdf5255cf7fe0"
-		},
-		{
-			"identifier": "agents_disconnect/schema.py",
-			"hash": "30c6b9c11238f47dfe81939c734330b0"
-		},
-		{
-			"identifier": "agents_fetch_logs/schema.py",
-			"hash": "bbd2f47b04ca7e204984ccdec28d4bf9"
-		},
-		{
-			"identifier": "agents_initiate/schema.py",
-			"hash": "dc2ec546fe8bd6702bd007017e65062e"
-		},
-		{
-			"identifier": "agents_processes/schema.py",
-			"hash": "5829282e911839f6876cdaed940739f2"
+			"identifier": "agents_action/schema.py",
+			"hash": "5ce7d3640f846b778ca50b7d0097e147"
 		},
 		{
 			"identifier": "agents_reload/schema.py",
-			"hash": "6042c9c755d2ed69b6182b6f662ae33a"
-		},
-		{
-			"identifier": "agents_restart/schema.py",
-			"hash": "bef5f00800aed1430bd4ba19c0bd29bf"
-		},
-		{
-			"identifier": "agents_shutdown/schema.py",
-			"hash": "8ffcd7e051cbe844c0a3f49a03896d4c"
+			"hash": "7fcc3b057529e4b7b6f81f0d2e63bd2a"
 		},
 		{
 			"identifier": "agents_summary/schema.py",
-			"hash": "7b07a2a83fc03c3bc00260000263aebd"
-		},
-		{
-			"identifier": "agents_uninstall/schema.py",
-			"hash": "a8aadf12df870c4aa829227c83078c40"
+			"hash": "6586d52d0aa5c344df97c2d308057dfe"
 		},
 		{
 			"identifier": "apps_by_agent_ids/schema.py",
-			"hash": "f1a871cbbcdf7e1730215961e3b2ac99"
+			"hash": "5acb77104723a6d43853f56d5ae058d4"
 		},
 		{
 			"identifier": "blacklist/schema.py",
-			"hash": "de16f4a3cf4c4e29f6a48cd120e2814d"
+			"hash": "c6ffebf6aa51317ef0df89844b6e2d74"
 		},
 		{
 			"identifier": "blacklist_by_content_hash/schema.py",
-			"hash": "ac946280f99e8fd3d8ab3f9376b373b1"
-		},
-		{
-			"identifier": "blacklist_by_ioc_hash/schema.py",
-			"hash": "502a5a23924956a6ca4d8b1c48e21624"
+			"hash": "8ae45aa8f56fc5c2dd177f8e5fbac025"
 		},
 		{
 			"identifier": "create_ioc_threat/schema.py",
-			"hash": "ea407640aed1d5eba054c404bb7687c9"
+			"hash": "d871e78b6173bb3fe5c38a148d8958e4"
 		},
 		{
 			"identifier": "get_agent_details/schema.py",
-			"hash": "25ba3600759d3ef519cc1ab92b03cdd8"
+			"hash": "7d65c527b12c679ebb04eaa1447b5797"
 		},
 		{
 			"identifier": "get_threat_summary/schema.py",
-			"hash": "ab6415868cda8d60ef6aa0e05757d618"
+			"hash": "fe17f966cc3c889c5c7984e11d85a92c"
 		},
 		{
 			"identifier": "mark_as_benign/schema.py",
-			"hash": "971bce7dda3ae1d4cb3cca4081877d15"
+			"hash": "53ab62546ee8811648fcd63dec13309b"
 		},
 		{
 			"identifier": "mark_as_threat/schema.py",
-			"hash": "20eb7d08b9923cce1e049622d820e101"
+			"hash": "a9e71f0e1b4ad74742654a59c03c5864"
 		},
 		{
 			"identifier": "mitigate_threat/schema.py",
-			"hash": "e09b29840c9d0ed17b7477e2aa01c68b"
+			"hash": "4ee6eb53560ca716ab85d7f6480b6e7c"
 		},
 		{
 			"identifier": "name_available/schema.py",
-			"hash": "7882f358d6395e2edb2ff5d82a45b4fc"
+			"hash": "118b7c643b37160c30b2ac85a3be3d98"
 		},
 		{
 			"identifier": "quarantine/schema.py",
-			"hash": "efc41dc01e25a9eb72e55f59ce15c372"
+			"hash": "8ff2f97296bf2cbda86dca06df33a036"
 		},
 		{
 			"identifier": "search_agents/schema.py",
-			"hash": "a7b30933b8d13028cfb4c7b333fbc2ed"
+			"hash": "910a7ece89dab6b81ecdbcfd784fbd7d"
 		},
 		{
 			"identifier": "threats_fetch_file/schema.py",
-			"hash": "0e4559bfcabc025efdbb53151f3681b7"
+			"hash": "633d155fcfac75bfb77d446a961cb62e"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "2e04a6a8659eaffcb6d893593d52635d"
+			"hash": "9cd875445a8e9941e22d5c5cd955dbb8"
 		},
 		{
 			"identifier": "get_threats/schema.py",
-			"hash": "440c00589451a864d06167c45adb0497"
+			"hash": "49e661c98f96cc6530676b0421ecfb33"
 		}
 	]
 }

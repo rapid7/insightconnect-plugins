@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: servicenow
 title: ServiceNow
 description: ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes
-version: 4.1.2
+version: 5.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -87,11 +87,90 @@ actions:
     title: Create Incident
     description: Create a new ServiceNow Incident record
     input:
-      create_data:
-        title: Create Data
-        description: JSON object containing the fields and values to create a new incident
-        type: object
+      caller:
+        title: Caller/User ID
+        description: User ID of incident caller
+        type: string
         required: false
+        example: user
+      category:
+        title: Category
+        description: Category code of incident
+        type: string
+        required: false
+        example: software
+      subcategory:
+        title: Subcategory
+        description: Subcategory code of incident (available values depends on the `Category` field)
+        type: string
+        required: false
+        example: email
+      business_service:
+        title: Business Service
+        description: Name of business service
+        type: string
+        required: false
+        example: All
+      configuration_item:
+        title: Configuration Item
+        description: Configuration item code of the incident
+        type: string
+        required: false
+        example: int-jenkins
+      contact_type:
+        title: Contact Type
+        description: Contact type of the incident
+        type: string
+        required: false
+        example: email
+      state:
+        title: State
+        description: State name of the incident
+        type: string
+        required: false
+        example: In Progress
+      impact:
+        title: Impact
+        description: Impact of the indicent
+        type: string
+        required: false
+        example: Medium
+      urgency:
+        title: Urgency
+        description: Urgency of the incident
+        type: string
+        required: false
+        example: Medium
+      priority:
+        title: Priority
+        description: Priority of the incident
+        type: string
+        required: false
+        example: Planning
+      assignment_group:
+        title: Assignment Group
+        description: Assignment group name of the incident
+        type: string
+        required: false
+        example: Team Development Code Reviewers
+      assigned_to:
+        title: Assigned To
+        description: User ID of person assigned to the incident
+        type: string
+        required: false
+        example: user
+      short_description:
+        title: Short Description
+        description: Short description of incident
+        type: string
+        required: false
+        example: New employee hire
+      description:
+        title: Description
+        description: Full description of incident
+        type: string
+        required: false
+        example: Full details about new employee hire
     output:
       system_id:
         title: System ID
@@ -149,11 +228,91 @@ actions:
         description: System ID of the Incident record to update
         type: string
         required: true
-      update_data:
-        title: Update Data
-        description: JSON object containing the fields and values to update
-        type: object
-        required: true
+        example: ee7e6b24dbf4e450e9faa5730596192b
+      caller:
+        title: Caller/User ID
+        description: User ID of incident caller
+        type: string
+        required: false
+        example: user
+      category:
+        title: Category
+        description: Category code of incident
+        type: string
+        required: false
+        example: hardware
+      subcategory:
+        title: Subcategory
+        description: Subcategory code of incident (available values depends on the `Category` field)
+        type: string
+        required: false
+        example: monitor
+      business_service:
+        title: Business Service
+        description: Name of business service
+        type: string
+        required: false
+        example: All
+      configuration_item:
+        title: Configuration Item
+        description: Configuration item code of the incident
+        type: string
+        required: false
+        example: int-jenkins
+      contact_type:
+        title: Contact Type
+        description: Contact type of the incident
+        type: string
+        required: false
+        example: phone
+      state:
+        title: State
+        description: State name of the incident
+        type: string
+        required: false
+        example: On Hold
+      impact:
+        title: Impact
+        description: Impact of the indicent
+        type: string
+        required: false
+        example: Medium
+      urgency:
+        title: Urgency
+        description: Urgency of the incident
+        type: string
+        required: false
+        example: Medium
+      priority:
+        title: Priority
+        description: Priority of the incident
+        type: string
+        required: false
+        example: Planning
+      assignment_group:
+        title: Assignment Group
+        description: Assignment group name of the incident
+        type: string
+        required: false
+        example: Recommendation Admin
+      assigned_to:
+        title: Assigned To
+        description: User ID of person assigned to the incident
+        type: string
+        required: false
+        example: user
+      short_description:
+        title: Short Description
+        description: Short description of incident
+        type: string
+        required: false
+        example: New employee hire update
+      description:
+        title: Description
+        description: Full description of incident
+        type: string
+        required: false
+        example: Full details about new employee hire update
     output:
       success:
         title: Success

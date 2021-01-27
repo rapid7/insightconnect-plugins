@@ -4,7 +4,7 @@ products: [insightconnect]
 name: sumologic
 title: Sumo Logic
 description: The Sumo Logic plugin allows you to run a Sumo Logic query and view the results
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []
