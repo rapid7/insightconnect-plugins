@@ -97,6 +97,16 @@ This action is used to search for documents.
 Example input:
 
 ```
+{
+  "_index": "my-index-000001",
+  "_type": "_doc",
+  "query": {
+    "term": {
+      "user.id": "kimchy"
+    }
+  },
+  "routing": "*"
+}
 ```
 
 ##### Output
