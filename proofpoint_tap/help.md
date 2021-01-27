@@ -133,7 +133,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.8 - Fix finding e-mail in `header_from`
+* 1.0.8 - Fix finding e-mail in `header_from` for e-mails addresses with `[.]`
 * 1.0.7 - Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Update plugin.spec.yaml to include `cloud_ready`
 * 1.0.6 - Parsing out GUID of the message into the output type
 * 1.0.5 - Parsing out the View Threat Details link from emails to its own value
@@ -148,4 +148,3 @@ This plugin does not contain any troubleshooting information.
 ## References
 
 * [Proofpoint TAP](https://www.proofpoint.com/us/products/ransomware-and-targeted-attack-protection)
-
