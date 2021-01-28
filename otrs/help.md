@@ -25,8 +25,6 @@ The connection configuration accepts the following parameters:
 |credentials|credential_username_password|None|True|OTRS username and password|None|None|
 |server|string|None|True|OTRS Server|None|None|
 
-To create a REST web service please save a copy [GenericTicketConnectorREST.yml](https://gitlab.com/rhab/PyOTRS/raw/master/webservices_templates/GenericTicketConnectorREST.yml)
-
 ## Technical Details
 
 ### Actions
@@ -43,11 +41,6 @@ This action is used to search for OTRS tickets.
 |dynamic_fields|[]search_dynamic_field|None|False|Fields as array of objects e.g. [{"name":"TestName1","value":"TestValue1", "operation":"Equals"},{"name":"TestName2","value":"TestValue2"}]. The value field is what will be searched for|None|None|
 |external_params|[]external_param|None|False|A key value object thats not a Dynamic Field e.g [{"Title":"Test Ticket"}]|None|None|
 |queue|string|None|False|Queue to search in|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -79,11 +72,6 @@ This action is used to retrieve OTRS ticket.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |ticket_id|integer|None|False|Ticket ID|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -337,11 +325,6 @@ This action is used to create OTRS ticket.
 |attachments|[]attachment|None|False|Attachments as array of objects e.g. [{"filename":"notes.txt","content":"VGhpcyBpcyBhIHRlc3QK"}]|None|None|
 |dynamic_fields|[]dynamic_field|None|False|Fields as array of objects e.g. [{"name":"TestName1","pattern":"TestValue1"},{"name":"TestName2","pattern":"TestValue2"}]|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -384,11 +367,6 @@ This action is used to update an OTRS ticket.
 |Title|string|None|False|Updated title|None|None|
 |Type|string|None|False|Updated type e.g. Incident|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -421,6 +399,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 5.0.2 - Correct spelling in help.md
 * 5.0.1 - Update dependency to PyOTRS 0.9 for authorization bug [PyOTRS issue 27](https://gitlab.com/rhab/PyOTRS/-/issues/27)
 * 5.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Disposition and Service in Create Ticket log message
 * 4.0.1 - Fix issue in Retrieve action to handle Escalation parameters being returned as strings | Adds new parameter No Article to update, this will submit updates to a ticket without adding a generated article

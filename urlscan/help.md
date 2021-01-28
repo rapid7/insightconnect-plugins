@@ -818,6 +818,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.8 - Correct spelling in help.md
 * 2.1.7 - Add missing outputs to Get Scan Results action
 * 2.1.6 - Add default input
 * 2.1.5 - Add example input

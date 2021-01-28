@@ -145,7 +145,7 @@ Example output:
 This action is used to get the account status of a user. If no users exist this action returns 'No results', and if the specified user does not exist it returns 'No user'.
 Also, for both these conditions `user_id` will return `None`.
 
-If the user is found, the action returns one of the following statuses: active, bypass, disabled, or locked out, and the user's ID. The user's ID can be used as input to actions in thie plugin that require a User ID.
+If the user is found, the action returns one of the following statuses: active, bypass, disabled, or locked out, and the user's ID. The user's ID can be used as input to actions in the plugin that require a User ID.
 
 ##### Input
 
@@ -282,10 +282,6 @@ This action is used to delete a user by ID.
 |----|----|--------|-----------|
 |response|string|False|Response|
 
-Example output:
-
-```
-```
 
 #### Get Authentication Logs
 
@@ -443,7 +439,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -456,6 +452,7 @@ A User ID can be obtained by passing a username to the Get User Status action.
 
 # Version History
 
+* 3.3.4 - Correct spelling in help.md
 * 3.3.3 - Changed `Exception` to `PluginException` | Moved constants to class init | Use fstring instead of concatenation
 * 3.3.2 - New spec and help.md format for the Extension Library
 * 3.3.1 - Update default `mintime` input and description for `Get Logs` action
