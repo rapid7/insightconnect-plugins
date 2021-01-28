@@ -19,9 +19,9 @@ This plugin utilizes the [Hippocampe API](https://github.com/TheHive-Project/Hip
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|url|string|None|True|Address of a working Hippocampe instance, including the port number (e.g. https://10.0.0.2:5000)|None|None|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|url|string|None|True|Address of a working Hippocampe instance, including the port number (e.g. https://10.0.0.2:5000)|None|
 
 ## Technical Details
 
@@ -268,9 +268,9 @@ This action is used to return all distinct values that match the given intellige
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|intelligence_types|[]string|None|True|Intelligence types, e.g. 'ip' or 'url'|None|None|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|intelligence_types|[]string|None|True|Intelligence types, e.g. 'ip' or 'url'|None|
 
 ##### Output
 
@@ -338,9 +338,9 @@ This action is used to return a score for each of the given observables. The sco
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|observables|[]observable|None|True|Observables to score|None|None|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|observables|[]observable|None|True|Observables to score|None|
 
 ##### Output
 
@@ -410,9 +410,9 @@ This action is used to schedule the launch of shadowbook (for automatic indexati
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|time|string|None|True|Job frequency in crontab syntax, e.g. `* */12 * * *`|None|None|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|time|string|None|True|Job frequency in crontab syntax, e.g. `* */12 * * *`|None|
 
 ##### Output
 
@@ -475,8 +475,8 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|job_id|string|True|ID of the job|
 |job_status|string|True|Status of the job|
+|job_id|string|True|ID of the job|
 
 Example output:
 
@@ -519,9 +519,9 @@ This action is used to return intelligence about given observables.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|observables|[]observable|None|True|Observables to get intelligence about|None|None|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|observables|[]observable|None|True|Observables to get intelligence about|None|
 
 ##### Output
 

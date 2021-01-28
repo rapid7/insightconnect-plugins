@@ -35,16 +35,16 @@ This action is used to compress a file. It supports a choice of one of the follo
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|algorithm|string|None|True|Compression algorithm|['gzip', 'bzip', 'lz', 'xz', 'zip']|None|
-|bytes|bytes|None|True|Base64-encoded file/bytes|None|None|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|bytes|bytes|None|False|Base64-encoded file|None|
+|algorithm|string|None|False|Compression algorithm|['gzip', 'bzip', 'lz', 'xz', 'zip']|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|compressed|bytes|False|Compressed|
+|compressed|bytes|False|None|
 
 #### Decompress Bytes
 
@@ -61,15 +61,15 @@ The following algorithms are supported:
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|bytes|bytes|None|True|Compressed Base64-encoded bytes|None|None|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|bytes|bytes|None|False|Base64-encoded file|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|decompressed|bytes|False|Decompressed|
+|decompressed|bytes|False|None|
 
 #### Create Archive
 
@@ -77,11 +77,11 @@ This action is used to compress a files into archive.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|algorithm|string|None|True|Compression algorithm|['tarball', 'zip']|None|
-|filename|string|None|True|Name of file archive|None|None|
-|files|[]file|None|True|Files to be compressed|None|None|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|files|[]file|None|True|Files to be compressed|None|
+|algorithm|string|None|True|Compression algorithm|['tarball', 'zip']|
+|filename|string|None|True|Name of file archive|None|
 
 ##### Output
 
@@ -96,9 +96,9 @@ This action is used to extract file archive.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|archive|file|None|True|Base64-encoded archive file|None|None|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|archive|file|None|True|Base64-encoded archive file|None|
 
 ##### Output
 

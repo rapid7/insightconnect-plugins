@@ -32,7 +32,10 @@ Example input:
 
 ```
 {
-  "credentials": "{\"username\": \"user@example.com\", \"password\": \"mypassword\"}",
+  "credentials": {
+    "username": "user@example.com",
+    "password": "mypassword"
+  },
   "url": "https://example.sentinelone.com"
 }
 ```
@@ -57,7 +60,11 @@ Example input:
 ```
 {
   "action": "connect",
-  "filter": "{\"ids\": [\"1000000000000000000\"]}"
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  }
 }
 ```
 
@@ -233,6 +240,19 @@ This action is used to reload an agent module (applies to Windows agents only).
 |filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|{"ids": ["1000000000000000000"]}|
 |module|string|None|True|Agent module to reload|['monitor', 'static', 'agent', 'log']|monitor|
 
+Example input:
+
+```
+{
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  },
+  "module": "monitor"
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -373,6 +393,8 @@ Example input:
 
 ```
 {
+  "blacklist_state": true,
+  "description": "Hash Blacklisted from InsightConnect",
   "hash": "3395856ce81f2b7382dee72602f798b642f14140"
 }
 ```

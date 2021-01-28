@@ -22,11 +22,11 @@ Rapid7 InsightConnect.
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|access_key|credential_secret_key|None|True|Access key ID|None|None|
-|region|string|None|False|Region|None|None|
-|secret_key|credential_secret_key|None|True|Secret access key|None|None|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|access_key|credential_secret_key|None|True|Access key ID|None|
+|secret_key|credential_secret_key|None|True|Secret access key|None|
+|region|string|None|False|Region|None|
 
 ## Technical Details
 
@@ -43,11 +43,11 @@ overwrite the existing record.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|condition_expression|string|None|False|An optional expression that can be used to reject inserts based on evaluating existing data|None|None|
-|data|object|None|True|The object data to store|None|None|
-|table|string|None|True|The table name to store into|None|None|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|condition_expression|string|None|False|An optional expression that can be used to reject inserts based on evaluating existing data|None|
+|table|string|None|True|The table name to store into|None|
+|data|object|None|True|The object data to store|None|
 
 ##### Output
 
@@ -63,12 +63,12 @@ are met.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|condition_expression|string|None|False|An optional expression that can be used to reject updates based on evaluating existing data|None|None|
-|data|object|None|True|The object data to update, as key/value pairs|None|None|
-|key|object|None|True|The primary key and optionally the sort key of the object to update. Provided as a pair of key/values|None|None|
-|table|string|None|True|The table name to store into|None|None|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|condition_expression|string|None|False|An optional expression that can be used to reject updates based on evaluating existing data|None|
+|data|object|None|True|The object data to update, as key/value pairs|None|
+|key|object|None|True|The primary key and optionally the sort key of the object to update. Provided as a pair of key/values|None|
+|table|string|None|True|The table name to store into|None|
 
 ##### Output
 
@@ -84,11 +84,11 @@ It will return the list of objects found, and a count of the records.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|index|string|None|False|The index to use. If empty, defaults to a full Scan of the table|None|None|
-|params|object|None|False|The params to query with, as key/value pairs|None|None|
-|table|string|None|True|The table name to search|None|None|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|table|string|None|True|The table name to search|None|
+|params|object|None|False|The params to query with, as key/value pairs|None|
+|index|string|None|False|The index to use. If empty, defaults to a full Scan of the table|None|
 
 ##### Output
 

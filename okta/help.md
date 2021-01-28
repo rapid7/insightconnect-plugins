@@ -113,6 +113,14 @@ This action returns an object containing all of a user's factors for MFA.
 |----|----|-------|--------|-----------|----|-------|
 |user_id|string|None|True|User ID to get factors for|None|None|
 
+Example input:
+
+```
+{
+  "user_id" : "opfpfac5jbFkZppdt0h7"
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -216,6 +224,14 @@ as a whole.
 |----|----|-------|--------|-----------|----|-------|
 |email|string|None|True|The email of the employee to suspend|None|None|
 
+Example input:
+
+```
+{
+  "email" : "user@example.com"
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -251,6 +267,14 @@ This action is used to reset all multifactors for a user by email.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |email|string|None|True|The email of the employee to reset factors|None|None|
+
+Example input:
+
+```
+{
+  "email" : "user@example.com"
+}
+```
 
 ##### Output
 
@@ -292,6 +316,14 @@ the API returning a successful result and the actual deactivation / deprovisioni
 |----|----|-------|--------|-----------|----|-------|
 |email|string|None|True|The email of the employee to deactivate|None|None|
 
+Example input:
+
+```
+{
+  "email": "user@example.com"
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -329,6 +361,15 @@ This action is used to delete a user. If a user is not deprovisioned, this will 
 |send_admin_email|boolean|False|True|Sends a deactivation email to the administrator if true. Default value is false|None|None|
 |user_email|string|None|True|The email of the user to delete|None|None|
 
+Example input:
+
+```
+{
+  "send_admin_email": True
+  "user_email": "user@example.com"
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -352,6 +393,14 @@ This action is used to unsuspend a user.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |email|string|None|True|The email of the Okta user|None|None|
+
+Example input:
+
+```
+{
+  "email": "user@example.com"
+}
+```
 
 ##### Output
 
@@ -388,6 +437,14 @@ This action is used to obtain information about a user.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |email|string|None|True|The email of the user to obtain information about|None|None|
+
+Example input:
+
+```
+{
+  "email": "user@example.com"
+}
+```
 
 ##### Output
 
@@ -497,6 +554,15 @@ This action is used to remove a user from an existing group.
 |email|string|None|True|The email of the Okta user|None|None|
 |group_id|string|None|True|The ID of the group to which the user should be added|None|None|
 
+Example input:
+
+```
+{
+  "email": "user@example.com"
+  "group_id": "00g41ix8hKbsu74Ca4x6"
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -524,6 +590,15 @@ This action is used to add a user to an existing group.
 |email|string|None|True|The email of the Okta user|None|None|
 |group_id|string|None|True|The ID of the group to which the user should be added|None|None|
 
+Example input:
+
+```
+{
+  "email": "user@example.com"
+  "group_id": "00g41ix8hKbsu74Ca4x6"
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -549,6 +624,14 @@ This action is used to list available groups.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |query|string|None|False|Query to list groups, otherwise all groups will be returned|None|None|
+
+Example input:
+
+```
+{
+  "query": "group name here"
+}
+```
 
 ##### Output
 
@@ -666,6 +749,57 @@ This action will attempt to prevent that be removing the entire input if it dete
 |nextLogin|boolean|None|True|Change password next time the user logs in|None|None|
 |profile|object|None|True|Profile properties for user|None|None|
 |provider|boolean|False|True|Indicates whether to create a user with a specified authentication provider|None|None|
+
+Example input:
+
+```
+{
+  "activate": true,
+  "credentials": {
+    "password": {
+      "value": "blah"
+    },
+    "provider": {
+       "name": "OKTA",
+       "type": "OKTA"
+    },
+    "recovery_question": {
+      "answer": "Q",
+      "question": "A"
+    }
+  },
+  "groupIds": [
+    "00gftwyoqyVBvcpdn0h7"
+  ],
+  "nextLogin": false,
+  "profile": {
+    "city": "San Francisco",
+    "costCenter": "10",
+    "countryCode": "US",
+    "department": "Engineering",
+    "displayName": "Isaac Brock",
+    "division": "R&D",
+    "email": "user@example.com",
+    "employeeNumber": "187",
+    "firstName": "Isaac",
+    "lastName": "Brock",
+    "login": "user@example.com",
+    "mobilePhone": "+1-555-415-1337",
+    "nickName": "issac",
+    "organization": "Okta",
+    "preferredLanguage": "en-US",
+    "primaryPhone": "+1-555-514-1337",
+    "profileUrl": "http://www.example.com/profile",
+    "secondEmail": "user@example.com",
+    "state": "CA",
+    "streetAddress": "301 Brannan St.",
+    "title": "Director",
+    "userType": "Employee",
+    "zipCode": "94107"
+  },
+  "provider": false
+}
+```
 
 ##### Output
 

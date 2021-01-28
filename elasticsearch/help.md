@@ -84,6 +84,21 @@ This action is used to search for documents.
 |query|object|None|False|JSON Query DSL|None|None|
 |routing|string|None|False|Optional Shards to Search|None|None|
 
+Example input:
+
+```
+{
+  "_index": "my-index-000001",
+  "_type": "_doc",
+  "query": {
+    "term": {
+      "user.id": "kimchy"
+    }
+  },
+  "routing": "*"
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|

@@ -15,14 +15,16 @@
 
 ## Setup
 
+Check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/mass-delete-with-powershell) for more details on how to configure this plugin.
+
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|auth|string|None|True|Authentication type|['NTLM', 'Kerberos', 'CredSSP', 'None']|None|
-|credentials|credential_username_password|None|False|Username and password|None|None|
-|kerberos|kerberos|None|False|Connection information required for Kerberos|None|None|
-|port|integer|5986|False|Port number, defaults are 5986 for SSL and 5985 for unencrypted|None|None|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|credentials|credential_username_password|None|False|Username and password|None|
+|kerberos|kerberos|None|False|Connection information required for Kerberos|None|
+|port|integer|5986|False|Port number, defaults are 5986 for SSL and 5985 for unencrypted|None|
+|auth|string|None|True|Authentication type|['NTLM', 'Kerberos', 'None', 'CredSSP']|
 
 ## Technical Details
 
@@ -34,11 +36,11 @@ This action is used to execute a PowerShell script in the form of a string on a 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|None|
-|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|None|
-|script|string|None|True|PowerShell script as a string|None|None|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|script|string|None|True|PowerShell script as a string|None|
+|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|
+|address|string|None|True|IP address of the remote host e.g. 192.168.1.1|None|
 
 ##### Output
 
@@ -64,11 +66,11 @@ This action is used to execute a PowerShell script on a remote host or locally o
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|None|
-|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|None|
-|script|bytes|None|True|PowerShell script as base64|None|None|
+|Name|Type|Default|Required|Description|Enum|
+|----|----|-------|--------|-----------|----|
+|script|bytes|None|True|PowerShell script as base64|None|
+|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|
+|address|string|None|True|IP address of the remote host e.g. 192.168.1.1|None|
 
 ##### Output
 

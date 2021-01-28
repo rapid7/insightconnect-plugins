@@ -24,7 +24,10 @@ Example input:
 
 ```
 {
-  "credentials": "{\"username\": \"admin\", \"password\": \"mypassword\"}"
+  "credentials": {
+    "username": "user@example.com",
+    "password": "mypassword"
+  }
 }
 ```
 
