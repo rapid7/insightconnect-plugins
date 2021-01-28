@@ -47,7 +47,7 @@ class Request(object):
                        "element": element}
 
         response = self.make_request("SESSION.POST", querystring)
-        output = self.get_output_with_exceptions(response)
+        output = self.get_output_with_exceptions(response, element)
         return {"response": output}
 
     def delete_(self, xpath: str) -> dict:
@@ -135,7 +135,7 @@ class Request(object):
         return response
 
     @staticmethod
-    def get_output_with_exceptions(response):
+    def get_output_with_exceptions(response, element=None):
         if response.status_code == 401:
             raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
         if response.status_code == 403:
@@ -174,6 +174,11 @@ class Request(object):
 
         if output.get('response', {}).get('@status') == 'error':
             error = output['response']['msg']
+            line_error = error.get('line')
+            if line_error and [s for s in line_error if 'is invalid' in s]:
+                raise PluginException(cause='Invalid response received.',
+                                      assistance=f'This is likely because the provided element {element} does not exist or the xpath is not correct. Please verify the element name and xpath and try again.',
+                                      data=line_error)
             error = json.dumps(error)
             raise PluginException(
                 cause='PAN-OS returned an error in response to the request.',
