@@ -1,8 +1,8 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ReportIpInput, ReportIpOutput, Input, Output
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 import requests
 import logging
@@ -10,6 +10,7 @@ from komand_abuseipdb.util import helper
 
 logging.getLogger("requests").setLevel(logging.WARNING)
 
+class ReportIp(insightconnect_plugin_runtime.Action):
 
 class ReportIp(komand.Action):
     def __init__(self):

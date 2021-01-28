@@ -1,4 +1,4 @@
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 def get_json(response):

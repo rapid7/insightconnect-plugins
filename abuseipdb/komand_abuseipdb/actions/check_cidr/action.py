@@ -1,8 +1,8 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CheckCidrInput, CheckCidrOutput, Input, Output
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 import requests
 import logging
@@ -10,6 +10,7 @@ from komand_abuseipdb.util import helper
 
 logging.getLogger("requests").setLevel(logging.WARNING)
 
+class CheckCidr(insightconnect_plugin_runtime.Action):
 
 class CheckCidr(komand.Action):
     def __init__(self):

@@ -27,7 +27,7 @@ class TAP:
                 "sender_ip": "",
                 "message_size": "",
                 "message_guid": "",
-                "threat_id": "",
+                "threat_id": ""
             },
             "browser": {"time": "", "source_ip": "", "user_agent": ""},
         }
@@ -62,7 +62,7 @@ class TAP:
                                             value = parseaddr(value)[1]
                                             clean_data["message"]["header_replyto"] = value
                                         if key == "header_from":
-                                            value = value.replace("=", "")
+                                            value = value.replace('=', '').replace('[.]', '.')
                                             value = re.findall(regex, value)[0]
                                             clean_data["message"]["header_from"] = value
                                     elif len(clean_data[k][kk]) == 0:

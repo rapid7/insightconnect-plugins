@@ -1,12 +1,13 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetIssueInput, GetIssueOutput, Input, Output, Component
 
 # Custom imports below
 from komand_jira.util.util import normalize_issue
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class GetIssue(komand.Action):
+class GetIssue(insightconnect_plugin_runtime.Action):
+
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_issue",
@@ -33,5 +34,5 @@ class GetIssue(komand.Action):
             logger=self.logger,
         )
 
-        clean_output = komand.helper.clean(output)
+        clean_output = insightconnect_plugin_runtime.helper.clean(output)
         return {Output.FOUND: True, Output.ISSUE: clean_output}

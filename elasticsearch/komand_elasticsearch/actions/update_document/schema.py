@@ -148,6 +148,12 @@ class UpdateDocumentOutput(komand.Output):
           "description": "Number of Failed Shards",
           "order": 3
         },
+        "skipped": {
+          "type": "integer",
+          "title": "Skipped",
+          "description": "Number of Skipped Shards",
+          "order": 4
+        },
         "successful": {
           "type": "integer",
           "title": "Successful",
@@ -219,6 +225,12 @@ class UpdateDocumentOutput(komand.Output):
               "title": "Failed",
               "description": "Number of Failed Shards",
               "order": 3
+            },
+            "skipped": {
+              "type": "integer",
+              "title": "Skipped",
+              "description": "Number of Skipped Shards",
+              "order": 4
             },
             "successful": {
               "type": "integer",

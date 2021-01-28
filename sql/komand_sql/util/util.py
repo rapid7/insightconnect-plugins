@@ -9,22 +9,31 @@ def generate_results(conn_type, connection, query, parameters, logger):
     header = None
 
     if conn_type.lower() != "mssql":
+        analyze_response = {}
         try:
-            a = analyze(connection.session, query).plan
-            logger.info(a)
-            rows_affected = a["Plan Rows"]
-            operation = a["Operation"]
+            analyze_response = analyze(connection.session, query).plan
+            logger.info(analyze_response)
+            rows_affected = analyze_response["Plan Rows"]
+            operation = analyze_response["Operation"]
         except KeyError:
-            rows_affected = a["Plan Rows"]
-            operation = "unknown"
+            if "Plan Rows" in analyze_response:
+                rows_affected = analyze_response["Plan Rows"]
+            else:
+                rows_affected = 0
+            operation = 'unknown'
         except Exception as e:
             logger.info(e)
             operation = "unknown"
 
-    rows = connection.session.execute(query) if len(parameters) == 0 else connection.session.execute(query, parameters)
+    if len(parameters) == 0:
+        rows = connection.session.execute(query)
+    else:
+        rows = connection.session.execute(query, parameters)
+
     if rows.is_insert or operation == "Insert":
         connection.session.commit()
         return {"status": "successfully inserted %d rows" % int(rows_affected)}
+
     if not rows.returns_rows:
         connection.session.commit()
         return {"status": "operation success"}

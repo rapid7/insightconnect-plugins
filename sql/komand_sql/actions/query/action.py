@@ -1,6 +1,5 @@
 import komand
-from .schema import QueryInput, QueryOutput
-
+from .schema import QueryInput, QueryOutput, Input, Output
 # Custom imports below
 from komand_sql.util.util import generate_results
 
@@ -12,19 +11,16 @@ class Query(komand.Action):
         )
 
     def run(self, params={}):
-        query = params.get("query")
-        parameters = dict(params.get("parameters"))
+        results = generate_results(
+            self.connection.type,
+            self.connection.connection,
+            params.get(Input.QUERY),
+            dict(params.get(Input.PARAMETERS)),
+            self.logger
+        )
 
-        conn = self.connection.connection
-        conn_type = self.connection.params["type"]
-
-        results = generate_results(conn_type, conn, query, parameters, self.logger)
-
-        return results
-
-    def test(self, params={}):
-        session = self.connection.connection.session
-        if session:
-            return {"status": "operation success"}
-        else:
-            raise Exception("Connection was not active. Please check your connection settings.")
+        return {
+            Output.STATUS: results["status"],
+            Output.RESULTS: results.get("results", []),
+            Output.HEADER: results.get("header", [])
+        }

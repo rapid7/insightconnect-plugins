@@ -1,12 +1,13 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CreateIssueInput, CreateIssueOutput, Input, Output, Component
 
 # Custom imports below
 from komand_jira.util.util import look_up_project, normalize_issue, add_attachment
-from komand.exceptions import ConnectionTestException, PluginException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
 
-class CreateIssue(komand.Action):
+class CreateIssue(insightconnect_plugin_runtime.Action):
+
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_issue",

@@ -1,5 +1,5 @@
 import komand
-from .schema import ConnectionSchema
+from .schema import ConnectionSchema, Input
 from komand.exceptions import ConnectionTestException
 import sqlalchemy
 from sqlalchemy.orm import sessionmaker
@@ -14,8 +14,8 @@ class SQLConnection(object):
 
     def __enter__(self):
         engine = sqlalchemy.create_engine(self.connection_string)
-        Session = sessionmaker()
-        self.session = Session(bind=engine)
+        session_maker = sessionmaker()
+        self.session = session_maker(bind=engine)
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
@@ -28,28 +28,29 @@ class Connection(komand.Connection):
         self.conn_str = None
         self.params = None
         self.connection = None
+        self.user = None
+        self.password = None
+        self.type = None
 
     def postgres_conn_string(self, params):
-        self.logger.info("Using PostgreSQL connection string...")
-        port = params.get("port", "")
-        params["port"] = port if port != "" else 5432
-        return "postgres://{user}:{password}@{host}:{port}/{db}".format(**params)
+        self.logger.info('Using PostgreSQL connection string...')
+        params[Input.PORT] = params.get(Input.PORT) or 5432
+        return f"postgres://{self.user}:{self.password}@{params[Input.HOST]}:{params[Input.PORT]}/{params[Input.DB]}"
 
     def mssql_conn_string(self, params):
-        self.logger.info("Using MSSQL connection string...")
-        return "mssql+pymssql://{user}:{password}@{host}:{port}/{db}".format(**params)
+        self.logger.info('Using MSSQL connection string...')
+        return f"mssql+pymssql://{self.user}:{self.password}@{params[Input.HOST]}:{params[Input.PORT]}/{params[Input.DB]}"
 
     def default_conn_string(self, params):
-        self.logger.info("Using MySQL connection string...")
-        return "mysql+mysqldb://{user}:{password}@{host}:{port}/{db}".format(**params)
+        self.logger.info('Using MySQL connection string...')
+        return f"mysql+mysqldb://{self.user}:{self.password}@{params[Input.HOST]}:{params[Input.PORT]}/{params[Input.DB]}"
 
     def connect(self, params={}):
-        username = params["credentials"]["username"]
-        password = params["credentials"]["password"]
-        del params["credentials"]
-        self.params = params
-        self.params["user"] = username
-        self.params["password"] = password
+        self.user = params.get(Input.CREDENTIALS).get("username")
+        self.password = params.get(Input.CREDENTIALS).get("password")
+        self.type = params[Input.TYPE]
+
+        del params[Input.CREDENTIALS]
 
         type_connection_string = {
             "MSSQL": Connection.mssql_conn_string,
@@ -57,7 +58,7 @@ class Connection(komand.Connection):
             "PostgreSQL": Connection.postgres_conn_string,
         }
 
-        self.conn_str = type_connection_string.get(params["type"])(self, params)
+        self.conn_str = type_connection_string.get(params[Input.TYPE])(self, params)
         self.connection = SQLConnection(self.conn_str)
         self.connection.__enter__()
         self.logger.info("Connect: Connecting...")
@@ -68,5 +69,7 @@ class Connection(komand.Connection):
             return True
         except Exception as e:
             raise ConnectionTestException(
-                cause="Unable to connect to the server.", assistance="Check connection credentials."
+                cause="Unable to connect to the server.",
+                assistance="Check connection credentials.",
+                data=e
             )

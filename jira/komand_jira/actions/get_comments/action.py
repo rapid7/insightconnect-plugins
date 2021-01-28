@@ -1,12 +1,13 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetCommentsInput, GetCommentsOutput, Input, Output, Component
 
 # Custom imports below
 from komand_jira.util.util import normalize_comment
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class GetComments(komand.Action):
+class GetComments(insightconnect_plugin_runtime.Action):
+
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_comments",
@@ -28,7 +29,7 @@ class GetComments(komand.Action):
         comments = issue.fields.comment.comments or []
 
         results = list(map(lambda comment: normalize_comment(comment, logger=self.logger), comments))
-        results = komand.helper.clean(results)
+        results = insightconnect_plugin_runtime.helper.clean(results)
 
         count = len(results)
 
