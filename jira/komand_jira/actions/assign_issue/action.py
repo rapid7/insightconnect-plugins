@@ -6,7 +6,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class AssignIssue(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
             name="assign_issue",

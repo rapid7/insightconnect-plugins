@@ -10,6 +10,7 @@ from komand_abuseipdb.util import helper
 
 logging.getLogger("requests").setLevel(logging.WARNING)
 
+
 class CheckIp(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(

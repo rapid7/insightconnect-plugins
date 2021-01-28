@@ -9,10 +9,11 @@ from .schema import UpdateIncidentInput, UpdateIncidentOutput, Input, Output, Co
 class UpdateIncident(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='update_incident',
+            name="update_incident",
             description=Component.DESCRIPTION,
             input=UpdateIncidentInput(),
-            output=UpdateIncidentOutput())
+            output=UpdateIncidentOutput(),
+        )
 
     def run(self, params={}):
         data = {
@@ -29,13 +30,11 @@ class UpdateIncident(insightconnect_plugin_runtime.Action):
             "assignment_group": params.get(Input.ASSIGNMENT_GROUP),
             "assigned_to": params.get(Input.ASSIGNED_TO),
             "short_description": params.get(Input.SHORT_DESCRIPTION),
-            "description": params.get(Input.DESCRIPTION)
+            "description": params.get(Input.DESCRIPTION),
         }
 
         response = self.connection.request.make_request(
-            endpoint=f'{self.connection.incident_url}/{params.get(Input.SYSTEM_ID)}',
-            method="put",
-            payload=data
+            endpoint=f"{self.connection.incident_url}/{params.get(Input.SYSTEM_ID)}", method="put", payload=data
         )
 
         if response.get("status", 0) in range(200, 299):

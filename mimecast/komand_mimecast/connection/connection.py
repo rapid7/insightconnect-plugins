@@ -21,15 +21,22 @@ class Connection(komand.Connection):
     def test(self):
         # Mimecast request
         mimecast_request = util.MimecastRequests()
-        response = mimecast_request.mimecast_post(url=self.url, uri='/api/account/get-account',
-                                                  access_key=self.access_key, secret_key=self.secret_key,
-                                                  app_id=self.app_id, app_key=self.app_key, data=None)
+        response = mimecast_request.mimecast_post(
+            url=self.url,
+            uri="/api/account/get-account",
+            access_key=self.access_key,
+            secret_key=self.secret_key,
+            app_id=self.app_id,
+            app_key=self.app_key,
+            data=None,
+        )
 
-        if response['meta']['status'] != 200 or response['fail'] != []:
+        if response["meta"]["status"] != 200 or response["fail"] != []:
             self.logger.error(response)
-            raise ConnectionTestException(cause='Server request failed.',
-                                          assistance='Status code is {}, see log for details.'.format(
-                                              response['meta']['status']),
-                                          data=response['fail'])
+            raise ConnectionTestException(
+                cause="Server request failed.",
+                assistance="Status code is {}, see log for details.".format(response["meta"]["status"]),
+                data=response["fail"],
+            )
 
         return {"connection": "successful"}

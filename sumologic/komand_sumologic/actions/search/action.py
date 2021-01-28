@@ -29,10 +29,7 @@ class Search(komand.Action):
 
         try:
             sj = self.connection.client.search_job(
-                    params['query'],
-                    params['from_time'],
-                    params['to_time'],
-                    params['timezone']
+                params["query"], params["from_time"], params["to_time"], params["timezone"]
             )
 
             self.logger.info("Running query: %s", params)

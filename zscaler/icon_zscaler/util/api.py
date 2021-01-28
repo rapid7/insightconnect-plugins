@@ -28,10 +28,7 @@ class ZscalerAPI:
         return 200 <= response.status_code < 300
 
     def get_blacklist_url(self) -> str:
-        return self.authenticated_call(
-            "GET",
-            "security/advanced"
-        ).json()
+        return self.authenticated_call("GET", "security/advanced").json()
 
     def get_hash_report(self, hash: str):
         return self.authenticated_call(

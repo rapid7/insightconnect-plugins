@@ -6,7 +6,6 @@ from komand_jira.util.util import normalize_user
 
 
 class FindUsers(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
             name="find_users",
@@ -24,7 +23,9 @@ class FindUsers(insightconnect_plugin_runtime.Action):
         else:
             users = self.connection.client.search_users(user=query, maxResults=max_results)
 
-        results = list(map(lambda user: normalize_user(user, is_cloud=self.connection.is_cloud, logger=self.logger), users))
+        results = list(
+            map(lambda user: normalize_user(user, is_cloud=self.connection.is_cloud, logger=self.logger), users)
+        )
         results = insightconnect_plugin_runtime.helper.clean(results)
 
         return {Output.USERS: results}

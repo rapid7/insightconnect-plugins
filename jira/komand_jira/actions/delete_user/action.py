@@ -6,7 +6,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class DeleteUser(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
             name="delete_user",

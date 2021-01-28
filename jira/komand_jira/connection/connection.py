@@ -10,7 +10,6 @@ from komand_jira.util.api import JiraApi
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.client, self.url, self.username, self.password, self.is_cloud = (

@@ -1,4 +1,5 @@
 import insightconnect_plugin_runtime
+
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
 
@@ -8,10 +9,11 @@ from .schema import CreateIncidentInput, CreateIncidentOutput, Input, Output, Co
 class CreateIncident(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='create_incident',
+            name="create_incident",
             description=Component.DESCRIPTION,
             input=CreateIncidentInput(),
-            output=CreateIncidentOutput())
+            output=CreateIncidentOutput(),
+        )
 
     def run(self, params={}):
         data = {
@@ -28,13 +30,11 @@ class CreateIncident(insightconnect_plugin_runtime.Action):
             "assignment_group": params.get(Input.ASSIGNMENT_GROUP),
             "assigned_to": params.get(Input.ASSIGNED_TO),
             "short_description": params.get(Input.SHORT_DESCRIPTION),
-            "description": params.get(Input.DESCRIPTION)
+            "description": params.get(Input.DESCRIPTION),
         }
 
         response = self.connection.request.make_request(
-            endpoint=self.connection.incident_url,
-            method="post",
-            payload=data
+            endpoint=self.connection.incident_url, method="post", payload=data
         )
 
         try:
@@ -46,7 +46,8 @@ class CreateIncident(insightconnect_plugin_runtime.Action):
         number = result.get("number", "")
 
         if sys_id is None:
-            raise PluginException(cause='Error: Create Incident failed - no system_id returned.',
-                                  assistance=f'Response: {response.text}')
+            raise PluginException(
+                cause="Error: Create Incident failed - no system_id returned.", assistance=f"Response: {response.text}"
+            )
 
         return {Output.SYSTEM_ID: sys_id, Output.NUMBER: number}
