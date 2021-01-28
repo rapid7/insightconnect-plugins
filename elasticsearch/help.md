@@ -1,6 +1,6 @@
 # Description
 
-[Elasticsearch](https://www.elastic.co) is a distrbuted real-time search and analytics engine. This plugin allows for indexing and updating documents, as well as searching indexes and polling for new documents given a query. The Elasticsearch plugin will allow you to update and search documents. It will also allow you to check your cluster's health.
+[Elasticsearch](https://www.elastic.co) is a distributed real-time search and analytics engine. This plugin allows for indexing and updating documents, as well as searching indexes and polling for new documents given a query. The Elasticsearch plugin will allow you to update and search documents. It will also allow you to check your cluster's health.
 This plugin utilizes the [Elasticsearch API](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html).
 
 # Key Features
@@ -25,11 +25,6 @@ The connection configuration accepts the following parameters:
 |credentials|credential_username_password|None|True|Basic Auth username and password|None|None|
 |url|string|None|True|Host URL E.g. http://10.0.2.2:9200|None|None|
 |use_authentication|boolean|True|True|If the Elasticsearch host does not use authentication set this value to false|None|None|
-
-Example input:
-
-```
-```
 
 ## Technical Details
 
@@ -69,11 +64,6 @@ This action is used to update a document.
 |script|object|None|True|JSON Script to Modify a Document|None|None|
 |timeout|string|1m|False|Custom Timeout Window|None|None|
 |wait_for_active_shards|integer|None|False|Number of Shard Copies required Before Update|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -142,11 +132,6 @@ This action is used to create or replace a document by index.
 |timeout|string|1m|False|Custom Timeout Window|None|None|
 |version_type|string|internal|False|Optional Version Type|['internal', 'external', 'external_gt', 'external_gte']|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -169,11 +154,6 @@ This trigger is used to poll for new documents given a query.
 |query|object|None|False|JSON Query DSL|None|None|
 |routing|string|None|False|Optional Shards to Search|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -190,6 +170,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.4 - Correct spelling in help.md
 * 2.0.3 - Updated Search Documents action output schema
 * 2.0.2 - New spec and help.md format for the Extension Library
 * 2.0.1 - Fix typo in plugin spec
