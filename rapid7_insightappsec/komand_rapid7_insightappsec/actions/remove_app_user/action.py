@@ -16,7 +16,6 @@ class RemoveAppUser(insightconnect_plugin_runtime.Action):
                 output=RemoveAppUserOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
         app_id = params.get(Input.APP_ID)
         user_id = params.get(Input.USER_ID)
         request = ResourceHelper(self.connection.session, self.logger)

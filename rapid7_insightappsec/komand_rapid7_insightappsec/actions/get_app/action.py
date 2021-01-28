@@ -17,12 +17,10 @@ class GetApp(insightconnect_plugin_runtime.Action):
                 output=GetAppOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
         app_id = params.get(Input.APP_ID)
         request = ResourceHelper(self.connection.session, self.logger)
 
         url = Apps.get_app(self.connection.url,app_id)
-        # url = f'{url}{app_id}'
 
         response = request.resource_request(url, 'get')
         try:

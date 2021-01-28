@@ -16,7 +16,6 @@ class GetAppUsers(insightconnect_plugin_runtime.Action):
                 output=GetAppUsersOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
         app_id = params.get(Input.APP_ID)
         request = ResourceHelper(self.connection.session, self.logger)
 

@@ -17,7 +17,6 @@ class GetSchedules(insightconnect_plugin_runtime.Action):
                 output=GetSchedulesOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
         sort = params.get(Input.SORT)
         index = params.get(Input.INDEX)
         size = params.get(Input.SIZE)

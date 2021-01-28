@@ -16,7 +16,6 @@ class CreateApp(insightconnect_plugin_runtime.Action):
                 output=CreateAppOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
         app_name = params.get(Input.APP_NAME)
         app_description = params.get(Input.APP_DESCRIPTION)
         request = ResourceHelper(self.connection.session, self.logger)

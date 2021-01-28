@@ -16,7 +16,6 @@ class UpdateApp(insightconnect_plugin_runtime.Action):
                 output=UpdateAppOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
         app_id = params.get(Input.APP_ID)
         app_name = params.get(Input.APP_NAME)
         app_description = params.get(Input.APP_DESCRIPTION)
