@@ -11,8 +11,6 @@ from komand_abuseipdb.util import helper
 logging.getLogger("requests").setLevel(logging.WARNING)
 
 class CheckCidr(insightconnect_plugin_runtime.Action):
-
-class CheckCidr(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="check_cidr",
@@ -47,4 +45,4 @@ class CheckCidr(komand.Action):
         else:
             out[Output.FOUND] = False
 
-        return out
+        return insightconnect_plugin_runtime.helper.clean(out)

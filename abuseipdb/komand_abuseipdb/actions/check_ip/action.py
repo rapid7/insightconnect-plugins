@@ -11,8 +11,6 @@ from komand_abuseipdb.util import helper
 logging.getLogger("requests").setLevel(logging.WARNING)
 
 class CheckIp(insightconnect_plugin_runtime.Action):
-
-class CheckIp(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="check_ip",
