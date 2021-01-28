@@ -339,7 +339,7 @@ There's a rate limit on the free API service. The following error messags `429 C
 
 # Version History
 
-* 5.0.5 - Fix none type error in `Check CIDR`
+* 5.0.5 - Fix none type error in Check CIDR action
 * 5.0.4 - Update to v4 Python plugin runtime
 * 5.0.3 - Add example inputs
 * 5.0.2 - Changed descriptions | Removed duplicated code | Use output constants | Added "f" strings
