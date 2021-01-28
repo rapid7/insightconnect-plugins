@@ -4,7 +4,7 @@ products: [insightconnect]
 name: elasticsearch
 title: Elasticsearch
 description: Distributed Real-Time Search and Analytics Engine
-version: 2.0.2
+version: 2.0.3
 vendor: rapid7
 support: community
 status: []
@@ -45,14 +45,22 @@ types:
       type: integer
       title: Total
       description: Number of Total Shards
+      required: false
     successful:
       type: integer
       title: Successful
       description: Number of Successful Shards
+      required: false
     failed:
       type: integer
       title: Failed
       description: Number of Failed Shards
+      required: false
+    skipped:
+      type: integer
+      title: Skipped
+      description: Number of Skipped Shards
+      required: false
   op_response:
     _index:
       type: string
@@ -107,11 +115,22 @@ types:
       type: object
       title: Source
       description: Content of Document
+  total:
+    value:
+      type: integer
+      title: Value
+      description: Total number of returned documents
+      required: false
+    relation:
+      type: string
+      title: Relation
+      description: Indicates whether the number of returned documents in the value parameter is accurate or a lower bound
+      required: false
   hits:
     total:
-      type: integer
+      type: total
       title: Total
-      description: Number of Total Hits
+      description: Details about total hits
     max_score:
       type: number
       title: Max Score
