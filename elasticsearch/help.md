@@ -190,7 +190,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.3 - Updated search_documents action output schema
+* 2.0.3 - Updated Search Documents action output schema
 * 2.0.2 - New spec and help.md format for the Extension Library
 * 2.0.1 - Fix typo in plugin spec
 * 2.0.0 - Fix issue where Poll Documents trigger will sometimes not return results | Update connection to allow optional authentication
@@ -206,4 +206,3 @@ _This plugin does not contain any troubleshooting information._
 
 * [ElasticSearch](https://www.elastic.co/)
 * [ElasticSearch API](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html)
-
