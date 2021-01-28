@@ -25,11 +25,6 @@ The connection configuration accepts the following parameters:
 |credentials|credential_username_password|None|True|OTRS username and password|None|None|
 |server|string|None|True|OTRS Server|None|None|
 
-Example input:
-
-```
-```
-
 ## Technical Details
 
 ### Actions
@@ -46,11 +41,6 @@ This action is used to search for OTRS tickets.
 |dynamic_fields|[]search_dynamic_field|None|False|Fields as array of objects e.g. [{"name":"TestName1","value":"TestValue1", "operation":"Equals"},{"name":"TestName2","value":"TestValue2"}]. The value field is what will be searched for|None|None|
 |external_params|[]external_param|None|False|A key value object thats not a Dynamic Field e.g [{"Title":"Test Ticket"}]|None|None|
 |queue|string|None|False|Queue to search in|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -82,11 +72,6 @@ This action is used to retrieve OTRS ticket.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |ticket_id|integer|None|False|Ticket ID|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -340,11 +325,6 @@ This action is used to create OTRS ticket.
 |attachments|[]attachment|None|False|Attachments as array of objects e.g. [{"filename":"notes.txt","content":"VGhpcyBpcyBhIHRlc3QK"}]|None|None|
 |dynamic_fields|[]dynamic_field|None|False|Fields as array of objects e.g. [{"name":"TestName1","pattern":"TestValue1"},{"name":"TestName2","pattern":"TestValue2"}]|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -386,11 +366,6 @@ This action is used to update an OTRS ticket.
 |TicketID|integer|None|False|Ticket ID|None|None|
 |Title|string|None|False|Updated title|None|None|
 |Type|string|None|False|Updated type e.g. Incident|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 

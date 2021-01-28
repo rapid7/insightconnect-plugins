@@ -25,11 +25,6 @@ The connection configuration accepts the following parameters:
 |integration_key|credential_secret_key|None|True|API integration key|None|None|
 |secret_key|credential_secret_key|None|True|API secret key|None|None|
 
-Example input:
-
-```
-```
-
 ## Technical Details
 
 ### Actions
@@ -43,11 +38,6 @@ This action is used to retrieve user information by ID.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |user_id|string|None|True|User ID, e.g. DUCUULF6HBMZ43IG9MBH|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -104,11 +94,6 @@ This action is used to retrieve information by username.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |username|string|None|True|Username, e.g. jdoe|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -168,11 +153,6 @@ If the user is found, the action returns one of the following statuses: active, 
 |----|----|-------|--------|-----------|----|-------|
 |user|string|None|True|The user account to check status, e.g. jdoe|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -201,11 +181,6 @@ This action is used to modify a user by ID.
 |----|----|-------|--------|-----------|----|-------|
 |status|string|None|True|New status|['active', 'disabled', 'bypass']|None|
 |user_id|string|None|True|User ID, e.g. DUCUULF6HBMZ43IG9MBH|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -301,21 +276,12 @@ This action is used to delete a user by ID.
 |----|----|-------|--------|-----------|----|-------|
 |user_id|string|None|True|User ID to remove, e.g. DUCUULF6HBMZ43IG9MBH|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|string|False|Response|
 
-Example output:
-
-```
-```
 
 #### Get Authentication Logs
 
@@ -327,11 +293,6 @@ This action is used to get auth logs, limited to past 180 days.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |mintime|integer|None|False|Minimum time in UNIX timestamp milliseconds. Must be 13 or more digits in length|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -384,11 +345,6 @@ This action is used to add a user in Duo Admin.
 |status|string|disabled|False|User status, e.g. active, bypass, disabled|['active', 'bypass', 'disabled']|None|
 |username|string|None|True|The name of the user to create|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -423,11 +379,6 @@ This action is used to get a list of phones associated with the user ID.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |user_id|string|None|True|User ID, e.g. DUCUULF6HBMZ43IG9MBH|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -471,11 +422,6 @@ This action is used to enroll a user and send an enrollment email to the specifi
 |email|string|None|True|Email address to send enrollment email to|None|None|
 |time_to_expiration|number|0|True|Amount of time in seconds until enrollment email expires. Use '0' for no expiration|None|None|
 |username|string|None|True|Username for user to enroll|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 

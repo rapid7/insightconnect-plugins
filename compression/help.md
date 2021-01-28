@@ -40,11 +40,6 @@ This action is used to compress a file. It supports a choice of one of the follo
 |algorithm|string|None|True|Compression algorithm|['gzip', 'bzip', 'lz', 'xz', 'zip']|None|
 |bytes|bytes|None|True|Base64-encoded file/bytes|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -70,11 +65,6 @@ The following algorithms are supported:
 |----|----|-------|--------|-----------|----|-------|
 |bytes|bytes|None|True|Compressed Base64-encoded bytes|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -93,21 +83,12 @@ This action is used to compress a files into archive.
 |filename|string|None|True|Name of file archive|None|None|
 |files|[]file|None|True|Files to be compressed|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |archive|file|False|Archive|
 
-Example output:
-
-```
-```
 
 #### Extract Archive
 
@@ -119,21 +100,12 @@ This action is used to extract file archive.
 |----|----|-------|--------|-----------|----|-------|
 |archive|file|None|True|Base64-encoded archive file|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |files|[]file|False|Files|
 
-Example output:
-
-```
-```
 
 ### Triggers
 

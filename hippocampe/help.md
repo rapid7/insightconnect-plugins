@@ -23,11 +23,6 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |url|string|None|True|Address of a working Hippocampe instance, including the port number (e.g. https://10.0.0.2:5000)|None|None|
 
-Example input:
-
-```
-```
-
 ## Technical Details
 
 ### Actions
@@ -277,11 +272,6 @@ This action is used to return all distinct values that match the given intellige
 |----|----|-------|--------|-----------|----|-------|
 |intelligence_types|[]string|None|True|Intelligence types, e.g. 'ip' or 'url'|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -351,11 +341,6 @@ This action is used to return a score for each of the given observables. The sco
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |observables|[]observable|None|True|Observables to score|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -428,11 +413,6 @@ This action is used to schedule the launch of shadowbook (for automatic indexati
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |time|string|None|True|Job frequency in crontab syntax, e.g. `* */12 * * *`|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -542,11 +522,6 @@ This action is used to return intelligence about given observables.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |observables|[]observable|None|True|Observables to get intelligence about|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 

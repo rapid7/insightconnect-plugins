@@ -28,11 +28,6 @@ The connection configuration accepts the following parameters:
 |region|string|None|False|Region|None|None|
 |secret_key|credential_secret_key|None|True|Secret access key|None|None|
 
-Example input:
-
-```
-```
-
 ## Technical Details
 
 ### Actions
@@ -53,11 +48,6 @@ overwrite the existing record.
 |condition_expression|string|None|False|An optional expression that can be used to reject inserts based on evaluating existing data|None|None|
 |data|object|None|True|The object data to store|None|None|
 |table|string|None|True|The table name to store into|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -80,11 +70,6 @@ are met.
 |key|object|None|True|The primary key and optionally the sort key of the object to update. Provided as a pair of key/values|None|None|
 |table|string|None|True|The table name to store into|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -104,11 +89,6 @@ It will return the list of objects found, and a count of the records.
 |index|string|None|False|The index to use. If empty, defaults to a full Scan of the table|None|None|
 |params|object|None|False|The params to query with, as key/value pairs|None|None|
 |table|string|None|True|The table name to search|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 

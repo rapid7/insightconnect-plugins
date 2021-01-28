@@ -24,11 +24,6 @@ The connection configuration accepts the following parameters:
 |kerberos|kerberos|None|False|Connection information required for Kerberos|None|None|
 |port|integer|5986|False|Port number, defaults are 5986 for SSL and 5985 for unencrypted|None|None|
 
-Example input:
-
-```
-```
-
 ## Technical Details
 
 ### Actions
@@ -44,11 +39,6 @@ This action is used to execute a PowerShell script in the form of a string on a 
 |address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|None|
 |host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|None|
 |script|string|None|True|PowerShell script as a string|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -79,11 +69,6 @@ This action is used to execute a PowerShell script on a remote host or locally o
 |address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|None|
 |host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|None|
 |script|bytes|None|True|PowerShell script as base64|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 

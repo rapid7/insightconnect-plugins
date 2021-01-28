@@ -27,11 +27,6 @@ The connection configuration accepts the following parameters:
 |credentials|credential_username_password|None|True|Username and password|None|None|
 |ssl_verify|boolean|True|True|Verify server's SSL/TLS certificate|None|None|
 
-Example input:
-
-```
-```
-
 ## Technical Details
 
 ### Actions
@@ -46,11 +41,6 @@ This action is used to label clients based on a search query.
 |----|----|-------|--------|-----------|----|-------|
 |label|[]string|None|True|Label's clients|None|None|
 |query|string|None|True|Search for clients|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -81,11 +71,6 @@ This action is used to find and list clients based on a search query.
 |hunt_approvals|boolean|None|False|List hunt approvals|None|None|
 |hunts|boolean|None|False|List hunts|None|None|
 |query|string|None|True|Query to search for (e.g. 'host:suspicious.corp.com')|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -298,21 +283,12 @@ This action is used to start a hunt on clients.
 |xor_in_key|integer|None|False|When searching memory we need to ensure we dont hit on our own process. This allows us to obfuscate the search string in memory to avoid us finding ourselves|None|None|
 |xor_out_key|integer|None|False|When searching memory we need to ensure we dont hit on our own process. This allows us to obfuscate the search string in memory to avoid us finding ourselves|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |results|string|False|Issues found with TruffleHog|
 
-Example output:
-
-```
-```
 
 ### Triggers
 

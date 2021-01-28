@@ -26,11 +26,6 @@ The connection configuration accepts the following parameters:
 |ssl_verify|boolean|True|True|SSL certificate verification|None|None|
 |url|string|https://127.0.0.1/api/bit9platform/v1|True|Carbon Black Server API URL|None|None|
 
-Example input:
-
-```
-```
-
 ## Technical Details
 
 ### Actions
@@ -46,11 +41,6 @@ This action is used to list alerts with given parameters.
 |query|string|None|False|Accepts the same data as the search box on the Process Search page|None|None|
 |rows|integer|10|False|How many rows of data to return. Default is 10|None|None|
 |start|integer|0|False|What row of data to start at. Default is 0|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -129,11 +119,6 @@ This action is used to delete a feed.
 |force|boolean|None|True|Force deletion of all matches if multiple matches found|None|None|
 |id|string|None|True|The ID of the feed|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -161,11 +146,6 @@ This action is used to list binaries with given parameters.
 |query|string|None|False|Accepts the same data as the search box on the Process Search page|None|None|
 |rows|integer|10|False|How many rows of data to return. Default is 10|None|None|
 |start|integer|0|False|What row of data to start at. Default is 0|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -244,11 +224,6 @@ This action is used to add a feed.
 |username|string|None|False|Username|None|None|
 |validate_server_cert|boolean|None|False|Whether or not to validate server certificate|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -275,11 +250,6 @@ This action is used to ban a hash given its MD5.
 |----|----|-------|--------|-----------|----|-------|
 |md5_hash|string|None|True|An MD5 hash|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -299,11 +269,6 @@ Example output:
 #### List Watchlists
 
 This action is used to list all watchlists.
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -347,11 +312,6 @@ This action is used to delete a watchlist.
 |force|boolean|None|True|Force deletion of all matches if multiple matches found|None|None|
 |id|string|None|True|The ID of the watchlist|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -379,11 +339,6 @@ This action is used to list processes with given parameters.
 |query|string|None|False|Accepts the same data as the search box on the Process Search page|None|None|
 |rows|integer|10|False|How many rows of data to return. Default is 10|None|None|
 |start|integer|0|False|What row of data to start at. Default is 0|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -447,11 +402,6 @@ This action is used to list all sensors.
 |hostname|string|None|False|The sensor hostname|None|None|
 |id|string|None|False|The sensor ID|None|None|
 |ip|string|None|False|The sensor IP address|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -523,11 +473,6 @@ This action is used to retrieve a binary by its MD5 hash.
 |----|----|-------|--------|-----------|----|-------|
 |hash|string|None|True|An MD5 hash|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -554,11 +499,6 @@ This action is used to update or resolve an alert.
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Unique ID of the alert. Example: 1cb11d0d-f86b-415d-aeb3-05f085973fbb|None|None|
 |status|string|Resolved|True|The status to update|['Resolved', 'Unresolved', 'In Progress', 'False Positive']|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -588,11 +528,6 @@ This action is used to add a watchlist.
 |name|string|None|True|Watchlist name|None|None|
 |query|string|None|True|Raw Carbon Black query that this watchlist matches|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -618,11 +553,6 @@ This action is used to isolate a sensor from the network.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |hostname|string|None|False|Hostname of the sensor to isolate|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -696,11 +626,6 @@ This action is used to bring a sensor back into the network.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |hostname|string|None|False|Hostname of the sensor to unisolate|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 

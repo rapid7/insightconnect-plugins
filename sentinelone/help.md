@@ -193,10 +193,6 @@ Example input:
 |----|----|--------|-----------|
 |data|[]activities_list|True|Result of activities list|
 
-Example output:
-
-```
-```
 
 #### Get Activity Types
 
@@ -236,11 +232,6 @@ This action is used to reload an agent module (applies to Windows agents only).
 |----|----|-------|--------|-----------|----|-------|
 |filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|{"ids": ["1000000000000000000"]}|
 |module|string|None|True|Agent module to reload|['monitor', 'static', 'agent', 'log']|monitor|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -330,10 +321,6 @@ Example input:
 |----|----|--------|-----------|
 |data|[]agent_applications|True|List of installed applications|
 
-Example output:
-
-```
-```
 
 #### Blacklist
 

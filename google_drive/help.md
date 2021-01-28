@@ -33,11 +33,6 @@ The connection configuration accepts the following parameters:
 |project_id|string|None|True|Project ID from service credentials|None|None|
 |token_uri|string|https://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|None|
 
-Example input:
-
-```
-```
-
 ## Technical Details
 
 ### Actions
@@ -53,11 +48,6 @@ This action is used to find a file ID.
 |filename|string|None|True|The name of the file to search for|None|None|
 |filename_operator|string|None|True|How the filename search will be performed. =,!=, or contains|['=', '!=', 'contains']|None|
 |parent_id|string|None|False|The ID of the parent folder|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -121,11 +111,6 @@ This action is used to upload a file to Google Drive.
 |folder_id|string|None|False|Folder to put the file in|None|None|
 |google_file_type|string|None|True|The file type that Google will convert the file to|['Docs', 'Sheets', 'Slides']|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -157,21 +142,12 @@ This action is used to overwrites a file with new data.
 |new_file_name|string|None|False|Select a new file name. e.g. testfile.csv|None|None|
 |new_mime_type|string|None|True|Select a new MIME type for the file|['Docs', 'Sheets', 'Slides']|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |file_id|string|False|Return the ID of the file created on Google Drive|
 
-Example output:
-
-```
-```
 
 #### Get File Contents
 
@@ -184,21 +160,12 @@ This action is used to get the contents of a file on Google Drive.
 |file_id|string|None|True|The file ID for the file that will be returned|None|None|
 |mime_type|string|None|True|The MIME Type to export the file as e.g. */* , text/plain|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |file|bytes|False|The file in bytes|
 
-Example output:
-
-```
-```
 
 ### Triggers
 
