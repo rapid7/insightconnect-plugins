@@ -9,22 +9,25 @@
 # Requirements
 
 * For local Orchestrator execution, ensure connectivity to any network resources the script will use
-* For remote server execution, a PowerShell-enabled server annd administrative credentials
+* For remote server execution, a PowerShell-enabled server and administrative credentials
 
 # Documentation
 
 ## Setup
 
-Check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/mass-delete-with-powershell) for more details on how to configure this plugin.
-
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|False|Username and password|None|
-|kerberos|kerberos|None|False|Connection information required for Kerberos|None|
-|port|integer|5986|False|Port number, defaults are 5986 for SSL and 5985 for unencrypted|None|
-|auth|string|None|True|Authentication type|['NTLM', 'Kerberos', 'None', 'CredSSP']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|auth|string|None|True|Authentication type|['NTLM', 'Kerberos', 'CredSSP', 'None']|None|
+|credentials|credential_username_password|None|False|Username and password|None|None|
+|kerberos|kerberos|None|False|Connection information required for Kerberos|None|None|
+|port|integer|5986|False|Port number, defaults are 5986 for SSL and 5985 for unencrypted|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -36,11 +39,16 @@ This action is used to execute a PowerShell script in the form of a string on a 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|script|string|None|True|PowerShell script as a string|None|
-|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|
-|address|string|None|True|IP address of the remote host e.g. 192.168.1.1|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|None|
+|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|None|
+|script|string|None|True|PowerShell script as a string|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -66,11 +74,16 @@ This action is used to execute a PowerShell script on a remote host or locally o
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|script|bytes|None|True|PowerShell script as base64|None|
-|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|
-|address|string|None|True|IP address of the remote host e.g. 192.168.1.1|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|None|
+|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|None|
+|script|bytes|None|True|PowerShell script as base64|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -134,7 +147,7 @@ Any errors generated on the remote computer by the PowerShell code
 are forwarded to the log file.
 
 Run this PowerShell command on a Windows host first to set up a unsigned certificate for authentication:
-This will not be needed if the host alredy has a SSL certificate set up for Winrm
+This will not be needed if the host already has a SSL certificate set up for Winrm
 
 ```
 
@@ -144,6 +157,7 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 
 # Version History
 
+* 2.1.3 - Correct spelling in help.md
 * 2.1.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/mass-delete-with-powershell)
 * 2.1.1 - New spec and help.md format for the Extension Library
 * 2.1.0 - Add functionality to allow CredSSP connections

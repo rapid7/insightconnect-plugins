@@ -19,11 +19,16 @@ security health of their devices before they connect to the apps they use. Using
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|secret_key|credential_secret_key|None|True|API secret key|None|
-|hostname|string|None|True|Duo API hostname|None|
-|integration_key|credential_secret_key|None|True|API integration key|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|hostname|string|None|True|Duo API hostname|None|None|
+|integration_key|credential_secret_key|None|True|API integration key|None|None|
+|secret_key|credential_secret_key|None|True|API secret key|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -35,9 +40,14 @@ This action is used to retrieve user information by ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user_id|string|None|True|User ID, e.g. DUCUULF6HBMZ43IG9MBH|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|User ID, e.g. DUCUULF6HBMZ43IG9MBH|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -91,9 +101,14 @@ This action is used to retrieve information by username.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|Username, e.g. jdoe|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|username|string|None|True|Username, e.g. jdoe|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -145,13 +160,18 @@ Example output:
 This action is used to get the account status of a user. If no users exist this action returns 'No results', and if the specified user does not exist it returns 'No user'.
 Also, for both these conditions `user_id` will return `None`.
 
-If the user is found, the action returns one of the following statuses: active, bypass, disabled, or locked out, and the user's ID. The user's ID can be used as input to actions in thie plugin that require a User ID.
+If the user is found, the action returns one of the following statuses: active, bypass, disabled, or locked out, and the user's ID. The user's ID can be used as input to actions in the plugin that require a User ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user|string|None|True|The user account to check status, e.g. jdoe|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user|string|None|True|The user account to check status, e.g. jdoe|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -177,10 +197,15 @@ This action is used to modify a user by ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|status|string|None|True|New status|['active', 'disabled', 'bypass']|
-|user_id|string|None|True|User ID, e.g. DUCUULF6HBMZ43IG9MBH|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|status|string|None|True|New status|['active', 'disabled', 'bypass']|None|
+|user_id|string|None|True|User ID, e.g. DUCUULF6HBMZ43IG9MBH|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -272,9 +297,14 @@ This action is used to delete a user by ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user_id|string|None|True|User ID to remove, e.g. DUCUULF6HBMZ43IG9MBH|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|User ID to remove, e.g. DUCUULF6HBMZ43IG9MBH|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -294,9 +324,14 @@ This action is used to get auth logs, limited to past 180 days.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|mintime|integer|None|False|Minimum time in UNIX timestamp milliseconds. Must be 13 or more digits in length|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|mintime|integer|None|False|Minimum time in UNIX timestamp milliseconds. Must be 13 or more digits in length|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -338,16 +373,21 @@ This action is used to add a user in Duo Admin.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|The name of the user to create|None|
-|status|string|disabled|False|User status, e.g. active, bypass, disabled|['active', 'bypass', 'disabled']|
-|realname|string|None|False|User's real name|None|
-|firstname|string|None|False|The users given name. Required for Duo's ID Proofing feature|None|
-|lastname|string|None|False|The users surname. Required for Duo's ID Proofing feature|None|
-|notes|string|None|False|An optional description or notes field. Can be viewed in the Admin Panel|None|
-|alias|[]string|None|False|User alias. May have up to 4 unique amongst users|None|
-|email|string|None|False|Email of the user|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|alias|[]string|None|False|User alias. May have up to 4 unique amongst users|None|None|
+|email|string|None|False|Email of the user|None|None|
+|firstname|string|None|False|The users given name. Required for Duo's ID Proofing feature|None|None|
+|lastname|string|None|False|The users surname. Required for Duo's ID Proofing feature|None|None|
+|notes|string|None|False|An optional description or notes field. Can be viewed in the Admin Panel|None|None|
+|realname|string|None|False|User's real name|None|None|
+|status|string|disabled|False|User status, e.g. active, bypass, disabled|['active', 'bypass', 'disabled']|None|
+|username|string|None|True|The name of the user to create|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -380,9 +420,14 @@ This action is used to get a list of phones associated with the user ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user_id|string|None|True|User ID, e.g. DUCUULF6HBMZ43IG9MBH|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|User ID, e.g. DUCUULF6HBMZ43IG9MBH|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -421,11 +466,16 @@ This action is used to enroll a user and send an enrollment email to the specifi
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|Username for user to enroll|None|
-|email|string|None|True|Email address to send enrollment email to|None|
-|time_to_expiration|number|0|True|Amount of time in seconds until enrollment email expires. Use '0' for no expiration|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|Email address to send enrollment email to|None|None|
+|time_to_expiration|number|0|True|Amount of time in seconds until enrollment email expires. Use '0' for no expiration|None|None|
+|username|string|None|True|Username for user to enroll|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -443,7 +493,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -456,6 +506,7 @@ A User ID can be obtained by passing a username to the Get User Status action.
 
 # Version History
 
+* 3.3.4 - Correct spelling in help.md
 * 3.3.3 - Changed `Exception` to `PluginException` | Moved constants to class init | Use fstring instead of concatenation
 * 3.3.2 - New spec and help.md format for the Extension Library
 * 3.3.1 - Update default `mintime` input and description for `Get Logs` action

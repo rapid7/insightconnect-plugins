@@ -1,6 +1,6 @@
 # Description
 
-[Elasticsearch](https://www.elastic.co) is a distrbuted real-time search and analytics engine. This plugin allows for indexing and updating documents, as well as searching indexes and polling for new documents given a query. The Elasticsearch plugin will allow you to update and search documents. It will also allow you to check your cluster's health.
+[Elasticsearch](https://www.elastic.co) is a distributed real-time search and analytics engine. This plugin allows for indexing and updating documents, as well as searching indexes and polling for new documents given a query. The Elasticsearch plugin will allow you to update and search documents. It will also allow you to check your cluster's health.
 This plugin utilizes the [Elasticsearch API](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html).
 
 # Key Features
@@ -97,16 +97,6 @@ This action is used to search for documents.
 Example input:
 
 ```
-{
-  "_index": "my-index-000001",
-  "_type": "_doc",
-  "query": {
-    "term": {
-      "user.id": "kimchy"
-    }
-  },
-  "routing": "*"
-}
 ```
 
 ##### Output
@@ -190,6 +180,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.4 - Correct spelling in help.md
 * 2.0.3 - Updated Search Documents action output schema
 * 2.0.2 - New spec and help.md format for the Extension Library
 * 2.0.1 - Fix typo in plugin spec

@@ -28,9 +28,7 @@ Example input:
 
 ```
 {
-  "api_key": {
-    "secretKey": “381cd93b-1946-9c73-1946-c916075eb9a3"
-  }
+  "api_key": "{\"secretKey\": \"381cd93b-1946-9c73-1946-c916075eb9a3\"}"
 }
 ```
 
@@ -818,6 +816,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.8 - Correct spelling in help.md
 * 2.1.7 - Add missing outputs to Get Scan Results action
 * 2.1.6 - Add default input
 * 2.1.5 - Add example input

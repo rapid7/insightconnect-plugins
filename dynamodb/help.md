@@ -22,11 +22,16 @@ Rapid7 InsightConnect.
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|access_key|credential_secret_key|None|True|Access key ID|None|
-|secret_key|credential_secret_key|None|True|Secret access key|None|
-|region|string|None|False|Region|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|access_key|credential_secret_key|None|True|Access key ID|None|None|
+|region|string|None|False|Region|None|None|
+|secret_key|credential_secret_key|None|True|Secret access key|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -38,16 +43,21 @@ This action will insert the provided data into the specified table.
 
 Optionally, you can specify a ConditionExpression which can prevent Dynamo from accepting writes if the conditions
 are met. For example, if you had a primary key of "myid", you could set this to "attribute_not_exist(myid)" to reject
-the insert if a key with the same value as this object already existed. Otherwise, the default behvior of Dynamo is to
+the insert if a key with the same value as this object already existed. Otherwise, the default behavior of Dynamo is to
 overwrite the existing record.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|condition_expression|string|None|False|An optional expression that can be used to reject inserts based on evaluating existing data|None|
-|table|string|None|True|The table name to store into|None|
-|data|object|None|True|The object data to store|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|condition_expression|string|None|False|An optional expression that can be used to reject inserts based on evaluating existing data|None|None|
+|data|object|None|True|The object data to store|None|None|
+|table|string|None|True|The table name to store into|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -63,12 +73,17 @@ are met.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|condition_expression|string|None|False|An optional expression that can be used to reject updates based on evaluating existing data|None|
-|data|object|None|True|The object data to update, as key/value pairs|None|
-|key|object|None|True|The primary key and optionally the sort key of the object to update. Provided as a pair of key/values|None|
-|table|string|None|True|The table name to store into|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|condition_expression|string|None|False|An optional expression that can be used to reject updates based on evaluating existing data|None|None|
+|data|object|None|True|The object data to update, as key/value pairs|None|None|
+|key|object|None|True|The primary key and optionally the sort key of the object to update. Provided as a pair of key/values|None|None|
+|table|string|None|True|The table name to store into|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -84,11 +99,16 @@ It will return the list of objects found, and a count of the records.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|table|string|None|True|The table name to search|None|
-|params|object|None|False|The params to query with, as key/value pairs|None|
-|index|string|None|False|The index to use. If empty, defaults to a full Scan of the table|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|index|string|None|False|The index to use. If empty, defaults to a full Scan of the table|None|None|
+|params|object|None|False|The params to query with, as key/value pairs|None|None|
+|table|string|None|True|The table name to search|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -111,6 +131,7 @@ Any situation in which you provide a ConditionExpression and it causes the job t
 
 # Version History
 
+* 1.0.3 - Correct spelling in help.md
 * 1.0.2 - New spec and help.md format for the Extension Library | Add missing title values for actions in plugin.spec.yaml
 * 1.0.1 - Set `params` input in Scan action to not required
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types

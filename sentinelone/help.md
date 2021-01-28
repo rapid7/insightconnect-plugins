@@ -32,10 +32,7 @@ Example input:
 
 ```
 {
-  "credentials": {
-    "username": "user@example.com",
-    "password": "mypassword"
-  },
+  "credentials": "{\"username\": \"user@example.com\", \"password\": \"mypassword\"}",
   "url": "https://example.sentinelone.com"
 }
 ```
@@ -60,11 +57,7 @@ Example input:
 ```
 {
   "action": "connect",
-  "filter": {
-    "ids": [
-      "1000000000000000000"
-    ]
-  }
+  "filter": "{\"ids\": [\"1000000000000000000\"]}"
 }
 ```
 
@@ -247,14 +240,6 @@ This action is used to reload an agent module (applies to Windows agents only).
 Example input:
 
 ```
-{
-  "filter": {
-    "ids": [
-      "1000000000000000000"
-    ]
-  },
-  "module": "monitor"
-}
 ```
 
 ##### Output
@@ -401,8 +386,6 @@ Example input:
 
 ```
 {
-  "blacklist_state": true,
-  "description": "Hash Blacklisted from InsightConnect",
   "hash": "3395856ce81f2b7382dee72602f798b642f14140"
 }
 ```
@@ -1147,7 +1130,7 @@ Example output:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Action|string|False|Action descripted in the activity|
+|Action|string|False|Action described in the activity|
 |Description Template|string|False|Activity description template as seen in activity page|
 |Type ID|float|False|Activity type ID|
 
@@ -1321,6 +1304,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 5.0.1 - Correct spelling in help.md
 * 5.0.0 - Consolidate various Agent actions | Use API version 2.1 where possible | Delete obsolete Blacklist by IOC Hash and Agent Processes
 * 4.1.1 - Update the Get Threat Summary action to return all threat summaries instead of 10
 * 4.1.0 - Add case sensitivity option for Agent lookups

@@ -24,10 +24,7 @@ Example input:
 
 ```
 {
-  "credentials": {
-    "username": "user@example.com",
-    "password": "mypassword"
-  }
+  "credentials": "{\"username\": \"admin\", \"password\": \"mypassword\"}"
 }
 ```
 
@@ -338,7 +335,7 @@ _This plugin does not contain any triggers._
 |Timezone Offset|string|False|Timezone offset|
 |Uninstall PWD|string|False|Uninstall PWD|
 |Updated At|string|False|Updated at|
-|User ctions Needed|[]object|False|User actions needed|
+|User Actions Needed|[]object|False|User actions needed|
 |Users|[]users|False|Users|
 
 #### applications
@@ -483,6 +480,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.1 - Correct spelling in help.md
 * 1.0.0 - Initial plugin
 
 # Links

@@ -35,16 +35,21 @@ This action is used to compress a file. It supports a choice of one of the follo
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|bytes|bytes|None|False|Base64-encoded file|None|
-|algorithm|string|None|False|Compression algorithm|['gzip', 'bzip', 'lz', 'xz', 'zip']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|algorithm|string|None|True|Compression algorithm|['gzip', 'bzip', 'lz', 'xz', 'zip']|None|
+|bytes|bytes|None|True|Base64-encoded file/bytes|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|compressed|bytes|False|None|
+|compressed|bytes|False|Compressed|
 
 #### Decompress Bytes
 
@@ -61,15 +66,20 @@ The following algorithms are supported:
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|bytes|bytes|None|False|Base64-encoded file|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|bytes|bytes|None|True|Compressed Base64-encoded bytes|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|decompressed|bytes|False|None|
+|decompressed|bytes|False|Decompressed|
 
 #### Create Archive
 
@@ -77,11 +87,16 @@ This action is used to compress a files into archive.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|files|[]file|None|True|Files to be compressed|None|
-|algorithm|string|None|True|Compression algorithm|['tarball', 'zip']|
-|filename|string|None|True|Name of file archive|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|algorithm|string|None|True|Compression algorithm|['tarball', 'zip']|None|
+|filename|string|None|True|Name of file archive|None|None|
+|files|[]file|None|True|Files to be compressed|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -96,13 +111,18 @@ Example output:
 
 #### Extract Archive
 
-This action is used to exctract file archive.
+This action is used to extract file archive.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|archive|file|None|True|Base64-encoded archive file|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|archive|file|None|True|Base64-encoded archive file|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -129,6 +149,7 @@ On decompression, be sure that the inputted file has been compressed using one o
 
 # Version History
 
+* 2.0.2 - Correct spelling in help.md
 * 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Rename "Create archive" action to "Create Archive" | Rename "Decompress bytes" action to "Decompress Bytes" | Rename "Compress bytes" action to "Compress Bytes" | Rename "Extract Archive" to "Exctract archive"
 * 1.1.0 - Port to Python v2 architecture | Support web server mode

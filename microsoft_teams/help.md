@@ -33,10 +33,7 @@ Example input:
   "application_id": "63a0cad6-ac64-435c-a221-5d37c97b763e",
   "application_secret": "aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=",
   "directory_id": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0",
-  "username_password": {
-    "username": "user",
-    "password": "mypassword"
-  }
+  "username_password": "{ \"username\": \"user\", \"password\": \"mypassword\" }"
 }
 ```
 
@@ -195,7 +192,7 @@ Example input:
 ```
 {
   "channel_name": "InsightConnect Channel",
-  "message_content": "<b>Hello!</b>",
+  "message_content": "\u003cb\u003eHello!\u003c/b\u003e",
   "team_name": "InsightConnect Team",
   "thread_id": 1595889908700
 }
@@ -255,10 +252,10 @@ Example input:
 
 ```
 {
-  "channel_name": "InsightConnect Channel",
+  "channel_guid": "xxxxx-xxxxx-xxxx-xxxx",
+  "is_html": false,
   "message": "Hello!",
-  "team_name": "InsightConnect Team",
-  "thread_id": 1595889908700
+  "team_guid": "xxxxx-xxxxx-xxxx-xxxx"
 }
 ```
 
@@ -578,8 +575,8 @@ This action is used to create a group in Azure and enable it for Microsoft Teams
 |group_name|string|None|True|Team name|None|test_group|
 |mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|False|
 |mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|TestGroup|
-|members|string[]|None|False|A list of usernames to set as members|None|["user@example.com"]|
-|owners|string[]|None|False|A list of usernames to set as owners|None|["user@example.com"]|
+|members|string[]|None|False|A list of usernames to set as members|None|[user@example.com]|
+|owners|string[]|None|False|A list of usernames to set as owners|None|[user@example.com]|
 
 Example input:
 
@@ -825,7 +822,7 @@ Example output:
 |Domains|[]string|False|Extracted domains from message|
 |Email Addresses|[]string|False|Extracted email addresses from message|
 |Hashes|hashes|False|Extracted hashes from message|
-|IP Addressses|ip_addresses|False|Extracted IP addresses from message|
+|IP Addresses|ip_addresses|False|Extracted IP addresses from message|
 |MAC Addresses|[]string|False|Extracted MAC addresses from message|
 |URLs|[]string|False|Extracted URLs from message|
 |UUIDs|[]string|False|Extracted UUIDs from message|
@@ -834,8 +831,8 @@ Example output:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|IPv4 Addressses|[]string|False|Extracted IPv4 addressses from message|
-|IPv6 Addressses|[]string|False|Extracted IPv6 addresses from message|
+|IPv4 Addresses|[]string|False|Extracted IPv4 addresses from message|
+|IPv6 Addresses|[]string|False|Extracted IPv6 addresses from message|
 
 #### message
 
@@ -873,6 +870,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.1 - Correct spelling in help.md
 * 3.1.0 - New actions Add Group Owner and Add Member to Channel
 * 3.0.1 - Fix import error in New Message Received trigger
 * 3.0.0 - Update to make `words` and `first_word` required values in the `message` custom type
