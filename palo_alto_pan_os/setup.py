@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="palo_alto_pan_os-rapid7-plugin",
-      version="6.0.4",
+      version="6.0.5",
       description="Manage Palo Alto Networks firewall devices",
       author="rapid7",
       author_email="",

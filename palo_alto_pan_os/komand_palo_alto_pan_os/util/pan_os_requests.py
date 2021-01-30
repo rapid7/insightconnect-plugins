@@ -175,10 +175,13 @@ class Request(object):
         if output.get('response', {}).get('@status') == 'error':
             error = output['response']['msg']
             line_error = error.get('line')
-            if line_error and [s for s in line_error if 'is invalid' in s]:
-                raise PluginException(cause='Invalid response received.',
-                                      assistance=f'This is likely because the provided element {element} does not exist or the xpath is not correct. Please verify the element name and xpath and try again.',
-                                      data=line_error)
+            if line_error and [s for s in line_error if 'is invalid' or 'config validity' in s]:
+                raise PluginException(
+                    cause='PAN-OS returned an error in response to the request.',
+                    assistance=f'This is likely because the provided element {element} does not exist or the xpath is not correct. Please verify the element name and xpath and try again.',
+                    data=line_error
+                )
+
             error = json.dumps(error)
             raise PluginException(
                 cause='PAN-OS returned an error in response to the request.',
