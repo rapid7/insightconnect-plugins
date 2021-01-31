@@ -269,7 +269,7 @@ This action is used to convert an epoch as an integer to a Datetime.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|epoch|number|None|True|Epoch as integer or float|None|1595452833|
+|epoch|string|None|True|Epoch as integer or float|None|1595452833|
 
 Example input:
 
@@ -383,6 +383,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.1 - Add support for epochs in milliseconds, microseconds and nanoseconds in Date from Epoch action
 * 2.2.0 - Add new action Get Future Time
 * 2.1.1 - Update to latest plugin runtime with support for gevent worker class
 * 2.1.0 - New actions To UTC and To Localtime
