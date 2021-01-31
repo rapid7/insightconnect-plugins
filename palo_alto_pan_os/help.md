@@ -489,7 +489,7 @@ Example input:
 
 ```
 {
-  "element": "\u003capplication\u003e\u003cmember\u003e8x8\u003c/member\u003e\u003c/application\u003e",
+  "element": "<application><member>8x8</member></application>",
   "xpath": "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']/application"
 }
 ```
