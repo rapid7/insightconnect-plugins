@@ -134,6 +134,22 @@ class Request(object):
 
         return response
 
+    def get_address_group(self, device_name: str, virtual_system: str, group_name: str) -> dict:
+        return self.get_(
+            f"/config/devices/entry[@name='{device_name}']/vsys/entry[@name='{virtual_system}']/address-group/entry[@name='{group_name}']"
+        )
+
+    def edit_address_group(self, device_name: str, virtual_system: str, group_name: str, xml_str: str) -> dict:
+        return self.edit_(
+            f"/config/devices/entry[@name='{device_name}']/vsys/entry[@name='{virtual_system}']/address-group/entry[@name='{group_name}']",
+            xml_str
+        )
+
+    def get_address_object(self, device_name: str, virtual_system: str, object_name: str) -> dict:
+        return self.get_(
+            f"/config/devices/entry[@name='{device_name}']/vsys/entry[@name='{virtual_system}']/address/entry[@name='{object_name}']"
+        )
+
     @staticmethod
     def get_output_with_exceptions(response):
         if response.status_code == 401:
