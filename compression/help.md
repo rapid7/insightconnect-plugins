@@ -89,14 +89,10 @@ This action is used to compress a files into archive.
 |----|----|--------|-----------|
 |archive|file|False|Archive|
 
-Example output:
-
-```
-```
 
 #### Extract Archive
 
-This action is used to exctract file archive.
+This action is used to extract file archive.
 
 ##### Input
 
@@ -110,10 +106,6 @@ This action is used to exctract file archive.
 |----|----|--------|-----------|
 |files|[]file|False|Files|
 
-Example output:
-
-```
-```
 
 ### Triggers
 
@@ -129,6 +121,7 @@ On decompression, be sure that the inputted file has been compressed using one o
 
 # Version History
 
+* 2.0.2 - Correct spelling in help.md
 * 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Rename "Create archive" action to "Create Archive" | Rename "Decompress bytes" action to "Decompress Bytes" | Rename "Compress bytes" action to "Compress Bytes" | Rename "Extract Archive" to "Exctract archive"
 * 1.1.0 - Port to Python v2 architecture | Support web server mode

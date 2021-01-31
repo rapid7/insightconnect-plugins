@@ -23,11 +23,6 @@ The connection configuration accepts the following parameters:
 |okta_key|credential_secret_key|None|True|Okta key|None|None|
 |okta_url|string|None|True|Okta Domain e.g. example.okta.com|None|None|
 
-Example input:
-
-```
-```
-
 ## Technical Details
 
 ### Actions
@@ -203,11 +198,6 @@ This action pushes a MFA challenge to a user's device and waits for a success or
 |factor_id|string|None|True|Factor ID of the user to push verification to|None|None|
 |user_id|string|None|True|User ID to push verification to|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -362,7 +352,7 @@ When the user is not found, the action returns:
 
 #### Delete User
 
-This action is used to delete a user. If a user is not deprovisioned, this will deprovision a user, a second delete will be needed to remove the user. Warning: This action annot be recovered from.
+This action is used to delete a user. If a user is not deprovisioned, this will deprovision a user, a second delete will be needed to remove the user. Warning: This action cannot be recovered from.
 
 ##### Input
 
@@ -714,11 +704,6 @@ This action is used to assign a user to an application for SSO and provisioning.
 
 `appuser` accepts a [application user model](https://developer.okta.com/docs/api/resources/apps#application-user-model) JSON object.
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -985,6 +970,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 3.5.3 - Correct spelling in help.md
 * 3.5.2 - Fix issue where Monitor User Groups trigger would be limited to 1000 users
 * 3.5.1 - Update to add additional logging to Monitor User Groups trigger
 * 3.5.0 - New action Update Blacklist Zones
