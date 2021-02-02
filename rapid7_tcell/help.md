@@ -2244,7 +2244,7 @@ an entity with the exact same data (e.g. IP groups), and in that case an excepti
 
 # Version History
 
-* 1.0.2 - Fixed base_url value and authorization header name
+* 1.0.2 - Update `base_url` and authentication method to use Rapid7 Insight platform
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
@@ -2255,4 +2255,3 @@ an entity with the exact same data (e.g. IP groups), and in that case an excepti
 * [tCell](https://www.tcell.io/)
 * [tCell API](https://docs.tcell.io)
 * [IP groups documentation](https://github.com/tcellio/tcell-deployment-examples/tree/master/api/ip-groups)
-
