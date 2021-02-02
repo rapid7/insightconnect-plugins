@@ -202,31 +202,20 @@ types:
       description: The current delay between HTTP requests
       type: number
       required: false
-  frequency:
-    type:
-      title:
-      description:
-      type: string
-      required: false
-    interval:
-      title:
-      description:
-      type: integer
-      required: false
   schedule:
     id:
       title: Assigned UUID of Schedule
-      description:
+      description: UUID of the schedule
       type: string
       required: false
     name:
       title: Name of Schedule
-      description:
+      description: Description of the schedule
       type: string
       required: false
     enabled:
       title: Enable the schedule
-      description:
+      description: Is this enabled or disabled
       type: boolean
       required: false
     first_start:
@@ -783,7 +772,7 @@ actions:
         example: 100
       include-errors:
         title: Validation Errors
-        description: Iclude validation errors in scan configs, can be expensive
+        description: Include validation errors in scan configs, can be expensive
         type: boolean
         required: false
         default: false

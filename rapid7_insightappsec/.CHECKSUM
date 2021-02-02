@@ -1,5 +1,5 @@
 {
-	"spec": "5a5afdb1b5d164746db554fbdf8f83aa",
+	"spec": "846c6fc63dc5506af54baf78082265fe",
 	"manifest": "78db97068d180e88aeb007dff07fea47",
 	"setup": "db1333242ad3d49bd16db23646ef67c9",
 	"schemas": [
@@ -57,7 +57,7 @@
 		},
 		{
 			"identifier": "get_scan_configs/schema.py",
-			"hash": "833611ebc0ee7035aad6cfe033db13a8"
+			"hash": "1a26926988b53ac17c9be0b3ddc253f3"
 		},
 		{
 			"identifier": "get_scan_engine_events/schema.py",
@@ -77,7 +77,7 @@
 		},
 		{
 			"identifier": "get_schedules/schema.py",
-			"hash": "d148d5bc2b3337d2f7c1777ea8008fb7"
+			"hash": "4628a029729a8bcc7381baff3cafd8ac"
 		},
 		{
 			"identifier": "remove_app_user/schema.py",

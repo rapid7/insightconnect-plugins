@@ -111,6 +111,7 @@ class GetSchedulesOutput(insightconnect_plugin_runtime.Output):
         "enabled": {
           "type": "boolean",
           "title": "Enable the schedule",
+          "description": "Is this enabled or disabled",
           "order": 3
         },
         "first_start": {
@@ -122,11 +123,13 @@ class GetSchedulesOutput(insightconnect_plugin_runtime.Output):
         "id": {
           "type": "string",
           "title": "Assigned UUID of Schedule",
+          "description": "UUID of the schedule",
           "order": 1
         },
         "name": {
           "type": "string",
           "title": "Name of Schedule",
+          "description": "Description of the schedule",
           "order": 2
         }
       }
