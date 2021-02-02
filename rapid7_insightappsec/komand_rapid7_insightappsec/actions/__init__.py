@@ -8,6 +8,8 @@ from .delete_scan_config.action import DeleteScanConfig
 from .get_app.action import GetApp
 from .get_app_users.action import GetAppUsers
 from .get_apps.action import GetApps
+from .get_attack_template.action import GetAttackTemplate
+from .get_attack_templates.action import GetAttackTemplates
 from .get_scan.action import GetScan
 from .get_scan_config.action import GetScanConfig
 from .get_scan_configs.action import GetScanConfigs

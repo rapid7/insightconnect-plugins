@@ -261,6 +261,32 @@ types:
       description: URL to define an application
       type: string
       required: false
+  attack_template:
+    name:
+      title: Name Of Attack Template
+      description: A name to identify an attack template
+      type: string
+      required: false
+    system_defined:
+      title: System Default
+      description: To differentiate between default and custom templates
+      type: boolean
+      required: false
+    description:
+      title: Attack Template Description
+      description: Describe the attack template
+      type: string
+      required: false
+    links:
+      title: Direct Platform Links
+      description: Direct links to the platform
+      type: '[]link'
+      required: false
+    id:
+      title: ID of the Attack Template
+      description: UUID of the attack template
+      type: string
+      required: false
 connection:
   api_key:
     title: API Key
@@ -474,6 +500,63 @@ actions:
         description: Status code of the request
         type: integer
         required: false
+  get_attack_templates:
+    title: Get All Attack Templates
+    description: Get a list of all the available attack templates
+    input:
+      sort:
+        title: Sort
+        description: How to sort the response
+        type: string
+        required: false
+        default: "ASC"
+        example: "ASC"
+      index:
+        title: Index
+        description: The page number of the return data set
+        type: integer
+        required: false
+        default: 0
+        example: 1
+      size:
+        title: Size
+        description: The data set size or the max number of apps to return per page
+        type: integer
+        required: false
+        default: 100
+        example: 100
+    output:
+      metadata:
+        title: Metadata
+        description: Metadata for the app results
+        type: object
+        required: false
+      data:
+        title: App Data
+        description: App data
+        type: '[]attack_template'
+        required: false
+      links:
+        title: Links to Data
+        description: Links to data
+        type: '[]link'
+        required: false
+  get_attack_template:
+    title: One Attack Template
+    description: Get one atack template
+    input:
+      id:
+        title:
+        description: UUID os the attack template
+        type: string
+        required: true
+        example: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    output:
+        attack_template:
+          title: Attack Template
+          description:
+          type: 'attack_template'
+          required: false
   create_scan_config:
     title: Create Scan Config
     description: Create a new scan configuration

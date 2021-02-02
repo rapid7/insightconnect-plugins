@@ -37,6 +37,120 @@ Example input:
 
 ### Actions
 
+#### Get All Attack Templates
+
+This action is used to get a list of all the available attack templates.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|index|integer|0|False|The page number of the return data set|None|1|
+|size|integer|100|False|The data set size or the max number of apps to return per page|None|100|
+|sort|string|ASC|False|How to sort the response|None|ASC|
+
+Example input:
+
+```
+{
+  "index": 1,
+  "size": 100,
+  "sort": "ASC"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|data|[]attack_template|False|App data|
+|links|[]link|False|Links to data|
+|metadata|object|False|Metadata for the app results|
+
+Example output:
+
+```
+{
+  "data": [
+
+    {
+      "id": "11111111-0000-0000-0000-000000000002",
+      "links": [
+        {
+          "href": "https://us.api.insight.rapid7.com:443/ias/v1/attack-templates/11111111-0000-0000-0000-000000000002",
+          "rel": "self"
+        }
+      ],
+      "name": "OWASP 2013",
+      "system_defined": true
+    },
+    {
+      "id": "11111111-0000-0000-0000-000000000001",
+      "links": [
+        {
+          "href": "https://us.api.insight.rapid7.com:443/ias/v1/attack-templates/11111111-0000-0000-0000-000000000001",
+          "rel": "self"
+        }
+      ],
+      "name": "Crawl only",
+      "system_defined": true
+    }
+    ],
+    "links": [
+      {
+        "href": "https://us.api.insight.rapid7.com:443/ias/v1/attack-templates",
+        "rel": "self"
+      }
+    ],
+    "metadata": {
+      "index": 0,
+      "size": 100,
+      "total_data": 2,
+      "total_pages": 1
+    }
+  }
+```
+
+#### One Attack Template
+
+This action is used to get one atack template.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|UUID os the attack template|None|xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx|
+
+Example input:
+
+```
+{
+  "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|attack_template|attack_template|False||
+
+Example output:
+
+```
+{
+  "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "links": [
+    {
+      "href": "https://us.api.insight.rapid7.com:443/ias/v1/attack-templates/11111111-0000-0000-0000-000000000004",
+      "rel": "self"
+    }
+  ],
+  "name": "Passive analysis",
+  "system_defined": true
+}
+```
+
 #### Dissociate a User from an Application
 
 This action is used to remove a user from accessing an application.
@@ -671,7 +785,7 @@ Example input:
 
 ```
 {
-  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  "scan_config_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
 }
 ```
 
@@ -859,7 +973,9 @@ Example input:
 
 ```
 {
-  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+  "index": 1,
+  "size": 50,
+  "sort": "scan.submit_time,DESC"
 }
 ```
 
@@ -997,7 +1113,8 @@ Example input:
 
 ```
 {
-  "scan_config_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  "action": "Pause",
+  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 }
 ```
 

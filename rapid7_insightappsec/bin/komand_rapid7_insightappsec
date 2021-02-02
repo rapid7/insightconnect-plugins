@@ -52,6 +52,10 @@ def main():
 
             self.add_action(actions.GetApps())
 
+            self.add_action(actions.GetAttackTemplate())
+
+            self.add_action(actions.GetAttackTemplates())
+
             self.add_action(actions.GetScan())
 
             self.add_action(actions.GetScanConfig())
