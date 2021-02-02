@@ -17,7 +17,7 @@ class TCell:
     def __init__(self, api_key, logger):
         self.api_key = api_key
         self.logger = logger
-        self.base_url = 'https://api.tcell.io/customer/api/v1/'
+        self.base_url = 'https://us.api.insight.rapid7.com/tcell/api/v1/'
 
         # Test API key
         self.list_apps()
