@@ -11,7 +11,7 @@ This plugin utilizes the [tCell API](https://docs.tcell.io).
 
 # Requirements
 
-* Requires an API Key from Insight platform
+* Requires a user API Key from the Insight platform. See [tCell API](https://docs.tcell.io/reference#usage-tutorial) for more information on how to retrieve one.
 
 # Documentation
 
@@ -298,7 +298,7 @@ Example output:
         },
         {
           "directive": "connect-src",
-          "source": "https://api.tcell.io/"
+          "source": "https://us.api.insight.rapid7.com/tcell/api/v1/"
         },
         {
           "directive": "connect-src",
@@ -1080,7 +1080,7 @@ Example output:
           },
           {
             "directive": "connect-src",
-            "source": "https://api.tcell.io/"
+            "source": "https://us.api.insight.rapid7.com/tcell/api/v1/"
           },
           {
             "directive": "connect-src",
@@ -1389,7 +1389,7 @@ Example output:
           },
           {
             "directive": "connect-src",
-            "source": "https://api.tcell.io/"
+            "source": "https://us.api.insight.rapid7.com/tcell/api/v1/"
           },
           {
             "directive": "connect-src",
