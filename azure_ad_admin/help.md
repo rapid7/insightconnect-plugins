@@ -176,11 +176,6 @@ This action is used to create a user with a randomly generated password and send
 |notify_recipient|string|None|True|Email address of the account to be notified of user creation|None|None|
 |user_principal_name|string|None|True|The user principal name e.g. user@example.com|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -204,11 +199,6 @@ This action is used to disable a user account. This action will not disable an a
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |user_id|string|None|True|User ID to disable e.g. user@example.com|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -234,11 +224,6 @@ This action is used to enable a user account.
 |----|----|-------|--------|-----------|----|-------|
 |user_id|string|None|True|User ID to enable e.g. user@example.com|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -263,11 +248,6 @@ This action forces a user to change their password on their next successful logi
 |----|----|-------|--------|-----------|----|-------|
 |user_id|string|None|True|User ID|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -291,11 +271,6 @@ This action is used to get user information.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |user_id|string|None|True|User ID e.g. user@example.com|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -334,11 +309,6 @@ This action is used to get a group by it's name.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |name|string|None|True|Name|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -394,11 +364,6 @@ This action is used to add a user to a group.
 |group_name|string|None|True|Group Name e.g. My Azure Group|None|None|
 |user_id|string|None|True|User ID e.g. user@example.com|None|None|
 
-Example input:
-
-```
-```
-
 ##### Output
 
 |Name|Type|Required|Description|
@@ -423,11 +388,6 @@ This action is used to remove a user from a group.
 |----|----|-------|--------|-----------|----|-------|
 |group_name|string|None|True|Group Name e.g. My Azure Group|None|None|
 |user_id|string|None|True|User ID e.g. user@example.com|None|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -455,11 +415,6 @@ This trigger provides list of both user and sign-in linked risk detections and a
 |----|----|-------|--------|-----------|----|-------|
 |frequency|integer|60|False|Poll frequency in seconds|None|None|
 |risk_level|string|None|True|Risk level|['low', 'medium', 'high', 'hidden', 'none', 'all']|None|
-
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -597,6 +552,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.5 - Correct spelling in help.md
 * 2.2.4 - Fix issue where Get User Info would fail on a disabled account
 * 2.2.3 - Fix issue where Get User Info occasionally fails with an SSL error in secondary call for user status
 * 2.2.2 - Fix issue where retry expected a valid response

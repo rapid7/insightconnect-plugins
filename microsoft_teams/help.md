@@ -825,7 +825,7 @@ Example output:
 |Domains|[]string|False|Extracted domains from message|
 |Email Addresses|[]string|False|Extracted email addresses from message|
 |Hashes|hashes|False|Extracted hashes from message|
-|IP Addressses|ip_addresses|False|Extracted IP addresses from message|
+|IP Addresses|ip_addresses|False|Extracted IP addresses from message|
 |MAC Addresses|[]string|False|Extracted MAC addresses from message|
 |URLs|[]string|False|Extracted URLs from message|
 |UUIDs|[]string|False|Extracted UUIDs from message|
@@ -834,8 +834,8 @@ Example output:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|IPv4 Addressses|[]string|False|Extracted IPv4 addressses from message|
-|IPv6 Addressses|[]string|False|Extracted IPv6 addresses from message|
+|IPv4 Addresses|[]string|False|Extracted IPv4 addresses from message|
+|IPv6 Addresses|[]string|False|Extracted IPv6 addresses from message|
 
 #### message
 
@@ -873,6 +873,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.1 - Correct spelling in help.md
 * 3.1.0 - New actions Add Group Owner and Add Member to Channel
 * 3.0.1 - Fix import error in New Message Received trigger
 * 3.0.0 - Update to make `words` and `first_word` required values in the `message` custom type
