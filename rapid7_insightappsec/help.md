@@ -28,7 +28,9 @@ Example input:
 
 ```
 {
-  "api_key": "abc12345-abc1-2345-abc1-abc123456789",
+  "api_key": {
+    "secretKey": "abc12345-abc1-2345-abc1-abc123456789"
+  },
   "url": "https://us.api.insight.rapid7.com"
 }
 ```
