@@ -23,7 +23,7 @@ class GetAttackTemplateInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "id": {
       "type": "string",
-      "title": "Id",
+      "title": "Get Attack Template",
       "description": "UUID os the attack template",
       "order": 1
     }
@@ -47,6 +47,7 @@ class GetAttackTemplateOutput(insightconnect_plugin_runtime.Output):
     "attack_template": {
       "$ref": "#/definitions/attack_template",
       "title": "Attack Template",
+      "description": "The full attack template",
       "order": 1
     }
   },

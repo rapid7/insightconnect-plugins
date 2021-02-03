@@ -133,7 +133,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|attack_template|attack_template|False||
+|attack_template|attack_template|False|The full attack template|
 
 Example output:
 
@@ -684,7 +684,7 @@ Example input:
 
 ```
 {
-  "scan_config_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
 }
 ```
 
@@ -1116,7 +1116,8 @@ Example input:
 
 ```
 {
-  "scan_config_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  "action": "Pause",
+  "scan_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 }
 ```
 

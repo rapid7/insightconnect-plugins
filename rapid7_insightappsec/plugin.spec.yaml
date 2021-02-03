@@ -81,8 +81,7 @@ types:
       required: false
     assignment_environment:
       title: Scan Environment
-      description: Which of two environments are used to run the scan action
-        (Rapid7 Cloud or a custom engine group)
+      description: Which of two environments are used to run the scan action (Rapid7 Cloud or a custom engine group)
       type: string
       required: false
     assignment_type:
@@ -535,7 +534,7 @@ actions:
     description: Get one atack template
     input:
       id:
-        title:
+        title: Get Attack Template
         description: UUID os the attack template
         type: string
         required: true
@@ -543,7 +542,7 @@ actions:
     output:
         attack_template:
           title: Attack Template
-          description:
+          description: The full attack template
           type: 'attack_template'
           required: false
   create_scan_config:
