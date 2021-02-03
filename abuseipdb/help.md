@@ -335,10 +335,11 @@ _This plugin does not contain any triggers._
 
 ## Troubleshooting
 
-There's a rate limit on the free API service. The following error messags `429 Client Error: Too Many Requests for url` indicates that threshold has been hit.
+There's a rate limit on the free API service. The following error messages `429 Client Error: Too Many Requests for url` indicates that threshold has been hit.
 
 # Version History
 
+* 5.0.5 - Correct spelling in help.md
 * 5.0.4 - Update to v4 Python plugin runtime
 * 5.0.3 - Add example inputs
 * 5.0.2 - Changed descriptions | Removed duplicated code | Use output constants | Added "f" strings
