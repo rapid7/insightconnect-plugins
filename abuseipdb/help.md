@@ -28,9 +28,7 @@ Example input:
 
 ```
 {
-  "credentials": {
-    "secretKey": "e73h82c63847f3ff1h5216b556edh153h30430d73bchhe680f70h1d8885fb8bb130b46c7767d6886"
-  }
+  "credentials": "e73h82c63847f3ff1h5216b556edh153h30430d73bchhe680f70h1d8885fb8bb130b46c7767d6886"
 }
 ```
 
@@ -339,6 +337,7 @@ There's a rate limit on the free API service. The following error messages `429 
 
 # Version History
 
+* 5.0.6 - Fix none type error in Check CIDR action
 * 5.0.5 - Correct spelling in help.md
 * 5.0.4 - Update to v4 Python plugin runtime
 * 5.0.3 - Add example inputs
