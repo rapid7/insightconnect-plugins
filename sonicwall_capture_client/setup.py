@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="sonicwall_capture_client-rapid7-plugin",
-      version="1.0.0",
+      version="1.0.1",
       description="SonicWall Capture Client is a unified client platform that delivers multiple endpoint protection capabilities, including next-generation malware protection and application vulnerability intelligence",
       author="rapid7",
       author_email="",

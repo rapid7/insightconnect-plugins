@@ -4,7 +4,7 @@ products: [insightconnect]
 name: sonicwall_capture_client
 title: SonicWall Capture Client
 description: SonicWall Capture Client is a unified client platform that delivers multiple endpoint protection capabilities, including next-generation malware protection and application vulnerability intelligence
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
