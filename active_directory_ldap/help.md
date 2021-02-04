@@ -54,7 +54,7 @@ This action is used to modify the attributes of an Active Directory object.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |attribute_to_modify|string|None|True|The name of the attribute to modify|None|postalCode|
-|attribute_value|string|None|True|The value of the attribute|None|1100|
+|attribute_value|string|None|True|The value of the attribute|None|2114|
 |distinguished_name|string|None|True|The distinguished name of the object to modify|None|CN=user,OU=domain_users,DC=example,DC=com|
 
 Example input:
@@ -125,7 +125,7 @@ This action is used to add the specified Active Directory user.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|account_disabled|string|True|True|Set this to true to disable the user account at creation|['true', 'false']|True|
+|account_disabled|string|true|True|Set this to true to disable the user account at creation|['true', 'false']|true|
 |additional_parameters|object|None|False|Add additional user parameters in JSON format|None|{"telephoneNumber":"(617)555-1234"}|
 |domain_name|string|None|True|The domain name this user will belong to|None|example.com|
 |first_name|string|None|True|User's first name|None|John|
@@ -175,6 +175,7 @@ For more information on LDAP queries see https://ldap3.readthedocs.io/tutorial_s
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|attributes|[]string|None|False|Attributes to search. If empty return all attributes|None|["createTimestamp", "creatorsName"]|
 |search_base|string|None|True|The base of the search request|None|DC=example,DC=com|
 |search_filter|string|None|True|The filter of the search request. It must conform to the LDAP filter syntax specified in RFC4515|None|(sAMAccountName=joesmith)|
 
@@ -182,6 +183,10 @@ Example input:
 
 ```
 {
+  "attributes": [
+    "createTimestamp",
+    "creatorsName"
+  ],
   "search_base": "DC=example,DC=com",
   "search_filter": "(sAMAccountName=joesmith)"
 }
@@ -191,6 +196,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|count|integer|False|Number of results|
 |results|[]result|False|Results returned|
 
 Example output:
@@ -471,7 +477,6 @@ For example `CN=Robert (Bob) Smith,OU=domain_users,DC=rapid7,DC=com` is supporte
 but `CN=Robert Bob) Smith,OU=domain_users,DC=rapid7,DC=com` is not.
 
 All inputs to the query action must be correctly escaped.
-  
 
 If you cannot connect, ensure that network access is available, and view the logs to identify any auth errors.
 
@@ -486,6 +491,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 4.1.0 - Add new input Attributes in action Query | Add new output Count in action Query
 * 4.0.3 - Fix issue with connection documentation incorrectly stating a protocol prefix is required
 * 4.0.2 - Fix issue where some host names were being incorrectly parsed
 * 4.0.1 - Fix issue were logging of connection info did not display hostname correctly
