@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Deletes the specified snapshot resource"
+    DESCRIPTION = "This action is used to delete the specified snapshot resource"
 
 
 class Input:

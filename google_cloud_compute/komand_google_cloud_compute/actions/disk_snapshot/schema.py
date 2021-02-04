@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action is used to create a snapshot of a specified persistent disk."
+    DESCRIPTION = "This action is used to create a snapshot of a specified persistent disk"
 
 
 class Input:

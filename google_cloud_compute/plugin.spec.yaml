@@ -397,8 +397,8 @@ connection:
 actions:
   disk_list:
     title: List Disks
-    description: Retrieves a list of persistent disks contained within the specified
-      zone
+    description: This action retrieves a list of persistent disks contained
+      within the specified zone
     input:
       zone:
         type: string
@@ -448,7 +448,7 @@ actions:
         required: false
   disk_attach:
     title: Attach Disk
-    description: Attaches an existing disk resource to an instance
+    description: This action is used to attach an existing disk resource to an instance
     input:
       zone:
         type: string
@@ -592,7 +592,7 @@ actions:
         required: false
   disk_detach:
     title: Detach Disk
-    description: Detaches a disk from an instance
+    description: This action is used to detach a disk from an instance
     input:
       zone:
         type: string
@@ -736,7 +736,7 @@ actions:
         required: false
   disk_snapshot:
     title: Snapshot Disk
-    description: Create a snapshot of a specified persistent disk
+    description: This action is used to create a snapshot of a specified persistent disk
     input:
       zone:
         type: string
@@ -900,8 +900,8 @@ actions:
         required: false
   list_snapshots:
     title: List Snapshots
-    description: Retrieve a list of Snapshot resources
-      contained within the specified project
+    description: This action is used to retrieve the list of
+      Snapshot resources contained within the specified project
     input:
       filter:
         type: string
@@ -947,7 +947,7 @@ actions:
         required: false
   delete_snapshots:
     title: Delete Snapshots
-    description: Deletes the specified snapshot resource
+    description: This action is used to delete the specified snapshot resource
     input:
       snapshot:
         type: string
@@ -1079,7 +1079,7 @@ actions:
         required: false
   get_firewall:
     title: Get Firewall Details
-    description: Retrieve details on a firewall including its rulesets
+    description: This action is used to retrieve details on a firewall including its rulesets
     input:
       firewall:
         type: string
@@ -1153,7 +1153,7 @@ actions:
         required: false
   insert_firewall:
     title: Insert Firewall
-    description: Create a firewall rule in the specified project
+    description: This action is used to create a firewall rule in the specified project
       using the data included in the request
     input:
       name:
@@ -1328,8 +1328,8 @@ actions:
         required: false
   list_firewalls:
     title: List Firewalls
-    description: Retrieve a list of persistent disks contained
-      within the specified zone
+    description: This action is used to retrieve a list of
+      persistent disks contained within the specified zone
     input:
       filter:
         type: string
@@ -1374,8 +1374,8 @@ actions:
         required: false
   update_firewall:
     title: Update Firewall
-    description: Updates the specified firewall rule with the data included in the
-      request
+    description: This action is used to update the specified
+      firewall rule with the data included in the request
     input:
       firewall:
         type: string
@@ -1555,7 +1555,7 @@ actions:
         required: false
   delete_firewall:
     title: Delete Firewall
-    description: Deletes the specified firewall
+    description: This action is used to delete the specified firewall
     input:
       firewall:
         type: string
@@ -1687,7 +1687,8 @@ actions:
         required: false
   list_instances:
     title: List Instances
-    description: Retrieves the list of instances contained within the specified zone
+    description: This action is used to retrieve the list of
+      instances contained within the specified zone
     input:
       zone:
         type: string
@@ -1740,8 +1741,8 @@ actions:
         required: false
   stop_instance:
     title: Stop Instance
-    description: Stop a running instance, shut it down cleanly,
-      and allow for a restart of the instance at a later time
+    description: This action is used to stop a running instance, shut it down cleanly,
+      and allow you to restart the instance at a later time
     input:
       zone:
         type: string
@@ -1879,7 +1880,7 @@ actions:
         required: false
   start_instance:
     title: Start Instance
-    description: Starts an instance
+    description: This action is used to start an instance
     input:
       zone:
         type: string

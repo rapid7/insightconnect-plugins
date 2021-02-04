@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Starts an instance"
+    DESCRIPTION = "This action is used to start an instance"
 
 
 class Input:

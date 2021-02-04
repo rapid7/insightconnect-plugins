@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieves a list of persistent disks contained within the specified zone"
+    DESCRIPTION = "This action retrieves a list of persistent disks contained within the specified zone"
 
 
 class Input:

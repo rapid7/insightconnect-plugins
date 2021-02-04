@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieves the list of instances contained within the specified zone"
+    DESCRIPTION = "This action is used to retrieve the list of instances contained within the specified zone"
 
 
 class Input:

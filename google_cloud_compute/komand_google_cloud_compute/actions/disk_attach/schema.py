@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Attaches an existing disk resource to an instance"
+    DESCRIPTION = "This action is used to attach an existing disk resource to an instance"
 
 
 class Input:

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action is used to stop a running instance, shut it down cleanly, and allow you to restart the instance at a later time."
+    DESCRIPTION = "This action is used to stop a running instance, shut it down cleanly, and allow you to restart the instance at a later time"
 
 
 class Input:

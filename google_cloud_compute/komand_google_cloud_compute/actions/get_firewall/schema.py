@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieve details on a firewall including its rulesets"
+    DESCRIPTION = "This action is used to retrieve details on a firewall including its rulesets"
 
 
 class Input:

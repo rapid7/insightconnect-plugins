@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Detaches a disk from an instance"
+    DESCRIPTION = "This action is used to detach a disk from an instance"
 
 
 class Input:

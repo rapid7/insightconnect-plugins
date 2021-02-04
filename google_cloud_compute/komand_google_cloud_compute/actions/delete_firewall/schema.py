@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Deletes the specified firewall"
+    DESCRIPTION = "This action is used to delete the specified firewall"
 
 
 class Input:

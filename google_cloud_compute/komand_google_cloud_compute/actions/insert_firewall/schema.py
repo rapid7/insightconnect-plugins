@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action is used to create a firewall rule in the specified project using the data included in the request."
+    DESCRIPTION = "This action is used to create a firewall rule in the specified project using the data included in the request"
 
 
 class Input:
