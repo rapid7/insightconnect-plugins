@@ -1,5 +1,5 @@
-from googleapiclient.errors import HttpError
 from googleapiclient.discovery import Resource
+from googleapiclient.errors import HttpError
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -15,24 +15,35 @@ class GoogleCloudComputeAPI:
         )
         return self.execute(request)
 
-    def list_firewalls(self, filter_=None, max_results=None, order_by=None, page_token=None):
+    def list_firewalls(self, filter_=None, max_results=None, order_by=None):
         if not filter_:
             filter_ = None
         if not max_results:
             max_results = None
         if not order_by:
             order_by = None
-        if not page_token:
-            page_token = None
 
         request = self.service.firewalls().list(
             project=self.project_id,
             filter=filter_,
             maxResults=max_results,
-            orderBy=order_by,
-            pageToken=page_token
+            orderBy=order_by
         )
-        return self.execute(request)
+
+        response = None
+        items = []
+
+        while request is not None:
+            response = request.execute()
+            items += response["items"]
+
+            request = self.service.firewalls().list_next(
+                previous_request=request,
+                previous_response=response
+            )
+
+        response["items"] = items
+        return response
 
     def insert_firewall(self, body: dict):
         request = self.service.firewalls().insert(
@@ -94,25 +105,36 @@ class GoogleCloudComputeAPI:
         )
         return self.execute(request)
 
-    def disk_list(self, zone: str, filter_=None, max_results=None, order_by=None, page_token=None):
+    def disk_list(self, zone: str, filter_=None, max_results=None, order_by=None):
         if not filter_:
             filter_ = None
         if not max_results:
             max_results = None
         if not order_by:
             order_by = None
-        if not page_token:
-            page_token = None
 
         request = self.service.disks().list(
             project=self.project_id,
             zone=zone,
             filter=filter_,
             maxResults=max_results,
-            orderBy=order_by,
-            pageToken=page_token
+            orderBy=order_by
         )
-        return self.execute(request)
+
+        response = None
+        items = []
+
+        while request is not None:
+            response = request.execute()
+            items += response["items"]
+
+            request = self.service.disks().list_next(
+                previous_request=request,
+                previous_response=response
+            )
+
+        response["items"] = items
+        return response
 
     def start_instance(self, zone: str, instance: str):
         request = self.service.instances().start(
@@ -130,44 +152,66 @@ class GoogleCloudComputeAPI:
         )
         return self.execute(request)
 
-    def list_instances(self, zone: str, filter_=None, max_results=None, order_by=None, page_token=None):
+    def list_instances(self, zone: str, filter_=None, max_results=None, order_by=None):
         if not filter_:
             filter_ = None
         if not max_results:
             max_results = None
         if not order_by:
             order_by = None
-        if not page_token:
-            page_token = None
 
         request = self.service.instances().list(
             project=self.project_id,
             zone=zone,
             filter=filter_,
             maxResults=max_results,
-            orderBy=order_by,
-            pageToken=page_token
+            orderBy=order_by
         )
-        return self.execute(request)
 
-    def list_snapshots(self, filter_=None, max_results=None, order_by=None, page_token=None):
+        response = None
+        items = []
+
+        while request is not None:
+            response = request.execute()
+            items += response["items"]
+
+            request = self.service.instances().list_next(
+                previous_request=request,
+                previous_response=response
+            )
+
+        response["items"] = items
+        return response
+
+    def list_snapshots(self, filter_=None, max_results=None, order_by=None):
         if not filter_:
             filter_ = None
         if not max_results:
             max_results = None
         if not order_by:
             order_by = None
-        if not page_token:
-            page_token = None
 
         request = self.service.snapshots().list(
             project=self.project_id,
             filter=filter_,
             maxResults=max_results,
-            orderBy=order_by,
-            pageToken=page_token
+            orderBy=order_by
         )
-        return self.execute(request)
+
+        response = None
+        items = []
+
+        while request is not None:
+            response = request.execute()
+            items += response["items"]
+
+            request = self.service.snapshots().list_next(
+                previous_request=request,
+                previous_response=response
+            )
+
+        response["items"] = items
+        return response
 
     def list_zones(self):
         request = self.service.zones().list(

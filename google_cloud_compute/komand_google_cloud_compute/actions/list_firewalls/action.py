@@ -18,6 +18,5 @@ class ListFirewalls(insightconnect_plugin_runtime.Action):
         return self.connection.client.list_firewalls(
             params.get(Input.FILTER),
             params.get(Input.MAXRESULTS),
-            params.get(Input.ORDERBY),
-            params.get(Input.PAGETOKEN)
+            params.get(Input.ORDERBY)
         )

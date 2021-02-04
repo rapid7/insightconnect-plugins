@@ -1,5 +1,5 @@
 {
-	"spec": "268a18c1eb2917500d4f633b77e438b0",
+	"spec": "1b0c5b27de4d5619b383f0b8e756d7dd",
 	"manifest": "2c4d8b3c37171c4779830b3b175978d1",
 	"setup": "eb75070569e552747721ce0a4b662b91",
 	"schemas": [
@@ -21,11 +21,11 @@
 		},
 		{
 			"identifier": "disk_list/schema.py",
-			"hash": "9f8a3291e8a86f2dcdd786e98ad7af46"
+			"hash": "984f368f2e95c14860d20e23239956e7"
 		},
 		{
 			"identifier": "disk_snapshot/schema.py",
-			"hash": "8067a358255e6da365d31f6fc715a39a"
+			"hash": "dfe2c3689b2c8279b19cd604c60db6d4"
 		},
 		{
 			"identifier": "get_firewall/schema.py",
@@ -33,19 +33,19 @@
 		},
 		{
 			"identifier": "insert_firewall/schema.py",
-			"hash": "f14f4b6c4c2b49b70464b47571435f03"
+			"hash": "443ed19927289f5d9dc0215cedf9c4d0"
 		},
 		{
 			"identifier": "list_firewalls/schema.py",
-			"hash": "a284fb66cb50dfbd331dcdf710a9fe9b"
+			"hash": "164e6c008ea043661fe531f6e05db227"
 		},
 		{
 			"identifier": "list_instances/schema.py",
-			"hash": "8f47a61922104b09a22a6fd4276b831c"
+			"hash": "8f51bb75e5697511332f0fb58523f0bd"
 		},
 		{
 			"identifier": "list_snapshots/schema.py",
-			"hash": "eae481c802b8ebc9b56f69d06fad9c8c"
+			"hash": "753f74c304e5c8f27312cc8eae11c0c1"
 		},
 		{
 			"identifier": "start_instance/schema.py",
@@ -53,7 +53,7 @@
 		},
 		{
 			"identifier": "stop_instance/schema.py",
-			"hash": "86df5f7673e70e64d1e27a3b841a3b42"
+			"hash": "e7ab95884fba161d41a9fa02ca5f7734"
 		},
 		{
 			"identifier": "update_firewall/schema.py",

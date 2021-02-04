@@ -11,7 +11,6 @@ class Input:
     FILTER = "filter"
     MAXRESULTS = "maxResults"
     ORDERBY = "orderBy"
-    PAGETOKEN = "pageToken"
     ZONE = "zone"
     
 
@@ -45,12 +44,6 @@ class ListInstancesInput(insightconnect_plugin_runtime.Input):
       "title": "OrderBy",
       "description": "Sorts list results by a certain order",
       "order": 4
-    },
-    "pageToken": {
-      "type": "string",
-      "title": "Page Token",
-      "description": "Set pageToken to the nextPageToken returned by a previous list request to get the next page of results",
-      "order": 5
     },
     "zone": {
       "type": "string",

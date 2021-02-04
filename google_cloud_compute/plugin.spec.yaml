@@ -418,20 +418,13 @@ actions:
         description: The maximum number of results per page that should be returned.
           Acceptable values are 0 to 500. Default 500
         required: false
-        example: 1
+        example: 500
       orderBy:
         type: string
         title: OrderBy
         description: Sorts list results by a certain order
         required: false
         example: creationTimestamp desc
-      pageToken:
-        type: string
-        title: Page Token
-        description: Set pageToken to the nextPageToken returned by a previous list
-          request to get the next page of results
-        required: false
-        example: CkYIpsyE6vCM7QI6OwoCGAEKAiAACgIYAgoHINDkjPrMGgoCGAIKFCoSZGVmYXVsdC1hbGxvdy1pY21wCgoggvCxhNin4rIJ
     output:
       items:
         description: A list of disk resources
@@ -451,12 +444,6 @@ actions:
       selfLink:
         description: Server-defined URL for this resource
         title: Self Link
-        type: string
-        required: false
-      nextPageToken:
-        description: This token allows you to get the next page of results for list
-          requests
-        title: Next Page Token
         type: string
         required: false
   disk_attach:
@@ -928,20 +915,13 @@ actions:
         description: The maximum number of results per page that should be returned.
           Acceptable values are 0 to 500. Default 500
         required: false
-        example: 1
+        example: 500
       orderBy:
         type: string
         title: OrderBy
         description: Sorts list results by a certain order
         required: false
         example: creationTimestamp desc
-      pageToken:
-        type: string
-        title: Page Token
-        description: Set pageToken to the nextPageToken returned by a previous list
-          request to get the next page of results
-        required: false
-        example: CkYIpsyE6vCM7QI6OwoCGAEKAiAACgIYAgoHINDkjPrMGgoCGAIKFCoSZGVmYXVsdC1hbGxvdy1pY21wCgoggvCxhNin4rIJ
     output:
       kind:
         description: Type of resource. Always compute#snapshotList of a list of Snapshot
@@ -1370,13 +1350,6 @@ actions:
         description: Sorts list results by a certain order
         required: false
         example: creationTimestamp desc
-      pageToken:
-        type: string
-        title: Page Token
-        description: Set pageToken to the nextPageToken returned by a previous list
-          request to get the next page of results
-        required: false
-        example: CkYIpsyE6vCM7QI6OwoCGAEKAiAACgIYAgoHINDkjPrMGgoCGAIKFCoSZGVmYXVsdC1hbGxvdy1pY21wCgoggvCxhNin4rIJ
     output:
       kind:
         type: string
@@ -1398,12 +1371,6 @@ actions:
         type: string
         title: Self Link
         description: Server-defined URL for this resource
-        required: false
-      nextPageToken:
-        type: string
-        title: Next Page Token
-        description: This token allows you to get the next page of results for list
-          requests
         required: false
   update_firewall:
     title: Update Firewall
@@ -1747,13 +1714,6 @@ actions:
         description: Sorts list results by a certain order
         required: false
         example: creationTimestamp desc
-      pageToken:
-        type: string
-        title: Page Token
-        description: Set pageToken to the nextPageToken returned by a previous list
-          request to get the next page of results
-        required: false
-        example: CkYIpsyE6vCM7QI6OwoCGAEKAiAACgIYAgoHINDkjPrMGgoCGAIKFCoSZGVmYXVsdC1hbGxvdy1pY21wCgoggvCxhNin4rIJ
     output:
       kind:
         description: Type of resource. Always compute#instanceList for lists of Instance

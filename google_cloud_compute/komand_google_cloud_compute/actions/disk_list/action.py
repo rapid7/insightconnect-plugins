@@ -19,6 +19,5 @@ class DiskList(insightconnect_plugin_runtime.Action):
             params.get(Input.ZONE),
             params.get(Input.FILTER),
             params.get(Input.MAXRESULTS),
-            params.get(Input.ORDERBY),
-            params.get(Input.PAGETOKEN)
+            params.get(Input.ORDERBY)
         )

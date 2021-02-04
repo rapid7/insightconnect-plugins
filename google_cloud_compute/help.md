@@ -136,9 +136,8 @@ This action retrieves a list of persistent disks contained within the specified 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |filter|string|None|False|Sets a filter expression for filtering listed resources|None|name != example-instance|
-|maxResults|integer|None|False|The maximum number of results per page that should be returned. Acceptable values are 0 to 500. Default 500|None|1|
+|maxResults|integer|None|False|The maximum number of results per page that should be returned. Acceptable values are 0 to 500. Default 500|None|500|
 |orderBy|string|None|False|Sorts list results by a certain order|None|creationTimestamp desc|
-|pageToken|string|None|False|Set pageToken to the nextPageToken returned by a previous list request to get the next page of results|None|None|
 |zone|string|None|True|The name of the zone for this request|None|us-central1-a|
 
 Example input:
@@ -146,7 +145,7 @@ Example input:
 ```
 {
   "filter": "name != example-instance",
-  "maxResults": 1,
+  "maxResults": 500,
   "orderBy": "creationTimestamp desc",
   "zone": "us-central1-a"
 }
@@ -159,7 +158,6 @@ Example input:
 |id|string|False|Unique identifier for the resource|
 |items|[]items|False|A list of disk resources|
 |kind|string|False|Type of resource|
-|nextPageToken|string|False|This token allows you to get the next page of results for list requests|
 |selfLink|string|False|Server-defined URL for this resource|
 
 Example output:
@@ -430,18 +428,16 @@ This action is used to retrieve the list of Snapshot resources contained within 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |filter|string|None|False|Sets a filter expression for filtering listed resources|None|name = example-instance|
-|maxResults|integer|None|False|The maximum number of results per page that should be returned. Acceptable values are 0 to 500. Default 500|None|1|
+|maxResults|integer|None|False|The maximum number of results per page that should be returned. Acceptable values are 0 to 500. Default 500|None|500|
 |orderBy|string|None|False|Sorts list results by a certain order|None|creationTimestamp desc|
-|pageToken|string|None|False|Set pageToken to the nextPageToken returned by a previous list request to get the next page of results|None|CkYIpsyE6vCM7QI6OwoCGAEKAiAACgIYAgoHINDkjPrMGgoCGAIKFCoSZGVmYXVsdC1hbGxvdy1pY21wCgoggvCxhNin4rIJ|
 
 Example input:
 
 ```
 {
   "filter": "name = example-instance",
-  "maxResults": 1,
-  "orderBy": "creationTimestamp desc",
-  "pageToken": "CkYIpsyE6vCM7QI6OwoCGAEKAiAACgIYAgoHINDkjPrMGgoCGAIKFCoSZGVmYXVsdC1hbGxvdy1pY21wCgoggvCxhNin4rIJ"
+  "maxResults": 500,
+  "orderBy": "creationTimestamp desc"
 }
 ```
 
@@ -648,18 +644,16 @@ This action is used to retrieve a list of persistent disks contained within the 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |filter|string|None|False|Sets a filter expression for filtering listed resources|None|name = my-firewall-1|
-|maxResults|integer|None|False|The maximum number of results per page that should be returned. Acceptable values are 0 to 500. Default 500|None|0|
+|maxResults|integer|None|False|The maximum number of results per page that should be returned. Acceptable values are 0 to 500. Default 500|None|500|
 |orderBy|string|None|False|Sorts list results by a certain order|None|creationTimestamp desc|
-|pageToken|string|None|False|Set pageToken to the nextPageToken returned by a previous list request to get the next page of results|None|CkYIpsyE6vCM7QI6OwoCGAEKAiAACgIYAgoHINDkjPrMGgoCGAIKFCoSZGVmYXVsdC1hbGxvdy1pY21wCgoggvCxhNin4rIJ|
 
 Example input:
 
 ```
 {
   "filter": "name = my-firewall-1",
-  "maxResults": 0,
-  "orderBy": "creationTimestamp desc",
-  "pageToken": "CkYIpsyE6vCM7QI6OwoCGAEKAiAACgIYAgoHINDkjPrMGgoCGAIKFCoSZGVmYXVsdC1hbGxvdy1pY21wCgoggvCxhNin4rIJ"
+  "maxResults": 500,
+  "orderBy": "creationTimestamp desc"
 }
 ```
 
@@ -670,7 +664,6 @@ Example input:
 |id|string|False|The unique identifier for the resource. This identifier is defined by the server|
 |items|[]items_firewalls|False|A list of firewall resources|
 |kind|string|False|Type of resource. Always compute#firewallList for lists of firewalls|
-|nextPageToken|string|False|This token allows you to get the next page of results for list requests|
 |selfLink|string|False|Server-defined URL for this resource|
 
 Example output:
@@ -863,9 +856,8 @@ This action is used to retrieve the list of instances contained within the speci
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |filter|string|None|False|Sets a filter expression for filtering listed resources|None|name = my-firewall-1|
-|maxResults|integer|None|False|The maximum number of results per page that should be returned. Acceptable values are 0 to 500. Default 500|None|0|
+|maxResults|integer|None|False|The maximum number of results per page that should be returned. Acceptable values are 0 to 500. Default 500|None|500|
 |orderBy|string|None|False|Sorts list results by a certain order|None|creationTimestamp desc|
-|pageToken|string|None|False|Set pageToken to the nextPageToken returned by a previous list request to get the next page of results|None|CkYIpsyE6vCM7QI6OwoCGAEKAiAACgIYAgoHINDkjPrMGgoCGAIKFCoSZGVmYXVsdC1hbGxvdy1pY21wCgoggvCxhNin4rIJ|
 |zone|string|None|True|The name of the zone for this request|None|us-central1-a|
 
 Example input:
@@ -873,9 +865,8 @@ Example input:
 ```
 {
   "filter": "name = my-firewall-1",
-  "maxResults": 0,
+  "maxResults": 500,
   "orderBy": "creationTimestamp desc",
-  "pageToken": "CkYIpsyE6vCM7QI6OwoCGAEKAiAACgIYAgoHINDkjPrMGgoCGAIKFCoSZGVmYXVsdC1hbGxvdy1pY21wCgoggvCxhNin4rIJ",
   "zone": "us-central1-a"
 }
 ```

@@ -11,14 +11,12 @@ class Input:
     FILTER = "filter"
     MAXRESULTS = "maxResults"
     ORDERBY = "orderBy"
-    PAGETOKEN = "pageToken"
     
 
 class Output:
     ID = "id"
     ITEMS = "items"
     KIND = "kind"
-    NEXTPAGETOKEN = "nextPageToken"
     SELFLINK = "selfLink"
     
 
@@ -45,12 +43,6 @@ class ListFirewallsInput(insightconnect_plugin_runtime.Input):
       "title": "OrderBy",
       "description": "Sorts list results by a certain order",
       "order": 3
-    },
-    "pageToken": {
-      "type": "string",
-      "title": "Page Token",
-      "description": "Set pageToken to the nextPageToken returned by a previous list request to get the next page of results",
-      "order": 4
     }
   }
 }
@@ -86,12 +78,6 @@ class ListFirewallsOutput(insightconnect_plugin_runtime.Output):
       "title": "Kind",
       "description": "Type of resource. Always compute#firewallList for lists of firewalls",
       "order": 1
-    },
-    "nextPageToken": {
-      "type": "string",
-      "title": "Next Page Token",
-      "description": "This token allows you to get the next page of results for list requests",
-      "order": 5
     },
     "selfLink": {
       "type": "string",
