@@ -42,4 +42,4 @@ class CheckCidr(insightconnect_plugin_runtime.Action):
         else:
             out[Output.FOUND] = False
 
-        return out
+        return insightconnect_plugin_runtime.helper.clean(out)

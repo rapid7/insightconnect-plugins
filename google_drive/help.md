@@ -148,10 +148,6 @@ This action is used to overwrites a file with new data.
 |----|----|--------|-----------|
 |file_id|string|False|Return the ID of the file created on Google Drive|
 
-Example output:
-
-```
-```
 
 #### Get File Contents
 
@@ -170,10 +166,6 @@ This action is used to get the contents of a file on Google Drive.
 |----|----|--------|-----------|
 |file|bytes|False|The file in bytes|
 
-Example output:
-
-```
-```
 
 ### Triggers
 
@@ -191,12 +183,13 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
+* 2.1.3 - Correct spelling in help.md
 * 2.1.2 - New spec and help.md format for the Extension Library
 * 2.1.1 - Fix typo in plugin spec
 * 2.1.0 - Add Download File action
 * 2.0.0 - Update to use new credential types
 * 1.2.1 - Fixed a bug that caused an error if Folder ID was left blank
-* 1.2.0 - Add the ablity to rename and force a MIME type on the overwrite action
+* 1.2.0 - Add the ability to rename and force a MIME type on the overwrite action
 * 1.1.0 - Add overwrite file action and search file action
 * 1.0.0 - Initial plugin
 
