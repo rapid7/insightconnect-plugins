@@ -25,6 +25,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|auto_referrals|boolean|True|True|Allows the plugin to follow referrals from the specified Active Directory server to other Active Directory servers|None|True|
 |host|string|None|True|Server Host, e.g. example.com|None|example.com|
 |port|integer|389|True|Port, e.g. 389|None|389|
 |use_ssl|boolean|None|True|Use SSL?|None|True|
@@ -34,10 +35,13 @@ Example input:
 
 ```
 {
+  "auto_referrals": true,
   "host": "example.com",
   "port": 389,
   "use_ssl": true,
-  "username_password": {"username":"user1", "password":"mypassword"}
+  "username_password": {
+    "username": "user1", "password": "mypassword"
+  }
 }
 ```
 
@@ -54,7 +58,7 @@ This action is used to modify the attributes of an Active Directory object.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |attribute_to_modify|string|None|True|The name of the attribute to modify|None|postalCode|
-|attribute_value|string|None|True|The value of the attribute|None|2114|
+|attribute_value|string|None|True|The value of the attribute|None|02114|
 |distinguished_name|string|None|True|The distinguished name of the object to modify|None|CN=user,OU=domain_users,DC=example,DC=com|
 
 Example input:
@@ -62,7 +66,7 @@ Example input:
 ```
 {
   "attribute_to_modify": "postalCode",
-  "attribute_value": 1100,
+  "attribute_value": "02114",
   "distinguished_name": "CN=user,OU=domain_users,DC=example,DC=com"
 }
 ```
@@ -139,8 +143,10 @@ Example input:
 
 ```
 {
-  "account_disabled": "true",
-  "additional_parameters": {"telephoneNumber":"(617)555-1234"},
+  "account_disabled": true,
+  "additional_parameters": {
+    "telephoneNumber": "(617)555-1234"
+  },
   "domain_name": "example.com",
   "first_name": "John",
   "last_name": "Doe",
@@ -471,7 +477,6 @@ For example `CN=Robert (Bob) Smith,OU=domain_users,DC=rapid7,DC=com` is supporte
 but `CN=Robert Bob) Smith,OU=domain_users,DC=rapid7,DC=com` is not.
 
 All inputs to the query action must be correctly escaped.
-  
 
 If you cannot connect, ensure that network access is available, and view the logs to identify any auth errors.
 
@@ -486,6 +491,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 5.0.1 - Removed trailing spaces | Move duplicate code to library
 * 5.0.0 - Add new input to connection to allow for Auto Referrals | A number of bug fixes
 * 4.0.3 - Fix issue with connection documentation incorrectly stating a protocol prefix is required
 * 4.0.2 - Fix issue where some host names were being incorrectly parsed

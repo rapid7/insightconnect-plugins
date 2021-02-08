@@ -285,7 +285,7 @@ actions:
         description: The value of the attribute
         type: string
         required: true
-        example: 02114
+        example: "02114"
     output:
       success:
         title: Success
