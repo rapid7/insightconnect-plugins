@@ -10,6 +10,8 @@ class Connection(komand.Connection):
 
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
+        self.ssl = None
+        self.conn = None
 
     def connect(self, params):
         """
@@ -26,30 +28,32 @@ class Connection(komand.Connection):
         self.logger.info(f'Connecting to {host}:{port}')
 
         server = ldap3.Server(
-                host=host,
-                port=port,
-                use_ssl=self.ssl,
-                allowed_referral_hosts=[("*", True)],
-                get_info=ldap3.ALL)
+            host=host,
+            port=port,
+            use_ssl=self.ssl,
+            allowed_referral_hosts=[("*", True)],
+            get_info=ldap3.ALL
+        )
 
         try:
-            conn = ldap3.Connection(server=server,
-                                    user=user_name,
-                                    password=password,
-                                    auto_bind=True,
-                                    auto_referrals=referrals,
-                                    authentication=ldap3.NTLM)
+            conn = ldap3.Connection(
+                server=server,
+                user=user_name,
+                password=password,
+                auto_bind=True,
+                auto_referrals=referrals,
+                authentication=ldap3.NTLM
+            )
         except exceptions.LDAPBindError as e:
-            self.logger.error(f'ldap3 returned the following error {e}')
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD, data=e)
         except exceptions.LDAPAuthorizationDeniedResult as e:
-            self.logger.error(f'ldap3 returned the following error {e}')
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED)
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED, data=e)
         except exceptions.LDAPSocketOpenError as e:
-            self.logger.error(f'ldap3 returned the following error {e}')
             raise ConnectionTestException(
-                preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
-        except:
+                preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE,
+                data=e
+            )
+        except exceptions.LDAPException:
             # An exception here is likely caused because the ldap server dose use NTLM
             # A basic auth connection will be tried instead
             self.logger.info("Failed to connect to the server with NTLM, attempting to connect with basic auth")
@@ -60,27 +64,20 @@ class Connection(komand.Connection):
                                         auto_referrals=referrals,
                                         auto_bind=True)
             except exceptions.LDAPBindError as e:
-                self.logger.error(f'ldap3 returned the following error {e}')
                 raise ConnectionTestException(
-                    preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
+                    preset=ConnectionTestException.Preset.USERNAME_PASSWORD,
+                    data=e
+                )
             except exceptions.LDAPAuthorizationDeniedResult as e:
-                self.logger.error(f'ldap3 returned the following error {e}')
-                raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED)
+                raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED, data=e)
             except exceptions.LDAPSocketOpenError as e:
-                self.logger.error(f'ldap3 returned the following error {e}')
                 raise ConnectionTestException(
-                    preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
+                    preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE,
+                    data=e
+                )
 
         self.logger.info("Connected!")
         self.conn = conn
-
-    def test(self):
-        try:
-            test = self.conn.extend.standard.who_am_i()
-        except:
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED)
-
-        return {'connection': 'successful'}
 
     def host_formatter(self, host: str) -> str:
         """
@@ -108,3 +105,14 @@ class Connection(komand.Connection):
         if backslash != -1:
             host = host[:backslash]
         return host
+
+    def test(self):
+        try:
+            self.conn.extend.standard.who_am_i()
+        except exceptions.LDAPExtensionError as e:
+            raise ConnectionTestException(
+                preset=ConnectionTestException.Preset.UNAUTHORIZED,
+                data=e
+            )
+
+        return {'connection': 'successful'}

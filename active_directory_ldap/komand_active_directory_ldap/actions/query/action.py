@@ -10,10 +10,10 @@ class Query(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='query',
-                description='Run a LDAP query',
-                input=QueryInput(),
-                output=QueryOutput())
+            name='query',
+            description='Run a LDAP query',
+            input=QueryInput(),
+            output=QueryOutput())
 
     def run(self, params={}):
         formatter = ADUtils()
@@ -30,10 +30,11 @@ class Query(komand.Action):
         escaped_query = formatter.escape_brackets_for_query(query, pairs)
         self.logger.info(f"Escaped query: {escaped_query}")
 
-        conn.search(search_base=params.get('search_base'),
-                    search_filter=escaped_query,
-                    attributes=[ldap3.ALL_ATTRIBUTES, ldap3.ALL_OPERATIONAL_ATTRIBUTES]
-                    )
+        conn.search(
+            search_base=params.get('search_base'),
+            search_filter=escaped_query,
+            attributes=[ldap3.ALL_ATTRIBUTES, ldap3.ALL_OPERATIONAL_ATTRIBUTES]
+        )
 
         result_list_json = conn.response_to_json()
         result_list_object = json.loads(result_list_json)
