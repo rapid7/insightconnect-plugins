@@ -315,7 +315,7 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
         "lastIpToMgmt": {
           "type": "string",
           "title": "Last IP to Management Console",
-          "description": "The last ip used to connect to the Management console",
+          "description": "The last IP used to connect to the Management console",
           "order": 63
         },
         "lastLoggedInUserName": {
@@ -618,13 +618,13 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
             "gatewayIp": {
               "type": "string",
               "title": "Gateway IP",
-              "description": "The default gateway ip",
+              "description": "The default gateway IP",
               "order": 5
             },
             "gatewayMacAddress": {
               "type": "string",
-              "title": "Gateway Mac Address",
-              "description": "The default gateway mac address",
+              "title": "Gateway MAC Address",
+              "description": "The default gateway MAC address",
               "order": 1
             },
             "id": {
@@ -698,13 +698,13 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
         "gatewayIp": {
           "type": "string",
           "title": "Gateway IP",
-          "description": "The default gateway ip",
+          "description": "The default gateway IP",
           "order": 5
         },
         "gatewayMacAddress": {
           "type": "string",
-          "title": "Gateway Mac Address",
-          "description": "The default gateway mac address",
+          "title": "Gateway MAC Address",
+          "description": "The default gateway MAC address",
           "order": 1
         },
         "id": {
