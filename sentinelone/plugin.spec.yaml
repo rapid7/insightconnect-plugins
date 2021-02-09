@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 5.0.1
+version: 5.1.0
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
@@ -476,6 +476,79 @@ types:
       type: boolean
       description: File malicious content
       required: false
+  location:
+    name:
+      title: Name
+      description: Location name
+      type: string
+      required: false
+    scope:
+      title: Scope
+      description: Location scope
+      type: string
+      required: false
+    id:
+      title: ID
+      description: Location ID
+      type: string
+      required: false
+  active_directory:
+    computerMemberOf:
+      title: Computer Member Of
+      description: Computer member of
+      type: '[]string'
+      required: false
+    lastUserDistinguishedName:
+      title: Last User Distinguished Name
+      description: Last user distinguished name
+      type: string
+      required: false
+    lastUserMemberOf:
+      title: Last User Member Of
+      description: Last user member of
+      type: '[]string'
+      required: false
+    computerDistinguishedName:
+      title: Computer Distinguished Name
+      description: Computer distinguished name
+      type: string
+      required: false
+  network_interfaces:
+    gatewayMacAddress:
+      title: Gateway MAC Address
+      description: The default gateway MAC address
+      type: string
+      required: false
+    inet6:
+      title: IPv6 Addresses
+      description: IPv6 addresses
+      type: '[]string'
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: string
+      required: false
+    physical:
+      title: Physical
+      description: Interface's MAC address
+      type: string
+      required: false
+    gatewayIp:
+      title: Gateway IP
+      description: The default gateway IP
+      type: string
+      required: false
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+    inet:
+      title: IPv4 Addresses
+      description: IPv4 addresses
+      type: '[]string'
+      required: false
   agent_data:
     scanFinishedAt:
       title: Scan Finished At
@@ -560,12 +633,12 @@ types:
     activeDirectory:
       title: Active Directory
       description: Active Directory data
-      type: object
+      type: active_directory
       required: false
     networkInterfaces:
       title: Network Interfaces
       description: Device's network interfaces
-      type: "[]object"
+      type: "[]network_interfaces"
       required: false
     rangerStatus:
       title: Ranger Status
@@ -660,7 +733,7 @@ types:
     locations:
       title: Locations
       description: A list of locations reported by the Agent
-      type: "[]object"
+      type: "[]location"
       required: false
     domain:
       title: Domain
@@ -786,6 +859,51 @@ types:
       title: Network Status
       description: Agent's network connectivity status
       type: string
+      required: false
+    lastIpToMgmt:
+      title: Last IP to Management Console
+      description: The last IP used to connect to the Management console
+      type: string
+      required: false
+    networkQuarantineEnabled:
+      title: Network Quarantine Enabled
+      description: Network quarantine enabled
+      type: boolean
+      required: false
+    remoteProfilingState:
+      title: Remote Profiling State
+      description: Agent remote profiling state
+      type: string
+      required: false
+    cloudProviders:
+      title: Cloud Providers
+      description: Cloud providers for this agent
+      type: object
+      required: false
+    operationalState:
+      title: Operational State
+      description: Agent operational state
+      type: string
+      required: false
+    remoteProfilingStateExpiration:
+      title: Remote Profiling State Expiration
+      description: Agent remote profiling state expiration in seconds
+      type: string
+      required: false
+    operationalStateExpiration:
+      title: Operational State Expiration
+      description: Agent operational state expiration
+      type: string
+      required: false
+    locationEnabled:
+      title: Location Enabled
+      description: Location enabled
+      type: boolean
+      required: false
+    firewallEnabled:
+      title: Firewall Enabled
+      description: Firewall enabled
+      type: boolean
       required: false
   quarantine_response:
     errors:
@@ -1042,7 +1160,7 @@ actions:
         required: false
         example: ["800000000000000008"]
       created_at_lt:
-        title: Less Then Date
+        title: Less than Date
         description: Return activities created before this date in ISO-8601
         type: string
         required: false
@@ -1054,7 +1172,7 @@ actions:
         required: false
         example: "2020-12-20T18:49:26.257525Z"
       created_at_gt:
-        title: Greater Then Date
+        title: Greater than Date
         description: Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z
         type: string
         required: false
@@ -1320,6 +1438,17 @@ actions:
         example: true
         default: true
         required: true
+      operational_state:
+        title: Operational State
+        description: Agent operational state
+        type: string
+        example: na
+        enum:
+        - na
+        - fully_disabled
+        - partially_disabled
+        - disabled_error
+        required: false
     output:
       agents:
         title: Agents
@@ -1343,6 +1472,17 @@ actions:
         example: true
         default: true
         required: true
+      operational_state:
+        title: Operational State
+        description: Agent operational state
+        type: string
+        example: na
+        enum:
+        - na
+        - fully_disabled
+        - partially_disabled
+        - disabled_error
+        required: false
     output:
       agent:
         title: Agent
