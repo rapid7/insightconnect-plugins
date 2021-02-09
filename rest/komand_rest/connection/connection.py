@@ -83,7 +83,7 @@ class Connection(komand.Connection):
         if self.authentication_type == "Rapid7 Insight":
             path = "/validate"
         elif self.authentication_type == "Pendo":
-            path = "/api/v1/report"
+            path = "/api/v1/feature"
         elif self.authentication_type == "OpsGenie":
             path = "/v2/users"
         Common.call_api(self.base_url, path, self.default_headers, self.ssl_verify, auth=self.auth)

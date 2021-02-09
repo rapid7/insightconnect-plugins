@@ -45,6 +45,23 @@ Example input:
 }
 ```
 
+Example input (with Custom header auth):
+
+```
+{
+  "authentication_type": "Custom",
+  "base_url": "https://httpbin.org/",
+  "secret": {
+    "secretKey": "ABCDEF123456"
+  }
+  "default_headers": {
+    "User-Agent": "Rapid7 InsightConnect",
+    "API-Token": "CUSTOM_SECRET_INPUT"
+  },
+  "ssl_verify": true
+}
+```
+
 ## Technical Details
 
 ### Actions
