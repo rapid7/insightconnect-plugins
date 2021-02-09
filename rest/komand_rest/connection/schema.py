@@ -49,19 +49,19 @@ class ConnectionSchema(komand.Input):
     "default_headers": {
       "type": "object",
       "title": "Default Headers",
-      "description": "Custom headers to include in all requests associated with this connection. Use \\"CUSTOM_SECRET_INPUT\\" instead of secret key, and provide your secret key in Secret Key input field",
+      "description": "Custom headers to include in all requests associated with this connection. To pass a encrypted key as a header value, enter your key in the Secret Key input and set the value of the header in this field to \\"CUSTOM_SECRET_INPUT\\" instead of secret key. The plugin will replace \\"CUSTOM_SECRET_INPUT\\" with the encrypted key stored in the Secret Key input when the plugin runs.",
       "order": 4
     },
     "secret": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Secret Key",
-      "description": "Credential secret key. Provide if you choose Bearer Token, Rapid7 Insight, OpsGenie, Pendo or Custom authentication type",
+      "description": "Credential secret key. Provide if you choose Bearer Token, Rapid7 Insight, OpsGenie, Pendo or using \\"CUSTOM_SECRET_INPUT\\" in the Default Headers field for Custom authentication type",
       "order": 3
     },
     "ssl_verify": {
       "type": "boolean",
       "title": "SSL Verify",
-      "description": "Verify SSL certificate",
+      "description": "Verify TLS/SSL certificate",
       "default": true,
       "order": 5
     }

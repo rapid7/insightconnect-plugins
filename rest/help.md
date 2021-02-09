@@ -24,9 +24,9 @@ The connection configuration accepts the following parameters:
 |authentication_type|string|Basic Auth|False|Type of authentication|['Basic Auth', 'Digest Auth', 'Bearer Token', 'Rapid7 Insight', 'OpsGenie', 'Pendo', 'Custom']|Basic Auth|
 |base_url|string|None|True|Base URL e.g. https://httpbin.org|None|https://httpbin.org/|
 |basic_auth_credentials|credential_username_password|None|False|Username and password. Provide if you choose Basic Auth or Digest Auth authentication type|None|{"username": "user@example.com", "password": "mypassword"}|
-|default_headers|object|None|False|Custom headers to include in all requests associated with this connection. Use "CUSTOM_SECRET_INPUT" instead of secret key, and provide your secret key in Secret Key input field|None|{ "User-Agent": "Rapid7 InsightConnect", "x-api-key": "CUSTOM_SECRET_INPUT" }|
-|secret|credential_secret_key|None|False|Credential secret key. Provide if you choose Bearer Token, Rapid7 Insight, OpsGenie, Pendo or Custom authentication type|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|ssl_verify|boolean|True|True|Verify SSL certificate|None|True|
+|default_headers|object|None|False|Custom headers to include in all requests associated with this connection. To pass a encrypted key as a header value, enter your key in the Secret Key input and set the value of the header in this field to "CUSTOM_SECRET_INPUT" instead of secret key. The plugin will replace "CUSTOM_SECRET_INPUT" with the encrypted key stored in the Secret Key input when the plugin runs.|None|{ "User-Agent": "Rapid7 InsightConnect", "Custom-Key-Header": "CUSTOM_SECRET_INPUT" }|
+|secret|credential_secret_key|None|False|Credential secret key. Provide if you choose Bearer Token, Rapid7 Insight, OpsGenie, Pendo or using "CUSTOM_SECRET_INPUT" in the Default Headers field for Custom authentication type|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|ssl_verify|boolean|True|True|Verify TLS/SSL certificate|None|True|
 
 Example input:
 

@@ -35,17 +35,16 @@ class Connection(komand.Connection):
                 password = params.get(Input.BASIC_AUTH_CREDENTIALS).get('password')
                 if not username or not password:
                     raise PluginException(
-                        cause="Missing credentials.",
-                        assistance="Chosen authentication type required username and password."
-                                   " Please check your connection and provide required data."
+                        cause="Basic Auth authentication selected without providing username and password.",
+                        assistance="The authentication type requires a username and password."
+                                   " Please complete the connection with a username and password or change the authentication type."
                     )
             else:
                 secret_key = params.get(Input.SECRET).get("secretKey")
                 if not secret_key:
                     raise PluginException(
-                        cause="Missing credentials.",
-                        assistance="Chosen authentication type required API Key."
-                                   " Please check your connection and provide required data."
+                        cause="An authentication type was selected that requires a secret key.",
+                        assistance="Please complete the connection with a secret key or change the authentication type."
                     )
 
                 if self.authentication_type == "Custom" and self.CUSTOM_SECRET_INPUT not in default_headers.values():
