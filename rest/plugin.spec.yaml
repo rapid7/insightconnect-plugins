@@ -54,10 +54,10 @@ connection:
     example: 9de5069c5afe602b2ea0a04b66beb2c0
   default_headers:
     title: Default Headers
-    description: Custom headers. Use "CUSTOM_SECRET_INPUT" instead of secret key, and provide your secret key in Secret Key input field
+    description: Custom headers to include in all requests associated with this connection. Use "CUSTOM_SECRET_INPUT" instead of secret key, and provide your secret key in Secret Key input field
     type: object
     required: false
-    example: '{ "User-Agent": "CUSTOM_SECRET_INPUT" }'
+    example: '{ "User-Agent": "Rapid7 InsightConnect", "x-api-key": "CUSTOM_SECRET_INPUT" }'
   ssl_verify:
     title: SSL Verify
     type: boolean

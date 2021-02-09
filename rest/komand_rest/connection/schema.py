@@ -49,7 +49,7 @@ class ConnectionSchema(komand.Input):
     "default_headers": {
       "type": "object",
       "title": "Default Headers",
-      "description": "Custom headers. Use \\"CUSTOM_SECRET_INPUT\\" instead of secret key, and provide your secret key in Secret Key input field",
+      "description": "Custom headers to include in all requests associated with this connection. Use \\"CUSTOM_SECRET_INPUT\\" instead of secret key, and provide your secret key in Secret Key input field",
       "order": 4
     },
     "secret": {

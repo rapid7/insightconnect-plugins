@@ -51,7 +51,7 @@ class Connection(komand.Connection):
                 if self.authentication_type == "Custom" and self.CUSTOM_SECRET_INPUT not in default_headers.values():
                     raise PluginException(
                         cause="Missing credentials.",
-                        assistance="Chosen authentication type required \"CUSTOM_SECRET_INPUT\" instead of Secret Key."
+                        assistance="Chosen authentication type required \"CUSTOM_SECRET_INPUT\" in headers."
                                    " Please check your custom headers and try again."
                     )
 
