@@ -23,7 +23,7 @@ class Get(komand.Action):
                                          headers)
         url = parse.urljoin(self.connection.base_url, route)
         response = requests.get(url, headers=req_headers,
-                                verify=self.connection.ssl_verify)
+                                verify=self.connection.ssl_verify, auth=self.connection.auth)
         body_object = {}
         try:
             body_object = response.json()

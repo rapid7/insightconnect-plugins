@@ -21,15 +21,18 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|authentication_type|string|Basic Auth|False|Type of authentication|['Basic Auth', 'Digest Auth', 'Bearer Token', 'Rapid7 Insight', 'OpsGenie', 'Pendo', 'Custom']|Basic Auth|
 |base_url|string|None|True|Base URL e.g. https://httpbin.org|None|https://httpbin.org/|
-|basic_auth_credentials|credential_username_password|None|False||None|{"username": "user@example.com", "password": "mypassword"}|
-|default_headers|object|None|False|Default headers to include in all requests associated with this connection e.g. { "User-Agent": "Rapid7 InsightConnect" }|None|{ "User-Agent": "Rapid7 InsightConnect"}|
+|basic_auth_credentials|credential_username_password|None|False|Username and password. Provide if you choose Basic Auth or Digest Auth authentication type|None|{"username": "user@example.com", "password": "mypassword"}|
+|default_headers|object|None|False|Custom headers. Use "CUSTOM_SECRET_INPUT" instead of secret key, and provide your secret key in Secret Key input field|None|{ "User-Agent": "CUSTOM_SECRET_INPUT" }|
+|secret|credential_secret_key|None|False|Credential secret key. Provide if you choose Bearer Token, Rapid7 Insight, OpsGenie, Pendo or Custom authentication type|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |ssl_verify|boolean|True|True|Verify SSL certificate|None|True|
 
 Example input:
 
 ```
 {
+  "authentication_type": "Basic Auth",
   "base_url": "https://httpbin.org/",
   "basic_auth_credentials": {
     "username": "user@example.com",
@@ -409,6 +412,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 3.1.0 - Support multiple authentications
 * 3.0.5 - Fix issue where a null body return on a successful request would crash the plugin
 * 3.0.4 - Update REST plugin title to HTTP Requests
 * 3.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/rest)

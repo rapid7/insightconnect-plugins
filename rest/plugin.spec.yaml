@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rest
 title: HTTP Requests
 description: The HTTP Requests plugin to make it easy to integrate with RESTful services
-version: 3.0.5
+version: 3.1.0
 vendor: rapid7
 support: community
 status: []
@@ -31,13 +31,33 @@ connection:
     type: string
     required: true
     example: https://httpbin.org/
+  authentication_type:
+    title: Authentication Type
+    description: Type of authentication
+    type: string
+    required: false
+    enum:
+      - Basic Auth
+      - Digest Auth
+      - Bearer Token
+      - Rapid7 Insight
+      - OpsGenie
+      - Pendo
+      - Custom
+    default: Basic Auth
+    example: Basic Auth
+  secret:
+    title: Secret Key
+    description: Credential secret key. Provide if you choose Bearer Token, Rapid7 Insight, OpsGenie, Pendo or Custom authentication type
+    type: credential_secret_key
+    required: false
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
   default_headers:
     title: Default Headers
-    description: 'Default headers to include in all requests associated with this
-      connection e.g. { "User-Agent": "Rapid7 InsightConnect" }'
+    description: Custom headers. Use "CUSTOM_SECRET_INPUT" instead of secret key, and provide your secret key in Secret Key input field
     type: object
     required: false
-    example: '{ "User-Agent": "Rapid7 InsightConnect"}'
+    example: '{ "User-Agent": "CUSTOM_SECRET_INPUT" }'
   ssl_verify:
     title: SSL Verify
     type: boolean
@@ -47,6 +67,7 @@ connection:
     example: true
   basic_auth_credentials:
     title: Basic Auth Credentials
+    description: Username and password. Provide if you choose Basic Auth or Digest Auth authentication type
     type: credential_username_password
     required: false
     example: '{"username": "user@example.com", "password": "mypassword"}'
