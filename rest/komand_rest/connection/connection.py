@@ -47,13 +47,6 @@ class Connection(komand.Connection):
                         assistance="Please complete the connection with a secret key or change the authentication type."
                     )
 
-                if self.authentication_type == "Custom" and self.CUSTOM_SECRET_INPUT not in default_headers.values():
-                    raise PluginException(
-                        cause="Missing credentials.",
-                        assistance="Chosen authentication type required \"CUSTOM_SECRET_INPUT\" in headers."
-                                   " Please check your custom headers and try again."
-                    )
-
             if self.authentication_type == "Basic Auth":
                 self.auth = HTTPBasicAuth(username, password)
             elif self.authentication_type == "Digest Auth":
