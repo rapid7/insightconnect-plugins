@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_pan_os
 title: Palo Alto Firewall
 description: Manage Palo Alto Networks firewall devices
-version: 7.0.0
+version: 6.1.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -902,12 +902,12 @@ actions:
         description: Was operation successful
         type: boolean
         required: true
-  add_address_objects_to_group:
-    title: Add Address Objects to Group
-    description: Adds an address objects to an address group. Supports IPv6
+  add_address_object_to_group:
+    title: Add Address Object to Group
+    description: Adds address objects to an address group. Supports IPv6
     input:
-      address_objects:
-        title: Address Objects
+      address_object:
+        title: Address Object
         description: The names of the address objects to add
         type: "[]string"
         example: ["198.51.100.100", "198.51.100.101", "example.com"]
@@ -949,7 +949,7 @@ actions:
         required: true
   get_addresses_from_group:
     title: Get Addresses from Group
-    description: Get an addresses from an address group
+    description: Get addresses from an address group
     input:
       group:
         title: Group

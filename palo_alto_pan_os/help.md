@@ -46,15 +46,15 @@ Example input:
 
 ### Actions
 
-#### Add Address Objects to Group
+#### Add Address Object to Group
 
-This action adds an address objects to an address group. Supports IPv6.
+This action adds address objects to an address group. Supports IPv6.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address_objects|[]string|None|True|The names of the address objects to add|None|["198.51.100.100", "198.51.100.101", "example.com"]|
+|address_object|[]string|None|True|The names of the address objects to add|None|["198.51.100.100", "198.51.100.101", "example.com"]|
 |device_name|string|localhost.localdomain|True|Device name|None|localhost.localdomain|
 |group|string|None|True|Group name|None|InsightConnect Block List|
 |virtual_system|string|vsys1|True|Virtual system name|None|vsys1|
@@ -63,7 +63,7 @@ Example input:
 
 ```
 {
-  "address_objects": [
+  "address_object": [
     "198.51.100.100",
     "198.51.100.101",
     "example.com"
@@ -99,7 +99,7 @@ Example output:
 
 #### Get Addresses from Group
 
-This action is used to get an addresses from an address group.
+This action is used to get addresses from an address group.
 
 ##### Input
 
@@ -1057,7 +1057,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
-* 7.0.0 - New action Get Addresses from Group | Rename Add Address Object to Group action to Add Address Objects to Group and support adding a list of address objects
+* 6.1.0 - New action `Get Addresses from Group` | Support adding a list of address objects in `Add Address Object to Group` action
 * 6.0.4 - Update error handling in Add Address Object to Group, Check if Address in Group, Get Policy and Remove Address Object from Group actions
 * 6.0.3 - Add Input and Output examples
 * 6.0.2 - Fix issue where Set Network Object did not support IPv6

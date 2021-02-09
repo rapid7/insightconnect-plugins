@@ -1,20 +1,20 @@
 import komand
-from .schema import AddAddressObjectsToGroupInput, AddAddressObjectsToGroupOutput, Input, Output, Component
+from .schema import AddAddressObjectToGroupInput, AddAddressObjectToGroupOutput, Input, Output, Component
 # Custom imports below
 from komand.exceptions import PluginException
 
 
-class AddAddressObjectsToGroup(komand.Action):
+class AddAddressObjectToGroup(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='add_address_objects_to_group',
+                name='add_address_object_to_group',
                 description=Component.DESCRIPTION,
-                input=AddAddressObjectsToGroupInput(),
-                output=AddAddressObjectsToGroupOutput())
+                input=AddAddressObjectToGroupInput(),
+                output=AddAddressObjectToGroupOutput())
 
     def run(self, params={}):
-        new_address_objects = params.get(Input.ADDRESS_OBJECTS)
+        new_address_objects = params.get(Input.ADDRESS_OBJECT)
         group_name = params.get(Input.GROUP)
         device_name = params.get(Input.DEVICE_NAME)
         virtual_system = params.get(Input.VIRTUAL_SYSTEM)
@@ -27,8 +27,7 @@ class AddAddressObjectsToGroup(komand.Action):
         )
 
         try:
-            address_objects = (response.get("response").get("result").get("entry").get("static").get("member"))
-
+            address_objects = response.get("response").get("result").get("entry").get("static").get("member")
         except AttributeError:
             raise PluginException(
                 cause="PAN OS returned an unexpected response.",
@@ -40,10 +39,19 @@ class AddAddressObjectsToGroup(komand.Action):
         # We got the group, now pull out all the address object names
         names = []
         for name in address_objects:
-            if type(name) == str:
+            if isinstance(name, str):
                 names.append(name)
             else:
-                names.append(name.get("#text"))
+                try:
+                    names.append(name.get("#text"))
+                except AttributeError:
+                    raise PluginException(
+                        cause="PAN OS returned an unexpected response.",
+                        assistance=f"Could not get the address object name. Check the group name, virtual system "
+                                   f"name, and device name and try again.\nDevice name: {device_name}\nVirtual "
+                                   f"system: {virtual_system}\n",
+                        data=name
+                    )
 
         # Append the address_objects
         for name in new_address_objects:

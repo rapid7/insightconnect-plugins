@@ -4,11 +4,11 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Adds an address objects to an address group. Supports IPv6"
+    DESCRIPTION = "Adds address objects to an address group. Supports IPv6"
 
 
 class Input:
-    ADDRESS_OBJECTS = "address_objects"
+    ADDRESS_OBJECT = "address_object"
     DEVICE_NAME = "device_name"
     GROUP = "group"
     VIRTUAL_SYSTEM = "virtual_system"
@@ -19,15 +19,15 @@ class Output:
     SUCCESS = "success"
     
 
-class AddAddressObjectsToGroupInput(komand.Input):
+class AddAddressObjectToGroupInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "address_objects": {
+    "address_object": {
       "type": "array",
-      "title": "Address Objects",
+      "title": "Address Object",
       "description": "The names of the address objects to add",
       "items": {
         "type": "string"
@@ -56,7 +56,7 @@ class AddAddressObjectsToGroupInput(komand.Input):
     }
   },
   "required": [
-    "address_objects",
+    "address_object",
     "device_name",
     "group",
     "virtual_system"
@@ -68,7 +68,7 @@ class AddAddressObjectsToGroupInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class AddAddressObjectsToGroupOutput(komand.Output):
+class AddAddressObjectToGroupOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get an addresses from an address group"
+    DESCRIPTION = "Get addresses from an address group"
 
 
 class Input:

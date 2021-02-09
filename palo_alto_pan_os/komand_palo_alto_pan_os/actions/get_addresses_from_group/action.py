@@ -48,7 +48,7 @@ class GetAddressesFromGroup(komand.Action):
                 object_name=object_name
             )
             try:
-                address_object = (response.get("response").get("result").get("entry"))
+                address_object = response.get("response").get("result").get("entry")
             except AttributeError:
                 raise PluginException(
                     cause="PAN OS returned an unexpected response.",
