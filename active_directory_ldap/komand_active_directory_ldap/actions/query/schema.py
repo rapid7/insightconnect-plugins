@@ -8,11 +8,13 @@ class Component:
 
 
 class Input:
+    ATTRIBUTES = "attributes"
     SEARCH_BASE = "search_base"
     SEARCH_FILTER = "search_filter"
     
 
 class Output:
+    COUNT = "count"
     RESULTS = "results"
     
 
@@ -22,6 +24,15 @@ class QueryInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "attributes": {
+      "type": "array",
+      "title": "Attributes",
+      "description": "Attributes to search. If empty return all attributes",
+      "items": {
+        "type": "string"
+      },
+      "order": 3
+    },
     "search_base": {
       "type": "string",
       "title": "Search Base",
@@ -52,6 +63,12 @@ class QueryOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "count": {
+      "type": "integer",
+      "title": "Count",
+      "description": "Number of results",
+      "order": 2
+    },
     "results": {
       "type": "array",
       "title": "Results",
