@@ -412,7 +412,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
-* 3.1.0 - Support multiple authentications
+* 3.1.0 - Support Digest Auth, Bearer Token, a method to encrypt a secret key in custom headers, and built-in authentication for Insight platform, Pendo and OpsGenie
 * 3.0.5 - Fix issue where a null body return on a successful request would crash the plugin
 * 3.0.4 - Update REST plugin title to HTTP Requests
 * 3.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/rest)
