@@ -581,6 +581,21 @@ Example input:
 }
 ```
 
+```
+{
+  "element": "<list><member>example.com</member></list>",
+  "xpath": "/config/devices/entry/vsys/entry/profiles/custom-url-category/"
+  "/config/devices/entry[@name=‘localhost.localdomain’]/vsys/entry[@name=‘vsys1’]/profiles/custom-url-category/entry[@name='RULE NAME']/list"
+}
+```
+
+```
+{
+  "element": "<disabled>no</disabled>",
+  "xpath": "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='RULE NAME']/disabled"
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -1057,7 +1072,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
-* 6.1.0 - New action `Get Addresses from Group` | Support adding a list of address objects in `Add Address Object to Group` action
+* 6.1.0 - Improve error handling for xpath elements and paths in `pa_os_request.py` | New action `Get Addresses from Group` | Support adding a list of address objects in `Add Address Object to Group` action
 * 6.0.4 - Update error handling in Add Address Object to Group, Check if Address in Group, Get Policy and Remove Address Object from Group actions
 * 6.0.3 - Add Input and Output examples
 * 6.0.2 - Fix issue where Set Network Object did not support IPv6
