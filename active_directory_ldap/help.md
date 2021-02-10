@@ -40,7 +40,8 @@ Example input:
   "port": 389,
   "use_ssl": true,
   "username_password": {
-    "username": "user1", "password": "mypassword"
+    "username": "user1",
+    "password": "mypassword"
   }
 }
 ```

@@ -18,7 +18,7 @@ class Query(komand.Action):
     def run(self, params={}):
         formatter = ADUtils()
         conn = self.connection.conn
-        query = params.get('search_filter')
+        query = params.get(Input.SEARCH_FILTER)
 
         query = query.replace("\\>=", ">=")
         query = query.replace("\\<=", "<=")
@@ -35,7 +35,7 @@ class Query(komand.Action):
             attributes = [ldap3.ALL_ATTRIBUTES, ldap3.ALL_OPERATIONAL_ATTRIBUTES]
 
         conn.search(
-            search_base=params.get('search_base'),
+            search_base=params.get(Input.SEARCH_BASE),
             search_filter=escaped_query,
             attributes=attributes
         )
