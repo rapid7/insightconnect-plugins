@@ -329,8 +329,8 @@ This action is used to create a user account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|email|string|None|True|Email|None|user1@example.com|
-|notify|boolean|False|True|Notify if true|[True, False]|False|
+|email|string|None|True|Email|None|user@example.com|
+|notify|boolean|False|True|Notify if true|[True, False]|True|
 |password|string|None|False|Password|None|mypassword|
 |username|string|None|False|Username|None|user1|
 
@@ -338,8 +338,8 @@ Example input:
 
 ```
 {
-  "email": "user1@example.com",
-  "notify": false,
+  "email": "user@example.com",
+  "notify": true,
   "password": "mypassword",
   "username": "user1"
 }
@@ -425,7 +425,7 @@ Example output for on-premise server:
 {
   "users": [{
       "name": "mrinehart",
-      "email_address": "user1@example.com",
+      "email_address": "userexample.com",
       "display_name": "User1",
       "active": true
   }]
@@ -439,7 +439,7 @@ Example output for cloud server:
   "users": [{
     "display_name": "user1",
     "active": true,
-    "email_address": "user1@example.com",
+    "email_address": "user@example.com",
     "account_id": "5ebaff48acdf9c0b917dac88"
   }]
 }
@@ -454,7 +454,7 @@ Example output:
       "account_id": "5ebaff48acdf9c0b917dac88",
       "active": true,
       "display_name": "user1",
-      "email_address": "user1@example.com"
+      "email_address": "user@example.com"
     }
   ]
 }
@@ -502,14 +502,14 @@ This action is used to retrieve an issue.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|get_attachments|boolean|False|False|Get attachments from issue|None|False|
+|get_attachments|boolean|False|False|Get attachments from issue|None|True|
 |id|string|None|True|Issue ID|None|TEST-1|
 
 Example input:
 
 ```
 {
-  "get_attachments": false,
+  "get_attachments": true,
   "id": "TEST-1"
 }
 ```
@@ -638,7 +638,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "4ac123f3f8412345a10cbaa0",
-              "emailAddress": "user1@example.com",
+              "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -655,7 +655,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "4ac123f3f8412345a10cbaa0",
-              "emailAddress": "user1@example.com",
+              "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -691,7 +691,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "4ac123f3f8412345a10cbaa0",
-                      "emailAddress": "user1@example.com",
+                      "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
@@ -708,7 +708,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "4ac123f3f8412345a10cbaa0",
-                      "emailAddress": "user1@example.com",
+                      "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
@@ -773,7 +773,7 @@ Example output:
       "id": "10000",
       "author": {
           "name": "admin",
-          "email_address": "user1@example.com",
+          "email_address": "user@example.com",
           "display_name": "User1",
           "active": true
       },
@@ -783,7 +783,7 @@ Example output:
           "name": "admin",
           "key": "admin",
           "accountId": "4ac123f3f8412345a10cbaa0",
-          "emailAddress": "user1@example.com",
+          "emailAddress": "user@example.com",
           "avatarUrls": {
               "48x48": "",
               "24x24": "",
@@ -813,7 +813,7 @@ For `fields` examples, see https://developer.atlassian.com/server/jira/platform/
 |description|string|None|False|Description field on the issue|None|Update ticket with additional Jira information for others teams wanting to leverage InsightConnect|
 |fields|object|None|False|An object of fields and values to change|None|{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }|
 |id|string|None|True|Issue ID|None|TEST-1|
-|notify|boolean|True|True|Will send a notification email about the issue updated. Admin and project admins credentials need to be used to disable the notification|None|False|
+|notify|boolean|True|True|Will send a notification email about the issue updated. Admin and project admins credentials need to be used to disable the notification|None|True|
 |summary|string|None|False|Summary field on the issue|None|Connect Jira to InsightConnect for Multiple Teams|
 |update|object|None|False|An object that contains update operations to apply, see examples at https://developer.atlassian.com/server/jira/platform/updating-an-issue-via-the-jira-rest-apis-6848604/|None|{ "update": { "labels": [ {"add": "newlabel"} ] } }|
 
@@ -863,7 +863,7 @@ Example input:
   "description": "Update ticket with additional Jira information for others teams wanting to leverage InsightConnect",
   "fields": "{ \"fields\": { \"project\": { \"key\": \"TEST\" }, \"summary\": \"Test Ticket\", \"description\": \"Test ticket created from InsightConnect\", \"issuetype\": { \"name\": \"Story\" } } }",
   "id": "TEST-1",
-  "notify": false,
+  "notify": true,
   "summary": "Connect Jira to InsightConnect for Multiple Teams",
   "update": "{ \"update\": { \"labels\": [ {\"add\": \"newlabel\"} ] } }"
 }
@@ -893,7 +893,7 @@ This trigger is used to trigger which indicates that a new issue has been create
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|get_attachments|boolean|False|False|Get attachments from issue|None|False|
+|get_attachments|boolean|False|False|Get attachments from issue|None|True|
 |jql|string|None|False|JQL search string to use|None|project = "TEST"|
 |poll_timeout|integer|60|False|Timeout between next poll, default 60|None|60|
 |project|string|None|True|Project ID or name|None|TEST|
@@ -902,7 +902,7 @@ Example input:
 
 ```
 {
-  "get_attachments": false,
+  "get_attachments": true,
   "jql": "project = \"TEST\"",
   "poll_timeout": 60,
   "project": "TEST"
@@ -1032,7 +1032,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "4ac123f3f8412345a10cbaa0",
-              "emailAddress": "user1@example.com",
+              "emailAddress": "userexample.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -1049,7 +1049,7 @@ Example output:
               "name": "admin",
               "key": "admin",
               "accountId": "4ac123f3f8412345a10cbaa0",
-              "emailAddress": "user1@example.com",
+              "emailAddress": "user@example.com",
               "avatarUrls": {
                   "48x48": "",
                   "24x24": "",
@@ -1085,7 +1085,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "4ac123f3f8412345a10cbaa0",
-                      "emailAddress": "user1@example.com",
+                      "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
@@ -1102,7 +1102,7 @@ Example output:
                       "name": "admin",
                       "key": "admin",
                       "accountId": "4ac123f3f8412345a10cbaa0",
-                      "emailAddress": "user1@example.com",
+                      "emailAddress": "user@example.com",
                       "avatarUrls": {
                           "48x48": "",
                           "24x24": "",
@@ -1142,6 +1142,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 6.0.4 - Update to v4 Python plugin runtime
 * 6.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/jira)
 * 6.0.2 - Fix in Comment Issue action where the Python module attributes were logged | Remove duplicate ConnectionTestException call from Connection Test
 * 6.0.1 - Update documentation to include supported Jira products

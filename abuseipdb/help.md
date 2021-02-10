@@ -28,9 +28,7 @@ Example input:
 
 ```
 {
-  "credentials": {
-    "secretKey": "e73h82c63847f3ff1h5216b556edh153h30430d73bchhe680f70h1d8885fb8bb130b46c7767d6886"
-    }
+  "credentials": "e73h82c63847f3ff1h5216b556edh153h30430d73bchhe680f70h1d8885fb8bb130b46c7767d6886"
 }
 ```
 
@@ -55,7 +53,7 @@ Example input:
 ```
 {
   "categories": "10,12,15",
-  "comment": "Brute forcing Wordpress login",
+  "comment": "Brute forcing Wordpress",
   "ip": "198.51.100.100"
 }
 ```
@@ -105,7 +103,7 @@ Example input:
 ```
 {
   "address": "198.51.100.100",
-  "days": "30",
+  "days": 30,
   "verbose": true
 }
 ```
@@ -189,8 +187,8 @@ Example input:
 
 ```
 {
-  "cidr": "198.51.100.0/24",
-  "days": "30"
+  "cidr": "207.126.144.0/20",
+  "days": 30
 }
 ```
 
@@ -255,7 +253,8 @@ Example input:
 
 ```
 {
-  "confidenceMinimum": "90"
+  "confidenceMinimum": 90,
+  "limit": 10
 }
 ```
 
@@ -334,10 +333,13 @@ _This plugin does not contain any triggers._
 
 ## Troubleshooting
 
-There's a rate limit on the free API service. The following error messags `429 Client Error: Too Many Requests for url` indicates that threshold has been hit.
+There's a rate limit on the free API service. The following error messages `429 Client Error: Too Many Requests for url` indicates that threshold has been hit.
 
 # Version History
 
+* 5.0.6 - Fix none type error in Check CIDR action
+* 5.0.5 - Correct spelling in help.md
+* 5.0.4 - Update to v4 Python plugin runtime
 * 5.0.3 - Add example inputs
 * 5.0.2 - Changed descriptions | Removed duplicated code | Use output constants | Added "f" strings
 * 5.0.1 - New spec and help.md format for the Extension Library

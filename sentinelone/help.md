@@ -34,7 +34,7 @@ Example input:
 {
   "credentials": {
     "username": "user@example.com",
-    "password": "mypassword
+    "password": "mypassword"
   },
   "url": "https://example.sentinelone.com"
 }
@@ -43,6 +43,42 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Run Agent Action
+
+This action is used to perform actions relating to your SentinelOne agents. This will help manage your assets connected to your SentinelOne console. Documentation for these actions can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|action|string|None|True|Agent action to run|['abort-scan', 'connect', 'decommission', 'disconnect', 'fetch-logs', 'initiate-scan', 'restart-machine', 'shutdown', 'uninstall']|connect|
+|filter|object|{}|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents. Note - decommission, disconnect, restart-machine, shutdown and uninstall actions require that one of the following filter arguments be supplied - ids, groupIds, or filterId|None|{"ids": ["1000000000000000000"]}|
+
+Example input:
+
+```
+{
+  "action": "connect",
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  }
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|False|Number of entities affected by the requested operation|
+
+```
+{
+  "affected": 0
+}
+```
 
 #### Fetch Threats File
 
@@ -81,68 +117,6 @@ Example output:
 }
 ```
 
-#### Connect to Network
-
-This action sends a connect to network command to all agents matching the input filter.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
-
-Example output:
-
-```
-{
-  "affected": 0
-}
-```
-
-#### Blacklist by IOC Hash
-
-This action is used to add hashed indicator of compromise to global blacklist.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|agent_id|string|None|True|Agent ID|None|None|
-|hash|string|None|True|Indicator of compromise hash to add to blacklist|None|3395856ce81f2b7382dee72602f798b642f14140|
-
-Example input:
-
-```
-{
-  "hash": "3395856ce81f2b7382dee72602f798b642f14140"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result|blacklist_data|True|Result of hashing operation|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
 #### Get Activities
 
 This action is used to get a list of activities.
@@ -151,32 +125,73 @@ This action is used to get a list of activities.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|account_ids|[]string|None|False|List of Account IDs to filter by|None|None|
-|activity_types|[]string|None|False|Return only these activity codes|None|None|
-|agent_ids|[]string|None|False|Return activities related to specified agent ids|None|None|
-|count_only|boolean|None|False|If true, only total number of items will be returned, without any of the actual objects|None|None|
-|created_at_between|string|None|False|Return activities created within this range (inclusive), example 1514978764288-1514978999999|None|None|
-|created_at_gt|string|None|False|Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|None|
-|created_at_gte|string|None|False|Return activities created after or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|None|
-|created_at_lt|string|None|False|Return activities created before this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|None|
-|created_at_lte|string|None|False|Return activities created before or at this date in ISO-8601, example 2018-02-27T04:49:26.257525Z|None|None|
-|cursor|string|None|False|Cursor position returned by the last request. Should be used for iterating over more than 1000 items, example YWdlbnRfaWQ6NTgwMjkzODE=|None|None|
-|group_ids|[]string|None|False|Get a list of activities|None|None|
-|ids|[]string|None|False|If true, total number of items will not be calculated, which speeds up execution time|None|None|
-|include_hidden|boolean|None|False|Include internal activities hidden from display|None|None|
-|limit|integer|None|False|Limit number of returned items (1-100)|None|None|
-|site_ids|[]string|None|False|List of Site IDs to filter by|None|None|
-|skip|integer|None|False|Skip first number of items (0-1000). For iterating over more than a 1000 items please use cursor instead|None|None|
-|skip_count|boolean|None|False|If true, total number of items will not be calculated, which speeds up execution time|None|None|
-|sort_by|string|None|False|The column to sort the results by|['id', 'activityType', 'createdAt']|None|
-|sort_order|string|None|False|Sort direction|['asc', 'desc']|None|
-|threat_ids|[]string|None|False|Return only these activity codes|None|None|
-|user_emails|[]string|None|False|Email of the user who invoked the activity (If applicable)|None|None|
-|user_ids|[]string|None|False|The user who invoked the activity (If applicable)|None|None|
+|account_ids|[]string|None|False|List of Account IDs to filter by|None|["400000000000000000"]|
+|activity_types|[]string|None|False|Return only these activity codes|None|["22", "23"]|
+|agent_ids|[]string|None|False|Return activities related to specified agent ids|None|["9000000000000000"]|
+|count_only|boolean|None|False|If true, only total number of items will be returned, without any of the actual objects|None|True|
+|created_at_between|string|None|False|Return activities created within this range (inclusive), example 1514978764288-1514978999999|None|1514978764288-1514978999999|
+|created_at_gt|string|None|False|Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|2020-12-18T18:49:26.257525Z|
+|created_at_gte|string|None|False|Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|2020-12-20T18:49:26.257525Z|
+|created_at_lt|string|None|False|Return activities created before this date in ISO-8601|None|2020-12-20T18:49:26.257525Z|
+|created_at_lte|string|None|False|Return activities created before or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|2020-12-20T18:49:26.257525Z|
+|group_ids|[]string|None|False|List of Group IDs|None|["500000000000000000"]|
+|ids|[]string|None|False|List of Activity IDs|None|["800000000000000008"]|
+|include_hidden|boolean|None|False|Include internal activities hidden from display|None|True|
+|limit|integer|10|False|Limit number of returned items (1-1000)|None|10|
+|site_ids|[]string|None|False|List of Site IDs to filter by|None|["5000000000000001"]|
+|skip|integer|None|False|Skip first number of items (0-1000). Will return the number entries specified in the 'limit' input (default is 10)|None|1|
+|skip_count|boolean|None|False|If true, total number of items will not be calculated, which speeds up execution time|None|True|
+|sort_by|string|createdAt|False|The column to sort the results by|['id', 'activityType', 'createdAt']|createdAt|
+|sort_order|string|asc|False|Sort direction|['asc', 'desc']|asc|
+|threat_ids|[]string|None|False|Return only these activity codes|None|["1"]|
+|user_emails|[]string|None|False|Email of the user who invoked the activity (If applicable)|None|["user@example.com"]|
+|user_ids|[]string|None|False|The user who invoked the activity (If applicable)|None|["500000000000000003"]|
 
 Example input:
 
 ```
+{
+  "account_ids": [
+    "400000000000000000"
+  ],
+  "activity_types": [
+    "22",
+    "23"
+  ],
+  "agent_ids": [
+    "9000000000000000"
+  ],
+  "count_only": true,
+  "created_at_between": "1514978764288-1514978999999",
+  "created_at_gt": "2020-12-18T18:49:26.257525Z",
+  "created_at_gte": "2020-12-20T18:49:26.257525Z",
+  "created_at_lt": "2020-12-20T18:49:26.257525Z",
+  "created_at_lte": "2020-12-20T18:49:26.257525Z",
+  "group_ids": [
+    "500000000000000000"
+  ],
+  "ids": [
+    "800000000000000008"
+  ],
+  "include_hidden": true,
+  "limit": 10,
+  "site_ids": [
+    "5000000000000001"
+  ],
+  "skip": 1,
+  "skip_count": true,
+  "sort_by": "createdAt",
+  "sort_order": "asc",
+  "threat_ids": [
+    "1"
+  ],
+  "user_emails": [
+    "user@example.com"
+  ],
+  "user_ids": [
+    "500000000000000003"
+  ]
+}
 ```
 
 ##### Output
@@ -184,12 +199,7 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|[]activities_list|True|Result of activities list|
-|pagination|pagination|True|Pagination object|
 
-Example output:
-
-```
-```
 
 #### Get Activity Types
 
@@ -219,177 +229,6 @@ Example output:
 }
 ```
 
-#### Agents Abort Scan
-
-This action aborts running scan on all agents matching the input filter.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
-
-Example output:
-
-```
-{
-  "affected": 0
-}
-```
-
-#### Agent Decommission
-
-This action decommissions all agents matching the input filter.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
-
-Example output:
-
-```
-{
-  "affected": 0
-}
-```
-
-#### Disconnect Agents
-
-This action disconnects agents associated to marked threats from network.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Use any of the filtering options to control the list of affected threats. You can also leave this field empty to apply to all available threats|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
-
-Example output:
-
-```
-{
-  "affected": 0
-}
-```
-
-#### Agents Fetch Logs
-
-This action sends a fetch logs command to all agents matching the input filter.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
-
-Example output:
-
-```
-{
-  "affected": 0
-}
-```
-
-#### Initiate Scan
-
-This action sends a scan command to all agents matching the input filter.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
-
-Example output:
-
-```
-{
-  "affected": 0
-}
-```
-
-#### Agents Processes
-
-This action is used to retrieve running processes for a specific agent.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|ids|[]string|None|True|Agent ID list|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|agents_processes|[]agents_processes|False|Agents processes entities|
-
-Example output:
-
-```
-```
-
 #### Agents Reload
 
 This action is used to reload an agent module (applies to Windows agents only).
@@ -398,70 +237,20 @@ This action is used to reload an agent module (applies to Windows agents only).
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|None|
-|module|string|None|True|Agent module to reload|['monitor', 'static', 'agent', 'log']|None|
+|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|{"ids": ["1000000000000000000"]}|
+|module|string|None|True|Agent module to reload|['monitor', 'static', 'agent', 'log']|monitor|
 
 Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
-
-Example output:
 
 ```
 {
-  "affected": 0
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  },
+  "module": "monitor"
 }
-```
-
-#### Agents Restart
-
-This action sends a restart command to all agents matching the input filter.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - One of the following filter arguments must be supplied - ids, groupIds, filterId|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
-
-Example output:
-
-```
-{
-  "affected": 0
-}
-```
-
-#### Agents Shutdown
-
-This action sends a shutdown command to all agents matching the input filter.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId|None|None|
-
-Example input:
-
-```
 ```
 
 ##### Output
@@ -486,12 +275,20 @@ This action is used to summary of agents by numbers.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|account_ids|[]string|None|False|List of Account IDs to filter by|None|None|
-|site_ids|[]string|None|False|List of Site IDs to filter by|None|None|
+|account_ids|[]string|None|False|List of Account IDs to filter by|None|["4000000000000000000"]|
+|site_ids|[]string|None|False|List of Site IDs to filter by|None|["500000000000000000"]|
 
 Example input:
 
 ```
+{
+  "account_ids": [
+    "4000000000000000000"
+  ],
+  "site_ids": [
+    "500000000000000000"
+  ]
+}
 ```
 
 ##### Output
@@ -508,34 +305,13 @@ Example input:
 Example output:
 
 ```
-```
-
-#### Uninstall
-
-This action sends an uninstall command to all agents matching the input filter.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|filter|object|None|True|Applied filter - only matched agents will be affected by the requested action. Note - one of the following filter arguments must be supplied - ids, groupIds, filterId|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
-
-Example output:
-
-```
 {
-  "affected": 0
+  "decommissioned": 4,
+  "infected": 0,
+  "out_of_date": 0,
+  "online": 1,
+  "total": 2,
+  "up_to_date": 2
 }
 ```
 
@@ -547,11 +323,16 @@ This action is used to retrieve running applications for a specific agent.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|ids|[]string|None|True|Agent ID list|None|None|
+|ids|[]string|None|True|Agent ID list|None|["1000000000000000000"]|
 
 Example input:
 
 ```
+{
+  "ids": [
+    "1000000000000000000"
+  ]
+}
 ```
 
 ##### Output
@@ -560,10 +341,6 @@ Example input:
 |----|----|--------|-----------|
 |data|[]agent_applications|True|List of installed applications|
 
-Example output:
-
-```
-```
 
 #### Blacklist
 
@@ -616,6 +393,8 @@ Example input:
 
 ```
 {
+  "blacklist_state": true,
+  "description": "Hash Blacklisted from InsightConnect",
   "hash": "3395856ce81f2b7382dee72602f798b642f14140"
 }
 ```
@@ -624,7 +403,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|result|blacklist_data|True|Result of hashing operation|
+|affected|integer|False|Number of entities affected by the requested operation|
 
 Example output:
 
@@ -644,16 +423,22 @@ This action is used to create a threat from an IOC event.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent_id|string|None|True|Agent ID for the slim threat|None|None|
-|annotation|string|None|True|Vigilance annotation|None|None|
-|annotation_url|string|None|True|Vigilance annotation URL|None|None|
-|group_id|string|None|False|Group ID|None|None|
-|hash|string|None|True|SHA1 hash|None|None|
-|path|string|None|False|Path|None|None|
+|agentId|string|None|True|Agent ID for the slim threat|None|1000000000000000000|
+|groupId|string|None|False|Group ID|None|1000000000000000001|
+|hash|string|None|True|SHA1 hash|None|A94A8FE5CCB19BA61C4C0873D391E987982FBBD3|
+|note|string|None|False|Note|None|Note|
+|path|string|None|False|Path|None|path|
 
 Example input:
 
 ```
+{
+  "agentId": "1000000000000000000",
+  "groupId": "1000000000000000001",
+  "hash": "A94A8FE5CCB19BA61C4C0873D391E987982FBBD3",
+  "note": "Note",
+  "path": "path"
+}
 ```
 
 ##### Output
@@ -800,7 +585,7 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|[]data|False|Data|
+|data|[]threat_data|False|Data|
 |errors|[]object|False|Errors|
 |pagination|pagination|False|Pagination|
 
@@ -895,13 +680,18 @@ This action is used to mark a threat as resolved.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|target_scope|string|None|True|Scope to be used for exclusions|['group', 'site', 'tenant']|None|
-|threat_id|string|None|True|ID of a threat|None|None|
-|whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|None|
+|target_scope|string|None|True|Scope to be used for exclusions|['group', 'site', 'tenant']|site|
+|threat_id|string|None|True|ID of a threat|None|1000000000000000000|
+|whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|path|
 
 Example input:
 
 ```
+{
+  "target_scope": "site",
+  "threat_id": "1000000000000000000",
+  "whitening_option": "path"
+}
 ```
 
 ##### Output
@@ -926,13 +716,18 @@ This action is used to mark a suspicious threat as a threat.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|target_scope|string|None|True|Scope to be used for exclusions|['group', 'site', 'tenant']|None|
-|threat_id|string|None|True|ID of a threat|None|None|
-|whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|None|
+|target_scope|string|None|True|Scope to be used for exclusions|['group', 'site', 'tenant']|site|
+|threat_id|string|None|True|ID of a threat|None|1000000000000000000|
+|whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|path|
 
 Example input:
 
 ```
+{
+  "target_scope": "site",
+  "threat_id": 1000000000000000000,
+  "whitening_option": "path"
+}
 ```
 
 ##### Output
@@ -957,12 +752,16 @@ This action is used to apply a mitigation action to a threat.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|action|string|None|True|Mitigation action|['rollback-remediation', 'quarantine', 'kill', 'remediate', 'un-quarantine']|None|
-|threat_id|string|None|True|ID of a threat|None|None|
+|action|string|None|True|Mitigation action|['rollback-remediation', 'quarantine', 'kill', 'remediate', 'un-quarantine']|quarantine|
+|threat_id|string|None|True|ID of a threat|None|1000000000000000000|
 
 Example input:
 
 ```
+{
+  "action": "quarantine",
+  "threat_id": 1000000000000000000
+}
 ```
 
 ##### Output
@@ -987,11 +786,14 @@ This action is the account name available for this account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name|string|None|True|Account Name to validate|None|None|
+|name|string|None|True|Account Name to validate|None|example|
 
 Example input:
 
 ```
+{
+  "name": "example"
+}
 ```
 
 ##### Output
@@ -1190,22 +992,33 @@ This trigger is used to get threats.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent_is_active|boolean|True|False|Include agents currently connected to the management console|None|None|
-|classifications|[]string|None|False|List of classifications to search|None|None|
-|engines|[]string|None|False|Included engines|None|None|
-|frequency|integer|5|False|Poll frequency in seconds|None|None|
-|resolved|boolean|None|False|Include resolved threats|None|None|
+|agent_is_active|boolean|True|False|Include agents currently connected to the management console|None|True|
+|classifications|[]string|None|False|List of classifications to search|None|[""]|
+|engines|[]string|None|False|Included engines|None|[""]|
+|frequency|integer|5|False|Poll frequency in seconds|None|5|
+|resolved|boolean|None|False|Include resolved threats|None|True|
 
 Example input:
 
 ```
+{
+  "agent_is_active": true,
+  "classifications": [
+    ""
+  ],
+  "engines": [
+    ""
+  ],
+  "frequency": 5,
+  "resolved": true
+}
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|threat|data|False|Threat|
+|threat|threat_data|False|Threat|
 
 Example output:
 
@@ -1326,7 +1139,7 @@ Example output:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Action|string|False|Action descripted in the activity|
+|Action|string|False|Action described in the activity|
 |Description Template|string|False|Activity description template as seen in activity page|
 |Type ID|float|False|Activity type ID|
 
@@ -1407,24 +1220,13 @@ Example output:
 |User Actions Needed|[]string|False|A list of pending user actions|
 |UUID|string|False|Agent's universally unique identifier|
 
-#### agents_processes
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|CPU Usage|integer|False|CPU Usage (%)|
-|Executable path|string|False|Executable path|
-|Memory usage|integer|False|Memory usage (MB)|
-|PID|integer|False|Process ID|
-|Process name|string|False|Process name|
-|Start time|string|False|Start time|
-
 #### blacklist_data
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |Affected|integer|False|Affected|
 
-#### data
+#### threat_data
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1511,6 +1313,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 5.0.1 - Correct spelling in help.md
+* 5.0.0 - Consolidate various Agent actions | Use API version 2.1 where possible | Delete obsolete Blacklist by IOC Hash and Agent Processes
 * 4.1.1 - Update the Get Threat Summary action to return all threat summaries instead of 10
 * 4.1.0 - Add case sensitivity option for Agent lookups
 * 4.0.1 - Fix Agent Active parameter in Get Agent Details action | Update Quarantine action whitelist for IP addresses

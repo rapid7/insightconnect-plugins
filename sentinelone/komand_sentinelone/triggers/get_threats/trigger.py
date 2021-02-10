@@ -1,23 +1,25 @@
-import komand
+import insightconnect_plugin_runtime
 import time
 from .schema import GetThreatsInput, GetThreatsOutput, Input, Output
 # Custom imports below
 from datetime import datetime
 
 
-class GetThreats(komand.Trigger):
+class GetThreats(insightconnect_plugin_runtime.Trigger):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_threats',
-                description='Get threats',
-                input=GetThreatsInput(),
-                output=GetThreatsOutput())
+            name='get_threats',
+            description='Get threats',
+            input=GetThreatsInput(),
+            output=GetThreatsOutput())
 
     def run(self, params={}):
         self.logger.info("Get Threats: trigger started")
 
-        params = {
+        frequency = params.get("frequency", 5)
+
+        trigger_params = {
             "resolved": params.get(Input.RESOLVED),
             "classifications": params.get(Input.CLASSIFICATIONS),
             "agentIsActive": params.get(Input.AGENT_IS_ACTIVE, True),
@@ -25,14 +27,13 @@ class GetThreats(komand.Trigger):
             "limit": 1,
         }
 
-        frequency = params.get("frequency", 5)
         since = datetime.now()
 
         while True:
             if since:
-                params["createdAt__gt"] = since
+                trigger_params["createdAt__gt"] = since
 
-            response = self.connection.get_threats(params)
+            response = self.connection.get_threats(trigger_params)
 
             while response["data"]:
                 self.send_first_threat(response["data"])
@@ -50,4 +51,4 @@ class GetThreats(komand.Trigger):
     def send_first_threat(self, data):
         threat = data[0]
         self.logger.info("Threat found: " + threat["id"])
-        self.send({Output.THREAT: komand.helper.clean(threat)})
+        self.send({Output.THREAT: insightconnect_plugin_runtime.helper.clean(threat)})

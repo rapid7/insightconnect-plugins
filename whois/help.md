@@ -163,14 +163,9 @@ _This plugin does not contain any custom output types._
 
 Multiple records can be returned by the server, this plugin currently only returns the first unique records found.
 
-# Links
-
-## References
-
-_This plugin has no references._
-
 # Version History
 
+* 3.0.1 - Clean up help.md formatting
 * 3.0.0 - Add input `registrar` for manual server selection to Address Lookup action
 * 2.0.3 - Upgrade to latest Python plugin runtime | Define `cloud_ready` in spec
 * 2.0.2 - Fix issue where com.br style domains could crash the plugin
@@ -192,6 +187,8 @@ _This plugin has no references._
 * 0.2.0 - Fix domain query and adjust output
 * 0.1.1 - Bugfixes and pagination support
 * 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 

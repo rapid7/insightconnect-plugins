@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Type Converter"
 Vendor = "rapid7"
-Version = "1.6.1"
+Version = "1.7.0"
 Description = "Type Converter is a utility plugin for converting data types within a Rapid7 InsightConnect workflow"
 
 
@@ -34,6 +34,8 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_action(actions.ArrayDiff())
+
             self.add_action(actions.ArrayToString())
 
             self.add_action(actions.BooleanToInteger())

@@ -1,7 +1,7 @@
 import logging
 import base64
 from io import BytesIO
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 def normalize_comment(source, logger=logging.getLogger()):

@@ -1,5 +1,5 @@
 import komand
-from .schema import QueryInput, QueryOutput
+from .schema import QueryInput, QueryOutput, Input, Output
 # Custom imports below
 from komand_active_directory_ldap.util.utils import ADUtils
 import json
@@ -30,14 +30,21 @@ class Query(komand.Action):
         escaped_query = formatter.escape_brackets_for_query(query, pairs)
         self.logger.info(f"Escaped query: {escaped_query}")
 
+        attributes = params.get(Input.ATTRIBUTES)
+        if not attributes:
+            attributes = [ldap3.ALL_ATTRIBUTES, ldap3.ALL_OPERATIONAL_ATTRIBUTES]
+
         conn.search(
             search_base=params.get('search_base'),
             search_filter=escaped_query,
-            attributes=[ldap3.ALL_ATTRIBUTES, ldap3.ALL_OPERATIONAL_ATTRIBUTES]
+            attributes=attributes
         )
 
         result_list_json = conn.response_to_json()
         result_list_object = json.loads(result_list_json)
         entries = result_list_object["entries"]
 
-        return {'results': entries}
+        return {
+            Output.RESULTS: entries,
+            Output.COUNT: len(entries)
+        }

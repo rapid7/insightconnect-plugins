@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="whois-rapid7-plugin",
-      version="3.0.0",
+      version="3.0.1",
       description="The WHOIS plugin enables address and domain lookups in the WHOIS databases",
       author="rapid7",
       author_email="",

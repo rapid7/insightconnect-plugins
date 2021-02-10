@@ -53,6 +53,36 @@ Example input:
 
 ### Actions
 
+#### Get Blacklist URL
+
+This action is used to get blacklisted URLs.
+
+##### Input
+
+_This action does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|blacklisted_urls|[]string|False|URLs added to the blacklist|
+
+Example output:
+
+```
+{
+  "blacklisted_urls": [
+    "domain.com",
+    "example.com",
+    "example1.com",
+    "example2.com",
+    "example3.com",
+    "example4.com",
+    "example5.com"
+  ]
+}
+```
+
 #### Get Sandbox Report for Hash
 
 This action is used to get a full report for an MD5 hash of a file that was analyzed by Sandbox.
@@ -309,6 +339,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.0 - Add Get Blacklist URL action
 * 1.2.1 - Usability updates and updated icon
 * 1.2.0 - New action Get Sandbox Report for Hash
 * 1.1.2 - Support both domains and URL inputs in the Blacklist URL and Lookup URL actions

@@ -3,12 +3,12 @@ from setuptools import setup, find_packages
 
 
 setup(name="sentinelone-rapid7-plugin",
-      version="4.1.1",
+      version="5.0.1",
       description="The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne",
       author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
-      install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
+      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_sentinelone']
       )

@@ -8,8 +8,21 @@ class Component:
 
 
 class Input:
+    ASSIGNED_TO = "assigned_to"
+    ASSIGNMENT_GROUP = "assignment_group"
+    BUSINESS_SERVICE = "business_service"
+    CALLER = "caller"
+    CATEGORY = "category"
+    CONFIGURATION_ITEM = "configuration_item"
+    CONTACT_TYPE = "contact_type"
+    DESCRIPTION = "description"
+    IMPACT = "impact"
+    PRIORITY = "priority"
+    SHORT_DESCRIPTION = "short_description"
+    STATE = "state"
+    SUBCATEGORY = "subcategory"
     SYSTEM_ID = "system_id"
-    UPDATE_DATA = "update_data"
+    URGENCY = "urgency"
     
 
 class Output:
@@ -22,22 +35,99 @@ class UpdateIncidentInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "assigned_to": {
+      "type": "string",
+      "title": "Assigned To",
+      "description": "User ID of person assigned to the incident",
+      "order": 13
+    },
+    "assignment_group": {
+      "type": "string",
+      "title": "Assignment Group",
+      "description": "Assignment group name of the incident",
+      "order": 12
+    },
+    "business_service": {
+      "type": "string",
+      "title": "Business Service",
+      "description": "Name of business service",
+      "order": 5
+    },
+    "caller": {
+      "type": "string",
+      "title": "Caller/User ID",
+      "description": "User ID of incident caller",
+      "order": 2
+    },
+    "category": {
+      "type": "string",
+      "title": "Category",
+      "description": "Category code of incident",
+      "order": 3
+    },
+    "configuration_item": {
+      "type": "string",
+      "title": "Configuration Item",
+      "description": "Configuration item code of the incident",
+      "order": 6
+    },
+    "contact_type": {
+      "type": "string",
+      "title": "Contact Type",
+      "description": "Contact type of the incident",
+      "order": 7
+    },
+    "description": {
+      "type": "string",
+      "title": "Description",
+      "description": "Full description of incident",
+      "order": 15
+    },
+    "impact": {
+      "type": "string",
+      "title": "Impact",
+      "description": "Impact of the indicent",
+      "order": 9
+    },
+    "priority": {
+      "type": "string",
+      "title": "Priority",
+      "description": "Priority of the incident",
+      "order": 11
+    },
+    "short_description": {
+      "type": "string",
+      "title": "Short Description",
+      "description": "Short description of incident",
+      "order": 14
+    },
+    "state": {
+      "type": "string",
+      "title": "State",
+      "description": "State name of the incident",
+      "order": 8
+    },
+    "subcategory": {
+      "type": "string",
+      "title": "Subcategory",
+      "description": "Subcategory code of incident (available values depends on the `Category` field)",
+      "order": 4
+    },
     "system_id": {
       "type": "string",
       "title": "System ID",
       "description": "System ID of the Incident record to update",
       "order": 1
     },
-    "update_data": {
-      "type": "object",
-      "title": "Update Data",
-      "description": "JSON object containing the fields and values to update",
-      "order": 2
+    "urgency": {
+      "type": "string",
+      "title": "Urgency",
+      "description": "Urgency of the incident",
+      "order": 10
     }
   },
   "required": [
-    "system_id",
-    "update_data"
+    "system_id"
   ]
 }
     """)

@@ -1,15 +1,15 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
 from jira import JIRA
 import requests
 from requests.auth import HTTPBasicAuth
-from komand.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 from komand_jira.util.api import JiraApi
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
 
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())

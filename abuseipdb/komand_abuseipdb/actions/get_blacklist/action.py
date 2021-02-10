@@ -1,7 +1,7 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetBlacklistInput, GetBlacklistOutput, Input, Output
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 import requests
 import logging
@@ -9,7 +9,7 @@ from komand_abuseipdb.util import helper
 logging.getLogger('requests').setLevel(logging.WARNING)
 
 
-class GetBlacklist(komand.Action):
+class GetBlacklist(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(

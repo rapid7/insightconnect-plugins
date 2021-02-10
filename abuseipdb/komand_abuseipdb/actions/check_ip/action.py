@@ -1,7 +1,7 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CheckIpInput, CheckIpOutput, Input, Output
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 import requests
 import logging
@@ -9,7 +9,7 @@ from komand_abuseipdb.util import helper
 logging.getLogger('requests').setLevel(logging.WARNING)
 
 
-class CheckIp(komand.Action):
+class CheckIp(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -23,7 +23,7 @@ class CheckIp(komand.Action):
         if out[Output.ISPUBLIC] is None:
             out[Output.ISPUBLIC] = False
 
-        out = komand.helper.clean(out)
+        out = insightconnect_plugin_runtime.helper.clean(out)
 
         return out
 

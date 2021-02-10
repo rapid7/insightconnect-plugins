@@ -119,7 +119,7 @@ _This plugin does not contain any triggers._
 |architectures|string|False|List of applicable architectures for the module|
 |Authors|string|False|List of module authors|
 |Content type|string|False|Type of returned content, module or vulnerability|
-|Description|string|False|Brief summary of the returend content|
+|Description|string|False|Brief summary of the returned content|
 |Published_at|string|False|Published date of vulnerability|
 |Rank|int|False|Rank of module|
 |References|string|False|List of references|
@@ -142,6 +142,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.4 - Correct spelling in help.md
 * 2.0.3 - Update to v4 Python plugin runtime | Add example inputs
 * 2.0.2 - Implement workaround for VulnDB API bug in Get Content action where the `severity` datatype response differs based on the action input
 * 2.0.1 - Add identifier field to the Search Database action

@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetThreatSummaryInput, GetThreatSummaryOutput
 # Custom imports below
 
 
-class GetThreatSummary(komand.Action):
+class GetThreatSummary(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -15,4 +15,4 @@ class GetThreatSummary(komand.Action):
     def run(self, params={}):
         self.logger.info("Starting step")
         threats = self.connection.get_threat_summary()
-        return komand.helper.clean(threats)
+        return insightconnect_plugin_runtime.helper.clean(threats)

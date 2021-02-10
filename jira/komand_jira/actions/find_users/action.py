@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import FindUsersInput, FindUsersOutput, Input, Output, Component
 # Custom imports below
 from komand_jira.util.util import normalize_user
 
 
-class FindUsers(komand.Action):
+class FindUsers(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -23,6 +23,6 @@ class FindUsers(komand.Action):
             users = self.connection.client.search_users(user=query, maxResults=max_results)
 
         results = list(map(lambda user: normalize_user(user, is_cloud=self.connection.is_cloud, logger=self.logger), users))
-        results = komand.helper.clean(results)
+        results = insightconnect_plugin_runtime.helper.clean(results)
 
         return {Output.USERS: results}

@@ -181,6 +181,7 @@ For more information on LDAP queries see https://ldap3.readthedocs.io/tutorial_s
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|attributes|[]string|None|False|Attributes to search. If empty return all attributes|None|["createTimestamp", "creatorsName"]|
 |search_base|string|None|True|The base of the search request|None|DC=example,DC=com|
 |search_filter|string|None|True|The filter of the search request. It must conform to the LDAP filter syntax specified in RFC4515|None|(sAMAccountName=joesmith)|
 
@@ -188,6 +189,10 @@ Example input:
 
 ```
 {
+  "attributes": [
+    "createTimestamp",
+    "creatorsName"
+  ],
   "search_base": "DC=example,DC=com",
   "search_filter": "(sAMAccountName=joesmith)"
 }
@@ -197,6 +202,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|count|integer|False|Number of results|
 |results|[]result|False|Results returned|
 
 Example output:
@@ -493,6 +499,7 @@ the query results, and then using the variable step $item.dn
 
 * 5.0.1 - Removed trailing spaces | Move duplicate code to library
 * 5.0.0 - Add new input to connection to allow for Auto Referrals | A number of bug fixes
+* 4.1.0 - Add new input Attributes in action Query | Add new output Count in action Query
 * 4.0.3 - Fix issue with connection documentation incorrectly stating a protocol prefix is required
 * 4.0.2 - Fix issue where some host names were being incorrectly parsed
 * 4.0.1 - Fix issue were logging of connection info did not display hostname correctly

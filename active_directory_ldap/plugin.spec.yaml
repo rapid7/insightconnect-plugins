@@ -77,10 +77,21 @@ actions:
         description: The base of the search request
         required: true
         example: "DC=example,DC=com"
+      attributes:
+        title: Attributes
+        description: Attributes to search. If empty return all attributes
+        required: false
+        type: '[]string'
+        example: ["createTimestamp", "creatorsName"]
     output:
       results:
         description: Results returned
         type: '[]result'
+        required: false
+      count:
+        title: Count
+        description: Number of results
+        type: integer
         required: false
   delete:
     title: Delete
