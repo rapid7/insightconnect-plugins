@@ -1,5 +1,5 @@
 {
-	"spec": "938c6ff9d72f021d9a4d57202e3c5293",
+	"spec": "e4baf5a2ad953ce337b418ff70ce8fe6",
 	"manifest": "de70de50f3a0e34d3f23e5fe3da19d01",
 	"setup": "8de5a405101601da1934833e29342e00",
 	"schemas": [
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "check_if_address_object_in_group/schema.py",
-			"hash": "214170851bdbc68e25f71ba75d87a960"
+			"hash": "a52772fc553e11ef040949042fe8ca0c"
 		},
 		{
 			"identifier": "commit/schema.py",
