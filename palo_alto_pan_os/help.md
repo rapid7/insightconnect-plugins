@@ -48,7 +48,7 @@ Example input:
 
 #### Add Address Object to Group
 
-This action adds address objects to an address group. Supports IPv6.
+This action adds address objects to an address group. This action supports FQDNs, IPv4 and IPv6 addresses.
 
 ##### Input
 
