@@ -1,11 +1,11 @@
 {
-	"spec": "8bb701e7b789350d086b75f0de1cb364",
+	"spec": "938c6ff9d72f021d9a4d57202e3c5293",
 	"manifest": "de70de50f3a0e34d3f23e5fe3da19d01",
 	"setup": "8de5a405101601da1934833e29342e00",
 	"schemas": [
 		{
 			"identifier": "add_address_object_to_group/schema.py",
-			"hash": "bb5c85c87b96257b4fce257a19caef53"
+			"hash": "11b477abddfd737cddf945e24cf38f92"
 		},
 		{
 			"identifier": "add_external_dynamic_list/schema.py",

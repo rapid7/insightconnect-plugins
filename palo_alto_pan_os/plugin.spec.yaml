@@ -904,7 +904,7 @@ actions:
         required: true
   add_address_object_to_group:
     title: Add Address Object to Group
-    description: Adds address objects to an address group. Supports IPv6
+    description: Adds address objects to an address group
     input:
       address_object:
         title: Address Object

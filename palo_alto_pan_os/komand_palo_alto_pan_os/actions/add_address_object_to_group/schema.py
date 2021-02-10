@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Adds address objects to an address group. Supports IPv6"
+    DESCRIPTION = "Adds address objects to an address group"
 
 
 class Input:
