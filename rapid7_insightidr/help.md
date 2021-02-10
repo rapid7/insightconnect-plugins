@@ -38,7 +38,7 @@ Example input:
 
 #### Advanced Query on Log Set
 
-This action is used to realtime query into an Insight IDR log set.
+This action is used to realtime query an InsightIDR log set. This will query entire log sets for results.
 
 This action should be used when querying a collection of related services.
 
@@ -136,7 +136,7 @@ Example output:
 
 #### Advanced Query on Log
 
-This action is used to realtime query into Insight IDR logs. 
+This action is used to realtime query an InsightIDR log. This will query individual logs for results.
 
 This action should be used if querying an individual service or device. 
 
