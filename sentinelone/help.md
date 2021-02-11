@@ -1335,7 +1335,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 6.0.0 - Add `operational_state` field to input, use API version 2.1, update schema in 'Get Agent Details' and 'Search Agent' actions
+* 6.0.0 - Add `operational_state` field to input of Get Agent Details and Search Agent actions | Update schema to return new outputs such as Active Directory, firewall, location, and quarantine information for Get Agent Details and Search Agent actions | Use API version 2.1 | Update capitalization according to style in Activities List action for Created Than Date and Less Than Dates inputs to Greater than Date and Less than Date
 * 5.0.1 - Correct spelling in help.md
 * 5.0.0 - Consolidate various Agent actions | Use API version 2.1 where possible | Delete obsolete Blacklist by IOC Hash and Agent Processes
 * 4.1.1 - Update the Get Threat Summary action to return all threat summaries instead of 10
