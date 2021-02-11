@@ -10,6 +10,7 @@ class Component:
 class Input:
     LOG = "log"
     QUERY = "query"
+    RELATIVE_TIME = "relative_time"
     TIME_FROM = "time_from"
     TIME_TO = "time_to"
     TIMEOUT = "timeout"
@@ -29,13 +30,32 @@ class AdvancedQueryOnLogInput(komand.Input):
       "type": "string",
       "title": "Log",
       "description": "Log to search",
-      "order": 5
+      "order": 6
     },
     "query": {
       "type": "string",
       "title": "Query",
       "description": "LQL Query",
       "order": 1
+    },
+    "relative_time": {
+      "type": "string",
+      "title": "Relative Time",
+      "default": "Last 5 Minutes",
+      "enum": [
+        "Last 5 Minutes",
+        "Last 10 Minutes",
+        "Last 20 Minutes",
+        "Last 30 Minutes",
+        "Last 45 Minutes",
+        "Last 1 Hour",
+        "Last 2 Hours",
+        "Last 3 Hours",
+        "Last 6 Hours",
+        "Last 12 Hours",
+        "Absolute Time To"
+      ],
+      "order": 3
     },
     "time_from": {
       "type": "string",
@@ -46,20 +66,21 @@ class AdvancedQueryOnLogInput(komand.Input):
     "time_to": {
       "type": "string",
       "title": "Time To",
-      "description": "Ending date and time for the query. If this is left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)",
-      "order": 3
+      "description": "If Absolute Time To is chosen for relative time the ending date and time for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)",
+      "order": 4
     },
     "timeout": {
       "type": "integer",
       "title": "Timeout",
       "description": "Time in seconds to wait for the query to return. If exceeded the plugin will throw an error",
       "default": 60,
-      "order": 4
+      "order": 5
     }
   },
   "required": [
     "log",
     "query",
+    "relative_time",
     "time_from",
     "timeout"
   ]

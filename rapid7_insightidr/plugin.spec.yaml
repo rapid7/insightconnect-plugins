@@ -580,9 +580,28 @@ actions:
         type: string
         example: "01-01-2020T00:00:00"
         required: true
+      relative_time:
+        title: Relative Time
+        descripiton: A relative time in the past to look for alerts
+        type: string
+        example: "Last 5 Minutes"
+        default: "Last 5 Minutes"
+        required: true
+        enum:
+          - "Last 5 Minutes"
+          - "Last 10 Minutes"
+          - "Last 20 Minutes"
+          - "Last 30 Minutes"
+          - "Last 45 Minutes"
+          - "Last 1 Hour"
+          - "Last 2 Hours"
+          - "Last 3 Hours"
+          - "Last 6 Hours"
+          - "Last 12 Hours"
+          - "Absolute Time To"
       time_to:
         title: Time To
-        description: Ending date and time for the query. If this is left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
+        description: If Absolute Time To is chosen for relative time the ending date and time for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
         type: string
         example: "12-31-2020T00:00:00"
         required: false
@@ -622,9 +641,28 @@ actions:
         type: string
         example: "01-01-2020T00:00:00"
         required: true
+      relative_time:
+        title: Relative Time
+        descripiton: A relative time in the past to look for alerts
+        type: string
+        example: "Last 5 Minutes"
+        default: "Last 5 Minutes"
+        required: true
+        enum:
+          - "Last 5 Minutes"
+          - "Last 10 Minutes"
+          - "Last 20 Minutes"
+          - "Last 30 Minutes"
+          - "Last 45 Minutes"
+          - "Last 1 Hour"
+          - "Last 2 Hours"
+          - "Last 3 Hours"
+          - "Last 6 Hours"
+          - "Last 12 Hours"
+          - "Absolute Time To"
       time_to:
         title: Time To
-        description: Ending date and time for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
+        description: If Absolute Time To is chosen for relative time the ending date and time for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
         type: string
         example: "12-31-2020T00:00:00"
         required: false
