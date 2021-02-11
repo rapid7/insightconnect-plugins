@@ -52,38 +52,3 @@ class TestAdvancedQueryOnLogSet(TestCase):
         test_action.connection = test_conn
         with self.assertRaises(PluginException):
             test_action.get_log_set_id("Do not find this log")
-
-    def test_parse_dates(self):
-        action_params, connection_params, test_action, test_conn = self.setup()
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-
-        time_test1 = "2005/10/31T17:11:09"
-        time_test2 = "01-01-2020"
-        time_test3 = "01-01-2020T18:01:01"
-        time_test4 = "02/24/1978"
-        time_test5 = "13:25"
-        time_test6 = "01/27/2020 10:00 PM"
-        time_test7 = "01-01-2020"
-        time_test8 = "12-31-2020"
-
-        res1, res2 = test_action.parse_dates(time_test1, time_test2)
-        res3, res4 = test_action.parse_dates(time_test3, time_test4)
-        res5, res6 = test_action.parse_dates(time_test5, time_test6)
-        res7, res8 = test_action.parse_dates(time_test7, time_test8)
-
-        self.assertEquals(res1, 1130800269000)
-        self.assertEquals(res2, 1577858400000)
-        self.assertEquals(res3, 1577923261000)
-        self.assertEquals(res4, 257148000000)
-        self.assertIsNotNone(res5) # This will be today @ 1:25 PM.
-        self.assertEquals(res6, 1580184000000)
-        self.assertEquals(res7, 1577858400000)
-        self.assertEquals(res8, 1609394400000)
-
-        not_used, now_result = test_action.parse_dates(time_test1, None)
-        self.assertIsNotNone(now_result)
-
-        with self.assertRaises(PluginException):
-            test_action.parse_dates("AAA", None)

@@ -5,7 +5,7 @@ from .schema import AdvancedQueryOnLogSetInput, AdvancedQueryOnLogSetOutput, Inp
 import time
 import json
 from komand.exceptions import PluginException
-from dateutil.parser import parse, ParserError
+from komand_rapid7_insightidr.util.parse_dates import parse_dates
 
 
 class AdvancedQueryOnLogSet(komand.Action):
@@ -23,10 +23,11 @@ class AdvancedQueryOnLogSet(komand.Action):
         timeout = params.get(Input.TIMEOUT)
 
         time_from_string = params.get(Input.TIME_FROM)
+        relative_time_from = params.get(Input.RELATIVE_TIME)
         time_to_string = params.get(Input.TIME_TO)
 
         # Time To is optional, if not specified, time to is set to now
-        time_from, time_to = self.parse_dates(time_from_string, time_to_string)
+        time_from, time_to = parse_dates(time_from_string, time_to_string, relative_time_from)
 
         log_set_id = self.get_log_set_id(log_set_name)
 
@@ -44,29 +45,6 @@ class AdvancedQueryOnLogSet(komand.Action):
 
         self.logger.info(f"Sending results to orchestrator.")
         return {Output.RESULTS: log_entries}
-
-    def parse_dates(self, time_from_string: str, time_to_string: str) -> (int, int):
-        """
-        Parse incoming dates and return them as millisecond epoch time
-
-        @param time_from_string: str
-        @param time_to_string: str (optional, if it's a falsey value, time to will be set to Now)
-        @return: (int, int)
-        """
-
-        # Parse times to epoch milliseconds
-        try:
-            time_from = int(parse(time_from_string).timestamp()) * 1000
-            if time_to_string:
-                time_to = int(parse(time_to_string).timestamp()) * 1000
-            else:
-                # Now in millisecond epoch time
-                time_to = int(time.time()) * 1000
-        except ParserError as e:
-            raise PluginException(cause="Could not parse given date.",
-                                  assistance="The date given was in an unrecognizable format.",
-                                  data=e)
-        return time_from, time_to
 
     def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:
         """
