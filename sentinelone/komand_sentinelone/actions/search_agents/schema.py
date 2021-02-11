@@ -11,6 +11,7 @@ class Input:
     AGENT = "agent"
     AGENT_ACTIVE = "agent_active"
     CASE_SENSITIVE = "case_sensitive"
+    OPERATIONAL_STATE = "operational_state"
     
 
 class Output:
@@ -42,6 +43,20 @@ class SearchAgentsInput(insightconnect_plugin_runtime.Input):
       "description": "Looks up agents in a case-sensitive manner. Setting this value to false may result in longer run times and unintended results",
       "default": true,
       "order": 3
+    },
+    "operational_state": {
+      "type": "string",
+      "title": "Operational State",
+      "description": "Agent operational state",
+      "default": "Any",
+      "enum": [
+        "Any",
+        "na",
+        "fully_disabled",
+        "partially_disabled",
+        "disabled_error"
+      ],
+      "order": 4
     }
   },
   "required": [
@@ -71,6 +86,42 @@ class SearchAgentsOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "definitions": {
+    "active_directory": {
+      "type": "object",
+      "title": "active_directory",
+      "properties": {
+        "computerDistinguishedName": {
+          "type": "string",
+          "title": "Computer Distinguished Name",
+          "description": "Computer distinguished name",
+          "order": 4
+        },
+        "computerMemberOf": {
+          "type": "array",
+          "title": "Computer Member Of",
+          "description": "Computer member of",
+          "items": {
+            "type": "string"
+          },
+          "order": 1
+        },
+        "lastUserDistinguishedName": {
+          "type": "string",
+          "title": "Last User Distinguished Name",
+          "description": "Last user distinguished name",
+          "order": 2
+        },
+        "lastUserMemberOf": {
+          "type": "array",
+          "title": "Last User Member Of",
+          "description": "Last user member of",
+          "items": {
+            "type": "string"
+          },
+          "order": 3
+        }
+      }
+    },
     "agent_data": {
       "type": "object",
       "title": "agent_data",
@@ -88,7 +139,7 @@ class SearchAgentsOutput(insightconnect_plugin_runtime.Output):
           "order": 13
         },
         "activeDirectory": {
-          "type": "object",
+          "$ref": "#/definitions/active_directory",
           "title": "Active Directory",
           "description": "Active Directory data",
           "order": 17
@@ -116,6 +167,12 @@ class SearchAgentsOutput(insightconnect_plugin_runtime.Output):
           "title": "Apps Vulnerability Status",
           "description": "Apps vulnerability status",
           "order": 7
+        },
+        "cloudProviders": {
+          "type": "object",
+          "title": "Cloud Providers",
+          "description": "Cloud providers for this agent",
+          "order": 66
         },
         "computerName": {
           "type": "string",
@@ -176,6 +233,12 @@ class SearchAgentsOutput(insightconnect_plugin_runtime.Output):
           "title": "External IP",
           "description": "External IPv4 address",
           "order": 3
+        },
+        "firewallEnabled": {
+          "type": "boolean",
+          "title": "Firewall Enabled",
+          "description": "Firewall enabled",
+          "order": 71
         },
         "groupId": {
           "type": "string",
@@ -261,6 +324,12 @@ class SearchAgentsOutput(insightconnect_plugin_runtime.Output):
           "description": "Last active date",
           "order": 60
         },
+        "lastIpToMgmt": {
+          "type": "string",
+          "title": "Last IP to Management Console",
+          "description": "The last IP used to connect to the Management console",
+          "order": 63
+        },
         "lastLoggedInUserName": {
           "type": "string",
           "title": "Last Logged In User Name",
@@ -273,6 +342,12 @@ class SearchAgentsOutput(insightconnect_plugin_runtime.Output):
           "description": "License key",
           "order": 46
         },
+        "locationEnabled": {
+          "type": "boolean",
+          "title": "Location Enabled",
+          "description": "Location enabled",
+          "order": 70
+        },
         "locationType": {
           "type": "string",
           "title": "Location Type",
@@ -284,7 +359,7 @@ class SearchAgentsOutput(insightconnect_plugin_runtime.Output):
           "title": "Locations",
           "description": "A list of locations reported by the Agent",
           "items": {
-            "type": "object"
+            "$ref": "#/definitions/location"
           },
           "order": 37
         },
@@ -317,15 +392,33 @@ class SearchAgentsOutput(insightconnect_plugin_runtime.Output):
           "title": "Network Interfaces",
           "description": "Device's network interfaces",
           "items": {
-            "type": "object"
+            "$ref": "#/definitions/network_interfaces"
           },
           "order": 18
+        },
+        "networkQuarantineEnabled": {
+          "type": "boolean",
+          "title": "Network Quarantine Enabled",
+          "description": "Network quarantine enabled",
+          "order": 64
         },
         "networkStatus": {
           "type": "string",
           "title": "Network Status",
           "description": "Agent's network connectivity status",
           "order": 62
+        },
+        "operationalState": {
+          "type": "string",
+          "title": "Operational State",
+          "description": "Agent operational state",
+          "order": 67
+        },
+        "operationalStateExpiration": {
+          "type": "string",
+          "title": "Operational State Expiration",
+          "description": "Agent operational state expiration",
+          "order": 69
         },
         "osArch": {
           "type": "string",
@@ -386,6 +479,18 @@ class SearchAgentsOutput(insightconnect_plugin_runtime.Output):
           "title": "Registered At",
           "description": "Time of first registration to management console (similar to createdAt)",
           "order": 40
+        },
+        "remoteProfilingState": {
+          "type": "string",
+          "title": "Remote Profiling State",
+          "description": "Agent remote profiling state",
+          "order": 65
+        },
+        "remoteProfilingStateExpiration": {
+          "type": "string",
+          "title": "Remote Profiling State Expiration",
+          "description": "Agent remote profiling state expiration in seconds",
+          "order": 68
         },
         "scanAbortedAt": {
           "type": "string",
@@ -455,6 +560,200 @@ class SearchAgentsOutput(insightconnect_plugin_runtime.Output):
           "title": "UUID",
           "description": "Agent's universally unique identifier",
           "order": 45
+        }
+      },
+      "definitions": {
+        "active_directory": {
+          "type": "object",
+          "title": "active_directory",
+          "properties": {
+            "computerDistinguishedName": {
+              "type": "string",
+              "title": "Computer Distinguished Name",
+              "description": "Computer distinguished name",
+              "order": 4
+            },
+            "computerMemberOf": {
+              "type": "array",
+              "title": "Computer Member Of",
+              "description": "Computer member of",
+              "items": {
+                "type": "string"
+              },
+              "order": 1
+            },
+            "lastUserDistinguishedName": {
+              "type": "string",
+              "title": "Last User Distinguished Name",
+              "description": "Last user distinguished name",
+              "order": 2
+            },
+            "lastUserMemberOf": {
+              "type": "array",
+              "title": "Last User Member Of",
+              "description": "Last user member of",
+              "items": {
+                "type": "string"
+              },
+              "order": 3
+            }
+          }
+        },
+        "location": {
+          "type": "object",
+          "title": "location",
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "ID",
+              "description": "Location ID",
+              "order": 3
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "Location name",
+              "order": 1
+            },
+            "scope": {
+              "type": "string",
+              "title": "Scope",
+              "description": "Location scope",
+              "order": 2
+            }
+          }
+        },
+        "network_interfaces": {
+          "type": "object",
+          "title": "network_interfaces",
+          "properties": {
+            "gatewayIp": {
+              "type": "string",
+              "title": "Gateway IP",
+              "description": "The default gateway IP",
+              "order": 5
+            },
+            "gatewayMacAddress": {
+              "type": "string",
+              "title": "Gateway MAC Address",
+              "description": "The default gateway MAC address",
+              "order": 1
+            },
+            "id": {
+              "type": "string",
+              "title": "ID",
+              "description": "ID",
+              "order": 3
+            },
+            "inet": {
+              "type": "array",
+              "title": "IPv4 Addresses",
+              "description": "IPv4 addresses",
+              "items": {
+                "type": "string"
+              },
+              "order": 7
+            },
+            "inet6": {
+              "type": "array",
+              "title": "IPv6 Addresses",
+              "description": "IPv6 addresses",
+              "items": {
+                "type": "string"
+              },
+              "order": 2
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "Name",
+              "order": 6
+            },
+            "physical": {
+              "type": "string",
+              "title": "Physical",
+              "description": "Interface's MAC address",
+              "order": 4
+            }
+          }
+        }
+      }
+    },
+    "location": {
+      "type": "object",
+      "title": "location",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "Location ID",
+          "order": 3
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Location name",
+          "order": 1
+        },
+        "scope": {
+          "type": "string",
+          "title": "Scope",
+          "description": "Location scope",
+          "order": 2
+        }
+      }
+    },
+    "network_interfaces": {
+      "type": "object",
+      "title": "network_interfaces",
+      "properties": {
+        "gatewayIp": {
+          "type": "string",
+          "title": "Gateway IP",
+          "description": "The default gateway IP",
+          "order": 5
+        },
+        "gatewayMacAddress": {
+          "type": "string",
+          "title": "Gateway MAC Address",
+          "description": "The default gateway MAC address",
+          "order": 1
+        },
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "ID",
+          "order": 3
+        },
+        "inet": {
+          "type": "array",
+          "title": "IPv4 Addresses",
+          "description": "IPv4 addresses",
+          "items": {
+            "type": "string"
+          },
+          "order": 7
+        },
+        "inet6": {
+          "type": "array",
+          "title": "IPv6 Addresses",
+          "description": "IPv6 addresses",
+          "items": {
+            "type": "string"
+          },
+          "order": 2
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 6
+        },
+        "physical": {
+          "type": "string",
+          "title": "Physical",
+          "description": "Interface's MAC address",
+          "order": 4
         }
       }
     }
