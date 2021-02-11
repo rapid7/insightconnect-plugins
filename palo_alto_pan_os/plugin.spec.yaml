@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_pan_os
 title: Palo Alto Firewall
 description: Manage Palo Alto Networks firewall devices
-version: 6.0.4
+version: 6.1.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -829,7 +829,7 @@ actions:
         order: 2
       enable_search:
         title: Enable Search
-        description: When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name
+        description: When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don't know the Address Object by its name
         type: boolean
         example: false
         default: false
@@ -904,13 +904,13 @@ actions:
         required: true
   add_address_object_to_group:
     title: Add Address Object to Group
-    description: Adds an address object to an address group. Supports IPv6
+    description: Adds address objects to an address group
     input:
       address_object:
         title: Address Object
-        description: The name of the address object to add
-        type: string
-        example: 198.51.100.100
+        description: The names of the address objects to add
+        type: "[]string"
+        example: ["198.51.100.100", "198.51.100.101", "example.com"]
         required: true
         order: 1
       group:
@@ -945,5 +945,58 @@ actions:
       address_objects:
         title: Address Objects
         description: Address objects currently in group
+        type: "[]string"
+        required: true
+  get_addresses_from_group:
+    title: Get Addresses from Group
+    description: Get addresses from an address group
+    input:
+      group:
+        title: Group
+        description: Group name
+        type: string
+        example: InsightConnect Block List
+        required: true
+        order: 1
+      device_name:
+        title: Device Name
+        description: Device name
+        type: string
+        default: localhost.localdomain
+        example: localhost.localdomain
+        required: true
+        order: 2
+      virtual_system:
+        title: Virtual System Name
+        description: Virtual system name
+        type: string
+        default: vsys1
+        example: vsys1
+        required: true
+        order: 3
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+      fqdn_addresses:
+        title: FQDN Addresses
+        description: FQDN addresses currently in group
+        type: "[]string"
+        required: true
+      ipv4_addresses:
+        title: IPv4 Addresses
+        description: IPv4 addresses currently in group
+        type: "[]string"
+        required: true
+      ipv6_addresses:
+        title: IPv6 Addresses
+        description: IPv6 addresses currently in group
+        type: "[]string"
+        required: true
+      all_addresses:
+        title: All Addresses
+        description: Addresses currently in group
         type: "[]string"
         required: true
