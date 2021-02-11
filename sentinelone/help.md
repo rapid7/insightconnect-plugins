@@ -465,7 +465,7 @@ This action is used to retrieve agent details.
 |----|----|-------|--------|-----------|----|-------|
 |agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID|None|hostname123|
 |case_sensitive|boolean|True|True|Looks up the specified Agent in a case-sensitive manner. Setting this to false may result in longer run times and unintended results|None|True|
-|operational_state|string|None|False|Agent operational state|['na', 'fully_disabled', 'partially_disabled', 'disabled_error']|na|
+|operational_state|string|Any|False|Agent operational state|['Any', 'na', 'fully_disabled', 'partially_disabled', 'disabled_error']|na|
 
 Example input:
 
@@ -882,7 +882,7 @@ Note that retrieving all active agents can return a very large amount of data de
 |agent|string|None|False|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID. If empty, this action will return all active or inactive agents depending on the value of the Agent Active input|None|hostname123|
 |agent_active|boolean|True|False|Return a list of all active or inactive agents when Agent input is not specified. Note that setting this to true for Active agents can return a very large amount of data|None|True|
 |case_sensitive|boolean|True|True|Looks up agents in a case-sensitive manner. Setting this value to false may result in longer run times and unintended results|None|True|
-|operational_state|string|None|False|Agent operational state|['na', 'fully_disabled', 'partially_disabled', 'disabled_error']|na|
+|operational_state|string|Any|False|Agent operational state|['Any', 'na', 'fully_disabled', 'partially_disabled', 'disabled_error']|na|
 
 Example input:
 
