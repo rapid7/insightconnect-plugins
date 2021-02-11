@@ -40,7 +40,9 @@ class GetAgentDetailsInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Operational State",
       "description": "Agent operational state",
+      "default": "Any",
       "enum": [
+        "Any",
         "na",
         "fully_disabled",
         "partially_disabled",
