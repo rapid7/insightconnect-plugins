@@ -41,7 +41,7 @@ class TestAdvancedQueryOnLog(TestCase):
 
         test_conn.connect(connection_params)
         test_action.connection = test_conn
-        result = test_action.get_log_id("Active Directory")
+        result = test_action.get_log_id("Web Access Log")
 
         self.assertIsNotNone(result) # Best we can do here, the log ID will change based on the instance used.
 
@@ -53,63 +53,4 @@ class TestAdvancedQueryOnLog(TestCase):
         with self.assertRaises(PluginException):
             test_action.get_log_id("Do not find this log")
 
-    def test_parse_dates(self):
-        action_params, connection_params, test_action, test_conn = self.setup()
 
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-
-        time_test_rel = "Absolute Time To"
-
-        time_test1 = "2005/10/31T17:11:09"
-        time_test2 = "01-01-2020"
-        time_test3 = "01-01-2020T18:01:01"
-        time_test4 = "02/24/1978"
-        time_test5 = "13:25"
-        time_test6 = "01/27/2020 10:00 PM"
-        time_test7 = "01-01-2020"
-        time_test8 = "12-31-2020"
-
-        res1, res2 = test_action.parse_dates(time_test1, time_test2, time_test_rel)
-        res3, res4 = test_action.parse_dates(time_test3, time_test4, time_test_rel)
-        res5, res6 = test_action.parse_dates(time_test5, time_test6, time_test_rel)
-        res7, res8 = test_action.parse_dates(time_test7, time_test8, time_test_rel)
-
-        self.assertEquals(res1, 1130800269000)
-        self.assertEquals(res2, 1577858400000)
-        self.assertEquals(res3, 1577923261000)
-        self.assertEquals(res4, 257148000000)
-        self.assertIsNotNone(res5) # This will be today @ 1:25 PM.
-        self.assertEquals(res6, 1580184000000)
-        self.assertEquals(res7, 1577858400000)
-        self.assertEquals(res8, 1609394400000)
-
-        not_used, now_result = test_action.parse_dates(time_test1, None, time_test_rel)
-        self.assertIsNotNone(now_result)
-
-        with self.assertRaises(PluginException):
-            test_action.parse_dates("AAA", None, time_test_rel)
-
-    def test_parse_dates_relative_time(self):
-        action_params, connection_params, test_action, test_conn = self.setup()
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-
-        time_test1 = "2005/10/31T17:11:09"
-        time_rel = "Absolute Time To"
-
-        not_used, res2 = test_action.parse_dates(time_test1, time_test1, time_rel)
-        self.assertEquals(res2, 1130800269000)
-
-        time_rel = "Last 5 Minutes"
-        not_used, res2 = test_action.parse_dates(time_test1, time_test1, time_rel)
-        expected = 1130800269000 - 300000
-        actual = res2
-        self.assertEquals(expected, actual)
-
-        time_rel = "Last 12 Hours"
-        not_used, res2 = test_action.parse_dates(time_test1, time_test1, time_rel)
-        expected = 1130800269000 - 4.32e+7
-        actual = res2
-        self.assertEquals(expected, actual)
