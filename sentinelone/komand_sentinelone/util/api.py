@@ -38,7 +38,7 @@ class SentineloneAPI:
             output = requests.get(f"{self.url}web/api/v{api_version}/agents?isActive={agent_active}", headers=self.token_header)
             results.extend(output.json()['data'])
 
-        if operational_state:
+        if operational_state and operational_state != "Any":
             for agent in results:
                 if agent.get('operationalState') != operational_state:
                     results.pop(results.index(agent))

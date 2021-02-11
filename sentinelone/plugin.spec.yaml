@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 5.1.0
+version: 6.0.0
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
@@ -1443,7 +1443,9 @@ actions:
         description: Agent operational state
         type: string
         example: na
+        default: Any
         enum:
+        - Any
         - na
         - fully_disabled
         - partially_disabled
@@ -1477,7 +1479,9 @@ actions:
         description: Agent operational state
         type: string
         example: na
+        default: Any
         enum:
+        - Any
         - na
         - fully_disabled
         - partially_disabled

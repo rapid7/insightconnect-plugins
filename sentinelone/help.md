@@ -486,7 +486,7 @@ Example input:
 Example output:
 
 ```
-{{
+{
   "agent": {
     "accountId": "433241117337583618",
     "accountName": "SentinelOne",
@@ -1335,7 +1335,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 5.1.0 - Add `operational_state` field to input, use API version 2.1, update schema in 'Get Agent Details' and 'Search Agent' actions
+* 6.0.0 - Add `operational_state` field to input, use API version 2.1, update schema in 'Get Agent Details' and 'Search Agent' actions
 * 5.0.1 - Correct spelling in help.md
 * 5.0.0 - Consolidate various Agent actions | Use API version 2.1 where possible | Delete obsolete Blacklist by IOC Hash and Agent Processes
 * 4.1.1 - Update the Get Threat Summary action to return all threat summaries instead of 10
