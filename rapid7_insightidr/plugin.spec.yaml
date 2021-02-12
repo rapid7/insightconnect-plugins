@@ -582,7 +582,7 @@ actions:
         required: true
       relative_time:
         title: Relative Time
-        descripiton: A relative time in the past to look for alerts
+        description: A relative time in the past to look for alerts
         type: string
         example: "Last 5 Minutes"
         default: "Last 5 Minutes"
@@ -643,7 +643,7 @@ actions:
         required: true
       relative_time:
         title: Relative Time
-        descripiton: A relative time in the past to look for alerts
+        description: A relative time in the past to look for alerts
         type: string
         example: "Last 5 Minutes"
         default: "Last 5 Minutes"

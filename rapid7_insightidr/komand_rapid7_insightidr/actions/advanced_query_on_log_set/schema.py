@@ -65,6 +65,7 @@ class AdvancedQueryOnLogSetInput(komand.Input):
     "relative_time": {
       "type": "string",
       "title": "Relative Time",
+      "description": "A relative time in the past to look for alerts",
       "default": "Last 5 Minutes",
       "enum": [
         "Last 5 Minutes",
