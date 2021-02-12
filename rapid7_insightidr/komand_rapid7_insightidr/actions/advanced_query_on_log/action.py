@@ -44,8 +44,6 @@ class AdvancedQueryOnLog(komand.Action):
         self.logger.info(f"Sending results to orchestrator.")
         return {Output.RESULTS: log_entries}
 
-        # Parse Dates
-
     def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:
         """
         Get log entries from a callback URL
