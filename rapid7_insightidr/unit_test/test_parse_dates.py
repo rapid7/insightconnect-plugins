@@ -41,19 +41,19 @@ class TestParseDates(TestCase):
         time_test1 = "2005/10/31T17:11:09"
         time_rel = "Absolute Time To"
 
-        not_used, res2 = parse_dates(time_test1, time_test1, time_rel)
-        self.assertEquals(res2, 1130800269000)
+        res1, _ = parse_dates(time_test1, time_test1, time_rel)
+        self.assertEquals(res1, 1130800269000)
 
         time_rel = "Last 5 Minutes"
-        not_used, res2 = parse_dates(time_test1, "", time_rel)
+        res1, _ = parse_dates(time_test1, "", time_rel)
         expected = int(time.time()) * 1000 - 300000
-        actual = res2
+        actual = res1
         self.assertTrue(expected - 1000 < actual < expected + 1000)
 
         time_rel = "Last 12 Hours"
-        not_used, res2 = parse_dates(time_test1, time_test1, time_rel)
+        res1, _ = parse_dates(time_test1, "", time_rel)
         expected = int(time.time()) * 1000 - 4.32e+7
-        actual = res2
+        actual = res1
         self.assertTrue(expected - 1000 < actual < expected + 1000)
 
 
