@@ -91,7 +91,7 @@ class AdvancedQueryOnLogSetInput(komand.Input):
     "time_to": {
       "type": "string",
       "title": "Time To",
-      "description": "Time and date for the end the query. If left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)",
+      "description": "Time and date for the end of the query. If left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)",
       "order": 4
     },
     "timeout": {
