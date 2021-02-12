@@ -45,26 +45,24 @@ class TestParseDates(TestCase):
         self.assertEquals(res2, 1130800269000)
 
         time_rel = "Last 5 Minutes"
-        not_used, res2 = parse_dates(time_test1, time_test1, time_rel)
-        expected = 1130800269000 - 300000
+        not_used, res2 = parse_dates(time_test1, "", time_rel)
+        expected = int(time.time()) * 1000 - 300000
         actual = res2
-        self.assertEquals(expected, actual)
+        self.assertTrue(expected - 1000 < actual < expected + 1000)
 
         time_rel = "Last 12 Hours"
         not_used, res2 = parse_dates(time_test1, time_test1, time_rel)
-        expected = 1130800269000 - 4.32e+7
+        expected = int(time.time()) * 1000 - 4.32e+7
         actual = res2
-        self.assertEquals(expected, actual)
+        self.assertTrue(expected - 1000 < actual < expected + 1000)
 
 
     def test_parse_dates_relative_time_no_to_date_specified(self):
         time_from = "1/1/2000"
 
+        # This shouldn't happen, but wanted to make sure there wasn't a crash.
         not_used, res2 = parse_dates(time_from, "", "")
         expected = int(time.time()) * 1000
 
         # This is realtime, give us 1s leeway for expected results
         self.assertTrue(expected - 1000 < res2 < expected + 1000)
-
-        time_rel = "Last 5 Minutes"
-        not_used, res2 = parse_dates(time_from, "", time_rel)
