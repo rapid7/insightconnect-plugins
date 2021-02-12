@@ -78,14 +78,14 @@ class AdvancedQueryOnLogSetInput(komand.Input):
         "Last 3 Hours",
         "Last 6 Hours",
         "Last 12 Hours",
-        "Use Time To Value"
+        "Use Time From Value"
       ],
       "order": 2
     },
     "time_from": {
       "type": "string",
       "title": "Time From",
-      "description": "Beginning time and date for the query. This will be ignored unless relative time is set to 'Use Time To Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)",
+      "description": "Beginning time and date for the query. This will be ignored unless relative time is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)",
       "order": 3
     },
     "time_to": {
