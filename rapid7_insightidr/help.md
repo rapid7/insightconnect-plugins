@@ -50,7 +50,7 @@ This action should be used when querying a collection of related services.
 |query|string|None|True|LQL Query|None|where(user=adagentadmin, loose)|
 |relative_time|string|Last 5 Minutes|True||['Last 5 Minutes', 'Last 10 Minutes', 'Last 20 Minutes', 'Last 30 Minutes', 'Last 45 Minutes', 'Last 1 Hour', 'Last 2 Hours', 'Last 3 Hours', 'Last 6 Hours', 'Last 12 Hours', 'Absolute Time To']|Last 5 Minutes|
 |time_from|string|None|True|Beginning time and date for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|01-01-2020T00:00:00|
-|time_to|string|None|False|If Absolute Time To is chosen for relative time the ending date and time for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|12-31-2020T00:00:00|
+|time_to|string|None|False|An absolute time to end the query. This will be ignored unless relative time is set to 'Use Time To Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|12-31-2020T00:00:00|
 |timeout|int|60|True|Time in seconds to wait for the query to return. If exceeded the plugin will throw an error|None|60|
 
 Example input:
@@ -148,9 +148,9 @@ This action should be used if querying an individual service or device.
 |----|----|-------|--------|-----------|----|-------|
 |log|string|None|True|Log to search|None|Firewall Activity|
 |query|string|None|True|LQL Query|None|where(user=adagentadmin, loose)|
-|relative_time|string|Last 5 Minutes|True||['Last 5 Minutes', 'Last 10 Minutes', 'Last 20 Minutes', 'Last 30 Minutes', 'Last 45 Minutes', 'Last 1 Hour', 'Last 2 Hours', 'Last 3 Hours', 'Last 6 Hours', 'Last 12 Hours', 'Absolute Time To']|Last 5 Minutes|
+|relative_time|string|Last 5 Minutes|True||['Last 5 Minutes', 'Last 10 Minutes', 'Last 20 Minutes', 'Last 30 Minutes', 'Last 45 Minutes', 'Last 1 Hour', 'Last 2 Hours', 'Last 3 Hours', 'Last 6 Hours', 'Last 12 Hours', 'Use Time To Value']|Last 5 Minutes|
 |time_from|string|None|True|Beginning time and date for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|01-01-2020T00:00:00|
-|time_to|string|None|False|If Absolute Time To is chosen for relative time the ending date and time for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|12-31-2020T00:00:00|
+|time_to|string|None|False|An absolute time to end the query. This will be ignored unless relative time is set to 'Use Time To Value' The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|12-31-2020T00:00:00|
 |timeout|int|60|True|Time in seconds to wait for the query to return. If exceeded the plugin will throw an error|None|60|
 
 Example input:
@@ -308,6 +308,9 @@ This action is used to get a specific log from an account.
 Example input:
 
 ```
+{
+  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06"
+}
 ```
 
 ##### Output

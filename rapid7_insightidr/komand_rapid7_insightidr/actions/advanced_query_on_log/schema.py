@@ -53,7 +53,7 @@ class AdvancedQueryOnLogInput(komand.Input):
         "Last 3 Hours",
         "Last 6 Hours",
         "Last 12 Hours",
-        "Absolute Time To"
+        "Use Time To Value"
       ],
       "order": 3
     },
@@ -66,7 +66,7 @@ class AdvancedQueryOnLogInput(komand.Input):
     "time_to": {
       "type": "string",
       "title": "Time To",
-      "description": "If Absolute Time To is chosen for relative time the ending date and time for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)",
+      "description": "An absolute time to end the query. This will be ignored unless relative time is set to 'Use Time To Value' The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)",
       "order": 4
     },
     "timeout": {

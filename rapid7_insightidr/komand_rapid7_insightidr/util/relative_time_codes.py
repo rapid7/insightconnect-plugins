@@ -9,5 +9,5 @@ relative_time_to_milliseconds = {
     "Last 3 Hours": 1.08e+7,
     "Last 6 Hours": 2.16e+7,
     "Last 12 Hours": 4.32e+7,
-    "Absolute Time To": 0
+    "Use Time To Value": 0
 }
