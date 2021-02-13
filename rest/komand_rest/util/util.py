@@ -1,5 +1,5 @@
 import requests
-from komand.exceptions import ConnectionTestException
+from komand.exceptions import PluginException
 
 
 class Common:
@@ -33,25 +33,25 @@ class Common:
             )
 
             if response.status_code == 401:
-                raise ConnectionTestException(
-                    preset=ConnectionTestException.Preset.USERNAME_PASSWORD,
+                raise PluginException(
+                    preset=PluginException.Preset.USERNAME_PASSWORD,
                     data=response.text
                 )
             if response.status_code == 403:
-                raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY, data=response.text)
+                raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
             if response.status_code == 404:
-                raise ConnectionTestException(preset=ConnectionTestException.Preset.NOT_FOUND, data=response.text)
+                raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
             if 400 <= response.status_code < 500:
-                raise ConnectionTestException(
-                    preset=ConnectionTestException.Preset.UNKNOWN,
-                    data=response.json().get("message", response.text)
+                raise PluginException(
+                    preset=PluginException.Preset.UNKNOWN,
+                    data=response.text
                 )
             if response.status_code >= 500:
-                raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVER_ERROR, data=response.text)
+                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
             if 200 <= response.status_code < 300:
                 return response
 
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNKNOWN, data=response.text)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except requests.exceptions.HTTPError as e:
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNKNOWN, data=e)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)

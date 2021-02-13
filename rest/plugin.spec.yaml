@@ -48,7 +48,7 @@ connection:
     example: Basic Auth
   secret:
     title: Secret Key
-    description: Credential secret key. Provide if you choose Bearer Token, Rapid7 Insight, OpsGenie, Pendo or using "CUSTOM_SECRET_INPUT" in the Default Headers field for Custom authentication type
+    description: Credential secret key. Provide a Bearer Token, Rapid7 Insight, OpsGenie, Pendo or using "CUSTOM_SECRET_INPUT" in the Default Headers field for Custom authentication type
     type: credential_secret_key
     required: false
     example: 9de5069c5afe602b2ea0a04b66beb2c0

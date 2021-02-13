@@ -55,7 +55,7 @@ class ConnectionSchema(komand.Input):
     "secret": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Secret Key",
-      "description": "Credential secret key. Provide if you choose Bearer Token, Rapid7 Insight, OpsGenie, Pendo or using \\"CUSTOM_SECRET_INPUT\\" in the Default Headers field for Custom authentication type",
+      "description": "Credential secret key. Provide a Bearer Token, Rapid7 Insight, OpsGenie, Pendo or using \\"CUSTOM_SECRET_INPUT\\" in the Default Headers field for Custom authentication type",
       "order": 3
     },
     "ssl_verify": {

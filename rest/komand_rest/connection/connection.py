@@ -1,7 +1,7 @@
 import komand
 from .schema import ConnectionSchema, Input
 from komand_rest.util.util import Common
-from komand.exceptions import PluginException
+from komand.exceptions import PluginException, ConnectionTestException
 # Custom imports below
 from requests.auth import HTTPDigestAuth, HTTPBasicAuth
 
@@ -11,8 +11,6 @@ class Connection(komand.Connection):
 
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
-        self.username = None
-        self.password = None
         self.api_key = None
         self.ssl_verify = None
         self.base_url = None
@@ -86,7 +84,11 @@ class Connection(komand.Connection):
             path = "/api/v1/feature"
         elif self.authentication_type == "OpsGenie":
             path = "/v2/users"
-        Common.call_api(self.base_url, path, self.default_headers, self.ssl_verify, auth=self.auth)
+
+        try:
+            Common.call_api(self.base_url.rstrip("/"), path, self.default_headers, self.ssl_verify, auth=self.auth)
+        except PluginException as e:
+            raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e.data)
 
         return {
             "success": True
