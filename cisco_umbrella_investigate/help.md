@@ -177,8 +177,8 @@ Example input:
 
 ```
 {
-  "domain": "example.com",
-  "type": "A"
+  "ip": "198.51.100.100",
+  "type": "NS"
 }
 ```
 
@@ -1425,6 +1425,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.1.1 - Add `data` in PluginException error handling in `investigate.py` file
 * 3.1.0 - Add Passive DNS and Timeline actions
 * 3.0.0 - Add action input and output examples to documentation | Set `title` in action input and output sections in schema | Update domain name in `investigate.py` | Improve error handling | Change action input names to lowercase in action Latest Malicious Domains by IP, DNS RR History for IP Address and Samples by Domain
 * 2.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Co-occurrences
