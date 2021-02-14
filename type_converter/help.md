@@ -23,7 +23,7 @@ _This plugin does not contain a connection._
 
 #### Array Match
 
-This action matches between two arrays with or without deduplicates element.
+This action matches between two arrays with or without duplicates element.
 
 ##### Input
 
