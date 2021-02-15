@@ -223,12 +223,14 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|host_status|string|False|Returns information about the host status|
 |status|status|False|Returns information about creating new address object|
 
 Example output:
 
 ```
 {
+    "host_status": "created",
     "status": {
         "success": true,
         "cli": {
@@ -345,6 +347,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.1 - Replace the PluginException with a logger in Create Address Object action | Add `host_status` output parameter in Create Address Object action
 * 1.3.0 - New action Remove Address from Group
 * 1.2.0 - New action Check If Address In Address Group
 * 1.1.0 - New actions Create Address Object and Delete Address Object
