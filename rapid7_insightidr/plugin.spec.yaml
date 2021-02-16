@@ -669,7 +669,7 @@ actions:
           - "Use Time From Value"
       time_from:
         title: Time From
-        description: Beginning date and time for the query. This will be ignored unless relative time is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
+        description: Beginning date and time for the query. This will be ignored unless Relative Time input is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
         type: string
         example: "01-01-2020T00:00:00"
         required: false
