@@ -29,7 +29,7 @@ class AdvancedQueryOnLog(komand.Action):
 
         if time_from > time_to:
             raise PluginException(cause="Time to was chronologically behind Time from.",
-                                  assistance="Please edit the step so Time From is chronologically behind (in the past) relative to Time To",
+                                  assistance="Please edit the step so Time From is chronologically behind (in the past) relative to Time To.\n",
                                   data=f"\nTime From: {time_from}\nTime To:{time_to}")
 
         log_id = self.get_log_id(log_name)
@@ -67,8 +67,14 @@ class AdvancedQueryOnLog(komand.Action):
         results_object = response.json()
         log_entries = results_object.get("events")
 
+
+        if results_object.get("links"):
+            callback_url = results_object.get("links")[0].get("href")
+        else:
+            callback_url = ""
+
         counter = timeout
-        while not log_entries and counter >= 0:
+        while callback_url:
             counter -= 1
             if counter < 0:
                 raise PluginException(cause="Time out exceeded",
@@ -96,7 +102,9 @@ class AdvancedQueryOnLog(komand.Action):
                     callback_url = results_object.get("links")[0].get("href")
                 except Exception: # No results were found
                     self.logger.info("No results were found, returning an empty list")
-                    log_entries = []
+                    return []
+            else:
+                return log_entries
 
         return log_entries
 

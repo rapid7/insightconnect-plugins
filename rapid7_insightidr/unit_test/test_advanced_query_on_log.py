@@ -35,6 +35,21 @@ class TestAdvancedQueryOnLog(TestCase):
 
         self.assertTrue("results" in results.keys())
         self.assertTrue(len(results.get("results")) > 0)
+        self.assertTrue("count" in results.keys())
+        self.assertTrue(results.get("count") > 0)
+
+    def test_integration_advanced_query_blank_log(self):
+        action_params, connection_params, test_action, test_conn = self.setup()
+
+        test_conn.connect(connection_params)
+        test_action.connection = test_conn
+        action_params["query"] = "where(dontfindthisxyzabc)"
+        results = test_action.run(action_params)
+
+        self.assertTrue("results" in results.keys())
+        self.assertTrue(len(results.get("results")) == 0)
+        self.assertTrue("count" in results.keys())
+        self.assertTrue(results.get("count") == 0)
 
     def test_get_log(self):
         action_params, connection_params, test_action, test_conn = self.setup()
