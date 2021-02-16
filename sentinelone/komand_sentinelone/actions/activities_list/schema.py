@@ -82,7 +82,7 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
     },
     "created_at_gt": {
       "type": "string",
-      "title": "Greater Then Date",
+      "title": "Greater than Date",
       "description": "Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z",
       "order": 10
     },
@@ -94,7 +94,7 @@ class ActivitiesListInput(insightconnect_plugin_runtime.Input):
     },
     "created_at_lt": {
       "type": "string",
-      "title": "Less Then Date",
+      "title": "Less than Date",
       "description": "Return activities created before this date in ISO-8601",
       "order": 8
     },
