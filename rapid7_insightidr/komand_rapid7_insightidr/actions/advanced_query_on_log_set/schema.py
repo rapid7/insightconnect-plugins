@@ -86,7 +86,7 @@ class AdvancedQueryOnLogSetInput(komand.Input):
     "time_from": {
       "type": "string",
       "title": "Time From",
-      "description": "Beginning date and time for the query. This will be ignored unless relative time is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)",
+      "description": "Beginning date and time for the query. This will be ignored unless Relative Time input is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)",
       "order": 3
     },
     "time_to": {
