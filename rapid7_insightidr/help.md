@@ -310,6 +310,9 @@ This action is used to get a specific log from an account.
 Example input:
 
 ```
+{	
+  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06"	
+}
 ```
 
 ##### Output
