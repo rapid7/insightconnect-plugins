@@ -9,15 +9,19 @@
 		},
 		{
 			"identifier": "advanced_query_on_log/schema.py",
-			"hash": "f08aae49d8ed8eef27355f1bba6dd7ea"
+			"hash": "c61b6f0167239fd450498d993aac9de9"
 		},
 		{
 			"identifier": "advanced_query_on_log_set/schema.py",
-			"hash": "b1412df7f9c1d09d797d742edc8935ef"
+			"hash": "cf06c0ce4e266841cb0f308714463cab"
 		},
 		{
 			"identifier": "assign_user_to_investigation/schema.py",
 			"hash": "ec59468fd861033f427686449183dc23"
+		},
+		{
+			"identifier": "close_investigations_in_bulk/schema.py",
+			"hash": "304d4c55e226aca9112ed3510d490a40"
 		},
 		{
 			"identifier": "get_a_log/schema.py",

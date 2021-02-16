@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Realtime query into an Insight IDR log set. This will query entire log sets for results"
+    DESCRIPTION = "Realtime query an InsightIDR log set. This will query entire log sets for results"
 
 
 class Input:

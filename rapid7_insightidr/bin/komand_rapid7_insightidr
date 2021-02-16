@@ -42,6 +42,8 @@ def main():
 
             self.add_action(actions.AssignUserToInvestigation())
 
+            self.add_action(actions.CloseInvestigationsInBulk())
+
             self.add_action(actions.GetALog())
 
             self.add_action(actions.GetAllLogs())
