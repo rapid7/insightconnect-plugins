@@ -57,7 +57,7 @@ Example input:
 
 ```
 {
-  "log": "Firewall Activity",
+  "log_set": "Firewall Activity",
   "query": "where(user=adagentadmin, loose)",
   "relative_time": "Last 5 Minutes",
   "time_from": "01-01-2020T00:00:00",
@@ -70,6 +70,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|count|integer|True|Number of log entries found|
 |results|[]events|True|Query Results|
 
 Example output:
@@ -170,6 +171,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|count|integer|True|Number of log entries found|
 |results|[]events|True|Query Results|
 
 Example output:

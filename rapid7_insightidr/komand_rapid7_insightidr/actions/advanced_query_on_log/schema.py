@@ -17,6 +17,7 @@ class Input:
     
 
 class Output:
+    COUNT = "count"
     RESULTS = "results"
     
 
@@ -97,6 +98,12 @@ class AdvancedQueryOnLogOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "count": {
+      "type": "integer",
+      "title": "Count",
+      "description": "Number of log entries found",
+      "order": 2
+    },
     "results": {
       "type": "array",
       "title": "Query Results",
@@ -108,6 +115,7 @@ class AdvancedQueryOnLogOutput(komand.Output):
     }
   },
   "required": [
+    "count",
     "results"
   ],
   "definitions": {

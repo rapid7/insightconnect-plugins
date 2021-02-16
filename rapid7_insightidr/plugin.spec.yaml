@@ -630,6 +630,11 @@ actions:
         description: Query Results
         type: "[]events"
         required: true
+      count:
+        title: Count
+        description: Number of log entries found
+        type: integer
+        required: true
 
   advanced_query_on_log_set:
     title: Advanced Query on Log Set
@@ -714,10 +719,14 @@ actions:
           - Third Party Alert
           - Virus Alert
           - Web Proxy Activity
-
     output:
       results:
         title: Query Results
         description: Query Results
         type: "[]events"
+        required: true
+      count:
+        title: Count
+        description: Number of log entries found
+        type: integer
         required: true

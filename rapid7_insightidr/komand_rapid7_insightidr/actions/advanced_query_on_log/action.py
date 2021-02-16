@@ -27,6 +27,11 @@ class AdvancedQueryOnLog(komand.Action):
         # Time To is optional, if not specified, time to is set to now
         time_from, time_to = parse_dates(time_from_string, time_to_string, relative_time_from)
 
+        if time_from > time_to:
+            raise PluginException(cause="Time to was chronologically behind Time from.",
+                                  assistance="Please edit the step so Time From is chronologically behind (in the past) relative to Time To",
+                                  data=f"\nTime From: {time_from}\nTime To:{time_to}")
+
         log_id = self.get_log_id(log_name)
 
         # The IDR API will SOMETIMES return results immediately.
@@ -42,7 +47,7 @@ class AdvancedQueryOnLog(komand.Action):
             log_entry["message"] = json.loads(log_entry.get("message", "{}"))
 
         self.logger.info(f"Sending results to orchestrator.")
-        return {Output.RESULTS: log_entries}
+        return {Output.RESULTS: log_entries, Output.COUNT: len(log_entries)}
 
     def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:
         """
@@ -89,9 +94,9 @@ class AdvancedQueryOnLog(komand.Action):
             if not log_entries:
                 try:
                     callback_url = results_object.get("links")[0].get("href")
-                except Exception:
-                    raise PluginException(PluginException.Preset.INVALID_JSON,
-                                          data=results_object)
+                except Exception: # No results were found
+                    self.logger.info("No results were found, returning an empty list")
+                    log_entries = []
 
         return log_entries
 
