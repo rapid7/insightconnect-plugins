@@ -104,7 +104,7 @@ This action is used to check that a host or address object is in an address grou
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |address|string|None|True|Address Object name, or IP, CIDR, or domain name when Enable Search is set to true|None|MaliciousHost|
-|enable_search|boolean|False|False|When enabled, search for contents of Address Objects for an IP, CIDR or domain. This is useful when you don’t know the Address Object by its name|None|True|
+|enable_search|boolean|False|False|When enabled, search for contents of Address Objects for an IP, CIDR or domain. This is useful when you don't know the Address Object by its name|None|True|
 |group|string|None|True|Name of address group to check|None|InsightConnect Block List|
 
 Example input:

@@ -215,7 +215,7 @@ actions:
         example: MaliciousHost
       enable_search:
         title: Enable Search
-        description: When enabled, search for contents of Address Objects for an IP, CIDR or domain. This is useful when you don’t know the Address Object by its name
+        description: When enabled, search for contents of Address Objects for an IP, CIDR or domain. This is useful when you don't know the Address Object by its name
         type: boolean
         default: false
         required: false
