@@ -25,22 +25,47 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
 
         if params.get(Input.SKIP_PRIVATE_ADDRESS) and address_type != "fqdn" and self._check_if_private(address,
                                                                                                         address_type):
-            raise PluginException(cause="Private address provided to be blocked.",
-                                    assistance="Skip Private Address set to true but private IP: "
-                                                f"{address} provided to be blocked.")
+            self.logger.error(
+                f"Private IP address '{address}' provided to be blocked.\n"
+                f"To block '{address}' set the Skip Private Address parameter to false."
+            )
+            return {
+                Output.HOST_STATUS: "private"
+            }
 
-        if whitelist:
-            self._match_whitelist(address, whitelist)
+        if whitelist and self._match_whitelist(address, whitelist):
+            return {
+                Output.HOST_STATUS: "whitelisted"
+            }
 
         self.connection.sonicwall_api.validate_if_zone_exists(zone)
-
         response = self.connection.sonicwall_api.create_address_object(
             address_type,
             self._create_payload(name, zone, address, address_type)
         )
 
+        try:
+            response_status_code = response.get('status').get('info')[0].get('code')
+        except (AttributeError, IndexError):
+            raise PluginException(
+                cause="SonicWall returned unexpected response.",
+                assistance="Status code could not be found. Please check that provided inputs are correct "
+                           "and try again.",
+                data=response
+            )
+        if response_status_code == "E_EXISTS":
+            self.logger.error(
+                f"Unable to create address object '{address}'.\n"
+                f"Address object '{address}' already exists."
+            )
+            return {
+                Output.STATUS: response['status'],
+                Output.HOST_STATUS: "already_exists"
+            }
+
         return {
-            Output.STATUS: response['status']
+            Output.STATUS: response['status'],
+            Output.HOST_STATUS: "created"
         }
 
     def _create_payload(self, name: str, zone: str, address: str, address_type: str) -> dict:
@@ -71,9 +96,12 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
     def _match_whitelist(self, address: str, whitelist: str) -> bool:
         trimmed_address = re.sub(r"/32$", "", address)
         if address in whitelist:
-            raise PluginException(
-                cause=f"Address Object not created because the host {address} was found in the whitelist as {address}.",
-                assistance=f"If you would like to block this host, remove {address} from the whitelist and try again.")
+            self.logger.error(
+                f"Address Object not created because the host {address} was found in the whitelist"
+                f"as {address}. If you would like to block this host, remove {address} from the whitelist "
+                f"and try again."
+            )
+            return True
         elif '/' not in trimmed_address:
             pass
 
@@ -82,12 +110,12 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
                 net = ip_network(address_object, False)
                 ip = ip_address(trimmed_address)
                 if ip in net:
-                    raise PluginException(
-                        cause=f"Address Object not created because the host {address}"
-                              f" was found in the whitelist as {address_object}.",
-                        assistance="If you would like to block this host,"
-                              f" remove {address_object} from the whitelist and try again.")
-
+                    self.logger.error(
+                        f"Address Object not created because the host {address} was found in the whitelist"
+                        f" as {address}. If you would like to block this host, remove {address} from the "
+                        f"whitelist and try again."
+                    )
+                    return True
         return False
 
     @staticmethod
@@ -118,5 +146,7 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
             return "fqdn"
         if re.search('/', address):
             return "cidr"
-        raise PluginException(cause="Unknown address type provided.",
-                              assistance=f"{address} is not one of the following: IPv4, IPv6, CIDR or domain name.")
+        raise PluginException(
+            cause="Unknown address type provided.",
+            assistance=f"{address} is not one of the following: IPv4, IPv6, CIDR or domain name."
+        )
