@@ -23,7 +23,7 @@ _This plugin does not contain a connection._
 
 #### Array Match
 
-This action matches between two arrays with or without duplicates element.
+This action identifies matches within two arrays, returning a new array containing items that were found in both arrays. It can be used to search for items in an array.
 
 ##### Input
 
