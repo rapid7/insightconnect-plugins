@@ -82,6 +82,7 @@ This action is used to create a new ServiceNow Incident record.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|additional_fields|object|None|False|JSON object containing the additional fields and values to create incident|None|{"description": "incident description"}|
 |assigned_to|string|None|False|User ID of person assigned to the incident|None|user|
 |assignment_group|string|None|False|Assignment group name of the incident|None|Team Development Code Reviewers|
 |business_service|string|None|False|Name of business service|None|All|
@@ -101,6 +102,7 @@ Example input:
 
 ```
 {
+  "additional_fields": "{"description": "incident description"}",
   "assigned_to": "user",
   "assignment_group": "Team Development Code Reviewers",
   "business_service": "All",
@@ -550,6 +552,7 @@ This action is used to update a ServiceNow Incident with the given data.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|additional_fields|object|None|False|JSON object containing the additional fields and values to update incident|None|{"description": "incident description"}|
 |assigned_to|string|None|False|User ID of person assigned to the incident|None|user|
 |assignment_group|string|None|False|Assignment group name of the incident|None|Recommendation Admin|
 |business_service|string|None|False|Name of business service|None|All|
@@ -570,6 +573,7 @@ Example input:
 
 ```
 {
+  "additional_fields": "{"description": "incident description"}",
   "assigned_to": "user",
   "assignment_group": "Recommendation Admin",
   "business_service": "All",
@@ -753,6 +757,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 5.0.1 - Add new Additional Fields input for Create Incident and Update Incident actions
 * 5.0.0 - Add input fields to Create Incident and Update Incident action instead of JSON object
 * 4.1.2 - Fix input parameter in Incident Created trigger
 * 4.1.1 - Add `docs_url` to plugin spec with link to plugin setup guide
