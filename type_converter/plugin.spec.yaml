@@ -335,7 +335,7 @@ actions:
         default: true
         example: True
     output:
-      item_array:
+      matches_array:
         title: Matches Array
         description: Array containing items found in both the first and second arrays
         type: "[]string"

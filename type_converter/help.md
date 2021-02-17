@@ -55,13 +55,13 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |count|integer|True|Count of matches|
-|item_array|[]string|True|Array with elements|
+|matches_array|[]string|True|Array containing items found in both the first and second arrays|
 
 Example output:
 
 ```
 {
-  "item_array": [
+  "matches_array": [
     "rapid7",
     "insight_connect"
   ],

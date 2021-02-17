@@ -21,7 +21,7 @@ class ArrayMatch(insightconnect_plugin_runtime.Action):
             array_match = self.intersection(first_array, second_array)
 
         return {
-            Output.ITEM_ARRAY: array_match,
+            Output.MATCHES_ARRAY: array_match,
             Output.COUNT: len(array_match)
         }
 

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Matches between two arrays with or without duplicates element"
+    DESCRIPTION = "Identify matched items present across two arrays"
 
 
 class Input:
@@ -15,7 +15,7 @@ class Input:
 
 class Output:
     COUNT = "count"
-    ITEM_ARRAY = "item_array"
+    MATCHES_ARRAY = "matches_array"
     
 
 class ArrayMatchInput(insightconnect_plugin_runtime.Input):
@@ -73,10 +73,10 @@ class ArrayMatchOutput(insightconnect_plugin_runtime.Output):
       "description": "Count of matches",
       "order": 2
     },
-    "item_array": {
+    "matches_array": {
       "type": "array",
-      "title": "Item Array",
-      "description": "Array with elements",
+      "title": "Matches Array",
+      "description": "Array containing items found in both the first and second arrays",
       "items": {
         "type": "string"
       },
@@ -85,7 +85,7 @@ class ArrayMatchOutput(insightconnect_plugin_runtime.Output):
   },
   "required": [
     "count",
-    "item_array"
+    "matches_array"
   ]
 }
     """)
