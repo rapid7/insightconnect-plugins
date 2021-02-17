@@ -313,7 +313,7 @@ actions:
         required: true
   array_match:
     title: Array Match
-    description: Matches between two arrays with or without duplicates element
+    description: Identify matched items present across two arrays
     input:
       array1:
         title: Array1
