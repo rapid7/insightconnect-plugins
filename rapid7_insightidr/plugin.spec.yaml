@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 2.0.1
+version: 2.1.0
 vendor: rapid7
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_insightidr
@@ -566,7 +566,7 @@ actions:
 
   advanced_query_on_log:
     title: Advanced Query on Log
-    description: Realtime query into an Insight IDR log. This will query individual logs for results
+    description: Realtime query an InsightIDR log. This will query individual logs for results
     input:
       query:
         title: Query
@@ -608,7 +608,7 @@ actions:
 
   advanced_query_on_log_set:
     title: Advanced Query on Log Set
-    description: Realtime query into an Insight IDR log set. This will query entire log sets for results
+    description: Realtime query an InsightIDR log set. This will query entire log sets for results
     input:
       query:
         title: Query
@@ -670,4 +670,54 @@ actions:
         title: Query Results
         description: Query Results
         type: "[]events"
+        required: true
+  close_investigations_in_bulk:
+    title: Close Investigations in Bulk
+    description: This action is used to close all investigations that fall within a date range
+    input:
+      source:
+        title: Source
+        description: The name of an investigation source
+        type: string
+        example: MANUAL
+        default: MANUAL
+        required: false
+        enum:
+          - ALERT
+          - MANUAL
+          - HUNT
+      datetime_from:
+        title: Datetime From
+        description: An ISO formatted timestamp, default last week
+        type: date
+        example: 2018-07-01T00:00:00Z
+        required: false
+      datetime_to:
+        title: Datetime To
+        description: An ISO formatted timestamp of the ending date range, current time if left blank
+        type: date
+        example: 2018-07-01T00:00:00Z
+        required: false
+      max_investigations_to_close:
+        title: Max Investigations to Close
+        description: An optional maximum number of alerts to close with this request. If this parameter is not specified then there is no maximum. If this limit is exceeded, then an error is returned
+        type: integer
+        example: 10
+        required: false
+      alert_type:
+        title: Alert Type
+        description: The category of alerts that should be closed
+        type: string
+        example: Account Created
+        required: false
+    output:
+      ids:
+        title: IDs
+        description: The IDs of the investigations that were closed by the request
+        type: "[]string"
+        required: true
+      num_closed:
+        title: Num Closed
+        description: The number of investigations closed by the request
+        type: integer
         required: true
