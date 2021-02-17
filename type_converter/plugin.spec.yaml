@@ -336,7 +336,7 @@ actions:
         example: True
     output:
       item_array:
-        title: Item Array
+        title: Matches Array
         description: Array with elements
         type: "[]string"
         required: true
