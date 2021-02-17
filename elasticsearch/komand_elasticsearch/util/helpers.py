@@ -1,3 +1,4 @@
+import json
 import requests
 from urllib.parse import quote
 from requests.auth import HTTPBasicAuth
@@ -122,6 +123,8 @@ def get_search(log, host, index, type_, query=None, username=None, password=None
 
     if not query:
         query = {}
+    else:
+        query = json.loads(query)
 
     query['version'] = True
     try:

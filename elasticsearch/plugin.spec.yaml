@@ -355,7 +355,7 @@ actions:
         required: false
       query:
         title: Query
-        type: object
+        type: string
         description: JSON Query DSL
         required: false
     output:
@@ -407,7 +407,7 @@ triggers:
         required: false
       query:
         title: Query
-        type: object
+        type: string
         description: JSON Query DSL
         required: false
     output:
