@@ -498,7 +498,6 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
-* 5.0.1 - Removed trailing spaces | Move duplicate code to library
 * 5.0.0 - Add new input to connection to allow for Auto Referrals | A number of bug fixes
 * 4.1.0 - Add new input Attributes in action Query | Add new output Count in action Query
 * 4.0.3 - Fix issue with connection documentation incorrectly stating a protocol prefix is required
