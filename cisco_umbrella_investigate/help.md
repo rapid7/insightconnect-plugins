@@ -177,8 +177,8 @@ Example input:
 
 ```
 {
-  "domain": "example.com",
-  "type": "A"
+  "ip": "198.51.100.100",
+  "type": "NS"
 }
 ```
 
@@ -468,7 +468,7 @@ This action is used to return a file, or a file-like object, such as a process r
 |----|----|-------|--------|-----------|----|-------|
 |hash|string|None|True|Search sample by hash (SHA-256, SHA-1 or MD5)|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |limit|string|None|False|Default of 10, can be extended for a larger data set|None|10|
-|offset|string|None|False|The offset of the individual entities in the query’s response, used for pagination|None|10|
+|offset|string|None|False|The offset of the individual entities in the query's response, used for pagination|None|10|
 
 Example input:
 
@@ -1077,7 +1077,7 @@ Example input:
 |----|----|--------|-----------|
 |limit|integer|True|Number of sample results|
 |moreDataAvailable|boolean|True|If more data is available. Extend the limit and/or offset to view|
-|offset|integer|True|The offset of the individual entities in the query’s response; used for pagination|
+|offset|integer|True|The offset of the individual entities in the query's response; used for pagination|
 |query|string|True|What string was queried or seen by the API|
 |samples|[]sample_info|True|Information about the actual sample|
 |totalResults|integer|True|The number of results returned. Same as limit if limit is reached and moreDataAvailable is true|
@@ -1425,6 +1425,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.1.1 - Return information from API when a PluginException has occurred to improve error messaging
 * 3.1.0 - Add Passive DNS and Timeline actions
 * 3.0.0 - Add action input and output examples to documentation | Set `title` in action input and output sections in schema | Update domain name in `investigate.py` | Improve error handling | Change action input names to lowercase in action Latest Malicious Domains by IP, DNS RR History for IP Address and Samples by Domain
 * 2.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Co-occurrences
