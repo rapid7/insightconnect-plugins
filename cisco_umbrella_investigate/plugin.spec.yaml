@@ -463,7 +463,7 @@ types:
       title: SHA256
       type: string
       description: The SHA256 checksum of the sample. This checksum is important if
-        you’d like to find out more about this sample in the /sample/ endpoint
+        you'd like to find out more about this sample in the /sample/ endpoint
       required: true
     sha1:
       title: SHA1
@@ -479,14 +479,14 @@ types:
       required: true
     magicType:
       type: string
-      description: A ‘magic type’ is better understood as a file type. Specifically,
-        it is the output of the Linux “file” utility
+      description: A 'magic type' is better understood as a file type. Specifically,
+        it is the output of the Linux 'file' utility
       required: true
     threatScore:
       type: integer
       description: A threatScore is a measure of the amount of system weakening, obfuscation,
         persistence, modification, data exfiltration, and other behaviors which may
-        be a threat to the host system’s integrity
+        be a threat to the host system's integrity
       required: true
     size:
       type: integer
@@ -959,7 +959,7 @@ actions:
         required: true
       offset:
         title: Offset
-        description: The offset of the individual entities in the query’s response;
+        description: The offset of the individual entities in the query's response;
           used for pagination
         type: integer
         required: true
@@ -988,7 +988,7 @@ actions:
       offset:
         title: Offset
         type: string
-        description: The offset of the individual entities in the query’s response,
+        description: The offset of the individual entities in the query's response,
           used for pagination
         required: false
         example: 10
