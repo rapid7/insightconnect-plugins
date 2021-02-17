@@ -757,7 +757,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 5.0.1 - Add JSON object containing the additional fields and values to create / update incident
+* 5.0.1 - Add new Additional Fields input for Create Incident and Update Incident actions
 * 5.0.0 - Add input fields to Create Incident and Update Incident action instead of JSON object
 * 4.1.2 - Fix input parameter in Incident Created trigger
 * 4.1.1 - Add `docs_url` to plugin spec with link to plugin setup guide
