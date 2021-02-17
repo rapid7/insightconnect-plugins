@@ -30,7 +30,7 @@ class AdvancedQueryOnLogSet(komand.Action):
         time_from, time_to = parse_dates(time_from_string, time_to_string, relative_time_from)
 
         if time_from > time_to:
-            raise PluginException(cause="Time to was chronologically behind Time from.",
+            raise PluginException(cause="Time To input was chronologically behind Time From.",
                                   assistance="Please edit the step so Time From is chronologically behind (in the past) relative to Time To.\n",
                                   data=f"\nTime From: {time_from}\nTime To:{time_to}")
 
