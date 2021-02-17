@@ -16,6 +16,7 @@ class Input:
     
 
 class Output:
+    HOST_STATUS = "host_status"
     STATUS = "status"
     
 
@@ -78,6 +79,12 @@ class CreateAddressObjectOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "host_status": {
+      "type": "string",
+      "title": "Host Status",
+      "description": "Returns information about the host status",
+      "order": 2
+    },
     "status": {
       "$ref": "#/definitions/status",
       "title": "Status",

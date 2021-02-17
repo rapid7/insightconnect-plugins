@@ -21,6 +21,54 @@ _This plugin does not contain a connection._
 
 ### Actions
 
+#### Array Match
+
+This action identifies matches within two arrays, returning a new array containing items that were found in both arrays. It can be used to search for items in an array.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|array1|[]string|None|True|First array|None|["rapid7", "insight_connect", "example"]|
+|array2|[]string|None|True|Second array|None|["rapid7", "insight_connect"]|
+|deduplicates|boolean|True|False|Set to true to return first matches items, set to false to return all matches|None|True|
+
+Example input:
+
+```
+{
+  "array1": [
+    "rapid7",
+    "insight_connect",
+    "example"
+  ],
+  "array2": [
+    "rapid7",
+    "insight_connect"
+  ],
+  "deduplicates": true
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|count|integer|True|Count of matches|
+|matches_array|[]string|True|Array containing items found in both the first and second arrays|
+
+Example output:
+
+```
+{
+  "matches_array": [
+    "rapid7",
+    "insight_connect"
+  ],
+  "count": 2
+}
+```
+
 #### Array Diff
 
 This action is used to get the difference between two arrays.
@@ -577,6 +625,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.8.0 - New action Array Match
 * 1.7.0 - New action Array Diff
 * 1.6.1 - Add Cloud Enabled tag
 * 1.6.0 - New action Combine Arrays

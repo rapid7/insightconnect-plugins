@@ -33,7 +33,7 @@ class CheckIfAddressInAddressGroupInput(insightconnect_plugin_runtime.Input):
     "enable_search": {
       "type": "boolean",
       "title": "Enable Search",
-      "description": "When enabled, search for contents of Address Objects for an IP, CIDR or domain. This is useful when you don’t know the Address Object by its name",
+      "description": "When enabled, search for contents of Address Objects for an IP, CIDR or domain. This is useful when you don't know the Address Object by its name",
       "default": false,
       "order": 3
     },
