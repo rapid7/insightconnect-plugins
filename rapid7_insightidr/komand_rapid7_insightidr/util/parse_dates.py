@@ -2,15 +2,16 @@ from dateutil.parser import parse, ParserError
 from komand_rapid7_insightidr.util.relative_time_codes import relative_time_to_milliseconds
 from komand.exceptions import PluginException
 import time
-import logging
+from typing import Optional
 
 
-def parse_dates(time_from_string: str, time_to_string: str, relative_time_from: str) -> (int, int):
+def parse_dates(time_from_string: str, time_to_string: Optional[str], relative_time_from: str) -> (int, int):
     """
     Parse incoming dates and return them as millisecond epoch time
 
     @param time_from_string: str
     @param time_to_string: str (optional, if it's a falsey value, time to will be set to Now)
+    @param relative_time_from: str
     @return: (int, int)
     """
 
