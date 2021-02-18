@@ -38,7 +38,8 @@ Example input:
 
 #### Advanced Query on Log Set
 
-This action is used to realtime query an InsightIDR log set. This will query entire log sets for results.
+This action is used to realtime query an InsightIDR log set. This will query entire log sets for results and can accept
+a relative or absolute time-range from which to query.
 
 This action should be used when querying a collection of related services.
 
@@ -69,9 +70,12 @@ Example input:
 To use Relative Time, leave `Time From` and `Time To` blank. For example:
 
 ```
+{
   "relative_time": "Last 5 Minutes",
   "time_from": "",
   "time_to": "",
+  ...
+}
 ```
 
 The above settings will run your search from 5 minutes ago until now. 
@@ -79,9 +83,12 @@ The above settings will run your search from 5 minutes ago until now.
 If you want to use absolute time for a query. You can set up the input like this:
 
 ```
+{
   "relative_time": "Use Time From Value",
   "time_from": "1/1/2021",
   "time_to": "1/31/2021",
+  ...
+}
 ```
 
 This will run your search for the entire month of January every time.
@@ -159,7 +166,7 @@ Example output:
 
 #### Advanced Query on Log
 
-This action is used to realtime query an InsightIDR log. This will query individual logs for results.
+This action is used to realtime query an InsightIDR log. This will query individual logs for results using a relative or absolute time-range from which to query.
 
 This action should be used if querying an individual service or device. 
 
@@ -190,9 +197,12 @@ Example input:
 To use Relative Time, leave `Time From` and `Time To` blank. For example:
 
 ```
+{
   "relative_time": "Last 5 Minutes",
   "time_from": "",
   "time_to": "",
+  ...
+}
 ```
 
 The above settings will run your search from 5 minutes ago until now. 
@@ -200,9 +210,12 @@ The above settings will run your search from 5 minutes ago until now.
 If you want to use absolute time for a query. You can set up the input like this:
 
 ```
+{
   "relative_time": "Use Time From Value",
   "time_from": "1/1/2021",
   "time_to": "1/31/2021",
+  ...
+}
 ```
 
 This will run your search for the entire month of January every time. 
