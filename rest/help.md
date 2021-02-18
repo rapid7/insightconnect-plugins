@@ -33,7 +33,7 @@ Example input:
 ```
 {
   "authentication_type": "Basic Auth",
-  "base_url": "https://httpbin.org/",
+  "base_url": "https://httpbin.org",
   "basic_auth_credentials": {
     "username": "user@example.com",
     "password": "mypassword"
@@ -50,13 +50,29 @@ Example input (with Custom header auth):
 ```
 {
   "authentication_type": "Custom",
-  "base_url": "https://httpbin.org/",
+  "base_url": "https://httpbin.org",
   "secret": {
     "secretKey": "ABCDEF123456"
   }
   "default_headers": {
     "User-Agent": "Rapid7 InsightConnect",
     "API-Token": "CUSTOM_SECRET_INPUT"
+  },
+  "ssl_verify": true
+}
+```
+
+Example input (with Insight Platform):
+
+```
+{
+  "authentication_type": "Rapid7 Insight",
+  "base_url": "https://us.api.insight.rapid7.com",
+  "secret": {
+    "secretKey": "12341234-1234-1234-1234-123412341234"
+  }
+  "default_headers": {
+    "User-Agent": "Rapid7 InsightConnect"
   },
   "ssl_verify": true
 }
