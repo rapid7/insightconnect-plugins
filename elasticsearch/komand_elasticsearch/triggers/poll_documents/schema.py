@@ -47,7 +47,7 @@ class PollDocumentsInput(komand.Input):
       "order": 1
     },
     "query": {
-      "type": "object",
+      "type": "string",
       "title": "Query",
       "description": "JSON Query DSL",
       "order": 5

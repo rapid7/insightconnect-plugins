@@ -4,7 +4,7 @@ products: [insightconnect]
 name: elasticsearch
 title: Elasticsearch
 description: Distributed Real-Time Search and Analytics Engine
-version: 2.0.4
+version: 2.0.5
 vendor: rapid7
 support: community
 status: []
@@ -128,7 +128,7 @@ types:
       required: false
   hits:
     total:
-      type: total
+      type: integer
       title: Total
       description: Details about total hits
     max_score:

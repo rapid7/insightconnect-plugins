@@ -121,10 +121,9 @@ def get_search(log, host, index, type_, query=None, username=None, password=None
         url += '&'.join(d)
     headers = {'Content-Type': 'application/json'}
 
-    if not query:
-        query = {}
-    else:
-        query = json.loads(query)
+    query = {}
+    if query:
+        query['query'] = json.loads(query)
 
     query['version'] = True
     try:

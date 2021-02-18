@@ -1,7 +1,7 @@
 {
-	"spec": "de4f0de764db9b450ab77ff505dfccd8",
-	"manifest": "2d140c606d4f74019d31fd1876f1b676",
-	"setup": "b9b9036972c0c5090a9b67c0994bbe66",
+	"spec": "bec707983fae1701ea799f50c4c919a4",
+	"manifest": "99e319385eb2626d2c796e1bb5c6cfaf",
+	"setup": "a3848fc1ce32df06038324cc17a939cf",
 	"schemas": [
 		{
 			"identifier": "cluster_health/schema.py",
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "search_documents/schema.py",
-			"hash": "329c5ffedc0beea8eeb2818cb92204c4"
+			"hash": "2d1cad52e7f5c0ad1ea2c2d2014fd82e"
 		},
 		{
 			"identifier": "update_document/schema.py",
@@ -25,7 +25,7 @@
 		},
 		{
 			"identifier": "poll_documents/schema.py",
-			"hash": "9d5ce812f5b4801c4cd24f4afb9a24b3"
+			"hash": "d060840b6e3fb05f16fba277f97961dd"
 		}
 	]
 }
