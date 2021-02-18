@@ -4,18 +4,20 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Realtime query into an Insight IDR log. This will query individual logs for results"
+    DESCRIPTION = "Realtime query an InsightIDR log. This will query individual logs for results"
 
 
 class Input:
     LOG = "log"
     QUERY = "query"
+    RELATIVE_TIME = "relative_time"
     TIME_FROM = "time_from"
     TIME_TO = "time_to"
     TIMEOUT = "timeout"
     
 
 class Output:
+    COUNT = "count"
     RESULTS = "results"
     
 
@@ -29,7 +31,7 @@ class AdvancedQueryOnLogInput(komand.Input):
       "type": "string",
       "title": "Log",
       "description": "Log to search",
-      "order": 5
+      "order": 6
     },
     "query": {
       "type": "string",
@@ -37,30 +39,50 @@ class AdvancedQueryOnLogInput(komand.Input):
       "description": "LQL Query",
       "order": 1
     },
+    "relative_time": {
+      "type": "string",
+      "title": "Relative Time",
+      "description": "A relative time in the past to look for alerts",
+      "default": "Last 5 Minutes",
+      "enum": [
+        "Last 5 Minutes",
+        "Last 10 Minutes",
+        "Last 20 Minutes",
+        "Last 30 Minutes",
+        "Last 45 Minutes",
+        "Last 1 Hour",
+        "Last 2 Hours",
+        "Last 3 Hours",
+        "Last 6 Hours",
+        "Last 12 Hours",
+        "Use Time From Value"
+      ],
+      "order": 2
+    },
     "time_from": {
       "type": "string",
       "title": "Time From",
-      "description": "Beginning time and date for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)",
-      "order": 2
+      "description": "Beginning date and time for the query. This will be ignored unless Relative Time input is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)",
+      "order": 3
     },
     "time_to": {
       "type": "string",
       "title": "Time To",
-      "description": "Ending date and time for the query. If this is left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)",
-      "order": 3
+      "description": "Date and time for the end of the query. If left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)",
+      "order": 4
     },
     "timeout": {
       "type": "integer",
       "title": "Timeout",
       "description": "Time in seconds to wait for the query to return. If exceeded the plugin will throw an error",
       "default": 60,
-      "order": 4
+      "order": 5
     }
   },
   "required": [
     "log",
     "query",
-    "time_from",
+    "relative_time",
     "timeout"
   ]
 }
@@ -76,6 +98,12 @@ class AdvancedQueryOnLogOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "count": {
+      "type": "integer",
+      "title": "Count",
+      "description": "Number of log entries found",
+      "order": 2
+    },
     "results": {
       "type": "array",
       "title": "Query Results",
@@ -87,6 +115,7 @@ class AdvancedQueryOnLogOutput(komand.Output):
     }
   },
   "required": [
+    "count",
     "results"
   ],
   "definitions": {

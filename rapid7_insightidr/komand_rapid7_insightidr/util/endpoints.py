@@ -20,6 +20,8 @@ class Investigations:
         :return: TODO
         """
 
+        return f"{console_url}idr/v1/investigations/bulk_close"
+
     @staticmethod
     def set_the_status_of_an_investigation(console_url: str, idr_id: str, status: str):
         """
