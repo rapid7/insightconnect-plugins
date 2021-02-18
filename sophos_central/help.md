@@ -684,7 +684,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.3.1 - Update headers adding User-Agent in api.py to identify API request
+* 4.3.1 - Add custom User-Agent string to API calls to identify API request
 * 4.3.0 - Add new action Check Tamper Protection Status
 * 4.2.0 - Add new action Get Agent Details
 * 4.1.0 - Add new action Antivirus Scan
