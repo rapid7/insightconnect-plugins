@@ -1,8 +1,9 @@
 import json
-import requests
+
+from komand.exceptions import PluginException
 from urllib.parse import quote
 from requests.auth import HTTPBasicAuth
-
+import requests
 
 def test_auth(log, host, username=None, password=None):
     if not host.endswith('/'):
@@ -121,16 +122,22 @@ def get_search(log, host, index, type_, query=None, username=None, password=None
         url += '&'.join(d)
     headers = {'Content-Type': 'application/json'}
 
-    query = {}
+    query_object = {}
     if query:
-        query['query'] = json.loads(query)
+        try:
+            query_object['query'] = json.loads(query)
+        except Exception as e:
+            raise PluginException(cause="Input query was malformed.",
+                                  assistance=f"Please ensure the input query is valid JSON.\n The query was:\n{query}\n",
+                                  data=e)
 
-    query['version'] = True
+
+    query_object['version'] = True
     try:
         if not username:
-            resp = requests.get(url, json=query, headers=headers)
+            resp = requests.get(url, json=query_object, headers=headers)
         else:
-            resp = requests.get(url, json=query, auth=HTTPBasicAuth(username, password), headers=headers)
+            resp = requests.get(url, json=query_object, auth=HTTPBasicAuth(username, password), headers=headers)
 
         if resp.status_code >= 200 and resp.status_code <= 399:
             return resp.json()
