@@ -4,11 +4,12 @@ import json
 
 
 class SophosCentralAPI:
-    def __init__(self, url, client_id, client_secret, tenant_id, logger):
+    def __init__(self, url, client_id, client_secret, tenant_id, version, logger):
         self.url = url
         self.client_id = client_id
         self.client_secret = client_secret
         self.tenant_id = tenant_id
+        self.version = version
         self.logger = logger
 
     def get_endpoint_id(self, entity):
@@ -49,7 +50,7 @@ class SophosCentralAPI:
     def get_blacklists(self, page: int = 1):
         return self._make_request(
             "GET",
-            f"/endpoint/v1/settings/blocked-items",
+            "/endpoint/v1/settings/blocked-items",
             "Tenant",
             params={
                 "page": page,
@@ -68,7 +69,7 @@ class SophosCentralAPI:
     def blacklist(self, hash: str, description: str):
         return self._make_request(
             "POST",
-            f"/endpoint/v1/settings/blocked-items",
+            "/endpoint/v1/settings/blocked-items",
             "Tenant",
             json_data={
                 "comment": description,
@@ -101,7 +102,7 @@ class SophosCentralAPI:
             }
         return self._make_request(
             "GET",
-            f"/common/v1/alerts",
+            "/common/v1/alerts",
             "Tenant",
             params=params
         )
@@ -120,7 +121,7 @@ class SophosCentralAPI:
             }
         return self._make_request(
             "GET",
-            f"/endpoint/v1/endpoints",
+            "/endpoint/v1/endpoints",
             "Tenant",
             params=params
         )
@@ -174,6 +175,10 @@ class SophosCentralAPI:
 
     def _call_api(self, method, url, params=None, json_data=None, data=None, headers=None):
         response = {"text": ""}
+        if not headers:
+            headers = {}
+        headers["User-Agent"] = f"Sophos Rapid7 InsightConnect {self.version}"
+
         try:
             response = requests.request(
                 method,
