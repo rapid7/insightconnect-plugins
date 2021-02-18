@@ -177,7 +177,7 @@ class SophosCentralAPI:
         response = {"text": ""}
         if not headers:
             headers = {}
-        headers["User-Agent"] = f"Sophos Rapid7 InsightConnect {self.version}"
+        headers["User-Agent"] = f"Rapid7 InsightConnect, Sophos Central:{self.version}"
 
         try:
             response = requests.request(
