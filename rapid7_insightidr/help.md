@@ -66,6 +66,26 @@ Example input:
 }
 ```
 
+To use Relative Time, leave `Time From` and `Time To` blank. For example:
+
+```
+  "relative_time": "Last 5 Minutes",
+  "time_from": "",
+  "time_to": "",
+```
+
+The above settings will run your search from 5 minutes ago until now. 
+
+If you want to use absolute time for a query. You can set up the input like this:
+
+```
+  "relative_time": "Use Time From Value",
+  "time_from": "1/1/2021",
+  "time_to": "1/31/2021",
+```
+
+This will run your search for the entire month of January every time.
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -166,6 +186,26 @@ Example input:
   "timeout": 60
 }
 ```
+
+To use Relative Time, leave `Time From` and `Time To` blank. For example:
+
+```
+  "relative_time": "Last 5 Minutes",
+  "time_from": "",
+  "time_to": "",
+```
+
+The above settings will run your search from 5 minutes ago until now. 
+
+If you want to use absolute time for a query. You can set up the input like this:
+
+```
+  "relative_time": "Use Time From Value",
+  "time_from": "1/1/2021",
+  "time_to": "1/31/2021",
+```
+
+This will run your search for the entire month of January every time. 
 
 ##### Output
 
