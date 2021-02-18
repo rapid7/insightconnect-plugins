@@ -498,7 +498,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
-* 5.0.0 - Add new input to connection to allow for Auto Referrals | A number of bug fixes
+* 5.0.0 - Add Chase Referrals input to the connection to support multi-domain environments | Rename Add action to Add User to be more explicit | Refactor reusable code from actions into util.py
 * 4.1.0 - Add new input Attributes in action Query | Add new output Count in action Query
 * 4.0.3 - Fix issue with connection documentation incorrectly stating a protocol prefix is required
 * 4.0.2 - Fix issue where some host names were being incorrectly parsed
