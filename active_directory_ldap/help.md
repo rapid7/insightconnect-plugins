@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|auto_referrals|boolean|True|True|Allows the plugin to follow referrals from the specified Active Directory server to other Active Directory servers|None|True|
+|chase_referrals|boolean|True|True|Allows the plugin to follow referrals from the specified Active Directory server to other Active Directory servers|None|True|
 |host|string|None|True|Server Host, e.g. example.com|None|example.com|
 |port|integer|389|True|Port, e.g. 389|None|389|
 |use_ssl|boolean|None|True|Use SSL?|None|True|
@@ -35,7 +35,7 @@ Example input:
 
 ```
 {
-  "auto_referrals": true,
+  "chase_referrals": true,
   "host": "example.com",
   "port": 389,
   "use_ssl": true,

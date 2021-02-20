@@ -4,7 +4,7 @@ from .schema import ModifyGroupsInput, ModifyGroupsOutput, Input, Output
 from komand.exceptions import PluginException
 from komand_active_directory_ldap.util.utils import ADUtils
 from ldap3 import extend
-from ldap3.core.exceptions import LDAPInvalidDnError
+from ldap3.core.exceptions import LDAPException
 
 
 class ModifyGroups(komand.Action):
@@ -39,24 +39,17 @@ class ModifyGroups(komand.Action):
                 assistance=f'The DN {dn} was not found.'
             )
 
-        if add_remove == 'add':
-            try:
-                group = extend.ad_add_members_to_groups(conn, dn, group_dn)
-            except LDAPInvalidDnError as e:
-                raise PluginException(
-                    cause='Either the user or group distinguished name was not found.',
-                    assistance='Please check that the distinguished names are correct',
-                    data=e
-                )
-        else:
-            try:
-                group = extend.ad_remove_members_from_groups(conn, dn, group_dn, fix=True)
-            except LDAPInvalidDnError as e:
-                raise PluginException(
-                    cause='Either the user or group distinguished name was not found.',
-                    assistance='Please check that the distinguished names are correct',
-                    data=e
-                )
+        try:
+            if add_remove == 'add':
+                group = extend.ad_add_members_to_groups(conn, dn, group_dn, fix=True, raise_error=True)
+            else:
+                group = extend.ad_remove_members_from_groups(conn, dn, group_dn, fix=True, raise_error=True)
+        except LDAPException as e:
+            raise PluginException(
+                cause='Either the user or group distinguished name was not found.',
+                assistance='Please check that the distinguished names are correct',
+                data=e
+            )
 
         if group is False:
             self.logger.error(f'ModifyGroups: Unexpected result for group. Group was {str(group)}')

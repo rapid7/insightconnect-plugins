@@ -52,8 +52,8 @@ connection:
     description: Username and password
     required: true
     example: '{"username":"user1", "password":"mypassword"}'
-  auto_referrals:
-    title: Auto Referrals
+  chase_referrals:
+    title: Chase Referrals
     type: boolean
     description: Allows the plugin to follow referrals from the specified Active Directory server to other Active Directory servers
     required: true

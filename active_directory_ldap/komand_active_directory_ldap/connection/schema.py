@@ -4,7 +4,7 @@ import json
 
 
 class Input:
-    AUTO_REFERRALS = "auto_referrals"
+    CHASE_REFERRALS = "chase_referrals"
     HOST = "host"
     PORT = "port"
     USE_SSL = "use_ssl"
@@ -17,9 +17,9 @@ class ConnectionSchema(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "auto_referrals": {
+    "chase_referrals": {
       "type": "boolean",
-      "title": "Auto Referrals",
+      "title": "Chase Referrals",
       "description": "Allows the plugin to follow referrals from the specified Active Directory server to other Active Directory servers",
       "default": true,
       "order": 5
@@ -51,7 +51,7 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "auto_referrals",
+    "chase_referrals",
     "host",
     "port",
     "use_ssl",
