@@ -40,4 +40,7 @@ class LookupDomain(komand.Action):
             clean_report = komand.helper.clean(domain_report["data"])
             return clean_report
         except Exception as e:
-            PluginException(cause=f"Error: {e}", assistance="Review exception")
+            raise PluginException(cause="Recorded Future did not return results",
+                                  assistance="This is usually because the domain entered was malformed. Please check the domain to make sure it is a valid domain",
+                                  data=f"\nDomain input: {original_domain}\n Exception:\n{e}")
+
