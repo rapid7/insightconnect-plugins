@@ -61,3 +61,6 @@ class TestLookupDomain(TestCase):
 
         actual = test_action.get_domain("https://www.google.gs")
         self.assertEquals(actual, "www.google.gs")
+
+        actual = test_action.get_domain("https://www.example.com/path/to/file")
+        self.assertEquals(actual, "www.example.com")
