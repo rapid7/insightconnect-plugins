@@ -16,7 +16,7 @@ class LookupDomain(komand.Action):
     def run(self, params={}):
         try:
             original_domain = params.get(Input.DOMAIN)
-            domain = original_domain.replace('https://','').split('/')[0]
+            domain = original_domain.replace('https://','').replace('http://','').split('/')[0]
             comment = params.get(Input.COMMENT)
             fields = [
                 "analystNotes",
