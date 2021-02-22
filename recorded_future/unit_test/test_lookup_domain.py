@@ -51,7 +51,7 @@ class TestLookupDomain(TestCase):
         test_action = LookupDomain()
 
         actual = test_action.get_domain("www.google.com")
-        self.assertEquals(actual, "google.com")
+        self.assertEquals(actual, "www.google.com")
 
         actual = test_action.get_domain("google.gs")
         self.assertEquals(actual, "google.gs")
@@ -60,4 +60,4 @@ class TestLookupDomain(TestCase):
         self.assertEquals(actual, "google.gs")
 
         actual = test_action.get_domain("https://www.google.gs")
-        self.assertEquals(actual, "google.gs")
+        self.assertEquals(actual, "www.google.gs")

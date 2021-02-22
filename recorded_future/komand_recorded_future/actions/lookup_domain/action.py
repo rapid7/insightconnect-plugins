@@ -2,6 +2,7 @@ import komand
 
 from .schema import LookupDomainInput, LookupDomainOutput, Input
 from komand.exceptions import PluginException
+from urllib.parse import urlparse
 
 
 class LookupDomain(komand.Action):
@@ -34,19 +35,20 @@ class LookupDomain(komand.Action):
 
             if not comment:
                 comment = None
+            self.logger.info(f"Looking for: {domain}")
             domain_report = self.connection.client.lookup_domain(domain, fields=fields, comment=comment)
             if domain_report.get("warnings", False):
                 self.logger.warning(f"Warning: {domain_report.get('warnings')}")
             clean_report = komand.helper.clean(domain_report["data"])
             return clean_report
         except Exception as e:
-            raise PluginException(cause="Recorded Future did not return results",
-                                  assistance="This is usually because the domain entered was malformed. Please check the domain to make sure it is a valid domain",
+            raise PluginException(cause="Recorded Future did not return results.",
+                                  assistance="This either indicates a malformed URL, or that the URL was not found in Recorded Future.",
                                   data=f"\nDomain input: {original_domain}\n Exception:\n{e}")
 
     def get_domain(self, original_domain):
-        stripped = original_domain.replace('https://', '').replace('http://', '').split('/')[0]
-        if stripped.startswith("www."):
-            stripped = stripped[4:]
+        stripped = urlparse(original_domain).netloc # This returns null if it's not a URL
+        if not stripped:
+            stripped = original_domain.replace('https://', '').replace('http://', '').split('/')[0]
         return stripped
 
