@@ -45,3 +45,19 @@ class TestLookupDomain(TestCase):
         self.assertTrue("analystNotes" in results.keys())
         self.assertTrue("metrics" in results.keys())
         self.assertTrue("risk" in results.keys())
+
+    def test_get_domain(self):
+        log = logging.getLogger("Test")
+        test_action = LookupDomain()
+
+        actual = test_action.get_domain("www.google.com")
+        self.assertEquals(actual, "google.com")
+
+        actual = test_action.get_domain("google.gs")
+        self.assertEquals(actual, "google.gs")
+
+        actual = test_action.get_domain("http://google.gs")
+        self.assertEquals(actual, "google.gs")
+
+        actual = test_action.get_domain("https://www.google.gs")
+        self.assertEquals(actual, "google.gs")

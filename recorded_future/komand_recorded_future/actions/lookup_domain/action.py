@@ -16,7 +16,7 @@ class LookupDomain(komand.Action):
     def run(self, params={}):
         try:
             original_domain = params.get(Input.DOMAIN)
-            domain = original_domain.replace('https://','').replace('http://','').split('/')[0]
+            domain = self.get_domain(original_domain)
             comment = params.get(Input.COMMENT)
             fields = [
                 "analystNotes",
@@ -43,4 +43,10 @@ class LookupDomain(komand.Action):
             raise PluginException(cause="Recorded Future did not return results",
                                   assistance="This is usually because the domain entered was malformed. Please check the domain to make sure it is a valid domain",
                                   data=f"\nDomain input: {original_domain}\n Exception:\n{e}")
+
+    def get_domain(self, original_domain):
+        stripped = original_domain.replace('https://', '').replace('http://', '').split('/')[0]
+        if stripped.startswith("www."):
+            stripped = stripped[4:]
+        return stripped
 
