@@ -1337,6 +1337,16 @@ Example input:
 }
 ```
 
+URLs given to this action will be stripped to their domains before they are used.
+
+For example: 
+
+`https://www.example.com/path/to/file`
+
+will become
+
+`www.example.com`
+
 ##### Output
 
 |Name|Type|Required|Description|
