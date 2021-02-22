@@ -15,7 +15,7 @@ class LookupDomain(komand.Action):
 
     def run(self, params={}):
         try:
-            domain = params.get(Input.DOMAIN).strip('https://').split('/')[0]
+            domain = params.get(Input.DOMAIN).lstrip('https://').split('/')[0]
             comment = params.get(Input.COMMENT)
             fields = [
                 "analystNotes",
@@ -36,6 +36,7 @@ class LookupDomain(komand.Action):
             domain_report = self.connection.client.lookup_domain(domain, fields=fields, comment=comment)
             if domain_report.get("warnings", False):
                 self.logger.warning(f"Warning: {domain_report.get('warnings')}")
-            return komand.helper.clean(domain_report["data"])
+            clean_report = komand.helper.clean(domain_report["data"])
+            return clean_report
         except Exception as e:
             PluginException(cause=f"Error: {e}", assistance="Review exception")
