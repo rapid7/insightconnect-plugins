@@ -2,7 +2,6 @@ import komand
 from .schema import ResetPasswordInput, ResetPasswordOutput, Input, Output, Component
 # Custom imports below
 import requests
-from komand.exceptions import PluginException
 
 
 class ResetPassword(komand.Action):
