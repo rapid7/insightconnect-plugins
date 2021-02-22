@@ -1337,7 +1337,7 @@ Example input:
 }
 ```
 
-URLs given to this action will be stripped to their domains before they are used.
+URLs given to this action will be stripped to their domain before they are used.
 
 For example: 
 
