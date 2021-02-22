@@ -5,8 +5,7 @@ from komand.exceptions import PluginException
 # Custom imports below
 import time
 import json
-from dateutil.parser import parse, ParserError
-
+from komand_rapid7_insightidr.util.parse_dates import parse_dates
 
 class AdvancedQueryOnLog(komand.Action):
     def __init__(self):
@@ -23,10 +22,16 @@ class AdvancedQueryOnLog(komand.Action):
         timeout = params.get(Input.TIMEOUT)
 
         time_from_string = params.get(Input.TIME_FROM)
+        relative_time_from = params.get(Input.RELATIVE_TIME)
         time_to_string = params.get(Input.TIME_TO)
 
         # Time To is optional, if not specified, time to is set to now
-        time_from, time_to = self.parse_dates(time_from_string, time_to_string)
+        time_from, time_to = parse_dates(time_from_string, time_to_string, relative_time_from)
+
+        if time_from > time_to:
+            raise PluginException(cause="Time To input was chronologically behind Time From.",
+                                  assistance="Please edit the step so Time From is chronologically behind (in the past) relative to Time To.\n",
+                                  data=f"\nTime From: {time_from}\nTime To:{time_to}")
 
         log_id = self.get_log_id(log_name)
 
@@ -43,32 +48,7 @@ class AdvancedQueryOnLog(komand.Action):
             log_entry["message"] = json.loads(log_entry.get("message", "{}"))
 
         self.logger.info(f"Sending results to orchestrator.")
-        return {Output.RESULTS: log_entries}
-
-    def parse_dates(self, time_from_string: str, time_to_string: str) -> (int, int):
-        """
-        Parse incoming dates and return them as millisecond epoch time
-
-        @param time_from_string: str
-        @param time_to_string: str (optional, if it's a falsey value, time to will be set to Now)
-        @return: (int, int)
-        """
-
-        # Parse times to epoch milliseconds
-        try:
-            time_from = int(parse(time_from_string).timestamp()) * 1000
-            if time_to_string:
-                time_to = int(parse(time_to_string).timestamp()) * 1000
-            else:
-                # Now in millisecond epoch time
-                time_to = int(time.time()) * 1000
-        except ParserError as e:
-            raise PluginException(
-                cause="Could not parse given date.",
-                assistance="The date given was in an unrecognizable format.",
-                data=e,
-            )
-        return time_from, time_to
+        return {Output.RESULTS: log_entries, Output.COUNT: len(log_entries)}
 
     def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:
         """
@@ -90,8 +70,14 @@ class AdvancedQueryOnLog(komand.Action):
         results_object = response.json()
         log_entries = results_object.get("events")
 
+
+        if results_object.get("links"):
+            callback_url = results_object.get("links")[0].get("href")
+        else:
+            callback_url = ""
+
         counter = timeout
-        while not log_entries and counter >= 0:
+        while callback_url:
             counter -= 1
             if counter < 0:
                 raise PluginException(
@@ -120,8 +106,11 @@ class AdvancedQueryOnLog(komand.Action):
             if not log_entries:
                 try:
                     callback_url = results_object.get("links")[0].get("href")
-                except Exception:
-                    raise PluginException(PluginException.Preset.INVALID_JSON, data=results_object)
+                except Exception: # No results were found
+                    self.logger.info("No results were found, returning an empty list")
+                    return []
+            else:
+                return log_entries
 
         return log_entries
 

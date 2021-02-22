@@ -299,9 +299,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         errors = "\n".join(response.get("errors"))
 
-        raise PluginException(
-            cause="An error occured when trying to unblacklist.", assistance=f"The following error(s) occured: {errors}"
-        )
+        raise PluginException(cause="An error occurred when trying to unblacklist.",
+                              assistance=f"The following error(s) occurred: {errors}")
 
     def delete_blacklist_item_by_hash(self, item_ids: str):
         return self._call_api("DELETE", "restrictions", json={"data": {"type": "black_hash", "ids": item_ids}}).get(

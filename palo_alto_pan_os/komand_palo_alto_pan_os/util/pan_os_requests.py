@@ -55,7 +55,7 @@ class Request(object):
         }
 
         response = self.make_request("SESSION.POST", querystring)
-        output = self.get_output_with_exceptions(response)
+        output = self.get_output_with_exceptions(response, element)
         return {"response": output}
 
     def delete_(self, xpath: str) -> dict:
@@ -146,8 +146,24 @@ class Request(object):
 
         return response
 
+    def get_address_group(self, device_name: str, virtual_system: str, group_name: str) -> dict:
+        return self.get_(
+            f"/config/devices/entry[@name='{device_name}']/vsys/entry[@name='{virtual_system}']/address-group/entry[@name='{group_name}']"
+        )
+
+    def edit_address_group(self, device_name: str, virtual_system: str, group_name: str, xml_str: str) -> dict:
+        return self.edit_(
+            f"/config/devices/entry[@name='{device_name}']/vsys/entry[@name='{virtual_system}']/address-group/entry[@name='{group_name}']",
+            xml_str
+        )
+
+    def get_address_object(self, device_name: str, virtual_system: str, object_name: str) -> dict:
+        return self.get_(
+            f"/config/devices/entry[@name='{device_name}']/vsys/entry[@name='{virtual_system}']/address/entry[@name='{object_name}']"
+        )
+
     @staticmethod
-    def get_output_with_exceptions(response):
+    def get_output_with_exceptions(response, element=None):
         if response.status_code == 401:
             raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
         if response.status_code == 403:
@@ -194,8 +210,16 @@ class Request(object):
                 data=f"{response.text}, error {e}",
             )
 
-        if output.get("response", {}).get("@status") == "error":
-            error = output["response"]["msg"]
+        if output.get('response', {}).get('@status') == 'error':
+            error = output['response']['msg']
+            line_error = error.get('line')
+            if line_error and [s for s in line_error if ('is invalid' in s or 'config validity' in s)]:
+                raise PluginException(
+                    cause='PAN-OS returned an error in response to the request.',
+                    assistance=f'This is likely because the provided element {element} does not exist or the xpath is not correct. Please verify the element name and xpath and try again.',
+                    data=line_error
+                )
+
             error = json.dumps(error)
             raise PluginException(
                 cause="PAN-OS returned an error in response to the request.",

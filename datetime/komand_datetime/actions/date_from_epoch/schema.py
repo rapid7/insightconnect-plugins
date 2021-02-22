@@ -22,7 +22,7 @@ class DateFromEpochInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "epoch": {
-      "type": "number",
+      "type": "string",
       "title": "Epoch",
       "description": "Epoch as integer or float",
       "order": 1

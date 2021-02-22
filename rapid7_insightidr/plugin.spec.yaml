@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 2.0.1
+version: 3.0.0
 vendor: rapid7
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_insightidr
@@ -566,7 +566,7 @@ actions:
 
   advanced_query_on_log:
     title: Advanced Query on Log
-    description: Realtime query into an Insight IDR log. This will query individual logs for results
+    description: Realtime query an InsightIDR log. This will query individual logs for results
     input:
       query:
         title: Query
@@ -574,18 +574,41 @@ actions:
         type: string
         example: "where(user=adagentadmin, loose)"
         required: true
+        order: 1
+      relative_time:
+        title: Relative Time
+        description: A relative time in the past to look for alerts
+        type: string
+        example: "Last 5 Minutes"
+        default: "Last 5 Minutes"
+        required: true
+        order: 2
+        enum:
+          - "Last 5 Minutes"
+          - "Last 10 Minutes"
+          - "Last 20 Minutes"
+          - "Last 30 Minutes"
+          - "Last 45 Minutes"
+          - "Last 1 Hour"
+          - "Last 2 Hours"
+          - "Last 3 Hours"
+          - "Last 6 Hours"
+          - "Last 12 Hours"
+          - "Use Time From Value"
       time_from:
         title: Time From
-        description: Beginning time and date for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
+        description: Beginning date and time for the query. This will be ignored unless Relative Time input is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
         type: string
         example: "01-01-2020T00:00:00"
-        required: true
+        required: false
+        order: 3
       time_to:
         title: Time To
-        description: Ending date and time for the query. If this is left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
+        description: Date and time for the end of the query. If left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
         type: string
         example: "12-31-2020T00:00:00"
         required: false
+        order: 4
       timeout:
         title: Timeout
         description: Time in seconds to wait for the query to return. If exceeded the plugin will throw an error
@@ -593,22 +616,29 @@ actions:
         example: 60
         default: 60
         required: true
+        order: 5
       log:
         title: Log
         description: Log to search
         type: string
         example: Firewall Activity
         required: true
+        order: 6
     output:
       results:
         title: Query Results
         description: Query Results
         type: "[]events"
         required: true
+      count:
+        title: Count
+        description: Number of log entries found
+        type: integer
+        required: true
 
   advanced_query_on_log_set:
     title: Advanced Query on Log Set
-    description: Realtime query into an Insight IDR log set. This will query entire log sets for results
+    description: Realtime query an InsightIDR log set. This will query entire log sets for results
     input:
       query:
         title: Query
@@ -616,18 +646,41 @@ actions:
         type: string
         example: "where(user=adagentadmin, loose)"
         required: true
+        order: 1
+      relative_time:
+        title: Relative Time
+        description: A relative time in the past to look for alerts
+        type: string
+        example: "Last 5 Minutes"
+        default: "Last 5 Minutes"
+        required: true
+        order: 2
+        enum:
+          - "Last 5 Minutes"
+          - "Last 10 Minutes"
+          - "Last 20 Minutes"
+          - "Last 30 Minutes"
+          - "Last 45 Minutes"
+          - "Last 1 Hour"
+          - "Last 2 Hours"
+          - "Last 3 Hours"
+          - "Last 6 Hours"
+          - "Last 12 Hours"
+          - "Use Time From Value"
       time_from:
         title: Time From
-        description: Beginning time and date for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
+        description: Beginning date and time for the query. This will be ignored unless Relative Time input is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
         type: string
         example: "01-01-2020T00:00:00"
-        required: true
+        required: false
+        order: 3
       time_to:
         title: Time To
-        description: Ending date and time for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
+        description: Date and time for the end of the query. If left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
         type: string
         example: "12-31-2020T00:00:00"
         required: false
+        order: 4
       timeout:
         title: Timeout
         description: Time in seconds to wait for the query to return. If exceeded the plugin will throw an error
@@ -635,12 +688,14 @@ actions:
         example: 60
         default: 60
         required: true
+        order: 5
       log_set:
         title: Log Set
         description: Log Set to search
         type: string
         example: Firewall Activity
         required: true
+        order: 6
         enum:
           - Advanced Malware Alert
           - Active Directory Admin Activity
@@ -664,10 +719,65 @@ actions:
           - Third Party Alert
           - Virus Alert
           - Web Proxy Activity
-
     output:
       results:
         title: Query Results
         description: Query Results
         type: "[]events"
+        required: true
+      count:
+        title: Count
+        description: Number of log entries found
+        type: integer
+        required: true
+
+  close_investigations_in_bulk:
+    title: Close Investigations in Bulk
+    description: This action is used to close all investigations that fall within a date range
+    input:
+      source:
+        title: Source
+        description: The name of an investigation source
+        type: string
+        example: MANUAL
+        default: MANUAL
+        required: false
+        enum:
+          - ALERT
+          - MANUAL
+          - HUNT
+      datetime_from:
+        title: Datetime From
+        description: An ISO formatted timestamp, default last week
+        type: date
+        example: 2018-07-01T00:00:00Z
+        required: false
+      datetime_to:
+        title: Datetime To
+        description: An ISO formatted timestamp of the ending date range, current time if left blank
+        type: date
+        example: 2018-07-01T00:00:00Z
+        required: false
+      max_investigations_to_close:
+        title: Max Investigations to Close
+        description: An optional maximum number of alerts to close with this request. If this parameter is not specified then there is no maximum. If this limit is exceeded, then an error is returned
+        type: integer
+        example: 10
+        required: false
+      alert_type:
+        title: Alert Type
+        description: The category of alerts that should be closed
+        type: string
+        example: Account Created
+        required: false
+    output:
+      ids:
+        title: IDs
+        description: The IDs of the investigations that were closed by the request
+        type: "[]string"
+        required: true
+      num_closed:
+        title: Num Closed
+        description: The number of investigations closed by the request
+        type: integer
         required: true
