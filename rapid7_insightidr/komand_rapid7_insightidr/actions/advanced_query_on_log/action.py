@@ -7,6 +7,7 @@ import time
 import json
 from komand_rapid7_insightidr.util.parse_dates import parse_dates
 
+
 class AdvancedQueryOnLog(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -29,9 +30,11 @@ class AdvancedQueryOnLog(komand.Action):
         time_from, time_to = parse_dates(time_from_string, time_to_string, relative_time_from)
 
         if time_from > time_to:
-            raise PluginException(cause="Time To input was chronologically behind Time From.",
-                                  assistance="Please edit the step so Time From is chronologically behind (in the past) relative to Time To.\n",
-                                  data=f"\nTime From: {time_from}\nTime To:{time_to}")
+            raise PluginException(
+                cause="Time To input was chronologically behind Time From.",
+                assistance="Please edit the step so Time From is chronologically behind (in the past) relative to Time To.\n",
+                data=f"\nTime From: {time_from}\nTime To:{time_to}",
+            )
 
         log_id = self.get_log_id(log_name)
 
@@ -70,7 +73,6 @@ class AdvancedQueryOnLog(komand.Action):
         results_object = response.json()
         log_entries = results_object.get("events")
 
-
         if results_object.get("links"):
             callback_url = results_object.get("links")[0].get("href")
         else:
@@ -106,7 +108,7 @@ class AdvancedQueryOnLog(komand.Action):
             if not log_entries:
                 try:
                     callback_url = results_object.get("links")[0].get("href")
-                except Exception: # No results were found
+                except Exception:  # No results were found
                     self.logger.info("No results were found, returning an empty list")
                     return []
             else:

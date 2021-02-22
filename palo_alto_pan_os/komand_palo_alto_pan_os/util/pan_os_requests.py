@@ -154,7 +154,7 @@ class Request(object):
     def edit_address_group(self, device_name: str, virtual_system: str, group_name: str, xml_str: str) -> dict:
         return self.edit_(
             f"/config/devices/entry[@name='{device_name}']/vsys/entry[@name='{virtual_system}']/address-group/entry[@name='{group_name}']",
-            xml_str
+            xml_str,
         )
 
     def get_address_object(self, device_name: str, virtual_system: str, object_name: str) -> dict:
@@ -210,14 +210,14 @@ class Request(object):
                 data=f"{response.text}, error {e}",
             )
 
-        if output.get('response', {}).get('@status') == 'error':
-            error = output['response']['msg']
-            line_error = error.get('line')
-            if line_error and [s for s in line_error if ('is invalid' in s or 'config validity' in s)]:
+        if output.get("response", {}).get("@status") == "error":
+            error = output["response"]["msg"]
+            line_error = error.get("line")
+            if line_error and [s for s in line_error if ("is invalid" in s or "config validity" in s)]:
                 raise PluginException(
-                    cause='PAN-OS returned an error in response to the request.',
-                    assistance=f'This is likely because the provided element {element} does not exist or the xpath is not correct. Please verify the element name and xpath and try again.',
-                    data=line_error
+                    cause="PAN-OS returned an error in response to the request.",
+                    assistance=f"This is likely because the provided element {element} does not exist or the xpath is not correct. Please verify the element name and xpath and try again.",
+                    data=line_error,
                 )
 
             error = json.dumps(error)

@@ -3,7 +3,7 @@ from komand.exceptions import PluginException
 
 
 class Common:
-    '''Merge 2 dictionaries'''
+    """Merge 2 dictionaries"""
 
     @staticmethod
     def merge_dicts(x, y):
@@ -12,7 +12,7 @@ class Common:
         z.update(y)
         return z
 
-    '''Copy the case insensitive headers dict to a normal one'''
+    """Copy the case insensitive headers dict to a normal one"""
 
     @staticmethod
     def copy_dict(x):
@@ -24,28 +24,16 @@ class Common:
     @staticmethod
     def call_api(url, path, headers, ssl_verify, auth=None):
         try:
-            response = requests.request(
-                "GET",
-                f"{url}{path}",
-                headers=headers,
-                verify=ssl_verify,
-                auth=auth
-            )
+            response = requests.request("GET", f"{url}{path}", headers=headers, verify=ssl_verify, auth=auth)
 
             if response.status_code == 401:
-                raise PluginException(
-                    preset=PluginException.Preset.USERNAME_PASSWORD,
-                    data=response.text
-                )
+                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
             if response.status_code == 404:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
             if 400 <= response.status_code < 500:
-                raise PluginException(
-                    preset=PluginException.Preset.UNKNOWN,
-                    data=response.text
-                )
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
             if response.status_code >= 500:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 

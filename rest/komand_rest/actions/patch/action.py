@@ -23,8 +23,9 @@ class Patch(komand.Action):
 
         req_headers = Common.merge_dicts(self.connection.default_headers, headers)
         url = parse.urljoin(self.connection.base_url, route)
-        response = requests.patch(url, headers=req_headers, data=body,
-                                  verify=self.connection.ssl_verify, auth=self.connection.auth)
+        response = requests.patch(
+            url, headers=req_headers, data=body, verify=self.connection.ssl_verify, auth=self.connection.auth
+        )
         body_object = {}
         try:
             body_object = response.json()

@@ -94,22 +94,22 @@ class Investigate(object):
                 raise PluginException(
                     cause="Unauthorized.",
                     assistance="Request had Authorization header but token was missing or invalid. "
-                               "Please ensure your API token is valid.",
-                    data=response.text
+                    "Please ensure your API token is valid.",
+                    data=response.text,
                 )
             if response.status_code == 404:
                 raise PluginException(
                     cause="Not found.",
                     assistance="The requested item doesn't exist, check the syntax of your query or ensure "
-                               "the IP and/or domain are valid.",
-                    data=response.text
+                    "the IP and/or domain are valid.",
+                    data=response.text,
                 )
             if response.status_code == 429:
                 raise PluginException(
                     cause="Too many request.",
                     assistance="Too many requests received in a given amount of time. "
-                               "You may have exceeded the rate limits for your organization or package.",
-                    data=response.text
+                    "You may have exceeded the rate limits for your organization or package.",
+                    data=response.text,
                 )
             if 400 <= response.status_code < 500:
                 raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)

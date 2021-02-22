@@ -59,7 +59,7 @@ class TestAdvancedQueryOnLog(TestCase):
         test_action.connection = test_conn
         result = test_action.get_log_id("Web Access Log")
 
-        self.assertIsNotNone(result) # Best we can do here, the log ID will change based on the instance used.
+        self.assertIsNotNone(result)  # Best we can do here, the log ID will change based on the instance used.
 
     def test_get_log_fails(self):
         action_params, connection_params, test_action, test_conn = self.setup()
@@ -68,4 +68,3 @@ class TestAdvancedQueryOnLog(TestCase):
         test_action.connection = test_conn
         with self.assertRaises(PluginException):
             test_action.get_log_id("Do not find this log")
-

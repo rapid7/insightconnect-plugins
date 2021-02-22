@@ -70,30 +70,16 @@ class SophosCentralAPI:
         if since:
             params = {"from": since}
         if key:
-            params = {
-                "pageFromKey": key
-            }
-        return self._make_request(
-            "GET",
-            "/common/v1/alerts",
-            "Tenant",
-            params=params
-        )
+            params = {"pageFromKey": key}
+        return self._make_request("GET", "/common/v1/alerts", "Tenant", params=params)
 
     def get_endpoints(self, since=None, page_key=None):
         params = {"pageTotal": True}
         if since:
             params = {"lastSeenAfter": since}
         if page_key:
-            params = {
-                "pageKey": page_key
-            }
-        return self._make_request(
-            "GET",
-            "/endpoint/v1/endpoints",
-            "Tenant",
-            params=params
-        )
+            params = {"pageKey": page_key}
+        return self._make_request("GET", "/endpoint/v1/endpoints", "Tenant", params=params)
 
     def whoami(self, access_token):
         return self._call_api(

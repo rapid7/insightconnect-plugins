@@ -31,9 +31,11 @@ class AdvancedQueryOnLogSet(komand.Action):
         time_from, time_to = parse_dates(time_from_string, time_to_string, relative_time_from)
 
         if time_from > time_to:
-            raise PluginException(cause="Time To input was chronologically behind Time From.",
-                                  assistance="Please edit the step so Time From is chronologically behind (in the past) relative to Time To.\n",
-                                  data=f"\nTime From: {time_from}\nTime To:{time_to}")
+            raise PluginException(
+                cause="Time To input was chronologically behind Time From.",
+                assistance="Please edit the step so Time From is chronologically behind (in the past) relative to Time To.\n",
+                data=f"\nTime From: {time_from}\nTime To:{time_to}",
+            )
 
         log_set_id = self.get_log_set_id(log_set_name)
 
@@ -107,7 +109,7 @@ class AdvancedQueryOnLogSet(komand.Action):
             if not log_entries:
                 try:
                     callback_url = results_object.get("links")[0].get("href")
-                except Exception: # No results were found
+                except Exception:  # No results were found
                     self.logger.info("No results were found, returning an empty list")
                     return []
             else:

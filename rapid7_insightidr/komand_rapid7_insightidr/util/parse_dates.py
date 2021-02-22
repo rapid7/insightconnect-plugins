@@ -29,13 +29,13 @@ def parse_dates(time_from_string: str, time_to_string: Optional[str], relative_t
             time_from = (int(time.time()) * 1000) - rel_time_milli
 
         if time_to_string:
-            time_to = (int(parse(time_to_string).timestamp()) * 1000)
+            time_to = int(parse(time_to_string).timestamp()) * 1000
         else:
             # Now in millisecond epoch time
-            time_to = (int(time.time()) * 1000)
+            time_to = int(time.time()) * 1000
 
     except ParserError as e:
-        raise PluginException(cause="Could not parse given date.",
-                              assistance="The date given was in an unrecognizable format.",
-                              data=e)
+        raise PluginException(
+            cause="Could not parse given date.", assistance="The date given was in an unrecognizable format.", data=e
+        )
     return time_from, time_to

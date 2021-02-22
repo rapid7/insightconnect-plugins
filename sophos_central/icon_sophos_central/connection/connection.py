@@ -25,7 +25,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             params.get(Input.CLIENT_SECRET).get("secretKey"),
             params.get(Input.TENANT_ID, {}).get("secretKey"),
             self.meta.version,
-            self.logger
+            self.logger,
         )
 
     def test(self):

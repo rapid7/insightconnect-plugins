@@ -97,7 +97,7 @@ class SonicWallAPI:
     def invoke_cli_command(self, payload):
         self.login()
         try:
-            response = self._call_api("POST", "direct/cli", data=payload, content_type='text/plain')
+            response = self._call_api("POST", "direct/cli", data=payload, content_type="text/plain")
         except PluginException as e:
             raise PluginException(cause=e.cause, assistance=e.assistance, data=e.data)
         finally:
@@ -142,7 +142,12 @@ class SonicWallAPI:
                 raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
-            if response.status_code == 400 and path == "address-objects/ipv4" or path == "address-objects/fqdn" or path == "address-objects/ipv6":
+            if (
+                response.status_code == 400
+                and path == "address-objects/ipv4"
+                or path == "address-objects/fqdn"
+                or path == "address-objects/ipv6"
+            ):
                 self.logger.error(
                     "Something unexpected occurred. Check the logs and if the issue persists please contact support."
                 )

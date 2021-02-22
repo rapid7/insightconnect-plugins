@@ -17,7 +17,7 @@ class TCell:
     def __init__(self, api_key, logger):
         self.api_key = api_key
         self.logger = logger
-        self.base_url = 'https://us.api.insight.rapid7.com/tcell/api/v1/'
+        self.base_url = "https://us.api.insight.rapid7.com/tcell/api/v1/"
 
         # Test API key
         self.list_apps()
@@ -138,9 +138,14 @@ class TCell:
         kwargs = {"params": params, "json": json, "data": data}
         kwargs = clean(kwargs)
 
-        resp = request(method, api_url, headers={
-            'X-API-Key': self.api_key,
-        }, **kwargs)
+        resp = request(
+            method,
+            api_url,
+            headers={
+                "X-API-Key": self.api_key,
+            },
+            **kwargs,
+        )
 
         try:
             resp.raise_for_status()

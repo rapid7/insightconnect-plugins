@@ -20,6 +20,6 @@ class SearchAgents(insightconnect_plugin_runtime.Action):
                 case_sensitive=params.get(Input.CASE_SENSITIVE),
                 agent_active=params.get(Input.AGENT_ACTIVE, True),
                 api_version="2.1",
-                operational_state=params.get(Input.OPERATIONAL_STATE, None)
+                operational_state=params.get(Input.OPERATIONAL_STATE, None),
             )
         }

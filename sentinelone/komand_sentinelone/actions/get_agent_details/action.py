@@ -19,7 +19,7 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
             agent,
             case_sensitive=params.get(Input.CASE_SENSITIVE),
             api_version="2.1",
-            operational_state=params.get(Input.OPERATIONAL_STATE, None)
+            operational_state=params.get(Input.OPERATIONAL_STATE, None),
         )
 
         if len(output) > 1:

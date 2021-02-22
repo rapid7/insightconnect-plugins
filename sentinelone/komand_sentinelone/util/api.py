@@ -9,8 +9,15 @@ class SentineloneAPI:
         self.url = url
         self.token_header = make_token_header
 
-    def search_agents(self, agent_details: str, agent_active: bool = True, case_sensitive: bool = True,
-                      operational_state: str = None, results_length: int = 0, api_version: str = "2.0") -> list:
+    def search_agents(
+        self,
+        agent_details: str,
+        agent_active: bool = True,
+        case_sensitive: bool = True,
+        operational_state: str = None,
+        results_length: int = 0,
+        api_version: str = "2.0",
+    ) -> list:
         results = []
         if agent_details:
             for search in self.__get_searches(agent_details):
@@ -35,12 +42,14 @@ class SentineloneAPI:
                         return self.clean_results(results)
 
         else:
-            output = requests.get(f"{self.url}web/api/v{api_version}/agents?isActive={agent_active}", headers=self.token_header)
-            results.extend(output.json()['data'])
+            output = requests.get(
+                f"{self.url}web/api/v{api_version}/agents?isActive={agent_active}", headers=self.token_header
+            )
+            results.extend(output.json()["data"])
 
         if operational_state and operational_state != "Any":
             for agent in results:
-                if agent.get('operationalState') != operational_state:
+                if agent.get("operationalState") != operational_state:
                     results.pop(results.index(agent))
 
         return self.clean_results(results)
