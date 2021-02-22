@@ -9,13 +9,11 @@ from .schema import StartInstanceInput, StartInstanceOutput, Input, Component
 class StartInstance(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='start_instance',
+            name="start_instance",
             description=Component.DESCRIPTION,
             input=StartInstanceInput(),
-            output=StartInstanceOutput())
+            output=StartInstanceOutput(),
+        )
 
     def run(self, params={}):
-        return self.connection.client.start_instance(
-            params.get(Input.ZONE),
-            params.get(Input.INSTANCE)
-        )
+        return self.connection.client.start_instance(params.get(Input.ZONE), params.get(Input.INSTANCE))

@@ -6,16 +6,14 @@ from .schema import InsertFirewallInput, InsertFirewallOutput, Input, Component
 class InsertFirewall(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='insert_firewall',
+            name="insert_firewall",
             description=Component.DESCRIPTION,
             input=InsertFirewallInput(),
-            output=InsertFirewallOutput())
+            output=InsertFirewallOutput(),
+        )
 
     def run(self, params={}):
-        data = {
-            "name": params.get(Input.NAME),
-            "allowed": params.get(Input.ALLOWED)
-        }
+        data = {"name": params.get(Input.NAME), "allowed": params.get(Input.ALLOWED)}
 
         if params.get(Input.DESCRIPTION):
             data["description"] = params.get(Input.DESCRIPTION)
