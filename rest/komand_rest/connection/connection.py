@@ -1,11 +1,7 @@
 import komand
 from .schema import ConnectionSchema, Input
 from komand_rest.util.util import Common
-<<<<<<< HEAD
-
-=======
 from komand.exceptions import PluginException, ConnectionTestException
->>>>>>> cc702844b25eb7892dd196067253ec158df64029
 # Custom imports below
 from requests.auth import HTTPDigestAuth, HTTPBasicAuth
 
