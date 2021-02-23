@@ -1320,6 +1320,8 @@ Example output:
 #### Lookup Domain
 
 This action is used to return information about a specific domain entry.
+It accepts both domains and URLs as input. If a URL is given, it will be stripped to its domain.
+For example, `https://www.example.com/path/to/file` will become `www.example.com`.
 
 ##### Input
 
@@ -1336,16 +1338,6 @@ Example input:
   "domain": "example.com"
 }
 ```
-
-URLs given to this action will be stripped to their domain before they are used.
-
-For example: 
-
-`https://www.example.com/path/to/file`
-
-will become
-
-`www.example.com`
 
 ##### Output
 
