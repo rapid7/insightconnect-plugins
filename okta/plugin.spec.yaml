@@ -702,7 +702,7 @@ actions:
     input:
       user_id:
         title: Okta User ID
-        description: ID of user that password will be resetted
+        description: User ID whose password will be reset
         type: string
         required: true
         example: 00ub0oNGTSWTBKOLGLNR
