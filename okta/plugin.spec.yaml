@@ -722,7 +722,7 @@ actions:
         example: true
       temp_password:
         title: Okta User Temporary Password
-        description: The temporary password of the Okta user, if `true` was given in input `temp_password` parameter
+        description: The temporary password of the Okta user, if true was set in Temporary Password input
         type: string
         required: false
         example: kYC452u2
