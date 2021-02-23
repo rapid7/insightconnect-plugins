@@ -25,21 +25,22 @@ def dispatch_compress(algorithm, file_bytes, tmpdir=""):
         return xz_compress(file_bytes)
 
     elif algorithm == Algorithm.ZIP:
-        return zip_compress(file_bytes,tmpdir)
+        return zip_compress(file_bytes, tmpdir)
 
     elif algorithm == Algorithm.TARBALL:
-        return tarball_compress(file_bytes,tmpdir)
+        return tarball_compress(file_bytes, tmpdir)
 
     else:
         raise Exception("Dispatch Compress: Invalid enum passed.")
 
-def tarball_compress(file_bytes,tmpdir):
-    with tarfile.open(tmpdir+"test.tar.gz","w:gz") as tar:
+
+def tarball_compress(file_bytes, tmpdir):
+    with tarfile.open(tmpdir + "test.tar.gz", "w:gz") as tar:
         tar.add(tmpdir, recursive=True)
-    fbytes=[]
-    with open(tmpdir+"test.tar.gz","rb") as f:
+    fbytes = []
+    with open(tmpdir + "test.tar.gz", "rb") as f:
         fbytes = f.read()
-    os.remove(tmpdir+"test.tar.gz")
+    os.remove(tmpdir + "test.tar.gz")
     return fbytes
 
 
@@ -62,11 +63,12 @@ def lz_compress(file_bytes):
     compressed = lzma.compress(data=file_bytes, format=lzma.FORMAT_ALONE)  # lzma.FORMAT_ALONE = LZMA
     return compressed
 
-def zip_compress(file_bytes,tmpdir=""):
+
+def zip_compress(file_bytes, tmpdir=""):
     if file_bytes != None:
         algorithm = zipfile.ZIP_DEFLATED  # sets compression type to deflated (standard for .zip)
-        zip_object = ZipFile('/tmp/compressed.zip', "w", algorithm)  # zip archive created in temp
-        zip_object.writestr('compressed', file_bytes)  # TODO use magic to corectly name files in arcive
+        zip_object = ZipFile("/tmp/compressed.zip", "w", algorithm)  # zip archive created in temp
+        zip_object.writestr("compressed", file_bytes)  # TODO use magic to corectly name files in arcive
         zip_object.close()
         in_file = open("/tmp/compressed.zip", "rb")
         compressed = in_file.read()
@@ -74,13 +76,11 @@ def zip_compress(file_bytes,tmpdir=""):
         os.remove("/tmp/compressed.zip")  # clean up
         return compressed
     else:
-        zipf = tmpdir+"compressed.zip"
+        zipf = tmpdir + "compressed.zip"
         with zipfile.ZipFile(zipf, "w", zipfile.ZIP_DEFLATED) as zippy:
-            for x in glob.glob(tmpdir+"*"):
-                zippy.write(x,os.path.basename(x))
-        with open(zipf,"rb") as f:
+            for x in glob.glob(tmpdir + "*"):
+                zippy.write(x, os.path.basename(x))
+        with open(zipf, "rb") as f:
             fbytes = f.read()
         os.remove(zipf)
         return fbytes
-
-

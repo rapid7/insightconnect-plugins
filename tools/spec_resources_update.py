@@ -26,12 +26,12 @@ def update_source_url(spec_path, plugin_name):
   license_url: {license_url}
 """
     pattern = "(resources:[\s\S]*?)tags:"
-    with open(spec_path, 'r') as spec:
+    with open(spec_path, "r") as spec:
         content = spec.read()
     match = re.findall(pattern, content)[0]
     content = content.replace(match, new_resources, 1)
     return content
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

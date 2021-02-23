@@ -5,6 +5,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from logging import Logger
 from typing import Optional
 
+
 class CiscoUmbrellaReportingAPI:
     def __init__(self, api_key: str, api_secret: str, organization_id: str, logger: Logger):
         self.url = "https://reports.api.umbrella.com/v1/"
@@ -17,29 +18,28 @@ class CiscoUmbrellaReportingAPI:
         return self._call_api(
             "GET",
             f"organizations/{self.organization_id}/destinations/{domain}/activity",
-            {
-                "limit": 500
-            }
+            {"limit": 500},
         )
 
     def security_activity_report(self) -> dict:
-        return self._call_api(
-            "GET",
-            f"organizations/{self.organization_id}/security-activity",
-            {
-                "limit": 500
-            }
-        )
+        return self._call_api("GET", f"organizations/{self.organization_id}/security-activity", {"limit": 500})
 
-    def _call_api(self, method: str, path: str, json_data: Optional[dict] = None, params: Optional[dict] = None) -> dict:
+    def _call_api(
+        self,
+        method: str,
+        path: str,
+        json_data: Optional[dict] = None,
+        params: Optional[dict] = None,
+    ) -> dict:
         response = {"text": ""}
 
         try:
             response = requests.request(
-                method, self.url + path,
+                method,
+                self.url + path,
                 json=json_data,
                 params=params,
-                auth=HTTPBasicAuth(self.api_key, self.api_secret)
+                auth=HTTPBasicAuth(self.api_key, self.api_secret),
             )
 
             if response.status_code == 401:

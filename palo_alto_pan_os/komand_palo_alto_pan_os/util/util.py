@@ -16,47 +16,61 @@ class SecurityPolicy:
         :param policy: A PAN-OS security policy
         :return A new cleaner dictionary containing the polices current config.
         """
-        self.logger.debug(f' Base policy {policy}')
+        self.logger.debug(f" Base policy {policy}")
 
-        key_list = ['source', 'destination', 'service',
-                    'application', 'source-user', 'to',
-                    'from', 'category', 'hip-profiles']
+        key_list = [
+            "source",
+            "destination",
+            "service",
+            "application",
+            "source-user",
+            "to",
+            "from",
+            "category",
+            "hip-profiles",
+        ]
         output = {}
         for i in key_list:
             try:
-                output[i] = policy['response']['result']['entry'][i]['member']
+                output[i] = policy["response"]["result"]["entry"][i]["member"]
             except KeyError:
-                self.logger.info(f'Current policy {policy}')
-                self.logger.info(f'The current policy has no {i} policy: Setting to any.')
-                output[i] = 'any'
+                self.logger.info(f"Current policy {policy}")
+                self.logger.info(f"The current policy has no {i} policy: Setting to any.")
+                output[i] = "any"
             except TypeError:
-                self.logger.info(f'Current policy {policy}')
-                self.logger.info(f'The current policy has no policy config for {i}: Setting to any.')
-                output[i] = 'any'
+                self.logger.info(f"Current policy {policy}")
+                self.logger.info(f"The current policy has no policy config for {i}: Setting to any.")
+                output[i] = "any"
             except BaseException:
-                raise PluginException(cause='An unknown formatting error occurred when formatting a security policy.',
-                                      assistance='Contact support for help.',
-                                      data=f'Policy config: {policy}')
+                raise PluginException(
+                    cause="An unknown formatting error occurred when formatting a security policy.",
+                    assistance="Contact support for help.",
+                    data=f"Policy config: {policy}",
+                )
         try:
-            output['action'] = policy['response']['result']['entry']['action']
+            output["action"] = policy["response"]["result"]["entry"]["action"]
         except KeyError:
-            raise PluginException(cause='Current policy config missing an action key.',
-                                  assistance='Contact support for help',
-                                  data=f'Policy config: {policy}')
+            raise PluginException(
+                cause="Current policy config missing an action key.",
+                assistance="Contact support for help",
+                data=f"Policy config: {policy}",
+            )
 
         for i in output:
             if isinstance(output[i], list):
                 if isinstance(output[i][0], dict):
                     for k, val in enumerate(output[i]):
                         try:
-                            output[i][k] = val['#text']
+                            output[i][k] = val["#text"]
                         except KeyError:
-                            raise PluginException(cause='An unknown formatting error occurred when formatting a security subpolicy.',
-                                                  assistance='Contact support for help.',
-                                                  data=f'Subpolicy {output[i][0]}')
+                            raise PluginException(
+                                cause="An unknown formatting error occurred when formatting a security subpolicy.",
+                                assistance="Contact support for help.",
+                                data=f"Subpolicy {output[i][0]}",
+                            )
             if isinstance(output[i], dict):
-                if isinstance(output[i], dict) and '#text' in output[i]:
-                    output[i] = output[i]['#text']
+                if isinstance(output[i], dict) and "#text" in output[i]:
+                    output[i] = output[i]["#text"]
 
         return output
 
@@ -69,18 +83,18 @@ class SecurityPolicy:
         :return The updated policy key
         """
 
-        self.logger.debug(f'Starting key {key}')
-        self.logger.debug(f'String to add {add}')
+        self.logger.debug(f"Starting key {key}")
+        self.logger.debug(f"String to add {add}")
 
         if add not in key:
             if isinstance(key, list):
                 key.append(add)
-            elif key and key != 'any':
+            elif key and key != "any":
                 key = [key, add]
             else:
                 key = add
 
-        self.logger.debug(f'Ending key {key}')
+        self.logger.debug(f"Ending key {key}")
         return key
 
     def remove_from_key(self, key, remove: str):
@@ -92,8 +106,8 @@ class SecurityPolicy:
         :return The updated policy key
         """
 
-        self.logger.debug(f'Starting key {key}')
-        self.logger.debug(f'String to remove {remove}')
+        self.logger.debug(f"Starting key {key}")
+        self.logger.debug(f"String to remove {remove}")
 
         if remove in key:
             # If a list is reduced to len 1 it must be cast as a str. for 2 or more leave as list
@@ -103,17 +117,29 @@ class SecurityPolicy:
                 key.remove(remove)
                 key = key[0]
             else:
-                key = 'any'
-            self.logger.debug(f'Ending key {key}')
+                key = "any"
+            self.logger.debug(f"Ending key {key}")
             return key
-        self.logger.error("{remove} was not found in {key}."
-                          " {remove} will not be removed from policy.".format(remove=remove,
-                                                                              key=key))
+        self.logger.error(
+            "{remove} was not found in {key}."
+            " {remove} will not be removed from policy.".format(remove=remove, key=key)
+        )
         return key
 
-    def element_for_policy_update(self, rule_name, to, from_, source, destination,
-                                  service, application, category, hip_profiles, source_user,
-                                  fire_wall_action) -> str:
+    def element_for_policy_update(
+        self,
+        rule_name,
+        to,
+        from_,
+        source,
+        destination,
+        service,
+        application,
+        category,
+        hip_profiles,
+        source_user,
+        fire_wall_action,
+    ) -> str:
         """
         Builds the updated policy dictionary into a XML string
         :param rule_name: Used to pass the name of the policy to be updated
@@ -130,24 +156,32 @@ class SecurityPolicy:
         :return A properly formatted XML file for the security policy
         """
         # Build dic for xml
-        element = {'to': to, 'from': from_, 'source': source, 'destination': destination,
-                   'service': service, 'application': application, 'category': category,
-                   'hip-profiles': hip_profiles, 'source-user': source_user,
-                   'action': fire_wall_action}
+        element = {
+            "to": to,
+            "from": from_,
+            "source": source,
+            "destination": destination,
+            "service": service,
+            "application": application,
+            "category": category,
+            "hip-profiles": hip_profiles,
+            "source-user": source_user,
+            "action": fire_wall_action,
+        }
 
-        self.logger.debug(f'Dictionary to convert to XML {element}')
+        self.logger.debug(f"Dictionary to convert to XML {element}")
 
         for value in element:
-            if not value == 'action' and isinstance(element[value], str):
+            if not value == "action" and isinstance(element[value], str):
                 temp = element[value]
-                element[value] = {'member': temp}
+                element[value] = {"member": temp}
 
         element = dicttoxml.dicttoxml(element, attr_type=False, root=False)
         element = element.decode()
-        element = element.replace('<item>', '<member>')
-        element = element.replace('</item>', '</member>')
+        element = element.replace("<item>", "<member>")
+        element = element.replace("</item>", "</member>")
         element = '<entry name="{name}">{data}</entry>'.format(name=rule_name, data=element)
-        self.logger.info('XML :{}'.format(element))
+        self.logger.info("XML :{}".format(element))
         return element
 
 
@@ -158,8 +192,9 @@ class ExternalList:
         else:
             self.logger = LogHelper().logger
 
-    def element_for_create_external_list(self, list_type: str, description: str,
-                                         source: str, repeat: str, time: str, day: str) -> str:
+    def element_for_create_external_list(
+        self, list_type: str, description: str, source: str, repeat: str, time: str, day: str
+    ) -> str:
         """
         Builds the update policy dictionary into a xml string
         :param list_type:
@@ -172,43 +207,40 @@ class ExternalList:
         :return: A properly formatted xml file for the security policy
         """
 
-        if repeat == 'daily':
+        if repeat == "daily":
             if not time:
-                raise PluginException(cause='Time of day not defined',
-                                      assistance='Contact support for help.')
-            element = '<type><{list_type}>' \
-                      '<recurring><daily><at>{time}</at></daily></recurring>' \
-                      '<description>{description}</description>' \
-                      '<url>{source}</url>' \
-                      '</{list_type}></type>'.format(list_type=list_type,
-                                                     time=time,
-                                                     description=description,
-                                                     source=source)
-        elif repeat == 'weekly':
+                raise PluginException(cause="Time of day not defined", assistance="Contact support for help.")
+            element = (
+                "<type><{list_type}>"
+                "<recurring><daily><at>{time}</at></daily></recurring>"
+                "<description>{description}</description>"
+                "<url>{source}</url>"
+                "</{list_type}></type>".format(list_type=list_type, time=time, description=description, source=source)
+            )
+        elif repeat == "weekly":
             if not time:
-                raise PluginException(cause='Time of day not defined',
-                                      assistance='Contact support for help.')
+                raise PluginException(cause="Time of day not defined", assistance="Contact support for help.")
             if not day:
-                raise PluginException(cause='Day of week not defined',
-                                      assistance='Contact support for help.')
-            element = '<type><{list_type}>' \
-                      '<recurring><weekly><day-of-week>{day}</day-of-week>' \
-                      '<at>{time}</at></weekly></recurring>' \
-                      '<description>{description}</description>' \
-                      '<url>{source}</url>' \
-                      '</{list_type}></type>'.format(list_type=list_type,
-                                                     day=day,
-                                                     time=time,
-                                                     description=description,
-                                                     source=source)
+                raise PluginException(cause="Day of week not defined", assistance="Contact support for help.")
+            element = (
+                "<type><{list_type}>"
+                "<recurring><weekly><day-of-week>{day}</day-of-week>"
+                "<at>{time}</at></weekly></recurring>"
+                "<description>{description}</description>"
+                "<url>{source}</url>"
+                "</{list_type}></type>".format(
+                    list_type=list_type, day=day, time=time, description=description, source=source
+                )
+            )
         else:
-            element = '<type><{list_type}>' \
-                      '<recurring><{repeat}/></recurring>' \
-                      '<description>{description}</description>' \
-                      '<url>{source}</url>' \
-                      '</{list_type}></type>'.format(list_type=list_type,
-                                                     repeat=repeat,
-                                                     description=description,
-                                                     source=source)
-        self.logger.info('XML :{}'.format(element))
+            element = (
+                "<type><{list_type}>"
+                "<recurring><{repeat}/></recurring>"
+                "<description>{description}</description>"
+                "<url>{source}</url>"
+                "</{list_type}></type>".format(
+                    list_type=list_type, repeat=repeat, description=description, source=source
+                )
+            )
+        self.logger.info("XML :{}".format(element))
         return element

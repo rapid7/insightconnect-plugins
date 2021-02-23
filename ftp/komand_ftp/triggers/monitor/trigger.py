@@ -1,6 +1,7 @@
 import komand
 import time
 from .schema import MonitorInput, MonitorOutput
+
 # Custom imports below
 import ftputil
 import stat
@@ -11,19 +12,19 @@ import os
 
 
 class Monitor(komand.Trigger):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='monitor',
-            description='Poll for files or directory changes',
+            name="monitor",
+            description="Poll for files or directory changes",
             input=MonitorInput(),
-            output=MonitorOutput())
+            output=MonitorOutput(),
+        )
 
     def run(self, params={}):
         """Run the trigger"""
         # send a test event
         # Stored data for file
-        stored_file_attribs = array('I')
+        stored_file_attribs = array("I")
         # Stored data for directory
         stored_dir_attribs = {}
         # Disable caching so we can see changes
@@ -31,11 +32,11 @@ class Monitor(komand.Trigger):
 
         while True:
             # Get parameters
-            path = params.get('path')
-            monitor_time = params.get('monitor_time', False)
-            monitor_size = params.get('monitor_size', True)
-            monitor_mode = params.get('monitor_mode', False)
-            interval = params.get('interval', 300)
+            path = params.get("path")
+            monitor_time = params.get("monitor_time", False)
+            monitor_size = params.get("monitor_size", True)
+            monitor_mode = params.get("monitor_mode", False)
+            interval = params.get("interval", 300)
             dir_test = None
             # Get information on path passed in
             try:
@@ -54,7 +55,7 @@ class Monitor(komand.Trigger):
                 for name in names:
                     lstatval = ftputil.FTPHost.lstat(self.connection.ftp_host, name)
                     # Populate tmp_array with values to be tracked
-                    tmp_array = array('I')
+                    tmp_array = array("I")
                     if monitor_size:
                         tmp_array.append(lstatval.st_size)
                         self.logger.info(path + "/" + name + " size is " + str(lstatval.st_size))
@@ -73,13 +74,13 @@ class Monitor(komand.Trigger):
                         has_changed = True
                     # Store information about directory
                     stored_dir_attribs = dir_attribs
-                    names2 = '\n'.join(self.connection.ftp_host._dir(path))
+                    names2 = "\n".join(self.connection.ftp_host._dir(path))
                     if has_changed:
-                        self.send({'changed': names2})
+                        self.send({"changed": names2})
             # If it's just a file
             else:
                 # Populate file_attribs with values to be tracked
-                file_attribs = array('I')
+                file_attribs = array("I")
                 if monitor_size:
                     file_attribs.append(dir_test.st_size)
                     self.logger.info(path + " size is " + str(dir_test.st_size))
@@ -99,28 +100,28 @@ class Monitor(komand.Trigger):
                         # Get tmp local file name based on MD5 hash of path + time
                         millis = int(round(time.time() * 1000))
                         tmp_str = path + str(millis)
-                        tmp_filename = hashlib.md5(tmp_str.encode('utf-8')).hexdigest()
+                        tmp_filename = hashlib.md5(tmp_str.encode("utf-8")).hexdigest()
                         # Actually download file
                         try:
                             self.connection.ftp_host.download(path, tmp_filename)
                         except ftputil.error.FTPError as e:
                             raise e
                         # Encode file as base64
-                        with open(tmp_filename, 'rb') as f:
-                            encoded = base64.b64encode(f.read()).decode('utf-8')
-                            #Clean up temporary file
+                        with open(tmp_filename, "rb") as f:
+                            encoded = base64.b64encode(f.read()).decode("utf-8")
+                            # Clean up temporary file
                             os.remove(tmp_filename)
-                            change_dict = {'changed': encoded}
+                            change_dict = {"changed": encoded}
                             if monitor_size:
-                                change_dict['size'] = file_attribs[0]
+                                change_dict["size"] = file_attribs[0]
                             if monitor_time:
                                 if monitor_size:
-                                    change_dict['time'] = time.ctime(file_attribs[1])
+                                    change_dict["time"] = time.ctime(file_attribs[1])
                                 else:
-                                    change_dict['time'] = time.ctime(file_attribs[0])
+                                    change_dict["time"] = time.ctime(file_attribs[0])
                             if monitor_mode:
                                 mode_index = len(file_attribs) - 1
-                                change_dict['mode'] = file_attribs[mode_index]
+                                change_dict["mode"] = file_attribs[mode_index]
                             self.send(change_dict)
 
             time.sleep(interval)
@@ -128,4 +129,3 @@ class Monitor(komand.Trigger):
     def test(self):
         """TODO: Test the trigger"""
         return {}
-

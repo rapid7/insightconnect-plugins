@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from icon_checkpoint_ngfw.connection.connection import Connection
@@ -49,7 +50,6 @@ class TestRemoveAccessRule(TestCase):
         test_action.connection = test_conn
         results = test_action.run(action_params)
 
-        expected = {'message': 'OK', 'success': True}
+        expected = {"message": "OK", "success": True}
 
         self.assertEquals(expected, results)
-

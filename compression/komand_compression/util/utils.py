@@ -2,6 +2,7 @@ import base64
 import magic
 from .algorithm import Algorithm
 
+
 def base64_encode(string):
     return base64.b64encode(string)
 

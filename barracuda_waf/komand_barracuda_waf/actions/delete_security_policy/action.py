@@ -3,13 +3,13 @@ from .schema import DeleteSecurityPolicyInput, DeleteSecurityPolicyOutput
 
 
 class DeleteSecurityPolicy(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='delete_security_policy',
-                description='Deletes the given security policy',
-                input=DeleteSecurityPolicyInput(),
-                output=DeleteSecurityPolicyOutput())
+            name="delete_security_policy",
+            description="Deletes the given security policy",
+            input=DeleteSecurityPolicyInput(),
+            output=DeleteSecurityPolicyOutput(),
+        )
 
     def run(self, params={}):
         self.connection.connector.check_required_params(params, ["id"])

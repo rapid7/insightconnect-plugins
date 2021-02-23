@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
+
 # Custom imports below
 import requests
 from requests.auth import HTTPBasicAuth
@@ -8,7 +9,6 @@ from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
@@ -20,8 +20,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         base_url = params.get(Input.URL, "")
 
-        if not base_url.endswith('/'):
-            base_url = f'{base_url}/'
+        if not base_url.endswith("/"):
+            base_url = f"{base_url}/"
 
         username = params[Input.CLIENT_LOGIN].get("username", "")
         password = params[Input.CLIENT_LOGIN].get("password", "")
@@ -30,13 +30,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.session.auth = HTTPBasicAuth(username, password)
         self.request = RequestHelper(self.session, self.logger)
 
-        self.table_url = f'{base_url}{api_route}table/'
-        self.incident_url = f'{self.table_url}{incident_table}'
-        self.attachment_url = f'{base_url}{api_route}attachment'
+        self.table_url = f"{base_url}{api_route}table/"
+        self.incident_url = f"{self.table_url}{incident_table}"
+        self.attachment_url = f"{base_url}{api_route}attachment"
         self.timeout = params.get("timeout", 30)
 
     def test(self):
-        url = f'{self.table_url}cmdb_ci'
+        url = f"{self.table_url}cmdb_ci"
         query = {"sysparm_limit": 1}
         method = "get"
 
@@ -46,6 +46,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         if response.get("status", 0) in range(200, 299):
             return {"success": True}
         else:
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNKNOWN,
-                                          data=f'{response.get("status", "Not available")}, '
-                                               f'{response.get("text", "Not available")}')
+            raise ConnectionTestException(
+                preset=ConnectionTestException.Preset.UNKNOWN,
+                data=f'{response.get("status", "Not available")}, ' f'{response.get("text", "Not available")}',
+            )

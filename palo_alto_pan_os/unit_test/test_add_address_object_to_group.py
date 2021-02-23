@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_palo_alto_pan_os.connection.connection import Connection
@@ -31,7 +32,6 @@ class TestAddAddressObjectToGroup(TestCase):
             Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
             """
             self.fail(message)
-
 
         test_conn.connect(connection_params)
         test_action.connection = test_conn

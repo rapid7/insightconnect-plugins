@@ -4,13 +4,13 @@ from .schema import PingInput, PingOutput
 
 
 class Ping(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='ping',
-                description='Check the status of your InfluxDB instance and your version of InfluxDB',
-                input=PingInput(),
-                output=PingOutput())
+            name="ping",
+            description="Check the status of your InfluxDB instance and your version of InfluxDB",
+            input=PingInput(),
+            output=PingOutput(),
+        )
 
     def run(self, params={}):
         server = self.connection.server
@@ -20,9 +20,9 @@ class Ping(komand.Action):
         r = requests.get(endpoint)
 
         if r.status_code == 204:
-            result['status'] = "Running"
+            result["status"] = "Running"
 
-        result['version'] = r.headers['X-Influxdb-Version']
+        result["version"] = r.headers["X-Influxdb-Version"]
 
         return result
 
@@ -35,8 +35,8 @@ class Ping(komand.Action):
         r = requests.get(endpoint)
 
         if r.status_code == 204:
-            result['status'] = "Running"
+            result["status"] = "Running"
 
-        result['version'] = r.headers['X-Influxdb-Version']
+        result["version"] = r.headers["X-Influxdb-Version"]
 
         return result

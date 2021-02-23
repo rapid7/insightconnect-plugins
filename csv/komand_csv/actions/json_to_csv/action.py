@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import JsonToCsvInput, JsonToCsvOutput, Input, Output, Component
+
 # Custom imports below
 import csv
 import base64
@@ -7,13 +8,13 @@ from io import StringIO
 
 
 class JsonToCsv(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='json_to_csv',
-                description=Component.DESCRIPTION,
-                input=JsonToCsvInput(),
-                output=JsonToCsvOutput())
+            name="json_to_csv",
+            description=Component.DESCRIPTION,
+            input=JsonToCsvInput(),
+            output=JsonToCsvOutput(),
+        )
 
     def run(self, params={}):
         input_json = params.get(Input.JSON)

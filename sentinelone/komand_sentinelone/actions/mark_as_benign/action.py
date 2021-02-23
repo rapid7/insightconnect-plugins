@@ -1,16 +1,17 @@
 import insightconnect_plugin_runtime
 from .schema import MarkAsBenignInput, MarkAsBenignOutput, Input, Output
+
 # Custom imports below
 
 
 class MarkAsBenign(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='mark_as_benign',
-                description='Mark threat as resolved',
-                input=MarkAsBenignInput(),
-                output=MarkAsBenignOutput())
+            name="mark_as_benign",
+            description="Mark threat as resolved",
+            input=MarkAsBenignInput(),
+            output=MarkAsBenignOutput(),
+        )
 
     def run(self, params={}):
         threat_id = params.get(Input.THREAT_ID)
@@ -19,7 +20,5 @@ class MarkAsBenign(insightconnect_plugin_runtime.Action):
 
         whitening_option = whitening_option or None
 
-        affected = self.connection.mark_as_benign(
-            threat_id, whitening_option, target_scope
-        )
+        affected = self.connection.mark_as_benign(threat_id, whitening_option, target_scope)
         return {Output.AFFECTED: affected}

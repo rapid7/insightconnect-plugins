@@ -1,5 +1,6 @@
 import komand
 from .schema import SearchInput, SearchOutput, Component, Input
+
 # Custom imports below
 from pyotrs import DynamicField
 import maya
@@ -8,16 +9,15 @@ from datetime import datetime, timedelta
 
 class Search(komand.Action):
 
-    TIMEFRAME = {
-        "week": datetime.utcnow() - timedelta(days=7)
-    }
+    TIMEFRAME = {"week": datetime.utcnow() - timedelta(days=7)}
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='search',
-                description=Component.DESCRIPTION,
-                input=SearchInput(),
-                output=SearchOutput())
+            name="search",
+            description=Component.DESCRIPTION,
+            input=SearchInput(),
+            output=SearchOutput(),
+        )
 
     def run(self, params={}):
         client = self.connection.client
@@ -27,15 +27,16 @@ class Search(komand.Action):
         try:
             client.session_create()
         except Exception as e:
-            raise Exception("Unable to connect to OTRS webservice! Please check your connection information and \
+            raise Exception(
+                "Unable to connect to OTRS webservice! Please check your connection information and \
             that you have properly configured OTRS webservice. Information on configuring the webservice can be found \
-            in the Connection help")
-
+            in the Connection help"
+            )
 
         # Time search params
         # TODO: Add support for searching tickets with date
 
-        #if params.get("date"):
+        # if params.get("date"):
         #    if params.get("date").startswith("0001-01-01"):
         #        del(params["date"])
         #    else:
@@ -58,7 +59,7 @@ class Search(komand.Action):
                     search_params[k] = v
 
         # set dynamic fields
-        dynamic_fields = params.get('dynamic_fields')
+        dynamic_fields = params.get("dynamic_fields")
         if dynamic_fields:
             for field in dynamic_fields:
                 df_payload = dict()
@@ -71,5 +72,4 @@ class Search(komand.Action):
 
         tickets = client.ticket_search(**search_params)
 
-        return {'ticket_ids': tickets}
-
+        return {"ticket_ids": tickets}

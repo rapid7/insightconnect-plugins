@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import CreateAddressObjectInput, CreateAddressObjectOutput, Input, Output, Component
+
 # Custom imports below
 import re
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -7,13 +8,13 @@ from ipaddress import ip_network, ip_address
 
 
 class CreateAddressObject(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='create_address_object',
+            name="create_address_object",
             description=Component.DESCRIPTION,
             input=CreateAddressObjectInput(),
-            output=CreateAddressObjectOutput())
+            output=CreateAddressObjectOutput(),
+        )
 
     def run(self, params={}):
         address = params.get(Input.ADDRESS)
@@ -29,7 +30,7 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
         if skip_private and object_type != "fqdn" and self.check_if_private(address):
             raise PluginException(
                 cause="Unable to create object for provided RFC 1918 (private) address.",
-                assistance="Provide a public address to create or disable Skip Private Addresses and try again."
+                assistance="Provide a public address to create or disable Skip Private Addresses and try again.",
             )
 
         if object_type != "IPv4Range" and whitelist:
@@ -37,25 +38,23 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
             if whitelisted_item:
                 raise PluginException(
                     cause=f"Address Object not created because the host {address} was "
-                          f"found in the whitelist as {whitelist}.",
+                    f"found in the whitelist as {whitelist}.",
                     assistance=f"If you would like to block this host, remove {whitelisted_item} "
-                               f"from the whitelist and try again."
+                    f"from the whitelist and try again.",
                 )
 
         self.connection.cisco_asa_api.create_address_object(name, object_type, address)
-        return {
-            Output.SUCCESS: True
-        }
+        return {Output.SUCCESS: True}
 
     @staticmethod
     def determine_address_type(address: str) -> str:
-        if ':' in address:
+        if ":" in address:
             return "IPv6Address"
-        if '/' in address:
+        if "/" in address:
             return "IPv4Network"
-        if re.search(r'[a-zA-Z]', address):
+        if re.search(r"[a-zA-Z]", address):
             return "IPv4FQDN"
-        if '-' in address:
+        if "-" in address:
             return "IPv4Range"
 
         return "IPv4Address"
@@ -84,14 +83,14 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
 
     @staticmethod
     def check_if_private(address: str) -> bool:
-        if re.search('/', address):  # CIDR
+        if re.search("/", address):  # CIDR
             return ip_network(address, False).is_private
-        elif re.search('-', address):  # IP Range
+        elif re.search("-", address):  # IP Range
             split_ = address.split("-")
             if len(address.split("-")) != 2:  # If this isn't 2, I'm not sure what the input was
                 raise PluginException(
                     cause="Improperly formatted input provided.",
-                    assistance="Range should have one and only one dash."
+                    assistance="Range should have one and only one dash.",
                 )
             return ip_address(split_[0]).is_private and ip_address(split_[1]).is_private
         try:  # Other

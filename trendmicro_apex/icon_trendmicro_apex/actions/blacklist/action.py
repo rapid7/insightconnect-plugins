@@ -12,14 +12,14 @@ from .schema import BlacklistInput, BlacklistOutput, Input, Output, Component
 
 
 class Blacklist(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='blacklist',
+            name="blacklist",
             description=Component.DESCRIPTION,
             input=BlacklistInput(),
-            output=BlacklistOutput())
-        self.api_path = '/WebApp/api/SuspiciousObjects/UserDefinedSO'
+            output=BlacklistOutput(),
+        )
+        self.api_path = "/WebApp/api/SuspiciousObjects/UserDefinedSO"
         self.MAX_NOTES_LENGTH = 256
         self.MAX_SHA_LENGTH = 40
         self.MAX_URL_LENGTH = 2046
@@ -46,7 +46,7 @@ class Blacklist(komand.Action):
                 request_url,
                 headers=self.connection.header_dict,
                 data=json_payload,
-                verify=False
+                verify=False,
             )
             response.raise_for_status()
             return {Output.SUCCESS: response is not None}
@@ -56,7 +56,7 @@ class Blacklist(komand.Action):
                 self.logger.error(f"Response was: {response.text}")
             raise PluginException(
                 assistance="Please verify the connection details and input data.",
-                cause=f"Error processing the Apex request: {rex}"
+                cause=f"Error processing the Apex request: {rex}",
             )
 
     @staticmethod
@@ -72,16 +72,16 @@ class Blacklist(komand.Action):
 
         raise PluginException(
             cause="Invalid indicator input provided.",
-            assistance="Supported indicators are IP, URL, domain and SHA1 hash."
+            assistance="Supported indicators are IP, URL, domain and SHA1 hash.",
         )
 
     def generate_payload(self, params):
-        payload_notes = ''
+        payload_notes = ""
         user_notes = params.get(Input.DESCRIPTION)
         if user_notes:
             if len(user_notes) > self.MAX_NOTES_LENGTH:
                 self.logger.warning(f"Note: exceeds maximum length, truncated to {self.MAX_NOTES_LENGTH} characters")
-            payload_notes = user_notes[:self.MAX_NOTES_LENGTH]
+            payload_notes = user_notes[: self.MAX_NOTES_LENGTH]
         indicator = params.get(Input.INDICATOR).lower()
         payload_type = self.get_data_type(indicator)
         payload_scan_action = params.get(Input.SCAN_ACTION, "BLOCK")
@@ -94,6 +94,6 @@ class Blacklist(komand.Action):
                 "expiration_utc_date": payload_expiry_date,
                 "notes": payload_notes,
                 "scan_action": payload_scan_action.lower(),
-                "type": payload_type.lower()
+                "type": payload_type.lower(),
             }
         }

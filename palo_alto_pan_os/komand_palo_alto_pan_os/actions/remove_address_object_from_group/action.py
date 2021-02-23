@@ -1,17 +1,24 @@
 import komand
-from .schema import RemoveAddressObjectFromGroupInput, RemoveAddressObjectFromGroupOutput, Input, Output, Component
+from .schema import (
+    RemoveAddressObjectFromGroupInput,
+    RemoveAddressObjectFromGroupOutput,
+    Input,
+    Output,
+    Component,
+)
+
 # Custom imports below
 from komand.exceptions import PluginException
 
 
 class RemoveAddressObjectFromGroup(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='remove_address_object_from_group',
+            name="remove_address_object_from_group",
             description=Component.DESCRIPTION,
             input=RemoveAddressObjectFromGroupInput(),
-            output=RemoveAddressObjectFromGroupOutput())
+            output=RemoveAddressObjectFromGroupOutput(),
+        )
 
     def run(self, params={}):
         address_object_name = params.get(Input.ADDRESS_OBJECT)
@@ -29,7 +36,7 @@ class RemoveAddressObjectFromGroup(komand.Action):
             raise PluginException(
                 cause="PAN OS returned an unexpected response.",
                 assistance=f"Could not find group '{group_name}', or group was empty. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {virtual_system}",
-                data=response
+                data=response,
             )
 
         found = False
@@ -53,6 +60,6 @@ class RemoveAddressObjectFromGroup(komand.Action):
         for name in names:
             members += f"<member>{name}</member>"
 
-        xml_template = f"<entry name=\"{group_name}\"><static>{members}</static></entry>"
+        xml_template = f'<entry name="{group_name}"><static>{members}</static></entry>'
 
         return xml_template

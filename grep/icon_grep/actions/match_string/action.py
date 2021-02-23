@@ -1,17 +1,18 @@
 import insightconnect_plugin_runtime
 from .schema import MatchStringInput, MatchStringOutput, Input, Output
+
 # Custom imports below
 from icon_grep.util import utils
 
 
 class MatchString(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='match_string',
-            description='Find pattern in string',
+            name="match_string",
+            description="Find pattern in string",
             input=MatchStringInput(),
-            output=MatchStringOutput())
+            output=MatchStringOutput(),
+        )
 
     def run(self, params={}):
         text = params.get(Input.TEXT)
@@ -21,7 +22,7 @@ class MatchString(insightconnect_plugin_runtime.Action):
         output = utils.process_grep(utils.run_grep(self.logger, text, pattern, behavior))
 
         return {
-            Output.FOUND: output.get('found'),
-            Output.HITS: output.get('hits'),
-            Output.MATCHES: output.get('matches')
+            Output.FOUND: output.get("found"),
+            Output.HITS: output.get("hits"),
+            Output.MATCHES: output.get("matches"),
         }

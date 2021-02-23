@@ -30,7 +30,7 @@ class LookupDomain(komand.Action):
                 "risk",
                 "sightings",
                 "threatLists",
-                "timestamps"
+                "timestamps",
             ]
 
             if not comment:
@@ -42,13 +42,14 @@ class LookupDomain(komand.Action):
             clean_report = komand.helper.clean(domain_report["data"])
             return clean_report
         except Exception as e:
-            raise PluginException(cause="Recorded Future did not return results.",
-                                  assistance="This either indicates a malformed URL, or that the URL was not found in Recorded Future.",
-                                  data=f"\nDomain input: {original_domain}\n Exception:\n{e}")
+            raise PluginException(
+                cause="Recorded Future did not return results.",
+                assistance="This either indicates a malformed URL, or that the URL was not found in Recorded Future.",
+                data=f"\nDomain input: {original_domain}\n Exception:\n{e}",
+            )
 
     def get_domain(self, original_domain):
-        stripped = urlparse(original_domain).netloc # This returns null if it's not a URL
+        stripped = urlparse(original_domain).netloc  # This returns null if it's not a URL
         if not stripped:
-            stripped = original_domain.replace('https://', '').replace('http://', '').split('/')[0]
+            stripped = original_domain.replace("https://", "").replace("http://", "").split("/")[0]
         return stripped
-

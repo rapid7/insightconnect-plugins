@@ -1,6 +1,7 @@
 import komand
 import time
 from .schema import ScrapingInput, ScrapingOutput
+
 # Custom imports below
 import json
 import re
@@ -11,13 +12,13 @@ import requests
 
 
 class Scraping(komand.Trigger):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='scraping',
-                description='Scrape most recent pastes every interval for a given pattern',
-                input=ScrapingInput(),
-                output=ScrapingOutput())
+            name="scraping",
+            description="Scrape most recent pastes every interval for a given pattern",
+            input=ScrapingInput(),
+            output=ScrapingOutput(),
+        )
 
     def run(self, params={}):
         """Run the trigger"""
@@ -25,10 +26,10 @@ class Scraping(komand.Trigger):
         req_params = {
             "api_dev_key": self.connection.dev_key,
             "limit": params.get("limit", "100"),
-            }
+        }
 
         if params.get("language") is not "All":
-            req_params['lang'] = utils.format_dict.get(params.get("language"))
+            req_params["lang"] = utils.format_dict.get(params.get("language"))
 
         queue = Queue()
         old_pastes = []
@@ -54,7 +55,7 @@ class Scraping(komand.Trigger):
                     queue.put(paste)
                 new_pastes.append(paste_key)
                 old_pastes = new_pastes
-            time.sleep(params.get('frequency', 300))
+            time.sleep(params.get("frequency", 300))
 
     def test(self):
         if self.connection.user_key:

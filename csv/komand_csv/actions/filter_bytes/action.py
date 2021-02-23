@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import FilterBytesInput, FilterBytesOutput, Input, Output, Component
+
 # Custom imports below
 import base64
 from komand_csv.util import utils
@@ -7,13 +8,13 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class FilterBytes(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='filter_bytes',
+            name="filter_bytes",
             description=Component.DESCRIPTION,
             input=FilterBytesInput(),
-            output=FilterBytesOutput())
+            output=FilterBytesOutput(),
+        )
 
     def run(self, params={}):
         decoded = base64.b64decode(params[Input.CSV]).decode()
@@ -30,8 +31,8 @@ class FilterBytes(insightconnect_plugin_runtime.Action):
                 converted = utils.convert_csv_array(filtered)
                 return {Output.FILTERED: base64.b64encode(converted.encode()).decode()}
             else:
-                raise PluginException(cause='Wrong input', assistance='Invalid field indices')
+                raise PluginException(cause="Wrong input", assistance="Invalid field indices")
         elif not csv_good:
-            raise PluginException(cause='Wrong input', assistance='Improper syntax in CSV bytes')
+            raise PluginException(cause="Wrong input", assistance="Improper syntax in CSV bytes")
         else:
-            raise PluginException(cause='Wrong input', assistance='Improper syntax in fields string')
+            raise PluginException(cause="Wrong input", assistance="Improper syntax in fields string")

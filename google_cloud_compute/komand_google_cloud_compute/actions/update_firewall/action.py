@@ -9,10 +9,11 @@ from .schema import UpdateFirewallInput, UpdateFirewallOutput, Input, Component
 class UpdateFirewall(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='update_firewall',
+            name="update_firewall",
             description=Component.DESCRIPTION,
             input=UpdateFirewallInput(),
-            output=UpdateFirewallOutput())
+            output=UpdateFirewallOutput(),
+        )
 
     def run(self, params={}):
         data = {"allowed": params.get(Input.ALLOWED)}
@@ -30,7 +31,4 @@ class UpdateFirewall(insightconnect_plugin_runtime.Action):
         if params.get(Input.TARGETTAGS):
             data["targetTags"] = params.get(Input.TARGETTAGS)
 
-        return self.connection.client.update_firewall(
-            params.get(Input.FIREWALL),
-            data
-        )
+        return self.connection.client.update_firewall(params.get(Input.FIREWALL), data)

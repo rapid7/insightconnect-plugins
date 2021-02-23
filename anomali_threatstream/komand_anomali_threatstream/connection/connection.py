@@ -11,7 +11,6 @@ from komand.exceptions import ConnectionTestException
 
 
 class Connection(komand.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.session = Session()
@@ -20,17 +19,17 @@ class Connection(komand.Connection):
     def connect(self, params):
         # Silence warnings and request logging
         requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-        logging.getLogger('urllib3').setLevel(logging.CRITICAL)
+        logging.getLogger("urllib3").setLevel(logging.CRITICAL)
 
-        username, threatstream_url, api_key = params["username"], \
-            params["url"], params["api_key"]["secretKey"]
+        username, threatstream_url, api_key = (
+            params["username"],
+            params["url"],
+            params["api_key"]["secretKey"],
+        )
         # Set up the base request
         self.request.url = threatstream_url + "/api/v1"
         self.request.verify = params.get("ssl_verify")
-        self.request.params = {
-            "username": username,
-            "api_key": api_key
-        }
+        self.request.params = {"username": username, "api_key": api_key}
 
     def test(self):
         self.request = copy(self.request)
@@ -39,7 +38,6 @@ class Connection(komand.Connection):
         response = self.session.send(self.request.prepare(), verify=self.request.verify)
 
         if response.status_code not in range(200, 299):
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.INVALID_JSON,
-                                          data=response.text)
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.INVALID_JSON, data=response.text)
 
-        return {'connection': 'successful'}
+        return {"connection": "successful"}

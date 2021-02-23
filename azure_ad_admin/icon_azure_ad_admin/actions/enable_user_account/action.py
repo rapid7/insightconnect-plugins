@@ -1,5 +1,6 @@
 import komand
 import requests
+
 # Custom imports below
 from komand.exceptions import PluginException
 
@@ -7,13 +8,13 @@ from .schema import EnableUserAccountInput, EnableUserAccountOutput, Input, Outp
 
 
 class EnableUserAccount(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='enable_user_account',
+            name="enable_user_account",
             description=Component.DESCRIPTION,
             input=EnableUserAccountInput(),
-            output=EnableUserAccountOutput())
+            output=EnableUserAccountOutput(),
+        )
 
     def run(self, params={}):
         user_id = params.get(Input.USER_ID)
@@ -22,14 +23,14 @@ class EnableUserAccount(komand.Action):
         self.logger.info(f"Enabling user: {user_id}")
 
         headers = self.connection.get_headers(self.connection.get_auth_token())
-        data = {
-            "accountEnabled": True
-        }
+        data = {"accountEnabled": True}
         result = requests.patch(endpoint, headers=headers, json=data)
 
         if not result.status_code == 204:
-            raise PluginException(cause="Enable user failed.",
-                                  assistance="Unexpected return code from server.",
-                                  data=result.text)
+            raise PluginException(
+                cause="Enable user failed.",
+                assistance="Unexpected return code from server.",
+                data=result.text,
+            )
 
         return {Output.SUCCESS: True}

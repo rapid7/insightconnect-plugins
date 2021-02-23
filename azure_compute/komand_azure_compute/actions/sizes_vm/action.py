@@ -27,8 +27,10 @@ class SizesVm(komand.Action):
             subscription_id = params.get(Input.SUBSCRIPTIONID)
             resource_group = params.get(Input.RESOURCEGROUP)
 
-            url = f"{server}/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft" \
-                  f".Compute/virtualMachines/{vm}/vmSizes?api-version={api_version}"
+            url = (
+                f"{server}/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft"
+                f".Compute/virtualMachines/{vm}/vmSizes?api-version={api_version}"
+            )
 
             # New Request, Call API and response data
             resp = requests.get(
@@ -43,9 +45,7 @@ class SizesVm(komand.Action):
             try:
                 result_dic = resp.json()
             except json.decoder.JSONDecodeError as e:
-                raise PluginException(
-                    preset=PluginException.Preset.INVALID_JSON, data=resp.read()
-                )
+                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=resp.read())
 
             return result_dic
         # Handle exception

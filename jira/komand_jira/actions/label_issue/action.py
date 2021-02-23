@@ -6,13 +6,13 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class LabelIssue(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='label_issue',
+            name="label_issue",
             description=Component.DESCRIPTION,
             input=LabelIssueInput(),
-            output=LabelIssueOutput())
+            output=LabelIssueOutput(),
+        )
 
     def run(self, params={}):
         """Add label to issue"""
@@ -20,17 +20,19 @@ class LabelIssue(insightconnect_plugin_runtime.Action):
         issue = self.connection.client.issue(id=params[Input.ID])
 
         if not issue:
-            raise PluginException(cause=f"No issue found with ID: {params[Input.ID]}.",
-                                  assistance='Please provide a valid issue ID.')
+            raise PluginException(
+                cause=f"No issue found with ID: {params[Input.ID]}.",
+                assistance="Please provide a valid issue ID.",
+            )
 
-        labels = params[Input.LABEL].split(',')
+        labels = params[Input.LABEL].split(",")
 
         for label in labels:
             if label not in issue.fields.labels:
                 issue.fields.labels.append(label)
 
-        self.logger.info('Adding labels to issue %s: %s', params[Input.ID], issue.fields.labels)
+        self.logger.info("Adding labels to issue %s: %s", params[Input.ID], issue.fields.labels)
 
-        issue.update(fields={'labels': issue.fields.labels})
+        issue.update(fields={"labels": issue.fields.labels})
 
         return {Output.SUCCESS: True}

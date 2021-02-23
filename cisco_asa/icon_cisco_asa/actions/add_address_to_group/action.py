@@ -1,26 +1,29 @@
 import insightconnect_plugin_runtime
 from .schema import AddAddressToGroupInput, AddAddressToGroupOutput, Input, Output, Component
+
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
 import validators
 
 
 class AddAddressToGroup(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='add_address_to_group',
-                description=Component.DESCRIPTION,
-                input=AddAddressToGroupInput(),
-                output=AddAddressToGroupOutput())
+            name="add_address_to_group",
+            description=Component.DESCRIPTION,
+            input=AddAddressToGroupInput(),
+            output=AddAddressToGroupOutput(),
+        )
 
     def run(self, params={}):
         group_name = params.get(Input.GROUP)
         group = self.connection.cisco_asa_api.get_group(group_name)
         address = params.get(Input.ADDRESS)
         if not group:
-            raise PluginException(cause=f"The group {group} does not exist in Cisco ASA.",
-                                  assistance="Please enter valid name and try again.")
+            raise PluginException(
+                cause=f"The group {group} does not exist in Cisco ASA.",
+                assistance="Please enter valid name and try again.",
+            )
 
         all_members = group.get("members")
         found = False
@@ -32,16 +35,11 @@ class AddAddressToGroup(insightconnect_plugin_runtime.Action):
         if found:
             self.logger.info(f"{address} already in {group_name}")
         else:
-            all_members.append({
-                "kind": self._get_kind(address),
-                "value": address
-            })
+            all_members.append({"kind": self._get_kind(address), "value": address})
 
             self.connection.cisco_asa_api.update_group(group.get("objectId"), group_name, all_members)
 
-        return {
-            Output.SUCCESS: True
-        }
+        return {Output.SUCCESS: True}
 
     @staticmethod
     def _get_kind(address: str):
@@ -54,6 +52,5 @@ class AddAddressToGroup(insightconnect_plugin_runtime.Action):
 
         raise PluginException(
             cause=f"Kind not detected from address: {address}",
-            assistance="Check address input and try again. Allowed kind are: "
-                       "IPv4Address, IPv6Address, IPv4Network."
+            assistance="Check address input and try again. Allowed kind are: " "IPv4Address, IPv6Address, IPv4Network.",
         )

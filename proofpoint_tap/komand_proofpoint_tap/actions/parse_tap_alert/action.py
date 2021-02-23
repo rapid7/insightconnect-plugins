@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import ParseTapAlertInput, ParseTapAlertOutput, Input, Output
+
 # Custom imports below
 from html_table_parser import HTMLTableParser
 from komand_proofpoint_tap.util.tap_formatter import TAP
@@ -7,13 +8,13 @@ from urlextract import URLExtract
 
 
 class ParseTapAlert(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='parse_tap_alert',
-            description='Parses a TAP alert',
+            name="parse_tap_alert",
+            description="Parses a TAP alert",
             input=ParseTapAlertInput(),
-            output=ParseTapAlertOutput())
+            output=ParseTapAlertOutput(),
+        )
 
     def run(self, params={}):
         p = HTMLTableParser()
@@ -25,11 +26,15 @@ class ParseTapAlert(insightconnect_plugin_runtime.Action):
         #    table element
         extractor = URLExtract()
         cleaned_input_for_extractor = params.get(Input.TAP_ALERT)
-        cleaned_input_for_extractor.replace('\n', '')
+        cleaned_input_for_extractor.replace("\n", "")
         urls_from_input = extractor.find_urls(cleaned_input_for_extractor)
-        threat_details_urls = list(filter(lambda u: r'threat/email' in u and r'threatinsight.proofpoint.com' in u[:40],
-                                          urls_from_input))
+        threat_details_urls = list(
+            filter(
+                lambda u: r"threat/email" in u and r"threatinsight.proofpoint.com" in u[:40],
+                urls_from_input,
+            )
+        )
         if threat_details_urls:
-            clean_data['threat']['threat_details_url'] = threat_details_urls[0]
+            clean_data["threat"]["threat_details_url"] = threat_details_urls[0]
 
         return {Output.RESULTS: clean_data}

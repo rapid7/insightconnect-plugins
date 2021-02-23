@@ -1,16 +1,17 @@
 import insightconnect_plugin_runtime
 from .schema import RunAntivirusScanInput, RunAntivirusScanOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class RunAntivirusScan(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='run_antivirus_scan',
-                description=Component.DESCRIPTION,
-                input=RunAntivirusScanInput(),
-                output=RunAntivirusScanOutput())
+            name="run_antivirus_scan",
+            description=Component.DESCRIPTION,
+            input=RunAntivirusScanInput(),
+            output=RunAntivirusScanOutput(),
+        )
 
     def run(self, params={}):
         self.logger.info("Running...")

@@ -2,6 +2,7 @@ from unittest import TestCase
 import icon_carbon_black_cloud.util.whitelist_checker as whitelist_checker
 import logging
 
+
 class TestWhitelistChecker(TestCase):
     def test_whitelist_checker(self):
         test_whitelist = ["198.162.1.1", "198.100.1.1/24", "win-test", "12345"]

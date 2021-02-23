@@ -1,5 +1,6 @@
 import komand
 from .schema import UpdateInput, UpdateOutput
+
 # Custom imports below
 import json
 import urllib2
@@ -9,10 +10,8 @@ import requests
 class Update(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='update',
-            description='Update a user',
-            input=UpdateInput(),
-            output=UpdateOutput())
+            name="update", description="Update a user", input=UpdateInput(), output=UpdateOutput()
+        )
 
     def run(self, params={}):
         try:
@@ -52,31 +51,35 @@ class Update(komand.Action):
             if presence:
                 data["presence"] = presence
 
-            url = server + '/user/' + id_or_email
+            url = server + "/user/" + id_or_email
 
             # new Request Request
-            request = urllib2.Request(url, data=json.dumps(data), headers={'Content-Type': 'application/json',
-                                                                           'Authorization': 'Bearer %s' % token})
+            request = urllib2.Request(
+                url,
+                data=json.dumps(data),
+                headers={"Content-Type": "application/json", "Authorization": "Bearer %s" % token},
+            )
             request.get_method = lambda: "PUT"
 
             # Call api and response data
             resp = urllib2.urlopen(request)
             status_code = resp.getcode()
 
-            return {'status_code': status_code}
+            return {"status_code": status_code}
 
         # handle exception
         except urllib2.HTTPError as e:
-            self.logger.error('HTTPError: %s for %s', str(e.code), url)
+            self.logger.error("HTTPError: %s for %s", str(e.code), url)
             message = json.loads(e.read())["error"]["message"]
-            self.logger.error('HTTPError Reason: %s' % message)
+            self.logger.error("HTTPError Reason: %s" % message)
             raise Exception(message)
         except urllib2.URLError as e:
-            self.logger.error('URLError: %s for %s', str(e.reason), url)
+            self.logger.error("URLError: %s for %s", str(e.reason), url)
         except Exception:
             import traceback
-            self.logger.error('Generic Exception: %s', traceback.format_exc())
-        raise Exception('URL Request Failed')
+
+            self.logger.error("Generic Exception: %s", traceback.format_exc())
+        raise Exception("URL Request Failed")
 
     def test(self):
         http_method = "GET"
@@ -84,15 +87,18 @@ class Update(komand.Action):
         token = self.connection.token
 
         #  url test authentication
-        url = server + '/room'
+        url = server + "/room"
 
         # call request test authentication
-        response = requests.request(http_method, url,
-                                    headers={'Content-Type': 'application/json', 'Authorization': 'Bearer %s' % token})
+        response = requests.request(
+            http_method,
+            url,
+            headers={"Content-Type": "application/json", "Authorization": "Bearer %s" % token},
+        )
 
         if response.status_code == 401:
-            raise Exception('Unauthorized: %s (HTTP status: %s)' % (response.text, response.status_code))
+            raise Exception("Unauthorized: %s (HTTP status: %s)" % (response.text, response.status_code))
         if response.status_code != 200:
-            raise Exception('%s (HTTP status: %s)' % (response.text, response.status_code))
+            raise Exception("%s (HTTP status: %s)" % (response.text, response.status_code))
 
-        return {'status_code': response.status_code}
+        return {"status_code": response.status_code}

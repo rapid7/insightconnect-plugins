@@ -1,18 +1,25 @@
 import komand
-from .schema import RemoveAddressObjectFromGroupInput, RemoveAddressObjectFromGroupOutput, Input, Output, Component
+from .schema import (
+    RemoveAddressObjectFromGroupInput,
+    RemoveAddressObjectFromGroupOutput,
+    Input,
+    Output,
+    Component,
+)
+
 # Custom imports below
 from komand.exceptions import PluginException
 from icon_fortinet_fortigate.util.util import Helpers
 
 
 class RemoveAddressObjectFromGroup(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='remove_address_object_from_group',
-                description=Component.DESCRIPTION,
-                input=RemoveAddressObjectFromGroupInput(),
-                output=RemoveAddressObjectFromGroupOutput())
+            name="remove_address_object_from_group",
+            description=Component.DESCRIPTION,
+            input=RemoveAddressObjectFromGroupInput(),
+            output=RemoveAddressObjectFromGroupOutput(),
+        )
 
     def run(self, params={}):
         group_name = params[Input.GROUP]
@@ -27,7 +34,10 @@ class RemoveAddressObjectFromGroup(komand.Action):
                 group_members.remove(item)
                 found = True
         if not found:
-            return {Output.SUCCESS: False, Output.RESULT_OBJECT: f"The address object {address_object} was not in the group {group_name}"}
+            return {
+                Output.SUCCESS: False,
+                Output.RESULT_OBJECT: f"The address object {address_object} was not in the group {group_name}",
+            }
 
         group["member"] = group_members
 
@@ -38,9 +48,11 @@ class RemoveAddressObjectFromGroup(komand.Action):
         try:
             json_response = response.json()
         except ValueError:
-            raise PluginException(cause="Data sent by FortiGate was not in JSON format.\n",
-                                  assistance="Contact support for help.",
-                                  data=response.text)
+            raise PluginException(
+                cause="Data sent by FortiGate was not in JSON format.\n",
+                assistance="Contact support for help.",
+                data=response.text,
+            )
         helper.http_errors(json_response, response.status_code)
 
         success = json_response.get("status", "").lower() == "success"

@@ -28,7 +28,6 @@ class HashType(Enum):
 
 
 class APIException(Exception):
-
     def __init__(self, status_code: Optional[int], message: str):
         self.status_code = status_code
         self.message = message
@@ -44,11 +43,16 @@ class APIClient(object):
 
     _STATUS_CODES = {
         400: APIException(status_code=400, message="The parameters are invalid."),
-        401: APIException(status_code=401, message="The user that is currently logged on has insufficient rights "
-                                                   "to execute the web method, or the user is unauthorized."),
+        401: APIException(
+            status_code=401,
+            message="The user that is currently logged on has insufficient rights "
+            "to execute the web method, or the user is unauthorized.",
+        ),
         404: APIException(status_code=404, message="The requested resource was not found."),
-        500: APIException(status_code=500, message="The web service encountered an error while processing the web "
-                                                   "request.")
+        500: APIException(
+            status_code=500,
+            message="The web service encountered an error while processing the web " "request.",
+        ),
     }
 
     def __init__(self, base_url: str, auth_token: str, logger: Logger):
@@ -65,8 +69,7 @@ class APIClient(object):
         :return: Header dict
         """
 
-        return {"Content-Type": "application/json",
-                "Authorization": f"Bearer {self.auth_token}"}
+        return {"Content-Type": "application/json", "Authorization": f"Bearer {self.auth_token}"}
 
     def _get_async_session(self) -> aiohttp.ClientSession:
         """
@@ -74,12 +77,18 @@ class APIClient(object):
         :return: aiohttp ClientSession
         """
 
-        return aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False),
-                                     headers=self._get_headers())
+        return aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False), headers=self._get_headers())
 
     @classmethod
-    def new_client(cls, host: str, username: str, password: str, domain: str, port: str,
-                   logger: Optional[Logger] = None):
+    def new_client(
+        cls,
+        host: str,
+        username: str,
+        password: str,
+        domain: str,
+        port: str,
+        logger: Optional[Logger] = None,
+    ):
         """
         Authenticates with Symantec Endpoint Protection and returns an API client
         :param host: Console host
@@ -101,30 +110,31 @@ class APIClient(object):
 
         auth_body = {"username": username, "password": password, "domain": domain}
         headers = {"Content-Type": "application/json"}
-        response = requests.post(url=auth_url,
-                                 json=auth_body,
-                                 headers=headers,
-                                 verify=False)
+        response = requests.post(url=auth_url, json=auth_body, headers=headers, verify=False)
         logger.info(f"Received status code '{response.status_code}' from Symantec Endpoint Protection console.")
 
         if response.status_code == 200:
             try:
                 auth_token = response.json()["token"]
             except json.JSONDecodeError:
-                raise APIException(status_code=None, message="Symantec Endpoint Protection server returned a "
-                                                             "non-JSON response!")
+                raise APIException(
+                    status_code=None,
+                    message="Symantec Endpoint Protection server returned a " "non-JSON response!",
+                )
             except KeyError:
-                raise APIException(status_code=None, message="Symantec Endpoint Protection did not return the "
-                                                             "authentication token!")
+                raise APIException(
+                    status_code=None,
+                    message="Symantec Endpoint Protection did not return the " "authentication token!",
+                )
             logger.info("Authentication with Symantec Endpoint Protection console successful!")
-            return cls(base_url=url,
-                       auth_token=auth_token,
-                       logger=logger)
+            return cls(base_url=url, auth_token=auth_token, logger=logger)
         elif cls._STATUS_CODES.get(response.status_code) is not None:
             raise cls._STATUS_CODES[response.status_code]
         else:
-            raise APIException(status_code=None, message=f"An unhandled response was received from Symantec Endpoint "
-                                                         f"Protection: {response.text}")
+            raise APIException(
+                status_code=None,
+                message=f"An unhandled response was received from Symantec Endpoint " f"Protection: {response.text}",
+            )
 
     def get_computer(self, computer_name: str = "*", mac_address: str = "*") -> Optional[Agent]:
         """
@@ -138,24 +148,26 @@ class APIClient(object):
 
         query_params = {"computerName": computer_name, "mac": mac_address}
 
-        response = self.session.get(url=url,
-                                    verify=False,
-                                    params=query_params)
+        response = self.session.get(url=url, verify=False, params=query_params)
 
         if response.status_code == 200:
             try:
                 match = response.json()["content"][0]
                 return match
             except json.JSONDecodeError:
-                raise APIException(status_code=None, message="Symantec Endpoint Protection server returned a "
-                                                             "non-JSON response!")
+                raise APIException(
+                    status_code=None,
+                    message="Symantec Endpoint Protection server returned a " "non-JSON response!",
+                )
             except (KeyError, IndexError):
                 return None
         elif self._STATUS_CODES.get(response.status_code) is not None:
             raise self._STATUS_CODES[response.status_code]
         else:
-            raise APIException(status_code=None, message=f"An unhandled response was received from Symantec Endpoint "
-                                                         f"Protection: {response.text}")
+            raise APIException(
+                status_code=None,
+                message=f"An unhandled response was received from Symantec Endpoint " f"Protection: {response.text}",
+            )
 
     async def _do_blacklist_files_request(self, body: dict, session: aiohttp.ClientSession) -> Optional[str]:
         """
@@ -168,9 +180,11 @@ class APIClient(object):
         url = f"{self.base_url}/policy-objects/fingerprints"
         status_codes = {
             **self._STATUS_CODES,
-            409: APIException(status_code=409,
-                              message="The request could not be completed due to a conflict with the current state "
-                                      "of the target resource. The file fingerprint already exists.")
+            409: APIException(
+                status_code=409,
+                message="The request could not be completed due to a conflict with the current state "
+                "of the target resource. The file fingerprint already exists.",
+            ),
         }
 
         response = await session.post(url=url, data=json.dumps(body))
@@ -179,22 +193,28 @@ class APIClient(object):
                 resp_json = await response.json()
                 return resp_json["id"]
             except json.JSONDecodeError:
-                raise APIException(status_code=None, message="Symantec Endpoint Protection server returned a "
-                                                             "non-JSON response!")
+                raise APIException(
+                    status_code=None,
+                    message="Symantec Endpoint Protection server returned a " "non-JSON response!",
+                )
             except (KeyError, IndexError):
                 return None
         elif status_codes.get(response.status) is not None:
             raise status_codes[response.status]
         else:
-            raise APIException(status_code=None, message=f"An unhandled response was received from Symantec Endpoint "
-                                                         f"Protection: {response.text}")
+            raise APIException(
+                status_code=None,
+                message=f"An unhandled response was received from Symantec Endpoint " f"Protection: {response.text}",
+            )
 
-    async def _blacklist_files(self,
-                               blacklist_data: [str],
-                               blacklist_description: str,
-                               domain_ids: [str],
-                               hash_type: HashType,
-                               name: Optional[str] = None) -> [str]:
+    async def _blacklist_files(
+        self,
+        blacklist_data: [str],
+        blacklist_description: str,
+        domain_ids: [str],
+        hash_type: HashType,
+        name: Optional[str] = None,
+    ) -> [str]:
         """
         Blacklists a file hash
         :param blacklist_data: The blacklist file’s data
@@ -213,32 +233,37 @@ class APIClient(object):
                     "description": blacklist_description,
                     "domainId": domain_id,
                     "hashType": hash_type.value,
-                    "name": name
+                    "name": name,
                 }
                 tasks.append(asyncio.ensure_future(self._do_blacklist_files_request(body=body, session=async_session)))
             blacklist_ids = await asyncio.gather(*tasks)
         return blacklist_ids
 
-    def blacklist_files(self,
-                        blacklist_data: [str],
-                        blacklist_description: str,
-                        domain_ids: [str],
-                        hash_type: HashType,
-                        name: Optional[str] = None) -> [str]:
+    def blacklist_files(
+        self,
+        blacklist_data: [str],
+        blacklist_description: str,
+        domain_ids: [str],
+        hash_type: HashType,
+        name: Optional[str] = None,
+    ) -> [str]:
         """
         Public function for calling the async blacklist_files function
         """
 
-        return asyncio.run(self._blacklist_files(blacklist_data=blacklist_data,
-                                                 blacklist_description=blacklist_description,
-                                                 domain_ids=domain_ids,
-                                                 hash_type=hash_type,
-                                                 name=name))
+        return asyncio.run(
+            self._blacklist_files(
+                blacklist_data=blacklist_data,
+                blacklist_description=blacklist_description,
+                domain_ids=domain_ids,
+                hash_type=hash_type,
+                name=name,
+            )
+        )
 
-    def update_quarantine_statuses(self,
-                                   computer_ids: [str] = [],
-                                   hardware_ids: [str] = [],
-                                   quarantine: bool = True) -> Optional[str]:
+    def update_quarantine_statuses(
+        self, computer_ids: [str] = [], hardware_ids: [str] = [], quarantine: bool = True
+    ) -> Optional[str]:
         """
         Update the quarantine status of a computer(s). Either computer_ids or hardware_ids should be specified
         :param computer_ids: List of 'uniqueId' belonging to computers to quarantine
@@ -255,24 +280,26 @@ class APIClient(object):
         else:
             params["hardware_ids"] = hardware_ids
 
-        response = self.session.post(url=url,
-                                     params=params,
-                                     verify=False)
+        response = self.session.post(url=url, params=params, verify=False)
 
         if response.status_code == 200:
             try:
                 command_id = response.json()["commandID_computer"]
                 return command_id
             except json.JSONDecodeError:
-                raise APIException(status_code=None, message="Symantec Endpoint Protection server returned a "
-                                                             "non-JSON response!")
+                raise APIException(
+                    status_code=None,
+                    message="Symantec Endpoint Protection server returned a " "non-JSON response!",
+                )
             except (KeyError, IndexError):
                 return None
         elif self._STATUS_CODES.get(response.status_code) is not None:
             raise self._STATUS_CODES[response.status_code]
         else:
-            raise APIException(status_code=None, message=f"An unhandled response was received from Symantec Endpoint "
-                                                         f"Protection: {response.text}")
+            raise APIException(
+                status_code=None,
+                message=f"An unhandled response was received from Symantec Endpoint " f"Protection: {response.text}",
+            )
 
     def get_all_accessible_domains(self) -> [Domain]:
         """
@@ -282,20 +309,23 @@ class APIClient(object):
 
         url = f"{self.base_url}/domains"
 
-        response = self.session.get(url=url,
-                                    verify=False)
+        response = self.session.get(url=url, verify=False)
 
         if response.status_code == 200:
             try:
                 domains = response.json()
                 return domains
             except json.JSONDecodeError:
-                raise APIException(status_code=None, message="Symantec Endpoint Protection server returned a "
-                                                             "non-JSON response!")
+                raise APIException(
+                    status_code=None,
+                    message="Symantec Endpoint Protection server returned a " "non-JSON response!",
+                )
             except (KeyError, IndexError):
                 return None
         elif self._STATUS_CODES.get(response.status_code) is not None:
             raise self._STATUS_CODES[response.status_code]
         else:
-            raise APIException(status_code=None, message=f"An unhandled response was received from Symantec Endpoint "
-                                                         f"Protection: {response.text}")
+            raise APIException(
+                status_code=None,
+                message=f"An unhandled response was received from Symantec Endpoint " f"Protection: {response.text}",
+            )

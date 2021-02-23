@@ -1,22 +1,23 @@
 import komand
 from .schema import ListSensorsInput, ListSensorsOutput
+
 # Custom imports below
 
 
 class ListSensors(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='list_sensors',
-                description='List all sensors',
-                input=ListSensorsInput(),
-                output=ListSensorsOutput())
+            name="list_sensors",
+            description="List all sensors",
+            input=ListSensorsInput(),
+            output=ListSensorsOutput(),
+        )
 
     def run(self, params={}):
         query_params = [
             ("hostname", params.get("hostname", "")),
             ("ip", params.get("ip", "")),
-            ("groupid", params.get("groupid", ""))
+            ("groupid", params.get("groupid", "")),
         ]
         id = params.get("id", "")
         try:
@@ -25,7 +26,9 @@ class ListSensors(komand.Action):
             else:
                 # Returns single sensor if ID is supplied
                 results = []
-                results.append(self.connection.carbon_black.get_object("/api/v1/sensor/%s" % id, query_parameters=query_params))
+                results.append(
+                    self.connection.carbon_black.get_object("/api/v1/sensor/%s" % id, query_parameters=query_params)
+                )
             updated_results = []
             for result in results:
                 result["found"] = True
@@ -33,12 +36,7 @@ class ListSensors(komand.Action):
             results = updated_results
         except Exception as ex:
             results = []
-            results.append(
-                {
-                    "computer_name": params.get("hostname"),
-                    "found": False
-                }
-            )
+            results.append({"computer_name": params.get("hostname"), "found": False})
 
         results = komand.helper.clean(results)
 

@@ -4,13 +4,13 @@ from komand_sentinelone.util.helper import Helper
 
 
 class AgentsSummary(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='agents_summary',
-                description=Component.DESCRIPTION,
-                input=AgentsSummaryInput(),
-                output=AgentsSummaryOutput())
+            name="agents_summary",
+            description=Component.DESCRIPTION,
+            input=AgentsSummaryInput(),
+            output=AgentsSummaryOutput(),
+        )
 
     def run(self, params={}):
         # This action is supported in API v2.1 but not 2.0
@@ -18,7 +18,7 @@ class AgentsSummary(insightconnect_plugin_runtime.Action):
             raise PluginException(
                 cause="Endpoint not found.",
                 assistance="This action is not supported in SentinelOne API v2.0. Verify that your SentinelOne console supports "
-                           "SentinelOne API v2.1 and try again."
+                "SentinelOne API v2.1 and try again.",
             )
 
         response = self.connection.agents_summary(

@@ -1,15 +1,17 @@
 import komand
 from .schema import UpdateInput, UpdateOutput
+
 # Custom imports below
 
 
 class Update(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='update',
-                description='A full update of all fields in a  single object in Dynamo. Performs a read, updates the provided fields, then a full write back. Will fail if Dynamo rejects the update unless force is true',
-                input=UpdateInput(),
-                output=UpdateOutput())
+            name="update",
+            description="A full update of all fields in a  single object in Dynamo. Performs a read, updates the provided fields, then a full write back. Will fail if Dynamo rejects the update unless force is true",
+            input=UpdateInput(),
+            output=UpdateOutput(),
+        )
 
     def run(self, params={}):
         pk = params.get("key")
@@ -25,7 +27,7 @@ class Update(komand.Action):
             props[pkey] = data[key]
             # Append to the expression
             exp += key + " = " + pkey + ","
-        exp = exp[:-1] # Chop off the trailing comma
+        exp = exp[:-1]  # Chop off the trailing comma
         kwargs = {
             "Key": pk,
             "UpdateExpression": exp,
@@ -35,7 +37,7 @@ class Update(komand.Action):
             kwargs["ConditionExpression"] = cond_expr
 
         t.update_item(**kwargs)
-        return {"success":True}
+        return {"success": True}
 
     def test(self):
         """TODO: Test action"""

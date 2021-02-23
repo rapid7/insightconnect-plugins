@@ -2,21 +2,18 @@ import komand
 from .schema import UpdateGlobalAclRuleInput, UpdateGlobalAclRuleOutput
 
 
-
 class UpdateGlobalAclRule(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='update_global_acl_rule',
-                description='Updates the values of given parameters in the given global ACL rule',
-                input=UpdateGlobalAclRuleInput(),
-                output=UpdateGlobalAclRuleOutput())
+            name="update_global_acl_rule",
+            description="Updates the values of given parameters in the given global ACL rule",
+            input=UpdateGlobalAclRuleInput(),
+            output=UpdateGlobalAclRuleOutput(),
+        )
 
     def run(self, params={}):
         action = "security_policies"
-        self.connection.connector.check_required_params(params, [
-            "policy_id",
-            "id"])
+        self.connection.connector.check_required_params(params, ["policy_id", "id"])
 
         action = action + "/" + params.get("policy_id") + "/global_acls/" + params.get("id")
 

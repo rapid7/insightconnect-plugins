@@ -1,5 +1,6 @@
 import komand
 from .schema import ListActivitiesInput, ListActivitiesOutput
+
 # Custom imports below
 import requests
 
@@ -10,10 +11,11 @@ class ListActivities(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='list_activities',
-                description='Lists the UBA (User Behavioral Analysis) activities',
-                input=ListActivitiesInput(),
-                output=ListActivitiesOutput())
+            name="list_activities",
+            description="Lists the UBA (User Behavioral Analysis) activities",
+            input=ListActivitiesInput(),
+            output=ListActivitiesOutput(),
+        )
 
     def run(self, params={}):
         try:

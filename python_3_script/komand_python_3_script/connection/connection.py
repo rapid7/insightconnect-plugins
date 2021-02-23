@@ -1,12 +1,12 @@
 import komand
 from .schema import ConnectionSchema, Input
+
 # Custom imports below
 from subprocess import run, check_output, TimeoutExpired, CalledProcessError
 import os
 
 
 class Connection(komand.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.dependencies, self.timeout = None, None
@@ -18,7 +18,7 @@ class Connection(komand.Connection):
     def test(self):
         self.logger.info("[*] Performing Python version check...\n")
 
-        check = str(check_output(["python", "--version"]), 'utf-8')
+        check = str(check_output(["python", "--version"]), "utf-8")
         self.logger.info(check)
 
         if "Python 3." not in check:
@@ -42,10 +42,7 @@ class Connection(komand.Connection):
         self._set_pythonuserbase()
 
         try:
-            run(args=command.split(" "),
-                capture_output=True,
-                timeout=self.timeout,
-                check=True)
+            run(args=command.split(" "), capture_output=True, timeout=self.timeout, check=True)
         except TimeoutExpired as e:
             raise Exception("Error: Installing Python dependencies exceeded timeout") from e
         except CalledProcessError as e:

@@ -51,8 +51,10 @@ class SqsFeed(komand.Trigger):
 
         if set(attrNames) - valid_attrNames:
             invalid_attrnames = set(attrNames) - valid_attrNames
-            raise PluginException(cause=f'Invalid attribute names',
-                                  assistance=f"""Attribute Names: {invalid_attrnames} and invalid \n Valid Attribute Names: 'All','Policy','VisibilityTimeout','MaximumMessageSize','MessageRetentionPeriod','ApproximateNumberOfMessages','ApproximateNumberOfMessagesNotVisible','CreatedTimestamp','LastModifiedTimestamp','QueueArn','ApproximateNumberOfMessagesDelayed','DelaySeconds','ReceiveMessageWaitTimeSeconds', 'RedrivePolicy', 'FifoQueue', 'ContentBasedDeduplication', 'KmsMasterKeyId', 'KmsDataKeyReusePeriodSeconds'""")
+            raise PluginException(
+                cause=f"Invalid attribute names",
+                assistance=f"""Attribute Names: {invalid_attrnames} and invalid \n Valid Attribute Names: 'All','Policy','VisibilityTimeout','MaximumMessageSize','MessageRetentionPeriod','ApproximateNumberOfMessages','ApproximateNumberOfMessagesNotVisible','CreatedTimestamp','LastModifiedTimestamp','QueueArn','ApproximateNumberOfMessagesDelayed','DelaySeconds','ReceiveMessageWaitTimeSeconds', 'RedrivePolicy', 'FifoQueue', 'ContentBasedDeduplication', 'KmsMasterKeyId', 'KmsDataKeyReusePeriodSeconds'""",
+            )
 
         while True:
             # get Message/messages
@@ -74,19 +76,19 @@ class SqsFeed(komand.Trigger):
                         try:
                             security_hub_event = json.loads(message["Body"])
                         except Exception as e:
-                            raise PluginException(cause=f'Invalid attribute names',
-                                                  assistance=f"An unexpected event occurred when processing the Security Hub Event: {e}")
+                            raise PluginException(
+                                cause=f"Invalid attribute names",
+                                assistance=f"An unexpected event occurred when processing the Security Hub Event: {e}",
+                            )
 
                     self.send(
                         {
                             Output.MESSAGE: message,
                             Output.SECURITYHUBEVENT: security_hub_event,
-                            Output.RESPONSEMETADATA: response["ResponseMetadata"]
+                            Output.RESPONSEMETADATA: response["ResponseMetadata"],
                         }
                     )
                     receipt_handle = message["ReceiptHandle"]
-                    client.delete_message(
-                        QueueUrl=sqs_url, ReceiptHandle=receipt_handle
-                    )
+                    client.delete_message(QueueUrl=sqs_url, ReceiptHandle=receipt_handle)
 
             time.sleep(params.get("interval", 5))

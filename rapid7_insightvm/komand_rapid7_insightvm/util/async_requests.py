@@ -26,8 +26,14 @@ class AsyncRequests:
         return aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False), auth=self.auth)
 
     @staticmethod
-    async def async_request(session, endpoint: str, method: str = 'get', params: Collection = None, payload: dict = None,
-                            json_response: bool = True):
+    async def async_request(
+        session,
+        endpoint: str,
+        method: str = "get",
+        params: Collection = None,
+        payload: dict = None,
+        json_response: bool = True,
+    ):
         """
         Sends an asynchronous request to APIv3 with the provided endpoint and optional method/body
         :param session: The asynchronous session
@@ -56,8 +62,10 @@ class AsyncRequests:
             try:
                 resp_json = await response.json()
             except aiohttp.ContentTypeError:
-                raise PluginException(cause='InsightVM returned malformed JSON.',
-                                      assistance='If this issue persists contact support for assistance.\n',
-                                      data=response.text())
+                raise PluginException(
+                    cause="InsightVM returned malformed JSON.",
+                    assistance="If this issue persists contact support for assistance.\n",
+                    data=response.text(),
+                )
             return resp_json
         return text

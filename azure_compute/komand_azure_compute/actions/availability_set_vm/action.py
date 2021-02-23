@@ -27,8 +27,10 @@ class AvailabilitySetVm(komand.Action):
             resource_group = params.get(Input.RESOURCEGROUP)
             availability_set = params.get(Input.AVAILABILITYSET)
 
-            url = f'{server}/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft' \
-                  f'.Compute/availabilitySets/{availability_set}/vmSizes?api-version={api_version}'
+            url = (
+                f"{server}/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft"
+                f".Compute/availabilitySets/{availability_set}/vmSizes?api-version={api_version}"
+            )
 
             # New Request, Call API and response data
             resp = requests.get(
@@ -44,9 +46,7 @@ class AvailabilitySetVm(komand.Action):
                 result_dic = resp.json()
             except json.decoder.JSONDecodeError as e:
                 self.logger.error("Decoding JSON Errors:  %s", e)
-                raise PluginException(
-                    preset=PluginException.Preset.INVALID_JSON, data=resp.read()
-                )
+                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=resp.read())
             return {Output.VALUE: result_dic}
 
         # Handle exception

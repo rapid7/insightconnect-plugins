@@ -1,12 +1,12 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
+
 # Custom imports below
 from komand_mcafee_epo.util.mcafee import Client
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.client = None
@@ -22,18 +22,15 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.logger.info("Connect: Connecting..")
             self.client = Client(
                 f"{url}:{port}",
-                params.get(Input.CREDENTIALS).get('username'),
-                params.get(Input.CREDENTIALS).get('password'),
-                verify=params.get(Input.SSL_VERIFY, True)
+                params.get(Input.CREDENTIALS).get("username"),
+                params.get(Input.CREDENTIALS).get("password"),
+                verify=params.get(Input.SSL_VERIFY, True),
             )
             if self.client is not None:
                 self.logger.info("Connected")
         except Exception:
             self.logger.error("Error connecting to Mcafee EPO")
-            raise ConnectionTestException(
-                cause="Connection error.",
-                assistance="Error connecting to McAfee EPO"
-            )
+            raise ConnectionTestException(cause="Connection error.", assistance="Error connecting to McAfee EPO")
 
     def test(self):
         try:
@@ -42,11 +39,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
             else:
                 raise ConnectionTestException(
                     cause="Connection error.",
-                    assistance="An unexpected error occurred during the API request"
+                    assistance="An unexpected error occurred during the API request",
                 )
         except Exception:
             self.logger.error("An unexpected error occurred during the API request")
             raise ConnectionTestException(
                 cause="Connection error.",
-                assistance="An unexpected error occurred during the API request"
+                assistance="An unexpected error occurred during the API request",
             )

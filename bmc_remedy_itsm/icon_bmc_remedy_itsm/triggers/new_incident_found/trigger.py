@@ -1,6 +1,7 @@
 import komand
 from komand.exceptions import PluginException
 from .schema import NewIncidentFoundInput, NewIncidentFoundOutput, Input, Output, Component
+
 # Custom Imports below
 import re
 import time
@@ -12,13 +13,13 @@ from typing import Optional
 
 
 class NewIncidentFound(komand.Trigger):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='new_incident_found',
+            name="new_incident_found",
             description=Component.DESCRIPTION,
             input=NewIncidentFoundInput(),
-            output=NewIncidentFoundOutput())
+            output=NewIncidentFoundOutput(),
+        )
 
     def run(self, params={}):
         description_query = params.get(Input.DESCRIPTION_QUERY)
@@ -34,9 +35,12 @@ class NewIncidentFound(komand.Trigger):
             time.sleep(interval)
             self.logger.info("\n")  # Just want a break in the log between each loop
 
-    def _check_new_incidents_and_send(self, compiled_query: object,
-                                      maya_initial_incident_date: maya.MayaDT,
-                                      new_incident_json: dict) -> None:
+    def _check_new_incidents_and_send(
+        self,
+        compiled_query: object,
+        maya_initial_incident_date: maya.MayaDT,
+        new_incident_json: dict,
+    ) -> None:
         """
         This will check an interval's worth of incidents, see if we have any new ones, and return those if they
         match the subject query (if available).
@@ -56,7 +60,9 @@ class NewIncidentFound(komand.Trigger):
         if maya_new_incident_date > maya_initial_incident_date:  # New incident was found
             new_date = maya_new_incident_date  # Reset the time as fast as possible, so we don't miss any new inidents while we're processing this set.
 
-            for incident in new_incident_json.get("entries"):  # Check each incident and see if we have more than one new incident
+            for incident in new_incident_json.get(
+                "entries"
+            ):  # Check each incident and see if we have more than one new incident
                 incident_to_check = incident.get("values")
                 maya_new_date = maya.parse(incident_to_check.get("Submit Date"))
 
@@ -87,7 +93,8 @@ class NewIncidentFound(komand.Trigger):
             raise PluginException(
                 cause=f"An unexpected error code was returned. Status code was {new_incidents_result.status_code}.",
                 assistance="Please contact support with the status code and error information.",
-                data=new_incidents_result.text) from e
+                data=new_incidents_result.text,
+            ) from e
 
         try:
             ret_val = new_incidents_result.json()
@@ -113,7 +120,8 @@ class NewIncidentFound(komand.Trigger):
             raise PluginException(
                 cause=f"An unexpected error code was returned. Status code was {initial_incident_request.status_code}.",
                 assistance="Please contact support with the status code and error information.",
-                data=initial_incident_request.text) from e
+                data=initial_incident_request.text,
+            ) from e
 
         try:
             initial_incident_json = initial_incident_request.json()
@@ -123,15 +131,19 @@ class NewIncidentFound(komand.Trigger):
         initial_incident_id = initial_incident_json.get("entries")[0].get("values").get("Request ID")
         initial_incident_submitted_date = initial_incident_json.get("entries")[0].get("values").get("Submit Date")
 
-        self.logger.info(f"Initial incident found with ID: {initial_incident_id} "
-                         f"and Submit Date: {initial_incident_submitted_date}")
+        self.logger.info(
+            f"Initial incident found with ID: {initial_incident_id} "
+            f"and Submit Date: {initial_incident_submitted_date}"
+        )
 
         try:
             maya_initial_incident_date = maya.parse(initial_incident_submitted_date)
         except Exception as e:
-            raise PluginException(cause="Can not parse date returned by BMC server",
-                                  assistance=f"The BMC server returned a date in an "
-                                             f"unexpected format: {initial_incident_submitted_date}") from e
+            raise PluginException(
+                cause="Can not parse date returned by BMC server",
+                assistance=f"The BMC server returned a date in an "
+                f"unexpected format: {initial_incident_submitted_date}",
+            ) from e
 
         return maya_initial_incident_date
 
@@ -148,7 +160,9 @@ class NewIncidentFound(komand.Trigger):
             try:
                 compiled_query = re.compile(description_query)
             except re.error as e:
-                raise PluginException(cause=f"Invalid regex used for Description Query: {description_query}",
-                                      assistance="Please check your input for Description Query for errors") from e
+                raise PluginException(
+                    cause=f"Invalid regex used for Description Query: {description_query}",
+                    assistance="Please check your input for Description Query for errors",
+                ) from e
 
         return compiled_query

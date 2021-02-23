@@ -21,31 +21,37 @@ class DarkTraceAPI:
     def model_breaches(self, params):
         return self._call_api("GET", "modelbreaches", params=clean(params))
 
-    def update_intelfeed(self, status: bool, entry: str, description: str, source: str, expiration: str, hostname: bool):
-        return self._call_api("POST", "intelfeed", data={
-            ("addentry" if status else "removeentry"): entry,
-            "description": description,
-            "expiry": expiration,
-            "hostname": hostname,
-            "source": source,
-            "fulldetails": True
-        })
+    def update_intelfeed(
+        self,
+        status: bool,
+        entry: str,
+        description: str,
+        source: str,
+        expiration: str,
+        hostname: bool,
+    ):
+        return self._call_api(
+            "POST",
+            "intelfeed",
+            data={
+                ("addentry" if status else "removeentry"): entry,
+                "description": description,
+                "expiry": expiration,
+                "hostname": hostname,
+                "source": source,
+                "fulldetails": True,
+            },
+        )
 
     def _get_signature(self, request: str, date: str) -> str:
         return hmac.new(
-            self.private_token.encode('ASCII'),
-            f"{request}\n{self.public_token}\n{date}".encode('ASCII'),
-            hashlib.sha1
+            self.private_token.encode("ASCII"),
+            f"{request}\n{self.public_token}\n{date}".encode("ASCII"),
+            hashlib.sha1,
         ).hexdigest()
 
-    def _call_api(
-            self,
-            method: str,
-            path: str,
-            data: dict = None,
-            params: dict = None
-    ) -> dict:
-        date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    def _call_api(self, method: str, path: str, data: dict = None, params: dict = None) -> dict:
+        date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         query = None
         if params:
             query = parse.urlencode(params)
@@ -60,17 +66,11 @@ class DarkTraceAPI:
         headers = {
             "DTAPI-Token": self.public_token,
             "DTAPI-Date": date,
-            "DTAPI-Signature": self._get_signature(endpoint, date)
+            "DTAPI-Signature": self._get_signature(endpoint, date),
         }
 
         try:
-            response = requests.request(
-                method,
-                f"{self.url}/{path}",
-                data=data,
-                params=params,
-                headers=headers
-            )
+            response = requests.request(method, f"{self.url}/{path}", data=data, params=params, headers=headers)
 
             if response.status_code == 401:
                 raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)

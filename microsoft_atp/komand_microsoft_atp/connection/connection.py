@@ -1,5 +1,6 @@
 from .schema import ConnectionSchema, Input
 import insightconnect_plugin_runtime
+
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 import requests
@@ -7,7 +8,6 @@ from komand_microsoft_atp.util.api import WindwosDefenderATP_API
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.session = requests.Session()
@@ -21,7 +21,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             params.get(Input.APPLICATION_ID),
             params.get(Input.APPLICATION_SECRET).get("secretKey"),
             params.get(Input.DIRECTORY_ID),
-            self.logger
+            self.logger,
         )
 
     def test(self):
@@ -29,8 +29,4 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.client.get_all_alerts("?$top=1")
             return {"status": True}
         except PluginException as e:
-            raise ConnectionTestException(
-                cause=e.cause,
-                assistance=e.assistance,
-                data=e.data
-            )
+            raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e.data)

@@ -6,10 +6,11 @@ from .schema import ListFloatingIpsInput, ListFloatingIpsOutput
 class ListFloatingIps(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='list_floating_ips',
-            description='List all floating IPs from the account',
+            name="list_floating_ips",
+            description="List all floating IPs from the account",
             input=ListFloatingIpsInput(),
-            output=ListFloatingIpsOutput())
+            output=ListFloatingIpsOutput(),
+        )
 
     def run(self, params={}):
         url = "https://api.digitalocean.com/v2/floating_ips"
@@ -27,7 +28,7 @@ class ListFloatingIps(komand.Action):
                 return {"floating_ips": floating_ips}
             else:
                 self.logger.error("Status code: %s, message: %s", response.status_code, response.json()["message"])
-                Exception('Non-200 status code received')
+                Exception("Non-200 status code received")
         except requests.exceptions.RequestException:
             self.logger.error("An unexpected error occurred during the API request")
             raise

@@ -20,10 +20,10 @@ def generate_results(conn_type, connection, query, parameters, logger):
                 rows_affected = analyze_response["Plan Rows"]
             else:
                 rows_affected = 0
-            operation = 'unknown'
+            operation = "unknown"
         except Exception as e:
             logger.info(e)
-            operation = 'unknown'
+            operation = "unknown"
 
     if len(parameters) == 0:
         rows = connection.session.execute(query)

@@ -1,5 +1,6 @@
 import komand
 from .schema import ScanInput, ScanOutput
+
 # Custom imports below
 from boto3.dynamodb.conditions import Attr
 
@@ -7,10 +8,11 @@ from boto3.dynamodb.conditions import Attr
 class Scan(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='scan',
-                description='Scan Dynamo and return any objects found',
-                input=ScanInput(),
-                output=ScanOutput())
+            name="scan",
+            description="Scan Dynamo and return any objects found",
+            input=ScanInput(),
+            output=ScanOutput(),
+        )
 
     def run(self, params={}):
         """TODO: Run action"""
@@ -31,16 +33,15 @@ class Scan(komand.Action):
         else:
             kwargs = {}
         # Run the query, will raise an exception if something breaks
-        
+
         if (index is not None) and (len(index) > 0):
             self.logger.info("Length: %s", len(index))
             kwargs["IndexName"] = index
 
         results = t.scan(**kwargs)
         return {
-            "records": results['Items'],
-            "count": results['Count'
-            ],
+            "records": results["Items"],
+            "count": results["Count"],
         }
 
     def test(self):

@@ -1,18 +1,19 @@
 import komand
 from .schema import LookupPasswordInput, LookupPasswordOutput, Input, Output
+
 # Custom imports below
 import hashlib
 from icon_haveibeenpwned.util.util import HaveIBeenPwned
 
 
 class LookupPassword(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='lookup_password',
-            description='Check password for compromise',
+            name="lookup_password",
+            description="Check password for compromise",
             input=LookupPasswordInput(),
-            output=LookupPasswordOutput())
+            output=LookupPasswordOutput(),
+        )
 
     def run(self, params={}):
         hibp = HaveIBeenPwned(self.logger)

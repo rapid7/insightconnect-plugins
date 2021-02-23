@@ -1,5 +1,6 @@
 import komand
 
+
 def clean(object):
     cleaned = komand.helper.clean_list(object) if isinstance(object, list) else komand.helper.clean_dict(object)
 

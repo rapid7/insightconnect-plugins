@@ -16,9 +16,7 @@ class Api:
 
         response = None
         try:
-            response = requests.request(method, request_url,
-                                        json=payload,
-                                        headers=self.connection.header_dict)
+            response = requests.request(method, request_url, json=payload, headers=self.connection.header_dict)
 
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.API_KEY)

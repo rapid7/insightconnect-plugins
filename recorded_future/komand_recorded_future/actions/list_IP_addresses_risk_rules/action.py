@@ -16,9 +16,7 @@ class ListIPAddressesRiskRules(komand.Action):
         try:
             risklist = params.get("list")
             query_headers = self.connection.headers
-            results = requests.get(
-                "https://api.recordedfuture.com/v2/ip/riskrules", headers=query_headers
-            ).json()
+            results = requests.get("https://api.recordedfuture.com/v2/ip/riskrules", headers=query_headers).json()
             return {"risk_rules": results["data"]["results"]}
         except Exception as e:
             self.logger.error("Error: " + str(e))

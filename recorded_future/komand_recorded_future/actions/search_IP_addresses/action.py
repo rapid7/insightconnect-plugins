@@ -14,8 +14,20 @@ class SearchIPAddresses(komand.Action):
         )
 
     def run(self, params={}):
-        params["fields"] = ["analystNotes", "counts", "entity", "intelCard", "location", "metrics", "relatedEntities",
-                            "risk", "riskyCIDRIPs", "sightings", "threatLists", "timestamps"]
+        params["fields"] = [
+            "analystNotes",
+            "counts",
+            "entity",
+            "intelCard",
+            "location",
+            "metrics",
+            "relatedEntities",
+            "risk",
+            "riskyCIDRIPs",
+            "sightings",
+            "threatLists",
+            "timestamps",
+        ]
         riskRuleMap = {
             "Threat Actor Used Infrastructure": "actorInfrastructure",
             "Historically Reported by Insikt Group": "analystNote",
@@ -60,7 +72,7 @@ class SearchIPAddresses(komand.Action):
             "Historical Threat Researcher": "threatResearcher",
             "Tor Node": "tor",
             "Unusual IP": "unusualIP",
-            "Vulnerable Host": "vulnerableHost"
+            "Vulnerable Host": "vulnerableHost",
         }
         risk_rule = riskRuleMap.get(params.get(Input.RISKRULE))
         if risk_rule:

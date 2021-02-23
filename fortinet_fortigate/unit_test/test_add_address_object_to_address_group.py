@@ -1,10 +1,13 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from icon_fortinet_fortigate.connection.connection import Connection
-from icon_fortinet_fortigate.actions.add_address_object_to_address_group import AddAddressObjectToAddressGroup
+from icon_fortinet_fortigate.actions.add_address_object_to_address_group import (
+    AddAddressObjectToAddressGroup,
+)
 import json
 import logging
 
@@ -45,12 +48,10 @@ class TestAddAddressObjectToAddressGroup(TestCase):
             """
             self.fail(message)
 
-
         test_conn.connect(connection_params)
         test_action.connection = test_conn
         results = test_action.run(action_params)
 
         self.assertIsNotNone(results)
-        self.assertTrue(results.get('success'))
-        self.assertEqual(results.get('result_object').get('status'), 'success')
-
+        self.assertTrue(results.get("success"))
+        self.assertEqual(results.get("result_object").get("status"), "success")

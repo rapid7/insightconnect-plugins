@@ -1,19 +1,20 @@
 import komand
 import time
 from .schema import NewExceptionRequestInput, NewExceptionRequestOutput, Input, Output, Component
+
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
 class NewExceptionRequest(komand.Trigger):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='new_exception_request',
-                description=Component.DESCRIPTION,
-                input=NewExceptionRequestInput(),
-                output=NewExceptionRequestOutput())
+            name="new_exception_request",
+            description=Component.DESCRIPTION,
+            input=NewExceptionRequestInput(),
+            output=NewExceptionRequestOutput(),
+        )
 
     def run(self, params={}):
         """Run the trigger"""
@@ -22,14 +23,14 @@ class NewExceptionRequest(komand.Trigger):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         endpoint = endpoints.VulnerabilityException.vulnerability_exceptions(self.connection.console_url)
         std_params = {"sort": "id,desc"}
-        response = resource_helper.paged_resource_request(endpoint=endpoint, method='get', params=std_params)
+        response = resource_helper.paged_resource_request(endpoint=endpoint, method="get", params=std_params)
         last_id = 0
         for r in response:
-            if r['id'] > last_id:
-                last_id = r['id']
-        params['interval'] = params['frequency']
+            if r["id"] > last_id:
+                last_id = r["id"]
+        params["interval"] = params["frequency"]
         status_filter = []
-        for i in params.get('status_filter', []):
+        for i in params.get("status_filter", []):
             status_filter.append(i.lower())
         while True:
             # process all new exceptions.  The inner loop is to handle grabbing
@@ -40,15 +41,17 @@ class NewExceptionRequest(komand.Trigger):
             # next higher exception id and we get an exception back instead of a
             # response containing a vulnerability exception.
             while True:
-                endpoint = endpoints.VulnerabilityException.vulnerability_exception(self.connection.console_url, last_id + 1)
+                endpoint = endpoints.VulnerabilityException.vulnerability_exception(
+                    self.connection.console_url, last_id + 1
+                )
                 # check if there is a new vulnerability exception
                 try:
-                    response = resource_helper.resource_request(endpoint=endpoint, method='get')
+                    response = resource_helper.resource_request(endpoint=endpoint, method="get")
                 except Exception:
                     break
                 last_id += 1
                 # do we send it on it's way?
-                if response.get('state').lower() not in status_filter:
+                if response.get("state").lower() not in status_filter:
                     continue
                 # send it on it's way
                 self.send({Output.EXCEPTION: response})

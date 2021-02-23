@@ -1,10 +1,13 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from icon_cisco_threatgrid.connection.connection import Connection
-from icon_cisco_threatgrid.actions.search_for_sample_report_by_domain import SearchForSampleReportByDomain
+from icon_cisco_threatgrid.actions.search_for_sample_report_by_domain import (
+    SearchForSampleReportByDomain,
+)
 import json
 import logging
 
@@ -31,7 +34,6 @@ class TestSearchForSampleReportByDomain(TestCase):
             Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
             """
             self.fail(message)
-
 
         test_conn.connect(connection_params)
         test_action.connection = test_conn

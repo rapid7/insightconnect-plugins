@@ -1,5 +1,6 @@
 import komand
 from .schema import NewScansInput, NewScansOutput, Input, Output, Component
+
 # Custom imports below
 from collections import defaultdict
 import csv
@@ -15,13 +16,13 @@ from komand.exceptions import PluginException
 
 
 class NewScans(komand.Trigger):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='new_scans',
-                description=Component.DESCRIPTION,
-                input=NewScansInput(),
-                output=NewScansOutput())
+            name="new_scans",
+            description=Component.DESCRIPTION,
+            input=NewScansInput(),
+            output=NewScansOutput(),
+        )
 
         self.CACHE_FILE_NAME = f"site_scans_cache_{time.time()}"
 
@@ -33,10 +34,12 @@ class NewScans(komand.Trigger):
         # Track site and scan IDs
         track_site_scans = {}
         for site_id, scan_details in site_scans.items():
-            track_site_scans[site_id] = [scan['scan_id'] for scan in scan_details]
+            track_site_scans[site_id] = [scan["scan_id"] for scan in scan_details]
 
-        self.logger.info(f"Writing state of site scans during initialization of trigger (Site regex: "
-                         f"{params.get(Input.SITE_NAME_FILTER)})")
+        self.logger.info(
+            f"Writing state of site scans during initialization of trigger (Site regex: "
+            f"{params.get(Input.SITE_NAME_FILTER)})"
+        )
         util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(track_site_scans))
 
         while True:
@@ -52,30 +55,33 @@ class NewScans(komand.Trigger):
             try:
                 cache_site_scans = json.loads(util.read_from_cache(self.CACHE_FILE_NAME))
             except ValueError as e:
-                raise PluginException(cause="Failed to load cache file",
-                                      assistance=f"Exception returned was {e}")
+                raise PluginException(cause="Failed to load cache file", assistance=f"Exception returned was {e}")
 
             # Send scans based on configuration
             for site_id, scans in site_scans.items():
                 for scan in scans:
                     # Only process scan IDs not previously cached
-                    if scan.get('scan_id') in cache_site_scans.get(site_id):
+                    if scan.get("scan_id") in cache_site_scans.get(site_id):
                         continue
 
                     # Get scan details
-                    endpoint = endpoints.Scan.scans(self.connection.console_url, scan['scan_id'])
+                    endpoint = endpoints.Scan.scans(self.connection.console_url, scan["scan_id"])
 
                     response = self.connection.session.get(url=endpoint, verify=False)
                     if response.status_code in [200, 201]:  # 200 is documented, 201 is undocumented
                         try:
                             scan_details = response.json()
                         except json.decoder.JSONDecodeError as e:
-                            raise PluginException(cause=f"Error: Failed to parse response while retrieving scan "
-                                                        f"details for scan ID {scan['scan_id']}.",
-                                                  assistance=f"Exception returned was {e}")
+                            raise PluginException(
+                                cause=f"Error: Failed to parse response while retrieving scan "
+                                f"details for scan ID {scan['scan_id']}.",
+                                assistance=f"Exception returned was {e}",
+                            )
                     else:
-                        raise PluginException(cause=f"ERROR: Failed to retrieve scan ID {scan['scan_id']}.",
-                                              assistance=f"Status code returned was {response.status_code}")
+                        raise PluginException(
+                            cause=f"ERROR: Failed to retrieve scan ID {scan['scan_id']}.",
+                            assistance=f"Status code returned was {response.status_code}",
+                        )
 
                     # Add site name and id; not provided by endpoint
                     scan_details["siteId"] = scan.get("site_id")
@@ -86,28 +92,29 @@ class NewScans(komand.Trigger):
                     self.send({Output.SCAN: scan_details})
 
                     # Update cache
-                    cache_site_scans[site_id].append(scan.get('scan_id'))
+                    cache_site_scans[site_id].append(scan.get("scan_id"))
 
             # Update cache file
             self.logger.info("Writing to " + self.CACHE_FILE_NAME)
             try:
                 util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(cache_site_scans))
             except TypeError as e:
-                raise PluginException(cause="Failed to save cache to file",
-                                      assistance=f"Exception returned was {e}")
+                raise PluginException(cause="Failed to save cache to file", assistance=f"Exception returned was {e}")
 
             # Sleep for configured frequency in minutes
             time.sleep(params.get(Input.FREQUENCY, 5) * 60)
 
     @staticmethod
     def scans_query(scan_statuses, site_ids):
-        return f"SELECT ds.scan_id, dss.description as status, dsscan.site_id, dsite.name as site_name " \
-               f"FROM dim_scan AS ds " \
-               f"JOIN dim_scan_status AS dss ON dss.status_id = ds.status_id " \
-               f"JOIN dim_site_scan AS dsscan ON dsscan.scan_id = ds.scan_id " \
-               f"JOIN dim_site AS dsite ON dsite.site_id = dsscan.site_id " \
-               f"WHERE dss.description IN ({','.join(scan_statuses)})" \
-               f"AND dsite.site_id IN ({','.join(site_ids)})"
+        return (
+            f"SELECT ds.scan_id, dss.description as status, dsscan.site_id, dsite.name as site_name "
+            f"FROM dim_scan AS ds "
+            f"JOIN dim_scan_status AS dss ON dss.status_id = ds.status_id "
+            f"JOIN dim_site_scan AS dsscan ON dsscan.scan_id = ds.scan_id "
+            f"JOIN dim_site AS dsite ON dsite.site_id = dsscan.site_id "
+            f"WHERE dss.description IN ({','.join(scan_statuses)})"
+            f"AND dsite.site_id IN ({','.join(site_ids)})"
+        )
 
     def get_sites_within_scope(self, site_regex):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
@@ -118,8 +125,8 @@ class NewScans(komand.Trigger):
         regex = re.compile(site_regex, re.IGNORECASE)
         site_ids = []
         for s in sites:
-            if regex.match(s['name']):
-                site_ids.append(s['id'])
+            if regex.match(s["name"]):
+                site_ids.append(s["id"])
         self.logger.info(f"Identified {len(site_ids)} sites within trigger scope based on regular expression filter")
 
         return site_ids
@@ -133,11 +140,13 @@ class NewScans(komand.Trigger):
 
         # Gather sites and corresponding site IDs in scope
         report_payload = {
-            'name': f"Rapid7-InsightConnect-NewScans-{identifier}",
-            'format': 'sql-query',
-            'query': NewScans.scans_query(map(lambda x: "'" + x + "'", params.get(Input.STATUS_FILTER)),
-                                          [str(site_id) for site_id in site_ids]),
-            'version': '2.3.0',
+            "name": f"Rapid7-InsightConnect-NewScans-{identifier}",
+            "format": "sql-query",
+            "query": NewScans.scans_query(
+                map(lambda x: "'" + x + "'", params.get(Input.STATUS_FILTER)),
+                [str(site_id) for site_id in site_ids],
+            ),
+            "version": "2.3.0",
         }
 
         # Run report to get scans based on sites in scope
@@ -147,10 +156,12 @@ class NewScans(komand.Trigger):
 
         site_scans = defaultdict(list)
         try:
-            csv_report = csv.DictReader(io.StringIO(report_contents['raw']))
+            csv_report = csv.DictReader(io.StringIO(report_contents["raw"]))
         except Exception as e:
-            raise PluginException(cause="Error: Failed to process query response while fetching site scans.",
-                                  assistance=f"Exception returned was {e}")
+            raise PluginException(
+                cause="Error: Failed to process query response while fetching site scans.",
+                assistance=f"Exception returned was {e}",
+            )
 
         # Identify all scans that match sites from regular expression and status filter
         for row in csv_report:
@@ -158,7 +169,7 @@ class NewScans(komand.Trigger):
                 "scan_id": int(row["scan_id"]),
                 "status": row["status"],
                 "site_id": int(row["site_id"]),
-                "site_name": row["site_name"]
+                "site_name": row["site_name"],
             }
             site_scans[row["site_id"]].append(site_scan)
 

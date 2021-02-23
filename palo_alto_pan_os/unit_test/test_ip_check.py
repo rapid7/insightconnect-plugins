@@ -2,7 +2,6 @@ from komand_palo_alto_pan_os.util.ip_check import IpCheck
 from unittest import TestCase
 
 
-
 class TestIpCheck(TestCase):
     def test_determine_address_type(self):
         ip_check = IpCheck()
@@ -40,10 +39,12 @@ class TestIpCheck(TestCase):
         self.assertTrue(ip_check.check_address_against_object("1.1.1.0/24", "1.1.1.1"))
         self.assertTrue(ip_check.check_address_against_object("google.com", "google.com"))
         self.assertTrue(ip_check.check_address_against_object("1.1.1.1", "1.1.1.1"))
-        self.assertTrue(ip_check.check_address_against_object("2001:0db8:85a3:0000:0000:8a2e:0370:7334", "2001:0db8:85a3:0000:0000:8a2e:0370:7334"))
+        self.assertTrue(
+            ip_check.check_address_against_object(
+                "2001:0db8:85a3:0000:0000:8a2e:0370:7334", "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
+            )
+        )
 
         self.assertFalse(ip_check.check_address_against_object("1.1.1.0/24", "3.1.1.1"))
         self.assertFalse(ip_check.check_address_against_object("www.google.com", "google.com"))
         self.assertFalse(ip_check.check_address_against_object("!@#$!@#$", "!@#$!@#$"))
-
-
