@@ -708,7 +708,7 @@ actions:
         example: 00ub0oNGTSWTBKOLGLNR
       temp_password:
         title: Okta User Temporary Password
-        description: If `true`, sets the user's password to a temporary password and returns it
+        description: If set to true, sets the user's password to a temporary password and returns it
         type: boolean
         required: false
         default: false
