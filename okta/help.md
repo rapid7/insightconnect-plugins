@@ -29,7 +29,7 @@ The connection configuration accepts the following parameters:
 
 #### Reset Password
 
-This action resets password for Okta user and transitions user status to PASSWORD_EXPIRED, so that the user is required to change their password at their next login
+This action resets password for Okta user and transitions user status to PASSWORD_EXPIRED, so that the user is required to change their password at their next login.
 
 ##### Input
 
