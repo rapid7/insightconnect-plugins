@@ -26,14 +26,14 @@ class ResetPasswordInput(komand.Input):
     "temp_password": {
       "type": "boolean",
       "title": "Okta User Temporary Password",
-      "description": "If `true`, sets the user's password to a temporary password and returns it",
+      "description": "If set to true, sets the user's password to a temporary password and returns it",
       "default": false,
       "order": 2
     },
     "user_id": {
       "type": "string",
       "title": "Okta User ID",
-      "description": "ID of user that password will be resetted",
+      "description": "User ID whose password will be reset",
       "order": 1
     }
   },
@@ -62,7 +62,7 @@ class ResetPasswordOutput(komand.Output):
     "temp_password": {
       "type": "string",
       "title": "Okta User Temporary Password",
-      "description": "The temporary password of the Okta user, if `true` was given in input `temp_password` parameter",
+      "description": "The temporary password of the Okta user, if true was set in Temporary Password input",
       "order": 2
     }
   },

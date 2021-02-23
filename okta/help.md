@@ -35,8 +35,8 @@ This action resets password for Okta user and transitions user status to PASSWOR
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|temp_password|boolean|False|False|If `true`, sets the user's password to a temporary password and returns it|None|True|
-|user_id|string|None|True|ID of user that password will be resetted|None|00ub0oNGTSWTBKOLGLNR|
+|temp_password|boolean|False|False|If set to true, sets the user's password to a temporary password and returns it|None|True|
+|user_id|string|None|True|User ID whose password will be reset|None|00ub0oNGTSWTBKOLGLNR|
 
 Example input:
 
@@ -52,7 +52,7 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |success|boolean|True|Whether the reset was successful|
-|temp_password|string|False|The temporary password of the Okta user, if `true` was given in input `temp_password` parameter|
+|temp_password|string|False|The temporary password of the Okta user, if true was set in Temporary Password input|
 
 Example output:
 

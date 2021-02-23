@@ -1,5 +1,5 @@
 {
-	"spec": "6463a3c99ef897c577e4d84aecde32bb",
+	"spec": "84061229dbd492411f2909688a3fe3e9",
 	"manifest": "f5ecb1d27978f856ffe7dbbcd17bc9f6",
 	"setup": "81061693de37ca0ad2ece9a8ed049209",
 	"schemas": [
@@ -45,7 +45,7 @@
 		},
 		{
 			"identifier": "reset_password/schema.py",
-			"hash": "bdf62ffccb24f4c5dbe76386f8dfdb6b"
+			"hash": "508d0fa3ed56c5cfbaa2a26ade1733d7"
 		},
 		{
 			"identifier": "send_push/schema.py",
