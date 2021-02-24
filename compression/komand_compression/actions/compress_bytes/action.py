@@ -1,17 +1,18 @@
 import komand
 from .schema import CompressBytesInput, CompressBytesOutput
+
 # Custom imports below
 from ...util import utils, compressor
 
 
 class CompressBytes(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='compress_bytes',
-                description='Compress bytes',
-                input=CompressBytesInput(),
-                output=CompressBytesOutput())
+            name="compress_bytes",
+            description="Compress bytes",
+            input=CompressBytesInput(),
+            output=CompressBytesOutput(),
+        )
 
     def run(self, params={}):
         algorithm = params.get("algorithm")

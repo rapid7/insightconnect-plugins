@@ -1,15 +1,17 @@
 import komand
 from .schema import DomainsInput, DomainsOutput
+
 # Custom imports below
 
 
 class Domains(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='domains',
-                description='To gather the lists of domains already added to the shared customer’s domain list, run a GET request against the domains endpoint of the API',
-                input=DomainsInput(),
-                output=DomainsOutput())
+            name="domains",
+            description="To gather the lists of domains already added to the shared customer’s domain list, run a GET request against the domains endpoint of the API",
+            input=DomainsInput(),
+            output=DomainsOutput(),
+        )
 
     def run(self, params={}):
         try:
@@ -33,11 +35,13 @@ class Domains(komand.Action):
         domains["meta"] = meta
 
         for data in datas:
-            domains["data"].append({
-                "ID": data.get("id"),
-                "name": data.get("name"),
-                "lastSeenAt": data.get("lastSeenAt")
-            })
+            domains["data"].append(
+                {
+                    "ID": data.get("id"),
+                    "name": data.get("name"),
+                    "lastSeenAt": data.get("lastSeenAt"),
+                }
+            )
 
         return domains
 

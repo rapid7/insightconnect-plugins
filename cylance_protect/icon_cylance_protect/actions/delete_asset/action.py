@@ -1,19 +1,20 @@
 import insightconnect_plugin_runtime
 from .schema import DeleteAssetInput, DeleteAssetOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
+
 # Custom imports below
 from icon_cylance_protect.util.find_helpers import find_in_whitelist, find_agent_by_ip
 import validators
 
 
 class DeleteAsset(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='delete_asset',
+            name="delete_asset",
             description=Component.DESCRIPTION,
             input=DeleteAssetInput(),
-            output=DeleteAssetOutput())
+            output=DeleteAssetOutput(),
+        )
 
     def run(self, params={}):
         whitelist = params.get(Input.WHITELIST, None)
@@ -55,7 +56,7 @@ class DeleteAsset(insightconnect_plugin_runtime.Action):
         if not valid_ids:
             raise PluginException(
                 cause="No valid devices to delete.",
-                assistance=f"Be sure that the devices exist in Cylance and are not part of the whitelist."
+                assistance=f"Be sure that the devices exist in Cylance and are not part of the whitelist.",
             )
 
         payload = {"device_ids": valid_ids}
@@ -63,16 +64,18 @@ class DeleteAsset(insightconnect_plugin_runtime.Action):
         if not success:
             raise PluginException(
                 cause="One of the devices failed to delete.",
-                assistance=f"A valid agent deletion may have failed, check your Cylance console."
+                assistance=f"A valid agent deletion may have failed, check your Cylance console.",
             )
 
-        return {Output.SUCCESS: True, Output.DELETED: valid_devices, Output.NOT_DELETED: invalid_devices}
+        return {
+            Output.SUCCESS: True,
+            Output.DELETED: valid_devices,
+            Output.NOT_DELETED: invalid_devices,
+        }
 
     @staticmethod
     def add_to_valid_devices(device_obj, valid_ids):
-        device_id = device_obj.get('id')
-        device_id.replace('-', '').upper()
+        device_id = device_obj.get("id")
+        device_id.replace("-", "").upper()
         valid_ids.append(device_id)
         return valid_ids
-
-

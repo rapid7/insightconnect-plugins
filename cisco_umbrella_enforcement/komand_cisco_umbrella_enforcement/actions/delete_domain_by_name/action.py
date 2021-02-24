@@ -1,15 +1,17 @@
 import komand
 from .schema import DeleteDomainByNameInput, DeleteDomainByNameOutput
+
 # Custom imports
 
 
 class DeleteDomainByName(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='delete_domain_by_name',
-                description='Delete domain from user domain list',
-                input=DeleteDomainByNameInput(),
-                output=DeleteDomainByNameOutput())
+            name="delete_domain_by_name",
+            description="Delete domain from user domain list",
+            input=DeleteDomainByNameInput(),
+            output=DeleteDomainByNameOutput(),
+        )
 
     def run(self, params={}):
         domainName = params.get("domain")

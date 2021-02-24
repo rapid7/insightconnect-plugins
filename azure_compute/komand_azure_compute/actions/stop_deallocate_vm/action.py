@@ -27,8 +27,10 @@ class StopDeallocateVm(komand.Action):
             subscription_id = params.get(Input.SUBSCRIPTIONID)
             resource_group = params.get(Input.RESOURCEGROUP)
 
-            url = f"{server}/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft" \
-                  f".Compute/virtualMachines/{vm}/deallocate?api-version={api_version}"
+            url = (
+                f"{server}/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft"
+                f".Compute/virtualMachines/{vm}/deallocate?api-version={api_version}"
+            )
 
             # New Request, Call API and response data
             resp = requests.post(

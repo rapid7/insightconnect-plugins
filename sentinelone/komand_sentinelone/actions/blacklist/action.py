@@ -1,29 +1,32 @@
 import insightconnect_plugin_runtime
 from .schema import BlacklistInput, BlacklistOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
+
 # Custom imports below
 import re
 
 
 class Blacklist(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='blacklist',
-                description=Component.DESCRIPTION,
-                input=BlacklistInput(),
-                output=BlacklistOutput())
+            name="blacklist",
+            description=Component.DESCRIPTION,
+            input=BlacklistInput(),
+            output=BlacklistOutput(),
+        )
 
     def run(self, params={}):
-        if re.match(r'\b[0-9a-f]{40}\b', params.get(Input.HASH)) is None:
-            raise PluginException(cause="An invalid hash was provided.",
-                                  assistance="Please enter a SHA1 hash and try again.")
+        if re.match(r"\b[0-9a-f]{40}\b", params.get(Input.HASH)) is None:
+            raise PluginException(
+                cause="An invalid hash was provided.",
+                assistance="Please enter a SHA1 hash and try again.",
+            )
 
         blacklist_state = params.get(Input.BLACKLIST_STATE)
         if blacklist_state is True:
             errors = self.connection.create_blacklist_item(
                 params.get(Input.HASH),
-                params.get(Input.DESCRIPTION, "Hash Blacklisted from InsightConnect")
+                params.get(Input.DESCRIPTION, "Hash Blacklisted from InsightConnect"),
             )
         else:
             item_ids = self.connection.get_item_ids_by_hash(params.get(Input.HASH))
@@ -32,10 +35,10 @@ class Blacklist(insightconnect_plugin_runtime.Action):
         if len(errors) == 0:
             success_result = True
         else:
-            raise PluginException(cause='The response from SentinelOne was not in the correct format.',
-                                  assistance='Contact support for help. See log for more details.',
-                                  data=errors)
+            raise PluginException(
+                cause="The response from SentinelOne was not in the correct format.",
+                assistance="Contact support for help. See log for more details.",
+                data=errors,
+            )
 
-        return {
-            Output.SUCCESS: success_result
-        }
+        return {Output.SUCCESS: success_result}

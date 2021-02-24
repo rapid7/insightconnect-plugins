@@ -7,18 +7,21 @@ import base64
 def encode_basic_auth(username, password):
     """Returns the content of an Auth header given a username and password"""
     creds = username + ":" + password
-    return b'Basic ' + base64.b64encode(bytes(creds, "utf-8"))
+    return b"Basic " + base64.b64encode(bytes(creds, "utf-8"))
 
 
 def get_offenses(log, host, basic_auth=None, token=None, fields=None, filter=None, range=None):
     url = host + "/api/siem/offenses?"
-    if fields: url += "fields=" + quote(fields) + "&"
-    if filter: url += "filter=" + quote(filter)
+    if fields:
+        url += "fields=" + quote(fields) + "&"
+    if filter:
+        url += "filter=" + quote(filter)
     if token:
         headers = {"SEC": token, "Accept": "application/json"}
     else:
         headers = {"Authorization": basic_auth, "Accept": "application/json"}
-    if range: headers["Range"] = range
+    if range:
+        headers["Range"] = range
     try:
         resp = requests.get(url, headers=headers, verify=False)
         if resp.status_code == 200:
@@ -37,6 +40,7 @@ def get_offenses(log, host, basic_auth=None, token=None, fields=None, filter=Non
         log.error("Requests: ConnectionError for %s" % url)
     return None
 
+
 def post_offense(log, host, offense_id, basic_auth=None, token=None, params=None):
     url = host + "/api/siem/offenses/" + str(offense_id) + "?"
 
@@ -46,7 +50,11 @@ def post_offense(log, host, offense_id, basic_auth=None, token=None, params=None
     if token:
         headers = {"SEC": token, "Accept": "application/json", "Content-Type": "application/json"}
     else:
-        headers = {"Authorization": basic_auth, "Accept": "application/json", "Content-Type": "application/json"}
+        headers = {
+            "Authorization": basic_auth,
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        }
     try:
         resp = requests.post(url, data=None, json=None, headers=headers, verify=False)
         if resp.status_code == 200:
@@ -77,19 +85,25 @@ def new_ariel_query(log, host, basic_auth=None, token=None, query=""):
         409: "The search cannot be created. The requested search ID that was provided in the query expression is already in use. Please use a unique search ID (or allow one to be generated)",
         422: "The query_expression contains invalid AQL syntax",
         500: "An error occurred during the attempt to create a new search",
-        503: "The Ariel server might be temporarily unavailable or offline. Please try again later"
+        503: "The Ariel server might be temporarily unavailable or offline. Please try again later",
     }
 
     url = host + "/api/ariel/searches"
 
     if token:
-        headers = {"SEC": token, "Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
+        headers = {
+            "SEC": token,
+            "Accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
+        }
     else:
-        headers = {"Authorization": basic_auth, "Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
+        headers = {
+            "Authorization": basic_auth,
+            "Accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
+        }
 
-    payload = {
-        "query_expression": query
-    }
+    payload = {"query_expression": query}
 
     try:
         r = requests.post(url, data=payload, headers=headers, verify=False)
@@ -114,15 +128,23 @@ def get_ariel_query_results(log, host, basic_auth=None, token=None, search_id=""
         404: "The search does not exist",
         422: "A request parameter is not valid",
         500: "An error occurred while attempting to retrieve the search information",
-        503: "The ariel server may be temporarily unavailable or offline. Please try again later"
+        503: "The ariel server may be temporarily unavailable or offline. Please try again later",
     }
 
     url = host + "/api/ariel/searches/" + search_id
 
     if token:
-        headers = {"SEC": token, "Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
+        headers = {
+            "SEC": token,
+            "Accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
+        }
     else:
-        headers = {"Authorization": basic_auth, "Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
+        headers = {
+            "Authorization": basic_auth,
+            "Accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
+        }
 
     try:
         r = requests.get(url, headers=headers, verify=False)
@@ -154,7 +176,11 @@ def add_data_to_reference_data_lists(log, host, basic_auth=None, token=None, pay
     if token:
         headers = {"SEC": token, "Accept": "application/json", "Content-Type": "application/json"}
     else:
-        headers = {"Authorization": basic_auth, "Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
+        headers = {
+            "Authorization": basic_auth,
+            "Accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
+        }
 
     try:
         r = requests.post(url, headers=headers, data=payload, verify=False)

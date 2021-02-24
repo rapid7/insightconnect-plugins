@@ -1,24 +1,30 @@
 import komand
 from .schema import BulkAnalyzeInput, BulkAnalyzeOutput, Input, Output, Component
+
 # Custom imports below
 from komand_cortex_v2.util.convert import job_to_dict
 
 
 class BulkAnalyze(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='bulk_analyze',
-                description=Component.DESCRIPTION,
-                input=BulkAnalyzeInput(),
-                output=BulkAnalyzeOutput())
+            name="bulk_analyze",
+            description=Component.DESCRIPTION,
+            input=BulkAnalyzeInput(),
+            output=BulkAnalyzeOutput(),
+        )
 
     def run(self, params={}):
         api = self.connection.api
         job_results = []
         cortex_analyzers = set()
         # set vars
-        analyzer_ids , observable, analyze_all, attributes = params.get(Input.ANALYZER_IDS), params.get(Input.OBSERVABLE), params.get(Input.ANALYZE_ALL), params.get(Input.ATTRIBUTES)
+        analyzer_ids, observable, analyze_all, attributes = (
+            params.get(Input.ANALYZER_IDS),
+            params.get(Input.OBSERVABLE),
+            params.get(Input.ANALYZE_ALL),
+            params.get(Input.ATTRIBUTES),
+        )
         data_type = attributes.get("dataType", None)
         tlp_num = attributes.get("tlp", None)
         # get list of analyzers
@@ -40,21 +46,15 @@ class BulkAnalyze(komand.Action):
             for analyzer in analyzer_ids:
                 self.logger.debug(f"Running Analyzer: {analyzer}")
                 job = api.analyzers.run_by_name(
-                    analyzer, {
-                        'data': observable,
-                        'dataType': data_type,
-                        'tlp': tlp_num
-                    }, force=1)
+                    analyzer, {"data": observable, "dataType": data_type, "tlp": tlp_num}, force=1
+                )
                 job_results.append(job_to_dict(job, api))
         else:
             # Analyze all
             for analyzer in cortex_analyzers:
                 job = api.analyzers.run_by_name(
-                    analyzer, {
-                        'data': observable,
-                        'dataType': data_type,
-                        'tlp': tlp_num
-                    }, force=1)
+                    analyzer, {"data": observable, "dataType": data_type, "tlp": tlp_num}, force=1
+                )
                 job_results.append(job_to_dict(job, api))
 
         # results

@@ -1,5 +1,6 @@
 import komand
 from .schema import ConnectionSchema, Input
+
 # Custom imports below
 from requests import Session
 from icon_fortinet_fortigate.util.util import Helpers
@@ -7,7 +8,6 @@ from komand.exceptions import ConnectionTestException, PluginException
 
 
 class Connection(komand.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
@@ -35,7 +35,7 @@ class Connection(komand.Connection):
         endpoint = f"https://{self.host}/api/v2/cmdb/firewall/addrgrp"
         params = {
             "access_token": self.api_key,
-            "filter": f"name=@{address_group_name}"  # I have no idea why they need the @ symbol
+            "filter": f"name=@{address_group_name}",  # I have no idea why they need the @ symbol
         }
 
         result = self.session.get(endpoint, params=params, verify=self.ssl_verify)
@@ -43,15 +43,19 @@ class Connection(komand.Connection):
         try:
             result.raise_for_status()
         except Exception as e:
-            raise PluginException(cause=f"Could not find address group {address_group_name}\n",
-                                  assistance=result.text,
-                                  data=f"{e}")
+            raise PluginException(
+                cause=f"Could not find address group {address_group_name}\n",
+                assistance=result.text,
+                data=f"{e}",
+            )
 
         groups = result.json().get("results")
         if not len(groups) > 0:
-            raise PluginException(cause=f"Could not find address group '{address_group_name}' in results.\n",
-                                  assistance=f"Please make sure the group '{address_group_name}' exists.\n",
-                                  data=result.text)
+            raise PluginException(
+                cause=f"Could not find address group '{address_group_name}' in results.\n",
+                assistance=f"Please make sure the group '{address_group_name}' exists.\n",
+                data=result.text,
+            )
 
         group = groups[0]
         return group
@@ -64,9 +68,11 @@ class Connection(komand.Connection):
         try:
             json_response = response.json()
         except ValueError:
-            raise PluginException(cause="Data sent by FortiGate was not in JSON format.\n",
-                                  assistance="Contact support for help.",
-                                  data=response.text)
+            raise PluginException(
+                cause="Data sent by FortiGate was not in JSON format.\n",
+                assistance="Contact support for help.",
+                data=response.text,
+            )
         helper.http_errors(json_response, response.status_code)
 
         return response.json()

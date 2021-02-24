@@ -5,7 +5,7 @@ import json
 
 class AnyRunAPI:
     def __init__(self, authentication_header, logger):
-        self.url = 'https://api.any.run/v1/analysis/'
+        self.url = "https://api.any.run/v1/analysis/"
         self.authentication_header = authentication_header
         self.logger = logger
 
@@ -21,11 +21,14 @@ class AnyRunAPI:
     def _call_api(self, method, url, params=None, json_data=None, files=None):
         response = {"text": ""}
         try:
-            response = requests.request(method, url,
-                                        files=files,
-                                        json=json_data,
-                                        params=params,
-                                        headers=self.authentication_header)
+            response = requests.request(
+                method,
+                url,
+                files=files,
+                json=json_data,
+                params=params,
+                headers=self.authentication_header,
+            )
 
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.API_KEY)

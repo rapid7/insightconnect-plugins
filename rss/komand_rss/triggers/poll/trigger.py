@@ -1,20 +1,22 @@
 import komand
 import time
 from .schema import PollInput, PollOutput
+
 # Custom imports below
 import feedparser
 
 
 class Poll(komand.Trigger):
-    
+
     _CACHE_FILE_NAME = "triggers_rss_poll"
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='poll',
-                description='Poll feed for latest event',
-                input=PollInput(),
-                output=PollOutput())
+            name="poll",
+            description="Poll feed for latest event",
+            input=PollInput(),
+            output=PollOutput(),
+        )
 
     def run(self, params={}):
         sleep_duration = params.get("frequency")
@@ -44,8 +46,11 @@ class Poll(komand.Trigger):
                     cache_file.write("{link}\n".format(link=link))
                     self.send(payload)
 
-            self.logger.info("Run: Parsed {new} new entries. Sleeping for {sleep} seconds.".format(new=new_count,
-                                                                                                   sleep=sleep_duration))
+            self.logger.info(
+                "Run: Parsed {new} new entries. Sleeping for {sleep} seconds.".format(
+                    new=new_count, sleep=sleep_duration
+                )
+            )
             time.sleep(sleep_duration)
 
     @staticmethod
@@ -53,7 +58,7 @@ class Poll(komand.Trigger):
         # This method can be improved using priority/fallback properties on an RSS entry.
         # See https://cyber.harvard.edu/rss/rss.html#requiredChannelElements for info on required/optional elements.
 
-        return {'results': entry}
+        return {"results": entry}
 
     def test(self):
         feed = feedparser.parse(self.connection.FEED_URL)
@@ -62,4 +67,8 @@ class Poll(komand.Trigger):
             link = entry["link"]  # Use link as an identifier since it is guaranteed according to W3 RSS spec
             return self.create_payload_from_entry(entry)
 
-        return {"contents": "http://example.com", "description": "Hello, world", 'title': "Example entry"}
+        return {
+            "contents": "http://example.com",
+            "description": "Hello, world",
+            "title": "Example entry",
+        }

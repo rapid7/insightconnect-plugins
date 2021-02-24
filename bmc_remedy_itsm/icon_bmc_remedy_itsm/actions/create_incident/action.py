@@ -1,5 +1,6 @@
 import komand
 from .schema import CreateIncidentInput, CreateIncidentOutput, Input, Output, Component
+
 # Custom imports below
 from icon_bmc_remedy_itsm.util import error_handling
 import requests
@@ -8,16 +9,25 @@ import urllib.parse
 
 class CreateIncident(komand.Action):
     _URI = "api/arsys/v1/entry/HPD%3AIncidentInterface%5FCreate"
-    _CONVERSION_KEY = {"First_Name": "first_name", "Last_Name": "last_name", "Service_Type": "service_type",
-                       "Login_ID": "login_id", "Reported Source": "reported_source", "Status": "status",
-                       "Impact": "impact", "Urgency": "urgency", "Description": "incident_description"}
+    _CONVERSION_KEY = {
+        "First_Name": "first_name",
+        "Last_Name": "last_name",
+        "Service_Type": "service_type",
+        "Login_ID": "login_id",
+        "Reported Source": "reported_source",
+        "Status": "status",
+        "Impact": "impact",
+        "Urgency": "urgency",
+        "Description": "incident_description",
+    }
 
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='create_incident',
+            name="create_incident",
             description=Component.DESCRIPTION,
             input=CreateIncidentInput(),
-            output=CreateIncidentOutput())
+            output=CreateIncidentOutput(),
+        )
 
     def run(self, params={}):
         handler = error_handling.ErrorHelper()

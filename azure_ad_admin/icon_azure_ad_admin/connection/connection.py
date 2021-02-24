@@ -1,6 +1,7 @@
 import time
 
 import komand
+
 # Custom imports below
 import requests
 from komand.exceptions import PluginException, ConnectionTestException
@@ -9,7 +10,6 @@ from .schema import ConnectionSchema, Input
 
 
 class Connection(komand.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.O365_AUTH_ENDPOINT = "https://login.microsoftonline.com/{}/oauth2/token"
@@ -45,10 +45,10 @@ class Connection(komand.Connection):
         self.logger.info("Updating auth token...")
 
         data = {
-            'grant_type': 'client_credentials',
-            'client_id': client_id,
-            'resource': self.SCOPE,
-            'client_secret': client_secret,
+            "grant_type": "client_credentials",
+            "client_id": client_id,
+            "resource": self.SCOPE,
+            "client_secret": client_secret,
         }
 
         formatted_endpoint = self.O365_AUTH_ENDPOINT.format(tenant_id)
@@ -59,13 +59,15 @@ class Connection(komand.Connection):
 
         if request.status_code is not 200:
             self.logger.error(request.text)
-            raise PluginException(cause="Unable to authorize against Microsoft graph API.",
-                                  assistance="The application may not be authorized to connect "
-                                             "to the Microsoft Graph API. Please contact your "
-                                             "Azure administrator.",
-                                  data=request.text)
+            raise PluginException(
+                cause="Unable to authorize against Microsoft graph API.",
+                assistance="The application may not be authorized to connect "
+                "to the Microsoft Graph API. Please contact your "
+                "Azure administrator.",
+                data=request.text,
+            )
 
-        token = request.json().get('access_token')
+        token = request.json().get("access_token")
 
         self.time_ago = time.time()
         self.auth_token = token
@@ -76,15 +78,14 @@ class Connection(komand.Connection):
 
     @staticmethod
     def get_headers(auth_token):
-        headers = {
-            "Content-type": "application/json",
-            "Authorization": "Bearer " + auth_token
-        }
+        headers = {"Content-type": "application/json", "Authorization": "Bearer " + auth_token}
         return headers
 
     def test(self):
         if not self.auth_token:
-            raise ConnectionTestException(cause="Unable to authorize against Microsoft graph API.",
-                                          assistance="The application may not be authorized to connect "
-                                                     "to the Microsoft Graph API. Please contact your "
-                                                     "Azure administrator.")
+            raise ConnectionTestException(
+                cause="Unable to authorize against Microsoft graph API.",
+                assistance="The application may not be authorized to connect "
+                "to the Microsoft Graph API. Please contact your "
+                "Azure administrator.",
+            )

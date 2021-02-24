@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from icon_cylance_protect.connection.connection import Connection
@@ -33,7 +34,6 @@ class TestDeleteAsset(TestCase):
             """
             self.fail(message)
 
-
         test_conn.connect(connection_params)
         test_action.connection = test_conn
 
@@ -41,21 +41,31 @@ class TestDeleteAsset(TestCase):
         self.assertEqual({"deleted": ["10.0.2.15"], "not_deleted": [], "success": True}, results)
 
     def test_find_in_whitelist(self):
-        dic = {'id': 'cf9c26cc-6d3d-454a-b242-7e9f565c6cf7', 'name': 'VAGRANT-PC', 'host_name': 'vagrant-pc',
-               'os_version': 'Microsoft Windows 7 Professional, Service Pack 1', 'state': 'Online',
-               'agent_version': '2.0.1540', 'products': [{'name': 'protect', 'version': '2.0.1540'}],
-               'policy': {'id': 'c6f694e8-5ddd-4988-8a6b-3a1d3d2da631', 'name': 'Default'},
-               'last_logged_in_user': 'vagrant-pc\\vagrant', 'update_available': False,
-               'background_detection': False, 'is_safe': True, 'date_first_registered': '2020-09-14T15:39:14',
-               'date_last_modified': '2020-09-14T15:45:53', 'ip_addresses': ['10.0.2.15'],
-               'mac_addresses': ['08-00-27-33-9F-CE']}
+        dic = {
+            "id": "cf9c26cc-6d3d-454a-b242-7e9f565c6cf7",
+            "name": "VAGRANT-PC",
+            "host_name": "vagrant-pc",
+            "os_version": "Microsoft Windows 7 Professional, Service Pack 1",
+            "state": "Online",
+            "agent_version": "2.0.1540",
+            "products": [{"name": "protect", "version": "2.0.1540"}],
+            "policy": {"id": "c6f694e8-5ddd-4988-8a6b-3a1d3d2da631", "name": "Default"},
+            "last_logged_in_user": "vagrant-pc\\vagrant",
+            "update_available": False,
+            "background_detection": False,
+            "is_safe": True,
+            "date_first_registered": "2020-09-14T15:39:14",
+            "date_last_modified": "2020-09-14T15:45:53",
+            "ip_addresses": ["10.0.2.15"],
+            "mac_addresses": ["08-00-27-33-9F-CE"],
+        }
 
         self.assertEqual(find_in_whitelist(dic, ["1.1.1.1", "2.2.2.2"]), [])
         self.assertEqual(find_in_whitelist(dic, []), [])
         self.assertNotEqual(find_in_whitelist(dic, ["1.1.1.1", "2.2.2.2"]), ["1.1.1.1"])
-        self.assertEqual(find_in_whitelist(dic, ['10.0.2.15']), ['10.0.2.15'])
-        self.assertEqual(find_in_whitelist(dic, ['08-00-27-33-9F-CE']), ['08-00-27-33-9F-CE'])
-        self.assertEqual(find_in_whitelist(dic, ['vagrant-pc']), ['vagrant-pc'])
+        self.assertEqual(find_in_whitelist(dic, ["10.0.2.15"]), ["10.0.2.15"])
+        self.assertEqual(find_in_whitelist(dic, ["08-00-27-33-9F-CE"]), ["08-00-27-33-9F-CE"])
+        self.assertEqual(find_in_whitelist(dic, ["vagrant-pc"]), ["vagrant-pc"])
 
     def test_find_agent_by_ip(self):
         ip = "10.0.2.15"
@@ -81,5 +91,3 @@ class TestDeleteAsset(TestCase):
         self.assertEqual(find_agent_by_ip(test_action.connection, ip), ip_device_id)
         self.assertNotEqual(find_agent_by_ip(test_action.connection, ip), "1.1.1.1")
         self.assertNotEqual(find_agent_by_ip(test_action.connection, ip), "10.0.2.15")
-
-

@@ -12,12 +12,14 @@ class CheckmarxCxSAST:
         self._auth_token = None
         self.session = Session()
         token = self.fetch_token()
-        self.session.headers.update({
-            "Authorization": f"{token.get('token_type')} {token.get('access_token')}",
-            "Accept": "application/json",
-            "Content-Type": "application/json;v=1.0",
-            "cxOrigin": "Rapid7 - InsightConnect"
-        })
+        self.session.headers.update(
+            {
+                "Authorization": f"{token.get('token_type')} {token.get('access_token')}",
+                "Accept": "application/json",
+                "Content-Type": "application/json;v=1.0",
+                "cxOrigin": "Rapid7 - InsightConnect",
+            }
+        )
 
     def _call_api(
         self,
@@ -47,7 +49,7 @@ class CheckmarxCxSAST:
                     cause=f"An error was received when running {action_name}.",
                     assistance=f"""Request status code of {resp.status_code}
                         was returned.\n{custom_error.get(resp.status_code, 000)}""",
-                    data=resp.text
+                    data=resp.text,
                 )
 
             try:
@@ -64,10 +66,7 @@ class CheckmarxCxSAST:
                 )
 
         except Exception as e:
-            self.logger.error(
-                f"An error had occurred : {e}"
-                "If the issue persists please contact support"
-            )
+            self.logger.error(f"An error had occurred : {e}" "If the issue persists please contact support")
             raise
 
         try:
@@ -93,7 +92,7 @@ class CheckmarxCxSAST:
                 "scope": "sast_rest_api",
                 "client_id": "resource_owner_client",
                 "client_secret": "014DF517-39D1-4453-B7B3-9930C563627C",
-            }
+            },
         )
         return self.auth_token
 

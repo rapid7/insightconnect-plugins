@@ -29,26 +29,25 @@ def load_file(filename, encoding="utf-8"):
 
 
 def export_word_frequency(filepath, word_frequency):
-    with open(filepath, 'w') as f:
+    with open(filepath, "w") as f:
         json.dump(word_frequency, f, indent="", sort_keys=True, ensure_ascii=False)
 
 
 def build_word_frequency(dirpath, output_path):
     word_frequency = Counter()
-    tok = RegexpTokenizer(r'\w+')
+    tok = RegexpTokenizer(r"\w+")
 
     rows = 0
 
     files = load_files(dirpath)
 
     for filepath in files:
-        with load_file(filepath, 'utf-8') as file:
+        with load_file(filepath, "utf-8") as file:
             for line in file:
-                line = re.sub('[^0-9a-zA-Z]+', ' ', line)
+                line = re.sub("[^0-9a-zA-Z]+", " ", line)
                 parts = tok.tokenize(line)
                 tagged_sent = pos_tag(parts)
-                words = [word[0].lower() for word in tagged_sent if
-                         word[0] and word[0][0].isalpha()]
+                words = [word[0].lower() for word in tagged_sent if word[0] and word[0][0].isalpha()]
                 if words:
                     word_frequency.update(words)
 
@@ -66,8 +65,7 @@ def build_word_frequency(dirpath, output_path):
 def _parse_args():
     import argparse
 
-    parser = argparse.ArgumentParser(
-        description='Build a new custom dictionary for an InsightConnect Plugin')
+    parser = argparse.ArgumentParser(description="Build a new custom dictionary for an InsightConnect Plugin")
     parser.add_argument("-p", "--path", help="The path to the plugin to build a custom dictionary for")
 
     args = parser.parse_args()
@@ -84,7 +82,7 @@ def _parse_args():
     return args
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     args = _parse_args()
     script_path = os.path.dirname(os.path.abspath(__file__))
     export_path = os.path.abspath("{}/custom_dict.json".format(args.path))

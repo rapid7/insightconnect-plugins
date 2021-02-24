@@ -14,9 +14,25 @@ class SearchVulnerabilities(komand.Action):
         )
 
     def run(self, params={}):
-        params["fields"] = ["analystNotes", "commonNames", "counts", "cpe", "cvss", "cvssv3", "entity", "intelCard",
-                            "metrics", "nvdDescription", "rawrisk", "relatedEntities", "relatedLinks", "risk",
-                            "sightings", "threatLists", "timestamps"]
+        params["fields"] = [
+            "analystNotes",
+            "commonNames",
+            "counts",
+            "cpe",
+            "cvss",
+            "cvssv3",
+            "entity",
+            "intelCard",
+            "metrics",
+            "nvdDescription",
+            "rawrisk",
+            "relatedEntities",
+            "relatedLinks",
+            "risk",
+            "sightings",
+            "threatLists",
+            "timestamps",
+        ]
         riskRuleMap = {
             "Historically Reported by Insikt Group": "analystNote",
             "Web Reporting Prior to CVSS Score": "awaitingCvssScore",
@@ -55,7 +71,7 @@ class SearchVulnerabilities(komand.Action):
             "Recently Referenced by Insikt Group": "recentRelatedNote",
             "Recently Linked to Penetration Testing Tools": "recentScannerUptake",
             "Historically Referenced by Insikt Group": "relatedNote",
-            "Historically Linked to Penetration Testing Tools": "scannerUptake"
+            "Historically Linked to Penetration Testing Tools": "scannerUptake",
         }
         risk_rule = riskRuleMap.get(params.get(Input.RISKRULE))
         if risk_rule:

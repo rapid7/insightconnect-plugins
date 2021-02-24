@@ -6,13 +6,13 @@ from .schema import EnableUserInput, EnableUserOutput, Input, Output
 
 
 class EnableUser(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='enable_user',
-            description='Enable a account',
+            name="enable_user",
+            description="Enable a account",
             input=EnableUserInput(),
-            output=EnableUserOutput())
+            output=EnableUserOutput(),
+        )
 
     def run(self, params={}):
         return {

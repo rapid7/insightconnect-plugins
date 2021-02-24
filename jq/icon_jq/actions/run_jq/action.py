@@ -1,4 +1,5 @@
 import json
+
 # Custom imports below
 import subprocess
 from subprocess import PIPE
@@ -8,13 +9,13 @@ from .schema import RunJqInput, RunJqOutput, Input, Output
 
 
 class RunJq(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='run_jq',
-                description='Pass the given JSON to the jq command, using the given flags and filter',
-                input=RunJqInput(),
-                output=RunJqOutput())
+            name="run_jq",
+            description="Pass the given JSON to the jq command, using the given flags and filter",
+            input=RunJqInput(),
+            output=RunJqOutput(),
+        )
 
     def run(self, params=None):
         if params is None:
@@ -28,7 +29,7 @@ class RunJq(komand.Action):
         jq_cmd_array = ["jq"]
 
         if len(flags) > 0:
-            string_flags = ' '.join(flags)
+            string_flags = " ".join(flags)
             jq_cmd_array.append(string_flags)
 
         jq_cmd_array.append(filter_)
@@ -44,5 +45,5 @@ class RunJq(komand.Action):
             self.logger.info("JQ Standard Error: {}".format(std_err.decode()))
             raise Exception("JQ failed with return code: {}".format(return_code))
 
-        output_string = std_out.decode('utf-8').strip()
+        output_string = std_out.decode("utf-8").strip()
         return {Output.JSON_OUT: output_string}

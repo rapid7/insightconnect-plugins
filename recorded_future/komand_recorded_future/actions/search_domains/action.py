@@ -14,8 +14,18 @@ class SearchDomains(komand.Action):
         )
 
     def run(self, params={}):
-        params["fields"] = ["analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities", "risk",
-                            "sightings", "threatLists", "timestamps"]
+        params["fields"] = [
+            "analystNotes",
+            "counts",
+            "entity",
+            "intelCard",
+            "metrics",
+            "relatedEntities",
+            "risk",
+            "sightings",
+            "threatLists",
+            "timestamps",
+        ]
         riskRuleMap = {
             "Historically Reported by Insikt Group": "analystNote",
             "Newly Registered Certificate With Potential for Abuse - DNS Sandwich": "certTyposquatSandwich",
@@ -76,7 +86,7 @@ class SearchDomains(komand.Action):
             "Historical Threat Researcher": "threatResearcher",
             "Historical Typosquat Similarity - DNS Sandwich": "typosquatSandwich",
             "Historical Typosquat Similarity - Typo or Homograph": "typosquatTypo",
-            "Historically Active Weaponized Domain": "weaponizedDomain"
+            "Historically Active Weaponized Domain": "weaponizedDomain",
         }
         risk_rule = riskRuleMap.get(params.get(Input.RISKRULE))
         if risk_rule:

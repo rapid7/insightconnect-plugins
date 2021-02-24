@@ -1,5 +1,6 @@
 import komand
 from .schema import SampleSamplesInput, SampleSamplesOutput
+
 # Custom imports below
 from komand.exceptions import PluginException
 
@@ -7,19 +8,20 @@ from komand.exceptions import PluginException
 class SampleSamples(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='sample_samples',
-                description='Return other samples associated with a sample',
-                input=SampleSamplesInput(),
-                output=SampleSamplesOutput())
+            name="sample_samples",
+            description="Return other samples associated with a sample",
+            input=SampleSamplesInput(),
+            output=SampleSamplesOutput(),
+        )
 
     def run(self, params={}):
-        hash = params.get('hash')
-        limit = params.get('limit', None)
-        offset = params.get('offset', None)
-        
+        hash = params.get("hash")
+        limit = params.get("limit", None)
+        offset = params.get("offset", None)
+
         if not limit or limit == 0:
             limit = 10
-        
+
         if not offset:
             offset = 0
 
@@ -29,7 +31,10 @@ class SampleSamples(komand.Action):
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 
         if "error" in sample_samples:
-            raise PluginException(cause='Unable to return artifact data.', assistance='Only Threat Grid customers have access to artifact data.')
+            raise PluginException(
+                cause="Unable to return artifact data.",
+                assistance="Only Threat Grid customers have access to artifact data.",
+            )
 
         return sample_samples
 

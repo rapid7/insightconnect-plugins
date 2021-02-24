@@ -3,15 +3,15 @@ def report_to_dict(report):
 
 
 def analyzers_to_dicts(analyzers):
-    return _convert_to_dicts(analyzers, (
-        'id', 'version', 'dataTypeList', 'name', 'description',
-        'license', 'author', 'url'
-    ))
+    return _convert_to_dicts(
+        analyzers,
+        ("id", "version", "dataTypeList", "name", "description", "license", "author", "url"),
+    )
 
 
 def job_to_dict(job, api):
-    job = _convert_to_dict(job, ('status', 'date', 'id', 'analyzerId'))
-    job['artifacts'] = _artifacts_to_dicts(api.jobs.get_artifacts(job['id']))
+    job = _convert_to_dict(job, ("status", "date", "id", "analyzerId"))
+    job["artifacts"] = _artifacts_to_dicts(api.jobs.get_artifacts(job["id"]))
     return job
 
 
@@ -20,7 +20,7 @@ def jobs_to_dicts(jobs, api):
 
 
 def _artifacts_to_dicts(artifacts):
-    return _convert_to_dicts(artifacts, ('dataType', 'data'))
+    return _convert_to_dicts(artifacts, ("dataType", "data"))
 
 
 def _convert_to_dicts(objects, keys):

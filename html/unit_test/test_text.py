@@ -3,11 +3,8 @@ from komand_html.actions.text import Text
 
 
 class TestText(TestCase):
-
     def test_run(self):
-        params = {
-            "doc": "<i>This is some text</i>"
-        }
+        params = {"doc": "<i>This is some text</i>"}
 
         test_action = Text()
         result = test_action.run(params)
@@ -15,9 +12,7 @@ class TestText(TestCase):
         self.assertEqual(result, {"text": "This is some text"})
 
     def test_run_no_text(self):
-        params = {
-            "doc": ""
-        }
+        params = {"doc": ""}
 
         test_action = Text()
         result = test_action.run(params)
@@ -38,22 +33,19 @@ and they lived at the bottom of a well.</p>
 
 <p class="story">...</p>
 """
-        params = {
-            'doc': test_text,
-            'remove_scripts': True
-        }
+        params = {"doc": test_text, "remove_scripts": True}
 
         test_action = Text()
         result = test_action.run(params)
 
-        expected = {'text': "\nThe Dormouse's story\n\nThe Dormouse's story\nOnce upon a time there were three little sisters; and their names were\nElsie,\nLacie and\nTillie;\nand they lived at the bottom of a well.\n...\n"}
+        expected = {
+            "text": "\nThe Dormouse's story\n\nThe Dormouse's story\nOnce upon a time there were three little sisters; and their names were\nElsie,\nLacie and\nTillie;\nand they lived at the bottom of a well.\n...\n"
+        }
 
         self.assertEqual(result, expected)
 
     def test_run_bad_html(self):
-        params = {
-            "doc": "<a>This is fubar.<b></c> Moar fubar"
-        }
+        params = {"doc": "<a>This is fubar.<b></c> Moar fubar"}
 
         test_action = Text()
         result = test_action.run(params)

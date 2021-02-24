@@ -24,11 +24,12 @@ class Connection(komand.Connection):
             response = self.api.account_information()
             response.data()
         except NotAuthorizedException as e:
-            raise ConnectionTestException(cause="Authorization failed.",
-                                          assistance="Double-check that your credentials configured in your connection are correct and try again.")
+            raise ConnectionTestException(
+                cause="Authorization failed.",
+                assistance="Double-check that your credentials configured in your connection are correct and try again.",
+            )
         except Exception as e:
-            raise ConnectionTestException(cause="Unable to connect to DomainTools.",
-                                          assistance=f"Exception was: {e}")
+            raise ConnectionTestException(cause="Unable to connect to DomainTools.", assistance=f"Exception was: {e}")
 
         phisheye_terms_list = Helper.make_request(self.api.phisheye_term_list, self.logger)
         self.terms = []

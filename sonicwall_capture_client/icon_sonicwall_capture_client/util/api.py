@@ -14,24 +14,18 @@ class SonicWallAPI:
         self.token = None
 
     def get_endpoint(self, device_id: str, install_token: str):
-        return self._make_request(
-            "GET",
-            f"endpoints/{device_id}/{install_token}"
-        )
+        return self._make_request("GET", f"endpoints/{device_id}/{install_token}")
 
     def get_endpoints_list(self):
-        return self._run_with_pages_endpoints(
-            "endpoints/list"
-        )
+        return self._run_with_pages_endpoints("endpoints/list")
 
     def get_access_token(self):
         if self.token:
             return self.token
 
-        self.token = self._call_api("POST", "login", json_data={
-            "email": self.username,
-            "password": self.password
-        }).get("token")
+        self.token = self._call_api("POST", "login", json_data={"email": self.username, "password": self.password}).get(
+            "token"
+        )
 
         return self.token
 
@@ -42,14 +36,7 @@ class SonicWallAPI:
         objects = []
         limit = 100
         for page in range(0, 9999):
-            response = self._make_request(
-                "GET",
-                path,
-                params={
-                    "limit": limit,
-                    "skip": page * limit
-                }
-            )
+            response = self._make_request("GET", path, params={"limit": limit, "skip": page * limit})
             objects.extend(response.get("devices", []))
 
             if value and response.get("value") == value:
@@ -71,16 +58,19 @@ class SonicWallAPI:
 
     def _call_api(self, method: str, path: str, token: str = None, json_data: dict = None, params: dict = None):
         response = {"text": ""}
-        headers_list = [('Accept', 'application/json')]
+        headers_list = [("Accept", "application/json")]
         if token:
-            headers_list.append(('Authorization', token))
+            headers_list.append(("Authorization", token))
 
         try:
-            response = requests.request(method, self.url + path,
-                                        json=json_data,
-                                        params=params,
-                                        headers=OrderedDict(headers_list),
-                                        verify=self.verify_ssl)
+            response = requests.request(
+                method,
+                self.url + path,
+                json=json_data,
+                params=params,
+                headers=OrderedDict(headers_list),
+                verify=self.verify_ssl,
+            )
 
             if response.status_code == 401:
                 raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)

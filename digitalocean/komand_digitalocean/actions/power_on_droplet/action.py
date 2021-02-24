@@ -7,10 +7,11 @@ from .schema import PowerOnDropletInput, PowerOnDropletOutput
 class PowerOnDroplet(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='power_on_droplet',
-            description='Powers on the droplet',
+            name="power_on_droplet",
+            description="Powers on the droplet",
             input=PowerOnDropletInput(),
-            output=PowerOnDropletOutput())
+            output=PowerOnDropletOutput(),
+        )
 
     def run(self, params={}):
         url = "https://api.digitalocean.com/v2/droplets/{droplet_id}/actions"
@@ -19,14 +20,17 @@ class PowerOnDroplet(komand.Action):
         payload = {"type": "power_on"}
 
         try:
-            response = requests.post(headers=self.connection.headers,
-                                     url=url.format(droplet_id=droplet_id), data=json.dumps(payload))
+            response = requests.post(
+                headers=self.connection.headers,
+                url=url.format(droplet_id=droplet_id),
+                data=json.dumps(payload),
+            )
 
             if response.status_code == 201:
                 return {"success": True}
             else:
                 self.logger.error("Status code: %s, message: %s", response.status_code, response.json()["message"])
-                Exception('Non-201 status code received')
+                Exception("Non-201 status code received")
         except requests.exceptions.RequestException:
             self.logger.error("An unexpected error occurred during the API request")
             raise

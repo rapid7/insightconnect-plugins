@@ -1,19 +1,21 @@
 import komand
 from .schema import LookupUserInput, LookupUserOutput, Input, Output
+
 # Custom imports below
 from icon_haveibeenpwned.util.util import HaveIBeenPwned
 
 
 class LookupUser(komand.Action):
 
-    _BASE_URL = 'https://haveibeenpwned.com/api/v3/breachedaccount/'
+    _BASE_URL = "https://haveibeenpwned.com/api/v3/breachedaccount/"
 
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='lookup_user',
-            description='Check username or email for compromise',
+            name="lookup_user",
+            description="Check username or email for compromise",
             input=LookupUserInput(),
-            output=LookupUserOutput())
+            output=LookupUserOutput(),
+        )
 
     def run(self, params={}):
         hibp = HaveIBeenPwned(self.logger)

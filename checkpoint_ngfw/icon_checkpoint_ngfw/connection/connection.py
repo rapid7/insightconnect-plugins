@@ -2,6 +2,7 @@ from json import JSONDecodeError
 
 import komand
 import requests
+
 # Custom imports below
 from komand.exceptions import PluginException, ConnectionTestException
 
@@ -10,7 +11,6 @@ from .schema import ConnectionSchema, Input
 
 
 class Connection(komand.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
@@ -30,10 +30,7 @@ class Connection(komand.Connection):
 
     def get_sid(self):
         url = f"{self.server_and_port}/web_api/login"
-        payload = {
-            "user": self.username,
-            "password": self.password
-        }
+        payload = {"user": self.username, "password": self.password}
 
         request = requests.post(url, json=payload, verify=self.ssl_verify)
 
@@ -42,10 +39,12 @@ class Connection(komand.Connection):
         except Exception:
             # The errors returned by this api aren't very good
             # It's a 400 with some error text.
-            raise PluginException(cause="There was problem authenticating with Check Point NGFW.",
-                                  assistance="Check the server IP address, port, username, and password defined in "
-                                             "your plugin connection",
-                                  data=request.text)
+            raise PluginException(
+                cause="There was problem authenticating with Check Point NGFW.",
+                assistance="Check the server IP address, port, username, and password defined in "
+                "your plugin connection",
+                data=request.text,
+            )
 
         self.sid = request.json().get("sid")
 
@@ -63,9 +62,11 @@ class Connection(komand.Connection):
             try:
                 raise PublishException.from_json_response(json_=request.json())
             except JSONDecodeError:
-                raise PluginException(cause="There was a problem publishing to Check Point NGFW.",
-                                      assistance=request.text,
-                                      data=e)
+                raise PluginException(
+                    cause="There was a problem publishing to Check Point NGFW.",
+                    assistance=request.text,
+                    data=e,
+                )
 
     def logout(self):
         url = f"{self.server_and_port}/web_api/logout"
@@ -76,14 +77,13 @@ class Connection(komand.Connection):
         try:
             request.raise_for_status()
         except Exception:
-            self.logger.warning(f"There was a problem logging out. Ignoring this and attempting to continue. "
-                                f"Error follows:\n{request.text}")
+            self.logger.warning(
+                f"There was a problem logging out. Ignoring this and attempting to continue. "
+                f"Error follows:\n{request.text}"
+            )
 
     def get_headers(self):
-        return {
-            "Content-Type": "application/json",
-            "X-chkp-sid": self.sid
-        }
+        return {"Content-Type": "application/json", "X-chkp-sid": self.sid}
 
     def discard_all_sessions(self):
         """
@@ -96,7 +96,7 @@ class Connection(komand.Connection):
         headers = self.get_headers()
         payload = {
             "limit": 20,  # This will make 20 calls to the API at most, if there are more sessions than that its trouble
-            "view-published-sessions": False
+            "view-published-sessions": False,
         }
         request = requests.post(url, json=payload, headers=headers, verify=self.ssl_verify)
         try:
@@ -104,17 +104,17 @@ class Connection(komand.Connection):
         except Exception as e:
             # The errors returned by this api aren't very good
             # It's a 400 with some error text.
-            raise PluginException(cause="There was problem publishing to Check Point NGFW.",
-                                  assistance=request.text,
-                                  data=e)
+            raise PluginException(
+                cause="There was problem publishing to Check Point NGFW.",
+                assistance=request.text,
+                data=e,
+            )
 
         url_discard = f"{self.server_and_port}/web_api/discard"
         sessions = request.json().get("objects")
         for session in sessions:
             uid = session.get("uid")
-            discard_payload = {
-                "uid": uid
-            }
+            discard_payload = {"uid": uid}
 
             requests.post(url_discard, json=discard_payload, headers=headers, verify=self.ssl_verify)
 
@@ -143,9 +143,7 @@ class Connection(komand.Connection):
             try:
                 result.raise_for_status()
             except Exception as e:
-                raise PluginException(cause=f"Call to {url} failed.",
-                                      assistance=result.text,
-                                      data=e)
+                raise PluginException(cause=f"Call to {url} failed.", assistance=result.text, data=e)
 
         self.publish()
         self.logout()
@@ -154,18 +152,14 @@ class Connection(komand.Connection):
 
     def get_group(self, name):
         endpoint = f"{self.server_and_port}/web_api/show-group"
-        payload = {
-            "name": name
-        }
+        payload = {"name": name}
         headers = self.get_headers()
         result = requests.post(endpoint, headers=headers, json=payload, verify=self.ssl_verify)
 
         try:
             result.raise_for_status()
         except Exception as e:
-            raise PluginException(cause=f"Could not find group {name}.",
-                                  assistance=result.text,
-                                  data=e)
+            raise PluginException(cause=f"Could not find group {name}.", assistance=result.text, data=e)
         return result.json()
 
     def get_groups(self, details_level: DetailsLevel, limit: int = 500, offset: int = 0) -> dict:
@@ -182,7 +176,7 @@ class Connection(komand.Connection):
             "limit": limit,
             "offset": offset,
             "details-level": details_level.value,
-            "show-as-ranges": True
+            "show-as-ranges": True,
         }
 
         headers = self.get_headers()
@@ -191,9 +185,7 @@ class Connection(komand.Connection):
         try:
             result.raise_for_status()
         except Exception as e:
-            raise PluginException(cause="Unable to get groups from Check Point NGFW.",
-                                  assistance=result.text,
-                                  data=e)
+            raise PluginException(cause="Unable to get groups from Check Point NGFW.", assistance=result.text, data=e)
 
         return result.json()
 
@@ -206,10 +198,7 @@ class Connection(komand.Connection):
         """
         endpoint = f"{self.server_and_port}/web_api/show-host"
 
-        payload = {
-            "name": host_name,
-            "details-level": details_level.value
-        }
+        payload = {"name": host_name, "details-level": details_level.value}
 
         headers = self.get_headers()
         result = requests.post(endpoint, headers=headers, json=payload, verify=self.ssl_verify)
@@ -217,9 +206,11 @@ class Connection(komand.Connection):
         try:
             result.raise_for_status()
         except Exception as e:
-            raise PluginException(cause=f"Unable to get host '{host_name}' from Check Point NGFW.",
-                                  assistance=result.text,
-                                  data=e)
+            raise PluginException(
+                cause=f"Unable to get host '{host_name}' from Check Point NGFW.",
+                assistance=result.text,
+                data=e,
+            )
 
         return result.json()
 
@@ -228,14 +219,13 @@ class Connection(komand.Connection):
         try:
             result.raise_for_status()
         except Exception as e:
-            raise PluginException(cause=f"Install policy failed: {url}",
-                                  assistance=result.text,
-                                  data=e)
+            raise PluginException(cause=f"Install policy failed: {url}", assistance=result.text, data=e)
         return result
 
     def test(self):
         if not self.sid:
-            raise ConnectionTestException(cause=f"Unable to authenticate to the Check Point server at: "
-                                                f"{self.server_ip}:{self.server_port}",
-                                          assistance="Please check your connection settings and try again.")
+            raise ConnectionTestException(
+                cause=f"Unable to authenticate to the Check Point server at: " f"{self.server_ip}:{self.server_port}",
+                assistance="Please check your connection settings and try again.",
+            )
         return {"success": True}

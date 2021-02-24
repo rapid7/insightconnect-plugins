@@ -1,6 +1,7 @@
 from unittest import TestCase
 import icon_carbon_black_cloud.util.agent_typer as agent_typer
 
+
 class TestAgentType(TestCase):
     def test_agent_type(self):
         input_ip = "192.168.1.1"

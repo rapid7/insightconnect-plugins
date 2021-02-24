@@ -1,17 +1,18 @@
 import komand
 from .schema import GetCasesInput, GetCasesOutput, Component
+
 # Custom imports below
 import requests
 
 
 class GetCases(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_cases',
-                description=Component.DESCRIPTION,
-                input=GetCasesInput(),
-                output=GetCasesOutput())
+            name="get_cases",
+            description=Component.DESCRIPTION,
+            input=GetCasesInput(),
+            output=GetCasesOutput(),
+        )
 
     def run(self, params={}):
         client = self.connection.client
@@ -23,7 +24,7 @@ class GetCases(komand.Action):
             self.logger.error(cases.json())
             raise
         except:
-            self.logger.error('Failed to get cases')
+            self.logger.error("Failed to get cases")
             raise
 
-        return {'list': cases.json()}
+        return {"list": cases.json()}

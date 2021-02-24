@@ -1,16 +1,17 @@
 import komand
 from .schema import InsertInput, InsertOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class Insert(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='insert',
-                description=Component.DESCRIPTION,
-                input=InsertInput(),
-                output=InsertOutput())
+            name="insert",
+            description=Component.DESCRIPTION,
+            input=InsertInput(),
+            output=InsertOutput(),
+        )
 
     def run(self, params={}):
         """Run insert action"""

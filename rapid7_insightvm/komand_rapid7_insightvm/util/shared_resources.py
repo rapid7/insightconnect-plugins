@@ -47,37 +47,43 @@ def resource_request_status_code_check(response_text: str, status_code: str) -> 
     :param status_code: response status code
     :return: None
     """
-    _CONTACT_SUPPORT = 'If this issue persists contact support for assistance.'
+    _CONTACT_SUPPORT = "If this issue persists contact support for assistance."
 
     _ERRORS = {
-        400: 'Bad Request',
-        401: 'Unauthorized',
-        404: 'Not Found',
-        500: 'Internal Server Error',
-        503: 'Service Unavailable',
-        000: 'Unknown Status Code'
+        400: "Bad Request",
+        401: "Unauthorized",
+        404: "Not Found",
+        500: "Internal Server Error",
+        503: "Service Unavailable",
+        000: "Unknown Status Code",
     }
 
     _ASSISTANCE = {
         400: _CONTACT_SUPPORT,
-        401: 'Ensure that the user name and password are correct.',
-        404: 'Ensure that the requested resource exists.',
+        401: "Ensure that the user name and password are correct.",
+        404: "Ensure that the requested resource exists.",
         500: _CONTACT_SUPPORT,
         503: _CONTACT_SUPPORT,
-        000: _CONTACT_SUPPORT
+        000: _CONTACT_SUPPORT,
     }
-    _CHECK_CONSOLE = 'Verify your connection is pointing to your local console and not `exposure-analytics.insight.rapid7.com`'
+    _CHECK_CONSOLE = (
+        "Verify your connection is pointing to your local console and not `exposure-analytics.insight.rapid7.com`"
+    )
 
     if status_code not in [200, 201]:  # 200 is documented, 201 is undocumented
         status_code_message = _ERRORS.get(status_code, _ERRORS[000])
         assistance = _ASSISTANCE.get(status_code, _ASSISTANCE[000])
         try:
             response_json = json.loads(response_text)
-            error = response_json.get('message', {})
+            error = response_json.get("message", {})
         except (KeyError, json.decoder.JSONDecodeError):
-            raise PluginException(cause=f'Malformed JSON received along with a status code of {status_code_message}',
-                                  assistance=f'{_CHECK_CONSOLE} {assistance}',
-                                  data=response_text)
-        raise PluginException(cause=f'InsightVM returned an error message. {status_code_message}',
-                              assistance=assistance,
-                              data=error)
+            raise PluginException(
+                cause=f"Malformed JSON received along with a status code of {status_code_message}",
+                assistance=f"{_CHECK_CONSOLE} {assistance}",
+                data=response_text,
+            )
+        raise PluginException(
+            cause=f"InsightVM returned an error message. {status_code_message}",
+            assistance=assistance,
+            data=error,
+        )

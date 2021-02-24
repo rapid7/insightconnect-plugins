@@ -1,18 +1,24 @@
 import insightconnect_plugin_runtime
-from .schema import CheckIfAddressInAddressGroupInput, CheckIfAddressInAddressGroupOutput, Input, Output, Component
+from .schema import (
+    CheckIfAddressInAddressGroupInput,
+    CheckIfAddressInAddressGroupOutput,
+    Input,
+    Output,
+    Component,
+)
 
 
 # Custom imports below
 
 
 class CheckIfAddressInAddressGroup(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='check_if_address_in_address_group',
+            name="check_if_address_in_address_group",
             description=Component.DESCRIPTION,
             input=CheckIfAddressInAddressGroupInput(),
-            output=CheckIfAddressInAddressGroupOutput())
+            output=CheckIfAddressInAddressGroupOutput(),
+        )
 
     def run(self, params={}):
         objects_matching = []
@@ -20,7 +26,7 @@ class CheckIfAddressInAddressGroup(insightconnect_plugin_runtime.Action):
 
         address_group = self.connection.sonicwall_api.get_group(params.get(Input.GROUP))
         address_objects_names = []
-        for ip in ['ipv4', 'ipv6']:
+        for ip in ["ipv4", "ipv6"]:
             address_object = address_group.get("address_group", {}).get(ip, {}).get("address_object", {})
             address_objects_names.extend(address_object.get("ipv4", []))
             address_objects_names.extend(address_object.get("ipv6", []))
@@ -37,13 +43,12 @@ class CheckIfAddressInAddressGroup(insightconnect_plugin_runtime.Action):
                 object_type = response.get("object_type", {})
                 address_object = response.get("address_object", {}).get("address_object").get(object_type)
                 upper_name = name.upper()
-                if upper_name == address_object.get("address", "").upper()\
-                        or upper_name.replace(":", "") == address_object.get("address", "").upper()\
-                        or upper_name == address_object.get("host", {}).get("ip", "").upper()\
-                        or upper_name == address_object.get("domain", "").upper():
+                if (
+                    upper_name == address_object.get("address", "").upper()
+                    or upper_name.replace(":", "") == address_object.get("address", "").upper()
+                    or upper_name == address_object.get("host", {}).get("ip", "").upper()
+                    or upper_name == address_object.get("domain", "").upper()
+                ):
                     objects_matching.append(address_object)
 
-        return {
-            Output.FOUND: len(objects_matching) > 0,
-            Output.ADDRESS_OBJECTS: objects_matching
-        }
+        return {Output.FOUND: len(objects_matching) > 0, Output.ADDRESS_OBJECTS: objects_matching}

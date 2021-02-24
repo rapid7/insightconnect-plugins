@@ -8,7 +8,7 @@ class JiraApi:
         self.logger = logger
 
     def delete_user(self, accountId):
-        url = self.jira_client._options['server'] + '/rest/api/latest/user/?accountId=%s' % accountId
+        url = self.jira_client._options["server"] + "/rest/api/latest/user/?accountId=%s" % accountId
         r = self.jira_client._session.delete(url)
 
         if 200 <= r.status_code <= 299:
@@ -18,4 +18,4 @@ class JiraApi:
             return False
 
     def find_users(self, query, max_results=10):
-        return self.jira_client._fetch_pages(User, None, 'user/search', 0, max_results, {'query': query})
+        return self.jira_client._fetch_pages(User, None, "user/search", 0, max_results, {"query": query})

@@ -104,7 +104,7 @@ This action is used to check that a host or address object is in an address grou
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |address|string|None|True|Address Object name, or IP, CIDR, or domain name when Enable Search is set to true|None|MaliciousHost|
-|enable_search|boolean|False|False|When enabled, search for contents of Address Objects for an IP, CIDR or domain. This is useful when you don’t know the Address Object by its name|None|True|
+|enable_search|boolean|False|False|When enabled, search for contents of Address Objects for an IP, CIDR or domain. This is useful when you don't know the Address Object by its name|None|True|
 |group|string|None|True|Name of address group to check|None|InsightConnect Block List|
 
 Example input:
@@ -223,12 +223,14 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|host_status|string|False|Returns information about the host status|
 |status|status|False|Returns information about creating new address object|
 
 Example output:
 
 ```
 {
+    "host_status": "created",
     "status": {
         "success": true,
         "cli": {
@@ -345,6 +347,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.1 - Replace the PluginException with a logger in Create Address Object action | Add `host_status` output parameter in Create Address Object action
 * 1.3.0 - New action Remove Address from Group
 * 1.2.0 - New action Check If Address In Address Group
 * 1.1.0 - New actions Create Address Object and Delete Address Object

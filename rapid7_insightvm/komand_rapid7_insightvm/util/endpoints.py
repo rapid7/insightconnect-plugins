@@ -1,5 +1,4 @@
 class Asset:
-
     @staticmethod
     def assets(console_url, asset_id=None):
         """
@@ -68,7 +67,6 @@ class Asset:
 
 
 class AssetGroup:
-
     @staticmethod
     def asset_groups(console_url, asset_group_id=None):
         """
@@ -118,7 +116,6 @@ class AssetGroup:
 
 
 class Scan:
-
     @staticmethod
     def site_scans(console_url, site_id):
         """
@@ -155,7 +152,6 @@ class Scan:
 
 
 class ScanEngine:
-
     @staticmethod
     def scan_engines(console_url, engine_id=None):
         """
@@ -181,7 +177,6 @@ class ScanEngine:
 
 
 class ScanEnginePool:
-
     @staticmethod
     def scan_engine_pools(console_url, engine_pool_id=None):
         """
@@ -211,7 +206,6 @@ class ScanEnginePool:
 
 
 class SharedSecret:
-
     @staticmethod
     def generate_shared_secret(console_url, time_to_live):
         """
@@ -224,7 +218,6 @@ class SharedSecret:
 
 
 class Site:
-
     @staticmethod
     def get_site_assets(console_url, site_id):
         """
@@ -314,7 +307,6 @@ class Site:
 
 
 class Tag:
-
     @staticmethod
     def tags(console_url, tag_id=None):
         """
@@ -382,7 +374,6 @@ class Tag:
 
 
 class VulnerabilityResult:
-
     @staticmethod
     def vulnerabilities_for_asset(console_url, asset_id):
         """
@@ -395,7 +386,6 @@ class VulnerabilityResult:
 
 
 class Administration:
-
     @staticmethod
     def get_info(console_url):
         """
@@ -407,7 +397,6 @@ class Administration:
 
 
 class Report:
-
     @staticmethod
     def create(console_url):
         return f"{console_url}/api/3/reports"
@@ -452,7 +441,6 @@ class Report:
 
 
 class Vulnerability:
-
     @staticmethod
     def vulnerability(console_url, vulnerability_id):
         """
@@ -484,7 +472,6 @@ class Vulnerability:
 
 
 class VulnerabilityException:
-
     @staticmethod
     def vulnerability_exceptions(console_url):
         """
@@ -535,7 +522,6 @@ class VulnerabilityException:
 
 
 class User:
-
     @staticmethod
     def users(console_url, user_id=None):
         """
@@ -579,7 +565,6 @@ class User:
 
 
 class AuthenticationSource:
-
     @staticmethod
     def authentication_sources(console_url, authentication_source_id=None):
         """
@@ -595,7 +580,6 @@ class AuthenticationSource:
 
 
 class Role:
-
     @staticmethod
     def roles(console_url, role_id=None):
         """

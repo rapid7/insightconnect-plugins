@@ -3,13 +3,13 @@ from .schema import DeleteVsiteInput, DeleteVsiteOutput
 
 
 class DeleteVsite(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='delete_vsite',
-                description='Deletes the given vsite',
-                input=DeleteVsiteInput(),
-                output=DeleteVsiteOutput())
+            name="delete_vsite",
+            description="Deletes the given vsite",
+            input=DeleteVsiteInput(),
+            output=DeleteVsiteOutput(),
+        )
 
     def run(self, params={}):
         action = "vsites/" + params.get("id")

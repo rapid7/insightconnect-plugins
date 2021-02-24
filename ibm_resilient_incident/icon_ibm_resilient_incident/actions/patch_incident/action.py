@@ -7,18 +7,18 @@ from .schema import PatchIncidentInput, PatchIncidentOutput
 class PatchIncident(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='patch_incident',
-                description='Patches a single incident.',
-                input=PatchIncidentInput(),
-                output=PatchIncidentOutput())
+            name="patch_incident",
+            description="Patches a single incident.",
+            input=PatchIncidentInput(),
+            output=PatchIncidentOutput(),
+        )
 
     def run(self, params={}):
         org_id = params.get("organization_id")
         inc_id = params.get("incident_id")
         patch = params.get("patch")
 
-        url = self.connection.API_BASE + "/orgs/{org_id}/incidents/{inc_id}".format(org_id=org_id,
-                                                                                    inc_id=inc_id)
+        url = self.connection.API_BASE + "/orgs/{org_id}/incidents/{inc_id}".format(org_id=org_id, inc_id=inc_id)
 
         patch = json.dumps(patch)
 

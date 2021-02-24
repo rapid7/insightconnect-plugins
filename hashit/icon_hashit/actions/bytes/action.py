@@ -8,13 +8,13 @@ from .schema import BytesInput, BytesOutput, Input, Output, Component
 
 
 class Bytes(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='bytes',
+            name="bytes",
             description=Component.DESCRIPTION,
             input=BytesInput(),
-            output=BytesOutput())
+            output=BytesOutput(),
+        )
 
     def run(self, params={}):
         raw = base64.standard_b64decode(params[Input.BYTES])

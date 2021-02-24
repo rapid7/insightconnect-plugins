@@ -5,7 +5,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException, Connection
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.client = None
@@ -16,18 +15,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
             params.get(Input.API_KEY).get("secretKey"),
             params.get(Input.API_SECRET).get("secretKey"),
             params.get(Input.ORGANIZATION_ID),
-            self.logger
+            self.logger,
         )
 
     def test(self):
         try:
             self.client.security_activity_report()
-            return {
-                "success": True
-            }
+            return {"success": True}
         except PluginException as e:
-            raise ConnectionTestException(
-                cause=e.cause,
-                assistance=e.assistance,
-                data=e.data
-            )
+            raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e.data)

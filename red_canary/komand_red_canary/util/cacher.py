@@ -52,10 +52,6 @@ def cache(cache_file_name: str, event_date: str, logger):
 
     # Create, or load data from cache
     with komand.helper.open_cachefile(cache_file_name) as cache_file:
-        logger.info(
-            "[*] Updating cache: {} to event date: {}".format(
-                cache_file_name, event_date
-            )
-        )
+        logger.info("[*] Updating cache: {} to event date: {}".format(cache_file_name, event_date))
         cache_file.write(str(event_date))
         cache_file.truncate()

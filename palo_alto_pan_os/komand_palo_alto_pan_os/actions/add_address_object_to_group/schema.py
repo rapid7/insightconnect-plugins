@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Adds an address object to an address group. Supports IPv6"
+    DESCRIPTION = "Adds address objects to an address group"
 
 
 class Input:
@@ -26,9 +26,12 @@ class AddAddressObjectToGroupInput(komand.Input):
   "title": "Variables",
   "properties": {
     "address_object": {
-      "type": "string",
+      "type": "array",
       "title": "Address Object",
-      "description": "The name of the address object to add",
+      "description": "The names of the address objects to add",
+      "items": {
+        "type": "string"
+      },
       "order": 1
     },
     "device_name": {

@@ -6,10 +6,11 @@ from .schema import GetIncidentsInput, GetIncidentsOutput
 class GetIncidents(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_incidents',
-                description='Gets a list of open and closed incidents.',
-                input=GetIncidentsInput(),
-                output=GetIncidentsOutput())
+            name="get_incidents",
+            description="Gets a list of open and closed incidents.",
+            input=GetIncidentsInput(),
+            output=GetIncidentsOutput(),
+        )
 
     def run(self, params={}):
         org_id = params.get("organization_id")

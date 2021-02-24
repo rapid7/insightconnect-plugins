@@ -2,17 +2,18 @@ import komand
 import json
 from .schema import SearchUrlsInput, SearchUrlsOutput, Component, Input
 from komand.exceptions import PluginException
+
 # Custom imports below
 
 
 class SearchUrls(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='search_urls',
-                description=Component.DESCRIPTION,
-                input=SearchUrlsInput(),
-                output=SearchUrlsOutput())
+            name="search_urls",
+            description=Component.DESCRIPTION,
+            input=SearchUrlsInput(),
+            output=SearchUrlsOutput(),
+        )
 
     def run(self, params={}):
         riskRuleMap = {
@@ -44,13 +45,15 @@ class SearchUrls(komand.Action):
             "Recently Active URL on Weaponized Domain": "recentWeaponizedURL",
             "Historically Referenced by Insikt Group": "relatedNote",
             "Historically Reported Spam or Unwanted Content": "spamSiteDetected",
-            "Historically Detected Suspicious Content": "suspiciousSiteDetected"
+            "Historically Detected Suspicious Content": "suspiciousSiteDetected",
         }
         risk_rule = riskRuleMap.get(params.get(Input.RISKRULE))
         if risk_rule:
             params[Input.RISKRULE] = risk_rule
 
-        params["fields"] = "analystNotes,counts,enterpriseLists,entity,metrics,relatedEntities,risk,timestamps,sightings"
+        params[
+            "fields"
+        ] = "analystNotes,counts,enterpriseLists,entity,metrics,relatedEntities,risk,timestamps,sightings"
 
         if not params.get(Input.RISKSCORE):
             params[Input.RISKSCORE] = None

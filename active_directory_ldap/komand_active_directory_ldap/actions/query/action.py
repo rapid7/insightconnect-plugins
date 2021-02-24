@@ -7,11 +7,10 @@ import ldap3
 
 
 class Query(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='query',
-            description='Run a LDAP query',
+            name="query",
+            description="Run a LDAP query",
             input=QueryInput(),
             output=QueryOutput())
 

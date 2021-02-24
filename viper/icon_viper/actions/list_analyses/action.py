@@ -4,13 +4,13 @@ from ...util import project
 
 
 class ListAnalyses(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='list_analyses',
-                description=Component.DESCRIPTION,
-                input=ListAnalysesInput(),
-                output=ListAnalysesOutput())
+            name="list_analyses",
+            description=Component.DESCRIPTION,
+            input=ListAnalysesInput(),
+            output=ListAnalysesOutput(),
+        )
 
     def run(self, params={}):
         return {

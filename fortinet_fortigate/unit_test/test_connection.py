@@ -1,7 +1,7 @@
 import sys
 import os
 
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from icon_fortinet_fortigate.connection.connection import Connection
@@ -10,10 +10,7 @@ import json
 import logging
 
 
-
 class TestCreateAddressObject(TestCase):
-
-
     def test_integration_connection_get_address_group(self):
         log = logging.getLogger("Test")
         test_conn = Connection()
@@ -63,4 +60,3 @@ class TestCreateAddressObject(TestCase):
         test_conn.connect(connection_params)
         with self.assertRaises(PluginException):
             test_conn.get_address_group("DONT FIND ME")
-

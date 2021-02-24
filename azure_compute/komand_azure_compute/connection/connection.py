@@ -65,9 +65,7 @@ class Connection(komand.Connection):
         )
 
         if response.status_code == 401:
-            raise ConnectionTestException(
-                preset=ConnectionTestException.Preset.UNAUTHORIZED
-            )
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED)
         if response.status_code != 200:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.UNKNOWN)
 

@@ -8,11 +8,11 @@ DEVICE_ID = "device-id"
 
 
 def determine_agent_type(agent):
-    if re.search('[a-zA-Z]', agent):
+    if re.search("[a-zA-Z]", agent):
         return HOST
-    if re.search('/', agent):
+    if re.search("/", agent):
         return IP_NETMASK
-    if re.search('-', agent):
+    if re.search("-", agent):
         return IP_RANGE
 
     try:
@@ -38,7 +38,7 @@ def match_whitelist(agent, whitelist, logger):
     trimmed_address = re.sub(r"/32$", "", agent)
 
     # if contains / we compare explicit matches, but not subnets in subnets
-    if '/' in trimmed_address:
+    if "/" in trimmed_address:
         return agent in whitelist
 
     # IP is in CIDR - Give the user a log message

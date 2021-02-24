@@ -1,16 +1,17 @@
 import komand
 from .schema import AddIssueLabelInput, AddIssueLabelOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class AddIssueLabel(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='add_issue_label',
-                description=Component.DESCRIPTION,
-                input=AddIssueLabelInput(),
-                output=AddIssueLabelOutput())
+            name="add_issue_label",
+            description=Component.DESCRIPTION,
+            input=AddIssueLabelInput(),
+            output=AddIssueLabelOutput(),
+        )
 
     def run(self, params={}):
         org = params.get(Input.ORGANIZATION)
@@ -26,6 +27,6 @@ class AddIssueLabel(komand.Action):
 
         try:
             issue = issue.add_to_labels(label)
-            return {'success': True}
+            return {"success": True}
         except:
-            return {'success': False}
+            return {"success": False}

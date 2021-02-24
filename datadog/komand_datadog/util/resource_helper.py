@@ -15,7 +15,7 @@ class ResourceHelper(object):
         404: "Not Found",
         500: "Internal Server Error",
         503: "Service Unavailable",
-        000: "Unknown Status Code"
+        000: "Unknown Status Code",
     }
 
     def __init__(self, session, logger):
@@ -28,8 +28,7 @@ class ResourceHelper(object):
         self.logger = logger
         self.session = session
 
-    def resource_request(self, endpoint: str, method: str = 'get', params: dict = None,
-                         payload: dict = None) -> dict:
+    def resource_request(self, endpoint: str, method: str = "get", params: dict = None, payload: dict = None) -> dict:
         """
         Sends a request to API with the provided endpoint and optional method/payload
         :param endpoint: Endpoint for the API call defined in endpoints.py
@@ -44,25 +43,23 @@ class ResourceHelper(object):
             if not params:
                 params = {}
             if not payload:
-                response = request_method(url=endpoint, params=params,
-                                          verify=False)
+                response = request_method(url=endpoint, params=params, verify=False)
             else:
-                response = request_method(url=endpoint, params=params,
-                                          json=payload, verify=False)
+                response = request_method(url=endpoint, params=params, json=payload, verify=False)
         except requests.RequestException as e:
             self.logger.error(e)
             raise
 
         if response.status_code in range(200, 299):
             resource = response.json()
-            return {'resource': resource, 'status': response.status_code}
+            return {"resource": resource, "status": response.status_code}
         else:
             try:
                 error = response.json()
             except KeyError:
-                self.logger.error(f'Code: {response.status_code}, message: {error}')
-                error = 'Unknown error occurred. Please contact support or try again later.'
+                self.logger.error(f"Code: {response.status_code}, message: {error}")
+                error = "Unknown error occurred. Please contact support or try again later."
 
             status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
-            self.logger.error(f'{status_code_message} ({response.status_code}): {error}')
-            raise Exception(f'Datadog returned a status code of {response.status_code}: {status_code_message}')
+            self.logger.error(f"{status_code_message} ({response.status_code}): {error}")
+            raise Exception(f"Datadog returned a status code of {response.status_code}: {status_code_message}")

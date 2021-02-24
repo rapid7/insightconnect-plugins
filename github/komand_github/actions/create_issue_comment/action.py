@@ -1,16 +1,17 @@
 import komand
 from .schema import CreateIssueCommentInput, CreateIssueCommentOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class CreateIssueComment(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='create_issue_comment',
+            name="create_issue_comment",
             description=Component.DESCRIPTION,
             input=CreateIssueCommentInput(),
-            output=CreateIssueCommentOutput())
+            output=CreateIssueCommentOutput(),
+        )
 
     def run(self, params={}):
         org = params.get(Input.ORGANIZATION)
@@ -26,4 +27,4 @@ class CreateIssueComment(komand.Action):
 
         issue_params = {"body": body}
         issue = issue.create_comment(**issue_params)
-        return {'url': issue.html_url}
+        return {"url": issue.html_url}

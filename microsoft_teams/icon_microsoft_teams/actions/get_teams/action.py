@@ -1,18 +1,19 @@
 import komand
 from .schema import GetTeamsInput, GetTeamsOutput, Input, Output, Component
+
 # Custom imports below
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
 from icon_microsoft_teams.util.teams_utils import get_teams_from_microsoft
 
 
 class GetTeams(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_teams',
-                description=Component.DESCRIPTION,
-                input=GetTeamsInput(),
-                output=GetTeamsOutput())
+            name="get_teams",
+            description=Component.DESCRIPTION,
+            input=GetTeamsInput(),
+            output=GetTeamsOutput(),
+        )
 
     def run(self, params={}):
         team_name = params.get(Input.TEAM_NAME, "")

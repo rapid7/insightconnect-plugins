@@ -1,25 +1,23 @@
 import komand
 from .schema import SetThreatProtectionInput, SetThreatProtectionOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class SetThreatProtection(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='set_threat_protection',
-                description=Component.DESCRIPTION,
-                input=SetThreatProtectionInput(),
-                output=SetThreatProtectionOutput())
+            name="set_threat_protection",
+            description=Component.DESCRIPTION,
+            input=SetThreatProtectionInput(),
+            output=SetThreatProtectionOutput(),
+        )
 
     def run(self, params={}):
         url = f"{self.connection.server_and_port}/web_api/set-threat-protection"
         payload = {
             "name": params[Input.NAME],
-            "overrides": {
-                "profile": params[Input.PROFILE],
-                "action": params[Input.ACTION]
-            }
+            "overrides": {"profile": params[Input.PROFILE], "action": params[Input.ACTION]},
         }
         headers = self.connection.get_headers()
 

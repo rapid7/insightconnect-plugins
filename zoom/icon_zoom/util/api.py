@@ -28,13 +28,13 @@ class ZoomAPI:
             "from": start_date,
             "to": end_date,
             "page_size": page_size,
-            "next_page_token": next_page_token
+            "next_page_token": next_page_token,
         }
 
         while True:
             response = self._call_api("GET", activities_url, params=params)
 
-            events = events + response.get('activity_logs', [])
+            events = events + response.get("activity_logs", [])
 
             if "next_page_token" in response and response.get("next_page_token") != "":
                 params["next_page_token"] = response.get("next_page_token")
@@ -43,30 +43,26 @@ class ZoomAPI:
 
     def _call_api(self, method, url, params=None, json_data=None, allow_404=False):
         token = generate_jwt_token(self.api_key, self.secret)
-        headers = {
-            "authorization": f"Bearer {token}",
-            "content-type": "application/json"
-        }
+        headers = {"authorization": f"Bearer {token}", "content-type": "application/json"}
 
         try:
-            response = requests.request(method, url,
-                                        json=json_data,
-                                        params=params,
-                                        headers=headers)
+            response = requests.request(method, url, json=json_data, params=params, headers=headers)
 
             if response.status_code == 401:
                 resp = json.loads(response.text)
-                raise PluginException(cause=resp.get("message"),
-                                      assistance="Verify your JWT App API key and Secret configured in your "
-                                                 "connection is correct.")
+                raise PluginException(
+                    cause=resp.get("message"),
+                    assistance="Verify your JWT App API key and Secret configured in your " "connection is correct.",
+                )
             if response.status_code == 404:
                 resp = json.loads(response.text)
                 if allow_404:
                     return None
                 else:
-                    raise PluginException(cause=resp.get("message"),
-                                          assistance=f"The object at {url} does not exist. Verify the ID and fields "
-                                                     f"used are valid.")
+                    raise PluginException(
+                        cause=resp.get("message"),
+                        assistance=f"The object at {url} does not exist. Verify the ID and fields " f"used are valid.",
+                    )
             # Success; no content
             if response.status_code == 204:
                 return None

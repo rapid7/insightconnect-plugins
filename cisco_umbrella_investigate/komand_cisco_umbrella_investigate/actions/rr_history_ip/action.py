@@ -1,5 +1,6 @@
 import komand
 from .schema import RrHistoryIpInput, RrHistoryIpOutput, Input
+
 # Custom imports below
 from komand.exceptions import PluginException
 from IPy import IP as IP_Validate
@@ -8,10 +9,11 @@ from IPy import IP as IP_Validate
 class RrHistoryIp(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='rr_history_ip',
-            description='Return the history that Umbrella has seen for a given IP address',
+            name="rr_history_ip",
+            description="Return the history that Umbrella has seen for a given IP address",
             input=RrHistoryIpInput(),
-            output=RrHistoryIpOutput())
+            output=RrHistoryIpOutput(),
+        )
 
     def run(self, params={}):
         IP = params.get(Input.IP)
@@ -19,13 +21,13 @@ class RrHistoryIp(komand.Action):
             IP_Validate(IP)
         except Exception as e:
             raise PluginException(
-                cause='Invalid IP provided by user.',
-                assistance='Please try again by submitting a valid IP address.',
-                data=e
+                cause="Invalid IP provided by user.",
+                assistance="Please try again by submitting a valid IP address.",
+                data=e,
             )
 
         try:
-            type = params.get('type')
+            type = params.get("type")
             if not type:
                 rr_history = self.connection.investigate.rr_history(IP)
             else:

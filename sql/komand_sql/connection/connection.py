@@ -23,7 +23,6 @@ class SQLConnection(object):
 
 
 class Connection(komand.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.conn_str = None
@@ -34,17 +33,21 @@ class Connection(komand.Connection):
         self.type = None
 
     def postgres_conn_string(self, params):
-        self.logger.info('Using PostgreSQL connection string...')
+        self.logger.info("Using PostgreSQL connection string...")
         params[Input.PORT] = params.get(Input.PORT) or 5432
         return f"postgres://{self.user}:{self.password}@{params[Input.HOST]}:{params[Input.PORT]}/{params[Input.DB]}"
 
     def mssql_conn_string(self, params):
-        self.logger.info('Using MSSQL connection string...')
-        return f"mssql+pymssql://{self.user}:{self.password}@{params[Input.HOST]}:{params[Input.PORT]}/{params[Input.DB]}"
+        self.logger.info("Using MSSQL connection string...")
+        return (
+            f"mssql+pymssql://{self.user}:{self.password}@{params[Input.HOST]}:{params[Input.PORT]}/{params[Input.DB]}"
+        )
 
     def default_conn_string(self, params):
-        self.logger.info('Using MySQL connection string...')
-        return f"mysql+mysqldb://{self.user}:{self.password}@{params[Input.HOST]}:{params[Input.PORT]}/{params[Input.DB]}"
+        self.logger.info("Using MySQL connection string...")
+        return (
+            f"mysql+mysqldb://{self.user}:{self.password}@{params[Input.HOST]}:{params[Input.PORT]}/{params[Input.DB]}"
+        )
 
     def connect(self, params={}):
         self.user = params.get(Input.CREDENTIALS).get("username")
@@ -54,9 +57,9 @@ class Connection(komand.Connection):
         del params[Input.CREDENTIALS]
 
         type_connection_string = {
-            'MSSQL': Connection.mssql_conn_string,
-            'MySQL': Connection.default_conn_string,
-            'PostgreSQL': Connection.postgres_conn_string
+            "MSSQL": Connection.mssql_conn_string,
+            "MySQL": Connection.default_conn_string,
+            "PostgreSQL": Connection.postgres_conn_string,
         }
 
         self.conn_str = type_connection_string.get(params[Input.TYPE])(self, params)
@@ -70,7 +73,5 @@ class Connection(komand.Connection):
             return True
         except Exception as e:
             raise ConnectionTestException(
-                cause="Unable to connect to the server.",
-                assistance="Check connection credentials.",
-                data=e
+                cause="Unable to connect to the server.", assistance="Check connection credentials.", data=e
             )

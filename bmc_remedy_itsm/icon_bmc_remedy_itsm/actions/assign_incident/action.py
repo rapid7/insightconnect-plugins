@@ -1,5 +1,6 @@
 import komand
 from .schema import AssignIncidentInput, AssignIncidentOutput, Input, Output, Component
+
 # Custom imports below
 from komand.exceptions import PluginException
 from icon_bmc_remedy_itsm.util import error_handling
@@ -9,13 +10,13 @@ import urllib.parse
 
 
 class AssignIncident(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='assign_incident',
-                description=Component.DESCRIPTION,
-                input=AssignIncidentInput(),
-                output=AssignIncidentOutput())
+            name="assign_incident",
+            description=Component.DESCRIPTION,
+            input=AssignIncidentInput(),
+            output=AssignIncidentOutput(),
+        )
 
     def run(self, params={}):
         handler = error_handling.ErrorHelper()
@@ -30,8 +31,7 @@ class AssignIncident(komand.Action):
         try:
             original_incident_response = requests.get(url, headers=headers)
         except json.JSONDecodeError as e:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON,
-                                  data=e)
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
 
         handler.error_handling(original_incident_response)
 
@@ -48,13 +48,11 @@ class AssignIncident(komand.Action):
 
         # If we made it this far, and this call fails, something really unexpected happened.
         if not original_incident_response.status_code == 200:
-            raise PluginException(preset=PluginException.Preset.SERVER_ERROR,
-                                  data=original_incident_response.text)
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=original_incident_response.text)
 
         try:
             original_incident = original_incident_response.json()
         except json.JSONDecodeError as e:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON,
-                                  data=e)
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
 
         return {Output.INCIDENT: komand.helper.clean(original_incident)}

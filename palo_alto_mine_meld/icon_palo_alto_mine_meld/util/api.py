@@ -12,8 +12,11 @@ class PaloAltoMineMeldAPI:
         self.logger = logger
 
     def update_external_dynamic_list(self, list_name, updated_indicators_list):
-        return self._call_api("PUT", f"{self.url}/config/data/{list_name}_indicators",
-                              json_data=updated_indicators_list)
+        return self._call_api(
+            "PUT",
+            f"{self.url}/config/data/{list_name}_indicators",
+            json_data=updated_indicators_list,
+        )
 
     def get_indicators(self, list_name):
         return self._call_api("GET", f"{self.url}/config/data/{list_name}_indicators")
@@ -30,7 +33,7 @@ class PaloAltoMineMeldAPI:
                 json=json_data,
                 params=params,
                 auth=(self.username, self.password),
-                verify=self.ssl_verify
+                verify=self.ssl_verify,
             )
 
             if response.status_code == 403:

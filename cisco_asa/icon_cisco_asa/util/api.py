@@ -5,8 +5,16 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class CiscoAsaAPI:
-    def __init__(self, username: str, password: str, url: str, user_agent: str, verify_ssl: bool, port: int,
-                 logger: object):
+    def __init__(
+        self,
+        username: str,
+        password: str,
+        url: str,
+        user_agent: str,
+        verify_ssl: bool,
+        port: int,
+        logger: object,
+    ):
         self.url = url + ":" + str(port) + "/api/"
         self.verify_ssl = verify_ssl
         self.logger = logger
@@ -18,10 +26,7 @@ class CiscoAsaAPI:
         return self._call_api(
             "PUT",
             f"objects/networkobjectgroups/{object_id}",
-            json_data={
-                "name": group,
-                "members": all_members
-            }
+            json_data={"name": group, "members": all_members},
         )
 
     def get_groups(self):
@@ -45,23 +50,13 @@ class CiscoAsaAPI:
         return {}
 
     def delete_address_object(self, object_id: str):
-        return self._call_api(
-            "DELETE",
-            f"objects/networkobjects/{object_id}"
-        )
+        return self._call_api("DELETE", f"objects/networkobjects/{object_id}")
 
     def run_with_pages(self, path):
         objects = []
         limit = 100
         for page in range(0, 9999):
-            response = self._call_api(
-                "GET",
-                path,
-                params={
-                    "limit": limit,
-                    "offset": page * limit
-                }
-            )
+            response = self._call_api("GET", path, params={"limit": limit, "offset": page * limit})
             objects.extend(response.get("items", []))
 
             if (page + 1) * limit >= response.get("rangeInfo", {}).get("total", 0):
@@ -76,30 +71,22 @@ class CiscoAsaAPI:
         return self._call_api(
             "POST",
             "objects/networkobjects",
-            json_data={
-                "name": name,
-                "host": {
-                    "kind": object_type,
-                    "value": address
-                }
-            }
+            json_data={"name": name, "host": {"kind": object_type, "value": address}},
         )
 
     def _call_api(self, method: str, path: str, json_data: dict = None, params: dict = None):
         response = {"text": ""}
-        headers = OrderedDict([
-            ('Content-Type', 'application/json'),
-            ('User-Agent', self.user_agent)
-        ])
+        headers = OrderedDict([("Content-Type", "application/json"), ("User-Agent", self.user_agent)])
 
         try:
             response = requests.request(
-                method, self.url + path,
+                method,
+                self.url + path,
                 json=json_data,
                 params=params,
                 auth=(self.username, self.password),
                 headers=headers,
-                verify=self.verify_ssl
+                verify=self.verify_ssl,
             )
 
             if response.status_code == 401:

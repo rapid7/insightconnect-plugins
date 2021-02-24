@@ -1,34 +1,33 @@
 import komand
 from .schema import GetVulnerabilitiesByCveInput, GetVulnerabilitiesByCveOutput
+
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
 class GetVulnerabilitiesByCve(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_vulnerabilities_by_cve',
-                description='Get vulnerabilities details associated with a CVE',
-                input=GetVulnerabilitiesByCveInput(),
-                output=GetVulnerabilitiesByCveOutput())
+            name="get_vulnerabilities_by_cve",
+            description="Get vulnerabilities details associated with a CVE",
+            input=GetVulnerabilitiesByCveInput(),
+            output=GetVulnerabilitiesByCveOutput(),
+        )
 
     def run(self, params={}):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
-        cve_id = params.get('cve_id')
+        cve_id = params.get("cve_id")
         endpoint = endpoints.Vulnerability.vulnerability_checks(self.connection.console_url)
         self.logger.info(f"Using {endpoint}...")
-        params = {
-            "search": cve_id
-        }
+        params = {"search": cve_id}
 
-        results = resource_helper.paged_resource_request(endpoint=endpoint, method='get', params=params)
+        results = resource_helper.paged_resource_request(endpoint=endpoint, method="get", params=params)
 
         # Get unique vulnerability IDs
         vuln_ids = set()
         for r in results:
-            vuln_ids.add(r['vulnerability'])
+            vuln_ids.add(r["vulnerability"])
         self.logger.info(f"Received {len(vuln_ids)} vulnerability IDs from search, getting details...")
         # Get vulnerability details
         vulns = []

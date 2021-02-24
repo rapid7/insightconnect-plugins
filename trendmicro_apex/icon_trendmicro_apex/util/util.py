@@ -22,26 +22,35 @@ class TaskType:
             "OSF_NOTIFY": 7,
             "OSF_LOG": 8,
             "MDR_ATTACK_DISCOVERY": 9,
-            "OSF_SYS_CALL": 10
+            "OSF_SYS_CALL": 10,
         }.get(task_type)
 
 
 def create_base64_checksum(http_method: str, raw_url: str, raw_header: str, request_body: str) -> str:
     """Create a base64 encoded hash string for an Apex JWT token"""
-    string_to_hash = http_method.upper() + '|' + raw_url.lower() + '|' + raw_header + '|' + request_body
-    base64_hash_string = base64.b64encode(hashlib.sha256(str.encode(string_to_hash)).digest()).decode('utf-8')
+    string_to_hash = http_method.upper() + "|" + raw_url.lower() + "|" + raw_header + "|" + request_body
+    base64_hash_string = base64.b64encode(hashlib.sha256(str.encode(string_to_hash)).digest()).decode("utf-8")
     return base64_hash_string
 
 
-def create_jwt_token(application_id: str, api_key: str, http_method: str, raw_url: str, header: str,
-                     request_body: str, algorithm='HS256') -> str:
+def create_jwt_token(
+    application_id: str,
+    api_key: str,
+    http_method: str,
+    raw_url: str,
+    header: str,
+    request_body: str,
+    algorithm="HS256",
+) -> str:
     """Generate a JWT token for an Apex HTTP request. Specific to a url destination and payload"""
     issue_time = time.time()
-    payload = {'appid': application_id,
-               'iat': issue_time,
-               'version': 'V1',
-               'checksum': create_base64_checksum(http_method, raw_url, header, request_body)}
-    token = jwt.encode(payload, api_key, algorithm).decode('utf-8')
+    payload = {
+        "appid": application_id,
+        "iat": issue_time,
+        "version": "V1",
+        "checksum": create_base64_checksum(http_method, raw_url, header, request_body),
+    }
+    token = jwt.encode(payload, api_key, algorithm).decode("utf-8")
     return token
 
 

@@ -1,5 +1,6 @@
 import komand
 from .schema import ScreenshotInput, ScreenshotOutput, Input, Output, Component
+
 # Custom imports below
 from komand.exceptions import PluginException
 import base64
@@ -11,23 +12,24 @@ from selenium.webdriver.chrome.options import Options
 
 
 class Screenshot(komand.Action):
-    CHROME_PATH = '/usr/bin/chromium'
-    CHROMEDRIVER_PATH = '/usr/bin/chromedriver'
+    CHROME_PATH = "/usr/bin/chromium"
+    CHROMEDRIVER_PATH = "/usr/bin/chromedriver"
     WINDOW_SIZE = "1920,1080"
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='screenshot',
-                description=Component.DESCRIPTION,
-                input=ScreenshotInput(),
-                output=ScreenshotOutput())
+            name="screenshot",
+            description=Component.DESCRIPTION,
+            input=ScreenshotInput(),
+            output=ScreenshotOutput(),
+        )
 
     def screenshot_to_file(self, driver):
         with tempfile.NamedTemporaryFile(suffix=".png") as t:
             driver.save_screenshot(t.name)
             with open(t.name, "rb") as file:
                 contents = file.read()
-                file_str = base64.b64encode(contents).decode('ascii')
+                file_str = base64.b64encode(contents).decode("ascii")
         return file_str
 
     def run(self, params={}):
@@ -43,7 +45,7 @@ class Screenshot(komand.Action):
 
             url = params.get(Input.URL, "")
             delay = params.get(Input.DELAY, 0)
-            if not url.lower().startswith('http'):
+            if not url.lower().startswith("http"):
                 raise PluginException(cause="Input Error:", assistance="URLs need to start with 'http'")
             driver = webdriver.Chrome(executable_path=self.CHROMEDRIVER_PATH, options=chrome_options)
             driver.get(url)
@@ -51,7 +53,7 @@ class Screenshot(komand.Action):
             full_page = params.get(Input.FULL_PAGE, False)
             if full_page:
                 try:
-                    body = driver.find_element_by_tag_name('body')
+                    body = driver.find_element_by_tag_name("body")
                     img_str = body.screenshot_as_base64
                 except Exception:
                     img_str = self.screenshot_to_file(driver)

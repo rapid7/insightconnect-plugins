@@ -13,18 +13,15 @@ class Helper:
                 sed_exp = f"{sed_exp} -e '{Helper.shell_quote(item)}' "
         else:
             raise PluginException(
-                cause='Illegal user input',
-                assistance='The sed expression must not be an empty string'
+                cause="Illegal user input",
+                assistance="The sed expression must not be an empty string",
             )
 
         sed_cmd = f"sed {Helper.shell_quote(sed_opts)} {sed_exp}"
         try:
             p = subprocess.Popen(sed_cmd, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         except Exception as e:
-            raise PluginException(
-                cause='Problem with process',
-                assistance=e.message
-            )
+            raise PluginException(cause="Problem with process", assistance=e.message)
 
         return p.communicate(input=input_str)[0]
 

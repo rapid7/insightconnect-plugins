@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_sentinelone.connection.connection import Connection
@@ -47,4 +48,6 @@ class TestAgentsSummary(TestCase):
         test_action.connection = test_conn
         results = test_action.run(action_params)
 
-        self.assertEqual(["decommissioned", "infected", "out_of_date", "online", "total", "up_to_date"], list(results.keys()))
+        self.assertEqual(
+            ["decommissioned", "infected", "out_of_date", "online", "total", "up_to_date"], list(results.keys())
+        )

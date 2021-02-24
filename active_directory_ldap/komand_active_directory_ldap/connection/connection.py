@@ -1,13 +1,13 @@
 import komand
 from komand.exceptions import ConnectionTestException
 from .schema import ConnectionSchema, Input
+
 # Custom imports below
 import ldap3
 from ldap3.core import exceptions
 
 
 class Connection(komand.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.ssl = None
@@ -21,8 +21,8 @@ class Connection(komand.Connection):
         host = params.get(Input.HOST)
         port = params.get(Input.PORT)
         referrals = params.get(Input.CHASE_REFERRALS)
-        user_name = params.get(Input.USERNAME_PASSWORD).get('username')
-        password = params.get(Input.USERNAME_PASSWORD).get('password')
+        user_name = params.get(Input.USERNAME_PASSWORD).get("username")
+        password = params.get(Input.USERNAME_PASSWORD).get("password")
 
         host = self.host_formatter(host)
         self.logger.info(f'Connecting to {host}:{port}')
@@ -58,11 +58,13 @@ class Connection(komand.Connection):
             # A basic auth connection will be tried instead
             self.logger.info("Failed to connect to the server with NTLM, attempting to connect with basic auth")
             try:
-                conn = ldap3.Connection(server=server,
-                                        user=user_name,
-                                        password=password,
-                                        auto_referrals=referrals,
-                                        auto_bind=True)
+                conn = ldap3.Connection(
+                    server=server,
+                    user=user_name,
+                    password=password,
+                    auto_referrals=referrals,
+                    auto_bind=True
+                )
             except exceptions.LDAPBindError as e:
                 raise ConnectionTestException(
                     preset=ConnectionTestException.Preset.USERNAME_PASSWORD,
@@ -83,25 +85,27 @@ class Connection(komand.Connection):
         """
         Formats The host as needed for the connection
         """
-        colons = host.count(':')
+        colons = host.count(":")
         if colons > 0:
-            host = host.split(':')
+            host = host.split(":")
             if colons == 1:
                 if host[1].find('//') != -1:
                     host = host[1][2:]
                 else:
-                    self.logger.info('Port was provided in hostname, using value from Port field instead')
+                    self.logger.info("Port was provided in hostname, using value from Port field instead")
                     host = host[0]
             elif colons == 2:
-                self.logger.info('Port was provided in hostname, using value from Port field instead')
+                self.logger.info("Port was provided in hostname, using value from Port field instead")
                 host = host[1]
                 if host.find('//') != -1:
                     host = host[2:]
             else:
-                raise ConnectionTestException(cause=f'There are too many colons ({colons}) in the host name ({host}).',
-                                              assistance='Check that the host name is correct',
-                                              data=host)
-        backslash = host.find('/')
+                raise ConnectionTestException(
+                    cause=f"There are too many colons ({colons}) in the host name ({host}).",
+                    assistance="Check that the host name is correct",
+                    data=host
+                )
+        backslash = host.find("/")
         if backslash != -1:
             host = host[:backslash]
         return host
@@ -115,4 +119,4 @@ class Connection(komand.Connection):
                 data=e
             )
 
-        return {'connection': 'successful'}
+        return {"connection": "successful"}

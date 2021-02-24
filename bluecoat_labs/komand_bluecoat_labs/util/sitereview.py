@@ -24,9 +24,9 @@ class SiteReview(object):
         else:
             days = response["CategorizationResult"]["ratingDtsCutoff"]
             more_or_less = "<"
-            if response["CategorizationResult"]["ratingDts"] == 'OLDER':
+            if response["CategorizationResult"]["ratingDts"] == "OLDER":
                 more_or_less = ">"
-            self.category = response["CategorizationResult"]["categorization"]['categorization']["name"]
+            self.category = response["CategorizationResult"]["categorization"]["categorization"]["name"]
             self.date = f"{more_or_less} {days}"
             self.url = response["CategorizationResult"]["url"]
 

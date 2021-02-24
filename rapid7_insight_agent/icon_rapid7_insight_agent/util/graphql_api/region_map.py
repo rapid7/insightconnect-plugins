@@ -5,5 +5,5 @@ region_map = {
     "Europe": "eu",
     "Canada": "ca",
     "Australia": "au",
-    "Japan": "ap"
+    "Japan": "ap",
 }

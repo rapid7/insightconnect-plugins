@@ -465,13 +465,15 @@ This action is used to retrieve agent details.
 |----|----|-------|--------|-----------|----|-------|
 |agent|string|None|True|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID|None|hostname123|
 |case_sensitive|boolean|True|True|Looks up the specified Agent in a case-sensitive manner. Setting this to false may result in longer run times and unintended results|None|True|
+|operational_state|string|Any|False|Agent operational state|['Any', 'na', 'fully_disabled', 'partially_disabled', 'disabled_error']|na|
 
 Example input:
 
 ```
 {
   "agent": "hostname123",
-  "case_sensitive": true
+  "case_sensitive": true,
+  "operational_state": "na"
 }
 ```
 
@@ -498,6 +500,7 @@ Example output:
     "agentVersion": "4.1.4.82",
     "allowRemoteShell": false,
     "appsVulnerabilityStatus": "up_to_date",
+    "cloudProviders": {},
     "computerName": "so-agent-win12",
     "consoleMigrationStatus": "N/A",
     "coreCount": 1,
@@ -508,6 +511,7 @@ Example output:
     "encryptedApplications": false,
     "externalId": "",
     "externalIp": "198.51.100.100",
+    "firewallEnabled": true,
     "groupId": "521580416411822676",
     "groupIp": "198.51.100.x",
     "groupName": "Default Group",
@@ -521,8 +525,10 @@ Example output:
     "isUninstalled": false,
     "isUpToDate": true,
     "lastActiveDate": "2020-06-05T18:32:56.748620Z",
+    "lastIpToMgmt": "10.4.24.55",
     "lastLoggedInUserName": "",
     "licenseKey": "",
+    "locationEnabled": true,
     "locationType": "fallback",
     "locations": [
       {
@@ -548,7 +554,10 @@ Example output:
         "physical": "00:50:56:94:17:08"
       }
     ],
+    "networkQuarantineEnabled": false,
     "networkStatus": "disconnected",
+    "operationalState": "na",
+    "operationalStateExpiration": "None",
     "osArch": "64 bit",
     "osName": "Windows Server 2012 Standard",
     "osRevision": "9200",
@@ -558,6 +567,8 @@ Example output:
     "rangerStatus": "NotApplicable",
     "rangerVersion": "None",
     "registeredAt": "2020-05-28T14:53:03.010853Z",
+    "remoteProfilingState": "disabled",
+    "remoteProfilingStateExpiration": "None",
     "scanAbortedAt": "None",
     "scanFinishedAt": "2020-05-28T22:24:59.420166Z",
     "scanStartedAt": "2020-05-28T21:12:58.216807Z",
@@ -871,6 +882,7 @@ Note that retrieving all active agents can return a very large amount of data de
 |agent|string|None|False|Agent to retrieve device information from. Accepts IP address, MAC address, hostname, UUID or agent ID. If empty, this action will return all active or inactive agents depending on the value of the Agent Active input|None|hostname123|
 |agent_active|boolean|True|False|Return a list of all active or inactive agents when Agent input is not specified. Note that setting this to true for Active agents can return a very large amount of data|None|True|
 |case_sensitive|boolean|True|True|Looks up agents in a case-sensitive manner. Setting this value to false may result in longer run times and unintended results|None|True|
+|operational_state|string|Any|False|Agent operational state|['Any', 'na', 'fully_disabled', 'partially_disabled', 'disabled_error']|na|
 
 Example input:
 
@@ -878,7 +890,8 @@ Example input:
 {
   "agent": "hostname123",
   "agent_active": true,
-  "case_sensitive": true
+  "case_sensitive": true,
+  "operational_state": "na"
 }
 ```
 
@@ -894,37 +907,59 @@ Example output:
 {
   "agents": [
     {
-      "installerType": ".exe",
-      "threatRebootRequired": false,
-      "groupIp": "198.51.100.x",
-      "modelName": "VMware, Inc. - VMware Virtual Platform",
-      "machineType": "server",
-      "groupName": "Default Group",
-      "lastActiveDate": "2020-06-03T18:53:56.748663Z",
-      "registeredAt": "2020-05-28T14:53:03.010853Z",
-      "scanStatus": "finished",
+      "accountId": "433241117337583618",
+      "accountName": "SentinelOne",
+      "activeDirectory": {
+        "computerDistinguishedName": "None",
+        "computerMemberOf": [],
+        "lastUserDistinguishedName": "None",
+        "lastUserMemberOf": []
+      },
+      "activeThreats": 0,
+      "agentVersion": "4.1.4.82",
       "allowRemoteShell": false,
       "appsVulnerabilityStatus": "up_to_date",
-      "coreCount": 1,
-      "inRemoteShellSession": false,
-      "isDecommissioned": false,
-      "siteId": "521580416395045459",
-      "accountName": "SentinelOne",
-      "isActive": true,
-      "isUpToDate": true,
-      "networkStatus": "disconnected",
-      "osType": "windows",
-      "updatedAt": "2020-06-03T18:53:39.584577Z",
-      "createdAt": "2020-05-28T14:53:03.014660Z",
-      "siteName": "Rapid7",
-      "lastLoggedInUserName": "",
-      "domain": "WORKGROUP",
-      "externalId": "",
-      "scanAbortedAt": "None",
+      "cloudProviders": {},
       "computerName": "so-agent-win12",
+      "consoleMigrationStatus": "N/A",
+      "coreCount": 1,
+      "cpuCount": 1,
+      "cpuId": "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz",
+      "createdAt": "2020-05-28T14:53:03.014660Z",
+      "domain": "WORKGROUP",
+      "encryptedApplications": false,
+      "externalId": "",
+      "externalIp": "198.51.100.100",
+      "firewallEnabled": true,
+      "groupId": "521580416411822676",
+      "groupIp": "198.51.100.x",
+      "groupName": "Default Group",
       "id": "901345720792880606",
+      "inRemoteShellSession": false,
+      "infected": false,
+      "installerType": ".exe",
+      "isActive": true,
+      "isDecommissioned": false,
+      "isPendingUninstall": false,
+      "isUninstalled": false,
+      "isUpToDate": true,
+      "lastActiveDate": "2020-06-05T18:32:56.748620Z",
+      "lastIpToMgmt": "10.4.24.55",
+      "lastLoggedInUserName": "",
+      "licenseKey": "",
+      "locationEnabled": true,
       "locationType": "fallback",
+      "locations": [
+        {
+          "id": "629380164464502476",
+          "name": "Fallback",
+          "scope": "global"
+        }
+      ],
+      "machineType": "server",
       "mitigationMode": "protect",
+      "mitigationModeSuspicious": "detect",
+      "modelName": "VMware, Inc. - VMware Virtual Platform",
       "networkInterfaces": [
         {
           "id": "901345720801269215",
@@ -938,45 +973,32 @@ Example output:
           "physical": "00:50:56:94:17:08"
         }
       ],
-      "scanStartedAt": "2020-05-28T21:12:58.216807Z",
-      "userActionsNeeded": [],
-      "activeDirectory": {
-        "computerDistinguishedName": "None",
-        "computerMemberOf": [],
-        "lastUserDistinguishedName": "None",
-        "lastUserMemberOf": []
-      },
-      "externalIp": "198.51.100.100",
-      "isUninstalled": false,
-      "licenseKey": "",
+      "networkQuarantineEnabled": false,
+      "networkStatus": "disconnected",
+      "operationalState": "na",
+      "operationalStateExpiration": "None",
       "osArch": "64 bit",
-      "totalMemory": 1023,
-      "accountId": "433241117337583618",
-      "consoleMigrationStatus": "N/A",
-      "groupId": "521580416411822676",
-      "isPendingUninstall": false,
-      "locations": [
-        {
-          "scope": "global",
-          "id": "629380164464502476",
-          "name": "Fallback"
-        }
-      ],
-      "osStartTime": "2020-05-28T14:59:33Z",
-      "scanFinishedAt": "2020-05-28T22:24:59.420166Z",
-      "cpuCount": 1,
-      "osUsername": "None",
-      "rangerVersion": "None",
-      "agentVersion": "4.1.4.82",
-      "osRevision": "9200",
-      "uuid": "28db47168fa54f89aeed99769ac8d4dc",
-      "mitigationModeSuspicious": "detect",
-      "cpuId": "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz",
-      "infected": false,
-      "encryptedApplications": false,
       "osName": "Windows Server 2012 Standard",
+      "osRevision": "9200",
+      "osStartTime": "2020-05-28T14:59:36Z",
+      "osType": "windows",
+      "osUsername": "None",
       "rangerStatus": "NotApplicable",
-      "activeThreats": 0
+      "rangerVersion": "None",
+      "registeredAt": "2020-05-28T14:53:03.010853Z",
+      "remoteProfilingState": "disabled",
+      "remoteProfilingStateExpiration": "None",
+      "scanAbortedAt": "None",
+      "scanFinishedAt": "2020-05-28T22:24:59.420166Z",
+      "scanStartedAt": "2020-05-28T21:12:58.216807Z",
+      "scanStatus": "finished",
+      "siteId": "521580416395045459",
+      "siteName": "Rapid7",
+      "threatRebootRequired": false,
+      "totalMemory": 1023,
+      "updatedAt": "2020-06-05T15:39:10.754112Z",
+      "userActionsNeeded": [],
+      "uuid": "28db47168fa54f89aeed99769ac8d4dc"
     }
   ]
 }
@@ -1313,6 +1335,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 6.0.0 - Add `operational_state` field to input of Get Agent Details and Search Agent actions | Update schema to return new outputs such as Active Directory, firewall, location, and quarantine information for Get Agent Details and Search Agent actions | Use API version 2.1 | Update capitalization according to style in Activities List action for Created Than Date and Less Than Dates inputs to Greater than Date and Less than Date
 * 5.0.1 - Correct spelling in help.md
 * 5.0.0 - Consolidate various Agent actions | Use API version 2.1 where possible | Delete obsolete Blacklist by IOC Hash and Agent Processes
 * 4.1.1 - Update the Get Threat Summary action to return all threat summaries instead of 10

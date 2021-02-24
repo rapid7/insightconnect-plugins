@@ -1,5 +1,6 @@
 import komand
 from .schema import BlacklistInput, BlacklistOutput
+
 # Custom imports below
 from komand_mxtoolbox_dns.util import utils
 
@@ -7,10 +8,11 @@ from komand_mxtoolbox_dns.util import utils
 class Blacklist(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='blacklist',
-                description='Check IP or host for reputation',
-                input=BlacklistInput(),
-                output=BlacklistOutput())
+            name="blacklist",
+            description="Check IP or host for reputation",
+            input=BlacklistInput(),
+            output=BlacklistOutput(),
+        )
 
     def run(self, params={}):
         base_url = self.connection.server

@@ -1,5 +1,6 @@
 import komand
 from .schema import ConnectionSchema
+
 # Custom imports below
 import os
 import contextlib
@@ -18,7 +19,6 @@ def temp_umask(umask):
 
 
 class Connection(komand.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.carbon_black = None
@@ -26,15 +26,14 @@ class Connection(komand.Connection):
 
     def connect(self, params={}):
         """ Connect uses the carbon black credentials to get the latest api token for the user """
-        url = params.get('url')
-        token = params.get('api_key').get('secretKey')
-        ssl_verify = params.get('ssl_verify')
+        url = params.get("url")
+        token = params.get("api_key").get("secretKey")
+        ssl_verify = params.get("ssl_verify")
 
         try:
-            self.carbon_black = CbEnterpriseResponseAPI(url=url,
-                                                        token=token,
-                                                        ssl_verify=ssl_verify,
-                                                        max_retries=2)  # Two retries to speed up a likely failure
+            self.carbon_black = CbEnterpriseResponseAPI(
+                url=url, token=token, ssl_verify=ssl_verify, max_retries=2
+            )  # Two retries to speed up a likely failure
         except UnauthorizedError as e:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY) from e
         except ApiError as e:
