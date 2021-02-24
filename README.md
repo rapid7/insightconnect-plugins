@@ -31,7 +31,7 @@ Dependencies:
 * [Docker Engine](https://www.docker.com)
 * [InsightConnect plugin tooling](https://docs.rapid7.com/insightconnect/getting-started/)
 * [InsightConnect validators](https://pypi.org/project/insightconnect-integrations-validators/), [pyyaml](https://pyyaml.org/), [js-yaml](https://github.com/nodeca/js-yaml), [jq](https://stedolan.github.io/jq/), [flake8](https://pypi.org/project/flake8/), [mdl](https://github.com/markdownlint/markdownlint) for the helper scripts in `tools/`.
-* [Pre-commit](https://pre-commit.com/)
+* [Pre-commit](https://pre-commit.com/) and [Black](https://github.com/psf/black)
 
 For a quick & easy way to install tooling dependencies, run `update-tools.sh` from the `tools/` directory in this repository!
 
