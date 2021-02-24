@@ -1,5 +1,7 @@
 # InsightConnect Plugins
 
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 We made a large number of our plugins open-source in order to benefit our customers, partners, and the greater community.
 
 The integrations here include some new, some old, and many that are community supported. These are automatically released to the product marketplace from this repository for convenient orchestration.
