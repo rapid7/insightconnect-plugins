@@ -37,11 +37,8 @@ sudo -H python3 -m pip install --user --upgrade insightconnect-integrations-vali
 echo "[*] Installing PyYAML..."
 sudo -H python3 -m pip install --user --upgrade pyyaml > /dev/null; true
 
-echo "[*] Installing bandit..."
-sudo -H python3 -m pip install --user --upgrade bandit > /dev/null; true
-
-echo "[*] Installing flake8..."
-sudo -H python3 -m pip install --user --upgrade flake8 > /dev/null; true
+echo "[*] Installing pre-commit..."
+sudo -H python3 -m pip install --user --upgrade pre-commit > /dev/null; true
 
 echo "[*] Installing mdl..."
 sudo gem install mdl > /dev/null; true
