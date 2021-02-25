@@ -49,8 +49,7 @@ class Threats:
         :return: pre-populated /idr/v1/customthreats/key/{key}/indicators/add
         """
 
-        return f"{console_url}idr/v1/customthreats/key/{key}/indicators/add"\
-
+        return f"{console_url}idr/v1/customthreats/key/{key}/indicators/add"
 
     @staticmethod
     def create_threat(console_url: str):
