@@ -4,6 +4,7 @@ from .advanced_query_on_log.action import AdvancedQueryOnLog
 from .advanced_query_on_log_set.action import AdvancedQueryOnLogSet
 from .assign_user_to_investigation.action import AssignUserToInvestigation
 from .close_investigations_in_bulk.action import CloseInvestigationsInBulk
+from .create_threat.action import CreateThreat
 from .get_a_log.action import GetALog
 from .get_all_logs.action import GetAllLogs
 from .list_investigations.action import ListInvestigations

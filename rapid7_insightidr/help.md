@@ -36,6 +36,52 @@ Example input:
 
 ### Actions
 
+#### Create Threat
+
+This action is used to create a private InsightIDR threat and add indicators to this threat.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|indicators|[]string|None|True|Add indicators to new threat in InsightIDR. Accept IP addresses, process hashes (SHA1, MD5, SHA256), domain names, URLs|None|["example.com", "10.0.0.1"]|
+|note_text|string|InsightIDR threat|False|Note text of created threat|None|InsightIDR threat|
+|threat_name|string|None|True|Name of created threat|None|InsightIDR Threat|
+
+Example input:
+
+```
+{
+  "indicators": [
+    "example.com",
+    "10.0.0.1"
+  ],
+  "note_text": "InsightIDR threat",
+  "threat_name": "InsightIDR Threat"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|rejected_indicators|[]string|True|Rejected indicators in new threat|
+|threat|threat|True|The information about the new threat|
+
+Example output:
+
+```
+{
+    "rejected_indicators": [],
+    "threat": {
+      "name": "InsightIDR Threat",
+      "note": "InsightIDR threat",
+      "published": false,
+      "indicator_count": 2
+  }
+}
+```
+
 #### Advanced Query on Log Set
 
 This action is used to realtime query an InsightIDR log set. This will query entire log sets for results and can accept
@@ -78,7 +124,7 @@ To use Relative Time, leave `Time From` and `Time To` blank. For example:
 }
 ```
 
-The above settings will run your search from 5 minutes ago until now. 
+The above settings will run your search from 5 minutes ago until now.
 
 If you want to use absolute time for a query. You can set up the input like this:
 
@@ -168,7 +214,7 @@ Example output:
 
 This action is used to realtime query an InsightIDR log. This will query individual logs for results using a relative or absolute time-range from which to query.
 
-This action should be used if querying an individual service or device. 
+This action should be used if querying an individual service or device.
 
 ##### Input
 
@@ -205,7 +251,7 @@ To use Relative Time, leave `Time From` and `Time To` blank. For example:
 }
 ```
 
-The above settings will run your search from 5 minutes ago until now. 
+The above settings will run your search from 5 minutes ago until now.
 
 If you want to use absolute time for a query. You can set up the input like this:
 
@@ -218,7 +264,7 @@ If you want to use absolute time for a query. You can set up the input like this
 }
 ```
 
-This will run your search for the entire month of January every time. 
+This will run your search for the entire month of January every time.
 
 ##### Output
 
@@ -293,7 +339,7 @@ Example output:
 
 #### Get All Logs
 
-This action is used to request a list of all Logs for an account. This action should be used when querying multiple related services. 
+This action is used to request a list of all Logs for an account. This action should be used when querying multiple related services.
 
 ##### Input
 
@@ -363,8 +409,8 @@ This action is used to get a specific log from an account.
 Example input:
 
 ```
-{	
-  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06"	
+{
+  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06"
 }
 ```
 
@@ -428,8 +474,8 @@ This action is used to close all investigations that fall within a date range.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |alert_type|string|None|False|The category of alerts that should be closed|None|Account Created|
-|datetime_from|date|None|False|An ISO formatted timestamp, default last week|None|2018-07-01T00:00:00Z|
-|datetime_to|date|None|False|An ISO formatted timestamp of the ending date range, current time if left blank|None|2018-07-01T00:00:00Z|
+|datetime_from|date|None|False|An ISO formatted timestamp, default last week|None|2018-07-01 00:00:00|
+|datetime_to|date|None|False|An ISO formatted timestamp of the ending date range, current time if left blank|None|2018-07-01 00:00:00|
 |max_investigations_to_close|integer|None|False|An optional maximum number of alerts to close with this request. If this parameter is not specified then there is no maximum. If this limit is exceeded, then an error is returned|None|10|
 |source|string|MANUAL|False|The name of an investigation source|['ALERT', 'MANUAL', 'HUNT']|MANUAL|
 
@@ -624,7 +670,7 @@ This action is used to add InsightIDR threat indicators to a threat with the giv
 |hashes|[]string|None|False|Process hashes to add. e.g. ["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]|None|["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3", "C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]|
 |ips|[]string|None|False|IP addresses to add. e.g. ["10.0.0.1","10.0.0.2"]|None|["10.0.0.1", "10.0.0.2"]|
 |key|string|None|True|The key of a threat for which the indicators are going to be added. e.g. c9404e11-b81a-429d-9400-05c531f229c3|None|c9404e11-b81a-429d-9400-05c531f229c3|
-|urls|[]string|None|False|URL's to add. e.g. ["https://example.com","https://test.com"]|None|["https://example.com", "https://test.com"]|
+|urls|[]string|None|False|URLs to add. e.g. ["https://example.com","https://test.com"]|None|["https://example.com", "https://test.com"]|
 
 Example input:
 
@@ -755,6 +801,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.0 - Add new action Create Threat
 * 3.0.0 - Added Relative Time options to Advanced Query actions | Fix issue where a query with no results would crash the plugin
 * 2.1.0 - New action Close Investigations in Bulk
 * 2.0.1 - Fix issue where long-running queries could crash the plugin
