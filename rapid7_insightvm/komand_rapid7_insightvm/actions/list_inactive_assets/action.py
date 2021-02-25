@@ -9,10 +9,10 @@ from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 class ListInactiveAssets(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='list_inactive_assets',
+            name="list_inactive_assets",
             description=Component.DESCRIPTION,
             input=ListInactiveAssetsInput(),
-            output=ListInactiveAssetsOutput()
+            output=ListInactiveAssetsOutput(),
         )
 
     def run(self, params={}):
@@ -32,12 +32,7 @@ class ListInactiveAssets(komand.Action):
             "match": "all",
         }
         assets = resource_helper.paged_resource_request(
-            endpoint=endpoint,
-            method="post",
-            payload=payload,
-            number_of_results=size
+            endpoint=endpoint, method="post", payload=payload, number_of_results=size
         )
-        
-        return {
-            Output.ASSETS: assets
-        }
+
+        return {Output.ASSETS: assets}
