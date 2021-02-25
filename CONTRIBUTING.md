@@ -17,7 +17,7 @@ it into production.  If you do not care to follow these rules, your contribution
 
 - **Do** read the [developer documentation]
 - **Do** install [pre-commit](https://pre-commit.com/) to ensure your style is [Black](https://github.com/psf/black).
-- **Do** Stick to our [plugin style] guides.
+- **Do** stick to our [plugin style] guides.
 - **Do** follow the [50/72 rule] for Git commit messages.
 - **Do** license your code as MIT.
 - **Do** create a [topic branch] to work on. This helps ensure users are aware of commits on the branch being considered for merge, allows for a location for more commits to be offered without mingling with other contributor changes, and allows contributors to make progress while a PR is still being reviewed.
