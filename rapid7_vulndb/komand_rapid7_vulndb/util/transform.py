@@ -65,9 +65,7 @@ def serialize_alternate_ids(data: Dict):
 
 def generate_link_attr(d: Dict):
     """Generates valid content API URL"""
-    d.update({"link": urljoin(
-        "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/",
-        d.get("identifier"))})
+    d.update({"link": urljoin("https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/", d.get("identifier"))})
 
 
 def pop_non_relevant_module_fields(data: Dict):
@@ -76,9 +74,17 @@ def pop_non_relevant_module_fields(data: Dict):
     :param data:
     :return:
     """
-    keys_to_keep = ["title", "description", "content_type", "published_at",
-                    "references",
-                    "architectures", "authors", "rank", "reliability"]
+    keys_to_keep = [
+        "title",
+        "description",
+        "content_type",
+        "published_at",
+        "references",
+        "architectures",
+        "authors",
+        "rank",
+        "reliability",
+    ]
     for key in list(data):
         if key not in keys_to_keep:
             data.pop(key)
@@ -86,9 +92,16 @@ def pop_non_relevant_module_fields(data: Dict):
 
 def pop_non_relevant_vuln_fields(data: Dict):
     """Removes fields not required for vulnerability content action"""
-    keys_to_keep = ["title", "description", "content_type", "published_at",
-                    "references",
-                    "severity", "solutions", "alternate_ids"]
+    keys_to_keep = [
+        "title",
+        "description",
+        "content_type",
+        "published_at",
+        "references",
+        "severity",
+        "solutions",
+        "alternate_ids",
+    ]
     for key in list(data):
         if key not in keys_to_keep:
             data.pop(key)

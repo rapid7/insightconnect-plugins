@@ -3,13 +3,13 @@ from .schema import UpdateActionPolicyInput, UpdateActionPolicyOutput
 
 
 class UpdateActionPolicy(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='update_action_policy',
-                description='Updates the values of given parameters in the given action policy',
-                input=UpdateActionPolicyInput(),
-                output=UpdateActionPolicyOutput())
+            name="update_action_policy",
+            description="Updates the values of given parameters in the given action policy",
+            input=UpdateActionPolicyInput(),
+            output=UpdateActionPolicyOutput(),
+        )
 
     def run(self, params={}):
         action = "security_policies"

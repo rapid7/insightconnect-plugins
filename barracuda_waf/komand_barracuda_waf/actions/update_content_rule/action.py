@@ -3,19 +3,17 @@ from .schema import UpdateContentRuleInput, UpdateContentRuleOutput
 
 
 class UpdateContentRule(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='update_content_rule',
-                description='Updates the values of given parameters in the given content rule',
-                input=UpdateContentRuleInput(),
-                output=UpdateContentRuleOutput())
+            name="update_content_rule",
+            description="Updates the values of given parameters in the given content rule",
+            input=UpdateContentRuleInput(),
+            output=UpdateContentRuleOutput(),
+        )
 
     def run(self, params={}):
         action = "virtual_services"
-        self.connection.connector.check_required_params(params, [
-            "id",
-            "virtual_service_id"])
+        self.connection.connector.check_required_params(params, ["id", "virtual_service_id"])
 
         action = action + "/" + params.get("virtual_service_id") + "/content_rules/" + params.get("id")
 

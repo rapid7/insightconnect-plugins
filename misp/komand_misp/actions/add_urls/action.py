@@ -1,16 +1,17 @@
 import komand
 from .schema import AddUrlsInput, AddUrlsOutput
+
 # Custom imports below
 
 
 class AddUrls(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='add_urls',
-                description='Add URLs to event',
-                input=AddUrlsInput(),
-                output=AddUrlsOutput())
+            name="add_urls",
+            description="Add URLs to event",
+            input=AddUrlsInput(),
+            output=AddUrlsOutput(),
+        )
 
     def run(self, params={}):
 
@@ -18,7 +19,7 @@ class AddUrls(komand.Action):
             "This Organization": "0",
             "This Community": "1",
             "Connected Communities": "2",
-            "All Communities": "3"
+            "All Communities": "3",
         }
 
         urls = params.get("urls")
@@ -27,11 +28,17 @@ class AddUrls(komand.Action):
         d = dist.get(params.get("distribution"))
         proposal = params.get("proposal")
 
-
         try:
             for url in urls:
-                client.add_url(event, url, category='Network activity', to_ids=False,
-                               comment=(params.get("comment") or None), distribution=d, proposal=proposal)
+                client.add_url(
+                    event,
+                    url,
+                    category="Network activity",
+                    to_ids=False,
+                    comment=(params.get("comment") or None),
+                    distribution=d,
+                    proposal=proposal,
+                )
             return {"status": True}
         except Exception as e:
             self.logger.error("An error has occurred adding one or more URLs. Error: {}".format(e))

@@ -1,16 +1,17 @@
 import insightconnect_plugin_runtime
 from .schema import IsolateMachineInput, IsolateMachineOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class IsolateMachine(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='isolate_machine',
-                description=Component.DESCRIPTION,
-                input=IsolateMachineInput(),
-                output=IsolateMachineOutput())
+            name="isolate_machine",
+            description=Component.DESCRIPTION,
+            input=IsolateMachineInput(),
+            output=IsolateMachineOutput(),
+        )
 
     def run(self, params={}):
         self.logger.info("Running...")

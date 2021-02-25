@@ -9,10 +9,11 @@ class Calculate(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='calculate',
+            name="calculate",
             description=Component.DESCRIPTION,
             input=CalculateInput(),
-            output=CalculateOutput())
+            output=CalculateOutput(),
+        )
 
     def run(self, params={}):
         equation = params.get(Input.EQUATION)
@@ -20,14 +21,12 @@ class Calculate(komand.Action):
 
         if result is None:
             raise PluginException(
-                cause='Calculation error',
+                cause="Calculation error",
                 assistance="Error occurred while calculating the equation. Check to make sure it is valid and try "
-                           "again. "
+                "again. ",
             )
 
-        return {
-            Output.RESULT: result
-        }
+        return {Output.RESULT: result}
 
     @staticmethod
     def execute_equation(eq):

@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
+
 # Custom imports below
 from threatstack import ThreatStack
 from threatstack.errors import ThreatStackAPIError, ThreatStackClientError, APIRateLimitError
@@ -8,7 +9,6 @@ import datetime
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.client = None
@@ -19,18 +19,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
         org_id = params.get(Input.ORG_ID)
         timeout = params.get(Input.TIMEOUT, 120)
 
-        self.client = ThreatStack(api_key=api_key,
-                                  user_id=user_id,
-                                  org_id=org_id,
-                                  api_version=2,
-                                  timeout=timeout)
+        self.client = ThreatStack(api_key=api_key, user_id=user_id, org_id=org_id, api_version=2, timeout=timeout)
 
     def test(self):
         now = datetime.datetime.now().strftime("%Y-%m-%d")
         try:
             self.client.http_request(method="get", path="agents", params={"from": now, "until": now})
         except (ThreatStackAPIError, ThreatStackClientError, APIRateLimitError) as e:
-            raise ConnectionTestException(cause="An error occurred!",
-                                          assistance=e)
+            raise ConnectionTestException(cause="An error occurred!", assistance=e)
 
         return {"success": True}

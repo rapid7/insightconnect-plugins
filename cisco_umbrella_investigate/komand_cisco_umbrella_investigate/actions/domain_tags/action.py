@@ -1,5 +1,6 @@
 import komand
 from .schema import DomainTagsInput, DomainTagsOutput
+
 # Custom imports below
 from komand.exceptions import PluginException
 
@@ -7,13 +8,14 @@ from komand.exceptions import PluginException
 class DomainTags(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='domain_tags',
-                description='Returns the date range when the domain being queried was a part of the Umbrella block list',
-                input=DomainTagsInput(),
-                output=DomainTagsOutput())
+            name="domain_tags",
+            description="Returns the date range when the domain being queried was a part of the Umbrella block list",
+            input=DomainTagsInput(),
+            output=DomainTagsOutput(),
+        )
 
     def run(self, params={}):
-        domain = params.get('domain')
+        domain = params.get("domain")
         try:
             domain_tags = self.connection.investigate.domain_tags(domain)
         except Exception as e:
@@ -28,7 +30,14 @@ class DomainTags(komand.Action):
             url = ""
             if tag.get("url"):
                 url = tag.get("url")
-            domains.append({"begin": tag.get("period").get('begin'), "end": tag.get("period").get('end'), "category": tag.get("category"), "url": url })
+            domains.append(
+                {
+                    "begin": tag.get("period").get("begin"),
+                    "end": tag.get("period").get("end"),
+                    "category": tag.get("category"),
+                    "url": url,
+                }
+            )
         return {"domain_tags": domains}
 
     def test(self):

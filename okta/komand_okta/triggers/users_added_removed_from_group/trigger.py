@@ -1,6 +1,13 @@
 import komand
 import time
-from .schema import UsersAddedRemovedFromGroupInput, UsersAddedRemovedFromGroupOutput, Input, Output, Component
+from .schema import (
+    UsersAddedRemovedFromGroupInput,
+    UsersAddedRemovedFromGroupOutput,
+    Input,
+    Output,
+    Component,
+)
+
 # Custom imports below
 from komand.exceptions import PluginException
 from komand_okta.util import helpers
@@ -8,13 +15,13 @@ import re
 
 
 class UsersAddedRemovedFromGroup(komand.Trigger):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='users_added_removed_from_group',
-                description=Component.DESCRIPTION,
-                input=UsersAddedRemovedFromGroupInput(),
-                output=UsersAddedRemovedFromGroupOutput())
+            name="users_added_removed_from_group",
+            description=Component.DESCRIPTION,
+            input=UsersAddedRemovedFromGroupInput(),
+            output=UsersAddedRemovedFromGroupOutput(),
+        )
 
     def run(self, params={}):
         """Run the trigger"""
@@ -30,9 +37,11 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             try:
                 data = response.json()
             except ValueError:
-                raise PluginException(cause='Returned data was not in JSON format.',
-                                      assistance="Double check that group ID's are all valid.",
-                                      data=response.text)
+                raise PluginException(
+                    cause="Returned data was not in JSON format.",
+                    assistance="Double check that group ID's are all valid.",
+                    data=response.text,
+                )
             helpers.raise_based_on_error_code(response)
             group_names.append(data["profile"]["name"])
 
@@ -68,7 +77,13 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
                 if added_users:
                     added.append({"group_name": group_names[index], "group_id": value, "users": added_users})
                 if removed_users:
-                    removed.append({"group_name": group_names[index], "group_id": value, "users": removed_users})
+                    removed.append(
+                        {
+                            "group_name": group_names[index],
+                            "group_id": value,
+                            "users": removed_users,
+                        }
+                    )
 
             if added and removed:
                 self.logger.info("Users added and removed, sending to orchestrator.")
@@ -89,9 +104,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
     def get_users_in_group_list(self, group_list, okta_url):
         current_list = []
         for group in group_list:
-            current_list.append({
-                group: self.get_users_in_group(f"{okta_url}/api/v1/groups/{group}/users")
-            })
+            current_list.append({group: self.get_users_in_group(f"{okta_url}/api/v1/groups/{group}/users")})
 
         return current_list
 
@@ -102,7 +115,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
         links = response.headers.get("Link", "").split(", ")
         for link in links:
             if 'rel="next"' in link:
-                matched_link = re.match('<(.*?)>', link)
+                matched_link = re.match("<(.*?)>", link)
                 if matched_link:
                     next_link = matched_link.group(1)
 
@@ -112,9 +125,11 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
         try:
             data = response.json()
         except ValueError:
-            raise PluginException(cause='Returned data was not in JSON format.',
-                                  assistance="Double-check that group ID's are all valid.",
-                                  data=response.text)
+            raise PluginException(
+                cause="Returned data was not in JSON format.",
+                assistance="Double-check that group ID's are all valid.",
+                data=response.text,
+            )
 
         helpers.raise_based_on_error_code(response)
         returned_data.extend(komand.helper.clean(data))

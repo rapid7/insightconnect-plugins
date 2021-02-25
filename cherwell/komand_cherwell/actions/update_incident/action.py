@@ -1,16 +1,17 @@
 import komand
 from .schema import UpdateIncidentInput, UpdateIncidentOutput, Input
+
 # Custom imports below
 
 
 class UpdateIncident(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='update_incident',
-                description='Updates an incident within Cherwell',
-                input=UpdateIncidentInput(),
-                output=UpdateIncidentOutput())
+            name="update_incident",
+            description="Updates an incident within Cherwell",
+            input=UpdateIncidentInput(),
+            output=UpdateIncidentOutput(),
+        )
 
     def run(self, params={}):
         # check that the incident exists
@@ -28,9 +29,9 @@ class UpdateIncident(komand.Action):
                     update_data.append(field)
 
             business_object = {
-                    "fields": update_data,
-                    "busObId": business_object_id,
-                    "busObPublicId": public_id,
+                "fields": update_data,
+                "busObId": business_object_id,
+                "busObPublicId": public_id,
             }
             response = self.connection.api.update_incident(business_object)
             return {"success": True, "raw_response": response}

@@ -20,14 +20,14 @@ def execute_command(logger, cmd, answer_section_regex, flags):
     cmd = f"{binary} {cmd}"
     logger.info(f"Executing command {cmd}")
     r = insightconnect_plugin_runtime.helper.exec_command(cmd)
-    stdout = r['stdout'].decode('utf-8')
+    stdout = r["stdout"].decode("utf-8")
 
     # Grab query status
-    status = util.safe_parse(re.search('status: (.+?),', stdout))
+    status = util.safe_parse(re.search("status: (.+?),", stdout))
     # Grab nameserver
-    ns = util.safe_parse(re.search('SERVER: (.+?)#', stdout))
+    ns = util.safe_parse(re.search("SERVER: (.+?)#", stdout))
     # Grab number of answers
-    answers = util.safe_parse(re.search(r'ANSWER: ([0-9]+)', stdout))
+    answers = util.safe_parse(re.search(r"ANSWER: ([0-9]+)", stdout))
     answer_section = None
     if util.not_empty(answers):
         answers = int(answers)
@@ -41,11 +41,11 @@ def execute_command(logger, cmd, answer_section_regex, flags):
                 answer_section = util.safe_parse(re.search(answer_section_regex, stdout, flags=flags))
 
     if status != "NOERROR":
-        stdout = f'Resolution failed, nameserver {ns} returned {status} status'
+        stdout = f"Resolution failed, nameserver {ns} returned {status} status"
 
     return {
-        'answer_section': answer_section,
-        'fulloutput': stdout + r['stderr'].decode('utf-8'),
-        'nameserver': ns,
-        'status': status
+        "answer_section": answer_section,
+        "fulloutput": stdout + r["stderr"].decode("utf-8"),
+        "nameserver": ns,
+        "status": status,
     }

@@ -1,28 +1,28 @@
 import komand
 from .schema import ConnectionSchema
+
 # Custom imports below
 import requests
 
 
 class Connection(komand.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
     def connect(self, params={}):
         self.logger.info("Connect: Connecting..")
 
-        if params.get('credentials').get('token'):
-            self.logger.info('API token provided')
-            token = params.get('credentials').get('token')
+        if params.get("credentials").get("token"):
+            self.logger.info("API token provided")
+            token = params.get("credentials").get("token")
         else:
-            self.logger.info('API token not provided, unauthenticated requests will be attempted')
-            token = ''  # nosec
+            self.logger.info("API token not provided, unauthenticated requests will be attempted")
+            token = ""  # nosec
 
-        if params.get('credentials').get('domain'):
-            self.domain = params.get('credentials').get('domain')
+        if params.get("credentials").get("domain"):
+            self.domain = params.get("credentials").get("domain")
         else:
-            self.domain = 'http://ipinfo.io/'
+            self.domain = "http://ipinfo.io/"
 
         self.token = token
 

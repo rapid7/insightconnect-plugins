@@ -1,17 +1,18 @@
 import komand
 from .schema import DecompressBytesInput, DecompressBytesOutput
+
 # Custom imports below
 from ...util import utils, decompressor
 
 
 class DecompressBytes(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='decompress_bytes',
-                description='Decompress bytes',
-                input=DecompressBytesInput(),
-                output=DecompressBytesOutput())
+            name="decompress_bytes",
+            description="Decompress bytes",
+            input=DecompressBytesInput(),
+            output=DecompressBytesOutput(),
+        )
 
     def run(self, params={}):
         file_bytes_b64 = params.get("bytes")  # Base64 encoded file as string
@@ -20,7 +21,7 @@ class DecompressBytes(komand.Action):
         file_bytes = utils.base64_decode(file_bytes_b64)  # Decode base64 so we can manipulate the file
 
         compression_type = utils.determine_compression_type(file_bytes)  # Determine compression type
-        decompressed= decompressor.dispatch_decompress(algorithm=compression_type, file_bytes=file_bytes)
+        decompressed = decompressor.dispatch_decompress(algorithm=compression_type, file_bytes=file_bytes)
         self.logger.info("Run: Decompressed file is: %s", type(decompressed))
 
         # Now re-encode the bytes in base64 so other plugins can use it

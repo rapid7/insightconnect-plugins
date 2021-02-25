@@ -32,8 +32,8 @@ class WindwosDefenderATP_API:
                 "resource": self.resource_url,
                 "client_id": self.app_id,
                 "client_secret": self.app_secret,
-                "grant_type": "client_credentials"
-            }
+                "grant_type": "client_credentials",
+            },
         )
         self.api_token = result_json.get("access_token")
         self.logger.info(f"Authentication was successful, token is: ******************{self.api_token[-5:]}")
@@ -54,9 +54,9 @@ class WindwosDefenderATP_API:
     def get_session_headers(self) -> dict:
         self.logger.info("Updating session headers.")
         return {
-            'Authorization': f'Bearer {self.api_token}',
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            "Authorization": f"Bearer {self.api_token}",
+            "Content-Type": "application/json",
+            "Accept": "application/json",
         }
 
     def find_machines(self, software: str):
@@ -69,11 +69,11 @@ class WindwosDefenderATP_API:
         return self._make_request("GET", f"machineactions/{action_id}")
 
     def find_first_machine(self, machine_identification: str) -> dict:
-        if re.match(r'^[a-z0-9]{40}$', machine_identification.lower()):
+        if re.match(r"^[a-z0-9]{40}$", machine_identification.lower()):
             return self.get_machine_information(machine_identification)
 
         machines = self.get_machines()
-        for machine in machines.get('value'):
+        for machine in machines.get("value"):
             for key in ["computerDnsName", "lastIpAddress", "lastExternalIpAddress"]:
                 if machine.get(key) == machine_identification:
                     return machine
@@ -94,33 +94,34 @@ class WindwosDefenderATP_API:
         return self._make_request("GET", f"alerts/{alert_id}/files")
 
     def isolate_machine(self, id_: str, isolation_type: str, comment: str) -> dict:
-        return self._make_request("POST", f"machines/{id_}/isolate", json_data={
-            "Comment": comment,
-            "IsolationType": isolation_type
-        })
+        return self._make_request(
+            "POST",
+            f"machines/{id_}/isolate",
+            json_data={"Comment": comment, "IsolationType": isolation_type},
+        )
 
     def unisolate_machine(self, id_: str, comment: str) -> dict:
-        return self._make_request("POST", f"machines/{id_}/unisolate", json_data={
-            "Comment": comment
-        })
+        return self._make_request("POST", f"machines/{id_}/unisolate", json_data={"Comment": comment})
 
     def run_antivirus_scan(self, machine_id: str, scan_type: str, comment: str) -> dict:
         self.logger.info(
             f"Run Antivirus Scan with machine id: {machine_id}, scan Type: {scan_type}, comment: {comment}"
         )
 
-        return self._make_request("POST", f"machines/{machine_id}/runAntiVirusScan", json_data={
-            "Comment": comment,
-            "ScanType": scan_type
-        })
+        return self._make_request(
+            "POST",
+            f"machines/{machine_id}/runAntiVirusScan",
+            json_data={"Comment": comment, "ScanType": scan_type},
+        )
 
     def stop_and_quarantine_file(self, machine_id: str, sha1_id: str, comment: str) -> dict:
         self.logger.info(f"Stop and quarantine file with: {machine_id}, SHA1_ID: {sha1_id}, comment: {comment}")
 
-        return self._make_request("POST", f"machines/{machine_id}/StopAndQuarantineFile", json_data={
-            "Comment": comment,
-            "Sha1": sha1_id
-        })
+        return self._make_request(
+            "POST",
+            f"machines/{machine_id}/StopAndQuarantineFile",
+            json_data={"Comment": comment, "Sha1": sha1_id},
+        )
 
     def get_all_alerts(self, query_parameters: str) -> dict:
         endpoint = "alerts"
@@ -145,22 +146,19 @@ class WindwosDefenderATP_API:
         return self._make_request("GET", f"machines/{machine}/software")
 
     def manage_tags(self, machine: str, tag: str, action_type: str) -> dict:
-        return self._make_request("POST", f"machines/{machine}/tags", json_data={
-            "Value": tag,
-            "Action": action_type
-        })
+        return self._make_request("POST", f"machines/{machine}/tags", json_data={"Value": tag, "Action": action_type})
 
     def get_related_machines(self, indicator: str, indicator_type: str) -> dict:
         return self._make_request("GET", f"{indicator_type}/{indicator}/machines")
 
     def find_machine_id(self, machine_identification: str) -> str:
-        if re.match(r'^[a-z0-9]{40}$', machine_identification.lower()):
+        if re.match(r"^[a-z0-9]{40}$", machine_identification.lower()):
             return machine_identification
         machines = self.get_machines()
-        for machine in machines.get('value'):
+        for machine in machines.get("value"):
             for key in ["computerDnsName", "lastIpAddress", "lastExternalIpAddress"]:
                 if machine.get(key) == machine_identification:
-                    return machine.get('id')
+                    return machine.get("id")
 
     def _make_request(self, method: str, path: str, json_data: dict = None, allow_empty: bool = False) -> dict:
         self.check_and_refresh_api_token()
@@ -169,29 +167,22 @@ class WindwosDefenderATP_API:
             f"{self.resource_url}/api/{path}",
             json_data=json_data,
             headers=self.get_session_headers(),
-            allow_empty=allow_empty
+            allow_empty=allow_empty,
         )
 
     def _call_api(
-            self,
-            method: str,
-            url: str,
-            params: dict = None,
-            json_data: dict = None,
-            data: dict = None,
-            headers: dict = None,
-            allow_empty: bool = False
+        self,
+        method: str,
+        url: str,
+        params: dict = None,
+        json_data: dict = None,
+        data: dict = None,
+        headers: dict = None,
+        allow_empty: bool = False,
     ) -> dict:
         response = {"text": ""}
         try:
-            response = requests.request(
-                method,
-                url,
-                json=json_data,
-                params=params,
-                data=data,
-                headers=headers
-            )
+            response = requests.request(method, url, json=json_data, params=params, data=data, headers=headers)
 
             if response.status_code == 401:
                 raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
@@ -203,9 +194,7 @@ class WindwosDefenderATP_API:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
             if response.status_code == 400 and '"message":"Action is already in progress"' in response.text:
                 self.logger.info("Action is already in progress")
-                return {
-                    "status": "InProgress"
-                }
+                return {"status": "InProgress"}
             if response.status_code >= 400:
                 raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
             if 200 <= response.status_code < 300:

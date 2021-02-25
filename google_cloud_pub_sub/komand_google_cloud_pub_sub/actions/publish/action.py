@@ -1,29 +1,27 @@
 import komand
 from .schema import PublishInput, PublishOutput
+
 # Custom imports below
 import time
 from google.cloud import pubsub
 
 
 class Publish(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='publish',
-                description='Publish',
-                input=PublishInput(),
-                output=PublishOutput())
+            name="publish", description="Publish", input=PublishInput(), output=PublishOutput()
+        )
 
     def run(self, params={}):
-        topic = params.get('topic')
-        message = params.get('message')
+        topic = params.get("topic")
+        message = params.get("message")
 
         project_id = self.connection.project
-        if params.get('project_id'):
-            project_id = params.get('project_id')
+        if params.get("project_id"):
+            project_id = params.get("project_id")
 
         message_bytes = str.encode(message)
-        topic_name = 'projects/{project_id}/topics/{topic}'.format(project_id=project_id, topic=topic)
+        topic_name = "projects/{project_id}/topics/{topic}".format(project_id=project_id, topic=topic)
 
         publisher = pubsub.PublisherClient(credentials=self.connection.credentials)
 
@@ -32,10 +30,10 @@ class Publish(komand.Action):
         success = results.done()
         if not success:
             error = results.exception(timeout=5)
-            self.logger.error('Error returned by google: ' + error)
-            raise Exception('There was an error when trying to publish see log for more details')
+            self.logger.error("Error returned by google: " + error)
+            raise Exception("There was an error when trying to publish see log for more details")
 
-        return {'success': success}
+        return {"success": success}
 
     def test(self):
         project_id = self.connection.project
@@ -47,4 +45,4 @@ class Publish(komand.Action):
         for x in publisher.list_topics(project_path):
             topics.append(x.name)
 
-        return {'topics': topics}
+        return {"topics": topics}

@@ -7,10 +7,11 @@ from .schema import UpdateArtifactInput, UpdateArtifactOutput
 class UpdateArtifact(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='update_artifact',
-                description='Saves changes to an artifact.',
-                input=UpdateArtifactInput(),
-                output=UpdateArtifactOutput())
+            name="update_artifact",
+            description="Saves changes to an artifact.",
+            input=UpdateArtifactInput(),
+            output=UpdateArtifactOutput(),
+        )
 
     def run(self, params={}):
         org_id = params.get("organization_id")
@@ -18,9 +19,9 @@ class UpdateArtifact(komand.Action):
         artifact_id = params.get("artifact_id")
         artifact = params.get("artifact")
 
-        url = self.connection.API_BASE + "/orgs/{org_id}/incidents/{inc_id}/artifacts/{artifact_id}".format(org_id=org_id,
-                                                                                                            inc_id=inc_id,
-                                                                                                            artifact_id=artifact_id)
+        url = self.connection.API_BASE + "/orgs/{org_id}/incidents/{inc_id}/artifacts/{artifact_id}".format(
+            org_id=org_id, inc_id=inc_id, artifact_id=artifact_id
+        )
 
         artifact = json.dumps(artifact)
 

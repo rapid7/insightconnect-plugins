@@ -5,7 +5,7 @@ indicator_types = {
     "IPv4": IndicatorTypes.IPv4,
     "IPv6": IndicatorTypes.IPv6,
     "URL": IndicatorTypes.URL,
-    "HOSTNAME": IndicatorTypes.HOSTNAME
+    "HOSTNAME": IndicatorTypes.HOSTNAME,
 }
 
 

@@ -1,18 +1,19 @@
 import insightconnect_plugin_runtime
 import time
 from .schema import UserActivityEventInput, UserActivityEventOutput, Input, Output, Component
+
 # Custom imports below
 from datetime import datetime
 
 
 class UserActivityEvent(insightconnect_plugin_runtime.Trigger):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='user_activity_event',
-                description=Component.DESCRIPTION,
-                input=UserActivityEventInput(),
-                output=UserActivityEventOutput())
+            name="user_activity_event",
+            description=Component.DESCRIPTION,
+            input=UserActivityEventInput(),
+            output=UserActivityEventOutput(),
+        )
 
     def run(self, params={}):
         activity_type = params.get(Input.ACTIVITY_TYPE, "All")

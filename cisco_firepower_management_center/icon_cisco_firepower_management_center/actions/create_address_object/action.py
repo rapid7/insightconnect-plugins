@@ -1,5 +1,6 @@
 import komand
 from .schema import CreateAddressObjectInput, CreateAddressObjectOutput, Input, Output, Component
+
 # Custom imports below
 import re
 import validators
@@ -8,24 +9,28 @@ from komand.exceptions import PluginException
 
 
 class CreateAddressObject(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='create_address_object',
-                description=Component.DESCRIPTION,
-                input=CreateAddressObjectInput(),
-                output=CreateAddressObjectOutput())
+            name="create_address_object",
+            description=Component.DESCRIPTION,
+            input=CreateAddressObjectInput(),
+            output=CreateAddressObjectOutput(),
+        )
 
     def run(self, params={}):
         address = params.get(Input.ADDRESS)
         address_type = self._determine_address_type(address)
         whitelist = params.get(Input.WHITELIST)
 
-        if params.get(Input.SKIP_PRIVATE_ADDRESS) and address_type != "fqdn" and self._check_if_private(address,
-                                                                                                        address_type):
-            raise PluginException(cause="Private address provided to be blocked.",
-                                  assistance="Skip Private Address set to true but private IP: "
-                                             f"{address} provided to be blocked.")
+        if (
+            params.get(Input.SKIP_PRIVATE_ADDRESS)
+            and address_type != "fqdn"
+            and self._check_if_private(address, address_type)
+        ):
+            raise PluginException(
+                cause="Private address provided to be blocked.",
+                assistance="Skip Private Address set to true but private IP: " f"{address} provided to be blocked.",
+            )
 
         if whitelist:
             self._match_whitelist(address, whitelist, address_type)
@@ -35,8 +40,8 @@ class CreateAddressObject(komand.Action):
                 address_type,
                 {
                     "name": params.get(Input.ADDRESS_OBJECT, params.get(Input.ADDRESS)),
-                    "value": address
-                }
+                    "value": address,
+                },
             )
         }
 
@@ -45,7 +50,8 @@ class CreateAddressObject(komand.Action):
             if address in whitelist:
                 raise PluginException(
                     cause=f"Address Object not created because the host {address} was found in the whitelist.",
-                    assistance="If you would like to block this host remove it from the whitelist and try again.")
+                    assistance="If you would like to block this host remove it from the whitelist and try again.",
+                )
             else:
                 return False
 
@@ -53,21 +59,22 @@ class CreateAddressObject(komand.Action):
         trimmed_address = re.sub(r"/32$", "", address)
 
         # if contains / we compare explicit matches, but not subnets in subnets
-        if '/' in trimmed_address:
+        if "/" in trimmed_address:
             return address in whitelist
 
         # IP is in CIDR - Give the user a log message
         for object in whitelist:
             type = self._determine_address_type(object)
             if type == "cidr":
-                net = ip_network(object, False) # False means ignore the masked bits, otherwise they need to be 0
+                net = ip_network(object, False)  # False means ignore the masked bits, otherwise they need to be 0
                 ip = ip_address(trimmed_address)
                 if ip in net:
                     raise PluginException(
                         cause=f"Address Object not created because the host {address}"
-                              f" was found in the whitelist as {object}.",
+                        f" was found in the whitelist as {object}.",
                         assistance="If you would like to block this host,"
-                                   f" remove {object} from the whitelist and try again.")
+                        f" remove {object} from the whitelist and try again.",
+                    )
 
         return False
 
@@ -90,7 +97,9 @@ class CreateAddressObject(komand.Action):
             return "ipv6"
         if validators.domain(address):
             return "fqdn"
-        if re.search('/', address):
+        if re.search("/", address):
             return "cidr"
-        raise PluginException(cause="Unknown address type provided.",
-                              assistance=f"{address} is not one of the following: IPv4, IPv6, CIDR or domain name.")
+        raise PluginException(
+            cause="Unknown address type provided.",
+            assistance=f"{address} is not one of the following: IPv4, IPv6, CIDR or domain name.",
+        )

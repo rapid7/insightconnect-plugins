@@ -1,6 +1,9 @@
-from komand_cisco_firepower.util.commands import generate_set_os_command, \
-    generate_add_host_command, generate_add_result_command, \
-    generate_set_source_command
+from komand_cisco_firepower.util.commands import (
+    generate_set_os_command,
+    generate_add_host_command,
+    generate_add_result_command,
+    generate_set_source_command,
+)
 
 
 class ScanResults(object):
@@ -9,7 +12,7 @@ class ScanResults(object):
 
     def __init__(self, max_page_size):
         self.max_page_size = max_page_size
-        self.commands = ['']
+        self.commands = [""]
         self.added_hosts = {}
 
     def add_scan_result(self, address, scan_result, operation):
@@ -17,13 +20,13 @@ class ScanResults(object):
         command = ""
         if not self.added_hosts.get(address):
             new_host = True
-            host = scan_result.get('host', {})
+            host = scan_result.get("host", {})
             command += generate_add_host_command(address)
             command += generate_set_os_command(host, address)
             self.added_hosts[address] = True
 
-        details = scan_result.get('scan_result_details', {})
-        source_id = details.get('source_id', '')
+        details = scan_result.get("scan_result_details", {})
+        source_id = details.get("source_id", "")
         command += generate_set_source_command(source_id)
         command += generate_add_result_command(details, address)
         if not new_host:

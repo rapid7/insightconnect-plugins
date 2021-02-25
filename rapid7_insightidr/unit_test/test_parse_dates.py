@@ -3,6 +3,7 @@ from komand_rapid7_insightidr.util.parse_dates import parse_dates
 from komand.exceptions import PluginException
 import time
 
+
 class TestParseDates(TestCase):
     def test_parse_dates(self):
         time_test_rel = "Absolute Time To"
@@ -36,7 +37,6 @@ class TestParseDates(TestCase):
         with self.assertRaises(PluginException):
             parse_dates("AAA", None, time_test_rel)
 
-
     def test_parse_dates_relative_time(self):
         time_test1 = "2005/10/31T17:11:09"
         time_rel = "Absolute Time To"
@@ -52,10 +52,9 @@ class TestParseDates(TestCase):
 
         time_rel = "Last 12 Hours"
         res1, _ = parse_dates(time_test1, "", time_rel)
-        expected = int(time.time()) * 1000 - 4.32e+7
+        expected = int(time.time()) * 1000 - 4.32e7
         actual = res1
         self.assertTrue(expected - 1000 < actual < expected + 1000)
-
 
     def test_parse_dates_relative_time_no_to_date_specified(self):
         time_from = "1/1/2000"

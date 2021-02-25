@@ -1,18 +1,19 @@
 import komand
 from .schema import RevokeSignInSessionsInput, RevokeSignInSessionsOutput, Input, Output, Component
+
 # Custom imports below
 import requests
 from komand.exceptions import PluginException
 
 
 class RevokeSignInSessions(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='revoke_sign_in_sessions',
-                description=Component.DESCRIPTION,
-                input=RevokeSignInSessionsInput(),
-                output=RevokeSignInSessionsOutput())
+            name="revoke_sign_in_sessions",
+            description=Component.DESCRIPTION,
+            input=RevokeSignInSessionsInput(),
+            output=RevokeSignInSessionsOutput(),
+        )
 
     def run(self, params={}):
         user_id = params.get(Input.USER_ID)
@@ -27,8 +28,10 @@ class RevokeSignInSessions(komand.Action):
         # https://docs.microsoft.com/en-us/graph/api/user-revokesigninsessions
         # Thus, I'm just going to look for invalid responses
         if result.status_code >= 400:
-            raise PluginException(cause="Revoke Sign In Sessions Failed.",
-                                  assistance="Unexpected return code from server.",
-                                  data=result.text)
+            raise PluginException(
+                cause="Revoke Sign In Sessions Failed.",
+                assistance="Unexpected return code from server.",
+                data=result.text,
+            )
 
         return {Output.SUCCESS: True}

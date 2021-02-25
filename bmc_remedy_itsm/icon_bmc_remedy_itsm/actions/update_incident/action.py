@@ -1,5 +1,6 @@
 import komand
 from .schema import UpdateIncidentInput, UpdateIncidentOutput, Input, Output, Component
+
 # Custom imports below
 from komand.exceptions import PluginException
 from icon_bmc_remedy_itsm.util import error_handling
@@ -9,15 +10,21 @@ import urllib.parse
 
 
 class UpdateIncident(komand.Action):
-    _CONVERSION_KEY = {"Status": "status", "Description": "incident_description", "Impact": "impact",
-                       "Urgency": "urgency", "Assigned Group": "assigned_group"}
+    _CONVERSION_KEY = {
+        "Status": "status",
+        "Description": "incident_description",
+        "Impact": "impact",
+        "Urgency": "urgency",
+        "Assigned Group": "assigned_group",
+    }
 
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='update_incident',
+            name="update_incident",
             description=Component.DESCRIPTION,
             input=UpdateIncidentInput(),
-            output=UpdateIncidentOutput())
+            output=UpdateIncidentOutput(),
+        )
 
     def run(self, params={}):
         handler = error_handling.ErrorHelper()
@@ -34,8 +41,7 @@ class UpdateIncident(komand.Action):
         try:
             original_incident = komand.helper.clean(original_incident_response.json())
         except json.JSONDecodeError as e:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON,
-                                  data=e)
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
 
         values = dict()
 
@@ -48,9 +54,11 @@ class UpdateIncident(komand.Action):
             for key, value in values:
                 original_incident.get("values")[key] = value
         except KeyError:
-            raise PluginException(cause="One or more of the input keys is invalid.",
-                                  assistance="Check that the input keys in 'Other Inputs' are all valid.",
-                                  data=values)
+            raise PluginException(
+                cause="One or more of the input keys is invalid.",
+                assistance="Check that the input keys in 'Other Inputs' are all valid.",
+                data=values,
+            )
 
         result = requests.put(url, headers=headers, json=original_incident)
         handler.error_handling(result)
@@ -59,13 +67,11 @@ class UpdateIncident(komand.Action):
 
         # If we made it this far, and this call fails, something really unexpected happened.
         if not original_incident_response.status_code == 200:
-            raise PluginException(preset=PluginException.Preset.SERVER_ERROR,
-                                  data=original_incident_response.text)
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=original_incident_response.text)
 
         try:
             original_incident = original_incident_response.json()
         except json.JSONDecodeError as e:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON,
-                                  data=e)
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
 
         return {Output.INCIDENT: komand.helper.clean(original_incident)}

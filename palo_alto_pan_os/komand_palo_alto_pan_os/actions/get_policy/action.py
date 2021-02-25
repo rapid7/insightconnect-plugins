@@ -1,5 +1,6 @@
 import komand
 from .schema import GetPolicyInput, GetPolicyOutput, Input, Output, Component
+
 # Custom imports below
 from komand.exceptions import PluginException
 
@@ -7,17 +8,15 @@ from komand.exceptions import PluginException
 class GetPolicy(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='get_policy',
-            description=Component.DESCRIPTION,
-            input=GetPolicyInput(),
-            output=GetPolicyOutput())
+            name="get_policy", description=Component.DESCRIPTION, input=GetPolicyInput(), output=GetPolicyOutput()
+        )
 
     def run(self, params={}):
         name = params.get(Input.POLICY_NAME)
         device_name = params.get(Input.DEVICE_NAME)
         vsys = params.get(Input.VIRTUAL_SYSTEM)
 
-        xpath = f"/config/devices/entry[@name=\"{device_name}\"]/vsys/entry[@name=\"{vsys}\"]/rulebase/security/rules/entry[@name=\"{name}\"]"
+        xpath = f'/config/devices/entry[@name="{device_name}"]/vsys/entry[@name="{vsys}"]/rulebase/security/rules/entry[@name="{name}"]'
 
         response = self.connection.request.get_(xpath)
 
@@ -28,7 +27,8 @@ class GetPolicy(komand.Action):
             raise PluginException(
                 cause="PAN OS returned an unexpected response.",
                 assistance=f"Could not find policy '{name}'. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {vsys}",
-                data=response)
+                data=response,
+            )
 
         entry_action = entry.get("action")
         if type(entry_action) is dict:
@@ -46,7 +46,7 @@ class GetPolicy(komand.Action):
             Output.APPLICATION: self.get_entries(entry, "application"),
             Output.SERVICE: self.get_entries(entry, "service"),
             Output.HIP_PROFILES: self.get_entries(entry, "hip-profiles"),
-            Output.ACTION: action
+            Output.ACTION: action,
         }
 
     def get_entries(self, entry, key):

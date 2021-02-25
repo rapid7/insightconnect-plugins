@@ -13,7 +13,6 @@ import json
 
 
 class TestDisableUser(TestCase):
-
     def test_admin_actions(self):
         log = logging.getLogger("TestLogger")
 
@@ -29,9 +28,7 @@ class TestDisableUser(TestCase):
             data = json.load(file)
             connection_params = data.get("body").get("connection")
 
-        action_params = {
-            "user_id": "user@example.com"
-        }
+        action_params = {"user_id": "user@example.com"}
 
         test_connection.connect(connection_params)
         test_disable.connection = test_connection

@@ -3,13 +3,10 @@ from .schema import ArrayMatchInput, ArrayMatchOutput, Input, Output, Component
 
 
 class ArrayMatch(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='array_match',
-            description=Component.DESCRIPTION,
-            input=ArrayMatchInput(),
-            output=ArrayMatchOutput())
+            name="array_match", description=Component.DESCRIPTION, input=ArrayMatchInput(), output=ArrayMatchOutput()
+        )
 
     def run(self, params={}):
         first_array = params.get(Input.ARRAY1)
@@ -20,10 +17,7 @@ class ArrayMatch(insightconnect_plugin_runtime.Action):
         else:
             array_match = self.intersection(first_array, second_array)
 
-        return {
-            Output.MATCHES_ARRAY: array_match,
-            Output.COUNT: len(array_match)
-        }
+        return {Output.MATCHES_ARRAY: array_match, Output.COUNT: len(array_match)}
 
     @staticmethod
     def intersection(first_array: list, second_array: list) -> list:

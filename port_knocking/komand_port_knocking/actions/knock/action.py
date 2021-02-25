@@ -14,10 +14,11 @@ class Knock(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='knock',
-                description='Knocks the specified ports on a host',
-                input=KnockInput(),
-                output=KnockOutput())
+            name="knock",
+            description="Knocks the specified ports on a host",
+            input=KnockInput(),
+            output=KnockOutput(),
+        )
 
     def run(self, params={}):
         self.__IP_HOST = params.get("host")

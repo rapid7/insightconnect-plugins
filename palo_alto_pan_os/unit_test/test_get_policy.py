@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_palo_alto_pan_os.connection.connection import Connection
@@ -32,12 +33,22 @@ class TestGetPolicy(TestCase):
             """
             self.fail(message)
 
-
         test_conn.connect(connection_params)
         test_action.connection = test_conn
         results = test_action.run(action_params)
 
-        keys = ['to', 'from', 'source', 'destination', 'source_user', 'category', 'application', 'service', 'hip_profiles', 'action']
+        keys = [
+            "to",
+            "from",
+            "source",
+            "destination",
+            "source_user",
+            "category",
+            "application",
+            "service",
+            "hip_profiles",
+            "action",
+        ]
 
         self.assertEquals(list(results.keys()), keys)
 

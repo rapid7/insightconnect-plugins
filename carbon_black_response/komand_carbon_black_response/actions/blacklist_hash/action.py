@@ -1,5 +1,6 @@
 import komand
 from .schema import BlacklistHashInput, BlacklistHashOutput
+
 # Custom imports below
 from cbapi.response.models import BannedHash
 
@@ -7,10 +8,11 @@ from cbapi.response.models import BannedHash
 class BlacklistHash(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='blacklist_hash',
-                description='Ban a hash given its MD5',
-                input=BlacklistHashInput(),
-                output=BlacklistHashOutput())
+            name="blacklist_hash",
+            description="Ban a hash given its MD5",
+            input=BlacklistHashInput(),
+            output=BlacklistHashOutput(),
+        )
 
     def run(self, params={}):
         md5 = params.get("md5_hash")
@@ -24,7 +26,7 @@ class BlacklistHash(komand.Action):
 
             return {"success": True}
         except Exception as ex:
-            self.logger.error('Failed to blacklist hash %s', ex)
+            self.logger.error("Failed to blacklist hash %s", ex)
             raise ex
 
     def test(self):

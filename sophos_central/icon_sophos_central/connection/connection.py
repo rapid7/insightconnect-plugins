@@ -1,12 +1,12 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
+
 # Custom imports below
 from ..util.api import SophosCentralAPI
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.client = None
@@ -25,17 +25,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
             params.get(Input.CLIENT_SECRET).get("secretKey"),
             params.get(Input.TENANT_ID, {}).get("secretKey"),
             self.meta.version,
-            self.logger
+            self.logger,
         )
 
     def test(self):
         try:
-            return {
-                "success": self.client.whoami(self.client.get_access_token())["id"] is not None
-            }
+            return {"success": self.client.whoami(self.client.get_access_token())["id"] is not None}
         except Exception as e:
             raise ConnectionTestException(
-                cause="Server error.",
-                assistance="Please contact support for assistance",
-                data=e
+                cause="Server error.", assistance="Please contact support for assistance", data=e
             )

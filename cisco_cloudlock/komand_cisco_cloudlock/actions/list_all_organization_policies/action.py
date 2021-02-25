@@ -1,5 +1,6 @@
 import komand
 from .schema import ListAllOrganizationPoliciesInput, ListAllOrganizationPoliciesOutput
+
 # Custom imports below
 import requests
 
@@ -10,10 +11,11 @@ class ListAllOrganizationPolicies(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='list_all_organization_policies',
-                description='Lists all of an organizations configured policies',
-                input=ListAllOrganizationPoliciesInput(),
-                output=ListAllOrganizationPoliciesOutput())
+            name="list_all_organization_policies",
+            description="Lists all of an organizations configured policies",
+            input=ListAllOrganizationPoliciesInput(),
+            output=ListAllOrganizationPoliciesOutput(),
+        )
 
     def run(self, params={}):
         input_state = params.get("state")

@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
+
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
@@ -7,7 +8,6 @@ from icon_microsoft_intune.util.api import MicrosoftIntuneAPI
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.api = None
@@ -22,7 +22,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             client_secret=params.get(Input.CLIENT_SECRET),
             tenant_id=params.get(Input.TENANT_ID),
             api_url=f"{url}/v1.0/",
-            logger=self.logger
+            logger=self.logger,
         )
 
         self.api.refresh_access_token()

@@ -1,5 +1,6 @@
 import komand
 from .schema import SubmitUrlInput, SubmitUrlOutput
+
 # Custom imports below
 from komand.exceptions import PluginException
 import requests
@@ -7,19 +8,19 @@ import xmltodict
 
 
 class SubmitUrl(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='submit_url',
-                description='Submit a URL for analysis',
-                input=SubmitUrlInput(),
-                output=SubmitUrlOutput())
+            name="submit_url",
+            description="Submit a URL for analysis",
+            input=SubmitUrlInput(),
+            output=SubmitUrlOutput(),
+        )
 
     def run(self, params={}):
         """TODO: Run action"""
-        endpoint =  "/publicapi/submit/link"
+        endpoint = "/publicapi/submit/link"
         client = self.connection.client
-        url = 'https://{}{}'.format(self.connection.host, endpoint)
+        url = "https://{}{}".format(self.connection.host, endpoint)
 
         # Formatted with None and tuples so requests sends form-data properly
         # => Send data, 299 bytes (0x12b)
@@ -35,8 +36,8 @@ class SubmitUrl(komand.Action):
         # ...
 
         req = {
-            'apikey': (None, self.connection.api_key),
-            'link': (None, params.get('url')),
+            "apikey": (None, self.connection.api_key),
+            "link": (None, params.get("url")),
         }
 
         try:
@@ -44,37 +45,43 @@ class SubmitUrl(komand.Action):
             o = xmltodict.parse(r.content)
             out = dict(o)
 
-            #self.logger.info(out)
-            #{
+            # self.logger.info(out)
+            # {
             #   "submission": {
             #     "error": {
             #       "error-message": "'Invalid webpage type url, url should start with http or https'"
             #     }
             #   }
-            #}
-            if 'submission' in out:
-                if 'error' in out['submission']:
-                    if 'error-message' in out['submission']['error']:
-                      error = out['submission']['error']['error-message']
-                      raise PluginException(cause='Received an error response from Wildfire.', assistance=f'{error}.')
+            # }
+            if "submission" in out:
+                if "error" in out["submission"]:
+                    if "error-message" in out["submission"]["error"]:
+                        error = out["submission"]["error"]["error-message"]
+                        raise PluginException(
+                            cause="Received an error response from Wildfire.",
+                            assistance=f"{error}.",
+                        )
 
             # A different response occurs sometimes
             # {'error': OrderedDict([('error-message', "'Invalid webpage type url, url should start with http or https'")])}
-            if 'error' in out:
-                if 'error-message' in out['error']:
-                  error = out['error']['error-message']
-                  raise PluginException(cause='Received an error response from Wildfire.', assistance=f'{error}.')
+            if "error" in out:
+                if "error-message" in out["error"]:
+                    error = out["error"]["error-message"]
+                    raise PluginException(cause="Received an error response from Wildfire.", assistance=f"{error}.")
                 else:
-                  self.logger.info(out)
-                  raise PluginException(cause='Received an error response from Wildfire.', assistance="Check the log output for more details.")
+                    self.logger.info(out)
+                    raise PluginException(
+                        cause="Received an error response from Wildfire.",
+                        assistance="Check the log output for more details.",
+                    )
 
-            out = dict(o['wildfire']['submit-link-info'])
+            out = dict(o["wildfire"]["submit-link-info"])
         except:
             raise
 
-        return { 'submission': out }
+        return {"submission": out}
 
     def test(self):
         """TODO: Test action"""
         client = self.connection.client
-        return { 'submission': { 'url': 'Test', 'sha256': 'Test', 'md5': 'Test' } }
+        return {"submission": {"url": "Test", "sha256": "Test", "md5": "Test"}}

@@ -1,12 +1,12 @@
 import komand
 from .schema import ListInactiveAssetsInput, ListInactiveAssetsOutput, Input, Output, Component
+
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
 class ListInactiveAssets(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
             name='list_inactive_assets',
@@ -28,14 +28,8 @@ class ListInactiveAssets(komand.Action):
             size = 1000
 
         payload = {
-            "filters": [
-                {
-                    "field": "last-scan-date",
-                    "operator": "is-earlier-than",
-                    "value": days_ago
-                }
-            ],
-            "match": "all"
+            "filters": [{"field": "last-scan-date", "operator": "is-earlier-than", "value": days_ago}],
+            "match": "all",
         }
         assets = resource_helper.paged_resource_request(
             endpoint=endpoint,
@@ -43,6 +37,7 @@ class ListInactiveAssets(komand.Action):
             payload=payload,
             number_of_results=size
         )
+        
         return {
             Output.ASSETS: assets
         }

@@ -1,7 +1,7 @@
 import sys
 import os
 
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_microsoft_atp.connection.connection import Connection
@@ -54,7 +54,7 @@ class TestGetMachineAction(TestCase):
         self.fail("Unimplemented test case")
 
         # TODO: The following assert should be updated to look for data from your action
-        # For example: self.assertEquals({"success": True}, results) 
+        # For example: self.assertEquals({"success": True}, results)
         self.assertEquals({}, results)
 
     def test_get_machine_action(self):

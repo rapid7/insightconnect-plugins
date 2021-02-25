@@ -4,7 +4,7 @@ from komand_box.actions.user_info_from_login import UserInfoFromLogin
 import logging
 
 
-class MockUser():
+class MockUser:
     def __init__(self):
         self.address = "FAKE"
         self.avatar_url = "FAKE"
@@ -18,18 +18,18 @@ class MockUser():
         self.timezone = "FAKE"
 
 
-class MockBoxConnection():
+class MockBoxConnection:
     def __init__(self):
         pass
 
     def users(self, filter_term):
-        if filter_term == 'randomtestuser@somerandomdomain.com':
+        if filter_term == "randomtestuser@somerandomdomain.com":
             return [MockUser()]
         else:
             return None
 
 
-class MockConnection():
+class MockConnection:
     def __init__(self):
         self.box_connection = MockBoxConnection()
 
@@ -47,8 +47,8 @@ class TestUserInfoFromLogin(TestCase):
 
         actual = user_info.run({"login": "randomtestuser@somerandomdomain.com"})
 
-        self.assertEqual('8830457340', actual.get('id'))
-        self.assertEqual('randomtestuser@somerandomdomain.com', actual.get('login'))
+        self.assertEqual("8830457340", actual.get("id"))
+        self.assertEqual("randomtestuser@somerandomdomain.com", actual.get("login"))
 
     def test_get_user_info_not_found(self):
         log = logging.getLogger("Test Logger")
@@ -59,5 +59,3 @@ class TestUserInfoFromLogin(TestCase):
 
         with self.assertRaises(PluginException):
             user_info.run({"login": "dontfindme@somefakedomain.com"})
-
-

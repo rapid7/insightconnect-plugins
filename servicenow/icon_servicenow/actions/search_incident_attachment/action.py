@@ -1,17 +1,24 @@
 import insightconnect_plugin_runtime
-from .schema import SearchIncidentAttachmentInput, SearchIncidentAttachmentOutput, Input, Output, Component
+from .schema import (
+    SearchIncidentAttachmentInput,
+    SearchIncidentAttachmentOutput,
+    Input,
+    Output,
+    Component,
+)
+
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class SearchIncidentAttachment(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='search_incident_attachment',
-                description=Component.DESCRIPTION,
-                input=SearchIncidentAttachmentInput(),
-                output=SearchIncidentAttachmentOutput())
+            name="search_incident_attachment",
+            description=Component.DESCRIPTION,
+            input=SearchIncidentAttachmentInput(),
+            output=SearchIncidentAttachmentOutput(),
+        )
 
     def run(self, params={}):
         url = self.connection.attachment_url
@@ -23,11 +30,8 @@ class SearchIncidentAttachment(insightconnect_plugin_runtime.Action):
         try:
             results = response["resource"].get("result")
         except KeyError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN,
-                                  data=response.text) from e
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text) from e
 
         attachment_ids = [result.get("sys_id") for result in results]
 
-        return {
-            Output.ATTACHMENT_IDS: attachment_ids
-        }
+        return {Output.ATTACHMENT_IDS: attachment_ids}

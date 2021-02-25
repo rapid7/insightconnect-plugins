@@ -755,7 +755,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.0.0 - Added Relative Time options to Advanced Query actions 
+* 3.0.0 - Added Relative Time options to Advanced Query actions | Fix issue where a query with no results would crash the plugin
 * 2.1.0 - New action Close Investigations in Bulk
 * 2.0.1 - Fix issue where long-running queries could crash the plugin
 * 2.0.0 - Refactor and split Advanced Query into two new actions Advanced Query on Log and Advanced Query on Log Set

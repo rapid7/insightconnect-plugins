@@ -1,5 +1,6 @@
 import komand
 from .schema import UploadInput, UploadOutput
+
 # Custom imports below
 import requests
 import base64
@@ -15,10 +16,11 @@ class Upload(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='upload',
-                description='Upload PCAP file',
-                input=UploadInput(),
-                output=UploadOutput())
+            name="upload",
+            description="Upload PCAP file",
+            input=UploadInput(),
+            output=UploadOutput(),
+        )
 
     def run(self, params={}):
         pcap_bytes = params.get("pcap")
@@ -49,7 +51,7 @@ class Upload(komand.Action):
     def create_search_url(self, response_text):
         """Uses regex to capture components from response text to create appropriate search URL."""
         re1 = re.compile("(?<=q=)(.*)(?=&)")
-        re2 = re.compile("(?<=&pmd5=)(.*)(?=\">)")
+        re2 = re.compile('(?<=&pmd5=)(.*)(?=">)')
 
         part_one = re1.search(response_text).group(1)
         part_two = re2.search(response_text).group(1)
@@ -64,7 +66,6 @@ class Upload(komand.Action):
             return response.json()
         else:
             raise Exception(self.__REQ_FAIL_TEXT)
-
 
     def test(self):
         """TODO: Test action"""

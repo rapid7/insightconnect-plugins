@@ -1,15 +1,17 @@
 import komand
 from .schema import AddEventInput, AddEventOutput
+
 # Custom imports below
 
 
 class AddEvent(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='add_event',
-                description='Posts a malware event for processing and optionally adding to a customers domain lists',
-                input=AddEventInput(),
-                output=AddEventOutput())
+            name="add_event",
+            description="Posts a malware event for processing and optionally adding to a customers domain lists",
+            input=AddEventInput(),
+            output=AddEventOutput(),
+        )
 
     def run(self, params={}):
         domains = params.get("events")
@@ -17,12 +19,12 @@ class AddEvent(komand.Action):
 
         for event in domains:
             dstUrl = event.get("dstURL")
-            event['dstUrl'] = dstUrl
-            del event['dstURL']
+            event["dstUrl"] = dstUrl
+            del event["dstURL"]
 
             ID = event.get("ID")
-            event['deviceId'] = ID
-            del event['ID']
+            event["deviceId"] = ID
+            del event["ID"]
 
             events.append(event)
 

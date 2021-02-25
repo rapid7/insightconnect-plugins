@@ -41,113 +41,64 @@ class SophosCentralAPI:
         return endpoint_id
 
     def tamper_status(self, endpoint_id):
-        return self._make_request(
-            "GET",
-            f"/endpoint/v1/endpoints/{endpoint_id}/tamper-protection",
-            "Tenant"
-        )
+        return self._make_request("GET", f"/endpoint/v1/endpoints/{endpoint_id}/tamper-protection", "Tenant")
 
     def get_blacklists(self, page: int = 1):
         return self._make_request(
             "GET",
             "/endpoint/v1/settings/blocked-items",
             "Tenant",
-            params={
-                "page": page,
-                "pageSize": 100,
-                "pageTotal": True
-            }
+            params={"page": page, "pageSize": 100, "pageTotal": True},
         )
 
     def unblacklist(self, uuid: str):
-        return self._make_request(
-            "DELETE",
-            f"/endpoint/v1/settings/blocked-items/{uuid}",
-            "Tenant"
-        )
+        return self._make_request("DELETE", f"/endpoint/v1/settings/blocked-items/{uuid}", "Tenant")
 
     def blacklist(self, hash: str, description: str):
         return self._make_request(
             "POST",
             "/endpoint/v1/settings/blocked-items",
             "Tenant",
-            json_data={
-                "comment": description,
-                "properties": {
-                    "sha256": hash
-                },
-                "type": "sha256"
-            }
+            json_data={"comment": description, "properties": {"sha256": hash}, "type": "sha256"},
         )
 
     def antivirus_scan(self, uuid: str):
-        return self._make_request(
-            "POST",
-            f"/endpoint/v1/endpoints/{uuid}/scans",
-            "Tenant",
-            json_data={}
-        )
+        return self._make_request("POST", f"/endpoint/v1/endpoints/{uuid}/scans", "Tenant", json_data={})
 
     def get_alerts(self, since: str = None, key: str = None):
-        params = {
-            "pageTotal": True
-        }
+        params = {"pageTotal": True}
         if since:
-            params = {
-                "from": since
-            }
+            params = {"from": since}
         if key:
-            params = {
-                "pageFromKey": key
-            }
-        return self._make_request(
-            "GET",
-            "/common/v1/alerts",
-            "Tenant",
-            params=params
-        )
+            params = {"pageFromKey": key}
+        return self._make_request("GET", "/common/v1/alerts", "Tenant", params=params)
 
     def get_endpoints(self, since=None, page_key=None):
-        params = {
-            "pageTotal": True
-        }
+        params = {"pageTotal": True}
         if since:
-            params = {
-                "lastSeenAfter": since
-            }
+            params = {"lastSeenAfter": since}
         if page_key:
-            params = {
-                "pageKey": page_key
-            }
-        return self._make_request(
-            "GET",
-            "/endpoint/v1/endpoints",
-            "Tenant",
-            params=params
-        )
+            params = {"pageKey": page_key}
+        return self._make_request("GET", "/endpoint/v1/endpoints", "Tenant", params=params)
 
     def whoami(self, access_token):
         return self._call_api(
             "GET",
             "https://api.central.sophos.com/whoami/v1",
-            headers={
-                "Authorization": f"Bearer {access_token}"
-            }
+            headers={"Authorization": f"Bearer {access_token}"},
         )
 
     def get_access_token(self):
         token = self._call_api(
             method="POST",
             url="https://id.sophos.com/api/v2/oauth2/token",
-            headers={
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
+            headers={"Content-Type": "application/x-www-form-urlencoded"},
             data={
                 "grant_type": "client_credentials",
                 "client_id": self.client_id,
                 "client_secret": self.client_secret,
-                "scope": "token"
-            }
+                "scope": "token",
+            },
         )
 
         return token.get("access_token")
@@ -167,10 +118,11 @@ class SophosCentralAPI:
             url = self.url
 
         return self._call_api(
-            method, f"{url}{path}", params, json_data, headers={
-                "Authorization": f"Bearer {access_token}",
-                f"X-{key_type}-ID": id_
-            }
+            method,
+            f"{url}{path}",
+            params,
+            json_data,
+            headers={"Authorization": f"Bearer {access_token}", f"X-{key_type}-ID": id_},
         )
 
     def _call_api(self, method, url, params=None, json_data=None, data=None, headers=None):
@@ -180,47 +132,41 @@ class SophosCentralAPI:
         headers["User-Agent"] = f"Rapid7 InsightConnect, Sophos Central:{self.version}"
 
         try:
-            response = requests.request(
-                method,
-                url,
-                json=json_data,
-                data=data,
-                params=params,
-                headers=headers
-            )
+            response = requests.request(method, url, json=json_data, data=data, params=params, headers=headers)
 
             if response.status_code == 400:
-                raise PluginException(cause="Bad request.",
-                                      assistance="The API client sent a malformed request.")
+                raise PluginException(cause="Bad request.", assistance="The API client sent a malformed request.")
             if response.status_code == 401:
-                raise PluginException(cause="Unauthorized.",
-                                      assistance="The client needs to authenticate before making the API call. "
-                                                 "Either your credentials are invalid or blacklisted,"
-                                                 " or your JWT authorization token has expired.")
+                raise PluginException(
+                    cause="Unauthorized.",
+                    assistance="The client needs to authenticate before making the API call. "
+                    "Either your credentials are invalid or blacklisted,"
+                    " or your JWT authorization token has expired.",
+                )
             if response.status_code == 403:
                 raise PluginException(
                     cause="Forbidden.",
                     assistance="The client has authenticated but doesn't have permission "
-                               "to perform the operation via the API."
+                    "to perform the operation via the API.",
                 )
             if response.status_code == 404:
                 raise PluginException(
                     cause="Not found.",
                     assistance="The requested resource wasn't found. The resource ID provided may be invalid, "
-                               "or the resource may have been deleted, or is no longer addressable."
+                    "or the resource may have been deleted, or is no longer addressable.",
                 )
             if response.status_code == 409:
                 raise PluginException(
                     cause="Conflict.",
                     assistance="Request made conflicts with an existing resource. Please check the API documentation "
-                               "or contact Support."
+                    "or contact Support.",
                 )
             if response.status_code == 451:
                 raise PluginException(
                     cause="Unavailable for Legal Reasons",
                     assistance="An example of a legal reason we can't serve an API is that the caller is located "
-                               "in a country where United States export control restrictions apply, "
-                               "and we are required by law not to handle such API calls."
+                    "in a country where United States export control restrictions apply, "
+                    "and we are required by law not to handle such API calls.",
                 )
             if response.status_code >= 500:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR)

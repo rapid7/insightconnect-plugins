@@ -1,5 +1,6 @@
 import komand
 from .schema import ListAllSuspiciousIPEntriesInput, ListAllSuspiciousIPEntriesOutput
+
 # Custom imports below
 import requests
 
@@ -9,10 +10,11 @@ class ListAllSuspiciousIPEntries(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='list_all_suspicious_IP_entries',
-                description='Lists all suspicious IP entries',
-                input=ListAllSuspiciousIPEntriesInput(),
-                output=ListAllSuspiciousIPEntriesOutput())
+            name="list_all_suspicious_IP_entries",
+            description="Lists all suspicious IP entries",
+            input=ListAllSuspiciousIPEntriesInput(),
+            output=ListAllSuspiciousIPEntriesOutput(),
+        )
 
     def run(self, params={}):
         name = params.get("name")

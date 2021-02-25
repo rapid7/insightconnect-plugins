@@ -9,7 +9,16 @@ class McAfeeRequest:
         self.verify_ssl = verify_ssl
         self.logger = logger
 
-    def make_json_request(self, method, path, params=None, data=None, headers=None, files=None, full_response: bool = False):
+    def make_json_request(
+        self,
+        method,
+        path,
+        params=None,
+        data=None,
+        headers=None,
+        files=None,
+        full_response: bool = False,
+    ):
         response = {"text": ""}
 
         try:
@@ -20,7 +29,7 @@ class McAfeeRequest:
                 params=params,
                 files=files,
                 headers=headers,
-                verify=self.verify_ssl
+                verify=self.verify_ssl,
             )
 
             if response.status_code == 403:

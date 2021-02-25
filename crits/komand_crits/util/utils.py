@@ -1,6 +1,7 @@
 import re
 from io import StringIO
 
+
 def file_from_params(filename, content):
     return filename, StringIO(content)
 
@@ -10,9 +11,9 @@ def slugify(name):
 
 
 def make_response(response):
-    message = response.get('message')
+    message = response.get("message")
     if message and type(message) == list:
         message = ", ".join(message)
-        response['message'] = message
+        response["message"] = message
 
     return response

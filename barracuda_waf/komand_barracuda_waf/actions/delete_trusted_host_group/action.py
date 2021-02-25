@@ -3,13 +3,13 @@ from .schema import DeleteTrustedHostGroupInput, DeleteTrustedHostGroupOutput
 
 
 class DeleteTrustedHostGroup(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='delete_trusted_host_group',
-                description='Deletes the given service group',
-                input=DeleteTrustedHostGroupInput(),
-                output=DeleteTrustedHostGroupOutput())
+            name="delete_trusted_host_group",
+            description="Deletes the given service group",
+            input=DeleteTrustedHostGroupInput(),
+            output=DeleteTrustedHostGroupOutput(),
+        )
 
     def run(self, params={}):
         action = "trusted_host_groups/"

@@ -8,13 +8,13 @@ from datetime import timedelta
 
 
 class Blacklist(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='blacklist',
+            name="blacklist",
             description=Component.DESCRIPTION,
             input=BlacklistInput(),
-            output=BlacklistOutput())
+            output=BlacklistOutput(),
+        )
 
     def run(self, params={}):
         self.logger.info("Running...")
@@ -32,10 +32,7 @@ class Blacklist(insightconnect_plugin_runtime.Action):
             "value"
         )
         if len(indicators) == 0:
-            raise PluginException(
-                cause='Did not find indicator to delete.',
-                assistance='Indicator not deleted.'
-            )
+            raise PluginException(cause="Did not find indicator to delete.", assistance="Indicator not deleted.")
         if len(indicators) > 1:
             self.logger.info("Multiple indicators found. We will only act upon the first match.")
 
@@ -74,7 +71,7 @@ class Blacklist(insightconnect_plugin_runtime.Action):
             "expirationTime": expiration_time,
             "severity": params.get(Input.SEVERITY, "High"),
             "recommendedActions": params.get(Input.RECOMMENDED_ACTIONS),
-            "rbacGroupNames": params.get(Input.RBAC_GROUP_NAMES, [])
+            "rbacGroupNames": params.get(Input.RBAC_GROUP_NAMES, []),
         }
 
     @staticmethod
@@ -92,9 +89,6 @@ class Blacklist(insightconnect_plugin_runtime.Action):
         elif validators.md5(indicator):
             raise PluginException(
                 cause="MD5 hash is not supported.",
-                assistance="API supported only SHA256 and SHA1. Please check provided hash and try again."
+                assistance="API supported only SHA256 and SHA1. Please check provided hash and try again.",
             )
-        raise PluginException(
-            cause='Could not determine type of indicator.',
-            assistance='Indicator not added.'
-        )
+        raise PluginException(cause="Could not determine type of indicator.", assistance="Indicator not added.")

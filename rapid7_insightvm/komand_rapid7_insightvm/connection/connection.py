@@ -1,5 +1,6 @@
 import komand
 from .schema import ConnectionSchema, Input
+
 # Custom imports below
 import urllib3
 from requests import Session
@@ -11,7 +12,6 @@ from komand_rapid7_insightvm.util import endpoints
 
 
 class Connection(komand.Connection):
-
     def __init__(self):
         self.session = None
         self.console_url = None
@@ -19,13 +19,12 @@ class Connection(komand.Connection):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
     def connect(self, params):
-        username = params.get(Input.CREDENTIALS).get('username')
-        password = params.get(Input.CREDENTIALS).get('password')
+        username = params.get(Input.CREDENTIALS).get("username")
+        password = params.get(Input.CREDENTIALS).get("password")
         self.console_url = params.get(Input.URL)
 
         self.session = Session()
-        self.session.auth = HTTPBasicAuth(username=username,
-                                          password=password)
+        self.session.auth = HTTPBasicAuth(username=username, password=password)
         self.async_connection = async_requests.AsyncRequests(username, password)
 
         # Suppress insecure request messages
@@ -33,6 +32,7 @@ class Connection(komand.Connection):
 
     def test(self):
         from komand.exceptions import ConnectionTestException
+
         """
         Tests connectivity to the InsightVM Console via administrative info endpoint
         :param session: Requests session populated with basic auth credentials
@@ -54,7 +54,7 @@ class Connection(komand.Connection):
         else:
             status = response.status_code in [200, 201]
             if status:
-                test_result = Result(status, 'Success')
+                test_result = Result(status, "Success")
             else:
                 test_result = Result(status, response.json()["message"])
 

@@ -1,5 +1,6 @@
 import komand
 from .schema import SearchIncidentInput, SearchIncidentOutput, Input, Output, Component
+
 # Custom imports below
 from komand.exceptions import PluginException
 from icon_bmc_remedy_itsm.util import error_handling
@@ -9,13 +10,13 @@ import urllib.parse
 
 
 class SearchIncident(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='search_incident',
-                description=Component.DESCRIPTION,
-                input=SearchIncidentInput(),
-                output=SearchIncidentOutput())
+            name="search_incident",
+            description=Component.DESCRIPTION,
+            input=SearchIncidentInput(),
+            output=SearchIncidentOutput(),
+        )
 
     def run(self, params={}):
         handler = error_handling.ErrorHelper()
@@ -31,13 +32,14 @@ class SearchIncident(komand.Action):
         try:
             incident = result.json()
         except json.JSONDecodeError as e:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON,
-                                  data=e)
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
         try:
             incident_list = incident["entries"]
         except KeyError:
-            raise PluginException(cause='The response did not contain a correctly formatted list.',
-                                  assistance="Please contact support with the status code and error information.",
-                                  data=incident)
+            raise PluginException(
+                cause="The response did not contain a correctly formatted list.",
+                assistance="Please contact support with the status code and error information.",
+                data=incident,
+            )
 
         return {Output.ENTRIES: komand.helper.clean(incident_list)}

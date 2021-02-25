@@ -1,5 +1,6 @@
 import komand
 from .schema import ConnectionSchema
+
 # Custom imports below
 import base64
 import re
@@ -13,19 +14,18 @@ from ..util.utils import first
 
 
 class Connection(komand.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
-    ONE_UINT = b'!I'
-    TWO_UINT = b'!II'
+    ONE_UINT = b"!I"
+    TWO_UINT = b"!II"
 
     def connect(self, params={}):
-        self.__p12 = params.get('certificate')
-        self.__p12_pwd = params.get('certificate_passphrase').get('secretKey')
-        self.__cert_file = 'cert.pem'
-        self.__host = params.get('server')
-        self.__port = params.get('port')
+        self.__p12 = params.get("certificate")
+        self.__p12_pwd = params.get("certificate_passphrase").get("secretKey")
+        self.__cert_file = "cert.pem"
+        self.__host = params.get("server")
+        self.__port = params.get("port")
 
         self.logger.info("Connect: Connecting..")
         self.__generate_certificate()
@@ -64,12 +64,12 @@ class Connection(komand.Connection):
         self.logger.info("Connect: Reading from socket...")
         msg_details = self.__get_message_details()
         data = self.__connection.recv(msg_details.msg_length)
-        data = data.decode('UTF-8')
+        data = data.decode("UTF-8")
         return data
 
     def test_connection(self):
         if self.__connection._closed:
-            raise Exception('Not connected.')
+            raise Exception("Not connected.")
         return {}
 
     def close(self):
@@ -77,13 +77,9 @@ class Connection(komand.Connection):
 
     def __send_data(self, msg_details):
         # Send the data type and size
-        data_struct = struct.pack(
-            self.TWO_UINT, msg_details.msg_type, msg_details.msg_length
-        )
+        data_struct = struct.pack(self.TWO_UINT, msg_details.msg_type, msg_details.msg_length)
         self.__connection.write(data_struct)
-        self.logger.debug(
-            "Sending {} bytes to socket".format(msg_details.msg_length)
-        )
+        self.logger.debug("Sending {} bytes to socket".format(msg_details.msg_length))
         self.__connection.send(msg_details.data.encode())
         self.logger.debug("Data sent.")
         response = self.read()
@@ -116,21 +112,18 @@ class Connection(komand.Connection):
         msg_value = self.__custom_unpack(data[4:8], self.ONE_UINT)
         msg_value = first(msg_value)
 
-        self.logger.debug(
-            "Got message details for type {}, and size {}"
-                .format(msg_type, msg_value)
-        )
+        self.logger.debug("Got message details for type {}, and size {}".format(msg_type, msg_value))
         return MessageDetails(msg_type, msg_value)
 
     def __generate_certificate(self):
-        self.logger.debug('Connect: Generating pem certificate.')
+        self.logger.debug("Connect: Generating pem certificate.")
         self.__p12 = base64.b64decode(self.__p12)
         self.__p12 = crypto.load_pkcs12(self.__p12, self.__p12_pwd)
         file_type = crypto.FILETYPE_PEM
         cert = crypto.dump_certificate(file_type, self.__p12.get_certificate())
         key = crypto.dump_privatekey(file_type, self.__p12.get_privatekey())
 
-        with open(self.__cert_file, 'wb') as f:
+        with open(self.__cert_file, "wb") as f:
             for certificate in (cert, key):
                 f.write(certificate)
 
@@ -140,7 +133,7 @@ class Connection(komand.Connection):
         regex = re.compile(commands_processed_message)
         error = not regex.match(response)
         commands = regex.search(response)
-        return error, int(''.join(re.findall('\d+', commands.group())))
+        return error, int("".join(re.findall("\d+", commands.group())))
 
     @staticmethod
     def __custom_unpack(data, fmt):

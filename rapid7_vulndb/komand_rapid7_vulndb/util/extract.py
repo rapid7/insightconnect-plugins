@@ -1,4 +1,5 @@
 from insightconnect_plugin_runtime.exceptions import PluginException
+
 # import all transformations
 from komand_rapid7_vulndb.util.transform import *
 from typing import Dict
@@ -23,8 +24,7 @@ class Search:
         :param query: free form text
         :return: Data as dictionary
         """
-        response = requests.get(cls.search_url, params=query,
-                                allow_redirects=False)
+        response = requests.get(cls.search_url, params=query, allow_redirects=False)
         response.raise_for_status()
         return response.json()
 
@@ -45,10 +45,13 @@ class Search:
             page = cls.execute_query(query)
             for dct in page["data"]:
                 res.append(
-                    transform(dct,
-                              pop_non_relevant_search_fields,
-                              generate_link_attr,
-                              normalize_published_field))
+                    transform(
+                        dct,
+                        pop_non_relevant_search_fields,
+                        generate_link_attr,
+                        normalize_published_field,
+                    )
+                )
         return res
 
     @classmethod
@@ -72,7 +75,7 @@ class Search:
         query = {"query": search_for}
         query = cls.set_query_db_type(query, db)
         data = cls.execute_query(query)
-        num_of_pages = data['metadata']['total_pages']
+        num_of_pages = data["metadata"]["total_pages"]
 
         # get all the pages
         return cls.paginate(query, num_of_pages)
@@ -85,9 +88,11 @@ class Content:
 
     content_url: str = "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/"
 
-    module_fields_to_serialize: [str] = ["architectures",
-                                         "references", "authors"]
-    vuln_fields_to_serialize: [str] = ["solutions", "references", ]
+    module_fields_to_serialize: [str] = ["architectures", "references", "authors"]
+    vuln_fields_to_serialize: [str] = [
+        "solutions",
+        "references",
+    ]
 
     @classmethod
     def get(cls, identifier: str) -> Dict:
@@ -120,14 +125,16 @@ class Content:
                 flatten_data_field,
                 normalize_published_field,
                 pop_non_relevant_module_fields,
-                *serialize_fields(cls.module_fields_to_serialize)]
+                *serialize_fields(cls.module_fields_to_serialize),
+            ]
         if data["content_type"] == "vulnerability":
             modifiers = [
                 flatten_data_field,
                 serialize_alternate_ids,
                 normalize_published_field,
                 pop_non_relevant_vuln_fields,
-                *serialize_fields(cls.vuln_fields_to_serialize)]
+                *serialize_fields(cls.vuln_fields_to_serialize),
+            ]
 
         # transform the data
         return transform(data, *modifiers)

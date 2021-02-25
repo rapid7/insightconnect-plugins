@@ -6,10 +6,11 @@ from .schema import DeleteSshKeyInput, DeleteSshKeyOutput
 class DeleteSshKey(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='delete_ssh_key',
-            description='Deletes an SSH key from the account',
+            name="delete_ssh_key",
+            description="Deletes an SSH key from the account",
             input=DeleteSshKeyInput(),
-            output=DeleteSshKeyOutput())
+            output=DeleteSshKeyOutput(),
+        )
 
     def run(self, params={}):
         url = "https://api.digitalocean.com/v2/account/keys/{key_id}"
@@ -22,7 +23,7 @@ class DeleteSshKey(komand.Action):
                 return {"success": True}
             else:
                 self.logger.error("Status code: %s, message: %s", response.status_code, response.json()["message"])
-                Exception('Non-204 status code received')
+                Exception("Non-204 status code received")
         except requests.exceptions.RequestException:
             self.logger.error("An unexpected error occurred during the API request")
             raise

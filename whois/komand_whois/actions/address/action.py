@@ -17,7 +17,7 @@ class Address(insightconnect_plugin_runtime.Action):
             "updated": "last-modified",
             "address": "address",
             "country": "country",
-            "org_abuse_email": "abuse-mailbox"
+            "org_abuse_email": "abuse-mailbox",
         },
         ARIN: {
             "netname": "NetName",
@@ -64,21 +64,22 @@ class Address(insightconnect_plugin_runtime.Action):
             "country": "country",
             "org_abuse_email": "e-mail",
             "org_abuse_phone": "phone",
-        }
+        },
     }
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name="address",
-                description="Whois IP Lookup",
-                input=AddressInput(),
-                output=AddressOutput())
+            name="address",
+            description="Whois IP Lookup",
+            input=AddressInput(),
+            output=AddressOutput(),
+        )
 
     def run(self, params={}):
         binary = "/usr/bin/whois"
         cmd = "%s %s" % (binary, params.get("address"))
         stdout = insightconnect_plugin_runtime.helper.exec_command(cmd)["stdout"]
-        stdout = stdout.decode('utf-8')
+        stdout = stdout.decode("utf-8")
         results = self.parse_stdout(params.get(Input.REGISTRAR), stdout=stdout)
         results = insightconnect_plugin_runtime.helper.clean_dict(results)
 
@@ -121,8 +122,10 @@ class Address(insightconnect_plugin_runtime.Action):
 
     def _load_normalization_map(self, refer):
         if refer not in self.NORMALIZATION_MAP.keys():
-            self.logger.info("Warning: No normalization map found for: %s\n"
-                             "Please contact support with the IP address used as input to this action." % refer)
+            self.logger.info(
+                "Warning: No normalization map found for: %s\n"
+                "Please contact support with the IP address used as input to this action." % refer
+            )
         return self.NORMALIZATION_MAP[refer]
 
     def parse_stdout(self, registrar, stdout):

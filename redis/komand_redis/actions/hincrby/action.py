@@ -1,16 +1,17 @@
 import komand
 from .schema import HincrbyInput, HincrbyOutput
+
 # Custom imports below
 
 
 class Hincrby(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='hincrby',
-                description='Increments the number stored at field in the hash stored at key by increment',
-                input=HincrbyInput(),
-                output=HincrbyOutput())
+            name="hincrby",
+            description="Increments the number stored at field in the hash stored at key by increment",
+            input=HincrbyInput(),
+            output=HincrbyOutput(),
+        )
 
     def run(self, params={}):
         key = params.get("key")

@@ -14,7 +14,6 @@ from urlparse import urlparse
 
 
 class BaseLog(object):
-
     def __init__(self, admin_api, path, logname):
         self.admin_api = admin_api
         self.path = path
@@ -40,9 +39,9 @@ class BaseLog(object):
 
     def get_mintime(self):
         """
-            Updates self.mintime which is the minimum timestamp of
-            log events we want to fetch.
-            self.mintime is > all event timestamps we have already fetched.
+        Updates self.mintime which is the minimum timestamp of
+        log events we want to fetch.
+        self.mintime is > all event timestamps we have already fetched.
         """
         try:
             # Only fetch events that come after timestamp of last event
@@ -53,7 +52,7 @@ class BaseLog(object):
 
     def write_last_timestamp(self):
         """
-            Store last_timestamp so that we don't fetch the same events again
+        Store last_timestamp so that we don't fetch the same events again
         """
         if not self.events:
             # Do not update last_timestamp
@@ -61,7 +60,7 @@ class BaseLog(object):
 
         last_timestamp = 0
         for event in self.events:
-            last_timestamp = max(last_timestamp, event['timestamp'])
+            last_timestamp = max(last_timestamp, event["timestamp"])
 
         path = self.get_last_timestamp_path()
         f = open(path, "w")
@@ -93,35 +92,37 @@ class AdministratorLog(BaseLog):
         Print events in a format suitable for Splunk.
         """
         for event in self.events:
-            event['ctime'] = time.ctime(event['timestamp'])
-            event['actionlabel'] = {
-                'admin_login': "Admin Login",
-                'admin_create': "Create Admin",
-                'admin_update': "Update Admin",
-                'admin_delete': "Delete Admin",
-                'customer_update': "Update Customer",
-                'group_create': "Create Group",
-                'group_udpate': "Update Group",
-                'group_delete': "Delete Group",
-                'integration_create': "Create Integration",
-                'integration_update': "Update Integration",
-                'integration_delete': "Delete Integration",
-                'phone_create': "Create Phone",
-                'phone_update': "Update Phone",
-                'phone_delete': "Delete Phone",
-                'user_create': "Create User",
-                'user_update': "Update User",
-                'user_delete': "Delete User"}.get(
-                event['action'], event['action'])
+            event["ctime"] = time.ctime(event["timestamp"])
+            event["actionlabel"] = {
+                "admin_login": "Admin Login",
+                "admin_create": "Create Admin",
+                "admin_update": "Update Admin",
+                "admin_delete": "Delete Admin",
+                "customer_update": "Update Customer",
+                "group_create": "Create Group",
+                "group_udpate": "Update Group",
+                "group_delete": "Delete Group",
+                "integration_create": "Create Integration",
+                "integration_update": "Update Integration",
+                "integration_delete": "Delete Integration",
+                "phone_create": "Create Phone",
+                "phone_update": "Update Phone",
+                "phone_delete": "Delete Phone",
+                "user_create": "Create User",
+                "user_update": "Update User",
+                "user_delete": "Delete User",
+            }.get(event["action"], event["action"])
 
-            fmtstr = '%(timestamp)s,' \
-                     'host="%(host)s", ' \
-                     'eventtype="%(eventtype)s", ' \
-                     'username="%(username)s", ' \
-                     'action="%(actionlabel)s"'
-            if event['object']:
+            fmtstr = (
+                "%(timestamp)s,"
+                'host="%(host)s", '
+                'eventtype="%(eventtype)s", '
+                'username="%(username)s", '
+                'action="%(actionlabel)s"'
+            )
+            if event["object"]:
                 fmtstr += ', object="%(object)s"'
-            if event['description']:
+            if event["description"]:
                 fmtstr += ', description="%(description)s"'
 
             print(fmtstr % event)
@@ -141,10 +142,10 @@ class AuthenticationLog(BaseLog):
         Print events in a format suitable for Splunk.
         """
         for event in self.events:
-            event['ctime'] = time.ctime(event['timestamp'])
+            event["ctime"] = time.ctime(event["timestamp"])
 
             fmtstr = (
-                '%(timestamp)s,'
+                "%(timestamp)s,"
                 'host="%(host)s", '
                 'eventtype="%(eventtype)s", '
                 'username="%(username)s", '
@@ -173,16 +174,18 @@ class TelephonyLog(BaseLog):
         Print events in a format suitable for Splunk.
         """
         for event in self.events:
-            event['ctime'] = time.ctime(event['timestamp'])
-            event['host'] = self.admin_api.host
+            event["ctime"] = time.ctime(event["timestamp"])
+            event["host"] = self.admin_api.host
 
-            fmtstr = '%(timestamp)s,' \
-                     'host="%(host)s", ' \
-                     'eventtype="%(eventtype)s", ' \
-                     'context="%(context)s", ' \
-                     'type="%(type)s", ' \
-                     'phone="%(phone)s", ' \
-                     'credits="%(credits)s"'
+            fmtstr = (
+                "%(timestamp)s,"
+                'host="%(host)s", '
+                'eventtype="%(eventtype)s", '
+                'context="%(context)s", '
+                'type="%(type)s", '
+                'phone="%(phone)s", '
+                'credits="%(credits)s"'
+            )
 
             print(fmtstr % event)
 
@@ -194,15 +197,15 @@ def admin_api_from_config(config_path):
     """
     config = six.moves.configparser.ConfigParser()
     config.read(config_path)
-    config_d = dict(config.items('duo'))
+    config_d = dict(config.items("duo"))
     ca_certs = config_d.get("ca_certs", None)
     if ca_certs is None:
         ca_certs = config_d.get("ca", None)
 
     ret = duo_client.Admin(
-        ikey=config_d['ikey'],
-        skey=config_d['skey'],
-        host=config_d['host'],
+        ikey=config_d["ikey"],
+        skey=config_d["skey"],
+        host=config_d["host"],
         ca_certs=ca_certs,
     )
 
@@ -211,7 +214,7 @@ def admin_api_from_config(config_path):
         proxy_parsed = urlparse(http_proxy)
         proxy_host = proxy_parsed.hostname
         proxy_port = proxy_parsed.port
-        ret.set_proxy(host = proxy_host, port = proxy_port)
+        ret.set_proxy(host=proxy_host, port=proxy_port)
 
     return ret
 
@@ -237,5 +240,5 @@ def main():
         log.run()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -6,6 +6,7 @@ Duo Security Auth API reference client implementation.
 from __future__ import absolute_import
 from . import client
 
+
 class Auth(client.Client):
     def ping(self):
         """
@@ -15,7 +16,7 @@ class Auth(client.Client):
             'time': <int:UNIX timestamp>,
         }
         """
-        return self.json_api_call('GET', '/auth/v2/ping', {})
+        return self.json_api_call("GET", "/auth/v2/ping", {})
 
     def check(self):
         """
@@ -26,7 +27,7 @@ class Auth(client.Client):
             'time': <int:UNIX timestamp>,
         }
         """
-        return self.json_api_call('GET', '/auth/v2/check', {})
+        return self.json_api_call("GET", "/auth/v2/check", {})
 
     def logo(self):
         """
@@ -34,9 +35,9 @@ class Auth(client.Client):
 
         Returns the logo on success, raises RuntimeError on failure.
         """
-        response, data = self.api_call('GET', '/auth/v2/logo', {})
-        content_type = response.getheader('Content-Type')
-        if content_type and content_type.startswith('image/'):
+        response, data = self.api_call("GET", "/auth/v2/logo", {})
+        content_type = response.getheader("Content-Type")
+        if content_type and content_type.startswith("image/"):
             return data
         else:
             return self.parse_json_response(response, data)
@@ -56,16 +57,14 @@ class Auth(client.Client):
         """
         params = {}
         if username is not None:
-            params['username'] = username
+            params["username"] = username
         if valid_secs is not None:
             valid_secs = str(int(valid_secs))
-            params['valid_secs'] = valid_secs
+            params["valid_secs"] = valid_secs
         if bypass_codes is not None:
             bypass_codes = str(int(bypass_codes))
-            params['bypass_codes'] = bypass_codes
-        return self.json_api_call('POST',
-                                  '/auth/v2/enroll',
-                                  params)
+            params["bypass_codes"] = bypass_codes
+        return self.json_api_call("POST", "/auth/v2/enroll", params)
 
     def enroll_status(self, user_id, activation_code):
         """
@@ -75,19 +74,13 @@ class Auth(client.Client):
         enrolled or the code remains unclaimed.
         """
         params = {
-            'user_id': user_id,
-            'activation_code': activation_code,
+            "user_id": user_id,
+            "activation_code": activation_code,
         }
-        response = self.json_api_call('POST',
-                                      '/auth/v2/enroll_status',
-                                      params)
+        response = self.json_api_call("POST", "/auth/v2/enroll_status", params)
         return response
 
-    def preauth(self,
-                username=None,
-                user_id=None,
-                ipaddr=None,
-                trusted_device_token=None):
+    def preauth(self, username=None, user_id=None, ipaddr=None, trusted_device_token=None):
         """
         Determine if and with what factors a user may authenticate or enroll.
 
@@ -95,29 +88,29 @@ class Auth(client.Client):
         """
         params = {}
         if username is not None:
-            params['username'] = username
+            params["username"] = username
         if user_id is not None:
-            params['user_id'] = user_id
+            params["user_id"] = user_id
         if ipaddr is not None:
-            params['ipaddr'] = ipaddr
+            params["ipaddr"] = ipaddr
         if trusted_device_token is not None:
-            params['trusted_device_token'] = trusted_device_token
-        response = self.json_api_call('POST',
-                                      '/auth/v2/preauth',
-                                      params)
+            params["trusted_device_token"] = trusted_device_token
+        response = self.json_api_call("POST", "/auth/v2/preauth", params)
         return response
 
-    def auth(self,
-             factor,
-             username=None,
-             user_id=None,
-             ipaddr=None,
-             async_txn=False,
-             type=None,
-             display_username=None,
-             pushinfo=None,
-             device=None,
-             passcode=None):
+    def auth(
+        self,
+        factor,
+        username=None,
+        user_id=None,
+        ipaddr=None,
+        async_txn=False,
+        type=None,
+        display_username=None,
+        pushinfo=None,
+        device=None,
+        passcode=None,
+    ):
         """
         Perform second-factor authentication for a user.
 
@@ -137,28 +130,26 @@ class Auth(client.Client):
         * trusted_device_token: <str: device token for use with preauth>
         """
         params = {
-            'factor': factor,
-            'async': str(int(async_txn)),
+            "factor": factor,
+            "async": str(int(async_txn)),
         }
         if username is not None:
-            params['username'] = username
+            params["username"] = username
         if user_id is not None:
-            params['user_id'] = user_id
+            params["user_id"] = user_id
         if ipaddr is not None:
-            params['ipaddr'] = ipaddr
+            params["ipaddr"] = ipaddr
         if type is not None:
-            params['type'] = type
+            params["type"] = type
         if display_username is not None:
-            params['display_username'] = display_username
+            params["display_username"] = display_username
         if pushinfo is not None:
-            params['pushinfo'] = pushinfo
+            params["pushinfo"] = pushinfo
         if device is not None:
-            params['device'] = device
+            params["device"] = device
         if passcode is not None:
-            params['passcode'] = passcode
-        response = self.json_api_call('POST',
-                                      '/auth/v2/auth',
-                                      params)
+            params["passcode"] = passcode
+        response = self.json_api_call("POST", "/auth/v2/auth", params)
         return response
 
     def auth_status(self, txid):
@@ -184,19 +175,17 @@ class Auth(client.Client):
           authentication for this user during an admin-defined period.
         """
         params = {
-            'txid': txid,
+            "txid": txid,
         }
-        status = self.json_api_call('GET',
-                                    '/auth/v2/auth_status',
-                                    params)
+        status = self.json_api_call("GET", "/auth/v2/auth_status", params)
         response = {
-            'waiting': (status.get('result') == 'waiting'),
-            'success': (status.get('result') == 'allow'),
-            'status': status.get('status', ''),
-            'status_msg': status.get('status_msg', ''),
+            "waiting": (status.get("result") == "waiting"),
+            "success": (status.get("result") == "allow"),
+            "status": status.get("status", ""),
+            "status_msg": status.get("status_msg", ""),
         }
 
-        if 'trusted_device_token' in status:
-            response['trusted_device_token'] = status['trusted_device_token']
+        if "trusted_device_token" in status:
+            response["trusted_device_token"] = status["trusted_device_token"]
 
         return response

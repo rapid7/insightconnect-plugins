@@ -1,18 +1,25 @@
 import insightconnect_plugin_runtime
-from .schema import UpdateExternalDynamicListInput, UpdateExternalDynamicListOutput, Input, Output, Component
+from .schema import (
+    UpdateExternalDynamicListInput,
+    UpdateExternalDynamicListOutput,
+    Input,
+    Output,
+    Component,
+)
+
 # Custom imports below
 import validators
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class UpdateExternalDynamicList(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='update_external_dynamic_list',
-                description=Component.DESCRIPTION,
-                input=UpdateExternalDynamicListInput(),
-                output=UpdateExternalDynamicListOutput())
+            name="update_external_dynamic_list",
+            description=Component.DESCRIPTION,
+            input=UpdateExternalDynamicListInput(),
+            output=UpdateExternalDynamicListOutput(),
+        )
 
     def run(self, params={}):
         list_name = params.get(Input.LIST_NAME)
@@ -26,8 +33,10 @@ class UpdateExternalDynamicList(insightconnect_plugin_runtime.Action):
             updated_indicators_list = self._remove_indicator(indicators_list, indicator, list_name)
 
         return {
-            Output.SUCCESS: self.connection.client.update_external_dynamic_list(list_name, updated_indicators_list)
-                                .get("result") == "ok"
+            Output.SUCCESS: self.connection.client.update_external_dynamic_list(list_name, updated_indicators_list).get(
+                "result"
+            )
+            == "ok"
         }
 
     def _add_indicator(self, indicators_list: list, indicator: str, list_name: str):
@@ -36,13 +45,10 @@ class UpdateExternalDynamicList(insightconnect_plugin_runtime.Action):
             if list_indicator.get("indicator") == indicator:
                 raise PluginException(
                     cause="Duplicate indicator.",
-                    assistance=f"Indicator already exists in {list_name}."
+                    assistance=f"Indicator already exists in {list_name}.",
                 )
 
-        updated_indicators_list.append({
-            "indicator": indicator,
-            "type": self._get_indicator_type(indicator)
-        })
+        updated_indicators_list.append({"indicator": indicator, "type": self._get_indicator_type(indicator)})
 
         return updated_indicators_list
 
@@ -56,10 +62,7 @@ class UpdateExternalDynamicList(insightconnect_plugin_runtime.Action):
             updated_indicators_list.append(list_indicator)
 
         if len(updated_indicators_list) == len(indicators_list):
-            raise PluginException(
-                cause="Not exist.",
-                assistance=f"Indicator does not exist in {list_name}."
-            )
+            raise PluginException(cause="Not exist.", assistance=f"Indicator does not exist in {list_name}.")
 
         return updated_indicators_list
 

@@ -1,4 +1,3 @@
-
 def set_field_values(template, field_values, dirty=True):
     """Creates a new business object from a template using the field_values to provide key, value mapping"""
     buisness_object = []
