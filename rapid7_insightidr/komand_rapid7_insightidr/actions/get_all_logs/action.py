@@ -11,10 +11,7 @@ import json
 class GetAllLogs(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="get_all_logs",
-            description=Component.DESCRIPTION,
-            input=GetAllLogsInput(),
-            output=GetAllLogsOutput(),
+            name="get_all_logs", description=Component.DESCRIPTION, input=GetAllLogsInput(), output=GetAllLogsOutput(),
         )
 
     def run(self, params={}):
