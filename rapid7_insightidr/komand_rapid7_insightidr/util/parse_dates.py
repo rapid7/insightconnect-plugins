@@ -5,7 +5,9 @@ import time
 from typing import Optional
 
 
-def parse_dates(time_from_string: str, time_to_string: Optional[str], relative_time_from: str) -> (int, int):
+def parse_dates(
+    time_from_string: str, time_to_string: Optional[str], relative_time_from: str
+) -> (int, int):
     """
     Parse incoming dates and return them as millisecond epoch time
 
@@ -36,6 +38,8 @@ def parse_dates(time_from_string: str, time_to_string: Optional[str], relative_t
 
     except ParserError as e:
         raise PluginException(
-            cause="Could not parse given date.", assistance="The date given was in an unrecognizable format.", data=e
+            cause="Could not parse given date.",
+            assistance="The date given was in an unrecognizable format.",
+            data=e,
         )
     return time_from, time_to

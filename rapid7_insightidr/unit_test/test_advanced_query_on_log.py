@@ -24,7 +24,9 @@ class TestAdvancedQueryOnLog(TestCase):
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
         except Exception as e:
-            self.fail("Likely could not find tests in test directory. Generate and fill out samples to fix this.")
+            self.fail(
+                "Likely could not find tests in test directory. Generate and fill out samples to fix this."
+            )
         return action_params, connection_params, test_action, test_conn
 
     def test_integration_advanced_query(self):
@@ -59,7 +61,9 @@ class TestAdvancedQueryOnLog(TestCase):
         test_action.connection = test_conn
         result = test_action.get_log_id("Web Access Log")
 
-        self.assertIsNotNone(result)  # Best we can do here, the log ID will change based on the instance used.
+        self.assertIsNotNone(
+            result
+        )  # Best we can do here, the log ID will change based on the instance used.
 
     def test_get_log_fails(self):
         action_params, connection_params, test_action, test_conn = self.setup()

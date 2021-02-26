@@ -1,6 +1,12 @@
 from dateutil.parser import ParserError
 import komand
-from .schema import AdvancedQueryOnLogSetInput, AdvancedQueryOnLogSetOutput, Input, Output, Component
+from .schema import (
+    AdvancedQueryOnLogSetInput,
+    AdvancedQueryOnLogSetOutput,
+    Input,
+    Output,
+    Component,
+)
 
 # Custom imports below
 import time
@@ -41,7 +47,9 @@ class AdvancedQueryOnLogSet(komand.Action):
 
         # The IDR API will SOMETIMES return results immediately.
         # It will return results if it gets them. If not, we'll get a call back URL to work on
-        callback_url, log_entries = self.maybe_get_log_entries(log_set_id, query, time_from, time_to)
+        callback_url, log_entries = self.maybe_get_log_entries(
+            log_set_id, query, time_from, time_to
+        )
 
         if not log_entries:
             log_entries = self.get_results_from_callback(callback_url, timeout)
@@ -117,7 +125,9 @@ class AdvancedQueryOnLogSet(komand.Action):
 
         return log_entries
 
-    def maybe_get_log_entries(self, log_id: str, query: str, time_from: int, time_to: int) -> (str, [object]):
+    def maybe_get_log_entries(
+        self, log_id: str, query: str, time_from: int, time_to: int
+    ) -> (str, [object]):
         """
         Make a call to the API and ask politely for log results.
 
@@ -195,5 +205,6 @@ class AdvancedQueryOnLogSet(komand.Action):
 
         self.logger.error(f"Could not find log set with name {log_name}")
         raise PluginException(
-            cause="Could not find specified log set.", assistance=f"Could not find log set with name: {log_name}"
+            cause="Could not find specified log set.",
+            assistance=f"Could not find log set with name: {log_name}",
         )

@@ -27,7 +27,9 @@ class AddIndicatorsToAThreat(komand.Action):
         request = ResourceHelper(self.connection.session, self.logger)
         endpoint = Threats.add_indicators_to_a_threat(self.connection.url, params.pop(Input.KEY))
 
-        response = request.resource_request(endpoint, "post", params={"format": "json"}, payload=params)
+        response = request.resource_request(
+            endpoint, "post", params={"format": "json"}, payload=params
+        )
         try:
             result = json.loads(response["resource"])
         except json.decoder.JSONDecodeError:

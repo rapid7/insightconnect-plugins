@@ -1,5 +1,11 @@
 import komand
-from .schema import CloseInvestigationsInBulkInput, CloseInvestigationsInBulkOutput, Input, Output, Component
+from .schema import (
+    CloseInvestigationsInBulkInput,
+    CloseInvestigationsInBulkOutput,
+    Input,
+    Output,
+    Component,
+)
 from komand.exceptions import PluginException
 
 # Custom imports below
@@ -24,7 +30,9 @@ class CloseInvestigationsInBulk(komand.Action):
         endpoint = Investigations.close_investigations_in_bulk(self.connection.url)
 
         source = self._get_with_default(params, Input.SOURCE, "MANUAL")
-        max_investigations_to_close = self._get_with_default(params, Input.MAX_INVESTIGATIONS_TO_CLOSE, None)
+        max_investigations_to_close = self._get_with_default(
+            params, Input.MAX_INVESTIGATIONS_TO_CLOSE, None
+        )
         alert_type = self._get_with_default(params, Input.ALERT_TYPE, None)
 
         timestamp_from = params.get(Input.DATETIME_FROM)

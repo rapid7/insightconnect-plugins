@@ -32,6 +32,7 @@ class Connection(komand.Connection):
         else:
             self.logger.error(response.text)
             raise ConnectionTestException(
-                cause=f"An unknown error occurred." f" InsightIDR responded with a {response.status_code} code.",
+                cause=f"An unknown error occurred."
+                f" InsightIDR responded with a {response.status_code} code.",
                 assistance="See log for more details. If the problem persists, please contact support.",
             )
