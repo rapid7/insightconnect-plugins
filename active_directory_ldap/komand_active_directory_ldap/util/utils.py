@@ -55,14 +55,14 @@ class ADUtils:
                 dn_list[idx] = dn_list[idx].replace(non_ascii_char, escaped_char)
         # escape \\ as needed
         for idx, value in enumerate(dn_list):
-            location = value.find('\\')
+            location = value.find("\\")
             if (
                 not value[location + 1] in character_list
                 and location != -1
                 and not value[location + 1] in manual_escape
                 and not value[location + 1] == "\\"
             ):
-                dn_list[idx] = dn_list[idx][:location] + "\\\\" + dn_list[idx][location + 1:]
+                dn_list[idx] = dn_list[idx][:location] + "\\\\" + dn_list[idx][location + 1 :]
 
         # Re add the removed ,..= to dn_list strings then remove the unneeded comma
         try:
@@ -163,51 +163,43 @@ class ADUtils:
         try:
             conn.search(
                 search_base=search_base,
-                search_filter=f'(distinguishedName={ADUtils.escape_user_dn(user_dn)})',
-                attributes=['userAccountControl']
+                search_filter=f"(distinguishedName={ADUtils.escape_user_dn(user_dn)})",
+                attributes=["userAccountControl"],
             )
         except LDAPInvalidDnError as e:
-            raise PluginException(
-                cause='The server not found group.',
-                assistance='Check group name.',
-                data=e
-            )
+            raise PluginException(cause="The DN was not found.", assistance=f"The DN {user_dn} was not found.", data=e)
         except LDAPOperationsErrorResult as e:
-            raise PluginException(
-                preset=PluginException.Preset.SERVER_ERROR,
-                data=e
-            )
-        return len([d['dn'] for d in conn.response if 'dn' in d]) > 0
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=e)
+        return len([d["dn"] for d in conn.response if "dn" in d]) > 0
 
     @staticmethod
     def change_account_status(conn, dn: str, status: bool, logger: Logger) -> bool:
         dn, search_base = ADUtils.format_dn(dn)
-        logger.info(f'Escaped DN {dn}')
+        logger.info(f"Escaped DN {dn}")
 
         if not ADUtils.check_user_dn_is_valid(conn, dn, search_base):
-            logger.error(f'The DN {dn} was not found')
-            raise PluginException(
-                cause='The DN was not found.',
-                assistance=f'The DN {dn} was not found.'
-            )
+            logger.error(f"The DN {dn} was not found")
+            raise PluginException(cause="The DN was not found.", assistance=f"The DN {dn} was not found.")
         user_list = [d["attributes"] for d in conn.response if "attributes" in d]
         user_control = user_list[0]
         try:
-            account_status = user_control['userAccountControl']
+            account_status = user_control["userAccountControl"]
         except Exception as ex:
-            logger.error('The DN ' + dn + ' is not a user')
-            raise PluginException(cause='The DN is not a user',
-                                  assistance='The DN ' + dn + ' is not a user') from ex
+            logger.error("The DN " + dn + " is not a user")
+            raise PluginException(
+                cause=f"The DN {dn} is not a user object therefore it cannot be enabled or disabled.",
+                assistance="Please provide a valid user object and try again.",
+            ) from ex
         user_account_flag = 2
         if status:
             account_status = account_status & ~user_account_flag
         else:
             account_status = account_status | user_account_flag
 
-        conn.modify(dn, {'userAccountControl': [(MODIFY_REPLACE, [account_status])]})
-        if conn.result['result'] == 0:
+        conn.modify(dn, {"userAccountControl": [(MODIFY_REPLACE, [account_status])]})
+        if conn.result["result"] == 0:
             return True
 
-        output = conn.result['description']
-        logger.error(f'failed: error message {output}')
+        output = conn.result["description"]
+        logger.error(f"failed: error message {output}")
         return False
