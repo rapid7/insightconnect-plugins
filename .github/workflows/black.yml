@@ -19,4 +19,4 @@ jobs:
           
       - name: Lint
         run: |
-          black . --check
+          black . --check --verbose
