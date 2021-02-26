@@ -796,7 +796,7 @@ actions:
         description: Note text of created threat
         type: string
         required: false
-        example: InsightIDR threat
+        default: "Threat created via InsightConnect"
         default: "MyThreat"
       indicators:
         title: Indicators
