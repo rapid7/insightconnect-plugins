@@ -19,4 +19,4 @@ jobs:
           
       - name: Lint
         run: |
-          black . --check --verbose
+          black . --check --verbose --diff
