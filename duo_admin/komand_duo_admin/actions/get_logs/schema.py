@@ -8,7 +8,19 @@ class Component:
 
 
 class Input:
+    APPLICATIONS = "applications"
+    EVENT_TYPES = "event_types"
+    FACTORS = "factors"
+    GROUPS = "groups"
+    MAXTIME = "maxtime"
     MINTIME = "mintime"
+    PHONE_NUMBERS = "phone_numbers"
+    REASONS = "reasons"
+    REGISTRATION_ID = "registration_id"
+    RESULTS = "results"
+    TOKEN_ID = "token_id"
+    USERS = "users"
+    WEBAUTHNKEY = "webauthnkey"
     
 
 class Output:
@@ -21,13 +33,121 @@ class GetLogsInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "applications": {
+      "type": "array",
+      "title": "Applications",
+      "description": "List of application IDs to filter on",
+      "items": {
+        "type": "string"
+      },
+      "order": 3
+    },
+    "event_types": {
+      "type": "array",
+      "title": "Event Types",
+      "description": "List of event types(authentication, enrollment) to filter on, to include all leave this parameter empty",
+      "items": {
+        "type": "string"
+      },
+      "order": 5
+    },
+    "factors": {
+      "type": "array",
+      "title": "Factors",
+      "description": "List of factors or methods used for an authentication attempt(duo_push, phone_call, u2f_token, hardware_token, bypass_code, sms_passcode, duo_mobile_passcode, yubikey_code, passcode, digipass_go_7_token, not_available, sms_refresh, remembered_device, trusted_network) to filter on, to include all leave this parameter empty",
+      "items": {
+        "type": "string"
+      },
+      "order": 6
+    },
+    "groups": {
+      "type": "array",
+      "title": "Groups",
+      "description": "List of group IDs to filter on",
+      "items": {
+        "type": "string"
+      },
+      "order": 7
+    },
+    "maxtime": {
+      "type": "integer",
+      "title": "Maxtime",
+      "description": "Maximum time in UNIX timestamp milliseconds. Must be 13 or more digits in length and greater than mintime. To use current time leave this parameter empty",
+      "order": 2
+    },
     "mintime": {
       "type": "integer",
       "title": "Mintime",
       "description": "Minimum time in UNIX timestamp milliseconds. Must be 13 or more digits in length",
       "order": 1
+    },
+    "phone_numbers": {
+      "type": "array",
+      "title": "Phone Numbers",
+      "description": "List of phone numbers to filter on",
+      "items": {
+        "type": "string"
+      },
+      "order": 8
+    },
+    "reasons": {
+      "type": "array",
+      "title": "Reasons",
+      "description": "List of reasons associated with an authentication attempt(user_marked_fraud, deny_unenrolled_user, error, locked_out, user_disabled, user_cancelled, invalid_passcode, no_response, no_keys_pressed, call_timed_out, location_restricted, factor_restricted, platform_restricted, version_restricted, rooted_device, no_screen_lock, touch_id_disabled, no_disk_encryption, anonymous_ip, out_of_date, denied_by_policy, software_restricted, no_duo_certificate_present, user_provided_invalid_certificate, could_not_determine_if_endpoint_was_trusted, invalid_management_certificate_collection_state, no_referring_hostname_provided, invalid_referring_hostname_provided, no_web_referer_match, endpoint_failed_google_verification, endpoint_is_not_trusted, invalid_device, anomalous_push,  endpoint_is_not_in_management_system, no_activated_duo_mobile_account, allow_unenrolled_user, bypass_user, trusted_network, remembered_device, trusted_location, user_approved, valid_passcode, allowed_by_policy, allow_unenrolled_user_on_trusted_network, user_not_in_permitted_group) to filter on, to include all leave this parameter empty",
+      "items": {
+        "type": "string"
+      },
+      "order": 9
+    },
+    "registration_id": {
+      "type": "array",
+      "title": "Registration ID",
+      "description": "List of FIDO U2F token registration IDs to filter on",
+      "items": {
+        "type": "string"
+      },
+      "order": 11
+    },
+    "results": {
+      "type": "array",
+      "title": "Results",
+      "description": "List of results of an authentication attempt(success, denied, fraud) to filter on, to include all leave this parameter empty",
+      "items": {
+        "type": "string"
+      },
+      "order": 10
+    },
+    "token_id": {
+      "type": "array",
+      "title": "Token ID",
+      "description": "List of hardware OTP token IDs to filter on",
+      "items": {
+        "type": "string"
+      },
+      "order": 12
+    },
+    "users": {
+      "type": "array",
+      "title": "Users",
+      "description": "List of user IDs to filter on",
+      "items": {
+        "type": "string"
+      },
+      "order": 4
+    },
+    "webauthnkey": {
+      "type": "array",
+      "title": "WebAuthn Key",
+      "description": "List of WebAuthn security keys to filter on",
+      "items": {
+        "type": "string"
+      },
+      "order": 13
     }
-  }
+  },
+  "required": [
+    "mintime"
+  ]
 }
     """)
 
@@ -198,60 +318,80 @@ class GetLogsOutput(komand.Output):
           "title": "Access Device",
           "order": 1
         },
+        "alias": {
+          "type": "string",
+          "title": "Alias",
+          "order": 2
+        },
         "application": {
           "$ref": "#/definitions/application",
           "title": "Application",
-          "order": 2
+          "order": 3
         },
         "auth_device": {
           "$ref": "#/definitions/auth_device",
           "title": "Auth Device",
-          "order": 3
+          "order": 4
+        },
+        "email": {
+          "type": "string",
+          "title": "Email",
+          "order": 5
         },
         "event_type": {
           "type": "string",
           "title": "Event Type",
-          "order": 4
+          "order": 6
         },
         "eventtype": {
           "type": "string",
           "title": "Eventtype",
-          "order": 5
+          "order": 7
         },
         "factor": {
           "type": "string",
           "title": "Factor",
-          "order": 6
+          "order": 8
         },
         "host": {
           "type": "string",
           "title": "Host",
-          "order": 7
+          "order": 10
+        },
+        "isotimestamp": {
+          "type": "string",
+          "title": "ISO8601 Timestamp",
+          "order": 9
+        },
+        "ood_software": {
+          "type": "string",
+          "title": "OOD Software",
+          "order": 11
         },
         "reason": {
           "type": "string",
           "title": "Reason",
-          "order": 8
+          "order": 12
         },
         "result": {
           "type": "string",
           "title": "Result",
-          "order": 9
+          "order": 13
         },
         "timestamp": {
           "type": "number",
           "title": "Timestamp",
-          "order": 10
+          "order": 14
         },
         "txid": {
           "type": "string",
-          "title": "Txid",
-          "order": 11
+          "title": "Transaction ID",
+          "order": 15
         },
         "user": {
           "$ref": "#/definitions/authlog_user",
           "title": "User",
-          "order": 12
+          "order": 16
         }
       },
       "required": [

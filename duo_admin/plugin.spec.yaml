@@ -7,7 +7,7 @@ vendor: rapid7
 support: rapid7
 status: []
 description: Duo is a trusted access solution for organizations. The Duo Admin plugin for Rapid7 InsightConnect allows users to manage and administrate their Duo organization
-version: 3.3.4
+version: 3.4.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/duo_admin
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -227,39 +227,67 @@ types:
 
   authlog:
     access_device:
+      title: Access Device
       type: access_device
       required: true
+    alias:
+      title: Alias
+      type: string
+      required: false
     application:
+      title: Application
       type: application
       required: true
     auth_device:
+      title: Auth Device
       type: auth_device
       required: true
+    email:
+      title: Email
+      type: string
+      required: false
     event_type:
+      title: Event Type
       type: string
       required: false
     eventtype:
+      title: Eventtype
       type: string
       required: false
     factor:
+      title: Factor
+      type: string
+      required: false
+    isotimestamp:
+      title: ISO8601 Timestamp
       type: string
       required: false
     host:
+      title: Host
+      type: string
+      required: false
+    ood_software:
+      title: OOD Software
       type: string
       required: false
     reason:
+      title: Reason
       type: string
       required: false
     result:
+      title: Result
       type: string
       required: false
     timestamp:
+      title: Timestamp
       type: number
       required: false
     txid:
+      title: Transaction ID
       type: string
       required: false
     user:
+      title: User
       type: authlog_user
       required: true
 
@@ -429,7 +457,80 @@ actions:
         title: Mintime
         type: integer
         description: Minimum time in UNIX timestamp milliseconds. Must be 13 or more digits in length
+        required: true
+        example: 1609377288936
+      maxtime:
+        title: Maxtime
+        type: integer
+        description: Maximum time in UNIX timestamp milliseconds. Must be 13 or more digits in length and greater than mintime. To use current time leave this parameter empty
         required: false
+        example: 1611069760000
+      applications:
+        title: Applications
+        type: '[]string'
+        description: List of application IDs to filter on
+        required: false
+        example: ["DIV9C5V7T6L02DRWL4RU"]
+      users:
+        title: Users
+        type: '[]string'
+        description: List of user IDs to filter on
+        required: false
+        example: ["DUW2DKA44RFYECTU8R1O"]
+      event_types:
+        title: Event Types
+        type: '[]string'
+        description: List of event types(authentication, enrollment) to filter on, to include all leave this parameter empty
+        required: false
+        example: ["authentication"]
+      factors:
+        title: Factors
+        type: '[]string'
+        description: List of factors or methods used for an authentication attempt(duo_push, phone_call, u2f_token, hardware_token, bypass_code, sms_passcode, duo_mobile_passcode, yubikey_code, passcode, digipass_go_7_token, not_available, sms_refresh, remembered_device, trusted_network) to filter on, to include all leave this parameter empty
+        required: false
+        example: ["duo_push", "sms_passcode"]
+      groups:
+        title: Groups
+        type: '[]string'
+        description: List of group IDs to filter on
+        required: false
+        example: ["DG67EON0I1QA2ZDUF32M"]
+      phone_numbers:
+        title: Phone Numbers
+        type: '[]string'
+        description: List of phone numbers to filter on
+        required: false
+        example: ["+11111111111"]
+      reasons:
+        title: Reasons
+        type: '[]string'
+        description: List of reasons associated with an authentication attempt(user_marked_fraud, deny_unenrolled_user, error, locked_out, user_disabled, user_cancelled, invalid_passcode, no_response, no_keys_pressed, call_timed_out, location_restricted, factor_restricted, platform_restricted, version_restricted, rooted_device, no_screen_lock, touch_id_disabled, no_disk_encryption, anonymous_ip, out_of_date, denied_by_policy, software_restricted, no_duo_certificate_present, user_provided_invalid_certificate, could_not_determine_if_endpoint_was_trusted, invalid_management_certificate_collection_state, no_referring_hostname_provided, invalid_referring_hostname_provided, no_web_referer_match, endpoint_failed_google_verification, endpoint_is_not_trusted, invalid_device, anomalous_push,  endpoint_is_not_in_management_system, no_activated_duo_mobile_account, allow_unenrolled_user, bypass_user, trusted_network, remembered_device, trusted_location, user_approved, valid_passcode, allowed_by_policy, allow_unenrolled_user_on_trusted_network, user_not_in_permitted_group) to filter on, to include all leave this parameter empty
+        required: false
+        example: ["user_disabled"]
+      results:
+        title: Results
+        type: '[]string'
+        description: List of results of an authentication attempt(success, denied, fraud) to filter on, to include all leave this parameter empty
+        required: false
+        example: ["denied"]
+      registration_id:
+        title: Registration ID
+        type: '[]string'
+        description: List of FIDO U2F token registration IDs to filter on
+        required: false
+        example: ["D21RU6X1B1DF5P54B6PV"]
+      token_id:
+        title: Token ID
+        type: '[]string'
+        description: List of hardware OTP token IDs to filter on
+        required: false
+        example: ["DHIZ34ALBA2445ND4AI2"]
+      webauthnkey:
+        title: WebAuthn Key
+        type: '[]string'
+        description: List of WebAuthn security keys to filter on
+        required: false
+        example: ["WA4ED9AUVMSWUF00KES4"]
     output:
       authlogs:
         title: Logs

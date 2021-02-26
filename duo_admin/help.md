@@ -19,11 +19,16 @@ security health of their devices before they connect to the apps they use. Using
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|secret_key|credential_secret_key|None|True|API secret key|None|
-|hostname|string|None|True|Duo API hostname|None|
-|integration_key|credential_secret_key|None|True|API integration key|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|hostname|string|None|True|Duo API hostname|None|None|
+|integration_key|credential_secret_key|None|True|API integration key|None|None|
+|secret_key|credential_secret_key|None|True|API secret key|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -35,9 +40,14 @@ This action is used to retrieve user information by ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user_id|string|None|True|User ID, e.g. DUCUULF6HBMZ43IG9MBH|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|User ID, e.g. DUCUULF6HBMZ43IG9MBH|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -91,9 +101,14 @@ This action is used to retrieve information by username.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|Username, e.g. jdoe|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|username|string|None|True|Username, e.g. jdoe|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -149,9 +164,14 @@ If the user is found, the action returns one of the following statuses: active, 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user|string|None|True|The user account to check status, e.g. jdoe|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user|string|None|True|The user account to check status, e.g. jdoe|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -177,10 +197,15 @@ This action is used to modify a user by ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|status|string|None|True|New status|['active', 'disabled', 'bypass']|
-|user_id|string|None|True|User ID, e.g. DUCUULF6HBMZ43IG9MBH|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|status|string|None|True|New status|['active', 'disabled', 'bypass']|None|
+|user_id|string|None|True|User ID, e.g. DUCUULF6HBMZ43IG9MBH|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -272,9 +297,14 @@ This action is used to delete a user by ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user_id|string|None|True|User ID to remove, e.g. DUCUULF6HBMZ43IG9MBH|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|User ID to remove, e.g. DUCUULF6HBMZ43IG9MBH|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -290,9 +320,64 @@ This action is used to get auth logs, limited to past 180 days.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|mintime|integer|None|False|Minimum time in UNIX timestamp milliseconds. Must be 13 or more digits in length|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|applications|[]string|None|False|List of application IDs to filter on|None|["DIV9C5V7T6L02DRWL4RU"]|
+|event_types|[]string|None|False|List of event types(authentication, enrollment) to filter on, to include all leave this parameter empty|None|["authentication"]|
+|factors|[]string|None|False|List of factors or methods used for an authentication attempt(duo_push, phone_call, u2f_token, hardware_token, bypass_code, sms_passcode, duo_mobile_passcode, yubikey_code, passcode, digipass_go_7_token, not_available, sms_refresh, remembered_device, trusted_network) to filter on, to include all leave this parameter empty|None|["duo_push", "sms_passcode"]|
+|groups|[]string|None|False|List of group IDs to filter on|None|["DG67EON0I1QA2ZDUF32M"]|
+|maxtime|integer|None|False|Maximum time in UNIX timestamp milliseconds. Must be 13 or more digits in length and greater than mintime. To use current time leave this parameter empty|None|1611069760000|
+|mintime|integer|None|True|Minimum time in UNIX timestamp milliseconds. Must be 13 or more digits in length|None|1609377288936|
+|phone_numbers|[]string|None|False|List of phone numbers to filter on|None|["+11111111111"]|
+|reasons|[]string|None|False|List of reasons associated with an authentication attempt(user_marked_fraud, deny_unenrolled_user, error, locked_out, user_disabled, user_cancelled, invalid_passcode, no_response, no_keys_pressed, call_timed_out, location_restricted, factor_restricted, platform_restricted, version_restricted, rooted_device, no_screen_lock, touch_id_disabled, no_disk_encryption, anonymous_ip, out_of_date, denied_by_policy, software_restricted, no_duo_certificate_present, user_provided_invalid_certificate, could_not_determine_if_endpoint_was_trusted, invalid_management_certificate_collection_state, no_referring_hostname_provided, invalid_referring_hostname_provided, no_web_referer_match, endpoint_failed_google_verification, endpoint_is_not_trusted, invalid_device, anomalous_push,  endpoint_is_not_in_management_system, no_activated_duo_mobile_account, allow_unenrolled_user, bypass_user, trusted_network, remembered_device, trusted_location, user_approved, valid_passcode, allowed_by_policy, allow_unenrolled_user_on_trusted_network, user_not_in_permitted_group) to filter on, to include all leave this parameter empty|None|["user_disabled"]|
+|registration_id|[]string|None|False|List of FIDO U2F token registration IDs to filter on|None|["D21RU6X1B1DF5P54B6PV"]|
+|results|[]string|None|False|List of results of an authentication attempt(success, denied, fraud) to filter on, to include all leave this parameter empty|None|["denied"]|
+|token_id|[]string|None|False|List of hardware OTP token IDs to filter on|None|["DHIZ34ALBA2445ND4AI2"]|
+|users|[]string|None|False|List of user IDs to filter on|None|["DUW2DKA44RFYECTU8R1O"]|
+|webauthnkey|[]string|None|False|List of WebAuthn security keys to filter on|None|["WA4ED9AUVMSWUF00KES4"]|
+
+Example input:
+
+```
+{
+  "applications": [
+    "DIV9C5V7T6L02DRWL4RU"
+  ],
+  "event_types": [
+    "authentication"
+  ],
+  "factors": [
+    "duo_push",
+    "sms_passcode"
+  ],
+  "groups": [
+    "DG67EON0I1QA2ZDUF32M"
+  ],
+  "maxtime": 1611069760000,
+  "mintime": 1609377288936,
+  "phone_numbers": [
+    "+11111111111"
+  ],
+  "reasons": [
+    "user_disabled"
+  ],
+  "registration_id": [
+    "D21RU6X1B1DF5P54B6PV"
+  ],
+  "results": [
+    "denied"
+  ],
+  "token_id": [
+    "DHIZ34ALBA2445ND4AI2"
+  ],
+  "users": [
+    "DUW2DKA44RFYECTU8R1O"
+  ],
+  "webauthnkey": [
+    "WA4ED9AUVMSWUF00KES4"
+  ]
+}
+```
 
 ##### Output
 
@@ -305,24 +390,58 @@ Example output:
 ```
 
 {
-  "logs": [
+  "authlogs": [
     {
-      "factor": "Bypass Code",
-      "integration": "UNIX Servers Login",
-      "ip": "98.226.218.52",
-      "location": {
-        "city": "Bloomington",
-        "country": "US",
-        "state": "Illinois"
+      "access_device": {
+        "browser": "Chrome",
+        "browser_version": "67.0.3396.99",
+        "flash_version": "uninstalled",
+        "hostname": "api-a22b2135.duosecurity.com",
+        "ip": "98.226.218.52",
+        "is_encryption_enabled": true,
+        "is_firewall_enabled": true,
+        "is_password_set": true,
+        "java_version": "uninstalled",
+        "location": {
+          "city": "Bloomington",
+          "country": "United States",
+          "state": "Illinois"
+        },
+        "os": "Mac OS X",
+        "os_version": "10.14.1",
+        "security_agents": []
       },
-      "new_enrollment": false,
-      "reason": "Valid passcode",
-      "result": "SUCCESS",
-      "timestamp": 1466092180,
-      "username": "centos",
-      "eventtype": "authentication",
-      "host": "api-a22b2135.duosecurity.com"
-    },
+      "alias": "",
+      "application": {
+        "key": "DIV9C5V7T6L02DRWL4RU",
+        "name": "Microsoft Azure Active Directory"
+      },
+      "auth_device": {
+        "ip": "192.168.220.245",
+        "location": {
+          "city": "Bloomington",
+          "country": "United States",
+          "state": "Illinois"
+        },
+        "name": "+11111111111"
+      },
+      "email": "user@example.com",
+      "event_type": "authentication",
+      "factor": "duo_push",
+      "isotimestamp": "2021-01-19T14:47:24.309957+00:00",
+      "ood_software": "null",
+      "reason": "user_disabled",
+      "result": "denied",
+      "timestamp": 1611067644,
+      "txid": "340a23e3-23f3-23c1-87dc-1491a23dfdbb",
+      "user": {
+        "groups": [
+          "InsightConnect Group",
+        ],
+        "key": "DUW2DKA44RFYECTU8R1O",
+        "name": "user@example.com"
+      }
+    }
   ]
 }
 
@@ -334,16 +453,21 @@ This action is used to add a user in Duo Admin.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|The name of the user to create|None|
-|status|string|disabled|False|User status, e.g. active, bypass, disabled|['active', 'bypass', 'disabled']|
-|realname|string|None|False|User's real name|None|
-|firstname|string|None|False|The users given name. Required for Duo's ID Proofing feature|None|
-|lastname|string|None|False|The users surname. Required for Duo's ID Proofing feature|None|
-|notes|string|None|False|An optional description or notes field. Can be viewed in the Admin Panel|None|
-|alias|[]string|None|False|User alias. May have up to 4 unique amongst users|None|
-|email|string|None|False|Email of the user|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|alias|[]string|None|False|User alias. May have up to 4 unique amongst users|None|None|
+|email|string|None|False|Email of the user|None|None|
+|firstname|string|None|False|The users given name. Required for Duo's ID Proofing feature|None|None|
+|lastname|string|None|False|The users surname. Required for Duo's ID Proofing feature|None|None|
+|notes|string|None|False|An optional description or notes field. Can be viewed in the Admin Panel|None|None|
+|realname|string|None|False|User's real name|None|None|
+|status|string|disabled|False|User status, e.g. active, bypass, disabled|['active', 'bypass', 'disabled']|None|
+|username|string|None|True|The name of the user to create|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -376,9 +500,14 @@ This action is used to get a list of phones associated with the user ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|user_id|string|None|True|User ID, e.g. DUCUULF6HBMZ43IG9MBH|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|user_id|string|None|True|User ID, e.g. DUCUULF6HBMZ43IG9MBH|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -417,11 +546,16 @@ This action is used to enroll a user and send an enrollment email to the specifi
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|Username for user to enroll|None|
-|email|string|None|True|Email address to send enrollment email to|None|
-|time_to_expiration|number|0|True|Amount of time in seconds until enrollment email expires. Use '0' for no expiration|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|Email address to send enrollment email to|None|None|
+|time_to_expiration|number|0|True|Amount of time in seconds until enrollment email expires. Use '0' for no expiration|None|None|
+|username|string|None|True|Username for user to enroll|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -443,7 +577,156 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+#### access_device
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Browser|string|False|None|
+|Browser Version|string|False|None|
+|Flash Version|string|False|None|
+|Hostname|string|False|None|
+|IP Address|string|False|None|
+|Is Encryption Enabled|string|False|None|
+|Is Firewall Enabled|string|False|None|
+|Is Password Set|string|False|None|
+|Java Version|string|False|None|
+|Location|location|False|None|
+|Operating System|string|False|None|
+|Operating System Version|string|False|None|
+|Security Agents|[]string|False|None|
+
+#### application
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Key|string|False|None|
+|Name|string|False|None|
+
+#### auth_device
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|IP Address|string|False|None|
+|Location|location|False|None|
+|Name|string|False|None|
+
+#### authlog
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Access Device|access_device|True|None|
+|Alias|string|False|None|
+|Application|application|True|None|
+|Auth Device|auth_device|True|None|
+|Email|string|False|None|
+|Event Type|string|False|None|
+|Eventtype|string|False|None|
+|Factor|string|False|None|
+|Host|string|False|None|
+|ISO8601 Timestamp|number|False|None|
+|OOD Software|string|False|None|
+|Reason|string|False|None|
+|Result|string|False|None|
+|Timestamp|number|False|None|
+|Transaction ID|string|False|None|
+|User|authlog_user|True|None|
+
+#### authlog_user
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Groups|[]string|False|None|
+|Key|string|False|None|
+|Name|string|False|None|
+
+#### group
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Desc|string|False|None|
+|Name|string|False|None|
+
+#### location
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|City|string|False|None|
+|Country|string|False|None|
+|State|string|False|None|
+
+#### phone
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Activated|boolean|False|None|
+|Capabilities|[]string|False|None|
+|Extension|string|False|None|
+|Number|string|False|None|
+|Phone ID|string|False|None|
+|Platform|string|False|None|
+|Postdelay|string|False|None|
+|Predelay|string|False|None|
+|SMS Passcodes Sent|boolean|False|None|
+
+#### phone_user
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Activated|boolean|False|Activated|
+|Capabilities|[]string|False|Capabilities|
+|Extension|string|False|Extension|
+|Name|string|False|Name|
+|Number|string|False|Number|
+|Phone ID|string|False|Phone ID|
+|Platform|string|False|Platform|
+|Post delay|string|False|Post delay|
+|Predelay|string|False|Predelay|
+|SMS Passcodes Sent|boolean|False|SMS passcodes sent|
+|Type|string|False|Type|
+
+#### response
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Alias 1|string|False|Alias 1|
+|Alias 2|string|False|Alias 2|
+|Alias 3|string|False|Alias 3|
+|Alias 4|string|False|Alias 4|
+|Email|string|False|Email|
+|First Name|string|False|First name|
+|Groups|[]group|False|Groups|
+|Last Login|integer|False|Last login|
+|Last Name|string|False|Last name|
+|Notes|string|False|Notes|
+|Phones|[]phone_user|False|Phones|
+|Real Name|string|False|Real name|
+|Status|string|False|Status|
+|Tokens|[]token|False|Tokens|
+|User ID|string|False|User ID|
+|Username|string|False|Username|
+
+#### token
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Serial|string|False|Serial|
+|Token ID|string|False|Token ID|
+|Type|string|False|Type|
+
+#### user
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Email|string|False|None|
+|Groups|[]group|False|None|
+|Last Login|integer|False|None|
+|Notes|string|False|None|
+|Phones|[]phone|False|None|
+|Realname|string|False|None|
+|Status|string|False|None|
+|Tokens|[]token|False|None|
+|User ID|string|True|None|
+|Username|string|False|None|
 
 ## Troubleshooting
 
@@ -452,6 +735,7 @@ A User ID can be obtained by passing a username to the Get User Status action.
 
 # Version History
 
+* 3.4.0 - Add `maxtime`, `applications`, `users`, `event_types`, `factors`, `groups`, `phone_numbers`, `reasons`, `results`, `registration_id`, `token_id`, `webauthnkey` inputs in `Get Logs` action | Update custom type for `authlogs` output
 * 3.3.4 - Correct spelling in help.md
 * 3.3.3 - Changed `Exception` to `PluginException` | Moved constants to class init | Use fstring instead of concatenation
 * 3.3.2 - New spec and help.md format for the Extension Library
