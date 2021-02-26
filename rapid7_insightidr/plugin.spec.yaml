@@ -790,7 +790,7 @@ actions:
         description: Name of created threat
         type: string
         required: true
-        example: InsightIDR Threat
+        example: "Threat created via InsightConnect"
       note_text:
         title: Note Text
         description: Note text of created threat
