@@ -797,7 +797,7 @@ actions:
         type: string
         required: false
         example: InsightIDR threat
-        default: InsightIDR threat
+        default: "MyThreat"
       indicators:
         title: Indicators
         description: Add indicators to new threat in InsightIDR. Accept IP addresses, process hashes (SHA1, MD5, SHA256), domain names, URLs
