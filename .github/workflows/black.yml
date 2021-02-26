@@ -15,7 +15,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install black
+          pip install black==19.10b0
           
       - name: Lint
         run: |
