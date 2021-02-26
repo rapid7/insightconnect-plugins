@@ -19,4 +19,4 @@ jobs:
           
       - name: Lint
         run: |
-          black . --check --line-length=120 --exclude '(schema.py|setup.py|__init__.py|ec2_investigations)'
+          black . --check
