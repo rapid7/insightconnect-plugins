@@ -25,7 +25,7 @@ class CreateThreat(komand.Action):
         indicators = params.get(Input.INDICATORS)
         note_text = params.get(Input.NOTE_TEXT)
         if not note_text:
-            note_text = "InsightIDR threat"
+            note_text = "Threat created via InsightConnect"
 
         ip_indicator = []
         url_indicator = []

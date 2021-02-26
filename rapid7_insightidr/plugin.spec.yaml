@@ -790,14 +790,14 @@ actions:
         description: Name of created threat
         type: string
         required: true
-        example: "Threat created via InsightConnect"
+        example: Threat created via InsightConnect
       note_text:
         title: Note Text
         description: Note text of created threat
         type: string
         required: false
-        default: "Threat created via InsightConnect"
-        default: "MyThreat"
+        example: Threat created via InsightConnect
+        default: Threat created via InsightConnect
       indicators:
         title: Indicators
         description: Add indicators to new threat in InsightIDR. Accept IP addresses, process hashes (SHA1, MD5, SHA256), domain names, URLs

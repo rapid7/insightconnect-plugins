@@ -45,8 +45,8 @@ This action is used to create a private InsightIDR threat and add indicators to 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |indicators|[]string|None|True|Add indicators to new threat in InsightIDR. Accept IP addresses, process hashes (SHA1, MD5, SHA256), domain names, URLs|None|["example.com", "10.0.0.1"]|
-|note_text|string|InsightIDR threat|False|Note text of created threat|None|InsightIDR threat|
-|threat_name|string|None|True|Name of created threat|None|InsightIDR Threat|
+|note_text|string|Threat created via InsightConnect|False|Note text of created threat|None|Threat created via InsightConnect|
+|threat_name|string|None|True|Name of created threat|None|Threat created via InsightConnect|
 
 Example input:
 
@@ -56,8 +56,8 @@ Example input:
     "example.com",
     "10.0.0.1"
   ],
-  "note_text": "InsightIDR threat",
-  "threat_name": "InsightIDR Threat"
+  "note_text": "Threat created via InsightConnect",
+  "threat_name": "Threat created via InsightConnect"
 }
 ```
 
@@ -74,8 +74,8 @@ Example output:
 {
     "rejected_indicators": [],
     "threat": {
-      "name": "InsightIDR Threat",
-      "note": "InsightIDR threat",
+      "name": "Threat created via InsightConnect",
+      "note": "Threat created via InsightConnect",
       "published": false,
       "indicator_count": 2
   }
