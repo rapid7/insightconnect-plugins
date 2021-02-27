@@ -56,9 +56,8 @@ This action is used to create a new Ivanti Service Manager service request.
 |----|----|-------|--------|-----------|----|-------|
 |customer|string|None|True|Email address of the customer|None|user@example.com|
 |description|string|None|True|Description of the service request|None|This service request was created using InsightConnect|
-|owner|string|None|False|Name of the service request owner as it appears in Ivanti Service Manager|None|John Doe|
 |service_request_template|string|None|True|Name or record ID of the service request template|None|VPN Connection Failure|
-|status|string|Submitted|True|Status of the incident|['Draft', 'Submitted', 'Active', 'Approved', 'In Procurement', 'Approval Rejected', 'Waiting for Customer', 'Waiting for 3rd Party', 'Fulfilled', 'Closed', 'Cancelled']|Active|
+|status|string|Submitted|True|Status of the incident|['Draft', 'Submitted', 'Approved', 'In Procurement', 'Approval Rejected', 'Waiting for Customer', 'Waiting for 3rd Party', 'Fulfilled', 'Closed', 'Cancelled']|Submitted|
 |urgency|string|None|False|Urgency of the incident|['Low', 'Medium', 'High']|Medium|
 
 Example input:
@@ -67,9 +66,8 @@ Example input:
 {
   "customer": "user@example.com",
   "description": "This service request was created using InsightConnect",
-  "owner": "John Doe",
   "service_request_template": "VPN Connection Failure",
-  "status": "Active",
+  "status": "Submitted",
   "urgency": "Medium"
 }
 ```
@@ -83,6 +81,80 @@ Example input:
 Example output:
 
 ```
+{
+  "service_request": {
+    "@odata.context": "https://rapid7.vantosi.com/HEAT/api/odata/$metadata#servicereqs/$entity",
+    "RecId": "0A89BD6EDB214B9C8D4488500E26867B",
+    "LastModDateTime": "2021-02-27T14:44:56-08:00",
+    "LastModBy": "user",
+    "CreatedDateTime": "2021-02-27T14:44:56-08:00",
+    "CreatedBy": "user",
+    "OwnerTeam_Valid": "2E4BABD54FB9420D94F836F0D9B80C47",
+    "OwnerTeam": "Service Management Team",
+    "ServiceReqNumber": 10196,
+    "OwnerTeamEmail": "user@example.com",
+    "ProfileLink_Category": "Employee",
+    "ProfileLink_RecID": "1087342EA6954D7D96140D64B452E597",
+    "ProfileLink": "1087342EA6954D7D96140D64B452E597",
+    "Email": "user@example.com",
+    "ProfileFullName": "user",
+    "CustomerLocation": "Chicago",
+    "IsVIP": false,
+    "IsReportedByAlternateContact": false,
+    "Status_Valid": "E5BDDCB73AC74B7693A57AA1D84D42EB",
+    "Status": "Submitted",
+    "Service_Valid": "1A6C68571E6648E7A99305E1905C29B4",
+    "Service": "Benefits Management",
+    "Source_Valid": "B7065708DF4B449F8503621393B4A7AE",
+    "Source": "Self Service",
+    "Urgency_Valid": "320F22CAA2984C87B06AEFD3DE6FFBBF",
+    "Urgency": "Low",
+    "Subject": "Benefits Package Claim",
+    "Symptom": "This service request was created using InsightConnect",
+    "Price_Currency": "USD",
+    "Price": "0.0000",
+    "IsNewRecord": false,
+    "Phone": "+1 (312) 9 3833",
+    "SvcReqTmplLink_Category": "ServiceReqTemplate",
+    "SvcReqTmplLink_RecID": "A299658A3EC84DC1BC401A065C0697D9",
+    "SvcReqTmplLink": "A299658A3EC84DC1BC401A065C0697D9",
+    "IsInFinalState": false,
+    "ProgressBarPosition": "1",
+    "OrgUnitLink_Category": "OrganizationalUnit",
+    "OrgUnitLink_RecID": "FA9C9DD75EF9455CBC892F65691A1E7F",
+    "OrgUnitLink": "FA9C9DD75EF9455CBC892F65691A1E7F",
+    "SLALink_Category": "ServiceAgreement.SLA",
+    "SLALink_RecID": "A202D6F371F04629B2426A2BA32C4CB9",
+    "SLALink": "A202D6F371F04629B2426A2BA32C4CB9",
+    "DefaultApprover_Valid": "AD770E6531B640879A49F3C40002C92F",
+    "DefaultApprover": "user@example.com",
+    "SLA": "Benefits Management (Silver) for Corporate IT",
+    "SLADisplayText": "Benefits Management (Silver) for Corporate IT",
+    "OrganizationUnitID": "Corporate IT Operations",
+    "ReadOnly": false,
+    "ProfileLoginId": "user",
+    "TotalTimeSpent": 0,
+    "IsDSMTaskExisted": false,
+    "IsDraft": false,
+    "Cancelable": false,
+    "TemplateCancelable": false,
+    "SendSurveyNotification": false,
+    "EntityLink_Category": "OrganizationalUnit",
+    "EntityLink_RecID": "FA9C9DD75EF9455CBC892F65691A1E7F",
+    "EntityLink": "FA9C9DD75EF9455CBC892F65691A1E7F",
+    "IsEditable": true,
+    "IsTemplateEditable": false,
+    "ForceNotCancelable": false,
+    "ForceNotEditable": false,
+    "IsNewRequestNotificationSent": false,
+    "IsExternal": false,
+    "HasScriptRun": false,
+    "InShoppingCart": false,
+    "IsUnRead": false,
+    "ivnt_PurchaseRequestCount": 0,
+    "ivnt_RequestedCatalogItemCount": 0
+  }
+}
 ```
 
 #### Add Note
@@ -317,7 +389,7 @@ This action is used to create a new Ivanti Service Manager Incident record.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |assignee|string|None|False|Name of the assignee as it appears in Ivanti Service Manager|None|John Doe|
-|category|string|None|False|Category of the incident|None|None|
+|category|string|None|False|Category of the incident|None|Software Installation|
 |customer|string|None|True|Email address of the customer|None|user@example.com|
 |description|string|None|True|Description of the incident|None|This incident was created using InsightConnect|
 |impact|string|None|False|Impact of the incident|['Low', 'Medium', 'High']|Medium|
@@ -332,6 +404,7 @@ Example input:
 ```
 {
   "assignee": "John Doe",
+  "category": "Software Installation",
   "customer": "user@example.com",
   "description": "This incident was created using InsightConnect",
   "impact": "Medium",
@@ -570,7 +643,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.1.0 - Added Create Service Request action
+* 1.1.0 - Added Create Service Request action | Added missing example input in Create Incident action
 * 1.0.0 - Initial plugin
 
 # Links

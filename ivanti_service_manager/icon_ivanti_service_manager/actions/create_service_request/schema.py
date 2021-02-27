@@ -10,7 +10,6 @@ class Component:
 class Input:
     CUSTOMER = "customer"
     DESCRIPTION = "description"
-    OWNER = "owner"
     SERVICE_REQUEST_TEMPLATE = "service_request_template"
     STATUS = "status"
     URGENCY = "urgency"
@@ -38,12 +37,6 @@ class CreateServiceRequestInput(insightconnect_plugin_runtime.Input):
       "description": "Description of the service request",
       "order": 3
     },
-    "owner": {
-      "type": "string",
-      "title": "Owner",
-      "description": "Name of the service request owner as it appears in Ivanti Service Manager",
-      "order": 5
-    },
     "service_request_template": {
       "type": "string",
       "title": "Service Request Template",
@@ -58,7 +51,6 @@ class CreateServiceRequestInput(insightconnect_plugin_runtime.Input):
       "enum": [
         "Draft",
         "Submitted",
-        "Active",
         "Approved",
         "In Procurement",
         "Approval Rejected",
@@ -79,7 +71,7 @@ class CreateServiceRequestInput(insightconnect_plugin_runtime.Input):
         "Medium",
         "High"
       ],
-      "order": 6
+      "order": 5
     }
   },
   "required": [
@@ -873,7 +865,7 @@ class CreateServiceRequestOutput(insightconnect_plugin_runtime.Output):
           "order": 103
         },
         "TotalTimeSpent": {
-          "type": "string",
+          "type": "integer",
           "title": "Total Time Spent",
           "description": "Total time spent",
           "order": 93

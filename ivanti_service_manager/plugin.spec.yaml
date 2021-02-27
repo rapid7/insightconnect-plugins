@@ -66,7 +66,7 @@ types:
     ClosedDuration:
       title: Closed Duration
       description: Closed duration
-      type: int
+      type: integer
       required: false
     CreatedBy:
       title: Created By
@@ -788,7 +788,7 @@ types:
     ServiceReqNumber:
       title: Service Request Number
       description: Service request number
-      type: int
+      type: integer
       required: false
     ClosedBy:
       title: Closed By
@@ -1198,7 +1198,7 @@ types:
     TotalTimeSpent:
       title: Total Time Spent
       description: Total time spent
-      type: string
+      type: integer
       required: false
     IsDSMTaskExisted:
       title: Is DSM Task Existed By
@@ -1398,12 +1398,12 @@ types:
     ivnt_PurchaseRequestCount:
       title: Ivanti Purchase Request Count
       description: Ivanti purchase request count
-      type: int
+      type: integer
       required: false
     ivnt_RequestedCatalogItemCount:
       title: Ivanti Requested Catalog Item Count
       description: Ivanti requested catalog item count
-      type: int
+      type: integer
       required: false
     ivnt_CILink_Category:
       title: Ivanti CI Link Category
@@ -1552,6 +1552,7 @@ actions:
         title: Category
         description: Category of the incident
         type: string
+        example: Software Installation
         required: false
     output:
       incident:
@@ -1735,7 +1736,6 @@ actions:
         enum:
         - Draft
         - Submitted
-        - Active
         - Approved
         - In Procurement
         - Approval Rejected
@@ -1744,13 +1744,7 @@ actions:
         - Fulfilled
         - Closed
         - Cancelled
-        example: Active
-      owner:
-        title: Owner
-        description: Name of the service request owner as it appears in Ivanti Service Manager
-        type: string
-        required: false
-        example: John Doe
+        example: Submitted
       urgency:
         title: Urgency
         description: Urgency of the incident
