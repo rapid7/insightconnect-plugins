@@ -35,6 +35,36 @@ Example input:
 
 ### Actions
 
+#### Isolate Machine
+
+This action is used to isolate a machine associated with the root cause of a Malop, or to remediate a process not involved in a malop.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|actions_by_machine|object|None|False|Actions by machine|None|None|
+|initiator_user_name|string|None|False|Initiator user name|None|None|
+|malop_id|string|None|False|Malop ID to isolate a machine or empty to remediate process not involved in a malop|None|None|
+|pylum_ids|[]string|None|False|The unique sensor ID the Cybereason platform uses for the machines to isolate|None|None|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|object|False|Malop response|
+
+Example output:
+
+```
+
+```
+
 #### Search for Files
 
 This action is used to find files on any machine in your environment with a Cybereason sensor installed..
@@ -43,8 +73,8 @@ This action is used to find files on any machine in your environment with a Cybe
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file_filter|string|None|True|A fileFilters|None|fileName Equals: ["sample.py"]|
-|server_filter|string|None|False|A Sensor|None|machineName: ["rapid7-windows"]|
+|file_filter|string|None|True|A fileFilters object where you filter by machine name, folder, file creation or modification time or file size with operator Equals, NotEquals, ContainsIgnoreCase, NotContainsIgnoreCase and others|None|fileName Equals: ["sample.py"]|
+|server_filter|string|None|False|A Sensor filters object where you filter sensors by different criteria such as operating system|None|machineName: ["rapid7-windows"]|
 
 Example input:
 

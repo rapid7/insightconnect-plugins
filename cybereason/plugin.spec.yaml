@@ -423,3 +423,28 @@ actions:
         title: Response
         type: response
         required: true
+  isolate_machine:
+    title: Isolate Machine
+    description: Isolate a machine associated with the root cause of a Malop, or to remediate a process not involved in a malop
+    input:
+      malop_id:
+        title: Malop ID
+        description: Malop ID to isolate a machine or empty to remediate process not involved in a malop
+        type: string
+      pylum_ids:
+        title: Pylum IDS
+        description: The unique sensor ID the Cybereason platform uses for the machines to isolate
+        type: "[]string"
+      initiator_user_name:
+        title: Initiator User Name
+        description: Initiator user name
+        type: string
+      actions_by_machine:
+        title: Actions By Machine
+        description: Actions by machine
+        type: object
+    output:
+      response:
+        title: Malop Response
+        description: Malop response
+        type: object
