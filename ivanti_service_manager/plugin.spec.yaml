@@ -1704,7 +1704,7 @@ actions:
         description: Journal note details
         type: journal_note
         required: true
-create_service_request:
+  create_service_request:
     title: Create Service Request
     description: Create a new Ivanti Service Manager service request
     input:

@@ -46,6 +46,45 @@ Example input:
 
 ### Actions
 
+#### Create Service Request
+
+This action is used to create a new Ivanti Service Manager service request.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|customer|string|None|True|Email address of the customer|None|user@example.com|
+|description|string|None|True|Description of the service request|None|This service request was created using InsightConnect|
+|owner|string|None|False|Name of the service request owner as it appears in Ivanti Service Manager|None|John Doe|
+|service_request_template|string|None|True|Name or record ID of the service request template|None|VPN Connection Failure|
+|status|string|Submitted|True|Status of the incident|['Draft', 'Submitted', 'Active', 'Approved', 'In Procurement', 'Approval Rejected', 'Waiting for Customer', 'Waiting for 3rd Party', 'Fulfilled', 'Closed', 'Cancelled']|Active|
+|urgency|string|None|False|Urgency of the incident|['Low', 'Medium', 'High']|Medium|
+
+Example input:
+
+```
+{
+  "customer": "user@example.com",
+  "description": "This service request was created using InsightConnect",
+  "owner": "John Doe",
+  "service_request_template": "VPN Connection Failure",
+  "status": "Active",
+  "urgency": "Medium"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|service_request|service_request|True|Newly created service request|
+
+Example output:
+
+```
+```
+
 #### Add Note
 
 This action adds a journal note to an incident.
@@ -531,6 +570,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - Added Create Service Request action
 * 1.0.0 - Initial plugin
 
 # Links
