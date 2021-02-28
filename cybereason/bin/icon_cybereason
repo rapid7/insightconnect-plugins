@@ -7,21 +7,19 @@ from sys import argv
 Name = "Cybereason Plugin"
 Vendor = "rapid7"
 Version = "1.0.0"
-Description = "The Cybereason platform provides military-grade cyber security with real-time awareness and detection."
+Description = "The Cybereason platform provides military-grade cyber security with real-time awareness and detection"
 
 
 def main():
-    if "http" in argv:
+    if 'http' in argv:
         if os.environ.get("GUNICORN_CONFIG_FILE"):
             with open(os.environ.get("GUNICORN_CONFIG_FILE")) as gf:
                 gunicorn_cfg = json.load(gf)
                 if gunicorn_cfg.get("worker_class", "sync") == "gevent":
                     from gevent import monkey
-
                     monkey.patch_all()
-        elif "gevent" in argv:
+        elif 'gevent' in argv:
             from gevent import monkey
-
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
@@ -34,9 +32,10 @@ def main():
                 vendor=Vendor,
                 version=Version,
                 description=Description,
-                connection=connection.Connection(),
+                connection=connection.Connection()
             )
             self.add_action(actions.SearchForFiles())
+
 
     """Run plugin"""
     cli = insightconnect_plugin_runtime.CLI(ICONCybereason())

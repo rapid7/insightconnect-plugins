@@ -1,3 +1,4 @@
+import insightconnect_plugin_runtime
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 import json
@@ -28,11 +29,6 @@ class CybereasonAPI:
             )
 
     def file_search(self, server_filter: dict, file_filter: dict):
-        if not file_filter:
-            raise PluginException(
-                cause="File filter shouldn't be empty", assistance="Please check this input"
-            )
-
         api_response = self.session.request(
             "POST",
             f"{self.base_url}/rest/sensors/action/fileSearch",
@@ -43,7 +39,7 @@ class CybereasonAPI:
         if api_response.status_code >= 400:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=api_response.text)
         if 200 <= api_response.status_code < 300:
-            return json.loads(api_response.content)
+            return insightconnect_plugin_runtime.helper.clean(json.loads(api_response.content))
 
         raise PluginException(preset=PluginException.Preset.UNKNOWN, data=api_response.text)
 
