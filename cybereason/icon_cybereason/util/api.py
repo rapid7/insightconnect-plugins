@@ -48,7 +48,7 @@ class CybereasonAPI:
     def file_search(self, server_filter: dict, file_filter: dict) -> dict:
         if not file_filter:
             raise PluginException(
-                cause="File filter shouldn't be empty", assistance="Please check this input"
+                cause="File filter shouldn't be empty.", assistance="Please check this input."
             )
 
         return self.send_request(

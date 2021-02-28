@@ -20,7 +20,7 @@ class IsolateMachine(insightconnect_plugin_runtime.Action):
             pylum_ids = params.get(Input.PYLUM_IDS)
             if not pylum_ids:
                 raise PluginException(
-                    cause="Pylum IDs shouldn't be empty", assistance="Please check this input"
+                    cause="Pylum IDs shouldn't be empty.", assistance="Please check this input."
                 )
             return {Output.RESPONSE: self.connection.api.isolate_machines(malop_id, pylum_ids)}
 
@@ -28,8 +28,8 @@ class IsolateMachine(insightconnect_plugin_runtime.Action):
         actions_by_machine = params.get(Input.ACTIONS_BY_MACHINE)
         if not initiator_user_name or not actions_by_machine:
             raise PluginException(
-                cause="Initiator user name and actions by machine shouldn't be empty",
-                assistance="Please check this input",
+                cause="Initiator user name and actions by machine shouldn't be empty.",
+                assistance="Please check this input.",
             )
 
         return {
