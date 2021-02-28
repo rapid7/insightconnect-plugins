@@ -22,10 +22,13 @@ class IsolateMachine(insightconnect_plugin_runtime.Action):
                 raise PluginException(
                     cause="Invalid input", assistance="Pylum IDs shouldn't be empty"
                 )
-            return self.connection.api.isolate_machines(malop_id, pylum_ids)
+            return {Output.RESPONSE: self.connection.api.isolate_machines(malop_id, pylum_ids)}
 
         initiator_user_name = params.get(Input.INITIATOR_USER_NAME)
         actions_by_machine = params.get(Input.ACTIONS_BY_MACHINE)
         if not initiator_user_name or not actions_by_machine:
             raise PluginException(cause="Invalid input", assistance="INITIATOR_USER_NAME")
-        return self.connection.api.remediate(initiator_user_name, actions_by_machine)
+
+        return {
+            Output.RESPONSE: self.connection.api.remediate(initiator_user_name, actions_by_machine)
+        }

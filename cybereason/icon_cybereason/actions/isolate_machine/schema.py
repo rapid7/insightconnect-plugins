@@ -27,7 +27,7 @@ class IsolateMachineInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "actions_by_machine": {
       "type": "object",
-      "title": "Actions By Machine",
+      "title": "Actions by Machine",
       "description": "Actions by machine",
       "order": 4
     },
@@ -74,7 +74,10 @@ class IsolateMachineOutput(insightconnect_plugin_runtime.Output):
       "description": "Malop response",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "response"
+  ]
 }
     """
     )

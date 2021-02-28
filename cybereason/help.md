@@ -26,10 +26,7 @@ Example input:
 
 ```
 {
-  "credentials": {
-    "username": "user@example.com",
-    "password": "mypassword"
-  },
+  "credentials": "{\"username\": \"user@example.com\", \"password\": \"mypassword\"}",
   "hostname": "example.com",
   "port": 8443
 }
@@ -47,26 +44,38 @@ This action is used to isolate a machine associated with the root cause of a Mal
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|actions_by_machine|object|None|False|Actions by machine|None|None|
-|initiator_user_name|string|None|False|Initiator user name|None|None|
-|malop_id|string|None|False|Malop ID to isolate a machine or empty to remediate process not involved in a malop|None|None|
-|pylum_ids|[]string|None|False|The unique sensor ID the Cybereason platform uses for the machines to isolate|None|None|
+|actions_by_machine|object|None|False|Actions by machine|None|{"126811122.2298225282553311122": [{"targetId": "531122333.-3391199199911692223","actionType": "KILL_PROCESS"}]}|
+|initiator_user_name|string|None|False|Initiator user name|None|user@example.com|
+|malop_id|string|None|False|Malop ID to isolate a machine or empty to remediate process not involved in a malop|None|22.2787422324806222966|
+|pylum_ids|[]string|None|False|The unique sensor ID the Cybereason platform uses for the machines to isolate|None|["PYLUMCLIENT_INTEGRATION_GDDA11-11_2222170222FC"]|
 
 Example input:
 
 ```
+{
+  "actions_by_machine": "{\"126811122.2298225282553311122\": [{\"targetId\": \"531122333.-3391199199911692223\",\"actionType\": \"KILL_PROCESS\"}]}",
+  "initiator_user_name": "user@example.com",
+  "malop_id": "22.2787422324806222966",
+  "pylum_ids": [
+    "PYLUMCLIENT_INTEGRATION_GDDA11-11_2222170222FC"
+  ]
+}
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|response|object|False|Malop response|
+|response|object|True|Malop response|
 
 Example output:
 
 ```
-
+{
+  "response": {
+    "PYLUMCLIENT_INTEGRATION_GDDA11-11_2222170222FC": "Succeeded"
+  }
+}
 ```
 
 #### Search for Files
@@ -197,6 +206,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - Add new action Isolate Machine
 * 1.0.0 - Initial plugin
 
 # Links
