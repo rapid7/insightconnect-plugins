@@ -1,5 +1,5 @@
 import komand
-from komand.exceptions import ConnectionTestException
+from komand.exceptions import ConnectionTestException, PluginException
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
@@ -45,12 +45,12 @@ class Connection(komand.Connection):
                 authentication=ldap3.NTLM
             )
         except exceptions.LDAPBindError as e:
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD, data=e)
+            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=e)
         except exceptions.LDAPAuthorizationDeniedResult as e:
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED, data=e)
+            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=e)
         except exceptions.LDAPSocketOpenError as e:
-            raise ConnectionTestException(
-                preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE,
+            raise PluginException(
+                preset=PluginException.Preset.SERVICE_UNAVAILABLE,
                 data=e
             )
         except exceptions.LDAPException:
@@ -66,15 +66,15 @@ class Connection(komand.Connection):
                     auto_bind=True
                 )
             except exceptions.LDAPBindError as e:
-                raise ConnectionTestException(
-                    preset=ConnectionTestException.Preset.USERNAME_PASSWORD,
+                raise PluginException(
+                    preset=PluginException.Preset.USERNAME_PASSWORD,
                     data=e
                 )
             except exceptions.LDAPAuthorizationDeniedResult as e:
-                raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED, data=e)
+                raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=e)
             except exceptions.LDAPSocketOpenError as e:
-                raise ConnectionTestException(
-                    preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE,
+                raise PluginException(
+                    preset=PluginException.Preset.SERVICE_UNAVAILABLE,
                     data=e
                 )
 
@@ -100,7 +100,7 @@ class Connection(komand.Connection):
                 if host.find('//') != -1:
                     host = host[2:]
             else:
-                raise ConnectionTestException(
+                raise PluginException(
                     cause=f"There are too many colons ({colons}) in the host name ({host}).",
                     assistance="Check that the host name is correct",
                     data=host
