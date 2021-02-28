@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 6.0.0
+version: 6.1.0
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
@@ -1579,6 +1579,74 @@ actions:
         title: File
         description: Base64 encoded threat file
         type: file
+        required: true
+  disable_agent:
+    title: Disable Agent
+    description: Disable agents that match the filter
+    input:
+      agent:
+        title: Agent
+        description: Agent to perform disable action on. Accepts IP address, MAC address, hostname, UUID or agent ID. Leave empty to perform action on all applicable Agents
+        type: string
+        example: hostname123
+        required: false
+      reboot:
+        title: Reboot
+        description: Set true to reboot the endpoint, set false to not reboot the endpoint
+        type: boolean
+        required: true
+        example: true
+      expiration_timezone:
+        title: Expiration Timezone
+        description: Timezone for the expiration timestamp. Set with expiration time
+        type: string
+        required: false
+        example: UTC
+      expiration_time:
+        title: Expiration Time
+        description: Agents will be re-enabled after this timestamp
+        type: string
+        required: false
+        example: 2020-02-27T04:49:26.257525Z
+      filter:
+        title: Filter
+        description: Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents
+        required: false
+        type: object
+        example: '{ "updatedAt__gt": "2019-02-27T04:49:26.257525Z" }'
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: true
+  enable_agent:
+    title: Enable Agent
+    description: Enable agents that match the filter
+    input:
+      agent:
+        title: Agent
+        description: Agent to perform disable action on. Accepts IP address, MAC address, hostname, UUID or agent ID. Leave empty to perform action on all applicable Agents
+        type: string
+        example: hostname123
+        required: false
+      reboot:
+        title: Reboot
+        description: Set true to reboot the endpoint, set false to not reboot the endpoint
+        type: boolean
+        required: true
+        example: true
+      filter:
+        title: Filter
+        description: Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents
+        required: false
+        type: object
+        example: '{ "updatedAt__gt": "2019-02-27T04:49:26.257525Z" }'
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
         required: true
 
 triggers:

@@ -1,5 +1,6 @@
 from json import dumps, loads
 from re import match
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 import requests
 
@@ -54,6 +55,16 @@ class SentineloneAPI:
 
         return self.clean_results(results)
 
+    def get_agent_uuid(self, agent):
+        agents = self.search_agents(agent)
+        if self.__check_agents_found(agents):
+            raise PluginException(
+                cause=f"No agents found for: {agent}.", assistance="Please check provided information and try again."
+            )
+        else:
+            agent_uuid = agents[0].get("uuid")
+        return agent_uuid
+
     @staticmethod
     def __get_searches(agent_details: str) -> list:
         if len(agent_details) == 18 and agent_details.isdigit():
@@ -68,3 +79,14 @@ class SentineloneAPI:
     @staticmethod
     def clean_results(results):
         return loads(dumps(results).replace("null", '"None"'))
+
+    @staticmethod
+    def __check_agents_found(agents: list) -> bool:
+        if len(agents) > 1:
+            raise PluginException(
+                cause="Multiple agents found.",
+                assistance="Please provide a unique identifier for the agent to be enable.",
+            )
+        if len(agents) == 0:
+            return True
+        return False

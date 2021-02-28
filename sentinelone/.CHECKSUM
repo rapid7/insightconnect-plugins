@@ -1,7 +1,7 @@
 {
-	"spec": "099891fc3a741778acbfc175b94a47ac",
-	"manifest": "c4df7208c6f8a44d8c1cebbeb1b192f1",
-	"setup": "0eaad573ccbcf007b6ecef3cc9e7df67",
+	"spec": "5205f4c66d528a67757a48fe05192ec4",
+	"manifest": "e02aaf06bc85239a3b8140f740f9fc31",
+	"setup": "d59d21ef8862926c9d1851e4578b8bf0",
 	"schemas": [
 		{
 			"identifier": "activities_list/schema.py",
@@ -38,6 +38,14 @@
 		{
 			"identifier": "create_ioc_threat/schema.py",
 			"hash": "d871e78b6173bb3fe5c38a148d8958e4"
+		},
+		{
+			"identifier": "disable_agent/schema.py",
+			"hash": "f73614f1d75f19b25178945fb54c7fc1"
+		},
+		{
+			"identifier": "enable_agent/schema.py",
+			"hash": "f093d3f57b33883612b3bae491ccd5ab"
 		},
 		{
 			"identifier": "get_agent_details/schema.py",

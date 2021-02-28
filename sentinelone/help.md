@@ -44,6 +44,86 @@ Example input:
 
 ### Actions
 
+#### Enable Agent
+
+This action is used to enable agents that match the filter.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|False|Agent to perform disable action on. Accepts IP address, MAC address, hostname, UUID or agent ID. Leave empty to perform action on all applicable Agents|None|hostname123|
+|filter|object|None|False|Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents|None|{ "updatedAt__gt": "2019-02-27T04:49:26.257525Z" }|
+|reboot|boolean|None|True|Set true to reboot the endpoint, set false to not reboot the endpoint|None|True|
+
+Example input:
+
+```
+{
+  "agent": "hostname123",
+  "filter": {
+    "updatedAt__gt": "2019-02-27T04:49:26.257525Z" 
+  },
+  "reboot": true
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|True|Number of entities affected by the requested operation|
+
+Example output:
+
+```
+{
+  "affected": 1
+}
+```
+
+#### Disable Agent
+
+This action is used to disable agents that match the filter.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|False|Agent to perform disable action on. Accepts IP address, MAC address, hostname, UUID or agent ID. Leave empty to perform action on all applicable Agents|None|hostname123|
+|expiration_time|string|None|False|Agents will be re-enabled after this timestamp|None|2020-02-27 04:49:26.257525|
+|expiration_timezone|string|None|False|Timezone for the expiration timestamp. Set with expiration time|None|UTC|
+|filter|object|None|False|Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents|None|{ "updatedAt__gt": "2019-02-27T04:49:26.257525Z" }|
+|reboot|boolean|None|True|Set true to reboot the endpoint, set false to not reboot the endpoint|None|True|
+
+Example input:
+
+```
+{
+  "agent": "hostname123",
+  "expiration_time": "2020-02-27T04:49:26.257525Z",
+  "expiration_timezone": "UTC",
+  "filter": {
+    "updatedAt__gt": "2019-02-27T04:49:26.257525Z" 
+  }
+  "reboot": true
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|True|Number of entities affected by the requested operation|
+
+Example output:
+
+```
+{
+  "affected": 1
+}
+```
+
 #### Run Agent Action
 
 This action is used to perform actions relating to your SentinelOne agents. This will help manage your assets connected to your SentinelOne console. Documentation for these actions can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions.
@@ -200,7 +280,6 @@ Example input:
 |----|----|--------|-----------|
 |data|[]activities_list|True|Result of activities list|
 
-
 #### Get Activity Types
 
 This action is used to get a list of activity types.
@@ -341,7 +420,6 @@ Example input:
 |----|----|--------|-----------|
 |data|[]agent_applications|True|List of installed applications|
 
-
 #### Blacklist
 
 This action is used to blacklist and unblacklist a SHA1 hash. The blacklist is attempted for Linux, Windows, and MacOS operating systems and for all sites that the user has permission to manage.
@@ -393,8 +471,6 @@ Example input:
 
 ```
 {
-  "blacklist_state": true,
-  "description": "Hash Blacklisted from InsightConnect",
   "hash": "3395856ce81f2b7382dee72602f798b642f14140"
 }
 ```
@@ -1335,6 +1411,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 6.1.0 - Add new actions Disable Agent and Enable Agent
 * 6.0.0 - Add `operational_state` field to input of Get Agent Details and Search Agent actions | Update schema to return new outputs such as Active Directory, firewall, location, and quarantine information for Get Agent Details and Search Agent actions | Use API version 2.1 | Update capitalization according to style in Activities List action for Created Than Date and Less Than Dates inputs to Greater than Date and Less than Date
 * 5.0.1 - Correct spelling in help.md
 * 5.0.0 - Consolidate various Agent actions | Use API version 2.1 where possible | Delete obsolete Blacklist by IOC Hash and Agent Processes
