@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 import validators
+from typing import Optional
 
 
 class MicrosoftIntuneAPI:
@@ -34,6 +35,30 @@ class MicrosoftIntuneAPI:
 
     def managed_device_action(self, device_id: str, action: str):
         return self._call_api("POST", f"deviceManagement/managedDevices/{device_id}/{action}")
+
+    def get_managed_app(self, uuid: str) -> list:
+        return [self._call_api("GET", f"deviceAppManagement/mobileApps/{uuid}")]
+
+    @staticmethod
+    def filter_managed_apps_result(response, app_filter) -> list:
+        return list(filter(lambda iter_app: iter_app["displayName"].lower() == app_filter.lower(), response["value"]))
+
+    def get_managed_apps_all_pages(self, app_filter: Optional[str]) -> list:
+        results = []
+        endpoint = "deviceAppManagement/mobileApps?$top=500"
+        i = 9999
+        while i > 0:
+            response = insightconnect_plugin_runtime.helper.clean(self._call_api("GET", endpoint))
+            if app_filter:
+                results.extend(self.filter_managed_apps_result(response, app_filter))
+            else:
+                results.extend(response.get("value", []))
+            endpoint = response.get("@odata.nextLink", "")
+            if not endpoint:
+                break
+            i -= 1
+
+        return results
 
     def search_managed_devices(self, device):
         if validators.uuid(device):
@@ -104,9 +129,11 @@ class MicrosoftIntuneAPI:
         raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
     def _call_api(self, method, endpoint, params=None, request_body=None, retry_on_unauthenticated=True):
+        if not endpoint.startswith("https"):
+            endpoint = self.api_url + endpoint
         response = self._request(
             method,
-            self.api_url + endpoint,
+            endpoint,
             request_body=request_body,
             params=params,
             headers=MicrosoftIntuneAPI.create_necessary_headers(self.access_token),
