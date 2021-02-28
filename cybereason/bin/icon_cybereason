@@ -7,7 +7,7 @@ from sys import argv
 Name = "Cybereason Plugin"
 Vendor = "rapid7"
 Version = "1.0.0"
-Description = "The Cybereason platform provides military-grade cyber security with real-time awareness and detection."
+Description = "The Cybereason platform provides military-grade cyber security with real-time awareness and detection"
 
 
 def main():

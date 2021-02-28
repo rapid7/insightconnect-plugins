@@ -4,9 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = (
-        "Find files on any machine in your environment with a Cybereason sensor installed."
-    )
+    DESCRIPTION = "Find files on any machine in your environment with a Cybereason sensor installed"
 
 
 class Input:
@@ -27,13 +25,13 @@ class SearchForFilesInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "file_filter": {
       "type": "string",
-      "title": "File filter",
+      "title": "File Filter",
       "description": "A fileFilters object where you filter by machine name, folder, file creation or modification time or file size with operator Equals, NotEquals, ContainsIgnoreCase, NotContainsIgnoreCase and others",
       "order": 2
     },
     "server_filter": {
       "type": "string",
-      "title": "Server filter",
+      "title": "Server Filter",
       "description": "A Sensor filters object where you filter sensors by different criteria such as operating system",
       "order": 1
     }
@@ -59,6 +57,7 @@ class SearchForFilesOutput(insightconnect_plugin_runtime.Output):
     "response": {
       "$ref": "#/definitions/response",
       "title": "Response",
+      "description": "Search file response",
       "order": 1
     }
   },
@@ -108,8 +107,8 @@ class SearchForFilesOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "cpuTrackingWindowMilli": {
               "type": "integer",
-              "title": "Cpu Tracking Window Milli",
-              "description": "Cpu tracking window milli",
+              "title": "CPU Tracking Window Milli",
+              "description": "CPU tracking window milli",
               "order": 4
             },
             "diskRateBytesPerMilli": {
@@ -180,8 +179,8 @@ class SearchForFilesOutput(insightconnect_plugin_runtime.Output):
             },
             "targetCpuPercentage": {
               "type": "integer",
-              "title": "Target Cpu Percentage",
-              "description": "Target cpu percentage",
+              "title": "Target CPU Percentage",
+              "description": "Target CPU percentage",
               "order": 5
             },
             "timoutPerFileScan": {
@@ -227,8 +226,8 @@ class SearchForFilesOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "cpuTrackingWindowMilli": {
           "type": "integer",
-          "title": "Cpu Tracking Window Milli",
-          "description": "Cpu tracking window milli",
+          "title": "CPU Tracking Window Milli",
+          "description": "CPU tracking window milli",
           "order": 4
         },
         "diskRateBytesPerMilli": {
@@ -299,8 +298,8 @@ class SearchForFilesOutput(insightconnect_plugin_runtime.Output):
         },
         "targetCpuPercentage": {
           "type": "integer",
-          "title": "Target Cpu Percentage",
-          "description": "Target cpu percentage",
+          "title": "Target CPU Percentage",
+          "description": "Target CPU percentage",
           "order": 5
         },
         "timoutPerFileScan": {
@@ -531,7 +530,7 @@ class SearchForFilesOutput(insightconnect_plugin_runtime.Output):
             "SendingMsi": {
               "type": "integer",
               "title": "Sending MSI",
-              "description": "Sending msi",
+              "description": "Sending MSI",
               "order": 15
             },
             "SendingPlatform": {
@@ -706,8 +705,8 @@ class SearchForFilesOutput(insightconnect_plugin_runtime.Output):
               "properties": {
                 "cpuTrackingWindowMilli": {
                   "type": "integer",
-                  "title": "Cpu Tracking Window Milli",
-                  "description": "Cpu tracking window milli",
+                  "title": "CPU Tracking Window Milli",
+                  "description": "CPU tracking window milli",
                   "order": 4
                 },
                 "diskRateBytesPerMilli": {
@@ -778,8 +777,8 @@ class SearchForFilesOutput(insightconnect_plugin_runtime.Output):
                 },
                 "targetCpuPercentage": {
                   "type": "integer",
-                  "title": "Target Cpu Percentage",
-                  "description": "Target cpu percentage",
+                  "title": "Target CPU Percentage",
+                  "description": "Target CPU percentage",
                   "order": 5
                 },
                 "timoutPerFileScan": {
@@ -825,8 +824,8 @@ class SearchForFilesOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "cpuTrackingWindowMilli": {
               "type": "integer",
-              "title": "Cpu Tracking Window Milli",
-              "description": "Cpu tracking window milli",
+              "title": "CPU Tracking Window Milli",
+              "description": "CPU tracking window milli",
               "order": 4
             },
             "diskRateBytesPerMilli": {
@@ -897,8 +896,8 @@ class SearchForFilesOutput(insightconnect_plugin_runtime.Output):
             },
             "targetCpuPercentage": {
               "type": "integer",
-              "title": "Target Cpu Percentage",
-              "description": "Target cpu percentage",
+              "title": "Target CPU Percentage",
+              "description": "Target CPU percentage",
               "order": 5
             },
             "timoutPerFileScan": {
@@ -1129,7 +1128,7 @@ class SearchForFilesOutput(insightconnect_plugin_runtime.Output):
                 "SendingMsi": {
                   "type": "integer",
                   "title": "Sending MSI",
-                  "description": "Sending msi",
+                  "description": "Sending MSI",
                   "order": 15
                 },
                 "SendingPlatform": {
@@ -1365,7 +1364,7 @@ class SearchForFilesOutput(insightconnect_plugin_runtime.Output):
             "SendingMsi": {
               "type": "integer",
               "title": "Sending MSI",
-              "description": "Sending msi",
+              "description": "Sending MSI",
               "order": 15
             },
             "SendingPlatform": {
@@ -1601,7 +1600,7 @@ class SearchForFilesOutput(insightconnect_plugin_runtime.Output):
         "SendingMsi": {
           "type": "integer",
           "title": "Sending MSI",
-          "description": "Sending msi",
+          "description": "Sending MSI",
           "order": 15
         },
         "SendingPlatform": {

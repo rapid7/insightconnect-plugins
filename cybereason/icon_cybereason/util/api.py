@@ -1,5 +1,5 @@
-import requests
 import insightconnect_plugin_runtime
+import requests
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 import json
 from logging import Logger
