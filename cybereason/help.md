@@ -26,10 +26,7 @@ Example input:
 
 ```
 {
-  "credentials": {
-    "username": "user@example.com",
-    "password": "mypassword"
-  },
+  "credentials": "{\"username\": \"user@example.com\", \"password\": \"mypassword\"}",
   "hostname": "example.com",
   "port": 8443
 }
@@ -56,12 +53,7 @@ Example input:
 
 ```
 {
-  "actions_by_machine": {
-    "126811122.2298225282553311122": [{
-      "targetId": "531122333.-3391199199911692223",
-      "actionType": "KILL_PROCESS"
-    }]
-  },
+  "actions_by_machine": "{\"126811122.2298225282553311122\": [{\"targetId\": \"531122333.-3391199199911692223\",\"actionType\": \"KILL_PROCESS\"}]}",
   "initiator_user_name": "user@example.com",
   "malop_id": "22.2787422324806222966",
   "pylum_ids": [
