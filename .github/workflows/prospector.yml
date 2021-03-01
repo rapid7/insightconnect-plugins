@@ -19,4 +19,4 @@ jobs:
 
       - name: Prospector
         run: |
-          prospector --tool dodgy pep8 bandit
+          prospector --tool dodgy pep8 bandit -p .
