@@ -322,8 +322,10 @@ Example input:
 |----|----|--------|-----------|
 |success|boolean|False|Operation status|
 
- ```
+Example output:
 
+ ```
+ 
 {
   "success": true
 }
@@ -356,12 +358,13 @@ Example input:
 |----|----|--------|-----------|
 |success|boolean|False|Operation status|
 
- ```
+Example output:
+
+```
 
 {
   "success": true
 }
-
 ```
 
 #### Disable
@@ -498,7 +501,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
-* 5.1.0 - Update actions to return underlying LDAP library exceptions
+* 5.1.0 - Update error handling in Add User, Force Password Reset, Modify Groups, Reset Password actions | Update connection.py to raise PluginException rather than ConnectionTestException
 * 5.0.0 - Add Chase Referrals input to the connection to support multi-domain environments | Rename Add action to Add User to be more explicit | Refactor reusable code from actions into util.py
 * 4.1.0 - Add new input Attributes in action Query | Add new output Count in action Query
 * 4.0.3 - Fix issue with connection documentation incorrectly stating a protocol prefix is required
