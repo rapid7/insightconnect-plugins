@@ -4,7 +4,7 @@ from komand.exceptions import PluginException
 # Custom imports below
 from ldap3 import extend
 from ldap3 import MODIFY_REPLACE
-from ldap3.core.exceptions import *
+from ldap3.core.exceptions import LDAPException
 
 
 class AddUser(komand.Action):
@@ -63,7 +63,7 @@ class AddUser(komand.Action):
         try:
             conn.raise_exceptions = True
             conn.add(dn, ["person", "user"], parameters)
-        except (LDAPObjectClassError, LDAPAttributeError, LDAPEntryAlreadyExistsResult) as e:
+        except LDAPException as e:
             raise PluginException(cause="LDAP returned an error message.",
                                   assistance="Creating new user failed, error returned by LDAP.",
                                   data=e)
@@ -72,7 +72,7 @@ class AddUser(komand.Action):
         if ssl:
             try:
                 extend.ad_modify_password(conn, dn, password, None)
-            except LDAPOperationResult as e:
+            except LDAPException:
                 self.logger.error("User account created successfully, but unable to update the password.")
                 success = False
         else:
