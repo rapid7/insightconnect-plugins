@@ -1,4 +1,4 @@
 [tool.black]
-line-length = 100
+line-length = 120
 target-version = ['py36', 'py37', 'py38']
-exclude = '(schema.py|setup.py|__init__.py)'
+exclude = '(schema.py|setup.py|__init__.py|ec2_investigations)'
