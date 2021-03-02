@@ -1,5 +1,8 @@
 import re
 from komand.exceptions import PluginException
+from ldap3.core.exceptions import LDAPInvalidDnError, LDAPOperationsErrorResult
+from ldap3 import MODIFY_REPLACE
+from logging import Logger
 
 
 class ADUtils:
@@ -64,7 +67,7 @@ class ADUtils:
         # Re add the removed ,..= to dn_list strings then remove the unneeded comma
         try:
             for idx, value in enumerate(attribute):
-                dn_list[idx + 1] = f"{value}{dn_list[idx+1]}"[1:]
+                dn_list[idx + 1] = f"{value}{dn_list[idx + 1]}"[1:]
         except PluginException as e:
             raise PluginException(
                 cause="The input DN was invalid. ",
@@ -83,15 +86,16 @@ class ADUtils:
         search_base = ",".join(dc_list)
         return search_base
 
-    def format_dn(self, dn: str) -> (str, str):
+    @staticmethod
+    def format_dn(dn: str) -> (str, str):
         """
         This method takes a dn and preforms all needed operations to make it ready for use with ldap
         :param dn: A dn
         :return: Will return a properly formatted dn and search base as a tuple
         """
-        dn = self.dn_normalize(dn)
-        dn_list = self.dn_escape_and_split(dn)
-        search_base = self.find_search_base(dn_list)
+        dn = ADUtils.dn_normalize(dn)
+        dn_list = ADUtils.dn_escape_and_split(dn)
+        search_base = ADUtils.find_search_base(dn_list)
         formatted_dn = ",".join(dn_list)
         return formatted_dn, search_base
 
@@ -144,3 +148,58 @@ class ADUtils:
                 query = query[:value] + "\\29" + query[value + 1 :]
                 query = query[:key] + "\\28" + query[key + 1 :]
         return query
+
+    @staticmethod
+    def escape_user_dn(user_dn: str) -> str:
+        pairs = ADUtils.find_parentheses_pairs(user_dn)
+        if pairs:
+            # replace ( and ) when they are part of a name rather than a search parameter
+            user_dn = ADUtils.escape_brackets_for_query(user_dn, pairs)
+
+        return user_dn
+
+    @staticmethod
+    def check_user_dn_is_valid(conn, user_dn: str, search_base: str) -> bool:
+        try:
+            conn.search(
+                search_base=search_base,
+                search_filter=f"(distinguishedName={ADUtils.escape_user_dn(user_dn)})",
+                attributes=["userAccountControl"],
+            )
+        except LDAPInvalidDnError as e:
+            raise PluginException(cause="The DN was not found.", assistance=f"The DN {user_dn} was not found.", data=e)
+        except LDAPOperationsErrorResult as e:
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=e)
+        return len([d["dn"] for d in conn.response if "dn" in d]) > 0
+
+    @staticmethod
+    def change_account_status(conn, dn: str, status: bool, logger: Logger) -> bool:
+        dn, search_base = ADUtils.format_dn(dn)
+        logger.info(f"Escaped DN {dn}")
+
+        if not ADUtils.check_user_dn_is_valid(conn, dn, search_base):
+            logger.error(f"The DN {dn} was not found")
+            raise PluginException(cause=f"The DN {dn} was not found.", assistance=f"Please provide a valid DN and try again.")
+        user_list = [d["attributes"] for d in conn.response if "attributes" in d]
+        user_control = user_list[0]
+        try:
+            account_status = user_control["userAccountControl"]
+        except Exception as ex:
+            logger.error("The DN " + dn + " is not a user")
+            raise PluginException(
+                cause=f"The DN {dn} is not a user object therefore it cannot be enabled or disabled.",
+                assistance="Please provide a valid user object and try again.",
+            ) from ex
+        user_account_flag = 2
+        if status:
+            account_status = account_status & ~user_account_flag
+        else:
+            account_status = account_status | user_account_flag
+
+        conn.modify(dn, {"userAccountControl": [(MODIFY_REPLACE, [account_status])]})
+        if conn.result["result"] == 0:
+            return True
+
+        output = conn.result["description"]
+        logger.error(f"failed: error message {output}")
+        return False
