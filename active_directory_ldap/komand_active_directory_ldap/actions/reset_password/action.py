@@ -5,6 +5,7 @@ from .schema import ResetPasswordInput, ResetPasswordOutput
 from komand.exceptions import PluginException
 from ldap3 import extend
 from komand_active_directory_ldap.util.utils import ADUtils
+from ldap3.core.exceptions import LDAPException
 
 
 class ResetPassword(komand.Action):
@@ -27,15 +28,15 @@ class ResetPassword(komand.Action):
         self.logger.info(f"Escaped DN {dn}")
 
         if ssl is False:
-            raise PluginException(
-                cause="SSL must be enabled",
-                assistance="SSL must be enabled for the reset password action",
-            )
+            raise PluginException(cause="SSL must be enabled",
+                                  assistance="SSL must be enabled for the reset password action")
 
-        success = extend.ad_modify_password(conn, dn, new_password, old_password=None)
-        result = conn.result
-
-        if success is False:
-            raise PluginException(PluginException.Preset.UNKNOWN, data=result)
+        try:
+            conn.raise_exceptions = True
+            success = extend.ad_modify_password(conn, dn, new_password, old_password=None)
+        except LDAPException as e:
+            raise PluginException(cause="LDAP returned an error in the response.",
+                                  assistance="LDAP failed to reset the password for this user",
+                                  data=e)
 
         return {"success": success}

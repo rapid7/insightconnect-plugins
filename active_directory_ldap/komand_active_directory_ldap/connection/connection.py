@@ -1,10 +1,10 @@
 import komand
-from komand.exceptions import ConnectionTestException
+from komand.exceptions import ConnectionTestException, PluginException
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
 import ldap3
-from ldap3.core import exceptions
+from ldap3.core.exceptions import *
 
 
 class Connection(komand.Connection):
@@ -44,16 +44,16 @@ class Connection(komand.Connection):
                 auto_referrals=referrals,
                 authentication=ldap3.NTLM
             )
-        except exceptions.LDAPBindError as e:
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD, data=e)
-        except exceptions.LDAPAuthorizationDeniedResult as e:
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED, data=e)
-        except exceptions.LDAPSocketOpenError as e:
-            raise ConnectionTestException(
-                preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE,
+        except LDAPBindError as e:
+            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=e)
+        except LDAPAuthorizationDeniedResult as e:
+            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=e)
+        except LDAPSocketOpenError as e:
+            raise PluginException(
+                preset=PluginException.Preset.SERVICE_UNAVAILABLE,
                 data=e
             )
-        except exceptions.LDAPException:
+        except LDAPException:
             # An exception here is likely caused because the ldap server dose use NTLM
             # A basic auth connection will be tried instead
             self.logger.info("Failed to connect to the server with NTLM, attempting to connect with basic auth")
@@ -65,16 +65,16 @@ class Connection(komand.Connection):
                     auto_referrals=referrals,
                     auto_bind=True
                 )
-            except exceptions.LDAPBindError as e:
-                raise ConnectionTestException(
-                    preset=ConnectionTestException.Preset.USERNAME_PASSWORD,
+            except LDAPBindError as e:
+                raise PluginException(
+                    preset=PluginException.Preset.USERNAME_PASSWORD,
                     data=e
                 )
-            except exceptions.LDAPAuthorizationDeniedResult as e:
-                raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED, data=e)
-            except exceptions.LDAPSocketOpenError as e:
-                raise ConnectionTestException(
-                    preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE,
+            except LDAPAuthorizationDeniedResult as e:
+                raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=e)
+            except LDAPSocketOpenError as e:
+                raise PluginException(
+                    preset=PluginException.Preset.SERVICE_UNAVAILABLE,
                     data=e
                 )
 
@@ -100,7 +100,7 @@ class Connection(komand.Connection):
                 if host.find('//') != -1:
                     host = host[2:]
             else:
-                raise ConnectionTestException(
+                raise PluginException(
                     cause=f"There are too many colons ({colons}) in the host name ({host}).",
                     assistance="Check that the host name is correct",
                     data=host
@@ -113,7 +113,7 @@ class Connection(komand.Connection):
     def test(self):
         try:
             self.conn.extend.standard.who_am_i()
-        except exceptions.LDAPExtensionError as e:
+        except LDAPExtensionError as e:
             raise ConnectionTestException(
                 preset=ConnectionTestException.Preset.UNAUTHORIZED,
                 data=e
