@@ -30,14 +30,10 @@ class AddUserInput(komand.Input):
   "title": "Variables",
   "properties": {
     "account_disabled": {
-      "type": "string",
+      "type": "boolean",
       "title": "Account Disabled",
       "description": "Set this to true to disable the user account at creation",
-      "default": "true",
-      "enum": [
-        "true",
-        "false"
-      ],
+      "default": true,
       "order": 7
     },
     "additional_parameters": {
