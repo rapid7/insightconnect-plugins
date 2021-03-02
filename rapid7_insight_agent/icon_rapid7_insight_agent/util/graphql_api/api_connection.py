@@ -225,12 +225,12 @@ class ApiConnection:
             "variables": {"orgId": self.org_key},
         }
 
-        self.logger.info(f"Getting all agents...")
+        self.logger.info("Getting all agents...")
         results_object = self._post_payload(payload)
 
         has_next_page = results_object.get("data").get("organization").get("assets").get("pageInfo").get("hasNextPage")
         agents.extend(self._get_agents_from_result_object(results_object))
-        self.logger.info(f"Initial agents received.")
+        self.logger.info("Initial agents received.")
 
         agent = self._find_agent_in_agents(agents, agent_input, agent_type)
         if agent:
@@ -239,7 +239,7 @@ class ApiConnection:
         # See if we have more pages of data, if so get next page and append until we reach the end
         self.logger.info(f"Extra pages of agents: {has_next_page}")
         while has_next_page:
-            self.logger.info(f"Getting next page of agents.")
+            self.logger.info("Getting next page of agents.")
             has_next_page, results_object, next_agents = self._get_next_page_of_agents(results_object)
             agent = self._find_agent_in_agents(next_agents, agent_input, agent_type)
             if agent:
@@ -247,7 +247,7 @@ class ApiConnection:
 
         raise APIException(
             cause=f"Could not find agent matching {agent_input} of type {agent_type}.",
-            assistance=f"Check the agent input value and try again.",
+            assistance="Check the agent input value and try again.",
             data="NA",
         )
 
@@ -259,7 +259,7 @@ class ApiConnection:
         :param results_object: dict
         :return: tuple (boolean, dict (results), list (agents))
         """
-        self.logger.info(f"Getting next page of agents.")
+        self.logger.info("Getting next page of agents.")
         next_cursor = results_object.get("data").get("organization").get("assets").get("pageInfo").get("endCursor")
         payload = {
             "query": "query( $orgId:String! $nextCursor:String! ) { organization(id: $orgId) { assets( first: 10000, after: $nextCursor ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
@@ -297,7 +297,7 @@ class ApiConnection:
                     if agent_input == agent.get("host").get("id"):
                         return agent
                     for host_name in agent.get("host").get("hostNames"):
-                        if agent_input == host_name.get("name"):
+                        if agent_input.lower() == host_name.get("name", "").lower():
                             return agent
                 elif agent_type == agent_typer.MAC_ADDRESS:
                     # MAC addresses can come in with : or - as a separator, remove all of it and compare
