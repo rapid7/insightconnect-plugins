@@ -85,7 +85,7 @@ class SentineloneAPI:
         if len(agents) > 1:
             raise PluginException(
                 cause="Multiple agents found.",
-                assistance="Please provide a unique identifier for the agent to be enable.",
+                assistance="Please provide a unique agent identifier so the action can be performed on the intended agent.",
             )
         if len(agents) == 0:
             return True
