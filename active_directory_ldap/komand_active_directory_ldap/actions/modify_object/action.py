@@ -4,7 +4,7 @@ from .schema import ModifyObjectInput, ModifyObjectOutput, Input, Output, Compon
 # Custom imports below
 from komand.exceptions import PluginException
 from komand_active_directory_ldap.util.utils import ADUtils
-from ldap3 import MODIFY_ADD, MODIFY_REPLACE, ALL_ATTRIBUTES, ALL_OPERATIONAL_ATTRIBUTES
+from ldap3 import MODIFY_REPLACE, ALL_ATTRIBUTES, ALL_OPERATIONAL_ATTRIBUTES
 from json import loads
 
 
