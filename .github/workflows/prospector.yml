@@ -20,3 +20,37 @@ jobs:
       - name: Prospector
         run: |
           prospector --without-tool pylint
+  black:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+
+      - name: Install dependencies
+        run: |
+          pip install black
+
+      - name: Prospector
+        run: |
+          black .
+  pylint:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+
+      - name: Install dependencies
+        run: |
+          pip install prospector
+
+      - name: Prospector
+        run: |
+          prospector --tool pylint
