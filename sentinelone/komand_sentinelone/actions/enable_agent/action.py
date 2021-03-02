@@ -1,6 +1,5 @@
 import insightconnect_plugin_runtime
 from .schema import EnableAgentInput, EnableAgentOutput, Input, Output, Component
-
 # Custom imports below
 
 
