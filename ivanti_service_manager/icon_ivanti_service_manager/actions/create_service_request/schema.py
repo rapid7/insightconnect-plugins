@@ -416,13 +416,13 @@ class CreateServiceRequestOutput(insightconnect_plugin_runtime.Output):
         },
         "LastModBy": {
           "type": "string",
-          "title": "Last Mod By",
+          "title": "Last Modified By",
           "description": "Last modified by",
           "order": 3
         },
         "LastModDateTime": {
           "type": "string",
-          "title": "Last Mod Date Time",
+          "title": "Last Modified Date Time",
           "description": "Last modified date and time",
           "order": 2
         },
@@ -620,7 +620,7 @@ class CreateServiceRequestOutput(insightconnect_plugin_runtime.Output):
         },
         "RequestOfferingWFTrigger": {
           "type": "string",
-          "title": "Request Offering WF Trigger",
+          "title": "Request Offering Workflow Trigger",
           "description": "Request offering workflow trigger",
           "order": 99
         },

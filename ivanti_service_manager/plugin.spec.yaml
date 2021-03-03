@@ -119,12 +119,12 @@ types:
       type: boolean
       required: false
     LastModBy:
-      title: Last Mod By
+      title: Last Modified By
       description: Last modified by
       type: string
       required: false
     LastModDateTime:
-      title: Last Mod Date Time
+      title: Last Modified Date Time
       description: Last modified date and time
       type: string
       required: false
@@ -625,12 +625,12 @@ types:
       type: string
       required: false
     LastModBy:
-      title: Last Mod By
+      title: Last Modified By
       description: Last modified by
       type: string
       required: false
     LastModDateTime:
-      title: Last Mod Date Time
+      title: Last Modified Date Time
       description: Last modified date and time
       type: string
       required: false
@@ -741,12 +741,12 @@ types:
       type: string
       required: false
     LastModDateTime:
-      title: Last Mod Date Time
+      title: Last Modified Date Time
       description: Last modified date and time
       type: string
       required: false
     LastModBy:
-      title: Last Mod By
+      title: Last Modified By
       description: Last modified by
       type: string
       required: false
@@ -1226,7 +1226,7 @@ types:
       type: boolean
       required: false
     RequestOfferingWFTrigger:
-      title: Request Offering WF Trigger
+      title: Request Offering Workflow Trigger
       description: Request offering workflow trigger
       type: string
       required: false
