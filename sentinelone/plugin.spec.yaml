@@ -1632,7 +1632,7 @@ actions:
         required: false
       reboot:
         title: Reboot
-        description: Set true to reboot the endpoint, set false to not reboot the endpoint
+        description: Set true to reboot the endpoint, false to skip rebooting
         type: boolean
         required: true
         example: true
