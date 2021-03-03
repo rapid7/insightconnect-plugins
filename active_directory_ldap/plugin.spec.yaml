@@ -4,7 +4,7 @@ products: [insightconnect]
 name: active_directory_ldap
 title: Active Directory LDAP
 description: "This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network"
-version: 5.0.0
+version: 5.1.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -85,6 +85,7 @@ actions:
         example: ["createTimestamp", "creatorsName"]
     output:
       results:
+        title: Results
         description: Results returned
         type: '[]result'
         required: false
@@ -105,6 +106,7 @@ actions:
         example: CN=user,OU=domain_users,DC=example,DC=com
     output:
       success:
+        title: Success
         description: Operation status
         type: boolean
         required: false
@@ -170,6 +172,7 @@ actions:
         example: '{"telephoneNumber":"(617)555-1234"}'
     output:
       success:
+        title: Success
         description: Operation status
         type: boolean
         required: false
@@ -185,6 +188,7 @@ actions:
         example: CN=user,OU=domain_users,DC=example,DC=com
     output:
       success:
+        title: Success
         description: Operation status
         type: boolean
         required: false
@@ -200,6 +204,7 @@ actions:
         example: CN=user,OU=domain_users,DC=example,DC=com
     output:
       success:
+        title: Success
         description: Operation status
         type: boolean
         required: false
@@ -230,6 +235,7 @@ actions:
         example: add
     output:
       success:
+        title: Success
         description: Operation status
         type: boolean
         required: false
@@ -251,6 +257,7 @@ actions:
         example: OU=disabled_users,DC=example,DC=com
     output:
       success:
+        title: Success
         description: Operation status
         type: boolean
         required: false
@@ -272,6 +279,7 @@ actions:
         example: mypassword
     output:
       success:
+        title: Success
         description: Operation status
         type: boolean
         required: false

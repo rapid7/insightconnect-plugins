@@ -46,6 +46,54 @@ Example input:
 
 ### Actions
 
+#### Collect Investigation Package
+
+This action collects investigation package from a machine.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|Investigation package collected via InsightConnect|False|Comment to associate with the action|None|Investigation package collected via InsightConnect|
+|machine|string|None|True|Machine IP address, hostname, or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+
+Example input:
+
+```
+{
+  "comment": "Investigation package collected via InsightConnect",
+  "machine": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|collect_investigation_package_response|machine_action|True|A response that includes information about the action taken|
+
+Example output:
+
+```
+{
+  "collect_investigation_package_response": {
+    "requestorComment": "Investigation package collected via InsightConnect",
+    "status": "Pending",
+    "type": "CollectInvestigationPackage",
+    "commands": [],
+    "creationDateTimeUtc": "2021-02-25T13:53:29.1889041Z",
+    "requestSource": "PublicApi",
+    "id": "7de39b39-107e-4556-855b-25cf652835ef",
+    "lastUpdateDateTimeUtc": "2021-02-25T13:53:29.1889041Z",
+    "machineId": "8de370ca0e0e58ff2c2513bbc16f632ffa6e6024",
+    "requestor": "b6e46392-61b9-48c0-ada3-63e3cd30d95b",
+    "@odata.context": "https://api.securitycenter.windows.com/api/$metada...",
+    "computerDnsName": "msedgewin10",
+    "errorHResult": 0
+  }
+}
+```
+
 #### Get Related Machines
 
 This action is used to get machines related to an file hash(SHA1), domain or username indicator.
@@ -1143,6 +1191,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.7.0 - Add new action Collect Investigation Package
 * 4.6.0 - Add new actions Get Installed Software, Get Related Machines and Manage Tags
 * 4.5.1 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/microsoft-defender-ATP)
 * 4.5.0 - Add new action Get Missing Software Updates
