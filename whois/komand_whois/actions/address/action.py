@@ -79,7 +79,10 @@ class Address(insightconnect_plugin_runtime.Action):
         binary = "/usr/bin/whois"
         cmd = "%s %s" % (binary, params.get("address"))
         stdout = insightconnect_plugin_runtime.helper.exec_command(cmd)["stdout"]
-        stdout = stdout.decode("utf-8")
+        try:
+            stdout = stdout.decode("utf-8")
+        except UnicodeDecodeError:
+            stdout = stdout.decode("iso-8859-1")
         results = self.parse_stdout(params.get(Input.REGISTRAR), stdout=stdout)
         results = insightconnect_plugin_runtime.helper.clean_dict(results)
 
