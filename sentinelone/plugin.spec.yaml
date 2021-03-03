@@ -1582,7 +1582,7 @@ actions:
         required: true
   disable_agent:
     title: Disable Agent
-    description: Disable agents that match the filter
+    description: Disable agents that match a filter
     input:
       agent:
         title: Agent
