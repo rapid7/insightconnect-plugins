@@ -41,7 +41,12 @@ class MicrosoftIntuneAPI:
 
     @staticmethod
     def filter_managed_apps_result(response, app_filter) -> list:
-        return list(filter(lambda iter_app: iter_app["displayName"].lower() == app_filter.lower(), response["value"]))
+        return list(
+            filter(
+                lambda iter_app: iter_app.get("displayName", "").lower() == app_filter.lower(),
+                response.get("value", []),
+            )
+        )
 
     def get_managed_apps_all_pages(self, app_filter: Optional[str]) -> list:
         results = []
