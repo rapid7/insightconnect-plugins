@@ -318,18 +318,23 @@ Example input:
 This action is used to get auth logs, limited to past 180 days.
 [Currentmillis.com](https://currentmillis.com/) is useful for finding a usable UNIX timestamp.
 
+Available inputs for parameters:
+
+* `factors` - a comma-separated list of factors(duo_push, phone_call, u2f_token, hardware_token, bypass_code, sms_passcode, duo_mobile_passcode, yubikey_code, passcode, digipass_go_7_token, not_available, sms_refresh, remembered_device, trusted_network), if left empty, the action returns the authentication logs for all factors used for an authentication attempt
+* `reasons` - a comma-separated list of reasons(user_marked_fraud, deny_unenrolled_user, error, locked_out, user_disabled, user_cancelled, invalid_passcode, no_response, no_keys_pressed, call_timed_out, location_restricted, factor_restricted, platform_restricted, version_restricted, rooted_device, no_screen_lock, touch_id_disabled, no_disk_encryption, anonymous_ip, out_of_date, denied_by_policy, software_restricted, no_duo_certificate_present, user_provided_invalid_certificate, could_not_determine_if_endpoint_was_trusted, invalid_management_certificate_collection_state, no_referring_hostname_provided, invalid_referring_hostname_provided, no_web_referer_match, endpoint_failed_google_verification, endpoint_is_not_trusted, invalid_device, anomalous_push,  endpoint_is_not_in_management_system, no_activated_duo_mobile_account, allow_unenrolled_user, bypass_user, trusted_network, remembered_device, trusted_location, user_approved, valid_passcode, allowed_by_policy, allow_unenrolled_user_on_trusted_network, user_not_in_permitted_group), if left empty, the action returns the authentication logs for all reasons associated with an authentication attempt
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |applications|[]string|None|False|List of application IDs to filter on|None|["DIV9C5V7T6L02DRWL4RU"]|
 |event_types|[]string|None|False|List of event types(authentication, enrollment) to filter on, to include all leave this parameter empty|None|["authentication"]|
-|factors|[]string|None|False|List of factors or methods used for an authentication attempt(duo_push, phone_call, u2f_token, hardware_token, bypass_code, sms_passcode, duo_mobile_passcode, yubikey_code, passcode, digipass_go_7_token, not_available, sms_refresh, remembered_device, trusted_network) to filter on, to include all leave this parameter empty|None|["duo_push", "sms_passcode"]|
+|factors|[]string|None|False|List of factors or methods used for an authentication attempt to filter on, to include all leave this parameter empty. Check the help documentation to see all available inputs|None|["duo_push", "sms_passcode"]|
 |groups|[]string|None|False|List of group IDs to filter on|None|["DG67EON0I1QA2ZDUF32M"]|
 |maxtime|integer|None|False|Maximum time in UNIX timestamp milliseconds. Must be 13 or more digits in length and greater than mintime. To use current time leave this parameter empty|None|1611069760000|
 |mintime|integer|None|True|Minimum time in UNIX timestamp milliseconds. Must be 13 or more digits in length|None|1609377288936|
 |phone_numbers|[]string|None|False|List of phone numbers to filter on|None|["+11111111111"]|
-|reasons|[]string|None|False|List of reasons associated with an authentication attempt(user_marked_fraud, deny_unenrolled_user, error, locked_out, user_disabled, user_cancelled, invalid_passcode, no_response, no_keys_pressed, call_timed_out, location_restricted, factor_restricted, platform_restricted, version_restricted, rooted_device, no_screen_lock, touch_id_disabled, no_disk_encryption, anonymous_ip, out_of_date, denied_by_policy, software_restricted, no_duo_certificate_present, user_provided_invalid_certificate, could_not_determine_if_endpoint_was_trusted, invalid_management_certificate_collection_state, no_referring_hostname_provided, invalid_referring_hostname_provided, no_web_referer_match, endpoint_failed_google_verification, endpoint_is_not_trusted, invalid_device, anomalous_push,  endpoint_is_not_in_management_system, no_activated_duo_mobile_account, allow_unenrolled_user, bypass_user, trusted_network, remembered_device, trusted_location, user_approved, valid_passcode, allowed_by_policy, allow_unenrolled_user_on_trusted_network, user_not_in_permitted_group) to filter on, to include all leave this parameter empty|None|["user_disabled"]|
+|reasons|[]string|None|False|List of reasons associated with an authentication attempt to filter on, to include all leave this parameter empty. Check the help documentation to see all available inputs|None|["user_disabled"]|
 |registration_id|[]string|None|False|List of FIDO U2F token registration IDs to filter on|None|["D21RU6X1B1DF5P54B6PV"]|
 |results|[]string|None|False|List of results of an authentication attempt(success, denied, fraud) to filter on, to include all leave this parameter empty|None|["denied"]|
 |token_id|[]string|None|False|List of hardware OTP token IDs to filter on|None|["DHIZ34ALBA2445ND4AI2"]|
