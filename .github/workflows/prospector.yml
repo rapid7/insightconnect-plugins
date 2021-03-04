@@ -15,7 +15,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install prospector
+          pip install pip install prospector[with_bandit]
 
       - name: Prospector
         run: |
