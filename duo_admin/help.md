@@ -320,8 +320,67 @@ This action is used to get auth logs, limited to past 180 days.
 
 Available inputs for parameters:
 
-* `factors` - a comma-separated list of factors(duo_push, phone_call, u2f_token, hardware_token, bypass_code, sms_passcode, duo_mobile_passcode, yubikey_code, passcode, digipass_go_7_token, not_available, sms_refresh, remembered_device, trusted_network), if left empty, the action returns the authentication logs for all factors used for an authentication attempt
-* `reasons` - a comma-separated list of reasons(user_marked_fraud, deny_unenrolled_user, error, locked_out, user_disabled, user_cancelled, invalid_passcode, no_response, no_keys_pressed, call_timed_out, location_restricted, factor_restricted, platform_restricted, version_restricted, rooted_device, no_screen_lock, touch_id_disabled, no_disk_encryption, anonymous_ip, out_of_date, denied_by_policy, software_restricted, no_duo_certificate_present, user_provided_invalid_certificate, could_not_determine_if_endpoint_was_trusted, invalid_management_certificate_collection_state, no_referring_hostname_provided, invalid_referring_hostname_provided, no_web_referer_match, endpoint_failed_google_verification, endpoint_is_not_trusted, invalid_device, anomalous_push,  endpoint_is_not_in_management_system, no_activated_duo_mobile_account, allow_unenrolled_user, bypass_user, trusted_network, remembered_device, trusted_location, user_approved, valid_passcode, allowed_by_policy, allow_unenrolled_user_on_trusted_network, user_not_in_permitted_group), if left empty, the action returns the authentication logs for all reasons associated with an authentication attempt
+* `factors` - a comma-separated list of factors, if left empty, the action returns the authentication logs for all factors used for an authentication attempt
+    * bypass_code
+    * digipass_go_7_token
+    * duo_mobile_passcode
+    * duo_push
+    * hardware_token
+    * not_available
+    * passcode
+    * phone_call
+    * remembered_device
+    * sms_passcode
+    * sms_refresh
+    * trusted_network
+    * u2f_token
+    * yubikey_code
+* `reasons` - a comma-separated list of reasons, if left empty, the action returns the authentication logs for all reasons associated with an authentication attempt
+    * allow_unenrolled_user
+    * allow_unenrolled_user_on_trusted_network
+    * allowed_by_policy
+    * anomalous_push
+    * anonymous_ip
+    * bypass_user
+    * call_timed_out
+    * could_not_determine_if_endpoint_was_trusted
+    * denied_by_policy
+    * deny_unenrolled_user
+    * endpoint_failed_google_verification
+    * endpoint_is_not_in_management_system
+    * endpoint_is_not_trusted
+    * error
+    * factor_restricted
+    * invalid_device
+    * invalid_management_certificate_collection_state
+    * invalid_passcode
+    * invalid_referring_hostname_provided
+    * location_restricted
+    * locked_out
+    * no_activated_duo_mobile_account
+    * no_disk_encryption
+    * no_duo_certificate_present
+    * no_keys_pressed
+    * no_referring_hostname_provided
+    * no_response
+    * no_screen_lock
+    * no_web_referer_match
+    * out_of_date
+    * platform_restricted
+    * remembered_device
+    * rooted_device
+    * software_restricted
+    * touch_id_disabled
+    * trusted_location
+    * trusted_network
+    * user_approved
+    * user_cancelled
+    * user_disabled
+    * user_marked_fraud
+    * user_not_in_permitted_group
+    * user_provided_invalid_certificate
+    * valid_passcode
+    * version_restricted
 
 ##### Input
 
