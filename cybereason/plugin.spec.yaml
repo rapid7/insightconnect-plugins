@@ -417,7 +417,7 @@ actions:
         example: 'machineName: ["rapid7-windows"]'
       file_filter:
         title: File Filter
-        description: A fileFilters object where you filter by machine name, folder, file creation or modification time or file size with operator Equals, NotEquals, ContainsIgnoreCase, NotContainsIgnoreCase and others
+        description: A fileFilters object for filtering by machine name, folder, file creation or modification time or file size with operator Equals, NotEquals, ContainsIgnoreCase, NotContainsIgnoreCase and others
         type: string
         required: true
         example: 'fileName Equals: ["sample.py"]'
