@@ -433,7 +433,7 @@ actions:
     input:
       malop_id:
         title: Malop ID
-        description: Malop ID to isolate a machine or empty to remediate process not involved in a malop
+        description: Malop ID to isolate a machine or empty to remediate process not involved in a Malop
         type: string
         required: false
         example: "22.2787422324806222966"
