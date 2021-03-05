@@ -429,7 +429,7 @@ actions:
         required: true
   isolate_machine:
     title: Isolate Machine
-    description: Isolate a machine associated with the root cause of a Malop, or to remediate a process not involved in a malop
+    description: Isolate a machine associated with the root cause of a Malop, or to remediate a process not involved in a Malop
     input:
       malop_id:
         title: Malop ID
