@@ -39,7 +39,7 @@ class EnableAgentInput(insightconnect_plugin_runtime.Input):
     "reboot": {
       "type": "boolean",
       "title": "Reboot",
-      "description": "Set true to reboot the endpoint, set false to not reboot the endpoint",
+      "description": "Set true to reboot the endpoint, false to skip rebooting",
       "order": 2
     }
   },

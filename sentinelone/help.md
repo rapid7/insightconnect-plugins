@@ -32,10 +32,7 @@ Example input:
 
 ```
 {
-  "credentials": {
-    "username": "user@example.com",
-    "password": "mypassword"
-  },
+  "credentials": "{\"username\": \"user@example.com\", \"password\": \"mypassword\"}",
   "url": "https://example.sentinelone.com"
 }
 ```
@@ -54,16 +51,14 @@ This action is used to enable agents that match the filter.
 |----|----|-------|--------|-----------|----|-------|
 |agent|string|None|False|Agent to perform disable action on. Accepts IP address, MAC address, hostname, UUID or agent ID. Leave empty to perform action on all applicable Agents|None|hostname123|
 |filter|object|None|False|Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents|None|{ "updatedAt__gt": "2019-02-27T04:49:26.257525Z" }|
-|reboot|boolean|None|True|Set true to reboot the endpoint, set false to not reboot the endpoint|None|True|
+|reboot|boolean|None|True|Set true to reboot the endpoint, false to skip rebooting|None|True|
 
 Example input:
 
 ```
 {
   "agent": "hostname123",
-  "filter": {
-    "updatedAt__gt": "2019-02-27T04:49:26.257525Z" 
-  },
+  "filter": "{ \"updatedAt__gt\": \"2019-02-27T04:49:26.257525Z\" }",
   "reboot": true
 }
 ```
@@ -91,10 +86,10 @@ This action is used to disable agents that match the filter.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |agent|string|None|False|Agent to perform disable action on. Accepts IP address, MAC address, hostname, UUID or agent ID. Leave empty to perform action on all applicable Agents|None|hostname123|
-|expiration_time|string|None|False|Agents will be re-enabled after this timestamp|None|2020-02-27 04:49:26.257525|
+|expiration_time|string|None|False|Agents will be re-enabled after this timestamp|None|2020-02-27T04:49:26.257525Z|
 |expiration_timezone|string|None|False|Timezone for the expiration timestamp. Set with expiration time|None|UTC|
 |filter|object|None|False|Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents|None|{ "updatedAt__gt": "2019-02-27T04:49:26.257525Z" }|
-|reboot|boolean|None|True|Set true to reboot the endpoint, set false to not reboot the endpoint|None|True|
+|reboot|boolean|None|True|Set true to reboot the endpoint, false to skip rebooting|None|True|
 
 Example input:
 
@@ -103,9 +98,7 @@ Example input:
   "agent": "hostname123",
   "expiration_time": "2020-02-27T04:49:26.257525Z",
   "expiration_timezone": "UTC",
-  "filter": {
-    "updatedAt__gt": "2019-02-27T04:49:26.257525Z" 
-  }
+  "filter": "{ \"updatedAt__gt\": \"2019-02-27T04:49:26.257525Z\" }",
   "reboot": true
 }
 ```
@@ -140,11 +133,7 @@ Example input:
 ```
 {
   "action": "connect",
-  "filter": {
-    "ids": [
-      "1000000000000000000"
-    ]
-  }
+  "filter": "{\"ids\": [\"1000000000000000000\"]}"
 }
 ```
 
@@ -322,14 +311,6 @@ This action is used to reload an agent module (applies to Windows agents only).
 Example input:
 
 ```
-{
-  "filter": {
-    "ids": [
-      "1000000000000000000"
-    ]
-  },
-  "module": "monitor"
-}
 ```
 
 ##### Output
@@ -471,6 +452,8 @@ Example input:
 
 ```
 {
+  "blacklist_state": true,
+  "description": "Hash Blacklisted from InsightConnect",
   "hash": "3395856ce81f2b7382dee72602f798b642f14140"
 }
 ```
@@ -774,11 +757,6 @@ This action is used to mark a threat as resolved.
 Example input:
 
 ```
-{
-  "target_scope": "site",
-  "threat_id": "1000000000000000000",
-  "whitening_option": "path"
-}
 ```
 
 ##### Output

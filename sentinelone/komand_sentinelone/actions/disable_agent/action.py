@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import DisableAgentInput, DisableAgentOutput, Input, Output, Component
+
 # Custom imports below
 
 
@@ -18,7 +19,7 @@ class DisableAgent(insightconnect_plugin_runtime.Action):
         data = {"shouldReboot": params.get(Input.REBOOT)}
         expiration_time = params.get(Input.EXPIRATION_TIME)
         if expiration_time:
-            expiration_timezone = params.get(Input.EXPIRATION_TIMEZONE, "UTC")
+            expiration_timezone = params.get(Input.EXPIRATION_TIMEZONE)
             data["expirationTimezone"] = expiration_timezone
             data["expiration"] = expiration_time
 
