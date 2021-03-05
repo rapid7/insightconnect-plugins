@@ -411,7 +411,7 @@ actions:
     input:
       server_filter:
         title: Server Filter
-        description: A Sensor filters object where you filter sensors by different criteria such as operating system
+        description: A Sensor filters string for filtering sensors by different criteria such as operating system
         type: string
         required: false
         example: 'machineName: ["rapid7-windows"]'
