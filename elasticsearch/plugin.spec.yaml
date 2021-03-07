@@ -192,7 +192,6 @@ actions:
   cluster_health:
     title: Cluster Health
     description: Check cluster health
-    input: null
     output:
       cluster_health:
         title: Cluster Health
