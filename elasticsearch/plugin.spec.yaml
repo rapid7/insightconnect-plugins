@@ -4,7 +4,7 @@ products: [insightconnect]
 name: elasticsearch
 title: Elasticsearch
 description: Distributed Real-Time Search and Analytics Engine
-version: 2.0.4
+version: 2.0.5
 vendor: rapid7
 support: community
 status: []
@@ -27,11 +27,13 @@ connection:
     type: string
     description: Host URL E.g. http://10.0.2.2:9200
     required: true
+    example: http://10.0.2.2:9200
   credentials:
     type: credential_username_password
     title: Basic Auth Username and Password
     description: Basic Auth username and password
     required: true
+    example: '{"username":"user1", "password":"mypassword"}'
   use_authentication:
     type: boolean
     title: Use Authentication
@@ -39,6 +41,7 @@ connection:
       to false
     required: true
     default: true
+    example: true
 types:
   _shards:
     total:
@@ -205,16 +208,19 @@ actions:
         type: string
         description: Index to Insert Document Into
         required: true
+        example: index001
       _type:
         title: Type
         type: string
         description: Type of Document to Index
         required: false
+        example: _doc
       _id:
         title: ID
         type: string
         description: Optional ID of Indexed Document
         required: false
+        example: "001"
       version_type:
         title: Version Type
         type: string
@@ -226,32 +232,38 @@ actions:
         - external_gte
         default: internal
         required: false
+        example: internal
       _version:
         title: Version
         type: integer
         description: Optional Version Specification
         required: false
+        example: 1
       document:
         title: Document
         type: object
         description: JSON Document to Index
         required: false
+        example: '{"firstname": "Jon", "lastname": "Doe", "gender": "M", "city": "Dante"}'
       routing:
         title: Routing
         type: string
         description: Optional Shard Placement
         required: false
+        example: user1
       parent:
         title: Parent
         type: string
         description: Optional Parent
         required: false
+        example: "001"
       timeout:
         title: Timeout
         type: string
         description: Custom Timeout Window
         default: 1m
         required: false
+        example: 1m
     output:
       index_response:
         title: Index Response
@@ -267,42 +279,50 @@ actions:
         type: string
         description: Index to Insert Document Into
         required: true
+        example: index001
       _type:
         title: Type
         type: string
         description: Type of Document to Index
         required: false
+        example: _doc
       _id:
         title: ID
         type: string
         description: Optional ID of Indexed Document
         required: true
+        example: "001"
       retry_on_conflict:
         title: Retry on Conflict
         type: integer
         description: Optional Number of Times to Retry on Update Conflict
         required: false
+        example: 5
       routing:
         title: Routing
         type: string
         description: Optional Shard Placement
         required: false
+        example: user1
       parent:
         title: Parent
         type: string
         description: Optional Parent
         required: false
+        example: "001"
       timeout:
         title: Timeout
         type: string
         description: Custom Timeout Window
         default: 1m
         required: false
+        example: 1m
       wait_for_active_shards:
         title: Wait for Active Shards
         type: integer
         description: Number of Shard Copies required Before Update
         required: false
+        example: 2
       refresh:
         title: Refresh
         type: string
@@ -313,21 +333,25 @@ actions:
         - 'false'
         default: 'false'
         required: false
+        example: 'false'
       _source:
         title: Source
         type: string
         description: Control If and How Source is Returned
         required: false
+        example: meta.*
       _version:
         title: Version
         type: integer
         description: Optional Version Specification
         required: false
+        example: 1
       script:
         title: Script
         type: object
         description: JSON Script to Modify a Document
         required: true
+        example: '{"lang": "painless"}'
     output:
       update_response:
         type: op_response
@@ -343,21 +367,25 @@ actions:
         type: string
         description: Document Index
         required: true
+        example: shakespeare
       _type:
         title: Type
         type: string
         description: Document Type
         required: false
+        example: doc
       routing:
         title: Routing
         type: string
         description: Optional Shards to Search
         required: false
+        example: user1
       query:
         title: Query
         type: object
         description: JSON Query DSL
         required: false
+        example: '{"query": {"match": {"line_number": {"query": "1.1.1"}}}}'
     output:
       took:
         title: Took
@@ -390,26 +418,31 @@ triggers:
         description: Poll frequency in seconds
         required: false
         default: 60
+        example: 60
       _index:
         title: Index
         type: string
         description: Document Index
         required: true
+        example: bank
       _type:
         title: Type
         type: string
         description: Document Type
         required: false
+        example: doc
       routing:
         title: Routing
         type: string
         description: Optional Shards to Search
         required: false
+        example: account
       query:
         title: Query
         type: object
         description: JSON Query DSL
         required: false
+        example: '{"query": {"match": {"line_number": {"query": "1.1.1"}}}}'
     output:
       hits:
         title: Hits
