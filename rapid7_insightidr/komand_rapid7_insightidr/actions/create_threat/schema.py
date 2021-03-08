@@ -11,16 +11,15 @@ class Input:
     INDICATORS = "indicators"
     NOTE_TEXT = "note_text"
     THREAT_NAME = "threat_name"
-
+    
 
 class Output:
     REJECTED_INDICATORS = "rejected_indicators"
     THREAT = "threat"
-
+    
 
 class CreateThreatInput(komand.Input):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -53,16 +52,14 @@ class CreateThreatInput(komand.Input):
     "threat_name"
   ]
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class CreateThreatOutput(komand.Output):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -120,8 +117,7 @@ class CreateThreatOutput(komand.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
