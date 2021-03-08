@@ -51,6 +51,16 @@ class Threats:
 
         return f"{console_url}idr/v1/customthreats/key/{key}/indicators/add"
 
+    @staticmethod
+    def create_threat(console_url: str):
+        """
+        URI for create custom threat
+        :param console_url: URL to the InsightIDR console
+        :return: pre-populated /idr/v1/customthreats
+        """
+
+        return f"{console_url}idr/v1/customthreats"
+
 
 class QueryLogs:
     @staticmethod

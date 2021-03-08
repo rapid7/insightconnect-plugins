@@ -15,16 +15,15 @@ class Connection(komand.Connection):
     def connect_key(self, params={}):
         home_dir = path.expanduser("~")
         key_file = "{}/.ssh".format(home_dir)
-        f = params.get("key").get("privateKey")
-        fb = f.get("content")
+        fb = params.get("key").get("privateKey")
         fb64 = base64.b64decode(fb)
         fb64 = fb64.decode("utf-8")
         if not path.exists(key_file):
             os.makedirs(key_file)
             os.chmod(key_file, 0o700)
         key_file_path = path.join(key_file, "id_rsa")
-        with open(key_file_path, "w+") as f:
-            f.write(fb64)
+        with open(key_file_path, "w+") as private_key:
+            private_key.write(fb64)
         os.chmod(key_file_path, 0o600)
         self.logger.info("Establishing connection")
         device = {

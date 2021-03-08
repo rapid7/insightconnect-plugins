@@ -4,15 +4,13 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add InsightIDR threat indicators to a threat with the given threat key"
+    DESCRIPTION = "Create a private InsightIDR threat and add indicators to this threat"
 
 
 class Input:
-    DOMAIN_NAMES = "domain_names"
-    HASHES = "hashes"
-    IPS = "ips"
-    KEY = "key"
-    URLS = "urls"
+    INDICATORS = "indicators"
+    NOTE_TEXT = "note_text"
+    THREAT_NAME = "threat_name"
     
 
 class Output:
@@ -20,57 +18,38 @@ class Output:
     THREAT = "threat"
     
 
-class AddIndicatorsToAThreatInput(komand.Input):
+class CreateThreatInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "domain_names": {
+    "indicators": {
       "type": "array",
-      "title": "Domain Names",
-      "description": "Domain names to add. e.g. [\\"rapid7.com\\",\\"google.com\\"]",
-      "items": {
-        "type": "string"
-      },
-      "order": 4
-    },
-    "hashes": {
-      "type": "array",
-      "title": "Process Hashes",
-      "description": "Process hashes to add. e.g. [\\"A94A8FE5CCB19BA61C4C0873D391E987982FBBD3\\",\\"C3499C2729730A7F807EFB8676A92DCB6F8A3F8F\\"]",
+      "title": "Indicators",
+      "description": "Add indicators to new threat in InsightIDR. Accept IP addresses, process hashes (SHA1, MD5, SHA256), domain names, URLs",
       "items": {
         "type": "string"
       },
       "order": 3
     },
-    "ips": {
-      "type": "array",
-      "title": "IP Addresses",
-      "description": "IP addresses to add. e.g. [\\"10.0.0.1\\",\\"10.0.0.2\\"]",
-      "items": {
-        "type": "string"
-      },
+    "note_text": {
+      "type": "string",
+      "title": "Note Text",
+      "description": "Note text of created threat",
+      "default": "Threat created via InsightConnect",
       "order": 2
     },
-    "key": {
+    "threat_name": {
       "type": "string",
-      "title": "Key",
-      "description": "The key of a threat for which the indicators are going to be added. e.g. c9404e11-b81a-429d-9400-05c531f229c3",
+      "title": "Threat Name",
+      "description": "Name of created threat",
       "order": 1
-    },
-    "urls": {
-      "type": "array",
-      "title": "URLs",
-      "description": "URLs to add. e.g. [\\"https://example.com\\",\\"https://test.com\\"]",
-      "items": {
-        "type": "string"
-      },
-      "order": 5
     }
   },
   "required": [
-    "key"
+    "indicators",
+    "threat_name"
   ]
 }
     """)
@@ -79,7 +58,7 @@ class AddIndicatorsToAThreatInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class AddIndicatorsToAThreatOutput(komand.Output):
+class CreateThreatOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
@@ -88,7 +67,7 @@ class AddIndicatorsToAThreatOutput(komand.Output):
     "rejected_indicators": {
       "type": "array",
       "title": "Rejected Indicators",
-      "description": "The list of indicators that have been rejected during the update",
+      "description": "Rejected indicators in new threat",
       "items": {
         "type": "string"
       },
@@ -97,10 +76,14 @@ class AddIndicatorsToAThreatOutput(komand.Output):
     "threat": {
       "$ref": "#/definitions/threat",
       "title": "Threat",
-      "description": "The information about the threat",
+      "description": "The information about the new threat",
       "order": 2
     }
   },
+  "required": [
+    "rejected_indicators",
+    "threat"
+  ],
   "definitions": {
     "threat": {
       "type": "object",
