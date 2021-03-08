@@ -96,7 +96,7 @@ This action is used to update a document.
 |_type|string|None|False|Type of Document to Index|None|_doc|
 |_version|integer|None|False|Optional Version Specification|None|1|
 |parent|string|None|False|Optional Parent|None|001|
-|refresh|string|False|False|Control when Changes Become Visible|['true', 'wait_for', 'false']|False|
+|refresh|string|false|False|Control when Changes Become Visible|['true', 'wait_for', 'false']|false|
 |retry_on_conflict|integer|None|False|Optional Number of Times to Retry on Update Conflict|None|5|
 |routing|string|None|False|Optional Shard Placement|None|user1|
 |script|object|None|True|JSON Script to Modify a Document|None|{"lang": "painless"}|
