@@ -40,6 +40,53 @@ Example input:
 
 ### Actions
 
+#### Isolate Machine
+
+This action is used to isolate a machine associated with the root cause of a Malop, or to remediate a process not involved in a malop.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|actions_by_machine|object|None|False|Actions by machine|None|{"126811122.2298225282553311122": [{"targetId": "531122333.-3391199199911692223","actionType": "KILL_PROCESS"}]}|
+|initiator_user_name|string|None|False|Initiator user name|None|user@example.com|
+|malop_id|string|None|False|Malop ID to isolate a machine or empty to remediate process not involved in a Malop|None|22.2787422324806222966|
+|pylum_ids|[]string|None|False|The unique sensor ID the Cybereason platform uses for the machines to isolate|None|["PYLUMCLIENT_INTEGRATION_GDDA11-11_2222170222FC"]|
+
+Example input:
+
+```
+{
+  "actions_by_machine": {
+    "126811122.2298225282553311122": [{
+      "targetId": "531122333.-3391199199911692223",
+      "actionType": "KILL_PROCESS"
+    }]
+  },
+  "initiator_user_name": "user@example.com",
+  "malop_id": "22.2787422324806222966",
+  "pylum_ids": [
+    "PYLUMCLIENT_INTEGRATION_GDDA11-11_2222170222FC"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|object|True|Malop response|
+
+Example output:
+
+```
+{
+  "response": {
+    "PYLUMCLIENT_INTEGRATION_GDDA11-11_2222170222FC": "Succeeded"
+  }
+}
+```
+
 #### Search for Files
 
 This action is used to find files on any machine in your environment with a Cybereason sensor installed.
@@ -48,8 +95,8 @@ This action is used to find files on any machine in your environment with a Cybe
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file_filter|string|None|True|A fileFilters object where you filter by machine name, folder, file creation or modification time or file size with operator Equals, NotEquals, ContainsIgnoreCase, NotContainsIgnoreCase and others|None|fileName Equals: ["sample.py"]|
-|server_filter|string|None|False|A Sensor filters object where you filter sensors by different criteria such as operating system|None|machineName: ["rapid7-windows"]|
+|file_filter|string|None|True|A fileFilters object for filtering by machine name, folder, file creation or modification time or file size with operator Equals, NotEquals, ContainsIgnoreCase, NotContainsIgnoreCase and others|None|fileName Equals: ["sample.py"]|
+|server_filter|string|None|False|A Sensor filters string for filtering sensors by different criteria such as operating system|None|machineName: ["rapid7-windows"]|
 
 Example input:
 
@@ -168,6 +215,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - Add new action Isolate Machine
 * 1.0.0 - Initial plugin
 
 # Links

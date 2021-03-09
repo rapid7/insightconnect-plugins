@@ -4,7 +4,7 @@ products: [insightconnect]
 name: cybereason
 title: Cybereason
 description: The Cybereason platform provides military-grade cyber security with real-time awareness and detection
-version: 1.0.0
+version: 1.1.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -426,4 +426,38 @@ actions:
         title: Response
         description: Search file response
         type: response
+        required: true
+  isolate_machine:
+    title: Isolate Machine
+    description: Isolate a machine associated with the root cause of a Malop, or to remediate a process not involved in a Malop
+    input:
+      malop_id:
+        title: Malop ID
+        description: Malop ID to isolate a machine or empty to remediate process not involved in a Malop
+        type: string
+        required: false
+        example: "22.2787422324806222966"
+      pylum_ids:
+        title: Pylum IDS
+        description: The unique sensor ID the Cybereason platform uses for the machines to isolate
+        type: "[]string"
+        required: false
+        example: ["PYLUMCLIENT_INTEGRATION_GDDA11-11_2222170222FC"]
+      initiator_user_name:
+        title: Initiator User Name
+        description: Initiator user name
+        type: string
+        required: false
+        example: user@example.com
+      actions_by_machine:
+        title: Actions by Machine
+        description: Actions by machine
+        type: object
+        required: false
+        example: '{"126811122.2298225282553311122": [{"targetId": "531122333.-3391199199911692223","actionType": "KILL_PROCESS"}]}'
+    output:
+      response:
+        title: Malop Response
+        description: Malop response
+        type: object
         required: true
