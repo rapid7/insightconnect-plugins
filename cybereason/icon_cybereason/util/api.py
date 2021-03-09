@@ -25,7 +25,7 @@ class CybereasonAPI:
         if login_response.status_code not in range(200, 299):
             raise ConnectionTestException(
                 preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE,
-                data="There is a problem with service. Please check your credentials and permissions",
+                data="There is a problem connecting to Cybereason. Please check your credentials and permissions.",
             )
 
     def isolate_machines(self, malop_id: str, pylum_ids: [str]) -> dict:

@@ -45,6 +45,26 @@ class IvantiServiceManagerAPI:
             assistance=f"No incident found using number provided - {incident_number}. Please validate and try again.",
         )
 
+    def search_service_request_template(self, identifier: str) -> dict:
+        template = self._call_api("GET", f"odata/businessobject/servicereqtemplates?$search={identifier}").get("value")
+
+        if template and len(template) > 1:
+            raise PluginException(
+                cause="Multiple employees found.",
+                assistance=f"Search for {template} returned more than 1 result. Please provide a unique identifier.",
+            )
+
+        if template:
+            return template[0]
+
+        raise PluginException(
+            cause="No service request templates found.",
+            assistance=f"No service request templates found using data provided - {identifier}. Please validate and try again.",
+        )
+
+    def post_service_request(self, payload: dict) -> dict:
+        return clean(self._call_api("POST", "odata/businessobject/servicereqs", json_data=payload))
+
     def post_incident(self, payload: dict) -> dict:
         return clean(self._call_api("POST", "odata/businessobject/incidents", json_data=payload))
 
@@ -55,7 +75,7 @@ class IvantiServiceManagerAPI:
         return self._call_api("DELETE", f"odata/businessobject/incidents('{incident_number}')")
 
     def post_journal_note(self, payload: dict) -> dict:
-        return clean(self._call_api("POST", f"odata/businessobject/journal__Notess", json_data=payload))
+        return clean(self._call_api("POST", "odata/businessobject/journal__Notess", json_data=payload))
 
     def _call_api(self, method: str, path: str, json_data: dict = None, params: dict = None):
         response = {"text": ""}

@@ -8,7 +8,8 @@ The Cybereason platform provides military-grade cyber security with real-time aw
 
 # Requirements
 
-* Requires an username and password
+* Requires a Cybereason username and password
+* Cybereason account configured as shown [here](https://nest.cybereason.com/user/login?destination=/documentation/product-documentation/191/search-and-browse-files-machines-0#pre-requisites) for File Search capabilities
 
 # Documentation
 

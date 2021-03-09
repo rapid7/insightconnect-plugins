@@ -19,15 +19,20 @@ _This plugin does not contain any requirements._
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|secret|credential_secret_key|None|False|Secret password|None|
-|verbose|boolean|False|True|Additional messages to standard output|None|
-|key|credential_asymmetric_key|None|False|A base64 encoded SSH private key to use to authenticate to network device|None|
-|device_type|string|None|True|Device type|['a10', 'accedian', 'alcatel_aos', 'alcatel_sros', 'arista_eos', 'aruba_os', 'avaya_ers', 'avaya_vsp', 'brocade_fastiron', 'brocade_netiron', 'brocade_nos', 'brocade_vdx', 'brocade_vyos', 'checkpoint_gaia', 'calix_b6', 'ciena_saos', 'cisco_asa', 'cisco_ios', 'cisco_nxos', 'cisco_s300', 'cisco_tp', 'cisco_wlc', 'cisco_xe', 'cisco_xr', 'coriant', 'dell_force10', 'dell_powerconnect', 'eltex', 'enterasys', 'extreme', 'extreme_wing', 'f5_ltm', 'fortinet', 'generic_termserver', 'hp_comware', 'hp_procurve', 'huawei', 'juniper', 'juniper_junos', 'linux', 'mellanox', 'mrv_optiswitch', 'netapp_cdot', 'ovs_linux', 'paloalto_panos', 'pluribus', 'quanta_mesh', 'ruckus_fastiron', 'ubiquiti_edge', 'ubiquiti_edgeswitch', 'vyatta_vyos', 'vyos']|
-|credentials|credential_username_password|None|True|User to run commands as|None|
-|host|string|None|True|Remote Host|None|
-|port|integer|22|True|Remote port|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|credentials|credential_username_password|None|True|User to run commands as|None|None|
+|device_type|string|None|True|Device type|['a10', 'accedian', 'alcatel_aos', 'alcatel_sros', 'arista_eos', 'aruba_os', 'avaya_ers', 'avaya_vsp', 'brocade_fastiron', 'brocade_netiron', 'brocade_nos', 'brocade_vdx', 'brocade_vyos', 'checkpoint_gaia', 'calix_b6', 'ciena_saos', 'cisco_asa', 'cisco_ios', 'cisco_nxos', 'cisco_s300', 'cisco_tp', 'cisco_wlc', 'cisco_xe', 'cisco_xr', 'coriant', 'dell_force10', 'dell_powerconnect', 'eltex', 'enterasys', 'extreme', 'extreme_wing', 'f5_ltm', 'fortinet', 'generic_termserver', 'hp_comware', 'hp_procurve', 'huawei', 'juniper', 'juniper_junos', 'linux', 'mellanox', 'mrv_optiswitch', 'netapp_cdot', 'ovs_linux', 'paloalto_panos', 'pluribus', 'quanta_mesh', 'ruckus_fastiron', 'ubiquiti_edge', 'ubiquiti_edgeswitch', 'vyatta_vyos', 'vyos']|None|
+|host|string|None|True|Remote Host|None|None|
+|key|credential_asymmetric_key|None|False|A base64 encoded SSH private key to use to authenticate to network device|None|None|
+|port|integer|22|True|Remote port|None|None|
+|secret|credential_secret_key|None|False|Secret password|None|None|
+|verbose|boolean|False|True|Additional messages to standard output|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -39,10 +44,15 @@ This action is used to change the device's configuration (global configuration m
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|host|string|None|False|Optional Hosts to run remote commands. If not provided, the connection host will be used|None|
-|command|[]string|None|True|Commands to change the configuration on network device|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|command|[]string|None|True|Commands to change the configuration on network device|None|None|
+|host|string|None|False|Optional Hosts to run remote commands. If not provided, the connection host will be used|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -66,10 +76,15 @@ This action is used to check the devices configurations (privilege exec mode).
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|host|string|None|False|Optional Host to run remote commands. If not provided, the connection host will be used|None|
-|command|string|None|True|Show command to execute on network device|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|command|string|None|True|Show command to execute on network device|None|None|
+|host|string|None|False|Optional Host to run remote commands. If not provided, the connection host will be used|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -101,6 +116,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.2 - Fix bug where the SSH private key was not being retrieved correctly from the user in the connection
 * 1.0.1 - Updated python libraries | New spec and help.md format for the Extension Library
 * 1.0.0 - Support web server mode | Update to new credential types | Rename "Execute show commands" action to "Execute Show Commands" | Rename "Execute configuration change commands" action to "Execute Configuration Commands"
 * 0.1.0 - Initial plugin
@@ -110,4 +126,3 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [Paramiko](http://www.paramiko.org/)
-
