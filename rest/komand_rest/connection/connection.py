@@ -2,6 +2,7 @@ import komand
 from .schema import ConnectionSchema, Input
 from komand_rest.util.util import Common
 from komand.exceptions import PluginException, ConnectionTestException
+from urllib.parse import urlparse, urljoin
 
 # Custom imports below
 from requests.auth import HTTPDigestAuth, HTTPBasicAuth
@@ -76,18 +77,22 @@ class Connection(komand.Connection):
 
     def test(self):
         path = ""
-        url = self.base_url
+        url_parsed = urlparse(self.base_url)
         if self.authentication_type == "Rapid7 Insight":
             path = "/validate"
         elif self.authentication_type == "Pendo":
             path = "/api/v1/feature"
-            url = self.base_url.replace("/api", "").replace("/v1", "")
         elif self.authentication_type == "OpsGenie":
             path = "/v2/users"
-            url = self.base_url.replace("/v2", "")
 
         try:
-            Common.call_api(url.rstrip("/"), path, self.default_headers, self.ssl_verify, auth=self.auth)
+            Common.call_api(
+                f"{url_parsed.scheme}://{url_parsed.netloc}",
+                path,
+                self.default_headers,
+                self.ssl_verify,
+                auth=self.auth
+            )
         except PluginException as e:
             raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e.data)
 
