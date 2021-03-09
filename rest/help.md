@@ -445,6 +445,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 4.0.1 - Fix issue where the connection test fails when a base URL is provided with a web resource path for the Rapid7 Insight and Pendo auth types
 * 4.0.0 - Support new authentication types: Digest Auth and Bearer Token | Add a workaround to encrypt a secret key when used in custom HTTP headers | Add built-in authentication for services: Insight Platform, Pendo and OpsGenie
 * 3.0.5 - Fix issue where a null body return on a successful request would crash the plugin
 * 3.0.4 - Update REST plugin title to HTTP Requests
