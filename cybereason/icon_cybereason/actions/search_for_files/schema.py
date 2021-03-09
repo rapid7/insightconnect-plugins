@@ -10,15 +10,14 @@ class Component:
 class Input:
     FILE_FILTER = "file_filter"
     SERVER_FILTER = "server_filter"
-
+    
 
 class Output:
     RESPONSE = "response"
-
+    
 
 class SearchForFilesInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -26,13 +25,13 @@ class SearchForFilesInput(insightconnect_plugin_runtime.Input):
     "file_filter": {
       "type": "string",
       "title": "File Filter",
-      "description": "A fileFilters object where you filter by machine name, folder, file creation or modification time or file size with operator Equals, NotEquals, ContainsIgnoreCase, NotContainsIgnoreCase and others",
+      "description": "A fileFilters object for filtering by machine name, folder, file creation or modification time or file size with operator Equals, NotEquals, ContainsIgnoreCase, NotContainsIgnoreCase and others",
       "order": 2
     },
     "server_filter": {
       "type": "string",
       "title": "Server Filter",
-      "description": "A Sensor filters object where you filter sensors by different criteria such as operating system",
+      "description": "A Sensor filters string for filtering sensors by different criteria such as operating system",
       "order": 1
     }
   },
@@ -40,16 +39,14 @@ class SearchForFilesInput(insightconnect_plugin_runtime.Input):
     "file_filter"
   ]
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class SearchForFilesOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -1655,8 +1652,7 @@ class SearchForFilesOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

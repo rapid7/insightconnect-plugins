@@ -4,6 +4,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException, Connection
 import json
 from logging import Logger
 from typing import Optional
+from urllib.parse import urljoin
 
 
 class CybereasonAPI:
@@ -60,12 +61,10 @@ class CybereasonAPI:
     def send_request(
         self, method: str, path: str, params: dict = None, payload: dict = None
     ) -> dict:
-        path = path.lstrip("/")
-
         try:
             response = self.session.request(
                 method.upper(),
-                f"{self.base_url}/{path}",
+                urljoin(self.base_url, path),
                 params=params,
                 json=payload,
                 headers=self.headers,

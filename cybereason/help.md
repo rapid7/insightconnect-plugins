@@ -50,7 +50,7 @@ This action is used to isolate a machine associated with the root cause of a Mal
 |----|----|-------|--------|-----------|----|-------|
 |actions_by_machine|object|None|False|Actions by machine|None|{"126811122.2298225282553311122": [{"targetId": "531122333.-3391199199911692223","actionType": "KILL_PROCESS"}]}|
 |initiator_user_name|string|None|False|Initiator user name|None|user@example.com|
-|malop_id|string|None|False|Malop ID to isolate a machine or empty to remediate process not involved in a malop|None|22.2787422324806222966|
+|malop_id|string|None|False|Malop ID to isolate a machine or empty to remediate process not involved in a Malop|None|22.2787422324806222966|
 |pylum_ids|[]string|None|False|The unique sensor ID the Cybereason platform uses for the machines to isolate|None|["PYLUMCLIENT_INTEGRATION_GDDA11-11_2222170222FC"]|
 
 Example input:
@@ -95,8 +95,8 @@ This action is used to find files on any machine in your environment with a Cybe
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file_filter|string|None|True|A fileFilters object where you filter by machine name, folder, file creation or modification time or file size with operator Equals, NotEquals, ContainsIgnoreCase, NotContainsIgnoreCase and others|None|fileName Equals: ["sample.py"]|
-|server_filter|string|None|False|A Sensor filters object where you filter sensors by different criteria such as operating system|None|machineName: ["rapid7-windows"]|
+|file_filter|string|None|True|A fileFilters object for filtering by machine name, folder, file creation or modification time or file size with operator Equals, NotEquals, ContainsIgnoreCase, NotContainsIgnoreCase and others|None|fileName Equals: ["sample.py"]|
+|server_filter|string|None|False|A Sensor filters string for filtering sensors by different criteria such as operating system|None|machineName: ["rapid7-windows"]|
 
 Example input:
 

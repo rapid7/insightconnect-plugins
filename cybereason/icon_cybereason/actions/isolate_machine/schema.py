@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Isolate a machine associated with the root cause of a Malop, or to remediate a process not involved in a malop"
+    DESCRIPTION = "Isolate a machine associated with the root cause of a Malop, or to remediate a process not involved in a Malop"
 
 
 class Input:
@@ -12,15 +12,14 @@ class Input:
     INITIATOR_USER_NAME = "initiator_user_name"
     MALOP_ID = "malop_id"
     PYLUM_IDS = "pylum_ids"
-
+    
 
 class Output:
     RESPONSE = "response"
-
+    
 
 class IsolateMachineInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -40,7 +39,7 @@ class IsolateMachineInput(insightconnect_plugin_runtime.Input):
     "malop_id": {
       "type": "string",
       "title": "Malop ID",
-      "description": "Malop ID to isolate a machine or empty to remediate process not involved in a malop",
+      "description": "Malop ID to isolate a machine or empty to remediate process not involved in a Malop",
       "order": 1
     },
     "pylum_ids": {
@@ -54,16 +53,14 @@ class IsolateMachineInput(insightconnect_plugin_runtime.Input):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class IsolateMachineOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -79,8 +76,7 @@ class IsolateMachineOutput(insightconnect_plugin_runtime.Output):
     "response"
   ]
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

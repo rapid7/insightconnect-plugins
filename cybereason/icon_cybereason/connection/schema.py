@@ -7,11 +7,10 @@ class Input:
     CREDENTIALS = "credentials"
     HOSTNAME = "hostname"
     PORT = "port"
-
+    
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -69,8 +68,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
