@@ -2,7 +2,7 @@ import komand
 from .schema import ConnectionSchema, Input
 from komand_rest.util.util import Common
 from komand.exceptions import PluginException, ConnectionTestException
-from urllib.parse import urlparse, urljoin
+from urllib.parse import urlparse
 
 # Custom imports below
 from requests.auth import HTTPDigestAuth, HTTPBasicAuth
