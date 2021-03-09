@@ -151,6 +151,11 @@ class WindwosDefenderATP_API:
     def get_related_machines(self, indicator: str, indicator_type: str) -> dict:
         return self._make_request("GET", f"{indicator_type}/{indicator}/machines")
 
+    def collect_investigation_package(self, machine: str, comment: str) -> dict:
+        return self._make_request(
+            "POST", f"machines/{machine}/collectInvestigationPackage", json_data={"Comment": comment}
+        )
+
     def find_machine_id(self, machine_identification: str) -> str:
         if re.match(r"^[a-z0-9]{40}$", machine_identification.lower()):
             return machine_identification

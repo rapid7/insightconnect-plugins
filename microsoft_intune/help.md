@@ -56,6 +56,64 @@ Example input:
 
 ### Actions
 
+#### Get Managed Apps
+
+This action returns InTune manageable apps.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|app|string|None|False|Application ID or name, if empty returns all applications|None|af6040ed-efe0-494c-89ed-89880989674c|
+
+Example input:
+
+```
+{
+  "app": "af6040ed-efe0-494c-89ed-89880989674c"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|managed_apps|[]value|False|Application details|
+
+Example output:
+
+```
+{
+  "managed_apps": [
+    {
+      "publisher": "Adobe Inc.",
+      "appAvailability": "lineOfBusiness",
+      "appStoreUrl": "https://play.google.com/store/apps/details?id=com....",
+      "createdDateTime": "2020-11-20T14:51:29.9832609Z",
+      "description": "Adobe Acrobat Reader is the most reliable, free gl...",
+      "displayName": "Adobe Acrobat Reader",
+      "id": "af6040ed-efe0-494c-89ed-89880989674c",
+      "isFeatured": false,
+      "publishingState": "published",
+      "@odata.type": "#microsoft.graph.managedAndroidStoreApp",
+      "minimumSupportedOperatingSystem": {
+        "v4_1": false,
+        "v4_2": false,
+        "v4_3": false,
+        "v4_4": true,
+        "v5_0": false,
+        "v5_1": false,
+        "v4_0": false,
+        "v4_0_3": false
+      },
+      "lastModifiedDateTime": "2020-11-20T14:51:29.9832609Z",
+      "version": "\"da13c2e2-b4b4-419c-a223-af043e69c799\"",
+      "packageId": "com.adobe.reader"
+    }
+  ]
+}
+```
+
 #### Wipe
 
 This action is used to wipe device by device name, device ID, user ID, or email address. It supports a whitelist to skip critical devices that should never be whitelisted.
@@ -184,7 +242,7 @@ This action is used to perform management tasks on a device such as rebooting an
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |device|string|None|True|Device name, user ID, email address, or device ID|None|aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa|
-|type|string|None|True|Type of action|['Reboot', 'Sync']|None|
+|type|string|None|True|Type of action|['Reboot', 'Sync']|Sync|
 |whitelist|[]string|None|False|This list contains a set of of device names, user IDs, email addresses, or device IDs that action will not be performed on|None|["user@example.com", "705c034c-034c-705c-4c03-5c704c035c70"]|
 
 Example input:
@@ -192,6 +250,7 @@ Example input:
 ```
 {
   "device": "aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa",
+  "type": "Sync",
   "whitelist": [
     "user@example.com",
     "705c034c-034c-705c-4c03-5c704c035c70"
@@ -261,6 +320,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.0 - Add new action Get Managed Apps
 * 1.2.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/microsoft-intune/)
 * 1.2.1 - Improve e-mail search in Search Devices action by performing an extended all device search for  `emailAddress` and `userPrincipalName` when email is not found
 * 1.2.0 - Add new action Manage Device
