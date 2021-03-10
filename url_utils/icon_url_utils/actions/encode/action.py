@@ -14,6 +14,15 @@ class Encode(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         input_url = params.get(Input.URL)
-        result = quote(input_url)
+        encode_all = params.get(Input.encode_all)
+
+        url = input_url.split('://')
+
+        if encode_all:
+            url[-1] = quote(url[-1], safe='')
+        else:
+            url[-1] = quote(url[-1], safe='/?=&')
+
+        result = '://'.join(url)
 
         return {Output.URL: result}
