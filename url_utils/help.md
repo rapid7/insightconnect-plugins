@@ -4,7 +4,7 @@
 
 # Key Features
 
-* Encode data in Base64 to transfer binary data, image files, etc. in a text format
+* Encode a URL into an ASCII format that is safe and universally accepted by servers and web browsers
 * Decode a URL to reveal original input
 
 # Requirements
