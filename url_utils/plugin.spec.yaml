@@ -33,8 +33,8 @@ actions:
         example: "https://example.com"
       encode_all:
         type: boolean
-        title: Encode All
-        description: Whether or not to encode all special characters, such as /
+        title: Encode All Characters
+        description: If true will encode all non-alphanumeric characters, including ?=&# but not /
         default: false
         required: false
     output:
