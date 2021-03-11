@@ -1,6 +1,6 @@
 # Description
 
-[Base64](https://en.wikipedia.org/wiki/Base64) is a common binary-to-text encoding scheme used in various protocols and software such as MIME to carry data stored in binary formats across channels that only reliably support text content. This plugin allows data to be Base64-encoded or decoded using the standard Base64 alphabet.
+[URL encoding](https://en.wikipedia.org/wiki/Percent-encoding) converts unprintable or special characters in a URL into a standard `%XX` representation, using only legal ASCII characters. For example, the space character ` ` is encoded as `%20`.
 
 # Key Features
 
@@ -95,10 +95,10 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-For the Base64 decode action, be sure that the input contains valid Base64 data.
+For the URL decode action, be sure that the input contains valid percent-encoded data.
 
-If the Base64 you're decoding contains any non UTF-8 characters the plugin will fail. To remedy this issue, there's a
-option to set how errors are to be handled. These options are "replace" and "ignore". Replace will change all non UTF-8
+If the URL you're decoding contains any non UTF-8 characters the plugin will fail. To remedy this issue, there's a
+option to set how errors are to be handled. These options are "replace" and "ignore". Replace will change all non-UTF-8
 characters to `\uffd` or `?`. While ignore will drop the character from the output.
 
 # Version History
