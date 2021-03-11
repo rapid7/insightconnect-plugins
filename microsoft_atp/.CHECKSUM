@@ -1,11 +1,15 @@
 {
-	"spec": "457f709c68ce278ef688dd56b20c5eb0",
-	"manifest": "dfca1399817f98a83395b1e3d381eb38",
-	"setup": "46a9bc136b9dc1915ce8e7ac27e54f7d",
+	"spec": "973667a57579262af1678d0236ae8c9a",
+	"manifest": "d046d7ea8bb7e5e0d7555d28f5588dda",
+	"setup": "273e654e5089823d8aa45a3acd2c1306",
 	"schemas": [
 		{
 			"identifier": "blacklist/schema.py",
 			"hash": "fd8b7fdaf9388af316671bac2aeaa91d"
+		},
+		{
+			"identifier": "collect_investigation_package/schema.py",
+			"hash": "d41df3f42b4122af2f0d83e758d646a2"
 		},
 		{
 			"identifier": "find_machines_with_installed_software/schema.py",

@@ -507,13 +507,13 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
         },
         "LastModBy": {
           "type": "string",
-          "title": "Last Mod By",
+          "title": "Last Modified By",
           "description": "Last modified by",
           "order": 20
         },
         "LastModDateTime": {
           "type": "string",
-          "title": "Last Mod Date Time",
+          "title": "Last Modified Date Time",
           "description": "Last modified date and time",
           "order": 21
         },
