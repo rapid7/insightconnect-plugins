@@ -19,4 +19,4 @@ jobs:
 
       - name: Prospector
         run: |
-          prospector --tool dodgy --tool bandit --tool mccabe
+          prospector --tool bandit --tool mccabe
