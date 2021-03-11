@@ -29,13 +29,14 @@ This action is used to encode special characters and non-ASCII text in a `string
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|url|string|None|True|URL to encode|None|https://example.com|
+|encode_all|boolean|False|False|If true will encode all non-alphanumeric characters, including ?=&# but not /|None|None|
+|url|string|None|True|URL to encode|None|https://example.com?test string&key=value|
 
 Example input:
 
 ```
 {
-  "url": "example.com/page?text=abc$%^-~<script>()#!123"
+  "url": "https://example.com?test string\u0026key=value"
 }
 ```
 
@@ -61,13 +62,13 @@ This action is used to decode an encoded URL `string` to the original characters
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|url|string|None|True|URL to decode|None|example.com/page%3Ftext%3Dabc%24%25%5E-~%3Cscript%3E%28%29%23%21123|
+|url|string|None|True|URL to decode|None|https://example.com?test%20string|
 
 Example input:
 
 ```
 {
-  "url": "example.com/page%3Ftext%3Dabc%24%25%5E-~%3Cscript%3E%28%29%23%21123"
+  "url": "https://example.com?test%20string"
 }
 ```
 

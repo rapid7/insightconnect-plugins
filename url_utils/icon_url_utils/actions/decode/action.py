@@ -14,13 +14,11 @@ class Decode(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        input_url = params.get(Input.URL)
+        errors = params.get(Input.ERRORS)
+
         try:
-            input_url = params.get(Input.URL)
-            errors = params.get(Input.ERRORS)
-            if errors in ["replace", "ignore"]:
-                return {Output.URL: unquote(input_url, errors=errors)}
-            else:
-                return {Output.URL: unquote(input_url)}
+            return self.decode_url(input_url, errors)
         except Exception as e:
             self.logger.error("An error has occurred while decoding ", e)
             raise PluginException(
@@ -28,3 +26,9 @@ class Decode(insightconnect_plugin_runtime.Action):
                 assistance="If you would like continue to attempt to decode the input try setting the value of the error field to ignore errors or to replace the characters.",
                 data=e,
             )
+
+    def decode_url(self, input_url:str, errors:str) -> dict:
+        if errors in ["replace", "ignore"]:
+            return {Output.URL: unquote(input_url, errors=errors)}
+        else:
+            return {Output.URL: unquote(input_url)}

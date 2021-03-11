@@ -55,15 +55,12 @@ class TestDecode(TestCase):
         self.assertEquals({}, results)
 
     def test_decode(self):
-        """
-        TODO: Implement test cases here
 
-        Here you can mock the connection with data returned from the above integration test.
-        For information on mocking and unit testing please go here:
+        log = logging.getLogger("Test")
+        test_action = Decode()
+        test_action.logger = log
+        test_url = 'https://example.com%2Fpage%3Ftext%3Dabc%24%25%5E-space%20here~%3C%3E%28%29%23%21123'
+        result = test_action.decode_url(test_url, errors='')
 
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
-
-        You can either create a formal Mock for this, or you can create a fake connection class to pass to your
-        action for testing.
-        """
-        self.fail("Unimplemented Test Case")
+        actual = {'url': 'https://example.com/page?text=abc$%^-space here~<>()#!123'}
+        self.assertEqual(result, actual)

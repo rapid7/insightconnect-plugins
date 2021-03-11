@@ -8,8 +8,8 @@ class Component:
 
 
 class Input:
+    ENCODE_ALL = "encode_all"
     URL = "url"
-    encode_all = "encode_all"
     
 
 class Output:
@@ -22,19 +22,19 @@ class EncodeInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "encode_all": {
+      "type": "boolean",
+      "title": "Encode All Characters",
+      "description": "If true will encode all non-alphanumeric characters, including ?=\\u0026# but not /",
+      "default": false,
+      "order": 2
+    },
     "url": {
       "type": "string",
       "title": "Url",
       "description": "URL to encode",
       "order": 1
-    },
-    "encode_all": {
-      "type": "boolean",
-      "title": "Encode All Characters",
-      "description": "If true will encode all non-alphanumeric characters, such as / ? = & #",
-      "default": false,
-      "order": 2
-    },    
+    }
   },
   "required": [
     "url"

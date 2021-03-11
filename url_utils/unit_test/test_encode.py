@@ -42,3 +42,15 @@ class TestEncode(TestCase):
         # For example: self.assertEquals({"success": True}, results)
         expected = {'url': 'example.com%3Ftest%3Dresult%3Fkey%3Dvalue'}
         self.assertEquals(expected, results)
+
+
+    def test_encode_all(self):
+
+        log = logging.getLogger("Test")
+        test_action = Encode()
+        test_action.logger = log
+        test_url = 'https://example.com/page?text=abc$%^-space here~<>()#!123'
+        result = test_action.encode_url(True, test_url)
+
+        actual = 'https://example.com%2Fpage%3Ftext%3Dabc%24%25%5E-space%20here~%3C%3E%28%29%23%21123'
+        self.assertEqual(result, actual)
