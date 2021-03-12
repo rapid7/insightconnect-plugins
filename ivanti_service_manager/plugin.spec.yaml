@@ -4,7 +4,7 @@ products: [insightconnect]
 name: ivanti_service_manager
 title: Ivanti Service Manager
 description: Ivanti Service Manager is a flexible and complete cloud-optimized, easily scalable and adaptable ITSM solution used for managing and automating ITSM processes
-version: 1.0.0
+version: 1.1.0
 vendor: rapid7
 support: community
 status: []
@@ -66,7 +66,7 @@ types:
     ClosedDuration:
       title: Closed Duration
       description: Closed duration
-      type: int
+      type: integer
       required: false
     CreatedBy:
       title: Created By
@@ -119,12 +119,12 @@ types:
       type: boolean
       required: false
     LastModBy:
-      title: Last Mod By
+      title: Last Modified By
       description: Last modified by
       type: string
       required: false
     LastModDateTime:
-      title: Last Mod Date Time
+      title: Last Modified Date Time
       description: Last modified date and time
       type: string
       required: false
@@ -625,12 +625,12 @@ types:
       type: string
       required: false
     LastModBy:
-      title: Last Mod By
+      title: Last Modified By
       description: Last modified by
       type: string
       required: false
     LastModDateTime:
-      title: Last Mod Date Time
+      title: Last Modified Date Time
       description: Last modified date and time
       type: string
       required: false
@@ -733,6 +733,707 @@ types:
       title: Unread Transition
       description: Unread transition
       type: boolean
+      required: false
+  service_request:
+    RecId:
+      title: Record ID
+      description: Record ID
+      type: string
+      required: false
+    LastModDateTime:
+      title: Last Modified Date Time
+      description: Last modified date and time
+      type: string
+      required: false
+    LastModBy:
+      title: Last Modified By
+      description: Last modified by
+      type: string
+      required: false
+    CreatedDateTime:
+      title: Created Date Time
+      description: Created date and time
+      type: string
+      required: false
+    CreatedBy:
+      title: Created By
+      description: Created by
+      type: string
+      required: false
+    OwnerType:
+      title: Owner Type
+      description: Owner type
+      type: string
+      required: false
+    Owner_Valid:
+      title: Owner Valid
+      description: Owner valid
+      type: string
+      required: false
+    Owner:
+      title: Owner
+      description: Owner
+      type: string
+      required: false
+    OwnerTeam_Valid:
+      title: Owner Team Valid
+      description: Owner team valid
+      type: string
+      required: false
+    OwnerTeam:
+      title: Owner Team
+      description: Owner team
+      type: string
+      required: false
+    ServiceReqNumber:
+      title: Service Request Number
+      description: Service request number
+      type: integer
+      required: false
+    ClosedBy:
+      title: Closed By
+      description: Closed by
+      type: string
+      required: false
+    ClosedDateTime:
+      title: Closed Date Time
+      description: Closed date and time
+      type: string
+      required: false
+    ResolvedBy:
+      title: Resolved By
+      description: Resolved by
+      type: string
+      required: false
+    ResolvedDateTime:
+      title: Resolved Date Time
+      description: Resolved date and time
+      type: string
+      required: false
+    OwnerEmail:
+      title: Owner Email
+      description: Owner email
+      type: string
+      required: false
+    OwnerTeamEmail:
+      title: Owner Team Email
+      description: Owner team email
+      type: string
+      required: false
+    OwnershipAssignmentEmail:
+      title: Ownership Assignment Email
+      description: Ownership assignment email
+      type: string
+      required: false
+    ProfileLink_Category:
+      title: Profile Link Category
+      description: Profile link category
+      type: string
+      required: false
+    ProfileLink_RecID:
+      title: Profile Link Record ID
+      description: Profile link record ID
+      type: string
+      required: false
+    ProfileLink:
+      title: Profile Link
+      description: Profile link
+      type: string
+      required: false
+    Email:
+      title: Email
+      description: Email
+      type: string
+      required: false
+    ProfileFullName:
+      title: Profile Full Name
+      description: Full name of who raised the incident
+      type: string
+      required: false
+    CustomerLocation:
+      title: Customer Location
+      description: Customer location
+      type: string
+      required: false
+    IsVIP:
+      title: Is VIP
+      description: Is the ticket raised by VIP
+      type: boolean
+      required: false
+    IsReportedByAlternateContact:
+      title: Is Reported By Alternate Contact
+      description: Is reported by alternate contact
+      type: boolean
+      required: false
+    AlternateContactLink_Category:
+      title: Alternate Contact Link Category
+      description: Alternate contact link category
+      type: string
+      required: false
+    AlternateContactLink_RecID:
+      title: Alternate Contact Link Record ID
+      description: Alternate contact link record ID
+      type: string
+      required: false
+    AlternateContactLink:
+      title: Alternate Contact Link
+      description: Alternate contact link
+      type: string
+      required: false
+    Status_Valid:
+      title: Status Valid
+      description: Status valid
+      type: string
+      required: false
+    Status:
+      title: Status
+      description: Created by
+      type: string
+      required: false
+    Service_Valid:
+      title: Service Valid
+      description: Service valid
+      type: string
+      required: false
+    Service:
+      title: Service
+      description: Service
+      type: string
+      required: false
+    Source_Valid:
+      title: Source Valid
+      description: Source valid
+      type: string
+      required: false
+    Source:
+      title: Source
+      description: Source
+      type: string
+      required: false
+    Urgency_Valid:
+      title: Urgency Valid
+      description: Urgency valid
+      type: string
+      required: false
+    Urgency:
+      title: Urgency
+      description: Urgency
+      type: string
+      required: false
+    Subject:
+      title: Subject
+      description: Incident subject
+      type: string
+      required: false
+    Symptom:
+      title: Symptom
+      description: Symptoms of the indident
+      type: string
+      required: false
+    ResolutionEscLink_Category:
+      title: Resolution Escalation Link Category
+      description: Resolution escalation link category
+      type: string
+      required: false
+    ResolutionEscLink_RecID:
+      title: Resolution Escalation Link Record ID
+      description: Resolution escalation record ID
+      type: string
+      required: false
+    ResolutionEscLink:
+      title: Resolution Escalation Link
+      description: Resolution escalation link
+      type: string
+      required: false
+    IncidentLink_Category:
+      title: Incident Escalation Link Category
+      description: Incident escalation link category
+      type: string
+      required: false
+    IncidentLink_RecID:
+      title: Incident Escalation Link Record ID
+      description: Incident escalation record ID
+      type: string
+      required: false
+    IncidentLink:
+      title: Incident Escalation Link
+      description: Incident escalation link
+      type: string
+      required: false
+    Price_Currency:
+      title: Price Currency
+      description: Price currency
+      type: string
+      required: false
+    Price_CurrencyValid:
+      title: Price Currency Valid
+      description: Price currency valid
+      type: string
+      required: false
+    Price:
+      title: Price
+      description: Price
+      type: string
+      required: false
+    IsNewRecord:
+      title: Is New Record
+      description: Is new record
+      type: boolean
+      required: false
+    WaitingEscLink_Category:
+      title: Waiting Escalation Link Category
+      description: Waiting escalation link category
+      type: string
+      required: false
+    WaitingEscLink_RecID:
+      title: Waiting Escalation Link Record ID
+      description: Waiting escalation record ID
+      type: string
+      required: false
+    WaitingEscLink:
+      title: Waiting Escalation Link
+      description: Waiting escalation link
+      type: string
+      required: false
+    ClosingEscLink_Category:
+      title: Closing Escalation Link Category
+      description: Closing escalation link category
+      type: string
+      required: false
+    ClosingEscLink_RecID:
+      title: Closing Escalation Link Record ID
+      description: Closing escalation record ID
+      type: string
+      required: false
+    ClosingEscLink:
+      title: Closing Escalation Link
+      description: Closing escalation link
+      type: string
+      required: false
+    Phone:
+      title: Phone
+      description: Phone
+      type: string
+      required: false
+    SvcReqTmplLink_Category:
+      title: Service Request Template Link Category
+      description: Service request template link category
+      type: string
+      required: false
+    SvcReqTmplLink_RecID:
+      title: Service Request Template Link Record ID
+      description: Service request template link record ID
+      type: string
+      required: false
+    SvcReqTmplLink:
+      title: Service Request Template Link
+      description: Service request template link
+      type: string
+      required: false
+    SvcReqSubscLink_Category:
+      title: Service Request Subsc Link Category
+      description: Service request subsc template link category
+      type: string
+      required: false
+    SvcReqSubscLink_RecID:
+      title: Service Request Subsc Link Record ID
+      description: Service request subsc template link record ID
+      type: string
+      required: false
+    SvcReqSubscLink:
+      title: Service Request Subsc Link
+      description: Service request subsc template link
+      type: string
+      required: false
+    ParentSvcReqSubscLink_Category:
+      title: Parent Service Request Subsc Link Category
+      description: Parent service request subsc template link category
+      type: string
+      required: false
+    ParentSvcReqSubscLink_RecID:
+      title: Parent Service Request Subsc Link Record ID
+      description: Parent service request subsc template link record ID
+      type: string
+      required: false
+    ParentSvcReqSubscLink:
+      title: Parent Service Request Subsc Link
+      description: Parent service request subsc template link
+      type: string
+      required: false
+    ResponseEscLink_Category:
+      title: Response Escalation Link Category
+      description: Response escalation link category
+      type: string
+      required: false
+    ResponseEscLink_RecID:
+      title: Response Escalation Link Record ID
+      description: Response escalation link record ID
+      type: string
+      required: false
+    ResponseEscLink:
+      title: Response Escalation Link
+      description: Response escalation link
+      type: string
+      required: false
+    IsInFinalState:
+      title: Is In Final State
+      description: Is the incident in its final state
+      type: boolean
+      required: false
+    ProgressBarPosition:
+      title: Progress Bar Position
+      description: Progress bar position
+      type: string
+      required: false
+    OrgUnitLink_Category:
+      title: Org Unit Link Category
+      description: Organization unit link category
+      type: string
+      required: false
+    OrgUnitLink_RecID:
+      title: Org Unit Link Record ID
+      description: Organization unit link record ID
+      type: string
+      required: false
+    OrgUnitLink:
+      title: Org Unit Link
+      description: Organization unit link
+      type: string
+      required: false
+    SLALink_Category:
+      title: SLA Link Category
+      description: SLA link Category
+      type: string
+      required: false
+    SLALink_RecID:
+      title: SLA Link Record ID
+      description: SLA link record ID
+      type: string
+      required: false
+    SLALink:
+      title: SLA Link
+      description: SLA link
+      type: string
+      required: false
+    FulfillmentPlanLink_Category:
+      title: Fulfillment Plan Link Category
+      description: Fulfillment plan link category
+      type: string
+      required: false
+    FulfillmentPlanLink_RecID:
+      title: Fulfillment Plan Link Record ID
+      description: Fulfillment plan link record ID
+      type: string
+      required: false
+    FulfillmentPlanLink:
+      title: Fulfillment Plan Link 
+      description: Fulfillment plan link
+      type: string
+      required: false
+    Cost_Currency:
+      title: Cost Currency
+      description: Cost currency
+      type: string
+      required: false
+    Cost_CurrencyValid:
+      title: Cost Currency Valid
+      description: Cost currency valid
+      type: string
+      required: false
+    Cost:
+      title: Cost
+      description: Cost
+      type: string
+      required: false
+    CostPerMinute_Currency:
+      title: Cost Per Minute Currency
+      description: Cost per minute currency
+      type: string
+      required: false
+    CostPerMinute_CurrencyValid:
+      title: Cost Per Minute Currency Valid
+      description: Cost per minute currency valid
+      type: string
+      required: false
+    CostPerMinute:
+      title: Cost Per Minute
+      description: Cost per minute
+      type: string
+      required: false
+    DefaultApprover_Valid:
+      title: Default Approver Valid
+      description: Default approver valid
+      type: string
+      required: false
+    DefaultApprover:
+      title: Default Approver
+      description: Default approver
+      type: string
+      required: false
+    SLA:
+      title: SLA
+      description: SLA
+      type: string
+      required: false
+    SLADisplayText:
+      title: SLA Display Text
+      description: SLA display text
+      type: string
+      required: false
+    OrganizationUnitID:
+      title: Organization Unit ID
+      description: Organization unit ID
+      type: string
+      required: false
+    ReadOnly:
+      title: Read Only
+      description: Is read only
+      type: boolean
+      required: false
+    ProfileLoginId:
+      title: Profile Login ID
+      description: Profile login ID
+      type: string
+      required: false
+    TotalTimeSpent:
+      title: Total Time Spent
+      description: Total time spent
+      type: integer
+      required: false
+    IsDSMTaskExisted:
+      title: Is DSM Task Existed By
+      description: Is DSM task existed
+      type: boolean
+      required: false
+    DraftPrice_Currency:
+      title: Draft Price Currency
+      description: Draft price currency
+      type: string
+      required: false
+    DraftPrice_CurrencyValid:
+      title: Draft Price Currency Valid
+      description: Draft price currency valid
+      type: string
+      required: false
+    DraftPrice:
+      title: Draft Price
+      description: Draft price
+      type: string
+      required: false
+    IsDraft:
+      title: Is Draft
+      description: Is draft
+      type: boolean
+      required: false
+    RequestOfferingWFTrigger:
+      title: Request Offering Workflow Trigger
+      description: Request offering workflow trigger
+      type: string
+      required: false
+    LoginId:
+      title: Login ID
+      description: Login ID
+      type: string
+      required: false
+    Cancelable:
+      title: Cancelable
+      description: Cancelable
+      type: boolean
+      required: false
+    Resolution:
+      title: Resolution
+      description: Resolution
+      type: string
+      required: false
+    TemplateCancelable:
+      title: Template Cancelable
+      description: Template cancelable
+      type: boolean
+      required: false
+    SendSurveyNotification:
+      title: Send Survey Notification
+      description: Send survey notification
+      type: boolean
+      required: false
+    EntityLink_Category:
+      title: Entity Link Category
+      description: Entity link category
+      type: string
+      required: false
+    EntityLink_RecID:
+      title: Entity Link Record ID
+      description: Entity link record ID
+      type: string
+      required: false
+    EntityLink:
+      title: Entity Link
+      description: Entity link
+      type: string
+      required: false
+    IsEditable:
+      title: Is Editable
+      description: Is editable
+      type: boolean
+      required: false
+    IsTemplateEditable:
+      title: Is Template Editable
+      description: Is template editable
+      type: boolean
+      required: false
+    ForceNotCancelable:
+      title: Force Not Cancelable
+      description: Force not cancelable
+      type: boolean
+      required: false
+    ForceNotEditable:
+      title: Force Not Editable
+      description: Force not editable
+      type: boolean
+      required: false
+    IsNewRequestNotificationSent:
+      title: Is New Request Notification Sent
+      description: Is new request notification sent
+      type: boolean
+      required: false
+    IsExternal:
+      title: Is External
+      description: Is external
+      type: boolean
+      required: false
+    ExternalViewUrl:
+      title: External View URL
+      description: External view URL
+      type: string
+      required: false
+    RecurrentPrice_Currency:
+      title: Recurrent Price Currency
+      description: Recurrent price currency
+      type: string
+      required: false
+    RecurrentPrice_CurrencyValid:
+      title: Recurrent Price Currency Valid
+      description: Recurrent price currency valid
+      type: string
+      required: false
+    RecurrentPrice:
+      title: Recurrent Price
+      description: Recurrent price
+      type: string
+      required: false
+    RecurrentPeriod:
+      title: Recurrent Period
+      description: Recurrent period
+      type: string
+      required: false
+    TaskPriceUSD_Currency:
+      title: Task Price USD Currency
+      description: Task price USD currency
+      type: string
+      required: false
+    TaskPriceUSD_CurrencyValid:
+      title: Task Price USD Currency Valid
+      description: Task price USD currency valid
+      type: string
+      required: false
+    TaskPriceUSD:
+      title: Task Price USD
+      description: Task price USD
+      type: string
+      required: false
+    TaskCostUSD_Currency:
+      title: Task Cost USD Currency
+      description: Task cost USD currency
+      type: string
+      required: false
+    TaskCostUSD_CurrencyValid:
+      title: Task Cost USD Currency Valid
+      description: Task cost USD currency valid
+      type: string
+      required: false
+    TaskCostUSD:
+      title: Task Cost USD
+      description: Task cost USD
+      type: string
+      required: false
+    ChargingAccount_Valid:
+      title: Charging Account Valid
+      description: Charging account valid
+      type: string
+      required: false
+    ChargingAccount:
+      title: Charging Account
+      description: Charging account
+      type: string
+      required: false
+    ServiceReqTemplateDefinitionLink_Category:
+      title: Service Request Template Definition Link Category
+      description: Service request template definition link category
+      type: string
+      required: false
+    ServiceReqTemplateDefinitionLink_RecID:
+      title: Service Request Template Definition Record ID
+      description: Service request template definition record ID
+      type: string
+      required: false
+    ServiceReqTemplateDefinitionLink:
+      title: Service Request Template Definition Link
+      description: Service request template definition link
+      type: string
+      required: false
+    HasScriptRun:
+      title: Has Script Run
+      description: Has script run
+      type: boolean
+      required: false
+    InShoppingCart:
+      title: In Shopping Cart
+      description: In shopping cart
+      type: boolean
+      required: false
+    IsUnRead:
+      title: Is Unread
+      description: Is unread
+      type: boolean
+      required: false
+    ivnt_PurchaseRequestCount:
+      title: Ivanti Purchase Request Count
+      description: Ivanti purchase request count
+      type: integer
+      required: false
+    ivnt_RequestedCatalogItemCount:
+      title: Ivanti Requested Catalog Item Count
+      description: Ivanti requested catalog item count
+      type: integer
+      required: false
+    ivnt_CILink_Category:
+      title: Ivanti CI Link Category
+      description: Ivanti CI Link link category
+      type: string
+      required: false
+    ivnt_CILink_RecID:
+      title: Ivanti CI Link Record ID
+      description: Ivanti CI Link record ID
+      type: string
+      required: false
+    ivnt_CILink:
+      title: Ivanti CI Link
+      description: Ivanti CI link
+      type: string
+      required: false
+    ivnt_ProductCatalogLink_Category:
+      title: Ivanti Product Catalog Link Category
+      description: Ivanti product catalog link category
+      type: string
+      required: false
+    ivnt_ProductCatalogLink_RecID:
+      title: Ivanti Product Catalog Link Record ID
+      description: Ivanti product catalog link record ID
+      type: string
+      required: false
+    ivnt_ProductCatalogLink:
+      title: Ivanti Product Catalog Link
+      description: Ivanti product catalog link
+      type: string
       required: false
     
 connection:
@@ -851,6 +1552,7 @@ actions:
         title: Category
         description: Category of the incident
         type: string
+        example: Software Installation
         required: false
     output:
       incident:
@@ -1002,4 +1704,60 @@ actions:
         title: Journal Note
         description: Journal note details
         type: journal_note
+        required: true
+  create_service_request:
+    title: Create Service Request
+    description: Create a new Ivanti Service Manager service request
+    input:
+      service_request_template:
+        title: Service Request Template
+        description: Name or record ID of the service request template
+        type: string
+        required: true
+        example: VPN Connection Failure
+      customer:
+        title: Customer
+        description: Email address of the customer
+        type: string
+        required: true
+        example: user@example.com
+      description:
+        title: Description
+        description: Description of the service request
+        type: string
+        required: true
+        example: This service request was created using InsightConnect
+      status:
+        title: Status
+        description: Status of the incident
+        type: string
+        required: true
+        default: Submitted
+        enum:
+        - Draft
+        - Submitted
+        - Approved
+        - In Procurement
+        - Approval Rejected
+        - Waiting for Customer
+        - Waiting for 3rd Party
+        - Fulfilled
+        - Closed
+        - Cancelled
+        example: Submitted
+      urgency:
+        title: Urgency
+        description: Urgency of the incident
+        type: string
+        required: false
+        enum:
+        - Low
+        - Medium
+        - High
+        example: Medium
+    output:
+      service_request:
+        title: Service Request
+        description: Newly created service request
+        type: service_request
         required: true

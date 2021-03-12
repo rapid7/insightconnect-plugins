@@ -1,7 +1,7 @@
 {
-	"spec": "de4f0de764db9b450ab77ff505dfccd8",
-	"manifest": "2d140c606d4f74019d31fd1876f1b676",
-	"setup": "b9b9036972c0c5090a9b67c0994bbe66",
+	"spec": "2576f2e352f3f21f9953403bddee7a8b",
+	"manifest": "99e319385eb2626d2c796e1bb5c6cfaf",
+	"setup": "a3848fc1ce32df06038324cc17a939cf",
 	"schemas": [
 		{
 			"identifier": "cluster_health/schema.py",

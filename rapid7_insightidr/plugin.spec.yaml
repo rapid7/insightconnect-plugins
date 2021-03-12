@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 3.0.0
+version: 3.1.0
 vendor: rapid7
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_insightidr
@@ -478,7 +478,7 @@ actions:
         example: ["rapid7.com","google.com"]
       urls:
         title: URLs
-        description: URL's to add. e.g. ["https://example.com","https://test.com"]
+        description: URLs to add. e.g. ["https://example.com","https://test.com"]
         type: "[]string"
         required: false
         example: ["https://example.com","https://test.com"]
@@ -780,4 +780,38 @@ actions:
         title: Num Closed
         description: The number of investigations closed by the request
         type: integer
+        required: true
+  create_threat:
+    title: Create Threat
+    description: Create a private InsightIDR threat and add indicators to this threat
+    input:
+      threat_name:
+        title: Threat Name
+        description: Name of created threat
+        type: string
+        required: true
+        example: Threat created via InsightConnect
+      note_text:
+        title: Note Text
+        description: Note text of created threat
+        type: string
+        required: false
+        example: Threat created via InsightConnect
+        default: Threat created via InsightConnect
+      indicators:
+        title: Indicators
+        description: Add indicators to new threat in InsightIDR. Accept IP addresses, process hashes (SHA1, MD5, SHA256), domain names, URLs
+        type: '[]string'
+        required: true
+        example: ["example.com", "10.0.0.1"]
+    output:
+      rejected_indicators:
+        title: Rejected Indicators
+        description: Rejected indicators in new threat
+        type: "[]string"
+        required: true
+      threat:
+        title: Threat
+        description: The information about the new threat
+        type: threat
         required: true
