@@ -3,4 +3,4 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 aiohttp==3.6.3
 defusedxml==0.5.0
-maya==0.6.1
+maya==0.5.0

@@ -21,8 +21,6 @@ RUN apk add --no-cache --virtual .build-deps \
 # I had to do the following
 RUN pip install --upgrade pip
 RUN pip install -U setuptools
-RUN pip install pendulum==2.0.5
-RUN pip install -r requirements.txt
 
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD . /python/src
