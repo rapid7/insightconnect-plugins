@@ -11,15 +11,14 @@ class Input:
     AGENT = "agent"
     FILTER = "filter"
     REBOOT = "reboot"
-
+    
 
 class Output:
     AFFECTED = "affected"
-
+    
 
 class EnableAgentInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -47,16 +46,14 @@ class EnableAgentInput(insightconnect_plugin_runtime.Input):
     "reboot"
   ]
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class EnableAgentOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -72,8 +69,7 @@ class EnableAgentOutput(insightconnect_plugin_runtime.Output):
     "affected"
   ]
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
