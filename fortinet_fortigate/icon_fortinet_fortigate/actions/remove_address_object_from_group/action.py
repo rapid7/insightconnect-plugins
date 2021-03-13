@@ -26,7 +26,9 @@ class RemoveAddressObjectFromGroup(komand.Action):
         address_object = params[Input.ADDRESS_OBJECT]
         helper = Helpers(self.logger)
 
-        group = self.connection.get_address_group(group_name)
+        is_ipv6 = self.connection.get_address_object(address_object)["name"] == "address6"
+
+        group = self.connection.get_address_group(group_name, is_ipv6)
         group_members = group.get("member")
         found = False
         for item in group_members:
@@ -41,7 +43,10 @@ class RemoveAddressObjectFromGroup(komand.Action):
 
         group["member"] = group_members
 
-        endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/addrgrp/{group.get('name')}"
+        if is_ipv6:
+            endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/addrgrp6/{group.get('name')}"
+        else:
+            endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/addrgrp/{group.get('name')}"
 
         response = self.connection.session.put(endpoint, json=group, verify=self.connection.ssl_verify)
 

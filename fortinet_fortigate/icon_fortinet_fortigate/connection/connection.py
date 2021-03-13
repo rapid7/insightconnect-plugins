@@ -31,8 +31,12 @@ class Connection(komand.Connection):
         # This is broken. Leaving this here as its supposed to be fixed in a future version of requests
         # self.session.verify = self.ssl_verify
 
-    def get_address_group(self, address_group_name):
+    def get_address_group(self, address_group_name, is_ipv6):
         endpoint = f"https://{self.host}/api/v2/cmdb/firewall/addrgrp"
+
+        if is_ipv6:
+            endpoint = f"https://{self.host}/api/v2/cmdb/firewall/addrgrp6"
+
         params = {
             "access_token": self.api_key,
             "filter": f"name=@{address_group_name}",  # I have no idea why they need the @ symbol
@@ -59,6 +63,31 @@ class Connection(komand.Connection):
 
         group = groups[0]
         return group
+
+    def get_address_object(self, address_name):
+        response_ipv4_json = self.session.get(
+            f"https://{self.host}/api/v2/cmdb/firewall/address/{address_name}",
+            verify=self.ssl_verify
+        ).json()
+
+        if response_ipv4_json["http_status"] == 200:
+            return response_ipv4_json
+
+        response_ipv6 = self.session.get(
+            f"https://{self.host}/api/v2/cmdb/firewall/address6/{address_name}",
+            verify=self.ssl_verify
+        )
+
+        response_ipv6_json = response_ipv6.json()
+
+        if response_ipv6_json["http_status"] == 200:
+            return response_ipv6_json
+
+        raise PluginException(
+            cause=f"Get address object failed. Address object '{address_name}' does not exists.\n",
+            assistance="Contact support for assistance.",
+            data=response_ipv6.text,
+        )
 
     def test(self):
         helper = Helpers(self.logger)

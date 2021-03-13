@@ -28,42 +28,9 @@ class CheckIfAddressInGroup(komand.Action):
         enable_search = params.get(Input.ENABLE_SEARCH)
         helper = Helpers(self.logger)
 
-        endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/addrgrp/{addrgrp}"
-        response = self.connection.session.get(endpoint, verify=self.connection.ssl_verify)
-
-        try:
-            address_data = response.json()
-        except ValueError:
-            raise PluginException(
-                cause="Data sent by FortiGate was not in JSON format.\n",
-                assistance="Contact support for help.",
-                data=response.text,
-            )
-
-        helper.http_errors(address_data, response.status_code)
-
-        try:
-            groups = address_data["results"]
-        except KeyError:
-            raise PluginException(
-                cause="No results were returned by FortiGate.\n",
-                assistance="This is normally caused by an invalid address group name."
-                " Double check that the address group name is correct",
-            )
-        if len(groups) > 1:
-            raise PluginException(
-                cause="FortiGate returned more than one address group.\n",
-                assistance="Contact support for help.",
-                data=response.text,
-            )
-        try:
-            address_objects = groups[0]["member"]
-        except KeyError:
-            raise PluginException(
-                cause="The address group date was malformed.\n",
-                assistance="Contact support for help.",
-                data=response.text,
-            )
+        is_ipv6 = self.connection.get_address_object(address_to_check)["name"] == "address6"
+        response = self.connection.get_address_group(addrgrp, is_ipv6)
+        address_objects = response["member"]
 
         found = False
         addresses_found = list()

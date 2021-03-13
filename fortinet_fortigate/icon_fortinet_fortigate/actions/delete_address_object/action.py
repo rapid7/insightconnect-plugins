@@ -18,6 +18,7 @@ class DeleteAddressObject(komand.Action):
 
     def run(self, params={}):
         host = params[Input.ADDRESS_OBJECT]
+        original_host = params[Input.ADDRESS_OBJECT]
         helper = Helpers(self.logger)
 
         # This will check if the host is an IP
@@ -34,11 +35,22 @@ class DeleteAddressObject(komand.Action):
                 )
             pass
 
-        params_payload = {"mkey": str(host)}
+        is_ipv6 = self.connection.get_address_object(original_host)["name"] == "address6"
 
-        endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/address"
-
-        response = self.connection.session.delete(endpoint, params=params_payload, verify=self.connection.ssl_verify)
+        if is_ipv6:
+            params_payload = {"mkey": original_host}
+            response = self.connection.session.delete(
+                f"https://{self.connection.host}/api/v2/cmdb/firewall/address6",
+                params=params_payload,
+                verify=self.connection.ssl_verify
+            )
+        else:
+            params_payload = {"mkey": str(host)}
+            response = self.connection.session.delete(
+                f"https://{self.connection.host}/api/v2/cmdb/firewall/address",
+                params=params_payload,
+                verify=self.connection.ssl_verify
+            )
 
         try:
             json_response = response.json()
