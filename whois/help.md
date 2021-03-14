@@ -165,7 +165,7 @@ Multiple records can be returned by the server, this plugin currently only retur
 
 # Version History
 
-* 3.0.2 - Support non-UTF-8 responses in the Address action
+* 3.0.3 - Add PluginException in Domain and Address action when response is empty* 3.0.2 - Support non-UTF-8 responses in the Address action
 * 3.0.1 - Clean up help.md formatting
 * 3.0.0 - Add input `registrar` for manual server selection to Address Lookup action
 * 2.0.3 - Upgrade to latest Python plugin runtime | Define `cloud_ready` in spec
