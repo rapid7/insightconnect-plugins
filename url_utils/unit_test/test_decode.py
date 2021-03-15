@@ -54,7 +54,20 @@ class TestDecode(TestCase):
         # For example: self.assertEquals({"success": True}, results) 
         self.assertEquals({}, results)
 
-    def test_decode(self):
+
+    def test_decode_default(self):
+
+        log = logging.getLogger("Test")
+        test_action = Decode()
+        test_action.logger = log
+        test_url = 'https://example.com/page?text=abc%24%25%5E-space%20here~%3C%3E%28%29%23%21123'
+        result = test_action.decode_url(test_url, errors='')
+
+        actual = {'url': 'https://example.com/page?text=abc$%^-space here~<>()#!123'}
+        self.assertEqual(result, actual)
+
+
+    def test_decode_all(self):
 
         log = logging.getLogger("Test")
         test_action = Decode()
