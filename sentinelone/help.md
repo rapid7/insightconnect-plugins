@@ -321,11 +321,14 @@ This action is used to reload an agent module (applies to Windows agents only).
 
 Example input:
 
+```
+{
   "filter": {
     "ids": [
       "1000000000000000000"
     ]
   }
+}
 ```
 
 ##### Output
