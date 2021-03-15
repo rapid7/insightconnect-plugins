@@ -3,7 +3,10 @@ import requests
 from .schema import ConnectionSchema, Input
 
 from komand_sentinelone.util.api import SentineloneAPI
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
+from insightconnect_plugin_runtime.exceptions import (
+    ConnectionTestException,
+    PluginException,
+)
 import zipfile
 import io
 import base64
@@ -126,7 +129,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return self._call_api("GET", "agents/applications", None, {"ids": identifiers})
 
     def agents_summary(self, site_ids, account_ids):
-        return self._call_api("GET", "private/agents/summary", None, {"siteIds": site_ids, "accountIds": account_ids})
+        return self._call_api(
+            "GET",
+            "private/agents/summary",
+            None,
+            {"siteIds": site_ids, "accountIds": account_ids},
+        )
 
     def agents_action(self, action: str, agents_filter: str):
         return self._call_api("POST", f"agents/actions/{action}", {"filter": agents_filter})
@@ -305,12 +313,28 @@ class Connection(insightconnect_plugin_runtime.Connection):
         )
 
     def delete_blacklist_item_by_hash(self, item_ids: str):
-        return self._call_api("DELETE", "restrictions", json={"data": {"type": "black_hash", "ids": item_ids}}).get(
-            "errors", []
+        return self._call_api(
+            "DELETE",
+            "restrictions",
+            json={"data": {"type": "black_hash", "ids": item_ids}},
+        ).get("errors", [])
+
+    def disable_agent(self, data: dict, agent_filter: dict) -> dict:
+        return self._call_api("POST", "agents/actions/disable-agent", json={"data": data, "filter": agent_filter})
+
+    def enable_agent(self, reboot: bool, agent_filter: dict) -> dict:
+        return self._call_api(
+            "POST", "agents/actions/enable-agent", json={"data": {"shouldReboot": reboot}, "filter": agent_filter}
         )
 
     def _call_api(
-        self, method, endpoint, json=None, params=None, full_response: bool = False, override_api_version: str = ""
+        self,
+        method,
+        endpoint,
+        json=None,
+        params=None,
+        full_response: bool = False,
+        override_api_version: str = "",
     ):
 
         # We prefer to use the same api version from the token creation,
