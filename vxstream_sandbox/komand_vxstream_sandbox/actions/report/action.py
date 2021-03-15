@@ -32,7 +32,7 @@ class Report(komand.Action):
             state_url,
             params=params,
             headers=user_agent,
-            verify=False,
+            verify=False,       # noqa: B501
             auth=requests.auth.HTTPBasicAuth(api_key, secret),
         )
         data = response.json()
@@ -42,7 +42,7 @@ class Report(komand.Action):
                 report_url,
                 headers=user_agent,
                 params=params,
-                verify=False,
+                verify=False,       # noqa: B501
                 auth=requests.auth.HTTPBasicAuth(api_key, secret),
             )
             output = res.json()
@@ -80,7 +80,7 @@ class Report(komand.Action):
             state_url,
             params={"environmentId": env_id},
             headers=user_agent,
-            verify=False,
+            verify=False,       # noqa: B501
             auth=requests.auth.HTTPBasicAuth(api_key, secret),
         )
         data = response.json()
