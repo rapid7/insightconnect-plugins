@@ -4,6 +4,7 @@ The Cybereason platform provides military-grade cyber security with real-time aw
 
 # Key Features
 
+* Quickly respond to threats by quarantining (isolating) a machine associated with a Malop
 * Search files on machines
 
 # Requirements
