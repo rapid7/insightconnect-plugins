@@ -124,6 +124,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|incident_url|string|True|URL to newly created incident|
 |number|string|True|Incident ticket number|
 |system_id|string|True|System ID of the new Incident created|
 
@@ -757,6 +758,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 5.1.0 - Add new Incident URL output for Create Incident action
 * 5.0.1 - Add new Additional Fields input for Create Incident and Update Incident actions
 * 5.0.0 - Add input fields to Create Incident and Update Incident action instead of JSON object
 * 4.1.2 - Fix input parameter in Incident Created trigger
