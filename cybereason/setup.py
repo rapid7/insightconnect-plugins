@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="cybereason-rapid7-plugin",
       version="1.1.0",
-      description="The Cybereason platform provides military-grade cyber security with real-time awareness and detection",
+      description="The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin",
       author="rapid7",
       author_email="",
       url="",

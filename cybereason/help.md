@@ -1,6 +1,6 @@
 # Description
 
-The Cybereason platform provides military-grade cyber security with real-time awareness and detection.
+The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin.
 
 # Key Features
 
