@@ -32,7 +32,7 @@ The `://` protocol separator is unchanged if it is present in the input, regardl
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|encode_all|boolean|False|False|If true will encode all special characters|None|False|
+|encode_all|boolean|False|False|If true will encode all special characters|None|True|
 |url|string|None|True|URL to encode|None|`https://example.com?test string&key=value`|
 
 Example input:
@@ -54,7 +54,7 @@ Example output:
 
 ```
 {
-  'url': 'https://example.com?test%20string&key=value'
+  'url': 'https://example.com%3Ftest%20string%26key%3Dvalue'
 }
 ```
 
@@ -66,7 +66,7 @@ This action is used to decode an encoded URL `string` to the original characters
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|url|string|None|True|URL to decode|None|`https://example.com?test%20string`|
+|url|string|None|True|URL to decode|None|`https://example.com?test%20string&key=value`|
 
 Example input:
 
