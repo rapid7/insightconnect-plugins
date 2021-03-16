@@ -31,7 +31,7 @@ The `://` protocol separator is unchanged if it is present in the input.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|encode_all|boolean|False|False|If true will encode all non-alphanumeric characters, including ?=&# but not /|None|False|
+|encode_all|boolean|False|False|If true will encode all special characters|None|False|
 |url|string|None|True|URL to encode|None|https://example.com?test string&key=value|
 
 Example input:
