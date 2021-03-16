@@ -77,3 +77,15 @@ class TestDecode(TestCase):
 
         actual = {'url': 'https://example.com/page?text=abc$%^-space here~<>()#!123'}
         self.assertEqual(result, actual)
+
+
+    def test_decode_unicode(self):
+
+        log = logging.getLogger("Test")
+        test_action = Decode()
+        test_action.logger = log
+        test_url = '%C4%95%CF%87%C4%81m%C6%A5%C4%BC%C8%85.%C6%88%C8%AD%E1%B9%81'
+        result = test_action.decode_url(test_url, errors='')
+
+        actual = {'url': 'ĕχāmƥļȅ.ƈȭṁ'}
+        self.assertEqual(result, actual)
