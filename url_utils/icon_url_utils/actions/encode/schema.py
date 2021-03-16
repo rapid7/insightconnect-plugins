@@ -25,7 +25,7 @@ class EncodeInput(insightconnect_plugin_runtime.Input):
     "encode_all": {
       "type": "boolean",
       "title": "Encode All Characters",
-      "description": "If true will encode all non-alphanumeric characters, including ?=\\u0026# but not /",
+      "description": "If true will encode all special characters",
       "default": false,
       "order": 2
     },

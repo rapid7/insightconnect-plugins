@@ -31,15 +31,15 @@ The `://` protocol separator is unchanged if it is present in the input.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|encode_all|boolean|False|False|If true will encode all special characters|None|False|
+|encode_all|boolean|False|False|If true will encode all special characters|None|True|
 |url|string|None|True|URL to encode|None|https://example.com?test string&key=value|
 
 Example input:
 
 ```
 {
-  "encode_all": false,
-  "url": "https://example.com?test string&key=value"
+  "encode_all": true,
+  "url": "https://example.com?test string\u0026key=value"
 }
 ```
 
