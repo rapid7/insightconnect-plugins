@@ -25,6 +25,8 @@ _This plugin does not contain a connection._
 
 This action is used to encode special characters and non-ASCII text in a `string` to make it safe for use as URL components.
 
+The `://` protocol separator is unchanged if it is present in the input.
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -36,8 +38,8 @@ Example input:
 
 ```
 {
-  "encode_all": "false",
-  "url": "https://example.com?test string\u0026key=value"
+  "encode_all": false,
+  "url": "https://example.com?test string&key=value"
 }
 ```
 
@@ -51,7 +53,7 @@ Example output:
 
 ```
 {
-  "data": "example.com/page%3Ftext%3Dabc%24%25%5E-~%3Cscript%3E%28%29%23%21123"
+  "url": "https://example.com?test%20string&key=value"
 }
 ```
 
@@ -83,7 +85,7 @@ Example output:
 
 ```
 {
-  "": "example.com/page?text=abc$%^-~<script>()#!123"
+  "url": "example.com/page?text=abc$%^-~<script>()#!123"
 }
 ```
 
