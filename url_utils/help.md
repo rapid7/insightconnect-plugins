@@ -38,8 +38,8 @@ Example input:
 
 ```
 {
-  "encode_all": "false",
-  "url": "https://example.com?test string\u0026key=value"
+  "encode_all": false,
+  "url": "https://example.com?test string&key=value"
 }
 ```
 

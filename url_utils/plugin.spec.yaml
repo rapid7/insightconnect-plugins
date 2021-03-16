@@ -34,10 +34,10 @@ actions:
       encode_all:
         type: boolean
         title: Encode All Characters
-        description: If true will encode all non-alphanumeric characters, including ?=&# but not /
+        description: If true will encode all special characters
         default: false
         required: false
-        example: "false"
+        example: true
     output:
       url:
         title: Encoded URL
