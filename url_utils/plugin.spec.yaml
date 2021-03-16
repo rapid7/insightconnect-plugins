@@ -30,7 +30,7 @@ actions:
         type: string
         description: URL to encode
         required: true
-        example: '`https://example.com?test string&key=value`'
+        example: "https://example.com?test string&key=value"
       encode_all:
         type: boolean
         title: Encode All Characters
@@ -52,7 +52,7 @@ actions:
         type: string
         description: URL to decode
         required: true
-        example: '`https://example.com?test%20string&key=value`'
+        example: "https://example.com?test%20string&key=value"
     output:
       url:
         title: URL
