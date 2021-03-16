@@ -37,6 +37,7 @@ actions:
         description: If true will encode all non-alphanumeric characters, including ?=&# but not /
         default: false
         required: false
+        example: false
     output:
       url:
         title: Encoded URL
