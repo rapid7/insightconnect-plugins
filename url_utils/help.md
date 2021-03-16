@@ -29,13 +29,14 @@ This action is used to encode special characters and non-ASCII text in a `string
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|encode_all|boolean|False|False|If true will encode all non-alphanumeric characters, including ?=&# but not /|None|None|
+|encode_all|boolean|False|False|If true will encode all non-alphanumeric characters, including ?=&# but not /|None|False|
 |url|string|None|True|URL to encode|None|https://example.com?test string&key=value|
 
 Example input:
 
 ```
 {
+  "encode_all": "false",
   "url": "https://example.com?test string\u0026key=value"
 }
 ```
