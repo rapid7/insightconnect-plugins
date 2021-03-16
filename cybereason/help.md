@@ -92,6 +92,8 @@ Example output:
 
 This action is used to find files on any machine in your environment with a Cybereason sensor installed.
 
+Note that if the machine you are trying to search on is offline, the file search can remain open for up to 3 days.
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
