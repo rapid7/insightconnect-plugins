@@ -38,7 +38,7 @@ Example input:
 
 ```
 {
-  "encode_all": false,
+  "encode_all": true,
   "url": "https://example.com?test string&key=value"
 }
 ```
