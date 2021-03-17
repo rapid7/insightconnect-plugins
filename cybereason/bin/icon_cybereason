@@ -4,10 +4,10 @@ import os
 import json
 from sys import argv
 
-Name = "WHOIS"
+Name = "Cybereason"
 Vendor = "rapid7"
-Version = "3.0.3"
-Description = "The WHOIS plugin enables address and domain lookups in the WHOIS databases"
+Version = "1.1.0"
+Description = "The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin"
 
 
 def main():
@@ -23,9 +23,9 @@ def main():
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
-    from komand_whois import connection, actions, triggers
+    from icon_cybereason import connection, actions, triggers
 
-    class ICONWhois(insightconnect_plugin_runtime.Plugin):
+    class ICONCybereason(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -34,13 +34,13 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
-            self.add_action(actions.Address())
+            self.add_action(actions.IsolateMachine())
 
-            self.add_action(actions.Domain())
+            self.add_action(actions.SearchForFiles())
 
 
     """Run plugin"""
-    cli = insightconnect_plugin_runtime.CLI(ICONWhois())
+    cli = insightconnect_plugin_runtime.CLI(ICONCybereason())
     cli.run()
 
 

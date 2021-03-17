@@ -52,4 +52,8 @@ class CreateIncident(insightconnect_plugin_runtime.Action):
                 cause="Error: Create Incident failed - no system_id returned.", assistance=f"Response: {response.text}"
             )
 
-        return {Output.SYSTEM_ID: sys_id, Output.NUMBER: number}
+        return {
+            Output.SYSTEM_ID: sys_id,
+            Output.NUMBER: number,
+            Output.INCIDENT_URL: f"{self.connection.base_url}task.do?sys_id={sys_id}",
+        }
