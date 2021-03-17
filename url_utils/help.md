@@ -54,7 +54,7 @@ Example output:
 
 ```
 {
-  'url': 'https://example.com%3Ftest%20string%26key%3Dvalue'
+  "url": "https://example.com%3Ftest%20string%26key%3Dvalue"
 }
 ```
 

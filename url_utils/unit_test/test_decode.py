@@ -63,7 +63,7 @@ class TestDecode(TestCase):
         test_url = 'https://example.com/page?text=abc%24%25%5E-space%20here~%3C%3E%28%29%23%21123'
         result = test_action.decode_url(test_url, errors='')
 
-        actual = {'url': 'https://example.com/page?text=abc$%^-space here~<>()#!123'}
+        actual = 'https://example.com/page?text=abc$%^-space here~<>()#!123'
         self.assertEqual(result, actual)
 
 
@@ -75,7 +75,7 @@ class TestDecode(TestCase):
         test_url = 'https://example.com%2Fpage%3Ftext%3Dabc%24%25%5E-space%20here~%3C%3E%28%29%23%21123'
         result = test_action.decode_url(test_url, errors='')
 
-        actual = {'url': 'https://example.com/page?text=abc$%^-space here~<>()#!123'}
+        actual = 'https://example.com/page?text=abc$%^-space here~<>()#!123'
         self.assertEqual(result, actual)
 
 
@@ -87,5 +87,5 @@ class TestDecode(TestCase):
         test_url = '%C4%95%CF%87%C4%81m%C6%A5%C4%BC%C8%85.%C6%88%C8%AD%E1%B9%81'
         result = test_action.decode_url(test_url, errors='')
 
-        actual = {'url': 'ĕχāmƥļȅ.ƈȭṁ'}
+        actual = 'ĕχāmƥļȅ.ƈȭṁ'
         self.assertEqual(result, actual)
