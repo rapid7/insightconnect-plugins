@@ -1,6 +1,6 @@
 # Description
 
-[URL encoding](https://en.wikipedia.org/wiki/Percent-encoding) converts unprintable or special characters in a URL into a standard `%XX` representation, using only legal ASCII characters. For example, the space character ` ` is encoded as `%20`.
+[URL encoding](https://en.wikipedia.org/wiki/Percent-encoding) converts special characters in a URL into a standard `%XX` representation, using only legal ASCII characters. For example, the space character ` ` is encoded as `%20`.
 
 # Key Features
 
@@ -39,7 +39,7 @@ Example input:
 
 ```
 {
-  "encode_all": true,
+  "encode_all": false,
   "url": "https://example.com?test string&key=value"
 }
 ```
@@ -54,7 +54,7 @@ Example output:
 
 ```
 {
-  "url": "https://example.com%3Ftest%20string%26key%3Dvalue"
+  "url": "https://example.com?test%20string&key=value"
 }
 ```
 
@@ -66,13 +66,13 @@ This action is used to decode an encoded URL `string` to the original characters
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|url|string|None|True|URL to decode|None|https://example.com?test%20string&key=value|
+|url|string|None|True|URL to decode|None|https://example.com/utf8%3D%E2%9C%93|
 
 Example input:
 
 ```
 {
-  "url": "https://example.com?test%20string&key=value"
+  "url": "https://example.com/utf8%3D%E2%9C%93"
 }
 ```
 
@@ -86,7 +86,7 @@ Example output:
 
 ```
 {
-  'url': 'https://example.com?test string&key=value'
+  "url": "https://example.com/utf8=✓"
 }
 ```
 
@@ -100,12 +100,15 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin uses the UTF-8 character encoding by default, and therefore supports Unicode characters.
+This plugin uses the [UTF-8](https://en.wikipedia.org/wiki/UTF-8) character encoding.
+Under the hood, the encode and decode actions use the Python methods [`urllib.parse.quote()`](https://docs.python.org/3/library/urllib.parse.html#urllib.parse.quote) and [`urllib.parse.unquote()`](https://docs.python.org/3/library/urllib.parse.html#urllib.parse.unquote), respectively.
 
 For the URL decode action, be sure that the input contains valid percent-encoded data.
 
-To help diagnose unexpected behavior when decoding URLs, there is an
-option to set how errors are to be handled. These options are "replace" and "ignore". Replace will change all invalid percent-encodings to `�`. Ignore will drop the character from the output.
+To help diagnose unexpected behavior when decoding URLs, there is an option to set
+how errors are to be handled. These options are "replace" and "ignore".
+Replace will change all invalid percent-encodings to `�`.
+Ignore will drop the character from the output.
 
 # Version History
 
