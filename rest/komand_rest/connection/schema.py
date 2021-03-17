@@ -10,10 +10,11 @@ class Input:
     DEFAULT_HEADERS = "default_headers"
     SECRET = "secret"
     SSL_VERIFY = "ssl_verify"
-    
+
 
 class ConnectionSchema(komand.Input):
-    schema = json.loads("""
+    schema = json.loads(
+        """
    {
   "type": "object",
   "title": "Variables",
@@ -67,7 +68,7 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
-    "base_url",
+    "authentication_type",
     "ssl_verify"
   ],
   "definitions": {
@@ -117,7 +118,8 @@ class ConnectionSchema(komand.Input):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

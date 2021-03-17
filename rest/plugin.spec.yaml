@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rest
 title: HTTP Requests
 description: The HTTP Requests plugin to make it easy to integrate with RESTful services
-version: 4.0.1
+version: 5.0.0
 vendor: rapid7
 support: community
 status: []
@@ -29,13 +29,13 @@ connection:
     title: Base URL
     description: Base URL e.g. https://httpbin.org
     type: string
-    required: true
+    required: false
     example: https://httpbin.org/
   authentication_type:
     title: Authentication Type
     description: Type of authentication
     type: string
-    required: false
+    required: true
     enum:
       - Basic Auth
       - Digest Auth
