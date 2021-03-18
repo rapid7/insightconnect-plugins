@@ -186,7 +186,7 @@ class SearchDocumentsOutput(komand.Output):
           "order": 2
         },
         "total": {
-          "type": "integer",
+          "$ref": "#/definitions/total",
           "title": "Total",
           "description": "Details about total hits",
           "order": 1
@@ -234,6 +234,42 @@ class SearchDocumentsOutput(komand.Output):
               "order": 4
             }
           }
+        },
+        "total": {
+          "type": "object",
+          "title": "total",
+          "properties": {
+            "relation": {
+              "type": "string",
+              "title": "Relation",
+              "description": "Indicates whether the number of returned documents in the value parameter is accurate or a lower bound",
+              "order": 2
+            },
+            "value": {
+              "type": "integer",
+              "title": "Value",
+              "description": "Total number of returned documents",
+              "order": 1
+            }
+          }
+        }
+      }
+    },
+    "total": {
+      "type": "object",
+      "title": "total",
+      "properties": {
+        "relation": {
+          "type": "string",
+          "title": "Relation",
+          "description": "Indicates whether the number of returned documents in the value parameter is accurate or a lower bound",
+          "order": 2
+        },
+        "value": {
+          "type": "integer",
+          "title": "Value",
+          "description": "Total number of returned documents",
+          "order": 1
         }
       }
     }

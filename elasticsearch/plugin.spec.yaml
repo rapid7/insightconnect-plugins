@@ -131,7 +131,7 @@ types:
       required: false
   hits:
     total:
-      type: integer
+      type: total
       title: Total
       description: Details about total hits
     max_score:
