@@ -4,7 +4,7 @@ import os
 import json
 from sys import argv
 
-Name = "URL Utilities"
+Name = "URL Encoder"
 Vendor = "rapid7"
 Version = "1.0.0"
 Description = "Encode and decode URLs"
@@ -23,9 +23,9 @@ def main():
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
-    from icon_url_utils import connection, actions, triggers
+    from icon_url_encoder import connection, actions, triggers
 
-    class ICONUrlUtils(insightconnect_plugin_runtime.Plugin):
+    class ICONUrlEncoder(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -40,7 +40,7 @@ def main():
 
 
     """Run plugin"""
-    cli = insightconnect_plugin_runtime.CLI(ICONUrlUtils())
+    cli = insightconnect_plugin_runtime.CLI(ICONUrlEncoder())
     cli.run()
 
 

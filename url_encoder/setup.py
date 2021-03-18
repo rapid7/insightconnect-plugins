@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 
-setup(name="url_utils-rapid7-plugin",
+setup(name="url_encoder-rapid7-plugin",
       version="1.0.0",
       description="Encode and decode URLs",
       author="rapid7",
@@ -10,5 +10,5 @@ setup(name="url_utils-rapid7-plugin",
       url="",
       packages=find_packages(),
       install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/icon_url_utils']
+      scripts=['bin/icon_url_encoder']
       )

@@ -1,8 +1,8 @@
 plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
-name: url_utils
-title: URL Utilities
+name: url_encoder
+title: URL Encoder
 description: Encode and decode URLs
 version: 1.0.0
 vendor: rapid7
