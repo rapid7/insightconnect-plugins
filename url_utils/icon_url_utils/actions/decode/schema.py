@@ -8,8 +8,8 @@ class Component:
 
 
 class Input:
-    URL = "url"
     ERRORS = "errors"
+    URL = "url"
     
 
 class Output:
@@ -22,6 +22,13 @@ class DecodeInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "errors": {
+      "type": "string",
+      "title": "Errors",
+      "description": "remove or replace invalid encodings",
+      "default": "",
+      "order": 2
+    },
     "url": {
       "type": "string",
       "title": "Url",

@@ -4,7 +4,7 @@ import os
 import json
 from sys import argv
 
-Name = "url_utils"
+Name = "URL Utilities"
 Vendor = "rapid7"
 Version = "1.0.0"
 Description = "Encode and decode URLs"

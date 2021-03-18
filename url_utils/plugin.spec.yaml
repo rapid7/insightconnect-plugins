@@ -52,7 +52,7 @@ actions:
         type: string
         description: URL to decode
         required: true
-        example: "https://example.com/utf8%3D%E2%9C%93"
+        example: "https://example.com/utf8%3D%E2%9C%93%26replace%3D%99"
       errors:
         type: string
         description: remove or replace invalid encodings

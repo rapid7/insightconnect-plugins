@@ -66,15 +66,19 @@ This action is used to decode an encoded URL `string` to the original characters
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|url|string|None|True|URL to decode|None|https://example.com/utf8%3D%E2%9C%93|
+|errors|string||False|remove or replace invalid encodings|None|replace|
+|url|string|None|True|URL to decode|None|https://example.com/utf8%3D%E2%9C%93%26replace%3D%99|
 
 Example input:
 
 ```
 {
-  "url": "https://example.com/utf8%3D%E2%9C%93"
+  "errors": "replace",
+  "url": "https://example.com/utf8%3D%E2%9C%93%26replace%3D%99"
 }
 ```
+
+Note that `%99`, the last encoding in `url`, is an invalid percent encoding.
 
 ##### Output
 
@@ -86,7 +90,7 @@ Example output:
 
 ```
 {
-  "url": "https://example.com/utf8=✓"
+  "url": "https://example.com/utf8=✓&replace=�"
 }
 ```
 
