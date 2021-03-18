@@ -66,7 +66,7 @@ This action is used to decode an encoded URL `string` to the original characters
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|errors|string||False|remove or replace invalid encodings|None|replace|
+|errors|string|replace|False|Set to remove or replace invalid encodings|None|replace|
 |url|string|None|True|URL to decode|None|https://example.com/utf8%3D%E2%9C%93%26replace%3D%99|
 
 Example input:
@@ -110,7 +110,7 @@ Under the hood, the encode and decode actions use the Python methods [`urllib.pa
 For the URL decode action, be sure that the input contains valid percent-encoded data.
 
 The decode action has an `errors` option to set how invalid percent-encodings are to be handled.
-These options are "replace" and "ignore".
+These options are "replace" and "ignore". The default is to replace.
 Replace will change all invalid percent-encodings to `�`.
 Ignore will drop the character from the output.
 
