@@ -355,7 +355,7 @@ actions:
         required: false
       query:
         title: Query
-        type: string
+        type: object
         description: JSON Query DSL
         required: false
     output:

@@ -125,12 +125,11 @@ def get_search(log, host, index, type_, query=None, username=None, password=None
     query_object = {}
     if query:
         try:
-            query_object['query'] = json.loads(query)
+            query_object['query'] = query
         except Exception as e:
             raise PluginException(cause="Input query was malformed.",
                                   assistance=f"Please ensure the input query is valid JSON.\n The query was:\n{query}\n",
                                   data=e)
-
 
     query_object['version'] = True
     try:

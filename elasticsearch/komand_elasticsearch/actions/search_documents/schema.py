@@ -40,7 +40,7 @@ class SearchDocumentsInput(komand.Input):
       "order": 2
     },
     "query": {
-      "type": "string",
+      "type": "object",
       "title": "Query",
       "description": "JSON Query DSL",
       "order": 4
