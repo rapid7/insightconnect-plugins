@@ -157,7 +157,7 @@ This action is used to install a policy to selected targets.
 |install_on_all_cluster_members_or_fail|boolean|False|True|Relevant for the gateway clusters. If true, the policy is installed on all the cluster members. If the installation on a cluster member fails, don't install on that cluster|None|False|
 |policy_package|string|standard|True|Policy package to install|None|standard|
 |qos_policy|boolean|False|True|Set to be true in order to install the QoS policy. By default, the value is true if Quality-of-Service policy is enabled on the input policy package, otherwise false|None|False|
-|targets|[]string|["target name"]|True|On what targets to execute this command. Targets may be identified by their name, or object unique identifier|None|["checkpoint_fw_1", "checkpoint_fw_2"]|
+|targets|[]string|['target name']|True|On what targets to execute this command. Targets may be identified by their name, or object unique identifier|None|["checkpoint_fw_1", "checkpoint_fw_2"]|
 |threat_prevention_policy|boolean|True|True|Set to be true in order to install the Threat Prevention policy. By default, the value is true if Threat Prevention policy is enabled on the input policy package, otherwise false|None|True|
 
 Example input:
@@ -982,6 +982,7 @@ privileges.
 
 # Version History
 
+* 2.0.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/checkpoint-ngfw)
 * 2.0.1 - Revise Create Address Object action output
 * 2.0.0 - New actions Check if Address in Group, Remove Address Object from Group | Rename "Add Host" action to "Create Address Object" and add whitelist support | Move "Discard Sessions" input from individual actions to connection
 * 1.3.0 - Update to add install options to Install Policy
