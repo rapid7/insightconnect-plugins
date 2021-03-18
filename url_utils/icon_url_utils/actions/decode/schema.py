@@ -25,7 +25,7 @@ class DecodeInput(insightconnect_plugin_runtime.Input):
     "errors": {
       "type": "string",
       "title": "Errors",
-      "description": "Set to remove or replace invalid encodings",
+      "description": "Set to ignore or replace invalid encodings",
       "default": "replace",
       "order": 2
     },
