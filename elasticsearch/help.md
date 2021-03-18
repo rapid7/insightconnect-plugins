@@ -371,8 +371,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-
-* 2.0.6 - Fix issue where Search Documents was not converting json properly
+* 2.0.6 - Fix issue where Search Documents was not converting JSON properly
 * 2.0.5 - Updated example inputs and outputs for all the actions
 * 2.0.4 - Correct spelling in help.md
 * 2.0.3 - Updated Search Documents action output schema
