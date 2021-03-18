@@ -22,4 +22,4 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 # Install plugin
 RUN python setup.py build && python setup.py install
 
-ENTRYPOINT ["/usr/local/bin/komand_aws_ec2"]
+ENTRYPOINT ["/usr/local/bin/icon_aws_ec2"]
