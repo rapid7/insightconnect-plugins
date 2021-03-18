@@ -20,4 +20,4 @@ RUN python setup.py build && python setup.py install
 USER nobody
 
 
-ENTRYPOINT ["/usr/local/bin/icon_url_utils"]
+ENTRYPOINT ["/usr/local/bin/icon_url_encoder"]
