@@ -1,6 +1,6 @@
 # Description
 
-[URL encoding](https://en.wikipedia.org/wiki/Percent-encoding) converts special characters in a URL into a standard `%XX` representation, using only legal ASCII characters. For example, the space character ` ` is encoded as `%20`.
+[URL encoding](https://en.wikipedia.org/wiki/Percent-encoding) converts special characters in a URL into a standard `%XX` representation, using only safe ASCII characters. For example, the space character ` ` is encoded as `%20`.
 
 # Key Features
 
@@ -23,8 +23,8 @@ _This plugin does not contain a connection._
 
 #### Encoder
 
-This action is used to encode special characters and non-ASCII text in a `string` to make it safe for use as URL components.
-It does not encode the characters `?=&#` by default, though you may encode these characters anyway by setting the `encode_all` variable to `true`.
+This action is used to encode special, reserved, unsafe, or non-ASCII characters in a `string` to make it safe for use as URL components.
+It does not encode the characters `/?=&#` by default, though you may encode these characters anyway by setting the `encode_all` variable to `true`.
 
 The `://` protocol separator is unchanged if it is present in the input, regardless of the `encode_all` value.
 
@@ -105,8 +105,8 @@ Under the hood, the encode and decode actions use the Python methods [`urllib.pa
 
 For the URL decode action, be sure that the input contains valid percent-encoded data.
 
-To help diagnose unexpected behavior when decoding URLs, there is an option to set
-how errors are to be handled. These options are "replace" and "ignore".
+The decode action has an `errors` option to set how invalid percent-encodings are to be handled.
+These options are "replace" and "ignore".
 Replace will change all invalid percent-encodings to `�`.
 Ignore will drop the character from the output.
 
