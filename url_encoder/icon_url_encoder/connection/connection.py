@@ -8,3 +8,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params):
         pass
+
+    def test(self):
+        return True

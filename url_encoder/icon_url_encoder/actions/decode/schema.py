@@ -31,7 +31,7 @@ class DecodeInput(insightconnect_plugin_runtime.Input):
     },
     "url": {
       "type": "string",
-      "title": "Url",
+      "title": "URL",
       "description": "URL to decode",
       "order": 1
     }

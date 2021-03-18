@@ -40,7 +40,7 @@ Example input:
 ```
 {
   "encode_all": true,
-  "url": "https://example.com?test string\u0026key=value"
+  "url": "https://example.com?test string&key=value"
 }
 ```
 

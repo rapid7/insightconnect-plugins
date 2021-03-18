@@ -31,7 +31,7 @@ class EncodeInput(insightconnect_plugin_runtime.Input):
     },
     "url": {
       "type": "string",
-      "title": "Url",
+      "title": "URL",
       "description": "URL to encode",
       "order": 1
     }

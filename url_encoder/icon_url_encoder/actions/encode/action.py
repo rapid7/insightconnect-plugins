@@ -20,7 +20,7 @@ class Encode(insightconnect_plugin_runtime.Action):
 
         return {Output.URL: result}
 
-    def encode_url(self, encode_all:bool, input_url:str) -> str:
+    def encode_url(self, encode_all: bool, input_url: str) -> str:
         self.logger.info(f"Encoding: {input_url}")
 
         url = input_url.split('://', maxsplit=1)
