@@ -89,3 +89,27 @@ class TestDecode(TestCase):
 
         actual = 'ĕχāmƥļȅ.ƈȭṁ'
         self.assertEqual(result, actual)
+
+
+    def test_decode_replace(self):
+
+        log = logging.getLogger("Test")
+        test_action = Decode()
+        test_action.logger = log
+        test_url = 'example.com/utf8%3D%E2%9C%93%26replace%3D%99'
+        result = test_action.decode_url(test_url, errors='replace')
+
+        actual = 'example.com/utf8=✓&replace=�'
+        self.assertEqual(result, actual)
+
+
+    def test_decode_ignore(self):
+
+        log = logging.getLogger("Test")
+        test_action = Decode()
+        test_action.logger = log
+        test_url = 'example.com/utf8%3D%E2%9C%93%26replace%3D%99'
+        result = test_action.decode_url(test_url, errors='ignore')
+
+        actual = 'example.com/utf8=✓&replace='
+        self.assertEqual(result, actual)
