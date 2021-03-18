@@ -66,7 +66,7 @@ This action is used to decode an encoded URL `string` to the original characters
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|errors|string|replace|False|Set to remove or replace invalid encodings|None|replace|
+|errors|string|replace|False|Set to ignore or replace invalid encodings|None|replace|
 |url|string|None|True|URL to decode|None|https://example.com/utf8%3D%E2%9C%93%26replace%3D%99|
 
 Example input:
