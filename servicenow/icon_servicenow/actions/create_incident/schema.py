@@ -8,6 +8,7 @@ class Component:
 
 
 class Input:
+    ADDITIONAL_FIELDS = "additional_fields"
     ASSIGNED_TO = "assigned_to"
     ASSIGNMENT_GROUP = "assignment_group"
     BUSINESS_SERVICE = "business_service"
@@ -25,6 +26,7 @@ class Input:
     
 
 class Output:
+    INCIDENT_URL = "incident_url"
     NUMBER = "number"
     SYSTEM_ID = "system_id"
     
@@ -35,6 +37,12 @@ class CreateIncidentInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "additional_fields": {
+      "type": "object",
+      "title": "Additional Fields",
+      "description": "JSON object containing the additional fields and values to create incident",
+      "order": 15
+    },
     "assigned_to": {
       "type": "string",
       "title": "Assigned To",
@@ -133,6 +141,12 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "incident_url": {
+      "type": "string",
+      "title": "Incident URL",
+      "description": "URL to newly created incident",
+      "order": 3
+    },
     "number": {
       "type": "string",
       "title": "Incident Number",
@@ -147,6 +161,7 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
+    "incident_url",
     "number",
     "system_id"
   ]

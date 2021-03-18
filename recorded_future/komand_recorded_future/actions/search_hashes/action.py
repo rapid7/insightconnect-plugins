@@ -14,8 +14,19 @@ class SearchHashes(komand.Action):
         )
 
     def run(self, params={}):
-        params["fields"] = ["analystNotes", "counts", "entity", "hashAlgorithm", "intelCard", "metrics",
-                            "relatedEntities", "risk", "sightings", "threatLists", "timestamps"]
+        params["fields"] = [
+            "analystNotes",
+            "counts",
+            "entity",
+            "hashAlgorithm",
+            "intelCard",
+            "metrics",
+            "relatedEntities",
+            "risk",
+            "sightings",
+            "threatLists",
+            "timestamps",
+        ]
         riskRuleMap = {
             "Reported by Insikt Group": "analystNote",
             "Historically Reported in Threat List": "historicalThreatListMembership",
@@ -29,7 +40,7 @@ class SearchHashes(komand.Action):
             "Recently Active Targeting Vulnerabilities in the Wild": "recentActiveMalware",
             "Referenced by Insikt Group": "relatedNote",
             "Trending in Recorded Future Analyst Community": "rfTrending",
-            "Threat Researcher": "threatResearcher"
+            "Threat Researcher": "threatResearcher",
         }
         risk_rule = riskRuleMap.get(params.get(Input.RISKRULE))
         if risk_rule:

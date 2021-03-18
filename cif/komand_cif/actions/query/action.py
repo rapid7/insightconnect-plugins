@@ -1,32 +1,35 @@
 import komand
 from .schema import QueryInput, QueryOutput
+
 # Custom imports below
 import requests
 
 
 class Query(komand.Action):
-    
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='query',
-                description='Query for observables',
-                input=QueryInput(),
-                output=QueryOutput())
+            name="query",
+            description="Query for observables",
+            input=QueryInput(),
+            output=QueryOutput(),
+        )
 
     def run(self, params={}):
-        url = '{}/{}'.format(self.connection.url, 'observables')
+        url = "{}/{}".format(self.connection.url, "observables")
         headers = {
             "Authorization": "Token token={}".format(self.connection.api_token),
             "Accept": "application/vnd.cif.v2+json",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         }
         l = []
 
         # Normalize input parameters
-        nolog = str(1) if params.get('nolog') == True else str(0)
-        params['nolog'] = nolog
-        if params.get('protocol') == "all": del params['protocol']
-        if params.get('otype') == "all": del params['otype']
+        nolog = str(1) if params.get("nolog") == True else str(0)
+        params["nolog"] = nolog
+        if params.get("protocol") == "all":
+            del params["protocol"]
+        if params.get("otype") == "all":
+            del params["otype"]
         for k in list(params.keys()):
             if not params[k]:
                 del params[k]
@@ -34,15 +37,15 @@ class Query(komand.Action):
         for i in params.keys():
             l.append(i)
 
-        self.logger.info('Inputs: %s', l)
+        self.logger.info("Inputs: %s", l)
 
         if l:
-            url = '{}{}'.format(url, '?')
+            url = "{}{}".format(url, "?")
             for opt in l:
                 # Debugging
                 # self.logger.info(url)
-                url = '{}{}={}&'.format(url, opt, params.get(opt))
-            url = url.rstrip('&')
+                url = "{}{}={}&".format(url, opt, params.get(opt))
+            url = url.rstrip("&")
         self.logger.info(url)
 
         try:
@@ -72,7 +75,9 @@ class Query(komand.Action):
             if "confidence" in item:
                 item["confidence"] = float(item["confidence"])
             if isinstance(item["application"], str):
-                format_app = list(); format_app.append(item["application"]); item["application"] = format_app
+                format_app = list()
+                format_app.append(item["application"])
+                item["application"] = format_app
             mod_data.append(item)
         result = mod_data
 
@@ -84,14 +89,14 @@ class Query(komand.Action):
                 if obj[k] is None:
                     obj[k] = "None"
 
-        return {'query': result}
+        return {"query": result}
 
     def test(self):
-        url = '{}/{}'.format(self.connection.url, 'ping')
+        url = "{}/{}".format(self.connection.url, "ping")
         headers = {
-          "Authorization":"Token token={}".format(self.connection.api_token),
-          "Accept": "application/vnd.cif.v2+json",
-          "Content-Type": "application/json"
+            "Authorization": "Token token={}".format(self.connection.api_token),
+            "Accept": "application/vnd.cif.v2+json",
+            "Content-Type": "application/json",
         }
 
         try:
@@ -112,4 +117,4 @@ class Query(komand.Action):
         except Exception as e:
             self.logger.error("Error: " + str(e))
             raise
-        return { 'query': [r.json()] }
+        return {"query": [r.json()]}

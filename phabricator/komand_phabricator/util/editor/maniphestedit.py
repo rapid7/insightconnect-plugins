@@ -1,4 +1,3 @@
-
 class ManiphesEdit:
     objectIdentifier = None
     phab = None
@@ -15,7 +14,7 @@ class ManiphesEdit:
             else:
                 deb = self.phab.maniphest.edit(transactions=transactions, objectIdentifier=self.objectIdentifier)
 
-            return str(deb['object']['id'])
+            return str(deb["object"]["id"])
         except ValueError as e:
             self.logger.error("ManiphesEdit: Run: Value error: {0}".format(e))
         except Exception as e:

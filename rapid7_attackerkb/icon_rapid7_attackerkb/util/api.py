@@ -22,9 +22,7 @@ class AttackerKB:
 
         api_url = self.base_url + path
 
-        headers = {
-            "Authorization": f"basic {self.token}"
-        }
+        headers = {"Authorization": f"basic {self.token}"}
 
         try:
             response = request("GET", self.base_url + path, params=komand.helper.clean(params), headers=headers)
@@ -34,7 +32,7 @@ class AttackerKB:
             raise PluginException(
                 cause=f"Failed to get a valid response from AttackerKB at endpoint {api_url}",
                 assistance=f"Response was {httpError.response.text}",
-                data=httpError
+                data=httpError,
             )
 
     def call_api_pages(self, path: str, params: dict = None):

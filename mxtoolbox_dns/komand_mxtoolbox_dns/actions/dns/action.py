@@ -1,5 +1,6 @@
 import komand
 from .schema import DnsInput, DnsOutput
+
 # Custom imports below
 from komand_mxtoolbox_dns.util import utils
 
@@ -7,10 +8,8 @@ from komand_mxtoolbox_dns.util import utils
 class Dns(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='dns',
-                description='Run a DNS query',
-                input=DnsInput(),
-                output=DnsOutput())
+            name="dns", description="Run a DNS query", input=DnsInput(), output=DnsOutput()
+        )
 
     def run(self, params={}):
         base_url = self.connection.server

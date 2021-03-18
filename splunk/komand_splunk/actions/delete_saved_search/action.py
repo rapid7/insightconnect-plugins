@@ -1,16 +1,17 @@
 import komand
 from .schema import DeleteSavedSearchInput, DeleteSavedSearchOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class DeleteSavedSearch(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='delete_saved_search',
-                description=Component.DESCRIPTION,
-                input=DeleteSavedSearchInput(),
-                output=DeleteSavedSearchOutput())
+            name="delete_saved_search",
+            description=Component.DESCRIPTION,
+            input=DeleteSavedSearchInput(),
+            output=DeleteSavedSearchOutput(),
+        )
 
     def run(self, params={}):
         saved_search_name = params.get(Input.SAVED_SEARCH_NAME)

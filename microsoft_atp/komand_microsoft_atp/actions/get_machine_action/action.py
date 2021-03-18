@@ -1,16 +1,17 @@
 import insightconnect_plugin_runtime
 from .schema import GetMachineActionInput, GetMachineActionOutput
+
 # Custom imports below
 
 
 class GetMachineAction(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_machine_action',
-                description='Retrieve details about an action taken on a machine',
-                input=GetMachineActionInput(),
-                output=GetMachineActionOutput())
+            name="get_machine_action",
+            description="Retrieve details about an action taken on a machine",
+            input=GetMachineActionInput(),
+            output=GetMachineActionOutput(),
+        )
 
     def run(self, params={}):
         self.logger.info("Running...")

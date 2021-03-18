@@ -1,18 +1,19 @@
 import komand
 from .schema import AddMemberToTeamInput, AddMemberToTeamOutput, Input, Output, Component
+
 # Custom imports below
 from icon_microsoft_teams.util.azure_ad_utils import get_user_info, add_user_to_group
 from icon_microsoft_teams.util.teams_utils import get_teams_from_microsoft
 
 
 class AddMemberToTeam(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='add_member_to_team',
-                description=Component.DESCRIPTION,
-                input=AddMemberToTeamInput(),
-                output=AddMemberToTeamOutput())
+            name="add_member_to_team",
+            description=Component.DESCRIPTION,
+            input=AddMemberToTeamInput(),
+            output=AddMemberToTeamOutput(),
+        )
 
     def run(self, params={}):
         user_login = params.get(Input.MEMBER_LOGIN)

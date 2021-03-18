@@ -1,6 +1,7 @@
 import komand
 import time
 from .schema import NewApprovalRequestInput, NewApprovalRequestOutput
+
 # Custom imports below
 
 
@@ -9,10 +10,11 @@ class NewApprovalRequest(komand.Trigger):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='new_approval_request',
-                description='Triggers when a new approval request is created',
-                input=NewApprovalRequestInput(),
-                output=NewApprovalRequestOutput())
+            name="new_approval_request",
+            description="Triggers when a new approval request is created",
+            input=NewApprovalRequestInput(),
+            output=NewApprovalRequestOutput(),
+        )
 
     def run(self, params={}):
         poll_rate = params.get("poll_rate", 10)
@@ -24,11 +26,13 @@ class NewApprovalRequest(komand.Trigger):
             with komand.helper.open_cachefile("cb_protection_new_approval_request") as cache_file:
                 cache_file.seek(0)
                 temporary_id = cache_file.readline().strip()
-                if temporary_id is not '':
+                if temporary_id is not "":
                     self.starting_id = int(temporary_id)
 
             try:
-                request = self.connection.session.get(url=url.format(id=self.starting_id), verify=self.connection.verify)
+                request = self.connection.session.get(
+                    url=url.format(id=self.starting_id), verify=self.connection.verify
+                )
                 results = request.json()
 
                 # Clean all the results before we do anything with them
@@ -55,13 +59,15 @@ class NewApprovalRequest(komand.Trigger):
                 time.sleep(poll_rate)
 
     def test(self):
-        url = self.connection.host + "/api/bit9platform/v1/approvalRequest?limit=-1"  # -1 returns just the count (lightweight call)
+        url = (
+            self.connection.host + "/api/bit9platform/v1/approvalRequest?limit=-1"
+        )  # -1 returns just the count (lightweight call)
 
         request = self.connection.session.get(url=url, verify=self.connection.verify)
 
         try:
             request.raise_for_status()
         except:
-            raise Exception('Run: HTTPError: %s' % request.text)
+            raise Exception("Run: HTTPError: %s" % request.text)
 
         return {}

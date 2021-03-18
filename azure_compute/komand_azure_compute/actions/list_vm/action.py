@@ -40,9 +40,7 @@ class ListVm(komand.Action):
             try:
                 result_dic = resp.json()
             except json.decoder.JSONDecodeError as e:
-                raise PluginException(
-                    preset=PluginException.Preset.INVALID_JSON, data=resp.read()
-                )
+                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=resp.read())
 
             return result_dic
         # Handle exception

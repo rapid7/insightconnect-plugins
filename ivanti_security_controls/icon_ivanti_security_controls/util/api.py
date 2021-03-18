@@ -72,19 +72,19 @@ class IvantiSecurityControlsAPI:
     def get_agents(self, count=1000, name="", listening=""):
         agents = []
         url = f"{self.url}/agents"
-        params = {'count': count, 'name': name, 'listening': listening}
+        params = {"count": count, "name": name, "listening": listening}
 
         while True:
             response = self._call_api("GET", url, params=params)
 
-            agents = agents + response.get('value', [])
+            agents = agents + response.get("value", [])
 
             try:
                 # Only retrieve start parameter from next url href since API does NOT include name and listening
                 # parameters even if included in original request so the next href can't be used blindly
-                query_params = parse_qs(urlparse(response['links']['next']['href']).query)
+                query_params = parse_qs(urlparse(response["links"]["next"]["href"]).query)
                 # Add or overwrite start parameter for next request
-                params['start'] = query_params['start']
+                params["start"] = query_params["start"]
             except KeyError:
                 # Return current list of agents when there are no more links to follow
                 return agents
@@ -143,14 +143,14 @@ class IvantiSecurityControlsAPI:
         return self._call_api("POST", f"{self.url}/patch/downloads/scans/{scan_id}", return_response=True)
 
     def get_patch_scan_by_name(self, scan_name):
-        params = {"name": scan_name, 'count': 1}
+        params = {"name": scan_name, "count": 1}
         return self._call_api("GET", f"{self.url}/patch/scans", params=params)
 
     def start_patch_deployment(self, payload):
         return self._call_api("POST", f"{self.url}/patch/deployments", json_data=payload, return_response=True)
 
     def get_patch_group_by_name(self, patch_group_name):
-        params = {"name": patch_group_name, 'count': 1}
+        params = {"name": patch_group_name, "count": 1}
         return self._call_api("GET", f"{self.url}/patch/groups", params=params)
 
     def add_patches_to_patch_group(self, patch_group_id, payload):
@@ -158,11 +158,14 @@ class IvantiSecurityControlsAPI:
 
     def _call_api(self, method, url, params=None, json_data=None, allow_404=False, return_response=False):
         try:
-            response = requests.request(method, url,
-                                        auth=self.ntlm_auth,
-                                        json=json_data,
-                                        params=params,
-                                        verify=self.ssl_verify)
+            response = requests.request(
+                method,
+                url,
+                auth=self.ntlm_auth,
+                json=json_data,
+                params=params,
+                verify=self.ssl_verify,
+            )
             if response.status_code == 401:
                 raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
             if response.status_code == 404:
@@ -171,7 +174,7 @@ class IvantiSecurityControlsAPI:
                 else:
                     raise PluginException(preset=PluginException.Preset.NOT_FOUND)
             if response.status_code == 409:
-                raise PluginException(cause='Conflict.', assistance='Resource with this name already exists.')
+                raise PluginException(cause="Conflict.", assistance="Resource with this name already exists.")
             if 200 <= response.status_code < 300:
                 if return_response:
                     return response
@@ -182,9 +185,11 @@ class IvantiSecurityControlsAPI:
             self.logger.info(f"Invalid json: {e}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
         except requests.exceptions.SSLError as e:
-            raise PluginException(cause='Failed to connect to Ivanti Security Controls API.',
-                                  assistance='Likely related to untrusted TLS/SSL certificate chain.',
-                                  data=e)
+            raise PluginException(
+                cause="Failed to connect to Ivanti Security Controls API.",
+                assistance="Likely related to untrusted TLS/SSL certificate chain.",
+                data=e,
+            )
         except requests.exceptions.HTTPError as e:
             self.logger.info(f"Call to Ivanti Security Controls failed: {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN)

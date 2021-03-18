@@ -1,5 +1,6 @@
 import komand
 from .schema import CheckUrlReputationInput, CheckUrlReputationOutput, Input, Output
+
 # Custom imports below
 import json
 
@@ -7,14 +8,15 @@ import json
 class CheckUrlReputation(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='check_url_reputation',
-            description='Check URL Reputation',
+            name="check_url_reputation",
+            description="Check URL Reputation",
             input=CheckUrlReputationInput(),
-            output=CheckUrlReputationOutput())
+            output=CheckUrlReputationOutput(),
+        )
 
     def run(self, params={}):
         searched_url = params.get(Input.URL)
-        with komand.helper.open_cachefile('/var/cache/feed.txt') as f:
+        with komand.helper.open_cachefile("/var/cache/feed.txt") as f:
             split_urls = f.read().splitlines()
         counter = self.count_found_urls(searched_url, split_urls)
         decoded_stats = self.normalize_decoded_stats(searched_url, self.get_decoded_stats())
@@ -23,12 +25,10 @@ class CheckUrlReputation(komand.Action):
         decoded_stats["matches"][searched_url] = decoded_stats["matches"][searched_url] + counter
         decoded_stats["total_matches"] = decoded_stats["total_matches"] + counter
 
-        with komand.helper.open_cachefile('/var/cache/stats.txt') as f:
+        with komand.helper.open_cachefile("/var/cache/stats.txt") as f:
             f.write(json.dumps(decoded_stats))
 
-        return {
-            Output.URLREPUTATION: decoded_stats
-        }
+        return {Output.URLREPUTATION: decoded_stats}
 
     @staticmethod
     def count_found_urls(searched_url, split_urls):
@@ -42,7 +42,7 @@ class CheckUrlReputation(komand.Action):
 
     @staticmethod
     def get_decoded_stats():
-        with komand.helper.open_cachefile('/var/cache/stats.txt') as f:
+        with komand.helper.open_cachefile("/var/cache/stats.txt") as f:
             stats_file = f.read()
         decoded_stats = {}
         if stats_file:
@@ -53,9 +53,7 @@ class CheckUrlReputation(komand.Action):
     @staticmethod
     def normalize_decoded_stats(searched_url, decoded_stats):
         if "matches" not in decoded_stats:
-            decoded_stats["matches"] = {
-                searched_url: 0
-            }
+            decoded_stats["matches"] = {searched_url: 0}
 
         if searched_url not in decoded_stats["matches"]:
             decoded_stats["matches"][searched_url] = 0

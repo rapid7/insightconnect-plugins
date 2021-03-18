@@ -1,11 +1,13 @@
 import komand
 from .schema import CreateUserInput, CreateUserOutput, Input, Output, Component
+
 # Custom imports below
 import requests
 from komand.exceptions import PluginException
 import json
 import string
 import random
+
 
 def _pw_gen(size: int = 16, chars: [str] = string.ascii_letters + string.digits + string.punctuation) -> (str):
     def gen(size: int = 16) -> str:
@@ -32,14 +34,15 @@ def _pw_gen(size: int = 16, chars: [str] = string.ascii_letters + string.digits 
         if has_lower and has_upper and has_num and has_punc:
             return password
 
-class CreateUser(komand.Action):
 
+class CreateUser(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='create_user',
-                description=Component.DESCRIPTION,
-                input=CreateUserInput(),
-                output=CreateUserOutput())
+            name="create_user",
+            description=Component.DESCRIPTION,
+            input=CreateUserInput(),
+            output=CreateUserOutput(),
+        )
 
     def run(self, params={}):
         passwd = _pw_gen()
@@ -59,14 +62,11 @@ class CreateUser(komand.Action):
         user_principal_name = params.get(Input.USER_PRINCIPAL_NAME)
 
         user = {
-            'accountEnabled': account_enabled,
-            'displayName': display_name,
-            'mailNickname': mail_nickname,
-            'userPrincipalName': user_principal_name,
-            'passwordProfile' : {
-                'forceChangePasswordNextSignIn': True,
-                'password': passwd
-            }
+            "accountEnabled": account_enabled,
+            "displayName": display_name,
+            "mailNickname": mail_nickname,
+            "userPrincipalName": user_principal_name,
+            "passwordProfile": {"forceChangePasswordNextSignIn": True, "password": passwd},
         }
 
         headers = self.connection.get_headers(self.connection.get_auth_token())
@@ -76,8 +76,7 @@ class CreateUser(komand.Action):
         try:
             result.raise_for_status()
         except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN,
-                                  data=result.text) from e
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=result.text) from e
 
         # 201 Created is the response according to MS.
         # https://docs.microsoft.com/en-us/graph/api/user-post-users?view=graph-rest-1.0&tabs=http#response-1
@@ -87,34 +86,21 @@ class CreateUser(komand.Action):
         email_from = params.get(Input.NOTIFY_FROM)
         email_to = params.get(Input.NOTIFY_RECIPIENT)
         subject = "New user created"
-        message = params.get(Input.NOTIFY_EMAIL_BODY, '$password')
+        message = params.get(Input.NOTIFY_EMAIL_BODY, "$password")
         html = False
 
-        message = message.replace('$password', passwd)
+        message = message.replace("$password", passwd)
 
         message = {
             "message": {
                 "subject": subject,
-                "body": {
-                    "contentType": "text",
-                    "content": message
-                },
-                "from": {
-                    "emailAddress": {
-                        "address": email_from
-                    }
-                },
-                "toRecipients": [
-                    {
-                        "emailAddress": {
-                            "address": email_to
-                        }
-                    }
-                ],
+                "body": {"contentType": "text", "content": message},
+                "from": {"emailAddress": {"address": email_from}},
+                "toRecipients": [{"emailAddress": {"address": email_to}}],
                 "ccRecipients": [],
                 "bccRecipients": [],
             },
-            "saveToSentItems": "false"
+            "saveToSentItems": "false",
         }
 
         return json.dumps(message)
@@ -128,8 +114,7 @@ class CreateUser(komand.Action):
         try:
             result.raise_for_status()
         except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN,
-                                  data=result.text) from e
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=result.text) from e
 
         # 202 Accepted is the response according to MS.
         # https://docs.microsoft.com/en-us/graph/api/user-sendmail?view=graph-rest-1.0&tabs=http

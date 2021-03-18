@@ -3,17 +3,18 @@ import requests
 import xmltodict
 from .schema import DownloadUrlRiskListInput, DownloadUrlRiskListOutput, Input, Output, Component
 from komand.exceptions import PluginException
+
 # Custom imports below
 
 
 class DownloadUrlRiskList(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='download_url_risk_list',
+            name="download_url_risk_list",
             description=Component.DESCRIPTION,
             input=DownloadUrlRiskListInput(),
-            output=DownloadUrlRiskListOutput())
+            output=DownloadUrlRiskListOutput(),
+        )
 
     def run(self, params={}):
         try:
@@ -46,7 +47,7 @@ class DownloadUrlRiskList(komand.Action):
                 "Recently Active URL on Weaponized Domain": "recentWeaponizedURL",
                 "Historically Referenced by Insikt Group": "relatedNote",
                 "Historically Reported Spam or Unwanted Content": "spamSiteDetected",
-                "Historically Detected Suspicious Content": "suspiciousSiteDetected"
+                "Historically Detected Suspicious Content": "suspiciousSiteDetected",
             }
             risk_list = riskListMap.get(params.get(Input.LIST))
             query_params = {"format": "xml/stix/1.2", "gzip": "false"}
@@ -59,9 +60,7 @@ class DownloadUrlRiskList(komand.Action):
                 params=query_params,
                 headers=query_headers,
             )
-            return {
-                Output.RISK_LIST: dict(xmltodict.parse(results.text))
-            }
+            return {Output.RISK_LIST: dict(xmltodict.parse(results.text))}
         except Exception as e:
             self.logger.error("Error: " + str(e))
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)

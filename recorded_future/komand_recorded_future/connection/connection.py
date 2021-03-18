@@ -1,5 +1,6 @@
 import komand
 from .schema import ConnectionSchema
+
 # Custom imports below
 from rfapi import ApiV2Client
 from komand_recorded_future.util import demo_test
@@ -17,7 +18,7 @@ class Connection(komand.Connection):
         self.app_name = "rapid7_insightconnect"
         self.headers = {
             "User-Agent": f"{self.app_name}/{self.app_version}",
-            "X-RFToken": self.token
+            "X-RFToken": self.token,
         }
 
         self.client = ApiV2Client(auth=self.token, app_name=self.app_name, app_version=self.app_version)

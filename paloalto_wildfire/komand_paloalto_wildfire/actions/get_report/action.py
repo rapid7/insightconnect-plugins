@@ -1,5 +1,6 @@
 import komand
 from .schema import GetReportInput, GetReportOutput
+
 # Custom imports below
 import requests
 import base64
@@ -8,16 +9,17 @@ import base64
 class GetReport(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_report',
-                description='Query for an XML or PDF report for a particular sample',
-                input=GetReportInput(),
-                output=GetReportOutput())
+            name="get_report",
+            description="Query for an XML or PDF report for a particular sample",
+            input=GetReportInput(),
+            output=GetReportOutput(),
+        )
 
     def run(self, params={}):
         """TODO: Run action"""
-        endpoint =  "/publicapi/get/report"
+        endpoint = "/publicapi/get/report"
         client = self.connection.client
-        url = 'https://{}/{}'.format(self.connection.host, endpoint)
+        url = "https://{}/{}".format(self.connection.host, endpoint)
         # Formatted with None and tuples so requests sends form-data properly
         # => Send data, 299 bytes (0x12b)
         # 0000: --------------------------8557684369749613
@@ -32,15 +34,15 @@ class GetReport(komand.Action):
         # ...
 
         req = {
-            'apikey': (None, self.connection.api_key),
-            'hash': (None, params.get('hash')),
-            'format': (None, params.get('format'))
+            "apikey": (None, self.connection.api_key),
+            "hash": (None, params.get("hash")),
+            "format": (None, params.get("format")),
         }
         r = requests.post(url, files=req)
         out = base64.b64encode(r.content).decode()
-        return { 'report': out }
+        return {"report": out}
 
     def test(self):
         """TODO: Test action"""
         client = self.connection.client
-        return { 'report': 'Test' }
+        return {"report": "Test"}

@@ -1,10 +1,13 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_palo_alto_pan_os.connection.connection import Connection
-from komand_palo_alto_pan_os.actions.remove_address_object_from_group import RemoveAddressObjectFromGroup
+from komand_palo_alto_pan_os.actions.remove_address_object_from_group import (
+    RemoveAddressObjectFromGroup,
+)
 import json
 import logging
 

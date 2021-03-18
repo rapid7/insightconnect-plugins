@@ -8,11 +8,13 @@ from typing import NamedTuple, Collection
 # Suppress insecure request messages
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+
 class RequestResult(NamedTuple):
     """
     Class for data returned in paged InsightVM API requests
     This is the Python 3.6 style for using named tuples with typing
     """
+
     page_num: int
     total_pages: int
     resources: dict
@@ -23,6 +25,7 @@ class TestResult(NamedTuple):
     Class for data returned in test method
     This is the Python 3.6 style for using named tuples with typing
     """
+
     status: int
     message: str
 
@@ -36,25 +39,24 @@ class ResourceRequests(object):
     """
 
     # Static headers for all requests
-    _HEADERS = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    }
-    _ENSURECONNECTIVITY = 'Ensure proper network connectivity between the InsightConnect orchestrator and the InsightVM console'
+    _HEADERS = {"Content-Type": "application/json", "Accept": "application/json"}
+    _ENSURECONNECTIVITY = (
+        "Ensure proper network connectivity between the InsightConnect orchestrator and the InsightVM console"
+    )
 
     # Currently only handling the most common requests exceptions more can be added as needed
     _REQUEST_EXCEPTIONS = {
-        requests.HTTPError: 'If this issue persists contact support for assistance.',
-        requests.ConnectionError: 'Unable to connect to IVM console.'
-                                  'If this issue persists contact support for assistance.',
+        requests.HTTPError: "If this issue persists contact support for assistance.",
+        requests.ConnectionError: "Unable to connect to IVM console."
+        "If this issue persists contact support for assistance.",
         requests.Timeout: _ENSURECONNECTIVITY,
         requests.ConnectTimeout: _ENSURECONNECTIVITY,
         requests.ReadTimeout: _ENSURECONNECTIVITY,
-        requests.TooManyRedirects: _ENSURECONNECTIVITY
+        requests.TooManyRedirects: _ENSURECONNECTIVITY,
     }
 
     # For request exceptions not in REQUEST_EXCEPTIONS
-    _UNHANDLED_EXCEPTION = 'Contact support for assistance'
+    _UNHANDLED_EXCEPTION = "Contact support for assistance"
 
     def __init__(self, session, logger):
         """
@@ -67,8 +69,14 @@ class ResourceRequests(object):
         self.session = session
         self.session.headers.update(self._HEADERS)
 
-    def resource_request(self, endpoint: str, method: str = 'get', params: Collection = None, payload: dict = None,
-                         json_response: bool = True) -> dict:
+    def resource_request(
+        self,
+        endpoint: str,
+        method: str = "get",
+        params: Collection = None,
+        payload: dict = None,
+        json_response: bool = True,
+    ) -> dict:
         """
         Sends a request to APIv3 with the provided endpoint and optional method/payload
         :param endpoint: Endpoint for the APIv3 call defined in endpoints.py
@@ -88,16 +96,15 @@ class ResourceRequests(object):
             parameters = RequestParams.from_tuples(params)
         else:
             parameters = RequestParams.from_dict(params)
-        if 'rawbody' in payload.keys():
-            payload = payload['rawbody']
+        if "rawbody" in payload.keys():
+            payload = payload["rawbody"]
 
         extras = {"json": payload, "params": parameters.params}
         try:
             response = request_method(url=endpoint, verify=False, **extras)
         except requests.RequestException as e:
             assistance = self._REQUEST_EXCEPTIONS.get(type(e), self._UNHANDLED_EXCEPTION)
-            raise PluginException(cause=e,
-                                  assistance=assistance)
+            raise PluginException(cause=e, assistance=assistance)
 
         resource_request_status_code_check(response.text, response.status_code)
 
@@ -107,12 +114,18 @@ class ResourceRequests(object):
             except json.decoder.JSONDecodeError as e:
                 raise PluginException(preset=PluginException.Preset.INVALID_JSON)
         else:
-            resource = {'raw': response.text}
+            resource = {"raw": response.text}
 
         return resource
 
-    def paged_resource_request(self, endpoint: str, method: str = 'get', params: Collection = None,
-                               payload: dict = None, number_of_results: int = 0) -> list:
+    def paged_resource_request(
+        self,
+        endpoint: str,
+        method: str = "get",
+        params: Collection = None,
+        payload: dict = None,
+        number_of_results: int = 0,
+    ) -> list:
         """
         Fetches all resources from a paged APIv3 endpoint
         :param endpoint: Endpoint for the APIv3 call defined in endpoints.py
@@ -131,40 +144,36 @@ class ResourceRequests(object):
         if not payload:
             payload = dict()
         if not params:
-            params = {
-                'size': 500,
-                'page': current_page
-            }
+            params = {"size": 500, "page": current_page}
         if isinstance(params, list):
             parameters = RequestParams.from_tuples(params)
         else:
             parameters = RequestParams.from_dict(params)
 
         while True:
-            self.logger.info(f'Fetching results from page {current_page}')
-            parameters['page'] = current_page
+            self.logger.info(f"Fetching results from page {current_page}")
+            parameters["page"] = current_page
             if number_of_results != 0:
-                if results_retrieved + parameters['size'] > number_of_results:
-                    parameters['size'] = number_of_results - results_retrieved
+                if results_retrieved + parameters["size"] > number_of_results:
+                    parameters["size"] = number_of_results - results_retrieved
                     last_page = True
 
-            response = self.get_resource_page(endpoint=endpoint,
-                                              method=method,
-                                              params=parameters,
-                                              payload=payload)
+            response = self.get_resource_page(endpoint=endpoint, method=method, params=parameters, payload=payload)
 
             resources += response.resources  # Grab resources and append to total
-            self.logger.info(f'Got {len(response.resources)} resources '
-                             f'from page {(response.page_num+1)} / {response.total_pages}')
+            self.logger.info(
+                f"Got {len(response.resources)} resources "
+                f"from page {(response.page_num+1)} / {response.total_pages}"
+            )
 
             if (response.total_pages == 0) or ((response.total_pages - 1) == response.page_num):
                 self.logger.info("All pages consumed, returning results...")
                 break  # exit the loop
             elif last_page:
-                self.logger.info(f'{number_of_results} results consumed, returning results')
+                self.logger.info(f"{number_of_results} results consumed, returning results")
                 break
             else:
-                self.logger.info('More pages exist, fetching...')
+                self.logger.info("More pages exist, fetching...")
                 current_page += 1
 
         return resources
@@ -196,7 +205,9 @@ class ResourceRequests(object):
         except json.decoder.JSONDecodeError as e:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
 
-        result = RequestResult(page_num=response_json['page']['number'],
-                               total_pages=response_json['page']['totalPages'],
-                               resources=response_json['resources'])
+        result = RequestResult(
+            page_num=response_json["page"]["number"],
+            total_pages=response_json["page"]["totalPages"],
+            resources=response_json["resources"],
+        )
         return result

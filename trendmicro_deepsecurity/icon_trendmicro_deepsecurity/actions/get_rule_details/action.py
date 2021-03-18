@@ -1,5 +1,6 @@
 import komand
 from .schema import GetRuleDetailsInput, GetRuleDetailsOutput, Input, Output, Component
+
 # Custom imports below
 
 from icon_trendmicro_deepsecurity.util.shared import tryJSON
@@ -7,13 +8,13 @@ from icon_trendmicro_deepsecurity.util.shared import checkResponse
 
 
 class GetRuleDetails(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_rule_details',
-                description=Component.DESCRIPTION,
-                input=GetRuleDetailsInput(),
-                output=GetRuleDetailsOutput())
+            name="get_rule_details",
+            description=Component.DESCRIPTION,
+            input=GetRuleDetailsInput(),
+            output=GetRuleDetailsOutput(),
+        )
 
     def run(self, params={}):
         """
@@ -29,8 +30,7 @@ class GetRuleDetails(komand.Action):
         url = f"{self.connection.dsm_url}/api/intrusionpreventionrules/{self.id}"
 
         # Send request
-        response = self.connection.session.get(url,
-                                               verify=self.connection.dsm_verify_ssl)
+        response = self.connection.session.get(url, verify=self.connection.dsm_verify_ssl)
 
         self.logger.info(f"url: {response.url}")
         self.logger.info(f"status: {response.status_code}")
@@ -53,10 +53,12 @@ class GetRuleDetails(komand.Action):
             cves = response_data["CVE"]
 
         # Return rule details
-        return {Output.NAME: name,
-                Output.DESCRIPTION: description,
-                Output.SEVERITY: severity,
-                Output.TYPE: rule_type,
-                Output.CVSS_SCORE: cvss_score,
-                Output.CVES: cves,
-                Output.RESPONSE_JSON: response_data}
+        return {
+            Output.NAME: name,
+            Output.DESCRIPTION: description,
+            Output.SEVERITY: severity,
+            Output.TYPE: rule_type,
+            Output.CVSS_SCORE: cvss_score,
+            Output.CVES: cves,
+            Output.RESPONSE_JSON: response_data,
+        }

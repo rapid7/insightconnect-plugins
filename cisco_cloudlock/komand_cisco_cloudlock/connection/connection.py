@@ -1,11 +1,11 @@
 import komand
 from .schema import ConnectionSchema
+
 # Custom imports below
 import requests
 
 
 class Connection(komand.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.CLIENT = None
@@ -17,7 +17,7 @@ class Connection(komand.Connection):
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "Authorization": api_key
+            "Authorization": api_key,
         }
 
         self.CLIENT = requests.Session()

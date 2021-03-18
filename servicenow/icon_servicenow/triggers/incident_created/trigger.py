@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 import time
 from .schema import IncidentCreatedInput, IncidentCreatedOutput, Input, Output, Component
+
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
 from datetime import datetime, timezone, timedelta
@@ -8,13 +9,13 @@ import pytz
 
 
 class IncidentCreated(insightconnect_plugin_runtime.Trigger):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='incident_created',
+            name="incident_created",
             description=Component.DESCRIPTION,
             input=IncidentCreatedInput(),
-            output=IncidentCreatedOutput())
+            output=IncidentCreatedOutput(),
+        )
         self.last_poll_time = (datetime.now(tz=timezone.utc) - timedelta(seconds=1)).replace(microsecond=0)
         self.most_recent_system_id = ""
         self.last_sys_id = ""
@@ -25,11 +26,13 @@ class IncidentCreated(insightconnect_plugin_runtime.Trigger):
         try:
             results = response["resource"].get("result")
         except KeyError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN,
-                                  data=response.text) from e
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text) from e
 
-        incidents = [(result.get("sys_created_on"), result.get("sys_id")) for result in results
-                     if result.get("sys_created_on") is not None and result.get("sys_id") is not None]
+        incidents = [
+            (result.get("sys_created_on"), result.get("sys_id"))
+            for result in results
+            if result.get("sys_created_on") is not None and result.get("sys_id") is not None
+        ]
 
         # Incidents stored from least to most recent date
         # Loop from most recent incident to least recent incident
@@ -57,15 +60,20 @@ class IncidentCreated(insightconnect_plugin_runtime.Trigger):
                         break
                 else:
                     if incident[0] == "":
-                        self.connection.logger.warning(f"Warning: An incident could not be read -- incident creation "
-                                                       f"date could not be found. Verify that the created date field exists.")
+                        self.connection.logger.warning(
+                            f"Warning: An incident could not be read -- incident creation "
+                            f"date could not be found. Verify that the created date field exists."
+                        )
                     else:
-                        self.connection.logger.warning(f"Warning: An incident could not be read -- incident system id "
-                                                       f"could not be found. Verify that the system id field exists.")
+                        self.connection.logger.warning(
+                            f"Warning: An incident could not be read -- incident system id "
+                            f"could not be found. Verify that the system id field exists."
+                        )
 
             else:
-                self.connection.logger.warning(f'Warning: An incident could not be read -- the incident '
-                                               f'did not have the necessary values.')
+                self.connection.logger.warning(
+                    f"Warning: An incident could not be read -- the incident " f"did not have the necessary values."
+                )
 
         # minus ~1 second to ensure that incidents between polls are not missed
         adjusted_poll = datetime.now(tz=timezone.utc) - timedelta(seconds=1)
@@ -74,7 +82,7 @@ class IncidentCreated(insightconnect_plugin_runtime.Trigger):
     def run(self, params={}):
         url = self.connection.incident_url
         method = "get"
-        utc = pytz.timezone('UTC')
+        utc = pytz.timezone("UTC")
 
         # Pulls directly from SNOW db to grab creation date in UTC
         query = {"sysparm_display_value": False, "sysparm_query": "ORDERBYsys_created_on"}

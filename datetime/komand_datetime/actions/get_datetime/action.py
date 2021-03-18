@@ -5,13 +5,13 @@ import maya
 
 
 class GetDatetime(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_datetime',
-                description='Gets the current datetime in a specified format',
-                input=GetDatetimeInput(),
-                output=GetDatetimeOutput())
+            name="get_datetime",
+            description="Gets the current datetime in a specified format",
+            input=GetDatetimeInput(),
+            output=GetDatetimeOutput(),
+        )
 
     def run(self, params={}):
         format_string = params.get(Input.FORMAT_STRING)

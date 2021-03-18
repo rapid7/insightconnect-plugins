@@ -15,13 +15,16 @@ def connectivity_test(connection: Connection) -> object:
         raise Exception(
             "Error: Received %d HTTP status code from Cherwell. Please verify your Cherwell server "
             "status and try again. If the issue persists please contact support. "
-            "Server response was: %s" % (response.status_code, response.text))
+            "Server response was: %s" % (response.status_code, response.text)
+        )
 
     try:
         # This should be a JSON object containing information about their Cherwell server
         response_data = response.json()
     except JSONDecodeError:
-        raise Exception("Error: Received an unexpected response from Cherwell "
-                        "(non-JSON or no response was received). Response was: %s" % response.text)
+        raise Exception(
+            "Error: Received an unexpected response from Cherwell "
+            "(non-JSON or no response was received). Response was: %s" % response.text
+        )
 
     return response_data

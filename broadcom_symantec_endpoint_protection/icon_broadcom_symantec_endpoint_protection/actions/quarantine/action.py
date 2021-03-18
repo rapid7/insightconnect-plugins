@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import QuarantineInput, QuarantineOutput, Input, Output, Component
+
 # Custom imports below
 from icon_broadcom_symantec_endpoint_protection.util.api import APIException
 import re
@@ -7,13 +8,13 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class Quarantine(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='quarantine',
+            name="quarantine",
             description=Component.DESCRIPTION,
             input=QuarantineInput(),
-            output=QuarantineOutput())
+            output=QuarantineOutput(),
+        )
 
     def run(self, params={}):
         agent_identifier = params.get(Input.AGENT)
@@ -31,7 +32,7 @@ class Quarantine(insightconnect_plugin_runtime.Action):
 
             if not full_details:
                 return {Output.SUCCESS: False, Output.WHITELISTED: False}
-            
+
             mac_addresses = set(full_details.get("macAddresses", []))
 
             in_whitelist = len(whitelist_normalized.intersection(mac_addresses)) > 0
@@ -42,21 +43,26 @@ class Quarantine(insightconnect_plugin_runtime.Action):
 
         # If whitelisted, return a failure with a whitelist status of true
         if in_whitelist:
-            self.logger.info(f"The agent specified '{agent_identifier}' was found within the whitelist and "
-                             f"will be skipped!")
+            self.logger.info(
+                f"The agent specified '{agent_identifier}' was found within the whitelist and " f"will be skipped!"
+            )
             return {Output.SUCCESS: False, Output.WHITELISTED: True}
 
         # No whitelist entry found, go ahead and do the action
-        self.logger.info(f"{'Quarantining' if quarantine_state else 'Unquarantining'} the "
-                         f"following agent: {agent_identifier}")
+        self.logger.info(
+            f"{'Quarantining' if quarantine_state else 'Unquarantining'} the " f"following agent: {agent_identifier}"
+        )
 
         try:
-            self.connection.api_client.update_quarantine_statuses(hardware_ids=[hardware_identifier],
-                                                                  quarantine=quarantine_state)
+            self.connection.api_client.update_quarantine_statuses(
+                hardware_ids=[hardware_identifier], quarantine=quarantine_state
+            )
         except APIException as e:
-            raise PluginException(cause=f"An error occurred while attempting to "
-                                        f"{'quarantine' if quarantine_state else 'unquarantine'} the agent!",
-                                  assistance=e.message)
+            raise PluginException(
+                cause=f"An error occurred while attempting to "
+                f"{'quarantine' if quarantine_state else 'unquarantine'} the agent!",
+                assistance=e.message,
+            )
 
         return {Output.SUCCESS: True, Output.WHITELISTED: False}
 

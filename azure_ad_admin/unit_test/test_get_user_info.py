@@ -21,18 +21,27 @@ class TestGetUserInfo(TestCase):
             data = json.load(file)
             connection_params = data.get("body").get("connection")
 
-        action_params = {
-            "user_id": "user@example.com"
-        }
+        action_params = {"user_id": "user@example.com"}
 
         test_connection.connect(connection_params)
         test_get_user_info.connection = test_connection
 
         result = test_get_user_info.run(action_params)
-        expected = {'user_information': {'@odata.context': 'https://graph.microsoft.com/v1.0/$metadata#users/$entity',
-                                         'businessPhones': [], 'displayName': 'Joey McAdams', 'givenName': 'Joey',
-                                         'jobTitle': 'Sr. Software Engineer', 'mail': '', 'mobilePhone': '',
-                                         'officeLocation': '', 'preferredLanguage': '', 'surname': 'McAdams',
-                                         'userPrincipalName': 'user@example.com',
-                                         'id': '08290005-23ba-46b4-a377-b381d651a2fb', 'accountEnabled': True}}
+        expected = {
+            "user_information": {
+                "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+                "businessPhones": [],
+                "displayName": "Joey McAdams",
+                "givenName": "Joey",
+                "jobTitle": "Sr. Software Engineer",
+                "mail": "",
+                "mobilePhone": "",
+                "officeLocation": "",
+                "preferredLanguage": "",
+                "surname": "McAdams",
+                "userPrincipalName": "user@example.com",
+                "id": "08290005-23ba-46b4-a377-b381d651a2fb",
+                "accountEnabled": True,
+            }
+        }
         self.assertEqual(result, expected)

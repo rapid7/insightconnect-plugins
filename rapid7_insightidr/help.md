@@ -36,9 +36,56 @@ Example input:
 
 ### Actions
 
+#### Create Threat
+
+This action is used to create a private InsightIDR threat and add indicators to this threat.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|indicators|[]string|None|True|Add indicators to new threat in InsightIDR. Accept IP addresses, process hashes (SHA1, MD5, SHA256), domain names, URLs|None|["example.com", "10.0.0.1"]|
+|note_text|string|Threat created via InsightConnect|False|Note text of created threat|None|Threat created via InsightConnect|
+|threat_name|string|None|True|Name of created threat|None|Threat created via InsightConnect|
+
+Example input:
+
+```
+{
+  "indicators": [
+    "example.com",
+    "10.0.0.1"
+  ],
+  "note_text": "Threat created via InsightConnect",
+  "threat_name": "Threat created via InsightConnect"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|rejected_indicators|[]string|True|Rejected indicators in new threat|
+|threat|threat|True|The information about the new threat|
+
+Example output:
+
+```
+{
+    "rejected_indicators": [],
+    "threat": {
+      "name": "Threat created via InsightConnect",
+      "note": "Threat created via InsightConnect",
+      "published": false,
+      "indicator_count": 2
+  }
+}
+```
+
 #### Advanced Query on Log Set
 
-This action is used to realtime query an InsightIDR log set. This will query entire log sets for results.
+This action is used to realtime query an InsightIDR log set. This will query entire log sets for results and can accept
+a relative or absolute time-range from which to query.
 
 This action should be used when querying a collection of related services.
 
@@ -48,8 +95,9 @@ This action should be used when querying a collection of related services.
 |----|----|-------|--------|-----------|----|-------|
 |log_set|string|None|True|Log Set to search|['Advanced Malware Alert', 'Active Directory Admin Activity', 'Asset Authentication', 'Cloud Service Admin Activity', 'Cloud Service Activity', 'DNS Query', 'Endpoint Activity', 'EndPoint Agent', 'Exploit Mitigation Alert', 'File Access Activity', 'File Modification Activity', 'Firewall Activity', 'Network Flow', 'Host To IP Observations', 'IDS Alert', 'Ingress Authentication', 'Raw Log', 'SSO Authentication', 'Unparsed Data', 'Third Party Alert', 'Virus Alert', 'Web Proxy Activity']|Firewall Activity|
 |query|string|None|True|LQL Query|None|where(user=adagentadmin, loose)|
-|time_from|string|None|True|Beginning time and date for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|01-01-2020T00:00:00|
-|time_to|string|None|False|Ending date and time for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|12-31-2020T00:00:00|
+|relative_time|string|Last 5 Minutes|True|A relative time in the past to look for alerts|['Last 5 Minutes', 'Last 10 Minutes', 'Last 20 Minutes', 'Last 30 Minutes', 'Last 45 Minutes', 'Last 1 Hour', 'Last 2 Hours', 'Last 3 Hours', 'Last 6 Hours', 'Last 12 Hours', 'Use Time From Value']|Last 5 Minutes|
+|time_from|string|None|False|Beginning date and time for the query. This will be ignored unless Relative Time input is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|01-01-2020T00:00:00|
+|time_to|string|None|False|Date and time for the end of the query. If left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|12-31-2020T00:00:00|
 |timeout|int|60|True|Time in seconds to wait for the query to return. If exceeded the plugin will throw an error|None|60|
 
 Example input:
@@ -58,16 +106,44 @@ Example input:
 {
   "log": "Firewall Activity",
   "query": "where(user=adagentadmin, loose)",
+  "relative_time": "Last 5 Minutes",
   "time_from": "01-01-2020T00:00:00",
   "time_to": "12-31-2020T00:00:00",
   "timeout": 60
 }
 ```
 
+To use Relative Time, leave `Time From` and `Time To` blank. For example:
+
+```
+{
+  "relative_time": "Last 5 Minutes",
+  "time_from": "",
+  "time_to": "",
+  ...
+}
+```
+
+The above settings will run your search from 5 minutes ago until now.
+
+If you want to use absolute time for a query. You can set up the input like this:
+
+```
+{
+  "relative_time": "Use Time From Value",
+  "time_from": "1/1/2021",
+  "time_to": "1/31/2021",
+  ...
+}
+```
+
+This will run your search for the entire month of January every time.
+
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|count|integer|True|Number of log entries found|
 |results|[]events|True|Query Results|
 
 Example output:
@@ -136,9 +212,9 @@ Example output:
 
 #### Advanced Query on Log
 
-This action is used to realtime query an InsightIDR log. This will query individual logs for results.
+This action is used to realtime query an InsightIDR log. This will query individual logs for results using a relative or absolute time-range from which to query.
 
-This action should be used if querying an individual service or device. 
+This action should be used if querying an individual service or device.
 
 ##### Input
 
@@ -146,8 +222,9 @@ This action should be used if querying an individual service or device.
 |----|----|-------|--------|-----------|----|-------|
 |log|string|None|True|Log to search|None|Firewall Activity|
 |query|string|None|True|LQL Query|None|where(user=adagentadmin, loose)|
-|time_from|string|None|True|Beginning time and date for the query. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|01-01-2020T00:00:00|
-|time_to|string|None|False|Ending date and time for the query. If this is left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|12-31-2020T00:00:00|
+|relative_time|string|Last 5 Minutes|True|A relative time in the past to look for alerts|['Last 5 Minutes', 'Last 10 Minutes', 'Last 20 Minutes', 'Last 30 Minutes', 'Last 45 Minutes', 'Last 1 Hour', 'Last 2 Hours', 'Last 3 Hours', 'Last 6 Hours', 'Last 12 Hours', 'Use Time From Value']|Last 5 Minutes|
+|time_from|string|None|False|Beginning date and time for the query. This will be ignored unless Relative Time input is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|01-01-2020T00:00:00|
+|time_to|string|None|False|Date and time for the end of the query. If left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|12-31-2020T00:00:00|
 |timeout|int|60|True|Time in seconds to wait for the query to return. If exceeded the plugin will throw an error|None|60|
 
 Example input:
@@ -156,16 +233,44 @@ Example input:
 {
   "log": "Firewall Activity",
   "query": "where(user=adagentadmin, loose)",
+  "relative_time": "Last 5 Minutes",
   "time_from": "01-01-2020T00:00:00",
   "time_to": "12-31-2020T00:00:00",
   "timeout": 60
 }
 ```
 
+To use Relative Time, leave `Time From` and `Time To` blank. For example:
+
+```
+{
+  "relative_time": "Last 5 Minutes",
+  "time_from": "",
+  "time_to": "",
+  ...
+}
+```
+
+The above settings will run your search from 5 minutes ago until now.
+
+If you want to use absolute time for a query. You can set up the input like this:
+
+```
+{
+  "relative_time": "Use Time From Value",
+  "time_from": "1/1/2021",
+  "time_to": "1/31/2021",
+  ...
+}
+```
+
+This will run your search for the entire month of January every time.
+
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|count|integer|True|Number of log entries found|
 |results|[]events|True|Query Results|
 
 Example output:
@@ -234,7 +339,7 @@ Example output:
 
 #### Get All Logs
 
-This action is used to request a list of all Logs for an account. This action should be used when querying multiple related services. 
+This action is used to request a list of all Logs for an account. This action should be used when querying multiple related services.
 
 ##### Input
 
@@ -565,7 +670,7 @@ This action is used to add InsightIDR threat indicators to a threat with the giv
 |hashes|[]string|None|False|Process hashes to add. e.g. ["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]|None|["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3", "C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]|
 |ips|[]string|None|False|IP addresses to add. e.g. ["10.0.0.1","10.0.0.2"]|None|["10.0.0.1", "10.0.0.2"]|
 |key|string|None|True|The key of a threat for which the indicators are going to be added. e.g. c9404e11-b81a-429d-9400-05c531f229c3|None|c9404e11-b81a-429d-9400-05c531f229c3|
-|urls|[]string|None|False|URL's to add. e.g. ["https://example.com","https://test.com"]|None|["https://example.com", "https://test.com"]|
+|urls|[]string|None|False|URLs to add. e.g. ["https://example.com","https://test.com"]|None|["https://example.com", "https://test.com"]|
 
 Example input:
 
@@ -696,6 +801,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.0 - Add new action Create Threat
+* 3.0.0 - Added Relative Time options to Advanced Query actions | Fix issue where a query with no results would crash the plugin
 * 2.1.0 - New action Close Investigations in Bulk
 * 2.0.1 - Fix issue where long-running queries could crash the plugin
 * 2.0.0 - Refactor and split Advanced Query into two new actions Advanced Query on Log and Advanced Query on Log Set

@@ -22,13 +22,21 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Basic Auth username and password|None|None|
-|url|string|None|True|Host URL E.g. http://10.0.2.2:9200|None|None|
-|use_authentication|boolean|True|True|If the Elasticsearch host does not use authentication set this value to false|None|None|
+|credentials|credential_username_password|None|True|Basic Auth username and password|None|{"username":"user1", "password":"mypassword"}|
+|url|string|None|True|Host URL E.g. http://10.0.2.2:9200|None|http://10.0.2.2:9200|
+|use_authentication|boolean|True|True|If the Elasticsearch host does not use authentication set this value to false|None|True|
 
 Example input:
 
 ```
+{
+  "credentials": {
+    "username": "user1",
+    "password": "mypassword"
+  },
+  "url": "http://10.0.2.2:9200",
+  "use_authentication": true
+}
 ```
 
 ## Technical Details
@@ -49,6 +57,31 @@ _This action does not contain any inputs._
 |----|----|--------|-----------|
 |cluster_health|health|False|Cluster Health|
 
+Example output:
+
+```
+{
+  "cluster_health": {
+    "active_primary_shards": 11,
+    "discovered_master": true,
+    "initializing_shards": 0,
+    "active_shards": 11,
+    "active_shards_percent_as_number": 52.38095238095239,
+    "number_of_nodes": 1,
+    "status": "yellow",
+    "delayed_unassigned_shards": 0,
+    "number_of_in_flight_fetch": 0,
+    "number_of_pending_tasks": 0,
+    "relocating_shards": 0,
+    "task_max_waiting_in_queue_millis": 0,
+    "cluster_name": "388488718562:dm-test-es",
+    "number_of_data_nodes": 1,
+    "timed_out": false,
+    "unassigned_shards": 10
+  }
+}
+```
+
 #### Update Document
 
 This action is used to update a document.
@@ -57,22 +90,38 @@ This action is used to update a document.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|_id|string|None|True|Optional ID of Indexed Document|None|None|
-|_index|string|None|True|Index to Insert Document Into|None|None|
-|_source|string|None|False|Control If and How Source is Returned|None|None|
-|_type|string|None|False|Type of Document to Index|None|None|
-|_version|integer|None|False|Optional Version Specification|None|None|
-|parent|string|None|False|Optional Parent|None|None|
-|refresh|string|False|False|Control when Changes Become Visible|['true', 'wait_for', 'false']|None|
-|retry_on_conflict|integer|None|False|Optional Number of Times to Retry on Update Conflict|None|None|
-|routing|string|None|False|Optional Shard Placement|None|None|
-|script|object|None|True|JSON Script to Modify a Document|None|None|
-|timeout|string|1m|False|Custom Timeout Window|None|None|
-|wait_for_active_shards|integer|None|False|Number of Shard Copies required Before Update|None|None|
+|_id|string|None|True|Optional ID of Indexed Document|None|001|
+|_index|string|None|True|Index to Insert Document Into|None|index001|
+|_source|string|None|False|Control If and How Source is Returned|None|meta.*|
+|_type|string|None|False|Type of Document to Index|None|_doc|
+|_version|integer|None|False|Optional Version Specification|None|1|
+|parent|string|None|False|Optional Parent|None|001|
+|refresh|string|false|False|Control when Changes Become Visible|['true', 'wait_for', 'false']|false|
+|retry_on_conflict|integer|None|False|Optional Number of Times to Retry on Update Conflict|None|5|
+|routing|string|None|False|Optional Shard Placement|None|user1|
+|script|object|None|True|JSON Script to Modify a Document|None|{"lang": "painless"}|
+|timeout|string|1m|False|Custom Timeout Window|None|1m|
+|wait_for_active_shards|integer|None|False|Number of Shard Copies required Before Update|None|2|
 
 Example input:
 
 ```
+{
+  "_id": "001",
+  "_index": "index001",
+  "_source": "meta.*",
+  "_type": "_doc",
+  "_version": 1,
+  "parent": "001",
+  "refresh": "false",
+  "retry_on_conflict": 5,
+  "routing": "user1",
+  "script": {
+    "lang": "painless"
+  },
+  "timeout": "1m",
+  "wait_for_active_shards": 2
+}
 ```
 
 ##### Output
@@ -80,6 +129,25 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |update_response|op_response|False|Updated response|
+
+Example output:
+
+```
+{
+  "_id": "1",
+  "_index": "account",
+  "_primary_term": 1,
+  "_seq_no": 0,
+  "_shards": {
+    "successful": 1,
+    "total": 2,
+    "failed": 0
+  },
+  "_type": "doc",
+  "_version": 1,
+  "result": "created"
+}
+```
 
 #### Search Documents
 
@@ -89,14 +157,28 @@ This action is used to search for documents.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|_index|string|None|True|Document Index|None|None|
-|_type|string|None|False|Document Type|None|None|
-|query|object|None|False|JSON Query DSL|None|None|
-|routing|string|None|False|Optional Shards to Search|None|None|
+|_index|string|None|True|Document Index|None|shakespeare|
+|_type|string|None|False|Document Type|None|doc|
+|query|object|None|False|JSON Query DSL|None|{"query": {"match": {"line_number": {"query": "1.1.1"}}}}|
+|routing|string|None|False|Optional Shards to Search|None|user1|
 
 Example input:
 
 ```
+{
+  "_index": "shakespeare",
+  "_type": "doc",
+  "query": {
+    "query": {
+      "match": {
+        "line_number": {
+          "query": "1.1.1"
+        }
+      }
+    }
+  },
+  "routing": "user1"
+}
 ```
 
 ##### Output
@@ -108,6 +190,46 @@ Example input:
 |timed_out|boolean|False|Timed Out Flag|
 |took|integer|False|Duration in Milliseconds|
 
+Example output:
+
+```
+{
+  "took": 4,
+  "timed_out": false,
+  "_shards": {
+    "total": 5,
+    "successful": 5,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 1,
+      "relation": "eq"
+    },
+    "max_score": 4.3903255,
+    "hits": [
+      {
+        "_index": "shakespeare",
+        "_type": "doc",
+        "_id": "3",
+        "_version": 1,
+        "_score": 4.3903255,
+        "_source": {
+          "type": "line",
+          "line_id": 4,
+          "play_name": "Henry IV",
+          "speech_number": 1,
+          "line_number": "1.1.1",
+          "speaker": "KING HENRY IV",
+          "text_entry": "So shaken as we are, so wan with care,"
+        }
+      }
+    ]
+  }
+}
+```
+
 #### Index Document
 
 This action is used to create or replace a document by index.
@@ -116,19 +238,35 @@ This action is used to create or replace a document by index.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|_id|string|None|False|Optional ID of Indexed Document|None|None|
-|_index|string|None|True|Index to Insert Document Into|None|None|
-|_type|string|None|False|Type of Document to Index|None|None|
-|_version|integer|None|False|Optional Version Specification|None|None|
-|document|object|None|False|JSON Document to Index|None|None|
-|parent|string|None|False|Optional Parent|None|None|
-|routing|string|None|False|Optional Shard Placement|None|None|
-|timeout|string|1m|False|Custom Timeout Window|None|None|
-|version_type|string|internal|False|Optional Version Type|['internal', 'external', 'external_gt', 'external_gte']|None|
+|_id|string|None|False|Optional ID of Indexed Document|None|001|
+|_index|string|None|True|Index to Insert Document Into|None|index001|
+|_type|string|None|False|Type of Document to Index|None|_doc|
+|_version|integer|None|False|Optional Version Specification|None|1|
+|document|object|None|False|JSON Document to Index|None|{"firstname": "Jon", "lastname": "Doe", "gender": "M", "city": "Dante"}|
+|parent|string|None|False|Optional Parent|None|001|
+|routing|string|None|False|Optional Shard Placement|None|user1|
+|timeout|string|1m|False|Custom Timeout Window|None|1m|
+|version_type|string|internal|False|Optional Version Type|['internal', 'external', 'external_gt', 'external_gte']|internal|
 
 Example input:
 
 ```
+{
+  "_id": "001",
+  "_index": "index001",
+  "_type": "_doc",
+  "_version": 1,
+  "document": {
+    "firstname": "Jon",
+    "lastname": "Doe",
+    "gender": "M",
+    "city": "Dante"
+  },
+  "parent": "001",
+  "routing": "user1",
+  "timeout": "1m",
+  "version_type": "internal"
+}
 ```
 
 ##### Output
@@ -136,6 +274,25 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |index_response|op_response|False|Result of Index Operation|
+
+Example output:
+
+```
+{
+  "_seq_no": 0,
+  "_shards": {
+    "failed": 0,
+    "successful": 1,
+    "total": 2
+  },
+  "_type": "doc",
+  "_version": 1,
+  "result": "created",
+  "_id": "1",
+  "_index": "account",
+  "_primary_term": 1
+}
+```
 
 ### Triggers
 
@@ -156,6 +313,21 @@ This trigger is used to poll for new documents given a query.
 Example input:
 
 ```
+{
+  "_index": "bank",
+  "_type": "doc",
+  "frequency": 60,
+  "query": {
+    "query": {
+      "match": {
+        "line_number": {
+          "query": "1.1.1"
+        }
+      }
+    }
+  },
+  "routing": "account"
+}
 ```
 
 ##### Output
@@ -163,6 +335,31 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |hits|[]hit|False|New Hits|
+
+Example output:
+
+```
+{
+  "hits": [
+    {
+      "_type": "doc",
+      "_version": 1,
+      "_id": "3",
+      "_index": "shakespeare",
+      "_score": 4.3903255,
+      "_source": {
+        "line_id": 4,
+        "line_number": "1.1.1",
+        "play_name": "Henry IV",
+        "speaker": "KING HENRY IV",
+        "speech_number": 1,
+        "text_entry": "So shaken as we are, so wan with care,",
+        "type": "line"
+      }
+    }
+  ]
+}
+```
 
 ### Custom Output Types
 
@@ -174,7 +371,9 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.5 - Fix issue where Search Documents was not converting json properly
+
+* 2.0.6 - Fix issue where Search Documents was not converting json properly
+* 2.0.5 - Updated example inputs and outputs for all the actions
 * 2.0.4 - Correct spelling in help.md
 * 2.0.3 - Updated Search Documents action output schema
 * 2.0.2 - New spec and help.md format for the Extension Library

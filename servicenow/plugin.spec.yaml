@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: servicenow
 title: ServiceNow
 description: ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes
-version: 5.0.0
+version: 5.1.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -171,6 +171,12 @@ actions:
         type: string
         required: false
         example: Full details about new employee hire
+      additional_fields:
+        title: Additional Fields
+        description: JSON object containing the additional fields and values to create incident
+        type: object
+        required: false
+        example: '{"description": "incident description"}'
     output:
       system_id:
         title: System ID
@@ -180,6 +186,11 @@ actions:
       number:
         title: Incident Number
         description: Incident ticket number
+        type: string
+        required: true
+      incident_url:
+        title: Incident URL
+        description: URL to newly created incident
         type: string
         required: true
   search_incident:
@@ -313,6 +324,12 @@ actions:
         type: string
         required: false
         example: Full details about new employee hire update
+      additional_fields:
+        title: Additional Fields
+        description: JSON object containing the additional fields and values to update incident
+        type: object
+        required: false
+        example: '{"description": "incident description"}'
     output:
       success:
         title: Success

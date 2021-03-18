@@ -1,17 +1,18 @@
 import komand
 from .schema import AddDataToReferenceDataListsInput, AddDataToReferenceDataListsOutput
+
 # Custom imports below
 from komand_qradar.util import helpers
 
 
 class AddDataToReferenceDataLists(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='add_data_to_reference_data_lists',
-                description='Add data to reference_data lists',
-                input=AddDataToReferenceDataListsInput(),
-                output=AddDataToReferenceDataListsOutput())
+            name="add_data_to_reference_data_lists",
+            description="Add data to reference_data lists",
+            input=AddDataToReferenceDataListsInput(),
+            output=AddDataToReferenceDataListsOutput(),
+        )
 
     def run(self, params={}):
         url = self.connection.url
@@ -19,10 +20,7 @@ class AddDataToReferenceDataLists(komand.Action):
         password = self.connection.password
         token = self.connection.token
 
-        payload = {
-            "element_type": params.get("element_type"),
-            "name": params.get("name")
-        }
+        payload = {"element_type": params.get("element_type"), "name": params.get("name")}
         if params.get("time_to_live"):
             payload["time_to_live"] = params.get("time_to_live")
         if params.get("timeout_type"):
@@ -52,6 +50,6 @@ class AddDataToReferenceDataLists(komand.Action):
             success = helpers.test_auth(self.logger, url, basic_auth=auth)
 
         if not success:
-            raise Exception('Test: Failed authentication')
+            raise Exception("Test: Failed authentication")
 
         return {}

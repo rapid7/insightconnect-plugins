@@ -3,13 +3,13 @@ from .schema import UpdateTrustedHostInput, UpdateTrustedHostOutput
 
 
 class UpdateTrustedHost(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='update_trusted_host',
-                description='Updates the values of given parameters',
-                input=UpdateTrustedHostInput(),
-                output=UpdateTrustedHostOutput())
+            name="update_trusted_host",
+            description="Updates the values of given parameters",
+            input=UpdateTrustedHostInput(),
+            output=UpdateTrustedHostOutput(),
+        )
 
     def run(self, params={}):
         action = "trusted_host_groups"

@@ -1,5 +1,6 @@
 import komand
 from .schema import DeleteUserInput, DeleteUserOutput, Input, Output, Component
+
 # Custom imports below
 import requests
 import urllib.parse
@@ -9,10 +10,11 @@ from komand.exceptions import PluginException
 class DeleteUser(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='delete_user',
+            name="delete_user",
             description=Component.DESCRIPTION,
             input=DeleteUserInput(),
-            output=DeleteUserOutput())
+            output=DeleteUserOutput(),
+        )
 
     def run(self, params={}):
         # Get the user by email
@@ -30,10 +32,8 @@ class DeleteUser(komand.Action):
 
         data = response.json()
 
-        user_id = data['id']
-        send_email_param = {
-            "sendEmail": params.get(Input.SEND_ADMIN_EMAIL)
-        }
+        user_id = data["id"]
+        send_email_param = {"sendEmail": params.get(Input.SEND_ADMIN_EMAIL)}
 
         # Deactivate the user by id
         self.logger.info(f"Deactivating user ID: {user_id}")
@@ -44,7 +44,9 @@ class DeleteUser(komand.Action):
             self.logger.error("Okta: Invalid token or domain")
 
         if response.status_code >= 400:
-            raise PluginException(cause="Delete User failed.",
-                                  assistance=f"Okta Deactivate User failed. Response was: {response.text}")
+            raise PluginException(
+                cause="Delete User failed.",
+                assistance=f"Okta Deactivate User failed. Response was: {response.text}",
+            )
 
         return {Output.SUCCESS: True}

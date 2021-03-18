@@ -6,6 +6,7 @@ IP_ADDRESS = "IP Address"
 HOSTNAME = "Host Name"
 DEVICE_ID = "Device ID"
 
+
 def get_agent_type(search_string):
     try:
         search_string = ip_address(search_string)

@@ -8,7 +8,7 @@ import requests
 from icon_bmc_remedy_itsm.actions import UpdateIncidentStatus
 
 
-class MockConnection():
+class MockConnection:
     def __init__(self):
         self.url = "http://test.url"
 
@@ -35,14 +35,9 @@ def mocked_requests_get(*args, headers, json=None):
         def json(self):
             return self.json_
 
-    mock_object = {
-        'values': {
-            'Status': 'Assigned',
-            'Entry ID': 'INC000000000108'
-        }
-    }
+    mock_object = {"values": {"Status": "Assigned", "Entry ID": "INC000000000108"}}
 
-    if args[0] == 'http://test.url/api/arsys/v1/entry/HPD%3AIncidentInterface/INC000000000108|INC000000000108':
+    if args[0] == "http://test.url/api/arsys/v1/entry/HPD%3AIncidentInterface/INC000000000108|INC000000000108":
         if not json:  # If there's no body, this is a get, else it's a put
             return MockResponse(mock_object, 200)
         return MockResponse(mock_object, 204)
@@ -83,8 +78,8 @@ class TestUpdateIncidentStatus(TestCase):
         # self.assertEqual(actual.get("Entry ID"), "INC000000000108")
         pass
 
-    @mock.patch('requests.get', side_effect=mocked_requests_get)
-    @mock.patch('requests.put', side_effect=mocked_requests_get)
+    @mock.patch("requests.get", side_effect=mocked_requests_get)
+    @mock.patch("requests.put", side_effect=mocked_requests_get)
     def test_update_incident_status(self, mockGet, mockPut):
         log = logging.getLogger("Test")
 
@@ -95,23 +90,17 @@ class TestUpdateIncidentStatus(TestCase):
         test_update_incident_status.logger = log
 
         connection_params = {
-            "credentials": {
-                "password": "password",
-                "username": "username"
-            },
+            "credentials": {"password": "password", "username": "username"},
             "port": "8008",
             "ssl_verify": True,
-            "url": "http://remd-itsm1902.vuln.lax.rapid7.com"
+            "url": "http://remd-itsm1902.vuln.lax.rapid7.com",
         }
 
         test_connection.connect(connection_params)
         test_update_incident_status.connection = test_connection
 
         new_status = "Assigned"
-        update_incident_params = {
-            "incident_id": "INC000000000108",
-            "status": new_status
-        }
+        update_incident_params = {"incident_id": "INC000000000108", "status": new_status}
 
         result = test_update_incident_status.run(update_incident_params)
         actual = result.get("incident").get("values")

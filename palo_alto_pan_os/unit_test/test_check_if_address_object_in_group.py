@@ -1,10 +1,13 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_palo_alto_pan_os.connection.connection import Connection
-from komand_palo_alto_pan_os.actions.check_if_address_object_in_group import CheckIfAddressObjectInGroup
+from komand_palo_alto_pan_os.actions.check_if_address_object_in_group import (
+    CheckIfAddressObjectInGroup,
+)
 import json
 import logging
 
@@ -32,14 +35,12 @@ class TestCheckIfAddressObjectInGroup(TestCase):
             """
             self.fail(message)
 
-
         test_conn.connect(connection_params)
         test_action.connection = test_conn
         results = test_action.run(action_params)
 
         self.assertTrue(results.get("found"))
         self.assertTrue(results.get("address_object_name"))
-
 
     def test_check_if_address_object_in_group(self):
         """

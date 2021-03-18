@@ -5,7 +5,6 @@ from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 
 class RequestHelper(object):
-
     def __init__(self, session, logger):
         """
         Creates a new instance of RequestHelper
@@ -20,10 +19,7 @@ class RequestHelper(object):
         try:
             request_method = getattr(self.session, method.lower())
 
-            headers = {
-                "Content-Type": content_type,
-                "Accept": "application/json"
-            }
+            headers = {"Content-Type": content_type, "Accept": "application/json"}
 
             if not params:
                 params = {}
@@ -36,18 +32,16 @@ class RequestHelper(object):
             try:
                 resource = None if response.status_code == 204 else response.json()
             except json.decoder.JSONDecodeError:
-                raise PluginException(
-                    preset=PluginException.Preset.INVALID_JSON,
-                    data=response.text)
+                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
-            return {'resource': resource, 'status': response.status_code}
+            return {"resource": resource, "status": response.status_code}
         else:
             try:
                 error = response.json()
             except json.decoder.JSONDecodeError:
-                raise PluginException(
-                    preset=PluginException.Preset.INVALID_JSON,
-                    data=response.text)
+                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
-            raise PluginException(cause=f'Error in API request to ServiceNow. ',
-                                  assistance=f'Status code: {response.status_code}, Error: {error}')
+            raise PluginException(
+                cause=f"Error in API request to ServiceNow. ",
+                assistance=f"Status code: {response.status_code}, Error: {error}",
+            )

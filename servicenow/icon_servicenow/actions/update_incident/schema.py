@@ -8,6 +8,7 @@ class Component:
 
 
 class Input:
+    ADDITIONAL_FIELDS = "additional_fields"
     ASSIGNED_TO = "assigned_to"
     ASSIGNMENT_GROUP = "assignment_group"
     BUSINESS_SERVICE = "business_service"
@@ -35,6 +36,12 @@ class UpdateIncidentInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "additional_fields": {
+      "type": "object",
+      "title": "Additional Fields",
+      "description": "JSON object containing the additional fields and values to update incident",
+      "order": 16
+    },
     "assigned_to": {
       "type": "string",
       "title": "Assigned To",

@@ -6,20 +6,21 @@ from .schema import WriteInput, WriteOutput
 class Write(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='write',
-                description='Write data to a pre-existing database',
-                input=WriteInput(),
-                output=WriteOutput())
+            name="write",
+            description="Write data to a pre-existing database",
+            input=WriteInput(),
+            output=WriteOutput(),
+        )
 
     def run(self, params={}):
         server = self.connection.server
-        database_name = params.get('database_name', '')
-        consistency = params.get('consistency', '')
-        precision = params.get('precision', '')
-        retention_policy = params.get('retention_policy', '')
-        username = params.get('username', '')
-        password = params.get('password', '')
-        data = params.get('data', '')
+        database_name = params.get("database_name", "")
+        consistency = params.get("consistency", "")
+        precision = params.get("precision", "")
+        retention_policy = params.get("retention_policy", "")
+        username = params.get("username", "")
+        password = params.get("password", "")
+        data = params.get("data", "")
 
         endpoint = server + "/write?db=%s" % (database_name)
 
@@ -40,7 +41,7 @@ class Write(komand.Action):
         if status_code == 204:
             message = "Success!"
         elif status_code in [400, 401, 404, 500]:
-            message = r.json()['error']
+            message = r.json()["error"]
 
         return {"status_code": status_code, "message": message}
 
@@ -53,7 +54,7 @@ class Write(komand.Action):
         r = requests.get(endpoint)
 
         if r.status_code == 204:
-            result['status'] = "Running"
+            result["status"] = "Running"
 
-        result['version'] = r.headers['X-Influxdb-Version']
+        result["version"] = r.headers["X-Influxdb-Version"]
         return result

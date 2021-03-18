@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_proofpoint_url_defense.connection.connection import Connection
@@ -32,23 +33,32 @@ class TestUrlDecode(TestCase):
             """
             self.fail(message)
 
-
         test_conn.connect(connection_params)
         test_action.connection = test_conn
 
         # test V2
         results = test_action.run(action_params)
-        self.assertEquals({'decoded_url': 'http://www.example.org/url', 'decode_success': True}, results)
+        self.assertEquals({"decoded_url": "http://www.example.org/url", "decode_success": True}, results)
 
         # test V3
-        action_params["encoded_url"] = "https://urldefense.com/v3/__https://www.myclientline.net/publicS/publicServ/ClientLineEnrollment/complete.jsp__;!!MiZrGOEI0vA!NohzERuuhFAIty3SEYDFKwxCVMolJEd8Nz9rLcG4K7F8vlC_LdVlbApnP4DYHhi0l4wPQz_sD0PvfecXmeU0yUsS$"
+        action_params[
+            "encoded_url"
+        ] = "https://urldefense.com/v3/__https://www.myclientline.net/publicS/publicServ/ClientLineEnrollment/complete.jsp__;!!MiZrGOEI0vA!NohzERuuhFAIty3SEYDFKwxCVMolJEd8Nz9rLcG4K7F8vlC_LdVlbApnP4DYHhi0l4wPQz_sD0PvfecXmeU0yUsS$"
         results = test_action.run(action_params)
-        self.assertEqual({'decoded_url': 'https://www.myclientline.net/publicS/publicServ/ClientLineEnrollment/complete.jsp', 'decode_success': True}, results)
+        self.assertEqual(
+            {
+                "decoded_url": "https://www.myclientline.net/publicS/publicServ/ClientLineEnrollment/complete.jsp",
+                "decode_success": True,
+            },
+            results,
+        )
 
         # another V2 test
-        action_params["encoded_url"] = "https://urldefense.proofpoint.com/v2/url?u=http-3A__amazon.com&d=DQIFAg&c=HUrdOLg_tCr0UMeDjWLBOM9lLDRpsndbROGxEKQRFzk&r=6rcUljFJZnpk5uomPd3v3WCzboqh0RuwO-BZyxMfi0U&m=fo458hhJrF87dIYyHwDAWZkegyOy6sGJVAGrntX1mP0&s=2r8EJkvOhZj1zr2Emwwgjav6t4vvg-O42jL_dHQUDkk&e="
+        action_params[
+            "encoded_url"
+        ] = "https://urldefense.proofpoint.com/v2/url?u=http-3A__amazon.com&d=DQIFAg&c=HUrdOLg_tCr0UMeDjWLBOM9lLDRpsndbROGxEKQRFzk&r=6rcUljFJZnpk5uomPd3v3WCzboqh0RuwO-BZyxMfi0U&m=fo458hhJrF87dIYyHwDAWZkegyOy6sGJVAGrntX1mP0&s=2r8EJkvOhZj1zr2Emwwgjav6t4vvg-O42jL_dHQUDkk&e="
         results = test_action.run(action_params)
-        self.assertEqual({'decoded_url': 'http://amazon.com', 'decode_success': True}, results)
+        self.assertEqual({"decoded_url": "http://amazon.com", "decode_success": True}, results)
 
     def test_integration_url_not_encoded(self):
         log = logging.getLogger("Test")
@@ -81,4 +91,3 @@ class TestUrlDecode(TestCase):
         results = test_action.run(action_params)
         self.assertFalse(results.get("decode_success"))
         self.assertEquals(results.get("decoded_url"), "http://www.google.com")
-

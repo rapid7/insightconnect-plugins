@@ -3,13 +3,13 @@ from .schema import RetrieveAttackGroupsInput, RetrieveAttackGroupsOutput
 
 
 class RetrieveAttackGroups(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='retrieve_attack_groups',
-                description='Lists all attack groups with attack group ID',
-                input=RetrieveAttackGroupsInput(),
-                output=RetrieveAttackGroupsOutput())
+            name="retrieve_attack_groups",
+            description="Lists all attack groups with attack group ID",
+            input=RetrieveAttackGroupsInput(),
+            output=RetrieveAttackGroupsOutput(),
+        )
 
     def run(self, params={}):
         action = "security_policies/"
@@ -26,21 +26,25 @@ class RetrieveAttackGroups(komand.Action):
         r = self.connection.connector.get(action)
         self.connection.connector.raise_error_when_not_in_status(200)
 
-        if 'data' not in r and attack_group_id:
+        if "data" not in r and attack_group_id:
             data = [r]
-        elif 'data' not in r:
+        elif "data" not in r:
             self.connection.connector.raise_error("Empty returned value")
         else:
-            data = r['data']
+            data = r["data"]
 
         return {"action_policy": data}
 
     def test(self):
-        return {"action_policy": [{
-            "action": "",
-            "denyResponse": "",
-            "followUpAction": "",
-            "followUpActionTime": 0,
-            "redirectUrl": "",
-            "responsePage": ""
-        }]}
+        return {
+            "action_policy": [
+                {
+                    "action": "",
+                    "denyResponse": "",
+                    "followUpAction": "",
+                    "followUpActionTime": 0,
+                    "redirectUrl": "",
+                    "responsePage": "",
+                }
+            ]
+        }

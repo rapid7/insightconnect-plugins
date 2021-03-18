@@ -52,9 +52,7 @@ class NewDetections(komand.Trigger):
 
                 self.logger.info("[*] Reviewing detection")
                 for detection in detections:
-                    detection_date = maya.MayaDT.from_rfc3339(
-                        detection["attributes"]["time_of_occurrence"]
-                    ).datetime()
+                    detection_date = maya.MayaDT.from_rfc3339(detection["attributes"]["time_of_occurrence"]).datetime()
                     if detection_date > cache_date:
                         detection_date_list.append(detection_date)
                         self.send({"detection": detection})
@@ -62,9 +60,7 @@ class NewDetections(komand.Trigger):
                 # Set cache date to max its seen
                 if detection_date_list:
                     max_date = max(detection_date_list)
-                    self.logger.info(
-                        f"[*] Checking if Max Date {max_date} > Current Cache Date {cache_date}"
-                    )
+                    self.logger.info(f"[*] Checking if Max Date {max_date} > Current Cache Date {cache_date}")
                     if max_date > cache_date:
                         cache_date = max_date
                         cache(cache_file_name, cache_date, self.logger)
@@ -74,6 +70,4 @@ class NewDetections(komand.Trigger):
 
                 time.sleep(params.get("frequency", 5))
             except Exception as e:
-                raise Exception(
-                    "An error occurred while reading detections: {}".format(e)
-                )
+                raise Exception("An error occurred while reading detections: {}".format(e))

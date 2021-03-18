@@ -1,16 +1,18 @@
 import insightconnect_plugin_runtime
 from .schema import GetAlertsInput, GetAlertsOutput, Input, Output
+
 # Custom imports below
 import time
 
-class GetAlerts(insightconnect_plugin_runtime.Trigger):
 
+class GetAlerts(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_alerts',
-                description='Return all new alerts',
-                input=GetAlertsInput(),
-                output=GetAlertsOutput())
+            name="get_alerts",
+            description="Return all new alerts",
+            input=GetAlertsInput(),
+            output=GetAlertsOutput(),
+        )
 
     def run(self, params={}):
         """Run the trigger"""
@@ -18,7 +20,9 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
         frequency = params.get(Input.FREQUENCY, 10)
 
         # Set a baseline for the time to start looking for alerts.
-        initial_results = self.connection.client.get_all_alerts(query_parameters="?$orderby=alertCreationTime+desc&$top=1")
+        initial_results = self.connection.client.get_all_alerts(
+            query_parameters="?$orderby=alertCreationTime+desc&$top=1"
+        )
         all_results = initial_results.json()
 
         if len(all_results.get("value")):
@@ -26,7 +30,7 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
             most_recent_time_string = most_recent_result.get("alertCreationTime")
         else:
             self.logger.info("No current alerts found, setting time to start looking to 2010-10-01.")
-            most_recent_time_string = "2010-01-01T00:00:00.000000Z" # We don't have any alerts yet
+            most_recent_time_string = "2010-01-01T00:00:00.000000Z"  # We don't have any alerts yet
 
         # Start looking for new results
         while True:

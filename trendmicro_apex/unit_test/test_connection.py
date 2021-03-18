@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from icon_trendmicro_apex.connection.connection import Connection
@@ -33,4 +34,3 @@ class TestAddFileToUdsoList(TestCase):
             log.error(f"Exception connecting to Apex: {err}")
 
         self.assertEqual({"success": True}, test_results)
-

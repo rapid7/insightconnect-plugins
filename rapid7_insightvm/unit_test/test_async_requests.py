@@ -3,7 +3,8 @@ from komand_rapid7_insightvm.util import async_requests
 import asyncio
 import json
 
-class MockResponse():
+
+class MockResponse:
     def __init__(self):
         self.status = 200
 
@@ -13,9 +14,11 @@ class MockResponse():
     async def json(self):
         return json.loads(self.text())
 
-class MockSession():
+
+class MockSession:
     async def request(self, url, method, **kwargs):
         return MockResponse()
+
 
 class TestAsyncRequests(TestCase):
     def test_async_request(self):

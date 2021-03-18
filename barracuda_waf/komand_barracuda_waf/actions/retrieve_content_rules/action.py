@@ -3,13 +3,13 @@ from .schema import RetrieveContentRulesInput, RetrieveContentRulesOutput
 
 
 class RetrieveContentRules(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='retrieve_content_rules',
-                description='Lists all content rules with rule ID',
-                input=RetrieveContentRulesInput(),
-                output=RetrieveContentRulesOutput())
+            name="retrieve_content_rules",
+            description="Lists all content rules with rule ID",
+            input=RetrieveContentRulesInput(),
+            output=RetrieveContentRulesOutput(),
+        )
 
     def run(self, params={}):
         action = "virtual_services"
@@ -26,12 +26,12 @@ class RetrieveContentRules(komand.Action):
         r = self.connection.connector.get(action)
         self.connection.connector.raise_error_when_not_in_status(200)
 
-        if 'data' not in r and rule_id:
+        if "data" not in r and rule_id:
             data = [r]
-        elif 'data' not in r:
+        elif "data" not in r:
             self.connection.connector.raise_error("Empty returned value")
         else:
-            data = r['data']
+            data = r["data"]
 
         for k, val in enumerate(data):
             if "servers" not in data[k] and not data[k]["servers"]:
@@ -40,16 +40,18 @@ class RetrieveContentRules(komand.Action):
         return data
 
     def test(self):
-        return [{
-            "comments": "",
-            "extended_match": "",
-            "extended_match_sequence": 0,
-            "host_match": "",
-            "id": "",
-            "lb_algorithm": "",
-            "name": "",
-            "persistence_method": "",
-            "servers": [],
-            "service_name": "",
-            "url_match": ""
-        }]
+        return [
+            {
+                "comments": "",
+                "extended_match": "",
+                "extended_match_sequence": 0,
+                "host_match": "",
+                "id": "",
+                "lb_algorithm": "",
+                "name": "",
+                "persistence_method": "",
+                "servers": [],
+                "service_name": "",
+                "url_match": "",
+            }
+        ]

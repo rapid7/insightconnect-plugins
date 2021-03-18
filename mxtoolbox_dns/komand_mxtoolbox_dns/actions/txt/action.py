@@ -1,5 +1,6 @@
 import komand
 from .schema import TxtInput, TxtOutput
+
 # Custom imports below
 from komand_mxtoolbox_dns.util import utils
 
@@ -7,10 +8,11 @@ from komand_mxtoolbox_dns.util import utils
 class Txt(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='txt',
-                description='Check TXT records on a domain',
-                input=TxtInput(),
-                output=TxtOutput())
+            name="txt",
+            description="Check TXT records on a domain",
+            input=TxtInput(),
+            output=TxtOutput(),
+        )
 
     def run(self, params={}):
         base_url = self.connection.server

@@ -1,5 +1,6 @@
 import komand
 from .schema import SpfInput, SpfOutput
+
 # Custom imports below
 from komand_mxtoolbox_dns.util import utils
 
@@ -7,10 +8,11 @@ from komand_mxtoolbox_dns.util import utils
 class Spf(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='spf',
-                description='Check SPF records on a domain',
-                input=SpfInput(),
-                output=SpfOutput())
+            name="spf",
+            description="Check SPF records on a domain",
+            input=SpfInput(),
+            output=SpfOutput(),
+        )
 
     def run(self, params={}):
         base_url = self.connection.server

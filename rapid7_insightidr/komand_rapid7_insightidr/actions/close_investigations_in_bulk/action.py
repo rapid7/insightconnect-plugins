@@ -1,6 +1,7 @@
 import komand
 from .schema import CloseInvestigationsInBulkInput, CloseInvestigationsInBulkOutput, Input, Output, Component
 from komand.exceptions import PluginException
+
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Investigations
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
@@ -10,13 +11,13 @@ from datetime import timedelta
 
 
 class CloseInvestigationsInBulk(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='close_investigations_in_bulk',
+            name="close_investigations_in_bulk",
             description=Component.DESCRIPTION,
             input=CloseInvestigationsInBulkInput(),
-            output=CloseInvestigationsInBulkOutput())
+            output=CloseInvestigationsInBulkOutput(),
+        )
 
     def run(self, params={}):
         request = ResourceHelper(self.connection.session, self.logger)
@@ -38,30 +39,27 @@ class CloseInvestigationsInBulk(komand.Action):
 
         response = request.resource_request(
             endpoint,
-            'post',
+            "post",
             payload={
                 "alert_type": alert_type,
                 "from": timestamp_from,
                 "max_investigations_to_close": max_investigations_to_close,
                 "source": source,
                 "to": timestamp_to,
-            }
+            },
         )
 
         try:
-            result = json.loads(response.get("resource", '{}'))
+            result = json.loads(response.get("resource", "{}"))
         except json.decoder.JSONDecodeError:
-            self.logger.error(f'InsightIDR response: {response}')
+            self.logger.error(f"InsightIDR response: {response}")
             raise PluginException(
-                cause='The response from InsightIDR was not in the expected format.',
-                assistance='Contact support for help. See log for more details:',
-                data=response
+                cause="The response from InsightIDR was not in the expected format.",
+                assistance="Contact support for help. See log for more details:",
+                data=response,
             )
 
-        return {
-            Output.IDS: result.get("ids", []),
-            Output.NUM_CLOSED: result.get("num_closed", 0)
-        }
+        return {Output.IDS: result.get("ids", []), Output.NUM_CLOSED: result.get("num_closed", 0)}
 
     @staticmethod
     def _get_with_default(dictionary, key, def_value):

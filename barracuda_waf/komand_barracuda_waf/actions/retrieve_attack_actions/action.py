@@ -3,13 +3,13 @@ from .schema import RetrieveAttackActionsInput, RetrieveAttackActionsOutput
 
 
 class RetrieveAttackActions(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='retrieve_attack_actions',
-                description='Lists all attack actions for the given attack group with actionID',
-                input=RetrieveAttackActionsInput(),
-                output=RetrieveAttackActionsOutput())
+            name="retrieve_attack_actions",
+            description="Lists all attack actions for the given attack group with actionID",
+            input=RetrieveAttackActionsInput(),
+            output=RetrieveAttackActionsOutput(),
+        )
 
     def run(self, params={}):
         action = "security_policies"
@@ -27,12 +27,12 @@ class RetrieveAttackActions(komand.Action):
         r = self.connection.connector.get(action)
         self.connection.connector.raise_error_when_not_in_status(200)
 
-        if 'data' not in r and action_id:
+        if "data" not in r and action_id:
             data = [r]
-        elif 'data' not in r:
+        elif "data" not in r:
             self.connection.connector.raise_error("Empty returned value")
         else:
-            data = r['data']
+            data = r["data"]
 
         for k, val in enumerate(data):
             if data[k]["follow_up_action_time"]:
@@ -41,13 +41,19 @@ class RetrieveAttackActions(komand.Action):
         return {"action_policy": data}
 
     def test(self):
-        return {"action_policy": [{"action": "",
-                                  "deny_response": "send_response",
-                                  "follow_up_action": "none",
-                                  "follow_up_action_time": 60,
-                                  "redirect_url": "",
-                                  "numeric_id": "invalid_soap_envelope",
-                                  "id": "invalid-soap-envelope",
-                                  "name": "invalid-soap-envelope",
-                                  "attack_group": "xmlfw-soap-violations",
-                                  "response_page": "default"}]}
+        return {
+            "action_policy": [
+                {
+                    "action": "",
+                    "deny_response": "send_response",
+                    "follow_up_action": "none",
+                    "follow_up_action_time": 60,
+                    "redirect_url": "",
+                    "numeric_id": "invalid_soap_envelope",
+                    "id": "invalid-soap-envelope",
+                    "name": "invalid-soap-envelope",
+                    "attack_group": "xmlfw-soap-violations",
+                    "response_page": "default",
+                }
+            ]
+        }

@@ -1,5 +1,6 @@
 import komand
 from .schema import ListAllOrganizationApplicationsInput, ListAllOrganizationApplicationsOutput
+
 # Custom imports below
 import requests
 
@@ -10,10 +11,11 @@ class ListAllOrganizationApplications(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='list_all_organization_applications',
-                description='Lists an organizations installed applications',
-                input=ListAllOrganizationApplicationsInput(),
-                output=ListAllOrganizationApplicationsOutput())
+            name="list_all_organization_applications",
+            description="Lists an organizations installed applications",
+            input=ListAllOrganizationApplicationsInput(),
+            output=ListAllOrganizationApplicationsOutput(),
+        )
 
     def run(self, params={}):
         input_classification = params.get("classification")

@@ -16,11 +16,13 @@ def get_query(url: str, query: str) -> requests.Response:
             assistance="If the issue persists please contact support.",
         )
     check_status_code(
-        response.status_code, range(200, 299),
+        response.status_code,
+        range(200, 299),
         cause=f"Received HTTP {response.status_code} status code from Threatminer."
-              "Please verify your Threatminer server status and try again.",
+        "Please verify your Threatminer server status and try again.",
         assistance="If the issue persists please contact support.",
-        data=f"{response.status_code}, {response.text[:100]}")
+        data=f"{response.status_code}, {response.text[:100]}",
+    )
 
     return response
 
@@ -29,15 +31,11 @@ def extract_json_data(response: requests.Response) -> Dict:
     try:
         dct = response.json()
     except json.decoder.JSONDecodeError:
-        raise PluginException(
-            preset=PluginException.Preset.INVALID_JSON,
-            data=response.text
-        )
+        raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
     return dct
 
 
-def check_status_code(code: int, expected_range: Iterable, cause="",
-                      assistance="", data=""):
+def check_status_code(code: int, expected_range: Iterable, cause="", assistance="", data=""):
     if code not in expected_range:
         raise PluginException(
             cause=cause,
@@ -49,10 +47,13 @@ def check_status_code(code: int, expected_range: Iterable, cause="",
 def check_api_status_code(api_resp: Dict, expected_range: Iterable):
     api_status_code = extract_response_field(api_resp, "status_code")
     normalized_status_code = normalize_status_code(api_status_code)
-    check_status_code(normalized_status_code, expected_range,
-                      cause="Unexpected status code received from Threatminer",
-                      assistance="Please contact support",
-                      data=normalized_status_code)
+    check_status_code(
+        normalized_status_code,
+        expected_range,
+        cause="Unexpected status code received from Threatminer",
+        assistance="Please contact support",
+        data=normalized_status_code,
+    )
 
 
 def normalize_status_code(api_status_code: int) -> int:
@@ -86,6 +87,6 @@ def extract_response_field(api_resp: Dict, field_name: str) -> Any:
         raise PluginException(
             cause=f"No {field_name} received from Threatminer",
             assistance="Please contact support",
-            data=json.dumps(api_resp)
+            data=json.dumps(api_resp),
         )
     return field_value

@@ -12,13 +12,11 @@ class Client(object):
 
 
 class ThreatEntry(object):
-
     def __init__(self, url):
         self.url = url
 
 
 class ThreatInfo(object):
-
     def __init__(self, threatTypes, platformTypes, threatEntryTypes, threatEntries):
         self.threatTypes = threatTypes
         self.platformTypes = platformTypes
@@ -27,7 +25,6 @@ class ThreatInfo(object):
 
 
 class Request(object):
-
     def __init__(self, client, threatInfo):
         self.client = client
         self.threatInfo = threatInfo

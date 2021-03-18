@@ -1320,6 +1320,8 @@ Example output:
 #### Lookup Domain
 
 This action is used to return information about a specific domain entry.
+It accepts both domains and URLs as input. If a URL is given, it will be stripped to its domain.
+For example, `https://www.example.com/path/to/file` will become `www.example.com`.
 
 ##### Input
 
@@ -2037,6 +2039,8 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.0.4 - Fix issue where Lookup Domain could corrupt non-common domain name extensions
+* 4.0.3 - Update Lookup Domain action to accept HTTP and HTTPS URLs as input
 * 4.0.2 - Return full `analystNotes` and `threatLists` data outputs in Lookup Domain action
 * 4.0.1 - Improve connection error messaging
 * 4.0.0 - Remove `fields` input in Lookup Domain, Lookup Hash, Lookup IP Address and Lookup URL actions - all fields will now be returned

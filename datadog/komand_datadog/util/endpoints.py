@@ -1,5 +1,4 @@
 class Events:
-
     @staticmethod
     def events(console_url: str):
         """
@@ -7,10 +6,10 @@ class Events:
         :param console_url: URL to the Datadog console
         :return: pre-populated events
         """
-        return f'{console_url}events/'
+        return f"{console_url}events/"
+
 
 class Metrics:
-
     @staticmethod
     def post_metrics(console_url: str):
         """
@@ -18,5 +17,4 @@ class Metrics:
         :param console_url: URL to the Datadog console
         :return: pre-populated events
         """
-        return f'{console_url}series/'
-
+        return f"{console_url}series/"

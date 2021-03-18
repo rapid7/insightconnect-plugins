@@ -1,5 +1,6 @@
 import komand
 from .schema import DownloadRcaCsvFileInput, DownloadRcaCsvFileOutput, Input, Output, Component
+
 # Custom imports below
 from ...util import util
 
@@ -7,10 +8,11 @@ from ...util import util
 class DownloadRcaCsvFile(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='download_rca_csv_file',
+            name="download_rca_csv_file",
             description=Component.DESCRIPTION,
             input=DownloadRcaCsvFileInput(),
-            output=DownloadRcaCsvFileOutput())
+            output=DownloadRcaCsvFileOutput(),
+        )
 
     def run(self, params={}):
         return {
@@ -25,8 +27,8 @@ class DownloadRcaCsvFile(komand.Action):
                         "scanSummaryGuid": params.get(Input.SCAN_SUMMARY_GUID),
                         "serverGuid": params.get(Input.SERVER_GUID),
                         "hostIP": params.get(Input.HOST_IP),
-                        "hostName": params.get(Input.HOST_NAME)
-                    }
-                }
+                        "hostName": params.get(Input.HOST_NAME),
+                    },
+                },
             )
         }

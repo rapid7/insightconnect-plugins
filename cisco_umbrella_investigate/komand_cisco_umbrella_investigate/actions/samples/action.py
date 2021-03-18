@@ -1,5 +1,6 @@
 import komand
 from .schema import SamplesInput, SamplesOutput, Input
+
 # Custom imports below
 from komand.exceptions import PluginException
 
@@ -7,23 +8,24 @@ from komand.exceptions import PluginException
 class Samples(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='samples',
-                description='Return all samples associated with the domain',
-                input=SamplesInput(),
-                output=SamplesOutput())
+            name="samples",
+            description="Return all samples associated with the domain",
+            input=SamplesInput(),
+            output=SamplesOutput(),
+        )
 
     def run(self, params={}):
         URL = params.get(Input.URL)
-        limit = params.get('limit', None)
-        offset = params.get('offset', None)
-        sortby = params.get('sortby', None)
-        
+        limit = params.get("limit", None)
+        offset = params.get("offset", None)
+        sortby = params.get("sortby", None)
+
         if not limit or limit == 0:
             limit = 10
-        
+
         if not sortby or sortby == "":
             sortby = "score"
-        
+
         if not offset:
             offset = 0
 
@@ -34,4 +36,11 @@ class Samples(komand.Action):
         return samples
 
     def test(self):
-        return {"limit": 1, "moreDataAvailable": False, "offset": 0, "query": "*", "samples": [], "totalResults": 0}
+        return {
+            "limit": 1,
+            "moreDataAvailable": False,
+            "offset": 0,
+            "query": "*",
+            "samples": [],
+            "totalResults": 0,
+        }

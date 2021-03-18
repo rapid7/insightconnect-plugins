@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import GetAgentDetailsInput, GetAgentDetailsOutput, Input, Output, Component
+
 # Custom imports below
 from insightconnect_plugin_runtime.helper import clean
 from icon_broadcom_symantec_endpoint_protection.util.api import APIException, Agent
@@ -10,13 +11,13 @@ import re
 
 
 class GetAgentDetails(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_agent_details',
-                description=Component.DESCRIPTION,
-                input=GetAgentDetailsInput(),
-                output=GetAgentDetailsOutput())
+            name="get_agent_details",
+            description=Component.DESCRIPTION,
+            input=GetAgentDetailsInput(),
+            output=GetAgentDetailsOutput(),
+        )
 
     def run(self, params={}):
         query = params.get(Input.AGENT)
@@ -33,8 +34,10 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
             return {Output.AGENT: clean(match)}
 
         except APIException as e:
-            raise PluginException(cause="An error occurred while attempting to get agent details!",
-                                  assistance=e.message)
+            raise PluginException(
+                cause="An error occurred while attempting to get agent details!",
+                assistance=e.message,
+            )
 
     @staticmethod
     def _is_search_mac_address(query: str) -> bool:

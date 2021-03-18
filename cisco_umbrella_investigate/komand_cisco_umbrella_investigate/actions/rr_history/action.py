@@ -1,5 +1,6 @@
 import komand
 from .schema import RrHistoryInput, RrHistoryOutput
+
 # Custom imports below
 from komand.exceptions import PluginException
 
@@ -7,14 +8,15 @@ from komand.exceptions import PluginException
 class RrHistory(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='rr_history',
-                description='Return the history that Umbrella has seen for a given domain',
-                input=RrHistoryInput(),
-                output=RrHistoryOutput())
+            name="rr_history",
+            description="Return the history that Umbrella has seen for a given domain",
+            input=RrHistoryInput(),
+            output=RrHistoryOutput(),
+        )
 
     def run(self, params={}):
-        domain = params.get('domain')
-        type = params.get('type')
+        domain = params.get("domain")
+        type = params.get("type")
 
         try:
             if not type:

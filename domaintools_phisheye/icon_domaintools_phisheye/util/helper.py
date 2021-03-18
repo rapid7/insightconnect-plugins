@@ -1,6 +1,9 @@
 from domaintools.exceptions import (
-    NotAuthorizedException, ServiceUnavailableException,
-    BadRequestException, NotFoundException, InternalServerErrorException
+    NotAuthorizedException,
+    ServiceUnavailableException,
+    BadRequestException,
+    NotFoundException,
+    InternalServerErrorException,
 )
 from komand.exceptions import PluginException
 

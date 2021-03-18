@@ -30,7 +30,9 @@ class CylanceProtectAPI:
             if len(ret) > 0:
                 devices = ret
         if len(devices) > 1:
-            self.logger.info(f"Multiple agents found that matched the query: {devices}. We will act upon the first match.")
+            self.logger.info(
+                f"Multiple agents found that matched the query: {devices}. We will act upon the first match."
+            )
         return clean(devices[0])
 
     def search_agents_all(self, agent):
@@ -38,15 +40,15 @@ class CylanceProtectAPI:
         agents = []
         while i < 9999:
             response = self.get_agents(i, "20")
-            if i > response.get('total_pages'):
+            if i > response.get("total_pages"):
                 break
-            agents.extend(self.search_agents(agent, response.get('page_items')))
+            agents.extend(self.search_agents(agent, response.get("page_items")))
             i += 1
 
         if len(agents) == 0:
             raise PluginException(
                 cause="Agent not found.",
-                assistance=f"Unable to find any agents using identifier provided: {agent}."
+                assistance=f"Unable to find any agents using identifier provided: {agent}.",
             )
 
         return agents
@@ -55,7 +57,7 @@ class CylanceProtectAPI:
         agents = []
         if validators.ipv4(agent):
             agents.extend(self.get_device_by_ip(agent, device_list))
-        elif match('[0-9a-f]{2}([-:]?)[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$', agent.lower()):
+        elif match("[0-9a-f]{2}([-:]?)[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$", agent.lower()):
             agents.extend(self.get_device_by_mac(agent, device_list))
         elif validators.uuid(agent):
             agents.extend(self.get_device_by_id(agent, device_list))
@@ -67,7 +69,7 @@ class CylanceProtectAPI:
     def get_device_by_ip(ip_address: str, device_list: list) -> list:
         matching_devices = []
         for device in device_list:
-            for ip in device.get('ip_addresses'):
+            for ip in device.get("ip_addresses"):
                 if ip_address == ip:
                     matching_devices.append(device)
         return matching_devices
@@ -76,8 +78,8 @@ class CylanceProtectAPI:
     def get_device_by_mac(mac_address: str, device_list: list) -> list:
         matching_devices = []
         for device in device_list:
-            for mac in device.get('mac_addresses'):
-                if mac_address.replace(':', '-').upper() == mac:
+            for mac in device.get("mac_addresses"):
+                if mac_address.replace(":", "-").upper() == mac:
                     matching_devices.append(device)
         return matching_devices
 
@@ -85,7 +87,7 @@ class CylanceProtectAPI:
     def get_device_by_id(device_id: str, device_list: list) -> list:
         matching_devices = []
         for device in device_list:
-            if device_id.lower() == device.get('id'):
+            if device_id.lower() == device.get("id"):
                 matching_devices.append(device)
         return matching_devices
 
@@ -93,7 +95,7 @@ class CylanceProtectAPI:
     def get_device_by_name(name: str, device_list: list) -> list:
         matching_devices = []
         for device in device_list:
-            if name.upper() == device.get('name').upper():
+            if name.upper() == device.get("name").upper():
                 matching_devices.append(device)
         return matching_devices
 
@@ -104,7 +106,7 @@ class CylanceProtectAPI:
         return self._call_api("DELETE", f"{self.url}/globallists/v2", "globallist:delete", json_data=payload)
 
     def device_lockdown(self, device_id):
-        device_id = device_id.replace('-', '').upper()
+        device_id = device_id.replace("-", "").upper()
         return self._call_api("PUT", f"{self.url}/devicecommands/v2/{device_id}/lockdown?value=true", None)
 
     def delete_devices(self, payload):
@@ -117,23 +119,23 @@ class CylanceProtectAPI:
         threats = self._call_api("GET", f"{self.url}/threats/v2?page=1&page_size=100", "threat:list").get("page_items")
         matching_threats = []
         for identifier in identifiers:
-            if match('^[a-fA-F\d]{32}$', identifier):
+            if match("^[a-fA-F\d]{32}$", identifier):
                 for threat in threats:
-                    if identifier.upper() == threat.get('md5'):
+                    if identifier.upper() == threat.get("md5"):
                         matching_threats.append(threat)
-            elif match('^[A-Fa-f0-9]{64}$', identifier):
+            elif match("^[A-Fa-f0-9]{64}$", identifier):
                 for threat in threats:
-                    if identifier.upper() == threat.get('sha256'):
+                    if identifier.upper() == threat.get("sha256"):
                         matching_threats.append(threat)
             else:
                 for threat in threats:
-                    if identifier.upper() == threat.get('name').upper():
+                    if identifier.upper() == threat.get("name").upper():
                         matching_threats.append(threat)
 
         if len(matching_threats) == 0:
             raise PluginException(
                 cause="Threat not found.",
-                assistance=f"Unable to find any threats using identifier provided: {identifier}."
+                assistance=f"Unable to find any threats using identifier provided: {identifier}.",
             )
 
         return clean(matching_threats)
@@ -152,41 +154,32 @@ class CylanceProtectAPI:
 
     def _call_api(self, method, url, scope, params=None, json_data=None):
         token = self.generate_token(scope)
-        return self._make_request(
-            method, url, params, json_data, headers={
-                "Authorization": f"Bearer {token}"
-            }
-        )
+        return self._make_request(method, url, params, json_data, headers={"Authorization": f"Bearer {token}"})
 
     def _make_request(self, method, url, params=None, json_data=None, data=None, headers=None):
         response = {"text": ""}
         try:
-            response = requests.request(method, url,
-                                        json=json_data,
-                                        data=data,
-                                        params=params,
-                                        headers=headers)
+            response = requests.request(method, url, json=json_data, data=data, params=params, headers=headers)
 
             if response.status_code == 400:
-                raise PluginException(cause="Bad request.",
-                                      data=response.text)
+                raise PluginException(cause="Bad request.", data=response.text)
             if response.status_code == 401:
                 raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
             if response.status_code == 403:
                 raise PluginException(
                     cause="Forbidden.",
-                    assistance="The JWT Token did not contain the proper scope to perform this action."
+                    assistance="The JWT Token did not contain the proper scope to perform this action.",
                 )
             if response.status_code == 404:
                 raise PluginException(
                     cause="Not found.",
-                    assistance="The request was made for a resource that doesn't exist."
+                    assistance="The request was made for a resource that doesn't exist.",
                 )
             if response.status_code == 409:
                 raise PluginException(
                     cause="Conflict.",
                     assistance="Request made conflicts with an existing resource.",
-                    data=response.text
+                    data=response.text,
                 )
             if response.status_code >= 500:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR)
@@ -215,17 +208,17 @@ class CylanceProtectAPI:
             "iss": "http://cylance.com",
             "sub": self.app_id,
             "tid": self.tenant_id,
-            "jti": str(uuid.uuid4())
+            "jti": str(uuid.uuid4()),
         }
 
         if scope:
             claims["scp"] = scope
 
-        response = self._make_request(method="POST",
-                                      url=f"{self.url}/auth/v2/token",
-                                      data=json.dumps({"auth_token": jwt.encode(claims, self.app_secret,
-                                                                                algorithm='HS256').decode(
-                                          'utf-8')}),
-                                      headers={"Content-Type": "application/json; charset=utf-8"})
+        response = self._make_request(
+            method="POST",
+            url=f"{self.url}/auth/v2/token",
+            data=json.dumps({"auth_token": jwt.encode(claims, self.app_secret, algorithm="HS256").decode("utf-8")}),
+            headers={"Content-Type": "application/json; charset=utf-8"},
+        )
 
-        return response['access_token']
+        return response["access_token"]

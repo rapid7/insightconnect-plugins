@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Microsoft Windows Defender ATP"
 Vendor = "rapid7"
-Version = "4.6.0"
+Version = "4.7.0"
 Description = "The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files"
 
 
@@ -39,6 +39,8 @@ def main():
             self.add_trigger(triggers.GetAlerts())
 
             self.add_action(actions.Blacklist())
+
+            self.add_action(actions.CollectInvestigationPackage())
 
             self.add_action(actions.FindMachinesWithInstalledSoftware())
 

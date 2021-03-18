@@ -1,5 +1,6 @@
 import komand
 from .schema import GetSiteAssetsInput, GetSiteAssetsOutput
+
 # Custom imports below
 import requests
 from komand_rapid7_insightvm.util import endpoints
@@ -14,15 +15,16 @@ class GetSiteAssets(komand.Action):
         401: "Unauthorized",
         500: "Internal Server Error",
         503: "Service Unavailable",
-        000: "Unknown Status Code"
+        000: "Unknown Status Code",
     }
 
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='get_site_assets',
-            description='Gets assets for a site',
+            name="get_site_assets",
+            description="Gets assets for a site",
             input=GetSiteAssetsInput(),
-            output=GetSiteAssetsOutput())
+            output=GetSiteAssetsOutput(),
+        )
 
     def run(self, params={}):
         site_id = params.get("site_id")
@@ -36,9 +38,9 @@ class GetSiteAssets(komand.Action):
             response = self.get_assets(endpoint=endpoint, endpoint_page=current_page)
 
             resources += response.resources  # Grab resources and append to total
-            self.logger.info("Got %d assets from page %d / %d" % (len(response.resources),
-                                                                  response.page_num,
-                                                                  response.total_pages))
+            self.logger.info(
+                "Got %d assets from page %d / %d" % (len(response.resources), response.page_num, response.total_pages)
+            )
 
             if (response.total_pages == 0) or ((response.total_pages - 1) == response.page_num):
                 self.logger.info("All pages consumed, returning results...")
@@ -52,11 +54,9 @@ class GetSiteAssets(komand.Action):
     def get_assets(self, endpoint, endpoint_page, size=500):
         self.logger.info("Fetching up to %d assets from endpoint page %d ..." % (size, endpoint_page))
         try:
-            response = self.connection.session.get(url=endpoint,
-                                                   verify=False,
-                                                   params={"size": size,
-                                                           "page": endpoint_page}
-                                                   )
+            response = self.connection.session.get(
+                url=endpoint, verify=False, params={"size": size, "page": endpoint_page}
+            )
         except requests.RequestException as e:
             self.logger.error(e)
             raise
@@ -66,9 +66,11 @@ class GetSiteAssets(komand.Action):
                 response_json = response.json()
 
                 Result = namedtuple("Result", "page_num total_pages resources")
-                r = Result(page_num=response_json["page"]["number"],
-                           total_pages=response_json["page"]["totalPages"],
-                           resources=response_json["resources"])
+                r = Result(
+                    page_num=response_json["page"]["number"],
+                    total_pages=response_json["page"]["totalPages"],
+                    resources=response_json["resources"],
+                )
 
                 return r
 
@@ -81,7 +83,9 @@ class GetSiteAssets(komand.Action):
                     raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=reason.text)
 
                 status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
-                self.logger.error("{status} ({code}): {reason}".format(status=status_code_message,
-                                                                       code=response.status_code,
-                                                                       reason=reason))
+                self.logger.error(
+                    "{status} ({code}): {reason}".format(
+                        status=status_code_message, code=response.status_code, reason=reason
+                    )
+                )
                 raise PluginException(preset=PluginException.Preset.UNKNOWN)
