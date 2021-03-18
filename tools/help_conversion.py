@@ -18,5 +18,5 @@ def main():
                 h.write(output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

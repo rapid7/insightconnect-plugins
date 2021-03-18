@@ -30,7 +30,6 @@ class EditIssue(insightconnect_plugin_runtime.Action):
         try:
             issue.update(notify=notify, **clean_params)
         except Exception as e:
-            raise PluginException(cause="An unknown error occurred.",
-                                  data=e)
+            raise PluginException(cause="An unknown error occurred.", data=e)
 
         return {Output.SUCCESS: True}

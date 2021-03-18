@@ -1,17 +1,18 @@
 import insightconnect_plugin_runtime
 from .schema import GetAgentDetailsInput, GetAgentDetailsOutput, Input, Output, Component
+
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class GetAgentDetails(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='get_agent_details',
+            name="get_agent_details",
             description=Component.DESCRIPTION,
             input=GetAgentDetailsInput(),
-            output=GetAgentDetailsOutput())
+            output=GetAgentDetailsOutput(),
+        )
 
     def run(self, params={}):
         all_endpoints = self.connection.client.get_endpoints_list()
@@ -24,8 +25,7 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
 
         if len(searched_agents) > 1:
             self.logger.info(
-                f"Multiple agents found that matched the query: {searched_agents}."
-                f"We will act upon the first match."
+                f"Multiple agents found that matched the query: {searched_agents}." f"We will act upon the first match."
             )
 
         if len(searched_agents) > 0:
@@ -38,17 +38,21 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
                 )
             }
 
-        raise PluginException(cause="Unable to return information about provided agent.",
-                              assistance="Please provide an existed agent information.")
+        raise PluginException(
+            cause="Unable to return information about provided agent.",
+            assistance="Please provide an existed agent information.",
+        )
 
     @staticmethod
     def _is_agent_found(agent, e):
-        return e.get("deviceId") == agent \
-               or e.get("name") == agent \
-               or e.get("domain") == agent \
-               or e.get("localIp") == agent \
-               or e.get("ip") == agent \
-               or GetAgentDetails._is_mac(agent, e)
+        return (
+            e.get("deviceId") == agent
+            or e.get("name") == agent
+            or e.get("domain") == agent
+            or e.get("localIp") == agent
+            or e.get("ip") == agent
+            or GetAgentDetails._is_mac(agent, e)
+        )
 
     @staticmethod
     def _is_mac(agent, e):

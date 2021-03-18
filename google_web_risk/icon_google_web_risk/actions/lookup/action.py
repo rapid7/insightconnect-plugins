@@ -6,13 +6,13 @@ import requests
 
 
 class Lookup(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='lookup',
-                description=Component.DESCRIPTION,
-                input=LookupInput(),
-                output=LookupOutput())
+            name="lookup",
+            description=Component.DESCRIPTION,
+            input=LookupInput(),
+            output=LookupOutput(),
+        )
 
     @staticmethod
     def _check_threat_type(threat_types: [str], params: dict, threat_type: str, name: str) -> None:
@@ -32,7 +32,7 @@ class Lookup(komand.Action):
         parameters = {
             "key": self.connection.key,
             "threatTypes": Lookup.build_threat_types(params),
-            "uri": params.get(Input.URL)
+            "uri": params.get(Input.URL),
         }
         result = requests.get(endpoint, params=parameters)
         if result.status_code != 200:

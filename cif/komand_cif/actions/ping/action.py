@@ -1,5 +1,6 @@
 import komand
 from .schema import PingOutput, PingInput
+
 # Custom imports below
 import requests
 
@@ -8,18 +9,16 @@ import requests
 class Ping(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='ping',
-                description='Ping the router',
-                input=PingInput(),
-                output=PingOutput())
+            name="ping", description="Ping the router", input=PingInput(), output=PingOutput()
+        )
 
     def run(self, params={}):
         # TODO: Implement run function
-        url = '{}/{}'.format(self.connection.url, 'ping')
+        url = "{}/{}".format(self.connection.url, "ping")
         headers = {
-          "Authorization":"Token token={}".format(self.connection.api_token),
-          "Accept": "application/vnd.cif.v2+json",
-          "Content-Type": "application/json"
+            "Authorization": "Token token={}".format(self.connection.api_token),
+            "Accept": "application/vnd.cif.v2+json",
+            "Content-Type": "application/json",
         }
 
         try:
@@ -42,14 +41,14 @@ class Ping(komand.Action):
             raise
 
         return r.json()
-    
+
     def test(self):
         # TODO: Implement test function
-        url = '{}/{}'.format(self.connection.url, 'ping')
+        url = "{}/{}".format(self.connection.url, "ping")
         headers = {
-          "Authorization":"Token token={}".format(self.connection.api_token),
-          "Accept": "application/vnd.cif.v2+json",
-          "Content-Type": "application/json"
+            "Authorization": "Token token={}".format(self.connection.api_token),
+            "Accept": "application/vnd.cif.v2+json",
+            "Content-Type": "application/json",
         }
 
         try:

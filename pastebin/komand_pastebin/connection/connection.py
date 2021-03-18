@@ -1,11 +1,11 @@
 import komand
 from .schema import ConnectionSchema
+
 # Custom imports below
 import requests
 
 
 class Connection(komand.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.dev_key = None
@@ -16,9 +16,10 @@ class Connection(komand.Connection):
     def connect(self, params):
         self.dev_key = params.get("key").get("secretKey")
 
-        payload = {"api_dev_key": self.dev_key,
-                   "api_user_name":params.get("credentials").get("username"),
-                   "api_user_password":params.get("credentials").get("password")
+        payload = {
+            "api_dev_key": self.dev_key,
+            "api_user_name": params.get("credentials").get("username"),
+            "api_user_password": params.get("credentials").get("password"),
         }
 
         req_url = self.url + "/api/api_login.php"

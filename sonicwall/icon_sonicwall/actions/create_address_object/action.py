@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import CreateAddressObjectInput, CreateAddressObjectOutput, Input, Output, Component
+
 # Custom imports below
 import re
 import validators
@@ -8,13 +9,13 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class CreateAddressObject(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='create_address_object',
-                description=Component.DESCRIPTION,
-                input=CreateAddressObjectInput(),
-                output=CreateAddressObjectOutput())
+            name="create_address_object",
+            description=Component.DESCRIPTION,
+            input=CreateAddressObjectInput(),
+            output=CreateAddressObjectOutput(),
+        )
 
     def run(self, params={}):
         name = params.get(Input.ADDRESS_OBJECT, params.get(Input.ADDRESS))
@@ -23,75 +24,57 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
         whitelist = params.get(Input.WHITELIST)
         zone = params.get(Input.ZONE)
 
-        if params.get(Input.SKIP_PRIVATE_ADDRESS) and address_type != "fqdn" and self._check_if_private(address,
-                                                                                                        address_type):
+        if (
+            params.get(Input.SKIP_PRIVATE_ADDRESS)
+            and address_type != "fqdn"
+            and self._check_if_private(address, address_type)
+        ):
             self.logger.error(
                 f"Private IP address '{address}' provided to be blocked.\n"
                 f"To block '{address}' set the Skip Private Address parameter to false."
             )
-            return {
-                Output.HOST_STATUS: "private"
-            }
+            return {Output.HOST_STATUS: "private"}
 
         if whitelist and self._match_whitelist(address, whitelist):
-            return {
-                Output.HOST_STATUS: "whitelisted"
-            }
+            return {Output.HOST_STATUS: "whitelisted"}
 
         self.connection.sonicwall_api.validate_if_zone_exists(zone)
         response = self.connection.sonicwall_api.create_address_object(
-            address_type,
-            self._create_payload(name, zone, address, address_type)
+            address_type, self._create_payload(name, zone, address, address_type)
         )
 
         try:
-            response_status_code = response.get('status').get('info')[0].get('code')
+            response_status_code = response.get("status").get("info")[0].get("code")
         except (AttributeError, IndexError):
             raise PluginException(
                 cause="SonicWall returned unexpected response.",
                 assistance="Status code could not be found. Please check that provided inputs are correct "
-                           "and try again.",
-                data=response
+                "and try again.",
+                data=response,
             )
         if response_status_code == "E_EXISTS":
             self.logger.error(
-                f"Unable to create address object '{address}'.\n"
-                f"Address object '{address}' already exists."
+                f"Unable to create address object '{address}'.\n" f"Address object '{address}' already exists."
             )
-            return {
-                Output.STATUS: response['status'],
-                Output.HOST_STATUS: "already_exists"
-            }
+            return {Output.STATUS: response["status"], Output.HOST_STATUS: "already_exists"}
 
-        return {
-            Output.STATUS: response['status'],
-            Output.HOST_STATUS: "created"
-        }
+        return {Output.STATUS: response["status"], Output.HOST_STATUS: "created"}
 
     def _create_payload(self, name: str, zone: str, address: str, address_type: str) -> dict:
-        payload = {
-            "name": name,
-            "zone": zone
-        }
+        payload = {"name": name, "zone": zone}
         if address_type == "fqdn":
             payload["domain"] = address
             payload["dns_ttl"] = 0
         elif address_type == "cidr":
             payload["network"] = self._generate_subnet_netmask(address)
         else:
-            payload["host"] = {
-                "ip": address
-            }
+            payload["host"] = {"ip": address}
 
         object_type = address_type
         if address_type == "cidr":
             object_type = "ipv4"
 
-        return {
-            "address_objects": [{
-                object_type: payload
-            }]
-        }
+        return {"address_objects": [{object_type: payload}]}
 
     def _match_whitelist(self, address: str, whitelist: str) -> bool:
         trimmed_address = re.sub(r"/32$", "", address)
@@ -102,7 +85,7 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
                 f"and try again."
             )
             return True
-        elif '/' not in trimmed_address:
+        elif "/" not in trimmed_address:
             pass
 
         for address_object in whitelist:
@@ -133,7 +116,7 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
     def _generate_subnet_netmask(address: str) -> dict:
         return {
             "subnet": str(IPv4Network(address).network_address),
-            "mask": str(IPv4Network(address).netmask)
+            "mask": str(IPv4Network(address).netmask),
         }
 
     @staticmethod
@@ -144,9 +127,9 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
             return "ipv6"
         if validators.domain(address):
             return "fqdn"
-        if re.search('/', address):
+        if re.search("/", address):
             return "cidr"
         raise PluginException(
             cause="Unknown address type provided.",
-            assistance=f"{address} is not one of the following: IPv4, IPv6, CIDR or domain name."
+            assistance=f"{address} is not one of the following: IPv4, IPv6, CIDR or domain name.",
         )

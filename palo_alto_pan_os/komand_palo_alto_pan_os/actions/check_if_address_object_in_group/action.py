@@ -28,13 +28,13 @@ class CheckIfAddressObjectInGroup(komand.Action):
         # Get the contents of the address group to check and extract all the address object names
         # Make the call and get the address group
         try:
-            ip_objects = (response.get("response").get("result").get("entry").get("static"))
+            ip_objects = response.get("response").get("result").get("entry").get("static")
 
         except AttributeError:
             raise PluginException(
                 cause="PAN OS returned an unexpected response.",
                 assistance=f"Could not find group '{group_name}', or group was empty. Check the name, virtual system name, and device name.\ndevice name: {device_name}\nvirtual system: {virtual_system}",
-                data=response
+                data=response,
             )
 
         # Extract all the address objects from the address group
@@ -77,7 +77,7 @@ class CheckIfAddressObjectInGroup(komand.Action):
                     raise PluginException(
                         cause="PAN OS returned an unexpected response.",
                         assistance=f"Address object '{name}' was not found. Check the name and try again.",
-                        date=object_result
+                        date=object_result,
                     )
 
                 # Now try and deal with that address object

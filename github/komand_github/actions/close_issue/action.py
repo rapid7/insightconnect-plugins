@@ -1,16 +1,17 @@
 import komand
 from .schema import CloseIssueInput, CloseIssueOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class CloseIssue(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='close_issue',
-                description=Component.DESCRIPTION,
-                input=CloseIssueInput(),
-                output=CloseIssueOutput())
+            name="close_issue",
+            description=Component.DESCRIPTION,
+            input=CloseIssueInput(),
+            output=CloseIssueOutput(),
+        )
 
     def run(self, params={}):
         org = params.get(Input.ORGANIZATION)
@@ -26,6 +27,6 @@ class CloseIssue(komand.Action):
         issue_params = {"state": "closed"}
         try:
             issue = issue.edit(**issue_params)
-            return {'success': True}
+            return {"success": True}
         except:
-            return {'success': False}
+            return {"success": False}

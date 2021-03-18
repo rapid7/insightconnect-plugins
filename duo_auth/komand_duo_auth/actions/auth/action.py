@@ -8,15 +8,16 @@ from .schema import AuthInput, AuthOutput, Input
 class Auth(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='auth',
-            description='Perform second-factor authentication',
+            name="auth",
+            description="Perform second-factor authentication",
             input=AuthInput(),
-            output=AuthOutput())
+            output=AuthOutput(),
+        )
 
     def run(self, params={}):
         """Run action"""
         opts = params.get(Input.OPTIONS) or {}
-        push_info = opts.get('pushinfo')
+        push_info = opts.get("pushinfo")
 
         if push_info:
             push_info = urllib.parse.urlencode(push_info)
@@ -38,11 +39,11 @@ class Auth(komand.Action):
             user_id=user_id,
             ipaddr=params.get(Input.IPADDR),
             async_txn=params.get(Input.ASYNC),
-            type=opts.get('type'),
+            type=opts.get("type"),
             display_username=username,
             pushinfo=push_info,
             device=params.get(Input.DEVICE),
-            passcode=opts.get('passcode')
+            passcode=opts.get("passcode"),
         )
         return response
 

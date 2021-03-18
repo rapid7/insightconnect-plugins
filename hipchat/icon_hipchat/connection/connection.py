@@ -6,7 +6,6 @@ from .schema import ConnectionSchema
 
 
 class Connection(komand.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
@@ -20,7 +19,7 @@ class Connection(komand.Connection):
         token = params.get("credentials").get("password", "")
 
         if token == "":
-            self.logger.info('Connect: Unauthenticated API will be used')
+            self.logger.info("Connect: Unauthenticated API will be used")
 
         self.server = server
         self.token = token

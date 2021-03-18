@@ -1,5 +1,6 @@
 import komand
 from .schema import ExtractInput, ExtractOutput
+
 # Custom imports below
 import os
 import base64
@@ -7,22 +8,22 @@ import binascii
 
 
 class Extract(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='extract',
-                description='Extract files from pcap',
-                input=ExtractInput(),
-                output=ExtractOutput())
+            name="extract",
+            description="Extract files from pcap",
+            input=ExtractInput(),
+            output=ExtractOutput(),
+        )
 
     def run(self, params={}):
-        _file = params.get('file').encode('UTF-8')
+        _file = params.get("file").encode("UTF-8")
 
         # Verify string is base64
         try:
             base64.decodebytes(_file)
         except binascii.Error:
-            self.logger.error('Error: Invalid Base64 string')
+            self.logger.error("Error: Invalid Base64 string")
             raise
 
         # Set file path to store file
@@ -70,11 +71,11 @@ class Extract(komand.Action):
         # Number of files extracted
         file_count = len(files)
 
-        return {"files": files, 'file_count': file_count}
+        return {"files": files, "file_count": file_count}
 
     def test(self):
         # Ensure tcpxtract exists
         binary = "/usr/sbin/tcpxtract"
         if not os.path.isfile(binary):
-            raise Exception('Tcpxtract not found')
+            raise Exception("Tcpxtract not found")
         return {}

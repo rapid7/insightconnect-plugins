@@ -6,13 +6,13 @@ from .schema import UpdateWatchedDomainsInput, UpdateWatchedDomainsOutput, Input
 
 
 class UpdateWatchedDomains(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='update_watched_domains',
+            name="update_watched_domains",
             description=Component.DESCRIPTION,
             input=UpdateWatchedDomainsInput(),
-            output=UpdateWatchedDomainsOutput())
+            output=UpdateWatchedDomainsOutput(),
+        )
 
     def run(self, params={}):
         response = self.connection.client.update_intelfeed(
@@ -23,15 +23,15 @@ class UpdateWatchedDomains(insightconnect_plugin_runtime.Action):
             self._get_default(
                 params,
                 Input.EXPIRATION_TIME,
-                (datetime.datetime.now() + datetime.timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S")
+                (datetime.datetime.now() + datetime.timedelta(days=30)).strftime("%Y-%m-%d %H:%M:%S"),
             ),
-            params.get(Input.HOSTNAME, False)
+            params.get(Input.HOSTNAME, False),
         )
 
         return {
             Output.SUCCESS: response.get("response") == "SUCCESS",
             Output.ADDED: response.get("added", 0),
-            Output.UPDATED: response.get("updated", 0)
+            Output.UPDATED: response.get("updated", 0),
         }
 
     @staticmethod

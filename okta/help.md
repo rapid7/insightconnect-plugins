@@ -27,6 +27,42 @@ The connection configuration accepts the following parameters:
 
 ### Actions
 
+#### Reset Password
+
+This action resets password for Okta user and transitions user status to PASSWORD_EXPIRED, so that the user is required to change their password at their next login.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|temp_password|boolean|False|False|If set to true, sets the user's password to a temporary password and returns it|None|True|
+|user_id|string|None|True|User ID whose password will be reset|None|00ub0oNGTSWTBKOLGLNR|
+
+Example input:
+
+```
+{
+  "temp_password": true,
+  "user_id": "00ub0oNGTSWTBKOLGLNR"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Whether the reset was successful|
+|temp_password|string|False|The temporary password of the Okta user, if true was set in Temporary Password input|
+
+Example output:
+
+```
+{
+  "success": true,
+  "temp_password": "Ur2BUQ2w"
+}
+```
+
 #### Update Blacklist Zones
 
 This action is used to block or unblock address or network by adding or removing from a blacklist network zone.
@@ -970,6 +1006,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 3.6.3 - Add Reset Password action
 * 3.5.3 - Correct spelling in help.md
 * 3.5.2 - Fix issue where Monitor User Groups trigger would be limited to 1000 users
 * 3.5.1 - Update to add additional logging to Monitor User Groups trigger

@@ -7,18 +7,17 @@ import ldap3
 
 
 class Query(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='query',
-            description='Run a LDAP query',
+            name="query",
+            description="Run a LDAP query",
             input=QueryInput(),
             output=QueryOutput())
 
     def run(self, params={}):
         formatter = ADUtils()
         conn = self.connection.conn
-        query = params.get('search_filter')
+        query = params.get(Input.SEARCH_FILTER)
 
         query = query.replace("\\>=", ">=")
         query = query.replace("\\<=", "<=")
@@ -35,7 +34,7 @@ class Query(komand.Action):
             attributes = [ldap3.ALL_ATTRIBUTES, ldap3.ALL_OPERATIONAL_ATTRIBUTES]
 
         conn.search(
-            search_base=params.get('search_base'),
+            search_base=params.get(Input.SEARCH_BASE),
             search_filter=escaped_query,
             attributes=attributes
         )

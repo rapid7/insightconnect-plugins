@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 
 from .schema import NewIssueInput, NewIssueOutput, Input, Output
+
 # Custom imports below
 import time
 from komand_jira.util.util import normalize_issue, look_up_project
@@ -8,17 +9,17 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class NewIssue(insightconnect_plugin_runtime.Trigger):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='new_issue',
-            description='Trigger which indicates that a new issue has been created',
+            name="new_issue",
+            description="Trigger which indicates that a new issue has been created",
             input=NewIssueInput(),
-            output=NewIssueOutput())
+            output=NewIssueOutput(),
+        )
 
         self.get_attachments = None
         self.project = None
-        self.jql = ''
+        self.jql = ""
         self.max = 10
         self.found = {}
 
@@ -33,12 +34,12 @@ class NewIssue(insightconnect_plugin_runtime.Trigger):
             if issue.id not in self.found:
                 output = normalize_issue(issue, get_attachments=self.get_attachments, logger=self.logger)
                 self.found[issue.id] = True
-                self.logger.debug('found: %s', output)
+                self.logger.debug("found: %s", output)
                 self.send({Output.ISSUE: output})
 
     def run(self, params={}):
         """Run the trigger"""
-        self.jql = params.get(Input.JQL) or ''
+        self.jql = params.get(Input.JQL) or ""
         self.get_attachments = params.get(Input.GET_ATTACHMENTS, False)
         self.project = params.get(Input.PROJECT)
 
@@ -46,15 +47,16 @@ class NewIssue(insightconnect_plugin_runtime.Trigger):
         if not valid_project:
             raise PluginException(
                 cause=f"Project {self.project} does not exist or the user does not have permission to access the project.",
-                assistance='Please provide a valid project ID/name or make sure the project is accessible to the user.')
+                assistance="Please provide a valid project ID/name or make sure the project is accessible to the user.",
+            )
 
         if self.project:
             if self.jql:
-                self.jql = 'project=' + self.project + ' and ' + self.jql
+                self.jql = "project=" + self.project + " and " + self.jql
             else:
-                self.jql = 'project=' + self.project
+                self.jql = "project=" + self.project
 
-        self.logger.info('Querying %s', self.jql)
+        self.logger.info("Querying %s", self.jql)
 
         self.initialize()
 

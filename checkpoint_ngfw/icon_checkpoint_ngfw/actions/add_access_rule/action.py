@@ -1,16 +1,17 @@
 import komand
 from .schema import AddAccessRuleInput, AddAccessRuleOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class AddAccessRule(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='add_access_rule',
-                description=Component.DESCRIPTION,
-                input=AddAccessRuleInput(),
-                output=AddAccessRuleOutput())
+            name="add_access_rule",
+            description=Component.DESCRIPTION,
+            input=AddAccessRuleInput(),
+            output=AddAccessRuleOutput(),
+        )
 
     def run(self, params={}):
         url = f"https://{self.connection.server_ip}:{self.connection.server_port}/web_api/add-access-rule"
@@ -23,10 +24,10 @@ class AddAccessRule(komand.Action):
             position = position_string
 
         payload = {
-          "layer": params.get(Input.LAYER),
-          "position": position,
-          "name": params.get(Input.NAME),
-          "action": params.get(Input.ACTION),
+            "layer": params.get(Input.LAYER),
+            "position": position,
+            "name": params.get(Input.NAME),
+            "action": params.get(Input.ACTION),
         }
 
         services = params.get(Input.LIST_OF_SERVICES, [])

@@ -7,13 +7,13 @@ from komand_box.connection.connection import Connection
 import logging
 
 
-class MockBoxResponse():
+class MockBoxResponse:
     def __init__(self):
         self.ok = True
         self.content = b'{"entries":[{"group":{"name": "bloop"}}, {"group":{"name": "blah"}}]}'
 
 
-class MockBoxConnection():
+class MockBoxConnection:
     def __init__(self):
         pass
 
@@ -26,7 +26,7 @@ class MockBoxConnection():
             return response
 
 
-class MockConnection():
+class MockConnection:
     def __init__(self):
         self.box_connection = MockBoxConnection()
 
@@ -47,8 +47,8 @@ class TestGetUserGroups(TestCase):
         actual = actual_output.get("groups")
 
         self.assertEqual(2, len(actual))
-        self.assertEqual('bloop', actual[0].get('name'))
-        self.assertEqual('blah', actual[1].get('name'))
+        self.assertEqual("bloop", actual[0].get("name"))
+        self.assertEqual("blah", actual[1].get("name"))
 
     def test_get_user_groups_not_found(self):
         log = logging.getLogger("Test Logger")
@@ -83,7 +83,3 @@ class TestGetUserGroups(TestCase):
         #
         # #  Set breakpoint here
         # self.assertEqual(actual, "")
-
-
-
-

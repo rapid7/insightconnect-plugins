@@ -1,16 +1,17 @@
 import insightconnect_plugin_runtime
 from .schema import GetInstalledSoftwareInput, GetInstalledSoftwareOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class GetInstalledSoftware(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_installed_software',
-                description=Component.DESCRIPTION,
-                input=GetInstalledSoftwareInput(),
-                output=GetInstalledSoftwareOutput())
+            name="get_installed_software",
+            description=Component.DESCRIPTION,
+            input=GetInstalledSoftwareInput(),
+            output=GetInstalledSoftwareOutput(),
+        )
 
     def run(self, params={}):
         self.logger.info("Running...")

@@ -7,13 +7,13 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class TransitionIssue(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='transition_issue',
+            name="transition_issue",
             description=Component.DESCRIPTION,
             input=TransitionIssueInput(),
-            output=TransitionIssueOutput())
+            output=TransitionIssueOutput(),
+        )
 
     def run(self, params={}):
         """Transition Issue"""
@@ -21,19 +21,21 @@ class TransitionIssue(insightconnect_plugin_runtime.Action):
         issue = self.connection.client.issue(id=params[Input.ID])
 
         if not issue:
-            raise PluginException(cause=f"No issue found with ID: {params[Input.ID]}.",
-                                  assistance='Please provide a valid issue ID.')
+            raise PluginException(
+                cause=f"No issue found with ID: {params[Input.ID]}.",
+                assistance="Please provide a valid issue ID.",
+            )
 
         try:
             result = self.connection.client.transition_issue(
                 issue=issue,
                 transition=params[Input.TRANSITION],
                 comment=params.get(Input.COMMENT),
-                fields=params.get(Input.FIELDS)
+                fields=params.get(Input.FIELDS),
             )
         except JIRAError as e:
             raise PluginException(cause=e.text if e.text else "Invalid input.", data=e)
 
-        self.logger.info('Result: %s', result)
+        self.logger.info("Result: %s", result)
 
         return {Output.SUCCESS: True}

@@ -8,14 +8,11 @@ class TestStoreAction(TestCase):
     def test_store(self):
         store = Store()
         retrieve = Retrieve()
-        params = {
-            "variable_name": "foobar",
-            "variable_value": "barfoo"
-        }
+        params = {"variable_name": "foobar", "variable_value": "barfoo"}
         store.run(params)
         actual = retrieve.run(params)
 
-        expected = {'value': 'barfoo'}
+        expected = {"value": "barfoo"}
         self.assertEqual(expected, actual)
 
         cache_help = CacheHelp()

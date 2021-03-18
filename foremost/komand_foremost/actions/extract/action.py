@@ -1,6 +1,7 @@
 import komand
 from .schema import ExtractInput, ExtractOutput, Input, Output, Component
 from komand.exceptions import PluginException
+
 # Custom imports below
 import os
 import base64
@@ -9,23 +10,23 @@ import tempfile
 
 
 class Extract(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='extract',
+            name="extract",
             description=Component.DESCRIPTION,
             input=ExtractInput(),
-            output=ExtractOutput())
+            output=ExtractOutput(),
+        )
 
     def run(self, params={}):
-        _file = params.get(Input.FILE).encode('UTF-8')
+        _file = params.get(Input.FILE).encode("UTF-8")
 
         # Verify string is base64
         try:
             base64.decodebytes(_file)
         except binascii.Error as e:
-            self.logger.error('Error: Invalid Base64 string')
-            raise PluginException(cause='Error: Invalid Base64 string', data=e)
+            self.logger.error("Error: Invalid Base64 string")
+            raise PluginException(cause="Error: Invalid Base64 string", data=e)
 
         # Set file path to store file
         tmp_dir = tempfile.gettempdir()
@@ -47,9 +48,11 @@ class Extract(komand.Action):
             komand.helper.exec_command(cmd)
         except Exception as e:
             self.logger.error("Foremost: Unable to process image")
-            raise PluginException(cause='Error: Bad image file',
-                                  assistance="Foremost: Unable to process image",
-                                  data=e)
+            raise PluginException(
+                cause="Error: Bad image file",
+                assistance="Foremost: Unable to process image",
+                data=e,
+            )
 
         # Initialize list to store b64 encoded files
         files = []

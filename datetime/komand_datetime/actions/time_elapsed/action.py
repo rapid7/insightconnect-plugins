@@ -4,13 +4,13 @@ import maya
 
 
 class TimeElapsed(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='time_elapsed',
-                description='Determine the elapsed time between two dates',
-                input=TimeElapsedInput(),
-                output=TimeElapsedOutput())
+            name="time_elapsed",
+            description="Determine the elapsed time between two dates",
+            input=TimeElapsedInput(),
+            output=TimeElapsedOutput(),
+        )
 
     def run(self, params={}):
         time1 = maya.MayaDT.from_rfc3339(params.get(Input.FIRST_TIME))

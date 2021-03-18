@@ -1,6 +1,7 @@
 import komand
 import time
 from .schema import UserInput, UserOutput
+
 # Custom imports below
 from komand_twitter.util import util
 
@@ -19,10 +20,11 @@ class User(komand.Trigger):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='user',
-            description='Monitor for tweets from a given screen name',
+            name="user",
+            description="Monitor for tweets from a given screen name",
             input=UserInput(),
-            output=UserOutput())
+            output=UserOutput(),
+        )
 
     def run(self, params={}):
         if not self.connection.client:
@@ -59,17 +61,19 @@ class User(komand.Trigger):
 
             time.sleep(self.interval)
 
-    '''Fetches new tweets from Twitter based on the pattern supplied and then sets the sleep time appropriately.'''
+    """Fetches new tweets from Twitter based on the pattern supplied and then sets the sleep time appropriately."""
+
     def get_timeline(self):
-        tweets = self.connection.client.GetUserTimeline(screen_name=self.screen_name,
-                                                        since_id=self.cached_id,
-                                                        count=self.MAX_TWEET_COUNT)
+        tweets = self.connection.client.GetUserTimeline(
+            screen_name=self.screen_name, since_id=self.cached_id, count=self.MAX_TWEET_COUNT
+        )
         tweet_count = len(tweets)
         self.logger.info("Get Tweets: Got {count} tweets.".format(count=tweet_count))
 
         return tweets
 
-    '''Takes a list of tweets and sends triggers for them. Writes the first ID (latest) to cache file.'''
+    """Takes a list of tweets and sends triggers for them. Writes the first ID (latest) to cache file."""
+
     def trigger_on_tweets(self, tweets):
         for index, tweet in enumerate(tweets):
             if index == 0:
@@ -81,14 +85,15 @@ class User(komand.Trigger):
             payload = self.create_trigger_payload(tweet)
             self.send(payload)
 
-    '''Creates a a payload to send from a tweet.'''
+    """Creates a a payload to send from a tweet."""
+
     def create_trigger_payload(self, tweet):
-        msg = tweet.text.encode('ascii', 'ignore')
-        user = tweet.user.screen_name.encode('ascii', 'ignore')
-        url = "{base_url}/{screen_name}/status/{post_id}".format(base_url=self.connection.TWITTER_URL,
-                                                                 screen_name=user,
-                                                                 post_id=tweet.id)
-        payload = {'msg': msg, 'url': url, 'user': user}
+        msg = tweet.text.encode("ascii", "ignore")
+        user = tweet.user.screen_name.encode("ascii", "ignore")
+        url = "{base_url}/{screen_name}/status/{post_id}".format(
+            base_url=self.connection.TWITTER_URL, screen_name=user, post_id=tweet.id
+        )
+        payload = {"msg": msg, "url": url, "user": user}
         self.logger.info("Create Trigger Payload: Created {payload}".format(payload=payload))
         return payload
 

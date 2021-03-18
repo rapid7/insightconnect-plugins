@@ -22,13 +22,11 @@ class TestForceUserToChangePassword(TestCase):
             data = json.load(file)
             connection_params = data.get("body").get("connection")
 
-        action_params = {
-            "user_id": "user@example.com"
-        }
+        action_params = {"user_id": "user@example.com"}
 
         test_connection.connect(connection_params)
         test_force_user.connection = test_connection
 
         result = test_force_user.run(action_params)
-        expected = {'success': True}
+        expected = {"success": True}
         self.assertEqual(result, expected)

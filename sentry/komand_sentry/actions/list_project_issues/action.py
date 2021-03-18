@@ -1,36 +1,35 @@
 import komand
 from .schema import ListProjectIssuesInput, ListProjectIssuesOutput
+
 # Custom imports below
 import json
 
 
 class ListProjectIssues(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='list_project_issues',
-                description='List all issues of a Sentry project',
-                input=ListProjectIssuesInput(),
-                output=ListProjectIssuesOutput())
-
-    def run(self, params={}):
-        organization_slug = params['organization_slug']
-        project_slug = params['project_slug']
-
-        query_params = {
-            key: params.get(key, None) for key in
-            ('statsPeriod', 'shortIdLookup', 'query')
-        }
-
-        url = 'projects/{}/{}/issues/'.format(organization_slug, project_slug)
-        issues = self.connection.sentry_connection.request(
-            'GET', url, query_params=query_params, pagination_enabled=True
+            name="list_project_issues",
+            description="List all issues of a Sentry project",
+            input=ListProjectIssuesInput(),
+            output=ListProjectIssuesOutput(),
         )
 
-        return {'issues': issues}
+    def run(self, params={}):
+        organization_slug = params["organization_slug"]
+        project_slug = params["project_slug"]
+
+        query_params = {key: params.get(key, None) for key in ("statsPeriod", "shortIdLookup", "query")}
+
+        url = "projects/{}/{}/issues/".format(organization_slug, project_slug)
+        issues = self.connection.sentry_connection.request(
+            "GET", url, query_params=query_params, pagination_enabled=True
+        )
+
+        return {"issues": issues}
 
     def test(self):
-        return json.loads("""
+        return json.loads(
+            """
         {
           "issues": [
             {
@@ -154,4 +153,5 @@ class ListProjectIssues(komand.Action):
             }
           ]
         }
-        """)
+        """
+        )

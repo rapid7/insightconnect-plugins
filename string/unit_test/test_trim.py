@@ -6,9 +6,7 @@ class TestTrim(TestCase):
     def test_trim(self):
         trim = Trim()
 
-        params = {
-            "string": " This is a string "
-        }
+        params = {"string": " This is a string "}
 
         result = trim.run(params)
         actual = result.get("trimmed")

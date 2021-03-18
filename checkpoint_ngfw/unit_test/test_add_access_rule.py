@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
 from icon_checkpoint_ngfw.connection.connection import Connection
@@ -41,25 +42,25 @@ def mocked_requests_post(*args, **kwargs):
     add_rule_payload = read_file_to_string(actual_joined_path_add_rule)
     show_sessions = read_file_to_string(actual_joined_path_show_sessions)
 
-    if args[0] == 'https://1.1.1.1:666/web_api/login':
+    if args[0] == "https://1.1.1.1:666/web_api/login":
         return MockResponse(login_payload, 200)
-    if args[0] == 'https://1.1.1.1:666/web_api/add-access-rule':
+    if args[0] == "https://1.1.1.1:666/web_api/add-access-rule":
         return MockResponse(add_rule_payload, 200)
-    if args[0] == 'https://1.1.1.1:666/web_api/publish':
+    if args[0] == "https://1.1.1.1:666/web_api/publish":
         return MockResponse("{}", 200)
-    if args[0] == 'https://1.1.1.2:666/web_api/login':
+    if args[0] == "https://1.1.1.2:666/web_api/login":
         return MockResponse(login_payload, 200)
-    if args[0] == 'https://1.1.1.2:666/web_api/add-access-rule':
+    if args[0] == "https://1.1.1.2:666/web_api/add-access-rule":
         payload = {
-          "code": "generic_error",
-          "message": "Runtime error: An object is locked by another session."
+            "code": "generic_error",
+            "message": "Runtime error: An object is locked by another session.",
         }
         return MockResponse(payload, 400)
-    if args[0] == 'https://1.1.1.2:666/web_api/show-sessions':
+    if args[0] == "https://1.1.1.2:666/web_api/show-sessions":
         return MockResponse(show_sessions, 200)
-    if args[0] == 'https://1.1.1.2:666/web_api/publish':
+    if args[0] == "https://1.1.1.2:666/web_api/publish":
         return MockResponse("{}", 200)
-    if args[0] == 'https://1.1.1.2:666/web_api/discard':
+    if args[0] == "https://1.1.1.2:666/web_api/discard":
         return MockResponse("{}", 200)
 
     print(f"mocked_requests_get failed looking for: {args[0]}")
@@ -110,10 +111,7 @@ class TestAddAccessRule(TestCase):
             "port": 666,
             "server": "1.1.1.1",
             "ssl_verify": False,
-            "username_password": {
-                "password": "password",
-                "username": "admin"
-            }
+            "username_password": {"password": "password", "username": "admin"},
         }
 
         action_params = {
@@ -122,14 +120,24 @@ class TestAddAccessRule(TestCase):
             "list_of_services": ["AOL"],
             "name": "Test from Komand",
             "position": "top",
-            "discard_other_sessions": False
+            "discard_other_sessions": False,
         }
 
         test_connection.connect(connection_params)
         test_action.connection = test_connection
         result = test_action.run(action_params)
 
-        expected = {'access_rule': {'uid': 'fakeUID', 'sid': 'fakeSID', 'url': 'https://1.1.1.1:666/web_api', 'session-timeout': 600, 'last-login-was-at': {'posix': 10000, 'iso-8601': '2020-02-28T10:49-0500'}, 'disk-space-message': "Partition /opt has: 716 MB of free space and it's lower than required: 2000 MB\n", 'api-server-version': '1.1'}}
+        expected = {
+            "access_rule": {
+                "uid": "fakeUID",
+                "sid": "fakeSID",
+                "url": "https://1.1.1.1:666/web_api",
+                "session-timeout": 600,
+                "last-login-was-at": {"posix": 10000, "iso-8601": "2020-02-28T10:49-0500"},
+                "disk-space-message": "Partition /opt has: 716 MB of free space and it's lower than required: 2000 MB\n",
+                "api-server-version": "1.1",
+            }
+        }
 
         self.assertEqual(expected, result)
 
@@ -146,10 +154,7 @@ class TestAddAccessRule(TestCase):
             "port": 666,
             "server": "1.1.1.2",
             "ssl_verify": True,
-            "username_password": {
-                "password": "password",
-                "username": "admin"
-            }
+            "username_password": {"password": "password", "username": "admin"},
         }
 
         action_params = {
@@ -158,7 +163,7 @@ class TestAddAccessRule(TestCase):
             "list_of_services": ["AOL"],
             "name": "Test from Komand",
             "position": "top",
-            "discard_other_sessions": True
+            "discard_other_sessions": True,
         }
 
         test_connection.connect(connection_params)
@@ -168,7 +173,9 @@ class TestAddAccessRule(TestCase):
 
         # This asserts that we've called the mock with these arguments
         # specifically, I want to make sure we're calling the discard endpoint
-        mockPost.assert_any_call('https://1.1.1.2:666/web_api/discard', headers={'Content-Type': 'application/json', 'X-chkp-sid': 'fakeSID'}, json={'uid': '0892b540-5fff-4f6f-90d4-b94b15a14f09'}, verify=True)
-
-
-
+        mockPost.assert_any_call(
+            "https://1.1.1.2:666/web_api/discard",
+            headers={"Content-Type": "application/json", "X-chkp-sid": "fakeSID"},
+            json={"uid": "0892b540-5fff-4f6f-90d4-b94b15a14f09"},
+            verify=True,
+        )

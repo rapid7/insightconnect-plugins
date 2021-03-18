@@ -1,11 +1,11 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 from icon_cylance_protect.util.api import CylanceProtectAPI
+
 # Custom imports below
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.client = None
@@ -17,7 +17,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             params.get(Input.URL),
             params.get(Input.TENANT_ID).get("secretKey"),
             params.get(Input.APPLICATION_ID).get("secretKey"),
-            params.get(Input.APPLICATION_SECRET).get("secretKey")
+            params.get(Input.APPLICATION_SECRET).get("secretKey"),
         )
 
     def test(self):

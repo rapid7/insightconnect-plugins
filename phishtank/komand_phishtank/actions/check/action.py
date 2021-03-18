@@ -1,22 +1,23 @@
 import komand
 from .schema import CheckInput, CheckOutput
+
 # Custom imports below
 import requests
 
 
 class Check(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='check',
-                description='Submit URL to Phishtank',
-                input=CheckInput(),
-                output=CheckOutput())
+            name="check",
+            description="Submit URL to Phishtank",
+            input=CheckInput(),
+            output=CheckOutput(),
+        )
 
     def run(self, params={}):
-        url = params.get('url')
+        url = params.get("url")
         if not url:
-            raise ValueError('url is required')
+            raise ValueError("url is required")
 
         url = url.strip()
         if not url.startswith("http://") and not url.startswith("https://"):
@@ -28,14 +29,14 @@ class Check(komand.Action):
         except Exception as e:
             self.logger.exception(e)
             return {
-                'url': url,
-                'in_database': False,
-                'verified': False,
-                }
+                "url": url,
+                "in_database": False,
+                "verified": False,
+            }
 
-        if 'verified_at' in result:
-            if result['verified_at'] is None:
-                result['verified_at'] = str(result['verified_at'])
+        if "verified_at" in result:
+            if result["verified_at"] is None:
+                result["verified_at"] = str(result["verified_at"])
 
         return result
 
@@ -47,9 +48,9 @@ class Check(komand.Action):
         except Exception as e:
             self.logger.exception(e)
             return {
-                'url': url,
-                'in_database': False,
-                'verified': False,
-                }
+                "url": url,
+                "in_database": False,
+                "verified": False,
+            }
 
         return result

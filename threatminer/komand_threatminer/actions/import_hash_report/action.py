@@ -7,14 +7,15 @@ import requests
 
 
 class ImportHashReport(komand.Action):
-    API_URL = 'https://www.threatminer.org/imphash.php?api=True&rt=2'
+    API_URL = "https://www.threatminer.org/imphash.php?api=True&rt=2"
 
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='import_hash_report',
-            description='Fetches information related to a hash',
+            name="import_hash_report",
+            description="Fetches information related to a hash",
             input=ImportHashReportInput(),
-            output=ImportHashReportOutput())
+            output=ImportHashReportOutput(),
+        )
 
     def run(self, params={}):
         query = params.get(Input.QUERY)
@@ -29,4 +30,3 @@ class ImportHashReport(komand.Action):
         normalized_data = utils.normalize_data(data)
 
         return {Output.RESPONSE: normalized_data}
-

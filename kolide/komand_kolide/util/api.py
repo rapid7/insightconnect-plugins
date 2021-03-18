@@ -4,7 +4,6 @@ from json import JSONDecodeError
 
 
 class Kolide:
-
     def __init__(self, base_url, logger, api_token, verify):
         self._base_url = base_url
         self.logger = logger
@@ -16,7 +15,16 @@ class Kolide:
     def _set_header(self, api_token):
         self.session.headers.update({"Authorization": f"Bearer {api_token}"})
 
-    def _call_api(self, method, endpoint, params=None, data=None, json=None, action_name=None, custom_error=None):
+    def _call_api(
+        self,
+        method,
+        endpoint,
+        params=None,
+        data=None,
+        json=None,
+        action_name=None,
+        custom_error=None,
+    ):
 
         url = self._base_url + endpoint
 
@@ -26,7 +34,7 @@ class Kolide:
             params=params,
             data=data,
             json=json,
-            headers=self.session.headers
+            headers=self.session.headers,
         )
         # Build request
 
@@ -45,17 +53,18 @@ class Kolide:
                 raise Exception(
                     f"An error was received when running {action_name}."
                     f"Request status code of {resp.status_code} was returned."
-                    "Please make sure connections have been configured correctly")
+                    "Please make sure connections have been configured correctly"
+                )
             elif resp.status_code != 200:
                 raise Exception(
                     f"An error was received when running {action_name}."
                     f" Request status code of {resp.status_code} was returned."
                     " Please make sure connections have been configured correctly "
-                    f"as well as the correct input for the action. Response was: {resp.text}")
+                    f"as well as the correct input for the action. Response was: {resp.text}"
+                )
 
         except Exception as e:
-            self.logger.error(f"An error had occurred : {e}"
-                              "If the issue persists please contact support")
+            self.logger.error(f"An error had occurred : {e}" "If the issue persists please contact support")
             raise
 
         try:
@@ -64,7 +73,8 @@ class Kolide:
         except JSONDecodeError:
             raise Exception(
                 f"Error: Received an unexpected response from {action_name}"
-                f"(non-JSON or no response was received). Response was: {resp.text}")
+                f"(non-JSON or no response was received). Response was: {resp.text}"
+            )
 
     def get_me(self):
         return self._call_api("GET", "/v1/kolide/me", action_name="Connection Test")

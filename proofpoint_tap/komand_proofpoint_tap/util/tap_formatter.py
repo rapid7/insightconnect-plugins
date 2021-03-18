@@ -3,7 +3,6 @@ import re
 
 
 class TAP:
-
     def __init__(self, data):
         self.data = self.clean_data(data)
 
@@ -15,7 +14,7 @@ class TAP:
                 "category": "",
                 "condemnation_time": "",
                 "url": "",
-                "threat_details_url": ""
+                "threat_details_url": "",
             },
             "message": {
                 "time_delivered": "",
@@ -28,14 +27,9 @@ class TAP:
                 "sender_ip": "",
                 "message_size": "",
                 "message_guid": "",
-                "threat_id": ""
+                "threat_id": "",
             },
-            "browser": {
-                "time": "",
-                "source_ip": "",
-                "user_agent": ""
-            }
-
+            "browser": {"time": "", "source_ip": "", "user_agent": ""},
         }
 
         def normalize_key(key):
@@ -51,7 +45,7 @@ class TAP:
 
         def walk_clean(collection):
             """Loops collection and walks clean to see if the key exists"""
-            regex = '''(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])'''
+            regex = """(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])"""
             for item in collection:
                 key = normalize_key(item)
                 # Walk dict and set value
@@ -68,7 +62,7 @@ class TAP:
                                             value = parseaddr(value)[1]
                                             clean_data["message"]["header_replyto"] = value
                                         if key == "header_from":
-                                            value = value.replace('=', '').replace('[.]', '.')
+                                            value = value.replace("=", "").replace("[.]", ".")
                                             value = re.findall(regex, value)[0]
                                             clean_data["message"]["header_from"] = value
                                     elif len(clean_data[k][kk]) == 0:

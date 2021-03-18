@@ -3,6 +3,7 @@ import pyodbc as pyodbc
 import komand
 from .schema import QueryInput, QueryOutput, Input, Output, Component
 from komand.exceptions import PluginException
+
 # Custom imports below
 from icon_microsoft_sql.util import db_exception
 from pyodbc import Error
@@ -11,13 +12,13 @@ import uuid
 
 
 class Query(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='query',
-                description=Component.DESCRIPTION,
-                input=QueryInput(),
-                output=QueryOutput())
+            name="query",
+            description=Component.DESCRIPTION,
+            input=QueryInput(),
+            output=QueryOutput(),
+        )
 
     def run(self, params={}):
         query = params.get(Input.QUERY)
@@ -54,9 +55,10 @@ class Query(komand.Action):
                 header_list.append(name[0])
             else:
                 raise PluginException(
-                    cause='One or more columns in the selected table was not correctly configured.',
-                    assistance='Please check that the table has been constructed properly.',
-                    data=headers)
+                    cause="One or more columns in the selected table was not correctly configured.",
+                    assistance="Please check that the table has been constructed properly.",
+                    data=headers,
+                )
 
         row_list = []
         for row in rows:

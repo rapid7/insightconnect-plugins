@@ -26,7 +26,7 @@ class Connection(komand.Connection):
             api_key=params.get(Input.API_KEY).get("secretKey"),
             base_url=self.base_url,
             logger=self.logger,
-            ssl_verify=ssl_verify
+            ssl_verify=ssl_verify,
         )
 
     def test(self):
@@ -34,7 +34,6 @@ class Connection(komand.Connection):
             self.api.test_api()
         except PluginException:
             raise ConnectionTestException(
-                cause="Connection Test Failed.",
-                assistance="Please check that your API key is correct."
+                cause="Connection Test Failed.", assistance="Please check that your API key is correct."
             )
         return {}

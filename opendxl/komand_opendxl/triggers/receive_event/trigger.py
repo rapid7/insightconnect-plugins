@@ -1,5 +1,6 @@
 import komand
 from .schema import ReceiveEventInput, ReceiveEventOutput
+
 # Custom imports below
 from dxlclient.callbacks import EventCallback
 from dxlclient.client import DxlClient
@@ -12,28 +13,28 @@ class ReceiveEvent(komand.Trigger):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='receive_event',
-                description='Trigger on receiving a new event from a specified topic',
-                input=ReceiveEventInput(),
-                output=ReceiveEventOutput())
+            name="receive_event",
+            description="Trigger on receiving a new event from a specified topic",
+            input=ReceiveEventInput(),
+            output=ReceiveEventOutput(),
+        )
 
     def run(self, params={}):
-        topic = params.get('topic')
-        number_of_messages = params.get('number_of_messages')
+        topic = params.get("topic")
+        number_of_messages = params.get("number_of_messages")
         if number_of_messages < 1:
-            raise Exception('Number of messages must be 1 or more')
+            raise Exception("Number of messages must be 1 or more")
 
         def _send(message_string):
             try:
                 self.message_list.append(message_string)
                 if len(self.message_list) >= number_of_messages:
-                    self.send({'messages': self.message_list})
+                    self.send({"messages": self.message_list})
                     self.message_list = []
             except Exception as e:
-                self.logger.error('Message string: {}'.format(message_string))
-                self.logger.error('Message list: {}'.format(self.message_list))
-                raise Exception(
-                    'An unknown error occurred. Dumping buffer to log. Error: {}'.format(e))
+                self.logger.error("Message string: {}".format(message_string))
+                self.logger.error("Message list: {}".format(self.message_list))
+                raise Exception("An unknown error occurred. Dumping buffer to log. Error: {}".format(e))
 
         event_count_condition = Condition()
         # Create the DXL client
@@ -42,7 +43,6 @@ class ReceiveEvent(komand.Trigger):
             dxl_client.connect()
 
             class _TriggerEventCallback(EventCallback):
-
                 def on_event(self, event):
                     with event_count_condition:
                         _send(event.payload.decode())
@@ -56,4 +56,4 @@ class ReceiveEvent(komand.Trigger):
     def test(self):
         t = self.connection.test()
         if t:
-            return {'success': True}
+            return {"success": True}

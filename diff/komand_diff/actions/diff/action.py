@@ -5,25 +5,23 @@ from .schema import DiffInput, DiffOutput
 
 
 def md5sum(input):
-    return hashlib.md5(input.encode('utf-8')).hexdigest()
+    return hashlib.md5(input.encode("utf-8")).hexdigest()
 
 
 class Diff(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='diff',
-                description='Diff strings',
-                input=DiffInput(),
-                output=DiffOutput())
+            name="diff", description="Diff strings", input=DiffInput(), output=DiffOutput()
+        )
 
     def run(self, params={}):
         """Run action"""
 
-        filename = md5sum(params['label'])
-        compare = params['compare']
+        filename = md5sum(params["label"])
+        compare = params["compare"]
         first_run = False
         different = False
-        diff = ''
+        diff = ""
 
         if not komand.helper.check_cachefile(filename):
             first_run = True
@@ -36,14 +34,14 @@ class Diff(komand.Action):
                 self.logger.debug("comparing %s %s", before, compare)
                 if compare != before:
                     different = True
-                    diff = ''.join(difflib.unified_diff(before, compare, 'before', 'after'))
+                    diff = "".join(difflib.unified_diff(before, compare, "before", "after"))
 
             cache_file.seek(0)
-            cache_file.write(compare) 
+            cache_file.write(compare)
             cache_file.truncate()
-                
-        return { 'different': different, 'diff': diff }
+
+        return {"different": different, "diff": diff}
 
     def test(self):
         """Test action"""
-        return { 'different': False, 'diff': ''}
+        return {"different": False, "diff": ""}

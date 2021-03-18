@@ -1,17 +1,18 @@
 import komand
 from .schema import SpreadListToSheetInput, SpreadListToSheetOutput, Input, Output
+
 # Custom imports below
 import gspread
 
 
 class SpreadListToSheet(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='spread_list_to_sheet',
-            description='Given a starting cell, this action will take a list of data and push it to either rows or columns in a Google Sheet',
+            name="spread_list_to_sheet",
+            description="Given a starting cell, this action will take a list of data and push it to either rows or columns in a Google Sheet",
             input=SpreadListToSheetInput(),
-            output=SpreadListToSheetOutput())
+            output=SpreadListToSheetOutput(),
+        )
 
     def run(self, params={}):
         sheet = params.get(Input.SHEET_ID)
@@ -39,7 +40,7 @@ class SpreadListToSheet(komand.Action):
             active_sheet = self.connection.google_client.open_by_key(sheet)
         except gspread.exceptions.APIError as e:
             self.logger.error(e)
-            raise Exception(e['error']['message'])
+            raise Exception(e["error"]["message"])
         self.logger.info("Getting sheet " + worksheet + " from active sheet " + sheet)
         try:
             active_work_sheet = active_sheet.worksheet(worksheet)

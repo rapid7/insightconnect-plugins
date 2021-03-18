@@ -1,19 +1,23 @@
 import komand
 from .schema import AddMemberToChannelInput, AddMemberToChannelOutput, Input, Output, Component
+
 # Custom imports below
 from icon_microsoft_teams.util.teams_utils import get_channels_from_microsoft
-from icon_microsoft_teams.util.azure_ad_utils import get_user_info, get_group_id_from_name, add_user_to_channel
+from icon_microsoft_teams.util.azure_ad_utils import (
+    get_user_info,
+    get_group_id_from_name,
+    add_user_to_channel,
+)
 from komand.exceptions import PluginException
 
 
 class AddMemberToChannel(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='add_member_to_channel',
+            name="add_member_to_channel",
             description=Component.DESCRIPTION,
             input=AddMemberToChannelInput(),
-            output=AddMemberToChannelOutput()
+            output=AddMemberToChannelOutput(),
         )
 
     def run(self, params={}):
@@ -26,25 +30,17 @@ class AddMemberToChannel(komand.Action):
             if not channel_id:
                 raise PluginException(
                     cause="The specified channel does not exist.",
-                    assistance="Please check that channel name is correct."
+                    assistance="Please check that channel name is correct.",
                 )
             if not user_id:
                 raise PluginException(
                     cause="The specified user does not exist.",
-                    assistance="Please check that member login is correct."
+                    assistance="Please check that member login is correct.",
                 )
         except IndexError as e:
             raise PluginException(
                 cause="The specified channel does not exist.",
                 assistance="If the issue persists please contact support.",
-                data=e
+                data=e,
             )
-        return {
-            Output.SUCCESS: add_user_to_channel(
-                self.logger,
-                self.connection,
-                group_id,
-                channel_id,
-                user_id
-            )
-        }
+        return {Output.SUCCESS: add_user_to_channel(self.logger, self.connection, group_id, channel_id, user_id)}

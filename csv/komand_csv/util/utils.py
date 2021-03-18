@@ -13,10 +13,10 @@ def csv_syntax_good(csv_string):
 
 
 def fields_syntax_good(fields):
-    re_single = r'\s*f[0-9]+\s*'
-    re_range = r'' + re_single + '(-' + re_single + ')?'
-    re_multi = r'' + re_range + '(,' + re_range + ')*'
-    pattern = re.compile('^' + re_multi + '$')
+    re_single = r"\s*f[0-9]+\s*"
+    re_range = r"" + re_single + "(-" + re_single + ")?"
+    re_multi = r"" + re_range + "(," + re_range + ")*"
+    pattern = re.compile("^" + re_multi + "$")
     if pattern.match(fields):
         return True
     return False
@@ -30,7 +30,7 @@ def fields_syntax_good(fields):
 # @return integer representation of fiele
 ##
 def field_to_number(field):
-    if field.startswith('f'):
+    if field.startswith("f"):
         field = field[1:]
     return int(field)
 
@@ -42,14 +42,14 @@ def field_to_number(field):
 # @return List containing integers to reference position of each field
 ##
 def get_field_list(fields, num_fields):
-    field_split = fields.split(',')
+    field_split = fields.split(",")
     field_list = []
     safe_range = range(1, num_fields + 1)
 
     for f in field_split:
         f = f.strip()
-        if '-' in f:
-            start, end = f.split('-')
+        if "-" in f:
+            start, end = f.split("-")
             start = field_to_number(start.strip())
             end = field_to_number(end.strip())
             if start < 1 or start not in safe_range or end not in safe_range:
@@ -71,11 +71,11 @@ def get_field_list(fields, num_fields):
 # @return Two-dimensional list consisting of items on each line of CSV string
 ##
 def parse_csv_string(csv_string):
-    csv_list = csv_string.split('\n')
+    csv_list = csv_string.split("\n")
     parsed = []
     for line in csv_list:
-        if line != '':
-            parsed.append(line.split(','))
+        if line != "":
+            parsed.append(line.split(","))
     return parsed
 
 
@@ -86,8 +86,8 @@ def parse_csv_string(csv_string):
 # @return The string of the CSV
 ##
 def convert_csv_array(csv_array):
-    item_delim = ','
-    line_delim = '\n'
+    item_delim = ","
+    line_delim = "\n"
     lines = []
 
     for line in csv_array:
@@ -120,13 +120,13 @@ def csv_to_dict(s, action):
     ret_list = []
 
     # Create array of CSV rows
-    csv_list = s.split('\n')
+    csv_list = s.split("\n")
 
     # Create list from CSV header (first line)
     try:
         if len(csv_list) > 0:
             header = [csv_list[0]]
-            action.logger.info('Header: %s, Length: %s', header, len(header))
+            action.logger.info("Header: %s, Length: %s", header, len(header))
     except Exception as e:
         action.logger.error("Element 0 doesn't exist in array")
         action.logger.error("Exception: " + str(e))
@@ -136,7 +136,7 @@ def csv_to_dict(s, action):
     try:
         if len(csv_list) > 0:
             first_row = [csv_list[1]]
-            action.logger.info('Sample Data: %s, Length: %s', first_row, len(first_row))
+            action.logger.info("Sample Data: %s, Length: %s", first_row, len(first_row))
     except Exception as e:
         action.logger.error("Element 1 doesn't exist in array")
         action.logger.error("Exception: " + str(e))

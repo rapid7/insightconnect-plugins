@@ -1,5 +1,6 @@
 import komand
 from .schema import PostInput, PostOutput
+
 # Custom imports below
 import json
 import urllib
@@ -11,20 +12,18 @@ import requests
 
 
 class Post(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name="post",
-                description="Post to pastebin",
-                input=PostInput(),
-                output=PostOutput())
+            name="post", description="Post to pastebin", input=PostInput(), output=PostOutput()
+        )
 
     def run(self, params={}):
         r = requests.session()
-        req_params = {"api_dev_key": self.connection.dev_key,
-                      "api_option": "paste",
-                      "api_paste_code": params.get("text")
-                      }
+        req_params = {
+            "api_dev_key": self.connection.dev_key,
+            "api_option": "paste",
+            "api_paste_code": params.get("text"),
+        }
         paste_private = params.get("paste_private", None)
         paste_expire_date = params.get("paste_expire_date", None)
         paste_name = params.get("paste_name", None)
@@ -48,7 +47,7 @@ class Post(komand.Action):
         return_dict = dict()
         return_dict["url"] = request.content.decode()
         timestamp = datetime.datetime.utcnow()
-        return_dict["timestamp"] = timestamp.isoformat("T") + "Z" # Time given in UTC
+        return_dict["timestamp"] = timestamp.isoformat("T") + "Z"  # Time given in UTC
         return return_dict
 
     def test(self):

@@ -3,13 +3,13 @@ from .schema import DeleteVirtualServiceInput, DeleteVirtualServiceOutput
 
 
 class DeleteVirtualService(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='delete_virtual_service',
-                description='Delete virtual service with service ID',
-                input=DeleteVirtualServiceInput(),
-                output=DeleteVirtualServiceOutput())
+            name="delete_virtual_service",
+            description="Delete virtual service with service ID",
+            input=DeleteVirtualServiceInput(),
+            output=DeleteVirtualServiceOutput(),
+        )
 
     def run(self, params={}):
         action = "virtual_services/"

@@ -1,5 +1,6 @@
 import komand
 from .schema import CreateBlockedSenderPolicyInput, CreateBlockedSenderPolicyOutput, Input, Output
+
 # Custom imports below
 from komand_mimecast.util import util
 
@@ -7,14 +8,15 @@ from komand_mimecast.util import util
 class CreateBlockedSenderPolicy(komand.Action):
 
     # URI for create blocked sender policy
-    _URI = '/api/policy/blockedsenders/create-policy'
+    _URI = "/api/policy/blockedsenders/create-policy"
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='create_blocked_sender_policy',
-                description='Creates a blocked sender policy',
-                input=CreateBlockedSenderPolicyInput(),
-                output=CreateBlockedSenderPolicyOutput())
+            name="create_blocked_sender_policy",
+            description="Creates a blocked sender policy",
+            input=CreateBlockedSenderPolicyInput(),
+            output=CreateBlockedSenderPolicyOutput(),
+        )
 
     def run(self, params={}):
         # Import variables from connection
@@ -27,7 +29,7 @@ class CreateBlockedSenderPolicy(komand.Action):
         source_ips = params.get(Input.SOURCE_IPS)
         option = params.get(Input.OPTION)
 
-        data = {'option': option}
+        data = {"option": option}
 
         # Generate policy dictionary
         policy = {}
@@ -37,24 +39,30 @@ class CreateBlockedSenderPolicy(komand.Action):
 
         # Remove source_ips and option from policy as they should not be directly in that dictionary
         if params.get(Input.SOURCE_IPS):
-            del policy['sourceIps']
-        del policy['option']
+            del policy["sourceIps"]
+        del policy["option"]
 
         # Transform source_ips from comma delimited string to list
         if params.get(Input.SOURCE_IPS):
-            source_ips = source_ips.split(',')
+            source_ips = source_ips.split(",")
 
         # Add conditions dic to policy
         if source_ips:
-            policy['conditions'] = {'sourceIPs': source_ips}
+            policy["conditions"] = {"sourceIPs": source_ips}
 
         # Add policy to data
-        data['policy'] = policy
+        data["policy"] = policy
 
         # Mimecast request
         mimecast_request = util.MimecastRequests()
-        response = mimecast_request.mimecast_post(url=url, uri=CreateBlockedSenderPolicy._URI,
-                                                  access_key=access_key, secret_key=secret_key,
-                                                  app_id=app_id, app_key=app_key, data=data)
+        response = mimecast_request.mimecast_post(
+            url=url,
+            uri=CreateBlockedSenderPolicy._URI,
+            access_key=access_key,
+            secret_key=secret_key,
+            app_id=app_id,
+            app_key=app_key,
+            data=data,
+        )
 
-        return {Output.SENDER_POLICY: response['data']}
+        return {Output.SENDER_POLICY: response["data"]}

@@ -4,6 +4,7 @@ from komand_paloalto_wildfire.connection import Connection
 import json
 import logging
 
+
 class TestSubmitFile(TestCase):
     def test_submit_file_unsupported_type(self):
         # Live test - uncomment and use icon-lab set to run
@@ -23,12 +24,11 @@ class TestSubmitFile(TestCase):
 
         action_params = {
             "filename": "EICAR.txt",
-            "file": "WDVPIVAlQEFQWzRcUFpYNTQoUF4pN0NDKTd9JEVJQ0FSLVNUQU5EQVJELUFOVElWSVJVUy1URVNULUZJTEUhJEgrSCo="
+            "file": "WDVPIVAlQEFQWzRcUFpYNTQoUF4pN0NDKTd9JEVJQ0FSLVNUQU5EQVJELUFOVElWSVJVUy1URVNULUZJTEUhJEgrSCo=",
         }
 
         actual = sf.run(action_params)
 
-        expected = {'submission': {'supported_file_type': False, 'filename': 'Unknown', 'url': 'Unknown'}}
+        expected = {"submission": {"supported_file_type": False, "filename": "Unknown", "url": "Unknown"}}
         self.assertEqual(actual, expected)
         pass
-

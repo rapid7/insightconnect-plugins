@@ -1,5 +1,6 @@
 import komand
 from .schema import LookupInput, LookupOutput
+
 # Custom imports below
 import json
 import requests
@@ -13,10 +14,11 @@ class Lookup(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='lookup',
-                description='Lookup URL in Safe Browsing service',
-                input=LookupInput(),
-                output=LookupOutput())
+            name="lookup",
+            description="Lookup URL in Safe Browsing service",
+            input=LookupInput(),
+            output=LookupOutput(),
+        )
 
     def run(self, params={}):
         client_id = params.get("client_id")
@@ -30,8 +32,12 @@ class Lookup(komand.Action):
 
         # Create object hierarchy and payload to send to Google
         client = Client(client_id=client_id)
-        threat_info = ThreatInfo(threatTypes=threat_types, platformTypes=platform_types,
-                                 threatEntryTypes=threat_entry_types, threatEntries=threat_entries)
+        threat_info = ThreatInfo(
+            threatTypes=threat_types,
+            platformTypes=platform_types,
+            threatEntryTypes=threat_entry_types,
+            threatEntries=threat_entries,
+        )
         request_payload = Request(client=client, threatInfo=threat_info)  # Create request payload
 
         # Marshall & serialize object hierarchy into JSON
@@ -39,24 +45,33 @@ class Lookup(komand.Action):
         self.logger.info("Run: Created payload: {payload}".format(payload=payload))
 
         # Send request to Google
-        response = requests.post(self.__URL,
-                                 data=payload,
-                                 params={"key": self.connection.API_KEY})
+        response = requests.post(self.__URL, data=payload, params={"key": self.connection.API_KEY})
 
         # Check if status code is good. If not, raise an exception and halt.
         if not self.status_code_ok(status_code=response.status_code):
-            raise Exception("Run: Non-200 status code received, halting. (Got {status_code})"
-                            .format(status_code=response.status_code))
+            raise Exception(
+                "Run: Non-200 status code received, halting. (Got {status_code})".format(
+                    status_code=response.status_code
+                )
+            )
 
         # Get matches from the response. If they don't exist, then early call sys.exit.
         matches = response.json().get("matches")
         if not matches:
             self.logger.info("Run: No matches found!")
-            matches = [{'threat':{'url':''}, 'threat_type':'','cache_duration':'','threat_entry_type':'','platform_type':''}]
+            matches = [
+                {
+                    "threat": {"url": ""},
+                    "threat_type": "",
+                    "cache_duration": "",
+                    "threat_entry_type": "",
+                    "platform_type": "",
+                }
+            ]
             results = 0
         else:
             results = len(matches)
-        return {"matches": matches, 'results': results}
+        return {"matches": matches, "results": results}
 
     @staticmethod
     def status_code_ok(status_code):
@@ -171,5 +186,3 @@ class Lookup(komand.Action):
 
     def test(self):
         return {}
-
-

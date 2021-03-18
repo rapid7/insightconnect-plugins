@@ -1,5 +1,12 @@
 import komand
-from .schema import CheckIfAddressInGroupInput, CheckIfAddressInGroupOutput, Input, Output, Component
+from .schema import (
+    CheckIfAddressInGroupInput,
+    CheckIfAddressInGroupOutput,
+    Input,
+    Output,
+    Component,
+)
+
 # Custom imports below
 from komand.exceptions import PluginException
 import ipaddress
@@ -7,13 +14,13 @@ from icon_fortinet_fortigate.util.util import Helpers
 
 
 class CheckIfAddressInGroup(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='check_if_address_in_group',
-                description=Component.DESCRIPTION,
-                input=CheckIfAddressInGroupInput(),
-                output=CheckIfAddressInGroupOutput())
+            name="check_if_address_in_group",
+            description=Component.DESCRIPTION,
+            input=CheckIfAddressInGroupInput(),
+            output=CheckIfAddressInGroupOutput(),
+        )
 
     def run(self, params={}):
         addrgrp = params.get(Input.GROUP)
@@ -27,28 +34,36 @@ class CheckIfAddressInGroup(komand.Action):
         try:
             address_data = response.json()
         except ValueError:
-            raise PluginException(cause="Data sent by FortiGate was not in JSON format.\n",
-                                  assistance="Contact support for help.",
-                                  data=response.text)
+            raise PluginException(
+                cause="Data sent by FortiGate was not in JSON format.\n",
+                assistance="Contact support for help.",
+                data=response.text,
+            )
 
         helper.http_errors(address_data, response.status_code)
 
         try:
             groups = address_data["results"]
         except KeyError:
-            raise PluginException(cause="No results were returned by FortiGate.\n",
-                                  assistance="This is normally caused by an invalid address group name."
-                                             " Double check that the address group name is correct")
+            raise PluginException(
+                cause="No results were returned by FortiGate.\n",
+                assistance="This is normally caused by an invalid address group name."
+                " Double check that the address group name is correct",
+            )
         if len(groups) > 1:
-            raise PluginException(cause="FortiGate returned more than one address group.\n",
-                                  assistance="Contact support for help.",
-                                  data=response.text)
+            raise PluginException(
+                cause="FortiGate returned more than one address group.\n",
+                assistance="Contact support for help.",
+                data=response.text,
+            )
         try:
             address_objects = groups[0]["member"]
         except KeyError:
-            raise PluginException(cause="The address group date was malformed.\n",
-                                  assistance="Contact support for help.",
-                                  data=response.text)
+            raise PluginException(
+                cause="The address group date was malformed.\n",
+                assistance="Contact support for help.",
+                data=response.text,
+            )
 
         found = False
         addresses_found = list()
@@ -56,26 +71,28 @@ class CheckIfAddressInGroup(komand.Action):
         if enable_search:
             for item in address_objects:
                 name = item["name"]
-                params = {
-                    "filter": f"name=@{name}"
-                }
+                params = {"filter": f"name=@{name}"}
                 endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/address/"
                 response = self.connection.session.get(endpoint, params=params, verify=self.connection.ssl_verify)
                 try:
                     address_data = response.json()
                 except ValueError:
-                    raise PluginException(cause="Data sent by FortiGate was not in JSON format.\n",
-                                          assistance="Contact support for help.",
-                                          data=response.text)
+                    raise PluginException(
+                        cause="Data sent by FortiGate was not in JSON format.\n",
+                        assistance="Contact support for help.",
+                        data=response.text,
+                    )
 
                 helper.http_errors(address_data, response.status_code)
 
                 try:
                     results = address_data["results"]
                 except KeyError:
-                    raise PluginException(cause="No results were returned by FortiGate.\n",
-                                          assistance="This is normally caused by an invalid address group name."
-                                                     " Double check that the address group name is correct")
+                    raise PluginException(
+                        cause="No results were returned by FortiGate.\n",
+                        assistance="This is normally caused by an invalid address group name."
+                        " Double check that the address group name is correct",
+                    )
                 for result in results:
                     # If address_object is a fqdn
                     if result["type"] == "fqdn":

@@ -1,6 +1,7 @@
 import komand
 from .schema import ConnectionSchema
 from komand.exceptions import PluginException
+
 # Custom imports below
 
 

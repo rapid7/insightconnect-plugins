@@ -4,7 +4,7 @@ import requests
 def demo_test(token, logger):
     demo_url = "https://api.recordedfuture.com/v2/hash/demoevents?limit=1"
     try:
-        test_headers = {'X-RFToken': token}
+        test_headers = {"X-RFToken": token}
         response = requests.get(demo_url, headers=test_headers)
         response.raise_for_status()
 

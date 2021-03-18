@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
@@ -23,15 +24,16 @@ def timeout_pass(func):
 
     return func_wrapper
 
+
 # This mocks komand.Trigger.send
 # We need this to fake out the plugin into thinking it's sending output in the trigger's run function
-class fakeSender():
+class fakeSender:
     def send(params):
         print(params)
 
+
 # Test class
 class TestGetAlerts(TestCase):
-
     @timeout_pass
     @timeout_decorator.timeout(30)
     @patch("komand.Trigger.send", side_effect=fakeSender.send)
@@ -62,5 +64,4 @@ class TestGetAlerts(TestCase):
 
         test_email_received.run(trigger_params)
 
-        self.fail() # If we made it this far, the run loop failed somehow
-
+        self.fail()  # If we made it this far, the run loop failed somehow

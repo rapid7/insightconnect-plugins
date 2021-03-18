@@ -1,5 +1,6 @@
 import komand
 from .schema import GetScanInput, GetScanOutput
+
 # Custom imports below
 import requests
 from komand_rapid7_insightvm.util import endpoints
@@ -14,15 +15,16 @@ class GetScan(komand.Action):
         401: "Unauthorized",
         500: "Internal Server Error",
         503: "Service Unavailable",
-        000: "Unknown Status Code"
+        000: "Unknown Status Code",
     }
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_scan',
-                description='Gets the status of a scan',
-                input=GetScanInput(),
-                output=GetScanOutput())
+            name="get_scan",
+            description="Gets the status of a scan",
+            input=GetScanInput(),
+            output=GetScanOutput(),
+        )
 
     def run(self, params={}):
         scan_id = params.get("scan_id")
@@ -49,7 +51,9 @@ class GetScan(komand.Action):
                     raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=reason.text)
 
                 status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
-                self.logger.error("{status} ({code}): {reason}".format(status=status_code_message,
-                                                                       code=response.status_code,
-                                                                       reason=reason))
+                self.logger.error(
+                    "{status} ({code}): {reason}".format(
+                        status=status_code_message, code=response.status_code, reason=reason
+                    )
+                )
                 raise PluginException(preset=PluginException.Preset.UNKNOWN)

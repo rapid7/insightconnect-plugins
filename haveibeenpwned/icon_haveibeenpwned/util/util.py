@@ -5,7 +5,10 @@ from icon_haveibeenpwned.util.log_helper import LogHelper
 
 
 class HaveIBeenPwned(object):
-    _HEADERS = {'User-Agent': "Rapid7 InsightConnect", 'Accept': "application/vnd.haveibeenpwned.v2+json"}
+    _HEADERS = {
+        "User-Agent": "Rapid7 InsightConnect",
+        "Accept": "application/vnd.haveibeenpwned.v2+json",
+    }
 
     def __init__(self, logger=None):
         if logger:
@@ -35,12 +38,14 @@ class HaveIBeenPwned(object):
             time.sleep(2)
             return []
         elif response.status_code == 429:  # too many requests from your IP
-            if 'Retry-After' in response.headers:
-                retry = response.headers['Retry-After']
+            if "Retry-After" in response.headers:
+                retry = response.headers["Retry-After"]
                 # HIBP recommendation on adding an additional 100 millisecond delay between requests
-                self.logger.info('Too many requests. The rate limit has been exceeded.'
-                                 ' Will retry after back off of: {0} sec'.format(retry))
-                time.sleep(retry + .100)
+                self.logger.info(
+                    "Too many requests. The rate limit has been exceeded."
+                    " Will retry after back off of: {0} sec".format(retry)
+                )
+                time.sleep(retry + 0.100)
                 return self.get_request(url, params, max_attempts=0)  # Retry get_request
             else:
                 # Just in case we don't get a Retry-After in the header
@@ -49,27 +54,33 @@ class HaveIBeenPwned(object):
                     self._retries = self._retries + 1
                     # set random time to wait
                     back_off = random.randrange(3, 5 + range_increase)  # nosec
-                    self.logger.info('Too many requests. The rate limit has been exceeded.'
-                                     ' Will retry after back off of: {0} sec'.format(back_off))
+                    self.logger.info(
+                        "Too many requests. The rate limit has been exceeded."
+                        " Will retry after back off of: {0} sec".format(back_off)
+                    )
                     time.sleep(back_off)  # Wait to slow down request rate
                     return self.get_request(url, params, max_attempts=max_attempts - 1)  # Retry get_request
-            raise Exception('Too many requests. The rate limit has been exceeded. Back off has failed.'
-                            ' Please run fewer workflows with the Have I been Pwned plugin')
+            raise Exception(
+                "Too many requests. The rate limit has been exceeded. Back off has failed."
+                " Please run fewer workflows with the Have I been Pwned plugin"
+            )
         elif response.status_code == 503:  # DDOS protection has flagged your IP for possible abuse
-            raise Exception('Warning: HTTP 503 status code received.'
-                            ' Have I Been Pwned has flagged this IP address as possibly abusive,'
-                            ' and issued a 24-hour ban. Please discontinue use of the plugin for 24 hours'
-                            ' and try again. If the issue persists, contact support.')
+            raise Exception(
+                "Warning: HTTP 503 status code received."
+                " Have I Been Pwned has flagged this IP address as possibly abusive,"
+                " and issued a 24-hour ban. Please discontinue use of the plugin for 24 hours"
+                " and try again. If the issue persists, contact support."
+            )
         else:
-            self.logger.error('An unknown error occurred status code: {0}'.format(response.status_code))
-            raise Exception('{0} error'.format(response.status_code))
+            self.logger.error("An unknown error occurred status code: {0}".format(response.status_code))
+            raise Exception("{0} error".format(response.status_code))
 
     def get_password(self, hash_start: str) -> list:
         """
         :param hash_start: The first 5 characters of a SHA1 hash
         :return: A list of hashes that match the hash_start param
         """
-        BASE_URl = 'https://api.pwnedpasswords.com/range/'
+        BASE_URl = "https://api.pwnedpasswords.com/range/"
 
         url = BASE_URl + hash_start
         try:

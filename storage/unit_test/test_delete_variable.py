@@ -8,14 +8,11 @@ class TestStoreAction(TestCase):
     def test_store(self):
         store = Store()
         delete_ = DeleteVariable()
-        params = {
-            "variable_name": "foobar",
-            "variable_value": "barfoo"
-        }
+        params = {"variable_name": "foobar", "variable_value": "barfoo"}
         store.run(params)
         actual = delete_.run(params)
 
-        expected = {'success': True}
+        expected = {"success": True}
         self.assertEqual(expected, actual)
 
         cache_help = CacheHelp()

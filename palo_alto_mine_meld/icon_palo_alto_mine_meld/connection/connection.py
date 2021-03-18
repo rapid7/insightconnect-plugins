@@ -1,12 +1,12 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
+
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 from icon_palo_alto_mine_meld.util.api import PaloAltoMineMeldAPI
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.client = None
@@ -23,17 +23,17 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.logger.info("Connect: Connecting..")
             self.client = PaloAltoMineMeldAPI(
                 f"{url}:{port}",
-                params.get(Input.CREDENTIALS).get('username'),
-                params.get(Input.CREDENTIALS).get('password'),
+                params.get(Input.CREDENTIALS).get("username"),
+                params.get(Input.CREDENTIALS).get("password"),
                 ssl_verify,
-                self.logger
+                self.logger,
             )
             self.logger.info("Connected")
         except Exception:
             self.logger.error("Error connecting to Palo Alto MineMeld")
             raise ConnectionTestException(
                 cause="Error connecting to Palo Alto MineMeld.",
-                assistance="Please check your connection credentials and that the orchestrator has network access to the MindMeld server."
+                assistance="Please check your connection credentials and that the orchestrator has network access to the MindMeld server.",
             )
 
     def test(self):
@@ -43,11 +43,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
             else:
                 raise ConnectionTestException(
                     cause="Connection error.",
-                    assistance="An unexpected error occurred during the API request."
+                    assistance="An unexpected error occurred during the API request.",
                 )
         except Exception:
             self.logger.error("An unexpected error occurred during the API request")
             raise ConnectionTestException(
                 cause="Connection error.",
-                assistance="An unexpected error occurred during the API request."
+                assistance="An unexpected error occurred during the API request.",
             )

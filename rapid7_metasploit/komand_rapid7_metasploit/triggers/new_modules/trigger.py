@@ -1,6 +1,7 @@
 import komand
 import time
 from .schema import NewModulesInput, NewModulesOutput
+
 # Custom imports below
 import requests
 
@@ -12,10 +13,11 @@ class NewModules(komand.Trigger):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='new_modules',
-                description='Checks for new Metasploit modules',
-                input=NewModulesInput(),
-                output=NewModulesOutput())
+            name="new_modules",
+            description="Checks for new Metasploit modules",
+            input=NewModulesInput(),
+            output=NewModulesOutput(),
+        )
 
     def run(self, params={}):
         """Run the trigger"""

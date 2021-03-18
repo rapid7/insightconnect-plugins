@@ -1,16 +1,17 @@
 import insightconnect_plugin_runtime
 from .schema import GetFileIdFromAlertIdInput, GetFileIdFromAlertIdOutput, Input, Output
+
 # Custom imports below
 
 
 class GetFileIdFromAlertId(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_file_id_from_alert_id',
-                description='Retrieves the File ID related to an alert',
-                input=GetFileIdFromAlertIdInput(),
-                output=GetFileIdFromAlertIdOutput())
+            name="get_file_id_from_alert_id",
+            description="Retrieves the File ID related to an alert",
+            input=GetFileIdFromAlertIdInput(),
+            output=GetFileIdFromAlertIdOutput(),
+        )
 
     def run(self, params={}):
         self.logger.info("Running...")

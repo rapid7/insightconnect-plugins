@@ -1,17 +1,18 @@
 import komand
 from .schema import CreateIncidentInput, CreateIncidentOutput
+
 # Custom imports below
 from komand_cherwell.util.utils import set_field_values
 
 
 class CreateIncident(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name="create_incident",
-                description="Create a Cherwell incident",
-                input=CreateIncidentInput(),
-                output=CreateIncidentOutput())
+            name="create_incident",
+            description="Create a Cherwell incident",
+            input=CreateIncidentInput(),
+            output=CreateIncidentOutput(),
+        )
 
     def run(self, params={}):
         # Will now take template id
@@ -21,11 +22,7 @@ class CreateIncident(komand.Action):
         business_object_id = params["business_object_id"]
 
         # Template lookup
-        bo_template = {
-            "busObId": business_object_id,
-            "includeRequired": True,
-            "includeAll": True
-        }
+        bo_template = {"busObId": business_object_id, "includeRequired": True, "includeAll": True}
 
         template = self.connection.api.get_businessobjecttemplate(bo_template)
 
@@ -40,7 +37,4 @@ class CreateIncident(komand.Action):
 
         response = self.connection.api.create_incident(busOb)
 
-        return {
-            "success": True,
-            "raw_response": response
-        }
+        return {"success": True, "raw_response": response}

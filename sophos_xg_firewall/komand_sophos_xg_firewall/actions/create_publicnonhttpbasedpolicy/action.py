@@ -1,18 +1,19 @@
 import komand
 from .schema import CreatePublicnonhttpbasedpolicyInput, CreatePublicnonhttpbasedpolicyOutput
+
 # Custom imports below
 import requests
 import xml.etree.ElementTree as ET
 
 
 class CreatePublicnonhttpbasedpolicy(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='create_publicnonhttpbasedpolicy',
-                description='Creates a PublicHTTPBased policy',
-                input=CreatePublicnonhttpbasedpolicyInput(),
-                output=CreatePublicnonhttpbasedpolicyOutput())
+            name="create_publicnonhttpbasedpolicy",
+            description="Creates a PublicHTTPBased policy",
+            input=CreatePublicnonhttpbasedpolicyInput(),
+            output=CreatePublicnonhttpbasedpolicyOutput(),
+        )
 
     def run(self, params={}):
         username = self.connection.username
@@ -31,13 +32,12 @@ class CreatePublicnonhttpbasedpolicy(komand.Action):
         pubnonhttppolicy = params["policy"]
         url = "https://{}/webconsole/APIController?".format(host + ":" + str(port))
         # Authentication
-        auth = "<Request><Login><Username>{}</Username><Password>{}</Password></Login>".format(
-            username,
-            password
-        )
+        auth = "<Request><Login><Username>{}</Username><Password>{}</Password></Login>".format(username, password)
 
         # Start of the operation to add a firewall policy
-        start = "<Set operation=\"add\"><SecurityPolicy><Name>{}</Name>".format(pubnonhttppolicy["SecurityPolicy"]["Name"])
+        start = '<Set operation="add"><SecurityPolicy><Name>{}</Name>'.format(
+            pubnonhttppolicy["SecurityPolicy"]["Name"]
+        )
 
         base_xml = "<Description>{}</Description><Status>{}</Status><IPFamily>{}</IPFamily>".format(
             pubnonhttppolicy["SecurityPolicy"]["Description"],
@@ -45,11 +45,14 @@ class CreatePublicnonhttpbasedpolicy(komand.Action):
             pubnonhttppolicy["SecurityPolicy"]["IPFamily"],
         )
         # Sets position xml
-        if pubnonhttppolicy["SecurityPolicy"]["Position"] == "after" or pubnonhttppolicy["SecurityPolicy"]["Position"] == "before":
+        if (
+            pubnonhttppolicy["SecurityPolicy"]["Position"] == "after"
+            or pubnonhttppolicy["SecurityPolicy"]["Position"] == "before"
+        ):
             position = "<{}>{}</{}>".format(
                 pubnonhttppolicy["SecurityPolicy"]["Position"],
                 pubnonhttppolicy["SecurityPolicy"]["PositionPolicyName"],
-                pubnonhttppolicy["SecurityPolicy"]["Position"]
+                pubnonhttppolicy["SecurityPolicy"]["Position"],
             )
         else:
             position = pubnonhttppolicy["SecurityPolicy"]["Position"]
@@ -106,24 +109,30 @@ class CreatePublicnonhttpbasedpolicy(komand.Action):
         # End of Policy String
         end = ""
         end += "<IntrusionPrevention>{}</IntrusionPrevention>".format(
-            pubnonhttppolicy["SecurityPolicy"]["IntrusionPrevention"])
+            pubnonhttppolicy["SecurityPolicy"]["IntrusionPrevention"]
+        )
         end += "<TrafficShapingPolicy>{}</TrafficShapingPolicy>".format(
-            pubnonhttppolicy["SecurityPolicy"]["TrafficShapingPolicy"])
+            pubnonhttppolicy["SecurityPolicy"]["TrafficShapingPolicy"]
+        )
         end += "<SourceSecurityHeartbeat>{}</SourceSecurityHeartbeat>".format(
-            pubnonhttppolicy["SecurityPolicy"]["SourceSecurityHeartbeat"])
+            pubnonhttppolicy["SecurityPolicy"]["SourceSecurityHeartbeat"]
+        )
         end += "<MinimumSourceHBPermitted />"
         end += "<DestSecurityHeartbeat>{}</DestSecurityHeartbeat>".format(
-            pubnonhttppolicy["SecurityPolicy"]["DestSecurityHeartbeat"])
+            pubnonhttppolicy["SecurityPolicy"]["DestSecurityHeartbeat"]
+        )
         end += "<MinimumDestinationHBPermitted /></SecurityPolicy></Set></Request>"
 
         # Build request url
-        request_string = "{}{}{}{}{}{}{}{}".format(auth, start, position_xml, base_xml, policy_type, policy, end_policy, end)
+        request_string = "{}{}{}{}{}{}{}{}".format(
+            auth, start, position_xml, base_xml, policy_type, policy, end_policy, end
+        )
 
         status_code = 00
         status_response = "default"
         invalid_params = ""
         try:
-            r = requests.post(url,files={"reqxml": (None, request_string)}, verify=False)
+            r = requests.post(url, files={"reqxml": (None, request_string)}, verify=False)
             tree = ET.fromstring(r.content)
             resp_status = tree.find("SecurityPolicy/Status")
             error_status = tree.find("Status")
@@ -148,10 +157,11 @@ class CreatePublicnonhttpbasedpolicy(komand.Action):
         except Exception as e:
             self.logger.error("An error has occurred while adding a Public Non HTTP based policy: ", e)
             raise
-        return {"response": {
-            "status_code": status_code,
-            "status_response": status_response,
-            "invalid_params": invalid_params
+        return {
+            "response": {
+                "status_code": status_code,
+                "status_response": status_response,
+                "invalid_params": invalid_params,
             }
         }
 
@@ -161,7 +171,8 @@ class CreatePublicnonhttpbasedpolicy(komand.Action):
         host = self.connection.host
         port = self.connection.port
         request_string = "<Request><Login><Username>{}</Username><Password>{}</Password></Login><Get><User></User></Get></Request>".format(
-            username, password)
+            username, password
+        )
         url = "https://{}/webconsole/APIController?".format(host + ":" + str(port))
         try:
             response = requests.get(url, files={"reqxml": (None, request_string)}, verify=False)

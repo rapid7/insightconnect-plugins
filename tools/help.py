@@ -11,6 +11,7 @@ class ComponentType(Enum):
     """
     Enum to allow for identifying the type of a plugin component (Connection, Action, Trigger)
     """
+
     connection = "connection"
     action = "action"
     trigger = "trigger"
@@ -21,16 +22,17 @@ class IO(object):
     An Input or Output on a Connection, Action, Trigger
     """
 
-    def __init__(self,
-                 identifier: str,
-                 title: Optional[str],
-                 description: Optional[str],
-                 type_: str,
-                 required: bool,
-                 default: Optional[Any],
-                 enum: Optional[list] = None,
-                 raw_parameters: set = {}
-                 ):
+    def __init__(
+        self,
+        identifier: str,
+        title: Optional[str],
+        description: Optional[str],
+        type_: str,
+        required: bool,
+        default: Optional[Any],
+        enum: Optional[list] = None,
+        raw_parameters: set = {},
+    ):
         """
         Initializer for an input or output belonging to a component
         :param identifier: Identifier for an IO (optional)
@@ -63,36 +65,40 @@ class IO(object):
         :return: Boolean indicating if a type is custom
         """
         # Strip off possible list indicator and compare against standard types
-        return self.type_.lstrip("[]") not in {"boolean",
-                                               "integer",
-                                               "int",
-                                               "number",
-                                               "float",
-                                               "string",
-                                               "date",
-                                               "bytes",
-                                               "object",
-                                               "password",
-                                               "python",
-                                               "file",
-                                               "credential_username_password",
-                                               "credential_asymmetric_key",
-                                               "credential_secret_key",
-                                               "credential_token"}
+        return self.type_.lstrip("[]") not in {
+            "boolean",
+            "integer",
+            "int",
+            "number",
+            "float",
+            "string",
+            "date",
+            "bytes",
+            "object",
+            "password",
+            "python",
+            "file",
+            "credential_username_password",
+            "credential_asymmetric_key",
+            "credential_secret_key",
+            "credential_token",
+        }
 
     @classmethod
     def from_dict(cls, raw: {str: Any}):
         # Get the first and only key from the dict anonymously and assign that to an identifier
         identifier = list(raw.keys())[0]
 
-        return cls(identifier=identifier,
-                   title=raw[identifier].get("title"),
-                   description=raw[identifier].get("description"),
-                   type_=raw[identifier].get("type"),
-                   required=raw[identifier].get("required"),
-                   default=raw[identifier].get("default"),
-                   enum=raw[identifier].get("enum"),
-                   raw_parameters=set(raw[identifier].keys()))
+        return cls(
+            identifier=identifier,
+            title=raw[identifier].get("title"),
+            description=raw[identifier].get("description"),
+            type_=raw[identifier].get("type"),
+            required=raw[identifier].get("required"),
+            default=raw[identifier].get("default"),
+            enum=raw[identifier].get("enum"),
+            raw_parameters=set(raw[identifier].keys()),
+        )
 
 
 class CustomType(object):
@@ -110,14 +116,16 @@ class PluginComponent(object):
     A Connection, Action, or Trigger
     """
 
-    def __init__(self,
-                 component_type: ComponentType,
-                 identifier: str = None,
-                 title: Optional[str] = None,
-                 description: Optional[str] = None,
-                 inputs: [IO] = None,
-                 outputs: [IO] = None,
-                 raw_parameters: set = {}):
+    def __init__(
+        self,
+        component_type: ComponentType,
+        identifier: str = None,
+        title: Optional[str] = None,
+        description: Optional[str] = None,
+        inputs: [IO] = None,
+        outputs: [IO] = None,
+        raw_parameters: set = {},
+    ):
         """
         Initializer for a PluginComponent
         :param component_type: Type of the component
@@ -149,13 +157,15 @@ class PluginComponent(object):
         inputs: [IO] = [IO.from_dict(raw={k: v}) for k, v in input_.items()] if input_ else []
         outputs: [IO] = [IO.from_dict(raw={k: v}) for k, v in output.items()] if output else []
 
-        return cls(component_type=ComponentType.action,
-                   identifier=identifier,
-                   title=raw[identifier].get("title"),
-                   description=raw[identifier].get("description"),
-                   inputs=inputs,
-                   outputs=outputs,
-                   raw_parameters=raw_parameters)
+        return cls(
+            component_type=ComponentType.action,
+            identifier=identifier,
+            title=raw[identifier].get("title"),
+            description=raw[identifier].get("description"),
+            inputs=inputs,
+            outputs=outputs,
+            raw_parameters=raw_parameters,
+        )
 
     @classmethod
     def new_trigger(cls, raw: dict):
@@ -168,21 +178,21 @@ class PluginComponent(object):
         inputs: [IO] = [IO.from_dict(raw={k: v}) for k, v in input_.items()] if input_ else []
         outputs: [IO] = [IO.from_dict(raw={k: v}) for k, v in output.items()] if output else []
 
-        return cls(component_type=ComponentType.trigger,
-                   identifier=identifier,
-                   title=raw[identifier].get("title"),
-                   description=raw[identifier].get("description"),
-                   inputs=inputs,
-                   outputs=outputs,
-                   raw_parameters=raw_parameters)
+        return cls(
+            component_type=ComponentType.trigger,
+            identifier=identifier,
+            title=raw[identifier].get("title"),
+            description=raw[identifier].get("description"),
+            inputs=inputs,
+            outputs=outputs,
+            raw_parameters=raw_parameters,
+        )
 
     @classmethod
     def new_connection(cls, raw: dict):
         # Create a list of IO objects from the raw inputs dict
         inputs: [IO] = [IO.from_dict(raw={k: v}) for k, v in raw.items()] if raw else []
-        return cls(component_type=ComponentType.connection,
-                   identifier="connection",
-                   inputs=inputs)
+        return cls(component_type=ComponentType.connection, identifier="connection", inputs=inputs)
 
 
 class PluginSpec(object):
@@ -190,18 +200,20 @@ class PluginSpec(object):
     A plugin specification file
     """
 
-    def __init__(self,
-                 spec_version: str,
-                 name: str,
-                 title: str,
-                 description: str,
-                 version: str,
-                 vendor: str,
-                 tags: [str],
-                 types: [CustomType],
-                 connection: PluginComponent = None,
-                 actions: [PluginComponent] = [],
-                 triggers: [PluginComponent] = []):
+    def __init__(
+        self,
+        spec_version: str,
+        name: str,
+        title: str,
+        description: str,
+        version: str,
+        vendor: str,
+        tags: [str],
+        types: [CustomType],
+        connection: PluginComponent = None,
+        actions: [PluginComponent] = [],
+        triggers: [PluginComponent] = [],
+    ):
         self.spec_version = spec_version
         self.name = name
         self.title = title
@@ -232,22 +244,30 @@ class PluginSpec(object):
             custom_types.append(CustomType(identifier=identifier, properties=io))
 
         connection = PluginComponent.new_connection(raw=spec.get("connection")) if spec.get("connection") else None
-        actions = [PluginComponent.new_action(raw={k: v}) for k, v in spec.get("actions").items()] if spec.get(
-            "actions") else []
-        triggers = [PluginComponent.new_action(raw={k: v}) for k, v in spec.get("triggers").items()] if spec.get(
-            "triggers") else []
+        actions = (
+            [PluginComponent.new_action(raw={k: v}) for k, v in spec.get("actions").items()]
+            if spec.get("actions")
+            else []
+        )
+        triggers = (
+            [PluginComponent.new_action(raw={k: v}) for k, v in spec.get("triggers").items()]
+            if spec.get("triggers")
+            else []
+        )
 
-        return cls(spec_version=spec.get("plugin_spec_version"),
-                   name=spec.get("name"),
-                   title=spec.get("title"),
-                   description=spec.get("description"),
-                   version=spec.get("version"),
-                   vendor=spec.get("vendor"),
-                   tags=spec.get("tags"),
-                   types=custom_types,
-                   connection=connection,
-                   actions=actions,
-                   triggers=triggers)
+        return cls(
+            spec_version=spec.get("plugin_spec_version"),
+            name=spec.get("name"),
+            title=spec.get("title"),
+            description=spec.get("description"),
+            version=spec.get("version"),
+            vendor=spec.get("vendor"),
+            tags=spec.get("tags"),
+            types=custom_types,
+            connection=connection,
+            actions=actions,
+            triggers=triggers,
+        )
 
 
 class Help(object):
@@ -286,9 +306,7 @@ class Help(object):
         :param inputs: List of IO objects for a component
         :return: Markdown table as a string
         """
-        table = (
-            "|Name|Type|Default|Required|Description|Enum|\n"
-            "|----|----|-------|--------|-----------|----|\n")
+        table = "|Name|Type|Default|Required|Description|Enum|\n" "|----|----|-------|--------|-----------|----|\n"
 
         for counter, io in enumerate(sorted(inputs), 1):
             # if io.is_custom:
@@ -311,9 +329,7 @@ class Help(object):
         :param outputs: List of IO objects for a component
         :return: Markdown table as a string
         """
-        table = (
-            "|Name|Type|Required|Description|\n"
-            "|----|----|--------|-----------|\n")
+        table = "|Name|Type|Required|Description|\n" "|----|----|--------|-----------|\n"
 
         for counter, io in enumerate(sorted(outputs), 1):
             # if io.is_custom:
@@ -324,10 +340,7 @@ class Help(object):
             # else:
             #     type_text = io.type_
 
-            table += (f"|{io.identifier}|"
-                      f"{io.type_}|"
-                      f"{io.required}|"
-                      f"{io.description}|")
+            table += f"|{io.identifier}|" f"{io.type_}|" f"{io.required}|" f"{io.description}|"
             table += "\n" if counter < len(outputs) else ""
 
         return table
@@ -338,7 +351,7 @@ class Help(object):
         :param section_type: ComponentType enum value representing the section type to generate
         :return: Markdown section as a string
         """
-        assert (section_type != ComponentType.connection), "generate_component_section does not support connections!"
+        assert section_type != ComponentType.connection, "generate_component_section does not support connections!"
 
         # Both actions and triggers are of type PluginComponent - so they can be swapped in/out in the code below
         components = self.spec.actions if section_type == ComponentType.action else self.spec.triggers
@@ -356,17 +369,19 @@ class Help(object):
             base = f"This {singular}" if has_s else f"This {singular} is used to"
             description = component.description[0].lower() + component.description[1:]
 
-            markdown += (f"### {component.title}{self.MD_BREAK}"
-                         f"{base} {description}.{self.MD_BREAK}")
+            markdown += f"### {component.title}{self.MD_BREAK}" f"{base} {description}.{self.MD_BREAK}"
             if component.inputs:
-                markdown += (f"#### Input{self.MD_BREAK}"
-                             f"{self._generate_input_table(inputs=component.inputs)}{self.MD_BREAK}")
+                markdown += (
+                    f"#### Input{self.MD_BREAK}" f"{self._generate_input_table(inputs=component.inputs)}{self.MD_BREAK}"
+                )
             if component.outputs:
-                markdown += (f"#### Output{self.MD_BREAK}"
-                             f"{self._generate_output_table(outputs=component.outputs)}{self.MD_BREAK}"
-                             f"Example output:{self.MD_BREAK}"
-                             f"```\n"
-                             f"```{self.MD_BREAK}")
+                markdown += (
+                    f"#### Output{self.MD_BREAK}"
+                    f"{self._generate_output_table(outputs=component.outputs)}{self.MD_BREAK}"
+                    f"Example output:{self.MD_BREAK}"
+                    f"```\n"
+                    f"```{self.MD_BREAK}"
+                )
 
         return markdown
 
@@ -382,12 +397,13 @@ class Help(object):
             leads_with_title = False
 
         description = self.spec.description.replace(self.spec.title, "", 1 if leads_with_title else 0)
-        markdown = (f"## About{self.MD_BREAK}"
-                    f"[{self.spec.title}](LINK TO PRODUCT/VENDOR WEBSITE) {description}."
-                    f"{self.MD_BREAK}")
+        markdown = (
+            f"## About{self.MD_BREAK}"
+            f"[{self.spec.title}](LINK TO PRODUCT/VENDOR WEBSITE) {description}."
+            f"{self.MD_BREAK}"
+        )
 
         return markdown
-
 
     def generate_full_markdown(self) -> str:
         """
@@ -411,34 +427,38 @@ class Help(object):
         # Connection
         markdown += f"## Connection{self.MD_BREAK}"
         if self.spec.connection:
-            markdown += (f"The connection configuration accepts the following parameters:{self.MD_BREAK}"
-                         f"{self._generate_input_table(inputs=self.spec.connection.inputs)}{self.MD_BREAK}")
+            markdown += (
+                f"The connection configuration accepts the following parameters:{self.MD_BREAK}"
+                f"{self._generate_input_table(inputs=self.spec.connection.inputs)}{self.MD_BREAK}"
+            )
         else:
             markdown += f"_This plugin does not contain a connection._{self.MD_BREAK}"
 
         # Troubleshooting
-        markdown += (f"## Troubleshooting{self.MD_BREAK}"
-                     f"_This plugin does not contain any troubleshooting information._{self.MD_BREAK}")
+        markdown += (
+            f"## Troubleshooting{self.MD_BREAK}"
+            f"_This plugin does not contain any troubleshooting information._{self.MD_BREAK}"
+        )
 
         # Workflows
-        markdown += (f"## Workflows{self.MD_BREAK}"
-                     f"Examples:{self.MD_BREAK}"
-                     f"* EXAMPLE HERE {self.MD_BREAK}")
+        markdown += f"## Workflows{self.MD_BREAK}" f"Examples:{self.MD_BREAK}" f"* EXAMPLE HERE {self.MD_BREAK}"
 
         # Versions
-        markdown += (f"## Versions{self.MD_BREAK}"
-                     f"* 1.0.0 - Initial plugin{self.MD_BREAK}")
+        markdown += f"## Versions{self.MD_BREAK}" f"* 1.0.0 - Initial plugin{self.MD_BREAK}"
 
         # References
-        markdown += (f"## References{self.MD_BREAK}"
-                     f"* [{self.spec.title}](LINK TO PRODUCT/VENDOR WEBSITE){self.MD_BREAK}")
+        markdown += (
+            f"## References{self.MD_BREAK}" f"* [{self.spec.title}](LINK TO PRODUCT/VENDOR WEBSITE){self.MD_BREAK}"
+        )
 
         # Custom Types
         markdown += f"## Custom Output Types{self.MD_BREAK}"
         if self.spec.types:
             for type_ in self.spec.types:
-                markdown += (f"### {type_.identifier}{self.MD_BREAK}"
-                             f"{self._generate_output_table(outputs=type_.properties)}{self.MD_BREAK}")
+                markdown += (
+                    f"### {type_.identifier}{self.MD_BREAK}"
+                    f"{self._generate_output_table(outputs=type_.properties)}{self.MD_BREAK}"
+                )
         else:
             markdown += f"_This plugin does not contain any custom output types._"
 

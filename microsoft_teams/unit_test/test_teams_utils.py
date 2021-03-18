@@ -1,6 +1,10 @@
 from unittest import TestCase
 from icon_microsoft_teams.connection.connection import Connection
-from icon_microsoft_teams.util.teams_utils import create_channel, delete_channel, get_channels_from_microsoft
+from icon_microsoft_teams.util.teams_utils import (
+    create_channel,
+    delete_channel,
+    get_channels_from_microsoft,
+)
 
 import logging
 import json

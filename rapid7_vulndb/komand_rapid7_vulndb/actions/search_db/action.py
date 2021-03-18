@@ -1,17 +1,18 @@
 import insightconnect_plugin_runtime
 from .schema import SearchDbInput, SearchDbOutput, Input, Output
+
 # Custom imports below
 from komand_rapid7_vulndb.util import extract
 
 
 class SearchDb(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='search_db',
-            description='Search the database to find vulnerabilities and exploits',
+            name="search_db",
+            description="Search the database to find vulnerabilities and exploits",
             input=SearchDbInput(),
-            output=SearchDbOutput())
+            output=SearchDbOutput(),
+        )
 
     def run(self, params={}):
         # Get params

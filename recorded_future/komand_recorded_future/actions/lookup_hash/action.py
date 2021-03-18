@@ -28,7 +28,7 @@ class LookupHash(komand.Action):
                 "sightings",
                 "threatLists",
                 "timestamps",
-                "hashAlgorithm"
+                "hashAlgorithm",
             ]
 
             if not comment:

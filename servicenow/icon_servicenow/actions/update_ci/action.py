@@ -1,19 +1,20 @@
 import insightconnect_plugin_runtime
 from .schema import UpdateCiInput, UpdateCiOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class UpdateCi(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='update_ci',
-                description=Component.DESCRIPTION,
-                input=UpdateCiInput(),
-                output=UpdateCiOutput())
+            name="update_ci",
+            description=Component.DESCRIPTION,
+            input=UpdateCiInput(),
+            output=UpdateCiOutput(),
+        )
 
     def run(self, params={}):
-        url = f'{self.connection.table_url}{params.get(Input.TABLE)}/{params.get(Input.SYSTEM_ID)}'
+        url = f"{self.connection.table_url}{params.get(Input.TABLE)}/{params.get(Input.SYSTEM_ID)}"
         payload = params.get(Input.UPDATE_DATA)
         method = "put"
 
@@ -24,6 +25,4 @@ class UpdateCi(insightconnect_plugin_runtime.Action):
         else:
             success = False
 
-        return {
-            Output.SUCCESS: success
-        }
+        return {Output.SUCCESS: success}

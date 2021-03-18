@@ -5,7 +5,7 @@ from __future__ import absolute_import
 from __future__ import print_function
 import six
 
-__version__ = '4.0.0'
+__version__ = "4.0.0"
 
 import base64
 import collections
@@ -35,7 +35,7 @@ except ImportError as e:
 
 from .https_wrapper import CertValidatingHTTPSConnection
 
-DEFAULT_CA_CERTS = os.path.join(os.path.dirname(__file__), 'ca_certs.pem')
+DEFAULT_CA_CERTS = os.path.join(os.path.dirname(__file__), "ca_certs.pem")
 
 
 def canon_params(params):
@@ -45,11 +45,10 @@ def canon_params(params):
     # this is normalized the same as for OAuth 1.0,
     # http://tools.ietf.org/html/rfc5849#section-3.4.1.3.2
     args = []
-    for (key, vals) in sorted(
-        (six.moves.urllib.parse.quote(key, '~'), vals) for (key, vals) in list(params.items())):
-        for val in sorted(six.moves.urllib.parse.quote(val, '~') for val in vals):
-            args.append('%s=%s' % (key, val))
-    return '&'.join(args)
+    for (key, vals) in sorted((six.moves.urllib.parse.quote(key, "~"), vals) for (key, vals) in list(params.items())):
+        for val in sorted(six.moves.urllib.parse.quote(val, "~") for val in vals):
+            args.append("%s=%s" % (key, val))
+    return "&".join(args)
 
 
 def canonicalize(method, host, uri, params, date, sig_version):
@@ -94,34 +93,33 @@ def canonicalize(method, host, uri, params, date, sig_version):
             method.upper(),
             host.lower(),
             uri,
-            '',
-            hashlib.sha512(params.encode('utf-8')).hexdigest(),
+            "",
+            hashlib.sha512(params.encode("utf-8")).hexdigest(),
         ]
     else:
         raise ValueError("Unknown signature version: {}".format(sig_version))
-    return '\n'.join(canon)
+    return "\n".join(canon)
 
 
-def sign(ikey, skey, method, host, uri, date, sig_version, params,
-         digestmod=hashlib.sha1):
+def sign(ikey, skey, method, host, uri, date, sig_version, params, digestmod=hashlib.sha1):
     """
     Return basic authorization header line with a Duo Web API signature.
     """
     canonical = canonicalize(method, host, uri, params, date, sig_version)
     if isinstance(skey, six.text_type):
-        skey = skey.encode('utf-8')
+        skey = skey.encode("utf-8")
     if isinstance(canonical, six.text_type):
-        canonical = canonical.encode('utf-8')
+        canonical = canonical.encode("utf-8")
 
     sig = hmac.new(skey, canonical, digestmod)
-    auth = '%s:%s' % (ikey, sig.hexdigest())
+    auth = "%s:%s" % (ikey, sig.hexdigest())
 
     if isinstance(auth, six.text_type):
-        auth = auth.encode('utf-8')
+        auth = auth.encode("utf-8")
     b64 = base64.b64encode(auth)
     if not isinstance(b64, six.text_type):
-        b64 = b64.decode('utf-8')
-    return 'Basic %s' % b64
+        b64 = b64.decode("utf-8")
+    return "Basic %s" % b64
 
 
 def normalize_params(params):
@@ -135,25 +133,28 @@ def normalize_params(params):
         if isinstance(value, six.text_type):
             return value.encode("utf-8")
         return value
+
     def to_list(value):
         if value is None or isinstance(value, six.string_types):
             return [value]
         return value
-    return dict(
-        (encode(key), [encode(v) for v in to_list(value)])
-        for (key, value) in list(params.items()))
+
+    return dict((encode(key), [encode(v) for v in to_list(value)]) for (key, value) in list(params.items()))
 
 
 class Client(object):
-
-    def __init__(self, ikey, skey, host,
-                 ca_certs=DEFAULT_CA_CERTS,
-                 sig_timezone='UTC',
-                 user_agent=('Duo API Python/' + __version__),
-                 timeout=socket._GLOBAL_DEFAULT_TIMEOUT,
-                 digestmod=hashlib.sha1,
-                 sig_version=2
-                 ):
+    def __init__(
+        self,
+        ikey,
+        skey,
+        host,
+        ca_certs=DEFAULT_CA_CERTS,
+        sig_timezone="UTC",
+        user_agent=("Duo API Python/" + __version__),
+        timeout=socket._GLOBAL_DEFAULT_TIMEOUT,
+        digestmod=hashlib.sha1,
+        sig_version=2,
+    ):
         """
         ca_certs - Path to CA pem file.
         """
@@ -177,18 +178,17 @@ class Client(object):
             self.timeout = float(timeout)
 
         if sig_version == 4 and digestmod != hashlib.sha512:
-            raise ValueError('sha512 required for sig_version 4')
+            raise ValueError("sha512 required for sig_version 4")
 
-    def set_proxy(self, host, port=None, headers=None,
-                  proxy_type='CONNECT'):
+    def set_proxy(self, host, port=None, headers=None, proxy_type="CONNECT"):
         """
         Configure proxy for API calls. Supported proxy_type values:
 
         'CONNECT' - HTTP proxy with CONNECT.
         None - Disable proxy.
         """
-        if proxy_type not in ('CONNECT', None):
-            raise NotImplementedError('proxy_type=%s' % (proxy_type,))
+        if proxy_type not in ("CONNECT", None):
+            raise NotImplementedError("proxy_type=%s" % (proxy_type,))
         self.proxy_headers = headers
         self.proxy_host = host
         self.proxy_port = port
@@ -210,7 +210,7 @@ class Client(object):
             # to json.
             params = self.canon_json(params)
 
-        if self.sig_timezone == 'UTC':
+        if self.sig_timezone == "UTC":
             now = email.utils.formatdate()
         elif pytz is None:
             raise pytz_error
@@ -218,49 +218,51 @@ class Client(object):
             d = datetime.datetime.now(pytz.timezone(self.sig_timezone))
             now = d.strftime("%a, %d %b %Y %H:%M:%S %z")
 
-        auth = sign(self.ikey,
-                    self.skey,
-                    method,
-                    self.host,
-                    path,
-                    now,
-                    self.sig_version,
-                    params,
-                    self.digestmod)
+        auth = sign(
+            self.ikey,
+            self.skey,
+            method,
+            self.host,
+            path,
+            now,
+            self.sig_version,
+            params,
+            self.digestmod,
+        )
         headers = {
-            'Authorization': auth,
-            'Date': now,
-            'Host': self.host,
+            "Authorization": auth,
+            "Date": now,
+            "Host": self.host,
         }
 
         if self.user_agent:
-            headers['User-Agent'] = self.user_agent
+            headers["User-Agent"] = self.user_agent
 
-        if method in ['POST', 'PUT']:
-            if self.sig_version in (3,4):
-                headers['Content-type'] = 'application/json'
+        if method in ["POST", "PUT"]:
+            if self.sig_version in (3, 4):
+                headers["Content-type"] = "application/json"
                 body = params
             else:
-                headers['Content-type'] = 'application/x-www-form-urlencoded'
+                headers["Content-type"] = "application/x-www-form-urlencoded"
                 body = six.moves.urllib.parse.urlencode(params, doseq=True)
             uri = path
         else:
             body = None
-            uri = path + '?' + six.moves.urllib.parse.urlencode(params, doseq=True)
+            uri = path + "?" + six.moves.urllib.parse.urlencode(params, doseq=True)
 
         encoded_headers = {}
         for k, v in headers.items():
             if isinstance(k, six.text_type):
-                k = k.encode('ascii')
+                k = k.encode("ascii")
             if isinstance(v, six.text_type):
-                v = v.encode('ascii')
+                v = v.encode("ascii")
             encoded_headers[k] = v
 
         return self._make_request(method, uri, body, encoded_headers)
 
     def _connect(self):
         # Host and port for the HTTP(S) connection to the API server.
-        if self.ca_certs == 'HTTP':
+        if self.ca_certs == "HTTP":
             api_port = 80
         else:
             api_port = 443
@@ -271,54 +273,48 @@ class Client(object):
         if self.proxy_type is None:
             host = self.host
             port = api_port
-        elif self.proxy_type == 'CONNECT':
+        elif self.proxy_type == "CONNECT":
             host = self.proxy_host
             port = self.proxy_port
         else:
-            raise NotImplementedError('proxy_type=%s' % (self.proxy_type,))
+            raise NotImplementedError("proxy_type=%s" % (self.proxy_type,))
 
         # Create outer HTTP(S) connection.
-        if self.ca_certs == 'HTTP':
+        if self.ca_certs == "HTTP":
             conn = six.moves.http_client.HTTPConnection(host, port)
-        elif self.ca_certs == 'DISABLE':
+        elif self.ca_certs == "DISABLE":
             kwargs = {}
-            if hasattr(ssl, '_create_unverified_context'):
+            if hasattr(ssl, "_create_unverified_context"):
                 # httplib.HTTPSConnection validates certificates by
                 # default in Python 2.7.9+.
-                kwargs['context'] = ssl._create_unverified_context()
+                kwargs["context"] = ssl._create_unverified_context()
             conn = six.moves.http_client.HTTPSConnection(host, port, **kwargs)
         else:
-            conn = CertValidatingHTTPSConnection(host,
-                                                 port,
-                                                 ca_certs=self.ca_certs)
+            conn = CertValidatingHTTPSConnection(host, port, ca_certs=self.ca_certs)
 
         # Override default socket timeout if requested.
         conn.timeout = self.timeout
 
         # Configure CONNECT proxy tunnel, if any.
-        if self.proxy_type == 'CONNECT':
-            if hasattr(conn, 'set_tunnel'): # 2.7+
-                conn.set_tunnel(self.host,
-                                api_port,
-                                self.proxy_headers)
-            elif hasattr(conn, '_set_tunnel'): # 2.6.3+
+        if self.proxy_type == "CONNECT":
+            if hasattr(conn, "set_tunnel"):  # 2.7+
+                conn.set_tunnel(self.host, api_port, self.proxy_headers)
+            elif hasattr(conn, "_set_tunnel"):  # 2.6.3+
                 # pylint: disable=E1103
-                conn._set_tunnel(self.host,
-                                 api_port,
-                                 self.proxy_headers)
+                conn._set_tunnel(self.host, api_port, self.proxy_headers)
                 # pylint: enable=E1103
 
         return conn
 
     def _make_request(self, method, uri, body, headers):
         conn = self._connect()
-        if self.proxy_type == 'CONNECT':
+        if self.proxy_type == "CONNECT":
             # Ensure the request uses the correct protocol and Host.
-            if self.ca_certs == 'HTTP':
-                api_proto = 'http'
+            if self.ca_certs == "HTTP":
+                api_proto = "http"
             else:
-                api_proto = 'https'
-            uri = ''.join((api_proto, '://', self.host, uri))
+                api_proto = "https"
+            uri = "".join((api_proto, "://", self.host, uri))
         conn.request(method, uri, body, headers)
         response = conn.getresponse()
         data = response.read()
@@ -341,48 +337,59 @@ class Client(object):
         """
         Return the parsed data structure or raise RuntimeError.
         """
+
         def raise_error(msg):
             error = RuntimeError(msg)
             error.status = response.status
             error.reason = response.reason
             error.data = data
             raise error
+
         if not isinstance(data, six.text_type):
-            data = data.decode('utf-8')
+            data = data.decode("utf-8")
         if response.status != 200:
             try:
                 data = json.loads(data)
-                if data['stat'] == 'FAIL':
-                    if 'message_detail' in data:
-                        raise_error('Received %s %s (%s)' % (
-                            response.status,
-                            data['message'],
-                            data['message_detail'],
-                        ))
-                    else:
-                        raise_error('Received %s %s' % (
+                if data["stat"] == "FAIL":
+                    if "message_detail" in data:
+                        raise_error(
+                            "Received %s %s (%s)"
+                            % (
                                 response.status,
-                            data['message'],
-                        ))
+                                data["message"],
+                                data["message_detail"],
+                            )
+                        )
+                    else:
+                        raise_error(
+                            "Received %s %s"
+                            % (
+                                response.status,
+                                data["message"],
+                            )
+                        )
             except (ValueError, KeyError, TypeError):
                 pass
-            raise_error('Received %s %s' % (
+            raise_error(
+                "Received %s %s"
+                % (
                     response.status,
                     response.reason,
-            ))
+                )
+            )
         try:
             data = json.loads(data)
-            if data['stat'] != 'OK':
-                raise_error('Received error response: %s' % data)
-            return data['response']
+            if data["stat"] != "OK":
+                raise_error("Received error response: %s" % data)
+            return data["response"]
         except (ValueError, KeyError, TypeError):
-            raise_error('Received bad response: %s' % data)
+            raise_error("Received bad response: %s" % data)
 
     @classmethod
     def canon_json(cls, params):
         if not isinstance(params, dict):
-            raise ValueError('JSON request must be an object.')
-        return json.dumps(params, sort_keys=True, separators=(',', ':'))
+            raise ValueError("JSON request must be an object.")
+        return json.dumps(params, sort_keys=True, separators=(",", ":"))
 
 
 def output_response(response, data, headers=None):
@@ -395,10 +402,10 @@ def output_response(response, data, headers=None):
     for header in headers:
         val = response.getheader(header)
         if val is not None:
-            print('%s: %s' % (header, val))
+            print("%s: %s" % (header, val))
     try:
         if not isinstance(data, six.text_type):
-            data = data.decode('utf-8')
+            data = data.decode("utf-8")
         data = json.loads(data)
         data = json.dumps(data, sort_keys=True, indent=4)
     except ValueError:
@@ -411,29 +418,24 @@ def main():
         raise argparse_error
     parser = argparse.ArgumentParser()
     # named arguments
-    parser.add_argument('--ikey', required=True,
-                        help='Duo integration key')
-    parser.add_argument('--skey', required=True,
-                        help='Duo integration secret key')
-    parser.add_argument('--host', required=True,
-                        help='Duo API hostname')
-    parser.add_argument('--method', required=True,
-                        help='HTTP request method')
-    parser.add_argument('--path', required=True,
-                        help='API endpoint path')
-    parser.add_argument('--ca', default=DEFAULT_CA_CERTS)
-    parser.add_argument('--sig-version', type=int, default=2)
-    parser.add_argument('--sig-timezone', default='UTC')
+    parser.add_argument("--ikey", required=True, help="Duo integration key")
+    parser.add_argument("--skey", required=True, help="Duo integration secret key")
+    parser.add_argument("--host", required=True, help="Duo API hostname")
+    parser.add_argument("--method", required=True, help="HTTP request method")
+    parser.add_argument("--path", required=True, help="API endpoint path")
+    parser.add_argument("--ca", default=DEFAULT_CA_CERTS)
+    parser.add_argument("--sig-version", type=int, default=2)
+    parser.add_argument("--sig-timezone", default="UTC")
     parser.add_argument(
-        '--show-header',
-        action='append',
+        "--show-header",
+        action="append",
         default=[],
-        metavar='Header-Name',
-        help='Show specified response header(s) (default: only output body).',
+        metavar="Header-Name",
+        help="Show specified response header(s) (default: only output body).",
     )
-    parser.add_argument('--file-args', default=[])
+    parser.add_argument("--file-args", default=[])
     # optional positional arguments are used for GET/POST params, name=val
-    parser.add_argument('param', nargs='*')
+    parser.add_argument("param", nargs="*")
     args = parser.parse_args()
 
     client = Client(
@@ -448,24 +450,23 @@ def main():
     params = collections.defaultdict(list)
     for p in args.param:
         try:
-            (k, v) = p.split('=', 1)
+            (k, v) = p.split("=", 1)
         except ValueError:
-            sys.exit('Error: Positional argument %s is not '
-                     'in key=value format.' % (p,))
+            sys.exit("Error: Positional argument %s is not " "in key=value format." % (p,))
         params[k].append(v)
 
     # parse which arguments are filenames
     file_args = args.file_args
     if args.file_args:
-        file_args = file_args.split(',')
+        file_args = file_args.split(",")
 
     for (k, v) in list(params.items()):
-        if k in file_args:      # value is a filename, replace with contents
+        if k in file_args:  # value is a filename, replace with contents
             if len(v) != 1:
                 # file arguments cannot have multiple values
                 raise NotImplementedError
             (v,) = v
-            with open(v, 'rb') as val:
+            with open(v, "rb") as val:
                 params[k] = base64.b64encode(val.read())
         else:
             params[k] = v
@@ -473,5 +474,6 @@ def main():
     (response, data) = client.api_call(args.method, args.path, params)
     output_response(response, data, args.show_header)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

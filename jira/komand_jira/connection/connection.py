@@ -10,10 +10,15 @@ from komand_jira.util.api import JiraApi
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
-        self.client, self.url, self.username, self.password, self.is_cloud = None, None, None, None, False
+        self.client, self.url, self.username, self.password, self.is_cloud = (
+            None,
+            None,
+            None,
+            None,
+            False,
+        )
         self.rest_client = None
 
     def connect(self, params={}):
@@ -26,20 +31,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         test_passed = self.test()
         if test_passed:
-            client = JIRA(
-                options={"server": self.url},
-                basic_auth=(
-                    self.username,
-                    self.password
-                )
-            )
+            client = JIRA(options={"server": self.url}, basic_auth=(self.username, self.password))
 
             self.client = client
             self.rest_client = JiraApi(self.client, self.is_cloud, self.logger)
 
     def test(self):
-        auth = HTTPBasicAuth(username=self.username,
-                             password=self.password)
+        auth = HTTPBasicAuth(username=self.username, password=self.password)
 
         response = requests.get(self.url, auth=auth)
 
@@ -49,9 +47,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         elif response.status_code == 401:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
         elif response.status_code == 404:
-            raise ConnectionTestException(cause=f"Unable to reach Jira instance at: {self.url}.",
-                                          assistance="Verify the Jira server at the URL configured in your plugin "
-                                                     "connection is correct.")
+            raise ConnectionTestException(
+                cause=f"Unable to reach Jira instance at: {self.url}.",
+                assistance="Verify the Jira server at the URL configured in your plugin " "connection is correct.",
+            )
         else:
-            raise ConnectionTestException(cause=f"Unhandled error occurred.",
-                                          assistance=response.content)
+            raise ConnectionTestException(cause=f"Unhandled error occurred.", assistance=response.content)

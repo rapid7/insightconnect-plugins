@@ -7,10 +7,11 @@ from .schema import UpdateDomainRecordInput, UpdateDomainRecordOutput
 class UpdateDomainRecord(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='update_domain_record',
-            description='Updates a domain record on the domain name',
+            name="update_domain_record",
+            description="Updates a domain record on the domain name",
             input=UpdateDomainRecordInput(),
-            output=UpdateDomainRecordOutput())
+            output=UpdateDomainRecordOutput(),
+        )
 
     def run(self, params={}):
         url = "https://api.digitalocean.com/v2/domains/{domain_name}/records/{record_id}"
@@ -23,15 +24,17 @@ class UpdateDomainRecord(komand.Action):
         payload = {record_property: value}
 
         try:
-            response = requests.put(headers=self.connection.headers,
-                                    url=url.format(domain_name=domain_name, record_id=record_id),
-                                    data=json.dumps(payload))
+            response = requests.put(
+                headers=self.connection.headers,
+                url=url.format(domain_name=domain_name, record_id=record_id),
+                data=json.dumps(payload),
+            )
 
             if response.status_code == 200:
                 return {"success": True}
             else:
                 self.logger.error("Status code: %s, message: %s", response.status_code, response.json()["message"])
-                Exception('Non-200 status code received')
+                Exception("Non-200 status code received")
         except requests.exceptions.RequestException:
             self.logger.error("An unexpected error occurred during the API request")
             raise

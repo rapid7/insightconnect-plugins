@@ -6,17 +6,19 @@ from .schema import GetIncidentHistoryInput, GetIncidentHistoryOutput
 class GetIncidentHistory(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_incident_history',
-                description='Gets history about an incident.',
-                input=GetIncidentHistoryInput(),
-                output=GetIncidentHistoryOutput())
+            name="get_incident_history",
+            description="Gets history about an incident.",
+            input=GetIncidentHistoryInput(),
+            output=GetIncidentHistoryOutput(),
+        )
 
     def run(self, params={}):
         org_id = params.get("organization_id")
         inc_id = params.get("incident_id")
 
-        url = self.connection.API_BASE + "/orgs/{org_id}/incidents/{inc_id}/history".format(org_id=org_id,
-                                                                                            inc_id=inc_id)
+        url = self.connection.API_BASE + "/orgs/{org_id}/incidents/{inc_id}/history".format(
+            org_id=org_id, inc_id=inc_id
+        )
 
         self.logger.info("Retrieving history for incident %s..." % inc_id)
         try:
