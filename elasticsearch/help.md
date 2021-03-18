@@ -304,11 +304,11 @@ This trigger is used to poll for new documents given a query.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|_index|string|None|True|Document Index|None|None|
-|_type|string|None|False|Document Type|None|None|
-|frequency|integer|60|False|Poll frequency in seconds|None|None|
-|query|string|None|False|JSON Query DSL|None|None|
-|routing|string|None|False|Optional Shards to Search|None|None|
+|frequency|integer|60|False|Poll frequency in seconds|None|60|
+|_index|string|None|True|Document Index|None|bank|
+|_type|string|None|False|Document Type|None|doc|
+|routing|string|None|False|Optional Shards to Search|None|account|
+|query|string|None|False|JSON Query DSL|None|{"query": {"match": {"line_number": {"query": "1.1.1"}}}}|
 
 Example input:
 
