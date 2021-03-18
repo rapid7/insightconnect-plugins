@@ -8,8 +8,8 @@ class Component:
 
 
 class Input:
-    ENCODE_ALL = "encode_all"
     URL = "url"
+    ENCODE_ALL = "encode_all"
     
 
 class Output:

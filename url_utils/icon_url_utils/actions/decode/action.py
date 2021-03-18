@@ -31,7 +31,7 @@ class Decode(insightconnect_plugin_runtime.Action):
     def decode_url(self, input_url:str, errors:str) -> str:
         self.logger.info(f"Decoding: {input_url}")
 
-        if errors in ["replace", "ignore"]:
+        if errors.lower() in ["replace", "ignore"]:
             return unquote(input_url, errors=errors)
         else:
             return unquote(input_url)

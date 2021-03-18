@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     URL = "url"
+    ERRORS = "errors"
     
 
 class Output:
