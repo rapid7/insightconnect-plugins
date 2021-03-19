@@ -5228,7 +5228,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 4.9.0 - Add new `size` input to List Inactive Assets | Update List Inactive Assets to return 500 results by default
+* 4.9.0 - Add new `size` input to List Inactive Assets | Update List Inactive Assets to return 500 results by default | Remove the usage of Maya from the plugin
 * 4.8.1 - Fixed an issue where some actions were expecting bytes data and were getting strings instead
 * 4.8.0 - New action Get Asset Vulnerability Solutions
 * 4.7.1 - Code refactor and bug fixes
