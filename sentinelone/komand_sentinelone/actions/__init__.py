@@ -8,6 +8,8 @@ from .apps_by_agent_ids.action import AppsByAgentIds
 from .blacklist.action import Blacklist
 from .blacklist_by_content_hash.action import BlacklistByContentHash
 from .create_ioc_threat.action import CreateIocThreat
+from .disable_agent.action import DisableAgent
+from .enable_agent.action import EnableAgent
 from .get_agent_details.action import GetAgentDetails
 from .get_threat_summary.action import GetThreatSummary
 from .mark_as_benign.action import MarkAsBenign

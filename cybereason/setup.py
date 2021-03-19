@@ -2,13 +2,13 @@
 from setuptools import setup, find_packages
 
 
-setup(name="sentinelone-rapid7-plugin",
-      version="6.1.0",
-      description="The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne",
+setup(name="cybereason-rapid7-plugin",
+      version="1.1.0",
+      description="The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin",
       author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
       install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_sentinelone']
+      scripts=['bin/icon_cybereason']
       )
