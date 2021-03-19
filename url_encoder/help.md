@@ -1,6 +1,6 @@
 # Description
 
-URL encoding converts special characters in a URL into a standard `%XX` representation, using only safe ASCII characters. For example, the space character ` ` is encoded as `%20`.
+URL encoding (also known as percent encoding) converts special characters in a URL into a standard `%XX` representation, using only safe ASCII characters. For example, the space character ` ` is encoded as `%20`.
 
 # Key Features
 

@@ -24,7 +24,7 @@ hub_tags:
 actions:
   encode:
     title: Encode URL
-    description: Percent-encode a URL
+    description: URL-encode a URL
     input:
       url:
         type: string
@@ -47,7 +47,7 @@ actions:
         required: true
   decode:
     title: Decode URL
-    description: Percent-decode a URL
+    description: URL-decode a URL
     input:
       url:
         type: string
