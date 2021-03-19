@@ -21,7 +21,7 @@ _This plugin does not contain a connection._
 
 ### Actions
 
-#### Encoder
+#### Encode URL
 
 This action is used to encode special, reserved, unsafe, or non-ASCII characters in a `string` to make it safe for use as URL components.
 It does not encode the characters `/?=&#` by default, though you may encode these characters anyway by setting the `encode_all` variable to `true`.
@@ -58,7 +58,7 @@ Example output:
 }
 ```
 
-#### Decoder
+#### Decode URL
 
 This action is used to decode an encoded URL `string` to the original characters.
 

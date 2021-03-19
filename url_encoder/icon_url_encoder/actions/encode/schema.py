@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Encode URLs"
+    DESCRIPTION = "Percent-encode a URL"
 
 
 class Input:
