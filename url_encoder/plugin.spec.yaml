@@ -10,7 +10,7 @@ support: community
 status: []
 cloud_ready: true
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/url_utils
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/url_encoder
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - url
@@ -23,8 +23,8 @@ hub_tags:
   features: []
 actions:
   encode:
-    title: Encoder
-    description: Encode URLs
+    title: Encode URL
+    description: Percent-encode a URL
     input:
       url:
         type: string
@@ -46,8 +46,8 @@ actions:
         description: Encoded URL
         required: true
   decode:
-    title: Decoder
-    description: Decode URLs
+    title: Decode URL
+    description: Percent-decode a URL
     input:
       url:
         type: string
