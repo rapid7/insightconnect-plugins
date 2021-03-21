@@ -11,7 +11,8 @@
 # Requirements
 
 * URL for Jira Software, Jira Server, or Jira ServiceDesk
-* Administrative credentials
+* Jira user email address and API key when using Jira Cloud
+* Jira user credentials when using on-prem Jira server
 
 # Documentation
 
@@ -1142,6 +1143,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 6.0.5 - Update `requirements` in help.md
 * 6.0.4 - Update to v4 Python plugin runtime
 * 6.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/jira)
 * 6.0.2 - Fix in Comment Issue action where the Python module attributes were logged | Remove duplicate ConnectionTestException call from Connection Test
