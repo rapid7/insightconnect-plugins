@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rest
 title: HTTP Requests
 description: The HTTP Requests plugin to make it easy to integrate with RESTful services
-version: 4.0.1
+version: 4.0.2
 vendor: rapid7
 support: community
 status: []
@@ -84,15 +84,14 @@ actions:
         example: /org/users
       headers:
         title: Headers
-        description: Headers to use for the request. These will override any default
-          headers
+        description: Headers to use for the request. These will override any default headers
         type: object
         required: false
         example: '{"Host": "rapid7.com"}'
     output:
       body_object:
         title: Body Object
-        description: Response payload from the server as an object. Note, if the response has invalid object structure(list, string..) plugin will wrap it with object map
+        description: Response payload from the server as an object. Note, if the response has invalid object structure (list, string..) plugin will wrap it with object map
         type: object
         required: false
       body_string:
@@ -103,7 +102,7 @@ actions:
       status:
         title: Status
         description: Status code of the response from the server
-        type: int
+        type: integer
         required: false
       headers:
         title: Headers
@@ -122,8 +121,7 @@ actions:
         example: /org/users
       headers:
         title: Headers
-        description: Headers to use for the request. These will override any default
-          headers
+        description: Headers to use for the request. These will override any default headers
         type: object
         required: false
         example: '{"Host": "rapid7.com"}'
@@ -147,7 +145,7 @@ actions:
       status:
         title: Status
         description: Status code of the response from the server
-        type: int
+        type: integer
         required: false
       headers:
         title: Headers
@@ -166,8 +164,7 @@ actions:
         example: /org/users
       headers:
         title: Headers
-        description: Headers to use for the request. These will override any default
-          headers
+        description: Headers to use for the request. These will override any default headers
         type: object
         required: false
         example: '{"Host": "rapid7.com"}'
@@ -191,7 +188,7 @@ actions:
       status:
         title: Status
         description: Status code of the response from the server
-        type: int
+        type: integer
         required: false
       headers:
         title: Headers
@@ -210,8 +207,7 @@ actions:
         example: /org/users
       headers:
         title: Headers
-        description: Headers to use for the request. These will override any default
-          headers
+        description: Headers to use for the request. These will override any default headers
         type: object
         required: false
         example: '{"Host": "rapid7.com"}'
@@ -235,7 +231,7 @@ actions:
       status:
         title: Status
         description: Status code of the response from the server
-        type: int
+        type: integer
         required: false
       headers:
         title: Headers
@@ -254,8 +250,7 @@ actions:
         example: /org/users
       headers:
         title: Headers
-        description: Headers to use for the request. These will override any default
-          headers
+        description: Headers to use for the request. These will override any default headers
         type: object
         required: false
         example: '{"Host": "rapid7.com"}'
@@ -279,7 +274,7 @@ actions:
       status:
         title: Status
         description: Status code of the response from the server
-        type: int
+        type: integer
         required: false
       headers:
         title: Headers
