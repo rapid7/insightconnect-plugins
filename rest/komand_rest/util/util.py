@@ -148,7 +148,6 @@ class RestAPI(object):
 
 class TestRestAPI(RestAPI):
     def __init__(self, rest_api: RestAPI):
-        urlparse(rest_api.url)
         super().__init__(
             TestRestAPI.get_parsed_url(rest_api.url),
             rest_api.logger,
