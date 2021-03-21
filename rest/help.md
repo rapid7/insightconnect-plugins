@@ -15,7 +15,7 @@ This plugin is often used to integrate with ad-hoc 3rd party API's in a workflow
 
 ## Setup
 
-Check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/rest) for more details on how to configure this plugin.
+Check out the [plugin guide](https://docs.rapid7.com/insightconnect/http-requests) for more details on how to configure this plugin.
 
 The connection configuration accepts the following parameters:
 
@@ -445,7 +445,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
-* 4.0.2 - Updated `docs_url` to [HTTP Requests - Plugin Connection Guide](https://insightconnect.help.rapid7.com/docs/http-requests)
+* 4.0.2 - Updated `docs_url` to [HTTP Requests - Plugin Connection Guide](https://docs.rapid7.com/insightconnect/http-requests)
 * 4.0.1 - Fix issue where the connection test fails when a base URL is provided with a web resource path for the Rapid7 Insight and Pendo auth types
 * 4.0.0 - Support new authentication types: Digest Auth and Bearer Token | Add a workaround to encrypt a secret key when used in custom HTTP headers | Add built-in authentication for services: Insight Platform, Pendo and OpsGenie
 * 3.0.5 - Fix issue where a null body return on a successful request would crash the plugin
@@ -467,4 +467,4 @@ Any issues connecting to the remote service should be present in the log of the 
 ## References
 
 * [HTTP Request Architecture Style](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
-* [InsightConnect HTTP Request Plugin Guide](https://insightconnect.help.rapid7.com/docs/rest)
+* [InsightConnect HTTP Request Plugin Guide](https://docs.rapid7.com/insightconnect/http-requests)
