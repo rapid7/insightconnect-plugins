@@ -113,7 +113,7 @@ Ignore will drop the character from the output.
 
 # Version History
 
-* 1.0.1 - Patch encode action safe characters
+* 1.0.1 - Patch encode action to include # as safe characters
 * 1.0.0 - Initial plugin
 
 # Links
