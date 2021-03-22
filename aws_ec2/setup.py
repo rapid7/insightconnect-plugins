@@ -10,5 +10,5 @@ setup(name='aws_ec2-rapid7-plugin',
       url='',
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/icon_aws_ec2']
+      scripts=['bin/komand_aws_ec2']
       )
