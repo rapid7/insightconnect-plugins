@@ -1,0 +1,43 @@
+{
+	"spec": "367d174a81b8d05916d2348f88aa9760",
+	"manifest": "43862f98e3e6f7304fafa91e7a050d14",
+	"setup": "f693c59941547e2e82440bf879134d46",
+	"schemas": [
+		{
+			"identifier": "authorize_security_group_egress/schema.py",
+			"hash": "f6d9c2f69b5f7b73c401442e746b4434"
+		},
+		{
+			"identifier": "authorize_security_group_ingress/schema.py",
+			"hash": "179e1650cbdd70b4f902925f0ade3b50"
+		},
+		{
+			"identifier": "describe_instances/schema.py",
+			"hash": "a72f696b769de5b7c740bc7dafc058b9"
+		},
+		{
+			"identifier": "describe_security_groups/schema.py",
+			"hash": "ca07a3fe25d8cc18e7dc0db84b3f043d"
+		},
+		{
+			"identifier": "revoke_security_group_egress/schema.py",
+			"hash": "88c6a9715dff786b8925b27129c8580f"
+		},
+		{
+			"identifier": "revoke_security_group_ingress/schema.py",
+			"hash": "b1d587b84ed425373a530a0dc63a775d"
+		},
+		{
+			"identifier": "update_security_group_rule_descriptions_egress/schema.py",
+			"hash": "43298595b0333431f30d2d8fb7ed1d57"
+		},
+		{
+			"identifier": "update_security_group_rule_descriptions_ingress/schema.py",
+			"hash": "2e7c392fe0c9dddeffa77edb05bef94e"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "77028f9999c8d94822cade06ab37be0b"
+		}
+	]
+}

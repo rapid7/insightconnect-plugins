@@ -1,0 +1,1141 @@
+plugin_spec_version: v2
+extension: plugin
+products: ["insightconnect"]
+name: aws_ec2
+title: AWS EC2
+vendor: rapid7
+support: rapid7
+status: []
+description: Amazon Elastic Compute Cloud (Amazon EC2) provides resizable computing
+  capacity in the Amazon Web Services (AWS) cloud. This plugin allows you to manage your EC2 environment.
+version: 1.0.1
+resources:
+  vendor_url: https://www.amazon.com
+tags:
+- aws
+- ec2
+- compute
+hub_tags:
+  use_cases: [threat_detection_and_response, asset_inventory]
+  keywords: [aws, ec2, compute]
+  features: []
+types:
+  instance_network_interface_association:
+    ip_owner_id:
+      title: IP Owner ID
+      type: string
+      description: The ID of the owner of the Elastic IP address
+      required: false
+    public_dns_name:
+      title: Public DNS Name
+      type: string
+      description: The public DNS name
+      required: false
+    public_ip:
+      title: Public IP
+      type: string
+      description: The public IP address or Elastic IP address bound to the network
+        interface
+      required: false
+  instance_private_ip_address:
+    association:
+      title: Association
+      type: instance_network_interface_association
+      description: The association information for an Elastic IP address for the network
+        interface
+      required: false
+    primary:
+      title: Primary
+      type: boolean
+      description: Indicates whether this IPv4 address is the primary private IP address
+        of the network interface
+      required: false
+    private_dns_name:
+      title: Private DNS Name
+      type: string
+      description: The private IPv4 DNS name
+      required: false
+    private_ip_address:
+      title: Private IP Address
+      type: string
+      description: The private IPv4 address of the network interface
+      required: false
+  instance_ipv6_address:
+    ipv6_address:
+      title: IPv6 Address
+      type: string
+      description: The IPv6 address
+      required: false
+  group_identifier:
+    group_name:
+      title: Group Name
+      type: string
+      description: The name of the security group
+      required: false
+    group_id:
+      title: Group ID
+      type: string
+      description: The ID of the security group
+      required: false
+  instance_network_interface_attachment:
+    attach_time:
+      title: Attach Time
+      type: string
+      description: The time stamp when the attachment initiated
+      required: false
+    attachment_id:
+      title: Attachment ID
+      type: string
+      description: The ID of the network interface attachment
+      required: false
+    delete_on_termination:
+      title: Delete On Termination
+      type: boolean
+      description: Indicates whether the network interface is deleted when the instance
+        is terminated
+      required: false
+    device_index:
+      title: Device Index
+      type: integer
+      description: The index of the device on the instance for the network interface
+        attachment
+      required: false
+    status:
+      title: Status
+      type: string
+      description: The attachment state
+      required: false
+  ebs_instance_block_device:
+    attach_time:
+      title: Attach Time
+      type: string
+      description: The time stamp when the attachment initiated
+      required: false
+    delete_on_termination:
+      title: Delete On Termination
+      type: boolean
+      description: Indicates whether the volume is deleted on instance termination
+      required: false
+    status:
+      title: Status
+      type: string
+      description: The attachment state
+      required: false
+    volume_id:
+      title: Volume ID
+      type: string
+      description: The ID of the EBS volume
+      required: false
+  user_id_group_pair:
+    description:
+      title: Description
+      type: string
+      description: A description for the security group rule that references this
+        user ID group pair
+      required: false
+    group_id:
+      title: Group ID
+      type: string
+      description: The ID of the security group
+      required: false
+    group_name:
+      title: Group Name
+      type: string
+      description: The name of the security group
+      required: false
+    peering_status:
+      title: Peering Status
+      type: string
+      description: The status of a VPC peering connection, if applicable
+      required: false
+    user_id:
+      title: User ID
+      type: string
+      description: The ID of an AWS account
+      required: false
+    vpc_id:
+      title: Vpc ID
+      type: string
+      description: The ID of the VPC for the referenced security group, if applicable
+      required: false
+    vpc_peering_connection_id:
+      title: Vpc Peering Connection ID
+      type: string
+      description: The ID of the VPC peering connection, if applicable
+      required: false
+  prefix_list_id:
+    description:
+      title: Description
+      type: string
+      description: A description for the security group rule that references this
+        prefix list ID
+      required: false
+    prefix_list_id:
+      title: Prefix List ID
+      type: string
+      description: The ID of the prefix
+      required: false
+  ipv6_range:
+    cidr_ipv6:
+      title: CIDR IPv6
+      type: string
+      description: The IPv6 CIDR range
+      required: false
+    description:
+      title: Description
+      type: string
+      description: A description for the security group rule that references this
+        IPv6 address range
+      required: false
+  ip_range:
+    cidr_ip:
+      title: CIDR IP
+      type: string
+      description: The IPv4 CIDR range
+      required: false
+    description:
+      title: Description
+      type: string
+      description: A description for the security group rule that references this
+        IPv4 address range
+      required: false
+  tag:
+    key:
+      title: Key
+      type: string
+      description: The key of the tag
+      required: false
+    value:
+      title: Value
+      type: string
+      description: The value of the tag
+      required: false
+  state_reason:
+    code:
+      title: Code
+      type: string
+      description: The reason code for the state change
+      required: false
+    message:
+      title: Message
+      type: string
+      description: The message for the state change
+      required: false
+  instance_network_interface:
+    association:
+      title: Association
+      type: instance_network_interface_association
+      description: The association information for an Elastic IPv4 associated with
+        the network interface
+      required: false
+    attachment:
+      title: Attachment
+      type: instance_network_interface_attachment
+      description: The network interface attachment
+      required: false
+    description:
+      title: Description
+      type: string
+      description: The description
+      required: false
+    groups:
+      title: Groups
+      type: '[]group_identifier'
+      description: One or more security groups
+      required: false
+    ipv6_addresses:
+      title: IPv6 Addresses
+      type: '[]instance_ipv6_address'
+      description: One or more IPv6 addresses associated with the network interface
+      required: false
+    mac_address:
+      title: Mac Address
+      type: string
+      description: The MAC address
+      required: false
+    network_interface_id:
+      title: Network Interface ID
+      type: string
+      description: The ID of the network interface
+      required: false
+    owner_id:
+      title: Owner ID
+      type: string
+      description: The ID of the AWS account that created the network interface
+      required: false
+    private_dns_name:
+      title: Private DNS Name
+      type: string
+      description: The private DNS name
+      required: false
+    private_ip_address:
+      title: Private IP Address
+      type: string
+      description: The IPv4 address of the network interface within the subnet
+      required: false
+    private_ip_addresses:
+      title: Private IP Addresses
+      type: '[]instance_private_ip_address'
+      description: One or more private IPv4 addresses associated with the network
+        interface
+      required: false
+    source_dest_check:
+      title: Source Dest Check
+      type: boolean
+      description: Indicates whether to validate network traffic to or from this network
+        interface
+      required: false
+    status:
+      title: Status
+      type: string
+      description: The status of the network interface
+      required: false
+    subnet_id:
+      title: Subnet ID
+      type: string
+      description: The ID of the subnet
+      required: false
+    vpc_id:
+      title: Vpc ID
+      type: string
+      description: The ID of the VPC
+      required: false
+  elastic_gpu_association:
+    elastic_gpu_id:
+      title: Elastic Gpu ID
+      type: string
+      description: The ID of the Elastic GPU
+      required: false
+    elastic_gpu_association_id:
+      title: Elastic Gpu Association ID
+      type: string
+      description: The ID of the association
+      required: false
+    elastic_gpu_association_state:
+      title: Elastic Gpu Association State
+      type: string
+      description: The state of the association between the instance and the Elastic
+        GPU
+      required: false
+    elastic_gpu_association_time:
+      title: Elastic Gpu Association Time
+      type: string
+      description: The time the Elastic GPU was associated with the instance
+      required: false
+  iam_instance_profile:
+    arn:
+      title: ARN
+      type: string
+      description: The Amazon Resource Name (ARN) of the instance profile
+      required: false
+    id:
+      title: ID
+      type: string
+      description: The ID of the instance profile
+      required: false
+  instance_block_device_mapping:
+    device_name:
+      title: Device Name
+      type: string
+      description: The device name (for example, /dev/sdh or xvdh)
+      required: false
+    ebs:
+      title: Ebs
+      type: ebs_instance_block_device
+      description: Parameters used to automatically set up EBS volumes when the instance
+        is launched
+      required: false
+  instance_state:
+    code:
+      title: Code
+      type: integer
+      description: The low byte represents the state
+      required: false
+    name:
+      title: Name
+      type: string
+      description: The current state of the instance
+      required: false
+  product_code:
+    product_code_id:
+      title: Product Code ID
+      type: string
+      description: The product code
+      required: false
+    product_code_type:
+      title: Product Code Type
+      type: string
+      description: The type of product code
+      required: false
+  placement:
+    availability_zone:
+      title: Availability Zone
+      type: string
+      description: The Availability Zone of the instance
+      required: false
+    affinity:
+      title: Affinity
+      type: string
+      description: The affinity setting for the instance on the Dedicated Host
+      required: false
+    group_name:
+      title: Group Name
+      type: string
+      description: The name of the placement group the instance is in (for cluster
+        compute instances)
+      required: false
+    host_id:
+      title: Host ID
+      type: string
+      description: The ID of the Dedicated Host on which the instance resides
+      required: false
+    tenancy:
+      title: Tenancy
+      type: string
+      description: The tenancy of the instance (if the instance is running in a VPC)
+      required: false
+    spread_domain:
+      title: Spread Domain
+      type: string
+      description: Reserved for future use
+      required: false
+  monitoring:
+    state:
+      title: State
+      type: string
+      description: Indicates whether detailed monitoring is enabled
+      required: false
+  ip_permission:
+    from_port:
+      title: From Port
+      type: integer
+      description: The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6
+        type number
+      required: false
+    ip_protocol:
+      title: IP Protocol
+      type: string
+      description: The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers)
+      required: false
+    ip_ranges:
+      title: IP Ranges
+      type: '[]ip_range'
+      description: One or more IPv4 ranges
+      required: false
+    ipv6_ranges:
+      title: IPv6 Ranges
+      type: '[]ipv6_range'
+      description: '[EC2-VPC only] One or more IPv6 ranges'
+      required: false
+    prefix_list_ids:
+      title: Prefix List IDs
+      type: '[]prefix_list_id'
+      description: (Valid for AuthorizeSecurityGroupEgress, RevokeSecurityGroupEgress
+        and DescribeSecurityGroups only) One or more prefix list IDs for an AWS service
+      required: false
+    to_port:
+      title: To Port
+      type: integer
+      description: The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6
+        code
+      required: false
+    user_id_group_pairs:
+      title: User ID Group Pairs
+      type: '[]user_id_group_pair'
+      description: One or more security group and AWS account ID pairs
+      required: false
+  instance:
+    ami_launch_index:
+      title: Ami Launch Index
+      type: integer
+      description: The AMI launch index, which can be used to find this instance in
+        the launch group
+      required: false
+    image_id:
+      title: Image ID
+      type: string
+      description: The ID of the AMI used to launch the instance
+      required: false
+    instance_id:
+      title: Instance ID
+      type: string
+      description: The ID of the instance
+      required: false
+    instance_type:
+      title: Instance Type
+      type: string
+      description: The instance type
+      required: false
+    kernel_id:
+      title: Kernel ID
+      type: string
+      description: The kernel associated with this instance, if applicable
+      required: false
+    key_name:
+      title: Key Name
+      type: string
+      description: The name of the key pair, if this instance was launched with an
+        associated key pair
+      required: false
+    launch_time:
+      title: Launch Time
+      type: string
+      description: The time the instance was launched
+      required: false
+    monitoring:
+      title: Monitoring
+      type: monitoring
+      description: The monitoring for the instance
+      required: false
+    placement:
+      title: Placement
+      type: placement
+      description: The location where the instance launched, if applicable
+      required: false
+    platform:
+      title: Platform
+      type: string
+      description: The value is Windows for Windows instances; otherwise blank
+      required: false
+    private_dns_name:
+      title: Private DNS Name
+      type: string
+      description: (IPv4 only) The private DNS hostname name assigned to the instance
+      required: false
+    private_ip_address:
+      title: Private IP Address
+      type: string
+      description: The private IPv4 address assigned to the instance
+      required: false
+    product_codes:
+      title: Product Codes
+      type: '[]product_code'
+      description: The product codes attached to this instance, if applicable
+      required: false
+    public_dns_name:
+      title: Public DNS Name
+      type: string
+      description: (IPv4 only) The public DNS name assigned to the instance
+      required: false
+    public_ip_address:
+      title: Public IP Address
+      type: string
+      description: The public IPv4 address assigned to the instance, if applicable
+      required: false
+    ramdisk_id:
+      title: Ramdisk ID
+      type: string
+      description: The RAM disk associated with this instance, if applicable
+      required: false
+    state:
+      title: State
+      type: instance_state
+      description: The current state of the instance
+      required: false
+    state_transition_reason:
+      title: State Transition Reason
+      type: string
+      description: The reason for the most recent state transition
+      required: false
+    subnet_id:
+      title: Subnet ID
+      type: string
+      description: '[EC2-VPC] The ID of the subnet in which the instance is running'
+      required: false
+    vpc_id:
+      title: Vpc ID
+      type: string
+      description: '[EC2-VPC] The ID of the VPC in which the instance is running'
+      required: false
+    architecture:
+      title: Architecture
+      type: string
+      description: The architecture of the image
+      required: false
+    block_device_mappings:
+      title: Block Device Mappings
+      type: '[]instance_block_device_mapping'
+      description: Any block device mapping entries for the instance
+      required: false
+    client_token:
+      title: Client Token
+      type: string
+      description: The idempotency token you provided when you launched the instance,
+        if applicable
+      required: false
+    ebs_optimized:
+      title: Ebs Optimized
+      type: boolean
+      description: Indicates whether the instance is optimized for Amazon EBS I/O
+      required: false
+    ena_support:
+      title: Ena Support
+      type: boolean
+      description: Specifies whether enhanced networking with ENA is enabled
+      required: false
+    hypervisor:
+      title: Hypervisor
+      type: string
+      description: The hypervisor type of the instance
+      required: false
+    iam_instance_profile:
+      title: Iam Instance Profile
+      type: iam_instance_profile
+      description: The IAM instance profile associated with the instance, if applicable
+      required: false
+    instance_lifecycle:
+      title: Instance Lifecycle
+      type: string
+      description: Indicates whether this is a Spot Instance or a Scheduled Instance
+      required: false
+    elastic_gpu_associations:
+      title: Elastic Gpu Associations
+      type: '[]elastic_gpu_association'
+      description: The Elastic GPU associated with the instance
+      required: false
+    network_interfaces:
+      title: Network Interfaces
+      type: '[]instance_network_interface'
+      description: '[EC2-VPC] One or more network interfaces for the instance'
+      required: false
+    root_device_name:
+      title: Root Device Name
+      type: string
+      description: The device name of the root device volume (for example, /dev/sda1)
+      required: false
+    root_device_type:
+      title: Root Device Type
+      type: string
+      description: The root device type used by the AMI
+      required: false
+    security_groups:
+      title: Security Groups
+      type: '[]group_identifier'
+      description: One or more security groups for the instance
+      required: false
+    source_dest_check:
+      title: Source Dest Check
+      type: boolean
+      description: Specifies whether to enable an instance launched in a VPC to perform
+        NAT
+      required: false
+    spot_instance_request_id:
+      title: Spot Instance Request ID
+      type: string
+      description: If the request is a Spot Instance request, the ID of the request
+      required: false
+    sriov_net_support:
+      title: Sriov Net Support
+      type: string
+      description: Specifies whether enhanced networking with the Intel 82599 Virtual
+        Function interface is enabled
+      required: false
+    state_reason:
+      title: State Reason
+      type: state_reason
+      description: The reason for the most recent state transition
+      required: false
+    tags:
+      title: Tags
+      type: '[]tag'
+      description: Any tags assigned to the instance
+      required: false
+    virtualization_type:
+      title: Virtualization Type
+      type: string
+      description: The virtualization type of the instance
+      required: false
+  response_metadata:
+    request_id:
+      title: Request ID
+      type: string
+      description: Unique identifier for the request
+      required: true
+    http_status_code:
+      title: HTTP Status Code
+      type: integer
+      description: HTTP status code for the request
+      required: true
+  security_group:
+    description:
+      title: Description
+      type: string
+      description: A description of the security group
+      required: false
+    group_name:
+      title: Group Name
+      type: string
+      description: The name of the security group
+      required: false
+    ip_permissions:
+      title: IP Permissions
+      type: '[]ip_permission'
+      description: One or more inbound rules associated with the security group
+      required: false
+    owner_id:
+      title: Owner ID
+      type: string
+      description: The AWS account ID of the owner of the security group
+      required: false
+    group_id:
+      title: Group ID
+      type: string
+      description: The ID of the security group
+      required: false
+    ip_permissions_egress:
+      title: IP Permissions Egress
+      type: '[]ip_permission'
+      description: '[EC2-VPC] One or more outbound rules associated with the security
+        group'
+      required: false
+    tags:
+      title: Tags
+      type: '[]tag'
+      description: Any tags assigned to the security group
+      required: false
+    vpc_id:
+      title: Vpc ID
+      type: string
+      description: '[EC2-VPC] The ID of the VPC for the security group'
+      required: false
+  filter:
+    name:
+      title: Name
+      type: string
+      description: The name of the filter
+      required: false
+    values:
+      title: Values
+      type: '[]string'
+      description: One or more filter values
+      required: false
+  reservation:
+    groups:
+      title: Groups
+      type: '[]group_identifier'
+      description: '[EC2-Classic only] One or more security groups'
+      required: false
+    instances:
+      title: Instances
+      type: '[]instance'
+      description: One or more instances
+      required: false
+    owner_id:
+      title: Owner ID
+      type: string
+      description: The ID of the AWS account that owns the reservation
+      required: false
+    requester_id:
+      title: Requester ID
+      type: string
+      description: The ID of the requester that launched the instances on your behalf
+        (for example, AWS Management Console or Auto Scaling)
+      required: false
+    reservation_id:
+      title: Reservation ID
+      type: string
+      description: The ID of the reservation
+      required: false
+connection:
+  aws_access_key_id:
+    title: AWS Access Key ID
+    description: The ID of the AWS Access Key to use for authentication with AWS
+    type: credential_secret_key
+    required: true
+  aws_secret_access_key:
+    title: AWS Secret Access Key
+    description: 'The AWS Secret Access Key used for signing requests with the given
+      AWS Access Key ID. Note: Domain is not required'
+    type: credential_secret_key
+    required: true
+  region:
+    title: Region
+    description: The AWS Region to use for requests. An example would be us-east-1
+    type: string
+    required: true
+actions:
+  authorize_security_group_egress:
+    title: Authorize Security Group Egress
+    description: '[EC2-VPC only] Adds one or more egress rules to a security group
+      for use with a VPC'
+    input:
+      dry_run:
+        title: Dry Run
+        type: boolean
+        description: Checks whether you have the required permissions for the action,
+          without actually making the request, and provides an error response
+        required: false
+      group_id:
+        title: Group ID
+        type: string
+        description: The ID of the security group
+        required: true
+      ip_permissions:
+        title: IP Permissions
+        type: '[]ip_permission'
+        description: One or more sets of IP permissions
+        required: false
+      cidr_ip:
+        title: CIDR IP
+        type: string
+        description: Not supported
+        required: false
+      from_port:
+        title: From Port
+        type: integer
+        description: Not supported
+        required: false
+      ip_protocol:
+        title: IP Protocol
+        type: string
+        description: Not supported
+        required: false
+      to_port:
+        title: To Port
+        type: integer
+        description: Not supported
+        required: false
+      source_security_group_name:
+        title: Source Security Group Name
+        type: string
+        description: Not supported
+        required: false
+      source_security_group_owner_id:
+        title: Source Security Group Owner ID
+        type: string
+        description: Not supported
+        required: false
+    output:
+      response_metadata:
+        title: Response Metadata
+        type: response_metadata
+        description: Metadata about the response from AWS
+        required: true
+  authorize_security_group_ingress:
+    title: Authorize Security Group Ingress
+    description: Adds one or more ingress rules to a security group
+    input:
+      cidr_ip:
+        title: CIDR IP
+        type: string
+        description: The CIDR IPv4 address range
+        required: false
+      from_port:
+        title: From Port
+        type: integer
+        description: The start of port range for the TCP and UDP protocols, or an
+          ICMP/ICMPv6 type number
+        required: false
+      group_id:
+        title: Group ID
+        type: string
+        description: The ID of the security group
+        required: false
+      group_name:
+        title: Group Name
+        type: string
+        description: '[EC2-Classic, default VPC] The name of the security group'
+        required: false
+      ip_permissions:
+        title: IP Permissions
+        type: '[]ip_permission'
+        description: One or more sets of IP permissions
+        required: false
+      ip_protocol:
+        title: IP Protocol
+        type: string
+        description: The IP protocol name (tcp, udp, icmp) or number (see Protocol
+          Numbers)
+        required: false
+      source_security_group_name:
+        title: Source Security Group Name
+        type: string
+        description: '[EC2-Classic, default VPC] The name of the source security group'
+        required: false
+      source_security_group_owner_id:
+        title: Source Security Group Owner ID
+        type: string
+        description: '[EC2-Classic] The AWS account ID for the source security group,
+          if the source security group is in a different account'
+        required: false
+      to_port:
+        title: To Port
+        type: integer
+        description: The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6
+          code number
+        required: false
+      dry_run:
+        title: Dry Run
+        type: boolean
+        description: Checks whether you have the required permissions for the action,
+          without actually making the request, and provides an error response
+        required: false
+    output:
+      response_metadata:
+        title: Response Metadata
+        type: response_metadata
+        description: Metadata about the response from AWS
+        required: true
+  describe_instances:
+    title: Describe Instances
+    description: Describes one or more of your instances
+    input:
+      filters:
+        title: Filters
+        type: '[]filter'
+        description: One or more filters
+        required: false
+      instance_ids:
+        title: Instance IDs
+        type: '[]string'
+        description: One or more instance IDs
+        required: false
+      dry_run:
+        title: Dry Run
+        type: boolean
+        description: Checks whether you have the required permissions for the action,
+          without actually making the request, and provides an error response
+        required: false
+    output:
+      response_metadata:
+        title: Response Metadata
+        type: response_metadata
+        description: Metadata about the response from AWS
+        required: true
+      reservations:
+        title: Reservations
+        type: '[]reservation'
+        description: Zero or more reservations
+        required: false
+  describe_security_groups:
+    title: Describe Security Groups
+    description: Describes one or more of your security groups
+    input:
+      filters:
+        title: Filters
+        type: '[]filter'
+        description: One or more filters
+        required: false
+      group_ids:
+        title: Group IDs
+        type: '[]string'
+        description: One or more security group IDs
+        required: false
+      group_names:
+        title: Group Names
+        type: '[]string'
+        description: '[EC2-Classic and default VPC only] One or more security group
+          names'
+        required: false
+      dry_run:
+        title: Dry Run
+        type: boolean
+        description: Checks whether you have the required permissions for the action,
+          without actually making the request, and provides an error response
+        required: false
+    output:
+      response_metadata:
+        title: Response Metadata
+        type: response_metadata
+        description: Metadata about the response from AWS
+        required: true
+      security_groups:
+        title: Security Groups
+        type: '[]security_group'
+        description: Information about one or more security groups
+        required: false
+  revoke_security_group_egress:
+    title: Revoke Security Group Egress
+    description: '[EC2-VPC only] Removes one or more egress rules from a security
+      group for EC2-VPC'
+    input:
+      dry_run:
+        title: Dry Run
+        type: boolean
+        description: Checks whether you have the required permissions for the action,
+          without actually making the request, and provides an error response
+        required: false
+      group_id:
+        title: Group ID
+        type: string
+        description: The ID of the security group
+        required: true
+      ip_permissions:
+        title: IP Permissions
+        type: '[]ip_permission'
+        description: One or more sets of IP permissions
+        required: false
+      cidr_ip:
+        title: CIDR IP
+        type: string
+        description: Not supported
+        required: false
+      from_port:
+        title: From Port
+        type: integer
+        description: Not supported
+        required: false
+      ip_protocol:
+        title: IP Protocol
+        type: string
+        description: Not supported
+        required: false
+      to_port:
+        title: To Port
+        type: integer
+        description: Not supported
+        required: false
+      source_security_group_name:
+        title: Source Security Group Name
+        type: string
+        description: Not supported
+        required: false
+      source_security_group_owner_id:
+        title: Source Security Group Owner ID
+        type: string
+        description: Not supported
+        required: false
+    output:
+      response_metadata:
+        title: Response Metadata
+        type: response_metadata
+        description: Metadata about the response from AWS
+        required: true
+  revoke_security_group_ingress:
+    title: Revoke Security Group Ingress
+    description: Removes one or more ingress rules from a security group
+    input:
+      cidr_ip:
+        title: CIDR IP
+        type: string
+        description: The CIDR IP address range
+        required: false
+      from_port:
+        title: From Port
+        type: integer
+        description: The start of port range for the TCP and UDP protocols, or an
+          ICMP type number
+        required: false
+      group_id:
+        title: Group ID
+        type: string
+        description: The ID of the security group
+        required: false
+      group_name:
+        title: Group Name
+        type: string
+        description: '[EC2-Classic, default VPC] The name of the security group'
+        required: false
+      ip_permissions:
+        title: IP Permissions
+        type: '[]ip_permission'
+        description: One or more sets of IP permissions
+        required: false
+      ip_protocol:
+        title: IP Protocol
+        type: string
+        description: The IP protocol name (tcp, udp, icmp) or number (see Protocol
+          Numbers)
+        required: false
+      source_security_group_name:
+        title: Source Security Group Name
+        type: string
+        description: '[EC2-Classic, default VPC] The name of the source security group'
+        required: false
+      source_security_group_owner_id:
+        title: Source Security Group Owner ID
+        type: string
+        description: '[EC2-Classic] The AWS account ID of the source security group,
+          if the source security group is in a different account'
+        required: false
+      to_port:
+        title: To Port
+        type: integer
+        description: The end of port range for the TCP and UDP protocols, or an ICMP
+          code number
+        required: false
+      dry_run:
+        title: Dry Run
+        type: boolean
+        description: Checks whether you have the required permissions for the action,
+          without actually making the request, and provides an error response
+        required: false
+    output:
+      response_metadata:
+        title: Response Metadata
+        type: response_metadata
+        description: Metadata about the response from AWS
+        required: true
+  update_security_group_rule_descriptions_egress:
+    title: Update Security Group Rule Descriptions Egress
+    description: '[EC2-VPC only] Updates the description of an egress (outbound) security
+      group rule'
+    input:
+      dry_run:
+        title: Dry Run
+        type: boolean
+        description: Checks whether you have the required permissions for the action,
+          without actually making the request, and provides an error response
+        required: false
+      group_id:
+        title: Group ID
+        type: string
+        description: The ID of the security group
+        required: false
+      group_name:
+        title: Group Name
+        type: string
+        description: '[Default VPC] The name of the security group'
+        required: false
+      ip_permissions:
+        title: IP Permissions
+        type: '[]ip_permission'
+        description: The IP permissions for the security group rule
+        required: true
+    output:
+      response_metadata:
+        title: Response Metadata
+        type: response_metadata
+        description: Metadata about the response from AWS
+        required: true
+      return:
+        title: Return
+        type: boolean
+        description: Returns true if the request succeeds; otherwise, returns an error
+        required: false
+  update_security_group_rule_descriptions_ingress:
+    title: Update Security Group Rule Descriptions Ingress
+    description: Updates the description of an ingress (inbound) security group rule
+    input:
+      dry_run:
+        title: Dry Run
+        type: boolean
+        description: Checks whether you have the required permissions for the action,
+          without actually making the request, and provides an error response
+        required: false
+      group_id:
+        title: Group ID
+        type: string
+        description: The ID of the security group
+        required: false
+      group_name:
+        title: Group Name
+        type: string
+        description: '[EC2-Classic, default VPC] The name of the security group'
+        required: false
+      ip_permissions:
+        title: IP Permissions
+        type: '[]ip_permission'
+        description: The IP permissions for the security group rule
+        required: true
+    output:
+      response_metadata:
+        title: Response Metadata
+        type: response_metadata
+        description: Metadata about the response from AWS
+        required: true
+      return:
+        title: Return
+        type: boolean
+        description: Returns true if the request succeeds; otherwise, returns an error
+        required: false
