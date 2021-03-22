@@ -35,8 +35,8 @@ Example input:
 
 ```
 {
-  "domain": "example.com",
-  "timeout": 10.0
+  "domain": "rapid7.com",
+  "timeout": 6
 }
 ```
 
@@ -423,6 +423,8 @@ Example input:
 |----|----|--------|-----------|
 |report|report|False|Report|
 
+Example output:
+
 ```
 {
   "report": {
@@ -623,6 +625,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.4 - Add skipping TLS to actions Check Domains and Check Domains Alternate Nameservers
 * 2.1.3 - Add example inputs
 * 2.1.2 - Changed description in action `check_domains_alternate_nameservers` | Fix typo in word `nameservers` to `name_servers` | Changed email addresses to `user@example.com`
 * 2.1.1 - New spec and help.md format for the Extension Library
