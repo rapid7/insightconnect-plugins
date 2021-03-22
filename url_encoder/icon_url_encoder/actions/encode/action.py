@@ -14,7 +14,7 @@ class Encode(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         input_url = params.get(Input.URL)
-        encode_all = params.get(Input.encode_all)
+        encode_all = params.get(Input.ENCODE_ALL)
 
         result = self.encode_url(encode_all, input_url)
 
