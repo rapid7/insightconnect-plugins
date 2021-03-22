@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "URL Encoder"
 Vendor = "rapid7"
-Version = "1.0.0"
+Version = "1.0.1"
 Description = "Encode and decode URLs"
 
 

@@ -28,7 +28,7 @@ class Encode(insightconnect_plugin_runtime.Action):
         if encode_all:
             url[-1] = quote(url[-1], safe='')
         else:
-            url[-1] = quote(url[-1], safe='/?=&')
+            url[-1] = quote(url[-1], safe='/?=&#')
 
         result = '://'.join(url)
         return result

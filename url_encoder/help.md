@@ -39,7 +39,7 @@ Example input:
 
 ```
 {
-  "encode_all": true,
+  "encode_all": false,
   "url": "https://example.com?test string&key=value"
 }
 ```
@@ -113,6 +113,7 @@ Ignore will drop the character from the output.
 
 # Version History
 
+* 1.0.1 - Patch encode action to include # as safe characters
 * 1.0.0 - Initial plugin
 
 # Links
