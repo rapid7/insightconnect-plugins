@@ -1,8 +1,3 @@
-# *************************************************************************
-# COPYRIGHT (C) 2012-2017, Rapid7 LLC, Boston, MA, USA.
-# All rights reserved. This material contains unpublished, copyrighted
-# work including confidential and proprietary information of Rapid7.
-# ************************************************************************/
 
 import botocore.exceptions
 import botocore.response
