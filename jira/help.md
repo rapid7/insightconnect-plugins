@@ -1143,6 +1143,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 6.0.6 - Fix build issue
 * 6.0.5 - Add more documentation on authentication
 * 6.0.4 - Update to v4 Python plugin runtime
 * 6.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/jira)
