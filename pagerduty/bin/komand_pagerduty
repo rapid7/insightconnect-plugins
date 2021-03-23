@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "PagerDuty"
 Vendor = "rapid7"
-Version = "2.1.0"
+Version = "2.2.0"
 Description = "Leverage PagerDuty for incident management and response"
 
 

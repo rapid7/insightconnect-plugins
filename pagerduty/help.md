@@ -43,7 +43,17 @@ This action is used to get a list of users on call.
 
 ##### Input
 
-_This action does not contain any inputs._
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|schedule_id|string|None|False|Schedule ID|None|P9E0DZT|
+
+Example input:
+
+```
+{
+  "schedule_id": "P9E0DZT"
+}
+```
 
 ##### Output
 
@@ -165,6 +175,11 @@ This action is used to acknowledge an incident.
 |incident_key|string|None|True|Incident Key|None|None|
 |service_key|string|None|True|Service Key (aka Integration Key)|None|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -186,6 +201,11 @@ This action is used to create a user.
 |name|string|None|True|Name|None|None|
 |role|string|None|False|Role|['admin', 'limited_user', 'owner', 'read_only_user', 'user']|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -202,6 +222,11 @@ This action is used to get information about a user by email address.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |email|string|None|True|Email|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -225,6 +250,11 @@ This action is used to trigger an incident.
 |details|object|None|False|An arbitrary JSON object containing any data you'd like included in the incident log|None|None|
 |service_key|string|None|True|Service Key (aka Integration Key)|None|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -242,6 +272,11 @@ This action is used to delete a user by id.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|User ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -263,6 +298,11 @@ This action is used to resolve an incident.
 |incident_key|string|None|True|Incident Key|None|None|
 |service_key|string|None|True|Service Key (aka Integration Key)|None|None|
 
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -280,6 +320,11 @@ This action is used to get information about a user by ID.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|User ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -302,6 +347,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.0 - Added Schedule ID optional input to Get On Call action
 * 2.1.0 - New action Get On Call
 * 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Fix issue to make 'service_key' required in Send Resolve Request action
