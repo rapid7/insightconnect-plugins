@@ -7,7 +7,7 @@ class Input:
     API_ACCESS_ID = "api_access_id"
     API_BASE_URL = "api_base_url"
     API_DEFAULT_ORG = "api_default_org"
-    API_SECRET_KEY = "api_secret_key"
+    API_SECRET_KEY = "api_secret_key"       # noqa: B105
     
 
 class ConnectionSchema(komand.Input):
