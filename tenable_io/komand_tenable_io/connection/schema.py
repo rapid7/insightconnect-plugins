@@ -5,7 +5,7 @@ import json
 
 class Input:
     ACCESS_KEY = "access_key"
-    SECRET_KEY = "secret_key"
+    SECRET_KEY = "secret_key"   # noqa: B105
     
 
 class ConnectionSchema(komand.Input):

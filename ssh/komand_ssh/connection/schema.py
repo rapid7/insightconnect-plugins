@@ -6,7 +6,7 @@ import json
 class Input:
     HOST = "host"
     KEY = "key"
-    PASSWORD = "password"
+    PASSWORD = "password"   # noqa: B105
     PORT = "port"
     USE_KEY = "use_key"
     USERNAME = "username"
