@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import subprocess
+import subprocess   # noqa: B404
 import sys
 import logging
 
@@ -25,7 +25,7 @@ def must_exec(cmd):
     print("[" + YELLOW + "*" + CEND + "]" + " " + BOLD + "Validating spec with js-yaml" + CEND)
     exit_code = 0
     try:
-        subprocess.check_output(cmd)
+        subprocess.check_output(cmd)    # noqa: B603
         exit_code = 0
         print("[" + YELLOW + "SUCCESS" + CEND + "]" + " Passes js-yaml spec check" + "\n")
     except OSError:
