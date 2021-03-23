@@ -12,7 +12,7 @@
 
 * URL for Jira Software, Jira Server, or Jira ServiceDesk
 * Jira user email address and API key when using Jira Cloud
-* Jira user credentials when using on-prem Jira server
+* Jira username and password credentials when using on-prem Jira server
 
 # Documentation
 
