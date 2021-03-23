@@ -35,7 +35,7 @@ Example input:
 
 ```
 {
-  "domain": "rapid7.com",
+  "domain": "example.com",
   "timeout": 6
 }
 ```
