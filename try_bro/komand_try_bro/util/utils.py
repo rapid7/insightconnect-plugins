@@ -28,7 +28,7 @@ def load_scripts(scripts, log):
 
 
 def md5(s):
-    m = hashlib.md5()
+    m = hashlib.md5()       # noqa: B303
     m.update(s)
     return m.hexdigest()
 
@@ -41,7 +41,7 @@ def maybe_upload_pcap(server, pcap, log):
         files = {"pcap": ("file.pcap", pcap)}
         log.info("MaybeUploadPcap: Uploading PCAP")
         status = requests.post(server + "/pcap/upload/" + checksum, files=files).json()["status"]
-        assert status
+        assert status       # noqa: B101
     else:
         log.info("MaybeUploadPcap: PCAP already exists, not uploading")
 

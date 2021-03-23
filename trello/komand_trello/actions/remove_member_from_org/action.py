@@ -52,9 +52,9 @@ class RemoveMemberFromOrg(komand.Action):
             return result_dic
 
         # handle exception
-        except urllib2.HTTPError, e:
+        except urllib2.HTTPError as e:
             logging.error("HTTPError: %s for %s", str(e.code), url)
-        except urllib2.URLError, e:
+        except urllib2.URLError as e:
             logging.error("URLError: %s for %s", str(e.reason), url)
         except Exception:
             import traceback
