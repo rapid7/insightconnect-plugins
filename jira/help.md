@@ -11,7 +11,8 @@
 # Requirements
 
 * URL for Jira Software, Jira Server, or Jira ServiceDesk
-* Administrative credentials
+* Jira user email address and API key when using Jira Cloud
+* Jira username and password credentials when using on-prem Jira server
 
 # Documentation
 
@@ -21,9 +22,9 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|Jira API key (Jira password is not supported)|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|api_key|credential_secret_key|None|True|Jira API key when connecting to Jira Cloud or Jira user password when connecting to on-prem Jira server|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |url|string|https://example.atlassian.net|False|Jira URL|None|https://example.atlassian.net|
-|user|string|None|True|Jira user email|None|user@example.com|
+|user|string|None|True|Jira user email when connecting to Jira Cloud or Jira username when connecting to on-prem Jira server|None|user@example.com|
 
 Example input:
 
@@ -1142,6 +1143,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 6.0.5 - Add more documentation on authentication
 * 6.0.4 - Update to v4 Python plugin runtime
 * 6.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/jira)
 * 6.0.2 - Fix in Comment Issue action where the Python module attributes were logged | Remove duplicate ConnectionTestException call from Connection Test

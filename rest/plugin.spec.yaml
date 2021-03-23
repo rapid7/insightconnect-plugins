@@ -4,14 +4,14 @@ products: [insightconnect]
 name: rest
 title: HTTP Requests
 description: The HTTP Requests plugin to make it easy to integrate with RESTful services
-version: 4.0.2
+version: 4.0.3
 vendor: rapid7
 support: community
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rest
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-  docs_url: https://insightconnect.help.rapid7.com/docs/rest
+  docs_url: https://docs.rapid7.com/insightconnect/http-requests
 tags:
 - rest
 - request
