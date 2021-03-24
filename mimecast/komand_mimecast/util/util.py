@@ -32,7 +32,7 @@ class MimecastRequests:
         else:
             self.logger = LogHelper().logger
 
-    def mimecast_post(
+    def mimecast_post(  # noqa: MC0001
         self,
         url: str,
         uri: str,

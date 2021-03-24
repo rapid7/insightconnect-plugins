@@ -14,7 +14,7 @@ class CardLookup(komand.Action):
             output=CardLookupOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}):   # noqa: MC0001
         address = params.get("address")
         issuer_id_number = params.get("card_issuer_id_number")
         last_4_digits = params.get("card_last_4_digits")

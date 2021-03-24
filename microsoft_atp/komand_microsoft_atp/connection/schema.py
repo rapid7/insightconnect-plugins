@@ -5,7 +5,7 @@ import json
 
 class Input:
     APPLICATION_ID = "application_id"
-    APPLICATION_SECRET = "application_secret"
+    APPLICATION_SECRET = "application_secret"   # noqa: B105
     DIRECTORY_ID = "directory_id"
     
 

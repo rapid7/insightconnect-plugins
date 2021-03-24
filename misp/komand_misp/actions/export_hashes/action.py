@@ -53,7 +53,7 @@ class ExportHashes(komand.Action):
         headers = {"content-type": "application/json", "Authorization": key}
 
         # Generate request
-        response = requests.get(url, headers=headers, verify=False)
+        response = requests.get(url, headers=headers, verify=False)     # noqa: B501
 
         # Raise exception if 200 response is not returned
         if response.status_code != 200:

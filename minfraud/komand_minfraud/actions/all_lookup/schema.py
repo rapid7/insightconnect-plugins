@@ -27,7 +27,7 @@ class Input:
     CARD_BANK_NAME = "card_bank_name"
     CARD_ISSUER_ID_NUMBER = "card_issuer_id_number"
     CARD_LAST_4_DIGITS = "card_last_4_digits"
-    CARD_TOKEN = "card_token"
+    CARD_TOKEN = "card_token"       # noqa: B105
     CVV_RESULT = "cvv_result"
     DOMAIN = "domain"
     EMAIL = "email"

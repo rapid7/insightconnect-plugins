@@ -9,7 +9,7 @@ class Input:
     HOST = "host"
     KEY = "key"
     PORT = "port"
-    SECRET = "secret"
+    SECRET = "secret"       # noqa: B105
     VERBOSE = "verbose"
 
 
