@@ -16,29 +16,20 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        # Get list of users
-
-        response = self.connection.api_connection.get("https://api.pagerduty.com/oncalls")
-        try:
-            response.raise_for_status()
-        except Exception as e:
-            raise PluginException(
-                cause="Failed to get on call users",
-                assistance="Unknown error. Please see the following for more information.",
-                data=response.text,
-            )
-        response_object = response.json()
-
+        schedule_id = params.get(Input.SCHEDULE_ID, None)
         user_ids = []
-        for oncall_object in response_object.get("oncalls", []):
+        for oncall_object in self.connection.api.get_on_calls(schedule_id).get("oncalls", []):
             try:
                 user_ids.append(oncall_object["user"]["id"])
             except KeyError as e:
                 self.logger.warning(f"User ID not available: {str(e)}")
                 continue
 
-        users = asyncio.run(self.async_get_users(user_ids))
+        if not user_ids and schedule_id:
+            self.logger.warning(f"No users found for the provided schedule ID - {schedule_id}."
+                                "Please make sure that the schedule used is correct.")
 
+        users = asyncio.run(self.async_get_users(user_ids))
         return {Output.USERS: insightconnect_plugin_runtime.helper.clean(users)}
 
     async def async_get_users(self, user_ids: [str]) -> list:
@@ -50,9 +41,7 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
                 tasks.append(
                     asyncio.ensure_future(connection.async_request(session=async_session, url=url, method="get"))
                 )
-                user_objects = await asyncio.gather(*tasks)
-                # extract "users" value from object
-                users = list()
-                for user in user_objects:
-                    users.append(user.get("user"))
-                return users
+            user_objects = await asyncio.gather(*tasks)
+            users = [u.get('user') for u in user_objects]
+
+            return users
