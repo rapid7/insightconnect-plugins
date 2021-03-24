@@ -23,10 +23,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         pypd.api_key = key
         pypd.Incident.find(maximum=1)
 
-        self.api = PagerDutyAPI(
-            api_key=key,
-            logger=self.logger
-        )
+        self.api = PagerDutyAPI(api_key=key, logger=self.logger)
 
         self.api_connection = requests.Session()
         headers = {"Authorization": f"Token token={key}"}

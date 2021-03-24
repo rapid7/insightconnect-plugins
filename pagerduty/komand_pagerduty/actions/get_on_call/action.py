@@ -26,8 +26,10 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
                 continue
 
         if not user_ids and schedule_id:
-            self.logger.warning(f"No users found for the provided schedule ID - {schedule_id}. "
-                                "Please make sure that the schedule used is correct.")
+            self.logger.warning(
+                f"No users found for the provided schedule ID - {schedule_id}. "
+                "Please make sure that the schedule used is correct."
+            )
 
         users = asyncio.run(self.async_get_users(user_ids))
         return {Output.USERS: insightconnect_plugin_runtime.helper.clean(users)}
@@ -42,6 +44,6 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
                     asyncio.ensure_future(connection.async_request(session=async_session, url=url, method="get"))
                 )
             user_objects = await asyncio.gather(*tasks)
-            users = [u.get('user') for u in user_objects]
+            users = [u.get("user") for u in user_objects]
 
             return users
