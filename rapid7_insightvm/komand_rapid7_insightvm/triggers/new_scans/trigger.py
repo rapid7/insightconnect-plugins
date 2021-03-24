@@ -107,7 +107,7 @@ class NewScans(komand.Trigger):
     @staticmethod
     def scans_query(scan_statuses, site_ids):
         return (
-            f"SELECT ds.scan_id, dss.description as status, dsscan.site_id, dsite.name as site_name "
+            f"SELECT ds.scan_id, dss.description as status, dsscan.site_id, dsite.name as site_name "   # noqa: B608
             f"FROM dim_scan AS ds "
             f"JOIN dim_scan_status AS dss ON dss.status_id = ds.status_id "
             f"JOIN dim_site_scan AS dsscan ON dsscan.scan_id = ds.scan_id "
