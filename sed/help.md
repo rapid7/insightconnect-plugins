@@ -34,7 +34,7 @@ This action is used to process base64 encoded data. The data is decoded and then
 
 ##### Input
 
-It accepts an expressions, options and a file input. The command-line options can be passed in via the options input.
+It accepts sed expressionss, options, and a file input. The command-line options can be passed in via the `options` input.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
