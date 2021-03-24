@@ -8,7 +8,7 @@ from requests.auth import HTTPDigestAuth, HTTPBasicAuth
 
 
 class Connection(komand.Connection):
-    CUSTOM_SECRET_INPUT = "CUSTOM_SECRET_INPUT"
+    CUSTOM_SECRET_INPUT = "CUSTOM_SECRET_INPUT"     # noqa: B105
 
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())

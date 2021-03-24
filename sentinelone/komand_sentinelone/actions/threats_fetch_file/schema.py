@@ -9,7 +9,7 @@ class Component:
 
 class Input:
     ID = "id"
-    PASSWORD = "password"
+    PASSWORD = "password"   # noqa: B105
     
 
 class Output:
