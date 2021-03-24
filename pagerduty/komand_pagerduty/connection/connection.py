@@ -6,11 +6,13 @@ import pypd
 import requests
 from komand_pagerduty.util.async_requests import AsyncRequests
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from komand_pagerduty.util.api import PagerDutyAPI
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
+        self.api = None
 
     def connect(self, params={}):
         """
@@ -20,6 +22,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
         key = params.get("api_key").get("secretKey")
         pypd.api_key = key
         pypd.Incident.find(maximum=1)
+
+        self.api = PagerDutyAPI(
+            api_key=key,
+            logger=self.logger
+        )
 
         self.api_connection = requests.Session()
         headers = {"Authorization": f"Token token={key}"}
