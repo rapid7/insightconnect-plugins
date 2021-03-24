@@ -4,7 +4,7 @@ products: [insightconnect]
 name: sed
 title: Sed
 description: The Sed plugin allows you to run the GNU stream editor on strings and files
-version: 2.0.2
+version: 2.0.3
 vendor: rapid7
 support: community
 status: []
@@ -28,16 +28,19 @@ actions:
         title: String
         type: string
         description: String to Process
+        example: one two three four five one two
         required: true
       expression:
         title: Expression
         type: '[]string'
         description: Sed Expression
+        example: ["s/one/ONE/", "s/two/2/g"]
         required: true
       options:
         title: Options
         type: string
         description: Sed Options
+        example: -r
         required: false
     output:
       output:
@@ -53,16 +56,19 @@ actions:
         title: Bytes
         type: bytes
         description: File/bytes to Process
+        example: b25lIHR3byB0aHJlZSBmb3VyIGZpdmUgb25lIHR3bw==
         required: true
       expression:
         title: Expression
         type: '[]string'
         description: Sed Expression
+        example: ["s/one/ONE/", "s/two/2/g"]
         required: true
       options:
         title: Options
         type: string
         description: Sed Options
+        example: -r
         required: false
     output:
       output:
