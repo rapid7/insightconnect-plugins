@@ -78,7 +78,7 @@ This action is used to process a string through the stream editor.
 
 ##### Input
 
-It accepts an expressions, options, and a string to process. The command-line options can be passed in via the options input.
+It accepts sed expressions, options, and a string to process. The command-line options can be passed in via the `options` input.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
