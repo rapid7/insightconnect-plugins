@@ -26,7 +26,7 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
                 continue
 
         if not user_ids and schedule_id:
-            self.logger.warning(f"No users found for the provided schedule ID - {schedule_id}."
+            self.logger.warning(f"No users found for the provided schedule ID - {schedule_id}. "
                                 "Please make sure that the schedule used is correct.")
 
         users = asyncio.run(self.async_get_users(user_ids))
