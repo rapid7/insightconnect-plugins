@@ -14,7 +14,7 @@ class Input:
     SOURCE_TYPE = "source_type"
     STRUCTURES = "structures"
     TITLE = "title"
-    TOKEN_SEED = "token_seed"
+    TOKEN_SEED = "token_seed"   # noqa: B105
     
 
 class Output:

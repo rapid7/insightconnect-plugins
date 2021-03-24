@@ -97,7 +97,7 @@ class NewScans(komand.Trigger):
             # Update cache file
             self.logger.info("Writing to " + self.CACHE_FILE_NAME)
             try:
-                util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(cache_site_scans))
+                util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(cache_site_scans))     # noqa: B608
             except TypeError as e:
                 raise PluginException(cause="Failed to save cache to file", assistance=f"Exception returned was {e}")
 
