@@ -19,7 +19,7 @@ class CheckDomains(komand.Action):
 
     def run(self, params={}):
         timeout = params.get(Input.TIMEOUT)
-        output = checkdmarc.check_domains([params.get(Input.DOMAIN)], timeout=timeout)
+        output = checkdmarc.check_domains([params.get(Input.DOMAIN)], timeout=timeout, skip_tls=True)
         try:
             clean_output = helper.clean(json.loads(json.dumps(output)))
         except Exception as e:
