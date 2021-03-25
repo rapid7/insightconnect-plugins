@@ -264,12 +264,14 @@ This action returns a list of inactive assets (limit 1000).
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |days_ago|integer|14|True|How many days ago should an asset be considered still active|None|14|
+|size|number|500|False|The number of assets to retrieve. If blank then 500 inactive assets will be returned, the maximum limit is 1000 assets|None|100|
 
 Example input:
 
 ```
 {
-  "days_ago": 14
+  "days_ago": 14,
+  "size": 100
 }
 ```
 
@@ -749,9 +751,9 @@ This action is used to get vulnerabilities found on an asset. Can only be used i
 Example input:
 
 ```
-{	
-  "asset_id": 234,	
-  "get_risk_score": true	
+{
+  "asset_id": 234,
+  "get_risk_score": true
 }
 ```
 
@@ -822,8 +824,8 @@ This action is used to get software found on an asset. Can only be used if the a
 Example input:
 
 ```
-{	
-  "asset_id": "234"	
+{
+  "asset_id": "234"
 }
 ```
 
@@ -5100,7 +5102,7 @@ This trigger is used to check for new InsightVM vulnerability exceptions.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |frequency|integer|5|True|How often the trigger should check for new vulnerability exception requests|None|None|
-|status_filter|[]string|["Under Review"]|False|List of vulnerability statuses to match against. Options include: Under Review and Approved|None|None|
+|status_filter|[]string|['Under Review']|False|List of vulnerability statuses to match against. Options include: Under Review and Approved|None|None|
 
 Example input:
 
@@ -5171,7 +5173,7 @@ This trigger is used to check for new InsightVM scans by site and scan status.
 |frequency|integer|5|True|How often the trigger should check for new scans in minutes|None|None|
 |most_recent_scan|boolean|True|True|Only process the most recent scan for a site since the last time the trigger was run|None|None|
 |site_name_filter|string|.*|True|Regular expression to match sites where new scans should be triggered|None|None|
-|status_filter|[]string|["Successful"]|False|List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown|None|None|
+|status_filter|[]string|['Successful']|False|List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown|None|None|
 
 Example input:
 
@@ -5226,6 +5228,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.9.0 - Add new `size` input to List Inactive Assets | Update List Inactive Assets to return 500 results by default | Remove the usage of Maya from the plugin
 * 4.8.1 - Fixed an issue where some actions were expecting bytes data and were getting strings instead
 * 4.8.0 - New action Get Asset Vulnerability Solutions
 * 4.7.1 - Code refactor and bug fixes
