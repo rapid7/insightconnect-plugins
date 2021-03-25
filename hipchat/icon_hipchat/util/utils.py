@@ -25,7 +25,7 @@ class Utils(object):
     def hash_url(self, url):
         """Creates a dictionary containing hashes from a url of type string"""
         try:
-            sha1 = hashlib.sha1(url).hexdigest()
+            sha1 = hashlib.sha1(url).hexdigest()    # noqa: B303
             contents = sha1 + ".file"
             metafile = sha1 + ".meta"
             self.logger.info("HashUrl: Url hashed successfully: " + sha1)
