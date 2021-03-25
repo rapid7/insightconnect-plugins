@@ -110,6 +110,10 @@ class TestTeamsUtils(TestCase):
             with self.assertRaises(PluginException):
                 teams = get_teams_from_microsoft(log, test_connection, expected, True)
 
+            expected = "DONT FIND THIS"
+            with self.assertRaises(PluginException):
+                teams = get_teams_from_microsoft(log, test_connection, expected, True)
+
 
 
 
