@@ -8,7 +8,8 @@ class Component:
 
 
 class Input:
-    pass
+    SCHEDULE_ID = "schedule_id"
+    
 
 class Output:
     USERS = "users"
@@ -16,7 +17,18 @@ class Output:
 
 class GetOnCallInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "schedule_id": {
+      "type": "string",
+      "title": "Schedule ID",
+      "description": "Schedule ID",
+      "order": 1
+    }
+  }
+}
     """)
 
     def __init__(self):

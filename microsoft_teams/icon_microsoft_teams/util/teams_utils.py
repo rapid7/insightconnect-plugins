@@ -16,8 +16,8 @@ def get_teams_from_microsoft(logger: Logger, connection: komand.connection, team
     :param explicit: boolean
     :return: array of teams
     """
-    compiled_team_name = None
-    if team_name:
+    compiled_team_name = re.compile("")
+    if team_name and not explicit:
         try:
             compiled_team_name = re.compile(team_name)
         except Exception as e:
@@ -37,6 +37,7 @@ def get_teams_from_microsoft(logger: Logger, connection: komand.connection, team
         teams_result.raise_for_status()
     except Exception as e:
         raise PluginException(cause="Attempt to get teams failed.", assistance=teams_result.text) from e
+
     try:
         teams = teams_result.json().get("value")
     except Exception as e:

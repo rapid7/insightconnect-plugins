@@ -4,7 +4,7 @@ products: [insightconnect]
 name: pagerduty
 title: PagerDuty
 description: Leverage PagerDuty for incident management and response
-version: 2.1.0
+version: 2.2.0
 vendor: rapid7
 support: community
 status: []
@@ -72,6 +72,13 @@ actions:
   get_on_call:
     title: Get On-Call Users
     description: Get list of on-call users
+    input:
+      schedule_id:
+        title: Schedule ID
+        description: Schedule ID
+        type: string
+        required: false
+        example: P9E0DZT
     output:
       users:
         title: Users
