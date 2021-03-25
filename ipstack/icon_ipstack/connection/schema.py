@@ -4,7 +4,7 @@ import json
 
 
 class Input:
-    CRED_TOKEN = "cred_token"
+    CRED_TOKEN = "cred_token"   # noqa: B105
     
 
 class ConnectionSchema(komand.Input):

@@ -10,7 +10,7 @@ class Component:
 class Input:
     EMAIL = "email"
     NOTIFY = "notify"
-    PASSWORD = "password"
+    PASSWORD = "password"   # noqa: B105
     USERNAME = "username"
     
 

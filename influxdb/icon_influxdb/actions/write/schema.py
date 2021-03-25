@@ -11,7 +11,7 @@ class Input:
     CONSISTENCY = "consistency"
     DATA = "data"
     DATABASE_NAME = "database_name"
-    PASSWORD = "password"
+    PASSWORD = "password"                   # noqa: B105
     PRECISION = "precision"
     RETENTION_POLICY = "retention_policy"
     USERNAME = "username"

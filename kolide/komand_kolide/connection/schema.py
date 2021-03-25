@@ -4,7 +4,7 @@ import json
 
 
 class Input:
-    API_TOKEN = "api_token"
+    API_TOKEN = "api_token"     # noqa: b105
     SSL_VERIFY = "ssl_verify"
     URL = "url"
     
