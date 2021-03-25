@@ -421,7 +421,7 @@ actions:
         type: boolean
         required: true
         order: 3
-        example: false
+        example: true
       message:
         title: Message
         description: Message to send
@@ -607,7 +607,7 @@ actions:
         type: boolean
         required: true
         order: 4
-        example: false
+        example: true
       owners:
         title: Owners
         description: A list of usernames to set as owners
