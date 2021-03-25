@@ -1,4 +1,7 @@
 from unittest import TestCase
+
+from komand.exceptions import PluginException
+
 from icon_microsoft_teams.connection.connection import Connection
 from icon_microsoft_teams.util.teams_utils import (
     create_channel,
@@ -92,3 +95,22 @@ class TestTeamsUtils(TestCase):
         expected = "Komand-Test-Everyone"
         teams = get_teams_from_microsoft(log, test_connection, expected, True)
         self.assertEquals(teams[0].get("displayName"), expected)
+
+    def test_integration_negative_get_blank_team(self):
+            log = logging.getLogger("Test")
+            test_connection = Connection()
+            test_connection.logger = log
+
+            with open("../tests/send_message.json") as file:
+                data = json.load(file)
+                connection_params = data.get("body").get("connection")
+
+            test_connection.connect(connection_params)
+            expected = ""
+            with self.assertRaises(PluginException):
+                teams = get_teams_from_microsoft(log, test_connection, expected, True)
+
+
+
+
+
