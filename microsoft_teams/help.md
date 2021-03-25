@@ -247,7 +247,7 @@ This action sends a message using the GUID for the team and channel. This is mor
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |channel_guid|string|None|True|Channel GUID|None|xxxxx-xxxxx-xxxx-xxxx|
-|is_html|boolean|None|True|Is the message HTML|None|False|
+|is_html|boolean|None|True|Is the message HTML|None|True|
 |message|string|None|True|Message to send|None|Hello!|
 |team_guid|string|None|True|Team GUID|None|xxxxx-xxxxx-xxxx-xxxx|
 
@@ -576,7 +576,7 @@ This action is used to create a group in Azure and enable it for Microsoft Teams
 |----|----|-------|--------|-----------|----|-------|
 |group_description|string|None|True|Group description|None|A test group|
 |group_name|string|None|True|Team name|None|test_group|
-|mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|False|
+|mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|True|
 |mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|TestGroup|
 |members|string[]|None|False|A list of usernames to set as members|None|["user@example.com"]|
 |owners|string[]|None|False|A list of usernames to set as owners|None|["user@example.com"]|
