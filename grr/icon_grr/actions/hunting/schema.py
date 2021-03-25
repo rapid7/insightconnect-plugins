@@ -96,7 +96,7 @@ class Input:
     START_OFFEST = "start_offest"
     START_OFFSET = "start_offset"
     TABLE_SIGNATURE_LIST = "table_signature_list"
-    UPLOAD_TOKEN = "upload_token"
+    UPLOAD_TOKEN = "upload_token"                               # noqa: B105
     USE_EXTERNAL_STORES = "use_external_stores"
     USE_TSK = "use_tsk"
     VALUE = "value"

@@ -12,7 +12,7 @@ class Input:
     HOST = "host"
     PRIVATE_KEY = "private_key"
     PROJECT_ID = "project_id"
-    TOKEN_URI = "token_uri"
+    TOKEN_URI = "token_uri"     # noqa: B105
     VERSION = "version"
     
 

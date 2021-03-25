@@ -23,7 +23,7 @@ class Connection(komand.Connection):
         self.host = params.get("host")
         # login to github
         try:
-            self.enterprise = requests.get(self.api_prefix, auth=(self.username, self.secret), verify=False)
+            self.enterprise = requests.get(self.api_prefix, auth=(self.username, self.secret), verify=False)    # noqa: B501
             if str(self.enterprise.status_code).startswith("2"):
                 self.logger.info("Connect: Login-in successful")
             else:
