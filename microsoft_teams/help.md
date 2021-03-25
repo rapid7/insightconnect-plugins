@@ -873,6 +873,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.2 - Fix issue where a name with a bracket could crash the plugin
 * 3.1.1 - Correct spelling in help.md
 * 3.1.0 - New actions Add Group Owner and Add Member to Channel
 * 3.0.1 - Fix import error in New Message Received trigger
