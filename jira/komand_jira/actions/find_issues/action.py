@@ -8,10 +8,7 @@ from komand_jira.util.util import normalize_issue
 class FindIssues(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="find_issues",
-            description=Component.DESCRIPTION,
-            input=FindIssuesInput(),
-            output=FindIssuesOutput(),
+            name="find_issues", description=Component.DESCRIPTION, input=FindIssuesInput(), output=FindIssuesOutput(),
         )
 
     def run(self, params={}):

@@ -18,7 +18,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "Jira API key (Jira password is not supported)",
+      "description": "Jira API key when connecting to Jira Cloud or Jira user password when connecting to on-prem Jira server",
       "order": 3
     },
     "url": {
@@ -31,7 +31,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "user": {
       "type": "string",
       "title": "User",
-      "description": "Jira user email",
+      "description": "Jira user email when connecting to Jira Cloud or Jira username when connecting to on-prem Jira server",
       "order": 2
     }
   },

@@ -26,6 +26,7 @@ class Input:
     
 
 class Output:
+    INCIDENT_URL = "incident_url"
     NUMBER = "number"
     SYSTEM_ID = "system_id"
     
@@ -140,6 +141,12 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "incident_url": {
+      "type": "string",
+      "title": "Incident URL",
+      "description": "URL to newly created incident",
+      "order": 3
+    },
     "number": {
       "type": "string",
       "title": "Incident Number",
@@ -154,6 +161,7 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
+    "incident_url",
     "number",
     "system_id"
   ]

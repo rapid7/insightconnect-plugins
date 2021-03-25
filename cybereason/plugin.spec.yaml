@@ -1,0 +1,463 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: cybereason
+title: Cybereason
+description: The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin
+version: 1.1.0
+vendor: rapid7
+support: rapid7
+status: []
+tags: [investigate, malware, threat tntel]
+hub_tags:
+  use_cases: [threat_detection_and_response, vulnerability_management]
+  keywords: [investigate, malware, threat tntel]
+  features: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cybereason
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.cybereason.com/
+enable_cache: true
+types:
+  fileSearchRequestConfiguration:
+    minThrottleAmountMilli:
+      title: Min Throttle Amount Milli
+      type: integer
+      description: Min throttle amount milli
+      required: false
+    diskRateBytesPerMilli:
+      title: Disk Rate Bytes Per Milli
+      type: integer
+      description: Disk rate bytes per milli
+      required: false
+    minFileReadPriceMilli:
+      title: Min File Read Price Milli
+      type: integer
+      description: Min file read price milli
+      required: false
+    cpuTrackingWindowMilli:
+      title: CPU Tracking Window Milli
+      type: integer
+      description: CPU tracking window milli
+      required: false
+    targetCpuPercentage:
+      title: Target CPU Percentage
+      type: integer
+      description: Target CPU percentage
+      required: false
+    maxResults:
+      title: Max Results
+      type: integer
+      description: Max results
+      required: false
+    maxYaraTimeouts:
+      title: Max Yara timeouts
+      type: integer
+      description: Max yara timeouts
+      required: false
+    timoutPerFileScan:
+      title: Timout Per File Scan
+      type: integer
+      description: Timout per file scan
+      required: false
+    maxDiskIOWindowMilli:
+      title: Max Disk IOWindow Milli
+      type: integer
+      description: Max disk IO window milli
+      required: false
+    searchTimeoutDataScanSec:
+      title: Search Timeout Data Scan Sec
+      type: integer
+      description: Search timeout data scan sec
+      required: false
+    maxConcurrentFileSearches:
+      title: Max Concurrent File Searches
+      type: integer
+      description: Max concurrent file searches
+      required: false
+    searchTimeoutSec:
+      title: Search Timeout Sec
+      type: integer
+      description: Search timeout sec
+      required: false
+    shouldUseNewAPI:
+      title: Should Use New API
+      type: boolean
+      description: Should use new API
+      required: false
+    maxReadBytesPerFile:
+      title: Max Read Bytes Per File
+      type: integer
+      description: Max read bytes per file
+      required: false
+  filters:
+    operator:
+      title: Operator
+      type: string
+      description: Operator
+      required: false
+    values:
+      title: Values
+      type: "[]string"
+      description: Values
+      required: false
+    fieldName:
+      title: Field Name
+      type: string
+      description: Field name
+      required: false
+  actionArguments:
+     yaraName:
+       title: Yara Name
+       type: string
+       description: Yara name
+       required: false
+     machines:
+       title: Machines
+       type: "[]string"
+       description: Machines
+       required: false
+     filters:
+       title: Filters
+       type: "[]filters"
+       description: Filters
+       required: false
+     fileSearchRequestConfiguration:
+       title: File Search Request Configuration
+       type: fileSearchRequestConfiguration
+       description: File search request configuration
+       required: false
+  stats:
+    Aborting:
+      title: Aborting
+      type: integer
+      description: Aborting
+      required: false
+    EndedWithYaraCompileError:
+      title: Ended With Yara Compile Error
+      type: integer
+      description: Ended with yara compile error
+      required: false
+    AlreadyUpdated:
+      title: Already Updated
+      type: integer
+      description: Already updated
+      required: false
+    EndedWithTooManyResults:
+      title: Ended With Too Many Results
+      type: integer
+      description: Ended with too many results
+      required: false
+    UnknownProbe:
+      title: Unknown Probe
+      type: integer
+      description: Unknown probe
+      required: false
+    Failed:
+      title: Failed
+      type: integer
+      description: Failed
+      required: false
+    EndedWithUnsupportedFilter:
+      title: Ended With Unsupported Filter
+      type: integer
+      description: Ended with unsupported filter
+      required: false
+    ProbeRemoved:
+      title: Probe Removed
+      type: integer
+      description: Probe removed
+      required: false
+    EndedWithInvalidParam:
+      title: Ended With Invalid Param
+      type: integer
+      description: Ended with invalid param
+      required: false
+    InProgress:
+      title: In Progress
+      type: integer
+      description: In progress
+      required: false
+    Pending:
+      title: Pending
+      type: integer
+      description: Pending
+      required: false
+    EndedWithUnknownError:
+      title: Ended With Unknown Error
+      type: integer
+      description: Ended with unknown error
+      required: false
+    MsiFileCorrupted:
+      title: MSI File Corrupted
+      type: integer
+      description: MSI file corrupted
+      required: false
+    Started:
+      title: Started
+      type: integer
+      description: Started
+      required: false
+    SendingMsi:
+      title: Sending MSI
+      type: integer
+      description: Sending MSI
+      required: false
+    GettingChunks:
+      title: Getting Chunks
+      type: integer
+      description: Getting chunks
+      required: false
+    Aborted:
+      title: Aborted
+      type: integer
+      description: Aborted
+      required: false
+    InvalidState:
+      title: Invalid State
+      type: integer
+      description: Invalid state
+      required: false
+    BadArgument:
+      title: Bad Argument
+      type: integer
+      description: Bad argument
+      required: false
+    EndedWithNoValidFolder:
+      title: Ended With No Valid Folder
+      type: integer
+      description: Ended with no valid folder
+      required: false
+    MsiSendFail:
+      title: MSI Send Fail
+      type: integer
+      description: MSI Send Fail
+      required: false
+    NewerInstalled:
+      title: Newer Installed
+      type: integer
+      description: Newer installed
+      required: false
+    None:
+      title: None
+      type: integer
+      description: None
+      required: false
+    Disconnected:
+      title: Disconnected
+      type: integer
+      description: Disconnected
+      required: false
+    Succeeded:
+      title: Succeeded
+      type: integer
+      description: Succeeded
+      required: false
+    EndedWithTooManySearches:
+      title: Ended With Too Many Searches
+      type: integer
+      description: Ended with too many searches
+      required: false
+    FailedSending:
+      title: Failed Sending
+      type: integer
+      description: Failed sending
+      required: false
+    ChunksRequired:
+      title: Chunks Required
+      type: integer
+      description: Chunks required
+      required: false
+    Timeout:
+      title: Timeout
+      type: integer
+      description: Timeout
+      required: false
+    EndedWithSensorTimeout:
+      title: Ended With Sensor Timeout
+      type: integer
+      description: Ended with sensor timeout
+      required: false
+    UnauthorizedUser:
+      title: Unauthorized User
+      type: integer
+      description: Unauthorized user
+      required: false
+    NotSupported:
+      title: Not Supported
+      type: integer
+      description: Not supported
+      required: false
+    TimeoutSending:
+      title: Timeout Sending
+      type: integer
+      description: Timeout sending
+      required: false
+    AbortTimeout:
+      title: Abort Timeout
+      type: integer
+      description: Abort timeout
+      required: false
+    SendingPlatform:
+      title: Sending Platform
+      type: integer
+      description: Sending platform
+      required: false
+    Primed:
+      title: Primed
+      type: integer
+      description: Primed
+      required: false
+    FailedSendingToServer:
+      title: Failed Sending To Server
+      type: integer
+      description: Failed sending to server
+      required: false
+    partialResponse:
+      title: Partial Response
+      type: integer
+      description: Partial response
+      required: false
+  globalStats:
+    stats:
+      title: Stats
+      type: stats
+      description: Stats
+      required: false
+  response:
+    globalStats:
+      title: Global Stats
+      type: globalStats
+      description: Global stats
+      required: false
+    initiatorUser:
+      title: Initiator User
+      type: string
+      description: Initiator user
+      required: false
+    abortHttpStatusCode:
+      title: Abort HTTP Status Code
+      type: string
+      description: Abort HTTP status code
+      required: false
+    actionArguments:
+      title: Action Arguments
+      type: actionArguments
+      description: Action arguments
+      required: false
+    abortTimeout:
+      title: Abort Timeout
+      type: boolean
+      description: Abort timeout
+      required: false
+    aborterUser:
+      title: Aborter User
+      type: string
+      description: Aborter user
+      required: false
+    batchId:
+      title: Batch ID
+      type: integer
+      description: Batch ID
+      required: false
+    abortTime:
+      title: Abort Time
+      type: integer
+      description: Abort time
+      required: false
+    actionType:
+      title: Action Type
+      type: string
+      description: Action type
+      required: false
+    finalState:
+      title: Final State
+      type: boolean
+      description: Final state
+      required: false
+    startTime:
+      title: Start Time
+      type: integer
+      description: Start time
+      required: false
+    totalNumberOfProbes:
+      title: Total Number Probes
+      type: integer
+      description: Total number of probes
+      required: false
+connection:
+  hostname:
+    title: Host
+    description: Enter the hostname
+    type: string
+    required: true
+    example: example.com
+  port:
+    description: Enter the port
+    type: integer
+    default: 8443
+    required: true
+    example: 8443
+  credentials:
+    title: Credentials
+    description: Username and password
+    type: credential_username_password
+    required: false
+    example: '{"username": "user@example.com", "password": "mypassword"}'
+actions:
+  search_for_files:
+    title: Search for Files
+    description: Find files on any machine in your environment with a Cybereason sensor installed
+    input:
+      server_filter:
+        title: Server Filter
+        description: A Sensor filters string for filtering sensors by different criteria such as operating system
+        type: string
+        required: false
+        example: 'machineName: ["rapid7-windows"]'
+      file_filter:
+        title: File Filter
+        description: A fileFilters object for filtering by machine name, folder, file creation or modification time or file size with operator Equals, NotEquals, ContainsIgnoreCase, NotContainsIgnoreCase and others
+        type: string
+        required: true
+        example: 'fileName Equals: ["sample.py"]'
+    output:
+      response:
+        title: Response
+        description: Search file response
+        type: response
+        required: true
+  isolate_machine:
+    title: Isolate Machine
+    description: Isolate a machine associated with the root cause of a Malop, or to remediate a process not involved in a Malop
+    input:
+      malop_id:
+        title: Malop ID
+        description: Malop ID to isolate a machine or empty to remediate process not involved in a Malop
+        type: string
+        required: false
+        example: "22.2787422324806222966"
+      pylum_ids:
+        title: Pylum IDS
+        description: The unique sensor ID the Cybereason platform uses for the machines to isolate
+        type: "[]string"
+        required: false
+        example: ["PYLUMCLIENT_INTEGRATION_GDDA11-11_2222170222FC"]
+      initiator_user_name:
+        title: Initiator User Name
+        description: Initiator user name
+        type: string
+        required: false
+        example: user@example.com
+      actions_by_machine:
+        title: Actions by Machine
+        description: Actions by machine
+        type: object
+        required: false
+        example: '{"126811122.2298225282553311122": [{"targetId": "531122333.-3391199199911692223","actionType": "KILL_PROCESS"}]}'
+    output:
+      response:
+        title: Malop Response
+        description: Malop response
+        type: object
+        required: true
