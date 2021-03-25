@@ -34,22 +34,43 @@ This action is used to process base64 encoded data. The data is decoded and then
 
 ##### Input
 
-It accepts an expression, options and a file input.
+It accepts sed expressions, options, and a file input encoded in base64. The command-line options can be passed in via the `options` input.
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|bytes|bytes|None|True|File/bytes to Process|None|
-|expression|[]string|None|True|Sed Expression|None|
-|options|string|None|False|Sed Options|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|bytes|bytes|None|True|File/bytes to Process|None|b25lIHR3byB0aHJlZSBmb3VyIGZpdmUgb25lIHR3bw==|
+|expression|[]string|None|True|Sed Expression|None|["s/one/ONE/", "s/two/2/g"]|
+|options|string|None|False|Sed Options|None|-r|
 
-The entire input expression will be surrounded in double-quotes on the backend and thus are not required in the expression input.
-E.g. the following will replace a lowercase one with a capitalized ONE: `s/one/ONE/`
+The `expression` input may contain a single expression, e.g `["s/one/ONE/"]` or multiply expressions, e.g `["s/one/ONE/","s/two/TWO/"]`.
+The above example expression `["s/one/ONE/"]` will replace the first occurrence of a lowercase `one` with a capitalized `ONE` in each line of the provided file/bytes to process.
+
+Example input:
+
+```
+{
+  "bytes": "b25lIHR3byB0aHJlZSBmb3VyIGZpdmUgb25lIHR3bw==",
+  "expression": [
+    "s/one/ONE/",
+    "s/two/2/g"
+  ],
+  "options": "-r"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |output|string|False|Processed String|
+
+Example output:
+
+```
+{
+  "output": "T05FIDIgdGhyZWUgZm91ciBmaXZlIG9uZSAy"
+}
+```
 
 #### Process String
 
@@ -57,23 +78,43 @@ This action is used to process a string through the stream editor.
 
 ##### Input
 
-It accepts an expression, options, and a string to process. The command-line options can be passed in via the options input.
+It accepts sed expressions, options, and a string to process. The command-line options can be passed in via the `options` input.
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|expression|[]string|None|True|Sed Expression|None|
-|string|string|None|True|String to Process|None|
-|options|string|None|False|Sed Options|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|expression|[]string|None|True|Sed Expression|None|["s/one/ONE/", "s/two/2/g"]|
+|options|string|None|False|Sed Options|None|-r|
+|string|string|None|True|String to Process|None|one two three four five one two|
 
-The entire input expression will be surrounded in double-quotes on the backend, thus they should not be surrounding the expression.
-E.g. the following will replace a lowercase `one` with a capitalized `ONE`: `s/one/ONE/`. Note that the expression is not surrounded
-by any quotes, although, you could surround it with single-quotes and still maintain functionality.
+The `expression` input may contain a single expression, e.g `["s/one/ONE/"]` or multiply expressions, e.g `["s/one/ONE/","s/two/TWO/"]`.
+The above example expression `["s/one/ONE/"]` will replace the first occurrence of a lowercase `one` with a capitalized `ONE` in each line of the provided string to process.
+
+Example input:
+
+```
+{
+  "expression": [
+    "s/one/ONE/",
+    "s/two/2/g"
+  ],
+  "options": "-r",
+  "string": "one two three four five one two"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |output|string|False|Processed String|
+
+Example output:
+
+```
+{
+  "output": "ONE 2 three four five one 2"
+}
+```
 
 ### Triggers
 
@@ -93,7 +134,8 @@ If a literal double-quote is required it must be escaped by a backslash `\`. For
 
 # Version History
 
-* 2.0.2 - New spec and help.md format for the Hub | Refactor duplicate code | Remove returning dummy output in connection test | Refactor Exception to PluginException | Changed type in help to be the same as in plugin spec
+* 2.0.3 - Add action input and output examples to the documentation
+* 2.0.2 - New spec and help.md format for the Extension Library | Refactor duplicate code | Remove returning dummy output in connection test | Refactor Exception to PluginException | Changed type in help to be the same as in plugin spec
 * 2.0.1 - Fix issue with both actions not returning all results
 * 2.0.0 - Update action inputs to allow for multiple expressions
 * 1.0.1 - Add `utilities` plugin tag for Marketplace searchability
@@ -107,4 +149,3 @@ If a literal double-quote is required it must be escaped by a backslash `\`. For
 ## References
 
 * [Sed](https://www.gnu.org/software/sed/manual/sed.html)
-

@@ -1,0 +1,31 @@
+{
+	"spec": "0c7da6cea3f392de054c466c15366c4f",
+	"manifest": "ad9fe2609ed89d7682a17174496b79b6",
+	"setup": "f5420c56de200a420dd3d2887049fe92",
+	"schemas": [
+		{
+			"identifier": "antivirus_scan/schema.py",
+			"hash": "13ec3c94a55380e9466c3dd6a51d795b"
+		},
+		{
+			"identifier": "get_managed_apps/schema.py",
+			"hash": "89e46df0faabf37d9b4d29312eaf00da"
+		},
+		{
+			"identifier": "manage_device/schema.py",
+			"hash": "92de89bbf3f69a44d190ac8485764572"
+		},
+		{
+			"identifier": "search_devices/schema.py",
+			"hash": "5b241bcc16dfba65ac53d35181f64e81"
+		},
+		{
+			"identifier": "wipe/schema.py",
+			"hash": "7d7cc20f5f027b8f7427bd22b498010c"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "c3aedbdb3d2fbf860fabe4ffaab041b4"
+		}
+	]
+}

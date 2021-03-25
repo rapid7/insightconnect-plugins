@@ -23,7 +23,7 @@ class ParseSingleInput(komand.Input):
   "properties": {
     "cef_string": {
       "type": "string",
-      "title": "Cef String",
+      "title": "CEF String",
       "description": "CEF formatted string",
       "order": 1
     }
@@ -46,7 +46,7 @@ class ParseSingleOutput(komand.Output):
   "properties": {
     "cef": {
       "$ref": "#/definitions/cef",
-      "title": "Cef",
+      "title": "CEF",
       "description": "CEF object",
       "order": 1
     }

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: advanced_regex
 title: Advanced Regex
 description: Perform advanced regular expression operations on a string using Python regex
-version: 1.0.1
+version: 1.0.3
 support: community
 vendor: rapid7
 status: []
@@ -31,35 +31,41 @@ actions:
         description: Input string
         type: string
         required: true
+        example: "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit. Aliquam sapien ex, lorems odales"
       in_regex:
         title: Regex
         description: Regex to use for data extraction
         type: string
         required: true
+        example: "lorem"
       ignorecase:
         title: Ignore Case
         description: Make regex non-case sensitive
         type: boolean
         required: false
         default: false
+        example: true
       multiline:
         title: Multiline
         description: Make begin/end consider each line
         type: boolean
         required: false
         default: false
+        example: true
       dotall:
         title: Dot All
         description: Make . match newline
         type: boolean
         required: false
         default: false
+        example: true
       ascii:
         title: ASCII
         description: Make \w \W \b \B follow ASCII rules
         type: boolean
         required: false
         default: false
+        example: false
     output:
       matches:
         title: Matches
@@ -75,46 +81,54 @@ actions:
         description: Input string
         type: string
         required: true
+        example: "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit. Aliquam sapien ex, lorems odales"
       replace_string:
         title: New String
         description: The string to replace matches with
         type: string
-        required: true
+        required: false
+        example: "REPLACED"
       in_regex:
         title: Regex
         description: Regex to match
         type: string
         required: true
+        example: "lorem"
       max_replace:
         title: Max Replace
         description: Max occurrences to replace - if zero all will be replaced
         type: integer
         required: false
         default: 0
+        example: 0
       ignorecase:
         title: Ignore Case
         description: Make regex non-case sensitive
         type: boolean
         required: false
         default: false
+        example: true
       multiline:
         title: Multiline
         description: Make begin/end consider each line
         type: boolean
         required: false
         default: false
+        example: true
       dotall:
         title: Dot All
         description: Make . match newline
         type: boolean
         required: false
         default: false
+        example: true
       ascii:
         title: ASCII
         description: Make \w \W \b \B follow ASCII rules
         type: boolean
         required: false
         default: false
+        example: false
     output:
       result:
         title: Result String
@@ -130,41 +144,48 @@ actions:
         description: Input string
         type: string
         required: true
+        example: "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit. Aliquam sapien ex, lorems odales sed"
       in_regex:
         title: Regex
         description: Regex to split string on matches
         type: string
         required: true
+        example: "lorem"
       max_split:
         title: Max Split
         description: Max splits - if non-zero last element is remainder of string
         type: integer
         required: false
         default: 0
+        example: 0
       ignorecase:
         title: Ignore Case
         description: Make regex non-case sensitive
         type: boolean
         required: false
         default: false
+        example: true
       multiline:
         title: Multiline
         description: Make begin/end consider each line
         type: boolean
         required: false
         default: false
+        example: true
       dotall:
         title: Dot All
         description: Make . match newline
         type: boolean
         required: false
         default: false
+        example: true
       ascii:
         title: ASCII
         description: Make \w \W \b \B follow ASCII rules
         type: boolean
         required: false
         default: false
+        example: false
     output:
       result:
         title: Result Strings

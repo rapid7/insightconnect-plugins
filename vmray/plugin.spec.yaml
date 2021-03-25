@@ -4,7 +4,7 @@ products: [insightconnect]
 name: vmray
 title: VMRay Sandbox
 description: Analyze and detect malware before it lands, protecting internal infrastructure
-version: 5.0.0
+version: 5.0.1
 vendor: rapid7
 support: community
 status: []
@@ -1055,12 +1055,14 @@ connection:
     description: API key for VMRay
     required: true
     title: API Key
+    example: 4SauhjkF9aANClXnIaLfAeE9RVBJnZZ8
   url:
     title: VMRay URL
-    description: VMRay host e.g https://cloud.vmray.com
+    description: The VMRay host URL, both on-premise and cloud is supported
     type: string
     default: https://cloud.vmray.com
     required: true
+    example: https://cloud.vmray.com
 actions:
   submit_file:
     title: Submit File
@@ -1071,6 +1073,7 @@ actions:
         required: true
         description: File and filename for analysis
         title: File
+        example: '{ "filename": "setup.exe", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}'
       analyzer_mode:
         type: string
         required: false
@@ -1083,12 +1086,14 @@ actions:
           - static_dynamic
           - static
         default: "default"
+        example: default
       optional_params:
         title: Optional Parameters
         description: 'Parameters that allow finer tuning of the Submit File action,
           e.g {"analysis_id": 12345}'
         type: object
         required: false
+        example: '{"analysis_id": 12345}'
     output:
       results:
         title: Results
@@ -1104,6 +1109,7 @@ actions:
         description: URL to be submitted for analysis
         type: string
         required: true
+        example: https://example.com
       analyzer_mode:
         type: string
         required: false
@@ -1116,12 +1122,14 @@ actions:
         - static_dynamic
         - static
         default: "default"
+        example: default
       optional_params:
         title: Optional Parameters
         description: 'Parameters that allow finer tuning of the Submit URL action,
           e.g {"analysis_id": 12345}'
         type: object
         required: false
+        example: '{"analysis_id": 12345}'
     output:
       results:
         title: Results
@@ -1158,17 +1166,20 @@ actions:
         - vti_score
         - all
         required: true
+        example: all
       id:
         title: ID
         description: ID based on ID type selected, leave blank if 'all' is selected
         type: string
         required: false
+        example: 1490045
       optional_params:
         title: Optional Parameters
         description: 'Parameters that allow finer tuning of the Get Analysis action,
           e.g {"analysis_id": 12345}'
         type: object
         required: false
+        example: '{"analysis_id": 12345}'
     output:
       results:
         title: Results
@@ -1194,17 +1205,20 @@ actions:
         - sha256
         - type
         required: true
+        example: md5
       sample:
         title: Sample
         description: Sample ID, hash or type, leave blank if 'all' is selected
         type: string
         required: false
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
       optional_params:
         title: Optional Parameters
         description: 'Parameters that allow finer tuning of the Get Samples action,
           e.g {"analysis_id": 12345}'
         type: object
         required: false
+        example: '{"analysis_id": 12345}'
     output:
       results:
         title: Results

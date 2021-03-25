@@ -1,5 +1,6 @@
 import komand
 from .schema import ExportHashesInput, ExportHashesOutput
+
 # Custom imports below
 import requests
 import base64
@@ -8,20 +9,21 @@ import base64
 class ExportHashes(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='export_hashes',
-            description='Export hashes from HIDS database',
+            name="export_hashes",
+            description="Export hashes from HIDS database",
             input=ExportHashesInput(),
-            output=ExportHashesOutput())
+            output=ExportHashesOutput(),
+        )
 
     def run(self, params={}):
         key = self.connection.key
-        format_ = params.get('format')
-        tags = params.get('tags')
-        from_ = params.get('from')
-        to_ = params.get('to')
-        last = params.get('last')
+        format_ = params.get("format")
+        tags = params.get("tags")
+        from_ = params.get("from")
+        to_ = params.get("to")
+        last = params.get("last")
 
-        path = '/events/hids/%s/download' % format_
+        path = "/events/hids/%s/download" % format_
         if tags:
             # If more than 1 tag, separate with &&
             if len(tags) > 1:
@@ -48,7 +50,7 @@ class ExportHashes(komand.Action):
         else:
             path = "%s/null" % path
         url = self.connection.url + path
-        headers = {'content-type': 'application/json', 'Authorization': key}
+        headers = {"content-type": "application/json", "Authorization": key}
 
         # Generate request
         response = requests.get(url, headers=headers, verify=False)
@@ -56,16 +58,16 @@ class ExportHashes(komand.Action):
         # Raise exception if 200 response is not returned
         if response.status_code != 200:
             response_json = response.json()
-            message = str(response_json['message'])
+            message = str(response_json["message"])
             self.logger.error(message)
             raise Exception(message)
 
         # Encode data as b64
-        hashes = base64.b64encode(response.text.encode('ascii'))
+        hashes = base64.b64encode(response.text.encode("ascii"))
 
         return {"hashes": hashes.decode("utf-8")}
 
     def test(self):
         client = self.connection.client
         output = client.test_connection()
-        return {"hashes": ''}
+        return {"hashes": ""}

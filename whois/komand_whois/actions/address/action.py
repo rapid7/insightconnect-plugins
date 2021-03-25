@@ -1,9 +1,10 @@
-import komand
-from .schema import AddressInput, AddressOutput
+import insightconnect_plugin_runtime
+from .schema import AddressInput, AddressOutput, Input
 import re
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class Address(komand.Action):
+class Address(insightconnect_plugin_runtime.Action):
     ARIN, LACNIC, APNIC, RIPE = "arin", "lacnic", "apnic", "ripe"
 
     NORMALIZATION_MAP = {
@@ -17,7 +18,7 @@ class Address(komand.Action):
             "updated": "last-modified",
             "address": "address",
             "country": "country",
-            "org_abuse_email": "abuse-mailbox"
+            "org_abuse_email": "abuse-mailbox",
         },
         ARIN: {
             "netname": "NetName",
@@ -64,26 +65,33 @@ class Address(komand.Action):
             "country": "country",
             "org_abuse_email": "e-mail",
             "org_abuse_phone": "phone",
-        }
+        },
     }
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name="address",
-                description="Whois IP Lookup",
-                input=AddressInput(),
-                output=AddressOutput())
+            name="address",
+            description="Whois IP Lookup",
+            input=AddressInput(),
+            output=AddressOutput(),
+        )
 
     def run(self, params={}):
         binary = "/usr/bin/whois"
         cmd = "%s %s" % (binary, params.get("address"))
-        stdout = komand.helper.exec_command(cmd)["stdout"]
-        stdout = stdout.decode('utf-8')
-        results = self.parse_stdout(stdout=stdout)
-        results = komand.helper.clean_dict(results)
+        stdout = insightconnect_plugin_runtime.helper.exec_command(cmd)["stdout"]
+        try:
+            stdout = stdout.decode("utf-8")
+        except UnicodeDecodeError:
+            stdout = stdout.decode("iso-8859-1")
+        results = self.parse_stdout(params.get(Input.REGISTRAR), stdout=stdout)
+        results = insightconnect_plugin_runtime.helper.clean_dict(results)
 
         if not results:
-            self.logger.error("Error: Request did not return any data")
+            raise PluginException(
+                cause="Error: Request did not return any data.",
+                assistance="Please check provided address and try again."
+            )
         return results
 
     def _get_stdout_pairs(self, stdout):
@@ -117,19 +125,24 @@ class Address(komand.Action):
             self.logger.info("Warning: No WHOIS registry detected from stdout, defaulting to ARIN...")
             registry = self.ARIN
 
-        self.logger.info("Info: Using registry: %s" % registry)
-
         return registry
 
     def _load_normalization_map(self, refer):
         if refer not in self.NORMALIZATION_MAP.keys():
-            self.logger.info("Warning: No normalization map found for: %s\n"
-                             "Please contact support with the IP address used as input to this action." % refer)
+            self.logger.info(
+                "Warning: No normalization map found for: %s\n"
+                "Please contact support with the IP address used as input to this action." % refer
+            )
         return self.NORMALIZATION_MAP[refer]
 
-    def parse_stdout(self, stdout):
+    def parse_stdout(self, registrar, stdout):
         pairs = self._get_stdout_pairs(stdout)
-        registry = self._get_registry(stdout=stdout)
+        if not registrar or registrar == "Autodetect":
+            registry = self._get_registry(stdout=stdout)
+        else:
+            registry = registrar.lower()
+
+        self.logger.info("Info: Using registry: %s" % registry)
 
         loaded_map = self._load_normalization_map(refer=registry)
 

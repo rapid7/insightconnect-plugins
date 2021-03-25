@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='markdown-rapid7-plugin',
-      version='2.2.2',
-      description='Convert markdown to and from various popular formats',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="markdown-rapid7-plugin",
+      version="3.1.0",
+      description="Convert markdown to and from various popular formats",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_markdown']

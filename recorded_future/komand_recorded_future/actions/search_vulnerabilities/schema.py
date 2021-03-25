@@ -13,6 +13,8 @@ class Input:
     FROM = "from"
     LIMIT = "limit"
     ORDERBY = "orderby"
+    RISKRULE = "riskRule"
+    RISKSCORE = "riskScore"
     
 
 class Output:
@@ -71,6 +73,58 @@ class SearchVulnerabilitiesInput(komand.Input):
         "Totalhits"
       ],
       "order": 3
+    },
+    "riskRule": {
+      "type": "string",
+      "title": "Risk Rule",
+      "description": "Filters the results by risk rule",
+      "enum": [
+        "Historically Reported by Insikt Group",
+        "Web Reporting Prior to CVSS Score",
+        "Cyber Exploit Signal - Critical",
+        "Cyber Exploit Signal - Important",
+        "Cyber Exploit Signal - Medium",
+        "Historical Suspected Exploit/Tool Development in the Wild",
+        "Historical Observed Exploit/Tool Development in the Wild",
+        "Historically Exploited in the Wild by Malware",
+        "Linked to Historical Cyber Exploit",
+        "Historically Linked to Exploit Kit",
+        "Historically Linked to Malware",
+        "Historically Linked to Remote Access Trojan",
+        "Historically Linked to Ransomware",
+        "Linked to Recent Cyber Exploit",
+        "Recently Linked to Exploit Kit",
+        "Recently Linked to Malware",
+        "Recently Linked to Remote Access Trojan",
+        "Recently Linked to Ransomware",
+        "Exploited in the Wild by Malware",
+        "NIST Severity - Critical",
+        "Duplicate of Vulnerability in NVD",
+        "NIST Severity - High",
+        "NIST Severity - Low",
+        "NIST Severity - Medium",
+        "Web Reporting Prior to NVD Disclosure",
+        "Historical Unverified Proof of Concept Available",
+        "Historical Verified Proof of Concept Available",
+        "Historical Verified Proof of Concept Available Using Remote Execution",
+        "Recently Reported by Insikt Group",
+        "Recent Suspected Exploit/Tool Development in the Wild",
+        "Exploited in the Wild by Recently Active Malware",
+        "Recent Unverified Proof of Concept Available",
+        "Recent Verified Proof of Concept Available",
+        "Recent Verified Proof of Concept Available Using Remote Execution",
+        "Recently Referenced by Insikt Group",
+        "Recently Linked to Penetration Testing Tools",
+        "Historically Referenced by Insikt Group",
+        "Historically Linked to Penetration Testing Tools"
+      ],
+      "order": 6
+    },
+    "riskScore": {
+      "type": "string",
+      "title": "Risk Score",
+      "description": "Filters the results by risk score",
+      "order": 7
     }
   },
   "required": [
@@ -101,6 +155,326 @@ class SearchVulnerabilitiesOutput(komand.Output):
     }
   },
   "definitions": {
+    "analystNote": {
+      "type": "object",
+      "title": "analystNote",
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/attributes",
+          "title": "Attributes",
+          "order": 1
+        },
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "order": 2
+        },
+        "source": {
+          "$ref": "#/definitions/labels",
+          "title": "Source",
+          "order": 3
+        }
+      },
+      "definitions": {
+        "attributes": {
+          "type": "object",
+          "title": "attributes",
+          "properties": {
+            "context_entities": {
+              "type": "array",
+              "title": "Context Entities",
+              "items": {
+                "$ref": "#/definitions/context_entities"
+              },
+              "order": 1
+            },
+            "labels": {
+              "type": "array",
+              "title": "Labels",
+              "items": {
+                "$ref": "#/definitions/labels"
+              },
+              "order": 2
+            },
+            "note_entities": {
+              "type": "array",
+              "title": "Note Entities",
+              "items": {
+                "$ref": "#/definitions/labels"
+              },
+              "order": 3
+            },
+            "published": {
+              "type": "string",
+              "title": "Published",
+              "order": 4
+            },
+            "text": {
+              "type": "string",
+              "title": "Text",
+              "order": 5
+            },
+            "title": {
+              "type": "string",
+              "title": "Title",
+              "order": 6
+            },
+            "topic": {
+              "$ref": "#/definitions/context_entities",
+              "title": "Topic",
+              "order": 7
+            },
+            "validated_on": {
+              "type": "string",
+              "title": "Validated On",
+              "order": 8
+            },
+            "validation_urls": {
+              "type": "array",
+              "title": "Validation Urls",
+              "items": {
+                "$ref": "#/definitions/labels"
+              },
+              "order": 9
+            }
+          },
+          "definitions": {
+            "context_entities": {
+              "type": "object",
+              "title": "context_entities",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "title": "Description",
+                  "order": 1
+                },
+                "id": {
+                  "type": "string",
+                  "title": "Id",
+                  "order": 2
+                },
+                "name": {
+                  "type": "string",
+                  "title": "Name",
+                  "order": 3
+                },
+                "type": {
+                  "type": "string",
+                  "title": "Type",
+                  "order": 4
+                }
+              }
+            },
+            "labels": {
+              "type": "object",
+              "title": "labels",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "title": "Id",
+                  "order": 1
+                },
+                "name": {
+                  "type": "string",
+                  "title": "Name",
+                  "order": 2
+                },
+                "type": {
+                  "type": "string",
+                  "title": "Type",
+                  "order": 3
+                }
+              }
+            }
+          }
+        },
+        "context_entities": {
+          "type": "object",
+          "title": "context_entities",
+          "properties": {
+            "description": {
+              "type": "string",
+              "title": "Description",
+              "order": 1
+            },
+            "id": {
+              "type": "string",
+              "title": "Id",
+              "order": 2
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "order": 3
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "order": 4
+            }
+          }
+        },
+        "labels": {
+          "type": "object",
+          "title": "labels",
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "Id",
+              "order": 1
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "order": 2
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "order": 3
+            }
+          }
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "title": "attributes",
+      "properties": {
+        "context_entities": {
+          "type": "array",
+          "title": "Context Entities",
+          "items": {
+            "$ref": "#/definitions/context_entities"
+          },
+          "order": 1
+        },
+        "labels": {
+          "type": "array",
+          "title": "Labels",
+          "items": {
+            "$ref": "#/definitions/labels"
+          },
+          "order": 2
+        },
+        "note_entities": {
+          "type": "array",
+          "title": "Note Entities",
+          "items": {
+            "$ref": "#/definitions/labels"
+          },
+          "order": 3
+        },
+        "published": {
+          "type": "string",
+          "title": "Published",
+          "order": 4
+        },
+        "text": {
+          "type": "string",
+          "title": "Text",
+          "order": 5
+        },
+        "title": {
+          "type": "string",
+          "title": "Title",
+          "order": 6
+        },
+        "topic": {
+          "$ref": "#/definitions/context_entities",
+          "title": "Topic",
+          "order": 7
+        },
+        "validated_on": {
+          "type": "string",
+          "title": "Validated On",
+          "order": 8
+        },
+        "validation_urls": {
+          "type": "array",
+          "title": "Validation Urls",
+          "items": {
+            "$ref": "#/definitions/labels"
+          },
+          "order": 9
+        }
+      },
+      "definitions": {
+        "context_entities": {
+          "type": "object",
+          "title": "context_entities",
+          "properties": {
+            "description": {
+              "type": "string",
+              "title": "Description",
+              "order": 1
+            },
+            "id": {
+              "type": "string",
+              "title": "Id",
+              "order": 2
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "order": 3
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "order": 4
+            }
+          }
+        },
+        "labels": {
+          "type": "object",
+          "title": "labels",
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "Id",
+              "order": 1
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "order": 2
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "order": 3
+            }
+          }
+        }
+      }
+    },
+    "context_entities": {
+      "type": "object",
+      "title": "context_entities",
+      "properties": {
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "order": 1
+        },
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "order": 2
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "order": 3
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "order": 4
+        }
+      }
+    },
     "counts": {
       "type": "object",
       "title": "counts",
@@ -162,9 +536,30 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "order": 6
         },
         "score": {
-          "type": "integer",
+          "type": "number",
           "title": "Score",
           "order": 5
+        },
+        "version": {
+          "type": "string",
+          "title": "Version",
+          "order": 10
+        }
+      }
+    },
+    "cvssv3": {
+      "type": "object",
+      "title": "cvssv3",
+      "properties": {
+        "attackComplexity": {
+          "type": "string",
+          "title": "AttackComplexity",
+          "order": 1
+        },
+        "attackVector": {
+          "type": "string",
+          "title": "AttackVector",
+          "order": 2
         }
       }
     },
@@ -243,7 +638,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
       "title": "evidenceDetails",
       "properties": {
         "criticality": {
-          "type": "integer",
+          "type": "number",
           "title": "Criticality",
           "order": 1
         },
@@ -269,6 +664,27 @@ class SearchVulnerabilitiesOutput(komand.Output):
         }
       }
     },
+    "labels": {
+      "type": "object",
+      "title": "labels",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "order": 1
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "order": 2
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "order": 3
+        }
+      }
+    },
     "metrics": {
       "type": "object",
       "title": "metrics",
@@ -279,8 +695,26 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "order": 1
         },
         "value": {
-          "type": "integer",
+          "type": "number",
           "title": "Value",
+          "order": 2
+        }
+      }
+    },
+    "rawrisk": {
+      "type": "object",
+      "title": "rawrisk",
+      "properties": {
+        "rule": {
+          "type": "string",
+          "title": "Rule",
+          "description": "Rule",
+          "order": 1
+        },
+        "timestamp": {
+          "type": "string",
+          "title": "Timestamp",
+          "description": "Timestamp",
           "order": 2
         }
       }
@@ -381,7 +815,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
       "title": "risk",
       "properties": {
         "criticality": {
-          "type": "integer",
+          "type": "number",
           "title": "Criticality",
           "order": 1
         },
@@ -420,7 +854,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "title": "evidenceDetails",
           "properties": {
             "criticality": {
-              "type": "integer",
+              "type": "number",
               "title": "Criticality",
               "order": 1
             },
@@ -504,6 +938,22 @@ class SearchVulnerabilitiesOutput(komand.Output):
       "type": "object",
       "title": "vulnerability_search_data",
       "properties": {
+        "analystNotes": {
+          "type": "array",
+          "title": "Analyst Notes",
+          "items": {
+            "$ref": "#/definitions/analystNote"
+          },
+          "order": 18
+        },
+        "commonNames": {
+          "type": "array",
+          "title": "CommonNames",
+          "items": {
+            "type": "string"
+          },
+          "order": 15
+        },
         "counts": {
           "type": "array",
           "title": "Counts",
@@ -524,6 +974,11 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "$ref": "#/definitions/cvss",
           "title": "Cvss",
           "order": 2
+        },
+        "cvssv3": {
+          "$ref": "#/definitions/cvssv3",
+          "title": "Cvssv3",
+          "order": 16
         },
         "entity": {
           "$ref": "#/definitions/entity",
@@ -553,6 +1008,14 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "title": "NVD Description",
           "order": 4
         },
+        "rawrisk": {
+          "type": "array",
+          "title": "Rawrisk",
+          "items": {
+            "$ref": "#/definitions/rawrisk"
+          },
+          "order": 14
+        },
         "relatedEntities": {
           "type": "array",
           "title": "Related Entities",
@@ -560,6 +1023,14 @@ class SearchVulnerabilitiesOutput(komand.Output):
             "$ref": "#/definitions/relatedEntities"
           },
           "order": 9
+        },
+        "relatedLinks": {
+          "type": "array",
+          "title": "RelatedLinks",
+          "items": {
+            "type": "string"
+          },
+          "order": 17
         },
         "risk": {
           "$ref": "#/definitions/risk",
@@ -589,6 +1060,326 @@ class SearchVulnerabilitiesOutput(komand.Output):
         }
       },
       "definitions": {
+        "analystNote": {
+          "type": "object",
+          "title": "analystNote",
+          "properties": {
+            "attributes": {
+              "$ref": "#/definitions/attributes",
+              "title": "Attributes",
+              "order": 1
+            },
+            "id": {
+              "type": "string",
+              "title": "Id",
+              "order": 2
+            },
+            "source": {
+              "$ref": "#/definitions/labels",
+              "title": "Source",
+              "order": 3
+            }
+          },
+          "definitions": {
+            "attributes": {
+              "type": "object",
+              "title": "attributes",
+              "properties": {
+                "context_entities": {
+                  "type": "array",
+                  "title": "Context Entities",
+                  "items": {
+                    "$ref": "#/definitions/context_entities"
+                  },
+                  "order": 1
+                },
+                "labels": {
+                  "type": "array",
+                  "title": "Labels",
+                  "items": {
+                    "$ref": "#/definitions/labels"
+                  },
+                  "order": 2
+                },
+                "note_entities": {
+                  "type": "array",
+                  "title": "Note Entities",
+                  "items": {
+                    "$ref": "#/definitions/labels"
+                  },
+                  "order": 3
+                },
+                "published": {
+                  "type": "string",
+                  "title": "Published",
+                  "order": 4
+                },
+                "text": {
+                  "type": "string",
+                  "title": "Text",
+                  "order": 5
+                },
+                "title": {
+                  "type": "string",
+                  "title": "Title",
+                  "order": 6
+                },
+                "topic": {
+                  "$ref": "#/definitions/context_entities",
+                  "title": "Topic",
+                  "order": 7
+                },
+                "validated_on": {
+                  "type": "string",
+                  "title": "Validated On",
+                  "order": 8
+                },
+                "validation_urls": {
+                  "type": "array",
+                  "title": "Validation Urls",
+                  "items": {
+                    "$ref": "#/definitions/labels"
+                  },
+                  "order": 9
+                }
+              },
+              "definitions": {
+                "context_entities": {
+                  "type": "object",
+                  "title": "context_entities",
+                  "properties": {
+                    "description": {
+                      "type": "string",
+                      "title": "Description",
+                      "order": 1
+                    },
+                    "id": {
+                      "type": "string",
+                      "title": "Id",
+                      "order": 2
+                    },
+                    "name": {
+                      "type": "string",
+                      "title": "Name",
+                      "order": 3
+                    },
+                    "type": {
+                      "type": "string",
+                      "title": "Type",
+                      "order": 4
+                    }
+                  }
+                },
+                "labels": {
+                  "type": "object",
+                  "title": "labels",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "title": "Id",
+                      "order": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "title": "Name",
+                      "order": 2
+                    },
+                    "type": {
+                      "type": "string",
+                      "title": "Type",
+                      "order": 3
+                    }
+                  }
+                }
+              }
+            },
+            "context_entities": {
+              "type": "object",
+              "title": "context_entities",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "title": "Description",
+                  "order": 1
+                },
+                "id": {
+                  "type": "string",
+                  "title": "Id",
+                  "order": 2
+                },
+                "name": {
+                  "type": "string",
+                  "title": "Name",
+                  "order": 3
+                },
+                "type": {
+                  "type": "string",
+                  "title": "Type",
+                  "order": 4
+                }
+              }
+            },
+            "labels": {
+              "type": "object",
+              "title": "labels",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "title": "Id",
+                  "order": 1
+                },
+                "name": {
+                  "type": "string",
+                  "title": "Name",
+                  "order": 2
+                },
+                "type": {
+                  "type": "string",
+                  "title": "Type",
+                  "order": 3
+                }
+              }
+            }
+          }
+        },
+        "attributes": {
+          "type": "object",
+          "title": "attributes",
+          "properties": {
+            "context_entities": {
+              "type": "array",
+              "title": "Context Entities",
+              "items": {
+                "$ref": "#/definitions/context_entities"
+              },
+              "order": 1
+            },
+            "labels": {
+              "type": "array",
+              "title": "Labels",
+              "items": {
+                "$ref": "#/definitions/labels"
+              },
+              "order": 2
+            },
+            "note_entities": {
+              "type": "array",
+              "title": "Note Entities",
+              "items": {
+                "$ref": "#/definitions/labels"
+              },
+              "order": 3
+            },
+            "published": {
+              "type": "string",
+              "title": "Published",
+              "order": 4
+            },
+            "text": {
+              "type": "string",
+              "title": "Text",
+              "order": 5
+            },
+            "title": {
+              "type": "string",
+              "title": "Title",
+              "order": 6
+            },
+            "topic": {
+              "$ref": "#/definitions/context_entities",
+              "title": "Topic",
+              "order": 7
+            },
+            "validated_on": {
+              "type": "string",
+              "title": "Validated On",
+              "order": 8
+            },
+            "validation_urls": {
+              "type": "array",
+              "title": "Validation Urls",
+              "items": {
+                "$ref": "#/definitions/labels"
+              },
+              "order": 9
+            }
+          },
+          "definitions": {
+            "context_entities": {
+              "type": "object",
+              "title": "context_entities",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "title": "Description",
+                  "order": 1
+                },
+                "id": {
+                  "type": "string",
+                  "title": "Id",
+                  "order": 2
+                },
+                "name": {
+                  "type": "string",
+                  "title": "Name",
+                  "order": 3
+                },
+                "type": {
+                  "type": "string",
+                  "title": "Type",
+                  "order": 4
+                }
+              }
+            },
+            "labels": {
+              "type": "object",
+              "title": "labels",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "title": "Id",
+                  "order": 1
+                },
+                "name": {
+                  "type": "string",
+                  "title": "Name",
+                  "order": 2
+                },
+                "type": {
+                  "type": "string",
+                  "title": "Type",
+                  "order": 3
+                }
+              }
+            }
+          }
+        },
+        "context_entities": {
+          "type": "object",
+          "title": "context_entities",
+          "properties": {
+            "description": {
+              "type": "string",
+              "title": "Description",
+              "order": 1
+            },
+            "id": {
+              "type": "string",
+              "title": "Id",
+              "order": 2
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "order": 3
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "order": 4
+            }
+          }
+        },
         "counts": {
           "type": "object",
           "title": "counts",
@@ -650,9 +1441,30 @@ class SearchVulnerabilitiesOutput(komand.Output):
               "order": 6
             },
             "score": {
-              "type": "integer",
+              "type": "number",
               "title": "Score",
               "order": 5
+            },
+            "version": {
+              "type": "string",
+              "title": "Version",
+              "order": 10
+            }
+          }
+        },
+        "cvssv3": {
+          "type": "object",
+          "title": "cvssv3",
+          "properties": {
+            "attackComplexity": {
+              "type": "string",
+              "title": "AttackComplexity",
+              "order": 1
+            },
+            "attackVector": {
+              "type": "string",
+              "title": "AttackVector",
+              "order": 2
             }
           }
         },
@@ -731,7 +1543,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "title": "evidenceDetails",
           "properties": {
             "criticality": {
-              "type": "integer",
+              "type": "number",
               "title": "Criticality",
               "order": 1
             },
@@ -757,6 +1569,27 @@ class SearchVulnerabilitiesOutput(komand.Output):
             }
           }
         },
+        "labels": {
+          "type": "object",
+          "title": "labels",
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "Id",
+              "order": 1
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "order": 2
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "order": 3
+            }
+          }
+        },
         "metrics": {
           "type": "object",
           "title": "metrics",
@@ -767,8 +1600,26 @@ class SearchVulnerabilitiesOutput(komand.Output):
               "order": 1
             },
             "value": {
-              "type": "integer",
+              "type": "number",
               "title": "Value",
+              "order": 2
+            }
+          }
+        },
+        "rawrisk": {
+          "type": "object",
+          "title": "rawrisk",
+          "properties": {
+            "rule": {
+              "type": "string",
+              "title": "Rule",
+              "description": "Rule",
+              "order": 1
+            },
+            "timestamp": {
+              "type": "string",
+              "title": "Timestamp",
+              "description": "Timestamp",
               "order": 2
             }
           }
@@ -869,7 +1720,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
           "title": "risk",
           "properties": {
             "criticality": {
-              "type": "integer",
+              "type": "number",
               "title": "Criticality",
               "order": 1
             },
@@ -908,7 +1759,7 @@ class SearchVulnerabilitiesOutput(komand.Output):
               "title": "evidenceDetails",
               "properties": {
                 "criticality": {
-                  "type": "integer",
+                  "type": "number",
                   "title": "Criticality",
                   "order": 1
                 },

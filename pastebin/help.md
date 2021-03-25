@@ -108,7 +108,7 @@ Scraping tasks require the IP of the machine running Komand to need be [whitelis
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Python 3 conversion | Bug fix updated endpoints
 * 0.1.2 - SSL bug fix in SDK
 * 0.1.1 - Force HTTPS connections, Pastebin will block HTTP requests beginning on March 1st, 2018

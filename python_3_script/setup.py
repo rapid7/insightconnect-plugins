@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='python_3_script-rapid7-plugin',
-      version='2.0.1',
-      description='The Python 3 plugin allows you to run Python 3 scripts',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="python_3_script-rapid7-plugin",
+      version="2.0.2",
+      description="Run a Python 3 script",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_python_3_script']

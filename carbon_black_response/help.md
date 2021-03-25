@@ -1,8 +1,8 @@
 # Description
 
-[Cb Response](https://www.carbonblack.com/products/cb-response/) is the most complete endpoint detection and response solution available to security teams. The InsigthConnect plugin allows you to automate information collection, endpoint isolation and hash blacklisting.
+[VMware Carbon Black EDR](https://www.carbonblack.com/products/edr/) is the most complete endpoint detection and response solution available to security teams. The InsightConnect plugin allows you to automate information collection, endpoint isolation and hash blacklisting.
 
-This plugin utilizes the [Cb Response REST API](https://developer.carbonblack.com/reference/enterprise-response/6.1/rest-api/).
+This plugin utilizes the [VMware Carbon Black EDR REST API](https://developer.carbonblack.com/guide/enterprise-response/).
 
 # Key Features
 
@@ -12,7 +12,7 @@ This plugin utilizes the [Cb Response REST API](https://developer.carbonblack.co
 
 # Requirements
 
-* Requires an API Key from Carbon Black Response
+* Requires an API Key from VMware Carbon Black EDR
 
 # Documentation
 
@@ -576,7 +576,7 @@ This action is used to list all feeds.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -651,7 +651,7 @@ This trigger is used to fire when a new alert is found.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -729,13 +729,16 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 3.1.8 - New spec and help.md format for the Hub
+* 3.1.11 - Correct spelling in help.md
+* 3.1.10 - Rebrand plugin
+* 3.1.9 - Pin to latest version of cbapi (1.6.2) to fix broken isolate() function
+* 3.1.8 - New spec and help.md format for the Extension Library
 * 3.1.7 - Fix issue where Delete Watchlist action would not run successfully
 * 3.1.6 - Fix issue where output from the New Alert trigger did not match the output schema
 * 3.1.5 - Update connection tests
 * 3.1.4 - Update descriptions
 * 3.1.3 - Pull the ConnectionCacheKey update from SDK
-* 3.1.2 - Fixed List Sensors action from failing when sensor dosen't exist
+* 3.1.2 - Fixed List Sensors action from failing when sensor doesn't exist
 * 3.1.1 - New input parameters for List Sensors action
 * 3.1.0 - Added action List Sensors
 * 3.0.0 - Plugin audited and various minor bugs corrected
@@ -747,5 +750,4 @@ This plugin does not contain any troubleshooting information.
 
 ## References
 
-* [Carbon Black REST API Reference](https://developer.carbonblack.com/reference/enterprise-response/6.1/rest-api/)
-
+* [VMware Carbon Black EDR REST API](https://developer.carbonblack.com/guide/enterprise-response/)

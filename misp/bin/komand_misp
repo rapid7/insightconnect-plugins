@@ -4,10 +4,10 @@ import komand
 from komand_misp import connection, actions, triggers
 
 
-Name = 'MISP'
-Vendor = 'rapid7'
-Version = '4.0.0'
-Description = 'MISP is an open source threat sharing platform'
+Name = "MISP"
+Vendor = "rapid7"
+Version = "5.0.0"
+Description = "MISP is an open source threat sharing platform"
 
 
 class ICONMisp(komand.Plugin):

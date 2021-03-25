@@ -86,8 +86,8 @@ class GetScanOutput(komand.Output):
     },
     "links": {
       "type": "array",
-      "title": "Hypermedia links to corresponding or related resources",
-      "description": "Links",
+      "title": "Links",
+      "description": "Hypermedia links to corresponding or related resources",
       "items": {
         "$ref": "#/definitions/link"
       },

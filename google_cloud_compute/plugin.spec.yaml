@@ -8,7 +8,7 @@ support: community
 status: []
 description: Google Compute Engine delivers virtual machines running in Google innovative
   data centers and worldwide fiber network
-version: 2.0.2
+version: 3.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/google_cloud_compute
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -337,86 +337,94 @@ connection:
     description: Google Cloud Compute Server
     required: true
     default: https://www.googleapis.com/compute/
+    example: https://www.googleapis.com/compute/
   version:
     type: string
     description: API Version
     required: true
     default: v1
+    example: v1
   project_id:
     title: Project ID
     type: string
     description: Project ID from service credentials
     required: true
+    example: my-project-1
   private_key:
     title: Private Key
     type: credential_asymmetric_key
     description: Private key from service credentials
     required: true
+    example: "-----BEGIN PRIVATE KEY-----MIIEvQIBAFANBgkqhkiG8w0BAQEFAASCBKcwggSjAgEAAoIBAQCpaAjyOCpEqm8Z-----END PRIVATE KEY-----"
   client_email:
     type: string
     description: Client email from service credentials
     required: true
+    example: user@example.com
   client_id:
     title: Client ID
     type: string
     description: Client ID
     required: true
+    example: "109554222673833892525"
   client_x509_cert_url:
     title: Client X509 Cert URL
     type: string
     description: x509 cert URL from service credentials
     required: true
+    example: https://www.googleapis.com/robot/v1/metadata/x509/914010354256-compute%40developer.gserviceaccount.com
   auth_uri:
     title: Auth URI
     type: string
     description: OAUTH2 Auth URI
     default: https://accounts.google.com/o/oauth2/auth
     required: true
+    example: https://accounts.google.com/o/oauth2/auth
   token_uri:
     title: Token URI
     type: string
     description: OAUTH2 Token URI
     default: https://accounts.google.com/o/oauth2/token
     required: true
+    example: https://accounts.google.com/o/oauth2/token
   auth_provider_x509_cert_url:
     title: Auth Provider X509 Cert URL
     type: string
     description: OAUTH2 Auth Provider x509 Cert URL
     default: https://www.googleapis.com/oauth2/v1/certs
     required: true
+    example: https://www.googleapis.com/oauth2/v1/certs
 actions:
   disk_list:
     title: List Disks
-    description: Retrieves a list of persistent disks contained within the specified
-      zone
+    description: This action retrieves a list of persistent disks contained
+      within the specified zone
     input:
       zone:
         type: string
         title: Zone
         description: The name of the zone for this request
         required: true
+        example: us-central1-a
       filter:
         type: string
         title: Filter
         description: Sets a filter expression for filtering listed resources
         required: false
+        example: name != example-instance
       maxResults:
         type: integer
         title: Max Results
         description: The maximum number of results per page that should be returned.
           Acceptable values are 0 to 500. Default 500
         required: false
+        example: 500
       orderBy:
         type: string
         title: OrderBy
         description: Sorts list results by a certain order
         required: false
-      pageToken:
-        type: string
-        title: Page Token
-        description: Set pageToken to the nextPageToken returned by a previous list
-          request to get the next page of results
-        required: false
+        example: creationTimestamp desc
     output:
       items:
         description: A list of disk resources
@@ -438,32 +446,28 @@ actions:
         title: Self Link
         type: string
         required: false
-      nextPageToken:
-        description: This token allows you to get the next page of results for list
-          requests
-        title: Next Page Token
-        type: string
-        required: false
   disk_attach:
     title: Attach Disk
-    description: Attaches an existing disk resource to an instance
+    description: This action is used to attach an existing disk resource to an instance
     input:
       zone:
         type: string
         title: Zone
         description: The name of the zone for this request
         required: true
+        example: us-central1-a
       instance:
         type: string
         title: Name Instance
-        description: Name of the instance resource to stop
+        description: The instance name for this request
         required: true
+        example: my-instance-1
       source:
         type: string
         title: Source
         description: Valid partial or full URL to an existing persistent disk resource
-          (e.g. projects/my-project-171212/zones/us-central1-c/disks/new-disk)
         required: true
+        example: projects/my-project-1/zones/us-central1-a/disks/my-disk-1
     output:
       id:
         description: The unique identifier for the resource. This identifier is defined
@@ -588,23 +592,26 @@ actions:
         required: false
   disk_detach:
     title: Detach Disk
-    description: Detaches a disk from an instance
+    description: This action is used to detach a disk from an instance
     input:
       zone:
         type: string
         title: Zone
         description: The name of the zone for this request
         required: true
+        example: us-central1-a
       instance:
         type: string
         title: Name Instance
         description: Name of the instance resource to stop
         required: true
+        example: my-instance-1
       deviceName:
         type: string
         title: Disk Name
         description: Disk device name to detach
         required: true
+        example: my-disk-1
     output:
       id:
         description: The unique identifier for the resource. This identifier is defined
@@ -729,76 +736,46 @@ actions:
         required: false
   disk_snapshot:
     title: Snapshot Disk
-    description: Creates a snapshot of a specified persistent disk
+    description: This action is used to create a snapshot of a specified persistent disk
     input:
       zone:
         type: string
         title: Zone
         description: The name of the zone for this request
         required: true
+        example: us-central1-a
       disk:
         type: string
         title: Disk
         description: Name of the persistent disk to snapshot
         required: true
-      kind:
-        type: string
-        title: Kind
-        description: Type of the resource. Always compute#snapshot for Snapshot resources
-        default: compute#snapshot
-        required: false
+        example: my-disk-1
       name:
         type: string
         title: Name
         description: Name of the resource, provided by the client when the resource
           is created
         required: true
-      id:
-        type: string
-        title: ID
-        description: The unique identifier for the resource
-        required: false
-      creationTimestamp:
-        type: string
-        title: Creation timestamp
-        description: Creation timestamp
-        required: false
+        example: my-snapshot-1
       description:
         type: string
         title: Description
         description: An optional description of this resource. Provide this property
           when you create the resource
         required: false
-      status:
-        type: string
-        title: Status
-        description: The status of the snapshot
-        required: false
-      diskSizeGb:
-        type: integer
-        title: Disk SizeGb
-        description: Size of the snapshot
-        required: false
-      licenses:
-        type: '[]string'
-        title: Licenses
-        description: A list of public visible licenses that apply to this snapshot
-        required: false
-      selfLink:
-        type: string
-        title: Self Link
-        description: Server-defined URL for the resource
-        required: true
+        example: my-snapshot-1 descriptions
       snapshotEncryptionKey:
         description: Encrypts the snapshot
         title: Snapshot Encryption Key
         type: snapshotEncryptionKey
         required: false
+        example: SGVsbG8gZnJvbSBHb29nbGUgQ2xvdWQgUGxhdGZvcm0=
       sourceDiskEncryptionKey:
         description: The customer-supplied encryption key of the source disk
         title: Source Disk Encryption Key
         type: snapshotEncryptionKey
         required: false
+        example: SGVsbG8gZnJvbSBHb29nbGUgQ2xvdWQgUGxhdGZvcm0=
     output:
       id:
         description: The unique identifier for the resource. This identifier is defined
@@ -923,31 +900,28 @@ actions:
         required: false
   list_snapshots:
     title: List Snapshots
-    description: Retrieves the list of Snapshot resources contained within the specified
-      project
+    description: This action is used to retrieve the list of
+      Snapshot resources contained within the specified project
     input:
       filter:
         type: string
         title: Filter
         description: Sets a filter expression for filtering listed resources
         required: false
+        example: name = example-instance
       maxResults:
         type: integer
         title: Max Results
         description: The maximum number of results per page that should be returned.
           Acceptable values are 0 to 500. Default 500
         required: false
+        example: 500
       orderBy:
         type: string
         title: OrderBy
         description: Sorts list results by a certain order
         required: false
-      pageToken:
-        type: string
-        title: Page Token
-        description: Set pageToken to the nextPageToken returned by a previous list
-          request to get the next page of results
-        required: false
+        example: creationTimestamp desc
     output:
       kind:
         description: Type of resource. Always compute#snapshotList of a list of Snapshot
@@ -973,13 +947,14 @@ actions:
         required: false
   delete_snapshots:
     title: Delete Snapshots
-    description: Deletes the specified snapshot resource
+    description: This action is used to delete the specified snapshot resource
     input:
       snapshot:
         type: string
         title: Name Snapshot
         description: Name of the snapshot resource to delete
         required: true
+        example: my-snapshot-1
     output:
       id:
         description: The unique identifier for the resource. This identifier is defined
@@ -1103,14 +1078,15 @@ actions:
         type: string
         required: false
   get_firewall:
-    title: Get Firewall
-    description: Get firewall
+    title: Get Firewall Details
+    description: This action is used to retrieve details on a firewall including its rulesets
     input:
       firewall:
         type: string
         title: Firewall Name
-        description: Name of the firewall rule to return
+        description: Name of the firewall to return
         required: true
+        example: my-firewall-1
     output:
       id:
         description: The unique identifier for the resource. This identifier is defined
@@ -1177,8 +1153,8 @@ actions:
         required: false
   insert_firewall:
     title: Insert Firewall
-    description: Creates a firewall rule in the specified project using the data included
-      in the request
+    description: This action is used to create a firewall rule in the specified project
+      using the data included in the request
     input:
       name:
         description: Name of the resource, provided by the client when the resource
@@ -1186,62 +1162,48 @@ actions:
         title: Name
         type: string
         required: true
+        example: my-firewall-1
       allowed:
         description: The list of allow rules specified by this firewall. Each rule
           specifies a protocol and port-range tuple that describes a permitted connection
         title: Allowed
         type: '[]allowed'
         required: true
-      id:
-        description: The unique identifier for the resource. This identifier is defined
-          by the server
-        title: ID
-        type: string
-        required: false
-      kind:
-        description: Type of the resource. Always compute#firewall for firewall rules
-        title: Kind
-        type: string
-        required: false
-      selfLink:
-        description: Server-defined URL for the resource
-        title: Self Link
-        type: string
-        required: false
+        example: '[{"IPProtocol": "tcp", "ports": ["80"]}]'
       description:
         description: A textual description of the operation, which is set when the
           operation is created
         type: string
         required: false
+        example: my-firewall-1 description
       network:
         description: 'URL of the network resource for this firewall rule. If not specified
           when creating a firewall rule, the default network is used: global/networks/default'
         title: Network
         type: string
         required: false
+        example: global/networks/my-network-1
       sourceTags:
         description: If source tags are specified, the firewall will apply only to
           traffic with source IP that belongs to a tag listed in source tags
         title: Source Tags
         type: '[]string'
         required: false
+        example: '["http"]'
       sourceRanges:
         description: If source ranges are specified, the firewall will apply only
           to traffic that has source IP address in these ranges
         title: Source Ranges
         type: '[]string'
         required: false
+        example: '["192.168.2.0/24"]'
       targetTags:
         description: A list of instance tags indicating sets of instances located
           in the network that may make network connections as specified in allowed[]
         title: Target Tags
         type: '[]string'
         required: false
-      creationTimestamp:
-        description: Creation timestamp
-        title: Creation Timestamp
-        type: string
-        required: false
+        example: '["http"]'
     output:
       id:
         description: The unique identifier for the resource. This identifier is defined
@@ -1366,30 +1328,28 @@ actions:
         required: false
   list_firewalls:
     title: List Firewalls
-    description: Retrieves the list of firewall rules available to the specified project
+    description: This action is used to retrieve a list of
+      persistent disks contained within the specified zone
     input:
       filter:
         type: string
         title: Filter
         description: Sets a filter expression for filtering listed resources
         required: false
+        example: name = my-firewall-1
       maxResults:
         type: integer
         title: Max Results
         description: The maximum number of results per page that should be returned.
           Acceptable values are 0 to 500. Default 500
         required: false
+        example: 500
       orderBy:
         type: string
         title: OrderBy
         description: Sorts list results by a certain order
         required: false
-      pageToken:
-        type: string
-        title: Page Token
-        description: Set pageToken to the nextPageToken returned by a previous list
-          request to get the next page of results
-        required: false
+        example: creationTimestamp desc
     output:
       kind:
         type: string
@@ -1412,84 +1372,65 @@ actions:
         title: Self Link
         description: Server-defined URL for this resource
         required: false
-      nextPageToken:
-        type: string
-        title: Next Page Token
-        description: This token allows you to get the next page of results for list
-          requests
-        required: false
   update_firewall:
     title: Update Firewall
-    description: Updates the specified firewall rule with the data included in the
-      request
+    description: This action is used to update the specified
+      firewall rule with the data included in the request
     input:
       firewall:
         type: string
         title: Firewall Name
         description: Name of the firewall rule to update
         required: true
+        example: my-firewall-1
       name:
         description: Name of the resource, provided by the client when the resource
           is created
         title: Name
         type: string
-        required: true
+        required: false
+        example: my-firewall-1
       allowed:
         description: The list of allow rules specified by this firewall. Each rule
           specifies a protocol and port-range tuple that describes a permitted connection
         title: Allowed
         type: '[]allowed'
-        required: true
-      id:
-        description: The unique identifier for the resource. This identifier is defined
-          by the server
-        title: ID
-        type: string
         required: false
-      kind:
-        description: Type of the resource. Always compute#firewall for firewall rules
-        title: Kind
-        type: string
-        required: false
-      selfLink:
-        description: Server-defined URL for the resource
-        title: Self Link
-        type: string
-        required: false
+        example: '[{"IPProtocol": "tcp", "ports": ["80"]}]'
       description:
         description: A textual description of the operation, which is set when the
           operation is created
         type: string
         required: false
+        example: my-firewall-1 description
       network:
         description: 'URL of the network resource for this firewall rule. If not specified
           when creating a firewall rule, the default network is used: global/networks/default'
         title: Network
         type: string
         required: false
+        example: global/networks/my-network-1
       sourceTags:
         description: If source tags are specified, the firewall will apply only to
           traffic with source IP that belongs to a tag listed in source tags
         title: Source Tags
         type: '[]string'
         required: false
+        example: '["http"]'
       sourceRanges:
         description: If source ranges are specified, the firewall will apply only
           to traffic that has source IP address in these ranges
         title: Source Ranges
         type: '[]string'
         required: false
+        example: '["192.168.2.0/24"]'
       targetTags:
         description: A list of instance tags indicating sets of instances located
           in the network that may make network connections as specified in allowed[]
         title: Target Tags
         type: '[]string'
         required: false
-      creationTimestamp:
-        description: Creation timestamp
-        title: Creation Timestamp
-        type: string
-        required: false
+        example: '["http"]'
     output:
       id:
         description: The unique identifier for the resource. This identifier is defined
@@ -1614,13 +1555,14 @@ actions:
         required: false
   delete_firewall:
     title: Delete Firewall
-    description: Deletes the specified firewall
+    description: This action is used to delete the specified firewall
     input:
       firewall:
         type: string
         title: Firewall Name
         description: Name of the firewall rule to delete
         required: true
+        example: my-firewall
     output:
       id:
         description: The unique identifier for the resource. This identifier is defined
@@ -1745,35 +1687,34 @@ actions:
         required: false
   list_instances:
     title: List Instances
-    description: Retrieves the list of instances contained within the specified zone
+    description: This action is used to retrieve the list of
+      instances contained within the specified zone
     input:
       zone:
         type: string
         title: Zone
         description: The name of the zone for this request
         required: true
+        example: us-central1-a
       filter:
         type: string
         title: Filter
         description: Sets a filter expression for filtering listed resources
         required: false
+        example: name = my-firewall-1
       maxResults:
         type: integer
         title: Max Results
         description: The maximum number of results per page that should be returned.
           Acceptable values are 0 to 500. Default 500
         required: false
+        example: 500
       orderBy:
         type: string
         title: OrderBy
         description: Sorts list results by a certain order
         required: false
-      pageToken:
-        type: string
-        title: Page Token
-        description: Set pageToken to the nextPageToken returned by a previous list
-          request to get the next page of results
-        required: false
+        example: creationTimestamp desc
     output:
       kind:
         description: Type of resource. Always compute#instanceList for lists of Instance
@@ -1800,19 +1741,21 @@ actions:
         required: false
   stop_instance:
     title: Stop Instance
-    description: Stops a running instance, shutting it down cleanly, and allows you
-      to restart the instance at a later time
+    description: This action is used to stop a running instance, shut it down cleanly,
+      and allow you to restart the instance at a later time
     input:
       zone:
         type: string
         title: Zone
         description: The name of the zone for this request
         required: true
+        example: us-central1-a
       instance:
         type: string
         title: Name Instance
         description: Name of the instance resource to stop
         required: true
+        example: my-instance-1
     output:
       id:
         description: The unique identifier for the resource. This identifier is defined
@@ -1937,18 +1880,20 @@ actions:
         required: false
   start_instance:
     title: Start Instance
-    description: Starts an instance
+    description: This action is used to start an instance
     input:
       zone:
         type: string
         title: Zone
         description: The name of the zone for this request
         required: true
+        example: us-central1-a
       instance:
         type: string
         title: Name Instance
         description: Name of the instance resource to stop
         required: true
+        example: my-instance-1
     output:
       id:
         description: The unique identifier for the resource. This identifier is defined

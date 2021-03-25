@@ -1,6 +1,6 @@
 # Description
 
-[Dig](https://linux.die.net/man/1/dig), or Domain Information Groper, is a network administration command-line tool for querying Domain Name System (DNS) name servers. This plugin uses Dig to make forward and reverse DNS requests.
+The DNS plugin is used for forward and reverse DNS lookups. This plugin uses [Dig](https://linux.die.net/man/1/dig), or Domain Information Groper, which is a network administration command-line tool for querying Domain Name System (DNS) name servers.
 
 # Key Features
 
@@ -38,37 +38,50 @@ It accepts a domain name of type `string` and one of the following record types:
 * PTR
 * SOA
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|False|Query type e.g. ANY, A, MX, NS, etc|['A', 'AAAA', 'ANY', 'CNAME', 'MX', 'NS', 'PTR', 'SOA']|
-|domain|string|None|True|Domain name to resolve|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|domain|string|None|True|Domain name to resolve|None|rapid7.com|
+|query|string|None|True|Query type e.g. ANY, A, MX, NS, etc|['A', 'AAAA', 'ANY', 'CNAME', 'MX', 'NS', 'PTR', 'SOA']|MX|
+|resolver|string|None|False|Resolver. Leave blank to use default resolver for the system|None|8.8.8.8|
+
+Example input:
+
+```
+{
+  "domain": "rapid7.com",
+  "query": "MX",
+  "resolver": "8.8.8.8"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|Query status [ NOERROR \| FORMERR \| NXDOMAIN \| SERVFAIL \| REFUSED ...]|
-|last_answer|string|False|The last answer found in the answers section|
-|fulloutput|string|False|Full Dig output|
+|all_answers|[]string|False|A list of all answers found|
 |answer|string|False|Answer received|
+|fulloutput|string|False|Full DNS output|
+|last_answer|string|False|The last answer found in the answers section|
 |nameserver|string|False|Nameserver that fulfilled request|
 |question|string|False|Question asked|
-|all_answers|[]string|False|A list of all answers found|
+|status|string|False|Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED ...]|
 
 On success, the raw output will look like the following:
 
+Example output:
+
 ```
-
 {
+  "last_answer": "172.217.6.14",
+  "nameserver": "192.168.65.1",
+  "question": "google.com",
   "status": "NOERROR",
-  "answer": "50.19.156.131",
-  "nameserver": "10.0.2.3",
-  "question": "komand.com",
-  "fulloutput": "\n; <<>> Dig 9.9.5-9+deb8u9-Debian <<>> komand.com A\n;; global options: +cmd\n;; Got answer:\n;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 15364\n;; flags: qr rd ra ad; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0\n\n;; QUESTION SECTION:\n;komand.com.\t\t\tIN\tA\n\n;; ANSWER SECTION:\nkomand.com.\t\t2677\tIN\tA\t50.19.156.131\n\n;; Query time: 6 msec\n;; SERVER: 10.0.2.3#53(10.0.2.3)\n;; WHEN: Thu Jan 26 23:11:29 UTC 2017\n;; MSG SIZE  rcvd: 44\n\n"
-  "all_answers": ["50.19.156.131"],
-  "last_answer": "50.19.156.131"
-},
-
+  "all_answers": [
+    "172.217.6.14"
+  ],
+  "answer": "172.217.6.14",
+  "fulloutput": "\n; <<>> DiG 9.12.4-P2 <<>> google.com A\n;; global ..."
+}
 ```
 
 On failure, the raw output will look like the following:
@@ -91,19 +104,29 @@ This action is used to request a reverse lookup for an IP address.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|address|string|None|True|Internet address to resolve|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|Internet address to resolve|None|1.2.3.4|
+|resolver|string|None|False|Resolver. Leave blank to use default resolver for the system|None|8.8.8.8|
+
+Example input:
+
+```
+{
+  "address": "1.2.3.4",
+  "resolver": "8.8.8.8"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|Query status [ NOERROR \| FORMERR \| NXDOMAIN \| SERVFAIL \| REFUSED ...]|
 |answer|string|False|Answer received|
+|fulloutput|string|False|Full DNS output|
 |nameserver|string|False|Nameserver that fulfilled request|
 |question|string|False|Question asked|
-|fulloutput|string|False|Full Dig output|
+|status|string|False|Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED ...]|
 
 On success, the raw output will look like the following:
 
@@ -117,6 +140,18 @@ On success, the raw output will look like the following:
   "fulloutput": "\n; <<>> Dig 9.9.5-9+deb8u9-Debian <<>> -x 8.8.8.8\n;; global options: +cmd\n;; Got answer:\n;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 59406\n;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version: 0, flags:; udp: 512\n;; QUESTION SECTION:\n;8.8.8.8.in-addr.arpa.\t\tIN\tPTR\n\n;; ANSWER SECTION:\n8.8.8.8.in-addr.arpa.\t68133\tIN\tPTR\tgoogle-public-dns-a.google.com.\n\n;; Query time: 22 msec\n;; SERVER: 10.0.2.3#53(10.0.2.3)\n;; WHEN: Thu Jan 26 23:43:43 UTC 2017\n;; MSG SIZE  rcvd: 93\n\n"
 }
 
+```
+
+Example output:
+
+```
+{
+  "status": "NOERROR",
+  "answer": "dns.google",
+  "fulloutput": "\n; <<>> DiG 9.14.8 <<>> -x 8.8.8.8\n;; global optio...",
+  "nameserver": "192.168.65.1",
+  "question": "8.8.8.8"
+}
 ```
 
 ### Triggers
@@ -159,7 +194,13 @@ Common examples:
 
 # Version History
 
-* 1.0.2 - New spec and help.md format for the Hub
+* 2.0.0 - Rename Dig plugin to DNS
+* 1.0.7 - Fix bug in `safe_parse` function | Fix bug when `answers` in function `execute_command` is str
+* 1.0.6 - Upgrade to latest Python plugin runtime | Define `cloud_ready` in spec
+* 1.0.5 - Update to v4 Python plugin runtime
+* 1.0.4 - Add example inputs
+* 1.0.3 - Use input and output constants | Change docker image from `komand/python-2-slim-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Added "f" strings | Remove duplicate code | Add user nobody to Dockerfile
+* 1.0.2 - New spec and help.md format for the Extension Library
 * 1.0.1 - Update to use the `komand/python-2-slim-plugin:2` Docker image to reduce plugin size
 * 1.0.0 - Support web server mode
 * 0.3.2 - Update to v2 Python plugin architecture
@@ -175,4 +216,3 @@ Common examples:
 
 * [Dig](https://linux.die.net/man/1/dig)
 * [DNS Status Code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml)
-

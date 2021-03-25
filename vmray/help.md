@@ -1,13 +1,14 @@
 # Description
 
-The VMRay plugin allows the user to submit files or URLs for malware analysis.
+The VMRay plugin allows the user to submit files or URLs for malware analysis with VMRay on-premise or VMRay Cloud.
+
 [VMRay](https://www.vmray.com) delivers advanced threat analysis and detection that combines a unique agent-less hypervisor-based network sandbox with a real-time reputation engine.
 The combination provides both fast, high volume file classification and in-depth malware analysis.
 The VMRay Analyzer is platform independent and can be scaled, the result of a decade of R&D by some of the world's leading experts on dynamic malware analysis.
 By monitoring at the hypervisor level, it is undetectable by malware running in the target operating system.
 VMRay serves leading enterprises around the world.
 
-This plugin utilizes the [VMRay API](https://cloud.vmray.com/static_doc/html/api/REST_API_Documentation.html).
+This plugin utilizes the VMRay API. The API is gated and can be found on-premise at `http://vmrayhost/static_doc/html/api/User_API_Reference.html` or in the [VMRay Cloud API documentation](https://cloud.vmray.com/static_doc/html/api/User_API_Reference.html).
 
 # Key Features
 
@@ -16,7 +17,7 @@ This plugin utilizes the [VMRay API](https://cloud.vmray.com/static_doc/html/api
 
 # Requirements
 
-* An API key
+* VMRay API key
 
 # Documentation
 
@@ -24,10 +25,21 @@ This plugin utilizes the [VMRay API](https://cloud.vmray.com/static_doc/html/api
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|API key for VMRay|None|
-|url|string|https://cloud.vmray.com|True|VMRay host e.g https://cloud.vmray.com|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|API key for VMRay|None|4SauhjkF9aANClXnIaLfAeE9RVBJnZZ8|
+|url|string|https://cloud.vmray.com|True|The VMRay host URL, both on-premise and cloud is supported|None|https://cloud.vmray.com|
+
+Example input:
+
+```
+{
+  "api_key": {
+      "secretKey": "4SauhjkF9aANClXnIaLfAeE9RVBJnZZ8"
+  },
+  "url": "https://cloud.vmray.com"
+}
+```
 
 ## Technical Details
 
@@ -39,16 +51,25 @@ This action is used to submit a file for analysis.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|file|file|None|True|File and filename for analysis|None|
-|analyzer_mode|string|default|False|Specify what analyzer mode to use|['default', 'reputation', 'reputation_static', 'reputation_static_dynamic', 'static_dynamic', 'static']|
-|optional_params|object|None|False|Parameters that allow finer tuning of the Submit File action, e.g {"analysis_id": 12345}|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|analyzer_mode|string|default|False|Specify what analyzer mode to use|['default', 'reputation', 'reputation_static', 'reputation_static_dynamic', 'static_dynamic', 'static']|default|
+|file|file|None|True|File and filename for analysis|None|{ "filename": "setup.exe", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|
+|optional_params|object|None|False|Parameters that allow finer tuning of the Submit File action, e.g {"analysis_id": 12345}|None|{"analysis_id": 12345}|
 
 Supported File Types:
 
 ```
 .exe, .scr, .lnk2, .dll, .sys, .ocx, .pdf, .doc,.docx, .docm, .dot, .dotx, .dotm, .xls,.xlsx, .xlsm, .xlt, .xltx, .xltm, .xlb, .xlsb, .iqy, .slk, .ppt,.pptx, .pptm, .pot, .potx, .potm .mpp, .accdb, .and, .accdr, .accdt, .accda, .mdw, .accde, .ade, .mdb, .mda, .vsd, .vsdx, .vss, .vst, .vsw, .vdx, .vtx, .vsdx, .vsdm, .vssx, .vssm, .vstx, .vstm, .pub, .puz, .rtf, .url, .html, .htm, .hta, .swf, .msi, .bat, .vbs, .vbe, .js, .jse, .wsf, .jar, .class, .ps1
+```
+
+Example input:
+
+```
+{
+  "content": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA...",
+  "filename": "setup.exe"
+}
 ```
 
 ##### Output
@@ -148,13 +169,22 @@ This action is used to get all dynamic and static analyses in the system or deta
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id_type|string|None|True|Get analysis based on ID of a specified type|["analysis_id", "analyzer", "configuration", "static_config", "created", "job", "jobrule", "job_started", "prescript", "result_code", "sample", "size", "snapshot", "submission", "user", "vm", "vmhost", "vti_score", "all"]|
-|id|string|None|False|ID based on ID type selected, leave blank if "all" is selected|None|
-|optional_params|object|None|False|Parameters that allow finer tuning of get analysis  e.g {"analysis_id": 12345}|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|False|ID based on ID type selected, leave blank if 'all' is selected|None|1490045|
+|id_type|string|None|True|Get analysis based on ID of a specified type|['analysis_id', 'analyzer', 'configuration', 'static_config', 'created', 'job', 'jobrule', 'job_started', 'prescript', 'result_code', 'sample', 'size', 'snapshot', 'submission', 'user', 'vm', 'vmhost', 'vti_score', 'all']|all|
+|optional_params|object|None|False|Parameters that allow finer tuning of the Get Analysis action, e.g {"analysis_id": 12345}|None|{"analysis_id": 12345}|
 
-Optional Parameters can be found in the API documentation, located `http://vmrayhost/static_doc/html/api/User_API_Reference.html`
+Optional Parameters can be found in the API documentation, located on premise at `http://vmrayhost/static_doc/html/api/User_API_Reference.html` or at the [VMRay Cloud API documentation](https://cloud.vmray.com/static_doc/html/api/User_API_Reference.html).
+
+Example input:
+
+```
+{
+  "id": "1490045",
+  "id_type": "submission"
+}
+```
 
 ##### Output
 
@@ -268,11 +298,22 @@ This action is used to get all samples in the system or details about specific o
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|sample_type|string|None|False|Specified type of sample|['all', 'sample_id', 'created', 'filesize', 'md5', 'sha1', 'sha256', 'type']|
-|sample|string|None|True|Sample ID, hash or type,leave blank if 'all' is selected|None|
-|optional_params|object|None|False|Parameters that allow finer tuning of get analysis e.g {"analysis_id": 12345}|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|optional_params|object|None|False|Parameters that allow finer tuning of the Get Samples action, e.g {"analysis_id": 12345}|None|{"analysis_id": 12345}|
+|sample|string|None|False|Sample ID, hash or type, leave blank if 'all' is selected|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|sample_type|string|None|True|Specified type of sample|['all', 'sample_id', 'created', 'filesize', 'md5', 'sha1', 'sha256', 'type']|md5|
+
+Optional Parameters can be found in the API documentation, located on premise at `http://vmrayhost/static_doc/html/api/User_API_Reference.html` or at the [VMRay Cloud API documentation](https://cloud.vmray.com/static_doc/html/api/User_API_Reference.html).
+
+Example input:
+
+```
+{
+  "sample": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "sample_type": "all"
+}
+```
 
 ##### Output
 
@@ -310,11 +351,21 @@ This action is used to submits a URL for analysis.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|URL to be submitted for analysis|None|
-|analyzer_mode|string|default|False|Specify what analyzer mode to use|['default', 'reputation', 'reputation_static', 'reputation_static_dynamic', 'static_dynamic', 'static']|
-|optional_params|object|None|False|Parameters that allow finer tuning of the Submit URL action, e.g {"analysis_id": 12345}|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|analyzer_mode|string|default|False|Specify what analyzer mode to use|['default', 'reputation', 'reputation_static', 'reputation_static_dynamic', 'static_dynamic', 'static']|default|
+|optional_params|object|None|False|Parameters that allow finer tuning of the Submit URL action, e.g {"analysis_id": 12345}|None|{"analysis_id": 12345}|
+|url|string|None|True|URL to be submitted for analysis|None|https://example.com|
+
+Optional Parameters can be found in the API documentation, located on premise at `http://vmrayhost/static_doc/html/api/User_API_Reference.html` or at the [VMRay Cloud API documentation](https://cloud.vmray.com/static_doc/html/api/User_API_Reference.html).
+
+Example input:
+
+```
+{
+  "url": "www.example.com",
+}
+```
 
 ##### Output
 
@@ -526,8 +577,9 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 5.0.1 - Add example inputs
 * 5.0.0 - New Titles for output data (spelling corrections)
-* 4.0.2 - New spec and help.md format for the Hub
+* 4.0.2 - New spec and help.md format for the Extension Library
 * 4.0.1 - Update actions and Submit URL to specify what analyzer to use | Update file type support for the Submit File action
 * 4.0.0 - New actions Get Samples and Submit URL | Removed action Get Analysis by Hash | Fixed issue where Submit File results are not available in the workflow builder, and filename would not be included when submitting the file for analysis | Get Samples should replace Get Analysis by Hash
 * 3.0.0 - Added action Get Analysis | Ported over to Python from Go

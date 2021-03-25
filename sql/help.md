@@ -9,9 +9,10 @@ This plugin allows users to run and execute queries against a SQL database.
 
 # Requirements
 
-* Type of SQL database
+* Type of SQL database (MSSQL, MySQL, PostgreSQL)
 * The host and port of your SQL database
-* Credentials for your SQL database
+* Name of your SQL database
+* Credentials (username and password) for your SQL database
 
 # Documentation
 
@@ -19,13 +20,28 @@ This plugin allows users to run and execute queries against a SQL database.
 
 The connection configuration accepts the following parameters:
 
-  |Name|Type|Default|Required|Description|Enum|
-  |----|----|-------|--------|-----------|----|
-  |type|string|None|True|Database type (i.e. mysql, postgres... etc.)|None|
-  |host|string|None|True|Database hostname|None|
-  |port|string|None|False|Database port|None|
-  |db|string|None|True|Database name|None|
-  |credentials|credential_username_password|None|True|Database username and password|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|credentials|credential_username_password|None|True|Database username and password|None|{ "username": "user@example.com", "password": "mypassword"}|
+|db|string|None|True|Database name|None|database_name|
+|host|string|None|True|Database hostname|None|198.51.100.1|
+|port|string|None|False|Database port|None|443|
+|type|string|None|True|Database type (MSSQL, MySQL, PostgreSQL)|['MSSQL', 'MySQL', 'PostgreSQL']|MySQL|
+
+Example input:
+
+```
+{
+  "credentials": {
+    "username": "user@example.com",
+    "password": "mypassword"
+  },
+  "db": "database_name",
+  "host": "198.51.100.1",
+  "port": 443,
+  "type": "MySQL"
+}
+```
 
 ## Technical Details
 
@@ -37,32 +53,49 @@ This action is used to run an arbitrary SQL query against the connected database
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|True|query to run|None|
-|parameters|object|None|True|parameter for parameterized query|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|parameters|object|None|False|Parameters for query|None|{ "name": "user" }|
+|query|string|None|True|Query to run|None|SELECT * FROM example WHERE name=:name|
+
+Example input:
+
+```
+{
+  "parameters": {
+    "name": "user" 
+  },
+  "query": "SELECT * FROM example WHERE name=:name"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|True|Status message|
 |header|[]string|False|Array of header fields for the columns|
 |results|[]object|False|Result rows, each as an object with header keys|
+|status|string|True|Status message|
 
 Example output:
 
 ```
-"output": {
-  "status": "operation success",
+{
   "header": [
-    "PluginName"
+    "name",
+    "surname",
+    "index",
+    "alias"
   ],
   "results": [
     {
-      "PluginName": "Test Plugin Name"
+      "name": "User",
+      "index": "1",
+      "Surname": "Example",
+      "alias": "Test"
     }
-  ]
+  ],
+  "status": "operation success"
 }
 ```
 
@@ -80,7 +113,10 @@ For the SQL query action, be sure that your query is valid SQL.
 
 # Version History
 
-* 2.0.5 - New spec and help.md format for the Hub
+* 3.0.0 - Add example input and title in connection and Query action | Update python version to `python-3-37-plugin:3` | Add `USER` in Dockerfile | Update `psycopg2` and `mysqlclient` version | Code refactor in connection.py, util.py and Query action.py
+* 2.0.7 - Add supported databases as a drop-down list | Add example inputs
+* 2.0.6 - Fix issue where connection test always success
+* 2.0.5 - New spec and help.md format for the Extension Library
 * 2.0.4 - Add support for Microsoft SQL server
 * 2.0.3 - Fix issue where credentials used incorrect username | Update help
 * 2.0.2 - Fix issue where credentials was spelled wrong in connection
@@ -94,4 +130,3 @@ For the SQL query action, be sure that your query is valid SQL.
 ## References
 
 * [SQLAlchemy](http://docs.sqlalchemy.org/en/latest/)
-

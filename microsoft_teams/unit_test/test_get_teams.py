@@ -22,13 +22,11 @@ class TestGetTeams(TestCase):
         test_connection.connect(connection_params)
         test_action.connection = test_connection
 
-        run_params = {
-            "team_name": "Dream Team"
-        }
+        run_params = {"team_name": "Dream Team"}
 
         result = test_action.run(run_params)
         self.assertIsNotNone(result)
-        self.assertEqual(result.get('teams')[0].get('displayName'), 'Dream Team')
+        self.assertEqual(result.get("teams")[0].get("displayName"), "Dream Team")
 
     def test_get_teams_with_regex(self):
         log = logging.getLogger("Test")
@@ -46,10 +44,8 @@ class TestGetTeams(TestCase):
         test_connection.connect(connection_params)
         test_action.connection = test_connection
 
-        run_params = {
-            "team_name": "Team"
-        }
+        run_params = {"team_name": "Team"}
 
         result = test_action.run(run_params)
         self.assertIsNotNone(result)
-        self.assertEqual(result.get('teams')[0].get('displayName'), 'Dream Team')
+        self.assertEqual(result.get("teams")[0].get("displayName"), "Dream Team")

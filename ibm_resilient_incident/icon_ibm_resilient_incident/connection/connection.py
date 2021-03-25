@@ -2,6 +2,7 @@ import komand
 import json
 import requests
 from .schema import ConnectionSchema
+
 # Custom imports below
 
 
@@ -28,11 +29,7 @@ class Connection(komand.Connection):
         self.SESSION.verify = False
 
         # Fill out payload with creds
-        auth_payload = {
-            "email": email,
-            "password": password,
-            "interactive": False
-        }
+        auth_payload = {"email": email, "password": password, "interactive": False}
 
         auth_payload = json.dumps(auth_payload)
 

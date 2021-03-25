@@ -142,6 +142,12 @@ class SendMessageByGuidOutput(komand.Output):
           "description": "Created date time",
           "order": 3
         },
+        "first_word": {
+          "type": "string",
+          "title": "First Word",
+          "description": "Extracted first word from message (easy way to obtain a chat command)",
+          "order": 9
+        },
         "from": {
           "$ref": "#/definitions/from",
           "title": "From",
@@ -177,8 +183,21 @@ class SendMessageByGuidOutput(komand.Output):
           "title": "Web URL",
           "description": "Web URL",
           "order": 4
+        },
+        "words": {
+          "type": "array",
+          "title": "Words",
+          "description": "The message split by spaces into a list of words. This list makes finding and using parameters in chat commands easier",
+          "items": {
+            "type": "string"
+          },
+          "order": 10
         }
       },
+      "required": [
+        "first_word",
+        "words"
+      ],
       "definitions": {
         "body": {
           "type": "object",

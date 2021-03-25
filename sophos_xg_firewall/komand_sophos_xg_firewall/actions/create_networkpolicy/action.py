@@ -1,18 +1,19 @@
 import komand
 from .schema import CreateNetworkpolicyInput, CreateNetworkpolicyOutput
+
 # Custom imports below
 import requests
 import xml.etree.ElementTree as ET
 
 
 class CreateNetworkpolicy(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='create_networkpolicy',
-                description='Creates a network firewall policy',
-                input=CreateNetworkpolicyInput(),
-                output=CreateNetworkpolicyOutput())
+            name="create_networkpolicy",
+            description="Creates a network firewall policy",
+            input=CreateNetworkpolicyInput(),
+            output=CreateNetworkpolicyOutput(),
+        )
 
     def run(self, params={}):
         username = self.connection.username
@@ -31,13 +32,10 @@ class CreateNetworkpolicy(komand.Action):
         networkpolicy = params["policy"]
         url = "https://{}/webconsole/APIController?".format(host + ":" + str(port))
         # Authentication
-        auth = "<Request><Login><Username>{}</Username><Password>{}</Password></Login>".format(
-            username,
-            password
-        )
+        auth = "<Request><Login><Username>{}</Username><Password>{}</Password></Login>".format(username, password)
 
         # Start of the operation to add a firewall policy
-        start = "<Set operation=\"add\"><SecurityPolicy><Name>{}</Name>".format(networkpolicy["SecurityPolicy"]["Name"])
+        start = '<Set operation="add"><SecurityPolicy><Name>{}</Name>'.format(networkpolicy["SecurityPolicy"]["Name"])
 
         base_xml = "<Description>{}</Description><Status>{}</Status><IPFamily>{}</IPFamily>".format(
             networkpolicy["SecurityPolicy"]["Description"],
@@ -45,11 +43,14 @@ class CreateNetworkpolicy(komand.Action):
             networkpolicy["SecurityPolicy"]["IPFamily"],
         )
         # Sets position xml
-        if networkpolicy["SecurityPolicy"]["Position"] == "after" or networkpolicy["SecurityPolicy"]["Position"] == "before":
+        if (
+            networkpolicy["SecurityPolicy"]["Position"] == "after"
+            or networkpolicy["SecurityPolicy"]["Position"] == "before"
+        ):
             position = "<{}>{}</{}>".format(
                 networkpolicy["SecurityPolicy"]["Position"],
                 networkpolicy["SecurityPolicy"]["PositionPolicyName"],
-                networkpolicy["SecurityPolicy"]["Position"]
+                networkpolicy["SecurityPolicy"]["Position"],
             )
         else:
             position = networkpolicy["SecurityPolicy"]["Position"]
@@ -130,20 +131,24 @@ class CreateNetworkpolicy(komand.Action):
         # End of Policy String
         end = ""
         end += "<IntrusionPrevention>{}</IntrusionPrevention>".format(
-            networkpolicy["SecurityPolicy"]["IntrusionPrevention"])
+            networkpolicy["SecurityPolicy"]["IntrusionPrevention"]
+        )
         end += "<TrafficShapingPolicy>{}</TrafficShapingPolicy>".format(
-            networkpolicy["SecurityPolicy"]["TrafficShapingPolicy"])
+            networkpolicy["SecurityPolicy"]["TrafficShapingPolicy"]
+        )
         end += "<SourceSecurityHeartbeat>{}</SourceSecurityHeartbeat>".format(
-            networkpolicy["SecurityPolicy"]["SourceSecurityHeartbeat"])
+            networkpolicy["SecurityPolicy"]["SourceSecurityHeartbeat"]
+        )
         end += "<MinimumSourceHBPermitted />"
         end += "<DestSecurityHeartbeat>{}</DestSecurityHeartbeat>".format(
-            networkpolicy["SecurityPolicy"]["DestSecurityHeartbeat"])
+            networkpolicy["SecurityPolicy"]["DestSecurityHeartbeat"]
+        )
         end += "<MinimumDestinationHBPermitted /></SecurityPolicy></Set></Request>"
 
         # Build request url
-        request_string = "{}{}{}{}{}{}{}{}".format(auth, start, position_xml, base_xml, policy_type, policy, end_policy,
-                                                   end)
-
+        request_string = "{}{}{}{}{}{}{}{}".format(
+            auth, start, position_xml, base_xml, policy_type, policy, end_policy, end
+        )
 
         status_code = 00
         status_response = "default"
@@ -174,10 +179,11 @@ class CreateNetworkpolicy(komand.Action):
         except Exception as e:
             self.logger.error("An error has occurred while adding a Network policy: ", e)
             raise
-        return {"response": {
-            "status_code": status_code,
-            "status_response": status_response,
-            "invalid_params": invalid_params
+        return {
+            "response": {
+                "status_code": status_code,
+                "status_response": status_response,
+                "invalid_params": invalid_params,
             }
         }
 
@@ -187,7 +193,8 @@ class CreateNetworkpolicy(komand.Action):
         host = self.connection.host
         port = self.connection.port
         request_string = "<Request><Login><Username>{}</Username><Password>{}</Password></Login><Get><User></User></Get></Request>".format(
-            username, password)
+            username, password
+        )
         url = "https://{}/webconsole/APIController?".format(host + ":" + str(port))
         try:
             response = requests.get(url, files={"reqxml": (None, request_string)}, verify=False)

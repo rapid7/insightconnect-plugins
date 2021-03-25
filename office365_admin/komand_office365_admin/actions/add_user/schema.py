@@ -68,7 +68,7 @@ class AddUserInput(komand.Input):
     "user_principal_name": {
       "type": "string",
       "title": "User Principal Name",
-      "description": "The user principal name e.g. jdoe@mydomain.com",
+      "description": "The user principal name e.g. user@example.com",
       "order": 4
     }
   },

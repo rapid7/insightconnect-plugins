@@ -23,7 +23,7 @@ class ConnectionSchema(komand.Input):
     "host": {
       "type": "string",
       "title": "Host",
-      "description": "Jenkins' server URL",
+      "description": "Jenkins server URL",
       "order": 1
     }
   },
@@ -43,12 +43,14 @@ class ConnectionSchema(komand.Input):
           "title": "Password",
           "displayType": "password",
           "description": "The password",
-          "format": "password"
+          "format": "password",
+          "order": 2
         },
         "username": {
           "type": "string",
           "title": "Username",
-          "description": "The username to log in with"
+          "description": "The username to log in with",
+          "order": 1
         }
       },
       "required": [

@@ -24,7 +24,7 @@ class ForcePasswordResetInput(komand.Input):
     "distinguished_name": {
       "type": "string",
       "title": "Distinguished Name",
-      "description": "The distinguished name of the user who will be forced to reset their password  e.g. CN=user,OU=domain_users,DC=mydomain,DC=com",
+      "description": "The distinguished name of the user who will be forced to reset",
       "order": 1
     }
   },

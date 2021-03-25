@@ -1,5 +1,6 @@
 import komand
 from .schema import ListEntitiesInput, ListEntitiesOutput
+
 # Custom imports below
 import requests
 
@@ -9,10 +10,11 @@ class ListEntities(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='list_entities',
-                description='List all asset list pages and exports',
-                input=ListEntitiesInput(),
-                output=ListEntitiesOutput())
+            name="list_entities",
+            description="List all asset list pages and exports",
+            input=ListEntitiesInput(),
+            output=ListEntitiesOutput(),
+        )
 
     def run(self, params={}):
         try:

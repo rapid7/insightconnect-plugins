@@ -4,7 +4,7 @@ products: [insightconnect]
 name: misp
 title: MISP
 description: MISP is an open source threat sharing platform
-version: 4.0.0
+version: 5.0.0
 vendor: rapid7
 support: community
 status: []
@@ -371,7 +371,7 @@ connection:
     required: true
 triggers:
   search_for_tag:
-    title: Search For Tag
+    title: Search for Tag
     description: This trigger will search MISP for any events with a specified tag
     input:
       interval:
@@ -1227,6 +1227,24 @@ actions:
         - Initial
         - Ongoing
         - Completed
+      values:
+        title: Values
+        description: Search by given values of attributes value field
+        type: '[]string'
+        required: false
+        example: [example_one, example_two]
+      type_attribute:
+        title: Type Attribute
+        description: Search by any valid MISP attribute type
+        type: string
+        required: false
+        example: text
+      category:
+        title: Category
+        description: Search by attribute category
+        type: string
+        required: false
+        example: Person
     output:
       event_list:
         title: Event List

@@ -1,43 +1,35 @@
 {
-	"spec": "bd5e7bfe187f9cf7f653dce654275202",
-	"manifest": "8ce9cd74ed9cbdf6ee74eb7fa4b5e934",
-	"setup": "243a18b0dbefb4242156b63ade96926f",
+	"spec": "7203aa7ea3f0c9b93b4c140db755d9e8",
+	"manifest": "9ec6bf9efa687f310dbe2afd4e95e0db",
+	"setup": "5c292cadc856780b9a2b1dbe4104b24d",
 	"schemas": [
 		{
 			"identifier": "get_agent/schema.py",
-			"hash": "857a6a8585edb2c56b8c796f6849c6f9"
+			"hash": "8a72a9123b768235eb1a5d7c16fa8dbc"
 		},
 		{
 			"identifier": "get_agents/schema.py",
-			"hash": "7df1731861165d43b84c2c397424998c"
+			"hash": "b354ff7641f3b60d47a93ac0eb90faf4"
 		},
 		{
 			"identifier": "get_alert/schema.py",
-			"hash": "ff011ec94fd3c8ea9a912f3d4e1fc63e"
+			"hash": "7d58a6a859d42a51bb928d2590f68536"
 		},
 		{
 			"identifier": "get_alerts/schema.py",
-			"hash": "312b6438d59cd9bf8ec5f5e386a75b7f"
+			"hash": "3ed6cb18d9af825e9c61eb73f8d2e453"
 		},
 		{
-			"identifier": "get_organization/schema.py",
-			"hash": "258d4e8c2891529f53364c7cbe251965"
+			"identifier": "get_events/schema.py",
+			"hash": "c1318d1e1d1bfefdbf6cbdc42d7c121f"
 		},
 		{
-			"identifier": "get_organizations/schema.py",
-			"hash": "b371271e95b5803b4b5601d4759b600b"
-		},
-		{
-			"identifier": "get_policies/schema.py",
-			"hash": "649b5dbb6e3637c7f971643429b813d5"
-		},
-		{
-			"identifier": "get_policy/schema.py",
-			"hash": "9669dc90a726472c87ab4c01484f651b"
+			"identifier": "get_rule/schema.py",
+			"hash": "ebe346bcfb3c237a3360eefc803b3401"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "af5b32361bb0bbf6af694833c929da4b"
+			"hash": "a75580b54fe256209974d63ce8f80333"
 		}
 	]
 }

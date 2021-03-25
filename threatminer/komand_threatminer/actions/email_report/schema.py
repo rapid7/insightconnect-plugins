@@ -24,7 +24,7 @@ class EmailReportInput(komand.Input):
     "email": {
       "type": "string",
       "title": "Email",
-      "description": "Email address to search e.g. janagreen2000@gmail.com",
+      "description": "Email address to search e.g. user@example.com",
       "order": 1
     }
   },

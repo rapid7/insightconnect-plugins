@@ -1,21 +1,22 @@
 import komand
 from .schema import DeleteAdversaryInput, DeleteAdversaryOutput
+
 # Custom imports below
 
 
 class DeleteAdversary(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='delete_adversary',
-                description='Delete an Adversary in the ThreatConnect platform',
-                input=DeleteAdversaryInput(),
-                output=DeleteAdversaryOutput())
+            name="delete_adversary",
+            description="Delete an Adversary in the ThreatConnect platform",
+            input=DeleteAdversaryInput(),
+            output=DeleteAdversaryOutput(),
+        )
 
     def run(self, params={}):
         adversaries = self.connection.threat_connect.adversaries()
-        adversary = adversaries.add('', params.get('owner'))
-        adversary.set_id(params.get('id'))
+        adversary = adversaries.add("", params.get("owner"))
+        adversary.set_id(params.get("id"))
 
         try:
             adversary.delete()
@@ -33,4 +34,4 @@ class DeleteAdversary(komand.Action):
 
         for owner in owners:
             owner = owner.name
-        return {'Owner Name': owner}
+        return {"Owner Name": owner}

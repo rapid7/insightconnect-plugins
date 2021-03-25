@@ -1,0 +1,72 @@
+plugin_spec_version: v2
+extension: plugin
+products: ["insightconnect"]
+name: orchestrator_ping
+title: Orchestrator Ping
+description: A simple plugin for testing Orchestrator interactions
+version: 1.1.6
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/orchestrator_ping
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.rapid7.com
+tags:
+- insight_connect
+- icon
+- orchestrator
+hub_tags:
+  use_cases: []
+  keywords: [insight_connect, icon, orchestrator]
+  features: []
+
+connection:
+  credentials:
+    type: credential_username_password
+    required: true
+    description: No-op credentials used to ensure the end to end experience of communicating
+      with the orchestrator is working
+
+triggers:
+  signal:
+    title: Signal
+    description: Send a signal to Insight Connect during startup and shutdown
+    input:
+      startup_message:
+        title: Startup Message
+        type: string
+        description: The message to return to Insight Connect when the Orchestrator
+          starts the trigger
+        required: true
+      shutdown_message:
+        title: Shutdown Message
+        type: string
+        description: The message to return to Insight Connect when the Orchestrator
+          shuts down
+        required: true
+    output:
+      message:
+        title: Message
+        type: string
+        description: The message with the signal, either Startup or Shutdown depending
+          on the event
+        required: false
+
+actions:
+  ping:
+    title: Ping
+    description: Send a ping to the Orchestrator and receive a message back
+    input:
+      message:
+        title: Message
+        type: string
+        description: The message to send, and also what you will receive back
+        required: true
+    output:
+      message:
+        title: Message
+        type: string
+        description: The message you'll receive, which is also the same as what was
+          sent
+        required: true

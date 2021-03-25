@@ -23,7 +23,7 @@ class CreateStringInput(komand.Input):
   "properties": {
     "cef": {
       "$ref": "#/definitions/cef",
-      "title": "Cef",
+      "title": "CEF",
       "description": "CEF Data",
       "order": 1
     }
@@ -120,7 +120,7 @@ class CreateStringOutput(komand.Output):
   "properties": {
     "cef_string": {
       "type": "string",
-      "title": "Cef String",
+      "title": "CEF String",
       "description": "CEF formatted string",
       "order": 1
     }

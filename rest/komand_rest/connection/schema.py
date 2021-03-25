@@ -4,9 +4,11 @@ import json
 
 
 class Input:
+    AUTHENTICATION_TYPE = "authentication_type"
     BASE_URL = "base_url"
     BASIC_AUTH_CREDENTIALS = "basic_auth_credentials"
     DEFAULT_HEADERS = "default_headers"
+    SECRET = "secret"
     SSL_VERIFY = "ssl_verify"
     
 
@@ -16,6 +18,22 @@ class ConnectionSchema(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "authentication_type": {
+      "type": "string",
+      "title": "Authentication Type",
+      "description": "Type of authentication",
+      "default": "Basic Auth",
+      "enum": [
+        "Basic Auth",
+        "Digest Auth",
+        "Bearer Token",
+        "Rapid7 Insight",
+        "OpsGenie",
+        "Pendo",
+        "Custom"
+      ],
+      "order": 2
+    },
     "base_url": {
       "type": "string",
       "title": "Base URL",
@@ -25,20 +43,27 @@ class ConnectionSchema(komand.Input):
     "basic_auth_credentials": {
       "$ref": "#/definitions/credential_username_password",
       "title": "Basic Auth Credentials",
-      "order": 4
+      "description": "Username and password. Provide if you choose Basic Auth or Digest Auth authentication type",
+      "order": 6
     },
     "default_headers": {
       "type": "object",
       "title": "Default Headers",
-      "description": "Default headers to include in all requests associated with this connection e.g. { User-Agent: Komand }",
-      "order": 2
+      "description": "Custom headers to include in all requests associated with this connection. To pass a encrypted key as a header value, enter your key in the Secret Key input and set the value of the header in this field to \\"CUSTOM_SECRET_INPUT\\" instead of secret key. The plugin will replace \\"CUSTOM_SECRET_INPUT\\" with the encrypted key stored in the Secret Key input when the plugin runs.",
+      "order": 4
+    },
+    "secret": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "Secret Key",
+      "description": "Credential secret key. Provide a Bearer Token, Rapid7 Insight, OpsGenie, Pendo or using \\"CUSTOM_SECRET_INPUT\\" in the Default Headers field for Custom authentication type",
+      "order": 3
     },
     "ssl_verify": {
       "type": "boolean",
       "title": "SSL Verify",
-      "description": "Verify SSL certificate",
+      "description": "Verify TLS/SSL certificate",
       "default": true,
-      "order": 3
+      "order": 5
     }
   },
   "required": [
@@ -46,6 +71,24 @@ class ConnectionSchema(komand.Input):
     "ssl_verify"
   ],
   "definitions": {
+    "credential_secret_key": {
+      "id": "credential_secret_key",
+      "type": "object",
+      "title": "Credential: Secret Key",
+      "description": "A shared secret key",
+      "properties": {
+        "secretKey": {
+          "type": "string",
+          "title": "Secret Key",
+          "displayType": "password",
+          "description": "The shared secret key",
+          "format": "password"
+        }
+      },
+      "required": [
+        "secretKey"
+      ]
+    },
     "credential_username_password": {
       "id": "credential_username_password",
       "type": "object",
@@ -57,12 +100,14 @@ class ConnectionSchema(komand.Input):
           "title": "Password",
           "displayType": "password",
           "description": "The password",
-          "format": "password"
+          "format": "password",
+          "order": 2
         },
         "username": {
           "type": "string",
           "title": "Username",
-          "description": "The username to log in with"
+          "description": "The username to log in with",
+          "order": 1
         }
       },
       "required": [

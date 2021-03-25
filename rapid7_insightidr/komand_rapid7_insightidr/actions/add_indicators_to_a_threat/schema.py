@@ -62,7 +62,7 @@ class AddIndicatorsToAThreatInput(komand.Input):
     "urls": {
       "type": "array",
       "title": "URLs",
-      "description": "URL's to add. e.g. [\\"https://example.com\\",\\"https://test.com\\"]",
+      "description": "URLs to add. e.g. [\\"https://example.com\\",\\"https://test.com\\"]",
       "items": {
         "type": "string"
       },

@@ -25,8 +25,8 @@ class CommitInput(komand.Input):
     "action": {
       "type": "string",
       "title": "Action",
-      "description": "Commit action (Default: 'commit-all')",
-      "default": "commit-all",
+      "description": "Commit action (Default: 'all')",
+      "default": "all",
       "order": 2
     },
     "cmd": {
@@ -55,7 +55,7 @@ class CommitOutput(komand.Output):
     "response": {
       "type": "object",
       "title": "Response",
-      "description": "Response from PAN-OS",
+      "description": "Response from the firewall",
       "order": 1
     }
   }

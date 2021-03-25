@@ -44,7 +44,12 @@ def attach_file(server, token, space, title, files):
         f = open(filename, "rb")
         try:
             byts = f.read()
-            logging.info("calling addAttachment(%s, %s, %s, ...)", token, existing_page["id"], repr(attachment))
+            logging.info(
+                "calling addAttachment(%s, %s, %s, ...)",
+                token,
+                existing_page["id"],
+                repr(attachment),
+            )
             server.confluence1.addAttachment(token, existing_page["id"], attachment, xmlrpclib.Binary(byts))
             logging.info("done")
         except Exception:
@@ -63,7 +68,7 @@ def remove_all_attachments(server, token, space, title):
     numfiles = len(files)
     i = 0
     for f in files:
-        filename = f['fileName']
+        filename = f["fileName"]
         logging.debug("Removing %d of %d (%s)..." % (i, numfiles, filename))
         server.confluence1.removeAttachment(token, existing_page["id"], filename)
         i += 1
@@ -74,7 +79,7 @@ def write_page(server, token, space, title, content, parent=None):
     if parent is not None:
         try:
             # Find out the ID of the parent page
-            parent_id = server.confluence1.getPage(token, space, parent)['id']
+            parent_id = server.confluence1.getPage(token, space, parent)["id"]
             logging.debug("parent page id is %s" % parent_id)
         except:
             logging.debug("couldn't find parent page; ignoring error...")
@@ -102,10 +107,7 @@ class XMLString(str):
 
 class Confluence(object):
 
-    DEFAULT_OPTIONS = {
-        "server": "http://localhost:8090",
-        "verify": True
-    }
+    DEFAULT_OPTIONS = {"server": "http://localhost:8090", "verify": True}
 
     def __init__(self, profile=None, url="http://localhost:8090/", username=None, password=None, appid=None):
         """
@@ -144,51 +146,56 @@ class Confluence(object):
             pass=...
 
         """
+
         def findfile(path):
             """
             Find the file named path in the sys.path.
             Returns the full path name if found, None if not found
             """
-            paths = [os.getcwd(), '.', os.path.expanduser('~')]
+            paths = [os.getcwd(), ".", os.path.expanduser("~")]
             paths.extend(sys.path)
             for dirname in paths:
                 possible = os.path.abspath(os.path.join(dirname, path))
                 if os.path.isfile(possible):
                     return possible
             return None
-        config = ConfigParser.SafeConfigParser(defaults={'user': None, 'pass': None, 'appid': appid})
 
-        config_file = findfile('config.ini')
+        config = ConfigParser.SafeConfigParser(defaults={"user": None, "pass": None, "appid": appid})
+
+        config_file = findfile("config.ini")
         logging.debug(config_file)
 
         if not profile:
             if config_file:
                 config.read(config_file)
                 try:
-                    profile = config.get('general', 'default-confluence-profile')
+                    profile = config.get("general", "default-confluence-profile")
                 except ConfigParser.NoOptionError:
                     pass
 
         if profile:
             if config_file:
                 config.read(config_file)
-                url = config.get(profile, 'url')
-                username = config.get(profile, 'user')
-                password = config.get(profile, 'pass')
-                appid = config.get(profile, 'appid')
+                url = config.get(profile, "url")
+                username = config.get(profile, "user")
+                password = config.get(profile, "pass")
+                appid = config.get(profile, "appid")
             else:
-                raise EnvironmentError("%s was not able to locate the config.ini file in current directory, user home directory or PYTHONPATH." % __name__)
+                raise EnvironmentError(
+                    "%s was not able to locate the config.ini file in current directory, user home directory or PYTHONPATH."
+                    % __name__
+                )
 
         options = Confluence.DEFAULT_OPTIONS
-        options['server'] = url
-        options['username'] = username
-        options['password'] = password
+        options["server"] = url
+        options["username"] = username
+        options["password"] = password
 
         socket.setdefaulttimeout(120)  # without this there is no timeout, and this may block the requests
         # 60 - getPages() timeout one with this !
         self._server = xmlrpclib.ServerProxy(
-            options['server'] +
-            '/rpc/xmlrpc', allow_none=True)  # using Server or ServerProxy ?
+            options["server"] + "/rpc/xmlrpc", allow_none=True
+        )  # using Server or ServerProxy ?
 
         # TODO: get rid of this split and just set self.server, self.token
         self._token = self._server.confluence1.login(username, password)
@@ -253,7 +260,12 @@ class Confluence(object):
             f = open(filename, "rb")
             try:
                 byts = f.read()
-                logging.info("calling addAttachment(%s, %s, %s, ...)", token, existing_page["id"], repr(attachment))
+                logging.info(
+                    "calling addAttachment(%s, %s, %s, ...)",
+                    token,
+                    existing_page["id"],
+                    repr(attachment),
+                )
                 server.addAttachment(token, existing_page["id"], attachment, xmlrpclib.Binary(byts))
                 logging.info("done")
             except xmlrpclib.Error:
@@ -339,9 +351,9 @@ class Confluence(object):
             page = self._server.confluence2.getPage(self._token2, space, page)
         else:
             page = self._server.confluence1.getPage(self._token, space, page)
-        return page['id']
+        return page["id"]
 
-    def movePage(self, sourcePageIds, targetPageId, space, position='append'):
+    def movePage(self, sourcePageIds, targetPageId, space, position="append"):
         """
         Moves sourcePage to be a child of targetPage by default.  Modify 'position' to either 'above' or 'below'
         to make sourcePage a sibling of targetPage, and place it either directly above or directly below targetPage
@@ -361,11 +373,9 @@ class Confluence(object):
                 sourcePageId = self.getPageId(sourcePageId, space)
 
             if self._token2:
-                self._server.confluence2.movePage(self._token2,
-                                                  str(sourcePageId), str(targetPageId), position)
+                self._server.confluence2.movePage(self._token2, str(sourcePageId), str(targetPageId), position)
             else:
-                self._server.confluence1.movePage(self._token2,
-                                                  str(sourcePageId), str(targetPageId), position)
+                self._server.confluence1.movePage(self._token2, str(sourcePageId), str(targetPageId), position)
 
     def storePageContent(self, page, space, content, convert_wiki=True, parent_page=None):
         """
@@ -393,12 +403,9 @@ class Confluence(object):
         try:
             data = self.getPage(page, space)
         except xmlrpclib.Fault:
-            data = {
-                "space": space,
-                "title": page
-            }
+            data = {"space": space, "title": page}
 
-        data['content'] = content
+        data["content"] = content
 
         if parent_page:
             parent_id = self.getPageId(parent_page, space)
@@ -407,12 +414,12 @@ class Confluence(object):
         if self._token2:
             if convert_wiki:
                 content = self._server.confluence2.convertWikiToStorageFormat(self._token2, content)
-            data['content'] = content
+            data["content"] = content
             return self._server.confluence2.storePage(self._token2, data)
         else:
             return self._server.confluence1.storePage(self._token, data)
 
-    def renderContent(self, space, page, a='', b=None):
+    def renderContent(self, space, page, a="", b=None):
         """
         Obtains the HTML content of a wiki page.
 
@@ -436,7 +443,13 @@ class Confluence(object):
             logging.error("%s while retrieving page %s", err, page)
             return None
         except xmlrpclib.Fault as err:
-            logging.error("Failed call to renderContent('%s','%s') : %d : %s", space, page, err.faultCode, err.faultString)
+            logging.error(
+                "Failed call to renderContent('%s','%s') : %d : %s",
+                space,
+                page,
+                err.faultCode,
+                err.faultString,
+            )
             raise err
 
     def convertWikiToStorageFormat(self, markup):
@@ -486,7 +499,7 @@ class Confluence(object):
         pages = {}
         if caching:
             try:
-                data = json.load(open('pages.json', 'r'))
+                data = json.load(open("pages.json", "r"))
                 pages = copy.deepcopy(data)
                 logging.info("%s pages loaded from cache.", len(pages.keys()))
             except IOError:
@@ -494,25 +507,25 @@ class Confluence(object):
         if not data:
             spaces = self.getSpaces()
             for space in spaces:
-                logging.debug("Space %s", space['key'])
-                for page in self.getPages(space=space['key']):
-                    pages[page['id']] = page['url']
+                logging.debug("Space %s", space["key"])
+                for page in self.getPages(space=space["key"]):
+                    pages[page["id"]] = page["url"]
             logging.info("%s pages loaded from confluence.", len(pages.keys()))
 
         for page in sorted(pages.keys()):
             cnt += 1
 
-            renderedPage = self.renderContent(None, page, '', {'style': 'clean'})
+            renderedPage = self.renderContent(None, page, "", {"style": "clean"})
 
             if not renderedPage:
                 if "Render failed" in stats:
-                    stats['Render failed'] += 1
+                    stats["Render failed"] += 1
                 else:
-                    stats['Render failed'] = 1
+                    stats["Render failed"] = 1
                 if stdout:
-                    logging.debug("\n%s" % page['url'])
+                    logging.debug("\n%s" % page["url"])
                 cnt_err += 1
-                result.insert(-1, page['url'])
+                result.insert(-1, page["url"])
                 data[page] = pages[page]
                 continue
             if renderedPage.find('<div class="error">') > 0:
@@ -529,9 +542,9 @@ class Confluence(object):
                 result.insert(-1, pages[page])
                 data[page] = pages[page]
             elif stdout:
-                logging.debug("\r [%s/%s]" % (cnt_err, cnt), end='')
+                logging.debug("\r [%s/%s]" % (cnt_err, cnt), end="")
 
-        json.dump(data, open('pages.json', 'w+'), indent=1)
+        json.dump(data, open("pages.json", "w+"), indent=1)
 
         if stdout:
             logging.debug("-- stats --")

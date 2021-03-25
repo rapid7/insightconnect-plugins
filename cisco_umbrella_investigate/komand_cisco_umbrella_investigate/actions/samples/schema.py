@@ -8,10 +8,10 @@ class Component:
 
 
 class Input:
-    URL = "URL"
     LIMIT = "limit"
     OFFSET = "offset"
     SORTBY = "sortby"
+    URL = "url"
     
 
 class Output:
@@ -29,12 +29,6 @@ class SamplesInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "URL": {
-      "type": "string",
-      "title": "URL",
-      "description": "Search sample by domain, IP or URL",
-      "order": 1
-    },
     "limit": {
       "type": "string",
       "title": "Limit",
@@ -52,10 +46,16 @@ class SamplesInput(komand.Input):
       "title": "Sort By",
       "description": "Default is score. Choose from ['first-seen', 'last-seen', 'score']. 'first-seen' sorts the samples in date descending order. 'last-seen' sorts the samples in ascending order. 'score' sorts the samples by the ThreatScore",
       "order": 4
+    },
+    "url": {
+      "type": "string",
+      "title": "URL",
+      "description": "Search sample by domain, IP",
+      "order": 1
     }
   },
   "required": [
-    "URL"
+    "url"
   ]
 }
     """)
@@ -85,7 +85,7 @@ class SamplesOutput(komand.Output):
     "offset": {
       "type": "integer",
       "title": "Offset",
-      "description": "The offset of the individual entities in the query’s response; used for pagination",
+      "description": "The offset of the individual entities in the query's response; used for pagination",
       "order": 5
     },
     "query": {
@@ -144,7 +144,7 @@ class SamplesOutput(komand.Output):
         "magicType": {
           "type": "string",
           "title": "MagicType",
-          "description": "A ‘magic type’ is better understood as a file type. Specifically, it is the output of the Linux “file” utility",
+          "description": "A 'magic type' is better understood as a file type. Specifically, it is the output of the Linux 'file' utility",
           "order": 4
         },
         "md5": {
@@ -162,7 +162,7 @@ class SamplesOutput(komand.Output):
         "sha256": {
           "type": "string",
           "title": "SHA256",
-          "description": "The SHA256 checksum of the sample. This checksum is important if you’d like to find out more about this sample in the /sample/ endpoint",
+          "description": "The SHA256 checksum of the sample. This checksum is important if you'd like to find out more about this sample in the /sample/ endpoint",
           "order": 1
         },
         "size": {
@@ -174,7 +174,7 @@ class SamplesOutput(komand.Output):
         "threatScore": {
           "type": "integer",
           "title": "ThreatScore",
-          "description": "A threatScore is a measure of the amount of system weakening, obfuscation, persistence, modification, data exfiltration, and other behaviors which may be a threat to the host system’s integrity",
+          "description": "A threatScore is a measure of the amount of system weakening, obfuscation, persistence, modification, data exfiltration, and other behaviors which may be a threat to the host system's integrity",
           "order": 5
         },
         "visible": {

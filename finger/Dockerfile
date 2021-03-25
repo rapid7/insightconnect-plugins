@@ -1,9 +1,4 @@
-FROM komand/python-2-plugin
-# The three supported python parent images are:
-# - komand/python-2-plugin
-# - komand/python-3-plugin
-# - komand/python-pypy3-plugin
-#
+FROM komand/python-3-37-plugin:3
 LABEL organization=komand
 
 # Add any custom package dependencies here

@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    IP = "IP"
+    IP = "ip"
     
 
 class Output:
@@ -21,7 +21,7 @@ class LatestDomainsInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "IP": {
+    "ip": {
       "type": "string",
       "title": "IP Address",
       "description": "IP Address to check for malicious domains",
@@ -29,7 +29,7 @@ class LatestDomainsInput(komand.Input):
     }
   },
   "required": [
-    "IP"
+    "ip"
   ]
 }
     """)

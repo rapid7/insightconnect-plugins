@@ -25,13 +25,13 @@ class MoveObjectInput(komand.Input):
     "distinguished_name": {
       "type": "string",
       "title": "Distinguished Name",
-      "description": "The distinguished name of the user whose membership will be modified e.g. CN=user,OU=domain_users,DC=mydomain,DC=com",
+      "description": "The distinguished name of the user whose membership will be modified",
       "order": 1
     },
     "new_ou": {
       "type": "string",
       "title": "New OU",
-      "description": "The distinguished name of the OU to move the object to e.g. OU=disabled_users,DC=mydomain,DC=com",
+      "description": "The distinguished name of the OU to move the object to",
       "order": 2
     }
   },

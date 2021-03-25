@@ -4,7 +4,7 @@ products: [insightconnect]
 name: office365_admin
 title: Office365 Admin
 description: Administrate and manage Office 365 users and licenses
-version: 1.3.1
+version: 1.4.0
 vendor: rapid7
 support: community
 status: []
@@ -128,7 +128,7 @@ actions:
         required: true
       user_principal_name:
         title: User Principal Name
-        description: The user principal name e.g. jdoe@mydomain.com
+        description: The user principal name e.g. user@example.com
         type: string
         required: true
       force_change_password:
@@ -192,7 +192,7 @@ actions:
         required: true
       user_principal_name:
         title: User Principal Name
-        description: The user principal name to update e.g. bob@hotmail.com
+        description: The user principal name to update e.g. user@example.com
         type: string
         required: true
     output:
@@ -200,4 +200,19 @@ actions:
         title: Success
         description: True if successful
         type: boolean
+        required: false
+  lookup_user_by_email:
+    title: Lookup User by Email
+    description: Get contact details of a user from an email
+    input:
+      email_address:
+        title: Email Address
+        description: Email address to search on
+        type: string
+        required: true
+    output:
+      user:
+        title: User
+        description: Metadata of the user matching the search in JSON format
+        type: object
         required: false

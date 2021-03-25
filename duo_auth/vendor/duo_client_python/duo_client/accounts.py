@@ -6,15 +6,14 @@ Duo Security Accounts API reference client implementation.
 from __future__ import absolute_import
 from . import client
 
+
 class Accounts(client.Client):
     def get_child_accounts(self):
         """
         Return a list of all child accounts of the integration's account.
         """
         params = {}
-        response = self.json_api_call('POST',
-                                      '/accounts/v1/account/list',
-                                      params)
+        response = self.json_api_call("POST", "/accounts/v1/account/list", params)
         return response
 
     def create_account(self, name):
@@ -22,11 +21,9 @@ class Accounts(client.Client):
         Create a new child account of the integration's account.
         """
         params = {
-            'name': name,
+            "name": name,
         }
-        response = self.json_api_call('POST',
-                                      '/accounts/v1/account/create',
-                                      params)
+        response = self.json_api_call("POST", "/accounts/v1/account/create", params)
         return response
 
     def delete_account(self, account_id):
@@ -34,9 +31,7 @@ class Accounts(client.Client):
         Delete a child account of the integration's account.
         """
         params = {
-            'account_id': account_id,
+            "account_id": account_id,
         }
-        response = self.json_api_call('POST',
-                                      '/accounts/v1/account/delete',
-                                      params)
+        response = self.json_api_call("POST", "/accounts/v1/account/delete", params)
         return response

@@ -24,7 +24,7 @@ class DownloadDomainRiskListInput(komand.Input):
     "list": {
       "type": "string",
       "title": "List",
-      "description": "The risk list to retrieve",
+      "description": "The risk list to retrieve, leaving the list parameter blank results in the default risk list",
       "enum": [
         "active_phishing_url",
         "blacklisted_dns_name",

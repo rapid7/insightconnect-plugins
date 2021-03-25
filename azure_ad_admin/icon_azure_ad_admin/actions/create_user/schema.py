@@ -60,7 +60,7 @@ class CreateUserInput(komand.Input):
     },
     "notify_recipient": {
       "type": "string",
-      "title": "Recipient of creation email",
+      "title": "Recipient of Creation Email",
       "description": "Email address of the account to be notified of user creation",
       "order": 6
     },

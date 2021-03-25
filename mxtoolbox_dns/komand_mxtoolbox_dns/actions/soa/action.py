@@ -1,5 +1,6 @@
 import komand
 from .schema import SoaInput, SoaOutput
+
 # Custom imports below
 from komand_mxtoolbox_dns.util import utils
 
@@ -7,10 +8,11 @@ from komand_mxtoolbox_dns.util import utils
 class Soa(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='soa',
-                description='Get Start of Authority record for a domain',
-                input=SoaInput(),
-                output=SoaOutput())
+            name="soa",
+            description="Get Start of Authority record for a domain",
+            input=SoaInput(),
+            output=SoaOutput(),
+        )
 
     def run(self, params={}):
         base_url = self.connection.server

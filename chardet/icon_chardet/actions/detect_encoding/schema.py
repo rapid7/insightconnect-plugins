@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Detect encoding"
+    DESCRIPTION = "Detect character encoding"
 
 
 class Input:
@@ -25,7 +25,7 @@ class DetectEncodingInput(komand.Input):
       "type": "string",
       "title": "Bytes to Analyze",
       "displayType": "bytes",
-      "description": "Bytes to analyze",
+      "description": "Bytes to analyze encoding",
       "format": "bytes",
       "order": 1
     }
@@ -49,7 +49,7 @@ class DetectEncodingOutput(komand.Output):
     "recommendation": {
       "$ref": "#/definitions/recommendation",
       "title": "Recommendation",
-      "description": "Recommendation",
+      "description": "Detected character encoding recommendation",
       "order": 1
     }
   },

@@ -333,7 +333,7 @@ This action is used to get the user object for the current logged-in user.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -364,7 +364,7 @@ This action is used to get statistics organized by country.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -534,7 +534,7 @@ This action is used to get a named map of general statistics.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -740,7 +740,7 @@ This action is used to get statistics organized by group.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -785,7 +785,7 @@ This action is used to get statistics and badge image for the authenticated user
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -1055,7 +1055,7 @@ This action is used to get a map of short-named statistics used in providing sit
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -1115,7 +1115,7 @@ In the case where this plugin is used extensively, the API can respond with 'Too
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
 # Links

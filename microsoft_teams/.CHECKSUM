@@ -1,11 +1,19 @@
 {
-	"spec": "3f14c4e52b4698a3d433c863eaffa4c8",
-	"manifest": "db492251ef8f8b7066f7c55a0139afa8",
-	"setup": "6133bb19d4f00219d4f3d7102503abb2",
+	"spec": "b8cbbcfc4ce625f4f0bc84a03ed25415",
+	"manifest": "7b795c145e3ecb0b22b6b1937bee9c55",
+	"setup": "90fcf7e835240d7d800af06bee72c72f",
 	"schemas": [
 		{
 			"identifier": "add_channel_to_team/schema.py",
 			"hash": "f593c759bae2baed383991e8ca9f7293"
+		},
+		{
+			"identifier": "add_group_owner/schema.py",
+			"hash": "d0a7b255caf6a320898dda73317e6c7c"
+		},
+		{
+			"identifier": "add_member_to_channel/schema.py",
+			"hash": "b933cf2fe62febb24a5cb5e0f61d77b8"
 		},
 		{
 			"identifier": "add_member_to_team/schema.py",
@@ -21,11 +29,11 @@
 		},
 		{
 			"identifier": "get_channels_for_team/schema.py",
-			"hash": "aa9254adf534eda56ced26be1f45678f"
+			"hash": "14a8ade85a7f1e8f1ce4a8630962afcb"
 		},
 		{
 			"identifier": "get_teams/schema.py",
-			"hash": "a1793406f678d71cad014bf1b5321192"
+			"hash": "a6125dae00aaac6d70c65092ccad6407"
 		},
 		{
 			"identifier": "remove_channel_from_team/schema.py",
@@ -37,23 +45,23 @@
 		},
 		{
 			"identifier": "send_html_message/schema.py",
-			"hash": "2c85b6d123630ea0001379baf34d1086"
+			"hash": "20444b2375642b0dd72acafddeb9a98a"
 		},
 		{
 			"identifier": "send_message/schema.py",
-			"hash": "4248262519b5357c6285a0c646104bda"
+			"hash": "1914c3a0f2e472ad4843824ab36f11e9"
 		},
 		{
 			"identifier": "send_message_by_guid/schema.py",
-			"hash": "2d62a82a9da67f4b76984189b377ba4e"
+			"hash": "dd6aab3dc00af305cfb6b0efadb49c66"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "a73885fe9af956ad991726f702255554"
+			"hash": "ae49f1ad13f84dc152b3a21fd556ef56"
 		},
 		{
 			"identifier": "new_message_received/schema.py",
-			"hash": "2ad20f8eea65fc83099143a8e55281b1"
+			"hash": "5a39d84aec45722019f9c71398bac3f3"
 		}
 	]
 }

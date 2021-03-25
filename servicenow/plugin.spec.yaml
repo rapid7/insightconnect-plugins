@@ -4,12 +4,13 @@ products: ["insightconnect"]
 name: servicenow
 title: ServiceNow
 description: ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes
-version: 3.1.1
+version: 5.1.0
 vendor: rapid7
 support: rapid7
 status: []
 resources:
   vendor_url: https://www.servicenow.com/
+  docs_url: https://docs.rapid7.com/insightconnect/servicenow
 tags:
 - servicenow
 - incident
@@ -67,31 +68,129 @@ connection:
     description: The full URL for your instance of ServiceNow, e.g. https://instance.servicenow.com
     type: string
     required: true
+    example: https://instance.servicenow.com
   client_login:
     title: Client Login Information
     description: The ServiceNow username and password for basic authentication API interaction
     type: credential_username_password
     required: true
+    example: '{"username":"user1", "password":"mypassword"}'
   timeout:
     title: Timeout
     description: The interval in seconds before abandoning an attempt to access ServiceNow
     type: integer
     required: false
     default: 30
+    example: 30
 actions:
   create_incident:
     title: Create Incident
     description: Create a new ServiceNow Incident record
     input:
-      create_data:
-        title: Create Data
-        description: JSON object containing the fields and values to create a new incident
+      caller:
+        title: Caller/User ID
+        description: User ID of incident caller
+        type: string
+        required: false
+        example: user
+      category:
+        title: Category
+        description: Category code of incident
+        type: string
+        required: false
+        example: software
+      subcategory:
+        title: Subcategory
+        description: Subcategory code of incident (available values depends on the `Category` field)
+        type: string
+        required: false
+        example: email
+      business_service:
+        title: Business Service
+        description: Name of business service
+        type: string
+        required: false
+        example: All
+      configuration_item:
+        title: Configuration Item
+        description: Configuration item code of the incident
+        type: string
+        required: false
+        example: int-jenkins
+      contact_type:
+        title: Contact Type
+        description: Contact type of the incident
+        type: string
+        required: false
+        example: email
+      state:
+        title: State
+        description: State name of the incident
+        type: string
+        required: false
+        example: In Progress
+      impact:
+        title: Impact
+        description: Impact of the indicent
+        type: string
+        required: false
+        example: Medium
+      urgency:
+        title: Urgency
+        description: Urgency of the incident
+        type: string
+        required: false
+        example: Medium
+      priority:
+        title: Priority
+        description: Priority of the incident
+        type: string
+        required: false
+        example: Planning
+      assignment_group:
+        title: Assignment Group
+        description: Assignment group name of the incident
+        type: string
+        required: false
+        example: Team Development Code Reviewers
+      assigned_to:
+        title: Assigned To
+        description: User ID of person assigned to the incident
+        type: string
+        required: false
+        example: user
+      short_description:
+        title: Short Description
+        description: Short description of incident
+        type: string
+        required: false
+        example: New employee hire
+      description:
+        title: Description
+        description: Full description of incident
+        type: string
+        required: false
+        example: Full details about new employee hire
+      additional_fields:
+        title: Additional Fields
+        description: JSON object containing the additional fields and values to create incident
         type: object
         required: false
+        example: '{"description": "incident description"}'
     output:
       system_id:
         title: System ID
         description: System ID of the new Incident created
+        type: string
+        required: true
+      number:
+        title: Incident Number
+        description: Incident ticket number
+        type: string
+        required: true
+      incident_url:
+        title: Incident URL
+        description: URL to newly created incident
         type: string
         required: true
   search_incident:
@@ -140,11 +239,97 @@ actions:
         description: System ID of the Incident record to update
         type: string
         required: true
-      update_data:
-        title: Update Data
-        description: JSON object containing the fields and values to update
+        example: ee7e6b24dbf4e450e9faa5730596192b
+      caller:
+        title: Caller/User ID
+        description: User ID of incident caller
+        type: string
+        required: false
+        example: user
+      category:
+        title: Category
+        description: Category code of incident
+        type: string
+        required: false
+        example: hardware
+      subcategory:
+        title: Subcategory
+        description: Subcategory code of incident (available values depends on the `Category` field)
+        type: string
+        required: false
+        example: monitor
+      business_service:
+        title: Business Service
+        description: Name of business service
+        type: string
+        required: false
+        example: All
+      configuration_item:
+        title: Configuration Item
+        description: Configuration item code of the incident
+        type: string
+        required: false
+        example: int-jenkins
+      contact_type:
+        title: Contact Type
+        description: Contact type of the incident
+        type: string
+        required: false
+        example: phone
+      state:
+        title: State
+        description: State name of the incident
+        type: string
+        required: false
+        example: On Hold
+      impact:
+        title: Impact
+        description: Impact of the indicent
+        type: string
+        required: false
+        example: Medium
+      urgency:
+        title: Urgency
+        description: Urgency of the incident
+        type: string
+        required: false
+        example: Medium
+      priority:
+        title: Priority
+        description: Priority of the incident
+        type: string
+        required: false
+        example: Planning
+      assignment_group:
+        title: Assignment Group
+        description: Assignment group name of the incident
+        type: string
+        required: false
+        example: Recommendation Admin
+      assigned_to:
+        title: Assigned To
+        description: User ID of person assigned to the incident
+        type: string
+        required: false
+        example: user
+      short_description:
+        title: Short Description
+        description: Short description of incident
+        type: string
+        required: false
+        example: New employee hire update
+      description:
+        title: Description
+        description: Full description of incident
+        type: string
+        required: false
+        example: Full details about new employee hire update
+      additional_fields:
+        title: Additional Fields
+        description: JSON object containing the additional fields and values to update incident
         type: object
-        required: true
+        required: false
+        example: '{"description": "incident description"}'
     output:
       success:
         title: Success
@@ -204,7 +389,7 @@ actions:
         - OTHER
         required: true
       other_mime_type:
-        title: Other MIME type
+        title: Other MIME Type
         description: User-specified MIME type not in the enumerated list
         type: string
         required: false
@@ -395,4 +580,27 @@ triggers:
         title: Changed Fields
         description: JSON object representing changed fields (map of field name to previous and current values)
         type: object
+        required: true
+  incident_created:
+    title: Incident Created
+    description: Identifies if a new incident has been created
+    input:
+      query:
+        title: Query
+        description: Non-encoded query string to match new incident records (will poll for any new incident if query is omitted)
+        type: string
+        required: false
+        example: short_description=Newbug
+      frequency:
+        title: Frequency
+        description: How often to poll for new incidents (in seconds)
+        type: integer
+        required: true
+        default: 5
+        example: 5
+    output:
+      system_id:
+        title: System ID
+        description: System ID of new incident
+        type: string
         required: true

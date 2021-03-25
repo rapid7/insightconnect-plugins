@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 1.1.1
+version: 3.1.0
 vendor: rapid7
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_insightidr
@@ -124,6 +124,231 @@ types:
       description: Indicates whether this threat has been published
       type: boolean
       required: false
+  link:
+    rel:
+      title: Relation
+      description: Relation
+      type: string
+    href:
+      title: HREF
+      description: HREF
+      type: string
+  eventData:
+    oaState:
+      title: OA State
+      type: string
+      description: OA state
+      required: false
+    lastAsSignatureAge:
+      title: Last As Signature Age
+      type: string
+      description: Last as signature age
+      required: false
+    productStatus:
+      title: Product Status
+      type: string
+      description: Product status
+      required: false
+    assignatureVersion:
+      title: As Signature Version
+      type: string
+      description: As signature version
+      required: false
+    ioavState:
+      title: IOAV State
+      type: string
+      description: IOAV state
+      required: false
+    asSignatureCreationTime:
+      title: As Signature Creation Time
+      type: string
+      description: As signature creation time
+      required: false
+    lastFullScanSource:
+      title: Last Full Scan Source
+      type: string
+      description: Last full scan source
+      required: false
+    nriSignatureVersion:
+      title: NRI Signature Version
+      type: string
+      description: NRI signature version
+      required: false
+    lastFullScanStartTime:
+      title: Last Full Scan Start Time
+      type: string
+      description: Last full scan start time
+      required: false
+    engineVersion:
+      title: Engine Version
+      type: string
+      description: Engine version
+      required: false
+    bmState:
+      title: BMS State
+      type: string
+      description: BMS state
+      required: false
+    lastQuickScanSource:
+      title: Last Quick Scan Source
+      type: string
+      description: Last quick scan source
+      required: false
+    lastFullScanEndTime:
+      title: Last Full Scan End Time
+      type: string
+      description: Last full scan end time
+      required: false
+    productName:
+      title: Product Name
+      type: string
+      description: Product name
+      required: false
+    rtpState:
+      title: RTP State
+      type: string
+      description: RTP state
+      required: false
+    platformVersion:
+      title: Platform Version
+      type: string
+      description: Platform version
+      required: false
+    lastQuickScanAge:
+      title: Last Quick Scan Age
+      type: string
+      description: Last quick scan age
+      required: false
+    data:
+      title: Data
+      type: "[]object"
+      description: Data
+      required: false
+    lastQuickScanEndTime:
+      title: Last Quick Scan End Time
+      type: string
+      description: Last quick scan end time
+      required: false
+    avSignatureCreationTime:
+      title: AV Signature Creation Time
+      type: string
+      description: AV signature creation time
+      required: false
+    avsignatureVersion:
+      title: AV Signature Version
+      type: string
+      description: AV signature version
+      required: false
+    lastAvSignatureAge:
+      title: Last AV Signature Age
+      type: string
+      description: Last AV signature age
+      required: false
+    nriEngineVersion:
+      title: NRI Engine Version
+      type: string
+      description: NRI engine version
+      required: false
+    lastQuickScanStartTime:
+      title: Last Quick Scan Start Time
+      type: string
+      description: Last quick scan start time
+      required: false
+    lastFullScanAge:
+      title: Last Full Scan Age
+      type: string
+      description: Last full scan age
+      required: false
+  message:
+    sourceName:
+      title: Source Name
+      type: string
+    eventCode:
+      title: Event Code
+      type: integer
+    computerName:
+      title: Computer Name
+      type: string
+    sid:
+      title: SID
+      type: string
+    isDomainController:
+      title: Is Domain Controller
+      type: boolean
+    eventData:
+      title: Event Data
+      type: eventData
+    timeWritten:
+      title: Time Written
+      type: string
+  events:
+    labels:
+      title: Labels
+      description: List of labels
+      type: "[]string"
+    timestamp:
+      title: Timestamp
+      description: Timestamp
+      type: integer
+    sequence_number:
+      title: Sequence Number
+      description: Sequence number
+      type: integer
+    log_id:
+      title: Log ID
+      description: Log ID
+      type: string
+    message:
+      title: Message
+      description: Message
+      type: message
+    links:
+      title: Links
+      description: Links
+      type: "[]link"
+  links:
+    href:
+      title: HREF
+      type: string
+      description: HREF
+      required: false
+    rel:
+      title: REL
+      type: string
+      description: REL
+      required: false
+  user_data:
+    platform_managed:
+      title: Platform Managed
+      type: string
+      description: Platform managed
+      required: false
+  logsets_info:
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    links:
+      title: Links
+      type: "[]links"
+      description: Links
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    rrn:
+      title: RRN
+      type: string
+      description: RRN
+      required: false
+    user_data:
+      title: User Data
+      type: user_data
+      description: User data
+      required: false
 
 
 connection:
@@ -132,12 +357,14 @@ connection:
     description: InsightIDR API key
     type: credential_secret_key
     required: true
+    example: 4472f2g7-991z-4w70-li11-7552w8qm0266
   url:
     title: URL
     description: The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com
     type: string
     required: true
     default: https://us.api.insight.rapid7.com
+    example: https://us.api.insight.rapid7.com
 
 actions:
   list_investigations:
@@ -150,6 +377,7 @@ actions:
         type: string
         required: true
         default: CLOSED
+        example: CLOSED
         enum:
         - "OPEN"
         - "CLOSED"
@@ -159,23 +387,27 @@ actions:
         description: An optional ISO-formatted timestamp. Only investigations whose createTime is after this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned
         type: date
         required: false
+        example: "2020-06-01T12:11:13+05:30"
       end_time:
         title: End Time
         description: An optional-ISO formatted timestamp. Only investigations whose createTime is before this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned
         type: date
         required: false
+        example: "2020-06-01T12:11:13+05:30"
       size:
         title: Size
-        description: The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 1000
+        description: The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 1000. Default value is 1000
         type: integer
         required: true
-        default: 20
+        default: 1000
+        example: 1000
       index:
         title: Index
         description: The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0
         type: integer
         required: true
         default: 0
+        example: 1
     output:
       investigations:
         title: Investigations
@@ -198,12 +430,14 @@ actions:
         description: The ID of the investigation to change the status of
         type: string
         required: true
+        example: 174e4f99-2ac7-4481-9301-4d24c34baf06
       status:
         title: Status
         description: The new status for the investigation
         type: string
         required: true
         default: CLOSED
+        example: CLOSED
         enum:
         - "OPEN"
         - "CLOSED"
@@ -223,26 +457,31 @@ actions:
         description: The key of a threat for which the indicators are going to be added. e.g. c9404e11-b81a-429d-9400-05c531f229c3
         type: string
         required: true
+        example: c9404e11-b81a-429d-9400-05c531f229c3
       ips:
         title: IP Addresses
         description: IP addresses to add. e.g. ["10.0.0.1","10.0.0.2"]
         type: "[]string"
         required: false
+        example: ["10.0.0.1","10.0.0.2"]
       hashes:
         title: Process Hashes
         description: Process hashes to add. e.g. ["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]
         type: "[]string"
         required: false
+        example: ["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]
       domain_names:
         title: Domain Names
         description: Domain names to add. e.g. ["rapid7.com","google.com"]
         type: "[]string"
         required: false
+        example: ["rapid7.com","google.com"]
       urls:
         title: URLs
-        description: URL's to add. e.g. ["https://example.com","https://test.com"]
+        description: URLs to add. e.g. ["https://example.com","https://test.com"]
         type: "[]string"
         required: false
+        example: ["https://example.com","https://test.com"]
     output:
       rejected_indicators:
         title: Rejected Indicators
@@ -254,3 +493,325 @@ actions:
         description: The information about the threat
         type: threat
         required: false
+
+  assign_user_to_investigation:
+    title: Assign User to Investigation
+    description: Assign a user to the specified investigation
+    input:
+      id:
+        title: ID
+        description: Investigation ID
+        type: string
+        example: 174e4f99-2ac7-4481-9301-4d24c34baf06
+        required: true
+      user_email_address:
+        title: User Email Address
+        description: The email address of the user to assign to this investigation, used to log into the insight platform
+        type: string
+        example: user@example.com
+        required: true
+    output:
+      success:
+        title: Success
+        description: Was the user assigned successfully
+        type: boolean
+        required: true
+      investigation:
+        title: Investigation
+        description: The investigation that was modified
+        type: investigation
+        required: true
+
+  query:
+    title: Get Query Results
+    description: Get query results for a LEQL query by query ID
+    input:
+      id:
+        title: ID
+        description: Query ID
+        type: string
+        example: 174e4f99-2ac7-4481-9301-4d24c34baf06
+        required: true
+    output:
+      events:
+        title: Events
+        description: Events from logs
+        type: "[]events"
+        required: true
+  get_a_log:
+    title: Get a Log
+    description: Get a specific log from an account
+    input:
+      id:
+        title: ID
+        description: Query ID
+        type: string
+        example: 174e4f99-2ac7-4481-9301-4d24c34baf06
+        required: true
+    output:
+      log:
+        title: Log
+        description: Requested log
+        type: logsets_info
+        required: true
+  get_all_logs:
+    title: Get All Logs
+    description: Request used to list all logs for an account
+    output:
+      logs:
+        title: Logs
+        description: All logs
+        type: logsets_info
+        required: true
+
+  advanced_query_on_log:
+    title: Advanced Query on Log
+    description: Realtime query an InsightIDR log. This will query individual logs for results
+    input:
+      query:
+        title: Query
+        description: LQL Query
+        type: string
+        example: "where(user=adagentadmin, loose)"
+        required: true
+        order: 1
+      relative_time:
+        title: Relative Time
+        description: A relative time in the past to look for alerts
+        type: string
+        example: "Last 5 Minutes"
+        default: "Last 5 Minutes"
+        required: true
+        order: 2
+        enum:
+          - "Last 5 Minutes"
+          - "Last 10 Minutes"
+          - "Last 20 Minutes"
+          - "Last 30 Minutes"
+          - "Last 45 Minutes"
+          - "Last 1 Hour"
+          - "Last 2 Hours"
+          - "Last 3 Hours"
+          - "Last 6 Hours"
+          - "Last 12 Hours"
+          - "Use Time From Value"
+      time_from:
+        title: Time From
+        description: Beginning date and time for the query. This will be ignored unless Relative Time input is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
+        type: string
+        example: "01-01-2020T00:00:00"
+        required: false
+        order: 3
+      time_to:
+        title: Time To
+        description: Date and time for the end of the query. If left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
+        type: string
+        example: "12-31-2020T00:00:00"
+        required: false
+        order: 4
+      timeout:
+        title: Timeout
+        description: Time in seconds to wait for the query to return. If exceeded the plugin will throw an error
+        type: int
+        example: 60
+        default: 60
+        required: true
+        order: 5
+      log:
+        title: Log
+        description: Log to search
+        type: string
+        example: Firewall Activity
+        required: true
+        order: 6
+    output:
+      results:
+        title: Query Results
+        description: Query Results
+        type: "[]events"
+        required: true
+      count:
+        title: Count
+        description: Number of log entries found
+        type: integer
+        required: true
+
+  advanced_query_on_log_set:
+    title: Advanced Query on Log Set
+    description: Realtime query an InsightIDR log set. This will query entire log sets for results
+    input:
+      query:
+        title: Query
+        description: LQL Query
+        type: string
+        example: "where(user=adagentadmin, loose)"
+        required: true
+        order: 1
+      relative_time:
+        title: Relative Time
+        description: A relative time in the past to look for alerts
+        type: string
+        example: "Last 5 Minutes"
+        default: "Last 5 Minutes"
+        required: true
+        order: 2
+        enum:
+          - "Last 5 Minutes"
+          - "Last 10 Minutes"
+          - "Last 20 Minutes"
+          - "Last 30 Minutes"
+          - "Last 45 Minutes"
+          - "Last 1 Hour"
+          - "Last 2 Hours"
+          - "Last 3 Hours"
+          - "Last 6 Hours"
+          - "Last 12 Hours"
+          - "Use Time From Value"
+      time_from:
+        title: Time From
+        description: Beginning date and time for the query. This will be ignored unless Relative Time input is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
+        type: string
+        example: "01-01-2020T00:00:00"
+        required: false
+        order: 3
+      time_to:
+        title: Time To
+        description: Date and time for the end of the query. If left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
+        type: string
+        example: "12-31-2020T00:00:00"
+        required: false
+        order: 4
+      timeout:
+        title: Timeout
+        description: Time in seconds to wait for the query to return. If exceeded the plugin will throw an error
+        type: int
+        example: 60
+        default: 60
+        required: true
+        order: 5
+      log_set:
+        title: Log Set
+        description: Log Set to search
+        type: string
+        example: Firewall Activity
+        required: true
+        order: 6
+        enum:
+          - Advanced Malware Alert
+          - Active Directory Admin Activity
+          - Asset Authentication
+          - Cloud Service Admin Activity
+          - Cloud Service Activity
+          - DNS Query
+          - Endpoint Activity
+          - EndPoint Agent
+          - Exploit Mitigation Alert
+          - File Access Activity
+          - File Modification Activity
+          - Firewall Activity
+          - Network Flow
+          - Host To IP Observations
+          - IDS Alert
+          - Ingress Authentication
+          - Raw Log
+          - SSO Authentication
+          - Unparsed Data
+          - Third Party Alert
+          - Virus Alert
+          - Web Proxy Activity
+    output:
+      results:
+        title: Query Results
+        description: Query Results
+        type: "[]events"
+        required: true
+      count:
+        title: Count
+        description: Number of log entries found
+        type: integer
+        required: true
+
+  close_investigations_in_bulk:
+    title: Close Investigations in Bulk
+    description: This action is used to close all investigations that fall within a date range
+    input:
+      source:
+        title: Source
+        description: The name of an investigation source
+        type: string
+        example: MANUAL
+        default: MANUAL
+        required: false
+        enum:
+          - ALERT
+          - MANUAL
+          - HUNT
+      datetime_from:
+        title: Datetime From
+        description: An ISO formatted timestamp, default last week
+        type: date
+        example: 2018-07-01T00:00:00Z
+        required: false
+      datetime_to:
+        title: Datetime To
+        description: An ISO formatted timestamp of the ending date range, current time if left blank
+        type: date
+        example: 2018-07-01T00:00:00Z
+        required: false
+      max_investigations_to_close:
+        title: Max Investigations to Close
+        description: An optional maximum number of alerts to close with this request. If this parameter is not specified then there is no maximum. If this limit is exceeded, then an error is returned
+        type: integer
+        example: 10
+        required: false
+      alert_type:
+        title: Alert Type
+        description: The category of alerts that should be closed
+        type: string
+        example: Account Created
+        required: false
+    output:
+      ids:
+        title: IDs
+        description: The IDs of the investigations that were closed by the request
+        type: "[]string"
+        required: true
+      num_closed:
+        title: Num Closed
+        description: The number of investigations closed by the request
+        type: integer
+        required: true
+  create_threat:
+    title: Create Threat
+    description: Create a private InsightIDR threat and add indicators to this threat
+    input:
+      threat_name:
+        title: Threat Name
+        description: Name of created threat
+        type: string
+        required: true
+        example: Threat created via InsightConnect
+      note_text:
+        title: Note Text
+        description: Note text of created threat
+        type: string
+        required: false
+        example: Threat created via InsightConnect
+        default: Threat created via InsightConnect
+      indicators:
+        title: Indicators
+        description: Add indicators to new threat in InsightIDR. Accept IP addresses, process hashes (SHA1, MD5, SHA256), domain names, URLs
+        type: '[]string'
+        required: true
+        example: ["example.com", "10.0.0.1"]
+    output:
+      rejected_indicators:
+        title: Rejected Indicators
+        description: Rejected indicators in new threat
+        type: "[]string"
+        required: true
+      threat:
+        title: Threat
+        description: The information about the new threat
+        type: threat
+        required: true

@@ -1,17 +1,14 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import EditIssueInput, EditIssueOutput, Input, Output, Component
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class EditIssue(komand.Action):
+class EditIssue(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="edit_issue",
-            description=Component.DESCRIPTION,
-            input=EditIssueInput(),
-            output=EditIssueOutput(),
+            name="edit_issue", description=Component.DESCRIPTION, input=EditIssueInput(), output=EditIssueOutput(),
         )
 
     def run(self, params={}):
@@ -30,7 +27,6 @@ class EditIssue(komand.Action):
         try:
             issue.update(notify=notify, **clean_params)
         except Exception as e:
-            raise PluginException(cause="An unknown error occurred.",
-                                  data=e)
+            raise PluginException(cause="An unknown error occurred.", data=e)
 
         return {Output.SUCCESS: True}

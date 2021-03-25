@@ -1,30 +1,31 @@
 import komand
 from .schema import ListIssueEventsInput, ListIssueEventsOutput
+
 # Custom imports below
 import json
 
 
 class ListIssueEvents(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='list_issue_events',
-                description='List all events of a Sentry issue',
-                input=ListIssueEventsInput(),
-                output=ListIssueEventsOutput())
-
-    def run(self, params={}):
-        issue_id = params.get('issue_id')
-
-        events = self.connection.sentry_connection.request(
-            'GET', 'issues/{}/events/'.format(issue_id),
-            pagination_enabled=True
+            name="list_issue_events",
+            description="List all events of a Sentry issue",
+            input=ListIssueEventsInput(),
+            output=ListIssueEventsOutput(),
         )
 
-        return {'events': events}
+    def run(self, params={}):
+        issue_id = params.get("issue_id")
+
+        events = self.connection.sentry_connection.request(
+            "GET", "issues/{}/events/".format(issue_id), pagination_enabled=True
+        )
+
+        return {"events": events}
 
     def test(self):
-        return json.loads("""
+        return json.loads(
+            """
         {
           "events": [
             {
@@ -100,4 +101,5 @@ class ListIssueEvents(komand.Action):
             }
           ]
         }
-        """)
+        """
+        )

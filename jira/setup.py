@@ -2,13 +2,13 @@
 from setuptools import setup, find_packages
 
 
-setup(name='jira-rapid7-plugin',
-      version='4.0.1',
-      description='Jira is an issue tracking product, developed by Atlassian. It provides bug tracking, issue tracking, and project management functions',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="jira-rapid7-plugin",
+      version="6.0.6",
+      description="Automate the creation, search and management of issues, users, and alerting for Jira Software, Jira Server, and Jira ServiceDesk",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
-      install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
+      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_jira']
       )

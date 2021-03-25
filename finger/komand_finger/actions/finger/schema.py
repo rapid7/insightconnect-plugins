@@ -70,97 +70,97 @@ class FingerOutput(komand.Output):
     "found": {
       "type": "boolean",
       "title": "Found Status",
-      "description": "Found",
+      "description": "Whether user exists on the system",
       "order": 1
     },
     "fullname": {
       "type": "string",
       "title": "Real Name",
-      "description": "Full name",
+      "description": "User's full name",
       "order": 5
     },
     "home": {
       "type": "string",
       "title": "Home Directory",
-      "description": "Home",
+      "description": "Path to user's home directory",
       "order": 6
     },
     "homephone": {
       "type": "string",
       "title": "Home Phone",
-      "description": "Homephone",
+      "description": "User home phone",
       "order": 7
     },
     "login": {
       "type": "string",
       "title": "Login Name",
-      "description": "Login",
+      "description": "User's login name",
       "order": 2
     },
     "loginfrom": {
       "type": "string",
       "title": "Login from",
-      "description": "Login from",
+      "description": "User's last login source address",
       "order": 4
     },
     "loginstatus": {
       "type": "string",
       "title": "Login Status",
-      "description": "Login Status",
+      "description": "When the user logged in",
       "order": 3
     },
     "mail": {
       "type": "string",
       "title": "Mail Forward Address",
-      "description": "Mail",
+      "description": "Mail forward address if it exists",
       "order": 9
     },
     "mailstatus": {
       "type": "string",
       "title": "Mail Status",
-      "description": "Mail status",
+      "description": "Status on unread mail",
       "order": 10
     },
     "plan": {
       "type": "string",
       "title": "Plan",
-      "description": "Plan",
+      "description": "The contents of the plan file if it exists",
       "order": 12
     },
     "project": {
       "type": "string",
       "title": "Project",
-      "description": "Project",
+      "description": "The contents of the project file if it exists",
       "order": 13
     },
     "pubkey": {
       "type": "string",
       "title": "Public Key File",
-      "description": "Public key",
+      "description": "The contents of user's public key if it exists",
       "order": 11
     },
     "room": {
       "type": "string",
       "title": "Room",
-      "description": "Room",
+      "description": "User room",
       "order": 14
     },
     "shell": {
       "type": "string",
       "title": "Shell",
-      "description": "Shell",
+      "description": "The user's default shell",
       "order": 8
     },
     "status": {
       "type": "string",
       "title": "Plugin Status",
-      "description": "Status",
+      "description": "Success or any error messages",
       "order": 16
     },
     "workphone": {
       "type": "string",
       "title": "Work Phone",
-      "description": "Workphone",
+      "description": "User work phone",
       "order": 15
     }
   }

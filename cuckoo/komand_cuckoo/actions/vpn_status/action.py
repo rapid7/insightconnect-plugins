@@ -1,18 +1,19 @@
 import komand
 from .schema import VpnStatusInput, VpnStatusOutput
+
 # Custom imports below
 import json
 import requests
 
 
 class VpnStatus(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='vpn_status',
-                description='Returns VPN status',
-                input=VpnStatusInput(),
-                output=VpnStatusOutput())
+            name="vpn_status",
+            description="Returns VPN status",
+            input=VpnStatusInput(),
+            output=VpnStatusOutput(),
+        )
 
     def run(self, params={}):
         server = self.connection.server
@@ -29,10 +30,7 @@ class VpnStatus(komand.Action):
                 else:
                     status = "Not running"
 
-                vpn_list.append({
-                        "name": response["vpns"][vpn],
-                        "status": status
-                    })
+                vpn_list.append({"name": response["vpns"][vpn], "status": status})
             response["vpns"] = vpn_list
             return response
 
@@ -41,5 +39,5 @@ class VpnStatus(komand.Action):
 
     def test(self):
         out = self.connection.test()
-        out['vpns'] = [{'message':'Test passed'}]
+        out["vpns"] = [{"message": "Test passed"}]
         return out

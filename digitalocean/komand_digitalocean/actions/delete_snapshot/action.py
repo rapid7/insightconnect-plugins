@@ -6,10 +6,11 @@ from .schema import DeleteSnapshotInput, DeleteSnapshotOutput
 class DeleteSnapshot(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='delete_snapshot',
-            description='Deletes a snapshot',
+            name="delete_snapshot",
+            description="Deletes a snapshot",
             input=DeleteSnapshotInput(),
-            output=DeleteSnapshotOutput())
+            output=DeleteSnapshotOutput(),
+        )
 
     def run(self, params={}):
         url = "https://api.digitalocean.com/v2/snapshots/{snapshot_id}"
@@ -22,7 +23,7 @@ class DeleteSnapshot(komand.Action):
                 return {"success": True}
             else:
                 self.logger.error("Status code: %s, message: %s", response.status_code, response.json()["message"])
-                Exception('Non-204 status code received')
+                Exception("Non-204 status code received")
         except requests.exceptions.RequestException:
             self.logger.error("An unexpected error occurred during the API request")
             raise

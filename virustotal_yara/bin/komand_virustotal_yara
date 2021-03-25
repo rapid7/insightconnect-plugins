@@ -4,10 +4,10 @@ import komand
 from komand_virustotal_yara import connection, actions, triggers
 
 
-Name = 'VirusTotal Yara'
-Vendor = 'rapid7'
-Version = '1.1.1'
-Description = 'Analyze files and URLs to detect malware, automatically share them with the security community'
+Name = "VirusTotal Yara"
+Vendor = "rapid7"
+Version = "1.1.2"
+Description = "Analyze files and URLs to detect malware, automatically share them with the security community"
 
 
 class ICONVirustotalYara(komand.Plugin):

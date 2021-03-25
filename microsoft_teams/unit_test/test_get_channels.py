@@ -22,10 +22,8 @@ class TestGetChannels(TestCase):
         test_connection.connect(connection_params)
         test_action.connection = test_connection
 
-        run_params = {
-            "team_name": "Dream Team",
-            "channel_name": "test123"
-        }
+        run_params = {"team_name": "Komand-Test-Everyone", "channel_name": "29_test_channel_2"}
 
         result = test_action.run(run_params)
         self.assertIsNotNone(result)
+        self.assertEqual(result.get("channels")[0].get("displayName"), "29_test_channel_2")

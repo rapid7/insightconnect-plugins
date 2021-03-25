@@ -4,10 +4,10 @@ import komand
 from icon_google_docs import connection, actions, triggers
 
 
-Name = 'Google Docs'
-Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'Create and retrieve Google documents'
+Name = "Google Docs"
+Vendor = "rapid7"
+Version = "1.1.0"
+Description = "Create and retrieve Google documents"
 
 
 class ICONGoogleDocs(komand.Plugin):
@@ -19,6 +19,8 @@ class ICONGoogleDocs(komand.Plugin):
                 description=Description,
                 connection=connection.Connection()
                 )
+        self.add_action(actions.AppendLine())
+
         self.add_action(actions.CreateBlankDocument())
 
         self.add_action(actions.CreateDocument())

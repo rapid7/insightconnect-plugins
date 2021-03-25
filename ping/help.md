@@ -80,7 +80,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.3 - New spec and help.md format for the Hub
+* 1.0.3 - New spec and help.md format for the Extension Library
 * 1.0.2 - Bug fix to correct regex's search pattern
 * 1.0.1 - Support web server mode
 * 1.0.0 - Initial plugin

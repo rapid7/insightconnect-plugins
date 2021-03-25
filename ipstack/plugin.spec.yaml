@@ -4,7 +4,7 @@ products: [insightconnect]
 name: ipstack
 title: IPStack
 description: Lookup geographical information for a host
-version: 1.0.1
+version: 2.0.0
 vendor: rapid7
 support: community
 status: []
@@ -21,10 +21,11 @@ hub_tags:
   features: []
 connection:
   cred_token:
-    type: credential_token
+    type: credential_secret_key
     title: API Token
     description: API Token
     required: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
 actions:
   lookup:
     title: GeoIP Lookup
@@ -35,6 +36,7 @@ actions:
         description: Host to Lookup
         type: string
         required: true
+        example: rapid7.com
     output:
       address:
         title: IP Address

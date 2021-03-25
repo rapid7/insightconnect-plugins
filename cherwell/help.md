@@ -320,7 +320,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.1.1 - New spec and help.md format for the Hub
+* 2.1.1 - New spec and help.md format for the Extension Library
 * 2.1.0 - New action Update Incident
 * 2.0.1 - Fixes issue where Create Incident was not properly formatting data to be passed to Cherwell
 * 2.0.0 - Fixes issue where `client_id` was using the wrong credential type | Update pinned requests version to resolve security vulnerability [CVE-2018-18074](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2018-18074)

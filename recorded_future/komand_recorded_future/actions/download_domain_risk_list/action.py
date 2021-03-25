@@ -16,7 +16,7 @@ class DownloadDomainRiskList(komand.Action):
     def run(self, params={}):
         try:
             risklist = params.get("list")
-            query_headers = {"X-RFToken": self.connection.token}
+            query_headers = self.connection.headers
             query_params = {"format": "xml/stix/1.2", "gzip": "false", "list": risklist}
             results = requests.get(
                 "https://api.recordedfuture.com/v2/domain/risklist",

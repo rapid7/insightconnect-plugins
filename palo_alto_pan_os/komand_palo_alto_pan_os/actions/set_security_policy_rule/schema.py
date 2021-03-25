@@ -63,7 +63,7 @@ class SetSecurityPolicyRuleInput(komand.Input):
     "disable_server_response_inspection": {
       "type": "boolean",
       "title": "Disable Server Response Inspection",
-      "description": "If true, PAN-OS will not inspect this traffic",
+      "description": "If true, the firewall will not inspect this traffic",
       "order": 8
     },
     "disabled": {
@@ -167,7 +167,7 @@ class SetSecurityPolicyRuleOutput(komand.Output):
     "response": {
       "$ref": "#/definitions/config",
       "title": "Response",
-      "description": "Response from PAN-OS",
+      "description": "Response from the firewall",
       "order": 1
     }
   },

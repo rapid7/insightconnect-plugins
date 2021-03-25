@@ -9,24 +9,26 @@ from komand.exceptions import PluginException
 
 
 class ImportObservable(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='import_observable',
-                description=Component.DESCRIPTION,
-                input=ImportObservableInput(),
-                output=ImportObservableOutput())
+            name="import_observable",
+            description=Component.DESCRIPTION,
+            input=ImportObservableInput(),
+            output=ImportObservableOutput(),
+        )
 
     def run(self, params={}):
         self.request = copy(self.connection.request)
         self.request.url, self.request.method = self.request.url + "/intelligence/import/", "POST"
 
-        file_ = params.get('file', None)
+        file_ = params.get("file", None)
         try:
-            file_bytes = base64.b64decode(file_['content'])
+            file_bytes = base64.b64decode(file_["content"])
         except:
-            raise PluginException(cause="Unable to decode base64.",
-                                  assistance="Contents of the file must be encoded with base64!")
+            raise PluginException(
+                cause="Unable to decode base64.",
+                assistance="Contents of the file must be encoded with base64!",
+            )
 
         data = {}
         observable_settings = params["observable_settings"]
@@ -40,13 +42,14 @@ class ImportObservable(komand.Action):
             data[key] = value
         self.request.files = {"file": (file_["filename"], file_bytes)}
         self.request.data = data
-        response = self.connection.session.send(self.request.prepare(),
-                                                verify=self.request.verify)
+        response = self.connection.session.send(self.request.prepare(), verify=self.request.verify)
         if response.status_code not in range(200, 299):
-            raise PluginException(cause="Received %d HTTP status code from ThreatStream." % response.status_code,
-                                  assistance="Please verify your ThreatStream server status and try again. "
-                                             "If the issue persists please contact support. "
-                                             "Server response was: %s" % response.text)
+            raise PluginException(
+                cause="Received %d HTTP status code from ThreatStream." % response.status_code,
+                assistance="Please verify your ThreatStream server status and try again. "
+                "If the issue persists please contact support. "
+                "Server response was: %s" % response.text,
+            )
 
         try:
             response_data = response.json()

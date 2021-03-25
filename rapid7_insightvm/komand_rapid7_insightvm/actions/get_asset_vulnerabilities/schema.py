@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     ASSET_ID = "asset_id"
+    GET_RISK_SCORE = "get_risk_score"
     
 
 class Output:
@@ -26,6 +27,12 @@ class GetAssetVulnerabilitiesInput(komand.Input):
       "title": "Asset ID",
       "description": "ID of the asset for which to find vulnerabilities",
       "order": 1
+    },
+    "get_risk_score": {
+      "type": "boolean",
+      "title": "Get Risk Score",
+      "description": "Return risk score along with other vulnerability data",
+      "order": 2
     }
   },
   "required": [
@@ -89,11 +96,23 @@ class GetAssetVulnerabilitiesOutput(komand.Output):
           },
           "order": 4
         },
+        "risk_score": {
+          "type": "number",
+          "title": "Risk Score",
+          "description": "The risk score for the vulnerability",
+          "order": 7
+        },
+        "since": {
+          "type": "string",
+          "title": "Since",
+          "description": "The date when this vulnerability was first detected",
+          "order": 5
+        },
         "status": {
           "type": "string",
           "title": "Status",
           "description": "Status, ie. vulnerable",
-          "order": 5
+          "order": 6
         }
       },
       "definitions": {

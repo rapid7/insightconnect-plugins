@@ -34,7 +34,7 @@ class TestCacheHelp(TestCase):
         self.cache_help.delete_variable("key2")
 
         actual = self.cache_help._get_dict_from_store()
-        expected = {'key1': 'value1', 'key3': 'value3'}
+        expected = {"key1": "value1", "key3": "value3"}
 
         self.assertEqual(expected, actual)
 

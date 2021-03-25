@@ -1,5 +1,7 @@
 import komand
 from .schema import ConnectionSchema, Input
+from komand.exceptions import ConnectionTestException
+from komand.exceptions import PluginException
 
 # Custom imports below
 from icon_cisco_threatgrid.util.api import ThreatGrid
@@ -19,12 +21,19 @@ class Connection(komand.Connection):
         else:
             self.base_url = "https://panacea.threatgrid.com"
 
+        ssl_verify = params.get(Input.SSL_VERIFY, False)
         self.api: ThreatGrid = ThreatGrid(
             api_key=params.get(Input.API_KEY).get("secretKey"),
             base_url=self.base_url,
             logger=self.logger,
+            ssl_verify=ssl_verify,
         )
 
     def test(self):
-        _ = self.api.test_api()
+        try:
+            self.api.test_api()
+        except PluginException:
+            raise ConnectionTestException(
+                cause="Connection Test Failed.", assistance="Please check that your API key is correct."
+            )
         return {}

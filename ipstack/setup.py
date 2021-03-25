@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="ipstack-rapid7-plugin",
-      version="1.0.1",
+      version="2.0.0",
       description="Lookup geographical information for a host",
       author="rapid7",
       author_email="",

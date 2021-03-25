@@ -2,9 +2,9 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: carbon_black_protection
-title: Carbon Black Protection
+title: VMware Carbon Black App Control
 description: Ban and unban files and as well as manage approval requests
-version: 2.2.1
+version: 2.2.2
 vendor: rapid7
 support: rapid7
 status: []
@@ -14,11 +14,12 @@ resources:
   vendor_url: https://www.carbonblack.com/
 tags:
 - carbon black
+- vmware
 - cb
 - protection
 hub_tags:
   use_cases: [threat_detection_and_response, alerting_and_notifications]
-  keywords: [carbon black, cb, protection]
+  keywords: [carbon black, vmware, cb, protection]
   features: []
 enable_cache: true
 connection:
@@ -570,15 +571,15 @@ types:
     cbSensorId:
       type: integer
       title: CB Sensor ID
-      description: ID of Carbon Black Sensor
+      description: ID of VMware Carbon Black Sensor
     cbSensorVersion:
       type: string
       title: CB Sensor Version
-      description: Carbon Black Sensor Version
+      description: VMware Carbon Black Sensor Version
     cbSensorFlags:
       type: integer
       title: CB Sensor Flags
-      description: Carbon Black Sensor Flags
+      description: VMware Carbon Black Sensor Flags
     SCEPStatus:
       type: integer
       title: SCEP Status

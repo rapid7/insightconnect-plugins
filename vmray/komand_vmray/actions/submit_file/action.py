@@ -1,21 +1,22 @@
 import komand
 from .schema import SubmitFileInput, SubmitFileOutput
+
 # Custom imports below
 
 import base64
 
 
 class SubmitFile(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='submit_file',
-                description='Submit file for analysis',
-                input=SubmitFileInput(),
-                output=SubmitFileOutput())
+            name="submit_file",
+            description="Submit file for analysis",
+            input=SubmitFileInput(),
+            output=SubmitFileOutput(),
+        )
 
     def run(self, params={}):
-        file_ = params.get('file', None)
+        file_ = params.get("file", None)
         file_name = file_.get("filename")
         optional_params = params.get("optional_params")
         analyzer_mode = params.get("analyzer_mode")
@@ -36,6 +37,4 @@ class SubmitFile(komand.Action):
         else:
             self.logger.error(f"File types, not supported by VMRay: {mime_types}")
             self.logger.error(f"Here is a list of supported file types {self.connection.api.SUPPORTED_FILETYPES}")
-            return {"results":
-                        {"errors":
-                             [{"files":f"File types found are not supported by VMRay {mime_types}"}]}}
+            return {"results": {"errors": [{"files": f"File types found are not supported by VMRay {mime_types}"}]}}

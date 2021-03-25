@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='freeipa-rapid7-plugin',
-      version='2.0.1',
-      description='This plugin can retrieve user details and statuses and delete users from FreeIPA servers',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="freeipa-rapid7-plugin",
+      version="2.0.2",
+      description="This plugin can retrieve user details and statuses and delete users from FreeIPA servers",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_freeipa']

@@ -4,22 +4,22 @@ from .schema import QueryInput, QueryOutput
 
 
 class Query(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='query',
-                description='Query data and manage databases, retention policies, and users',
-                input=QueryInput(),
-                output=QueryOutput())
+            name="query",
+            description="Query data and manage databases, retention policies, and users",
+            input=QueryInput(),
+            output=QueryOutput(),
+        )
 
     def run(self, params={}):
         server = self.connection.server
-        database_name = params.get('database_name', '')
-        chunked = params.get('chunked', '')
-        epoch = params.get('epoch', '')
-        username = params.get('username', '')
-        password = params.get('password', '')
-        query = params.get('query', '')
+        database_name = params.get("database_name", "")
+        chunked = params.get("chunked", "")
+        epoch = params.get("epoch", "")
+        username = params.get("username", "")
+        password = params.get("password", "")
+        query = params.get("query", "")
 
         endpoint = server + "/query?db=%s" % (database_name)
 
@@ -37,26 +37,22 @@ class Query(komand.Action):
         r = requests.post(endpoint)
         response = r.json()
 
-        for result in response['results']:
+        for result in response["results"]:
             if "series" in result:
                 new_points = []
-                for point in result['series']:
-                    old_values = point['values']
+                for point in result["series"]:
+                    old_values = point["values"]
                     new_values = []
-                    name = point['name']
-                    columns = point['columns']
+                    name = point["name"]
+                    columns = point["columns"]
                     for entry in old_values:
                         temp_list = []
                         for item in entry:
                             temp_list.append(str(item))
                         new_values.append(temp_list)
-                    new_point = {
-                        "name": name,
-                        "columns": columns,
-                        "values": new_values
-                    }
+                    new_point = {"name": name, "columns": columns, "values": new_values}
                     new_points.append(new_point)
-                result['series'] = new_points
+                result["series"] = new_points
 
         return response
 
@@ -69,7 +65,7 @@ class Query(komand.Action):
         r = requests.get(endpoint)
 
         if r.status_code == 204:
-            result['status'] = "Running"
+            result["status"] = "Running"
 
-        result['version'] = r.headers['X-Influxdb-Version']
+        result["version"] = r.headers["X-Influxdb-Version"]
         return result

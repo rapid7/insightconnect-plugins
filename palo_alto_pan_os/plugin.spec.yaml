@@ -2,9 +2,9 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: palo_alto_pan_os
-title: Palo Alto PAN-OS
-description: Manage Palo Alto Networks devices via PAN-OS
-version: 1.5.5
+title: Palo Alto Firewall
+description: Manage Palo Alto Networks firewall devices
+version: 6.1.1
 vendor: rapid7
 support: rapid7
 status: []
@@ -31,19 +31,22 @@ connection:
   server:
     title: Server
     type: string
-    description: URL pointing to instance of PAN-OS
+    description: URL pointing to instance of Panorama or an individual Palo Alto firewall
     required: true
+    example: http://www.example.com
   credentials:
     title: Credentials
     description: Username and password
     type: credential_username_password
     required: true
+    example: '{"username":"username", "password":"password"}'
   verify_cert:
     title: Verify Cert
     type: boolean
-    description: If true, validate the server's TLS certificate when contacting PAN-OS
+    description: If true, validate the server's TLS certificate when contacting the firewall
       over HTTPS
     required: true
+    example: true
 actions:
   set_security_policy_rule:
     title: Set Security Policy Rule
@@ -52,6 +55,7 @@ actions:
       rule_name:
         title: Rule Name
         description: Name of the rule
+        example: InsightConnect Block Rule
         type: string
         required: true
       source:
@@ -60,84 +64,99 @@ actions:
           any
         type: string
         required: true
+        example: any
       destination:
         title: Destination
         description: Destinations for which this rule will be applied e.g. 10.0.0.1,
           computername, any
         type: string
         required: true
+        example: any
       service:
         title: Service
         description: Service type for which this rule will be applied e.g. HTTP, HTTPS,
           any
         type: string
         required: true
+        example: any
       application:
         title: Application
         description: Applications for which this rule will be applied e.g. adobe-cloud,
           dropbox,  any
         type: string
         required: true
+        example: any
       action:
         title: Action
         description: Action that will occur if an event meets the rule definitions
         type: string
         required: true
+        example: drop
       source_user:
         title: Source User
         description: User that the network traffic originated from e.g. Joe Smith,
           any
         type: string
         required: true
+        example: any
       disable_server_response_inspection:
         title: Disable Server Response Inspection
-        description: If true, PAN-OS will not inspect this traffic
+        description: If true, the firewall will not inspect this traffic
         type: boolean
         required: true
+        example: false
       negate_source:
         title: Negate Source
         description: Negate source
         type: boolean
         required: true
+        example: false
       negate_destination:
         title: Negate Destination
         description: Negate destination
         type: boolean
         required: true
+        example: false
       disabled:
         title: Disabled
         description: If true, rule is disabled
         type: boolean
         required: true
+        example: false
       log_start:
         title: Log Start
         description: Generates a traffic log entry for the start of a session
         type: boolean
         required: true
+        example: false
       log_end:
         title: Log End
         description: Generates a traffic log entry for the end of a session
         type: boolean
         required: true
+        example: false
       description:
         title: Description
         description: Description of the rule and what it does
         type: string
         required: true
+        example: Block Rule
       src_zone:
         title: SRC Zone
         description: Zone in which the traffic originated e.g. server zone, any
         type: string
         required: true
+        example: any
       dst_zone:
         title: DST Zone
         description: Zone which the traffic is going to e.g. server zone, any
         type: string
         required: true
+        example: any
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: config
         required: false
   show:
@@ -149,10 +168,11 @@ actions:
         type: string
         description: Xpath targeting the requested portion of the configuration
         required: true
+        example: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: config
         required: false
   get:
@@ -164,10 +184,11 @@ actions:
         type: string
         description: Xpath targeting the requested portion of the configuration
         required: true
+        example: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='test_group']
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: config
         required: false
   delete:
@@ -179,10 +200,11 @@ actions:
         type: string
         description: Xpath targeting the object to delete
         required: true
+        example: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='test_group']
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: config
         required: false
   set:
@@ -194,15 +216,17 @@ actions:
         type: string
         description: Xpath location to create the new object
         required: true
+        example: /config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']
       element:
         title: Element
         type: string
         description: XML representation of the object to be created
         required: true
+        example: "<application><member>8x8</member></application>"
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: object
         required: false
   edit:
@@ -214,16 +238,18 @@ actions:
         type: string
         description: Xpath location of the object to edit
         required: true
+        example: /config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='test rule']/application
       element:
         title: Element
         type: string
         description: XML representation of the updated object. This replaces the previous
           object entirely, any unchanged attributes must be restated
         required: true
+        example: "<application><member>8x8</member></application>"
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: object
         required: false
   commit:
@@ -235,16 +261,18 @@ actions:
         type: string
         description: XML specifying any commit arguments
         required: true
+        example: "<commit></commit>"
       action:
         title: Action
         type: string
-        description: 'Commit action (Default: ''commit-all'')'
-        default: commit-all
+        description: 'Commit action (Default: ''all'')'
+        default: all
         required: false
+        example: all
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: object
         required: false
   op:
@@ -256,10 +284,11 @@ actions:
         type: string
         description: XML specifying operation to be completed
         required: false
+        example: "<show><commit-locks/></show>"
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: object
         required: false
   retrieve_logs:
@@ -279,23 +308,27 @@ actions:
         - url
         - wildfire
         required: false
+        example: config
       count:
         title: Count
         type: integer
         description: 'Number of logs to retrieve (Max: 500, Default: 20)'
         default: 20
         required: false
+        example: 20
       skip:
         title: Skip
         type: integer
         description: 'Log retrieval offset, number of entries to skip, (Default: 0)'
         default: 0
         required: false
+        example: 0
       filter:
         title: Filter
         type: string
         description: Search query. Format as a log filter expression
         required: false
+        example:
       interval:
         title: Interval
         type: float
@@ -303,6 +336,7 @@ actions:
           job completion (Default: 0.5)'
         default: 0.5
         required: false
+        example: 0.5
       max_tries:
         title: Max Tries
         type: integer
@@ -310,6 +344,7 @@ actions:
           out (Default: 25)'
         default: 25
         required: false
+        example: 25
       direction:
         title: Direction
         type: string
@@ -318,21 +353,23 @@ actions:
         - backward
         - forward
         required: false
+        example: backward
     output:
       response:
         title: Response
-        description: Response from PAN-OS
+        description: Response from the firewall
         type: log
         required: false
   add_to_policy:
     title: Add to Policy
-    description: Add a rule to a PAN-OS security policy
+    description: Add a rule to a firewall security policy
     input:
       rule_name:
         title: Rule Name
         description: Name of the rule
         type: string
         required: true
+        example: InsightConnect Block Rule
       update_active_or_candidate_configuration:
         title: Update Active or Candidate Configuration
         description: Will apply the update to the active or candidate configuration.
@@ -342,61 +379,72 @@ actions:
         enum:
         - active
         - candidate
+        example: active
       source:
         title: Source
         description: A source for which this rule will be applied e.g. 10.0.0.1, computername,
           or any
         type: string
         required: false
+        example: any
       destination:
         title: Destination
         description: A destination for which this rule will be applied e.g. 10.0.0.1,
           computername, or any
         type: string
         required: false
+        example: any
       service:
         title: Service
         description: Service type for which this rule will be applied e.g. HTTP, HTTPS,
           or any
         type: string
         required: false
+        example: any
       application:
         title: Application
         description: Application for which this rule will be applied e.g. adobe-cloud,
           dropbox, or  any
         type: string
         required: false
+        example: any
       source_user:
         title: Source User
         description: User that the network traffic originated from e.g. Joe Smith,
           or any
         type: string
         required: false
+        example: Joe Smith
       src_zone:
         title: SRC Zone
         description: Zone in which the traffic originated e.g. server zone, or any
         type: string
         required: false
+        example: any
       dst_zone:
         title: DST Zone
         description: Zone which the traffic is going to e.g. server zone, or any
         type: string
         required: false
+        example: any
       url_category:
         title: URL Category
         description: The URL category e.g. adult
         type: string
         required: false
+        example: adult
       hip_profiles:
-        title: HIP profiles
+        title: HIP Profiles
         description: Host information profile
         type: string
         required: false
+        example: any
       action:
         title: Action
         description: Action that will occur if an event meets the rule definitions
         type: string
         required: false
+        example: drop
     output:
       status:
         title: Status
@@ -405,7 +453,7 @@ actions:
         required: false
       code:
         title: Code
-        description: Response code from PAN-OS
+        description: Response code from firewall
         type: string
         required: false
       message:
@@ -415,13 +463,14 @@ actions:
         required: false
   remove_from_policy:
     title: Remove from Policy
-    description: Remove a rule from a PAN-OS security policy
+    description: Remove a rule from a firewall security policy
     input:
       rule_name:
         title: Rule Name
         description: Name of the rule
         type: string
         required: true
+        example: InsightConnect Block Rule
       update_active_or_candidate_configuration:
         title: Update Active or Candidate Configuration
         description: Will apply the update to the active or candidate configuration.
@@ -431,61 +480,72 @@ actions:
         enum:
         - active
         - candidate
+        example: active
       source:
         title: Source
         description: A source for which this rule will be applied e.g. 10.0.0.1, computername,
           or any
         type: string
         required: false
+        example: any
       destination:
         title: Destination
         description: A Destination for which this rule will be applied e.g. 10.0.0.1,
           computername, or any
         type: string
         required: false
+        example: any
       service:
         title: Service
         description: Service type for which this rule will be applied e.g. HTTP, HTTPS,
           any
         type: string
         required: false
+        example: any
       application:
         title: Application
         description: Application for which this rule will be applied e.g. adobe-cloud,
           dropbox, or any
         type: string
         required: false
+        example: any
       source_user:
         title: Source User
         description: User that the network traffic originated from e.g. Joe Smith,
           or any
         type: string
         required: false
+        example: any
       src_zone:
         title: SRC Zone
         description: Zone in which the traffic originated e.g. server zone, or any
         type: string
         required: false
+        example: any
       dst_zone:
         title: DST Zone
         description: Zone which the traffic is going to e.g. server zone, or any
         type: string
         required: false
+        example: any
       url_category:
         title: URL Category
         description: The URL category e.g. adult
         type: string
         required: false
+        example: adult
       hip_profiles:
-        title: HIP profiles
+        title: HIP Profiles
         description: Host information profile
         type: string
         required: false
+        example: any
       action:
         title: Action
         description: The action that will occur if an event meets the rule definitions
         type: string
         required: false
+        example: drop
     output:
       status:
         title: Status
@@ -494,7 +554,7 @@ actions:
         required: false
       code:
         title: Code
-        description: Response code from PAN-OS
+        description: Response code from the firewall
         type: string
         required: false
       message:
@@ -507,11 +567,12 @@ actions:
     description: Add an external dynamic list
     input:
       name:
-        title: The name of the list
+        title: The Name of the List
         description: An arbitrary name for the list. This name will be used to identify
-          the list in PAN-OS
+          the list in the firewall
         type: string
         required: true
+        example: IP List
       list_type:
         title: List Type
         description: The type of list
@@ -521,16 +582,19 @@ actions:
         - IP List
         - Domain List
         - URL List
+        example: IP List
       description:
         title: Description
         description: A description of the list
         type: string
         required: true
+        example: List of IP's
       source:
         title: Source
-        description: The web site you will pull the list from e.g. http://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
+        description: The web site you will pull the list from e.g. https://www.example.com/test.txt
         type: string
         required: true
+        example: https://www.example.com/test.txt
       repeat:
         title: Repeat
         description: The interval at which to retrieve updates from the list
@@ -541,6 +605,7 @@ actions:
         - Hourly
         - Daily
         - Weekly
+        example: Five Minute
       time:
         title: Time
         description: 'If repeat is daily or weekly, choose an hour on a 24 hour clock
@@ -557,8 +622,8 @@ actions:
         - '05'
         - '06'
         - '07'
-        - 08
-        - 09
+        - '08'
+        - '09'
         - '10'
         - '11'
         - '12'
@@ -574,6 +639,7 @@ actions:
         - '22'
         - '23'
         default: ''
+        example: '00'
       day:
         title: Day
         description: If repeat is weekly, choose a day to update
@@ -589,6 +655,7 @@ actions:
         - Saturday
         - Sunday
         default: ''
+        example: Monday
     output:
       status:
         title: Status
@@ -597,7 +664,7 @@ actions:
         required: false
       code:
         title: Code
-        description: Response code from PAN-OS
+        description: Response code from the firewall
         type: string
         required: false
       message:
@@ -606,39 +673,47 @@ actions:
         type: string
         required: false
   set_address_object:
-    title: Set Address Object
-    description: Create a new address object
+    title: Create Address Object
+    description: Create a new address object. Supports IPv6
     input:
       address:
         title: Address
-        description: The IP-Netmask, IP-Range, or FQDN e.g. 192.168.1.0/24, 10.0.0.1-10.0.0.12,
+        description: The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com
           google.com
         type: string
+        example: 1.1.1.1
         required: true
-      type:
-        title: Type
-        description: The type of address object to create
-        type: string
-        required: true
-        enum:
-        - IP-Netmask
-        - IP-Range
-        - FQDN
-      object_name:
-        title: Object Name
+      address_object:
+        title: Address Object
         description: The name of the address object
         type: string
+        example: Blocked host
         required: true
-      object_description:
-        title: Object Description
+      description:
+        title: Description
         description: A description for the address object
         type: string
+        example: Blocked host from Insight Connect
         required: false
       tags:
         title: Tags
         description: Tags for the address object. Use commas to separate multiple
           tags
         type: string
+        example: malware
+        required: false
+      skip_rfc1918:
+        title: Skip RFC 1918 (Private) IP Addresses
+        description: Skip private IP addresses as defined in RFC 1918
+        type: boolean
+        example: true
+        required: true
+        default: false
+      whitelist:
+        title: Whitelist
+        description: This list contains a set of network objects that should not be blocked. This can include IPs, CIDR notation, or domains. It can not include an IP range (such as 10.0.0.0-10.0.0.10)
+        type: "[]string"
+        example: ["198.51.100.100", "192.0.2.0/24", "example.com"]
         required: false
     output:
       status:
@@ -648,7 +723,7 @@ actions:
         required: false
       code:
         title: Code
-        description: Response code from PAN-OS
+        description: Response code from the firewall
         type: string
         required: false
       message:
@@ -656,3 +731,272 @@ actions:
         description: A message with more detail about the status
         type: string
         required: false
+  get_policy:
+    title: Get Policy
+    description: Get a policy by name
+    input:
+      policy_name:
+        title: Policy Name
+        description: Policy name
+        type: string
+        required: true
+        order: 1
+        example: InsightConnect Block Policy
+      device_name:
+        title: Device Name
+        description: Device name
+        type: string
+        default: "localhost.localdomain"
+        required: true
+        example: "localhost.localdomain"
+        order: 2
+      virtual_system:
+        title: Virtual System Name
+        description: Virtual system name
+        type: string
+        default: vsys1
+        example: vsys1
+        required: true
+        order: 3
+    output:
+      to:
+        title: To
+        description: To
+        type: "[]string"
+        required: false
+      from:
+        title: From
+        description: From
+        type: "[]string"
+        required: false
+      source:
+        title: Source
+        description: Source
+        type: "[]string"
+        required: false
+      destination:
+        title: Destination
+        description: Destination
+        type: "[]string"
+        required: false
+      source_user:
+        title: Source User
+        description: Source user
+        type: "[]string"
+        required: false
+      category:
+        title: Category
+        description: Category
+        type: "[]string"
+        required: false
+      application:
+        title: Application
+        description: Application
+        type: "[]string"
+        required: false
+      service:
+        title: Service
+        description: Service
+        type: "[]string"
+        required: false
+      hip_profiles:
+        title: HIP Profiles
+        description: Host Information in Policy Enforcement profile
+        type: "[]string"
+        required: false
+      action:
+        title: Action
+        description: Action
+        type: "string"
+        required: false
+  check_if_address_object_in_group:
+    title: Check if Address in Group
+    description: Checks to see if an IP address, CIDR IP address, or domain is in an Address Group. Supports IPv6
+    input:
+      group:
+        title: Group
+        description: Group name
+        type: string
+        example: InsightConnect Block List
+        required: true
+        order: 1
+      address:
+        title: Address
+        description: The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name
+        type: string
+        example: 198.51.100.100
+        required: true
+        order: 2
+      enable_search:
+        title: Enable Search
+        description: When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don't know the Address Object by its name
+        type: boolean
+        example: false
+        default: false
+        required: true
+        order: 3
+      device_name:
+        title: Device Name
+        description: Device name
+        type: string
+        default: localhost.localdomain
+        example: localhost.localdomain
+        required: true
+        order: 4
+      virtual_system:
+        title: Virtual System Name
+        description: Virtual system name
+        type: string
+        default: vsys1
+        example: vsys1
+        required: true
+        order: 5
+    output:
+      found:
+        title: Found
+        description: Was address found in group
+        type: boolean
+        required: true
+      address_objects:
+        title: Address Objects
+        description: The names of the address objects that match or contain address
+        type: "[]string"
+        required: false
+  remove_address_object_from_group:
+    title: Remove Address Object from Group
+    description: Removes an address object from an address group. Supports IPv6
+    input:
+      address_object:
+        title: Address Object
+        description: The name of the address object to remove
+        type: string
+        example: Malicious Host
+        required: true
+        order: 1
+      group:
+        title: Group
+        description: Group name
+        type: string
+        example: InsightConnect Block List
+        required: true
+        order: 2
+      device_name:
+        title: Device Name
+        description: Device name
+        type: string
+        default: localhost.localdomain
+        example: localhost.localdomain
+        required: true
+        order: 3
+      virtual_system:
+        title: Virtual System Name
+        description: Virtual system name
+        type: string
+        default: vsys1
+        example: vsys1
+        required: true
+        order: 4
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  add_address_object_to_group:
+    title: Add Address Object to Group
+    description: Adds address objects to an address group
+    input:
+      address_object:
+        title: Address Object
+        description: The names of the address objects to add
+        type: "[]string"
+        example: ["198.51.100.100", "198.51.100.101", "example.com"]
+        required: true
+        order: 1
+      group:
+        title: Group
+        description: Group name
+        type: string
+        example: InsightConnect Block List
+        required: true
+        order: 2
+      device_name:
+        title: Device Name
+        description: Device name
+        type: string
+        default: localhost.localdomain
+        example: localhost.localdomain
+        required: true
+        order: 3
+      virtual_system:
+        title: Virtual System Name
+        description: Virtual system name
+        type: string
+        default: vsys1
+        example: vsys1
+        required: true
+        order: 4
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+      address_objects:
+        title: Address Objects
+        description: Address objects currently in group
+        type: "[]string"
+        required: true
+  get_addresses_from_group:
+    title: Get Addresses from Group
+    description: Get addresses from an address group
+    input:
+      group:
+        title: Group
+        description: Group name
+        type: string
+        example: InsightConnect Block List
+        required: true
+        order: 1
+      device_name:
+        title: Device Name
+        description: Device name
+        type: string
+        default: localhost.localdomain
+        example: localhost.localdomain
+        required: true
+        order: 2
+      virtual_system:
+        title: Virtual System Name
+        description: Virtual system name
+        type: string
+        default: vsys1
+        example: vsys1
+        required: true
+        order: 3
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+      fqdn_addresses:
+        title: FQDN Addresses
+        description: FQDN addresses currently in group
+        type: "[]string"
+        required: true
+      ipv4_addresses:
+        title: IPv4 Addresses
+        description: IPv4 addresses currently in group
+        type: "[]string"
+        required: true
+      ipv6_addresses:
+        title: IPv6 Addresses
+        description: IPv6 addresses currently in group
+        type: "[]string"
+        required: true
+      all_addresses:
+        title: All Addresses
+        description: Addresses currently in group
+        type: "[]string"
+        required: true

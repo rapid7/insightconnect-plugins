@@ -2,24 +2,26 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: rest
-title: REST
-description: The REST plugin to make it easy to integrate with RESTful services
-version: 3.0.1
+title: HTTP Requests
+description: The HTTP Requests plugin to make it easy to integrate with RESTful services
+version: 4.0.2
 vendor: rapid7
 support: community
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rest
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  docs_url: https://docs.rapid7.com/insightconnect/http-requests
 tags:
 - rest
+- request
 - http
 - rpc
 - microservices
 - api
 hub_tags:
   use_cases: [data_utility]
-  keywords: [rest, http, rpc, microservices, api]
+  keywords: [rest, request, http, rpc, microservices, api]
   features: []
 enable_cache: true
 connection:
@@ -28,22 +30,47 @@ connection:
     description: Base URL e.g. https://httpbin.org
     type: string
     required: true
+    example: https://httpbin.org/
+  authentication_type:
+    title: Authentication Type
+    description: Type of authentication
+    type: string
+    required: false
+    enum:
+      - Basic Auth
+      - Digest Auth
+      - Bearer Token
+      - Rapid7 Insight
+      - OpsGenie
+      - Pendo
+      - Custom
+    default: Basic Auth
+    example: Basic Auth
+  secret:
+    title: Secret Key
+    description: Credential secret key. Provide a Bearer Token, Rapid7 Insight, OpsGenie, Pendo or using "CUSTOM_SECRET_INPUT" in the Default Headers field for Custom authentication type
+    type: credential_secret_key
+    required: false
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
   default_headers:
     title: Default Headers
-    description: 'Default headers to include in all requests associated with this
-      connection e.g. { User-Agent: Komand }'
+    description: Custom headers to include in all requests associated with this connection. To pass a encrypted key as a header value, enter your key in the Secret Key input and set the value of the header in this field to "CUSTOM_SECRET_INPUT" instead of secret key. The plugin will replace "CUSTOM_SECRET_INPUT" with the encrypted key stored in the Secret Key input when the plugin runs.
     type: object
     required: false
+    example: '{ "User-Agent": "Rapid7 InsightConnect", "Custom-Key-Header": "CUSTOM_SECRET_INPUT" }'
   ssl_verify:
     title: SSL Verify
     type: boolean
-    description: Verify SSL certificate
+    description: Verify TLS/SSL certificate
     required: true
     default: true
+    example: true
   basic_auth_credentials:
     title: Basic Auth Credentials
+    description: Username and password. Provide if you choose Basic Auth or Digest Auth authentication type
     type: credential_username_password
     required: false
+    example: '{"username": "user@example.com", "password": "mypassword"}'
 actions:
   get:
     title: GET
@@ -54,16 +81,18 @@ actions:
         description: The route to append to the base URL e.g. /org/users
         type: string
         required: true
+        example: /org/users
       headers:
         title: Headers
         description: Headers to use for the request. These will override any default
           headers
         type: object
         required: false
+        example: '{"Host": "rapid7.com"}'
     output:
       body_object:
         title: Body Object
-        description: Response payload from the server as an object
+        description: Response payload from the server as an object. Note, if the response has invalid object structure(list, string..) plugin will wrap it with object map
         type: object
         required: false
       body_string:
@@ -90,17 +119,20 @@ actions:
         description: The route to append to the base URL e.g. /org/users
         type: string
         required: true
+        example: /org/users
       headers:
         title: Headers
         description: Headers to use for the request. These will override any default
           headers
         type: object
         required: false
+        example: '{"Host": "rapid7.com"}'
       body:
         title: Body
-        description: Payload to submit to the server when making the REST call
+        description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
+        example: '{"user": "user@example.com"}'
     output:
       body_object:
         title: Body Object
@@ -131,17 +163,20 @@ actions:
         description: The route to append to the base URL e.g. /org/users
         type: string
         required: true
+        example: /org/users
       headers:
         title: Headers
         description: Headers to use for the request. These will override any default
           headers
         type: object
         required: false
+        example: '{"Host": "rapid7.com"}'
       body:
         title: Body
-        description: Payload to submit to the server when making the REST call
+        description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
+        example: '{"user": "user@example.com"}'
     output:
       body_object:
         title: Body Object
@@ -172,17 +207,20 @@ actions:
         description: The route to append to the base URL e.g. /org/users
         type: string
         required: true
+        example: /org/users
       headers:
         title: Headers
         description: Headers to use for the request. These will override any default
           headers
         type: object
         required: false
+        example: '{"Host": "rapid7.com"}'
       body:
         title: Body
-        description: Payload to submit to the server when making the REST call
+        description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
+        example: '{"user": "user@example.com"}'
     output:
       body_object:
         title: Body Object
@@ -213,17 +251,20 @@ actions:
         description: The route to append to the base URL e.g. /org/users
         type: string
         required: true
+        example: /org/users
       headers:
         title: Headers
         description: Headers to use for the request. These will override any default
           headers
         type: object
         required: false
+        example: '{"Host": "rapid7.com"}'
       body:
         title: Body
-        description: Payload to submit to the server when making the REST call
+        description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
+        example: '{"user": "user@example.com"}'
     output:
       body_object:
         title: Body Object

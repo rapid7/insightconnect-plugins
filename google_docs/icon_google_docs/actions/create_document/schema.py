@@ -25,7 +25,7 @@ class CreateDocumentInput(komand.Input):
     "content": {
       "type": "string",
       "title": "Content",
-      "description": "Document content",
+      "description": "This Google Doc document was created by InsightConnect",
       "order": 2
     },
     "title": {

@@ -1,5 +1,6 @@
 import komand
 from .schema import SearchInput, SearchOutput
+
 # Custom imports below
 import requests
 
@@ -10,10 +11,11 @@ class Search(komand.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='search',
-                description='Search based on MD5 hash',
-                input=SearchInput(),
-                output=SearchOutput())
+            name="search",
+            description="Search based on MD5 hash",
+            input=SearchInput(),
+            output=SearchOutput(),
+        )
 
     def run(self, params={}):
         md5 = params.get("md5")

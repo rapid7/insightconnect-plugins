@@ -22,8 +22,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|username|string|None|True|Username to logon to FreeIPA server|None|
-|password|password|None|True|Password|None|
+|credentials|credential_username_password|None|True|Username and Password to logon to FreeIPA server|None|
 |server|string|None|True|The name of the FreeIPA server e.g. ipa.demo1.freeipa.org|None|
 
 ## Technical Details
@@ -87,6 +86,7 @@ This action is used to search for a user.
 |----|----|--------|-----------|
 |full_message|[]find_user_output|False|All stored information match the search criteria|
 |users|[]string|False|A list of users that match the search criteria|
+|found|boolean|False|Boolean showing the status of the request|
 
 Example output:
 
@@ -149,7 +149,7 @@ Example output:
         "0"
       ],
       "krbcanonicalname": [
-        "helpdesk@DEMO1.FREEIPA.ORG"
+        "user@example.com"
       ],
       "uid": [
         "helpdesk"
@@ -170,10 +170,10 @@ Example output:
         "1198600005"
       ],
       "mail": [
-        "helpdesk@demo1.freeipa.org"
+        "user@example.com"
       ],
       "krbprincipalname": [
-        "helpdesk@DEMO1.FREEIPA.ORG"
+        "user@example.com"
       ],
       "loginshell": [
         "/bin/sh"
@@ -268,7 +268,7 @@ Example output:
       "0"
     ],
     "krbcanonicalname": [
-      "helpdesk@DEMO1.FREEIPA.ORG"
+      "user@example.com"
     ],
     "uid": [
       "helpdesk"
@@ -280,10 +280,10 @@ Example output:
       "1198600005"
     ],
     "mail": [
-      "helpdesk@demo1.freeipa.org"
+      "user@example.com"
     ],
     "krbprincipalname": [
-      "helpdesk@DEMO1.FREEIPA.ORG"
+      "user@example.com"
     ],
     "sn": [
       "Helpdesk"
@@ -321,14 +321,14 @@ This action is used to delete a user.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
-|username|string|None|True|The UID of the user to delete|None|
 |preserve|boolean|None|True|If true the user will be preserved rather than deleted|None|
+|username|string|None|True|The UID of the user to delete|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|False|Status of the delete User request. Will be false if |
+|status|boolean|False|Status of the delete User request. Will be false if |
 |summary|string|False|A summary of the deleted user|
 
 Example output:
@@ -356,7 +356,8 @@ Note that deletion is permanent and cannot be undone.
 
 # Version History
 
-* 2.0.1 - New spec and help.md format for the Hub
+* 2.0.2 - Use input and output constants | Change docker image from `komand/python-pypy3-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Changed `Exception` to `PluginException`
+* 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Support web server mode | Update to new credential types
 * 1.0.0 - Initial plugin
 

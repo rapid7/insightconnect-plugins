@@ -1,4 +1,4 @@
-FROM komand/python-3-37-slim-plugin:3
+FROM rapid7/insightconnect-python-3-38-slim-plugin:4
 LABEL organization=komand
 LABEL sdk=python
 LABEL type=plugin
@@ -7,10 +7,12 @@ ENV SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
 ENV SSL_CERT_DIR /etc/ssl/certs
 ENV REQUESTS_CA_BUNDLE  /etc/ssl/certs/ca-certificates.crt
 
-ADD ./plugin.spec.yaml /plugin.spec.yaml
-ADD . /python/src
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 
 RUN apk add --no-cache gcc libc-dev libffi-dev openssl-dev
+
+ADD ./plugin.spec.yaml /plugin.spec.yaml
+ADD . /python/src
 
 WORKDIR /python/src
 # Add any package dependencies here

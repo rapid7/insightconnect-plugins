@@ -1,62 +1,36 @@
-import komand
-from .schema import ShodanQueryInput, ShodanQueryOutput
+import insightconnect_plugin_runtime
+from .schema import ShodanQueryInput, ShodanQueryOutput, Output, Input
+
 # Custom imports below
-import json
+from insightconnect_plugin_runtime.exceptions import PluginException
 import shodan
-import sys
 
 
-class ShodanQuery(komand.Action):
-
+class ShodanQuery(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='shodan_query',
-                description='Search Shodan Using the Query Syntax',
-                input=ShodanQueryInput(),
-                output=ShodanQueryOutput())
+            name="shodan_query",
+            description="Search Shodan Using the Query Syntax",
+            input=ShodanQueryInput(),
+            output=ShodanQueryOutput(),
+        )
 
     def run(self, params={}):
-        query = params.get('query')
-        token = self.connection.token
-        api = shodan.Shodan(token)
-
-        #Error handling for unsuccessful query
         try:
-          response = api.search(query)
-
+            response = shodan.Shodan(self.connection.token).search(params.get(Input.QUERY))
         except shodan.exception.APIError as e:
-          raise Exception('Shodan: {}'.format(e))
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=e)
 
-        #Check if no results are returned
-        if response['total'] == 0:
-          self.logger.info('No results found for query')
+        if response["total"] == 0:
+            self.logger.info("No results found for query")
 
         ip_str = []
         org = []
 
-        #Generate list of IPs and organizations
-        for item in response['matches']:
-          ip_str.append(item['ip_str'])
-          org.append(item['org'])
+        for item in response["matches"]:
+            ip_str.append(item["ip_str"])
+            org.append(item["org"])
 
-        #Generate final dic to return
-        dic = {
-          'ip_str': ip_str,
-          'org': org,
-          'total': response.get('total')
-        }
-
-        #None returns an error during type validation
-        return komand.helper.clean_dict(dic)
-
-    def test(self):
-        token = self.connection.token
-        api = shodan.Shodan(token)
-
-        #Test authentication
-        try:
-            response = api.info()
-        except shodan.exception.APIError as e:
-            raise Exception('Text: {}'.format(e))
-
-        return {}
+        return insightconnect_plugin_runtime.helper.clean_dict(
+            {Output.IP_STR: ip_str, Output.ORG: org, Output.TOTAL: response.get("total")}
+        )

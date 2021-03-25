@@ -532,7 +532,7 @@ This action is used to get the list of feeds that a user has access to.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -610,7 +610,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.2 - New spec and help.md format for the Hub
+* 1.0.2 - New spec and help.md format for the Extension Library
 * 1.0.1 - Add discontinuation of Cymon notice
 * 1.0.0 - Initial plugin
 

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans
-version: 3.5.2
+version: 4.9.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -42,6 +42,91 @@ types:
       description: Link relation type following RFC 5988
       title: Rel
       type: string
+      required: false
+  fingerprint:
+    description:
+      title: Description
+      type: string
+      required: false
+    family:
+      title: Family
+      type: string
+      required: false
+    product:
+      title: Product
+      type: string
+      required: false
+    vendor:
+      title: Vendor
+      type: string
+      required: false
+    version:
+      title: Version
+      type: string
+      required: false
+  match:
+    confidence:
+      title: Confidence
+      type: string
+      required: false
+    fingerprint:
+      title: Fingerprint
+      type: fingerprint
+      required: false
+  step:
+    html:
+      title: HTML
+      type: string
+      required: false
+    text:
+      title: text
+      type: string
+      required: false
+  summary:
+    html:
+      title: HTML
+      type: string
+      required: false
+    text:
+      title: text
+      type: string
+      required: false
+  resources:
+    appliesTo:
+      title: Applies To
+      type: string
+      required: false
+    confidence:
+      title: Confidence
+      type: string
+      required: false
+    estimate:
+      title: Estimate
+      type: string
+      required: false
+    id:
+      title: ID
+      type: string
+      required: false
+    links:
+      title: links
+      type: '[]link'
+      required: false
+    type:
+      title: Type
+      type: string
+      required: false
+    matches:
+      title: Matches
+      type: '[]match'
+      required: false
+    steps:
+      title: Steps
+      type: step
+      required: false
+    summary:
+      title: Summary
+      type: summary
       required: false
   address:
     ip:
@@ -102,6 +187,11 @@ types:
       description: Type of the file, e.g. file or directory
       title: Type
       type: string
+      required: false
+    content:
+      description: Contents of the file
+      title: Contents
+      type: bytes
       required: false
   history:
     date:
@@ -845,10 +935,20 @@ types:
       title: Results
       type: '[]asset_vulnerability_result'
       required: false
+    since:
+      description: The date when this vulnerability was first detected
+      title: Since
+      type: string
+      required: false
     status:
       description: Status, ie. vulnerable
       title: Status
       type: string
+      required: false
+    risk_score:
+      title: Risk Score
+      description: The risk score for the vulnerability
+      type: float
       required: false
   site:
     assets:
@@ -1629,17 +1729,31 @@ types:
       description: The vulnerabilities that would be remediated
       type: '[]remediation_vulnerability'
       required: true
+  vulnerability_solution:
+    links:
+      description: Hypermedia links to corresponding or related resources
+      title: Links
+      type: '[]link'
+      required: false
+    resources:
+      title: Solutions
+      description: Solutions to vulnerabilities
+      type: '[]resources'
+      required: false
+
 connection:
   url:
     title: URL
     description: URL to your InsightVM console, without trailing slashes, e.g. https://insightvm.example.com:3780
     type: string
     required: true
+    example: https://insightvm.example.com:3780
   credentials:
     title: Credentials
     description: Username and password
     type: credential_username_password
     required: true
+    example: '{"username": "username", "password": "password"}'
 actions:
   scan:
     title: Scan
@@ -1649,11 +1763,18 @@ actions:
         title: Site ID
         description: ID of the site to scan
         type: string
+        example: 1
         required: true
+      hosts:
+        title: Hosts
+        description: The hosts that should be included in the scan
+        type: "[]string"
+        example: ["192.0.2.3", "192.0.2.10-192.0.2.20", "ADSRV.local"]
+        required: false
     output:
       id:
-        description: Scan ID
-        title: Identifier of the resource created
+        description: Identifier of the resource created
+        title: Scan ID
         type: integer
         required: false
       links:
@@ -1688,8 +1809,8 @@ actions:
         type: integer
         required: false
       links:
-        description: Links
-        title: Hypermedia links to corresponding or related resources
+        description: Hypermedia links to corresponding or related resources
+        title: Links
         type: '[]link'
         required: false
       vulnerabilities:
@@ -1767,6 +1888,13 @@ actions:
         description: ID of the asset for which to find vulnerabilities
         type: string
         required: true
+        example: 234
+      get_risk_score:
+        title: Get Risk Score
+        description: Return risk score along with other vulnerability data
+        type: boolean
+        required: false
+        example: true
     output:
       vulnerabilities:
         title: Vulnerabilities
@@ -1782,6 +1910,7 @@ actions:
         description: ID of the asset for which to find software
         type: string
         required: true
+        example: "234"
     output:
       software:
         title: Software
@@ -2168,6 +2297,19 @@ actions:
         description: 'Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria'
         type: object
         required: true
+      size:
+        title: Size
+        description: The number of records to retrieve. If blank or '0' all assets that match the search will be returned
+        type: number
+        required: false
+        default: 0
+        example: 100
+      sort_criteria:
+        title: Sort Criteria
+        description: JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)
+        type: object
+        required: false
+        example: '{"risk-score": "asc", "criticality-tag": "desc"}'
     output:
       assets:
         title: Assets
@@ -2555,7 +2697,7 @@ actions:
         title: Description
         description: Asset group description
         type: string
-        required: false
+        required: true
       searchCriteria:
         title: Search Criteria
         description: 'Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria'
@@ -3586,6 +3728,128 @@ actions:
         description: The details of the vulnerability requested
         type: vulnerability
         required: true
+  get_asset_group_assets:
+    title: Get Asset Group Assets
+    description: Get asset group assets
+    input:
+      id:
+        title: Asset Group ID
+        description: Asset group ID
+        type: integer
+        required: true
+    output:
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: true
+      resources:
+        title: Resources
+        description: The identifiers of the associated resources
+        type: '[]integer'
+        required: false
+  delete_asset:
+    title: Delete an Asset
+    description: Delete an Asset
+    input:
+      id:
+        title: ID
+        description: Asset ID
+        type: integer
+        required: true
+    output:
+      success:
+        title: Success
+        description: Was the operation successful
+        type: boolean
+        required: true
+  list_inactive_assets:
+    title: List Inactive Assets
+    description: Returns a list of inactive assets (limit 1000) determined by how many days ago they were scanned
+    input:
+      days_ago:
+        title: Days Ago
+        description: How many days ago should an asset be considered still active
+        type: integer
+        example: 14
+        default: 14
+        required: true
+      size:
+        title: Size
+        description: The number of assets to retrieve. If blank then 500 inactive assets will be returned, the maximum limit is 1000 assets
+        type: number
+        required: false
+        default: 500
+        example: 100
+    output:
+      assets:
+        title: Assets
+        description: A list of inactive assets
+        type: "[]asset"
+        required: true
+  get_expiring_vulnerability_exceptions:
+    title: Get Expiring Vulnerability Exceptions
+    description: Return a list of expiring vulnerability exceptions
+    input:
+      expires_in_less_than:
+        title: Expires in Less Than
+        description: Number of days left until the exception expires
+        type: integer
+        example: 7
+        default: 7
+        required: true
+    output:
+      exceptions:
+        title: Exceptions
+        description: Exceptions about to expire
+        type: "[]vulnerability_exception"
+        required: false
+  update_vulnerability_exception_expiration_date:
+    title: Update Vulnerability Exception Expiration Date
+    description: Update vulnerability exception expiration date
+    input:
+      id:
+        title: ID
+        description: Asset ID
+        type: integer
+        required: true
+        example: 42
+      date:
+        title: Date
+        description: Expiration date. e.g. 2020-02-24T06:59:59.999Z
+        type: string
+        required: true
+        example: "2020-02-24T06:59:59.999Z"
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+        example: True
+  asset_vulnerability_solution:
+    title: Get Asset Vulnerability Solutions
+    description: Returns the highest-superceding rollup solutions for a list of vulnerabilities on an asset
+    input:
+      asset_id:
+        title: Asset ID
+        description: The identifier of the asset
+        type: string
+        required: true
+        example: 423
+      vulnerability_ids:
+        title: Vulnerability IDs
+        description: A list of identifiers of the vulnerabilities
+        type: "[]string"
+        required: true
+        example: ["flash_player-cve-2017-11305"]
+    output:
+      vulnerabilities_solution:
+        title: Solutions for Vulnerabilities
+        description: Highest-superceding rollup solutions for a vulnerabilities on an asset
+        type: "[]vulnerability_solution"
+        required: true
+
 triggers:
   new_scans:
     title: New Scans

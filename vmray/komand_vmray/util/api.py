@@ -7,19 +7,79 @@ import magic
 
 class VMRay:
 
-    SUPPORTED_FILETYPES = [".exe", ".scr", ".lnk2", ".dll", ".sys", ".ocx",
-                           ".pdf", ".doc", ".docx", ".docm", ".dot", ".dotx",
-                           ".dotm", ".xls", ".xlsx", ".xlsm", ".xlt", ".xltx",
-                           ".xltm", ".xlb", ".xlsb", ".iqy", ".slk", ".ppt",
-                           ".pptx", ".pptm", ".pot", ".potx", ".potm", ".mpp",
-                           ".accdb", ".adn", ".accdr", ".accdt", ".accda",
-                           ".mdw", ".accde", ".ade", ".mdb", ".mda", ".vsd",
-                           ".vsdx", ".vss", ".vst", ".vsw", ".vdx", ".vtx",
-                           ".vsdx", ".vsdm", ".vssx", ".vssm", ".vstx",
-                           ".vstm", ".pub", ".puz", ".rtf", ".url", ".html",
-                           ".htm", ".hta", ".swf", ".msi", ".bat", ".vbs",
-                           ".vbe", ".js", ".jse", ".wsf", ".jar", ".class",
-                           ".ps1"]
+    SUPPORTED_FILETYPES = [
+        ".exe",
+        ".scr",
+        ".lnk2",
+        ".dll",
+        ".sys",
+        ".ocx",
+        ".pdf",
+        ".doc",
+        ".docx",
+        ".docm",
+        ".dot",
+        ".dotx",
+        ".dotm",
+        ".xls",
+        ".xlsx",
+        ".xlsm",
+        ".xlt",
+        ".xltx",
+        ".xltm",
+        ".xlb",
+        ".xlsb",
+        ".iqy",
+        ".slk",
+        ".ppt",
+        ".pptx",
+        ".pptm",
+        ".pot",
+        ".potx",
+        ".potm",
+        ".mpp",
+        ".accdb",
+        ".adn",
+        ".accdr",
+        ".accdt",
+        ".accda",
+        ".mdw",
+        ".accde",
+        ".ade",
+        ".mdb",
+        ".mda",
+        ".vsd",
+        ".vsdx",
+        ".vss",
+        ".vst",
+        ".vsw",
+        ".vdx",
+        ".vtx",
+        ".vsdx",
+        ".vsdm",
+        ".vssx",
+        ".vssm",
+        ".vstx",
+        ".vstm",
+        ".pub",
+        ".puz",
+        ".rtf",
+        ".url",
+        ".html",
+        ".htm",
+        ".hta",
+        ".swf",
+        ".msi",
+        ".bat",
+        ".vbs",
+        ".vbe",
+        ".js",
+        ".jse",
+        ".wsf",
+        ".jar",
+        ".class",
+        ".ps1",
+    ]
 
     def __init__(self, url, api_key, logger):
         self.url = url
@@ -32,9 +92,7 @@ class VMRay:
 
     def _call_api(self, method, endpoint_url, files=None, params=None, data=None, json=None, action_name=None):
         url = self.url + endpoint_url
-        headers = {
-            "Authorization": f"api_key {self.api_key}"
-        }
+        headers = {"Authorization": f"api_key {self.api_key}"}
         req = Request(
             url=url,
             method=method,
@@ -42,21 +100,25 @@ class VMRay:
             data=data,
             json=json,
             files=files,
-            headers=headers
+            headers=headers,
         )
 
         try:
             req = req.prepare()
             resp = self.s.send(req)
             if resp.status_code == 405:
-                raise Exception(f"An error was received when running {action_name}."
-                                f"Request status code of {resp.status_code} was returned."
-                                "Please make sure connections have been configured correctly")
+                raise Exception(
+                    f"An error was received when running {action_name}."
+                    f"Request status code of {resp.status_code} was returned."
+                    "Please make sure connections have been configured correctly"
+                )
             elif resp.status_code != 200:
-                raise Exception(f"An error was received when running {action_name}."
-                                f" Request status code of {resp.status_code} was returned."
-                                " Please make sure connections have been configured correctly "
-                                f"as well as the correct input for the action. Response was: {resp.text}")
+                raise Exception(
+                    f"An error was received when running {action_name}."
+                    f" Request status code of {resp.status_code} was returned."
+                    " Please make sure connections have been configured correctly "
+                    f"as well as the correct input for the action. Response was: {resp.text}"
+                )
 
         except Exception as e:
             self.logger.error(f"An error has occurred: {e}")
@@ -68,7 +130,8 @@ class VMRay:
         except JSONDecodeError:
             raise Exception(
                 f"Error: Received an unexpected response from {action_name}"
-                f"(non-JSON or no response was received). Response was: {resp.text}")
+                f"(non-JSON or no response was received). Response was: {resp.text}"
+            )
 
     def get_analysis(self, analysis_id, id_type, optional_params):
         if id_type not in ["all", "analysis_id"]:
@@ -90,12 +153,16 @@ class VMRay:
         return self._call_api("GET", endpoint_url=endpoint_url, params=optional_params, action_name="Get Samples")
 
     def submit_file(self, name, file_bytes, optional_params):
-        files = {
-            "sample_file": (f"{name}", file_bytes)
-        }
+        files = {"sample_file": (f"{name}", file_bytes)}
         endpoint_url = "/rest/sample/submit"
 
-        return self._call_api("POST", endpoint_url=endpoint_url, files=files, params=optional_params, action_name= "Submit File")
+        return self._call_api(
+            "POST",
+            endpoint_url=endpoint_url,
+            files=files,
+            params=optional_params,
+            action_name="Submit File",
+        )
 
     def submit_url(self, url, optional_params):
         optional_params.update({"sample_url": url})
@@ -103,13 +170,12 @@ class VMRay:
 
         return self._call_api("POST", endpoint_url=endpoint_url, params=optional_params, action_name="Submit URL")
 
-
     def check_filetype(self, content, filename=None):
-        '''
+        """
         :param content: contents of file
         :param filename: name of file being passed in
         :return: mime type that matches or a list of all mime extensions that
-        '''
+        """
         api_magic = magic.Magic(mime=True)
         content_mime_type = api_magic.from_buffer(content)
         all_extensions = mimetypes.guess_all_extensions(content_mime_type)
@@ -119,8 +185,7 @@ class VMRay:
 
         return all_extensions, False
 
-
-        #for filetype in self.SUPPORTED_FILETYPES:
+        # for filetype in self.SUPPORTED_FILETYPES:
         #    if filename.startswith(filename):
         #        return filetype, True
 

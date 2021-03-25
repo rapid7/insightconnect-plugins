@@ -4,7 +4,7 @@ products: [insightconnect]
 name: grep
 title: Grep
 description: Search for a specified pattern in a string or a file
-version: 1.0.3
+version: 1.0.4
 vendor: rapid7
 support: community
 status: []
@@ -28,15 +28,18 @@ actions:
         type: string
         description: Pattern to match
         required: true
+        example: hello world
       text:
         type: string
         description: String to match
         required: true
+        example: hello world \n hello world2
       behavior:
         type: string
         description: Return entire matched lines or only matched pattern
         required: false
         default: Default
+        example: Default
         enum:
         - Default
         - Only matching
@@ -61,15 +64,18 @@ actions:
         type: string
         description: Pattern to match
         required: true
+        example: hello world
       data:
         type: bytes
         description: Base64 encoded text
         required: true
+        example: SSBzZWUgdGhlIGRvZyAKIFRoZSBkb2cgc2VlcyBtZSAKIFRoaXMgbGluZSB0ZXN0cyBzdHVmZg==
       behavior:
         type: string
         description: Return entire matched lines or only matched pattern
         required: false
         default: Default
+        example: Default
         enum:
         - Default
         - Only matching

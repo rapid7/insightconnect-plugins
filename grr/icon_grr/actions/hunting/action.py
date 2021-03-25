@@ -6,18 +6,18 @@ from .schema import HuntingInput, HuntingOutput
 
 
 class Hunting(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='hunting',
-            description='Looks for exposed secrets in the git commit history and branches',
+            name="hunting",
+            description="Looks for exposed secrets in the git commit history and branches",
             input=HuntingInput(),
-            output=HuntingOutput())
+            output=HuntingOutput(),
+        )
         self.grr_api = None
 
     def run(self, params={}):
         self.grr_api = self.connection.grr_api
-        flow_name = params.get('flow_name')
+        flow_name = params.get("flow_name")
         administrative = ["Interrogate", "KeepAlive", "OnlineNotification"]
         browser = ["CacheGrep", "ChromeHistory", "FirefoxHistory"]
         collectors = ["ArtifactCollectorFlow", "DumpACPITable", "DumpFlashImage"]
@@ -46,7 +46,7 @@ class Hunting(komand.Action):
             flow_args.lightweight = True
             self.hunter_args()
         if flow_name == "KeepAlive":
-            duration = params.get('duration')
+            duration = params.get("duration")
             flow_args.duration = duration
             self.hunter_args()
         if flow_name == "OnlineNotification":
@@ -57,11 +57,11 @@ class Hunting(komand.Action):
     def browser(self, flow_name, params={}):
         flow_args = self.grr_api.types.CreateFlowArgs(flow_name)
         if flow_name == "CacheGrep":
-            check_chrome = params.get('check_chrome')
-            check_firefox = params.get('check_firefox')
-            data_regex = params.get('data_regex')
-            grep_users = params.get('grep_users')
-            pathtype = params.get('pathtype')
+            check_chrome = params.get("check_chrome")
+            check_firefox = params.get("check_firefox")
+            data_regex = params.get("data_regex")
+            grep_users = params.get("grep_users")
+            pathtype = params.get("pathtype")
             if check_chrome:
                 flow_args.check_chrome = True
             if check_firefox:
@@ -71,20 +71,20 @@ class Hunting(komand.Action):
             flow_args.grep_users = grep_users
             self.hunter_args()
         if flow_name == "ChromeHistory":
-            get_archive = params.get('get_archive')
-            history_path = params.get('history_path')
-            path_type = params.get('pathtype')
-            username = params.get('username')
+            get_archive = params.get("get_archive")
+            history_path = params.get("history_path")
+            path_type = params.get("pathtype")
+            username = params.get("username")
             flow_args.get_archive = get_archive
             flow_args.username = username
             flow_args.history_path = history_path
             flow_args.path_type = path_type
             self.hunter_args()
         if flow_name == "FirefoxHistory":
-            get_archive = params.get('get_archive')
-            history_path = params.get('history_path')
-            path_type = params.get('pathtype')
-            username = params.get('username')
+            get_archive = params.get("get_archive")
+            history_path = params.get("history_path")
+            path_type = params.get("pathtype")
+            username = params.get("username")
             flow_args.get_archive = get_archive
             flow_args.username = username
             flow_args.history_path = history_path
@@ -94,11 +94,11 @@ class Hunting(komand.Action):
     def checks(self, flow_name, params={}):
         flow_args = self.grr_api.types.CreateFlowArgs(flow_name)
         if flow_name == "CheckRunner":
-            max_findings = params.get('max_findings')
-            only_cpe = params.get('only_cpe')
-            only_label = params.get('only_label')
-            only_os = params.get('only_os')
-            restrict_checks = params.get('restrict_checks')
+            max_findings = params.get("max_findings")
+            only_cpe = params.get("only_cpe")
+            only_label = params.get("only_label")
+            only_os = params.get("only_os")
+            restrict_checks = params.get("restrict_checks")
             flow_args.restrict_checks = restrict_checks
             flow_args.only_os = only_os
             flow_args.only_label = only_label
@@ -109,15 +109,15 @@ class Hunting(komand.Action):
     def collectors(self, flow_name, params={}):
         flow_args = self.grr_api.types.CreateFlowArgs(flow_name)
         if flow_name == "ArtifactCollectorFlow":
-            apply_parsers = params.get('apply_parsers')
-            artifact_list = params.get('artifact_list')
-            dependencies = params.get('dependencies')
-            ignore_interpolation_errors = params.get('ignore_interpolation_errors')
-            knowledge_base = params.get('knowledge_base')
-            max_file_size = params.get('max_file_size')
-            on_no_results_error = params.get('on_no_results_error')
-            split_output_by_artifact = params.get('split_output_by_artifact')
-            use_tsk = params.get('use_tsk')
+            apply_parsers = params.get("apply_parsers")
+            artifact_list = params.get("artifact_list")
+            dependencies = params.get("dependencies")
+            ignore_interpolation_errors = params.get("ignore_interpolation_errors")
+            knowledge_base = params.get("knowledge_base")
+            max_file_size = params.get("max_file_size")
+            on_no_results_error = params.get("on_no_results_error")
+            split_output_by_artifact = params.get("split_output_by_artifact")
+            use_tsk = params.get("use_tsk")
             if ignore_interpolation_errors:
                 flow_args.ignore_interpolation_errors = ignore_interpolation_errors
             if apply_parsers:
@@ -134,18 +134,18 @@ class Hunting(komand.Action):
             flow_args.max_file_size = max_file_size
             self.hunter_args()
         if flow_name == "DumpACPITable":
-            component_version = params.get('component_version')
-            logging = params.get('logging')
-            table_signature_list = params.get('table_signature_list')
+            component_version = params.get("component_version")
+            logging = params.get("logging")
+            table_signature_list = params.get("table_signature_list")
             flow_args.component_version = component_version
             flow_args.table_signature_list = table_signature_list
             flow_args.logging = logging
             self.hunter_args()
         if flow_name == "DumpFlashImage":
-            chunk_size = params.get('chunk_size')
-            component_version = params.get('component_version')
-            log_level = params.get('log_level')
-            notify_syslog = params.get('notify_syslog')
+            chunk_size = params.get("chunk_size")
+            component_version = params.get("component_version")
+            log_level = params.get("log_level")
+            notify_syslog = params.get("notify_syslog")
             if notify_syslog:
                 flow_args.notify_syslog = notify_syslog
             flow_args.chunk_size = chunk_size
@@ -154,17 +154,17 @@ class Hunting(komand.Action):
             self.hunter_args()
 
     def filesystem(self, flow_name, params={}):
-        if flow_name == 'list_volume_shadow_copies':
+        if flow_name == "list_volume_shadow_copies":
             flow_args = self.grr_api.types.CreateFlowArgs(flow_name)
-        if flow_name == 'FileFinder':
+        if flow_name == "FileFinder":
             flow_args = self.grr_api.types.CreateFlowArgs(flow_name)
-            action = params.get('action')
-            conditions = params.get('conditions')
-            follow_links = params.get('follow_links')
-            paths = params.get('paths')
-            pathtype = params.get('pathtype')
-            process_non_regular_files = params.get('process_non_regular_files')
-            xdev = params.get('xdev')
+            action = params.get("action")
+            conditions = params.get("conditions")
+            follow_links = params.get("follow_links")
+            paths = params.get("paths")
+            pathtype = params.get("pathtype")
+            process_non_regular_files = params.get("process_non_regular_files")
+            xdev = params.get("xdev")
             if action:
                 flow_args.action = action
             if conditions:
@@ -181,23 +181,23 @@ class Hunting(komand.Action):
             if xdev:
                 flow_args.xdev = xdev
             self.hunter_args()
-        if flow_name == 'length':
-            length = params.get('length')
+        if flow_name == "length":
+            length = params.get("length")
             flow_args.ClearField("length")
             flow_args.length.append(length)
 
     def hunter_args(self, params={}):
-        hunt_name = params.get('hunt_name')
-        description = params.get('description')
-        priority = params.get('priority')
-        notification_event = params.get('notification_event')
-        queue = params.get('queue')
-        cpu_limit = params.get('cpu_limit')
-        network_bytes_limit = params.get('network_bytes_limit')
-        client_limit = params.get('client_limit')
-        expiry_time = params.get('expiry_time')
-        client_rate = params.get('client_rate')
-        crash_alert_email = params.get('crash_alert_email')
+        hunt_name = params.get("hunt_name")
+        description = params.get("description")
+        priority = params.get("priority")
+        notification_event = params.get("notification_event")
+        queue = params.get("queue")
+        cpu_limit = params.get("cpu_limit")
+        network_bytes_limit = params.get("network_bytes_limit")
+        client_limit = params.get("client_limit")
+        expiry_time = params.get("expiry_time")
+        client_rate = params.get("client_rate")
+        crash_alert_email = params.get("crash_alert_email")
         hunt_runner_args = self.grr_api.types.CreateHuntRunnerArgs()
         if hunt_name:
             hunt_runner_args.hunt_name.append(hunt_name)
@@ -235,25 +235,25 @@ class Hunting(komand.Action):
         pass
 
     def output_plugins(self, hunt_runner_args, params={}):
-        plugin_name = params.get('output_plugin_name')
+        plugin_name = params.get("output_plugin_name")
         output_plugin = hunt_runner_args.output_plugin
         if plugin_name:
             output_plugin.plugin_name = plugin_name
         plugin_args = output_plugin.plugin_args
         if plugin_name == "EmailOutput":
-            email_address = params.get('email_address')
-            emails_limit = params.get('emails_limit')
+            email_address = params.get("email_address")
+            emails_limit = params.get("emails_limit")
             if email_address:
                 plugin_args.email_address.append(email_address)
             if emails_limit:
                 plugin_args.ClearField("emails_limit")
                 plugin_args.emails_limit.append(emails_limit)
         if plugin_name == "BigQueryOutput":
-            convert_values = params.get('convert_values')
-            export_files_contents = params.get('export_files_contents')
-            export_files_hashes = params.get('export_files_hashes')
-            follow_urns = params.get('follow_urns')
-            annotations = params.get('annotations')
+            convert_values = params.get("convert_values")
+            export_files_contents = params.get("export_files_contents")
+            export_files_hashes = params.get("export_files_hashes")
+            follow_urns = params.get("follow_urns")
+            annotations = params.get("annotations")
             if convert_values:
                 plugin_args.ClearField("convert_values")
                 plugin_args.convert_values.append(convert_values)
@@ -274,16 +274,16 @@ class Hunting(komand.Action):
 
     def network(self, flow_name, params={}):
         flow_args = self.grr_api.types.CreateFlowArgs(flow_name)
-        listening_only = params.get('listening_only')
+        listening_only = params.get("listening_only")
         if listening_only:
             flow_args.listening_only = listening_only
 
     def processes(self, flow_name, params={}):
         flow_args = self.grr_api.types.CreateFlowArgs(flow_name)
-        if flow_name == 'list_processes':
-            connection_states = params.get('connection_states')
-            fetch_binaries = params.get('fetch_binaries')
-            filename_regex = params.get('filename_regex')
+        if flow_name == "list_processes":
+            connection_states = params.get("connection_states")
+            fetch_binaries = params.get("fetch_binaries")
+            filename_regex = params.get("filename_regex")
             if connection_states:
                 flow_args.connection_states = connection_states
             if fetch_binaries:
@@ -292,12 +292,12 @@ class Hunting(komand.Action):
                 flow_args.filename_regex = filename_regex
 
     def registry(self, flow_name, params={}):
-        if flow_name == 'CollectRunKeyBinaries':
+        if flow_name == "CollectRunKeyBinaries":
             flow_args = self.grr_api.types.CreateFlowArgs(flow_name)
-        if flow_name == 'RegistryFinder':
+        if flow_name == "RegistryFinder":
             flow_args = self.grr_api.types.CreateFlowArgs(flow_name)
-            conditions = params.get('conditions')
-            key_paths = params.get('key_paths')
+            conditions = params.get("conditions")
+            key_paths = params.get("key_paths")
             if conditions:
                 flow_args.conditions = conditions
             if key_paths:

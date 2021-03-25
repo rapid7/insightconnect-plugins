@@ -1,11 +1,5 @@
 import komand
-from .schema import (
-    GetSampleAnalysisInput,
-    GetSampleAnalysisOutput,
-    Input,
-    Output,
-    Component,
-)
+from .schema import GetSampleAnalysisInput, GetSampleAnalysisOutput, Input, Output, Component
 
 # Custom imports below
 from icon_cisco_threatgrid.util.api import ThreatGrid
@@ -27,16 +21,10 @@ class GetSampleAnalysis(komand.Action):
 
         artifacts = clean_artifact(api.get_artifact_analysis(sample_id=sample_id))
         iocs = clean_data(api.get_ioc_analysis(sample_id=sample_id))
-        network_streams = clean_data(
-            api.get_network_streams_analysis(sample_id=sample_id)
-        )
+        network_streams = clean_data(api.get_network_streams_analysis(sample_id=sample_id))
         processes = clean_data(api.get_processes_analysis(sample_id=sample_id))
-        annotations = clean_annotations(
-            api.get_annotations_analysis(sample_id=sample_id)
-        )
+        annotations = clean_annotations(api.get_annotations_analysis(sample_id=sample_id))
         metadata = clean_data(api.get_metadata_analysis(sample_id=sample_id))
-
-        # self.logger.info(artifacts)
 
         report = {
             Output.ARTIFACT_REPORT: artifacts,
@@ -46,13 +34,12 @@ class GetSampleAnalysis(komand.Action):
             Output.ANNOTATIONS_REPORT: annotations,
             Output.METADATA_REPORT: metadata,
         }
-
         return komand.helper.clean(report)
 
 
 def clean_data(analysis_data):
     """
-    Normilizes items from data for custom types
+    Normalizes items from data for custom types
     :param analysis_data API get analysis request
     :return:
     """
@@ -99,9 +86,7 @@ def clean_artifact(artifact_data):
                     # Clean sections
                     if v.get("forensics").get("sections", False):
                         if isinstance(v.get("forensics").get("sections"), dict):
-                            v["forensics"]["sections"] = [
-                                v.get("forensics").get("sections")
-                            ]
+                            v["forensics"]["sections"] = [v.get("forensics").get("sections")]
                     # Clean exports
                     exports = []
                     if v.get("forensics").get("exports", False):

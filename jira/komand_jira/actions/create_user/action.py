@@ -1,32 +1,27 @@
-import komand
-from .schema import CreateUserInput, CreateUserOutput
+import insightconnect_plugin_runtime
+from .schema import CreateUserInput, CreateUserOutput, Input, Output, Component
+
 # Custom imports below
 
 
-class CreateUser(komand.Action):
-
+class CreateUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='create_user',
-            description='Create User',
-            input=CreateUserInput(),
-            output=CreateUserOutput())
+            name="create_user", description=Component.DESCRIPTION, input=CreateUserInput(), output=CreateUserOutput(),
+        )
 
     def run(self, params={}):
         """Run action"""
-        notify = False
-        password = None
 
-        if params.get('notify'):
-            notify = params['notify']
-
-        if params.get('password'):
-            password = params['password']
+        username = ""
+        if not self.connection.is_cloud:
+            username = params[Input.USERNAME]
 
         success = self.connection.client.add_user(
-            username=params['username'],
-            email=params['email'],
-            password=password,
-            notify=notify,
+            fullname=params[Input.USERNAME],
+            email=params[Input.EMAIL],
+            password=params.get(Input.PASSWORD, None),
+            notify=params.get(Input.NOTIFY, False),
+            username=username,
         )
-        return {'success': success}
+        return {Output.SUCCESS: success}

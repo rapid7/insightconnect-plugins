@@ -12,7 +12,13 @@ class Input:
     
 
 class Output:
+    LISTS = "lists"
+    META = "meta"
+    PAGE = "page"
     SCAN_RESULTS = "scan_results"
+    STATS = "stats"
+    TASK = "task"
+    VERDICTS = "verdicts"
     
 
 class GetScanResultsInput(komand.Input):
@@ -44,15 +50,57 @@ class GetScanResultsOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "lists": {
+      "type": "object",
+      "title": "Lists",
+      "description": "Results of the lists",
+      "order": 4
+    },
+    "meta": {
+      "type": "object",
+      "title": "Meta",
+      "description": "Results of the meta",
+      "order": 5
+    },
+    "page": {
+      "type": "object",
+      "title": "Page",
+      "description": "Results of the page",
+      "order": 3
+    },
     "scan_results": {
       "$ref": "#/definitions/scan_results",
       "title": "Scan Results",
       "description": "Results of the scan report",
       "order": 1
+    },
+    "stats": {
+      "type": "object",
+      "title": "Stats",
+      "description": "Results of the stats",
+      "order": 6
+    },
+    "task": {
+      "type": "object",
+      "title": "Task",
+      "description": "Results of the task",
+      "order": 2
+    },
+    "verdicts": {
+      "type": "object",
+      "title": "Verdicts",
+      "description": "Results of the verdicts",
+      "order": 7
     }
   },
   "required": [
-    "scan_results"
+    "lists",
+    "meta",
+    "page",
+    "scan_results",
+    "stats",
+    "task",
+    "verdicts"
   ],
   "definitions": {
     "scan_results": {

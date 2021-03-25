@@ -6,10 +6,11 @@ from .schema import DeleteVolumeInput, DeleteVolumeOutput
 class DeleteVolume(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='delete_volume',
-            description='Deletes a volume (volume must be detached)',
+            name="delete_volume",
+            description="Deletes a volume (volume must be detached)",
             input=DeleteVolumeInput(),
-            output=DeleteVolumeOutput())
+            output=DeleteVolumeOutput(),
+        )
 
     def run(self, params={}):
         url = "https://api.digitalocean.com/v2/volumes/{volume_id}"
@@ -26,7 +27,7 @@ class DeleteVolume(komand.Action):
                 return {"success": True}
             else:
                 self.logger.error("Status code: %s, message: %s", response.status_code, response.json()["message"])
-                Exception('Unsuccessful status code received')
+                Exception("Unsuccessful status code received")
         except requests.exceptions.RequestException:
             self.logger.error("An unexpected error occurred during the API request")
             raise

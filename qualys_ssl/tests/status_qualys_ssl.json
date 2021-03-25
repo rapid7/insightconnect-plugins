@@ -1,9 +1,0 @@
-{
-  "body": {
-    "action": "status",
-    "input": {},
-    "meta": {}
-  },
-  "version": "v1",
-  "type": "action_start"
-}

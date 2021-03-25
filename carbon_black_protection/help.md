@@ -1,8 +1,8 @@
 # Description
 
-[Carbon Black Protection](https://www.carbonblack.com/products/cb-protection/) allows users to lock down and harden systems to prevent malware, ransomware, and more. The InsigthConnect plugin can ban and unban files, as well as manage approval requests.
+[VMware Carbon Black App Control](https://www.carbonblack.com/products/app-control/) allows users to lock down and harden systems to prevent malware, ransomware, and more. The InsightConnect plugin can ban and unban files, as well as manage approval requests.
 
-This plugin utilizes the [Carbon Black Protection API](https://developer.carbonblack.com/reference/enterprise-protection/7.2/rest-api/).
+This plugin utilizes the [VMware Carbon Black App Control API](https://developer.carbonblack.com/reference/enterprise-protection/7.2/rest-api/).
 
 # Key Features
 
@@ -12,7 +12,7 @@ This plugin utilizes the [Carbon Black Protection API](https://developer.carbonb
 
 # Requirements
 
-* Requires an API Key from Carbon Black Protection
+* Requires an API Key from VMware Carbon Black App Control
 
 # Documentation
 
@@ -549,11 +549,12 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-Carbon Black Protection schedules events to happen, therefore what you see in output may not be accurate as the Carbon Black Protection server may not yet have processed the event
+VMware Carbon Black App Control schedules events to happen, therefore what you see in output may not be accurate as the VMware Carbon Black App Control server may not yet have processed the event
 
 # Version History
 
-* 2.2.1 - New spec and help.md format for the Hub
+* 2.2.2 - Rebrand and update help references
+* 2.2.1 - New spec and help.md format for the Extension Library
 * 2.2.0 - Update to add Status to Resolve Approval Request | New action Get Approval Reqeust
 * 2.1.0 - Add Action: Create File Rule | Add Action: Get File Rule
 * 2.0.0 - Fix for Approve File Locally action | Fix for Unapprove File Locally action | Update to rename Unapprove Local Approval action to Unapprove File Locally
@@ -571,5 +572,5 @@ Carbon Black Protection schedules events to happen, therefore what you see in ou
 
 ## References
 
-* [Carbon Black Protection REST API](https://developer.carbonblack.com/reference/enterprise-protection/7.2/rest-api/)
+* [VMware Carbon Black App Control REST API](https://developer.carbonblack.com/reference/enterprise-protection/7.2/rest-api/)
 

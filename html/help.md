@@ -33,9 +33,17 @@ This action is used to convert an HTML document to DOCX.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|doc|string|None|True|Document to transform|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to DOCX</p></body></html>|
+
+Example input:
+
+```
+{
+  "doc": "\u003c!DOCTYPE html\u003e\u003chtml\u003e\u003chead\u003e\u003ctitle\u003eRapid7 InsightConnect\u003c/title\u003e\u003c/head\u003e\u003cbody\u003e\u003cp\u003eConvert HTML to DOCX\u003c/p\u003e\u003c/body\u003e\u003c/html\u003e"
+}
+```
 
 ##### Output
 
@@ -43,15 +51,31 @@ This action is used to convert an HTML document to DOCX.
 |----|----|--------|-----------|
 |docx|bytes|False|Docx File|
 
+Example output:
+
+```
+{
+  "docx": "UEsDBBQAAggIACEf91DPOFToaQEAAKgGAAA..."
+}
+```
+
 #### Markdown
 
 This action is used to convert an HTML document to Markdown.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|doc|string|None|True|Document to transform|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to Markdown</p></body></html>|
+
+Example input:
+
+```
+{
+  "doc": "\u003c!DOCTYPE html\u003e\u003chtml\u003e\u003chead\u003e\u003ctitle\u003eRapid7 InsightConnect\u003c/title\u003e\u003c/head\u003e\u003cbody\u003e\u003cp\u003eConvert HTML to Markdown\u003c/p\u003e\u003c/body\u003e\u003c/html\u003e"
+}
+```
 
 ##### Output
 
@@ -60,22 +84,48 @@ This action is used to convert an HTML document to Markdown.
 |markdown_contents|string|False|Markdown Contents|
 |markdown_file|bytes|False|Markdown File|
 
+Example output:
+
+```
+{
+  "markdown_file": "Q29udmVydCBIVE1MIHRvIE1hcmtkb3duCg==",
+  "markdown_contents": "Convert HTML to Markdown\n"
+}
+```
+
 #### HTML5
 
 This action is used to convert an HTML document to HTML5.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|doc|string|None|True|Document to transform|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to HTML5</p></body></html>|
+
+Example input:
+
+```
+{
+  "doc": "\u003c!DOCTYPE html\u003e\u003chtml\u003e\u003chead\u003e\u003ctitle\u003eRapid7 InsightConnect\u003c/title\u003e\u003c/head\u003e\u003cbody\u003e\u003cp\u003eConvert HTML to HTML5\u003c/p\u003e\u003c/body\u003e\u003c/html\u003e"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|html5_file|bytes|False|HTML5 File|
 |html5_contents|string|False|HTML5 Contents|
+|html5_file|bytes|False|HTML5 File|
+
+Example output:
+
+```
+{
+  "html5_contents": "&lt;!DOCTYPE html&gt;\n<html>\n<head>\n<title>\nRapid7 InsightConnect\n</title>\n</head>\n<body>\n<p>\nConvert HTML to HTML5\n</p>\n</body>\n</html>\n", 
+  "html5_file": "Jmx0OyFET0NUWVBFIGh0bWwmZ3Q7Cj..."
+}
+```
 
 #### PDF
 
@@ -83,9 +133,17 @@ This action is used to convert an HTML document to PDF.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|doc|string|None|True|Document to transform|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to PDF</p></body></html>|
+
+Example input:
+
+```
+{
+  "doc": "\u003c!DOCTYPE html\u003e\u003chtml\u003e\u003chead\u003e\u003ctitle\u003eRapid7 InsightConnect\u003c/title\u003e\u003c/head\u003e\u003cbody\u003e\u003cp\u003eConvert HTML to PDF\u003c/p\u003e\u003c/body\u003e\u003c/html\u003e"
+}
+```
 
 ##### Output
 
@@ -93,15 +151,31 @@ This action is used to convert an HTML document to PDF.
 |----|----|--------|-----------|
 |pdf|bytes|False|PDF File|
 
+Example output:
+
+```
+{
+  "pdf": "JVBERi0xLjUKJdDUxdgKNSAwIG9iago8PA..."
+}
+```
+
 #### Validate
 
 This action is used to validate an HTML document using the [W3 validator](https://validator.w3.org).
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|html_contents|string|None|True|HTML Contents|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|html_contents|string|None|True|HTML Contents|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect!</p></body></html>|
+
+Example input:
+
+```
+{
+  "html_contents": "\u003c!DOCTYPE html\u003e\u003chtml\u003e\u003chead\u003e\u003ctitle\u003eRapid7 InsightConnect\u003c/title\u003e\u003c/head\u003e\u003cbody\u003e\u003cp\u003eAutomate with InsightConnect!\u003c/p\u003e\u003c/body\u003e\u003c/html\u003e"
+}
+```
 
 ##### Output
 
@@ -109,15 +183,31 @@ This action is used to validate an HTML document using the [W3 validator](https:
 |----|----|--------|-----------|
 |validated|boolean|False|HTML Syntax Validation Status|
 
+Example output:
+
+```
+{
+  "validated": true
+}
+```
+
 #### EPUB
 
 This action is used to convert an HTML document to EPUB.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|doc|string|None|True|Document to transform|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to EPUB</p></body></html>|
+
+Example input:
+
+```
+{
+  "doc": "\u003c!DOCTYPE html\u003e\u003chtml\u003e\u003chead\u003e\u003ctitle\u003eRapid7 InsightConnect\u003c/title\u003e\u003c/head\u003e\u003cbody\u003e\u003cp\u003eConvert HTML to EPUB\u003c/p\u003e\u003c/body\u003e\u003c/html\u003e"
+}
+```
 
 ##### Output
 
@@ -125,16 +215,33 @@ This action is used to convert an HTML document to EPUB.
 |----|----|--------|-----------|
 |epub|bytes|False|Epub file|
 
+Example output:
+
+```
+{
+  "epub": "UEsDBBQAAggAAPAe91BvYassFAAAABQAAAA..."
+}
+```
+
 #### Text
 
 This action is used to strip an HTML string of all tags and return only the text.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|doc|string|None|True|Document to transform|None|
-|remove_scripts|boolean|None|False|Remove non-HTML scripts from the document|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect!</p></body></html>|
+|remove_scripts|boolean|None|False|Remove non-HTML scripts from the document|None|False|
+
+Example input:
+
+```
+{
+  "doc": "\u003c!DOCTYPE html\u003e\u003chtml\u003e\u003chead\u003e\u003ctitle\u003eRapid7 InsightConnect\u003c/title\u003e\u003c/head\u003e\u003cbody\u003e\u003cp\u003eAutomate with InsightConnect!\u003c/p\u003e\u003c/body\u003e\u003c/html\u003e",
+  "remove_scripts": false
+}
+```
 
 ##### Output
 
@@ -146,7 +253,7 @@ Example output:
 
 ```
 {
-  "text": "Yup, this is some text"
+  "text": "Automate with InsightConnect!"
 }
 ```
 
@@ -164,7 +271,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.2.1 - New spec and help.md format for the Hub
+* 1.2.2 - Update to v4 Python plugin runtime
+* 1.2.1 - New spec and help.md format for the Extension Library
 * 1.2.0 - Update to add the Remove Scripts option to Text
 * 1.1.0 - New action: Text
 * 1.0.1 - Add `utilities` plugin tag for Marketplace searchability

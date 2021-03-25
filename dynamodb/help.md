@@ -38,7 +38,7 @@ This action will insert the provided data into the specified table.
 
 Optionally, you can specify a ConditionExpression which can prevent Dynamo from accepting writes if the conditions
 are met. For example, if you had a primary key of "myid", you could set this to "attribute_not_exist(myid)" to reject
-the insert if a key with the same value as this object already existed. Otherwise, the default behvior of Dynamo is to
+the insert if a key with the same value as this object already existed. Otherwise, the default behavior of Dynamo is to
 overwrite the existing record.
 
 ##### Input
@@ -111,7 +111,8 @@ Any situation in which you provide a ConditionExpression and it causes the job t
 
 # Version History
 
-* 1.0.2 - New spec and help.md format for the Hub | Add missing title values for actions in plugin.spec.yaml
+* 1.0.3 - Correct spelling in help.md
+* 1.0.2 - New spec and help.md format for the Extension Library | Add missing title values for actions in plugin.spec.yaml
 * 1.0.1 - Set `params` input in Scan action to not required
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.2 - Clean up unsatisfactory debugging message

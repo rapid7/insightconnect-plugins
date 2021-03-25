@@ -157,7 +157,7 @@ To enable API access within Sophos XG, the setting is located in Backup & Firmwa
 
 # Version History
 
-* 2.0.1 - New spec and help.md format for the Hub
+* 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Update to new credential types
 * 1.0.0 - Support web server mode | Update to v2 Python plugin architecture
 * 0.1.0 - Initial plugin

@@ -1,4 +1,3 @@
-
 from urllib.parse import unquote
 
 
@@ -8,4 +7,4 @@ def decode_url(url: str) -> str:
     for param in split_url_params:
         if param.split("=")[0] == "url":
             return unquote(param.split("=")[1])
-    return ""
+    return url

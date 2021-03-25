@@ -289,10 +289,6 @@ This action is used to start a hunt on clients.
 |----|----|--------|-----------|
 |results|string|False|Issues found with TruffleHog|
 
-Example output:
-
-```
-```
 
 ### Triggers
 
@@ -308,7 +304,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.1 - New spec and help.md format for the Hub
+* 2.0.2 - Correct spelling in help.md
+* 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Add certificate validation to connection
 * 1.0.1 - Support web server mode
 * 1.0.0 - Initial plugin

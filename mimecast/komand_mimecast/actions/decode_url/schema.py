@@ -24,7 +24,7 @@ class DecodeUrlInput(komand.Input):
     "encoded_url": {
       "type": "string",
       "title": "Encoded URL",
-      "description": "The Mimecast encoded URL (e.g. https://protect-xx.mimecast.com/...)",
+      "description": "The Mimecast encoded URL",
       "order": 1
     }
   },

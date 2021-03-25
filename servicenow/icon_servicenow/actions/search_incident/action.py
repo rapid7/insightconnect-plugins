@@ -1,16 +1,16 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SearchIncidentInput, SearchIncidentOutput, Input, Output, Component
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class SearchIncident(komand.Action):
-
+class SearchIncident(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='search_incident',
-                description=Component.DESCRIPTION,
-                input=SearchIncidentInput(),
-                output=SearchIncidentOutput())
+            name="search_incident",
+            description=Component.DESCRIPTION,
+            input=SearchIncidentInput(),
+            output=SearchIncidentOutput(),
+        )
 
     def run(self, params={}):
         url = self.connection.incident_url
@@ -22,11 +22,8 @@ class SearchIncident(komand.Action):
         try:
             results = response["resource"].get("result")
         except KeyError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN,
-                                  data=response.text) from e
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text) from e
 
         system_ids = [result.get("sys_id") for result in results]
 
-        return {
-            Output.SYSTEM_IDS: system_ids
-        }
+        return {Output.SYSTEM_IDS: system_ids}

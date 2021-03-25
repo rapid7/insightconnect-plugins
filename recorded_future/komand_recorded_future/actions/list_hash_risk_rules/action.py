@@ -15,7 +15,7 @@ class ListHashRiskRules(komand.Action):
     def run(self, params={}):
         try:
             risklist = params.get("list")
-            query_headers = {"X-RFToken": self.connection.token}
+            query_headers = self.connection.headers
             results = requests.get(
                 "https://api.recordedfuture.com/v2/hash/riskrules",
                 headers=query_headers,

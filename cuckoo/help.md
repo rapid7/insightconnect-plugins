@@ -267,7 +267,7 @@ This action is used to return the status of the cuckoo server.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -418,7 +418,7 @@ This action is used to return VPN status.
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -435,7 +435,7 @@ This action is used to return a list with details on the analysis machines avail
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -633,7 +633,7 @@ This action is used to shut down the server if in debug mode and using the werkz
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -772,7 +772,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.2 - New spec and help.md format for the Hub
+* 1.0.2 - New spec and help.md format for the Extension Library
 * 1.0.1 - Bug fix for Submit Files where Submit ID was required
 * 1.0.0 - Support web server mode | Bug fix for testing outputs | Semver compliance
 * 0.2.3 - Bug fix for Cuckoo API version 2.0.5

@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    BUILD NUMBER = "build number"
+    BUILD_NUMBER = "build_number"
     NAME = "name"
     
 
@@ -22,7 +22,7 @@ class BuildInfoInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "build number": {
+    "build_number": {
       "type": "integer",
       "title": "Build Number",
       "description": "The build number you want detailed information on",
@@ -36,7 +36,7 @@ class BuildInfoInput(komand.Input):
     }
   },
   "required": [
-    "build number",
+    "build_number",
     "name"
   ]
 }
@@ -72,7 +72,7 @@ class BuildInfoOutput(komand.Output):
         },
         "built_on": {
           "type": "string",
-          "title": " Built On",
+          "title": "Built On",
           "description": "The server the build occurred on",
           "order": 9
         },

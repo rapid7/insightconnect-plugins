@@ -10,13 +10,14 @@ There are multiple ways to contribute beyond writing code. These include:
 - Submit an updated or brand new plugin!  We are always eager for new
   integrations or features. Don't know where to start? Check out the [developer documentation].
 
-Here is a short list of do's and don'ts to make sure *your* valuable contributions actually make
+Here is a short list of dos and don'ts to make sure *your* valuable contributions actually make
 it into production.  If you do not care to follow these rules, your contribution **will** be rejected. Sorry!
 
 ## Code Contributions
 
 - **Do** read the [developer documentation]
-- **Do** stick to the [Python PEP8] and [plugin style] guides.
+- **Do** install [pre-commit](https://pre-commit.com/) to ensure your style is [Black](https://github.com/psf/black).
+- **Do** stick to our [plugin style] guides.
 - **Do** follow the [50/72 rule] for Git commit messages.
 - **Do** license your code as MIT.
 - **Do** create a [topic branch] to work on. This helps ensure users are aware of commits on the branch being considered for merge, allows for a location for more commits to be offered without mingling with other contributor changes, and allows contributors to make progress while a PR is still being reviewed.
@@ -61,13 +62,13 @@ Finally, **thank you** for taking the few moments to read this far! You're alrea
 curve, so keep it up!
 
 [Code of Conduct]:./CODE_OF_CONDUCT.md
-[developer documentation]:https://komand.github.io/python/start.html
+[developer documentation]:https://docs.rapid7.com/insightconnect/getting-started/
 [Submit bugs and feature requests]:https://github.com/rapid7/insightconnect-plugins/issues
 [Report a security vulnerability in InsightConnect itself or its plugins]:https://www.rapid7.com/disclosure.jsp
 [Help fellow users with open issues]:https://github.com/rapid7/insightconnect-plugins/issues
 [help fellow committers test recent pull requests]:https://github.com/rapid7/insightconnect-plugins/pulls
 [Python PEP8]:https://www.python.org/dev/peps/pep-0008/
-[plugin style]:https://komand.github.io/python/style.html
+[plugin style]:https://docs.rapid7.com/insightconnect/style-guide/
 [50/72 rule]:http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 [Report a security vulnerability in Metasploit itself]:https://www.rapid7.com/disclosure.jsp
 [topic branch]:http://git-scm.com/book/en/Git-Branching-Branching-Workflows#Topic-Branches

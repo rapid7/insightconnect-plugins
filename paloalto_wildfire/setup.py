@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='paloalto_wildfire-rapid7-plugin',
-      version='1.1.1',
-      description='Palo Alto Wildfire is a cloud-based threat analysis service. Perform malware analysis with the Palo Alto Wildfire plugin for InsightConnect malware',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="paloalto_wildfire-rapid7-plugin",
+      version="1.1.2",
+      description="Perform malware analysis with Palo Alto Wildfire",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_paloalto_wildfire']

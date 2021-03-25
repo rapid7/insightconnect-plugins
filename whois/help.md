@@ -28,9 +28,17 @@ This action is used to retrieve data about a domain name.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|domain|string|None|True|Domain name to lookup|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|domain|string|None|True|Domain name to lookup|None|rapid7.com|
+
+Example input:
+
+```
+{
+  "domain": "rapid7.com"
+}
+```
 
 ##### Output
 
@@ -81,9 +89,19 @@ This action is used to retrieve data about an IP address.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|address|string|None|True|IP to Lookup|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|IP to Lookup|None|198.51.100.100|
+|registrar|string|Autodetect|False|Domain Registrar|['Autodetect', 'RIPE', 'ARIN', 'LACNIC', 'APNIC']|Autodetect|
+
+Example input:
+
+```
+{
+  "address": "198.51.100.100",
+  "registrar": "Autodetect"
+}
+```
 
 ##### Output
 
@@ -145,16 +163,18 @@ _This plugin does not contain any custom output types._
 
 Multiple records can be returned by the server, this plugin currently only returns the first unique records found.
 
-# Links
-
-## References
-
-_This plugin has no references._
-
 # Version History
 
-* 1.0.7 - Upgrade komand/python-whois version to 0.4.2 | Update whois.conf to support .in domains | Updated help.md for the Hub
-* 1.0.6 - New spec and help.md format for the Hub
+* 3.0.3 - Add PluginException in Domain and Address action when response is empty
+* 3.0.2 - Support non-UTF-8 responses in the Address action
+* 3.0.1 - Clean up help.md formatting
+* 3.0.0 - Add input `registrar` for manual server selection to Address Lookup action
+* 2.0.3 - Upgrade to latest Python plugin runtime | Define `cloud_ready` in spec
+* 2.0.2 - Fix issue where com.br style domains could crash the plugin
+* 2.0.1 - Update to v4 Python plugin runtime
+* 2.0.0 - Add example inputs | Fix capitalization in the title of the `last_updated` output.
+* 1.0.7 - Upgrade komand/python-whois version to 0.4.2 | Update whois.conf to support .in domains | Updated help.md for the Extension Library
+* 1.0.6 - New spec and help.md format for the Extension Library
 * 1.0.5 - Upgrade komand/python-whois version to 0.4.1 | Upgrade SDK
 * 1.0.4 - Fix variable name in domain lookup
 * 1.0.3 - Handle instances where domain name is prefixed with a protocol
@@ -169,6 +189,8 @@ _This plugin has no references._
 * 0.2.0 - Fix domain query and adjust output
 * 0.1.1 - Bugfixes and pagination support
 * 0.1.0 - Initial plugin
+
+# Links
 
 ## References
 

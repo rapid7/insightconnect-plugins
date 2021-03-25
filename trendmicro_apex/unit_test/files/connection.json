@@ -1,0 +1,11 @@
+{
+  "connection": {
+    "api_key": {
+      "secretKey": ""
+    },
+    "application_id": {
+      "secretKey": ""
+    },
+    "url": ""
+  }
+}

@@ -1,5 +1,4 @@
 class Asset:
-
     @staticmethod
     def assets(console_url, asset_id=None):
         """
@@ -46,9 +45,28 @@ class Asset:
         """
         return f"{console_url}/api/3/assets/{asset_id}/software"
 
+    @staticmethod
+    def asset_search(console_url):
+        """
+        Search for assets
+        :param console_url: URL to the InsightVM console
+        :return: url
+        """
+        return f"{console_url}/api/3/assets/search"
+
+    @staticmethod
+    def asset_vulnerability_solution(console_url, asset_id, vulnerability_id):
+        """
+        Returns the highest-superceding rollup solutions for a vulnerability on an asset.
+        :param console_url: URL to the InsightVM console
+        :param asset_id: ID of the asset with which to interact
+        :param vulnerability_id: ID of the vulnerability to get a solution for
+        :return:  url
+        """
+        return f"{console_url}/api/3/assets/{asset_id}/vulnerabilities/{vulnerability_id}/solution"
+
 
 class AssetGroup:
-
     @staticmethod
     def asset_groups(console_url, asset_group_id=None):
         """
@@ -61,6 +79,16 @@ class AssetGroup:
             return f"{console_url}/api/3/asset_groups/{asset_group_id}"
         else:
             return f"{console_url}/api/3/asset_groups"
+
+    @staticmethod
+    def asset_group_assets(console_url, asset_group_id=None):
+        """
+        Gets assets by site
+        :param console_url: URL to the InsightVM console
+        :param asset_group_id: ID of the site to get assets for
+        :return: pre-populated GET /api/3/asset_groups/{id}/assets
+        """
+        return f"{console_url}/api/3/asset_groups/{asset_group_id}/assets"
 
     @staticmethod
     def asset_group_search_criteria(console_url, asset_group_id):
@@ -88,7 +116,6 @@ class AssetGroup:
 
 
 class Scan:
-
     @staticmethod
     def site_scans(console_url, site_id):
         """
@@ -125,7 +152,6 @@ class Scan:
 
 
 class ScanEngine:
-
     @staticmethod
     def scan_engines(console_url, engine_id=None):
         """
@@ -151,7 +177,6 @@ class ScanEngine:
 
 
 class ScanEnginePool:
-
     @staticmethod
     def scan_engine_pools(console_url, engine_pool_id=None):
         """
@@ -181,7 +206,6 @@ class ScanEnginePool:
 
 
 class SharedSecret:
-
     @staticmethod
     def generate_shared_secret(console_url, time_to_live):
         """
@@ -194,7 +218,6 @@ class SharedSecret:
 
 
 class Site:
-
     @staticmethod
     def get_site_assets(console_url, site_id):
         """
@@ -284,7 +307,6 @@ class Site:
 
 
 class Tag:
-
     @staticmethod
     def tags(console_url, tag_id=None):
         """
@@ -352,7 +374,6 @@ class Tag:
 
 
 class VulnerabilityResult:
-
     @staticmethod
     def vulnerabilities_for_asset(console_url, asset_id):
         """
@@ -365,7 +386,6 @@ class VulnerabilityResult:
 
 
 class Administration:
-
     @staticmethod
     def get_info(console_url):
         """
@@ -377,7 +397,6 @@ class Administration:
 
 
 class Report:
-
     @staticmethod
     def create(console_url):
         return f"{console_url}/api/3/reports"
@@ -422,7 +441,6 @@ class Report:
 
 
 class Vulnerability:
-
     @staticmethod
     def vulnerability(console_url, vulnerability_id):
         """
@@ -454,7 +472,6 @@ class Vulnerability:
 
 
 class VulnerabilityException:
-
     @staticmethod
     def vulnerability_exceptions(console_url):
         """
@@ -473,6 +490,15 @@ class VulnerabilityException:
         :return: pre-populated GET /api/3/vulnerability_exceptions
         """
         return f"{console_url}/api/3/vulnerability_exceptions/{id}"
+
+    @staticmethod
+    def vulnerability_exceptions(console_url):
+        """
+        Get all vulnerability exceptions
+        :param console_url: URL to the InsightVM console
+        :return: pre-populated GET /api/3/vulnerability_exceptions
+        """
+        return f"{console_url}/api/3/vulnerability_exceptions"
 
     @staticmethod
     def vulnerability_exception_expiration(console_url, id):
@@ -496,7 +522,6 @@ class VulnerabilityException:
 
 
 class User:
-
     @staticmethod
     def users(console_url, user_id=None):
         """
@@ -540,7 +565,6 @@ class User:
 
 
 class AuthenticationSource:
-
     @staticmethod
     def authentication_sources(console_url, authentication_source_id=None):
         """
@@ -556,7 +580,6 @@ class AuthenticationSource:
 
 
 class Role:
-
     @staticmethod
     def roles(console_url, role_id=None):
         """

@@ -47,7 +47,7 @@ class ShowOutput(komand.Output):
     "response": {
       "$ref": "#/definitions/config",
       "title": "Response",
-      "description": "Response from PAN-OS",
+      "description": "Response from the firewall",
       "order": 1
     }
   },

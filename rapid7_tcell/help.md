@@ -11,7 +11,7 @@ This plugin utilizes the [tCell API](https://docs.tcell.io).
 
 # Requirements
 
-* Requires an API Key from Insight platform
+* Requires a user API Key from the Insight platform. See [tCell API](https://docs.tcell.io/reference#usage-tutorial) for more information on how to retrieve one.
 
 # Documentation
 
@@ -59,7 +59,7 @@ This action is used to fetch app name and app ID for all apps in a customer envi
 
 ##### Input
 
-This action does not contain any inputs.
+_This action does not contain any inputs._
 
 ##### Output
 
@@ -298,7 +298,7 @@ Example output:
         },
         {
           "directive": "connect-src",
-          "source": "https://api.tcell.io/"
+          "source": "https://us.api.insight.rapid7.com/tcell/api/v1/"
         },
         {
           "directive": "connect-src",
@@ -1080,7 +1080,7 @@ Example output:
           },
           {
             "directive": "connect-src",
-            "source": "https://api.tcell.io/"
+            "source": "https://us.api.insight.rapid7.com/tcell/api/v1/"
           },
           {
             "directive": "connect-src",
@@ -1389,7 +1389,7 @@ Example output:
           },
           {
             "directive": "connect-src",
-            "source": "https://api.tcell.io/"
+            "source": "https://us.api.insight.rapid7.com/tcell/api/v1/"
           },
           {
             "directive": "connect-src",
@@ -2244,7 +2244,8 @@ an entity with the exact same data (e.g. IP groups), and in that case an excepti
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.2 - Update `base_url` and authentication method to use Rapid7 Insight platform
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
 # Links
@@ -2254,4 +2255,3 @@ an entity with the exact same data (e.g. IP groups), and in that case an excepti
 * [tCell](https://www.tcell.io/)
 * [tCell API](https://docs.tcell.io)
 * [IP groups documentation](https://github.com/tcellio/tcell-deployment-examples/tree/master/api/ip-groups)
-

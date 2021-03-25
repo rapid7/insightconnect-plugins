@@ -9,7 +9,7 @@ status: []
 description: "Recorded Future arms threat analysts, security operators, and incident
   responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7
 InsightConnect, users can search domain lists, entity lists, and more"
-version: 1.5.3
+version: 4.0.4
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/recorded_future
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -27,6 +27,115 @@ hub_tags:
 enable_cache: false
 language: python
 types:
+  list:
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    type:
+      title: Type
+      type: string
+      description: Type
+      required: false
+  enterpriseLists:
+    added:
+      title: Added
+      type: string
+      description: Added
+      required: false
+    list:
+      title: List
+      type: list
+      description: List
+      required: false
+  threatLists:
+    description:
+      title: Description
+      type: string
+      description: Description
+      required: false
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    type:
+      title: Type
+      type: string
+      description: Type
+      required: false
+  context_entities:
+    description:
+      type: string
+      required: false
+    id:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    type:
+      type: string
+      required: false
+  labels:
+    id:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    type:
+      type: string
+      required: false
+  attributes:
+    context_entities:
+      type: "[]context_entities"
+      required: false
+    labels:
+      type: "[]labels"
+      required: false
+    note_entities:
+      type: "[]labels"
+      required: false
+    published:
+      type: string
+      required: false
+    text:
+      type: string
+      required: false
+    title:
+      type: string
+      required: false
+    topic:
+      type: context_entities
+      required: false
+    validated_on:
+      type: string
+      required: false
+    validation_urls:
+      type: "[]labels"
+      required: false
+  analystNote:
+    attributes:
+      type: attributes
+      required: false
+    id:
+      type: string
+      required: false
+    source:
+      type: labels
+      required: false
   counts:
     count:
       type: integer
@@ -52,7 +161,7 @@ types:
       type: string
       required: false
     value:
-      type: integer
+      type: float
       required: false
   entities:
     count:
@@ -70,7 +179,7 @@ types:
       required: false
   evidenceDetails:
     criticality:
-      type: integer
+      type: number
       required: false
     criticalityLabel:
       title: Criticality Label
@@ -88,7 +197,7 @@ types:
       required: false
   risk:
     criticality:
-      type: integer
+      type: number
       required: false
     criticalityLabel:
       title: Criticality Label
@@ -144,7 +253,7 @@ types:
       type: string
       required: false
     criticality:
-      type: integer
+      type: number
       required: false
     criticalityLabel:
       type: string
@@ -166,7 +275,7 @@ types:
       type: string
       required: false
     score:
-      type: integer
+      type: float
       required: false
     published:
       type: string
@@ -180,6 +289,27 @@ types:
     accessVector:
       title: Access Vector
       type: string
+      required: false
+    version:
+      type: string
+      required: false
+  cvssv3:
+    attackComplexity:
+      type: string
+      required: false
+    attackVector:
+      type: string
+      required: false
+  rawrisk:
+    rule:
+      title: "Rule"
+      type: string
+      description: "Rule"
+      required: false
+    timestamp:
+      title: "Timestamp"
+      type: string
+      description: "Timestamp"
       required: false
   vulnerability_search_data:
     counts:
@@ -225,6 +355,22 @@ types:
       required: false
     timestamps:
       type: timestamps
+      required: false
+    rawrisk:
+      type: '[]rawrisk'
+      required: false
+    commonNames:
+      type: '[]string'
+      required: false
+    cvssv3:
+      type: cvssv3
+      required: false
+    relatedLinks:
+      type: '[]string'
+      required: false
+    analystNotes:
+      title: Analyst Notes
+      type: '[]analystNote'
       required: false
   location_data:
     continent:
@@ -341,6 +487,48 @@ types:
       description: Score
       type: integer
       required: false
+  review:
+    status:
+      type: string
+      required: false
+  rule:
+    id:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    url:
+      type: string
+      required: false
+  alert:
+    counts:
+      type: counts
+      required: false
+    entities:
+      type: "[]entities"
+      required: false
+    id:
+      type: string
+      required: false
+    review:
+      type: review
+      required: false
+    rule:
+      type: rule
+      required: false
+    title:
+      type: string
+      required: false
+    triggered:
+      type: string
+      required: false
+    type:
+      type: string
+      required: false
+    url:
+      type: string
+      required: false
 
 connection:
   api_key:
@@ -348,6 +536,8 @@ connection:
     type: credential_secret_key
     description: API Key
     required: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
+
 actions:
   download_domain_risk_list:
     title: Download Domain Risk List
@@ -355,7 +545,7 @@ actions:
       rule
     input:
       list:
-        description: The risk list to retrieve
+        description: The risk list to retrieve, leaving the list parameter blank results in the default risk list
         type: string
         enum:
         - active_phishing_url
@@ -381,6 +571,7 @@ actions:
         - typosquat_similarity__dns_sandwich
         - typosquat_similarity__typo_or_homograph
         required: false
+        example: active_phishing_url
     output:
       risk_list:
         type: object
@@ -390,6 +581,7 @@ actions:
     title: List Domain Risk Rules
     description: This action is used to list available filtration rules for domain
       risk lists
+    input:
     output:
       risk_rules:
         type: '[]risk_rule'
@@ -404,12 +596,14 @@ actions:
         type: number
         description: Number of results to retrieve, up to 100
         required: true
+        example: 10
       from:
         title: Offset
         type: number
         description: Number of initial records to skip
         default: 0
         required: true
+        example: 0
       orderby:
         title: Order By
         description: Which property to sort the results by
@@ -425,6 +619,7 @@ actions:
         - Sixtydayshits
         - Totalhits
         required: true
+        example: Riskscore
       direction:
         title: Result Direction
         description: Sort results ascending/descending
@@ -434,11 +629,86 @@ actions:
         - desc
         default: asc
         required: true
+        example: asc
       parent:
         title: Parent
         description: Parent domain, if any
         type: string
         required: true
+        example: example.com
+      riskRule:
+        title: Risk Rule
+        description: Filters the results by risk rule
+        type: string
+        enum:
+        - Historically Reported by Insikt Group
+        - Newly Registered Certificate With Potential for Abuse - DNS Sandwich
+        - Newly Registered Certificate With Potential for Abuse - Typo or Homograph
+        - C&C Nameserver
+        - C&C DNS Name
+        - C&C URL
+        - Compromised URL
+        - Historical COVID-19-Related Domain Lure
+        - Recently Resolved to Host of Many DDNS Names
+        - Historically Reported as a Defanged DNS Name
+        - Historically Reported by DHS AIS
+        - Recent Fast Flux DNS Name
+        - Historically Reported Fraudulent Content
+        - Historically Reported in Threat List
+        - Historically Linked to Cyber Attack
+        - Historical Malware Analysis DNS Name
+        - Historically Detected Malware Operation
+        - Historically Detected Cryptocurrency Mining Techniques
+        - Blacklisted DNS Name
+        - Historical Phishing Lure
+        - Historically Detected Phishing Techniques
+        - Active Phishing URL
+        - Recorded Future Predictive Risk Model
+        - Historical Punycode Domain
+        - Ransomware Distribution URL
+        - Ransomware Payment DNS Name
+        - Recently Reported by Insikt Group
+        - Recent COVID-19-Related Domain Lure - Malicious
+        - Recent COVID-19-Related Domain Lure - Suspicious
+        - Recently Reported as a Defanged DNS Name
+        - Recently Reported by DHS AIS
+        - Recently Reported Fraudulent Content
+        - Recently Linked to Cyber Attack
+        - Recent Malware Analysis DNS Name
+        - Recently Detected Malware Operation
+        - Recently Detected Cryptocurrency Mining Techniques
+        - Recent Phishing Lure - Malicious
+        - Recent Phishing Lure - Suspicious
+        - Recently Detected Phishing Techniques
+        - Recent Punycode Domain
+        - Recently Referenced by Insikt Group
+        - Recently Reported Spam or Unwanted Content
+        - URL Recently Linked to Suspicious Content
+        - Recent Threat Researcher
+        - Recent Typosquat Similarity - DNS Sandwich
+        - Recent Typosquat Similarity - Typo or Homograph
+        - Recently Active Weaponized Domain
+        - Recently Defaced Site
+        - Historically Referenced by Insikt Group
+        - Recently Resolved to Malicious IP
+        - Recently Resolved to Suspicious IP
+        - Recently Resolved to Unusual IP
+        - Recently Resolved to Very Malicious IP
+        - Trending in Recorded Future Analyst Community
+        - Historically Reported Spam or Unwanted Content
+        - URL Historically Linked to Suspicious Content
+        - Historical Threat Researcher
+        - Historical Typosquat Similarity - DNS Sandwich
+        - Historical Typosquat Similarity - Typo or Homograph
+        - Historically Active Weaponized Domain
+        required: false
+        example: Active Phishing URL
+      riskScore:
+        title: Risk Score
+        description: Filters the results by risk score
+        type: string
+        required: false
+        example: "[1,100]"
     output:
       data:
         type: search_data
@@ -454,16 +724,13 @@ actions:
         type: string
         description: Domain
         required: true
-      fields:
-        title: Fields
-        description: List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities" , "risk" , "timestamps"]
-        type: "[]string"
-        required: false
+        example: example.com
       comment:
         title: Comment
         description: Add a comment to a domain
         type: string
         required: false
+        example: Domain look up performed by InsightConnect
     output:
       entity:
         type: entity
@@ -476,7 +743,7 @@ actions:
       analystNotes:
         title: "Analyst Notes"
         description: "Notes from an analyst"
-        type: "[]string"
+        type: "[]analystNote"
         required: false
       counts:
         title: "Counts"
@@ -506,12 +773,17 @@ actions:
       threatLists:
         title: "Threat Lists"
         description: "Threat lists"
-        type: "[]string"
+        type: "[]threatLists"
         required: false
       risk:
         title: "Risk"
         description: "Risk"
         type: risk
+        required: false
+      enterpriseLists:
+        title: Enterprise Lists
+        description: Enterprise lists
+        type: "[]enterpriseLists"
         required: false
   search_entity_lists:
     title: Search Entity Lists
@@ -522,6 +794,7 @@ actions:
         type: string
         description: Freetext search
         required: true
+        example: example
     output:
       entities:
         type: '[]entity'
@@ -535,6 +808,7 @@ actions:
         type: string
         required: true
         description: Entity list ID, obtained from the 'Search Entity lists' action
+        example: "report:Oe5eg5"
     output:
       entities:
         type: '[]entity'
@@ -546,7 +820,7 @@ actions:
       risk rule
     input:
       list:
-        description: The risk list to retrieve
+        description: The risk list to retrieve, leaving the list parameter blank results in the default risk list
         type: string
         enum:
         - large
@@ -557,6 +831,7 @@ actions:
         - positive_malware_verdict
         - threat_researcher
         required: false
+        example: positive_malware_verdict
     output:
       risk_list:
         type: object
@@ -566,6 +841,7 @@ actions:
     title: List Hash Risk Rules
     description: This action is used to list available filtration rules for hash risk
       lists
+    input:
     output:
       risk_rules:
         type: '[]risk_rule'
@@ -580,12 +856,14 @@ actions:
         type: number
         description: Number of results to retrieve, up to 100
         required: true
+        example: 10
       from:
         title: Offset
         type: number
         description: Number of initial records to skip
         default: 0
         required: true
+        example: 0
       orderby:
         title: Order By
         description: Which property to sort the results by
@@ -594,7 +872,6 @@ actions:
         - Created
         - Lastseen
         - Firstseen
-        - Lastseen
         - Modified
         - Riskscore
         - Rules
@@ -602,6 +879,7 @@ actions:
         - Sixtydayshits
         - Totalhits
         required: true
+        example: Riskscore
       direction:
         title: Result Direction
         description: Sort results ascending/descending
@@ -611,6 +889,7 @@ actions:
         - desc
         default: asc
         required: true
+        example: asc
       algorithm:
         title: Algorithm
         description: Hashing algorithm to search by
@@ -620,6 +899,33 @@ actions:
         - SHA-1
         - SHA-256
         required: true
+        example: SHA-1
+      riskRule:
+        title: Risk Rule
+        description: Filters the results by risk rule
+        type: string
+        enum:
+        - Reported by Insikt Group
+        - Historically Reported in Threat List
+        - Linked to Cyber Attack
+        - Linked to Malware
+        - Linked to Attack Vector
+        - Linked to Vulnerability
+        - Malware SSL Certificate Fingerprint
+        - Observed in Underground Virus Testing Sites
+        - Positive Malware Verdict
+        - Recently Active Targeting Vulnerabilities in the Wild
+        - Referenced by Insikt Group
+        - Trending in Recorded Future Analyst Community
+        - Threat Researcher
+        required: false
+        example: Positive Malware Verdict
+      riskScore:
+        title: Risk Score
+        description: Filters the results by risk score
+        type: string
+        required: false
+        example: "[1,100]"
     output:
       data:
         type: search_data
@@ -634,16 +940,13 @@ actions:
         type: string
         description: Hash
         required: true
-      fields:
-        title: "Fields"
-        description: List of fields to include with results e.g ["timestamps", "sightings", "threatLists", "analystNotes", "counts", "entity", "hashAlgorithm", "intelCard", "metrics", "relatedEntities", "risk", "timestamps"]
-        type: "[]string"
-        required: false
+        example: 44d88612fea8a8f36de82e1278abb02f
       comment:
         title: Comment
         description: Add a comment to a hash
         type: string
         required: false
+        example: Hash look up performed by InsightConnect
     output:
       entity:
         type: entity
@@ -698,14 +1001,18 @@ actions:
         description: "Risk"
         type: risk
         required: false
-
+      enterpriseLists:
+        title: Enterprise Lists
+        description: Enterprise lists
+        type: "[]enterpriseLists"
+        required: false
   download_IP_addresses_risk_list:
     title: Download IP Addresses Risk List
     description: This action is used to fetch a risk list of the IP addresses that
       match a specified filtration rule
     input:
       list:
-        description: The risk list to retrieve
+        description: The risk list to retrieve, leaving the list parameter blank results in the default risk list
         type: string
         enum:
         - current_cc_server
@@ -748,6 +1055,7 @@ actions:
         - unusual_ip
         - vulnerable_host
         required: false
+        example: malware_delivery
     output:
       risk_list:
         type: object
@@ -757,6 +1065,7 @@ actions:
     title: List IP Addresses Risk Rules
     description: This action is used to list available filtration rules for IP address
       risk lists
+    input:
     output:
       risk_rules:
         type: '[]risk_rule'
@@ -770,12 +1079,14 @@ actions:
         type: number
         description: Number of results to retrieve, up to 100
         required: true
+        example: 10
       from:
         title: Offset
         type: number
         description: Number of initial records to skip
         default: 0
         required: true
+        example: 0
       orderby:
         title: Order By
         description: Which property to sort the results by
@@ -791,6 +1102,7 @@ actions:
         - Sixtydayshits
         - Totalhits
         required: true
+        example: Lastseen
       direction:
         title: Result Direction
         description: Sort results ascending/descending
@@ -800,11 +1112,70 @@ actions:
         - desc
         default: asc
         required: true
+        example: asc
       ip_range:
         title: IP Range
         description: IP address range to search
         type: string
         required: true
+        example: 198.51.100.0/24
+      riskRule:
+        title: Risk Rule
+        description: Filters the results by risk rule
+        type: string
+        enum:
+        - Threat Actor Used Infrastructure
+        - Historically Reported by Insikt Group
+        - Inside Possible Bogus BGP Route
+        - Historical Botnet Traffic
+        - Nameserver for C&C Server
+        - Historical C&C Server
+        - Cyber Exploit Signal - Critical
+        - Cyber Exploit Signal - Important
+        - Cyber Exploit Signal - Medium
+        - Recent Host of Many DDNS Names
+        - Historically Reported as a Defanged IP
+        - Historically Reported by DHS AIS
+        - Resolution of Fast Flux DNS Name
+        - Historically Reported in Threat List
+        - Historical Honeypot Sighting
+        - Honeypot Host
+        - Recently Active C&C Server
+        - Recent C&C Server
+        - Historically Linked to Intrusion Method
+        - Historically Linked to APT
+        - Historically Linked to Cyber Attack
+        - Malicious Packet Source
+        - Malware Delivery
+        - Historical Multicategory Blacklist
+        - Historical Open Proxies
+        - Phishing Host
+        - Historical Positive Malware Verdict
+        - Recorded Future Predictive Risk Model
+        - Actively Communicating C&C Server
+        - Recently Reported by Insikt Group
+        - Recent Spam Source
+        - Recent SSH/Dictionary Attacker
+        - Recent Bad SSL Association
+        - Recent Threat Researcher
+        - Recently Defaced Site
+        - Historically Referenced by Insikt Group
+        - Trending in Recorded Future Analyst Community
+        - Historical Spam Source
+        - Historical SSH/Dictionary Attacker
+        - Historical Bad SSL Association
+        - Historical Threat Researcher
+        - Tor Node
+        - Unusual IP
+        - Vulnerable Host
+        required: false
+        example: Malware Delivery
+      riskScore:
+        title: Risk Score
+        description: Filters the results by risk score
+        type: string
+        required: false
+        example: "[1,100]"
     output:
       data:
         type: search_data
@@ -819,16 +1190,13 @@ actions:
         description: IP address
         type: string
         required: true
-      fields:
-        title: Fields
-        description: List of fields to include with results e.g ["sightings", "threatLists", "analystNotes", "counts", "entity", "intelCard", "metrics", "relatedEntities", "riskyCIDRIPs","risk", "location", "timestamps"]
-        type: "[]string"
-        required: false
+        example: 198.51.100.100
       comment:
         title: Comment
         description: Add comment to IP address lookup for Recorded Future
         type: string
         required: false
+        example: IP look up performed by InsightConnect
     output:
       entity:
         type: entity
@@ -871,7 +1239,7 @@ actions:
       threatLists:
         title: "Threat Lists"
         description: "Threat lists"
-        type: "[]string"
+        type: "[]threatLists"
         required: false
       location:
         title: "Location"
@@ -888,6 +1256,11 @@ actions:
         description: Risky CIDR IPs
         type: "[]riskyCIDRIP"
         required: false
+      enterpriseLists:
+        title: Enterprise Lists
+        description: Enterprise lists
+        type: "[]enterpriseLists"
+        required: false
       found:
         title: Found
         description: Has the IP been found in Recorded Future
@@ -897,21 +1270,36 @@ actions:
     title: Search Malware
     description: This action is used to search for data related to malware
     input:
+      list:
+        title: List
+        type: string
+        description: Filters the results by list ID
+        required: false
+        example: fKXuF0
+      firstSeen:
+        title: First Seen
+        type: string
+        description: Filters the results by first seen
+        required: false
+        example: 2016-06-15 07:54:38.286000
       freetext:
         title: Text
         type: string
         description: Freetext search
         required: false
+        example: example
       limit:
         type: number
         description: Number of results to retrieve, up to 100
         required: true
+        example: 10
       from:
         title: Offset
         type: number
         description: Number of initial records to skip
         default: 0
         required: true
+        example: 0
       orderby:
         title: Order By
         description: Which property to sort the results by
@@ -927,6 +1315,7 @@ actions:
         - Sixtydayshits
         - Totalhits
         required: true
+        example: Riskscore
       direction:
         title: Result Direction
         description: Sort results ascending/descending
@@ -936,6 +1325,7 @@ actions:
         - desc
         default: asc
         required: true
+        example: asc
     output:
       data:
         type: search_data
@@ -951,6 +1341,7 @@ actions:
         description: Malware ID
         type: string
         required: true
+        example: ShciZX
     output:
       entity:
         type: entity
@@ -966,7 +1357,7 @@ actions:
       a specified filtration rule
     input:
       list:
-        description: The risk list to retrieve
+        description: The risk list to retrieve, leaving the list parameter blank results in the default risk list
         type: string
         enum:
         - cyber_exploit_signal_critical
@@ -990,6 +1381,7 @@ actions:
         - recently_linked_to_remote_access_trojan
         - web_reporting_prior_to_nvd_disclosure
         required: false
+        example: nist_severity_critical
     output:
       risk_list:
         type: object
@@ -999,6 +1391,7 @@ actions:
     title: List Vulnerability Risk Rules
     description: This action is used to retrieve available filtration rules for vulnerability
       risk lists
+    input:
     output:
       risk_rules:
         type: '[]risk_rule'
@@ -1012,12 +1405,14 @@ actions:
         type: number
         description: Number of results to retrieve, up to 100
         required: true
+        example: 10
       from:
         title: Offset
         type: number
         description: Number of initial records to skip
         default: 0
         required: true
+        example: 0
       orderby:
         title: Order By
         description: Which property to sort the results by
@@ -1033,6 +1428,7 @@ actions:
         - Sixtydayshits
         - Totalhits
         required: true
+        example: Riskscore
       direction:
         title: Result Direction
         description: Sort results ascending/descending
@@ -1042,11 +1438,64 @@ actions:
         - desc
         default: asc
         required: true
+        example: asc
       freetext:
         title: Text
         description: Text query
         type: string
         required: true
+        example: example
+      riskRule:
+        title: Risk Rule
+        description: Filters the results by risk rule
+        type: string
+        enum:
+        - Historically Reported by Insikt Group
+        - Web Reporting Prior to CVSS Score
+        - Cyber Exploit Signal - Critical
+        - Cyber Exploit Signal - Important
+        - Cyber Exploit Signal - Medium
+        - Historical Suspected Exploit/Tool Development in the Wild
+        - Historical Observed Exploit/Tool Development in the Wild
+        - Historically Exploited in the Wild by Malware
+        - Linked to Historical Cyber Exploit
+        - Historically Linked to Exploit Kit
+        - Historically Linked to Malware
+        - Historically Linked to Remote Access Trojan
+        - Historically Linked to Ransomware
+        - Linked to Recent Cyber Exploit
+        - Recently Linked to Exploit Kit
+        - Recently Linked to Malware
+        - Recently Linked to Remote Access Trojan
+        - Recently Linked to Ransomware
+        - Exploited in the Wild by Malware
+        - NIST Severity - Critical
+        - Duplicate of Vulnerability in NVD
+        - NIST Severity - High
+        - NIST Severity - Low
+        - NIST Severity - Medium
+        - Web Reporting Prior to NVD Disclosure
+        - Historical Unverified Proof of Concept Available
+        - Historical Verified Proof of Concept Available
+        - Historical Verified Proof of Concept Available Using Remote Execution
+        - Recently Reported by Insikt Group
+        - Recent Suspected Exploit/Tool Development in the Wild
+        - Exploited in the Wild by Recently Active Malware
+        - Recent Unverified Proof of Concept Available
+        - Recent Verified Proof of Concept Available
+        - Recent Verified Proof of Concept Available Using Remote Execution
+        - Recently Referenced by Insikt Group
+        - Recently Linked to Penetration Testing Tools
+        - Historically Referenced by Insikt Group
+        - Historically Linked to Penetration Testing Tools
+        required: false
+        example: NIST Severity - Critical
+      riskScore:
+        title: Risk Score
+        description: Filters the results by risk score
+        type: string
+        required: false
+        example: "[1,100]"
     output:
       data:
         type: vulnerability_search_data
@@ -1061,6 +1510,7 @@ actions:
         description: CVE or RF ID
         type: string
         required: true
+        example: CVE-2014-0160
     output:
       data:
         type: vulnerability_search_data
@@ -1075,16 +1525,13 @@ actions:
         type: string
         description: URL
         required: true
-      fields:
-        title: Fields
-        description: List of fields to include with results e.g ["sightings", "analystNotes", "counts", "entity", "metrics", "relatedEntities", "risk", "timestamps"]
-        type: "[]string"
-        required: false
+        example: https://example.com
       comment:
         title: Comment
         description: Add a comment to an IP address lookup for Recorded Future
         type: string
         required: false
+        example: URL look up performed by InsightConnect
     output:
       entity:
         type: entity
@@ -1124,3 +1571,189 @@ actions:
         description: Risk
         type: risk
         required: false
+      enterpriseLists:
+        title: Enterprise Lists
+        description: Enterprise lists
+        type: "[]enterpriseLists"
+        required: false
+  lookup_alert:
+    title: Lookup Alert
+    description: Get information about an Alert
+    input:
+      alert_id:
+        title: Alert ID
+        description: Alert ID
+        type: string
+        example: fhS1El
+        required: true
+    output:
+      alert:
+        title: Alert
+        description: Alert Details
+        type: alert
+        required: true
+  list_url_risk_rules:
+    title: List URL Risk Rules
+    description: List available filtration rules for URL risk lists
+    output:
+      risk_rules:
+        title: Risk Rules
+        description: Risk Rules for URL
+        type: '[]risk_rule'
+        required: true
+  search_urls:
+    title: Search URLs
+    description: Search for data related to URLs
+    input:
+      limit:
+        title: Limit
+        description: Number of results to retrieve, up to 100
+        type: number
+        required: false
+        default: 10
+        example: 10
+      from:
+        title: Offset
+        description: Number of initial records to skip
+        type: number
+        required: false
+        example: 0
+      orderby:
+        title: Order By
+        description: Which property to sort the results by
+        type: string
+        enum:
+          - Created
+          - Criticality
+          - Lastseen
+          - Firstseen
+          - Modified
+          - Riskscore
+          - Rules
+          - Sevendayshits
+          - Sixtydayshits
+          - Totalhits
+        required: false
+        example: Riskscore
+      direction:
+        title: Result Direction
+        description: Sort results ascending/descending
+        type: string
+        enum:
+          - asc
+          - desc
+        required: false
+        example: asc
+      riskScore:
+        title: Risk Score
+        description: Risk score of data
+        type: string
+        required: false
+        example: "[0,100]"
+      riskRule:
+        title: Risk Rule
+        description: Risk rule od data
+        type: string
+        enum:
+          - Historically Reported by Insikt Group
+          - C&C URL
+          - Compromised URL
+          - Historically Reported as a Defanged URL
+          - Historically Reported by DHS AIS
+          - Historically Reported Fraudulent Content
+          - Historically Reported in Threat List
+          - Historically Detected Malicious Browser Exploits
+          - Historically Detected Malware Distribution
+          - Historically Detected Cryptocurrency Mining Techniques
+          - Historically Detected Phishing Techniques
+          - Active Phishing URL
+          - Positive Malware Verdict
+          - Ransomware Distribution URL
+          - Recently Reported by Insikt Group
+          - Recently Reported as a Defanged URL
+          - Recently Reported by DHS AIS
+          - Recently Reported Fraudulent Content
+          - Recently Detected Malicious Browser Exploits
+          - Recently Detected Malware Distribution
+          - Recently Detected Cryptocurrency Mining Techniques
+          - Recently Detected Phishing Techniques
+          - Recently Referenced by Insikt Group
+          - Recently Reported Spam or Unwanted Content
+          - Recently Detected Suspicious Content
+          - Recently Active URL on Weaponized Domain
+          - Historically Referenced by Insikt Group
+          - Historically Reported Spam or Unwanted Content
+          - Historically Detected Suspicious Content
+        required: false
+        example: Historically Reported by Insikt Group
+    output:
+      data:
+        title: Data
+        description: Search result
+        type: search_data
+        required: true
+  download_url_risk_list:
+    title: Download URL Risk List
+    description: Returns a risk list of URLs matching a filtration
+    input:
+      list:
+        title: List
+        description: The risk list to retrieve, left this field blank to retrieve default risk list
+        type: string
+        required: false
+        enum:
+          - Historically Reported by Insikt Group
+          - Compromised URL
+          - Historically Reported as a Defanged URL
+          - Historically Reported by DHS AIS
+          - Historically Reported Fraudulent Content
+          - Historically Reported in Threat List
+          - Large
+          - Historically Detected Malicious Browser Exploits
+          - Historically Detected Malware Distribution
+          - Historically Detected Cryptocurrency Mining Techniques
+          - Historically Detected Phishing Techniques
+          - Active Phishing URL
+          - Positive Malware Verdict
+          - Ransomware Distribution URL
+          - Recently Reported by Insikt Group
+          - Recently Reported as a Defanged URL
+          - Recently Reported by DHS AIS
+          - Recently Reported Fraudulent Content
+          - Recently Detected Malicious Browser Exploits
+          - Recently Detected Malware Distribution
+          - Recently Detected Cryptocurrency Mining Techniques
+          - Recently Detected Phishing Techniques
+          - Recently Referenced by Insikt Group
+          - Recently Reported Spam or Unwanted Content
+          - Recently Detected Suspicious Content
+          - Recently Active URL on Weaponized Domain
+          - Historically Referenced by Insikt Group
+          - Historically Reported Spam or Unwanted Content
+          - Historically Detected Suspicious Content
+        example: Historically Reported by Insikt Group
+    output:
+      risk_list:
+        title: Risk List
+        description: Risk list of matching URLs
+        type: object
+        required: true
+
+triggers:
+  get_new_alerts:
+    title: Get New Alerts
+    description: Get New Alerts
+    input:
+      frequency:
+        title: Frequency
+        description: Frequency (in seconds)
+        type: int
+        default: 10
+        example: 10
+        required: true
+    output:
+      alert:
+        title: Alert
+        description: Alert
+        type: alert
+        required: true

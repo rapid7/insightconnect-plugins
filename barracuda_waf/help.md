@@ -1777,7 +1777,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.0.0 - New spec and help.md format for the Hub | Fix spelling of variable titled Persistence Method
+* 2.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Persistence Method
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.0 - Initial plugin
 

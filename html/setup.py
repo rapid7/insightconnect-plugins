@@ -2,13 +2,13 @@
 from setuptools import setup, find_packages
 
 
-setup(name='html-rapid7-plugin',
-      version='1.2.1',
-      description='Validate HTML, convert a HTML document to another format, or strip a HTML document of all tags',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="html-rapid7-plugin",
+      version="1.2.2",
+      description="Validate HTML, convert a HTML document to another format, or strip a HTML document of all tags",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
-      install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
+      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/icon_html']
       )

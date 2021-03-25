@@ -4,6 +4,7 @@ import json
 
 
 class Input:
+    CHASE_REFERRALS = "chase_referrals"
     HOST = "host"
     PORT = "port"
     USE_SSL = "use_ssl"
@@ -16,10 +17,17 @@ class ConnectionSchema(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "chase_referrals": {
+      "type": "boolean",
+      "title": "Chase Referrals",
+      "description": "Allows the plugin to follow referrals from the specified Active Directory server to other Active Directory servers",
+      "default": true,
+      "order": 5
+    },
     "host": {
       "type": "string",
       "title": "Host",
-      "description": "Server Host, e.g. ldap://192.5.5.5. Must use either ldap:// or ldaps:// for SSL prefix",
+      "description": "Server Host, e.g. example.com",
       "order": 1
     },
     "port": {
@@ -43,6 +51,7 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
+    "chase_referrals",
     "host",
     "port",
     "use_ssl",
@@ -60,12 +69,14 @@ class ConnectionSchema(komand.Input):
           "title": "Password",
           "displayType": "password",
           "description": "The password",
-          "format": "password"
+          "format": "password",
+          "order": 2
         },
         "username": {
           "type": "string",
           "title": "Username",
-          "description": "The username to log in with"
+          "description": "The username to log in with",
+          "order": 1
         }
       },
       "required": [

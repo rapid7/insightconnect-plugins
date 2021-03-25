@@ -4,10 +4,10 @@ import komand
 from komand_sleep import connection, actions, triggers
 
 
-Name = 'Sleep'
-Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'Sleep allows Rapid7 InsightConnect users to suspend workflow execution for a specified period of time. Popular uses are to avoid rate limiting by a service or to wait for processing by a service to complete'
+Name = "Sleep"
+Vendor = "rapid7"
+Version = "1.0.2"
+Description = "Sleep allows Rapid7 InsightConnect users to suspend workflow execution for a specified period of time. Popular uses are to avoid rate limiting by a service or to wait for processing by a service to complete"
 
 
 class ICONSleep(komand.Plugin):

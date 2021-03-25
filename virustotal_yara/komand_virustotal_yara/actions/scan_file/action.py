@@ -1,18 +1,19 @@
 import komand
 from .schema import ScanFileInput, ScanFileOutput
+
 # Custom imports below
 import yara
 import base64
 
 
 class ScanFile(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='scan_file',
-                description='Scans file using Yara',
-                input=ScanFileInput(),
-                output=ScanFileOutput())
+            name="scan_file",
+            description="Scans file using Yara",
+            input=ScanFileInput(),
+            output=ScanFileOutput(),
+        )
 
     def run(self, params={}):
         yara_results = []
@@ -70,21 +71,13 @@ class ScanFile(komand.Action):
 
             yara_results.append(
                 {
-                    "meta":result.meta,
+                    "meta": result.meta,
                     "namespace": result.namespace,
                     "rule": result.rule,
                     "string": san_strings,
-                    "tags": result.tags
+                    "tags": result.tags,
                 }
             )
 
         # Returning a array of objects
         return {"results": yara_results}
-
-    def test(self):
-        # Checks to make sure Yara loads
-        try:
-            version = yara.YARA_VERSION
-        except ImportError:
-            raise ImportError("Error occurred trying to import Yara")
-        return {"results": [{"success": True}]}

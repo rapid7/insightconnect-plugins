@@ -7,7 +7,7 @@ vendor: rapid7
 support: community
 status: []
 description: This plugin used for generating and manipulating event in a Common Event Format (CEF)
-version: 1.0.1
+version: 2.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cef
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -84,11 +84,13 @@ actions:
     description: Creates a CEF formatted string
     input:
       cef:
+        title: CEF
         description: CEF Data
         type: cef
         required: true
     output:
       cef_string:
+        title: CEF String
         description: CEF formatted string
         type: string
         required: false
@@ -97,11 +99,13 @@ actions:
     description: Parse a single CEF formatted string
     input:
       cef_string:
+        title: CEF String
         description: CEF formatted string
         type: string
         required: true
     output:
       cef:
+        title: CEF
         description: CEF object
         type: cef
         required: false
@@ -110,11 +114,13 @@ actions:
     description: Parse multiple CEF formatted strings from a file
     input:
       file:
+        title: File
         description: Parse multiple CEF formatted strings from a file
         type: bytes
         required: true
     output:
       cefs:
+        title: CEF Objects
         description: A list of CEF objects parsed from the file
         type: '[]cef'
         required: false

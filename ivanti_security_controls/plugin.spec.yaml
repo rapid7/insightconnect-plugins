@@ -1,0 +1,1057 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: ivanti_security_controls
+title: Ivanti Security Controls
+description: Ivanti Security Controls is a unified IT management platform used for managing and protecting through Patch Management, Application Control, and Asset Inventory functionality
+version: 1.5.0
+vendor: rapid7
+support: rapid7
+status: []
+tags: [TEM, endpoint, patch]
+hub_tags:
+  use_cases: [application_management, threat_detection_and_response, asset_inventory, remediation_management]
+  keywords: [TEM, endpoint, patch]
+  features: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/ivanti_security_controls
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.ivanti.com/
+enable_cache: false
+
+connection:
+  host:
+    title: Host
+    description: Enter the hostname
+    type: string
+    required: true
+    example: example.com
+  port:
+    title: Port
+    description: Enter the port
+    type: integer
+    default: 3121
+    required: true
+    example: 3121
+  credentials:
+    title: Credentials
+    description: Username and password
+    type: credential_username_password
+    required: true
+    example: '{"username":"user1", "password":"mypassword"}'
+  ssl_verify:
+    title: SSL Verify
+    description: Validate certificate
+    type: boolean
+    default: true
+    required: true
+    example: true
+
+types:
+  agent_detail:
+    agentId:
+      title: Agent ID
+      description: The agent ID
+      type: string
+      required: true
+    assignedPolicyId:
+      title: Assigned Policy ID
+      description: The unique identifier of the policy that is in effect for this agent
+      type: string
+      required: false
+    dnsName:
+      title: DNS Name
+      description: The DNS name of the agent machine
+      type: string
+      required: false
+    domain:
+      title: Domain
+      description: The domain of the agent machine
+      type: string
+      required: false
+    frameworkVersion:
+      title: Framework Version
+      description: The installed agent framework version
+      type: string
+      required: false
+    isListening:
+      title: Is Listening
+      description: Specifies if the agent is a listening agent
+      type: boolean
+      required: false
+    lastCheckIn:
+      title: Last Check-In
+      description: The date and time of the most recent check-in
+      type: string
+      required: false
+    lastKnownIPAddress:
+      title: Last Known IP Address
+      description: The last known IP address of the agent machine
+      type: string
+      required: false
+    listeningPort:
+      title: Listening Port
+      description: The listening port number
+      type: integer
+      required: false
+    machineName:
+      title: Machine Name
+      description: The agent machine's host name
+      type: string
+      required: false
+    reportedPolicyId:
+      title: Reported Policy ID
+      description: The agent policy ID
+      type: string
+      required: false
+    status:
+      title: Status
+      description: The current status of the agent
+      type: string
+      required: true
+    links:
+      title: Agent Links
+      description: Shows the related URLs for the agent
+      type: object
+      required: false
+  agent_status:
+    agentId:
+      title: Agent ID
+      description: The agent ID
+      type: string
+      required: true
+    frameworkVersion:
+      title: Framework Version
+      description: The installed agent framework version
+      type: object
+      required: false
+    installedPackages:
+      title: Installed Packages
+      description: The list of engines installed on the agent machine
+      type: "[]string"
+      required: false
+    lastCheckIn:
+      title: Last Check-In
+      description: The date and time of the most recent check-in
+      type: string
+      required: false
+    machineName:
+      title: Machine Name
+      description: The agent machine's host name
+      type: string
+      required: false
+    reportedOn:
+      title: Reported On
+      description: The time the information was gathered from the agent machine
+      type: string
+      required: false
+    runningPolicyId:
+      title: Running Policy ID
+      description: The agent's running policy ID
+      type: string
+      required: false
+    runningPolicyVersion:
+      title: Running Policy Version
+      description: The agent's policy ID
+      type: integer
+      required: false
+    links:
+      title: Agent Links
+      description: Shows the related URLs for the agent
+      type: object
+      required: false
+  patch_scan_machine:
+    completedOn:
+      title: Completed On
+      description: The date and time that the machine assessment was completed
+      type: string
+      required: false
+    domain:
+      title: Domain
+      description: The domain short-name of the assessed machine
+      type: string
+      required: false
+    errorDescription:
+      title: Error Description
+      description: Description of the patch scan or resolution error
+      type: string
+      required: false
+    errorNumber:
+      title: Error Number
+      description: An error code representing a resolution or assessment failure
+      type: integer
+      required: false
+    id:
+      title: ID
+      description: The unique identifier of the machine patch assessment
+      type: integer
+      required: false
+    installedPatchCount:
+      title: Installed Patch Count
+      description: The total number of installed patches found in the assessment
+      type: integer
+      required: false
+    links:
+      title: Links
+      description: Shows the related URLs
+      type: object
+      required: false
+    missingPatchCount:
+      title: Missing Patch Count
+      description: The total number of missing patches detected in the assessment
+      type: integer
+      required: false
+    missingServicePackCount:
+      title: Missing Service Pack Count
+      description: The total number of missing service packs detected in the assessment
+      type: integer
+      required: false
+    name:
+      title: Host Name
+      description: The resolved short-name or host name of the machine
+      type: string
+      required: false
+    virtualMachinePath:
+      title: Virtual Machine Path
+      description: The virtual machine path if this is a hosted VM
+      type: string
+      required: false
+    virtualServer:
+      title: Virtual Server
+      description: The virtual machine server name if this is a hosted VM
+      type: string
+      required: false
+  scan_details:
+    id:
+      title: Scan ID
+      description: Scan ID
+      type: string
+      required: true
+    isComplete:
+      title: Is Complete
+      description: Is complete
+      type: boolean
+      required: true
+    links:
+      title: Scan Links
+      description: Scan links
+      type: object
+      required: true
+    name:
+      title: Scan Name
+      description: Scan name
+      type: string
+      required: false
+    scanType:
+      title: Scan Type
+      description: Scan Type
+      type: string
+      required: true
+    startedOn:
+      title: Scan Start Time
+      description: Scan start time
+      type: string
+      required: true
+    updatedOn:
+      title: Update Time
+      description: Update Time
+      type: string
+      required: true
+    user:
+      title: Username
+      description: Username
+      type: string
+      required: true
+  patch_scan_status_details:
+    consoleName:
+      title: Console Name
+      description: Console Name
+      type: string
+      required: true
+    definitionDate:
+      title: Definition Date
+      description: Definition Date
+      type: string
+      required: false
+    definitionVersion:
+      title: Definition Version
+      description: Definition version
+      type: string
+      required: false
+    expectedResultTotal:
+      title: Expected Result Total
+      description: Expected result total count
+      type: integer
+      required: true
+    id:
+      title: Scan ID
+      description: Scan ID
+      type: string
+      required: true
+    isComplete:
+      title: Is Complete
+      description: Is Complete
+      type: boolean
+      required: true
+    links:
+      title: Links
+      description: Scan links
+      type: object
+      required: true
+    name:
+      title: Scan Name
+      description: Scan name
+      type: string
+      required: true
+    receivedResultCount:
+      title: Received Result Count
+      description: Received result count
+      type: integer
+      required: true
+    scanType:
+      title: Scan Type
+      description: Scan Type
+      type: string
+      required: true
+    startedOn:
+      title: Scan Start Time
+      description: Scan start time
+      type: string
+      required: true
+    updatedOn:
+      title: Update Time
+      description: Update time
+      type: string
+      required: true
+    user:
+      title: Username
+      description: Username
+      type: string
+      required: true
+  detected_patch:
+    bulletinId:
+      title: Bulletin ID
+      description: Bulletin ID
+      type: string
+      required: true
+    cultureName:
+      title: Culture Name
+      description: Culture name
+      type: string
+      required: true
+    kb:
+      title: KB
+      description: KB issued by the vendor of the patch
+      type: string
+      required: true
+    links:
+      title: Links
+      description: Shows the related URLs
+      type: object
+      required: false
+    patchType:
+      title: Patch Type
+      description: Patch Type
+      type: string
+      required: true
+    patchId:
+      title: Patch ID
+      description: Patch ID
+      type: string
+      required: true
+    productName:
+      title: Product Name
+      description: Product name
+      type: string
+      required: true
+    productId:
+      title: Product ID
+      description: Product ID
+      type: string
+      required: true
+    scanItemId:
+      title: Scan Item ID
+      description: Scan ID of the patch summary
+      type: integer
+      required: true
+    scanState:
+      title: Scan State
+      description: The state of the patch installation
+      type: string
+      required: true
+    servicePackName:
+      title: Service Pack Name
+      description: The name of the service pack to which the patch applies
+      type: string
+      required: true
+    vendorSeverity:
+      title: Vendor Severity
+      description: The vendor-defined severity of the security risk or issue that this patch corrects
+      type: string
+      required: true
+  next:
+    href:
+      title: "HREF"
+      type: string
+      description: "Href"
+      required: false
+  links:
+    next:
+      title: "Next"
+      type: next
+      description: "Next"
+      required: false
+  links_self:
+    self:
+      title: "Self"
+      type: next
+      description: "Self"
+      required: false
+  vulnerability:
+    bulletinId:
+      title: "Bulletin ID"
+      type: string
+      description: "Bulletinid"
+      required: false
+    cve:
+      title: "CVE"
+      type: "[]string"
+      description: "CVE"
+      required: false
+    id:
+      title: "Patch ID"
+      type: integer
+      description: "Id"
+      required: false
+    isSupported:
+      title: "Is Supported"
+      type: boolean
+      description: "Issupported"
+      required: false
+    kb:
+      title: "Kb"
+      type: string
+      description: "Kb"
+      required: false
+    links:
+      title: "Links"
+      type: links_self
+      description: "Links"
+      required: false
+    patchIds:
+      title: "Patchids"
+      type: "[]string"
+      description: "Patch IDs"
+      required: false
+    patchType:
+      title: "Patchtype"
+      type: string
+      description: "Patch Type"
+      required: false
+    releaseDate:
+      title: "Releasedate"
+      type: string
+      description: "Release Date"
+      required: false
+    replacedBy:
+      title: "Replaced By"
+      type: "[]string"
+      description: "Replacedby"
+      required: false
+  patch_deployment:
+    completedMachineCount:
+      title: Completed Machine Count
+      description: Number of machines that has the deployment completed
+      type: integer
+      required: false
+    creator:
+      title: Creator
+      description: Initiator of the deployment
+      type: string
+      required: false
+    expectedMachineCount:
+      title: Expected Machine Count
+      description: Number of machines in this deployment
+      type: integer
+      required: false
+    isComplete:
+      title: Completed
+      description: Completion status of the deployment
+      type: boolean
+      required: false
+    lastUpdatedOn:
+      title: Last Updated On
+      description: Date of receipt of the last status update
+      type: string
+      required: false
+    links:
+      title: Links
+      description: Shows the related URLs for the deployment, the machines and the template
+      type: object
+      required: false
+    name:
+      title: Name
+      description: Name of the deployment template
+      type: string
+      required: false
+    startedOn:
+      title: Started On
+      description: Deployment start date
+      type: string
+      required: false
+    id:
+      title: ID
+      description: The unique operation identifier assigned to the patch deployment
+      type: string
+      required: true
+  machine_deploy_state:
+    address:
+      title: Address
+      description: The IP address of the machine
+      type: string
+      required: false
+    completedPatches:
+      title: Completed Patches
+      description: The count of in-progress patches
+      type: integer
+      required: false
+    dnsName:
+      title: DNS Name
+      description: The DNS name of the machine
+      type: string
+      required: false
+    domain:
+      title: Domain
+      description: The domain name of the machine
+      type: string
+      required: false
+    errorCode:
+      title: Error Code
+      description: The error code reported on failure by the machine
+      type: integer
+      required: false
+    id:
+      title: ID
+      description: The unique machine identifier for the machine being deployed to
+      type: integer
+      required: false
+    lastUpdated:
+      title: Last Updated
+      description: Specifies when the deployment status was last updated
+      type: string
+      required: false
+    links:
+      title: Links
+      description: Shows the related URL for the deployment to the machine
+      type: object
+      required: false
+    name:
+      title: Name
+      description: The hostname of the machine
+      type: string
+      required: false
+    overallState:
+      title: Overall State
+      description: The overall state of the machine deployment
+      type: string
+      required: false
+    patchStates:
+      title: Patch States
+      description: The status of each patch in the deployment
+      type: "[]object"
+      required: false
+    statusDescription:
+      title: Status Description
+      description: A description of the status of the deployment
+      type: string
+      required: false
+  patch_property_filter:
+    customActions:
+      title: Custom Actions
+      description: Custom actions
+      type: boolean
+      required: false
+    nonSecurityPatchSeverities:
+      title: Non Security Patch Severities
+      description: The non-security patch severities
+      type: string
+      required: false
+    securityPatchSeverities:
+      title: Security Patch Severities
+      description: The security patch severities
+      type: string
+      required: false
+    securityTools:
+      title: Security Tools
+      description: Security tools
+      type: boolean
+      required: false
+  patch_filter:
+    patchFilePath:
+      title: Patch File Path
+      description: The patch file path
+      type: string
+      required: false
+    patchGroupFilterType:
+      title: Patch Group Filter Type
+      description: The patch's filter describes how this filter will be applied. The values can be Scan, Skip, or None
+      type: string
+      required: false
+    patchGroupIds:
+      title: Patch Group IDs
+      description: The IDs of the patch groups to use
+      type: '[]integer'
+      required: false
+    patchPropertyFilter:
+      title: Patch Property Filter
+      description: Patch property filter (security, non-security, critical, etc.)
+      type: patch_property_filter
+      required: false
+    scanFor:
+      title: Scan For
+      description: Gets or sets the type of patches to scan for
+      type: string
+      required: false
+    softwareDistribution:
+      title: Software Distribution
+      description: Is software distribution included in the scan
+      type: boolean
+      required: false
+    vendorFamilyProductFilter:
+      title: Vendor Family Product Filter
+      description: Vendor and family product hierarchy
+      type: object
+      required: false
+  patch_scan_template:
+    creator:
+      title: Creator
+      description: The name of the person who created the template
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Provides a description that explains the purpose of this patch scan template
+      type: string
+      required: false
+    id:
+      title: ID
+      description: Specifies the ID of the patch scan template
+      type: string
+      required: false
+    isSystem:
+      title: Is System
+      description: Indicates if this is a system template
+      type: boolean
+      required: false
+    links:
+      title: Links
+      description: Shows the related URLs for each patch scan template and for the usedby list
+      type: object
+      required: false
+    name:
+      title: Name
+      description: Specifies the patch scan template name
+      type: string
+      required: false
+    patchFilter:
+      title: Patch Filter
+      description: Specifies the mode
+      type: patch_filter
+      required: false
+    path:
+      title: Path
+      description: The path that describes the location of the machine group within the Patch Scan Templates list in the navigation pane
+      type: string
+      required: false
+    threadCount:
+      title: Thread Count
+      description: Specifies maximum number of machines that can be simultaneously scanned during one patch scan
+      type: integer
+      required: false
+  patch_group:
+    id:
+      title: ID
+      description: The patch group ID
+      type: integer
+      required: false
+    links:
+      title: Links
+      description: Shows the related URLs for the patch group
+      type: object
+      required: false
+    name:
+      title: Name
+      description: The name of the patch group
+      type: string
+      required: false
+    path:
+      title: Path
+      description: The path that describes the location of the patch group within the Windows Patch Groups list in the navigation pane
+      type: string
+      required: false
+actions:
+  get_agent:
+    title: Get Agent
+    description: Retrieve Agent from Ivanti Security Controls
+    input:
+      id:
+        title: Agent ID
+        description: Agent Identifier
+        type: string
+        required: true
+        example: ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCD
+    output:
+      agent:
+        title: Agent
+        description: Details about an agent
+        type: agent_detail
+        required: true
+  get_agents:
+    title: Get Agents
+    description: Retrieve Agent from Ivanti Security Controls
+    input:
+      agent_configuration_filter:
+        title: Agent Configuration Filter
+        description: Filters agents based on listening configuration
+        type: string
+        enum:
+        - "Listening"
+        - "Not Listening"
+        - "All"
+        default: "All"
+        required: false
+        example: "All"
+      name_filter:
+        title: Name Filter
+        description: Filters agents where host or DNS name equals this value
+        type: string
+        required: false
+        example: "hostname-1"
+    output:
+      count:
+        title: Count
+        description: Number of agents returned
+        type: integer
+        required: false
+      agents:
+        title: Agents
+        description: List of agent details
+        type: "[]agent_detail"
+        required: false
+  get_agent_status:
+    title: Get Agent Status
+    description: Retrieve Agent Status from Ivanti Security Controls
+    input:
+      id:
+        title: Agent ID
+        description: Agent Identifier
+        type: string
+        required: true
+        example: ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCD
+    output:
+      agent_status:
+        title: Agent Status
+        description: Agent status with details
+        type: agent_status
+        required: true
+  start_patch_scan:
+    title: Start a Patch Scan
+    description: Start a patch scan
+    input:
+      hostnames:
+        title: Hostnames
+        description: Hostnames - Either hostnames or machine group IDs must be specified
+        type: '[]string'
+        required: false
+        example: "hostname-1"
+      machine_group_ids:
+        title: Machine Group IDs
+        description: List of machine groups to scan. Either hostnames or machine group IDs must be specified
+        type: '[]string'
+        required: false
+        example: ["1","2"]
+      diagnostic_trace_enabled:
+        title: Diagnostic Trace Enabled
+        description: An indication whether diagnostics tracing should be enabled during scan
+        type: boolean
+        required: false
+        example: false
+      credential_id:
+        title: Credential ID
+        description: Credential ID
+        type: string
+        required: false
+        example: 01234567-89AB-CDEF-0123-456789ABCDEF
+      name:
+        title: Name
+        description: Name to be given to scan
+        type: string
+        required: false
+        example: "test-scan"
+      run_as_credential_id:
+        title: Run as Credential ID
+        description: Reference to a credential to use to start a scan. Overwrites RunAsDefault behavior
+        type: string
+        required: false
+        example: 01234567-89AB-CDEF-0123-456789ABCDEF
+      template_id:
+        title: Patch Scan Template ID
+        description: Patch scan template ID
+        type: string
+        required: true
+        example: 01234567-89AB-CDEF-0123-456789ABCDEF
+      use_machine_credential:
+        title: Use Machine Credential
+        description: An indication whether to use machine credentials. If No is specified, then either group-level credentials, default credentials or integrated Windows authentication credentials (in that order) will be used. This parameter is only used if an endpoint name is specified
+        type: boolean
+        required: false
+        example: false
+      max_poll_time:
+        title: Max Poll Time
+        description: Max poll time
+        type: integer
+        default: 300
+        required: true
+        example: 300
+    output:
+      scan_details:
+        title: Scan Details
+        description: Scan details
+        type: scan_details
+        required: true
+  get_patch_scan_status:
+    title: Get Patch Scan Status
+    description: Get patch scan status
+    input:
+      scan_id:
+        title: Scan ID
+        description: Scan ID
+        type: string
+        required: true
+        example: 01234567-89AB-CDEF-0123-456789ABCDEF
+    output:
+      patch_scan_status_details:
+        title: Patch Scan Status Details
+        description: Patch scan status details
+        type: patch_scan_status_details
+        required: true
+  get_scanned_machine_details:
+    title: Get Scanned Machine Details
+    description: Get scanned machine details
+    input:
+      scan_id:
+        title: Scan ID
+        description: Scan ID
+        type: string
+        required: true
+        example: 01234567-89AB-CDEF-0123-456789ABCDEF
+      hostname:
+        title: Hostname
+        description: Hostname
+        type: string
+        required: true
+        example: "hostname-1"
+    output:
+      patch_scan_machine:
+        title: Patch Scan Machine
+        description: Patch scan machine
+        type: patch_scan_machine
+        required: true
+      detected_patches:
+        title: Detected Patches
+        description: Detected patches
+        type: '[]detected_patch'
+        required: true
+  search_patches:
+    title: Search Patches
+    description: Find and display detailed information about patch
+    input:
+      security_id:
+        title: Security ID
+        description: Security Vulnerability ID
+        type: '[]string'
+        required: true
+        example: ["MS99-031", "Q240346", "CVE-2015-4485", "4693"]
+    output:
+      vulnerabilities:
+        title: Vulnerabilities
+        description: Details about an agent
+        type: "[]vulnerability"
+        required: true
+  get_patch_details:
+    title: Get Patch Details
+    description: Retrieve information about a patch from Ivanti Security Control
+    input:
+      id:
+        title: ID
+        description: The vulnerability ID
+        type: integer
+        required: true
+        example: 4693
+    output:
+      patch:
+        title: Patch
+        description: Detailed information about a patch
+        type: vulnerability
+        required: true
+  get_patch_deployment:
+    title: Get Patch Deployment
+    description: Retrieve information about a specific patch deployment
+    input:
+      deployment_id:
+        title: Deployment ID
+        description: Patch deployment ID
+        type: string
+        required: true
+        example: 5dbcb89f-eec3-4182-a9aa-1e6074fb0acb
+      machine_id:
+        title: Machine ID
+        description: ID of a machine involved with a specific patch deployment
+        type: integer
+        required: false
+        example: 7
+    output:
+      patch_deployment_details:
+        title: Patch Deployment Details
+        description: Detailed information about a specific deployment
+        type: patch_deployment
+        required: true
+      machine_information:
+        title: Machine Information
+        description: Information about a machine involved with the patch deployment
+        type: machine_deploy_state
+        required: true
+  get_patch_deployment_template_id:
+    title: Get Patch Deployment Template ID
+    description: Get a Patch Deployment Template ID by searching for the Patch Deployment Template Name
+    input:
+      patch_deployment_template_name:
+        title: Patch Deployment Template Name
+        description: The name of the patch deployment template
+        type: string
+        required: true
+        example: Patch Deployment Template created from InsightConnect
+    output:
+      patch_deployment_template_id:
+        title: Patch Deployment Template ID
+        description: The ID of the patch deployment template
+        type: string
+        required: true
+  start_patch_deployment:
+    title: Start Patch Deployment
+    description: Start patch deployment
+    input:
+      scan_identifier:
+        title: Scan Identifier
+        description: A scan ID or scan name
+        type: string
+        required: true
+        example: 01234567-89AB-CDEF-0123-456789ABCDEF
+      template_identifier:
+        title: Template Identifier
+        description: A template ID or template name
+        type: string
+        required: true
+        example: Deployment Template created from InsightConnect
+      download_patches:
+        title: Download Patches
+        description: Boolean to initiate patch download before starting the deployment
+        type: boolean
+        required: true
+        example: false
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  create_patch_scan_template:
+    title: Create Patch Scan Template
+    description: Create a new patch scan template
+    input:
+      name:
+        title: Name
+        description: Name of the patch scan template
+        type: string
+        required: true
+        example: ExamplePatchScanTemplate
+      description:
+        title: Description
+        description: Description that explains the purpose of this patch scan template
+        type: string
+        required: false
+        example: Patch Scan Template created from InsightConnect
+      path:
+        title: Path
+        description: Path to the location of the machine group within the Patch Scan Templates list in the navigation pane
+        type: string
+        required: false
+        example: Lab\Servers
+      threadCount:
+        title: Thread Count
+        description: Specifies maximum number of machines that can be simultaneously scanned during one patch scan
+        type: integer
+        required: false
+        example: 1
+      patchGroupIds:
+        title: Patch Group IDs
+        description: The IDs of the patch groups to use
+        type: '[]integer'
+        required: true
+        example: 1
+    output:
+      patch_scan_template:
+        title: Patch Scan Template
+        description: Detailed information about the patch scan template
+        type: patch_scan_template
+        required: true
+  create_patch_group_and_add_cves:
+    title: Create Patch Group
+    description: Create a new patch group with CVEs
+    input:
+      name:
+        title: Name
+        description: The name of the new patch group
+        type: string
+        required: true
+        example: New Patch Group
+      path:
+        title: Path
+        description: The path that describes the location of the patch group within the Patch Templates and Groups list in the navigation pane
+        type: string
+        required: false
+        example: Lab\Servers
+      cves:
+        title: CVEs
+        description: The CVEs that should be included in the new patch group
+        type: '[]string'
+        required: true
+        example: ["cve-2019-0701", "CVE-2019-0708"]
+    output:
+      patch_group:
+        title: Patch Group
+        description: Detailed information about the patch group
+        type: patch_group
+        required: true
+  update_patch_group:
+    title: Update Patch Group
+    description: Add CVEs or Patches to an existing patch group
+    input:
+      patch_group:
+        title: Patch Group
+        description: Name or ID of an existing patch group
+        type: string
+        required: true
+        example: Patch Group created from InsightConnect
+      vulnerability_identifier:
+        title: Vulnerability Identifier
+        description: List of patch IDs or CVEs to add to an existing patch group
+        type: '[]string'
+        required: true
+        example: ['CVE-2019-0708', "12345"]
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true

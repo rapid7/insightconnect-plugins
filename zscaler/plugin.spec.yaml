@@ -1,0 +1,281 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: zscaler
+title: Zscaler
+version: 1.3.0
+description: Zscaler is a SaaS security platform that provides fast, secure connections between client applications, regardless of device, location, or network
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/zscaler
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.zscaler.com/
+tags:
+- zscaler
+- security
+- platform
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [zscaler, proxy]
+  features: []
+
+types:
+  url_categorization:
+    url:
+      title: URL
+      type: string
+      description: Checked URL
+      required: false
+    urlClassifications:
+      title: URL Classifications
+      type: "[]string"
+      description: URL classifications
+      required: false
+    urlClassificationsWithSecurityAlert:
+      title: URL classifications with security alert
+      type: "[]string"
+      description: URL classifications with security alert
+      required: false
+  Classification:
+    Category:
+      title: Category
+      type: string
+      description: Category
+      required: false
+    DetectedMalware:
+      title: Detected Malware
+      type: string
+      description: Detected malware
+      required: false
+    Score:
+      title: Score
+      type: integer
+      description: Score
+      required: false
+    Type:
+      title: Type
+      type: string
+      description: Type
+      required: false
+  FileProperties:
+    DigitalCerificate:
+      title: Digital Certificate
+      type: string
+      description: Digital certificate
+      required: false
+    FileSize:
+      title: File Size
+      type: integer
+      description: File size
+      required: false
+    FileType:
+      title: File Type
+      type: string
+      description: File type
+      required: false
+    Issuer:
+      title: Issuer
+      type: string
+      description: Issuer
+      required: false
+    MD5:
+      title: MD5
+      type: string
+      description: MD5
+      required: false
+    RootCA:
+      title: Root CA
+      type: string
+      description: Root CA
+      required: false
+    SHA1:
+      title: SHA1
+      type: string
+      description: SHA1
+      required: false
+    SSDeep:
+      title: SS Deep
+      type: string
+      description: SS deep
+      required: false
+    Sha256:
+      title: SHA256
+      type: string
+      description: SHA256
+      required: false
+  PersistenceSummary:
+    Risk:
+      title: Risk
+      type: string
+      description: Risk
+      required: false
+    Signature:
+      title: Signature
+      type: string
+      description: Signature
+      required: false
+    SignatureSources:
+      title: Signature Sources
+      type: "[]string"
+      description: Signature sources
+      required: false
+  Summary:
+    Category:
+      title: Category
+      type: string
+      description: Category
+      required: false
+    Duration:
+      title: Duration
+      type: integer
+      description: Duration
+      required: false
+    FileType:
+      title: File Type
+      type: string
+      description: File type
+      required: false
+    StartTime:
+      title: Start Time
+      type: integer
+      description: Start time
+      required: false
+    Status:
+      title: Status
+      type: string
+      description: Status
+      required: false
+  FullDetails:
+    Classification:
+      title: Classification
+      type: Classification
+      description: Classification
+      required: false
+    FileProperties:
+      title: File Properties
+      type: FileProperties
+      description: File properties
+      required: false
+    Persistence:
+      title: Persistence
+      type: "[]PersistenceSummary"
+      description: Persistence
+      required: false
+    SecurityBypass:
+      title: Security Bypass
+      type: "[]PersistenceSummary"
+      description: Security bypass
+      required: false
+    Summary:
+      title: Summary
+      type: Summary
+      description: Summary
+      required: false
+    Networking:
+      title: Networking
+      type: "[]PersistenceSummary"
+      description: Networking
+      required: false
+    Stealth:
+      title: Stealth
+      type: "[]PersistenceSummary"
+      description: Stealth
+      required: false
+    SystemSummary:
+      title: System Summary
+      type: "[]PersistenceSummary"
+      description: System summary
+      required: false
+  full_report:
+    FullDetails:
+      title: Full Details
+      type: FullDetails
+      description: Full details
+      required: false
+
+connection:
+  url:
+    title: URL
+    type: string
+    description: Base URL, ex. 'https://admin.zscalerbeta.net'. See https://help.zscaler.com/zia/api-getting-started#RetrieveAPIKey for details
+    required: true
+    example: https://admin.zscalerbeta.net
+  api_key:
+    title: API Key
+    type: credential_secret_key
+    description: Enter organization API key
+    required: true
+    example: 14M2d25A7c12
+  credentials:
+    title: Username and Password
+    description: Username and password to access Zscaler
+    type: credential_username_password
+    required: true
+    example: '{"username":"user@example.com", "password":"mypassword"}'
+actions:
+  lookup_url:
+    title: Lookup URL
+    description: Look up the categorization of a given set of URLs
+    input:
+      urls:
+        title: URLs
+        description: The given set of URLs or domains to be looked up
+        type: "[]string"
+        required: true
+        example: ["example.com", "https://rapid7.com"]
+    output:
+      url_categorization:
+        title: URL Categorization
+        description: Information about given URLs
+        type: "[]url_categorization"
+        required: true
+  blacklist_url:
+    title: Blacklist URL
+    description: Blacklist or unblacklist URLs
+    input:
+      urls:
+        title: URLs
+        description: A given set of one or more URLs or domains to update in the blacklist
+        type: "[]string"
+        required: true
+        example: ["www.example.com", "http://rapid7.com"]
+      blacklist_state:
+        title: Blacklist State
+        description: True to blacklist a URL, false to unblacklist a URL
+        type: boolean
+        required: false
+        default: true
+        example: true
+    output:
+      success:
+        title: Success
+        description: Whether or not the request succeeded
+        type: boolean
+        required: true
+  get_sandbox_report_for_hash:
+    title: Get Sandbox Report for Hash
+    description: Get a full report for an MD5 hash of a file that was analyzed by Sandbox
+    input:
+      hash:
+        title: Hash
+        description: MD5 hash to get report
+        type: string
+        required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+    output:
+      full_report:
+        title: Full Report
+        description: Full report of an analyzed MD5 hash
+        type: full_report
+        required: true
+  get_blacklist_url:
+    title: Get Blacklist URL
+    description: Get blacklisted URLs
+    output:
+      blacklisted_urls:
+        title: Blacklisted URLs
+        description: URLs added to the blacklist
+        type: "[]string"
+        required: false

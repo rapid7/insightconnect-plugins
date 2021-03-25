@@ -1,33 +1,34 @@
-import komand
-from .schema import GetCommentsInput, GetCommentsOutput
+import insightconnect_plugin_runtime
+from .schema import GetCommentsInput, GetCommentsOutput, Input, Output, Component
 
 # Custom imports below
-from ...util import *
-from komand.exceptions import PluginException
+from komand_jira.util.util import normalize_comment
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class GetComments(komand.Action):
-
+class GetComments(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='get_comments',
-            description='Get Comments',
+            name="get_comments",
+            description=Component.DESCRIPTION,
             input=GetCommentsInput(),
-            output=GetCommentsOutput())
+            output=GetCommentsOutput(),
+        )
 
     def run(self, params={}):
         """Run action"""
-        issue = self.connection.client.issue(id=params['id'])
+        issue = self.connection.client.issue(id=params[Input.ID])
 
         if not issue:
-            raise PluginException(cause=f"No issue found with ID: {params['id']}.",
-                                  assistance='Please provide a valid issue ID.')
+            raise PluginException(
+                cause=f"No issue found with ID: {params[Input.ID]}.", assistance="Please provide a valid issue ID.",
+            )
 
         comments = issue.fields.comment.comments or []
 
         results = list(map(lambda comment: normalize_comment(comment, logger=self.logger), comments))
-        results = komand.helper.clean(results)
+        results = insightconnect_plugin_runtime.helper.clean(results)
 
         count = len(results)
 
-        return {'count': count, 'comments': results}
+        return {Output.COUNT: count, Output.COMMENTS: results}

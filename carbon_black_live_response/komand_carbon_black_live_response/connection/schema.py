@@ -18,13 +18,13 @@ class ConnectionSchema(komand.Input):
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "API token found in your Carbon Black profile",
+      "description": "API token found in your VMware Carbon Black profile",
       "order": 1
     },
     "url": {
       "type": "string",
       "title": "API URL",
-      "description": "Carbon Black Server API URL",
+      "description": "VMware Carbon Black Server API URL",
       "default": "https://127.0.0.1/api/bit9platform/v1",
       "order": 2
     },

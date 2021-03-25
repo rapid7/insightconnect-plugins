@@ -9,22 +9,82 @@
 
 # Requirements
 
-* A JWT with Google Docs permissions
-* Google Docs API must be enabled
+* [Google Docs API must be enabled](https://console.developers.google.com/apis/library)
+* [A JWT with Google Docs permissions](https://developers.google.com/identity/protocols/oauth2)
 
 # Documentation
 
 ## Setup
 
+1. Enable the Google Docs API from the [developer console](https://console.developers.google.com/apis/library) by searching for "Google Docs API" and selecting Enable
+2. Choose Credentials on the left-hand pane and select '+ Create Credentials' at the top of page
+3. Choose OAuth 2
+4. Enable 'Consent Screen' and configure the consent with your desired permissions
+5. Complete the 'OAuth 2.0 Client IDs' configuration
+6. On the Credentials page, find your newly created OAuth Client and click the download arrow icon next to the trashcan
+7. Copy and paste the contents of the downloaded credential file into the plugin's connection
+
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials_file_contents|credential_secret_key|None|True|Copy and paste the contents of the credentials file from google|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|credentials_file_contents|credential_secret_key|None|True|Copy and paste the contents of the credentials file provided by Google|None|{ "credentials_file_contents": { "secretKey": "{\"type\":\"service_account\",\"project_id\":\"project-1111111111111\",\"private_key_id\": \"a1111aa111111aaa1111a1aa1aa111aa1a11aaaa1\",\"private_key\": \"-----BEGIN PRIVATE KEY-----\\\\nc29tZSBwcml2YXRlIGtleQ==\\\\n-----END PRIVATE KEY-----\\\\n\",\"client_email\": \"user@example.com\",\"client_id\": \"111111111111111111111\",\"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\"token_uri\": \"https://oauth2.googleapis.com/token\",\"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/test%40project-1111111111111.iam.gserviceaccount.com\"}" } }|
+
+Example input:
+
+```
+{
+  "credentials_file_contents": {
+    "secretKey": "{\"type\":\"service_account\",\"project_id\":\"project-1111111111111\",\"private_key_id\": \"a1111aa111111aaa1111a1aa1aa111aa1a11aaaa1\",\"private_key\": \"-----BEGIN PRIVATE KEY-----\\\\nc29tZSBwcml2YXRlIGtleQ==\\\\n-----END PRIVATE KEY-----\\\\n\",\"client_email\": \"user@example.com\",\"client_id\": \"111111111111111111111\",\"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\"token_uri\": \"https://oauth2.googleapis.com/token\",\"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/test%40project-1111111111111.iam.gserviceaccount.com\"}"
+  }
+}
+```
 
 ## Technical Details
 
 ### Actions
+
+#### Append Line
+
+This action is used to append line at end of document.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|content|string|None|True|Document content|None|This line will be added to end of document|
+|document_id|string|None|True|Document ID|None|1wLmF13vLaGrzsnPbwh6bjNg72jFhr8t4B6unBbfJi_q|
+
+Example input:
+
+```
+{
+  "document_id": "1wLmF13vLaGrzsnPbwh6bjNg72jFhr8t4B6unBbfJi_q",
+  "content": "This line will be added to end of document"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|result|create_result|True|Append line result|
+
+Example output:
+
+```
+{
+  "result": {
+    "replies": [
+      {}
+    ],
+    "writeControl": {
+      "requiredRevisionId": "ALm37BXuK4Riu0b1tbfv_hcbywo6sqKmArHp9GjZXy3xmRHAMG3p8C46LxZzMynRAoeC2_WSzDQrp4CGN7Gf"
+    },
+    "documentId": "1wLmF13vLaGrzsnPbwh6bjNg72jFhr8t4B6unBbfJi_q"
+  }
+}
+```
 
 #### Create Blank Document
 
@@ -32,9 +92,17 @@ This action is used to create a blank Google document.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|title|string|None|True|Document Title|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|title|string|None|True|Document Title|None|New Document by InsightConnect|
+
+Example input:
+
+```
+{
+  "title": "New Document by InsightConnect"
+}
+```
 
 ##### Output
 
@@ -47,7 +115,7 @@ Example output:
 ```
 {
   "document": {
-    "title": "Test Blank Komand Doc",
+    "title": "New Document by InsightConnect",
     "body": {
       "content": [
         {
@@ -468,16 +536,25 @@ This action is used to create a Google document.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|content|string|None|False|Document Content|None|
-|title|string|None|True|Document Title|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|content|string|None|True|This Google Doc document was created by InsightConnect|None|None|
+|title|string|None|True|Document Title|None|New Document by InsightConnect|
+
+Example input:
+
+```
+{
+  "content": "This Google Doc document was created by InsightConnect",
+  "title": "New Document by InsightConnect"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|result|string|True|Document Creation Result|
+|result|create_result|True|Document creation result|
 
 Example output:
 
@@ -501,9 +578,17 @@ This action is used to get a Google document.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|document_id|string|None|True|Document ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|document_id|string|None|True|Document ID|None|1wLmF13vLaGrzsnPbwh6bjNg72jFhr8t4B6unBbfJi_q|
+
+Example input:
+
+```
+{
+  "document_id": "1wLmF13vLaGrzsnPbwh6bjNg72jFhr8t4B6unBbfJi_q"
+}
+```
 
 ##### Output
 
@@ -516,7 +601,7 @@ Example output:
 ```
 {
   "document": {
-    "title": "Test Komand Doc",
+    "title": "New Document by InsightConnect",
     "body": {
       "content": [
         {
@@ -945,7 +1030,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.1.0 - Add new Append Line action | Add example input
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
 # Links

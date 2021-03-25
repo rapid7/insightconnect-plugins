@@ -57,7 +57,7 @@ This action sends a message to a user or group
 
 ### Triggers
 
-_This plugin does not contain any triggers_
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -69,7 +69,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.1 - New spec and help.md format for the Hub
+* 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
 # Links

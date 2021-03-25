@@ -77,7 +77,7 @@ class CreateTicketInput(komand.Input):
       "order": 6
     },
     "group_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Group ID",
       "description": "Group ID",
       "order": 7
@@ -90,7 +90,8 @@ class CreateTicketInput(komand.Input):
         "Urgent",
         "High",
         "Normal",
-        "Low"
+        "Low",
+        ""
       ],
       "order": 14
     },
@@ -122,7 +123,8 @@ class CreateTicketInput(komand.Input):
         "Pending",
         "Hold",
         "Solved",
-        "Closed"
+        "Closed",
+        ""
       ],
       "order": 15
     },
@@ -149,7 +151,8 @@ class CreateTicketInput(komand.Input):
         "Problem",
         "Incident",
         "Task",
-        "Question"
+        "Question",
+        ""
       ],
       "order": 13
     }

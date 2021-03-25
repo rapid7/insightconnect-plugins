@@ -1,13 +1,8 @@
-FROM komand/python-pypy3-plugin:2
-# The three supported python parent images are:
-# - komand/python-2-plugin
-# - komand/python-3-plugin
-# - komand/python-pypy3-plugin
-#
-# Update the tag to a full semver version
+FROM komand/python-3-37-slim-plugin:3
 
 # Add any custom package dependencies here
 # NOTE: Add pip packages to requirements.txt
+RUN apk add git
 RUN pip install git+https://github.com/komand/python-freeipa-json
 
 # End package dependencies
@@ -22,5 +17,7 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
 # Install plugin
 RUN python setup.py build && python setup.py install
+
+USER nobody
 
 ENTRYPOINT ["/usr/local/bin/komand_freeipa"]

@@ -4,10 +4,10 @@ import komand
 from komand_finger import connection, actions, triggers
 
 
-Name = 'Finger'
-Vendor = 'rapid7'
-Version = '1.0.1'
-Description = 'Query the Finger Service'
+Name = "Finger"
+Vendor = "rapid7"
+Version = "1.0.2"
+Description = "Query the Finger Service"
 
 
 class ICONFinger(komand.Plugin):

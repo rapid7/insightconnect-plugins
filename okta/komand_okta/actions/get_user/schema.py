@@ -268,22 +268,27 @@ class GetUserOutput(komand.Output):
         "firstName": {
           "type": "string",
           "title": "FirstName",
-          "order": 2
+          "order": 3
         },
         "lastName": {
           "type": "string",
           "title": "LastName",
-          "order": 3
+          "order": 4
         },
         "login": {
           "type": "string",
           "title": "Login",
-          "order": 4
+          "order": 5
         },
         "mobilePhone": {
           "type": "string",
           "title": "MobilePhone",
-          "order": 5
+          "order": 6
+        },
+        "secondEmail": {
+          "type": "string",
+          "title": "SecondEmail",
+          "order": 2
         }
       }
     },

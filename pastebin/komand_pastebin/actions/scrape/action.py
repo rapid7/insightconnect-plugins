@@ -1,5 +1,6 @@
 import komand
 from .schema import ScrapeInput, ScrapeOutput
+
 # Custom imports below
 import time
 import json
@@ -7,18 +8,20 @@ import urllib
 import ssl
 import os
 import re
-#from Queue import Queue
+
+# from Queue import Queue
 from threading import Thread
 import requests
 
-class Scrape(komand.Action):
 
+class Scrape(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='scrape',
-                description='Scrape the most recent pastes',
-                input=ScrapeInput(),
-                output=ScrapeOutput())
+            name="scrape",
+            description="Scrape the most recent pastes",
+            input=ScrapeInput(),
+            output=ScrapeOutput(),
+        )
 
     def run(self, params={}):
         r = requests.session()
@@ -30,7 +33,9 @@ class Scrape(komand.Action):
             "limit": params.get("limit", "100"),
         }
         try:
-            resp = r.post(url, data=req_params)  #urllib.urlopen(self.connection.scraping_url, urllib.urlencode(req_params), context=ctx)
+            resp = r.post(
+                url, data=req_params
+            )  # urllib.urlopen(self.connection.scraping_url, urllib.urlencode(req_params), context=ctx)
         except Exception as e:
             self.logger.error("An error occurred ", e)
             raise
@@ -38,9 +43,9 @@ class Scrape(komand.Action):
         data = json.loads(data)
 
         paste_list = []
-        #pastes_raw = request.read()
+        # pastes_raw = request.read()
         if resp.text.startswith("YOUR IP:"):
-            self.logger.error('Scraping: IP not whitelisted')
+            self.logger.error("Scraping: IP not whitelisted")
         else:
             for item in data:
                 scrape_url = item.get("scrape_url")
@@ -58,4 +63,3 @@ class Scrape(komand.Action):
             return {"success": True}
         else:
             return {"success": False}
-

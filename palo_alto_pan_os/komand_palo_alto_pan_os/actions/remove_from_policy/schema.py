@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Remove a rule from a PAN-OS security policy"
+    DESCRIPTION = "Remove a rule from a firewall security policy"
 
 
 class Input:
@@ -60,7 +60,7 @@ class RemoveFromPolicyInput(komand.Input):
     },
     "hip_profiles": {
       "type": "string",
-      "title": "HIP profiles",
+      "title": "HIP Profiles",
       "description": "Host information profile",
       "order": 11
     },
@@ -131,7 +131,7 @@ class RemoveFromPolicyOutput(komand.Output):
     "code": {
       "type": "string",
       "title": "Code",
-      "description": "Response code from PAN-OS",
+      "description": "Response code from the firewall",
       "order": 2
     },
     "message": {

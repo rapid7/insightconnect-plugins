@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    IP = "IP"
+    IP = "ip"
     TYPE = "type"
     
 
@@ -23,7 +23,7 @@ class RrHistoryIpInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "IP": {
+    "ip": {
       "type": "string",
       "title": "IP Address",
       "description": "IP address",
@@ -37,7 +37,7 @@ class RrHistoryIpInput(komand.Input):
     }
   },
   "required": [
-    "IP"
+    "ip"
   ]
 }
     """)

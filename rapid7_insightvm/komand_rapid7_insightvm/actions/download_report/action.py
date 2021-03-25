@@ -1,5 +1,6 @@
 import komand
 from .schema import DownloadReportInput, DownloadReportOutput
+
 # Custom imports below
 import requests
 from komand_rapid7_insightvm.util import endpoints
@@ -14,15 +15,16 @@ class DownloadReport(komand.Action):
         404: "Not Found",
         500: "Internal Server Error",
         503: "Service Unavailable",
-        000: "Unknown Status Code"
+        000: "Unknown Status Code",
     }
 
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='download_report',
-            description='Returns the contents of a generated report',
+            name="download_report",
+            description="Returns the contents of a generated report",
             input=DownloadReportInput(),
-            output=DownloadReportOutput())
+            output=DownloadReportOutput(),
+        )
 
     def run(self, params={}):
         report_id = params.get("id")
@@ -50,7 +52,9 @@ class DownloadReport(komand.Action):
                     raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=reason.text)
 
                 status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
-                self.logger.error("{status} ({code}): {reason}".format(status=status_code_message,
-                                                                       code=response.status_code,
-                                                                       reason=reason))
+                self.logger.error(
+                    "{status} ({code}): {reason}".format(
+                        status=status_code_message, code=response.status_code, reason=reason
+                    )
+                )
                 raise PluginException(preset=PluginException.Preset.UNKNOWN)

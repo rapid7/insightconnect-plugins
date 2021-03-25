@@ -4,10 +4,10 @@ import komand
 from komand_office365_admin import connection, actions, triggers
 
 
-Name = 'Office365 Admin'
-Vendor = 'rapid7'
-Version = '1.3.1'
-Description = 'Administrate and manage Office 365 users and licenses'
+Name = "Office365 Admin"
+Vendor = "rapid7"
+Version = "1.4.0"
+Description = "Administrate and manage Office 365 users and licenses"
 
 
 class ICONOffice365Admin(komand.Plugin):
@@ -26,6 +26,8 @@ class ICONOffice365Admin(komand.Plugin):
         self.add_action(actions.DeleteUser())
 
         self.add_action(actions.GetSubscribedSkus())
+
+        self.add_action(actions.LookupUserByEmail())
 
         self.add_action(actions.UpdateUsageLocation())
 

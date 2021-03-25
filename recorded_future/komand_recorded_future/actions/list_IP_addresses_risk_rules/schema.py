@@ -45,7 +45,7 @@ class ListIPAddressesRiskRulesOutput(komand.Output):
       "title": "risk_rule",
       "properties": {
         "criticality": {
-          "type": "integer",
+          "type": "number",
           "title": "Criticality",
           "order": 3
         },

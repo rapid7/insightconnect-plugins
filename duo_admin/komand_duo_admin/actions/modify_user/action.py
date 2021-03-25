@@ -1,17 +1,18 @@
 import komand
 from komand.exceptions import PluginException
 from .schema import ModifyUserInput, ModifyUserOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class ModifyUser(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='modify_user',
+            name="modify_user",
             description=Component.DESCRIPTION,
             input=ModifyUserInput(),
-            output=ModifyUserOutput())
+            output=ModifyUserOutput(),
+        )
 
     def run(self, params={}):
         status = params.get(Input.STATUS)

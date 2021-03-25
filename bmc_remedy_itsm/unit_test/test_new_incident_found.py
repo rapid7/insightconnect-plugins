@@ -45,11 +45,11 @@ def mocked_requests_get(*args, headers):
 
     print(f"Headers: {headers}")
 
-    mock_get_new_incidents_payload = read_file_to_string('./payloads/get_new_incidents.json')
+    mock_get_new_incidents_payload = read_file_to_string("./payloads/get_new_incidents.json")
 
-    if args[0] == 'http://test.url/api/arsys/v1/entry/HPD:IncidentInterface?sort=Submit Date.desc':
+    if args[0] == "http://test.url/api/arsys/v1/entry/HPD:IncidentInterface?sort=Submit Date.desc":
         return MockResponse(mock_get_new_incidents_payload, 200)
-    if args[0] == 'http://test.url/api/arsys/v1/entry/HPD:IncidentInterface?sort=Submit Date.desc&limit=1':
+    if args[0] == "http://test.url/api/arsys/v1/entry/HPD:IncidentInterface?sort=Submit Date.desc&limit=1":
         return MockResponse(mock_get_new_incidents_payload, 200)
 
     print(f"Attempted to get:\n{args[0]}")
@@ -61,7 +61,7 @@ def mock_send(*args, **kwargs):
     print(f"kwargs: {kwargs}")
 
 
-class MockConnection():
+class MockConnection:
     def __init__(self):
         self.url = "http://test.url"
 
@@ -105,37 +105,37 @@ class TestNewIncidentFound(TestCase):
         nif = NewIncidentFound()
         nif.logger = log
 
-        new_incidents_json = json.loads(read_file_to_string('./payloads/get_new_incidents.json'))
+        new_incidents_json = json.loads(read_file_to_string("./payloads/get_new_incidents.json"))
 
         nif._check_new_incidents_and_send("", maya.now(), new_incidents_json)
         pass  # We are just making sure the last call didn't throw an exception.
 
-    @mock.patch('icon_bmc_remedy_itsm.triggers.NewIncidentFound.send', side_effect=mock_send)
+    @mock.patch("icon_bmc_remedy_itsm.triggers.NewIncidentFound.send", side_effect=mock_send)
     def test_check_new_incidents_and_send_valid_return(self, mockSend):
         log = logging.getLogger("Test")
         nif = NewIncidentFound()
         nif.logger = log
 
-        new_incidents_json = json.loads(read_file_to_string('./payloads/get_new_incidents.json'))
+        new_incidents_json = json.loads(read_file_to_string("./payloads/get_new_incidents.json"))
         test_for_time = maya.parse("2019-09-19T15:00:00.000+0000")
         nif._check_new_incidents_and_send(None, test_for_time, new_incidents_json)
 
         self.assertEqual(mockSend.call_count, 2)
 
         actual_call = mockSend.call_args_list
-        incident1 = actual_call[0][0][0].get('incident').get('values')
-        incident2 = actual_call[1][0][0].get('incident').get('values')
+        incident1 = actual_call[0][0][0].get("incident").get("values")
+        incident2 = actual_call[1][0][0].get("incident").get("values")
 
-        self.assertEqual(incident1.get("Entry ID"), 'INC000000000109')
-        self.assertEqual(incident2.get("Entry ID"), 'INC000000000108')
+        self.assertEqual(incident1.get("Entry ID"), "INC000000000109")
+        self.assertEqual(incident2.get("Entry ID"), "INC000000000108")
 
-    @mock.patch('icon_bmc_remedy_itsm.triggers.NewIncidentFound.send', side_effect=mock_send)
+    @mock.patch("icon_bmc_remedy_itsm.triggers.NewIncidentFound.send", side_effect=mock_send)
     def test_check_new_incidents_and_send_with_query(self, mockSend):
         log = logging.getLogger("Test")
         nif = NewIncidentFound()
         nif.logger = log
 
-        new_incidents_json = json.loads(read_file_to_string('./payloads/get_new_incidents.json'))
+        new_incidents_json = json.loads(read_file_to_string("./payloads/get_new_incidents.json"))
         test_for_time = maya.parse("2019-09-19T15:00:00.000+0000")
 
         compiled_query = re.compile("Testing Incident Trigger for Query")
@@ -145,10 +145,10 @@ class TestNewIncidentFound(TestCase):
         self.assertEqual(mockSend.call_count, 1)
 
         actual_call = mockSend.call_args_list
-        incident1 = actual_call[0][0][0].get('incident').get('values')
-        self.assertEqual(incident1.get("Entry ID"), 'INC000000000109')
+        incident1 = actual_call[0][0][0].get("incident").get("values")
+        self.assertEqual(incident1.get("Entry ID"), "INC000000000109")
 
-    @mock.patch('requests.get', side_effect=mocked_requests_get)
+    @mock.patch("requests.get", side_effect=mocked_requests_get)
     def test_get_new_incidents(self, mock_get):
         log = logging.getLogger("Test")
         nif = NewIncidentFound()
@@ -157,9 +157,9 @@ class TestNewIncidentFound(TestCase):
 
         actual = nif._get_new_incidents()
 
-        self.assertEqual(actual.get('entries')[0].get('values').get('Entry ID'), "INC000000000109")
+        self.assertEqual(actual.get("entries")[0].get("values").get("Entry ID"), "INC000000000109")
 
-    @mock.patch('requests.get', side_effect=mocked_requests_get)
+    @mock.patch("requests.get", side_effect=mocked_requests_get)
     def test_get_initial_incident_info(self, mock_get):
         log = logging.getLogger("Test")
         nif = NewIncidentFound()
@@ -167,7 +167,7 @@ class TestNewIncidentFound(TestCase):
         nif.logger = log
 
         actual = nif._get_initial_incident_info()
-        expected = maya.parse('Tue, 24 Sep 2019 18:08:11 GMT')
+        expected = maya.parse("Tue, 24 Sep 2019 18:08:11 GMT")
 
         self.assertEqual(actual, expected)
 

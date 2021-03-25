@@ -1,5 +1,6 @@
 import komand
 from .schema import AddIncidentWorkNoteInput, AddIncidentWorkNoteOutput, Input, Output, Component
+
 # Custom imports below
 from komand.exceptions import PluginException
 from icon_bmc_remedy_itsm.util import error_handling
@@ -9,13 +10,13 @@ import urllib.parse
 
 
 class AddIncidentWorkNote(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='add_incident_work_note',
-                description=Component.DESCRIPTION,
-                input=AddIncidentWorkNoteInput(),
-                output=AddIncidentWorkNoteOutput())
+            name="add_incident_work_note",
+            description=Component.DESCRIPTION,
+            input=AddIncidentWorkNoteInput(),
+            output=AddIncidentWorkNoteOutput(),
+        )
 
     def run(self, params={}):
         handler = error_handling.ErrorHelper()
@@ -30,16 +31,14 @@ class AddIncidentWorkNote(komand.Action):
         try:
             original_incident_response = requests.get(url, headers=headers)
         except json.JSONDecodeError as e:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON,
-                                  data=e)
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
 
         handler.error_handling(original_incident_response)
 
         try:
             original_incident = komand.helper.clean(original_incident_response.json())
         except json.JSONDecodeError as e:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON,
-                                  data=e)
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
 
         original_incident.get("values")["z1D Action"] = "Modify"
         original_incident.get("values")["z1D_Details"] = work_note
@@ -51,13 +50,11 @@ class AddIncidentWorkNote(komand.Action):
 
         # If we made it this far, and this call fails, something really unexpected happened.
         if not original_incident_response.status_code == 200:
-            raise PluginException(preset=PluginException.Preset.SERVER_ERROR,
-                                  data=original_incident_response.text)
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=original_incident_response.text)
 
         try:
             original_incident = original_incident_response.json()
         except json.JSONDecodeError as e:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON,
-                                  data=e)
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
 
         return {Output.INCIDENT: komand.helper.clean(original_incident)}

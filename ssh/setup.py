@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='ssh-rapid7-plugin',
-      version='2.0.0',
-      description='The SSH protocol is a method for secure remote login from one computer to another',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="ssh-rapid7-plugin",
+      version="4.0.0",
+      description="The SSH protocol is a method for secure remote login from one computer to another",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_ssh']

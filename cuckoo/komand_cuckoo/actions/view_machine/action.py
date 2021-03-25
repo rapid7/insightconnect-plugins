@@ -1,22 +1,23 @@
 import komand
 from .schema import ViewMachineInput, ViewMachineOutput
+
 # Custom imports below
 import json
 import requests
 
 
 class ViewMachine(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='view_machine',
-                description='Returns details on the analysis machine associated with the given name',
-                input=ViewMachineInput(),
-                output=ViewMachineOutput())
+            name="view_machine",
+            description="Returns details on the analysis machine associated with the given name",
+            input=ViewMachineInput(),
+            output=ViewMachineOutput(),
+        )
 
     def run(self, params={}):
         server = self.connection.server
-        machine_name = params.get('machine_name', '')
+        machine_name = params.get("machine_name", "")
         endpoint = server + "/machines/view/" + machine_name
 
         try:
@@ -37,5 +38,5 @@ class ViewMachine(komand.Action):
 
     def test(self):
         out = self.connection.test()
-        out['machine'] = {'message':'Test passed'}
+        out["machine"] = {"message": "Test passed"}
         return out

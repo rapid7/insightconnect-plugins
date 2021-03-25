@@ -195,7 +195,7 @@ This plugin requires a Google [service account](https://cloud.google.com/storage
 
 # Version History
 
-* 3.1.2 - New spec and help.md format for the Hub
+* 3.1.2 - New spec and help.md format for the Extension Library
 * 3.1.1 - Fix typo in plugin spec
 * 3.1.0 - Update connection to make `admin_user` an optional input
 * 3.0.0 - Update trigger to allow for the return of multiple messages at one time

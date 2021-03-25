@@ -44,7 +44,7 @@ class OpOutput(komand.Output):
     "response": {
       "type": "object",
       "title": "Response",
-      "description": "Response from PAN-OS",
+      "description": "Response from the firewall",
       "order": 1
     }
   }
