@@ -15,7 +15,7 @@ class Input:
     PRIVATE = "private"
     SAMPLE = "sample"
     SAMPLE_FILENAME = "sample_filename"
-    SAMPLE_PASSWORD = "sample_password"
+    SAMPLE_PASSWORD = "sample_password"     # noqa: B105
     TAGS = "tags"
     VM = "vm"
     

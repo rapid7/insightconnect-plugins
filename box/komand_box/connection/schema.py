@@ -5,11 +5,11 @@ import json
 
 class Input:
     CLIENT_ID = "client_id"
-    CLIENT_SECRET = "client_secret"
+    CLIENT_SECRET = "client_secret"     # noqa: B105
     ENTERPRISE_ID = "enterprise_id"
     JWT_KEY_ID = "jwt_key_id"
     PRIVATE_KEY = "private_key"
-    RSA_PASSWORD = "rsa_password"
+    RSA_PASSWORD = "rsa_password"       # noqa: B105
     
 
 class ConnectionSchema(komand.Input):

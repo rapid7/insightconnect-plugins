@@ -4,8 +4,8 @@ import json
 
 
 class Input:
-    API_PRIVATE_TOKEN = "api_private_token"
-    API_PUBLIC_TOKEN = "api_public_token"
+    API_PRIVATE_TOKEN = "api_private_token"     # noqa: B105
+    API_PUBLIC_TOKEN = "api_public_token"       # noqa: B105
     URL = "url"
     
 

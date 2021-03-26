@@ -8,7 +8,7 @@ class Input:
     PORT = "port"
     SERVER = "server"
     SSL_VERIFY = "ssl_verify"
-    USERNAME_PASSWORD = "username_password"
+    USERNAME_PASSWORD = "username_password"     # noqa: B105
     
 
 class ConnectionSchema(komand.Input):

@@ -31,7 +31,7 @@ class Connection(komand.Connection):
             username = credentials.get("username")
             password = credentials.get("password")
 
-        if username == "anonymous" and password == "anonymous":
+        if username == "anonymous" and password == "anonymous":     # noqa: B105
             username = None
             password = None
 

@@ -18,7 +18,7 @@ class Input:
     REASONS = "reasons"
     REGISTRATION_ID = "registration_id"
     RESULTS = "results"
-    TOKEN_ID = "token_id"
+    TOKEN_ID = "token_id"   # noqa: B105
     USERS = "users"
     WEBAUTHNKEY = "webauthnkey"
     

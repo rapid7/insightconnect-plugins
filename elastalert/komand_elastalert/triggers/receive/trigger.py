@@ -17,7 +17,7 @@ class Receive(komand.Trigger):
             output=ReceiveOutput(),
         )
 
-    def handler_data(self, recv_data):
+    def handler_data(self, recv_data):  # noqa: MC0001
         # Parse headers
         try:
             headers, data = recv_data.split("\r\n\r\n")
@@ -90,7 +90,7 @@ class Receive(komand.Trigger):
 
         BUFF = 4096
         interval = params.get("interval")
-        endpoint = params.get("endpoint", "0.0.0.0")
+        endpoint = params.get("endpoint", "0.0.0.0")    # noqa: B104
         tcp_port = params.get("tcp_port")
 
         host = endpoint + ":" + str(tcp_port)

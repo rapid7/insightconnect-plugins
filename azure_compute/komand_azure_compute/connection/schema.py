@@ -6,7 +6,7 @@ import json
 class Input:
     API_VERSION = "api_version"
     CLIENT_ID = "client_id"
-    CLIENT_SECRET = "client_secret"
+    CLIENT_SECRET = "client_secret"     # noqa: B105
     HOST = "host"
     TENANT_ID = "tenant_id"
     

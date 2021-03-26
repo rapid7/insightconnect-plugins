@@ -6,7 +6,7 @@ import json
 class Input:
     HOSTNAME = "hostname"
     INTEGRATION_KEY = "integration_key"
-    SECRET_KEY = "secret_key"
+    SECRET_KEY = "secret_key"               # noqa: B105
     
 
 class ConnectionSchema(komand.Input):

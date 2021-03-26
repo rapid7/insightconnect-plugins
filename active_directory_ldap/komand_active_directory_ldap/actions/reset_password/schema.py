@@ -9,7 +9,7 @@ class Component:
 
 class Input:
     DISTINGUISHED_NAME = "distinguished_name"
-    NEW_PASSWORD = "new_password"
+    NEW_PASSWORD = "new_password"   # noqa: B105
     
 
 class Output:

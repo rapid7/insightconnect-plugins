@@ -5,7 +5,7 @@ import json
 
 class Input:
     API_ID = "api_id"
-    API_SECRET_KEY = "api_secret_key"
+    API_SECRET_KEY = "api_secret_key"   # noqa: B105
     ORG_KEY = "org_key"
     URL = "url"
     

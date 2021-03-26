@@ -21,7 +21,7 @@ class Output:
     RESULT = "result"
     STATUS = "status"
     STATUS_MSG = "status_msg"
-    TRUSTED_DEVICE_TOKEN = "trusted_device_token"
+    TRUSTED_DEVICE_TOKEN = "trusted_device_token"   # noqa: B105
     TXID = "txid"
     
 

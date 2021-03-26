@@ -110,7 +110,7 @@ class APIClient(object):
 
         auth_body = {"username": username, "password": password, "domain": domain}
         headers = {"Content-Type": "application/json"}
-        response = requests.post(url=auth_url, json=auth_body, headers=headers, verify=False)
+        response = requests.post(url=auth_url, json=auth_body, headers=headers, verify=False)   # noqa: B501
         logger.info(f"Received status code '{response.status_code}' from Symantec Endpoint Protection console.")
 
         if response.status_code == 200:

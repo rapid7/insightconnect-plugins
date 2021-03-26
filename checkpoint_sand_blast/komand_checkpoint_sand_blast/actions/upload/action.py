@@ -44,7 +44,7 @@ class Upload(komand.Action):
         mime_type = mime.from_buffer(file_bytes)
 
         # Hash file_bytes
-        hashed = hashlib.sha1(file_bytes)
+        hashed = hashlib.sha1(file_bytes)   # noqa: B303
         file_hash = hashed.hexdigest()
 
         # Build Request JSON

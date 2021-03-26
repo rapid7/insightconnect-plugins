@@ -111,7 +111,7 @@ class CertValidatingHTTPSConnection(six.moves.http_client.HTTPConnection):
         self.sock = socket.create_connection((self.host, self.port), self.timeout)
         if self._tunnel_host:
             self._tunnel()
-        self.sock = ssl.wrap_socket(
+        self.sock = ssl.wrap_socket(    # noqa: B504
             self.sock,
             keyfile=self.key_file,
             certfile=self.cert_file,
