@@ -18,7 +18,7 @@ def parse_dsn(logger, dsn):
 
     protocol = r"(?P<protocol>\w+)"
     public_key = r"(?P<public_key>\w+)"
-    secret_key = r"(?P<secret_key>\w+)"
+    secret_key = r"(?P<secret_key>\w+)"     # noqa: B105
     host = r"(?P<host>[^/]+)"
     project_id = r"(?P<project_id>\w+)"
 

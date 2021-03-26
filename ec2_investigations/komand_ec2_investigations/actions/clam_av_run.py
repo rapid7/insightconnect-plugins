@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import os
-import subprocess
+import subprocess   # noqa: B404
 from datetime import datetime
 import json
 import hashlib
@@ -11,7 +11,7 @@ from pwd import getpwuid
 
 file_paths = []
 json_output = {"malicious_files": []}
-sha1 = hashlib.sha1()
+sha1 = hashlib.sha1()   # noqa: B303
 
 # Get output from scan result.
 def open_file(s):
@@ -29,7 +29,7 @@ def open_file(s):
         filename = p
         get_time = os.path.getctime(p)
         format_time = datetime.fromtimestamp(get_time).strftime("%Y-%m-%d %H:%M:%S")
-        hashvalue = hashlib.sha1(filename).hexdigest()
+        hashvalue = hashlib.sha1(filename).hexdigest()  # noqa: B303
         owner_name = getpwuid(stat(filename).st_uid).pw_name
         json_output["malicious_files"].append(
             {"file": p, "owner": owner_name, "hash_value": hashvalue, "time_created": format_time}
@@ -46,14 +46,14 @@ def get_scan():
         _now = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
         _file = "Result" + _now + ".txt"
         s = sys.argv[1]
-        d = "/tmp"
+        d = "/tmp"  # noqa: B108
         try:
-            subprocess.check_call(["clamscan", "--quiet", "-r", s, "-l", d + "/" + _file])
+            subprocess.check_call(["clamscan", "--quiet", "-r", s, "-l", d + "/" + _file])  # noqa: B603,B607
         except OSError as e:
             # Error 0 - Clamscan is not installed on host
             print("0")
             return
-        except:
+        except:     # noqa: B110
             pass
         open_file(d + "/" + _file)
 

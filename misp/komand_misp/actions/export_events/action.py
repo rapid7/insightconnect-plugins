@@ -49,7 +49,7 @@ class ExportEvents(komand.Action):
         post = {"request": request}
 
         # Generate request
-        response = requests.post(url, data=json.dumps(post), headers=headers, verify=False)
+        response = requests.post(url, data=json.dumps(post), headers=headers, verify=False)     # noqa: B501
 
         # Raise exception if 200 response is not returned
         if response.status_code != 200:

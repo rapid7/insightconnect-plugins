@@ -20,7 +20,7 @@ class SetAddressObject(komand.Action):
         try:
             ip_address(address)
             return "ip-netmask"
-        except:
+        except:     # noqa: B110
             pass
         if re.search("[a-zA-Z]", address):
             return "fqdn"
@@ -67,7 +67,8 @@ class SetAddressObject(komand.Action):
         try:  # Other
             if ip_address(address).is_private:
                 return True
-        except Exception:  # This was a domain name
+        except Exception:   # noqa: B110
+            # This was a domain name
             pass
 
         return False

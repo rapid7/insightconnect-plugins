@@ -19,7 +19,7 @@ class GetUser(komand.Action):
         r_url = "%s/users/%s" % (self.connection.url, params.get("id"))
 
         try:
-            r = requests.get(r_url, headers={"PRIVATE-TOKEN": self.connection.token}, verify=False)
+            r = requests.get(r_url, headers={"PRIVATE-TOKEN": self.connection.token}, verify=False)     # noqa: B501
             if not r.ok:
                 self.logger.error("Run: Error: ID Does not exist")
                 raise Exception("Run: Error: ID Does not exist")

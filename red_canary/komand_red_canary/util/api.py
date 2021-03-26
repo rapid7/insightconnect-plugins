@@ -126,7 +126,7 @@ class RedCanary3:
     def acknowledge_detection(self, detection_id):
         return self._call_api("PATCH", "detections/{}/mark_acknowledged".format(detection_id))[0]
 
-    def _call_api(
+    def _call_api(  # noqa: MC0001
         self,
         method,
         endpoint_url,

@@ -71,7 +71,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 + r.text,
             )
 
-        token = ""
+        token = ""      # noqa: B105
 
         # Some consoles do not support v2.1 but some actions are not included in 2.0
         # Instead, try getting an auth token from 2.1 first, then rollback to 2.0 if needed

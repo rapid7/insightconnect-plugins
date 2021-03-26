@@ -10,7 +10,7 @@ class SecurityPolicy:
         else:
             self.logger = LogHelper().logger
 
-    def extract_from_security_policy(self, policy: dict) -> dict:
+    def extract_from_security_policy(self, policy: dict) -> dict:   # noqa: MC0001
         """
         Removes extraneous xml data from a current security policy so that it can be edited.
         :param policy: A PAN-OS security policy

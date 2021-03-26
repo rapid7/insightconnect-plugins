@@ -1,0 +1,22 @@
+name: Static Code Analysis
+
+on: [push]
+
+jobs:
+  prospector:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+
+      - name: Install dependencies
+        run: |
+          pip install prospector[with_bandit]
+
+      - name: Prospector
+        run: |
+          prospector --profile prospector.yaml --tool bandit --tool mccabe

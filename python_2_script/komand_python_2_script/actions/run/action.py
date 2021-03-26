@@ -26,7 +26,7 @@ def python_custom_handler(p={}):
 
     def run(self, params={}):
         """ Run action"""
-        exec(self.construct(params["function"]))
+        exec(self.construct(params["function"]))    # noqa: B102
 
         result = python_custom_handler(params["input"])
         return result or {}

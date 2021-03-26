@@ -1,5 +1,5 @@
 from insightconnect_plugin_runtime.exceptions import PluginException
-from subprocess import run
+from subprocess import run  # noqa: B404
 import tempfile
 
 
@@ -9,9 +9,9 @@ def run_grep(log: object, text: str, pattern: str, behavior: str) -> str:
         fp.write(text.encode())
         fp.seek(0)
         if behavior == "Default":
-            matches = run(["egrep", pattern, fp.name], capture_output=True)
+            matches = run(["egrep", pattern, fp.name], capture_output=True)         # noqa: B603,B607
         elif behavior == "Only matching":
-            matches = run(["egrep", "-o", pattern, fp.name], capture_output=True)
+            matches = run(["egrep", "-o", pattern, fp.name], capture_output=True)   # noqa: B603,B607
 
     if matches.returncode == 2:
         raise PluginException(cause="The grep process returned an error", assistance=matches.stderr.decode())

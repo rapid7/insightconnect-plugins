@@ -5,7 +5,7 @@ from .schema import GetReportXmlInput, GetReportXmlOutput
 import sys
 from openvas_lib import VulnscanTaskNotFinishedError
 from openvas_lib import VulnscanServerError
-from xml.etree.ElementTree import tostring
+from xml.etree.ElementTree import tostring  # noqa: B405
 
 
 class GetReportXml(komand.Action):

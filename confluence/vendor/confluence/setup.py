@@ -47,7 +47,7 @@ def get_metadata(*path):
     # This still supports dynamic versioning
     with open(fn) as fo:
         code = compile(fo.read(), fn, 'exec')
-        exec(code, scope)
+        exec(code, scope)   # noqa: B102
 
     if 'setup_metadata' in scope:
         return scope['setup_metadata']

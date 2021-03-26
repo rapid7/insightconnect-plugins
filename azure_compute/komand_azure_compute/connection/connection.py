@@ -38,7 +38,7 @@ class Connection(komand.Connection):
             endpoint=endpoint, client_id=client_id, client_secret=client_secret
         )
 
-        if access_token == "":
+        if access_token == "":  # noqa: B105
             self.logger.info("Connect: Unauthenticated API will be used")
 
         self.server = server

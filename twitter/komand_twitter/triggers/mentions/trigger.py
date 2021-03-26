@@ -27,7 +27,7 @@ class Mentions(komand.Trigger):
 
     def run(self, params={}):
         if not self.connection.client:
-            assert "Run: Twitter API client was None."
+            assert "Run: Twitter API client was None."              # noqa: B101
             raise Exception("Run: Twitter API client was None.")
 
         self.pattern = params.get("pattern")

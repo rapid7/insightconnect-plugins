@@ -23,7 +23,7 @@ class UsersAddedRemovedFromGroup(komand.Trigger):
             output=UsersAddedRemovedFromGroupOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}):   # noqa: MC0001
         """Run the trigger"""
         group_list = params.get(Input.GROUP_IDS)
         okta_url = self.connection.okta_url

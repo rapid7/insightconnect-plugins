@@ -28,7 +28,7 @@ def main():
             logging.warning("ERROR: Wrong file type specified")
 
 
-def parse_fields(yaml_obj):
+def parse_fields(yaml_obj):  # noqa: MC0001
     # Manifest Version -- mandatory
     manifest_obj = {"manifest_version": 1}
 
