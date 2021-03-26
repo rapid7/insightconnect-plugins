@@ -8,7 +8,7 @@ class Input:
     BASE_URL = "base_url"
     BASIC_AUTH_CREDENTIALS = "basic_auth_credentials"
     DEFAULT_HEADERS = "default_headers"
-    SECRET = "secret"           # noqa: B105
+    SECRET = "secret"
     SSL_VERIFY = "ssl_verify"
     
 

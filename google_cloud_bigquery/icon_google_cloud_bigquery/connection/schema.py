@@ -12,7 +12,7 @@ class Input:
     PRIVATE_KEY = "private_key"
     PRIVATE_KEY_ID = "private_key_id"
     PROJECT_ID = "project_id"
-    TOKEN_URI = "token_uri"     # noqa: B105
+    TOKEN_URI = "token_uri"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):

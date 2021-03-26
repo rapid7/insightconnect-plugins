@@ -5,7 +5,7 @@ import json
 
 class Input:
     URL = "url"
-    USERNAME_PASSWORD = "username_password"     # noqa: B105
+    USERNAME_PASSWORD = "username_password"
     
 
 class ConnectionSchema(komand.Input):

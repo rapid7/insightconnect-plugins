@@ -13,7 +13,7 @@ class Input:
     FEED_URL = "feed_url"
     FORCE = "force"
     KEY = "key"
-    PASSWORD = "password"   # noqa: B105
+    PASSWORD = "password"
     USE_PROXY = "use_proxy"
     USERNAME = "username"
     VALIDATE_SERVER_CERT = "validate_server_cert"

@@ -5,9 +5,9 @@ import json
 
 class Input:
     CLIENT_ID = "client_id"
-    CLIENT_SECRET = "client_secret"                                                         # noqa: B105
-    SALESFORCE_ACCOUNT_USERNAME_AND_PASSWORD = "salesforce_account_username_and_password"   # noqa: B105
-    SECURITY_TOKEN = "security_token"                                                       # noqa: B105
+    CLIENT_SECRET = "client_secret"
+    SALESFORCE_ACCOUNT_USERNAME_AND_PASSWORD = "salesforce_account_username_and_password"
+    SECURITY_TOKEN = "security_token"
     
 
 class ConnectionSchema(komand.Input):

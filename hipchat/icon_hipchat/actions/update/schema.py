@@ -13,7 +13,7 @@ class Input:
     IS_GROUP_ADMIN = "is_group_admin"
     MENTION_NAME = "mention_name"
     NAME = "name"
-    PASSWORD = "password"       # noqa: B105
+    PASSWORD = "password"
     PRESENCE = "presence"
     ROLES = "roles"
     TIMEZONE = "timezone"

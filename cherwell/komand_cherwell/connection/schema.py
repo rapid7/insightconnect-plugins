@@ -8,7 +8,7 @@ class Input:
     CLIENT_ID = "client_id"
     SSL_VERIFY = "ssl_verify"
     URL = "url"
-    USERNAME_AND_PASSWORD = "username_and_password"     # noqa: B105
+    USERNAME_AND_PASSWORD = "username_and_password"
     
 
 class ConnectionSchema(komand.Input):

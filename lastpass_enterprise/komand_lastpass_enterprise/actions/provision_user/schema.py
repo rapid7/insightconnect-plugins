@@ -10,8 +10,8 @@ class Component:
 class Input:
     FULL_NAME = "full_name"
     GROUPS = "groups"
-    PASSWORD = "password"                                   # noqa: B105
-    PASSWORD_RESET_REQUIRED = "password_reset_required"     # noqa: B105
+    PASSWORD = "password"
+    PASSWORD_RESET_REQUIRED = "password_reset_required"
     USER_NAME = "user_name"
     
 

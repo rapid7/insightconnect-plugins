@@ -8,8 +8,8 @@ class Component:
 
 
 class Input:
-    ORIGINAL_PASSWORD_IS_A_HASH = "original_password_is_a_hash"     # noqa: B105
-    PASSWORD = "password"                                           # noqa: B105
+    ORIGINAL_PASSWORD_IS_A_HASH = "original_password_is_a_hash"
+    PASSWORD = "password"
     
 
 class Output:

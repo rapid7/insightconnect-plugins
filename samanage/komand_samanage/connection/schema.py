@@ -5,7 +5,7 @@ import json
 
 class Input:
     EU_CUSTOMER = "eu_customer"
-    TOKEN = "token"             # noqa: B105
+    TOKEN = "token"
     
 
 class ConnectionSchema(komand.Input):

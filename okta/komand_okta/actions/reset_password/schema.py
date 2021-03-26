@@ -8,13 +8,13 @@ class Component:
 
 
 class Input:
-    TEMP_PASSWORD = "temp_password"     # noqa: B105
+    TEMP_PASSWORD = "temp_password"
     USER_ID = "user_id"
     
 
 class Output:
     SUCCESS = "success"
-    TEMP_PASSWORD = "temp_password"     # noqa: B105
+    TEMP_PASSWORD = "temp_password"
     
 
 class ResetPasswordInput(komand.Input):

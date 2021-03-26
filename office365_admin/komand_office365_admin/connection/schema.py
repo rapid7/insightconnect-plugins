@@ -5,7 +5,7 @@ import json
 
 class Input:
     APP_ID = "app_id"
-    APP_SECRET = "app_secret"   # noqa: B105
+    APP_SECRET = "app_secret"
     TENANT_ID = "tenant_id"
     
 

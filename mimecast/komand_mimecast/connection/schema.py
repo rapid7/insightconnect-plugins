@@ -7,7 +7,7 @@ class Input:
     ACCESS_KEY = "access_key"
     APP_ID = "app_id"
     APP_KEY = "app_key"
-    SECRET_KEY = "secret_key"   # noqa: B105
+    SECRET_KEY = "secret_key"
     URL = "url"
     
 

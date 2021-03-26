@@ -4,7 +4,7 @@ import json
 
 
 class Input:
-    ACCESS_TOKEN_CREDENTIALS = "access_token_credentials"   # noqa: B105
+    ACCESS_TOKEN_CREDENTIALS = "access_token_credentials"
     CONSUMER_CREDENTIALS = "consumer_credentials"
     
 

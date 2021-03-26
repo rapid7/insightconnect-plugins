@@ -5,7 +5,7 @@ import json
 
 class Input:
     API_KEY = "api_key"
-    API_TOKEN = "api_token"     # noqa: B105
+    API_TOKEN = "api_token"
     VERSION = "version"
     
 

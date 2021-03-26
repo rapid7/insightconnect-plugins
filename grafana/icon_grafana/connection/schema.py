@@ -6,7 +6,7 @@ import json
 class Input:
     BASIC_AUTH = "basic_auth"
     PORT = "port"
-    TOKEN_AUTH = "token_auth"   # noqa: B105
+    TOKEN_AUTH = "token_auth"
     URL = "url"
     
 

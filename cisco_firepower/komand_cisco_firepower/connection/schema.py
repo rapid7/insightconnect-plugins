@@ -5,7 +5,7 @@ import json
 
 class Input:
     CERTIFICATE = "certificate"
-    CERTIFICATE_PASSPHRASE = "certificate_passphrase"   # noqa: B105
+    CERTIFICATE_PASSPHRASE = "certificate_passphrase"
     PORT = "port"
     SERVER = "server"
     

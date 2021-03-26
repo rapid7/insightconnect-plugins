@@ -14,7 +14,7 @@ class Input:
     FILE = "file"
     FILENAME = "filename"
     HYBRIDANALYSIS = "hybridanalysis"
-    PROMPTFILL_PASSWORD = "promptfill_password"     # noqa: B105
+    PROMPTFILL_PASSWORD = "promptfill_password"
     SCRIPTLOGGING = "scriptlogging"
     
 

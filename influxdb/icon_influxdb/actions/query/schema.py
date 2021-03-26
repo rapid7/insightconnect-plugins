@@ -11,7 +11,7 @@ class Input:
     CHUNKED = "chunked"
     DATABASE_NAME = "database_name"
     EPOCH = "epoch"
-    PASSWORD = "password"           # noqa: B105
+    PASSWORD = "password"
     QUERY = "query"
     USERNAME = "username"
     

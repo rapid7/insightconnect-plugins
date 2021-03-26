@@ -5,7 +5,7 @@ import json
 
 class Input:
     SSL_VERIFY = "ssl_verify"
-    TOKEN = "token"     # noqa: B105
+    TOKEN = "token"
     URL = "url"
     
 

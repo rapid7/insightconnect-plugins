@@ -4,7 +4,7 @@ import json
 
 
 class Input:
-    TOKEN = "token"  # noqa: B105
+    TOKEN = "token"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):

@@ -6,7 +6,7 @@ import json
 class Input:
     ACCESS_KEY = "access_key"
     HOSTNAME = "hostname"
-    SECRET_KEY = "secret_key"   # noqa: B105
+    SECRET_KEY = "secret_key"
     SSL_VERIFY = "ssl_verify"
     
 

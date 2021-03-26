@@ -5,7 +5,7 @@ import json
 
 class Input:
     API_KEY = "api_key"
-    SECRET = "secret"       # noqa: B105
+    SECRET = "secret"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):

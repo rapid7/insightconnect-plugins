@@ -12,7 +12,7 @@ class Input:
     
 
 class Output:
-    SHARED_SECRET = "shared_secret"     # noqa: B105
+    SHARED_SECRET = "shared_secret"
     
 
 class GenerateSharedSecretInput(komand.Input):

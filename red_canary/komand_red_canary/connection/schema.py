@@ -4,7 +4,7 @@ import json
 
 
 class Input:
-    API_TOKEN = "api_token"         # noqa: B105
+    API_TOKEN = "api_token"
     CUSTOMER_ID = "customer_id"
     
 

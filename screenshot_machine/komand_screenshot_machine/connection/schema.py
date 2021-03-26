@@ -5,7 +5,7 @@ import json
 
 class Input:
     KEY = "key"
-    SECRET = "secret"   # noqa: B105
+    SECRET = "secret"
     
 
 class ConnectionSchema(komand.Input):

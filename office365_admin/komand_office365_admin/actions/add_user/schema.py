@@ -10,10 +10,10 @@ class Component:
 class Input:
     ACCOUNT_ENABLED = "account_enabled"
     DISPLAY_NAME = "display_name"
-    FORCE_CHANGE_PASSWORD = "force_change_password"     # noqa: B105
+    FORCE_CHANGE_PASSWORD = "force_change_password"
     MAIL_NICKNAME = "mail_nickname"
     OFFICE_LOCATION = "office_location"
-    PASSWORD = "password"                               # noqa: B105
+    PASSWORD = "password"
     USER_PRINCIPAL_NAME = "user_principal_name"
     
 

@@ -14,7 +14,7 @@ class Input:
     FIRST_NAME = "first_name"
     LAST_NAME = "last_name"
     LOGON_NAME = "logon_name"
-    PASSWORD = "password"       # noqa: B105
+    PASSWORD = "password"
     USER_OU = "user_ou"
     USER_PRINCIPAL_NAME = "user_principal_name"
     

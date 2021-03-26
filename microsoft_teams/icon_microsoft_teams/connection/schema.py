@@ -5,9 +5,9 @@ import json
 
 class Input:
     APPLICATION_ID = "application_id"
-    APPLICATION_SECRET = "application_secret"   # noqa: B105
+    APPLICATION_SECRET = "application_secret"
     DIRECTORY_ID = "directory_id"
-    USERNAME_PASSWORD = "username_password"     # noqa: B105
+    USERNAME_PASSWORD = "username_password"
     
 
 class ConnectionSchema(komand.Input):

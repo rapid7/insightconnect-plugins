@@ -5,7 +5,7 @@ import json
 
 class Input:
     CLIENT_ID = "client_id"
-    CLIENT_SECRET = "client_secret"     # noqa: B105
+    CLIENT_SECRET = "client_secret"
     CREDENTIALS = "credentials"
     TENANT_ID = "tenant_id"
     URL = "url"
