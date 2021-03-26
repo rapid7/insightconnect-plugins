@@ -1,4 +1,4 @@
-name: Prospector Analysis
+name: Static Code Analysis
 
 on: [push]
 
