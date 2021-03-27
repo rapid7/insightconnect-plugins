@@ -13,7 +13,7 @@ class Retrieve(komand.Action):
             output=RetrieveOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}):   # noqa: MC0001
         client = self.connection.client
         #
         try:

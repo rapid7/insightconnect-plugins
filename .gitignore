@@ -24,8 +24,8 @@
 **/venv
 
 # We don't want a spec file in the root of the repo, people end up editing it
-/*.yaml
-/*.yml
+/plugin.spec.yaml
+/plugin.spec.yml
 
 # We don't want run files
 **/*-run

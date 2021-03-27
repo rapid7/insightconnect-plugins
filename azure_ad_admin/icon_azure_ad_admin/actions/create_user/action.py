@@ -11,7 +11,7 @@ import random
 
 def _pw_gen(size: int = 16, chars: [str] = string.ascii_letters + string.digits + string.punctuation) -> (str):
     def gen(size: int = 16) -> str:
-        return "".join(random.choice(chars) for _ in range(size))
+        return "".join(random.choice(chars) for _ in range(size))   # noqa: B311
 
     while True:
         password = gen(size=16)

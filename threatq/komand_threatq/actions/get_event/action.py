@@ -32,7 +32,7 @@ class GetEvent(komand.Action):
         auth_headers = {"content-type": "application/json"}
 
         try:
-            auth_response = requests.post(auth_url, data=json.dumps(auth_body), headers=auth_headers, verify=False)
+            auth_response = requests.post(auth_url, data=json.dumps(auth_body), headers=auth_headers, verify=False)     # noqa: B501
             auth_response_dict = json.loads(auth_response.text)
             auth_token = auth_response_dict["access_token"]
 
@@ -42,7 +42,7 @@ class GetEvent(komand.Action):
             get_headers = {"authorization": "Bearer " + auth_token}
 
             try:
-                get_results = requests.get(get_url, headers=get_headers, params=get_params, verify=False)
+                get_results = requests.get(get_url, headers=get_headers, params=get_params, verify=False)   # noqa: B501
                 results = json.loads(get_results.text)
                 return results
 

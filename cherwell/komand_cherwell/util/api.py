@@ -6,7 +6,7 @@ from urllib.parse import urlencode
 
 class Cherwell:
 
-    TOKEN = ""
+    TOKEN = ""  # noqa: B105
 
     def __init__(self, base_url, logger, username, password, client_id, authentication_mode):
         self._base_url = base_url

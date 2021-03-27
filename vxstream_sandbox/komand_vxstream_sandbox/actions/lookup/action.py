@@ -26,7 +26,7 @@ class Lookup(komand.Action):
             secret,
         )
         req = urllib.request.Request(url=url, headers={"User-Agent": "VxStream Sandbox"})
-        response = urllib.request.urlopen(req)
+        response = urllib.request.urlopen(req)      # noqa: B310
         output = json.loads(response.read().decode("utf-8"))
 
         if output["response_code"] == 0:
@@ -53,7 +53,7 @@ class Lookup(komand.Action):
         digest = "d6dcfa69ef0e437fbcc60a1ea4f03019e4814fa90b789e0e80d5179022e2b118"
         url = server + "/scan/%s?apikey=%s&secret=%s" % (digest, api_key, secret)
         req = urllib.request.Request(url=url, headers={"User-Agent": "VxStream Sandbox"})
-        response = urllib.request.urlopen(req)
+        response = urllib.request.urlopen(req)      # noqa: B310
         output = json.loads(response.read().decode("utf-8"))
 
         if output["response_code"] != 0:

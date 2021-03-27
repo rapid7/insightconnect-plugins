@@ -140,7 +140,7 @@ class TopRemediations(komand.Action):
     @staticmethod
     def remediations_query(limit):
         return (
-            f"SELECT fr.solution_id, fr.assets, fr.vulnerabilities, fr.riskscore, ds.nexpose_id, "
+            f"SELECT fr.solution_id, fr.assets, fr.vulnerabilities, fr.riskscore, ds.nexpose_id, "  # noqa: B608
             f'ds.summary AS "summary", htmlToText(ds.fix) AS "fix", '
             f"array_to_string(array_agg(DISTINCT da.ip_address), ', ') AS \"ip_addresses\", "
             f"array_to_string(array_agg(DISTINCT da.host_name),', ') AS \"host_names\" "
@@ -155,7 +155,7 @@ class TopRemediations(komand.Action):
     @staticmethod
     def assets_query(limit):
         return (
-            f"WITH criticality_tags AS ( "
+            f"WITH criticality_tags AS ( "  # noqa: B608
             f"SELECT asset_id, array_to_string(array_agg(distinct tag_name),',') AS criticality_tag "
             f"FROM dim_tag "
             f"JOIN dim_tag_asset USING (tag_id) "
@@ -179,7 +179,7 @@ class TopRemediations(komand.Action):
     @staticmethod
     def vulnerabilities_query(limit):
         return (
-            f"WITH remediation_vulnerabilities AS ( "
+            f"WITH remediation_vulnerabilities AS ( "   # noqa: B608
             f"SELECT DISTINCT solution_id, vulnerability_id "
             f"FROM dim_asset_vulnerability_solution "
             f")"

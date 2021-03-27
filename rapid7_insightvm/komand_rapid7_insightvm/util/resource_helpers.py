@@ -116,7 +116,7 @@ class ValidateUser:
             self.logger.error(error)
             raise ResourceNotFound(error)
 
-    def validate_user_permissions(self, console_url: str, user: dict) -> dict:
+    def validate_user_permissions(self, console_url: str, user: dict) -> dict:  # noqa: MC0001
         """
         Validate that user permissions are appropriate given the user's role.
         This is useful when updating a user's role or create a new user as

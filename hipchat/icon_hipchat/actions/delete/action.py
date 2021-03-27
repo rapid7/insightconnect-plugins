@@ -24,14 +24,14 @@ class Delete(komand.Action):
             url = server + "/user/" + id_or_email
 
             # new Request Request
-            request = urllib2.Request(
+            request = urllib2.Request(  # noqa: B310
                 url,
                 headers={"Content-Type": "application/json", "Authorization": "Bearer %s" % token},
             )
             request.get_method = lambda: "DELETE"
 
             # Call api and response data
-            resp = urllib2.urlopen(request)
+            resp = urllib2.urlopen(request)     # noqa: B310
             status_code = resp.getcode()
 
             return {"status_code": status_code}

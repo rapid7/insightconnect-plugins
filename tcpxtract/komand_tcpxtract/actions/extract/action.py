@@ -27,7 +27,7 @@ class Extract(komand.Action):
             raise
 
         # Set file path to store file
-        dir = "/tmp/tcpxtract"
+        dir = "/tmp/tcpxtract"  # noqa: B108
         file_name = "tcpxtract.pcap"
         full_path = "%s/%s" % (dir, file_name)
 

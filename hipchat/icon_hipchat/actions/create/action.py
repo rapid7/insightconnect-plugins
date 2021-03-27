@@ -49,14 +49,14 @@ class Create(komand.Action):
             url = server + "/user"
 
             # new Request Request
-            request = urllib2.Request(
+            request = urllib2.Request(  # noqa: B310
                 url,
                 data=json.dumps(data),
                 headers={"Content-Type": "application/json", "Authorization": "Bearer %s" % token},
             )
 
             # Call api and response data
-            resp = urllib2.urlopen(request)
+            resp = urllib2.urlopen(request)     # noqa: B310
 
             # handle decoding json
             try:

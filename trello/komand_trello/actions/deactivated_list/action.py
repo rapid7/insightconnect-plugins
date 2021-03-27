@@ -43,7 +43,7 @@ class DeactivatedList(komand.Action):
 
             url = server + "/organizations/" + params.get("id_or_name") + "/memberships?" + url_values
             # api GetBoardsByMember response array board
-            resp = urllib2.urlopen(url)
+            resp = urllib2.urlopen(url)     # noqa: B310
             # handle decoding json
             try:
                 result_dic = json.loads(resp.read())
@@ -68,7 +68,7 @@ class DeactivatedList(komand.Action):
         http_method = "GET"
         id_or_name = "586e017aed11e154f287d464"
         api_key = "35cc663206a549a44b12a196e8e17554"
-        token = "8342ebeaf475ca337bae562abaf68582ebb18f469659440e4199020d108bd46d"
+        token = "8342ebeaf475ca337bae562abaf68582ebb18f469659440e4199020d108bd46d"  # noqa: B105
 
         #  url test authentication
         url = "https://api.trello.com/1/organizations/" + id_or_name
