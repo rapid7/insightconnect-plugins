@@ -27,7 +27,7 @@ class Common:
         return d
 
     @staticmethod
-    def body_object(response) -> object:
+    def body_object(response) -> dict:
 
         body_object = {}
         try:
