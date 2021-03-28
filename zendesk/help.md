@@ -187,7 +187,7 @@ Example input:
 
 ```
 {
-  "membership_id": 1401295821555
+  "membership_id": "1401295821555"
 }
 ```
 
@@ -219,7 +219,7 @@ Example input:
 
 ```
 {
-  "user_id": 361738647591
+  "user_id": "361738647591"
 }
 ```
 
@@ -282,7 +282,7 @@ Example input:
 
 ```
 {
-  "user_id": 361738647591
+  "user_id": "361738647591"
 }
 ```
 
@@ -314,7 +314,7 @@ Example input:
 
 ```
 {
-  "user_id": 361738647591
+  "user_id": "361738647591"
 }
 ```
 
@@ -371,12 +371,12 @@ Example input:
   ],
   "description": "Example description",
   "due_at": "2021-04-10T12:00:00Z",
-  "external_id": 10,
-  "group_id": 1400012453812,
+  "external_id": "10",
+  "group_id": "1400012453812",
   "priority": "High",
-  "problem_id": 25,
-  "recipient": 352083642834,
-  "requester_id": 361738647672,
+  "problem_id": "25",
+  "recipient": "352083642834",
+  "requester_id": "361738647672",
   "status": "Open",
   "subject": "New Subject",
   "tags": [
@@ -461,7 +461,7 @@ Example input:
 
 ```
 {
-  "assignee_id": 361738647591,
+  "assignee_id": "361738647591",
   "collaborator_ids": [
     "361738647591",
     "361738647672"
@@ -473,12 +473,12 @@ Example input:
     "public": true
   },
   "due_at": "2021-04-10T12:00:00Z",
-  "external_id": 10,
-  "group_id": 1400012453812,
+  "external_id": "10",
+  "group_id": "1400012453812",
   "priority": "High",
-  "problem_id": 25,
-  "recipient": 352083642834,
-  "requester_id": 361738647672,
+  "problem_id": "25",
+  "recipient": "352083642834",
+  "requester_id": "361738647672",
   "status": "Open",
   "subject": "New Subject",
   "tags": [
@@ -556,7 +556,7 @@ Example input:
 
 ```
 {
-  "user_id": 361738647591
+  "user_id": "361738647591"
 }
 ```
 
