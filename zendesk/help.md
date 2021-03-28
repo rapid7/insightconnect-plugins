@@ -22,13 +22,21 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|False|Zendesk API key|None|None|
-|credentials|credential_username_password|None|True|Email and password|None|None|
-|subdomain|string|None|True|Zendesk subdomain|None|None|
+|api_key|credential_secret_key|None|False|Zendesk API key|None|A6yLhgioJiF2wOP1omP9sTa5yWSTvucx2U7yg67u|
+|credentials|credential_username_password|None|True|Email and password|None|{"username": "user@example.com", "password": "password"}|
+|subdomain|string|None|True|Zendesk subdomain|None|example-subdomain|
 
 Example input:
 
 ```
+{
+  "api_key": "A6yLhgioJiF2wOP1omP9sTa5yWSTvucx2U7yg67u",
+  "credentials": {
+    "username": "user@example.com",
+    "password": "password"
+  },
+  "subdomain": "example-subdomain"
+}
 ```
 
 ## Technical Details
@@ -43,14 +51,14 @@ This action is used to search Zendesk.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|item|string|None|True|Search item E.g. password reset|None|None|
-|type|string|None|True|Search type|['User', 'Organization', 'Ticket']|None|
+|item|string|None|True|Search item E.g. password reset|None|Example User|
+|type|string|None|True|Search type|['User', 'Organization', 'Ticket']|User|
 
 Example input:
 
 ```
 {
-  "item": "Alex",
+  "item": "Example User",
   "type": "User"
 }
 ```
@@ -59,14 +67,16 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|[]object|False|Get Zendesk query results|
+|organizations|[]organization|False|Get Zendesk query results for organizations|
+|tickets|[]ticket|False|Get Zendesk query results for tickets|
+|users|[]user|False|Get Zendesk query results for users|
 
 Example output:
 
 ```
 
 {
-  "results": [
+  "users": [
     {
       "active": true,
       "alias": null,
@@ -81,7 +91,7 @@ Example output:
       "locale": "en-US",
       "locale_id": 1,
       "moderator": true,
-      "name": "Jen Andre",
+      "name": "Example User",
       "notes": null,
       "only_private_comments": false,
       "organization_id": 360002530352,
@@ -139,13 +149,13 @@ This action is used to delete a ticket.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|ticket_id|string|None|True|Delete ticket|None|None|
+|ticket_id|string|None|True|Delete ticket|None|10|
 
 Example input:
 
 ```
 {
-  "ticket_id": "20181554587"
+  "ticket_id": 10
 }
 ```
 
@@ -154,6 +164,14 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|boolean|True|Success or failure|
+
+Example output:
+
+```
+{
+  "status": true
+}
+```
 
 #### Delete Membership
 
@@ -163,13 +181,13 @@ This action is used to delete an organization membership.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|membership_id|string|None|True|ID of membership to delete E.g. 1657574807|None|None|
+|membership_id|string|None|True|ID of membership to delete E.g. 1401295821555|None|1401295821555|
 
 Example input:
 
 ```
 {
-  "membership_id": "1657574807"
+  "membership_id": 1401295821555
 }
 ```
 
@@ -178,6 +196,14 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|boolean|True|Success or failure|
+
+Example output:
+
+```
+{
+  "status": true
+}
+```
 
 #### Show User
 
@@ -187,13 +213,13 @@ This action is used to retrieve user information.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|ID of user to show E.g. 20444826487|None|None|
+|user_id|string|None|True|ID of user to show E.g. 361738647591|None|361738647591|
 
 Example input:
 
 ```
 {
-  "user_id": "361738647591"
+  "user_id": 361738647591
 }
 ```
 
@@ -203,6 +229,45 @@ Example input:
 |----|----|--------|-----------|
 |user|object|True|User meta data|
 
+Example output:
+
+```
+{
+  "active": true,
+  "alias": null,
+  "chat_only": false,
+  "created_at": "2021-03-16T19:29:15Z",
+  "custom_role_id": null,
+  "details": null,
+  "email": "user@example.com",
+  "external_id": null,
+  "id": 361738647591,
+  "last_login_at": "2021-03-28T20:59:47Z",
+  "locale": "en-US",
+  "locale_id": 1,
+  "moderator": true,
+  "name": "Example User",
+  "notes": null,
+  "only_private_comments": false,
+  "organization_id": 1500182396435,
+  "phone": null,
+  "photo": null,
+  "restricted_agent": false,
+  "role": "admin",
+  "shared": false,
+  "shared_agent": false,
+  "signature": null,
+  "suspended": false,
+  "tags": [],
+  "ticket_restriction": null,
+  "time_zone": "America/Chicago",
+  "two_factor_auth_enabled": null,
+  "updated_at": "2021-03-28T20:59:47Z",
+  "url": "https://zendesk.com/api/v2/users/361738647591.json",
+  "verified": true
+}
+```
+
 #### Suspend User
 
 This action is used to suspend a user.
@@ -211,13 +276,13 @@ This action is used to suspend a user.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|ID of user to delete E.g. 20444826487|None|None|
+|user_id|string|None|True|ID of user to delete E.g. 361738647591|None|361738647591|
 
 Example input:
 
 ```
 {
-  "user_id": "361738647591"
+  "user_id": 361738647591
 }
 ```
 
@@ -226,6 +291,14 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |status|boolean|True|Success or failure|
+
+Example output:
+
+```
+{
+  "status": true
+}
+```
 
 #### Delete User
 
@@ -235,13 +308,13 @@ This action is used to delete a user.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|ID of user to delete E.g. 20444826487|None|None|
+|user_id|string|None|True|ID of user to delete E.g. 361738647591|None|361738647591|
 
 Example input:
 
 ```
 {
-  "user_id": "361738647591"
+  "user_id": 361738647591
 }
 ```
 
@@ -251,6 +324,14 @@ Example input:
 |----|----|--------|-----------|
 |status|boolean|True|Success or failure|
 
+Example output:
+
+```
+{
+  "status": true
+}
+```
+
 #### Create Ticket
 
 This action is used to create a ticket.
@@ -259,50 +340,51 @@ This action is used to create a ticket.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|assignee_id|string|None|False|Assignee ID|None|None|
-|attachment|file|None|False|Optional file attachment|None|None|
-|collaborator_ids|[]string|None|False|List of collaborator IDs|None|None|
-|description|string|None|True|Ticket description|None|None|
-|due_at|date|None|False|Time ticket is due|None|None|
-|external_id|string|None|False|Support ticket ID|None|None|
-|group_id|string|None|False|Group ID|None|None|
-|priority|string|None|False|Ticket priority|['Urgent', 'High', 'Normal', 'Low', '']|None|
-|problem_id|string|None|False|For tickets of type 'incident', the numeric ID of the problem the incident is linked to|None|None|
-|recipient|string|None|False|ID of user recipient|None|None|
-|requester_id|string|None|False|ID of user requesting support|None|None|
-|status|string|None|False|Ticket status|['New', 'Open', 'Pending', 'Hold', 'Solved', 'Closed', '']|None|
-|subject|string|None|True|Subject of ticket|None|None|
-|tags|[]string|None|False|Tags describing ticket|None|None|
-|type|string|None|False|Ticket type|['Problem', 'Incident', 'Task', 'Question', '']|None|
+|assignee_id|string|None|False|Assignee ID|None|361738647591|
+|attachment|file|None|False|Optional file attachment|None|{"content": "Sample Content", "filename": "sample_file.txt"}|
+|collaborator_ids|[]string|None|False|List of collaborator IDs|None|["361738647591", "361738647672"]|
+|description|string|None|True|Ticket description|None|Example description|
+|due_at|date|None|False|Time ticket is due|None|2021-04-10 12:00:00|
+|external_id|string|None|False|Support ticket ID|None|10|
+|group_id|string|None|False|Group ID|None|1400012453812|
+|priority|string|None|False|Ticket priority|['Urgent', 'High', 'Normal', 'Low', '']|High|
+|problem_id|string|None|False|For tickets of type 'incident', the numeric ID of the problem the incident is linked to|None|25|
+|recipient|string|None|False|ID of user recipient|None|352083642834|
+|requester_id|string|None|False|ID of user requesting support|None|361738647672|
+|status|string|None|False|Ticket status|['New', 'Open', 'Pending', 'Hold', 'Solved', 'Closed', '']|Open|
+|subject|string|None|True|Subject of ticket|None|New Subject|
+|tags|[]string|None|False|Tags describing ticket|None|["tag", "example", "ticket"]|
+|type|string|None|False|Ticket type|['Problem', 'Incident', 'Task', 'Question', '']|Problem|
 
 Example input:
 
 ```
 {
-  "assignee_id":"20241548208",
-  "attachment":{
-    "content":"heyMAX",
-    "filename":"hello.txt"
+  "assignee_id": "361738647591",
+  "attachment": {
+    "content": "Sample Content",
+    "filename": "sample_file.txt"
   },
-  "collaborator_ids":[
-    "20241548208",
-    "20180428207"
+  "collaborator_ids": [
+    "361738647591",
+    "361738647672"
   ],
-  "description":"Hello description",
-  "due_at":"2017-03-20T23:03:32.114196",
-  "external_id":"22",
-  "priority":"High",
-  "problem_id":"14",
-  "recipient":"20243926068",
-  "requester_id":"20243926068",
-  "status":"Pending",
-  "subject":"hello Subject",
-  "tags":[
-    "Peace",
-    "Love",
-    "Happiness"
+  "description": "Example description",
+  "due_at": "2021-04-10T12:00:00Z",
+  "external_id": 10,
+  "group_id": 1400012453812,
+  "priority": "High",
+  "problem_id": 25,
+  "recipient": 352083642834,
+  "requester_id": 361738647672,
+  "status": "Open",
+  "subject": "New Subject",
+  "tags": [
+    "tag",
+    "example",
+    "ticket"
   ],
-  "type":"Incident"
+  "type": "Problem"
 }
 ```
 
@@ -312,6 +394,45 @@ Example input:
 |----|----|--------|-----------|
 |ticket|object|False|Ticket meta data|
 
+Example output:
+
+```
+{
+  "assignee_id": 361738647591,
+  "brand_id": 1500182396435,
+  "collaborator_ids": [
+    361738647591,
+    361738647672
+  ],
+  "created_at": "2021-03-28T20:05:16Z",
+  "description": "Example description",
+  "due_at": 2021-04-10T12:00:00Z,
+  "external_id": "10",
+  "forum_topic_id": null,
+  "group_id": 1400012453812,
+  "has_incidents": false,
+  "id": 15,
+  "organization_id": 1500075172832,
+  "priority": "high",
+  "problem_id": 25,
+  "raw_subject": "New Subject",
+  "recipient": 352083642834,
+  "requester_id": 361738647672,
+  "sharing_agreement_ids": [],
+  "status": "open",
+  "subject": "New Subject",
+  "submitter_id": 1503798876742,
+  "tags": [
+    "example",
+    "tag",
+    "ticket"
+  ],
+  "type": "problem",
+  "updated_at": "2021-03-28T20:05:16Z",
+  "url": "https:/zendesk.com/api/v2/tickets/15.json"
+}
+```
+
 #### Update Ticket
 
 This action is used to update ticket.
@@ -320,53 +441,53 @@ This action is used to update ticket.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|assignee_id|string|None|False|Assignee ID|None|None|
-|collaborator_ids|[]string|None|False|List of collaborator IDs|None|None|
-|comment|comment|None|False|Comment|None|None|
-|due_at|date|None|False|Time ticket is due|None|None|
-|external_id|string|None|False|Support ticket ID|None|None|
-|group_id|string|None|False|Group ID|None|None|
-|priority|string|None|False|Ticket priority|['Urgent', 'High', 'Normal', 'Low', '']|None|
-|problem_id|string|None|False|For tickets of type 'incident', the numeric ID of the problem the incident is linked to|None|None|
-|recipient|string|None|False|ID of user recipient|None|None|
-|requester_id|string|None|True|ID of user requesting support|None|None|
-|status|string|None|False|Ticket status|['New', 'Open', 'Pending', 'Hold', 'Solved', 'Closed', '']|None|
-|subject|string|None|False|Subject of ticket|None|None|
-|tags|[]string|None|False|Tags describing ticket|None|None|
-|ticket_id|string|None|True|Ticket ID|None|None|
-|type|string|None|False|Ticket type|['Problem', 'Incident', 'Task', 'Question', '']|None|
+|assignee_id|string|None|False|Assignee ID|None|361738647591|
+|collaborator_ids|[]string|None|False|List of collaborator IDs|None|["361738647591", "361738647672"]|
+|comment|comment|None|False|Comment|None|{"author_id": "361738647591","body": "Test comment","html_body": "<u>Test Underlined comment</u>","public": true}|
+|due_at|date|None|False|Time ticket is due|None|2021-04-10 12:00:00|
+|external_id|string|None|False|Support ticket ID|None|10|
+|group_id|string|None|False|Group ID|None|1400012453812|
+|priority|string|None|False|Ticket priority|['Urgent', 'High', 'Normal', 'Low', '']|High|
+|problem_id|string|None|False|For tickets of type 'incident', the numeric ID of the problem the incident is linked to|None|25|
+|recipient|string|None|False|ID of user recipient|None|352083642834|
+|requester_id|string|None|True|ID of user requesting support|None|361738647672|
+|status|string|None|False|Ticket status|['New', 'Open', 'Pending', 'Hold', 'Solved', 'Closed', '']|Open|
+|subject|string|None|False|Subject of ticket|None|New Subject|
+|tags|[]string|None|False|Tags describing ticket|None|["tag", "example", "ticket"]|
+|ticket_id|integer|None|True|Ticket ID|None|30|
+|type|string|None|False|Ticket type|['Problem', 'Incident', 'Task', 'Question', '']|Problem|
 
 Example input:
 
 ```
 {
-  "assignee_id":"",
-  "comment":{
-    "author_id":"435353535",
-    "body":"Test comment",
-    "html_body":"<u>Test Underlined comment</u>",
-    "public":true
+  "assignee_id": 361738647591,
+  "collaborator_ids": [
+    "361738647591",
+    "361738647672"
+  ],
+  "comment": {
+    "author_id": "361738647591",
+    "body": "Test comment",
+    "html_body": "<u>Test Underlined comment</u>",
+    "public": true
   },
-  "collaborator_ids":[
-    "20241548208",
-    "20180428207"
+  "due_at": "2021-04-10T12:00:00Z",
+  "external_id": 10,
+  "group_id": 1400012453812,
+  "priority": "High",
+  "problem_id": 25,
+  "recipient": 352083642834,
+  "requester_id": 361738647672,
+  "status": "Open",
+  "subject": "New Subject",
+  "tags": [
+    "tag",
+    "example",
+    "ticket"
   ],
-  "due_at":"2017-03-20T23:03:32.114196",
-  "external_id":"57",
-  "group_id":"22",
-  "description":"New description",
-  "priority":"Urgent",
-  "problem_id":"14",
-  "recipient":"20243926068",
-  "requester_id":"406059378433",
-  "status":"Open",
-  "subject":"New Subject",
-  "tags":[
-    "tag1",
-    "tag2"
-  ],
-  "ticket_id":"53",
-  "type":"Problem"
+  "ticket_id": 30,
+  "type": "Problem"
 }
 ```
 
@@ -379,47 +500,46 @@ Example input:
 Example output:
 
 ```
-
 {
-  "assignee_id":"",
-  "brand_id":360000066092,
-  "comment":{
-    "author_id":"435353535",
-    "body":"Test comment",
-    "html_body":"<u>Test Underlined comment</u>",
-    "public":true
-  },
-  "collaborator_ids":[
-
-  ],
-  "created_at":"2018-05-01T15:36:04Z",
-  "description":"",
-  "due_at":"0001-01-01T00:00:00Z",
-  "external_id":"",
-  "forum_topic_id":null,
-  "group_id":"",
-  "has_incidents":false,
-  "id":399,
-  "organization_id":null,
-  "priority":null,
-  "problem_id":"",
-  "raw_subject":"some ticket",
-  "recipient":"",
-  "requester_id":"360386052052",
-  "sharing_agreement_ids":[
-
-  ],
-  "status":"new",
-  "subject":"I want to change things",
-  "submitter_id":363945031071,
-  "tags":[
-
-  ],
-  "type":null,
-  "updated_at":"2018-05-16T15:22:00Z",
-  "url":"https://zendesk.com/api/v2/tickets/399.json"
+  "ticket": {
+    "assignee_id": "361738647591",
+    "brand_id": 1500182396435,
+    "collaborator_ids": [
+      "361738647591",
+      "361738647672"
+    ],
+    "created_at": "2021-03-28T18:51:48Z",
+    "due_at": "2021-04-10T12:00:00Z",
+    "external_id": "10",
+    "group_id": "1400012453812",
+    "has_incidents": false,
+    "id": 12,
+    "organization_id": 1500075172832,
+    "priority": "High",
+    "problem_id": "25",
+    "raw_subject": "Example Ticket",
+    "recipient": "1503798876742",
+    "requester_id": "1503798876742",
+    "sharing_agreement_ids": [],
+    "status": "Open",
+    "subject": "New Subject",
+    "submitter_id": 361738647591,
+    "tags": [
+      "tag",
+      "example",
+      "ticket"
+    ],
+    "type": "Problem",
+    "updated_at": "2021-03-28T20:46:09Z",
+    "url": "https://zendesk.com/api/v2/tickets/12.json",
+    "comment": {
+      "author_id": "361738647591",
+      "body":"Test comment",
+      "html_body":"<u>Test Underlined comment</u>",
+      "public":true
+    }
+  }
 }
-
 ```
 
 #### Show Organization Memberships
@@ -430,13 +550,13 @@ This action is used to show all organization memberships.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|ID of user to show E.g. 20444826487|None|None|
+|user_id|string|None|True|ID of user to show E.g. 361738647591|None|361738647591|
 
 Example input:
 
 ```
 {
-  "user_id": "361738647591"
+  "user_id": 361738647591
 }
 ```
 
@@ -445,6 +565,23 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |memberships|[]object|True|Members data|
+
+Example input:
+
+```
+{
+  "memberships": [
+    {
+      "created_at": "2021-03-16T19:29:22Z",
+      "default": true,
+      "id": 1401295821555,
+      "organization_id": 1500183722875,
+      "updated_at": "2021-03-16T19:29:22Z",
+      "user_id": 1504758840389
+    }
+  ]
+}
+```
 
 ### Triggers
 
@@ -461,26 +598,81 @@ _This plugin does not contain any triggers._
 |HTML Body|string|False|The comment formatted as HTML. This will be preferred over body|
 |Public|boolean|False|Public (true if public comment, false if an internal note)|
 
+#### organization
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Created At|date|False|Created at|
+|Details|string|False|Details|
+|External ID|string|False|External ID|
+|Group ID|string|False|Group ID|
+|ID|string|False|ID|
+|Name|string|False|Name|
+|Notes|string|False|Notes|
+|Shared Comments|boolean|False|Shared comments|
+|Shared Tickets|boolean|False|Shared tickets|
+|Tags|[]string|False|Tags|
+|Updated At|string|False|Updated at|
+|URL|string|False|URL|
+
 #### ticket
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Assignee ID|string|False|None|
-|Attachment|file|False|None|
-|Collaborator IDs|[]string|False|None|
-|Comment|comment|False|None|
-|Description|string|False|None|
-|Due At|date|False|None|
-|External ID|string|False|None|
-|Group ID|integer|False|None|
-|Priority|string|False|None|
-|Problem ID|string|False|None|
-|Recipient ID|string|False|None|
-|Requester ID|string|False|None|
-|Status|string|False|None|
-|Subject|string|False|None|
-|Tags|[]string|False|None|
-|Type|string|False|None|
+|Assignee ID|string|False|Assignee ID|
+|Attachment|file|False|Attachment|
+|Collaborator IDs|[]string|False|Collaborator IDs|
+|Comment|comment|False|Comment|
+|Description|string|False|Description|
+|Due At|date|False|Due at|
+|External ID|string|False|External ID|
+|Group ID|string|False|Group ID|
+|ID|integer|False|ID|
+|Priority|string|False|Priority|
+|Problem ID|string|False|Problem ID|
+|Recipient ID|string|False|Recipient ID|
+|Requester ID|string|False|Requester ID|
+|Status|string|False|Status|
+|Subject|string|False|Subject|
+|Tags|[]string|False|Tags|
+|Type|string|False|Type|
+
+#### user
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Active|boolean|False|Active|
+|Alias|string|False|Alias|
+|Chat Only|boolean|False|Chat only|
+|Created At|date|False|Created at|
+|Custom Role ID|string|False|Custom role ID|
+|Details|string|False|Details|
+|Email|string|False|Email|
+|External ID|string|False|External ID|
+|ID|string|False|ID|
+|Last Login At|date|False|Last login at|
+|Locale|string|False|Locale|
+|Locale ID|integer|False|Locale ID|
+|Moderator|boolean|False|Moderator|
+|Name|string|False|Name|
+|Notes|string|False|Notes|
+|Only Private Comments|boolean|False|Only private comments|
+|Organization ID|string|False|Organization ID|
+|Phone|string|False|Phone|
+|Photo|object|False|Photo|
+|Restricted Agent|boolean|False|Restricted agent|
+|Role|string|False|Role|
+|Shared|boolean|False|Shared|
+|Shared Agent|boolean|False|Shared agent|
+|Signature|string|False|Signature|
+|Suspended|boolean|False|Suspended|
+|Tags|[]string|False|Tags|
+|Ticket Restriction|string|False|Ticket restriction|
+|Time Zone|string|False|Time Zone|
+|Two Factor Auth Enabled|boolean|False|Two factor auth enabled|
+|Updated At|string|False|Updated at|
+|URL|string|False|URL|
+|Verified|boolean|False|Verified|
 
 ## Troubleshooting
 
@@ -488,6 +680,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.2 - Add custom output types in Search action | Add conversion of IDs to string in Search action to allow reuse search data in other actions | Add action input and output examples to the documentation
 * 2.0.1 - Change custom output type `group_id` from integer to string | Change `group_id` input type from integer to string in Create Ticket action
 * 2.0.0 - Remove unwanted input fields, add comment field in action Update Ticket | Fix enum fields issue with Create Ticket action
 * 1.1.1 - New spec and help.md format for the Extension Library

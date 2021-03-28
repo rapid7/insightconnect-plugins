@@ -4,7 +4,7 @@ products: [insightconnect]
 name: zendesk
 title: Zendesk
 description: Regulate customer communications by managing tickets and users in Zendesk data
-version: 2.0.1
+version: 2.0.2
 vendor: rapid7
 support: community
 status: []
@@ -38,90 +38,332 @@ types:
       title: Author ID
       description: Author ID
       type: string
+  organization:
+    created_at:
+      title: Created At
+      description: Created at
+      type: date
+      required: false
+    details:
+      title: Details
+      description: Details
+      type: string
+      required: false
+    external_id: 
+      title: External ID
+      description: External ID
+      type: string
+      required: false
+    group_id:
+      title: Group ID
+      description: Group ID
+      type: string
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: string
+      required: false
+    name: 
+      title: Name
+      description: Name
+      type: string
+      required: false
+    notes:
+      title: Notes
+      description: Notes
+      type: string
+      required: false
+    shared_comments:
+      title: Shared Comments
+      description: Shared comments
+      type: boolean
+      required: false
+    shared_tickets:
+      title: Shared Tickets
+      description: Shared tickets
+      type: boolean
+      required: false
+    tags:
+      title: Tags
+      description: Tags
+      type: "[]string"
+      required: false
+    updated_at:
+      title: Updated At
+      description: Updated at
+      type: string
+      required: false
+    url:
+      title: URL
+      description: URL
+      type: string
+      required: false
   ticket:
     attachment:
       title: Attachment
+      description: Attachment
       type: file
+      required: false
     assignee_id:
       title: Assignee ID
+      description: Assignee ID
       type: string
+      required: false
     collaborator_ids:
       title: Collaborator IDs
+      description: Collaborator IDs
       type: '[]string'
+      required: false
     comment:
       title: Comment
+      description: Comment
       type: comment
+      required: false
     description:
       title: Description
+      description: Description
       type: string
+      required: false
     due_at:
       title: Due At
+      description: Due at
       type: date
+      required: false
     external_id:
       title: External ID
+      description: External ID
       type: string
+      required: false
     group_id:
       title: Group ID
+      description: Group ID
       type: string
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
     requester_id:
       title: Requester ID
+      description: Requester ID
       type: string
+      required: false
     recipient:
       title: Recipient ID
+      description: Recipient ID
       type: string
+      required: false
     problem_id:
       title: Problem ID
+      description: Problem ID
       type: string
+      required: false
     subject:
       title: Subject
+      description: Subject
       type: string
+      required: false
     tags:
       title: Tags
+      description: Tags
       type: '[]string'
+      required: false
     type:
       title: Type
+      description: Type
       type: string
-      enum:
-      - Problem
-      - Incident
-      - Task
-      - Question
-      - ''
+      required: false
     priority:
       title: Priority
+      description: Priority
       type: string
-      enum:
-      - Urgent
-      - High
-      - Normal
-      - Low
-      - ''
+      required: false
     status:
       title: Status
+      description: Status
       type: string
-      enum:
-      - New
-      - Open
-      - Pending
-      - Hold
-      - Solved
-      - Closed
-      - ''
+      required: false
+  user:
+    active:
+      title: Active
+      description: Active
+      type: boolean
+      required: false
+    alias:
+      title: Alias
+      description: Alias
+      type: string
+      required: false
+    chat_only:
+      title: Chat Only
+      description: Chat only
+      type: boolean
+      required: false
+    created_at:
+      title: Created At
+      description: Created at
+      type: date
+      required: false
+    custom_role_id: 
+      title: Custom Role ID
+      description: Custom role ID
+      type: string
+      required: false
+    details:
+      title: Details
+      description: Details
+      type: string
+      required: false
+    email:
+      title: Email
+      description: Email
+      type: string
+      required: false
+    external_id: 
+      title: External ID
+      description: External ID
+      type: string
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: string
+      required: false
+    last_login_at:
+      title: Last Login At
+      description: Last login at
+      type: date
+      required: false
+    locale:
+      title: Locale
+      description: Locale
+      type: string
+      required: false
+    locale_id:
+      title: Locale ID
+      description: Locale ID
+      type: integer
+      required: false
+    moderator:
+      title: Moderator
+      description: Moderator
+      type: boolean
+      required: false
+    name: 
+      title: Name
+      description: Name
+      type: string
+      required: false
+    notes:
+      title: Notes
+      description: Notes
+      type: string
+      required: false
+    only_private_comments:
+      title: Only Private Comments
+      description: Only private comments
+      type: boolean
+      required: false
+    organization_id:
+      title: Organization ID
+      description: Organization ID
+      type: string
+      required: false
+    phone:
+      title: Phone
+      description: Phone
+      type: string
+      required: false
+    photo:
+      title: Photo
+      description: Photo
+      type: object
+      required: false
+    restricted_agent:
+      title: Restricted Agent
+      description: Restricted agent
+      type: boolean
+      required: false
+    role:
+      title: Role
+      description: Role
+      type: string
+      required: false
+    shared:
+      title: Shared
+      description: Shared
+      type: boolean
+      required: false
+    shared_agent:
+      title: Shared Agent
+      description: Shared agent
+      type: boolean
+      required: false
+    signature:
+      title: Signature
+      description: Signature
+      type: string
+      required: false
+    suspended:
+      title: Suspended
+      description: Suspended
+      type: boolean
+      required: false
+    tags:
+      title: Tags
+      description: Tags
+      type: "[]string"
+      required: false
+    ticket_restriction:
+      title: Ticket Restriction
+      description: Ticket restriction
+      type: string
+      required: false
+    time_zone:
+      title: Time Zone
+      description: Time Zone
+      type: string
+      required: false
+    two_factor_auth_enabled:
+      title: Two Factor Auth Enabled
+      description: Two factor auth enabled
+      type: boolean
+      required: false
+    updated_at:
+      title: Updated At
+      description: Updated at
+      type: string
+      required: false
+    url:
+      title: URL
+      description: URL
+      type: string
+      required: false
+    verified:
+      title: Verified
+      description: Verified
+      type: boolean
+      required: false
 connection:
   credentials:
     title: Email and Password
     description: Email and password
     type: credential_username_password
+    example: '{"username": "user@example.com", "password": "password"}'
     required: true
   api_key:
     type: credential_secret_key
     title: API Key
     description: Zendesk API key
+    example: A6yLhgioJiF2wOP1omP9sTa5yWSTvucx2U7yg67u
     required: false
   subdomain:
     type: string
     title: Subdomain
     description: Zendesk subdomain
+    example: example-subdomain
     required: true
 actions:
   search:
@@ -136,17 +378,29 @@ actions:
         - User
         - Organization
         - Ticket
+        example: User
         required: true
       item:
         title: Item
         type: string
         description: Search item E.g. password reset
+        example: Example User
         required: true
     output:
-      results:
-        title: Search Results
-        type: '[]object'
-        description: Get Zendesk query results
+      tickets:
+        title: Ticket Search Results
+        type: '[]ticket'
+        description: Get Zendesk query results for tickets
+        required: false
+      organizations:
+        title: Organization Search Results
+        type: '[]organization'
+        description: Get Zendesk query results for organizations
+        required: false
+      users:
+        title: User Search Results
+        type: '[]user'
+        description: Get Zendesk query results for users
         required: false
   delete_user:
     title: Delete User
@@ -155,7 +409,8 @@ actions:
       user_id:
         title: User ID
         type: string
-        description: ID of user to delete E.g. 20444826487
+        description: ID of user to delete E.g. 361738647591
+        example: 361738647591
         required: true
     output:
       status:
@@ -170,7 +425,8 @@ actions:
       user_id:
         title: User ID
         type: string
-        description: ID of user to delete E.g. 20444826487
+        description: ID of user to delete E.g. 361738647591
+        example: 361738647591
         required: true
     output:
       status:
@@ -185,7 +441,8 @@ actions:
       user_id:
         title: User ID
         type: string
-        description: ID of user to show E.g. 20444826487
+        description: ID of user to show E.g. 361738647591
+        example: 361738647591
         required: true
     output:
       user:
@@ -200,7 +457,8 @@ actions:
       user_id:
         title: User ID
         type: string
-        description: ID of user to show E.g. 20444826487
+        description: ID of user to show E.g. 361738647591
+        example: 361738647591
         required: true
     output:
       memberships:
@@ -215,7 +473,8 @@ actions:
       membership_id:
         title: Membership ID
         type: string
-        description: ID of membership to delete E.g. 1657574807
+        description: ID of membership to delete E.g. 1401295821555
+        example: 1401295821555
         required: true
     output:
       status:
@@ -231,6 +490,7 @@ actions:
         title: Delete Ticket
         type: string
         description: Delete ticket
+        example: 10
         required: true
     output:
       status:
@@ -246,62 +506,73 @@ actions:
         title: Attachment
         type: file
         description: Optional file attachment
+        example: '{"content": "Sample Content", "filename": "sample_file.txt"}'
         required: false
       assignee_id:
         title: Assignee ID
         type: string
         description: Assignee ID
+        example: "361738647591"
         required: false
       collaborator_ids:
         title: Collaborator IDs
         type: '[]string'
         description: List of collaborator IDs
+        example: ["361738647591", "361738647672"]
         required: false
       description:
         title: Description
         type: string
         description: Ticket description
+        example: Example description
         required: true
       due_at:
         title: Due At
         type: date
         description: Time ticket is due
+        example: 2021-04-10T12:00:00Z
         required: false
       external_id:
         title: External ID
         type: string
         description: Support ticket ID
+        example: 10
         required: false
       group_id:
         title: Group ID
         type: string
         description: Group ID
+        example: 1400012453812
         required: false
       requester_id:
         title: Requester ID
         type: string
         description: ID of user requesting support
+        example: 361738647672
         required: false
       recipient:
         title: Recipient ID
         type: string
         description: ID of user recipient
+        example: 352083642834
         required: false
       problem_id:
         title: Problem ID
         type: string
-        description: For tickets of type 'incident', the numeric ID of the problem
-          the incident is linked to
+        description: For tickets of type 'incident', the numeric ID of the problem the incident is linked to
+        example: 25
         required: false
       subject:
         title: Subject
         type: string
         description: Subject of ticket
+        example: New Subject
         required: true
       tags:
         title: Tags
         type: '[]string'
         description: Tags describing ticket
+        example: ["tag","example","ticket"]
         required: false
       type:
         title: Type
@@ -313,6 +584,7 @@ actions:
         - Task
         - Question
         - ''
+        example: Problem
         required: false
       priority:
         title: Priority
@@ -324,6 +596,7 @@ actions:
         - Normal
         - Low
         - ''
+        example: High
         required: false
       status:
         title: Status
@@ -337,6 +610,7 @@ actions:
         - Solved
         - Closed
         - ''
+        example: Open
         required: false
     output:
       ticket:
@@ -351,63 +625,74 @@ actions:
       ticket_id:
         title: Ticket ID
         description: Ticket ID
-        type: string
+        type: integer
+        example: 30
         required: true
       comment:
         title: Comment
         description: Comment
         type: comment
+        example: '{"author_id": "361738647591","body": "Test comment","html_body": "<u>Test Underlined comment</u>","public": true}'
         required: false
       requester_id:
         title: Requester ID
         type: string
         description: ID of user requesting support
+        example: 361738647672
         required: true
       assignee_id:
         title: Assignee ID
         type: string
         description: Assignee ID
+        example: 361738647591
         required: false
       collaborator_ids:
         title: Collaborator IDs
         type: '[]string'
         description: List of collaborator IDs
+        example: ["361738647591", "361738647672"]
         required: false
       due_at:
         title: Due At
         type: date
         description: Time ticket is due
+        example: 2021-04-10T12:00:00Z
         required: false
       external_id:
         title: External ID
         type: string
         description: Support ticket ID
+        example: 10
         required: false
       group_id:
         title: Group ID
         type: string
         description: Group ID
+        example: 1400012453812
         required: false
       recipient:
         title: Recipient ID
         type: string
         description: ID of user recipient
+        example: 352083642834
         required: false
       problem_id:
         title: Problem ID
         type: string
-        description: For tickets of type 'incident', the numeric ID of the problem
-          the incident is linked to
+        description: For tickets of type 'incident', the numeric ID of the problem the incident is linked to
+        example: 25
         required: false
       subject:
         title: Subject
         type: string
         description: Subject of ticket
+        example: New Subject
         required: false
       tags:
         title: Tags
         type: '[]string'
         description: Tags describing ticket
+        example: ["tag","example","ticket"]
         required: false
       type:
         title: Type
@@ -419,6 +704,7 @@ actions:
         - Task
         - Question
         - ''
+        example: Problem
         required: false
       priority:
         title: Priority
@@ -430,6 +716,7 @@ actions:
         - Normal
         - Low
         - ''
+        example: High
         required: false
       status:
         title: Status
@@ -443,6 +730,7 @@ actions:
         - Solved
         - Closed
         - ''
+        example: Open
         required: false
     output:
       ticket:
