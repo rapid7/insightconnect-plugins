@@ -58,7 +58,7 @@ def first(sequence, default=''):
 
 
 class RestAPI(object):
-    CUSTOM_SECRET_INPUT = "CUSTOM_SECRET_INPUT"
+    CUSTOM_SECRET_INPUT = "CUSTOM_SECRET_INPUT"  # noqa: B105
 
     def __init__(
             self, url: str, logger: Logger, ssl_verify: bool, default_headers: dict = None
