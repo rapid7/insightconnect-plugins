@@ -4,7 +4,7 @@ products: [insightconnect]
 name: active_directory_ldap
 title: Active Directory LDAP
 description: "This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network"
-version: 5.1.0
+version: 5.2.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -21,6 +21,173 @@ hub_tags:
   keywords: [ldap, active directory, microsoft]
   features: []
 types:
+  attributes:
+    accountExpires:
+      title: Account Expires
+      type: string
+      description: Account expires
+      required: false
+    adminCount:
+      title: Admin Count
+      type: integer
+      description: Admin count
+      required: false
+    badPasswordTime:
+      title: Bad Password Time
+      type: string
+      description: Bad password time
+      required: false
+    badPwdCount:
+      title:  Bad PWD Count
+      type: integer
+      description: Bad PWD count
+      required: false
+    cn:
+      title: CN
+      type: string
+      description: CN
+      required: false
+    codePage:
+      title: Code Page
+      type: integer
+      description: Code page
+      required: false
+    countryCode:
+      title: Country Code
+      type: integer
+      description: Country code
+      required: false
+    dSCorePropagationData:
+      title: DS Core Propagation Data
+      type: "[]string"
+      description: DS core propagation data
+      required: false
+    description:
+      title: Description
+      type: "[]string"
+      description: Description
+      required: false
+    distinguishedName:
+      title: Distinguished Name
+      type: string
+      description: Distinguished name
+      required: false
+    instanceType:
+      title: Instance Type
+      type: integer
+      description: Instance type
+      required: false
+    isCriticalSystemObject:
+      title: Is Critical System Object
+      type: boolean
+      description: Is critical system object
+      required: false
+    lastLogoff:
+      title: Last Log Off
+      type: string
+      description: Last log off
+      required: false
+    lastLogon:
+      title: Last Log On
+      type: string
+      description: Last log on
+      required: false
+    lastLogonTimestamp:
+      title: Last Log On Timestamp
+      type: string
+      description: Last log on timestamp
+      required: false
+    logonCount:
+      title: Log On Count
+      type: integer
+      description: Log on count
+      required: false
+    memberOf:
+      title: Member Of
+      type: "[]string"
+      description: Member of
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    objectCategory:
+      title: Object Category
+      type: string
+      description: Object category
+      required: false
+    objectClass:
+      title: Object Class
+      type: "[]string"
+      description: Object class
+      required: false
+    objectGUID:
+      title: Object GUID
+      type: string
+      description: Object GUID
+      required: false
+    objectSid:
+      title: Object SID
+      type: string
+      description: Object SID
+      required: false
+    primaryGroupID:
+      title: Primary Group ID
+      type: integer
+      description: Primary group ID
+      required: false
+    pwdLastSet:
+      title: PWD Last Set
+      type: string
+      description: PWD last set
+      required: false
+    sAMAccountName:
+      title: SAM Account Name
+      type: string
+      description: SAM account name
+      required: false
+    sAMAccountType:
+      title: SAM Account Type
+      type: integer
+      description: SAM account type
+      required: false
+    uSNChanged:
+      title: USN changed
+      type: integer
+      description: USN changed
+      required: false
+    uSNCreated:
+      title: USN created
+      type: integer
+      description: USN created
+      required: false
+    userAccountControl:
+      title: User Account Control
+      type: integer
+      description: User account control
+      required: false
+    whenChanged:
+      title: When Changed
+      type: string
+      description: When changed
+      required: false
+    whenCreated:
+      title: When Created
+      type: string
+      description: When created
+      required: false
+  results:
+    attributes:
+      title: Attributes
+      type: attributes
+      description: Attributes
+      required: false
+    dn:
+      title: DN
+      type: string
+      description: DN
+      required: false
   result:
     attributes:
       type: object
@@ -326,4 +493,43 @@ actions:
         title: Success
         description: Operation status
         type: boolean
+        required: false
+  query_group_membership:
+    title: Query Group Membership
+    description: Return users and groups that belonging to the specific group
+    input:
+      group_name:
+        title: Group Name
+        description: Name of the group for which membership will be checked
+        required: true
+        type: string
+        example: Domain Users
+      search_base:
+        title: Search Base
+        description: The base of the search request
+        type: string
+        required: true
+        example: "DC=example,DC=com"
+      include_groups:
+        title: Include Groups
+        description: Include groups in results
+        type: boolean
+        required: false
+        example: true
+      expand_nested_groups:
+        title: Expand Nested Groups
+        description: Expand nested groups in results
+        type: boolean
+        required: false
+        example: true
+    output:
+      results:
+        title: Results
+        description: Results returned
+        type: '[]results'
+        required: false
+      count:
+        title: Count
+        description: Number of results
+        type: integer
         required: false
