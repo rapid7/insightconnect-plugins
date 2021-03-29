@@ -8,4 +8,5 @@ from .modify_groups.action import ModifyGroups
 from .modify_object.action import ModifyObject
 from .move_object.action import MoveObject
 from .query.action import Query
+from .query_group_membership.action import QueryGroupMembership
 from .reset_password.action import ResetPassword
