@@ -4,7 +4,7 @@ products: [insightconnect]
 name: zendesk
 title: Zendesk
 description: Regulate customer communications by managing tickets and users in Zendesk data
-version: 2.0.2
+version: 3.0.0
 vendor: rapid7
 support: community
 status: []
