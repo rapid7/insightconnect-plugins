@@ -56,6 +56,7 @@ class SubmitUrlInput(komand.Input):
       "type": "string",
       "title": "Private",
       "description": "Mark sample as private if not set to 'false' or any other value",
+      "default": true,
       "order": 6
     },
     "tags": {

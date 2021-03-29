@@ -2126,6 +2126,7 @@ actions:
         title: Private
         description: Mark sample as private if not set to 'false' or any other value
         type: string
+        default: true
         required: false
         example: false
       tags:
