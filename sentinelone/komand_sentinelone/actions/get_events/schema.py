@@ -26,7 +26,7 @@ class GetEventsInput(insightconnect_plugin_runtime.Input):
     "limit": {
       "type": "integer",
       "title": "Limit",
-      "description": "Limit number of returned items (1-1000)",
+      "description": "Limit number of returned items (1-1000), if no limit is provided returns all the results up to 20,000",
       "order": 2
     },
     "query_id": {
@@ -71,9 +71,12 @@ class GetEventsOutput(insightconnect_plugin_runtime.Output):
       "title": "get_events_response",
       "properties": {
         "data": {
-          "$ref": "#/definitions/query_data",
+          "type": "array",
           "title": "Data",
           "description": "Response data",
+          "items": {
+            "$ref": "#/definitions/query_data"
+          },
           "order": 3
         },
         "errors": {
@@ -181,6 +184,12 @@ class GetEventsOutput(insightconnect_plugin_runtime.Output):
               "description": "Agent Operating System",
               "order": 20
             },
+            "agentTimestamp": {
+              "type": "string",
+              "title": "Agent Timestamp",
+              "description": "Agent timestamp",
+              "order": 87
+            },
             "agentUuid": {
               "type": "string",
               "title": "Agent UUID",
@@ -192,6 +201,21 @@ class GetEventsOutput(insightconnect_plugin_runtime.Output):
               "title": "Agent Version",
               "description": "Agent version",
               "order": 31
+            },
+            "attributes": {
+              "type": "array",
+              "title": "Attributes",
+              "description": "Attributes",
+              "items": {
+                "type": "object"
+              },
+              "order": 88
+            },
+            "childProcCount": {
+              "type": "string",
+              "title": "Child Process Count",
+              "description": "Child process count",
+              "order": 89
             },
             "connectionStatus": {
               "type": "string",
@@ -228,6 +252,30 @@ class GetEventsOutput(insightconnect_plugin_runtime.Output):
               "title": "Destination Port",
               "description": "Object type",
               "order": 75
+            },
+            "endpointMachineType": {
+              "type": "string",
+              "title": "Endpoint Machine Type",
+              "description": "Endpoint machine type",
+              "order": 90
+            },
+            "endpointName": {
+              "type": "string",
+              "title": "Endpoint Name",
+              "description": "Endpoint name",
+              "order": 91
+            },
+            "endpointOs": {
+              "type": "string",
+              "title": "Endpoint OS",
+              "description": "Endpoint OS",
+              "order": 92
+            },
+            "eventTime": {
+              "type": "string",
+              "title": "Event Time",
+              "description": "Event time",
+              "order": 93
             },
             "eventType": {
               "type": "string",
@@ -723,6 +771,12 @@ class GetEventsOutput(insightconnect_plugin_runtime.Output):
           "description": "Agent Operating System",
           "order": 20
         },
+        "agentTimestamp": {
+          "type": "string",
+          "title": "Agent Timestamp",
+          "description": "Agent timestamp",
+          "order": 87
+        },
         "agentUuid": {
           "type": "string",
           "title": "Agent UUID",
@@ -734,6 +788,21 @@ class GetEventsOutput(insightconnect_plugin_runtime.Output):
           "title": "Agent Version",
           "description": "Agent version",
           "order": 31
+        },
+        "attributes": {
+          "type": "array",
+          "title": "Attributes",
+          "description": "Attributes",
+          "items": {
+            "type": "object"
+          },
+          "order": 88
+        },
+        "childProcCount": {
+          "type": "string",
+          "title": "Child Process Count",
+          "description": "Child process count",
+          "order": 89
         },
         "connectionStatus": {
           "type": "string",
@@ -770,6 +839,30 @@ class GetEventsOutput(insightconnect_plugin_runtime.Output):
           "title": "Destination Port",
           "description": "Object type",
           "order": 75
+        },
+        "endpointMachineType": {
+          "type": "string",
+          "title": "Endpoint Machine Type",
+          "description": "Endpoint machine type",
+          "order": 90
+        },
+        "endpointName": {
+          "type": "string",
+          "title": "Endpoint Name",
+          "description": "Endpoint name",
+          "order": 91
+        },
+        "endpointOs": {
+          "type": "string",
+          "title": "Endpoint OS",
+          "description": "Endpoint OS",
+          "order": 92
+        },
+        "eventTime": {
+          "type": "string",
+          "title": "Event Time",
+          "description": "Event time",
+          "order": 93
         },
         "eventType": {
           "type": "string",

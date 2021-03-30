@@ -53,7 +53,7 @@ This action is used to get Deep Visibility results from the query that matches t
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |event_type|string|None|True|Event type for Autocomplete|['Process Exit', 'Process Modification', 'Process Creation', 'Duplicate Process Handle', 'Duplicate Thread Handle', 'Open Remote Process Handle', 'Remote Thread Creation', 'Remote Process Termination', 'Command Script', 'IP Connect', 'IP Listen', 'File Modification', 'File Creation', 'File Scan', 'File Deletion', 'File Rename', 'Pre Execution Detection', 'Login', 'Logout', 'GET', 'OPTIONS', 'POST', 'PUT', 'DELETE', 'CONNECT', 'HEAD', 'DNS Resolved', 'DNS Unresolved', 'Task Register', 'Task Update', 'Task Start', 'Task Trigger', 'Task Delete', 'Registry Key Create', 'Registry Key Rename', 'Registry Key Delete', 'Registry Key Export', 'Registry Key Security Changed', 'Registry Key Import', 'Registry Value Modified', 'Registry Value Create', 'Registry Value Delete', 'Behavioral Indicators', 'Module Load']|None|
-|limit|integer|None|False|Limit number of returned items (1-1000)|None|10|
+|limit|integer|None|False|Limit number of returned items (1-1000), if no limit is provided returns all the results up to 20,000|None|10|
 |query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|q1xx2xx3|
 |sub_query|string|None|False|Sub query to run on the data that was already pulled|None|AgentName IS NOT EMPTY|
 
@@ -76,6 +76,7 @@ Example input:
 Example output:
 
 ```
+
 ```
 
 #### Get Events
@@ -86,7 +87,7 @@ This action is used to get all Deep Visibility events from a queryId.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|limit|integer|None|False|Limit number of returned items (1-1000)|None|10|
+|limit|integer|None|False|Limit number of returned items (1-1000), if no limit is provided returns all the results up to 20,000|None|10|
 |query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|q1xx2xx3|
 |sub_query|string|None|False|Sub query to run on the data that was already pulled|None|AgentName IS NOT EMPTY|
 
@@ -138,6 +139,7 @@ Example input:
 Example output:
 
 ```
+
 ```
 
 #### Get Query Status
@@ -167,6 +169,7 @@ Example input:
 Example output:
 
 ```
+
 ```
 
 #### Create Query
@@ -221,6 +224,18 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |response|create_query_response|False|SentinelOne API call response data|
+
+Example output:
+
+```
+{
+  "response": {
+    "data": {
+      "queryId": "qef4d0d2de7141756ff16959180015e75"
+    }
+  }
+}
+```
 
 #### Enable Agent
 

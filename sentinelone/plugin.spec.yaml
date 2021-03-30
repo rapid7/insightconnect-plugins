@@ -1403,6 +1403,41 @@ types:
       description: Logins user name
       type: string
       required: false
+    agentTimestamp:
+      title: Agent Timestamp
+      description: Agent timestamp
+      type: string
+      required: false
+    attributes:
+      title: Attributes
+      description: Attributes
+      type: "[]object"
+      required: false
+    childProcCount:
+      title: Child Process Count
+      description: Child process count
+      type: string
+      required: false
+    endpointMachineType:
+      title: Endpoint Machine Type
+      description: Endpoint machine type
+      type: string
+      required: false
+    endpointName:
+      title: Endpoint Name
+      description: Endpoint name
+      type: string
+      required: false
+    endpointOs:
+      title: Endpoint OS
+      description: Endpoint OS
+      type: string
+      required: false
+    eventTime:
+      title: Event Time
+      description: Event time
+      type: string
+      required: false
   get_events_response:
     errors:
       title: Errors
@@ -1417,7 +1452,7 @@ types:
     data:
       title: Data
       description: Response data
-      type: query_data
+      type: "[]query_data"
       required: false
 
 connection:
@@ -2468,7 +2503,7 @@ actions:
         required: true
       limit:
         title: Limit
-        description: Limit number of returned items (1-1000)
+        description: Limit number of returned items (1-1000), if no limit is provided returns all the results up to 20,000
         type: integer
         example: 10
         required: false
@@ -2546,7 +2581,7 @@ actions:
         required: true
       limit:
         title: Limit
-        description: Limit number of returned items (1-1000)
+        description: Limit number of returned items (1-1000), if no limit is provided returns all the results up to 20,000
         type: integer
         example: 10
         required: false
