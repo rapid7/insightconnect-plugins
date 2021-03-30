@@ -1255,7 +1255,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.1.1 - Add default value and change type to boolean for input private in action Submit Sample
+* 3.0.0 - Add default value and change type to boolean for input private in action Submit Sample
 * 2.1.0 - Remove quotes in titles and descriptions in custom types in plugin.spec | Remove a blank lines in plugin.spec | Change type in tags in submit_sample_data custom type | Change description for region and API key in connection | Change description for SHA256 input parameter and sample report list output parameter in Search for Sample Report by SHA256 action | Change description for sample report output parameter in Search for Sample Report by Domain action | Change example for email notification input parameter in Submit URL and Submit Sample actions | Change description for network streams report and metadata report output parameters in Get Sample Analysis action | Add custom types in help.md | Replace ConnectionTestException with PluginException in Search for Sample Report by Domain action | Update connection test to use ConnectionTestException | Add more user-friendly cause and assistance messages for status codes using PluginException | Update existing PluginExceptions | Add types for arguments in methods in api.py | Change names for arguments in search_sha256, search_domain, search_id methods in api.py | Add KeyError exception in Submit Sample action | Add IndexError exception in Search for Sample Report by Domain action
 * 2.0.0 - Fix issue where Search for Sample by Domain would fail | Removed Search for Sample by ID | Update to Search for Sample Report by SHA256 to only return one output object
 * 1.2.2 - New action Submit URL
