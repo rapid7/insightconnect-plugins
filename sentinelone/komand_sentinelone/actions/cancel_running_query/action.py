@@ -13,5 +13,4 @@ class CancelRunningQuery(insightconnect_plugin_runtime.Action):
                 output=CancelRunningQueryOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        return {Output.RESPONSE: self.connection.cancel_running_query(params.get(Input.QUERY_ID))}

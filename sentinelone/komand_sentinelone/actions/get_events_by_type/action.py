@@ -13,5 +13,23 @@ class GetEventsByType(insightconnect_plugin_runtime.Action):
                 output=GetEventsByTypeOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        limit = params.get(Input.LIMIT)
+        sub_query = params.get(Input.SUB_QUERY)
+        get_all_results = False
+
+        params = {
+            "queryId": params.get(Input.QUERY_ID)
+        }
+
+        if limit:
+            params["limit"] = limit
+        else:
+            get_all_results = True
+        if sub_query:
+            params["subQuery"] = sub_query
+
+        return {Output.RESPONSE: self.connection.get_events(
+            params,
+            get_all_results,
+            event_type=params.get(Input.EVENT_TYPE),
+        )}

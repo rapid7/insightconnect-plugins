@@ -13,5 +13,4 @@ class GetQueryStatus(insightconnect_plugin_runtime.Action):
                 output=GetQueryStatusOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        return {Output.RESPONSE: self.connection.get_query_status(params.get(Input.QUERY_ID))}
