@@ -318,7 +318,7 @@ This action submits a sample to Threat Grid for analysis.
 |email_notification|boolean|None|False|If true, sends an email to the email address of the user that submitted the sample, upon completion of the sample analysis|None|False|
 |network_exit|string|None|False|Any outgoing network traffic that is generated during the analysis to appear to exit from the Network Exit Location|None|US - Pennsylvania - Philadelphia|
 |playbook|string|None|False|Name of a playbook to apply to this sample run|None|Random Cursor Movement with Image Recognition|
-|private|boolean|None|False|If true mark sample as private, if false mark sample as public|None|False|
+|private|boolean|True|False|If true mark sample as private, if false mark sample as public|None|False|
 |sample|file|None|True|The sample file|None|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
 |sample_filename|string|None|False|Filename to use to override the default filename|None|example.exe|
 |sample_password|string|None|False|Password used to open the submitted archive or document|None|password|
@@ -490,7 +490,7 @@ This action is used to submit a URL to Threat Grid for analysis.
 |email_notification|boolean|None|False|If true, sends an email to the email address of the user that submitted the sample, upon completion of the sample analysis|None|False|
 |network_exit|string|None|False|Any outgoing network traffic that is generated during the analysis to appear to exit from the Network Exit Location|None|US - Pennsylvania - Philadelphia|
 |playbook|string|None|False|Name of a playbook to apply to this sample run|None|Random Cursor Movement with Image Recognition|
-|private|string|True|False|Mark sample as private if not set to 'false' or any other value|None|False|
+|private|string|None|False|Mark sample as private if not set to 'false' or any other value|None|False|
 |tags|string|None|False|A comma-separated list of tags applied to this sample|None|malware, trojan, phishing|
 |url|string|None|True|The URL to submit for analysis|None|http://www.example.com|
 |vm|string|None|False|A string identifying a specific VM to use. See the linked configuration endpoint|None|rcn-work-022|

@@ -58,6 +58,7 @@ class SubmitSampleInput(komand.Input):
       "type": "boolean",
       "title": "Private",
       "description": "If true mark sample as private, if false mark sample as public",
+      "default": true,
       "order": 6
     },
     "sample": {
