@@ -23,7 +23,7 @@ class Connection(komand.Connection):
 
         self.logger.info("Connecting")
         if "cred_token" not in params:
-            token = ""
+            token = ""                  # noqa: B105
             self.logger.info("Connect: Unauthenticated API will be used")
         else:
             token = params.get("api_key").get("secretKey")

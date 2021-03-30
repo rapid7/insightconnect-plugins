@@ -1,7 +1,7 @@
 # Do not import anything except from standard lib and setuptools,
 # as this is getting imported by the setup script
 from pkg_resources import parse_version
-import subprocess
+import subprocess   # noqa: B404
 import os
 import re
 import datetime
@@ -60,7 +60,7 @@ def run_but_ignore_errors(*args, **kwargs):
     # we use the version as is. We don't want any errors
     with open(os.devnull, "w") as devnull:
         try:
-            return subprocess.check_output(*args, shell=True, stderr=devnull, **kwargs)
+            return subprocess.check_output(*args, shell=True, stderr=devnull, **kwargs)     # noqa: B602
         except (subprocess.SubprocessError, FileNotFoundError, OSError):
             return None
         except Exception:

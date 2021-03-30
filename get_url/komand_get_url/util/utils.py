@@ -31,7 +31,7 @@ class Utils(object):
         """Creates a dictionary containing hashes from a url of type string"""
         try:
             self.logger.info(f"url: {url}")
-            sha1 = hashlib.sha1(url.encode("utf-8")).hexdigest()
+            sha1 = hashlib.sha1(url.encode("utf-8")).hexdigest()    # noqa: B303
             contents = sha1 + ".file"
             meta_file = sha1 + ".meta"
             self.logger.info(f"HashUrl: Url hashed successfully: {sha1}")

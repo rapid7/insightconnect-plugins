@@ -17,7 +17,7 @@ class Run(komand.Action):
 
         try:
             func = params["function"]
-            exec(func)
+            exec(func)  # noqa: B102
             funcname = func.split(" ")[1].split("(")[0]
             out = locals()[funcname](params["input"])
         except Exception as e:

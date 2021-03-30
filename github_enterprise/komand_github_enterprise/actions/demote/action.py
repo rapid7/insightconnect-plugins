@@ -21,7 +21,7 @@ class Demote(komand.Action):
             # Promote user
             response = requests.delete(
                 api_call,
-                verify=False,
+                verify=False,   # noqa: B501
                 auth=(self.connection.username, self.connection.secret),
                 headers={"Content-Length": 0},
             )
@@ -36,7 +36,7 @@ class Demote(komand.Action):
     def test(self):
         try:
             api_call = self.connection.api_prefix + "/user"
-            response = requests.get(api_call, auth=(self.connection.username, self.connection.secret), verify=False)
+            response = requests.get(api_call, auth=(self.connection.username, self.connection.secret), verify=False)    # noqa: B501
             if response.status_code == 200:
                 return {"status": "Success"}
         except requests.exceptions.RequestException as e:

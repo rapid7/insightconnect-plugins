@@ -141,7 +141,7 @@ class AWSAction(Action):
         endpoint = client._endpoint.host
         r = requests.get(endpoint)
 
-        assert r.ok
+        assert r.ok     # noqa: B101
 
         if 'properties' in self.output.schema:
             response = helper.format_output(self.output.schema, {})

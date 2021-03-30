@@ -22,7 +22,7 @@ class CheckIfAddressInGroup(komand.Action):
             output=CheckIfAddressInGroupOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}):   # noqa: MC0001
         addrgrp = params.get(Input.GROUP)
         address_to_check = params.get(Input.ADDRESS)
         enable_search = params.get(Input.ENABLE_SEARCH)

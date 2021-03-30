@@ -20,7 +20,7 @@ class ListSsh(komand.Action):
         ssh_keys = []
 
         try:
-            r = requests.get(r_url, headers={"PRIVATE-TOKEN": self.connection.token}, verify=False)
+            r = requests.get(r_url, headers={"PRIVATE-TOKEN": self.connection.token}, verify=False)     # noqa: B501
         except requests.exceptions.RequestException as e:  # This is the correct syntax
             self.logger.error(e)
             raise Exception(e)

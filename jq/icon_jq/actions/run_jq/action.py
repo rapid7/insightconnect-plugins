@@ -1,8 +1,8 @@
 import json
 
 # Custom imports below
-import subprocess
-from subprocess import PIPE
+import subprocess               # noqa: B404
+from subprocess import PIPE     # noqa: B404
 
 import komand
 from .schema import RunJqInput, RunJqOutput, Input, Output
@@ -35,7 +35,7 @@ class RunJq(komand.Action):
         jq_cmd_array.append(filter_)
 
         self.logger.info("Command to Run: {}".format(jq_cmd_array))
-        process = subprocess.Popen(jq_cmd_array, stdout=PIPE, stderr=PIPE, stdin=PIPE)
+        process = subprocess.Popen(jq_cmd_array, stdout=PIPE, stderr=PIPE, stdin=PIPE)  # noqa: B603
         std_out, std_err = process.communicate(input=json.dumps(json_in).encode(), timeout=timeout)
         return_code = process.returncode
 

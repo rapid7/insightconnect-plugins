@@ -14,7 +14,7 @@ class Query(komand.Action):
             output=QueryOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}):   # noqa: MC0001
         url = "{}/{}".format(self.connection.url, "observables")
         headers = {
             "Authorization": "Token token={}".format(self.connection.api_token),

@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     DAYS_AGO = "days_ago"
+    SIZE = "size"
     
 
 class Output:
@@ -27,6 +28,13 @@ class ListInactiveAssetsInput(komand.Input):
       "description": "How many days ago should an asset be considered still active",
       "default": 14,
       "order": 1
+    },
+    "size": {
+      "type": "number",
+      "title": "Size",
+      "description": "The number of assets to retrieve. If blank then 500 inactive assets will be returned, the maximum limit is 1000 assets",
+      "default": 500,
+      "order": 2
     }
   },
   "required": [

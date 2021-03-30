@@ -10,7 +10,7 @@ def main():
         spec_path = os.path.join(base_path, d, "plugin.spec.yaml")
         try:
             output = update_source_url(spec_path, d)
-        except Exception:
+        except Exception:   # noqa: B112
             continue
         if output is not None:
             with open(spec_path, "w") as h:

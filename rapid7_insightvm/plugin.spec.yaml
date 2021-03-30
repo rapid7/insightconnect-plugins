@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans
-version: 4.8.1
+version: 4.9.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -3774,6 +3774,13 @@ actions:
         example: 14
         default: 14
         required: true
+      size:
+        title: Size
+        description: The number of assets to retrieve. If blank then 500 inactive assets will be returned, the maximum limit is 1000 assets
+        type: number
+        required: false
+        default: 500
+        example: 100
     output:
       assets:
         title: Assets

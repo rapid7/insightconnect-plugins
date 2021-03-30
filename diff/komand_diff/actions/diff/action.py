@@ -5,7 +5,7 @@ from .schema import DiffInput, DiffOutput
 
 
 def md5sum(input):
-    return hashlib.md5(input.encode("utf-8")).hexdigest()
+    return hashlib.md5(input.encode("utf-8")).hexdigest()   # noqa: B303
 
 
 class Diff(komand.Action):
