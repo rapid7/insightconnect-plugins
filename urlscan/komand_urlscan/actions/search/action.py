@@ -5,6 +5,7 @@ from .schema import SearchInput, SearchOutput, Input, Component
 from komand.exceptions import PluginException
 import requests
 import json
+import validators
 
 
 class Search(komand.Action):
@@ -17,7 +18,33 @@ class Search(komand.Action):
         )
 
     def run(self, params={}):
-        url = f'{self.connection.server}/search/?q={params.get(Input.Q)}&size={str(params.get(Input.SIZE, 100))}&offset={str(params.get(Input.OFFSET, 0))}&sort={params.get(Input.SORT, "_score")}'
+        input_type = params.get(Input.INPUT_TYPE, "Custom")
+        query = params.get(Input.Q)
+        if input_type == "Custom":
+            search_query = query
+        elif input_type == "URL":
+            if not validators.url(query):
+                raise PluginException(
+                    cause="URL entered as input type, but not provided in query. ",
+                    assistance="Please check URL and try again."
+                )
+            search_query = f"page.url: \"{query}\""
+        else:
+            if not validators.domain(query):
+                raise PluginException(
+                    cause="Domain entered as input type, but not provided in query. ",
+                    assistance="Please check domain address and try again."
+                )
+            search_query = f"page.domain:\"{query}\""
+
+        query_params = [
+            f'q={search_query}',
+            f'size={str(params.get(Input.SIZE, 100))}',
+            f'offset={str(params.get(Input.OFFSET, 0))}',
+            f'sort={params.get(Input.SORT, "_score")}'
+        ]
+
+        url = f'{self.connection.server}/search/?{"&".join(query_params)}'
         self.logger.info(url)
 
         try:
@@ -26,11 +53,11 @@ class Search(komand.Action):
             raise PluginException(cause="Something went wrong during the request. ", assistance=e)
 
         try:
-            out = response.json()
+            output = response.json()
         except json.decoder.JSONDecodeError:
             raise PluginException(
                 cause="Received an unexpected response from the Urlscan API. ",
                 assistance=f"(non-JSON or no response was received). Response was: {response.text}",
             )
 
-        return out
+        return output
