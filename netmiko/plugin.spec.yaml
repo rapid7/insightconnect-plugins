@@ -93,7 +93,7 @@ connection:
     type: credential_secret_key
     description: API seret key
     required: false
-    example: 1452d258-7c12-7c12-7c12-1452d25874c2
+    example: b42ec8b4-deb2-c75e-ebd0-132d63f8e8d4
   key:
     title: Key
     type: credential_asymmetric_key
