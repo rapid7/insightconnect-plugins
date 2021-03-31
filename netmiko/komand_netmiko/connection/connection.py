@@ -1,12 +1,14 @@
-import komand
-from .schema import ConnectionSchema
+import insightconnect_plugin_runtime
+from .schema import ConnectionSchema, Input
 from netmiko import ConnectHandler
+from netmiko.ssh_exception import SSHException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 from os import path
 import os
 import base64
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.device = {}
@@ -14,27 +16,28 @@ class Connection(komand.Connection):
 
     def connect_key(self, params={}):
         home_dir = path.expanduser("~")
-        key_file = "{}/.ssh".format(home_dir)
-        fb = params.get("key").get("privateKey")
-        fb64 = base64.b64decode(fb)
-        fb64 = fb64.decode("utf-8")
+        key_file = f"{home_dir}/.ssh"
         if not path.exists(key_file):
             os.makedirs(key_file)
             os.chmod(key_file, 0o700)
         key_file_path = path.join(key_file, "id_rsa")
         with open(key_file_path, "w+") as private_key:
-            private_key.write(fb64)
+            private_key.write(
+                base64.b64decode(
+                    params.get(Input.KEY).get("privateKey")
+                ).decode("utf-8")
+            )
         os.chmod(key_file_path, 0o600)
         self.logger.info("Establishing connection")
         device = {
-            "device_type": params.get("device_type"),
-            "ip": params.get("host"),
-            "username": params.get("credentials").get("username"),
+            "device_type": params.get(Input.DEVICE_TYPE),
+            "ip": params.get(Input.HOST),
+            "username": params.get(Input.CREDENTIALS).get("username"),
             "use_keys": True,
             "key_file": key_file_path,
-            "password": params.get("credentials").get("password"),
-            "port": params.get("port"),
-            "secret": params.get("secret").get("secretKey"),
+            "password": params.get(Input.CREDENTIALS).get("password"),
+            "port": params.get(Input.PORT),
+            "secret": params.get(Input.SECRET).get("secretKey"),
             "allow_agent": True,
             "global_delay_factor": 4,
         }
@@ -44,12 +47,12 @@ class Connection(komand.Connection):
     def connect_password(self, params={}):
         self.logger.info("Establishing connection")
         device = {
-            "device_type": params.get("device_type"),
-            "ip": params.get("host"),
-            "username": params.get("credentials").get("username"),
-            "password": params.get("credentials").get("password"),
-            "port": params.get("port"),
-            "secret": params.get("secret").get("secretKey"),
+            "device_type": params.get(Input.DEVICE_TYPE),
+            "ip": params.get(Input.HOST),
+            "username": params.get(Input.CREDENTIALS).get("username"),
+            "password": params.get(Input.CREDENTIALS).get("password"),
+            "port": params.get(Input.PORT),
+            "secret": params.get(Input.SECRET).get("secretKey"),
             "global_delay_factor": 4,
         }
         self.device_connect = ConnectHandler(**device)
@@ -57,8 +60,8 @@ class Connection(komand.Connection):
 
     def client(self, host=None):
         if host:
-            self.parameters["host"] = host
-        if self.parameters.get("key"):
+            self.parameters[Input.HOST] = host
+        if self.parameters.get(Input.KEY):
             self.logger.info("Using key...")
             self.logger.info(self.parameters)
             return self.connect_key(self.parameters)
@@ -66,6 +69,24 @@ class Connection(komand.Connection):
             self.logger.info("Using password...")
             return self.connect_password(self.parameters)
 
-    def connect(self, params):
+    def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
-        self.client(params.get("host"))
+        try:
+            self.client(params.get("host"))
+        except (ValueError, OSError) as e:
+            raise ConnectionTestException(
+                cause="Cannot connect/configure this device.",
+                assistance="Please check provided connection data and try again.",
+                data=e
+            )
+
+    def test(self):
+        try:
+            self.client().write_channel("\n")
+            return {
+                "success": True
+            }
+        except (ValueError, EOFError, SSHException):
+            return {
+                "success": False
+            }

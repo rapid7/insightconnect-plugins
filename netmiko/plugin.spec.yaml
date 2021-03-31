@@ -4,7 +4,7 @@ products: [insightconnect]
 name: netmiko
 title: Netmiko
 description: Access network devices over SSH
-version: 1.0.2
+version: 2.0.0
 vendor: rapid7
 support: community
 status: []
@@ -26,7 +26,7 @@ connection:
   device_type:
     title: Device Type
     type: string
-    description: Device type
+    description: The type of device to connect
     required: true
     enum:
     - a10
@@ -81,39 +81,45 @@ connection:
     - ubiquiti_edgeswitch
     - vyatta_vyos
     - vyos
+    example: linux
   credentials:
     title: Credentials
     type: credential_username_password
-    description: User to run commands as
+    description: Username and password to run commands as
     required: true
+    example: '{"username": "user@example.com", "password": "mypassword"}'
   secret:
     title: Secret
     type: credential_secret_key
-    description: Secret password
+    description: API seret key
     required: false
+    example: 1452d258-7c12-7c12-7c12-1452d25874c2
   key:
     title: Key
     type: credential_asymmetric_key
-    description: A base64 encoded SSH private key to use to authenticate to network
-      device
+    description: A base64 encoded SSH private key to use to authenticate to network device
     required: false
+    example: "LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tTUlJRXZRSUJBRkFOQmdrcWhraUc4dzBCQVFFRkFBU0NCS2N3Z2dTakFnRUFBb0lCQVFDcGFBanlPQ3BFcW04Wi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0="
   host:
     title: Host
     type: string
     description: Remote Host
     required: true
+    example: example.com
   port:
     title: Port
     type: integer
     description: Remote port
     default: 22
     required: true
+    example: 22
   verbose:
     title: Verbose
     type: boolean
     description: Additional messages to standard output
     default: false
     required: true
+    example: true
 actions:
   show_commands:
     title: Execute Show Commands
@@ -122,18 +128,19 @@ actions:
       host:
         title: Host
         type: string
-        description: Optional Host to run remote commands. If not provided, the connection
-          host will be used
+        description: Optional Host to run remote commands. If not provided, the connection host will be used
         required: false
+        example: example.com
       command:
         title: Command
         type: string
         description: Show command to execute on network device
         required: true
+        example: "ls -la"
     output:
       results:
-        title: Output results
-        description: Results
+        title: Results
+        description: Output results
         type: string
         required: true
   configuration_commands:
@@ -143,17 +150,18 @@ actions:
       host:
         title: Host
         type: string
-        description: Optional Hosts to run remote commands. If not provided, the connection
-          host will be used
+        description: Optional Hosts to run remote commands. If not provided, the connection host will be used
         required: false
+        example: example.com
       command:
         title: Command
         type: '[]string'
         description: Commands to change the configuration on network device
         required: true
+        example: ["ls -la"]
     output:
       results:
-        title: Output device CLI
-        description: Results
+        title: Results
+        description: Output device CLI
         type: string
         required: true
