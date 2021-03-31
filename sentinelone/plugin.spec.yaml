@@ -2467,7 +2467,7 @@ actions:
         title: Query ID
         description: QueryId obtained when creating a query under Create Query
         type: string
-        example: q1xx2xx3
+        example: qd94e330ac025d525b5948bdf897b955e
         required: true
     output:
       response:
@@ -2483,7 +2483,7 @@ actions:
         title: Query ID
         description: QueryId obtained when creating a query under Create Query
         type: string
-        example: q1xx2xx3
+        example: qd94e330ac025d525b5948bdf897b955e
         required: true
     output:
       response:
@@ -2499,7 +2499,7 @@ actions:
         title: Query ID
         description: QueryId obtained when creating a query under Create Query
         type: string
-        example: q1xx2xx3
+        example: qd94e330ac025d525b5948bdf897b955e
         required: true
       limit:
         title: Limit
@@ -2520,14 +2520,14 @@ actions:
         type: get_events_response
         required: false
   get_events_by_type:
-    title: Get Events By Type
+    title: Get Events by Type
     description: Get Deep Visibility results from the query that matches the given event type
     input:
       query_id:
         title: Query ID
         description: QueryId obtained when creating a query under Create Query
         type: string
-        example: q1xx2xx3
+        example: qd94e330ac025d525b5948bdf897b955e
         required: true
       event_type:
         title: Event Type
