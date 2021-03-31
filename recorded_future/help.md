@@ -28,7 +28,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|API Key|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|api_key|credential_secret_key|None|True|API key|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
@@ -66,7 +66,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|alert|alert|True|Alert Details|
+|alert|alert|True|Alert details|
 
 Example output:
 
@@ -193,7 +193,7 @@ This action returns a risk list of URLs matching a filtration.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|list|string|None|False|The risk list to retrieve, left this field blank to retrieve default risk list|['Historically Reported by Insikt Group', 'Compromised URL', 'Historically Reported as a Defanged URL', 'Historically Reported by DHS AIS', 'Historically Reported Fraudulent Content', 'Historically Reported in Threat List', 'Large', 'Historically Detected Malicious Browser Exploits', 'Historically Detected Malware Distribution', 'Historically Detected Cryptocurrency Mining Techniques', 'Historically Detected Phishing Techniques', 'Active Phishing URL', 'Positive Malware Verdict', 'Ransomware Distribution URL', 'Recently Reported by Insikt Group', 'Recently Reported as a Defanged URL', 'Recently Reported by DHS AIS', 'Recently Reported Fraudulent Content', 'Recently Detected Malicious Browser Exploits', 'Recently Detected Malware Distribution', 'Recently Detected Cryptocurrency Mining Techniques', 'Recently Detected Phishing Techniques', 'Recently Referenced by Insikt Group', 'Recently Reported Spam or Unwanted Content', 'Recently Detected Suspicious Content', 'Recently Active URL on Weaponized Domain', 'Historically Referenced by Insikt Group', 'Historically Reported Spam or Unwanted Content', 'Historically Detected Suspicious Content']|Historically Reported by Insikt Group|
+|list|string|None|False|The risk list to retrieve, left this field blank to retrieve default risk list|['Historically Reported by Insikt Group', 'C&C URL', 'Compromised URL', 'Historically Reported as a Defanged URL', 'Historically Reported by DHS AIS', 'Historically Reported Fraudulent Content', 'Historically Reported in Threat List', 'Large', 'Historically Detected Malicious Browser Exploits', 'Historically Detected Malware Distribution', 'Historically Detected Cryptocurrency Mining Techniques', 'Historically Detected Phishing Techniques', 'Active Phishing URL', 'Positive Malware Verdict', 'Ransomware Distribution URL', 'Recently Reported by Insikt Group', 'Recently Reported as a Defanged URL', 'Recently Reported by DHS AIS', 'Recently Reported Fraudulent Content', 'Recently Detected Malicious Browser Exploits', 'Recently Detected Malware Distribution', 'Recently Detected Cryptocurrency Mining Techniques', 'Recently Detected Phishing Techniques', 'Recent Ransomware Distribution URL', 'Recently Referenced by Insikt Group', 'Recently Reported Spam or Unwanted Content', 'Recently Detected Suspicious Content', 'Recently Active URL on Weaponized Domain', 'Historically Referenced by Insikt Group', 'Historically Reported Spam or Unwanted Content', 'Historically Detected Suspicious Content']|Historically Reported by Insikt Group|
 
 Example input:
 
@@ -316,7 +316,7 @@ This action is used to search for data related to URLs.
 |from|number|None|False|Number of initial records to skip|None|0|
 |limit|number|10|False|Number of results to retrieve, up to 100|None|10|
 |orderby|string|None|False|Which property to sort the results by|['Created', 'Criticality', 'Lastseen', 'Firstseen', 'Modified', 'Riskscore', 'Rules', 'Sevendayshits', 'Sixtydayshits', 'Totalhits']|Riskscore|
-|riskRule|string|None|False|Risk rule od data|['Historically Reported by Insikt Group', 'C&C URL', 'Compromised URL', 'Historically Reported as a Defanged URL', 'Historically Reported by DHS AIS', 'Historically Reported Fraudulent Content', 'Historically Reported in Threat List', 'Historically Detected Malicious Browser Exploits', 'Historically Detected Malware Distribution', 'Historically Detected Cryptocurrency Mining Techniques', 'Historically Detected Phishing Techniques', 'Active Phishing URL', 'Positive Malware Verdict', 'Ransomware Distribution URL', 'Recently Reported by Insikt Group', 'Recently Reported as a Defanged URL', 'Recently Reported by DHS AIS', 'Recently Reported Fraudulent Content', 'Recently Detected Malicious Browser Exploits', 'Recently Detected Malware Distribution', 'Recently Detected Cryptocurrency Mining Techniques', 'Recently Detected Phishing Techniques', 'Recently Referenced by Insikt Group', 'Recently Reported Spam or Unwanted Content', 'Recently Detected Suspicious Content', 'Recently Active URL on Weaponized Domain', 'Historically Referenced by Insikt Group', 'Historically Reported Spam or Unwanted Content', 'Historically Detected Suspicious Content']|Historically Reported by Insikt Group|
+|riskRule|string|None|False|Risk rule of data|['Historically Reported by Insikt Group', 'C&C URL', 'Compromised URL', 'Historically Reported as a Defanged URL', 'Historically Reported by DHS AIS', 'Historically Reported Fraudulent Content', 'Historically Reported in Threat List', 'Historically Detected Malicious Browser Exploits', 'Historically Detected Malware Distribution', 'Historically Detected Cryptocurrency Mining Techniques', 'Historically Detected Phishing Techniques', 'Active Phishing URL', 'Positive Malware Verdict', 'Ransomware Distribution URL', 'Recently Reported by Insikt Group', 'Recently Reported as a Defanged URL', 'Recently Reported by DHS AIS', 'Recently Reported Fraudulent Content', 'Recently Detected Malicious Browser Exploits', 'Recently Detected Malware Distribution', 'Recently Detected Cryptocurrency Mining Techniques', 'Recently Detected Phishing Techniques', 'Recent Ransomware Distribution URL', 'Recently Referenced by Insikt Group', 'Recently Reported Spam or Unwanted Content', 'Recently Detected Suspicious Content', 'Recently Active URL on Weaponized Domain', 'Historically Referenced by Insikt Group', 'Historically Reported Spam or Unwanted Content', 'Historically Detected Suspicious Content']|Historically Reported by Insikt Group|
 |riskScore|string|None|False|Risk score of data|None|[0,100]|
 
 Example input:
@@ -336,7 +336,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|search_data|True|Search result|
+|data|[]url_search_data|True|Search result|
 
 Example output:
 
@@ -453,7 +453,7 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|risk_rules|[]risk_rule|True|Risk Rules for URL|
+|risk_rules|[]risk_rule|True|Risk rules for URL|
 
 Example output:
 
@@ -484,7 +484,7 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|risk_rules|[]risk_rule|False|Risk Rules|
+|risk_rules|[]risk_rule|True|Risk rules|
 
 Example output:
 
@@ -551,7 +551,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|search_data|False|Data|
+|data|[]domain_search_data|True|Data|
 
 Example output:
 
@@ -602,7 +602,7 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|risk_rules|[]risk_rule|False|Risk Rules|
+|risk_rules|[]risk_rule|True|Risk rules|
 
 Example output:
 
@@ -673,7 +673,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|search_data|False|Data|
+|data|[]malware_search_data|True|Data|
 
 Example output:
 
@@ -734,7 +734,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|entities|[]entity|False|Entities|
+|entities|[]entity|True|Entities|
 
 Example output:
 
@@ -775,13 +775,13 @@ This action returns a risk list of domains matching a filtration rule.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|['active_phishing_url', 'blacklisted_dns_name', 'cc_dns_name', 'cc_nameserver', 'cc_url', 'compromised_url', 'historical_malware_analysis_dns_name', 'historically_linked_to_cyber_attack', 'large', 'ransomware_distribution_url', 'ransomware_payment_dns_name', 'recent_fast_flux_dns_name', 'recent_malware_analysis_dns_name', 'recently_linked_to_cyber_attack', 'recently_resolved_to_host_of_many_ddns_names', 'recently_resolved_to_malicious_ip', 'recently_resolved_to_suspicious_ip', 'recently_resolved_to_unusual_ip', 'recently_resolved_to_very_malicious_ip', 'sinkhole_dns_name', 'typosquat_similarity__dns_sandwich', 'typosquat_similarity__typo_or_homograph']|active_phishing_url|
+|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|['Historically Reported by Insikt Group', 'C&C Nameserver', 'C&C DNS Name', 'Compromised URL', 'Historical COVID-19-Related Domain Lure', 'Recently Resolved to Host of Many DDNS Names', 'Historically Reported as a Defanged DNS Name', 'Historically Reported by DHS AIS', 'Recent Fast Flux DNS Name', 'Historically Reported Fraudulent Content', 'Historically Reported in Threat List', 'Historically Linked to Cyber Attack', 'Historical Malware Analysis DNS Name', 'Historically Detected Malware Operation', 'Historically Detected Cryptocurrency Mining Techniques', 'Blacklisted DNS Name', 'Historical Phishing Lure', 'Historically Detected Phishing Techniques', 'Active Phishing URL', 'Recorded Future Predictive Risk Model', 'Historical Punycode Domain', 'Ransomware Distribution URL', 'Ransomware Payment DNS Name', 'Recently Reported by Insikt Group', 'Recent COVID-19-Related Domain Lure - Malicious', 'Recent COVID-19-Related Domain Lure - Suspicious', 'Recently Reported as a Defanged DNS Name', 'Recently Reported by DHS AIS', 'Recently Reported Fraudulent Content', 'Recently Linked to Cyber Attack', 'Recent Malware Analysis DNS Name', 'Recently Detected Malware Operation', 'Recently Detected Cryptocurrency Mining Techniques', 'Recent Phishing Lure - Malicious', 'Recent Phishing Lure - Suspicious', 'Recently Detected Phishing Techniques', 'Recent Punycode Domain', 'Recently Referenced by Insikt Group', 'Recently Reported Spam or Unwanted Content', 'Recent Threat Researcher', 'Recently Active Weaponized Domain', 'Recently Defaced Site', 'Historically Referenced by Insikt Group', 'Recently Resolved to Malicious IP', 'Recently Resolved to Suspicious IP', 'Recently Resolved to Unusual IP', 'Recently Resolved to Very Malicious IP', 'Trending in Recorded Future Analyst Community', 'Historically Reported Spam or Unwanted Content', 'Historical Threat Researcher', 'Historically Active Weaponized Domain']|Active Phishing URL|
 
 Example input:
 
 ```
 {
-  "list": "active_phishing_url"
+  "list": "Active Phishing URL"
 }
 ```
 
@@ -789,7 +789,194 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|risk_list|object|False|Risk List|
+|risk_list|object|True|Risk list|
+
+Example output:
+
+```
+{
+  "stix:STIX_Package": {
+    "@xmlns:FileObj": "http://cybox.mitre.org/objects#FileObject-2",
+    "@xmlns:cybox": "http://cybox.mitre.org/cybox-2",
+    "@xmlns:indicator": "http://stix.mitre.org/Indicator-2",
+    "@xmlns:stix": "http://stix.mitre.org/stix-1",
+    "@xmlns:stixCommon": "http://stix.mitre.org/common-1",
+    "@id": "RF:Package-54aacd87-04f9-41b8-ae7d-f42eb0247d02",
+    "@version": "1.2",
+    "@xmlns:stixVocabs": "http://stix.mitre.org/default_vocabularies-1",
+    "@xmlns:ttp": "http://stix.mitre.org/TTP-1",
+    "stix:Indicators": {
+      "stix:Indicator": [
+        {
+          "indicator:Description": "Current risk: Malicious.Triggers 5 of 46 rules",
+          "indicator:Indicated_TTP": [
+            {
+              "stixCommon:Confidence": {
+                "stixCommon:Value": {
+                  "#text": "Low",
+                  "@xsi:type": "stixVocabs:HighMediumLowVocab-1.0"
+                }
+              },
+              "stixCommon:TTP": {
+                "@id": "RF:TTP-9ae8f382-c7be-36c2-86a1-b530694de07c",
+                "@timestamp": "2021-03-08T09:20:53.876Z",
+                "@xsi:type": "ttp:TTPType",
+                "ttp:Description": "1 sighting on 1 source: PhishTank: Phishing Report...",
+                "ttp:Title": "Risk Rule: Active Phishing URL"
+              }
+            },
+            {
+              "stixCommon:Confidence": {
+                "stixCommon:Value": {
+                  "#text": "Medium",
+                  "@xsi:type": "stixVocabs:HighMediumLowVocab-1.0"
+                }
+              },
+              "stixCommon:TTP": {
+                "ttp:Title": "Risk Rule: Recently Resolved to Malicious IP",
+                "@id": "RF:TTP-d24a0fba-58c6-3d06-9601-68cf1928a7fb",
+                "@timestamp": "2021-03-08T09:20:53.885Z",
+                "@xsi:type": "ttp:TTPType",
+                "ttp:Description": "From DNS resolution data collected by Recorded Fut..."
+              }
+            }
+          ],
+          "indicator:Observable": {
+            "@id": "RF:Observable-11bb6be2-4c0a-37fd-b656-f5a1da2d3185",
+            "cybox:Object": {
+              "@id": "RF:DomainName-13691b17-6e0b-3345-a062-d6a27ac2f616",
+              "cybox:Properties": {
+                "@type": "FQDN",
+                "@xsi:type": "DomainNameObj:DomainNameObjectType",
+                "DomainNameObj:Value": {
+                  "#text": "groupwhatsappbokp18.wikaba.com",
+                  "@condition": "Equals"
+                }
+              }
+            }
+          },
+          "indicator:Producer": {
+            "stixCommon:Description": "Recorded Future",
+            "stixCommon:References": {
+              "stixCommon:Reference": "https://app.recordedfuture.com/live/sc/entity/idn%..."
+            }
+          },
+          "indicator:Valid_Time_Position": {
+            "indicator:End_Time": {
+              "@precision": "second",
+              "#text": "2021-03-07T12:29:15.165Z"
+            },
+            "indicator:Start_Time": {
+              "#text": "2021-02-22T23:39:49.769Z",
+              "@precision": "second"
+            }
+          },
+          "@xsi:type": "indicator:IndicatorType",
+          "@timestamp": "2021-03-08T12:25:06.596Z",
+          "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+          "indicator:Confidence": {
+            "stixCommon:Description": "Recorded Future Risk Score",
+            "stixCommon:Value": "77"
+          },
+          "indicator:Title": "Domain groupwhatsappbokp18.wikaba.com",
+          "indicator:Type": {
+            "#text": "Domain Watchlist",
+            "@xsi:type": "stixVocabs:IndicatorTypeVocab-1.1"
+          },
+          "@id": "RF:Indicator-0579d6f3-8f65-3857-826a-ee26c89b5277"
+        },
+        {
+          "@xsi:type": "indicator:IndicatorType",
+          "indicator:Confidence": {
+            "stixCommon:Value": "77",
+            "stixCommon:Description": "Recorded Future Risk Score"
+          },
+          "indicator:Producer": {
+            "stixCommon:Description": "Recorded Future",
+            "stixCommon:References": {
+              "stixCommon:Reference": "https://app.recordedfuture.com/live/sc/entity/idn%..."
+            }
+          },
+          "indicator:Type": {
+            "@xsi:type": "stixVocabs:IndicatorTypeVocab-1.1",
+            "#text": "Domain Watchlist"
+          },
+          "indicator:Title": "Domain secure-paypal06.servehttp.com",
+          "indicator:Valid_Time_Position": {
+            "indicator:End_Time": {
+              "#text": "2021-03-06T22:51:08.340Z",
+              "@precision": "second"
+            },
+            "indicator:Start_Time": {
+              "#text": "2021-02-25T07:48:55.485Z",
+              "@precision": "second"
+            }
+          },
+          "@id": "RF:Indicator-7ac5b845-d79a-34da-9eb0-f07d9553808b",
+          "@timestamp": "2021-03-08T12:25:06.596Z",
+          "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+          "indicator:Description": "Current risk: Malicious.Triggers 5 of 46 rules",
+          "indicator:Indicated_TTP": [
+            {
+              "stixCommon:Confidence": {
+                "stixCommon:Value": {
+                  "#text": "Low",
+                  "@xsi:type": "stixVocabs:HighMediumLowVocab-1.0"
+                }
+              },
+              "stixCommon:TTP": {
+                "ttp:Description": "1 sighting on 1 source: PhishTank: Phishing Report...",
+                "ttp:Title": "Risk Rule: Active Phishing URL",
+                "@id": "RF:TTP-95174e67-d168-34e6-8f95-d54e2734bc32",
+                "@timestamp": "2021-03-07T23:08:00.982Z",
+                "@xsi:type": "ttp:TTPType"
+              }
+            },
+            {
+              "stixCommon:Confidence": {
+                "stixCommon:Value": {
+                  "#text": "Low",
+                  "@xsi:type": "stixVocabs:HighMediumLowVocab-1.0"
+                }
+              },
+              "stixCommon:TTP": {
+                "@xsi:type": "ttp:TTPType",
+                "ttp:Description": "From DNS resolution data collected by Recorded Fut...",
+                "ttp:Title": "Risk Rule: Recently Resolved to Suspicious IP",
+                "@id": "RF:TTP-59f917a3-c686-3097-8a9f-cee4394dac38",
+                "@timestamp": "2021-03-07T23:08:00.991Z"
+              }
+            }
+          ],
+          "indicator:Observable": {
+            "cybox:Object": {
+              "@id": "RF:DomainName-d9ea6f3f-8707-3f78-8a6b-7c64eba49f10",
+              "cybox:Properties": {
+                "@type": "FQDN",
+                "@xsi:type": "DomainNameObj:DomainNameObjectType",
+                "DomainNameObj:Value": {
+                  "#text": "secure-paypal06.servehttp.com",
+                  "@condition": "Equals"
+                }
+              }
+            },
+            "@id": "RF:Observable-30dec8fb-af9e-3de4-b36f-b291804532cf"
+          }
+        }
+      ]
+    },
+    "@timestamp": "2021-03-08T12:25:06.596Z",
+    "@xmlns:cyboxVocabs": "http://cybox.mitre.org/default_vocabularies-2",
+    "stix:STIX_Header": {
+      "stix:Description": "Recorded Future STIX"
+    },
+    "@xmlns": "http://xml/metadataSharing.xsd",
+    "@xmlns:RF": "http://stix.recordedfuture.com/",
+    "@xmlns:cyboxCommon": "http://cybox.mitre.org/common-2",
+    "@xmlns:DomainNameObj": "http://cybox.mitre.org/objects#DomainNameObject-1"
+  }
+}
+```
 
 #### Search Vulnerabilities
 
@@ -825,7 +1012,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|vulnerability_search_data|False|Data|
+|data|[]vulnerability_search_data|True|Data|
 
 Example output:
 
@@ -879,7 +1066,7 @@ This action is used to for data related to a specified IP range.
 |ip_range|string|None|True|IP address range to search|None|198.51.100.0/24|
 |limit|number|None|True|Number of results to retrieve, up to 100|None|10|
 |orderby|string|None|True|Which property to sort the results by|['Created', 'Lastseen', 'Firstseen', 'Modified', 'Riskscore', 'Rules', 'Sevendayshits', 'Sixtydayshits', 'Totalhits']|Lastseen|
-|riskRule|string|None|False|Filters the results by risk rule|['Threat Actor Used Infrastructure', 'Historically Reported by Insikt Group', 'Inside Possible Bogus BGP Route', 'Historical Botnet Traffic', 'Nameserver for C&C Server', 'Historical C&C Server', 'Cyber Exploit Signal - Critical', 'Cyber Exploit Signal - Important', 'Cyber Exploit Signal - Medium', 'Recent Host of Many DDNS Names', 'Historically Reported as a Defanged IP', 'Historically Reported by DHS AIS', 'Resolution of Fast Flux DNS Name', 'Historically Reported in Threat List', 'Historical Honeypot Sighting', 'Honeypot Host', 'Recently Active C&C Server', 'Recent C&C Server', 'Historically Linked to Intrusion Method', 'Historically Linked to APT', 'Historically Linked to Cyber Attack', 'Malicious Packet Source', 'Malware Delivery', 'Historical Multicategory Blacklist', 'Historical Open Proxies', 'Phishing Host', 'Historical Positive Malware Verdict', 'Recorded Future Predictive Risk Model', 'Actively Communicating C&C Server', 'Recently Reported by Insikt Group', 'Recent Spam Source', 'Recent SSH/Dictionary Attacker', 'Recent Bad SSL Association', 'Recent Threat Researcher', 'Recently Defaced Site', 'Historically Referenced by Insikt Group', 'Trending in Recorded Future Analyst Community', 'Historical Spam Source', 'Historical SSH/Dictionary Attacker', 'Historical Bad SSL Association', 'Historical Threat Researcher', 'Tor Node', 'Unusual IP', 'Vulnerable Host']|Malware Delivery|
+|riskRule|string|None|False|Filters the results by risk rule|['Threat Actor Used Infrastructure', 'Historically Reported by Insikt Group', 'Inside Possible Bogus BGP Route', 'Historical Botnet Traffic', 'Recently Communicating With C&C Server', 'Nameserver for C&C Server', 'Historical C&C Server', 'Cyber Exploit Signal - Critical', 'Cyber Exploit Signal - Important', 'Cyber Exploit Signal - Medium', 'Recent Host of Many DDNS Names', 'Historically Reported as a Defanged IP', 'Historically Reported by DHS AIS', 'Resolution of Fast Flux DNS Name', 'Historically Reported in Threat List', 'Historical Honeypot Sighting', 'Honeypot Host', 'Recently Active C&C Server', 'Recent C&C Server', 'Historically Linked to Intrusion Method', 'Historically Linked to APT', 'Historically Linked to Cyber Attack', 'Malicious Packet Source', 'Malware Delivery', 'Historical Multicategory Blacklist', 'Historical Open Proxies', 'Phishing Host', 'Historical Positive Malware Verdict', 'Recorded Future Predictive Risk Model', 'Actively Communicating C&C Server', 'Recently Reported by Insikt Group', 'Recent Botnet Traffic', 'Current C&C Server', 'Recently Reported as a Defanged IP', 'Recently Reported by DHS AIS', 'Recent Honeypot Sighting', 'Recently Linked to Intrusion Method', 'Recently Linked to APT', 'Recently Linked to Cyber Attack', 'Recent Multicategory Blacklist', 'Recent Open Proxies', 'Recent Positive Malware Verdict', 'Recently Referenced by Insikt Group', 'Recent Spam Source', 'Recent SSH/Dictionary Attacker', 'Recent Bad SSL Association', 'Recent Threat Researcher', 'Recently Defaced Site', 'Historically Referenced by Insikt Group', 'Trending in Recorded Future Analyst Community', 'Historical Spam Source', 'Historical SSH/Dictionary Attacker', 'Historical Bad SSL Association', 'Historical Threat Researcher', 'Tor Node', 'Unusual IP', 'Vulnerable Host']|Malware Delivery|
 |riskScore|string|None|False|Filters the results by risk score|None|[1,100]|
 
 Example input:
@@ -900,7 +1087,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|search_data|False|Data|
+|data|[]ip_search_data|True|Data|
 
 Example output:
 
@@ -951,7 +1138,7 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|risk_rules|[]risk_rule|False|Risk Rules|
+|risk_rules|[]risk_rule|True|Risk rules|
 
 Example output:
 
@@ -986,13 +1173,13 @@ This action is used to returns a list of hashes matching a specified risk rule.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|['large', 'linked_to_attack_vector', 'linked_to_cyber_attack', 'linked_to_malware', 'linked_to_vulnerability', 'positive_malware_verdict', 'threat_researcher']|positive_malware_verdict|
+|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|['Historically Reported in Threat List', 'Large', 'Linked to Attack Vector', 'Linked to Cyber Attack', 'Linked to Malware', 'Linked to Vulnerability', 'Malware SSL Certificate Fingerprint', 'Observed in Underground Virus Testing Sites', 'Positive Malware Verdict', 'Recently Active Targeting Vulnerabilities in the Wild', 'Referenced by Insikt Group', 'Reported by DHS AIS', 'Reported by Insikt Group', 'Threat Researcher', 'Trending in Recorded Future Analyst Community']|Positive Malware Verdict|
 
 Example input:
 
 ```
 {
-  "list": "positive_malware_verdict"
+  "list": "Positive Malware Verdict"
 }
 ```
 
@@ -1000,7 +1187,109 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|risk_list|object|False|Risk List|
+|risk_list|object|True|Risk list|
+
+Example output:
+
+```
+{
+  "risk_list": {
+    "stix:STIX_Package": {
+      "@id": "RF:Package-83248179-6985-47ad-b182-2e236c81b3f9",
+      "@timestamp": "2021-03-17T12:40:03.438Z",
+      "@version": "1.2",
+      "@xmlns": "http://xml/metadataSharing.xsd",
+      "@xmlns:FileObj": "http://cybox.mitre.org/objects#FileObject-2",
+      "@xmlns:RF": "http://stix.recordedfuture.com/",
+      "@xmlns:cybox": "http://cybox.mitre.org/cybox-2",
+      "@xmlns:cyboxCommon": "http://cybox.mitre.org/common-2",
+      "@xmlns:cyboxVocabs": "http://cybox.mitre.org/default_vocabularies-2",
+      "@xmlns:indicator": "http://stix.mitre.org/Indicator-2",
+      "@xmlns:stix": "http://stix.mitre.org/stix-1",
+      "@xmlns:stixCommon": "http://stix.mitre.org/common-1",
+      "@xmlns:stixVocabs": "http://stix.mitre.org/default_vocabularies-1",
+      "@xmlns:ttp": "http://stix.mitre.org/TTP-1",
+      "stix:Indicators": {
+        "stix:Indicator": [
+          {
+            "@id": "RF:Indicator-e14a49ac-556b-3358-b2e7-8d3b9e013aa3",
+            "@timestamp": "2021-03-17T12:40:03.438Z",
+            "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+            "@xsi:type": "indicator:IndicatorType",
+            "indicator:Confidence": {
+              "stixCommon:Description": "Recorded Future Risk Score",
+              "stixCommon:Value": "89"
+            },
+            "indicator:Description": "Current risk: Malicious.Triggers 7 of 13 rules",
+            "indicator:Indicated_TTP": [
+              {
+                "stixCommon:Confidence": {
+                  "stixCommon:Value": {
+                    "#text": "Low",
+                    "@xsi:type": "stixVocabs:HighMediumLowVocab-1.0"
+                  }
+                },
+                "stixCommon:TTP": {
+                  "@id": "RF:TTP-a78cfeaa-e468-3621-831f-5809f8d6f255",
+                  "@timestamp": "2021-03-16T00:00:00.000Z",
+                  "@xsi:type": "ttp:TTPType",
+                  "ttp:Description": "99 sightings on 5 sources: Security Affairs, McAfee, RSA Blogs, US CERT CISA Bulletins, Recorded Future. Most recent link (Mar 16, 2021): https://www.mcafee.com/enterprise/en-us/assets/reports/rp-operation-dianxun.pdf",
+                  "ttp:Title": "Risk Rule: Threat Researcher"
+                }
+              }
+            ],
+            "indicator:Observable": {
+              "@id": "RF:Observable-d61de1d4-568c-33fb-b73e-c67a4640e7b9",
+              "cybox:Object": {
+                "@id": "RF:File-3bbda3a0-997c-3617-914a-2cdcf6fc42ad",
+                "cybox:Properties": {
+                  "@xsi:type": "FileObj:FileObjectType",
+                  "FileObj:Hashes": {
+                    "cyboxCommon:Hash": {
+                      "cyboxCommon:Simple_Hash_Value": {
+                        "#text": "f34d5f2d4577ed6d9ceec516c1f5a744",
+                        "@condition": "Equals"
+                      },
+                      "cyboxCommon:Type": {
+                        "#text": "MD5",
+                        "@xsi:type": "cyboxVocabs:HashNameVocab-1.0"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "indicator:Producer": {
+              "stixCommon:Description": "Recorded Future",
+              "stixCommon:References": {
+                "stixCommon:Reference": "https://app.recordedfuture.com/live/sc/entity/hash%!A(MISSING)f34d5f2d4577ed6d9ceec516c1f5a744"
+              }
+            },
+            "indicator:Title": "MD5-hash f34d5f2d4577ed6d9ceec516c1f5a744",
+            "indicator:Type": {
+              "#text": "File Hash Watchlist",
+              "@xsi:type": "stixVocabs:IndicatorTypeVocab-1.1"
+            },
+            "indicator:Valid_Time_Position": {
+              "indicator:End_Time": {
+                "#text": "2021-03-16T21:42:27.746Z",
+                "@precision": "second"
+              },
+              "indicator:Start_Time": {
+                "#text": "2014-02-20T07:31:50.884Z",
+                "@precision": "second"
+              }
+            }
+          }
+        ]
+      },
+      "stix:STIX_Header": {
+        "stix:Description": "Recorded Future STIX"
+      }
+    }
+  }
+}
+```
 
 #### Search Hashes
 
@@ -1036,7 +1325,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|search_data|False|Data|
+|data|[]hash_search_data|True|Data|
 
 Example output:
 
@@ -1243,7 +1532,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|entities|[]entity|False|Entities|
+|entities|[]entity|True|Entities|
 
 Example output:
 
@@ -1296,8 +1585,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|entity|entity|False|Entity|
-|timestamps|timestamps|False|Timestamps|
+|data|malware_search_data|True|Data|
 
 Example output:
 
@@ -1343,17 +1631,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|analystNotes|[]analystNote|False|Notes from an analyst|
-|counts|[]counts|False|Counts|
-|enterpriseLists|[]enterpriseLists|False|Enterprise lists|
-|entity|entity|False|Entity|
-|intelCard|string|False|Intel card|
-|metrics|[]metrics|False|Metrics|
-|relatedEntities|[]relatedEntities|False|Related entities|
-|risk|risk|False|Risk|
-|sightings|[]sightings|False|Sightings|
-|threatLists|[]threatLists|False|Threat lists|
-|timestamps|timestamps|False|Timestamps|
+|data|domain_search_data|True|Data|
 
 Example output:
 
@@ -1397,18 +1675,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|analystNotes|[]string|False|Notes from an analyst|
-|counts|[]counts|False|Counts|
-|enterpriseLists|[]enterpriseLists|False|Enterprise lists|
-|entity|entity|False|Entity|
-|hashAlgorithm|string|False|Hash Algorithm|
-|intelCard|string|False|Intel card|
-|metrics|[]metrics|False|Metrics|
-|relatedEntities|[]relatedEntities|False|Related entities|
-|risk|risk|False|Risk|
-|sightings|[]sightings|False|Sightings|
-|threatLists|[]string|False|Threat Lists|
-|timestamps|timestamps|False|Timestamps|
+|data|hash_search_data|True|Data|
 
 Example output:
 
@@ -1478,15 +1745,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|analystNotes|[]string|False|Notes from an analyst|
-|counts|[]counts|False|Counts|
-|enterpriseLists|[]enterpriseLists|False|Enterprise lists|
-|entity|entity|False|Entity|
-|metrics|[]metrics|False|Metrics|
-|relatedEntities|[]relatedEntities|False|Related entities|
-|risk|risk|False|Risk|
-|sightings|[]sightings|False|Sightings|
-|timestamps|timestamps|False|Timestamps|
+|data|url_search_data|True|Data|
 
 Example output:
 
@@ -1513,13 +1772,13 @@ This action is used to fetch a risk list of the IP addresses that match a specif
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|['current_cc_server', 'cyber_exploit_signal_medium', 'historical_bad_ssl_association', 'historical_botnet_traffic', 'historical_cc_server', 'historical_honeypot_sighting', 'historical_multicategory_blacklist', 'historical_open_proxies', 'historical_positive_malware_verdict', 'historical_spam_source', 'historical_sshdictionary_attacker', 'historical_threat_researcher', 'historically_linked_to_apt', 'historically_linked_to_cyber_attack', 'historically_linked_to_intrusion_method', 'honeypot_host', 'inside_possible_bogus_bgp_route', 'large', 'malicious_packet_source', 'malware_delivery', 'nameserver_for_cc_server', 'phishing_host', 'recent_botnet_traffic', 'recent_cc_server', 'recent_honeypot_sighting', 'recent_host_of_many_ddns_names', 'recent_multicategory_blacklist', 'recent_open_proxies', 'recent_positive_malware_verdict', 'recent_spam_source', 'recent_sshdictionary_attacker', 'recent_threat_researcher', 'recently_linked_to_apt', 'recently_linked_to_cyber_attack', 'recently_linked_to_intrusion_method', 'resolution_of_fast_flux_dns_name', 'tor_node', 'unusual_ip', 'vulnerable_host']|malware_delivery|
+|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|['Threat Actor Used Infrastructure', 'Historically Reported by Insikt Group', 'Inside Possible Bogus BGP Route', 'Historical Botnet Traffic', 'Recently Communicating With C&C Server', 'Nameserver for C&C Server', 'Historical C&C Server', 'Cyber Exploit Signal - Critical', 'Cyber Exploit Signal - Important', 'Cyber Exploit Signal - Medium', 'Recent Host of Many DDNS Names', 'Historically Reported as a Defanged IP', 'Historically Reported by DHS AIS', 'Resolution of Fast Flux DNS Name', 'Historically Reported in Threat List', 'Historical Honeypot Sighting', 'Large', 'Honeypot Host', 'Recently Active C&C Server', 'Recent C&C Server', 'Historically Linked to Intrusion Method', 'Historically Linked to APT', 'Historically Linked to Cyber Attack', 'Malicious Packet Source', 'Malware Delivery', 'Historical Multicategory Blacklist', 'Historical Open Proxies', 'Phishing Host', 'Historical Positive Malware Verdict', 'Recorded Future Predictive Risk Model', 'Actively Communicating C&C Server', 'Recently Reported by Insikt Group', 'Recent Botnet Traffic', 'Current C&C Server', 'Recently Reported as a Defanged IP', 'Recently Reported by DHS AIS', 'Recent Honeypot Sighting', 'Recently Linked to Intrusion Method', 'Recently Linked to APT', 'Recently Linked to Cyber Attack', 'Recent Multicategory Blacklist', 'Recent Open Proxies', 'Recent Positive Malware Verdict', 'Recently Referenced by Insikt Group', 'Recent Spam Source', 'Recent SSH/Dictionary Attacker', 'Recent Bad SSL Association', 'Recent Threat Researcher', 'Recently Defaced Site', 'Historically Referenced by Insikt Group', 'Trending in Recorded Future Analyst Community', 'Historical Spam Source', 'Historical SSH/Dictionary Attacker', 'Historical Bad SSL Association', 'Historical Threat Researcher', 'Tor Node', 'Unusual IP', 'Vulnerable Host']|Malware Delivery|
 
 Example input:
 
 ```
 {
-  "list": "malware_delivery"
+  "list": "Malware Delivery"
 }
 ```
 
@@ -1527,7 +1786,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|risk_list|object|False|Risk List|
+|risk_list|object|True|Risk list|
 
 Example output:
 
@@ -1723,20 +1982,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|analystNotes|[]string|False|Notes from an analyst|
-|counts|[]counts|False|Counts|
-|enterpriseLists|[]enterpriseLists|False|Enterprise lists|
-|entity|entity|False|Entity|
-|found|boolean|False|Has the IP been found in Recorded Future|
-|intelCard|string|False|Intel card|
-|location|location|False|Location|
-|metrics|[]metrics|False|Metrics|
-|relatedEntities|[]relatedEntities|False|Related entities|
-|risk|risk|False|Risk|
-|riskyCIDRIPs|[]riskyCIDRIP|False|Risky CIDR IPs|
-|sightings|[]sightings|False|Sightings|
-|threatLists|[]threatLists|False|Threat lists|
-|timestamps|timestamps|False|Timestamps|
+|data|ip_search_data|True|Data|
 
 Example output:
 
@@ -1762,13 +2008,13 @@ This action is used to fetch a risk list of vulnerabilities matching a specified
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|['cyber_exploit_signal_critical', 'cyber_exploit_signal_important', 'cyber_exploit_signal_medium', 'historical_scanner_uptake', 'historically_linked_to_exploit_kit', 'historically_linked_to_malware', 'historically_linked_to_ransomware', 'historically_linked_to_remote_access_trojan', 'large', 'linked_to_recent_cyber_exploit', 'nist_severity_critical', 'nist_severity_high', 'nist_severity_low', 'nist_severity_medium', 'recent_scanner_uptake', 'recently_linked_to_exploit_kit', 'recently_linked_to_malware', 'recently_linked_to_ransomware', 'recently_linked_to_remote_access_trojan', 'web_reporting_prior_to_nvd_disclosure']|nist_severity_critical|
+|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|['Historically Reported by Insikt Group', 'Web Reporting Prior to CVSS Score', 'Cyber Exploit Signal - Critical', 'Cyber Exploit Signal - Important', 'Cyber Exploit Signal - Medium', 'Historically Exploited in the Wild by Malware', 'Large', 'Linked to Historical Cyber Exploit', 'Historically Linked to Exploit Kit', 'Historically Linked to Malware', 'Historically Linked to Remote Access Trojan', 'Historically Linked to Ransomware', 'Linked to Recent Cyber Exploit', 'Recently Linked to Exploit Kit', 'Recently Linked to Malware', 'Recently Linked to Remote Access Trojan', 'Recently Linked to Ransomware', 'Exploited in the Wild by Malware', 'NIST Severity - Critical', 'Duplicate of Vulnerability in NVD', 'NIST Severity - High', 'NIST Severity - Low', 'NIST Severity - Medium', 'Web Reporting Prior to NVD Disclosure', 'Historical Unverified Proof of Concept Available', 'Historical Verified Proof of Concept Available', 'Historical Verified Proof of Concept Available Using Remote Execution', 'Recently Reported by Insikt Group', 'Exploited in the Wild by Recently Active Malware', 'Recent Unverified Proof of Concept Available', 'Recent Verified Proof of Concept Available', 'Recent Verified Proof of Concept Available Using Remote Execution', 'Recently Referenced by Insikt Group', 'Recently Linked to Penetration Testing Tools', 'Historically Referenced by Insikt Group', 'Historically Linked to Penetration Testing Tools']|NIST Severity Critical|
 
 Example input:
 
 ```
 {
-  "list": "nist_severity_critical"
+  "list": "NIST Severity Critical"
 }
 ```
 
@@ -1776,7 +2022,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|risk_list|object|False|Risk List|
+|risk_list|object|True|Risk list|
 
 Example output:
 
@@ -1843,7 +2089,7 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|risk_rules|[]risk_rule|False|Risk Rules|
+|risk_rules|[]risk_rule|True|Risk rules|
 
 Example output:
 
@@ -1894,7 +2140,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|vulnerability_search_data|False|Data|
+|data|vulnerability_search_data|True|Data|
 
 Example output:
 
@@ -2031,7 +2277,350 @@ Example output:
 
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+#### alert
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Counts|counts|False|Counts|
+|Entities|[]entities|False|Entities|
+|ID|string|False|ID|
+|Review|review|False|Review|
+|Rule|rule|False|Rule|
+|Title|string|False|Title|
+|Triggered|string|False|Triggered|
+|Type|string|False|Type|
+|URL|string|False|URL|
+
+#### analystNote
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Attributes|attributes|False|Attributes|
+|ID|string|False|ID|
+|Source|labels|False|Source|
+
+#### attributes
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Context Entities|[]context_entities|False|Context entities|
+|Labels|[]labels|False|Labels|
+|Note Entities|[]labels|False|Note entities|
+|Published|string|False|Published|
+|Text|string|False|Text|
+|Title|string|False|Title|
+|Title|context_entities|False|Title|
+|Validated On|string|False|Validated on|
+|Validation URLs|[]labels|False|Validation URLs|
+
+#### cidr
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ID|string|False|ID|
+|Name|string|False|Name|
+|Type|string|False|Type|
+
+#### context_entities
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Description|string|False|Description|
+|ID|string|False|ID|
+|Name|string|False|Name|
+|Type|string|False|Type|
+
+#### counts
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Count|integer|False|Count|
+|Date|string|False|Date|
+
+#### cvss
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Access Complexity|string|False|Access complexity|
+|Access Vector|string|False|Access vector|
+|Authentication|string|False|Authentication|
+|Availability|string|False|Availability|
+|Confidentiality|string|False|Confidentiality|
+|Integrity|string|False|Integrity|
+|Last Modified|string|False|Last modified|
+|Published|string|False|Published|
+|Score|float|False|Score|
+|Version|string|False|Version|
+
+#### cvssv3
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Attack Complexity|string|False|Attack complexity|
+|Attack Vector|string|False|Attack vector|
+
+#### domain_search_data
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Analyst Notes|[]analystNote|False|Notes from an analyst|
+|Counts|[]counts|False|Counts|
+|Enterprise Lists|[]enterpriseLists|False|Enterprise lists|
+|Entity|entity|False|Entity|
+|Intel Card|string|False|Intel card|
+|Metrics|[]metrics|False|Metrics|
+|Related Entities|[]relatedEntities|False|Related entities|
+|Risk|risk|False|Risk|
+|Sightings|[]sightings|False|Sightings|
+|Threat Lists|[]threatLists|False|Threat lists|
+|Timestamps|timestamps|False|Timestamps|
+
+#### enterpriseLists
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Added|string|False|Added|
+|List|list|False|List|
+
+#### entities
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Count|integer|False|Count|
+|Entity|entity|False|Entity|
+
+#### entity
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Description|string|False|Description|
+|ID|string|False|ID|
+|Name|string|False|Name|
+|Type|string|False|Type|
+
+#### evidenceDetails
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Criticality|number|False|Criticality|
+|Criticality Label|string|False|Criticality label|
+|Evidence String|string|False|Evidence string|
+|Rule|string|False|Rule|
+|Timestamp|string|False|Timestamp|
+
+#### hash_search_data
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Analyst Notes|[]analystNote|False|Notes from an analyst|
+|Counts|[]counts|False|Counts|
+|Enterprise Lists|[]enterpriseLists|False|Enterprise lists|
+|Entity|entity|False|Entity|
+|Hash Algorithm|string|False|Hash algorithm|
+|Intel Card|string|False|Intel card|
+|Metrics|[]metrics|False|Metrics|
+|Related Entities|[]relatedEntities|False|Related entities|
+|Risk|risk|False|Risk|
+|Sightings|[]sightings|False|Sightings|
+|Threat Lists|[]threatLists|False|Threat lists|
+|Timestamps|timestamps|False|Timestamps|
+
+#### ip
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ID|string|False|ID|
+|Name|string|False|Name|
+|Type|string|False|Type|
+
+#### ip_search_data
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Analyst Notes|[]analystNote|False|Notes from an analyst|
+|Counts|[]counts|False|Counts|
+|Enterprise Lists|[]enterpriseLists|False|Enterprise lists|
+|Entity|entity|False|Entity|
+|Intel Card|string|False|Intel card|
+|Location|location|False|Location|
+|Metrics|[]metrics|False|Metrics|
+|Related Entities|[]relatedEntities|False|Related entities|
+|Risk|risk|False|Risk|
+|Risky CIDR IPs|[]riskyCIDRIP|False|Risky CIDR IPs|
+|Sightings|[]sightings|False|Sightings|
+|Threat Lists|[]threatLists|False|Threat lists|
+|Timestamps|timestamps|False|Timestamps|
+
+#### labels
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ID|string|False|ID|
+|Name|string|False|Name|
+|Type|string|False|Type|
+
+#### list
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ID|string|False|ID|
+|Name|string|False|Name|
+|Type|string|False|Type|
+
+#### location
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ASN|string|False|ASN|
+|CIDR|cidr|False|Classless Inter-Domain Routing|
+|Location|location_data|False|Location|
+|Organization|string|False|Organization|
+
+#### location_data
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|City|string|False|City|
+|Continent|string|False|Continent|
+|Country|string|False|Country|
+
+#### malware_search_data
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Analyst Notes|[]analystNote|False|Notes from an analyst|
+|Counts|[]counts|False|Counts|
+|Entity|entity|False|Entity|
+|Intel Card|string|False|Intel card|
+|Metrics|[]metrics|False|Metrics|
+|Related Entities|[]relatedEntities|False|Related entities|
+|Sightings|[]sightings|False|Sightings|
+|Timestamps|timestamps|False|Timestamps|
+
+#### metrics
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Type|string|False|Type|
+|Value|float|False|Value|
+
+#### rawrisk
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Rule|string|False|Rule|
+|Timestamp|string|False|Timestamp|
+
+#### relatedEntities
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Entities|[]entities|False|Entities|
+|Type|string|False|Type|
+
+#### review
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Status|string|False|Status|
+
+#### risk
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Criticality|number|False|Criticality|
+|Criticality Label|string|False|Criticality label|
+|Evidence Details|[]evidenceDetails|False|Evidence details|
+|Risk Summary|string|False|Risk summary|
+|Rules|integer|False|Rules|
+|Score|integer|False|Score|
+
+#### risk_rule
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Criticality|number|False|Criticality|
+|Criticality Label|string|False|Criticality label|
+|Description|string|False|Description|
+|Name|string|False|Name|
+
+#### riskyCIDRIP
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|IP|ip|False|IP|
+|Score|integer|False|Score|
+
+#### rule
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ID|string|False|ID|
+|Name|string|False|Name|
+|URL|string|False|URL|
+
+#### sightings
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Fragment|string|False|Fragment|
+|Published|string|False|Published|
+|Source|string|False|Source|
+|Title|string|False|Title|
+|Type|string|False|Type|
+|URL|string|False|URL|
+
+#### threatLists
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Description|string|False|Description|
+|ID|string|False|ID|
+|Name|string|False|Name|
+|Type|string|False|Type|
+
+#### timestamps
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|First Seen|string|False|First seen|
+|Last Seen|string|False|Last seen|
+
+#### url_search_data
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Analyst Notes|[]analystNote|False|Notes from an analyst|
+|Counts|[]counts|False|Counts|
+|Enterprise Lists|[]enterpriseLists|False|Enterprise lists|
+|Entity|entity|False|Entity|
+|Metrics|[]metrics|False|Metrics|
+|Related Entities|[]relatedEntities|False|Related entities|
+|Risk|risk|False|Risk|
+|Sightings|[]sightings|False|Sightings|
+|Timestamps|timestamps|False|Timestamps|
+
+#### vulnerability_search_data
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Analyst Notes|[]analystNote|False|Analyst notes|
+|Common Names|[]string|False|Common names|
+|Counts|[]counts|False|Counts|
+|CPE|[]string|False|CPE|
+|CVSS|cvss|False|CVSS|
+|CVSSV3|cvssv3|False|CVSSV3|
+|Entity|entity|False|Entity|
+|Intel Card|string|False|Intel card|
+|Metrics|[]metrics|False|Metrics|
+|NVD Description|string|False|NVD description|
+|Rawrisk|[]rawrisk|False|Rawrisk|
+|Related Entities|[]relatedEntities|False|Related entities|
+|Related Links|[]string|False|Related links|
+|Risk|risk|False|Risk|
+|Sightings|[]sightings|False|Sightings|
+|Threat Lists|[]threatLists|False|Threat lists|
+|Timestamps|timestamps|False|Timestamps|
 
 ## Troubleshooting
 
@@ -2039,6 +2628,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 5.0.0 - Rewrite all API calls and move them to api.py | Improve error handling | Add more user-friendly cause and assistance messaging using PluginException | Add missing Input, Output, and Component imports and use them in actions | Add the `riskRuleMap` parameter for the Download Risk List actions | Move the `fields` and `riskRuleMap` parameters from actions to util.py | Remove unused `risklist` parameter from the List Risk Rules actions | Remove private variables from the Search actions | Update the available values for the `list` parameter for the Download Risk List actions in plugin.spec.yaml | Add missing titles for input and output parameters for actions in plugin.spec.yaml | Remove blank input from the List Risk Rules actions in plugin.spec.yaml | Add missing titles and descriptions for parameters in custom types | Update custom types for action outputs | Remove unnecessary quotes and new lines from plugin.spec.yaml | Update Python version in Dockerfile | Add USER nobody in Dockerfile | Update xmltodict in requirements.txt | Remove rfapi from requirements.txt | Add output example for the Download Domain Risk List and Download Hash Risk List actions | Add custom types in help.md
 * 4.0.4 - Fix issue where Lookup Domain could corrupt non-common domain name extensions
 * 4.0.3 - Update Lookup Domain action to accept HTTP and HTTPS URLs as input
 * 4.0.2 - Return full `analystNotes` and `threatLists` data outputs in Lookup Domain action
