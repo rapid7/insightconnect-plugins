@@ -62,7 +62,7 @@ Example input:
 ```
 {
   "limit": 10,
-  "query_id": "q1xx2xx3",
+  "query_id": "qd94e330ac025d525b5948bdf897b955e",
   "sub_query": "AgentName IS NOT EMPTY"
 }
 ```
@@ -76,7 +76,152 @@ Example input:
 Example output:
 
 ```
-
+{
+  "response": {
+    "data": [
+      {
+        "agentDomain": "WORKGROUP",
+        "agentGroupId": "123123456712356789",
+        "agentId": "123123456712356789",
+        "agentInfected": false,
+        "agentIp": "192.168.50.1",
+        "agentIsActive": true,
+        "agentIsDecommissioned": false,
+        "agentMachineType": "server",
+        "agentName": "example-agent",
+        "agentNetworkStatus": "connected",
+        "agentOs": "windows",
+        "agentTimestamp": "2021-03-22T12:20:34.441Z",
+        "agentUuid": "28db47168fa54f89aeed99769ac8d4dc",
+        "agentVersion": "4.1.4.82",
+        "attributes": [
+          {
+            "display": "Endpoint Name",
+            "display_all_events": "Endpoint Name",
+            "display_attribute": true,
+            "enriched_in_mgmt": false,
+            "field_id": "endpointName",
+            "in_all_events": false,
+            "queryable": true,
+            "section": "Endpoint Details",
+            "value": "example-agent"
+          },
+          {
+            "display": "Endpoint OS",
+            "display_all_events": "Endpoint OS",
+            "display_attribute": true,
+            "enriched_in_mgmt": false,
+            "field_id": "endpointOs",
+            "in_all_events": false,
+            "queryable": true,
+            "section": "Endpoint Details",
+            "value": "windows"
+          },
+          {
+            "display": "Agent UUID",
+            "display_all_events": "Agent UUID",
+            "display_attribute": false,
+            "enriched_in_mgmt": false,
+            "field_id": "agentUuid",
+            "in_all_events": false,
+            "queryable": true,
+            "section": "Endpoint Details",
+            "value": "28db47168fa54f89aeed99769ac8d4dc"
+          }
+        ],
+        "childProcCount": "0",
+        "createdAt": "2021-03-22T12:20:34.441000Z",
+        "crossProcCount": "0",
+        "crossProcDupRemoteProcHandleCount": "0",
+        "crossProcDupThreadHandleCount": "0",
+        "crossProcOpenProcCount": "0",
+        "crossProcOutOfStorylineCount": "0",
+        "crossProcThreadCreateCount": "0",
+        "dnsCount": "0",
+        "endpointMachineType": "server",
+        "endpointName": "example-agent",
+        "endpointOs": "windows",
+        "eventTime": "2021-03-22T12:20:34.441Z",
+        "eventType": "Task Start",
+        "id": "538501898938548224",
+        "indicatorBootConfigurationUpdateCount": "0",
+        "indicatorEvasionCount": "0",
+        "indicatorExploitationCount": "0",
+        "indicatorGeneralCount": "0",
+        "indicatorInfostealerCount": "0",
+        "indicatorInjectionCount": "0",
+        "indicatorPersistenceCount": "0",
+        "indicatorPostExploitationCount": "0",
+        "indicatorRansomwareCount": "0",
+        "indicatorReconnaissanceCount": "0",
+        "metaEventName": "SCHEDTASKSTART",
+        "moduleCount": "0",
+        "netConnCount": "0",
+        "netConnInCount": "0",
+        "netConnOutCount": "0",
+        "objectType": "scheduled_task",
+        "parentPid": "1576",
+        "parentProcessName": "GoogleUpdateSetup.exe",
+        "parentProcessStartTime": "2021-02-05T04:15:29.040Z",
+        "parentProcessUniqueKey": "0B457A0EEDCCDE79",
+        "pid": "2124",
+        "processCmd": "\"C:\\Program Files (x86)\\Google\\Temp\\GUMFD36.tmp\\GoogleUpdate.exe\" /update /sessionid \"{A93A4584-B89A-4960-BF6B-7D22327D555B}\"",
+        "processDisplayName": "Google Installer",
+        "processGroupId": "010F0690CE863720",
+        "processImagePath": "C:\\Program Files (x86)\\Google\\Temp\\GUMFD36.tmp\\GoogleUpdate.exe",
+        "processIntegrityLevel": "SYSTEM",
+        "processIsRedirectedCommandProcessor": "False",
+        "processIsWow64": "True",
+        "processName": "GoogleUpdate.exe",
+        "processRoot": "False",
+        "processSessionId": "0",
+        "processStartTime": "2021-02-05T04:15:30.704Z",
+        "processSubSystem": "SYS_WIN32",
+        "processUniqueKey": "0B457A0EEDCCDE79",
+        "registryChangeCount": "0",
+        "relatedToThreat": "False",
+        "siteId": "521580416395045459",
+        "siteName": "Rapid7",
+        "srcProcCmdLine": "\"C:\\Program Files (x86)\\Google\\Temp\\GUMFD36.tmp\\GoogleUpdate.exe\" /update /sessionid \"{A93A4584-B89A-4960-BF6B-7D22327D555B}\"",
+        "srcProcDisplayName": "Google Installer",
+        "srcProcImagePath": "C:\\Program Files (x86)\\Google\\Temp\\GUMFD36.tmp\\GoogleUpdate.exe",
+        "srcProcIntegrityLevel": "SYSTEM",
+        "srcProcIsNative64Bit": "True",
+        "srcProcIsRedirectCmdProcessor": "False",
+        "srcProcIsStorylineRoot": "False",
+        "srcProcName": "GoogleUpdate.exe",
+        "srcProcParentImagePath": "C:\\Program Files (x86)\\Google\\Update\\Install\\{D0BA3C2C-8787-4281-9646-FB4B6EE87E66}\\GoogleUpdateSetup.exe",
+        "srcProcParentName": "GoogleUpdateSetup.exe",
+        "srcProcParentPid": "1576",
+        "srcProcParentProcUid": "022700598B3061C5",
+        "srcProcParentStartTime": "2021-02-05T04:15:29.040Z",
+        "srcProcParentUid": "022700598B3061C5",
+        "srcProcPid": "2124",
+        "srcProcRelatedToThreat": "False",
+        "srcProcSessionId": "0",
+        "srcProcStartTime": "2021-02-05T04:15:30.704Z",
+        "srcProcStorylineId": "010F0690CE863720",
+        "srcProcSubsystem": "SYS_WIN32",
+        "srcProcTid": "2116",
+        "srcProcUid": "0B457A0EEDCCDE79",
+        "srcProcUser": "NT AUTHORITY\\SYSTEM",
+        "storyline": "010F0690CE863720",
+        "taskName": "\\GoogleUpdateTaskMachineUA",
+        "taskPath": "C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe",
+        "tgtFileCreationCount": "0",
+        "tgtFileDeletionCount": "0",
+        "tgtFileModificationCount": "0",
+        "tid": "2116",
+        "trueContext": "010F0690CE863720",
+        "user": "NT AUTHORITY\\SYSTEM"
+      }
+    ],
+    "pagination": {
+      "nextCursor": "eyJpZF9jb2x1bW4iOiAiaWQiLCAiaWRfdmFsdWUiOiAiNTM4NTAxODk4OTM4NTQ4MjI0IiwgInNvcnRfYnlfY29sdW1uIjogImFnZW50VGltZXN0YW1wIiwgInNvcnRfYnlfdmFsdWUiOiAiMjAyMS0wMy0yMlQxMjoyMDozNC40NDFaIiwgInNvcnRfb3JkZXIiOiAiZGVzYyJ9",
+      "totalItems": 1000
+    }
+  }
+}
 ```
 
 #### Get Events
@@ -96,7 +241,7 @@ Example input:
 ```
 {
   "limit": 10,
-  "query_id": "q1xx2xx3",
+  "query_id": "qd94e330ac025d525b5948bdf897b955e",
   "sub_query": "AgentName IS NOT EMPTY"
 }
 ```
@@ -110,6 +255,152 @@ Example input:
 Example output:
 
 ```
+{
+  "response": {
+    "data": [
+      {
+        "agentDomain": "WORKGROUP",
+        "agentGroupId": "123123456712356789",
+        "agentId": "123123456712356789",
+        "agentInfected": false,
+        "agentIp": "192.168.50.1",
+        "agentIsActive": true,
+        "agentIsDecommissioned": false,
+        "agentMachineType": "server",
+        "agentName": "example-agent",
+        "agentNetworkStatus": "connected",
+        "agentOs": "windows",
+        "agentTimestamp": "2021-03-22T12:20:34.441Z",
+        "agentUuid": "28db47168fa54f89aeed99769ac8d4dc",
+        "agentVersion": "4.1.4.82",
+        "attributes": [
+          {
+            "display": "Endpoint Name",
+            "display_all_events": "Endpoint Name",
+            "display_attribute": true,
+            "enriched_in_mgmt": false,
+            "field_id": "endpointName",
+            "in_all_events": false,
+            "queryable": true,
+            "section": "Endpoint Details",
+            "value": "example-agent"
+          },
+          {
+            "display": "Endpoint OS",
+            "display_all_events": "Endpoint OS",
+            "display_attribute": true,
+            "enriched_in_mgmt": false,
+            "field_id": "endpointOs",
+            "in_all_events": false,
+            "queryable": true,
+            "section": "Endpoint Details",
+            "value": "windows"
+          },
+          {
+            "display": "Agent UUID",
+            "display_all_events": "Agent UUID",
+            "display_attribute": false,
+            "enriched_in_mgmt": false,
+            "field_id": "agentUuid",
+            "in_all_events": false,
+            "queryable": true,
+            "section": "Endpoint Details",
+            "value": "28db47168fa54f89aeed99769ac8d4dc"
+          }
+        ],
+        "childProcCount": "0",
+        "createdAt": "2021-03-22T12:20:34.441000Z",
+        "crossProcCount": "0",
+        "crossProcDupRemoteProcHandleCount": "0",
+        "crossProcDupThreadHandleCount": "0",
+        "crossProcOpenProcCount": "0",
+        "crossProcOutOfStorylineCount": "0",
+        "crossProcThreadCreateCount": "0",
+        "dnsCount": "0",
+        "endpointMachineType": "server",
+        "endpointName": "example-agent",
+        "endpointOs": "windows",
+        "eventTime": "2021-03-22T12:20:34.441Z",
+        "eventType": "Task Start",
+        "id": "538501898938548224",
+        "indicatorBootConfigurationUpdateCount": "0",
+        "indicatorEvasionCount": "0",
+        "indicatorExploitationCount": "0",
+        "indicatorGeneralCount": "0",
+        "indicatorInfostealerCount": "0",
+        "indicatorInjectionCount": "0",
+        "indicatorPersistenceCount": "0",
+        "indicatorPostExploitationCount": "0",
+        "indicatorRansomwareCount": "0",
+        "indicatorReconnaissanceCount": "0",
+        "metaEventName": "SCHEDTASKSTART",
+        "moduleCount": "0",
+        "netConnCount": "0",
+        "netConnInCount": "0",
+        "netConnOutCount": "0",
+        "objectType": "scheduled_task",
+        "parentPid": "1576",
+        "parentProcessName": "GoogleUpdateSetup.exe",
+        "parentProcessStartTime": "2021-02-05T04:15:29.040Z",
+        "parentProcessUniqueKey": "0B457A0EEDCCDE79",
+        "pid": "2124",
+        "processCmd": "\"C:\\Program Files (x86)\\Google\\Temp\\GUMFD36.tmp\\GoogleUpdate.exe\" /update /sessionid \"{A93A4584-B89A-4960-BF6B-7D22327D555B}\"",
+        "processDisplayName": "Google Installer",
+        "processGroupId": "010F0690CE863720",
+        "processImagePath": "C:\\Program Files (x86)\\Google\\Temp\\GUMFD36.tmp\\GoogleUpdate.exe",
+        "processIntegrityLevel": "SYSTEM",
+        "processIsRedirectedCommandProcessor": "False",
+        "processIsWow64": "True",
+        "processName": "GoogleUpdate.exe",
+        "processRoot": "False",
+        "processSessionId": "0",
+        "processStartTime": "2021-02-05T04:15:30.704Z",
+        "processSubSystem": "SYS_WIN32",
+        "processUniqueKey": "0B457A0EEDCCDE79",
+        "registryChangeCount": "0",
+        "relatedToThreat": "False",
+        "siteId": "521580416395045459",
+        "siteName": "Rapid7",
+        "srcProcCmdLine": "\"C:\\Program Files (x86)\\Google\\Temp\\GUMFD36.tmp\\GoogleUpdate.exe\" /update /sessionid \"{A93A4584-B89A-4960-BF6B-7D22327D555B}\"",
+        "srcProcDisplayName": "Google Installer",
+        "srcProcImagePath": "C:\\Program Files (x86)\\Google\\Temp\\GUMFD36.tmp\\GoogleUpdate.exe",
+        "srcProcIntegrityLevel": "SYSTEM",
+        "srcProcIsNative64Bit": "True",
+        "srcProcIsRedirectCmdProcessor": "False",
+        "srcProcIsStorylineRoot": "False",
+        "srcProcName": "GoogleUpdate.exe",
+        "srcProcParentImagePath": "C:\\Program Files (x86)\\Google\\Update\\Install\\{D0BA3C2C-8787-4281-9646-FB4B6EE87E66}\\GoogleUpdateSetup.exe",
+        "srcProcParentName": "GoogleUpdateSetup.exe",
+        "srcProcParentPid": "1576",
+        "srcProcParentProcUid": "022700598B3061C5",
+        "srcProcParentStartTime": "2021-02-05T04:15:29.040Z",
+        "srcProcParentUid": "022700598B3061C5",
+        "srcProcPid": "2124",
+        "srcProcRelatedToThreat": "False",
+        "srcProcSessionId": "0",
+        "srcProcStartTime": "2021-02-05T04:15:30.704Z",
+        "srcProcStorylineId": "010F0690CE863720",
+        "srcProcSubsystem": "SYS_WIN32",
+        "srcProcTid": "2116",
+        "srcProcUid": "0B457A0EEDCCDE79",
+        "srcProcUser": "NT AUTHORITY\\SYSTEM",
+        "storyline": "010F0690CE863720",
+        "taskName": "\\GoogleUpdateTaskMachineUA",
+        "taskPath": "C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe",
+        "tgtFileCreationCount": "0",
+        "tgtFileDeletionCount": "0",
+        "tgtFileModificationCount": "0",
+        "tid": "2116",
+        "trueContext": "010F0690CE863720",
+        "user": "NT AUTHORITY\\SYSTEM"
+      }
+    ],
+    "pagination": {
+      "nextCursor": "eyJpZF9jb2x1bW4iOiAiaWQiLCAiaWRfdmFsdWUiOiAiNTM4NTAxODk4OTM4NTQ4MjI0IiwgInNvcnRfYnlfY29sdW1uIjogImFnZW50VGltZXN0YW1wIiwgInNvcnRfYnlfdmFsdWUiOiAiMjAyMS0wMy0yMlQxMjoyMDozNC40NDFaIiwgInNvcnRfb3JkZXIiOiAiZGVzYyJ9",
+      "totalItems": 1000
+    }
+  }
+}
 ```
 
 #### Cancel Running Query
@@ -126,7 +417,7 @@ Example input:
 
 ```
 {
-  "query_id": "q1xx2xx3"
+  "query_id": "qd94e330ac025d525b5948bdf897b955e"
 }
 ```
 
@@ -139,7 +430,11 @@ Example input:
 Example output:
 
 ```
-
+{
+  "response": {
+    "success": true
+  }
+}
 ```
 
 #### Get Query Status
@@ -156,7 +451,7 @@ Example input:
 
 ```
 {
-  "query_id": "q1xx2xx3"
+  "query_id": "qd94e330ac025d525b5948bdf897b955e"
 }
 ```
 
@@ -169,7 +464,14 @@ Example input:
 Example output:
 
 ```
-
+{
+  "response": {
+    "data": {
+      "progressStatus": 50,
+      "responseState": "RUNNING"
+    }
+  }
+}
 ```
 
 #### Create Query
