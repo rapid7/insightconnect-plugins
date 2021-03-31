@@ -34,7 +34,7 @@ class ConfigurationCommandsInput(insightconnect_plugin_runtime.Input):
     "host": {
       "type": "string",
       "title": "Host",
-      "description": "Optional Hosts to run remote commands. If not provided, the connection host will be used",
+      "description": "Optional hosts to run remote commands. If not provided, the connection host will be used",
       "order": 1
     }
   },

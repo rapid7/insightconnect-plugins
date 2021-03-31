@@ -59,7 +59,7 @@ This action is used to change the device's configuration (global configuration m
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |command|[]string|None|True|Commands to change the configuration on network device|None|["ls -la"]|
-|host|string|None|False|Optional Hosts to run remote commands. If not provided, the connection host will be used|None|example.com|
+|host|string|None|False|Optional hosts to run remote commands. If not provided, the connection host will be used|None|example.com|
 
 Example input:
 
@@ -97,7 +97,7 @@ This action is used to check the devices configurations (privilege exec mode).
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |command|string|None|True|Show command to execute on network device|None|ls -la|
-|host|string|None|False|Optional Host to run remote commands. If not provided, the connection host will be used|None|example.com|
+|host|string|None|False|Optional host to run remote commands. If not provided, the connection host will be used|None|example.com|
 
 Example input:
 

@@ -31,7 +31,7 @@ class ShowCommandsInput(insightconnect_plugin_runtime.Input):
     "host": {
       "type": "string",
       "title": "Host",
-      "description": "Optional Host to run remote commands. If not provided, the connection host will be used",
+      "description": "Optional host to run remote commands. If not provided, the connection host will be used",
       "order": 1
     }
   },
