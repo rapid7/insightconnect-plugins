@@ -2578,6 +2578,7 @@ actions:
         - Registry Value Delete
         - Behavioral Indicators
         - Module Load
+        example: Registry Key Create
         required: true
       limit:
         title: Limit
