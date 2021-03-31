@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "HTTP Requests"
 Vendor = "rapid7"
-Version = "4.0.2"
+Version = "4.0.3"
 Description = "The HTTP Requests plugin to make it easy to integrate with RESTful services"
 
 
@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from komand_rest import connection, actions, triggers
 
-    class ICONRest(komand.Plugin):
+    class ICONRest(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -46,7 +46,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONRest())
+    cli = insightconnect_plugin_runtime.CLI(ICONRest())
     cli.run()
 
 
