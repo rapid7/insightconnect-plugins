@@ -1,16 +1,14 @@
 import insightconnect_plugin_runtime
 from .schema import CreateQueryInput, CreateQueryOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class CreateQuery(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='create_query',
-                description=Component.DESCRIPTION,
-                input=CreateQueryInput(),
-                output=CreateQueryOutput())
+            name="create_query", description=Component.DESCRIPTION, input=CreateQueryInput(), output=CreateQueryOutput()
+        )
 
     def run(self, params={}):
         account_ids = params.get(Input.ACCOUNT_IDS, None)
@@ -24,7 +22,7 @@ class CreateQuery(insightconnect_plugin_runtime.Action):
         payload = {
             "fromDate": params.get(Input.FROM_DATE),
             "toDate": params.get(Input.TO_DATE),
-            "query": params.get(Input.QUERY)
+            "query": params.get(Input.QUERY),
         }
 
         if account_ids:
