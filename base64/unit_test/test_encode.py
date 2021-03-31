@@ -21,7 +21,6 @@ class TestEncode(TestCase):
         test_json_file = {
             "body": {
                 "action": "encode",
-                "connection": null,
                 "input": {
                     "content": "some content"
                 },
@@ -44,4 +43,4 @@ class TestEncode(TestCase):
 
         # TODO: The following assert should be updated to look for data from your action
         # For example: self.assertEquals({"success": True}, results)
-        self.assertEquals({}, results)
+        self.assertEqual({}, results)

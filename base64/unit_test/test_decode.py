@@ -41,4 +41,4 @@ class TestDecode(TestCase):
         results = test_action.run(action_params)
 
         expected = {'data': 'some content'}
-        self.assertEquals(expected, results)
+        self.assertEqual(expected, results)
