@@ -150,7 +150,7 @@ actions:
       host:
         title: Host
         type: string
-        description: Optional Hosts to run remote commands. If not provided, the connection host will be used
+        description: Optional hosts to run remote commands. If not provided, the connection host will be used
         required: false
         example: example.com
       command:
