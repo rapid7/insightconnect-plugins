@@ -989,7 +989,7 @@ types:
       type: string
       required: false
     processIsWow64:
-      title: Process Is WOW64
+      title: Process is WOW64
       description: Process is WOW64
       type: string
       required: false
@@ -1084,12 +1084,12 @@ types:
       type: string
       required: false
     agentIsActive:
-      title: Agent Is Active
+      title: Agent is Active
       description: Agent is active
       type: boolean
       required: false
     processIsRedirectedCommandProcessor:
-      title: Process Is Redirected Command Processor
+      title: Process is Redirected Command Processor
       description: Process is redirected command processor
       type: string
       required: false
@@ -1149,7 +1149,7 @@ types:
       type: string
       required: false
     agentIsDecommissioned:
-      title: Agent Is Decommissioned
+      title: Agent is Decommissioned
       description: Agent is decommissioned
       type: boolean
       required: false
@@ -1264,7 +1264,7 @@ types:
       type: string
       required: false
     parentProcessIsMalicious:
-      title: Parent Process Is Malicious
+      title: Parent Process is Malicious
       description: Parent process is malicious
       type: boolean
       required: false
@@ -1284,7 +1284,7 @@ types:
       type: string
       required: false
     relatedToThreat:
-      title: Related To Threat
+      title: Related to Threat
       description: Related to threat
       type: string
       required: false
@@ -1354,7 +1354,7 @@ types:
       type: string
       required: false
     processIsMalicious:
-      title: Process Is Malicious
+      title: Process is Malicious
       description: Process is malicious
       type: boolean
       required: false
