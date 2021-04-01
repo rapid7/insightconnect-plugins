@@ -355,7 +355,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
         first_endpoint_page = f"{endpoint}?limit={limit}"
         results = self._call_api("GET", first_endpoint_page, json, params)
         all_result_data = results["data"]
-        next_cursor = results["pagination"]["nextCursor"]
+
+        try:
+            next_cursor = results["pagination"]["nextCursor"]
+        except KeyError:
+            return results
 
         while next_cursor:
             next_page = self._call_api("GET", f"{first_endpoint_page}&cursor={next_cursor}")
