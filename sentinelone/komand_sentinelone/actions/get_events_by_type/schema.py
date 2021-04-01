@@ -204,13 +204,13 @@ class GetEventsByTypeOutput(insightconnect_plugin_runtime.Output):
             },
             "agentIsActive": {
               "type": "boolean",
-              "title": "Agent Is Active",
+              "title": "Agent is Active",
               "description": "Agent is active",
               "order": 23
             },
             "agentIsDecommissioned": {
               "type": "boolean",
-              "title": "Agent Is Decommissioned",
+              "title": "Agent is Decommissioned",
               "description": "Agent is decommissioned",
               "order": 36
             },
@@ -495,7 +495,7 @@ class GetEventsByTypeOutput(insightconnect_plugin_runtime.Output):
             },
             "parentProcessIsMalicious": {
               "type": "boolean",
-              "title": "Parent Process Is Malicious",
+              "title": "Parent Process is Malicious",
               "description": "Parent process is malicious",
               "order": 59
             },
@@ -561,19 +561,19 @@ class GetEventsByTypeOutput(insightconnect_plugin_runtime.Output):
             },
             "processIsMalicious": {
               "type": "boolean",
-              "title": "Process Is Malicious",
+              "title": "Process is Malicious",
               "description": "Process is malicious",
               "order": 77
             },
             "processIsRedirectedCommandProcessor": {
               "type": "string",
-              "title": "Process Is Redirected Command Processor",
+              "title": "Process is Redirected Command Processor",
               "description": "Process is redirected command processor",
               "order": 24
             },
             "processIsWow64": {
               "type": "string",
-              "title": "Process Is WOW64",
+              "title": "Process is WOW64",
               "description": "Process is WOW64",
               "order": 4
             },
@@ -639,7 +639,7 @@ class GetEventsByTypeOutput(insightconnect_plugin_runtime.Output):
             },
             "relatedToThreat": {
               "type": "string",
-              "title": "Related To Threat",
+              "title": "Related to Threat",
               "description": "Related to threat",
               "order": 63
             },
@@ -791,13 +791,13 @@ class GetEventsByTypeOutput(insightconnect_plugin_runtime.Output):
         },
         "agentIsActive": {
           "type": "boolean",
-          "title": "Agent Is Active",
+          "title": "Agent is Active",
           "description": "Agent is active",
           "order": 23
         },
         "agentIsDecommissioned": {
           "type": "boolean",
-          "title": "Agent Is Decommissioned",
+          "title": "Agent is Decommissioned",
           "description": "Agent is decommissioned",
           "order": 36
         },
@@ -1082,7 +1082,7 @@ class GetEventsByTypeOutput(insightconnect_plugin_runtime.Output):
         },
         "parentProcessIsMalicious": {
           "type": "boolean",
-          "title": "Parent Process Is Malicious",
+          "title": "Parent Process is Malicious",
           "description": "Parent process is malicious",
           "order": 59
         },
@@ -1148,19 +1148,19 @@ class GetEventsByTypeOutput(insightconnect_plugin_runtime.Output):
         },
         "processIsMalicious": {
           "type": "boolean",
-          "title": "Process Is Malicious",
+          "title": "Process is Malicious",
           "description": "Process is malicious",
           "order": 77
         },
         "processIsRedirectedCommandProcessor": {
           "type": "string",
-          "title": "Process Is Redirected Command Processor",
+          "title": "Process is Redirected Command Processor",
           "description": "Process is redirected command processor",
           "order": 24
         },
         "processIsWow64": {
           "type": "string",
-          "title": "Process Is WOW64",
+          "title": "Process is WOW64",
           "description": "Process is WOW64",
           "order": 4
         },
@@ -1226,7 +1226,7 @@ class GetEventsByTypeOutput(insightconnect_plugin_runtime.Output):
         },
         "relatedToThreat": {
           "type": "string",
-          "title": "Related To Threat",
+          "title": "Related to Threat",
           "description": "Related to threat",
           "order": 63
         },

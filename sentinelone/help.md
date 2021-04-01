@@ -61,10 +61,10 @@ Example input:
 
 ```
 {
+  "event_type": "Registry Key Create",
   "limit": 10,
   "query_id": "qd94e330ac025d525b5948bdf897b955e",
-  "sub_query": "AgentName IS NOT EMPTY",
-  "event_type": "Registry Key Create"
+  "sub_query": "AgentName IS NOT EMPTY"
 }
 ```
 
