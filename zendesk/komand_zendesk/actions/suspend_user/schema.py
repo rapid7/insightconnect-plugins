@@ -24,7 +24,7 @@ class SuspendUserInput(komand.Input):
     "user_id": {
       "type": "string",
       "title": "User ID",
-      "description": "ID of user to delete E.g. 20444826487",
+      "description": "ID of user to delete E.g. 361738647591",
       "order": 1
     }
   },

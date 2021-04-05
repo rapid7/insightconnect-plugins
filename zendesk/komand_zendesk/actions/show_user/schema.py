@@ -24,7 +24,7 @@ class ShowUserInput(komand.Input):
     "user_id": {
       "type": "string",
       "title": "User ID",
-      "description": "ID of user to show E.g. 20444826487",
+      "description": "ID of user to show E.g. 361738647591",
       "order": 1
     }
   },
