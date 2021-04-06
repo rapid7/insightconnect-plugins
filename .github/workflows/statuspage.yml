@@ -18,7 +18,7 @@
 #         python -m pip install --upgrade pip setuptools
 #         python -m pip install --user github-status-checker --no-warn-script-location
 
-       name: Install dependencies
+     - name: Install dependencies
        run: apt-get install -y curl jq
 
      - name: Check InsightConnect status
