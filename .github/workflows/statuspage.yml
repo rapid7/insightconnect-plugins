@@ -9,7 +9,7 @@
     
      steps:
      - name: Install dependencies
-       run: apt-get install -y curl jq
+       run: sudo apt-get install -y curl jq
 
      - name: Check InsightConnect status
        shell: bash
