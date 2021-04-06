@@ -19,5 +19,5 @@
          if [[ -n "$status" ]]; then
              exit 0
          else
-             exit 1
+             exit 77
          fi
