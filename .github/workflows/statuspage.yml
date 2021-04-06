@@ -3,21 +3,24 @@
  on: [push]
 
  jobs:
-   build:
+   check-status:
 
      runs-on: ubuntu-latest
     
      steps:
-     - uses: actions/checkout@v2
-     - uses: actions/setup-python@v1
-       with:
-         python-version: '3.7'
+     - uses: actions/checkout@v2        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#     - uses: actions/setup-python@v1
+#       with:
+#         python-version: '3.7'
 
-     - name: Install dependencies
+#     - name: Install dependencies
+#       run: |
+#         python -m pip install --upgrade pip setuptools
+#         python -m pip install --user github-status-checker --no-warn-script-location
+       name: Install dependencies
+       run: apt-get install -y curl jq
+
+     - name: Check InsightConnect status
+       shell: bash
        run: |
-         python -m pip install --upgrade pip setuptools
-         python -m pip install --user github-status-checker --no-warn-script-location
-     - name: GitHub Webhooks Status
-       run: |
-         STATUS=$(/home/runner/.local/bin/github-status webhooks)
-         grep "is currently operational" <<< "${STATUS}"
+         echo $(curl https://xj0q6t5s793q.statuspage.io/api/v2/components.json | jq '.components[] | select(.name | contains("InsightConnect")) ')
