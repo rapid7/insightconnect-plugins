@@ -1,23 +1,25 @@
-# name: GitHub Webhooks Status
+name: GitHub Webhooks Status
 
-# on: [push]
+on: [push]
 
-# jobs:
-#   build:
+jobs:
+  check-status:
 
-#     runs-on: ubuntu-latest
-    
-#     steps:
-#     - uses: actions/checkout@v2
-#     - uses: actions/setup-python@v1
-#       with:
-#         python-version: '3.7'
+    runs-on: ubuntu-latest
 
-#     - name: Install dependencies
-#       run: |
-#         python -m pip install --upgrade pip setuptools
-#         python -m pip install --user github-status-checker --no-warn-script-location
-#     - name: GitHub Webhooks Status
-#       run: |
-#         STATUS=$(/home/runner/.local/bin/github-status webhooks)
-#         grep "is currently operational" <<< "${STATUS}"
+    steps:
+      - name: Install dependencies
+        run: sudo apt-get install -y curl jq
+
+      - name: Check GitHub Webhooks status
+        shell: bash
+        run: |
+          STATUS=$(curl --no-progress-meter https://kctbh9vrtdwd.statuspage.io/api/v2/components.json \
+          | jq '.components[] | select(.name=="Webhooks" and .status!="operational")')
+
+          if [[ -z "$STATUS" ]]; then
+              exit 0
+          else
+              echo "GitHub Webhooks are currently not operational. Please try again later."
+              exit 1
+          fi
