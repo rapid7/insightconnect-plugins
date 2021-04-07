@@ -15,8 +15,9 @@
        shell: bash
        run: |
          echo "START OUTPUT"
-         curl --no-progress-meter https://xj0q6t5s793q.statuspage.io/api/v2/components.json \
-         | jq '.components[] | select((.name | contains("InsightConnect")) and .status=="operational")'
+         status=$(curl --no-progress-meter https://xj0q6t5s793q.statuspage.io/api/v2/components.json \
+         | jq '.components[] | select((.name | contains("InsightConnect")) and .status=="operational")')
+         echo $status
          echo "END OUTPUT"
 
 #         if [[ -n "$status" ]]; then
