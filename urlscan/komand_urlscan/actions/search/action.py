@@ -32,7 +32,7 @@ class Search(komand.Action):
         else:
             if not validators.domain(query):
                 raise PluginException(
-                    cause="Domain entered as input type, but not provided in query. ",
+                    cause="Domain entered as input type, but not provided in query.",
                     assistance="Please check domain address and try again."
                 )
             search_query = f"page.domain:\"{query}\""
