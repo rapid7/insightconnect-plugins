@@ -311,7 +311,7 @@ actions:
         default: Custom
       q:
         title: Query
-        description: The query term (ElasticSearch simple query string), default is *. If Input Type provide as URL or domain, provide here only URL or domain
+        description: The query term (ElasticSearch simple query string), default is *. If 'Input Type' input is set to URL or domain, provide only the URL or domain
         type: string
         required: true
         example: example.com
