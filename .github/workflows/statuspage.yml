@@ -1,6 +1,9 @@
 name: Rapid7 InsightConnect Release Status
 
-on: [push]
+on:
+  push:
+  schedule:
+    - cron: '*/15 * * * *'
 
 jobs:
   check-status:
