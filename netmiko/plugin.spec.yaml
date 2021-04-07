@@ -91,7 +91,7 @@ connection:
   secret:
     title: Secret
     type: credential_secret_key
-    description: API seret key
+    description: API secret key
     required: false
     example: b42ec8b4-deb2-c75e-ebd0-132d63f8e8d4
   key:

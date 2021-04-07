@@ -107,7 +107,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "secret": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Secret",
-      "description": "API seret key",
+      "description": "API secret key",
       "order": 3
     },
     "verbose": {
