@@ -1,6 +1,6 @@
  name: Rapid7 Status
 
- on: [push]
+ on: [release]
 
  jobs:
    check-status:
