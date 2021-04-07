@@ -16,7 +16,7 @@
        run: |
          echo "START OUTPUT"
          status=$(curl --no-progress-meter https://xj0q6t5s793q.statuspage.io/api/v2/components.json \
-         | jq '.components[] | select((.name | contains("InsightConnect")) and .status=="operational")')
+         | jq '.components[] | select((.name | contains("InsightConnect")) and .status!="operational")')
          echo $status
          echo "END OUTPUT"
 
