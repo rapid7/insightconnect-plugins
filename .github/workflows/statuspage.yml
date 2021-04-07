@@ -14,14 +14,14 @@
      - name: Check InsightConnect status
        shell: bash
        run: |
-         echo "START OUTPUT"
-         status=$(curl --no-progress-meter https://xj0q6t5s793q.statuspage.io/api/v2/components.json \
-         | jq '.components[] | select((.name | contains("InsightConnect")) and .status!="operational")')
-         echo -n "STATUS IS \"$status\"."
-         echo "END OUTPUT"
+         STATUS=$(curl --no-progress-meter https://xj0q6t5s793q.statuspage.io/api/v2/components.json \
+         | jq '.components[] | select((.name | contains("InsightConnect")) and .status=="operational")')
 
-         if [[ -n "$status" ]]; then
+         if [[ -z "$STATUS" ]]; then
              exit 0
          else
-             exit 77
+             echo "The following services are not operational:"
+             echo $STATUS | jq .name
+             echo "Please try again later."
+             exit 1
          fi
