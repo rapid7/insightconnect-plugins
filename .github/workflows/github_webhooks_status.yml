@@ -1,6 +1,9 @@
 name: GitHub Webhooks Status
 
-on: [push]
+on:
+  push:
+  schedule:
+    - cron: '*/15 * * * *'
 
 jobs:
   check-status:
