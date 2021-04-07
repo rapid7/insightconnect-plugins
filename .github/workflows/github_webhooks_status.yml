@@ -20,8 +20,6 @@ jobs:
           if [[ -z "$STATUS" ]]; then
               exit 0
           else
-              echo "The following services are not operational:"
-              echo $STATUS | jq .name
-              echo "Please try again later."
+              echo "GitHub Webhooks are currently not operational. Please try again later."
               exit 1
           fi
