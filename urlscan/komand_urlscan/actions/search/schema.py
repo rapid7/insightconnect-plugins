@@ -49,7 +49,7 @@ class SearchInput(komand.Input):
     "q": {
       "type": "string",
       "title": "Query",
-      "description": "The query term (ElasticSearch simple query string), default is *. If Input Type provide as URL or domain, provide here only URL or domain",
+      "description": "The query term (ElasticSearch simple query string), default is *. If 'Input Type' input is set to URL or domain, provide only the URL or domain",
       "default": "example.com",
       "order": 2
     },
@@ -91,7 +91,7 @@ class SearchOutput(komand.Output):
     "has_more": {
       "type": "boolean",
       "title": "Has More",
-      "description": "Is source has more entities",
+      "description": "Whether or not the source has more entities",
       "order": 2
     },
     "results": {

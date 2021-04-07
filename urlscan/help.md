@@ -48,7 +48,7 @@ This action is used to search urlscan.io.
 |----|----|-------|--------|-----------|----|-------|
 |input_type|string|Custom|True|Type of provided query. Set 'custom' to provide custom query, set 'url' to search information about provided URL, set 'domain' to search information about provided domain|['URL', 'Domain', 'Custom']|Domain|
 |offset|integer|0|True|Offset of first result (for paginating)|None|1|
-|q|string|example.com|True|The query term (ElasticSearch simple query string), default is *. If Input Type provide as URL or domain, provide here only URL or domain|None|example.com|
+|q|string|example.com|True|The query term (ElasticSearch simple query string), default is *. If 'Input Type' input is set to URL or domain, provide only the URL or domain|None|example.com|
 |size|integer|100|True|Number of results returned|None|45|
 |sort|string|_score|True|Sorting, specificied via $sort_field:$sort_order|None|_score|
 
@@ -68,7 +68,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|has_more|boolean|False|Is source has more entities|
+|has_more|boolean|False|Whether or not the source has more entities|
 |results|[]results|False|UrlScan.io Results|
 |total|integer|False|Total number of results returned|
 
