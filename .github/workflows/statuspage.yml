@@ -1,4 +1,4 @@
- name: Rapid7 Status
+ name: Rapid7 InsightConnect Release Status
 
  on: [push]
 
