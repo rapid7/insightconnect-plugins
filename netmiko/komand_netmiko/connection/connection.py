@@ -61,7 +61,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def client(self, host=None):
         if host:
             self.parameters[Input.HOST] = host
-        if self.parameters.get(Input.KEY):
+
+        if self.parameters.get(Input.KEY, {}).get("privateKey"):
             self.logger.info("Using key...")
             self.logger.info(self.parameters)
             return self.connect_key(self.parameters)
