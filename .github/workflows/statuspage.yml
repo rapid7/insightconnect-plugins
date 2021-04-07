@@ -20,8 +20,8 @@
          echo $status
          echo "END OUTPUT"
 
-#         if [[ -n "$status" ]]; then
-#             exit 0
-#         else
-#             exit 77
-#         fi
+         if [[ -n "$status" ]]; then
+             exit 0
+         else
+             exit 77
+         fi
