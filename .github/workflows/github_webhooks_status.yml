@@ -11,7 +11,7 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get install -y curl jq
 
-      - name: Check InsightConnect status
+      - name: Check GitHub Webhooks status
         shell: bash
         run: |
           STATUS=$(curl --no-progress-meter https://kctbh9vrtdwd.statuspage.io/api/v2/components.json \
