@@ -25,7 +25,7 @@ class Search(komand.Action):
         elif input_type == "URL":
             if not validators.url(query):
                 raise PluginException(
-                    cause="URL entered as input type, but not provided in query. ",
+                    cause="URL entered as input type, but not provided in query.",
                     assistance="Please check URL and try again."
                 )
             search_query = f"page.url: \"{query}\""
