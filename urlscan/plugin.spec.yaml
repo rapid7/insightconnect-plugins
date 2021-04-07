@@ -346,7 +346,7 @@ actions:
       has_more:
         title: Has More
         type: boolean
-        description: Is source has more entities
+        description: Whether or not the source has more entities
         required: false
       results:
         title: Results
