@@ -1,6 +1,5 @@
 import insightconnect_plugin_runtime
 from .schema import AttachIssueInput, AttachIssueOutput, Input, Output, Component
-from komand_jira.util.util import add_attachment
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -25,12 +24,8 @@ class AttachIssue(insightconnect_plugin_runtime.Action):
                 cause=f"No issue found with ID: {id_}.", assistance="Please provide a valid issue ID.",
             )
 
-        output = add_attachment(
-            self.connection,
-            self.logger,
-            issue,
+        return {Output.ID: self.connection.rest_client.add_attachment(
+            issue.key,
             params.get(Input.ATTACHMENT_FILENAME),
-            params.get(Input.ATTACHMENT_BYTES),
-        )
-
-        return {Output.ID: output.id}
+            params.get(Input.ATTACHMENT_BYTES)
+        )}
