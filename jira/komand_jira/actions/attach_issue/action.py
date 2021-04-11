@@ -21,11 +21,12 @@ class AttachIssue(insightconnect_plugin_runtime.Action):
 
         if not issue:
             raise PluginException(
-                cause=f"No issue found with ID: {id_}.", assistance="Please provide a valid issue ID.",
+                cause=f"No issue found with ID: {id_}.",
+                assistance="Please provide a valid issue ID.",
             )
 
-        return {Output.ID: self.connection.rest_client.add_attachment(
-            issue.key,
-            params.get(Input.ATTACHMENT_FILENAME),
-            params.get(Input.ATTACHMENT_BYTES)
-        )}
+        return {
+            Output.ID: self.connection.rest_client.add_attachment(
+                issue.key, params.get(Input.ATTACHMENT_FILENAME), params.get(Input.ATTACHMENT_BYTES)
+            )
+        }

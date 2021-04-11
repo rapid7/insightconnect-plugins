@@ -42,10 +42,18 @@ class JiraApi:
             "POST",
             f"/rest/api/latest/issue/{issue}/attachments",
             files={"file": (filename, attachment, "application/octet-stream")},
-            headers={"content-type": None, "X-Atlassian-Token": "nocheck"}
-        )[0].get('id')
-        
-    def call_api(self, method: str, path: str, files: dict = None, headers: dict = None, params: dict = None, payload: dict = None) -> dict:
+            headers={"content-type": None, "X-Atlassian-Token": "nocheck"},
+        )[0].get("id")
+
+    def call_api(
+        self,
+        method: str,
+        path: str,
+        files: dict = None,
+        headers: dict = None,
+        params: dict = None,
+        payload: dict = None,
+    ) -> dict:
         try:
             response = self.session.request(
                 method.upper(),
@@ -57,9 +65,7 @@ class JiraApi:
             )
 
             if response.status_code == 401:
-                raise PluginException(
-                    preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text
-                )
+                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
             if response.status_code == 404:
@@ -70,9 +76,7 @@ class JiraApi:
                     data=response.text,
                 )
             if response.status_code >= 500:
-                raise PluginException(
-                    preset=PluginException.Preset.SERVER_ERROR, data=response.text
-                )
+                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
             if 200 <= response.status_code < 300:
                 return response.json()
