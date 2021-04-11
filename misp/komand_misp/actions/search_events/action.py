@@ -22,7 +22,7 @@ class SearchEvents(komand.Action):
             output=SearchEventsOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}):   # noqa: MC0001
         # Set blank strings to None
         for k, v in params.items():
             if not params[k]:

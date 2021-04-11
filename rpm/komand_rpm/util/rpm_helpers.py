@@ -5,7 +5,7 @@ import os
 import re
 
 cache_dir = "/var/cache/rpm_plugin/"
-temp_dir = "/tmp/"
+temp_dir = "/tmp/"                      # noqa: B108
 yum_dir = "/etc/yum.repos.d/"
 
 centos6_repos = []
@@ -48,7 +48,7 @@ class RPMHelper(object):
         """adds a custom repo file returns a list of added repo ids and abs file path."""
         self.logger.info("AddRepo: Adding new repo at url %s" % url)
         # cmd = 'yum-config-manager --add-repo %s' % url
-        path = "%scustom-%s.repo" % (yum_dir, int(random.random() * 1000))
+        path = "%scustom-%s.repo" % (yum_dir, int(random.random() * 1000))      # noqa: B311
         cmd = "wget -O %s %s" % (path, url)
         proc = komand.helper.exec_command(cmd)
         if proc["rcode"] == 0:
@@ -86,7 +86,7 @@ class RPMHelper(object):
                 m = re.match(r"\[(.*?)\]", line)
 
                 if m:
-                    custom_repo = m.group(1) + "-" + str(int(random.random() * 1000))
+                    custom_repo = m.group(1) + "-" + str(int(random.random() * 1000))   # noqa: B311
                     line = re.sub(m.group(1), custom_repo, line)
                     repo_ids.append(custom_repo)
 
@@ -124,7 +124,7 @@ class RPMHelper(object):
         else:
             raise Exception("CheckSig: Package at path %s could not be queried by rpm" % path)
 
-    def info2dic(self, info):
+    def info2dic(self, info):   # noqa: MC0001
         """converts a dic of strings from rpm info to a custom dictionary"""
         pi = {"found": True}
         package_lines = info["package"].splitlines()[:17]
@@ -243,7 +243,7 @@ class RPMHelper(object):
                 return package_path
 
         self.logger.info("DownloadPackage: Downloading package with label %s" % label)
-        script_temp = "%s.script.%s" % (temp_dir + label, int(random.random() * 1000))
+        script_temp = "%s.script.%s" % (temp_dir + label, int(random.random() * 1000))  # noqa: B311
         cmd = 'script %s -c "yumdownloader -v --destdir=%s ' % (script_temp, temp_dir)
         params = self._build_params(arch, distro, repo_ids)
 

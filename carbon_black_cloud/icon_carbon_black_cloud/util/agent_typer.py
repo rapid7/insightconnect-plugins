@@ -11,7 +11,7 @@ def get_agent_type(search_string):
     try:
         search_string = ip_address(search_string)
         return IP_ADDRESS
-    except Exception:
+    except Exception:   # noqa: B110
         pass
 
     mac_address_regex = re.compile("^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$")
@@ -21,7 +21,7 @@ def get_agent_type(search_string):
     try:
         int(search_string)
         return DEVICE_ID
-    except Exception:
+    except Exception:   # noqa: B110
         pass
 
     return HOSTNAME

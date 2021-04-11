@@ -27,7 +27,7 @@ class Query(komand.Action):
         )
 
         req = urllib.request.Request(url=url, headers={"User-Agent": "VxStream Sandbox"})
-        response = urllib.request.urlopen(req)
+        response = urllib.request.urlopen(req)      # noqa: B310
         output = json.loads(response.read().decode("utf-8"))
 
         if output["response_code"] == 0:
@@ -56,7 +56,7 @@ class Query(komand.Action):
         url = server + "/search?query=%s&apikey=%s&secret=%s" % (query, api_key, secret)
 
         req = urllib.request.Request(url=url, headers={"User-Agent": "VxStream Sandbox"})
-        response = urllib.request.urlopen(req)
+        response = urllib.request.urlopen(req)      # noqa: B310
         output = json.loads(response.read().decode("utf-8"))
 
         if output["response_code"] != 0:

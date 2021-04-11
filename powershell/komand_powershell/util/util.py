@@ -1,6 +1,6 @@
 import winrm
 import base64
-import subprocess
+import subprocess   # noqa: B404
 
 
 def fix_run_ps(self, script):  # Fixes string bug in python 3 for NTLM connection
@@ -19,7 +19,7 @@ def local(action, powershell_script):
     action.logger.debug("PowerShell script: " + powershell_script)
     process = subprocess.Popen(
         powershell_script,
-        shell="true",
+        shell="true",           # noqa: B602
         executable="pwsh",
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
@@ -103,14 +103,14 @@ default_domain = {udomain}
     dns = "search %s\r\nnameserver %s" % (domain, kdc)
     action.logger.debug(dns)
     # Sends output from stdout on shell commands to logging. Preventing errors
-    subprocess.call("mkdir -p /var/lib/samba/private", shell="true")
-    subprocess.call("systemctl enable sssd", shell="true")
+    subprocess.call("mkdir -p /var/lib/samba/private", shell="true")                                   # noqa: B607,B602
+    subprocess.call("systemctl enable sssd", shell="true")                                             # noqa: B607,B602
     # Setup realm to join the domain
     with open("/etc/krb5.conf", "w") as f:
         f.write(krb_config)
     # Creates a Kerberos ticket
     kinit = """echo '%s' | kinit %s@%s""" % (password, username, domain.upper())
-    response = subprocess.Popen(kinit, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    response = subprocess.Popen(kinit, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE)   # noqa: B602
     (stdout, stderr) = response.communicate()
     stdout = stdout.decode("utf-8")
     stderr = stderr.decode("utf-8")
@@ -121,7 +121,7 @@ default_domain = {udomain}
         f.write(dns)
     # Joins Komand to domain
     realm = """echo '%s' | realm --install=/ join --user=%s %s""" % (password, username, domain)
-    response = subprocess.Popen(realm, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    response = subprocess.Popen(realm, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE)   # noqa: B602
     (stdout, stderr) = response.communicate()
     stdout = stdout.decode("utf-8")
     stderr = stderr.decode("utf-8")

@@ -4,13 +4,14 @@ products: [insightconnect]
 name: checkpoint_ngfw
 title: Check Point NGFW
 description: Check Point Next Generation Firewalls (NGFW) are trusted by customers for their highest security effectiveness and their ability to keep organizations protected from sophisticated fifth generation cyber-attacks
-version: 2.0.1
+version: 2.0.2
 vendor: rapid7
 support: community
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/checkpoint_ngfw
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  docs_url: https://docs.rapid7.com/insightconnect/checkpoint-ngfw
 tags:
 - firewall
 - checkpoint

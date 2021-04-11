@@ -287,8 +287,8 @@ class Client(object):
             if hasattr(ssl, "_create_unverified_context"):
                 # httplib.HTTPSConnection validates certificates by
                 # default in Python 2.7.9+.
-                kwargs["context"] = ssl._create_unverified_context()
-            conn = six.moves.http_client.HTTPSConnection(host, port, **kwargs)
+                kwargs["context"] = ssl._create_unverified_context()            # noqa: B323
+            conn = six.moves.http_client.HTTPSConnection(host, port, **kwargs)  # noqa: B309
         else:
             conn = CertValidatingHTTPSConnection(host, port, ca_certs=self.ca_certs)
 

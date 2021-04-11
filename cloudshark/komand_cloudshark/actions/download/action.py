@@ -18,7 +18,7 @@ class Download(komand.Action):
         base = self.connection.base
         token = self.connection.token
         url = base + token + "/download/" + params.get("cid")
-        resp = urllib2.urlopen(url)
+        resp = urllib2.urlopen(url)     # noqa: B310
         capture_file = komand.helper.encode_string(resp.read())
         return {"capture_file": capture_file, "status": resp.code}
 

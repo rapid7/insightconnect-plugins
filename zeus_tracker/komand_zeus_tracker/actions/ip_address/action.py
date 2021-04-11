@@ -4,7 +4,7 @@ from .schema import IpAddressInput, IpAddressOutput
 # Custom imports below
 import json
 import urllib.request
-import lxml.html
+import lxml.html    # noqa: B410
 
 
 class IpAddress(komand.Action):
@@ -20,7 +20,7 @@ class IpAddress(komand.Action):
         output = {}
         server = self.connection.server
         url = server + "/monitor.php?ipaddress=" + params.get("ip")
-        response = urllib.request.urlopen(url)
+        response = urllib.request.urlopen(url)      # noqa: B310
         tree = lxml.html.fromstring(response.read())
         tables = tree.xpath("//table")
 

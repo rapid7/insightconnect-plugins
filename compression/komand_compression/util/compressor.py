@@ -67,13 +67,15 @@ def lz_compress(file_bytes):
 def zip_compress(file_bytes, tmpdir=""):
     if file_bytes != None:
         algorithm = zipfile.ZIP_DEFLATED  # sets compression type to deflated (standard for .zip)
-        zip_object = ZipFile("/tmp/compressed.zip", "w", algorithm)  # zip archive created in temp
-        zip_object.writestr("compressed", file_bytes)  # TODO use magic to corectly name files in arcive
+        # zip archive created in temp
+        zip_object = ZipFile("/tmp/compressed.zip", "w", algorithm)     # noqa: B108
+        zip_object.writestr("compressed", file_bytes)  # TODO use magic to correctly name files in archive
         zip_object.close()
-        in_file = open("/tmp/compressed.zip", "rb")
+        in_file = open("/tmp/compressed.zip", "rb")                     # noqa: B108
         compressed = in_file.read()
         in_file.close()
-        os.remove("/tmp/compressed.zip")  # clean up
+        # clean up
+        os.remove("/tmp/compressed.zip")                                # noqa: B108
         return compressed
     else:
         zipf = tmpdir + "compressed.zip"

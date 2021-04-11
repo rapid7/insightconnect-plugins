@@ -247,7 +247,7 @@ This action sends a message using the GUID for the team and channel. This is mor
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |channel_guid|string|None|True|Channel GUID|None|xxxxx-xxxxx-xxxx-xxxx|
-|is_html|boolean|None|True|Is the message HTML|None|False|
+|is_html|boolean|None|True|Is the message HTML|None|True|
 |message|string|None|True|Message to send|None|Hello!|
 |team_guid|string|None|True|Team GUID|None|xxxxx-xxxxx-xxxx-xxxx|
 
@@ -576,7 +576,7 @@ This action is used to create a group in Azure and enable it for Microsoft Teams
 |----|----|-------|--------|-----------|----|-------|
 |group_description|string|None|True|Group description|None|A test group|
 |group_name|string|None|True|Team name|None|test_group|
-|mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|False|
+|mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|True|
 |mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|TestGroup|
 |members|string[]|None|False|A list of usernames to set as members|None|["user@example.com"]|
 |owners|string[]|None|False|A list of usernames to set as owners|None|["user@example.com"]|
@@ -873,6 +873,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.2 - Fix issue where a name with a bracket could crash the plugin
 * 3.1.1 - Correct spelling in help.md
 * 3.1.0 - New actions Add Group Owner and Add Member to Channel
 * 3.0.1 - Fix import error in New Message Received trigger

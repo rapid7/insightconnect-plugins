@@ -18,7 +18,7 @@ class Post(komand.Action):
         self.logger.info("Run: Tweet length is {tweet_length}".format(tweet_length=tweet_length))
 
         if tweet_length == 0:
-            assert "Run: Tweet length was 0. Make sure property 'msg' is marked required."
+            assert "Run: Tweet length was 0. Make sure property 'msg' is marked required."      # noqa: B101
             raise Exception("Twitter: Tweet length was 0. Make sure property 'msg' is marked required.")
 
         if tweet_length > self.connection.TWEET_MAX_LENGTH:  # Requirement: Truncate tweet is greater than max length
@@ -32,7 +32,7 @@ class Post(komand.Action):
         post = self.connection.client.PostUpdate(tweet).AsDict()
 
         if not post:
-            assert "Run: No payload received."
+            assert "Run: No payload received."      # noqa: B101
             raise Exception("Twitter: No response received from API request.")
 
         post_id = post.get("id")

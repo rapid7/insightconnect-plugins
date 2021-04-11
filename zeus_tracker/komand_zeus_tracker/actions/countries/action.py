@@ -19,7 +19,7 @@ class Countries(komand.Action):
     def run(self, params={}):
         server = self.connection.server
         url = server + "/monitor.php?countryrss=" + params.get("country")
-        response = urllib.request.urlopen(url)
+        response = urllib.request.urlopen(url)      # noqa: B310
         raw_data = feedparser.parse(response.read())
         results = []
 

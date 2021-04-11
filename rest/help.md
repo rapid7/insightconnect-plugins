@@ -15,7 +15,7 @@ This plugin is often used to integrate with ad-hoc 3rd party API's in a workflow
 
 ## Setup
 
-Check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/rest) for more details on how to configure this plugin.
+Check out the [plugin guide](https://docs.rapid7.com/insightconnect/http-requests) for more details on how to configure this plugin.
 
 The connection configuration accepts the following parameters:
 
@@ -115,7 +115,7 @@ Example input:
 |body_object|object|False|Response payload from the server as an object|
 |body_string|string|False|Response payload from the server as a string|
 |headers|object|False|Response headers from the server|
-|status|int|False|Status code of the response from the server|
+|status|integer|False|Status code of the response from the server|
 
 Example output:
 
@@ -190,7 +190,7 @@ Example input:
 |body_object|object|False|Response payload from the server as an object|
 |body_string|string|False|Response payload from the server as a string|
 |headers|object|False|Response headers from the server|
-|status|int|False|Status code of the response from the server|
+|status|integer|False|Status code of the response from the server|
 
 Example output:
 
@@ -265,7 +265,7 @@ Example input:
 |body_object|object|False|Response payload from the server as an object|
 |body_string|string|False|Response payload from the server as a string|
 |headers|object|False|Response headers from the server|
-|status|int|False|Status code of the response from the server|
+|status|integer|False|Status code of the response from the server|
 
 Example output:
 
@@ -330,10 +330,10 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|body_object|object|False|Response payload from the server as an object. Note, if the response has invalid object structure(list, string..) plugin will wrap it with object map|
+|body_object|object|False|Response payload from the server as an object. Note, if the response has invalid object structure (list, string..) plugin will wrap it with object map|
 |body_string|string|False|Response payload from the server as a string|
 |headers|object|False|Response headers from the server|
-|status|int|False|Status code of the response from the server|
+|status|integer|False|Status code of the response from the server|
 
 Example output:
 
@@ -390,7 +390,7 @@ Example input:
 |body_object|object|False|Response payload from the server as an object|
 |body_string|string|False|Response payload from the server as a string|
 |headers|object|False|Response headers from the server|
-|status|int|False|Status code of the response from the server|
+|status|integer|False|Status code of the response from the server|
 
 Example output:
 
@@ -445,6 +445,9 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 4.0.3 - Update `requests` to the latest version | Update python version to `python-3-38-plugin:4` | Add `USER` in Dockerfile | Use input and output constants | Code refactor | Strip leading and trailing whitespace from route
+* 4.0.2 - Updated `docs_url` to [HTTP Requests - Plugin Connection Guide](https://docs.rapid7.com/insightconnect/http-requests)
+* 4.0.1 - Fix issue where the connection test fails when a base URL is provided with a web resource path for the Rapid7 Insight and Pendo auth types
 * 4.0.0 - Support new authentication types: Digest Auth and Bearer Token | Add a workaround to encrypt a secret key when used in custom HTTP headers | Add built-in authentication for services: Insight Platform, Pendo and OpsGenie
 * 3.0.5 - Fix issue where a null body return on a successful request would crash the plugin
 * 3.0.4 - Update REST plugin title to HTTP Requests
@@ -465,4 +468,4 @@ Any issues connecting to the remote service should be present in the log of the 
 ## References
 
 * [HTTP Request Architecture Style](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
-* [InsightConnect HTTP Request Plugin Guide](https://insightconnect.help.rapid7.com/docs/rest)
+* [InsightConnect HTTP Request Plugin Guide](https://docs.rapid7.com/insightconnect/http-requests)

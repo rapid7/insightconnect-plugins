@@ -50,6 +50,97 @@ Example input:
 
 ### Actions
 
+#### Query Group Membership
+
+This action is used to query group membership.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|expand_nested_groups|boolean|None|False|Expand nested groups in results|None|True|
+|group_name|string|None|True|Name of the group for which membership will be checked|None|Domain Users|
+|include_groups|boolean|None|False|Include groups in results|None|True|
+|search_base|string|None|True|The base of the search request|None|DC=example,DC=com|
+
+Example input:
+
+```
+{
+  "expand_nested_groups": true,
+  "group_name": "Domain Users",
+  "include_groups": true,
+  "search_base": "DC=example,DC=com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|count|integer|False|Number of results|
+|results|[]results|False|Results returned|
+
+Example output:
+
+```
+{
+  "count": 1,
+  "results": [
+    {
+      "attributes": {
+        "accountExpires": "9999-12-31 23:59:59.999999+00:00",
+        "adminCount": 0,
+        "badPasswordTime": "1601-01-01 00:00:00+00:00",
+        "badPwdCount": 0,
+        "cn": "Example User",
+        "codePage": 0,
+        "countryCode": 0,
+        "dSCorePropagationData": [
+          "2021-01-14 18:17:28+00:00",
+          "2021-01-14 17:48:27+00:00",
+          "1601-01-01 00:04:16+00:00"
+        ],
+        "description": [
+          "Example Account"
+        ],
+        "distinguishedName": "CN=Example User,CN=Users,DC=example,DC=com",
+        "instanceType": 4,
+        "isCriticalSystemObject": true,
+        "lastLogoff": "1601-01-01 00:00:00+00:00",
+        "lastLogon": "1601-01-01 00:00:00+00:00",
+        "logonCount": 0,
+        "memberOf": [
+          "CN=Domain Users,CN=Users,example,DC=com"
+        ],
+        "name": "Example User",
+        "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=example,DC=com",
+        "objectClass": [
+          "top",
+          "person",
+          "organizationalPerson",
+          "user"
+        ],
+        "objectGUID": "{b45138aa-be39-47d9-ab57-3aee8f381f87}",
+        "objectSid": "S-1-5-33-3456299977-1009817396-2685666617-303",
+        "primaryGroupID": 513,
+        "pwdLastSet": "2021-01-14 17:48:26.197384+00:00",
+        "sAMAccountName": "Example User",
+        "sAMAccountType": 489006322,
+        "showInAdvancedViewOnly": true,
+        "uSNChanged": 16419,
+        "uSNCreated": 12324,
+        "userAccountControl": 514,
+        "whenChanged": "2021-01-14 18:17:28+00:00",
+        "whenCreated": "2021-01-14 17:48:26+00:00"
+      },
+      "dn": "CN=Example User,CN=Users,DC=example,DC=com"
+    }
+  ]
+}
+
+```
+
 #### Modify Object
 
 This action is used to modify the attributes of an Active Directory object.
@@ -324,7 +415,7 @@ Example input:
 
 Example output:
 
- ```
+```
  
 {
   "success": true
@@ -473,7 +564,55 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+#### attributes
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Account Expires|string|False|Account expires|
+|Admin Count|integer|False|Admin count|
+|Bad Password Time|string|False|Bad password time|
+|Bad PWD Count|integer|False|Bad PWD count|
+|CN|string|False|CN|
+|Code Page|integer|False|Code page|
+|Country Code|integer|False|Country code|
+|DS Core Propagation Data|[]string|False|DS core propagation data|
+|Description|[]string|False|Description|
+|Distinguished Name|string|False|Distinguished name|
+|Instance Type|integer|False|Instance type|
+|Is Critical System Object|boolean|False|Is critical system object|
+|Last Log Off|string|False|Last log off|
+|Last Log On|string|False|Last log on|
+|Last Log On Timestamp|string|False|Last log on timestamp|
+|Log On Count|integer|False|Log on count|
+|Member Of|[]string|False|Member of|
+|Name|string|False|Name|
+|Object Category|string|False|Object category|
+|Object Class|[]string|False|Object class|
+|Object GUID|string|False|Object GUID|
+|Object SID|string|False|Object SID|
+|Primary Group ID|integer|False|Primary group ID|
+|PWD Last Set|string|False|PWD last set|
+|SAM Account Name|string|False|SAM account name|
+|SAM Account Type|integer|False|SAM account type|
+|USN changed|integer|False|USN changed|
+|USN created|integer|False|USN created|
+|User Account Control|integer|False|User account control|
+|When Changed|string|False|When changed|
+|When Created|string|False|When created|
+
+#### result
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Attributes|object|False|None|
+|Dn|string|False|None|
+
+#### results
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Attributes|attributes|False|Attributes|
+|DN|string|False|DN|
 
 ## Troubleshooting
 
@@ -501,6 +640,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 5.2.0 - New action Query Group Membership
 * 5.1.0 - Update error handling in Add User, Force Password Reset, Reset Password actions | Update connection.py to raise PluginException rather than ConnectionTestException
 * 5.0.0 - Add Chase Referrals input to the connection to support multi-domain environments | Rename Add action to Add User to be more explicit | Refactor reusable code from actions into util.py
 * 4.1.0 - Add new input Attributes in action Query | Add new output Count in action Query

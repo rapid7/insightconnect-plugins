@@ -18,7 +18,7 @@ def determine_agent_type(agent):
     try:
         int(agent)
         return DEVICE_ID
-    except Exception:
+    except Exception:   # noqa: B110
         pass
 
     return IP_NETMASK

@@ -77,7 +77,7 @@ class URLDefenseDecoder(object):
 
     def decode_v3(self, rewritten_url):
         def replace_token(token):
-            if token == "*":
+            if token == "*":    # noqa: B105
                 character = self.dec_bytes[self.current_marker]
                 self.current_marker += 1
                 return character

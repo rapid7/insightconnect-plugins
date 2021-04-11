@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="pagerduty-rapid7-plugin",
-      version="2.1.0",
+      version="2.2.0",
       description="Leverage PagerDuty for incident management and response",
       author="rapid7",
       author_email="",

@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import AddressInput, AddressOutput, Input
 import re
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class Address(insightconnect_plugin_runtime.Action):
@@ -87,7 +88,10 @@ class Address(insightconnect_plugin_runtime.Action):
         results = insightconnect_plugin_runtime.helper.clean_dict(results)
 
         if not results:
-            self.logger.error("Error: Request did not return any data")
+            raise PluginException(
+                cause="Error: Request did not return any data.",
+                assistance="Please check provided address and try again."
+            )
         return results
 
     def _get_stdout_pairs(self, stdout):

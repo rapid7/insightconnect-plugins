@@ -18,10 +18,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
         api_route = "api/now/"
         incident_table = "incident"
 
-        base_url = params.get(Input.URL, "")
+        self.base_url = params.get(Input.URL, "")
 
-        if not base_url.endswith("/"):
-            base_url = f"{base_url}/"
+        if not self.base_url.endswith("/"):
+            self.base_url = f"{self.base_url}/"
 
         username = params[Input.CLIENT_LOGIN].get("username", "")
         password = params[Input.CLIENT_LOGIN].get("password", "")
@@ -30,9 +30,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.session.auth = HTTPBasicAuth(username, password)
         self.request = RequestHelper(self.session, self.logger)
 
-        self.table_url = f"{base_url}{api_route}table/"
+        self.table_url = f"{self.base_url}{api_route}table/"
         self.incident_url = f"{self.table_url}{incident_table}"
-        self.attachment_url = f"{base_url}{api_route}attachment"
+        self.attachment_url = f"{self.base_url}{api_route}attachment"
         self.timeout = params.get("timeout", 30)
 
     def test(self):

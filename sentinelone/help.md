@@ -44,6 +44,582 @@ Example input:
 
 ### Actions
 
+#### Get Events by Type
+
+This action is used to get Deep Visibility results from the query that matches the given event type.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|event_type|string|None|True|Event type for Autocomplete|['Process Exit', 'Process Modification', 'Process Creation', 'Duplicate Process Handle', 'Duplicate Thread Handle', 'Open Remote Process Handle', 'Remote Thread Creation', 'Remote Process Termination', 'Command Script', 'IP Connect', 'IP Listen', 'File Modification', 'File Creation', 'File Scan', 'File Deletion', 'File Rename', 'Pre Execution Detection', 'Login', 'Logout', 'GET', 'OPTIONS', 'POST', 'PUT', 'DELETE', 'CONNECT', 'HEAD', 'DNS Resolved', 'DNS Unresolved', 'Task Register', 'Task Update', 'Task Start', 'Task Trigger', 'Task Delete', 'Registry Key Create', 'Registry Key Rename', 'Registry Key Delete', 'Registry Key Export', 'Registry Key Security Changed', 'Registry Key Import', 'Registry Value Modified', 'Registry Value Create', 'Registry Value Delete', 'Behavioral Indicators', 'Module Load']|Registry Key Create|
+|limit|integer|None|False|Limit number of returned items (1-1000), if no limit is provided returns all the results up to 20,000|None|10|
+|query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
+|sub_query|string|None|False|Sub query to run on the data that was already pulled|None|AgentName IS NOT EMPTY|
+
+Example input:
+
+```
+{
+  "event_type": "Registry Key Create",
+  "limit": 10,
+  "query_id": "qd94e330ac025d525b5948bdf897b955e",
+  "sub_query": "AgentName IS NOT EMPTY"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|get_events_response|False|SentinelOne API call response data|
+
+Example output:
+
+```
+{
+  "response": {
+    "data": [
+      {
+        "agentDomain": "WORKGROUP",
+        "agentGroupId": "123123456712356789",
+        "agentId": "123123456712356789",
+        "agentInfected": false,
+        "agentIp": "192.168.50.1",
+        "agentIsActive": true,
+        "agentIsDecommissioned": false,
+        "agentMachineType": "server",
+        "agentName": "example-agent",
+        "agentNetworkStatus": "connected",
+        "agentOs": "windows",
+        "agentTimestamp": "2021-03-22T12:20:34.441Z",
+        "agentUuid": "28db47168fa54f89aeed99769ac8d4dc",
+        "agentVersion": "4.1.4.82",
+        "attributes": [
+          {
+            "display": "Endpoint Name",
+            "display_all_events": "Endpoint Name",
+            "display_attribute": true,
+            "enriched_in_mgmt": false,
+            "field_id": "endpointName",
+            "in_all_events": false,
+            "queryable": true,
+            "section": "Endpoint Details",
+            "value": "example-agent"
+          },
+          {
+            "display": "Endpoint OS",
+            "display_all_events": "Endpoint OS",
+            "display_attribute": true,
+            "enriched_in_mgmt": false,
+            "field_id": "endpointOs",
+            "in_all_events": false,
+            "queryable": true,
+            "section": "Endpoint Details",
+            "value": "windows"
+          },
+          {
+            "display": "Agent UUID",
+            "display_all_events": "Agent UUID",
+            "display_attribute": false,
+            "enriched_in_mgmt": false,
+            "field_id": "agentUuid",
+            "in_all_events": false,
+            "queryable": true,
+            "section": "Endpoint Details",
+            "value": "28db47168fa54f89aeed99769ac8d4dc"
+          }
+        ],
+        "childProcCount": "0",
+        "createdAt": "2021-03-22T12:20:34.441000Z",
+        "crossProcCount": "0",
+        "crossProcDupRemoteProcHandleCount": "0",
+        "crossProcDupThreadHandleCount": "0",
+        "crossProcOpenProcCount": "0",
+        "crossProcOutOfStorylineCount": "0",
+        "crossProcThreadCreateCount": "0",
+        "dnsCount": "0",
+        "endpointMachineType": "server",
+        "endpointName": "example-agent",
+        "endpointOs": "windows",
+        "eventTime": "2021-03-22T12:20:34.441Z",
+        "eventType": "Task Start",
+        "id": "538501898938548224",
+        "indicatorBootConfigurationUpdateCount": "0",
+        "indicatorEvasionCount": "0",
+        "indicatorExploitationCount": "0",
+        "indicatorGeneralCount": "0",
+        "indicatorInfostealerCount": "0",
+        "indicatorInjectionCount": "0",
+        "indicatorPersistenceCount": "0",
+        "indicatorPostExploitationCount": "0",
+        "indicatorRansomwareCount": "0",
+        "indicatorReconnaissanceCount": "0",
+        "metaEventName": "SCHEDTASKSTART",
+        "moduleCount": "0",
+        "netConnCount": "0",
+        "netConnInCount": "0",
+        "netConnOutCount": "0",
+        "objectType": "scheduled_task",
+        "parentPid": "1576",
+        "parentProcessName": "GoogleUpdateSetup.exe",
+        "parentProcessStartTime": "2021-02-05T04:15:29.040Z",
+        "parentProcessUniqueKey": "0B457A0EEDCCDE79",
+        "pid": "2124",
+        "processCmd": "\"C:\\Program Files (x86)\\Google\\Temp\\GUMFD36.tmp\\GoogleUpdate.exe\" /update /sessionid \"{A93A4584-B89A-4960-BF6B-7D22327D555B}\"",
+        "processDisplayName": "Google Installer",
+        "processGroupId": "010F0690CE863720",
+        "processImagePath": "C:\\Program Files (x86)\\Google\\Temp\\GUMFD36.tmp\\GoogleUpdate.exe",
+        "processIntegrityLevel": "SYSTEM",
+        "processIsRedirectedCommandProcessor": "False",
+        "processIsWow64": "True",
+        "processName": "GoogleUpdate.exe",
+        "processRoot": "False",
+        "processSessionId": "0",
+        "processStartTime": "2021-02-05T04:15:30.704Z",
+        "processSubSystem": "SYS_WIN32",
+        "processUniqueKey": "0B457A0EEDCCDE79",
+        "registryChangeCount": "0",
+        "relatedToThreat": "False",
+        "siteId": "521580416395045459",
+        "siteName": "Rapid7",
+        "srcProcCmdLine": "\"C:\\Program Files (x86)\\Google\\Temp\\GUMFD36.tmp\\GoogleUpdate.exe\" /update /sessionid \"{A93A4584-B89A-4960-BF6B-7D22327D555B}\"",
+        "srcProcDisplayName": "Google Installer",
+        "srcProcImagePath": "C:\\Program Files (x86)\\Google\\Temp\\GUMFD36.tmp\\GoogleUpdate.exe",
+        "srcProcIntegrityLevel": "SYSTEM",
+        "srcProcIsNative64Bit": "True",
+        "srcProcIsRedirectCmdProcessor": "False",
+        "srcProcIsStorylineRoot": "False",
+        "srcProcName": "GoogleUpdate.exe",
+        "srcProcParentImagePath": "C:\\Program Files (x86)\\Google\\Update\\Install\\{D0BA3C2C-8787-4281-9646-FB4B6EE87E66}\\GoogleUpdateSetup.exe",
+        "srcProcParentName": "GoogleUpdateSetup.exe",
+        "srcProcParentPid": "1576",
+        "srcProcParentProcUid": "022700598B3061C5",
+        "srcProcParentStartTime": "2021-02-05T04:15:29.040Z",
+        "srcProcParentUid": "022700598B3061C5",
+        "srcProcPid": "2124",
+        "srcProcRelatedToThreat": "False",
+        "srcProcSessionId": "0",
+        "srcProcStartTime": "2021-02-05T04:15:30.704Z",
+        "srcProcStorylineId": "010F0690CE863720",
+        "srcProcSubsystem": "SYS_WIN32",
+        "srcProcTid": "2116",
+        "srcProcUid": "0B457A0EEDCCDE79",
+        "srcProcUser": "NT AUTHORITY\\SYSTEM",
+        "storyline": "010F0690CE863720",
+        "taskName": "\\GoogleUpdateTaskMachineUA",
+        "taskPath": "C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe",
+        "tgtFileCreationCount": "0",
+        "tgtFileDeletionCount": "0",
+        "tgtFileModificationCount": "0",
+        "tid": "2116",
+        "trueContext": "010F0690CE863720",
+        "user": "NT AUTHORITY\\SYSTEM"
+      }
+    ],
+    "pagination": {
+      "nextCursor": "eyJpZF9jb2x1bW4iOiAiaWQiLCAiaWRfdmFsdWUiOiAiNTM4NTAxODk4OTM4NTQ4MjI0IiwgInNvcnRfYnlfY29sdW1uIjogImFnZW50VGltZXN0YW1wIiwgInNvcnRfYnlfdmFsdWUiOiAiMjAyMS0wMy0yMlQxMjoyMDozNC40NDFaIiwgInNvcnRfb3JkZXIiOiAiZGVzYyJ9",
+      "totalItems": 1000
+    }
+  }
+}
+```
+
+#### Get Events
+
+This action is used to get all Deep Visibility events from a queryId.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|limit|integer|None|False|Limit number of returned items (1-1000), if no limit is provided returns all the results up to 20,000|None|10|
+|query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
+|sub_query|string|None|False|Sub query to run on the data that was already pulled|None|AgentName IS NOT EMPTY|
+
+Example input:
+
+```
+{
+  "limit": 10,
+  "query_id": "qd94e330ac025d525b5948bdf897b955e",
+  "sub_query": "AgentName IS NOT EMPTY"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|get_events_response|False|SentinelOne API call response data|
+
+Example output:
+
+```
+{
+  "response": {
+    "data": [
+      {
+        "agentDomain": "WORKGROUP",
+        "agentGroupId": "123123456712356789",
+        "agentId": "123123456712356789",
+        "agentInfected": false,
+        "agentIp": "192.168.50.1",
+        "agentIsActive": true,
+        "agentIsDecommissioned": false,
+        "agentMachineType": "server",
+        "agentName": "example-agent",
+        "agentNetworkStatus": "connected",
+        "agentOs": "windows",
+        "agentTimestamp": "2021-03-22T12:20:34.441Z",
+        "agentUuid": "28db47168fa54f89aeed99769ac8d4dc",
+        "agentVersion": "4.1.4.82",
+        "attributes": [
+          {
+            "display": "Endpoint Name",
+            "display_all_events": "Endpoint Name",
+            "display_attribute": true,
+            "enriched_in_mgmt": false,
+            "field_id": "endpointName",
+            "in_all_events": false,
+            "queryable": true,
+            "section": "Endpoint Details",
+            "value": "example-agent"
+          },
+          {
+            "display": "Endpoint OS",
+            "display_all_events": "Endpoint OS",
+            "display_attribute": true,
+            "enriched_in_mgmt": false,
+            "field_id": "endpointOs",
+            "in_all_events": false,
+            "queryable": true,
+            "section": "Endpoint Details",
+            "value": "windows"
+          },
+          {
+            "display": "Agent UUID",
+            "display_all_events": "Agent UUID",
+            "display_attribute": false,
+            "enriched_in_mgmt": false,
+            "field_id": "agentUuid",
+            "in_all_events": false,
+            "queryable": true,
+            "section": "Endpoint Details",
+            "value": "28db47168fa54f89aeed99769ac8d4dc"
+          }
+        ],
+        "childProcCount": "0",
+        "createdAt": "2021-03-22T12:20:34.441000Z",
+        "crossProcCount": "0",
+        "crossProcDupRemoteProcHandleCount": "0",
+        "crossProcDupThreadHandleCount": "0",
+        "crossProcOpenProcCount": "0",
+        "crossProcOutOfStorylineCount": "0",
+        "crossProcThreadCreateCount": "0",
+        "dnsCount": "0",
+        "endpointMachineType": "server",
+        "endpointName": "example-agent",
+        "endpointOs": "windows",
+        "eventTime": "2021-03-22T12:20:34.441Z",
+        "eventType": "Task Start",
+        "id": "538501898938548224",
+        "indicatorBootConfigurationUpdateCount": "0",
+        "indicatorEvasionCount": "0",
+        "indicatorExploitationCount": "0",
+        "indicatorGeneralCount": "0",
+        "indicatorInfostealerCount": "0",
+        "indicatorInjectionCount": "0",
+        "indicatorPersistenceCount": "0",
+        "indicatorPostExploitationCount": "0",
+        "indicatorRansomwareCount": "0",
+        "indicatorReconnaissanceCount": "0",
+        "metaEventName": "SCHEDTASKSTART",
+        "moduleCount": "0",
+        "netConnCount": "0",
+        "netConnInCount": "0",
+        "netConnOutCount": "0",
+        "objectType": "scheduled_task",
+        "parentPid": "1576",
+        "parentProcessName": "GoogleUpdateSetup.exe",
+        "parentProcessStartTime": "2021-02-05T04:15:29.040Z",
+        "parentProcessUniqueKey": "0B457A0EEDCCDE79",
+        "pid": "2124",
+        "processCmd": "\"C:\\Program Files (x86)\\Google\\Temp\\GUMFD36.tmp\\GoogleUpdate.exe\" /update /sessionid \"{A93A4584-B89A-4960-BF6B-7D22327D555B}\"",
+        "processDisplayName": "Google Installer",
+        "processGroupId": "010F0690CE863720",
+        "processImagePath": "C:\\Program Files (x86)\\Google\\Temp\\GUMFD36.tmp\\GoogleUpdate.exe",
+        "processIntegrityLevel": "SYSTEM",
+        "processIsRedirectedCommandProcessor": "False",
+        "processIsWow64": "True",
+        "processName": "GoogleUpdate.exe",
+        "processRoot": "False",
+        "processSessionId": "0",
+        "processStartTime": "2021-02-05T04:15:30.704Z",
+        "processSubSystem": "SYS_WIN32",
+        "processUniqueKey": "0B457A0EEDCCDE79",
+        "registryChangeCount": "0",
+        "relatedToThreat": "False",
+        "siteId": "521580416395045459",
+        "siteName": "Rapid7",
+        "srcProcCmdLine": "\"C:\\Program Files (x86)\\Google\\Temp\\GUMFD36.tmp\\GoogleUpdate.exe\" /update /sessionid \"{A93A4584-B89A-4960-BF6B-7D22327D555B}\"",
+        "srcProcDisplayName": "Google Installer",
+        "srcProcImagePath": "C:\\Program Files (x86)\\Google\\Temp\\GUMFD36.tmp\\GoogleUpdate.exe",
+        "srcProcIntegrityLevel": "SYSTEM",
+        "srcProcIsNative64Bit": "True",
+        "srcProcIsRedirectCmdProcessor": "False",
+        "srcProcIsStorylineRoot": "False",
+        "srcProcName": "GoogleUpdate.exe",
+        "srcProcParentImagePath": "C:\\Program Files (x86)\\Google\\Update\\Install\\{D0BA3C2C-8787-4281-9646-FB4B6EE87E66}\\GoogleUpdateSetup.exe",
+        "srcProcParentName": "GoogleUpdateSetup.exe",
+        "srcProcParentPid": "1576",
+        "srcProcParentProcUid": "022700598B3061C5",
+        "srcProcParentStartTime": "2021-02-05T04:15:29.040Z",
+        "srcProcParentUid": "022700598B3061C5",
+        "srcProcPid": "2124",
+        "srcProcRelatedToThreat": "False",
+        "srcProcSessionId": "0",
+        "srcProcStartTime": "2021-02-05T04:15:30.704Z",
+        "srcProcStorylineId": "010F0690CE863720",
+        "srcProcSubsystem": "SYS_WIN32",
+        "srcProcTid": "2116",
+        "srcProcUid": "0B457A0EEDCCDE79",
+        "srcProcUser": "NT AUTHORITY\\SYSTEM",
+        "storyline": "010F0690CE863720",
+        "taskName": "\\GoogleUpdateTaskMachineUA",
+        "taskPath": "C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe",
+        "tgtFileCreationCount": "0",
+        "tgtFileDeletionCount": "0",
+        "tgtFileModificationCount": "0",
+        "tid": "2116",
+        "trueContext": "010F0690CE863720",
+        "user": "NT AUTHORITY\\SYSTEM"
+      }
+    ],
+    "pagination": {
+      "nextCursor": "eyJpZF9jb2x1bW4iOiAiaWQiLCAiaWRfdmFsdWUiOiAiNTM4NTAxODk4OTM4NTQ4MjI0IiwgInNvcnRfYnlfY29sdW1uIjogImFnZW50VGltZXN0YW1wIiwgInNvcnRfYnlfdmFsdWUiOiAiMjAyMS0wMy0yMlQxMjoyMDozNC40NDFaIiwgInNvcnRfb3JkZXIiOiAiZGVzYyJ9",
+      "totalItems": 1000
+    }
+  }
+}
+```
+
+#### Cancel Running Query
+
+This action is used to stop a Deep Visibility Query by queryId.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
+
+Example input:
+
+```
+{
+  "query_id": "qd94e330ac025d525b5948bdf897b955e"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|cancel_query_response|False|SentinelOne API call response data|
+
+Example output:
+
+```
+{
+  "response": {
+    "success": true
+  }
+}
+```
+
+#### Get Query Status
+
+This action is used to get that status of a Deep Visibility Query.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
+
+Example input:
+
+```
+{
+  "query_id": "qd94e330ac025d525b5948bdf897b955e"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|get_query_status_response|False|SentinelOne API call response data|
+
+Example output:
+
+```
+{
+  "response": {
+    "data": {
+      "progressStatus": 50,
+      "responseState": "RUNNING"
+    }
+  }
+}
+```
+
+#### Create Query
+
+This action is used to start a Deep Visibility Query and get the queryId. You can use the queryId for other commands, such as Get Events and Get Query Status.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|account_ids|[]string|None|False|List of account IDs to filter by|None|["225494730938491234", "225494730938491235"]|
+|from_date|string|None|True|From date|None|2021-03-01 04:49:26.257525|
+|group_ids|[]string|None|False|List of group IDs to filter by|None|["225494730938491234", "225494730938491235"]|
+|is_verbose|boolean|None|False|Show all fields or just priority fields|None|True|
+|limit|integer|None|False|Limit number of returned items (1-20000)|None|10|
+|query|string|None|True|Events matching the query search term will be returned|None|AgentName IS NOT EMPTY|
+|query_type|[]string|None|False|Query search type|None|["events"]|
+|site_ids|[]string|None|False|List of site IDs to filter by|None|["225494730938491234", "225494730938491235"]|
+|tenant|boolean|None|False|Indicates a Global (tenant) scope request|None|True|
+|to_date|string|None|True|Events created before or at this timestamp|None|2021-03-20 04:49:26.257525|
+
+Example input:
+
+```
+{
+  "account_ids": [
+    "225494730938491234",
+    "225494730938491235"
+  ],
+  "from_date": "2021-03-01T04:49:26.257525Z",
+  "group_ids": [
+    "225494730938491234",
+    "225494730938491235"
+  ],
+  "is_verbose": true,
+  "limit": 10,
+  "query": "AgentName IS NOT EMPTY",
+  "query_type": [
+    "events"
+  ],
+  "site_ids": [
+    "225494730938491234",
+    "225494730938491235"
+  ],
+  "tenant": true,
+  "to_date": "2021-03-20T04:49:26.257525Z"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|create_query_response|False|SentinelOne API call response data|
+
+Example output:
+
+```
+{
+  "response": {
+    "data": {
+      "queryId": "qef4d0d2de7141756ff16959180015e75"
+    }
+  }
+}
+```
+
+#### Enable Agent
+
+This action is used to enable agents that match the filter.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|False|Agent to perform disable action on. Accepts IP address, MAC address, hostname, UUID or agent ID. Leave empty to perform action on all applicable Agents|None|hostname123|
+|filter|object|None|False|Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents|None|{ "updatedAt__gt": "2019-02-27T04:49:26.257525Z" }|
+|reboot|boolean|None|True|Set true to reboot the endpoint, false to skip rebooting|None|True|
+
+Example input:
+
+```
+{
+  "agent": "hostname123",
+  "filter": {
+    "updatedAt__gt": "2019-02-27T04:49:26.257525Z"
+  },
+  "reboot": true
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|True|Number of entities affected by the requested operation|
+
+Example output:
+
+```
+{
+  "affected": 1
+}
+```
+
+#### Disable Agent
+
+This action is used to disable agents that match the filter.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent|string|None|False|Agent to perform disable action on. Accepts IP address, MAC address, hostname, UUID or agent ID. Leave empty to perform action on all applicable Agents|None|hostname123|
+|expiration_time|string|None|False|Agents will be re-enabled after this timestamp|None|2020-02-27 04:49:26.257525|
+|expiration_timezone|string|Central Standard Time (North America) [CST]|False|Timezone for the expiration timestamp. Set with expiration time|['Australian Central Daylight Saving Time [ACDT]', 'Australian Central Standard Time [ACST]', 'Acre Time [ACT]', 'Atlantic Daylight Time [ADT]', 'Australian Eastern Daylight Saving Time [AEDT]', 'Australian Eastern Standard Time [AEST]', 'Australian Eastern Time [AET]', 'Afghanistan Time [AFT]', 'Alaska Daylight Time [AKDT]', 'Alaska Standard Time [AKST]', 'Alma-Ata Time [ALMT]', 'Amazon Summer Time (Brazil) [AMST]', 'Amazon Time (Brazil) [AMT]', 'Armenia Time [AMT]', 'Anadyr Time [ANAT]', 'Aqtobe Time [AQTT]', 'Argentina Time [ART]', 'Arabia Standard Time [AST]', 'Atlantic Standard Time [AST]', 'Australian Western Standard Time [AWST]', 'Azores Summer Time [AZOST]', 'Azores Standard Time [AZOT]', 'Azerbaijan Time [AZT]', 'Brunei Time [BNT]', 'British Indian Ocean Time [BIOT]', 'Baker Island Time [BIT]', 'Bolivia Time [BOT]', 'Brasilia Summer Time [BRST]', 'Brasilia Time [BRT]', 'Bangladesh Standard Time [BST]', 'Bougainville Standard Time [BST]', 'Bhutan Time [BTT]', 'Central Africa Time [CAT]', 'Cocos Islands Time [CCT]', 'Central Daylight Time (North America) [CDT]', 'Cuba Daylight Time [CDT]', 'Central European Summer Time [CEST]', 'Central European Time [CET]', 'Chatham Daylight Time [CHADT]', 'Chatham Standard Time [CHAST]', 'Choibalsan Standard Time [CHOT]', 'Choibalsan Summer Time [CHOST]', 'Chamorro Standard Time [CHST]', 'Chuuk Time [CHUT]', 'Clipperton Island Standard Time [CIST]', 'Central Indonesia Time [WITA]', 'Cook Island Time [CKT]', 'Chile Summer Time [CLST]', 'Chile Standard Time [CLT]', 'Colombia Summer Time [COST]', 'Colombia Time [COT]', 'Central Standard Time (North America) [CST]', 'China Standard Time [CST]', 'Cuba Standard Time [CST]', 'Central Time [CT]', 'Cape Verde Time [CVT]', 'Christmas Island Time [CXT]', 'Davis Time [DAVT]', 'Dumont dUrville Time [DDUT]', 'AIX-specific equivalent of Central European Time [DFT]', 'Easter Island Summer Time [EASST]', 'Easter Island Standard Time [EAST]', 'East Africa Time [EAT]', 'Ecuador Time [ECT]', 'Eastern Daylight Time (North America) [EDT]', 'Eastern European Summer Time [EEST]', 'Eastern European Time [EET]', 'Eastern Greenland Summer Time [EGST]', 'Eastern Greenland Time [EGT]', 'Eastern Indonesian Time [WIT]', 'Eastern Standard Time (North America) [EST]', 'Further-eastern European Time [FET]', 'Fiji Time [FJT]', 'Falkland Islands Summer Time [FKST]', 'Falkland Islands Time [FKT]', 'Fernando de Noronha Time [FNT]', 'Galapagos Time [GALT]', 'Gambier Islands Time [GAMT]', 'Georgia Standard Time [GET]', 'French Guiana Time [GFT]', 'Gilbert Island Time [GILT]', 'Gambier Island Time [GIT]', 'Greenwich Mean Time [GMT]', 'South Georgia and the South Sandwich Islands Time [GST]', 'Gulf Standard Time [GST]', 'Guyana Time [GYT]', 'Hawaii-Aleutian Daylight Time [HDT]', 'Heure Avancee Europe Centrale French-language name for CEST [HAEC]', 'Hawaii-Aleutian Standard Time [HST]', 'Hong Kong Time [HKT]', 'Heard and McDonald Islands Time [HMT]', 'Hovd Time [HOVT]', 'Indochina Time [ICT]', 'International Day Line West time zone [IDLW]', 'Israel Daylight Time [IDT]', 'Indian Ocean Time [IOT]', 'Iran Daylight Time [IRDT]', 'Irkutsk Time [IRKT]', 'Iran Standard Time [IRST]', 'Indian Standard Time [IST]', 'Irish Standard Time [IST]', 'Israel Standard Time [IST]', 'Japan Standard Time [JST]', 'Kaliningrad Time [KALT]', 'Kyrgyzstan Time [KGT]', 'Kosrae Time [KOST]', 'Krasnoyarsk Time [KRAT]', 'Korea Standard Time [KST]', 'Lord Howe Standard Time [LHST]', 'Lord Howe Summer Time [LHST]', 'Line Islands Time [LINT]', 'Magadan Time [MAGT]', 'Marquesas Islands Time [MART]', 'Mawson Station Time [MAWT]', 'Mountain Daylight Time (North America) [MDT]', 'Middle European Time [MET]', 'Middle European Summer Time [MEST]', 'Marshall Islands Time [MHT]', 'Macquarie Island Station Time [MIST]', 'Marquesas Islands Time [MIT]', 'Myanmar Standard Time [MMT]', 'Moscow Time [MSK]', 'Malaysia Standard Time [MST]', 'Mountain Standard Time (North America) [MST]', 'Mauritius Time [MUT]', 'Maldives Time [MVT]', 'Malaysia Time [MYT]', 'New Caledonia Time [NCT]', 'Newfoundland Daylight Time [NDT]', 'Norfolk Island Time [NFT]', 'Novosibirsk Time [NOVT]', 'Nepal Time [NPT]', 'Newfoundland Standard Time [NST]', 'Newfoundland Time [NT]', 'Niue Time [NUT]', 'New Zealand Daylight Time [NZDT]', 'New Zealand Standard Time [NZST]', 'Omsk Time [OMST]', 'Oral Time [ORAT]', 'Pacific Daylight Time (North America) [PDT]', 'Peru Time [PET]', 'Kamchatka Time [PETT]', 'Papua New Guinea Time [PGT]', 'Phoenix Island Time [PHOT]', 'Philippine Time [PHT]', 'Pakistan Standard Time [PKT]', 'Saint Pierre and Miquelon Daylight Time [PMDT]', 'Saint Pierre and Miquelon Standard Time [PMST]', 'Pohnpei Standard Time [PONT]', 'Pacific Standard Time (North America) [PST]', 'Philippine Standard Time [PST]', 'Palau Time [PWT]', 'Paraguay Summer Time [PYST]', 'Paraguay Time [PYT]', 'Reunion Time [RET]', 'Rothera Research Station Time [ROTT]', 'Sakhalin Island Time [SAKT]', 'Samara Time [SAMT]', 'South African Standard Time [SAST]', 'Solomon Islands Time [SBT]', 'Seychelles Time [SCT]', 'Samoa Daylight Time [SDT]', 'Singapore Time [SGT]', 'Sri Lanka Standard Time [SLST]', 'Srednekolymsk Time [SRET]', 'Suriname Time [SRT]', 'Samoa Standard Time [SST]', 'Singapore Standard Time [SST]', 'Showa Station Time [SYOT]', 'Tahiti Time [TAHT]', 'Thailand Standard Time [THA]', 'French Southern and Antarctic Time [TFT]', 'Tajikistan Time [TJT]', 'Tokelau Time [TKT]', 'Timor Leste Time [TLT]', 'Turkmenistan Time [TMT]', 'Turkey Time [TRT]', 'Tonga Time [TOT]', 'Tuvalu Time [TVT]', 'Ulaanbaatar Summer Time [ULAST]', 'Ulaanbaatar Standard Time [ULAT]', 'Coordinated Universal Time [UTC]', 'Uruguay Summer Time [UYST]', 'Uruguay Standard Time [UYT]', 'Uzbekistan Time [UZT]', 'Venezuelan Standard Time [VET]', 'Vladivostok Time [VLAT]', 'Volgograd Time [VOLT]', 'Vostok Station Time [VOST]', 'Vanuatu Time [VUT]', 'Wake Island Time [WAKT]', 'West Africa Summer Time [WAST]', 'West Africa Time [WAT]', 'Western European Summer Time [WEST]', 'Western European Time [WET]', 'Western Indonesian Time [WIB]', 'West Greenland Summer Time [WGST]', 'West Greenland Time [WGT]', 'Western Standard Time [WST]', 'Yakutsk Time [YAKT]', 'Yekaterinburg Time [YEKT]']|Central Standard Time (North America) [CST]|
+|filter|object|None|False|Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents|None|{ "updatedAt__gt": "2019-02-27T04:49:26.257525Z" }|
+|reboot|boolean|None|True|Set true to reboot the endpoint, false to skip rebooting|None|True|
+
+Example input:
+
+```
+{
+  "agent": "hostname123",
+  "expiration_time": "2020-02-27T04:49:26.257525Z",
+  "expiration_timezone": "Central Standard Time (North America) [CST]",
+  "filter": {
+    "updatedAt__gt": "2019-02-27T04:49:26.257525Z"
+  },
+  "reboot": true
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|True|Number of entities affected by the requested operation|
+
+Example output:
+
+```
+{
+  "affected": 1
+}
+```
+
 #### Run Agent Action
 
 This action is used to perform actions relating to your SentinelOne agents. This will help manage your assets connected to your SentinelOne console. Documentation for these actions can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions.
@@ -200,7 +776,6 @@ Example input:
 |----|----|--------|-----------|
 |data|[]activities_list|True|Result of activities list|
 
-
 #### Get Activity Types
 
 This action is used to get a list of activity types.
@@ -248,8 +823,7 @@ Example input:
     "ids": [
       "1000000000000000000"
     ]
-  },
-  "module": "monitor"
+  }
 }
 ```
 
@@ -340,7 +914,6 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|[]agent_applications|True|List of installed applications|
-
 
 #### Blacklist
 
@@ -1335,6 +1908,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 6.2.0 - New actions Create Query, Get Query Status, Cancel Running Query, Get Events, Get Events By Type
+* 6.1.0 - Add new actions Disable Agent and Enable Agent
 * 6.0.0 - Add `operational_state` field to input of Get Agent Details and Search Agent actions | Update schema to return new outputs such as Active Directory, firewall, location, and quarantine information for Get Agent Details and Search Agent actions | Use API version 2.1 | Update capitalization according to style in Activities List action for Created Than Date and Less Than Dates inputs to Greater than Date and Less than Date
 * 5.0.1 - Correct spelling in help.md
 * 5.0.0 - Consolidate various Agent actions | Use API version 2.1 where possible | Delete obsolete Blacklist by IOC Hash and Agent Processes
