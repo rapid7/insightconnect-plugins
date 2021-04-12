@@ -17,14 +17,14 @@ class DeleteUser(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         if self.connection.is_cloud and not params.get(Input.ACCOUNT_ID):
             raise PluginException(
-                preset=PluginException.Preset.USERNAME_PASSWORD,
-                assistance="Jira cloud server need account ID to be set",
+                cause="Account ID not provided",
+                assistance="Jira cloud server needs account ID to be set",
             )
 
         if not self.connection.is_cloud and not params.get(Input.USERNAME):
             raise PluginException(
-                preset=PluginException.Preset.USERNAME_PASSWORD,
-                assistance="Jira server need username to be set",
+                cause="Username not provided",
+                assistance="Jira server needs username to be set",
             )
 
         if self.connection.is_cloud:
