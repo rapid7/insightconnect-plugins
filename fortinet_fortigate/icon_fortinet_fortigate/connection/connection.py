@@ -4,7 +4,9 @@ from .schema import ConnectionSchema, Input
 # Custom imports below
 from requests import Session
 from icon_fortinet_fortigate.util.util import Helpers
-from komand.exceptions import ConnectionTestException, PluginException
+from komand.exceptions import PluginException
+import requests
+import json
 
 
 class Connection(komand.Connection):
@@ -32,26 +34,18 @@ class Connection(komand.Connection):
         # self.session.verify = self.ssl_verify
 
     def get_address_group(self, address_group_name, is_ipv6):
-        endpoint = f"https://{self.host}/api/v2/cmdb/firewall/addrgrp"
+        endpoint = "firewall/addrgrp"
 
         if is_ipv6:
-            endpoint = f"https://{self.host}/api/v2/cmdb/firewall/addrgrp6"
+            endpoint = "firewall/addrgrp6"
 
-        params = {
-            "access_token": self.api_key,
-            "filter": f"name=@{address_group_name}",  # I have no idea why they need the @ symbol
-        }
-
-        result = self.session.get(endpoint, params=params, verify=self.ssl_verify)
-
-        try:
-            result.raise_for_status()
-        except Exception as e:
-            raise PluginException(
-                cause=f"Could not find address group {address_group_name}\n",
-                assistance=result.text,
-                data=f"{e}",
-            )
+        result = self._call_api(
+            path=endpoint,
+            params={
+                "access_token": self.api_key,
+                "filter": f"name=@{address_group_name}",  # I have no idea why they need the @ symbol
+            }
+        )
 
         groups = result.json().get("results")
         if not len(groups) > 0:
@@ -61,23 +55,22 @@ class Connection(komand.Connection):
                 data=result.text,
             )
 
-        group = groups[0]
-        return group
+        return groups[0]
 
     def get_address_object(self, address_name):
-        response_ipv4_json = self.session.get(
-            f"https://{self.host}/api/v2/cmdb/firewall/address/{address_name}",
-            verify=self.ssl_verify
-        ).json()
+        try:
+            response_ipv4_json = self._call_api(
+                path=f"firewall/address/{address_name}"
+            ).json()
 
-        if response_ipv4_json["http_status"] == 200:
-            return response_ipv4_json
+            if response_ipv4_json["http_status"] == 200:
+                return response_ipv4_json
+        except (PluginException, json.decoder.JSONDecodeError, requests.exceptions.HTTPError):
+            pass
 
-        response_ipv6 = self.session.get(
-            f"https://{self.host}/api/v2/cmdb/firewall/address6/{address_name}",
-            verify=self.ssl_verify
+        response_ipv6 = self._call_api(
+            path=f"firewall/address6/{address_name}"
         )
-
         response_ipv6_json = response_ipv6.json()
 
         if response_ipv6_json["http_status"] == 200:
@@ -91,8 +84,9 @@ class Connection(komand.Connection):
 
     def test(self):
         helper = Helpers(self.logger)
-        endpoint = f"https://{self.host}/api/v2/cmdb/firewall.consolidated/policy"
-        response = self.session.get(endpoint, verify=self.ssl_verify)
+        response = self._call_api(
+            path="firewall.consolidated/policy"
+        )
 
         try:
             json_response = response.json()
@@ -105,3 +99,38 @@ class Connection(komand.Connection):
         helper.http_errors(json_response, response.status_code)
 
         return response.json()
+
+    def _call_api(
+            self,
+            path: str,
+            params: dict = None
+    ) -> requests.Response:
+        try:
+            response = self.session.get(
+                f"https://{self.host}/api/v2/cmdb/{path}",
+                verify=self.ssl_verify,
+                params=params
+            )
+
+            if response.status_code == 401:
+                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
+            if response.status_code == 403:
+                raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
+            if response.status_code == 404:
+                raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
+            if 400 <= response.status_code < 500:
+                raise PluginException(
+                    preset=PluginException.Preset.UNKNOWN,
+                    data=response.json().get("message", response.text),
+                )
+            if response.status_code >= 500:
+                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+
+            if 200 <= response.status_code < 300:
+                return response
+
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+        except json.decoder.JSONDecodeError as e:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
+        except requests.exceptions.HTTPError as e:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
