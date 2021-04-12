@@ -70,10 +70,6 @@ class RestAPI(object):
         self.auth = None
         self.default_headers = default_headers
 
-        if not ssl_verify:
-            ssl._create_default_https_context = ssl._create_unverified_context
-
-
     def with_credentials(
             self, authentication_type: str, username: str = None, password: str = None, secret_key: str = None
     ):
