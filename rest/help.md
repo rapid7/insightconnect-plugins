@@ -445,6 +445,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 4.0.4 - Fix issue with SSL Verify
 * 4.0.3 - Update `requests` to the latest version | Update python version to `python-3-38-plugin:4` | Add `USER` in Dockerfile | Use input and output constants | Code refactor | Strip leading and trailing whitespace from route
 * 4.0.2 - Updated `docs_url` to [HTTP Requests - Plugin Connection Guide](https://docs.rapid7.com/insightconnect/http-requests)
 * 4.0.1 - Fix issue where the connection test fails when a base URL is provided with a web resource path for the Rapid7 Insight and Pendo auth types
