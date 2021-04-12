@@ -1749,6 +1749,20 @@ connection:
     type: credential_secret_key
     required: true
     example: YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9
+  region:
+    title: Region
+    description: the region in which thep plugin with work
+    type: string
+    required: true
+    defualt: us
+    example: us
+  max_pages:
+    title: Max Pages
+    description: Max pages returned, default 100
+    type: integer
+    required: false
+    default: 100
+    example: 10
   
 
 actions:

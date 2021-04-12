@@ -5,6 +5,8 @@ import json
 
 class Input:
     CREDENTIALS = "credentials"
+    MAX_PAGES = "max_pages"
+    REGION = "region"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -18,10 +20,24 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "API Key",
       "description": "API key from account e.g. YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9",
       "order": 1
+    },
+    "max_pages": {
+      "type": "integer",
+      "title": "Max Pages",
+      "description": "Max pages returned, default 100",
+      "default": 100,
+      "order": 3
+    },
+    "region": {
+      "type": "string",
+      "title": "Region",
+      "description": "the region in which thep plugin with work",
+      "order": 2
     }
   },
   "required": [
-    "credentials"
+    "credentials",
+    "region"
   ],
   "definitions": {
     "credential_secret_key": {

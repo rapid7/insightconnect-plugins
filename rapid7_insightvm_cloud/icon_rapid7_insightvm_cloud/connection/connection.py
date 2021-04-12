@@ -1,26 +1,23 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 # Custom imports below
+from icon_rapid7_insightvm_cloud.util.api import IVM_Cloud
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
 
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
+        self.ivm_cloud_api = None
 
     def connect(self, params):
-        """
-        Connection config params are supplied as a dict in
-        params or also accessible in self.parameters['key']
-
-        The following will setup the var to be accessed
-          self.blah = self.parameters['blah']
-        in the action and trigger files as:
-          blah = self.connection.blah
-        """
-        # TODO: Implement connection or 'pass' if no connection is necessary
         self.logger.info("Connect: Connecting...")
+        self.ivm_cloud_api = IVM_Cloud(
+            params.get(Input.CREDENTIALS).get("secretKey"),
+            self.logger,
+            params.get(Input.MAX_PAGES, 100),
+            params.get(Input.REGION)
+        )
 
     def test(self):
-        # TODO: Implement connection test
-        pass
+        self.ivm_cloud_api.call_api("scan")

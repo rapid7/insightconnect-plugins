@@ -20,10 +20,17 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_secret_key|None|True|API key from account e.g. YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9|None|YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9|
+|max_pages|integer|100|False|Max pages returned, default 100|None|10|
+|region|string|None|True|the region in which thep plugin with work|None|us-east-1|
 
 Example input:
 
 ```
+{
+  "credentials": "YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9",
+  "max_pages": 10,
+  "region": "us-east-1"
+}
 ```
 
 ## Technical Details
@@ -45,6 +52,10 @@ This action is used to search for assets using filtered asset search.
 Example input:
 
 ```
+{
+  "size": 100,
+  "sort_criteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}"
+}
 ```
 
 ##### Output
@@ -134,6 +145,14 @@ This action is used to start a scan on a site.
 Example input:
 
 ```
+{
+  "hosts": [
+    "192.0.2.3",
+    "192.0.2.10-192.0.2.20",
+    "ADSRV.local"
+  ],
+  "site_id": 1
+}
 ```
 
 ##### Output
