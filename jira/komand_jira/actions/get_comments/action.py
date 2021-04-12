@@ -21,7 +21,8 @@ class GetComments(insightconnect_plugin_runtime.Action):
 
         if not issue:
             raise PluginException(
-                cause=f"No issue found with ID: {params[Input.ID]}.", assistance="Please provide a valid issue ID.",
+                cause=f"No issue found with ID: {params[Input.ID]}.",
+                assistance="Please provide a valid issue ID.",
             )
 
         comments = issue.fields.comment.comments or []

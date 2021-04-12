@@ -8,7 +8,10 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 class EditIssue(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="edit_issue", description=Component.DESCRIPTION, input=EditIssueInput(), output=EditIssueOutput(),
+            name="edit_issue",
+            description=Component.DESCRIPTION,
+            input=EditIssueInput(),
+            output=EditIssueOutput(),
         )
 
     def run(self, params={}):
