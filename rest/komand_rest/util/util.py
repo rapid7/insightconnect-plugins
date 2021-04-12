@@ -5,6 +5,7 @@ from urllib.parse import urlparse, urlsplit, urlunsplit
 from logging import Logger
 from requests.auth import HTTPDigestAuth, HTTPBasicAuth
 import json
+import ssl
 
 
 class Common:
@@ -69,6 +70,10 @@ class RestAPI(object):
         self.auth = None
         self.default_headers = default_headers
 
+        if not ssl_verify:
+            ssl._create_default_https_context = ssl._create_unverified_context
+
+
     def with_credentials(
             self, authentication_type: str, username: str = None, password: str = None, secret_key: str = None
     ):
@@ -119,7 +124,8 @@ class RestAPI(object):
                 data=data,
                 json=json_data,
                 headers=Common.merge_dicts(self.default_headers, headers or {}),
-                auth=self.auth
+                auth=self.auth,
+                verify=self.ssl_verify
             )
 
             if response.status_code == 401:
