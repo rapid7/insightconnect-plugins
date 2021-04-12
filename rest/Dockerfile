@@ -25,4 +25,5 @@ RUN python setup.py build && python setup.py install
 # needed for SSL Verify
 USER root
 
+# Entrypoint
 ENTRYPOINT ["/usr/local/bin/komand_rest"]
