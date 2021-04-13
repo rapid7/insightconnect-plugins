@@ -20,4 +20,4 @@ class Connection(insightconnect_plugin_runtime.Connection):
         )
 
     def test(self):
-        self.ivm_cloud_api.call_api("scan")
+        self.ivm_cloud_api.test_api()

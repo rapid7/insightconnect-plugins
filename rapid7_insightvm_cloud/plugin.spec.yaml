@@ -1751,7 +1751,7 @@ connection:
     example: YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9
   region:
     title: Region
-    description: the region in which thep plugin with work
+    description: the region in which the plugin will work
     type: string
     required: true
     defualt: us
