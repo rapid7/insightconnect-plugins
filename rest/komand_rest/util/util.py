@@ -5,7 +5,6 @@ from urllib.parse import urlparse, urlsplit, urlunsplit
 from logging import Logger
 from requests.auth import HTTPDigestAuth, HTTPBasicAuth
 import json
-import ssl
 
 
 class Common:
@@ -40,7 +39,12 @@ class Common:
         if body_object is None:
             body_object = {}
 
-        return body_object
+        if isinstance(body_object, dict):
+            return body_object
+        else:
+            # Convert to object
+            return {"object": body_object}
+
 
 
 def url_path_join(*parts):
