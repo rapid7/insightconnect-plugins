@@ -445,6 +445,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 4.0.5 - Fix issue where non json return would crash the plugin
 * 4.0.4 - Fix issue with SSL Verify
 * 4.0.3 - Update `requests` to the latest version | Update python version to `python-3-38-plugin:4` | Add `USER` in Dockerfile | Use input and output constants | Code refactor | Strip leading and trailing whitespace from route
 * 4.0.2 - Updated `docs_url` to [HTTP Requests - Plugin Connection Guide](https://docs.rapid7.com/insightconnect/http-requests)
