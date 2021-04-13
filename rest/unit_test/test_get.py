@@ -50,12 +50,7 @@ class TestGet(TestCase):
         test_action.connection = test_conn
         results = test_action.run(action_params)
 
-        # TODO: Remove this line
-        self.fail("Unimplemented test case")
-
-        # TODO: The following assert should be updated to look for data from your action
-        # For example: self.assertEquals({"success": True}, results)
-        self.assertEquals({}, results)
+        self.AssertIsNotNone({}, results)
 
     def test_get(self):
         """
