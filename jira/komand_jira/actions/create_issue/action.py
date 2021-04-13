@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import CreateIssueInput, CreateIssueOutput, Input, Output, Component
 
 # Custom imports below
-from komand_jira.util.util import look_up_project, normalize_issue, add_attachment
+from komand_jira.util.util import look_up_project, normalize_issue
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
 
@@ -75,10 +75,8 @@ class CreateIssue(insightconnect_plugin_runtime.Action):
             )
 
         if params.get(Input.ATTACHMENT_BYTES) and params.get(Input.ATTACHMENT_FILENAME):
-            add_attachment(
-                self.connection,
-                self.logger,
-                issue,
+            self.connection.rest_client.add_attachment(
+                issue.key,
                 params.get(Input.ATTACHMENT_FILENAME),
                 params.get(Input.ATTACHMENT_BYTES),
             )
