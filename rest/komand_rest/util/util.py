@@ -5,7 +5,6 @@ from urllib.parse import urlparse, urlsplit, urlunsplit
 from logging import Logger
 from requests.auth import HTTPDigestAuth, HTTPBasicAuth
 import json
-import ssl
 
 
 class Common:
@@ -40,7 +39,12 @@ class Common:
         if body_object is None:
             body_object = {}
 
-        return body_object
+        if isinstance(body_object, dict):
+            return body_object
+        else:
+            # Convert to object
+            return {"object": body_object}
+
 
 
 def url_path_join(*parts):
@@ -138,7 +142,7 @@ class RestAPI(object):
             if response.status_code >= 500:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
-            if 200 <= response.status_code < 300:
+            if 200 <= response.status_code and response.status_code < 300:
                 return response
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
