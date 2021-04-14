@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 6.1.0
+version: 6.2.0
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
@@ -916,6 +916,545 @@ types:
       description: Response data
       type: object
       required: false
+  query_id:
+    queryID:
+      title: Query ID
+      description: Query ID
+      type: string
+      required: false
+  create_query_response:
+    errors:
+      title: Errors
+      description: Errors
+      type: "[]object"
+      required: false
+    data:
+      title: Data
+      description: Response data
+      type: query_id
+      required: false
+  query_status:
+    progressStatus:
+      title: Progress Status
+      description: Query loading status in percentage
+      type: integer
+      required: false
+    responseState:
+      title: Response State
+      description: Response state
+      type: string
+      required: false
+  get_query_status_response:
+    errors:
+      title: Errors
+      description: Errors
+      type: "[]object"
+      required: false
+    data:
+      title: Data
+      description: Response data
+      type: query_status
+      required: false
+  query_success:
+    success:
+      title: Success
+      description: Request success status
+      type: string
+      required: false
+  cancel_query_response:
+    errors:
+      title: Errors
+      description: Errors
+      type: "[]object"
+      required: false
+    data:
+      title: Data
+      description: Response data
+      type: query_success
+      required: false
+  query_data:
+    objectType:
+      title: Object Type
+      description: Object type
+      type: string
+      required: false
+    tid:
+      title: TID
+      description: TID
+      type: string
+      required: false
+    registryPath:
+      title: Registry Path
+      description: Registry path
+      type: string
+      required: false
+    processIsWow64:
+      title: Process is WOW64
+      description: Process is WOW64
+      type: string
+      required: false
+    networkSource:
+      title: Network Source
+      description: Network source
+      type: string
+      required: false
+    fileFullName:
+      title: File Full Name
+      description: File full name
+      type: string
+      required: false
+    dnsResponse:
+      title: DNS Response
+      description: DNS response
+      type: string
+      required: false
+    publisher:
+      title: Publisher
+      description: Publisher
+      type: string
+      required: false
+    parentProcessGroupId:
+      title: Parent Process Group ID
+      description: Parent process group ID
+      type: string
+      required: false
+    agentNetworkStatus:
+      title: Agent Network Status
+      description: Agent network status
+      type: string
+      required: false
+    pid:
+      title: PID
+      description: PID
+      type: string
+      required: false
+    trueContext:
+      title: True Context
+      description: True context
+      type: string
+      required: false
+    parentProcessUniqueKey:
+      title: Parent Process Unique Key
+      description: Parent process unique key
+      type: string
+      required: false
+    fileId:
+      title: File ID
+      description: File ID
+      type: string
+      required: false
+    processStartTime:
+      title: Process Start Time
+      description: Process start time
+      type: string
+      required: false
+    agentInfected:
+      title: Agent Infected
+      description: Agent infected
+      type: boolean
+      required: false
+    indicatorCategory:
+      title: Indicator Category
+      description: Indicator category
+      type: string
+      required: false
+    processDisplayName:
+      title: Process Display Name
+      description: Process display name
+      type: string
+      required: false
+    oldFileSha256:
+      title: Old File SHA256
+      description: Old file SHA256
+      type: string
+      required: false
+    agentOs:
+      title: Agent OS
+      description: Agent Operating System
+      type: string
+      required: false
+    processIntegrityLevel:
+      title: Process Integrity Level
+      description: Process integrity level
+      type: string
+      required: false
+    processCmd:
+      title: Process CMD
+      description: Process CMD
+      type: string
+      required: false
+    agentIsActive:
+      title: Agent is Active
+      description: Agent is active
+      type: boolean
+      required: false
+    processIsRedirectedCommandProcessor:
+      title: Process is Redirected Command Processor
+      description: Process is redirected command processor
+      type: string
+      required: false
+    verifiedStatus:
+      title: Verified Status
+      description: Verified status
+      type: string
+      required: false
+    processRoot:
+      title: Process Root
+      description: Process root
+      type: string
+      required: false
+    signatureSignedInvalidReason:
+      title: Signature Signed Invalid Reason
+      description: Signature signed invalid reason
+      type: string
+      required: false
+    registryId:
+      title: Registry ID
+      description: Registry ID
+      type: string
+      required: false
+    processSessionId:
+      title: Process Session ID
+      description: Process session ID
+      type: string
+      required: false
+    agentGroupId:
+      title: Agent Group ID
+      description: Agent group ID
+      type: string
+      required: false
+    agentVersion:
+      title: Agent Version
+      description: Agent version
+      type: string
+      required: false
+    parentProcessName:
+      title: Parent Process Name
+      description: Parent process name
+      type: string
+      required: false
+    fileSha256:
+      title: File SHA256
+      description: File SHA256
+      type: string
+      required: false
+    parentPid:
+      title: Parent PID
+      description: Parent PID
+      type: string
+      required: false
+    agentId:
+      title: Agent ID
+      description: Agent ID
+      type: string
+      required: false
+    agentIsDecommissioned:
+      title: Agent is Decommissioned
+      description: Agent is decommissioned
+      type: boolean
+      required: false
+    networkUrl:
+      title: Network URL
+      description: Network URL
+      type: string
+      required: false
+    processUserName:
+      title: Process User Name
+      description: Process user name
+      type: string
+      required: false
+    processImageSha1Hash:
+      title: Process Image SHA1 Hash
+      description: Process image SHA1 hash
+      type: string
+      required: false
+    taskPath:
+      title: Task Path
+      description: Task path
+      type: string
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: string
+      required: false
+    srcPort:
+      title: Source Port
+      description: Source port
+      type: integer
+      required: false
+    oldFileName:
+      title: Old File Name
+      description: Old file name
+      type: string
+      required: false
+    sha256:
+      title: SHA256
+      description: SHA256
+      type: string
+      required: false
+    processImagePath:
+      title: Process Image Path
+      description: Process image path
+      type: string
+      required: false
+    siteName:
+      title: Site Name
+      description: Site name
+      type: string
+      required: false
+    oldFileMd5:
+      title: Old File MD5
+      description: Old file MD5
+      type: string
+      required: false
+    agentMachineType:
+      title: Agent Machine Type
+      description: Agent machine type
+      type: string
+      required: false
+    taskName:
+      title: Task Name
+      description: Task name
+      type: string
+      required: false
+    networkMethod:
+      title: Network Method
+      description: Network method
+      type: string
+      required: false
+    parentProcessStartTime:
+      title: Parent Process Start Time
+      description: Parent process start time
+      type: string
+      required: false
+    srcIp:
+      title: Source IP
+      description: Source IP
+      type: string
+      required: false
+    fileSize:
+      title: File Size
+      description: File size
+      type: string
+      required: false
+    fileMd5:
+      title: File MD5
+      description: File MD5
+      type: string
+      required: false
+    createdAt:
+      title: Created At
+      description: Created at
+      type: string
+      required: false
+    indicatorDescription:
+      title: Indicator Description
+      description: Indicator description
+      type: string
+      required: false
+    processName:
+      title: Process Name
+      description: Process name
+      type: string
+      required: false
+    oldFileSha1:
+      title: Old File SHA1
+      description: Old file SHA1
+      type: string
+      required: false
+    parentProcessIsMalicious:
+      title: Parent Process is Malicious
+      description: Parent process is malicious
+      type: boolean
+      required: false
+    indicatorMetadata:
+      title: Indicator Metadata
+      description: Indicator metadata
+      type: string
+      required: false
+    rpid:
+      title: RPID
+      description: RPID
+      type: string
+      required: false
+    sha1:
+      title: SHA1
+      description: SHA1
+      type: string
+      required: false
+    relatedToThreat:
+      title: Related to Threat
+      description: Related to threat
+      type: string
+      required: false
+    loginsBaseType:
+      title: Logins Base Type
+      description: Logins base type
+      type: string
+      required: false
+    md5:
+      title: MD5
+      description: MD5
+      type: string
+      required: false
+    agentDomain:
+      title: Agent Domain
+      description: Agent domain
+      type: string
+      required: false
+    eventType:
+      title: Event Type
+      description: Event type
+      type: string
+      required: false
+    fileSha1:
+      title: File SHA1
+      description: File SHA1
+      type: string
+      required: false
+    user:
+      title: User
+      description: User
+      type: string
+      required: false
+    processGroupId:
+      title: Process Group ID
+      description: Process group ID
+      type: string
+      required: false
+    agentIp:
+      title: Agent IP
+      description: Agent IP
+      type: string
+      required: false
+    fileType:
+      title: File Type
+      description: File type
+      type: string
+      required: false
+    connectionStatus:
+      title: Connection Status
+      description: Connection status
+      type: string
+      required: false
+    processSubSystem:
+      title: Process Sub System
+      description: Process sub system
+      type: string
+      required: false
+    dstPort:
+      title: Destination Port
+      description: Object type
+      type: integer
+      required: false
+    signedStatus:
+      title: Signed Status
+      description: Signed status
+      type: string
+      required: false
+    processIsMalicious:
+      title: Process is Malicious
+      description: Process is malicious
+      type: boolean
+      required: false
+    forensicUrl:
+      title: Forensic URL
+      description: Forensic URL
+      type: string
+      required: false
+    dstIp:
+      title: Destination IP
+      description: Destination IP
+      type: string
+      required: false
+    direction:
+      title: Direction
+      description: Direction
+      type: string
+      required: false
+    agentUuid:
+      title: Agent UUID
+      description: Agent UUID
+      type: string
+      required: false
+    agentName:
+      title: Agent Name
+      description: Agent name
+      type: string
+      required: false
+    threatStatus:
+      title: Threat Status
+      description: Threat status
+      type: string
+      required: false
+    processUniqueKey:
+      title: Process Unique Key
+      description: Process unique key
+      type: string
+      required: false
+    indicatorName:
+      title: Indicator Name
+      description: Indicator name
+      type: string
+      required: false
+    loginsUserName:
+      title: Logins User Name
+      description: Logins user name
+      type: string
+      required: false
+    agentTimestamp:
+      title: Agent Timestamp
+      description: Agent timestamp
+      type: string
+      required: false
+    attributes:
+      title: Attributes
+      description: Attributes
+      type: "[]object"
+      required: false
+    childProcCount:
+      title: Child Process Count
+      description: Child process count
+      type: string
+      required: false
+    endpointMachineType:
+      title: Endpoint Machine Type
+      description: Endpoint machine type
+      type: string
+      required: false
+    endpointName:
+      title: Endpoint Name
+      description: Endpoint name
+      type: string
+      required: false
+    endpointOs:
+      title: Endpoint OS
+      description: Endpoint OS
+      type: string
+      required: false
+    eventTime:
+      title: Event Time
+      description: Event time
+      type: string
+      required: false
+  get_events_response:
+    errors:
+      title: Errors
+      description: Errors
+      type: "[]object"
+      required: false
+    pagination:
+      title: Pagination
+      description: Pagination
+      type: pagination
+      required: false
+    data:
+      title: Data
+      description: Response data
+      type: "[]query_data"
+      required: false
+
 connection:
   credentials:
     type: credential_username_password
@@ -1413,7 +1952,6 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: false
-
   search_agents:
     title: Search Agents
     description: Search for agents
@@ -1851,7 +2389,215 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: true
-
+  create_query:
+    title: Create Query
+    description: Start a Deep Visibility Query and get the queryId. You can use the queryId for other commands, such as Get Events and Get Query Status
+    input:
+      query:
+        title: Query
+        description: Events matching the query search term will be returned
+        type: string
+        example: AgentName IS NOT EMPTY
+        required: true
+      from_date:
+        title: From Date
+        description: From date
+        type: string
+        example: 2021-03-01T04:49:26.257525Z
+        required: true
+      to_date:
+        title: To Date
+        description: Events created before or at this timestamp
+        type: string
+        example: 2021-03-20T04:49:26.257525Z
+        required: true
+      limit:
+        title: Limit
+        description: Limit number of returned items (1-20000)
+        type: integer
+        example: 10
+        required: false
+      site_ids:
+        title: Site IDs
+        description: List of site IDs to filter by
+        type: "[]string"
+        example: ["225494730938491234", "225494730938491235"]
+        required: false
+      tenant: 
+        title: Tenant
+        description: Indicates a Global (tenant) scope request
+        type: boolean
+        example: true
+        required: false
+      account_ids:
+        title: Account IDs
+        description: List of account IDs to filter by
+        type: "[]string"
+        example: ["225494730938491234", "225494730938491235"]
+        required: false
+      is_verbose: 
+        title: Is Verbose
+        description: Show all fields or just priority fields
+        type: boolean
+        example: true
+        required: false
+      group_ids:
+        title: Account IDs
+        description: List of group IDs to filter by
+        type: "[]string"
+        example: ["225494730938491234", "225494730938491235"]
+        required: false
+      query_type:
+        title: Query Type
+        description: Query search type
+        type: "[]string"
+        example: ["events"]
+        required: false
+    output:
+      response:
+        title: Response
+        description: SentinelOne API call response data
+        type: create_query_response
+        required: false
+  get_query_status:
+    title: Get Query Status
+    description: Get that status of a Deep Visibility Query
+    input:
+      query_id:
+        title: Query ID
+        description: QueryId obtained when creating a query under Create Query
+        type: string
+        example: qd94e330ac025d525b5948bdf897b955e
+        required: true
+    output:
+      response:
+        title: Response
+        description: SentinelOne API call response data
+        type: get_query_status_response
+        required: false
+  cancel_running_query:
+    title: Cancel Running Query
+    description: Stop a Deep Visibility Query by queryId
+    input:
+      query_id:
+        title: Query ID
+        description: QueryId obtained when creating a query under Create Query
+        type: string
+        example: qd94e330ac025d525b5948bdf897b955e
+        required: true
+    output:
+      response:
+        title: Response
+        description: SentinelOne API call response data
+        type: cancel_query_response
+        required: false
+  get_events:
+    title: Get Events
+    description: Get all Deep Visibility events from a queryId
+    input:
+      query_id:
+        title: Query ID
+        description: QueryId obtained when creating a query under Create Query
+        type: string
+        example: qd94e330ac025d525b5948bdf897b955e
+        required: true
+      limit:
+        title: Limit
+        description: Limit number of returned items (1-1000), if no limit is provided returns all the results up to 20,000
+        type: integer
+        example: 10
+        required: false
+      sub_query:
+        title: Sub Query
+        description: Sub query to run on the data that was already pulled
+        type: string
+        example: AgentName IS NOT EMPTY
+        required: false
+    output:
+      response:
+        title: Response
+        description: SentinelOne API call response data
+        type: get_events_response
+        required: false
+  get_events_by_type:
+    title: Get Events by Type
+    description: Get Deep Visibility results from the query that matches the given event type
+    input:
+      query_id:
+        title: Query ID
+        description: QueryId obtained when creating a query under Create Query
+        type: string
+        example: qd94e330ac025d525b5948bdf897b955e
+        required: true
+      event_type:
+        title: Event Type
+        description: Event type for Autocomplete
+        type: string
+        enum: 
+        - Process Exit
+        - Process Modification
+        - Process Creation
+        - Duplicate Process Handle
+        - Duplicate Thread Handle
+        - Open Remote Process Handle
+        - Remote Thread Creation
+        - Remote Process Termination
+        - Command Script
+        - IP Connect
+        - IP Listen
+        - File Modification
+        - File Creation
+        - File Scan
+        - File Deletion
+        - File Rename
+        - Pre Execution Detection
+        - Login
+        - Logout
+        - GET
+        - OPTIONS
+        - POST
+        - PUT
+        - DELETE
+        - CONNECT
+        - HEAD
+        - DNS Resolved
+        - DNS Unresolved
+        - Task Register
+        - Task Update
+        - Task Start
+        - Task Trigger
+        - Task Delete
+        - Registry Key Create
+        - Registry Key Rename
+        - Registry Key Delete
+        - Registry Key Export
+        - Registry Key Security Changed
+        - Registry Key Import
+        - Registry Value Modified
+        - Registry Value Create
+        - Registry Value Delete
+        - Behavioral Indicators
+        - Module Load
+        example: Registry Key Create
+        required: true
+      limit:
+        title: Limit
+        description: Limit number of returned items (1-1000), if no limit is provided returns all the results up to 20,000
+        type: integer
+        example: 10
+        required: false
+      sub_query:
+        title: Sub Query
+        description: Sub query to run on the data that was already pulled
+        type: string
+        example: AgentName IS NOT EMPTY
+        required: false
+    output:
+      response:
+        title: Response
+        description: SentinelOne API call response data
+        type: get_events_response
+        required: false
 triggers:
   get_threats:
     title: Get Threats

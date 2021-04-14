@@ -39,7 +39,12 @@ class Common:
         if body_object is None:
             body_object = {}
 
-        return body_object
+        if isinstance(body_object, dict):
+            return body_object
+        else:
+            # Convert to object
+            return {"object": body_object}
+
 
 
 def url_path_join(*parts):
@@ -119,7 +124,8 @@ class RestAPI(object):
                 data=data,
                 json=json_data,
                 headers=Common.merge_dicts(self.default_headers, headers or {}),
-                auth=self.auth
+                auth=self.auth,
+                verify=self.ssl_verify
             )
 
             if response.status_code == 401:

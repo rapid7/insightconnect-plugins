@@ -1,8 +1,8 @@
 import komand
-from .schema import SearchInput, SearchOutput
+from .schema import SearchInput, SearchOutput, Output
 
 # Custom imports below
-import json
+from typing import Optional
 
 
 class Search(komand.Action):
@@ -23,9 +23,9 @@ class Search(komand.Action):
                 organization_obj = {
                     "created_at": item.created_at,
                     "details": item.details,
-                    "external_id": item.external_id,
-                    "group_id": item.group_id,
-                    "id": item.id,
+                    "external_id": self.convert_to_string(item.external_id),
+                    "group_id": self.convert_to_string(item.group_id),
+                    "id": self.convert_to_string(item.id),
                     "name": item.name,
                     "notes": item.notes,
                     "shared_comments": item.shared_comments,
@@ -38,27 +38,27 @@ class Search(komand.Action):
 
             if s_type == "Ticket" and results is not None:
                 ticket_obj = {
-                    "assignee_id": item.assignee_id,
-                    "brand_id": item.brand_id,
-                    "collaborator_ids": item.collaborator_ids,
+                    "assignee_id": self.convert_to_string(item.assignee_id),
+                    "brand_id": self.convert_to_string(item.brand_id),
+                    "collaborator_ids": self.convert_array(item.collaborator_ids),
                     "created_at": item.created_at,
                     "description": item.description,
                     "due_at": item.due_at,
-                    "external_id": item.external_id,
-                    "forum_topic_id": item.forum_topic_id,
-                    "group_id": item.group_id,
+                    "external_id": self.convert_to_string(item.external_id),
+                    "forum_topic_id": self.convert_to_string(item.forum_topic_id),
+                    "group_id": self.convert_to_string(item.group_id),
                     "has_incidents": item.has_incidents,
                     "id": item.id,
-                    "organization_id": item.organization_id,
+                    "organization_id": self.convert_to_string(item.organization_id),
                     "priority": item.priority,
-                    "problem_id": item.problem_id,
+                    "problem_id": self.convert_to_string(item.problem_id),
                     "raw_subject": item.raw_subject,
-                    "recipient": item.recipient,
-                    "requester_id": item.requester_id,
-                    "sharing_agreement_ids": item.sharing_agreement_ids,
+                    "recipient": self.convert_to_string(item.recipient),
+                    "requester_id": self.convert_to_string(item.requester_id),
+                    "sharing_agreement_ids": self.convert_array(item.sharing_agreement_ids),
                     "status": item.status,
                     "subject": item.subject,
-                    "submitter_id": item.submitter_id,
+                    "submitter_id": self.convert_to_string(item.submitter_id),
                     "tags": item.tags,
                     "type": item.type,
                     "updated_at": item.updated_at,
@@ -72,11 +72,11 @@ class Search(komand.Action):
                     "alias": item.alias,
                     "chat_only": item.chat_only,
                     "created_at": item.created_at,
-                    "custom_role_id": item.custom_role_id,
+                    "custom_role_id": self.convert_to_string(item.custom_role_id),
                     "details": item.details,
                     "email": item.email,
-                    "external_id": item.external_id,
-                    "id": item.id,
+                    "external_id": self.convert_to_string(item.external_id),
+                    "id": self.convert_to_string(item.id),
                     "last_login_at": item.last_login_at,
                     "locale": item.locale,
                     "locale_id": item.locale_id,
@@ -84,7 +84,7 @@ class Search(komand.Action):
                     "name": item.name,
                     "notes": item.notes,
                     "only_private_comments": item.only_private_comments,
-                    "organization_id": item.organization_id,
+                    "organization_id": self.convert_to_string(item.organization_id),
                     "phone": item.phone,
                     "photo": item.photo,
                     "restricted_agent": item.restricted_agent,
@@ -102,12 +102,22 @@ class Search(komand.Action):
                     "verified": item.verified,
                 }
                 objs.append(user_obj)
-            return {"results": objs}
+            if s_type == "Organization":
+                return {Output.ORGANIZATIONS: komand.helper.clean(objs)}
+            elif s_type == "Ticket":
+                return {Output.TICKETS: komand.helper.clean(objs)}
+            else:
+                return {Output.USERS: komand.helper.clean(objs)}
 
-    def test(self):
-        try:
-            test = self.connection.client.users.me().email
-            self.logger.info(test)
-            return {"success": test}
-        except:
-            raise
+    @staticmethod
+    def convert_to_string(values: Optional[int]) -> Optional[str]:
+        if not values:
+            return None
+        return str(values)
+
+    @staticmethod
+    def convert_array(values: Optional[list]) -> Optional[list]:
+        converted_array = []
+        for item in values:
+            converted_array.append(str(item))
+        return converted_array

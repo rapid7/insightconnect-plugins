@@ -8,7 +8,10 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 class LabelIssue(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="label_issue", description=Component.DESCRIPTION, input=LabelIssueInput(), output=LabelIssueOutput(),
+            name="label_issue",
+            description=Component.DESCRIPTION,
+            input=LabelIssueInput(),
+            output=LabelIssueOutput(),
         )
 
     def run(self, params={}):
@@ -18,7 +21,8 @@ class LabelIssue(insightconnect_plugin_runtime.Action):
 
         if not issue:
             raise PluginException(
-                cause=f"No issue found with ID: {params[Input.ID]}.", assistance="Please provide a valid issue ID.",
+                cause=f"No issue found with ID: {params[Input.ID]}.",
+                assistance="Please provide a valid issue ID.",
             )
 
         labels = params[Input.LABEL].split(",")
