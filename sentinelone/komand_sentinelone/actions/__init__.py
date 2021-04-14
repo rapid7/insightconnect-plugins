@@ -7,10 +7,15 @@ from .agents_summary.action import AgentsSummary
 from .apps_by_agent_ids.action import AppsByAgentIds
 from .blacklist.action import Blacklist
 from .blacklist_by_content_hash.action import BlacklistByContentHash
+from .cancel_running_query.action import CancelRunningQuery
 from .create_ioc_threat.action import CreateIocThreat
+from .create_query.action import CreateQuery
 from .disable_agent.action import DisableAgent
 from .enable_agent.action import EnableAgent
 from .get_agent_details.action import GetAgentDetails
+from .get_events.action import GetEvents
+from .get_events_by_type.action import GetEventsByType
+from .get_query_status.action import GetQueryStatus
 from .get_threat_summary.action import GetThreatSummary
 from .mark_as_benign.action import MarkAsBenign
 from .mark_as_threat.action import MarkAsThreat

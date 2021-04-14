@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "SentinelOne"
 Vendor = "rapid7"
-Version = "6.1.0"
+Version = "6.2.0"
 Description = "The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne"
 
 
@@ -52,13 +52,23 @@ def main():
 
             self.add_action(actions.BlacklistByContentHash())
 
+            self.add_action(actions.CancelRunningQuery())
+
             self.add_action(actions.CreateIocThreat())
+
+            self.add_action(actions.CreateQuery())
 
             self.add_action(actions.DisableAgent())
 
             self.add_action(actions.EnableAgent())
 
             self.add_action(actions.GetAgentDetails())
+
+            self.add_action(actions.GetEvents())
+
+            self.add_action(actions.GetEventsByType())
+
+            self.add_action(actions.GetQueryStatus())
 
             self.add_action(actions.GetThreatSummary())
 

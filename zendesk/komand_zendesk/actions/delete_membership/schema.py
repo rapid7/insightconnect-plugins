@@ -24,7 +24,7 @@ class DeleteMembershipInput(komand.Input):
     "membership_id": {
       "type": "string",
       "title": "Membership ID",
-      "description": "ID of membership to delete E.g. 1657574807",
+      "description": "ID of membership to delete E.g. 1401295821555",
       "order": 1
     }
   },
