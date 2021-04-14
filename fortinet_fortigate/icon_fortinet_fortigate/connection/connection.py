@@ -39,7 +39,7 @@ class Connection(komand.Connection):
         if is_ipv6:
             endpoint = "firewall/addrgrp6"
 
-        result = self._call_api(
+        result = self.call_api(
             path=endpoint,
             params={
                 "access_token": self.api_key,
@@ -59,7 +59,7 @@ class Connection(komand.Connection):
 
     def get_address_object(self, address_name):
         try:
-            response_ipv4_json = self._call_api(
+            response_ipv4_json = self.call_api(
                 path=f"firewall/address/{address_name}"
             ).json()
 
@@ -68,7 +68,7 @@ class Connection(komand.Connection):
         except (PluginException, json.decoder.JSONDecodeError, requests.exceptions.HTTPError):
             pass
 
-        response_ipv6 = self._call_api(
+        response_ipv6 = self.call_api(
             path=f"firewall/address6/{address_name}"
         )
         response_ipv6_json = response_ipv6.json()
@@ -84,7 +84,7 @@ class Connection(komand.Connection):
 
     def test(self):
         helper = Helpers(self.logger)
-        response = self._call_api(
+        response = self.call_api(
             path="firewall.consolidated/policy"
         )
 
@@ -100,15 +100,19 @@ class Connection(komand.Connection):
 
         return response.json()
 
-    def _call_api(
+    def call_api(
             self,
             path: str,
-            params: dict = None
+            method: str = "GET",
+            params: dict = None,
+            json_data: dict = None
     ) -> requests.Response:
         try:
-            response = self.session.get(
-                f"https://{self.host}/api/v2/cmdb/{path}",
+            response = self.session.request(
+                method=method.upper(),
+                url=f"https://{self.host}/api/v2/cmdb/{path}",
                 verify=self.ssl_verify,
+                json=json_data,
                 params=params
             )
 

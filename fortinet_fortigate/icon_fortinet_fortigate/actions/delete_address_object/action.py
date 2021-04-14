@@ -39,17 +39,17 @@ class DeleteAddressObject(komand.Action):
 
         if is_ipv6:
             params_payload = {"mkey": original_host}
-            response = self.connection.session.delete(
-                f"https://{self.connection.host}/api/v2/cmdb/firewall/address6",
-                params=params_payload,
-                verify=self.connection.ssl_verify
+            response = self.connection.call_api(
+                method="DELETE",
+                path=f"firewall/address6",
+                params=params_payload
             )
         else:
             params_payload = {"mkey": str(host)}
-            response = self.connection.session.delete(
-                f"https://{self.connection.host}/api/v2/cmdb/firewall/address",
-                params=params_payload,
-                verify=self.connection.ssl_verify
+            response = self.connection.call_api(
+                method="DELETE",
+                path=f"firewall/address",
+                params=params_payload
             )
 
         try:
