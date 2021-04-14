@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="cisco_threatgrid-rapid7-plugin",
-      version="2.1.1",
+      version="3.0.0",
       description="This plugin retrieves malware reports, report samples and URLs for analysis to Cisco ThreatGrid server Cisco ThreatGrid combines advanced sandboxing with threat intelligence into one unified solution to protect organizations from malware",
       author="rapid7",
       author_email="",
