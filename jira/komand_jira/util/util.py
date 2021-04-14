@@ -1,6 +1,5 @@
 import logging
 import base64
-from io import BytesIO
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -101,18 +100,3 @@ def look_up_project(_id, client, logger=logging.getLogger()):
         logger.debug("Project %s exists", project_id_name)
         return True
     return False
-
-
-def add_attachment(connection, logger, issue, filename, file_bytes):
-    try:
-        data = base64.b64decode(file_bytes)
-    except Exception as e:
-        raise PluginException(
-            cause="Unable to decode attachment bytes.",
-            assistance=f"Please provide a valid attachment bytes. Error: {str(e)}",
-        )
-    attachment = BytesIO()
-    attachment.write(data)
-    output = connection.client.add_attachment(issue=issue, attachment=attachment, filename=filename)
-    logger.debug("Attach issue has returned: %s", output)
-    return output
