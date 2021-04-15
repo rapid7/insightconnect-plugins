@@ -1,0 +1,733 @@
+plugin_spec_version: v2
+extension: plugin
+products: ["insightconnect"]
+name: easyvista
+title: EasyVista
+description: EasyVista Service Manager platform supports even the most complex requirements, while bringing a new level of simplicity, agility, and mobility required to make cloud based IT Service Management (ITSM) software easy to use and easy to deliver. Using the EasyVista plugin for Rapid7 InsightConnect, users can manage the creation, update, search and closure of incident, service request, problem or event tickets
+version: 1.0.0
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/easyvista
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.easyvista.com
+tags:
+- easyvista
+- ticket
+hub_tags:
+  use_cases: [remediation_management]
+  keywords: [easyvista, ticket, itsm]
+  features: []
+
+types:
+  comment:
+    HREF:
+      title: HREF
+      description: HREF hyperlink
+      type: string
+      required: false
+  catalog_request:
+    CODE:
+      title: Code
+      description: Code
+      type: string
+      required: false
+    CATALOG_REQUEST_PATH:
+      title: Catalog Request Path
+      description: Catalog request path
+      type: string
+      required: false
+    HREF:
+      title: HREF
+      description: HREF hyperlink
+      type: string
+      required: false
+    SD_CATALOG_ID:
+      title: SD Catalog ID
+      description: SD catalog ID
+      type: string
+      required: false
+    TITLE_EN:
+      title: Title EN
+      description: Title EN
+      type: string
+      required: false
+  status:
+    STATUS_EN:
+      title: Status EN
+      description: Status EN
+      type: string
+      required: false
+    STATUS_GUID:
+       title: Status GUID
+       description: Status GUID
+       type: string
+       required: false
+    HREF:
+      title: HREF
+      description: HREF hyperlink
+      type: string
+      required: false
+    STATUS_ID:
+      title: Status ID
+      description: Status ID
+      type: string
+      required: false
+  employee:
+    BEGIN_OF_CONTRACT:
+      title: Begin Of Contract
+      description: Begin of contract
+      type: string
+      required: false
+    CELLULAR_NUMBER:
+      title: Cellular Number
+      description: Cellular number
+      type: string
+      required: false
+    DEPARTMENT_PATH:
+      title: Department Path
+      description: Department path
+      type: string
+      required: false
+    E_MAIL:
+      title: Email
+      description: Email
+      type: string
+      required: false
+    EMPLOYEE_ID:
+      title: Employee ID
+      description: Employee ID
+      type: string
+      required: false
+    LAST_NAME:
+      title: Last Name
+      description: Last name
+      type: string
+      required: false
+    LOCATION_PATH:
+      title: Location Path
+      description: Location path
+      type: string
+      required: false
+    PHONE_NUMBER:
+      title: Phone Number
+      description: Phone number
+      type: string
+      required: false
+  location:
+    CITY:
+      title: City
+      description: City
+      type: string
+      required: false
+    LOCATION_CODE:
+      title: Location Code
+      description: Location code
+      type: string
+      required: false
+    LOCATION_EN:
+      title: Location EN
+      description: Location EN
+      type: string
+      required: false
+    LOCATION_PATH:
+      title: Location Path
+      description: Location path
+      type: string
+      required: false
+    HREF:
+      title: HREF
+      description: HREF hyperlink
+      type: string
+      required: false
+    LOCATION_ID:
+      title: Location ID
+      description: Location ID
+      type: string
+      required: false
+  department:
+    DEPARTMENT_CODE:
+      title: Department Code
+      description: Department code
+      type: string
+      required: false
+    DEPARTMENT_EN:
+      title: Department EN
+      description: Department EN
+      type: string
+      required: false
+    DEPARTMENT_PATH:
+      title: Department Path
+      description: Department path
+      type: string
+      required: false
+    HREF:
+      title: HREF
+      description: HREF hyperlink
+      type: string
+      required: false
+    DEPARTMENT_ID:
+      title: Department ID
+      description: Department ID
+      type: string
+      required: false
+    DEPARTMENT_LABEL:
+      title: Department Label
+      description: Department label
+      type: string
+      required: false
+  known_error:
+    KNOWNERROR_PATH:
+      title: Known Error Path
+      description: Known error path
+      type: string
+      required: false
+    KNOWN_PROBLEMS_ID:
+      title: Known Problems ID
+      description: Known problems ID
+      type: string
+      required: false
+    KP_NUMBER:
+      title: KP Number
+      description: KP number
+      type: string
+      required: false
+    QUESTION_EN:
+      title: Question EN
+      description: Question EN
+      type: string
+      required: false
+  record:
+    HREF:
+      title: HREF
+      description: HREF hyperlink
+      type: string
+      required: false
+    COMMENT:
+      title: Comment
+      description: Comment
+      type: comment
+      required: false
+    MAX_RESOLUTION_DATE_UT:
+      title: Max Resolution Date
+      description: Max resolution date
+      type: string
+      required: false
+    REQUEST_ID:
+      title: Request ID
+      description: Request ID
+      type: string
+      required: false
+    RFC_NUMBER:
+      title: RFC Number
+      description: RFC number
+      type: string
+      required: false
+    SUBMIT_DATE_UT:
+      title: Submit Date
+      description: Submit date
+      type: string
+      required: false
+    CATALOG_REQUEST:
+      title: Catalog Request
+      description: Catalog request
+      type: catalog_request
+      required: false
+    STATUS:
+      title: Status
+      description: Status
+      type: status
+      required: false
+    RECIPIENT:
+      title: Recipient
+      description: Recipient
+      type: employee
+      required: false
+    REQUESTOR:
+      title: Requestor
+      description: Requestor
+      type: employee
+      required: false
+    LOCATION:
+      title: Location
+      description: Location
+      type: location
+      required: false
+    DEPARTMENT:
+      title: Department
+      description: Department
+      type: department
+      required: false
+    KNOWNERROR:
+      title: Known Error
+      description: Known error
+      type: known_error
+      required: false
+  search_ticket_results:
+    HREF:
+      title: HREF
+      description: HREF hyperlink
+      type: string
+      required: false
+    record_count:
+      title: Record Count
+      description: Record count
+      type: string
+      required: false
+    total_record_count:
+      title: Total Record Count
+      description: Total record count
+      type: string
+      required: false
+    records:
+      title: Records
+      description: Records
+      type: "[]record"
+      required: false
+  ticket_data:
+    href_hyperlink:
+      title: HREF Hyperlink
+      description: URL link (HREF) to the ticket
+      type: string
+      required: false
+    reference_number:
+      title: Reference Number
+      description: Reference number of the ticket
+      type: string
+      required: false
+
+connection:
+  hostname:
+    title: EasyVista Server Hostname
+    description: The hostname of your EasyVista server, e.g. https://example.easyvista.com
+    type: string
+    required: true
+    example: https://example.easyvista.com
+  account:
+    title: Account
+    description: Service Manager account used
+    type: integer
+    required: true
+    example: 50004
+    default: 50004
+  client_login:
+    title: Client Login Information
+    description: The EasyVista username and password for basic authentication API interaction
+    type: credential_username_password
+    required: true
+    example: '{"username":"user1", "password":"mypassword"}'
+actions:
+  create_ticket:
+    title: Create Ticket
+    description: Create a new EasyVista ticket
+    input:
+      catalog:
+        title: Catalog
+        description: Identifier (GUID) or code for the subject of the ticket
+        type: string
+        required: true
+        example: 44D88612-FEA8-A8F3-6DE8-2E1278ABB02F
+      asset_id:
+        title: Asset ID
+        description: Identifier of the asset
+        type: string
+        required: false
+        example: 123
+      asset_tag:
+        title: Asset Tag
+        description: Tag of the asset
+        type: string
+        required: false
+        example: 10564S
+      asset_name:
+        title: Asset Name
+        description: Name of the asset
+        type: string
+        required: false
+        example: Example asset name
+      ci_id:
+        title: CI ID
+        description: Identifier of the Configuration Item
+        type: string
+        required: false
+        example: 1
+      ci_asset_tag:
+        title: CI Asset Tag
+        description: Asset tag of the Configuration Item
+        type: string
+        required: false
+        example: 10564S
+      ci_name:
+        title: CI Name
+        description: Name of the Configuration Item
+        type: string
+        required: false
+        example: SQL-RDB_IT
+      department_id:
+        title: Department ID
+        description: Department ID of the requestor
+        type: string
+        required: false
+        example: 1
+      department_code:
+        title: Department Code
+        description: Department code of the requestor
+        type: string
+        required: false
+        example: DEP01
+      description:
+        title: Description
+        description: Description of the ticket
+        type: string
+        required: false
+        example: Example ticket description
+      impact_id:
+        title: Impact ID
+        description: Identifier of the impact level
+        type: integer
+        required: false
+        example: 2
+      external_reference:
+        title: External Reference
+        description: Identifier of the object attributed by an external application
+        type: string
+        required: false
+        example: external_ref_example
+      location_id:
+        title: Location ID
+        description: Location ID of the requestor
+        type: string
+        required: false
+        example: 10
+      location_code:
+        title: Location Code
+        description: Location code of the requestor
+        type: string
+        required: false
+        example: LOC01
+      origin:
+        title: Origin
+        description: Identifier of the origin
+        type: string
+        required: false
+        example: Email
+      parentrequest:
+        title: Parent Request
+        description: Identifier of the related request (parent request) attached to the object
+        type: string
+        required: false
+        example: 5
+      phone:
+        title: Phone
+        description: Phone number of the requestor
+        type: string
+        required: false
+        example: +11111111
+      recipient_id:
+        title: Recipient ID
+        description: Identifier of the recipient
+        type: string
+        required: false
+        example: 1
+      recipient_identification:
+        title: Recipient Identification
+        description: Employee number of the recipient
+        type: string
+        required: false
+        example: 12345
+      recipient_mail:
+        title: Recipient Mail
+        description: Email address of the recipient
+        type: string
+        required: false
+        example: user@example.com
+      recipient_name:
+        title: Recipient Name
+        description: Name of the recipient
+        type: string
+        required: false
+        example: Example Recipient
+      requestor_identification:
+        title: Requestor Identification
+        description: Employee number of the requestor
+        type: string
+        required: false
+        example: 12345
+      requestor_mail:
+        title: Requestor Mail
+        description: Email address of the requestor
+        type: string
+        required: false
+        example: user@example.com
+      requestor_name:
+        title: Requestor Name
+        description: Name of the requestor
+        type: string
+        required: false
+        example: Example Requestor
+      severity_id:
+        title: Severity ID
+        description: Identifier of the severity level
+        type: integer
+        required: false
+        example: 1
+      submit_date:
+        title: Submit Date
+        description: Creation date of the ticket
+        type: string
+        required: false
+        example: 04/12/2021 2:00:00 pm
+      title:
+        title: Title
+        description: Title of the ticket
+        type: string
+        required: false
+        example: Example ticket title
+      urgency_id:
+        title: Urgency ID
+        description: Identifier of the urgency level
+        type: integer
+        required: false
+        example: 1
+    output:
+      result:
+        title: Result
+        description: Result that includes URL link (HREF) and reference number of the created ticket
+        type: ticket_data
+        required: true
+  update_ticket:
+    title: Update Ticket
+    description: Update the EasyVista ticket
+    input:
+      rfc_number:
+        title: Reference Number
+        description: Reference number of the ticket to be updated
+        type: string
+        required: true
+        example: I210412_000001
+      analytical_charge_id:
+        title: Analytical Charge ID
+        description: Analytical charge ID or code
+        type: string
+        required: false
+        example: 132
+      asset_id:
+        title: Asset ID
+        description: Identifier of the asset
+        type: string
+        required: false
+        example: 123
+      asset_serial:
+        title: Asset Serial
+        description: Serial number of the asset
+        type: string
+        required: false
+        example: MXRADF
+      asset_tag:
+        title: Asset Tag
+        description: Tag of the asset
+        type: string
+        required: false
+        example: 10564S
+      ci:
+        title: CI
+        description: Name of the Configuration Item
+        type: string
+        required: false
+        example: SQL-RDB_IT
+      ci_id:
+        title: CI ID
+        description: Identifier of the Configuration Item
+        type: integer
+        required: false
+        example: 1
+      ci_serial:
+        title: CI Serial
+        description: Serial number of the Configuration Item
+        type: string
+        required: false
+        example: KD78QGJYU
+      comment:
+        title: Comment
+        description: Comment explaining the updating of the ticket
+        type: string
+        required: false
+        example: Comment updated via InsightConnect
+      continuity_plan_id:
+        title: Continuity Plan ID
+        description: Continuity plan ID or code
+        type: string
+        required: false
+        example: CP01
+      description:
+        title: Description
+        description: Description of the ticket
+        type: string
+        required: false
+        example: Example description
+      external_reference:
+        title: External Reference
+        description: Identifier of the object attributed by an external application
+        type: string
+        required: false
+        example: external_ref_example
+      impact_id:
+        title: Impact ID
+        description: Identifier of the impact level
+        type: integer
+        required: false
+        example: 2
+      known_problems_id:
+        title: Known Problems ID
+        description: Identifier of the known problems
+        type: integer
+        required: false
+        example: 1
+      net_price_cur_id:
+        title: Price Currency ID
+        description: Price currency or currency ID
+        type: string
+        required: false
+        example: EUR
+      origin_tool_id:
+        title: Origin Tool ID
+        description: Identifier of the origin tool
+        type: string
+        required: false
+        example: 1
+      owner_id:
+        title: Owner ID
+        description: Identifier of the owner (Employee ID or name)
+        type: string
+        required: false
+        example: 16
+      owning_group_id:
+        title: Owning Group ID
+        description: Owning group ID or name
+        type: string
+        required: false
+        example: Desktop USA
+      release_id:
+        title: Release ID
+        description: Release ID or code
+        type: string
+        required: false
+        example: 1
+      rental_net_price_cur_id:
+        title: Rental Price Currency ID
+        description: Rental price currency or currency ID
+        type: string
+        required: false
+        example: EUR
+      request_origin_id:
+        title: Request Origin ID
+        description: Request origin name or ID
+        type: string
+        required: false
+        example: Email
+      requestor_phone:
+        title: Requestor Phone
+        description: Phone number of the requestor
+        type: string
+        required: false
+        example: +11111111
+      root_cause_id:
+        title: Root Cause ID
+        description: Root Cause ID or name
+        type: string
+        required: false
+        example: Virus
+      submit_date_ut:
+        title: Submit Date
+        description: Creation date of the ticket
+        type: string
+        required: false
+        example: 4/12/2021 2:00:00 pm
+      system_id:
+        title: System ID
+        description: System ID or name
+        type: string
+        required: false
+        example: Supervisor
+      title:
+        title: Title
+        description: Title of the ticket
+        type: string
+        required: false
+        example: Example ticket title
+      urgency_id:
+        title: Urgency ID
+        description: Identifier of the urgency level
+        type: integer
+        required: false
+        example: 1
+    output:
+      result:
+        title: Result
+        description: Result that includes URL link (HREF) and reference number of the updated ticket
+        type: ticket_data
+        required: true
+  close_ticket:
+    title: Close Ticket
+    description: Close the EasyVista ticket
+    input:
+      rfc_number:
+        title: Reference Number
+        description: Reference number of the ticket to be closed
+        type: string
+        required: true
+        example: I210412_000001
+      catalog_guid:
+        title: Catalog GUID
+        description: Identifier of the topic of the ticket. Required if the ticket needs to be requalified before closing
+        type: string
+        required: false
+        example: 44D88612-FEA8-A8F3-6DE8-2E1278ABB02F
+      comment:
+        title: Comment
+        description: Comment explaining the closing of the ticket
+        type: string
+        required: false
+        example: Ticket closed via InsightConnect
+      delete_actions:
+        title: Delete Actions
+        description: Used to indicate the measures to be taken for ongoing actions in the ticket
+        type: boolean
+        required: false
+        default: false
+        example: false
+      end_date:
+        title: End Date
+        description: Closing date of open actions associated with the ticket and the anticipated closure action. By default, the current date
+        type: string
+        required: false
+        example: 04/20/2021 12:00:00
+      status_guid:
+        title: Status GUID
+        description: Identifier (GUID) of the final status of the ticket
+        type: string
+        required: false
+        example: DC97DD1D-0F35-4153-B0E1-0F2E0155365D
+    output:
+      result:
+        title: Result
+        description: Result that includes URL link (HREF) and reference number of the closed ticket
+        type: ticket_data
+        required: true
+  search_tickets:
+    title: Search Tickets
+    description: Search the EasyVista tickets
+    input:
+      query:
+        title: Query
+        description: Search query, if empty, returns all tickets
+        type: string
+        required: false
+        example: rfc_number:I210412_000001
+    output:
+      results:
+        title: Results
+        description: Search results for the given query
+        type: search_ticket_results
+        required: true
