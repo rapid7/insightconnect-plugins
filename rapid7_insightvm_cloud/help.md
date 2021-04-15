@@ -21,7 +21,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_secret_key|None|True|API key from account e.g. YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9|None|YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9|
 |max_pages|integer|100|False|Max pages returned, default 100|None|10|
-|region|string|None|True|the region in which thep plugin with work|None|us-east-1|
+|region|string|None|True|the region in which the plugin will work|None|us|
 
 Example input:
 
@@ -29,13 +29,40 @@ Example input:
 {
   "credentials": "YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9",
   "max_pages": 10,
-  "region": "us-east-1"
+  "region": "us"
 }
 ```
 
 ## Technical Details
 
 ### Actions
+
+#### Update Scan Status
+
+This action is used to update the status of a scan.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|integer|None|True|Scan ID|None|None|
+|status|string|stop|True|Status to which the scan should be set (stop, resume, pause)|['stop', 'resume', 'pause']|None|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|links|[]link|True|Hypermedia links to corresponding or related resources|
+
+Example output:
+
+```
+```
 
 #### Asset Search
 
@@ -67,6 +94,7 @@ Example input:
 Example output:
 
 ```
+null
 ```
 
 #### Get Asset
@@ -129,6 +157,7 @@ Example input:
 Example output:
 
 ```
+null
 ```
 
 #### Scan

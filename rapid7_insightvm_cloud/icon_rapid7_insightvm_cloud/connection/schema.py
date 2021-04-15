@@ -31,7 +31,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "region": {
       "type": "string",
       "title": "Region",
-      "description": "the region in which thep plugin with work",
+      "description": "the region in which the plugin will work",
       "order": 2
     }
   },

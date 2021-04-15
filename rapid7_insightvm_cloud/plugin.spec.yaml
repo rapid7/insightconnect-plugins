@@ -1902,6 +1902,31 @@ actions:
         description: Asset details
         type: asset
         required: true
+  update_scan_status:
+    title: Update Scan Status
+    description: Update the status of a scan
+    input:
+      id:
+        title: ID
+        description: Scan ID
+        type: integer
+        required: true
+      status:
+        title: Status
+        description: Status to which the scan should be set (stop, resume, pause)
+        type: string
+        required: true
+        default: stop
+        enum:
+          - stop
+          - resume
+          - pause
+    output:
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: true
   
 triggers:
   new_scans:
