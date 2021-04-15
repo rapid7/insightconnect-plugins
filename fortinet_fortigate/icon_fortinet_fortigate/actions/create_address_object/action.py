@@ -32,7 +32,9 @@ class CreateAddressObject(komand.Action):
         if host.endswith("/32"):
             whitelist_ref = host[:-3]
 
-        if type_ == "ipmask" and skip_rfc1918 is True and ipaddress.ip_network(host).is_private:
+        ip_address = ipaddress.ip_network(host)
+
+        if type_ == "ipmask" and skip_rfc1918 is True and ip_address.is_private:
             return {
                 Output.SUCCESS: False,
                 Output.RESPONSE_OBJECT: {
@@ -47,7 +49,10 @@ class CreateAddressObject(komand.Action):
         if not found:
             payload = {"name": name if name else host, "type": type_, "subnet": host}
 
-            endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/address"
+            if ip_address.version == "4":
+                endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/address"
+            else:
+                endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/address6"
 
             response = self.connection.session.post(endpoint, json=payload, verify=self.connection.ssl_verify)
             try:
