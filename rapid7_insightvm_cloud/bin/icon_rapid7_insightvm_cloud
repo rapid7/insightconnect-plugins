@@ -44,7 +44,7 @@ def main():
 
             self.add_action(actions.Scan())
 
-            self.add_action(actions.UpdateScanStatus())
+            self.add_action(actions.StopScan())
 
 
     """Run plugin"""

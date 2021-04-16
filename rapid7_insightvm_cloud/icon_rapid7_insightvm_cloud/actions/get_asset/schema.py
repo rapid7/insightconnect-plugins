@@ -22,7 +22,7 @@ class GetAssetInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "id": {
-      "type": "integer",
+      "type": "string",
       "title": "ID",
       "description": "Get an asset by ID",
       "order": 1

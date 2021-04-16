@@ -3,4 +3,4 @@ from .asset_search.action import AssetSearch
 from .get_asset.action import GetAsset
 from .get_scan.action import GetScan
 from .scan.action import Scan
-from .update_scan_status.action import UpdateScanStatus
+from .stop_scan.action import StopScan

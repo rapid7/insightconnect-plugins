@@ -1852,7 +1852,7 @@ actions:
       id:
         description: ID of the scan
         title: ID
-        type: integer
+        type: string
         required: false
       scanName:
         description: User-driven scan name for the scan
@@ -1894,7 +1894,7 @@ actions:
       id:
         title: ID
         description: Get an asset by ID
-        type: integer
+        type: string
         required: true
     output:
       asset:
@@ -1902,30 +1902,20 @@ actions:
         description: Asset details
         type: asset
         required: true
-  update_scan_status:
+  stop_scan:
     title: Update Scan Status
-    description: Update the status of a scan
+    description: Stop a scan in progress
     input:
       id:
         title: ID
         description: Scan ID
-        type: integer
-        required: true
-      status:
-        title: Status
-        description: Status to which the scan should be set (stop, resume, pause)
         type: string
         required: true
-        default: stop
-        enum:
-          - stop
-          - resume
-          - pause
     output:
-      links:
-        title: Links
-        description: Hypermedia links to corresponding or related resources
-        type: '[]link'
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
         required: true
   
 triggers:

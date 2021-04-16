@@ -79,7 +79,7 @@ class GetScanOutput(insightconnect_plugin_runtime.Output):
       "order": 8
     },
     "id": {
-      "type": "integer",
+      "type": "string",
       "title": "ID",
       "description": "ID of the scan",
       "order": 10

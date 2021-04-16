@@ -135,9 +135,9 @@ class Scan:
         :return: pre-populated /api/3/scans
         """
         if scan_id:
-            return f"{console_url}/api/3/scans/{scan_id}"
+            return f"{console_url}scan/{scan_id}"
         else:
-            return f"{console_url}/api/3/scans"
+            return f"{console_url}scan"
 
     @staticmethod
     def scan_status(console_url, scan_id, status):

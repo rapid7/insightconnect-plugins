@@ -45,8 +45,7 @@ This action is used to update the status of a scan.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Scan ID|None|None|
-|status|string|stop|True|Status to which the scan should be set (stop, resume, pause)|['stop', 'resume', 'pause']|None|
+|id|string|None|True|Scan ID|None|None|
 
 Example input:
 
@@ -57,11 +56,12 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|links|[]link|True|Hypermedia links to corresponding or related resources|
+|success|boolean|True|Was operation successful|
 
 Example output:
 
 ```
+
 ```
 
 #### Asset Search
@@ -105,7 +105,7 @@ This action gets an asset by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Get an asset by ID|None|None|
+|id|string|None|True|Get an asset by ID|None|None|
 
 Example input:
 
@@ -146,7 +146,7 @@ Example input:
 |duration|string|False|Duration of the scan in ISO8601 format|
 |endTime|string|False|End time of the scan in ISO8601 format|
 |engineName|string|False|Name of the engine used for the scan|
-|id|integer|False|ID of the scan|
+|id|string|False|ID of the scan|
 |links|[]link|False|Hypermedia links to corresponding or related resources|
 |scanName|string|False|User-driven scan name for the scan|
 |scanType|string|False|Scan type (manual, automated, scheduled)|
