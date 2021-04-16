@@ -138,7 +138,7 @@ class UpdateTicketInput(komand.Input):
       "order": 12
     },
     "ticket_id": {
-      "type": "string",
+      "type": "integer",
       "title": "Ticket ID",
       "description": "Ticket ID",
       "order": 1
@@ -273,16 +273,19 @@ class UpdateTicketOutput(komand.Output):
         "assignee_id": {
           "type": "string",
           "title": "Assignee ID",
+          "description": "Assignee ID",
           "order": 2
         },
         "attachment": {
           "$ref": "#/definitions/file",
           "title": "Attachment",
+          "description": "Attachment",
           "order": 1
         },
         "collaborator_ids": {
           "type": "array",
           "title": "Collaborator IDs",
+          "description": "Collaborator IDs",
           "items": {
             "type": "string"
           },
@@ -291,95 +294,91 @@ class UpdateTicketOutput(komand.Output):
         "comment": {
           "$ref": "#/definitions/comment",
           "title": "Comment",
+          "description": "Comment",
           "order": 4
         },
         "description": {
           "type": "string",
           "title": "Description",
+          "description": "Description",
           "order": 5
         },
         "due_at": {
           "type": "string",
           "title": "Due At",
           "displayType": "date",
+          "description": "Due at",
           "format": "date-time",
           "order": 6
         },
         "external_id": {
           "type": "string",
           "title": "External ID",
+          "description": "External ID",
           "order": 7
         },
         "group_id": {
           "type": "string",
           "title": "Group ID",
+          "description": "Group ID",
           "order": 8
+        },
+        "id": {
+          "type": "integer",
+          "title": "ID",
+          "description": "ID",
+          "order": 9
         },
         "priority": {
           "type": "string",
           "title": "Priority",
-          "enum": [
-            "Urgent",
-            "High",
-            "Normal",
-            "Low",
-            ""
-          ],
-          "order": 15
+          "description": "Priority",
+          "order": 16
         },
         "problem_id": {
           "type": "string",
           "title": "Problem ID",
-          "order": 11
+          "description": "Problem ID",
+          "order": 12
         },
         "recipient": {
           "type": "string",
           "title": "Recipient ID",
-          "order": 10
+          "description": "Recipient ID",
+          "order": 11
         },
         "requester_id": {
           "type": "string",
           "title": "Requester ID",
-          "order": 9
+          "description": "Requester ID",
+          "order": 10
         },
         "status": {
           "type": "string",
           "title": "Status",
-          "enum": [
-            "New",
-            "Open",
-            "Pending",
-            "Hold",
-            "Solved",
-            "Closed",
-            ""
-          ],
-          "order": 16
+          "description": "Status",
+          "order": 17
         },
         "subject": {
           "type": "string",
           "title": "Subject",
-          "order": 12
+          "description": "Subject",
+          "order": 13
         },
         "tags": {
           "type": "array",
           "title": "Tags",
+          "description": "Tags",
           "items": {
             "type": "string"
           },
-          "order": 13
+          "order": 14
         },
         "type": {
           "type": "string",
           "title": "Type",
-          "enum": [
-            "Problem",
-            "Incident",
-            "Task",
-            "Question",
-            ""
-          ],
-          "order": 14
+          "description": "Type",
+          "order": 15
         }
       },
       "definitions": {

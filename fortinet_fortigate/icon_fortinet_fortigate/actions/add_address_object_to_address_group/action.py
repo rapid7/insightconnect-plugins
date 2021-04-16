@@ -26,13 +26,15 @@ class AddAddressObjectToAddressGroup(komand.Action):
         address_name = params[Input.ADDRESS_OBJECT]
         helper = Helpers(self.logger)
 
-        group = self.connection.get_address_group(group_name)
+        is_ipv6 = self.connection.get_address_object(address_name)["name"] == "address6"
+
+        group = self.connection.get_address_group(group_name, is_ipv6)
         group_members = group.get("member")
 
         group_members.append({"name": address_name})
         group["member"] = group_members
 
-        endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/addrgrp/{group.get('name')}"
+        endpoint = self._determine_endpoint(is_ipv6, group_name)
 
         response = self.connection.session.put(endpoint, json=group, verify=self.connection.ssl_verify)
 
@@ -58,9 +60,8 @@ class AddAddressObjectToAddressGroup(komand.Action):
 
         return {Output.SUCCESS: success, Output.RESULT_OBJECT: json_response}
 
-    def throw_unknown_error(self, endpoint, response):
-        raise PluginException(
-            cause=f"Add address object to address group failed: {endpoint}\n",
-            assistance="Contact support for assistance.",
-            data=response.text,
-        )
+    def _determine_endpoint(self, is_ipv6, group_name):
+        if is_ipv6:
+            return f"https://{self.connection.host}/api/v2/cmdb/firewall/addrgrp6/{group_name}"
+
+        return f"https://{self.connection.host}/api/v2/cmdb/firewall/addrgrp/{group_name}"

@@ -21,7 +21,8 @@ class CommentIssue(insightconnect_plugin_runtime.Action):
 
         if not issue:
             raise PluginException(
-                cause=f"No issue found with ID: {id_}.", assistance="Please provide a valid issue ID.",
+                cause=f"No issue found with ID: {id_}.",
+                assistance="Please provide a valid issue ID.",
             )
 
         comment = self.connection.client.add_comment(issue=issue, body=params[Input.COMMENT])
