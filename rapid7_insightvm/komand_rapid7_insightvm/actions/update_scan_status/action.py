@@ -9,7 +9,7 @@ from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 class UpdateScanStatus(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="stop_scan",
+            name="update_scan_status",
             description="Update the status of a scan (pause, resume, stop)",
             input=UpdateScanStatusInput(),
             output=UpdateScanStatusOutput(),
