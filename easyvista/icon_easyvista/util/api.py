@@ -2,11 +2,12 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from json import JSONDecodeError
 import requests
 from requests.auth import HTTPBasicAuth
+from urllib.parse import urlsplit
 
 
 class EasyVistaApi:
-    def __init__(self, client_login: dict, account: int, hostname: str):
-        self.base_url = f"{hostname}/api/v1/{account}/"
+    def __init__(self, client_login: dict, account: int, url: str):
+        self.base_url = f"{self.split_url(url)}/api/v1/{account}/"
         self.username = client_login.get("username")
         self.password = client_login.get("password")
 
@@ -24,8 +25,8 @@ class EasyVistaApi:
             raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
         if response.status_code == 404:
             raise PluginException(
-                cause="No results found. Invalid or unreachable endpoint provided. ",
-                assistance="Please provide a valid inputs or verify the endpoint/URL/hostname configured in your plugin"
+                cause="No results found. Invalid or unreachable endpoint provided.",
+                assistance="Please provide valid inputs or verify the endpoint/URL/hostname configured in your plugin"
                 " connection is correct.",
             )
         if 400 <= response.status_code < 500:
@@ -54,7 +55,12 @@ class EasyVistaApi:
             return {"href_hyperlink": href, "reference_number": href.split("/requests/")[1]}
         except (AttributeError, IndexError) as e:
             raise PluginException(
-                cause="EasyVista returned unexpected response. ",
-                assistance="Please check that the provided inputs are correct and try again. ",
+                cause="EasyVista returned unexpected response.",
+                assistance="Please check that the provided inputs are correct and try again.",
                 data=e,
             )
+
+    @staticmethod
+    def split_url(url: str) -> str:
+        scheme, netloc, paths, queries, fragments = urlsplit(url.strip())
+        return f"{scheme}://{netloc}"

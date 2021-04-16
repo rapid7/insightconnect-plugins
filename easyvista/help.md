@@ -1,6 +1,6 @@
 # Description
 
-EasyVista Service Manager platform supports even the most complex requirements, while bringing a new level of  simplicity, agility, and mobility required to make cloud based IT Service Management (ITSM) software easy to use and easy to deliver. Using the EasyVista plugin for Rapid7 InsightConnect, users can manage the creation, update, search and closure of incident, service request, problem or event tickets
+EasyVista Service Manager platform supports even the most complex requirements, while bringing a new level of simplicity, agility, and mobility required to make cloud based IT Service Management (ITSM) software easy to use and easy to deliver. Using the EasyVista plugin for Rapid7 InsightConnect, users can manage the creation, update, search and closure of incident, service request, problem or event tickets
 
 # Key Features
 
@@ -21,7 +21,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |account|integer|50004|True|Service Manager account used|None|50004|
 |client_login|credential_username_password|None|True|The EasyVista username and password for basic authentication API interaction|None|{"username":"user1", "password":"mypassword"}|
-|hostname|string|None|True|The hostname of your EasyVista server, e.g. https://example.easyvista.com|None|https://example.easyvista.com|
+|url|string|None|True|The full URL for your EasyVista server, e.g. https://example.easyvista.com|None|https://example.easyvista.com|
 
 Example input:
 
@@ -32,7 +32,7 @@ Example input:
     "username": "user1",
     "password": "mypassword"
   },
-  "hostname": "https://example.easyvista.com"
+  "url": "https://example.easyvista.com"
 }
 ```
 
@@ -42,13 +42,13 @@ Example input:
 
 #### Search Tickets
 
-This action is used to search the EasyVista tickets.
+This action is used to search for EasyVista tickets. All available search filters can be found [here](https://wiki.easyvista.com/xwiki/bin/view/Documentation/REST+API+-+Options+for+Fields#SearchFilterOptions).
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|query|string|None|False|Search query, if empty, returns all tickets|None|rfc_number:I210412_000001|
+|query|string|None|False|Search query. Returns all tickets if left empty|None|rfc_number:I210412_000001|
 
 Example input:
 
@@ -145,14 +145,14 @@ Example output:
 
 #### Close Ticket
 
-This action is used to close the EasyVista ticket.
+This action is used to close an EasyVista ticket.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |catalog_guid|string|None|False|Identifier of the topic of the ticket. Required if the ticket needs to be requalified before closing|None|44D88612-FEA8-A8F3-6DE8-2E1278ABB02F|
-|comment|string|None|False|Comment explaining the closing of the ticket|None|Ticket closed via InsightConnect|
+|comment|string|None|False|Comment that explains why the ticket was closed|None|Ticket closed via InsightConnect|
 |delete_actions|boolean|False|False|Used to indicate the measures to be taken for ongoing actions in the ticket|None|False|
 |end_date|string|None|False|Closing date of open actions associated with the ticket and the anticipated closure action. By default, the current date|None|04/20/2021 12:00:00|
 |rfc_number|string|None|True|Reference number of the ticket to be closed|None|I210412_000001|
@@ -190,7 +190,7 @@ Example output:
 
 #### Update Ticket
 
-This action is used to update the EasyVista ticket.
+This action is used to update an EasyVista ticket.
 
 ##### Input
 
@@ -203,10 +203,10 @@ This action is used to update the EasyVista ticket.
 |ci|string|None|False|Name of the Configuration Item|None|SQL-RDB_IT|
 |ci_id|integer|None|False|Identifier of the Configuration Item|None|1|
 |ci_serial|string|None|False|Serial number of the Configuration Item|None|KD78QGJYU|
-|comment|string|None|False|Comment explaining the updating of the ticket|None|Comment updated via InsightConnect|
+|comment|string|None|False|Comment that explains the reason for the update|None|Comment updated via InsightConnect|
 |continuity_plan_id|string|None|False|Continuity plan ID or code|None|CP01|
 |description|string|None|False|Description of the ticket|None|Example description|
-|external_reference|string|None|False|Identifier of the object attributed by an external application|None|external_ref_example|
+|external_reference|string|None|False|Identifier of the object used by an external application|None|external_ref_example|
 |impact_id|integer|None|False|Identifier of the impact level|None|2|
 |known_problems_id|integer|None|False|Identifier of the known problems|None|1|
 |net_price_cur_id|string|None|False|Price currency or currency ID|None|EUR|
@@ -277,7 +277,7 @@ Example output:
 
 #### Create Ticket
 
-This action is used to create a new EasyVista ticket.
+This action is used to create a new EasyVista ticket. The only required input parameter is `catalog`. All other input parameters are optional, and you can only provide the ones you need.
 
 ##### Input
 
@@ -401,7 +401,7 @@ _This plugin does not contain any triggers._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Begin Of Contract|string|False|Begin of contract|
+|Begin of Contract|string|False|Begin of contract|
 |Cellular Number|string|False|Cellular number|
 |Department Path|string|False|Department path|
 |Employee ID|string|False|Employee ID|

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Search the EasyVista tickets"
+    DESCRIPTION = "Search for EasyVista tickets"
 
 
 class Input:
@@ -24,7 +24,7 @@ class SearchTicketsInput(insightconnect_plugin_runtime.Input):
     "query": {
       "type": "string",
       "title": "Query",
-      "description": "Search query, if empty, returns all tickets",
+      "description": "Search query. Returns all tickets if left empty",
       "order": 1
     }
   }
@@ -148,7 +148,7 @@ class SearchTicketsOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "BEGIN_OF_CONTRACT": {
           "type": "string",
-          "title": "Begin Of Contract",
+          "title": "Begin of Contract",
           "description": "Begin of contract",
           "order": 1
         },
@@ -448,7 +448,7 @@ class SearchTicketsOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "BEGIN_OF_CONTRACT": {
               "type": "string",
-              "title": "Begin Of Contract",
+              "title": "Begin of Contract",
               "description": "Begin of contract",
               "order": 1
             },
@@ -729,7 +729,7 @@ class SearchTicketsOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "BEGIN_OF_CONTRACT": {
               "type": "string",
-              "title": "Begin Of Contract",
+              "title": "Begin of Contract",
               "description": "Begin of contract",
               "order": 1
             },
@@ -1029,7 +1029,7 @@ class SearchTicketsOutput(insightconnect_plugin_runtime.Output):
               "properties": {
                 "BEGIN_OF_CONTRACT": {
                   "type": "string",
-                  "title": "Begin Of Contract",
+                  "title": "Begin of Contract",
                   "description": "Begin of contract",
                   "order": 1
                 },

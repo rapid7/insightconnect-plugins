@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Update the EasyVista ticket"
+    DESCRIPTION = "Update an EasyVista ticket"
 
 
 class Input:
@@ -92,7 +92,7 @@ class UpdateTicketInput(insightconnect_plugin_runtime.Input):
     "comment": {
       "type": "string",
       "title": "Comment",
-      "description": "Comment explaining the updating of the ticket",
+      "description": "Comment that explains the reason for the update",
       "order": 9
     },
     "continuity_plan_id": {
@@ -110,7 +110,7 @@ class UpdateTicketInput(insightconnect_plugin_runtime.Input):
     "external_reference": {
       "type": "string",
       "title": "External Reference",
-      "description": "Identifier of the object attributed by an external application",
+      "description": "Identifier of the object used by an external application",
       "order": 12
     },
     "impact_id": {

@@ -76,7 +76,7 @@ types:
       required: false
   employee:
     BEGIN_OF_CONTRACT:
-      title: Begin Of Contract
+      title: Begin of Contract
       description: Begin of contract
       type: string
       required: false
@@ -298,9 +298,9 @@ types:
       required: false
 
 connection:
-  hostname:
-    title: EasyVista Server Hostname
-    description: The hostname of your EasyVista server, e.g. https://example.easyvista.com
+  url:
+    title: EasyVista Server URL
+    description: The full URL for your EasyVista server, e.g. https://example.easyvista.com
     type: string
     required: true
     example: https://example.easyvista.com
@@ -320,7 +320,7 @@ connection:
 actions:
   create_ticket:
     title: Create Ticket
-    description: Create a new EasyVista ticket
+    description: Create a new EasyVista ticket. The only required input parameter is `catalog`. All other input parameters are optional, and you can only provide the ones you need
     input:
       catalog:
         title: Catalog
@@ -498,7 +498,7 @@ actions:
         required: true
   update_ticket:
     title: Update Ticket
-    description: Update the EasyVista ticket
+    description: Update an EasyVista ticket
     input:
       rfc_number:
         title: Reference Number
@@ -550,7 +550,7 @@ actions:
         example: KD78QGJYU
       comment:
         title: Comment
-        description: Comment explaining the updating of the ticket
+        description: Comment that explains the reason for the update
         type: string
         required: false
         example: Comment updated via InsightConnect
@@ -568,7 +568,7 @@ actions:
         example: Example description
       external_reference:
         title: External Reference
-        description: Identifier of the object attributed by an external application
+        description: Identifier of the object used by an external application
         type: string
         required: false
         example: external_ref_example
@@ -670,7 +670,7 @@ actions:
         required: true
   close_ticket:
     title: Close Ticket
-    description: Close the EasyVista ticket
+    description: Close an EasyVista ticket
     input:
       rfc_number:
         title: Reference Number
@@ -686,7 +686,7 @@ actions:
         example: 44D88612-FEA8-A8F3-6DE8-2E1278ABB02F
       comment:
         title: Comment
-        description: Comment explaining the closing of the ticket
+        description: Comment that explains why the ticket was closed
         type: string
         required: false
         example: Ticket closed via InsightConnect
@@ -717,11 +717,11 @@ actions:
         required: true
   search_tickets:
     title: Search Tickets
-    description: Search the EasyVista tickets
+    description: Search for EasyVista tickets
     input:
       query:
         title: Query
-        description: Search query, if empty, returns all tickets
+        description: Search query. Returns all tickets if left empty
         type: string
         required: false
         example: rfc_number:I210412_000001

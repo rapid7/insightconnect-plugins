@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Close the EasyVista ticket"
+    DESCRIPTION = "Close an EasyVista ticket"
 
 
 class Input:
@@ -35,7 +35,7 @@ class CloseTicketInput(insightconnect_plugin_runtime.Input):
     "comment": {
       "type": "string",
       "title": "Comment",
-      "description": "Comment explaining the closing of the ticket",
+      "description": "Comment that explains why the ticket was closed",
       "order": 3
     },
     "delete_actions": {

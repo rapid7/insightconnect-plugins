@@ -6,7 +6,7 @@ import json
 class Input:
     ACCOUNT = "account"
     CLIENT_LOGIN = "client_login"
-    HOSTNAME = "hostname"
+    URL = "url"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -28,17 +28,17 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "The EasyVista username and password for basic authentication API interaction",
       "order": 3
     },
-    "hostname": {
+    "url": {
       "type": "string",
-      "title": "EasyVista Server Hostname",
-      "description": "The hostname of your EasyVista server, e.g. https://example.easyvista.com",
+      "title": "EasyVista Server URL",
+      "description": "The full URL for your EasyVista server, e.g. https://example.easyvista.com",
       "order": 1
     }
   },
   "required": [
     "account",
     "client_login",
-    "hostname"
+    "url"
   ],
   "definitions": {
     "credential_username_password": {

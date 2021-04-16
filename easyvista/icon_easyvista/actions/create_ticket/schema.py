@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Create a new EasyVista ticket"
+    DESCRIPTION = "Create a new EasyVista ticket. The only required input parameter is `catalog`. All other input parameters are optional, and you can only provide the ones you need"
 
 
 class Input:

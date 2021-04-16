@@ -13,16 +13,14 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
-        self.client = EasyVistaApi(
-            params.get(Input.CLIENT_LOGIN), params.get(Input.ACCOUNT), params.get(Input.HOSTNAME)
-        )
+        self.client = EasyVistaApi(params.get(Input.CLIENT_LOGIN), params.get(Input.ACCOUNT), params.get(Input.URL))
 
     def test(self):
         try:
             self.client.search_ticket("submit_date_ut:today")
         except PluginException:
             raise ConnectionTestException(
-                cause="Connection error. ",
+                cause="Connection error.",
                 assistance="Please check that your username, password, account and hostname are correct.",
             )
         return {"status": "Success"}
