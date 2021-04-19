@@ -168,7 +168,7 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
           "order": 9
         },
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Identifier of the asset",
           "order": 10

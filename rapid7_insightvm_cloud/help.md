@@ -121,6 +121,7 @@ Example input:
 Example output:
 
 ```
+
 ```
 
 #### Get Scan
