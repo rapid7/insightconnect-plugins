@@ -16,7 +16,7 @@ class StopScan(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         scan_id = params.get(Input.ID)
-        url = "scan/"+scan_id+"/stop"
+        url = f"scan/{scan_id}/stop"
         try:
             response = self.connection.ivm_cloud_api.call_api(url, "POST")
             if response == 202:
