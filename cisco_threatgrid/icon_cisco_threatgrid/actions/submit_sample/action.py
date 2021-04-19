@@ -25,12 +25,16 @@ class SubmitSample(komand.Action):
         except Exception as e:
             raise PluginException(cause=PluginException.Preset.BASE64_DECODE, data=e)
 
+        is_private = params.get(Input.PRIVATE)
+        if not isinstance(is_private, bool):
+            is_private = True
+
         data = {
             "callback_url": params.get(Input.CALLBACK_URL),
             "email_notification": params.get(Input.EMAIL_NOTIFICATION),
             "network_exit": params.get(Input.NETWORK_EXIT),
             "playbook": params.get(Input.PLAYBOOK),
-            "private": params.get(Input.PRIVATE),
+            "private": is_private,
             "sample_filename": params.get(Input.SAMPLE_FILENAME),
             "sample_password": params.get(Input.SAMPLE_PASSWORD),
             "tags": params.get(Input.TAGS),
