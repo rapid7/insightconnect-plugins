@@ -2,8 +2,6 @@ import insightconnect_plugin_runtime
 from .schema import GetScanInput, GetScanOutput, Input, Output, Component
 # Custom imports below
 import requests
-import json
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class GetScan(insightconnect_plugin_runtime.Action):

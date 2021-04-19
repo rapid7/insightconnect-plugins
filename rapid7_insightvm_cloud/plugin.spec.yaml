@@ -797,7 +797,7 @@ types:
     id:
       description: Identifier of the asset
       title: ID
-      type: integer
+      type: string
       required: false
     ids:
       description: Unique identifiers found on the asset, such as hardware or operating

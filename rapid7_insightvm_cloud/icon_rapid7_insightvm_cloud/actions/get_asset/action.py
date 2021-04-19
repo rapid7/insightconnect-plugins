@@ -2,8 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import GetAssetInput, GetAssetOutput, Input, Output, Component
 
 # Custom imports below
-from icon_rapid7_insightvm_cloud.util import endpoints
-from icon_rapid7_insightvm_cloud.util.resource_requests import ResourceRequests
+import requests
 
 
 class GetAsset(insightconnect_plugin_runtime.Action):
@@ -16,10 +15,12 @@ class GetAsset(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
-        asset_id = params.get(Input.ID)
-        endpoint = endpoints.Asset.assets(self.connection.console_url, asset_id)
-        self.logger.info("Using %s ..." % endpoint)
-        asset = resource_helper.resource_request(endpoint)
+        asset_id = params.get("id")
 
-        return {Output.ASSET: asset}
+        try:
+            response = self.connection.ivm_cloud_api.call_api("assets/" + asset_id, "GET")
+            return {Output.ASSET: response}
+        except requests.RequestException as e:
+            self.logger.error(e)
+            raise
+
