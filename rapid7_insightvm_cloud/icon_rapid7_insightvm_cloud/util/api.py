@@ -25,15 +25,13 @@ class IVM_Cloud:
         else:
             self.max_pages = 100
 
-    def call_api_pages(self, path: str, params: dict = None):
+    def call_api_pages(self, path: str, request_type: str, params: dict = None):
         responses = []
         for pages in range(self.max_pages):
-            cleaned_response = self.call_api(path, params)
-            if "data" in cleaned_response:
-                responses.extend(cleaned_response.get("data"))
+            params.append(("page", pages))
+            response = self.call_api(path, request_type, params)
+            responses.append(response)
 
-            if "links" not in cleaned_response or "next" not in cleaned_response["links"]:
-                break
         return responses
 
     def call_api(self, path: str, request_type: str, params: dict = None):
@@ -57,6 +55,8 @@ class IVM_Cloud:
                 )
             if response.text == '':
                 return response.status_code
+            if "data" in response:
+                return response.get("data")
             else:
                 return response.json()
         except HTTPError as httpError:
