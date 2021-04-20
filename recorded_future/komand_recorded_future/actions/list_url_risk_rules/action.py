@@ -1,12 +1,12 @@
-import komand
-import requests
+import insightconnect_plugin_runtime
 from .schema import ListUrlRiskRulesInput, ListUrlRiskRulesOutput, Output, Component
-from komand.exceptions import PluginException
 
 # Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_recorded_future.util.api import Endpoint
 
 
-class ListUrlRiskRules(komand.Action):
+class ListUrlRiskRules(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="list_url_risk_rules",
@@ -17,9 +17,10 @@ class ListUrlRiskRules(komand.Action):
 
     def run(self, params={}):
         try:
-            query_headers = self.connection.headers
-            results = requests.get("https://api.recordedfuture.com/v2/url/riskrules", headers=query_headers).json()
-            return {Output.RISK_RULES: results["data"]["results"]}
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
+            return {
+                Output.RISK_RULES: self.connection.client.make_request(Endpoint.list_url_risk_rules())
+                .get("data", {})
+                .get("results")
+            }
+        except AttributeError as e:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
