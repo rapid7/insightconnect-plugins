@@ -1,12 +1,13 @@
-import komand
+import insightconnect_plugin_runtime
 import time
 from .schema import GetNewAlertsInput, GetNewAlertsOutput, Input, Output, Component
 
 # Custom imports below
+from komand_recorded_future.util.api import Endpoint
 from datetime import datetime
 
 
-class GetNewAlerts(komand.Trigger):
+class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_new_alerts",
@@ -25,10 +26,10 @@ class GetNewAlerts(komand.Trigger):
 
             # triggered = [2017 - 07 - 30,)
             # // same as 7 / 30 / 2017 <= triggered
-            params = {"triggered": f"[{then.isoformat()},)"}
-
-            response = self.connection.client.search_alerts(**params)
-            alerts = komand.helper.clean(response.result.get("data").get("results"))
+            params = {"triggered": f"[{then.isoformat()},]"}
+            alerts = insightconnect_plugin_runtime.helper.clean(
+                self.connection.client.make_request(Endpoint.search_alerts(), params).get("data").get("results")
+            )
 
             for alert in alerts:
                 self.send({Output.ALERT: alert})

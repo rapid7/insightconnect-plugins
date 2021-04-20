@@ -1,42 +1,37 @@
-import komand
-from .schema import LookupHashInput, LookupHashOutput, Input
+import insightconnect_plugin_runtime
+from .schema import LookupHashInput, LookupHashOutput, Input, Output, Component
+
+# Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_recorded_future.util.util import AvailableInputs
+from komand_recorded_future.util.api import Endpoint
 
 
-class LookupHash(komand.Action):
+class LookupHash(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="lookup_hash",
-            description="This action is used to retrieve information about a specified hash",
+            description=Component.DESCRIPTION,
             input=LookupHashInput(),
             output=LookupHashOutput(),
         )
 
     def run(self, params={}):
+        comment = params.get(Input.COMMENT)
+        if not comment:
+            comment = None
         try:
-            hash_id = params.get(Input.HASH)
-            comment = params.get(Input.COMMENT)
-
-            fields = [
-                "analystNotes",
-                "counts",
-                "enterpriseLists",
-                "entity",
-                "intelCard",
-                "metrics",
-                "relatedEntities",
-                "risk",
-                "sightings",
-                "threatLists",
-                "timestamps",
-                "hashAlgorithm",
-            ]
-
-            if not comment:
-                comment = None
-
-            hash_report = self.connection.client.lookup_hash(hash_id, fields=fields, comment=comment)
-
-            return komand.helper.clean(hash_report["data"])
-
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
+            return {
+                Output.DATA: insightconnect_plugin_runtime.helper.clean(
+                    self.connection.client.make_request(
+                        Endpoint.lookup_hash(params.get(Input.HASH)),
+                        {"fields": AvailableInputs.HashFields, "comment": comment},
+                    ).get("data")
+                )
+            }
+        except AttributeError as e:
+            raise PluginException(
+                cause="Recorded Future returned unexpected response.",
+                assistance="Please check that the provided inputs are correct and try again.",
+                data=e,
+            )

@@ -1,12 +1,13 @@
-import komand
-import json
-from .schema import SearchUrlsInput, SearchUrlsOutput, Component, Input
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from .schema import SearchUrlsInput, SearchUrlsOutput, Input, Output, Component
 
 # Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_recorded_future.util.util import AvailableInputs
+from komand_recorded_future.util.api import Endpoint
 
 
-class SearchUrls(komand.Action):
+class SearchUrls(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="search_urls",
@@ -16,51 +17,21 @@ class SearchUrls(komand.Action):
         )
 
     def run(self, params={}):
-        riskRuleMap = {
-            "Historically Reported by Insikt Group": "analystNote",
-            "C&amp;C URL": "cncUrl",
-            "Compromised URL": "compromisedUrl",
-            "Historically Reported as a Defanged URL": "defangedURL",
-            "Historically Reported by DHS AIS": "dhsAis",
-            "Historically Reported Fraudulent Content": "fraudulentContent",
-            "Historically Reported in Threat List": "historicalThreatListMembership",
-            "Historically Detected Malicious Browser Exploits": "maliciousSiteDetected",
-            "Historically Detected Malware Distribution": "malwareSiteDetected",
-            "Historically Detected Cryptocurrency Mining Techniques": "miningSiteDetected",
-            "Historically Detected Phishing Techniques": "phishingSiteDetected",
-            "Active Phishing URL": "phishingUrl",
-            "Positive Malware Verdict": "positiveMalwareVerdict",
-            "Ransomware Distribution URL": "ransomwareDistribution",
-            "Recently Reported by Insikt Group": "recentAnalystNote",
-            "Recently Reported as a Defanged URL": "recentDefangedURL",
-            "Recently Reported by DHS AIS": "recentDhsAis",
-            "Recently Reported Fraudulent Content": "recentFraudulentContent",
-            "Recently Detected Malicious Browser Exploits": "recentMaliciousSiteDetected",
-            "Recently Detected Malware Distribution": "recentMalwareSiteDetected",
-            "Recently Detected Cryptocurrency Mining Techniques": "recentMiningSiteDetected",
-            "Recently Detected Phishing Techniques": "recentPhishingSiteDetected",
-            "Recently Referenced by Insikt Group": "recentRelatedNote",
-            "Recently Reported Spam or Unwanted Content": "recentSpamSiteDetected",
-            "Recently Detected Suspicious Content": "recentSuspiciousSiteDetected",
-            "Recently Active URL on Weaponized Domain": "recentWeaponizedURL",
-            "Historically Referenced by Insikt Group": "relatedNote",
-            "Historically Reported Spam or Unwanted Content": "spamSiteDetected",
-            "Historically Detected Suspicious Content": "suspiciousSiteDetected",
-        }
-        risk_rule = riskRuleMap.get(params.get(Input.RISKRULE))
+        params["fields"] = AvailableInputs.UrlFields
+        risk_rule = AvailableInputs.UrlRiskRuleMap.get(params.get(Input.RISKRULE))
         if risk_rule:
             params[Input.RISKRULE] = risk_rule
-
-        params[
-            "fields"
-        ] = "analystNotes,counts,enterpriseLists,entity,metrics,relatedEntities,risk,timestamps,sightings"
-
-        if not params.get(Input.RISKSCORE):
-            params[Input.RISKSCORE] = None
-
+        else:
+            params[Input.RISKRULE] = None
         try:
-            results = self.connection.client.search_urls(**params)
-            return json.loads(results._req_response._content.decode("utf-8"))
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+            return {
+                Output.DATA: insightconnect_plugin_runtime.helper.clean(
+                    self.connection.client.make_request(Endpoint.search_urls(), params).get("data", {}).get("results")
+                )
+            }
+        except AttributeError as e:
+            raise PluginException(
+                cause="Recorded Future returned unexpected response.",
+                assistance="Please check that the provided inputs are correct and try again.",
+                data=e,
+            )
