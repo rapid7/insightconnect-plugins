@@ -2313,7 +2313,7 @@ Example output:
 |Validated On|string|False|Validated on|
 |Validation URLs|[]labels|False|Validation URLs|
 
-#### cidr
+#### CIDR
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2337,7 +2337,7 @@ Example output:
 |Count|integer|False|Count|
 |Date|string|False|Date|
 
-#### cvss
+#### CVSS
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -2425,7 +2425,7 @@ Example output:
 |Threat Lists|[]threatLists|False|Threat lists|
 |Timestamps|timestamps|False|Timestamps|
 
-#### ip
+#### IP
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
