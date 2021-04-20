@@ -1,71 +1,37 @@
-import komand
-from .schema import LookupIPAddressInput, LookupIPAddressOutput, Input
-from komand.exceptions import PluginException
-import requests
-import json
+import insightconnect_plugin_runtime
+from .schema import LookupIPAddressInput, LookupIPAddressOutput, Input, Output, Component
+
+# Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_recorded_future.util.util import AvailableInputs
+from komand_recorded_future.util.api import Endpoint
 
 
-class LookupIPAddress(komand.Action):
+class LookupIPAddress(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="lookup_IP_address",
-            description="This action is used to query for data related to a specific IP address",
+            description=Component.DESCRIPTION,
             input=LookupIPAddressInput(),
             output=LookupIPAddressOutput(),
         )
 
     def run(self, params={}):
+        comment = params.get(Input.COMMENT)
+        if not comment:
+            comment = None
         try:
-            ip_address = params.get(Input.IP_ADDRESS)
-            comment = params.get(Input.COMMENT)
-
-            query_params = {
-                "fields": ",".join(
-                    [
-                        "analystNotes",
-                        "counts",
-                        "enterpriseLists",
-                        "entity",
-                        "intelCard",
-                        "metrics",
-                        "relatedEntities",
-                        "risk",
-                        "sightings",
-                        "threatLists",
-                        "timestamps",
-                        "location",
-                        "riskyCIDRIPs",
-                    ]
+            return {
+                Output.DATA: insightconnect_plugin_runtime.helper.clean(
+                    self.connection.client.make_request(
+                        Endpoint.lookup_ip_address(params.get(Input.IP_ADDRESS)),
+                        {"fields": AvailableInputs.IpFields, "comment": comment},
+                    ).get("data")
                 )
             }
-
-            if comment and len(comment):
-                query_params["comment"] = comment
-
-            # move to raw, API was unable to handle error data returned
-            headers = self.connection.headers
-            resp = requests.get(
-                f"https://api.recordedfuture.com/v2/ip/{ip_address}",
-                params=query_params,
-                headers=headers,
+        except AttributeError as e:
+            raise PluginException(
+                cause="Recorded Future returned unexpected response.",
+                assistance="Please check that the provided inputs are correct and try again.",
+                data=e,
             )
-            data = resp.json()
-
-            # IP Not found
-            if data.get("error", {}).get("message", "") == "Not found":
-                self.logger.error("Error: " + json.dumps(data.get("error")))
-                self.logger.error(f"IP {ip_address} not found")
-                return {"found": False}
-
-            if data.get("error", False):
-                self.logger.error("Error:" + json.dumps(data.get("error")))
-                return {"found": False}
-
-            data["data"]["found"] = True
-            return komand.helper.clean(data["data"])
-
-        except Exception as e:
-            if isinstance(e, dict):
-                raise PluginException(cause=("Error: ", json.dumps(e)))
-
-            raise PluginException(cause=f"Error: {e}")

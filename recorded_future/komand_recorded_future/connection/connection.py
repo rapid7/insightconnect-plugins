@@ -1,37 +1,27 @@
-import komand
-from .schema import ConnectionSchema
+import insightconnect_plugin_runtime
+from .schema import ConnectionSchema, Input
 
 # Custom imports below
-from rfapi import ApiV2Client
-from komand_recorded_future.util import demo_test
+from komand_recorded_future.util.api import RecordedFutureApi
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
+from komand_recorded_future.util.api import Endpoint
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.client = None
         self.token = None
 
-    def connect(self, params):
-        self.token = params.get("api_key").get("secretKey")
-        self.app_version = self.setup_custom_header()
-        self.app_name = "rapid7_insightconnect"
-        self.headers = {
-            "User-Agent": f"{self.app_name}/{self.app_version}",
-            "X-RFToken": self.token,
-        }
-
-        self.client = ApiV2Client(auth=self.token, app_name=self.app_name, app_version=self.app_version)
+    def connect(self, params={}):
+        self.token = params.get(Input.API_KEY).get("secretKey")
+        self.client = RecordedFutureApi(self.logger, self.meta, self.token)
 
     def test(self):
-        return demo_test.demo_test(self.token)
-
-    def setup_custom_header(self):
-        try:  # This may not be defined in local komand instances.
-            version = self.meta.version
-        except AttributeError:
-            version = "test-version"
-
-        self.logger.info(f"Plugin Version: {version}")
-
-        return version
+        try:
+            self.client.make_request(Endpoint.list_hash_risk_rules())
+        except PluginException:
+            raise ConnectionTestException(
+                cause="Connection error.", assistance="Please check that your API key is correct."
+            )
+        return {"status": "Success"}

@@ -1,25 +1,26 @@
-import komand
-import requests
-from .schema import ListHashRiskRulesInput, ListHashRiskRulesOutput
+import insightconnect_plugin_runtime
+from .schema import ListHashRiskRulesInput, ListHashRiskRulesOutput, Output, Component
+
+# Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_recorded_future.util.api import Endpoint
 
 
-class ListHashRiskRules(komand.Action):
+class ListHashRiskRules(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="list_hash_risk_rules",
-            description="This action is used to list available filtration rules for hash risk lists",
+            description=Component.DESCRIPTION,
             input=ListHashRiskRulesInput(),
             output=ListHashRiskRulesOutput(),
         )
 
     def run(self, params={}):
         try:
-            risklist = params.get("list")
-            query_headers = self.connection.headers
-            results = requests.get(
-                "https://api.recordedfuture.com/v2/hash/riskrules",
-                headers=query_headers,
-            ).json()
-            return {"risk_rules": results["data"]["results"]}
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
+            return {
+                Output.RISK_RULES: self.connection.client.make_request(Endpoint.list_hash_risk_rules())
+                .get("data", {})
+                .get("results")
+            }
+        except AttributeError as e:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)

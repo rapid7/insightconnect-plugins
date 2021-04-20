@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Recorded Future"
 Vendor = "rapid7"
-Version = "4.0.4"
+Version = "5.0.0"
 Description = "Recorded Future arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7 InsightConnect, users can search domain lists, entity lists, and more"
 
 
@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from komand_recorded_future import connection, actions, triggers
 
-    class ICONRecordedFuture(komand.Plugin):
+    class ICONRecordedFuture(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -88,7 +88,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONRecordedFuture())
+    cli = insightconnect_plugin_runtime.CLI(ICONRecordedFuture())
     cli.run()
 
 

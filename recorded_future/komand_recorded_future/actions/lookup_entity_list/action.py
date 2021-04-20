@@ -1,23 +1,32 @@
-import komand
-import requests
-from .schema import LookupEntityListInput, LookupEntityListOutput
+import insightconnect_plugin_runtime
+from .schema import LookupEntityListInput, LookupEntityListOutput, Input, Output, Component
+
+# Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_recorded_future.util.api import Endpoint
 
 
-class LookupEntityList(komand.Action):
+class LookupEntityList(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="lookup_entity_list",
-            description="This action is used to fetch a specified entity list by ID",
+            description=Component.DESCRIPTION,
             input=LookupEntityListInput(),
             output=LookupEntityListOutput(),
         )
 
     def run(self, params={}):
         try:
-            list_id = params.get("entity_list_id")
-            query_headers = self.connection.headers
-            query_url = "https://api.recordedfuture.com/v2/entitylist/" + list_id
-            results = requests.get(query_url, headers=query_headers)
-            return results.json()
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
+            return {
+                Output.ENTITIES: insightconnect_plugin_runtime.helper.clean(
+                    self.connection.client.make_request(Endpoint.lookup_entity_list(params.get(Input.ENTITY_LIST_ID)))
+                    .get("data")
+                    .get("results")
+                )
+            }
+        except AttributeError as e:
+            raise PluginException(
+                cause="Recorded Future returned unexpected response.",
+                assistance="Please check that the provided input is correct and try again.",
+                data=e,
+            )
