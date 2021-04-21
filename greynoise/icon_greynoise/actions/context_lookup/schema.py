@@ -9,7 +9,7 @@ class Component:
 
 class Input:
     IP_ADDRESS = "ip_address"
-    
+
 
 class Output:
     ACTOR = "actor"
@@ -27,10 +27,11 @@ class Output:
     VIZ_URL = "viz_url"
     VPN = "vpn"
     VPN_SERVICE = "vpn_service"
-    
+
 
 class ContextLookupInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(
+        """
    {
   "type": "object",
   "title": "Variables",
@@ -46,14 +47,16 @@ class ContextLookupInput(insightconnect_plugin_runtime.Input):
     "ip_address"
   ]
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class ContextLookupOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(
+        """
    {
   "type": "object",
   "title": "Variables",
@@ -132,7 +135,7 @@ class ContextLookupOutput(insightconnect_plugin_runtime.Output):
     "tags": {
       "type": "array",
       "title": "GreyNoise Tags",
-      "description": "GreyNoise Tags Assoicated with IP",
+      "description": "GreyNoise Tags Associated with IP",
       "items": {
         "type": "string"
       },
@@ -303,7 +306,8 @@ class ContextLookupOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

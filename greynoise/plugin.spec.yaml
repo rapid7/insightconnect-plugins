@@ -132,7 +132,7 @@ types:
     tags:
       title: GreyNoise Tags
       type: "[]string"
-      description: GreyNoise Tags Assoicated with IP
+      description: GreyNoise Tags Associated with IP
       required: false
     actor:
       title: GreyNoise Actor
@@ -228,7 +228,7 @@ actions:
       tags:
         title: GreyNoise Tags
         type: "[]string"
-        description: GreyNoise Tags Assoicated with IP
+        description: GreyNoise Tags Associated with IP
         required: false
       actor:
         title: GreyNoise Actor
@@ -300,30 +300,37 @@ actions:
         title: GreyNoise RIOT
         description: Defines if IP is part of GreyNoise RIOT dataset
         type: boolean
+        required: false
       category:
         title: GreyNoise RIOT Category
         description: RIOT Category IP is part of
         type: string
+        required: false
       name:
         title: GreyNoise RIOT Vendor Name
         description: Vendor Name IP belongs to
         type: string
+        required: false
       description:
         title: GreyNoise RIOT Service Description
         description: Description of the IP service
         type: string
+        required: false
       explanation:
         title: GreyNoise RIOT Explanation
         description: Explanation for why this is likely benign
         type: string
+        required: false
       last_updated:
         title: GreyNoise RIOT Last Updated
         description: Last time this IP was updated in RIOT dataset
         type: date
+        required: false
       reference:
         title: GreyNoise RIOT Reference
         description: Additional reference information
         type: string
+        required: false
       viz_url:
         title: GreyNoise Visualizer Link
         type: string
@@ -349,14 +356,17 @@ actions:
         title: GreyNoise Noise
         description: Defines if IP is Internet Noise
         type: boolean
+        required: false
       code:
         title: API Response Code
         description: Response Code from Quick API endpoint
         type: string
+        required: false
       code_message:
         title: API Response Code Message
         description: Response Code Message from Quick API endpoint
         type: string
+        required: false
   get_tag_details:
     title: Get Tag Details
     description: Get Details of a GreyNoise Tag
@@ -366,6 +376,7 @@ actions:
         description: Tag Name to get additional Details From
         type: string
         required: true
+        example: BingBot
     output:
       name:
         title: "Tag Name"
@@ -465,10 +476,12 @@ actions:
         title: GreyNoise Noise
         description: Defines if IP is Internet Noise
         type: boolean
+        required: false
       riot:
         title: GreyNoise RIOT
         description: Defines if IP is part of GreyNoise RIOT dataset
         type: boolean
+        required: false
       classification:
         title: GreyNoise Classification
         type: string
@@ -492,5 +505,5 @@ actions:
       name:
         title: GreyNoise Name
         type: string
-        description: GreyNoise Actor or Service Name Assoicated with IP
+        description: GreyNoise Actor or Service Name Associated with IP
         required: false

@@ -77,7 +77,7 @@ Example input:
 |raw_data|raw_data|False|GreyNoise IP Raw Data|
 |seen|boolean|False|Has this IP been Seen by GreyNoise|
 |spoofable|boolean|False|IP address may be spoofed|
-|tags|[]string|False|GreyNoise Tags Assoicated with IP|
+|tags|[]string|False|GreyNoise Tags Associated with IP|
 |viz_url|string|False|Link to GreyNoise Visualizer for IP Details|
 |vpn|boolean|False|GreyNoise has identified this as a VPN|
 |vpn_service|string|False|Name of VPN Service|
@@ -86,7 +86,7 @@ Example output:
 
 ```
 {
-  "ip": "190.79.85.166", 
+  "ip": "190.79.85.166",
   "first_seen": "2021-03-27T00:00:00+00:00",
   "last_seen": "2021-04-14T00:00:00+00:00",
   "seen": true,
@@ -217,11 +217,14 @@ This action is used to get Details of a GreyNoise Tag.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|tag_name|string|None|True|Tag Name to get additional Details From|None|None|
+|tag_name|string|None|True|Tag Name to get additional Details From|None|BingBot|
 
 Example input:
 
 ```
+{
+  "tag_name": "BingBot"
+}
 ```
 
 ##### Output
@@ -278,7 +281,7 @@ Example input:
 |last_seen|string|False|Last Seen By GreyNoise|
 |link|string|False|Link to GreyNoise Visualizer for IP Details|
 |message|string|False|GreyNoise Community API Status Message|
-|name|string|False|GreyNoise Actor or Service Name Assoicated with IP|
+|name|string|False|GreyNoise Actor or Service Name Associated with IP|
 |noise|boolean|False|Defines if IP is Internet Noise|
 |riot|boolean|False|Defines if IP is part of GreyNoise RIOT dataset|
 

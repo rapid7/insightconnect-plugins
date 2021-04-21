@@ -9,7 +9,7 @@ class Component:
 
 class Input:
     IP_ADDRESS = "ip_address"
-    
+
 
 class Output:
     CLASSIFICATION = "classification"
@@ -20,10 +20,11 @@ class Output:
     NAME = "name"
     NOISE = "noise"
     RIOT = "riot"
-    
+
 
 class CommunityLookupInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(
+        """
    {
   "type": "object",
   "title": "Variables",
@@ -39,14 +40,16 @@ class CommunityLookupInput(insightconnect_plugin_runtime.Input):
     "ip_address"
   ]
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class CommunityLookupOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(
+        """
    {
   "type": "object",
   "title": "Variables",
@@ -84,7 +87,7 @@ class CommunityLookupOutput(insightconnect_plugin_runtime.Output):
     "name": {
       "type": "string",
       "title": "GreyNoise Name",
-      "description": "GreyNoise Actor or Service Name Assoicated with IP",
+      "description": "GreyNoise Actor or Service Name Associated with IP",
       "order": 8
     },
     "noise": {
@@ -101,7 +104,8 @@ class CommunityLookupOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
