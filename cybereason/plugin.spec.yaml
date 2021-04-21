@@ -4,7 +4,7 @@ products: [insightconnect]
 name: cybereason
 title: Cybereason
 description: The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin
-version: 1.1.0
+version: 1.2.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -385,6 +385,79 @@ types:
       type: integer
       description: Total number of probes
       required: false
+  statusLog:
+    machineId:
+      title: Machine ID
+      description: The unique ID for the machine or machines on which the remediation was performed
+      type: string
+      required: false
+    targetID:
+      title: Target ID
+      description: Reports a null value
+      type: string
+      required: false
+    status:
+      title: Status
+      description: The status of the remediation request
+      type: string
+      required: false
+    actionType:
+      title: Action Type
+      description: The type of action you attempted to perform
+      type: string
+      required: false
+    timestamp:
+      title: Timestamp
+      description: The time (in epoch) of the status report for the remediation request
+      type: integer
+      required: false
+  error:
+    message:
+      title: Message
+      description: A description of the error
+      type: string
+      required: false
+    errorType:
+      title: Error Type
+      description: The type of error
+      type: string
+      required: false
+  remediate_items:
+    malopId:
+      title: Malop ID
+      description: The numerical identifier of the Malop assigned by Cybereason
+      type: string
+      required: false
+    remediationID:
+      title: Remediation ID
+      description: The numerical identifier of the Malop assigned by Cybereason
+      type: string
+      required: false
+    start:
+      title: Start
+      description: The time (in epoch) that the remediation operation began
+      type: integer
+      required: false
+    end:
+      title: End
+      description: The time (in epoch) that the remediation operation ended
+      type: integer
+      required: false
+    initiatingUser:
+      title: Initiating User
+      description: The Cybereason user name of the user initiating the remediation
+      type: string
+      required: false
+    statusLog:
+      title: Status Log
+      description: An object containing information about the remediation
+      type: '[]statusLog'
+      required: false
+    error:
+      title: Error
+      description: An object containing details of the error
+      type: '[]error'
+      required: false
 connection:
   hostname:
     title: Host
@@ -460,4 +533,32 @@ actions:
         title: Malop Response
         description: Malop response
         type: object
+        required: true
+  quarantine_file:
+    title: Quarantine File
+    description: This action is used to quarantine a detected malicious file in a secure location or unquarantine a file
+    input:
+      malop_id:
+        title: Malop ID
+        description: Malop ID related to the file you wish to quarantine or unquaratine
+        type: string
+        required: true
+        example: "22.2787422324806222966"
+      sensor:
+        title: Sensor
+        description: The unique identifier of the machine you wish to perform the quarantine/unquarantine operation on, this can be an internal IPv4 address, hostname or sensor GUID
+        type: string
+        required: true
+        example: "-1632138521.1198775089551518743"
+      quarantine:
+        title: Quaratine
+        description: True to quarantine a file, False to remove file quarantine
+        type: boolean
+        required: true
+        example: true
+    output:
+      remediate_items_response:
+        title: Remediate Items Response
+        description: Remediate items response
+        type: remediate_items
         required: true

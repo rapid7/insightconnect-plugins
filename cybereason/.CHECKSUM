@@ -1,11 +1,15 @@
 {
-	"spec": "2a6f9b8b30f10b7fcfb6000c3236f54c",
-	"manifest": "ef9d9c4a10b9c149cdf1f6b3226323b6",
-	"setup": "85bf489a7472140be0dae6bc3ac34cc3",
+	"spec": "d2736d80d4073a33d610e87fd3bd3db2",
+	"manifest": "a40eaf1d5c7abbd5c2b146098cd1be71",
+	"setup": "f39c9646122e6a25762e62bba6de9692",
 	"schemas": [
 		{
 			"identifier": "isolate_machine/schema.py",
 			"hash": "df2fe4e3aeda904ff9ff54f1a2b6fd3c"
+		},
+		{
+			"identifier": "quarantine_file/schema.py",
+			"hash": "80efcddce0ee82dd460df8ed6a52bc37"
 		},
 		{
 			"identifier": "search_for_files/schema.py",

@@ -41,6 +41,40 @@ Example input:
 
 ### Actions
 
+#### Quarantine File
+
+This action this action is used to quarantine a detected malicious file in a secure location or unquarantine a file.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|malop_id|string|None|True|Malop ID related to the file you wish to quarantine or unquaratine|None|22.2787422324806222966|
+|quarantine|boolean|None|True|True to quarantine a file, False to remove file quarantine|None|True|
+|sensor|string|None|True|The unique identifier of the machine you wish to perform the quarantine/unquarantine operation on, this can be an internal IPv4 address, hostname or sensor GUID|None|-1632138521.1198775089551518743|
+
+Example input:
+
+```
+{
+  "malop_id": "22.2787422324806222966",
+  "quarantine": true,
+  "sensor": "-1632138521.1198775089551518743"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|remediate_items_response|remediate_items|True|Remediate items response|
+
+Example output:
+
+```
+
+```
+
 #### Isolate Machine
 
 This action is used to isolate a machine associated with the root cause of a Malop, or to remediate a process not involved in a malop.
@@ -218,6 +252,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.0 - Add new action Quarantine File
 * 1.1.0 - Add new action Isolate Machine
 * 1.0.0 - Initial plugin
 
