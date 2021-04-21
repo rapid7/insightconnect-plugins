@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CalculateInput, CalculateOutput, Input, Output, Component
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from simpleeval import simple_eval
 
 
-class Calculate(komand.Action):
+class Calculate(insightconnect_plugin_runtime.Action):
     _result = None
 
     def __init__(self):
