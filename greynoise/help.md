@@ -1,7 +1,7 @@
 # Description
 
-GreyNoise helps analysts recognize events not worth their attention. Indicators in GreyNoise are likely associated with 
-opportunistic internet scanning or common business services, not targeted threats. This context helps analysts focus 
+GreyNoise helps analysts recognize events not worth their attention. Indicators in GreyNoise are likely associated with
+opportunistic internet scanning or common business services, not targeted threats. This context helps analysts focus
 on what matters most.  The GreyNoise Plugin provides users with context on an IP address around the activity
 GreyNoise has observed.
 
@@ -18,8 +18,7 @@ More information can be found at [greynoise.io/tech](https://greynoise.io/tech)
 
 * Requires an API Key for the GreyNoise API [GreyNoise Account Details](https://viz.greynoise.io/account)
 * A free trial can be created on the [GreyNoise Visualizer](https://viz.greynoise.io/signup)
-* For Users with Community API Access only, a Community API key is required, and the only action supported is the
-Community IP Lookup.  Other actions will fail with a 401 for a Community API key.
+* For Users with Community API Access only, a Community API key is required, and the only action supported is the Community IP Lookup.  Other actions will fail with a 401 for a Community API key.
 
 # Documentation
 
@@ -30,13 +29,14 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_secret_key|None|True|API key from GreyNoise Account|None|abcdefghijklmnopqrstuvwxyz0123456789|
-|server|string|https://api.greynoise.io|True||None|None|
+|server|string|https://api.greynoise.io|True||None|https://api.greynoise.io|
 
 Example input:
 
 ```
 {
-  "credentials": "abcdefghijklmnopqrstuvwxyz0123456789"
+  "credentials": "abcdefghijklmnopqrstuvwxyz0123456789",
+  "server": "https://api.greynoise.io"
 }
 ```
 
@@ -52,13 +52,13 @@ This action is used to query a routable IPv4 address in the GreyNoise Context AP
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|ip_address|string|None|True|Routable IPv4 address to query|None|None|
+|ip_address|string|None|True|Routable IPv4 address to query|None|1.2.3.4|
 
 Example input:
 
 ```
 {
-  "ip_address": "190.79.85.166"
+  "ip_address": "1.2.3.4"
 }
 ```
 
@@ -87,27 +87,27 @@ Example output:
 ```
 {
   "ip": "190.79.85.166", 
-  "first_seen": "2021-03-27T00:00:00+00:00", 
-  "last_seen": "2021-04-14T00:00:00+00:00", 
-  "seen": true, 
-  "tags": ["Eternalblue"], 
-  "actor": "unknown", 
-  "spoofable": false, 
-  "classification": "malicious", 
-  "cve": ["CVE-2017-0144"], 
-  "bot": false, 
-  "vpn": false, 
-  "vpn_service": "", 
+  "first_seen": "2021-03-27T00:00:00+00:00",
+  "last_seen": "2021-04-14T00:00:00+00:00",
+  "seen": true,
+  "tags": ["Eternalblue"],
+  "actor": "unknown",
+  "spoofable": false,
+  "classification": "malicious",
+  "cve": ["CVE-2017-0144"],
+  "bot": false,
+  "vpn": false,
+  "vpn_service": "",
   "metadata": {
-    "asn": "AS8048", 
-    "city": "Caracas", 
-    "country": "Venezuela", 
-    "country_code": "VE", 
-    "organization": "CANTV Servicios, Venezuela", 
-    "category": "isp", 
-    "tor": false, 
-    "rdns": "190-79-85-166.dyn.dsl.cantv.net", 
-    "os": "Windows 7/8", 
+    "asn": "AS8048",
+    "city": "Caracas",
+    "country": "Venezuela",
+    "country_code": "VE",
+    "organization": "CANTV Servicios, Venezuela",
+    "category": "isp",
+    "tor": false,
+    "rdns": "190-79-85-166.dyn.dsl.cantv.net",
+    "os": "Windows 7/8",
     "region": "Distrito Federal"
     },
   "raw_data": {
@@ -115,8 +115,8 @@ Example output:
       "port": 445,
       "protocol": "TCP"
       }],
-    "web": {}, 
-    "ja3": [], 
+    "web": {},
+    "ja3": [],
     "hassh": []
   }
 }
@@ -130,13 +130,13 @@ This action is used to query a routable IPv4 address in the GreyNoise Quick API 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|ip_address|string|None|True|Routable IPv4 address to query|None|None|
+|ip_address|string|None|True|Routable IPv4 address to query|None|1.2.3.4|
 
 Example input:
 
 ```
 {
-  "ip_address": "1.1.1.1"
+  "ip_address": "1.2.3.4"
 }
 ```
 
@@ -153,9 +153,9 @@ Example output:
 
 ```
 {
-  "ip": "1.1.1.1", 
-  "noise": false, 
-  "code": "0x00", 
+  "ip": "1.1.1.1",
+  "noise": false,
+  "code": "0x00",
   "code_message": "IP has never been observed scanning the Internet"
 }
 ```
@@ -168,13 +168,13 @@ This action is used to query a routable IPv4 address in the GreyNoise RIOT API e
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|ip_address|string|None|True|Routable IPv4 address to query|None|None|
+|ip_address|string|None|True|Routable IPv4 address to query|None|1.2.3.4|
 
 Example input:
 
 ```
 {
-  "ip_address": "1.1.1.1"
+  "ip_address": "1.2.3.4"
 }
 ```
 
@@ -196,14 +196,14 @@ Example output:
 
 ```
 {
-  "ip": "8.8.8.8", 
-  "riot": true, 
-  "category": "public_dns", 
-  "name": "Google Public DNS", 
-  "description": "Google's global domain name system (DNS) resolution service.", 
-  "explanation": "Public DNS services are used as alternatives to ISP's name servers. You may see devices on your 
-    network communicating with Google Public DNS over port 53/TCP or 53/UDP to resolve DNS lookups.", 
-  "last_updated": "2021-04-20T13:55:41Z", 
+  "ip": "8.8.8.8",
+  "riot": true,
+  "category": "public_dns",
+  "name": "Google Public DNS",
+  "description": "Google's global domain name system (DNS) resolution service.",
+  "explanation": "Public DNS services are used as alternatives to ISP's name servers. You may see devices on your
+    network communicating with Google Public DNS over port 53/TCP or 53/UDP to resolve DNS lookups.",
+  "last_updated": "2021-04-20T13:55:41Z",
   "reference": "https://developers.google.com/speed/public-dns/docs/isp#alternative",
   "viz_url": "https://viz.greynoise.io/riot/8.8.8.8"}
 }
@@ -222,9 +222,6 @@ This action is used to get Details of a GreyNoise Tag.
 Example input:
 
 ```
-{
-  "tag_name": "BingBot"
-}
 ```
 
 ##### Output
@@ -243,13 +240,13 @@ Example output:
 
 ```
 {
-  "name": "BingBot", 
-  "category": "search_engine", 
-  "intention": "benign", 
-  "description": "This IP address belongs to Bing, Microsoft's search engine. It is used to crawl web servers around 
-    the Internet and index content for search.", 
-  "references": [], 
-  "recommend_block": false, 
+  "name": "BingBot",
+  "category": "search_engine",
+  "intention": "benign",
+  "description": "This IP address belongs to Bing, Microsoft's search engine. It is used to crawl web servers around
+    the Internet and index content for search.",
+  "references": [],
+  "recommend_block": false,
   "cves": []
 }
 ```
@@ -262,13 +259,13 @@ This action is used to query a routable IPv4 address in the GreyNoise Community 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|ip_address|string|None|True|Routable IPv4 address to query|None|None|
+|ip_address|string|None|True|Routable IPv4 address to query|None|1.2.3.4|
 
 Example input:
 
 ```
 {
-  "ip_address": "1.1.1.1"
+  "ip_address": "1.2.3.4"
 }
 ```
 
@@ -308,14 +305,14 @@ This action is used to perform a GreyNoise GNQL Query.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|query|string|None|True|Query in GreyNoise Query Language (GNQL) Syntax|None|None|
-|size|string|10|False|Max Number of IPs to Return Data For|None|None|
+|query|string|None|True|Query in GreyNoise Query Language (GNQL) Syntax|None|last_seen:1d|
+|size|string|10|False|Max Number of IPs to Return Data For|None|10|
 
 Example input:
 
 ```
 {
-  "query": "1.1.1.1",
+  "query": "last_seen:1d",
   "size": "10"
 }
 ```
@@ -397,18 +394,22 @@ _This plugin does not contain any custom output types._
 ## Troubleshooting
 
 ### Response 401
-If the actions are returning a 401, ensure that the API key provided is valid and has an appropriate subscription or 
+
+If the actions are returning a 401, ensure that the API key provided is valid and has an appropriate subscription or
 trial associated with it.
 
 ### Response 429
-If the actions are returning a 429, check your daily rate-limit quota, as the API indicates the daily limit has been 
+
+If the actions are returning a 429, check your daily rate-limit quota, as the API indicates the daily limit has been
 reached or exceeded.
 
 ### Community API Keys
-For users with Community API Keys or Enterprise Trial Keys that have expired, the Community IP Lookup is the only 
+
+For users with Community API Keys or Enterprise Trial Keys that have expired, the Community IP Lookup is the only
 action that will continue to function.  All other actions will return an 401.  This is expected behavior.
 
 ### Other Issues
+
 For any other API or plugin related issues, feel free to reach out to [GreyNoise Support](mailto:support@greynoise.io)
 or reference the [GreyNoise Developer Documentation](https://developer.greynoise.io)
 

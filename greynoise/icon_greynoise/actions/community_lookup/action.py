@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import CommunityLookupInput, CommunityLookupOutput, Input, Output, Component
+from .schema import CommunityLookupInput, CommunityLookupOutput, Input, Component
 
 # Custom imports below
 from greynoise import GreyNoise

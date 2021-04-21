@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import ConnectionSchema, Input
+from .schema import ConnectionSchema
 
 # Custom imports below
 import re

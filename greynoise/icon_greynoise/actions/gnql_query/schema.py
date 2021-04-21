@@ -10,7 +10,7 @@ class Component:
 class Input:
     QUERY = "query"
     SIZE = "size"
-
+    
 
 class Output:
     COMPLETE = "complete"
@@ -18,11 +18,10 @@ class Output:
     DATA = "data"
     MESSAGE = "message"
     QUERY = "query"
-
+    
 
 class GnqlQueryInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -45,16 +44,14 @@ class GnqlQueryInput(insightconnect_plugin_runtime.Input):
     "query"
   ]
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class GnqlQueryOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -198,8 +195,8 @@ class GnqlQueryOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "asn": {
               "type": "string",
-              "title": "Asn",
-              "description": "Asn",
+              "title": "ASN",
+              "description": "ASN",
               "order": 1
             },
             "category": {
@@ -223,7 +220,7 @@ class GnqlQueryOutput(insightconnect_plugin_runtime.Output):
             "country_code": {
               "type": "string",
               "title": "Country Code",
-              "description": "Country code",
+              "description": "Country Code",
               "order": 5
             },
             "organization": {
@@ -234,14 +231,14 @@ class GnqlQueryOutput(insightconnect_plugin_runtime.Output):
             },
             "os": {
               "type": "string",
-              "title": "Os",
-              "description": "Os",
+              "title": "OS",
+              "description": "OS",
               "order": 7
             },
             "rdns": {
               "type": "string",
-              "title": "Rdns",
-              "description": "Rdns",
+              "title": "rDNS",
+              "description": "rDNS",
               "order": 8
             },
             "region": {
@@ -252,8 +249,8 @@ class GnqlQueryOutput(insightconnect_plugin_runtime.Output):
             },
             "tor": {
               "type": "boolean",
-              "title": "Tor",
-              "description": "Tor",
+              "title": "TOR",
+              "description": "TOR",
               "order": 10
             }
           }
@@ -264,8 +261,8 @@ class GnqlQueryOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "hassh": {
               "type": "array",
-              "title": "Hassh",
-              "description": "Hassh",
+              "title": "HASSH",
+              "description": "HASSH",
               "items": {
                 "type": "object"
               },
@@ -273,7 +270,7 @@ class GnqlQueryOutput(insightconnect_plugin_runtime.Output):
             },
             "ja3": {
               "type": "array",
-              "title": "Ja3",
+              "title": "JA3",
               "description": "Ja3",
               "items": {
                 "type": "object"
@@ -343,8 +340,8 @@ class GnqlQueryOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "asn": {
           "type": "string",
-          "title": "Asn",
-          "description": "Asn",
+          "title": "ASN",
+          "description": "ASN",
           "order": 1
         },
         "category": {
@@ -368,7 +365,7 @@ class GnqlQueryOutput(insightconnect_plugin_runtime.Output):
         "country_code": {
           "type": "string",
           "title": "Country Code",
-          "description": "Country code",
+          "description": "Country Code",
           "order": 5
         },
         "organization": {
@@ -379,14 +376,14 @@ class GnqlQueryOutput(insightconnect_plugin_runtime.Output):
         },
         "os": {
           "type": "string",
-          "title": "Os",
-          "description": "Os",
+          "title": "OS",
+          "description": "OS",
           "order": 7
         },
         "rdns": {
           "type": "string",
-          "title": "Rdns",
-          "description": "Rdns",
+          "title": "rDNS",
+          "description": "rDNS",
           "order": 8
         },
         "region": {
@@ -397,8 +394,8 @@ class GnqlQueryOutput(insightconnect_plugin_runtime.Output):
         },
         "tor": {
           "type": "boolean",
-          "title": "Tor",
-          "description": "Tor",
+          "title": "TOR",
+          "description": "TOR",
           "order": 10
         }
       }
@@ -409,8 +406,8 @@ class GnqlQueryOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "hassh": {
           "type": "array",
-          "title": "Hassh",
-          "description": "Hassh",
+          "title": "HASSH",
+          "description": "HASSH",
           "items": {
             "type": "object"
           },
@@ -418,7 +415,7 @@ class GnqlQueryOutput(insightconnect_plugin_runtime.Output):
         },
         "ja3": {
           "type": "array",
-          "title": "Ja3",
+          "title": "JA3",
           "description": "Ja3",
           "items": {
             "type": "object"
@@ -482,8 +479,7 @@ class GnqlQueryOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

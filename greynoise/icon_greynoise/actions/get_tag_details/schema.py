@@ -9,7 +9,7 @@ class Component:
 
 class Input:
     TAG_NAME = "tag_name"
-
+    
 
 class Output:
     CATEGORY = "category"
@@ -19,11 +19,10 @@ class Output:
     NAME = "name"
     RECOMMEND_BLOCK = "recommend_block"
     REFERENCES = "references"
-
+    
 
 class GetTagDetailsInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -39,16 +38,14 @@ class GetTagDetailsInput(insightconnect_plugin_runtime.Input):
     "tag_name"
   ]
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class GetTagDetailsOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -103,8 +100,7 @@ class GetTagDetailsOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

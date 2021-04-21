@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import RiotLookupInput, RiotLookupOutput, Input, Output, Component
+from .schema import RiotLookupInput, RiotLookupOutput, Input, Component
 
 # Custom imports below
 from greynoise.exceptions import RequestFailure

@@ -2,14 +2,13 @@
 from setuptools import setup, find_packages
 
 
-setup(
-    name="greynoise-greynoise-plugin",
-    version="0.1.0",
-    description="Interact with GreyNoise API",
-    author="greynoise",
-    author_email="",
-    url="",
-    packages=find_packages(),
-    install_requires=["insightconnect-plugin-runtime"],  # Add third-party dependencies to requirements.txt, not here!
-    scripts=["bin/icon_greynoise"],
-)
+setup(name="greynoise-greynoise-plugin",
+      version="1.0.0",
+      description="Interact with GreyNoise API",
+      author="greynoise",
+      author_email="",
+      url="",
+      packages=find_packages(),
+      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
+      scripts=['bin/icon_greynoise']
+      )

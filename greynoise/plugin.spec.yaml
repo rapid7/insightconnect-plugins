@@ -9,7 +9,7 @@ vendor: greynoise
 support: community
 status: []
 description: Interact with GreyNoise API
-version: 0.1.0
+version: 1.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/greynoise
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -27,54 +27,54 @@ enable_cache: true
 types:
   metadata:
     asn:
-      title: "Asn"
+      title: ASN
       type: string
-      description: "Asn"
+      description: ASN
       required: false
     category:
-      title: "Category"
+      title: Category
       type: string
-      description: "Category"
+      description: Category
       required: false
     city:
-      title: "City"
+      title: City
       type: string
-      description: "City"
+      description: City
       required: false
     country:
-      title: "Country"
+      title: Country
       type: string
-      description: "Country"
+      description: Country
       required: false
     country_code:
-      title: "Country Code"
+      title: Country Code
       type: string
-      description: "Country code"
+      description: Country Code
       required: false
     organization:
-      title: "Organization"
+      title: Organization
       type: string
-      description: "Organization"
+      description: Organization
       required: false
     os:
-      title: "Os"
+      title: OS
       type: string
-      description: "Os"
+      description: OS
       required: false
     rdns:
-      title: "Rdns"
+      title: rDNS
       type: string
-      description: "Rdns"
+      description: rDNS
       required: false
     region:
-      title: "Region"
+      title: Region
       type: string
-      description: "Region"
+      description: Region
       required: false
     tor:
-      title: "Tor"
+      title: TOR
       type: boolean
-      description: "Tor"
+      description: TOR
       required: false
   scan:
     port:
@@ -89,12 +89,12 @@ types:
       required: false
   raw_data:
     hassh:
-      title: "Hassh"
+      title: "HASSH"
       type: "[]object"
-      description: "Hassh"
+      description: "HASSH"
       required: false
     ja3:
-      title: "Ja3"
+      title: "JA3"
       type: "[]object"
       description: "Ja3"
       required: false
@@ -192,6 +192,7 @@ connection:
     type: string
     required: true
     default: "https://api.greynoise.io"
+    example: "https://api.greynoise.io"
 actions:
   context_lookup:
     title: Context IP Lookup
@@ -202,6 +203,7 @@ actions:
         description: Routable IPv4 address to query
         type: string
         required: true
+        example: 1.2.3.4
     output:
       ip:
         title: IP Queried
@@ -287,11 +289,13 @@ actions:
         description: Routable IPv4 address to query
         type: string
         required: true
+        example: 1.2.3.4
     output:
       ip:
         title: IP Queried
         description: Value that was Queried
         type: string
+        required: false
       riot:
         title: GreyNoise RIOT
         description: Defines if IP is part of GreyNoise RIOT dataset
@@ -334,11 +338,13 @@ actions:
         description: Routable IPv4 address to query
         type: string
         required: true
+        example: 1.2.3.4
     output:
       ip:
         title: IP Queried
         description: Value that was Queried
         type: string
+        required: false
       noise:
         title: GreyNoise Noise
         description: Defines if IP is Internet Noise
@@ -405,12 +411,14 @@ actions:
         description: Query in GreyNoise Query Language (GNQL) Syntax
         type: string
         required: true
+        example: "last_seen:1d"
       size:
         title: Max Size
         description: Max Number of IPs to Return Data For
         type: string
         required: false
         default: "10"
+        example: "10"
     output:
       complete:
         title: GreyNoise Query
@@ -446,11 +454,13 @@ actions:
         description: Routable IPv4 address to query
         type: string
         required: true
+        example: 1.2.3.4
     output:
       ip:
         title: IP Queried
         description: Value that was Queried
         type: string
+        required: false
       noise:
         title: GreyNoise Noise
         description: Defines if IP is Internet Noise
