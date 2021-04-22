@@ -72,7 +72,8 @@ This action is used to search for assets using filtered asset search.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|searchCriteria|object|None|True|Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|None|
+|hostname|string|None|False|The hostname|None|None|
+|ip|string|None|False|The ip|None|None|
 |size|number|0|False|The number of records to retrieve. If blank or '0' all assets that match the search will be returned|None|100|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|
 
@@ -89,7 +90,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|assets|[]asset|True|List of asset details returned by the search|
+|assets|[]search_asset|True|List of asset details returned by the search|
 
 Example output:
 
@@ -169,19 +170,20 @@ This action is used to start a scan on a site.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hosts|[]string|None|False|The hosts that should be included in the scan|None|["192.0.2.3", "192.0.2.10-192.0.2.20", "ADSRV.local"]|
-|site_id|string|None|True|ID of the site to scan|None|1|
+|asset_count|integer|None|False|Amount of assets to scan|None|None|
+|asset_ids|[]string|None|False|IDs of the assets to scan|None|["cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-135"]|
+|hostname|string|None|False|The hostname|None|None|
+|ip|string|None|False|The ip|None|None|
+|name|string|None|True|The name of the scan|None|test cloud scan|
 
 Example input:
 
 ```
 {
-  "hosts": [
-    "192.0.2.3",
-    "192.0.2.10-192.0.2.20",
-    "ADSRV.local"
+  "asset_ids": [
+    "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-135"
   ],
-  "site_id": 1
+  "name": "test cloud scan"
 }
 ```
 
@@ -190,11 +192,24 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |id|integer|False|Identifier of the resource created|
-|links|[]link|False|Hypermedia links to corresponding or related resources|
 
 Example output:
 
 ```
+{
+  "scans": [
+    {
+      "asset_ids": [
+        "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset..."
+      ],
+      "engine_id": "c8970d2ee174180e202af83b66cd0c4b",
+      "finished": null,
+      "id": "a723dbb9-9b22-46d9-b7f5-fba0ecdffec6",
+      "name": "this is a test"
+    }
+  ],
+  "unscanned_assets": []
+}
 ```
 
 ### Triggers

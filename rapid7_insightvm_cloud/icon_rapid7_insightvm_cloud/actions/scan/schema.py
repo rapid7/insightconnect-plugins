@@ -8,13 +8,15 @@ class Component:
 
 
 class Input:
-    HOSTS = "hosts"
-    SITE_ID = "site_id"
+    ASSET_COUNT = "asset_count"
+    ASSET_IDS = "asset_ids"
+    HOSTNAME = "hostname"
+    IP = "ip"
+    NAME = "name"
     
 
 class Output:
     ID = "id"
-    LINKS = "links"
     
 
 class ScanInput(insightconnect_plugin_runtime.Input):
@@ -23,24 +25,42 @@ class ScanInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "hosts": {
+    "asset_count": {
+      "type": "integer",
+      "title": "Asset Count",
+      "description": "Amount of assets to scan",
+      "order": 5
+    },
+    "asset_ids": {
       "type": "array",
-      "title": "Hosts",
-      "description": "The hosts that should be included in the scan",
+      "title": "Asset Ids",
+      "description": "IDs of the assets to scan",
       "items": {
         "type": "string"
       },
-      "order": 2
-    },
-    "site_id": {
-      "type": "string",
-      "title": "Site ID",
-      "description": "ID of the site to scan",
       "order": 1
+    },
+    "hostname": {
+      "type": "string",
+      "title": "Hostname",
+      "description": "The hostname",
+      "order": 4
+    },
+    "ip": {
+      "type": "string",
+      "title": "IP",
+      "description": "The ip",
+      "order": 3
+    },
+    "name": {
+      "type": "string",
+      "title": "Name",
+      "description": "The name of the scan",
+      "order": 2
     }
   },
   "required": [
-    "site_id"
+    "name"
   ]
 }
     """)
@@ -60,35 +80,6 @@ class ScanOutput(insightconnect_plugin_runtime.Output):
       "title": "Scan ID",
       "description": "Identifier of the resource created",
       "order": 1
-    },
-    "links": {
-      "type": "array",
-      "title": "Links",
-      "description": "Hypermedia links to corresponding or related resources",
-      "items": {
-        "$ref": "#/definitions/link"
-      },
-      "order": 2
-    }
-  },
-  "definitions": {
-    "link": {
-      "type": "object",
-      "title": "link",
-      "properties": {
-        "href": {
-          "type": "string",
-          "title": "URL",
-          "description": "A hypertext reference, which is either a URI (see RFC 3986) or URI template (see RFC 6570)",
-          "order": 1
-        },
-        "rel": {
-          "type": "string",
-          "title": "Rel",
-          "description": "Link relation type following RFC 5988",
-          "order": 2
-        }
-      }
     }
   }
 }

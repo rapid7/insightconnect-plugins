@@ -1741,6 +1741,192 @@ types:
       description: Solutions to vulnerabilities
       type: '[]resources'
       required: false
+  creds:
+    port:
+      description: The port that is used
+      title: Port
+      type: integer
+      required: false
+    protocol:
+      title: Protocol
+      description: TCP or other
+      type: string
+      required: false
+    status:
+      title: Status
+      description: Which creds apply
+      type: string
+      required: false
+  identifiers:
+    source:
+      description: The source
+      title: Source
+      type: string
+      required: false
+    id:
+      title: ID
+      description: The ID
+      type: string
+      required: false
+  asset_tag:
+    name:
+      description: The name
+      title: Name
+      type: string
+      required: false
+    type:
+      title: Type
+      description: The type
+      type: string
+      required: false
+  search_asset:
+    assessedForPolicies:
+      description: Whether the asset has been assessed for policies at least once
+      title: Assessed for Policies
+      type: boolean
+      required: false
+    assessedForVulnerabilities:
+      description: Whether the asset has been assessed for vulnerabilities at least
+        once
+      title: Assessed for Vulnerabilities
+      type: boolean
+      required: false
+    credential_assessments:
+      title: Credential Assessments
+      description: Assessments from the credentials
+      type: '[]creds'
+      required: false
+    critical_vulnerabilities:
+      title: Critical Vulnerabilities
+      description: Number of critical vulnerabilities
+      type: integer
+      required: false
+    exploits:
+      title: Exploits
+      description: Number of exploits
+      type: integer
+      required: false
+    host_name:
+      description: Primary host name (local or FQDN) of the asset
+      title: Hostname
+      type: string
+      required: false
+    id:
+      description: Identifier of the asset
+      title: ID
+      type: string
+      required: true
+    ip:
+      description: Primary IPv4 or IPv6 address of the asset
+      title: IP
+      type: string
+      required: false
+    last_assessed_for_vulnerabilities:
+      description: Date of last scan
+      title: Last Assessed For Vulnerabilities
+      type: string
+      required: false
+    last_scan_end:
+      description: When the last scan was ended
+      title: Last Scan End
+      type: string
+      required: false
+    last_scan_start:
+      description: When the last scan was started
+      title: Last Scan Start
+      type: string
+      required: false
+    mac:
+      description: Media Access Control (MAC) address, e.g. AF:12:BC:5A:F7:48
+      title: MAC
+      type: string
+      required: false
+    malware_kits:
+      description: Number of malware kits
+      title: Malware Kits
+      type: integer
+      required: false
+    moderate_vulnerabilities:
+      description: Number of moderate vulnerabilities
+      title: Moderate Vulnerabilities
+      type: integer
+      required: false
+    os_architecture:
+      description: The srchitecture of the os
+      title:  OS Architecture
+      type: string
+      required: false
+    os_description:
+      description: Description of the os
+      title: OS Description
+      type: string
+      required: false
+    os_family:
+      description: Family of the os
+      title: OS Family
+      type: string
+      required: false
+    os_name:
+      description: Name of the os
+      title: OS Name
+      type: string
+      required: false
+    os_system_name:
+      description: Name of the system os
+      title: OS System Name
+      type: string
+      required: false
+    os_type:
+      description: Type of os
+      title: OS Type
+      type: string
+      required: false
+    os_vendor:
+      description: Vendor of the os
+      title: OS Vendor
+      type: string
+      required: false
+    riskScore:
+      description: Risk score (with criticality adjustments) of the asset
+      title: Risk Score
+      type: float
+      required: false
+    severe_vulnerabilities:
+      description: Number of sever vulns
+      title: Severe Vulnerabilities
+      type: integer
+      required: false
+    tags:
+      description: Asset tags
+      title: Tags
+      type: '[]asset_tag'
+      required: false
+    total_vulnerabilities:
+      description: Total number of vulns
+      title: Total Vulnerabilities
+      type: integer
+      required: false
+    source:
+      description: Source of the asset
+      title: Source
+      type: string
+      required: false
+    unique_identifiers:
+      description: Uniqure aspects of the asset
+      title: Unique Identifiers
+      type: '[]identifiers'
+      required: false
+    new:
+      description: unknown
+      title: New
+      type: '[]string'
+      required: false
+    remediated:
+      description: unknown
+      title: Remediates
+      type: '[]string'
+      required: false
+
   
 connection:
   credentials:
@@ -1770,28 +1956,33 @@ actions:
     title: Scan
     description: Start a scan on a site
     input:
-      site_id:
-        title: Site ID
-        description: ID of the site to scan
-        type: string
-        example: 1
-        required: true
-      hosts:
-        title: Hosts
-        description: The hosts that should be included in the scan
+      asset_ids:
+        title: Asset Ids
+        description: IDs of the assets to scan
         type: "[]string"
-        example: ["192.0.2.3", "192.0.2.10-192.0.2.20", "ADSRV.local"]
+        example: ["cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-135"]
+        required: false
+      name:
+        title: Name
+        description: The name of the scan
+        type: string
+        example: "test cloud scan"
+        required: true
+      ip:
+        title: IP
+        description: The ip
+        type: string
+        required: false
+      hostname:
+        title: Hostname
+        description: The hostname
+        type: string
         required: false
     output:
       id:
         description: Identifier of the resource created
         title: Scan ID
         type: integer
-        required: false
-      links:
-        description: Hypermedia links to corresponding or related resources
-        title: Links
-        type: '[]link'
         required: false
   get_scan:
     title: Get Scan
@@ -1863,11 +2054,6 @@ actions:
     title: Asset Search
     description: Search for assets using filtered asset search
     input:
-      searchCriteria:
-        title: Search Criteria
-        description: 'Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria'
-        type: object
-        required: true
       size:
         title: Size
         description: The number of records to retrieve. If blank or '0' all assets that match the search will be returned
@@ -1881,11 +2067,21 @@ actions:
         type: object
         required: false
         example: '{"risk-score": "asc", "criticality-tag": "desc"}'
+      ip:
+        title: IP
+        description: The ip
+        type: string
+        required: false
+      hostname:
+        title: Hostname
+        description: The hostname
+        type: string
+        required: false
     output:
       assets:
         title: Assets
         description: List of asset details returned by the search
-        type: '[]asset'
+        type: '[]search_asset'
         required: true
   get_asset:
     title: Get Asset

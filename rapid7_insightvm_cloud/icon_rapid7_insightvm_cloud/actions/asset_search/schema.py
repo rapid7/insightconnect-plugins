@@ -8,7 +8,8 @@ class Component:
 
 
 class Input:
-    SEARCHCRITERIA = "searchCriteria"
+    HOSTNAME = "hostname"
+    IP = "ip"
     SIZE = "size"
     SORT_CRITERIA = "sort_criteria"
     
@@ -23,29 +24,32 @@ class AssetSearchInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "searchCriteria": {
-      "type": "object",
-      "title": "Search Criteria",
-      "description": "Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria",
-      "order": 1
+    "hostname": {
+      "type": "string",
+      "title": "Hostname",
+      "description": "The hostname",
+      "order": 4
+    },
+    "ip": {
+      "type": "string",
+      "title": "IP",
+      "description": "The ip",
+      "order": 3
     },
     "size": {
       "type": "number",
       "title": "Size",
       "description": "The number of records to retrieve. If blank or '0' all assets that match the search will be returned",
       "default": 0,
-      "order": 2
+      "order": 1
     },
     "sort_criteria": {
       "type": "object",
       "title": "Sort Criteria",
       "description": "JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)",
-      "order": 3
+      "order": 2
     }
-  },
-  "required": [
-    "searchCriteria"
-  ]
+  }
 }
     """)
 
@@ -64,7 +68,7 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
       "title": "Assets",
       "description": "List of asset details returned by the search",
       "items": {
-        "$ref": "#/definitions/asset"
+        "$ref": "#/definitions/search_asset"
       },
       "order": 1
     }
@@ -73,2323 +77,321 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
     "assets"
   ],
   "definitions": {
-    "address": {
+    "asset_tag": {
       "type": "object",
-      "title": "address",
+      "title": "asset_tag",
       "properties": {
-        "ip": {
+        "name": {
           "type": "string",
-          "title": "IP",
-          "description": "IPv4 or IPv6 address",
+          "title": "Name",
+          "description": "The name",
           "order": 1
         },
-        "mac": {
+        "type": {
           "type": "string",
-          "title": "MAC",
-          "description": "Media Access Control (MAC) address, e.g. AF:12:BC:5A:F7:48",
+          "title": "Type",
+          "description": "The type",
           "order": 2
         }
       }
     },
-    "asset": {
+    "creds": {
       "type": "object",
-      "title": "asset",
+      "title": "creds",
       "properties": {
-        "addresses": {
-          "type": "array",
-          "title": "Addresses",
-          "description": "All addresses discovered on the asset",
-          "items": {
-            "$ref": "#/definitions/address"
-          },
+        "port": {
+          "type": "integer",
+          "title": "Port",
+          "description": "The port that is used",
           "order": 1
         },
+        "protocol": {
+          "type": "string",
+          "title": "Protocol",
+          "description": "TCP or other",
+          "order": 2
+        },
+        "status": {
+          "type": "string",
+          "title": "Status",
+          "description": "Which creds apply",
+          "order": 3
+        }
+      }
+    },
+    "identifiers": {
+      "type": "object",
+      "title": "identifiers",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "The ID",
+          "order": 2
+        },
+        "source": {
+          "type": "string",
+          "title": "Source",
+          "description": "The source",
+          "order": 1
+        }
+      }
+    },
+    "search_asset": {
+      "type": "object",
+      "title": "search_asset",
+      "properties": {
         "assessedForPolicies": {
           "type": "boolean",
           "title": "Assessed for Policies",
           "description": "Whether the asset has been assessed for policies at least once",
-          "order": 2
+          "order": 1
         },
         "assessedForVulnerabilities": {
           "type": "boolean",
           "title": "Assessed for Vulnerabilities",
           "description": "Whether the asset has been assessed for vulnerabilities at least once",
+          "order": 2
+        },
+        "credential_assessments": {
+          "type": "array",
+          "title": "Credential Assessments",
+          "description": "Assessments from the credentials",
+          "items": {
+            "$ref": "#/definitions/creds"
+          },
           "order": 3
         },
-        "configurations": {
-          "type": "array",
-          "title": "Configurations",
-          "description": "Configuration key-values pairs enumerated on the asset",
-          "items": {
-            "$ref": "#/definitions/configuration"
-          },
+        "critical_vulnerabilities": {
+          "type": "integer",
+          "title": "Critical Vulnerabilities",
+          "description": "Number of critical vulnerabilities",
           "order": 4
         },
-        "databases": {
-          "type": "array",
-          "title": "Databases",
-          "description": "Databases enumerated on the asset",
-          "items": {
-            "$ref": "#/definitions/database"
-          },
+        "exploits": {
+          "type": "integer",
+          "title": "Exploits",
+          "description": "Number of exploits",
           "order": 5
         },
-        "files": {
-          "type": "array",
-          "title": "Files",
-          "description": "Files discovered with searching on the asset",
-          "items": {
-            "$ref": "#/definitions/file"
-          },
-          "order": 6
-        },
-        "history": {
-          "type": "array",
-          "title": "History",
-          "description": "History of changes to the asset over time",
-          "items": {
-            "$ref": "#/definitions/history"
-          },
-          "order": 7
-        },
-        "hostName": {
+        "host_name": {
           "type": "string",
           "title": "Hostname",
           "description": "Primary host name (local or FQDN) of the asset",
-          "order": 8
-        },
-        "hostNames": {
-          "type": "array",
-          "title": "Hostnames",
-          "description": "All hostnames or aliases discovered on the asset",
-          "items": {
-            "$ref": "#/definitions/hostName"
-          },
-          "order": 9
+          "order": 6
         },
         "id": {
           "type": "string",
           "title": "ID",
           "description": "Identifier of the asset",
-          "order": 10
-        },
-        "ids": {
-          "type": "array",
-          "title": "IDs",
-          "description": "Unique identifiers found on the asset, such as hardware or operating system identifiers",
-          "items": {
-            "$ref": "#/definitions/id"
-          },
-          "order": 11
+          "order": 7
         },
         "ip": {
           "type": "string",
           "title": "IP",
           "description": "Primary IPv4 or IPv6 address of the asset",
-          "order": 12
+          "order": 8
         },
-        "links": {
-          "type": "array",
-          "title": "Links",
-          "description": "Hypermedia links to corresponding or related resources",
-          "items": {
-            "$ref": "#/definitions/link"
-          },
-          "order": 13
+        "last_assessed_for_vulnerabilities": {
+          "type": "string",
+          "title": "Last Assessed For Vulnerabilities",
+          "description": "Date of last scan",
+          "order": 9
+        },
+        "last_scan_end": {
+          "type": "string",
+          "title": "Last Scan End",
+          "description": "When the last scan was ended",
+          "order": 10
+        },
+        "last_scan_start": {
+          "type": "string",
+          "title": "Last Scan Start",
+          "description": "When the last scan was started",
+          "order": 11
         },
         "mac": {
           "type": "string",
           "title": "MAC",
           "description": "Media Access Control (MAC) address, e.g. AF:12:BC:5A:F7:48",
+          "order": 12
+        },
+        "malware_kits": {
+          "type": "integer",
+          "title": "Malware Kits",
+          "description": "Number of malware kits",
+          "order": 13
+        },
+        "moderate_vulnerabilities": {
+          "type": "integer",
+          "title": "Moderate Vulnerabilities",
+          "description": "Number of moderate vulnerabilities",
           "order": 14
         },
-        "os": {
+        "new": {
+          "type": "array",
+          "title": "New",
+          "description": "unknown",
+          "items": {
+            "type": "string"
+          },
+          "order": 28
+        },
+        "os_architecture": {
           "type": "string",
-          "title": "OS",
-          "description": "Full description of the operating system of the asset",
+          "title": "OS Architecture",
+          "description": "The srchitecture of the os",
           "order": 15
         },
-        "osFingerprint": {
-          "$ref": "#/definitions/osFingerprint",
-          "title": "OS Fingerprint",
-          "description": "Details of the operating system of the asset",
+        "os_description": {
+          "type": "string",
+          "title": "OS Description",
+          "description": "Description of the os",
           "order": 16
         },
-        "rawRiskScore": {
-          "type": "number",
-          "title": "Raw Risk Score",
-          "description": "Base risk score of the asset",
+        "os_family": {
+          "type": "string",
+          "title": "OS Family",
+          "description": "Family of the os",
           "order": 17
+        },
+        "os_name": {
+          "type": "string",
+          "title": "OS Name",
+          "description": "Name of the os",
+          "order": 18
+        },
+        "os_system_name": {
+          "type": "string",
+          "title": "OS System Name",
+          "description": "Name of the system os",
+          "order": 19
+        },
+        "os_type": {
+          "type": "string",
+          "title": "OS Type",
+          "description": "Type of os",
+          "order": 20
+        },
+        "os_vendor": {
+          "type": "string",
+          "title": "OS Vendor",
+          "description": "Vendor of the os",
+          "order": 21
+        },
+        "remediated": {
+          "type": "array",
+          "title": "Remediates",
+          "description": "unknown",
+          "items": {
+            "type": "string"
+          },
+          "order": 29
         },
         "riskScore": {
           "type": "number",
           "title": "Risk Score",
           "description": "Risk score (with criticality adjustments) of the asset",
-          "order": 18
-        },
-        "services": {
-          "type": "array",
-          "title": "Services",
-          "description": "Services discovered on the asset",
-          "items": {
-            "$ref": "#/definitions/service"
-          },
-          "order": 19
-        },
-        "software": {
-          "type": "array",
-          "title": "Software",
-          "description": "Software discovered on the asset",
-          "items": {
-            "$ref": "#/definitions/software"
-          },
-          "order": 20
-        },
-        "type": {
-          "type": "string",
-          "title": "Type",
-          "description": "Type of asset e.g. unknown, guest, hypervisor, physical, mobile",
-          "order": 21
-        },
-        "userGroups": {
-          "type": "array",
-          "title": "User Groups",
-          "description": "User group accounts enumerated on the asset",
-          "items": {
-            "$ref": "#/definitions/userGroup"
-          },
           "order": 22
         },
-        "users": {
-          "type": "array",
-          "title": "Users",
-          "description": "User accounts enumerated on the asset",
-          "items": {
-            "$ref": "#/definitions/user"
-          },
+        "severe_vulnerabilities": {
+          "type": "integer",
+          "title": "Severe Vulnerabilities",
+          "description": "Number of sever vulns",
           "order": 23
         },
-        "vulnerabilities": {
-          "$ref": "#/definitions/vulnerabilities",
-          "title": "Vulnerabilities",
-          "description": " Summary information for vulnerabilities on the asset",
+        "source": {
+          "type": "string",
+          "title": "Source",
+          "description": "Source of the asset",
+          "order": 26
+        },
+        "tags": {
+          "type": "array",
+          "title": "Tags",
+          "description": "Asset tags",
+          "items": {
+            "$ref": "#/definitions/asset_tag"
+          },
           "order": 24
+        },
+        "total_vulnerabilities": {
+          "type": "integer",
+          "title": "Total Vulnerabilities",
+          "description": "Total number of vulns",
+          "order": 25
+        },
+        "unique_identifiers": {
+          "type": "array",
+          "title": "Unique Identifiers",
+          "description": "Uniqure aspects of the asset",
+          "items": {
+            "$ref": "#/definitions/identifiers"
+          },
+          "order": 27
         }
       },
+      "required": [
+        "id"
+      ],
       "definitions": {
-        "address": {
+        "asset_tag": {
           "type": "object",
-          "title": "address",
-          "properties": {
-            "ip": {
-              "type": "string",
-              "title": "IP",
-              "description": "IPv4 or IPv6 address",
-              "order": 1
-            },
-            "mac": {
-              "type": "string",
-              "title": "MAC",
-              "description": "Media Access Control (MAC) address, e.g. AF:12:BC:5A:F7:48",
-              "order": 2
-            }
-          }
-        },
-        "configuration": {
-          "type": "object",
-          "title": "configuration",
+          "title": "asset_tag",
           "properties": {
             "name": {
               "type": "string",
               "title": "Name",
-              "description": "Name of the configuration value",
+              "description": "The name",
               "order": 1
-            },
-            "value": {
-              "type": "string",
-              "title": "Value",
-              "description": "Configuration value",
-              "order": 2
-            }
-          }
-        },
-        "cpe": {
-          "type": "object",
-          "title": "cpe",
-          "properties": {
-            "edition": {
-              "type": "string",
-              "title": "Edition",
-              "description": "Edition-related terms applied by the vendor to the product",
-              "order": 1
-            },
-            "language": {
-              "type": "string",
-              "title": "Language",
-              "description": "Defines the language supported in the user interface of the product being described. The format of the language tag adheres to RFC 5646",
-              "order": 2
-            },
-            "other": {
-              "type": "string",
-              "title": "Other",
-              "description": "Captures any other general descriptive or identifying information which is vendor- or product-specific and which does not logically fit in any other attribute value",
-              "order": 3
-            },
-            "part": {
-              "type": "string",
-              "title": "Part",
-              "description": "A single letter code that designates the particular platform part that is being identified",
-              "order": 4
-            },
-            "product": {
-              "type": "string",
-              "title": "Product",
-              "description": "Most common and recognizable title or name of the product",
-              "order": 5
-            },
-            "swEdition": {
-              "type": "string",
-              "title": "Software Edition",
-              "description": "Characterizes how the product is tailored to a particular market or class of end users",
-              "order": 6
-            },
-            "targetHW": {
-              "type": "string",
-              "title": "Target Hardware",
-              "description": "Characterize the instruction set architecture on which the product operates",
-              "order": 7
-            },
-            "targetSW": {
-              "type": "string",
-              "title": "Target Software",
-              "description": "Characterizes the software computing environment within which the product operates",
-              "order": 8
-            },
-            "update": {
-              "type": "string",
-              "title": "Update",
-              "description": "Vendor-specific alphanumeric strings characterizing the particular update, service pack, or point release of the product",
-              "order": 9
-            },
-            "v2.2": {
-              "type": "string",
-              "title": "Version 2.2",
-              "description": "The full CPE string in the CPE 2.2 format",
-              "order": 10
-            },
-            "v2.3": {
-              "type": "string",
-              "title": "Version 2.3",
-              "description": "The full CPE string in the CPE 2.3 format",
-              "order": 11
-            },
-            "vendor": {
-              "type": "string",
-              "title": "Vendor",
-              "description": "The person or organization that manufactured or created the product",
-              "order": 12
-            },
-            "version": {
-              "type": "string",
-              "title": "Version",
-              "description": "Vendor-specific alphanumeric strings characterizing the particular release version of the product",
-              "order": 13
-            }
-          }
-        },
-        "database": {
-          "type": "object",
-          "title": "database",
-          "properties": {
-            "description": {
-              "type": "string",
-              "title": "Description",
-              "description": "Description of the database instance",
-              "order": 1
-            },
-            "id": {
-              "type": "integer",
-              "title": "ID",
-              "description": "Identifier of the database",
-              "order": 2
-            },
-            "name": {
-              "type": "string",
-              "title": "Name",
-              "description": "Name of the database instance",
-              "order": 3
-            }
-          }
-        },
-        "file": {
-          "id": "file",
-          "type": "object",
-          "title": "File",
-          "description": "File Object",
-          "properties": {
-            "content": {
-              "type": "string",
-              "title": "Content",
-              "description": "File contents",
-              "format": "bytes"
-            },
-            "filename": {
-              "type": "string",
-              "title": "Filename",
-              "description": "Name of file"
-            }
-          }
-        },
-        "history": {
-          "type": "object",
-          "title": "history",
-          "properties": {
-            "date": {
-              "type": "string",
-              "title": "Date",
-              "description": "Date the asset information was collected or changed",
-              "order": 1
-            },
-            "description": {
-              "type": "string",
-              "title": "Description",
-              "description": "Additional information describing the change",
-              "order": 2
-            },
-            "scanId": {
-              "type": "integer",
-              "title": "Scan ID",
-              "description": "If a scan-oriented change, the identifier of the corresponding scan the asset was scanned in",
-              "order": 3
             },
             "type": {
               "type": "string",
               "title": "Type",
-              "description": "Type, for additional information see the help section of this plugin",
-              "order": 4
-            },
-            "user": {
-              "type": "string",
-              "title": "User",
-              "description": "User",
-              "order": 5
-            },
-            "version": {
-              "type": "integer",
-              "title": "Version",
-              "description": "Version",
-              "order": 6
-            },
-            "vulnerabilityExceptionId": {
-              "type": "integer",
-              "title": "Vulnerability Exception ID",
-              "description": "Vulnerability exception ID",
-              "order": 7
-            }
-          }
-        },
-        "hostName": {
-          "type": "object",
-          "title": "hostName",
-          "properties": {
-            "name": {
-              "type": "string",
-              "title": "Name",
-              "description": "Name",
-              "order": 1
-            },
-            "source": {
-              "type": "string",
-              "title": "Source",
-              "description": "Source",
+              "description": "The type",
               "order": 2
             }
           }
         },
-        "id": {
+        "creds": {
           "type": "object",
-          "title": "id",
+          "title": "creds",
           "properties": {
-            "id": {
-              "type": "string",
-              "title": "ID",
-              "description": "ID",
-              "order": 1
-            },
-            "source": {
-              "type": "string",
-              "title": "Source",
-              "description": "Source",
-              "order": 2
-            }
-          }
-        },
-        "link": {
-          "type": "object",
-          "title": "link",
-          "properties": {
-            "href": {
-              "type": "string",
-              "title": "URL",
-              "description": "A hypertext reference, which is either a URI (see RFC 3986) or URI template (see RFC 6570)",
-              "order": 1
-            },
-            "rel": {
-              "type": "string",
-              "title": "Rel",
-              "description": "Link relation type following RFC 5988",
-              "order": 2
-            }
-          }
-        },
-        "osFingerprint": {
-          "type": "object",
-          "title": "osFingerprint",
-          "properties": {
-            "architecture": {
-              "type": "string",
-              "title": "Architecture",
-              "description": "The architecture of the operating system",
-              "order": 1
-            },
-            "configurations": {
-              "type": "array",
-              "title": "Configuration",
-              "description": "Configuration key-values pairs enumerated on the operating system",
-              "items": {
-                "$ref": "#/definitions/configuration"
-              },
-              "order": 2
-            },
-            "cpe": {
-              "$ref": "#/definitions/cpe",
-              "title": "CPE",
-              "description": "Common Platform Enumeration",
-              "order": 3
-            },
-            "description": {
-              "type": "string",
-              "title": "Description",
-              "description": "The description of the operating system (containing vendor, family, product, version and architecture in a single string)",
-              "order": 4
-            },
-            "family": {
-              "type": "string",
-              "title": "Family",
-              "description": "Family of the operating system",
-              "order": 5
-            },
-            "id": {
-              "type": "integer",
-              "title": "ID",
-              "description": "Identifier of the operating system",
-              "order": 6
-            },
-            "product": {
-              "type": "string",
-              "title": "Product",
-              "description": "Name of the operating system",
-              "order": 7
-            },
-            "systemName": {
-              "type": "string",
-              "title": "System Name",
-              "description": "A combination of vendor and family (with redundancies removed), suitable for grouping",
-              "order": 8
-            },
-            "type": {
-              "type": "string",
-              "title": "Type",
-              "description": "Type of operating system",
-              "order": 9
-            },
-            "vendor": {
-              "type": "string",
-              "title": "Vendor",
-              "description": "Vendor of the operating system",
-              "order": 10
-            },
-            "version": {
-              "type": "string",
-              "title": "Version",
-              "description": "Version of the operating system",
-              "order": 11
-            }
-          },
-          "definitions": {
-            "configuration": {
-              "type": "object",
-              "title": "configuration",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "title": "Name",
-                  "description": "Name of the configuration value",
-                  "order": 1
-                },
-                "value": {
-                  "type": "string",
-                  "title": "Value",
-                  "description": "Configuration value",
-                  "order": 2
-                }
-              }
-            },
-            "cpe": {
-              "type": "object",
-              "title": "cpe",
-              "properties": {
-                "edition": {
-                  "type": "string",
-                  "title": "Edition",
-                  "description": "Edition-related terms applied by the vendor to the product",
-                  "order": 1
-                },
-                "language": {
-                  "type": "string",
-                  "title": "Language",
-                  "description": "Defines the language supported in the user interface of the product being described. The format of the language tag adheres to RFC 5646",
-                  "order": 2
-                },
-                "other": {
-                  "type": "string",
-                  "title": "Other",
-                  "description": "Captures any other general descriptive or identifying information which is vendor- or product-specific and which does not logically fit in any other attribute value",
-                  "order": 3
-                },
-                "part": {
-                  "type": "string",
-                  "title": "Part",
-                  "description": "A single letter code that designates the particular platform part that is being identified",
-                  "order": 4
-                },
-                "product": {
-                  "type": "string",
-                  "title": "Product",
-                  "description": "Most common and recognizable title or name of the product",
-                  "order": 5
-                },
-                "swEdition": {
-                  "type": "string",
-                  "title": "Software Edition",
-                  "description": "Characterizes how the product is tailored to a particular market or class of end users",
-                  "order": 6
-                },
-                "targetHW": {
-                  "type": "string",
-                  "title": "Target Hardware",
-                  "description": "Characterize the instruction set architecture on which the product operates",
-                  "order": 7
-                },
-                "targetSW": {
-                  "type": "string",
-                  "title": "Target Software",
-                  "description": "Characterizes the software computing environment within which the product operates",
-                  "order": 8
-                },
-                "update": {
-                  "type": "string",
-                  "title": "Update",
-                  "description": "Vendor-specific alphanumeric strings characterizing the particular update, service pack, or point release of the product",
-                  "order": 9
-                },
-                "v2.2": {
-                  "type": "string",
-                  "title": "Version 2.2",
-                  "description": "The full CPE string in the CPE 2.2 format",
-                  "order": 10
-                },
-                "v2.3": {
-                  "type": "string",
-                  "title": "Version 2.3",
-                  "description": "The full CPE string in the CPE 2.3 format",
-                  "order": 11
-                },
-                "vendor": {
-                  "type": "string",
-                  "title": "Vendor",
-                  "description": "The person or organization that manufactured or created the product",
-                  "order": 12
-                },
-                "version": {
-                  "type": "string",
-                  "title": "Version",
-                  "description": "Vendor-specific alphanumeric strings characterizing the particular release version of the product",
-                  "order": 13
-                }
-              }
-            }
-          }
-        },
-        "page": {
-          "type": "object",
-          "title": "page",
-          "properties": {
-            "linkType": {
-              "type": "string",
-              "title": "Link Type",
-              "description": "Type of link used to traverse or detect the page",
-              "order": 1
-            },
-            "path": {
-              "type": "string",
-              "title": "Path",
-              "description": "Path to the page (URI)",
-              "order": 2
-            },
-            "response": {
-              "type": "integer",
-              "title": "Response",
-              "description": "HTTP response code observed with retrieving the page",
-              "order": 3
-            }
-          }
-        },
-        "service": {
-          "type": "object",
-          "title": "service",
-          "properties": {
-            "configurations": {
-              "type": "array",
-              "title": "Configurations",
-              "description": "Configuration key-values pairs enumerated on the service",
-              "items": {
-                "$ref": "#/definitions/configuration"
-              },
-              "order": 1
-            },
-            "databases": {
-              "type": "array",
-              "title": "Databases",
-              "description": "Databases enumerated on the service",
-              "items": {
-                "$ref": "#/definitions/database"
-              },
-              "order": 2
-            },
-            "family": {
-              "type": "string",
-              "title": "Family",
-              "description": "Family of the service",
-              "order": 3
-            },
-            "links": {
-              "type": "array",
-              "title": "Links",
-              "description": "Hypermedia links to corresponding or related resources",
-              "items": {
-                "$ref": "#/definitions/link"
-              },
-              "order": 4
-            },
-            "name": {
-              "type": "string",
-              "title": "Name",
-              "description": "Name of the service",
-              "order": 5
-            },
             "port": {
               "type": "integer",
               "title": "Port",
-              "description": "Port of the service",
-              "order": 6
-            },
-            "product": {
-              "type": "string",
-              "title": "Product",
-              "description": "Product running the service",
-              "order": 7
+              "description": "The port that is used",
+              "order": 1
             },
             "protocol": {
               "type": "string",
               "title": "Protocol",
-              "description": "Protocol of the service",
-              "order": 8
-            },
-            "userGroups": {
-              "type": "array",
-              "title": "User Groups",
-              "description": "User groups",
-              "items": {
-                "$ref": "#/definitions/userGroup"
-              },
-              "order": 9
-            },
-            "users": {
-              "type": "array",
-              "title": "Users",
-              "description": "Users",
-              "items": {
-                "$ref": "#/definitions/user"
-              },
-              "order": 10
-            },
-            "vendor": {
-              "type": "string",
-              "title": "Vendor",
-              "description": "Vendor of the service",
-              "order": 11
-            },
-            "version": {
-              "type": "string",
-              "title": "Version",
-              "description": "Version of the service",
-              "order": 12
-            },
-            "webApplications": {
-              "type": "array",
-              "title": "Web Applications",
-              "description": "Web applications found on the service",
-              "items": {
-                "$ref": "#/definitions/webApplication"
-              },
-              "order": 13
-            }
-          },
-          "definitions": {
-            "configuration": {
-              "type": "object",
-              "title": "configuration",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "title": "Name",
-                  "description": "Name of the configuration value",
-                  "order": 1
-                },
-                "value": {
-                  "type": "string",
-                  "title": "Value",
-                  "description": "Configuration value",
-                  "order": 2
-                }
-              }
-            },
-            "database": {
-              "type": "object",
-              "title": "database",
-              "properties": {
-                "description": {
-                  "type": "string",
-                  "title": "Description",
-                  "description": "Description of the database instance",
-                  "order": 1
-                },
-                "id": {
-                  "type": "integer",
-                  "title": "ID",
-                  "description": "Identifier of the database",
-                  "order": 2
-                },
-                "name": {
-                  "type": "string",
-                  "title": "Name",
-                  "description": "Name of the database instance",
-                  "order": 3
-                }
-              }
-            },
-            "link": {
-              "type": "object",
-              "title": "link",
-              "properties": {
-                "href": {
-                  "type": "string",
-                  "title": "URL",
-                  "description": "A hypertext reference, which is either a URI (see RFC 3986) or URI template (see RFC 6570)",
-                  "order": 1
-                },
-                "rel": {
-                  "type": "string",
-                  "title": "Rel",
-                  "description": "Link relation type following RFC 5988",
-                  "order": 2
-                }
-              }
-            },
-            "page": {
-              "type": "object",
-              "title": "page",
-              "properties": {
-                "linkType": {
-                  "type": "string",
-                  "title": "Link Type",
-                  "description": "Type of link used to traverse or detect the page",
-                  "order": 1
-                },
-                "path": {
-                  "type": "string",
-                  "title": "Path",
-                  "description": "Path to the page (URI)",
-                  "order": 2
-                },
-                "response": {
-                  "type": "integer",
-                  "title": "Response",
-                  "description": "HTTP response code observed with retrieving the page",
-                  "order": 3
-                }
-              }
-            },
-            "user": {
-              "type": "object",
-              "title": "user",
-              "properties": {
-                "fullName": {
-                  "type": "string",
-                  "title": "Full Name",
-                  "description": "Full name of the user account",
-                  "order": 1
-                },
-                "id": {
-                  "type": "integer",
-                  "title": "ID",
-                  "description": "Identifier of the user account",
-                  "order": 2
-                },
-                "name": {
-                  "type": "string",
-                  "title": "Name",
-                  "description": "Name of the user account",
-                  "order": 3
-                }
-              }
-            },
-            "userGroup": {
-              "type": "object",
-              "title": "userGroup",
-              "properties": {
-                "id": {
-                  "type": "integer",
-                  "title": "ID",
-                  "description": "Identifier of the user group",
-                  "order": 1
-                },
-                "name": {
-                  "type": "string",
-                  "title": "Name",
-                  "description": "Name of the user group",
-                  "order": 2
-                }
-              }
-            },
-            "webApplication": {
-              "type": "object",
-              "title": "webApplication",
-              "properties": {
-                "id": {
-                  "type": "integer",
-                  "title": "ID",
-                  "description": "Identifier of the web application",
-                  "order": 1
-                },
-                "pages": {
-                  "type": "array",
-                  "title": "Pages",
-                  "description": "Pages",
-                  "items": {
-                    "$ref": "#/definitions/page"
-                  },
-                  "order": 2
-                },
-                "root": {
-                  "type": "string",
-                  "title": "Root",
-                  "description": "Web root of the web application",
-                  "order": 3
-                },
-                "virtualHost": {
-                  "type": "string",
-                  "title": "Virtual Host",
-                  "description": "Virtual host of the web application",
-                  "order": 4
-                }
-              },
-              "definitions": {
-                "page": {
-                  "type": "object",
-                  "title": "page",
-                  "properties": {
-                    "linkType": {
-                      "type": "string",
-                      "title": "Link Type",
-                      "description": "Type of link used to traverse or detect the page",
-                      "order": 1
-                    },
-                    "path": {
-                      "type": "string",
-                      "title": "Path",
-                      "description": "Path to the page (URI)",
-                      "order": 2
-                    },
-                    "response": {
-                      "type": "integer",
-                      "title": "Response",
-                      "description": "HTTP response code observed with retrieving the page",
-                      "order": 3
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "software": {
-          "type": "object",
-          "title": "software",
-          "properties": {
-            "configurations": {
-              "type": "array",
-              "title": "Configurations",
-              "description": "Configurations",
-              "items": {
-                "$ref": "#/definitions/configuration"
-              },
-              "order": 1
-            },
-            "cpe": {
-              "$ref": "#/definitions/cpe",
-              "title": "CPE",
-              "description": "CPE",
+              "description": "TCP or other",
               "order": 2
             },
-            "description": {
+            "status": {
               "type": "string",
-              "title": "Description",
-              "description": "Description of the software",
-              "order": 3
-            },
-            "family": {
-              "type": "string",
-              "title": "Family",
-              "description": "Family of the software",
-              "order": 4
-            },
-            "id": {
-              "type": "integer",
-              "title": "ID",
-              "description": "ID",
-              "order": 5
-            },
-            "product": {
-              "type": "string",
-              "title": "Product",
-              "description": "Product of the software",
-              "order": 6
-            },
-            "type": {
-              "type": "string",
-              "title": "Type",
-              "description": "Type of the software",
-              "order": 7
-            },
-            "vendor": {
-              "type": "string",
-              "title": "Vendor",
-              "description": "Vendor of the software",
-              "order": 8
-            },
-            "version": {
-              "type": "string",
-              "title": "Version",
-              "description": "Version of the software",
-              "order": 9
-            }
-          },
-          "definitions": {
-            "configuration": {
-              "type": "object",
-              "title": "configuration",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "title": "Name",
-                  "description": "Name of the configuration value",
-                  "order": 1
-                },
-                "value": {
-                  "type": "string",
-                  "title": "Value",
-                  "description": "Configuration value",
-                  "order": 2
-                }
-              }
-            },
-            "cpe": {
-              "type": "object",
-              "title": "cpe",
-              "properties": {
-                "edition": {
-                  "type": "string",
-                  "title": "Edition",
-                  "description": "Edition-related terms applied by the vendor to the product",
-                  "order": 1
-                },
-                "language": {
-                  "type": "string",
-                  "title": "Language",
-                  "description": "Defines the language supported in the user interface of the product being described. The format of the language tag adheres to RFC 5646",
-                  "order": 2
-                },
-                "other": {
-                  "type": "string",
-                  "title": "Other",
-                  "description": "Captures any other general descriptive or identifying information which is vendor- or product-specific and which does not logically fit in any other attribute value",
-                  "order": 3
-                },
-                "part": {
-                  "type": "string",
-                  "title": "Part",
-                  "description": "A single letter code that designates the particular platform part that is being identified",
-                  "order": 4
-                },
-                "product": {
-                  "type": "string",
-                  "title": "Product",
-                  "description": "Most common and recognizable title or name of the product",
-                  "order": 5
-                },
-                "swEdition": {
-                  "type": "string",
-                  "title": "Software Edition",
-                  "description": "Characterizes how the product is tailored to a particular market or class of end users",
-                  "order": 6
-                },
-                "targetHW": {
-                  "type": "string",
-                  "title": "Target Hardware",
-                  "description": "Characterize the instruction set architecture on which the product operates",
-                  "order": 7
-                },
-                "targetSW": {
-                  "type": "string",
-                  "title": "Target Software",
-                  "description": "Characterizes the software computing environment within which the product operates",
-                  "order": 8
-                },
-                "update": {
-                  "type": "string",
-                  "title": "Update",
-                  "description": "Vendor-specific alphanumeric strings characterizing the particular update, service pack, or point release of the product",
-                  "order": 9
-                },
-                "v2.2": {
-                  "type": "string",
-                  "title": "Version 2.2",
-                  "description": "The full CPE string in the CPE 2.2 format",
-                  "order": 10
-                },
-                "v2.3": {
-                  "type": "string",
-                  "title": "Version 2.3",
-                  "description": "The full CPE string in the CPE 2.3 format",
-                  "order": 11
-                },
-                "vendor": {
-                  "type": "string",
-                  "title": "Vendor",
-                  "description": "The person or organization that manufactured or created the product",
-                  "order": 12
-                },
-                "version": {
-                  "type": "string",
-                  "title": "Version",
-                  "description": "Vendor-specific alphanumeric strings characterizing the particular release version of the product",
-                  "order": 13
-                }
-              }
-            }
-          }
-        },
-        "user": {
-          "type": "object",
-          "title": "user",
-          "properties": {
-            "fullName": {
-              "type": "string",
-              "title": "Full Name",
-              "description": "Full name of the user account",
-              "order": 1
-            },
-            "id": {
-              "type": "integer",
-              "title": "ID",
-              "description": "Identifier of the user account",
-              "order": 2
-            },
-            "name": {
-              "type": "string",
-              "title": "Name",
-              "description": "Name of the user account",
+              "title": "Status",
+              "description": "Which creds apply",
               "order": 3
             }
           }
         },
-        "userGroup": {
+        "identifiers": {
           "type": "object",
-          "title": "userGroup",
+          "title": "identifiers",
           "properties": {
             "id": {
-              "type": "integer",
+              "type": "string",
               "title": "ID",
-              "description": "Identifier of the user group",
-              "order": 1
-            },
-            "name": {
-              "type": "string",
-              "title": "Name",
-              "description": "Name of the user group",
-              "order": 2
-            }
-          }
-        },
-        "vulnerabilities": {
-          "type": "object",
-          "title": "vulnerabilities",
-          "properties": {
-            "critical": {
-              "type": "integer",
-              "title": "Critical",
-              "description": "Number of critical vulnerabilities",
-              "order": 1
-            },
-            "exploits": {
-              "type": "integer",
-              "title": "Exploits",
-              "description": "Number of distinct exploits that can exploit any of the vulnerabilities on the asset",
+              "description": "The ID",
               "order": 2
             },
-            "malwareKits": {
-              "type": "integer",
-              "title": "Malware Kits",
-              "description": "Number of distinct malware kits that vulnerabilities on the asset are susceptible to",
-              "order": 3
-            },
-            "moderate": {
-              "type": "integer",
-              "title": "Moderate",
-              "description": "Number of moderate vulnerabilities",
-              "order": 4
-            },
-            "severe": {
-              "type": "integer",
-              "title": "Severe",
-              "description": "Number of severe vulnerabilities",
-              "order": 5
-            },
-            "total": {
-              "type": "integer",
-              "title": "Total",
-              "description": "Total number of vulnerabilities",
-              "order": 6
-            }
-          }
-        },
-        "webApplication": {
-          "type": "object",
-          "title": "webApplication",
-          "properties": {
-            "id": {
-              "type": "integer",
-              "title": "ID",
-              "description": "Identifier of the web application",
+            "source": {
+              "type": "string",
+              "title": "Source",
+              "description": "The source",
               "order": 1
-            },
-            "pages": {
-              "type": "array",
-              "title": "Pages",
-              "description": "Pages",
-              "items": {
-                "$ref": "#/definitions/page"
-              },
-              "order": 2
-            },
-            "root": {
-              "type": "string",
-              "title": "Root",
-              "description": "Web root of the web application",
-              "order": 3
-            },
-            "virtualHost": {
-              "type": "string",
-              "title": "Virtual Host",
-              "description": "Virtual host of the web application",
-              "order": 4
-            }
-          },
-          "definitions": {
-            "page": {
-              "type": "object",
-              "title": "page",
-              "properties": {
-                "linkType": {
-                  "type": "string",
-                  "title": "Link Type",
-                  "description": "Type of link used to traverse or detect the page",
-                  "order": 1
-                },
-                "path": {
-                  "type": "string",
-                  "title": "Path",
-                  "description": "Path to the page (URI)",
-                  "order": 2
-                },
-                "response": {
-                  "type": "integer",
-                  "title": "Response",
-                  "description": "HTTP response code observed with retrieving the page",
-                  "order": 3
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "configuration": {
-      "type": "object",
-      "title": "configuration",
-      "properties": {
-        "name": {
-          "type": "string",
-          "title": "Name",
-          "description": "Name of the configuration value",
-          "order": 1
-        },
-        "value": {
-          "type": "string",
-          "title": "Value",
-          "description": "Configuration value",
-          "order": 2
-        }
-      }
-    },
-    "cpe": {
-      "type": "object",
-      "title": "cpe",
-      "properties": {
-        "edition": {
-          "type": "string",
-          "title": "Edition",
-          "description": "Edition-related terms applied by the vendor to the product",
-          "order": 1
-        },
-        "language": {
-          "type": "string",
-          "title": "Language",
-          "description": "Defines the language supported in the user interface of the product being described. The format of the language tag adheres to RFC 5646",
-          "order": 2
-        },
-        "other": {
-          "type": "string",
-          "title": "Other",
-          "description": "Captures any other general descriptive or identifying information which is vendor- or product-specific and which does not logically fit in any other attribute value",
-          "order": 3
-        },
-        "part": {
-          "type": "string",
-          "title": "Part",
-          "description": "A single letter code that designates the particular platform part that is being identified",
-          "order": 4
-        },
-        "product": {
-          "type": "string",
-          "title": "Product",
-          "description": "Most common and recognizable title or name of the product",
-          "order": 5
-        },
-        "swEdition": {
-          "type": "string",
-          "title": "Software Edition",
-          "description": "Characterizes how the product is tailored to a particular market or class of end users",
-          "order": 6
-        },
-        "targetHW": {
-          "type": "string",
-          "title": "Target Hardware",
-          "description": "Characterize the instruction set architecture on which the product operates",
-          "order": 7
-        },
-        "targetSW": {
-          "type": "string",
-          "title": "Target Software",
-          "description": "Characterizes the software computing environment within which the product operates",
-          "order": 8
-        },
-        "update": {
-          "type": "string",
-          "title": "Update",
-          "description": "Vendor-specific alphanumeric strings characterizing the particular update, service pack, or point release of the product",
-          "order": 9
-        },
-        "v2.2": {
-          "type": "string",
-          "title": "Version 2.2",
-          "description": "The full CPE string in the CPE 2.2 format",
-          "order": 10
-        },
-        "v2.3": {
-          "type": "string",
-          "title": "Version 2.3",
-          "description": "The full CPE string in the CPE 2.3 format",
-          "order": 11
-        },
-        "vendor": {
-          "type": "string",
-          "title": "Vendor",
-          "description": "The person or organization that manufactured or created the product",
-          "order": 12
-        },
-        "version": {
-          "type": "string",
-          "title": "Version",
-          "description": "Vendor-specific alphanumeric strings characterizing the particular release version of the product",
-          "order": 13
-        }
-      }
-    },
-    "database": {
-      "type": "object",
-      "title": "database",
-      "properties": {
-        "description": {
-          "type": "string",
-          "title": "Description",
-          "description": "Description of the database instance",
-          "order": 1
-        },
-        "id": {
-          "type": "integer",
-          "title": "ID",
-          "description": "Identifier of the database",
-          "order": 2
-        },
-        "name": {
-          "type": "string",
-          "title": "Name",
-          "description": "Name of the database instance",
-          "order": 3
-        }
-      }
-    },
-    "file": {
-      "id": "file",
-      "type": "object",
-      "title": "File",
-      "description": "File Object",
-      "properties": {
-        "content": {
-          "type": "string",
-          "title": "Content",
-          "description": "File contents",
-          "format": "bytes"
-        },
-        "filename": {
-          "type": "string",
-          "title": "Filename",
-          "description": "Name of file"
-        }
-      }
-    },
-    "history": {
-      "type": "object",
-      "title": "history",
-      "properties": {
-        "date": {
-          "type": "string",
-          "title": "Date",
-          "description": "Date the asset information was collected or changed",
-          "order": 1
-        },
-        "description": {
-          "type": "string",
-          "title": "Description",
-          "description": "Additional information describing the change",
-          "order": 2
-        },
-        "scanId": {
-          "type": "integer",
-          "title": "Scan ID",
-          "description": "If a scan-oriented change, the identifier of the corresponding scan the asset was scanned in",
-          "order": 3
-        },
-        "type": {
-          "type": "string",
-          "title": "Type",
-          "description": "Type, for additional information see the help section of this plugin",
-          "order": 4
-        },
-        "user": {
-          "type": "string",
-          "title": "User",
-          "description": "User",
-          "order": 5
-        },
-        "version": {
-          "type": "integer",
-          "title": "Version",
-          "description": "Version",
-          "order": 6
-        },
-        "vulnerabilityExceptionId": {
-          "type": "integer",
-          "title": "Vulnerability Exception ID",
-          "description": "Vulnerability exception ID",
-          "order": 7
-        }
-      }
-    },
-    "hostName": {
-      "type": "object",
-      "title": "hostName",
-      "properties": {
-        "name": {
-          "type": "string",
-          "title": "Name",
-          "description": "Name",
-          "order": 1
-        },
-        "source": {
-          "type": "string",
-          "title": "Source",
-          "description": "Source",
-          "order": 2
-        }
-      }
-    },
-    "id": {
-      "type": "object",
-      "title": "id",
-      "properties": {
-        "id": {
-          "type": "string",
-          "title": "ID",
-          "description": "ID",
-          "order": 1
-        },
-        "source": {
-          "type": "string",
-          "title": "Source",
-          "description": "Source",
-          "order": 2
-        }
-      }
-    },
-    "link": {
-      "type": "object",
-      "title": "link",
-      "properties": {
-        "href": {
-          "type": "string",
-          "title": "URL",
-          "description": "A hypertext reference, which is either a URI (see RFC 3986) or URI template (see RFC 6570)",
-          "order": 1
-        },
-        "rel": {
-          "type": "string",
-          "title": "Rel",
-          "description": "Link relation type following RFC 5988",
-          "order": 2
-        }
-      }
-    },
-    "osFingerprint": {
-      "type": "object",
-      "title": "osFingerprint",
-      "properties": {
-        "architecture": {
-          "type": "string",
-          "title": "Architecture",
-          "description": "The architecture of the operating system",
-          "order": 1
-        },
-        "configurations": {
-          "type": "array",
-          "title": "Configuration",
-          "description": "Configuration key-values pairs enumerated on the operating system",
-          "items": {
-            "$ref": "#/definitions/configuration"
-          },
-          "order": 2
-        },
-        "cpe": {
-          "$ref": "#/definitions/cpe",
-          "title": "CPE",
-          "description": "Common Platform Enumeration",
-          "order": 3
-        },
-        "description": {
-          "type": "string",
-          "title": "Description",
-          "description": "The description of the operating system (containing vendor, family, product, version and architecture in a single string)",
-          "order": 4
-        },
-        "family": {
-          "type": "string",
-          "title": "Family",
-          "description": "Family of the operating system",
-          "order": 5
-        },
-        "id": {
-          "type": "integer",
-          "title": "ID",
-          "description": "Identifier of the operating system",
-          "order": 6
-        },
-        "product": {
-          "type": "string",
-          "title": "Product",
-          "description": "Name of the operating system",
-          "order": 7
-        },
-        "systemName": {
-          "type": "string",
-          "title": "System Name",
-          "description": "A combination of vendor and family (with redundancies removed), suitable for grouping",
-          "order": 8
-        },
-        "type": {
-          "type": "string",
-          "title": "Type",
-          "description": "Type of operating system",
-          "order": 9
-        },
-        "vendor": {
-          "type": "string",
-          "title": "Vendor",
-          "description": "Vendor of the operating system",
-          "order": 10
-        },
-        "version": {
-          "type": "string",
-          "title": "Version",
-          "description": "Version of the operating system",
-          "order": 11
-        }
-      },
-      "definitions": {
-        "configuration": {
-          "type": "object",
-          "title": "configuration",
-          "properties": {
-            "name": {
-              "type": "string",
-              "title": "Name",
-              "description": "Name of the configuration value",
-              "order": 1
-            },
-            "value": {
-              "type": "string",
-              "title": "Value",
-              "description": "Configuration value",
-              "order": 2
-            }
-          }
-        },
-        "cpe": {
-          "type": "object",
-          "title": "cpe",
-          "properties": {
-            "edition": {
-              "type": "string",
-              "title": "Edition",
-              "description": "Edition-related terms applied by the vendor to the product",
-              "order": 1
-            },
-            "language": {
-              "type": "string",
-              "title": "Language",
-              "description": "Defines the language supported in the user interface of the product being described. The format of the language tag adheres to RFC 5646",
-              "order": 2
-            },
-            "other": {
-              "type": "string",
-              "title": "Other",
-              "description": "Captures any other general descriptive or identifying information which is vendor- or product-specific and which does not logically fit in any other attribute value",
-              "order": 3
-            },
-            "part": {
-              "type": "string",
-              "title": "Part",
-              "description": "A single letter code that designates the particular platform part that is being identified",
-              "order": 4
-            },
-            "product": {
-              "type": "string",
-              "title": "Product",
-              "description": "Most common and recognizable title or name of the product",
-              "order": 5
-            },
-            "swEdition": {
-              "type": "string",
-              "title": "Software Edition",
-              "description": "Characterizes how the product is tailored to a particular market or class of end users",
-              "order": 6
-            },
-            "targetHW": {
-              "type": "string",
-              "title": "Target Hardware",
-              "description": "Characterize the instruction set architecture on which the product operates",
-              "order": 7
-            },
-            "targetSW": {
-              "type": "string",
-              "title": "Target Software",
-              "description": "Characterizes the software computing environment within which the product operates",
-              "order": 8
-            },
-            "update": {
-              "type": "string",
-              "title": "Update",
-              "description": "Vendor-specific alphanumeric strings characterizing the particular update, service pack, or point release of the product",
-              "order": 9
-            },
-            "v2.2": {
-              "type": "string",
-              "title": "Version 2.2",
-              "description": "The full CPE string in the CPE 2.2 format",
-              "order": 10
-            },
-            "v2.3": {
-              "type": "string",
-              "title": "Version 2.3",
-              "description": "The full CPE string in the CPE 2.3 format",
-              "order": 11
-            },
-            "vendor": {
-              "type": "string",
-              "title": "Vendor",
-              "description": "The person or organization that manufactured or created the product",
-              "order": 12
-            },
-            "version": {
-              "type": "string",
-              "title": "Version",
-              "description": "Vendor-specific alphanumeric strings characterizing the particular release version of the product",
-              "order": 13
-            }
-          }
-        }
-      }
-    },
-    "page": {
-      "type": "object",
-      "title": "page",
-      "properties": {
-        "linkType": {
-          "type": "string",
-          "title": "Link Type",
-          "description": "Type of link used to traverse or detect the page",
-          "order": 1
-        },
-        "path": {
-          "type": "string",
-          "title": "Path",
-          "description": "Path to the page (URI)",
-          "order": 2
-        },
-        "response": {
-          "type": "integer",
-          "title": "Response",
-          "description": "HTTP response code observed with retrieving the page",
-          "order": 3
-        }
-      }
-    },
-    "service": {
-      "type": "object",
-      "title": "service",
-      "properties": {
-        "configurations": {
-          "type": "array",
-          "title": "Configurations",
-          "description": "Configuration key-values pairs enumerated on the service",
-          "items": {
-            "$ref": "#/definitions/configuration"
-          },
-          "order": 1
-        },
-        "databases": {
-          "type": "array",
-          "title": "Databases",
-          "description": "Databases enumerated on the service",
-          "items": {
-            "$ref": "#/definitions/database"
-          },
-          "order": 2
-        },
-        "family": {
-          "type": "string",
-          "title": "Family",
-          "description": "Family of the service",
-          "order": 3
-        },
-        "links": {
-          "type": "array",
-          "title": "Links",
-          "description": "Hypermedia links to corresponding or related resources",
-          "items": {
-            "$ref": "#/definitions/link"
-          },
-          "order": 4
-        },
-        "name": {
-          "type": "string",
-          "title": "Name",
-          "description": "Name of the service",
-          "order": 5
-        },
-        "port": {
-          "type": "integer",
-          "title": "Port",
-          "description": "Port of the service",
-          "order": 6
-        },
-        "product": {
-          "type": "string",
-          "title": "Product",
-          "description": "Product running the service",
-          "order": 7
-        },
-        "protocol": {
-          "type": "string",
-          "title": "Protocol",
-          "description": "Protocol of the service",
-          "order": 8
-        },
-        "userGroups": {
-          "type": "array",
-          "title": "User Groups",
-          "description": "User groups",
-          "items": {
-            "$ref": "#/definitions/userGroup"
-          },
-          "order": 9
-        },
-        "users": {
-          "type": "array",
-          "title": "Users",
-          "description": "Users",
-          "items": {
-            "$ref": "#/definitions/user"
-          },
-          "order": 10
-        },
-        "vendor": {
-          "type": "string",
-          "title": "Vendor",
-          "description": "Vendor of the service",
-          "order": 11
-        },
-        "version": {
-          "type": "string",
-          "title": "Version",
-          "description": "Version of the service",
-          "order": 12
-        },
-        "webApplications": {
-          "type": "array",
-          "title": "Web Applications",
-          "description": "Web applications found on the service",
-          "items": {
-            "$ref": "#/definitions/webApplication"
-          },
-          "order": 13
-        }
-      },
-      "definitions": {
-        "configuration": {
-          "type": "object",
-          "title": "configuration",
-          "properties": {
-            "name": {
-              "type": "string",
-              "title": "Name",
-              "description": "Name of the configuration value",
-              "order": 1
-            },
-            "value": {
-              "type": "string",
-              "title": "Value",
-              "description": "Configuration value",
-              "order": 2
-            }
-          }
-        },
-        "database": {
-          "type": "object",
-          "title": "database",
-          "properties": {
-            "description": {
-              "type": "string",
-              "title": "Description",
-              "description": "Description of the database instance",
-              "order": 1
-            },
-            "id": {
-              "type": "integer",
-              "title": "ID",
-              "description": "Identifier of the database",
-              "order": 2
-            },
-            "name": {
-              "type": "string",
-              "title": "Name",
-              "description": "Name of the database instance",
-              "order": 3
-            }
-          }
-        },
-        "link": {
-          "type": "object",
-          "title": "link",
-          "properties": {
-            "href": {
-              "type": "string",
-              "title": "URL",
-              "description": "A hypertext reference, which is either a URI (see RFC 3986) or URI template (see RFC 6570)",
-              "order": 1
-            },
-            "rel": {
-              "type": "string",
-              "title": "Rel",
-              "description": "Link relation type following RFC 5988",
-              "order": 2
-            }
-          }
-        },
-        "page": {
-          "type": "object",
-          "title": "page",
-          "properties": {
-            "linkType": {
-              "type": "string",
-              "title": "Link Type",
-              "description": "Type of link used to traverse or detect the page",
-              "order": 1
-            },
-            "path": {
-              "type": "string",
-              "title": "Path",
-              "description": "Path to the page (URI)",
-              "order": 2
-            },
-            "response": {
-              "type": "integer",
-              "title": "Response",
-              "description": "HTTP response code observed with retrieving the page",
-              "order": 3
-            }
-          }
-        },
-        "user": {
-          "type": "object",
-          "title": "user",
-          "properties": {
-            "fullName": {
-              "type": "string",
-              "title": "Full Name",
-              "description": "Full name of the user account",
-              "order": 1
-            },
-            "id": {
-              "type": "integer",
-              "title": "ID",
-              "description": "Identifier of the user account",
-              "order": 2
-            },
-            "name": {
-              "type": "string",
-              "title": "Name",
-              "description": "Name of the user account",
-              "order": 3
-            }
-          }
-        },
-        "userGroup": {
-          "type": "object",
-          "title": "userGroup",
-          "properties": {
-            "id": {
-              "type": "integer",
-              "title": "ID",
-              "description": "Identifier of the user group",
-              "order": 1
-            },
-            "name": {
-              "type": "string",
-              "title": "Name",
-              "description": "Name of the user group",
-              "order": 2
-            }
-          }
-        },
-        "webApplication": {
-          "type": "object",
-          "title": "webApplication",
-          "properties": {
-            "id": {
-              "type": "integer",
-              "title": "ID",
-              "description": "Identifier of the web application",
-              "order": 1
-            },
-            "pages": {
-              "type": "array",
-              "title": "Pages",
-              "description": "Pages",
-              "items": {
-                "$ref": "#/definitions/page"
-              },
-              "order": 2
-            },
-            "root": {
-              "type": "string",
-              "title": "Root",
-              "description": "Web root of the web application",
-              "order": 3
-            },
-            "virtualHost": {
-              "type": "string",
-              "title": "Virtual Host",
-              "description": "Virtual host of the web application",
-              "order": 4
-            }
-          },
-          "definitions": {
-            "page": {
-              "type": "object",
-              "title": "page",
-              "properties": {
-                "linkType": {
-                  "type": "string",
-                  "title": "Link Type",
-                  "description": "Type of link used to traverse or detect the page",
-                  "order": 1
-                },
-                "path": {
-                  "type": "string",
-                  "title": "Path",
-                  "description": "Path to the page (URI)",
-                  "order": 2
-                },
-                "response": {
-                  "type": "integer",
-                  "title": "Response",
-                  "description": "HTTP response code observed with retrieving the page",
-                  "order": 3
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "software": {
-      "type": "object",
-      "title": "software",
-      "properties": {
-        "configurations": {
-          "type": "array",
-          "title": "Configurations",
-          "description": "Configurations",
-          "items": {
-            "$ref": "#/definitions/configuration"
-          },
-          "order": 1
-        },
-        "cpe": {
-          "$ref": "#/definitions/cpe",
-          "title": "CPE",
-          "description": "CPE",
-          "order": 2
-        },
-        "description": {
-          "type": "string",
-          "title": "Description",
-          "description": "Description of the software",
-          "order": 3
-        },
-        "family": {
-          "type": "string",
-          "title": "Family",
-          "description": "Family of the software",
-          "order": 4
-        },
-        "id": {
-          "type": "integer",
-          "title": "ID",
-          "description": "ID",
-          "order": 5
-        },
-        "product": {
-          "type": "string",
-          "title": "Product",
-          "description": "Product of the software",
-          "order": 6
-        },
-        "type": {
-          "type": "string",
-          "title": "Type",
-          "description": "Type of the software",
-          "order": 7
-        },
-        "vendor": {
-          "type": "string",
-          "title": "Vendor",
-          "description": "Vendor of the software",
-          "order": 8
-        },
-        "version": {
-          "type": "string",
-          "title": "Version",
-          "description": "Version of the software",
-          "order": 9
-        }
-      },
-      "definitions": {
-        "configuration": {
-          "type": "object",
-          "title": "configuration",
-          "properties": {
-            "name": {
-              "type": "string",
-              "title": "Name",
-              "description": "Name of the configuration value",
-              "order": 1
-            },
-            "value": {
-              "type": "string",
-              "title": "Value",
-              "description": "Configuration value",
-              "order": 2
-            }
-          }
-        },
-        "cpe": {
-          "type": "object",
-          "title": "cpe",
-          "properties": {
-            "edition": {
-              "type": "string",
-              "title": "Edition",
-              "description": "Edition-related terms applied by the vendor to the product",
-              "order": 1
-            },
-            "language": {
-              "type": "string",
-              "title": "Language",
-              "description": "Defines the language supported in the user interface of the product being described. The format of the language tag adheres to RFC 5646",
-              "order": 2
-            },
-            "other": {
-              "type": "string",
-              "title": "Other",
-              "description": "Captures any other general descriptive or identifying information which is vendor- or product-specific and which does not logically fit in any other attribute value",
-              "order": 3
-            },
-            "part": {
-              "type": "string",
-              "title": "Part",
-              "description": "A single letter code that designates the particular platform part that is being identified",
-              "order": 4
-            },
-            "product": {
-              "type": "string",
-              "title": "Product",
-              "description": "Most common and recognizable title or name of the product",
-              "order": 5
-            },
-            "swEdition": {
-              "type": "string",
-              "title": "Software Edition",
-              "description": "Characterizes how the product is tailored to a particular market or class of end users",
-              "order": 6
-            },
-            "targetHW": {
-              "type": "string",
-              "title": "Target Hardware",
-              "description": "Characterize the instruction set architecture on which the product operates",
-              "order": 7
-            },
-            "targetSW": {
-              "type": "string",
-              "title": "Target Software",
-              "description": "Characterizes the software computing environment within which the product operates",
-              "order": 8
-            },
-            "update": {
-              "type": "string",
-              "title": "Update",
-              "description": "Vendor-specific alphanumeric strings characterizing the particular update, service pack, or point release of the product",
-              "order": 9
-            },
-            "v2.2": {
-              "type": "string",
-              "title": "Version 2.2",
-              "description": "The full CPE string in the CPE 2.2 format",
-              "order": 10
-            },
-            "v2.3": {
-              "type": "string",
-              "title": "Version 2.3",
-              "description": "The full CPE string in the CPE 2.3 format",
-              "order": 11
-            },
-            "vendor": {
-              "type": "string",
-              "title": "Vendor",
-              "description": "The person or organization that manufactured or created the product",
-              "order": 12
-            },
-            "version": {
-              "type": "string",
-              "title": "Version",
-              "description": "Vendor-specific alphanumeric strings characterizing the particular release version of the product",
-              "order": 13
-            }
-          }
-        }
-      }
-    },
-    "user": {
-      "type": "object",
-      "title": "user",
-      "properties": {
-        "fullName": {
-          "type": "string",
-          "title": "Full Name",
-          "description": "Full name of the user account",
-          "order": 1
-        },
-        "id": {
-          "type": "integer",
-          "title": "ID",
-          "description": "Identifier of the user account",
-          "order": 2
-        },
-        "name": {
-          "type": "string",
-          "title": "Name",
-          "description": "Name of the user account",
-          "order": 3
-        }
-      }
-    },
-    "userGroup": {
-      "type": "object",
-      "title": "userGroup",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "title": "ID",
-          "description": "Identifier of the user group",
-          "order": 1
-        },
-        "name": {
-          "type": "string",
-          "title": "Name",
-          "description": "Name of the user group",
-          "order": 2
-        }
-      }
-    },
-    "vulnerabilities": {
-      "type": "object",
-      "title": "vulnerabilities",
-      "properties": {
-        "critical": {
-          "type": "integer",
-          "title": "Critical",
-          "description": "Number of critical vulnerabilities",
-          "order": 1
-        },
-        "exploits": {
-          "type": "integer",
-          "title": "Exploits",
-          "description": "Number of distinct exploits that can exploit any of the vulnerabilities on the asset",
-          "order": 2
-        },
-        "malwareKits": {
-          "type": "integer",
-          "title": "Malware Kits",
-          "description": "Number of distinct malware kits that vulnerabilities on the asset are susceptible to",
-          "order": 3
-        },
-        "moderate": {
-          "type": "integer",
-          "title": "Moderate",
-          "description": "Number of moderate vulnerabilities",
-          "order": 4
-        },
-        "severe": {
-          "type": "integer",
-          "title": "Severe",
-          "description": "Number of severe vulnerabilities",
-          "order": 5
-        },
-        "total": {
-          "type": "integer",
-          "title": "Total",
-          "description": "Total number of vulnerabilities",
-          "order": 6
-        }
-      }
-    },
-    "webApplication": {
-      "type": "object",
-      "title": "webApplication",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "title": "ID",
-          "description": "Identifier of the web application",
-          "order": 1
-        },
-        "pages": {
-          "type": "array",
-          "title": "Pages",
-          "description": "Pages",
-          "items": {
-            "$ref": "#/definitions/page"
-          },
-          "order": 2
-        },
-        "root": {
-          "type": "string",
-          "title": "Root",
-          "description": "Web root of the web application",
-          "order": 3
-        },
-        "virtualHost": {
-          "type": "string",
-          "title": "Virtual Host",
-          "description": "Virtual host of the web application",
-          "order": 4
-        }
-      },
-      "definitions": {
-        "page": {
-          "type": "object",
-          "title": "page",
-          "properties": {
-            "linkType": {
-              "type": "string",
-              "title": "Link Type",
-              "description": "Type of link used to traverse or detect the page",
-              "order": 1
-            },
-            "path": {
-              "type": "string",
-              "title": "Path",
-              "description": "Path to the page (URI)",
-              "order": 2
-            },
-            "response": {
-              "type": "integer",
-              "title": "Response",
-              "description": "HTTP response code observed with retrieving the page",
-              "order": 3
             }
           }
         }

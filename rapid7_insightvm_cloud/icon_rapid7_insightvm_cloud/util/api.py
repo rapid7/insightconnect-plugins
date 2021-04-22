@@ -1,3 +1,5 @@
+import json
+
 from requests import request
 from logging import Logger
 
@@ -34,23 +36,26 @@ class IVM_Cloud:
 
         return responses
 
-    def call_api(self, path: str, request_type: str, params: dict = None):
+    def call_api(self, path: str, request_type: str, params: dict = None, body: dict = None):
         if params is None:
             params = {}
+        if body is None:
+            body = {}
 
         api_url = self.base_url + path
 
-        headers = {"x-api-key": self.token}
+        headers = {"x-api-key": self.token, "content-type": "application/json"}
 
         try:
             response = request(request_type, self.base_url + path,
                                params=insightconnect_plugin_runtime.helper.clean(params),
-                               headers=headers)
+                               headers=headers,
+                               data=json.dumps(body))
             if response.status_code not in [200, 201, 202]:
                 status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
                 raise PluginException(
                     cause=f"Failed to get a valid response from InsightVM at endpoint {api_url}",
-                    assistance=f"Response was {status_code_message}",
+                    assistance=f"Response was {response.request.body}",
                     data=response.status_code,
                 )
             if response.text == '':

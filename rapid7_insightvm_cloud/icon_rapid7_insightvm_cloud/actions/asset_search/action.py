@@ -1,21 +1,23 @@
 import insightconnect_plugin_runtime
 from .schema import AssetSearchInput, AssetSearchOutput, Input, Output, Component
+
 # Custom imports below
-from icon_rapid7_insightvm_cloud.util import endpoints
-from icon_rapid7_insightvm_cloud.util.resource_requests import ResourceRequests
+import ast
+
 
 class AssetSearch(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='asset_search',
-                description=Component.DESCRIPTION,
-                input=AssetSearchInput(),
-                output=AssetSearchOutput())
+            name='asset_search',
+            description=Component.DESCRIPTION,
+            input=AssetSearchInput(),
+            output=AssetSearchOutput())
 
     def run(self, params={}):
-        search_criteria = params.get(Input.SEARCHCRITERIA)
         size = params.get(Input.SIZE, 0)
+        ip = params.get(Input.IP)
+        hostname = params.get(Input.HOSTNAME)
         sort_criteria = params.get(Input.SORT_CRITERIA, dict())
         parameters = list()
 
@@ -32,4 +34,32 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
             parameters.append(("size", 100))
             resources = self.connection.ivm_cloud_api.call_api_pages("assets", "POST", parameters)
 
-        return {Output.ASSETS: resources}
+        assets = list()
+        for page in range(len(resources)):
+            current = str(resources[page])
+            asset = current.split("]},")
+            for num in range(len(asset)):
+                curr = asset[num]
+                if num == 0:
+                    curr = curr[11:] + "]"
+                else:
+                    curr = curr[2:] + "]"
+                if num == len(asset) - 1:
+                    ending = curr.split("], 'metadata':")
+                    curr = ending[0]
+                    if curr[len(curr) - 1] == "}":
+                        curr = curr[:len(curr) - 1]
+                curr = "{" + curr + "}"
+                curr = eval(curr)
+                if hostname != "":
+                    if "host_name" in curr:
+                        if hostname == curr["host_name"]:
+                            assets.append(curr)
+                elif ip != "":
+                    if "ip" in curr:
+                        if ip == curr["ip"]:
+                            assets.append(curr)
+                elif hostname == "" and ip == "":
+                    assets.append(curr)
+
+        return {Output.ASSETS: assets}
