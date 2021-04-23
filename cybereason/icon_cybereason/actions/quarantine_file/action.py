@@ -52,9 +52,7 @@ class QuarantineFile(insightconnect_plugin_runtime.Action):
 
         return {
             Output.REMEDIATE_ITEMS_RESPONSE: self.connection.api.remediate(
-                self.connection.api.username,
-                {sensor_guid: actions},
-                malop_id=malop_id
+                self.connection.api.username, {sensor_guid: actions}, malop_id=malop_id
             )
         }
 
