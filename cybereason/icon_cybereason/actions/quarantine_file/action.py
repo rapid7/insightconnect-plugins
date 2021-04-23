@@ -44,6 +44,12 @@ class QuarantineFile(insightconnect_plugin_runtime.Action):
         for guid in file_guids:
             actions.append({"targetId": guid, "actionType": action_type})
 
+        if not actions:
+            raise PluginException(
+                cause="No actions to perform.",
+                assistance=f"Usually it's because there is no quarantined files in the Malop provided.",
+            )
+
         return {
             Output.REMEDIATE_ITEMS_RESPONSE: self.connection.api.remediate(
                 self.connection.api.username, {sensor_guid: actions}
