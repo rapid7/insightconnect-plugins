@@ -44,11 +44,12 @@ class QuarantineFile(insightconnect_plugin_runtime.Action):
         for guid in file_guids:
             actions.append({"targetId": guid, "actionType": action_type})
 
-
-        return {Output.REMEDIATE_ITEMS_RESPONSE: self.connection.api.remediate(
-            self.connection.api.username,
-            actions_by_machine
-        )}
+        return {
+            Output.REMEDIATE_ITEMS_RESPONSE: self.connection.api.remediate(
+                self.connection.api.username,
+                {sensor_guid: actions}
+            )
+        }
 
     def get_file_guids(self, files: list, machine_name: str, machine_guid: str, quarantine: bool) -> list:
         filters = [
