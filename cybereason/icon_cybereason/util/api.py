@@ -83,15 +83,11 @@ class CybereasonAPI:
                 "POST",
                 "/rest/crimes/unified",
                 payload={
-                    "totalResultLimit":10000,
-                    "perGroupLimit":10000,
-                    "templateContext":"OVERVIEW",
-                    "queryPath":[{
-                        "requestedType":"MalopProcess",
-                        "guidList":[malop_guid],
-                        "result":True
-                    }]
-                }
+                    "totalResultLimit": 10000,
+                    "perGroupLimit": 10000,
+                    "templateContext": "OVERVIEW",
+                    "queryPath": [{"requestedType": "MalopProcess", "guidList": [malop_guid], "result": True}],
+                },
             )["data"]["resultIdToElementDataMap"][malop_guid]
         except KeyError:
             raise PluginException(
@@ -105,19 +101,15 @@ class CybereasonAPI:
                 "POST",
                 "/rest/visualsearch/query/simple",
                 payload={
-                    "queryPath": [{
-                        "requestedType": requestedType,
-                        "filters": filters,
-                        "isResult": True
-                    }],
+                    "queryPath": [{"requestedType": requestedType, "filters": filters, "isResult": True}],
                     "totalResultLimit": 1000,
                     "perGroupLimit": 100,
                     "perFeatureLimit": 100,
                     "templateContext": "SPECIFIC",
                     "queryTimeout": 120000,
-                    "customFields": customFields
-                }
-            )['data']['resultIdToElementDataMap']
+                    "customFields": customFields,
+                },
+            )["data"]["resultIdToElementDataMap"]
         except KeyError:
             raise PluginException(
                 cause="No results found.",
