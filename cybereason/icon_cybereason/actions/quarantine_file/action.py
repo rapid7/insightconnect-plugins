@@ -47,14 +47,14 @@ class QuarantineFile(insightconnect_plugin_runtime.Action):
         if not actions:
             raise PluginException(
                 cause="No actions to perform.",
-                assistance=f"Usually it's because there is no quarantined files in the Malop provided.",
+                assistance="Usually it's because there is no quarantined files in the Malop provided.",
             )
 
         return {
             Output.REMEDIATE_ITEMS_RESPONSE: self.connection.api.remediate(
                 self.connection.api.username,
                 {sensor_guid: actions},
-                malop_id = malop_id
+                malop_id=malop_id
             )
         }
 
@@ -79,7 +79,7 @@ class QuarantineFile(insightconnect_plugin_runtime.Action):
         quarantined_file_guids = []
         for k in results.keys():
             try:
-                quarantined_files = result[k]["elementValues"]["quarantineFile"]["elementValues"]
+                quarantined_files = results[k]["elementValues"]["quarantineFile"]["elementValues"]
             except KeyError:
                 continue
             for f in quarantined_files:
