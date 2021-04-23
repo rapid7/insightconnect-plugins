@@ -72,7 +72,23 @@ Example input:
 Example output:
 
 ```
-
+{
+  "remediate_items_response": {
+    "malopId": "11.753856273233159896",
+    "remediationId": "ea1a0c09-2491-4b00-b612-c51f8e7eb14a",
+    "start": 1619207122620,
+    "initiatingUser": "user@example.com",
+    "statusLog": [
+      {
+        "machineId": "-626082210.1198775089551518743",
+        "targetId": "-626082210.2561601065548740673",
+        "status": "PENDING",
+        "actionType": "QUARANTINE_FILE",
+        "timestamp": 1619207122996
+      }
+    ]
+  }
+}
 ```
 
 #### Isolate Machine
