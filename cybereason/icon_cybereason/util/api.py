@@ -105,17 +105,17 @@ class CybereasonAPI:
                 "POST",
                 "/rest/visualsearch/query/simple",
                 payload={
-                    "queryPath": [
+                    "queryPath": [{
                         "requestedType": requestedType,
                         "filters": filters,
                         "isResult": True
-                    ],
+                    }],
                     "totalResultLimit": 1000,
                     "perGroupLimit": 100,
                     "perFeatureLimit": 100,
                     "templateContext": "SPECIFIC",
                     "queryTimeout": 120000,
-                    "customFields" : customFields
+                    "customFields": customFields
                 }
             )['data']['resultIdToElementDataMap']
         except KeyError:

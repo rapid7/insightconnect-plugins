@@ -1,6 +1,8 @@
 import insightconnect_plugin_runtime
 from .schema import QuarantineFileInput, QuarantineFileOutput, Input, Output, Component
+
 # Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class QuarantineFile(insightconnect_plugin_runtime.Action):
@@ -13,24 +15,22 @@ class QuarantineFile(insightconnect_plugin_runtime.Action):
                 output=QuarantineFileOutput())
 
     def run(self, params={}):
-        sensor = params.get(Input.SENSOR)
-        sensor_details = self.connection.api.get_sensor_details(sensor)
+        sensor_details = self.connection.api.get_sensor_details(params.get(Input.SENSOR))
         sensor_guid = sensor_details['guid']
-        sensor_name = sensor_details['machineName']        
         malop_id = params.get(Input.MALOP_ID)
         quarantine = params.get(Input.QUARANTINE)
 
         malop_data = self.connection.api.get_malop(malop_id)
 
-        if not check_machine_in_malop():
+        if not self.check_machine_in_malop(malop_data, sensor_guid):
             raise PluginException(
-                cause="Sensor provided not related to the Malop ID Provided."
+                cause="Sensor provided is not related to the Malop ID Provided.",
                 assistance=f"Make sure that sensor provided is involved in the Malop - {malop_id}."
             )
         
         file_guids = self.get_file_guids(
-            get_files_in_malop(self.connection.api.get_malop(malop_id)),
-            sensor_name,
+            self.get_files_in_malop(self.connection.api.get_malop(malop_id)),
+            sensor_details['machineName'],
             sensor_guid,
             quarantine
         )
@@ -66,19 +66,19 @@ class QuarantineFile(insightconnect_plugin_runtime.Action):
                 ]
             }
         ]
-        try:
-            if quarantine:
-                results = self.connection.api.get_visual_search(
-                    requestedType = "File",
-                    filters = filters,
-                    customFields = ["ownerMachine"]
-                )
-            else:
-                results = self.connection.api.get_visual_search(
-                    requestedType = "QuarantineFile",
-                    filters = filters,
-                    customFields = ["quarantineFile"]
-                )
+        
+        if quarantine:
+            results = self.connection.api.get_visual_search(
+                requestedType = "File",
+                filters = filters,
+                customFields = ["ownerMachine"]
+            )
+        else:
+            results = self.connection.api.get_visual_search(
+                requestedType = "QuarantineFile",
+                filters = filters,
+                customFields = ["quarantineFile"]
+            )
         
         if quarantine:
             return [k for k in results.keys()]
