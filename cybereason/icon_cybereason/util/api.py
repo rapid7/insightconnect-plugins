@@ -38,14 +38,18 @@ class CybereasonAPI:
             payload={"malopId": malop_id, "pylumIds": pylum_ids},
         )
 
-    def remediate(self, initiator_user_name: str, actions_by_machine: dict) -> dict:
+    def remediate(self, initiator_user_name: str, actions_by_machine: dict, malop_id: str = None) -> dict:
+        payload = {
+            "initiatorUserName": initiator_user_name,
+            "actionsByMachine": actions_by_machine,
+        }
+        if malop_id:
+            payload["malopId"] = malop_id
+
         return self.send_request(
             "POST",
             "/rest/remediate",
-            payload={
-                "initiatorUserName": initiator_user_name,
-                "actionsByMachine": actions_by_machine,
-            },
+            payload=payload,
         )
 
     def file_search(self, server_filter: dict, file_filter: dict) -> dict:
