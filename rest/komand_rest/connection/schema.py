@@ -8,6 +8,7 @@ class Input:
     BASE_URL = "base_url"
     BASIC_AUTH_CREDENTIALS = "basic_auth_credentials"
     DEFAULT_HEADERS = "default_headers"
+    FAIL_ON_ERROR = "fail_on_error"
     SECRET = "secret"
     SSL_VERIFY = "ssl_verify"
     
@@ -51,6 +52,13 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "Default Headers",
       "description": "Custom headers to include in all requests associated with this connection. To pass a encrypted key as a header value, enter your key in the Secret Key input and set the value of the header in this field to \\"CUSTOM_SECRET_INPUT\\" instead of secret key. The plugin will replace \\"CUSTOM_SECRET_INPUT\\" with the encrypted key stored in the Secret Key input when the plugin runs.",
       "order": 4
+    },
+    "fail_on_error": {
+      "type": "boolean",
+      "title": "Fail On Error",
+      "description": "Indicates whether the plugin should fail on standard HTTP errors",
+      "default": true,
+      "order": 7
     },
     "secret": {
       "$ref": "#/definitions/credential_secret_key",

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rest
 title: HTTP Requests
 description: The HTTP Requests plugin to make it easy to integrate with RESTful services
-version: 4.0.5
+version: 4.1.0
 vendor: rapid7
 support: community
 status: []
@@ -71,6 +71,13 @@ connection:
     type: credential_username_password
     required: false
     example: '{"username": "user@example.com", "password": "mypassword"}'
+  fail_on_error:
+    title: Fail On Error
+    description: Indicates whether the plugin should fail on standard HTTP errors
+    type: boolean
+    required: false
+    default: true
+    example: true
 actions:
   get:
     title: GET
