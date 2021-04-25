@@ -1,0 +1,64 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: abnormal_security
+title: Abnormal Security
+description: Protect your Microsoft Office 365 and G-Suite environments with next-generation email security that uses the most advanced AI detection techniques to stop targeted phishing attacks
+version: 1.0.0
+vendor: rapid7
+support: rapid7
+status: []
+tags: [investigate, malware, threat intel]
+hub_tags:
+  use_cases: [threat_detection_and_response, vulnerability_management]
+  keywords: [investigate, malware, threat intel]
+  features: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/abnormal_security
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://abnormalsecurity.com/
+enable_cache: true
+types:
+  threat:
+    threatId:
+      title: Threat ID
+      description: Threat ID
+      type: string
+      required: false
+connection:
+  hostname:
+    title: Host
+    description: Abnormal Security host url
+    type: string
+    required: true
+    example: https://api.abnormalplatform.com
+    default: https://api.abnormalplatform.com
+  api_key:
+    type: credential_secret_key
+    title: Abnormal Security API Key
+    description: Abnormal Security API Key
+    required: true
+    example: Vud5CDO9ULIV3SJOcp
+actions:
+  get_threats:
+    title: Get Threats
+    description: Get a list of up to 100 threats identified in the Abnormal Security Threat Log
+    input:
+      from_date:
+        title: From Date
+        description: This input enables you to filter your results from a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ
+        type: string
+        required: false
+        example: 2021-03-01T21:11:38Z
+      to_date:
+        title: To Date
+        description: This input enables you to filter your results to a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ
+        type: string
+        required: false
+        example: 2021-03-11T21:11:38Z
+    output:
+      threats:
+        title: Threats
+        description: List of threats found
+        type: '[]threat'
+        required: true

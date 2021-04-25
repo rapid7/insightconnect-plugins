@@ -1,0 +1,15 @@
+{
+	"spec": "a7beed2226a6bcaabb69d3b811767eb7",
+	"manifest": "835dae23daf051242cd169e898d4e17e",
+	"setup": "789ca230ec01920bad70854c03e376fd",
+	"schemas": [
+		{
+			"identifier": "get_threats/schema.py",
+			"hash": "fe8df55d7bff07859d784295f8f978e0"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "afc71950f715f95055cd1a01f022b015"
+		}
+	]
+}
