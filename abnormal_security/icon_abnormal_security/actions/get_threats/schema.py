@@ -51,7 +51,7 @@ class GetThreatsOutput(insightconnect_plugin_runtime.Output):
     "threats": {
       "type": "array",
       "title": "Threats",
-      "description": "List of threats found",
+      "description": "A list of the top 100 threats identified in Threat Log",
       "items": {
         "$ref": "#/definitions/threat"
       },

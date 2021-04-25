@@ -34,6 +34,8 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_action(actions.GetThreatDetails())
+
             self.add_action(actions.GetThreats())
 
 

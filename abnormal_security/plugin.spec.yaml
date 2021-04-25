@@ -25,6 +25,153 @@ types:
       description: Threat ID
       type: string
       required: false
+  message:
+    threatId:
+      title: Threat ID
+      description: Threat ID
+      type: string
+      required: false
+    autoRemediated:
+      title: Auto Remediated
+      description: Auto remediated
+      type: boolean
+      required: false
+    postRemediated:
+      title: Post Remediated
+      description: Post remediated
+      type: boolean
+      required: false
+    attackType:
+      title: Attack Type
+      description: Attack type
+      type: string
+      required: false
+    attackStrategy:
+      title: Attack Strategy
+      description: Attack strategy
+      type: string
+      required: false
+    returnPath:
+      title: Return Path
+      description: Return path
+      type: string
+      required: false
+    replyToEmails:
+      title: Reply to Emails
+      description: Reply to emails
+      type: '[]string'
+      required: false
+    ccEmails:
+      title: CC Emails
+      description: CC emails
+      type: '[]string'
+      required: false
+    senderIpAddress:
+      title: Sender IP Address
+      description: Sender IP address
+      type: string
+      required: false
+    impersonatedParty:
+      title: Impersonated Party
+      description: Impersonated party
+      type: string
+      required: false
+    attackVector:
+      title: Attack Vector
+      description: Attack vector
+      type: string
+      required: false
+    attachmentNames:
+      title: Attachment Names
+      description: Attachment names
+      type: '[]string'
+      required: false
+    summaryInsights:
+      title: Summary Insights
+      description: Summary insights
+      type: '[]string'
+      required: false
+    remediationTimestamp:
+      title: Remediation Timestamp
+      description: Remediation timestamp
+      type: string
+      required: false
+    isRead:
+      title: Is Read
+      description: Is Read
+      type: boolean
+      required: false
+    attackedParty:
+      title: Attacked Party
+      description: Attacked party
+      type: string
+      required: false
+    abxMessageId:
+      title: ABX Message ID
+      description: ABX Message ID
+      type: integer
+      required: false
+    abxPortalUrl:
+      title: ABX Portal URL ID
+      description: ABX portal URL ID
+      type: string
+      required: false
+    subject:
+      title: Subject
+      description: Subject
+      type: string
+      required: false
+    fromAddress:
+      title: From Address
+      description: From address
+      type: string
+      required: false
+    fromName:
+      title: From Name
+      description: From name
+      type: string
+      required: false
+    toAddresses:
+      title: To Address
+      description: To address
+      type: string
+      required: false
+    recipientAddress:
+      title: Recipient Address
+      description: Recipient address
+      type: string
+      required: false
+    receivedTime:
+      title: Received Time
+      description: Received time
+      type: string
+      required: false
+    sentTime:
+      title: Sent Time
+      description: Sent time
+      type: string
+      required: false
+    internetMessageId:
+      title: Internet Message ID
+      description: Internet message ID
+      type: string
+      required: false
+    urls:
+      title: URLs
+      description: URLs
+      type: '[]string'
+      required: false
+  threat_details:
+    threatId:
+      title: Threat ID
+      description: Threat ID
+      type: string
+      required: false
+    messages:
+      title: Messages
+      description: List of messages
+      type: '[]message'
+      required: false
 connection:
   hostname:
     title: Host
@@ -59,6 +206,22 @@ actions:
     output:
       threats:
         title: Threats
-        description: List of threats found
+        description: A list of the top 100 threats identified in Threat Log
         type: '[]threat'
+        required: true
+  get_threat_details:
+    title: Get Threat Details
+    description: Get details of a threat identified by Abnormal Security
+    input:
+      threat_id:
+        title: Threat ID
+        description: A UUID representing the threat
+        type: string
+        required: true
+        example: 184712ab-6d8b-47b3-89d3-a314efef79e2
+    output:
+      threat_details:
+        title: Threat Details
+        description: Details of the requested threat identified by Abnormal Security
+        type: threat_details
         required: true

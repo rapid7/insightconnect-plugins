@@ -25,11 +25,44 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
+{
+  "api_key": "Vud5CDO9ULIV3SJOcp",
+  "hostname": "https://api.abnormalplatform.com"
+}
 ```
 
 ## Technical Details
 
 ### Actions
+
+#### Get Threat Details
+
+This action is used to get details of a threat identified by Abnormal Security.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|threat_id|string|None|True|A UUID representing the threat|None|184712ab-6d8b-47b3-89d3-a314efef79e2|
+
+Example input:
+
+```
+{
+  "threat_id": "184712ab-6d8b-47b3-89d3-a314efef79e2"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|threat_details|threat_details|True|Details of the requested threat identified by Abnormal Security|
+
+Example output:
+
+```
+```
 
 #### Get Threats
 
@@ -45,13 +78,17 @@ This action is used to get a list of up to 100 threats identified in the Abnorma
 Example input:
 
 ```
+{
+  "from_date": "2021-03-01T21:11:38Z",
+  "to_date": "2021-03-11T21:11:38Z"
+}
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|threats|[]threat|True|List of threats found|
+|threats|[]threat|True|A list of the top 100 threats identified in Threat Log|
 
 Example output:
 
