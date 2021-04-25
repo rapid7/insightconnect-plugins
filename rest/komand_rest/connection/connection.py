@@ -20,7 +20,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         password = None
         secret_key = None
 
-        self.api = RestAPI(base_url, self.logger, params.get(Input.SSL_VERIFY, True), default_headers)
+        self.api = RestAPI(base_url, self.logger, params.get(Input.SSL_VERIFY, True), default_headers, params.get(Input.FAIL_ON_ERROR, True))
 
         if self.authentication_type:
             if self.authentication_type == "Basic Auth" or self.authentication_type == "Digest Auth":

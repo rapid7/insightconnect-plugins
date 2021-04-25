@@ -66,13 +66,14 @@ class RestAPI(object):
     CUSTOM_SECRET_INPUT = "CUSTOM_SECRET_INPUT"  # noqa: B105
 
     def __init__(
-            self, url: str, logger: Logger, ssl_verify: bool, default_headers: dict = None
+            self, url: str, logger: Logger, ssl_verify: bool, default_headers: dict = None, fail_on_error: bool = True
     ):
         self.url = url
         self.logger = logger
         self.ssl_verify = ssl_verify
         self.auth = None
         self.default_headers = default_headers
+        self.fail_on_error = fail_on_error
 
     def with_credentials(
             self, authentication_type: str, username: str = None, password: str = None, secret_key: str = None
@@ -127,6 +128,9 @@ class RestAPI(object):
                 auth=self.auth,
                 verify=self.ssl_verify
             )
+
+            if not self.fail_on_error:
+                return response
 
             if response.status_code == 401:
                 raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
