@@ -50,6 +50,9 @@ class ThreadCrowdAPI:
                 raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response_data.message)
 
             if 200 <= response.status_code < 300:
+                if "Too many connections" in response.text:
+                    raise PluginException(cause="ThreatCrowd server return 'too many connections' error. ",
+                                          assistance="Please wait and try again.")
                 if full_response:
                     return response
 
