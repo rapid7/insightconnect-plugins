@@ -47,6 +47,12 @@ class SubmitUrlForScan(komand.Action):
         #  "status": 400
         # }
 
+        if "The submitted domain is on our blacklist. For your own safety we did not perform this scan..." in out["description"]:
+            self.logger.error(out['description'])
+            return {
+                Output.SCAN_ID: ""
+            }
+
         if ("message" in out) and ("description" in out):
             raise PluginException(cause=f"{out['message']}. ", assistance=f"{out['description']}.")
 
