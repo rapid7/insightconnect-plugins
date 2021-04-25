@@ -13,14 +13,12 @@ class Get(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         response = self.connection.api.call_api(
-            method="GET",
-            path=params.get(Input.ROUTE),
-            headers=params.get(Input.HEADERS, {})
+            method="GET", path=params.get(Input.ROUTE), headers=params.get(Input.HEADERS, {})
         )
 
         return {
             Output.BODY_OBJECT: Common.body_object(response),
             Output.BODY_STRING: response.text,
             Output.STATUS: response.status_code,
-            Output.HEADERS: Common.copy_dict(response.headers)
+            Output.HEADERS: Common.copy_dict(response.headers),
         }
