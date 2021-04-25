@@ -55,7 +55,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     },
     "fail_on_error": {
       "type": "boolean",
-      "title": "Fail On Error",
+      "title": "Fail on Error",
       "description": "Indicates whether the plugin should fail on standard HTTP errors",
       "default": true,
       "order": 7

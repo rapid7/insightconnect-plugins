@@ -72,7 +72,7 @@ connection:
     required: false
     example: '{"username": "user@example.com", "password": "mypassword"}'
   fail_on_error:
-    title: Fail On Error
+    title: Fail on Error
     description: Indicates whether the plugin should fail on standard HTTP errors
     type: boolean
     required: false
