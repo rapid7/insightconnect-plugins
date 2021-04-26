@@ -449,7 +449,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
-* 4.1.0 - Add optional input - Fail on Error to connection
+* 4.1.0 - Add ability for user to choose if the plugin should fail on standard HTTP error codes (4xx-5xx)
 * 4.0.5 - Fix issue where if an API returned a list it would crash the plugin
 * 4.0.4 - Fix issue with SSL Verify
 * 4.0.3 - Update `requests` to the latest version | Update python version to `python-3-38-plugin:4` | Add `USER` in Dockerfile | Use input and output constants | Code refactor | Strip leading and trailing whitespace from route

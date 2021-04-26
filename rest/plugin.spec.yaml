@@ -71,9 +71,9 @@ connection:
     type: credential_username_password
     required: false
     example: '{"username": "user@example.com", "password": "mypassword"}'
-  fail_on_error:
-    title: Fail on Error
-    description: Indicates whether the plugin should fail on standard HTTP errors
+  fail_on_http_errors:
+    title: Fail on HTTP Errors
+    description: Indicates whether the plugin should fail on standard HTTP errors (4xx-5xx)
     type: boolean
     required: false
     default: true
