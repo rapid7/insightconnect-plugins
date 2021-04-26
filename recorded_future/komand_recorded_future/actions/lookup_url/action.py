@@ -1,10 +1,14 @@
-import komand
-from .schema import LookupUrlInput, LookupUrlOutput, Input, Component
+import insightconnect_plugin_runtime
+from .schema import LookupUrlInput, LookupUrlOutput, Input, Output, Component
 
 # Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_recorded_future.util.util import AvailableInputs
+from komand_recorded_future.util.api import Endpoint
+from urllib.parse import quote
 
 
-class LookupUrl(komand.Action):
+class LookupUrl(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="lookup_url",
@@ -14,29 +18,21 @@ class LookupUrl(komand.Action):
         )
 
     def run(self, params={}):
+        comment = params.get(Input.COMMENT)
+        if not comment:
+            comment = None
         try:
-            url = params.get(Input.URL)
-            comment = params.get(Input.COMMENT)
-
-            fields = [
-                "analystNotes",
-                "counts",
-                "enterpriseLists",
-                "entity",
-                "metrics",
-                "relatedEntities",
-                "risk",
-                "sightings",
-                "timestamps",
-            ]
-
-            if not len(comment):
-                comment = None
-
-            url_report = self.connection.client.lookup_url(url=url, fields=fields, comment=comment)
-
-            return komand.helper.clean(url_report["data"])
-
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
-            return {}
+            return {
+                Output.DATA: insightconnect_plugin_runtime.helper.clean(
+                    self.connection.client.make_request(
+                        Endpoint.lookup_url(quote(params.get(Input.URL), safe="")),
+                        {"fields": AvailableInputs.UrlFields, "comment": comment},
+                    ).get("data")
+                )
+            }
+        except AttributeError as e:
+            raise PluginException(
+                cause="Recorded Future returned unexpected response.",
+                assistance="Please check that the provided inputs are correct and try again.",
+                data=e,
+            )

@@ -1,28 +1,23 @@
-import komand
-import requests
-import xmltodict
-from .schema import DownloadHashRiskListInput, DownloadHashRiskListOutput
+import insightconnect_plugin_runtime
+from .schema import DownloadHashRiskListInput, DownloadHashRiskListOutput, Input, Output, Component
+
+# Custom imports below
+from komand_recorded_future.util.util import AvailableInputs
+from komand_recorded_future.util.api import Endpoint
 
 
-class DownloadHashRiskList(komand.Action):
+class DownloadHashRiskList(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="download_hash_risk_list",
-            description="This action is used to return a list of hashes matching a specified risk rule",
+            description=Component.DESCRIPTION,
             input=DownloadHashRiskListInput(),
             output=DownloadHashRiskListOutput(),
         )
 
     def run(self, params={}):
-        try:
-            risklist = params.get("list")
-            query_headers = self.connection.headers
-            query_params = {"format": "xml/stix/1.2", "gzip": "false", "list": risklist}
-            results = requests.get(
-                "https://api.recordedfuture.com/v2/hash/risklist",
-                params=query_params,
-                headers=query_headers,
-            )
-            return dict(xmltodict.parse(results.text))
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
+        query_params = {"format": "xml/stix/1.2", "gzip": "false"}
+        risk_list = AvailableInputs.HashRiskRuleMap.get(params.get(Input.LIST))
+        if risk_list:
+            query_params[Input.LIST] = risk_list
+        return {Output.RISK_LIST: self.connection.client.make_request(Endpoint.download_hash_risk_list(), query_params)}

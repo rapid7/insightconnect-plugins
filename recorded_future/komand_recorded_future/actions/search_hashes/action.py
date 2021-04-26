@@ -1,55 +1,37 @@
-import komand
-import json
-from .schema import SearchHashesInput, SearchHashesOutput, Input
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from .schema import SearchHashesInput, SearchHashesOutput, Input, Output, Component
+
+# Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_recorded_future.util.util import AvailableInputs
+from komand_recorded_future.util.api import Endpoint
 
 
-class SearchHashes(komand.Action):
+class SearchHashes(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="search_hashes",
-            description="This action is used to search for data related to hashes of a specified type",
+            description=Component.DESCRIPTION,
             input=SearchHashesInput(),
             output=SearchHashesOutput(),
         )
 
     def run(self, params={}):
-        params["fields"] = [
-            "analystNotes",
-            "counts",
-            "entity",
-            "hashAlgorithm",
-            "intelCard",
-            "metrics",
-            "relatedEntities",
-            "risk",
-            "sightings",
-            "threatLists",
-            "timestamps",
-        ]
-        riskRuleMap = {
-            "Reported by Insikt Group": "analystNote",
-            "Historically Reported in Threat List": "historicalThreatListMembership",
-            "Linked to Cyber Attack": "linkedToCyberAttack",
-            "Linked to Malware": "linkedToMalware",
-            "Linked to Attack Vector": "linkedToVector",
-            "Linked to Vulnerability": "linkedToVuln",
-            "Malware SSL Certificate Fingerprint": "malwareSsl",
-            "Observed in Underground Virus Testing Sites": "observedMalwareTesting",
-            "Positive Malware Verdict": "positiveMalwareVerdict",
-            "Recently Active Targeting Vulnerabilities in the Wild": "recentActiveMalware",
-            "Referenced by Insikt Group": "relatedNote",
-            "Trending in Recorded Future Analyst Community": "rfTrending",
-            "Threat Researcher": "threatResearcher",
-        }
-        risk_rule = riskRuleMap.get(params.get(Input.RISKRULE))
+        params["fields"] = AvailableInputs.HashFields
+        risk_rule = AvailableInputs.HashRiskRuleMap.get(params.get(Input.RISKRULE))
         if risk_rule:
             params[Input.RISKRULE] = risk_rule
         else:
             params[Input.RISKRULE] = None
         try:
-            results = self.connection.client.search_hashes(**params)
-            return json.loads(results._req_response._content.decode("utf-8"))
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+            return {
+                Output.DATA: insightconnect_plugin_runtime.helper.clean(
+                    self.connection.client.make_request(Endpoint.search_hashes(), params).get("data", {}).get("results")
+                )
+            }
+        except AttributeError as e:
+            raise PluginException(
+                cause="Recorded Future returned unexpected response.",
+                assistance="Please check that the provided inputs are correct and try again.",
+                data=e,
+            )
