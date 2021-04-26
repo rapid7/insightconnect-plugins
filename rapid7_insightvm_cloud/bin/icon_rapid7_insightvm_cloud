@@ -34,8 +34,6 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
-            self.add_trigger(triggers.NewScans())
-
             self.add_action(actions.AssetSearch())
 
             self.add_action(actions.GetAsset())

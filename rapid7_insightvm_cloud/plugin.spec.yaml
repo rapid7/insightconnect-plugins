@@ -2114,39 +2114,3 @@ actions:
         type: boolean
         required: true
   
-triggers:
-  new_scans:
-    title: New Scans
-    description: Check for new InsightVM scans by site and scan status
-    input:
-      frequency:
-        title: Frequency
-        description: How often the trigger should check for new scans in minutes
-        type: integer
-        required: true
-        default: 5
-      site_name_filter:
-        title: Site Name Filter
-        description: Regular expression to match sites where new scans should be triggered
-        type: string
-        required: true
-        default: .*
-      most_recent_scan:
-        title: Most Recent Scan Only
-        description: Only process the most recent scan for a site since the last time the trigger was run
-        type: boolean
-        required: true
-        default: true
-      status_filter:
-        title: Status Filter
-        description: 'List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown'
-        type: '[]string'
-        required: false
-        default: ['Successful']
-    output:
-      scan:
-        title: Scan
-        description: InsightVM Scan
-        type: scan
-        required: false
- 

@@ -8,7 +8,6 @@ class Component:
 
 
 class Input:
-    ASSET_COUNT = "asset_count"
     ASSET_IDS = "asset_ids"
     HOSTNAME = "hostname"
     IP = "ip"
@@ -25,12 +24,6 @@ class ScanInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "asset_count": {
-      "type": "integer",
-      "title": "Asset Count",
-      "description": "Amount of assets to scan",
-      "order": 5
-    },
     "asset_ids": {
       "type": "array",
       "title": "Asset Ids",

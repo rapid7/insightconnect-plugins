@@ -170,7 +170,6 @@ This action is used to start a scan on a site.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_count|integer|None|False|Amount of assets to scan|None|None|
 |asset_ids|[]string|None|False|IDs of the assets to scan|None|["cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-135"]|
 |hostname|string|None|False|The hostname|None|None|
 |ip|string|None|False|The ip|None|None|
@@ -214,34 +213,7 @@ Example output:
 
 ### Triggers
 
-#### New Scans
-
-This trigger is used to check for new InsightVM scans by site and scan status.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|frequency|integer|5|True|How often the trigger should check for new scans in minutes|None|None|
-|most_recent_scan|boolean|True|True|Only process the most recent scan for a site since the last time the trigger was run|None|None|
-|site_name_filter|string|.*|True|Regular expression to match sites where new scans should be triggered|None|None|
-|status_filter|[]string|["Successful"]|False|List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|scan|scan|False|InsightVM Scan|
-
-Example output:
-
-```
-```
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
