@@ -42,7 +42,7 @@ Example input:
   "default_headers": {
     "User-Agent": "Rapid7 InsightConnect"
   },
-  "fail_on_error": true,
+  "fail_on_http_errors": true,
   "ssl_verify": true
 }
 ```
@@ -60,7 +60,7 @@ Example input (with Custom header auth):
     "User-Agent": "Rapid7 InsightConnect",
     "API-Token": "CUSTOM_SECRET_INPUT"
   },
-  "fail_on_error": true,
+  "fail_on_http_errors": true,
   "ssl_verify": true
 }
 ```
@@ -77,7 +77,7 @@ Example input (with Insight Platform):
   "default_headers": {
     "User-Agent": "Rapid7 InsightConnect"
   },
-  "fail_on_error": false,
+  "fail_on_http_errors": false,
   "ssl_verify": true
 }
 ```
