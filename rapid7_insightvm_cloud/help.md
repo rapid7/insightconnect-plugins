@@ -1,6 +1,6 @@
 # Description
 
-InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the  v4 cloud API to view assets, scan results and start scans
+InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the v4 cloud API to view assets, scan results and start scans
 
 # Key Features
 
