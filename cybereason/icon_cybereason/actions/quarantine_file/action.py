@@ -25,7 +25,7 @@ class QuarantineFile(insightconnect_plugin_runtime.Action):
         if not self.check_machine_in_malop(malop_data, sensor_guid):
             raise PluginException(
                 cause="Sensor provided is not related to the Malop ID Provided.",
-                assistance=f"Make sure that sensor provided is involved in the Malop: {malop_id}.",
+                assistance=f"Make sure the provided sensor is involved in the Malop: {malop_id}.",
             )
 
         file_guids = self.get_file_guids(
@@ -47,7 +47,7 @@ class QuarantineFile(insightconnect_plugin_runtime.Action):
         if not actions:
             raise PluginException(
                 cause="No actions to perform.",
-                assistance="Usually it's because there is no quarantined files in the Malop provided.",
+                assistance="This can happen because there are no quarantined files in the provided Malop.",
             )
 
         return {

@@ -536,11 +536,11 @@ actions:
         required: true
   quarantine_file:
     title: Quarantine File
-    description: This action is used to quarantine a detected malicious file in a secure location or unquarantine a file
+    description: Quarantine a detected malicious file in a secure location or unquarantine a file
     input:
       malop_id:
         title: Malop ID
-        description: Malop ID related to the file you wish to quarantine or unquaratine
+        description: Malop ID related to the file you wish to quarantine or unquarantine
         type: string
         required: true
         example: "22.2787422324806222966"
