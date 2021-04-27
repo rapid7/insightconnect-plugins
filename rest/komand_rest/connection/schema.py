@@ -31,7 +31,8 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
         "Rapid7 Insight",
         "OpsGenie",
         "Pendo",
-        "Custom"
+        "Custom",
+        "No Authentication"
       ],
       "order": 2
     },

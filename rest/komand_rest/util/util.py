@@ -85,7 +85,7 @@ class RestAPI(object):
                     " Please complete the connection with a username and password or change the authentication type.",
                 )
         else:
-            if not secret_key:
+            if not secret_key and authentication_type != "Custom":
                 raise PluginException(
                     cause="An authentication type was selected that requires a secret key.",
                     assistance="Please complete the connection with a secret key or change the authentication type.",
@@ -109,6 +109,12 @@ class RestAPI(object):
             new_headers = {}
             for key, value in self.default_headers.items():
                 if value == self.CUSTOM_SECRET_INPUT:
+                    if not secret_key:
+                        raise PluginException(
+                            cause="'CUSTOM_SECRET_INPUT' used in authentication header, but no secret provided.",
+                            assistance="When using 'CUSTOM_SECRET_INPUT' as a value in authentication headers the"
+                            " 'secret_key' field is required.",
+                        )
                     new_headers[key] = secret_key
                 else:
                     new_headers[key] = value
