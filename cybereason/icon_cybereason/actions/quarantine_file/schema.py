@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action is used to quarantine a detected malicious file in a secure location or unquarantine a file"
+    DESCRIPTION = "Quarantine a detected malicious file in a secure location or unquarantine a file"
 
 
 class Input:
@@ -26,7 +26,7 @@ class QuarantineFileInput(insightconnect_plugin_runtime.Input):
     "malop_id": {
       "type": "string",
       "title": "Malop ID",
-      "description": "Malop ID related to the file you wish to quarantine or unquaratine",
+      "description": "Malop ID related to the file you wish to quarantine or unquarantine",
       "order": 1
     },
     "quarantine": {
