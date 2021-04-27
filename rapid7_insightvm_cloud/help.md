@@ -1,15 +1,15 @@
 # Description
 
-InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans
+InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the  v4 cloud API to view assets, scan results and start scans
 
 # Key Features
 
-Identify key features of plugin.
+Search through assets in order to start scans.
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product's user interface
+Requires an API Key from the product
+
 
 # Documentation
 
@@ -37,9 +37,9 @@ Example input:
 
 ### Actions
 
-#### Update Scan Status
+#### Stop Scan 
 
-This action is used to update the status of a scan.
+This action is used to stop a running scan.
 
 ##### Input
 
@@ -50,6 +50,10 @@ This action is used to update the status of a scan.
 Example input:
 
 ```
+    {
+      "id": "abb37782-df95-4cf6-b4c2-8d466ca5734",
+      "status": "stop"
+    }
 ```
 
 ##### Output
@@ -61,7 +65,9 @@ Example input:
 Example output:
 
 ```
-
+    {
+      "success": true
+    }
 ```
 
 #### Asset Search
@@ -82,7 +88,9 @@ Example input:
 ```
 {
   "size": 100,
-  "sort_criteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}"
+  "sort_criteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}",
+  "ip": "10.4.22.144",
+  "hostname": "fortigate-vm02.vuln.lax.rapid7.com"
 }
 ```
 
@@ -95,7 +103,80 @@ Example input:
 Example output:
 
 ```
-null
+    {
+      "assets": [
+        {
+          "assessed_for_policies": false,
+          "assessed_for_vulnerabilities": true,
+          "credential_assessments": [],
+          "critical_vulnerabilities": 12,
+          "exploits": 5,
+          "id": "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-107",
+          "ip": "10.4.22.144",
+          "last_assessed_for_vulnerabilities": "2020-06-25T15:19:51.543Z",
+          "last_scan_end": "2020-10-26T22:35:53.590Z",
+          "last_scan_start": "2020-10-26T22:35:53.564Z",
+          "mac": "00:50:56:94:52:04",
+          "malware_kits": 0,
+          "moderate_vulnerabilities": 4,
+          "new": [],
+          "os_architecture": "",
+          "os_description": "Linux 2.6.32",
+          "os_family": "Linux",
+          "os_name": "Linux",
+          "os_system_name": "Linux",
+          "os_type": "General",
+          "os_vendor": "Linux",
+          "os_version": "2.6.32",
+          "remediated": [],
+          "risk_score": 9304.376953125,
+          "severe_vulnerabilities": 21,
+          "tags": [
+            {
+              "name": "integrations discovery",
+              "type": "SITE"
+            }
+          ],
+          "total_vulnerabilities": 37,
+          "unique_identifiers": []
+        },
+        {
+          "assessed_for_policies": false,
+          "assessed_for_vulnerabilities": true,
+          "credential_assessments": [],
+          "critical_vulnerabilities": 12,
+          "exploits": 5,
+          "id": "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-107",
+          "ip": "10.4.22.144",
+          "last_assessed_for_vulnerabilities": "2020-06-25T15:19:51.543Z",
+          "last_scan_end": "2020-10-26T22:35:53.590Z",
+          "last_scan_start": "2020-10-26T22:35:53.564Z",
+          "mac": "00:50:56:94:52:04",
+          "malware_kits": 0,
+          "moderate_vulnerabilities": 4,
+          "new": [],
+          "os_architecture": "",
+          "os_description": "Linux 2.6.32",
+          "os_family": "Linux",
+          "os_name": "Linux",
+          "os_system_name": "Linux",
+          "os_type": "General",
+          "os_vendor": "Linux",
+          "os_version": "2.6.32",
+          "remediated": [],
+          "risk_score": 9304.376953125,
+          "severe_vulnerabilities": 21,
+          "tags": [
+            {
+              "name": "integrations discovery",
+              "type": "SITE"
+            }
+          ],
+          "total_vulnerabilities": 37,
+          "unique_identifiers": []
+        }
+      ]
+    }
 ```
 
 #### Get Asset
@@ -111,6 +192,9 @@ This action gets an asset by ID.
 Example input:
 
 ```
+    {
+      "id": "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-13"
+    }
 ```
 
 ##### Output
@@ -122,7 +206,69 @@ Example input:
 Example output:
 
 ```
-
+    "asset": {
+        "assessed_for_policies": false,
+        "assessed_for_vulnerabilities": true,
+        "credential_assessments": [
+          {
+            "port": 22,
+            "protocol": "TCP",
+            "status": "NO_CREDS_SUPPLIED"
+          }
+        ],
+        "critical_vulnerabilities": 1,
+        "exploits": 2,
+        "host_name": "fortigate-vm02.vuln.lax.rapid7.com",
+        "id": "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-13",
+        "ip": "10.4.31.141",
+        "last_assessed_for_vulnerabilities": "2021-04-26T08:04:28.536Z",
+        "last_scan_end": "2021-04-26T08:04:28.536Z",
+        "last_scan_start": "2021-04-26T08:00:56.006Z",
+        "mac": "00:50:56:94:42:6B",
+        "malware_kits": 0,
+        "moderate_vulnerabilities": 7,
+        "new": [],
+        "remediated": [],
+        "risk_score": 9006.3388671875,
+        "severe_vulnerabilities": 19,
+        "tags": [
+          {
+            "name": "sn_pt_LDAP Admins",
+            "type": "OWNER"
+          },
+          {
+            "name": "sn_CAB Approval",
+            "type": "OWNER"
+          },
+          {
+            "name": "integrations",
+            "type": "CUSTOM"
+          },
+          {
+            "name": "ck_test_site_2",
+            "type": "SITE"
+          },
+          {
+            "name": "integrations",
+            "type": "SITE"
+          },
+          {
+            "name": "ck_test_site_3",
+            "type": "SITE"
+          },
+          {
+            "name": "integrations discovery",
+            "type": "SITE"
+          },
+          {
+            "name": "ck_test_site_1",
+            "type": "SITE"
+          }
+        ],
+        "total_vulnerabilities": 27,
+        "unique_identifiers": []
+      }
+    }
 ```
 
 #### Get Scan
@@ -138,6 +284,9 @@ This action is used to get the status of a scan.
 Example input:
 
 ```
+    {
+      "scan_id": "abb37782-df95-4cf6-b4c2-8d466ca57349"
+    }
 ```
 
 ##### Output
@@ -159,7 +308,20 @@ Example input:
 Example output:
 
 ```
-null
+    {
+      "scans": [
+        {
+          "asset_ids": [
+            "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-13"
+          ],
+          "engine_id": "c8970d2ee174180e202af83b66cd0c4b",
+          "finished": null,
+          "id": "7fc3d8ec-24a7-4835-84f2-8877fe96a29b",
+          "name": "testing scan action"
+        }
+      ],
+      "unscanned_assets": []
+    }
 ```
 
 #### Scan
@@ -178,12 +340,12 @@ This action is used to start a scan on a site.
 Example input:
 
 ```
-{
-  "asset_ids": [
-    "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-135"
-  ],
-  "name": "test cloud scan"
-}
+    {
+      "asset_ids": ["cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-107",
+      "name": "testing scan action",
+      "ip": "10.4.31.141",
+      "hostname": "fortigate-vm02.vuln.lax.rapid7.com"
+    }
 ```
 
 ##### Output
@@ -195,20 +357,20 @@ Example input:
 Example output:
 
 ```
-{
-  "scans": [
     {
-      "asset_ids": [
-        "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset..."
+      "scans": [
+        {
+          "asset_ids": [
+            "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-13"
+          ],
+          "engine_id": "c8970d2ee174180e202af83b66cd0c4b",
+          "finished": null,
+          "id": "7fc3d8ec-24a7-4835-84f2-8877fe96a29b",
+          "name": "testing scan action"
+        }
       ],
-      "engine_id": "c8970d2ee174180e202af83b66cd0c4b",
-      "finished": null,
-      "id": "a723dbb9-9b22-46d9-b7f5-fba0ecdffec6",
-      "name": "this is a test"
+      "unscanned_assets": []
     }
-  ],
-  "unscanned_assets": []
-}
 ```
 
 ### Triggers
@@ -836,4 +998,4 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Rapid7 InsightVM for th Cloud](LINK TO PRODUCT/VENDOR WEBSITE)
+* [InsightVM Cloud API](https://help.rapid7.com/insightvm/en-us/api/integrations.html)
