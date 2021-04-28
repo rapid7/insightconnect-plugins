@@ -1,3 +1,5 @@
+import ast
+
 import insightconnect_plugin_runtime
 from .schema import ScanInput, ScanOutput, Input, Component
 # Custom imports below
@@ -34,7 +36,7 @@ class Scan(insightconnect_plugin_runtime.Action):
                     if curr[len(curr) - 1] == "}":
                         curr = curr[:len(curr) - 1]
                 curr = "{" + curr + "}"
-                curr = eval(curr)
+                curr = ast.literal_eval(curr)
                 if hostname != "":
                     if "host_name" in curr:
                         if hostname == curr["host_name"]:
