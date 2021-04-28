@@ -25,7 +25,7 @@ class Connection(komand.Connection):
         self.connection_test_passed = False
 
     def connect(self, params={}):
-        """ Connect uses the carbon black credentials to get the latest api token for the user """
+        """Connect uses the carbon black credentials to get the latest api token for the user"""
         url = params.get("url")
         token = params.get("api_key").get("secretKey")
         ssl_verify = params.get("ssl_verify")

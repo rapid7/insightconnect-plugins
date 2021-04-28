@@ -13,7 +13,7 @@ import ssl
 import sys
 
 try:
-    import xmlrpclib    # noqa: B411
+    import xmlrpclib  # noqa: B411
 except ImportError:
     import xmlrpc.client as xmlrpclib
 
@@ -487,7 +487,7 @@ class Confluence(object):
         """
         return self._server.confluence2.getPages(self._token2, space)
 
-    def getPagesWithErrors(self, stdout=True, caching=True):    # noqa: MC0001
+    def getPagesWithErrors(self, stdout=True, caching=True):  # noqa: MC0001
         """
         Get pages with formatting errors
         """

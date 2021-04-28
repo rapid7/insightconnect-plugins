@@ -28,12 +28,12 @@ class Tweets(komand.Trigger):
 
     def run(self, params={}):
         if not self.connection.client:
-            assert "Run: Twitter API client was None."              # noqa: B101
+            assert "Run: Twitter API client was None."  # noqa: B101
             raise Exception("Run: Twitter API client was None.")
 
         self.pattern = params.get("pattern")
         if not self.pattern:
-            assert "Run: Pattern parameter was empty. Make sure input is marked required."              # noqa: B101
+            assert "Run: Pattern parameter was empty. Make sure input is marked required."  # noqa: B101
             raise Exception("Run: Pattern parameter was empty. Make sure input is marked required.")
 
         # Make doubly sure it defaults to the original value, just in case?

@@ -26,22 +26,22 @@ class Search(komand.Action):
             if not validators.url(query):
                 raise PluginException(
                     cause="URL entered as input type, but not provided in query.",
-                    assistance="Please check URL and try again."
+                    assistance="Please check URL and try again.",
                 )
-            search_query = f"page.url: \"{query}\""
+            search_query = f'page.url: "{query}"'
         else:
             if not validators.domain(query):
                 raise PluginException(
                     cause="Domain entered as input type, but not provided in query.",
-                    assistance="Please check domain address and try again."
+                    assistance="Please check domain address and try again.",
                 )
-            search_query = f"page.domain:\"{query}\""
+            search_query = f'page.domain:"{query}"'
 
         query_params = [
-            f'q={search_query}',
-            f'size={str(params.get(Input.SIZE, 100))}',
-            f'offset={str(params.get(Input.OFFSET, 0))}',
-            f'sort={params.get(Input.SORT, "_score")}'
+            f"q={search_query}",
+            f"size={str(params.get(Input.SIZE, 100))}",
+            f"offset={str(params.get(Input.OFFSET, 0))}",
+            f'sort={params.get(Input.SORT, "_score")}',
         ]
 
         url = f'{self.connection.server}/search/?{"&".join(query_params)}'

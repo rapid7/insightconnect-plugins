@@ -39,11 +39,7 @@ class CreateThreat(komand.Action):
                 domain_indicator.append(indicator)
             elif validators.url(indicator):
                 url_indicator.append(indicator)
-            elif (
-                validators.sha1(indicator)
-                or validators.md5(indicator)
-                or validators.sha256(indicator)
-            ):
+            elif validators.sha1(indicator) or validators.md5(indicator) or validators.sha256(indicator):
                 hash_indicator.append(indicator)
             else:
                 self.logger.info(

@@ -28,15 +28,18 @@ class ResetPassword(komand.Action):
         self.logger.info(f"Escaped DN {dn}")
 
         if ssl is False:
-            raise PluginException(cause="SSL must be enabled",
-                                  assistance="SSL must be enabled for the reset password action")
+            raise PluginException(
+                cause="SSL must be enabled", assistance="SSL must be enabled for the reset password action"
+            )
 
         try:
             conn.raise_exceptions = True
             success = extend.ad_modify_password(conn, dn, new_password, old_password=None)
         except LDAPException as e:
-            raise PluginException(cause="LDAP returned an error in the response.",
-                                  assistance="LDAP failed to reset the password for this user",
-                                  data=e)
+            raise PluginException(
+                cause="LDAP returned an error in the response.",
+                assistance="LDAP failed to reset the password for this user",
+                data=e,
+            )
 
         return {"success": success}

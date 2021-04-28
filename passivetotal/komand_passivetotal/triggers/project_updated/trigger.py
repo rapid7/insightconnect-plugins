@@ -36,7 +36,7 @@ class ProjectUpdated(komand.Trigger):
                 guids = list(map(lambda i: i["guid"], artifacts))
                 guids_sorted = sorted(guids)
                 guid_string = reduce((lambda g1, g2: g1 + g2), guids_sorted)
-                new_hash = hashlib.md5(guid_string.encode())    # noqa: B303
+                new_hash = hashlib.md5(guid_string.encode())  # noqa: B303
                 new_hash = new_hash.hexdigest()
 
                 with komand.helper.open_cachefile(self.CACHE_FILE_NAME) as cache_file:

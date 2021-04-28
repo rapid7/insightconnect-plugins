@@ -97,7 +97,7 @@ class NewScans(komand.Trigger):
             # Update cache file
             self.logger.info("Writing to " + self.CACHE_FILE_NAME)
             try:
-                util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(cache_site_scans))     # noqa: B608
+                util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(cache_site_scans))  # noqa: B608
             except TypeError as e:
                 raise PluginException(cause="Failed to save cache to file", assistance=f"Exception returned was {e}")
 
@@ -107,7 +107,7 @@ class NewScans(komand.Trigger):
     @staticmethod
     def scans_query(scan_statuses, site_ids):
         return (
-            f"SELECT ds.scan_id, dss.description as status, dsscan.site_id, dsite.name as site_name "   # noqa: B608
+            f"SELECT ds.scan_id, dss.description as status, dsscan.site_id, dsite.name as site_name "  # noqa: B608
             f"FROM dim_scan AS ds "
             f"JOIN dim_scan_status AS dss ON dss.status_id = ds.status_id "
             f"JOIN dim_site_scan AS dsscan ON dsscan.scan_id = ds.scan_id "

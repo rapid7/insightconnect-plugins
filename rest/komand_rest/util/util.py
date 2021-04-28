@@ -33,7 +33,7 @@ class Common:
         try:
             body_object = response.json()
         except ValueError:
-            """ Nothing? We don't care if it fails, that could be normal """
+            """Nothing? We don't care if it fails, that could be normal"""
         # It's possible to have a successful call with no body
         # https://stackoverflow.com/questions/32319845/python-requests-gives-none-response-where-json-data-is-expected
         if body_object is None:

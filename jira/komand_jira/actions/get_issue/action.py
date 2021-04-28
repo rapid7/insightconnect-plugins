@@ -16,7 +16,7 @@ class GetIssue(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        """ Get an issue by ID """
+        """Get an issue by ID"""
         issue = self.connection.client.issue(id=params[Input.ID])
         get_attachments = params.get(Input.GET_ATTACHMENTS)
 

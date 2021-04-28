@@ -2,7 +2,7 @@ import komand
 from .schema import TracerouteInput, TracerouteOutput
 
 # Custom imports below
-import subprocess   # noqa: B404
+import subprocess  # noqa: B404
 import re
 
 
@@ -60,7 +60,7 @@ class Traceroute(komand.Action):
             ) + "-w {time_out} {host} {port}".format(time_out=time_out, host=host, port=port)
 
         response = subprocess.Popen(
-            ["tcptraceroute " + request], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True    # noqa: B602
+            ["tcptraceroute " + request], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True  # noqa: B602
         )
         (output, err) = response.communicate()
 
