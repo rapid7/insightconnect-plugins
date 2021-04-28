@@ -351,7 +351,9 @@ class Help(object):
         :param section_type: ComponentType enum value representing the section type to generate
         :return: Markdown section as a string
         """
-        assert section_type != ComponentType.connection, "generate_component_section does not support connections!"     # noqa: B101
+        assert (
+            section_type != ComponentType.connection
+        ), "generate_component_section does not support connections!"  # noqa: B101
 
         # Both actions and triggers are of type PluginComponent - so they can be swapped in/out in the code below
         components = self.spec.actions if section_type == ComponentType.action else self.spec.triggers

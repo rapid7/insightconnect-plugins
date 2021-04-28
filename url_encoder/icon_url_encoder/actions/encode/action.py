@@ -23,12 +23,12 @@ class Encode(insightconnect_plugin_runtime.Action):
     def encode_url(self, encode_all: bool, input_url: str) -> str:
         self.logger.info(f"Encoding: {input_url}")
 
-        url = input_url.split('://', maxsplit=1)
+        url = input_url.split("://", maxsplit=1)
 
         if encode_all:
-            url[-1] = quote(url[-1], safe='')
+            url[-1] = quote(url[-1], safe="")
         else:
-            url[-1] = quote(url[-1], safe='/?=&#')
+            url[-1] = quote(url[-1], safe="/?=&#")
 
-        result = '://'.join(url)
+        result = "://".join(url)
         return result

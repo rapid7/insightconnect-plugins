@@ -17,9 +17,6 @@ class DisableUser(komand.Action):
     def run(self, params={}):
         return {
             Output.SUCCESS: ADUtils.change_account_status(
-                self.connection.conn,
-                params.get(Input.DISTINGUISHED_NAME),
-                False,
-                self.logger
+                self.connection.conn, params.get(Input.DISTINGUISHED_NAME), False, self.logger
             )
         }

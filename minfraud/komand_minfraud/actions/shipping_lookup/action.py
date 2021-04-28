@@ -14,7 +14,7 @@ class ShippingLookup(komand.Action):
             output=ShippingLookupOutput(),
         )
 
-    def run(self, params={}):   # noqa: MC0001
+    def run(self, params={}):  # noqa: MC0001
         address = params.get("address")
         shipping_first_name = params.get("shipping_first_name")
         shipping_last_name = params.get("shipping_last_name")

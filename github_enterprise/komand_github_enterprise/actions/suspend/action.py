@@ -21,7 +21,7 @@ class Suspend(komand.Action):
             # Promote user
             response = requests.put(
                 api_call,
-                verify=False,   # noqa: B501
+                verify=False,  # noqa: B501
                 auth=(self.connection.username, self.connection.secret),
                 headers={"Content-Length": 0},
             )
@@ -36,7 +36,9 @@ class Suspend(komand.Action):
     def test(self):
         try:
             api_call = self.connection.api_prefix + "/user"
-            response = requests.get(api_call, auth=(self.connection.username, self.connection.secret), verify=False)    # noqa: B501
+            response = requests.get(
+                api_call, auth=(self.connection.username, self.connection.secret), verify=False
+            )  # noqa: B501
             if response.status_code == 200:
                 return {"status": "Success"}
         except requests.exceptions.RequestException as e:

@@ -22,11 +22,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             os.chmod(key_file, 0o700)
         key_file_path = path.join(key_file, "id_rsa")
         with open(key_file_path, "w+") as private_key:
-            private_key.write(
-                base64.b64decode(
-                    params.get(Input.KEY).get("privateKey")
-                ).decode("utf-8")
-            )
+            private_key.write(base64.b64decode(params.get(Input.KEY).get("privateKey")).decode("utf-8"))
         os.chmod(key_file_path, 0o600)
         self.logger.info("Establishing connection")
         device = {
@@ -78,16 +74,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
             raise ConnectionTestException(
                 cause="Cannot connect/configure this device.",
                 assistance="Please check provided connection data and try again.",
-                data=e
+                data=e,
             )
 
     def test(self):
         try:
             self.client().write_channel("\n")
-            return {
-                "success": True
-            }
+            return {"success": True}
         except (ValueError, EOFError, SSHException):
-            return {
-                "success": False
-            }
+            return {"success": False}

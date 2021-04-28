@@ -18,7 +18,7 @@ class Connection(komand.Connection):
         user = params.get("credentials").get("username", "")
         token = params.get("credentials").get("password", "")
 
-        if token == "":     # noqa: B105
+        if token == "":  # noqa: B105
             self.logger.info("Connect: Unauthenticated API will be used")
 
         self.server = server

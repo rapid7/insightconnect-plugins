@@ -20,7 +20,7 @@ class DeactivatedList(komand.Action):
 
     def run(self, params={}):
         try:
-            """ Get api_key and token from connection """
+            """Get api_key and token from connection"""
             server = self.connection.server
             api_key = self.connection.api_key
             token = self.connection.token
@@ -43,7 +43,7 @@ class DeactivatedList(komand.Action):
 
             url = server + "/organizations/" + params.get("id_or_name") + "/memberships?" + url_values
             # api GetBoardsByMember response array board
-            resp = urllib2.urlopen(url)     # noqa: B310
+            resp = urllib2.urlopen(url)  # noqa: B310
             # handle decoding json
             try:
                 result_dic = json.loads(resp.read())

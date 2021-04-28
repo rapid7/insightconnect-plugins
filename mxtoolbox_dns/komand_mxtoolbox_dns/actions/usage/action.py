@@ -18,7 +18,7 @@ class Usage(komand.Action):
         base_url = self.connection.server
         token = self.connection.token
         request_url = base_url + "usage"
-        if token != "" and token != None:       # noqa: B105
+        if token != "" and token != None:  # noqa: B105
             return utils.query_api(request_url, token)
         else:
             return {"response": {"Errors": [{"Error": "This call requires a token to identify the requested account"}]}}
@@ -27,7 +27,7 @@ class Usage(komand.Action):
         base_url = self.connection.server
         token = self.connection.token
         request_url = base_url + "usage"
-        if token != "" and token != None:       # noqa: B105
+        if token != "" and token != None:  # noqa: B105
             return utils.test_api(request_url, token)
         else:
             return {"response": {"Errors": [{"Error": "This call requires a token to identify the requested account"}]}}
