@@ -19,7 +19,7 @@ class RemoveMemberFromOrg(komand.Action):
 
     def run(self, params={}):
         try:
-            """ Get api_key and token from connection """
+            """Get api_key and token from connection"""
             server = self.connection.server
             api_key = self.connection.api_key
             token = self.connection.token
@@ -37,11 +37,13 @@ class RemoveMemberFromOrg(komand.Action):
             url = server + "/organizations/" + params.get("id_or_name") + "/members/" + id_member
 
             # new Request
-            request = urllib2.Request(url, data=json.dumps(data), headers={"Content-Type": "application/json"})  # noqa: B310
+            request = urllib2.Request(
+                url, data=json.dumps(data), headers={"Content-Type": "application/json"}
+            )  # noqa: B310
             request.get_method = lambda: "DELETE"
 
             # Call api and response data
-            resp = urllib2.urlopen(request)     # noqa: B310
+            resp = urllib2.urlopen(request)  # noqa: B310
             # handle decoding json
             try:
                 result_dic = json.loads(resp.read())

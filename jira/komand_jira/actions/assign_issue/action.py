@@ -15,7 +15,7 @@ class AssignIssue(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        """ Run action"""
+        """Run action"""
         id_ = params[Input.ID]
         issue = self.connection.client.issue(id=id_)
 

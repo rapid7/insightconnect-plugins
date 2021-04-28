@@ -8,7 +8,7 @@ from splunklib.binding import HTTPError, AuthenticationError
 from splunklib.client import Service
 import splunklib.client as client
 
-from xml.etree.ElementTree import ParseError    # noqa: B405
+from xml.etree.ElementTree import ParseError  # noqa: B405
 from ssl import SSLError
 import socket
 

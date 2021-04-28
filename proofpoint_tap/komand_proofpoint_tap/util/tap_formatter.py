@@ -6,7 +6,7 @@ class TAP:
     def __init__(self, data):
         self.data = self.clean_data(data)
 
-    @staticmethod           # noqa: MC0001
+    @staticmethod  # noqa: MC0001
     def clean_data(data):
         clean_data = {
             "threat": {

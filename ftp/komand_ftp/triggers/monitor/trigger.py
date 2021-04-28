@@ -20,7 +20,7 @@ class Monitor(komand.Trigger):
             output=MonitorOutput(),
         )
 
-    def run(self, params={}):   # noqa: MC0001
+    def run(self, params={}):  # noqa: MC0001
         """Run the trigger"""
         # send a test event
         # Stored data for file
@@ -100,7 +100,7 @@ class Monitor(komand.Trigger):
                         # Get tmp local file name based on MD5 hash of path + time
                         millis = int(round(time.time() * 1000))
                         tmp_str = path + str(millis)
-                        tmp_filename = hashlib.md5(tmp_str.encode("utf-8")).hexdigest()     # noqa: B303
+                        tmp_filename = hashlib.md5(tmp_str.encode("utf-8")).hexdigest()  # noqa: B303
                         # Actually download file
                         try:
                             self.connection.ftp_host.download(path, tmp_filename)

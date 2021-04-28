@@ -24,7 +24,7 @@ class ListReports(komand.Action):
             output=ListReportsOutput(),
         )
 
-    def run(self, params={}):   # noqa: MC0001
+    def run(self, params={}):  # noqa: MC0001
         page = 0
         size = 1
         sort = params.get("sort")

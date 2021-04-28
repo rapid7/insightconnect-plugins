@@ -62,7 +62,7 @@ class Update(komand.Action):
             request.get_method = lambda: "PUT"
 
             # Call api and response data
-            resp = urllib2.urlopen(request)     # noqa: B310
+            resp = urllib2.urlopen(request)  # noqa: B310
             status_code = resp.getcode()
 
             return {"status_code": status_code}

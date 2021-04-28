@@ -44,7 +44,7 @@ class Capture(komand.Action):
         }
 
         if self.connection.secret:
-            hash_ = hashlib.md5((params["url"] + self.connection.secret).encode("ascii")).hexdigest()   # noqa: B303
+            hash_ = hashlib.md5((params["url"] + self.connection.secret).encode("ascii")).hexdigest()  # noqa: B303
             params["hash"] = hash_
 
         res = requests.get(self.connection.base, params=params)

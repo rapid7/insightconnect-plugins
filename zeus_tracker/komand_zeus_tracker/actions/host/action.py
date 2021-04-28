@@ -5,7 +5,7 @@ from .schema import HostInput, HostOutput
 import json
 import base64
 import urllib.request
-import lxml.html    # noqa: B410
+import lxml.html  # noqa: B410
 
 
 class Host(komand.Action):
@@ -21,7 +21,7 @@ class Host(komand.Action):
         output = {}
         server = self.connection.server
         url = server + "/monitor.php?host=" + params.get("host")
-        response = urllib.request.urlopen(url)      # noqa: B310
+        response = urllib.request.urlopen(url)  # noqa: B310
         tree = lxml.html.fromstring(response.read())
         tables = tree.xpath("//table")
 
@@ -79,7 +79,7 @@ class Host(komand.Action):
                 file_url,
             ) = tr.xpath("td")
             dl_link = server + file_url.xpath("a/@href")[-1]
-            response = urllib.request.urlopen(dl_link)      # noqa: B310
+            response = urllib.request.urlopen(dl_link)  # noqa: B310
             file_dl = str(base64.b64encode(response.read()))
             row = {
                 "date": date.text,
@@ -110,7 +110,7 @@ class Host(komand.Action):
                 file_url,
             ) = tr.xpath("td")
             dl_link = server + file_url.xpath("a/@href")[-1]
-            response = urllib.request.urlopen(dl_link)      # noqa: B310
+            response = urllib.request.urlopen(dl_link)  # noqa: B310
             file_dl = str(base64.b64encode(response.read()))
             row = {
                 "date": date.text,

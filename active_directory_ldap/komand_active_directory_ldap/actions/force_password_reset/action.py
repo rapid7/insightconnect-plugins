@@ -1,6 +1,7 @@
 import komand
 from .schema import ForcePasswordResetInput, ForcePasswordResetOutput
 from komand.exceptions import PluginException
+
 # Custom imports below
 from komand_active_directory_ldap.util.utils import ADUtils
 from ldap3.core.exceptions import LDAPException
@@ -29,8 +30,10 @@ class ForcePasswordReset(komand.Action):
             conn.raise_exceptions = True
             conn.modify(dn=dn, changes=password_expire)
         except LDAPException as e:
-            raise PluginException(cause="LDAP returned an error.",
-                                  assistance="Error was returned when trying to force password reset for this user.",
-                                  data=e)
+            raise PluginException(
+                cause="LDAP returned an error.",
+                assistance="Error was returned when trying to force password reset for this user.",
+                data=e,
+            )
 
         return {"success": True}

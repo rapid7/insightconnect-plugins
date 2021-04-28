@@ -19,9 +19,7 @@ class IsolateMachine(insightconnect_plugin_runtime.Action):
         if malop_id:
             pylum_ids = params.get(Input.PYLUM_IDS)
             if not pylum_ids:
-                raise PluginException(
-                    cause="Pylum IDs shouldn't be empty.", assistance="Please check this input."
-                )
+                raise PluginException(cause="Pylum IDs shouldn't be empty.", assistance="Please check this input.")
             return {Output.RESPONSE: self.connection.api.isolate_machines(malop_id, pylum_ids)}
 
         initiator_user_name = params.get(Input.INITIATOR_USER_NAME)
@@ -32,6 +30,4 @@ class IsolateMachine(insightconnect_plugin_runtime.Action):
                 assistance="Please check this input.",
             )
 
-        return {
-            Output.RESPONSE: self.connection.api.remediate(initiator_user_name, actions_by_machine)
-        }
+        return {Output.RESPONSE: self.connection.api.remediate(initiator_user_name, actions_by_machine)}

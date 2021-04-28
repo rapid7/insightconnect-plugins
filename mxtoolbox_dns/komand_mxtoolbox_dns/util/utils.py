@@ -5,7 +5,7 @@ import komand
 
 def query_api(request_url, token):
     try:
-        if token == "" or token == None:        # noqa: B105
+        if token == "" or token == None:  # noqa: B105
             results = requests.get(request_url)
         else:
             headers = {"Authorization": token}
@@ -19,7 +19,7 @@ def query_api(request_url, token):
 
 def test_api(request_url, token):
     try:
-        if token == "" or token == None:        # noqa: B105
+        if token == "" or token == None:  # noqa: B105
             results = requests.get(request_url)
         else:
             headers = {"Authorization": token}

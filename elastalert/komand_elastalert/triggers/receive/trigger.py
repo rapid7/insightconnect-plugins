@@ -90,7 +90,7 @@ class Receive(komand.Trigger):
 
         BUFF = 4096
         interval = params.get("interval")
-        endpoint = params.get("endpoint", "0.0.0.0")    # noqa: B104
+        endpoint = params.get("endpoint", "0.0.0.0")  # noqa: B104
         tcp_port = params.get("tcp_port")
 
         host = endpoint + ":" + str(tcp_port)

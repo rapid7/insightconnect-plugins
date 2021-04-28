@@ -21,7 +21,7 @@ class DeleteSsh(komand.Action):
             params.get("key_id"),
         )
         try:
-            r = requests.delete(r_url, headers={"PRIVATE-TOKEN": self.connection.token}, verify=False)      # noqa: B501
+            r = requests.delete(r_url, headers={"PRIVATE-TOKEN": self.connection.token}, verify=False)  # noqa: B501
         except requests.exceptions.RequestException as e:  # This is the correct syntax
             self.logger.error(e)
             raise Exception(e)
