@@ -77,7 +77,7 @@ This action is used to search for assets using filtered asset search.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |hostname|string|None|False|The hostname|None|fortigate-vm02.vuln.lax.rapid7.com|
-|ip|string|None|False|The IP|None|10.4.22.144|
+|ip|string|None|False|Primary IPv4 or IPv6 address of the asset|None|10.4.22.144|
 |size|number|0|False|The number of records to retrieve. If blank or '0' all assets that match the search will be returned|None|100|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|
 
@@ -291,7 +291,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|asset_ids|[]string|False|List of ids of the scanned assets|
+|asset_ids|[]string|False|List of IDs of the scanned assets|
 |engine_id|string|False|ID of the engine used for the scan|
 |scanName|string|False|User-driven scan name for the scan|
 
@@ -324,7 +324,7 @@ This action is used to start a scan on a site.
 |----|----|-------|--------|-----------|----|-------|
 |asset_ids|[]string|None|False|IDs of the assets to scan|None|["cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-135"]|
 |hostname|string|None|False|The hostname|None|fortigate-vm02.vuln.lax.rapid7.com|
-|ip|string|None|False|The IP|None|10.4.31.141|
+|ip|string|None|False|Primary IPv4 or IPv6 address of the asset|None|10.4.31.141|
 |name|string|None|True|The name of the scan|None|test cloud scan|
 
 Example input:

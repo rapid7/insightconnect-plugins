@@ -49,7 +49,7 @@ class GetScanOutput(insightconnect_plugin_runtime.Output):
     "asset_ids": {
       "type": "array",
       "title": "Asset IDs",
-      "description": "List of ids of the scanned assets",
+      "description": "List of IDs of the scanned assets",
       "items": {
         "type": "string"
       },

@@ -26,7 +26,7 @@ class ScanInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "asset_ids": {
       "type": "array",
-      "title": "Asset Ids",
+      "title": "Asset IDs",
       "description": "IDs of the assets to scan",
       "items": {
         "type": "string"
@@ -42,7 +42,7 @@ class ScanInput(insightconnect_plugin_runtime.Input):
     "ip": {
       "type": "string",
       "title": "IP",
-      "description": "The IP",
+      "description": "Primary IPv4 or IPv6 address of the asset",
       "order": 3
     },
     "name": {

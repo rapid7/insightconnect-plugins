@@ -20,34 +20,34 @@ class Scan(insightconnect_plugin_runtime.Action):
         parameters.append(("size", 50))
         resources = self.connection.ivm_cloud_api.call_api_pages("assets", "POST", parameters)
 
-        assets = list()
-        for page in range(len(resources)):
-            current = str(resources[page])
-            asset = current.split("]},")
-            for num in range(len(asset)):
-                curr = asset[num]
-                if num == 0:
-                    curr = curr[11:] + "]"
+        results = list()
+        for page in resources:
+            string_page = str(page)
+            assets = string_page.split("]},")
+            for asset_number in range(len(assets)):
+                asset = assets[asset_number]
+                if asset_number == 0:
+                    asset = asset[11:] + "]"
                 else:
-                    curr = curr[2:] + "]"
-                if num == len(asset) - 1:
-                    ending = curr.split("], 'metadata':")
-                    curr = ending[0]
-                    if curr[len(curr) - 1] == "}":
-                        curr = curr[:len(curr) - 1]
-                curr = "{" + curr + "}"
-                curr = ast.literal_eval(curr)
+                    asset = asset[2:] + "]"
+                if asset_number == len(assets) - 1:
+                    ending = asset.split("], 'metadata':")
+                    asset = ending[0]
+                    if asset[len(asset) - 1] == "}":
+                        asset = asset[:len(asset) - 1]
+                asset = "{" + asset + "}"
+                asset = ast.literal_eval(asset)
                 if hostname != "":
-                    if "host_name" in curr:
-                        if hostname == curr["host_name"]:
-                            if curr["id"] not in assets:
-                                assets.append(curr["id"])
+                    if "host_name" in asset:
+                        if hostname == asset["host_name"]:
+                            if asset["id"] not in results:
+                                results.append(asset["id"])
                 elif ip != "":
-                    if "ip" in curr:
-                        if ip == curr["ip"]:
-                            if curr["id"] not in assets:
-                                assets.append(curr["id"])
-        return assets
+                    if "ip" in asset:
+                        if ip == asset["ip"]:
+                            if asset["id"] not in results:
+                                results.append(asset["id"])
+        return results
 
     def run(self, params={}):
         asset_ids = params.get(Input.ASSET_IDS)
@@ -61,8 +61,8 @@ class Scan(insightconnect_plugin_runtime.Action):
             )
         if hostname != "" or ip != "":
             extra_ids = self.asset_search(hostname, ip)
-            for num in range(len(extra_ids)):
-                asset_ids.append(extra_ids[num])
+            for extra_id in range(len(extra_ids)):
+                asset_ids.append(extra_ids[extra_id])
 
         body = {"asset_ids": asset_ids, "name": name}
 

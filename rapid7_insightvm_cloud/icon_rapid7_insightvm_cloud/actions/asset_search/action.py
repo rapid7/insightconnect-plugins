@@ -8,36 +8,36 @@ from .schema import AssetSearchInput, AssetSearchOutput, Input, Output, Componen
 
 
 def format_response(resources: [], params={}):
-    assets = list()
+    results = list()
     ip = params.get(Input.IP)
     hostname = params.get(Input.HOSTNAME)
-    for page in range(len(resources)):
-        current = str(resources[page])
-        asset = current.split("]},")
-        for num in range(len(asset)):
-            curr = asset[num]
-            if num == 0:
-                curr = curr[11:] + "]"
+    for page in resources:
+        string_page = str(page)
+        assets = string_page.split("]},")
+        for asset_number in range(len(assets)):
+            asset = assets[asset_number]
+            if asset_number == 0:
+                asset = asset[11:] + "]"
             else:
-                curr = curr[2:] + "]"
-            if num == len(asset) - 1:
-                ending = curr.split("], 'metadata':")
-                curr = ending[0]
-                if curr[len(curr) - 1] == "}":
-                    curr = curr[:len(curr) - 1]
-            curr = "{" + curr + "}"
-            curr = ast.literal_eval(curr)
+                asset = asset[2:] + "]"
+            if asset_number == len(assets) - 1:
+                ending = asset.split("], 'metadata':")
+                asset = ending[0]
+                if asset[len(asset) - 1] == "}":
+                    asset = asset[:len(asset) - 1]
+            asset = "{" + asset + "}"
+            asset = ast.literal_eval(asset)
             if hostname != "":
-                if "host_name" in curr:
-                    if hostname == curr["host_name"]:
-                        assets.append(curr)
+                if "host_name" in asset:
+                    if hostname == asset["host_name"]:
+                        results.append(asset)
             elif ip != "":
-                if "ip" in curr:
-                    if ip == curr["ip"]:
-                        assets.append(curr)
+                if "ip" in asset:
+                    if ip == asset["ip"]:
+                        results.append(asset)
             elif hostname == "" and ip == "":
-                assets.append(curr)
-    return assets
+                results.append(asset)
+    return results
 
 
 class AssetSearch(insightconnect_plugin_runtime.Action):

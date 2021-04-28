@@ -1957,7 +1957,7 @@ actions:
     description: Start a scan on a site
     input:
       asset_ids:
-        title: Asset Ids
+        title: Asset IDs
         description: IDs of the assets to scan
         type: "[]string"
         example: ["cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-135"]
@@ -1970,7 +1970,7 @@ actions:
         required: true
       ip:
         title: IP
-        description: The IP
+        description: Primary IPv4 or IPv6 address of the asset
         type: string
         example: "10.4.31.141"
         required: false
@@ -2012,7 +2012,7 @@ actions:
         required: true
     output:
       asset_ids:
-        description: List of ids of the scanned assets
+        description: List of IDs of the scanned assets
         title: Asset IDs
         type: "[]string"
         example: ["cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-13"]
@@ -2048,7 +2048,7 @@ actions:
         example: '{"risk-score": "asc", "criticality-tag": "desc"}'
       ip:
         title: IP
-        description: The IP
+        description: Primary IPv4 or IPv6 address of the asset
         type: string
         example: "10.4.22.144"
         required: false
