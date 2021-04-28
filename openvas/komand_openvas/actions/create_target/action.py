@@ -43,7 +43,7 @@ class CreateTarget(komand.Action):
             except ValueError:
                 raise
 
-    def validateIPList(self, host_list):    # noqa: MC0001
+    def validateIPList(self, host_list):  # noqa: MC0001
         for i in host_list:
             if "/" in i:
                 try:

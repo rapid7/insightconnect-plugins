@@ -16,12 +16,12 @@ class Post(insightconnect_plugin_runtime.Action):
             method="POST",
             path=params.get(Input.ROUTE),
             json_data=params.get(Input.BODY, {}),
-            headers=params.get(Input.HEADERS, {})
+            headers=params.get(Input.HEADERS, {}),
         )
 
         return {
             Output.BODY_OBJECT: Common.body_object(response),
             Output.BODY_STRING: response.text,
             Output.STATUS: response.status_code,
-            Output.HEADERS: Common.copy_dict(response.headers)
+            Output.HEADERS: Common.copy_dict(response.headers),
         }

@@ -30,7 +30,7 @@ def score_domain(domain):
     try:
         res = get_tld(domain, as_object=True, fail_silently=True, fix_protocol=True)
         domain = ".".join([res.subdomain, res.domain])
-    except:     # noqa: B110
+    except:  # noqa: B110
         pass
 
     words_in_domain = re.split("\W+", domain)

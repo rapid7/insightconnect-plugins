@@ -1,4 +1,4 @@
-import subprocess   # noqa: B404
+import subprocess  # noqa: B404
 from komand.exceptions import PluginException
 
 
@@ -19,7 +19,7 @@ class Helper:
 
         sed_cmd = f"sed {Helper.shell_quote(sed_opts)} {sed_exp}"
         try:
-            p = subprocess.Popen(sed_cmd, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)    # noqa: B602
+            p = subprocess.Popen(sed_cmd, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)  # noqa: B602
         except Exception as e:
             raise PluginException(cause="Problem with process", assistance=e.message)
 

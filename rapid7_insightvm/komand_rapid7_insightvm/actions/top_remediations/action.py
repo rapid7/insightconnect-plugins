@@ -179,7 +179,7 @@ class TopRemediations(komand.Action):
     @staticmethod
     def vulnerabilities_query(limit):
         return (
-            f"WITH remediation_vulnerabilities AS ( "   # noqa: B608
+            f"WITH remediation_vulnerabilities AS ( "  # noqa: B608
             f"SELECT DISTINCT solution_id, vulnerability_id "
             f"FROM dim_asset_vulnerability_solution "
             f")"
