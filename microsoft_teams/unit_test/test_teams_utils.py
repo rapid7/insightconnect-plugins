@@ -7,7 +7,7 @@ from icon_microsoft_teams.util.teams_utils import (
     create_channel,
     delete_channel,
     get_channels_from_microsoft,
-    get_teams_from_microsoft
+    get_teams_from_microsoft,
 )
 
 import logging
@@ -97,24 +97,19 @@ class TestTeamsUtils(TestCase):
         self.assertEquals(teams[0].get("displayName"), expected)
 
     def test_integration_negative_get_blank_team(self):
-            log = logging.getLogger("Test")
-            test_connection = Connection()
-            test_connection.logger = log
+        log = logging.getLogger("Test")
+        test_connection = Connection()
+        test_connection.logger = log
 
-            with open("../tests/send_message.json") as file:
-                data = json.load(file)
-                connection_params = data.get("body").get("connection")
+        with open("../tests/send_message.json") as file:
+            data = json.load(file)
+            connection_params = data.get("body").get("connection")
 
-            test_connection.connect(connection_params)
-            expected = ""
-            with self.assertRaises(PluginException):
-                teams = get_teams_from_microsoft(log, test_connection, expected, True)
+        test_connection.connect(connection_params)
+        expected = ""
+        with self.assertRaises(PluginException):
+            teams = get_teams_from_microsoft(log, test_connection, expected, True)
 
-            expected = "DONT FIND THIS"
-            with self.assertRaises(PluginException):
-                teams = get_teams_from_microsoft(log, test_connection, expected, True)
-
-
-
-
-
+        expected = "DONT FIND THIS"
+        with self.assertRaises(PluginException):
+            teams = get_teams_from_microsoft(log, test_connection, expected, True)

@@ -16,7 +16,7 @@ class Block(komand.Action):
         self.logger.info("Run: Got screen name: {screen_name}".format(screen_name=screen_name))
 
         if len(screen_name) == 0:
-            assert "Run: Tweet length was 0. Make sure property 'user' is marked required."     # noqa: B101
+            assert "Run: Tweet length was 0. Make sure property 'user' is marked required."  # noqa: B101
             return {"blocked": False}
 
         # Grab users that have been blocked, then check if the user to block has already been blocked.

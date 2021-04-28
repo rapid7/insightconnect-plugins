@@ -23,6 +23,6 @@ class Connection(komand.Connection):
         return self.client
 
     def connect(self, params={}):
-        """ Connect to SMTP server  """
+        """Connect to SMTP server"""
         self.params = params
         return None

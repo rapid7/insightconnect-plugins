@@ -59,7 +59,7 @@ class CreateIssue(komand.Action):
         r_url += "?%s" % (urllib.parse.urlencode(issue_params))
 
         try:
-            r = requests.post(r_url, headers={"PRIVATE-TOKEN": self.connection.token}, verify=False)    # noqa: B501
+            r = requests.post(r_url, headers={"PRIVATE-TOKEN": self.connection.token}, verify=False)  # noqa: B501
             if r.ok:
                 return self.clean_json(json.loads(json.dumps(r.json())))
             raise Exception(r.text)

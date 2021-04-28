@@ -35,13 +35,10 @@ class ModifyGroups(komand.Action):
         # Check that dn exists in AD
         if not ADUtils.check_user_dn_is_valid(conn, dn, search_base):
             self.logger.error(f"The DN {dn} was not found")
-            raise PluginException(
-                cause="The DN was not found.",
-                assistance=f"The DN {dn} was not found."
-            )
+            raise PluginException(cause="The DN was not found.", assistance=f"The DN {dn} was not found.")
 
         try:
-            if add_remove == 'add':
+            if add_remove == "add":
                 group = extend.ad_add_members_to_groups(conn, dn, group_dn, fix=True, raise_error=True)
             else:
                 group = extend.ad_remove_members_from_groups(conn, dn, group_dn, fix=True, raise_error=True)
@@ -49,13 +46,11 @@ class ModifyGroups(komand.Action):
             raise PluginException(
                 cause="Either the user or group distinguished name was not found.",
                 assistance="Please check that the distinguished names are correct",
-                data=e
+                data=e,
             )
 
         if group is False:
             self.logger.error(f"ModifyGroups: Unexpected result for group. Group was {str(group)}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
-        return {
-            Output.SUCCESS: group
-        }
+        return {Output.SUCCESS: group}

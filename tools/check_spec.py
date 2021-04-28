@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import subprocess   # noqa: B404
+import subprocess  # noqa: B404
 import sys
 import logging
 
@@ -13,19 +13,19 @@ CEND = "\033[0m"
 
 
 def check_args(args):
-    """ check_args ensures we are running the script with the right number of arguments"""
+    """check_args ensures we are running the script with the right number of arguments"""
     if len(args) != 2:
         print("./check_spec.py <path/plugin.spec.yaml>")
         sys.exit(0)
 
 
 def must_exec(cmd):
-    """ must_exec ensures the executed commands are successful """
+    """must_exec ensures the executed commands are successful"""
     print("")
     print("[" + YELLOW + "*" + CEND + "]" + " " + BOLD + "Validating spec with js-yaml" + CEND)
     exit_code = 0
     try:
-        subprocess.check_output(cmd)    # noqa: B603
+        subprocess.check_output(cmd)  # noqa: B603
         exit_code = 0
         print("[" + YELLOW + "SUCCESS" + CEND + "]" + " Passes js-yaml spec check" + "\n")
     except OSError:
@@ -38,7 +38,7 @@ def must_exec(cmd):
 
 
 def validate(spec_path):
-    """ validate validates a yaml file at the spec_path """
+    """validate validates a yaml file at the spec_path"""
     cmd = ["js-yaml", spec_path]
     must_exec(cmd)
 

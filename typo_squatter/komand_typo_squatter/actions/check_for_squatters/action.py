@@ -3,7 +3,7 @@ from .schema import CheckForSquattersInput, CheckForSquattersOutput
 
 # Custom imports below
 import json
-import subprocess       # noqa: B404
+import subprocess  # noqa: B404
 import shutil
 import tempfile
 from komand_typo_squatter.util import utils
@@ -33,7 +33,7 @@ class CheckForSquatters(komand.Action):
             else "./dnstwist/dnstwist.py --json  %s > %s" % (domain, path + fname)
         )
         self.logger.info("Running command: %s" % cmd)
-        subprocess.call(cmd, shell=True)        # noqa: B602
+        subprocess.call(cmd, shell=True)  # noqa: B602
 
         j = ""
         with open(path + fname, "r") as f:
