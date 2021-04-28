@@ -1,6 +1,7 @@
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 import json
+import time
 
 
 class ThreadCrowdAPI:
@@ -9,7 +10,7 @@ class ThreadCrowdAPI:
         self.url = "https://www.threatcrowd.org/searchApi/v2"
 
     def health_check(self):
-        return self._call_api("GET", f"{self.url}/ip/report/?ip=188.40.75.132", full_response=True).status_code == 200
+        return self._call_api("GET", f"{self.url}/ip/report/?ip=54.192.230.36", full_response=True).status_code == 200
 
     def search_address(self, domain):
         return self._call_api("GET", f"{self.url}/ip/report/", params={"ip": domain})
@@ -27,17 +28,27 @@ class ThreadCrowdAPI:
         return self._call_api("GET", f"{self.url}/file/report/", params={"resource": search_hash})
 
     def vote_malicious(self, vote, entity):
-        return self._call_api("GET", "https://www.threatcrowd.org/vote.php", params={"vote": vote, "value": entity}, full_response=True)
+        return self._call_api("GET", "https://www.threatcrowd.org/vote.php", params={"vote": vote, "value": entity},
+                              full_response=True)
 
     def _call_api(self, method, url, params=None, json_data=None, full_response: bool = False):
         response = {"text": ""}
+        seconds_to_wait = 5
         try:
-            response = requests.request(
-                method,
-                url,
-                json=json_data,
-                params=params
-            )
+            i = 0
+            while i < 10:
+                response = requests.request(
+                    method,
+                    url,
+                    json=json_data,
+                    params=params
+                )
+                i += 1
+                if 200 <= response.status_code < 300 and "Too many connections" in response.text:
+                    self.logger.info(f"Too many connections to ThreatCrowd. Waiting {seconds_to_wait} seconds.")
+                    time.sleep(seconds_to_wait)
+                else:
+                    break
 
             if response.status_code == 404 or (200 <= response.status_code < 300 and not response.text):
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND)
