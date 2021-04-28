@@ -10,7 +10,6 @@ Search through assets in order to start scans.
 
 Requires an API Key from the product
 
-
 # Documentation
 
 ## Setup
@@ -19,7 +18,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_secret_key|None|True|API key from account e.g. YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9|None|YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9|
+|credentials|credential_secret_key|None|True|API key from account|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |max_pages|integer|100|False|Max pages returned, default 100|None|10|
 |region|string|None|True|the region in which the plugin will work|None|us|
 
@@ -27,7 +26,7 @@ Example input:
 
 ```
 {
-  "credentials": "YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9",
+  "credentials": "9de5069c5afe602b2ea0a04b66beb2c0",
   "max_pages": 10,
   "region": "us"
 }
@@ -37,23 +36,22 @@ Example input:
 
 ### Actions
 
-#### Stop Scan 
+#### Update Scan Status
 
-This action is used to stop a running scan.
+This action is used to stop a scan in progress.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Scan ID|None|None|
+|id|string|None|True|Scan ID|None|abb37782-df95-4cf6-b4c2-8d466ca5734|
 
 Example input:
 
 ```
-    {
-      "id": "abb37782-df95-4cf6-b4c2-8d466ca5734",
-      "status": "stop"
-    }
+{
+  "id": "abb37782-df95-4cf6-b4c2-8d466ca5734"
+}
 ```
 
 ##### Output
@@ -65,9 +63,9 @@ Example input:
 Example output:
 
 ```
-    {
-      "success": true
-    }
+{
+  "success": true
+}
 ```
 
 #### Asset Search
@@ -78,8 +76,8 @@ This action is used to search for assets using filtered asset search.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hostname|string|None|False|The hostname|None|None|
-|ip|string|None|False|The ip|None|None|
+|hostname|string|None|False|The hostname|None|fortigate-vm02.vuln.lax.rapid7.com|
+|ip|string|None|False|The IP|None|10.4.22.144|
 |size|number|0|False|The number of records to retrieve. If blank or '0' all assets that match the search will be returned|None|100|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|
 
@@ -87,10 +85,10 @@ Example input:
 
 ```
 {
-  "size": 100,
-  "sort_criteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}",
+  "hostname": "fortigate-vm02.vuln.lax.rapid7.com",
   "ip": "10.4.22.144",
-  "hostname": "fortigate-vm02.vuln.lax.rapid7.com"
+  "size": 100,
+  "sort_criteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}"
 }
 ```
 
@@ -187,14 +185,14 @@ This action gets an asset by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Get an asset by ID|None|None|
+|id|string|None|True|Get an asset by ID|None|cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-13|
 
 Example input:
 
 ```
-    {
-      "id": "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-13"
-    }
+{
+  "id": "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-13"
+}
 ```
 
 ##### Output
@@ -279,31 +277,23 @@ This action is used to get the status of a scan.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|scan_id|string|None|True|ID of the scan to obtain|None|None|
+|scan_id|string|None|True|ID of the scan to obtain|None|abb37782-df95-4cf6-b4c2-8d466ca57349|
 
 Example input:
 
 ```
-    {
-      "scan_id": "abb37782-df95-4cf6-b4c2-8d466ca57349"
-    }
+{
+  "scan_id": "abb37782-df95-4cf6-b4c2-8d466ca57349"
+}
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|assets|integer|False|Number of assets within the scan|
-|duration|string|False|Duration of the scan in ISO8601 format|
-|endTime|string|False|End time of the scan in ISO8601 format|
-|engineName|string|False|Name of the engine used for the scan|
-|id|string|False|ID of the scan|
-|links|[]link|False|Hypermedia links to corresponding or related resources|
+|asset_ids|[]string|False|List of ids of the scanned assets|
+|engine_id|string|False|ID of the engine used for the scan|
 |scanName|string|False|User-driven scan name for the scan|
-|scanType|string|False|Scan type (manual, automated, scheduled)|
-|startTime|string|False|Start time of the scan in ISO8601 format|
-|status|string|False|Scan status (aborted, unknown, running, finished, stopped, error, paused, dispatched or integrating)|
-|vulnerabilities|vulnerabilities_count|False|Counts of vulnerabilities found within the scan|
 
 Example output:
 
@@ -333,19 +323,21 @@ This action is used to start a scan on a site.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |asset_ids|[]string|None|False|IDs of the assets to scan|None|["cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-135"]|
-|hostname|string|None|False|The hostname|None|None|
-|ip|string|None|False|The ip|None|None|
+|hostname|string|None|False|The hostname|None|fortigate-vm02.vuln.lax.rapid7.com|
+|ip|string|None|False|The IP|None|10.4.31.141|
 |name|string|None|True|The name of the scan|None|test cloud scan|
 
 Example input:
 
 ```
-    {
-      "asset_ids": ["cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-107",
-      "name": "testing scan action",
-      "ip": "10.4.31.141",
-      "hostname": "fortigate-vm02.vuln.lax.rapid7.com"
-    }
+{
+  "asset_ids": [
+    "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-135"
+  ],
+  "hostname": "fortigate-vm02.vuln.lax.rapid7.com",
+  "ip": "10.4.31.141",
+  "name": "test cloud scan"
+}
 ```
 
 ##### Output
@@ -489,7 +481,7 @@ _This plugin does not contain any triggers._
 |Vendor|string|False|The person or organization that manufactured or created the product|
 |Version|string|False|Vendor-specific alphanumeric strings characterizing the particular release version of the product|
 
-#### cvss
+#### CVSS
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -497,7 +489,7 @@ _This plugin does not contain any triggers._
 |V2|cvss_v2|False|CVSSv2 details|
 |V3|cvss_v3|False|CVSSv3 details|
 
-#### cvss_v2
+#### CVSS_v2
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -512,7 +504,7 @@ _This plugin does not contain any triggers._
 |Score|float|False|CVSSv2 score|
 |Vector|string|False|CVSSv2 combined vector string|
 
-#### cvss_v3
+#### CVSS_v3
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -652,7 +644,7 @@ _This plugin does not contain any triggers._
 |Path|string|False|Path to the page (URI)|
 |Response|integer|False|HTTP response code observed with retrieving the page|
 
-#### pci
+#### PCI
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -935,7 +927,7 @@ _This plugin does not contain any triggers._
 |Added|date|False|Date that the vulnerability was added to InsightVM|
 |Categories|[]string|False|List of vulnerabilities categories with which this vulnerability is affiliated|
 |CVEs|[]string|False|List of CVE identifiers associated with this vulnerability|
-|CVSS|cvss|False|Vulnerability CVSS details|
+|CVSS|CVSS|False|Vulnerability CVSS details|
 |Denial of Service|boolean|False|Whether the vulnerability is a denial of service vulnerability|
 |Description|vulnerability_description|False|Vulnerability description|
 |Exploits|integer|False|Exploit count|
@@ -943,7 +935,7 @@ _This plugin does not contain any triggers._
 |Links|[]link|False|List of hypermedia links to corresponding resources|
 |Malware Kits|integer|False|Malware kit count|
 |Modified|date|False|Date the vulnerability was last modified in InsightVM|
-|PCI|pci|False|Vulnerability PCI details|
+|PCI|PCI|False|Vulnerability PCI details|
 |Published|date|False|Date the vulnerability was published|
 |Risk Score|float|False|Vulnerability risk score using the configured risk scoring strategy (RealRisk by default)|
 |Severity|string|False|Vulnerability severity string (Moderate/Severe/Critical)|
@@ -984,7 +976,6 @@ _This plugin does not contain any triggers._
 |Pages|[]page|False|Pages|
 |Root|string|False|Web root of the web application|
 |Virtual Host|string|False|Virtual host of the web application|
-
 
 ## Troubleshooting
 

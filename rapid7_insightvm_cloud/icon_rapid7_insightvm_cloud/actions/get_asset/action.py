@@ -15,7 +15,7 @@ class GetAsset(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        asset_id = params.get("id")
+        asset_id = params.get(Input.ID)
 
         try:
             response = self.connection.ivm_cloud_api.call_api("assets/" + asset_id, "GET")
@@ -23,4 +23,3 @@ class GetAsset(insightconnect_plugin_runtime.Action):
         except requests.RequestException as e:
             self.logger.error(e)
             raise
-

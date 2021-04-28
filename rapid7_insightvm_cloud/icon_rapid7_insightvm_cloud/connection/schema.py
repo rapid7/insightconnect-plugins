@@ -18,7 +18,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "credentials": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "API key from account e.g. YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9",
+      "description": "API key from account",
       "order": 1
     },
     "max_pages": {

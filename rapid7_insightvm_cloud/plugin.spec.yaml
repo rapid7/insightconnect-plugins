@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: rapid7_insightvm_cloud
 title: Rapid7 InsightVM for the Cloud
-description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the v4 cloud API to view assets, scan results and start scans.
+description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the v4 cloud API to view assets, scan results and start scans
 version: 1.0.0
 vendor: rapid7
 support: rapid7
@@ -17,7 +17,7 @@ tags:
 - rapid7
 - vulnerability
 hub_tags:
-  use_cases: [asset_inventory, remediation_management, vulnerability_management, reporting_and_analytics]
+  use_cases: [asset_inventory, vulnerability_management, scan_management]
   keywords: [insightvm, rapid7, cloud]
   features: []
 
@@ -1932,16 +1932,15 @@ types:
 connection:
   credentials:
     title: API Key
-    description: API key from account e.g. YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9
+    description: API key from account
     type: credential_secret_key
     required: true
-    example: YYDHZKByMaDTMmY4ZC12MmUxLTkyTTBtY2UxUzkxNjbbYWI2OMzLYjATHjABZ9x3MUhyVUEzMWF1N0E5QThDOEhsQTRrMW1GVDZWUGVaDnA9
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
   region:
     title: Region
     description: the region in which the plugin will work
     type: string
     required: true
-    defualt: us
     example: us
   max_pages:
     title: Max Pages
@@ -1971,19 +1970,35 @@ actions:
         required: true
       ip:
         title: IP
-        description: The ip
+        description: The IP
         type: string
+        example: "10.4.31.141"
         required: false
       hostname:
         title: Hostname
         description: The hostname
         type: string
+        example: "fortigate-vm02.vuln.lax.rapid7.com"
         required: false
     output:
       id:
         description: Identifier of the resource created
         title: Scan ID
         type: integer
+        example: ' {
+              "scans": [
+                {
+                  "asset_ids": [
+                    "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-13"
+                  ],
+                  "engine_id": "c8970d2ee174180e202af83b66cd0c4b",
+                  "finished": null,
+                  "id": "7fc3d8ec-24a7-4835-84f2-8877fe96a29b",
+                  "name": "testing scan action"
+                }
+              ],
+              "unscanned_assets": []
+            }'
         required: false
   get_scan:
     title: Get Scan
@@ -1993,63 +2008,26 @@ actions:
         title: Scan ID
         description: ID of the scan to obtain
         type: string
+        example: "abb37782-df95-4cf6-b4c2-8d466ca57349"
         required: true
     output:
-      status:
-        description: Scan status (aborted, unknown, running, finished, stopped, error,
-          paused, dispatched or integrating)
-        title: Status
+      asset_ids:
+        description: List of ids of the scanned assets
+        title: Asset IDs
+        type: "[]string"
+        example: ["cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-13"]
+        required: false
+      engine_id:
+        description: ID of the engine used for the scan
+        title: Engine ID
         type: string
-        required: false
-      scanType:
-        description: Scan type (manual, automated, scheduled)
-        title: Scan Type
-        type: string
-        required: false
-      assets:
-        description: Number of assets within the scan
-        title: Assets
-        type: integer
-        required: false
-      links:
-        description: Hypermedia links to corresponding or related resources
-        title: Links
-        type: '[]link'
-        required: false
-      vulnerabilities:
-        description: Counts of vulnerabilities found within the scan
-        title: Vulnerabilities
-        type: vulnerabilities_count
-        required: false
-      startTime:
-        description: Start time of the scan in ISO8601 format
-        title: Start Time
-        type: string
-        required: false
-      duration:
-        description: Duration of the scan in ISO8601 format
-        title: Duration
-        type: string
-        required: false
-      engineName:
-        description: Name of the engine used for the scan
-        title: Engine Name
-        type: string
-        required: false
-      endTime:
-        description: End time of the scan in ISO8601 format
-        title: End Time
-        type: string
-        required: false
-      id:
-        description: ID of the scan
-        title: ID
-        type: string
+        example: "c8970d2ee174180e202af83b66cd0c4b"
         required: false
       scanName:
         description: User-driven scan name for the scan
         title: Scan Name
         type: string
+        example: "testing scan action"
         required: false
   asset_search:
     title: Asset Search
@@ -2070,19 +2048,95 @@ actions:
         example: '{"risk-score": "asc", "criticality-tag": "desc"}'
       ip:
         title: IP
-        description: The ip
+        description: The IP
         type: string
+        example: "10.4.22.144"
         required: false
       hostname:
         title: Hostname
         description: The hostname
         type: string
+        example: "fortigate-vm02.vuln.lax.rapid7.com"
         required: false
     output:
       assets:
         title: Assets
         description: List of asset details returned by the search
         type: '[]search_asset'
+        example: '{
+                    "assets": [
+                      {
+                        "assessed_for_policies": false,
+                        "assessed_for_vulnerabilities": true,
+                        "credential_assessments": [],
+                        "critical_vulnerabilities": 12,
+                        "exploits": 5,
+                        "id": "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-107",
+                        "ip": "10.4.22.144",
+                        "last_assessed_for_vulnerabilities": "2020-06-25T15:19:51.543Z",
+                        "last_scan_end": "2020-10-26T22:35:53.590Z",
+                        "last_scan_start": "2020-10-26T22:35:53.564Z",
+                        "mac": "00:50:56:94:52:04",
+                        "malware_kits": 0,
+                        "moderate_vulnerabilities": 4,
+                        "new": [],
+                        "os_architecture": "",
+                        "os_description": "Linux 2.6.32",
+                        "os_family": "Linux",
+                        "os_name": "Linux",
+                        "os_system_name": "Linux",
+                        "os_type": "General",
+                        "os_vendor": "Linux",
+                        "os_version": "2.6.32",
+                        "remediated": [],
+                        "risk_score": 9304.376953125,
+                        "severe_vulnerabilities": 21,
+                        "tags": [
+                          {
+                            "name": "integrations discovery",
+                            "type": "SITE"
+                          }
+                        ],
+                        "total_vulnerabilities": 37,
+                        "unique_identifiers": []
+                      },
+                      {
+                        "assessed_for_policies": false,
+                        "assessed_for_vulnerabilities": true,
+                        "credential_assessments": [],
+                        "critical_vulnerabilities": 12,
+                        "exploits": 5,
+                        "id": "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-107",
+                        "ip": "10.4.22.144",
+                        "last_assessed_for_vulnerabilities": "2020-06-25T15:19:51.543Z",
+                        "last_scan_end": "2020-10-26T22:35:53.590Z",
+                        "last_scan_start": "2020-10-26T22:35:53.564Z",
+                        "mac": "00:50:56:94:52:04",
+                        "malware_kits": 0,
+                        "moderate_vulnerabilities": 4,
+                        "new": [],
+                        "os_architecture": "",
+                        "os_description": "Linux 2.6.32",
+                        "os_family": "Linux",
+                        "os_name": "Linux",
+                        "os_system_name": "Linux",
+                        "os_type": "General",
+                        "os_vendor": "Linux",
+                        "os_version": "2.6.32",
+                        "remediated": [],
+                        "risk_score": 9304.376953125,
+                        "severe_vulnerabilities": 21,
+                        "tags": [
+                          {
+                            "name": "integrations discovery",
+                            "type": "SITE"
+                          }
+                        ],
+                        "total_vulnerabilities": 37,
+                        "unique_identifiers": []
+                      }
+                    ]
+                  }'
         required: true
   get_asset:
     title: Get Asset
@@ -2092,12 +2146,76 @@ actions:
         title: ID
         description: Get an asset by ID
         type: string
+        example: "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-13"
         required: true
     output:
       asset:
         title: Asset
         description: Asset details
         type: asset
+        example: '"asset": {
+                  "assessed_for_policies": false,
+                  "assessed_for_vulnerabilities": true,
+                  "credential_assessments": [
+                    {
+                      "port": 22,
+                      "protocol": "TCP",
+                      "status": "NO_CREDS_SUPPLIED"
+                    }
+                  ],
+                  "critical_vulnerabilities": 1,
+                  "exploits": 2,
+                  "host_name": "fortigate-vm02.vuln.lax.rapid7.com",
+                  "id": "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-13",
+                  "ip": "10.4.31.141",
+                  "last_assessed_for_vulnerabilities": "2021-04-26T08:04:28.536Z",
+                  "last_scan_end": "2021-04-26T08:04:28.536Z",
+                  "last_scan_start": "2021-04-26T08:00:56.006Z",
+                  "mac": "00:50:56:94:42:6B",
+                  "malware_kits": 0,
+                  "moderate_vulnerabilities": 7,
+                  "new": [],
+                  "remediated": [],
+                  "risk_score": 9006.3388671875,
+                  "severe_vulnerabilities": 19,
+                  "tags": [
+                    {
+                      "name": "sn_pt_LDAP Admins",
+                      "type": "OWNER"
+                    },
+                    {
+                      "name": "sn_CAB Approval",
+                      "type": "OWNER"
+                    },
+                    {
+                      "name": "integrations",
+                      "type": "CUSTOM"
+                    },
+                    {
+                      "name": "ck_test_site_2",
+                      "type": "SITE"
+                    },
+                    {
+                      "name": "integrations",
+                      "type": "SITE"
+                    },
+                    {
+                      "name": "ck_test_site_3",
+                      "type": "SITE"
+                    },
+                    {
+                      "name": "integrations discovery",
+                      "type": "SITE"
+                    },
+                    {
+                      "name": "ck_test_site_1",
+                      "type": "SITE"
+                    }
+                  ],
+                  "total_vulnerabilities": 27,
+                  "unique_identifiers": []
+                }
+              }'
         required: true
   stop_scan:
     title: Update Scan Status
@@ -2107,11 +2225,13 @@ actions:
         title: ID
         description: Scan ID
         type: string
+        example: "abb37782-df95-4cf6-b4c2-8d466ca5734"
         required: true
     output:
       success:
         title: Success
         description: Was operation successful
         type: boolean
+        example: true
         required: true
   

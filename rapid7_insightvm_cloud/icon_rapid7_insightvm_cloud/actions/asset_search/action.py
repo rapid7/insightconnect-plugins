@@ -1,8 +1,8 @@
 import insightconnect_plugin_runtime
 from .schema import AssetSearchInput, AssetSearchOutput, Input, Output, Component
 
+
 # Custom imports below
-import ast
 
 
 class AssetSearch(insightconnect_plugin_runtime.Action):

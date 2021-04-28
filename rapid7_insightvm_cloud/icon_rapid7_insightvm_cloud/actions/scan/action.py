@@ -1,16 +1,17 @@
 import insightconnect_plugin_runtime
-from .schema import ScanInput, ScanOutput, Input, Output, Component
+from .schema import ScanInput, ScanOutput, Input, Component
 # Custom imports below
-import json
 from insightconnect_plugin_runtime.exceptions import PluginException
+
+
 class Scan(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='scan',
-                description=Component.DESCRIPTION,
-                input=ScanInput(),
-                output=ScanOutput())
+            name='scan',
+            description=Component.DESCRIPTION,
+            input=ScanInput(),
+            output=ScanOutput())
 
     def asset_search(self, hostname: str, ip: str):
         parameters = list()

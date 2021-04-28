@@ -4,11 +4,10 @@ import os
 import json
 from sys import argv
 
-Name = "Rapid7 InsightVM for th Cloud"
+Name = "Rapid7 InsightVM for the Cloud"
 Vendor = "rapid7"
 Version = "1.0.0"
-Description = "InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates " \
-              "vulnerabilities. This plugin can get top remediations, scan results and start scans "
+Description = "InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the v4 cloud API to view assets, scan results and start scans"
 
 
 def main():
@@ -44,6 +43,7 @@ def main():
             self.add_action(actions.Scan())
 
             self.add_action(actions.StopScan())
+
 
     """Run plugin"""
     cli = insightconnect_plugin_runtime.CLI(ICONRapid7InsightvmCloud())

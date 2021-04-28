@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import StopScanInput, StopScanOutput, Input, Output, Component
+from .schema import StopScanInput, StopScanOutput, Input, Output
 # Custom imports below
 import requests
 

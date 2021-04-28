@@ -33,7 +33,7 @@ class AssetSearchInput(insightconnect_plugin_runtime.Input):
     "ip": {
       "type": "string",
       "title": "IP",
-      "description": "The ip",
+      "description": "The IP",
       "order": 3
     },
     "size": {

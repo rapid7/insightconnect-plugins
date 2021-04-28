@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetScanInput, GetScanOutput, Input, Output, Component
+from .schema import GetScanInput, GetScanOutput, Input
 # Custom imports below
 import requests
 
@@ -15,12 +15,11 @@ class GetScan(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        scan_id = params.get("scan_id")
+        scan_id = params.get(Input.SCAN_ID)
 
         try:
-            response = self.connection.ivm_cloud_api.call_api("scan/"+scan_id, "GET")
+            response = self.connection.ivm_cloud_api.call_api("scan/" + scan_id, "GET")
             return response
         except requests.RequestException as e:
             self.logger.error(e)
             raise
-

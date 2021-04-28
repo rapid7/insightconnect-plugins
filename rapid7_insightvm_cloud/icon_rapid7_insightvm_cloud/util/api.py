@@ -52,7 +52,6 @@ class IVM_Cloud:
                                headers=headers,
                                data=json.dumps(body))
             if response.status_code not in [200, 201, 202]:
-                status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
                 raise PluginException(
                     cause=f"Failed to get a valid response from InsightVM at endpoint {api_url}",
                     assistance=f"Response was {response.request.body}",

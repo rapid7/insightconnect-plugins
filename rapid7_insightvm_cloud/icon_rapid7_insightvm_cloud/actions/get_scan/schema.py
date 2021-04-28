@@ -12,17 +12,9 @@ class Input:
     
 
 class Output:
-    ASSETS = "assets"
-    DURATION = "duration"
-    ENDTIME = "endTime"
-    ENGINENAME = "engineName"
-    ID = "id"
-    LINKS = "links"
+    ASSET_IDS = "asset_ids"
+    ENGINE_ID = "engine_id"
     SCANNAME = "scanName"
-    SCANTYPE = "scanType"
-    STARTTIME = "startTime"
-    STATUS = "status"
-    VULNERABILITIES = "vulnerabilities"
     
 
 class GetScanInput(insightconnect_plugin_runtime.Input):
@@ -54,124 +46,26 @@ class GetScanOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "assets": {
-      "type": "integer",
-      "title": "Assets",
-      "description": "Number of assets within the scan",
-      "order": 3
-    },
-    "duration": {
-      "type": "string",
-      "title": "Duration",
-      "description": "Duration of the scan in ISO8601 format",
-      "order": 7
-    },
-    "endTime": {
-      "type": "string",
-      "title": "End Time",
-      "description": "End time of the scan in ISO8601 format",
-      "order": 9
-    },
-    "engineName": {
-      "type": "string",
-      "title": "Engine Name",
-      "description": "Name of the engine used for the scan",
-      "order": 8
-    },
-    "id": {
-      "type": "string",
-      "title": "ID",
-      "description": "ID of the scan",
-      "order": 10
-    },
-    "links": {
+    "asset_ids": {
       "type": "array",
-      "title": "Links",
-      "description": "Hypermedia links to corresponding or related resources",
+      "title": "Asset IDs",
+      "description": "List of ids of the scanned assets",
       "items": {
-        "$ref": "#/definitions/link"
+        "type": "string"
       },
-      "order": 4
+      "order": 1
+    },
+    "engine_id": {
+      "type": "string",
+      "title": "Engine ID",
+      "description": "ID of the engine used for the scan",
+      "order": 2
     },
     "scanName": {
       "type": "string",
       "title": "Scan Name",
       "description": "User-driven scan name for the scan",
-      "order": 11
-    },
-    "scanType": {
-      "type": "string",
-      "title": "Scan Type",
-      "description": "Scan type (manual, automated, scheduled)",
-      "order": 2
-    },
-    "startTime": {
-      "type": "string",
-      "title": "Start Time",
-      "description": "Start time of the scan in ISO8601 format",
-      "order": 6
-    },
-    "status": {
-      "type": "string",
-      "title": "Status",
-      "description": "Scan status (aborted, unknown, running, finished, stopped, error, paused, dispatched or integrating)",
-      "order": 1
-    },
-    "vulnerabilities": {
-      "$ref": "#/definitions/vulnerabilities_count",
-      "title": "Vulnerabilities",
-      "description": "Counts of vulnerabilities found within the scan",
-      "order": 5
-    }
-  },
-  "definitions": {
-    "link": {
-      "type": "object",
-      "title": "link",
-      "properties": {
-        "href": {
-          "type": "string",
-          "title": "URL",
-          "description": "A hypertext reference, which is either a URI (see RFC 3986) or URI template (see RFC 6570)",
-          "order": 1
-        },
-        "rel": {
-          "type": "string",
-          "title": "Rel",
-          "description": "Link relation type following RFC 5988",
-          "order": 2
-        }
-      }
-    },
-    "vulnerabilities_count": {
-      "type": "object",
-      "title": "vulnerabilities_count",
-      "properties": {
-        "critical": {
-          "type": "integer",
-          "title": "Critical",
-          "description": "Number of critical vulnerabilities",
-          "order": 1
-        },
-        "moderate": {
-          "type": "integer",
-          "title": "Moderate",
-          "description": "Number of moderate vulnerabilities",
-          "order": 2
-        },
-        "severe": {
-          "type": "integer",
-          "title": "Severe",
-          "description": "Number of severe vulnerabilities",
-          "order": 3
-        },
-        "total": {
-          "type": "integer",
-          "title": "Total number of vulnerabilities",
-          "description": "Total",
-          "order": 4
-        }
-      }
+      "order": 3
     }
   }
 }
