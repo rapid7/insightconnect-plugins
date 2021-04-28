@@ -1,21 +1,20 @@
-import ast
-
 import insightconnect_plugin_runtime
-from .schema import ScanInput, ScanOutput, Input, Component
+from .schema import StartScanInput, StartScanOutput, Input, Output, Component
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
+import ast
 
 
-class Scan(insightconnect_plugin_runtime.Action):
+class StartScan(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='scan',
+            name='start_scan',
             description=Component.DESCRIPTION,
-            input=ScanInput(),
-            output=ScanOutput())
+            input=StartScanInput(),
+            output=StartScanOutput())
 
-    def asset_search(self, hostname: str, ip: str):
+    def asset_search(self, hostnames: str, ips: str):
         parameters = list()
         parameters.append(("size", 50))
         resources = self.connection.ivm_cloud_api.call_api_pages("assets", "POST", parameters)
@@ -37,14 +36,14 @@ class Scan(insightconnect_plugin_runtime.Action):
                         asset = asset[:len(asset) - 1]
                 asset = "{" + asset + "}"
                 asset = ast.literal_eval(asset)
-                if hostname != "":
+                if hostnames:
                     if "host_name" in asset:
-                        if hostname == asset["host_name"]:
+                        if asset["host_name"] in hostnames:
                             if asset["id"] not in results:
                                 results.append(asset["id"])
-                elif ip != "":
+                elif ips:
                     if "ip" in asset:
-                        if ip == asset["ip"]:
+                        if asset["ip"] in ips:
                             if asset["id"] not in results:
                                 results.append(asset["id"])
         return results
@@ -52,15 +51,15 @@ class Scan(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         asset_ids = params.get(Input.ASSET_IDS)
         name = params.get(Input.NAME)
-        ip = params.get(Input.IP)
-        hostname = params.get(Input.HOSTNAME)
-        if asset_ids == [] and ip == "" and hostname == "":
+        ips = params.get(Input.IP)
+        hostnames = params.get(Input.HOSTNAME)
+        if asset_ids == [] and ips == [] and hostnames == []:
             raise PluginException(
                 cause="Did not enter necessary information of what to scan.",
                 assistance="Please enter asset id, hostname, or ip."
             )
-        if hostname != "" or ip != "":
-            extra_ids = self.asset_search(hostname, ip)
+        if hostnames != [] or ips != []:
+            extra_ids = self.asset_search(hostnames, ips)
             for extra_id in extra_ids:
                 asset_ids.append(extra_id)
 

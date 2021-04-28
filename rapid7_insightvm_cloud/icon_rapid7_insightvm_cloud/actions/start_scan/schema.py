@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Start a scan on a site"
+    DESCRIPTION = "Start an InsightVM scan of previously scanned devices"
 
 
 class Input:
@@ -18,7 +18,7 @@ class Output:
     ID = "id"
     
 
-class ScanInput(insightconnect_plugin_runtime.Input):
+class StartScanInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -34,15 +34,21 @@ class ScanInput(insightconnect_plugin_runtime.Input):
       "order": 1
     },
     "hostname": {
-      "type": "string",
+      "type": "array",
       "title": "Hostname",
       "description": "The hostname",
+      "items": {
+        "type": "string"
+      },
       "order": 4
     },
     "ip": {
-      "type": "string",
+      "type": "array",
       "title": "IP",
       "description": "Primary IPv4 or IPv6 address of the asset",
+      "items": {
+        "type": "string"
+      },
       "order": 3
     },
     "name": {
@@ -62,7 +68,7 @@ class ScanInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class ScanOutput(insightconnect_plugin_runtime.Output):
+class StartScanOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",

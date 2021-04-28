@@ -2,14 +2,15 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: rapid7_insightvm_cloud
-title: Rapid7 InsightVM for the Cloud
-description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the v4 cloud API to view assets, scan results and start scans
+title: Rapid7 InsightVM Cloud
+description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the InsightVM cloud API to view assets, scan results, and start scans
 version: 1.0.0
 vendor: rapid7
 support: rapid7
 status: []
+cloud_ready: true
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_insightvm
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_insightvm_cloud
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.rapid7.com
 tags:
@@ -1952,9 +1953,9 @@ connection:
   
 
 actions:
-  scan:
-    title: Scan
-    description: Start a scan on a site
+  start_scan:
+    title: Start Scan
+    description: Start an InsightVM scan of previously scanned devices
     input:
       asset_ids:
         title: Asset IDs
@@ -1971,14 +1972,14 @@ actions:
       ip:
         title: IP
         description: Primary IPv4 or IPv6 address of the asset
-        type: string
-        example: "10.4.31.141"
+        type: "[]string"
+        example: ["10.4.31.141"]
         required: false
       hostname:
         title: Hostname
         description: The hostname
-        type: string
-        example: "fortigate-vm02.vuln.lax.rapid7.com"
+        type: "[]string"
+        example: ["fortigate-vm02.vuln.lax.rapid7.com"]
         required: false
     output:
       id:

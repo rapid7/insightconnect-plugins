@@ -2,5 +2,5 @@
 from .asset_search.action import AssetSearch
 from .get_asset.action import GetAsset
 from .get_scan.action import GetScan
-from .scan.action import Scan
+from .start_scan.action import StartScan
 from .stop_scan.action import StopScan

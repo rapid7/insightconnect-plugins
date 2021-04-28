@@ -36,6 +36,47 @@ Example input:
 
 ### Actions
 
+#### Start Scan
+
+This action is used to start an InsightVM scan of previously scanned devices.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|asset_ids|[]string|None|False|IDs of the assets to scan|None|["cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-135"]|
+|hostname|[]string|None|False|The hostname|None|["fortigate-vm02.vuln.lax.rapid7.com"]|
+|ip|[]string|None|False|Primary IPv4 or IPv6 address of the asset|None|["10.4.31.141"]|
+|name|string|None|True|The name of the scan|None|test cloud scan|
+
+Example input:
+
+```
+{
+  "asset_ids": [
+    "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-135"
+  ],
+  "hostname": [
+    "fortigate-vm02.vuln.lax.rapid7.com"
+  ],
+  "ip": [
+    "10.4.31.141"
+  ],
+  "name": "test cloud scan"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|id|integer|False|Identifier of the resource created|
+
+Example output:
+
+```
+```
+
 #### Update Scan Status
 
 This action is used to stop a scan in progress.
@@ -294,57 +335,6 @@ Example input:
 |asset_ids|[]string|False|List of IDs of the scanned assets|
 |engine_id|string|False|ID of the engine used for the scan|
 |scanName|string|False|User-driven scan name for the scan|
-
-Example output:
-
-```
-    {
-      "scans": [
-        {
-          "asset_ids": [
-            "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-13"
-          ],
-          "engine_id": "c8970d2ee174180e202af83b66cd0c4b",
-          "finished": null,
-          "id": "7fc3d8ec-24a7-4835-84f2-8877fe96a29b",
-          "name": "testing scan action"
-        }
-      ],
-      "unscanned_assets": []
-    }
-```
-
-#### Scan
-
-This action is used to start a scan on a site.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|asset_ids|[]string|None|False|IDs of the assets to scan|None|["cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-135"]|
-|hostname|string|None|False|The hostname|None|fortigate-vm02.vuln.lax.rapid7.com|
-|ip|string|None|False|Primary IPv4 or IPv6 address of the asset|None|10.4.31.141|
-|name|string|None|True|The name of the scan|None|test cloud scan|
-
-Example input:
-
-```
-{
-  "asset_ids": [
-    "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-135"
-  ],
-  "hostname": "fortigate-vm02.vuln.lax.rapid7.com",
-  "ip": "10.4.31.141",
-  "name": "test cloud scan"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|integer|False|Identifier of the resource created|
 
 Example output:
 
