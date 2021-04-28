@@ -61,8 +61,8 @@ class Scan(insightconnect_plugin_runtime.Action):
             )
         if hostname != "" or ip != "":
             extra_ids = self.asset_search(hostname, ip)
-            for extra_id in range(len(extra_ids)):
-                asset_ids.append(extra_ids[extra_id])
+            for extra_id in extra_ids:
+                asset_ids.append(extra_id)
 
         body = {"asset_ids": asset_ids, "name": name}
 
