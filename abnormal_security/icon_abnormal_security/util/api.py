@@ -4,15 +4,17 @@ from insightconnect_plugin_runtime.exceptions import PluginException, Connection
 import json
 from logging import Logger
 from urllib.parse import urljoin
+from datetime import datetime
 
 
 class AbnormalSecurityAPI:
     def __init__(self, hostname: str, api_key: str, logger: Logger):
-        self.base_url = f"https://{hostname}/v1"
-        self.api_key = api_key
+        self.api_version = "v1"
+        # self.base_url = f"https://{hostname}/{self.api_version}"
+        self.base_url = f"https://{hostname}"
         self.headers = {
-            "x-mock-match-request-headers": "authorization",
-            "authorization": f"Bearer {api_key}"
+            "authorization": f"Bearer {api_key}",
+            "x-mock-match-request-headers": "authorization"
         }
         self.session = requests.session()
         self.logger = logger
@@ -28,6 +30,20 @@ class AbnormalSecurityAPI:
                 preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE,
                 data="There is a problem connecting to Abnormal Security. Please check your API Key or permissions.",
             )
+
+    def get_threats(self, from_date: str = None, to_date: str = None):
+        params = {}
+        if from_date or to_date:
+            params = {"filter": "receivedTime"}
+            if from_date and self.validate_iso8601(from_date):
+                params["filter"] = params["filter"] + f" gte {from_date}"
+            if to_date and self.validate_iso8601(to_date):
+                params["filter"] = params["filter"] + f" lte {to_date}"
+
+        return self.send_request("GET", "/threats", params = params).get("threats")
+
+    def get_threat_details(self, threat_guid):
+        return self.send_request("GET", f"/threats/{threat_guid}")
 
     def send_request(
         self, method: str, path: str, params: dict = None, payload: dict = None
@@ -67,3 +83,17 @@ class AbnormalSecurityAPI:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
         except requests.exceptions.HTTPError as e:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+
+    @staticmethod
+    def validate_iso8601(dt_string):
+        try:
+            datetime.fromisoformat(dt_string)
+        except ValueError:
+            try:
+                datetime.fromisoformat(dt_string.replace('Z', '+00:00'))
+            except ValueError:
+                raise PluginException(
+                    cause=f"Date: {dt_string} is not a valid ISO8601 date.",
+                    assistance="Please update the date to match ISO8601 format (YYYY-MM-DDTHH:MM:SSZ)."
+                )
+        return True

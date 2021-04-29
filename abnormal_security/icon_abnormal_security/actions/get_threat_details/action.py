@@ -13,5 +13,4 @@ class GetThreatDetails(insightconnect_plugin_runtime.Action):
                 output=GetThreatDetailsOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        return {Output.THREAT_DETAILS: self.connection.api.get_threat_details(params.get(Input.THREAT_ID))}

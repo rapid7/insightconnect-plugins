@@ -13,5 +13,9 @@ class GetThreats(insightconnect_plugin_runtime.Action):
                 output=GetThreatsOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        return {
+            Output.THREATS: self.connection.api.get_threats(
+                from_date=params.get(Input.FROM_DATE, None),
+                to_date=params.get(Input.TO_DATE, None)
+            )
+        }
