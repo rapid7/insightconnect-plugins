@@ -112,7 +112,7 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |message|string|False|Reason why the action failed|
-|status_code|integer|False|Code returned by api call|
+|status_code|integer|False|Code returned by API call|
 |success|boolean|True|Was operation successful|
 
 Example output:

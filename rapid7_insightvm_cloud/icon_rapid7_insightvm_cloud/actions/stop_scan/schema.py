@@ -55,7 +55,7 @@ class StopScanOutput(insightconnect_plugin_runtime.Output):
     "status_code": {
       "type": "integer",
       "title": "Status Code",
-      "description": "Code returned by api call",
+      "description": "Code returned by API call",
       "order": 2
     },
     "success": {

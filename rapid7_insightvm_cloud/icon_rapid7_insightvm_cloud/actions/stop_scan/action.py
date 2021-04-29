@@ -11,6 +11,7 @@ _ERRORS = {
     000: "Unknown Status Code",
 }
 
+
 class StopScan(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
