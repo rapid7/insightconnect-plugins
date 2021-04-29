@@ -17,7 +17,7 @@ class StartScan(insightconnect_plugin_runtime.Action):
     def asset_search(self, hostnames: str, ips: str):
         parameters = list()
         parameters.append(("size", 50))
-        resources = self.connection.ivm_cloud_api.call_api_pages("assets", "POST", parameters)
+        resources = self.connection.ivm_cloud_api.call_api_pages("assets", "POST", 3, parameters)
 
         results = list()
         for page in resources:

@@ -1030,14 +1030,6 @@ connection:
     type: string
     required: true
     example: us
-  max_pages:
-    title: Max Pages
-    description: Max pages returned, default 100
-    type: integer
-    required: false
-    default: 100
-    example: 10
-  
 
 actions:
   start_scan:
@@ -1127,6 +1119,13 @@ actions:
         type: number
         required: false
         default: 0
+        example: 100
+      pages:
+        title: Pages
+        description: The number of pages of records to retrieve
+        type: number
+        required: false
+        default: 1
         example: 100
       sort_criteria:
         title: Sort Criteria
@@ -1322,4 +1321,16 @@ actions:
         type: boolean
         example: true
         required: true
+      status_code:
+        title: Status Code
+        description: Code returned by api call
+        type: integer
+        example: 400
+        required: false
+      message:
+        title: Message
+        description: Reason why the action failed
+        type: string
+        example: "The scan could not be stopped"
+        required: false
   

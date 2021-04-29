@@ -20,7 +20,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.ivm_cloud_api = IVM_Cloud(
             params.get(Input.CREDENTIALS).get("secretKey"),
             self.logger,
-            params.get(Input.MAX_PAGES, 100),
             self.api_url
         )
 

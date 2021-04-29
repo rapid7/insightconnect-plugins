@@ -19,7 +19,6 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_secret_key|None|True|API key from account|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|max_pages|integer|100|False|Max pages returned, default 100|None|10|
 |region|string|None|True|the region in which the plugin will work|None|us|
 
 Example input:
@@ -27,7 +26,6 @@ Example input:
 ```
 {
   "credentials": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "max_pages": 10,
   "region": "us"
 }
 ```
@@ -113,6 +111,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|message|string|False|Reason why the action failed|
+|status_code|integer|False|Code returned by api call|
 |success|boolean|True|Was operation successful|
 
 Example output:
@@ -133,6 +133,7 @@ This action is used to search for assets using filtered asset search.
 |----|----|-------|--------|-----------|----|-------|
 |hostname|string|None|False|The hostname|None|fortigate-vm02.vuln.lax.rapid7.com|
 |ip|string|None|False|Primary IPv4 or IPv6 address of the asset|None|10.4.22.144|
+|pages|number|1|False|The number of pages of records to retrieve|None|100|
 |size|number|0|False|The number of records to retrieve. If blank or '0' all assets that match the search will be returned|None|100|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|
 
@@ -142,6 +143,7 @@ Example input:
 {
   "hostname": "fortigate-vm02.vuln.lax.rapid7.com",
   "ip": "10.4.22.144",
+  "pages": 100,
   "size": 100,
   "sort_criteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}"
 }

@@ -52,6 +52,7 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         size = params.get(Input.SIZE, 0)
         sort_criteria = params.get(Input.SORT_CRITERIA, dict())
+        pages_count = params.get(Input.PAGES)
         parameters = list()
 
         for key, value in sort_criteria.items():
@@ -59,13 +60,13 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
 
         if size == 0:
             parameters.append(("size", 100))
-            resources = self.connection.ivm_cloud_api.call_api_pages("assets", "POST", parameters)
+            resources = self.connection.ivm_cloud_api.call_api_pages("assets", "POST", pages_count, parameters)
         elif size <= 100:
             parameters.append(("size", size))
-            resources = self.connection.ivm_cloud_api.call_api_pages("assets", "POST", parameters)
+            resources = self.connection.ivm_cloud_api.call_api_pages("assets", "POST", pages_count, parameters)
         else:
             parameters.append(("size", 100))
-            resources = self.connection.ivm_cloud_api.call_api_pages("assets", "POST", parameters)
+            resources = self.connection.ivm_cloud_api.call_api_pages("assets", "POST", pages_count, parameters)
 
         assets = format_response(resources, params)
 

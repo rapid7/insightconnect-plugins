@@ -5,7 +5,6 @@ import json
 
 class Input:
     CREDENTIALS = "credentials"
-    MAX_PAGES = "max_pages"
     REGION = "region"
     
 
@@ -20,13 +19,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "API Key",
       "description": "API key from account",
       "order": 1
-    },
-    "max_pages": {
-      "type": "integer",
-      "title": "Max Pages",
-      "description": "Max pages returned, default 100",
-      "default": 100,
-      "order": 3
     },
     "region": {
       "type": "string",

@@ -18,19 +18,15 @@ class IVM_Cloud:
         000: "Unknown Status Code",
     }
 
-    def __init__(self, token: str, logger: Logger, max_pages: int, url: str):
+    def __init__(self, token: str, logger: Logger, url: str):
         self.logger = logger
         self.token = token
         self.base_url = url
-        if max_pages:
-            self.max_pages = max_pages
-        else:
-            self.max_pages = 100
 
-    def call_api_pages(self, path: str, request_type: str, params: dict = None):
+    def call_api_pages(self, path: str, request_type: str, pages: int, params: dict = None):
         responses = []
-        for pages in range(self.max_pages):
-            params.append(("page", pages))
+        for page in range(pages):
+            params.append(("page", page))
             response = self.call_api(path, request_type, params)
             responses.append(response)
 

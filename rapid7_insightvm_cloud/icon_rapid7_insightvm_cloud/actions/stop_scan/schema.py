@@ -12,6 +12,8 @@ class Input:
     
 
 class Output:
+    MESSAGE = "message"
+    STATUS_CODE = "status_code"
     SUCCESS = "success"
     
 
@@ -44,6 +46,18 @@ class StopScanOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "message": {
+      "type": "string",
+      "title": "Message",
+      "description": "Reason why the action failed",
+      "order": 3
+    },
+    "status_code": {
+      "type": "integer",
+      "title": "Status Code",
+      "description": "Code returned by api call",
+      "order": 2
+    },
     "success": {
       "type": "boolean",
       "title": "Success",
