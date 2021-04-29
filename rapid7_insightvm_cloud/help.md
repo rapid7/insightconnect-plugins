@@ -75,6 +75,20 @@ Example input:
 Example output:
 
 ```
+{
+  "scans": [
+    {
+      "engine_id": "c8970d2ee174180e202af83b66cd0c4b",
+      "finished": null,
+      "id": "436a59e4-b203-4743-89a9-5b76294f20f4",
+      "name": "testing scan action",
+      "asset_ids": [
+        "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset..."
+      ]
+    }
+  ],
+  "unscanned_assets": []
+}
 ```
 
 #### Update Scan Status
