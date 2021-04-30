@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get a list of up to 100 threats identified in the Abnormal Security Threat Log"
+    DESCRIPTION = "Get a list of up to 100 threats identified in the Abnormal Security Threat Log, if no input filter dates are provided, it will return up to 100 latest results"
 
 
 class Input:
