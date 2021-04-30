@@ -1305,7 +1305,7 @@ actions:
               }'
         required: true
   stop_scan:
-    title: Update Scan Status
+    title: Stop Scan
     description: Stop a scan in progress
     input:
       id:

@@ -34,6 +34,40 @@ Example input:
 
 ### Actions
 
+#### Stop Scan
+
+This action is used to stop a scan in progress.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|Scan ID|None|abb37782-df95-4cf6-b4c2-8d466ca5734|
+
+Example input:
+
+```
+{
+  "id": "abb37782-df95-4cf6-b4c2-8d466ca5734"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|message|string|False|Reason why the action failed|
+|status_code|integer|False|Code returned by API call|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 #### Start Scan
 
 This action is used to start an InsightVM scan of previously scanned devices.
@@ -86,40 +120,6 @@ Example output:
     }
   ],
   "unscanned_assets": []
-}
-```
-
-#### Update Scan Status
-
-This action is used to stop a scan in progress.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Scan ID|None|abb37782-df95-4cf6-b4c2-8d466ca5734|
-
-Example input:
-
-```
-{
-  "id": "abb37782-df95-4cf6-b4c2-8d466ca5734"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|message|string|False|Reason why the action failed|
-|status_code|integer|False|Code returned by API call|
-|success|boolean|True|Was operation successful|
-
-Example output:
-
-```
-{
-  "success": true
 }
 ```
 
