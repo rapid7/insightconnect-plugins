@@ -36,14 +36,12 @@ class AbnormalSecurityAPI:
             if to_date and self.validate_iso8601(to_date):
                 params["filter"] = params["filter"] + f" lte {to_date}"
 
-        return self.send_request("GET", "/threats", params = params).get("threats")
+        return self.send_request("GET", "/threats", params=params).get("threats")
 
     def get_threat_details(self, threat_guid):
         return self.send_request("GET", f"/threats/{threat_guid}")
 
-    def send_request(
-        self, method: str, path: str, params: dict = None, payload: dict = None
-    ) -> dict:
+    def send_request(self, method: str, path: str, params: dict = None, payload: dict = None) -> dict:
         try:
             response = self.session.request(
                 method.upper(),
@@ -54,9 +52,7 @@ class AbnormalSecurityAPI:
             )
 
             if response.status_code == 401:
-                raise PluginException(
-                    preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text
-                )
+                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
             if response.status_code == 404:
@@ -67,9 +63,7 @@ class AbnormalSecurityAPI:
                     data=response.text,
                 )
             if response.status_code >= 500:
-                raise PluginException(
-                    preset=PluginException.Preset.SERVER_ERROR, data=response.text
-                )
+                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
             if 200 <= response.status_code < 300:
                 return clean(json.loads(response.content))
@@ -86,10 +80,10 @@ class AbnormalSecurityAPI:
             datetime.fromisoformat(dt_string)
         except ValueError:
             try:
-                datetime.fromisoformat(dt_string.replace('Z', '+00:00'))
+                datetime.fromisoformat(dt_string.replace("Z", "+00:00"))
             except ValueError:
                 raise PluginException(
                     cause=f"Date: {dt_string} is not a valid ISO8601 date.",
-                    assistance="Please update the date to match ISO8601 format (YYYY-MM-DDTHH:MM:SSZ)."
+                    assistance="Please update the date to match ISO8601 format (YYYY-MM-DDTHH:MM:SSZ).",
                 )
         return True
