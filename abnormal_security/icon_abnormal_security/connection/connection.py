@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 
 # Custom imports below
 from icon_abnormal_security.util.api import AbnormalSecurityAPI
@@ -12,13 +13,17 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params):
         self.logger.info("Connect: Connecting...")
-        self.logger.info(params.get(Input.API_KEY).get("secretKey"))
         self.api = AbnormalSecurityAPI(
             hostname=params.get(Input.HOSTNAME),
             api_key=params.get(Input.API_KEY).get("secretKey"),
             logger=self.logger,
         )
-        self.api.connect()
 
     def test(self):
-        return {"connection": "success"}
+        try:
+            self.api.test_api()
+        except PluginException:
+            raise ConnectionTestException(
+                cause="Connection Test Failed.", assistance="Please check that your API key is correct."
+            )
+        return {}

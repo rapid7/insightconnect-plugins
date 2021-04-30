@@ -12,20 +12,10 @@ class AbnormalSecurityAPI:
         self.api_version = "v1"
         self.base_url = f"https://{hostname}/{self.api_version}"
         self.headers = {"authorization": f"Bearer {api_key}"}
-        self.session = requests.session()
         self.logger = logger
 
-    def connect(self):
-        login_response = self.session.get(
-            f"{self.base_url}/threats",
-            headers=self.headers,
-        )
-
-        if login_response.status_code not in range(200, 299):
-            raise ConnectionTestException(
-                preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE,
-                data="There is a problem connecting to Abnormal Security. Please check your API Key and permissions.",
-            )
+    def test_api(self):
+        return self.send_request("GET", "/threats")
 
     def get_threats(self, from_date: str = None, to_date: str = None):
         params = {}
@@ -43,7 +33,7 @@ class AbnormalSecurityAPI:
 
     def send_request(self, method: str, path: str, params: dict = None, payload: dict = None) -> dict:
         try:
-            response = self.session.request(
+            response = requests.request(
                 method.upper(),
                 urljoin(self.base_url, path),
                 params=params,
