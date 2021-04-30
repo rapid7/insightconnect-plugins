@@ -1,6 +1,6 @@
 from insightconnect_plugin_runtime.helper import clean
 import requests
-from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 from logging import Logger
 from urllib.parse import urljoin
