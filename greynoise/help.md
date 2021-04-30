@@ -29,7 +29,6 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_secret_key|None|True|API key from GreyNoise Account|None|abcdefghijklmnopqrstuvwxyz0123456789|
-|server|string|https://api.greynoise.io|True||None|https://api.greynoise.io|
 
 Example input:
 

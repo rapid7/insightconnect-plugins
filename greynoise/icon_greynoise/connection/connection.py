@@ -21,7 +21,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params):
         self.api_key = params.get("credentials").get("secretKey", "")
-        self.server = params.get("server", "https://api.greynoise.io")
+        self.server = "https://api.greynoise.io"
         self.user_agent = "rapid7-insightconnect-v" + str(PLUGIN_VERSION)
         self.gn_client = GreyNoise(api_server=self.server, api_key=self.api_key, integration_name=self.user_agent)
         self.logger.info("Connect: Connecting...")
