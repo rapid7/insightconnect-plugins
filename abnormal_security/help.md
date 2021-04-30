@@ -83,11 +83,11 @@ Example output:
                 "Abnormal Email SignOff",
                 "Unusual Sender"
             ],
-            "remediationTimestamp": "2021-02-02T21: 09: 41Z",
+            "remediationTimestamp": "2021-02-02T21:09:41Z",
             "isRead": false,
             "attackedParty": "Other",
             "abxMessageId": 1111111111111111113,
-            "abxPortalUrl": "https: //portal.abnormalsecurity.com/home/threat-center/remediation-history/1111111111111111113",
+            "abxPortalUrl": "https://portal.abnormalsecurity.com/home/threat-center/remediation-history/1111111111111111113",
             "subject": "[LIKELY PHISHING] Testing Myths",
             "fromAddress": "user@example.com",
             "fromName": "Test Example",
@@ -96,7 +96,7 @@ Example output:
             "sentTime": "2021-02-02T21:06:49Z",
             "internetMessageId": "<user@example.com>",
             "urls": [
-                "https://do-not-click-me.com/click/example/EW71AW9IBJ7ZQHKRF6JN/"
+                "https://example.com"
             ]
         },
         {
@@ -129,8 +129,8 @@ Example output:
             "sentTime": "2020-05-17T21:09:46Z",
             "internetMessageId": "<user@example.com>",
             "urls": [
-                "https://randomurl.com/docs/DOC-0r2019j",
-                "https://suspicious-url.com/click/example/EW71AW9IBJ7ZQHKRF6JN/"
+                "https://example.com",
+                "https://example.com"
             ]
         },
         {
