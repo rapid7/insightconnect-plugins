@@ -16,7 +16,7 @@ class Update(komand.Action):
             output=UpdateOutput(),
         )
 
-    def run(self, params={}):   # noqa: MC0001
+    def run(self, params={}):  # noqa: MC0001
         no_article = params.pop("NoArticle")
         client = self.connection.client
         attachments = []

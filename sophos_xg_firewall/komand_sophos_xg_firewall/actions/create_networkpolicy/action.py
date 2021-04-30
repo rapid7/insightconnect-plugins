@@ -15,7 +15,7 @@ class CreateNetworkpolicy(komand.Action):
             output=CreateNetworkpolicyOutput(),
         )
 
-    def run(self, params={}):   # noqa: MC0001
+    def run(self, params={}):  # noqa: MC0001
         username = self.connection.username
         password = self.connection.password
         host = self.connection.host
@@ -155,24 +155,24 @@ class CreateNetworkpolicy(komand.Action):
         invalid_params = ""
         try:
             r = requests.post(url, files={"reqxml": (None, request_string)}, verify=False)  # noqa: B501
-            tree = ET.fromstring(r.content)     # noqa: B314
+            tree = ET.fromstring(r.content)  # noqa: B314
             resp_status = tree.find("SecurityPolicy/Status")
             error_status = tree.find("Status")
             inval_params = tree.findall("SecurityPolicy/InvalidParams/Params")
             try:
                 status_code = resp_status.get("code")
                 status_response = resp_status.text
-            except:     # noqa: B110
+            except:  # noqa: B110
                 pass
             try:
                 status_code = error_status.get("code")
                 status_response = error_status.text
-            except:     # noqa: B110
+            except:  # noqa: B110
                 pass
             try:
                 for item in inval_params:
                     invalid_params += "{} ".format(item.text)
-            except:     # noqa: B110
+            except:  # noqa: B110
                 pass
             if invalid_params == "":
                 invalid_params = "None"
@@ -197,7 +197,7 @@ class CreateNetworkpolicy(komand.Action):
         )
         url = "https://{}/webconsole/APIController?".format(host + ":" + str(port))
         try:
-            response = requests.get(url, files={"reqxml": (None, request_string)}, verify=False)    # noqa: B501
+            response = requests.get(url, files={"reqxml": (None, request_string)}, verify=False)  # noqa: B501
             if not response.status_code // 100 == 2:
                 self.logger.error("Error: Unexpected response {}".format(response))
             else:

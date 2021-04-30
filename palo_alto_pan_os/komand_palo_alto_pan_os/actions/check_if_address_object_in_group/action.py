@@ -15,7 +15,7 @@ class CheckIfAddressObjectInGroup(komand.Action):
             output=CheckIfAddressObjectInGroupOutput(),
         )
 
-    def run(self, params={}):   # noqa: MC0001
+    def run(self, params={}):  # noqa: MC0001
         group_name = params.get(Input.GROUP)
         address_to_check = params.get(Input.ADDRESS)
         device_name = params.get(Input.DEVICE_NAME)

@@ -44,7 +44,7 @@ class Connection(komand.Connection):
             params={
                 "access_token": self.api_key,
                 "filter": f"name=@{address_group_name}",  # I have no idea why they need the @ symbol
-            }
+            },
         )
 
         groups = result.json().get("results")
@@ -59,18 +59,14 @@ class Connection(komand.Connection):
 
     def get_address_object(self, address_name):
         try:
-            response_ipv4_json = self.call_api(
-                path=f"firewall/address/{address_name}"
-            ).json()
+            response_ipv4_json = self.call_api(path=f"firewall/address/{address_name}").json()
 
             if response_ipv4_json["http_status"] == 200:
                 return response_ipv4_json
         except (PluginException, json.decoder.JSONDecodeError, requests.exceptions.HTTPError):
             pass
 
-        response_ipv6 = self.call_api(
-            path=f"firewall/address6/{address_name}"
-        )
+        response_ipv6 = self.call_api(path=f"firewall/address6/{address_name}")
         response_ipv6_json = response_ipv6.json()
 
         if response_ipv6_json["http_status"] == 200:
@@ -84,9 +80,7 @@ class Connection(komand.Connection):
 
     def test(self):
         helper = Helpers(self.logger)
-        response = self.call_api(
-            path="firewall.consolidated/policy"
-        )
+        response = self.call_api(path="firewall.consolidated/policy")
 
         try:
             json_response = response.json()
@@ -101,11 +95,7 @@ class Connection(komand.Connection):
         return response.json()
 
     def call_api(
-            self,
-            path: str,
-            method: str = "GET",
-            params: dict = None,
-            json_data: dict = None
+        self, path: str, method: str = "GET", params: dict = None, json_data: dict = None
     ) -> requests.Response:
         try:
             response = self.session.request(
@@ -113,7 +103,7 @@ class Connection(komand.Connection):
                 url=f"https://{self.host}/api/v2/cmdb/{path}",
                 verify=self.ssl_verify,
                 json=json_data,
-                params=params
+                params=params,
             )
 
             if response.status_code == 401:

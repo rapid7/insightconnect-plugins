@@ -27,17 +27,14 @@ class ThreadCrowdAPI:
         return self._call_api("GET", f"{self.url}/file/report/", params={"resource": search_hash})
 
     def vote_malicious(self, vote, entity):
-        return self._call_api("GET", "https://www.threatcrowd.org/vote.php", params={"vote": vote, "value": entity}, full_response=True)
+        return self._call_api(
+            "GET", "https://www.threatcrowd.org/vote.php", params={"vote": vote, "value": entity}, full_response=True
+        )
 
     def _call_api(self, method, url, params=None, json_data=None, full_response: bool = False):
         response = {"text": ""}
         try:
-            response = requests.request(
-                method,
-                url,
-                json=json_data,
-                params=params
-            )
+            response = requests.request(method, url, json=json_data, params=params)
 
             if response.status_code == 404 or (200 <= response.status_code < 300 and not response.text):
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND)

@@ -22,7 +22,7 @@ class Run(komand.Action):
             output=RunOutput(),
         )
 
-    def run(self, params={}):   # noqa: MC0001
+    def run(self, params={}):  # noqa: MC0001
         dump = params.get(Input.DUMP).encode("UTF-8")
         exclude = params.get(Input.EXCLUDE)
 

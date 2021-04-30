@@ -21,16 +21,16 @@ class Connection(komand.Connection):
         consumer_key = params["consumer_credentials"]["username"]
         consumer_secret = params["consumer_credentials"]["password"]
 
-        assert (    # noqa: B101
+        assert (  # noqa: B101
             access_token is not None or len(access_token) == 0
         ), "Connect: Property 'access_token' was None or 0 length. Make sure it is marked required."
-        assert (    # noqa: B101
+        assert (  # noqa: B101
             access_token_secret is not None or len(access_token_secret) == 0
         ), "Connect: Property 'access_token_secret' was None or 0 length. Make sure it is marked required."
-        assert (    # noqa: B101
+        assert (  # noqa: B101
             consumer_key is not None or len(consumer_key) == 0
         ), "Connect: Property 'consumer_key' was None or 0 length. Make sure it is marked required."
-        assert (    # noqa: B101
+        assert (  # noqa: B101
             consumer_secret is not None or len(consumer_secret) == 0
         ), "Connect: Property 'consumer_secret' was None or 0 length. Make sure it is marked required."
 
@@ -56,7 +56,7 @@ class Connection(komand.Connection):
         user_id = verification_info.get("id")
         self.screen_name = verification_info.get("screen_name")
 
-        assert (    # noqa: B101
+        assert (  # noqa: B101
             username is not None and user_id is not None and self.screen_name is not None
         ), "Connect: One or more necessary properties not found. Unsure of success."
 

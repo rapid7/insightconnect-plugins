@@ -2,7 +2,7 @@ import komand
 from .schema import PingInput, PingOutput
 
 # Custom imports below
-import subprocess   # noqa: B404
+import subprocess  # noqa: B404
 import re
 from komand.exceptions import PluginException
 
@@ -16,7 +16,7 @@ class Ping(komand.Action):
             output=PingOutput(),
         )
 
-    def run(self, params={}):   # noqa: MC0001
+    def run(self, params={}):  # noqa: MC0001
         host = params.get("host")
         count = params.get("count")
         resolve_hostname = params.get("resolve_hostname")
@@ -26,10 +26,14 @@ class Ping(komand.Action):
         count = str(count)
 
         if resolve_hostname:
-            response = subprocess.Popen(["ping -c " + count + " " + host], stdout=subprocess.PIPE, shell=True)  # noqa: B602
+            response = subprocess.Popen(
+                ["ping -c " + count + " " + host], stdout=subprocess.PIPE, shell=True
+            )  # noqa: B602
             (output, err) = response.communicate()
         else:
-            response = subprocess.Popen(["ping -n -c " + count + " " + host], stdout=subprocess.PIPE, shell=True)  # noqa: B602
+            response = subprocess.Popen(
+                ["ping -n -c " + count + " " + host], stdout=subprocess.PIPE, shell=True
+            )  # noqa: B602
             (output, err) = response.communicate()
 
         output = output.decode("utf-8")
@@ -149,7 +153,7 @@ class Ping(komand.Action):
             raise PluginException(preset=PluginException.Preset.UNKNOWN, assistance="Please see log for details.")
 
     def test(self):
-        response = subprocess.Popen(["ping -c 4 127.0.0.1"], stdout=subprocess.PIPE, shell=True)    # noqa: B607,B602
+        response = subprocess.Popen(["ping -c 4 127.0.0.1"], stdout=subprocess.PIPE, shell=True)  # noqa: B607,B602
         (output, err) = response.communicate()
 
         output = output.decode("utf-8")

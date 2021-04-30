@@ -40,7 +40,9 @@ class AddFileToUdsoList(komand.Action):
 
         response = None
         try:
-            response = requests.put(request_url, headers=self.connection.header_dict, data=json_payload, verify=False)  # noqa: B501
+            response = requests.put(
+                request_url, headers=self.connection.header_dict, data=json_payload, verify=False
+            )  # noqa: B501
             response.raise_for_status()
             return {Output.SUCCESS: response is not None}
         except RequestException as rex:

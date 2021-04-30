@@ -14,7 +14,7 @@ class SignaturesRetrieve(komand.Action):
             output=SignaturesRetrieveOutput(),
         )
 
-    def run(self, params={}):   # noqa: MC0001
+    def run(self, params={}):  # noqa: MC0001
         sig_obj_list = []
         signatures = self.connection.threat_connect.signatures()
 

@@ -165,9 +165,9 @@ USER_STATUS_BYPASS = "bypass"
 USER_STATUS_DISABLED = "disabled"
 USER_STATUS_LOCKED_OUT = "locked out"
 
-TOKEN_HOTP_6 = "h6"     # noqa: B105
-TOKEN_HOTP_8 = "h8"     # noqa: B105
-TOKEN_YUBIKEY = "yk"    # noqa: B105
+TOKEN_HOTP_6 = "h6"  # noqa: B105
+TOKEN_HOTP_8 = "h8"  # noqa: B105
+TOKEN_YUBIKEY = "yk"  # noqa: B105
 
 VALID_AUTHLOG_REQUEST_PARAMS = [
     "mintime",
@@ -1364,7 +1364,7 @@ class Admin(client.Client):
         """
         return self.json_api_call("GET", "/admin/v1/settings", {})
 
-    def update_settings(    # noqa: MC0001
+    def update_settings(  # noqa: MC0001
         self,
         lockout_threshold=None,
         lockout_expire_duration=None,
@@ -1801,7 +1801,7 @@ class Admin(client.Client):
         response = self.json_api_call("GET", "/admin/v1/integrations/" + integration_key, params)
         return response
 
-    def create_integration(     # noqa: MC0001
+    def create_integration(  # noqa: MC0001
         self,
         name,
         integration_type,
@@ -1908,7 +1908,7 @@ class Admin(client.Client):
         path = "/admin/v1/integrations/%s" % integration_key
         return self.json_api_call("DELETE", path, {})
 
-    def update_integration(     # noqa: MC0001
+    def update_integration(  # noqa: MC0001
         self,
         integration_key,
         name=None,
@@ -2001,7 +2001,7 @@ class Admin(client.Client):
         if adminapi_write_resource is not None:
             params["adminapi_write_resource"] = "1" if adminapi_write_resource else "0"
         if reset_secret_key is not None:
-            params["reset_secret_key"] = "1"    # noqa: B105
+            params["reset_secret_key"] = "1"  # noqa: B105
         if groups_allowed is not None:
             params["groups_allowed"] = groups_allowed
         if self_service_allowed is not None:
