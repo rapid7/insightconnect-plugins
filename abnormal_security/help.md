@@ -4,7 +4,8 @@ Protect your Microsoft Office 365 and G-Suite environments with next-generation 
 
 # Key Features
 
-Identify key features of plugin.
+* Retrive a list of threats from Abnormal Threat Log
+* Get details about existing threats
 
 # Requirements
 
