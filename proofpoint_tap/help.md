@@ -10,17 +10,597 @@ threats before they reach your inbox. This plugin enables users to parse TAP ale
 
 # Requirements
 
-_This plugin does not contain any requirements._
+* TAP service principal and secret
 
 # Documentation
 
 ## Setup
 
-_This plugin does not contain a connection._
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|secret|credential_secret_key|None|False|The TAP secret for basic authentication API interaction|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
+|service_principal|credential_secret_key|None|False|The TAP service principal for basic authentication API interaction|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
+
+Example input:
+
+```
+{
+  "secret": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+  "service_principal": "44d88612-fea8-a8f3-6de8-2e1278abb02f"
+}
+```
 
 ## Technical Details
 
 ### Actions
+
+#### Get Top Clickers
+
+This action is used to fetch the identities and attack index of the top clickers within your organization for a given period.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|window|integer|None|True|An integer indicating how many days the data should be retrieved for|[14, 30, 90]|14|
+
+Example input:
+
+```
+{
+  "window": 90
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|results|top_clickers|True|The results containing top clickers|
+
+Example output:
+
+```
+{
+  "results": {
+    "interval": "2021-01-23T15:45:00Z/2021-04-23T15:45:00Z",
+    "totalTopClickers": 5,
+    "users": [
+      {
+        "clickStatistics": {
+          "families": [
+            {
+              "clicks": 28,
+              "name": "Malware"
+            }
+          ],
+          "clickCount": 28
+        },
+        "identity": {
+          "emails": [
+            "user@example.com"
+          ],
+          "guid": "9ec73de-5100-26ef-4935-579c6b872d35",
+          "vip": false
+        }
+      },
+      {
+        "clickStatistics": {
+          "clickCount": 8,
+          "families": [
+            {
+              "clicks": 6,
+              "name": "MalSpam"
+            },
+            {
+              "clicks": 8,
+              "name": "Malware"
+            }
+          ]
+        },
+        "identity": {
+          "emails": [
+            "user@example.com"
+          ],
+          "guid": "c6b872d3-26ef-69b1-1c56-c73dc58da704",
+          "vip": false
+        }
+      }
+    ]
+  }
+}
+```
+
+#### Get Permitted Clicks
+
+This action is used to fetch events for clicks to malicious URLs permitted in the specified time period.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|threat_status|string|None|False|The threat statuses which will be returned in the data. If no value is specified, active and cleared threats are returned|['active', 'cleared', 'falsePositive']|active|
+|time_end|string|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 22:00:00|
+|time_start|string|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 21:00:00|
+|url|string|None|False|The URL for which the results will be returned. Returns all results if left empty|None|https://example.com|
+
+Example input:
+
+```
+{
+  "threat_status": "active",
+  "time_end": "2021-04-20T22:00:00Z",
+  "time_start": "2021-04-20T21:00:00Z",
+  "url": "https://example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|results|permitted_clicks|True|The results containing permitted clicks|
+
+Example output:
+
+```
+{
+  "results": {
+    "clicksPermitted": [
+      {
+        "GUID": "X7sh5TwRxBZOAXb-d8ESyugsIdtfv3u",
+        "classification": "malware",
+        "clickIP": "208.86.202.9",
+        "clickTime": "2021-04-20T21:08:13.000Z",
+        "id": "0f5a7622-faa9-4e98-9b38-692581598a5e",
+        "messageID": "<user@example.com>",
+        "recipient": "user@example.com",
+        "sender": "user@example.com",
+        "senderIP": "10.25.0.30",
+        "threatID": "f1f23718b35b8db3db005cd498ff0812e53fe994537567ff0a...",
+        "threatStatus": "active",
+        "threatTime": "2021-04-20T21:08:38.000Z",
+        "threatURL": "https://threatinsight.proofpoint.com/e65934ff-e650...",
+        "url": "https://example.com",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36"
+      }
+    ],
+    "queryEndTime": "2021-04-21T13:00:00Z"
+  }
+}
+```
+
+#### Get Delivered Threats
+
+This action is used to fetch events for messages delivered in the specified time period which contained a known threat.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|subject|string|None|False|The subject of the email for which the results will be returned. Returns all results if left empty|None|A phishy email|
+|threat_status|string|None|False|The threat statuses which will be returned in the data. If no value is specified, active and cleared threats are returned|['active', 'cleared', 'falsePositive']|active|
+|threat_type|string|None|False|The threat type which will be returned in the data. If no value is specified, all threat types are returned|['url', 'attachment', 'messageText']|url|
+|time_end|string|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 22:00:00|
+|time_start|string|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 21:00:00|
+
+Example input:
+
+```
+{
+  "subject": "A phishy email",
+  "threat_status": "active",
+  "threat_type": "url",
+  "time_end": "2021-04-21T18:00:00Z",
+  "time_start": "2021-04-21T17:00:00Z"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|results|delivered_threats|True|The results containing delivered threats|
+
+Example output:
+
+```
+{
+  "results": {
+    "messagesDelivered": [
+      {
+        "messageParts": [
+          {
+            "disposition": "inline",
+            "filename": "text-rfc822-headers",
+            "md5": "da626a1706e14a8cf5e7ed420285889c",
+            "oContentType": "text/plain",
+            "sandboxStatus": null,
+            "sha256": "12aea580d129035f1e424484a818bec62455db3f5632cf5bac...",
+            "contentType": "text/plain"
+          },
+          {
+            "contentType": "message/delivery-status",
+            "disposition": "attached",
+            "filename": "message-delivery-status",
+            "md5": "c6c55ec0c1ca8505a0f08baca77319fe",
+            "oContentType": "message/delivery-status",
+            "sandboxStatus": null,
+            "sha256": "15ec858c84dd6d44ae94cfed9b9edbab8bb1341d75cea30b48..."
+          }
+        ],
+        "messageSize": 16026,
+        "threatsInfoMap": [
+          {
+            "threatID": "22a340fea5cb89908a7576b5e387ce6b296a61a8ac35aac574...",
+            "threatStatus": "active",
+            "threatTime": "2021-04-13T14:45:53.000Z",
+            "threatType": "url",
+            "threatUrl": "https://threatinsight.proofpoint.com/e65934ff-e650...",
+            "campaignID": null,
+            "classification": "phish",
+            "threat": "starbrandb2bedm.xyz/emm/"
+          },
+          {
+            "threat": "starbrandb2bedm.xyz/emm/index.php",
+            "threatID": "bcef1812236a940d5e7bb743439e2dc883d3e666124896c339...",
+            "threatStatus": "active",
+            "threatTime": "2021-04-13T08:51:37.000Z",
+            "threatType": "url",
+            "threatUrl": "https://threatinsight.proofpoint.com/e65934ff-e650...",
+            "campaignID": null,
+            "classification": "phish"
+          }
+        ],
+        "malwareScore": 0,
+        "messageID": "<user@example.com>",
+        "policyRoutes": [
+          "allow_relay",
+          "firewallsafe"
+        ],
+        "subject": "A phishy email",
+        "quarantineRule": null,
+        "senderIP": "127.0.0.1",
+        "spamScore": 0,
+        "completelyRewritten": false,
+        "modulesRun": [
+          "access"
+        ],
+        "id": "7ea3968d-c180-89be-808e-95618b89f52a",
+        "messageTime": "2021-04-21T17:26:30.000Z",
+        "toAddresses": [
+          "info-cheri=user@example.com"
+        ],
+        "ccAddresses": [],
+        "headerFrom": "Mail Delivery Subsystem <user@example.com>",
+        "impostorScore": 0,
+        "sender": "",
+        "xmailer": null,
+        "recipient": [
+          "info-cheri=user@example.com"
+        ],
+        "GUID": "sVfuaRyZ59_UnD2m8RX9i7uGsW4pHcUX",
+        "phishScore": 0,
+        "fromAddress": [
+          "user@example.com"
+        ],
+        "headerReplyTo": null,
+        "quarantineFolder": null,
+        "replyToAddress": [],
+        "QID": "13LHPoqE012261",
+        "cluster": "proofpointdemo_cloudadminuidemo_hosted"
+      }
+    ],
+    "queryEndTime": "2021-04-21T18:00:00Z"
+  }
+}
+```
+
+#### Get Blocked Messages
+
+This action is used to fetch events for messages blocked in the specified time period which contained a known threat.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|subject|string|None|False|The subject of the email for which the results will be returned. Returns all results if left empty|None|A phishy email|
+|threat_status|string|None|False|The threat statuses which will be returned in the data. If no value is specified, active and cleared threats are returned|['active', 'cleared', 'falsePositive']|active|
+|threat_type|string|None|False|The threat type which will be returned in the data. If no value is specified, all threat types are returned|['url', 'attachment', 'messageText']|url|
+|time_end|string|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 22:00:00|
+|time_start|string|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 21:00:00|
+
+Example input:
+
+```
+{
+  "subject": "A phishy email",
+  "threat_status": "active",
+  "threat_type": "url",
+  "time_end": "2021-04-21T13:00:00Z",
+  "time_start": "2021-04-21T12:00:00Z"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|results|blocked_messages|True|The results containing blocked messages|
+
+Example output:
+
+```
+{
+  "results": {
+    "messagesBlocked": [
+      {
+        "ccAddresses": [],
+        "headerFrom": "\"amazon\" <user@example.com>",
+        "impostorScore": 0,
+        "sender": "user@example.com",
+        "QID": "381f1q3k77-1",
+        "completelyRewritten": false,
+        "malwareScore": 0,
+        "modulesRun": [
+          "av",
+          "spf"
+        ],
+        "phishScore": 100,
+        "policyRoutes": [
+          "default_inbound",
+          "allow_relay"
+        ],
+        "senderIP": "208.86.203.10",
+        "fromAddress": [
+          "user@example.com"
+        ],
+        "messageParts": [
+          {
+            "md5": "532cec8c1c73be5c49c8be0f9e08131c",
+            "oContentType": "text/html",
+            "sandboxStatus": null,
+            "sha256": "7e38804bf4e90803cc6ef24b6c5e79dd9b9d84b48b23f04ea5...",
+            "contentType": "text/html",
+            "disposition": "inline",
+            "filename": "text.html"
+          },
+          {
+            "sandboxStatus": null,
+            "sha256": "b31b0a1f2b61146af3377833db02811d9af26596e9b5e81457...",
+            "contentType": "text/plain",
+            "disposition": "inline",
+            "filename": "text.txt",
+            "md5": "ed55fbff99e1020dddd0c204b98d96c0",
+            "oContentType": "text/plain"
+          }
+        ],
+        "toAddresses": [
+          "user@example.com"
+        ],
+        "cluster": "proofpointdemo_cloudadminuidemo_hosted",
+        "recipient": [
+          "user@example.com"
+        ],
+        "xmailer": "Fenokohthk 9",
+        "spamScore": 100,
+        "GUID": "fA8S1YIRh2taWGdoS02QyNccz985vY2D",
+        "messageID": "<user@example.com>",
+        "messageSize": 26539,
+        "messageTime": "2021-04-21T12:27:35.000Z",
+        "replyToAddress": [],
+        "headerReplyTo": null,
+        "id": "2aec6a82-a36f-0cf8-c2ff-e6f12ef00e2b",
+        "quarantineFolder": "Phish",
+        "quarantineRule": "phish",
+        "subject": "A phishy email",
+        "threatsInfoMap": [
+          {
+            "threatStatus": "active",
+            "threatTime": "2021-04-20T09:31:34.000Z",
+            "threatType": "url",
+            "threatUrl": "https://threatinsight.proofpoint.com/e65934ff-e650...",
+            "campaignID": null,
+            "classification": "phish",
+            "threat": "182.16.93.221/ap/signin",
+            "threatID": "0e10e285491d55c6dba3016e31243af7dabf5842433a3c4735..."
+          },
+          {
+            "threat": "http://182.16.93.221/ap/signin?openid.pape.max_aut...",
+            "threatID": "378a3a7731552a2f06349d066f2853f833fa6094ed660d8789...",
+            "threatStatus": "active",
+            "threatTime": "2021-04-20T09:29:43.000Z",
+            "threatType": "url",
+            "threatUrl": "https://threatinsight.proofpoint.com/e65934ff-e650...",
+            "campaignID": null,
+            "classification": "phish"
+          }
+        ]
+      }
+    ],
+    "queryEndTime": "2021-04-21T13:00:00Z"
+  }
+}
+```
+
+#### Get All Threats
+
+This action is used to fetch events for all clicks and messages relating to known threats within the specified time period.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|threat_status|string|None|False|The threat statuses which will be returned in the data. If no value is specified, active and cleared threats are returned|['active', 'cleared', 'falsePositive']|active|
+|threat_type|string|None|False|The threat type which will be returned in the data. If no value is specified, all threat types are returned|['url', 'attachment', 'messageText']|url|
+|time_end|string|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 22:00:00|
+|time_start|string|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 21:00:00|
+
+Example input:
+
+```
+{
+  "threat_status": "active",
+  "threat_type": "url",
+  "time_end": "2021-04-21T12:00:00Z",
+  "time_start": "2021-04-21T11:00:00Z"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|results|all_threats|True|The results containing all threats|
+
+Example output:
+
+```
+{
+  "results": {
+    "clicksBlocked": [],
+    "clicksPermitted": [],
+    "messagesBlocked": [
+      {
+        "cluster": "proofpointdemo_cloudadminuidemo_hosted",
+        "impostorScore": 0,
+        "sender": "",
+        "threatsInfoMap": [
+          {
+            "threat": "klongkru.ac.th/",
+            "threatID": "d22be456cbc0a0e5d900696c36c92c547bea13cc76d32b63ed...",
+            "threatStatus": "active",
+            "threatTime": "2021-02-09T15:59:49.000Z",
+            "threatType": "url",
+            "threatUrl": "https://threatinsight.proofpoint.com/e65934ff-e650...",
+            "campaignID": null,
+            "classification": "phish"
+          }
+        ],
+        "QID": "3823t51rm5-1",
+        "ccAddresses": [],
+        "messageTime": "2021-04-21T11:15:26.000Z",
+        "spamScore": 100,
+        "toAddresses": [
+          "user@example.com"
+        ],
+        "GUID": "gk6qK0AUnJMM-0iF10DbYBA3lZgxMALt",
+        "completelyRewritten": false,
+        "modulesRun": [
+          "av",
+          "spf"
+        ],
+        "messageParts": [
+          {
+            "contentType": "message/delivery-status",
+            "disposition": "attached",
+            "filename": "message-delivery-status",
+            "md5": "1a2b15614f9adae2eb34426c695006f9",
+            "oContentType": "message/delivery-status",
+            "sandboxStatus": null,
+            "sha256": "067fc64bf84042ce48f4761097aec5c5d6cf62bb80dc66c45e..."
+          },
+          {
+            "oContentType": "text/plain",
+            "sandboxStatus": null,
+            "sha256": "f95b2809b1ecd4dd6de4e2318340388f8007c7ac76778532c4...",
+            "contentType": "text/plain",
+            "disposition": "inline",
+            "filename": "text.txt",
+            "md5": "2391ed6fa3d2cc2eabbfba68fa204cb0"
+          }
+        ],
+        "messageSize": 9982,
+        "replyToAddress": [],
+        "subject": "Mail delivery failed: returning message to sender",
+        "fromAddress": [
+          "user@example.com"
+        ],
+        "headerFrom": "Mail Delivery System <user@example.com>",
+        "quarantineFolder": "Phish",
+        "recipient": [
+          "user@example.com"
+        ],
+        "headerReplyTo": null,
+        "malwareScore": 0,
+        "policyRoutes": [
+          "default_inbound",
+          "allow_relay"
+        ],
+        "messageID": "<user@example.com>",
+        "phishScore": 100,
+        "quarantineRule": "phish",
+        "senderIP": "208.86.203.10",
+        "xmailer": null,
+        "id": "2bc8c6a9-e1a7-10d3-97e9-dc2956c5cc9b"
+      }
+    ],
+    "messagesDelivered": [],
+    "queryEndTime": "2021-04-21T12:00:00Z"
+  }
+}
+```
+
+#### Get Blocked Clicks
+
+This action is used to fetch events for clicks to malicious URLs blocked in the specified time period.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|threat_status|string|None|False|The threat statuses which will be returned in the data. If no value is specified, active and cleared threats are returned|['active', 'cleared', 'falsePositive']|active|
+|time_end|string|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 22:00:00|
+|time_start|string|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 21:00:00|
+|url|string|None|False|The URL for which the results will be returned. Returns all results if left empty|None|https://example.com|
+
+Example input:
+
+```
+{
+  "threat_status": "active",
+  "time_end": "2021-04-21T13:00:00Z",
+  "time_start": "2021-04-21T12:00:00Z",
+  "url": "https://example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|results|blocked_clicks|True|The results containing blocked clicks|
+
+Example output:
+
+```
+{
+  "results": {
+    "clicksBlocked": [
+      {
+        "GUID": "X7sh5TwRxBZOAXb-d8ESyugsIdtfv3u",
+        "classification": "malware",
+        "clickIP": "208.86.202.9",
+        "clickTime": "2021-04-20T21:08:13.000Z",
+        "id": "0f5a7622-faa9-4e98-9b38-692581598a5e",
+        "messageID": "<user@example.com>",
+        "recipient": "user@example.com",
+        "sender": "user@example.com",
+        "senderIP": "10.25.0.30",
+        "threatID": "f1f23718b35b8db3db005cd498ff0812e53fe994537567ff0a...",
+        "threatStatus": "active",
+        "threatTime": "2021-04-20T21:08:38.000Z",
+        "threatURL": "https://threatinsight.proofpoint.com/e65934ff-e650...",
+        "url": "https://example.com",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36"
+      }
+    ],
+    "queryEndTime": "2021-04-21T13:00:00Z"
+  }
+}
+```
 
 #### Parse Alert
 
@@ -84,7 +664,29 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-### Custom Output Types
+#### all_threats
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Clicks Blocked|[]clicks|False|An array containing all clicks to URL threats which were blocked|
+|Clicks Permitted|[]clicks|False|An array containing all clicks to URL threats which were permitted|
+|Messages Blocked|[]messages|False|An array containing all messages with threats which were quarantined by PPS|
+|Messages Delivered|[]messages|False|An array containing all messages with threats which were delivered by PPS|
+|Query End Time|string|False|The time at which the period queried for data ended|
+
+#### blocked_clicks
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Clicks Blocked|[]clicks|False|An array containing all clicks to URL threats which were blocked|
+|Query End Time|string|False|The time at which the period queried for data ended|
+
+#### blocked_messages
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Messages Blocked|[]messages|False|An array containing all messages with threats which were quarantined by PPS|
+|Query End Time|string|False|The time at which the period queried for data ended|
 
 #### browser
 
@@ -93,6 +695,60 @@ _This plugin does not contain any triggers._
 |Source IP|string|False|Source IP|
 |Time|string|False|Time|
 |User Agent|string|False|User agent string|
+
+#### click_statistics
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Click Count|integer|False|Click count|
+|Families|[]families|False|Families|
+
+#### clicks
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|GUID|string|False|The ID of the message within PPS|
+|Campaign ID|string|False|An identifier for the campaign of which the threat is a member|
+|Classification|string|False|The threat category of the malicious URL|
+|Click IP|string|False|The external IP address of the user who clicked on the link|
+|Click Time|string|False|The time the user clicked on the URL|
+|ID|string|False|The unique id of the click|
+|Recipient|string|False|The email address of the recipient|
+|Sender|string|False|The email address of the sender. The user-part is hashed. The domain-part is cleartext|
+|Sender IP|string|False|The IP address of the sender|
+|Threat ID|string|False|The unique identifier associated with this threat|
+|Threat Status|string|False|The current state of the threat|
+|Threat Time|string|False|Proofpoint identified the URL as a threat at this time|
+|Threat URL|string|False|A link to the entry on the TAP Dashboard for the particular threat|
+|URL|string|False|The malicious URL which was clicked|
+|User Agent|string|False|The User-Agent header from the clicker's HTTP request|
+
+#### delivered_threats
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Messages Delivered|[]messages|False|An array containing all messages with threats which were delivered by PPS|
+|Query End Time|string|False|The time at which the period queried for data ended|
+
+#### families
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Clicks|integer|False|Clicks|
+|Name|string|False|Name|
+
+#### identity
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Customer User ID|string|False|Customer user ID|
+|Department|string|False|Department|
+|Emails|[]string|False|Emails|
+|GUID|string|False|GUID|
+|Location|string|False|Location|
+|Name|string|False|Name|
+|Title|string|False|Title|
+|VIP|boolean|False|VIP|
 
 #### message
 
@@ -107,7 +763,60 @@ _This plugin does not contain any triggers._
 |Sender|string|False|Sender|
 |Sender IP|string|False|Sender IP|
 |Subject|string|False|Subject|
+|Threat ID|string|False|Unique identifier for this threat|
 |Time Delivered|string|False|Time Delivered|
+
+#### message_parts
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Content Type|string|False|The true, detected Content-Type of the messagePart|
+|Disposition|string|False|If the value is 'inline', the messagePart is a message body. If the value is 'attached', the messagePart is an attachment|
+|Filename|string|False|The filename of the messagePart|
+|MD5|string|False|The MD5 hash of the messagePart contents|
+|Declared Content Type|string|False|The declared Content-Type of the messagePart|
+|Sandbox Status|string|False|The verdict returned by the sandbox during the scanning process|
+|SHA256|string|False|The SHA256 hash of the messagePart contents|
+
+#### messages
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|GUID|string|False|The ID of the message within PPS|
+|QID|string|False|The queue ID of the message within PPS|
+|CC Addresses|[]string|False|A list of email addresses contained within the CC|
+|Cluster ID|string|False|The name of the PPS cluster which processed the message|
+|Completely Rewritten|boolean|False|The rewrite status of the message|
+|From Address|[]string|False|The email address contained in the From|
+|Header From|string|False|The full content of the From|
+|Header Reply To|string|False|If present, the full content of the Reply-To|
+|Impostor Score|integer|False|The impostor score of the message. Higher scores indicate higher certainty|
+|Malware Score|integer|False|The malware score of the message. Higher scores indicate higher certainty|
+|Message ID|string|False|Message-ID extracted from the headers of the email message|
+|Message Parts|[]message_parts|False|Details about parts of the message, including both message bodies and attachments|
+|Message Size|integer|False|The size in bytes of the message, including headers and attachments|
+|Message Time|string|False|When the message was delivered to the user or quarantined by PPS|
+|Modules Run|[]string|False|The list of PPS modules which processed the message|
+|Phish Score|integer|False|The phish score of the message. Higher scores indicate higher certainty|
+|Policy Routes|[]string|False|The policy routes that the message matched during processing by PPS|
+|Quarantine Folder|string|False|The name of the folder which contains the quarantined message|
+|Quarantine Rule|string|False|The name of the rule which quarantined the message|
+|Recipient|[]string|False|An array containing the email addresses of the SMTP (envelope) recipients|
+|Reply To Address|[]string|False|The email address contained in the Reply-To|
+|Sender|string|False|The email address of the SMTP (envelope) sender. The user-part is hashed. The domain-part is cleartext|
+|Sender IP|string|False|The IP address of the sender|
+|Spam Score|integer|False|The spam score of the message. Higher scores indicate higher certainty|
+|Subject|string|False|The subject line of the message, if available|
+|Threats Info Map|[]threats_info_map|False|Details about detected threats within the message|
+|To Address|[]string|False|A list of email addresses contained within the To|
+|X-mailer|string|False|The content of the X-Mailer|
+
+#### permitted_clicks
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Clicks Permitted|[]clicks|False|An array containing all clicks to URL threats which were permitted|
+|Query End Time|string|False|The time at which the period queried for data ended|
 
 #### tap_results
 
@@ -127,12 +836,41 @@ _This plugin does not contain any triggers._
 |Threat Details URL|string|False|URL for Details of the Threat|
 |URL|string|False|URL|
 
+#### threats_info_map
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Campaign ID|string|False|An identifier for the campaign of which the threat is a member|
+|Classification|string|False|The category of threat found in the message|
+|Threat|string|False|The artifact which was condemned by Proofpoint. The malicious URL, hash of the attachment threat, or email address of the impostor sender|
+|Threat ID|string|False|The unique identifier associated with this threat|
+|Threat Status|string|False|The current state of the threat|
+|Threat Time|string|False|Proofpoint assigned the threatStatus at this time|
+|Threat Type|string|False|Whether the threat was an attachment, URL, or message type|
+|Threat URL|string|False|A link to the entry about the threat on the TAP Dashboard|
+
+#### top_clickers
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Interval|string|False|An ISO8601-formatted interval showing what time the response was calculated for|
+|Total Top Clickers|integer|False|An integer describing the total number of top clickers in the time interval|
+|Users|[]user|False|An array of user objects that contain information about the user's identity and statistics of the clicking behavior|
+
+#### user
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Click Statistics|click_statistics|False|Click statistics|
+|Identity|identity|False|Identity|
+
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.1.0 - Add new actions Get Blocked Clicks, Get Permitted Clicks, Get Blocked Messages, Get Delivered Threats, Get All Threats, Get Top Clickers
 * 1.0.8 - Fix finding e-mail in `header_from` for e-mails addresses with `[.]`
 * 1.0.7 - Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Update plugin.spec.yaml to include `cloud_ready`
 * 1.0.6 - Parsing out GUID of the message into the output type
