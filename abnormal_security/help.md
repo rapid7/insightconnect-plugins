@@ -120,7 +120,7 @@ Example output:
             "abxMessageId": -1111111111111111112,
             "abxPortalUrl": "https://portal.abnormalsecurity.com/home/threat-center/remediation-history/-1111111111111111112",
             "subject": "[LIKELY PHISHING] Testing Myths",
-            "fromAddress": "test@example.com",
+            "fromAddress": "user@example.com",
             "fromName": "Test Example",
             "toAddresses": "user@example.com",
             "recipientAddress": "user@example.com",
