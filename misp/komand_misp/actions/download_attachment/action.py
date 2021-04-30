@@ -26,7 +26,7 @@ class DownloadAttachment(komand.Action):
 
         try:
             # Generate request
-            response = requests.get(url, headers=headers, verify=False)     # noqa: B501
+            response = requests.get(url, headers=headers, verify=False)  # noqa: B501
             message = str(response.json()["message"])
             response.raise_for_status()
         except ValueError:

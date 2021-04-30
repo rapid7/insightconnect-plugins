@@ -48,9 +48,7 @@ class CybereasonAPI:
 
     def file_search(self, server_filter: dict, file_filter: dict) -> dict:
         if not file_filter:
-            raise PluginException(
-                cause="File filter shouldn't be empty.", assistance="Please check this input."
-            )
+            raise PluginException(cause="File filter shouldn't be empty.", assistance="Please check this input.")
 
         return self.send_request(
             "POST",
@@ -58,9 +56,7 @@ class CybereasonAPI:
             payload={"filters": server_filter, "fileFilters": file_filter},
         )
 
-    def send_request(
-        self, method: str, path: str, params: dict = None, payload: dict = None
-    ) -> dict:
+    def send_request(self, method: str, path: str, params: dict = None, payload: dict = None) -> dict:
         try:
             response = self.session.request(
                 method.upper(),
@@ -71,9 +67,7 @@ class CybereasonAPI:
             )
 
             if response.status_code == 401:
-                raise PluginException(
-                    preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text
-                )
+                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
             if response.status_code == 404:
@@ -84,9 +78,7 @@ class CybereasonAPI:
                     data=response.text,
                 )
             if response.status_code >= 500:
-                raise PluginException(
-                    preset=PluginException.Preset.SERVER_ERROR, data=response.text
-                )
+                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
             if 200 <= response.status_code < 300:
                 return insightconnect_plugin_runtime.helper.clean(json.loads(response.content))
@@ -103,9 +95,7 @@ class CybereasonAPI:
             return []
 
         server_filter = server_filter.split(":")
-        value = json.loads(
-            '{"' + server_filter[0] + '":' + server_filter[1].replace("'", '"') + "}"
-        )
+        value = json.loads('{"' + server_filter[0] + '":' + server_filter[1].replace("'", '"') + "}")
 
         return [
             {

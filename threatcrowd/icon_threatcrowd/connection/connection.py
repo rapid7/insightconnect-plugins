@@ -1,12 +1,12 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema
+
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 from icon_threatcrowd.util.api import ThreadCrowdAPI
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.client = None
@@ -22,11 +22,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
             else:
                 raise ConnectionTestException(
                     cause="An unexpected error occurred during the API request.",
-                    assistance="Check that https://threatcrowd.org is reachable or please contact support."
+                    assistance="Check that https://threatcrowd.org is reachable or please contact support.",
                 )
         except Exception:
             self.logger.error("An unexpected error occurred during the API request")
             raise ConnectionTestException(
                 cause="An unexpected error occurred during the API request.",
-                assistance="Check that https://threatcrowd.org is reachable or please contact support."
+                assistance="Check that https://threatcrowd.org is reachable or please contact support.",
             )

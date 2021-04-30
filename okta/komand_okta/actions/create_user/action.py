@@ -16,7 +16,7 @@ class CreateUser(komand.Action):
             output=CreateUserOutput(),
         )
 
-    def run(self, params={}):   # noqa: MC0001
+    def run(self, params={}):  # noqa: MC0001
         okta_url = self.connection.okta_url
         # We need to handle nextLogin ourselves, we simplified the UI for user
         try:

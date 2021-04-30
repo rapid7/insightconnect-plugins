@@ -15,7 +15,7 @@ class AllLookup(komand.Action):
             output=AllLookupOutput(),
         )
 
-    def run(self, params={}):   # noqa: MC0001
+    def run(self, params={}):  # noqa: MC0001
         address = params.get("address")
         user_agent = params.get("user_agent")
         accept_language = params.get("accept_language")

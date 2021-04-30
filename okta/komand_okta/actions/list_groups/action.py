@@ -17,7 +17,7 @@ class ListGroups(komand.Action):
         )
 
     def run(self, params={}):
-        """ Get the user by email """
+        """Get the user by email"""
         query = params.get(Input.QUERY)
         okta_url = self.connection.okta_url
 

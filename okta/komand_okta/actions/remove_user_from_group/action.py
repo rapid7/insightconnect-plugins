@@ -16,7 +16,7 @@ class RemoveUserFromGroup(komand.Action):
         )
 
     def run(self, params={}):
-        """ Get the user by email """
+        """Get the user by email"""
         group_id = params.get(Input.GROUP_ID)
         email = params.get(Input.EMAIL)
         user_id = helpers.get_user_id(email, self.connection, self.logger)
