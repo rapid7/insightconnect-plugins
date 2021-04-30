@@ -23,7 +23,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "hostname": {
       "type": "string",
       "title": "Host",
-      "description": "Abnormal Security host url",
+      "description": "Abnormal Security host URL",
       "default": "https://api.abnormalplatform.com",
       "order": 1
     }

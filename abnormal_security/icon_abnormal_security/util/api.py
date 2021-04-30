@@ -10,12 +10,8 @@ from datetime import datetime
 class AbnormalSecurityAPI:
     def __init__(self, hostname: str, api_key: str, logger: Logger):
         self.api_version = "v1"
-        # self.base_url = f"https://{hostname}/{self.api_version}"
-        self.base_url = f"https://{hostname}"
-        self.headers = {
-            "authorization": f"Bearer {api_key}",
-            "x-mock-match-request-headers": "authorization"
-        }
+        self.base_url = f"https://{hostname}/{self.api_version}"
+        self.headers = {"authorization": f"Bearer {api_key}"}
         self.session = requests.session()
         self.logger = logger
 
@@ -28,7 +24,7 @@ class AbnormalSecurityAPI:
         if login_response.status_code not in range(200, 299):
             raise ConnectionTestException(
                 preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE,
-                data="There is a problem connecting to Abnormal Security. Please check your API Key or permissions.",
+                data="There is a problem connecting to Abnormal Security. Please check your API Key and permissions.",
             )
 
     def get_threats(self, from_date: str = None, to_date: str = None):

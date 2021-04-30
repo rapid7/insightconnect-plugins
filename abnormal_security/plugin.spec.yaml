@@ -175,7 +175,7 @@ types:
 connection:
   hostname:
     title: Host
-    description: Abnormal Security host url
+    description: Abnormal Security host URL
     type: string
     required: true
     example: https://api.abnormalplatform.com
