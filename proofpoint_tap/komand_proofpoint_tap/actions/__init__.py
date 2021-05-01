@@ -6,3 +6,4 @@ from .get_delivered_threats.action import GetDeliveredThreats
 from .get_permitted_clicks.action import GetPermittedClicks
 from .get_top_clickers.action import GetTopClickers
 from .parse_tap_alert.action import ParseTapAlert
+from .url_decode.action import UrlDecode

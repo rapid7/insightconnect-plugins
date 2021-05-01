@@ -10,24 +10,20 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.client = None
+        self.is_authorized = False
 
     def connect(self, params={}):
-        if params.get(Input.SERVICE_PRINCIPAL) and params.get(Input.SECRET):
-            self.logger.info("Connect: Connecting...")
-            self.client = ProofpointTapApi(params.get(Input.SERVICE_PRINCIPAL), params.get(Input.SECRET))
-        else:
-            pass
+        self.logger.info("Connect: Connecting...")
+        service_principal = params.get(Input.SERVICE_PRINCIPAL, {})
+        self.client = ProofpointTapApi(service_principal, params.get(Input.SECRET))
 
     def test(self):
-        try:
-            self.client.get_top_clickers({"window": 14})
-        except AttributeError:
-            raise PluginException(
-                cause="Connection configuration required.", assistance="Please set up your connection and try again."
-            )
-        except PluginException:
-            raise ConnectionTestException(
-                cause="Connection error.",
-                assistance="Please check that your service principal and secret are correct.",
-            )
+        if self.client.authorized:
+            try:
+                self.client.get_top_clickers({"window": 14})
+            except PluginException:
+                raise ConnectionTestException(
+                    cause="Connection error.",
+                    assistance="Please check that your service principal and secret are correct.",
+                )
         return {"status": "Success"}

@@ -17,26 +17,22 @@ class GetAllThreats(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        try:
-            return {
-                Output.RESULTS: insightconnect_plugin_runtime.helper.clean(
-                    self.connection.client.siem_action(
-                        Endpoint.get_all_threats(),
-                        SiemUtils.prepare_time_range(
-                            params.get(Input.TIME_START),
-                            params.get(Input.TIME_END),
-                            {
-                                "format": "JSON",
-                                "threatType": params.get(Input.THREAT_TYPE),
-                                "threatStatus": params.get(Input.THREAT_STATUS),
-                            },
-                        ),
-                    )
+        self.connection.client.check_authorization()
+
+        return {
+            Output.RESULTS: insightconnect_plugin_runtime.helper.clean(
+                self.connection.client.siem_action(
+                    Endpoint.get_all_threats(),
+                    SiemUtils.prepare_time_range(
+                        params.get(Input.TIME_START),
+                        params.get(Input.TIME_END),
+                        {
+                            "format": "JSON",
+                            "threatType": params.get(Input.THREAT_TYPE),
+                            "threatStatus": params.get(Input.THREAT_STATUS),
+                        },
+                    ),
                 )
-            }
-        except AttributeError as e:
-            raise PluginException(
-                cause="Proofpoint Tap returned unexpected response.",
-                assistance="Please check that the connection required for this action is set up and try again.",
-                data=e,
             )
+        }
+

@@ -17,28 +17,22 @@ class GetBlockedMessages(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        try:
-            response = self.connection.client.siem_action(
-                Endpoint.get_blocked_messages(),
-                SiemUtils.prepare_time_range(
-                    params.get(Input.TIME_START),
-                    params.get(Input.TIME_END),
-                    {
-                        "format": "JSON",
-                        "threatStatus": params.get(Input.THREAT_STATUS),
-                        "threatType": params.get(Input.THREAT_TYPE),
-                    },
-                ),
-            )
-            if params.get(Input.SUBJECT):
-                response["messagesBlocked"] = SiemUtils.search_subject(
-                    response.get("messagesBlocked"), params.get(Input.SUBJECT)
-                )
-        except AttributeError as e:
-            raise PluginException(
-                cause="Proofpoint Tap returned unexpected response.",
-                assistance="Please check that the provided inputs are correct or that the connection required for this "
-                "action is set up and try again.",
-                data=e,
+        self.connection.client.check_authorization()
+
+        response = self.connection.client.siem_action(
+            Endpoint.get_blocked_messages(),
+            SiemUtils.prepare_time_range(
+                params.get(Input.TIME_START),
+                params.get(Input.TIME_END),
+                {
+                    "format": "JSON",
+                    "threatStatus": params.get(Input.THREAT_STATUS),
+                    "threatType": params.get(Input.THREAT_TYPE),
+                },
+            ),
+        )
+        if params.get(Input.SUBJECT):
+            response["messagesBlocked"] = SiemUtils.search_subject(
+                response.get("messagesBlocked"), params.get(Input.SUBJECT)
             )
         return {Output.RESULTS: insightconnect_plugin_runtime.helper.clean(response)}

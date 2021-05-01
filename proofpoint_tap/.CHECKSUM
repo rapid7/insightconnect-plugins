@@ -1,6 +1,6 @@
 {
-	"spec": "248fa2075c3f9c98141c4515f6ee3121",
-	"manifest": "71b2060544302643cc7560057f73699a",
+	"spec": "310c055d72db7196e4411e010141a7fd",
+	"manifest": "490e67f79f912467278723285dbe396c",
 	"setup": "600d069019e02856d7ffeea327342837",
 	"schemas": [
 		{
@@ -30,6 +30,10 @@
 		{
 			"identifier": "parse_tap_alert/schema.py",
 			"hash": "dd2e63e8048b97fa23e094e39b845135"
+		},
+		{
+			"identifier": "url_decode/schema.py",
+			"hash": "7bdd5a9639316f7c1b168971c334bd7c"
 		},
 		{
 			"identifier": "connection/schema.py",

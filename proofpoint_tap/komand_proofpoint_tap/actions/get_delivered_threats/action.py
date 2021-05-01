@@ -17,28 +17,23 @@ class GetDeliveredThreats(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        try:
-            response = self.connection.client.siem_action(
-                Endpoint.get_delivered_threats(),
-                SiemUtils.prepare_time_range(
-                    params.get(Input.TIME_START),
-                    params.get(Input.TIME_END),
-                    {
-                        "format": "JSON",
-                        "threatStatus": params.get(Input.THREAT_STATUS),
-                        "threatType": params.get(Input.THREAT_TYPE),
-                    },
-                ),
+        self.connection.client.check_authorization()
+
+        response = self.connection.client.siem_action(
+            Endpoint.get_delivered_threats(),
+            SiemUtils.prepare_time_range(
+                params.get(Input.TIME_START),
+                params.get(Input.TIME_END),
+                {
+                    "format": "JSON",
+                    "threatStatus": params.get(Input.THREAT_STATUS),
+                    "threatType": params.get(Input.THREAT_TYPE),
+                },
+            ),
+        )
+        if params.get(Input.SUBJECT):
+            response["messagesDelivered"] = SiemUtils.search_subject(
+                response.get("messagesDelivered"), params.get(Input.SUBJECT)
             )
-            if params.get(Input.SUBJECT):
-                response["messagesDelivered"] = SiemUtils.search_subject(
-                    response.get("messagesDelivered"), params.get(Input.SUBJECT)
-                )
-        except AttributeError as e:
-            raise PluginException(
-                cause="Proofpoint Tap returned unexpected response.",
-                assistance="Please check that the provided inputs are correct or that the connection required for this "
-                "action is set up and try again.",
-                data=e,
-            )
+
         return {Output.RESULTS: insightconnect_plugin_runtime.helper.clean(response)}

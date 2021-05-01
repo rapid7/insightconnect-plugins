@@ -590,6 +590,43 @@ types:
       description: An ISO8601-formatted interval showing what time the response was calculated for
       type: string
       required: false
+  urls:
+    decodedUrl:
+      title: Decoded URL
+      type: string
+      description: Decoded URL
+      required: false
+    encodedUrl:
+      title: Encoded URL
+      type: string
+      description: Encoded URL
+      required: false
+    success:
+      title: Success
+      type: boolean
+      description: Success
+      required: false
+    messageGuid:
+      title: Message GUID
+      type: string
+      description: Message GUID
+      required: false
+    clusterName:
+      title: Cluster Name
+      type: string
+      description: Cluster Name
+      required: false
+    recipientEmail:
+      title: Recipient Email
+      type: string
+      description: Recipient Email
+      required: false
+  decoded_urls:
+    urls:
+      title: "Urls"
+      type: "[]urls"
+      description: "Urls"
+      required: false
 
 connection:
   service_principal:
@@ -854,4 +891,20 @@ actions:
         title: Results
         description: The results containing top clickers
         type: top_clickers
+        required: true
+  url_decode:
+    title: URL Decode
+    description: Decode URLs which have been rewritten by TAP to their original, target URL
+    input:
+      urls:
+        title: URLs
+        description: List of URLs to decode
+        type: '[]string'
+        required: true
+        example: '["https://example.com", "https://example2.com"]'
+    output:
+      results:
+        title: Results
+        description: Decoded URLs
+        type: decoded_urls
         required: true

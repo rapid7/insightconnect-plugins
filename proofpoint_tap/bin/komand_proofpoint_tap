@@ -48,6 +48,8 @@ def main():
 
             self.add_action(actions.ParseTapAlert())
 
+            self.add_action(actions.UrlDecode())
+
 
     """Run plugin"""
     cli = insightconnect_plugin_runtime.CLI(ICONProofpointTap())

@@ -7,15 +7,29 @@ from json import JSONDecodeError
 class ProofpointTapApi:
     def __init__(self, service_principal: dict, secret: dict):
         self.base_url = "https://tap-api-v2.proofpoint.com/v2/"
-        self.service_principal = service_principal.get("secretKey")
-        self.secret = secret.get("secretKey")
+        if service_principal and secret:
+            self.service_principal = service_principal.get("secretKey")
+            self.secret = secret.get("secretKey")
+            self.authorized = True
+        else:
+            self.authorized = False
 
-    def _call_api(self, method: str, endpoint: str, params: dict = None):
+    def check_authorization(self):
+        if not self.authorized:
+            raise PluginException(
+                cause="Proofpoint Tap required authorization for this action.",
+                assistance="Please check that credentials are correct and try again."
+            )
+
+        return True
+
+    def _call_api(self, method: str, endpoint: str, params: dict = None, json_data: dict = None):
         response = requests.request(
             url=self.base_url + endpoint,
             method=method,
             params=params,
-            auth=HTTPBasicAuth(self.service_principal, self.secret),
+            json=json_data,
+            auth=HTTPBasicAuth(self.service_principal, self.secret) if self.authorized else None,
         )
         if response.status_code == 401:
             raise PluginException(
@@ -55,6 +69,9 @@ class ProofpointTapApi:
         response["users"] = users
         response["totalTopClickers"] = total_clickers
         return response
+
+    def get_decoded_url(self, payload: dict):
+        return self._call_api("POST", "url/decode", json_data=payload)
 
 
 class Endpoint:

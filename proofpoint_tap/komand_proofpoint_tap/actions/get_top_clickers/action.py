@@ -15,15 +15,10 @@ class GetTopClickers(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        try:
-            return {
-                Output.RESULTS: insightconnect_plugin_runtime.helper.clean(
-                    self.connection.client.get_top_clickers({"window": params.get(Input.WINDOW)})
-                )
-            }
-        except AttributeError as e:
-            raise PluginException(
-                cause="Proofpoint Tap returned unexpected response.",
-                assistance="Please check that the connection required for this action is set up and try again.",
-                data=e,
+        self.connection.client.check_authorization()
+
+        return {
+            Output.RESULTS: insightconnect_plugin_runtime.helper.clean(
+                self.connection.client.get_top_clickers({"window": params.get(Input.WINDOW)})
             )
+        }

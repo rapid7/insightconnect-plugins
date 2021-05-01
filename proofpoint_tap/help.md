@@ -36,6 +36,46 @@ Example input:
 
 ### Actions
 
+#### URL Decode
+
+This action is used to decode URLs which have been rewritten by TAP to their original, target URL.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|urls|[]string|None|True|List of URLs to decode|None|["https://example.com", "https://example2.com"]|
+
+Example input:
+
+```
+{
+  "urls": ["https://example.com", "https://example2.com"]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|results|decoded_urls|True|Decoded URLs|
+
+Example output:
+
+```
+{
+  "results": {
+    "urls": [
+      {
+        "encodedUrl": "https://urldefense.proofpoint.com/v1/url?u=http://www.example.com/&amp;k=oIvRg1%2BdGAgOoM1BIlLLqw%3D%3D%0A&amp;r=IKM5u8%2B%2F%2Fi8EBhWOS%2BqGbTqCC%2BrMqWI%2FVfEAEsQO%2F0Y%3D%0A&amp;m=Ww6iaHO73mDQpPQwOwfLfN8WMapqHyvtu8jM8SjqmVQ%3D%0A&amp;s=d3583cfa53dade97025bc6274c6c8951dc29fe0f38830cf8e5a447723b9f1c9a\"",
+        "decodedUrl": "http://www.example.com/",
+        "success": true
+      }
+    ]
+  }
+}
+```
+
 #### Get Top Clickers
 
 This action is used to fetch the identities and attack index of the top clickers within your organization for a given period.
@@ -50,7 +90,7 @@ Example input:
 
 ```
 {
-  "window": 90
+  "window": 14
 }
 ```
 
@@ -870,7 +910,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.1.0 - Add new actions Get Blocked Clicks, Get Permitted Clicks, Get Blocked Messages, Get Delivered Threats, Get All Threats, Get Top Clickers
+* 1.1.0 - Add new actions Get Blocked Clicks, Get Permitted Clicks, Get Blocked Messages, Get Delivered Threats, Get All Threats, Get Top Clickers, URL Decode
 * 1.0.8 - Fix finding e-mail in `header_from` for e-mails addresses with `[.]`
 * 1.0.7 - Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Update plugin.spec.yaml to include `cloud_ready`
 * 1.0.6 - Parsing out GUID of the message into the output type
