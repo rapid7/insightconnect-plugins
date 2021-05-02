@@ -17,40 +17,44 @@ class ProofpointTapApi:
     def check_authorization(self):
         if not self.authorized:
             raise PluginException(
-                cause="Proofpoint Tap required authorization for this action.",
-                assistance="Please check that credentials are correct and try again."
+                cause="Proofpoint Tap authorization is required for this action.",
+                assistance="Please check that credentials are correct and try again.",
             )
-
         return True
 
     def _call_api(self, method: str, endpoint: str, params: dict = None, json_data: dict = None):
-        response = requests.request(
-            url=self.base_url + endpoint,
-            method=method,
-            params=params,
-            json=json_data,
-            auth=HTTPBasicAuth(self.service_principal, self.secret) if self.authorized else None,
-        )
-        if response.status_code == 401:
-            raise PluginException(
-                cause="Invalid service principal or secret provided.",
-                assistance="Verify your service principal and secret are correct.",
-            )
-        if response.status_code == 403:
-            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
-        if response.status_code == 404:
-            raise PluginException(
-                cause="No results found.",
-                assistance="Please provide valid inputs and try again.",
-            )
-        if 400 <= response.status_code < 500:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        if response.status_code >= 500:
-            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
         try:
-            return response.json()
-        except JSONDecodeError:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+            response = requests.request(
+                url=self.base_url + endpoint,
+                method=method,
+                params=params,
+                json=json_data,
+                auth=HTTPBasicAuth(self.service_principal, self.secret) if self.authorized else None,
+            )
+            if response.status_code == 401:
+                raise PluginException(
+                    cause="Invalid service principal or secret provided.",
+                    assistance="Verify your service principal and secret are correct.",
+                )
+            elif response.status_code == 403:
+                raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
+            elif response.status_code == 404:
+                raise PluginException(
+                    cause="No results found.",
+                    assistance="Please provide valid inputs and try again.",
+                )
+            elif 400 <= response.status_code < 500:
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+            elif response.status_code >= 500:
+                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+            elif 200 <= response.status_code < 300:
+                return response.json()
+            else:
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+        except JSONDecodeError as e:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
+        except requests.exceptions.HTTPError as e:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 
     def siem_action(self, endpoint: str, query_params: dict) -> dict:
         return self._call_api("GET", endpoint, params=query_params)
