@@ -43,17 +43,20 @@ class IVM_Cloud:
         headers = {"x-api-key": self.token, "content-type": "application/json"}
 
         try:
-            response = request(request_type, self.base_url + path,
-                               params=insightconnect_plugin_runtime.helper.clean(params),
-                               headers=headers,
-                               data=json.dumps(body))
+            response = request(
+                request_type,
+                self.base_url + path,
+                params=insightconnect_plugin_runtime.helper.clean(params),
+                headers=headers,
+                data=json.dumps(body),
+            )
             if response.status_code not in [200, 201, 202]:
                 raise PluginException(
                     cause=f"Failed to get a valid response from InsightVM at endpoint {api_url}",
                     assistance=f"Response was {response.request.body}",
                     data=response.status_code,
                 )
-            if response.text == '':
+            if response.text == "":
                 return response.status_code
             if "data" in response:
                 return response.get("data")
@@ -75,8 +78,9 @@ class IVM_Cloud:
         headers = {"x-api-key": self.token}
 
         try:
-            response = request("POST", api_url, params=insightconnect_plugin_runtime.helper.clean(params),
-                               headers=headers)
+            response = request(
+                "POST", api_url, params=insightconnect_plugin_runtime.helper.clean(params), headers=headers
+            )
             response.raise_for_status()
             return insightconnect_plugin_runtime.helper.clean(response.json())
         except HTTPError as httpError:

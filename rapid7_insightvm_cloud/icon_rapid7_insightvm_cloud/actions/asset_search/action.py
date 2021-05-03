@@ -24,30 +24,25 @@ def format_response(resources: [], params={}):
                 ending = asset.split("], 'metadata':")
                 asset = ending[0]
                 if asset[len(asset) - 1] == "}":
-                    asset = asset[:len(asset) - 1]
+                    asset = asset[: len(asset) - 1]
             asset = "{" + asset + "}"
             asset = ast.literal_eval(asset)
-            if hostname != "":
-                if "host_name" in asset:
-                    if hostname == asset["host_name"]:
-                        results.append(asset)
-            elif ip != "":
-                if "ip" in asset:
-                    if ip == asset["ip"]:
-                        results.append(asset)
-            elif hostname == "" and ip == "":
+            if hostname:
+                if asset.get("host_name") in hostname:
+                    results.append(asset)
+            if ip:
+                if asset.get("ip") in ip:
+                    results.append(asset)
+            if hostname == [] and ip == []:
                 results.append(asset)
     return results
 
 
 class AssetSearch(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='asset_search',
-            description=Component.DESCRIPTION,
-            input=AssetSearchInput(),
-            output=AssetSearchOutput())
+            name="asset_search", description=Component.DESCRIPTION, input=AssetSearchInput(), output=AssetSearchOutput()
+        )
 
     def run(self, params={}):
         size = params.get(Input.SIZE, 0)

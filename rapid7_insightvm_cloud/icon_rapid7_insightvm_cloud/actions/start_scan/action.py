@@ -1,18 +1,16 @@
 import insightconnect_plugin_runtime
 from .schema import StartScanInput, StartScanOutput, Input, Component
+
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
 import ast
 
 
 class StartScan(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='start_scan',
-            description=Component.DESCRIPTION,
-            input=StartScanInput(),
-            output=StartScanOutput())
+            name="start_scan", description=Component.DESCRIPTION, input=StartScanInput(), output=StartScanOutput()
+        )
 
     def asset_search(self, hostnames: str, ips: str):
         parameters = list()
@@ -33,19 +31,17 @@ class StartScan(insightconnect_plugin_runtime.Action):
                     ending = asset.split("], 'metadata':")
                     asset = ending[0]
                     if asset[len(asset) - 1] == "}":
-                        asset = asset[:len(asset) - 1]
+                        asset = asset[: len(asset) - 1]
                 asset = "{" + asset + "}"
                 asset = ast.literal_eval(asset)
                 if hostnames:
-                    if "host_name" in asset:
-                        if asset["host_name"] in hostnames:
-                            if asset["id"] not in results:
-                                results.append(asset["id"])
-                elif ips:
-                    if "ip" in asset:
-                        if asset["ip"] in ips:
-                            if asset["id"] not in results:
-                                results.append(asset["id"])
+                    if asset.get("host_name") in hostnames:
+                        if asset.get("id") not in results:
+                            results.append(asset.get("id"))
+                if ips:
+                    if asset.get("ip") in ips:
+                        if asset.get("id") not in results:
+                            results.append(asset.get("id"))
         return results
 
     def run(self, params={}):
@@ -56,7 +52,7 @@ class StartScan(insightconnect_plugin_runtime.Action):
         if asset_ids == [] and ips == [] and hostnames == []:
             raise PluginException(
                 cause="Did not enter necessary information of what to scan.",
-                assistance="Please enter asset id, hostname, or ip."
+                assistance="Please enter asset id, hostname, or ip.",
             )
         if hostnames != [] or ips != []:
             extra_ids = self.asset_search(hostnames, ips)

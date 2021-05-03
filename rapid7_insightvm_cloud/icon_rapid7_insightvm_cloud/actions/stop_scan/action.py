@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import StopScanInput, StopScanOutput, Input, Output
+
 # Custom imports below
 import requests
 
@@ -13,7 +14,6 @@ _ERRORS = {
 
 
 class StopScan(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
             name="stop_scan",

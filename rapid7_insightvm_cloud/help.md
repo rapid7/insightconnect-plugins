@@ -76,9 +76,9 @@ This action is used to start an InsightVM scan of previously scanned devices.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_ids|[]string|None|False|IDs of the assets to scan|None|["cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-135"]|
-|hostname|[]string|None|False|The hostname|None|["fortigate-vm02.vuln.lax.rapid7.com"]|
-|ip|[]string|None|False|Primary IPv4 or IPv6 address of the asset|None|["10.4.31.141"]|
+|asset_ids|[]string|None|False|IDs of the assets to scan|None|["abc978-5678-abc-a5a94a1234b8-asset"]|
+|hostname|[]string|None|False|The hostname|None|["rapid7.com"]|
+|ip|[]string|None|False|Primary IPv4 or IPv6 address of the asset|None|["2001:db8:1:1:1:1:1:1"]|
 |name|string|None|True|The name of the scan|None|test cloud scan|
 
 Example input:
@@ -86,13 +86,13 @@ Example input:
 ```
 {
   "asset_ids": [
-    "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-135"
+    "abc978-5678-abc-a5a94a1234b8-asset"
   ],
   "hostname": [
-    "fortigate-vm02.vuln.lax.rapid7.com"
+    "rapid7.com"
   ],
   "ip": [
-    "10.4.31.141"
+    "2001:db8:1:1:1:1:1:1"
   ],
   "name": "test cloud scan"
 }
@@ -131,8 +131,8 @@ This action is used to search for assets using filtered asset search.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hostname|string|None|False|The hostname|None|fortigate-vm02.vuln.lax.rapid7.com|
-|ip|string|None|False|Primary IPv4 or IPv6 address of the asset|None|10.4.22.144|
+|hostname|[]string|None|False|The hostname|None|["rapid7.com"]|
+|ip|[]string|None|False|Primary IPv4 or IPv6 address of the asset|None|["2001:db8:1:1:1:1:1:1"]|
 |pages|number|1|False|The number of pages of records to retrieve|None|100|
 |size|number|0|False|The number of records to retrieve. If blank or '0' all assets that match the search will be returned|None|100|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|
@@ -141,8 +141,12 @@ Example input:
 
 ```
 {
-  "hostname": "fortigate-vm02.vuln.lax.rapid7.com",
-  "ip": "10.4.22.144",
+  "hostname": [
+    "rapid7.com"
+  ],
+  "ip": [
+    "2001:db8:1:1:1:1:1:1"
+  ],
   "pages": 100,
   "size": 100,
   "sort_criteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}"
@@ -242,13 +246,13 @@ This action gets an asset by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Get an asset by ID|None|cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-13|
+|id|string|None|True|Get an asset by ID|None|abc978-5678-abc-a5a94a1234b8-asset|
 
 Example input:
 
 ```
 {
-  "id": "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-13"
+  "id": "abc978-5678-abc-a5a94a1234b8-asset"
 }
 ```
 

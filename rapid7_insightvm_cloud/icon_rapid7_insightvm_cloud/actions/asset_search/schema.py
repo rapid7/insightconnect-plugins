@@ -26,15 +26,21 @@ class AssetSearchInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "hostname": {
-      "type": "string",
+      "type": "array",
       "title": "Hostname",
       "description": "The hostname",
+      "items": {
+        "type": "string"
+      },
       "order": 5
     },
     "ip": {
-      "type": "string",
+      "type": "array",
       "title": "IP",
       "description": "Primary IPv4 or IPv6 address of the asset",
+      "items": {
+        "type": "string"
+      },
       "order": 4
     },
     "pages": {
