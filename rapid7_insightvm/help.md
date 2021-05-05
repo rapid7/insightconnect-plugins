@@ -18,8 +18,6 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 ## Setup
 
-The URL must point to your local console, not the platform or cloud console.
-
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -31,11 +29,8 @@ Example input:
 
 ```
 {
-  "url": "https://insightvm.example.com:3780",
-  "credentials": {
-    "username": "username",
-    "password": "password"
-  }
+  "credentials": "{\"username\": \"username\", \"password\": \"password\"}",
+  "url": "https://insightvm.example.com:3780"
 }
 ```
 
@@ -58,10 +53,7 @@ Example input:
 
 ```
 {
-  "asset_id": 423,
-  "vulnerability_ids": [
-    "flash_player-cve-2017-11305"
-  ]
+  "id": 1234
 }
 ```
 
@@ -402,11 +394,14 @@ This action is used to delete an Asset.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Asset ID|None|None|
+|id|integer|None|True|Asset ID|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -431,11 +426,14 @@ This action is used to get Asset Group Assets.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Asset group ID|None|None|
+|id|integer|None|True|Asset group ID|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -467,11 +465,14 @@ This action gets an asset by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Get an asset by ID|None|None|
+|id|integer|None|True|Get an asset by ID|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -621,11 +622,14 @@ This action is used to get a listing of all tags for an asset.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_id|integer|None|True|Identifier of asset|None|None|
+|asset_id|integer|None|True|Identifier of asset|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -752,8 +756,7 @@ Example input:
 
 ```
 {
-  "asset_id": 234,
-  "get_risk_score": true
+  "id": 1234
 }
 ```
 
@@ -861,11 +864,14 @@ This action is used to get the status of a scan.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|scan_id|string|None|True|ID of the scan to obtain|None|None|
+|scan_id|string|None|True|ID of the scan to obtain|None|11234abc-65c8-4628-adf4-e27f36ea0e2b|
 
 Example input:
 
 ```
+{
+  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
+}
 ```
 
 ##### Output
@@ -921,11 +927,14 @@ This action is used to get assets for a site.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|site_id|string|None|True|ID of the site to get assets for|None|None|
+|site_id|string|None|True|ID of the site to get assets for|None|11234abc-65c8-4628-adf4-e27f36ea0e2b|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -1053,14 +1062,23 @@ This action is used to create, generate, download, and cleanup a SQL report base
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|filters|string|{}|False|Filters in JSON format to be applied to the contents of the report; review InsightVM API documentation for filter options|None|None|
-|query|string|None|True|Reporting Data Model SQL query|None|None|
-|scope|string|none|True|Scope context for generated report; if set, remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID; scan scope only supports single scan ID as input|['none', 'assets', 'assetGroups', 'sites', 'tags', 'scan']|None|
-|scope_ids|[]integer|[]|False|Scope IDs for which tickets should be generated, by default all are included|None|None|
+|filters|string|{}|False|Filters in JSON format to be applied to the contents of the report; review InsightVM API documentation for filter options|None|{filters}|
+|query|string|None|True|Reporting Data Model SQL query|None|example query|
+|scope|string|none|True|Scope context for generated report; if set, remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID; scan scope only supports single scan ID as input|['none', 'assets', 'assetGroups', 'sites', 'tags', 'scan']|none|
+|scope_ids|[]integer|[]|False|Scope IDs for which tickets should be generated, by default all are included|None|[1234, 5678]|
 
 Example input:
 
 ```
+{
+  "filters": "{filters}",
+  "query": "example query",
+  "scope": "none",
+  "scope_ids": [
+    1234,
+    5678
+  ]
+}
 ```
 
 ##### Output
@@ -1088,12 +1106,16 @@ This action is used to return the contents of a generated report.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Identifier of the report to download e.g. 265|None|None|
-|instance|string|None|True|The identifier of the report instance, 'latest' or ID e.g. 100|None|None|
+|id|integer|None|True|Identifier of the report to download e.g. 265|None|1234|
+|instance|string|None|True|The identifier of the report instance, 'latest' or ID e.g. 100|None|latest|
 
 Example input:
 
 ```
+{
+  "id": 1234,
+  "instance": "latest"
+}
 ```
 
 ##### Output
@@ -1120,12 +1142,16 @@ This action is used to list reports and return their identifiers.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name|string|None|False|Name of report, otherwise all reports by criteria|None|None|
-|sort|string|None|True|Sort order, ascending or descending|['Ascending', 'Descending']|None|
+|name|string|None|False|Name of report, otherwise all reports by criteria|None|Name|
+|sort|string|None|True|Sort order, ascending or descending|['Ascending', 'Descending']|Ascending|
 
 Example input:
 
 ```
+{
+  "name": "Name",
+  "sort": "Ascending"
+}
 ```
 
 ##### Output
@@ -1163,11 +1189,14 @@ This action is used to get the assets affected by the vulnerability.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|vulnerability_id|string|None|True|The identifier of the vulnerability e.g. jre-vuln-cve-2013-2471|None|None|
+|vulnerability_id|string|None|True|The identifier of the vulnerability e.g. jre-vuln-cve-2013-2471|None|jre-vuln-cve-2013-2471|
 
 Example input:
 
 ```
+{
+  "vulnerability_id": "jre-vuln-cve-2013-2471"
+}
 ```
 
 ##### Output
@@ -1279,14 +1308,20 @@ This action is used to create a new tag.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|color|string|default|False|Tag color (only available for custom tags)|['default', 'blue', 'green', 'orange', 'purple', 'red']|None|
-|name|string|None|True|Tag name|None|None|
-|searchCriteria|object|None|False|Tag search Criteria - options documentation https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|None|
-|type|string|None|True|Tag type|['owner', 'location', 'custom']|None|
+|color|string|default|False|Tag color (only available for custom tags)|['default', 'blue', 'green', 'orange', 'purple', 'red']|default|
+|name|string|None|True|Tag name|None|example name|
+|searchCriteria|object|None|False|Tag search Criteria - options documentation https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{"risk-score": "asc", "criticality-tag": "desc"}|
+|type|string|None|True|Tag type|['owner', 'location', 'custom']|owner|
 
 Example input:
 
 ```
+{
+  "color": "default",
+  "name": "example name",
+  "searchCriteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}",
+  "type": "owner"
+}
 ```
 
 ##### Output
@@ -1311,11 +1346,14 @@ This action is used to delete an existing tag.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Tag ID|None|None|
+|id|integer|None|True|Tag ID|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -1345,12 +1383,15 @@ This action is used to get a listing of all tags and return their details.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name|string||False|Tag name regular expression by which to filter|None|None|
-|type|string||False|Type of tag by which to filter, all types are returned if none is specified|['owner', 'location', 'custom', 'criticality', '']|None|
+|name|string||False|Tag name regular expression by which to filter|None|example name|
+|type|string||False|Type of tag by which to filter, all types are returned if none is specified|['owner', 'location', 'custom', 'criticality', '']|owner|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -1446,11 +1487,14 @@ This action is used to get tag details by tag ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Tag ID, e.g. 1|None|None|
+|id|integer|None|True|Tag ID, e.g. 1|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -1526,11 +1570,14 @@ This action is used to get site IDs associated with a tag.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Tag ID for which to retrieve site associations|None|None|
+|id|integer|None|True|Tag ID for which to retrieve site associations|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -1557,11 +1604,14 @@ This action is used to tag ID for which to retrieve asset associations.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Tag ID to add to site|None|None|
+|id|integer|None|True|Tag ID to add to site|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -1600,11 +1650,14 @@ This action is used to get asset groups associated with a tag.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Tag ID for which to retrieve asset group associations|None|None|
+|id|integer|None|True|Tag ID for which to retrieve asset group associations|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -1632,12 +1685,16 @@ This action is used to remove a tag from an asset.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_id|integer|None|True|Asset ID from which to remove the tag|None|None|
-|tag_id|integer|None|True|Tag ID to remove from the asset|None|None|
+|asset_id|integer|None|True|Asset ID from which to remove the tag|None|12345|
+|tag_id|integer|None|True|Tag ID to remove from the asset|None|1234|
 
 Example input:
 
 ```
+{
+  "asset_id": 12345,
+  "tag_id": 1234
+}
 ```
 
 ##### Output
@@ -1667,11 +1724,14 @@ This action is used to remove all tags from an asset group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Asset group ID from which to remove all tags|None|None|
+|id|integer|None|True|Asset group ID from which to remove all tags|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -1701,11 +1761,14 @@ This action is used to remove all asset group associations from a tag.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Tag ID from which to remove all asset group associations|None|None|
+|id|integer|None|True|Tag ID from which to remove all asset group associations|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -1735,11 +1798,14 @@ This action is used to remove all site associations from a tag.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Tag ID from which to remove all site associations|None|None|
+|id|integer|None|True|Tag ID from which to remove all site associations|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -1769,11 +1835,14 @@ This action is used to remove all search criteria from a tag.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Tag ID from which to remove all search criteria|None|None|
+|id|integer|None|True|Tag ID from which to remove all search criteria|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -1803,12 +1872,16 @@ This action is used to add a tag to an asset.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_id|integer|None|True|Asset ID to tag|None|None|
-|tag_id|integer|None|True|Tag ID to add to site|None|None|
+|asset_id|integer|None|True|Asset ID to tag|None|12345|
+|tag_id|integer|None|True|Tag ID to add to site|None|1234|
 
 Example input:
 
 ```
+{
+  "asset_id": 12345,
+  "tag_id": 1234
+}
 ```
 
 ##### Output
@@ -1838,12 +1911,16 @@ This action is used to add a tag to an asset group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_group_id|integer|None|True|Asset group ID to tag|None|None|
-|tag_id|integer|None|True|Tag ID to add to site|None|None|
+|asset_group_id|integer|None|True|Asset group ID to tag|None|12345|
+|tag_id|integer|None|True|Tag ID to add to site|None|1234|
 
 Example input:
 
 ```
+{
+  "asset_id": 12345,
+  "tag_id": 1234
+}
 ```
 
 ##### Output
@@ -1873,12 +1950,16 @@ This action is used to add a tag to a site.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|site_id|integer|None|True|Site ID to tag|None|None|
-|tag_id|integer|None|True|Tag ID to add to site|None|None|
+|site_id|integer|None|True|Site ID to tag|None|12345|
+|tag_id|integer|None|True|Tag ID to add to site|None|1234|
 
 Example input:
 
 ```
+{
+  "site_id": 12345,
+  "tag_id": 1234
+}
 ```
 
 ##### Output
@@ -1908,12 +1989,16 @@ This action is used to update the search criteria for an existing tag.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Tag ID|None|None|
-|searchCriteria|object|None|True|Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|None|
+|id|integer|None|True|Tag ID|None|1234|
+|searchCriteria|object|None|True|Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{"risk-score": "asc", "criticality-tag": "desc"}|
 
 Example input:
 
 ```
+{
+  "id": 1234,
+  "searchCriteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}"
+}
 ```
 
 ##### Output
@@ -1943,7 +2028,7 @@ This action is used to search for assets using a filtered asset search.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|searchCriteria|object|None|True|Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|None|
+|searchCriteria|object|None|True|Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{"risk-score": "asc", "criticality-tag": "desc"}|
 |size|number|0|False|The number of records to retrieve. If blank or '0' all assets that match the search will be returned|None|100|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|
 
@@ -1951,11 +2036,9 @@ Example input:
 
 ```
 {
+  "searchCriteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}",
   "size": 100,
-  "sort_criteria": {
-    "risk-score": "asc",
-    "criticality-tag": "desc"
-  }
+  "sort_criteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}"
 }
 ```
 
@@ -2108,14 +2191,20 @@ This action is used to create an asset group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|description|string|None|True|Asset group description|None|None|
-|name|string|None|True|Asset group name|None|None|
-|searchCriteria|object|None|False|Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|None|
-|type|string|None|True|Asset group type|['dynamic', 'static']|None|
+|description|string|None|True|Asset group description|None|example description|
+|name|string|None|True|Asset group name|None|example name|
+|searchCriteria|object|None|False|Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{"risk-score": "asc", "criticality-tag": "desc"}|
+|type|string|None|True|Asset group type|['dynamic', 'static']|dynamic|
 
 Example input:
 
 ```
+{
+  "description": "example description",
+  "name": "example name",
+  "searchCriteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}",
+  "type": "dynamic"
+}
 ```
 
 ##### Output
@@ -2140,19 +2229,42 @@ This action is used to create a new site.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|description|string|None|False|The site's description|None|None|
-|engine_id|integer|None|False|The identifier of a scan engine. Default scan engine is selected when not specified|None|None|
-|excluded_addresses|[]string|[]|False|List of addresses to exclude in scan scope|None|None|
-|excluded_asset_groups|[]integer|[]|False|Assets associated with these asset group IDs will be excluded in the site|None|None|
-|importance|string|normal|False|The site importance|['very_low', 'low', 'normal', 'high', 'very_high']|None|
-|included_addresses|[]string|[]|False|List of addresses to include in scan scope|None|None|
-|included_asset_groups|[]integer|[]|False|Assets associated with these asset group IDs will be included in the site|None|None|
-|name|string|None|True|The site name. Name must be unique|None|None|
-|scan_template_id|string|None|False|The identifier of a scan template|None|None|
+|description|string|None|False|The site's description|None|example description|
+|engine_id|integer|None|False|The identifier of a scan engine. Default scan engine is selected when not specified|None|1234|
+|excluded_addresses|[]string|[]|False|List of addresses to exclude in scan scope|None|["1234-abcd", "4567-def"]|
+|excluded_asset_groups|[]integer|[]|False|Assets associated with these asset group IDs will be excluded in the site|None|[1234, 5768]|
+|importance|string|normal|False|The site importance|['very_low', 'low', 'normal', 'high', 'very_high']|low|
+|included_addresses|[]string|[]|False|List of addresses to include in scan scope|None|["1234-abcd", "4567-def"]|
+|included_asset_groups|[]integer|[]|False|Assets associated with these asset group IDs will be included in the site|None|[1234, 5768]|
+|name|string|None|True|The site name. Name must be unique|None|example name|
+|scan_template_id|string|None|False|The identifier of a scan template|None|12345-abcd|
 
 Example input:
 
 ```
+{
+  "description": "example description",
+  "engine_id": 1234,
+  "excluded_addresses": [
+    "1234-abcd",
+    "4567-def"
+  ],
+  "excluded_asset_groups": [
+    1234,
+    5768
+  ],
+  "importance": "low",
+  "included_addresses": [
+    "1234-abcd",
+    "4567-def"
+  ],
+  "included_asset_groups": [
+    1234,
+    5768
+  ],
+  "name": "example name",
+  "scan_template_id": "12345-abcd"
+}
 ```
 
 ##### Output
@@ -2189,16 +2301,24 @@ This action is used to update an existing site.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|description|string|None|True|The site's description|None|None|
-|engine_id|integer|None|True|The identifier of a scan engine. Default scan engine is selected when not specified|None|None|
-|id|integer|None|True|The identifier of the site|None|None|
-|importance|string|normal|True|The site importance|['very_low', 'low', 'normal', 'high', 'very_high']|None|
-|name|string|None|True|The site name. Name must be unique|None|None|
-|scan_template_id|string|None|True|The identifier of a scan template|None|None|
+|description|string|None|True|The site's description|None|example description|
+|engine_id|integer|None|True|The identifier of a scan engine. Default scan engine is selected when not specified|None|1234|
+|id|integer|None|True|The identifier of the site|None|1234|
+|importance|string|normal|True|The site importance|['very_low', 'low', 'normal', 'high', 'very_high']|low|
+|name|string|None|True|The site name. Name must be unique|None|example name|
+|scan_template_id|string|None|True|The identifier of a scan template|None|1234|
 
 Example input:
 
 ```
+{
+  "description": "example description",
+  "engine_id": 1234,
+  "id": 1234,
+  "importance": "low",
+  "name": "example name",
+  "scan_template_id": 1234
+}
 ```
 
 ##### Output
@@ -2230,13 +2350,21 @@ This action is used to update an existing site scope of included IP address and 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|The identifier of the site|None|None|
-|included_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|None|
-|overwrite|boolean|True|True|Whether to overwrite the included targets to the current site or append to the previous list of included targets|None|None|
+|id|integer|None|True|The identifier of the site|None|1234|
+|included_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|["10.2.144", "10.8.36.144"]|
+|overwrite|boolean|True|True|Whether to overwrite the included targets to the current site or append to the previous list of included targets|None|True|
 
 Example input:
 
 ```
+{
+  "description": "example description",
+  "engine_id": 1234,
+  "id": 1234,
+  "importance": "low",
+  "name": "example name",
+  "scan_template_id": 1234
+}
 ```
 
 ##### Output
@@ -2268,13 +2396,21 @@ This action is used to update an existing site scope of excluded IP address and 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|excluded_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|None|
-|id|integer|None|True|The identifier of the site|None|None|
-|overwrite|boolean|True|True|Whether to overwrite the excluded targets to the current site or append to the previous list of excluded targets|None|None|
+|excluded_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|["10.2.144", "10.8.36.144"]|
+|id|integer|None|True|The identifier of the site|None|1234|
+|overwrite|boolean|True|True|Whether to overwrite the excluded targets to the current site or append to the previous list of excluded targets|None|True|
 
 Example input:
 
 ```
+{
+  "excluded_targets": [
+    "10.2.144",
+    "10.8.36.144"
+  ],
+  "id": 1234,
+  "overwrite": true
+}
 ```
 
 ##### Output
@@ -2306,13 +2442,21 @@ This action is used to update an existing site scope of included asset groups.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|The identifier of the site|None|None|
-|included_asset_groups|[]integer|None|False|Assets associated with these asset group IDs will be included in the site|None|None|
-|overwrite|boolean|True|True|Whether to overwrite the included asset group IDs to the current site or append to the previous list of asset group IDs|None|None|
+|id|integer|None|True|The identifier of the site|None|1234|
+|included_asset_groups|[]integer|None|False|Assets associated with these asset group IDs will be included in the site|None|[1234, 567]|
+|overwrite|boolean|True|True|Whether to overwrite the included asset group IDs to the current site or append to the previous list of asset group IDs|None|True|
 
 Example input:
 
 ```
+{
+  "description": "example description",
+  "engine_id": 1234,
+  "id": 1234,
+  "importance": "low",
+  "name": "example name",
+  "scan_template_id": 1234
+}
 ```
 
 ##### Output
@@ -2344,13 +2488,21 @@ This action is used to update an existing site scope of excluded asset groups.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|excluded_asset_groups|[]integer|None|False|Assets associated with these asset group IDs will be excluded from the site|None|None|
-|id|integer|None|True|The identifier of the site|None|None|
-|overwrite|boolean|True|True|Whether to overwrite the excluded asset group IDs to the current site or append to the previous list of asset group IDs|None|None|
+|excluded_asset_groups|[]integer|None|False|Assets associated with these asset group IDs will be excluded from the site|None|[1234, 567]|
+|id|integer|None|True|The identifier of the site|None|1234|
+|overwrite|boolean|True|True|Whether to overwrite the excluded asset group IDs to the current site or append to the previous list of asset group IDs|None|True|
 
 Example input:
 
 ```
+{
+  "description": "example description",
+  "engine_id": 1234,
+  "id": 1234,
+  "importance": "low",
+  "name": "example name",
+  "scan_template_id": 1234
+}
 ```
 
 ##### Output
@@ -2382,11 +2534,14 @@ This action is used to delete an existing site.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Site ID|None|None|
+|id|integer|None|True|Site ID|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -2416,11 +2571,14 @@ This action is used to get a list of asset groups.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name|string||False|Asset group name regular expression by which to filter|None|None|
+|name|string||False|Asset group name regular expression by which to filter|None|example name|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -2488,11 +2646,14 @@ This action is used to get an asset group by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Asset group ID|None|None|
+|id|integer|None|True|Asset group ID|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -2558,11 +2719,14 @@ This action is used to delete an existing asset group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Asset group ID|None|None|
+|id|integer|None|True|Asset group ID|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -2592,12 +2756,16 @@ This action is used to update the search criteria for an existing asset group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Asset group ID|None|None|
-|searchCriteria|object|None|True|Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|None|
+|id|integer|None|True|Asset group ID|None|1234|
+|searchCriteria|object|None|True|Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{"risk-score": "asc", "criticality-tag": "desc"}|
 
 Example input:
 
 ```
+{
+  "id": 1234,
+  "searchCriteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}"
+}
 ```
 
 ##### Output
@@ -2627,11 +2795,14 @@ This action is used to get a list of sites.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name|string||False|Site name regular expression by which to filter|None|None|
+|name|string||False|Site name regular expression by which to filter|None|example name|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -2744,11 +2915,14 @@ This action is used to get a site by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Site ID|None|None|
+|id|integer|None|True|Site ID|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -2858,11 +3032,14 @@ This action is used to get vulnerability details associated with a CVE.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|cve_id|string|None|True|Common Vulnerabilities and Exposures ID, e.g. CVE-2018-12345|None|None|
+|cve_id|string|None|True|Common Vulnerabilities and Exposures ID, e.g. CVE-2018-12345|None|CVE-2018-12345|
 
 Example input:
 
 ```
+{
+  "cve_id": "CVE-2018-12345"
+}
 ```
 
 ##### Output
@@ -2968,11 +3145,14 @@ This action gets assets for a scan.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|scan_id|integer|None|True|ID of the scan to get assets for|None|None|
+|scan_id|integer|None|True|ID of the scan to get assets for|None|123456789|
 
 Example input:
 
 ```
+{
+  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
+}
 ```
 
 ##### Output
@@ -3086,12 +3266,16 @@ This action is used to get scans with optional site filter.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|active|boolean|False|False|Return running scans or past scans|None|None|
-|id|integer|None|False|Site ID|None|None|
+|active|boolean|False|False|Return running scans or past scans|None|False|
+|id|integer|None|False|Site ID|None|1234|
 
 Example input:
 
 ```
+{
+  "active": false,
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -3148,12 +3332,16 @@ This action is used to update the status of a scan (pause, resume, stop).
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Scan ID|None|None|
-|status|string|stop|True|Status to which the scan should be set (stop, resume, pause)|['stop', 'resume', 'pause']|None|
+|id|integer|None|True|Scan ID|None|1234|
+|status|string|stop|True|Status to which the scan should be set (stop, resume, pause)|['stop', 'resume', 'pause']|stop|
 
 Example input:
 
 ```
+{
+  "id": 1234,
+  "status": "stop"
+}
 ```
 
 ##### Output
@@ -3183,11 +3371,14 @@ This action is used to generate a shared secret for use with pairing a scan engi
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|time_to_live|integer|3600|True|Time to live in seconds for the shared secret|None|None|
+|time_to_live|integer|3600|True|Time to live in seconds for the shared secret|None|3600|
 
 Example input:
 
 ```
+{
+  "time_to_live": 3600
+}
 ```
 
 ##### Output
@@ -3212,12 +3403,15 @@ This action is used to list scan engines paired with the security console.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|False|Optional address (IP/hostname) by which to filter, accepts regular expression patterns|None|None|
-|name|string|None|False|Optional engine name by which to filter, accepts regular expression patterns|None|None|
+|address|string|None|False|Optional address (IP/hostname) by which to filter, accepts regular expression patterns|None|10.4.36.120|
+|name|string|None|False|Optional engine name by which to filter, accepts regular expression patterns|None|example name|
 
 Example input:
 
 ```
+{
+  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
+}
 ```
 
 ##### Output
@@ -3411,11 +3605,14 @@ This action is used to get a scan engine by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Scan engine identifier|None|None|
+|id|integer|None|True|Scan engine identifier|None|1234|
 
 Example input:
 
 ```
+{
+  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
+}
 ```
 
 ##### Output
@@ -3475,14 +3672,23 @@ This action is used to create a new scan engine with console -> engine connectiv
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|Scan engine address (IP/hostname)|None|None|
-|name|string|None|True|Scan engine name|None|None|
-|port|integer|40814|True|Scan engine connectivity port|None|None|
-|sites|[]integer|[]|False|List of site IDs with which to associate the engine|None|None|
+|address|string|None|True|Scan engine address (IP/hostname)|None|10.4.36.120|
+|name|string|None|True|Scan engine name|None|example name|
+|port|integer|40814|True|Scan engine connectivity port|None|40814|
+|sites|[]integer|[]|False|List of site IDs with which to associate the engine|None|[1234, 5678]|
 
 Example input:
 
 ```
+{
+  "address": "10.4.36.120",
+  "name": "example name",
+  "port": 40814,
+  "sites": [
+    1234,
+    5678
+  ]
+}
 ```
 
 ##### Output
@@ -3519,11 +3725,14 @@ This action is used to delete an existing scan engine from the security console.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Scan engine identifier|None|None|
+|id|integer|None|True|Scan engine identifier|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -3553,11 +3762,14 @@ This action is used to retrieve a list of configured scan engine pools.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name|string|None|False|Scan engine pool name by which to filter, accepts regular expression patterns|None|None|
+|name|string|None|False|Scan engine pool name by which to filter, accepts regular expression patterns|None|example name|
 
 Example input:
 
 ```
+{
+  "name": "example name"
+}
 ```
 
 ##### Output
@@ -3626,11 +3838,14 @@ This action is used to retrieve scan engine pool details by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Scan engine pool identifier|None|None|
+|id|integer|None|True|Scan engine pool identifier|None|1234|
 
 Example input:
 
 ```
+{
+  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
+}
 ```
 
 ##### Output
@@ -3679,12 +3894,19 @@ the engines assigned to the pool and that output is NOT an array, you will need 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|engines|[]integer|None|False|List of scan engine IDs to associate with the scan engine pool|None|None|
-|name|string|None|True|Scan engine pool name|None|None|
+|engines|[]integer|None|False|List of scan engine IDs to associate with the scan engine pool|None|[1234, 5678]|
+|name|string|None|True|Scan engine pool name|None|example name|
 
 Example input:
 
 ```
+{
+  "engines": [
+    1234,
+    5678
+  ],
+  "name": "example name"
+}
 ```
 
 ##### Output
@@ -3721,12 +3943,16 @@ This action is used to add a scan engine to a scan engine pool (AWS pre-authoriz
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|engine_id|integer|None|True|Scan engine ID|None|None|
-|pool_id|integer|None|True|Scan engine pool ID|None|None|
+|engine_id|integer|None|True|Scan engine ID|None|1234567|
+|pool_id|integer|None|True|Scan engine pool ID|None|1234|
 
 Example input:
 
 ```
+{
+  "engine_id": 1234567,
+  "pool_id": 1234
+}
 ```
 
 ##### Output
@@ -3756,12 +3982,16 @@ This action is used to remove a scan engine from a scan engine pool.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|engine_id|integer|None|True|Scan engine ID|None|None|
-|pool_id|integer|None|True|Scan engine pool ID|None|None|
+|engine_id|integer|None|True|Scan engine ID|None|5678|
+|pool_id|integer|None|True|Scan engine pool ID|None|1234|
 
 Example input:
 
 ```
+{
+  "engine_id": 5678,
+  "pool_id": 1234
+}
 ```
 
 ##### Output
@@ -3791,11 +4021,14 @@ This action is used to delete an existing scan engine pool from the security con
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Scan engine pool identifier|None|None|
+|id|integer|None|True|Scan engine pool identifier|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -3825,12 +4058,20 @@ This action is used to update the scan engine/scan engine pool associated with a
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|engine_id|integer|None|True|Identifier of the scan engine/scan engine pool to associate with the site|None|None|
-|site_id|integer|None|True|Identifier of the site to update|None|None|
+|engine_id|integer|None|True|Identifier of the scan engine/scan engine pool to associate with the site|None|5678|
+|site_id|integer|None|True|Identifier of the site to update|None|1234|
 
 Example input:
 
 ```
+{
+  "description": "example description",
+  "engine_id": 1234,
+  "id": 1234,
+  "importance": "low",
+  "name": "example name",
+  "scan_template_id": 1234
+}
 ```
 
 ##### Output
@@ -3860,18 +4101,28 @@ This action is used to create a vulnerability exception submission.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|comment|string|Exception created with InsightConnect|True|Comment to include in the vulnerability exception submission|None|None|
-|expiration|date|None|False|The date the vulnerability exception expires|None|None|
-|key|string|None|False|The key to identify a specific instance if the type is Instance|None|None|
-|port|integer|None|False|The port the vulnerability appears on if the type is Instance|None|None|
-|reason|string|None|True|Reason for the exception|['False Positive', 'Compensating Control', 'Acceptable Use', 'Acceptable Risk', 'Other']|None|
-|scope|integer|None|False|The ID of the scope the vulnerability exception applies to.  May be empty if type is Global|None|None|
-|type|string|None|True|The type of vulnerability exception to create|['Global', 'Site', 'Asset', 'Asset Group', 'Instance']|None|
-|vulnerability|string|None|True|The vulnerability this exception applies to|None|None|
+|comment|string|Exception created with InsightConnect|True|Comment to include in the vulnerability exception submission|None|example comment|
+|expiration|date|None|False|The date the vulnerability exception expires|None|10-12-2020|
+|key|string|None|False|The key to identify a specific instance if the type is Instance|None|example_key|
+|port|integer|None|False|The port the vulnerability appears on if the type is Instance|None|40000|
+|reason|string|None|True|Reason for the exception|['False Positive', 'Compensating Control', 'Acceptable Use', 'Acceptable Risk', 'Other']|False Positive|
+|scope|integer|None|False|The ID of the scope the vulnerability exception applies to.  May be empty if type is Global|None|1234|
+|type|string|None|True|The type of vulnerability exception to create|['Global', 'Site', 'Asset', 'Asset Group', 'Instance']|Global|
+|vulnerability|string|None|True|The vulnerability this exception applies to|None|vulnerability|
 
 Example input:
 
 ```
+{
+  "comment": "example comment",
+  "expiration": "10-12-2020",
+  "key": "example_key",
+  "port": 40000,
+  "reason": "False Positive",
+  "scope": 1234,
+  "type": "Global",
+  "vulnerability": "vulnerability"
+}
 ```
 
 ##### Output
@@ -3908,11 +4159,14 @@ This action is used to delete an existing vulnerability exception.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|exception_id|integer|None|True|Vulnerability exception ID to delete|None|None|
+|exception_id|integer|None|True|Vulnerability exception ID to delete|None|1234|
 
 Example input:
 
 ```
+{
+  "exception_id": 1234
+}
 ```
 
 ##### Output
@@ -3942,11 +4196,14 @@ This action is used to get the details of a specific vulnerability by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|The identifier of the vulnerability to retrieve from InsightVM|None|None|
+|id|string|None|True|The identifier of the vulnerability to retrieve from InsightVM|None|1234-abcd|
 
 Example input:
 
 ```
+{
+  "id": "1234-abcd"
+}
 ```
 
 ##### Output
@@ -4044,13 +4301,18 @@ This action is used to approve or reject a vulnerability exception.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|comment|string|None|False|Comment to include in the review|None|None|
-|exception|integer|None|True|The vulnerability exception ID to approve or reject|None|None|
-|review|string|None|True|Approval or rejection of the exception|['Approved', 'Rejected']|None|
+|comment|string|None|False|Comment to include in the review|None|example comment|
+|exception|integer|None|True|The vulnerability exception ID to approve or reject|None|1234|
+|review|string|None|True|Approval or rejection of the exception|['Approved', 'Rejected']|Approved|
 
 Example input:
 
 ```
+{
+  "comment": "example comment",
+  "exception": 1234,
+  "review": "Approved"
+}
 ```
 
 ##### Output
@@ -4080,12 +4342,16 @@ This action is used to list authentication sources available for InsightVM users
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name|string|None|False|Authentication source name by which to filter, accepts regular expression patterns|None|None|
-|type|string||False|Authentication source type by which to filter|['', 'admin', 'kerberos', 'ldap', 'normal', 'saml']|None|
+|name|string|None|False|Authentication source name by which to filter, accepts regular expression patterns|None|example name|
+|type|string||False|Authentication source type by which to filter|['', 'admin', 'kerberos', 'ldap', 'normal', 'saml']|admin|
 
 Example input:
 
 ```
+{
+  "name": "example name",
+  "type": "admin"
+}
 ```
 
 ##### Output
@@ -4127,11 +4393,14 @@ This action is used to get the details for an authentication source.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Authentication source ID|None|None|
+|id|integer|None|True|Authentication source ID|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -4171,11 +4440,14 @@ This action is used to list role details.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name|string|None|False|Role name by which to filter, accepts regular expression patterns|None|None|
+|name|string|None|False|Role name by which to filter, accepts regular expression patterns|None|example name|
 
 Example input:
 
 ```
+{
+  "id": "global-admin"
+}
 ```
 
 ##### Output
@@ -4266,11 +4538,14 @@ This action is used to get role details by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Role ID, e.g 'global-admin'|None|None|
+|id|string|None|True|Role ID, e.g 'global-admin'|None|global-admin|
 
 Example input:
 
 ```
+{
+  "id": "global-admin"
+}
 ```
 
 ##### Output
@@ -4344,12 +4619,15 @@ This action is used to list user accounts.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|login|string|None|False|User account login name by which to filter, accepts regular expression patterns|None|None|
-|name|string|None|False|User account name by which to filter, accepts regular expression patterns|None|None|
+|login|string|None|False|User account login name by which to filter, accepts regular expression patterns|None|account|
+|name|string|None|False|User account name by which to filter, accepts regular expression patterns|None|example name|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -4471,11 +4749,14 @@ This action is used to get user account details by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|User account ID|None|None|
+|id|integer|None|True|User account ID|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -4595,19 +4876,30 @@ This action is used to create a new user account (limited to external authentica
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|access_all_asset_groups|boolean|False|True|Whether to grant the user access to all asset groups|None|None|
-|access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|None|
-|authentication_id|integer|None|False|The identifier of the authentication source to use to authenticate the user. The source with the specified identifier must be of the type specified by Authentication Type. If Authentication ID is omitted, then one source of the specified Authentication Type is selected|None|None|
-|authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|['kerberos', 'ldap', 'saml']|None|
-|email|string|None|True|The email address of the user|None|None|
-|enabled|boolean|True|True|Whether the user account is enabled|None|None|
-|login|string|None|True|The login name of the user|None|None|
-|name|string|None|True|The full name of the user|None|None|
-|role_id|string|None|True|The identifier of the role to which the user should be assigned, e.g 'global-admin'|None|None|
+|access_all_asset_groups|boolean|False|True|Whether to grant the user access to all asset groups|None|False|
+|access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|False|
+|authentication_id|integer|None|False|The identifier of the authentication source to use to authenticate the user. The source with the specified identifier must be of the type specified by Authentication Type. If Authentication ID is omitted, then one source of the specified Authentication Type is selected|None|1234|
+|authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|['kerberos', 'ldap', 'saml']|ldap|
+|email|string|None|True|The email address of the user|None|example@gmail.com|
+|enabled|boolean|True|True|Whether the user account is enabled|None|True|
+|login|string|None|True|The login name of the user|None|jdoe24|
+|name|string|None|True|The full name of the user|None|John Doe|
+|role_id|string|None|True|The identifier of the role to which the user should be assigned, e.g 'global-admin'|None|global-admin|
 
 Example input:
 
 ```
+{
+  "access_all_asset_groups": false,
+  "access_all_sites": false,
+  "authentication_id": 1234,
+  "authentication_type": "ldap",
+  "email": "example@gmail.com",
+  "enabled": true,
+  "login": "jdoe24",
+  "name": "John Doe",
+  "role_id": "global-admin"
+}
 ```
 
 ##### Output
@@ -4643,20 +4935,32 @@ This action is used to update the configuration of an existing user account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|access_all_asset_groups|boolean|False|True|Whether to grant the user access to all asset groups|None|None|
-|access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|None|
-|authentication_id|integer|None|False|The identifier of the authentication source to use to authenticate the user. The source with the specified identifier must be of the type specified by Authentication Type. If Authentication ID is omitted, then one source of the specified Authentication Type is selected|None|None|
-|authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|['normal', 'admin', 'kerberos', 'ldap', 'saml']|None|
-|email|string|None|True|The email address of the user|None|None|
-|enabled|boolean|True|True|Whether the user account is enabled|None|None|
-|id|integer|None|True|The identifier of the user|None|None|
-|login|string|None|True|The login name of the user|None|None|
-|name|string|None|True|The full name of the user|None|None|
-|role_id|string|None|True|The identifier of the role to which the user should be assigned, e.g 'global-admin'|None|None|
+|access_all_asset_groups|boolean|False|True|Whether to grant the user access to all asset groups|None|False|
+|access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|False|
+|authentication_id|integer|None|False|The identifier of the authentication source to use to authenticate the user. The source with the specified identifier must be of the type specified by Authentication Type. If Authentication ID is omitted, then one source of the specified Authentication Type is selected|None|567|
+|authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|['normal', 'admin', 'kerberos', 'ldap', 'saml']|ldap|
+|email|string|None|True|The email address of the user|None|example@gmail.com|
+|enabled|boolean|True|True|Whether the user account is enabled|None|True|
+|id|integer|None|True|The identifier of the user|None|1234|
+|login|string|None|True|The login name of the user|None|jdoe24|
+|name|string|None|True|The full name of the user|None|John Doe|
+|role_id|string|None|True|The identifier of the role to which the user should be assigned, e.g 'global-admin'|None|global-admin|
 
 Example input:
 
 ```
+{
+  "access_all_asset_groups": false,
+  "access_all_sites": false,
+  "authentication_id": 567,
+  "authentication_type": "ldap",
+  "email": "example@gmail.com",
+  "enabled": true,
+  "id": 1234,
+  "login": "jdoe24",
+  "name": "John Doe",
+  "role_id": "global-admin"
+}
 ```
 
 ##### Output
@@ -4686,11 +4990,14 @@ This action is used to delete an user account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|The identifier of the user account|None|None|
+|id|integer|None|True|The identifier of the user account|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -4720,11 +5027,14 @@ This action is used to disable an user account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|The identifier of the user account|None|None|
+|id|integer|None|True|The identifier of the user account|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -4754,11 +5064,14 @@ This action is used to enable an user account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|The identifier of the user account|None|None|
+|id|integer|None|True|The identifier of the user account|None|1234|
 
 Example input:
 
 ```
+{
+  "id": 1234
+}
 ```
 
 ##### Output
@@ -4788,14 +5101,26 @@ This action is used to update the role associated with an user account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|access_all_asset_groups|boolean|False|True|Whether to grant the user access to all asset groups|None|None|
-|access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|None|
-|role_id|string|None|True|The identifier of the role to which the user should be assigned, e.g 'global-admin'|None|None|
-|user_id|integer|None|True|The identifier of the user account|None|None|
+|access_all_asset_groups|boolean|False|True|Whether to grant the user access to all asset groups|None|False|
+|access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|False|
+|role_id|string|None|True|The identifier of the role to which the user should be assigned, e.g 'global-admin'|None|global-admin|
+|user_id|integer|None|True|The identifier of the user account|None|1234|
 
 Example input:
 
 ```
+{
+  "access_all_asset_groups": false,
+  "access_all_sites": false,
+  "authentication_id": 567,
+  "authentication_type": "ldap",
+  "email": "example@gmail.com",
+  "enabled": true,
+  "id": 1234,
+  "login": "jdoe24",
+  "name": "John Doe",
+  "role_id": "global-admin"
+}
 ```
 
 ##### Output
@@ -4825,12 +5150,24 @@ This action is used to update the asset groups to which a user has access in bul
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_group_ids|[]integer|None|True|The identifiers of the asset groups to which the user account should be granted access, ignored if the user has access to all asset groups|None|None|
-|user_id|integer|None|True|The identifier of the user account|None|None|
+|asset_group_ids|[]integer|None|True|The identifiers of the asset groups to which the user account should be granted access, ignored if the user has access to all asset groups|None|[1234, 5678]|
+|user_id|integer|None|True|The identifier of the user account|None|1234|
 
 Example input:
 
 ```
+{
+  "access_all_asset_groups": false,
+  "access_all_sites": false,
+  "authentication_id": 567,
+  "authentication_type": "ldap",
+  "email": "example@gmail.com",
+  "enabled": true,
+  "id": 1234,
+  "login": "jdoe24",
+  "name": "John Doe",
+  "role_id": "global-admin"
+}
 ```
 
 ##### Output
@@ -4860,12 +5197,16 @@ This action is used to grant an user account access to an asset group by id.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_group_id|integer|None|True|The identifier of the asset group|None|None|
-|user_id|integer|None|True|The identifier of the user account|None|None|
+|asset_group_id|integer|None|True|The identifier of the asset group|None|5678|
+|user_id|integer|None|True|The identifier of the user account|None|1234|
 
 Example input:
 
 ```
+{
+  "asset_group_id": 5678,
+  "user_id": 1234
+}
 ```
 
 ##### Output
@@ -4895,12 +5236,16 @@ This action is used to remove asset group access from an user account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_group_id|integer|None|True|The identifier of the asset group|None|None|
-|user_id|integer|None|True|The identifier of the user account|None|None|
+|asset_group_id|integer|None|True|The identifier of the asset group|None|4567|
+|user_id|integer|None|True|The identifier of the user account|None|1234|
 
 Example input:
 
 ```
+{
+  "asset_group_id": 4567,
+  "user_id": 1234
+}
 ```
 
 ##### Output
@@ -4930,12 +5275,24 @@ This action is used to update the sites to which a user has access in bulk. It c
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|site_ids|[]integer|None|True|The identifiers of the sites to which the user account should be granted access, ignored if the user has access to all sites|None|None|
-|user_id|integer|None|True|The identifier of the user account|None|None|
+|site_ids|[]integer|None|True|The identifiers of the sites to which the user account should be granted access, ignored if the user has access to all sites|None|[1234, 567]|
+|user_id|integer|None|True|The identifier of the user account|None|1234|
 
 Example input:
 
 ```
+{
+  "access_all_asset_groups": false,
+  "access_all_sites": false,
+  "authentication_id": 567,
+  "authentication_type": "ldap",
+  "email": "example@gmail.com",
+  "enabled": true,
+  "id": 1234,
+  "login": "jdoe24",
+  "name": "John Doe",
+  "role_id": "global-admin"
+}
 ```
 
 ##### Output
@@ -4965,12 +5322,16 @@ This action is used to grant an user account access to a site by id.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|site_id|integer|None|True|The identifier of the site|None|None|
-|user_id|integer|None|True|The identifier of the user account|None|None|
+|site_id|integer|None|True|The identifier of the site|None|4567|
+|user_id|integer|None|True|The identifier of the user account|None|1234|
 
 Example input:
 
 ```
+{
+  "site_id": 4567,
+  "user_id": 1234
+}
 ```
 
 ##### Output
@@ -5000,12 +5361,16 @@ This action is used to remove site access from an user account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|site_id|integer|None|True|The identifier of the site|None|None|
-|user_id|integer|None|True|The identifier of the user account|None|None|
+|site_id|integer|None|True|The identifier of the site|None|4567|
+|user_id|integer|None|True|The identifier of the user account|None|1234|
 
 Example input:
 
 ```
+{
+  "site_id": 4567,
+  "user_id": 1234
+}
 ```
 
 ##### Output
@@ -5035,15 +5400,25 @@ This action is used to generate results for the top remediations based on a defi
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_limit|integer|None|False|The amount of assets to be returned with each top remediation; this can be used to reduce message size and processing time|None|None|
-|limit|integer|25|True|Number of remediations for which tickets should be generated|[10, 25, 50, 100]|None|
-|scope|string|none|True|Scope context for generated report; if set remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID|['none', 'assets', 'assetGroups', 'sites', 'tags', 'scan']|None|
-|scope_ids|[]integer|[]|False|Scope IDs for which tickets should be generated, by default all are included|None|None|
-|vulnerability_limit|integer|None|False|The amount of vulnerabilities to be returned with each top remediation; this can be used to reduce message size and processing time|None|None|
+|asset_limit|integer|None|False|The amount of assets to be returned with each top remediation; this can be used to reduce message size and processing time|None|4|
+|limit|integer|25|True|Number of remediations for which tickets should be generated|[10, 25, 50, 100]|10|
+|scope|string|none|True|Scope context for generated report; if set remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID|['none', 'assets', 'assetGroups', 'sites', 'tags', 'scan']|none|
+|scope_ids|[]integer|[]|False|Scope IDs for which tickets should be generated, by default all are included|None|[1234, 45]|
+|vulnerability_limit|integer|None|False|The amount of vulnerabilities to be returned with each top remediation; this can be used to reduce message size and processing time|None|2|
 
 Example input:
 
 ```
+{
+  "asset_limit": 4,
+  "limit": 10,
+  "scope": "none",
+  "scope_ids": [
+    1234,
+    45
+  ],
+  "vulnerability_limit": 2
+}
 ```
 
 ##### Output
@@ -5101,12 +5476,18 @@ This trigger is used to check for new InsightVM vulnerability exceptions.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|frequency|integer|5|True|How often the trigger should check for new vulnerability exception requests|None|None|
-|status_filter|[]string|['Under Review']|False|List of vulnerability statuses to match against. Options include: Under Review and Approved|None|None|
+|frequency|integer|5|True|How often the trigger should check for new vulnerability exception requests|None|5|
+|status_filter|[]string|["Under Review"]|False|List of vulnerability statuses to match against. Options include: Under Review and Approved|None|["Under Review"]|
 
 Example input:
 
 ```
+{
+  "frequency": 5,
+  "status_filter": [
+    "Under Review"
+  ]
+}
 ```
 
 ##### Output
@@ -5170,14 +5551,22 @@ This trigger is used to check for new InsightVM scans by site and scan status.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|frequency|integer|5|True|How often the trigger should check for new scans in minutes|None|None|
-|most_recent_scan|boolean|True|True|Only process the most recent scan for a site since the last time the trigger was run|None|None|
-|site_name_filter|string|.*|True|Regular expression to match sites where new scans should be triggered|None|None|
-|status_filter|[]string|['Successful']|False|List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown|None|None|
+|frequency|integer|5|True|How often the trigger should check for new scans in minutes|None|5|
+|most_recent_scan|boolean|True|True|Only process the most recent scan for a site since the last time the trigger was run|None|True|
+|site_name_filter|string|.*|True|Regular expression to match sites where new scans should be triggered|None|example name|
+|status_filter|[]string|["Successful"]|False|List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown|None|["Successful"]|
 
 Example input:
 
 ```
+{
+  "frequency": 5,
+  "most_recent_scan": true,
+  "site_name_filter": "example name",
+  "status_filter": [
+    "Successful"
+  ]
+}
 ```
 
 ##### Output
@@ -5228,6 +5617,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 5.0.0 - Rename the plugin with "console" as there is a new cloud based plugin for InsightVM
 * 4.9.0 - Add new `size` input to List Inactive Assets | Update List Inactive Assets to return 500 results by default | Remove the usage of Maya from the plugin
 * 4.8.1 - Fixed an issue where some actions were expecting bytes data and were getting strings instead
 * 4.8.0 - New action Get Asset Vulnerability Solutions
