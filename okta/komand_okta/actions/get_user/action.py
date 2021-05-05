@@ -17,7 +17,7 @@ class GetUser(komand.Action):
         )
 
     def run(self, params={}):
-        """ Get the user by email """
+        """Get the user by email"""
         url = requests.compat.urljoin(
             self.connection.okta_url, f"/api/v1/users/{urllib.parse.quote(params.get(Input.EMAIL))}"
         )

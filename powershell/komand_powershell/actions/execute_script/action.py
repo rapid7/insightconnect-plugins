@@ -13,7 +13,7 @@ class ExecuteScript(komand.Action):
             output=ExecuteScriptOutput(),
         )
 
-    def run(self, params={}):   # noqa: MC0001
+    def run(self, params={}):  # noqa: MC0001
         auth = self.connection.auth_type
         host_ip = params.get("address")
         encoded_powershell_script = params.get("script")

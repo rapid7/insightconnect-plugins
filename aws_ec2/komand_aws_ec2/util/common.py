@@ -1,4 +1,3 @@
-
 import botocore.exceptions
 import botocore.response
 import json
@@ -15,8 +14,7 @@ class AWSAction(Action):
     Abstract class for handling any aws-cli request.
     """
 
-    def __init__(self, name, description, input, output,
-                 aws_service, aws_command, pagination_helper=None):
+    def __init__(self, name, description, input, output, aws_service, aws_command, pagination_helper=None):
         """
 
         Initializes a new AwsAction object.
@@ -28,11 +26,7 @@ class AWSAction(Action):
         :param aws_service: The AWS service. Should be snake case.
         :param aws_command: The type of request to invoke. Should be snake case.
         """
-        super().__init__(
-            name=name,
-            description=description,
-            input=input,
-            output=output)
+        super().__init__(name=name, description=description, input=input, output=output)
         self.aws_service = aws_service
         self.aws_command = aws_command
         self.pagination_helper = pagination_helper
@@ -45,36 +39,38 @@ class AWSAction(Action):
         try:
             params = helper.format_input(params)
         except Exception as e:
-            self.logger.error('Unable to format input parameters')
+            self.logger.error("Unable to format input parameters")
             raise e
 
         # Execute the botocore function
         try:
             response = client_function(**params)
         except botocore.exceptions.EndpointConnectionError as e:
-            self.logger.error('Error occurred when invoking the aws-cli: Unable to reach the url endpoint.' +
-                          ' Check the connection region is correct.')
+            self.logger.error(
+                "Error occurred when invoking the aws-cli: Unable to reach the url endpoint."
+                + " Check the connection region is correct."
+            )
             raise e
         except botocore.exceptions.ParamValidationError as e:
-            self.logger.error(
-                'Error occurred when invoking the aws-cli. Input parameters were missing or incorrect')
+            self.logger.error("Error occurred when invoking the aws-cli. Input parameters were missing or incorrect")
             raise e
         except botocore.exceptions.ClientError as e:
             self.logger.error(
-                'Error occurred when invoking the aws-cli. Check client connection keys and input arguments.')
+                "Error occurred when invoking the aws-cli. Check client connection keys and input arguments."
+            )
             raise e
         except Exception as e:
-            self.logger.error('Error occurred when invoking the aws-cli.')
+            self.logger.error("Error occurred when invoking the aws-cli.")
             raise e
 
         # Format the output parameters for the komand action output schema
         try:
-            if 'properties' in self.output.schema:
+            if "properties" in self.output.schema:
                 response = helper.format_output(self.output.schema, response)
             else:
                 response = helper.format_output(None, response)
         except Exception as e:
-            self.logger.error('Unable to format output parameters')
+            self.logger.error("Unable to format output parameters")
             raise e
 
         return response
@@ -100,12 +96,7 @@ class AWSAction(Action):
         try:
             client_function = getattr(client, self.aws_command)
         except AttributeError as e:
-            self.logger.error(
-                'Unable to find the command "' +
-                self.aws_service +
-                ' ' +
-                self.aws_command +
-                '"')
+            self.logger.error('Unable to find the command "' + self.aws_service + " " + self.aws_command + '"')
             raise e
 
         response = self.handle_rest_call(client_function, params)
@@ -113,11 +104,10 @@ class AWSAction(Action):
         # Handle possible paginatin if this action supports pagination.
         if self.pagination_helper:
             while self.pagination_helper.handle_pagination(params, response):
-                self.logger.info(
-                    "Response was paginated. Performing another call.")
+                self.logger.info("Response was paginated. Performing another call.")
                 response, max_hit = self.pagination_helper.merge_responses(
-                    params,
-                    self.handle_rest_call(client_function, params), response)
+                    params, self.handle_rest_call(client_function, params), response
+                )
                 if max_hit:
                     break
             self.pagination_helper.remove_keys(response)
@@ -141,9 +131,9 @@ class AWSAction(Action):
         endpoint = client._endpoint.host
         r = requests.get(endpoint)
 
-        assert r.ok     # noqa: B101
+        assert r.ok  # noqa: B101
 
-        if 'properties' in self.output.schema:
+        if "properties" in self.output.schema:
             response = helper.format_output(self.output.schema, {})
         else:
             response = helper.format_output(None, {})
@@ -158,7 +148,7 @@ class ActionHelper:
 
     @staticmethod
     def to_upper_camel_case(snake_str):
-        components = snake_str.split('_')
+        components = snake_str.split("_")
         # We capitalize the first letter of each component except the first one
         # with the 'title' method and join them together.
         return "".join(x.title() for x in components)
@@ -186,13 +176,12 @@ class ActionHelper:
                 continue
             elif isinstance(v, dict) and (len(v.keys()) == 0):
                 continue
-            elif isinstance(v, str) and (v == ''):
+            elif isinstance(v, str) and (v == ""):
                 continue
             else:
-                formatted_params[k.replace('$', '')] = v
+                formatted_params[k.replace("$", "")] = v
 
-        formatted_params = ActionHelper.convert_all_to_upper_camel_case(
-            formatted_params)
+        formatted_params = ActionHelper.convert_all_to_upper_camel_case(formatted_params)
 
         return formatted_params
 
@@ -207,27 +196,24 @@ class ActionHelper:
         :return: A dictionary which maps properties to empty values.
         """
         empty_output = {}
-        if 'properties' in output_schema:
-            output_properties = output_schema['properties']
+        if "properties" in output_schema:
+            output_properties = output_schema["properties"]
             for prop_key in output_properties:
                 prop = output_properties[prop_key]
-                if 'type' in prop:
-                    if prop['type'] == 'array':
+                if "type" in prop:
+                    if prop["type"] == "array":
                         empty_output[prop_key] = []
-                    elif prop['type'] == 'object':
+                    elif prop["type"] == "object":
                         empty_output[prop_key] = {}
-                elif '$ref' in prop:
-                    prop = output_schema['definitions'][prop_key]
-                    if 'type' in prop:
-                        if prop['type'] == 'array':
+                elif "$ref" in prop:
+                    prop = output_schema["definitions"][prop_key]
+                    if "type" in prop:
+                        if prop["type"] == "array":
                             empty_output[prop_key] = []
-                        elif prop['type'] == 'object':
+                        elif prop["type"] == "object":
                             empty_output[prop_key] = {}
 
-        empty_output['response_metadata'] = {
-            'request_id': '',
-            'http_status_code': 0
-        }
+        empty_output["response_metadata"] = {"request_id": "", "http_status_code": 0}
         return empty_output
 
     def fix_output_types(self, output):
@@ -257,9 +243,9 @@ class ActionHelper:
         elif isinstance(output, str):
             return output
         elif isinstance(output, botocore.response.StreamingBody):
-            return base64.b64encode(output.read()).decode('utf-8')
+            return base64.b64encode(output.read()).decode("utf-8")
         elif isinstance(output, bytes):
-            return base64.b64encode(output).decode('utf-8')
+            return base64.b64encode(output).decode("utf-8")
         elif isinstance(output, int):
             return output
         elif isinstance(output, bool):
@@ -271,8 +257,8 @@ class ActionHelper:
         else:
             return json.dumps(output)
 
-    first_cap_re = re.compile('(.)([A-Z][a-z]+)')
-    all_cap_re = re.compile('([a-z0-9])([A-Z])')
+    first_cap_re = re.compile("(.)([A-Z][a-z]+)")
+    all_cap_re = re.compile("([a-z0-9])([A-Z])")
 
     @staticmethod
     def to_snake_case(camel_case):
@@ -283,8 +269,8 @@ class ActionHelper:
         :return: The same string in snake_case
         """
 
-        s1 = ActionHelper.first_cap_re.sub(r'\1_\2', camel_case)
-        return ActionHelper.all_cap_re.sub(r'\1_\2', s1).lower()
+        s1 = ActionHelper.first_cap_re.sub(r"\1_\2", camel_case)
+        return ActionHelper.all_cap_re.sub(r"\1_\2", s1).lower()
 
     @staticmethod
     def convert_all_to_upper_camel_case(obj):
@@ -363,8 +349,9 @@ class PaginationHelper:
     A helper class for dealing with paginated requests.
     """
 
-    def __init__(self, input_token, output_token, result_key, limit_key=None, more_results=None,
-                 non_aggregate_keys=None):
+    def __init__(
+        self, input_token, output_token, result_key, limit_key=None, more_results=None, non_aggregate_keys=None
+    ):
         self.input_token = input_token
         self.output_token = output_token
         self.result_key = result_key
@@ -397,8 +384,7 @@ class PaginationHelper:
 
         is_paginated = False
 
-        if self.more_results and self.more_results in output.keys(
-        ) and output[self.more_results]:
+        if self.more_results and self.more_results in output.keys() and output[self.more_results]:
             is_paginated = True
 
         for idx, val in enumerate(self.input_token):
@@ -429,6 +415,6 @@ class PaginationHelper:
             if self.limit_key and self.limit_key in input.keys():
                 if len(a[r]) >= input[self.limit_key]:
                     max_hit = True
-                    a[r] = a[r][:input[self.limit_key]]
+                    a[r] = a[r][: input[self.limit_key]]
 
         return a, max_hit

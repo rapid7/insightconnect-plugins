@@ -17,7 +17,7 @@ class Submit(komand.Action):
             output=SubmitOutput(),
         )
 
-    def run(self, params={}):   # noqa: MC0001
+    def run(self, params={}):  # noqa: MC0001
         _type = None
         url = "https://submit.symantec.com/websubmit/bcs.cgi"
 

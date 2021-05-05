@@ -1,8 +1,8 @@
 import json
 
 # Custom imports below
-import subprocess               # noqa: B404
-from subprocess import PIPE     # noqa: B404
+import subprocess  # noqa: B404
+from subprocess import PIPE  # noqa: B404
 
 import komand
 from .schema import RunJqInput, RunJqOutput, Input, Output

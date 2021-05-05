@@ -23,7 +23,7 @@ class Run(komand.Action):
             raise
 
         # Set file path to store file
-        dir = "/tmp"    # noqa: B108
+        dir = "/tmp"  # noqa: B108
         file_name = "p0f.pcap"
         full_path = "%s/%s" % (dir, file_name)
 
@@ -48,7 +48,7 @@ class Run(komand.Action):
         )
 
         # Set file path to store file
-        dir = "/tmp"    # noqa: B108
+        dir = "/tmp"  # noqa: B108
         file_name = "p0f.pcap"
         full_path = "%s/%s" % (dir, file_name)
 

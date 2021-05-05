@@ -90,7 +90,7 @@ class Address(insightconnect_plugin_runtime.Action):
         if not results:
             raise PluginException(
                 cause="Error: Request did not return any data.",
-                assistance="Please check provided address and try again."
+                assistance="Please check provided address and try again.",
             )
         return results
 

@@ -29,16 +29,12 @@ class Domain(insightconnect_plugin_runtime.Action):
             lookup_results = whois.query(domain, ignore_returncode=1)  # ignore_returncode required for plugin
         except Exception as e:
             self.logger.error("Error occurred: %s" % e)
-            raise PluginException(
-                preset=PluginException.Preset.UNKNOWN,
-                assistance="Error occurred: ",
-                data=e
-            )
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, assistance="Error occurred: ", data=e)
 
         if not lookup_results:
             raise PluginException(
                 cause="Error: Request did not return any data.",
-                assistance="Please check provided domain and try again."
+                assistance="Please check provided domain and try again.",
             )
         else:
             serializable_results = lookup_results.get_json_serializable()

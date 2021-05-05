@@ -2,7 +2,7 @@ import komand
 from .schema import ConnectionSchema
 
 # Custom imports below
-import ftplib           # noqa: B402
+import ftplib  # noqa: B402
 import ftputil.session
 
 

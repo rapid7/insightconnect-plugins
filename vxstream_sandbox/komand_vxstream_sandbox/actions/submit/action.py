@@ -56,7 +56,7 @@ class Submit(komand.Action):
             data=data,
             headers=user_agent,
             files=files,
-            verify=False,       # noqa: B501
+            verify=False,  # noqa: B501
             auth=requests.auth.HTTPBasicAuth(api_key, secret),
         )
 

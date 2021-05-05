@@ -2,7 +2,7 @@ import komand
 from .schema import ConnectionSchema
 
 # Custom imports below
-import subprocess   # noqa: B404
+import subprocess  # noqa: B404
 
 
 class Connection(komand.Connection):
@@ -18,11 +18,11 @@ class Connection(komand.Connection):
         self.api_port = params.get("api_port")
         self.f = open("sqlmap_logs.txt", "w")
         if not self.api_host and not self.api_port:
-            subprocess.Popen(   # noqa: B607
+            subprocess.Popen(  # noqa: B607
                 ["python /python/src/sqlmap-master/sqlmapapi.py -s"],
                 stdout=self.f,
                 stderr=self.f,
-                shell=True,     # noqa: B602
+                shell=True,  # noqa: B602
             )
             self.api_host = "127.0.0.1"
             self.api_port = "8775"
@@ -34,5 +34,5 @@ class Connection(komand.Connection):
                 ],
                 stdout=self.f,
                 stderr=self.f,
-                shell=True,     # noqa: B602
+                shell=True,  # noqa: B602
             )

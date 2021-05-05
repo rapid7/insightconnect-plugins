@@ -23,7 +23,7 @@ def get_offenses(log, host, basic_auth=None, token=None, fields=None, filter=Non
     if range:
         headers["Range"] = range
     try:
-        resp = requests.get(url, headers=headers, verify=False)     # noqa: B501
+        resp = requests.get(url, headers=headers, verify=False)  # noqa: B501
         if resp.status_code == 200:
             return resp.json()
         elif resp.status_code == 422:
@@ -106,7 +106,7 @@ def new_ariel_query(log, host, basic_auth=None, token=None, query=""):
     payload = {"query_expression": query}
 
     try:
-        r = requests.post(url, data=payload, headers=headers, verify=False)     # noqa: B501
+        r = requests.post(url, data=payload, headers=headers, verify=False)  # noqa: B501
         if r.status_code == 201:
             return r.json()
         else:
@@ -147,7 +147,7 @@ def get_ariel_query_results(log, host, basic_auth=None, token=None, search_id=""
         }
 
     try:
-        r = requests.get(url, headers=headers, verify=False)    # noqa: B501
+        r = requests.get(url, headers=headers, verify=False)  # noqa: B501
         if r.status_code == 200:
             return r.json()
         else:
@@ -183,7 +183,7 @@ def add_data_to_reference_data_lists(log, host, basic_auth=None, token=None, pay
         }
 
     try:
-        r = requests.post(url, headers=headers, data=payload, verify=False)     # noqa: B501
+        r = requests.post(url, headers=headers, data=payload, verify=False)  # noqa: B501
         log.info(r.status_code)
         if r.status_code == 201:
             return r.json()
@@ -210,7 +210,7 @@ def test_auth(log, host, basic_auth=None, token=None):
     else:
         headers = {"Authorization": basic_auth, "Accept": "application/json"}
     try:
-        resp = requests.get(url, headers=headers, verify=False)     # noqa: B501
+        resp = requests.get(url, headers=headers, verify=False)  # noqa: B501
         if resp.status_code == 200:
             return resp.json()
         elif resp.status_code == 422:
