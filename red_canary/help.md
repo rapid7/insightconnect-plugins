@@ -131,8 +131,8 @@ Example output:
     {
       "type": "primitives.IpAddress",
       "attributes": {
-        "ip_address": "129.95.36.200",
-        "ip_address_defanged": "129.95.36[.]200",
+        "ip_address": "198.51.100.1",
+        "ip_address_defanged": "198.51.100[.]200",
         "ip_address_matches_rfc_1918": false,
         "ip_address_matches_rfc_4193": false,
         "ip_address_is_link_local": false
