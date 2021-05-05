@@ -1,4 +1,5 @@
-from .shared_resources import *
+from .shared_resources import RequestParams
+from .shared_resources import resource_request_status_code_check
 import json
 import requests
 import urllib3
@@ -111,7 +112,7 @@ class ResourceRequests(object):
         if json_response:
             try:
                 resource = response.json()
-            except json.decoder.JSONDecodeError as e:
+            except json.decoder.JSONDecodeError:
                 raise PluginException(preset=PluginException.Preset.INVALID_JSON)
         else:
             resource = {"raw": response.text}
@@ -202,7 +203,7 @@ class ResourceRequests(object):
         resource_request_status_code_check(response.text, response.status_code)
         try:
             response_json = response.json()
-        except json.decoder.JSONDecodeError as e:
+        except json.decoder.JSONDecodeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
 
         result = RequestResult(
