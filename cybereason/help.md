@@ -43,7 +43,7 @@ Example input:
 
 #### Quarantine File
 
-This action this action is used to quarantine a detected malicious file in a secure location or unquarantine a file.
+This action is used to quarantine a detected malicious file in a secure location or unquarantine a file.
 
 ##### Input
 
