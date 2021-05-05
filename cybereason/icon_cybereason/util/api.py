@@ -1,5 +1,7 @@
 import insightconnect_plugin_runtime
 import requests
+import validators
+import re
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 import json
 from logging import Logger
@@ -36,14 +38,18 @@ class CybereasonAPI:
             payload={"malopId": malop_id, "pylumIds": pylum_ids},
         )
 
-    def remediate(self, initiator_user_name: str, actions_by_machine: dict) -> dict:
+    def remediate(self, initiator_user_name: str, actions_by_machine: dict, malop_id: str = None) -> dict:
+        payload = {
+            "initiatorUserName": initiator_user_name,
+            "actionsByMachine": actions_by_machine,
+        }
+        if malop_id:
+            payload["malopId"] = malop_id
+
         return self.send_request(
             "POST",
             "/rest/remediate",
-            payload={
-                "initiatorUserName": initiator_user_name,
-                "actionsByMachine": actions_by_machine,
-            },
+            payload=payload,
         )
 
     def file_search(self, server_filter: dict, file_filter: dict) -> dict:
@@ -55,6 +61,64 @@ class CybereasonAPI:
             "/rest/sensors/action/fileSearch",
             payload={"filters": server_filter, "fileFilters": file_filter},
         )
+
+    def get_sensor_details(self, identifier: str) -> dict:
+        if re.match("^(-?\d{10}\.-?\d{19})$", identifier):
+            return identifier
+
+        sensors = self.send_request("POST", "/rest/sensors/query", payload=self.generate_sensor_filter(identifier))
+
+        if sensors.get("totalResults") == 0:
+            raise PluginException(
+                cause=f"No sensors found using identifier: {identifier}.",
+                assistance="Please validate inputs and try again.",
+            )
+        if sensors.get("totalResults") > 1:
+            raise PluginException(
+                cause=f"Multiple sensors found using identifier: {identifier}.",
+                assistance="Please provide a unique identifier and try again.",
+            )
+
+        return sensors.get("sensors")[0]
+
+    def get_malop(self, malop_guid: str) -> dict:
+        try:
+            return self.send_request(
+                "POST",
+                "/rest/crimes/unified",
+                payload={
+                    "totalResultLimit": 10000,
+                    "perGroupLimit": 10000,
+                    "templateContext": "OVERVIEW",
+                    "queryPath": [{"requestedType": "MalopProcess", "guidList": [malop_guid], "result": True}],
+                },
+            )["data"]["resultIdToElementDataMap"][malop_guid]
+        except KeyError:
+            raise PluginException(
+                cause=f"Unable to retrieve Malop information for {malop_guid}.",
+                assistance="Please ensure that provided Malop GUID is valid and try again.",
+            )
+
+    def get_visual_search(self, requestedType: str, filters: list, customFields: list) -> dict:
+        try:
+            return self.send_request(
+                "POST",
+                "/rest/visualsearch/query/simple",
+                payload={
+                    "queryPath": [{"requestedType": requestedType, "filters": filters, "isResult": True}],
+                    "totalResultLimit": 1000,
+                    "perGroupLimit": 100,
+                    "perFeatureLimit": 100,
+                    "templateContext": "SPECIFIC",
+                    "queryTimeout": 120000,
+                    "customFields": customFields,
+                },
+            )["data"]["resultIdToElementDataMap"]
+        except KeyError:
+            raise PluginException(
+                cause="No results found.",
+                assistance="No Visual Search results returned for the provided filter.",
+            )
 
     def send_request(self, method: str, path: str, params: dict = None, payload: dict = None) -> dict:
         try:
@@ -114,3 +178,14 @@ class CybereasonAPI:
         operator = command[1]
 
         return [{"fieldName": file_name, "operator": operator, "values": value[file_filter[0]]}]
+
+    @staticmethod
+    def generate_sensor_filter(identifier: str) -> dict:
+        sensor_filter = {"filters": [{"operator": "ContainsIgnoreCase", "values": [identifier]}]}
+
+        if validators.ipv4(identifier):
+            sensor_filter["filters"][0]["fieldName"] = "internalIpAddress"
+        else:
+            sensor_filter["filters"][0]["fieldName"] = "machineName"
+
+        return sensor_filter

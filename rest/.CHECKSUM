@@ -1,7 +1,7 @@
 {
-	"spec": "263fcd892213892f301df024c7019400",
-	"manifest": "2f727ec0622d3400ebacb57c31ed6e48",
-	"setup": "aa125f411e96bfbcc1ab37e4ef28f16f",
+	"spec": "bf1114d9756518e750e67e86741650da",
+	"manifest": "5f201bf4190ae4cd70965f89a7e6296c",
+	"setup": "336ccd9283d9f3ac6e1ea50bc58f6b91",
 	"schemas": [
 		{
 			"identifier": "delete/schema.py",
@@ -25,7 +25,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "a1900e29625cf6a721912e201b8ca596"
+			"hash": "d253c3852980575c53679299a801c1b1"
 		}
 	]
 }
