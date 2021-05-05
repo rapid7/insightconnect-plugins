@@ -4,7 +4,7 @@ Protect your Microsoft Office 365 and G-Suite environments with next-generation 
 
 # Key Features
 
-* Retrive a list of threats from Abnormal Threat Log
+* Retrieve a list of threats from Abnormal Threat Log
 * Get details about existing threats
 
 # Requirements
