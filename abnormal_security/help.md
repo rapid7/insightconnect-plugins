@@ -19,15 +19,15 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|URL|string|https://api.abnormalplatform.com|True|Abnormal Security URL|None|https://api.abnormalplatform.com|
 |api_key|credential_secret_key|None|True|Abnormal Security API Key|None|Vud5CDO9ULIV3SJOcp|
-|hostname|string|https://api.abnormalplatform.com|True|Abnormal Security host URL|None|https://api.abnormalplatform.com|
 
 Example input:
 
 ```
 {
-  "api_key": "Vud5CDO9ULIV3SJOcp",
-  "hostname": "https://api.abnormalplatform.com"
+  "URL": "https://api.abnormalplatform.com",
+  "api_key": "Vud5CDO9ULIV3SJOcp"
 }
 ```
 

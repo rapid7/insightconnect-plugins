@@ -173,9 +173,9 @@ types:
       type: '[]message'
       required: false
 connection:
-  hostname:
-    title: Host
-    description: Abnormal Security host URL
+  URL:
+    title: URL
+    description: Abnormal Security URL
     type: string
     required: true
     example: https://api.abnormalplatform.com

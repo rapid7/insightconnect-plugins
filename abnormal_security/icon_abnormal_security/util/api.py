@@ -8,9 +8,9 @@ from datetime import datetime
 
 
 class AbnormalSecurityAPI:
-    def __init__(self, hostname: str, api_key: str, logger: Logger):
+    def __init__(self, url: str, api_key: str, logger: Logger):
         self.api_version = "v1"
-        self.base_url = f"https://{hostname}/{self.api_version}"
+        self.base_url = f"https://{url}/{self.api_version}"
         self.headers = {"authorization": f"Bearer {api_key}"}
         self.logger = logger
 

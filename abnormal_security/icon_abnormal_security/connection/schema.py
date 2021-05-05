@@ -4,8 +4,8 @@ import json
 
 
 class Input:
+    URL = "URL"
     API_KEY = "api_key"
-    HOSTNAME = "hostname"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -14,23 +14,23 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "URL": {
+      "type": "string",
+      "title": "URL",
+      "description": "Abnormal Security URL",
+      "default": "https://api.abnormalplatform.com",
+      "order": 1
+    },
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Abnormal Security API Key",
       "description": "Abnormal Security API Key",
       "order": 2
-    },
-    "hostname": {
-      "type": "string",
-      "title": "Host",
-      "description": "Abnormal Security host URL",
-      "default": "https://api.abnormalplatform.com",
-      "order": 1
     }
   },
   "required": [
-    "api_key",
-    "hostname"
+    "URL",
+    "api_key"
   ],
   "definitions": {
     "credential_secret_key": {
