@@ -46,7 +46,7 @@ Example output:
 {
   "reachable": false,
   "port": 8080,
-  "address": "208.118.227.1"
+  "address": "198.51.100.100"
 }
 
 ```
@@ -78,8 +78,8 @@ Example output:
   "country_iso": "US",
   "ip_decimal": 3497452289,
   "country": "United States",
-  "hostname": "208.118.227.1.rapid7.com",
-  "address": "208.118.227.1"
+  "hostname": "198.51.100.100.example.com",
+  "address": "198.51.100.100 "
 }
 
 ```
