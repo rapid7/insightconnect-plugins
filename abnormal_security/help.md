@@ -9,8 +9,7 @@ Protect your Microsoft Office 365 and G-Suite environments with next-generation 
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product's user interface
+* An Abnormal Security API Key
 
 # Documentation
 
@@ -228,4 +227,4 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Abnormal Security](LINK TO PRODUCT/VENDOR WEBSITE)
+* [Abnormal Security](https://abnormalsecurity.com/)
