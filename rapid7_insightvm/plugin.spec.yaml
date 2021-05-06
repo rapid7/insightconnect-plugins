@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM Console
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations, scan results and start scans
-version: 5.0.0
+version: 4.9.1
 vendor: rapid7
 support: rapid7
 status: []
@@ -1753,7 +1753,7 @@ connection:
     description: Username and password
     type: credential_username_password
     required: true
-    example: '{"username": "username", "password": "password"}'
+    example: "{'username': 'user1', 'password': 'mypassword'}"
 actions:
   scan:
     title: Scan
@@ -2028,7 +2028,7 @@ actions:
         title: Search Criteria
         description: Tag search Criteria - options documentation https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria
         type: object
-        example: '{"risk-score": "asc", "criticality-tag": "desc"}'
+        example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
         required: false
     output:
       id:
@@ -2313,7 +2313,7 @@ actions:
         title: Search Criteria
         description: 'Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria'
         type: object
-        example: '{"risk-score": "asc", "criticality-tag": "desc"}'
+        example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
         required: true
     output:
       links:
@@ -2329,7 +2329,7 @@ actions:
         title: Search Criteria
         description: 'Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria'
         type: object
-        example: '{"risk-score": "asc", "criticality-tag": "desc"}'
+        example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
         required: true
       size:
         title: Size
@@ -2343,7 +2343,7 @@ actions:
         description: JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)
         type: object
         required: false
-        example: '{"risk-score": "asc", "criticality-tag": "desc"}'
+        example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
     output:
       assets:
         title: Assets
@@ -2774,7 +2774,7 @@ actions:
         title: Search Criteria
         description: 'Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria'
         type: object
-        example: '{"risk-score": "asc", "criticality-tag": "desc"}'
+        example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
         required: false
       type:
         title: Type
@@ -2821,7 +2821,7 @@ actions:
         title: Search Criteria
         description: 'Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria'
         type: object
-        example: '{"risk-score": "asc", "criticality-tag": "desc"}'
+        example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
         required: true
     output:
       links:

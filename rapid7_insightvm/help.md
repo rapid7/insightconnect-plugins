@@ -22,14 +22,14 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and password|None|{"username": "username", "password": "password"}|
+|credentials|credential_username_password|None|True|Username and password|None|{'username': 'user1', 'password': 'mypassword'}|
 |url|string|None|True|URL to your InsightVM console, without trailing slashes, e.g. https://insightvm.example.com:3780|None|https://insightvm.example.com:3780|
 
 Example input:
 
 ```
 {
-  "credentials": "{\"username\": \"username\", \"password\": \"password\"}",
+  "credentials": "{'username': 'user1', 'password': 'mypassword'}",
   "url": "https://insightvm.example.com:3780"
 }
 ```
@@ -756,7 +756,8 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "asset_id": 234,
+  "get_risk_score": true
 }
 ```
 
@@ -828,7 +829,7 @@ Example input:
 
 ```
 {
-  "asset_id": "234"
+  "id": 1234
 }
 ```
 
@@ -933,7 +934,7 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "site_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
 }
 ```
 
@@ -1310,7 +1311,7 @@ This action is used to create a new tag.
 |----|----|-------|--------|-----------|----|-------|
 |color|string|default|False|Tag color (only available for custom tags)|['default', 'blue', 'green', 'orange', 'purple', 'red']|default|
 |name|string|None|True|Tag name|None|example name|
-|searchCriteria|object|None|False|Tag search Criteria - options documentation https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{"risk-score": "asc", "criticality-tag": "desc"}|
+|searchCriteria|object|None|False|Tag search Criteria - options documentation https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
 |type|string|None|True|Tag type|['owner', 'location', 'custom']|owner|
 
 Example input:
@@ -1319,7 +1320,7 @@ Example input:
 {
   "color": "default",
   "name": "example name",
-  "searchCriteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}",
+  "searchCriteria": "{'risk-score': 'asc', 'criticality-tag': 'desc'}",
   "type": "owner"
 }
 ```
@@ -1918,7 +1919,7 @@ Example input:
 
 ```
 {
-  "asset_id": 12345,
+  "asset_group_id": 12345,
   "tag_id": 1234
 }
 ```
@@ -1990,14 +1991,14 @@ This action is used to update the search criteria for an existing tag.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|integer|None|True|Tag ID|None|1234|
-|searchCriteria|object|None|True|Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{"risk-score": "asc", "criticality-tag": "desc"}|
+|searchCriteria|object|None|True|Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
 
 Example input:
 
 ```
 {
   "id": 1234,
-  "searchCriteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}"
+  "searchCriteria": "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
 }
 ```
 
@@ -2028,17 +2029,17 @@ This action is used to search for assets using a filtered asset search.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|searchCriteria|object|None|True|Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{"risk-score": "asc", "criticality-tag": "desc"}|
+|searchCriteria|object|None|True|Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
 |size|number|0|False|The number of records to retrieve. If blank or '0' all assets that match the search will be returned|None|100|
-|sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|
+|sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
 
 Example input:
 
 ```
 {
-  "searchCriteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}",
+  "searchCriteria": "{'risk-score': 'asc', 'criticality-tag': 'desc'}",
   "size": 100,
-  "sort_criteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}"
+  "sort_criteria": "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
 }
 ```
 
@@ -2193,7 +2194,7 @@ This action is used to create an asset group.
 |----|----|-------|--------|-----------|----|-------|
 |description|string|None|True|Asset group description|None|example description|
 |name|string|None|True|Asset group name|None|example name|
-|searchCriteria|object|None|False|Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{"risk-score": "asc", "criticality-tag": "desc"}|
+|searchCriteria|object|None|False|Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
 |type|string|None|True|Asset group type|['dynamic', 'static']|dynamic|
 
 Example input:
@@ -2202,7 +2203,7 @@ Example input:
 {
   "description": "example description",
   "name": "example name",
-  "searchCriteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}",
+  "searchCriteria": "{'risk-score': 'asc', 'criticality-tag': 'desc'}",
   "type": "dynamic"
 }
 ```
@@ -2404,12 +2405,12 @@ Example input:
 
 ```
 {
-  "excluded_targets": [
-    "10.2.144",
-    "10.8.36.144"
-  ],
+  "description": "example description",
+  "engine_id": 1234,
   "id": 1234,
-  "overwrite": true
+  "importance": "low",
+  "name": "example name",
+  "scan_template_id": 1234
 }
 ```
 
@@ -2496,12 +2497,12 @@ Example input:
 
 ```
 {
-  "description": "example description",
-  "engine_id": 1234,
+  "excluded_asset_groups": [
+    1234,
+    567
+  ],
   "id": 1234,
-  "importance": "low",
-  "name": "example name",
-  "scan_template_id": 1234
+  "overwrite": true
 }
 ```
 
@@ -2757,14 +2758,14 @@ This action is used to update the search criteria for an existing asset group.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|integer|None|True|Asset group ID|None|1234|
-|searchCriteria|object|None|True|Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{"risk-score": "asc", "criticality-tag": "desc"}|
+|searchCriteria|object|None|True|Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
 
 Example input:
 
 ```
 {
   "id": 1234,
-  "searchCriteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}"
+  "searchCriteria": "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
 }
 ```
 
@@ -2801,7 +2802,7 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "name": "example name"
 }
 ```
 
@@ -3273,8 +3274,7 @@ Example input:
 
 ```
 {
-  "active": false,
-  "id": 1234
+  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
 }
 ```
 
@@ -3768,7 +3768,7 @@ Example input:
 
 ```
 {
-  "name": "example name"
+  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
 }
 ```
 
@@ -3901,11 +3901,13 @@ Example input:
 
 ```
 {
-  "engines": [
+  "address": "10.4.36.120",
+  "name": "example name",
+  "port": 40814,
+  "sites": [
     1234,
     5678
-  ],
-  "name": "example name"
+  ]
 }
 ```
 
@@ -4446,7 +4448,7 @@ Example input:
 
 ```
 {
-  "id": "global-admin"
+  "name": "example name"
 }
 ```
 
@@ -4626,7 +4628,8 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "login": "account",
+  "name": "example name"
 }
 ```
 
@@ -5112,14 +5115,8 @@ Example input:
 {
   "access_all_asset_groups": false,
   "access_all_sites": false,
-  "authentication_id": 567,
-  "authentication_type": "ldap",
-  "email": "example@gmail.com",
-  "enabled": true,
-  "id": 1234,
-  "login": "jdoe24",
-  "name": "John Doe",
-  "role_id": "global-admin"
+  "role_id": "global-admin",
+  "user_id": 1234
 }
 ```
 
@@ -5282,16 +5279,11 @@ Example input:
 
 ```
 {
-  "access_all_asset_groups": false,
-  "access_all_sites": false,
-  "authentication_id": 567,
-  "authentication_type": "ldap",
-  "email": "example@gmail.com",
-  "enabled": true,
-  "id": 1234,
-  "login": "jdoe24",
-  "name": "John Doe",
-  "role_id": "global-admin"
+  "site_ids": [
+    1234,
+    567
+  ],
+  "user_id": 1234
 }
 ```
 
@@ -5617,7 +5609,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 5.0.0 - Rename the plugin with "console" as there is a new cloud based plugin for InsightVM
+* 4.9.1 - Rename the plugin with "console" as there is a new cloud based plugin for InsightVM
 * 4.9.0 - Add new `size` input to List Inactive Assets | Update List Inactive Assets to return 500 results by default | Remove the usage of Maya from the plugin
 * 4.8.1 - Fixed an issue where some actions were expecting bytes data and were getting strings instead
 * 4.8.0 - New action Get Asset Vulnerability Solutions
