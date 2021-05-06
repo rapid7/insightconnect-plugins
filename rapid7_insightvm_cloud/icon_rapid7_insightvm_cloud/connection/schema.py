@@ -24,6 +24,13 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Region",
       "description": "the region in which the plugin will work",
+      "enum": [
+        "us",
+        "eu",
+        "ca",
+        "au",
+        "ap"
+      ],
       "order": 2
     }
   },

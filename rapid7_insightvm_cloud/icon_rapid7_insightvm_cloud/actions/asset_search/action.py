@@ -9,32 +9,32 @@ from .schema import AssetSearchInput, AssetSearchOutput, Input, Output, Componen
 
 def format_response(resources: [], params={}):
     results = list()
-    ip = params.get(Input.IP)
-    hostname = params.get(Input.HOSTNAME)
-    for page in resources:
-        string_page = str(page)
-        assets = string_page.split("]},")
-        for asset_number in range(len(assets)):
-            asset = assets[asset_number]
-            if asset_number == 0:
-                asset = asset[11:] + "]"
-            else:
-                asset = asset[2:] + "]"
-            if asset_number == len(assets) - 1:
-                ending = asset.split("], 'metadata':")
-                asset = ending[0]
-                if asset[len(asset) - 1] == "}":
-                    asset = asset[: len(asset) - 1]
-            asset = "{" + asset + "}"
-            asset = ast.literal_eval(asset)
-            if hostname:
-                if asset.get("host_name") in hostname:
-                    results.append(asset)
-            if ip:
-                if asset.get("ip") in ip:
-                    results.append(asset)
-            if hostname == [] and ip == []:
+    ip = params.get(Input.IPS)
+    hostname = params.get(Input.HOSTNAMES)
+
+    string_page = str(resources)
+    assets = string_page.split("]},")
+    for asset_number in range(len(assets)):
+        asset = assets[asset_number]
+        if asset_number == 0:
+            asset = asset[11:] + "]"
+        else:
+            asset = asset[2:] + "]"
+        if asset_number == len(assets) - 1:
+            ending = asset.split("], 'metadata':")
+            asset = ending[0]
+            if asset[len(asset) - 1] == "}":
+                asset = asset[: len(asset) - 1]
+        asset = "{" + asset + "}"
+        asset = ast.literal_eval(asset)
+        if hostname:
+            if asset.get("host_name") in hostname:
                 results.append(asset)
+        if ip:
+            if asset.get("ip") in ip:
+                results.append(asset)
+        if hostname == [] and ip == []:
+            results.append(asset)
     return results
 
 
@@ -47,22 +47,15 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         size = params.get(Input.SIZE, 0)
         sort_criteria = params.get(Input.SORT_CRITERIA, dict())
-        pages_count = params.get(Input.PAGES)
         parameters = list()
 
         for key, value in sort_criteria.items():
             parameters.append(("sort", f"{key},{value}"))
 
-        if size == 0:
-            parameters.append(("size", 100))
-            resources = self.connection.ivm_cloud_api.call_api_pages("assets", "POST", pages_count, parameters)
-        elif size <= 100:
-            parameters.append(("size", size))
-            resources = self.connection.ivm_cloud_api.call_api_pages("assets", "POST", pages_count, parameters)
-        else:
-            parameters.append(("size", 100))
-            resources = self.connection.ivm_cloud_api.call_api_pages("assets", "POST", pages_count, parameters)
+        resources = self.connection.ivm_cloud_api.call_api("assets", "POST", parameters)
 
-        assets = format_response(resources, params)
+        assets = []
+        for asset in resources:
+            assets.append(asset)
 
         return {Output.ASSETS: assets}

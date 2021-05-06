@@ -8,9 +8,8 @@ class Component:
 
 
 class Input:
-    HOSTNAME = "hostname"
-    IP = "ip"
-    PAGES = "pages"
+    HOSTNAMES = "hostnames"
+    IPS = "ips"
     SIZE = "size"
     SORT_CRITERIA = "sort_criteria"
     
@@ -25,30 +24,23 @@ class AssetSearchInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "hostname": {
+    "hostnames": {
       "type": "array",
-      "title": "Hostname",
-      "description": "The hostname",
-      "items": {
-        "type": "string"
-      },
-      "order": 5
-    },
-    "ip": {
-      "type": "array",
-      "title": "IP",
-      "description": "Primary IPv4 or IPv6 address of the asset",
+      "title": "Hostnames",
+      "description": "List of hostnames to search",
       "items": {
         "type": "string"
       },
       "order": 4
     },
-    "pages": {
-      "type": "number",
-      "title": "Pages",
-      "description": "The number of pages of records to retrieve",
-      "default": 1,
-      "order": 2
+    "ips": {
+      "type": "array",
+      "title": "IPs",
+      "description": "List of IPv4 or IPv6 addresses to search",
+      "items": {
+        "type": "string"
+      },
+      "order": 3
     },
     "size": {
       "type": "number",
@@ -61,7 +53,7 @@ class AssetSearchInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "Sort Criteria",
       "description": "JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)",
-      "order": 3
+      "order": 2
     }
   }
 }

@@ -1029,6 +1029,12 @@ connection:
     description: the region in which the plugin will work
     type: string
     required: true
+    enum:
+      - us
+      - eu
+      - ca
+      - au
+      - ap
     example: us
 
 actions:
@@ -1048,15 +1054,15 @@ actions:
         type: string
         example: "test cloud scan"
         required: true
-      ip:
-        title: IP
-        description: Primary IPv4 or IPv6 address of the asset
+      ips:
+        title: IPs
+        description: List of IPv4 or IPv6 addresses to scan
         type: "[]string"
         example: ["2001:db8:1:1:1:1:1:1"]
         required: false
-      hostname:
-        title: Hostname
-        description: The hostname
+      hostnames:
+        title: Hostnames
+        description: TList of hostnames to scan
         type: "[]string"
         example: ["rapid7.com"]
         required: false
@@ -1120,28 +1126,21 @@ actions:
         required: false
         default: 0
         example: 100
-      pages:
-        title: Pages
-        description: The number of pages of records to retrieve
-        type: number
-        required: false
-        default: 1
-        example: 100
       sort_criteria:
         title: Sort Criteria
         description: JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)
         type: object
         required: false
         example: '{"risk-score": "asc", "criticality-tag": "desc"}'
-      ip:
-        title: IP
-        description: Primary IPv4 or IPv6 address of the asset
+      ips:
+        title: IPs
+        description: List of IPv4 or IPv6 addresses to search
         type: "[]string"
         example: [ "2001:db8:1:1:1:1:1:1" ]
         required: false
-      hostname:
-        title: Hostname
-        description: The hostname
+      hostnames:
+        title: Hostnames
+        description: List of hostnames to search
         type: "[]string"
         example: [ "rapid7.com" ]
         required: false

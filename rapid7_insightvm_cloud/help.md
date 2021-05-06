@@ -19,7 +19,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_secret_key|None|True|API key from account|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|region|string|None|True|the region in which the plugin will work|None|us|
+|region|string|None|True|the region in which the plugin will work|['us', 'eu', 'ca', 'au', 'ap']|us|
 
 Example input:
 
@@ -77,8 +77,8 @@ This action is used to start an InsightVM scan of previously scanned devices.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |asset_ids|[]string|None|False|IDs of the assets to scan|None|["abc978-5678-abc-a5a94a1234b8-asset"]|
-|hostname|[]string|None|False|The hostname|None|["rapid7.com"]|
-|ip|[]string|None|False|Primary IPv4 or IPv6 address of the asset|None|["2001:db8:1:1:1:1:1:1"]|
+|hostnames|[]string|None|False|TList of hostnames to scan|None|["rapid7.com"]|
+|ips|[]string|None|False|List of IPv4 or IPv6 addresses to scan|None|["2001:db8:1:1:1:1:1:1"]|
 |name|string|None|True|The name of the scan|None|test cloud scan|
 
 Example input:
@@ -88,10 +88,10 @@ Example input:
   "asset_ids": [
     "abc978-5678-abc-a5a94a1234b8-asset"
   ],
-  "hostname": [
+  "hostnames": [
     "rapid7.com"
   ],
-  "ip": [
+  "ips": [
     "2001:db8:1:1:1:1:1:1"
   ],
   "name": "test cloud scan"
@@ -131,9 +131,8 @@ This action is used to search for assets using filtered asset search.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hostname|[]string|None|False|The hostname|None|["rapid7.com"]|
-|ip|[]string|None|False|Primary IPv4 or IPv6 address of the asset|None|["2001:db8:1:1:1:1:1:1"]|
-|pages|number|1|False|The number of pages of records to retrieve|None|100|
+|hostnames|[]string|None|False|List of hostnames to search|None|["rapid7.com"]|
+|ips|[]string|None|False|List of IPv4 or IPv6 addresses to search|None|["2001:db8:1:1:1:1:1:1"]|
 |size|number|0|False|The number of records to retrieve. If blank or '0' all assets that match the search will be returned|None|100|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|
 
@@ -141,13 +140,12 @@ Example input:
 
 ```
 {
-  "hostname": [
+  "hostnames": [
     "rapid7.com"
   ],
-  "ip": [
+  "ips": [
     "2001:db8:1:1:1:1:1:1"
   ],
-  "pages": 100,
   "size": 100,
   "sort_criteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}"
 }

@@ -20,4 +20,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.ivm_cloud_api = IVM_Cloud(params.get(Input.CREDENTIALS).get("secretKey"), self.logger, self.api_url)
 
     def test(self):
-        self.ivm_cloud_api.test_api()
+        regions = ["us", "eu", "ca", "au", "ap"]
+        for region in regions:
+            self.api_url = "https://" + region + ".api.insight.rapid7.com/validate"
+            self.ivm_cloud_api.test_api(self.api_url)

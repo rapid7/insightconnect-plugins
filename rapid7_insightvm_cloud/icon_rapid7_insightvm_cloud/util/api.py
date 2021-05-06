@@ -23,15 +23,6 @@ class IVM_Cloud:
         self.token = token
         self.base_url = url
 
-    def call_api_pages(self, path: str, request_type: str, pages: int, params: dict = None):
-        responses = []
-        for page in range(pages):
-            params.append(("page", page))
-            response = self.call_api(path, request_type, params)
-            responses.append(response)
-
-        return responses
-
     def call_api(self, path: str, request_type: str, params: dict = None, body: dict = None):
         if params is None:
             params = {}
@@ -69,11 +60,9 @@ class IVM_Cloud:
                 data=httpError,
             )
 
-    def test_api(self, params: dict = None) -> dict:
+    def test_api(self, api_url: str, params: dict = None,) -> dict:
         if params is None:
             params = {}
-
-        api_url = "https://us.api.insight.rapid7.com/validate"
 
         headers = {"x-api-key": self.token}
 

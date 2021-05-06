@@ -9,8 +9,8 @@ class Component:
 
 class Input:
     ASSET_IDS = "asset_ids"
-    HOSTNAME = "hostname"
-    IP = "ip"
+    HOSTNAMES = "hostnames"
+    IPS = "ips"
     NAME = "name"
     
 
@@ -33,19 +33,19 @@ class StartScanInput(insightconnect_plugin_runtime.Input):
       },
       "order": 1
     },
-    "hostname": {
+    "hostnames": {
       "type": "array",
-      "title": "Hostname",
-      "description": "The hostname",
+      "title": "Hostnames",
+      "description": "TList of hostnames to scan",
       "items": {
         "type": "string"
       },
       "order": 4
     },
-    "ip": {
+    "ips": {
       "type": "array",
-      "title": "IP",
-      "description": "Primary IPv4 or IPv6 address of the asset",
+      "title": "IPs",
+      "description": "List of IPv4 or IPv6 addresses to scan",
       "items": {
         "type": "string"
       },
