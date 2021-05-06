@@ -356,6 +356,7 @@ This variable can be used in automated decisions to check if ThreatCrowd has inf
 
 # Version History
 
+* 3.0.3 - Add PluginException for case 'Too many connections' response from server | Change IP address in api.py file
 * 3.0.2 - Add source and license URLs in plugin spec | Set `USER` to `nobody` in Dockerfile
 * 3.0.1 - Add Hash input conversion to lowercase in the Hash action to match API requirements
 * 3.0.0 - Update to use the `insightconnect-python-3-38-plugin:4` Docker image | Improve error handling | Changed `Exception` to `PluginException` | Update actions to return appropriate JSON | Move test from actions to connection | Update plugin.spec.yaml to include `cloud_ready` | Use input and output constants | Add example input and output | Added "f" strings | Rename `search_hash` input in Hash Lookup action to `hash`
