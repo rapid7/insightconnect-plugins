@@ -2,8 +2,8 @@ import insightconnect_plugin_runtime
 from .schema import GetTagDetailsInput, GetTagDetailsOutput, Input, Component
 
 # Custom imports below
+from icon_greynoise.util.util import GNRequestFailure
 from greynoise.exceptions import RequestFailure
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class GetTagDetails(insightconnect_plugin_runtime.Action):
@@ -24,11 +24,7 @@ class GetTagDetails(insightconnect_plugin_runtime.Action):
                 if tag["name"].lower() == tag_name:
                     output = tag
         except RequestFailure as e:
-            raise PluginException(
-                cause="Received HTTP %d status code from GreyNoise. Verify your input and try again." % e.args[0],
-                assistance="If the issue persists please contact support.",
-                data=f"{e.args[0]}, {e.args[1]['message']}",
-            )
+            raise GNRequestFailure(e.args[0], e.args[1])
         if output:
             return output
         else:

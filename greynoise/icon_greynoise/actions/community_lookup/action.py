@@ -2,9 +2,9 @@ import insightconnect_plugin_runtime
 from .schema import CommunityLookupInput, CommunityLookupOutput, Input, Component
 
 # Custom imports below
+from icon_greynoise.util.util import GNRequestFailure, GNValueError
 from greynoise import GreyNoise
 from greynoise.exceptions import RequestFailure
-from insightconnect_plugin_runtime.exceptions import PluginException
 import pendulum
 
 
@@ -30,17 +30,9 @@ class CommunityLookup(insightconnect_plugin_runtime.Action):
                 resp["last_seen"] = pendulum.parse(resp["last_seen"]).to_rfc3339_string()
 
         except RequestFailure as e:
-            raise PluginException(
-                cause="Received HTTP %d status code from GreyNoise. Verify your input and try again." % e.args[0],
-                assistance="If the issue persists please contact support.",
-                data=f"{e.args[0]}, {e.args[1]['message']}",
-            )
+            raise GNRequestFailure(e.args[0], e.args[1])
+
         except ValueError as e:
-            raise PluginException(
-                cause="Received HTTP 404 status code from GreyNoise. "
-                "Input provided was not found, please try another.",
-                assistance="If the issue persists please contact support.",
-                data=f"{e.args[0]}",
-            )
+            raise GNValueError(e.args[0])
 
         return resp
