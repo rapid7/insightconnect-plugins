@@ -30,8 +30,8 @@ class GetBlockedMessages(insightconnect_plugin_runtime.Action):
                 },
             ),
         )
-        if params.get(Input.SUBJECT):
-            response["messagesBlocked"] = SiemUtils.search_subject(
-                response.get("messagesBlocked"), params.get(Input.SUBJECT)
-            )
+        blocked_messages = response.get("messagesBlocked", [])
+        if params.get(Input.SUBJECT) and blocked_messages:
+            response["messagesBlocked"] = SiemUtils.search_subject(blocked_messages, params.get(Input.SUBJECT))
+
         return {Output.RESULTS: insightconnect_plugin_runtime.helper.clean(response)}

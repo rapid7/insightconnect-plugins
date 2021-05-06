@@ -30,9 +30,8 @@ class GetDeliveredThreats(insightconnect_plugin_runtime.Action):
                 },
             ),
         )
-        if params.get(Input.SUBJECT):
-            response["messagesDelivered"] = SiemUtils.search_subject(
-                response.get("messagesDelivered"), params.get(Input.SUBJECT)
-            )
+        delivered_messages = response.get("messagesDelivered", [])
+        if params.get(Input.SUBJECT) and delivered_messages:
+            response["messagesDelivered"] = SiemUtils.search_subject(delivered_messages, params.get(Input.SUBJECT))
 
         return {Output.RESULTS: insightconnect_plugin_runtime.helper.clean(response)}

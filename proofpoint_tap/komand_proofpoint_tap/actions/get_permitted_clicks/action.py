@@ -29,7 +29,8 @@ class GetPermittedClicks(insightconnect_plugin_runtime.Action):
                 },
             ),
         )
-        if params.get(Input.URL):
-            response["clicksBlocked"] = SiemUtils.search_url(response.get("clicksBlocked"), params.get(Input.URL))
+        permitted_clicks = response.get("clicksPermitted", [])
+        if params.get(Input.URL) and permitted_clicks:
+            response["clicksPermitted"] = SiemUtils.search_url(permitted_clicks, params.get(Input.URL))
 
         return {Output.RESULTS: insightconnect_plugin_runtime.helper.clean(response)}

@@ -48,9 +48,10 @@ class ProofpointTapApi:
             elif response.status_code >= 500:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
             elif 200 <= response.status_code < 300:
+                if not response.text:
+                    return {}
                 return response.json()
-            else:
-                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except JSONDecodeError as e:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
         except requests.exceptions.HTTPError as e:
@@ -67,12 +68,10 @@ class ProofpointTapApi:
         while response.get("users"):
             for i in response.get("users"):
                 users.append(i)
-            total_clickers += response.get("totalTopClickers")
+            total_clickers += response.get("totalTopClickers", 0)
             query_params["page"] += 1
             response = self._call_api("GET", "people/top-clickers", params=query_params)
-        response["users"] = users
-        response["totalTopClickers"] = total_clickers
-        return response
+        return {"users": users, "totalTopClickers": total_clickers, "interval": response.get("interval")}
 
     def get_decoded_url(self, payload: dict):
         return self._call_api("POST", "url/decode", json_data=payload)

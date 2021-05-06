@@ -4,7 +4,7 @@ import datetime
 
 class SiemUtils:
     @staticmethod
-    def search_subject(all_results: dict, subject: str) -> list:
+    def search_subject(all_results: list, subject: str) -> list:
         data = []
         for i in all_results:
             if i.get("subject") == subject:
@@ -12,7 +12,7 @@ class SiemUtils:
         return data
 
     @staticmethod
-    def search_url(all_results: dict, url: str) -> list:
+    def search_url(all_results: list, url: str) -> list:
         data = []
         for i in all_results:
             if i.get("url") == url:
