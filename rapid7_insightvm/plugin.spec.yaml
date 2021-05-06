@@ -3723,7 +3723,7 @@ actions:
         title: Query
         type: string
         description: Reporting Data Model SQL query
-        example: "example query"
+        example: select * from dim_asset
         required: true
       scope:
         title: Scope
@@ -3863,7 +3863,7 @@ actions:
         title: Vulnerability Key
         description: The key to identify a specific instance if the type is Instance
         type: string
-        example: "example_key"
+        example: "9de5069c5afe602b2ea0a04b66beb2c0"
         required: false
       port:
         title: Vulnerability Port

@@ -756,8 +756,7 @@ Example input:
 
 ```
 {
-  "asset_id": 234,
-  "get_risk_score": true
+  "id": 1234
 }
 ```
 
@@ -1064,7 +1063,7 @@ This action is used to create, generate, download, and cleanup a SQL report base
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |filters|string|{}|False|Filters in JSON format to be applied to the contents of the report; review InsightVM API documentation for filter options|None|{filters}|
-|query|string|None|True|Reporting Data Model SQL query|None|example query|
+|query|string|None|True|Reporting Data Model SQL query|None|select * from dim_asset|
 |scope|string|none|True|Scope context for generated report; if set, remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID; scan scope only supports single scan ID as input|['none', 'assets', 'assetGroups', 'sites', 'tags', 'scan']|none|
 |scope_ids|[]integer|[]|False|Scope IDs for which tickets should be generated, by default all are included|None|[1234, 5678]|
 
@@ -1073,7 +1072,7 @@ Example input:
 ```
 {
   "filters": "{filters}",
-  "query": "example query",
+  "query": "select * from dim_asset",
   "scope": "none",
   "scope_ids": [
     1234,
@@ -1919,7 +1918,7 @@ Example input:
 
 ```
 {
-  "asset_group_id": 12345,
+  "asset_id": 12345,
   "tag_id": 1234
 }
 ```
@@ -2359,12 +2358,12 @@ Example input:
 
 ```
 {
-  "description": "example description",
-  "engine_id": 1234,
   "id": 1234,
-  "importance": "low",
-  "name": "example name",
-  "scan_template_id": 1234
+  "included_targets": [
+    "10.2.144",
+    "10.8.36.144"
+  ],
+  "overwrite": true
 }
 ```
 
@@ -2405,12 +2404,12 @@ Example input:
 
 ```
 {
-  "description": "example description",
-  "engine_id": 1234,
+  "excluded_targets": [
+    "10.2.144",
+    "10.8.36.144"
+  ],
   "id": 1234,
-  "importance": "low",
-  "name": "example name",
-  "scan_template_id": 1234
+  "overwrite": true
 }
 ```
 
@@ -3152,7 +3151,7 @@ Example input:
 
 ```
 {
-  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
+  "scan_id": 123456789
 }
 ```
 
@@ -3410,7 +3409,7 @@ Example input:
 
 ```
 {
-  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
+  "id": 1234
 }
 ```
 
@@ -3611,7 +3610,7 @@ Example input:
 
 ```
 {
-  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
+  "id": 1234
 }
 ```
 
@@ -3768,7 +3767,7 @@ Example input:
 
 ```
 {
-  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
+  "id": 1234
 }
 ```
 
@@ -3844,7 +3843,7 @@ Example input:
 
 ```
 {
-  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
+  "id": 1234
 }
 ```
 
@@ -4067,12 +4066,8 @@ Example input:
 
 ```
 {
-  "description": "example description",
-  "engine_id": 1234,
-  "id": 1234,
-  "importance": "low",
-  "name": "example name",
-  "scan_template_id": 1234
+  "engine_id": 5678,
+  "site_id": 1234
 }
 ```
 
@@ -4105,7 +4100,7 @@ This action is used to create a vulnerability exception submission.
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|Exception created with InsightConnect|True|Comment to include in the vulnerability exception submission|None|example comment|
 |expiration|date|None|False|The date the vulnerability exception expires|None|10-12-2020|
-|key|string|None|False|The key to identify a specific instance if the type is Instance|None|example_key|
+|key|string|None|False|The key to identify a specific instance if the type is Instance|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |port|integer|None|False|The port the vulnerability appears on if the type is Instance|None|40000|
 |reason|string|None|True|Reason for the exception|['False Positive', 'Compensating Control', 'Acceptable Use', 'Acceptable Risk', 'Other']|False Positive|
 |scope|integer|None|False|The ID of the scope the vulnerability exception applies to.  May be empty if type is Global|None|1234|
@@ -4118,7 +4113,7 @@ Example input:
 {
   "comment": "example comment",
   "expiration": "10-12-2020",
-  "key": "example_key",
+  "key": "9de5069c5afe602b2ea0a04b66beb2c0",
   "port": 40000,
   "reason": "False Positive",
   "scope": 1234,
@@ -4351,8 +4346,7 @@ Example input:
 
 ```
 {
-  "name": "example name",
-  "type": "admin"
+  "id": 1234
 }
 ```
 
@@ -5115,8 +5109,14 @@ Example input:
 {
   "access_all_asset_groups": false,
   "access_all_sites": false,
-  "role_id": "global-admin",
-  "user_id": 1234
+  "authentication_id": 567,
+  "authentication_type": "ldap",
+  "email": "example@gmail.com",
+  "enabled": true,
+  "id": 1234,
+  "login": "jdoe24",
+  "name": "John Doe",
+  "role_id": "global-admin"
 }
 ```
 
@@ -5279,11 +5279,16 @@ Example input:
 
 ```
 {
-  "site_ids": [
-    1234,
-    567
-  ],
-  "user_id": 1234
+  "access_all_asset_groups": false,
+  "access_all_sites": false,
+  "authentication_id": 567,
+  "authentication_type": "ldap",
+  "email": "example@gmail.com",
+  "enabled": true,
+  "id": 1234,
+  "login": "jdoe24",
+  "name": "John Doe",
+  "role_id": "global-admin"
 }
 ```
 
