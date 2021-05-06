@@ -34,7 +34,10 @@ class SubmitUrlForScan(komand.Action):
             )
 
         if "uuid" in out:
-            return {Output.SCAN_ID: out["uuid"]}
+            return {
+                Output.WAS_SCAN_SKIPPED: False,
+                Output.SCAN_ID: out["uuid"]
+            }
 
         if "status" in out:
             if out["status"] == 401:
@@ -50,6 +53,7 @@ class SubmitUrlForScan(komand.Action):
         if "The submitted domain is on our blacklist. For your own safety we did not perform this scan..." in out["description"]:
             self.logger.error(out['description'])
             return {
+                Output.WAS_SCAN_SKIPPED: True,
                 Output.SCAN_ID: ""
             }
 
