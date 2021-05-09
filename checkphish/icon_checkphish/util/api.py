@@ -9,7 +9,7 @@ from urllib.parse import urljoin
 
 class CheckPhishAPI:
     def __init__(self, api_key: str, logger: Logger):
-        self.base_url = "https://developers.checkphish.ai/api"
+        self.url = "https://developers.checkphish.ai/api/"
         self.headers = {"Content-Type": "application/json"}
         self.api_key = api_key
         self.logger = logger
@@ -18,10 +18,10 @@ class CheckPhishAPI:
         return self.submit_scan("https://rapid7.com")
 
     def submit_scan(self, url: str) -> dict:
-        return self.send_request("POST", "/neo/scan/", payload={"urlInfo": {"url": url}})
+        return self.send_request("POST", "neo/scan/", payload={"urlInfo": {"url": url}})
 
     def get_scan_results(self, job_id: str) -> dict:
-        return self.send_request("POST", "/neo/scan/status", payload={"jobID": job_id, "insights": True})
+        return self.send_request("POST", "neo/scan/status", payload={"jobID": job_id, "insights": True})
 
     def submit_and_get_results(self, url: str) -> dict:
         try:
@@ -48,12 +48,11 @@ class CheckPhishAPI:
         try:
             response = requests.request(
                 method.upper(),
-                urljoin(self.base_url, path),
+                urljoin(self.url, path),
                 params=params,
                 json=payload,
                 headers=self.headers,
             )
-
             if response.status_code == 401:
                 raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
             if response.status_code == 403:
