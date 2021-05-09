@@ -34,7 +34,11 @@ class CheckPhishAPI:
         scan_results = self.get_scan_results(job_id)
 
         i = 0
-        while scan_results.get("status") != "DONE" or i == 12:
+        while scan_results.get("status") != "DONE":
+            if i == 12:
+                return PluginException(
+                    cause="Timeout.", assistance="The job did not complete within 60 seconds, please try again."
+                )
             sleep(5)
             scan_results = self.get_scan_results(job_id)
             i += 1
@@ -67,6 +71,12 @@ class CheckPhishAPI:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
             if 200 <= response.status_code < 300:
+                error_message = response.json().get("errorMessage")
+                if error_message:
+                    raise PluginException(
+                        cause="CheckPhish API Returned as error message.",
+                        assistance=f"The error message is: {error_message}",
+                    )
                 return clean(json.loads(response.content))
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
