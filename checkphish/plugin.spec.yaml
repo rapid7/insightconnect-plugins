@@ -20,7 +20,7 @@ tags:
 - intel
 hub_tags:
   use_cases: [threat_detection_and_response, data_enrichment]
-  keywords: [url, checkphish, phishing, intel]
+  keywords: [url, phishing, intel]
   features: []
 
 types:
