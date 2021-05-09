@@ -28,10 +28,9 @@ class CheckPhishAPI:
             job_id = self.submit_scan(url)["jobID"]
         except KeyError:
             raise PluginException(
-                cause="Job ID not returned.",
-                assistance=f"Failed to retrive scan results for {url} from CheckPhish."
+                cause="Job ID not returned.", assistance=f"Failed to retrive scan results for {url} from CheckPhish."
             )
-        
+
         scan_results = self.get_scan_results(job_id)
 
         i = 0
