@@ -94,7 +94,7 @@ actions:
         description: URL you wish to scan and get results for
         type: string
         required: true
-        example: Incident Created By InsightConnect
+        example: https://example.com
     output:
       scan_results:
         title: Scan Results

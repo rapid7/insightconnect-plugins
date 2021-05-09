@@ -40,13 +40,13 @@ This action is used to scan a URL and retrieve scan results.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|url|string|None|True|URL you wish to scan and get results for|None|Incident Created By InsightConnect|
+|url|string|None|True|URL you wish to scan and get results for|None|https://example.com|
 
 Example input:
 
 ```
 {
-  "url": "Incident Created By InsightConnect"
+  "url": "https://example.com"
 }
 ```
 
