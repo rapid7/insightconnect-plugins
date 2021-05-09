@@ -4,7 +4,8 @@ from .schema import ConnectionSchema
 # Custom imports below
 from komand.exceptions import ConnectionTestException
 import requests
-from ..investigate import *
+from komand_cisco_umbrella_investigate.investigate import investigate
+import re
 
 
 class Connection(komand.Connection):
