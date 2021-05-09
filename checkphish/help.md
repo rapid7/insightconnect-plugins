@@ -18,15 +18,13 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_secret_key|None|True|CheckPhish API Key|None|1A2B3CC4D5E67F8901G2HI345J6K7L89|
+|api_key|credential_secret_key|None|True|CheckPhish API Key|None|1A2B3CC4D5E67F8901G2HI345J6K7L89|
 
 Example input:
 
 ```
 {
-  "api_key": {
-    "secretKey": “1A2B3CC4D5E67F8901G2HI345J6K7L89"
-  }
+  "api_key": "1A2B3CC4D5E67F8901G2HI345J6K7L89"
 }
 ```
 
@@ -48,7 +46,7 @@ Example input:
 
 ```
 {
-  "url": "https://example.com"
+  "url": "Incident Created By InsightConnect"
 }
 ```
 

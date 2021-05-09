@@ -13,5 +13,4 @@ class ScanUrl(insightconnect_plugin_runtime.Action):
                 output=ScanUrlOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        return {Output.SCAN_RESULTS: self.connection.api.submit_and_get_results(params.get(Input.URL))}

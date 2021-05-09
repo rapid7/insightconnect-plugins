@@ -4,7 +4,7 @@ import json
 
 
 class Input:
-    CREDENTIALS = "credentials"
+    API_KEY = "api_key"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -13,7 +13,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "credentials": {
+    "api_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
       "description": "CheckPhish API Key",
@@ -21,7 +21,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "credentials"
+    "api_key"
   ],
   "definitions": {
     "credential_secret_key": {
