@@ -151,7 +151,7 @@ Example output:
             "attackedParty": "Employee (other)",
             "abxMessageId": -1111111111111111114,
             "abxPortalUrl": "https://portal.abnormalsecurity.com/home/threat-center/remediation-history/-1111111111111111114",
-            "subject": "The Truth About 7 Masturbation Myths",
+            "subject": "The Truth About 7 Myths",
             "fromAddress": "user@example.com",
             "fromName": "Test Example",
             "toAddresses": "user@example.com",
