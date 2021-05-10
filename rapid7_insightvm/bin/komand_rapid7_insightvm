@@ -4,10 +4,10 @@ import os
 import json
 from sys import argv
 
-Name = "Rapid7 InsightVM"
+Name = "Rapid7 InsightVM Console"
 Vendor = "rapid7"
-Version = "4.9.0"
-Description = "InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin can get top remediations, scan results and start scans"
+Version = "4.9.1"
+Description = "InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations, scan results and start scans"
 
 
 def main():

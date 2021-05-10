@@ -1,8 +1,6 @@
 import sys
 import os
 
-sys.path.append(os.path.abspath("../"))
-
 from komand.exceptions import PluginException
 from unittest import TestCase
 from komand_rapid7_insightvm.util import resource_requests
@@ -10,6 +8,8 @@ import logging
 import requests
 import json
 import pytest
+
+sys.path.append(os.path.abspath("../"))
 
 
 class MockResponse:
@@ -65,14 +65,14 @@ class TestResourceRequests(TestCase):
         session = MockSession()
         test_object = resource_requests.ResourceRequests(logger=logger, session=session)
         with pytest.raises(PluginException):
-            response = test_object.resource_request("exception.com")
+            test_object.resource_request("exception.com")
 
     def test_resource_request_401(self):
         logger = logging.getLogger("logger")
         session = MockSession()
         test_object = resource_requests.ResourceRequests(logger=logger, session=session)
         with pytest.raises(PluginException, match="InsightVM returned an error message. Unauthorized"):
-            response = test_object.resource_request("bad password")
+            test_object.resource_request("bad password")
 
 
 class TestPagedResourceRequest(TestCase):

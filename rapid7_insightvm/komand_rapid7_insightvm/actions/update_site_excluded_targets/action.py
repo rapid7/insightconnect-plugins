@@ -4,7 +4,6 @@ from .schema import UpdateSiteExcludedTargetsInput, UpdateSiteExcludedTargetsOut
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
-import json
 
 
 class UpdateSiteExcludedTargets(komand.Action):
@@ -24,7 +23,7 @@ class UpdateSiteExcludedTargets(komand.Action):
         # Pull current site scope in order to append to list instead of overwriting
         if not params.get(Input.OVERWRITE):
             current_scope = resource_helper.resource_request(endpoint=endpoint, method="get")
-            self.logger.info(f"Appending to current list of excluded targets")
+            self.logger.info("Appending to current list of excluded targets")
             scope.extend(current_scope["addresses"])
 
         self.logger.info(f"Using {endpoint} ...")
