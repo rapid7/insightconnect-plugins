@@ -4,7 +4,7 @@ CheckPhish is a free scanner to detect phishing & fraudulent sites in real-time
 
 # Key Features
 
-* Perform a scan and retrive scan results for potentially malicious URLs
+* Perform a scan and retrieve scan results for potentially malicious URLs
 
 # Requirements
 
