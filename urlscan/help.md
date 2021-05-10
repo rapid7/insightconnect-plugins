@@ -823,7 +823,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.3.0 - In action Submit URL for Scan add logger when submitted domain in on blacklist
+* 2.3.0 - Add logger when submitted domain is in blacklist for Submit URL for Scan action
 * 2.2.0 - Add new input Input Type in Search action
 * 2.1.8 - Correct spelling in help.md
 * 2.1.7 - Add missing outputs to Get Scan Results action
@@ -845,4 +845,3 @@ _This plugin does not contain any troubleshooting information._
 
 * [Urlscan.io](https://urlscan.io/)
 * [Urlscan API](https://urlscan.io/about-api/)
-
