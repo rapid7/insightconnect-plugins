@@ -2,13 +2,10 @@ import insightconnect_plugin_runtime
 from .schema import ConnectionSchema
 
 # Custom imports below
-import re
+
 from greynoise import GreyNoise
 from greynoise.exceptions import RequestFailure
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
-
-PLUGIN_STRING = open("/python/src/plugin.spec.yaml", "r").read()
-PLUGIN_VERSION = re.search(r"\bversion:\s(.*)", PLUGIN_STRING).group(1)
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -22,7 +19,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params):
         self.api_key = params.get("credentials").get("secretKey", "")
         self.server = "https://api.greynoise.io"
-        self.user_agent = "rapid7-insightconnect-v" + str(PLUGIN_VERSION)
+        self.user_agent = f"rapid7-insightconnect-v{self.meta.version}"
         self.gn_client = GreyNoise(api_server=self.server, api_key=self.api_key, integration_name=self.user_agent)
         self.logger.info("Connect: Connecting...")
 

@@ -8,7 +8,7 @@ class GNRequestFailure(Exception):
 
         raise PluginException(
             cause="Received HTTP %d status code from GreyNoise. Verify your input and try again." % self.status_code,
-            assistance="If the issue persists please contact support.",
+            assistance="If the issue persists please contact GreyNoise support.",
             data=f"{self.status_code}, {self.message}",
         )
 
@@ -18,8 +18,8 @@ class GNValueError(Exception):
         self.message = message
 
         raise PluginException(
-            cause="Received HTTP 404 status code from GreyNoise. "
+            cause="Received HTTP 404 status code from GreyNoise."
                   "Input provided was not found, please try another.",
-            assistance="If the issue persists please contact support.",
+            assistance="If the issue persists please contact GreyNoise support.",
             data=f"{self.message}",
         )

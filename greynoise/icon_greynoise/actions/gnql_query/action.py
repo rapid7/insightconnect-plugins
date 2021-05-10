@@ -19,7 +19,7 @@ class GnqlQuery(insightconnect_plugin_runtime.Action):
         if size and size.isdigit():
             if int(size) < 0 or int(size) > 10000:
                 raise PluginException(
-                    cause="Invalid Size Input Provided", assistance="Size must be a valid integer between 1 and 10000"
+                    cause="Invalid Size Input Provided.", assistance="Size must be a valid integer between 1 and 10000."
                 )
         try:
             resp = self.connection.gn_client.query(query, size=size)
