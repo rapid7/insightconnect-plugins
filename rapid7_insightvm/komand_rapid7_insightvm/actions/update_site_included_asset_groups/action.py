@@ -24,7 +24,7 @@ class UpdateSiteIncludedAssetGroups(komand.Action):
         if not params.get(Input.OVERWRITE):
             current_scope = resource_helper.resource_request(endpoint=endpoint, method="get")
             current_asset_group_ids = [group["id"] for group in current_scope["resources"]]
-            self.logger.info(f"Appending to current list of included asset groups")
+            self.logger.info("Appending to current list of included asset groups")
             scope.extend(current_asset_group_ids)
 
         self.logger.info(f"Using {endpoint} ...")
