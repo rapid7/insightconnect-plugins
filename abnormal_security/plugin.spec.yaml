@@ -185,7 +185,7 @@ connection:
     title: Abnormal Security API Key
     description: Abnormal Security API Key
     required: true
-    example: Vud5CDO9ULIV3SJOcp
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
 actions:
   get_threats:
     title: Get Threats
