@@ -31,11 +31,11 @@ Example input:
 
 ```
 {
-   "url": "https://insightvm.example.com:3780",
-   "credentials": {
+  "url": "https://insightvm.example.com:3780",
+  "credentials": {
     "username": "username",
     "password": "password"
-   }
+  }
 }
 ```
 
