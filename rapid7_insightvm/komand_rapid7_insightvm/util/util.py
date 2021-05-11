@@ -30,7 +30,7 @@ def adhoc_sql_report(connection, logger, report_payload: dict):
         )
 
     endpoint = endpoints.Report.generate(connection.console_url, report_id)
-    logger.info(f"Generating report")
+    logger.info("Generating report")
     response = resource_helper.resource_request(endpoint=endpoint, method="post")
     report_instance_id = response.get("id")
 
@@ -58,12 +58,12 @@ def adhoc_sql_report(connection, logger, report_payload: dict):
 
     # Download report
     endpoint = endpoints.Report.download(connection.console_url, report_id, report_instance_id)
-    logger.info(f"Downloading SQL report contents")
+    logger.info("Downloading SQL report contents")
     report_contents = resource_helper.resource_request(endpoint=endpoint, json_response=False)
 
     # Cleanup report
     endpoint = endpoints.Report.delete(connection.console_url, report_id)
-    logger.info(f"Cleaning up report configuration ")
+    logger.info("Cleaning up report configuration ")
     resource_helper.resource_request(endpoint=endpoint, method="delete")
 
     return report_contents

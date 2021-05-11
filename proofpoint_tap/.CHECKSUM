@@ -1,15 +1,43 @@
 {
-	"spec": "f625ff2505ef3e2b1813f1819668177a",
-	"manifest": "b28197af13e25ebc0905af1c0f4ecb8c",
-	"setup": "e7a87afcac582b4100cbab87bdc8eefc",
+	"spec": "97113129ec3c8a063394607fc7a26a31",
+	"manifest": "0b35c03d10da1fd024f79b7ba41a7bc8",
+	"setup": "a45b97d03c1572624efbc3f73d079b68",
 	"schemas": [
+		{
+			"identifier": "get_all_threats/schema.py",
+			"hash": "a84d061f9904b5f3c313d0a95c0bbe71"
+		},
+		{
+			"identifier": "get_blocked_clicks/schema.py",
+			"hash": "2f37507642cc3d9b42bc952def451d23"
+		},
+		{
+			"identifier": "get_blocked_messages/schema.py",
+			"hash": "739b2c4e04db48a55f78c366b954344d"
+		},
+		{
+			"identifier": "get_delivered_threats/schema.py",
+			"hash": "44b2043d60ed60f0db98817c54cb461d"
+		},
+		{
+			"identifier": "get_permitted_clicks/schema.py",
+			"hash": "6de992e2df2566fda213ef5ccb6958b9"
+		},
+		{
+			"identifier": "get_top_clickers/schema.py",
+			"hash": "42734f0f2d4fa6c9934bcc5759d57ce2"
+		},
 		{
 			"identifier": "parse_tap_alert/schema.py",
 			"hash": "dd2e63e8048b97fa23e094e39b845135"
 		},
 		{
+			"identifier": "url_decode/schema.py",
+			"hash": "7bdd5a9639316f7c1b168971c334bd7c"
+		},
+		{
 			"identifier": "connection/schema.py",
-			"hash": "da5382221ca2a33a2f854e17b068d502"
+			"hash": "754002cc58c248448cb4b1790c1776a0"
 		}
 	]
 }
