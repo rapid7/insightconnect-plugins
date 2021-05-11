@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rest
 title: HTTP Requests
 description: The HTTP Requests plugin to make it easy to integrate with RESTful services
-version: 5.0.0
+version: 5.0.1
 vendor: rapid7
 support: community
 status: []
@@ -31,6 +31,30 @@ connection:
     type: string
     required: true
     example: https://httpbin.org/
+    order: 1
+  default_headers:
+    title: Default Headers
+    description: Custom headers to include in all requests associated with this connection. To pass a encrypted key as a header value, enter your key in the Secret Key input and set the value of the header in this field to "CUSTOM_SECRET_INPUT" instead of secret key. The plugin will replace "CUSTOM_SECRET_INPUT" with the encrypted key stored in the Secret Key input when the plugin runs.
+    type: object
+    required: false
+    example: '{ "User-Agent": "Rapid7 InsightConnect", "Custom-Key-Header": "CUSTOM_SECRET_INPUT" }'
+    order: 2
+  ssl_verify:
+    title: SSL Verify
+    type: boolean
+    description: Verify TLS/SSL certificate
+    required: true
+    default: true
+    example: true
+    order: 3
+  fail_on_http_errors:
+    title: Fail on HTTP Errors
+    description: Indicates whether the plugin should fail on standard HTTP errors (4xx-5xx)
+    type: boolean
+    required: false
+    default: true
+    example: true
+    order: 4
   authentication_type:
     title: Authentication Type
     description: Type of authentication
@@ -45,40 +69,23 @@ connection:
       - Pendo
       - Custom
       - No Authentication
-    default: Basic Auth
+    default: No Authentication
     example: Basic Auth
-  secret:
-    title: Secret Key
-    description: Credential secret key. Provide a Bearer Token, Rapid7 Insight, OpsGenie, Pendo or using "CUSTOM_SECRET_INPUT" in the Default Headers field for Custom authentication type
-    type: credential_secret_key
-    required: false
-    example: 9de5069c5afe602b2ea0a04b66beb2c0
-  default_headers:
-    title: Default Headers
-    description: Custom headers to include in all requests associated with this connection. To pass a encrypted key as a header value, enter your key in the Secret Key input and set the value of the header in this field to "CUSTOM_SECRET_INPUT" instead of secret key. The plugin will replace "CUSTOM_SECRET_INPUT" with the encrypted key stored in the Secret Key input when the plugin runs.
-    type: object
-    required: false
-    example: '{ "User-Agent": "Rapid7 InsightConnect", "Custom-Key-Header": "CUSTOM_SECRET_INPUT" }'
-  ssl_verify:
-    title: SSL Verify
-    type: boolean
-    description: Verify TLS/SSL certificate
-    required: true
-    default: true
-    example: true
+    order: 5
   basic_auth_credentials:
     title: Basic Auth Credentials
     description: Username and password. Provide if you choose Basic Auth or Digest Auth authentication type
     type: credential_username_password
     required: false
     example: '{"username": "user@example.com", "password": "mypassword"}'
-  fail_on_http_errors:
-    title: Fail on HTTP Errors
-    description: Indicates whether the plugin should fail on standard HTTP errors (4xx-5xx)
-    type: boolean
+    order: 6
+  secret:
+    title: Secret Key
+    description: Credential secret key. Provide a Bearer Token, Rapid7 Insight, OpsGenie, Pendo or using "CUSTOM_SECRET_INPUT" in the Default Headers field for Custom authentication type
+    type: credential_secret_key
     required: false
-    default: true
-    example: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
+    order: 7
 actions:
   get:
     title: GET

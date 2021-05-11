@@ -23,7 +23,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Authentication Type",
       "description": "Type of authentication",
-      "default": "Basic Auth",
+      "default": "No Authentication",
       "enum": [
         "Basic Auth",
         "Digest Auth",
@@ -34,7 +34,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
         "Custom",
         "No Authentication"
       ],
-      "order": 2
+      "order": 5
     },
     "base_url": {
       "type": "string",
@@ -52,27 +52,27 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "Default Headers",
       "description": "Custom headers to include in all requests associated with this connection. To pass a encrypted key as a header value, enter your key in the Secret Key input and set the value of the header in this field to \\"CUSTOM_SECRET_INPUT\\" instead of secret key. The plugin will replace \\"CUSTOM_SECRET_INPUT\\" with the encrypted key stored in the Secret Key input when the plugin runs.",
-      "order": 4
+      "order": 2
     },
     "fail_on_http_errors": {
       "type": "boolean",
       "title": "Fail on HTTP Errors",
       "description": "Indicates whether the plugin should fail on standard HTTP errors (4xx-5xx)",
       "default": true,
-      "order": 7
+      "order": 4
     },
     "secret": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Secret Key",
       "description": "Credential secret key. Provide a Bearer Token, Rapid7 Insight, OpsGenie, Pendo or using \\"CUSTOM_SECRET_INPUT\\" in the Default Headers field for Custom authentication type",
-      "order": 3
+      "order": 7
     },
     "ssl_verify": {
       "type": "boolean",
       "title": "SSL Verify",
       "description": "Verify TLS/SSL certificate",
       "default": true,
-      "order": 5
+      "order": 3
     }
   },
   "required": [
