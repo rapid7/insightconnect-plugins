@@ -1,10 +1,9 @@
-import ast
-
 import insightconnect_plugin_runtime
 from .schema import AssetSearchInput, AssetSearchOutput, Input, Output, Component
 
 
 # Custom imports below
+from ..start_scan.action import format_body
 
 
 class AssetSearch(insightconnect_plugin_runtime.Action):
@@ -14,9 +13,8 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        results = list()
-        ips = params.get(Input.IPS)
-        hostnames = params.get(Input.HOSTNAMES)
+        asset_crit = params.get(Input.ASSET_CRITERIA)
+        vuln_crit = params.get(Input.VULN_CRITERIA)
         size = params.get(Input.SIZE, 0)
         sort_criteria = params.get(Input.SORT_CRITERIA, dict())
         parameters = list()
@@ -25,17 +23,14 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
             parameters.append(("sort", f"{key},{value}"))
 
         parameters.append(("size", size))
-        resources = self.connection.ivm_cloud_api.call_api("assets", "POST", parameters)
+        if asset_crit or vuln_crit:
+            hostnames = asset_crit.get("hostnames")
+            ips = asset_crit.get("ips")
+            body = format_body(hostnames, ips, vuln_crit)
+            resources = self.connection.ivm_cloud_api.call_api("assets", "POST", params, body)
+        else:
+            resources = self.connection.ivm_cloud_api.call_api("assets", "POST", parameters)
 
         assets = resources.get("data")
-        for asset in assets:
-            if hostnames:
-                if asset.get("host_name") in hostnames:
-                    results.append(asset)
-            if ips:
-                if asset.get("ip") in ips:
-                    results.append(asset)
-            if hostnames == [] and ips == []:
-                results.append(asset)
 
-        return {Output.ASSETS: results}
+        return {Output.ASSETS: assets}

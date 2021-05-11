@@ -8,10 +8,10 @@ class Component:
 
 
 class Input:
-    HOSTNAMES = "hostnames"
-    IPS = "ips"
+    ASSET_CRITERIA = "asset_criteria"
     SIZE = "size"
     SORT_CRITERIA = "sort_criteria"
+    VULN_CRITERIA = "vuln_criteria"
     
 
 class Output:
@@ -24,28 +24,16 @@ class AssetSearchInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "hostnames": {
-      "type": "array",
-      "title": "Hostnames",
-      "description": "List of hostnames to search",
-      "items": {
-        "type": "string"
-      },
-      "order": 4
-    },
-    "ips": {
-      "type": "array",
-      "title": "IPs",
-      "description": "List of IPv4 or IPv6 addresses to search",
-      "items": {
-        "type": "string"
-      },
+    "asset_criteria": {
+      "type": "object",
+      "title": "Asset Criteria",
+      "description": "Object of filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames",
       "order": 3
     },
     "size": {
       "type": "number",
       "title": "Size",
-      "description": "The number of records to retrieve. If blank or '0' all assets that match the search will be returned",
+      "description": "The number of assets to retrieve. If blank or '0' all assets that match the search will be returned",
       "default": 0,
       "order": 1
     },
@@ -54,6 +42,15 @@ class AssetSearchInput(insightconnect_plugin_runtime.Input):
       "title": "Sort Criteria",
       "description": "JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)",
       "order": 2
+    },
+    "vuln_criteria": {
+      "type": "array",
+      "title": "Vulnerability Criteria",
+      "description": "List of vulnerability criteria to filter by",
+      "items": {
+        "type": "string"
+      },
+      "order": 4
     }
   }
 }

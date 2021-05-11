@@ -131,23 +131,21 @@ This action is used to search for assets using filtered asset search.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hostnames|[]string|None|False|List of hostnames to search|None|["rapid7.com"]|
-|ips|[]string|None|False|List of IPv4 or IPv6 addresses to search|None|["2001:db8:1:1:1:1:1:1"]|
-|size|number|0|False|The number of records to retrieve. If blank or '0' all assets that match the search will be returned|None|100|
+|asset_criteria|object|None|False|Object of filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames|None|{"ip": "2001:db8:1:1:1:1:1:1", "name": "example"}|
+|size|number|0|False|The number of assets to retrieve. If blank or '0' all assets that match the search will be returned|None|100|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|
+|vuln_criteria|[]string|None|False|List of vulnerability criteria to filter by|None|["rapid7.com"]|
 
 Example input:
 
 ```
 {
-  "hostnames": [
-    "rapid7.com"
-  ],
-  "ips": [
-    "2001:db8:1:1:1:1:1:1"
-  ],
+  "asset_criteria": "{\"ip\": \"2001:db8:1:1:1:1:1:1\", \"name\": \"example\"}",
   "size": 100,
-  "sort_criteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}"
+  "sort_criteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}",
+  "vuln_criteria": [
+    "rapid7.com"
+  ]
 }
 ```
 
@@ -351,8 +349,11 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |asset_ids|[]string|False|List of IDs of the scanned assets|
-|engine_id|string|False|ID of the engine used for the scan|
-|scanName|string|False|User-driven scan name for the scan|
+|finished|string|False|When the scan was finished|
+|name|string|False|User-driven scan name for the scan|
+|scan_id|string|False|ID of the scan|
+|started|string|False|When the scan was started|
+|status|string|False|Current status of the retreived scan|
 
 Example output:
 

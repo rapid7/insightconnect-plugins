@@ -13,8 +13,11 @@ class Input:
 
 class Output:
     ASSET_IDS = "asset_ids"
-    ENGINE_ID = "engine_id"
-    SCANNAME = "scanName"
+    FINISHED = "finished"
+    NAME = "name"
+    SCAN_ID = "scan_id"
+    STARTED = "started"
+    STATUS = "status"
     
 
 class GetScanInput(insightconnect_plugin_runtime.Input):
@@ -55,17 +58,35 @@ class GetScanOutput(insightconnect_plugin_runtime.Output):
       },
       "order": 1
     },
-    "engine_id": {
+    "finished": {
       "type": "string",
-      "title": "Engine ID",
-      "description": "ID of the engine used for the scan",
-      "order": 2
+      "title": "Finished",
+      "description": "When the scan was finished",
+      "order": 6
     },
-    "scanName": {
+    "name": {
       "type": "string",
-      "title": "Scan Name",
+      "title": "Name",
       "description": "User-driven scan name for the scan",
       "order": 3
+    },
+    "scan_id": {
+      "type": "string",
+      "title": "Scan ID",
+      "description": "ID of the scan",
+      "order": 2
+    },
+    "started": {
+      "type": "string",
+      "title": "Started",
+      "description": "When the scan was started",
+      "order": 5
+    },
+    "status": {
+      "type": "string",
+      "title": "Status",
+      "description": "Current status of the retreived scan",
+      "order": 4
     }
   }
 }

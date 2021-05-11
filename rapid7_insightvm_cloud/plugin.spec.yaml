@@ -1103,17 +1103,35 @@ actions:
         type: "[]string"
         example: ["abc978-5678-abc-a5a94a1234b8-asset"]
         required: false
-      engine_id:
-        description: ID of the engine used for the scan
-        title: Engine ID
+      scan_id:
+        description: ID of the scan
+        title: Scan ID
         type: string
         example: "a9870dce1234180e202af83b66cd0c4b"
         required: false
-      scanName:
+      name:
         description: User-driven scan name for the scan
-        title: Scan Name
+        title: Name
         type: string
         example: "testing scan action"
+        required: false
+      status:
+        description: Current status of the retreived scan
+        title: Status
+        type: string
+        example: "Stopped"
+        required: false
+      started:
+        description: When the scan was started
+        title: Started
+        type: string
+        example: "2021-04-15T17:56:47Z"
+        required: false
+      finished:
+        description: When the scan was finished
+        title: Finished
+        type: string
+        example: "2021-04-15T18:00:33Z"
         required: false
   asset_search:
     title: Asset Search
@@ -1121,7 +1139,7 @@ actions:
     input:
       size:
         title: Size
-        description: The number of records to retrieve. If blank or '0' all assets that match the search will be returned
+        description: The number of assets to retrieve. If blank or '0' all assets that match the search will be returned
         type: number
         required: false
         default: 0
@@ -1132,15 +1150,15 @@ actions:
         type: object
         required: false
         example: '{"risk-score": "asc", "criticality-tag": "desc"}'
-      ips:
-        title: IPs
-        description: List of IPv4 or IPv6 addresses to search
-        type: "[]string"
-        example: [ "2001:db8:1:1:1:1:1:1" ]
+      asset_criteria:
+        title: Asset Criteria
+        description: Object of filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames
+        type: object
+        example: '{"ip": "2001:db8:1:1:1:1:1:1", "name": "example"}'
         required: false
-      hostnames:
-        title: Hostnames
-        description: List of hostnames to search
+      vuln_criteria:
+        title: Vulnerability Criteria
+        description: List of vulnerability criteria to filter by
         type: "[]string"
         example: [ "rapid7.com" ]
         required: false

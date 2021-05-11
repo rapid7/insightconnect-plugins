@@ -9,15 +9,6 @@ from requests.exceptions import HTTPError
 
 
 class IVM_Cloud:
-
-    _ERRORS = {
-        400: "Bad Request",
-        401: "Unauthorized",
-        500: "Internal Server Error",
-        503: "Service Unavailable",
-        000: "Unknown Status Code",
-    }
-
     def __init__(self, token: str, logger: Logger, url: str):
         self.logger = logger
         self.token = token
@@ -60,7 +51,11 @@ class IVM_Cloud:
                 data=httpError,
             )
 
-    def test_api(self, api_url: str, params: dict = None,) -> dict:
+    def test_api(
+        self,
+        api_url: str,
+        params: dict = None,
+    ) -> dict:
         if params is None:
             params = {}
 

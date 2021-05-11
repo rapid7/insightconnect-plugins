@@ -4,6 +4,7 @@ from .schema import ConnectionSchema, Input
 # Custom imports below
 from requests import Session
 from icon_rapid7_insightvm_cloud.util.api import IVM_Cloud
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -14,6 +15,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.session = None
 
     def connect(self, params):
+        if params.get(Input.CREDENTIALS).get("secretKey") == "":
+            raise PluginException(
+                cause="Required credentials not provided.",
+                assistance="Will not run until an api key is provided",
+                data=000,
+            )
         self.logger.info("Connect: Connecting...")
         self.api_url = "https://" + params.get(Input.REGION) + ".api.insight.rapid7.com/vm/v4/integration/"
         self.session = Session()
