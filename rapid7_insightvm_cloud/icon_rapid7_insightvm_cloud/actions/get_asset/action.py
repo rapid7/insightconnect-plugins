@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import GetAssetInput, GetAssetOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import requests
@@ -22,4 +23,8 @@ class GetAsset(insightconnect_plugin_runtime.Action):
             return {Output.ASSET: response}
         except requests.RequestException as e:
             self.logger.error(e)
-            raise
+            raise PluginException(
+                cause="Failed to get a valid response from InsightVM with given asset id.",
+                assistance=f"Response was {response.request.body}",
+                data=response.status_code,
+            )

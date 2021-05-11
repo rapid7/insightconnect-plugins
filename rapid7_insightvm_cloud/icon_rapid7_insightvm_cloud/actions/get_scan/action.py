@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import GetScanInput, GetScanOutput, Input
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import requests
@@ -22,4 +23,8 @@ class GetScan(insightconnect_plugin_runtime.Action):
             return response
         except requests.RequestException as e:
             self.logger.error(e)
-            raise
+            raise PluginException(
+                cause="Failed to get a valid response from InsightVM with given scan id.",
+                assistance=f"Response was {response.request.body}",
+                data=response.status_code,
+            )
