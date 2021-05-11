@@ -1071,20 +1071,20 @@ actions:
         description: Identifier of the resource created
         title: Scan ID
         type: integer
-        example: ' {
-              "scans": [
+        example: " {
+              'scans': [
                 {
-                  "asset_ids": [
-                    "abc978-5678-abc-a5a94a1234b8-asset"
+                  'asset_ids': [
+                    'abc978-5678-abc-a5a94a1234b8-asset'
                   ],
-                  "engine_id": "a9870dce1234180e202af83b66cd0c4b",
-                  "finished": null,
-                  "id": "abb37782-df95-4cf6-b4c2-8d466ca57349",
-                  "name": "testing scan action"
+                  'engine_id': 'a9870dce1234180e202af83b66cd0c4b',
+                  'finished': null,
+                  'id': 'abb37782-df95-4cf6-b4c2-8d466ca57349',
+                  'name': 'testing scan action'
                 }
               ],
-              "unscanned_assets": []
-            }'
+              'unscanned_assets': []
+            }"
         required: false
   get_scan:
     title: Get Scan
@@ -1149,12 +1149,12 @@ actions:
         description: JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)
         type: object
         required: false
-        example: '{"risk-score": "asc", "criticality-tag": "desc"}'
+        example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
       asset_criteria:
         title: Asset Criteria
         description: Object of filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames
         type: object
-        example: '{"ip": "2001:db8:1:1:1:1:1:1", "name": "example"}'
+        example: "{'ip': '2001:db8:1:1:1:1:1:1', 'name': 'example'}"
         required: false
       vuln_criteria:
         title: Vulnerability Criteria
@@ -1167,80 +1167,81 @@ actions:
         title: Assets
         description: List of asset details returned by the search
         type: '[]search_asset'
-        example: '{
-                    "assets": [
-                      {
-                        "assessed_for_policies": false,
-                        "assessed_for_vulnerabilities": true,
-                        "credential_assessments": [],
-                        "critical_vulnerabilities": 12,
-                        "exploits": 5,
-                        "id": "cdc978de-f683-d5a94a114b87-asset",
-                        "ip": "2001:db8:1:1:1:1:1:1",
-                        "last_assessed_for_vulnerabilities": "2020-06-25T15:19:51.543Z",
-                        "last_scan_end": "2020-10-26T22:35:53.590Z",
-                        "last_scan_start": "2020-10-26T22:35:53.564Z",
-                        "mac": "00:50:56:94:52:04",
-                        "malware_kits": 0,
-                        "moderate_vulnerabilities": 4,
-                        "new": [],
-                        "os_architecture": "",
-                        "os_description": "Linux 2.6.32",
-                        "os_family": "Linux",
-                        "os_name": "Linux",
-                        "os_system_name": "Linux",
-                        "os_type": "General",
-                        "os_vendor": "Linux",
-                        "os_version": "2.6.32",
-                        "remediated": [],
-                        "risk_score": 9304.376953125,
-                        "severe_vulnerabilities": 21,
-                        "tags": [
-                          {
-                            "name": "integrations discovery",
-                            "type": "SITE"
-                          }
-                        ],
-                        "total_vulnerabilities": 37,
-                        "unique_identifiers": []
-                      },
-                      {
-                        "assessed_for_policies": false,
-                        "assessed_for_vulnerabilities": true,
-                        "credential_assessments": [],
-                        "critical_vulnerabilities": 12,
-                        "exploits": 5,
-                        "id": "cdc978de-f683-d5a94a114b87-asset",
-                        "ip": "2001:db8:1:1:1:1:1:1",
-                        "last_assessed_for_vulnerabilities": "2020-06-25T15:19:51.543Z",
-                        "last_scan_end": "2020-10-26T22:35:53.590Z",
-                        "last_scan_start": "2020-10-26T22:35:53.564Z",
-                        "mac": "00:50:56:94:52:04",
-                        "malware_kits": 0,
-                        "moderate_vulnerabilities": 4,
-                        "new": [],
-                        "os_architecture": "",
-                        "os_description": "Linux 2.6.32",
-                        "os_family": "Linux",
-                        "os_name": "Linux",
-                        "os_system_name": "Linux",
-                        "os_type": "General",
-                        "os_vendor": "Linux",
-                        "os_version": "2.6.32",
-                        "remediated": [],
-                        "risk_score": 9304.376953125,
-                        "severe_vulnerabilities": 21,
-                        "tags": [
-                          {
-                            "name": "integrations discovery",
-                            "type": "SITE"
-                          }
-                        ],
-                        "total_vulnerabilities": 37,
-                        "unique_identifiers": []
-                      }
-                    ]
-                  }'
+        example: "{
+           'assets': [
+             {
+               'assessed_for_policies': false,
+               'assessed_for_vulnerabilities': true,
+               'credential_assessments': [],
+               'critical_vulnerabilities': 12,
+               'exploits': 5,
+               'id': 'cdc978de-f683-d5a94a114b87-asset',
+               'ip': '2001:db8:1:1:1:1:1:1',
+               'last_assessed_for_vulnerabilities': '2020-06-25T15:19:51.543Z',
+               'last_scan_end': '2020-10-26T22:35:53.590Z',
+               'last_scan_start': '2020-10-26T22:35:53.564Z',
+               'mac': '00:50:56:94:52:04',
+               'malware_kits': 0,
+               'moderate_vulnerabilities': 4,
+               'new': [],
+               'os_architecture': '',
+               'os_description': 'Linux 2.6.32',
+               'os_family': 'Linux',
+               'os_name': 'Linux',
+               'os_system_name': 'Linux',
+               'os_type': 'General',
+               'os_vendor': 'Linux',
+               'os_version': '2.6.32',
+               'remediated': [],
+               'risk_score': 9304.376953125,
+               'severe_vulnerabilities': 21,
+               'tags': [
+                 {
+                   'name': 'integrations discovery',
+                   'type': 'SITE'
+                 }
+               ],
+               'total_vulnerabilities': 37,
+               'unique_identifiers': []
+             },
+             {
+               'assessed_for_policies': false,
+               'assessed_for_vulnerabilities': true,
+               'credential_assessments': [],
+               'critical_vulnerabilities': 12,
+               'exploits': 5,
+               'id': 'cdc978de-f683-d5a94a114b87-asset',
+               'ip': '2001:db8:1:1:1:1:1:1',
+               'last_assessed_for_vulnerabilities': '2020-06-25T15:19:51.543Z',
+               'last_scan_end': '2020-10-26T22:35:53.590Z',
+               'last_scan_start': '2020-10-26T22:35:53.564Z',
+               'mac': '00:50:56:94:52:04',
+               'malware_kits': 0,
+               'moderate_vulnerabilities': 4,
+               'new': [],
+               'os_architecture': '',
+               'os_description': 'Linux 2.6.32',
+               'os_family': 'Linux',
+               'os_name': 'Linux',
+               'os_system_name': 'Linux',
+               'os_type': 'General',
+               'os_vendor': 'Linux',
+               'os_version': '2.6.32',
+               'remediated': [],
+               'risk_score': 9304.376953125,
+               'severe_vulnerabilities': 21,
+               'tags': [
+                 {
+                   'name': 'integrations discovery',
+                   'type': 'SITE'
+                 }
+               ],
+               'total_vulnerabilities': 37,
+               'unique_identifiers': []
+             }
+           ]
+         }"
+
         required: true
   get_asset:
     title: Get Asset
@@ -1257,69 +1258,70 @@ actions:
         title: Asset
         description: Asset details
         type: asset
-        example: '"asset": {
-                  "assessed_for_policies": false,
-                  "assessed_for_vulnerabilities": true,
-                  "credential_assessments": [
-                    {
-                      "port": 22,
-                      "protocol": "TCP",
-                      "status": "NO_CREDS_SUPPLIED"
-                    }
-                  ],
-                  "critical_vulnerabilities": 1,
-                  "exploits": 2,
-                  "host_name": "rapid7.com",
-                  "id": "abc978-5678-abc-a5a94a1234b8-asset",
-                  "ip": "2001:db8:1:1:1:1:1:1",
-                  "last_assessed_for_vulnerabilities": "2021-04-26T08:04:28.536Z",
-                  "last_scan_end": "2021-04-26T08:04:28.536Z",
-                  "last_scan_start": "2021-04-26T08:00:56.006Z",
-                  "mac": "00:50:56:94:42:6B",
-                  "malware_kits": 0,
-                  "moderate_vulnerabilities": 7,
-                  "new": [],
-                  "remediated": [],
-                  "risk_score": 9006.3388671875,
-                  "severe_vulnerabilities": 19,
-                  "tags": [
-                    {
-                      "name": "sn_pt_LDAP Admins",
-                      "type": "OWNER"
-                    },
-                    {
-                      "name": "sn_CAB Approval",
-                      "type": "OWNER"
-                    },
-                    {
-                      "name": "integrations",
-                      "type": "CUSTOM"
-                    },
-                    {
-                      "name": "ck_test_site_2",
-                      "type": "SITE"
-                    },
-                    {
-                      "name": "integrations",
-                      "type": "SITE"
-                    },
-                    {
-                      "name": "ck_test_site_3",
-                      "type": "SITE"
-                    },
-                    {
-                      "name": "integrations discovery",
-                      "type": "SITE"
-                    },
-                    {
-                      "name": "ck_test_site_1",
-                      "type": "SITE"
-                    }
-                  ],
-                  "total_vulnerabilities": 27,
-                  "unique_identifiers": []
-                }
-              }'
+        example: "'asset': {
+         'assessed_for_policies': false,
+         'assessed_for_vulnerabilities': true,
+         'credential_assessments': [
+           {
+             'port': 22,
+             'protocol': 'TCP',
+             'status': 'NO_CREDS_SUPPLIED'
+           }
+         ],
+         'critical_vulnerabilities': 1,
+         'exploits': 2,
+         'host_name': 'rapid7.com',
+         'id': 'abc978-5678-abc-a5a94a1234b8-asset',
+         'ip': '2001:db8:1:1:1:1:1:1',
+         'last_assessed_for_vulnerabilities': '2021-04-26T08:04:28.536Z',
+         'last_scan_end': '2021-04-26T08:04:28.536Z',
+         'last_scan_start': '2021-04-26T08:00:56.006Z',
+         'mac': '00:50:56:94:42:6B',
+         'malware_kits': 0,
+         'moderate_vulnerabilities': 7,
+         'new': [],
+         'remediated': [],
+         'risk_score': 9006.3388671875,
+         'severe_vulnerabilities': 19,
+         'tags': [
+           {
+             'name': 'sn_pt_LDAP Admins',
+             'type': 'OWNER'
+           },
+           {
+             'name': 'sn_CAB Approval',
+             'type': 'OWNER'
+           },
+           {
+             'name': 'integrations',
+             'type': 'CUSTOM'
+           },
+           {
+             'name': 'ck_test_site_2',
+             'type': 'SITE'
+           },
+           {
+             'name': 'integrations',
+             'type': 'SITE'
+           },
+           {
+             'name': 'ck_test_site_3',
+             'type': 'SITE'
+           },
+           {
+             'name': 'integrations discovery',
+             'type': 'SITE'
+           },
+           {
+             'name': 'ck_test_site_1',
+             'type': 'SITE'
+           }
+         ],
+         'total_vulnerabilities': 27,
+         'unique_identifiers': []
+       }
+     }
+"
         required: true
   stop_scan:
     title: Stop Scan

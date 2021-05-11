@@ -819,9 +819,6 @@ This action is used to get software found on an asset. Can only be used if the a
 Example input:
 
 ```
-{
-  "asset_id": "234"
-}
 ```
 
 ##### Output
