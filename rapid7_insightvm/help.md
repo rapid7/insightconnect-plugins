@@ -18,6 +18,8 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 ## Setup
 
+The URL must point to your local console, not the platform or cloud console.
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -29,8 +31,10 @@ Example input:
 
 ```
 {
-  "credentials": "{\"username\": \"username\", \"password\": \"password\"}",
-  "url": "https://insightvm.example.com:3780"
+    "url": "https://insightvm.example.com:3780",
+    "credentials": {
+    "username": "username",
+    "password": "password"
 }
 ```
 
@@ -819,6 +823,9 @@ This action is used to get software found on an asset. Can only be used if the a
 Example input:
 
 ```
+{
+  "asset_id": "234"
+}
 ```
 
 ##### Output
@@ -1944,7 +1951,10 @@ Example input:
 ```
 {
   "size": 100,
-  "sort_criteria": "{\"risk-score\": \"asc\", \"criticality-tag\": \"desc\"}"
+  "sort_criteria": {
+    "risk-score": "asc",
+    "criticality-tag": "desc"
+  }
 }
 ```
 
@@ -5091,7 +5101,7 @@ This trigger is used to check for new InsightVM vulnerability exceptions.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |frequency|integer|5|True|How often the trigger should check for new vulnerability exception requests|None|None|
-|status_filter|[]string|["Under Review"]|False|List of vulnerability statuses to match against. Options include: Under Review and Approved|None|None|
+|status_filter|[]string|['Under Review']|False|List of vulnerability statuses to match against. Options include: Under Review and Approved|None|None|
 
 Example input:
 
@@ -5162,7 +5172,7 @@ This trigger is used to check for new InsightVM scans by site and scan status.
 |frequency|integer|5|True|How often the trigger should check for new scans in minutes|None|None|
 |most_recent_scan|boolean|True|True|Only process the most recent scan for a site since the last time the trigger was run|None|None|
 |site_name_filter|string|.*|True|Regular expression to match sites where new scans should be triggered|None|None|
-|status_filter|[]string|["Successful"]|False|List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown|None|None|
+|status_filter|[]string|['Successful']|False|List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown|None|None|
 
 Example input:
 
