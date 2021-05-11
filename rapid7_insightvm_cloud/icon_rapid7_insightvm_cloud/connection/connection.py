@@ -4,7 +4,6 @@ from .schema import ConnectionSchema, Input
 # Custom imports below
 from requests import Session
 from icon_rapid7_insightvm_cloud.util.api import IVM_Cloud
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
