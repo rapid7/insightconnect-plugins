@@ -16,7 +16,7 @@ jobs:
     - name: Validate Plugin(s)
       run: |
         python -m pip install --upgrade pip setuptools
-        curl -s https://${{ secrets.ci_packagecloud_token }}@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh | bash
+        curl -s https://${{ secrets.CI_PACKAGECLOUD_TOKEN }}@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh | bash
         python -m pip install --user icon-integrations-ci --no-warn-script-location
         export ICON_INTEGRATIONS_RELEASES_SLACK_WEBHOOK=${{ secrets.ICON_INTEGRATIONS_RELEASES_SLACK_WEBHOOK }}
         /home/runner/.local/bin/icon-ci pr
