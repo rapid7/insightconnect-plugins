@@ -39,9 +39,9 @@ class DeactivateUser(komand.Action):
             url = server + "/organizations/" + params.get("id_or_name") + "/members/" + id_member + "/deactivated"
 
             # new Request Request
-            request = urllib2.Request(
+            request = urllib2.Request(  # noqa: B310
                 url, data=json.dumps(data), headers={"Content-Type": "application/json"}
-            )  # noqa: B310
+            )
             request.get_method = lambda: "PUT"
 
             # Call api and response data

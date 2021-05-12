@@ -30,8 +30,8 @@ class Search(komand.Action):
 
         try:
             auth_response = requests.post(
-                auth_url, data=json.dumps(auth_body), headers=auth_headers, verify=False
-            )  # noqa: B501
+                auth_url, data=json.dumps(auth_body), headers=auth_headers, verify=False # noqa: B501
+            )
             auth_response_dict = json.loads(auth_response.text)
             auth_token = auth_response_dict["access_token"]
 
@@ -41,8 +41,8 @@ class Search(komand.Action):
 
             try:
                 search_results = requests.get(
-                    search_url, headers=search_headers, params=search_params, verify=False
-                )  # noqa: B501
+                    search_url, headers=search_headers, params=search_params, verify=False  # noqa: B501
+                )
                 results_list = json.loads(search_results.text)["data"]
                 return {"results": results_list}
 
