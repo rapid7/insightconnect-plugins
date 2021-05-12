@@ -23,7 +23,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Authentication Type",
       "description": "Type of authentication",
-      "default": "Basic Auth",
+      "default": "No Authentication",
       "enum": [
         "Basic Auth",
         "Digest Auth",
