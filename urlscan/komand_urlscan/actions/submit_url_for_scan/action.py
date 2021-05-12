@@ -34,7 +34,7 @@ class SubmitUrlForScan(komand.Action):
             )
 
         if "uuid" in out:
-            return {Output.SCAN_ID: out["uuid"]}
+            return {Output.WAS_SCAN_SKIPPED: False, Output.SCAN_ID: out["uuid"]}
 
         if "status" in out:
             if out["status"] == 401:
@@ -46,6 +46,13 @@ class SubmitUrlForScan(komand.Action):
         #  "description": "The URL supplied was not OK, please specify it including the protocol, host and path (e.g. http://example.com/bar)",
         #  "status": 400
         # }
+
+        if (
+            "The submitted domain is on our blacklist. For your own safety we did not perform this scan..."
+            in out["description"]
+        ):
+            self.logger.error(out["description"])
+            return {Output.WAS_SCAN_SKIPPED: True, Output.SCAN_ID: ""}
 
         if ("message" in out) and ("description" in out):
             raise PluginException(cause=f"{out['message']}. ", assistance=f"{out['description']}.")
