@@ -1,0 +1,500 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: greynoise
+title: GreyNoise
+vendor: greynoise
+support: partner
+status: []
+description: GreyNoise helps analysts recognize events not worth their attention. Indicators in GreyNoise are likely associated with opportunistic internet scanning or common business services, not targeted threats. This context helps analysts focus on what matters most
+version: 1.0.0
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/greynoise
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://greynoise.io
+tags:
+  - greynoise
+  - ip
+  - threat intel
+  - intelligence
+hub_tags:
+  use_cases: [data_enrichment, threat_detection_and_response]
+  keywords: [ip, intelligence, greynoise]
+  features: []
+enable_cache: false
+types:
+  metadata:
+    asn:
+      title: ASN
+      type: string
+      description: ASN
+      required: false
+    category:
+      title: Category
+      type: string
+      description: Category
+      required: false
+    city:
+      title: City
+      type: string
+      description: City
+      required: false
+    country:
+      title: Country
+      type: string
+      description: Country
+      required: false
+    country_code:
+      title: Country Code
+      type: string
+      description: Country Code
+      required: false
+    organization:
+      title: Organization
+      type: string
+      description: Organization
+      required: false
+    os:
+      title: OS
+      type: string
+      description: OS
+      required: false
+    rdns:
+      title: rDNS
+      type: string
+      description: rDNS
+      required: false
+    region:
+      title: Region
+      type: string
+      description: Region
+      required: false
+    tor:
+      title: TOR
+      type: boolean
+      description: TOR
+      required: false
+  scan:
+    port:
+      title: "Port"
+      type: integer
+      description: "Port"
+      required: false
+    protocol:
+      title: "Protocol"
+      type: string
+      description: "Protocol"
+      required: false
+  raw_data:
+    hassh:
+      title: "HASSH"
+      type: "[]object"
+      description: "HASSH"
+      required: false
+    ja3:
+      title: "JA3"
+      type: "[]object"
+      description: "Ja3"
+      required: false
+    scan:
+      title: "Scan"
+      type: "[]scan"
+      description: "Scan"
+      required: false
+    web:
+      title: "Web"
+      type: object
+      description: "Web"
+      required: false
+  data:
+    ip:
+      title: IP Address
+      type: string
+      description: IP Address
+      required: false
+    first_seen:
+      title: GreyNoise First Seen
+      type: date
+      description: First Seen By GreyNoise
+      required: false
+    last_seen:
+      title: GreyNoise Last Seen
+      type: string
+      description: Last Seen By GreyNoise
+      required: false
+    seen:
+      title: GreyNoise Seen
+      type: boolean
+      description: Has this IP been Seen by GreyNoise
+      required: false
+    tags:
+      title: GreyNoise Tags
+      type: "[]string"
+      description: GreyNoise Tags Associated with IP
+      required: false
+    actor:
+      title: GreyNoise Actor
+      type: string
+      description: GreyNoise Actor Associated with IP
+      required: false
+    spoofable:
+      title: GreyNoise Spoofable
+      type: boolean
+      description: IP address may be spoofed
+      required: false
+    classification:
+      title: GreyNoise Classification
+      type: string
+      description: GreyNoise Classification
+      required: false
+    cve:
+      title: GreyNoise CVEs
+      type: "[]string"
+      description: CVEs associated with GreyNoise Tags
+      required: false
+    bot:
+      title: GreyNoise Bot
+      type: boolean
+      description: GreyNoise has identified this as a Bot
+      required: false
+    vpn:
+      title: GreyNoise VPN
+      type: boolean
+      description: GreyNoise has identified this as a VPN
+      required: false
+    vpn_service:
+      title: GreyNoise VPN Service
+      type: string
+      description: Name of VPN Service
+      required: false
+    metadata:
+      title: GreyNoise Metadata
+      type: metadata
+      description: GreyNoise IP Metadata
+      required: false
+    raw_data:
+      title: GreyNoise Raw Data
+      type: raw_data
+      description: GreyNoise IP Raw Data
+      required: false
+connection:
+  credentials:
+    title: GreyNoise API Key
+    description: API key from GreyNoise Account
+    type: credential_secret_key
+    required: true
+    example: abcdefghijklmnopqrstuvwxyz0123456789
+actions:
+  context_lookup:
+    title: Context IP Lookup
+    description: Query a routable IPv4 address in the GreyNoise Context API endpoint
+    input:
+      ip_address:
+        title: IP Address
+        description: Routable IPv4 address to query
+        type: string
+        required: true
+        example: 1.2.3.4
+    output:
+      ip:
+        title: IP Queried
+        type: string
+        description: Value that was Queried
+        required: false
+      first_seen:
+        title: GreyNoise First Seen
+        type: date
+        description: First Seen By GreyNoise
+        required: false
+      last_seen:
+        title: GreyNoise Last Seen
+        type: string
+        description: Last Seen By GreyNoise
+        required: false
+      seen:
+        title: GreyNoise Seen
+        type: boolean
+        description: Has this IP been Seen by GreyNoise
+        required: false
+      tags:
+        title: GreyNoise Tags
+        type: "[]string"
+        description: GreyNoise Tags Associated with IP
+        required: false
+      actor:
+        title: GreyNoise Actor
+        type: string
+        description: GreyNoise Actor Associated with IP
+        required: false
+      spoofable:
+        title: GreyNoise Spoofable
+        type: boolean
+        description: IP address may be spoofed
+        required: false
+      classification:
+        title: GreyNoise Classification
+        type: string
+        description: GreyNoise Classification
+        required: false
+      cve:
+        title: GreyNoise CVEs
+        type: "[]string"
+        description: CVEs associated with GreyNoise Tags
+        required: false
+      bot:
+        title: GreyNoise Bot
+        type: boolean
+        description: GreyNoise has identified this as a Bot
+        required: false
+      vpn:
+        title: GreyNoise VPN
+        type: boolean
+        description: GreyNoise has identified this as a VPN
+        required: false
+      vpn_service:
+        title: GreyNoise VPN Service
+        type: string
+        description: Name of VPN Service
+        required: false
+      metadata:
+        title: GreyNoise Metadata
+        type: metadata
+        description: GreyNoise IP Metadata
+        required: false
+      raw_data:
+        title: GreyNoise Raw Data
+        type: raw_data
+        description: GreyNoise IP Raw Data
+        required: false
+      viz_url:
+        title: GreyNoise Visualizer Link
+        type: string
+        description: Link to GreyNoise Visualizer for IP Details
+        required: false
+  riot_lookup:
+    title: RIOT IP Lookup
+    description: Query a routable IPv4 address in the GreyNoise RIOT API endpoint
+    input:
+      ip_address:
+        title: IP Address
+        description: Routable IPv4 address to query
+        type: string
+        required: true
+        example: 1.2.3.4
+    output:
+      ip:
+        title: IP Queried
+        description: Value that was Queried
+        type: string
+        required: false
+      riot:
+        title: GreyNoise RIOT
+        description: Defines if IP is part of GreyNoise RIOT dataset
+        type: boolean
+        required: false
+      category:
+        title: GreyNoise RIOT Category
+        description: RIOT Category IP is part of
+        type: string
+        required: false
+      name:
+        title: GreyNoise RIOT Vendor Name
+        description: Vendor Name IP belongs to
+        type: string
+        required: false
+      description:
+        title: GreyNoise RIOT Service Description
+        description: Description of the IP service
+        type: string
+        required: false
+      explanation:
+        title: GreyNoise RIOT Explanation
+        description: Explanation for why this is likely benign
+        type: string
+        required: false
+      last_updated:
+        title: GreyNoise RIOT Last Updated
+        description: Last time this IP was updated in RIOT dataset
+        type: date
+        required: false
+      reference:
+        title: GreyNoise RIOT Reference
+        description: Additional reference information
+        type: string
+        required: false
+      viz_url:
+        title: GreyNoise Visualizer Link
+        type: string
+        description: Link to GreyNoise Visualizer for IP Details
+        required: false
+  quick_lookup:
+    title: Quick IP Lookup
+    description: Query a routable IPv4 address in the GreyNoise Quick API endpoint
+    input:
+      ip_address:
+        title: IP Address
+        description: Routable IPv4 address to query
+        type: string
+        required: true
+        example: 1.2.3.4
+    output:
+      ip:
+        title: IP Queried
+        description: Value that was Queried
+        type: string
+        required: false
+      noise:
+        title: GreyNoise Noise
+        description: Defines if IP is Internet Noise
+        type: boolean
+        required: false
+      code:
+        title: API Response Code
+        description: Response Code from Quick API endpoint
+        type: string
+        required: false
+      code_message:
+        title: API Response Code Message
+        description: Response Code Message from Quick API endpoint
+        type: string
+        required: false
+  get_tag_details:
+    title: Get Tag Details
+    description: Get Details of a GreyNoise Tag
+    input:
+      tag_name:
+        title: Tag Name
+        description: Tag Name to get additional Details From
+        type: string
+        required: true
+        example: BingBot
+    output:
+      name:
+        title: "Tag Name"
+        type: string
+        description: "Name of GreyNoise Tag"
+        required: false
+      category:
+        title: "Tag Category"
+        type: string
+        description: "Tag Category"
+        required: false
+      intention:
+        title: "Tag Intention"
+        type: string
+        description: "Tag Intention"
+        required: false
+      description:
+        title: "Tag Description"
+        type: string
+        description: "Description of the Tag"
+        required: false
+      references:
+        title: "References"
+        type: "[]object"
+        description: "References"
+        required: false
+      recommend_block:
+        title: "Recommend Block"
+        type: boolean
+        description: "GreyNoise Recommends Blocking IPs associated with this Tag"
+        required: false
+      cves:
+        title: "CVEs"
+        type: "[]object"
+        description: "CVEs associate with Tag"
+        required: false
+  gnql_query:
+    title: GreyNoise Query
+    description: Perform a GreyNoise GNQL Query
+    input:
+      query:
+        title: GreyNoise Query
+        description: Query in GreyNoise Query Language (GNQL) Syntax
+        type: string
+        required: true
+        example: "last_seen:1d"
+      size:
+        title: Max Size
+        description: Max Number of IPs to Return Data For
+        type: string
+        required: false
+        default: "10"
+        example: "10"
+    output:
+      complete:
+        title: GreyNoise Query
+        type: boolean
+        description: GreyNoise Query Completed
+        required: false
+      count:
+        title: GreyNoise Count
+        type: integer
+        description: Count of IPs In Query
+        required: false
+      data:
+        title: GreyNoise Query Data
+        type: "[]data"
+        description: GreyNoise Query Data
+        required: false
+      message:
+        title: GreyNoise Query Message
+        type: string
+        description: GreyNoise Query Message
+        required: false
+      query:
+        title: GreyNoise Query
+        type: string
+        description: GreyNoise Query Sent to API
+        required: false
+  community_lookup:
+    title: Community IP Lookup
+    description: Query a routable IPv4 address in the GreyNoise Community API
+    input:
+      ip_address:
+        title: IP Address
+        description: Routable IPv4 address to query
+        type: string
+        required: true
+        example: 1.2.3.4
+    output:
+      ip:
+        title: IP Queried
+        description: Value that was Queried
+        type: string
+        required: false
+      noise:
+        title: GreyNoise Noise
+        description: Defines if IP is Internet Noise
+        type: boolean
+        required: false
+      riot:
+        title: GreyNoise RIOT
+        description: Defines if IP is part of GreyNoise RIOT dataset
+        type: boolean
+        required: false
+      classification:
+        title: GreyNoise Classification
+        type: string
+        description: GreyNoise Classification
+        required: false
+      link:
+        title: GreyNoise Visualizer Link
+        type: string
+        description: Link to GreyNoise Visualizer for IP Details
+        required: false
+      last_seen:
+        title: GreyNoise Last Seen
+        type: string
+        description: Last Seen By GreyNoise
+        required: false
+      message:
+        title: GreyNoise Status Message
+        type: string
+        description: GreyNoise Community API Status Message
+        required: false
+      name:
+        title: GreyNoise Name
+        type: string
+        description: GreyNoise Actor or Service Name Associated with IP
+        required: false
