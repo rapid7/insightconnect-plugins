@@ -40,8 +40,6 @@ class IVM_Cloud:
                 )
             if response.text == "":
                 return response.status_code
-            if "data" in response:
-                return response.get("data")
             else:
                 return response.json()
         except HTTPError as httpError:
