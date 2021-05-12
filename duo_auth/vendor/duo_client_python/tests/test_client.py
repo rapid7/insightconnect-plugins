@@ -48,7 +48,7 @@ class TestQueryParameters(unittest.TestCase):
         )
 
     def test_list_string(self):
-        """ A list and a string will both get converted. """
+        """A list and a string will both get converted."""
         self.assert_canon_params(
             {"realname": "First Last", "username": ["root"]}, "realname=First%20Last&username=root"
         )
@@ -276,7 +276,7 @@ class TestSign(unittest.TestCase):
 
 
 class TestRequest(unittest.TestCase):
-    """ Tests for the request created by api_call and json_api_call. """
+    """Tests for the request created by api_call and json_api_call."""
 
     # usful args for testing
     args_in = {"foo": ["bar"], "baz": ["qux", "quux=quuux", "foobar=foobar&barbaz=barbaz"]}

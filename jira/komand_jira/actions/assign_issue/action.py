@@ -15,13 +15,14 @@ class AssignIssue(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        """ Run action"""
+        """Run action"""
         id_ = params[Input.ID]
         issue = self.connection.client.issue(id=id_)
 
         if not issue:
             raise PluginException(
-                cause=f"No issue found with ID: {id_}.", assistance="Please provide a valid issue ID.",
+                cause=f"No issue found with ID: {id_}.",
+                assistance="Please provide a valid issue ID.",
             )
 
         result = self.connection.client.assign_issue(issue=issue, assignee=params[Input.ASSIGNEE])

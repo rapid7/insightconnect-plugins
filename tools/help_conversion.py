@@ -10,7 +10,7 @@ def main():
         os.chdir(os.path.join(base_path, d))
         try:
             output = HelpUpdate.convert()
-        except Exception:   # noqa: B112
+        except Exception:  # noqa: B112
             continue
         if output is not None:
             with open("./help.md", "w") as h:

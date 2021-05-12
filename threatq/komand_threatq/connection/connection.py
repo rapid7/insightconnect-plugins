@@ -14,7 +14,7 @@ class Connection(komand.Connection):
         self.threatq = None
 
     def connect(self, params={}):
-        """ Connect will create a ThreatQ object to use in the plugin"""
+        """Connect will create a ThreatQ object to use in the plugin"""
         self.logger.info("Connect: Connecting..")
 
         self.host = params["host"]
@@ -51,7 +51,9 @@ class Connection(komand.Connection):
         }
         auth_headers = {"content-type": "application/json"}
 
-        auth_response = requests.post(auth_url, data=json.dumps(auth_body), headers=auth_headers, verify=False)  # noqa: B501
+        auth_response = requests.post(
+            auth_url, data=json.dumps(auth_body), headers=auth_headers, verify=False
+        )  # noqa: B501
         auth_response_dict = json.loads(auth_response.text)
         auth_token = auth_response_dict["access_token"]
 

@@ -14,7 +14,7 @@ class BillingLookup(komand.Action):
             output=BillingLookupOutput(),
         )
 
-    def run(self, params={}):   # noqa: MC0001
+    def run(self, params={}):  # noqa: MC0001
         address = params.get("address")
         billing_first_name = params.get("billing_first_name")
         billing_last_name = params.get("billing_last_name")

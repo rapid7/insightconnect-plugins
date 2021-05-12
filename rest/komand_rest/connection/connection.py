@@ -5,7 +5,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException, Connection
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.api = None
@@ -20,14 +19,22 @@ class Connection(insightconnect_plugin_runtime.Connection):
         password = None
         secret_key = None
 
-        self.api = RestAPI(base_url, self.logger, params.get(Input.SSL_VERIFY, True), default_headers)
+        self.api = RestAPI(
+            base_url,
+            self.logger,
+            params.get(Input.SSL_VERIFY, True),
+            default_headers,
+            params.get(Input.FAIL_ON_HTTP_ERRORS, True),
+        )
 
-        if self.authentication_type:
+        if self.authentication_type and self.authentication_type != "No Authentication":
             if self.authentication_type == "Basic Auth" or self.authentication_type == "Digest Auth":
                 username = params.get(Input.BASIC_AUTH_CREDENTIALS).get("username")
                 password = params.get(Input.BASIC_AUTH_CREDENTIALS).get("password")
             else:
-                secret_key = params.get(Input.SECRET).get("secretKey")
+                secret = params.get(Input.SECRET, None)
+                if secret:
+                    secret_key = secret.get("secretKey")
 
             self.api.with_credentials(self.authentication_type, username, password, secret_key)
 

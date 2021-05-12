@@ -71,7 +71,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 + r.text,
             )
 
-        token = ""      # noqa: B105
+        token = ""  # noqa: B105
 
         # Some consoles do not support v2.1 but some actions are not included in 2.0
         # Instead, try getting an auth token from 2.1 first, then rollback to 2.0 if needed
@@ -326,6 +326,51 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return self._call_api(
             "POST", "agents/actions/enable-agent", json={"data": {"shouldReboot": reboot}, "filter": agent_filter}
         )
+
+    def create_query(self, payload: dict) -> dict:
+        return self._call_api("POST", "dv/init-query", json=payload)
+
+    def cancel_running_query(self, query_id: str) -> dict:
+        return self._call_api("POST", "dv/cancel-query", json={"queryId": query_id})
+
+    def get_query_status(self, query_id: str) -> dict:
+        return self._call_api("GET", "dv/query-status", params={"queryId": query_id})
+
+    def get_events(self, params: dict, get_all_results: bool, event_type: str = None) -> dict:
+        endpoint = "dv/events"
+        if event_type:
+            endpoint = endpoint + f"/{event_type}"
+        if get_all_results:
+            return insightconnect_plugin_runtime.helper.clean(self.get_all_paginated_results(endpoint, params=params))
+
+        return insightconnect_plugin_runtime.helper.clean(self._call_api("GET", endpoint, params=params))
+
+    def get_all_paginated_results(
+        self,
+        endpoint: str,
+        limit: int = 1000,
+        json: dict = None,
+        params: dict = None,
+    ) -> dict:
+        first_endpoint_page = f"{endpoint}?limit={limit}"
+        results = self._call_api("GET", first_endpoint_page, json, params)
+        all_result_data = results["data"]
+
+        try:
+            next_cursor = results["pagination"]["nextCursor"]
+        except KeyError:
+            return results
+
+        while next_cursor:
+            next_page = self._call_api("GET", f"{first_endpoint_page}&cursor={next_cursor}")
+            all_result_data += next_page["data"]
+            try:
+                next_cursor = next_page["pagination"]["nextCursor"]
+            except KeyError:
+                next_cursor = False
+
+        results["data"] = all_result_data
+        return results
 
     def _call_api(
         self,

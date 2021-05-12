@@ -63,7 +63,7 @@ class Issue(komand.Trigger):
             r_url += "?%s" % (urllib.parse.urlencode(issue_params))
 
             try:
-                r = requests.get(r_url, headers={"PRIVATE-TOKEN": self.connection.token}, verify=False)     # noqa: B501
+                r = requests.get(r_url, headers={"PRIVATE-TOKEN": self.connection.token}, verify=False)  # noqa: B501
                 if r.ok:
                     issues = r.json()
                     for issue in issues:

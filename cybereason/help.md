@@ -41,6 +41,56 @@ Example input:
 
 ### Actions
 
+#### Quarantine File
+
+This action is used to quarantine a detected malicious file in a secure location or unquarantine a file.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|malop_id|string|None|True|Malop ID related to the file you wish to quarantine or unquarantine|None|22.2787422324806222966|
+|quarantine|boolean|None|True|True to quarantine a file, False to remove file quarantine|None|True|
+|sensor|string|None|True|The unique identifier of the machine you wish to perform the quarantine/unquarantine operation on, this can be an internal IPv4 address, hostname or sensor GUID|None|-1632138521.1198775089551518743|
+
+Example input:
+
+```
+{
+  "malop_id": "22.2787422324806222966",
+  "quarantine": true,
+  "sensor": "-1632138521.1198775089551518743"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|remediate_items_response|remediate_items|True|Remediate items response|
+
+Example output:
+
+```
+{
+  "remediate_items_response": {
+    "malopId": "11.753856273233159896",
+    "remediationId": "ea1a0c09-2491-4b00-b612-c51f8e7eb14a",
+    "start": 1619207122620,
+    "initiatingUser": "user@example.com",
+    "statusLog": [
+      {
+        "machineId": "-626082210.1198775089551518743",
+        "targetId": "-626082210.2561601065548740673",
+        "status": "PENDING",
+        "actionType": "QUARANTINE_FILE",
+        "timestamp": 1619207122996
+      }
+    ]
+  }
+}
+```
+
 #### Isolate Machine
 
 This action is used to isolate a machine associated with the root cause of a Malop, or to remediate a process not involved in a malop.
@@ -218,6 +268,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.0 - Add new action Quarantine File
 * 1.1.0 - Add new action Isolate Machine
 * 1.0.0 - Initial plugin
 

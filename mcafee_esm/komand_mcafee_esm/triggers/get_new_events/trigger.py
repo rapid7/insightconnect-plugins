@@ -16,7 +16,7 @@ class GetNewEvents(komand.Trigger):
             output=GetNewEventsOutput(),
         )
 
-    def run(self, params={}):   # noqa: MC0001
+    def run(self, params={}):  # noqa: MC0001
         """Run the trigger"""
         alert_id = {"name": "AlertID", "types": ["STRING"]}
         esm_session = self.connection.esm_session

@@ -18,7 +18,7 @@ class GetBoardsByMember(komand.Action):
             output=GetBoardsByMemberOutput(),
         )
 
-    def run(self, params={}):   # noqa: MC0001
+    def run(self, params={}):  # noqa: MC0001
         try:
             server = self.connection.server
             api_key = self.connection.api_key
@@ -73,7 +73,7 @@ class GetBoardsByMember(komand.Action):
             url_values = urllib.urlencode(data)
             url = server + "/member/" + params.get("id_or_name") + "/boards?" + url_values
             # api GetBoardsByMember response array board
-            resp = urllib2.urlopen(url)     # noqa: B310
+            resp = urllib2.urlopen(url)  # noqa: B310
             # handle decoding json
             try:
                 result_dic = json.loads(resp.read())

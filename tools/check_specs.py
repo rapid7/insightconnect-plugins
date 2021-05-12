@@ -12,7 +12,7 @@ BASE_DIR = os.path.dirname(os.path.realpath(__file__)) + "/.."
 
 
 def get_plugin_spec(spec_dir):
-    """ get_plugin_spec checks if there is a spec file in the dir and returns the path """
+    """get_plugin_spec checks if there is a spec file in the dir and returns the path"""
     if not os.path.isdir(spec_dir):
         return None
 

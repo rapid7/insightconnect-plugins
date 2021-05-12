@@ -1,6 +1,7 @@
 import komand
 from .schema import AddUserInput, AddUserOutput
 from komand.exceptions import PluginException
+
 # Custom imports below
 from ldap3 import extend
 from ldap3 import MODIFY_REPLACE
@@ -64,9 +65,11 @@ class AddUser(komand.Action):
             conn.raise_exceptions = True
             conn.add(dn, ["person", "user"], parameters)
         except LDAPException as e:
-            raise PluginException(cause="LDAP returned an error message.",
-                                  assistance="Creating new user failed, error returned by LDAP.",
-                                  data=e)
+            raise PluginException(
+                cause="LDAP returned an error message.",
+                assistance="Creating new user failed, error returned by LDAP.",
+                data=e,
+            )
         success = True
 
         if ssl:

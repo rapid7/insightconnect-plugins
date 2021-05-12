@@ -8,6 +8,7 @@ class Component:
 
 
 class Input:
+    INPUT_TYPE = "input_type"
     OFFSET = "offset"
     Q = "q"
     SIZE = "size"
@@ -15,6 +16,7 @@ class Input:
     
 
 class Output:
+    HAS_MORE = "has_more"
     RESULTS = "results"
     TOTAL = "total"
     
@@ -25,36 +27,49 @@ class SearchInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "input_type": {
+      "type": "string",
+      "title": "Input Type",
+      "description": "Type of provided query. Set 'custom' to provide custom query, set 'url' to search information about provided URL, set 'domain' to search information about provided domain",
+      "default": "Custom",
+      "enum": [
+        "URL",
+        "Domain",
+        "Custom"
+      ],
+      "order": 1
+    },
     "offset": {
       "type": "integer",
       "title": "Offset",
       "description": "Offset of first result (for paginating)",
       "default": 0,
-      "order": 3
+      "order": 4
     },
     "q": {
       "type": "string",
       "title": "Query",
-      "description": "The query term (ElasticSearch simple query string), default is *",
-      "default": "domain:example.com",
-      "order": 1
+      "description": "The query term (ElasticSearch simple query string), default is *. If 'Input Type' input is set to URL or domain, provide only the URL or domain",
+      "default": "example.com",
+      "order": 2
     },
     "size": {
       "type": "integer",
       "title": "Size",
       "description": "Number of results returned",
       "default": 100,
-      "order": 2
+      "order": 3
     },
     "sort": {
       "type": "string",
       "title": "Sort",
       "description": "Sorting, specificied via $sort_field:$sort_order",
       "default": "_score",
-      "order": 4
+      "order": 5
     }
   },
   "required": [
+    "input_type",
     "offset",
     "q",
     "size",
@@ -73,6 +88,12 @@ class SearchOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "has_more": {
+      "type": "boolean",
+      "title": "Has More",
+      "description": "Whether or not the source has more entities",
+      "order": 2
+    },
     "results": {
       "type": "array",
       "title": "Results",
@@ -80,7 +101,7 @@ class SearchOutput(komand.Output):
       "items": {
         "$ref": "#/definitions/results"
       },
-      "order": 2
+      "order": 3
     },
     "total": {
       "type": "integer",

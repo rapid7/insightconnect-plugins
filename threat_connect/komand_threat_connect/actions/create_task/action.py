@@ -13,7 +13,7 @@ class CreateTask(komand.Action):
             output=CreateTaskOutput(),
         )
 
-    def run(self, params={}):   # noqa: MC0001
+    def run(self, params={}):  # noqa: MC0001
         tasks = self.connection.threat_connect.tasks()
 
         # name, owner required

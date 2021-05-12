@@ -1,0 +1,30 @@
+name: Rapid7 InsightConnect Release Status
+
+on:
+  push:
+  schedule:
+    - cron: '*/15 * * * *'
+
+jobs:
+  check-status:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install dependencies
+        run: sudo apt-get install -y curl jq
+
+      - name: Check InsightConnect status
+        shell: bash
+        run: |
+          STATUS=$(curl --no-progress-meter https://xj0q6t5s793q.statuspage.io/api/v2/components.json \
+          | jq '.components[] | select((.name | contains("InsightConnect")) and .status!="operational")')
+
+          if [[ -z "$STATUS" ]]; then
+              exit 0
+          else
+              echo "The following services are not operational:"
+              echo $STATUS | jq .name
+              echo "Please try again later."
+              exit 1
+          fi

@@ -33,13 +33,17 @@ class Common:
         try:
             body_object = response.json()
         except ValueError:
-            """ Nothing? We don't care if it fails, that could be normal """
+            """Nothing? We don't care if it fails, that could be normal"""
         # It's possible to have a successful call with no body
         # https://stackoverflow.com/questions/32319845/python-requests-gives-none-response-where-json-data-is-expected
         if body_object is None:
             body_object = {}
 
-        return body_object
+        if isinstance(body_object, dict):
+            return body_object
+        else:
+            # Convert to object
+            return {"object": body_object}
 
 
 def url_path_join(*parts):
@@ -47,13 +51,13 @@ def url_path_join(*parts):
     schemes, netlocs, paths, queries, fragments = zip(*(urlsplit(part.strip()) for part in parts))
     scheme = first(schemes)
     netloc = first(netlocs)
-    path = '/'.join(x.strip('/') for x in paths if x)
+    path = "/".join(x.strip("/") for x in paths if x)
     query = first(queries)
     fragment = first(fragments)
     return urlunsplit((scheme, netloc, path, query, fragment))
 
 
-def first(sequence, default=''):
+def first(sequence, default=""):
     return next((x for x in sequence if x), default)
 
 
@@ -61,26 +65,27 @@ class RestAPI(object):
     CUSTOM_SECRET_INPUT = "CUSTOM_SECRET_INPUT"  # noqa: B105
 
     def __init__(
-            self, url: str, logger: Logger, ssl_verify: bool, default_headers: dict = None
+        self, url: str, logger: Logger, ssl_verify: bool, default_headers: dict = None, fail_on_error: bool = True
     ):
         self.url = url
         self.logger = logger
         self.ssl_verify = ssl_verify
         self.auth = None
         self.default_headers = default_headers
+        self.fail_on_error = fail_on_error
 
     def with_credentials(
-            self, authentication_type: str, username: str = None, password: str = None, secret_key: str = None
+        self, authentication_type: str, username: str = None, password: str = None, secret_key: str = None
     ):
         if authentication_type == "Basic Auth" or authentication_type == "Digest Auth":
             if not username or not password:
                 raise PluginException(
                     cause="Basic Auth authentication selected without providing username and password.",
                     assistance="The authentication type requires a username and password."
-                               " Please complete the connection with a username and password or change the authentication type.",
+                    " Please complete the connection with a username and password or change the authentication type.",
                 )
         else:
-            if not secret_key:
+            if not secret_key and authentication_type != "Custom":
                 raise PluginException(
                     cause="An authentication type was selected that requires a secret key.",
                     assistance="Please complete the connection with a secret key or change the authentication type.",
@@ -104,13 +109,19 @@ class RestAPI(object):
             new_headers = {}
             for key, value in self.default_headers.items():
                 if value == self.CUSTOM_SECRET_INPUT:
+                    if not secret_key:
+                        raise PluginException(
+                            cause="'CUSTOM_SECRET_INPUT' used in authentication header, but no secret provided.",
+                            assistance="When using 'CUSTOM_SECRET_INPUT' as a value in authentication headers the"
+                            " 'secret_key' field is required.",
+                        )
                     new_headers[key] = secret_key
                 else:
                     new_headers[key] = value
             self.default_headers = new_headers
 
     def call_api(
-            self, method: str, path: str, data: str = None, json_data: dict = None, headers: dict = None
+        self, method: str, path: str, data: str = None, json_data: dict = None, headers: dict = None
     ) -> Response:
         try:
             response = requests.request(
@@ -119,8 +130,12 @@ class RestAPI(object):
                 data=data,
                 json=json_data,
                 headers=Common.merge_dicts(self.default_headers, headers or {}),
-                auth=self.auth
+                auth=self.auth,
+                verify=self.ssl_verify,
             )
+
+            if not self.fail_on_error:
+                return response
 
             if response.status_code == 401:
                 raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
@@ -149,10 +164,7 @@ class RestAPI(object):
 class TestRestAPI(RestAPI):
     def __init__(self, rest_api: RestAPI):
         super().__init__(
-            TestRestAPI.get_parsed_url(rest_api.url),
-            rest_api.logger,
-            rest_api.ssl_verify,
-            rest_api.default_headers
+            TestRestAPI.get_parsed_url(rest_api.url), rest_api.logger, rest_api.ssl_verify, rest_api.default_headers
         )
 
     @staticmethod

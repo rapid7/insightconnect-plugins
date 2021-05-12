@@ -37,7 +37,7 @@ class Post(komand.Action):
             )
 
             # Call api and response data
-            resp = urllib2.urlopen(request)     # noqa: B310
+            resp = urllib2.urlopen(request)  # noqa: B310
 
             # handle decoding json
             try:

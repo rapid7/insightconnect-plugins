@@ -8,23 +8,24 @@ import ldap3
 
 
 class QueryGroupMembership(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='query_group_membership',
+            name="query_group_membership",
             description=Component.DESCRIPTION,
             input=QueryGroupMembershipInput(),
-            output=QueryGroupMembershipOutput())
+            output=QueryGroupMembershipOutput(),
+        )
 
     def run(self, params={}):
         base = params.get(Input.SEARCH_BASE)
         include_groups = params.get(Input.INCLUDE_GROUPS)
         expand_nested_groups = params.get(Input.EXPAND_NESTED_GROUPS)
         try:
-            group_dn = self.search_data(
-                base=base,
-                filter_query=f"(sAMAccountName={params.get(Input.GROUP_NAME)})"
-            ).get("entries")[0].get("dn")
+            group_dn = (
+                self.search_data(base=base, filter_query=f"(sAMAccountName={params.get(Input.GROUP_NAME)})")
+                .get("entries")[0]
+                .get("dn")
+            )
             if include_groups and expand_nested_groups:
                 query = f"(memberOf:1.2.840.113556.1.4.1941:={group_dn})"
             elif include_groups:
@@ -33,26 +34,20 @@ class QueryGroupMembership(komand.Action):
                 query = f"(&(objectClass=user)(memberOf:1.2.840.113556.1.4.1941:={group_dn}))"
             else:
                 query = f"(&(objectClass=user)(memberOf:={group_dn}))"
-            entries = self.search_data(
-                base=base,
-                filter_query=query
-            ).get("entries")
-            return {
-                Output.RESULTS: entries,
-                Output.COUNT: len(entries)
-            }
+            entries = self.search_data(base=base, filter_query=query).get("entries")
+            return {Output.RESULTS: entries, Output.COUNT: len(entries)}
         except (AttributeError, IndexError) as e:
             raise PluginException(
                 cause="LDAP returned unexpected response.",
                 assistance="Check that the provided inputs are correct and try again. If the issue persists please "
-                           "contact support.",
-                data=e
+                "contact support.",
+                data=e,
             )
 
     def search_data(self, base: str, filter_query: str) -> dict:
         self.connection.conn.search(
             search_base=base,
             search_filter=filter_query,
-            attributes=[ldap3.ALL_ATTRIBUTES, ldap3.ALL_OPERATIONAL_ATTRIBUTES]
+            attributes=[ldap3.ALL_ATTRIBUTES, ldap3.ALL_OPERATIONAL_ATTRIBUTES],
         )
         return json.loads(self.connection.conn.response_to_json())

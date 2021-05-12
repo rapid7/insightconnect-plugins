@@ -1,7 +1,7 @@
 {
-	"spec": "9e54d6f0e7c5bed278c4e56d1c50cd12",
-	"manifest": "e02aaf06bc85239a3b8140f740f9fc31",
-	"setup": "d59d21ef8862926c9d1851e4578b8bf0",
+	"spec": "64549953462c5f2680a10e35d85f3d40",
+	"manifest": "48f68aaebdd8c2c7a7661a4b0b533507",
+	"setup": "b0314664b0ec2044e322a75ebee6ee53",
 	"schemas": [
 		{
 			"identifier": "activities_list/schema.py",
@@ -36,8 +36,16 @@
 			"hash": "8ae45aa8f56fc5c2dd177f8e5fbac025"
 		},
 		{
+			"identifier": "cancel_running_query/schema.py",
+			"hash": "b6a9db3058cb603e084dbcc9f6461338"
+		},
+		{
 			"identifier": "create_ioc_threat/schema.py",
 			"hash": "d871e78b6173bb3fe5c38a148d8958e4"
+		},
+		{
+			"identifier": "create_query/schema.py",
+			"hash": "840a72a7b27dae0d743bf821591a42ed"
 		},
 		{
 			"identifier": "disable_agent/schema.py",
@@ -50,6 +58,18 @@
 		{
 			"identifier": "get_agent_details/schema.py",
 			"hash": "4f59cab298d3fef23dfe89b7c78ecbbd"
+		},
+		{
+			"identifier": "get_events/schema.py",
+			"hash": "85383ee54c4f4caff6388c9ad46a99cb"
+		},
+		{
+			"identifier": "get_events_by_type/schema.py",
+			"hash": "f942122b93f47e4d0f2064f7fc1a7e2e"
+		},
+		{
+			"identifier": "get_query_status/schema.py",
+			"hash": "fb8645d5c03c5399bdeae1faf718c60f"
 		},
 		{
 			"identifier": "get_threat_summary/schema.py",

@@ -34,7 +34,7 @@ class TopRemediations(komand.Action):
         if (params.get(Input.SCOPE) != "none") and (len(params.get(Input.SCOPE_IDS)) > 0):
             report_payload["scope"] = {params.get(Input.SCOPE): params.get(Input.SCOPE_IDS)}
 
-        self.logger.info(f"Generating top remediations for InsightVM and scope")
+        self.logger.info("Generating top remediations for InsightVM and scope")
         report_contents = util.adhoc_sql_report(self.connection, self.logger, report_payload)
 
         # Structure returned remediations
@@ -179,7 +179,7 @@ class TopRemediations(komand.Action):
     @staticmethod
     def vulnerabilities_query(limit):
         return (
-            f"WITH remediation_vulnerabilities AS ( "   # noqa: B608
+            f"WITH remediation_vulnerabilities AS ( "  # noqa: B608
             f"SELECT DISTINCT solution_id, vulnerability_id "
             f"FROM dim_asset_vulnerability_solution "
             f")"
