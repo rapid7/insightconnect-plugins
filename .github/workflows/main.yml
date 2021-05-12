@@ -19,7 +19,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip setuptools
         echo ${#PACKAGE_CLOUD_TOKEN}
-        curl -s https://$PACKAGE_CLOUD_TOKEN@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh | bash
+        curl -s https://${PACKAGE_CLOUD_TOKEN}@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh | bash
         python -m pip install --user icon-integrations-ci --no-warn-script-location
         export ICON_INTEGRATIONS_RELEASES_SLACK_WEBHOOK=${{ secrets.ICON_INTEGRATIONS_RELEASES_SLACK_WEBHOOK }}
         /home/runner/.local/bin/icon-ci pr
