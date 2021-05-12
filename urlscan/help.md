@@ -134,11 +134,13 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |scan_id|string|True|UUID of the scan to query later|
+|was_scan_skipped|boolean|True|If true scan was skipped, false if scan was executed|
 
 Example output:
 
 ```
 {
+  "was_scan_skipped": false,
   "scan_id": "557a7923-c597-4a84-982c-665ece8fa6ed"}
 }
 ```
@@ -821,6 +823,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.3.0 - Add logger when submitted domain is in blacklist for Submit URL for Scan action
 * 2.2.0 - Add new input Input Type in Search action
 * 2.1.8 - Correct spelling in help.md
 * 2.1.7 - Add missing outputs to Get Scan Results action
@@ -842,4 +845,3 @@ _This plugin does not contain any troubleshooting information._
 
 * [Urlscan.io](https://urlscan.io/)
 * [Urlscan API](https://urlscan.io/about-api/)
-
