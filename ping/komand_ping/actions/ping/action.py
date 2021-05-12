@@ -27,13 +27,13 @@ class Ping(komand.Action):
 
         if resolve_hostname:
             response = subprocess.Popen(
-                ["ping -c " + count + " " + host], stdout=subprocess.PIPE, shell=True
-            )  # noqa: B602
+                ["ping -c " + count + " " + host], stdout=subprocess.PIPE, shell=True  # noqa: B602
+            )
             (output, err) = response.communicate()
         else:
             response = subprocess.Popen(
-                ["ping -n -c " + count + " " + host], stdout=subprocess.PIPE, shell=True
-            )  # noqa: B602
+                ["ping -n -c " + count + " " + host], stdout=subprocess.PIPE, shell=True  # noqa: B602
+            )
             (output, err) = response.communicate()
 
         output = output.decode("utf-8")
