@@ -19,5 +19,4 @@ RUN python setup.py build && python setup.py install
 
 USER nobody
 
-
 ENTRYPOINT ["/usr/local/bin/komand_base64"]
