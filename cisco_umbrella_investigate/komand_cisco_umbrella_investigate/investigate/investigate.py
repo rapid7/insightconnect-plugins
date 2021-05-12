@@ -231,7 +231,7 @@ class Investigate(object):
         resp_json = self.get_parse(uri)
 
         # parse out the domain names
-        return [val for d in resp_json for key, val in d.iteritems() if key == "name"]
+        return [val for d in resp_json for key, val in iter(d.items()) if key == "name"]
 
     def domain_whois(self, domain):
         """Gets whois information for a domain"""
