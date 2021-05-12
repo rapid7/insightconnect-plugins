@@ -28,8 +28,9 @@ class ThreadCrowdAPI:
         return self._call_api("GET", f"{self.url}/file/report/", params={"resource": search_hash})
 
     def vote_malicious(self, vote, entity):
-        return self._call_api("GET", "https://www.threatcrowd.org/vote.php", params={"vote": vote, "value": entity},
-                              full_response=True)
+        return self._call_api(
+            "GET", "https://www.threatcrowd.org/vote.php", params={"vote": vote, "value": entity}, full_response=True
+        )
 
     def _call_api(self, method, url, params=None, json_data=None, full_response: bool = False):
         response = {"text": ""}
@@ -37,12 +38,7 @@ class ThreadCrowdAPI:
         try:
             i = 0
             while i < 10:
-                response = requests.request(
-                    method,
-                    url,
-                    json=json_data,
-                    params=params
-                )
+                response = requests.request(method, url, json=json_data, params=params)
                 i += 1
                 if 200 <= response.status_code < 300 and "Too many connections" in response.text:
                     self.logger.info(f"Too many connections to ThreatCrowd. Waiting {seconds_to_wait} seconds.")
@@ -62,8 +58,10 @@ class ThreadCrowdAPI:
 
             if 200 <= response.status_code < 300:
                 if "Too many connections" in response.text:
-                    raise PluginException(cause="ThreatCrowd server return 'too many connections' error. ",
-                                          assistance="Please wait and try again.")
+                    raise PluginException(
+                        cause="ThreatCrowd server return 'too many connections' error. ",
+                        assistance="Please wait and try again.",
+                    )
                 if full_response:
                     return response
 
