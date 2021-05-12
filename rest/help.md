@@ -449,6 +449,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 5.0.1 - Update to make 'No Authentication' the default connection type
 * 5.0.0 - Add ability for user to choose if the plugin should fail on standard HTTP error codes (4xx-5xx) | Add 'No Authentication' as another authentication type
 * 4.0.5 - Fix issue where if an API returned a list it would crash the plugin
 * 4.0.4 - Fix issue with SSL Verify
