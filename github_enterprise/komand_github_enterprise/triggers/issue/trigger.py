@@ -109,8 +109,8 @@ class Issue(komand.Trigger):
         try:
             api_call = self.connection.api_prefix + "/user"
             response = requests.get(
-                api_call, auth=(self.connection.username, self.connection.secret), verify=False
-            )  # noqa: B501
+                api_call, auth=(self.connection.username, self.connection.secret), verify=False  # noqa: B501
+            )
             if response.status_code == 200:
                 return {"status": "Success"}
         except requests.exceptions.RequestException as e:
