@@ -6,7 +6,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from ipaddress import ip_address, IPv4Address, IPv6Address
 
 
-def format_body(hostnames: str, ips: str, vulns: str):
+def format_body(hostnames: [], ips: []):
     asset_body = ""
     for hostname in hostnames:
         asset_body = asset_body + "asset.name STARTS WITH '" + hostname + "' || "
@@ -17,15 +17,7 @@ def format_body(hostnames: str, ips: str, vulns: str):
             asset_body = asset_body + "asset.ipv6 = " + ip + " || "
     if asset_body[len(asset_body) - 2] == "|":
         asset_body = asset_body[: len(asset_body) - 4]
-    vuln_body = ""
-    if vulns != "":
-        for vuln in vulns:
-            vuln_body = vuln_body + "vulnerability.categories IN ['" + vuln + "'] || "
-        if vuln_body[len(vuln_body) - 2] == "|":
-            vuln_body = vuln_body[: len(vuln_body) - 4]
-        body_object = {"asset": asset_body, "vulnerability": vuln_body}
-    else:
-        body_object = {"asset": asset_body}
+    body_object = {"asset": asset_body}
     return body_object
 
 
@@ -46,7 +38,7 @@ class StartScan(insightconnect_plugin_runtime.Action):
                 assistance="Please enter asset id, hostname, or ip.",
             )
         if ips or hostnames:
-            body = format_body(hostnames, ips, "")
+            body = format_body(hostnames, ips)
             resources = self.connection.ivm_cloud_api.call_api("assets", "POST", params, body)
             extra_ids = resources.get("data")
             for extra_id in extra_ids:

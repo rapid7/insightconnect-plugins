@@ -1138,15 +1138,15 @@ actions:
         example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
       asset_criteria:
         title: Asset Criteria
-        description: Object of filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames
-        type: object
-        example: "{'ip': '2001:db8:1:1:1:1:1:1', 'name': 'example'}"
+        description: Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames
+        type: string
+        example: "asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'"
         required: false
       vuln_criteria:
         title: Vulnerability Criteria
-        description: List of vulnerability criteria to filter by
-        type: "[]string"
-        example: [ "rapid7.com" ]
+        description: Vulnerability criteria to filter by
+        type: string
+        example: "vulnerability.categories IN ['example']"
         required: false
     output:
       assets:

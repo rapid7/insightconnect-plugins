@@ -25,9 +25,9 @@ class AssetSearchInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "asset_criteria": {
-      "type": "object",
+      "type": "string",
       "title": "Asset Criteria",
-      "description": "Object of filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames",
+      "description": "Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames",
       "order": 3
     },
     "size": {
@@ -44,12 +44,9 @@ class AssetSearchInput(insightconnect_plugin_runtime.Input):
       "order": 2
     },
     "vuln_criteria": {
-      "type": "array",
+      "type": "string",
       "title": "Vulnerability Criteria",
-      "description": "List of vulnerability criteria to filter by",
-      "items": {
-        "type": "string"
-      },
+      "description": "Vulnerability criteria to filter by",
       "order": 4
     }
   }

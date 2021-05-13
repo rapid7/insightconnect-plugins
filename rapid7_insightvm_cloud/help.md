@@ -131,21 +131,19 @@ This action is used to search for assets using filtered asset search.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_criteria|object|None|False|Object of filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames|None|{'ip': '2001:db8:1:1:1:1:1:1', 'name': 'example'}|
+|asset_criteria|string|None|False|Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames|None|asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'|
 |size|number|0|False|The number of assets to retrieve. If blank or '0' all assets that match the search will be returned|None|100|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
-|vuln_criteria|[]string|None|False|List of vulnerability criteria to filter by|None|["rapid7.com"]|
+|vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|vulnerability.categories IN ['example']|
 
 Example input:
 
 ```
 {
-  "asset_criteria": "{'ip': '2001:db8:1:1:1:1:1:1', 'name': 'example'}",
+  "asset_criteria": "asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'",
   "size": 100,
   "sort_criteria": "{'risk-score': 'asc', 'criticality-tag': 'desc'}",
-  "vuln_criteria": [
-    "rapid7.com"
-  ]
+  "vuln_criteria": "vulnerability.categories IN ['example']"
 }
 ```
 

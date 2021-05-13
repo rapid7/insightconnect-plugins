@@ -24,9 +24,7 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
 
         parameters.append(("size", size))
         if asset_crit or vuln_crit:
-            hostnames = asset_crit.get("hostnames")
-            ips = asset_crit.get("ips")
-            body = format_body(hostnames, ips, vuln_crit)
+            body = {"asset": asset_crit, "vulnerability": vuln_crit}
             resources = self.connection.ivm_cloud_api.call_api("assets", "POST", params, body)
         else:
             resources = self.connection.ivm_cloud_api.call_api("assets", "POST", parameters)
