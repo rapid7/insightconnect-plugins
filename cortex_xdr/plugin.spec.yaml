@@ -1,0 +1,173 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnent, insightidr]
+name: cortex_xdr
+title: Cortex XDR
+description: cortex xdr
+version: 1.0.0
+vendor: rapid7
+support: rapid7
+status: []
+tags: [cortex, xdr]
+
+connection:
+  fqdn:
+    title: FQDN
+    description: Fully qualified domain name
+    type: string
+    required: true
+    example: www.fqdn.com
+  api_key_id:
+    title: API key ID
+    description: XDR auth ID
+    type: credential_secret_key
+    required: true
+    example: '1'
+  api_key:
+    title: API key
+    description: XDR auth key
+    type: credential_secret_key
+    required: true
+    example: 'rapid7.fqdn.paloaltonetworks.com'
+
+types:
+  incident:
+    incident_id:
+      title: Incident ID
+      description: Incident ID
+      type: string
+    incident_name:
+      title: Incident Name
+      description: Incident Name
+      type: string
+    creation_time:
+      title: Creation Time
+      description: Creation Time
+      type: integer
+    modification_time:
+      title: Modification Time
+      description: Modification Time
+      type: integer
+    detection_time:
+      title: Detection Time
+      description: Detection Time
+      type: integer
+    status:
+      title: Status
+      description: Status
+      type: string
+    severity:
+      title: Severity
+      description: Severity
+      type: string
+    description:
+      title: Description
+      description: Description
+      type: string
+    assigned_user_mail:
+      title: Assigned User Mail
+      description: Assigned User Mail
+      type: string
+    assigned_user_pretty_name:
+      title: Assigned User Pretty Name
+      description: Assigned User Pretty Name
+      type: string
+    alert_count:
+      title: Alert Count
+      description: Alert Count
+      type: integer
+    low_severity_alert_count:
+      title: Low Severity Alert Count
+      description: Low Severity Alert Count
+      type: integer
+    med_severity_alert_count:
+      title: Med Severity Alert Count
+      description: Med Severity Alert Count
+      type: integer
+    high_severity_alert_count:
+      title: High Severity Alert Count
+      description: High Severity Alert Count
+      type: integer
+    user_count:
+      title: User Count
+      description: User Count
+      type: integer
+    host_count:
+      title: Host Count
+      description: Host Count
+      type: integer
+    notes:
+      title: Notes
+      description: Notes
+      type: string
+    resolve_comment:
+      title: Resolve Comment
+      description: Resolve Comment
+      type: string
+    manual_severity:
+      title: Manual Severity
+      description: Manual Severity
+      type: string
+    manual_description:
+      title: Manual Description
+      description: Manual Description
+      type: string
+    xdr_url:
+      title: XDR URL
+      description: XDR URL
+      type: string
+    starred:
+      title: Starred
+      description: Starred
+      type: boolean
+    hosts:
+      title: Hosts
+      description: Hosts
+      type: "[]string"
+    users:
+      title: Users
+      description: Users
+      type: "[]string"
+    incident_sources:
+      title: Incident Sources
+      description: Incident Sources
+      type: "[]string"
+    rule_based_score:
+      title: Rule Based Score
+      description: Rule Based Score
+      type: integer
+    manual_score:
+      title: Manual Score
+      description: Manual Score
+      type: integer
+
+
+triggers:
+  get_incidents:
+    title: Get Incidents
+    description: Get Incidents
+    input:
+      start_time:
+        title: Start Time
+        description: Earliest incident time in epoch ms
+        type: integer
+        required: false
+      time_field:
+        title: Time Field
+        description: Which time field to filter and sort on
+        type: string
+        required: true
+        enum:
+          - "modification_time"
+          - "creation_time"
+        example: "creation_time"
+    output:
+      incident:
+        title: Incident
+        description: Incident
+        type: incident
+        required: false
+
+
+
+    
