@@ -12,15 +12,16 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.ivm_cloud_api = None
         self.api_url = None
         self.session = None
+        self.region = None
 
     def connect(self, params):
         self.logger.info("Connect: Connecting...")
-        self.api_url = "https://" + params.get(Input.REGION) + ".api.insight.rapid7.com/vm/v4/integration/"
+        self.region = params.get(Input.REGION)
+        self.api_url = "https://" + self.region + ".api.insight.rapid7.com/vm/v4/integration/"
         self.session = Session()
         self.ivm_cloud_api = IVM_Cloud(params.get(Input.CREDENTIALS).get("secretKey"), self.logger, self.api_url)
 
     def test(self):
-        regions = ["us", "eu", "ca", "au", "ap"]
-        for region in regions:
-            self.api_url = "https://" + region + ".api.insight.rapid7.com/validate"
-            self.ivm_cloud_api.test_api(self.api_url)
+        region = self.region
+        self.api_url = "https://" + region + ".api.insight.rapid7.com/validate"
+        self.ivm_cloud_api.test_api(self.api_url)
