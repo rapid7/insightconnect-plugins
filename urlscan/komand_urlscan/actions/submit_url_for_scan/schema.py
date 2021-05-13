@@ -14,6 +14,7 @@ class Input:
 
 class Output:
     SCAN_ID = "scan_id"
+    WAS_SCAN_SKIPPED = "was_scan_skipped"
     
 
 class SubmitUrlForScanInput(komand.Input):
@@ -58,10 +59,17 @@ class SubmitUrlForScanOutput(komand.Output):
       "title": "Scan ID",
       "description": "UUID of the scan to query later",
       "order": 1
+    },
+    "was_scan_skipped": {
+      "type": "boolean",
+      "title": "Was Scan Skipped",
+      "description": "If true scan was skipped, false if scan was executed",
+      "order": 2
     }
   },
   "required": [
-    "scan_id"
+    "scan_id",
+    "was_scan_skipped"
   ]
 }
     """)

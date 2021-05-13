@@ -4,10 +4,10 @@ import os
 import json
 from sys import argv
 
-Name = "urlscan.io"
+Name = "CheckPhish"
 Vendor = "rapid7"
-Version = "2.3.0"
-Description = "Analyze URLs for malicious indicators using the URLScan website scanner"
+Version = "1.0.0"
+Description = "CheckPhish is a free scanner to detect phishing & fraudulent sites in real-time"
 
 
 def main():
@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
-    from komand_urlscan import connection, actions, triggers
+    import insightconnect_plugin_runtime
+    from icon_checkphish import connection, actions, triggers
 
-    class ICONUrlscan(komand.Plugin):
+    class ICONCheckphish(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -34,15 +34,11 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
-            self.add_action(actions.GetScanResults())
-
-            self.add_action(actions.Search())
-
-            self.add_action(actions.SubmitUrlForScan())
+            self.add_action(actions.ScanUrl())
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONUrlscan())
+    cli = insightconnect_plugin_runtime.CLI(ICONCheckphish())
     cli.run()
 
 

@@ -25,7 +25,7 @@ class Search(komand.Action):
         if not limit or limit == 0:
             limit = 1000
 
-        if not include_category or include_category == None:
+        if not include_category or include_category is None:
             include_category = False
 
         nr = re.search(r"[+-]?\d+", start)

@@ -1,0 +1,103 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: checkphish
+title: CheckPhish
+description: CheckPhish is a free scanner to detect phishing & fraudulent sites in real-time
+version: 1.0.0
+vendor: rapid7
+support: community
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/checkphish
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://checkphish.ai/
+tags: 
+- url
+- analysis
+- checkphish
+- phishing
+- intel
+hub_tags:
+  use_cases: [threat_detection_and_response, data_enrichment]
+  keywords: [url, phishing, intel]
+  features: []
+
+types:
+  scan_url:
+    job_id:
+      title: Job ID
+      description: Job ID
+      type: string
+      required: false
+    status:
+      title: Status
+      description: Status
+      type: string
+      required: false
+    url:
+      title: URL
+      description: URL
+      type: string
+      required: false
+    url_sha256:
+      title: URL SHA256
+      description: URL SHA256
+      type: string
+      required: false
+    disposition:
+      title: Disposition
+      description: Disposition
+      type: string
+      required: false
+    brand:
+      title: Brand
+      description: Brand
+      type: string
+      required: false
+    insights:
+      title: Insights
+      description: Insights URL
+      type: string
+      required: false
+    resolved:
+      title: Resolved
+      description: Resolved
+      type: boolean
+      required: false
+    screenshot_path:
+      title: Screenshot Path
+      description: Screenshot Path
+      type: string
+      required: false
+    error:
+      title: Error
+      description: Error
+      type: boolean
+      required: false
+    
+connection:
+  api_key:
+    title: API Key
+    description: CheckPhish API Key
+    type: credential_secret_key
+    required: true
+    example: 1A2B3CC4D5E67F8901G2HI345J6K7L89
+
+actions:
+  scan_url:
+    title: Scan URL
+    description: Scan a URL and retrieve scan results
+    input:
+      url:
+        title: URL
+        description: URL you wish to scan and get results for
+        type: string
+        required: true
+        example: https://example.com
+    output:
+      scan_results:
+        title: Scan Results
+        description: Scan results
+        type: scan_url
+        required: true
