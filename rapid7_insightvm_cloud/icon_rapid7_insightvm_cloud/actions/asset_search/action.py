@@ -3,7 +3,6 @@ from .schema import AssetSearchInput, AssetSearchOutput, Input, Output, Componen
 
 
 # Custom imports below
-from ..start_scan.action import format_body
 
 
 class AssetSearch(insightconnect_plugin_runtime.Action):
@@ -15,13 +14,15 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         asset_crit = params.get(Input.ASSET_CRITERIA)
         vuln_crit = params.get(Input.VULN_CRITERIA)
-        size = params.get(Input.SIZE, 0)
+        size = params.get(Input.SIZE, 200)
         sort_criteria = params.get(Input.SORT_CRITERIA, dict())
         parameters = list()
 
         for key, value in sort_criteria.items():
             parameters.append(("sort", f"{key},{value}"))
 
+        if size > 500:
+            size = 500
         parameters.append(("size", size))
         if asset_crit or vuln_crit:
             body = {"asset": asset_crit, "vulnerability": vuln_crit}
