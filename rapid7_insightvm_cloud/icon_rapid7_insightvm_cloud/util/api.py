@@ -34,8 +34,8 @@ class IVM_Cloud:
             )
             if response.status_code not in [200, 201, 202]:
                 raise PluginException(
-                    cause=f"Failed to get a valid response from InsightVM at endpoint {api_url}",
-                    assistance=f"Response was {response.request.body}",
+                    cause=f"Failed to get a valid response from InsightVM at endpoint '{api_url}'",
+                    assistance=f"Response was {response.request.body}.",
                     data=response.status_code,
                 )
             if response.text == "":
@@ -44,8 +44,8 @@ class IVM_Cloud:
                 return response.json()
         except HTTPError as httpError:
             raise PluginException(
-                cause=f"Failed to get a valid response from InsightVM at endpoint {api_url}",
-                assistance=f"Response was {httpError.response.text}",
+                cause=f"Failed to get a valid response from InsightVM at endpoint '{api_url}'",
+                assistance=f"Response was {httpError.response.text}.",
                 data=httpError,
             )
 
@@ -67,7 +67,7 @@ class IVM_Cloud:
             return insightconnect_plugin_runtime.helper.clean(response.json())
         except HTTPError as httpError:
             raise PluginException(
-                cause=f"Failed to get a valid response from InsightVM at endpoint {api_url}",
-                assistance=f"Response was {httpError.response.text}",
+                cause=f"Failed to get a valid response from InsightVM at endpoint '{api_url}'",
+                assistance=f"Response was {httpError.response.text}.",
                 data=httpError,
             )

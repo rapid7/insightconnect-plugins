@@ -24,7 +24,7 @@ class GetAsset(insightconnect_plugin_runtime.Action):
         except requests.RequestException as e:
             self.logger.error(e)
             raise PluginException(
-                cause="Failed to get a valid response from InsightVM with given asset id.",
+                cause=f"Failed to get a valid response from InsightVM with given asset ID '{asset_id}'.",
                 assistance=f"Response was {response.request.body}",
                 data=response.status_code,
             )

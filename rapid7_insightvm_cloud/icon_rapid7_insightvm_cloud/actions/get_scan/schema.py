@@ -85,7 +85,7 @@ class GetScanOutput(insightconnect_plugin_runtime.Output):
     "status": {
       "type": "string",
       "title": "Status",
-      "description": "Current status of the retreived scan",
+      "description": "Current status of the retrieved scan",
       "order": 4
     }
   }

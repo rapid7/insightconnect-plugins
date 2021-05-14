@@ -1062,7 +1062,7 @@ actions:
         required: false
       hostnames:
         title: Hostnames
-        description: TList of hostnames to scan
+        description: List of hostnames to scan
         type: "[]string"
         example: ["rapid7.com"]
         required: false
@@ -1102,7 +1102,7 @@ actions:
         example: "testing scan action"
         required: false
       status:
-        description: Current status of the retreived scan
+        description: Current status of the retrieved scan
         title: Status
         type: string
         example: "Stopped"

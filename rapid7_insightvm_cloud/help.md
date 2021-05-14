@@ -8,7 +8,7 @@ Search through assets in order to start scans.
 
 # Requirements
 
-Requires an API Key from the product
+Requires an API Key from the InsightVM
 
 # Documentation
 
@@ -77,7 +77,7 @@ This action is used to start an InsightVM scan of previously scanned devices.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |asset_ids|[]string|None|False|IDs of the assets to scan|None|["abc978-5678-abc-a5a94a1234b8-asset"]|
-|hostnames|[]string|None|False|TList of hostnames to scan|None|["rapid7.com"]|
+|hostnames|[]string|None|False|List of hostnames to scan|None|["rapid7.com"]|
 |ips|[]string|None|False|List of IPv4 or IPv6 addresses to scan|None|["2001:db8:1:1:1:1:1:1"]|
 |name|string|None|True|The name of the scan|None|test cloud scan|
 
@@ -115,7 +115,7 @@ Example output:
       "id": "436a59e4-b203-4743-89a9-5b76294f20f4",
       "name": "testing scan action",
       "asset_ids": [
-        "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset..."
+        "cdc978de-4178-a1d9-d5a94a114b87-example..."
       ]
     }
   ],
@@ -164,8 +164,8 @@ Example output:
           "credential_assessments": [],
           "critical_vulnerabilities": 12,
           "exploits": 5,
-          "id": "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-107",
-          "ip": "10.4.22.144",
+          "id": "cdc978de-4178-a1d9-d5a94a114b87-example",
+          "ip": "2001:db8:1:1:1:1:1:1",
           "last_assessed_for_vulnerabilities": "2020-06-25T15:19:51.543Z",
           "last_scan_end": "2020-10-26T22:35:53.590Z",
           "last_scan_start": "2020-10-26T22:35:53.564Z",
@@ -199,8 +199,8 @@ Example output:
           "credential_assessments": [],
           "critical_vulnerabilities": 12,
           "exploits": 5,
-          "id": "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-107",
-          "ip": "10.4.22.144",
+          "id": "cdc978de-4178-a1d9-d5a94a114b87-example,
+          "ip": "2001:db8:1:1:1:1:1:1",
           "last_assessed_for_vulnerabilities": "2020-06-25T15:19:51.543Z",
           "last_scan_end": "2020-10-26T22:35:53.590Z",
           "last_scan_start": "2020-10-26T22:35:53.564Z",
@@ -271,9 +271,9 @@ Example output:
         ],
         "critical_vulnerabilities": 1,
         "exploits": 2,
-        "host_name": "fortigate-vm02.vuln.lax.rapid7.com",
-        "id": "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-13",
-        "ip": "10.4.31.141",
+        "host_name": "example.rapid7.com",
+        "id": "cdc978de-4178-a1d9-d5a94a114b87-example",
+        "ip": "2001:db8:1:1:1:1:1:1",
         "last_assessed_for_vulnerabilities": "2021-04-26T08:04:28.536Z",
         "last_scan_end": "2021-04-26T08:04:28.536Z",
         "last_scan_start": "2021-04-26T08:00:56.006Z",
@@ -351,7 +351,7 @@ Example input:
 |name|string|False|User-driven scan name for the scan|
 |scan_id|string|False|ID of the scan|
 |started|string|False|When the scan was started|
-|status|string|False|Current status of the retreived scan|
+|status|string|False|Current status of the retrieved scan|
 
 Example output:
 

@@ -36,7 +36,7 @@ class StartScanInput(insightconnect_plugin_runtime.Input):
     "hostnames": {
       "type": "array",
       "title": "Hostnames",
-      "description": "TList of hostnames to scan",
+      "description": "List of hostnames to scan",
       "items": {
         "type": "string"
       },
