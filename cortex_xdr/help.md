@@ -49,7 +49,6 @@ This trigger is used to get Incidents.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|start_time|integer|None|False|Earliest incident time in epoch ms|None|None|
 |time_field|string|None|True|Which time field to filter and sort on|['modification_time', 'creation_time']|creation_time|
 
 Example input:

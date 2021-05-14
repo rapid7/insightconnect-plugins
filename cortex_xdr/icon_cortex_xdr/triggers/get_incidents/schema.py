@@ -9,7 +9,6 @@ class Component:
 
 class Input:
     
-    START_TIME = "start_time"
     TIME_FIELD = "time_field"
     
 
@@ -24,12 +23,6 @@ class GetIncidentsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "start_time": {
-      "type": "integer",
-      "title": "Start Time",
-      "description": "Earliest incident time in epoch ms",
-      "order": 1
-    },
     "time_field": {
       "type": "string",
       "title": "Time Field",
@@ -38,7 +31,7 @@ class GetIncidentsInput(insightconnect_plugin_runtime.Input):
         "modification_time",
         "creation_time"
       ],
-      "order": 2
+      "order": 1
     }
   },
   "required": [

@@ -147,11 +147,6 @@ triggers:
     title: Get Incidents
     description: Get Incidents
     input:
-      start_time:
-        title: Start Time
-        description: Earliest incident time in epoch ms
-        type: integer
-        required: false
       time_field:
         title: Time Field
         description: Which time field to filter and sort on
