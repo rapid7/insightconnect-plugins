@@ -22,7 +22,7 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
             parameters.append(("sort", f"{key},{value}"))
 
         if size > 500:
-            self.connection.logger.info(f"'{size}' too large, set to max size of 500.")
+            self.logger.info(f"'{size}' too large, set to max size of 500.")
             size = 500
         parameters.append(("size", size))
         if asset_crit or vuln_crit:
@@ -31,6 +31,6 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
         else:
             resources = self.connection.ivm_cloud_api.call_api("assets", "POST", parameters)
 
-        assets = resources.get("data")
+        assets = resources[1].get("data")
 
         return {Output.ASSETS: assets}

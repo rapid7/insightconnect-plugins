@@ -8,7 +8,7 @@ Search through assets in order to start scans.
 
 # Requirements
 
-Requires an API Key from the InsightVM
+Requires an InsightVM API Key
 
 # Documentation
 

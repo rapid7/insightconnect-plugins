@@ -6,6 +6,7 @@ from logging import Logger
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 from requests.exceptions import HTTPError
+from typing import Optional
 
 
 class IVM_Cloud:
@@ -14,7 +15,7 @@ class IVM_Cloud:
         self.token = token
         self.base_url = url
 
-    def call_api(self, path: str, request_type: str, params: dict = None, body: dict = None) -> dict:
+    def call_api(self, path: str, request_type: str, params: dict = None, body: dict = None) -> (int, Optional[dict]):
         if params is None:
             params = {}
         if body is None:
@@ -38,9 +39,9 @@ class IVM_Cloud:
                     data=response.status_code,
                 )
             if response.text == "":
-                return {"status_code": response.status_code}
+                return response.status_code, None
             else:
-                return response.json()
+                return response.status_code, response.json()
         except HTTPError as httpError:
             raise PluginException(
                 cause=f"Failed to get a valid response from InsightVM at endpoint '{api_url}'",
