@@ -14,14 +14,13 @@ class IVM_Cloud:
         self.token = token
         self.base_url = url
 
-    def call_api(self, path: str, request_type: str, params: dict = None, body: dict = None):
+    def call_api(self, path: str, request_type: str, params: dict = None, body: dict = None) -> dict:
         if params is None:
             params = {}
         if body is None:
             body = {}
 
         api_url = self.base_url + path
-
         headers = {"x-api-key": self.token, "content-type": "application/json"}
 
         try:
@@ -39,7 +38,7 @@ class IVM_Cloud:
                     data=response.status_code,
                 )
             if response.text == "":
-                return response.status_code
+                return {"status_code": response.status_code}
             else:
                 return response.json()
         except HTTPError as httpError:
@@ -49,14 +48,8 @@ class IVM_Cloud:
                 data=httpError,
             )
 
-    def test_api(
-        self,
-        api_url: str,
-        params: dict = None,
-    ) -> dict:
-        if params is None:
-            params = {}
-
+    def test_api(self, api_url: str) -> dict:
+        params = {}
         headers = {"x-api-key": self.token}
 
         try:

@@ -1,6 +1,5 @@
 import insightconnect_plugin_runtime
 
-from icon_rapid7_insightvm_cloud.util.error_handling import ERRORS
 from .schema import StopScanInput, StopScanOutput, Input, Output
 
 # Custom imports below
@@ -19,7 +18,19 @@ class StopScan(insightconnect_plugin_runtime.Action):
         scan_id = params.get(Input.ID)
         url = f"scan/{scan_id}/stop"
         response = self.connection.ivm_cloud_api.call_api(url, "POST")
-        if response == 202:
-            return {Output.SUCCESS: True}
+        if response.get("status_code") == 202:
+            response = self.connection.ivm_cloud_api.call_api("scan/" + scan_id, "GET")
+            if response.get("status") == "Stopped":
+                return {Output.SUCCESS: True}
+            else:
+                return {
+                    Output.SUCCESS: False,
+                    Output.STATUS_CODE: 400,
+                    Output.MESSAGE: f"Failed to stop scan with ID '{scan_id}'. Status of scan is {response.get('status')}",
+                }
         else:
-            return {Output.SUCCESS: False, Output.STATUS_CODE: response, Output.MESSAGE: ERRORS.get(response)}
+            return {
+                Output.SUCCESS: False,
+                Output.STATUS_CODE: response.get("status_code"),
+                Output.MESSAGE: f"Failed to stop scan with ID '{scan_id}'",
+            }

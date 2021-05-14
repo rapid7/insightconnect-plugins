@@ -50,4 +50,3 @@ def _format_body(hostnames: [str], ips: [str]) -> object:
         asset_body = asset_body[: len(asset_body) - 4]
     body_object = {"asset": asset_body}
     return body_object
-
