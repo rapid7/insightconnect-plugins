@@ -1,6 +1,6 @@
 # Description
 
-Protect your Microsoft Office 365 and G-Suite environments with next-generation email security that uses the most advanced AI detection techniques to stop targeted phishing attacks
+Protect your Microsoft Office 365 and G-Suite environments with next-generation email security from Abnormal Security, that uses the most advanced AI detection techniques to stop targeted phishing attacks.
 
 # Key Features
 
