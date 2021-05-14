@@ -1,5 +1,5 @@
 import komand
-from .schema import LatestDomainsInput, LatestDomainsOutput, Input
+from .schema import LatestDomainsInput, LatestDomainsOutput, Input, Output
 
 # Custom imports below
 from komand.exceptions import PluginException
@@ -16,9 +16,9 @@ class LatestDomains(komand.Action):
         )
 
     def run(self, params={}):
-        IP = params.get(Input.IP)
+        ip_address = params.get(Input.IP)
         try:
-            IP_Validate(IP)
+            IP_Validate(ip_address)
         except Exception as e:
             raise PluginException(
                 cause="Invalid IP provided by user.",
@@ -27,10 +27,7 @@ class LatestDomains(komand.Action):
             )
 
         try:
-            latest_domains = self.connection.investigate.latest_domains(IP)
+            latest_domains = self.connection.investigate.latest_domains(ip_address)
         except Exception as e:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
-        return {"domains": latest_domains}
-
-    def test(self):
-        return {"domains": []}
+        return {Output.DOMAINS: latest_domains}

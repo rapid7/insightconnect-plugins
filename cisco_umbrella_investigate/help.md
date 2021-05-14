@@ -781,7 +781,13 @@ Example input:
 Example output:
 
 ```
-
+{
+  "domains": [
+    "example1.com",
+    "example2.com",
+    "example3.com"
+  ]
+}
 ```
 
 #### Sample Artifacts
@@ -972,6 +978,13 @@ Example input:
 Example output:
 
 ```
+{
+  "expression": "example.com",
+  "totalResults": 0,
+  "moreDataAvailable": false,
+  "limit": 1000,
+  "matches": []
+}
 
 ```
 
@@ -1425,6 +1438,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.1.2 - Replace python2 code to python3 in investigate.py file
 * 3.1.1 - Return information from API when a PluginException has occurred to improve error messaging
 * 3.1.0 - Add Passive DNS and Timeline actions
 * 3.0.0 - Add action input and output examples to documentation | Set `title` in action input and output sections in schema | Update domain name in `investigate.py` | Improve error handling | Change action input names to lowercase in action Latest Malicious Domains by IP, DNS RR History for IP Address and Samples by Domain

@@ -56,8 +56,8 @@ class Connection(komand.Connection):
 
         try:
             response = requests.get(
-                request_url, headers=self.header_dict, data=json_payload, verify=False
-            )  # noqa: B501
+                request_url, headers=self.header_dict, data=json_payload, verify=False  # noqa: B501
+            )
             response.raise_for_status()
             if response.status_code != 200:
                 raise ConnectionTestException(f"{response.text} (HTTP status: {response.status_code})")

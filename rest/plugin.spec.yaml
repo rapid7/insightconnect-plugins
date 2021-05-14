@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rest
 title: HTTP Requests
 description: The HTTP Requests plugin to make it easy to integrate with RESTful services
-version: 5.0.0
+version: 5.0.1
 vendor: rapid7
 support: community
 status: []
@@ -45,7 +45,7 @@ connection:
       - Pendo
       - Custom
       - No Authentication
-    default: Basic Auth
+    default: No Authentication
     example: Basic Auth
   secret:
     title: Secret Key
