@@ -3,7 +3,6 @@ from .schema import GetScanInput, GetScanOutput, Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
-import requests
 
 
 class GetScan(insightconnect_plugin_runtime.Action):
@@ -18,13 +17,12 @@ class GetScan(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         scan_id = params.get(Input.SCAN_ID)
 
-        try:
-            response = self.connection.ivm_cloud_api.call_api("scan/" + scan_id, "GET")
-            return response[1]
-        except requests.RequestException as e:
-            self.logger.error(e)
+        response = self.connection.ivm_cloud_api.call_api("scan/" + scan_id, "GET")
+        if response[1].get("finished") is None:
             raise PluginException(
-                cause=f"Failed to get a valid response from InsightVM with given asset ID '{scan_id}'.",
-                assistance=f"Response was {response[1].request.body}",
-                data=response[1].status_code,
+                cause=f"Failed to get a valid response from InsightVM with given scan ID '{scan_id}'.",
+                assistance="Please try a different scan ID.",
+                data=400,
             )
+        else:
+            return response[1]
