@@ -15,7 +15,7 @@ support: rapid7
 status: []
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [siem, rapid7]
+  keywords: [idr, siem, rapid7]
   features: []
 
 types:
