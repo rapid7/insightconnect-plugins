@@ -13,5 +13,4 @@ class GetCaseDetails(insightconnect_plugin_runtime.Action):
                 output=GetCaseDetailsOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        return {Output.CASE_DETAILS: self.connection.api.get_case_details(params.get(Input.CASE_ID))}

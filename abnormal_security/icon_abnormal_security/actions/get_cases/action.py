@@ -13,5 +13,8 @@ class GetCases(insightconnect_plugin_runtime.Action):
                 output=GetCasesOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        return {
+            Output.CASES: self.connection.api.get_cases(
+                from_date=params.get(Input.FROM_DATE, None), to_date=params.get(Input.TO_DATE, None)
+            )
+        }
