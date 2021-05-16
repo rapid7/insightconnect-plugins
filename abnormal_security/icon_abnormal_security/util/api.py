@@ -43,7 +43,7 @@ class AbnormalSecurityAPI:
 
             if response.status_code == 401:
                 try:
-                    error_message = response.json()['message']
+                    error_message = response.json()["message"]
                 except Exception:
                     raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
                 raise PluginException(
