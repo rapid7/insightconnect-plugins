@@ -36,6 +36,8 @@ def main():
             )
             self.add_trigger(triggers.GetIncidents())
 
+            self.add_action(actions.GetEndpointDetailsByHostname())
+
 
     """Run plugin"""
     cli = insightconnect_plugin_runtime.CLI(ICONCortexXdr())

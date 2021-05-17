@@ -10,137 +10,86 @@ support: rapid7
 status: []
 tags: [cortex, xdr]
 
+types:
+  endpoint:
+    agent_id:
+      title: "Agent ID"
+      type: string
+      description: "Agent iD"
+      required: false
+    agent_status:
+      title: "Agent Status"
+      type: string
+      description: "Agent status"
+      required: false
+    host_name:
+      title: "Hostname"
+      type: string
+      description: "Hostname"
+      required: false
+    agent_type:
+      title: "Agent Type"
+      type: string
+      description: "Agent type"
+      required: false
+    ip:
+      title: "Ip"
+      type: "[]string"
+      description: "Ip"
+      required: false
+    last_seen:
+      title: "Last Seen"
+      type: integer
+      description: "Last seen"
+      required: false
+
+
 connection:
   fqdn:
     title: FQDN
     description: Fully qualified domain name
     type: string
     required: true
-    example: www.fqdn.com
+    example: https://api-example.xdr.us.paloaltonetworks.com/
   api_key_id:
-    title: API key ID
-    description: XDR auth ID
-    type: credential_secret_key
+    title: API Key ID
+    description: The API Key ID shown in the API Keys table in settings. e.g. 1, 2, 3
+    type: int
     required: true
-    example: '1'
+    example: 1
   api_key:
-    title: API key
-    description: XDR auth key
+    title: API Key
+    description: The API Key that is generated when creating a new key
     type: credential_secret_key
     required: true
-    example: 'rapid7.fqdn.paloaltonetworks.com'
-
-types:
-  incident:
-    incident_id:
-      title: Incident ID
-      description: Incident ID
-      type: string
-    incident_name:
-      title: Incident Name
-      description: Incident Name
-      type: string
-    creation_time:
-      title: Creation Time
-      description: Creation Time
-      type: integer
-    modification_time:
-      title: Modification Time
-      description: Modification Time
-      type: integer
-    detection_time:
-      title: Detection Time
-      description: Detection Time
-      type: integer
-    status:
-      title: Status
-      description: Status
-      type: string
-    severity:
-      title: Severity
-      description: Severity
-      type: string
-    description:
-      title: Description
-      description: Description
-      type: string
-    assigned_user_mail:
-      title: Assigned User Mail
-      description: Assigned User Mail
-      type: string
-    assigned_user_pretty_name:
-      title: Assigned User Pretty Name
-      description: Assigned User Pretty Name
-      type: string
-    alert_count:
-      title: Alert Count
-      description: Alert Count
-      type: integer
-    low_severity_alert_count:
-      title: Low Severity Alert Count
-      description: Low Severity Alert Count
-      type: integer
-    med_severity_alert_count:
-      title: Med Severity Alert Count
-      description: Med Severity Alert Count
-      type: integer
-    high_severity_alert_count:
-      title: High Severity Alert Count
-      description: High Severity Alert Count
-      type: integer
-    user_count:
-      title: User Count
-      description: User Count
-      type: integer
-    host_count:
-      title: Host Count
-      description: Host Count
-      type: integer
-    notes:
-      title: Notes
-      description: Notes
-      type: string
-    resolve_comment:
-      title: Resolve Comment
-      description: Resolve Comment
-      type: string
-    manual_severity:
-      title: Manual Severity
-      description: Manual Severity
-      type: string
-    manual_description:
-      title: Manual Description
-      description: Manual Description
-      type: string
-    xdr_url:
-      title: XDR URL
-      description: XDR URL
-      type: string
-    starred:
-      title: Starred
-      description: Starred
-      type: boolean
-    hosts:
-      title: Hosts
-      description: Hosts
-      type: "[]string"
-    users:
-      title: Users
-      description: Users
-      type: "[]string"
-    incident_sources:
-      title: Incident Sources
-      description: Incident Sources
-      type: "[]string"
-    rule_based_score:
-      title: Rule Based Score
-      description: Rule Based Score
-      type: integer
-    manual_score:
-      title: Manual Score
-      description: Manual Score
-      type: integer
-
+    example: '1234123412341234asdfasdfasdfasdfasdf1234123412341234123412341234asdfasdfasdfasdfasdf123412341234123412341234asdfasdfasdfasdfasdf'
+  security_level:
+    title: Security Level
+    description: The Security Level of the key provided. This can be found in the API Key settings table in the Cortex XDR settings
+    type: string
+    required: true
+    example: Standard
+    default: Standard
+    enum:
+      - Advanced
+      - Standard
+actions:
+  get_endpoint_details_by_hostname:
+    title: Get Endpoint Details
+    description: Get information about an endpoint
+    input:
+      hostname:
+        title: Hostname
+        description: The hostname to get information about
+        type: string
+        required: true
+        example: example-host
+    output:
+      endpoints:
+        title: Endpoints
+        description: Any endpoints that match the given hostname
+        type: "[]endpoint"
+        required: true
 
 triggers:
   get_incidents:
@@ -160,9 +109,9 @@ triggers:
       incident:
         title: Incident
         description: Incident
-        type: incident
+        type: object
         required: false
 
 
 
-    
+

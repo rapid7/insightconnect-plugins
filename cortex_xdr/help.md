@@ -19,17 +19,19 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|XDR auth key|None|rapid7.fqdn.paloaltonetworks.com|
-|api_key_id|credential_secret_key|None|True|XDR auth ID|None|1|
-|fqdn|string|None|True|Fully qualified domain name|None|www.fqdn.com|
+|api_key|credential_secret_key|None|True|The API Key that is generated when creating a new key|None|1234123412341234asdfasdfasdfasdfasdf1234123412341234123412341234asdfasdfasdfasdfasdf123412341234123412341234asdfasdfasdfasdfasdf|
+|api_key_id|int|None|True|The API Key ID shown in the API Keys table in settings. e.g. 1, 2, 3|None|1|
+|fqdn|string|None|True|Fully qualified domain name|None|https://api-example.xdr.us.paloaltonetworks.com/|
+|security_level|string|Standard|True|The Security Level of the key provided. This can be found in the API Key settings table in the Cortex XDR settings|['Advanced', 'Standard']|Standard|
 
 Example input:
 
 ```
 {
-  "api_key": "rapid7.fqdn.paloaltonetworks.com",
-  "api_key_id": "1",
-  "fqdn": "www.fqdn.com"
+  "api_key": "1234123412341234asdfasdfasdfasdfasdf1234123412341234123412341234asdfasdfasdfasdfasdf123412341234123412341234asdfasdfasdfasdfasdf",
+  "api_key_id": 1,
+  "fqdn": "https://api-example.xdr.us.paloaltonetworks.com/",
+  "security_level": "Standard"
 }
 ```
 
@@ -37,7 +39,34 @@ Example input:
 
 ### Actions
 
-_This plugin does not contain any actions._
+#### Get Endpoint Details
+
+This action is used to get information about an endpoint.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|hostname|string|None|True|The hostname to get information about|None|example-host|
+
+Example input:
+
+```
+{
+  "hostname": "example-host"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|endpoints|[]endpoint|True|Any endpoints that match the given hostname|
+
+Example output:
+
+```
+```
 
 ### Triggers
 
@@ -63,7 +92,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|incident|incident|False|Incident|
+|incident|object|False|Incident|
 
 Example output:
 

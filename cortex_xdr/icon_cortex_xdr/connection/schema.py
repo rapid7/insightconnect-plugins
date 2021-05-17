@@ -7,6 +7,7 @@ class Input:
     API_KEY = "api_key"
     API_KEY_ID = "api_key_id"
     FQDN = "fqdn"
+    SECURITY_LEVEL = "security_level"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -17,14 +18,14 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "properties": {
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
-      "title": "API key",
-      "description": "XDR auth key",
+      "title": "API Key",
+      "description": "The API Key that is generated when creating a new key",
       "order": 3
     },
     "api_key_id": {
-      "$ref": "#/definitions/credential_secret_key",
-      "title": "API key ID",
-      "description": "XDR auth ID",
+      "type": "integer",
+      "title": "API Key ID",
+      "description": "The API Key ID shown in the API Keys table in settings. e.g. 1, 2, 3",
       "order": 2
     },
     "fqdn": {
@@ -32,12 +33,24 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "FQDN",
       "description": "Fully qualified domain name",
       "order": 1
+    },
+    "security_level": {
+      "type": "string",
+      "title": "Security Level",
+      "description": "The Security Level of the key provided. This can be found in the API Key settings table in the Cortex XDR settings",
+      "default": "Standard",
+      "enum": [
+        "Advanced",
+        "Standard"
+      ],
+      "order": 4
     }
   },
   "required": [
     "api_key",
     "api_key_id",
-    "fqdn"
+    "fqdn",
+    "security_level"
   ],
   "definitions": {
     "credential_secret_key": {
