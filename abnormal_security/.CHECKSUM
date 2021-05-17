@@ -1,0 +1,19 @@
+{
+	"spec": "881792c13c6a63fc18a91d3a87ac5a9f",
+	"manifest": "4a66eb3261eb12bdd41cffa157efaeef",
+	"setup": "789ca230ec01920bad70854c03e376fd",
+	"schemas": [
+		{
+			"identifier": "get_threat_details/schema.py",
+			"hash": "579d250ac9821395cabaabb5d5298ee5"
+		},
+		{
+			"identifier": "get_threats/schema.py",
+			"hash": "12a0cb1ad94ee399831f0340ce49835e"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "2a5295ff218578eaa2894ffd027ddc21"
+		}
+	]
+}
