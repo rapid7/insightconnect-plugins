@@ -132,12 +132,12 @@ types:
       title: Version
       type: integer
       required: false
-    vulnerabilityExceptionId:
+    vulnerability_exception_id:
       description: Vulnerability exception ID
       title: Vulnerability Exception ID
       type: integer
       required: false
-  hostName:
+  host_name:
     name:
       description: Name
       title: Name
@@ -189,19 +189,19 @@ types:
       title: Product
       type: string
       required: false
-    swEdition:
+    sw_edition:
       description: Characterizes how the product is tailored to a particular market
         or class of end users
       title: Software Edition
       type: string
       required: false
-    targetHW:
+    target_HW:
       description: Characterize the instruction set architecture on which the product
         operates
       title: Target Hardware
       type: string
       required: false
-    targetSW:
+    target_SW:
       description: Characterizes the software computing environment within which the
         product operates
       title: Target Software
@@ -234,7 +234,7 @@ types:
       title: Version
       type: string
       required: false
-  osFingerprint:
+  os_fingerprint:
     architecture:
       description: The architecture of the operating system
       title: Architecture
@@ -292,7 +292,7 @@ types:
       title: Version
       type: string
       required: false
-  userGroup:
+  user_group:
     id:
       description: Identifier of the user group
       title: ID
@@ -304,7 +304,7 @@ types:
       type: string
       required: false
   user:
-    fullName:
+    full_name:
       description: Full name of the user account
       title: Full Name
       type: string
@@ -320,7 +320,7 @@ types:
       type: string
       required: false
   page:
-    linkType:
+    link_type:
       description: Type of link used to traverse or detect the page
       title: Link Type
       type: string
@@ -335,7 +335,7 @@ types:
       title: Response
       type: integer
       required: false
-  webApplication:
+  web_application:
     id:
       description: Identifier of the web application
       title: ID
@@ -351,7 +351,7 @@ types:
       title: Root
       type: string
       required: false
-    virtualHost:
+    virtual_host:
       description: Virtual host of the web application
       title: Virtual Host
       type: string
@@ -397,10 +397,10 @@ types:
       title: Protocol
       type: string
       required: false
-    userGroups:
+    user_groups:
       description: User groups
       title: User Groups
-      type: '[]userGroup'
+      type: '[]user_group'
       required: false
     users:
       description: Users
@@ -417,10 +417,10 @@ types:
       title: Version
       type: string
       required: false
-    webApplications:
+    web_applications:
       description: Web applications found on the service
       title: Web Applications
-      type: '[]webApplication'
+      type: '[]web_application'
       required: false
   vulnerabilities:
     critical:
@@ -434,7 +434,7 @@ types:
       title: Exploits
       type: integer
       required: false
-    malwareKits:
+    malware_kits:
       description: Number of distinct malware kits that vulnerabilities on the asset
         are susceptible to
       title: Malware Kits
@@ -507,12 +507,12 @@ types:
       title: Addresses
       type: '[]address'
       required: false
-    assessedForPolicies:
+    assessed_for_policies:
       description: Whether the asset has been assessed for policies at least once
       title: Assessed for Policies
       type: boolean
       required: false
-    assessedForVulnerabilities:
+    assessed_for_vulnerabilities:
       description: Whether the asset has been assessed for vulnerabilities at least
         once
       title: Assessed for Vulnerabilities
@@ -538,15 +538,15 @@ types:
       title: History
       type: '[]history'
       required: false
-    hostName:
+    host_name:
       description: Primary host name (local or FQDN) of the asset
       title: Hostname
       type: string
       required: false
-    hostNames:
+    host_names:
       description: All hostnames or aliases discovered on the asset
       title: Hostnames
-      type: '[]hostName'
+      type: '[]host_name'
       required: false
     id:
       description: Identifier of the asset
@@ -579,17 +579,17 @@ types:
       title: OS
       type: string
       required: false
-    osFingerprint:
+    os_fingerprint:
       description: Details of the operating system of the asset
       title: OS Fingerprint
-      type: osFingerprint
+      type: os_fingerprint
       required: false
-    rawRiskScore:
+    raw_risk_score:
       description: Base risk score of the asset
       title: Raw Risk Score
       type: float
       required: false
-    riskScore:
+    risk_score:
       description: Risk score (with criticality adjustments) of the asset
       title: Risk Score
       type: float
@@ -609,10 +609,10 @@ types:
       title: Type
       type: string
       required: false
-    userGroups:
+    user_groups:
       description: User group accounts enumerated on the asset
       title: User Groups
-      type: '[]userGroup'
+      type: '[]user_group'
       required: false
     users:
       description: User accounts enumerated on the asset
@@ -634,11 +634,11 @@ types:
       description: Vulnerability description raw text
       type: string
   pci:
-    adjustedCVSSScore:
+    adjusted_CVSS_score:
       title: Adjusted CVSS score
       description: PCI adjusted CVSS score
       type: integer
-    adjustedSeverityScore:
+    adjusted_severity_score:
       title: Adjusted severity score
       description: PCI adjusted severity score
       type: integer
@@ -646,7 +646,7 @@ types:
       title: Fail
       description: Whether this vulnerability results in a PCI assessment failure
       type: boolean
-    specialNotes:
+    special_notes:
       title: Special Notes
       description: PCI special notes
       type: string
@@ -655,11 +655,11 @@ types:
       description: PCI status
       type: string
   cvss_v2:
-    accessComplexity:
+    access_complexity:
       title: Access Complexity
       description: CVSSv2 access complexity metric
       type: string
-    accessVector:
+    access_vector:
       title: Access Vector
       description: CVSSv2 access vector metric
       type: string
@@ -667,24 +667,24 @@ types:
       title: Authentication
       description: CVSSv2 authentication metric
       type: string
-    availabilityImpact:
+    availability_impact:
       title: Availability Impact
       description: CVSSv2 availability impact metric
       type: string
-    confidentialityImpact:
+    confidentiality_impact:
       title: Confidentiality Impact
       description: CVSSv2 confidentiality impact metric
       type: string
-    exploitScore:
+    exploit_score:
       title: Exploit Score
       description: CVSSv2 combined exploit metric score (Access Complexity/Access
         Vector/Authentication)
       type: float
-    impactScore:
+    impact_score:
       title: Impact Score
       description: CVSSv2 combined impact metric score (Confidentiality/Integrity/Availability)
       type: float
-    integrityImpact:
+    integrity_impact:
       title: Integrity Impact
       description: CVSSv2 integrity impact metric
       type: string
@@ -697,36 +697,36 @@ types:
       description: CVSSv2 combined vector string
       type: string
   cvss_v3:
-    attackComplexity:
+    attack_complexity:
       title: Attack Complexity
       description: CVSSv3 attack complexity metric
       type: string
-    attackVector:
+    attack_vector:
       title: Attack Vector
       description: CVSSv3 attack vector metric
       type: string
-    availabilityImpact:
+    availability_impact:
       title: Availability Impact
       description: CVSSv3 availability impact metric
       type: string
-    confidentialityImpact:
+    confidentiality_impact:
       title: Confidentiality Impact
       description: CVSSv3 confidentiality impact metric
       type: string
-    exploitScore:
+    exploit_score:
       title: Exploit Score
       description: CVSSv3 combined exploit metric score (Attack Complexity/Attack
         Vector/Privilege Required/Scope/User Interaction)
       type: float
-    impactScore:
+    impact_score:
       title: Impact Score
       description: CVSSv3 combined impact metric score (Confidentiality/Integrity/Availability)
       type: float
-    integrityImpact:
+    integrity_impact:
       title: Integrity Impact
       description: CVSSv3 integrity impact metric
       type: string
-    privilegeRequired:
+    privilege_required:
       title: Privilege Required
       description: CVSSv3 privilege required metric
       type: string
@@ -738,7 +738,7 @@ types:
       title: Score
       description: CVSSv3 score
       type: float
-    userInteraction:
+    user_interaction:
       title: User Interaction
       description: CVSSv3 user interaction metric
       type: string
@@ -759,77 +759,6 @@ types:
       title: V3
       description: CVSSv3 details
       type: cvss_v3
-  vulnerability:
-    added:
-      title: Added
-      description: Date that the vulnerability was added to InsightVM
-      type: date
-    exploits:
-      title: Exploits
-      description: Exploit count
-      type: integer
-    description:
-      title: Description
-      description: Vulnerability description
-      type: vulnerability_description
-    links:
-      title: Links
-      description: List of hypermedia links to corresponding resources
-      type: '[]link'
-    title:
-      title: Title
-      description: Vulnerability title
-      type: string
-    malwareKits:
-      title: Malware Kits
-      description: Malware kit count
-      type: integer
-    denialOfService:
-      title: Denial of Service
-      description: Whether the vulnerability is a denial of service vulnerability
-      type: boolean
-    modified:
-      title: Modified
-      description: Date the vulnerability was last modified in InsightVM
-      type: date
-    id:
-      title: ID
-      description: Vulnerability ID
-      type: string
-    severityScore:
-      title: Severity Score
-      description: Vulnerability severity score
-      type: integer
-    pci:
-      title: PCI
-      description: Vulnerability PCI details
-      type: pci
-    published:
-      title: Published
-      description: Date the vulnerability was published
-      type: date
-    severity:
-      title: Severity
-      description: Vulnerability severity string (Moderate/Severe/Critical)
-      type: string
-    riskScore:
-      title: Risk Score
-      description: Vulnerability risk score using the configured risk scoring strategy
-        (RealRisk by default)
-      type: float
-    cvss:
-      title: CVSS
-      description: Vulnerability CVSS details
-      type: cvss
-    categories:
-      title: Categories
-      description: List of vulnerabilities categories with which this vulnerability
-        is affiliated
-      type: '[]string'
-    cves:
-      title: CVEs
-      description: List of CVE identifiers associated with this vulnerability
-      type: '[]string'
   creds:
     port:
       description: The port that is used
@@ -869,12 +798,12 @@ types:
       type: string
       required: false
   search_asset:
-    assessedForPolicies:
+    assessed_for_policies:
       description: Whether the asset has been assessed for policies at least once
       title: Assessed for Policies
       type: boolean
       required: false
-    assessedForVulnerabilities:
+    assessed_for_vulnerabilities:
       description: Whether the asset has been assessed for vulnerabilities at least
         once
       title: Assessed for Vulnerabilities
@@ -975,7 +904,7 @@ types:
       title: OS Vendor
       type: string
       required: false
-    riskScore:
+    risk_score:
       description: Risk score (with criticality adjustments) of the asset
       title: Risk Score
       type: float
@@ -1006,13 +935,13 @@ types:
       type: '[]identifiers'
       required: false
     new:
-      description: unknown
-      title: New
+      description: Vulnerabilities that are the new between current and comparison time for the asset
+      title: New Vulnerabilities
       type: '[]string'
       required: false
     remediated:
-      description: unknown
-      title: Remediates
+      description: Vulnerabilities that were remediated in the latest version at current time for the asset
+      title: Remediated Vulnerabilities
       type: '[]string'
       required: false
 
@@ -1031,6 +960,8 @@ connection:
     required: true
     enum:
       - us
+      - us2
+      - us3
       - eu
       - ca
       - au

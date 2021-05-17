@@ -19,7 +19,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_secret_key|None|True|API key from account|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|region|string|None|True|the region in which the plugin will work|['us', 'eu', 'ca', 'au', 'ap']|us|
+|region|string|None|True|the region in which the plugin will work|['us', 'us2', 'us3', 'eu', 'ca', 'au', 'ap']|us|
 
 Example input:
 

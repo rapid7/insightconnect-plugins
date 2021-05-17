@@ -141,13 +141,13 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "search_asset",
       "properties": {
-        "assessedForPolicies": {
+        "assessed_for_policies": {
           "type": "boolean",
           "title": "Assessed for Policies",
           "description": "Whether the asset has been assessed for policies at least once",
           "order": 1
         },
-        "assessedForVulnerabilities": {
+        "assessed_for_vulnerabilities": {
           "type": "boolean",
           "title": "Assessed for Vulnerabilities",
           "description": "Whether the asset has been assessed for vulnerabilities at least once",
@@ -230,8 +230,8 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
         },
         "new": {
           "type": "array",
-          "title": "New",
-          "description": "unknown",
+          "title": "New Vulnerabilities",
+          "description": "Vulnerabilities that are the new between current and comparison time for the asset",
           "items": {
             "type": "string"
           },
@@ -281,14 +281,14 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
         },
         "remediated": {
           "type": "array",
-          "title": "Remediates",
-          "description": "unknown",
+          "title": "Remediated Vulnerabilities",
+          "description": "Vulnerabilities that were remediated in the latest version at current time for the asset",
           "items": {
             "type": "string"
           },
           "order": 29
         },
-        "riskScore": {
+        "risk_score": {
           "type": "number",
           "title": "Risk Score",
           "description": "Risk score (with criticality adjustments) of the asset",

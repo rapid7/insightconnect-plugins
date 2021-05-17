@@ -86,13 +86,13 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           },
           "order": 1
         },
-        "assessedForPolicies": {
+        "assessed_for_policies": {
           "type": "boolean",
           "title": "Assessed for Policies",
           "description": "Whether the asset has been assessed for policies at least once",
           "order": 2
         },
-        "assessedForVulnerabilities": {
+        "assessed_for_vulnerabilities": {
           "type": "boolean",
           "title": "Assessed for Vulnerabilities",
           "description": "Whether the asset has been assessed for vulnerabilities at least once",
@@ -134,18 +134,18 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           },
           "order": 7
         },
-        "hostName": {
+        "host_name": {
           "type": "string",
           "title": "Hostname",
           "description": "Primary host name (local or FQDN) of the asset",
           "order": 8
         },
-        "hostNames": {
+        "host_names": {
           "type": "array",
           "title": "Hostnames",
           "description": "All hostnames or aliases discovered on the asset",
           "items": {
-            "$ref": "#/definitions/hostName"
+            "$ref": "#/definitions/host_name"
           },
           "order": 9
         },
@@ -191,19 +191,19 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           "description": "Full description of the operating system of the asset",
           "order": 15
         },
-        "osFingerprint": {
-          "$ref": "#/definitions/osFingerprint",
+        "os_fingerprint": {
+          "$ref": "#/definitions/os_fingerprint",
           "title": "OS Fingerprint",
           "description": "Details of the operating system of the asset",
           "order": 16
         },
-        "rawRiskScore": {
+        "raw_risk_score": {
           "type": "number",
           "title": "Raw Risk Score",
           "description": "Base risk score of the asset",
           "order": 17
         },
-        "riskScore": {
+        "risk_score": {
           "type": "number",
           "title": "Risk Score",
           "description": "Risk score (with criticality adjustments) of the asset",
@@ -233,12 +233,12 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           "description": "Type of asset e.g. unknown, guest, hypervisor, physical, mobile",
           "order": 21
         },
-        "userGroups": {
+        "user_groups": {
           "type": "array",
           "title": "User Groups",
           "description": "User group accounts enumerated on the asset",
           "items": {
-            "$ref": "#/definitions/userGroup"
+            "$ref": "#/definitions/user_group"
           },
           "order": 22
         },
@@ -329,19 +329,19 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
               "description": "Most common and recognizable title or name of the product",
               "order": 5
             },
-            "swEdition": {
+            "sw_edition": {
               "type": "string",
               "title": "Software Edition",
               "description": "Characterizes how the product is tailored to a particular market or class of end users",
               "order": 6
             },
-            "targetHW": {
+            "target_HW": {
               "type": "string",
               "title": "Target Hardware",
               "description": "Characterize the instruction set architecture on which the product operates",
               "order": 7
             },
-            "targetSW": {
+            "target_SW": {
               "type": "string",
               "title": "Target Software",
               "description": "Characterizes the software computing environment within which the product operates",
@@ -462,7 +462,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
               "description": "Version",
               "order": 6
             },
-            "vulnerabilityExceptionId": {
+            "vulnerability_exception_id": {
               "type": "integer",
               "title": "Vulnerability Exception ID",
               "description": "Vulnerability exception ID",
@@ -470,9 +470,9 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "hostName": {
+        "host_name": {
           "type": "object",
-          "title": "hostName",
+          "title": "host_name",
           "properties": {
             "name": {
               "type": "string",
@@ -524,9 +524,9 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "osFingerprint": {
+        "os_fingerprint": {
           "type": "object",
-          "title": "osFingerprint",
+          "title": "os_fingerprint",
           "properties": {
             "architecture": {
               "type": "string",
@@ -651,19 +651,19 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
                   "description": "Most common and recognizable title or name of the product",
                   "order": 5
                 },
-                "swEdition": {
+                "sw_edition": {
                   "type": "string",
                   "title": "Software Edition",
                   "description": "Characterizes how the product is tailored to a particular market or class of end users",
                   "order": 6
                 },
-                "targetHW": {
+                "target_HW": {
                   "type": "string",
                   "title": "Target Hardware",
                   "description": "Characterize the instruction set architecture on which the product operates",
                   "order": 7
                 },
-                "targetSW": {
+                "target_SW": {
                   "type": "string",
                   "title": "Target Software",
                   "description": "Characterizes the software computing environment within which the product operates",
@@ -707,7 +707,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "page",
           "properties": {
-            "linkType": {
+            "link_type": {
               "type": "string",
               "title": "Link Type",
               "description": "Type of link used to traverse or detect the page",
@@ -788,12 +788,12 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
               "description": "Protocol of the service",
               "order": 8
             },
-            "userGroups": {
+            "user_groups": {
               "type": "array",
               "title": "User Groups",
               "description": "User groups",
               "items": {
-                "$ref": "#/definitions/userGroup"
+                "$ref": "#/definitions/user_group"
               },
               "order": 9
             },
@@ -818,12 +818,12 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
               "description": "Version of the service",
               "order": 12
             },
-            "webApplications": {
+            "web_applications": {
               "type": "array",
               "title": "Web Applications",
               "description": "Web applications found on the service",
               "items": {
-                "$ref": "#/definitions/webApplication"
+                "$ref": "#/definitions/web_application"
               },
               "order": 13
             }
@@ -893,7 +893,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
               "type": "object",
               "title": "page",
               "properties": {
-                "linkType": {
+                "link_type": {
                   "type": "string",
                   "title": "Link Type",
                   "description": "Type of link used to traverse or detect the page",
@@ -917,7 +917,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
               "type": "object",
               "title": "user",
               "properties": {
-                "fullName": {
+                "full_name": {
                   "type": "string",
                   "title": "Full Name",
                   "description": "Full name of the user account",
@@ -937,9 +937,9 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
                 }
               }
             },
-            "userGroup": {
+            "user_group": {
               "type": "object",
-              "title": "userGroup",
+              "title": "user_group",
               "properties": {
                 "id": {
                   "type": "integer",
@@ -955,9 +955,9 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
                 }
               }
             },
-            "webApplication": {
+            "web_application": {
               "type": "object",
-              "title": "webApplication",
+              "title": "web_application",
               "properties": {
                 "id": {
                   "type": "integer",
@@ -980,7 +980,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
                   "description": "Web root of the web application",
                   "order": 3
                 },
-                "virtualHost": {
+                "virtual_host": {
                   "type": "string",
                   "title": "Virtual Host",
                   "description": "Virtual host of the web application",
@@ -992,7 +992,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
                   "type": "object",
                   "title": "page",
                   "properties": {
-                    "linkType": {
+                    "link_type": {
                       "type": "string",
                       "title": "Link Type",
                       "description": "Type of link used to traverse or detect the page",
@@ -1131,19 +1131,19 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
                   "description": "Most common and recognizable title or name of the product",
                   "order": 5
                 },
-                "swEdition": {
+                "sw_edition": {
                   "type": "string",
                   "title": "Software Edition",
                   "description": "Characterizes how the product is tailored to a particular market or class of end users",
                   "order": 6
                 },
-                "targetHW": {
+                "target_HW": {
                   "type": "string",
                   "title": "Target Hardware",
                   "description": "Characterize the instruction set architecture on which the product operates",
                   "order": 7
                 },
-                "targetSW": {
+                "target_SW": {
                   "type": "string",
                   "title": "Target Software",
                   "description": "Characterizes the software computing environment within which the product operates",
@@ -1187,7 +1187,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "user",
           "properties": {
-            "fullName": {
+            "full_name": {
               "type": "string",
               "title": "Full Name",
               "description": "Full name of the user account",
@@ -1207,9 +1207,9 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "userGroup": {
+        "user_group": {
           "type": "object",
-          "title": "userGroup",
+          "title": "user_group",
           "properties": {
             "id": {
               "type": "integer",
@@ -1241,7 +1241,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
               "description": "Number of distinct exploits that can exploit any of the vulnerabilities on the asset",
               "order": 2
             },
-            "malwareKits": {
+            "malware_kits": {
               "type": "integer",
               "title": "Malware Kits",
               "description": "Number of distinct malware kits that vulnerabilities on the asset are susceptible to",
@@ -1267,9 +1267,9 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "webApplication": {
+        "web_application": {
           "type": "object",
-          "title": "webApplication",
+          "title": "web_application",
           "properties": {
             "id": {
               "type": "integer",
@@ -1292,7 +1292,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
               "description": "Web root of the web application",
               "order": 3
             },
-            "virtualHost": {
+            "virtual_host": {
               "type": "string",
               "title": "Virtual Host",
               "description": "Virtual host of the web application",
@@ -1304,7 +1304,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
               "type": "object",
               "title": "page",
               "properties": {
-                "linkType": {
+                "link_type": {
                   "type": "string",
                   "title": "Link Type",
                   "description": "Type of link used to traverse or detect the page",
@@ -1380,19 +1380,19 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           "description": "Most common and recognizable title or name of the product",
           "order": 5
         },
-        "swEdition": {
+        "sw_edition": {
           "type": "string",
           "title": "Software Edition",
           "description": "Characterizes how the product is tailored to a particular market or class of end users",
           "order": 6
         },
-        "targetHW": {
+        "target_HW": {
           "type": "string",
           "title": "Target Hardware",
           "description": "Characterize the instruction set architecture on which the product operates",
           "order": 7
         },
-        "targetSW": {
+        "target_SW": {
           "type": "string",
           "title": "Target Software",
           "description": "Characterizes the software computing environment within which the product operates",
@@ -1513,7 +1513,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           "description": "Version",
           "order": 6
         },
-        "vulnerabilityExceptionId": {
+        "vulnerability_exception_id": {
           "type": "integer",
           "title": "Vulnerability Exception ID",
           "description": "Vulnerability exception ID",
@@ -1521,9 +1521,9 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "hostName": {
+    "host_name": {
       "type": "object",
-      "title": "hostName",
+      "title": "host_name",
       "properties": {
         "name": {
           "type": "string",
@@ -1575,9 +1575,9 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "osFingerprint": {
+    "os_fingerprint": {
       "type": "object",
-      "title": "osFingerprint",
+      "title": "os_fingerprint",
       "properties": {
         "architecture": {
           "type": "string",
@@ -1702,19 +1702,19 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
               "description": "Most common and recognizable title or name of the product",
               "order": 5
             },
-            "swEdition": {
+            "sw_edition": {
               "type": "string",
               "title": "Software Edition",
               "description": "Characterizes how the product is tailored to a particular market or class of end users",
               "order": 6
             },
-            "targetHW": {
+            "target_HW": {
               "type": "string",
               "title": "Target Hardware",
               "description": "Characterize the instruction set architecture on which the product operates",
               "order": 7
             },
-            "targetSW": {
+            "target_SW": {
               "type": "string",
               "title": "Target Software",
               "description": "Characterizes the software computing environment within which the product operates",
@@ -1758,7 +1758,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "page",
       "properties": {
-        "linkType": {
+        "link_type": {
           "type": "string",
           "title": "Link Type",
           "description": "Type of link used to traverse or detect the page",
@@ -1839,12 +1839,12 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           "description": "Protocol of the service",
           "order": 8
         },
-        "userGroups": {
+        "user_groups": {
           "type": "array",
           "title": "User Groups",
           "description": "User groups",
           "items": {
-            "$ref": "#/definitions/userGroup"
+            "$ref": "#/definitions/user_group"
           },
           "order": 9
         },
@@ -1869,12 +1869,12 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           "description": "Version of the service",
           "order": 12
         },
-        "webApplications": {
+        "web_applications": {
           "type": "array",
           "title": "Web Applications",
           "description": "Web applications found on the service",
           "items": {
-            "$ref": "#/definitions/webApplication"
+            "$ref": "#/definitions/web_application"
           },
           "order": 13
         }
@@ -1944,7 +1944,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "page",
           "properties": {
-            "linkType": {
+            "link_type": {
               "type": "string",
               "title": "Link Type",
               "description": "Type of link used to traverse or detect the page",
@@ -1968,7 +1968,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "user",
           "properties": {
-            "fullName": {
+            "full_name": {
               "type": "string",
               "title": "Full Name",
               "description": "Full name of the user account",
@@ -1988,9 +1988,9 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "userGroup": {
+        "user_group": {
           "type": "object",
-          "title": "userGroup",
+          "title": "user_group",
           "properties": {
             "id": {
               "type": "integer",
@@ -2006,9 +2006,9 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "webApplication": {
+        "web_application": {
           "type": "object",
-          "title": "webApplication",
+          "title": "web_application",
           "properties": {
             "id": {
               "type": "integer",
@@ -2031,7 +2031,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
               "description": "Web root of the web application",
               "order": 3
             },
-            "virtualHost": {
+            "virtual_host": {
               "type": "string",
               "title": "Virtual Host",
               "description": "Virtual host of the web application",
@@ -2043,7 +2043,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
               "type": "object",
               "title": "page",
               "properties": {
-                "linkType": {
+                "link_type": {
                   "type": "string",
                   "title": "Link Type",
                   "description": "Type of link used to traverse or detect the page",
@@ -2182,19 +2182,19 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
               "description": "Most common and recognizable title or name of the product",
               "order": 5
             },
-            "swEdition": {
+            "sw_edition": {
               "type": "string",
               "title": "Software Edition",
               "description": "Characterizes how the product is tailored to a particular market or class of end users",
               "order": 6
             },
-            "targetHW": {
+            "target_HW": {
               "type": "string",
               "title": "Target Hardware",
               "description": "Characterize the instruction set architecture on which the product operates",
               "order": 7
             },
-            "targetSW": {
+            "target_SW": {
               "type": "string",
               "title": "Target Software",
               "description": "Characterizes the software computing environment within which the product operates",
@@ -2238,7 +2238,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "user",
       "properties": {
-        "fullName": {
+        "full_name": {
           "type": "string",
           "title": "Full Name",
           "description": "Full name of the user account",
@@ -2258,9 +2258,9 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "userGroup": {
+    "user_group": {
       "type": "object",
-      "title": "userGroup",
+      "title": "user_group",
       "properties": {
         "id": {
           "type": "integer",
@@ -2292,7 +2292,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           "description": "Number of distinct exploits that can exploit any of the vulnerabilities on the asset",
           "order": 2
         },
-        "malwareKits": {
+        "malware_kits": {
           "type": "integer",
           "title": "Malware Kits",
           "description": "Number of distinct malware kits that vulnerabilities on the asset are susceptible to",
@@ -2318,9 +2318,9 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "webApplication": {
+    "web_application": {
       "type": "object",
-      "title": "webApplication",
+      "title": "web_application",
       "properties": {
         "id": {
           "type": "integer",
@@ -2343,7 +2343,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           "description": "Web root of the web application",
           "order": 3
         },
-        "virtualHost": {
+        "virtual_host": {
           "type": "string",
           "title": "Virtual Host",
           "description": "Virtual host of the web application",
@@ -2355,7 +2355,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "page",
           "properties": {
-            "linkType": {
+            "link_type": {
               "type": "string",
               "title": "Link Type",
               "description": "Type of link used to traverse or detect the page",

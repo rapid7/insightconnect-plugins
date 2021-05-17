@@ -26,6 +26,8 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "the region in which the plugin will work",
       "enum": [
         "us",
+        "us2",
+        "us3",
         "eu",
         "ca",
         "au",
