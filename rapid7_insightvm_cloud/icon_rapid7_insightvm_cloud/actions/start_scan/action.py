@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import StartScanInput, StartScanOutput, Input, Component
+from .schema import StartScanInput, StartScanOutput, Input, Component, Output
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -33,8 +33,9 @@ class StartScan(insightconnect_plugin_runtime.Action):
         body = {"asset_ids": asset_ids, "name": name}
 
         response = self.connection.ivm_cloud_api.call_api("scan", "POST", None, body)
+        testing = response[1].get("scans")
 
-        return response[1]
+        return {Output.DATA: response[1], Output.ID: testing[0].get("id")}
 
 
 def _format_body(hostnames: [str], ips: [str]) -> object:
