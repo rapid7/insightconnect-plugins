@@ -417,9 +417,8 @@ or reference the [GreyNoise Developer Documentation](https://developer.greynoise
 
 # Version History
 
-* 1.0.0 - Initial plugin
-
 * 1.0.1 - Fix bug with connection parameters
+* 1.0.0 - Initial plugin
 
 # Links
 
