@@ -9,7 +9,7 @@ class Component:
 
 class Input:
     DOMAIN = "domain"
-    
+
 
 class Output:
     ASN_SCORE = "asn_score"
@@ -28,10 +28,11 @@ class Output:
     SECURERANK2 = "securerank2"
     THREAT_TYPE = "threat_type"
     TLD_GEODIVERSITY = "tld_geodiversity"
-    
+
 
 class SecurityInput(komand.Input):
-    schema = json.loads("""
+    schema = json.loads(
+        """
    {
   "type": "object",
   "title": "Variables",
@@ -47,14 +48,16 @@ class SecurityInput(komand.Input):
     "domain"
   ]
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class SecurityOutput(komand.Output):
-    schema = json.loads("""
+    schema = json.loads(
+        """
    {
   "type": "object",
   "title": "Variables",
@@ -103,8 +106,8 @@ class SecurityOutput(komand.Output):
     },
     "ks_test": {
       "type": "number",
-      "title": "Kolmogorov–Smirnov Test",
-      "description": "Kolmogorov–Smirnov test on geodiversity. 0 means that the client traffic matches what is expected for this TLD",
+      "title": "Kolmogorov Smirnov Test",
+      "description": "Kolmogorov Smirnov test on geodiversity. 0 means that the client traffic matches what is expected for this TLD",
       "order": 14
     },
     "pagerank": {
@@ -170,7 +173,8 @@ class SecurityOutput(komand.Output):
     "tld_geodiversity"
   ]
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
