@@ -39,6 +39,43 @@ Example input:
 
 ### Actions
 
+#### Isolate Endpoint
+
+This action is used to isolate an endpoint.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|endpoint|string|None|True|Endpoint to take isolation action on. This can be IPv4, hostnames, and endpoint IDs|None|0123456abcdef12345abcde12345abcd|
+|isolation_state|boolean|True|True|True to isolate host, false to unisolate a host|None|True|
+|whitelist|[]string|[]|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, and device IDs|None|["198.51.100.100", "hostname123", "225494730938493804"]|
+
+Example input:
+
+```
+{
+  "endpoint": "0123456abcdef12345abcde12345abcd",
+  "isolation_state": true,
+  "whitelist": [
+    "198.51.100.100",
+    "hostname123",
+    "225494730938493804"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|result|isolation_result|True|The result of the isolation request|
+
+Example output:
+
+```
+```
+
 #### Get Endpoint Details
 
 This action is used to get information about an endpoint.
@@ -47,13 +84,13 @@ This action is used to get information about an endpoint.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hostname|string|None|True|The hostname to get information about|None|example-host|
+|endpoint|string|None|True|The endpoint to get information about. Endpoint will accept IPv4, hostnames, and endpoint IDs|None|0123456abcdef12345abcde12345abcd|
 
 Example input:
 
 ```
 {
-  "hostname": "example-host"
+  "endpoint": "0123456abcdef12345abcde12345abcd"
 }
 ```
 
@@ -61,7 +98,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|endpoints|[]endpoint|True|Any endpoints that match the given hostname|
+|endpoints|[]endpoint|True|Any endpoints that match the given endpoint information|
+|total_count|integer|True|Number of results found (max 100)|
 
 Example output:
 

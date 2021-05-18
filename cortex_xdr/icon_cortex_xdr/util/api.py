@@ -6,11 +6,16 @@ import hashlib
 import requests
 import urllib
 
+from re import match
 from datetime import datetime, timezone
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class CortexXdrAPI:
+    ENDPOINT_ID_TYPE = "endpoint_id_list"
+    ENDPOINT_IP_TYPE = "ip_list"
+    ENDPOINT_HOSTNAME_TYPE = "hostname"
+
     def __init__(self, api_key_id, api_key, fully_qualified_domain_name, secuirty_level, logger):
         self.api_key_id = api_key_id
         self.api_key = api_key
@@ -25,8 +30,11 @@ class CortexXdrAPI:
         endpoint = "/api_keys/validate/"
         self._post_to_api(endpoint, {})
 
-    def get_endpoint_information_by_hostname(self, endpoint):
-        api_endpoint = "/public_api/v1/endpoints/get_endpoints/"
+    def get_endpoint_information(self, endpoint):
+        endpoint_type = self._get_endpoint_type(endpoint)
+        self.logger.info(f"Endpoint field to look for: {endpoint_type}")
+
+        api_endpoint = "/public_api/v1/endpoints/get_endpoint/"
 
         request_body = {
             "request_data":{
@@ -38,7 +46,7 @@ class CortexXdrAPI:
                  },
                  "filters":[
                      {
-                         "field":"hostname",
+                         "field":endpoint_type,
                          "operator":"in",
                          "value":[
                             endpoint
@@ -48,9 +56,34 @@ class CortexXdrAPI:
             }
         }
 
-        return self._post_to_api(api_endpoint, request_body)
+        self.logger.info("Posting to API...")
+        results = self._post_to_api(api_endpoint, request_body)
+        self.logger.info("Getting Reply...")
 
+        output_object = {
+            "endpoints":results.get("reply").get("endpoints"),
+            "total_count":results.get("reply").get("total_count")
+        }
 
+        return output_object
+
+    def isolate_endpoint(self, endpoint, isolation_state):
+        endpoint_info = self.get_endpoint_information(endpoint)
+        endpoints = endpoint_info.get("endpoints")
+        if not endpoints:
+            self.logger.error(f"No matching endpoint found. Endpoint: {endpoint}")
+            raise PluginException(cause="Endpoint not found",
+                                  assistance=f"The endpoint {endpoint} was not found. Please check your input and try again")
+
+        num_endpoints = len(endpoints)
+        self.logger.info(f"Number of endpoints found: {num_endpoints}")
+
+        if num_endpoints > 1:
+            self.logger.info(f"Taking isolation action on multiple endpoints.")
+            return self._isolate_multiple_endpoints(endpoints, isolation_state)
+        else:
+            self.logger.info(f"Taking isolation action on a singe endpoint.")
+            return self._isolate_endpoint(endpoints, isolation_state)
 
     def get_incidents(self, from_time, to_time, time_field):
         endpoint = "/public_api/v1/incidents/get_incidents/"
@@ -119,12 +152,55 @@ class CortexXdrAPI:
     ###########################
     # Private Methods
     ###########################
+    def _isolate_multiple_endpoints(self, endpoints, isolation_state):
+        if isolation_state:
+            api_endpoint = "/public_api/v1/endpoints/isolate/"
+        else:
+            api_endpoint = "/public_api/v1/endpoints/unisolate/"
+
+        endpoint_ids = []
+        for ep in endpoints:
+            endpoint_ids.append(ep.get("endpoint_id"))
+
+        self.logger.info(f"Isolation: {isolation_state}\nEndpoint IDs:{endpoint_ids}")
+        post_body = {
+           "request_data":{
+              "filters":[
+                 {
+                    "field":"endpoint_id_list",
+                    "operator":"in",
+                    "value": endpoint_ids
+                 }
+              ]
+           }
+        }
+
+        result = self._post_to_api(api_endpoint, post_body)
+        return result.get("reply")
+
+    def _isolate_endpoint(self, endpoint, isolation_state):
+        if isolation_state:
+            api_endpoint = "/public_api/v1/endpoints/isolate/"
+        else:
+            api_endpoint = "/public_api/v1/endpoints/unisolate/"
+
+        endpoint_id = endpoint[0].get("endpoint_id")
+
+        self.logger.info(f"Isolation: {isolation_state}\nEndpoint ID:{endpoint_id}")
+        post_body = {
+           "request_data":{
+              "endpoint_id": endpoint_id
+           }
+        }
+
+        result = self._post_to_api(api_endpoint, post_body)
+        return result.get("reply")
+
     def _standard_authentication(self, api_key_id, api_key):
         return {
             "x-xdr-auth-id": str(api_key_id),
             "Authorization": api_key
         }
-
 
     def _advanced_authentication(self, api_key_id: int, api_key: str) -> dict:
         '''
@@ -208,3 +284,19 @@ class CortexXdrAPI:
         except requests.exceptions.HTTPError as e:
             self.logger.info(f"Request to f{url} failed: {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
+
+    def _get_endpoint_type(self, endpoint_info):
+        # ID
+        if len(endpoint_info) == 32:
+            try:
+                int(endpoint_info, 16)
+                return self.ENDPOINT_ID_TYPE
+            except Exception:
+                pass
+
+        # IP
+        if match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", endpoint_info):
+            return self.ENDPOINT_IP_TYPE
+
+        # Don't know, try hostname
+        return self.ENDPOINT_HOSTNAME_TYPE

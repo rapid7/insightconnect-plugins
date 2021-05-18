@@ -36,7 +36,9 @@ def main():
             )
             self.add_trigger(triggers.GetIncidents())
 
-            self.add_action(actions.GetEndpointDetailsByHostname())
+            self.add_action(actions.GetEndpointDetails())
+
+            self.add_action(actions.IsolateEndpoint())
 
 
     """Run plugin"""

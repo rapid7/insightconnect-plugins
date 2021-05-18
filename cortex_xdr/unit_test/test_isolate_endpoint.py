@@ -4,22 +4,22 @@ sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase
 from icon_cortex_xdr.connection.connection import Connection
-from icon_cortex_xdr.actions.get_endpoint_details_by_hostname import GetEndpointDetailsByHostname
+from icon_cortex_xdr.actions.isolate_endpoint import IsolateEndpoint
 import json
 import logging
 
 
-class TestGetEndpointDetailsByHostname(TestCase):
-    def test_integration_get_endpoint_details_by_hostname(self):
+class TestIsolateEndpoint(TestCase):
+    def test_integration_isolate_endpoint(self):
         log = logging.getLogger("Test")
         test_conn = Connection()
-        test_action = GetEndpointDetailsByHostname()
+        test_action = IsolateEndpoint()
 
         test_conn.logger = log
         test_action.logger = log
 
         try:
-            with open("../tests/get_endpoint_details_by_hostname.json") as file:
+            with open("../tests/isolate_endpoint.json") as file:
                 test_json = json.loads(file.read()).get("body")
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
