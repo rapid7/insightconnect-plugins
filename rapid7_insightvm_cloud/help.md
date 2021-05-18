@@ -4,13 +4,14 @@ InsightVM is a powerful vulnerability management tool which finds, prioritizes, 
 
 # Key Features
 
-* View assets
-* Start scans
-* Get scan results
+* Perform scan management functionality including starting and checking the status of scans
+* Perform asset searches leveraging flexible asset and vulnerability filters
+* Retrieve individual asset information
 
 # Requirements
 
-*Requires an InsightVM API Key
+* Requires an InsightVM API Key
+* InsightVM Scan Engine(s) paired to the Insight Platform
 
 # Documentation
 
