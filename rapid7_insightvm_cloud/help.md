@@ -4,11 +4,13 @@ InsightVM is a powerful vulnerability management tool which finds, prioritizes, 
 
 # Key Features
 
-Search through assets in order to start scans.
+* View assets
+* Start scans
+* Get scan results
 
 # Requirements
 
-Requires an InsightVM API Key
+*Requires an InsightVM API Key
 
 # Documentation
 
@@ -102,7 +104,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|id|integer|False|Identifier of the resource created|
+|data|object|False|Information received about the scan|
+|id|string|False|Identifier of the resource created|
 
 Example output:
 
@@ -347,10 +350,10 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |asset_ids|[]string|False|List of IDs of the scanned assets|
-|finished|string|False|When the scan was finished|
+|finished|date|False|When the scan was finished|
 |name|string|False|User-driven scan name for the scan|
 |scan_id|string|False|ID of the scan|
-|started|string|False|When the scan was started|
+|started|date|False|When the scan was started|
 |status|string|False|Current status of the retrieved scan|
 
 Example output:

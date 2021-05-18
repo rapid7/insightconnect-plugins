@@ -15,6 +15,7 @@ class Input:
     
 
 class Output:
+    DATA = "data"
     ID = "id"
     
 
@@ -74,8 +75,14 @@ class StartScanOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "data": {
+      "type": "object",
+      "title": "Data",
+      "description": "Information received about the scan",
+      "order": 2
+    },
     "id": {
-      "type": "integer",
+      "type": "string",
       "title": "Scan ID",
       "description": "Identifier of the resource created",
       "order": 1
