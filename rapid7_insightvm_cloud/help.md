@@ -994,7 +994,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.0 - Fixed issues in actions and help doc
+* 2.0.0 - Fix issue where string data-type should be date in actions | Update docs
 * 1.0.0 - Initial plugin
 
 # Links
