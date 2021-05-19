@@ -73,11 +73,12 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|file_quarantine_status|object|True|The File's Quarantine Status|
+|file_is_quarantined|boolean|True|Is the provided file quarantined|
 
 Example output:
 
 ```
+
 ```
 
 #### Block File

@@ -51,7 +51,3 @@ class TestGetFileQuarantineStatus(TestCase):
         test_action.connection = test_conn
         results = test_action.run(action_params)
         self.assertIsNotNone(results)
-        self.assertTrue('endpoint_id' in results)
-        self.assertTrue('file_path' in results)
-        self.assertTrue('file_hash' in results)
-        self.assertTrue('status' in results)

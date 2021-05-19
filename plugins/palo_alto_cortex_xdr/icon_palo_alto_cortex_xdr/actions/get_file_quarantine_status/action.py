@@ -26,4 +26,4 @@ class GetFileQuarantineStatus(insightconnect_plugin_runtime.Action):
         file_quarantine_status = self.connection.xdr_api.get_file_quarantine_status(file)
         output = insightconnect_plugin_runtime.helper.clean(file_quarantine_status)
         self.logger.info("Get file quarantine status complete.")
-        return output
+        return {Output.FILE_IS_QUARANTINED: output['status']}

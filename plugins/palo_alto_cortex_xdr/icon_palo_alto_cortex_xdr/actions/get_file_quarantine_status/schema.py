@@ -14,7 +14,7 @@ class Input:
     
 
 class Output:
-    FILE_QUARANTINE_STATUS = "file_quarantine_status"
+    FILE_IS_QUARANTINED = "file_is_quarantined"
     
 
 class GetFileQuarantineStatusInput(insightconnect_plugin_runtime.Input):
@@ -60,15 +60,15 @@ class GetFileQuarantineStatusOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "file_quarantine_status": {
-      "type": "object",
-      "title": "File Quarantine Status",
-      "description": "The File's Quarantine Status",
+    "file_is_quarantined": {
+      "type": "boolean",
+      "title": "File is quarantined",
+      "description": "Is the provided file quarantined",
       "order": 1
     }
   },
   "required": [
-    "file_quarantine_status"
+    "file_is_quarantined"
   ]
 }
     """)

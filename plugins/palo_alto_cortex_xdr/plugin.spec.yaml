@@ -165,6 +165,7 @@ connection:
     enum:
       - Advanced
       - Standard
+
 actions:
   get_file_quarantine_status:
     title: Get File Quarantine Status
@@ -186,10 +187,10 @@ actions:
         description: File Hash
         required: true
     output:
-      file_quarantine_status:
-        title: File Quarantine Status
-        description: The File's Quarantine Status
-        type: object
+      file_is_quarantined:
+        title: File is quarantined
+        description: Is the provided file quarantined
+        type: boolean
         required: true
   get_endpoint_details:
     title: Get Endpoint Details
