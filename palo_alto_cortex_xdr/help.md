@@ -62,7 +62,7 @@ This action is used to isolate an endpoint.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |endpoint|string|None|True|Endpoint to take isolation action on. This can be IPv4, hostnames, and endpoint IDs|None|0123456abcdef12345abcde12345abcd|
-|isolation_state|boolean|True|True|True to isolate host, false to unisolate a host|None|True|
+|isolation_state|string|Isolate|True|True to isolate host, false to unisolate a host|['Isolate', 'Unisolate']|Unisolate|
 |whitelist|[]string|[]|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, and device IDs|None|["198.51.100.100", "hostname123", "225494730938493804"]|
 
 Example input:
@@ -70,7 +70,7 @@ Example input:
 ```
 {
   "endpoint": "0123456abcdef12345abcde12345abcd",
-  "isolation_state": true,
+  "isolation_state": "Unisolate",
   "whitelist": [
     "198.51.100.100",
     "hostname123",
@@ -128,16 +128,11 @@ This trigger is used to get Incidents.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|time_field|string|None|True|Which time field to filter and sort on|['modification_time', 'creation_time']|creation_time|
+_This trigger does not contain any inputs._
 
 Example input:
 
 ```
-{
-  "time_field": "creation_time"
-}
 ```
 
 ##### Output

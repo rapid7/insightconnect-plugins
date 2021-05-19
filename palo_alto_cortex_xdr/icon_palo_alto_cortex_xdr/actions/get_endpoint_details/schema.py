@@ -91,7 +91,7 @@ class GetEndpointDetailsOutput(insightconnect_plugin_runtime.Output):
         "endpoint_id": {
           "type": "string",
           "title": "Endpoint ID",
-          "description": "Endpoint iD",
+          "description": "Endpoint ID",
           "order": 4
         },
         "endpoint_name": {

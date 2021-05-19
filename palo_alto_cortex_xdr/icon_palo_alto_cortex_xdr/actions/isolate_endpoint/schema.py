@@ -30,10 +30,14 @@ class IsolateEndpointInput(insightconnect_plugin_runtime.Input):
       "order": 1
     },
     "isolation_state": {
-      "type": "boolean",
+      "type": "string",
       "title": "Isolation State",
       "description": "True to isolate host, false to unisolate a host",
-      "default": true,
+      "default": "Isolate",
+      "enum": [
+        "Isolate",
+        "Unisolate"
+      ],
       "order": 2
     },
     "whitelist": {

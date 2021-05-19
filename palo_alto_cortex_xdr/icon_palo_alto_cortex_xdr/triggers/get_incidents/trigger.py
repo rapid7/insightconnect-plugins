@@ -7,9 +7,6 @@ from .schema import GetIncidentsInput, GetIncidentsOutput, Input, Output, Compon
 from ...util.util import Util
 
 
-DEFAULT_TIME_FIELD = "creation_time"
-
-
 class GetIncidents(insightconnect_plugin_runtime.Trigger):
 
     def __init__(self):
@@ -20,7 +17,7 @@ class GetIncidents(insightconnect_plugin_runtime.Trigger):
                 output=GetIncidentsOutput())
 
     def run(self, params={}):
-        time_field = params.get(Input.TIME_FIELD, DEFAULT_TIME_FIELD)
+        time_field = "creation_time"
 
         # We will be asking for incidents between one hour ago and now.
         one_hour_in_ms = 60 * 60 * 1000
@@ -28,7 +25,7 @@ class GetIncidents(insightconnect_plugin_runtime.Trigger):
         start_time = end_time - one_hour_in_ms
         last_event_processed_time_ms = start_time
 
-        self.logger.info(f"Initializing get_incidents trigger for cortex xdr plugin.")
+        self.logger.info(f"Initializing Get Incidents trigger for Cortex XDR plugin.")
 
         while True:
             incidents = self.connection.xdr_api.get_incidents(

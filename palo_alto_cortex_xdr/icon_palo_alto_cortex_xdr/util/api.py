@@ -8,7 +8,7 @@ import urllib
 
 from re import match
 from datetime import datetime, timezone
-from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 
 
 class CortexXdrAPI:
@@ -16,19 +16,24 @@ class CortexXdrAPI:
     ENDPOINT_IP_TYPE = "ip_list"
     ENDPOINT_HOSTNAME_TYPE = "hostname"
 
-    def __init__(self, api_key_id, api_key, fully_qualified_domain_name, secuirty_level, logger):
+    def __init__(self, api_key_id, api_key, fully_qualified_domain_name, security_level, logger):
         self.api_key_id = api_key_id
         self.api_key = api_key
         self.fully_qualified_domain_name = fully_qualified_domain_name
         self.logger = logger
-        if secuirty_level == "Advanced":
+        if security_level == "Advanced":
             self.headers = self._advanced_authentication(self.api_key_id, self.api_key)
         else:
             self.headers = self._standard_authentication(self.api_key_id, self.api_key)
 
     def test_connection(self):
         endpoint = "/api_keys/validate/"
-        self._post_to_api(endpoint, {})
+        try:
+            self._post_to_api(endpoint, {})
+        except Exception as e:
+            raise ConnectionTestException(cause="Connection Test Failed.",
+                                          assistance="Please check your connection settings and try again.",
+                                          data=e)
 
     def get_endpoint_information(self, endpoint):
         endpoint_type = self._get_endpoint_type(endpoint)
@@ -85,7 +90,7 @@ class CortexXdrAPI:
             self.logger.info(f"Taking isolation action on a singe endpoint.")
             return self._isolate_endpoint(endpoints, isolation_state)
 
-    def get_incidents(self, from_time, to_time, time_field):
+    def get_incidents(self, from_time, to_time, time_field="creation_time"):
         endpoint = "/public_api/v1/incidents/get_incidents/"
 
         batch_size = 100
@@ -250,7 +255,7 @@ class CortexXdrAPI:
                 resp = json.loads(response.text)
                 raise PluginException(
                     cause=resp.get("message"),
-                    assistance="Authorization failed. Check your API_KEY_ID & API_KEY.",
+                    assistance="Authorization failed. Check your API Key ID & API Key.",
                 )
             if response.status_code == 402:
                 resp = json.loads(response.text)
@@ -269,7 +274,7 @@ class CortexXdrAPI:
                 resp = json.loads(response.text)
                 raise PluginException(
                     cause=resp.get("message"),
-                    assistance=f"The object at {url} does not exist.",
+                    assistance=f"The object at {url} does not exist. Check the FQDN connection setting and try again.",
                 )
             # Success; no content
             if response.status_code == 204:

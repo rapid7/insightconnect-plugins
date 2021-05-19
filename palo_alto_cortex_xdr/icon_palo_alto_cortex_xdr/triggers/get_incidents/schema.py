@@ -8,8 +8,7 @@ class Component:
 
 
 class Input:
-    
-    TIME_FIELD = "time_field"
+    pass
     
 
 class Output:
@@ -19,25 +18,7 @@ class Output:
 
 class GetIncidentsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
-   {
-  "type": "object",
-  "title": "Variables",
-  "properties": {
-    "time_field": {
-      "type": "string",
-      "title": "Time Field",
-      "description": "Which time field to filter and sort on",
-      "enum": [
-        "modification_time",
-        "creation_time"
-      ],
-      "order": 1
-    }
-  },
-  "required": [
-    "time_field"
-  ]
-}
+   {}
     """)
 
     def __init__(self):

@@ -57,7 +57,7 @@ types:
     endpoint_id:
         title: "Endpoint ID"
         type: string
-        description: "Endpoint iD"
+        description: "Endpoint ID"
         required: false
     endpoint_name:
         title: "Endpoint Name"
@@ -199,10 +199,13 @@ actions:
       isolation_state:
         title: Isolation State
         description: True to isolate host, false to unisolate a host
-        type: boolean
+        type: string
         required: true
-        default: True
-        example: True
+        default: Isolate
+        example: Unisolate
+        enum:
+          - Isolate
+          - Unisolate
       whitelist:
         title: Whitelist
         description: This list contains a set of devices that should not be blocked. This can include IPs, hostnames, and device IDs
@@ -221,16 +224,6 @@ triggers:
   get_incidents:
     title: Get Incidents
     description: Get Incidents
-    input:
-      time_field:
-        title: Time Field
-        description: Which time field to filter and sort on
-        type: string
-        required: true
-        enum:
-          - "modification_time"
-          - "creation_time"
-        example: "creation_time"
     output:
       incident:
         title: Incident

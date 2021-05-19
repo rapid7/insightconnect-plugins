@@ -15,7 +15,8 @@ class IsolateEndpoint(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         endpoint = params.get(Input.ENDPOINT)
-        isolation_state = params.get(Input.ISOLATION_STATE)
+        isolation_string = params.get(Input.ISOLATION_STATE)
+        isolation_state = True if isolation_string == "Isolate" else False
         whitelist = params.get(Input.WHITELIST)
 
         if whitelist and endpoint in whitelist and not isolation_state:
