@@ -13,6 +13,7 @@ More information can be found at [greynoise.io/tech](https://greynoise.io/tech)
 * Perform a GreyNoise IP Quick Lookup
 * Perform a GreyNoise IP RIOT (Rule it out) Lookup
 * Query for additional Tag details
+* Perform a GreyNoise Community IP Lookup
 
 # Requirements
 
@@ -34,8 +35,7 @@ Example input:
 
 ```
 {
-  "credentials": "abcdefghijklmnopqrstuvwxyz0123456789",
-  "server": "https://api.greynoise.io"
+  "credentials": "abcdefghijklmnopqrstuvwxyz0123456789"
 }
 ```
 
@@ -417,6 +417,7 @@ or reference the [GreyNoise Developer Documentation](https://developer.greynoise
 
 # Version History
 
+* 1.0.1 - Fix bug with connection parameters
 * 1.0.0 - Initial plugin
 
 # Links
