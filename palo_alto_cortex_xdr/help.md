@@ -251,7 +251,7 @@ Example output:
 
 ## Troubleshooting
 
-* Isolate Endpiont fails with 500 error - This will happen if an isolation action (Isolate or Unisolate) is in progress on the selected endpoint. Wait a few minutes and try again. 
+* Isolate Endpoint fails with 500 error - This will happen if an isolation action (Isolate or Unisolate) is in progress on the selected endpoint. Wait a few minutes and try again. 
 
 # Version History
 

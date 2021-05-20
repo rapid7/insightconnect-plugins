@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect, insightidr]
 name: palo_alto_cortex_xdr
 title: Palo Alto Cortex XDR
-description: Stop modern attacks with the industrys first extended detection and response platform that spans your endpoint, network and cloud data
+description: Stop modern attacks with the industry's first extended detection and response platform that spans your endpoint, network and cloud data
 version: 1.0.0
 vendor: rapid7
 support: rapid7
