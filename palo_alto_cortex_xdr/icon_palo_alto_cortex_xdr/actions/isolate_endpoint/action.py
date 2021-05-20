@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import IsolateEndpointInput, IsolateEndpointOutput, Input, Output, Component
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
+from time import sleep
 
 
 class IsolateEndpoint(insightconnect_plugin_runtime.Action):
@@ -25,5 +26,11 @@ class IsolateEndpoint(insightconnect_plugin_runtime.Action):
                 assistance=f"If you would like to block this host, remove {endpoint} from the whitelist and try again."
             )
 
-        result = self.connection.xdr_api.isolate_endpoint(endpoint, isolation_state)
+        try:
+            result = self.connection.xdr_api.isolate_endpoint(endpoint, isolation_state)
+        except PluginException: # This is usually the result of an isolate action being in progress, try again after 10 seconds
+            self.logger.warning("Isolation action failed. Waiting 10 seconds and trying again.")
+            sleep(10)
+            result = self.connection.xdr_api.isolate_endpoint(endpoint, isolation_state)
+
         return {Output.RESULT: result}
