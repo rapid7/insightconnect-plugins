@@ -231,7 +231,3 @@ triggers:
         description: Incident
         type: object
         required: false
-
-
-
-
