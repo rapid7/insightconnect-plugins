@@ -5,7 +5,6 @@ import json
 
 class Input:
     CREDENTIALS = "credentials"
-    SERVER = "server"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -19,17 +18,10 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "GreyNoise API Key",
       "description": "API key from GreyNoise Account",
       "order": 1
-    },
-    "server": {
-      "type": "string",
-      "title": "GreyNoise API URL",
-      "default": "https://api.greynoise.io",
-      "order": 2
     }
   },
   "required": [
-    "credentials",
-    "server"
+    "credentials"
   ],
   "definitions": {
     "credential_secret_key": {
