@@ -13,7 +13,8 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.paloaltonetworks.com/cortex/cortex-xdr
 tags:
-- sentinelone
+- cortex xdr
+- palo alto
 - endpoint
 - detection
 hub_tags:
