@@ -25,7 +25,7 @@ class GetIncidents(insightconnect_plugin_runtime.Trigger):
         start_time = end_time - one_hour_in_ms
         last_event_processed_time_ms = start_time
 
-        self.logger.info(f"Initializing Get Incidents trigger for Cortex XDR plugin.")
+        self.logger.info(f"Initializing Get Incidents trigger for the Palo Alto Cortex XDR plugin.")
 
         while True:
             incidents = self.connection.xdr_api.get_incidents(
