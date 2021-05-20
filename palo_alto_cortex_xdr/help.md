@@ -251,7 +251,7 @@ Example output:
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+* Isolate Endpiont fails with 500 error - This will happen if an isolation action (Isolate or Unisolate) is in progress on the selected endpoint. Wait a few minutes and try again. 
 
 # Version History
 
