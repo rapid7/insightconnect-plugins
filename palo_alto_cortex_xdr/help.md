@@ -71,7 +71,7 @@ Example input:
 {
   "comment": "File blocked by InsightConnect",
   "file_hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
-  "incident_id": 5
+  "incident_id": "5"
 }
 ```
 
@@ -107,7 +107,7 @@ Example input:
 {
   "comment": "File allowed by InsightConnect",
   "file_hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
-  "incident_id": 5
+  "incident_id": "5"
 }
 ```
 

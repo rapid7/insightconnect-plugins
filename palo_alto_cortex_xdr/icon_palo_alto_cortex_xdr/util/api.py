@@ -157,7 +157,7 @@ class CortexXdrAPI:
         if block_file:
             endpoint = "/public_api/v1/hash_exceptions/blocklist/"
         else:
-            endpoint = 	"/public_api/v1/hash_exceptions/allowlist/"
+            endpoint = "/public_api/v1/hash_exceptions/allowlist/"
 
         post_body = {
             "request_data": {
