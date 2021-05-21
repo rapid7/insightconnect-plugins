@@ -63,7 +63,7 @@ This action is used to add a file to the block list.
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|File blocked by InsightConnect|True|String that represents additional information regarding the action|None|File blocked by InsightConnect|
 |file_hash|string|None|True|A SHA256 file hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
-|incident_id|integer|None|False|If this is related to an incident, the ID should be entered here|None|5|
+|incident_id|string|None|False|If this is related to an incident, the ID should be entered here|None|5|
 
 Example input:
 
