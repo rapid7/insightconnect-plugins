@@ -220,6 +220,68 @@ actions:
         description: The result of the isolation request
         type: isolation_result
         required: true
+  allow_file:
+    title: Allow File
+    description: Add a file to the allow list
+    input:
+      file_hash:
+        title: File Hash
+        description: A SHA256 file hash
+        type: string
+        required: true
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+      comment:
+        title: Comment
+        description: String that represents additional information regarding the action
+        type: string
+        required: true
+        default: File allowed by InsightConnect
+        example: File allowed by InsightConnect
+      incident_id:
+        title: Incident ID
+        description: If this is related to an incident, the ID should be entered here
+        type: integer
+        required: false
+        example: 5
+    output:
+      success:
+        title: Success
+        description: Was the operation successful
+        type: boolean
+        required: true
+
+  block_file:
+    title: Block File
+    description: Add a file to the block list
+    input:
+      file_hash:
+        title: File Hash
+        description: A SHA256 file hash
+        type: string
+        required: true
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+      comment:
+        title: Comment
+        description: String that represents additional information regarding the action
+        type: string
+        required: true
+        default: File blocked by InsightConnect
+        example: File blocked by InsightConnect
+      incident_id:
+        title: Incident ID
+        description: If this is related to an incident, the ID should be entered here
+        type: integer
+        required: false
+        example: 5
+    output:
+      success:
+        title: Success
+        description: Was the operation successful
+        type: boolean
+        required: true
+
+
+
 
 triggers:
   get_incidents:

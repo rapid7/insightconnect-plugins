@@ -153,6 +153,33 @@ class CortexXdrAPI:
 
         return all_incidents
 
+    def allow_or_block_file(self, file_hash, comment, incident_id=None, block_file=True):
+        if block_file:
+            endpoint = "/public_api/v1/hash_exceptions/blocklist/"
+        else:
+            endpoint = 	"/public_api/v1/hash_exceptions/allowlist/"
+
+        post_body = {
+            "request_data": {
+                "hash_list": [file_hash],
+                "comment": comment,
+            }
+        }
+
+        if incident_id:
+            post_body["request_data"]["incident_id"] = incident_id
+
+        self.logger.info(f"Taking action on file: {file_hash}")
+        self.logger.info(f"Block file is set to: {block_file}")
+        self.logger.info(f"Endpoint: {endpoint}")
+
+        result = self._post_to_api(endpoint, post_body)
+        if result.get("reply"): # reply will be true or false
+            self.logger.info(f"Block action was successful")
+            return True
+        self.logger.warning(f"Block action failed")
+        self.logger.warning(f"Result: {result}")
+        return False
 
     ###########################
     # Private Methods
