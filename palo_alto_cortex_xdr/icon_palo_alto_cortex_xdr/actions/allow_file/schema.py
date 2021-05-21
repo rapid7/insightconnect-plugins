@@ -37,7 +37,7 @@ class AllowFileInput(insightconnect_plugin_runtime.Input):
       "order": 1
     },
     "incident_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Incident ID",
       "description": "If this is related to an incident, the ID should be entered here",
       "order": 3
