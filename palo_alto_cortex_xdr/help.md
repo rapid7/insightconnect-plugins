@@ -84,6 +84,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Allow File
@@ -117,6 +120,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Isolate Endpoint

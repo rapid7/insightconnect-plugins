@@ -169,15 +169,17 @@ class CortexXdrAPI:
         if incident_id:
             post_body["request_data"]["incident_id"] = incident_id
 
-        self.logger.info(f"Taking action on file: {file_hash}")
-        self.logger.info(f"Block file is set to: {block_file}")
+        block_action = "Block" if block_file else "Allow"
+
+        self.logger.info(f"Taking {block_action} action on file: {file_hash}")
         self.logger.info(f"Endpoint: {endpoint}")
 
         result = self._post_to_api(endpoint, post_body)
+
         if result.get("reply"): # reply will be true or false
-            self.logger.info(f"Block action was successful")
+            self.logger.info(f"{block_action} action was successful")
             return True
-        self.logger.warning(f"Block action failed")
+        self.logger.warning(f"{block_action} action failed")
         self.logger.warning(f"Result: {result}")
         return False
 

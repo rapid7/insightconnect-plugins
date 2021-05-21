@@ -240,7 +240,7 @@ actions:
       incident_id:
         title: Incident ID
         description: If this is related to an incident, the ID should be entered here
-        type: integer
+        type: string
         required: false
         example: 5
     output:
@@ -270,7 +270,7 @@ actions:
       incident_id:
         title: Incident ID
         description: If this is related to an incident, the ID should be entered here
-        type: integer
+        type: string
         required: false
         example: 5
     output:
