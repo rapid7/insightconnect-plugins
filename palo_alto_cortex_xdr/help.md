@@ -19,9 +19,8 @@ The API Key will be generated when you create a new API key.
 
 The API Key ID is the value from the ID column
 
-To get the FQDN, right click on your API key and pick generate examples. In the example
-that's generated will be a URL that looks like "https://api-yourorg.xdr.us.paloaltonetworks.com/api_keys/validate/". 
-Copy the part that looks like "https://api-yourorg.xdr.us.paloaltonetworks.com". That is your FQDN. 
+To get the FQDN, right click on your API key and pick generate examples. The generated example is a URL that should look similar to "https://api-yourorg.xdr.us.paloaltonetworks.com/api_keys/validate/". 
+In our example the FQDN is "https://api-yourorg.xdr.us.paloaltonetworks.com" and should be copied.
 
 
 # Documentation
