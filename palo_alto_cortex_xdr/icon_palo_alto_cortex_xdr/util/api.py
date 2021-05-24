@@ -246,31 +246,31 @@ class CortexXdrAPI:
                 raise PluginException(
                     cause=f"API Error. API returned {response.status_code}",
                     assistance="Bad request, invalid JSON.",
-                    data=response_text
+                    data=response_text,
                 )
             if response.status_code == 401:
                 raise PluginException(
                     cause=f"API Error. API returned {response.status_code}",
                     assistance="Authorization failed. Check your API Key ID & API Key.",
-                    data=response_text
+                    data=response_text,
                 )
             if response.status_code == 402:
                 raise PluginException(
                     cause=f"API Error. API returned {response.status_code}",
                     assistance="Unauthorized access. User oes not have the required license type to run this API.",
-                    data=response_text
+                    data=response_text,
                 )
             if response.status_code == 403:
                 raise PluginException(
                     cause=f"API Error. API returned {response.status_code}",
                     assistance="Forbidden. The provided API Key does not have the required RBAC permissions to run this API.",
-                    data=response_text
+                    data=response_text,
                 )
             if response.status_code == 404:
                 raise PluginException(
                     cause=f"API Error. API returned {response.status_code}",
                     assistance=f"The object at {url} does not exist. Check the FQDN connection setting and try again.",
-                    data=response_text
+                    data=response_text,
                 )
             # Success; no content
             if response.status_code == 204:
