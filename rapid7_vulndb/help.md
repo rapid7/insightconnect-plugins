@@ -143,7 +143,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.1.0 - Add in Search Database action `solutions` output field
+* 2.1.0 - Return list of vulnerability solutions in the Search Database action with new `solutions` output field
 * 2.0.4 - Correct spelling in help.md
 * 2.0.3 - Update to v4 Python plugin runtime | Add example inputs
 * 2.0.2 - Implement workaround for VulnDB API bug in Get Content action where the `severity` datatype response differs based on the action input
@@ -159,4 +159,3 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [Rapid7 Vulnerability & Exploit Database API Specification](https://vdb.rapid7.com/swagger_doc)
-
