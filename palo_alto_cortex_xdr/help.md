@@ -13,8 +13,7 @@ Stop modern attacks with the industry’s first extended detection and response 
 * The API Key ID
 * The FQDN to your API instance
 
-The required connection information is available in the Cortex XDR web dashboard. Go 
-to the gear icon, click settings, and then click on API Keys in the left. 
+The required connection information is available in the Cortex XDR web dashboard. Click the gear icon, click settings, and then click on API Keys on the left. 
 
 The API Key will be generated when you create a new API key. 
 
