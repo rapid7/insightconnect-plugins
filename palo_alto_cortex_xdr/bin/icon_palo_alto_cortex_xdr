@@ -36,6 +36,10 @@ def main():
             )
             self.add_trigger(triggers.GetIncidents())
 
+            self.add_action(actions.AllowFile())
+
+            self.add_action(actions.BlockFile())
+
             self.add_action(actions.GetEndpointDetails())
 
             self.add_action(actions.IsolateEndpoint())
