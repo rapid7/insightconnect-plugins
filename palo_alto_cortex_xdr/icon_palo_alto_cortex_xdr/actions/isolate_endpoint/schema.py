@@ -4,18 +4,18 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Isolate an endpoints"
+    DESCRIPTION = "Isolate an endpoint"
 
 
 class Input:
-    ENDPOINT = "endpoints"
+    ENDPOINT = "endpoint"
     ISOLATION_STATE = "isolation_state"
     WHITELIST = "whitelist"
-
+    
 
 class Output:
     RESULT = "result"
-
+    
 
 class IsolateEndpointInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
@@ -23,10 +23,10 @@ class IsolateEndpointInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "endpoints": {
+    "endpoint": {
       "type": "string",
       "title": "Endpoint",
-      "description": "Endpoint to take isolation action on. This can be IPv4, hostnames, and endpoints IDs",
+      "description": "Endpoint to isolate or unisolate. This can be an IPv4 address, hostname, or endpoint ID",
       "order": 1
     },
     "isolation_state": {
@@ -52,7 +52,7 @@ class IsolateEndpointInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "endpoints",
+    "endpoint",
     "isolation_state"
   ]
 }

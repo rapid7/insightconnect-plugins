@@ -25,13 +25,13 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "api_key_id": {
       "type": "integer",
       "title": "API Key ID",
-      "description": "The API Key ID shown in the API Keys table in settings. e.g. 1, 2, 3",
+      "description": "The API Key ID shown in the Cortex XDR API Keys table in settings. e.g. 1, 2, 3",
       "order": 2
     },
     "fqdn": {
       "type": "string",
       "title": "FQDN",
-      "description": "Fully qualified domain name",
+      "description": "Cortex XDR fully qualified domain name",
       "order": 1
     },
     "security_level": {

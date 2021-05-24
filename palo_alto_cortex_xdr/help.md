@@ -32,8 +32,8 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|The API Key that is generated when creating a new key|None|1234123412341234asdfasdfasdfasdfasdf1234123412341234123412341234asdfasdfasdfasdfasdf123412341234123412341234asdfasdfasdfasdfasdf|
-|api_key_id|int|None|True|The API Key ID shown in the API Keys table in settings. e.g. 1, 2, 3|None|1|
-|fqdn|string|None|True|Fully qualified domain name|None|https://api-example.xdr.us.paloaltonetworks.com/|
+|api_key_id|int|None|True|The API Key ID shown in the Cortex XDR API Keys table in settings. e.g. 1, 2, 3|None|1|
+|fqdn|string|None|True|Cortex XDR fully qualified domain name|None|https://api-example.xdr.us.paloaltonetworks.com/|
 |security_level|string|Standard|True|The Security Level of the key provided. This can be found in the API Key settings table in the Cortex XDR settings|['Advanced', 'Standard']|Standard|
 
 Example input:
@@ -69,7 +69,7 @@ Example input:
 {
   "comment": "File blocked by InsightConnect",
   "file_hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
-  "incident_id": "5"
+  "incident_id": 5
 }
 ```
 
@@ -105,7 +105,7 @@ Example input:
 {
   "comment": "File allowed by InsightConnect",
   "file_hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
-  "incident_id": "5"
+  "incident_id": 5
 }
 ```
 
@@ -131,7 +131,7 @@ This action is used to isolate an endpoint.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|endpoint|string|None|True|Endpoint to take isolation action on. This can be IPv4, hostnames, and endpoint IDs|None|0123456abcdef12345abcde12345abcd|
+|endpoint|string|None|True|Endpoint to isolate or unisolate. This can be an IPv4 address, hostname, or endpoint ID|None|0123456abcdef12345abcde12345abcd|
 |isolation_state|string|Isolate|True|True to isolate host, false to unisolate a host|['Isolate', 'Unisolate']|Unisolate|
 |whitelist|[]string|[]|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, and device IDs|None|["198.51.100.100", "hostname123", "225494730938493804"]|
 
