@@ -39,7 +39,7 @@ class StartScan(insightconnect_plugin_runtime.Action):
             return {Output.DATA: response[1], Output.ID: get_id[0].get("id")}
         except IndexError as error:
             raise PluginException(
-                cause=f"Failed to get a valid response from InsightVM for a scan call",
+                cause=f"Failed to get a valid response from InsightVM for a scan call.",
                 assistance=f"Response was {error}.",
                 data=error,
             )
