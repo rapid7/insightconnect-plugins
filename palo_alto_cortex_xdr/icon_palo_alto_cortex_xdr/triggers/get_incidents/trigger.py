@@ -2,19 +2,20 @@ import insightconnect_plugin_runtime
 import time
 
 from .schema import GetIncidentsInput, GetIncidentsOutput, Input, Output, Component
+
 # Custom imports below
 
 from ...util.util import Util
 
 
 class GetIncidents(insightconnect_plugin_runtime.Trigger):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_incidents',
-                description=Component.DESCRIPTION,
-                input=GetIncidentsInput(),
-                output=GetIncidentsOutput())
+            name="get_incidents",
+            description=Component.DESCRIPTION,
+            input=GetIncidentsInput(),
+            output=GetIncidentsOutput(),
+        )
 
     def run(self, params={}):
         time_field = "creation_time"
@@ -29,9 +30,7 @@ class GetIncidents(insightconnect_plugin_runtime.Trigger):
 
         while True:
             incidents = self.connection.xdr_api.get_incidents(
-                from_time=start_time,
-                to_time=end_time,
-                time_field=time_field
+                from_time=start_time, to_time=end_time, time_field=time_field
             )
 
             # Process incidents from oldest to newest

@@ -3,9 +3,10 @@ from icon_palo_alto_cortex_xdr.util.api import CortexXdrAPI
 
 import logging
 
+
 class TestAPI(TestCase):
     def test_get_type(self):
-        api = CortexXdrAPI(1, "key","https://fqdn", "ADVANCED", logging.getLogger())
+        api = CortexXdrAPI(1, "key", "https://fqdn", "ADVANCED", logging.getLogger())
 
         result = api._get_endpoint_type("1.2.3.4")
         self.assertEquals(result, api.ENDPOINT_IP_TYPE)

@@ -31,9 +31,11 @@ class CortexXdrAPI:
         try:
             self._post_to_api(endpoint, {})
         except Exception as e:
-            raise ConnectionTestException(cause="Connection Test Failed.",
-                                          assistance="Please check your connection settings and try again.",
-                                          data=e)
+            raise ConnectionTestException(
+                cause="Connection Test Failed.",
+                assistance="Please check your connection settings and try again.",
+                data=e,
+            )
 
     def get_endpoint_information(self, endpoint):
         endpoint_type = self._get_endpoint_type(endpoint)
@@ -42,22 +44,11 @@ class CortexXdrAPI:
         api_endpoint = "/public_api/v1/endpoints/get_endpoint/"
 
         request_body = {
-            "request_data":{
-                 "search_from": 0,
-                 "search_to": 100,
-                 "sort": {
-                    "field": "endpoint_id",
-                    "keyword": "ASC"
-                 },
-                 "filters":[
-                     {
-                         "field":endpoint_type,
-                         "operator":"in",
-                         "value":[
-                            endpoint
-                         ]
-                     }
-                ]
+            "request_data": {
+                "search_from": 0,
+                "search_to": 100,
+                "sort": {"field": "endpoint_id", "keyword": "ASC"},
+                "filters": [{"field": endpoint_type, "operator": "in", "value": [endpoint]}],
             }
         }
 
@@ -66,8 +57,8 @@ class CortexXdrAPI:
         self.logger.info("Getting Reply...")
 
         output_object = {
-            "endpoints":results.get("reply").get("endpoints"),
-            "total_count":results.get("reply").get("total_count")
+            "endpoints": results.get("reply").get("endpoints"),
+            "total_count": results.get("reply").get("total_count"),
         }
 
         return output_object
@@ -77,8 +68,10 @@ class CortexXdrAPI:
         endpoints = endpoint_info.get("endpoints")
         if not endpoints:
             self.logger.error(f"No matching endpoint found. Endpoint: {endpoint}")
-            raise PluginException(cause="Endpoint not found",
-                                  assistance=f"The endpoint {endpoint} was not found. Please check your input and try again")
+            raise PluginException(
+                cause="Endpoint not found",
+                assistance=f"The endpoint {endpoint} was not found. Please check your input and try again",
+            )
 
         num_endpoints = len(endpoints)
         self.logger.info(f"Number of endpoints found: {num_endpoints}")
@@ -102,26 +95,15 @@ class CortexXdrAPI:
             "request_data": {
                 "search_from": search_from,
                 "search_to": search_to,
-                "sort": {
-                    "field": time_field,
-                    "keyword": "asc"
-                }
+                "sort": {"field": time_field, "keyword": "asc"},
             }
         }
 
         # If time constraints have been provided for the request, add them to the post body
         if from_time is not None and to_time is not None:
-            post_body['request_data']['filters'] = [
-                {
-                    "field": time_field,
-                    "operator": "gte",
-                    "value": from_time
-                },
-                {
-                    "field": time_field,
-                    "operator": "lte",
-                    "value": to_time
-                }
+            post_body["request_data"]["filters"] = [
+                {"field": time_field, "operator": "gte", "value": from_time},
+                {"field": time_field, "operator": "lte", "value": to_time},
             ]
 
         done = False
@@ -131,7 +113,7 @@ class CortexXdrAPI:
         while not done:
             resp_json = self._post_to_api(endpoint, post_body)
             if resp_json is not None:
-                total_count = resp_json.get('reply', {}).get("total_count", -1)
+                total_count = resp_json.get("reply", {}).get("total_count", -1)
                 all_incidents.extend(resp_json.get("reply", {}).get("incidents", []))
                 # If the number of incidents we have received so far is greater than or equal to the total number of
                 # incidents which match the query, then we can stop paging.
@@ -143,8 +125,8 @@ class CortexXdrAPI:
                 search_to = search_to + batch_size if search_to + batch_size < total_count else total_count
 
                 # Add the updated page indices to the request body for when we request the next page
-                post_body['request_data']['search_from'] = search_from
-                post_body['request_data']['search_to'] = search_to
+                post_body["request_data"]["search_from"] = search_from
+                post_body["request_data"]["search_to"] = search_to
             else:
                 done = True
 
@@ -176,7 +158,7 @@ class CortexXdrAPI:
 
         result = self._post_to_api(endpoint, post_body)
 
-        if result.get("reply"): # reply will be true or false
+        if result.get("reply"):  # reply will be true or false
             self.logger.info(f"{block_action} action was successful")
             return True
         self.logger.warning(f"{block_action} action failed")
@@ -198,15 +180,7 @@ class CortexXdrAPI:
 
         self.logger.info(f"Isolation: {isolation_state}\nEndpoint IDs:{endpoint_ids}")
         post_body = {
-           "request_data":{
-              "filters":[
-                 {
-                    "field":"endpoint_id_list",
-                    "operator":"in",
-                    "value": endpoint_ids
-                 }
-              ]
-           }
+            "request_data": {"filters": [{"field": "endpoint_id_list", "operator": "in", "value": endpoint_ids}]}
         }
 
         result = self._post_to_api(api_endpoint, post_body)
@@ -221,23 +195,16 @@ class CortexXdrAPI:
         endpoint_id = endpoint[0].get("endpoint_id")
 
         self.logger.info(f"Isolation: {isolation_state}\nEndpoint ID:{endpoint_id}")
-        post_body = {
-           "request_data":{
-              "endpoint_id": endpoint_id
-           }
-        }
+        post_body = {"request_data": {"endpoint_id": endpoint_id}}
 
         result = self._post_to_api(api_endpoint, post_body)
         return result.get("reply")
 
     def _standard_authentication(self, api_key_id, api_key):
-        return {
-            "x-xdr-auth-id": str(api_key_id),
-            "Authorization": api_key
-        }
+        return {"x-xdr-auth-id": str(api_key_id), "Authorization": api_key}
 
     def _advanced_authentication(self, api_key_id: int, api_key: str) -> dict:
-        '''
+        """
         This was generated by Cortex XDR.
 
         This will create the headers we need to authenticate to the API
@@ -248,7 +215,7 @@ class CortexXdrAPI:
         :type api_key: string
         :return: headers object
         :rtype: dict
-        '''
+        """
 
         # Generate a 64 bytes random string
         nonce = "".join([secrets.choice(string.ascii_letters + string.digits) for _ in range(64)])
@@ -265,9 +232,8 @@ class CortexXdrAPI:
             "x-xdr-timestamp": str(timestamp),
             "x-xdr-nonce": nonce,
             "x-xdr-auth-id": str(api_key_id),
-            "Authorization": api_key_hash
+            "Authorization": api_key_hash,
         }
-
 
     def _post_to_api(self, endpoint, post_body):
         url = urllib.parse.urljoin(self.fully_qualified_domain_name, endpoint)
@@ -296,8 +262,7 @@ class CortexXdrAPI:
                 resp = json.loads(response.text)
                 raise PluginException(
                     cause=resp.get("message"),
-                    assistance=
-                    "Forbidden. The provided API Key does not have the required RBAC permissions to run this API.",
+                    assistance="Forbidden. The provided API Key does not have the required RBAC permissions to run this API.",
                 )
             if response.status_code == 404:
                 resp = json.loads(response.text)

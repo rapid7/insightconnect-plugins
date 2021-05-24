@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
+
 # Custom imports below
 from ..util.api import CortexXdrAPI
 from datetime import datetime, timezone
@@ -9,9 +10,7 @@ import hashlib
 import requests
 
 
-
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.xdr_api = None
