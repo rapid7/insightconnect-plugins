@@ -13,7 +13,6 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/rapid7_insightvm_cloud
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.rapid7.com
-  pair_scan_engine: https://docs.rapid7.com/insightvm/scan-engine-management-on-the-insight-platform/#how-to-pair-your-scan-engines-to-the-insight-platform
 tags:
 - insightvm
 - rapid7

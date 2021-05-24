@@ -1002,3 +1002,4 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [InsightVM Cloud API](https://help.rapid7.com/insightvm/en-us/api/integrations.html)
+* [Scan Engine Pairing](https://docs.rapid7.com/insightvm/scan-engine-management-on-the-insight-platform/#how-to-pair-your-scan-engines-to-the-insight-platform)
