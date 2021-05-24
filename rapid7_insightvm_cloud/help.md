@@ -106,7 +106,7 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|object|False|Information received about the scan|
-|id|string|False|Identifier of the resource created|
+|ids|[]string|False|List of identifiers of the scans started|
 
 Example output:
 

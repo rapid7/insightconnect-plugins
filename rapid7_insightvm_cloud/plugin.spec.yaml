@@ -998,10 +998,10 @@ actions:
         example: ["rapid7.com"]
         required: false
     output:
-      id:
-        description: Identifier of the resource created
-        title: Scan ID
-        type: string
+      ids:
+        description: List of identifiers of the scans started
+        title: Scan IDs
+        type: "[]string"
         required: false
       data:
         description: Information received about the scan

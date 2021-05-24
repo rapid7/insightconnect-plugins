@@ -35,11 +35,14 @@ class StartScan(insightconnect_plugin_runtime.Action):
         response = self.connection.ivm_cloud_api.call_api("scan", "POST", None, body)
 
         try:
-            get_id = response[1].get("scans")
-            return {Output.DATA: response[1], Output.ID: get_id[0].get("id")}
+            scans = response[1].get("scans")
+            ids = []
+            for scan in scans:
+                ids.append(scan.get("id"))
+            return {Output.DATA: response[1], Output.IDS: ids}
         except IndexError as error:
             raise PluginException(
-                cause=f"Failed to get a valid response from InsightVM for a scan call",
+                cause=f"Failed to get a valid response from InsightVM for a scan call.",
                 assistance=f"Response was {error}.",
                 data=error,
             )
