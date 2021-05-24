@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect, insightidr]
 name: palo_alto_cortex_xdr
 title: Palo Alto Cortex XDR
-description: Stop modern attacks with the industry's first extended detection and response platform that spans your endpoint, network and cloud data
+description: Stop modern attacks with the industry's first extended detection and response platform that spans your endpoints, network and cloud data
 version: 1.0.0
 vendor: rapid7
 support: rapid7
@@ -15,11 +15,11 @@ resources:
 tags:
 - cortex xdr
 - palo alto
-- endpoint
+- endpoints
 - detection
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [cortex, xdr, endpoint, detection]
+  keywords: [cortex, xdr, endpoints, detection]
   features: []
 
 types:
@@ -168,11 +168,11 @@ connection:
 actions:
   get_endpoint_details:
     title: Get Endpoint Details
-    description: Get information about an endpoint
+    description: Get information about an endpoints
     input:
       endpoint:
         title: Endpoint
-        description: The endpoint to get information about. Endpoint will accept IPv4, hostnames, and endpoint IDs
+        description: The endpoints to get information about. Endpoint will accept IPv4, hostnames, and endpoints IDs
         type: string
         required: true
         example: 0123456abcdef12345abcde12345abcd
@@ -184,12 +184,12 @@ actions:
         required: true
       endpoints:
         title: Endpoints
-        description: Any endpoints that match the given endpoint information
-        type: "[]endpoint"
+        description: Any endpoints that match the given endpoints information
+        type: "[]endpoints"
         required: true
   isolate_endpoint:
     title: Isolate Endpoint
-    description: Isolate an endpoint
+    description: Isolate an endpoints
     input:
       endpoint:
         title: Endpoint

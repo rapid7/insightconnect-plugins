@@ -9,9 +9,9 @@ Stop modern attacks with the industry’s first extended detection and response 
 
 # Requirements
 
-* An API Key
-* The API Key ID
-* The FQDN to your API instance
+* A Palo Alto Cortex XDR API key
+* A Palo Alto Cortex XDR API key ID
+* The fully-qualified domain name (FQDN) to your Palo Alto Cortex XDR API instance
 
 The required connection information is available in the Cortex XDR web dashboard. Click the gear icon, click settings, and then click on API Keys on the left. 
 

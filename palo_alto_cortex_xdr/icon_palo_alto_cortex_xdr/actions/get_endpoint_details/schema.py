@@ -4,17 +4,17 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get information about an endpoint"
+    DESCRIPTION = "Get information about an endpoints"
 
 
 class Input:
-    ENDPOINT = "endpoint"
-    
+    ENDPOINT = "endpoints"
+
 
 class Output:
     ENDPOINTS = "endpoints"
     TOTAL_COUNT = "total_count"
-    
+
 
 class GetEndpointDetailsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
@@ -22,15 +22,15 @@ class GetEndpointDetailsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "endpoint": {
+    "endpoints": {
       "type": "string",
       "title": "Endpoint",
-      "description": "The endpoint to get information about. Endpoint will accept IPv4, hostnames, and endpoint IDs",
+      "description": "The endpoints to get information about. Endpoint will accept IPv4, hostnames, and endpoints IDs",
       "order": 1
     }
   },
   "required": [
-    "endpoint"
+    "endpoints"
   ]
 }
     """)
@@ -48,9 +48,9 @@ class GetEndpointDetailsOutput(insightconnect_plugin_runtime.Output):
     "endpoints": {
       "type": "array",
       "title": "Endpoints",
-      "description": "Any endpoints that match the given endpoint information",
+      "description": "Any endpoints that match the given endpoints information",
       "items": {
-        "$ref": "#/definitions/endpoint"
+        "$ref": "#/definitions/endpoints"
       },
       "order": 2
     },
@@ -66,9 +66,9 @@ class GetEndpointDetailsOutput(insightconnect_plugin_runtime.Output):
     "total_count"
   ],
   "definitions": {
-    "endpoint": {
+    "endpoints": {
       "type": "object",
-      "title": "endpoint",
+      "title": "endpoints",
       "properties": {
         "alias": {
           "type": "string",

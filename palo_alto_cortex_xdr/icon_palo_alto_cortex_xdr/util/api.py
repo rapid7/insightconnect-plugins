@@ -67,10 +67,10 @@ class CortexXdrAPI:
         endpoint_info = self.get_endpoint_information(endpoint)
         endpoints = endpoint_info.get("endpoints")
         if not endpoints:
-            self.logger.error(f"No matching endpoint found. Endpoint: {endpoint}")
+            self.logger.error(f"No matching endpoints found. Endpoint: {endpoint}")
             raise PluginException(
                 cause="Endpoint not found",
-                assistance=f"The endpoint {endpoint} was not found. Please check your input and try again",
+                assistance=f"The endpoints {endpoint} was not found. Please check your input and try again",
             )
 
         num_endpoints = len(endpoints)
@@ -80,7 +80,7 @@ class CortexXdrAPI:
             self.logger.info(f"Taking isolation action on multiple endpoints.")
             return self._isolate_multiple_endpoints(endpoints, isolation_state)
         else:
-            self.logger.info(f"Taking isolation action on a single endpoint.")
+            self.logger.info(f"Taking isolation action on a single endpoints.")
             return self._isolate_endpoint(endpoints, isolation_state)
 
     def get_incidents(self, from_time, to_time, time_field="creation_time"):
@@ -186,13 +186,13 @@ class CortexXdrAPI:
         result = self._post_to_api(api_endpoint, post_body)
         return result.get("reply")
 
-    def _isolate_endpoint(self, endpoint, isolation_state):
+    def _isolate_endpoint(self, endpoints, isolation_state):
         if isolation_state:
             api_endpoint = "/public_api/v1/endpoints/isolate/"
         else:
             api_endpoint = "/public_api/v1/endpoints/unisolate/"
 
-        endpoint_id = endpoint[0].get("endpoint_id")
+        endpoint_id = endpoints[0].get("endpoint_id")
 
         self.logger.info(f"Isolation: {isolation_state}\nEndpoint ID:{endpoint_id}")
         post_body = {"request_data": {"endpoint_id": endpoint_id}}
@@ -240,35 +240,37 @@ class CortexXdrAPI:
         try:
             response = requests.post(url=url, json=post_body, headers=self.headers)
 
+            response_text = response.text
+
             if response.status_code == 400:
-                resp = json.loads(response.text)
                 raise PluginException(
-                    cause=resp.get("message"),
+                    cause=f"API Error. API returned {response.status_code}",
                     assistance="Bad request, invalid JSON.",
+                    data=response_text
                 )
             if response.status_code == 401:
-                resp = json.loads(response.text)
                 raise PluginException(
-                    cause=resp.get("message"),
+                    cause=f"API Error. API returned {response.status_code}",
                     assistance="Authorization failed. Check your API Key ID & API Key.",
+                    data=response_text
                 )
             if response.status_code == 402:
-                resp = json.loads(response.text)
                 raise PluginException(
-                    cause=resp.get("message"),
-                    assistance="Unauthorized access. User does not have the required license type to run this API.",
+                    cause=f"API Error. API returned {response.status_code}",
+                    assistance="Unauthorized access. User oes not have the required license type to run this API.",
+                    data=response_text
                 )
             if response.status_code == 403:
-                resp = json.loads(response.text)
                 raise PluginException(
-                    cause=resp.get("message"),
+                    cause=f"API Error. API returned {response.status_code}",
                     assistance="Forbidden. The provided API Key does not have the required RBAC permissions to run this API.",
+                    data=response_text
                 )
             if response.status_code == 404:
-                resp = json.loads(response.text)
                 raise PluginException(
-                    cause=resp.get("message"),
+                    cause=f"API Error. API returned {response.status_code}",
                     assistance=f"The object at {url} does not exist. Check the FQDN connection setting and try again.",
+                    data=response_text
                 )
             # Success; no content
             if response.status_code == 204:
@@ -281,7 +283,7 @@ class CortexXdrAPI:
             self.logger.info(f"Invalid json: {e}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
         except requests.exceptions.HTTPError as e:
-            self.logger.info(f"Request to f{url} failed: {e}")
+            self.logger.info(f"Request to {url} failed: {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
     def _get_endpoint_type(self, endpoint_info):
