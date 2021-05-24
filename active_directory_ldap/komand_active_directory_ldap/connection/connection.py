@@ -13,7 +13,7 @@ class Connection(komand.Connection):
         self.ssl = None
         self.conn = None
 
-    def connect(self, params):
+    def connect(self, params={}):
         """
         Connect to LDAP
         """
@@ -23,6 +23,12 @@ class Connection(komand.Connection):
         referrals = params.get(Input.CHASE_REFERRALS)
         user_name = params.get(Input.USERNAME_PASSWORD).get("username")
         password = params.get(Input.USERNAME_PASSWORD).get("password")
+
+        if not host.startswith("ldap://") and not host.startswith("ldaps://"):
+            if self.ssl:
+                host = f"ldaps://{host}"
+            else:
+                host = f"ldap://{host}"
 
         host = self.host_formatter(host)
         self.logger.info(f"Connecting to {host}:{port}")

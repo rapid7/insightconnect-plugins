@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm_cloud
 title: Rapid7 InsightVM Cloud
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the InsightVM Cloud Integrations API to view assets and start scans
-version: 1.0.0
+version: 2.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -998,10 +998,15 @@ actions:
         example: ["rapid7.com"]
         required: false
     output:
-      id:
-        description: Identifier of the resource created
-        title: Scan ID
-        type: integer
+      ids:
+        description: List of identifiers of the scans started
+        title: Scan IDs
+        type: "[]string"
+        required: false
+      data:
+        description: Information received about the scan
+        title: Data
+        type: object
         required: false
   get_scan:
     title: Get Scan
@@ -1041,13 +1046,13 @@ actions:
       started:
         description: When the scan was started
         title: Started
-        type: string
+        type: date
         example: "2021-04-15T17:56:47Z"
         required: false
       finished:
         description: When the scan was finished
         title: Finished
-        type: string
+        type: date
         example: "2021-04-15T18:00:33Z"
         required: false
   asset_search:

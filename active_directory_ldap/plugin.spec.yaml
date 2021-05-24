@@ -4,7 +4,7 @@ products: [insightconnect]
 name: active_directory_ldap
 title: Active Directory LDAP
 description: "This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network"
-version: 5.2.0
+version: 5.2.1
 vendor: rapid7
 support: rapid7
 status: []
@@ -18,7 +18,7 @@ tags:
 - microsoft
 hub_tags:
   use_cases: [user_management, credential_management, application_management, threat_detection_and_response]
-  keywords: [ldap, active directory, microsoft]
+  keywords: [ldap, microsoft]
   features: []
 types:
   attributes:
