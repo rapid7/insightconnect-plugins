@@ -145,7 +145,7 @@ connection:
     example: https://api-example.xdr.us.paloaltonetworks.com/
   api_key_id:
     title: API Key ID
-    description: The API Key ID shown in the API Keys table in settings. e.g. 1, 2, 3
+    description: The API Key ID shown in the Cortex XDR API Keys table in settings. e.g. 1, 2, 3
     type: int
     required: true
     example: 1
