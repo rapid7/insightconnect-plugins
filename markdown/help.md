@@ -180,7 +180,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.1.1 - Use input and output constants inm Markdown to PDF action | Change docker image from `komand/python-2-plugin:2` to `komand/python-3-37-slim-plugin:3` | Changed `Exception` to `PluginException` in Markdown to PDF action | Add `USER nobody` in Dockerfile | Update `pypandoc` and `beautifulsoup4` version in requirements | Add example inputs and outputs
+* 3.1.1 - Use input and output constants inm Markdown to PDF action | Change docker image from `komand/python-2-plugin:2` to `insightconnect-python-3-38-plugin:4` | Changed `Exception` to `PluginException` in Markdown to PDF action | Add `USER nobody` in Dockerfile | Update `pypandoc` and `beautifulsoup4` version in requirements | Add example inputs and outputs
 * 3.1.0 - New action: Markdown to TXT
 * 3.0.0 - Update Markdown to HTML and Markdown to PDF action titles and descriptions
 * 2.2.2 - New spec and help.md format for the Extension Library
