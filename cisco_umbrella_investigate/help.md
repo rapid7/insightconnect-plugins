@@ -1198,7 +1198,7 @@ Example input:
 |geodiversity|array|True|A score representing the number of queries from clients visiting the domain, broken down by country. Score is a non-normalized ratio between 0 and 1|
 |geodiversity_normalized|array|True|A score representing the amount of queries for clients visiting the domain, broken down by country. Score is a normalized ratio between 0 and 1|
 |geoscore|number|True|A score that represents how far the different physical locations serving this name are from each other|
-|ks_test|number|True|Kolmogorov–Smirnov test on geodiversity. 0 means that the client traffic matches what is expected for this TLD|
+|ks_test|number|True|Kolmogorov Smirnov test on geodiversity. 0 means that the client traffic matches what is expected for this TLD|
 |pagerank|number|True|Popularity according to Google's pagerank algorithm|
 |perplexity|number|True|A second score on the likeliness of the name to be algorithmically generated, on a scale from 0 to 1|
 |popularity|number|True|The number of unique client IPs visiting this site, relative to the all requests to all sites. A score of how many different client/unique IPs go to this domain compared to others|
@@ -1438,6 +1438,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.1.3 - Fix invalid character in description
 * 3.1.2 - Replace python2 code to python3 in investigate.py file
 * 3.1.1 - Return information from API when a PluginException has occurred to improve error messaging
 * 3.1.0 - Add Passive DNS and Timeline actions
