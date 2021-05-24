@@ -139,7 +139,7 @@ types:
 connection:
   fqdn:
     title: FQDN
-    description: Fully qualified domain name
+    description: Cortex XDR fully qualified domain name
     type: string
     required: true
     example: https://api-example.xdr.us.paloaltonetworks.com/
