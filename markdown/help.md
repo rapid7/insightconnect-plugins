@@ -30,12 +30,16 @@ This action is used to convert HTML to Markdown.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|html|bytes|None|False|HTML data as bytes|None|None|
-|html_string|string|None|False|HTML data as string|None|None|
+|html|bytes|None|False|HTML data as bytes|None|PGgxPlJhcGlkNzwvaDE+|
+|html_string|string|None|False|HTML data as string|None|<h1>Rapid7</h1>|
 
 Example input:
 
 ```
+{
+  "html": "PGgxPlJhcGlkNzwvaDE+",
+  "html_string": "<h1>Rapid7</h1>"
+}
 ```
 
 ##### Output
@@ -44,6 +48,15 @@ Example input:
 |----|----|--------|-----------|
 |markdown|bytes|False|Markdown data as bytes|
 |markdown_string|bytes|False|Markdown data as string|
+
+Example output:
+
+```
+{
+  "markdown_string": "Rapid7\n======\n",
+  "markdown": "UmFwaWQ3Cj09PT09PQo="
+}
+```
 
 #### Markdown to PDF
 
@@ -71,6 +84,15 @@ Example input:
 |----|----|--------|-----------|
 |pdf|bytes|False|PDF data as bytes|
 |pdf_string|string|False|PDF data as string|
+
+Example output:
+
+```
+{
+  "pdf_string": "%PDF-1.4\n%\u00e2\u00e3\n1 0 obj\n<<\n/Title ()\n/Creator()",
+  "pdf": "JVBERi0xLjQKJcOiw6MKMSAwIG9iago8PAovVGl0bGUgKCkKL0NyZWF0b3IgKO+/v"
+}
+```
 
 #### Markdown to HTML
 
@@ -158,6 +180,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.1 - Use input and output constants inm Markdown to PDF action | Change docker image from `komand/python-2-plugin:2` to `komand/python-3-37-slim-plugin:3` | Changed `Exception` to `PluginException` in Markdown to PDF action | Add `USER nobody` in Dockerfile | Update `pypandoc` and `beautifulsoup4` version in requirements | Add example inputs and outputs
 * 3.1.0 - New action: Markdown to TXT
 * 3.0.0 - Update Markdown to HTML and Markdown to PDF action titles and descriptions
 * 2.2.2 - New spec and help.md format for the Extension Library
