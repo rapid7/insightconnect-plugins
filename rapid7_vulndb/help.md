@@ -58,6 +58,7 @@ Example output:
       "identifier": "ubuntu-cve-2015-9542",
       "title": "Ubuntu: (Multiple Advisories) (CVE-2015-9542): libpam-radius-auth vulnerability",
       "published_at": "2020-02-24T00:00:00.000Z",
+      "solutions": "ubuntu-upgrade-chromium",
       "link": "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/ubuntu-cve-2015-9542"
     }
   ]
@@ -142,6 +143,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.0 - Add in Search Database action `solutions` output field
 * 2.0.4 - Correct spelling in help.md
 * 2.0.3 - Update to v4 Python plugin runtime | Add example inputs
 * 2.0.2 - Implement workaround for VulnDB API bug in Get Content action where the `severity` datatype response differs based on the action input
