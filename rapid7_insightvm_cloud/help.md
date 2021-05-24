@@ -1,14 +1,17 @@
 # Description
 
-InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the v4 cloud API to view assets, scan results and start scans
+InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the v4 cloud API to view assets, retrieve scan results and start scans. With an InsightVM scan engine paired to the platform, take advantage of triggering scans on assets in your environment along with performing robust asset searches to lookup and make actionable the asset and vulnerability data in your environment.
 
 # Key Features
 
-Search through assets in order to start scans.
+* Perform scan management functionality including starting and checking the status of scans
+* Perform asset searches leveraging flexible asset and vulnerability filters
+* Retrieve individual asset information
 
 # Requirements
 
-Requires an InsightVM API Key
+* Requires an InsightVM API Key
+* InsightVM Scan Engine(s) paired to the Insight Platform
 
 # Documentation
 
@@ -102,7 +105,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|id|integer|False|Identifier of the resource created|
+|data|object|False|Information received about the scan|
+|ids|[]string|False|List of identifiers of the scans started|
 
 Example output:
 
@@ -347,10 +351,10 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |asset_ids|[]string|False|List of IDs of the scanned assets|
-|finished|string|False|When the scan was finished|
+|finished|date|False|When the scan was finished|
 |name|string|False|User-driven scan name for the scan|
 |scan_id|string|False|ID of the scan|
-|started|string|False|When the scan was started|
+|started|date|False|When the scan was started|
 |status|string|False|Current status of the retrieved scan|
 
 Example output:
@@ -990,6 +994,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Fix issue where string data-type should be date in actions | Update docs
 * 1.0.0 - Initial plugin
 
 # Links
@@ -997,3 +1002,4 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [InsightVM Cloud API](https://help.rapid7.com/insightvm/en-us/api/integrations.html)
+* [Scan Engine Pairing](https://docs.rapid7.com/insightvm/scan-engine-management-on-the-insight-platform/#how-to-pair-your-scan-engines-to-the-insight-platform)
