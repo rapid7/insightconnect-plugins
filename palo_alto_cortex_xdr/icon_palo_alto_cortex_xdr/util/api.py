@@ -290,7 +290,7 @@ class CortexXdrAPI:
             try:
                 int(endpoint_info, 16)
                 return self.ENDPOINT_ID_TYPE
-            except Exception:
+            except Exception: # noqa B110 - Try except pass
                 pass
 
         # IP
