@@ -189,7 +189,7 @@ actions:
         required: true
   isolate_endpoint:
     title: Isolate Endpoint
-    description: Isolate an endpoint
+    description: Isolate or unisolate an endpoint
     input:
       endpoint:
         title: Endpoint
