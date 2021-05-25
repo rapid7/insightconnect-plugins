@@ -280,9 +280,6 @@ actions:
         type: boolean
         required: true
 
-
-
-
 triggers:
   get_incidents:
     title: Get Incidents
