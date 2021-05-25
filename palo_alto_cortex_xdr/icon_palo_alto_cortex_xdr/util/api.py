@@ -80,7 +80,7 @@ class CortexXdrAPI:
             self.logger.info(f"Taking isolation action on multiple endpoints.")
             return self._isolate_multiple_endpoints(endpoints, isolation_state)
         else:
-            self.logger.info(f"Taking isolation action on a single endpoints.")
+            self.logger.info(f"Taking isolation action on a single endpoint.")
             return self._isolate_endpoint(endpoints, isolation_state)
 
     def get_incidents(self, from_time, to_time, time_field="creation_time"):

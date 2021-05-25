@@ -6,8 +6,8 @@ import json
 class Input:
     API_KEY = "api_key"
     API_KEY_ID = "api_key_id"
-    FQDN = "fqdn"
     SECURITY_LEVEL = "security_level"
+    URL = "url"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -28,12 +28,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "The API Key ID shown in the Cortex XDR API Keys table in settings. e.g. 1, 2, 3",
       "order": 2
     },
-    "fqdn": {
-      "type": "string",
-      "title": "FQDN",
-      "description": "Cortex XDR fully qualified domain name",
-      "order": 1
-    },
     "security_level": {
       "type": "string",
       "title": "Security Level",
@@ -44,13 +38,19 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
         "Standard"
       ],
       "order": 4
+    },
+    "url": {
+      "type": "string",
+      "title": "URL",
+      "description": "Cortex XDR API URL",
+      "order": 1
     }
   },
   "required": [
     "api_key",
     "api_key_id",
-    "fqdn",
-    "security_level"
+    "security_level",
+    "url"
   ],
   "definitions": {
     "credential_secret_key": {

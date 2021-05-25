@@ -11,7 +11,7 @@ Stop modern attacks with the industry’s first extended detection and response 
 
 * A Palo Alto Cortex XDR API key
 * A Palo Alto Cortex XDR API key ID
-* The fully-qualified domain name (FQDN) to your Palo Alto Cortex XDR API instance
+* The URL to your Palo Alto Cortex XDR API instance
 
 The required connection information is available in the Cortex XDR web dashboard. Click the gear icon, click settings, and then click on API Keys on the left. 
 
@@ -19,8 +19,8 @@ The API Key will be generated when you create a new API key.
 
 The API Key ID is the value from the ID column
 
-To get the FQDN, right click on your API key and pick generate examples. The generated example is a URL that should look similar to "https://api-yourorg.xdr.us.paloaltonetworks.com/api_keys/validate/". 
-In our example the FQDN is "https://api-yourorg.xdr.us.paloaltonetworks.com" and should be copied.
+To get the API URL, right click on your API key and pick generate examples. The generated example is a URL that should look similar to "https://api-yourorg.xdr.us.paloaltonetworks.com/api_keys/validate/". 
+In our example the API URL is "https://api-yourorg.xdr.us.paloaltonetworks.com" and should be copied.
 
 
 # Documentation
@@ -33,8 +33,8 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|The API Key that is generated when creating a new key|None|1234123412341234asdfasdfasdfasdfasdf1234123412341234123412341234asdfasdfasdfasdfasdf123412341234123412341234asdfasdfasdfasdfasdf|
 |api_key_id|int|None|True|The API Key ID shown in the Cortex XDR API Keys table in settings. e.g. 1, 2, 3|None|1|
-|fqdn|string|None|True|Cortex XDR fully qualified domain name|None|https://api-example.xdr.us.paloaltonetworks.com/|
 |security_level|string|Standard|True|The Security Level of the key provided. This can be found in the API Key settings table in the Cortex XDR settings|['Advanced', 'Standard']|Standard|
+|url|string|None|True|Cortex XDR API URL|None|https://api-example.xdr.us.paloaltonetworks.com/|
 
 Example input:
 
@@ -42,8 +42,8 @@ Example input:
 {
   "api_key": "1234123412341234asdfasdfasdfasdfasdf1234123412341234123412341234asdfasdfasdfasdfasdf123412341234123412341234asdfasdfasdfasdfasdf",
   "api_key_id": 1,
-  "fqdn": "https://api-example.xdr.us.paloaltonetworks.com/",
-  "security_level": "Standard"
+  "security_level": "Standard",
+  "url": "https://api-example.xdr.us.paloaltonetworks.com/"
 }
 ```
 
