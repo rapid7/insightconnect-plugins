@@ -99,6 +99,12 @@ class SearchDbOutput(insightconnect_plugin_runtime.Output):
           "description": "Published date of vulnerability",
           "order": 3
         },
+        "solutions": {
+          "type": "string",
+          "title": "Solutions",
+          "description": "List of possible solutions for the vulnerability",
+          "order": 5
+        },
         "title": {
           "type": "string",
           "title": "Title",

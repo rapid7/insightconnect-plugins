@@ -18,7 +18,18 @@ class SearchDb(insightconnect_plugin_runtime.Action):
         # Get params
         search_for = params.get(Input.SEARCH)
         db = params.get(Input.DATABASE)
-        results = extract.Search.get_results(search_for, db)
+        responses = extract.Search.get_results(search_for, db)
+        results = []
+
+        for response in responses:
+            identifier = response.get("identifier")
+            if not identifier:
+                continue
+
+            dict_response = response.copy()
+            dict_response["solutions"] = extract.Content.get(identifier).get("solutions")
+            results.append(dict_response)
+
         return {
             Output.RESULTS_FOUND: len(results) > 0,
             Output.SEARCH_RESULTS: results,
