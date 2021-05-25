@@ -20,7 +20,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         api_key = params.get(Input.API_KEY).get("secretKey")
         api_key_id = params.get(Input.API_KEY_ID)
-        fqdn = params.get(Input.FQDN)
+        fqdn = params.get(Input.URL)
         fqdn = self.clean_up_fqdn(fqdn)
 
         security_level = params.get(Input.SECURITY_LEVEL)
