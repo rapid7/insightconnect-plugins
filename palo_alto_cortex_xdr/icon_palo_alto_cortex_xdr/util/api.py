@@ -122,7 +122,8 @@ class CortexXdrAPI:
 
                 # Update the indices of search_from and search_to to we can request the next page
                 search_from = search_from + batch_size
-                search_to = search_to + batch_size if search_to + batch_size < total_count else total_count
+                new_to = search_to + batch_size
+                search_to = new_to if new_to < total_count else total_count
 
                 # Add the updated page indices to the request body for when we request the next page
                 post_body["request_data"]["search_from"] = search_from
