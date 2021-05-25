@@ -258,7 +258,7 @@ class CortexXdrAPI:
             if response.status_code == 402:
                 raise PluginException(
                     cause=f"API Error. API returned {response.status_code}",
-                    assistance="Unauthorized access. User oes not have the required license type to run this API.",
+                    assistance="Unauthorized access. User does not have the required license type to run this API.",
                     data=response_text,
                 )
             if response.status_code == 403:
