@@ -172,7 +172,7 @@ actions:
     input:
       endpoint:
         title: Endpoint
-        description: The endpoint to get information about. Endpoint will accept IPv4, hostnames, and endpoint IDs
+        description: The endpoint to get information about. This can be an IPv4 address, hostname, or endpoint ID
         type: string
         required: true
         example: 0123456abcdef12345abcde12345abcd
