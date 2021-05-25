@@ -199,7 +199,7 @@ actions:
         example: 0123456abcdef12345abcde12345abcd
       isolation_state:
         title: Isolation State
-        description: True to isolate host, false to unisolate a host
+        description: Isolation state to set
         type: string
         required: true
         default: Isolate
