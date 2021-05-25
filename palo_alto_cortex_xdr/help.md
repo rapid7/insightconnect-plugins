@@ -5,7 +5,8 @@ Stop modern attacks with the industry’s first extended detection and response 
 # Key Features
 
 * Get Endpoint Information
-* Isolate or Unisolate endpoints
+* Isolate or Unisolate an endpoint
+* Add files to the block or allow lists
 
 # Requirements
 
@@ -69,7 +70,7 @@ Example input:
 {
   "comment": "File blocked by InsightConnect",
   "file_hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
-  "incident_id": 5
+  "incident_id": "5"
 }
 ```
 
