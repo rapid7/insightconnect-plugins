@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 from komand_markdown.util import utils
 from .schema import HtmlToMarkdownInput, HtmlToMarkdownOutput
 
 
-class HtmlToMarkdown(komand.Action):
+class HtmlToMarkdown(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="html_to_markdown",

@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import MarkdownToTxtInput, MarkdownToTxtOutput, Input, Output, Component
 from komand_markdown.util import utils
 
@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 import binascii
 
 
-class MarkdownToTxt(komand.Action):
+class MarkdownToTxt(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="markdown_to_txt",
