@@ -69,7 +69,7 @@ class CortexXdrAPI:
         if not endpoints:
             self.logger.error(f"No matching endpoints found. Endpoint: {endpoint}")
             raise PluginException(
-                cause="Endpoint not found",
+                cause="Endpoint not found.",
                 assistance=f"The endpoints {endpoint} was not found. Please check your input and try again",
             )
 
