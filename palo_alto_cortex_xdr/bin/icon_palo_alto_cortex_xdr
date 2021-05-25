@@ -4,10 +4,10 @@ import os
 import json
 from sys import argv
 
-Name = "Cisco ThreatGrid"
+Name = "Palo Alto Cortex XDR"
 Vendor = "rapid7"
-Version = "3.0.1"
-Description = "This plugin retrieves malware reports, report samples and URLs for analysis to Cisco ThreatGrid server Cisco ThreatGrid combines advanced sandboxing with threat intelligence into one unified solution to protect organizations from malware"
+Version = "1.0.0"
+Description = "Stop modern attacks with the industry's first extended detection and response platform that spans your endpoints, network and cloud data"
 
 
 def main():
@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
-    from icon_cisco_threatgrid import connection, actions, triggers
+    import insightconnect_plugin_runtime
+    from icon_palo_alto_cortex_xdr import connection, actions, triggers
 
-    class ICONCiscoThreatgrid(komand.Plugin):
+    class ICONPaloAltoCortexXdr(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -34,19 +34,19 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
-            self.add_action(actions.GetSampleAnalysis())
+            self.add_trigger(triggers.GetIncidents())
 
-            self.add_action(actions.SearchForSampleReportByDomain())
+            self.add_action(actions.AllowFile())
 
-            self.add_action(actions.SearchForSampleReportBySha256())
+            self.add_action(actions.BlockFile())
 
-            self.add_action(actions.SubmitSample())
+            self.add_action(actions.GetEndpointDetails())
 
-            self.add_action(actions.SubmitUrl())
+            self.add_action(actions.IsolateEndpoint())
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONCiscoThreatgrid())
+    cli = insightconnect_plugin_runtime.CLI(ICONPaloAltoCortexXdr())
     cli.run()
 
 
