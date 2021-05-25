@@ -25,7 +25,7 @@ class GetEndpointDetailsInput(insightconnect_plugin_runtime.Input):
     "endpoint": {
       "type": "string",
       "title": "Endpoint",
-      "description": "The endpoint to get information about. Endpoint will accept IPv4, hostnames, and endpoint IDs",
+      "description": "The endpoint to get information about. This can be an IPv4 address, hostname, or endpoint ID",
       "order": 1
     }
   },

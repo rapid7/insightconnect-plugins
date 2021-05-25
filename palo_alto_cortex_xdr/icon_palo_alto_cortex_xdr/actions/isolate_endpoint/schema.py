@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Isolate an endpoint"
+    DESCRIPTION = "Isolate or unisolate an endpoint"
 
 
 class Input:
@@ -32,7 +32,7 @@ class IsolateEndpointInput(insightconnect_plugin_runtime.Input):
     "isolation_state": {
       "type": "string",
       "title": "Isolation State",
-      "description": "True to isolate host, false to unisolate a host",
+      "description": "Isolation state to set",
       "default": "Isolate",
       "enum": [
         "Isolate",
@@ -43,7 +43,7 @@ class IsolateEndpointInput(insightconnect_plugin_runtime.Input):
     "whitelist": {
       "type": "array",
       "title": "Whitelist",
-      "description": "This list contains a set of devices that should not be blocked. This can include IPs, hostnames, and device IDs",
+      "description": "This list contains a set of devices that should not be blocked. This can be a combination of IPv4 addresses, hostnames, or endpoint IDs",
       "items": {
         "type": "string"
       },

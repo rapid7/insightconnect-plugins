@@ -19,7 +19,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "The API Key that is generated when creating a new key",
+      "description": "The Cortex XDR API Key that is generated when creating a new key",
       "order": 3
     },
     "api_key_id": {
