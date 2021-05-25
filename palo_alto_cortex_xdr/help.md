@@ -331,4 +331,4 @@ Example output:
 
 ## References
 
-* [Palo Alto Cortex XDR](LINK TO PRODUCT/VENDOR WEBSITE)
+* [Palo Alto Cortex XDR](https://www.paloaltonetworks.com/cortex/cortex-xdr)
