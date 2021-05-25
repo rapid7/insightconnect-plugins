@@ -54,7 +54,7 @@ class CortexXdrAPI:
 
         self.logger.info("Posting to API...")
         results = self._post_to_api(api_endpoint, request_body)
-        self.logger.info("Getting Reply...")
+        self.logger.info("Getting reply...")
 
         output_object = {
             "endpoints": results.get("reply").get("endpoints"),
