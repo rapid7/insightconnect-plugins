@@ -24,7 +24,7 @@ hub_tags:
   use_cases: [vulnerability_management, remediation_management]
   keywords: [exploit, rapid7, database, vulndb]
   features: []
-enable_cache: true
+enable_cache: false
 language: python
 types:
   search_result:
