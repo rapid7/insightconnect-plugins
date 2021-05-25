@@ -209,7 +209,7 @@ actions:
           - Unisolate
       whitelist:
         title: Whitelist
-        description: This list contains a set of devices that should not be blocked. This can include IPs, hostnames, and device IDs
+        description: This list contains a set of devices that should not be blocked. This can be a combination of IPv4 addresses, hostnames, or endpoint IDs
         type: "[]string"
         required: false
         default: []
