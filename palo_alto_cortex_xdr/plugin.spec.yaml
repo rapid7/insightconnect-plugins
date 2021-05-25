@@ -151,7 +151,7 @@ connection:
     example: 1
   api_key:
     title: API Key
-    description: The API Key that is generated when creating a new key
+    description: The Cortex XDR API Key that is generated when creating a new key
     type: credential_secret_key
     required: true
     example: '1234123412341234asdfasdfasdfasdfasdf1234123412341234123412341234asdfasdfasdfasdfasdf123412341234123412341234asdfasdfasdfasdfasdf'
