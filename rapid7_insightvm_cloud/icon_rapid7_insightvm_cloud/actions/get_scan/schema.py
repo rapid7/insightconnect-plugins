@@ -61,7 +61,9 @@ class GetScanOutput(insightconnect_plugin_runtime.Output):
     "finished": {
       "type": "string",
       "title": "Finished",
+      "displayType": "date",
       "description": "When the scan was finished",
+      "format": "date-time",
       "order": 6
     },
     "name": {
@@ -79,7 +81,9 @@ class GetScanOutput(insightconnect_plugin_runtime.Output):
     "started": {
       "type": "string",
       "title": "Started",
+      "displayType": "date",
       "description": "When the scan was started",
+      "format": "date-time",
       "order": 5
     },
     "status": {
