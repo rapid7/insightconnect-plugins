@@ -14,11 +14,11 @@ Stop modern attacks with the industry’s first extended detection and response 
 * A Palo Alto Cortex XDR API key ID
 * The URL to your Palo Alto Cortex XDR API instance
 
-The required connection information is available in the Cortex XDR web dashboard. Click the gear icon, click settings, and then click on API Keys on the left. 
+The required connection information is available in the Cortex XDR web dashboard. Click the gear icon, click settings, and then click on API Keys on the left.
 
-The API Key will be generated when you create a new API key. 
+The API Key will be generated when you create a new API key.
 
-The API Key ID is the value from the ID column
+The API Key ID is the value from the ID column.
 
 To get the API URL, right click on your API key and pick generate examples. The generated example is a URL that should look similar to "https://api-yourorg.xdr.us.paloaltonetworks.com/api_keys/validate/". 
 In our example the API URL is "https://api-yourorg.xdr.us.paloaltonetworks.com" and should be copied.
