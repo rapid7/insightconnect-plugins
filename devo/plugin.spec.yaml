@@ -22,6 +22,95 @@ hub_tags:
   keywords: [devo, sim, logs, cloud]
   features: []
 
+types:
+  log_entry:
+    bytesTransferred:
+      title: "Bytes Transferred"
+      type: integer
+      description: "Bytes Transferred"
+      required: false
+    clientIpAddress:
+      title: "Client IP Address"
+      type: string
+      description: "Client IP address"
+      required: false
+    cookie:
+      title: "Cookie"
+      type: string
+      description: "Cookie"
+      required: false
+    eventdate:
+      title: "Event Date"
+      type: integer
+      description: "Event date"
+      required: false
+    method:
+      title: "Method"
+      type: string
+      description: "Method"
+      required: false
+    protocol:
+      title: "Protocol"
+      type: string
+      description: "Protocol"
+      required: false
+    referralUri:
+      title: "Referral URI"
+      type: string
+      description: "Referral URI"
+      required: false
+    statusCode:
+      title: "Status Code"
+      type: integer
+      description: "Status code"
+      required: false
+    timeTaken:
+      title: "Time Taken"
+      type: integer
+      description: "Time taken"
+      required: false
+    timestamp:
+      title: "Time stamp"
+      type: string
+      description: "Time stamp"
+      required: false
+    uri:
+      title: "URI"
+      type: string
+      description: "URI"
+      required: false
+    userAgent:
+      title: "User Agent"
+      type: string
+      description: "User agent"
+      required: false
+  query_result:
+    msg:
+        title: "Message"
+        type: string
+        description: "Message"
+        required: false
+    timestamp:
+        title: "Time Stamp"
+        type: integer
+        description: "Time stamp"
+        required: false
+    cid:
+        title: "CID"
+        type: string
+        description: "CID"
+        required: false
+    status:
+        title: "Status"
+        type: integer
+        description: "Status"
+        required: false
+    object:
+        title: "Log Entries"
+        type: "[]log_entry"
+        description: "Log Entries"
+        required: false
+
 connection:
   authentication_token:
     title: Authentication Token
@@ -49,9 +138,23 @@ actions:
         description: Query
         type: string
         required: true
+        example: "from from demo.ecommerce.data select *"
+      from_date:
+        title: From Date
+        description: Earliest date to query events from, will accept relative or absolute times. e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now
+        type: string
+        required: true
+        example: 5 minutes ago
+      to_date:
+        title: To Date
+        description: Lastest date to query events from, will accept relative or absolute times. e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now
+        type: string
+        required: true
+        default: Now
+        example: Now
     output:
       results:
-        title: Results
-        description: Results
-        type: "[]object"
+        title: Query Result
+        description: An object containing information and results about the query that was run
+        type: query_result
         required: true

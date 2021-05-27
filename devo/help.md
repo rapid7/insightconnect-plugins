@@ -20,7 +20,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |authentication_token|credential_secret_key|None|True|Authentication Token|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|region|string|None|True|Region|['US', 'Europe', 'Spain (VDC)']|None|
+|region|string|None|True|Region|['USA', 'EU', 'VDC (Spain)']|None|
 
 Example input:
 
@@ -34,26 +34,33 @@ Example input:
 
 ### Actions
 
-#### 
+#### Query Logs
 
-This action is used to .
+This action is used to run a LINQ query against the logs.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|query|string|None|True|Query|None|None|
+|from_date|string|None|True|Earliest date to query events from, will accept relative or absolute times. e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now|None|5 minutes ago|
+|query|string|None|True|Query|None|from from demo.ecommerce.data select *|
+|to_date|string|Now|True|Lastest date to query events from, will accept relative or absolute times. e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now|None|Now|
 
 Example input:
 
 ```
+{
+  "from_date": "5 minutes ago",
+  "query": "from from demo.ecommerce.data select *",
+  "to_date": "Now"
+}
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|results|[]object|True|Results|
+|results|query_result|True|An object containing information and results about the query that was run|
 
 Example output:
 

@@ -25,9 +25,9 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "Region",
       "description": "Region",
       "enum": [
-        "US",
-        "Europe",
-        "Spain (VDC)"
+        "USA",
+        "EU",
+        "VDC (Spain)"
       ],
       "order": 2
     }

@@ -4,11 +4,13 @@ import json
 
 
 class Component:
-    DESCRIPTION = ""
+    DESCRIPTION = "Run a LINQ query against the logs"
 
 
 class Input:
+    FROM_DATE = "from_date"
     QUERY = "query"
+    TO_DATE = "to_date"
     
 
 class Output:
@@ -21,15 +23,30 @@ class QueryLogsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "from_date": {
+      "type": "string",
+      "title": "From Date",
+      "description": "Earliest date to query events from, will accept relative or absolute times. e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now",
+      "order": 2
+    },
     "query": {
       "type": "string",
       "title": "Query",
       "description": "Query",
       "order": 1
+    },
+    "to_date": {
+      "type": "string",
+      "title": "To Date",
+      "description": "Lastest date to query events from, will accept relative or absolute times. e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now",
+      "default": "Now",
+      "order": 3
     }
   },
   "required": [
-    "query"
+    "from_date",
+    "query",
+    "to_date"
   ]
 }
     """)
@@ -45,18 +62,214 @@ class QueryLogsOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "results": {
-      "type": "array",
-      "title": "Results",
-      "description": "Results",
-      "items": {
-        "type": "object"
-      },
+      "$ref": "#/definitions/query_result",
+      "title": "Query Result",
+      "description": "An object containing information and results about the query that was run",
       "order": 1
     }
   },
   "required": [
     "results"
-  ]
+  ],
+  "definitions": {
+    "log_entry": {
+      "type": "object",
+      "title": "log_entry",
+      "properties": {
+        "bytesTransferred": {
+          "type": "integer",
+          "title": "Bytes Transferred",
+          "description": "Bytes Transferred",
+          "order": 1
+        },
+        "clientIpAddress": {
+          "type": "string",
+          "title": "Client IP Address",
+          "description": "Client IP address",
+          "order": 2
+        },
+        "cookie": {
+          "type": "string",
+          "title": "Cookie",
+          "description": "Cookie",
+          "order": 3
+        },
+        "eventdate": {
+          "type": "integer",
+          "title": "Event Date",
+          "description": "Event date",
+          "order": 4
+        },
+        "method": {
+          "type": "string",
+          "title": "Method",
+          "description": "Method",
+          "order": 5
+        },
+        "protocol": {
+          "type": "string",
+          "title": "Protocol",
+          "description": "Protocol",
+          "order": 6
+        },
+        "referralUri": {
+          "type": "string",
+          "title": "Referral URI",
+          "description": "Referral URI",
+          "order": 7
+        },
+        "statusCode": {
+          "type": "integer",
+          "title": "Status Code",
+          "description": "Status code",
+          "order": 8
+        },
+        "timeTaken": {
+          "type": "integer",
+          "title": "Time Taken",
+          "description": "Time taken",
+          "order": 9
+        },
+        "timestamp": {
+          "type": "string",
+          "title": "Time stamp",
+          "description": "Time stamp",
+          "order": 10
+        },
+        "uri": {
+          "type": "string",
+          "title": "URI",
+          "description": "URI",
+          "order": 11
+        },
+        "userAgent": {
+          "type": "string",
+          "title": "User Agent",
+          "description": "User agent",
+          "order": 12
+        }
+      }
+    },
+    "query_result": {
+      "type": "object",
+      "title": "query_result",
+      "properties": {
+        "cid": {
+          "type": "string",
+          "title": "CID",
+          "description": "CID",
+          "order": 3
+        },
+        "msg": {
+          "type": "string",
+          "title": "Message",
+          "description": "Message",
+          "order": 1
+        },
+        "object": {
+          "type": "array",
+          "title": "Log Entries",
+          "description": "Log Entries",
+          "items": {
+            "$ref": "#/definitions/log_entry"
+          },
+          "order": 5
+        },
+        "status": {
+          "type": "integer",
+          "title": "Status",
+          "description": "Status",
+          "order": 4
+        },
+        "timestamp": {
+          "type": "integer",
+          "title": "Time Stamp",
+          "description": "Time stamp",
+          "order": 2
+        }
+      },
+      "definitions": {
+        "log_entry": {
+          "type": "object",
+          "title": "log_entry",
+          "properties": {
+            "bytesTransferred": {
+              "type": "integer",
+              "title": "Bytes Transferred",
+              "description": "Bytes Transferred",
+              "order": 1
+            },
+            "clientIpAddress": {
+              "type": "string",
+              "title": "Client IP Address",
+              "description": "Client IP address",
+              "order": 2
+            },
+            "cookie": {
+              "type": "string",
+              "title": "Cookie",
+              "description": "Cookie",
+              "order": 3
+            },
+            "eventdate": {
+              "type": "integer",
+              "title": "Event Date",
+              "description": "Event date",
+              "order": 4
+            },
+            "method": {
+              "type": "string",
+              "title": "Method",
+              "description": "Method",
+              "order": 5
+            },
+            "protocol": {
+              "type": "string",
+              "title": "Protocol",
+              "description": "Protocol",
+              "order": 6
+            },
+            "referralUri": {
+              "type": "string",
+              "title": "Referral URI",
+              "description": "Referral URI",
+              "order": 7
+            },
+            "statusCode": {
+              "type": "integer",
+              "title": "Status Code",
+              "description": "Status code",
+              "order": 8
+            },
+            "timeTaken": {
+              "type": "integer",
+              "title": "Time Taken",
+              "description": "Time taken",
+              "order": 9
+            },
+            "timestamp": {
+              "type": "string",
+              "title": "Time stamp",
+              "description": "Time stamp",
+              "order": 10
+            },
+            "uri": {
+              "type": "string",
+              "title": "URI",
+              "description": "URI",
+              "order": 11
+            },
+            "userAgent": {
+              "type": "string",
+              "title": "User Agent",
+              "description": "User agent",
+              "order": 12
+            }
+          }
+        }
+      }
+    }
+  }
 }
     """)
 

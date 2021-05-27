@@ -13,5 +13,8 @@ class QueryLogs(insightconnect_plugin_runtime.Action):
                 output=QueryLogsOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        query = params.get(Input.QUERY)
+        from_date = params.get(Input.FROM_DATE)
+        to_date = params.get(Input.TO_DATE)
+        output = self.connection.api.query(query, from_date, to_date)
+        return {Output.RESULTS: insightconnect_plugin_runtime.helper.clean(output)}
