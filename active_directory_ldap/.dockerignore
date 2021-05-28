@@ -1,5 +1,5 @@
-#unit_test/**/*
-#unit_test
+unit_test/**/*
+unit_test
 unit_integration_test/**/*
 unit_integration_test
 examples/**/*
