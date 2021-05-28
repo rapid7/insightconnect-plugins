@@ -39,7 +39,7 @@ Example input:
   "host": "example.com",
   "port": 389,
   "use_ssl": true,
-    "username_password": {
+  "username_password": {
     "username": "user1",
     "password": "mypassword"
   }
@@ -236,7 +236,7 @@ Example input:
 ```
 {
   "account_disabled": true,
-    "additional_parameters": {
+  "additional_parameters": {
     "telephoneNumber": "(617)555-1234"
   },
   "domain_name": "example.com",
