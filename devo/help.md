@@ -20,13 +20,14 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |authentication_token|credential_secret_key|None|True|Authentication Token|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|region|string|None|True|Region|['USA', 'EU', 'VDC (Spain)']|None|
+|region|string|None|True|Region|['USA', 'EU', 'VDC (Spain)']|USA|
 
 Example input:
 
 ```
 {
-  "authentication_token": "9de5069c5afe602b2ea0a04b66beb2c0"
+  "authentication_token": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "region": "USA"
 }
 ```
 

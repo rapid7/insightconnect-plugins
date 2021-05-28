@@ -3,7 +3,7 @@ import os
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from icon_devo.util.api import DevoAPI
@@ -50,4 +50,3 @@ class TestQueryLogs(TestCase):
 
         with self.assertRaises(PluginException):
             test_api._convert_time_to_epoch("some gibberish that doesn't mean anything")
-

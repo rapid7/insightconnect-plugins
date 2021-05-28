@@ -7,13 +7,13 @@ import time
 
 # From: https://docs.devo.com/confluence/ndt/api-reference/query-api
 REGION_MAP = {
-    "USA":"https://apiv2-us.devo.com/search/",
-    "EU":"Https://apiv2-eu.devo.com/search/",
-    "VDC (Spain)":"https://apiv2-es.devo.com/search/"
+    "USA": "https://apiv2-us.devo.com/search/",
+    "EU": "Https://apiv2-eu.devo.com/search/",
+    "VDC (Spain)": "https://apiv2-es.devo.com/search/",
 }
 
 
-class DevoAPI():
+class DevoAPI:
     def __init__(self, logger, api_token, region):
         self.logger = logger
         self.token = api_token
@@ -21,12 +21,12 @@ class DevoAPI():
 
         self.base_url = REGION_MAP.get(region)
         if not self.base_url:
-            raise PluginException(cause="Region not found.",
-                                  assistance=f"The region {self.region} was not reconginzed, please check your connection input and try again.")
+            raise PluginException(
+                cause="Region not found.",
+                assistance=f"The region {self.region} was not reconginzed, please check your connection input and try again.",
+            )
 
-        self.headers = {
-            "Authorization": f"Bearer {self.token}"
-        }
+        self.headers = {"Authorization": f"Bearer {self.token}"}
 
         self.session = requests.Session()
 
@@ -40,11 +40,9 @@ class DevoAPI():
             "query": query,
             "from": from_epoch,
             "to": to_epoch,
-            "mode": {
-                "type":"json"
-            },
+            "mode": {"type": "json"},
             "dateFormat": "iso",
-            "ipAsString": True
+            "ipAsString": True,
         }
 
         results = self._post_to_api(endpoint, post_payload)
@@ -59,32 +57,35 @@ class DevoAPI():
         """
 
         try:
-            self._post_to_api("/query",{})
+            self._post_to_api("/query", {})
         except Exception as e:
             if "405" in e.data:
                 return "pass"
             else:
-                raise ConnectionTestException(ConnectionTestException.Preset.UNAUTHORIZED,
-                                              data=e)
+                raise ConnectionTestException(ConnectionTestException.Preset.UNAUTHORIZED, data=e)
 
     #################
     # Private Methods
     #################
-    def _convert_time_to_epoch(self, time_string:str) -> int:
+    def _convert_time_to_epoch(self, time_string: str) -> int:
         try:
             parsed_time = dateparser.parse(time_string)
-        except Exception as e: # I don't think this will ever happen, leaving as a safeguard.
-            raise PluginException(cause=f"{time_string} does not appear to be a valid time",
-                                  assistance="Please check your step inputs and try again.",
-                                  data=e)
+        except Exception as e:  # I don't think this will ever happen, leaving as a safeguard.
+            raise PluginException(
+                cause=f"{time_string} does not appear to be a valid time",
+                assistance="Please check your step inputs and try again.",
+                data=e,
+            )
 
         if not parsed_time:
-            raise PluginException(cause=f"{time_string} does not appear to be a valid time",
-                                  assistance="Please check your step inputs and try again.")
+            raise PluginException(
+                cause=f"{time_string} does not appear to be a valid time",
+                assistance="Please check your step inputs and try again.",
+            )
 
         return int(parsed_time.timestamp())
 
-    def _post_to_api(self, endpoint:str, post_body:dict) -> dict:
+    def _post_to_api(self, endpoint: str, post_body: dict) -> dict:
         self.logger.info(f"Starting post to API: {endpoint}")
 
         # Need this because if it starts with / url join thinks it's a root
@@ -101,10 +102,7 @@ class DevoAPI():
                     data=response_text,
                 )
             if response.status_code > 401 and response.status_code < 404:
-                raise PluginException(
-                    PluginException.Preset.UNAUTHORIZED,
-                    data=response_text
-                )
+                raise PluginException(PluginException.Preset.UNAUTHORIZED, data=response_text)
             if response.status_code == 404:
                 raise PluginException(
                     cause=f"API Error. API returned {response.status_code}",
