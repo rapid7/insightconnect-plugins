@@ -15,6 +15,7 @@ class Input:
     
 
 class Output:
+    ASSET_IDS = "asset_ids"
     DATA = "data"
     IDS = "ids"
     
@@ -75,11 +76,20 @@ class StartScanOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "asset_ids": {
+      "type": "array",
+      "title": "Asset IDs",
+      "description": "List of identifiers of the assets scanned",
+      "items": {
+        "type": "string"
+      },
+      "order": 2
+    },
     "data": {
       "type": "object",
       "title": "Data",
       "description": "Information received about the scan",
-      "order": 2
+      "order": 3
     },
     "ids": {
       "type": "array",
