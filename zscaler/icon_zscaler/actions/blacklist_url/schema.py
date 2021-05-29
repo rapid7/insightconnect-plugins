@@ -8,11 +8,13 @@ class Component:
 
 
 class Input:
+    ACTIVATE_CONFIGURATION = "activate_configuration"
     BLACKLIST_STATE = "blacklist_state"
     URLS = "urls"
     
 
 class Output:
+    STATUS = "status"
     SUCCESS = "success"
     
 
@@ -22,6 +24,13 @@ class BlacklistUrlInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "activate_configuration": {
+      "type": "boolean",
+      "title": "Activate Configuration",
+      "description": "This setting activates the configuration changes so they're go into effect when set to true",
+      "default": false,
+      "order": 3
+    },
     "blacklist_state": {
       "type": "boolean",
       "title": "Blacklist State",
@@ -40,6 +49,7 @@ class BlacklistUrlInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
+    "activate_configuration",
     "urls"
   ]
 }
@@ -55,6 +65,12 @@ class BlacklistUrlOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "status": {
+      "type": "string",
+      "title": "Status",
+      "description": "Activation status for a configuration change",
+      "order": 2
+    },
     "success": {
       "type": "boolean",
       "title": "Success",
@@ -63,6 +79,7 @@ class BlacklistUrlOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
+    "status",
     "success"
   ]
 }

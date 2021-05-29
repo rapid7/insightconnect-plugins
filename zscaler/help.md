@@ -178,6 +178,7 @@ This action is used to add or remove URLs from a blacklist. These URLs will appe
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|activate_configuration|boolean|False|True|This setting activates the configuration changes so they're go into effect when set to true|None|False|
 |blacklist_state|boolean|True|False|True to blacklist a URL, false to unblacklist a URL|None|True|
 |urls|[]string|None|True|A given set of one or more URLs or domains to update in the blacklist|None|["www.example.com", "http://rapid7.com"]|
 
@@ -185,6 +186,7 @@ Example input:
 
 ```
 {
+  "activate_configuration": false,
   "blacklist_state": true,
   "urls": [
     "www.example.com",
@@ -197,13 +199,15 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|status|string|True|Activation status for a configuration change|
 |success|boolean|True|Whether or not the request succeeded|
 
 Example output:
 
 ```
 {
-  "success": true
+  "success": true,
+  "status": "PENDING"
 }
 ```
 
@@ -339,6 +343,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.4.0 - Add Activate Configuration input in Blacklist URL action
 * 1.3.0 - Add Get Blacklist URL action
 * 1.2.1 - Usability updates and updated icon
 * 1.2.0 - New action Get Sandbox Report for Hash
