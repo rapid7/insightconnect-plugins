@@ -18,18 +18,21 @@ class GetAllThreats(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         self.connection.client.check_authorization()
 
+        query_params = {"format": "JSON"}
+        threat_type = params.get(Input.THREAT_TYPE)
+        threat_status = params.get(Input.THREAT_STATUS)
+
+        if threat_type != "all":
+            query_params["threatType"] = threat_type
+        if threat_status != "all":
+            query_params["threatStatus"] = threat_status
+
         return {
             Output.RESULTS: insightconnect_plugin_runtime.helper.clean(
                 self.connection.client.siem_action(
                     Endpoint.get_all_threats(),
                     SiemUtils.prepare_time_range(
-                        params.get(Input.TIME_START),
-                        params.get(Input.TIME_END),
-                        {
-                            "format": "JSON",
-                            "threatType": params.get(Input.THREAT_TYPE),
-                            "threatStatus": params.get(Input.THREAT_STATUS),
-                        },
+                        params.get(Input.TIME_START), params.get(Input.TIME_END), query_params
                     ),
                 )
             )

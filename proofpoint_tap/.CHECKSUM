@@ -1,27 +1,27 @@
 {
-	"spec": "97113129ec3c8a063394607fc7a26a31",
-	"manifest": "0b35c03d10da1fd024f79b7ba41a7bc8",
-	"setup": "a45b97d03c1572624efbc3f73d079b68",
+	"spec": "366e4f1e83473c163697cf3299108aae",
+	"manifest": "19efdc8893fca049c2e2fa92755ce7c7",
+	"setup": "067742a32a59decc2cee6a8a9a4bb5ad",
 	"schemas": [
 		{
 			"identifier": "get_all_threats/schema.py",
-			"hash": "a84d061f9904b5f3c313d0a95c0bbe71"
+			"hash": "a3cdb79f9f30835eb2dfc77c7333b627"
 		},
 		{
 			"identifier": "get_blocked_clicks/schema.py",
-			"hash": "2f37507642cc3d9b42bc952def451d23"
+			"hash": "a029738a0a0b4f60ddd15f820d186ce1"
 		},
 		{
 			"identifier": "get_blocked_messages/schema.py",
-			"hash": "739b2c4e04db48a55f78c366b954344d"
+			"hash": "9e20b7aea9de741ed3b6d12461ee2848"
 		},
 		{
 			"identifier": "get_delivered_threats/schema.py",
-			"hash": "44b2043d60ed60f0db98817c54cb461d"
+			"hash": "fcdab07ef75cf40b97f82c34b38ed85c"
 		},
 		{
 			"identifier": "get_permitted_clicks/schema.py",
-			"hash": "6de992e2df2566fda213ef5ccb6958b9"
+			"hash": "520ae3e7508c6216b4011c04de9221aa"
 		},
 		{
 			"identifier": "get_top_clickers/schema.py",
