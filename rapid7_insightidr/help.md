@@ -801,6 +801,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.2 - Send plugin name and version in the User-Agent string to vendor
 * 3.1.1 - Convert given date from timezone to UTC in List Investigations action
 * 3.1.0 - Add new action Create Threat
 * 3.0.0 - Added Relative Time options to Advanced Query actions | Fix issue where a query with no results would crash the plugin
