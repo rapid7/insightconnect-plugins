@@ -28,7 +28,9 @@ Example input:
 
 ```
 {
-  "api_key": "{\"secretKey\": \"381cd93b-1946-9c73-1946-c916075eb9a3\"}"
+  "api_key": {
+    "secretKey": “381cd93b-1946-9c73-1946-c916075eb9a3"
+  }
 }
 ```
 
