@@ -139,7 +139,7 @@ actions:
         description: A Query. The response be limited to 200 mb of raw data or 1000 entries whichever is hit first
         type: string
         required: true
-        example: "from from demo.ecommerce.data select *"
+        example: "from demo.ecommerce.data select *"
       from_date:
         title: From Date
         description: Earliest date to query events from, will accept relative or absolute times. e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now
