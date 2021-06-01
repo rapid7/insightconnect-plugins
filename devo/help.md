@@ -102,9 +102,9 @@ _This plugin does not contain any custom output types._
 
 * The plugin doesn't return all my results from a query. 
 
-The plugin is limited to 1000 entries or 200 mb of data for queries, whichever is hit first. 
+   The plugin is limited to 1000 entries or 200MB of data for queries, whichever is hit first. 
 
-To avoid this issue either rewrite your query to return fewer results, or you can use the `offset` keyword to paginate data. 
+   To avoid this issue either rewrite your query to return fewer results, or you can use the `offset` keyword to paginate data. 
 
 # Version History
 
