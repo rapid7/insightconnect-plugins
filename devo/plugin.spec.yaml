@@ -142,7 +142,7 @@ actions:
         example: "from demo.ecommerce.data select *"
       from_date:
         title: From Date
-        description: Earliest date to query events from, will accept relative or absolute times. e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now
+        description: Earliest date to query events from, will accept relative or absolute times, e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now
         type: string
         required: true
         example: 5 minutes ago
