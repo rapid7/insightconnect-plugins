@@ -1,6 +1,6 @@
 # Description
 
-Devo is the cloud-native logging and security analytics solution that delivers real-time visibility for security and operations teams
+[Devo](https://www.devo.com/) is the cloud-native logging and security analytics solution that delivers real-time visibility for security and operations teams
 
 # Key Features
 
@@ -114,4 +114,4 @@ _This plugin does not contain any custom output types._
 
 ## References
 
-* [devo](LINK TO PRODUCT/VENDOR WEBSITE)
+* [Devo](https://www.devo.com/)
