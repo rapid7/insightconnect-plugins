@@ -70,7 +70,7 @@ types:
       description: "Time taken"
       required: false
     timestamp:
-      title: "Time stamp"
+      title: "Timestamp"
       type: string
       description: "Time stamp"
       required: false
