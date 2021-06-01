@@ -51,7 +51,7 @@ Example input:
 ```
 {
   "from_date": "5 minutes ago",
-  "query": "from from demo.ecommerce.data select *",
+  "query": "from demo.ecommerce.data select *",
   "to_date": "Now"
 }
 ```
