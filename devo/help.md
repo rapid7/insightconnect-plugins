@@ -4,16 +4,18 @@ Devo is the cloud-native logging and security analytics solution that delivers r
 
 # Key Features
 
-Identify key features of plugin.
+* Query Devo for log results
+* Download a report from Devo
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product's user interface
+* An Authentication Token
 
 # Documentation
 
 ## Setup
+
+To create an Authentication Token go to Administration > Credentials from the left nav in Devo. At the top of the screen is a tab for "Authentication Tokens". When you create a new token, take care that the token has access to the tables you expect to query. 
 
 The connection configuration accepts the following parameters:
 
@@ -66,6 +68,29 @@ Example input:
 Example output:
 
 ```
+{
+  "results": {
+    "timestamp": 1622211663530,
+    "cid": "24d4cd197626",
+    "status": 0,
+    "object": [
+      {
+        "eventdate": 1622211602031,
+        "clientIpAddress": "198.162.50.1",
+        "timestamp": "28/May/2021:14:19:55 +0000",
+        "method": "GET",
+        "uri": "/category.screen?category_id=FURNITURE&JSESSIONID=SD10SL8FF6ADFF7",
+        "protocol": "HTTP 1.1",
+        "statusCode": 408,
+        "bytesTransferred": 697,
+        "referralUri": "http://www.example.com/cart.do?action=changequantity&itemId=LOG-69&product_id=235-40LSZ-09823&JSESSIONID=SD10SL8FF6ADFF7",
+        "userAgent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)",
+        "cookie": "mc0ocue109c4n9fkvof64ou0i1:-",
+        "timeTaken": 891
+      }
+    ]
+  }
+}
 ```
 
 ### Triggers
@@ -78,7 +103,11 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+* The plugin doesn't return all my results from a query. 
+
+The plugin is limited to 1000 entries or 200 mb of data for queries, whichever is hit first. 
+
+To avoid this issue either rewrite your query to return fewer results, or you can use the `offset` keyword to paginate data. 
 
 # Version History
 

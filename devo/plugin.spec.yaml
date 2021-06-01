@@ -136,7 +136,7 @@ actions:
     input:
       query:
         title: Query
-        description: Query
+        description: A LINQ script query. This will be limited to 200 mb of raw data or 1000 entries whichever is hit first.
         type: string
         required: true
         example: "from from demo.ecommerce.data select *"

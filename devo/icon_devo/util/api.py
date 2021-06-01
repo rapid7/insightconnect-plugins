@@ -7,10 +7,12 @@ import time
 
 # From: https://docs.devo.com/confluence/ndt/api-reference/query-api
 REGION_MAP = {
-    "USA": "https://apiv2-us.devo.com/search/",
-    "EU": "Https://apiv2-eu.devo.com/search/",
-    "VDC (Spain)": "https://apiv2-es.devo.com/search/",
+    "USA": "https://apiv2-us.devo.com/",
+    "EU": "Https://apiv2-eu.devo.com/",
+    "VDC (Spain)": "https://apiv2-es.devo.com/",
 }
+
+RESPONSE_MAXSIZE = 2e8  # 200 MB in bytes
 
 
 class DevoAPI:
@@ -31,7 +33,7 @@ class DevoAPI:
         self.session = requests.Session()
 
     def query(self, query, from_date, to_date):
-        endpoint = "/query"
+        endpoint = "/search/query"
 
         from_epoch = self._convert_time_to_epoch(from_date)
         to_epoch = self._convert_time_to_epoch(to_date)
@@ -91,23 +93,21 @@ class DevoAPI:
         # Need this because if it starts with / url join thinks it's a root
         url = urllib.parse.urljoin(self.base_url, endpoint.lstrip("/"))
         try:
-            response = self.session.post(url=url, json=post_body, headers=self.headers, stream=False)
-
-            response_text = response.text
+            response = self.session.post(url=url, json=post_body, headers=self.headers, stream=True)
 
             if response.status_code == 400:
                 raise PluginException(
                     cause=f"API Error. API returned {response.status_code}",
                     assistance="Bad request or invalid JSON.",
-                    data=response_text,
+                    data=response.text,
                 )
             if response.status_code > 401 and response.status_code < 404:
-                raise PluginException(PluginException.Preset.UNAUTHORIZED, data=response_text)
+                raise PluginException(PluginException.Preset.UNAUTHORIZED, data=response.text)
             if response.status_code == 404:
                 raise PluginException(
                     cause=f"API Error. API returned {response.status_code}",
                     assistance=f"The object at {url} does not exist.",
-                    data=response_text,
+                    data=response.text,
                 )
             # Success; no content
             if response.status_code == 204:
@@ -115,7 +115,8 @@ class DevoAPI:
 
             if response.status_code >= 200 and response.status_code < 300:
                 self.logger.info("Returning from post to API")
-                return response.json()
+                output = self._get_stream(response)
+                return output
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except json.decoder.JSONDecodeError as e:
@@ -124,3 +125,22 @@ class DevoAPI:
         except requests.exceptions.HTTPError as e:
             self.logger.info(f"Request to {url} failed: {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
+
+    def _get_stream(self, request: requests.Request) -> dict:
+        content = ""
+        for chunk in request.iter_content(2048):
+            content += chunk.decode()
+            if len(content) > RESPONSE_MAXSIZE:
+                request.close()
+                raise PluginException(
+                    cause="Response too large.",
+                    assistance="The response recieved from the server was too large, please edit your input to reduce the returned data size and try again.",
+                )
+
+        if content:
+            try:
+                return json.loads(content)
+            except Exception as e:
+                raise PluginException(PluginException.Preset.INVALID_JSON)
+        else:
+            return {}
