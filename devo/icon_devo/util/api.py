@@ -134,7 +134,7 @@ class DevoAPI:
                 request.close()
                 raise PluginException(
                     cause="Response too large.",
-                    assistance="The response recieved from the server was too large, please edit your input to reduce the returned data size and try again.",
+                    assistance="The response received from the server was too large, please edit your input to reduce the returned data size and try again.",
                 )
 
         if content:
