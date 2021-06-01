@@ -1,3 +1,5 @@
+import logging
+
 import dateparser
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 import urllib
@@ -16,7 +18,7 @@ RESPONSE_MAXSIZE = 2e8  # 200 MB in bytes
 
 
 class DevoAPI:
-    def __init__(self, logger, api_token, region):
+    def __init__(self, logger: logging.Logger, api_token: str, region: str):
         self.logger = logger
         self.token = api_token
         self.region = region
@@ -32,7 +34,7 @@ class DevoAPI:
 
         self.session = requests.Session()
 
-    def query(self, query, from_date, to_date):
+    def query(self, query: str, from_date: str, to_date: str) -> dict:
         endpoint = "/search/query"
 
         from_epoch = self._convert_time_to_epoch(from_date)
@@ -59,7 +61,7 @@ class DevoAPI:
         """
 
         try:
-            self._post_to_api("/query", {})
+            self._post_to_api("/search/query", {})
         except Exception as e:
             if "405" in e.data:
                 return "pass"
@@ -134,7 +136,7 @@ class DevoAPI:
                 request.close()
                 raise PluginException(
                     cause="Response too large.",
-                    assistance="The response received from the server was too large, please edit your input to reduce the returned data size and try again.",
+                    assistance="The response received from the server was too large, please edit your input to reduce the returned data size and try again. See the trouble shooting section in the help for this plugin.",
                 )
 
         if content:

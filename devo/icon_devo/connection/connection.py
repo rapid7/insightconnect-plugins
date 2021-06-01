@@ -16,5 +16,5 @@ class Connection(insightconnect_plugin_runtime.Connection):
         )
 
     def test(self):
-        # TODO: Implement connection test
-        pass
+        self.api.test_connection()
+
