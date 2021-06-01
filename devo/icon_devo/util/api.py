@@ -25,7 +25,7 @@ class DevoAPI:
         if not self.base_url:
             raise PluginException(
                 cause="Region not found.",
-                assistance=f"The region {self.region} was not reconginzed, please check your connection input and try again.",
+                assistance=f"The region {self.region} was not recognized, please check your connection input and try again.",
             )
 
         self.headers = {"Authorization": f"Bearer {self.token}"}
