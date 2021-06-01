@@ -87,7 +87,7 @@ class DevoAPI:
 
         return int(parsed_time.timestamp())
 
-    def _post_to_api(self, endpoint: str, post_body: dict) -> dict:
+    def _post_to_api(self, endpoint: str, post_body: dict) -> Optional[dict]:
         self.logger.info(f"Starting post to API: {endpoint}")
 
         # Need this because if it starts with / url join thinks it's a root
