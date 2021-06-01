@@ -23,7 +23,6 @@ class TestQueryLogs(TestCase):
             test_json = json.loads(file.read()).get("body")
             connection_params = test_json.get("connection")
 
-
         test_conn.connect(connection_params)
         test_action.connection = test_conn
 

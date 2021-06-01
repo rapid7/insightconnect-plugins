@@ -17,4 +17,3 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self):
         self.api.test_connection()
-
