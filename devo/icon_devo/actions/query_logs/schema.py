@@ -26,7 +26,7 @@ class QueryLogsInput(insightconnect_plugin_runtime.Input):
     "from_date": {
       "type": "string",
       "title": "From Date",
-      "description": "Earliest date to query events from, will accept relative or absolute times. e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now",
+      "description": "Earliest date to query events from, will accept relative or absolute times, e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now",
       "order": 2
     },
     "query": {
@@ -38,7 +38,7 @@ class QueryLogsInput(insightconnect_plugin_runtime.Input):
     "to_date": {
       "type": "string",
       "title": "To Date",
-      "description": "Latest date to query events from, will accept relative or absolute times. e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now",
+      "description": "Latest date to query events from, will accept relative or absolute times, e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now",
       "default": "Now",
       "order": 3
     }
@@ -79,7 +79,7 @@ class QueryLogsOutput(insightconnect_plugin_runtime.Output):
         "bytesTransferred": {
           "type": "integer",
           "title": "Bytes Transferred",
-          "description": "Bytes Transferred",
+          "description": "Bytes transferred",
           "order": 1
         },
         "clientIpAddress": {
@@ -132,8 +132,8 @@ class QueryLogsOutput(insightconnect_plugin_runtime.Output):
         },
         "timestamp": {
           "type": "string",
-          "title": "Time stamp",
-          "description": "Time stamp",
+          "title": "Timestamp",
+          "description": "Timestamp",
           "order": 10
         },
         "uri": {
@@ -169,7 +169,7 @@ class QueryLogsOutput(insightconnect_plugin_runtime.Output):
         "object": {
           "type": "array",
           "title": "Log Entries",
-          "description": "Log Entries",
+          "description": "Log entries",
           "items": {
             "$ref": "#/definitions/log_entry"
           },
@@ -183,8 +183,8 @@ class QueryLogsOutput(insightconnect_plugin_runtime.Output):
         },
         "timestamp": {
           "type": "integer",
-          "title": "Time Stamp",
-          "description": "Time stamp",
+          "title": "Timestamp",
+          "description": "Timestamp",
           "order": 2
         }
       },
@@ -196,7 +196,7 @@ class QueryLogsOutput(insightconnect_plugin_runtime.Output):
             "bytesTransferred": {
               "type": "integer",
               "title": "Bytes Transferred",
-              "description": "Bytes Transferred",
+              "description": "Bytes transferred",
               "order": 1
             },
             "clientIpAddress": {
@@ -249,8 +249,8 @@ class QueryLogsOutput(insightconnect_plugin_runtime.Output):
             },
             "timestamp": {
               "type": "string",
-              "title": "Time stamp",
-              "description": "Time stamp",
+              "title": "Timestamp",
+              "description": "Timestamp",
               "order": 10
             },
             "uri": {

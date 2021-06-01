@@ -5,7 +5,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException, Connection
 import urllib
 import requests
 import json
-import time
+from typing import Optional
 
 # From: https://docs.devo.com/confluence/ndt/api-reference/query-api
 REGION_MAP = {

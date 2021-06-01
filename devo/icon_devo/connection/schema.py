@@ -17,7 +17,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "authentication_token": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Authentication Token",
-      "description": "Authentication Token",
+      "description": "Devo authentication token",
       "order": 1
     },
     "region": {

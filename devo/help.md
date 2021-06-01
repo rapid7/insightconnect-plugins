@@ -18,7 +18,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|authentication_token|credential_secret_key|None|True|Authentication Token|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|authentication_token|credential_secret_key|None|True|Devo authentication token|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |region|string|None|True|Region|['USA', 'EU', 'VDC (Spain)']|USA|
 
 Example input:
@@ -42,9 +42,9 @@ This action is used to run a LINQ query against the logs.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|from_date|string|None|True|Earliest date to query events from, will accept relative or absolute times. e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now|None|5 minutes ago|
-|query|string|None|True|A Query. The response be limited to 200 mb of raw data or 1000 entries whichever is hit first|None|from from demo.ecommerce.data select *|
-|to_date|string|Now|True|Latest date to query events from, will accept relative or absolute times. e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now|None|Now|
+|from_date|string|None|True|Earliest date to query events from, will accept relative or absolute times, e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now|None|5 minutes ago|
+|query|string|None|True|A Query. The response be limited to 200 mb of raw data or 1000 entries whichever is hit first|None|from demo.ecommerce.data select *|
+|to_date|string|Now|True|Latest date to query events from, will accept relative or absolute times, e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now|None|Now|
 
 Example input:
 
