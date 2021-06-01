@@ -8,7 +8,7 @@ Devo is the cloud-native logging and security analytics solution that delivers r
 
 # Requirements
 
-* An Authentication Token
+* A Devo authentication token
 
 # Documentation
 
