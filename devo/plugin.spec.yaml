@@ -27,7 +27,7 @@ types:
     bytesTransferred:
       title: "Bytes Transferred"
       type: integer
-      description: "Bytes Transferred"
+      description: "Bytes transferred"
       required: false
     clientIpAddress:
       title: "Client IP Address"
