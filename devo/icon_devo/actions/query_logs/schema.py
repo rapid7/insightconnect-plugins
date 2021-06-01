@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Run a LINQ query against the logs"
+    DESCRIPTION = "Run a query against the logs"
 
 
 class Input:
@@ -32,13 +32,13 @@ class QueryLogsInput(insightconnect_plugin_runtime.Input):
     "query": {
       "type": "string",
       "title": "Query",
-      "description": "Query",
+      "description": "A Query. this will be limited to 200 mb of raw data or 1000 entries whichever is hit first",
       "order": 1
     },
     "to_date": {
       "type": "string",
       "title": "To Date",
-      "description": "Lastest date to query events from, will accept relative or absolute times. e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now",
+      "description": "Latest date to query events from, will accept relative or absolute times. e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now",
       "default": "Now",
       "order": 3
     }

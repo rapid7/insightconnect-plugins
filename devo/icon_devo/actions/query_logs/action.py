@@ -25,5 +25,7 @@ class QueryLogs(insightconnect_plugin_runtime.Action):
 
     def _add_limit_to_query(self, query: str) -> str:
         if not "limit" in query.lower():
+            self.logger.info("Adding limit to query.")
             query += " limit 1000"
+            self.logger.info(f"Query: {query}")
         return query

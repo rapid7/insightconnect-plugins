@@ -4,8 +4,7 @@ Devo is the cloud-native logging and security analytics solution that delivers r
 
 # Key Features
 
-* Query Devo for log results
-* Download a report from Devo
+* Query for log results
 
 # Requirements
 
@@ -14,8 +13,6 @@ Devo is the cloud-native logging and security analytics solution that delivers r
 # Documentation
 
 ## Setup
-
-To create an Authentication Token go to Administration > Credentials from the left nav in Devo. At the top of the screen is a tab for "Authentication Tokens". When you create a new token, take care that the token has access to the tables you expect to query. 
 
 The connection configuration accepts the following parameters:
 
@@ -46,8 +43,8 @@ This action is used to run a LINQ query against the logs.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |from_date|string|None|True|Earliest date to query events from, will accept relative or absolute times. e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now|None|5 minutes ago|
-|query|string|None|True|Query|None|from from demo.ecommerce.data select *|
-|to_date|string|Now|True|Lastest date to query events from, will accept relative or absolute times. e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now|None|Now|
+|query|string|None|True|A Query. this will be limited to 200 mb of raw data or 1000 entries whichever is hit first|None|from from demo.ecommerce.data select *|
+|to_date|string|Now|True|Latest date to query events from, will accept relative or absolute times. e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now|None|Now|
 
 Example input:
 
