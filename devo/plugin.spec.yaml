@@ -72,7 +72,7 @@ types:
     timestamp:
       title: "Timestamp"
       type: string
-      description: "Time stamp"
+      description: "Timestamp"
       required: false
     uri:
       title: "URI"
