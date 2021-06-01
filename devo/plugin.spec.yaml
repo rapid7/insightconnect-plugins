@@ -148,7 +148,7 @@ actions:
         example: 5 minutes ago
       to_date:
         title: To Date
-        description: Latest date to query events from, will accept relative or absolute times. e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now
+        description: Latest date to query events from, will accept relative or absolute times, e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now
         type: string
         required: true
         default: Now
