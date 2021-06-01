@@ -36,10 +36,13 @@ class StartScan(insightconnect_plugin_runtime.Action):
 
         try:
             scans = response[1].get("scans")
-            ids = []
+            scan_ids = []
+            asset_ids = []
             for scan in scans:
-                ids.append(scan.get("id"))
-            return {Output.DATA: response[1], Output.IDS: ids}
+                scan_ids.append(scan.get("id"))
+                for asset_id in scan.get("asset_ids"):
+                    asset_ids.append(asset_id)
+            return {Output.DATA: response[1], Output.IDS: scan_ids, Output.ASSET_IDS: asset_ids}
         except IndexError as error:
             raise PluginException(
                 cause=f"Failed to get a valid response from InsightVM for a scan call.",

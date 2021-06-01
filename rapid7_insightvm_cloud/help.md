@@ -105,6 +105,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|asset_ids|[]string|False|List of identifiers of the assets scanned|
 |data|object|False|Information received about the scan|
 |ids|[]string|False|List of identifiers of the scans started|
 
@@ -994,6 +995,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.0 - Added scanned asset_ids as an output of start_scan
 * 2.0.0 - Fix issue where string data-type should be date in actions | Update docs
 * 1.0.0 - Initial plugin
 
