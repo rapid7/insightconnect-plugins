@@ -93,7 +93,7 @@ types:
     timestamp:
         title: "Time Stamp"
         type: integer
-        description: "Time stamp"
+        description: "Timestamp"
         required: false
     cid:
         title: "CID"
