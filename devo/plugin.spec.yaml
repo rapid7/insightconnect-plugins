@@ -108,7 +108,7 @@ types:
     object:
         title: "Log Entries"
         type: "[]log_entry"
-        description: "Log Entries"
+        description: "Log entries"
         required: false
 
 connection:
