@@ -32,7 +32,7 @@ class QueryLogsInput(insightconnect_plugin_runtime.Input):
     "query": {
       "type": "string",
       "title": "Query",
-      "description": "A Query. this will be limited to 200 mb of raw data or 1000 entries whichever is hit first",
+      "description": "A Query. The response be limited to 200 mb of raw data or 1000 entries whichever is hit first",
       "order": 1
     },
     "to_date": {
