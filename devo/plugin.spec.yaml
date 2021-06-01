@@ -114,7 +114,7 @@ types:
 connection:
   authentication_token:
     title: Authentication Token
-    description: Authentication Token
+    description: Devo authentication token
     type: credential_secret_key
     required: true
     example: 9de5069c5afe602b2ea0a04b66beb2c0
