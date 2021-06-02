@@ -910,7 +910,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.0.1 - Adding decoding URls with quotable encoding in URL Decode action
+* 2.0.1 - Adding decoding URLs with quotable encoding in URL Decode action
 * 2.0.0 - Add new actions Get Blocked Clicks, Get Permitted Clicks, Get Blocked Messages, Get Delivered Threats, Get All Threats, Get Top Clickers, URL Decode
 * 1.0.8 - Fix finding e-mail in `header_from` for e-mails addresses with `[.]`
 * 1.0.7 - Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Update plugin.spec.yaml to include `cloud_ready`
