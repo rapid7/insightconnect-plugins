@@ -1,3 +1,5 @@
+import time
+
 import insightconnect_plugin_runtime
 
 from .schema import StopScanInput, StopScanOutput, Input, Output
@@ -18,7 +20,7 @@ class StopScan(insightconnect_plugin_runtime.Action):
         scan_id = params.get(Input.ID)
         url = f"scan/{scan_id}/stop"
         self.connection.ivm_cloud_api.call_api(url, "POST")
-
+        time.sleep(5)
         response = self.connection.ivm_cloud_api.call_api("scan/" + scan_id, "GET")
         if response.get("status") == "Stopped":
             return {Output.SUCCESS: True}
