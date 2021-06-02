@@ -997,7 +997,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.2.0 - Added ability to include vulnerabilities on get_asset return | api call update
+* 2.2.0 - Added ability to include vulnerabilities on get_asset return | API call update
 * 2.1.0 - Added scanned asset_ids as an output of start_scan
 * 2.0.0 - Fix issue where string data-type should be date in actions | Update docs
 * 1.0.0 - Initial plugin

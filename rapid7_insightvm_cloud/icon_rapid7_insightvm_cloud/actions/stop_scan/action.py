@@ -28,4 +28,3 @@ class StopScan(insightconnect_plugin_runtime.Action):
                 Output.STATUS_CODE: 400,
                 Output.MESSAGE: f"Failed to stop scan with ID '{scan_id}'. Status of scan is {response.get('status')}",
             }
-
