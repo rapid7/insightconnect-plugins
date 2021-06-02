@@ -246,12 +246,14 @@ This action gets an asset by ID.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Get an asset by ID|None|abc978-5678-abc-a5a94a1234b8-asset|
+|include_vulns|boolean|None|False|Whether or not the list of vulnerabilities should be returned|None|True|
 
 Example input:
 
 ```
 {
-  "id": "abc978-5678-abc-a5a94a1234b8-asset"
+  "id": "abc978-5678-abc-a5a94a1234b8-asset",
+  "include_vulns": true
 }
 ```
 
@@ -995,6 +997,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.0 - Added ability to include vulnerabilities on get_asset return | api call update
 * 2.1.0 - Added scanned asset_ids as an output of start_scan
 * 2.0.0 - Fix issue where string data-type should be date in actions | Update docs
 * 1.0.0 - Initial plugin

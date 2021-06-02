@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     ID = "id"
+    INCLUDE_VULNS = "include_vulns"
     
 
 class Output:
@@ -26,6 +27,12 @@ class GetAssetInput(insightconnect_plugin_runtime.Input):
       "title": "ID",
       "description": "Get an asset by ID",
       "order": 1
+    },
+    "include_vulns": {
+      "type": "boolean",
+      "title": "Include Vulnerabilities",
+      "description": "Whether or not the list of vulnerabilities should be returned",
+      "order": 2
     }
   },
   "required": [

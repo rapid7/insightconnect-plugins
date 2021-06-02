@@ -15,7 +15,7 @@ class IVM_Cloud:
         self.token = token
         self.base_url = url
 
-    def call_api(self, path: str, request_type: str, params: dict = None, body: dict = None) -> (int, Optional[dict]):
+    def call_api(self, path: str, request_type: str, params: dict = None, body: dict = None) -> dict:
         if params is None:
             params = {}
         if body is None:
@@ -38,10 +38,9 @@ class IVM_Cloud:
                     assistance=f"Response was {response.request.body}.",
                     data=response.status_code,
                 )
-            if response.text == "":
-                return response.status_code, None
-            else:
-                return response.status_code, response.json()
+            if response.text != "":
+                return response.json()
+
         except HTTPError as httpError:
             raise PluginException(
                 cause=f"Failed to get a valid response from InsightVM at endpoint '{api_url}'",
