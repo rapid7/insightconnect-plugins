@@ -57,7 +57,7 @@ class Search(komand.Action):
             try:
                 response = requests.get(url, headers=self.connection.headers)
             except Exception as e:
-                raise PluginException(cause="Something went wrong during the request. ", assistance=e)
+                raise PluginException(cause="Something went wrong during the request.", assistance=e)
 
             try:
                 responses = response.json()
