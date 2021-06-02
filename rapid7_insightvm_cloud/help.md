@@ -246,7 +246,7 @@ This action gets an asset by ID.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Get an asset by ID|None|abc978-5678-abc-a5a94a1234b8-asset|
-|include_vulns|boolean|None|False|Whether or not the list of vulnerabilities should be returned|None|True|
+|include_vulns|boolean|False|False|Whether or not the list of vulnerabilities should be returned|None|True|
 
 Example input:
 

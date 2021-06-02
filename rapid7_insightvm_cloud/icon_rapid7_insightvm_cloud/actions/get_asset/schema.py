@@ -32,6 +32,7 @@ class GetAssetInput(insightconnect_plugin_runtime.Input):
       "type": "boolean",
       "title": "Include Vulnerabilities",
       "description": "Whether or not the list of vulnerabilities should be returned",
+      "default": false,
       "order": 2
     }
   },
