@@ -1110,6 +1110,7 @@ actions:
         description: Whether or not the list of vulnerabilities should be returned
         type: boolean
         required: false
+        default: false
         example: true
     output:
       asset:
