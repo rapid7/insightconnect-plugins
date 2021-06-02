@@ -25,7 +25,7 @@ class StartScan(insightconnect_plugin_runtime.Action):
         if ips or hostnames:
             body = _format_body(hostnames, ips)
             resources = self.connection.ivm_cloud_api.call_api("assets", "POST", params, body)
-            extra_ids = resources.get("data")
+            extra_ids = resources.get("data", [])
             for extra_id in extra_ids:
                 if extra_id.get("id") not in asset_ids:
                     asset_ids.append(extra_id.get("id"))
