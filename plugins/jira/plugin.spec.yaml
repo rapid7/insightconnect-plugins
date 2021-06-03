@@ -19,7 +19,7 @@ tags:
   - Jira
 hub_tags:
   use_cases: [remediation_management, threat_detection_and_response, reporting_and_analytics]
-  keywords: [ticket, jira]
+  keywords: [ticket, jira, cloud_enabled]
   features: []
 types:
   user:

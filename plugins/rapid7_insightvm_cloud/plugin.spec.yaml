@@ -19,7 +19,7 @@ tags:
 - vulnerability
 hub_tags:
   use_cases: [asset_inventory, vulnerability_management]
-  keywords: [insightvm, rapid7, cloud]
+  keywords: [insightvm, rapid7, cloud, cloud_enabled]
   features: []
 
 types:
