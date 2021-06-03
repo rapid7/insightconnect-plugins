@@ -1,9 +1,0 @@
-# List third-party dependencies here, separated by newlines. 
-# All dependencies must be version-pinned, eg. requests==1.2.0
-# See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
-records==0.5.2
-maya==0.5.0
-lxml==4.2.2
-datetime==4.2
-pyyaml==3.12
-beautifulsoup4==4.6.0
