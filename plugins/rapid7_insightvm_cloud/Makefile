@@ -1,5 +1,5 @@
 # Include other Makefiles for improved functionality
-INCLUDE_DIR = ../../tools/Makefiles
+INCLUDE_DIR = ../tools/Makefiles
 MAKEFILES := $(wildcard $(INCLUDE_DIR)/*.mk)
 # We can't guarantee customers will have the include files
 # - prefix to ignore Makefiles when not present
