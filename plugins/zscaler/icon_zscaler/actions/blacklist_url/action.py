@@ -26,7 +26,7 @@ class BlacklistUrl(insightconnect_plugin_runtime.Action):
         for url in urls:
             if url and not url.startswith("http"):
                 url = f"http://{url}"
-                self.logger.info(f"URL did not begin with protocol, prefixing with {url} ...")
+                self.logger.info(f"URL did not begin with protocol, prefixing with 'http://' ...")
             normalized_urls.append(urlparse(url).hostname)
 
         response = self.connection.client.blacklist_url(blacklist_step, normalized_urls)

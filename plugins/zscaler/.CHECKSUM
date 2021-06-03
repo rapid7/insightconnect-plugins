@@ -1,11 +1,11 @@
 {
-	"spec": "14b03f0d85b04436b1cda006e69e9ef8",
+	"spec": "73c1e7327af7fe9eb510dd25c44a7243",
 	"manifest": "76cc8acbbcc482ae97e236d26380a5bf",
 	"setup": "d1dfe8fcf625947511042c5997569f2d",
 	"schemas": [
 		{
 			"identifier": "blacklist_url/schema.py",
-			"hash": "53fea7da9a1b64cc3d359074ac876533"
+			"hash": "8d9d2dd1c6f8b847d52780ed9a00683a"
 		},
 		{
 			"identifier": "get_blacklist_url/schema.py",

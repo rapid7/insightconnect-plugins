@@ -27,7 +27,7 @@ class BlacklistUrlInput(insightconnect_plugin_runtime.Input):
     "activate_configuration": {
       "type": "boolean",
       "title": "Activate Configuration",
-      "description": "This setting activates the configuration changes so they're go into effect when set to true",
+      "description": "Set to true to activate configuration changes",
       "default": false,
       "order": 3
     },

@@ -178,7 +178,7 @@ This action is used to add or remove URLs from a blacklist. These URLs will appe
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|activate_configuration|boolean|False|True|This setting activates the configuration changes so they're go into effect when set to true|None|False|
+|activate_configuration|boolean|False|True|Set to true to activate configuration changes|None|False|
 |blacklist_state|boolean|True|False|True to blacklist a URL, false to unblacklist a URL|None|True|
 |urls|[]string|None|True|A given set of one or more URLs or domains to update in the blacklist|None|["www.example.com", "http://rapid7.com"]|
 

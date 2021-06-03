@@ -250,7 +250,7 @@ actions:
         example: true
       activate_configuration:
         title: Activate Configuration
-        description: This setting activates the configuration changes so they're go into effect when set to true
+        description: Set to true to activate configuration changes
         type: boolean
         required: true
         default: false
