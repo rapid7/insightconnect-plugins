@@ -25,10 +25,15 @@ _This plugin does not contain any requirements._
 
 Check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/python-2-or-3-script) for more details on how to configure this plugin.
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|modules|[]string|None|False|List of third-party modules to install for use in the supplied Python script|None|
-|timeout|integer|60|True|Timeout (in seconds) for installing third-party modules|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|modules|[]string|[""]|False|List of third-party modules to install for use in the supplied Python script|None|None|
+|timeout|integer|60|True|Timeout (in seconds) for installing third-party modules|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -56,10 +61,27 @@ This returns a string with key `hello` on the output object accessible at `{{Ste
 
 Make sure you the edit the output variables so that they match the keys returned by the 'run()' function.
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|function|python|None|False|Function definition|None|
-|input|object|None|False|Input object to be passed as `params={}` to the `run` function|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|function|python|def run(params={}):\n    return {}|False|Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output|None|None|
+|input|object|None|False|Input object to be passed as `params={}` to the `run` function|None|None|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|result1|string|False|Sample output result1 (delete or edit)|
+|result2|string|False|Sample output result2 (delete or edit)|
+
+Example input:
+
+```
+```
 
 ##### Output
 

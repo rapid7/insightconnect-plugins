@@ -6,10 +6,11 @@ import json
 class Input:
     MODULES = "modules"
     TIMEOUT = "timeout"
-    
+
 
 class ConnectionSchema(komand.Input):
-    schema = json.loads("""
+    schema = json.loads(
+        """
    {
   "type": "object",
   "title": "Variables",
@@ -21,6 +22,9 @@ class ConnectionSchema(komand.Input):
       "items": {
         "type": "string"
       },
+      "default": [
+        ""
+      ],
       "order": 1
     },
     "timeout": {
@@ -35,7 +39,8 @@ class ConnectionSchema(komand.Input):
     "timeout"
   ]
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
