@@ -29,13 +29,16 @@ class GetIncidents(insightconnect_plugin_runtime.Trigger):
         self.logger.info(f"Initializing Get Incidents trigger for the Palo Alto Cortex XDR plugin.")
 
         while True:
-            incidents = self.connection.xdr_api.get_incidents(
-                from_time=start_time, to_time=end_time, time_field=time_field
-            )
+            # incidents = self.connection.xdr_api.get_incidents(
+            #     from_time=start_time, to_time=end_time, time_field=time_field
+            # )
+
+            incidents = [{time_field: 1577024425126}, {time_field: 1577024425127}, {time_field: 1577024425128}, {time_field: 1577024425129}, {time_field: 1577024425130}]
 
             # Process incidents from oldest to newest
             for incident_time in Util.send_items_to_platform_for_trigger(
-                    self, incidents, Output.INCIDENT, last_event_processed_time_ms, time_field):
+                    self, incidents, Output.INCIDENT, last_event_processed_time_ms
+            ):
                 last_event_processed_time_ms = incident_time
 
             # Back off before next iteration
@@ -45,3 +48,8 @@ class GetIncidents(insightconnect_plugin_runtime.Trigger):
             # last_processed_time_ms and set the end_time for the request to now.
             start_time = last_event_processed_time_ms
             end_time = Util.now_ms()
+
+
+if __name__ == "__main__":
+    trigger = GetIncidents()
+    trigger.run()

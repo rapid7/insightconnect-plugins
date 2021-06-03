@@ -85,15 +85,13 @@ class CortexXdrAPI:
 
     def get_alerts(self, from_time, to_time, time_field="creation_time"):
         endpoint = "/public_api/v1/alerts/get_alerts_multi_events/"
-        response_alerts_field = "alerts"
-        return self._get_items_from_endpoint(endpoint, from_time, to_time, response_alerts_field, time_field)
+        return self._get_items_from_endpoint(endpoint, from_time, to_time, time_field)
 
     def get_incidents(self, from_time, to_time, time_field="creation_time"):
         endpoint = "/public_api/v1/incidents/get_incidents/"
-        response_incidents_field = "incidents"
-        return self._get_items_from_endpoint(endpoint, from_time, to_time, response_incidents_field, time_field)
+        return self._get_items_from_endpoint(endpoint, from_time, to_time, time_field)
 
-    def _get_items_from_endpoint(self, endpoint, from_time, to_time, response_item_field, time_field="creation_time"):
+    def _get_items_from_endpoint(self, endpoint, from_time, to_time, time_field="creation_time"):
         batch_size = 100
         search_from = 0
         search_to = search_from + batch_size
@@ -121,7 +119,7 @@ class CortexXdrAPI:
             resp_json = self._post_to_api(endpoint, post_body)
             if resp_json is not None:
                 total_count = resp_json.get("reply", {}).get("total_count", -1)
-                all_items.extend(resp_json.get("reply", {}).get(response_item_field, []))
+                all_items.extend(resp_json.get("reply", {}).get("incidents", []))
 
                 # If the number of items we have received so far is greater than or equal to the total number of
                 # items which match the query, then we can stop paging.

@@ -1,42 +1,44 @@
 import insightconnect_plugin_runtime
 import time
 
-from .schema import GetIncidentsInput, GetIncidentsOutput, Input, Output, Component
+from .schema import GetAlertsInput, GetAlertsOutput, Input, Output, Component
 
 # Custom imports below
 
 from ...util.util import Util
 
 
-class GetIncidents(insightconnect_plugin_runtime.Trigger):
+class GetAlerts(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="get_incidents",
-            description=Component.DESCRIPTION,
-            input=GetIncidentsInput(),
-            output=GetIncidentsOutput(),
+                name='get_alerts',
+                description=Component.DESCRIPTION,
+                input=GetAlertsInput(),
+                output=GetAlertsOutput()
         )
 
     def run(self, params={}):
         time_field = "creation_time"
 
-        # We will be asking for incidents between one hour ago and now.
+        # Request all Alerts from one hour ago to now.
         one_hour_in_ms = 60 * 60 * 1000
         end_time = Util.now_ms()
         start_time = end_time - one_hour_in_ms
         last_event_processed_time_ms = start_time
 
-        self.logger.info(f"Initializing Get Incidents trigger for the Palo Alto Cortex XDR plugin.")
+        self.logger.info(f"Initializing Get Alerts trigger for the Palo Alto Cortex XDR plugin.")
 
         while True:
-            incidents = self.connection.xdr_api.get_incidents(
+            alerts = self.connection.xdr_api.get_alerts(
                 from_time=start_time, to_time=end_time, time_field=time_field
             )
 
-            # Process incidents from oldest to newest
-            for incident_time in Util.send_items_to_platform_for_trigger(
-                    self, incidents, Output.INCIDENT, last_event_processed_time_ms, time_field):
-                last_event_processed_time_ms = incident_time
+            # Process alerts from oldest to newest
+            for alert in alerts:
+                alert_time = alert.get(time_field, -1)
+                if alert_time > last_event_processed_time_ms:
+                    last_event_processed_time_ms = alert_time
+                    self.send({Output.ALERT: alert})
 
             # Back off before next iteration
             time.sleep(params.get("interval", 5))
