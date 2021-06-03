@@ -625,6 +625,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.3 - Send plugin name and version in the User-Agent string to vendor
 * 1.0.2 - Update to v4 Python plugin runtime | Add example inputs
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
