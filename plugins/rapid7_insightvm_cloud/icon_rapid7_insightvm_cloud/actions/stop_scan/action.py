@@ -4,6 +4,7 @@ import insightconnect_plugin_runtime
 
 from .schema import StopScanInput, StopScanOutput, Input, Output
 
+
 # Custom imports below
 
 
@@ -16,6 +17,7 @@ class StopScan(insightconnect_plugin_runtime.Action):
             output=StopScanOutput(),
         )
 
+    #check check
     def run(self, params={}):
         scan_id = params.get(Input.ID)
         url = f"scan/{scan_id}/stop"
