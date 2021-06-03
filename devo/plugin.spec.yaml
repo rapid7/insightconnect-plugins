@@ -23,6 +23,104 @@ hub_tags:
   features: []
 
 types:
+  alert:
+    eventdate:
+      title: "Event Date"
+      type: integer
+      description: "Event date"
+      required: false
+    alertHost:
+      title: "Alert Host"
+      type: string
+      description: "Alert host"
+      required: false
+    domain:
+      title: "Domain"
+      type: string
+      description: "Domain"
+      required: false
+    priority:
+      title: "Priority"
+      type: float
+      description: "Priority"
+      required: false
+    context:
+      title: "Context"
+      type: string
+      description: "Context"
+      required: false
+    category:
+      title: "Category"
+      type: string
+      description: "Category"
+      required: false
+    status:
+      title: "Status"
+      type: integer
+      description: "Status"
+      required: false
+    alertId:
+      title: "Alert ID"
+      type: string
+      description: "Alert ID"
+      required: false
+    srcIp:
+      title: "Source IP"
+      type: string
+      description: "Source IP"
+      required: false
+    srcPort:
+      title: "Source Port"
+      type: string
+      description: "Source Port"
+      required: false
+    srcHost:
+      title: "Source Host"
+      type: string
+      description: "Source host"
+      required: false
+    dstIp:
+      title: "Destination IP"
+      type: string
+      description: "Destination IP"
+      required: false
+    dstPort:
+      title: "Destination Port"
+      type: string
+      description: "Destination Port"
+      required: false
+    dstHost:
+      title: "Destination Host"
+      type: string
+      description: "Destination host"
+      required: false
+    protocol:
+      title: "Protocol"
+      type: string
+      description: "Protocol"
+      required: false
+    username:
+      title: "Username"
+      type: string
+      description: "Username"
+      required: false
+    application:
+      title: "Application"
+      type: string
+      description: "Application"
+      required: false
+    engine:
+      title: "Engine"
+      type: string
+      description: "Engine"
+      required: false
+    extraData:
+      title: "Extra Data"
+      type: string
+      description: "Extra data"
+      required: false
+
+
   log_entry:
     bytesTransferred:
       title: "Bytes Transferred"
@@ -128,6 +226,17 @@ connection:
       - USA
       - EU
       - VDC (Spain)
+
+triggers:
+  get_new_alerts:
+    title: Get New Alerts
+    description: Get new alerts
+    output:
+      alert:
+        title: Alert
+        description: An alert
+        type: object
+        required: true
 
 actions:
   query_logs:

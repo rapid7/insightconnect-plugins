@@ -5,10 +5,20 @@
 # Key Features
 
 * Query for log results
+* Trigger workflows on new alerts
 
 # Requirements
 
 * A Devo authentication token
+
+The Devo authentication token must have access to the tables you are building your query for. In additon
+if you are using the alert trigger, the access token will need access to 
+`siem.logtrust.alert.info`
+
+For testing purposes, to give access to all tables, use `*.*.**`. This is not recommended for final production use, but can be used to rule out access errors when configuring the plugin for hte first time.  
+
+Authentication Token Documentation: 
+https://docs.devo.com/confluence/ndt/latest/domain-administration/security-credentials/authentication-tokens
 
 # Documentation
 
@@ -92,7 +102,39 @@ Example output:
 
 ### Triggers
 
-_This plugin does not contain any triggers._
+#### Get New Alerts
+
+This trigger is used to get new alerts.
+
+##### Input
+
+_This trigger does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|alert|object|True|An alert|
+
+Example output:
+
+```
+{
+  "alert": {
+    "eventdate": 1622747437335,
+    "alertHost": "backoffice",
+    "domain": "rapid7",
+    "priority": 3,
+    "context": "my.alert.rapid7.example",
+    "category": "my.context",
+    "status": 0,
+    "alertId": "26004002",
+    "username": "user@example.com",
+    "engine": "pil01-pro-custom-us-aws",
+    "extraData": "{\"clientIpAddress\":\"192.168.50.1\",\"timeTaken\":\"176\",\"protocol\":\"HTTP+1.1\",\"bytesTransferred\":\"3295\",\"method\":\"GET\",\"cookie\":\"3djv1l0ebi7cmsai1131pf2a65%3A-\",\"userAgent\":\"Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F42.0.2311.135+Safari%2F537.36+Edge%2F12.246\",\"referralUri\":\"http%3A%2F%2Fwww.google.com%2Fcategory.screen%3Fcategory_id%3DBEDROOM%26JSESSIONID%3DSD1SL6FF5ADFF2\",\"uri\":\"%2Fcategory.screen%3Fcategory_id%3DBEDROOM%26JSESSIONID%3DSD1SL6FF5ADFF2\",\"eventdate\":\"2021-06-03+19%3A10%3A28.676\",\"timestamp\":\"03%2FJun%2F2021%3A19%3A10%3A26+%2B0000\",\"statusCode\":\"500\"}"
+  }
+}
+```
 
 ### Custom Output Types
 
@@ -115,3 +157,4 @@ _This plugin does not contain any custom output types._
 ## References
 
 * [Devo](https://www.devo.com/)
+* [Authentication Token Documentation](https://docs.devo.com/confluence/ndt/latest/domain-administration/security-credentials/authentication-tokens)
