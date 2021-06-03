@@ -19,7 +19,7 @@ tags:
 - calculator
 hub_tags:
   use_cases: [data_utility]
-  keywords: [math, computation, utilities, calculator]
+  keywords: [math, computation, utilities, calculator, cloud_enabled]
   features: []
 actions:
   calculate:
