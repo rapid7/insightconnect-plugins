@@ -24,7 +24,7 @@ To use the Devo plugin, you will need to create an authentication token.
 The Devo authentication token must have access to the tables you are building your query for. In addition, if you are using the alert trigger, the access token will need access to: 
 `siem.logtrust.alert.info`.
 
-For testing purposes, to give access to all tables, use `*.*.**`. This is not recommended for final production use, but can be used to rule out access errors when configuring the plugin for hte first time.  
+For testing purposes, to give access to all tables, use `*.*.**`. This is not recommended for final production use, but can be used to rule out access errors when configuring the plugin for the first time.  
 
 [Authentication Token Documentation](https://docs.devo.com/confluence/ndt/latest/domain-administration/security-credentials/authentication-tokens) 
 
