@@ -87,7 +87,7 @@ types:
     dstPort:
       title: "Destination Port"
       type: string
-      description: "Destination Port"
+      description: "Destination port"
       required: false
     dstHost:
       title: "Destination Host"
