@@ -15,6 +15,12 @@
 
 ## Setup
 
+To use the Devo plugin, you will need to create an authentication token. 
+
+1. In Devo go to the left nav and choose Administration > Credentials
+2. From the credentials screen, choose Authentication Tokens from the top tabs
+3. Click 'CREATE NEW TOKEN'
+
 The Devo authentication token must have access to the tables you are building your query for. In addition, if you are using the alert trigger, the access token will need access to: 
 `siem.logtrust.alert.info`
 
