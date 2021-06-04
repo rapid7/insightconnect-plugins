@@ -2,7 +2,7 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: devo
-title: devo
+title: Devo
 description: Devo is the cloud-native logging and security analytics solution that delivers real-time visibility for security and operations teams
 version: 1.0.0
 vendor: rapid7
