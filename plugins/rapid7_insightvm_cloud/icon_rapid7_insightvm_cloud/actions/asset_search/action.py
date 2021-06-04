@@ -31,6 +31,6 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
         else:
             resources = self.connection.ivm_cloud_api.call_api("assets", "POST", parameters)
 
-        assets = resources[1].get("data")
+        assets = resources.get("data")
 
         return {Output.ASSETS: assets}

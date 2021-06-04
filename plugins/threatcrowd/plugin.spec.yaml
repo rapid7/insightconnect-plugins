@@ -19,7 +19,7 @@ tags:
 - api
 hub_tags:
   use_cases: [threat_detection_and_response, data_enrichment]
-  keywords: [antivirus, domain, api]
+  keywords: [antivirus, domain, api, cloud_enabled]
   features: []
 types:
   domains:
