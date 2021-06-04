@@ -15,14 +15,13 @@
 
 ## Setup
 
-The Devo authentication token must have access to the tables you are building your query for. In additon
-if you are using the alert trigger, the access token will need access to 
+The Devo authentication token must have access to the tables you are building your query for. In addition, if you are using the alert trigger, the access token will need access to: 
 `siem.logtrust.alert.info`
 
 For testing purposes, to give access to all tables, use `*.*.**`. This is not recommended for final production use, but can be used to rule out access errors when configuring the plugin for hte first time.  
 
-Authentication Token Documentation: 
-https://docs.devo.com/confluence/ndt/latest/domain-administration/security-credentials/authentication-tokens
+[Authentication Token Documentation](https://docs.devo.com/confluence/ndt/latest/domain-administration/security-credentials/authentication-tokens) 
+
 
 The connection configuration accepts the following parameters:
 
