@@ -72,7 +72,7 @@ types:
     srcPort:
       title: "Source Port"
       type: string
-      description: "Source Port"
+      description: "Source port"
       required: false
     srcHost:
       title: "Source Host"
