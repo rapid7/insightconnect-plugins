@@ -1,0 +1,292 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: palo_alto_cortex_xdr
+title: Palo Alto Cortex XDR
+description: Stop modern attacks with the industry's first extended detection and response platform that spans your endpoints, network and cloud data
+version: 1.0.0
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/palo_alto_cortex_xdr
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.paloaltonetworks.com/cortex/cortex-xdr
+tags:
+- cortex xdr
+- palo alto
+- endpoint
+- detection
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [cortex, endpoint, detection]
+  features: []
+
+types:
+  isolation_result:
+    action_id:
+      title: "Action ID"
+      type: integer
+      description: "Action ID"
+      required: false
+    status:
+      title: "Status"
+      type: string
+      description: "Status"
+      required: false
+    endpoints_count:
+      title: "Endpoints Count"
+      type: integer
+      description: "Endpoints count"
+      required: false
+  endpoint:
+    alias:
+        title: "Alias"
+        type: string
+        description: "Alias"
+        required: false
+    content_version:
+        title: "Content Version"
+        type: string
+        description: "Content version"
+        required: false
+    domain:
+        title: "Domain"
+        type: string
+        description: "Domain"
+        required: false
+    endpoint_id:
+        title: "Endpoint ID"
+        type: string
+        description: "Endpoint ID"
+        required: false
+    endpoint_name:
+        title: "Endpoint Name"
+        type: string
+        description: "Endpoint name"
+        required: false
+    endpoint_status:
+        title: "Endpoint Status"
+        type: string
+        description: "Endpoint status"
+        required: false
+    endpoint_type:
+        title: "Endpoint Type"
+        type: string
+        description: "Endpoint type"
+        required: false
+    endpoint_version:
+        title: "Endpoint Version"
+        type: string
+        description: "Endpoint version"
+        required: false
+    first_seen:
+        title: "First Seen"
+        type: integer
+        description: "First seen"
+        required: false
+    install_date:
+        title: "Install Date"
+        type: integer
+        description: "Install date"
+        required: false
+    installation_package:
+        title: "Installation Package"
+        type: string
+        description: "Installation package"
+        required: false
+    ip:
+        title: "IP"
+        type: "[]string"
+        description: "IP"
+        required: false
+    is_isolated:
+        title: "Is Isolated"
+        type: string
+        description: "Is isolated"
+        required: false
+    last_seen:
+        title: "Last Seen"
+        type: integer
+        description: "Last seen"
+        required: false
+    operational_status:
+        title: "Operational Status"
+        type: string
+        description: "Operational status"
+        required: false
+    operational_status_description:
+        title: "Operational Status Description"
+        type: string
+        description: "Operational status description"
+        required: false
+    os_type:
+        title: "OS Type"
+        type: string
+        description: "OS type"
+        required: false
+    scan_status:
+        title: "Scan Status"
+        type: string
+        description: "Scan status"
+        required: false
+    users:
+        title: "Users"
+        type: "[]string"
+        description: "Users"
+        required: false
+
+connection:
+  url:
+    title: URL
+    description: Cortex XDR API URL
+    type: string
+    required: true
+    example: https://api-example.xdr.us.paloaltonetworks.com/
+  api_key_id:
+    title: API Key ID
+    description: The API Key ID shown in the Cortex XDR API Keys table in settings. e.g. 1, 2, 3
+    type: int
+    required: true
+    example: 1
+  api_key:
+    title: API Key
+    description: The Cortex XDR API Key that is generated when creating a new key
+    type: credential_secret_key
+    required: true
+    example: '1234123412341234asdfasdfasdfasdfasdf1234123412341234123412341234asdfasdfasdfasdfasdf123412341234123412341234asdfasdfasdfasdfasdf'
+  security_level:
+    title: Security Level
+    description: The Security Level of the key provided. This can be found in the API Key settings table in the Cortex XDR settings
+    type: string
+    required: true
+    example: Standard
+    default: Standard
+    enum:
+      - Advanced
+      - Standard
+actions:
+  get_endpoint_details:
+    title: Get Endpoint Details
+    description: Get information about an endpoint
+    input:
+      endpoint:
+        title: Endpoint
+        description: The endpoint to get information about. This can be an IPv4 address, hostname, or endpoint ID
+        type: string
+        required: true
+        example: 0123456abcdef12345abcde12345abcd
+    output:
+      total_count:
+        title: Total Count
+        description: Number of results found (max 100)
+        type: integer
+        required: true
+      endpoints:
+        title: Endpoints
+        description: Any endpoints that match the given endpoint information
+        type: "[]endpoint"
+        required: true
+  isolate_endpoint:
+    title: Isolate Endpoint
+    description: Isolate or unisolate an endpoint
+    input:
+      endpoint:
+        title: Endpoint
+        description: Endpoint to isolate or unisolate. This can be an IPv4 address, hostname, or endpoint ID
+        type: string
+        required: true
+        example: 0123456abcdef12345abcde12345abcd
+      isolation_state:
+        title: Isolation State
+        description: Isolation state to set
+        type: string
+        required: true
+        default: Isolate
+        example: Unisolate
+        enum:
+          - Isolate
+          - Unisolate
+      whitelist:
+        title: Whitelist
+        description: This list contains a set of devices that should not be blocked. This can be a combination of IPv4 addresses, hostnames, or endpoint IDs
+        type: "[]string"
+        required: false
+        default: []
+        example: ["198.51.100.100", "hostname123", "225494730938493804"]
+    output:
+      result:
+        title: Result
+        description: The result of the isolation request
+        type: isolation_result
+        required: true
+  allow_file:
+    title: Allow File
+    description: Add a file to the allow list
+    input:
+      file_hash:
+        title: File Hash
+        description: A SHA256 file hash
+        type: string
+        required: true
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+      comment:
+        title: Comment
+        description: String that represents additional information regarding the action
+        type: string
+        required: true
+        default: File allowed by InsightConnect
+        example: File allowed by InsightConnect
+      incident_id:
+        title: Incident ID
+        description: If this is related to an incident, the ID should be entered here
+        type: string
+        required: false
+        example: 5
+    output:
+      success:
+        title: Success
+        description: Was the operation successful
+        type: boolean
+        required: true
+
+  block_file:
+    title: Block File
+    description: Add a file to the block list
+    input:
+      file_hash:
+        title: File Hash
+        description: A SHA256 file hash
+        type: string
+        required: true
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+      comment:
+        title: Comment
+        description: String that represents additional information regarding the action
+        type: string
+        required: true
+        default: File blocked by InsightConnect
+        example: File blocked by InsightConnect
+      incident_id:
+        title: Incident ID
+        description: If this is related to an incident, the ID should be entered here
+        type: string
+        required: false
+        example: 5
+    output:
+      success:
+        title: Success
+        description: Was the operation successful
+        type: boolean
+        required: true
+
+triggers:
+  get_incidents:
+    title: Get Incidents
+    description: Get Incidents
+    output:
+      incident:
+        title: Incident
+        description: Incident
+        type: object
+        required: false
