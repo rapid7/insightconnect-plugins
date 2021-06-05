@@ -5,6 +5,7 @@ import json
 from logging import Logger
 from urllib.parse import urljoin
 from datetime import datetime
+import dateparser
 
 
 class AbnormalSecurityAPI:
@@ -75,22 +76,18 @@ class AbnormalSecurityAPI:
         params = {}
         if from_date or to_date:
             params = {"filter": "receivedTime"}
-            if from_date and self.validate_iso8601(from_date):
-                params["filter"] = params["filter"] + f" gte {from_date}"
-            if to_date and self.validate_iso8601(to_date):
-                params["filter"] = params["filter"] + f" lte {to_date}"
+            if from_date:
+                params["filter"] = params["filter"] + f" gte {self.parse_date(from_date)}"
+            if to_date:
+                params["filter"] = params["filter"] + f" lte {self.parse_date(to_date)}"
         return params
 
     @staticmethod
-    def validate_iso8601(dt_string):
+    def parse_date(date: str) -> str:
         try:
-            datetime.fromisoformat(dt_string)
-        except ValueError:
-            try:
-                datetime.fromisoformat(dt_string.replace("Z", "+00:00"))
-            except ValueError:
-                raise PluginException(
-                    cause=f"Date: {dt_string} is not a valid ISO8601 date.",
-                    assistance="Please update the date to match ISO8601 format (YYYY-MM-DDTHH:MM:SSZ).",
-                )
-        return True
+            return dateparser.parse(date).isoformat()
+        except AttributeError:
+            raise PluginException(
+                cause=f"Date '{date}' is not a valid date.",
+                assistance="Please verify the date and try again.",
+            )
