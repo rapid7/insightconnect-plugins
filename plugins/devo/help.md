@@ -57,7 +57,7 @@ This action is used to run a LINQ query against the logs.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |from_date|string|None|True|Earliest date to query events from, will accept relative or absolute times, e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now|None|5 minutes ago|
-|query|string|None|True|A Query. The response be limited to 200 mb of raw data or 1000 entries whichever is hit first|None|from demo.ecommerce.data select *|
+|query|string|None|True|A query. The response be limited to 200 MB of raw data or 1000 entries whichever is hit first|None|from demo.ecommerce.data select *|
 |to_date|string|Now|True|Latest date to query events from, will accept relative or absolute times, e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now|None|Now|
 
 Example input:
