@@ -15,6 +15,19 @@
 
 ## Setup
 
+To use the Devo plugin, you will need to create an authentication token. 
+
+1. In Devo go to the left nav and choose Administration > Credentials
+2. From the credentials screen, choose Authentication Tokens from the top tabs
+3. Click 'CREATE NEW TOKEN'
+
+The Devo authentication token must have access to the tables you are building your query for. In addition, if you are using the alert trigger, the access token will need access to: 
+`siem.logtrust.alert.info`.
+
+For testing purposes, to give access to all tables, use `*.*.**`. This is not recommended for final production use, but can be used to rule out access errors when configuring the plugin for the first time.  
+
+[Authentication Token Documentation](https://docs.devo.com/confluence/ndt/latest/domain-administration/security-credentials/authentication-tokens) 
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -44,7 +57,7 @@ This action is used to run a LINQ query against the logs.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |from_date|string|None|True|Earliest date to query events from, will accept relative or absolute times, e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now|None|5 minutes ago|
-|query|string|None|True|A query. The response is limited to 200MB of raw data or 1000 entries, whichever is hit first|None|from demo.ecommerce.data select *|
+|query|string|None|True|A Query. The response be limited to 200 mb of raw data or 1000 entries whichever is hit first|None|from demo.ecommerce.data select *|
 |to_date|string|Now|True|Latest date to query events from, will accept relative or absolute times, e.g. 1/1/2020, 2 hours ago, 1/1/2020T12:00:00, Now|None|Now|
 
 Example input:
