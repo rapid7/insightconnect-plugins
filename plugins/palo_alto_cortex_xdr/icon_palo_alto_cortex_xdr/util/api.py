@@ -37,6 +37,20 @@ class CortexXdrAPI:
                 data=e,
             )
 
+    def get_file_quarantine_status(self, file):
+        quarantine_status_endpoint = "/public_api/v1/quarantine/status/"
+        post_body = {
+            "request_data": {
+                "files": [file]
+            }
+        }
+        resp_json = self._post_to_api(quarantine_status_endpoint, post_body)
+        file_quarantine_statuses = resp_json.get("reply", [])
+        if len(file_quarantine_statuses) < 1:
+            return {}
+        else:
+            return file_quarantine_statuses[0]
+
     def get_endpoint_information(self, endpoint):
         endpoint_type = self._get_endpoint_type(endpoint)
         self.logger.info(f"Endpoint field to look for: {endpoint_type}")

@@ -52,6 +52,34 @@ Example input:
 
 ### Actions
 
+#### Get File Quarantine Status
+
+This action is used to get File Quarantine Status.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|endpoint_id|string|None|True|Endpoint ID|None|None|
+|file_hash|string|None|True|File Hash|None|None|
+|file_path|string|None|True|File Path|None|None|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|file_quarantine_status|object|True|The File's Quarantine Status|
+
+Example output:
+
+```
+```
+
 #### Block File
 
 This action is used to add a file to the block list.

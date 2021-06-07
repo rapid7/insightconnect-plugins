@@ -11,6 +11,9 @@ icon_palo_alto_cortex_xdr/actions/block_file/schema.py
 icon_palo_alto_cortex_xdr/actions/get_endpoint_details/__init__.py
 icon_palo_alto_cortex_xdr/actions/get_endpoint_details/action.py
 icon_palo_alto_cortex_xdr/actions/get_endpoint_details/schema.py
+icon_palo_alto_cortex_xdr/actions/get_file_quarantine_status/__init__.py
+icon_palo_alto_cortex_xdr/actions/get_file_quarantine_status/action.py
+icon_palo_alto_cortex_xdr/actions/get_file_quarantine_status/schema.py
 icon_palo_alto_cortex_xdr/actions/isolate_endpoint/__init__.py
 icon_palo_alto_cortex_xdr/actions/isolate_endpoint/action.py
 icon_palo_alto_cortex_xdr/actions/isolate_endpoint/schema.py

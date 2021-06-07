@@ -25,8 +25,8 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
 
         # Request all Alerts from one hour ago to now.
         one_hour_in_ms = 60 * 60 * 1000
-        end_time = Util.now_ms() / 10
-        start_time = end_time - one_hour_in_ms / 10
+        end_time = Util.now_ms()
+        start_time = end_time - one_hour_in_ms
         last_event_processed_time_ms = start_time
 
         self.logger.info(f"Initializing Get Alerts trigger for the Palo Alto Cortex XDR plugin.")

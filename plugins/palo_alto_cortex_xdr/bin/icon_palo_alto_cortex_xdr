@@ -44,6 +44,8 @@ def main():
 
             self.add_action(actions.GetEndpointDetails())
 
+            self.add_action(actions.GetFileQuarantineStatus())
+
             self.add_action(actions.IsolateEndpoint())
 
 

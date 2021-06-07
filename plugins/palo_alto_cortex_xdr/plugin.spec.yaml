@@ -166,6 +166,31 @@ connection:
       - Advanced
       - Standard
 actions:
+  get_file_quarantine_status:
+    title: Get File Quarantine Status
+    description: Get File Quarantine Status
+    input:
+      endpoint_id:
+        title: Endpoint ID
+        type: string
+        description: Endpoint ID
+        required: true
+      file_path:
+        title: File Path
+        type: string
+        description: File Path
+        required: true
+      file_hash:
+        title: File Hash
+        type: string
+        description: File Hash
+        required: true
+    output:
+      file_quarantine_status:
+        title: File Quarantine Status
+        description: The File's Quarantine Status
+        type: object
+        required: true
   get_endpoint_details:
     title: Get Endpoint Details
     description: Get information about an endpoint
