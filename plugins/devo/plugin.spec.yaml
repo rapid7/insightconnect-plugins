@@ -245,7 +245,7 @@ actions:
     input:
       query:
         title: Query
-        description: A Query. The response be limited to 200 mb of raw data or 1000 entries whichever is hit first
+        description: A query. The response is limited to 200MB of raw data or 1000 entries, whichever is hit first
         type: string
         required: true
         example: "from demo.ecommerce.data select *"
