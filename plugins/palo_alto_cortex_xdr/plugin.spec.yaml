@@ -315,7 +315,6 @@ triggers:
         description: Incident
         type: object
         required: false
-
   get_alerts:
     title: Get Alerts
     description: Get Alerts
