@@ -17,6 +17,10 @@ class GetAsset(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         asset_id = params.get(Input.ID)
-
-        response = self.connection.ivm_cloud_api.call_api("assets/" + asset_id, "GET")
-        return {Output.ASSET: response[1]}
+        include_vulns = params.get(Input.INCLUDE_VULNS)
+        if include_vulns:
+            params = {"includeSame": True}
+            response = self.connection.ivm_cloud_api.call_api("assets/" + asset_id, "GET", params)
+        else:
+            response = self.connection.ivm_cloud_api.call_api("assets/" + asset_id, "GET")
+        return {Output.ASSET: response}
