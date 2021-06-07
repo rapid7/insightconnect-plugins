@@ -153,7 +153,7 @@ class CortexXdrAPI:
             else:
                 done = True
 
-                # Back-off between making requests to the API.
+            # Back-off between making requests to the API.
             time.sleep(1)
 
         return all_items
