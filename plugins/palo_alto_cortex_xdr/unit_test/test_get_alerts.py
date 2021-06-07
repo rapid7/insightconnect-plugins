@@ -33,7 +33,7 @@ class fakeSender():
 class TestGetAlerts(TestCase):
 
     @timeout_pass
-    @timeout_decorator.timeout(300)
+    @timeout_decorator.timeout(30)
     @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=fakeSender.send)
     def test_integration_get_alerts(self, mockSend):
         """
