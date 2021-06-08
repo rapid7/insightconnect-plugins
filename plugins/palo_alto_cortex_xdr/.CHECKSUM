@@ -1,5 +1,5 @@
 {
-	"spec": "68f1012436346c307ad1fb6e614d4bbc",
+	"spec": "0c6d7b4de9dcacb65965500ee56bba68",
 	"manifest": "d0f0cfa6b086ddcb1a7ec76daad1d679",
 	"setup": "6dfe6819fce3f0f92290b26b015e7caf",
 	"schemas": [
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "get_file_quarantine_status/schema.py",
-			"hash": "479f1f4c42b619c026c3e54917af848d"
+			"hash": "3afca679a2d6a5a57267d47f3fb2524a"
 		},
 		{
 			"identifier": "isolate_endpoint/schema.py",

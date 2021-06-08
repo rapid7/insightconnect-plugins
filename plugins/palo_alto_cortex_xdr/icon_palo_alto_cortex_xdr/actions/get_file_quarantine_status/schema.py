@@ -33,13 +33,13 @@ class GetFileQuarantineStatusInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "File Hash",
       "description": "File Hash",
-      "order": 3
+      "order": 2
     },
     "file_path": {
       "type": "string",
       "title": "File Path",
       "description": "File Path",
-      "order": 2
+      "order": 3
     }
   },
   "required": [

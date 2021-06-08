@@ -176,16 +176,19 @@ actions:
         type: string
         description: Endpoint ID
         required: true
-      file_path:
-        title: File Path
-        type: string
-        description: File Path
-        required: true
+        example: SOMEENDPOINT
       file_hash:
         title: File Hash
         type: string
         description: File Hash
         required: true
+        example: de96a6e01234567895dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c
+      file_path:
+        title: File Path
+        type: string
+        description: File Path
+        required: true
+        example: powershell.exe
     output:
       file_is_quarantined:
         title: File is quarantined

@@ -60,17 +60,17 @@ This action is used to get File Quarantine Status.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|endpoint_id|string|None|True|Endpoint ID|None|None|
-|file_hash|string|None|True|File Hash|None|None|
-|file_path|string|None|True|File Path|None|None|
+|endpoint_id|string|None|True|Endpoint ID|None|SOMEENDPOINT|
+|file_hash|string|None|True|File Hash|None|de96a6e01234567895dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c|
+|file_path|string|None|True|File Path|None|powershell.exe|
 
 Example input:
 
 ```
 {
   "endpoint_id": "SOMEENDPOINT",
-  "file_hash": "abcdefghijklmnopqrstuvwxyz123456789",
-  "file_path": "executable.exe"
+  "file_hash": "de96a6e01234567895dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c",
+  "file_path": "powershell.exe"
 }
 ```
 
