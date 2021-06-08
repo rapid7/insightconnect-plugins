@@ -156,7 +156,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|assets|[]search_asset|True|List of asset details returned by the search|
+|assets|[]asset|True|List of asset details returned by the search|
 
 Example output:
 
@@ -262,6 +262,7 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |asset|asset|True|Asset details|
+|vulnerabilities|[]vulnerability|False|Vulnerabilities associated with the asset|
 
 Example output:
 
@@ -997,6 +998,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.1 - Changed output of Get Asset action to include vulnerabilities properly
 * 2.2.0 - Added ability to include vulnerabilities on Get Asset action | API call update
 * 2.1.0 - Added scanned asset_ids as an output of start_scan
 * 2.0.0 - Fix issue where string data-type should be date in actions | Update docs
