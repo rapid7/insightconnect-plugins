@@ -20,7 +20,7 @@ tags:
 - safe
 - links
 hub_tags:
-  use_cases: [data_utility, threat_detection_and_response]
+  use_cases: [data_utility, threat_detection_and_response, cloud_enabled]
   keywords: [ATP, Microsoft, safe, links]
   features: []
 actions:
