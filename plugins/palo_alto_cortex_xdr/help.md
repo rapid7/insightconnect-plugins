@@ -67,6 +67,11 @@ This action is used to get File Quarantine Status.
 Example input:
 
 ```
+{
+  "endpoint_id": "SOMEENDPOINT",
+  "file_hash": "abcdefghijklmnopqrstuvwxyz123456789",
+  "file_path": "executable.exe"
+}
 ```
 
 ##### Output
