@@ -1,0 +1,100 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: csv
+title: CSV
+description: "CSV (Comma Separated Values) is a simple data format for storing data. This plugin allows one to
+  extract fields from CSV strings and files"
+version: 1.1.6
+vendor: rapid7
+support: community
+status: []
+cloud_ready: true
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/csv
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+tags:
+- csv
+- utilities
+hub_tags:
+  use_cases: [data_utility]
+  keywords: [csv, utilities, cloud_enabled]
+  features: []
+actions:
+  filter_string:
+    title: Filter String
+    description: Keep fields from CSV string
+    input:
+      csv:
+        type: string
+        description: CSV string
+        required: true
+        example: column1, column2\nvalue1, value2
+      fields:
+        type: string
+        description: Fields to filter
+        required: true
+        example: f1, f2, f3-f6
+    output:
+      string:
+        type: string
+        description: Filtered CSV string
+        required: true
+  filter_bytes:
+    title: Filter Bytes
+    description: Keep fields from base64 CSV file
+    input:
+      csv:
+        type: bytes
+        description: Base64 encoded CSV file
+        required: true
+        example: ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTIK
+      fields:
+        type: string
+        description: Fields to filter
+        required: true
+        example: f1, f2, f3-f6
+    output:
+      filtered:
+        type: bytes
+        description: Filtered CSV file
+        required: true
+  to_json:
+    title: To JSON
+    description: Convert CSV to JSON
+    input:
+      csv:
+        title: CSV
+        type: bytes
+        description: Base64 encoded CSV file
+        required: true
+        example: ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTIK
+      validation:
+        title: Validate
+        type: boolean
+        description: Validate CSV data, error if not valid
+        default: false
+        required: true
+        example: true
+    output:
+      json:
+        title: JSON
+        type: '[]object'
+        description: List of objects
+        required: true
+  json_to_csv:
+    title: JSON to CSV
+    description: Convert a JSON array to CSV
+    input:
+      json:
+        title: JSON
+        type: '[]object'
+        description: JSON array to convert to CSV
+        required: true
+        example: "[{\"column1\": \"value1\", \" column2\": \" value2\"}]"
+    output:
+      csv:
+        title: CSV
+        type: bytes
+        required: true
+        description: Resulting CSV file from the conversion
