@@ -68,7 +68,7 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
       "title": "Assets",
       "description": "List of asset details returned by the search",
       "items": {
-        "$ref": "#/definitions/search_asset"
+        "$ref": "#/definitions/asset"
       },
       "order": 1
     }
@@ -77,69 +77,9 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
     "assets"
   ],
   "definitions": {
-    "asset_tag": {
+    "asset": {
       "type": "object",
-      "title": "asset_tag",
-      "properties": {
-        "name": {
-          "type": "string",
-          "title": "Name",
-          "description": "The name",
-          "order": 1
-        },
-        "type": {
-          "type": "string",
-          "title": "Type",
-          "description": "The type",
-          "order": 2
-        }
-      }
-    },
-    "creds": {
-      "type": "object",
-      "title": "creds",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "title": "Port",
-          "description": "The port that is used",
-          "order": 1
-        },
-        "protocol": {
-          "type": "string",
-          "title": "Protocol",
-          "description": "TCP or other",
-          "order": 2
-        },
-        "status": {
-          "type": "string",
-          "title": "Status",
-          "description": "Which creds apply",
-          "order": 3
-        }
-      }
-    },
-    "identifiers": {
-      "type": "object",
-      "title": "identifiers",
-      "properties": {
-        "id": {
-          "type": "string",
-          "title": "ID",
-          "description": "The ID",
-          "order": 2
-        },
-        "source": {
-          "type": "string",
-          "title": "Source",
-          "description": "The source",
-          "order": 1
-        }
-      }
-    },
-    "search_asset": {
-      "type": "object",
-      "title": "search_asset",
+      "title": "asset",
       "properties": {
         "assessed_for_policies": {
           "type": "boolean",
@@ -394,6 +334,66 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
               "order": 1
             }
           }
+        }
+      }
+    },
+    "asset_tag": {
+      "type": "object",
+      "title": "asset_tag",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "The name",
+          "order": 1
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "description": "The type",
+          "order": 2
+        }
+      }
+    },
+    "creds": {
+      "type": "object",
+      "title": "creds",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "title": "Port",
+          "description": "The port that is used",
+          "order": 1
+        },
+        "protocol": {
+          "type": "string",
+          "title": "Protocol",
+          "description": "TCP or other",
+          "order": 2
+        },
+        "status": {
+          "type": "string",
+          "title": "Status",
+          "description": "Which creds apply",
+          "order": 3
+        }
+      }
+    },
+    "identifiers": {
+      "type": "object",
+      "title": "identifiers",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "The ID",
+          "order": 2
+        },
+        "source": {
+          "type": "string",
+          "title": "Source",
+          "description": "The source",
+          "order": 1
         }
       }
     }
