@@ -9,11 +9,7 @@ class Util:
 
     @staticmethod
     def send_items_to_platform_for_trigger(
-            trigger,
-            items,
-            output_type,
-            last_event_processed_time_ms,
-            time_field="creation_time"
+        trigger, items, output_type, last_event_processed_time_ms, time_field="creation_time"
     ):
         for item in items:
             item_time = item.get(time_field, -1)

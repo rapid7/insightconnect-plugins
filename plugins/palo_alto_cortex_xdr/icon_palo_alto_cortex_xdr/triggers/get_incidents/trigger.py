@@ -35,7 +35,8 @@ class GetIncidents(insightconnect_plugin_runtime.Trigger):
 
             # Process incidents from oldest to newest
             for incident_time in Util.send_items_to_platform_for_trigger(
-                    self, incidents, Output.INCIDENT, last_event_processed_time_ms, time_field):
+                self, incidents, Output.INCIDENT, last_event_processed_time_ms, time_field
+            ):
                 last_event_processed_time_ms = incident_time
 
             # Back off before next iteration

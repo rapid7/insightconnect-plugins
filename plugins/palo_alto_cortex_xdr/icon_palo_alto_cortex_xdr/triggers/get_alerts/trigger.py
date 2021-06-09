@@ -11,10 +11,7 @@ from ...util.util import Util
 class GetAlerts(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_alerts',
-                description=Component.DESCRIPTION,
-                input=GetAlertsInput(),
-                output=GetAlertsOutput()
+            name="get_alerts", description=Component.DESCRIPTION, input=GetAlertsInput(), output=GetAlertsOutput()
         )
 
     def run(self, params={}):
@@ -32,12 +29,11 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
         self.logger.info(f"Initializing Get Alerts trigger for the Palo Alto Cortex XDR plugin.")
 
         while True:
-            alerts = self.connection.xdr_api.get_alerts(
-                from_time=start_time, to_time=end_time, time_field=time_field
-            )
+            alerts = self.connection.xdr_api.get_alerts(from_time=start_time, to_time=end_time, time_field=time_field)
 
             for alert_time in Util.send_items_to_platform_for_trigger(
-                    self, alerts, Output.ALERT, last_event_processed_time_ms, alert_timestamp_field):
+                self, alerts, Output.ALERT, last_event_processed_time_ms, alert_timestamp_field
+            ):
                 last_event_processed_time_ms = alert_time
 
             # Back off before next iteration

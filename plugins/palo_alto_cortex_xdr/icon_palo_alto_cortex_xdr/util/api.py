@@ -39,11 +39,7 @@ class CortexXdrAPI:
 
     def get_file_quarantine_status(self, file):
         quarantine_status_endpoint = "/public_api/v1/quarantine/status/"
-        post_body = {
-            "request_data": {
-                "files": [file]
-            }
-        }
+        post_body = {"request_data": {"files": [file]}}
         resp_json = self._post_to_api(quarantine_status_endpoint, post_body)
         file_quarantine_statuses = resp_json.get("reply", [])
         if len(file_quarantine_statuses) < 1:
