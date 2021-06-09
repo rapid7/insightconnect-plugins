@@ -191,8 +191,8 @@ actions:
         example: powershell.exe
     output:
       file_is_quarantined:
-        title: File is quarantined
-        description: Is the provided file quarantined
+        title: File is Quarantined
+        description: Check if the provided file is quarantined
         type: boolean
         required: true
   get_endpoint_details:

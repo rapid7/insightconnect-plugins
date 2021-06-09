@@ -62,8 +62,8 @@ class GetFileQuarantineStatusOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "file_is_quarantined": {
       "type": "boolean",
-      "title": "File is quarantined",
-      "description": "Is the provided file quarantined",
+      "title": "File is Quarantined",
+      "description": "Check if the provided file is quarantined",
       "order": 1
     }
   },

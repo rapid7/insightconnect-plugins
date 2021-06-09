@@ -78,7 +78,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|file_is_quarantined|boolean|True|Is the provided file quarantined|
+|file_is_quarantined|boolean|True|Check if the provided file is quarantined|
 
 Example output:
 
