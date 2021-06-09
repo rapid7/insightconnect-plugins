@@ -438,7 +438,7 @@ types:
       type: date
       required: false
     proof:
-      description: Proof of the vulnerability, ie. <p><p>OpenBSD OpenSSH 4.3 on Linux</p></p>
+      description: Proof of the vulnerability, i.e. <p><p>OpenBSD OpenSSH 4.3 on Linux</p></p>
       title: Proof
       type: string
       required: false
