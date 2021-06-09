@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm_cloud
 title: Rapid7 InsightVM Cloud
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the InsightVM Cloud Integrations API to view assets and start scans
-version: 2.2.0
+version: 3.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -421,38 +421,56 @@ types:
       title: Web Applications
       type: '[]web_application'
       required: false
-  vulnerabilities:
-    critical:
-      description: Number of critical vulnerabilities
-      title: Critical
-      type: integer
+  vulnerability:
+    first_found:
+      title: First Found
+      description: Date the vulnerability was first found in InsightVM
+      type: date
       required: false
-    exploits:
-      description: Number of distinct exploits that can exploit any of the vulnerabilities
-        on the asset
-      title: Exploits
-      type: integer
+    key:
+      title: Vulnerability Key
+      description: The key to identify a specific instance if the type is Instance
+      type: string
       required: false
-    malware_kits:
-      description: Number of distinct malware kits that vulnerabilities on the asset
-        are susceptible to
-      title: Malware Kits
-      type: integer
+    last_found:
+      title: Last Found
+      description: Date the vulnerability was last found in InsightVM
+      type: date
       required: false
-    moderate:
-      description: Number of moderate vulnerabilities
-      title: Moderate
-      type: integer
+    proof:
+      description: Proof of the vulnerability, i.e. <p><p>OpenBSD OpenSSH 4.3 on Linux</p></p>
+      title: Proof
+      type: string
       required: false
-    severe:
-      description: Number of severe vulnerabilities
-      title: Severe
-      type: integer
+    solution_fix:
+      title: Fix
+      description: The steps that are part of the fix this solution prescribes
+      type: string
       required: false
-    total:
-      description: Total number of vulnerabilities
-      title: Total
-      type: integer
+    solution_id:
+      title: Solution ID
+      description: The identifier of the solution
+      type: string
+      required: false
+    solution_summary:
+      title: Solution Summary
+      description: Remediation summary
+      type: string
+      required: false
+    solution_type:
+      title: Solution Type
+      description: Remediation type
+      type: string
+      required: true
+    status:
+      description: Status, i.e. vulnerable
+      title: Status
+      type: string
+      required: false
+    vulnerability_id:
+      description: The identifier of the vulnerability
+      title: Vulnerability ID
+      type: string
       required: false
   software:
     configurations:
@@ -499,129 +517,6 @@ types:
       description: Version of the software
       title: Version
       type: string
-      required: false
-  asset:
-    addresses:
-      description: All addresses discovered on the asset
-      title: Addresses
-      type: '[]address'
-      required: false
-    assessed_for_policies:
-      description: Whether the asset has been assessed for policies at least once
-      title: Assessed for Policies
-      type: boolean
-      required: false
-    assessed_for_vulnerabilities:
-      description: Whether the asset has been assessed for vulnerabilities at least
-        once
-      title: Assessed for Vulnerabilities
-      type: boolean
-      required: false
-    configurations:
-      description: Configuration key-values pairs enumerated on the asset
-      title: Configurations
-      type: '[]configuration'
-      required: false
-    databases:
-      description: Databases enumerated on the asset
-      title: Databases
-      type: '[]database'
-      required: false
-    files:
-      description: Files discovered with searching on the asset
-      title: Files
-      type: '[]file'
-      required: false
-    history:
-      description: History of changes to the asset over time
-      title: History
-      type: '[]history'
-      required: false
-    host_name:
-      description: Primary host name (local or FQDN) of the asset
-      title: Hostname
-      type: string
-      required: false
-    host_names:
-      description: All hostnames or aliases discovered on the asset
-      title: Hostnames
-      type: '[]host_name'
-      required: false
-    id:
-      description: Identifier of the asset
-      title: ID
-      type: string
-      required: false
-    ids:
-      description: Unique identifiers found on the asset, such as hardware or operating
-        system identifiers
-      title: IDs
-      type: '[]id'
-      required: false
-    ip:
-      description: Primary IPv4 or IPv6 address of the asset
-      title: IP
-      type: string
-      required: false
-    links:
-      description: Hypermedia links to corresponding or related resources
-      title: Links
-      type: '[]link'
-      required: false
-    mac:
-      description: Media Access Control (MAC) address, e.g. AF:12:BC:5A:F7:48
-      title: MAC
-      type: string
-      required: false
-    os:
-      description: Full description of the operating system of the asset
-      title: OS
-      type: string
-      required: false
-    os_fingerprint:
-      description: Details of the operating system of the asset
-      title: OS Fingerprint
-      type: os_fingerprint
-      required: false
-    raw_risk_score:
-      description: Base risk score of the asset
-      title: Raw Risk Score
-      type: float
-      required: false
-    risk_score:
-      description: Risk score (with criticality adjustments) of the asset
-      title: Risk Score
-      type: float
-      required: false
-    services:
-      description: Services discovered on the asset
-      title: Services
-      type: '[]service'
-      required: false
-    software:
-      description: Software discovered on the asset
-      title: Software
-      type: '[]software'
-      required: false
-    type:
-      description: Type of asset e.g. unknown, guest, hypervisor, physical, mobile
-      title: Type
-      type: string
-      required: false
-    user_groups:
-      description: User group accounts enumerated on the asset
-      title: User Groups
-      type: '[]user_group'
-      required: false
-    users:
-      description: User accounts enumerated on the asset
-      title: Users
-      type: '[]user'
-      required: false
-    vulnerabilities:
-      description: ' Summary information for vulnerabilities on the asset'
-      title: Vulnerabilities
-      type: vulnerabilities
       required: false
   vulnerability_description:
     html:
@@ -796,7 +691,7 @@ types:
       description: The type
       type: string
       required: false
-  search_asset:
+  asset:
     assessed_for_policies:
       description: Whether the asset has been assessed for policies at least once
       title: Assessed for Policies
@@ -1092,7 +987,7 @@ actions:
       assets:
         title: Assets
         description: List of asset details returned by the search
-        type: '[]search_asset'
+        type: '[]asset'
         required: true
   get_asset:
     title: Get Asset
@@ -1117,6 +1012,11 @@ actions:
         description: Asset details
         type: asset
         required: true
+      vulnerabilities:
+        title: Vulnerabilities
+        description: Vulnerabilities associated with the asset
+        type: '[]vulnerability'
+        required: false
   stop_scan:
     title: Stop Scan
     description: Stop a scan in progress
