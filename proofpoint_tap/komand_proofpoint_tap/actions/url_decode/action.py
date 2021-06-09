@@ -18,7 +18,7 @@ class UrlDecode(insightconnect_plugin_runtime.Action):
         for url in params_urls:
             try:
                 encoded_url = quopri.decodestring(url).decode("UTF-8")
-            except UnicodeDecodeError as _:
+            except UnicodeDecodeError:
                 encoded_url = url
 
             urls.append(encoded_url)
