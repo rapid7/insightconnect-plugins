@@ -422,7 +422,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
         "proof": {
           "type": "string",
           "title": "Proof",
-          "description": "Proof of the vulnerability, ie. \\u003cp\\u003e\\u003cp\\u003eOpenBSD OpenSSH 4.3 on Linux\\u003c/p\\u003e\\u003c/p\\u003e",
+          "description": "Proof of the vulnerability, i.e. \\u003cp\\u003e\\u003cp\\u003eOpenBSD OpenSSH 4.3 on Linux\\u003c/p\\u003e\\u003c/p\\u003e",
           "order": 4
         },
         "solution_fix": {
@@ -452,7 +452,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
         "status": {
           "type": "string",
           "title": "Status",
-          "description": "Status, ie. vulnerable",
+          "description": "Status, i.e. vulnerable",
           "order": 9
         },
         "vulnerability_id": {
