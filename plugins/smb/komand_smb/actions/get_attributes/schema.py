@@ -27,7 +27,7 @@ class GetAttributesInput(komand.Input):
     "file_path": {
       "type": "string",
       "title": "File Path",
-      "description": "Path relative to share to create a file",
+      "description": "Path relative to share to get file attributes",
       "order": 2
     },
     "share_name": {

@@ -26,7 +26,7 @@ class DownloadFileInput(komand.Input):
     "file_path": {
       "type": "string",
       "title": "File Path",
-      "description": "Path relative to share to create a file",
+      "description": "Path relative to share of the file to download",
       "order": 2
     },
     "share_name": {

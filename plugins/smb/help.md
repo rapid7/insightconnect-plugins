@@ -100,7 +100,7 @@ This action is used to download file.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file_path|string|None|True|Path relative to share to create a file|None|test.csv|
+|file_path|string|None|True|Path relative to share of the file to download|None|test.csv|
 |share_name|string|None|True|Name of the SMB share|None|data|
 |timeout|integer|30|False|Request timeout of operation in seconds|None|30|
 
@@ -139,7 +139,7 @@ This action is used to get attributes.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file_path|string|None|True|Path relative to share to create a file|None|test.csv|
+|file_path|string|None|True|Path relative to share to get file attributes|None|test.csv|
 |share_name|string|None|True|Name of the SMB share|None|data|
 |timeout|integer|30|False|Request timeout of operation in seconds|None|30|
 |timezone|string|UTC|False|Timezone to be applied to datetime fields (eg. UTC, US/Eastern, US/Pacific, Europe/London). Reference https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for valid timezone names|None|UTC|

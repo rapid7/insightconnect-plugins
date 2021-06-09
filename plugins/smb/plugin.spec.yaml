@@ -41,7 +41,7 @@ types:
       description: Short name
       type: string
     is_directory:
-      title: Is Directory?
+      title: Is Directory
       description: Is directory
       type: boolean
     create_time:
@@ -300,7 +300,7 @@ actions:
         example: data
       file_path:
         title: File Path
-        description: Path relative to share to create a file
+        description: Path relative to share of the file to download
         type: string
         required: true
         example: test.csv
@@ -329,7 +329,7 @@ actions:
         example: data
       file_path:
         title: File Path
-        description: Path relative to share to create a file
+        description: Path relative to share to get file attributes
         type: string
         required: true
         example: test.csv
