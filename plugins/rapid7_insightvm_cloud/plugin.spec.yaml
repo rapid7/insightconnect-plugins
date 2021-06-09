@@ -463,7 +463,7 @@ types:
       type: string
       required: true
     status:
-      description: Status, ie. vulnerable
+      description: Status, i.e. vulnerable
       title: Status
       type: string
       required: false
