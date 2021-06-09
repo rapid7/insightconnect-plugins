@@ -530,7 +530,7 @@ Example output:
 
 # Version History
 
-* 1.0.1 - Added get file quarantine status action and get alerts trigger
+* 1.0.1 - Add Get File Quarantine Status action and Get Alerts trigger
 * 1.0.0 - Initial plugin
 
 # Links
