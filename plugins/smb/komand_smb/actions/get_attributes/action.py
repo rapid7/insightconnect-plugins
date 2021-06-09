@@ -1,6 +1,7 @@
 import komand
 from .schema import GetAttributesInput, GetAttributesOutput, Input, Output, Component
 from komand.exceptions import PluginException
+
 # Custom imports below
 import smb
 import pytz
@@ -8,13 +9,13 @@ from komand_smb.util import utils
 
 
 class GetAttributes(komand.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_attributes',
-                description=Component.DESCRIPTION,
-                input=GetAttributesInput(),
-                output=GetAttributesOutput())
+            name="get_attributes",
+            description=Component.DESCRIPTION,
+            input=GetAttributesInput(),
+            output=GetAttributesOutput(),
+        )
 
     def run(self, params={}):
         file_path = params.get(Input.FILE_PATH)
@@ -44,13 +45,18 @@ class GetAttributes(komand.Action):
             }
             return {Output.ATTRIBUTES: file_attributes}
         except smb.smb_structs.OperationFailure as e:
-            raise PluginException(cause="Failed to get file attributes.",
-                                  assistance="This may occur when the file does not exist.")
+            raise PluginException(
+                cause="Failed to get file attributes.", assistance="This may occur when the file does not exist."
+            )
         except smb.base.SMBTimeout as e:
-            raise PluginException(cause="Timeout reached when connecting to SMB endpoint.",
-                                  assistance="Validate network connectivity.",
-                                  data=e)
+            raise PluginException(
+                cause="Timeout reached when connecting to SMB endpoint.",
+                assistance="Validate network connectivity.",
+                data=e,
+            )
         except smb.base.NotReadyError as e:
-            raise PluginException(cause="The SMB connection is not authenticated or the authentication has failed.",
-                                  assistance="Verify the credentials of the connection in use.",
-                                  data=e)
+            raise PluginException(
+                cause="The SMB connection is not authenticated or the authentication has failed.",
+                assistance="Verify the credentials of the connection in use.",
+                data=e,
+            )
