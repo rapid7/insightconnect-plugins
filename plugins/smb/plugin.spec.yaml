@@ -121,7 +121,7 @@ actions:
         example: Hello world
     output:
       response:
-        description: Server Response
+        description: Server response
         title: Response
         type: string
         required: true

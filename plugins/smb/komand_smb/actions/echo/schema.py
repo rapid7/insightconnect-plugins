@@ -47,7 +47,7 @@ class EchoOutput(komand.Output):
     "response": {
       "type": "string",
       "title": "Response",
-      "description": "Server Response",
+      "description": "Server response",
       "order": 1
     }
   },

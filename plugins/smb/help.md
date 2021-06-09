@@ -199,7 +199,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|response|string|True|Server Response|
+|response|string|True|Server response|
 
 Example output:
 
