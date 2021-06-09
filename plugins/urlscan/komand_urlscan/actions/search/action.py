@@ -61,13 +61,17 @@ class Search(komand.Action):
 
             try:
                 responses = response.json()
-                results.extend(responses["results"])
-                has_more = responses["has_more"]
+                response_results = responses.get("results", [])
+                if not response_results or not isinstance(response_results, list):
+                    break
+
+                results.extend(response_results)
+                has_more = responses.get("has_more", False)
                 if not has_more:
                     break
 
-                if "sort" in responses["results"][-1] and len(responses["results"][-1]["sort"]) == 2:
-                    returned_sort = responses["results"][-1]["sort"]
+                if "sort" in response_results[-1] and len(response_results[-1]["sort"]) == 2:
+                    returned_sort = response_results[-1]["sort"]
                     search_after = f"{returned_sort[0]},{returned_sort[1]}"
                 else:
                     break
