@@ -2,9 +2,15 @@ import komand
 from .schema import GetObservablesInput, GetObservablesOutput, Component
 
 # Custom imports below
+import logging
 from copy import copy
 from json import JSONDecodeError
 from komand.exceptions import PluginException
+from komand_anomali_threatstream.util import SensitiveFormatter
+
+logger = logging.getLogger()
+for h in logging.root.handlers:
+    h.setFormatter(SensitiveFormatter)
 
 
 class GetObservables(komand.Action):
@@ -27,7 +33,7 @@ class GetObservables(komand.Action):
         self.request.params.update({"value": "{value}".format(value=params.get("value")), "limit": 1000, "offset": 0})
 
         while self.continue_paging:
-            response = self.connection.session.send(self.request.prepare(), verify=self.request.verify)
+            response = self.connection.session.send(self.request.prepare(), verify=self.request.verify)     # may cause NewConnectionError: Operation timed out. That prints: Max retries exceeded with url: <URL WITH EXPOSED API KEY>
 
             if response.status_code not in range(200, 299):
                 raise PluginException(
