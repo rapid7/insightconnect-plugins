@@ -23,6 +23,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self):
         try:
-            return {"success": self.client.get_status() != {}}
+            return {"success": self.client.get_status().status_code == 200}
         except PluginException as e:
             raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e.data)
