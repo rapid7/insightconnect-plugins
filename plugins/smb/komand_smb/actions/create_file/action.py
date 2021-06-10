@@ -25,8 +25,8 @@ class CreateFile(komand.Action):
             try:
                 self.connection.conn.getAttributes(share_name, file_path, timeout=timeout)
                 raise PluginException(
-                    cause="Can not overwrite existing file.",
-                    assistance="Please set overwrite_existing to true and re-run.",
+                    cause="Cannot overwrite existing file.",
+                    assistance="Please set the 'Overwrite Existing' input to true and re-run.",
                 )
             except smb.smb_structs.OperationFailure as e:
                 self.logger.info(f"File {file_path} does not exist. Continuing with file creation...")

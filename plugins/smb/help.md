@@ -38,7 +38,10 @@ Example input:
 
 ```
 {
-  "credentials": "{\"username\": \"user@example.com\", \"password\": \"mypassword\"}",
+  "credentials": {
+    "username": "user@example.com",
+    "password": "mypassword"
+  },
   "domain": "example.com",
   "host": "198.51.100.1",
   "netbios_name": "example.com",
