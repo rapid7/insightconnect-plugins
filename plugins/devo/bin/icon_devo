@@ -4,10 +4,10 @@ import os
 import json
 from sys import argv
 
-Name = "Zscaler"
+Name = "Devo"
 Vendor = "rapid7"
-Version = "1.4.0"
-Description = "Zscaler is a SaaS security platform that provides fast, secure connections between client applications, regardless of device, location, or network"
+Version = "1.0.0"
+Description = "Devo is the cloud-native logging and security analytics solution that delivers real-time visibility for security and operations teams"
 
 
 def main():
@@ -23,9 +23,9 @@ def main():
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
-    from icon_zscaler import connection, actions, triggers
+    from icon_devo import connection, actions, triggers
 
-    class ICONZscaler(insightconnect_plugin_runtime.Plugin):
+    class ICONDevo(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -34,17 +34,13 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
-            self.add_action(actions.BlacklistUrl())
+            self.add_trigger(triggers.GetNewAlerts())
 
-            self.add_action(actions.GetBlacklistUrl())
-
-            self.add_action(actions.GetSandboxReportForHash())
-
-            self.add_action(actions.LookupUrl())
+            self.add_action(actions.QueryLogs())
 
 
     """Run plugin"""
-    cli = insightconnect_plugin_runtime.CLI(ICONZscaler())
+    cli = insightconnect_plugin_runtime.CLI(ICONDevo())
     cli.run()
 
 
