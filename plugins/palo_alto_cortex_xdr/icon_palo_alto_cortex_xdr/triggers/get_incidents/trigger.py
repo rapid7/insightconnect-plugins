@@ -20,10 +20,9 @@ class GetIncidents(insightconnect_plugin_runtime.Trigger):
     def run(self, params={}):
         time_field = "creation_time"
 
-        # We will be asking for incidents between one hour ago and now.
-        one_hour_in_ms = 60 * 60 * 1000
         end_time = Util.now_ms()
-        start_time = end_time - one_hour_in_ms
+        # Request all events between 1ms ago and now on first iteration.
+        start_time = end_time - 1
         last_event_processed_time_ms = start_time
 
         self.logger.info(f"Initializing Get Incidents trigger for the Palo Alto Cortex XDR plugin.")

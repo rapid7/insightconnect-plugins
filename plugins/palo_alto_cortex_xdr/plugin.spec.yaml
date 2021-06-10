@@ -23,6 +23,799 @@ hub_tags:
   features: []
 
 types:
+  event:
+    action_country:
+      title: "Action Country"
+      type: string
+      description: "Action country"
+      required: false
+    action_external_hostname:
+      title: "Action External Hostname"
+      type: string
+      description: "Action external hostname"
+      required: false
+    action_file_macro_sha256:
+      title: "Action File MACro SHA256"
+      type: string
+      description: "Action file macro SHA256"
+      required: false
+    action_file_md5:
+      title: "Action File MD5"
+      type: string
+      description: "Action file MD5"
+      required: false
+    action_file_name:
+      title: "Action File Name"
+      type: string
+      description: "Action file name"
+      required: false
+    action_file_path:
+      title: "Action File Path"
+      type: string
+      description: "Action file path"
+      required: false
+    action_file_sha256:
+      title: "Action File SHA256"
+      type: string
+      description: "Action file SHA256"
+      required: false
+    action_local_ip:
+      title: "Action Local IP"
+      type: string
+      description: "Action local IP"
+      required: false
+    action_local_port:
+      title: "Action Local Port"
+      type: string
+      description: "Action local port"
+      required: false
+    action_process_causality_id:
+      title: "Action Process Causality Id"
+      type: string
+      description: "Action process causality id"
+      required: false
+    action_process_image_command_line:
+      title: "Action Process Image Command Line"
+      type: string
+      description: "Action process image command line"
+      required: false
+    action_process_image_name:
+      title: "Action Process Image Name"
+      type: string
+      description: "Action process image name"
+      required: false
+    action_process_image_sha256:
+      title: "Action Process Image SHA256"
+      type: string
+      description: "Action process image SHA256"
+      required: false
+    action_process_instance_id:
+      title: "Action Process Instance Id"
+      type: string
+      description: "Action process instance id"
+      required: false
+    action_process_signature_status:
+      title: "Action Process Signature Status"
+      type: string
+      description: "Action process signature status"
+      required: false
+    action_process_signature_vendor:
+      title: "Action Process Signature Vendor"
+      type: string
+      description: "Action process signature vendor"
+      required: false
+    action_registry_data:
+      title: "Action Registry Data"
+      type: string
+      description: "Action registry data"
+      required: false
+    action_registry_full_key:
+      title: "Action Registry Full Key"
+      type: string
+      description: "Action registry full key"
+      required: false
+    action_registry_key_name:
+      title: "Action Registry Key Name"
+      type: string
+      description: "Action registry key name"
+      required: false
+    action_registry_value_name:
+      title: "Action Registry Value Name"
+      type: string
+      description: "Action registry value name"
+      required: false
+    action_remote_ip:
+      title: "Action Remote IP"
+      type: string
+      description: "Action remote IP"
+      required: false
+    action_remote_port:
+      title: "Action Remote Port"
+      type: string
+      description: "Action remote port"
+      required: false
+    actor_causality_id:
+      title: "Actor Causality Id"
+      type: string
+      description: "Actor causality id"
+      required: false
+    actor_process_causality_id:
+      title: "Actor Process Causality Id"
+      type: string
+      description: "Actor process causality id"
+      required: false
+    actor_process_command_line:
+      title: "Actor Process Command Line"
+      type: string
+      description: "Actor process command line"
+      required: false
+    actor_process_image_md5:
+      title: "Actor Process Image MD5"
+      type: string
+      description: "Actor process image MD5"
+      required: false
+    actor_process_image_name:
+      title: "Actor Process Image Name"
+      type: string
+      description: "Actor process image name"
+      required: false
+    actor_process_image_path:
+      title: "Actor Process Image Path"
+      type: string
+      description: "Actor process image path"
+      required: false
+    actor_process_image_sha256:
+      title: "Actor Process Image SHA256"
+      type: string
+      description: "Actor process image SHA256"
+      required: false
+    actor_process_instance_id:
+      title: "Actor Process Instance Id"
+      type: string
+      description: "Actor process instance id"
+      required: false
+    actor_process_os_pid:
+      title: "Actor Process Os PID"
+      type: integer
+      description: "Actor process os PID"
+      required: false
+    actor_process_signature_status:
+      title: "Actor Process Signature Status"
+      type: string
+      description: "Actor process signature status"
+      required: false
+    actor_process_signature_vendor:
+      title: "Actor Process Signature Vendor"
+      type: string
+      description: "Actor process signature vendor"
+      required: false
+    actor_thread_thread_id:
+      title: "Actor Thread Thread Id"
+      type: string
+      description: "Actor thread thread id"
+      required: false
+    agent_host_boot_time:
+      title: "Agent Host Boot Time"
+      type: string
+      description: "Agent host boot time"
+      required: false
+    agent_install_type:
+      title: "Agent Install Type"
+      type: string
+      description: "Agent install type"
+      required: false
+    association_strength:
+      title: "Association Strength"
+      type: string
+      description: "Association strength"
+      required: false
+    causality_actor_causality_id:
+      title: "Causality Actor Causality Id"
+      type: string
+      description: "Causality actor causality id"
+      required: false
+    causality_actor_process_command_line:
+      title: "Causality Actor Process Command Line"
+      type: string
+      description: "Causality actor process command line"
+      required: false
+    causality_actor_process_execution_time:
+      title: "Causality Actor Process Execution Time"
+      type: string
+      description: "Causality actor process execution time"
+      required: false
+    causality_actor_process_image_md5:
+      title: "Causality Actor Process Image MD5"
+      type: string
+      description: "Causality actor process image MD5"
+      required: false
+    causality_actor_process_image_name:
+      title: "Causality Actor Process Image Name"
+      type: string
+      description: "Causality actor process image name"
+      required: false
+    causality_actor_process_image_path:
+      title: "Causality Actor Process Image Path"
+      type: string
+      description: "Causality actor process image path"
+      required: false
+    causality_actor_process_image_sha256:
+      title: "Causality Actor Process Image SHA256"
+      type: string
+      description: "Causality actor process image SHA256"
+      required: false
+    causality_actor_process_signature_status:
+      title: "Causality Actor Process Signature Status"
+      type: string
+      description: "Causality actor process signature status"
+      required: false
+    causality_actor_process_signature_vendor:
+      title: "Causality Actor Process Signature Vendor"
+      type: string
+      description: "Causality actor process signature vendor"
+      required: false
+    cluster_name:
+      title: "Cluster Name"
+      type: string
+      description: "Cluster name"
+      required: false
+    container_id:
+      title: "Container Id"
+      type: string
+      description: "Container id"
+      required: false
+    contains_featured_host:
+      title: "Contains Featured Host"
+      type: string
+      description: "Contains featured host"
+      required: false
+    contains_featured_ip:
+      title: "Contains Featured IP"
+      type: string
+      description: "Contains featured IP"
+      required: false
+    contains_featured_user:
+      title: "Contains Featured User"
+      type: string
+      description: "Contains featured user"
+      required: false
+    dns_query_name:
+      title: "DNS Query Name"
+      type: string
+      description: "DNS query name"
+      required: false
+    dst_action_country:
+      title: "Dst Action Country"
+      type: string
+      description: "Dst action country"
+      required: false
+    dst_action_external_hostname:
+      title: "Dst Action External Hostname"
+      type: string
+      description: "Dst action external hostname"
+      required: false
+    dst_action_external_port:
+      title: "Dst Action External Port"
+      type: string
+      description: "Dst action external port"
+      required: false
+    dst_agent_id:
+      title: "Dst Agent Id"
+      type: string
+      description: "Dst agent id"
+      required: false
+    dst_association_strength:
+      title: "Dst Association Strength"
+      type: string
+      description: "Dst association strength"
+      required: false
+    dst_causality_actor_process_execution_time:
+      title: "Dst Causality Actor Process Execution Time"
+      type: string
+      description: "Dst causality actor process execution time"
+      required: false
+    event_id:
+      title: "Event Id"
+      type: string
+      description: "Event id"
+      required: false
+    event_sub_type:
+      title: "Event Sub Type"
+      type: string
+      description: "Event sub type"
+      required: false
+    event_timestamp:
+      title: "Event Timestamp"
+      type: integer
+      description: "Event timestamp"
+      required: false
+    event_type:
+      title: "Event Type"
+      type: string
+      description: "Event type"
+      required: false
+    fw_app_category:
+      title: "Fw App Category"
+      type: string
+      description: "Fw app category"
+      required: false
+    fw_app_id:
+      title: "Fw App Id"
+      type: string
+      description: "Fw app id"
+      required: false
+    fw_app_subcategory:
+      title: "Fw App Subcategory"
+      type: string
+      description: "Fw app subcategory"
+      required: false
+    fw_app_technology:
+      title: "Fw App Technology"
+      type: string
+      description: "Fw app technology"
+      required: false
+    fw_device_name:
+      title: "Fw Device Name"
+      type: string
+      description: "Fw device name"
+      required: false
+    fw_email_recipient:
+      title: "Fw Email Recipient"
+      type: string
+      description: "Fw email recipient"
+      required: false
+    fw_email_sender:
+      title: "Fw Email Sender"
+      type: string
+      description: "Fw email sender"
+      required: false
+    fw_email_subject:
+      title: "Fw Email Subject"
+      type: string
+      description: "Fw email subject"
+      required: false
+    fw_interface_from:
+      title: "Fw Interface From"
+      type: string
+      description: "Fw interface from"
+      required: false
+    fw_interface_to:
+      title: "Fw Interface To"
+      type: string
+      description: "Fw interface to"
+      required: false
+    fw_is_phishing:
+      title: "Fw Is Phishing"
+      type: string
+      description: "Fw is phishing"
+      required: false
+    fw_misc:
+      title: "Fw Misc"
+      type: string
+      description: "Fw misc"
+      required: false
+    fw_rule:
+      title: "Fw Rule"
+      type: string
+      description: "Fw rule"
+      required: false
+    fw_rule_id:
+      title: "Fw Rule Id"
+      type: string
+      description: "Fw rule id"
+      required: false
+    fw_serial_number:
+      title: "Fw Serial Number"
+      type: string
+      description: "Fw serial number"
+      required: false
+    fw_url_domain:
+      title: "Fw URL Domain"
+      type: string
+      description: "Fw URL domain"
+      required: false
+    fw_vsys:
+      title: "Fw Vsys"
+      type: string
+      description: "Fw vsys"
+      required: false
+    fw_xff:
+      title: "Fw Xff"
+      type: string
+      description: "Fw xff"
+      required: false
+    image_name:
+      title: "Image Name"
+      type: string
+      description: "Image name"
+      required: false
+    module_id:
+      title: "Module Id"
+      type: string
+      description: "Module id"
+      required: false
+    os_actor_causality_id:
+      title: "Os Actor Causality Id"
+      type: string
+      description: "Os actor causality id"
+      required: false
+    os_actor_effective_username:
+      title: "Os Actor Effective Username"
+      type: string
+      description: "Os actor effective username"
+      required: false
+    os_actor_process_causality_id:
+      title: "Os Actor Process Causality Id"
+      type: string
+      description: "Os actor process causality id"
+      required: false
+    os_actor_process_command_line:
+      title: "Os Actor Process Command Line"
+      type: string
+      description: "Os actor process command line"
+      required: false
+    os_actor_process_image_name:
+      title: "Os Actor Process Image Name"
+      type: string
+      description: "Os actor process image name"
+      required: false
+    os_actor_process_image_path:
+      title: "Os Actor Process Image Path"
+      type: string
+      description: "Os actor process image path"
+      required: false
+    os_actor_process_image_sha256:
+      title: "Os Actor Process Image SHA256"
+      type: string
+      description: "Os actor process image SHA256"
+      required: false
+    os_actor_process_instance_id:
+      title: "Os Actor Process Instance Id"
+      type: string
+      description: "Os actor process instance id"
+      required: false
+    os_actor_process_os_pid:
+      title: "Os Actor Process Os PID"
+      type: string
+      description: "Os actor process os PID"
+      required: false
+    os_actor_process_signature_status:
+      title: "Os Actor Process Signature Status"
+      type: string
+      description: "Os actor process signature status"
+      required: false
+    os_actor_process_signature_vendor:
+      title: "Os Actor Process Signature Vendor"
+      type: string
+      description: "Os actor process signature vendor"
+      required: false
+    os_actor_thread_thread_id:
+      title: "Os Actor Thread Thread Id"
+      type: string
+      description: "Os actor thread thread id"
+      required: false
+    story_id:
+      title: "Story Id"
+      type: string
+      description: "Story id"
+      required: false
+    user_name:
+      title: "User Name"
+      type: string
+      description: "User name"
+      required: false
+  alert:
+    action:
+      title: "Action"
+      type: string
+      description: "Action"
+      required: false
+    action_pretty:
+      title: "Action Pretty"
+      type: string
+      description: "Action pretty"
+      required: false
+    agent_data_collection_status:
+      title: "Agent Data Collection Status"
+      type: boolean
+      description: "Agent data collection status"
+      required: false
+    agent_device_domain:
+      title: "Agent Device Domain"
+      type: string
+      description: "Agent device domain"
+      required: false
+    agent_fqdn:
+      title: "Agent FQDN"
+      type: string
+      description: "Agent FQDN"
+      required: false
+    agent_os_sub_type:
+      title: "Agent Os Sub Type"
+      type: string
+      description: "Agent os sub type"
+      required: false
+    agent_os_type:
+      title: "Agent Os Type"
+      type: string
+      description: "Agent os type"
+      required: false
+    agent_version:
+      title: "Agent Version"
+      type: string
+      description: "Agent version"
+      required: false
+    alert_id:
+      title: "Alert Id"
+      type: string
+      description: "Alert id"
+      required: false
+    attempt_counter:
+      title: "Attempt Counter"
+      type: string
+      description: "Attempt counter"
+      required: false
+    bioc_category_enum_key:
+      title: "Bioc Category Enum Key"
+      type: string
+      description: "Bioc category enum key"
+      required: false
+    bioc_indicator:
+      title: "Bioc Indicator"
+      type: string
+      description: "Bioc indicator"
+      required: false
+    category:
+      title: "Category"
+      type: string
+      description: "Category"
+      required: false
+    deduplicate_tokens:
+      title: "Deduplicate Tokens"
+      type: string
+      description: "Deduplicate tokens"
+      required: false
+    description:
+      title: "Description"
+      type: string
+      description: "Description"
+      required: false
+    detection_timestamp:
+      title: "Detection Timestamp"
+      type: integer
+      description: "Detection timestamp"
+      required: false
+    end_match_attempt_ts:
+      title: "End Match Attempt Ts"
+      type: string
+      description: "End match attempt ts"
+      required: false
+    endpoint_id:
+      title: "Endpoint Id"
+      type: string
+      description: "Endpoint id"
+      required: false
+    events:
+      title: "Events"
+      type: "[]event"
+      description: "Events"
+      required: false
+    external_id:
+      title: "External Id"
+      type: string
+      description: "External id"
+      required: false
+    filter_rule_id:
+      title: "Filter Rule Id"
+      type: string
+      description: "Filter rule id"
+      required: false
+    host_ip:
+      title: "Host IP"
+      type: "[]string"
+      description: "Host IP"
+      required: false
+    host_name:
+      title: "Host Name"
+      type: string
+      description: "Host name"
+      required: false
+    is_whitelisted:
+      title: "Is Whitelisted"
+      type: boolean
+      description: "Is whitelisted"
+      required: false
+    local_insert_ts:
+      title: "Local Insert Ts"
+      type: integer
+      description: "Local insert ts"
+      required: false
+    mac:
+      title: "MAC"
+      type: string
+      description: "MAC"
+      required: false
+    mac_addresses:
+      title: "MAC Addresses"
+      type: "[]string"
+      description: "MAC addresses"
+      required: false
+    matching_service_rule_id:
+      title: "Matching Service Rule Id"
+      type: string
+      description: "Matching service rule id"
+      required: false
+    matching_status:
+      title: "Matching Status"
+      type: string
+      description: "Matching status"
+      required: false
+    mitre_tactic_id_and_name:
+      title: "Mitre Tactic Id And Name"
+      type: "[]string"
+      description: "Mitre tactic id and name"
+      required: false
+    mitre_technique_id_and_name:
+      title: "Mitre Technique Id And Name"
+      type: "[]string"
+      description: "Mitre technique id and name"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    severity:
+      title: "Severity"
+      type: string
+      description: "Severity"
+      required: false
+    source:
+      title: "Source"
+      type: string
+      description: "Source"
+      required: false
+    starred:
+      title: "Starred"
+      type: boolean
+      description: "Starred"
+      required: false
+  incident:
+    alert_count:
+      title: "Alert Count"
+      type: integer
+      description: "Alert count"
+      required: false
+    assigned_user_mail:
+      title: "Assigned User Mail"
+      type: string
+      description: "Assigned user mail"
+      required: false
+    assigned_user_pretty_name:
+      title: "Assigned User Pretty Name"
+      type: string
+      description: "Assigned user pretty name"
+      required: false
+    creation_time:
+      title: "Creation Time"
+      type: integer
+      description: "Creation time"
+      required: false
+    description:
+      title: "Description"
+      type: string
+      description: "Description"
+      required: false
+    detection_time:
+      title: "Detection Time"
+      type: string
+      description: "Detection time"
+      required: false
+    high_severity_alert_count:
+      title: "High Severity Alert Count"
+      type: integer
+      description: "High severity alert count"
+      required: false
+    host_count:
+      title: "Host Count"
+      type: integer
+      description: "Host count"
+      required: false
+    hosts:
+      title: "Hosts"
+      type: "[]string"
+      description: "Hosts"
+      required: false
+    incident_id:
+      title: "Incident Id"
+      type: string
+      description: "Incident id"
+      required: false
+    incident_name:
+      title: "Incident Name"
+      type: string
+      description: "Incident name"
+      required: false
+    incident_sources:
+      title: "Incident Sources"
+      type: "[]string"
+      description: "Incident sources"
+      required: false
+    low_severity_alert_count:
+      title: "Low Severity Alert Count"
+      type: integer
+      description: "Low severity alert count"
+      required: false
+    manual_description:
+      title: "Manual Description"
+      type: string
+      description: "Manual description"
+      required: false
+    manual_score:
+      title: "Manual Score"
+      type: string
+      description: "Manual score"
+      required: false
+    manual_severity:
+      title: "Manual Severity"
+      type: string
+      description: "Manual severity"
+      required: false
+    med_severity_alert_count:
+      title: "Med Severity Alert Count"
+      type: integer
+      description: "Med severity alert count"
+      required: false
+    modification_time:
+      title: "Modification Time"
+      type: integer
+      description: "Modification time"
+      required: false
+    notes:
+      title: "Notes"
+      type: string
+      description: "Notes"
+      required: false
+    resolve_comment:
+      title: "Resolve Comment"
+      type: string
+      description: "Resolve comment"
+      required: false
+    rule_based_score:
+      title: "Rule Based Score"
+      type: string
+      description: "Rule based score"
+      required: false
+    severity:
+      title: "Severity"
+      type: string
+      description: "Severity"
+      required: false
+    starred:
+      title: "Starred"
+      type: boolean
+      description: "Starred"
+      required: false
+    status:
+      title: "Status"
+      type: string
+      description: "Status"
+      required: false
+    user_count:
+      title: "User Count"
+      type: integer
+      description: "User count"
+      required: false
+    users:
+      title: "Users"
+      type: "[]string"
+      description: "Users"
+      required: false
+    xdr_url:
+      title: "Xdr URL"
+      type: string
+      description: "Xdr URL"
+      required: false
   isolation_result:
     action_id:
       title: "Action ID"
@@ -317,7 +1110,7 @@ triggers:
       incident:
         title: Incident
         description: Incident
-        type: object
+        type: incident
         required: false
   get_alerts:
     title: Get Alerts
@@ -326,6 +1119,6 @@ triggers:
       alert:
         title: Alert
         description: Alert
-        type: object
+        type: alert
         required: false
 

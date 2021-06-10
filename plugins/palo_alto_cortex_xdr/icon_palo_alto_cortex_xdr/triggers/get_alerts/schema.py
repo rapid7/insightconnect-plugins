@@ -32,10 +32,1409 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "alert": {
-      "type": "object",
+      "$ref": "#/definitions/alert",
       "title": "Alert",
       "description": "Alert",
       "order": 1
+    }
+  },
+  "definitions": {
+    "alert": {
+      "type": "object",
+      "title": "alert",
+      "properties": {
+        "action": {
+          "type": "string",
+          "title": "Action",
+          "description": "Action",
+          "order": 1
+        },
+        "action_pretty": {
+          "type": "string",
+          "title": "Action Pretty",
+          "description": "Action pretty",
+          "order": 2
+        },
+        "agent_data_collection_status": {
+          "type": "boolean",
+          "title": "Agent Data Collection Status",
+          "description": "Agent data collection status",
+          "order": 3
+        },
+        "agent_device_domain": {
+          "type": "string",
+          "title": "Agent Device Domain",
+          "description": "Agent device domain",
+          "order": 4
+        },
+        "agent_fqdn": {
+          "type": "string",
+          "title": "Agent FQDN",
+          "description": "Agent FQDN",
+          "order": 5
+        },
+        "agent_os_sub_type": {
+          "type": "string",
+          "title": "Agent Os Sub Type",
+          "description": "Agent os sub type",
+          "order": 6
+        },
+        "agent_os_type": {
+          "type": "string",
+          "title": "Agent Os Type",
+          "description": "Agent os type",
+          "order": 7
+        },
+        "agent_version": {
+          "type": "string",
+          "title": "Agent Version",
+          "description": "Agent version",
+          "order": 8
+        },
+        "alert_id": {
+          "type": "string",
+          "title": "Alert Id",
+          "description": "Alert id",
+          "order": 9
+        },
+        "attempt_counter": {
+          "type": "string",
+          "title": "Attempt Counter",
+          "description": "Attempt counter",
+          "order": 10
+        },
+        "bioc_category_enum_key": {
+          "type": "string",
+          "title": "Bioc Category Enum Key",
+          "description": "Bioc category enum key",
+          "order": 11
+        },
+        "bioc_indicator": {
+          "type": "string",
+          "title": "Bioc Indicator",
+          "description": "Bioc indicator",
+          "order": 12
+        },
+        "category": {
+          "type": "string",
+          "title": "Category",
+          "description": "Category",
+          "order": 13
+        },
+        "deduplicate_tokens": {
+          "type": "string",
+          "title": "Deduplicate Tokens",
+          "description": "Deduplicate tokens",
+          "order": 14
+        },
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "description": "Description",
+          "order": 15
+        },
+        "detection_timestamp": {
+          "type": "integer",
+          "title": "Detection Timestamp",
+          "description": "Detection timestamp",
+          "order": 16
+        },
+        "end_match_attempt_ts": {
+          "type": "string",
+          "title": "End Match Attempt Ts",
+          "description": "End match attempt ts",
+          "order": 17
+        },
+        "endpoint_id": {
+          "type": "string",
+          "title": "Endpoint Id",
+          "description": "Endpoint id",
+          "order": 18
+        },
+        "events": {
+          "type": "array",
+          "title": "Events",
+          "description": "Events",
+          "items": {
+            "$ref": "#/definitions/event"
+          },
+          "order": 19
+        },
+        "external_id": {
+          "type": "string",
+          "title": "External Id",
+          "description": "External id",
+          "order": 20
+        },
+        "filter_rule_id": {
+          "type": "string",
+          "title": "Filter Rule Id",
+          "description": "Filter rule id",
+          "order": 21
+        },
+        "host_ip": {
+          "type": "array",
+          "title": "Host IP",
+          "description": "Host IP",
+          "items": {
+            "type": "string"
+          },
+          "order": 22
+        },
+        "host_name": {
+          "type": "string",
+          "title": "Host Name",
+          "description": "Host name",
+          "order": 23
+        },
+        "is_whitelisted": {
+          "type": "boolean",
+          "title": "Is Whitelisted",
+          "description": "Is whitelisted",
+          "order": 24
+        },
+        "local_insert_ts": {
+          "type": "integer",
+          "title": "Local Insert Ts",
+          "description": "Local insert ts",
+          "order": 25
+        },
+        "mac": {
+          "type": "string",
+          "title": "MAC",
+          "description": "MAC",
+          "order": 26
+        },
+        "mac_addresses": {
+          "type": "array",
+          "title": "MAC Addresses",
+          "description": "MAC addresses",
+          "items": {
+            "type": "string"
+          },
+          "order": 27
+        },
+        "matching_service_rule_id": {
+          "type": "string",
+          "title": "Matching Service Rule Id",
+          "description": "Matching service rule id",
+          "order": 28
+        },
+        "matching_status": {
+          "type": "string",
+          "title": "Matching Status",
+          "description": "Matching status",
+          "order": 29
+        },
+        "mitre_tactic_id_and_name": {
+          "type": "array",
+          "title": "Mitre Tactic Id And Name",
+          "description": "Mitre tactic id and name",
+          "items": {
+            "type": "string"
+          },
+          "order": 30
+        },
+        "mitre_technique_id_and_name": {
+          "type": "array",
+          "title": "Mitre Technique Id And Name",
+          "description": "Mitre technique id and name",
+          "items": {
+            "type": "string"
+          },
+          "order": 31
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 32
+        },
+        "severity": {
+          "type": "string",
+          "title": "Severity",
+          "description": "Severity",
+          "order": 33
+        },
+        "source": {
+          "type": "string",
+          "title": "Source",
+          "description": "Source",
+          "order": 34
+        },
+        "starred": {
+          "type": "boolean",
+          "title": "Starred",
+          "description": "Starred",
+          "order": 35
+        }
+      },
+      "definitions": {
+        "event": {
+          "type": "object",
+          "title": "event",
+          "properties": {
+            "action_country": {
+              "type": "string",
+              "title": "Action Country",
+              "description": "Action country",
+              "order": 1
+            },
+            "action_external_hostname": {
+              "type": "string",
+              "title": "Action External Hostname",
+              "description": "Action external hostname",
+              "order": 2
+            },
+            "action_file_macro_sha256": {
+              "type": "string",
+              "title": "Action File MACro SHA256",
+              "description": "Action file macro SHA256",
+              "order": 3
+            },
+            "action_file_md5": {
+              "type": "string",
+              "title": "Action File MD5",
+              "description": "Action file MD5",
+              "order": 4
+            },
+            "action_file_name": {
+              "type": "string",
+              "title": "Action File Name",
+              "description": "Action file name",
+              "order": 5
+            },
+            "action_file_path": {
+              "type": "string",
+              "title": "Action File Path",
+              "description": "Action file path",
+              "order": 6
+            },
+            "action_file_sha256": {
+              "type": "string",
+              "title": "Action File SHA256",
+              "description": "Action file SHA256",
+              "order": 7
+            },
+            "action_local_ip": {
+              "type": "string",
+              "title": "Action Local IP",
+              "description": "Action local IP",
+              "order": 8
+            },
+            "action_local_port": {
+              "type": "string",
+              "title": "Action Local Port",
+              "description": "Action local port",
+              "order": 9
+            },
+            "action_process_causality_id": {
+              "type": "string",
+              "title": "Action Process Causality Id",
+              "description": "Action process causality id",
+              "order": 10
+            },
+            "action_process_image_command_line": {
+              "type": "string",
+              "title": "Action Process Image Command Line",
+              "description": "Action process image command line",
+              "order": 11
+            },
+            "action_process_image_name": {
+              "type": "string",
+              "title": "Action Process Image Name",
+              "description": "Action process image name",
+              "order": 12
+            },
+            "action_process_image_sha256": {
+              "type": "string",
+              "title": "Action Process Image SHA256",
+              "description": "Action process image SHA256",
+              "order": 13
+            },
+            "action_process_instance_id": {
+              "type": "string",
+              "title": "Action Process Instance Id",
+              "description": "Action process instance id",
+              "order": 14
+            },
+            "action_process_signature_status": {
+              "type": "string",
+              "title": "Action Process Signature Status",
+              "description": "Action process signature status",
+              "order": 15
+            },
+            "action_process_signature_vendor": {
+              "type": "string",
+              "title": "Action Process Signature Vendor",
+              "description": "Action process signature vendor",
+              "order": 16
+            },
+            "action_registry_data": {
+              "type": "string",
+              "title": "Action Registry Data",
+              "description": "Action registry data",
+              "order": 17
+            },
+            "action_registry_full_key": {
+              "type": "string",
+              "title": "Action Registry Full Key",
+              "description": "Action registry full key",
+              "order": 18
+            },
+            "action_registry_key_name": {
+              "type": "string",
+              "title": "Action Registry Key Name",
+              "description": "Action registry key name",
+              "order": 19
+            },
+            "action_registry_value_name": {
+              "type": "string",
+              "title": "Action Registry Value Name",
+              "description": "Action registry value name",
+              "order": 20
+            },
+            "action_remote_ip": {
+              "type": "string",
+              "title": "Action Remote IP",
+              "description": "Action remote IP",
+              "order": 21
+            },
+            "action_remote_port": {
+              "type": "string",
+              "title": "Action Remote Port",
+              "description": "Action remote port",
+              "order": 22
+            },
+            "actor_causality_id": {
+              "type": "string",
+              "title": "Actor Causality Id",
+              "description": "Actor causality id",
+              "order": 23
+            },
+            "actor_process_causality_id": {
+              "type": "string",
+              "title": "Actor Process Causality Id",
+              "description": "Actor process causality id",
+              "order": 24
+            },
+            "actor_process_command_line": {
+              "type": "string",
+              "title": "Actor Process Command Line",
+              "description": "Actor process command line",
+              "order": 25
+            },
+            "actor_process_image_md5": {
+              "type": "string",
+              "title": "Actor Process Image MD5",
+              "description": "Actor process image MD5",
+              "order": 26
+            },
+            "actor_process_image_name": {
+              "type": "string",
+              "title": "Actor Process Image Name",
+              "description": "Actor process image name",
+              "order": 27
+            },
+            "actor_process_image_path": {
+              "type": "string",
+              "title": "Actor Process Image Path",
+              "description": "Actor process image path",
+              "order": 28
+            },
+            "actor_process_image_sha256": {
+              "type": "string",
+              "title": "Actor Process Image SHA256",
+              "description": "Actor process image SHA256",
+              "order": 29
+            },
+            "actor_process_instance_id": {
+              "type": "string",
+              "title": "Actor Process Instance Id",
+              "description": "Actor process instance id",
+              "order": 30
+            },
+            "actor_process_os_pid": {
+              "type": "integer",
+              "title": "Actor Process Os PID",
+              "description": "Actor process os PID",
+              "order": 31
+            },
+            "actor_process_signature_status": {
+              "type": "string",
+              "title": "Actor Process Signature Status",
+              "description": "Actor process signature status",
+              "order": 32
+            },
+            "actor_process_signature_vendor": {
+              "type": "string",
+              "title": "Actor Process Signature Vendor",
+              "description": "Actor process signature vendor",
+              "order": 33
+            },
+            "actor_thread_thread_id": {
+              "type": "string",
+              "title": "Actor Thread Thread Id",
+              "description": "Actor thread thread id",
+              "order": 34
+            },
+            "agent_host_boot_time": {
+              "type": "string",
+              "title": "Agent Host Boot Time",
+              "description": "Agent host boot time",
+              "order": 35
+            },
+            "agent_install_type": {
+              "type": "string",
+              "title": "Agent Install Type",
+              "description": "Agent install type",
+              "order": 36
+            },
+            "association_strength": {
+              "type": "string",
+              "title": "Association Strength",
+              "description": "Association strength",
+              "order": 37
+            },
+            "causality_actor_causality_id": {
+              "type": "string",
+              "title": "Causality Actor Causality Id",
+              "description": "Causality actor causality id",
+              "order": 38
+            },
+            "causality_actor_process_command_line": {
+              "type": "string",
+              "title": "Causality Actor Process Command Line",
+              "description": "Causality actor process command line",
+              "order": 39
+            },
+            "causality_actor_process_execution_time": {
+              "type": "string",
+              "title": "Causality Actor Process Execution Time",
+              "description": "Causality actor process execution time",
+              "order": 40
+            },
+            "causality_actor_process_image_md5": {
+              "type": "string",
+              "title": "Causality Actor Process Image MD5",
+              "description": "Causality actor process image MD5",
+              "order": 41
+            },
+            "causality_actor_process_image_name": {
+              "type": "string",
+              "title": "Causality Actor Process Image Name",
+              "description": "Causality actor process image name",
+              "order": 42
+            },
+            "causality_actor_process_image_path": {
+              "type": "string",
+              "title": "Causality Actor Process Image Path",
+              "description": "Causality actor process image path",
+              "order": 43
+            },
+            "causality_actor_process_image_sha256": {
+              "type": "string",
+              "title": "Causality Actor Process Image SHA256",
+              "description": "Causality actor process image SHA256",
+              "order": 44
+            },
+            "causality_actor_process_signature_status": {
+              "type": "string",
+              "title": "Causality Actor Process Signature Status",
+              "description": "Causality actor process signature status",
+              "order": 45
+            },
+            "causality_actor_process_signature_vendor": {
+              "type": "string",
+              "title": "Causality Actor Process Signature Vendor",
+              "description": "Causality actor process signature vendor",
+              "order": 46
+            },
+            "cluster_name": {
+              "type": "string",
+              "title": "Cluster Name",
+              "description": "Cluster name",
+              "order": 47
+            },
+            "container_id": {
+              "type": "string",
+              "title": "Container Id",
+              "description": "Container id",
+              "order": 48
+            },
+            "contains_featured_host": {
+              "type": "string",
+              "title": "Contains Featured Host",
+              "description": "Contains featured host",
+              "order": 49
+            },
+            "contains_featured_ip": {
+              "type": "string",
+              "title": "Contains Featured IP",
+              "description": "Contains featured IP",
+              "order": 50
+            },
+            "contains_featured_user": {
+              "type": "string",
+              "title": "Contains Featured User",
+              "description": "Contains featured user",
+              "order": 51
+            },
+            "dns_query_name": {
+              "type": "string",
+              "title": "DNS Query Name",
+              "description": "DNS query name",
+              "order": 52
+            },
+            "dst_action_country": {
+              "type": "string",
+              "title": "Dst Action Country",
+              "description": "Dst action country",
+              "order": 53
+            },
+            "dst_action_external_hostname": {
+              "type": "string",
+              "title": "Dst Action External Hostname",
+              "description": "Dst action external hostname",
+              "order": 54
+            },
+            "dst_action_external_port": {
+              "type": "string",
+              "title": "Dst Action External Port",
+              "description": "Dst action external port",
+              "order": 55
+            },
+            "dst_agent_id": {
+              "type": "string",
+              "title": "Dst Agent Id",
+              "description": "Dst agent id",
+              "order": 56
+            },
+            "dst_association_strength": {
+              "type": "string",
+              "title": "Dst Association Strength",
+              "description": "Dst association strength",
+              "order": 57
+            },
+            "dst_causality_actor_process_execution_time": {
+              "type": "string",
+              "title": "Dst Causality Actor Process Execution Time",
+              "description": "Dst causality actor process execution time",
+              "order": 58
+            },
+            "event_id": {
+              "type": "string",
+              "title": "Event Id",
+              "description": "Event id",
+              "order": 59
+            },
+            "event_sub_type": {
+              "type": "string",
+              "title": "Event Sub Type",
+              "description": "Event sub type",
+              "order": 60
+            },
+            "event_timestamp": {
+              "type": "integer",
+              "title": "Event Timestamp",
+              "description": "Event timestamp",
+              "order": 61
+            },
+            "event_type": {
+              "type": "string",
+              "title": "Event Type",
+              "description": "Event type",
+              "order": 62
+            },
+            "fw_app_category": {
+              "type": "string",
+              "title": "Fw App Category",
+              "description": "Fw app category",
+              "order": 63
+            },
+            "fw_app_id": {
+              "type": "string",
+              "title": "Fw App Id",
+              "description": "Fw app id",
+              "order": 64
+            },
+            "fw_app_subcategory": {
+              "type": "string",
+              "title": "Fw App Subcategory",
+              "description": "Fw app subcategory",
+              "order": 65
+            },
+            "fw_app_technology": {
+              "type": "string",
+              "title": "Fw App Technology",
+              "description": "Fw app technology",
+              "order": 66
+            },
+            "fw_device_name": {
+              "type": "string",
+              "title": "Fw Device Name",
+              "description": "Fw device name",
+              "order": 67
+            },
+            "fw_email_recipient": {
+              "type": "string",
+              "title": "Fw Email Recipient",
+              "description": "Fw email recipient",
+              "order": 68
+            },
+            "fw_email_sender": {
+              "type": "string",
+              "title": "Fw Email Sender",
+              "description": "Fw email sender",
+              "order": 69
+            },
+            "fw_email_subject": {
+              "type": "string",
+              "title": "Fw Email Subject",
+              "description": "Fw email subject",
+              "order": 70
+            },
+            "fw_interface_from": {
+              "type": "string",
+              "title": "Fw Interface From",
+              "description": "Fw interface from",
+              "order": 71
+            },
+            "fw_interface_to": {
+              "type": "string",
+              "title": "Fw Interface To",
+              "description": "Fw interface to",
+              "order": 72
+            },
+            "fw_is_phishing": {
+              "type": "string",
+              "title": "Fw Is Phishing",
+              "description": "Fw is phishing",
+              "order": 73
+            },
+            "fw_misc": {
+              "type": "string",
+              "title": "Fw Misc",
+              "description": "Fw misc",
+              "order": 74
+            },
+            "fw_rule": {
+              "type": "string",
+              "title": "Fw Rule",
+              "description": "Fw rule",
+              "order": 75
+            },
+            "fw_rule_id": {
+              "type": "string",
+              "title": "Fw Rule Id",
+              "description": "Fw rule id",
+              "order": 76
+            },
+            "fw_serial_number": {
+              "type": "string",
+              "title": "Fw Serial Number",
+              "description": "Fw serial number",
+              "order": 77
+            },
+            "fw_url_domain": {
+              "type": "string",
+              "title": "Fw URL Domain",
+              "description": "Fw URL domain",
+              "order": 78
+            },
+            "fw_vsys": {
+              "type": "string",
+              "title": "Fw Vsys",
+              "description": "Fw vsys",
+              "order": 79
+            },
+            "fw_xff": {
+              "type": "string",
+              "title": "Fw Xff",
+              "description": "Fw xff",
+              "order": 80
+            },
+            "image_name": {
+              "type": "string",
+              "title": "Image Name",
+              "description": "Image name",
+              "order": 81
+            },
+            "module_id": {
+              "type": "string",
+              "title": "Module Id",
+              "description": "Module id",
+              "order": 82
+            },
+            "os_actor_causality_id": {
+              "type": "string",
+              "title": "Os Actor Causality Id",
+              "description": "Os actor causality id",
+              "order": 83
+            },
+            "os_actor_effective_username": {
+              "type": "string",
+              "title": "Os Actor Effective Username",
+              "description": "Os actor effective username",
+              "order": 84
+            },
+            "os_actor_process_causality_id": {
+              "type": "string",
+              "title": "Os Actor Process Causality Id",
+              "description": "Os actor process causality id",
+              "order": 85
+            },
+            "os_actor_process_command_line": {
+              "type": "string",
+              "title": "Os Actor Process Command Line",
+              "description": "Os actor process command line",
+              "order": 86
+            },
+            "os_actor_process_image_name": {
+              "type": "string",
+              "title": "Os Actor Process Image Name",
+              "description": "Os actor process image name",
+              "order": 87
+            },
+            "os_actor_process_image_path": {
+              "type": "string",
+              "title": "Os Actor Process Image Path",
+              "description": "Os actor process image path",
+              "order": 88
+            },
+            "os_actor_process_image_sha256": {
+              "type": "string",
+              "title": "Os Actor Process Image SHA256",
+              "description": "Os actor process image SHA256",
+              "order": 89
+            },
+            "os_actor_process_instance_id": {
+              "type": "string",
+              "title": "Os Actor Process Instance Id",
+              "description": "Os actor process instance id",
+              "order": 90
+            },
+            "os_actor_process_os_pid": {
+              "type": "string",
+              "title": "Os Actor Process Os PID",
+              "description": "Os actor process os PID",
+              "order": 91
+            },
+            "os_actor_process_signature_status": {
+              "type": "string",
+              "title": "Os Actor Process Signature Status",
+              "description": "Os actor process signature status",
+              "order": 92
+            },
+            "os_actor_process_signature_vendor": {
+              "type": "string",
+              "title": "Os Actor Process Signature Vendor",
+              "description": "Os actor process signature vendor",
+              "order": 93
+            },
+            "os_actor_thread_thread_id": {
+              "type": "string",
+              "title": "Os Actor Thread Thread Id",
+              "description": "Os actor thread thread id",
+              "order": 94
+            },
+            "story_id": {
+              "type": "string",
+              "title": "Story Id",
+              "description": "Story id",
+              "order": 95
+            },
+            "user_name": {
+              "type": "string",
+              "title": "User Name",
+              "description": "User name",
+              "order": 96
+            }
+          }
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "title": "event",
+      "properties": {
+        "action_country": {
+          "type": "string",
+          "title": "Action Country",
+          "description": "Action country",
+          "order": 1
+        },
+        "action_external_hostname": {
+          "type": "string",
+          "title": "Action External Hostname",
+          "description": "Action external hostname",
+          "order": 2
+        },
+        "action_file_macro_sha256": {
+          "type": "string",
+          "title": "Action File MACro SHA256",
+          "description": "Action file macro SHA256",
+          "order": 3
+        },
+        "action_file_md5": {
+          "type": "string",
+          "title": "Action File MD5",
+          "description": "Action file MD5",
+          "order": 4
+        },
+        "action_file_name": {
+          "type": "string",
+          "title": "Action File Name",
+          "description": "Action file name",
+          "order": 5
+        },
+        "action_file_path": {
+          "type": "string",
+          "title": "Action File Path",
+          "description": "Action file path",
+          "order": 6
+        },
+        "action_file_sha256": {
+          "type": "string",
+          "title": "Action File SHA256",
+          "description": "Action file SHA256",
+          "order": 7
+        },
+        "action_local_ip": {
+          "type": "string",
+          "title": "Action Local IP",
+          "description": "Action local IP",
+          "order": 8
+        },
+        "action_local_port": {
+          "type": "string",
+          "title": "Action Local Port",
+          "description": "Action local port",
+          "order": 9
+        },
+        "action_process_causality_id": {
+          "type": "string",
+          "title": "Action Process Causality Id",
+          "description": "Action process causality id",
+          "order": 10
+        },
+        "action_process_image_command_line": {
+          "type": "string",
+          "title": "Action Process Image Command Line",
+          "description": "Action process image command line",
+          "order": 11
+        },
+        "action_process_image_name": {
+          "type": "string",
+          "title": "Action Process Image Name",
+          "description": "Action process image name",
+          "order": 12
+        },
+        "action_process_image_sha256": {
+          "type": "string",
+          "title": "Action Process Image SHA256",
+          "description": "Action process image SHA256",
+          "order": 13
+        },
+        "action_process_instance_id": {
+          "type": "string",
+          "title": "Action Process Instance Id",
+          "description": "Action process instance id",
+          "order": 14
+        },
+        "action_process_signature_status": {
+          "type": "string",
+          "title": "Action Process Signature Status",
+          "description": "Action process signature status",
+          "order": 15
+        },
+        "action_process_signature_vendor": {
+          "type": "string",
+          "title": "Action Process Signature Vendor",
+          "description": "Action process signature vendor",
+          "order": 16
+        },
+        "action_registry_data": {
+          "type": "string",
+          "title": "Action Registry Data",
+          "description": "Action registry data",
+          "order": 17
+        },
+        "action_registry_full_key": {
+          "type": "string",
+          "title": "Action Registry Full Key",
+          "description": "Action registry full key",
+          "order": 18
+        },
+        "action_registry_key_name": {
+          "type": "string",
+          "title": "Action Registry Key Name",
+          "description": "Action registry key name",
+          "order": 19
+        },
+        "action_registry_value_name": {
+          "type": "string",
+          "title": "Action Registry Value Name",
+          "description": "Action registry value name",
+          "order": 20
+        },
+        "action_remote_ip": {
+          "type": "string",
+          "title": "Action Remote IP",
+          "description": "Action remote IP",
+          "order": 21
+        },
+        "action_remote_port": {
+          "type": "string",
+          "title": "Action Remote Port",
+          "description": "Action remote port",
+          "order": 22
+        },
+        "actor_causality_id": {
+          "type": "string",
+          "title": "Actor Causality Id",
+          "description": "Actor causality id",
+          "order": 23
+        },
+        "actor_process_causality_id": {
+          "type": "string",
+          "title": "Actor Process Causality Id",
+          "description": "Actor process causality id",
+          "order": 24
+        },
+        "actor_process_command_line": {
+          "type": "string",
+          "title": "Actor Process Command Line",
+          "description": "Actor process command line",
+          "order": 25
+        },
+        "actor_process_image_md5": {
+          "type": "string",
+          "title": "Actor Process Image MD5",
+          "description": "Actor process image MD5",
+          "order": 26
+        },
+        "actor_process_image_name": {
+          "type": "string",
+          "title": "Actor Process Image Name",
+          "description": "Actor process image name",
+          "order": 27
+        },
+        "actor_process_image_path": {
+          "type": "string",
+          "title": "Actor Process Image Path",
+          "description": "Actor process image path",
+          "order": 28
+        },
+        "actor_process_image_sha256": {
+          "type": "string",
+          "title": "Actor Process Image SHA256",
+          "description": "Actor process image SHA256",
+          "order": 29
+        },
+        "actor_process_instance_id": {
+          "type": "string",
+          "title": "Actor Process Instance Id",
+          "description": "Actor process instance id",
+          "order": 30
+        },
+        "actor_process_os_pid": {
+          "type": "integer",
+          "title": "Actor Process Os PID",
+          "description": "Actor process os PID",
+          "order": 31
+        },
+        "actor_process_signature_status": {
+          "type": "string",
+          "title": "Actor Process Signature Status",
+          "description": "Actor process signature status",
+          "order": 32
+        },
+        "actor_process_signature_vendor": {
+          "type": "string",
+          "title": "Actor Process Signature Vendor",
+          "description": "Actor process signature vendor",
+          "order": 33
+        },
+        "actor_thread_thread_id": {
+          "type": "string",
+          "title": "Actor Thread Thread Id",
+          "description": "Actor thread thread id",
+          "order": 34
+        },
+        "agent_host_boot_time": {
+          "type": "string",
+          "title": "Agent Host Boot Time",
+          "description": "Agent host boot time",
+          "order": 35
+        },
+        "agent_install_type": {
+          "type": "string",
+          "title": "Agent Install Type",
+          "description": "Agent install type",
+          "order": 36
+        },
+        "association_strength": {
+          "type": "string",
+          "title": "Association Strength",
+          "description": "Association strength",
+          "order": 37
+        },
+        "causality_actor_causality_id": {
+          "type": "string",
+          "title": "Causality Actor Causality Id",
+          "description": "Causality actor causality id",
+          "order": 38
+        },
+        "causality_actor_process_command_line": {
+          "type": "string",
+          "title": "Causality Actor Process Command Line",
+          "description": "Causality actor process command line",
+          "order": 39
+        },
+        "causality_actor_process_execution_time": {
+          "type": "string",
+          "title": "Causality Actor Process Execution Time",
+          "description": "Causality actor process execution time",
+          "order": 40
+        },
+        "causality_actor_process_image_md5": {
+          "type": "string",
+          "title": "Causality Actor Process Image MD5",
+          "description": "Causality actor process image MD5",
+          "order": 41
+        },
+        "causality_actor_process_image_name": {
+          "type": "string",
+          "title": "Causality Actor Process Image Name",
+          "description": "Causality actor process image name",
+          "order": 42
+        },
+        "causality_actor_process_image_path": {
+          "type": "string",
+          "title": "Causality Actor Process Image Path",
+          "description": "Causality actor process image path",
+          "order": 43
+        },
+        "causality_actor_process_image_sha256": {
+          "type": "string",
+          "title": "Causality Actor Process Image SHA256",
+          "description": "Causality actor process image SHA256",
+          "order": 44
+        },
+        "causality_actor_process_signature_status": {
+          "type": "string",
+          "title": "Causality Actor Process Signature Status",
+          "description": "Causality actor process signature status",
+          "order": 45
+        },
+        "causality_actor_process_signature_vendor": {
+          "type": "string",
+          "title": "Causality Actor Process Signature Vendor",
+          "description": "Causality actor process signature vendor",
+          "order": 46
+        },
+        "cluster_name": {
+          "type": "string",
+          "title": "Cluster Name",
+          "description": "Cluster name",
+          "order": 47
+        },
+        "container_id": {
+          "type": "string",
+          "title": "Container Id",
+          "description": "Container id",
+          "order": 48
+        },
+        "contains_featured_host": {
+          "type": "string",
+          "title": "Contains Featured Host",
+          "description": "Contains featured host",
+          "order": 49
+        },
+        "contains_featured_ip": {
+          "type": "string",
+          "title": "Contains Featured IP",
+          "description": "Contains featured IP",
+          "order": 50
+        },
+        "contains_featured_user": {
+          "type": "string",
+          "title": "Contains Featured User",
+          "description": "Contains featured user",
+          "order": 51
+        },
+        "dns_query_name": {
+          "type": "string",
+          "title": "DNS Query Name",
+          "description": "DNS query name",
+          "order": 52
+        },
+        "dst_action_country": {
+          "type": "string",
+          "title": "Dst Action Country",
+          "description": "Dst action country",
+          "order": 53
+        },
+        "dst_action_external_hostname": {
+          "type": "string",
+          "title": "Dst Action External Hostname",
+          "description": "Dst action external hostname",
+          "order": 54
+        },
+        "dst_action_external_port": {
+          "type": "string",
+          "title": "Dst Action External Port",
+          "description": "Dst action external port",
+          "order": 55
+        },
+        "dst_agent_id": {
+          "type": "string",
+          "title": "Dst Agent Id",
+          "description": "Dst agent id",
+          "order": 56
+        },
+        "dst_association_strength": {
+          "type": "string",
+          "title": "Dst Association Strength",
+          "description": "Dst association strength",
+          "order": 57
+        },
+        "dst_causality_actor_process_execution_time": {
+          "type": "string",
+          "title": "Dst Causality Actor Process Execution Time",
+          "description": "Dst causality actor process execution time",
+          "order": 58
+        },
+        "event_id": {
+          "type": "string",
+          "title": "Event Id",
+          "description": "Event id",
+          "order": 59
+        },
+        "event_sub_type": {
+          "type": "string",
+          "title": "Event Sub Type",
+          "description": "Event sub type",
+          "order": 60
+        },
+        "event_timestamp": {
+          "type": "integer",
+          "title": "Event Timestamp",
+          "description": "Event timestamp",
+          "order": 61
+        },
+        "event_type": {
+          "type": "string",
+          "title": "Event Type",
+          "description": "Event type",
+          "order": 62
+        },
+        "fw_app_category": {
+          "type": "string",
+          "title": "Fw App Category",
+          "description": "Fw app category",
+          "order": 63
+        },
+        "fw_app_id": {
+          "type": "string",
+          "title": "Fw App Id",
+          "description": "Fw app id",
+          "order": 64
+        },
+        "fw_app_subcategory": {
+          "type": "string",
+          "title": "Fw App Subcategory",
+          "description": "Fw app subcategory",
+          "order": 65
+        },
+        "fw_app_technology": {
+          "type": "string",
+          "title": "Fw App Technology",
+          "description": "Fw app technology",
+          "order": 66
+        },
+        "fw_device_name": {
+          "type": "string",
+          "title": "Fw Device Name",
+          "description": "Fw device name",
+          "order": 67
+        },
+        "fw_email_recipient": {
+          "type": "string",
+          "title": "Fw Email Recipient",
+          "description": "Fw email recipient",
+          "order": 68
+        },
+        "fw_email_sender": {
+          "type": "string",
+          "title": "Fw Email Sender",
+          "description": "Fw email sender",
+          "order": 69
+        },
+        "fw_email_subject": {
+          "type": "string",
+          "title": "Fw Email Subject",
+          "description": "Fw email subject",
+          "order": 70
+        },
+        "fw_interface_from": {
+          "type": "string",
+          "title": "Fw Interface From",
+          "description": "Fw interface from",
+          "order": 71
+        },
+        "fw_interface_to": {
+          "type": "string",
+          "title": "Fw Interface To",
+          "description": "Fw interface to",
+          "order": 72
+        },
+        "fw_is_phishing": {
+          "type": "string",
+          "title": "Fw Is Phishing",
+          "description": "Fw is phishing",
+          "order": 73
+        },
+        "fw_misc": {
+          "type": "string",
+          "title": "Fw Misc",
+          "description": "Fw misc",
+          "order": 74
+        },
+        "fw_rule": {
+          "type": "string",
+          "title": "Fw Rule",
+          "description": "Fw rule",
+          "order": 75
+        },
+        "fw_rule_id": {
+          "type": "string",
+          "title": "Fw Rule Id",
+          "description": "Fw rule id",
+          "order": 76
+        },
+        "fw_serial_number": {
+          "type": "string",
+          "title": "Fw Serial Number",
+          "description": "Fw serial number",
+          "order": 77
+        },
+        "fw_url_domain": {
+          "type": "string",
+          "title": "Fw URL Domain",
+          "description": "Fw URL domain",
+          "order": 78
+        },
+        "fw_vsys": {
+          "type": "string",
+          "title": "Fw Vsys",
+          "description": "Fw vsys",
+          "order": 79
+        },
+        "fw_xff": {
+          "type": "string",
+          "title": "Fw Xff",
+          "description": "Fw xff",
+          "order": 80
+        },
+        "image_name": {
+          "type": "string",
+          "title": "Image Name",
+          "description": "Image name",
+          "order": 81
+        },
+        "module_id": {
+          "type": "string",
+          "title": "Module Id",
+          "description": "Module id",
+          "order": 82
+        },
+        "os_actor_causality_id": {
+          "type": "string",
+          "title": "Os Actor Causality Id",
+          "description": "Os actor causality id",
+          "order": 83
+        },
+        "os_actor_effective_username": {
+          "type": "string",
+          "title": "Os Actor Effective Username",
+          "description": "Os actor effective username",
+          "order": 84
+        },
+        "os_actor_process_causality_id": {
+          "type": "string",
+          "title": "Os Actor Process Causality Id",
+          "description": "Os actor process causality id",
+          "order": 85
+        },
+        "os_actor_process_command_line": {
+          "type": "string",
+          "title": "Os Actor Process Command Line",
+          "description": "Os actor process command line",
+          "order": 86
+        },
+        "os_actor_process_image_name": {
+          "type": "string",
+          "title": "Os Actor Process Image Name",
+          "description": "Os actor process image name",
+          "order": 87
+        },
+        "os_actor_process_image_path": {
+          "type": "string",
+          "title": "Os Actor Process Image Path",
+          "description": "Os actor process image path",
+          "order": 88
+        },
+        "os_actor_process_image_sha256": {
+          "type": "string",
+          "title": "Os Actor Process Image SHA256",
+          "description": "Os actor process image SHA256",
+          "order": 89
+        },
+        "os_actor_process_instance_id": {
+          "type": "string",
+          "title": "Os Actor Process Instance Id",
+          "description": "Os actor process instance id",
+          "order": 90
+        },
+        "os_actor_process_os_pid": {
+          "type": "string",
+          "title": "Os Actor Process Os PID",
+          "description": "Os actor process os PID",
+          "order": 91
+        },
+        "os_actor_process_signature_status": {
+          "type": "string",
+          "title": "Os Actor Process Signature Status",
+          "description": "Os actor process signature status",
+          "order": 92
+        },
+        "os_actor_process_signature_vendor": {
+          "type": "string",
+          "title": "Os Actor Process Signature Vendor",
+          "description": "Os actor process signature vendor",
+          "order": 93
+        },
+        "os_actor_thread_thread_id": {
+          "type": "string",
+          "title": "Os Actor Thread Thread Id",
+          "description": "Os actor thread thread id",
+          "order": 94
+        },
+        "story_id": {
+          "type": "string",
+          "title": "Story Id",
+          "description": "Story id",
+          "order": 95
+        },
+        "user_name": {
+          "type": "string",
+          "title": "User Name",
+          "description": "User name",
+          "order": 96
+        }
+      }
     }
   }
 }

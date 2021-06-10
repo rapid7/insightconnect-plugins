@@ -277,7 +277,7 @@ _This trigger does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|alert|object|False|Alert|
+|alert|alert|False|Alert|
 
 Example output:
 
@@ -445,7 +445,7 @@ _This trigger does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|incident|object|False|Incident|
+|incident|incident|False|Incident|
 
 Example output:
 
@@ -530,7 +530,7 @@ Example output:
 
 # Version History
 
-* 1.0.1 - Added get file quarantine status action and get alerts trigger
+* 1.0.1 - Add Get File Quarantine Status action and Get Alerts trigger
 * 1.0.0 - Initial plugin
 
 # Links
