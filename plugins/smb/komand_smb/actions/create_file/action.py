@@ -25,8 +25,9 @@ class CreateFile(komand.Action):
         try:
             file_content = base64.b64decode(file_content)
         except binascii.Error as e:
-            raise PluginException(cause="Invalid file content input provided.",
-                                  assistance="Please double-check the file content input.")
+            raise PluginException(
+                cause="Invalid file content input provided.", assistance="Please double-check the file content input."
+            )
 
         if not overwrite_existing:
             try:
@@ -56,9 +57,9 @@ class CreateFile(komand.Action):
             self.logger.info(f"File {file_path} created successfully")
             return {Output.CREATED: True}
         except smb.smb_structs.OperationFailure as e:
-            raise PluginException(cause="Failed to create a file.",
-                                  assistance="This may occur when the file does not exist.",
-                                  data=e)
+            raise PluginException(
+                cause="Failed to create a file.", assistance="This may occur when the file does not exist.", data=e
+            )
         except smb.base.SMBTimeout as e:
             raise PluginException(
                 cause="Timeout reached when connecting to SMB endpoint.",
