@@ -389,7 +389,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.0 - Add actions Create File, Download File, Get Attributes | Update Echo action output
+* 2.0.0 - New actions Create File, Download File, Get Attributes | Update Echo action output
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 

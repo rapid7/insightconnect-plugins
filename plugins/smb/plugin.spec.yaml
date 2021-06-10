@@ -290,7 +290,7 @@ actions:
         required: false
   download_file:
     title: Download File
-    description: Download file
+    description: Download a file
     input:
       share_name:
         title: Share Name

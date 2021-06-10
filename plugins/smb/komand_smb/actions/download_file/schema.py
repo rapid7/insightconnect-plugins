@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Download file"
+    DESCRIPTION = "Download a file"
 
 
 class Input:
