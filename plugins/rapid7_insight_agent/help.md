@@ -12,6 +12,7 @@ The agent is used by [Rapid7 InsightIDR](https://www.rapid7.com/products/insight
 # Requirements
 
 * [Platform API Key](https://docs.rapid7.com/insight/managing-platform-api-keys/)
+* Administrator access to InsightIDR
 
 # Documentation
 
@@ -199,6 +200,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.3 - Documentation update
 * 1.0.2 - Fix for a case-sensitive agent hostname
 * 1.0.1 - Documentation update
 * 1.0.0 - Initial plugin
