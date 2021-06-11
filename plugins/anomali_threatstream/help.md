@@ -22,13 +22,17 @@ This plugin utilizes the Anomali ThreatStream API, which is located with the clo
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|Anomali ThreatStream username|None|
-|api_key|credential_secret_key|None|True|Anomali ThreatStream API key|None|
-|ssl_verify|boolean|True|True|Verify the server's SSL/TLS certificate|None|
-|url|string|None|True|URL for the ThreatStream instance e.g. https://ts.example.com|None|
-|username|string|None|True|Anomali ThreatStream username|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|Anomali ThreatStream API key|None|None|
+|ssl_verify|boolean|True|True|Verify the server's SSL/TLS certificate|None|None|
+|url|string|None|True|URL for the ThreatStream instance e.g. https://ts.example.com|None|None|
+|username|string|None|True|Anomali ThreatStream username|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -40,9 +44,14 @@ This action is used to get a sandbox report.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|report_id|string|None|True|Report ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|report_id|string|None|True|Report ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -109,9 +118,14 @@ This action is used to lookup an IP address in Anomali.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|ip_address|string|None|False|IP address|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ip_address|string|None|False|IP address|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -156,9 +170,14 @@ This action is used to lookup a URL in Anomali.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|False|URL|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|url|string|None|False|URL|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -203,9 +222,14 @@ This action is used to lookup a file hash in Anomali.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|hash|string|None|False|Hash|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|hash|string|None|False|Hash|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -227,9 +251,14 @@ This action is used to get observables.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|value|string|None|False|Value|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|value|string|None|False|Value|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -276,10 +305,15 @@ Observable Settings
   * When passing unstructured data via `file` its best that mappings be set.
   * A list of iTypes can be located here `https://<Amonali Server>//optic-doc/ThreatStream_OnlineHelp.htm#appendices/app_indicators.htm`
   
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|file|file|None|True|File of data to be imported into Anomali ThreatStream|None|
-|observable_settings|observable_settings|None|False|Settings needed for importing an observable that needs approval|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|file|file|None|True|File of data to be imported into Anomali ThreatStream|None|None|
+|observable_settings|observable_settings|None|False|Settings needed for importing an observable that needs approval|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -305,13 +339,18 @@ This action is used to submit a file to a ThreatStream sandbox.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|classification|string|private|False|Classification of the Sandbox submission, either public or private|['private', 'public']|
-|detail|string|None|False|A comma-separated list that provides additional details for the indicator. This information is displayed in the Tag column of the ThreatStream UI. For example, "Credential-Exposure,compromised_email"|None|
-|file|file|None|True|File to detonate|None|
-|platform|string|None|True|Platform on which the submitted URL or file will be run|['ALL', 'ANDROID4.4', 'ANDROID5.1', 'ANDROID6.0', 'MACOSX', 'WINDOWSXP', 'WINDOWSXPNATIVE', 'WINDOWS7', 'WINDOWS7NATIVE', 'WINDOWS7OFFICE2010', 'WINDOWS7OFFICE2013', 'WINDOWS10', 'WINDOWS10x64']|
-|use_premium_sandbox|boolean|None|True|Specify whether the premium sandbox should be used for detonation|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|classification|string|private|False|Classification of the Sandbox submission, either public or private|['private', 'public']|None|
+|detail|string|None|False|A comma-separated list that provides additional details for the indicator. This information is displayed in the Tag column of the ThreatStream UI. For example, "Credential-Exposure,compromised_email"|None|None|
+|file|file|None|True|File to detonate|None|None|
+|platform|string|None|True|Platform on which the submitted URL or file will be run|['ALL', 'ANDROID4.4', 'ANDROID5.1', 'ANDROID6.0', 'MACOSX', 'WINDOWSXP', 'WINDOWSXPNATIVE', 'WINDOWS7', 'WINDOWS7NATIVE', 'WINDOWS7OFFICE2010', 'WINDOWS7OFFICE2013', 'WINDOWS10', 'WINDOWS10x64']|None|
+|use_premium_sandbox|boolean|None|True|Specify whether the premium sandbox should be used for detonation|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -348,13 +387,18 @@ This action is used to submit a URL to a ThreatStream sandbox.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|classification|string|private|False|Classification of the sandbox submission, either public or private|['private', 'public']|
-|detail|string|None|False|A comma-separated list that provides additional details for the indicator. This information is displayed in the tag column of the ThreatStream UI. For example, "Credential-Exposure,compromised_email"|None|
-|platform|string|None|True|Platform on which the submitted URL or file will be run|['ALL', 'ANDROID4.4', 'ANDROID5.1', 'ANDROID6.0', 'MACOSX', 'WINDOWSXP', 'WINDOWSXPNATIVE', 'WINDOWS7', 'WINDOWS7NATIVE', 'WINDOWS7OFFICE2010', 'WINDOWS7OFFICE2013', 'WINDOWS10', 'WINDOWS10x64']|
-|url|string|None|True|URL to detonate|None|
-|use_premium_sandbox|boolean|None|True|Specify whether the premium sandbox should be used for detonation|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|classification|string|private|False|Classification of the sandbox submission, either public or private|['private', 'public']|None|
+|detail|string|None|False|A comma-separated list that provides additional details for the indicator. This information is displayed in the tag column of the ThreatStream UI. For example, "Credential-Exposure,compromised_email"|None|None|
+|platform|string|None|True|Platform on which the submitted URL or file will be run|['ALL', 'ANDROID4.4', 'ANDROID5.1', 'ANDROID6.0', 'MACOSX', 'WINDOWSXP', 'WINDOWSXPNATIVE', 'WINDOWS7', 'WINDOWS7NATIVE', 'WINDOWS7OFFICE2010', 'WINDOWS7OFFICE2013', 'WINDOWS10', 'WINDOWS10x64']|None|
+|url|string|None|True|URL to detonate|None|None|
+|use_premium_sandbox|boolean|None|True|Specify whether the premium sandbox should be used for detonation|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
