@@ -41,8 +41,11 @@ class TestActionEnableUser(TestCase):
             action.run({Input.DISTINGUISHED_NAME: "CN=LDAPOperationsErrorResult,DC=example,DC=com"})
 
         self.assertEqual("Server error occurred", context.exception.cause)
-        self.assertEqual("Verify your plugin connection inputs are correct and not malformed and try again. "
-                         "If the issue persists, please contact support.", context.exception.assistance)
+        self.assertEqual(
+            "Verify your plugin connection inputs are correct and not malformed and try again. "
+            "If the issue persists, please contact support.",
+            context.exception.assistance,
+        )
 
     @mock.patch("ldap3.Server", mock.MagicMock(return_value=MockServer))
     @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockConnection()))

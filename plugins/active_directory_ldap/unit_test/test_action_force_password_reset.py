@@ -25,4 +25,6 @@ class TestActionForcePasswordReset(TestCase):
             action.run({Input.DISTINGUISHED_NAME: "CN=LDAPInvalidDnError,DC=example,DC=com"})
 
         self.assertEqual("LDAP returned an error.", context.exception.cause)
-        self.assertEqual("Error was returned when trying to force password reset for this user.", context.exception.assistance)
+        self.assertEqual(
+            "Error was returned when trying to force password reset for this user.", context.exception.assistance
+        )

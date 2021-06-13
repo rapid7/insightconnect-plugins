@@ -30,6 +30,5 @@ class Delete(komand.Action):
 
         self.logger.error("failed: error message %s" % output)
         raise PluginException(
-            cause=PluginException.causes[PluginException.Preset.UNKNOWN],
-            assistance=f"failed: error message {output}"
+            cause=PluginException.causes[PluginException.Preset.UNKNOWN], assistance=f"failed: error message {output}"
         )

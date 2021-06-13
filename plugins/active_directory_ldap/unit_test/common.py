@@ -18,10 +18,7 @@ class MockConnection:
     DESCRIPTION = "description"
 
     def __init__(self):
-        self.result = {
-            self.RESULT: RESULT_SUCCESS,
-            self.DESCRIPTION: None
-        }
+        self.result = {self.RESULT: RESULT_SUCCESS, self.DESCRIPTION: None}
         self.response = []
         self.check_names = True
         self.strategy = SyncStrategy(self)
@@ -44,14 +41,7 @@ class MockConnection:
     def modify(self, dn: str, changes: dict, controls=None):
         return self.default_modify(dn)
 
-    def modify_dn(
-            self,
-            dn,
-            relative_dn,
-            delete_old_dn=True,
-            new_superior=None,
-            controls=None
-    ):
+    def modify_dn(self, dn, relative_dn, delete_old_dn=True, new_superior=None, controls=None):
         return self.default_modify(dn)
 
     def delete(self, dn: str, controls=None):
@@ -62,23 +52,17 @@ class MockConnection:
 
     def response_to_json(self):
         if self.result[self.DESCRIPTION] == "empty_search":
-            return json.dumps({
-                "entries": []
-            })
+            return json.dumps({"entries": []})
 
-        return json.dumps({
-            "entries": [{
-                "dn": "DN=user"
-            }]
-        })
+        return json.dumps({"entries": [{"dn": "DN=user"}]})
 
     def search(
-            self,
-            search_base,
-            search_filter,
-            search_scope=ldap3.SUBTREE,
-            dereference_aliases=ldap3.DEREF_ALWAYS,
-            attributes=None,
+        self,
+        search_base,
+        search_filter,
+        search_scope=ldap3.SUBTREE,
+        dereference_aliases=ldap3.DEREF_ALWAYS,
+        attributes=None,
     ):
         if "CN=LDAPInvalidDnError,DC=example,DC=com" in search_filter:
             raise LDAPInvalidDnError("Some error")
@@ -96,12 +80,7 @@ class MockConnection:
 
         self.result[self.RESULT] = RESULT_SUCCESS
         self.result[self.DESCRIPTION] = "success"
-        self.response = [{
-            "dn": search_base,
-            "attributes": {
-                "userAccountControl": False
-            }
-        }]
+        self.response = [{"dn": search_base, "attributes": {"userAccountControl": False}}]
 
 
 class MockServer:
