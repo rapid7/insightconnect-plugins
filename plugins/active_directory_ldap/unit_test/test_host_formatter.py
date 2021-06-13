@@ -2,8 +2,8 @@ from unittest import TestCase, mock
 from komand_active_directory_ldap import connection
 from komand_active_directory_ldap.connection.schema import Input
 import logging
-from .common import MockServer
-from .common import MockConnection
+from unit_test.common import MockServer
+from unit_test.common import MockConnection
 
 
 class TestHostFormatter(TestCase):
