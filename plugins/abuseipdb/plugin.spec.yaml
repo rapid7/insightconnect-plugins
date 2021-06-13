@@ -1,0 +1,328 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: abuseipdb
+title: AbuseIPDB
+description: Enables the look up of IP reports, provides list and details of blacklisted IPs, and submissions of abusive IPs
+version: 5.0.6
+vendor: rapid7
+support: community
+cloud_ready: true
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/abuseipdb
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.abuseipdb.com
+tags:
+- ip
+- intelligence
+- abuse
+hub_tags:
+  use_cases: [data_enrichment, threat_detection_and_response]
+  keywords: [ip, intelligence, abuse, cloud_enabled]
+  features: []
+enable_cache: false
+types:
+
+  blacklisted:
+    ipAddress:
+      title: IP Address
+      description: IP Address of abusive IP
+      type: string
+      required: true
+    abuseConfidenceScore:
+      title: Abuse Confidence Score
+      description: Confidence that IP is abusive
+      type: string
+      required: true
+
+  report:
+    reportedAt:
+      title: Reported At
+      description: Date and time of report
+      type: string
+      required: false
+    comment:
+      title: Comment
+      description: Comment by reporter
+      type: string
+      required: false
+    categories:
+      title: Categories
+      description: List of categories
+      type: '[]integer'
+      required: false
+    reporterId:
+      title: Reporter ID
+      description: ID number of reporter
+      type: integer
+      required: false
+    reporterCountryCode:
+      title: Reporter Country Code
+      description: Country code of the reporter
+      type: string
+      required: false
+    reporterCountryName:
+      title: Reporter Country Name
+      description: Name of country reporter is from
+      type: string
+      required: false
+
+  reportedIPs:
+    ipAddress:
+      title: IP
+      type: string
+      description: IP Address of reported resource
+    numReports:
+      title: Number of Reports
+      type: integer
+      description: Number of reports of this IP
+    mostRecentReport:
+      title: Most Recent Report
+      type: string
+      description: Most recent report for this IP
+    abuseConfidenceScore:
+      title: Abuse Confidence Score
+      type: integer
+      description: Confidence that this IP is abusive
+    countryCode:
+      title: Country Code
+      type: string
+      description: Country code of IP
+
+connection:
+  credentials:
+    title: API Key
+    description: API key from account
+    type: credential_secret_key
+    required: true
+    example: e73h82c63847f3ff1h5216b556edh153h30430d73bchhe680f70h1d8885fb8bb130b46c7767d6886
+
+actions:
+  check_ip:
+    title: Check IP
+    description: Look up an IP address in the database
+    input:
+      address:
+        title: IP Address
+        description: IPv4 or IPv6 address e.g. 198.51.100.100, ::1, must be subscribed to accept bitmask wider than 255.255.255.0 (/24)
+        type: string
+        required: true
+        example: 198.51.100.100
+      days:
+        title: Days
+        description: Check for IP reports in the last x days
+        type: string
+        default: '30'
+        required: true
+        example: 30
+      verbose:
+        title: Verbose
+        description: When set, reports will include the comment (if any) and the reporter's
+          user ID number (0 if reported anonymously)
+        type: boolean
+        default: true
+        required: true
+        example: true
+    output:
+      ipAddress:
+        title: IP Address
+        description: Queried IP Address
+        type: string
+        required: false
+      isPublic:
+        title: Is Public
+        description: Whether or not the IP Address is public
+        type: boolean
+        required: false
+      ipVersion:
+        title: IP Version
+        description: Version of IP Address
+        type: integer
+        required: false
+      isWhitelisted:
+        title: Is Whitelisted
+        description: Whether or not IP Address is whitelisted
+        type: boolean
+        required: false
+      abuseConfidenceScore:
+        title: Abuse Confidence Score
+        description: Confidence of Abuse
+        type: integer
+        required: false
+      countryCode:
+        title: Country Code
+        description: Code of country IP is registered in
+        type: string
+        required: false
+      usageType:
+        title: Usage Type
+        description: How IP is used
+        type: string
+        required: false
+      isp:
+        title: ISP
+        description: Internet Service Provider for IP
+        type: string
+        required: false
+      domain:
+        title: Domain
+        description: Domain Name of IP
+        type: string
+        required: false
+      countryName:
+        title: Country Name
+        description: Name of Country IP is registered in
+        type: string
+        required: false
+      totalReports:
+        title: Total Reports
+        description: Total number of reports of abuse
+        type: integer
+        required: false
+      numDistinctUsers:
+        title: Number of Distinct Users
+        description: Number of distinct users who reported IP
+        type: integer
+        required: false
+      lastReportedAt:
+        title: Last Reported At
+        description: Date of last report
+        type: string
+        required: false
+      reports:
+        title: Reports
+        description: List of reports
+        type: '[]report'
+        required: false
+      found:
+        title: Found
+        description: Whether an IP address was found in the database
+        type: boolean
+        required: false
+
+  check_cidr:
+    title: Check CIDR
+    description: Look up a CIDR address in the database
+    input:
+      cidr:
+        title: CIDR
+        description: IPv4 address block in CIDR notation e.g. 207.126.144.0/20
+        type: string
+        required: true
+        example: 207.126.144.0/20
+      days:
+        title: Days
+        description: Check for CIDR reports in the last x days
+        type: string
+        default: '30'
+        required: true
+        example: 30
+    output:
+      networkAddress:
+        title: Network Address
+        description: Network address in block
+        type: string
+        required: false
+      netmask:
+        title: Netmask
+        description: Netmask, ie. 24
+        type: string
+        required: false
+      minAddress:
+        title: Minimum Address
+        description: First address in block
+        type: string
+        required: false
+      maxAddress:
+        title: Maximum Address
+        description: Last address in block
+        type: string
+        required: false
+      numPossibleHosts:
+        title: Number of Hosts
+        description: Number of possible hosts
+        type: integer
+        required: false
+      addressSpaceDesc:
+        title: Address Space Description
+        description: Description of address space
+        type: string
+        required: false
+      reportedAddress:
+        title: Reported IPs
+        description: List of reported IPs
+        type: '[]reportedIPs'
+        required: false
+      found:
+        title: Found
+        description: Whether the CIDR was found in the database
+        type: boolean
+        required: true
+  report_ip:
+    title: Report IP
+    description: Report an abusive IP address
+    input:
+      ip:
+        title: IP Address
+        description: IPv4 or IPv6 address to report e.g. 198.51.100.100, ::1
+        type: string
+        required: true
+        example: 198.51.100.100
+      categories:
+        title: Categories
+        description: Comma delineated list of category IDs e.g. 10,12,15. Entire list
+          is available at https://www.abuseipdb.com/categories
+        type: string
+        required: true
+        example: 10,12,15
+      comment:
+        title: Comment
+        description: Describe the type of malicious activity e.g. Brute forcing Wordpress
+          login
+        type: string
+        required: false
+        example: Brute forcing Wordpress
+    output:
+      ipAddress:
+        title: Comment
+        description: IP address submitted
+        type: string
+        required: false
+      abuseConfidenceScore:
+        title: Abuse Confidence Score
+        description: Confidence that reported IP is abusive
+        type: integer
+        required: false
+      success:
+        title: Success
+        description: Submission success
+        type: boolean
+        required: True
+  get_blacklist:
+    title: Get Blacklist
+    description: List of blacklisted IP addresses
+    input:
+      confidenceMinimum:
+        title: Confidence Minimum
+        description: Minimum confidence to filter by, scaled 0-100, least to most confident
+        type: string
+        required: true
+        example: 90
+      limit:
+        title: Limit
+        description: Max length of blacklist
+        type: string
+        required: false
+        example: 10
+    output:
+      blacklist:
+        title: Blacklist
+        description: List of abusive IPs
+        type: '[]blacklisted'
+        required: false
+      success:
+        title: Success
+        description: Was the blacklist successfully retrieved
+        type: boolean
+        required: true

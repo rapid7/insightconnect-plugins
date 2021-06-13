@@ -1,0 +1,85 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: hashit
+title: HashIt
+vendor: rapid7
+support: community
+status: []
+description: Generate Common Hashes from a File or String
+version: 2.0.4
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/hashit
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+tags:
+- hashes
+- crypto
+- integrity
+- files
+- utilities
+cloud_ready: true
+hub_tags:
+  use_cases: [data_utility]
+  keywords: [hashes, crypto, integrity, files, utilities, cloud_enabled]
+  features: []
+actions:
+  string:
+    title: Hash String
+    description: Generate hashes from text
+    input:
+      string:
+        type: string
+        description: String of text to hash
+        required: true
+        example: hello world
+    output:
+      md5:
+        title: MD5 Hash
+        description: MD5 hash
+        type: string
+        required: false
+      sha1:
+        title: SHA1 Hash
+        description: SHA1 hash
+        type: string
+        required: false
+      sha256:
+        title: SHA256 Hash
+        description: SHA256 hash
+        type: string
+        required: false
+      sha512:
+        title: SHA512 Hash
+        description: SHA512 hash
+        type: string
+        required: false
+  bytes:
+    title: Hash Bytes
+    description: Generate hashes from file bytes
+    input:
+      bytes:
+        type: bytes
+        description: Base64 encoded file bytes to hash
+        required: true
+        example: aGVsbG8gd29ybGQ=
+    output:
+      md5:
+        title: MD5 Hash
+        description: MD5 hash
+        type: string
+        required: false
+      sha1:
+        title: SHA1 Hash
+        description: SHA1 hash
+        type: string
+        required: false
+      sha256:
+        title: SHA256 Hash
+        description: SHA256 hash
+        type: string
+        required: false
+      sha512:
+        title: SHA512 Hash
+        description: SHA512 hash
+        type: string
+        required: false
