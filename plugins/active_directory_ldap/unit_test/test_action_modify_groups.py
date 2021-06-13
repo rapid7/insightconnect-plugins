@@ -50,7 +50,7 @@ class TestActionModifyGroups(TestCase):
     @mock.patch("ldap3.Server", mock.MagicMock(return_value=MockServer))
     @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockConnection()))
     @default_connector(action=ModifyGroups())
-    def test_force_password_reset_raise(self, action):
+    def test_modify_group_raise(self, action):
         with self.assertRaises(PluginException) as context:
             action.run({
             Input.DISTINGUISHED_NAME: "CN=LDAPInvalidDnError,DC=example,DC=com",
