@@ -3,6 +3,7 @@ from .schema import DownloadFileInput, DownloadFileOutput, Input, Output, Compon
 from komand.exceptions import PluginException
 
 # Custom imports below
+import chardet
 import io
 import smb
 
@@ -42,5 +43,5 @@ class DownloadFile(komand.Action):
                 assistance="Verify the credentials of the connection in use.",
                 data=e,
             )
-
-        return {Output.FILE: {"content": file_obj.getvalue().decode("UTF-8"), "filename": file_path}}
+        encoding = chardet.detect(file_obj.getvalue()).get("encoding", "utf-8")
+        return {Output.FILE: {"content": file_obj.getvalue().decode(encoding), "filename": file_path}}
