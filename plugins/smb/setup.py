@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='smb-rapid7-plugin',
-      version='1.0.1',
-      description='Server Message Block (SMB) is a protocol used for interacting with files on an SMB server. Using this plugin, users can interact with shares and delete files',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="smb-rapid7-plugin",
+      version="2.0.0",
+      description="Server Message Block (SMB) is a protocol used for interacting with files on an SMB server. Using this plugin, users can interact with shares and delete files",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_smb']

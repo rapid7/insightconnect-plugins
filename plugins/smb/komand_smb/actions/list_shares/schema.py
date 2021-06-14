@@ -63,11 +63,13 @@ class ListSharesOutput(komand.Output):
         "comments": {
           "type": "string",
           "title": "Share Comments",
+          "description": "Share comments",
           "order": 2
         },
         "name": {
           "type": "string",
           "title": "Share Name",
+          "description": "Share name",
           "order": 1
         }
       }

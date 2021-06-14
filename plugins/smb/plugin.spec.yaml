@@ -5,7 +5,7 @@ name: smb
 title: SMB
 description: "Server Message Block (SMB) is a protocol used for interacting with files on an SMB server. Using this
 plugin, users can interact with shares and delete files"
-version: 1.0.1
+version: 2.0.0
 vendor: rapid7
 support: community
 status: []
@@ -25,19 +25,24 @@ types:
   share:
     name:
       title: Share Name
+      description: Share name
       type: string
     comments:
       title: Share Comments
+      description: Share comments
       type: string
   file:
     name:
       title: File Name
+      description: File name
       type: string
     short_name:
       title: Short Name
+      description: Short name
       type: string
     is_directory:
-      title: Is Directory?
+      title: Is Directory
+      description: Is directory
       type: boolean
     create_time:
       title: Create Time
@@ -61,27 +66,32 @@ connection:
     description: Address or hostname of the SMB server
     type: string
     required: true
+    example: 198.51.100.1
   port:
     title: Port
     description: Port of the SMB server
     type: integer
     default: 445
     required: false
+    example: 445
   credentials:
     title: Credentials
     description: Username and password
     type: credential_username_password
     required: true
+    example: '{"username": "user@example.com", "password": "mypassword"}'
   domain:
     title: Domain
     description: The network domain
     type: string
     required: false
+    example: example.com
   netbios_name:
     title: Server NetBIOS Name
     description: The NetBIOS machine name of the remote server
     type: string
     required: true
+    example: example.com
   use_ntlmv2:
     title: Use NTLMv2
     description: Defines use of NTLMv2 for authentication; will use NTLMv1 if set
@@ -89,12 +99,14 @@ connection:
     type: boolean
     required: true
     default: true
+    example: true
   timeout:
     title: Timeout
     description: Connection timeout
     type: integer
     required: true
     default: 60
+    example: 30
 actions:
   echo:
     title: Echo
@@ -106,10 +118,11 @@ actions:
         description: Message to send to the remote server
         type: string
         required: true
+        example: Hello world
     output:
       response:
-        description: Response
-        title: Server response
+        description: Server response
+        title: Response
         type: string
         required: true
   list_shares:
@@ -122,6 +135,7 @@ actions:
         type: integer
         required: false
         default: 30
+        example: 30
     output:
       shares:
         title: Shares
@@ -137,24 +151,28 @@ actions:
         description: Name of the SMB share
         type: string
         required: true
+        example: data
       path:
         title: Path
         description: Path relative to share to return files
         type: string
         required: true
         default: /
+        example: test.csv
       pattern:
         title: Pattern
         description: Pattern used to filter results
         type: string
         required: false
         default: '*'
+        example: '*'
       timeout:
         title: Timeout
         description: Request timeout of operation in seconds
         type: integer
         required: false
         default: 30
+        example: 30
       timezone:
         title: Timezone
         description: Timezone to be applied to datetime fields (eg. UTC, US/Eastern,
@@ -163,6 +181,7 @@ actions:
         type: string
         required: true
         default: UTC
+        example: UTC
     output:
       files:
         title: Files
@@ -178,17 +197,20 @@ actions:
         description: Name of the SMB share
         type: string
         required: true
+        example: data
       file_path:
         title: File Path
         description: Path of the file to delete
         type: string
         required: true
+        example: test.csv
       timeout:
         title: Timeout
         description: Request timeout of operation in seconds
         type: integer
         required: false
         default: 30
+        example: 30
     output:
       deleted:
         title: Deleted
@@ -204,20 +226,133 @@ actions:
         description: Name of the SMB share
         type: string
         required: true
+        example: data
       file_path:
         title: File Path
-        description: Path of file(s) to delete, accepts wildcard patterns (e.g. /test*.csv)
+        description: Path of file(s) to delete, accepts wildcard patterns
         type: string
         required: true
+        example: test*.csv
       timeout:
         title: Timeout
         description: Request timeout of operation in seconds
         type: integer
         required: false
         default: 30
+        example: 30
     output:
       deleted:
         title: Deleted
         description: Deletion success
         type: boolean
         required: true
+  create_file:
+    title: Create File
+    description: Create a file in a given share
+    input:
+      share_name:
+        title: Share Name
+        description: Name of the SMB share
+        type: string
+        required: true
+        example: data
+      file_path:
+        title: File Path
+        description: Path relative to share to create a file
+        type: string
+        required: true
+        example: test.csv
+      file_content:
+        title: File Content
+        description: File content
+        type: string
+        required: true
+        example: V2hhdCdzIHVwIGd1eXMh
+      overwrite_existing:
+        title: Overwrite Existing
+        description: Overwrite existing file if set to True
+        type: boolean
+        required: true
+        default: false
+        example: true
+      timeout:
+        title: Timeout
+        description: Request timeout of operation in seconds
+        type: integer
+        required: false
+        default: 30
+        example: 30
+    output:
+      created:
+        title: Created
+        description: Creation success
+        type: boolean
+        required: false
+  download_file:
+    title: Download File
+    description: Download a file
+    input:
+      share_name:
+        title: Share Name
+        description: Name of the SMB share
+        type: string
+        required: true
+        example: data
+      file_path:
+        title: File Path
+        description: Path relative to share of the file to download
+        type: string
+        required: true
+        example: test.csv
+      timeout:
+        title: Timeout
+        description: Request timeout of operation in seconds
+        type: integer
+        required: false
+        default: 30
+        example: 30
+    output:
+      file:
+        title: File
+        type: file
+        description: Downloaded file
+        required: false
+  get_attributes:
+    title: Get Attributes
+    description: Get attributes
+    input:
+      share_name:
+        title: Share Name
+        description: Name of the SMB share
+        type: string
+        required: true
+        example: data
+      file_path:
+        title: File Path
+        description: Path relative to share to get file attributes
+        type: string
+        required: true
+        example: test.csv
+      timezone:
+        title: Timezone
+        description: Timezone to be applied to datetime fields (eg. UTC, US/Eastern,
+          US/Pacific, Europe/London). Reference https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+          for valid timezone names
+        type: string
+        required: false
+        default: UTC
+        example: UTC
+      timeout:
+        title: Timeout
+        description: Request timeout of operation in seconds
+        type: integer
+        required: false
+        default: 30
+        example: 30
+    output:
+      attributes:
+        title: Attributes
+        description: File attributes
+        type: file
+        required: true
+
