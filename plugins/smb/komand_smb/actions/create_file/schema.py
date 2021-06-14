@@ -4,30 +4,45 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Delete file(s) from the share; allows wildcards"
+    DESCRIPTION = "Create a file in a given share"
 
 
 class Input:
+    FILE_CONTENT = "file_content"
     FILE_PATH = "file_path"
+    OVERWRITE_EXISTING = "overwrite_existing"
     SHARE_NAME = "share_name"
     TIMEOUT = "timeout"
     
 
 class Output:
-    DELETED = "deleted"
+    CREATED = "created"
     
 
-class DeleteFilesInput(komand.Input):
+class CreateFileInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
+    "file_content": {
+      "type": "string",
+      "title": "File Content",
+      "description": "File content",
+      "order": 3
+    },
     "file_path": {
       "type": "string",
       "title": "File Path",
-      "description": "Path of file(s) to delete, accepts wildcard patterns",
+      "description": "Path relative to share to create a file",
       "order": 2
+    },
+    "overwrite_existing": {
+      "type": "boolean",
+      "title": "Overwrite Existing",
+      "description": "Overwrite existing file if set to True",
+      "default": false,
+      "order": 4
     },
     "share_name": {
       "type": "string",
@@ -40,11 +55,13 @@ class DeleteFilesInput(komand.Input):
       "title": "Timeout",
       "description": "Request timeout of operation in seconds",
       "default": 30,
-      "order": 3
+      "order": 5
     }
   },
   "required": [
+    "file_content",
     "file_path",
+    "overwrite_existing",
     "share_name"
   ]
 }
@@ -54,22 +71,19 @@ class DeleteFilesInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class DeleteFilesOutput(komand.Output):
+class CreateFileOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "deleted": {
+    "created": {
       "type": "boolean",
-      "title": "Deleted",
-      "description": "Deletion success",
+      "title": "Created",
+      "description": "Creation success",
       "order": 1
     }
-  },
-  "required": [
-    "deleted"
-  ]
+  }
 }
     """)
 
