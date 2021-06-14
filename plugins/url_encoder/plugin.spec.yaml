@@ -1,0 +1,70 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: url_encoder
+title: URL Encoder
+description: Encode and decode URLs
+version: 1.0.2
+vendor: rapid7
+support: community
+status: []
+cloud_ready: true
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/url_encoder
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+tags:
+- url
+- encoder
+- decoder
+- utilities
+hub_tags:
+  use_cases: [data_utility]
+  keywords: [url, encoder, decoder, utilities, cloud_enabled]
+  features: []
+actions:
+  encode:
+    title: Encode URL
+    description: URL-encode a URL
+    input:
+      url:
+        type: string
+        title: URL
+        description: URL to encode
+        required: true
+        example: "https://example.com?test string&key=value"
+      encode_all:
+        type: boolean
+        title: Encode All Characters
+        description: If true will encode all special characters
+        default: false
+        required: false
+        example: true
+    output:
+      url:
+        type: string
+        title: Encoded URL
+        description: Encoded URL
+        required: true
+  decode:
+    title: Decode URL
+    description: URL-decode a URL
+    input:
+      url:
+        type: string
+        title: URL
+        description: URL to decode
+        required: true
+        example: "https://example.com/utf8%3D%E2%9C%93%26replace%3D%99"
+      errors:
+        type: string
+        title: Errors
+        description: Set to ignore or replace invalid encodings
+        default: replace
+        required: false
+        example: replace
+    output:
+      url:
+        type: string
+        title: URL
+        description: Decoded URL
+        required: true
