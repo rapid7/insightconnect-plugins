@@ -14,9 +14,3 @@ class TestEncode(TestCase):
 
         results = test_encoder.run(input_params)
         self.assertEqual("SSBsaWtlIGNoZWVzZQ==", results.get("data"))
-
-    def test_fail_1(self):
-        raise Exception("This is an exception")
-
-    def test_fail_2(self):
-        self.fail("This is a failed test")
