@@ -33,7 +33,9 @@ class GetObservables(komand.Action):
         self.request.params.update({"value": "{value}".format(value=params.get("value")), "limit": 1000, "offset": 0})
 
         while self.continue_paging:
-            response = self.connection.session.send(self.request.prepare(), verify=self.request.verify)     # may cause NewConnectionError: Operation timed out. That prints: Max retries exceeded with url: <URL WITH EXPOSED API KEY>
+            response = self.connection.session.send(
+                self.request.prepare(), verify=self.request.verify
+            )  # may cause NewConnectionError: Operation timed out. That prints: Max retries exceeded with url: <URL WITH EXPOSED API KEY>
 
             if response.status_code not in range(200, 299):
                 raise PluginException(
