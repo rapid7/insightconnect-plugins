@@ -13,6 +13,5 @@ class TestEncode(TestCase):
         }
 
         results = test_encoder.run(input_params)
-        raise Exception("BAD")
         self.assertEqual("SSBsaWtlIGNoZWVzZQ==", results.get("data"))
 
