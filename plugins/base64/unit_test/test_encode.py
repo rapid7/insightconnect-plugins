@@ -9,7 +9,7 @@ class TestEncode(TestCase):
         log = logging.getLogger("Test")
         test_encoder.logger = log
 
-        input_params = {"content": "I like cheese"}
+        input_params = {"content": "Rapid7"}
 
         results = test_encoder.run(input_params)
-        self.assertEqual("SSBsaWtlIGNoZWVzZQ==", results.get("data"))
+        self.assertEqual("UmFwaWQ3", results.get("data"))
