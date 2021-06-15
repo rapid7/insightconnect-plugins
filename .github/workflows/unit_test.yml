@@ -22,6 +22,5 @@ jobs:
         curl -s "https://${PACKAGE_CLOUD_TOKEN}@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh" | bash
         python -m pip install --user icon-integrations-ci --no-cache-dir --no-warn-script-location
         python -m pip install --user insightconnect_plugin_runtime --no-cache-dir --no-warn-script-location
-        python -m pip install --user komand --no-cache-dir --no-warn-script-location
         cd plugins
         /home/runner/.local/bin/icon-ci run_unit_tests
