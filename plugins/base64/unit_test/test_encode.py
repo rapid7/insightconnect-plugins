@@ -14,4 +14,3 @@ class TestEncode(TestCase):
         results = test_encoder.run(input_params)
 
         self.assertEqual("UmFwaWQ3", results.get("data"))
-        self.assertEqual("UmFwaWQ3", results.get("data")) # This is just something to get the PR to pick it up
