@@ -26,7 +26,7 @@ class DeleteFilesInput(komand.Input):
     "file_path": {
       "type": "string",
       "title": "File Path",
-      "description": "Path of file(s) to delete, accepts wildcard patterns (e.g. /test*.csv)",
+      "description": "Path of file(s) to delete, accepts wildcard patterns",
       "order": 2
     },
     "share_name": {

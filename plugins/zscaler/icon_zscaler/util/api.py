@@ -15,8 +15,11 @@ class ZscalerAPI:
         self.logger = logger
         self.cookie = None
 
-    def get_status(self):
+    def get_status(self) -> Response:
         return self.authenticated_call("GET", "status")
+
+    def activate_configuration(self) -> Response:
+        return self.authenticated_call("POST", "status/activate")
 
     def blacklist_url(self, blacklist_step: str, urls: list) -> bool:
         response = self.authenticated_call(

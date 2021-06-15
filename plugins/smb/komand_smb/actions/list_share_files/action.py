@@ -5,6 +5,7 @@ from .schema import ListShareFilesInput, ListShareFilesOutput, Input, Output
 from datetime import datetime, timezone
 import pytz
 import smb
+from komand_smb.util import utils
 
 
 class ListShareFiles(komand.Action):
@@ -43,9 +44,9 @@ class ListShareFiles(komand.Action):
                         "name": f.filename,
                         "short_name": f.short_name,
                         "is_directory": f.isDirectory,
-                        "create_time": self.datetime_with_timezone(f.create_time, tz).isoformat(),
-                        "last_access_time": self.datetime_with_timezone(f.last_access_time, tz).isoformat(),
-                        "last_write_time": self.datetime_with_timezone(f.last_write_time, tz).isoformat(),
+                        "create_time": utils.datetime_with_timezone(f.create_time, tz).isoformat(),
+                        "last_access_time": utils.datetime_with_timezone(f.last_access_time, tz).isoformat(),
+                        "last_write_time": utils.datetime_with_timezone(f.last_write_time, tz).isoformat(),
                         "file_size": f.file_size,
                     }
                 )
@@ -67,10 +68,3 @@ class ListShareFiles(komand.Action):
 
         self.logger.info(f"Returned {len(files)} files from share")
         return {Output.FILES: files}
-
-    @staticmethod
-    def datetime_with_timezone(raw_datetime, tz):
-        # Apply UTC timezone; pysmb times are float of seconds from epoch with no timezone defined
-        dt = datetime.fromtimestamp(raw_datetime).replace(tzinfo=timezone.utc)
-
-        return dt.astimezone(tz)
