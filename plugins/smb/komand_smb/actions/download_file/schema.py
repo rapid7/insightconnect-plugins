@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Delete file(s) from the share; allows wildcards"
+    DESCRIPTION = "Download a file"
 
 
 class Input:
@@ -14,10 +14,10 @@ class Input:
     
 
 class Output:
-    DELETED = "deleted"
+    FILE = "file"
     
 
-class DeleteFilesInput(komand.Input):
+class DownloadFileInput(komand.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -26,7 +26,7 @@ class DeleteFilesInput(komand.Input):
     "file_path": {
       "type": "string",
       "title": "File Path",
-      "description": "Path of file(s) to delete, accepts wildcard patterns",
+      "description": "Path relative to share of the file to download",
       "order": 2
     },
     "share_name": {
@@ -54,22 +54,40 @@ class DeleteFilesInput(komand.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class DeleteFilesOutput(komand.Output):
+class DownloadFileOutput(komand.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "deleted": {
-      "type": "boolean",
-      "title": "Deleted",
-      "description": "Deletion success",
+    "file": {
+      "$ref": "#/definitions/file",
+      "title": "File",
+      "description": "Downloaded file",
       "order": 1
     }
   },
-  "required": [
-    "deleted"
-  ]
+  "definitions": {
+    "file": {
+      "id": "file",
+      "type": "object",
+      "title": "File",
+      "description": "File Object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "title": "Content",
+          "description": "File contents",
+          "format": "bytes"
+        },
+        "filename": {
+          "type": "string",
+          "title": "Filename",
+          "description": "Name of file"
+        }
+      }
+    }
+  }
 }
     """)
 
