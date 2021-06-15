@@ -12,5 +12,4 @@ class TestEncode(TestCase):
         input_params = {"content": "Rapid7"}
 
         results = test_encoder.run(input_params)
-
         self.assertEqual("UmFwaWQ3", results.get("data"))
