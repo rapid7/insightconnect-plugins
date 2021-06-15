@@ -16,7 +16,7 @@ Developers, verify you have completed the following items by checking them off:
 
 ### Unit Tests
 
-Review our documentation on [generating](https://docs.rapid7.com/insightconnect/unit-test-generation) and [writing](https://docs.rapid7.com/insightconnect/unit-test-primer) unit tests
+Review our documentation on [generating](https://docs.rapid7.com/insightconnect/unit-test-generation) and [writing](https://docs.rapid7.com/insightconnect/unit-test-primer) plugin unit tests
 
 - [ ] Unit tests written for any new or updated code
 
