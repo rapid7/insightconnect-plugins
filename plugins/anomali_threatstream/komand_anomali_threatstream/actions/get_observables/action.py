@@ -6,7 +6,7 @@ import logging
 from copy import copy
 from json import JSONDecodeError
 from komand.exceptions import PluginException
-from komand_anomali_threatstream.util import SensitiveFormatter
+from komand_anomali_threatstream.util.formatter import SensitiveFormatter
 
 logger = logging.getLogger()
 for h in logging.root.handlers:
