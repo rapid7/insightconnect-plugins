@@ -36,9 +36,9 @@ class RecordedFutureApi:
             raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
         if response.status_code == 404:
             raise PluginException(
-                cause="No results found. Invalid or unreachable endpoint provided.",
-                assistance="Please provide a valid inputs or verify the endpoint/URL/hostname configured in your plugin"
-                " connection is correct.",
+                cause="No results found.\n",
+                assistance="Please provide valid inputs or verify the endpoint/URL/hostname configured in your plugin.\n",
+                data=response.text
             )
         if 400 <= response.status_code < 500:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
