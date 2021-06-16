@@ -51,6 +51,21 @@ class AdvancedQueryOnLogSet(komand.Action):
         for log_entry in log_entries:
             log_entry["message"] = json.loads(log_entry.get("message", "{}"))
 
+            labels = log_entry.get("labels", [])
+            new_labels = []
+            if labels:
+                for label in labels:
+                    log_id = label.get("id")
+                    if log_id:
+                        response = self.connection.session.get(f"{self.connection.url}log_search/management/labels/{log_id}")
+                        try:
+                            response.raise_for_status()
+                            new_labels.append(response.json().get("label", {}).get("name"))
+                        except Exception:
+                            continue
+
+                log_entry["labels"] = new_labels
+
         self.logger.info(f"Sending results to orchestrator.")
         return {Output.RESULTS: log_entries, Output.COUNT: len(log_entries)}
 
