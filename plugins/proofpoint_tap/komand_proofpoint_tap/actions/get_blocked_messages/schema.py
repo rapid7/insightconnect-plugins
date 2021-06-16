@@ -34,22 +34,26 @@ class GetBlockedMessagesInput(insightconnect_plugin_runtime.Input):
     "threat_status": {
       "type": "string",
       "title": "Threat Status",
-      "description": "The threat statuses which will be returned in the data. If no value is specified, active and cleared threats are returned",
+      "description": "The threat statuses which will be returned in the data",
+      "default": "all",
       "enum": [
         "active",
         "cleared",
-        "falsePositive"
+        "falsePositive",
+        "all"
       ],
       "order": 5
     },
     "threat_type": {
       "type": "string",
       "title": "Threat Type",
-      "description": "The threat type which will be returned in the data. If no value is specified, all threat types are returned",
+      "description": "The threat type which will be returned in the data",
+      "default": "all",
       "enum": [
         "url",
         "attachment",
-        "messageText"
+        "messageText",
+        "all"
       ],
       "order": 4
     },
@@ -65,7 +69,11 @@ class GetBlockedMessagesInput(insightconnect_plugin_runtime.Input):
       "description": "The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "threat_status",
+    "threat_type"
+  ]
 }
     """)
 
