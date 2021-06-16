@@ -36,7 +36,7 @@ class GetObservables(komand.Action):
                 raise PluginException(
                     cause=f"The following ConnectionError was raised: {hide_api_key(str(e))}",
                     assistance="Please verify your ThreatStream server status and try again. "
-                    "If the issue persists please contact support."
+                    "If the issue persists please contact support.",
                 ) from ConnectionError  # Suppresses the exception context from the original error that exposes API key
 
             if response.status_code not in range(200, 299):
