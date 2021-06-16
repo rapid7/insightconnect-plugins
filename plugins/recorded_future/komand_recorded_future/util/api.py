@@ -29,9 +29,7 @@ class RecordedFutureApi:
 
         _url = self.base_url + endpoint
 
-        response = requests.request(
-            url=_url, method=method, params=params, data=data, json=json, headers=self.headers
-        )
+        response = requests.request(url=_url, method=method, params=params, data=data, json=json, headers=self.headers)
         if response.status_code == 401:
             raise PluginException(preset=PluginException.Preset.API_KEY)
         if response.status_code == 403:
@@ -40,7 +38,7 @@ class RecordedFutureApi:
             raise PluginException(
                 cause="No results found.\n",
                 assistance="Please provide valid inputs or verify the endpoint/URL/hostname configured in your plugin.\n",
-                data=f"{response.text}\nurl: {_url}"
+                data=f"{response.text}\nurl: {_url}",
             )
         if 400 <= response.status_code < 500:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
