@@ -2,7 +2,6 @@ import komand
 from .schema import GetObservablesInput, GetObservablesOutput, Component
 
 # Custom imports below
-import logging
 from requests.exceptions import ConnectionError
 from copy import copy
 from json import JSONDecodeError
