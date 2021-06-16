@@ -3,14 +3,11 @@ from .schema import GetObservablesInput, GetObservablesOutput, Component
 
 # Custom imports below
 import logging
+from requests.exceptions import ConnectionError
 from copy import copy
 from json import JSONDecodeError
 from komand.exceptions import PluginException
-from komand_anomali_threatstream.util.formatter import SensitiveFormatter
-
-logger = logging.getLogger()
-for h in logging.root.handlers:
-    h.setFormatter(SensitiveFormatter)
+from komand_anomali_threatstream.util.utils import hide_api_key
 
 
 class GetObservables(komand.Action):
@@ -34,11 +31,13 @@ class GetObservables(komand.Action):
 
         while self.continue_paging:
             try:
-                response = self.connection.session.send(
-                    self.request.prepare(), verify=self.request.verify, timeout=1
-                )  # may cause NewConnectionError: Operation timed out. That prints: Max retries exceeded with url: <URL WITH EXPOSED API KEY>
-            except BaseException:
-                raise PluginException(PluginException.Preset.UNKNOWN) from None
+                response = self.connection.session.send(self.request.prepare(), verify=self.request.verify)
+            except ConnectionError as e:
+                raise PluginException(
+                    cause=f"The following ConnectionError was raised: {hide_api_key(str(e))}",
+                    assistance="Please verify your ThreatStream server status and try again. "
+                    "If the issue persists please contact support."
+                ) from ConnectionError  # Suppresses the exception context from the original error that exposes API key
 
             if response.status_code not in range(200, 299):
                 raise PluginException(
