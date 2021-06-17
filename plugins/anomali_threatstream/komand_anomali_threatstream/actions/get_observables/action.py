@@ -2,11 +2,9 @@ import komand
 from .schema import GetObservablesInput, GetObservablesOutput, Component
 
 # Custom imports below
-from requests.exceptions import ConnectionError
 from copy import copy
 from json import JSONDecodeError
 from komand.exceptions import PluginException
-from komand_anomali_threatstream.util.utils import hide_api_key
 
 
 class GetObservables(komand.Action):
@@ -29,14 +27,7 @@ class GetObservables(komand.Action):
         self.request.params.update({"value": "{value}".format(value=params.get("value")), "limit": 1000, "offset": 0})
 
         while self.continue_paging:
-            try:
-                response = self.connection.session.send(self.request.prepare(), verify=self.request.verify)
-            except ConnectionError as e:
-                raise PluginException(
-                    cause=f"The following ConnectionError was raised: {hide_api_key(str(e))}",
-                    assistance="Please verify your ThreatStream server status and try again. "
-                    "If the issue persists please contact support.",
-                ) from ConnectionError  # Suppresses the exception context from the original error that exposes API key
+            response = self.connection.send()
 
             if response.status_code not in range(200, 299):
                 raise PluginException(
