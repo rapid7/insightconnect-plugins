@@ -27,18 +27,18 @@ class RecordedFutureApi:
 
     def _call_api(self, method: str, endpoint: str, params: dict = None, data: dict = None, json: dict = None):
 
-        response = requests.request(
-            url=self.base_url + endpoint, method=method, params=params, data=data, json=json, headers=self.headers
-        )
+        _url = self.base_url + endpoint
+
+        response = requests.request(url=_url, method=method, params=params, data=data, json=json, headers=self.headers)
         if response.status_code == 401:
             raise PluginException(preset=PluginException.Preset.API_KEY)
         if response.status_code == 403:
             raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
         if response.status_code == 404:
             raise PluginException(
-                cause="No results found. Invalid or unreachable endpoint provided.",
-                assistance="Please provide a valid inputs or verify the endpoint/URL/hostname configured in your plugin"
-                " connection is correct.",
+                cause="No results found.\n",
+                assistance="Please provide valid inputs or verify the endpoint/URL/hostname configured in your plugin.\n",
+                data=f"{response.text}\nurl: {_url}",
             )
         if 400 <= response.status_code < 500:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
