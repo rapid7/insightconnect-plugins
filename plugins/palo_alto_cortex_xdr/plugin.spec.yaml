@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_cortex_xdr
 title: Palo Alto Cortex XDR
 description: Stop modern attacks with the industry's first extended detection and response platform that spans your endpoints, network and cloud data
-version: 1.0.1
+version: 1.1.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -35,7 +35,7 @@ types:
       description: "Action external hostname"
       required: false
     action_file_macro_sha256:
-      title: "Action File MACro SHA256"
+      title: "Action File Macro SHA256"
       type: string
       description: "Action file macro SHA256"
       required: false
@@ -70,9 +70,9 @@ types:
       description: "Action local port"
       required: false
     action_process_causality_id:
-      title: "Action Process Causality Id"
+      title: "Action Process Causality ID"
       type: string
-      description: "Action process causality id"
+      description: "Action process causality ID"
       required: false
     action_process_image_command_line:
       title: "Action Process Image Command Line"
@@ -90,9 +90,9 @@ types:
       description: "Action process image SHA256"
       required: false
     action_process_instance_id:
-      title: "Action Process Instance Id"
+      title: "Action Process Instance ID"
       type: string
-      description: "Action process instance id"
+      description: "Action process instance ID"
       required: false
     action_process_signature_status:
       title: "Action Process Signature Status"
@@ -135,14 +135,14 @@ types:
       description: "Action remote port"
       required: false
     actor_causality_id:
-      title: "Actor Causality Id"
+      title: "Actor Causality ID"
       type: string
-      description: "Actor causality id"
+      description: "Actor causality ID"
       required: false
     actor_process_causality_id:
-      title: "Actor Process Causality Id"
+      title: "Actor Process Causality ID"
       type: string
-      description: "Actor process causality id"
+      description: "Actor process causality ID"
       required: false
     actor_process_command_line:
       title: "Actor Process Command Line"
@@ -170,14 +170,14 @@ types:
       description: "Actor process image SHA256"
       required: false
     actor_process_instance_id:
-      title: "Actor Process Instance Id"
+      title: "Actor Process Instance ID"
       type: string
-      description: "Actor process instance id"
+      description: "Actor process instance ID"
       required: false
     actor_process_os_pid:
-      title: "Actor Process Os PID"
+      title: "Actor Process OS PID"
       type: integer
-      description: "Actor process os PID"
+      description: "Actor process OS PID"
       required: false
     actor_process_signature_status:
       title: "Actor Process Signature Status"
@@ -190,9 +190,9 @@ types:
       description: "Actor process signature vendor"
       required: false
     actor_thread_thread_id:
-      title: "Actor Thread Thread Id"
+      title: "Actor Thread Thread ID"
       type: string
-      description: "Actor thread thread id"
+      description: "Actor thread thread ID"
       required: false
     agent_host_boot_time:
       title: "Agent Host Boot Time"
@@ -210,9 +210,9 @@ types:
       description: "Association strength"
       required: false
     causality_actor_causality_id:
-      title: "Causality Actor Causality Id"
+      title: "Causality Actor Causality ID"
       type: string
-      description: "Causality actor causality id"
+      description: "Causality actor causality ID"
       required: false
     causality_actor_process_command_line:
       title: "Causality Actor Process Command Line"
@@ -260,9 +260,9 @@ types:
       description: "Cluster name"
       required: false
     container_id:
-      title: "Container Id"
+      title: "Container ID"
       type: string
-      description: "Container id"
+      description: "Container ID"
       required: false
     contains_featured_host:
       title: "Contains Featured Host"
@@ -285,39 +285,39 @@ types:
       description: "DNS query name"
       required: false
     dst_action_country:
-      title: "Dst Action Country"
+      title: "DST Action Country"
       type: string
-      description: "Dst action country"
+      description: "DST action country"
       required: false
     dst_action_external_hostname:
-      title: "Dst Action External Hostname"
+      title: "DST Action External Hostname"
       type: string
-      description: "Dst action external hostname"
+      description: "DST action external hostname"
       required: false
     dst_action_external_port:
-      title: "Dst Action External Port"
+      title: "DST Action External Port"
       type: string
-      description: "Dst action external port"
+      description: "DST action external port"
       required: false
     dst_agent_id:
-      title: "Dst Agent Id"
+      title: "DST Agent ID"
       type: string
-      description: "Dst agent id"
+      description: "DST agent ID"
       required: false
     dst_association_strength:
-      title: "Dst Association Strength"
+      title: "DST Association Strength"
       type: string
-      description: "Dst association strength"
+      description: "DST association strength"
       required: false
     dst_causality_actor_process_execution_time:
-      title: "Dst Causality Actor Process Execution Time"
+      title: "DST Causality Actor Process Execution Time"
       type: string
-      description: "Dst causality actor process execution time"
+      description: "DST causality actor process execution time"
       required: false
     event_id:
-      title: "Event Id"
+      title: "Event ID"
       type: string
-      description: "Event id"
+      description: "Event ID"
       required: false
     event_sub_type:
       title: "Event Sub Type"
@@ -335,94 +335,94 @@ types:
       description: "Event type"
       required: false
     fw_app_category:
-      title: "Fw App Category"
+      title: "FW App Category"
       type: string
-      description: "Fw app category"
+      description: "FW app category"
       required: false
     fw_app_id:
-      title: "Fw App Id"
+      title: "FW App ID"
       type: string
-      description: "Fw app id"
+      description: "FW app ID"
       required: false
     fw_app_subcategory:
-      title: "Fw App Subcategory"
+      title: "FW App Subcategory"
       type: string
-      description: "Fw app subcategory"
+      description: "FW app subcategory"
       required: false
     fw_app_technology:
-      title: "Fw App Technology"
+      title: "FW App Technology"
       type: string
-      description: "Fw app technology"
+      description: "FW app technology"
       required: false
     fw_device_name:
-      title: "Fw Device Name"
+      title: "FW Device Name"
       type: string
-      description: "Fw device name"
+      description: "FW device name"
       required: false
     fw_email_recipient:
-      title: "Fw Email Recipient"
+      title: "FW Email Recipient"
       type: string
-      description: "Fw email recipient"
+      description: "FW email recipient"
       required: false
     fw_email_sender:
-      title: "Fw Email Sender"
+      title: "FW Email Sender"
       type: string
-      description: "Fw email sender"
+      description: "FW email sender"
       required: false
     fw_email_subject:
-      title: "Fw Email Subject"
+      title: "FW Email Subject"
       type: string
-      description: "Fw email subject"
+      description: "FW email subject"
       required: false
     fw_interface_from:
-      title: "Fw Interface From"
+      title: "FW Interface From"
       type: string
-      description: "Fw interface from"
+      description: "FW interface from"
       required: false
     fw_interface_to:
-      title: "Fw Interface To"
+      title: "FW Interface To"
       type: string
-      description: "Fw interface to"
+      description: "FW interface to"
       required: false
     fw_is_phishing:
-      title: "Fw Is Phishing"
+      title: "FW Is Phishing"
       type: string
-      description: "Fw is phishing"
+      description: "FW is phishing"
       required: false
     fw_misc:
-      title: "Fw Misc"
+      title: "FW Misc"
       type: string
-      description: "Fw misc"
+      description: "FW misc"
       required: false
     fw_rule:
-      title: "Fw Rule"
+      title: "FW Rule"
       type: string
-      description: "Fw rule"
+      description: "FW rule"
       required: false
     fw_rule_id:
-      title: "Fw Rule Id"
+      title: "FW Rule ID"
       type: string
-      description: "Fw rule id"
+      description: "FW rule ID"
       required: false
     fw_serial_number:
-      title: "Fw Serial Number"
+      title: "FW Serial Number"
       type: string
-      description: "Fw serial number"
+      description: "FW serial number"
       required: false
     fw_url_domain:
-      title: "Fw URL Domain"
+      title: "FW URL Domain"
       type: string
-      description: "Fw URL domain"
+      description: "FW URL domain"
       required: false
     fw_vsys:
-      title: "Fw Vsys"
+      title: "FW Vsys"
       type: string
-      description: "Fw vsys"
+      description: "FW vsys"
       required: false
     fw_xff:
-      title: "Fw Xff"
+      title: "FW Xff"
       type: string
-      description: "Fw xff"
+      description: "FW xff"
       required: false
     image_name:
       title: "Image Name"
@@ -430,14 +430,14 @@ types:
       description: "Image name"
       required: false
     module_id:
-      title: "Module Id"
+      title: "Module ID"
       type: string
-      description: "Module id"
+      description: "Module ID"
       required: false
     os_actor_causality_id:
-      title: "Os Actor Causality Id"
+      title: "Os Actor Causality ID"
       type: string
-      description: "Os actor causality id"
+      description: "Os actor causality ID"
       required: false
     os_actor_effective_username:
       title: "Os Actor Effective Username"
@@ -445,9 +445,9 @@ types:
       description: "Os actor effective username"
       required: false
     os_actor_process_causality_id:
-      title: "Os Actor Process Causality Id"
+      title: "Os Actor Process Causality ID"
       type: string
-      description: "Os actor process causality id"
+      description: "Os actor process causality ID"
       required: false
     os_actor_process_command_line:
       title: "Os Actor Process Command Line"
@@ -470,9 +470,9 @@ types:
       description: "Os actor process image SHA256"
       required: false
     os_actor_process_instance_id:
-      title: "Os Actor Process Instance Id"
+      title: "Os Actor Process Instance ID"
       type: string
-      description: "Os actor process instance id"
+      description: "Os actor process instance ID"
       required: false
     os_actor_process_os_pid:
       title: "Os Actor Process Os PID"
@@ -490,14 +490,14 @@ types:
       description: "Os actor process signature vendor"
       required: false
     os_actor_thread_thread_id:
-      title: "Os Actor Thread Thread Id"
+      title: "Os Actor Thread Thread ID"
       type: string
-      description: "Os actor thread thread id"
+      description: "Os actor thread thread ID"
       required: false
     story_id:
-      title: "Story Id"
+      title: "Story ID"
       type: string
-      description: "Story id"
+      description: "Story ID"
       required: false
     user_name:
       title: "User Name"
@@ -546,9 +546,9 @@ types:
       description: "Agent version"
       required: false
     alert_id:
-      title: "Alert Id"
+      title: "Alert ID"
       type: string
-      description: "Alert id"
+      description: "Alert ID"
       required: false
     attempt_counter:
       title: "Attempt Counter"
@@ -591,9 +591,9 @@ types:
       description: "End match attempt ts"
       required: false
     endpoint_id:
-      title: "Endpoint Id"
+      title: "Endpoint ID"
       type: string
-      description: "Endpoint id"
+      description: "Endpoint ID"
       required: false
     events:
       title: "Events"
@@ -601,14 +601,14 @@ types:
       description: "Events"
       required: false
     external_id:
-      title: "External Id"
+      title: "External ID"
       type: string
-      description: "External id"
+      description: "External ID"
       required: false
     filter_rule_id:
-      title: "Filter Rule Id"
+      title: "Filter Rule ID"
       type: string
-      description: "Filter rule id"
+      description: "Filter rule ID"
       required: false
     host_ip:
       title: "Host IP"
@@ -641,9 +641,9 @@ types:
       description: "MAC addresses"
       required: false
     matching_service_rule_id:
-      title: "Matching Service Rule Id"
+      title: "Matching Service Rule ID"
       type: string
-      description: "Matching service rule id"
+      description: "Matching service rule ID"
       required: false
     matching_status:
       title: "Matching Status"
@@ -651,14 +651,14 @@ types:
       description: "Matching status"
       required: false
     mitre_tactic_id_and_name:
-      title: "Mitre Tactic Id And Name"
+      title: "MITRE Tactic ID And Name"
       type: "[]string"
-      description: "Mitre tactic id and name"
+      description: "MITRE tactic ID and name"
       required: false
     mitre_technique_id_and_name:
-      title: "Mitre Technique Id And Name"
+      title: "MITRE Technique ID And Name"
       type: "[]string"
-      description: "Mitre technique id and name"
+      description: "MITRE technique ID and name"
       required: false
     name:
       title: "Name"
@@ -727,9 +727,9 @@ types:
       description: "Hosts"
       required: false
     incident_id:
-      title: "Incident Id"
+      title: "Incident ID"
       type: string
-      description: "Incident id"
+      description: "Incident ID"
       required: false
     incident_name:
       title: "Incident Name"
@@ -962,7 +962,7 @@ connection:
 actions:
   get_file_quarantine_status:
     title: Get File Quarantine Status
-    description: Get File Quarantine Status
+    description: Get quarantine status for a file
     input:
       endpoint_id:
         title: Endpoint ID
@@ -975,11 +975,11 @@ actions:
         type: string
         description: File Hash
         required: true
-        example: de96a6e01234567895dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
       file_path:
         title: File Path
         type: string
-        description: File Path
+        description: File path
         required: true
         example: powershell.exe
     output:
@@ -1105,7 +1105,14 @@ actions:
 triggers:
   get_incidents:
     title: Get Incidents
-    description: Get Incidents
+    description: Get incidents
+    input:
+      interval:
+        title: Interval
+        description: Interval
+        type: integer
+        required: true
+        example: 5
     output:
       incident:
         title: Incident
@@ -1114,7 +1121,14 @@ triggers:
         required: false
   get_alerts:
     title: Get Alerts
-    description: Get Alerts
+    description: Get alerts
+    input:
+      interval:
+        title: Interval
+        description: Interval
+        type: integer
+        required: true
+        example: 5
     output:
       alert:
         title: Alert

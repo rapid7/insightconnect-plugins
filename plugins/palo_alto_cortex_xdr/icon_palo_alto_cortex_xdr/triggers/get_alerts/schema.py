@@ -4,11 +4,12 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get Alerts"
+    DESCRIPTION = "Get alerts"
 
 
 class Input:
-    pass
+    
+    INTERVAL = "interval"
     
 
 class Output:
@@ -18,7 +19,21 @@ class Output:
 
 class GetAlertsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "interval": {
+      "type": "integer",
+      "title": "Interval",
+      "description": "Interval",
+      "order": 1
+    }
+  },
+  "required": [
+    "interval"
+  ]
+}
     """)
 
     def __init__(self):
@@ -93,8 +108,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "alert_id": {
           "type": "string",
-          "title": "Alert Id",
-          "description": "Alert id",
+          "title": "Alert ID",
+          "description": "Alert ID",
           "order": 9
         },
         "attempt_counter": {
@@ -147,8 +162,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "endpoint_id": {
           "type": "string",
-          "title": "Endpoint Id",
-          "description": "Endpoint id",
+          "title": "Endpoint ID",
+          "description": "Endpoint ID",
           "order": 18
         },
         "events": {
@@ -162,14 +177,14 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "external_id": {
           "type": "string",
-          "title": "External Id",
-          "description": "External id",
+          "title": "External ID",
+          "description": "External ID",
           "order": 20
         },
         "filter_rule_id": {
           "type": "string",
-          "title": "Filter Rule Id",
-          "description": "Filter rule id",
+          "title": "Filter Rule ID",
+          "description": "Filter rule ID",
           "order": 21
         },
         "host_ip": {
@@ -216,8 +231,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "matching_service_rule_id": {
           "type": "string",
-          "title": "Matching Service Rule Id",
-          "description": "Matching service rule id",
+          "title": "Matching Service Rule ID",
+          "description": "Matching service rule ID",
           "order": 28
         },
         "matching_status": {
@@ -228,8 +243,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "mitre_tactic_id_and_name": {
           "type": "array",
-          "title": "Mitre Tactic Id And Name",
-          "description": "Mitre tactic id and name",
+          "title": "MITRE Tactic ID And Name",
+          "description": "MITRE tactic ID and name",
           "items": {
             "type": "string"
           },
@@ -237,8 +252,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "mitre_technique_id_and_name": {
           "type": "array",
-          "title": "Mitre Technique Id And Name",
-          "description": "Mitre technique id and name",
+          "title": "MITRE Technique ID And Name",
+          "description": "MITRE technique ID and name",
           "items": {
             "type": "string"
           },
@@ -288,7 +303,7 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "action_file_macro_sha256": {
               "type": "string",
-              "title": "Action File MACro SHA256",
+              "title": "Action File Macro SHA256",
               "description": "Action file macro SHA256",
               "order": 3
             },
@@ -330,8 +345,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "action_process_causality_id": {
               "type": "string",
-              "title": "Action Process Causality Id",
-              "description": "Action process causality id",
+              "title": "Action Process Causality ID",
+              "description": "Action process causality ID",
               "order": 10
             },
             "action_process_image_command_line": {
@@ -354,8 +369,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "action_process_instance_id": {
               "type": "string",
-              "title": "Action Process Instance Id",
-              "description": "Action process instance id",
+              "title": "Action Process Instance ID",
+              "description": "Action process instance ID",
               "order": 14
             },
             "action_process_signature_status": {
@@ -408,14 +423,14 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "actor_causality_id": {
               "type": "string",
-              "title": "Actor Causality Id",
-              "description": "Actor causality id",
+              "title": "Actor Causality ID",
+              "description": "Actor causality ID",
               "order": 23
             },
             "actor_process_causality_id": {
               "type": "string",
-              "title": "Actor Process Causality Id",
-              "description": "Actor process causality id",
+              "title": "Actor Process Causality ID",
+              "description": "Actor process causality ID",
               "order": 24
             },
             "actor_process_command_line": {
@@ -450,14 +465,14 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "actor_process_instance_id": {
               "type": "string",
-              "title": "Actor Process Instance Id",
-              "description": "Actor process instance id",
+              "title": "Actor Process Instance ID",
+              "description": "Actor process instance ID",
               "order": 30
             },
             "actor_process_os_pid": {
               "type": "integer",
-              "title": "Actor Process Os PID",
-              "description": "Actor process os PID",
+              "title": "Actor Process OS PID",
+              "description": "Actor process OS PID",
               "order": 31
             },
             "actor_process_signature_status": {
@@ -474,8 +489,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "actor_thread_thread_id": {
               "type": "string",
-              "title": "Actor Thread Thread Id",
-              "description": "Actor thread thread id",
+              "title": "Actor Thread Thread ID",
+              "description": "Actor thread thread ID",
               "order": 34
             },
             "agent_host_boot_time": {
@@ -498,8 +513,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "causality_actor_causality_id": {
               "type": "string",
-              "title": "Causality Actor Causality Id",
-              "description": "Causality actor causality id",
+              "title": "Causality Actor Causality ID",
+              "description": "Causality actor causality ID",
               "order": 38
             },
             "causality_actor_process_command_line": {
@@ -558,8 +573,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "container_id": {
               "type": "string",
-              "title": "Container Id",
-              "description": "Container id",
+              "title": "Container ID",
+              "description": "Container ID",
               "order": 48
             },
             "contains_featured_host": {
@@ -588,44 +603,44 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "dst_action_country": {
               "type": "string",
-              "title": "Dst Action Country",
-              "description": "Dst action country",
+              "title": "DST Action Country",
+              "description": "DST action country",
               "order": 53
             },
             "dst_action_external_hostname": {
               "type": "string",
-              "title": "Dst Action External Hostname",
-              "description": "Dst action external hostname",
+              "title": "DST Action External Hostname",
+              "description": "DST action external hostname",
               "order": 54
             },
             "dst_action_external_port": {
               "type": "string",
-              "title": "Dst Action External Port",
-              "description": "Dst action external port",
+              "title": "DST Action External Port",
+              "description": "DST action external port",
               "order": 55
             },
             "dst_agent_id": {
               "type": "string",
-              "title": "Dst Agent Id",
-              "description": "Dst agent id",
+              "title": "DST Agent ID",
+              "description": "DST agent ID",
               "order": 56
             },
             "dst_association_strength": {
               "type": "string",
-              "title": "Dst Association Strength",
-              "description": "Dst association strength",
+              "title": "DST Association Strength",
+              "description": "DST association strength",
               "order": 57
             },
             "dst_causality_actor_process_execution_time": {
               "type": "string",
-              "title": "Dst Causality Actor Process Execution Time",
-              "description": "Dst causality actor process execution time",
+              "title": "DST Causality Actor Process Execution Time",
+              "description": "DST causality actor process execution time",
               "order": 58
             },
             "event_id": {
               "type": "string",
-              "title": "Event Id",
-              "description": "Event id",
+              "title": "Event ID",
+              "description": "Event ID",
               "order": 59
             },
             "event_sub_type": {
@@ -648,110 +663,110 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "fw_app_category": {
               "type": "string",
-              "title": "Fw App Category",
-              "description": "Fw app category",
+              "title": "FW App Category",
+              "description": "FW app category",
               "order": 63
             },
             "fw_app_id": {
               "type": "string",
-              "title": "Fw App Id",
-              "description": "Fw app id",
+              "title": "FW App ID",
+              "description": "FW app ID",
               "order": 64
             },
             "fw_app_subcategory": {
               "type": "string",
-              "title": "Fw App Subcategory",
-              "description": "Fw app subcategory",
+              "title": "FW App Subcategory",
+              "description": "FW app subcategory",
               "order": 65
             },
             "fw_app_technology": {
               "type": "string",
-              "title": "Fw App Technology",
-              "description": "Fw app technology",
+              "title": "FW App Technology",
+              "description": "FW app technology",
               "order": 66
             },
             "fw_device_name": {
               "type": "string",
-              "title": "Fw Device Name",
-              "description": "Fw device name",
+              "title": "FW Device Name",
+              "description": "FW device name",
               "order": 67
             },
             "fw_email_recipient": {
               "type": "string",
-              "title": "Fw Email Recipient",
-              "description": "Fw email recipient",
+              "title": "FW Email Recipient",
+              "description": "FW email recipient",
               "order": 68
             },
             "fw_email_sender": {
               "type": "string",
-              "title": "Fw Email Sender",
-              "description": "Fw email sender",
+              "title": "FW Email Sender",
+              "description": "FW email sender",
               "order": 69
             },
             "fw_email_subject": {
               "type": "string",
-              "title": "Fw Email Subject",
-              "description": "Fw email subject",
+              "title": "FW Email Subject",
+              "description": "FW email subject",
               "order": 70
             },
             "fw_interface_from": {
               "type": "string",
-              "title": "Fw Interface From",
-              "description": "Fw interface from",
+              "title": "FW Interface From",
+              "description": "FW interface from",
               "order": 71
             },
             "fw_interface_to": {
               "type": "string",
-              "title": "Fw Interface To",
-              "description": "Fw interface to",
+              "title": "FW Interface To",
+              "description": "FW interface to",
               "order": 72
             },
             "fw_is_phishing": {
               "type": "string",
-              "title": "Fw Is Phishing",
-              "description": "Fw is phishing",
+              "title": "FW Is Phishing",
+              "description": "FW is phishing",
               "order": 73
             },
             "fw_misc": {
               "type": "string",
-              "title": "Fw Misc",
-              "description": "Fw misc",
+              "title": "FW Misc",
+              "description": "FW misc",
               "order": 74
             },
             "fw_rule": {
               "type": "string",
-              "title": "Fw Rule",
-              "description": "Fw rule",
+              "title": "FW Rule",
+              "description": "FW rule",
               "order": 75
             },
             "fw_rule_id": {
               "type": "string",
-              "title": "Fw Rule Id",
-              "description": "Fw rule id",
+              "title": "FW Rule ID",
+              "description": "FW rule ID",
               "order": 76
             },
             "fw_serial_number": {
               "type": "string",
-              "title": "Fw Serial Number",
-              "description": "Fw serial number",
+              "title": "FW Serial Number",
+              "description": "FW serial number",
               "order": 77
             },
             "fw_url_domain": {
               "type": "string",
-              "title": "Fw URL Domain",
-              "description": "Fw URL domain",
+              "title": "FW URL Domain",
+              "description": "FW URL domain",
               "order": 78
             },
             "fw_vsys": {
               "type": "string",
-              "title": "Fw Vsys",
-              "description": "Fw vsys",
+              "title": "FW Vsys",
+              "description": "FW vsys",
               "order": 79
             },
             "fw_xff": {
               "type": "string",
-              "title": "Fw Xff",
-              "description": "Fw xff",
+              "title": "FW Xff",
+              "description": "FW xff",
               "order": 80
             },
             "image_name": {
@@ -762,14 +777,14 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "module_id": {
               "type": "string",
-              "title": "Module Id",
-              "description": "Module id",
+              "title": "Module ID",
+              "description": "Module ID",
               "order": 82
             },
             "os_actor_causality_id": {
               "type": "string",
-              "title": "Os Actor Causality Id",
-              "description": "Os actor causality id",
+              "title": "Os Actor Causality ID",
+              "description": "Os actor causality ID",
               "order": 83
             },
             "os_actor_effective_username": {
@@ -780,8 +795,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "os_actor_process_causality_id": {
               "type": "string",
-              "title": "Os Actor Process Causality Id",
-              "description": "Os actor process causality id",
+              "title": "Os Actor Process Causality ID",
+              "description": "Os actor process causality ID",
               "order": 85
             },
             "os_actor_process_command_line": {
@@ -810,8 +825,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "os_actor_process_instance_id": {
               "type": "string",
-              "title": "Os Actor Process Instance Id",
-              "description": "Os actor process instance id",
+              "title": "Os Actor Process Instance ID",
+              "description": "Os actor process instance ID",
               "order": 90
             },
             "os_actor_process_os_pid": {
@@ -834,14 +849,14 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "os_actor_thread_thread_id": {
               "type": "string",
-              "title": "Os Actor Thread Thread Id",
-              "description": "Os actor thread thread id",
+              "title": "Os Actor Thread Thread ID",
+              "description": "Os actor thread thread ID",
               "order": 94
             },
             "story_id": {
               "type": "string",
-              "title": "Story Id",
-              "description": "Story id",
+              "title": "Story ID",
+              "description": "Story ID",
               "order": 95
             },
             "user_name": {
@@ -872,7 +887,7 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "action_file_macro_sha256": {
           "type": "string",
-          "title": "Action File MACro SHA256",
+          "title": "Action File Macro SHA256",
           "description": "Action file macro SHA256",
           "order": 3
         },
@@ -914,8 +929,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "action_process_causality_id": {
           "type": "string",
-          "title": "Action Process Causality Id",
-          "description": "Action process causality id",
+          "title": "Action Process Causality ID",
+          "description": "Action process causality ID",
           "order": 10
         },
         "action_process_image_command_line": {
@@ -938,8 +953,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "action_process_instance_id": {
           "type": "string",
-          "title": "Action Process Instance Id",
-          "description": "Action process instance id",
+          "title": "Action Process Instance ID",
+          "description": "Action process instance ID",
           "order": 14
         },
         "action_process_signature_status": {
@@ -992,14 +1007,14 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "actor_causality_id": {
           "type": "string",
-          "title": "Actor Causality Id",
-          "description": "Actor causality id",
+          "title": "Actor Causality ID",
+          "description": "Actor causality ID",
           "order": 23
         },
         "actor_process_causality_id": {
           "type": "string",
-          "title": "Actor Process Causality Id",
-          "description": "Actor process causality id",
+          "title": "Actor Process Causality ID",
+          "description": "Actor process causality ID",
           "order": 24
         },
         "actor_process_command_line": {
@@ -1034,14 +1049,14 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "actor_process_instance_id": {
           "type": "string",
-          "title": "Actor Process Instance Id",
-          "description": "Actor process instance id",
+          "title": "Actor Process Instance ID",
+          "description": "Actor process instance ID",
           "order": 30
         },
         "actor_process_os_pid": {
           "type": "integer",
-          "title": "Actor Process Os PID",
-          "description": "Actor process os PID",
+          "title": "Actor Process OS PID",
+          "description": "Actor process OS PID",
           "order": 31
         },
         "actor_process_signature_status": {
@@ -1058,8 +1073,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "actor_thread_thread_id": {
           "type": "string",
-          "title": "Actor Thread Thread Id",
-          "description": "Actor thread thread id",
+          "title": "Actor Thread Thread ID",
+          "description": "Actor thread thread ID",
           "order": 34
         },
         "agent_host_boot_time": {
@@ -1082,8 +1097,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "causality_actor_causality_id": {
           "type": "string",
-          "title": "Causality Actor Causality Id",
-          "description": "Causality actor causality id",
+          "title": "Causality Actor Causality ID",
+          "description": "Causality actor causality ID",
           "order": 38
         },
         "causality_actor_process_command_line": {
@@ -1142,8 +1157,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "container_id": {
           "type": "string",
-          "title": "Container Id",
-          "description": "Container id",
+          "title": "Container ID",
+          "description": "Container ID",
           "order": 48
         },
         "contains_featured_host": {
@@ -1172,44 +1187,44 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "dst_action_country": {
           "type": "string",
-          "title": "Dst Action Country",
-          "description": "Dst action country",
+          "title": "DST Action Country",
+          "description": "DST action country",
           "order": 53
         },
         "dst_action_external_hostname": {
           "type": "string",
-          "title": "Dst Action External Hostname",
-          "description": "Dst action external hostname",
+          "title": "DST Action External Hostname",
+          "description": "DST action external hostname",
           "order": 54
         },
         "dst_action_external_port": {
           "type": "string",
-          "title": "Dst Action External Port",
-          "description": "Dst action external port",
+          "title": "DST Action External Port",
+          "description": "DST action external port",
           "order": 55
         },
         "dst_agent_id": {
           "type": "string",
-          "title": "Dst Agent Id",
-          "description": "Dst agent id",
+          "title": "DST Agent ID",
+          "description": "DST agent ID",
           "order": 56
         },
         "dst_association_strength": {
           "type": "string",
-          "title": "Dst Association Strength",
-          "description": "Dst association strength",
+          "title": "DST Association Strength",
+          "description": "DST association strength",
           "order": 57
         },
         "dst_causality_actor_process_execution_time": {
           "type": "string",
-          "title": "Dst Causality Actor Process Execution Time",
-          "description": "Dst causality actor process execution time",
+          "title": "DST Causality Actor Process Execution Time",
+          "description": "DST causality actor process execution time",
           "order": 58
         },
         "event_id": {
           "type": "string",
-          "title": "Event Id",
-          "description": "Event id",
+          "title": "Event ID",
+          "description": "Event ID",
           "order": 59
         },
         "event_sub_type": {
@@ -1232,110 +1247,110 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "fw_app_category": {
           "type": "string",
-          "title": "Fw App Category",
-          "description": "Fw app category",
+          "title": "FW App Category",
+          "description": "FW app category",
           "order": 63
         },
         "fw_app_id": {
           "type": "string",
-          "title": "Fw App Id",
-          "description": "Fw app id",
+          "title": "FW App ID",
+          "description": "FW app ID",
           "order": 64
         },
         "fw_app_subcategory": {
           "type": "string",
-          "title": "Fw App Subcategory",
-          "description": "Fw app subcategory",
+          "title": "FW App Subcategory",
+          "description": "FW app subcategory",
           "order": 65
         },
         "fw_app_technology": {
           "type": "string",
-          "title": "Fw App Technology",
-          "description": "Fw app technology",
+          "title": "FW App Technology",
+          "description": "FW app technology",
           "order": 66
         },
         "fw_device_name": {
           "type": "string",
-          "title": "Fw Device Name",
-          "description": "Fw device name",
+          "title": "FW Device Name",
+          "description": "FW device name",
           "order": 67
         },
         "fw_email_recipient": {
           "type": "string",
-          "title": "Fw Email Recipient",
-          "description": "Fw email recipient",
+          "title": "FW Email Recipient",
+          "description": "FW email recipient",
           "order": 68
         },
         "fw_email_sender": {
           "type": "string",
-          "title": "Fw Email Sender",
-          "description": "Fw email sender",
+          "title": "FW Email Sender",
+          "description": "FW email sender",
           "order": 69
         },
         "fw_email_subject": {
           "type": "string",
-          "title": "Fw Email Subject",
-          "description": "Fw email subject",
+          "title": "FW Email Subject",
+          "description": "FW email subject",
           "order": 70
         },
         "fw_interface_from": {
           "type": "string",
-          "title": "Fw Interface From",
-          "description": "Fw interface from",
+          "title": "FW Interface From",
+          "description": "FW interface from",
           "order": 71
         },
         "fw_interface_to": {
           "type": "string",
-          "title": "Fw Interface To",
-          "description": "Fw interface to",
+          "title": "FW Interface To",
+          "description": "FW interface to",
           "order": 72
         },
         "fw_is_phishing": {
           "type": "string",
-          "title": "Fw Is Phishing",
-          "description": "Fw is phishing",
+          "title": "FW Is Phishing",
+          "description": "FW is phishing",
           "order": 73
         },
         "fw_misc": {
           "type": "string",
-          "title": "Fw Misc",
-          "description": "Fw misc",
+          "title": "FW Misc",
+          "description": "FW misc",
           "order": 74
         },
         "fw_rule": {
           "type": "string",
-          "title": "Fw Rule",
-          "description": "Fw rule",
+          "title": "FW Rule",
+          "description": "FW rule",
           "order": 75
         },
         "fw_rule_id": {
           "type": "string",
-          "title": "Fw Rule Id",
-          "description": "Fw rule id",
+          "title": "FW Rule ID",
+          "description": "FW rule ID",
           "order": 76
         },
         "fw_serial_number": {
           "type": "string",
-          "title": "Fw Serial Number",
-          "description": "Fw serial number",
+          "title": "FW Serial Number",
+          "description": "FW serial number",
           "order": 77
         },
         "fw_url_domain": {
           "type": "string",
-          "title": "Fw URL Domain",
-          "description": "Fw URL domain",
+          "title": "FW URL Domain",
+          "description": "FW URL domain",
           "order": 78
         },
         "fw_vsys": {
           "type": "string",
-          "title": "Fw Vsys",
-          "description": "Fw vsys",
+          "title": "FW Vsys",
+          "description": "FW vsys",
           "order": 79
         },
         "fw_xff": {
           "type": "string",
-          "title": "Fw Xff",
-          "description": "Fw xff",
+          "title": "FW Xff",
+          "description": "FW xff",
           "order": 80
         },
         "image_name": {
@@ -1346,14 +1361,14 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "module_id": {
           "type": "string",
-          "title": "Module Id",
-          "description": "Module id",
+          "title": "Module ID",
+          "description": "Module ID",
           "order": 82
         },
         "os_actor_causality_id": {
           "type": "string",
-          "title": "Os Actor Causality Id",
-          "description": "Os actor causality id",
+          "title": "Os Actor Causality ID",
+          "description": "Os actor causality ID",
           "order": 83
         },
         "os_actor_effective_username": {
@@ -1364,8 +1379,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "os_actor_process_causality_id": {
           "type": "string",
-          "title": "Os Actor Process Causality Id",
-          "description": "Os actor process causality id",
+          "title": "Os Actor Process Causality ID",
+          "description": "Os actor process causality ID",
           "order": 85
         },
         "os_actor_process_command_line": {
@@ -1394,8 +1409,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "os_actor_process_instance_id": {
           "type": "string",
-          "title": "Os Actor Process Instance Id",
-          "description": "Os actor process instance id",
+          "title": "Os Actor Process Instance ID",
+          "description": "Os actor process instance ID",
           "order": 90
         },
         "os_actor_process_os_pid": {
@@ -1418,14 +1433,14 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "os_actor_thread_thread_id": {
           "type": "string",
-          "title": "Os Actor Thread Thread Id",
-          "description": "Os actor thread thread id",
+          "title": "Os Actor Thread Thread ID",
+          "description": "Os actor thread thread ID",
           "order": 94
         },
         "story_id": {
           "type": "string",
-          "title": "Story Id",
-          "description": "Story id",
+          "title": "Story ID",
+          "description": "Story ID",
           "order": 95
         },
         "user_name": {

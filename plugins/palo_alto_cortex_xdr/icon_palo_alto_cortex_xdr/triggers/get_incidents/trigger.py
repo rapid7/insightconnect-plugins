@@ -39,7 +39,7 @@ class GetIncidents(insightconnect_plugin_runtime.Trigger):
                 last_event_processed_time_ms = incident_time
 
             # Back off before next iteration
-            time.sleep(params.get("interval", 5))
+            time.sleep(params.get(Input.INTERVAL, 5))
 
             # Update the start and end times for the next iteration. Don't request events older than our
             # last_processed_time_ms and set the end_time for the request to now.

@@ -61,15 +61,15 @@ This action is used to get File Quarantine Status.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |endpoint_id|string|None|True|Endpoint ID|None|SOMEENDPOINT|
-|file_hash|string|None|True|File Hash|None|de96a6e01234567895dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c|
-|file_path|string|None|True|File Path|None|powershell.exe|
+|file_hash|string|None|True|File Hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
+|file_path|string|None|True|File path|None|powershell.exe|
 
 Example input:
 
 ```
 {
   "endpoint_id": "SOMEENDPOINT",
-  "file_hash": "de96a6e01234567895dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c",
+  "file_hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
   "file_path": "powershell.exe"
 }
 ```
@@ -271,7 +271,17 @@ This trigger is used to get Alerts.
 
 ##### Input
 
-_This trigger does not contain any inputs._
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|interval|integer|None|True|Interval|None|5|
+
+Example input:
+
+```
+{
+  "interval": 5
+}
+```
 
 ##### Output
 
@@ -331,7 +341,7 @@ Example output:
         "actor_process_command_line": "C:\\Windows\\system32\\executable.exe /c \"\"C:\\detection_test.bat\" \"",
         "actor_process_signature_status": "N/A",
         "actor_process_signature_vendor": "Microsoft WindowsMicrosoft Corporation",
-        "actor_process_image_sha256": "sodnoaidsnfpoisansoidnfsandlkjndkfjnlsjkfdnbvljhksbdfv",
+        "actor_process_image_sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
         "actor_process_image_md5": null,
         "actor_process_causality_id": null,
         "actor_causality_id": null,
@@ -410,7 +420,7 @@ Example output:
         "image_name": null,
         "container_id": null,
         "cluster_name": null,
-        "user_name": "GJCaesar"
+        "user_name": "example"
       }
     ],
     "alert_id": "1",
@@ -439,7 +449,17 @@ This trigger is used to get Incidents.
 
 ##### Input
 
-_This trigger does not contain any inputs._
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|interval|integer|None|True|Interval|None|5|
+
+Example input:
+
+```
+{
+  "interval": 5
+}
+```
 
 ##### Output
 
@@ -530,7 +550,7 @@ Example output:
 
 # Version History
 
-* 1.0.1 - Add Get File Quarantine Status action and Get Alerts trigger
+* 1.1.0 - New action Get File Quarantine Status | New trigger Get Alerts
 * 1.0.0 - Initial plugin
 
 # Links

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get File Quarantine Status"
+    DESCRIPTION = "Get quarantine status for a file"
 
 
 class Input:
@@ -38,7 +38,7 @@ class GetFileQuarantineStatusInput(insightconnect_plugin_runtime.Input):
     "file_path": {
       "type": "string",
       "title": "File Path",
-      "description": "File Path",
+      "description": "File path",
       "order": 3
     }
   },

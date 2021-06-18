@@ -37,7 +37,7 @@ class CortexXdrAPI:
                 data=e,
             )
 
-    def get_file_quarantine_status(self, file):
+    def get_file_quarantine_status(self, file: dict) -> dict:
         quarantine_status_endpoint = "/public_api/v1/quarantine/status/"
         post_body = {"request_data": {"files": [file]}}
         resp_json = self._post_to_api(quarantine_status_endpoint, post_body)
@@ -93,17 +93,50 @@ class CortexXdrAPI:
             self.logger.info(f"Taking isolation action on a single endpoint.")
             return self._isolate_endpoint(endpoints, isolation_state)
 
-    def get_alerts(self, from_time, to_time, time_field="creation_time"):
+    def get_alerts(self, from_time: int, to_time: int, time_field="creation_time") -> list[dict]:
         endpoint = "/public_api/v1/alerts/get_alerts_multi_events/"
         response_alerts_field = "alerts"
         return self._get_items_from_endpoint(endpoint, from_time, to_time, response_alerts_field, time_field)
 
-    def get_incidents(self, from_time, to_time, time_field="creation_time"):
+    def get_incidents(self, from_time: int, to_time: int, time_field="creation_time") -> list[dict]:
         endpoint = "/public_api/v1/incidents/get_incidents/"
         response_incidents_field = "incidents"
         return self._get_items_from_endpoint(endpoint, from_time, to_time, response_incidents_field, time_field)
 
-    def _get_items_from_endpoint(self, endpoint, from_time, to_time, response_item_field, time_field="creation_time"):
+    def allow_or_block_file(self, file_hash, comment, incident_id=None, block_file=True):
+        if block_file:
+            endpoint = "/public_api/v1/hash_exceptions/blocklist/"
+        else:
+            endpoint = "/public_api/v1/hash_exceptions/allowlist/"
+
+        post_body = {
+            "request_data": {
+                "hash_list": [file_hash],
+                "comment": comment,
+            }
+        }
+
+        if incident_id:
+            post_body["request_data"]["incident_id"] = incident_id
+
+        block_action = "Block" if block_file else "Allow"
+
+        self.logger.info(f"Taking {block_action} action on file: {file_hash}")
+        self.logger.info(f"Endpoint: {endpoint}")
+
+        result = self._post_to_api(endpoint, post_body)
+
+        if result.get("reply"):  # reply will be true or false
+            self.logger.info(f"{block_action} action was successful")
+            return True
+        self.logger.warning(f"{block_action} action failed")
+        self.logger.warning(f"Result: {result}")
+        return False
+
+    ###########################
+    # Private Methods
+    ###########################
+    def _get_items_from_endpoint(self, endpoint: str, from_time: int, to_time: int, response_item_field: str, time_field="creation_time") -> list[dict]:
         batch_size = 100
         search_from = 0
         search_to = search_from + batch_size
@@ -154,39 +187,6 @@ class CortexXdrAPI:
 
         return all_items
 
-    def allow_or_block_file(self, file_hash, comment, incident_id=None, block_file=True):
-        if block_file:
-            endpoint = "/public_api/v1/hash_exceptions/blocklist/"
-        else:
-            endpoint = "/public_api/v1/hash_exceptions/allowlist/"
-
-        post_body = {
-            "request_data": {
-                "hash_list": [file_hash],
-                "comment": comment,
-            }
-        }
-
-        if incident_id:
-            post_body["request_data"]["incident_id"] = incident_id
-
-        block_action = "Block" if block_file else "Allow"
-
-        self.logger.info(f"Taking {block_action} action on file: {file_hash}")
-        self.logger.info(f"Endpoint: {endpoint}")
-
-        result = self._post_to_api(endpoint, post_body)
-
-        if result.get("reply"):  # reply will be true or false
-            self.logger.info(f"{block_action} action was successful")
-            return True
-        self.logger.warning(f"{block_action} action failed")
-        self.logger.warning(f"Result: {result}")
-        return False
-
-    ###########################
-    # Private Methods
-    ###########################
     def _isolate_multiple_endpoints(self, endpoints, isolation_state):
         if isolation_state:
             api_endpoint = "/public_api/v1/endpoints/isolate/"

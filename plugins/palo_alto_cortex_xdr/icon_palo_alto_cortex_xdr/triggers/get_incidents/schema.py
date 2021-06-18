@@ -4,11 +4,12 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get Incidents"
+    DESCRIPTION = "Get incidents"
 
 
 class Input:
-    pass
+    
+    INTERVAL = "interval"
     
 
 class Output:
@@ -18,7 +19,21 @@ class Output:
 
 class GetIncidentsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "interval": {
+      "type": "integer",
+      "title": "Interval",
+      "description": "Interval",
+      "order": 1
+    }
+  },
+  "required": [
+    "interval"
+  ]
+}
     """)
 
     def __init__(self):
@@ -102,8 +117,8 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
         },
         "incident_id": {
           "type": "string",
-          "title": "Incident Id",
-          "description": "Incident id",
+          "title": "Incident ID",
+          "description": "Incident ID",
           "order": 10
         },
         "incident_name": {
