@@ -18,17 +18,18 @@ class GetDeliveredThreats(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         self.connection.client.check_authorization()
 
+        query_params = {"format": "JSON"}
+        threat_type = params.get(Input.THREAT_TYPE)
+        threat_status = params.get(Input.THREAT_STATUS)
+
+        if threat_type != "all":
+            query_params["threatType"] = threat_type
+        if threat_status != "all":
+            query_params["threatStatus"] = threat_status
+
         response = self.connection.client.siem_action(
             Endpoint.get_delivered_threats(),
-            SiemUtils.prepare_time_range(
-                params.get(Input.TIME_START),
-                params.get(Input.TIME_END),
-                {
-                    "format": "JSON",
-                    "threatStatus": params.get(Input.THREAT_STATUS),
-                    "threatType": params.get(Input.THREAT_TYPE),
-                },
-            ),
+            SiemUtils.prepare_time_range(params.get(Input.TIME_START), params.get(Input.TIME_END), query_params),
         )
         delivered_messages = response.get("messagesDelivered", [])
         if params.get(Input.SUBJECT) and delivered_messages:

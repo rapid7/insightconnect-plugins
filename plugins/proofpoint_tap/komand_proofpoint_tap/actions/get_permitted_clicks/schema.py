@@ -27,11 +27,13 @@ class GetPermittedClicksInput(insightconnect_plugin_runtime.Input):
     "threat_status": {
       "type": "string",
       "title": "Threat Status",
-      "description": "The threat statuses which will be returned in the data. If no value is specified, active and cleared threats are returned",
+      "description": "The threat statuses which will be returned in the data",
+      "default": "all",
       "enum": [
         "active",
         "cleared",
-        "falsePositive"
+        "falsePositive",
+        "all"
       ],
       "order": 4
     },
@@ -53,7 +55,10 @@ class GetPermittedClicksInput(insightconnect_plugin_runtime.Input):
       "description": "The URL for which the results will be returned. Returns all results if left empty",
       "order": 3
     }
-  }
+  },
+  "required": [
+    "threat_status"
+  ]
 }
     """)
 
