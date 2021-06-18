@@ -3,6 +3,8 @@ import time
 import secrets
 import string
 import hashlib
+from typing import List, Dict
+
 import requests
 import urllib
 
@@ -37,7 +39,7 @@ class CortexXdrAPI:
                 data=e,
             )
 
-    def get_file_quarantine_status(self, file: dict) -> dict:
+    def get_file_quarantine_status(self, file: dict) -> Dict:
         quarantine_status_endpoint = "/public_api/v1/quarantine/status/"
         post_body = {"request_data": {"files": [file]}}
         resp_json = self._post_to_api(quarantine_status_endpoint, post_body)
@@ -93,12 +95,12 @@ class CortexXdrAPI:
             self.logger.info(f"Taking isolation action on a single endpoint.")
             return self._isolate_endpoint(endpoints, isolation_state)
 
-    def get_alerts(self, from_time: int, to_time: int, time_field="creation_time") -> list[dict]:
+    def get_alerts(self, from_time: int, to_time: int, time_field="creation_time") -> List[Dict]:
         endpoint = "/public_api/v1/alerts/get_alerts_multi_events/"
         response_alerts_field = "alerts"
         return self._get_items_from_endpoint(endpoint, from_time, to_time, response_alerts_field, time_field)
 
-    def get_incidents(self, from_time: int, to_time: int, time_field="creation_time") -> list[dict]:
+    def get_incidents(self, from_time: int, to_time: int, time_field="creation_time") -> List[Dict]:
         endpoint = "/public_api/v1/incidents/get_incidents/"
         response_incidents_field = "incidents"
         return self._get_items_from_endpoint(endpoint, from_time, to_time, response_incidents_field, time_field)
@@ -138,7 +140,7 @@ class CortexXdrAPI:
     ###########################
     def _get_items_from_endpoint(
         self, endpoint: str, from_time: int, to_time: int, response_item_field: str, time_field="creation_time"
-    ) -> list[dict]:
+    ) -> List[Dict]:
         batch_size = 100
         search_from = 0
         search_to = search_from + batch_size
