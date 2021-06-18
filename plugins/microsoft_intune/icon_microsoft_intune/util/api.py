@@ -16,6 +16,40 @@ class MicrosoftIntuneAPI:
         self.logger = logger
         self.access_token = None
 
+    def add_app_to_policy(self, application_name: str, policy_name: str, device_type: str):
+        managed_app_policies = self._call_api("GET", "/deviceAppManagement/managedAppPolicies")
+        policy_id = self._filter_policy_id(managed_app_policies, policy_name)
+        managed_app_policies_with_apps = self._call_api("GET", f"deviceAppManagement/{device_type}ManagedAppProtections(\'{policy_id}\')?$expand=apps")
+        managed_app_list = self._call_api("GET", "deviceAppManagement/managedAppStatuses(\'managedAppList\')")
+        application_package_id = self._filter_app_package_id(managed_app_list, application_name)
+
+        target_apps = []
+
+        for item in managed_app_policies_with_apps["apps"]:
+            target_apps.append(
+                {
+                    "mobileAppIdentifier": {
+                        "@odata.type": item["mobileAppIdentifier"]["@odata.type"],
+                        "packageId": item["mobileAppIdentifier"]["packageId"]
+                    }
+                }
+            )
+
+        target_apps.append(
+            {
+                "mobileAppIdentifier": {
+                    "@odata.type": f"#microsoft.graph.{device_type}MobileAppIdentifier",
+                    "packageId": application_package_id
+                }
+            }
+        )
+
+        return self._call_api(
+            "POST",
+            f"deviceAppManagement/{device_type}ManagedAppProtections(\'{policy_id}\')/targetApps",
+            request_body={"apps": target_apps}
+        )
+
     def wipe_managed_device(
         self,
         managed_device_id,
@@ -214,3 +248,13 @@ class MicrosoftIntuneAPI:
             "Authorization": f"Bearer {access_token}",
             "Content-Type": "application/json",
         }
+
+    def _filter_policy_id(self, managed_app_policies, policy_name):
+        for item in managed_app_policies["value"]:
+            if item["displayName"] == policy_name:
+                return item["id"]
+
+    def _filter_app_package_id(self, managed_app_list, application_name):
+        for item in managed_app_list["content"]["appList"]:
+            if item["displayName"] == application_name and "packageId" in item["appIdentifier"]:
+                return item["appIdentifier"]["packageId"]
