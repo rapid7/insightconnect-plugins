@@ -50,6 +50,32 @@ class MicrosoftIntuneAPI:
             request_body={"apps": target_apps}
         )
 
+    def delete_app_from_policy(self, application_name: str, policy_name: str, device_type: str):
+        managed_app_policies = self._call_api("GET", "/deviceAppManagement/managedAppPolicies")
+        policy_id = self._filter_policy_id(managed_app_policies, policy_name)
+        managed_app_policies_with_apps = self._call_api("GET", f"deviceAppManagement/{device_type}ManagedAppProtections(\'{policy_id}\')?$expand=apps")
+        managed_app_list = self._call_api("GET", "deviceAppManagement/managedAppStatuses(\'managedAppList\')")
+        application_package_id = self._filter_app_package_id(managed_app_list, application_name)
+
+        target_apps = []
+
+        for item in managed_app_policies_with_apps["apps"]:
+            if item["mobileAppIdentifier"]["packageId"] != application_package_id:
+                target_apps.append(
+                    {
+                        "mobileAppIdentifier": {
+                            "@odata.type": item["mobileAppIdentifier"]["@odata.type"],
+                            "packageId": item["mobileAppIdentifier"]["packageId"]
+                        }
+                    }
+                )
+
+        return self._call_api(
+            "POST",
+            f"deviceAppManagement/{device_type}ManagedAppProtections(\'{policy_id}\')/targetApps",
+            request_body={"apps": target_apps}
+        )
+
     def wipe_managed_device(
         self,
         managed_device_id,

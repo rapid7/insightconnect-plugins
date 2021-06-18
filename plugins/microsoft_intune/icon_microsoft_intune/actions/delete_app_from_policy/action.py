@@ -1,16 +1,16 @@
 import insightconnect_plugin_runtime
-from .schema import AddAppToPolicyInput, AddAppToPolicyOutput, Input, Output, Component
+from .schema import DeleteAppFromPolicyInput, DeleteAppFromPolicyOutput, Input, Output, Component
 # Custom imports below
 
 
-class AddAppToPolicy(insightconnect_plugin_runtime.Action):
+class DeleteAppFromPolicy(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='add_app_to_policy',
+                name='delete_app_from_policy',
                 description=Component.DESCRIPTION,
-                input=AddAppToPolicyInput(),
-                output=AddAppToPolicyOutput())
+                input=DeleteAppFromPolicyInput(),
+                output=DeleteAppFromPolicyOutput())
 
     def run(self, params={}):
         return self.connection.api.delete_app_from_policy(

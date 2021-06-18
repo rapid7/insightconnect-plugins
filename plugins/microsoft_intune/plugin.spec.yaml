@@ -768,3 +768,33 @@ actions:
         description: Return true if action was successfully performed on device
         type: object
         required: false
+  delete_app_from_policy:
+    title: Delete Application from a Policy
+    description: Delete application to a policy
+    input:
+      application_name:
+        title: Application
+        description: Application name
+        type: string
+        required: true
+        example: Adobe Reader
+      policy_name:
+        title: Policy
+        description: Policy name
+        type: string
+        required: true
+        example: my-android-app-policy
+      device_type:
+        title: Device type
+        description: Device type
+        type: "string"
+        required: true
+        enum:
+          - android
+          - ios
+    output:
+      success:
+        title: Success
+        description: Return true if action was successfully performed on policy
+        type: object
+        required: false
