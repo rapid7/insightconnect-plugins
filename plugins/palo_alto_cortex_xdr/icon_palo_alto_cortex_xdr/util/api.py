@@ -136,7 +136,9 @@ class CortexXdrAPI:
     ###########################
     # Private Methods
     ###########################
-    def _get_items_from_endpoint(self, endpoint: str, from_time: int, to_time: int, response_item_field: str, time_field="creation_time") -> list[dict]:
+    def _get_items_from_endpoint(
+        self, endpoint: str, from_time: int, to_time: int, response_item_field: str, time_field="creation_time"
+    ) -> list[dict]:
         batch_size = 100
         search_from = 0
         search_to = search_from + batch_size
