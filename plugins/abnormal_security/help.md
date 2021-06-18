@@ -299,7 +299,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.1.0 - New action Get Cases | New action Get Case Details
+* 1.1.0 - New actions Get Cases and Get Case Details
 * 1.0.0 - Initial plugin
 
 # Links

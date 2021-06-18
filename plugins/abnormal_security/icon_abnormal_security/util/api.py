@@ -26,10 +26,10 @@ class AbnormalSecurityAPI:
     def get_threat_details(self, threat_guid):
         return self.send_request("GET", f"/threats/{threat_guid}")
 
-    def get_cases(self, from_date: str = None, to_date: str = None):
+    def get_cases(self, from_date: str = None, to_date: str = None) -> dict:
         return self.send_request("GET", "/cases", params=self.generate_filter_params(from_date, to_date)).get("cases")
 
-    def get_case_details(self, case_guid):
+    def get_case_details(self, case_guid: str) -> dict:
         return self.send_request("GET", f"/cases/{case_guid}")
 
     def send_request(self, method: str, path: str, params: dict = None, payload: dict = None) -> dict:
@@ -86,7 +86,7 @@ class AbnormalSecurityAPI:
     def parse_date(date: str) -> str:
         try:
             return dateparser.parse(date).isoformat()
-        except AttributeError:
+        except Exception:
             raise PluginException(
                 cause=f"Date '{date}' is not a valid date.",
                 assistance="Please verify the date and try again.",
