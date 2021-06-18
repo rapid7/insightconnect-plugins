@@ -1,8 +1,12 @@
 {
-	"spec": "0c7da6cea3f392de054c466c15366c4f",
-	"manifest": "ad9fe2609ed89d7682a17174496b79b6",
+	"spec": "9a0d1e26261d42fcf5cb0b9658d6335d",
+	"manifest": "4e569bb7970aa1feb37266d5c5b4c788",
 	"setup": "f5420c56de200a420dd3d2887049fe92",
 	"schemas": [
+		{
+			"identifier": "add_app_to_policy/schema.py",
+			"hash": "888aba981b96facc45c54507bd761b20"
+		},
 		{
 			"identifier": "antivirus_scan/schema.py",
 			"hash": "13ec3c94a55380e9466c3dd6a51d795b"

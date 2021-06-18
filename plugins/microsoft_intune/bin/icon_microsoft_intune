@@ -34,6 +34,8 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_action(actions.AddAppToPolicy())
+
             self.add_action(actions.AntivirusScan())
 
             self.add_action(actions.GetManagedApps())
