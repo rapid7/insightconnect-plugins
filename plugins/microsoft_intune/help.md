@@ -58,14 +58,14 @@ Example input:
 
 #### Delete Application from a Policy
 
-This action is used to delete application to a policy.
+This action is used to delete application from a policy.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |application_name|string|None|True|Application name|None|Adobe Reader|
-|device_type|string|None|True|Device type|['android', 'ios']|None|
+|device_type|string|None|True|Device type|['android', 'ios']|android|
 |policy_name|string|None|True|Policy name|None|my-android-app-policy|
 
 Example input:
@@ -73,6 +73,7 @@ Example input:
 ```
 {
   "application_name": "Adobe Reader",
+  "device_type": "android",
   "policy_name": "my-android-app-policy"
 }
 ```
@@ -86,6 +87,9 @@ Example input:
 Example output:
 
 ```
+{
+   "success": {}
+}
 ```
 
 #### Add Application to a Policy
@@ -97,7 +101,7 @@ This action is used to add application to a policy.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |application_name|string|None|True|Application name|None|Adobe Reader|
-|device_type|string|None|True|Device type|['android', 'ios']|None|
+|device_type|string|None|True|Device type|['android', 'ios']|android|
 |policy_name|string|None|True|Policy name|None|my-android-app-policy|
 
 Example input:
@@ -105,6 +109,7 @@ Example input:
 ```
 {
   "application_name": "Adobe Reader",
+  "device_type": "android",
   "policy_name": "my-android-app-policy"
 }
 ```
@@ -118,6 +123,9 @@ Example input:
 Example output:
 
 ```
+{
+   "success": {}
+}
 ```
 
 #### Get Managed Apps

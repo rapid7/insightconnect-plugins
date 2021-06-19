@@ -13,8 +13,10 @@ class AddAppToPolicy(insightconnect_plugin_runtime.Action):
                 output=AddAppToPolicyOutput())
 
     def run(self, params={}):
-        return self.connection.api.delete_app_from_policy(
+        response = self.connection.api.delete_app_from_policy(
             params.get(Input.APPLICATION_NAME),
             params.get(Input.POLICY_NAME),
             params.get(Input.DEVICE_TYPE)
         )
+
+        return {Output.SUCCESS: response}
