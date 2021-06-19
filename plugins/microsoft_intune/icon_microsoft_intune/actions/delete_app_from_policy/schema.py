@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Delete application to a policy"
+    DESCRIPTION = "Delete application from a policy"
 
 
 class Input:

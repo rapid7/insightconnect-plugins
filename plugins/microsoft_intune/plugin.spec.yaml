@@ -759,6 +759,7 @@ actions:
         description: Device type
         type: "string"
         required: true
+        example: android
         enum:
           - android
           - ios
@@ -770,7 +771,7 @@ actions:
         required: false
   delete_app_from_policy:
     title: Delete Application from a Policy
-    description: Delete application to a policy
+    description: Delete application from a policy
     input:
       application_name:
         title: Application
@@ -789,6 +790,7 @@ actions:
         description: Device type
         type: "string"
         required: true
+        example: android
         enum:
           - android
           - ios

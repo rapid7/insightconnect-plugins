@@ -1,5 +1,5 @@
 {
-	"spec": "39e53efe02dc5628f5ff649f0d285368",
+	"spec": "2ed9d273ce91d2be4931e62c9e480fe5",
 	"manifest": "bccde3871294ba97b118522362980434",
 	"setup": "f5420c56de200a420dd3d2887049fe92",
 	"schemas": [
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "delete_app_from_policy/schema.py",
-			"hash": "7eb4f7672ed3e13f68a7a8c90e406d0e"
+			"hash": "c08058f399cfff31b1d80cdc98f6a41c"
 		},
 		{
 			"identifier": "get_managed_apps/schema.py",
