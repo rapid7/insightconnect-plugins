@@ -23,18 +23,15 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Basic Auth username and password|None|{"username":"user1", "password":"mypassword"}|
-|url|string|None|True|Host URL E.g. http://10.0.2.2:9200|None|http://10.0.2.2:9200|
+|url|string|None|True|Elasticsearch URL|None|htpps://example.com:9243|
 |use_authentication|boolean|True|True|If the Elasticsearch host does not use authentication set this value to false|None|True|
 
 Example input:
 
 ```
 {
-  "credentials": {
-    "username": "user1",
-    "password": "mypassword"
-  },
-  "url": "http://10.0.2.2:9200",
+  "credentials": "{\"username\":\"user1\", \"password\":\"mypassword\"}",
+  "url": "htpps://example.com:9243",
   "use_authentication": true
 }
 ```
@@ -90,38 +87,22 @@ This action is used to update a document.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|_id|string|None|True|Optional ID of Indexed Document|None|001|
-|_index|string|None|True|Index to Insert Document Into|None|index001|
-|_source|string|None|False|Control If and How Source is Returned|None|meta.*|
-|_type|string|None|False|Type of Document to Index|None|_doc|
-|_version|integer|None|False|Optional Version Specification|None|1|
+|id|string|None|True|Optional ID of Indexed Document|None|001|
+|index|string|None|True|Index to Insert Document Into|None|index001|
 |parent|string|None|False|Optional Parent|None|001|
-|refresh|string|false|False|Control when Changes Become Visible|['true', 'wait_for', 'false']|false|
+|refresh|string|False|False|Control when Changes Become Visible|['true', 'wait_for', 'false']|False|
 |retry_on_conflict|integer|None|False|Optional Number of Times to Retry on Update Conflict|None|5|
 |routing|string|None|False|Optional Shard Placement|None|user1|
 |script|object|None|True|JSON Script to Modify a Document|None|{"lang": "painless"}|
+|source|string|None|False|Control If and How Source is Returned|None|meta.*|
 |timeout|string|1m|False|Custom Timeout Window|None|1m|
+|type|string|None|False|Type of Document to Index|None|_doc|
+|version|integer|None|False|Optional Version Specification|None|1|
 |wait_for_active_shards|integer|None|False|Number of Shard Copies required Before Update|None|2|
 
 Example input:
 
 ```
-{
-  "_id": "001",
-  "_index": "index001",
-  "_source": "meta.*",
-  "_type": "_doc",
-  "_version": 1,
-  "parent": "001",
-  "refresh": "false",
-  "retry_on_conflict": 5,
-  "routing": "user1",
-  "script": {
-    "lang": "painless"
-  },
-  "timeout": "1m",
-  "wait_for_active_shards": 2
-}
 ```
 
 ##### Output
@@ -157,27 +138,19 @@ This action is used to search for documents.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|_index|string|None|True|Document Index|None|shakespeare|
-|_type|string|None|False|Document Type|None|doc|
+|index|string|None|True|Document Index|None|shakespeare|
 |query|object|None|False|JSON Query DSL|None|{"query": {"match": {"line_number": {"query": "1.1.1"}}}}|
 |routing|string|None|False|Optional Shards to Search|None|user1|
+|type|string|None|False|Document Type|None|doc|
 
 Example input:
 
 ```
 {
-  "_index": "shakespeare",
-  "_type": "doc",
-  "query": {
-    "query": {
-      "match": {
-        "line_number": {
-          "query": "1.1.1"
-        }
-      }
-    }
-  },
-  "routing": "user1"
+  "index": "shakespeare",
+  "query": "{\"query\": {\"match\": {\"line_number\": {\"query\": \"1.1.1\"}}}}",
+  "routing": "user1",
+  "type": "doc"
 }
 ```
 
@@ -185,8 +158,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|_shards|_shards|False|Information About Replication Process|
 |hits|hits|False|Information About Hits|
+|shards|_shards|False|Information About Replication Process|
 |timed_out|boolean|False|Timed Out Flag|
 |took|integer|False|Duration in Milliseconds|
 
@@ -238,33 +211,28 @@ This action is used to create or replace a document by index.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|_id|string|None|False|Optional ID of Indexed Document|None|001|
-|_index|string|None|True|Index to Insert Document Into|None|index001|
-|_type|string|None|False|Type of Document to Index|None|_doc|
-|_version|integer|None|False|Optional Version Specification|None|1|
 |document|object|None|False|JSON Document to Index|None|{"firstname": "Jon", "lastname": "Doe", "gender": "M", "city": "Dante"}|
+|id|string|None|False|Optional ID of Indexed Document|None|001|
+|index|string|None|True|Index to Insert Document Into|None|index001|
 |parent|string|None|False|Optional Parent|None|001|
 |routing|string|None|False|Optional Shard Placement|None|user1|
 |timeout|string|1m|False|Custom Timeout Window|None|1m|
+|type|string|None|False|Type of Document to Index|None|_doc|
+|version|integer|None|False|Optional Version Specification|None|1|
 |version_type|string|internal|False|Optional Version Type|['internal', 'external', 'external_gt', 'external_gte']|internal|
 
 Example input:
 
 ```
 {
-  "_id": "001",
-  "_index": "index001",
-  "_type": "_doc",
-  "_version": 1,
-  "document": {
-    "firstname": "Jon",
-    "lastname": "Doe",
-    "gender": "M",
-    "city": "Dante"
-  },
+  "document": "{\"firstname\": \"Jon\", \"lastname\": \"Doe\", \"gender\": \"M\", \"city\": \"Dante\"}",
+  "id": "001",
+  "index": "index001",
   "parent": "001",
   "routing": "user1",
   "timeout": "1m",
+  "type": "_doc",
+  "version": 1,
   "version_type": "internal"
 }
 ```
@@ -304,29 +272,21 @@ This trigger is used to poll for new documents given a query.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|_index|string|None|True|Document Index|None|bank|
-|_type|string|None|False|Document Type|None|doc|
 |frequency|integer|60|False|Poll frequency in seconds|None|60|
+|index|string|None|True|Document Index|None|bank|
 |query|object|None|False|JSON Query DSL|None|{"query": {"match": {"line_number": {"query": "1.1.1"}}}}|
 |routing|string|None|False|Optional Shards to Search|None|account|
+|type|string|None|False|Document Type|None|doc|
 
 Example input:
 
 ```
 {
-  "_index": "bank",
-  "_type": "doc",
   "frequency": 60,
-  "query": {
-    "query": {
-      "match": {
-        "line_number": {
-          "query": "1.1.1"
-        }
-      }
-    }
-  },
-  "routing": "account"
+  "index": "bank",
+  "query": "{\"query\": {\"match\": {\"line_number\": {\"query\": \"1.1.1\"}}}}",
+  "routing": "account",
+  "type": "doc"
 }
 ```
 
@@ -371,6 +331,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.0 - TODO
 * 2.0.5 - Updated example inputs and outputs for all the actions
 * 2.0.4 - Correct spelling in help.md
 * 2.0.3 - Updated Search Documents action output schema

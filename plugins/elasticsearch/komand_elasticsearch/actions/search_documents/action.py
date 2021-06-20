@@ -1,35 +1,35 @@
-import komand
-from .schema import SearchDocumentsInput, SearchDocumentsOutput
+import insightconnect_plugin_runtime
+from .schema import SearchDocumentsInput, SearchDocumentsOutput, Input, Output, Component
 
 # Custom imports below
-from komand_elasticsearch.util import helpers
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class SearchDocuments(komand.Action):
+class SearchDocuments(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="search_documents",
-            description="Execute a search query and get back search hits that match the query",
+            description=Component.DESCRIPTION,
             input=SearchDocumentsInput(),
             output=SearchDocumentsOutput(),
         )
 
     def run(self, params={}):
-        host = self.connection.elastic_host
-        username = self.connection.username
-        password = self.connection.password
-        index = params.get("_index")
-        type_ = params.get("_type")
-        routing = params.get("routing")
-        query = params.get("query")
+        index = params.get(Input.INDEX)
+        type_ = params.get(Input.TYPE)
+        routing = params.get(Input.ROUTING)
+        query = params.get(Input.QUERY)
 
         params = {}
         if routing:
             params["routing"] = routing
 
-        results = helpers.get_search(self.logger, host, index, type_, query, username, password, params)
+        results = self.connection.client.search_documents(index, type_, query, params)
         if not results:
-            raise Exception("Run: Document search not run")
+            raise PluginException(
+                cause="Document search not run. ",
+                assistance="Please check provided data and try again."
+            )
 
         if not results["hits"]["max_score"]:
             results["hits"]["max_score"] = 0
@@ -39,13 +39,4 @@ class SearchDocuments(komand.Action):
                 hit["_score"] = 0
                 self.logger.info("One or most results lack a relevance score, assuming 0")
 
-        return komand.helper.clean(results)
-
-    def test(self):
-        host = self.connection.elastic_host
-        username = self.connection.username
-        password = self.connection.password
-        r = helpers.test_auth(self.logger, host, username, password)
-        if not r:
-            raise Exception("Test: Failed authentication")
-        return {}
+        return insightconnect_plugin_runtime.helper.clean(results)
