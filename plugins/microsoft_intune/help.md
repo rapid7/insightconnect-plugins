@@ -82,13 +82,13 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|object|False|Return true if action was successfully performed on policy|
+|success|boolean|True|Return true if action was successfully performed on policy|
 
 Example output:
 
 ```
 {
-   "success": {}
+   "success": true
 }
 ```
 
@@ -118,13 +118,13 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|object|False|Return true if action was successfully performed on device|
+|success|boolean|True|Return true if action was successfully performed on device|
 
 Example output:
 
 ```
 {
-   "success": {}
+   "success": true
 }
 ```
 
