@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Delete application from a policy"
+    DESCRIPTION = "Deletes application from the given policy"
 
 
 class Input:
@@ -31,7 +31,7 @@ class DeleteAppFromPolicyInput(insightconnect_plugin_runtime.Input):
     },
     "device_type": {
       "type": "string",
-      "title": "Device type",
+      "title": "Device Type",
       "description": "Device type",
       "enum": [
         "android",
