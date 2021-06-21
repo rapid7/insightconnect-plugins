@@ -39,7 +39,7 @@ class CreateAssetGroupInput(komand.Input):
     "searchCriteria": {
       "type": "object",
       "title": "Search Criteria",
-      "description": "Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria",
+      "description": "Asset group search criteria - options documentation - https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria",
       "order": 3
     },
     "type": {

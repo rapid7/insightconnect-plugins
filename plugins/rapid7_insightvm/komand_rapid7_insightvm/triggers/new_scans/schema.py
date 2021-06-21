@@ -50,13 +50,11 @@ class NewScansInput(komand.Input):
     "status_filter": {
       "type": "array",
       "title": "Status Filter",
-      "description": "List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown",
+      "description": "List of scan statuses to match for trigger; options include - Aborted, Successful, Running, Stopped, Failed, Paused, Unknown",
       "items": {
         "type": "string"
       },
-      "default": [
-        "Successful"
-      ],
+      "default": "['Successful']",
       "order": 4
     }
   },

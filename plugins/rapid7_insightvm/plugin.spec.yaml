@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM Console
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations, scan results and start scans
-version: 4.9.1
+version: 4.9.2
 vendor: rapid7
 support: rapid7
 status: []
@@ -1769,7 +1769,7 @@ actions:
         title: Hosts
         description: The hosts that should be included in the scan
         type: "[]string"
-        example: ["192.0.2.3", "192.0.2.10-192.0.2.20", "ADSRV.local"]
+        example: ["example.com", "198.51.100.1-198.51.100.10", "198.51.100.1"]
         required: false
     output:
       id:
@@ -1790,7 +1790,7 @@ actions:
         title: Scan ID
         description: ID of the scan to obtain
         type: string
-        example: "11234abc-65c8-4628-adf4-e27f36ea0e2b"
+        example: 12
         required: true
     output:
       status:
@@ -1857,7 +1857,7 @@ actions:
         title: Site ID
         description: ID of the site to get assets for
         type: string
-        example: "11234abc-65c8-4628-adf4-e27f36ea0e2b"
+        example: 12
         required: true
     output:
       assets:
@@ -1873,7 +1873,7 @@ actions:
         title: Scan ID
         description: ID of the scan to get assets for
         type: integer
-        example: 123456789
+        example: 156
         required: true
     output:
       assets:
@@ -1891,7 +1891,7 @@ actions:
         description: ID of the asset for which to find vulnerabilities
         type: string
         required: true
-        example: 234
+        example: 3190
       get_risk_score:
         title: Get Risk Score
         description: Return risk score along with other vulnerability data
@@ -1913,7 +1913,7 @@ actions:
         description: ID of the asset for which to find software
         type: string
         required: true
-        example: "234"
+        example: 3910
     output:
       software:
         title: Software
@@ -1928,13 +1928,13 @@ actions:
         title: Report ID
         description: Identifier of the report to download e.g. 265
         type: integer
-        example: 1234
+        example: 265
         required: true
       instance:
         title: Instance
         description: The identifier of the report instance, 'latest' or ID e.g. 100
         type: string
-        example: "latest"
+        example: latest
         required: true
     output:
       report:
@@ -1950,14 +1950,14 @@ actions:
         description: Name of report, otherwise all reports by criteria
         type: string
         required: false
-        example: "Name"
+        example: Rapid7 New Scan
       sort:
         description: Sort order, ascending or descending
         type: string
         enum:
         - Ascending
         - Descending
-        example: "Ascending"
+        example: Ascending
         required: true
     output:
       found:
@@ -1977,7 +1977,7 @@ actions:
         title: Vulnerability ID
         description: The identifier of the vulnerability e.g. jre-vuln-cve-2013-2471
         type: string
-        example: "jre-vuln-cve-2013-2471"
+        example: jre-vuln-cve-2013-2471
         required: true
     output:
       links:
@@ -1998,14 +1998,14 @@ actions:
         title: Name
         description: Tag name
         type: string
-        example: "example name"
+        example: Example Tag Name
         required: true
       type:
         title: Type
         description: Tag type
         type: string
         required: true
-        example: "owner"
+        example: owner
         enum:
         - owner
         - location
@@ -2016,7 +2016,7 @@ actions:
         type: string
         required: false
         default: default
-        example: "default"
+        example: default
         enum:
         - default
         - blue
@@ -2028,7 +2028,7 @@ actions:
         title: Search Criteria
         description: Tag search Criteria - options documentation https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria
         type: object
-        example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
+        example: '{"field": "risk-score","operator": "is","value": "9"}'
         required: false
     output:
       id:
@@ -2044,7 +2044,7 @@ actions:
         title: ID
         description: Tag ID
         type: integer
-        example: 1234
+        example: 665
         required: true
     output:
       links:
@@ -2061,7 +2061,7 @@ actions:
         description: Tag name regular expression by which to filter
         type: string
         required: false
-        example: "example name"
+        example: (?:high|low)
         default: ''
       type:
         title: Type
@@ -2070,7 +2070,7 @@ actions:
         type: string
         required: false
         default: ''
-        example: "owner"
+        example: owner
         enum:
         - owner
         - location
@@ -2091,7 +2091,7 @@ actions:
         title: ID
         description: Tag ID, e.g. 1
         type: integer
-        example: 1234
+        example: 1
         required: true
     output:
       tag:
@@ -2107,7 +2107,7 @@ actions:
         title: ID
         description: Tag ID for which to retrieve site associations
         type: integer
-        example: 1234
+        example: 42
         required: true
     output:
       site_ids:
@@ -2123,7 +2123,7 @@ actions:
         title: ID
         description: Tag ID to add to site
         type: integer
-        example: 1234
+        example: 69
         required: true
     output:
       assets:
@@ -2139,7 +2139,7 @@ actions:
         title: ID
         description: Tag ID for which to retrieve asset group associations
         type: integer
-        example: 1234
+        example: 69
         required: true
     output:
       asset_group_ids:
@@ -2155,13 +2155,13 @@ actions:
         title: Asset ID
         description: Asset ID from which to remove the tag
         type: integer
-        example: 12345
+        example: 21150
         required: true
       tag_id:
         title: Tag ID
         description: Tag ID to remove from the asset
         type: integer
-        example: 1234
+        example: 69
         required: true
     output:
       links:
@@ -2177,7 +2177,7 @@ actions:
         title: ID
         description: Asset group ID from which to remove all tags
         type: integer
-        example: 1234
+        example: 20
         required: true
     output:
       links:
@@ -2193,7 +2193,7 @@ actions:
         title: ID
         description: Tag ID from which to remove all asset group associations
         type: integer
-        example: 1234
+        example: 69
         required: true
     output:
       links:
@@ -2209,7 +2209,7 @@ actions:
         title: ID
         description: Tag ID from which to remove all site associations
         type: integer
-        example: 1234
+        example: 69
         required: true
     output:
       links:
@@ -2225,7 +2225,7 @@ actions:
         title: ID
         description: Tag ID from which to remove all search criteria
         type: integer
-        example: 1234
+        example: 69
         required: true
     output:
       links:
@@ -2241,13 +2241,13 @@ actions:
         title: Site ID
         description: Site ID to tag
         type: integer
-        example: 12345
+        example: 42
         required: true
       tag_id:
         title: Tag ID
         description: Tag ID to add to site
         type: integer
-        example: 1234
+        example: 69
         required: true
     output:
       links:
@@ -2263,13 +2263,13 @@ actions:
         title: Asset ID
         description: Asset ID to tag
         type: integer
-        example: 12345
+        example: 21150
         required: true
       tag_id:
         title: Tag ID
         description: Tag ID to add to site
         type: integer
-        example: 1234
+        example: 4
         required: true
     output:
       links:
@@ -2285,13 +2285,13 @@ actions:
         title: Asset Group ID
         description: Asset group ID to tag
         type: integer
-        example: 12345
+        example: 20
         required: true
       tag_id:
         title: Tag ID
         description: Tag ID to add to site
         type: integer
-        example: 1234
+        example: 69
         required: true
     output:
       links:
@@ -2307,13 +2307,13 @@ actions:
         title: ID
         description: Tag ID
         type: integer
-        example: 1234
+        example: 69
         required: true
       searchCriteria:
         title: Search Criteria
-        description: 'Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria'
+        description: Tag search criteria - options documentation - https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria
         type: object
-        example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
+        example: '{"field": "risk-score","operator": "is","value": "9"}'
         required: true
     output:
       links:
@@ -2327,9 +2327,9 @@ actions:
     input:
       searchCriteria:
         title: Search Criteria
-        description: 'Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria'
+        description: Tag search criteria - options documentation - https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria
         type: object
-        example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
+        example: '{"field": "risk-score","operator": "is","value": "9"}'
         required: true
       size:
         title: Size
@@ -2358,7 +2358,7 @@ actions:
         title: ID
         description: Get an asset by ID
         type: integer
-        example: 1234
+        example: 74708
         required: true
     output:
       asset:
@@ -2374,7 +2374,7 @@ actions:
         title: Asset ID
         description: Identifier of asset
         type: integer
-        example: 1234
+        example: 74708
         required: true
     output:
       tags:
@@ -2391,7 +2391,7 @@ actions:
         description: Site name regular expression by which to filter
         type: string
         default: ''
-        example: "example name"
+        example: example_demo_name
         required: false
     output:
       sites:
@@ -2407,7 +2407,7 @@ actions:
         title: ID
         description: Site ID
         type: integer
-        example: 1234
+        example: 39
         required: true
     output:
       site:
@@ -2423,27 +2423,27 @@ actions:
         title: Name
         description: The site name. Name must be unique
         type: string
-        example: "example name"
+        example: Unique Example Name
         required: true
       description:
         title: Description
         description: The site's description
         type: string
-        example: "example description"
+        example: Example Description
         required: false
       engine_id:
         title: Engine ID
         description: The identifier of a scan engine. Default scan engine is selected
           when not specified
         type: integer
-        example: 1234
+        example: 3
         required: false
       importance:
         title: Importance
         description: The site importance
         type: string
         required: false
-        example: "low"
+        example: normal
         enum:
         - very_low
         - low
@@ -2455,20 +2455,20 @@ actions:
         title: Scan Template ID
         description: The identifier of a scan template
         type: string
-        example: "12345-abcd"
+        example: example-template-id
         required: false
       included_addresses:
         title: Included Addresses
         description: List of addresses to include in scan scope
         type: '[]string'
-        example: ["1234-abcd", "4567-def"]
+        example: ["example3.com", "example4.com"]
         default: []
         required: false
       excluded_addresses:
         title: Excluded Addresses
         description: List of addresses to exclude in scan scope
         type: '[]string'
-        example: ["1234-abcd", "4567-def"]
+        example: ["example1.com", "example2.com"]
         default: []
         required: false
       included_asset_groups:
@@ -2476,7 +2476,7 @@ actions:
         description: Assets associated with these asset group IDs will be included
           in the site
         type: '[]integer'
-        example: [1234, 5768]
+        example: [636, 638]
         default: []
         required: false
       excluded_asset_groups:
@@ -2484,7 +2484,7 @@ actions:
         description: Assets associated with these asset group IDs will be excluded
           in the site
         type: '[]integer'
-        example: [1234, 5768]
+        example: [83, 85]
         default: []
         required: false
     output:
@@ -2506,33 +2506,33 @@ actions:
         title: Site ID
         description: The identifier of the site
         type: integer
-        example: 1234
+        example: 332
         required: true
       name:
         title: Name
         description: The site name. Name must be unique
         type: string
-        example: "example name"
+        example: Update Site Name Example
         required: true
       description:
         title: Description
         description: The site's description
         type: string
-        example: "example description"
+        example: Update Description Example
         required: true
       engine_id:
         title: Engine ID
         description: The identifier of a scan engine. Default scan engine is selected
           when not specified
         type: integer
-        example: 1234
+        example: 3
         required: true
       importance:
         title: Importance
         description: The site importance
         type: string
         required: true
-        example: "low"
+        example: normal
         enum:
         - very_low
         - low
@@ -2544,7 +2544,7 @@ actions:
         title: Scan Template ID
         description: The identifier of a scan template
         type: string
-        example: 1234
+        example: example-template-id
         required: true
     output:
       id:
@@ -2566,14 +2566,14 @@ actions:
         title: Site ID
         description: The identifier of the site
         type: integer
-        example: 1234
+        example: 332
         required: true
       included_targets:
         title: Included Targets
         description: List of addresses that represent either a hostname, IPv4 address,
           IPv4 address range, IPv6 address, or CIDR notation
         type: '[]string'
-        example: ["10.2.144", "10.8.36.144"]
+        example: ["example.com", "198.51.100.1"]
         required: false
       overwrite:
         title: Overwrite
@@ -2588,7 +2588,6 @@ actions:
         title: ID
         description: The identifier of the updated site
         type: integer
-        example: 1234
         required: true
       links:
         title: Links
@@ -2604,14 +2603,14 @@ actions:
         title: Site ID
         description: The identifier of the site
         type: integer
-        example: 1234
+        example: 332
         required: true
       excluded_targets:
         title: Excluded Targets
         description: List of addresses that represent either a hostname, IPv4 address,
           IPv4 address range, IPv6 address, or CIDR notation
         type: '[]string'
-        example: ["10.2.144", "10.8.36.144"]
+        example: ["example2.com", "198.51.100.0/24"]
         required: false
       overwrite:
         title: Overwrite
@@ -2626,7 +2625,6 @@ actions:
         title: ID
         description: The identifier of the updated site
         type: integer
-        example: 1234
         required: true
       links:
         title: Links
@@ -2641,14 +2639,14 @@ actions:
         title: Site ID
         description: The identifier of the site
         type: integer
-        example: 1234
+        example: 332
         required: true
       included_asset_groups:
         title: Included Asset Group IDs
         description: Assets associated with these asset group IDs will be included
           in the site
         type: '[]integer'
-        example: [1234, 567]
+        example: [436, 567]
         required: false
       overwrite:
         title: Overwrite
@@ -2677,14 +2675,14 @@ actions:
         title: Site ID
         description: The identifier of the site
         type: integer
-        example: 1234
+        example: 332
         required: true
       excluded_asset_groups:
         title: Excluded Asset Group IDs
         description: Assets associated with these asset group IDs will be excluded
           from the site
         type: '[]integer'
-        example: [1234, 567]
+        example: [457, 569]
         required: false
       overwrite:
         title: Overwrite
@@ -2713,7 +2711,7 @@ actions:
         title: ID
         description: Site ID
         type: integer
-        example: 1234
+        example: 322
         required: true
     output:
       links:
@@ -2730,7 +2728,7 @@ actions:
         description: Asset group name regular expression by which to filter
         type: string
         default: ''
-        example: "example name"
+        example: (?:Test Asset Group)
         required: false
     output:
       asset_groups:
@@ -2746,7 +2744,7 @@ actions:
         title: ID
         description: Asset group ID
         type: integer
-        example: 1234
+        example: 53
         required: true
     output:
       asset_group:
@@ -2762,26 +2760,26 @@ actions:
         title: Name
         description: Asset group name
         type: string
-        example: "example name"
+        example: Test Asset Group
         required: true
       description:
         title: Description
         description: Asset group description
         type: string
-        example: "example description"
+        example: Asset Group Example Description
         required: true
       searchCriteria:
         title: Search Criteria
-        description: 'Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria'
+        description: Asset group search criteria - options documentation - https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria
         type: object
-        example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
+        example: '{"field": "risk-score","operator": "is","value": "9"}'
         required: false
       type:
         title: Type
         description: Asset group type
         type: string
         required: true
-        example: "dynamic"
+        example: dynamic
         enum:
         - dynamic
         - static
@@ -2799,7 +2797,7 @@ actions:
         title: ID
         description: Asset group ID
         type: integer
-        example: 1234
+        example: 20
         required: true
     output:
       links:
@@ -2815,13 +2813,13 @@ actions:
         title: ID
         description: Asset group ID
         type: integer
-        example: 1234
+        example: 69
         required: true
       searchCriteria:
         title: Search Criteria
-        description: 'Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria'
+        description: Asset group search criteria - options documentation - https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria
         type: object
-        example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
+        example: '{"field": "risk-score","operator": "is","value": "9"}'
         required: true
     output:
       links:
@@ -2837,7 +2835,7 @@ actions:
         title: CVE ID
         description: Common Vulnerabilities and Exposures ID, e.g. CVE-2018-12345
         type: string
-        example: "CVE-2018-12345"
+        example: CVE-2008-4250
         required: true
     output:
       vulnerabilities:
@@ -2853,7 +2851,7 @@ actions:
         title: ID
         description: Site ID
         type: integer
-        example: 1234
+        example: 41
         required: false
       active:
         title: Active
@@ -2876,7 +2874,7 @@ actions:
         title: ID
         description: Scan ID
         type: integer
-        example: 1234
+        example: 1026
         required: true
       status:
         title: Status
@@ -2884,7 +2882,7 @@ actions:
         type: string
         required: true
         default: stop
-        example: "stop"
+        example: stop
         enum:
         - stop
         - resume
@@ -2921,14 +2919,14 @@ actions:
         description: Optional engine name by which to filter, accepts regular expression
           patterns
         type: string
-        example: "example name"
+        example: (?:AWS)
         required: false
       address:
         title: Address
         description: Optional address (IP/hostname) by which to filter, accepts regular
           expression patterns
         type: string
-        example: "10.4.36.120"
+        example: 198.51.100.1
         required: false
     output:
       scan_engines:
@@ -2944,7 +2942,7 @@ actions:
         title: ID
         description: Scan engine identifier
         type: integer
-        example: 1234
+        example: 4
         required: true
     output:
       scan_engine:
@@ -2960,13 +2958,13 @@ actions:
         title: Name
         description: Scan engine name
         type: string
-        example: "example name"
+        example: New Engine Scan
         required: true
       address:
         title: Address
         description: Scan engine address (IP/hostname)
         type: string
-        example: "10.4.36.120"
+        example: 198.51.100.1
         required: true
       port:
         title: Port
@@ -2980,7 +2978,7 @@ actions:
         description: List of site IDs with which to associate the engine
         type: '[]integer'
         default: []
-        example: [1234, 5678]
+        example: [186, 196]
         required: false
     output:
       id:
@@ -3001,7 +2999,7 @@ actions:
         title: ID
         description: Scan engine identifier
         type: integer
-        example: 1234
+        example: 12
         required: true
     output:
       links:
@@ -3018,7 +3016,7 @@ actions:
         description: Scan engine pool name by which to filter, accepts regular expression
           patterns
         type: string
-        example: "example name"
+        example: (?:Default Engine Pool)
         required: false
     output:
       scan_engine_pools:
@@ -3034,7 +3032,7 @@ actions:
         title: ID
         description: Scan engine pool identifier
         type: integer
-        example: 1234
+        example: 6
         required: true
     output:
       scan_engine_pool:
@@ -3050,13 +3048,13 @@ actions:
         title: Name
         description: Scan engine pool name
         type: string
-        example: "example name"
+        example: Scan Engine Pool
         required: true
       engines:
         title: Engines
         description: List of scan engine IDs to associate with the scan engine pool
         type: '[]integer'
-        example: [1234, 5678]
+        example: [2, 3]
         required: false
     output:
       id:
@@ -3078,13 +3076,13 @@ actions:
         title: Pool ID
         description: Scan engine pool ID
         type: integer
-        example: 1234
+        example: 6
         required: true
       engine_id:
         title: Engine ID
         description: Scan engine ID
         type: integer
-        example: 1234567
+        example: 5
         required: true
     output:
       links:
@@ -3100,13 +3098,13 @@ actions:
         title: Pool ID
         description: Scan engine pool ID
         type: integer
-        example: 1234
+        example: 6
         required: true
       engine_id:
         title: Engine ID
         description: Scan engine ID
         type: integer
-        example: 5678
+        example: 5
         required: true
     output:
       links:
@@ -3122,7 +3120,7 @@ actions:
         title: ID
         description: Scan engine pool identifier
         type: integer
-        example: 1234
+        example: 13
         required: true
     output:
       links:
@@ -3138,14 +3136,14 @@ actions:
         title: Site ID
         description: Identifier of the site to update
         type: integer
-        example: 1234
+        example: 272
         required: true
       engine_id:
         title: Engine ID
         description: Identifier of the scan engine/scan engine pool to associate with
           the site
         type: integer
-        example: 5678
+        example: 3
         required: true
     output:
       links:
@@ -3162,7 +3160,7 @@ actions:
         description: Authentication source name by which to filter, accepts regular
           expression patterns
         type: string
-        example: "example name"
+        example: (?:OpenLDAP)
         required: false
       type:
         title: Type
@@ -3170,7 +3168,7 @@ actions:
         type: string
         required: false
         default: ''
-        example: "admin"
+        example: ldap
         enum:
         - ''
         - admin
@@ -3192,7 +3190,7 @@ actions:
         title: ID
         description: Authentication source ID
         type: integer
-        example: 1234
+        example: 1
         required: true
     output:
       authentication_source:
@@ -3208,7 +3206,7 @@ actions:
         title: Name
         description: Role name by which to filter, accepts regular expression patterns
         type: string
-        example: "example name"
+        example: (custom)
         required: false
     output:
       roles:
@@ -3224,7 +3222,7 @@ actions:
         title: ID
         description: Role ID, e.g 'global-admin'
         type: string
-        example: "global-admin"
+        example: global-admin
         required: true
     output:
       role:
@@ -3241,14 +3239,14 @@ actions:
         description: User account name by which to filter, accepts regular expression
           patterns
         type: string
-        example: "example name"
+        example: Example Name
         required: false
       login:
         title: Login
         description: User account login name by which to filter, accepts regular expression
           patterns
         type: string
-        example: "account"
+        example: Example.*
         required: false
     output:
       users:
@@ -3264,7 +3262,7 @@ actions:
         title: ID
         description: User account ID
         type: integer
-        example: 1234
+        example: 1
         required: true
     output:
       user:
@@ -3283,7 +3281,7 @@ actions:
           by Authentication Type. If Authentication ID is omitted, then one source
           of the specified Authentication Type is selected
         type: integer
-        example: 1234
+        example: 1
         required: false
       authentication_type:
         title: Authentication Type
@@ -3292,7 +3290,7 @@ actions:
         type: string
         required: true
         default: ldap
-        example: "ldap"
+        example: ldap
         enum:
         - kerberos
         - ldap
@@ -3301,7 +3299,7 @@ actions:
         title: Email
         description: The email address of the user
         type: string
-        example: "example@gmail.com"
+        example: user@example.com
         required: true
       enabled:
         title: Enabled
@@ -3314,13 +3312,13 @@ actions:
         title: Login
         description: The login name of the user
         type: string
-        example: "jdoe24"
+        example: Example Login
         required: true
       name:
         title: Name
         description: The full name of the user
         type: string
-        example: "John Doe"
+        example: Example Name
         required: true
       access_all_asset_groups:
         title: Access All Asset Groups
@@ -3341,7 +3339,7 @@ actions:
         description: The identifier of the role to which the user should be assigned,
           e.g 'global-admin'
         type: string
-        example: "global-admin"
+        example: global-admin
         required: true
     output:
       links:
@@ -3362,7 +3360,7 @@ actions:
         title: ID
         description: The identifier of the user
         type: integer
-        example: 1234
+        example: 83
         required: true
       authentication_id:
         title: Authentication ID
@@ -3371,7 +3369,7 @@ actions:
           by Authentication Type. If Authentication ID is omitted, then one source
           of the specified Authentication Type is selected
         type: integer
-        example: 567
+        example: 1
         required: false
       authentication_type:
         title: Authentication Type
@@ -3380,7 +3378,7 @@ actions:
         type: string
         required: true
         default: ldap
-        example: "ldap"
+        example: ldap
         enum:
         - normal
         - admin
@@ -3391,7 +3389,7 @@ actions:
         title: Email
         description: The email address of the user
         type: string
-        example: "example@gmail.com"
+        example: user@example.com
         required: true
       enabled:
         title: Enabled
@@ -3404,13 +3402,13 @@ actions:
         title: Login
         description: The login name of the user
         type: string
-        example: "jdoe24"
+        example: Example Login
         required: true
       name:
         title: Name
         description: The full name of the user
         type: string
-        example: "John Doe"
+        example: Example Name
         required: true
       access_all_asset_groups:
         title: Access All Asset Groups
@@ -3431,7 +3429,7 @@ actions:
         description: The identifier of the role to which the user should be assigned,
           e.g 'global-admin'
         type: string
-        example: "global-admin"
+        example: global-admin
         required: true
     output:
       links:
@@ -3447,7 +3445,7 @@ actions:
         title: ID
         description: The identifier of the user account
         type: integer
-        example: 1234
+        example: 83
         required: true
     output:
       links:
@@ -3463,7 +3461,7 @@ actions:
         title: ID
         description: The identifier of the user account
         type: integer
-        example: 1234
+        example: 83
         required: true
     output:
       links:
@@ -3479,7 +3477,7 @@ actions:
         title: ID
         description: The identifier of the user account
         type: integer
-        example: 1234
+        example: 83
         required: true
     output:
       links:
@@ -3495,7 +3493,7 @@ actions:
         title: User ID
         description: The identifier of the user account
         type: integer
-        example: 1234
+        example: 83
         required: true
       access_all_asset_groups:
         title: Access All Asset Groups
@@ -3516,7 +3514,7 @@ actions:
         description: The identifier of the role to which the user should be assigned,
           e.g 'global-admin'
         type: string
-        example: "global-admin"
+        example: global-admin
         required: true
     output:
       links:
@@ -3533,14 +3531,14 @@ actions:
         title: User ID
         description: The identifier of the user account
         type: integer
-        example: 1234
+        example: 83
         required: true
       asset_group_ids:
         title: Asset Group IDs
         description: The identifiers of the asset groups to which the user account
           should be granted access, ignored if the user has access to all asset groups
         type: '[]integer'
-        example: [1234, 5678]
+        example: [657, 678]
         required: true
     output:
       links:
@@ -3556,13 +3554,13 @@ actions:
         title: User ID
         description: The identifier of the user account
         type: integer
-        example: 1234
+        example: 83
         required: true
       asset_group_id:
         title: Asset Group ID
         description: The identifier of the asset group
         type: integer
-        example: 5678
+        example: 657
         required: true
     output:
       links:
@@ -3578,13 +3576,13 @@ actions:
         title: User ID
         description: The identifier of the user account
         type: integer
-        example: 1234
+        example: 83
         required: true
       asset_group_id:
         title: Asset Group ID
         description: The identifier of the asset group
         type: integer
-        example: 4567
+        example: 657
         required: true
     output:
       links:
@@ -3601,14 +3599,14 @@ actions:
         title: User ID
         description: The identifier of the user account
         type: integer
-        example: 1234
+        example: 83
         required: true
       site_ids:
         title: Site IDs
         description: The identifiers of the sites to which the user account should
           be granted access, ignored if the user has access to all sites
         type: '[]integer'
-        example: [1234, 567]
+        example: [657, 767]
         required: true
     output:
       links:
@@ -3624,13 +3622,13 @@ actions:
         title: User ID
         description: The identifier of the user account
         type: integer
-        example: 1234
+        example: 83
         required: true
       site_id:
         title: Site ID
         description: The identifier of the site
         type: integer
-        example: 4567
+        example: 156
         required: true
     output:
       links:
@@ -3646,13 +3644,13 @@ actions:
         title: User ID
         description: The identifier of the user account
         type: integer
-        example: 1234
+        example: 83
         required: true
       site_id:
         title: Site ID
         description: The identifier of the site
         type: integer
-        example: 4567
+        example: 156
         required: true
     output:
       links:
@@ -3670,7 +3668,7 @@ actions:
         type: integer
         required: true
         default: 25
-        example: 10
+        example: 25
         enum:
           - 10
           - 25
@@ -3682,7 +3680,7 @@ actions:
         type: string
         required: true
         default: none
-        example: "none"
+        example: none
         enum:
           - none
           - assets
@@ -3695,7 +3693,7 @@ actions:
         description: Scope IDs for which tickets should be generated, by default all are included
         type: '[]integer'
         required: false
-        example: [1234, 45]
+        example: [657, 745]
         default: []
       asset_limit:
         title: Asset Limit
@@ -3731,7 +3729,7 @@ actions:
         type: string
         required: true
         default: none
-        example: "none"
+        example: none
         enum:
           - none
           - assets
@@ -3744,14 +3742,14 @@ actions:
         description: Scope IDs for which tickets should be generated, by default all are included
         type: '[]integer'
         required: false
-        example: [1234, 5678]
+        example: [657, 745]
         default: []
       filters:
         title: Report Filters
         description: Filters in JSON format to be applied to the contents of the report; review InsightVM API documentation for filter options
         type: string
         required: false
-        example: "{filters}"
+        example: '{"field": "risk-score","operator": "is","value": "9"}'
         default: '{}'
     output:
       report:
@@ -3767,14 +3765,14 @@ actions:
         title: Exception ID
         description: The vulnerability exception ID to approve or reject
         type: integer
-        example: 1234
+        example: 35
         required: true
       review:
         title: Review Outcome
         description: Approval or rejection of the exception
         type: string
         required: true
-        example: "Approved"
+        example: Approved
         enum:
         - Approved
         - Rejected
@@ -3782,7 +3780,7 @@ actions:
         title: Review Comment
         description: Comment to include in the review
         type: string
-        example: "example comment"
+        example: Approved Review Example Comment
         required: false
     output:
       links:
@@ -3798,7 +3796,7 @@ actions:
         title: Exception ID
         description: Vulnerability exception ID to delete
         type: integer
-        example: 1234
+        example: 32
         required: true
     output:
       links:
@@ -3815,7 +3813,7 @@ actions:
         description: The type of vulnerability exception to create
         type: string
         required: true
-        example: "Global"
+        example: Global
         enum:
         - Global
         - Site
@@ -3826,13 +3824,13 @@ actions:
         title: Vulnerability
         description: The vulnerability this exception applies to
         type: string
-        example: "vulnerability"
+        example: Malware Kits
         required: true
       scope:
         title: Scope ID
         description: The ID of the scope the vulnerability exception applies to.  May be empty if type is Global
         type: integer
-        example: 1234
+        example: 156
         required: false
       expiration:
         title: Expiration
@@ -3845,14 +3843,14 @@ actions:
         description: Comment to include in the vulnerability exception submission
         type: string
         required: true
-        example: "example comment"
+        example: Exception created with InsightConnect
         default: Exception created with InsightConnect
       reason:
         title: Reason
         description: Reason for the exception
         type: string
         required: true
-        example: "False Positive"
+        example: False Positive
         enum:
         - False Positive
         - Compensating Control
@@ -3863,7 +3861,7 @@ actions:
         title: Vulnerability Key
         description: The key to identify a specific instance if the type is Instance
         type: string
-        example: "9de5069c5afe602b2ea0a04b66beb2c0"
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
         required: false
       port:
         title: Vulnerability Port
@@ -3890,7 +3888,7 @@ actions:
         title: Vulnerability ID
         description: The identifier of the vulnerability to retrieve from InsightVM
         type: string
-        example: "1234-abcd"
+        example: apple-itunes-obsolete
         required: true
     output:
       vulnerability:
@@ -3906,7 +3904,7 @@ actions:
         title: Asset Group ID
         description: Asset group ID
         type: integer
-        example: 1234
+        example: 1
         required: true
     output:
       links:
@@ -3927,7 +3925,7 @@ actions:
         title: ID
         description: Asset ID
         type: integer
-        example: 1234
+        example: 156
         required: true
     output:
       success:
@@ -3952,7 +3950,7 @@ actions:
         type: number
         required: false
         default: 500
-        example: 100
+        example: 500
     output:
       assets:
         title: Assets
@@ -3985,7 +3983,7 @@ actions:
         description: Asset ID
         type: integer
         required: true
-        example: 42
+        example: 156
       date:
         title: Date
         description: Expiration date. e.g. 2020-02-24T06:59:59.999Z
@@ -3998,7 +3996,6 @@ actions:
         description: Was operation successful
         type: boolean
         required: true
-        example: True
   asset_vulnerability_solution:
     title: Get Asset Vulnerability Solutions
     description: Returns the highest-superceding rollup solutions for a list of vulnerabilities on an asset
@@ -4008,13 +4005,13 @@ actions:
         description: The identifier of the asset
         type: string
         required: true
-        example: 423
+        example: 234
       vulnerability_ids:
         title: Vulnerability IDs
         description: A list of identifiers of the vulnerabilities
         type: "[]string"
         required: true
-        example: ["flash_player-cve-2017-11305"]
+        example: ["adobe-flash-windows-upgrade-latest"]
     output:
       vulnerabilities_solution:
         title: Solutions for Vulnerabilities
@@ -4039,7 +4036,7 @@ triggers:
         description: Regular expression to match sites where new scans should be triggered
         type: string
         required: true
-        example: "example name"
+        example: .*
         default: .*
       most_recent_scan:
         title: Most Recent Scan Only
@@ -4050,11 +4047,11 @@ triggers:
         default: true
       status_filter:
         title: Status Filter
-        description: 'List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown'
+        description: List of scan statuses to match for trigger; options include - Aborted, Successful, Running, Stopped, Failed, Paused, Unknown
         type: '[]string'
         required: false
-        example: ['Successful']
-        default: ['Successful']
+        example: "['Successful']"
+        default: "['Successful']"
     output:
       scan:
         title: Scan
@@ -4074,11 +4071,11 @@ triggers:
         default: 5
       status_filter:
         title: Status Filter
-        description: 'List of vulnerability statuses to match against. Options include: Under Review and Approved'
+        description: List of vulnerability statuses to match against. Options include - Under Review and Approved
         type: '[]string'
         required: false
-        example: ['Under Review']
-        default: ['Under Review']
+        example: "['Under Review']"
+        default: "['Under Review']"
     output:
       exception:
         title: Vulnerability Exception

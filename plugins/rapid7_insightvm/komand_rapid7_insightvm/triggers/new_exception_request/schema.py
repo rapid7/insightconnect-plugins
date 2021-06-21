@@ -34,13 +34,11 @@ class NewExceptionRequestInput(komand.Input):
     "status_filter": {
       "type": "array",
       "title": "Status Filter",
-      "description": "List of vulnerability statuses to match against. Options include: Under Review and Approved",
+      "description": "List of vulnerability statuses to match against. Options include - Under Review and Approved",
       "items": {
         "type": "string"
       },
-      "default": [
-        "Under Review"
-      ],
+      "default": "['Under Review']",
       "order": 2
     }
   },

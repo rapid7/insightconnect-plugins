@@ -31,7 +31,7 @@ class UpdateTagSearchCriteriaInput(komand.Input):
     "searchCriteria": {
       "type": "object",
       "title": "Search Criteria",
-      "description": "Tag search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria",
+      "description": "Tag search criteria - options documentation - https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria",
       "order": 2
     }
   },
