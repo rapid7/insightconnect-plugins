@@ -17,8 +17,7 @@ class TestDomain(TestCase):
         # This test is greatly reduced as this plugin runs differently in linux vs OS, so when the tests work
         # the plugin doesn't, and when the plugin works the tests do not. In order to keep the actual plugin
         # working, the tests currently check very little.
-        # To make this test work, add "whois == {latest-version}" to requirements.txt and change domain/action.py
-        # line 40 to "serializable_results = lookup_results.__dict__"
+        # To make this test work, change domain/action.py line 40 to "serializable_results = lookup_results.__dict__"
 
         # working_params = {"domain": "rapid7.com"}
         # results = test_action.run(working_params)
