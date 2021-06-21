@@ -64,9 +64,17 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|True|Hypermedia links to corresponding or related resources|
 
-Example output:
+Example Output:
 
 ```
+{
+  "links": [
+    {
+      "href": "https://insightvm:3780/api/3/users/83/sites",
+      "rel": "User Asset Groups"
+    }
+  ]
+}
 ```
 
 #### Get Asset Vulnerability Solutions
@@ -1103,7 +1111,11 @@ Example input:
 
 ```
 {
-  "filters": "{\"field\": \"risk-score\",\"operator\": \"is\",\"value\": \"9\"}",
+  "filters": {
+    "field": "risk-score",
+    "operator": "is",
+    "value": "9"
+  },
   "query": "select * from dim_asset",
   "scope": "none",
   "scope_ids": [
@@ -1351,7 +1363,11 @@ Example input:
 {
   "color": "default",
   "name": "Example Tag Name",
-  "searchCriteria": "{\"field\": \"risk-score\",\"operator\": \"is\",\"value\": \"9\"}",
+  "searchCriteria": {
+    "field": "risk-score",
+    "operator": "is",
+    "value": "9"
+  },
   "type": "owner"
 }
 ```
@@ -2030,7 +2046,11 @@ Example input:
 ```
 {
   "id": 69,
-  "searchCriteria": "{\"field\": \"risk-score\",\"operator\": \"is\",\"value\": \"9\"}"
+  "searchCriteria": {
+    "field": "risk-score",
+    "operator": "is",
+    "value": "9"
+  }
 }
 ```
 
@@ -2069,7 +2089,11 @@ Example input:
 
 ```
 {
-  "searchCriteria": "{\"field\": \"risk-score\",\"operator\": \"is\",\"value\": \"9\"}",
+  "searchCriteria": {
+    "field": "risk-score",
+    "operator": "is",
+    "value": "9"
+  },
   "size": 100,
   "sort_criteria": "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
 }
@@ -2235,7 +2259,11 @@ Example input:
 {
   "description": "Asset Group Example Description",
   "name": "Test Asset Group",
-  "searchCriteria": "{\"field\": \"risk-score\",\"operator\": \"is\",\"value\": \"9\"}",
+  "searchCriteria": {
+    "field": "risk-score",
+    "operator": "is",
+    "value": "9"
+  },
   "type": "dynamic"
 }
 ```
@@ -2391,12 +2419,12 @@ Example input:
 
 ```
 {
-  "description": "Update Description Example",
-  "engine_id": 3,
   "id": 332,
-  "importance": "normal",
-  "name": "Update Site Name Example",
-  "scan_template_id": "example-template-id"
+  "included_targets": [
+    "example.com",
+    "198.51.100.1"
+  ] 
+  "overwrite": true
 }
 ```
 
@@ -2437,12 +2465,12 @@ Example input:
 
 ```
 {
-  "description": "Update Description Example",
-  "engine_id": 3,
+  "excluded_targets": [
+    "example2.com",
+    "198.51.100.0/24"
+  ],
   "id": 332,
-  "importance": "normal",
-  "name": "Update Site Name Example",
-  "scan_template_id": "example-template-id"
+  "overwrite": true
 }
 ```
 
@@ -2529,12 +2557,12 @@ Example input:
 
 ```
 {
-  "description": "Update Description Example",
-  "engine_id": 3,
+  "excluded_asset_groups": [
+    457,
+    569
+  ],
   "id": 332,
-  "importance": "normal",
-  "name": "Update Site Name Example",
-  "scan_template_id": "example-template-id"
+  "overwrite": true
 }
 ```
 
@@ -2797,7 +2825,11 @@ Example input:
 ```
 {
   "id": 69,
-  "searchCriteria": "{\"field\": \"risk-score\",\"operator\": \"is\",\"value\": \"9\"}"
+  "searchCriteria": {
+    "field": "risk-score",
+    "operator": "is",
+    "value": "9"
+  }
 }
 ```
 
@@ -3935,13 +3967,11 @@ Example input:
 
 ```
 {
-  "address": "198.51.100.1",
-  "name": "New Engine Scan",
-  "port": 40814,
-  "sites": [
-    186,
-    196
-  ]
+  "engines": [
+    2,
+    3
+  ],
+  "name": "New Engine Scan"
 }
 ```
 
@@ -4101,12 +4131,8 @@ Example input:
 
 ```
 {
-  "description": "Update Description Example",
   "engine_id": 3,
-  "id": 332,
-  "importance": "normal",
-  "name": "Update Site Name Example",
-  "scan_template_id": "example-template-id"
+  "site_id": 332
 }
 ```
 
@@ -4385,7 +4411,8 @@ Example input:
 
 ```
 {
-  "id": 1
+  "name": "(?:OpenLDAP)",
+  "type": "ldap"
 }
 ```
 
@@ -4481,7 +4508,7 @@ Example input:
 
 ```
 {
-  "id": "global-admin"
+  "name": "(custom)"
 }
 ```
 
@@ -4661,7 +4688,8 @@ Example input:
 
 ```
 {
-  "id": 1
+  "login": "Example.*",
+  "name": "Example Name"
 }
 ```
 
