@@ -22,3 +22,10 @@ class TestDomain(TestCase):
         # working_params = {"domain": "rapid7.com"}
         # results = test_action.run(working_params)
         # self.assertNotEqual({}, results, "returns non - empty results")
+
+        params = {
+            "domain": "google.com"
+        }
+
+        result = test_action.run(params)
+        self.assertIsNotNone(result)

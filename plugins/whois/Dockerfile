@@ -12,9 +12,10 @@ ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD . /python/src
 
 WORKDIR /python/src
+
 # Add any package dependencies here
-RUN apt-get update && apt-get install -y whois git
-RUN pip install git+https://github.com/komand/python-whois.git@0.6.13
+RUN apt-get update && apt-get install -y git whois
+# RUN pip install git+https://github.com/komand/python-whois.git@0.6.13
 
 # End package dependencies
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
