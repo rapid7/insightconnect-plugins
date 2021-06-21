@@ -4,7 +4,7 @@ products: [insightconnect]
 name: microsoft_intune
 title: Microsoft Intune
 description: Microsoft cloud-based management solution that provides for mobile device and operating system management
-version: 1.3.0
+version: 1.4.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -740,7 +740,7 @@ actions:
         required: false
   add_app_to_policy:
     title: Add Application to a Policy
-    description: Add application to a policy
+    description: Adds application to the given policy
     input:
       application_name:
         title: Application
@@ -755,9 +755,9 @@ actions:
         required: true
         example: my-android-app-policy
       device_type:
-        title: Device type
-        description: Device type
-        type: "string"
+        title: Device Type
+        description: Device platform type
+        type: string
         required: true
         example: android
         enum:
@@ -769,10 +769,9 @@ actions:
         description: Return true if action was successfully performed on device
         type: boolean
         required: true
-        example: true
   delete_app_from_policy:
-    title: Delete Application from a Policy
-    description: Delete application from a policy
+    title: Delete Application from Policy
+    description: Deletes application from the given policy
     input:
       application_name:
         title: Application
@@ -787,9 +786,9 @@ actions:
         required: true
         example: my-android-app-policy
       device_type:
-        title: Device type
+        title: Device Type
         description: Device type
-        type: "string"
+        type: string
         required: true
         example: android
         enum:
@@ -801,4 +800,3 @@ actions:
         description: Return true if action was successfully performed on policy
         type: boolean
         required: true
-        example: true

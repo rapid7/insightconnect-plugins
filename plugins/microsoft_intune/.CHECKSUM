@@ -1,11 +1,11 @@
 {
-	"spec": "8eb81c0a3244ceed501a5df42116a49e",
-	"manifest": "bccde3871294ba97b118522362980434",
-	"setup": "f5420c56de200a420dd3d2887049fe92",
+	"spec": "c1b2a706c82dc593ce80c3bf9540b29e",
+	"manifest": "fd1ef9271ccb382a8dbb58541346e434",
+	"setup": "99f3f88951bd1b7d4df8a47b5a5c47e7",
 	"schemas": [
 		{
 			"identifier": "add_app_to_policy/schema.py",
-			"hash": "8005fb0d2c75c77fc32e1828a1a536ee"
+			"hash": "41c3504c249571d50f374f5034383403"
 		},
 		{
 			"identifier": "antivirus_scan/schema.py",
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "delete_app_from_policy/schema.py",
-			"hash": "51d03863666fb7db0082b8e8a92a26de"
+			"hash": "2195421a77d67a23568fdcb8cbdc98ae"
 		},
 		{
 			"identifier": "get_managed_apps/schema.py",

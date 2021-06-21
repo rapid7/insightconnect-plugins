@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add application to a policy"
+    DESCRIPTION = "Adds application to the given policy"
 
 
 class Input:
@@ -31,8 +31,8 @@ class AddAppToPolicyInput(insightconnect_plugin_runtime.Input):
     },
     "device_type": {
       "type": "string",
-      "title": "Device type",
-      "description": "Device type",
+      "title": "Device Type",
+      "description": "Device platform type",
       "enum": [
         "android",
         "ios"
