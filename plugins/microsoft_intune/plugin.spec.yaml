@@ -767,8 +767,9 @@ actions:
       success:
         title: Success
         description: Return true if action was successfully performed on device
-        type: object
-        required: false
+        type: boolean
+        required: true
+        example: true
   delete_app_from_policy:
     title: Delete Application from a Policy
     description: Delete application from a policy
@@ -798,5 +799,6 @@ actions:
       success:
         title: Success
         description: Return true if action was successfully performed on policy
-        type: object
-        required: false
+        type: boolean
+        required: true
+        example: true

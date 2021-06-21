@@ -65,12 +65,15 @@ class AddAppToPolicyOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "success": {
-      "type": "object",
+      "type": "boolean",
       "title": "Success",
       "description": "Return true if action was successfully performed on device",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "success"
+  ]
 }
     """)
 

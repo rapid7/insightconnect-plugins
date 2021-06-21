@@ -19,4 +19,7 @@ class DeleteAppFromPolicy(insightconnect_plugin_runtime.Action):
             params.get(Input.DEVICE_TYPE)
         )
 
-        return {Output.SUCCESS: response}
+        if not response:
+            return {Output.SUCCESS: True}
+
+        return {Output.SUCCESS: False}
