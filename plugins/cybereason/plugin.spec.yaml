@@ -512,7 +512,7 @@ actions:
         example: 198.51.100.100
       quarantine_state:
         title: Quarantine State
-        description: True to quarantine the sensor, false to unquarantine it
+        description: True to isolate the sensor, false to un-isolate it
         type: boolean
         required: true
         default: true

@@ -33,7 +33,7 @@ class IsolateMachineInput(insightconnect_plugin_runtime.Input):
     "quarantine_state": {
       "type": "boolean",
       "title": "Quarantine State",
-      "description": "True to quarantine the sensor, false to unquarantine it",
+      "description": "True to isolate the sensor, false to un-isolate it",
       "default": true,
       "order": 2
     },

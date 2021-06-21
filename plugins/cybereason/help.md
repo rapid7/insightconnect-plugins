@@ -138,7 +138,7 @@ This action is used to isolate a machine associated with the root cause of a Mal
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |malop_id|string|None|False|Malop ID to associate with the quarantine action|None|22.2787422324806222966|
-|quarantine_state|boolean|True|True|True to quarantine the sensor, false to unquarantine it|None|True|
+|quarantine_state|boolean|True|True|True to isolate the sensor, false to un-isolate it|None|True|
 |sensor|string|None|True|Sensor ID, hostname or IP address of the sensor to perform the action on|None|198.51.100.100|
 
 Example input:
@@ -162,9 +162,8 @@ Example output:
 
 ```
 {
-  "response": {
-    "PYLUMCLIENT_INTEGRATION_GDDA11-11_2222170222FC": "Succeeded"
-  }
+  "machine_id": "PYLUMCLIENT_EXAMPLE_EXAMPLE_HOSTNAME-WINS_000C29D6CBF7",
+  "success": true
 }
 ```
 
