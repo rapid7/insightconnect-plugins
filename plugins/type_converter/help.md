@@ -440,7 +440,7 @@ This action converts a string to a boolean. Case-insensitive true -> True, else 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|input|string|None|True|Input variable|None|True|
+|input|string|None|True|Input variable|None|true|
 
 Example input:
 
@@ -505,7 +505,7 @@ This action converts a string to an integer.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |input|string|None|True|Input variable|None|123|
-|strip|boolean|None|False|Strip whitespace|None|true|
+|strip|boolean|None|False|Strip whitespace|None|True|
 
 Example input:
 
