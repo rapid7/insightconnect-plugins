@@ -6,13 +6,24 @@ Describe the proposed changes:
 
   -
 
-### Testing
-
-Any testing information goes here.
-
 ## PR Requirements
 
 Developers, verify you have completed the following items by checking them off:
+
+### Testing
+
+#### Unit Tests
+
+Review our documentation on [generating](https://docs.rapid7.com/insightconnect/unit-test-generation) and [writing](https://docs.rapid7.com/insightconnect/unit-test-primer) plugin unit tests
+
+- [ ] Unit tests written for any new or updated code
+
+#### In-Product Tests
+
+If you are an InsightConnect customer or have access to an InsightConnect instance, the following in-product tests should be done:
+
+- [ ] Screenshot of job output with the plugin changes
+- [ ] Screenshot of the changed connection, actions, or triggers input within the InsightConnect workflow builder
 
 ### Style
 
@@ -45,7 +56,5 @@ You must validate your work to reviewers:
 
 1. Run `make validate` and make sure everything passes
 2. Run the assessment tool: `icon-plugin run -A -R all -T all`. For single action validation: `icon-plugin run -A -R tests/my_action.json -T tests/my_action.json`
-3. Copy (`icon-plugin ... | pbcopy`) and paste the output in **a new post** on this PR.
-4. Add UI screenshot of the workflow used for testing
-5. Add UI screenshot of the job output used for testing
-6. Add UI screenshot of the artifact (See rules in UI Checklist) used for testing
+3. Copy (`icon-plugin ... | pbcopy`) and paste the output in **a new post** on this PR
+4. Add required screenshots from the In-Product Tests section
