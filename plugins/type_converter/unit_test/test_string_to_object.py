@@ -18,19 +18,19 @@ class TestStringToObject(TestCase):
 
         working_params = {"input": '{"object": ["rapid", "7"],"rapid7": "value"}'}
         results = test_action.run(working_params)
-        expected = {'output': {'object': ['rapid', '7'], 'rapid7': 'value'}}
+        expected = {"output": {"object": ["rapid", "7"], "rapid7": "value"}}
 
         self.assertNotEqual({}, results, "returns non - empty results")
         self.assertEqual(expected, results)
 
         working_params = {"input": '{"rapid7": "value"}'}
         results = test_action.run(working_params)
-        expected = {'output': {'rapid7': 'value'}}
+        expected = {"output": {"rapid7": "value"}}
         self.assertEqual(expected, results)
 
         working_params = {"input": '{"name":"Doe", "age":100, "city":"El Dorado"}'}
         results = test_action.run(working_params)
-        expected = {'output': {"name": "Doe", "age": 100, "city": "El Dorado"}}
+        expected = {"output": {"name": "Doe", "age": 100, "city": "El Dorado"}}
         self.assertEqual(expected, results)
 
         with self.assertRaises(PluginException):
@@ -38,7 +38,7 @@ class TestStringToObject(TestCase):
             test_action.run(working_params)
 
         with self.assertRaises(PluginException):
-            working_params = {'this is a string'}
+            working_params = {"this is a string"}
             test_action.run(working_params)
 
         with self.assertRaises(PluginException):

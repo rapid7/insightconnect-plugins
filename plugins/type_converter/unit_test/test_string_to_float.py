@@ -23,29 +23,29 @@ class TestStringToFloat(TestCase):
         self.assertNotEqual({}, results, "returns non - empty results")
         self.assertEqual(expected, results)
 
-        working_params = {"input": '1'}
+        working_params = {"input": "1"}
         results = test_action.run(working_params)
-        expected = {'output': 1}
+        expected = {"output": 1}
         self.assertEqual(expected, results)
 
-        working_params = {"input": '0'}
+        working_params = {"input": "0"}
         results = test_action.run(working_params)
-        expected = {'output': 0}
+        expected = {"output": 0}
         self.assertEqual(expected, results)
 
-        working_params = {"input": '3.14159265359'}
+        working_params = {"input": "3.14159265359"}
         results = test_action.run(working_params)
-        expected = {'output': 3.14159265359}
+        expected = {"output": 3.14159265359}
         self.assertEqual(expected, results)
 
         with self.assertRaises(PluginException):
-            working_params = {'this is a string'}
+            working_params = {"this is a string"}
             test_action.run(working_params)
 
         with self.assertRaises(PluginException):
-            working_params = {"input": 'twenty'}
+            working_params = {"input": "twenty"}
             test_action.run(working_params)
 
         with self.assertRaises(PluginException):
-            working_params = {'123.456'}
+            working_params = {"123.456"}
             test_action.run(working_params)
