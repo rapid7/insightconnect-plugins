@@ -40,7 +40,7 @@ Example input:
 
 #### Add User Asset Group Access
 
-This action is used to grant an user account access to an asset group by ID.
+This action is used to grant a user account access to an asset group by ID.
 
 ##### Input
 
@@ -92,7 +92,10 @@ Example input:
 
 ```
 {
-  "id": 74708
+  "asset_id": 234,
+  "vulnerability_ids": [
+    "adobe-flash-windows-upgrade-latest"
+  ]
 }
 ```
 
@@ -868,7 +871,7 @@ Example input:
 
 ```
 {
-  "id": 74708
+  "asset_id": 3910
 }
 ```
 
@@ -1625,7 +1628,7 @@ Example input:
 
 ```
 {
-  "id": 1
+  "id": 42
 }
 ```
 
@@ -1659,7 +1662,7 @@ Example input:
 
 ```
 {
-  "id": 69
+  "id": 1
 }
 ```
 
@@ -2423,7 +2426,7 @@ Example input:
   "included_targets": [
     "example.com",
     "198.51.100.1"
-  ] 
+  ],
   "overwrite": true
 }
 ```
@@ -3910,7 +3913,7 @@ Example input:
 
 ```
 {
-  "id": 4
+  "id": 6
 }
 ```
 
@@ -3971,7 +3974,7 @@ Example input:
     2,
     3
   ],
-  "name": "New Engine Scan"
+  "name": "Scan Engine Pool"
 }
 ```
 
@@ -4132,7 +4135,7 @@ Example input:
 ```
 {
   "engine_id": 3,
-  "site_id": 332
+  "site_id": 272
 }
 ```
 

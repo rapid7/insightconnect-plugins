@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Grant an user account access to an asset group by ID"
+    DESCRIPTION = "Grant a user account access to an asset group by ID"
 
 
 class Input:

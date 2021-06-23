@@ -3548,7 +3548,7 @@ actions:
         required: true
   add_user_asset_group_access:
     title: Add User Asset Group Access
-    description: Grant an user account access to an asset group by ID
+    description: Grant a user account access to an asset group by ID
     input:
       user_id:
         title: User ID
