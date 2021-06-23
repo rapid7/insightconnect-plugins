@@ -619,6 +619,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.8.1 - Help.md input examples updated
 * 1.8.0 - New action Array Match
 * 1.7.0 - New action Array Diff
 * 1.6.1 - Add Cloud Enabled tag
