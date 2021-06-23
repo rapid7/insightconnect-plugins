@@ -16,6 +16,7 @@ def read_file_to_string(filename):
     with open(filename) as my_file:
         return my_file.read()
 
+
 # This method will be used by the mock to replace requests.get
 def mocked_requests_get(*args, **kwargs):
     class MockResponse:
@@ -23,6 +24,7 @@ def mocked_requests_get(*args, **kwargs):
             self.json_data = json_data
             self.status_code = status_code
             self.text = "This is some error text"
+
         def json(self):
             return json.loads(self.json_data)
 
@@ -51,34 +53,22 @@ class MockConnection:
 
 
 class TestGetBlacklist(TestCase):
-    @mock.patch('requests.get', side_effect=mocked_requests_get)
+    @mock.patch("requests.get", side_effect=mocked_requests_get)
     def test_get_blacklist(self, mock_get):
         log = logging.getLogger("Test")
         test_action = GetBlacklist()
         test_action.connection = MockConnection()
         test_action.logger = log
 
-        working_params = {
-          "confidenceMinimum": 90,
-          "limit": 10
-        }
+        working_params = {"confidenceMinimum": 90, "limit": 10}
         results = test_action.run(working_params)
         expected = {
-          "blacklist": [
-            {
-              "ipAddress": "198.51.100.100",
-              "abuseConfidenceScore": 100
-            },
-            {
-              "ipAddress": "198.51.100.101",
-              "abuseConfidenceScore": 100
-            },
-            {
-              "ipAddress": "198.51.100.102",
-              "abuseConfidenceScore": 100
-            }
-          ],
-          "success": True
+            "blacklist": [
+                {"ipAddress": "198.51.100.100", "abuseConfidenceScore": 100},
+                {"ipAddress": "198.51.100.101", "abuseConfidenceScore": 100},
+                {"ipAddress": "198.51.100.102", "abuseConfidenceScore": 100},
+            ],
+            "success": True,
         }
 
         self.assertNotEqual({}, results, "returns non - empty results")

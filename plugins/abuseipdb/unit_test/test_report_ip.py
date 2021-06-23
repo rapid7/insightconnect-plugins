@@ -16,6 +16,7 @@ def read_file_to_string(filename):
     with open(filename) as my_file:
         return my_file.read()
 
+
 # This method will be used by the mock to replace requests.get
 def mocked_requests_get(*args, **kwargs):
     class MockResponse:
@@ -23,6 +24,7 @@ def mocked_requests_get(*args, **kwargs):
             self.json_data = json_data
             self.status_code = status_code
             self.text = "This is some error text"
+
         def json(self):
             return json.loads(self.json_data)
 
@@ -51,24 +53,16 @@ class MockConnection:
 
 
 class TestReportIP(TestCase):
-    @mock.patch('requests.post', side_effect=mocked_requests_get)
+    @mock.patch("requests.post", side_effect=mocked_requests_get)
     def test_report_ip(self, mock_get):
         log = logging.getLogger("Test")
         test_action = ReportIp()
         test_action.connection = MockConnection()
         test_action.logger = log
 
-        working_params = {
-          "categories": "10,12,15",
-          "comment": "Brute forcing Wordpress",
-          "ip": "198.51.100.100"
-        }
+        working_params = {"categories": "10,12,15", "comment": "Brute forcing Wordpress", "ip": "198.51.100.100"}
         results = test_action.run(working_params)
-        expected = {
-          "ipAddress": "127.0.0.1",
-          "abuseConfidenceScore": 52,
-          "success": True
-        }
+        expected = {"ipAddress": "127.0.0.1", "abuseConfidenceScore": 52, "success": True}
 
         self.assertNotEqual({}, results, "returns non - empty results")
         self.assertEqual(expected, results)

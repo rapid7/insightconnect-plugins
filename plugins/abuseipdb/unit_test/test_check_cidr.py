@@ -16,6 +16,7 @@ def read_file_to_string(filename):
     with open(filename) as my_file:
         return my_file.read()
 
+
 # This method will be used by the mock to replace requests.get
 def mocked_requests_get(*args, **kwargs):
     class MockResponse:
@@ -23,6 +24,7 @@ def mocked_requests_get(*args, **kwargs):
             self.json_data = json_data
             self.status_code = status_code
             self.text = "This is some error text"
+
         def json(self):
             return json.loads(self.json_data)
 
@@ -51,35 +53,32 @@ class MockConnection:
 
 
 class TestCheckCidr(TestCase):
-    @mock.patch('requests.get', side_effect=mocked_requests_get)
+    @mock.patch("requests.get", side_effect=mocked_requests_get)
     def test_check_cidr(self, mock_get):
         log = logging.getLogger("Test")
         test_action = CheckCidr()
         test_action.connection = MockConnection()
         test_action.logger = log
 
-        working_params = {
-          "cidr": "207.126.144.0/20",
-          "days": 30
-        }
+        working_params = {"cidr": "207.126.144.0/20", "days": 30}
         results = test_action.run(working_params)
         expected = {
-          "networkAddress": "198.51.100.100",
-          "netmask": "255.255.255.0",
-          "minAddress": "198.51.100.1",
-          "maxAddress": "198.51.100.254",
-          "numPossibleHosts": 254,
-          "addressSpaceDesc": "Internet",
-          "reportedAddress": [
-            {
-              "ipAddress": "198.51.100.100",
-              "numReports": 3,
-              "mostRecentReport": "2019-08-28T21:08:34+01:00",
-              "abuseConfidenceScore": 11,
-              "countryCode": "CN"
-            }
-          ],
-          "found": True
+            "networkAddress": "198.51.100.100",
+            "netmask": "255.255.255.0",
+            "minAddress": "198.51.100.1",
+            "maxAddress": "198.51.100.254",
+            "numPossibleHosts": 254,
+            "addressSpaceDesc": "Internet",
+            "reportedAddress": [
+                {
+                    "ipAddress": "198.51.100.100",
+                    "numReports": 3,
+                    "mostRecentReport": "2019-08-28T21:08:34+01:00",
+                    "abuseConfidenceScore": 11,
+                    "countryCode": "CN",
+                }
+            ],
+            "found": True,
         }
 
         self.assertNotEqual({}, results, "returns non - empty results")
