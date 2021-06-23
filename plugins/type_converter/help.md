@@ -396,7 +396,7 @@ Example output:
 
 ```
 {
-  "input": 123
+  "output": 123
 }
 ```
 
@@ -431,7 +431,7 @@ Example output:
 
 ```
 {
-  "output": "{\"object\": [\"rapid\", \"7\"], \"rapid7\": \"value\"}"
+  "output": '{"object": ["rapid", "7"], "rapid7": "value"}'
 }
 ```
 
@@ -443,13 +443,13 @@ This action converts a string to a boolean. Case-insensitive true -> True, else 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|input|string|None|True|Input variable|None|True|
+|input|string|None|True|Input variable|None|'True'|
 
 Example input:
 
 ```
 {
-  "input": true
+  "input": 'true'
 }
 ```
 
@@ -475,13 +475,13 @@ This action converts a string to a float.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|input|string|None|True|Type converted input|None|123.456|
+|input|string|None|True|Type converted input|None|'123.456'|
 
 Example input:
 
 ```
 {
-  "input": 123.456
+  "input": '123.456'
 }
 ```
 
@@ -507,14 +507,14 @@ This action converts a string to an integer.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|input|string|None|True|Input variable|None|123|
+|input|string|None|True|Input variable|None|'123'|
 |strip|boolean|None|False|Strip whitespace|None|True|
 
 Example input:
 
 ```
 {
-  "input": 123,
+  "input": '123',
   "strip": true
 }
 ```
@@ -578,16 +578,16 @@ This action converts a string to an object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|input|string|None|True|Input variable|None|{"object":["rapid","7"],"rapid7":"value"}|
+|input|string|None|True|Input variable|None|'{"object":["rapid","7"],"rapid7":"value"}'|
 
 Example input:
 
 ```
 {
-  "input": {
+  "input": '{
     "object": ["rapid", "7"],
     "rapid7": "value"
-  }
+  }'
 }
 ```
 
