@@ -505,7 +505,7 @@ This action converts a string to an integer.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |input|string|None|True|Input variable|None|123|
-|strip|boolean|None|False|Strip whitespace|None|True|
+|strip|boolean|None|False|Strip whitespace|None|true|
 
 Example input:
 
