@@ -1,0 +1,9 @@
+unit_test/**/*
+unit_test
+examples/**/*
+examples
+tests
+tests/**/*
+**/*.json
+**/*.tar
+**/*.gz
