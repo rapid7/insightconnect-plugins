@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Extracts all Dates from a string or file"
+    DESCRIPTION = "Extracts all dates from a string or file"
 
 
 class Input:

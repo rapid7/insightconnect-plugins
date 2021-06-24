@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: extractit
 title: ExtractIt
 description: The ExtractIt plugin has a collection of actions used to extract various information from text. These include URLs, emails, and IPs
-version: 1.0.0
+version: 2.1.1
 vendor: rapid7
 support: rapid7
 status: []
@@ -22,7 +22,7 @@ hub_tags:
 actions:
   url_extractor:
     title: URL Extractor
-    description: Extract URL's from a string or file
+    description: Extract URLs from a string or file
     input:
       str:
         title: String
@@ -59,7 +59,7 @@ actions:
         required: false
         example: MTk4LjUxLjEwMC4xMDAgYW5kIDIwMDE6ZGI4Ojg6NDo6MiBhcmUgc2FtcGxlIElQIGFkZHJlc3Nlcw==
     output:
-      ip_addresses:
+      ip_addrs:
         title: IP Addresses
         description: List of extracted IP Addresses
         type: '[]string'
@@ -103,7 +103,7 @@ actions:
         required: false
         example: MDA6MTQ6MjI6MDE6MjM6NDUgaXMgYW4gZXhhbXBsZSBNQUMgYWRkcmVzcw==
     output:
-      mac_addresses:
+      mac_addrs:
         title: MAC Addresses
         description: List of extracted MAC Addresses
         type: '[]string'
@@ -138,7 +138,7 @@ actions:
         required: false
   filepath_extractor:
     title: File Path Extractor
-    description: Extracts all File paths from a string or file
+    description: Extracts all file paths from a string or file
     input:
       str:
         title: String
@@ -160,7 +160,7 @@ actions:
         required: false
   date_extractor:
     title: Date Extractor
-    description: Extracts all Dates from a string or file
+    description: Extracts all dates from a string or file
     input:
       str:
         title: String

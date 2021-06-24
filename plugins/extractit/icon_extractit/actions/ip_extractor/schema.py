@@ -13,7 +13,7 @@ class Input:
     
 
 class Output:
-    IP_ADDRESSES = "ip_addresses"
+    IP_ADDRS = "ip_addrs"
     
 
 class IpExtractorInput(insightconnect_plugin_runtime.Input):
@@ -50,7 +50,7 @@ class IpExtractorOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "ip_addresses": {
+    "ip_addrs": {
       "type": "array",
       "title": "IP Addresses",
       "description": "List of extracted IP Addresses",

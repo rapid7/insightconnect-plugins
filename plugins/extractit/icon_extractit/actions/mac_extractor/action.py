@@ -15,6 +15,4 @@ class MacExtractor(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {
-            Output.MAC_ADDRESSES: Extractor.extract(Regex.MACAddress, params.get(Input.STR), params.get(Input.FILE))
-        }
+        return {Output.MAC_ADDRS: Extractor.extract(Regex.MACAddress, params.get(Input.STR), params.get(Input.FILE))}

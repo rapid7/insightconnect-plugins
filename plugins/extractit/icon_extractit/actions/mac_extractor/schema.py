@@ -13,7 +13,7 @@ class Input:
     
 
 class Output:
-    MAC_ADDRESSES = "mac_addresses"
+    MAC_ADDRS = "mac_addrs"
     
 
 class MacExtractorInput(insightconnect_plugin_runtime.Input):
@@ -50,7 +50,7 @@ class MacExtractorOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "mac_addresses": {
+    "mac_addrs": {
       "type": "array",
       "title": "MAC Addresses",
       "description": "List of extracted MAC Addresses",

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Extract URL's from a string or file"
+    DESCRIPTION = "Extract URLs from a string or file"
 
 
 class Input:

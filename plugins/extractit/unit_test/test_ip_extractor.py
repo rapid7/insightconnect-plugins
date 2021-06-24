@@ -12,7 +12,7 @@ class TestIpExtractor(TestCase):
             }
         )
         expected = {
-            Output.IP_ADDRESSES: [
+            Output.IP_ADDRS: [
                 "0.0.0.0",
                 "255.255.255.255",
                 "198.51.100.100",
@@ -32,7 +32,7 @@ class TestIpExtractor(TestCase):
         actual = action.run(
             {Input.STR: "777.777.777.777 192.00.1.1 256.256.256.256 2001:0db8:85a03:0000:0000:8a2e:0370:7334"}
         )
-        expected = {Output.IP_ADDRESSES: []}
+        expected = {Output.IP_ADDRS: []}
         self.assertEqual(actual, expected)
 
     def test_extract_ips_from_file(self):
@@ -43,7 +43,7 @@ class TestIpExtractor(TestCase):
             }
         )
         expected = {
-            Output.IP_ADDRESSES: [
+            Output.IP_ADDRS: [
                 "0.0.0.0",
                 "255.255.255.255",
                 "198.51.100.100",
@@ -65,5 +65,5 @@ class TestIpExtractor(TestCase):
                 Input.FILE: "Nzc3Ljc3Ny43NzcuNzc3IDE5Mi4wMC4xLjEgMjU2LjI1Ni4yNTYuMjU2IDIwMDE6MGRiODo4NWEwMzowMDAwOjAwMDA6OGEyZTowMzcwOjczMzQ=",
             }
         )
-        expected = {Output.IP_ADDRESSES: []}
+        expected = {Output.IP_ADDRS: []}
         self.assertEqual(actual, expected)

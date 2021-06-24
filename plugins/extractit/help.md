@@ -237,13 +237,13 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|ip_addresses|[]string|False|List of extracted IP Addresses|
+|ip_addrs|[]string|False|List of extracted IP Addresses|
 
 Example output:
 
 ```
 {
-  "ip_addresses": [
+  "ip_addrs": [
     "198.51.100.100",
     "2001:db8:8:4::2"
   ]
@@ -274,13 +274,13 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|mac_addresses|[]string|False|List of extracted MAC Addresses|
+|mac_addrs|[]string|False|List of extracted MAC Addresses|
 
 Example output:
 
 ```
 {
-  "mac_addresses": [
+  "mac_addrs": [
     "00:14:22:01:23:45"
   ]
 }
@@ -480,7 +480,20 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.0 - Initial plugin
+* 2.1.1 - Rewrite plugin to use the Python SDK | Add input and output examples in plugin.spec and held.md | Fix issue in domain extractor where multiply domains were extracted from a single URL | Fix issue where the URL extractor does not extract URLs containing an email address | Fix issue where hash extractors would return part of SHA256 or SHA512 hashes as SHA1 hash and part of SHA512 hash as SHA256 hash | Update the MD5 regex to exclude spaces or other extra characters in the results | Fix issue where the file path extractor was extracting part of a URL or date as a file path | Add unit tests
+* 2.1.0 - Fix issue in domain extractor where a colon could crash the plugin | Update to support unicode domains in extract domain | Fix issue where extract domain output could have invalid characters. e.g. email address and email headers
+* 2.0.0 - URL Extractor action no longer falsely identifies email addresses as URLs
+* 1.1.7 - New spec and help.md format for the Extension Library
+* 1.1.6 - Fix issue where IP Extractor would return inaccurate IPs
+* 1.1.5 - Fix issue where URL Extractor parsing was missing URLs
+* 1.1.4 - Fix issue where URL Extractor would return IPs
+* 1.1.3 - Regenerate with latest Go SDK to solve bug with triggers
+* 1.1.2 - Updating to Go SDK 2.6.4
+* 1.1.1 - Fix issue where test method for Domain Extractor was not properly testing the action
+* 1.1.0 - Port to V2 architecture | Support web server mode | MD5 matching bugfix
+* 1.0.1 - Bugfix Email Extractor
+* 1.0.0 - Domain Extractor bugfix
+* 0.1.0 - Initial plugin
 
 # Links
 

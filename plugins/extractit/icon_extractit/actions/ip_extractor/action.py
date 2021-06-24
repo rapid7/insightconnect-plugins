@@ -15,4 +15,4 @@ class IpExtractor(insightconnect_plugin_runtime.Action):
         matches = []
         matches.extend(Extractor.extract(Regex.IPv4, params.get(Input.STR), params.get(Input.FILE)))
         matches.extend(Extractor.extract(Regex.IPv6, params.get(Input.STR), params.get(Input.FILE)))
-        return {Output.IP_ADDRESSES: matches}
+        return {Output.IP_ADDRS: matches}

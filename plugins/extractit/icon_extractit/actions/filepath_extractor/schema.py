@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Extracts all File paths from a string or file"
+    DESCRIPTION = "Extracts all file paths from a string or file"
 
 
 class Input:
