@@ -14,7 +14,7 @@ class TestIocExtractor(TestCase):
         expected = {
             Output.IOCS: [
                 "example.com",
-                "10/10/2021",
+                "2021-10-10T00:00:00Z",
                 "/tmp/script",
                 "user@example.com",
                 "00:1B:44:11:3A:B7",
@@ -39,7 +39,7 @@ class TestIocExtractor(TestCase):
         expected = {
             Output.IOCS: [
                 "example.com",
-                "10/10/2021",
+                "2021-10-10T00:00:00Z",
                 "/tmp/script",
                 "user@example.com",
                 "00:1B:44:11:3A:B7",

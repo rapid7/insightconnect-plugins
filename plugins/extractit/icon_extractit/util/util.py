@@ -2,6 +2,7 @@ import regex
 import base64
 import tldextract
 import validators
+from datetime import datetime
 
 
 class Regex:
@@ -62,3 +63,10 @@ class Extractor:
             if not validators.ip_address.ipv4(matches[i]) and not validators.email(matches[i]):
                 new_matches.append(matches[i])
         return new_matches
+
+    @staticmethod
+    def parse_time(dates: list) -> list:
+        for i in range(len(dates)):
+            date_time_obj = datetime.strptime(dates[i], "%d/%m/%Y")
+            dates[i] = date_time_obj.strftime("%Y-%m-%dT%H:%M:%SZ")
+        return dates

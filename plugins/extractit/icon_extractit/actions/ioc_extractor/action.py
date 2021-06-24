@@ -19,7 +19,7 @@ class IocExtractor(insightconnect_plugin_runtime.Action):
         provided_string = params.get(Input.STR)
         provided_file = params.get(Input.FILE)
         matches.extend(Extractor.clear_domains(Extractor.extract(Regex.Domain, provided_string, provided_file)))
-        matches.extend(Extractor.extract(Regex.Date, provided_string, provided_file))
+        matches.extend(Extractor.parse_time(Extractor.extract(Regex.Date, provided_string, provided_file)))
         matches.extend(Extractor.extract_filepath(Regex.FilePath, provided_string, provided_file))
         matches.extend(Extractor.extract(Regex.Email, provided_string, provided_file))
         matches.extend(Extractor.extract(Regex.MACAddress, provided_string, provided_file))
