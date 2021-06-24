@@ -25,8 +25,10 @@ def mocked_requests_post(*args, **kwargs):
         def json(self):
             if self.filename == "json_error":
                 raise json.decoder.JSONDecodeError("json error", "json error", 0)
-
-            return json.loads(read_file_to_string(f"payloads/{self.filename}.json.resp"))
+            actual_joined_path = os.path.join(
+                os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}.json.resp"
+            )
+            return json.loads(read_file_to_string(actual_joined_path))
 
     if kwargs["data"]["url"] == "401":
         return MockResponse("submit_url_for_scan_401", 401)
