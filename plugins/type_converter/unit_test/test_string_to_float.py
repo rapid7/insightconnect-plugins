@@ -11,7 +11,7 @@ import logging
 
 
 class TestStringToFloat(TestCase):
-    def test_string_to_float(self):
+    def test_string_to_float_simple(self):
         log = logging.getLogger("Test")
         test_action = StringToFloat()
         test_action.logger = log
@@ -23,21 +23,37 @@ class TestStringToFloat(TestCase):
         self.assertNotEqual({}, results, "returns non - empty results")
         self.assertEqual(expected, results)
 
+    def test_string_to_float_single_digit(self):
+        log = logging.getLogger("Test")
+        test_action = StringToFloat()
+        test_action.logger = log
         working_params = {"input": "1"}
         results = test_action.run(working_params)
         expected = {"output": 1}
         self.assertEqual(expected, results)
 
+    def test_string_to_float_zero(self):
+        log = logging.getLogger("Test")
+        test_action = StringToFloat()
+        test_action.logger = log
         working_params = {"input": "0"}
         results = test_action.run(working_params)
         expected = {"output": 0}
         self.assertEqual(expected, results)
 
+    def test_string_to_float_many_digits(self):
+        log = logging.getLogger("Test")
+        test_action = StringToFloat()
+        test_action.logger = log
         working_params = {"input": "3.14159265359"}
         results = test_action.run(working_params)
         expected = {"output": 3.14159265359}
         self.assertEqual(expected, results)
 
+    def test_string_to_float_negatives(self):
+        log = logging.getLogger("Test")
+        test_action = StringToFloat()
+        test_action.logger = log
         with self.assertRaises(PluginException):
             working_params = {"this is a string"}
             test_action.run(working_params)

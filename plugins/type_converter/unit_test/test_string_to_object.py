@@ -11,28 +11,39 @@ import logging
 
 
 class TestStringToObject(TestCase):
-    def test_string_to_object(self):
+    def test_string_to_object_simple(self):
         log = logging.getLogger("Test")
         test_action = StringToObject()
         test_action.logger = log
 
-        working_params = {"input": '{"object": ["rapid", "7"],"rapid7": "value"}'}
-        results = test_action.run(working_params)
-        expected = {"output": {"object": ["rapid", "7"], "rapid7": "value"}}
-
-        self.assertNotEqual({}, results, "returns non - empty results")
-        self.assertEqual(expected, results)
-
         working_params = {"input": '{"rapid7": "value"}'}
         results = test_action.run(working_params)
         expected = {"output": {"rapid7": "value"}}
+        self.assertNotEqual({}, results, "returns non - empty results")
         self.assertEqual(expected, results)
 
+    def test_string_to_object_different_value_types(self):
+        log = logging.getLogger("Test")
+        test_action = StringToObject()
+        test_action.logger = log
         working_params = {"input": '{"name":"Doe", "age":100, "city":"El Dorado"}'}
         results = test_action.run(working_params)
         expected = {"output": {"name": "Doe", "age": 100, "city": "El Dorado"}}
         self.assertEqual(expected, results)
 
+    def test_string_to_object_nested_object(self):
+        log = logging.getLogger("Test")
+        test_action = StringToObject()
+        test_action.logger = log
+        working_params = {"input": '{"object": ["rapid", "7"],"rapid7": "value"}'}
+        results = test_action.run(working_params)
+        expected = {"output": {"object": ["rapid", "7"], "rapid7": "value"}}
+        self.assertEqual(expected, results)
+
+    def test_string_to_object_negatives(self):
+        log = logging.getLogger("Test")
+        test_action = StringToObject()
+        test_action.logger = log
         with self.assertRaises(PluginException):
             working_params = {'{"object": ["rapid", "7"],"rapid7": "value"}'}
             test_action.run(working_params)
