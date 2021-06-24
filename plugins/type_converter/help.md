@@ -585,9 +585,7 @@ Example input:
 
 ```
 {
-  "input": "{
-  'object':['rapid','7'],
-  'rapid7':'value'}"
+  "input": "{'object':['rapid','7'], 'rapid7':'value'}"
 }
 ```
 
