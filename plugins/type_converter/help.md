@@ -430,9 +430,7 @@ Example output:
 
 ```
 {
-  "output": '{
-  "object": ["rapid", "7"], 
-  "rapid7": "value"}'
+  "output": "{'object': ['rapid', '7'], 'rapid7': 'value'}"
 }
 ```
 
