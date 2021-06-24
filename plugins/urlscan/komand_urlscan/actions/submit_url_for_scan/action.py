@@ -41,7 +41,7 @@ class SubmitUrlForScan(komand.Action):
                 # {'message': "No API key supplied. Send the key using the 'API-Key' header", 'status': 401}
                 raise PluginException(preset=PluginException.Preset.API_KEY)
             elif out["status"] == 429:
-                raise PluginException(cause="API limit error.", assistance=out["message"])
+                raise PluginException(cause="API limit error.", assistance=out.get("message", ""))
 
         # {
         #  "message": "Missing URL properties",
