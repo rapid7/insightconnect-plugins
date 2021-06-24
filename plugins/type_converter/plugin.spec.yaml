@@ -196,7 +196,7 @@ actions:
         description: Type converted input
         type: string
         required: true
-        example: 'Rapid7 Insightconnect'
+        example: 'Rapid7 InsightConnect'
       delimiter:
         title: Delimiter
         description: Character used to split the string into slices for the list.
