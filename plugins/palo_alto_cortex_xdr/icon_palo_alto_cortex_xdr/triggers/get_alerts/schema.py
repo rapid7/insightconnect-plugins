@@ -90,14 +90,14 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "agent_os_sub_type": {
           "type": "string",
-          "title": "Agent Os Sub Type",
-          "description": "Agent os sub type",
+          "title": "Agent OS Sub Type",
+          "description": "Agent OS sub type",
           "order": 6
         },
         "agent_os_type": {
           "type": "string",
-          "title": "Agent Os Type",
-          "description": "Agent os type",
+          "title": "Agent OS Type",
+          "description": "Agent OS type",
           "order": 7
         },
         "agent_version": {
@@ -120,14 +120,14 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "bioc_category_enum_key": {
           "type": "string",
-          "title": "Bioc Category Enum Key",
-          "description": "Bioc category enum key",
+          "title": "BIOC Category Enum Key",
+          "description": "BIOC category enum key",
           "order": 11
         },
         "bioc_indicator": {
           "type": "string",
-          "title": "Bioc Indicator",
-          "description": "Bioc indicator",
+          "title": "BIOC Indicator",
+          "description": "BIOC indicator",
           "order": 12
         },
         "category": {
@@ -156,8 +156,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "end_match_attempt_ts": {
           "type": "string",
-          "title": "End Match Attempt Ts",
-          "description": "End match attempt ts",
+          "title": "End Match Attempt TS",
+          "description": "End match attempt TS",
           "order": 17
         },
         "endpoint_id": {
@@ -210,8 +210,8 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "local_insert_ts": {
           "type": "integer",
-          "title": "Local Insert Ts",
-          "description": "Local insert ts",
+          "title": "Local Insert TS",
+          "description": "Local insert TS",
           "order": 25
         },
         "mac": {
@@ -759,14 +759,14 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "fw_vsys": {
               "type": "string",
-              "title": "FW Vsys",
-              "description": "FW vsys",
+              "title": "FW VSYS",
+              "description": "FW VSYS",
               "order": 79
             },
             "fw_xff": {
               "type": "string",
-              "title": "FW Xff",
-              "description": "FW xff",
+              "title": "FW XFF",
+              "description": "FW XFF",
               "order": 80
             },
             "image_name": {
@@ -783,74 +783,74 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
             },
             "os_actor_causality_id": {
               "type": "string",
-              "title": "Os Actor Causality ID",
-              "description": "Os actor causality ID",
+              "title": "OS Actor Causality ID",
+              "description": "OS actor causality ID",
               "order": 83
             },
             "os_actor_effective_username": {
               "type": "string",
-              "title": "Os Actor Effective Username",
-              "description": "Os actor effective username",
+              "title": "OS Actor Effective Username",
+              "description": "OS actor effective username",
               "order": 84
             },
             "os_actor_process_causality_id": {
               "type": "string",
-              "title": "Os Actor Process Causality ID",
-              "description": "Os actor process causality ID",
+              "title": "OS Actor Process Causality ID",
+              "description": "OS actor process causality ID",
               "order": 85
             },
             "os_actor_process_command_line": {
               "type": "string",
-              "title": "Os Actor Process Command Line",
-              "description": "Os actor process command line",
+              "title": "OS Actor Process Command Line",
+              "description": "OS actor process command line",
               "order": 86
             },
             "os_actor_process_image_name": {
               "type": "string",
-              "title": "Os Actor Process Image Name",
-              "description": "Os actor process image name",
+              "title": "OS Actor Process Image Name",
+              "description": "OS actor process image name",
               "order": 87
             },
             "os_actor_process_image_path": {
               "type": "string",
-              "title": "Os Actor Process Image Path",
-              "description": "Os actor process image path",
+              "title": "OS Actor Process Image Path",
+              "description": "OS actor process image path",
               "order": 88
             },
             "os_actor_process_image_sha256": {
               "type": "string",
-              "title": "Os Actor Process Image SHA256",
-              "description": "Os actor process image SHA256",
+              "title": "OS Actor Process Image SHA256",
+              "description": "OS actor process image SHA256",
               "order": 89
             },
             "os_actor_process_instance_id": {
               "type": "string",
-              "title": "Os Actor Process Instance ID",
-              "description": "Os actor process instance ID",
+              "title": "OS Actor Process Instance ID",
+              "description": "OS actor process instance ID",
               "order": 90
             },
             "os_actor_process_os_pid": {
               "type": "string",
-              "title": "Os Actor Process Os PID",
-              "description": "Os actor process os PID",
+              "title": "OS Actor Process OS PID",
+              "description": "OS actor process OS PID",
               "order": 91
             },
             "os_actor_process_signature_status": {
               "type": "string",
-              "title": "Os Actor Process Signature Status",
-              "description": "Os actor process signature status",
+              "title": "OS Actor Process Signature Status",
+              "description": "OS actor process signature status",
               "order": 92
             },
             "os_actor_process_signature_vendor": {
               "type": "string",
-              "title": "Os Actor Process Signature Vendor",
-              "description": "Os actor process signature vendor",
+              "title": "OS Actor Process Signature Vendor",
+              "description": "OS actor process signature vendor",
               "order": 93
             },
             "os_actor_thread_thread_id": {
               "type": "string",
-              "title": "Os Actor Thread Thread ID",
-              "description": "Os actor thread thread ID",
+              "title": "OS Actor Thread Thread ID",
+              "description": "OS actor thread thread ID",
               "order": 94
             },
             "story_id": {
@@ -1343,14 +1343,14 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "fw_vsys": {
           "type": "string",
-          "title": "FW Vsys",
-          "description": "FW vsys",
+          "title": "FW VSYS",
+          "description": "FW VSYS",
           "order": 79
         },
         "fw_xff": {
           "type": "string",
-          "title": "FW Xff",
-          "description": "FW xff",
+          "title": "FW XFF",
+          "description": "FW XFF",
           "order": 80
         },
         "image_name": {
@@ -1367,74 +1367,74 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
         },
         "os_actor_causality_id": {
           "type": "string",
-          "title": "Os Actor Causality ID",
-          "description": "Os actor causality ID",
+          "title": "OS Actor Causality ID",
+          "description": "OS actor causality ID",
           "order": 83
         },
         "os_actor_effective_username": {
           "type": "string",
-          "title": "Os Actor Effective Username",
-          "description": "Os actor effective username",
+          "title": "OS Actor Effective Username",
+          "description": "OS actor effective username",
           "order": 84
         },
         "os_actor_process_causality_id": {
           "type": "string",
-          "title": "Os Actor Process Causality ID",
-          "description": "Os actor process causality ID",
+          "title": "OS Actor Process Causality ID",
+          "description": "OS actor process causality ID",
           "order": 85
         },
         "os_actor_process_command_line": {
           "type": "string",
-          "title": "Os Actor Process Command Line",
-          "description": "Os actor process command line",
+          "title": "OS Actor Process Command Line",
+          "description": "OS actor process command line",
           "order": 86
         },
         "os_actor_process_image_name": {
           "type": "string",
-          "title": "Os Actor Process Image Name",
-          "description": "Os actor process image name",
+          "title": "OS Actor Process Image Name",
+          "description": "OS actor process image name",
           "order": 87
         },
         "os_actor_process_image_path": {
           "type": "string",
-          "title": "Os Actor Process Image Path",
-          "description": "Os actor process image path",
+          "title": "OS Actor Process Image Path",
+          "description": "OS actor process image path",
           "order": 88
         },
         "os_actor_process_image_sha256": {
           "type": "string",
-          "title": "Os Actor Process Image SHA256",
-          "description": "Os actor process image SHA256",
+          "title": "OS Actor Process Image SHA256",
+          "description": "OS actor process image SHA256",
           "order": 89
         },
         "os_actor_process_instance_id": {
           "type": "string",
-          "title": "Os Actor Process Instance ID",
-          "description": "Os actor process instance ID",
+          "title": "OS Actor Process Instance ID",
+          "description": "OS actor process instance ID",
           "order": 90
         },
         "os_actor_process_os_pid": {
           "type": "string",
-          "title": "Os Actor Process Os PID",
-          "description": "Os actor process os PID",
+          "title": "OS Actor Process OS PID",
+          "description": "OS actor process OS PID",
           "order": 91
         },
         "os_actor_process_signature_status": {
           "type": "string",
-          "title": "Os Actor Process Signature Status",
-          "description": "Os actor process signature status",
+          "title": "OS Actor Process Signature Status",
+          "description": "OS actor process signature status",
           "order": 92
         },
         "os_actor_process_signature_vendor": {
           "type": "string",
-          "title": "Os Actor Process Signature Vendor",
-          "description": "Os actor process signature vendor",
+          "title": "OS Actor Process Signature Vendor",
+          "description": "OS actor process signature vendor",
           "order": 93
         },
         "os_actor_thread_thread_id": {
           "type": "string",
-          "title": "Os Actor Thread Thread ID",
-          "description": "Os actor thread thread ID",
+          "title": "OS Actor Thread Thread ID",
+          "description": "OS actor thread thread ID",
           "order": 94
         },
         "story_id": {

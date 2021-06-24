@@ -225,8 +225,8 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
         },
         "xdr_url": {
           "type": "string",
-          "title": "Xdr URL",
-          "description": "Xdr URL",
+          "title": "XDR URL",
+          "description": "XDR URL",
           "order": 27
         }
       }

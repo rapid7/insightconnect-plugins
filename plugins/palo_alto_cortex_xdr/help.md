@@ -550,7 +550,7 @@ Example output:
 
 # Version History
 
-* 1.1.0 - New action Get File Quarantine Status | New trigger Get Alerts
+* 2.0.0 - New action Get File Quarantine Status | New trigger Get Alerts
 * 1.0.0 - Initial plugin
 
 # Links

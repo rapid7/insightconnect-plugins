@@ -1,5 +1,8 @@
 import time
 
+from typing import List, Dict, Generator
+from insightconnect_plugin_runtime import Trigger
+
 
 class Util:
     @staticmethod
@@ -9,8 +12,12 @@ class Util:
 
     @staticmethod
     def send_items_to_platform_for_trigger(
-        trigger, items, output_type, last_event_processed_time_ms, time_field="creation_time"
-    ):
+        trigger: Trigger,
+        items: List[Dict],
+        output_type: str,
+        last_event_processed_time_ms: int,
+        time_field: str = "creation_time",
+    ) -> Generator[int]:
         for item in items:
             item_time = item.get(time_field, -1)
             # Check incident time to ensure we don't send dupes on to the platform

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_cortex_xdr
 title: Palo Alto Cortex XDR
 description: Stop modern attacks with the industry's first extended detection and response platform that spans your endpoints, network and cloud data
-version: 1.1.0
+version: 2.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -415,14 +415,14 @@ types:
       description: "FW URL domain"
       required: false
     fw_vsys:
-      title: "FW Vsys"
+      title: "FW VSYS"
       type: string
-      description: "FW vsys"
+      description: "FW VSYS"
       required: false
     fw_xff:
-      title: "FW Xff"
+      title: "FW XFF"
       type: string
-      description: "FW xff"
+      description: "FW XFF"
       required: false
     image_name:
       title: "Image Name"
@@ -435,64 +435,64 @@ types:
       description: "Module ID"
       required: false
     os_actor_causality_id:
-      title: "Os Actor Causality ID"
+      title: "OS Actor Causality ID"
       type: string
-      description: "Os actor causality ID"
+      description: "OS actor causality ID"
       required: false
     os_actor_effective_username:
-      title: "Os Actor Effective Username"
+      title: "OS Actor Effective Username"
       type: string
-      description: "Os actor effective username"
+      description: "OS actor effective username"
       required: false
     os_actor_process_causality_id:
-      title: "Os Actor Process Causality ID"
+      title: "OS Actor Process Causality ID"
       type: string
-      description: "Os actor process causality ID"
+      description: "OS actor process causality ID"
       required: false
     os_actor_process_command_line:
-      title: "Os Actor Process Command Line"
+      title: "OS Actor Process Command Line"
       type: string
-      description: "Os actor process command line"
+      description: "OS actor process command line"
       required: false
     os_actor_process_image_name:
-      title: "Os Actor Process Image Name"
+      title: "OS Actor Process Image Name"
       type: string
-      description: "Os actor process image name"
+      description: "OS actor process image name"
       required: false
     os_actor_process_image_path:
-      title: "Os Actor Process Image Path"
+      title: "OS Actor Process Image Path"
       type: string
-      description: "Os actor process image path"
+      description: "OS actor process image path"
       required: false
     os_actor_process_image_sha256:
-      title: "Os Actor Process Image SHA256"
+      title: "OS Actor Process Image SHA256"
       type: string
-      description: "Os actor process image SHA256"
+      description: "OS actor process image SHA256"
       required: false
     os_actor_process_instance_id:
-      title: "Os Actor Process Instance ID"
+      title: "OS Actor Process Instance ID"
       type: string
-      description: "Os actor process instance ID"
+      description: "OS actor process instance ID"
       required: false
     os_actor_process_os_pid:
-      title: "Os Actor Process Os PID"
+      title: "OS Actor Process OS PID"
       type: string
-      description: "Os actor process os PID"
+      description: "OS actor process OS PID"
       required: false
     os_actor_process_signature_status:
-      title: "Os Actor Process Signature Status"
+      title: "OS Actor Process Signature Status"
       type: string
-      description: "Os actor process signature status"
+      description: "OS actor process signature status"
       required: false
     os_actor_process_signature_vendor:
-      title: "Os Actor Process Signature Vendor"
+      title: "OS Actor Process Signature Vendor"
       type: string
-      description: "Os actor process signature vendor"
+      description: "OS actor process signature vendor"
       required: false
     os_actor_thread_thread_id:
-      title: "Os Actor Thread Thread ID"
+      title: "OS Actor Thread Thread ID"
       type: string
-      description: "Os actor thread thread ID"
+      description: "OS actor thread thread ID"
       required: false
     story_id:
       title: "Story ID"
@@ -531,14 +531,14 @@ types:
       description: "Agent FQDN"
       required: false
     agent_os_sub_type:
-      title: "Agent Os Sub Type"
+      title: "Agent OS Sub Type"
       type: string
-      description: "Agent os sub type"
+      description: "Agent OS sub type"
       required: false
     agent_os_type:
-      title: "Agent Os Type"
+      title: "Agent OS Type"
       type: string
-      description: "Agent os type"
+      description: "Agent OS type"
       required: false
     agent_version:
       title: "Agent Version"
@@ -556,14 +556,14 @@ types:
       description: "Attempt counter"
       required: false
     bioc_category_enum_key:
-      title: "Bioc Category Enum Key"
+      title: "BIOC Category Enum Key"
       type: string
-      description: "Bioc category enum key"
+      description: "BIOC category enum key"
       required: false
     bioc_indicator:
-      title: "Bioc Indicator"
+      title: "BIOC Indicator"
       type: string
-      description: "Bioc indicator"
+      description: "BIOC indicator"
       required: false
     category:
       title: "Category"
@@ -586,9 +586,9 @@ types:
       description: "Detection timestamp"
       required: false
     end_match_attempt_ts:
-      title: "End Match Attempt Ts"
+      title: "End Match Attempt TS"
       type: string
-      description: "End match attempt ts"
+      description: "End match attempt TS"
       required: false
     endpoint_id:
       title: "Endpoint ID"
@@ -626,9 +626,9 @@ types:
       description: "Is whitelisted"
       required: false
     local_insert_ts:
-      title: "Local Insert Ts"
+      title: "Local Insert TS"
       type: integer
-      description: "Local insert ts"
+      description: "Local insert TS"
       required: false
     mac:
       title: "MAC"
@@ -812,9 +812,9 @@ types:
       description: "Users"
       required: false
     xdr_url:
-      title: "Xdr URL"
+      title: "XDR URL"
       type: string
-      description: "Xdr URL"
+      description: "XDR URL"
       required: false
   isolation_result:
     action_id:

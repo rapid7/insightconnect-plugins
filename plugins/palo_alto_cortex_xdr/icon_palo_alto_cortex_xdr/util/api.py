@@ -105,7 +105,9 @@ class CortexXdrAPI:
         response_incidents_field = "incidents"
         return self._get_items_from_endpoint(endpoint, from_time, to_time, response_incidents_field, time_field)
 
-    def allow_or_block_file(self, file_hash, comment, incident_id=None, block_file=True):
+    def allow_or_block_file(
+        self, file_hash: str, comment: str, incident_id: str = None, block_file: bool = True
+    ) -> bool:
         if block_file:
             endpoint = "/public_api/v1/hash_exceptions/blocklist/"
         else:
