@@ -1,0 +1,14 @@
+{
+  "_index": "test-index",
+  "_type": "_doc",
+  "_id": "VWx5O3oBrBTgS4Hhf6Hp",
+  "_version": 1,
+  "result": "created",
+  "_shards": {
+    "total": 2,
+    "successful": 1,
+    "failed": 0
+  },
+  "_seq_no": 0,
+  "_primary_term": 1
+}

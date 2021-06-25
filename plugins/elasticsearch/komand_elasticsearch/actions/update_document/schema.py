@@ -17,7 +17,6 @@ class Input:
     SCRIPT = "script"
     SOURCE = "source"
     TIMEOUT = "timeout"
-    TYPE = "type"
     VERSION = "version"
     WAIT_FOR_ACTIVE_SHARDS = "wait_for_active_shards"
     
@@ -36,7 +35,7 @@ class UpdateDocumentInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "ID",
       "description": "Optional ID of Indexed Document",
-      "order": 3
+      "order": 2
     },
     "index": {
       "type": "string",
@@ -48,7 +47,7 @@ class UpdateDocumentInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Parent",
       "description": "Optional Parent",
-      "order": 6
+      "order": 5
     },
     "refresh": {
       "type": "string",
@@ -60,56 +59,50 @@ class UpdateDocumentInput(insightconnect_plugin_runtime.Input):
         "wait_for",
         "false"
       ],
-      "order": 9
+      "order": 8
     },
     "retry_on_conflict": {
       "type": "integer",
       "title": "Retry on Conflict",
       "description": "Optional Number of Times to Retry on Update Conflict",
-      "order": 4
+      "order": 3
     },
     "routing": {
       "type": "string",
       "title": "Routing",
       "description": "Optional Shard Placement",
-      "order": 5
+      "order": 4
     },
     "script": {
       "type": "object",
       "title": "Script",
       "description": "JSON Script to Modify a Document",
-      "order": 12
+      "order": 11
     },
     "source": {
       "type": "string",
       "title": "Source",
       "description": "Control If and How Source is Returned",
-      "order": 10
+      "order": 9
     },
     "timeout": {
       "type": "string",
       "title": "Timeout",
       "description": "Custom Timeout Window",
       "default": "1m",
-      "order": 7
-    },
-    "type": {
-      "type": "string",
-      "title": "Type",
-      "description": "Type of Document to Index",
-      "order": 2
+      "order": 6
     },
     "version": {
       "type": "integer",
       "title": "Version",
       "description": "Optional Version Specification",
-      "order": 11
+      "order": 10
     },
     "wait_for_active_shards": {
       "type": "integer",
       "title": "Wait for Active Shards",
       "description": "Number of Shard Copies required Before Update",
-      "order": 8
+      "order": 7
     }
   },
   "required": [

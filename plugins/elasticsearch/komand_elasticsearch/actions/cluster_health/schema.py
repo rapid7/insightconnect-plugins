@@ -56,11 +56,6 @@ class ClusterHealthOutput(insightconnect_plugin_runtime.Output):
           "title": "Active Shards Percent as Number",
           "order": 15
         },
-        "cluster_name": {
-          "type": "string",
-          "title": "Cluster Name",
-          "order": 1
-        },
         "delayed_unassigned_shards": {
           "type": "integer",
           "title": "Delayed Unassigned Shards",
@@ -70,6 +65,11 @@ class ClusterHealthOutput(insightconnect_plugin_runtime.Output):
           "type": "integer",
           "title": "Initializing Shards",
           "order": 9
+        },
+        "name": {
+          "type": "string",
+          "title": "Cluster Name",
+          "order": 1
         },
         "number_of_data_nodes": {
           "type": "integer",

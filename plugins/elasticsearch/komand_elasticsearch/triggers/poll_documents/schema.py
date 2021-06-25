@@ -13,7 +13,6 @@ class Input:
     INDEX = "index"
     QUERY = "query"
     ROUTING = "routing"
-    TYPE = "type"
     
 
 class Output:
@@ -44,18 +43,12 @@ class PollDocumentsInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "Query",
       "description": "JSON Query DSL",
-      "order": 5
+      "order": 4
     },
     "routing": {
       "type": "string",
       "title": "Routing",
       "description": "Optional Shards to Search",
-      "order": 4
-    },
-    "type": {
-      "type": "string",
-      "title": "Type",
-      "description": "Document Type",
       "order": 3
     }
   },

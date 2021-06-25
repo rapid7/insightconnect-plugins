@@ -16,7 +16,6 @@ class UpdateDocument(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         index = params.get(Input.INDEX)
-        type_ = params.get(Input.TYPE)
         id_ = params.get(Input.ID)
         retry_on_conflict = params.get(Input.RETRY_ON_CONFLICT)
         wait_for_active_shards = params.get(Input.WAIT_FOR_ACTIVE_SHARDS)
@@ -46,15 +45,11 @@ class UpdateDocument(insightconnect_plugin_runtime.Action):
         if timeout:
             params["timeout"] = timeout
 
-        results = self.connection.client.update(index, type_, id_, script, params)
+        results = self.connection.client.update(index, id_, params, script)
 
         if not results:
             raise PluginException(
-                cause="Document was not updated",
-                assistance="Please check provided data and try again."
+                cause="Document was not updated", assistance="Please check provided data and try again."
             )
         else:
-            return {
-                Output.UPDATE_RESPONSE: insightconnect_plugin_runtime.helper.clean(results)
-            }
-
+            return {Output.UPDATE_RESPONSE: insightconnect_plugin_runtime.helper.clean(results)}

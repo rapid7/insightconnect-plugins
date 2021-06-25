@@ -16,7 +16,6 @@ class SearchDocuments(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         index = params.get(Input.INDEX)
-        type_ = params.get(Input.TYPE)
         routing = params.get(Input.ROUTING)
         query = params.get(Input.QUERY)
 
@@ -24,19 +23,25 @@ class SearchDocuments(insightconnect_plugin_runtime.Action):
         if routing:
             params["routing"] = routing
 
-        results = self.connection.client.search_documents(index, type_, query, params)
+        results = self.connection.client.search_documents(index, query, params)
         if not results:
             raise PluginException(
-                cause="Document search not run. ",
-                assistance="Please check provided data and try again."
+                cause="Document search not run. ", assistance="Please check provided data and try again."
             )
 
         if not results["hits"]["max_score"]:
             results["hits"]["max_score"] = 0
 
         for hit in results["hits"]["hits"]:
-            if hit["_score"] is None or "_score" not in hit:
+            if "_score" not in hit or hit["_score"] is None:
                 hit["_score"] = 0
                 self.logger.info("One or most results lack a relevance score, assuming 0")
 
-        return insightconnect_plugin_runtime.helper.clean(results)
+        return insightconnect_plugin_runtime.helper.clean(
+            {
+                Output.SHARDS: results["_shards"],
+                Output.HITS: results["hits"],
+                Output.TOOK: results["took"],
+                Output.TIMED_OUT: results["timed_out"],
+            }
+        )

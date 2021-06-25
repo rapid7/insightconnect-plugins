@@ -16,7 +16,6 @@ class IndexDocument(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         index = params.get(Input.INDEX)
-        type_ = params.get(Input.TYPE)
         id_ = params.get(Input.ID)
         version_type = params.get(Input.VERSION_TYPE)
         version = params.get(Input.VERSION)
@@ -37,17 +36,10 @@ class IndexDocument(insightconnect_plugin_runtime.Action):
         if timeout:
             params["timeout"] = timeout
 
-        if not id_:
-            results = self.connection.client.index(index, type_, document, params)
-        else:
-            results = self.connection.client.index(index, type_, id_, document, params)
+        results = self.connection.client.index(index, id_, params, document)
+        if results:
+            return {Output.INDEX_RESPONSE: insightconnect_plugin_runtime.helper.clean(results)}
 
-        if not results:
-            raise PluginException(
-                cause="Document was not indexed. ",
-                assistance="Please check provided data and try again."
-            )
-        else:
-            return {
-                Output.INDEX_RESPONSE: insightconnect_plugin_runtime.helper.clean(results)
-            }
+        raise PluginException(
+            cause="Document was not indexed. ", assistance="Please check provided data and try again."
+        )

@@ -142,7 +142,7 @@ types:
       title: Hits
       description: Array of Hits
   health:
-    cluster_name:
+    name:
       type: string
       title: Cluster Name
     status:
@@ -207,12 +207,6 @@ actions:
         description: Index to Insert Document Into
         required: true
         example: index001
-      type:
-        title: Type
-        type: string
-        description: Type of Document to Index
-        required: false
-        example: _doc
       id:
         title: ID
         type: string
@@ -278,12 +272,6 @@ actions:
         description: Index to Insert Document Into
         required: true
         example: index001
-      type:
-        title: Type
-        type: string
-        description: Type of Document to Index
-        required: false
-        example: _doc
       id:
         title: ID
         type: string
@@ -366,12 +354,6 @@ actions:
         description: Document Index
         required: true
         example: shakespeare
-      type:
-        title: Type
-        type: string
-        description: Document Type
-        required: false
-        example: doc
       routing:
         title: Routing
         type: string
@@ -423,12 +405,6 @@ triggers:
         description: Document Index
         required: true
         example: bank
-      type:
-        title: Type
-        type: string
-        description: Document Type
-        required: false
-        example: doc
       routing:
         title: Routing
         type: string

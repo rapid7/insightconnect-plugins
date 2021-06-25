@@ -18,21 +18,16 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.logger.info("Connect: Connecting..")
             self.client = ElasticSearchAPI(
                 params.get(Input.URL),
+                self.logger,
                 params.get(Input.CREDENTIALS).get("username"),
                 params.get(Input.CREDENTIALS).get("password"),
-                self.logger
             )
         else:
             self.logger.info("Connect: Warning, No Auth Provided")
-            self.client = ElasticSearchAPI(
-                params.get(Input.URL),
-                self.logger
-            )
+            self.client = ElasticSearchAPI(params.get(Input.URL), self.logger)
 
     def test(self):
         try:
-            return {
-                "success": self.client.test_auth()
-            }
+            return {"success": self.client.test_auth()}
         except PluginException as e:
             raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e.data)
