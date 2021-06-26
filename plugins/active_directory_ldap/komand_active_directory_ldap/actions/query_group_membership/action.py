@@ -45,9 +45,11 @@ class QueryGroupMembership(komand.Action):
             )
 
     def search_data(self, base: str, filter_query: str) -> dict:
-        self.connection.conn.search(
+        self.connection.conn.extend.standard.paged_search(
             search_base=base,
             search_filter=filter_query,
             attributes=[ldap3.ALL_ATTRIBUTES, ldap3.ALL_OPERATIONAL_ATTRIBUTES],
+            paged_size=100,
+            generator=False,
         )
         return json.loads(self.connection.conn.response_to_json())
