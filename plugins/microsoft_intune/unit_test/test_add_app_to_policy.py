@@ -23,3 +23,25 @@ class TestAddAppToPolicy(TestCase):
         expected = {"success": True}
 
         self.assertEqual(actual, expected)
+
+    def test_policy_not_found(self, mock_post):
+        action = AddAppToPolicy()
+        action.connection = MockConnection()
+
+        actual = action.run(
+            {"application_name": "Comfy", "device_type": "android", "policy_name": "my-android-app-policy2"}
+        )
+        expected = {"success": False}
+
+        self.assertEqual(actual, expected)
+
+    def test_application_not_found(self, mock_post):
+        action = AddAppToPolicy()
+        action.connection = MockConnection()
+
+        actual = action.run(
+            {"application_name": "Comfy2", "device_type": "android", "policy_name": "my-android-app-policy"}
+        )
+        expected = {"success": False}
+
+        self.assertEqual(actual, expected)

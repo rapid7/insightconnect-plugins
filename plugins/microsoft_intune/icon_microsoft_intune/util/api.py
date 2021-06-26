@@ -19,11 +19,24 @@ class MicrosoftIntuneAPI:
     def add_app_to_policy(self, application_name: str, policy_name: str, device_type: str):
         managed_app_policies = self._call_api("GET", "/deviceAppManagement/managedAppPolicies")
         policy_id = self._filter_policy_id(managed_app_policies, policy_name)
+
+        if not policy_id:
+            raise PluginException(
+                cause=f"Policy: {policy_name}, was not found.",
+                assistance="Contact support for help. See log for more details.",
+            )
+
         managed_app_policies_with_apps = self._call_api(
             "GET", f"deviceAppManagement/{device_type}ManagedAppProtections('{policy_id}')?$expand=apps"
         )
         managed_app_list = self._call_api("GET", "deviceAppManagement/managedAppStatuses('managedAppList')")
         application_package_id = self._filter_app_package_id(managed_app_list, application_name)
+
+        if not application_package_id:
+            raise PluginException(
+                cause=f"Application: {application_name}, was not found.",
+                assistance="Contact support for help. See log for more details.",
+            )
 
         target_apps = []
 
@@ -55,11 +68,24 @@ class MicrosoftIntuneAPI:
     def delete_app_from_policy(self, application_name: str, policy_name: str, device_type: str):
         managed_app_policies = self._call_api("GET", "/deviceAppManagement/managedAppPolicies")
         policy_id = self._filter_policy_id(managed_app_policies, policy_name)
+
+        if not policy_id:
+            raise PluginException(
+                cause=f"Policy: {policy_name}, was not found.",
+                assistance="Contact support for help. See log for more details.",
+            )
+
         managed_app_policies_with_apps = self._call_api(
             "GET", f"deviceAppManagement/{device_type}ManagedAppProtections('{policy_id}')?$expand=apps"
         )
         managed_app_list = self._call_api("GET", "deviceAppManagement/managedAppStatuses('managedAppList')")
         application_package_id = self._filter_app_package_id(managed_app_list, application_name)
+
+        if not application_package_id:
+            raise PluginException(
+                cause=f"Application: {application_name}, was not found.",
+                assistance="Contact support for help. See log for more details.",
+            )
 
         target_apps = []
 
