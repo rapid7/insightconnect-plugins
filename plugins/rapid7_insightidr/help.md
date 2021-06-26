@@ -474,8 +474,8 @@ This action is used to close all investigations that fall within a date range.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |alert_type|string|None|False|The category of alerts that should be closed|None|Account Created|
-|datetime_from|date|None|False|An ISO formatted timestamp, default last week|None|2018-07-01T00:00:00Z|
-|datetime_to|date|None|False|An ISO formatted timestamp of the ending date range, current time if left blank|None|2018-07-01T00:00:00Z|
+|datetime_from|date|None|False|An ISO formatted timestamp, default last week|None|2018-07-01 00:00:00|
+|datetime_to|date|None|False|An ISO formatted timestamp of the ending date range, current time if left blank|None|2018-07-01 00:00:00|
 |max_investigations_to_close|integer|None|False|An optional maximum number of alerts to close with this request. If this parameter is not specified then there is no maximum. If this limit is exceeded, then an error is returned|None|10|
 |source|string|MANUAL|False|The name of an investigation source|['ALERT', 'MANUAL', 'HUNT']|MANUAL|
 
@@ -801,6 +801,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.2 - Send plugin name and version in the User-Agent string to vendor
 * 3.1.1 - Convert given date from timezone to UTC in List Investigations action
 * 3.1.0 - Add new action Create Threat
 * 3.0.0 - Added Relative Time options to Advanced Query actions | Fix issue where a query with no results would crash the plugin
