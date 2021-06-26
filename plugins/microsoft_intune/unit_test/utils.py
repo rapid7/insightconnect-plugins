@@ -47,7 +47,7 @@ class MockConnection:
             username="username",
             password=None,
             client_id="client_id",
-            client_secret="client_secret",
+            client_secret=None,
             tenant_id="tenant_id",
             api_url="",
             logger=logging.getLogger("Test"),
