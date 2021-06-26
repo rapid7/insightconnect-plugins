@@ -31,7 +31,11 @@ def mocked_requests_request(*args, **kwargs):
     if args[0] == "GET" and args[1] == "deviceAppManagement/managedAppStatuses('managedAppList')":
         return MockResponse("managed_app_list", 200)
 
-    if args[0] == "GET" and args[1] == "deviceAppManagement/androidManagedAppProtections('T_3a18890f-ee6c-4421-adb2-29305e3e9ee5')?$expand=apps":
+    if (
+        args[0] == "GET"
+        and args[1]
+        == "deviceAppManagement/androidManagedAppProtections('T_3a18890f-ee6c-4421-adb2-29305e3e9ee5')?$expand=apps"
+    ):
         return MockResponse("managed_app_policies_with_apps", 200)
 
     return MockResponse("add_app_to_policy_204", 204)
@@ -46,5 +50,5 @@ class MockConnection:
             client_secret="client_secret",
             tenant_id="tenant_id",
             api_url="",
-            logger=logging.getLogger("Test")
+            logger=logging.getLogger("Test"),
         )
