@@ -45,7 +45,7 @@ class MockConnection:
     def __init__(self):
         self.api = MicrosoftIntuneAPI(
             username="username",
-            password="password",
+            password=None,
             client_id="client_id",
             client_secret="client_secret",
             tenant_id="tenant_id",
