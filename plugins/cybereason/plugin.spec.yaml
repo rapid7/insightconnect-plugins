@@ -11,7 +11,7 @@ status: []
 tags: [investigate, malware, threat tntel]
 hub_tags:
   use_cases: [threat_detection_and_response, vulnerability_management]
-  keywords: [investigate, malware, threat tntel]
+  keywords: [investigate]
   features: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cybereason
