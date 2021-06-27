@@ -31,14 +31,14 @@ class CybereasonAPI:
                 data="There is a problem connecting to Cybereason. Please check your credentials and permissions.",
             )
 
-    def isolate_machines(self, pylum_ids: list(str), malop_id: str = None) -> dict:
+    def isolate_machines(self, pylum_ids: [str], malop_id: str = None) -> dict:
         return self.send_request(
             "POST",
             "/rest/monitor/global/commands/isolate",
             payload={"malopId": malop_id, "pylumIds": pylum_ids},
         )
 
-    def un_isolate_machines(self, pylum_ids: list(str), malop_id: str = None) -> dict:
+    def un_isolate_machines(self, pylum_ids: [str], malop_id: str = None) -> dict:
         return self.send_request(
             "POST",
             "/rest/monitor/global/commands/un-isolate",
@@ -189,6 +189,8 @@ class CybereasonAPI:
 
         if validators.ipv4(identifier):
             sensor_filter["filters"][0]["fieldName"] = "internalIpAddress"
+        elif re.match("^(-?\d{10}\.-?\d{19})$", identifier):
+            sensor_filter["filters"][0]["fieldName"] = "guid"
         else:
             sensor_filter["filters"][0]["fieldName"] = "machineName"
 

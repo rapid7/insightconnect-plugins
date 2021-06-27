@@ -45,13 +45,17 @@ Example input:
 
 This action is used to remediate a specific process, file or registry key if remediation is possible.
 
+This action supports the following action types: KILL_PROCESS, DELETE_REGISTRY_KEY, QUARANTINE_FILE, UNQUARANTINE_FILE, BLOCK_FILE, KILL_PREVENT_UNSUSPEND, ISOLATE_MACHINE.
+
+For more information about how to generate `actions_by_machine` object, refer to [Cybereason documentation](https://nest.cybereason.com/documentation/api-documentation/all-versions/remediate-items#remediatemalops).
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |actions_by_machine|object|None|True|Actions by machine|None|{"126811122.2298225282553311122": [{"targetId": "531122333.-3391199199911692223","actionType": "KILL_PROCESS"}]}|
 |initiator_user_name|string|None|True|Initiator user name|None|user@example.com|
-|malop_id|string|None|False|Malop ID to associate with the quarantine action|None|22.2787422324806222966|
+|malop_id|string|None|False|Malop ID to associate with the remediation actions|None|22.2787422324806222966|
 
 Example input:
 
@@ -73,9 +77,11 @@ Example output:
 
 ```
 {
-  "response": {
-    "PYLUMCLIENT_INTEGRATION_GDDA11-11_2222170222FC": "Succeeded"
-  }
+  "malopId": "11.2189746432167327222",
+  "remediationId": "5144cf82-94c4-49f8-82cd-9ce1fcbd6a23",
+  "start": 1624819406074,
+  "initiatingUser": "user@example.com",
+  "statusLog": []
 }
 ```
 

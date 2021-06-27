@@ -580,7 +580,7 @@ actions:
         example: '{"126811122.2298225282553311122": [{"targetId": "531122333.-3391199199911692223","actionType": "KILL_PROCESS"}]}'
       malop_id:
         title: Malop ID
-        description: Malop ID to associate with the quarantine action
+        description: Malop ID to associate with the remediation actions
         type: string
         required: false
         example: "22.2787422324806222966"

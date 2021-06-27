@@ -38,7 +38,7 @@ class RemediateItemsInput(insightconnect_plugin_runtime.Input):
     "malop_id": {
       "type": "string",
       "title": "Malop ID",
-      "description": "Malop ID to associate with the quarantine action",
+      "description": "Malop ID to associate with the remediation actions",
       "order": 3
     }
   },
