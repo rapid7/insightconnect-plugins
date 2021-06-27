@@ -189,7 +189,7 @@ class CybereasonAPI:
 
         if validators.ipv4(identifier):
             sensor_filter["filters"][0]["fieldName"] = "internalIpAddress"
-        elif re.match(r"^(-?\d{10}\.-?\d{19})$", identifier):
+        elif re.match(r"^(-?\d{9,10}\.-?\d{19})$", identifier):
             sensor_filter["filters"][0]["fieldName"] = "guid"
         else:
             sensor_filter["filters"][0]["fieldName"] = "machineName"
