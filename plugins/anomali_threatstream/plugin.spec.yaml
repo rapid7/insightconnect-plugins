@@ -368,7 +368,7 @@ actions:
         title: Hash
         description: Hash
         type: string
-        example: 9123dcbb0b42652b0e105956c68d3ca2ff34584f324fa41a29aedd32b883e131
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
         required: false
     output:
       results:
