@@ -31,8 +31,8 @@ class FetchForensics(insightconnect_plugin_runtime.Action):
             )
         elif not threat_id and not campaign_id:
             raise PluginException(
-                cause="One of the following inputs must be provide.",
-                assistance="Please enter Threat ID or Campaign ID.",
+                cause="One of the following inputs must be provided.",
+                assistance="Please enter either Threat ID or Campaign ID.",
             )
 
         if not threat_id:
