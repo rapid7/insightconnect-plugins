@@ -522,7 +522,7 @@ actions:
         title: URL
         required: true
         description: URL to detonate
-        example: "https://test.example.com/test/example.exe"
+        example: "https://example.com/setup.exe"
       detail:
         title: Detail
         description: A comma-separated list that provides additional details for the indicator. This information is displayed in the tag column of the ThreatStream UI
