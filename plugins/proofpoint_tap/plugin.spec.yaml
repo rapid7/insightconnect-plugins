@@ -701,7 +701,7 @@ types:
       required: false
     cnames:
       title: Canonical Names
-      description: Optional, an array of cnames which were associated with the hostname
+      description: Optional, an array of CNAMEs which were associated with the hostname
       type: "[]string"
       required: false
     ips:
