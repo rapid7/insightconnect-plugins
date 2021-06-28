@@ -114,7 +114,8 @@ class TestFetchForensinc(TestCase):
 
         self.assertEqual(error.exception.cause, "Both Campaign ID and Threat ID were provided.")
         self.assertEqual(
-            error.exception.assistance, "Only one of the following two parameters can be used: Campaign ID or Threat ID."
+            error.exception.assistance,
+            "Only one of the following two parameters can be used: Campaign ID or Threat ID.",
         )
 
     @patch("requests.request", side_effect=Util.mocked_requests_get)
