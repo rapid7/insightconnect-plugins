@@ -705,7 +705,7 @@ types:
       type: "[]string"
       required: false
     ips:
-      title: IPs
+      title: Resolved IP Addresses
       description: Optional, an array of IP addresses which were resolved to the hostname
       type: "[]string"
       required: false
